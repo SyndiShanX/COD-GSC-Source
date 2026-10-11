@@ -64,14 +64,14 @@ function function_8b038048() {
   self.doa.var_74e4ded8 = 1;
   self.var_c7121c91 = 1;
   self.var_4dcf6637 = 1;
-  self.var_1c8b76d3 = 1;
+  self.non_zombie = 1;
   self.no_gib = 1;
   self.var_32c5c724 = 1;
   self.zombie_move_speed = "walk";
   self.maxhealth = self.health;
   self.shock_status_effect = getstatuseffect(#"shock_zm_trap");
   self thread damagewatch();
-  self thread function_79445831();
+  self thread deathwatch();
 
   if(level.doa.world_state == 0) {
     if(!isDefined(level.doa.var_36fba6)) {
@@ -116,7 +116,7 @@ function damagewatch() {
   }
 }
 
-function function_79445831() {
+function deathwatch() {
   self notify("4ce673b7273d3482");
   self endon("4ce673b7273d3482");
   self waittill(#"death");
@@ -173,7 +173,7 @@ function private function_85e8940a(entity) {
   entity clientfield::increment("brutus_shock_attack", 1);
 
   foreach(player in players) {
-    if(!namespace_7f5aeb59::isplayervalid(player)) {
+    if(!doa_player_utility::isplayervalid(player)) {
       continue;
     }
 

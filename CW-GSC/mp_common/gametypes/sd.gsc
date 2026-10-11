@@ -258,7 +258,7 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
 
   if(isPlayer(attacker) && attacker.pers[#"team"] != idamage.pers[#"team"] && isDefined(idamage.isbombcarrier) && idamage.isbombcarrier == 1) {
     attacker recordgameevent("kill_carrier");
-    level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+    level thread telemetry::function_18135b72(#"callback_on_game_event", {
       #player: attacker, #eventtype: #"kill_carrier"});
     level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
       #player: idamage, #var_bdc4bbd2: #"carrying"});
@@ -327,11 +327,11 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 
 function private function_8f5272b2(player) {
   if(isDefined(player.team)) {
-    globallogic_audio::play_2d_on_team(#"hash_7f0c9c0ec4410623", player.team);
+    globallogic_audio::play_2d_on_team(#"mpl_gunfight_enemy_score", player.team);
     otherteam = util::getotherteam(player.team);
 
     if(isDefined(otherteam) && otherteam != player.team) {
-      globallogic_audio::play_2d_on_team(#"hash_14b3ab2971ce1112", otherteam);
+      globallogic_audio::play_2d_on_team(#"mpl_gunfight_team_score", otherteam);
     }
   }
 }
@@ -797,7 +797,7 @@ function onuseplantobject(player) {
   globallogic_audio::leader_dialog("bombPlanted");
   scoreevents::processscoreevent(#"planted_bomb", player, undefined, undefined);
   player recordgameevent("plant");
-  level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+  level thread telemetry::function_18135b72(#"callback_on_game_event", {
     #player: player, #eventtype: #"plant"});
   thread function_d45df32e();
 }
@@ -845,7 +845,7 @@ function onusedefuseobject(player) {
 
   player globallogic_score::incpersstat(#"objectivedefends", 1, 0, 1);
   player recordgameevent("defuse");
-  level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+  level thread telemetry::function_18135b72(#"callback_on_game_event", {
     #player: player, #eventtype: #"defuse"});
 }
 
@@ -870,7 +870,7 @@ function onpickup(player) {
   assert(isPlayer(player));
   player.isbombcarrier = 1;
   player recordgameevent("pickup");
-  level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+  level thread telemetry::function_18135b72(#"callback_on_game_event", {
     #player: player, #eventtype: #"pickup"});
   self gameobjects::set_model_visibility(0);
 
@@ -1038,7 +1038,7 @@ function bombplanted(destroyedobj, player) {
       scoreevents::processscoreevent(#"bomb_detonated", player, undefined, undefined);
       player stats::function_bb7eedf0(#"destructions", 1);
       player recordgameevent("destroy");
-      level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+      level thread telemetry::function_18135b72(#"callback_on_game_event", {
         #player: player, #eventtype: #"destroy"});
     } else {
       destroyedobj.visuals[0] radiusdamage(explosionorigin, 512, 600, 400, undefined, "MOD_EXPLOSIVE", getweapon(#"briefcase_bomb"));

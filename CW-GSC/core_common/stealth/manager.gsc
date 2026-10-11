@@ -77,7 +77,7 @@ function init() {
   level.stealth.detect.minrangedarkness[#"hidden"] = [];
   level.stealth.detect.minrangedarkness[#"spotted"] = [];
   level.stealth.detect.timeout = 5;
-  namespace_cc4354b9::corpse_init_level();
+  stealth_corpse::corpse_init_level();
   stealth_event::event_init_level();
   level.stealth.next_sound_wait = 3000;
   level.stealth.head_shot_dist = 20;
@@ -128,16 +128,16 @@ function set_default_settings(isnight) {
   stealth_spotted[#"crouch"] = 8192;
   stealth_spotted[#"stand"] = 8192;
   namespace_979752dc::set_detect_ranges(stealth_hidden, stealth_spotted);
-  var_90bb9561 = [];
-  var_90bb9561[#"prone"] = 130;
-  var_90bb9561[#"crouch"] = 215;
-  var_90bb9561[#"stand"] = 300;
-  var_a8964800 = [];
-  var_a8964800[#"prone"] = 300;
-  var_a8964800[#"crouch"] = 375;
-  var_a8964800[#"stand"] = 450;
-  namespace_979752dc::set_min_detect_range_darkness(var_90bb9561, var_a8964800);
-  namespace_cc4354b9::set_corpse_ranges_default();
+  minrangedarkness_hidden = [];
+  minrangedarkness_hidden[#"prone"] = 130;
+  minrangedarkness_hidden[#"crouch"] = 215;
+  minrangedarkness_hidden[#"stand"] = 300;
+  minrangedarkness_spotted = [];
+  minrangedarkness_spotted[#"prone"] = 300;
+  minrangedarkness_spotted[#"crouch"] = 375;
+  minrangedarkness_spotted[#"stand"] = 450;
+  namespace_979752dc::set_min_detect_range_darkness(minrangedarkness_hidden, minrangedarkness_spotted);
+  stealth_corpse::set_corpse_ranges_default();
   namespace_979752dc::set_disguised(0);
   event_change("hidden");
 }
@@ -234,16 +234,16 @@ function update_stealth_spotted_thread() {
           level flag::set("stealth_spotted");
 
           if(isDefined(self.stealth)) {
-            var_1dd006fc = self namespace_979752dc::get_group_flagname("stealth_spotted");
-            level flag::set(var_1dd006fc);
+            mygroupflagname = self namespace_979752dc::get_group_flagname("stealth_spotted");
+            level flag::set(mygroupflagname);
           }
         }
       } else if(level flag::get("stealth_spotted")) {
         namespace_979752dc::function_740dbf99();
 
         if(isDefined(self.stealth)) {
-          var_1dd006fc = self namespace_979752dc::get_group_flagname("stealth_spotted");
-          level flag::clear(var_1dd006fc);
+          mygroupflagname = self namespace_979752dc::get_group_flagname("stealth_spotted");
+          level flag::clear(mygroupflagname);
         }
       }
 
@@ -343,7 +343,7 @@ function stealth_suspicious_doors_init() {
       level.stealth.suspicious_door.found_distsqrd = sqr(300);
     }
 
-    level namespace_979752dc::set_stealth_func("suspicious_door", &namespace_cc4354b9::suspicious_door_found);
+    level namespace_979752dc::set_stealth_func("suspicious_door", &stealth_corpse::suspicious_door_found);
     level stealth_event::event_severity_set("investigate", "suspicious_door", 20);
   }
 }

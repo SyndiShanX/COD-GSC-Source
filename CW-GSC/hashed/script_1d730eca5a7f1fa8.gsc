@@ -33,7 +33,7 @@
 function function_b784c6bd(type) {
   switch (type) {
     case 10:
-      self namespace_83eb6304::function_3ecfde67("player_healOS");
+      self doa_fx::function_3ecfde67("player_healOS");
       self.health += 150;
 
       if(self.health < self.health) {
@@ -47,9 +47,9 @@ function function_b784c6bd(type) {
       break;
     case 46:
       self.doa.var_ccd8393c++;
-      self namespace_83eb6304::function_3ecfde67("divine_shield");
-      self namespace_83eb6304::function_3ecfde67("player_respawn_red");
-      self namespace_83eb6304::function_3ecfde67("player_respawn_yellow");
+      self doa_fx::function_3ecfde67("divine_shield");
+      self doa_fx::function_3ecfde67("player_respawn_red");
+      self doa_fx::function_3ecfde67("player_respawn_yellow");
       break;
   }
 
@@ -64,8 +64,8 @@ function function_a6ab97f0(type) {
       break;
     case 46:
       self.doa.var_ccd8393c = 0;
-      self namespace_83eb6304::turnofffx("divine_shield");
-      self namespace_83eb6304::function_3ecfde67("divine_shield_off");
+      self doa_fx::turnofffx("divine_shield");
+      self doa_fx::function_3ecfde67("divine_shield_off");
       break;
   }
 }
@@ -79,7 +79,7 @@ function function_6acf8fc6(type) {
     case 12:
       break;
     case 46:
-      timeout = self namespace_1c2a96f9::function_4808b985(1800);
+      timeout = self doa_fate::function_4808b985(1800);
       self waittilltimeout(timeout, #"hash_226c5964dec34ae7");
       break;
   }

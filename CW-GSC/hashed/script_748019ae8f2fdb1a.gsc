@@ -173,15 +173,15 @@ function function_4167db58() {
     foreach(zombie in zombies) {
       if(isDefined(zombie) && !is_true(zombie.var_df972d6)) {
         if(zombie.origin[2] < -100) {
-          var_8d9b91de = undefined;
+          teleport_point = undefined;
 
           if(is_true(zombie.var_c588eb)) {
             var_d193654b = struct::get_array("kill_hvt", "content_script_name");
-            var_8d9b91de = arraygetclosest(zombie.origin, var_d193654b);
-            level thread function_42fbf5d9(zombie, var_8d9b91de);
+            teleport_point = arraygetclosest(zombie.origin, var_d193654b);
+            level thread function_42fbf5d9(zombie, teleport_point);
           }
 
-          if(isalive(zombie) && !isDefined(var_8d9b91de)) {
+          if(isalive(zombie) && !isDefined(teleport_point)) {
             zombie.var_a54d6082 = 1;
             zombie.allowdeath = 1;
             zombie kill();
@@ -242,15 +242,15 @@ function function_ab9b7039() {
   }
 }
 
-function function_f5c78778(entity, var_213c85d7) {
+function function_f5c78778(entity, old_goal) {
   var_a694f08d = [#"hash_7c0d83ac1e845ac2", #"zombie_dog", #"soa", #"mimic"];
 
-  if(isinarray(var_a694f08d, var_213c85d7.archetype)) {
+  if(isinarray(var_a694f08d, old_goal.archetype)) {
     var_7c27952f = [#"hash_7c0d83ac1e845ac2", #"mimic"];
 
-    if(isinarray(var_7c27952f, var_213c85d7.archetype)) {
-      if(isPlayer(var_213c85d7.enemy) && var_213c85d7.enemy isinvehicle()) {
-        vehicle = var_213c85d7.enemy getvehicleoccupied();
+    if(isinarray(var_7c27952f, old_goal.archetype)) {
+      if(isPlayer(old_goal.enemy) && old_goal.enemy isinvehicle()) {
+        vehicle = old_goal.enemy getvehicleoccupied();
 
         if(function_7243fef2(vehicle)) {
           return undefined;
@@ -258,19 +258,19 @@ function function_f5c78778(entity, var_213c85d7) {
       }
     }
 
-    var_a404d227 = getnavfaceregion(var_213c85d7.origin, 100);
+    var_a404d227 = getnavfaceregion(old_goal.origin, 100);
 
-    if(isDefined(var_213c85d7.enemy)) {
-      if(var_a404d227 === getnavfaceregion(var_213c85d7.enemy.origin, 100)) {
+    if(isDefined(old_goal.enemy)) {
+      if(var_a404d227 === getnavfaceregion(old_goal.enemy.origin, 100)) {
         return undefined;
       }
     }
 
     if(isDefined(var_a404d227) && isDefined(level.var_6f400b17[var_a404d227])) {
-      var_82ae862c = arraygetclosest(var_213c85d7.origin, level.var_6f400b17[var_a404d227]);
+      var_82ae862c = arraygetclosest(old_goal.origin, level.var_6f400b17[var_a404d227]);
 
-      if(isDefined(var_213c85d7.origin) && isDefined(var_82ae862c) && distancesquared(var_213c85d7.origin, var_82ae862c) < sqr(100)) {
-        return var_213c85d7.origin;
+      if(isDefined(old_goal.origin) && isDefined(var_82ae862c) && distancesquared(old_goal.origin, var_82ae862c) < sqr(100)) {
+        return old_goal.origin;
       }
 
       return var_82ae862c;
@@ -298,8 +298,8 @@ function private function_ebba8a0(entity, enemy, target_pos) {
 }
 
 function private function_929727c5(entity) {
-  var_1cea0f62 = entity.origin + anglesToForward(entity.angles) * 50;
-  var_53b2da60 = zombie_utility::function_d446de65(entity, var_1cea0f62, 10);
+  check_pos = entity.origin + anglesToForward(entity.angles) * 50;
+  var_53b2da60 = zombie_utility::function_d446de65(entity, check_pos, 10);
 
   if(!isDefined(var_53b2da60)) {
     return false;
@@ -339,8 +339,8 @@ function function_725ddc56() {
 
     if(isvehicle(ground_ent) && function_7243fef2(ground_ent) && !is_true(self.var_df972d6)) {
       var_d193654b = struct::get_array("kill_hvt", "content_script_name");
-      var_8d9b91de = arraygetclosest(self.origin, var_d193654b);
-      level thread function_42fbf5d9(self, var_8d9b91de);
+      teleport_point = arraygetclosest(self.origin, var_d193654b);
+      level thread function_42fbf5d9(self, teleport_point);
     }
   }
 }
@@ -362,17 +362,17 @@ function private on_ai_damage(params) {
           self.var_1a06330f = 0;
 
           if(self.archetype === #"raz") {
-            var_8d9b91de = getrandomnavpoint(params.eattacker.origin, 200, self getpathfindingradius() * 1.2);
+            teleport_point = getrandomnavpoint(params.eattacker.origin, 200, self getpathfindingradius() * 1.2);
 
-            if(isDefined(var_8d9b91de)) {
-              to_player = params.eattacker.origin - var_8d9b91de;
+            if(isDefined(teleport_point)) {
+              to_player = params.eattacker.origin - teleport_point;
               var_78d08958 = vectortoyaw(to_player);
 
               if(self clientfield::is_registered("zombie_teleport")) {
                 self clientfield::increment("zombie_teleport", 1);
               }
 
-              util::delay_network_frames(1, #"death", &function_5095f2ff, var_8d9b91de, (0, var_78d08958, 0));
+              util::delay_network_frames(1, #"death", &function_5095f2ff, teleport_point, (0, var_78d08958, 0));
             }
           }
 
@@ -391,9 +391,9 @@ function private on_ai_damage(params) {
   }
 }
 
-function function_5095f2ff(var_8d9b91de, teleport_angles) {
+function function_5095f2ff(teleport_point, teleport_angles) {
   self dontinterpolate();
-  self forceteleport(var_8d9b91de, teleport_angles);
+  self forceteleport(teleport_point, teleport_angles);
 
   if(isDefined(self.var_b0f20cfe)) {
     self thread[[self.var_b0f20cfe]]();
@@ -516,9 +516,9 @@ function function_42fbf5d9(var_956ca580, s_dest) {
 
   while(true) {
     if(isDefined(teleport_ent)) {
-      var_ed0c1ff8 = distance2d(teleport_ent.origin, v_target_pos);
+      n_current_dist = distance2d(teleport_ent.origin, v_target_pos);
 
-      if(var_ed0c1ff8 <= 100) {
+      if(n_current_dist <= 100) {
         break;
       }
 

@@ -57,7 +57,7 @@ function main(str_skipto, b_starting) {
 
   if(is_true(b_starting)) {
     level thread scene::init("scene_kgb_walkup_adler");
-    kgb_ins_prepare::function_52f0fcb3(str_skipto);
+    kgb_ins_prepare::office_guys(str_skipto);
     kgb_ins_prepare::function_84d00884();
     level thread namespace_99e99ffa::function_99e99ffa(str_skipto);
     level thread namespace_e77bf565::function_ada6d016();
@@ -72,7 +72,7 @@ function main(str_skipto, b_starting) {
   level flag::clear("no_corpse_pickup");
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
@@ -99,7 +99,7 @@ function init_flags() {
 
 function init_clientfields() {}
 
-function function_22b7fffd() {
+function init_scenes() {
   spawner::add_spawn_function_group("prison_guys", "script_noteworthy", &function_c1e43496);
 }
 
@@ -156,8 +156,8 @@ function function_eb4677fe() {
 }
 
 function function_165e5918() {
-  level endon(#"hash_43fb421b5c84be9d");
-  var_2757e05d = ["vox_cp_rkgb_02000_blkv_adleriswaitingo_9d", "vox_cp_rkgb_02000_blkv_mykeycardtaskis_5b"];
+  level endon(#"stop_nags");
+  a_nags = ["vox_cp_rkgb_02000_blkv_adleriswaitingo_9d", "vox_cp_rkgb_02000_blkv_mykeycardtaskis_5b"];
   var_67f23465 = 25;
 
   for(count = 0; !level flag::get("flag_player_swap"); count++) {
@@ -167,7 +167,7 @@ function function_165e5918() {
 }
 
 function function_9987ec40() {
-  level thread function_a459deb9();
+  level thread player_swap_moment();
   level flag::wait_till("flag_checkpoint_done");
   level flag::set("ins_rv_complete");
 }
@@ -182,7 +182,7 @@ function function_32137f1e(prompt) {
   return level flag::get("flag_allow_boiler_door");
 }
 
-function function_a459deb9() {
+function player_swap_moment() {
   level.player endon(#"death");
   level.player clientfield::set_to_player("stream_belikov_rv_assets", 1);
   var_d21147d1 = getEnt("basement_door_clip_open", "targetname");
@@ -198,7 +198,7 @@ function function_a459deb9() {
   level.belikov.ignoreme = 1;
   level.belikov.ignoreall = 1;
   level.belikov util::stop_magic_bullet_shield();
-  level.adler = namespace_e77bf565::function_52fe0eb3("kgb_ins_rv");
+  level.adler = namespace_e77bf565::adler_spawn("kgb_ins_rv");
   level.adler.ignoreme = 1;
   level.adler.ignoreall = 1;
   level.adler namespace_e77bf565::function_5770c74("civ");
@@ -206,7 +206,7 @@ function function_a459deb9() {
   doorclip notsolid();
   var_d21147d1 solid();
   level.player setmovespeedscale(0.5);
-  level notify(#"hash_43fb421b5c84be9d");
+  level notify(#"stop_nags");
   level flag::set("flag_player_swap");
   level.player.ignoreme = 1;
   level.player.ignoreall = 1;
@@ -443,7 +443,7 @@ function fade_back_in() {
 
 function function_ab071d71() {
   level.player endon(#"death");
-  level waittill(#"hash_4261efb41698295d");
+  level waittill(#"start_fade_out");
   level.player lui::screen_fade_out(1.5, "black");
 }
 
@@ -545,14 +545,14 @@ function function_4105690c() {
   wait 0.2;
   level.player lui::screen_fade_in(0.5);
   wait 0.5;
-  level thread globallogic_ui::function_7bc0e4b9(0, 1);
+  level thread globallogic_ui::do_chyron_text(0, 1);
   level thread savegame::checkpoint_save();
   namespace_353d803e::music("7.0_tunnels");
 }
 
 function function_1e56b6d7() {
   level thread function_3209e378();
-  level thread function_49f1319a();
+  level thread stairs_guys();
   level flag::wait_till("flag_player_checkpoint_start");
   level scene::stop("scene_kgb_walkup_hall_talk", 1);
   level scene::stop("scene_kgb_walkup_stairs_duo", 1);
@@ -570,7 +570,7 @@ function function_3209e378() {
   }
 }
 
-function function_49f1319a() {
+function stairs_guys() {
   level.adler waittill(#"hash_5f3452bc1c48bf4d");
   level thread scene::play("scene_kgb_walkup_stairs_duo", "Shot 1");
 }
@@ -608,7 +608,7 @@ function function_ce801c8b(skipto, b_starting) {
   level flag::set("flag_player_swap_complete");
   level flag::set("flag_checkpoint_moment_done");
   level thread function_9987ec40();
-  level.adler = namespace_e77bf565::function_52fe0eb3("kgb_ins_rv");
+  level.adler = namespace_e77bf565::adler_spawn("kgb_ins_rv");
   level.adler.ignoreme = 1;
   level.adler.ignoreall = 1;
   level thread namespace_99e99ffa::function_99e99ffa(b_starting);
@@ -658,14 +658,14 @@ function function_9b6d9815(off = 1) {
 
   if(off) {
     level.player setstance("stand");
-    level.player val::set(#"hash_5814be4ed0ae9e2b", "allow_stand", 1);
-    level.player val::set(#"hash_5814be4ed0ae9e2b", "allow_crouch", 0);
-    level.player val::set(#"hash_5814be4ed0ae9e2b", "allow_prone", 0);
+    level.player val::set(#"player_swap_moment", "allow_stand", 1);
+    level.player val::set(#"player_swap_moment", "allow_crouch", 0);
+    level.player val::set(#"player_swap_moment", "allow_prone", 0);
     clip.origin += (0, 0, -256);
     return;
   }
 
-  level.player val::reset_all(#"hash_5814be4ed0ae9e2b");
+  level.player val::reset_all(#"player_swap_moment");
   clip delete();
 }
 

@@ -213,15 +213,15 @@ function function_cdea4abe(v_origin, n_radius) {
 function function_42b23f00() {
   level endon(#"hash_3b34b6b1b8c07116");
   self endon(#"death");
-  var_71e5d64 = 0;
+  n_wave_count = 0;
 
   while(true) {
     waitresult = self waittill(#"trigger");
 
     if(zm_utility::is_player_valid(waitresult.activator)) {
-      var_71e5d64++;
+      n_wave_count++;
 
-      switch (var_71e5d64) {
+      switch (n_wave_count) {
         case 1:
           level thread function_45c2bb18(waitresult.activator);
           self function_4d67771c(1);
@@ -338,9 +338,9 @@ function function_b49b76d4(eventstruct) {
   }
 }
 
-function function_844cd1f6(var_a53bb2cc) {
+function function_844cd1f6(v_drop_origin) {
   level flag::set(#"hash_7239f34e436d2b72");
-  level function_3db48fdd(#"item_zmquest_tungsten_ww_quest_part_b", var_a53bb2cc + (0, 0, 20));
+  level function_3db48fdd(#"item_zmquest_tungsten_ww_quest_part_b", v_drop_origin + (0, 0, 20));
 }
 
 function function_c24ab28e(s_params) {
@@ -420,13 +420,13 @@ function function_313be247(attacker, weapon, means_of_death) {
   return true;
 }
 
-function function_99f5fd48(var_a53bb2cc) {
-  if(!zm_utility::check_point_in_playable_area(var_a53bb2cc) || level flag::get(#"hash_1d1c8f35328c066d")) {
+function function_99f5fd48(v_drop_origin) {
+  if(!zm_utility::check_point_in_playable_area(v_drop_origin) || level flag::get(#"hash_1d1c8f35328c066d")) {
     return;
   }
 
   level flag::set(#"hash_1d1c8f35328c066d");
-  level function_3db48fdd(#"item_zmquest_tungsten_ww_quest_part_c", var_a53bb2cc + (0, 0, 10));
+  level function_3db48fdd(#"item_zmquest_tungsten_ww_quest_part_c", v_drop_origin + (0, 0, 10));
 }
 
 function on_item_pickup(params) {
@@ -484,9 +484,9 @@ function function_da57dd7c(e_player) {
   e_player zm_tungsten_vo::function_d137d6a0(var_991f2885, #"hash_369770613414183e", var_fe5272ea);
 }
 
-function private function_3db48fdd(str_item_name, var_a53bb2cc, var_55ab02db = (0, 0, 0)) {
+function private function_3db48fdd(str_item_name, v_drop_origin, var_55ab02db = (0, 0, 0)) {
   point = function_4ba8fde(str_item_name);
-  var_60687c46 = item_drop::drop_item(0, undefined, 1, 0, point.id, var_a53bb2cc, var_55ab02db, 0);
+  var_60687c46 = item_drop::drop_item(0, undefined, 1, 0, point.id, v_drop_origin, var_55ab02db, 0);
   var_60687c46.var_dd21aec2 = 1 | 16;
   var_60687c46 playLoopSound(#"hash_21d80fb4d9a84575");
 
@@ -544,10 +544,10 @@ function function_499de9e() {
 function function_69f39621() {
   level.var_d52e24c5 = [];
   s_interact = struct::get("ww_pool_interact");
-  var_d56fdb6 = struct::get_array(s_interact.target);
+  a_s_crystals = struct::get_array(s_interact.target);
 
-  foreach(var_d2ee34ea in var_d56fdb6) {
-    mdl_crystal = util::spawn_model(var_d2ee34ea.model, var_d2ee34ea.origin, var_d2ee34ea.angles);
+  foreach(s_crystal in a_s_crystals) {
+    mdl_crystal = util::spawn_model(s_crystal.model, s_crystal.origin, s_crystal.angles);
 
     if(!isDefined(level.var_d52e24c5)) {
       level.var_d52e24c5 = [];
@@ -730,7 +730,7 @@ function function_ea86330e() {
   item_ww = item_drop::drop_item(0, getweapon(#"ww_axe_gun_melee_t9"), 1, 0, point.id, var_222825ae.origin, var_222825ae.angles, 0);
   item_ww.var_dd21aec2 = 1 | 16;
   item_ww.var_19920dbe = 1;
-  item_ww.itementry.var_fa988b4b = undefined;
+  item_ww.itementry.droptimeout = undefined;
   item_ww playSound(#"hash_250f39946d7f6289");
   item_ww playLoopSound(#"hash_3297d5eea6cd1217");
   item_ww moveTo(item_ww.origin + (0, 0, 32), 5, 0.05, 0.05);

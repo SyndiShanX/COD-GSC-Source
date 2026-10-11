@@ -62,13 +62,13 @@ function function_be87aa71(var_c01b1f44) {
   }
 
   while(true) {
-    if(self.var_ade25cfe === var_c01b1f44.sound_name && isDefined(self.var_6039cf61) && self.var_6039cf61 > getservertime(0)) {
+    if(self.loop_alias === var_c01b1f44.sound_name && isDefined(self.var_6039cf61) && self.var_6039cf61 > getservertime(0)) {
       wait float(self.var_6039cf61 - getservertime(0)) / 1000;
     }
 
-    var_c9823318 = function_5c10bd79(0);
+    local_client = function_5c10bd79(0);
 
-    if(isPlayer(var_c9823318) && distancesquared(var_c9823318.origin, self.origin) < sqr(1000)) {
+    if(isPlayer(local_client) && distancesquared(local_client.origin, self.origin) < sqr(1000)) {
       playSound(0, var_c01b1f44.sound_name, self.origin);
 
       if(getdvarint(#"hash_5bbf0a73200999f9", 0)) {
@@ -78,7 +78,7 @@ function function_be87aa71(var_c01b1f44) {
 
     wait_time = var_c01b1f44.var_9b95a335 != var_c01b1f44.var_bffcadab ? randomfloatrange(var_c01b1f44.var_9b95a335, var_c01b1f44.var_bffcadab) : var_c01b1f44.var_9b95a335;
     self.var_6039cf61 = getservertime(0) + int(wait_time * 1000);
-    self.var_ade25cfe = var_c01b1f44.sound_name;
+    self.loop_alias = var_c01b1f44.sound_name;
     wait wait_time;
     self.var_6039cf61 = undefined;
   }
@@ -88,8 +88,8 @@ function function_733e5314() {
   self endon(#"state_changed");
   var_25dac1e7 = randomfloatrange(30, 90);
   bundle = function_489009c1(self);
-  var_2828eabf = isDefined(bundle.destroyed) ? bundle.destroyed : 0;
-  var_d3b6e91d = isDefined(bundle.idlestate) ? bundle.idlestate : 0;
+  destroyed_state = isDefined(bundle.destroyed) ? bundle.destroyed : 0;
+  idle_state = isDefined(bundle.idlestate) ? bundle.idlestate : 0;
   var_60138ede = isDefined(bundle.var_7320b70a) ? bundle.var_7320b70a : 0;
   var_5f94b69b = isDefined(bundle.var_49caaddf) ? bundle.var_49caaddf : 0;
   var_de89d793 = bundle.dynentstates[var_60138ede];
@@ -100,7 +100,7 @@ function function_733e5314() {
 
   var_381de367 = var_de89d793.stateanim;
   var_931fd54a = is_true(var_de89d793.var_3f644836);
-  var_efcac2fa = bundle.dynentstates[var_d3b6e91d];
+  var_efcac2fa = bundle.dynentstates[idle_state];
   idle_anim = var_efcac2fa.stateanim;
   var_881752fb = function_2ec27175(var_de89d793);
   var_fe69fc89 = function_2ec27175(var_efcac2fa);
@@ -123,7 +123,7 @@ function function_733e5314() {
       self.origin = self.start_origin;
       self.angles = self.start_angles;
       wait 5;
-      setdynentstate(0, self, var_d3b6e91d);
+      setdynentstate(0, self, idle_state);
       self thread function_733e5314();
       return;
     }
@@ -154,7 +154,7 @@ function function_733e5314() {
         self.origin = self.start_origin;
         self.angles = self.start_angles;
         wait 5;
-        setdynentstate(0, self, var_d3b6e91d);
+        setdynentstate(0, self, idle_state);
         self thread function_733e5314();
         return;
       }

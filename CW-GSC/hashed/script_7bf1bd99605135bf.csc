@@ -26,7 +26,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_eccff4fb;
+#namespace doa_score;
 
 function init() {
   function_32d5e898();

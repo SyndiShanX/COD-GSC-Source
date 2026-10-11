@@ -584,8 +584,8 @@ function private function_f61e64e8(a_ents, var_4ebc26aa, var_822d3bf5, var_7e21e
   println("<dev string:x266>" + var_4ebc26aa + "<dev string:x27d>" + var_7e21e745);
 }
 
-function private function_41dc295(var_9cef00e4, var_822d3bf5, str_scene_name) {
-  var_9cef00e4 endon(#"death");
+function private function_41dc295(e_scene_object, var_822d3bf5, str_scene_name) {
+  e_scene_object endon(#"death");
 
   if(isDefined(str_scene_name)) {
     level endon(str_scene_name + "<dev string:x2bf>");
@@ -597,8 +597,8 @@ function private function_41dc295(var_9cef00e4, var_822d3bf5, str_scene_name) {
 
   while(true) {
     if(getdvarint(#"hash_3a787cfe7207f59", 0)) {
-      org = var_9cef00e4 gettagorigin(var_822d3bf5);
-      angles = var_9cef00e4 gettagangles(var_822d3bf5);
+      org = e_scene_object gettagorigin(var_822d3bf5);
+      angles = e_scene_object gettagangles(var_822d3bf5);
       print3d(org, toupper(var_822d3bf5), (0, 1, 0), undefined, 0.25);
       originendpoint = org + vectorscale(anglesToForward(angles), 6);
       originrightpoint = org + vectorscale(anglestoright(angles), -1 * 6);
@@ -2869,23 +2869,23 @@ function anim_reach(str_scene_name, str_shot, ai) {
   [[var_8d01ee50]] - > function_47bd9bac(ai, str_shot);
 }
 
-function private function_2fd8d9a3(s_tracker, var_cfeeef61, a_ents) {
-  assert(isinarray(level.scene_sequence_names, hash(var_cfeeef61)), "<dev string:x6f1>" + var_cfeeef61 + "<dev string:x704>");
+function private function_2fd8d9a3(s_tracker, str_sequence, a_ents) {
+  assert(isinarray(level.scene_sequence_names, hash(str_sequence)), "<dev string:x6f1>" + str_sequence + "<dev string:x704>");
 
-  if(!isDefined(level.var_25a8c888[var_cfeeef61])) {
-    level.var_25a8c888[var_cfeeef61] = [];
-    s_bundle = getscriptbundle(var_cfeeef61);
+  if(!isDefined(level.var_25a8c888[str_sequence])) {
+    level.var_25a8c888[str_sequence] = [];
+    s_bundle = getscriptbundle(str_sequence);
 
-    foreach(var_15a51335 in s_bundle.sequencenodes) {
-      level.var_25a8c888[var_cfeeef61][var_15a51335.name] = var_15a51335;
+    foreach(s_node in s_bundle.sequencenodes) {
+      level.var_25a8c888[str_sequence][s_node.name] = s_node;
     }
   }
 
-  var_c1a775f3 = arraycopy(level.var_25a8c888[var_cfeeef61]);
+  var_c1a775f3 = arraycopy(level.var_25a8c888[str_sequence]);
 
   foreach(var_ff90ecdb in var_c1a775f3) {
     if(is_true(var_ff90ecdb.var_6507df35)) {
-      self function_a6fc0988(var_cfeeef61, var_c1a775f3, var_ff90ecdb, a_ents);
+      self function_a6fc0988(str_sequence, var_c1a775f3, var_ff90ecdb, a_ents);
       s_tracker.n_scene_count--;
 
       if(s_tracker.n_scene_count == 0) {
@@ -2896,14 +2896,14 @@ function private function_2fd8d9a3(s_tracker, var_cfeeef61, a_ents) {
     }
   }
 
-  assertmsg("<dev string:x758>" + var_cfeeef61 + "<dev string:x765>");
+  assertmsg("<dev string:x758>" + str_sequence + "<dev string:x765>");
 }
 
-function private function_a6fc0988(var_cfeeef61, var_c1a775f3, var_840fe719, a_ents) {
+function private function_a6fc0988(str_sequence, var_c1a775f3, var_840fe719, a_ents) {
   var_2f3f4731 = var_840fe719;
 
   while(true) {
-    s_waitresult = function_8fc96d1b(var_cfeeef61, var_2f3f4731, a_ents, var_2f3f4731.n_blend);
+    s_waitresult = function_8fc96d1b(str_sequence, var_2f3f4731, a_ents, var_2f3f4731.n_blend);
 
     if(isDefined(s_waitresult.var_cc000a39)) {
       var_e6336354 = s_waitresult.var_cc000a39[0].var_99a313b2;
@@ -2911,7 +2911,7 @@ function private function_a6fc0988(var_cfeeef61, var_c1a775f3, var_840fe719, a_e
 
       if(isarray(s_waitresult.var_cc000a39[0].var_7698819c)) {
         foreach(var_9b685a51 in s_waitresult.var_cc000a39[0].var_7698819c) {
-          a_ents[var_9b685a51.var_db32441] = var_2f3f4731.a_ents[tolower(var_9b685a51.var_db32441)];
+          a_ents[var_9b685a51.sceneobjectname] = var_2f3f4731.a_ents[tolower(var_9b685a51.sceneobjectname)];
         }
       }
 
@@ -2925,12 +2925,12 @@ function private function_a6fc0988(var_cfeeef61, var_c1a775f3, var_840fe719, a_e
   }
 }
 
-function private function_8fc96d1b(var_cfeeef61, var_2f3f4731, a_ents, n_blend) {
+function private function_8fc96d1b(str_sequence, var_2f3f4731, a_ents, n_blend) {
   var_db632007 = 0;
 
-  if(isarray(a_ents.var_d6cfa700)) {
-    foreach(var_15a51335 in a_ents.var_d6cfa700) {
-      if(isDefined(var_15a51335.var_b1299ae4)) {
+  if(isarray(a_ents.sequenceconnectors)) {
+    foreach(s_node in a_ents.sequenceconnectors) {
+      if(isDefined(s_node.nextsequencenodes)) {
         var_db632007 = 1;
         break;
       }
@@ -2950,7 +2950,7 @@ function private function_8fc96d1b(var_cfeeef61, var_2f3f4731, a_ents, n_blend) 
 
     s_tracker = spawnStruct();
 
-    foreach(var_db087283 in a_ents.var_d6cfa700) {
+    foreach(var_db087283 in a_ents.sequenceconnectors) {
       switch (var_db087283.name) {
         case #"death":
           foreach(ent in self.scene_ents) {
@@ -3002,7 +3002,7 @@ function private function_100bb0ad(var_db087283, ent) {
   self endon(#"sequence_event");
   ent waittill(var_db087283.name);
   self notify(#"sequence_event", {
-    #var_cc000a39: var_db087283.var_b1299ae4
+    #var_cc000a39: var_db087283.nextsequencenodes
   });
 }
 
@@ -3017,11 +3017,11 @@ function private function_ac41a9e4(var_db087283, ent) {
       v_forward = anglesToForward(ent.angles);
       var_3f9826ab = vectordot(var_2231bfef, v_forward);
       v_right = anglestoright(ent.angles);
-      var_8ecbd20e = vectordot(var_2231bfef, v_right);
+      n_dot_right = vectordot(var_2231bfef, v_right);
 
-      if(var_3f9826ab >= 0.7 && var_db087283.name === "react_f" || var_3f9826ab <= -0.7 && var_db087283.name === "react_b" || var_8ecbd20e <= -0.7 && var_db087283.name === "react_l" || var_8ecbd20e >= 0.7 && var_db087283.name === "react_r") {
+      if(var_3f9826ab >= 0.7 && var_db087283.name === "react_f" || var_3f9826ab <= -0.7 && var_db087283.name === "react_b" || n_dot_right <= -0.7 && var_db087283.name === "react_l" || n_dot_right >= 0.7 && var_db087283.name === "react_r") {
         self notify(#"sequence_event", {
-          #var_cc000a39: var_db087283.var_b1299ae4
+          #var_cc000a39: var_db087283.nextsequencenodes
         });
         return;
       }

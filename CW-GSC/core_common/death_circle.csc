@@ -23,7 +23,7 @@ function private preinit() {
   }
 
   level.var_ef215639 = [1: #"evt_death_circle_weak", 2: #"evt_death_circle_med", 3: "evt_death_circle_strong"];
-  level.var_cb450873 = #"hash_313f1d0b4ff27caa";
+  level.var_cb450873 = #"evt_death_circle_3d";
 
   if(isDefined(level.var_7bd7bdc8)) {
     level.var_f6795a59 = level.var_7bd7bdc8;

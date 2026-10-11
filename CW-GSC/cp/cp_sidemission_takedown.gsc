@@ -22,7 +22,7 @@
 function event_handler[level_init] main(eventstruct) {
   setclearanceceiling(16);
   init_clientfields();
-  function_37dfd679();
+  init_skiptos();
   load::main();
   init_callbacks();
   level.player = getPlayers()[0];
@@ -49,13 +49,13 @@ function function_f4dca234() {
   }
 }
 
-function function_37dfd679() {
-  skipto::function_eb91535d("tkdn_heli_intro", &namespace_347b95ee::main, &namespace_347b95ee::starting, "Chaos: Heli", &namespace_347b95ee::cleanup);
-  skipto::function_eb91535d("tkdn_heli_convoy_aslt", &namespace_9c42e5f3::main, &namespace_9c42e5f3::starting, "Chaos: Convoy Assault", &namespace_9c42e5f3::cleanup);
-  skipto::function_eb91535d("tkdn_heli_trailer_park", &namespace_1ca393d1::main, &namespace_1ca393d1::starting, "Chaos: Trailer Park", &namespace_1ca393d1::cleanup);
-  skipto::function_eb91535d("tkdn_heli_hotel_parking_lot", &namespace_f464d565::function_b474f6be, &namespace_f464d565::function_dbf2a80e, "Chaos: Hotel Parking Lot", &namespace_f464d565::function_a81c2225);
-  skipto::function_eb91535d("tkdn_heli_hotel_breach", &namespace_f464d565::main, &namespace_f464d565::starting, "Chaos: Hotel Breach", &namespace_f464d565::cleanup);
-  skipto::function_eb91535d("tkdn_heli_exfil", &namespace_fe8e156a::main, &namespace_fe8e156a::starting, "Chaos: Exfil", &namespace_fe8e156a::cleanup);
+function init_skiptos() {
+  skipto::add_saved("tkdn_heli_intro", &namespace_347b95ee::main, &namespace_347b95ee::starting, "Chaos: Heli", &namespace_347b95ee::cleanup);
+  skipto::add_saved("tkdn_heli_convoy_aslt", &namespace_9c42e5f3::main, &namespace_9c42e5f3::starting, "Chaos: Convoy Assault", &namespace_9c42e5f3::cleanup);
+  skipto::add_saved("tkdn_heli_trailer_park", &namespace_1ca393d1::main, &namespace_1ca393d1::starting, "Chaos: Trailer Park", &namespace_1ca393d1::cleanup);
+  skipto::add_saved("tkdn_heli_hotel_parking_lot", &namespace_f464d565::function_b474f6be, &namespace_f464d565::function_dbf2a80e, "Chaos: Hotel Parking Lot", &namespace_f464d565::function_a81c2225);
+  skipto::add_saved("tkdn_heli_hotel_breach", &namespace_f464d565::main, &namespace_f464d565::starting, "Chaos: Hotel Breach", &namespace_f464d565::cleanup);
+  skipto::add_saved("tkdn_heli_exfil", &namespace_fe8e156a::main, &namespace_fe8e156a::starting, "Chaos: Exfil", &namespace_fe8e156a::cleanup);
 }
 
 function init_clientfields() {

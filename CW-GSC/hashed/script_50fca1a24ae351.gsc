@@ -48,7 +48,7 @@ function init() {
   clientfield::register("world", "world_dungeon_set", 1, 8, "int");
   clientfield::register("world", "world_dungeon_build", 1, 1, "counter");
   clientfield::register("world", "world_dungeon_destroy", 1, 1, "counter");
-  level.var_3dd67d2d = &function_c153f40;
+  level.rg_postlevelgen_cb = &function_c153f40;
   namespace_c9c45ed8::init();
   namespace_5849a337::init();
   namespace_22574328::init();
@@ -76,9 +76,9 @@ function main() {
     level.doa.dungeons[idx].var_9105f204 = array(level.doa.var_65a70dc);
 
     if(isDefined(trigger.script_parameters)) {
-      var_f589486f = strtok(trigger.script_parameters, ";");
+      fodder = strtok(trigger.script_parameters, ";");
 
-      foreach(ai in var_f589486f) {
+      foreach(ai in fodder) {
         if(!isDefined(level.doa.dungeons[idx].var_9105f204)) {
           level.doa.dungeons[idx].var_9105f204 = [];
         } else if(!isarray(level.doa.dungeons[idx].var_9105f204)) {
@@ -95,13 +95,13 @@ function main() {
 }
 
 function function_470f56e6(origin, ignore, var_fcfb8b8d = 1) {
-  foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+  foreach(player in doa_player_utility::function_23e1f90f()) {
     if(player === ignore) {
       continue;
     }
 
     if(!isalive(player) || is_true(player.doa.respawning)) {
-      player namespace_7f5aeb59::function_513831e1();
+      player doa_player_utility::function_513831e1();
     }
 
     player notify(#"hash_279998c5df86c04d");
@@ -113,11 +113,11 @@ function function_470f56e6(origin, ignore, var_fcfb8b8d = 1) {
     }
 
     if(var_fcfb8b8d) {
-      player notify(#"hash_7893364bd228d63e");
+      player notify(#"doa_playerdumpfps");
     }
   }
 
-  foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+  foreach(player in doa_player_utility::function_23e1f90f()) {
     if(player === ignore) {
       continue;
     }
@@ -150,10 +150,10 @@ function function_ec0b503f(var_499e2f80) {
 
   foreach(player in getPlayers()) {
     player notify(#"hash_279998c5df86c04d");
-    player thread namespace_7f5aeb59::turnplayershieldon(0);
+    player thread doa_player_utility::turnplayershieldon(0);
 
     if(level.doa.dungeons[idx].policy == 0) {
-      player notify(#"hash_7893364bd228d63e");
+      player notify(#"doa_playerdumpfps");
     }
   }
 
@@ -170,11 +170,11 @@ function function_ec0b503f(var_499e2f80) {
   profilestop();
   level function_c88b8726(idx);
   level doa_banner::function_7a0e5387(16);
-  level thread namespace_9fc66ac::announce(61);
+  level thread doa_sound::announce(61);
   level.doa.var_5b55ba1f = namespace_4dae815d::function_21cd3890(5);
 
   if(isDefined(var_8f13e4c5)) {
-    namespace_7f5aeb59::function_a8b57c52(var_8f13e4c5.origin, var_8f13e4c5.angles, result.activator, var_8f13e4c5);
+    doa_player_utility::function_a8b57c52(var_8f13e4c5.origin, var_8f13e4c5.angles, result.activator, var_8f13e4c5);
   }
 
   if(is_true(level.doa.var_c93506fb)) {
@@ -190,7 +190,7 @@ function function_ec0b503f(var_499e2f80) {
         var_2436e1b solid();
         level.doa.var_43cb2d40[level.doa.var_43cb2d40.size] = var_2436e1b;
         self.topper = var_2436e1b;
-        var_2436e1b namespace_83eb6304::function_3ecfde67("explode_lg");
+        var_2436e1b doa_fx::function_3ecfde67("explode_lg");
       }
     }
   }
@@ -286,7 +286,7 @@ function function_8790b64a() {
   level.doa.var_187ed224 = undefined;
 
   if(isDefined(level.doa.var_9f48249a)) {
-    level.doa.var_9f48249a namespace_83eb6304::turnofffx("teleporter_dungeon_light");
+    level.doa.var_9f48249a doa_fx::turnofffx("teleporter_dungeon_light");
     util::wait_network_frame();
 
     if(isDefined(level.doa.var_9f48249a.trigger)) {
@@ -312,7 +312,7 @@ function function_4be92bcc(idx, seconds) {
   var_80d530a9.tiles = level.var_c97eeeb4.size;
   var_80d530a9.rooms = level.var_d5561d56;
   var_80d530a9.halls = level.var_5d40e975;
-  var_80d530a9.players = namespace_7f5aeb59::function_f08b75c1();
+  var_80d530a9.players = doa_player_utility::function_f08b75c1();
   var_80d530a9.var_a98f4fd2 = [];
 
   foreach(tileid in level.doa.var_830f8412) {
@@ -379,7 +379,7 @@ function function_fd83ca7f() {
   level endon(#"dungeon_cleanup", #"dungeon_destroyed");
 
   while(true) {
-    result = self waittill(#"hash_4c72e79bdad8315e");
+    result = self waittill(#"ai_queue_spawned");
     result.ai.var_f979e699 = 0;
   }
 }
@@ -391,7 +391,7 @@ function function_3574d58() {
   self endon(#"death");
 
   while(true) {
-    result = self waittill(#"hash_4c72e79bdad8315e");
+    result = self waittill(#"ai_queue_spawned");
 
     if(!isDefined(level.doa.var_35c4260d)) {
       level.doa.var_35c4260d = [];
@@ -479,8 +479,8 @@ function function_600ea4f() {
 
     furthest = level.doa.teleporter_locs[level.doa.teleporter_locs.size - 1];
     level.doa.teleporter_locs = [];
-    level.doa.var_9f48249a = namespace_dfc652ee::itemspawn(namespace_dfc652ee::function_2c9923d7(39), furthest.origin, undefined, undefined, 1);
-    level.doa.var_9f48249a namespace_83eb6304::function_3ecfde67("teleporter_dungeon_light");
+    level.doa.var_9f48249a = doa_pickups::itemspawn(doa_pickups::function_2c9923d7(39), furthest.origin, undefined, undefined, 1);
+    level.doa.var_9f48249a doa_fx::function_3ecfde67("teleporter_dungeon_light");
     level.doa.var_9f48249a clientfield::set("set_icon", 9);
     level.doa.var_9f48249a notify(#"hash_2a866f50cc161ca8");
     objective_onentity(13, level.doa.var_9f48249a);
@@ -493,7 +493,7 @@ function function_600ea4f() {
       continue;
     }
 
-    item = namespace_dfc652ee::itemspawn(namespace_dfc652ee::function_6265bde4(pickup.script_noteworthy), pickup.origin, undefined, undefined, 1);
+    item = doa_pickups::itemspawn(doa_pickups::function_6265bde4(pickup.script_noteworthy), pickup.origin, undefined, undefined, 1);
 
     if(isDefined(pickup.modelscale)) {
       item setscale(pickup.modelscale);
@@ -572,9 +572,9 @@ function function_73730269(var_f3c8eb3) {
   result = level waittill(#"ladder_up", #"game_over");
 
   if(result._notify == #"ladder_up" && result.pickup === var_f3c8eb3) {
-    namespace_7f5aeb59::function_f8645db3(getdvarint(#"hash_2a014ab8179901f4", 500));
+    doa_player_utility::function_f8645db3(getdvarint(#"hash_2a014ab8179901f4", 500));
 
-    foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+    foreach(player in doa_player_utility::function_23e1f90f()) {
       player giveachievement(#"doa_achievement_dungeondiver");
       player namespace_d2efac9a::function_cb7b5503();
 
@@ -588,7 +588,7 @@ function function_73730269(var_f3c8eb3) {
   level notify(#"rg_abort");
 
   if(isDefined(var_f3c8eb3)) {
-    var_f3c8eb3 namespace_83eb6304::turnofffx("teleporter_dungeon_light");
+    var_f3c8eb3 doa_fx::turnofffx("teleporter_dungeon_light");
   }
 
   level thread namespace_ec06fe4a::function_87612422(level.doa.var_e84586f1.origin, level.doa.var_e84586f1.angles, 1, 8, level.var_564dda4);
@@ -597,9 +597,9 @@ function function_73730269(var_f3c8eb3) {
   level namespace_c85a46fe::function_edfcfa44(2);
   namespace_ec06fe4a::function_de70888a();
   namespace_ec06fe4a::function_b6b79fd1();
-  level thread namespace_7f5aeb59::function_67f054d7();
+  level thread doa_player_utility::function_67f054d7();
   level waittill(#"hash_1b322de3d2e3e781");
-  level notify(#"hash_7893364bd228d63e");
+  level notify(#"doa_playerdumpfps");
   level function_8790b64a();
   namespace_1e25ad94::function_4e3cfad("\tDungeon destroyed", undefined, undefined, undefined, 10);
 
@@ -609,16 +609,16 @@ function function_73730269(var_f3c8eb3) {
     return;
   }
 
-  namespace_7f5aeb59::function_a8b57c52(level.doa.var_e84586f1.origin, level.doa.var_e84586f1.angles);
+  doa_player_utility::function_a8b57c52(level.doa.var_e84586f1.origin, level.doa.var_e84586f1.angles);
 
-  foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+  foreach(player in doa_player_utility::function_23e1f90f()) {
     player clientfield::increment_to_player("resetCamera");
   }
 
   level.doa.var_e84586f1 = undefined;
   level.doa.var_70bd361d = undefined;
   namespace_4dae815d::function_21cd3890(level.doa.var_5b55ba1f);
-  level thread namespace_7f5aeb59::function_836aeb74();
+  level thread doa_player_utility::function_836aeb74();
   objective_setstate(12, "active");
   oldstate = level.var_564dda4;
   level util::set_lighting_state(oldstate, 0);

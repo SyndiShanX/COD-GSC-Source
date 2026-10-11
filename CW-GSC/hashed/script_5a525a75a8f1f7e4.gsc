@@ -35,7 +35,7 @@ function postinit() {
   mapdestinations = struct::get_array(#"content_destination", "variantname");
 
   if(!zm_utility::is_survival() && isDefined(mapdestinations) && mapdestinations.size > 0) {
-    level thread function_b99f518f(mapdestinations[0]);
+    level thread init_ammo_cache(mapdestinations[0]);
   }
 }
 
@@ -147,8 +147,8 @@ function function_5eeaa168() {
       var_ae70df3a = player item_inventory::function_2e711614(17 + 1 + 8 + 1 + 8 + 1);
 
       if(isDefined(var_ae70df3a)) {
-        var_5df29481 = player item_inventory_util::function_2b83d3ff(var_ae70df3a);
-        var_5df29481 = zm_weapons::function_ec62a449(var_5df29481);
+        weapon3 = player item_inventory_util::function_2b83d3ff(var_ae70df3a);
+        weapon3 = zm_weapons::function_ec62a449(weapon3);
       }
 
       if(!isDefined(weapon1)) {
@@ -159,28 +159,28 @@ function function_5eeaa168() {
         weapon2 = var_f945fa92;
       }
 
-      if(isDefined(var_5df29481)) {
+      if(isDefined(weapon3)) {
         if(killstreaks::is_killstreak_weapon(currentweapon)) {
           player.var_b8783de6 = 3;
           self sethintstringforplayer(player, #"hash_56425e74a921890d");
-        } else if(weapon1.weapclass == "melee" && weapon2.weapclass == "melee" && var_5df29481.weapclass == "melee") {
+        } else if(weapon1.weapclass == "melee" && weapon2.weapclass == "melee" && weapon3.weapclass == "melee") {
           player.var_b8783de6 = 3;
           self sethintstringforplayer(player, #"hash_56425e74a921890d");
-        } else if(var_5df29481.weapclass != "melee" && weapon1.weapclass == "melee" && weapon2.weapclass == "melee") {
+        } else if(weapon3.weapclass != "melee" && weapon1.weapclass == "melee" && weapon2.weapclass == "melee") {
           cost = function_adb75323(var_ae70df3a);
 
-          if(player zm_score::can_player_purchase(cost) && !player function_f300168a(var_5df29481)) {
+          if(player zm_score::can_player_purchase(cost) && !player function_f300168a(weapon3)) {
             player.var_b8783de6 = 4;
-            self sethintstringforplayer(player, #"hash_47f37dccf2dfd164", cost, var_5df29481.displayname);
-          } else if(player zm_score::can_player_purchase(cost) && player function_f300168a(var_5df29481)) {
+            self sethintstringforplayer(player, #"hash_47f37dccf2dfd164", cost, weapon3.displayname);
+          } else if(player zm_score::can_player_purchase(cost) && player function_f300168a(weapon3)) {
             player.var_b8783de6 = 3;
-            self sethintstringforplayer(player, #"hash_36de8d628bb52fe9", var_5df29481.displayname);
+            self sethintstringforplayer(player, #"hash_36de8d628bb52fe9", weapon3.displayname);
           } else {
             player.var_b8783de6 = 3;
             var_1c7e95e9 = 1;
-            self sethintstringforplayer(player, #"hash_56d6b70cf6595b1a", cost, var_5df29481.displayname);
+            self sethintstringforplayer(player, #"hash_56d6b70cf6595b1a", cost, weapon3.displayname);
           }
-        } else if(weapon1.weapclass != "melee" && weapon2.weapclass == "melee" && var_5df29481.weapclass == "melee") {
+        } else if(weapon1.weapclass != "melee" && weapon2.weapclass == "melee" && weapon3.weapclass == "melee") {
           item = player item_inventory::function_230ceec4(weapon1);
           cost = function_adb75323(item);
 
@@ -193,9 +193,9 @@ function function_5eeaa168() {
           } else {
             player.var_b8783de6 = 3;
             var_1c7e95e9 = 1;
-            self sethintstringforplayer(player, #"hash_56d6b70cf6595b1a", cost, var_5df29481.displayname);
+            self sethintstringforplayer(player, #"hash_56d6b70cf6595b1a", cost, weapon3.displayname);
           }
-        } else if(weapon2.weapclass != "melee" && weapon1.weapclass == "melee" && var_5df29481.weapclass == "melee") {
+        } else if(weapon2.weapclass != "melee" && weapon1.weapclass == "melee" && weapon3.weapclass == "melee") {
           item = player item_inventory::function_230ceec4(weapon2);
           cost = function_adb75323(item);
 
@@ -210,7 +210,7 @@ function function_5eeaa168() {
             var_1c7e95e9 = 1;
             self sethintstringforplayer(player, #"hash_56d6b70cf6595b1a", cost, weapon2.displayname);
           }
-        } else if((weapon2.weapclass != "melee" || weapon1.weapclass != "melee") && var_5df29481.weapclass == "melee" && currentweapon == var_5df29481) {
+        } else if((weapon2.weapclass != "melee" || weapon1.weapclass != "melee") && weapon3.weapclass == "melee" && currentweapon == weapon3) {
           if(weapon1.weapclass != "melee" && !player function_f300168a(weapon1)) {
             item = player item_inventory::function_230ceec4(weapon1);
             cost = function_adb75323(item);
@@ -370,7 +370,7 @@ function function_e4ff673(eventstruct) {
     var_ae70df3a = player item_inventory::function_2e711614(17 + 1 + 8 + 1 + 8 + 1);
 
     if(isDefined(var_ae70df3a)) {
-      var_5df29481 = player item_inventory_util::function_2b83d3ff(var_ae70df3a);
+      weapon3 = player item_inventory_util::function_2b83d3ff(var_ae70df3a);
     }
 
     if(!isDefined(weapon1)) {
@@ -406,12 +406,12 @@ function function_e4ff673(eventstruct) {
 
           return;
         case 4:
-          if(isDefined(var_5df29481.weapclass)) {
-            if(var_5df29481.weapclass != "melee") {
-              self function_7c1cc13c(player, var_5df29481, model);
+          if(isDefined(weapon3.weapclass)) {
+            if(weapon3.weapclass != "melee") {
+              self function_7c1cc13c(player, weapon3, model);
 
-              if(currentweapon != var_5df29481) {
-                player switchtoweapon(var_5df29481);
+              if(currentweapon != weapon3) {
+                player switchtoweapon(weapon3);
               }
             }
           }
@@ -438,7 +438,7 @@ function function_7c1cc13c(player, weapon, model) {
   if(currentclip < weapon.clipsize && (maxammo == 0 || is_true(weapon.cliponly)) && var_3069fe3) {
     if(player hasweapon(weapon)) {
       player setweaponammoclip(weapon, maxclip);
-      player playsoundtoplayer(#"hash_3d571b980c703675", player);
+      player playsoundtoplayer(#"zmb_ammocrate_ammoget", player);
       player zm_score::minus_to_player_score(cost);
 
       if(zm_weapons::is_wonder_weapon(weapon)) {
@@ -455,7 +455,7 @@ function function_7c1cc13c(player, weapon, model) {
       }
 
       player.var_b6cd4a03 = gettime();
-      player playsoundtoplayer(#"hash_3d571b980c703675", player);
+      player playsoundtoplayer(#"zmb_ammocrate_ammoget", player);
       player zm_score::minus_to_player_score(cost);
 
       if(zm_weapons::is_wonder_weapon(weapon) || weapon.statname === #"ray_gun") {
@@ -494,13 +494,13 @@ function private function_f300168a(weapon) {
   return var_e20637be;
 }
 
-function function_b99f518f(destination) {
+function init_ammo_cache(destination) {
   level flag::wait_till("start_zombie_round_logic");
   waittillframeend();
-  function_7b19802a(destination);
+  spawn_ammo_cache(destination);
 }
 
-function function_7b19802a(destination) {
+function spawn_ammo_cache(destination) {
   foreach(location in destination.locations) {
     ammo_cache = location.instances[#"ammo_cache"];
 

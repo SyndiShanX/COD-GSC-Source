@@ -40,8 +40,8 @@ function function_21fee83f(var_c4f44e2) {
   }
 
   if(var_c4f44e2 === 2) {
-    function_672403ca("mute_underscore_aboveground", 1, 1);
-    function_672403ca("mute_underscore_belowground", 1, 1);
+    blendsubmix("mute_underscore_aboveground", 1, 1);
+    blendsubmix("mute_underscore_belowground", 1, 1);
     level.var_c5cba082 = 1;
     return;
   }
@@ -62,27 +62,27 @@ function function_21fee83f(var_c4f44e2) {
     }
 
     if(var_c4f44e2 === 0) {
-      function_672403ca("mute_underscore_aboveground", 5, 0);
-      function_672403ca("mute_underscore_belowground", 5, 1);
+      blendsubmix("mute_underscore_aboveground", 5, 0);
+      blendsubmix("mute_underscore_belowground", 5, 1);
       return;
     }
 
     if(var_c4f44e2 === 1) {
-      function_672403ca("mute_underscore_aboveground", 5, 1);
-      function_672403ca("mute_underscore_belowground", 5, 0);
+      blendsubmix("mute_underscore_aboveground", 5, 1);
+      blendsubmix("mute_underscore_belowground", 5, 0);
       return;
     }
 
     if(var_c4f44e2 === 4) {
-      function_672403ca("mute_underscore_aboveground", 5, 1);
-      function_672403ca("mute_underscore_belowground", 5, 1);
+      blendsubmix("mute_underscore_aboveground", 5, 1);
+      blendsubmix("mute_underscore_belowground", 5, 1);
     }
   }
 }
 
 function function_12b1d8eb() {
-  function_5ea2c6e3("mute_underscore_aboveground", 0);
-  function_5ea2c6e3("mute_underscore_belowground", 0);
+  addsubmix("mute_underscore_aboveground", 0);
+  addsubmix("mute_underscore_belowground", 0);
   util::waitforclient(0);
   wait 10;
   audio::playloopat("mus_underscore_aboveground_loop_0", (0, 0, 0));
@@ -104,16 +104,16 @@ function function_d8392499() {
   var_c4e62be5 playLoopSound(#"hash_7caec96b396c14c5");
   var_c4e62be5 setforcenocull();
   soundloopemitter(#"hash_3990cd4e6ed8ede1", (3545, 8279, -336));
-  soundloopemitter(#"hash_5c289c9099eaf1c2", (3563, 1785, -290));
-  soundloopemitter(#"hash_7c1b5a05e3094db2", (3484, 2094, -338));
-  soundloopemitter(#"hash_7c1b5a05e3094db2", (3577, 2091, -264));
-  soundloopemitter(#"hash_7c1b5a05e3094db2", (3732, 1790, -253));
-  soundloopemitter(#"hash_7c1b5a05e3094db2", (2382, 1314, -222));
-  soundloopemitter(#"hash_7c1b5a05e3094db2", (2777, 1105, -221));
-  soundloopemitter(#"hash_7c1b5a05e3094db2", (2777, 951, -221));
-  soundloopemitter(#"hash_7c1b5a05e3094db2", (2559, 1316, -222));
-  soundloopemitter(#"hash_7c1b5a05e3094db2", (2578, 672, -222));
-  soundloopemitter(#"hash_7c1b5a05e3094db2", (2367, 672, -225));
+  soundloopemitter(#"amb_tv_static_horror_moved", (3563, 1785, -290));
+  soundloopemitter(#"amb_tv_static_regular", (3484, 2094, -338));
+  soundloopemitter(#"amb_tv_static_regular", (3577, 2091, -264));
+  soundloopemitter(#"amb_tv_static_regular", (3732, 1790, -253));
+  soundloopemitter(#"amb_tv_static_regular", (2382, 1314, -222));
+  soundloopemitter(#"amb_tv_static_regular", (2777, 1105, -221));
+  soundloopemitter(#"amb_tv_static_regular", (2777, 951, -221));
+  soundloopemitter(#"amb_tv_static_regular", (2559, 1316, -222));
+  soundloopemitter(#"amb_tv_static_regular", (2578, 672, -222));
+  soundloopemitter(#"amb_tv_static_regular", (2367, 672, -225));
 }
 
 function function_933f292d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -155,42 +155,42 @@ function function_933f292d(localclientnum, oldval, newval, bnewent, binitialsnap
 
       break;
     case 5:
-      function_5ea2c6e3("zmb_tungsten_bossfight", 5, 1);
-      function_ed62c9c2("zmb_tungsten_escort", 4);
+      addsubmix("zmb_tungsten_bossfight", 5, 1);
+      clearsubmix("zmb_tungsten_escort", 4);
       break;
     case 6:
-      function_ed62c9c2("zmb_tungsten_bossfight", 5);
-      function_ed62c9c2("zmb_tungsten_boss_outro", 5);
-      function_ed62c9c2("zmb_tungsten_boss_outro_igc", 2);
-      soundstoploopemitter(#"hash_75e463968d66b62f", (8399, 1766, -387));
+      clearsubmix("zmb_tungsten_bossfight", 5);
+      clearsubmix("zmb_tungsten_boss_outro", 5);
+      clearsubmix("zmb_tungsten_boss_outro_igc", 2);
+      soundstoploopemitter(#"zmb_mq_boss_idle_lp", (8399, 1766, -387));
       break;
     case 7:
-      playSound(fieldname, #"hash_418285810ee4b665", (0, 0, 0));
+      playSound(fieldname, #"zmb_mq_boss_intermission_fadeout", (0, 0, 0));
       soundloopemitter("zmb_mq_boss_intermission_blackscreen_lp", (0, 0, 0));
-      function_5ea2c6e3("zmb_tungsten_intermission", 2, 1);
+      addsubmix("zmb_tungsten_intermission", 2, 1);
       break;
     case 8:
-      playSound(fieldname, #"hash_541ffb94c24dbf12", (0, 0, 0));
+      playSound(fieldname, #"zmb_mq_boss_intermission_slam_in", (0, 0, 0));
       soundstoploopemitter("zmb_mq_boss_intermission_blackscreen_lp", (0, 0, 0));
       soundloopemitter("zmb_mq_boss_intermission_bg_lp", (0, 0, 0));
       break;
     case 9:
       soundstoploopemitter("zmb_mq_boss_intermission_bg_lp", (0, 0, 0));
-      function_ed62c9c2("zmb_tungsten_intermission", 0.1);
+      clearsubmix("zmb_tungsten_intermission", 0.1);
       break;
     case 10:
-      function_5ea2c6e3("zmb_tungsten_boss_outro", 2, 1);
+      addsubmix("zmb_tungsten_boss_outro", 2, 1);
       break;
     case 13:
-      function_5ea2c6e3("zmb_tungsten_boss_outro_igc", 0.5, 1);
-      function_ed62c9c2("zmb_tungsten_boss_outro", 2);
+      addsubmix("zmb_tungsten_boss_outro_igc", 0.5, 1);
+      clearsubmix("zmb_tungsten_boss_outro", 2);
       break;
     case 11:
       level.var_21ece77b = 1;
       level.var_4ac6cdf7 = 1;
       break;
     case 12:
-      function_5ea2c6e3("zmb_tungsten_escort", 4, 1);
+      addsubmix("zmb_tungsten_escort", 4, 1);
       break;
   }
 }

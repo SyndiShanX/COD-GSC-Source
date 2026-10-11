@@ -55,15 +55,15 @@ function function_6ec0595a() {
     org.owner = self;
     org.objects = [];
     org linkTo(self, undefined, (0, 0, 30));
-    org thread namespace_ec06fe4a::function_f506b4c7(1);
-    org thread function_3be74620(self);
+    org thread namespace_ec06fe4a::rotateme(1);
+    org thread watchforcleanup(self);
     self thread function_8efc825c(org);
   }
 
   self function_dd76db7c(self.doa.tesla_org);
-  timeout = self namespace_1c2a96f9::function_4808b985(30);
+  timeout = self doa_fate::function_4808b985(30);
 
-  while(!namespace_dfc652ee::function_f759a457()) {
+  while(!doa_pickups::function_f759a457()) {
     waitframe(1);
   }
 
@@ -100,8 +100,8 @@ function function_9b8a196a() {
   trigger thread function_49ee8def();
   trigger.ball = ball;
   ball.trigger = trigger;
-  ball namespace_83eb6304::function_3ecfde67("tesla_trail");
-  ball namespace_83eb6304::function_3ecfde67("tesla_ball");
+  ball doa_fx::function_3ecfde67("tesla_trail");
+  ball doa_fx::function_3ecfde67("tesla_ball");
   ball namespace_e32bb68::function_3a59ec34("evt_doa_pickup_teslaball_active_lp");
   return ball;
 }
@@ -166,12 +166,12 @@ function function_f50d3546(org, vel) {
   self moveTo(org.origin, 0.5);
   self waittilltimeout(1, #"movedone");
   vel *= 0.25;
-  self namespace_83eb6304::function_3ecfde67("tesla_launch");
+  self doa_fx::function_3ecfde67("tesla_launch");
   self namespace_e32bb68::function_ae271c0b("evt_doa_pickup_teslaball_active_lp");
   self physicslaunch(self.origin, vel);
 }
 
-function function_3be74620(owner) {
+function watchforcleanup(owner) {
   self notify("9a8fea8ce1c3c75");
   self endon("9a8fea8ce1c3c75");
   self endon(#"death");
@@ -237,28 +237,28 @@ function function_8d45f3be(guy, attacker) {
     return 0;
   }
 
-  if(function_5d21013(attacker)) {
+  if(tesla_ok_to_discharge(attacker)) {
     guy.damagedby = "tesla";
-    guy thread function_957d23cc(attacker);
+    guy thread tesla_damage_init(attacker);
     return 1;
   }
 
   return 0;
 }
 
-function function_5d21013(player) {
-  if(!isDefined(player.var_e253250e)) {
+function tesla_ok_to_discharge(player) {
+  if(!isDefined(player.tesla_discharge)) {
     return true;
   }
 
-  if(player.var_e253250e == 0) {
+  if(player.tesla_discharge == 0) {
     return false;
   }
 
   return true;
 }
 
-function function_957d23cc(player) {
+function tesla_damage_init(player) {
   if(!isDefined(player)) {
     return;
   }
@@ -270,24 +270,24 @@ function function_957d23cc(player) {
   player endon(#"death");
   player.tesla_enemies = undefined;
   player.tesla_enemies_hit = 1;
-  player.var_b740173a = 0;
-  player notify(#"hash_45f6a84f01d669d5");
-  self namespace_83eb6304::function_3ecfde67("tesla_shock");
-  self function_d9c75d31(self, player, 0);
+  player.tesla_powerup_dropped = 0;
+  player notify(#"tesla_discharged");
+  self doa_fx::function_3ecfde67("tesla_shock");
+  self tesla_arc_damage(self, player, 0);
   player.tesla_enemies_hit = 0;
 }
 
-function function_d9c75d31(source_enemy, player, arc_num) {
+function tesla_arc_damage(source_enemy, player, arc_num) {
   if(isPlayer(player)) {
     player endon(#"disconnect");
   }
 
   player endon(#"death");
-  function_c6988f55(self, 1);
+  tesla_flag_hit(self, 1);
   radius_decay = getdvarint(#"hash_3eb3a662a40de94a", 20) * arc_num;
-  enemies = function_2513a3f2(self gettagorigin("j_head"), getdvarint(#"hash_28fd9a5b3176c120", 300) - radius_decay, player);
-  function_c6988f55(enemies, 1);
-  self thread function_9a98038e(source_enemy, arc_num, player);
+  enemies = tesla_get_enemies_in_area(self gettagorigin("j_head"), getdvarint(#"hash_28fd9a5b3176c120", 300) - radius_decay, player);
+  tesla_flag_hit(enemies, 1);
+  self thread tesla_do_damage(source_enemy, arc_num, player);
 
   foreach(guy in enemies) {
     if(!isactor(guy)) {
@@ -302,17 +302,17 @@ function function_d9c75d31(source_enemy, player, arc_num) {
       continue;
     }
 
-    if(function_a34a58f4(arc_num + 1, player.tesla_enemies_hit)) {
-      function_c6988f55(guy, 0);
+    if(tesla_end_arc_damage(arc_num + 1, player.tesla_enemies_hit)) {
+      tesla_flag_hit(guy, 0);
       continue;
     }
 
     player.tesla_enemies_hit++;
-    guy thread function_d9c75d31(self, player, arc_num + 1);
+    guy thread tesla_arc_damage(self, player, arc_num + 1);
   }
 }
 
-function function_a34a58f4(arc_num, enemies_hit_num) {
+function tesla_end_arc_damage(arc_num, enemies_hit_num) {
   if(arc_num >= getdvarint(#"hash_7ec1e8e3c113c497", 5)) {
     return true;
   }
@@ -330,7 +330,7 @@ function function_a34a58f4(arc_num, enemies_hit_num) {
   return false;
 }
 
-function function_2513a3f2(origin, distance, player) {
+function tesla_get_enemies_in_area(origin, distance, player) {
   if(!isDefined(origin)) {
     return [];
   }
@@ -353,7 +353,7 @@ function function_2513a3f2(origin, distance, player) {
       continue;
     }
 
-    if(is_true(zombie.var_c17aa4a3)) {
+    if(is_true(zombie.zombie_tesla_hit)) {
       continue;
     }
 
@@ -373,23 +373,23 @@ function function_2513a3f2(origin, distance, player) {
   return enemies;
 }
 
-function function_c6988f55(enemy, hit) {
+function tesla_flag_hit(enemy, hit) {
   if(!isDefined(enemy)) {
     return;
   }
 
   if(isarray(enemy)) {
     for(i = 0; i < enemy.size; i++) {
-      enemy[i].var_c17aa4a3 = hit;
+      enemy[i].zombie_tesla_hit = hit;
     }
 
     return;
   }
 
-  enemy.var_c17aa4a3 = hit;
+  enemy.zombie_tesla_hit = hit;
 }
 
-function function_9a98038e(source_enemy, arc_num, player) {
+function tesla_do_damage(source_enemy, arc_num, player) {
   if(isPlayer(player)) {
     player endon(#"disconnect");
   }
@@ -413,7 +413,7 @@ function function_9a98038e(source_enemy, arc_num, player) {
   }
 
   self.tesla_death = 1;
-  self thread function_ba559b7b(arc_num);
+  self thread tesla_play_death_fx(arc_num);
   origin = player.origin;
 
   if(isDefined(source_enemy) && source_enemy != self) {
@@ -421,31 +421,31 @@ function function_9a98038e(source_enemy, arc_num, player) {
   }
 
   if(self.archetype == "zombie") {
-    self namespace_ed80aead::function_c25b3c76(undefined, player);
+    self doa_gib::function_c25b3c76(undefined, player);
     return;
   }
 
   if(self.archetype == "robot") {
-    self namespace_ed80aead::function_586ef822();
+    self doa_gib::function_586ef822();
     return;
   }
 
   self thread namespace_ec06fe4a::function_570729f0(0.1, player);
 }
 
-function function_ba559b7b(arc_num) {
+function tesla_play_death_fx(arc_num) {
   if(arc_num > 1) {
-    self namespace_83eb6304::function_3ecfde67("tesla_shock_eyes");
+    self doa_fx::function_3ecfde67("tesla_shock_eyes");
   }
 
-  self namespace_83eb6304::function_3ecfde67("tesla_shock");
+  self doa_fx::function_3ecfde67("tesla_shock");
   self namespace_e32bb68::function_3a59ec34("evt_doa_pickup_teslaball_impact");
-  level namespace_ed80aead::trygibbinghead(self, 100);
+  level doa_gib::trygibbinghead(self, 100);
 }
 
 function tesla_play_arc_fx(target) {
   if(!isDefined(self) || !isDefined(target)) {
-    wait getdvarfloat(#"hash_d68c28b3c93b18f", 0.05);
+    wait getdvarfloat(#"scr_arc_travel_time", 0.05);
     return;
   }
 
@@ -465,7 +465,7 @@ function tesla_play_arc_fx(target) {
   target_origin = target gettagorigin(target_tag);
   distsq = distancesquared(origin, target_origin);
   var_1a24eda0 = distsq / sqr(128);
-  timemove = var_1a24eda0 * getdvarfloat(#"hash_d68c28b3c93b18f", 0.05);
+  timemove = var_1a24eda0 * getdvarfloat(#"scr_arc_travel_time", 0.05);
 
   if(timemove < 0.2) {
     timemove = 0.2;
@@ -474,7 +474,7 @@ function tesla_play_arc_fx(target) {
   fxorg = namespace_ec06fe4a::spawnmodel(origin, "tag_origin", undefined, "doa_tesla_fxOrg");
 
   if(isDefined(fxorg)) {
-    fxorg namespace_83eb6304::function_3ecfde67("tesla_trail");
+    fxorg doa_fx::function_3ecfde67("tesla_trail");
     fxorg moveTo(target_origin, timemove);
     fxorg waittilltimeout(timemove + 1, #"movedone");
     fxorg delete();

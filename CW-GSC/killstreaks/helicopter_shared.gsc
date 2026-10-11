@@ -260,7 +260,7 @@ function function_eca18f00(helicopter, var_84c9052b, var_1286d1f7, var_299b0ed5,
   }
 
   if(isDefined(var_1286d1f7)) {
-    pilot = util::spawn_anim_model(#"hash_71aea3bbaef3e00c", helicopter.origin);
+    pilot = util::spawn_anim_model(#"c_t9_usa_chopper_pilot_02", helicopter.origin);
 
     if(isDefined(pilot)) {
       helicopter.var_89cf7991[1] = pilot;
@@ -538,7 +538,7 @@ function heli_think(owner, startnode, heli_team, protectlocation, killstreakbund
   chopper.health_evasive = level.heli_armor;
   chopper.targeting_delay = level.heli_targeting_delay;
   chopper.primarytarget = undefined;
-  chopper.var_9ddb1534 = undefined;
+  chopper.helitarget = undefined;
   chopper.secondarytarget = undefined;
   chopper.attacker = undefined;
   chopper.missile_ammo = level.heli_missile_max;
@@ -721,7 +721,7 @@ function heli_targeting(missilesenabled, hardpointtype) {
 
     if(var_997d5bf1.size) {
       if(function_7078bd6e(self)) {
-        self.var_9ddb1534 = arraygetclosest(self.origin, var_997d5bf1, level.var_410ccc21);
+        self.helitarget = arraygetclosest(self.origin, var_997d5bf1, level.var_410ccc21);
         self notify(#"hash_27ba79e760b6494f");
       }
     }
@@ -1547,7 +1547,7 @@ function heli_health(hardpointtype, playernotify) {
     if(self.damagetaken > self.maxhealth) {
       damagestate = 0;
       self heli_set_active_camo_state(0);
-      self thread function_ae4b9a81(hardpointtype, self.owner, playernotify);
+      self thread heli_death(hardpointtype, self.owner, playernotify);
       continue;
     }
 
@@ -1595,7 +1595,7 @@ function play_going_down_vo(delay) {
   wait delay;
 }
 
-function function_ae4b9a81(hardpointtype, player, playernotify) {
+function heli_death(hardpointtype, player, playernotify) {
   self endon(#"death");
   self notify(#"crashing");
   self influencers::remove_influencers();
@@ -2498,8 +2498,8 @@ function function_83430362(hardpointtype) {
   targetcosine = cos((isDefined(self.killstreakbundle.var_96879013) ? self.killstreakbundle.var_96879013 : 30) / 2);
 
   for(;;) {
-    if(isDefined(self.var_9ddb1534)) {
-      self.var_8475558b = self.var_9ddb1534;
+    if(isDefined(self.helitarget)) {
+      self.var_8475558b = self.helitarget;
       self.var_a6642d42 = 0;
 
       while(isDefined(self.var_8475558b) && isalive(self.var_8475558b)) {
@@ -2571,7 +2571,7 @@ function function_83430362(hardpointtype) {
         burstdelay = randomintrangeinclusive(var_f2c81dc3, var_dca0680c);
         wait burstdelay;
 
-        if(!isDefined(self.var_8475558b) || isDefined(self.var_9ddb1534) && isDefined(self.var_8475558b) && self.var_8475558b != self.var_9ddb1534) {
+        if(!isDefined(self.var_8475558b) || isDefined(self.helitarget) && isDefined(self.var_8475558b) && self.var_8475558b != self.helitarget) {
           break;
         }
       }
@@ -2726,7 +2726,7 @@ function attack_primary(hardpointtype) {
   var_dca0680c = isDefined(self.killstreakbundle.var_9770d1a6) ? self.killstreakbundle.var_9770d1a6 : 5;
 
   for(;;) {
-    if(isDefined(self.primarytarget) && !isDefined(self.var_9ddb1534)) {
+    if(isDefined(self.primarytarget) && !isDefined(self.helitarget)) {
       self.primarytarget.antithreat = undefined;
       self.turrettarget = self.primarytarget;
       antithreat = 0;

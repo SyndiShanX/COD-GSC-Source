@@ -117,14 +117,14 @@ function police_headlights(localclientnum, oldval, newval, bnewent, binitialsnap
     self.lights = spawnStruct();
   }
 
-  if(isDefined(self.lights.var_9e97f891)) {
-    stopfx(fieldname, self.lights.var_9e97f891);
-    self.lights.var_9e97f891 = undefined;
+  if(isDefined(self.lights.headlight_l)) {
+    stopfx(fieldname, self.lights.headlight_l);
+    self.lights.headlight_l = undefined;
   }
 
-  if(isDefined(self.lights.var_f1119d87)) {
-    stopfx(fieldname, self.lights.var_f1119d87);
-    self.lights.var_f1119d87 = undefined;
+  if(isDefined(self.lights.headlight_r)) {
+    stopfx(fieldname, self.lights.headlight_r);
+    self.lights.headlight_r = undefined;
   }
 
   if(isDefined(self.lights.var_f5005d7f)) {
@@ -138,8 +138,8 @@ function police_headlights(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(bwastimejump === 1) {
-    self.lights.var_9e97f891 = util::playFXOnTag(fieldname, "maps/cp_stakeout/fx9_headlight_yellow_car_l", self, "tag_fx_headlight_left");
-    self.lights.var_f1119d87 = util::playFXOnTag(fieldname, "maps/cp_stakeout/fx9_headlight_yellow_car_r", self, "tag_fx_headlight_right");
+    self.lights.headlight_l = util::playFXOnTag(fieldname, "maps/cp_stakeout/fx9_headlight_yellow_car_l", self, "tag_fx_headlight_left");
+    self.lights.headlight_r = util::playFXOnTag(fieldname, "maps/cp_stakeout/fx9_headlight_yellow_car_r", self, "tag_fx_headlight_right");
     self.lights.var_f5005d7f = util::playFXOnTag(fieldname, "vehicle/fx9_taillight_civ_rus_gaz", self, "tag_fx_tail_light_left");
     self.lights.var_a3c2bacd = util::playFXOnTag(fieldname, "vehicle/fx9_taillight_civ_rus_gaz", self, "tag_fx_tail_light_right");
   }

@@ -335,14 +335,14 @@ function function_5c4dbcb4(jet) {
 function function_e6b2dc3e() {
   self endon(#"death", #"off_spline");
   self waittill(#"hash_44ecf28b1fb3c4bb");
-  self playSound(#"hash_12ddb7dd3e5716e2");
+  self playSound(#"veh_f35_air_brake");
 }
 
 function function_8a865fc8(jet) {
   self val::set(#"hash_8110844715cf5ff", "freezecontrols");
   self thread function_5c4dbcb4(jet);
   jet thread function_e6b2dc3e();
-  jet playSound(#"hash_6f66776e9247eccc");
+  jet playSound(#"veh_f35_sonic_boom");
   jet takeplayercontrol();
   self clientfield::set_to_player("" + #"hash_1a4b729551097abf", 1);
 }
@@ -374,7 +374,7 @@ function function_58b50fe4(jet) {
   mover.angles = jet.angles;
   jet linkTo(mover);
   mover moveTo(jet.var_ced649a0, 3, 0, 1);
-  jet playSound(#"hash_6f66776e9247eccc");
+  jet playSound(#"veh_f35_sonic_boom");
   mover waittill(#"movedone");
   mover delete();
 
@@ -414,10 +414,10 @@ function function_7725894b() {
 
   deltaheight = min(abs(mover.origin[2] - var_74e37e01), 2000);
   ascendtime = 3;
-  var_b85efcef = mover.origin + (0, 0, deltaheight);
+  ascendpoint = mover.origin + (0, 0, deltaheight);
   ascendspeed = deltaheight / ascendtime;
   mover rotatepitch(mover.angles[0] * -1, ascendtime / 2, 0, 1);
-  mover moveTo(var_b85efcef, ascendtime, 0.5, 0.5);
+  mover moveTo(ascendpoint, ascendtime, 0.5, 0.5);
   mover waittill(#"movedone", #"death");
 
   if(!isDefined(self)) {
@@ -435,18 +435,18 @@ function function_7725894b() {
     return;
   }
 
-  self playSound(#"hash_6f66776e9247eccc");
+  self playSound(#"veh_f35_sonic_boom");
   self clientfield::set("" + #"hash_3a74d4ba3c54d57b", 1);
   var_6221de3 = int(3 * 1000);
-  var_c347ff91 = gettime();
+  exitstarttime = gettime();
   exittime = int(10 * 1000);
-  var_53a69347 = gettime();
+  lastframetime = gettime();
 
   for(;;) {
     var_e2c617ce = gettime();
-    deltatime = float(var_e2c617ce - var_53a69347) / 1000;
+    deltatime = float(var_e2c617ce - lastframetime) / 1000;
     forward = anglesToForward(mover.angles);
-    var_471b7e06 = (var_e2c617ce - var_c347ff91) / var_6221de3;
+    var_471b7e06 = (var_e2c617ce - exitstarttime) / var_6221de3;
 
     if(var_471b7e06 < 0) {
       var_471b7e06 = 0;
@@ -468,11 +468,11 @@ function function_7725894b() {
 
     mover.angles = (newpitch, mover.angles[1], mover.angles[2]);
 
-    if(var_e2c617ce - var_c347ff91 > exittime) {
+    if(var_e2c617ce - exitstarttime > exittime) {
       break;
     }
 
-    var_53a69347 = var_e2c617ce;
+    lastframetime = var_e2c617ce;
     waitframe(1);
 
     if(!isDefined(self) || !isalive(self)) {
@@ -519,7 +519,7 @@ function function_80586c75(jet) {
     jet.fx_flare = bundle.fxflares;
     jet thread heatseekingmissile::missiletarget_proximitydetonateincomingmissile(bundle, "death");
     jet thread vehicle::monitor_missiles_locked_on_to_me(player);
-    jet thread heatseekingmissile::playlockonsoundsthread(player, #"hash_4666b0cfa119c919", #"hash_5ccac207f5c91427");
+    jet thread heatseekingmissile::playlockonsoundsthread(player, #"uin_hoverjet_e_targeting", #"uin_hoverjet_e_target_lock");
     jet.is_still_valid_target_for_stinger_override = &function_61c4894;
     jet.var_eb66cfc6 = &function_fa687280;
     jet.var_43384efb = &function_63ec1d12;

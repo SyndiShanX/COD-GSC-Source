@@ -129,13 +129,13 @@ function radio_safe(alias) {
   return radio(alias, float(function_60d95f53()) / 1000);
 }
 
-function function_96171f6d(alias, timeout, var_bcc3bb15) {
+function player_say(alias, timeout, var_bcc3bb15) {
   player_gesture(alias, 0, undefined, undefined, undefined, timeout, var_bcc3bb15);
 }
 
 function player_gesture(alias, sounddelay, gestures, gesturedelays, targetents, timeout, var_bcc3bb15) {
   if(is_true(var_bcc3bb15)) {
-    self function_3db52a33();
+    self player_stop();
   }
 
   player_dialogue_emitter = self function_7ddb5aa3();
@@ -152,7 +152,7 @@ function player_gesture(alias, sounddelay, gestures, gesturedelays, targetents, 
   player_dialogue_emitter util::function_stack_timeout(timeout, &_play_player_dialogue, alias, sounddelay, gestures, gesturedelays, targetents);
 }
 
-function function_3db52a33() {
+function player_stop() {
   player_dialogue_emitter = self function_7ddb5aa3();
 
   if(!isDefined(player_dialogue_emitter)) {

@@ -90,7 +90,7 @@ function private function_d00809d8(localclientnum, pos, surface, notetrack, bone
 
 function private function_8745f9df(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self.var_cafcaa0a = util::playFXOnTag(bwastimejump, level._effect[#"fx8_gegenees_shield_blast"], self, "tag_shield_fx");
-  self playSound(bwastimejump, #"hash_1f62dff95ae6f9c6");
+  self playSound(bwastimejump, #"zmb_ai_gegenees_shield_fire");
 }
 
 function private function_ae96bf9a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

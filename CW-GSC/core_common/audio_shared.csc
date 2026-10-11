@@ -1383,7 +1383,7 @@ function function_350920b9() {
 }
 
 function function_31468a30(scriptstruct) {
-  soundloop = scriptstruct.var_b6ce262a;
+  soundloop = scriptstruct.soundstruct;
 
   if(isDefined(level.loopers)) {
     for(i = 0; i < level.loopers.size; i++) {
@@ -1404,7 +1404,7 @@ function function_31468a30(scriptstruct) {
 }
 
 function event_handler[event_2df6ae0f] function_5470fa95(scriptstruct) {
-  soundloop = scriptstruct.var_b6ce262a;
+  soundloop = scriptstruct.soundstruct;
 
   if(isDefined(level.loopers)) {
     index = scriptstruct.index;
@@ -1418,7 +1418,7 @@ function event_handler[event_2df6ae0f] function_5470fa95(scriptstruct) {
 }
 
 function event_handler[event_7a92af95] function_3fda4bf4(scriptstruct) {
-  soundloop = scriptstruct.var_b6ce262a;
+  soundloop = scriptstruct.soundstruct;
 
   if(isDefined(level.loopers) && isDefined(soundloop) && isDefined(soundloop.script_sound) && isDefined(soundloop.script_looping)) {
     index = scriptstruct.index;
@@ -1438,7 +1438,7 @@ function event_handler[event_7a92af95] function_3fda4bf4(scriptstruct) {
 }
 
 function event_handler[event_5295e5ef] function_882b5910(scriptstruct) {
-  soundloop = scriptstruct.var_b6ce262a;
+  soundloop = scriptstruct.soundstruct;
   level.var_7acea05a = -1;
 
   if(isDefined(level.loopers)) {
@@ -1452,7 +1452,7 @@ function event_handler[event_5295e5ef] function_882b5910(scriptstruct) {
 }
 
 function function_4fb7ec9c(scriptstruct) {
-  var_2f7118b0 = scriptstruct.var_b6ce262a;
+  var_2f7118b0 = scriptstruct.soundstruct;
 
   if(isDefined(level.lineemitters)) {
     for(i = 0; i < level.lineemitters.size; i++) {
@@ -1474,7 +1474,7 @@ function function_4fb7ec9c(scriptstruct) {
 }
 
 function event_handler[event_f61e7d0a] function_bbc6b84a(scriptstruct) {
-  var_2f7118b0 = scriptstruct.var_b6ce262a;
+  var_2f7118b0 = scriptstruct.soundstruct;
 
   if(isDefined(level.lineemitters)) {
     index = scriptstruct.index;
@@ -1489,7 +1489,7 @@ function event_handler[event_f61e7d0a] function_bbc6b84a(scriptstruct) {
 }
 
 function event_handler[event_70cd2720] function_4910c05b(scriptstruct) {
-  var_2f7118b0 = scriptstruct.var_b6ce262a;
+  var_2f7118b0 = scriptstruct.soundstruct;
 
   if(isDefined(level.lineemitters) && isDefined(var_2f7118b0)) {
     index = scriptstruct.index;
@@ -1514,7 +1514,7 @@ function event_handler[event_70cd2720] function_4910c05b(scriptstruct) {
 }
 
 function event_handler[event_edffbf97] function_ee6f0c88(scriptstruct) {
-  var_2f7118b0 = scriptstruct.var_b6ce262a;
+  var_2f7118b0 = scriptstruct.soundstruct;
   level.var_7acea05a = -1;
 
   if(isDefined(level.lineemitters)) {
@@ -1528,7 +1528,7 @@ function event_handler[event_edffbf97] function_ee6f0c88(scriptstruct) {
 }
 
 function function_abd4ca1(scriptstruct) {
-  soundrandom = scriptstruct.var_b6ce262a;
+  soundrandom = scriptstruct.soundstruct;
 
   if(isDefined(level.randoms)) {
     for(i = 0; i < level.randoms.size; i++) {
@@ -1549,7 +1549,7 @@ function function_abd4ca1(scriptstruct) {
 }
 
 function event_handler[event_bfb86175] function_464598c8(scriptstruct) {
-  soundrandom = scriptstruct.var_b6ce262a;
+  soundrandom = scriptstruct.soundstruct;
 
   if(isDefined(level.randoms)) {
     index = scriptstruct.index;
@@ -1563,7 +1563,7 @@ function event_handler[event_bfb86175] function_464598c8(scriptstruct) {
 }
 
 function event_handler[event_43494658] function_12dface6(scriptstruct) {
-  soundrandom = scriptstruct.var_b6ce262a;
+  soundrandom = scriptstruct.soundstruct;
 
   if(isDefined(level.randoms)) {
     index = scriptstruct.index;
@@ -1585,14 +1585,14 @@ function event_handler[event_43494658] function_12dface6(scriptstruct) {
     }
 
     if(index == -2) {
-      scriptstruct.var_b6ce262a.origin = neworigin;
+      scriptstruct.soundstruct.origin = neworigin;
       function_abd4ca1(scriptstruct);
     }
   }
 }
 
 function event_handler[event_8c00f89] function_8673317e(scriptstruct) {
-  soundrandom = scriptstruct.var_b6ce262a;
+  soundrandom = scriptstruct.soundstruct;
   level.var_7acea05a = -1;
 
   if(isDefined(level.randoms)) {

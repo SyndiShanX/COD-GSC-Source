@@ -21,9 +21,9 @@ function event_handler[gametype_init] main(eventstruct) {
 
   if(util::get_game_type() === #"gun_rambo") {
     function_11e3e877(#"surface_enter", #"hash_8d0717b4d7850b6");
-    function_11e3e877(#"hash_6be5853fe57d01b0", #"hash_8d0717b4d7850b6");
-    function_11e3e877(#"hash_6251d9bc015e4542", #"hash_8d0717b4d7850b6");
-    function_11e3e877(#"hash_6a2ccf46147cb7d8", #"hash_8d0717b4d7850b6");
+    function_11e3e877(#"surface_enter_bullet_xlarge", #"hash_8d0717b4d7850b6");
+    function_11e3e877(#"surface_enter_bullet_small", #"hash_8d0717b4d7850b6");
+    function_11e3e877(#"surface_enter_bullet_xsmall", #"hash_8d0717b4d7850b6");
     level.var_87c6c648 = 1;
     setsoundcontext("ltm", "gungame");
   }

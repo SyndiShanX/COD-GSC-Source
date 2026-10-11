@@ -33,8 +33,8 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  if(!isDefined(level.var_e97fadd5)) {
-    level.var_e97fadd5 = [];
+  if(!isDefined(level.a_s_windows)) {
+    level.a_s_windows = [];
   }
 }
 
@@ -50,9 +50,9 @@ function init_window() {
 
 function private postinit() {
   level flag::wait_till("radiant_gameobjects_initialized");
-  level.var_e97fadd5 = struct::get_array("scriptbundle_windows", "classname");
+  level.a_s_windows = struct::get_array("scriptbundle_windows", "classname");
 
-  foreach(s_instance in level.var_e97fadd5) {
+  foreach(s_instance in level.a_s_windows) {
     c_door = s_instance init_window();
 
     if(isDefined(c_door)) {
@@ -60,7 +60,7 @@ function private postinit() {
     }
   }
 
-  foreach(s_instance in level.var_e97fadd5) {
+  foreach(s_instance in level.a_s_windows) {
     if(isDefined(s_instance.linkname)) {
       var_d5700a96 = struct::get_array(s_instance.linkname, "linkto");
 
@@ -89,19 +89,19 @@ function unlock(str_value, str_key = "targetname", b_do_open = 1) {
 }
 
 function function_d216984f(str_value, str_key = "targetname") {
-  var_e97fadd5 = [];
+  a_s_windows = [];
 
   if(isDefined(str_value)) {
     a_structs = struct::get_array(str_value, str_key);
 
     foreach(struct in a_structs) {
-      if(isinarray(level.var_e97fadd5, struct)) {
-        array::add(var_e97fadd5, struct, 0);
+      if(isinarray(level.a_s_windows, struct)) {
+        array::add(a_s_windows, struct, 0);
       }
     }
   } else {
-    var_e97fadd5 = level.var_e97fadd5;
+    a_s_windows = level.a_s_windows;
   }
 
-  return var_e97fadd5;
+  return a_s_windows;
 }

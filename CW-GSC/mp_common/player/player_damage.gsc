@@ -98,17 +98,17 @@ function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansof
     if(isDefined(eattacker) && !attackerishittingself && (isalive(eattacker) || eattacker util::isusingremote())) {
       if(damagefeedback::dodamagefeedback(weapon, einflictor, idamage, smeansofdeath)) {
         if(idamage > 0) {
-          var_4d72910 = 0;
+          dofeedback = 0;
           armorbroke = is_true(self.var_426947c4);
 
           if(self.health > 0) {
-            var_4d72910 = 1;
+            dofeedback = 1;
           } else if(self.health == 0 && self armor::get_armor() > 0) {
-            var_4d72910 = 1;
+            dofeedback = 1;
             armorbroke = 1;
           }
 
-          if(var_4d72910) {
+          if(dofeedback) {
             perkfeedback = function_e512b988(self, weapon, smeansofdeath, einflictor, idflags & 2048, armorbroke);
           }
         }
@@ -269,17 +269,17 @@ function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansof
   if(isDefined(eattacker) && !attackerishittingself && (isalive(eattacker) || eattacker util::isusingremote())) {
     if(damagefeedback::dodamagefeedback(weapon, einflictor, idamage, smeansofdeath)) {
       if(idamage > 0) {
-        var_4d72910 = 0;
+        dofeedback = 0;
         armorbroke = is_true(self.var_426947c4);
 
         if(self.health > 0) {
-          var_4d72910 = 1;
+          dofeedback = 1;
         } else if(self.health == 0 && self armor::get_armor() > 0) {
-          var_4d72910 = 1;
+          dofeedback = 1;
           armorbroke = 1;
         }
 
-        if(var_4d72910) {
+        if(dofeedback) {
           perkfeedback = function_e512b988(self, weapon, smeansofdeath, einflictor, idflags & 2048, armorbroke);
         }
       }

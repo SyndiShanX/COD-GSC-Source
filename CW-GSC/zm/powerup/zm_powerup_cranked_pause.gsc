@@ -53,8 +53,8 @@ function private function_4ee6dbc3(drop_item, player) {
   }
 
   level flag::set("cranked_pause");
-  playSoundAtPosition(#"hash_6add4f54cc6f196a", (0, 0, 0));
+  playSoundAtPosition(#"zmb_cranked_pause_activate", (0, 0, 0));
   wait 10;
   level flag::clear("cranked_pause");
-  playSoundAtPosition(#"hash_54a9a9f2c8be8a9d", (0, 0, 0));
+  playSoundAtPosition(#"zmb_cranked_pause_deactivate", (0, 0, 0));
 }

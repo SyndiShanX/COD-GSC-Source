@@ -195,12 +195,12 @@ function function_aba9a175() {
 }
 
 function function_f7c83b06(vehicle, start_node) {
-  var_825d3987 = vehicle::simple_spawn_single_and_drive(start_node);
-  obj_loc = util::spawn_model("tag_origin", var_825d3987.origin + (0, 0, 96), var_825d3987.angles);
-  obj_loc linkTo(var_825d3987, "tag_origin");
+  e_truck = vehicle::simple_spawn_single_and_drive(start_node);
+  obj_loc = util::spawn_model("tag_origin", e_truck.origin + (0, 0, 96), e_truck.angles);
+  obj_loc linkTo(e_truck, "tag_origin");
   objectives::follow(#"follow_vip", obj_loc, undefined, undefined, undefined, #"hash_443d177707542b08");
   objectives::function_67f87f80("follow_vip", obj_loc, #"hash_7ead0c0608d779c");
-  snd::client_targetname(var_825d3987, "rudnik_truck");
+  snd::client_targetname(e_truck, "rudnik_truck");
   level flag::set("flag_rudnik_truck_drive");
   level flag::wait_till("flag_rudnik_truck_stop");
   objectives::complete(#"follow_vip");
@@ -315,7 +315,7 @@ function function_c06a491a(teleport_node) {
   self setgoal(node, 1);
 }
 
-function function_d6af6077() {
+function player_kill_trigger() {
   trig = getEnt("player_jump_kill_trigger", "targetname");
   level flag::wait_till("player_is_rappelling");
   trig delete();
@@ -343,7 +343,7 @@ function function_d6b495cf(var_5267e989 = 1048576, everyone = 1) {
     enemy_ai = arraycombine(enemy_ai, var_43db4b2);
   }
 
-  var_9daaae3d = 0;
+  num_killed = 0;
 
   foreach(ai in enemy_ai) {
     if(!isalive(ai)) {
@@ -356,25 +356,25 @@ function function_d6b495cf(var_5267e989 = 1048576, everyone = 1) {
       continue;
     }
 
-    if(inside && var_9daaae3d % 2) {
+    if(inside && num_killed % 2) {
       ai kill();
-      var_9daaae3d += 4;
+      num_killed += 4;
     } else {
       ai delete();
-      var_9daaae3d++;
+      num_killed++;
     }
 
-    if(var_9daaae3d >= 8) {
-      var_9daaae3d = 0;
+    if(num_killed >= 8) {
+      num_killed = 0;
       waitframe(1);
     }
   }
 }
 
 function function_abde7b6d() {
-  var_d64a504a = getEntArray("combat_vehicles", "script_noteworthy", 1);
+  e_veh = getEntArray("combat_vehicles", "script_noteworthy", 1);
 
-  foreach(ent in var_d64a504a) {
+  foreach(ent in e_veh) {
     if(isalive(ent)) {
       ent delete();
     }
@@ -396,7 +396,7 @@ function function_cb6a2e9b() {
   level waittill(#"hash_56a61cb4fe8b8e79");
   level flag::set("mission_timer_fail");
   level waittill(#"hash_267bd9980f77d5f4");
-  util::function_2a8f4806(#"hash_67c0d8cb1c978161", #"hash_4bac1239d9e0e0bd");
+  util::missionfailedwrapper_nodeath(#"hash_67c0d8cb1c978161", #"hash_4bac1239d9e0e0bd");
 }
 
 function function_7094e60a() {
@@ -405,13 +405,13 @@ function function_7094e60a() {
   level flag::set("evac_heli_kill");
   level waittill(#"hash_267bd9980f77d5f4");
   wait 0.2;
-  util::function_2a8f4806(#"hash_73070752ddd02cad", #"hash_4bac1239d9e0e0bd");
+  util::missionfailedwrapper_nodeath(#"hash_73070752ddd02cad", #"hash_4bac1239d9e0e0bd");
 }
 
 function setup_allies() {
-  util::function_268bdf4f("woods");
+  util::init_hero("woods");
   level.woods pushplayer(1);
-  level.woods battlechatter::function_2ab9360b(0);
+  level.woods battlechatter::bc_allow(0);
   level flag::wait_till("tundra_intro_done");
   createthreatbiasgroup("sniper_woods");
   level.woods setthreatbiasgroup("sniper_woods");
@@ -428,35 +428,35 @@ function function_c70f5d3() {
   waitframe(5);
   level.woods val::set("woods_ridge", "ignoreme", 1);
   level.woods val::set("woods_ridge", "ignoreall", 1);
-  var_4e2fa30a = getnode("woods_ridge_start_node", "targetname");
+  curr_node = getnode("woods_ridge_start_node", "targetname");
   var_41476401 = [];
   var_41476401[0] = struct::get("woods_north_limit", "targetname");
   var_41476401[1] = struct::get(var_41476401[0].target, "targetname");
 
   level.var_13a95ce2 = 0;
 
-  var_880f27ba = 0;
+  curr_point = 0;
   level.woods childthread function_723f322d();
 
   while(true) {
-    if(!isDefined(var_4e2fa30a)) {
-      var_4e2fa30a = getnode("woods_ridge_start_node", "targetname");
+    if(!isDefined(curr_node)) {
+      curr_node = getnode("woods_ridge_start_node", "targetname");
     }
 
-    var_7f1df23e = pointonsegmentnearesttopoint(var_41476401[var_880f27ba].origin, var_41476401[var_880f27ba + 1].origin, level.player.origin);
+    var_7f1df23e = pointonsegmentnearesttopoint(var_41476401[curr_point].origin, var_41476401[curr_point + 1].origin, level.player.origin);
     nearest_node = getnearestnode(var_7f1df23e);
 
     if(!isDefined(nearest_node)) {
-      nearest_node = var_4e2fa30a;
+      nearest_node = curr_node;
     }
 
-    if(var_4e2fa30a != nearest_node) {
-      curr = distance(var_4e2fa30a.origin, var_7f1df23e);
+    if(curr_node != nearest_node) {
+      curr = distance(curr_node.origin, var_7f1df23e);
       nearest = distance(nearest_node.origin, var_7f1df23e);
 
       if(nearest * 1.33 < curr) {
-        var_4e2fa30a = nearest_node;
-        level.woods setgoal(var_4e2fa30a, 1);
+        curr_node = nearest_node;
+        level.woods setgoal(curr_node, 1);
       }
     }
 
@@ -470,9 +470,9 @@ function function_c70f5d3() {
 
         sphere(var_7f1df23e, 32, (1, 1, 0), 1, 0, 8, 4);
         sphere(level.woods.origin - (0, 0, 32), 49, (1, 0, 0), 0.5, 0, 8, 4);
-        sphere(var_4e2fa30a.origin - (0, 0, 52), 40, (0, 0, 1), 0.6, 0, 8, 4);
+        sphere(curr_node.origin - (0, 0, 52), 40, (0, 0, 1), 0.6, 0, 8, 4);
 
-        if(var_4e2fa30a != nearest_node) {
+        if(curr_node != nearest_node) {
           sphere(nearest_node.origin, 32, (0.1, 0.1, 0.1), 1, 0, 8, 4);
         }
 
@@ -491,7 +491,7 @@ function function_6842005a() {
   var_ac9255fb = 0;
 
   while(true) {
-    self waittill(#"hash_35a85d0d53e9405e");
+    self waittill(#"got_one");
     wait 0.6;
 
     if(gettime() > var_ac9255fb) {
@@ -512,7 +512,7 @@ function function_723f322d() {
   level flag::wait_till_any(array("flag_spawn_motor_pool_enemies", "flag_spawn_radar_enemies", "flag_spawn_fuel_depot_enemies"));
   self childthread function_6842005a();
   self.var_5b0f2db2 = gettime();
-  var_36ff13de = 0;
+  in_progress = 0;
   ai_array = [];
   var_ffb10b3c = [];
 
@@ -522,20 +522,20 @@ function function_723f322d() {
     }
 
     if(level flag::get("woods_pause_overwatch")) {
-      var_36ff13de = 0;
+      in_progress = 0;
       level flag::wait_till_clear("woods_pause_overwatch");
       continue;
     }
 
-    if(!var_36ff13de) {
+    if(!in_progress) {
       fwd = anglesToForward(level.player getangles());
       player_origin = level.player getplayercamerapos();
       var_ffb10b3c = getaiteamarray("axis");
       ai_array = [];
-      var_36ff13de = 1;
+      in_progress = 1;
 
       foreach(ai in var_ffb10b3c) {
-        var_2c0fdec8 = length2d(ai getvelocity());
+        spd = length2d(ai getvelocity());
 
         if(ai.script_parameters === "woods_no_shoot" || length2dsquared(ai getvelocity()) > 1400) {
           continue;
@@ -563,7 +563,7 @@ function function_723f322d() {
 
     }
 
-    if(var_36ff13de) {
+    if(in_progress) {
       var_d3692aca = 0;
       ai_target = undefined;
 
@@ -597,22 +597,22 @@ function function_723f322d() {
         self.var_5b0f2db2 = gettime() + 5000;
         start = self.origin + (0, 0, 36) + anglesToForward(self.angles) * 120;
         end = ai gettagorigin("j_head");
-        var_bdccc219 = length(start - end) / 24000;
+        flight_time = length(start - end) / 24000;
         vel = ai getvelocity();
-        end += vel * var_bdccc219;
+        end += vel * flight_time;
         var_280c0a5f = gettime();
         magicbullet(self.weapon, start, end, self, ai);
-        var_36ff13de = 0;
-        ret = ai waittilltimeout(var_bdccc219 + 0.1, #"death");
+        in_progress = 0;
+        ret = ai waittilltimeout(flight_time + 0.1, #"death");
 
         if(ret._notify === #"death" && ret.attacker === self) {
-          self notify(#"hash_35a85d0d53e9405e");
+          self notify(#"got_one");
         } else {
           self.var_5b0f2db2 = gettime() + 5000 / 3;
         }
       } else if(ai_array.size == 0) {
         self.var_5b0f2db2 = gettime() + 500;
-        var_36ff13de = 0;
+        in_progress = 0;
         continue;
       }
     }
@@ -758,8 +758,8 @@ function function_2e11eba4() {
     if(start_t + (var_53e12236 + var_88e50635) * var_4aa60bdd > gettime()) {
       thread savegame::checkpoint_save(1);
 
-      var_9dbe6b43 = (start_t + (var_53e12236 + var_88e50635) * var_4aa60bdd - gettime()) / 1000;
-      iprintln("<dev string:x72>" + var_4a37c7a0[var_88e50635] + var_9dbe6b43 + "<dev string:x80>");
+      undertime = (start_t + (var_53e12236 + var_88e50635) * var_4aa60bdd - gettime()) / 1000;
+      iprintln("<dev string:x72>" + var_4a37c7a0[var_88e50635] + undertime + "<dev string:x80>");
 
       continue;
     }

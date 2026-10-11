@@ -50,7 +50,7 @@ function private function_a228d7a3(localclientnum, oldval, newval, bnewent, bini
       function_d48752e(fieldname, level.var_7f1612a0[fieldname]);
     }
 
-    level.var_7f1612a0[fieldname] = function_604c9983(fieldname, #"hash_390aa7d4252c46b5");
+    level.var_7f1612a0[fieldname] = function_604c9983(fieldname, #"mpl_health_regen_loop_plr");
     return;
   }
 
@@ -105,7 +105,7 @@ function function_766ed49(localclientnum, shouldplay) {
       function_d48752e(localclientnum, level.var_4103bf85[localclientnum]);
     }
 
-    level.var_4103bf85[localclientnum] = function_604c9983(localclientnum, #"hash_390aa7d4252c46b5");
+    level.var_4103bf85[localclientnum] = function_604c9983(localclientnum, #"mpl_health_regen_loop_plr");
     return;
   }
 

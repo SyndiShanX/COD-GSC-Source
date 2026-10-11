@@ -49,7 +49,7 @@ function main(str_objective, b_starting) {
   wait 1;
   thread function_1fc6733a();
   wait 16.8;
-  level thread globallogic_ui::function_7bc0e4b9();
+  level thread globallogic_ui::do_chyron_text();
   thread dialogue::radio("vox_cp_prsn_00100_adlr_duringamissiont_52");
   wait 7.5;
   thread dialogue::radio("vox_cp_prsn_00100_pilo_shitwevebeenhit_c6");
@@ -65,14 +65,14 @@ function main(str_objective, b_starting) {
   player val::reset(#"temp_intro", "allowdeath");
   player val::reset(#"temp_intro", "hide");
 
-  if(isDefined(level.var_d7d201ba)) {
-    level.player flag::set(level.var_d7d201ba);
+  if(isDefined(level.str_player_start_flag)) {
+    level.player flag::set(level.str_player_start_flag);
   }
 
   wait 1.5;
-  transient = savegame::function_6440b06b();
+  transient = savegame::get_mission_data();
   transient.var_711aa308 = 1;
-  skipto::function_4e3ab877("intro");
+  skipto::objective_completed("intro");
   wait 0.5;
 }
 
@@ -90,8 +90,8 @@ function function_44a53adb(delay, alias) {
   snd::play(alias);
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {}
+function cleanup(str_objective, b_starting, b_direct, player) {}
 
-function function_c26b0bc0() {
+function flags_init() {
   level flag::init("start_vnm_sfx");
 }

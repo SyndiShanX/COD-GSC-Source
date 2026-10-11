@@ -842,7 +842,7 @@ function playlockonsoundsthread(player, var_df318bbf, var_4edd2f28) {
   player endon(#"disconnect");
   self endon(#"death", #"crashing", #"leaving");
   self.locksounds = spawn("script_model", self.origin);
-  self.locksounds thread function_c8b14330(self);
+  self.locksounds thread deleteonvehicledeath(self);
   self.locksounds linkTo(self, "tag_origin");
 
   while(true) {
@@ -867,7 +867,7 @@ function playlockonsoundsthread(player, var_df318bbf, var_4edd2f28) {
   }
 }
 
-function function_c8b14330(vehicle) {
+function deleteonvehicledeath(vehicle) {
   self endon(#"death");
   vehicle waittill(#"death");
   self delete();
@@ -1329,10 +1329,10 @@ function missiletarget_playflarefx(flare_fx, tag_origin) {
   }
 
   if(isDefined(self.owner)) {
-    self playsoundtoplayer(#"hash_470978b5aa6302ba", self.owner);
+    self playsoundtoplayer(#"wpn_attack_helicopter_chaff", self.owner);
   }
 
-  self playSound(#"hash_470978b5aa6302ba");
+  self playSound(#"wpn_attack_helicopter_chaff");
 }
 
 function missiletarget_deployflares(origin, angles) {

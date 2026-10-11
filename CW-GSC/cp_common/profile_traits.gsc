@@ -28,12 +28,12 @@ function private preinit() {
 
   level.var_e85d5a3f = spawnStruct();
   var_1f7a9822 = getscriptbundle(#"profile_traits");
-  level.var_e85d5a3f.var_e4f193a3 = [];
+  level.var_e85d5a3f.traitslist = [];
 
   for(i = 0; i < var_1f7a9822.traits.size; i++) {
     if(!is_true(var_1f7a9822.traits[i].disabled)) {
       var_1f7a9822.traits[i].bitflag = 1 << i;
-      level.var_e85d5a3f.var_e4f193a3[level.var_e85d5a3f.var_e4f193a3.size] = var_1f7a9822.traits[i];
+      level.var_e85d5a3f.traitslist[level.var_e85d5a3f.traitslist.size] = var_1f7a9822.traits[i];
       continue;
     }
 
@@ -51,8 +51,8 @@ function private preinit() {
   function_cd140ee9("<dev string:x9e>", &function_df62d47f);
   function_cd140ee9("<dev string:xb7>", &function_df62d47f);
 
-  for(i = 0; i < level.var_e85d5a3f.var_e4f193a3.size; i++) {
-    var_fb7d23d9 = level.var_e85d5a3f.var_e4f193a3[i];
+  for(i = 0; i < level.var_e85d5a3f.traitslist.size; i++) {
+    var_fb7d23d9 = level.var_e85d5a3f.traitslist[i];
     adddebugcommand("<dev string:xd4>" + var_fb7d23d9.var_7c0b3589 + "<dev string:x100>" + i + "<dev string:x105>" + i + "<dev string:x123>");
     adddebugcommand("<dev string:x129>" + var_fb7d23d9.var_7c0b3589 + "<dev string:x100>" + i + "<dev string:x158>" + i + "<dev string:x123>");
   }
@@ -74,8 +74,8 @@ function private function_b8f86396(params) {
     var_e3ffeeb4 = params.value;
 
     if(var_e3ffeeb4 > -1) {
-      assert(var_e3ffeeb4 < level.var_e85d5a3f.var_e4f193a3.size);
-      var_fb7d23d9 = level.var_e85d5a3f.var_e4f193a3[var_e3ffeeb4];
+      assert(var_e3ffeeb4 < level.var_e85d5a3f.traitslist.size);
+      var_fb7d23d9 = level.var_e85d5a3f.traitslist[var_e3ffeeb4];
       player function_18198dfb(var_fb7d23d9.bitflag);
       setDvar(#"hash_1d3ff4dcafbd084e", -1);
     }
@@ -87,8 +87,8 @@ function private function_b8f86396(params) {
     var_eccea24e = params.value;
 
     if(var_eccea24e > -1) {
-      assert(var_eccea24e < level.var_e85d5a3f.var_e4f193a3.size);
-      var_fb7d23d9 = level.var_e85d5a3f.var_e4f193a3[var_eccea24e];
+      assert(var_eccea24e < level.var_e85d5a3f.traitslist.size);
+      var_fb7d23d9 = level.var_e85d5a3f.traitslist[var_eccea24e];
       player function_1c1fa213(var_fb7d23d9.bitflag);
       setDvar(#"hash_35ef1fad3aba3507", -1);
     }
@@ -122,8 +122,8 @@ function private function_30a971a4() {
   player endoncallback(&function_6f60cb1e, #"hash_639ee73311ef0e56");
   player.var_adeb44c2 = [];
 
-  for(i = 0; i < level.var_e85d5a3f.var_e4f193a3.size; i++) {
-    trait = level.var_e85d5a3f.var_e4f193a3[i];
+  for(i = 0; i < level.var_e85d5a3f.traitslist.size; i++) {
+    trait = level.var_e85d5a3f.traitslist[i];
     hudelem = newdebughudelem(player);
     hudelem.alignx = "<dev string:x22f>";
     hudelem.aligny = "<dev string:x237>";
@@ -141,8 +141,8 @@ function private function_30a971a4() {
   while(true) {
     wait 0.5;
 
-    for(i = 0; i < level.var_e85d5a3f.var_e4f193a3.size; i++) {
-      trait = level.var_e85d5a3f.var_e4f193a3[i];
+    for(i = 0; i < level.var_e85d5a3f.traitslist.size; i++) {
+      trait = level.var_e85d5a3f.traitslist[i];
       var_16021753 = function_a996bd5e(trait.bitflag);
       perkactive = -1;
 
@@ -204,7 +204,7 @@ function private function_6f60cb1e() {
 }
 
 function function_979631fd() {
-  return level.var_e85d5a3f.var_e4f193a3;
+  return level.var_e85d5a3f.traitslist;
 }
 
 function function_3937b542() {
@@ -216,7 +216,7 @@ function function_d9b59414(var_f2c93983) {
     return 0;
   }
 
-  foreach(trait in level.var_e85d5a3f.var_e4f193a3) {
+  foreach(trait in level.var_e85d5a3f.traitslist) {
     if(trait.ref_name == var_f2c93983) {
       return trait.bitflag;
     }
@@ -233,7 +233,7 @@ function function_56266435() {
 function function_a996bd5e(var_f03e5d1b) {
   assert(isPlayer(self));
   player = self;
-  var_b3903404 = player savegame::function_2ee66e93("savegame_personal_trait_flags", undefined);
+  var_b3903404 = player savegame::get_player_data("savegame_personal_trait_flags", undefined);
 
   if(!isDefined(var_b3903404)) {
     var_b3903404 = 0;
@@ -246,7 +246,7 @@ function function_a996bd5e(var_f03e5d1b) {
 function function_18198dfb(var_f03e5d1b) {
   assert(isPlayer(self));
   player = self;
-  var_b3903404 = player savegame::function_2ee66e93("savegame_personal_trait_flags", undefined);
+  var_b3903404 = player savegame::get_player_data("savegame_personal_trait_flags", undefined);
 
   if(!isDefined(var_b3903404)) {
     var_b3903404 = 0;
@@ -260,13 +260,13 @@ function function_18198dfb(var_f03e5d1b) {
 function function_1c1fa213(var_f03e5d1b) {
   assert(isPlayer(self));
   player = self;
-  var_b3903404 = player savegame::function_2ee66e93("savegame_personal_trait_flags", undefined);
+  var_b3903404 = player savegame::get_player_data("savegame_personal_trait_flags", undefined);
 
   if(!isDefined(var_b3903404)) {
     var_b3903404 = 0;
   }
 
-  foreach(trait in level.var_e85d5a3f.var_e4f193a3) {
+  foreach(trait in level.var_e85d5a3f.traitslist) {
     if(var_f03e5d1b &var_b3903404 &trait.bitflag) {
       if(is_true(trait.use_perk) && player hasperk(trait.perk_name)) {
         player perks::perk_unsetperk(trait.perk_name);
@@ -289,13 +289,13 @@ function function_1c1fa213(var_f03e5d1b) {
 function function_d53bb873() {
   assert(isPlayer(self));
   player = self;
-  var_b3903404 = player savegame::function_2ee66e93("savegame_personal_trait_flags", undefined);
+  var_b3903404 = player savegame::get_player_data("savegame_personal_trait_flags", undefined);
 
   if(!isDefined(var_b3903404)) {
     return 0;
   }
 
-  foreach(trait in level.var_e85d5a3f.var_e4f193a3) {
+  foreach(trait in level.var_e85d5a3f.traitslist) {
     if(var_b3903404 &trait.bitflag) {
       if(is_true(trait.use_perk) && !player hasperk(trait.perk_name)) {
         player perks::perk_setperk(trait.perk_name);

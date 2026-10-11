@@ -34,7 +34,7 @@ function private autoexec function_4047919b() {
   clientfield::register("scriptmover", "clientFieldSndTargetScriptMover", 1, 11, "int");
   function_3ffa0089();
 
-  level thread function_ce893a25();
+  level thread snd_debug_init();
 
   waittillframeend();
   level._snd.isinitialized = 1;
@@ -160,12 +160,12 @@ function client_voice(ent, soundalias) {
 
 #namespace namespace_afa8e18b;
 
-function function_b5959278(ent, var_1d25915, linkedentity, var_e330010e) {
+function function_b5959278(ent, var_1d25915, linkedentity, linkedbonetag) {
   assert(isDefined(ent), "<dev string:x38>");
   assert(isDefined(ent.soundkey), "<dev string:x52>");
 
   if(isDefined(linkedentity)) {
-    var_e330010e = linkedentity snd::function_bf7c949(var_e330010e);
+    linkedbonetag = linkedentity snd::gettagsafe(linkedbonetag);
     linkedoffset = (0, 0, 0);
     linkedangles = (0, 0, 0);
 
@@ -173,14 +173,14 @@ function function_b5959278(ent, var_1d25915, linkedentity, var_e330010e) {
       linkedoffset = var_1d25915;
     }
 
-    assert(isDefined(var_e330010e), "<dev string:x6d>");
+    assert(isDefined(linkedbonetag), "<dev string:x6d>");
 
-    if(var_e330010e == "tag_origin") {
-      var_e330010e = "";
+    if(linkedbonetag == "tag_origin") {
+      linkedbonetag = "";
     }
 
     ent enablelinkTo();
-    ent linkTo(linkedentity, var_e330010e, linkedoffset, linkedangles);
+    ent linkTo(linkedentity, linkedbonetag, linkedoffset, linkedangles);
 
     if(!isarray(linkedentity.var_a415b6d6)) {
       linkedentity.var_a415b6d6 = [];
@@ -193,15 +193,15 @@ function function_b5959278(ent, var_1d25915, linkedentity, var_e330010e) {
   level._snd.var_92f63ad0[ent.soundkey] = ent;
 }
 
-function function_85daf9f0(soundalias, var_1d25915, linkedentity, var_e330010e) {
+function function_85daf9f0(soundalias, var_1d25915, linkedentity, linkedbonetag) {
   ent = undefined;
   spawnorigin = undefined;
 
-  if(isDefined(linkedentity) && isDefined(var_e330010e) && isDefined(var_1d25915)) {
-    spawnorigin = linkedentity gettagorigin(var_e330010e);
+  if(isDefined(linkedentity) && isDefined(linkedbonetag) && isDefined(var_1d25915)) {
+    spawnorigin = linkedentity gettagorigin(linkedbonetag);
     spawnorigin += var_1d25915;
-  } else if(isDefined(linkedentity) && isDefined(var_e330010e)) {
-    spawnorigin = linkedentity gettagorigin(var_e330010e);
+  } else if(isDefined(linkedentity) && isDefined(linkedbonetag)) {
+    spawnorigin = linkedentity gettagorigin(linkedbonetag);
   } else if(isDefined(linkedentity)) {
     spawnorigin = linkedentity.origin;
   } else if(!isDefined(linkedentity) && !isDefined(var_1d25915)) {
@@ -227,7 +227,7 @@ function function_85daf9f0(soundalias, var_1d25915, linkedentity, var_e330010e) 
   assert(isDefined(ent), "<dev string:x8d>");
 
   if(isentity(ent)) {
-    ent.var_90c86b97 = linkedentity;
+    ent.soundlinkedentity = linkedentity;
     ent.soundtype = #"gentity";
     ent.soundkey = ent getentitynumber();
     ent.targetname = "snd " + soundalias;
@@ -245,8 +245,8 @@ function function_6ac5b570(ent) {
     return;
   }
 
-  if(isDefined(ent.var_90c86b97) && isarray(ent.var_90c86b97.var_a415b6d6)) {
-    linkedentity = ent.var_90c86b97;
+  if(isDefined(ent.soundlinkedentity) && isarray(ent.soundlinkedentity.var_a415b6d6)) {
+    linkedentity = ent.soundlinkedentity;
     var_5244aa9 = isDefined(linkedentity.var_a415b6d6[ent.soundkey]);
 
     if(var_5244aa9 == 1) {
@@ -305,9 +305,9 @@ function function_2dde45d9(soundobject, soundalias, initialvolume, delaytime) {
         ent thread function_bd8d70b0(donenotifystr);
       }
     } else {
-      if(isDefined(ent.var_90c86b97) && isDefined(level._snd.var_c7f0039)) {
+      if(isDefined(ent.soundlinkedentity) && isDefined(level._snd.fnplaysoundonmovingent)) {
         waitframe(1);
-        ent[[level._snd.var_c7f0039]](soundalias);
+        ent[[level._snd.fnplaysoundonmovingent]](soundalias);
       } else {
         ent playSound(soundalias);
       }
@@ -369,11 +369,11 @@ function private function_bd8d70b0(done) {
   function_6ac5b570(ent);
 }
 
-function function_2761fc04(ent, var_1d25915, linkedentity, var_e330010e) {
+function function_2761fc04(ent, var_1d25915, linkedentity, linkedbonetag) {
   assert(0, "<dev string:xd3>");
 }
 
-function function_5275752c(soundalias, var_1d25915, linkedentity, var_e330010e) {
+function function_5275752c(soundalias, var_1d25915, linkedentity, linkedbonetag) {
   assert(0, "<dev string:xd3>");
   return undefined;
 }
@@ -427,7 +427,7 @@ function function_13246855(soundalias, notifystring, player_or_team) {
 
   ent endon(#"death");
   snd = play(notifystring, [ent, "j_head"]);
-  function_f4f3a2a(snd, ent);
+  stop_on_ent_death(snd, ent);
 
   if(isDefined(player_or_team)) {
     function_2fdc4fb(snd);

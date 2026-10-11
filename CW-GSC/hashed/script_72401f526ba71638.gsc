@@ -320,7 +320,7 @@ function private event_handler[grenade_fire] function_4776caf4(eventstruct) {
 function function_5f81a103(weapon, b_killed = 0) {
   if(isPlayer(self)) {
     var_49058ab = {
-      #var_4b738e64: function_f8d53445(), #var_8335e8a8: zm_utility::function_e3025ca5(), #var_d8fb195f: zm_utility::get_round_number(), #field_upgrade: weapon.name, #var_c9995ddd: b_killed
+      #var_4b738e64: function_f8d53445(), #var_8335e8a8: zm_utility::function_e3025ca5(), #var_d8fb195f: zm_utility::get_round_number(), #field_upgrade: weapon.name, #killed_enemy: b_killed
     };
     self function_678f57c8(#"hash_7f3eae86c535c88", var_49058ab);
   }

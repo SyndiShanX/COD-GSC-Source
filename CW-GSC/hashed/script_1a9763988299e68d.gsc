@@ -78,9 +78,9 @@ function function_377d91b2(name, type) {
 }
 
 function function_dc699ae6(name) {
-  foreach(var_f5c7c2f0 in level.doa.var_e57e1d34) {
-    if([[var_f5c7c2f0]] - > getname() == name) {
-      return var_f5c7c2f0;
+  foreach(wp in level.doa.var_e57e1d34) {
+    if([[wp]] - > getname() == name) {
+      return wp;
     }
   }
 }
@@ -124,7 +124,7 @@ function updateweapon() {
     return;
   }
 
-  if(gettime() < self.doa.var_909a4dd5 || !namespace_dfc652ee::function_f759a457() || is_true(self.doa.var_57eaec6e)) {
+  if(gettime() < self.doa.var_909a4dd5 || !doa_pickups::function_f759a457() || is_true(self.doa.var_57eaec6e)) {
     return;
   }
 
@@ -152,7 +152,7 @@ function updateweapon() {
     weaponlevel = self.doa.weaponlevel;
     self.doa.var_9c7d56c1 = [[self.doa.weaponpack]] - > function_91c18b19(weaponlevel);
 
-    if(self namespace_1c2a96f9::function_d5b51f1e()) {
+    if(self doa_fate::function_d5b51f1e()) {
       weaponlevel = math::clamp(self.doa.weaponlevel + level.doa.var_6c58d51, self.doa.weaponlevel, 2);
       self.doa.var_4eda72ee = [[self.doa.weaponpack]] - > function_91c18b19(weaponlevel);
     }
@@ -213,7 +213,7 @@ function function_51e99bc7(amount = 1) {
   weaponlevel = self.doa.weaponlevel;
   self.doa.var_9c7d56c1 = [[self.doa.weaponpack]] - > function_91c18b19(weaponlevel);
 
-  if(self namespace_1c2a96f9::function_d5b51f1e()) {
+  if(self doa_fate::function_d5b51f1e()) {
     weaponlevel = math::clamp(self.doa.weaponlevel + level.doa.var_6c58d51, self.doa.weaponlevel, 2);
     self.doa.var_4eda72ee = [[self.doa.weaponpack]] - > function_91c18b19(weaponlevel);
   }
@@ -270,7 +270,7 @@ function function_6c4d9896(var_9de8aead, weaponpickup = 0) {
     self.doa.var_3327c78f = 0;
 
     if(self.doa.weaponlevel == 0) {
-      if(is_true(fill) && var_9de8aead === self.doa.var_ed8fde10 || self namespace_1c2a96f9::function_9e59136f()) {
+      if(is_true(fill) && var_9de8aead === self.doa.var_ed8fde10 || self doa_fate::function_9e59136f()) {
         self.doa.weaponlevel = 1;
       }
     } else {
@@ -280,7 +280,7 @@ function function_6c4d9896(var_9de8aead, weaponpickup = 0) {
     weaponlevel = self.doa.weaponlevel;
     self.doa.var_9c7d56c1 = [[self.doa.weaponpack]] - > function_91c18b19(weaponlevel);
 
-    if(self namespace_1c2a96f9::function_d5b51f1e()) {
+    if(self doa_fate::function_d5b51f1e()) {
       weaponlevel = math::clamp(self.doa.weaponlevel + level.doa.var_6c58d51, self.doa.weaponlevel, 2);
       self.doa.var_4eda72ee = [[self.doa.weaponpack]] - > function_91c18b19(weaponlevel);
     }
@@ -319,7 +319,7 @@ function function_8b7acf56(var_c16ab4b2 = 1) {
     weaponlevel = self.doa.weaponlevel;
     self.doa.var_9c7d56c1 = [[self.doa.weaponpack]] - > function_91c18b19(weaponlevel);
 
-    if(self namespace_1c2a96f9::function_d5b51f1e()) {
+    if(self doa_fate::function_d5b51f1e()) {
       weaponlevel = math::clamp(self.doa.weaponlevel + level.doa.var_6c58d51, self.doa.weaponlevel, 2);
       self.doa.var_4eda72ee = [[self.doa.weaponpack]] - > function_91c18b19(weaponlevel);
     }
@@ -385,26 +385,26 @@ function function_bacdbafd(weaponpack) {
 
 function function_ed0da451(ai, idamage, eattacker, vdir, smeansofdeath, weapon) {
   vdir namespace_e32bb68::function_3a59ec34("wpn_doa_buzzsaw_impact_zombie");
-  vdir namespace_ed80aead::function_1f275794(weapon, smeansofdeath);
+  vdir doa_gib::function_1f275794(weapon, smeansofdeath);
 }
 
 function function_3d40d138(ai, idamage, eattacker, vdir, smeansofdeath, weapon) {
   eattacker namespace_e32bb68::function_3a59ec34("wpn_doa_buzzsaw_impact_zombie");
-  namespace_ed80aead::trygibbinglimb(eattacker, vdir, undefined, undefined, math::cointoss() ? "right_arm_upper" : "left_arm_upper");
-  eattacker namespace_ed80aead::function_1f275794(weapon, smeansofdeath);
+  doa_gib::trygibbinglimb(eattacker, vdir, undefined, undefined, math::cointoss() ? "right_arm_upper" : "left_arm_upper");
+  eattacker doa_gib::function_1f275794(weapon, smeansofdeath);
 }
 
 function function_bcd45061(ai, idamage, eattacker, vdir, smeansofdeath, weapon) {
   eattacker namespace_e32bb68::function_3a59ec34("wpn_doa_buzzsaw_impact_zombie");
 
   if(!is_true(eattacker.boss) && randomint(100) < 20) {
-    eattacker namespace_ed80aead::function_586ef822();
+    eattacker doa_gib::function_586ef822();
     return;
   }
 
-  namespace_ed80aead::trygibbinghead(eattacker, vdir, undefined, undefined, "head", 0, 1);
-  namespace_ed80aead::trygibbinglimb(eattacker, vdir, undefined, undefined, math::cointoss() ? "right_arm_upper" : "left_arm_upper");
-  eattacker namespace_ed80aead::function_1f275794(weapon, smeansofdeath);
+  doa_gib::trygibbinghead(eattacker, vdir, undefined, undefined, "head", 0, 1);
+  doa_gib::trygibbinglimb(eattacker, vdir, undefined, undefined, math::cointoss() ? "right_arm_upper" : "left_arm_upper");
+  eattacker doa_gib::function_1f275794(weapon, smeansofdeath);
 }
 
 function function_64adaae3() {
@@ -415,7 +415,7 @@ function function_64adaae3() {
   }
 
   closetargets = arraysortclosest(enemies, self.origin, enemies.size, 0, 4096);
-  var_742a1b0d = [];
+  fovtargets = [];
 
   foreach(guy in closetargets) {
     if(is_true(guy.boss)) {
@@ -423,20 +423,20 @@ function function_64adaae3() {
     }
 
     if(util::within_fov(self.origin, self.angles, guy.origin, 0.8)) {
-      var_742a1b0d[var_742a1b0d.size] = guy;
+      fovtargets[fovtargets.size] = guy;
     }
 
-    if(var_742a1b0d.size >= 2) {
+    if(fovtargets.size >= 2) {
       break;
     }
   }
 
-  if(var_742a1b0d.size == 0) {
+  if(fovtargets.size == 0) {
     return;
   }
 
-  target1 = var_742a1b0d[0];
-  target2 = var_742a1b0d.size < 1 ? var_742a1b0d[0] : var_742a1b0d[1];
+  target1 = fovtargets[0];
+  target2 = fovtargets.size < 1 ? fovtargets[0] : fovtargets[1];
   v_spawn = self gettagorigin("tag_flash");
   v_dir = anglesToForward(self.angles) * 50;
 
@@ -444,18 +444,18 @@ function function_64adaae3() {
     v_spawn = self.origin;
   }
 
-  var_ce35a286 = v_spawn + v_dir + (0, 0, 50);
-  self thread function_eae80c2(v_spawn, var_ce35a286, target1);
+  aimspot = v_spawn + v_dir + (0, 0, 50);
+  self thread function_eae80c2(v_spawn, aimspot, target1);
   waitframe(1);
-  self thread function_eae80c2(v_spawn, var_ce35a286, target2);
+  self thread function_eae80c2(v_spawn, aimspot, target2);
 }
 
-function function_eae80c2(origin, var_ce35a286, target, var_7aea2f21 = 0.1) {
+function function_eae80c2(origin, aimspot, target, var_7aea2f21 = 0.1) {
   self endon(#"disconnect");
   self endon(#"death");
 
   if(namespace_ec06fe4a::function_a8975c67(32)) {
-    magicbullet(level.doa.var_5b088fde, origin, var_ce35a286, self);
+    magicbullet(level.doa.var_5b088fde, origin, aimspot, self);
     result = self waittill(#"missile_fire");
     wait var_7aea2f21;
 
@@ -472,16 +472,16 @@ function ui_menu_ftue_itemshop(timesec, var_effbd38b = 1) {
     self thread function_a0a68431();
   }
 
-  self.doa.var_909a4dd5 = time + int(self namespace_1c2a96f9::function_4808b985(8) * 1000);
+  self.doa.var_909a4dd5 = time + int(self doa_fate::function_4808b985(8) * 1000);
 }
 
 function function_a0a68431() {
   self notify("7be06012f999ab75");
   self endon("7be06012f999ab75");
   self endon(#"disconnect");
-  self thread namespace_83eb6304::turnofffx("ammo_unlimited");
+  self thread doa_fx::turnofffx("ammo_unlimited");
   util::wait_network_frame();
-  self namespace_83eb6304::function_3ecfde67("ammo_unlimited");
+  self doa_fx::function_3ecfde67("ammo_unlimited");
 
   while(isDefined(self) && self.doa.var_909a4dd5 > gettime()) {
     result = self waittilltimeout(0.25, #"hash_6edec00b6bae610a", #"player_died");
@@ -494,6 +494,6 @@ function function_a0a68431() {
   self.doa.var_909a4dd5 = 0;
 
   if(isDefined(self)) {
-    self thread namespace_83eb6304::turnofffx("ammo_unlimited");
+    self thread doa_fx::turnofffx("ammo_unlimited");
   }
 }

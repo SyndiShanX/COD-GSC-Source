@@ -29,7 +29,7 @@ function init() {
   namespace_22574328::init();
   namespace_40bb01c9::init();
   namespace_1dc364c0::init();
-  level.var_3dd67d2d = &function_c153f40;
+  level.rg_postlevelgen_cb = &function_c153f40;
 }
 
 function function_3d1b6aa8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -58,22 +58,22 @@ function function_74359dc(localclientnum, oldval, newval, bnewent, binitialsnap,
   }
 
   level.doa.var_182fb75a = level.doa.var_5d21548e;
-  var_bff754c6 = struct::get(level.doa.dungeons[level.doa.var_182fb75a].name + "_startRoom", "targetname");
+  startroom = struct::get(level.doa.dungeons[level.doa.var_182fb75a].name + "_startRoom", "targetname");
 
-  if(isDefined(var_bff754c6)) {
+  if(isDefined(startroom)) {
     x = 0;
     y = 0;
-    spot = var_bff754c6.origin + (x, y, 0);
+    spot = startroom.origin + (x, y, 0);
     scale = 2;
-    var_639727b6 = namespace_ec06fe4a::spawnmodel(bwastimejump, spot, "tag_origin", var_bff754c6.angles, "dungeon start room");
+    var_639727b6 = namespace_ec06fe4a::spawnmodel(bwastimejump, spot, "tag_origin", startroom.angles, "dungeon start room");
 
     if(isDefined(var_639727b6)) {
       iconname = "doa_hud_icon_dungeon_room_square_reveal";
       var_639727b6 setcompassicon(iconname);
       var_639727b6 thread namespace_ec06fe4a::function_d55f042c(level, "dungeon_destroyed");
 
-      if(isDefined(var_bff754c6.script_noteworthy)) {
-        scale = float(var_bff754c6.script_noteworthy);
+      if(isDefined(startroom.script_noteworthy)) {
+        scale = float(startroom.script_noteworthy);
       }
 
       var_639727b6 function_5e00861(scale);

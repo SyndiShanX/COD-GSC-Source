@@ -20,7 +20,7 @@
 
 function event_handler[level_init] main(eventstruct) {
   setclearanceceiling(16);
-  namespace_31c67f6d::function_1c920347();
+  namespace_31c67f6d::main_pre_load();
   level function_5b503df2();
   function_b0bc875b();
   load::main();
@@ -48,7 +48,7 @@ function function_5b503df2() {
 }
 
 function function_b0bc875b() {
-  var_56528c9b = skipto::function_5a61e21a()[0];
+  var_56528c9b = skipto::get_current_skiptos()[0];
   var_93fe9edf = skipto::function_3a4ee594(var_56528c9b);
   missionname = "cp_ger_hub";
 
@@ -66,10 +66,10 @@ function function_b0bc875b() {
     }
 
     activities::function_b73af3c(missionname);
-    savegame::function_87dafd45(missionname);
+    savegame::set_mission_name(missionname);
 
     if(var_93fe9edf == skipto::function_3a4ee594(skipto::function_5011fee2(missionname))) {
-      savegame::function_81534803(#"transient");
+      savegame::clear_mission_data(#"transient");
     }
   }
 }

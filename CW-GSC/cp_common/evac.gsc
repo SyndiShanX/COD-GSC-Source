@@ -39,7 +39,7 @@ function main(var_834e775, var_d12d84db, var_eb954041, var_5859bbb4, var_3e8a01b
   if(!isDefined(var_834e775)) {
     var_834e775 = self function_b99870d0();
     var_f771f6f2 = 1;
-    childthread function_d1e14c76(var_834e775);
+    childthread smoke_start(var_834e775);
   }
 
   var_edfdb06f = 0;
@@ -104,21 +104,21 @@ function private function_b99870d0() {
   return var_834e775;
 }
 
-function function_d1e14c76(var_1b6599c9) {
-  var_c39b3c14 = function_787dbb94(var_1b6599c9, (-90, 0, 0), undefined, "tag_origin");
-  snd::play("wpn_smoke_grenade_explode", var_c39b3c14);
-  snd::play(["wpn_smoke_hiss_start", 0.2], var_c39b3c14);
-  var_61c561f8 = snd::play(["wpn_smoke_hiss_lp", 0.2], var_c39b3c14);
-  snd::function_f4f3a2a(var_61c561f8, var_c39b3c14, 1);
-  playFXOnTag("smoke/fx9_smk_grenade_green_windy", var_c39b3c14, "tag_origin");
-  level thread function_a64f1050(var_c39b3c14);
+function smoke_start(var_1b6599c9) {
+  e_fx_tag = function_787dbb94(var_1b6599c9, (-90, 0, 0), undefined, "tag_origin");
+  snd::play("wpn_smoke_grenade_explode", e_fx_tag);
+  snd::play(["wpn_smoke_hiss_start", 0.2], e_fx_tag);
+  var_61c561f8 = snd::play(["wpn_smoke_hiss_lp", 0.2], e_fx_tag);
+  snd::stop_on_ent_death(var_61c561f8, e_fx_tag, 1);
+  playFXOnTag("smoke/fx9_smk_grenade_green_windy", e_fx_tag, "tag_origin");
+  level thread function_a64f1050(e_fx_tag);
   level flag::set("flag_evac_location_set");
 }
 
-function private function_a64f1050(var_c39b3c14) {
+function private function_a64f1050(e_fx_tag) {
   level flag::wait_till("flag_evac_stop_smoke");
-  snd::play("wpn_smoke_hiss_end", var_c39b3c14);
-  var_c39b3c14 delete();
+  snd::play("wpn_smoke_hiss_end", e_fx_tag);
+  e_fx_tag delete();
 }
 
 function private helicopter(var_eb954041, var_edfdb06f, var_d12d84db) {
@@ -240,7 +240,7 @@ function private function_f724246e(var_b4a49886, lz) {
   var_b4a49886 vehicle::set_goal_pos(lz.origin + (0, 0, 1024), 1);
   var_b4a49886 waittill(#"goal");
   var_b4a49886 setgoalyaw(lz.angles[1]);
-  var_b4a49886 function_f4db9f04();
+  var_b4a49886 helicopter_land();
   self function_b064c2b3(1, var_b4a49886);
   var_b4a49886 setspeed(11);
   level.player util::delay(0.1, undefined, &playrumbleonentity, #"hash_5f4c8cad06be5f5d");
@@ -249,7 +249,7 @@ function private function_f724246e(var_b4a49886, lz) {
   var_b4a49886 vehicle::set_goal_pos(var_b4a49886.origin + (0, 0, 3096) + anglesToForward(var_b4a49886.angles) * 4096, 1);
 }
 
-function private function_f4db9f04() {
+function private helicopter_land() {
   ground_pos = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[#"position"] + (0, 0, 24);
   var_c7f41a78 = self.origin;
   level flag::set("flag_evac_stop_smoke");
@@ -284,18 +284,18 @@ function private function_f4db9f04() {
 function function_76525803(var_ad1ba59d, var_9b1de80a, var_8db0ea88) {
   level endon(#"evac_chopper_landed");
   var_568798 = var_8db0ea88 * var_8db0ea88;
-  var_1cea5425 = 25;
+  slop = 25;
   var_b90d30a9 = 1;
-  badplace_cylinder("evac_badplace", -1, var_ad1ba59d + (0, 0, -32), var_8db0ea88 + var_1cea5425, 128, #"any");
+  badplace_cylinder("evac_badplace", -1, var_ad1ba59d + (0, 0, -32), var_8db0ea88 + slop, 128, #"any");
 
   while(true) {
     set = 0;
     var_b90d30a9 = -1;
 
     if(level flag::get("landing_obstructed")) {
-      var_568798 = var_8db0ea88 + var_1cea5425;
+      var_568798 = var_8db0ea88 + slop;
     } else {
-      var_568798 = var_8db0ea88 - var_1cea5425;
+      var_568798 = var_8db0ea88 - slop;
     }
 
     var_568798 *= var_568798;

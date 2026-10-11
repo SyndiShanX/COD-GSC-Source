@@ -45,13 +45,13 @@ function function_22faec66() {
     level waittill(#"hash_20397d5f66793917");
 
     foreach(player in getlocalplayers()) {
-      player postfx::playpostfxbundle(#"hash_50d5d465e2b9b355");
+      player postfx::playpostfxbundle(#"pstfx_sprite_rain_splash");
     }
 
     level waittill(#"hash_3acd8a1b1fe43b7b");
 
     foreach(player in getlocalplayers()) {
-      player postfx::exitpostfxbundle(#"hash_50d5d465e2b9b355");
+      player postfx::exitpostfxbundle(#"pstfx_sprite_rain_splash");
     }
   }
 }

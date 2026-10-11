@@ -36,7 +36,7 @@ function function_8efe7666() {
   self callback::function_d8abfc3d(#"hash_10ab46b52df7967a", &namespace_85745671::function_5cb3181e);
   self.var_12af7864 = 1;
   self.var_c11b8a5a = 1;
-  self.ai.var_870d0893 = 1;
+  self.ai.rex_mp_swamp_concrete_debris = 1;
   self.targetname = "defend_zombie";
 
   if(!namespace_88795f45::function_6b87eed1()) {

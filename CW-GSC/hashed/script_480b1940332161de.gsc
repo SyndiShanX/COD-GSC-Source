@@ -17,7 +17,7 @@ function private autoexec __init__system__() {
   system::register(#"poi", &function_f64316de, undefined, undefined, undefined);
 }
 
-function enable(shouldenable, firstpoint, var_8fbcda45) {
+function enable(shouldenable, firstpoint, doaim) {
   assert(isactor(self));
   assert(shouldenable === 1 || shouldenable === 0, "<dev string:x38>");
 
@@ -36,11 +36,11 @@ function enable(shouldenable, firstpoint, var_8fbcda45) {
   self.poi.currentpoi = undefined;
   self.poi.nextpoi = undefined;
   self.poi.doingpoi = shouldenable;
-  self.poi.var_8fbcda45 = var_8fbcda45;
+  self.poi.doaim = doaim;
 
   if(!shouldenable) {
-    assert(isDefined(level.poi.var_5ee53e3), "<dev string:x69>");
-    arrayremovevalue(level.poi.var_5ee53e3, self);
+    assert(isDefined(level.poi.activeai), "<dev string:x69>");
+    arrayremovevalue(level.poi.activeai, self);
     self.turnrate = isDefined(self.poi.poi_oldturnrate) ? self.poi.poi_oldturnrate : self.turnrate;
     self.gunadditiveoverride = undefined;
     self.gunposeoverride = undefined;
@@ -65,12 +65,12 @@ function enable(shouldenable, firstpoint, var_8fbcda45) {
   var_47658db3 = function_15a5703b("human", min(self.poi.var_1365068, var_67b78bf3));
   self setdesiredspeed(var_47658db3);
 
-  if(!isDefined(level.poi.var_5ee53e3)) {
-    level.poi.var_5ee53e3 = [];
+  if(!isDefined(level.poi.activeai)) {
+    level.poi.activeai = [];
   }
 
-  if(!array::contains(level.poi.var_5ee53e3, self)) {
-    level.poi.var_5ee53e3[level.poi.var_5ee53e3.size] = self;
+  if(!array::contains(level.poi.activeai, self)) {
+    level.poi.activeai[level.poi.activeai.size] = self;
   }
 
   if(isDefined(level.poi.fnfindcqbpointsofinterest)) {
@@ -87,11 +87,11 @@ function enable(shouldenable, firstpoint, var_8fbcda45) {
   self notify(#"poi_enabled");
 }
 
-function function_fc1d22bd(shouldenable, yawmin, yawmax, pitchmin, pitchmax, var_8fbcda45) {
+function function_fc1d22bd(shouldenable, yawmin, yawmax, pitchmin, pitchmax, doaim) {
   shouldenable = is_true(shouldenable);
 
   if(shouldenable && !isDefined(self.poi.auto)) {
-    self auto_init(yawmin, yawmax, pitchmin, pitchmax, var_8fbcda45);
+    self auto_init(yawmin, yawmax, pitchmin, pitchmax, doaim);
     self thread function_c6ff2ee5();
     self notify(#"hash_4f88221ad3977829");
     return;
@@ -99,7 +99,7 @@ function function_fc1d22bd(shouldenable, yawmin, yawmax, pitchmin, pitchmax, var
 
   if(!shouldenable && isDefined(self.poi.auto)) {
     self notify(#"poiauto_disable");
-    self ai::look_at(self.poi.auto.angles, 3, 1, float(function_60d95f53()) / 1000, self.poi.auto.var_8fbcda45, 1);
+    self ai::look_at(self.poi.auto.angles, 3, 1, float(function_60d95f53()) / 1000, self.poi.auto.doaim, 1);
     self.poi.auto = undefined;
     self notify(#"hash_eb07a9b95814b4a");
   }
@@ -141,15 +141,15 @@ function private function_b31aaef9() {
   waitframe(1);
 
   while(true) {
-    if(!isarray(level.poi.var_5ee53e3) || level.poi.var_5ee53e3.size == 0) {
+    if(!isarray(level.poi.activeai) || level.poi.activeai.size == 0) {
       level.poi.alreadyfindingpoi = undefined;
       return;
     }
 
-    var_6a9ced4 = [];
+    guystoremove = [];
     waited = 0;
 
-    foreach(guy in level.poi.var_5ee53e3) {
+    foreach(guy in level.poi.activeai) {
       if(isalive(guy) && is_true(guy.poi.doingpoi) && !guy is_combat()) {
         poi = guy function_f3a2a643();
 
@@ -157,7 +157,7 @@ function private function_b31aaef9() {
           now = gettime();
           guy.poi.poi_starttime = now;
           guy.poi.currentpoi = poi;
-          var_8fbcda45 = isDefined(poi.var_1eabcced) ? poi.var_1eabcced : self.poi.var_8fbcda45;
+          doaim = isDefined(poi.var_1eabcced) ? poi.var_1eabcced : self.poi.doaim;
           var_9ced4e21 = poi util::function_4b93f9c2();
 
           if((isDefined(var_9ced4e21) ? var_9ced4e21 : 0) == 0) {
@@ -165,7 +165,7 @@ function private function_b31aaef9() {
           }
 
           guy.poi.currentpoi.var_3b03815e = now + var_9ced4e21 * 1000;
-          guy ai::look_at(poi.origin, 3, 1, var_9ced4e21, var_8fbcda45);
+          guy ai::look_at(poi.origin, 3, 1, var_9ced4e21, doaim);
           guy thread function_d0341c76(3, var_9ced4e21);
         }
 
@@ -174,11 +174,11 @@ function private function_b31aaef9() {
         continue;
       }
 
-      var_6a9ced4[var_6a9ced4.size] = guy;
+      guystoremove[guystoremove.size] = guy;
     }
 
-    foreach(guy in var_6a9ced4) {
-      arrayremovevalue(level.poi.var_5ee53e3, guy);
+    foreach(guy in guystoremove) {
+      arrayremovevalue(level.poi.activeai, guy);
     }
 
     if(!waited) {
@@ -362,7 +362,7 @@ function private function_d0341c76(priority, var_9ced4e21) {
   }
 }
 
-function private auto_init(yawmin = 15, yawmax = 35, pitchmin = -20, pitchmax = 0, var_8fbcda45) {
+function private auto_init(yawmin = 15, yawmax = 35, pitchmin = -20, pitchmax = 0, doaim) {
   if(!isDefined(self.poi)) {
     self.poi = {};
   }
@@ -372,7 +372,7 @@ function private auto_init(yawmin = 15, yawmax = 35, pitchmin = -20, pitchmax = 
   self.poi.auto.yawmin = yawmin;
   self.poi.auto.pitchmin = pitchmin;
   self.poi.auto.pitchmax = pitchmax;
-  self.poi.auto.var_8fbcda45 = var_8fbcda45;
+  self.poi.auto.doaim = doaim;
 }
 
 function private function_c6ff2ee5() {
@@ -380,8 +380,8 @@ function private function_c6ff2ee5() {
   self endon(#"poiauto_disable");
   self endon(#"death");
   var_796d6ecf = 500;
-  var_b785492c = 0;
-  var_8dfbd33c = 0;
+  nextaimtimer = 0;
+  lastaimtimer = 0;
   var_960224ae = gettime() + 30000;
 
   if(!isDefined(self.poi.auto)) {
@@ -396,24 +396,24 @@ function private function_c6ff2ee5() {
     if(var_960224ae <= gettime()) {
       self.poi.auto.angles = (0, 0, 0);
 
-      if(var_960224ae == var_b785492c) {
+      if(var_960224ae == nextaimtimer) {
         secondaim = 1;
       }
     }
 
-    if(var_b785492c <= gettime()) {
+    if(nextaimtimer <= gettime()) {
       var_960224ae = gettime() + int(randomfloatrange(0.8, 1.8) * 1000);
-      var_8dfbd33c = gettime();
+      lastaimtimer = gettime();
       function_504eb38e(secondaim);
       var_456b9fca = var_796d6ecf - gettime();
       var_33e79978 = var_960224ae - gettime();
 
       if(abs(var_33e79978 - var_456b9fca) >= 550 && math::cointoss()) {
-        var_b785492c = var_960224ae;
+        nextaimtimer = var_960224ae;
       } else if(var_456b9fca > 3000) {
-        var_b785492c = gettime() + randomintrange(2000, 3000);
+        nextaimtimer = gettime() + randomintrange(2000, 3000);
       } else {
-        var_b785492c = gettime() + var_456b9fca + 550 + randomintrange(1000, 2000);
+        nextaimtimer = gettime() + var_456b9fca + 550 + randomintrange(1000, 2000);
       }
     }
 
@@ -478,7 +478,7 @@ function private function_504eb38e(secondaim) {
 
   self.poi.auto.nextangles = (pitch, yaw, 0);
   self.poi.auto.var_f0ada51b = randomintrange(100, 300) + gettime();
-  self ai::look_at(self.poi.auto.angles, 3, 1, 0, self.poi.auto.var_8fbcda45, 1);
+  self ai::look_at(self.poi.auto.angles, 3, 1, 0, self.poi.auto.doaim, 1);
 }
 
 function private function_636d2b5d(yawmax, yawmin, pitchmin, pitchmax) {
@@ -532,8 +532,8 @@ function private debug() {
   var_3b1af2ae = struct::get_array("<dev string:xb7>", "<dev string:xbe>");
 
   while(true) {
-    if(isDefined(level.poi.var_5ee53e3)) {
-      foreach(ai in level.poi.var_5ee53e3) {
+    if(isDefined(level.poi.activeai)) {
+      foreach(ai in level.poi.activeai) {
         if(isDefined(ai.poi.currentpoi) && gettime() < (isDefined(ai.poi.currentpoi.var_3b03815e) ? ai.poi.currentpoi.var_3b03815e : gettime() + float(function_60d95f53()) / 1000)) {
           line(ai getEye(), ai.poi.currentpoi.origin, (0, 0, 1), 1, 0, 1);
           continue;

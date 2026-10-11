@@ -89,14 +89,14 @@ function private function_37eab05b(instance) {
   level thread function_a77f3600(instance);
   level thread function_2d2fade8(instance);
   level thread function_68aac628(instance, "monsterhouse_low");
-  var_d56fdb6 = array::randomize(isDefined(instance.contentgroups[#"spawn_crystal"]) ? instance.contentgroups[#"spawn_crystal"] : []);
+  a_s_crystals = array::randomize(isDefined(instance.contentgroups[#"spawn_crystal"]) ? instance.contentgroups[#"spawn_crystal"] : []);
   instance.var_eb3bf4b1 = [];
   var_90acdb64 = getPlayers().size * 2 + 4;
   n_spawned = 0;
   instance.var_5cbcc78a = var_90acdb64;
 
-  foreach(var_d2ee34ea in var_d56fdb6) {
-    mdl_crystal = function_4b312787(var_d2ee34ea);
+  foreach(s_crystal in a_s_crystals) {
+    mdl_crystal = function_4b312787(s_crystal);
 
     if(isDefined(mdl_crystal)) {
       if(mdl_crystal clientfield::is_registered("perk_death_perception_item_marked_for_rob")) {
@@ -180,7 +180,7 @@ function private function_a77f3600(instance) {
   instance endon(#"cleanup");
 
   while(true) {
-    namespace_2c949ef8::function_8b6ae460(instance.var_8b241b32, "monster_house_ambush_list_realm_" + level.realm, 500, 1500, undefined, undefined, 0, "monster_house_ai");
+    namespace_2c949ef8::do_ambush(instance.var_8b241b32, "monster_house_ambush_list_realm_" + level.realm, 500, 1500, undefined, undefined, 0, "monster_house_ai");
   }
 }
 
@@ -277,8 +277,8 @@ function function_fc37bb4f(str_type) {
 }
 
 function function_68aac628(instance, str_musicstate) {
-  if(!isDefined(instance.var_de3f63de) || instance.var_de3f63de != str_musicstate) {
-    instance.var_de3f63de = str_musicstate;
+  if(!isDefined(instance.current_music_state) || instance.current_music_state != str_musicstate) {
+    instance.current_music_state = str_musicstate;
     level namespace_9b972177::function_9a65b730(str_musicstate);
   }
 }
@@ -289,11 +289,11 @@ function private function_fa4d3a3e(instance) {
   }
 
   level endon(#"portal_activated");
-  var_d56fdb6 = isDefined(instance.contentgroups[#"spawn_crystal"]) ? instance.contentgroups[#"spawn_crystal"] : [];
+  a_s_crystals = isDefined(instance.contentgroups[#"spawn_crystal"]) ? instance.contentgroups[#"spawn_crystal"] : [];
 
   while(true) {
-    foreach(var_d2ee34ea in var_d56fdb6) {
-      sphere(var_d2ee34ea.origin, 6, (0, 1, 1), 0.75, 0, 7, 10);
+    foreach(s_crystal in a_s_crystals) {
+      sphere(s_crystal.origin, 6, (0, 1, 1), 0.75, 0, 7, 10);
     }
 
     foreach(mdl_crystal in instance.var_eb3bf4b1) {

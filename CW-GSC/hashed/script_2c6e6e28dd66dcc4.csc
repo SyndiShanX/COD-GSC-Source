@@ -61,5 +61,5 @@ function private function_bc183609(localclientnum) {
 
   self.var_520069d0 = util::spawn_model(localclientnum, #"hash_753879ed23d447bb", self.origin);
   self.var_520069d0.var_fc558e74 = "aether_tunnel";
-  self.var_520069d0 function_619a5c20();
+  self.var_520069d0 pingable();
 }

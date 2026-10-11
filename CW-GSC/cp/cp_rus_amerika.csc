@@ -120,7 +120,7 @@ function private function_f966e7bb(localclientnum, oldvalue, newvalue, bnewent, 
   self.var_f966e7bb.var_97c4563c = self clientfield::get("apc_threat_sight_state");
 
   if(!isDefined(self.var_f966e7bb.elem)) {
-    if(!getdvarint(#"hash_7bf40e4b6a830d11", 1)) {
+    if(!getdvarint(#"ai_threatsightdisplay", 1)) {
       return;
     }
 
@@ -136,7 +136,7 @@ function private function_f966e7bb(localclientnum, oldvalue, newvalue, bnewent, 
       self.var_f966e7bb.elem stealth_meter_display::open(wasdemojump);
     }
 
-    if(getdvarint(#"hash_7bf40e4b6a830d11", 1)) {
+    if(getdvarint(#"ai_threatsightdisplay", 1)) {
       self.var_f966e7bb.elem stealth_meter_display::function_4d628707(wasdemojump, self.var_f966e7bb.var_97c4563c);
       self.var_f966e7bb.elem stealth_meter_display::function_7425637b(wasdemojump, self.var_f966e7bb.sight);
       return;
@@ -323,15 +323,15 @@ function function_14a42a9d() {
 
 function slowmo_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    if(self postfx::function_556665f2(#"hash_21d59a2878ad21ad")) {
-      self postfx::stoppostfxbundle(#"hash_21d59a2878ad21ad");
+    if(self postfx::function_556665f2(#"pstfx_slow_motion")) {
+      self postfx::stoppostfxbundle(#"pstfx_slow_motion");
     }
 
-    self postfx::playpostfxbundle(#"hash_21d59a2878ad21ad");
+    self postfx::playpostfxbundle(#"pstfx_slow_motion");
     return;
   }
 
-  self postfx::exitpostfxbundle(#"hash_21d59a2878ad21ad");
+  self postfx::exitpostfxbundle(#"pstfx_slow_motion");
 }
 
 function playIntro_postFX(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

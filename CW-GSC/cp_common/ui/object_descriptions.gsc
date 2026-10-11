@@ -38,7 +38,7 @@ function on_player_spawned() {
       link_ent = getEnt(rect.target, "targetname");
     }
 
-    function_23e7a30a("rect" + index, rect.origin, rect.angles, rect.script_width, rect.script_height, hash(rect.script_string), rect.script_maxdist, link_ent);
+    register_rect("rect" + index, rect.origin, rect.angles, rect.script_width, rect.script_height, hash(rect.script_string), rect.script_maxdist, link_ent);
   }
 
   foreach(index, circle in circles) {
@@ -75,7 +75,7 @@ function register_trigger(uid, trigger, loc_string, max_dist = 500, var_36247bfb
   _register(uid, data);
 }
 
-function function_23e7a30a(uid, center, angles, width, height, loc_string, max_dist = 500, link_ent, var_36247bfb, var_774d5d03 = 1) {
+function register_rect(uid, center, angles, width, height, loc_string, max_dist = 500, link_ent, var_36247bfb, var_774d5d03 = 1) {
   data = {};
   data.center = center;
   data.axis = anglestoaxis(angles);
@@ -250,7 +250,7 @@ function private _think() {
   self endon(#"death");
   level endon(#"level_restarting");
   level flag::set("object_descriptions_active");
-  namespace_61e6d095::create(#"object_descriptions", #"hash_1dbb8163d29524c9");
+  scripted_widgets::create(#"object_descriptions", #"hash_1dbb8163d29524c9");
   var_ebb41806 = undefined;
 
   while(level.object_descriptions.trace_dist > 0) {
@@ -259,7 +259,7 @@ function private _think() {
     text = #"";
     var_36247bfb = #"";
 
-    if(!namespace_61e6d095::exists(#"hint_tutorial") && !self flag::get(#"lockpicking") && function_185fc34e(eye, eye_dir)) {
+    if(!scripted_widgets::exists(#"hint_tutorial") && !self flag::get(#"lockpicking") && function_185fc34e(eye, eye_dir)) {
       end = eye + eye_dir * level.object_descriptions.trace_dist;
       trace = bulletTrace(eye, end, 1, self, 1, 0);
 
@@ -292,26 +292,26 @@ function private _think() {
 
       if(isDefined(data) && isDefined(var_ebb41806) && var_ebb41806 != #"") {
         if(isDefined(var_36247bfb) && var_36247bfb != #"") {
-          namespace_61e6d095::set_text(#"object_descriptions", var_36247bfb);
-          namespace_61e6d095::function_bfdab223(#"object_descriptions", text);
+          scripted_widgets::set_text(#"object_descriptions", var_36247bfb);
+          scripted_widgets::function_bfdab223(#"object_descriptions", text);
         } else if(data.var_774d5d03 == 3) {
-          namespace_61e6d095::set_text(#"object_descriptions", text);
+          scripted_widgets::set_text(#"object_descriptions", text);
         } else {
-          namespace_61e6d095::function_bfdab223(#"object_descriptions", text);
+          scripted_widgets::function_bfdab223(#"object_descriptions", text);
         }
 
-        namespace_61e6d095::set_state(#"object_descriptions", data.var_774d5d03);
+        scripted_widgets::set_state(#"object_descriptions", data.var_774d5d03);
       } else {
-        namespace_61e6d095::set_text(#"object_descriptions", #"");
-        namespace_61e6d095::function_bfdab223(#"object_descriptions", #"");
-        namespace_61e6d095::set_state(#"object_descriptions", 0);
+        scripted_widgets::set_text(#"object_descriptions", #"");
+        scripted_widgets::function_bfdab223(#"object_descriptions", #"");
+        scripted_widgets::set_state(#"object_descriptions", 0);
       }
     }
 
     waitframe(1);
   }
 
-  namespace_61e6d095::remove(#"object_descriptions");
+  scripted_widgets::remove(#"object_descriptions");
   level flag::clear("object_descriptions_active");
 }
 

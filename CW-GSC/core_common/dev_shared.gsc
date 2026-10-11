@@ -487,7 +487,7 @@ function function_6d793eb9(hornindex) {
     return;
   }
 
-  var_e2bbb439 = getscriptbundlelist(#"hash_4bea1d6b321100bb");
+  var_e2bbb439 = getscriptbundlelist(#"vehiclehorn_list");
 
   if(!isDefined(var_e2bbb439)) {
     return;
@@ -790,19 +790,19 @@ function dev_get_point_pair() {
   return points;
 }
 
-function function_adde34ed(var_b008e583, var_d7016d06, a, b, c, radius, spacing) {
+function function_adde34ed(initial_origin, initial_angle, a, b, c, radius, spacing) {
   return {
-    #start_origin: var_b008e583, #start_angle: var_d7016d06, #angle: 0, #a: a, #b: b, #c: c, #radius: radius, #spacing: spacing
+    #start_origin: initial_origin, #start_angle: initial_angle, #angle: 0, #a: a, #b: b, #c: c, #radius: radius, #spacing: spacing
   };
 }
 
-function function_a4ccb933(var_b008e583, var_d7016d06) {
+function function_a4ccb933(initial_origin, initial_angle) {
   radius = 100;
   spacing = getdvarint(#"hash_71c117351507b9e5", 75);
   a = getdvarint(#"hash_3c42741c0efba07", 14);
   b = getdvarint(#"hash_3c42841c0efbbba", 35);
   c = getdvarfloat(#"hash_3c42941c0efbd6d", 1);
-  return function_adde34ed(var_b008e583, var_d7016d06, a, b, c, radius, spacing);
+  return function_adde34ed(initial_origin, initial_angle, a, b, c, radius, spacing);
 }
 
 function function_df0b6f84(spiral) {

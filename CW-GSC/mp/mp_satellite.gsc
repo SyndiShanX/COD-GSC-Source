@@ -20,7 +20,7 @@ function event_handler[level_init] main(eventstruct) {
   killstreaks::function_257a5f13("helicopter_comlink", 75);
   clientfield::register("toplayer", "force_stream_rappel_ropes", 1, 1, "int");
   load::main();
-  scene::add_scene_func(#"hash_4ac8864d2a236932", &function_29776f58);
+  scene::add_scene_func(#"p9_fxanim_mp_sat_satellite_parachute_01_bundle", &function_29776f58);
   scene::add_scene_func(#"cin_mp_satellite_rappel_intro", &force_stream_rappel_ropes, "play", "play");
   scene::add_scene_func(#"cin_mp_satellite_rappel_intro", &force_stream_rappel_ropes, "done", "done");
   scene::add_scene_func(#"cin_mp_satellite_rappel_intro", &force_stream_rappel_ropes, "stop", "stop");
@@ -64,13 +64,13 @@ function on_game_playing() {
     ent show();
   }
 
-  level thread scene::play(#"hash_1e1ac7b63df20511");
+  level thread scene::play(#"p9_fxanim_mp_sat_hind_cliff_bundle");
 }
 
 function on_end_game() {}
 
 function function_8be0ab76() {
-  level thread scene::add_scene_func(#"hash_1e1ac7b63df20511", &function_b467087, "init");
+  level thread scene::add_scene_func(#"p9_fxanim_mp_sat_hind_cliff_bundle", &function_b467087, "init");
 }
 
 function function_b467087(a_ents) {

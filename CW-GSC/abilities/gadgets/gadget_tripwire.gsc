@@ -240,7 +240,7 @@ function function_b9549a9() {
 
   if(!isDefined(self.activated)) {
     self playSound(#"hash_58a0696fb1726978");
-    self playLoopSound(#"hash_3e09d676ac6291c1", 0.25);
+    self playLoopSound(#"wpn_tripwire_active_loop", 0.25);
     self.activated = 1;
   }
 
@@ -289,7 +289,7 @@ function function_55c50f15() {
 
         if(!isDefined(self.activated)) {
           self playSound(#"hash_58a0696fb1726978");
-          self playLoopSound(#"hash_3e09d676ac6291c1", 0.25);
+          self playLoopSound(#"wpn_tripwire_active_loop", 0.25);
           self.activated = 1;
         }
       }
@@ -535,7 +535,7 @@ function function_9e546fb3(attacker, weapon, target, var_2f6adbe3, tripper) {
     self battlechatter::function_d2600afc(weapon, self.owner, self.weapon, target);
     self thread function_9b3a657f(target);
   } else {
-    self playSound(#"hash_1f0de5f27d29d3aa");
+    self playSound(#"wpn_tripwire_alert");
     self.detonating = 1;
 
     if(isDefined(var_2f6adbe3)) {
@@ -572,7 +572,7 @@ function function_9e546fb3(attacker, weapon, target, var_2f6adbe3, tripper) {
       perpvec = perpendicularvector(explosiondir);
       owner = isDefined(var_2f6adbe3.owner) && isentity(var_2f6adbe3.owner) ? var_2f6adbe3.owner : undefined;
       var_2f6adbe3 cylinderdamage(explosiondir * explosiondist, var_2f6adbe3.origin, nearradius, farradius, maxdamage, mindamage, owner, "MOD_EXPLOSIVE", self.weapon);
-      playFX(#"hash_69455dfeef0311c2", var_2f6adbe3.origin, explosiondir, perpvec);
+      playFX(#"weapon/fx8_equip_tripwire_exp", var_2f6adbe3.origin, explosiondir, perpvec);
       playSoundAtPosition(explosionsound, self.origin);
       playSoundAtPosition(explosionsound, var_2f6adbe3.origin);
       var_2f6adbe3 ghost();
@@ -592,7 +592,7 @@ function function_9e546fb3(attacker, weapon, target, var_2f6adbe3, tripper) {
       }
 
       perpvec = perpendicularvector(explosiondir);
-      playFX(#"hash_69455dfeef0311c2", self.origin, explosiondir, perpvec);
+      playFX(#"weapon/fx8_equip_tripwire_exp", self.origin, explosiondir, perpvec);
       self playSound(explosionsound);
 
       if(!isDefined(self.hitnormal)) {

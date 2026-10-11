@@ -27,7 +27,7 @@ function private function_538c9c9b(params) {
 
   setDvar(#"show_note", "<dev string:x45>");
 
-  if(namespace_61e6d095::exists(#"generic_note")) {
+  if(scripted_widgets::exists(#"generic_note")) {
     return;
   }
 
@@ -42,16 +42,16 @@ function private function_538c9c9b(params) {
 function private function_32402e29(notetype, noteid) {
   player = self;
 
-  if(namespace_61e6d095::exists(#"generic_note")) {
+  if(scripted_widgets::exists(#"generic_note")) {
     assertmsg("<dev string:x8e>");
     return;
   }
 
-  namespace_61e6d095::create(#"generic_note", #"hash_77979ca92bd3cc85");
-  namespace_61e6d095::function_28027c42(#"generic_note", #"generic_note");
+  scripted_widgets::create(#"generic_note", #"hash_77979ca92bd3cc85");
+  scripted_widgets::function_28027c42(#"generic_note", #"generic_note");
   namespace_c8e236da::function_ebf737f8(#"hash_1aefb4de625039be");
   level waittill(#"note_closed");
   namespace_c8e236da::removelist();
-  namespace_61e6d095::remove(#"generic_note");
-  namespace_61e6d095::function_4279fd02(#"generic_note");
+  scripted_widgets::remove(#"generic_note");
+  scripted_widgets::function_4279fd02(#"generic_note");
 }

@@ -333,7 +333,7 @@ function function_c1ae3843() {
 function spawn_corpse() {
   trace_start = self.origin;
   trace_end = self.origin + (0, 0, -500);
-  var_5716a6f5 = playerphysicstrace(trace_start, trace_end);
+  corpse_trace = playerphysicstrace(trace_start, trace_end);
   playFX(#"hash_7338c45a04f946da", self.origin);
   corpse = util::spawn_player_clone(self, #"pb_tombstone_idle", undefined, 0);
   corpse clientfield::set("" + #"hash_5d96e4c9a397fa0", 1);
@@ -500,7 +500,7 @@ function revive_trigger_think(t_secondary) {
 function function_fe8b87d5() {
   self endon(#"death", #"entering_last_stand");
   self thread lui::screen_flash(0.1, 0.5, 0.5, 1, "white");
-  self.var_8f0245d0 = {
+  self.tombstone = {
     #armor: self.armor
   };
   self.var_b895a3ff = 1;
@@ -547,7 +547,7 @@ function function_fe8b87d5() {
   self clientfield::set("" + #"hash_46072c670fdaf2fa", 1);
   self.var_dc4f101 waittill(#"player_revived");
   self notify(#"player_revived");
-  self.var_4eea3759 = 1;
+  self.tombstone_revived = 1;
 }
 
 function function_19412563() {
@@ -749,9 +749,9 @@ function function_3db7ced3() {
   self val::reset("tombstone_shadow", "health_regen");
   self val::reset("tombstone_shadow", "disable_usability");
   self clientfield::set("" + #"hash_46072c670fdaf2fa", 0);
-  self.armor = self.var_8f0245d0.armor;
-  self.var_8f0245d0 struct::delete();
-  self.var_8f0245d0 = undefined;
+  self.armor = self.tombstone.armor;
+  self.tombstone struct::delete();
+  self.tombstone = undefined;
   self.var_8fd58a32 = undefined;
   self.var_1399a943 = undefined;
   self clientfield::set_player_uimodel("hud_items.tombstonePerkAvailable", 0);
@@ -795,13 +795,13 @@ function on_disconnect() {
 }
 
 function function_8fddd50e() {
-  var_a97ca678 = isDefined(self.var_dc4f101) ? self.var_dc4f101.origin : self.origin;
-  trace_start = var_a97ca678;
-  trace_end = var_a97ca678 + (0, 0, -100);
+  temp_origin = isDefined(self.var_dc4f101) ? self.var_dc4f101.origin : self.origin;
+  trace_start = temp_origin;
+  trace_end = temp_origin + (0, 0, -100);
   var_dfa8eaa5 = playerphysicstrace(trace_start, trace_end);
   a_str_models = [#"hash_4bee36a9434de051", #"hash_4bee33a9434ddb38", #"hash_4bee34a9434ddceb", #"hash_4bee39a9434de56a"];
   stash = util::spawn_model(a_str_models[self.entity_num], var_dfa8eaa5 + (0, 0, 15));
-  stash function_619a5c20();
+  stash pingable();
   stash clientfield::set("" + #"hash_2897f04212a28873", 1);
   stash.owner = self;
   stash thread function_330c66cc();
@@ -820,10 +820,10 @@ function function_330c66cc() {
   s_unitrigger.prompt_and_visibility_func = &function_c7f0270c;
   s_unitrigger.related_parent = self;
   self.s_unitrigger = s_unitrigger;
-  zm_unitrigger::register_static_unitrigger(s_unitrigger, &function_cde4678f);
+  zm_unitrigger::register_static_unitrigger(s_unitrigger, &unitrigger_logic);
 }
 
-function function_cde4678f() {
+function unitrigger_logic() {
   self endon(#"kill_trigger");
 
   while(true) {

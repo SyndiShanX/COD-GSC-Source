@@ -20,10 +20,10 @@ function private preinit() {
   a_s_breadcrumbs = struct::get_array("breadcrumb", "variantname");
   level function_bf078d39(a_s_breadcrumbs);
 
-  level thread function_17a595c8(a_s_breadcrumbs);
+  level thread debug_breadcrumbs(a_s_breadcrumbs);
 }
 
-function function_61037c6c(kvp) {
+function start_chain(kvp) {
   var_6638ee82 = self function_a307948d(kvp);
   var_a067b105 = var_6638ee82;
 
@@ -90,7 +90,7 @@ function private function_c3c3607b(e_player) {
 
   if(!isDefined(mission.var_650ffa70[e_player getentitynumber()])) {
     n_obj_id = gameobjects::get_next_obj_id();
-    objective_add(n_obj_id, "active", (0, 0, 0), #"hash_7057d3992f70bf08");
+    objective_add(n_obj_id, "active", (0, 0, 0), #"cp_waypoint_breadcrumb");
     function_4339912c(n_obj_id);
     function_29ef32ee(n_obj_id, level.teams[e_player.team]);
     objective_setteam(n_obj_id, #"none");
@@ -221,7 +221,7 @@ function private function_a307948d(kvp) {
   return var_6638ee82;
 }
 
-function private function_17a595c8(a_s_breadcrumbs) {
+function private debug_breadcrumbs(a_s_breadcrumbs) {
   while(true) {
     waitframe(10);
 

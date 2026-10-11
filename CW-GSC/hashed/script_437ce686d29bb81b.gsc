@@ -208,8 +208,8 @@ function function_f859a82d(player) {
         function_53721fc4(player, #"hash_5e1b2fdec911ccdf", #"aat", hash(var_c170414));
       }
 
-      function_53721fc4(player, #"hash_5e1b2fdec911ccdf", #"hash_455cfe820071b143", is_true(var_fcee4e8f.var_b3546c09));
-      function_53721fc4(player, #"hash_5e1b2fdec911ccdf", #"hash_4696d1f524b4b683", is_true(var_fcee4e8f.var_a0cc02cf));
+      function_53721fc4(player, #"hash_5e1b2fdec911ccdf", #"isloadoutweapon", is_true(var_fcee4e8f.isloadoutweapon));
+      function_53721fc4(player, #"hash_5e1b2fdec911ccdf", #"hash_4696d1f524b4b683", is_true(var_fcee4e8f.mystery_box_weapon));
       function_53721fc4(player, #"hash_5e1b2fdec911ccdf", #"hash_5b4b4e5cc381eb9b", is_true(var_fcee4e8f.var_96c71057));
       function_53721fc4(player, #"hash_5e1b2fdec911ccdf", #"hash_98bbe4497a6c326", is_true(var_fcee4e8f.var_d688ad29));
       function_53721fc4(player, #"hash_5e1b2fdec911ccdf", #"hash_4071d18f7d9f2e36", is_true(var_fcee4e8f.var_387e74f4));
@@ -262,8 +262,8 @@ function function_f859a82d(player) {
         function_53721fc4(player, #"weapons", weapon_index, #"rarity", hash(item.itementry.rarity));
       }
 
-      function_53721fc4(player, #"weapons", weapon_index, #"hash_455cfe820071b143", is_true(item.var_b3546c09));
-      function_53721fc4(player, #"weapons", weapon_index, #"hash_4696d1f524b4b683", is_true(item.var_a0cc02cf));
+      function_53721fc4(player, #"weapons", weapon_index, #"isloadoutweapon", is_true(item.isloadoutweapon));
+      function_53721fc4(player, #"weapons", weapon_index, #"hash_4696d1f524b4b683", is_true(item.mystery_box_weapon));
       function_53721fc4(player, #"weapons", weapon_index, #"hash_5b4b4e5cc381eb9b", is_true(item.var_96c71057));
       function_53721fc4(player, #"weapons", weapon_index, #"hash_98bbe4497a6c326", is_true(item.var_d688ad29));
       function_53721fc4(player, #"weapons", weapon_index, #"hash_4071d18f7d9f2e36", is_true(item.var_387e74f4));
@@ -273,7 +273,7 @@ function function_f859a82d(player) {
       function_53721fc4(player, #"weapons", weapon_index, #"hash_17f911763bde5dfe", string(isDefined(item.var_908f65ca) ? item.var_908f65ca : 0));
     }
 
-    function_53721fc4(player, #"weapons", weapon_index, #"hash_22de893145a66a64", player.var_5d80a93b === weapon);
+    function_53721fc4(player, #"weapons", weapon_index, #"lastequipped", player.var_5d80a93b === weapon);
     var_3c6fcb66++;
   }
 }
@@ -617,11 +617,11 @@ function function_7695efd4(player, index, var_d17eb4df) {
   }
 
   rarity = hash(function_48b5c403(player, #"weapons", index, #"rarity"));
-  var_b3546c09 = function_48b5c403(player, #"weapons", index, #"hash_455cfe820071b143");
+  isloadoutweapon = function_48b5c403(player, #"weapons", index, #"isloadoutweapon");
   weaponoptions = function_48b5c403(player, #"weapons", index, #"weaponoptions");
   var_e91aba42 = function_48b5c403(player, #"weapons", index, #"hash_6ebd8dec863a7782");
   var_908f65ca = function_48b5c403(player, #"weapons", index, #"hash_17f911763bde5dfe");
-  var_50087796 = function_48b5c403(player, #"weapons", index, #"hash_22de893145a66a64");
+  lastequipped = function_48b5c403(player, #"weapons", index, #"lastequipped");
   var_2448ba23 = function_48b5c403(player, #"weapons", index, #"hash_4696d1f524b4b683");
   var_caea3e78 = function_48b5c403(player, #"weapons", index, #"hash_5b4b4e5cc381eb9b");
   var_570e79a0 = function_48b5c403(player, #"weapons", index, #"hash_98bbe4497a6c326");
@@ -636,8 +636,8 @@ function function_7695efd4(player, index, var_d17eb4df) {
   rootweapon = weapon.rootweapon;
   weapon_rarity = zm_weapons::function_d4f870ec(rarity);
 
-  if((paplv || weapon_rarity !== #"white" || !var_b3546c09) && (isDefined(level.var_c1f1b29a[rootweapon.name]) && isDefined(level.var_c1f1b29a[rootweapon.name][weapon_rarity]) || isDefined(level.var_ec04a8a4[rootweapon.name]) && isDefined(level.var_ec04a8a4[rootweapon.name][weapon_rarity]))) {
-    if(isDefined(paplv) && weapon_rarity === #"white" && var_b3546c09) {
+  if((paplv || weapon_rarity !== #"white" || !isloadoutweapon) && (isDefined(level.var_c1f1b29a[rootweapon.name]) && isDefined(level.var_c1f1b29a[rootweapon.name][weapon_rarity]) || isDefined(level.var_ec04a8a4[rootweapon.name]) && isDefined(level.var_ec04a8a4[rootweapon.name][weapon_rarity]))) {
+    if(isDefined(paplv) && weapon_rarity === #"white" && isloadoutweapon) {
       if(zm_weapons::is_weapon_upgraded(rootweapon)) {
         if(weapon.name == #"knife_loadout_upgraded") {
           var_8114384d = "knife_loadout" + "_t9_upgraded" + "_item_sr";
@@ -669,7 +669,7 @@ function function_7695efd4(player, index, var_d17eb4df) {
       println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:xe3>" + (ishash(var_f259d9cd.name) ? hashtostring(var_f259d9cd.name) : var_f259d9cd.name));
     }
 
-    weapon = player zm_weapons::weapon_give(var_f259d9cd, 1, 1, undefined, var_b3546c09, undefined, attachments, 0);
+    weapon = player zm_weapons::weapon_give(var_f259d9cd, 1, 1, undefined, isloadoutweapon, undefined, attachments, 0);
   } else {
     item = function_4ba8fde(var_f259d9cd);
 
@@ -677,7 +677,7 @@ function function_7695efd4(player, index, var_d17eb4df) {
       println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:xfc>" + (ishash(var_f259d9cd) ? hashtostring(var_f259d9cd) : var_f259d9cd));
     }
 
-    weapon = player zm_weapons::function_943eabd9(item, 1, 0, var_b3546c09, attachments, weaponoptions, var_e91aba42, var_908f65ca);
+    weapon = player zm_weapons::function_943eabd9(item, 1, 0, isloadoutweapon, attachments, weaponoptions, var_e91aba42, var_908f65ca);
   }
 
   if(var_d17eb4df < var_6653c106.size && item_world_util::function_db35e94f(player.inventory.items[var_6653c106[var_d17eb4df]].networkid) && player.inventory.items[var_6653c106[var_d17eb4df]].var_627c698b.rootweapon === weapon.rootweapon) {
@@ -699,7 +699,7 @@ function function_7695efd4(player, index, var_d17eb4df) {
       }
     }
 
-    if(isDefined(weapon) && is_true(var_50087796)) {
+    if(isDefined(weapon) && is_true(lastequipped)) {
       var_c0cc95d5 = weapon;
     }
 
@@ -712,7 +712,7 @@ function function_7695efd4(player, index, var_d17eb4df) {
     return;
   }
 
-  item zm_weapons::function_9aaa198a(var_b3546c09, var_2448ba23, var_caea3e78, var_570e79a0, var_1f86291a, var_f997f47);
+  item zm_weapons::function_9aaa198a(isloadoutweapon, var_2448ba23, var_caea3e78, var_570e79a0, var_1f86291a, var_f997f47);
 
   if(aat !== #"") {
     if(getDvar(#"hash_64ed0f72b786103", 0) !== 0) {
@@ -731,7 +731,7 @@ function function_7695efd4(player, index, var_d17eb4df) {
     player item_inventory::function_d92c6b5b(item.var_627c698b, undefined, paplv);
   }
 
-  if(isDefined(item.var_627c698b) && is_true(var_50087796)) {
+  if(isDefined(item.var_627c698b) && is_true(lastequipped)) {
     var_c0cc95d5 = item.var_627c698b;
   }
 
@@ -766,7 +766,7 @@ function function_77e8e806(player) {
       weaponoptions = function_48b5c403(player, #"hash_5e1b2fdec911ccdf", #"weaponoptions");
       var_e91aba42 = function_48b5c403(player, #"hash_5e1b2fdec911ccdf", #"hash_6ebd8dec863a7782");
       var_908f65ca = function_48b5c403(player, #"hash_5e1b2fdec911ccdf", #"hash_17f911763bde5dfe");
-      var_b3546c09 = function_48b5c403(player, #"hash_5e1b2fdec911ccdf", #"hash_455cfe820071b143");
+      isloadoutweapon = function_48b5c403(player, #"hash_5e1b2fdec911ccdf", #"isloadoutweapon");
       var_2448ba23 = function_48b5c403(player, #"hash_5e1b2fdec911ccdf", #"hash_4696d1f524b4b683");
       var_caea3e78 = function_48b5c403(player, #"hash_5e1b2fdec911ccdf", #"hash_5b4b4e5cc381eb9b");
       var_570e79a0 = function_48b5c403(player, #"hash_5e1b2fdec911ccdf", #"hash_98bbe4497a6c326");
@@ -799,7 +799,7 @@ function function_77e8e806(player) {
 
       player zm_weapons::function_7df0d6b2(var_7aa8c3c7, var_7aa8c3c7.var_627c698b, weaponoptions, var_e91aba42, var_908f65ca);
       player.var_3e8da229 = var_7aa8c3c7;
-      var_7aa8c3c7 zm_weapons::function_9aaa198a(var_b3546c09, var_2448ba23, var_caea3e78, var_570e79a0, var_1f86291a, var_f997f47);
+      var_7aa8c3c7 zm_weapons::function_9aaa198a(isloadoutweapon, var_2448ba23, var_caea3e78, var_570e79a0, var_1f86291a, var_f997f47);
       var_7aa8c3c7.hidetime = 1;
       var_7aa8c3c7.var_864ea466 = 1;
     }

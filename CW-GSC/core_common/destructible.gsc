@@ -235,8 +235,8 @@ function car_explosion(attacker, physics_explosion) {
   }
 
   if(sessionmodeiscampaigngame()) {
-    var_767445cc = "burningCar" + self getentitynumber();
-    badplace_delete(var_767445cc);
+    badplacename = "burningCar" + self getentitynumber();
+    badplace_delete(badplacename);
   }
 
   if(!isDefined(physics_explosion)) {
@@ -379,8 +379,8 @@ function car_fire_think(attacker) {
   self endon(#"death");
 
   if(sessionmodeiscampaigngame()) {
-    var_767445cc = "burningCar" + self getentitynumber();
-    badplace_cylinder(var_767445cc, 10, self.origin, 256, 256, "allies", "axis", "neutral");
+    badplacename = "burningCar" + self getentitynumber();
+    badplace_cylinder(badplacename, 10, self.origin, 256, 256, "allies", "axis", "neutral");
   }
 
   time_interval = randomintrange(7, 10);

@@ -38,12 +38,12 @@
 
 function event_handler[level_init] main(eventstruct) {
   setclearanceceiling(16);
-  function_bf4b4b7e();
+  setup_skiptos();
   init_flags();
   init_spawnfunctions();
   init_clientfields();
   load::main();
-  function_22b7fffd();
+  init_scenes();
   init_callbacks();
   level thread objective_init();
   setDvar(#"compassmaxrange", "2100");
@@ -79,35 +79,35 @@ function init_clientfields() {
   serverfield::register("kraus_zoom_hint_end", 1, 1, "int", &namespace_acaa3a2e::function_afc2d473);
 }
 
-function function_22b7fffd() {
-  level thread namespace_a613430e::function_22b7fffd();
-  level thread namespace_acaa3a2e::function_22b7fffd();
-  level thread namespace_dd1bf157::function_22b7fffd();
-  level thread namespace_afd0968c::function_22b7fffd();
-  level thread namespace_e6b6aea1::function_22b7fffd();
-  level thread cp_ger_stakeout_fx::function_22b7fffd();
+function init_scenes() {
+  level thread namespace_a613430e::init_scenes();
+  level thread namespace_acaa3a2e::init_scenes();
+  level thread namespace_dd1bf157::init_scenes();
+  level thread namespace_afd0968c::init_scenes();
+  level thread namespace_e6b6aea1::init_scenes();
+  level thread cp_ger_stakeout_fx::init_scenes();
   level thread namespace_11998b8f::function_dd4726f3();
   level thread namespace_11998b8f::function_54158bc();
 }
 
-function function_bf4b4b7e() {
-  skipto::function_eb91535d("train", &namespace_4dd4b998::main, &namespace_4dd4b998::start, "Train", &namespace_4dd4b998::cleanup, "train");
-  skipto::function_eb91535d("ghost_station", &namespace_a613430e::main, &namespace_a613430e::start, "Ghost Station", &namespace_a613430e::cleanup, "tunnels");
-  skipto::function_eb91535d("ghost_station_exit", &namespace_3aaa42f7::main, &namespace_3aaa42f7::start, "Ghost Station Exit", &namespace_3aaa42f7::cleanup, ["tunnels", "vista", "streets"]);
-  skipto::function_eb91535d("wall", &namespace_acaa3a2e::function_cca0368, &namespace_acaa3a2e::wall_start, "Berlin Wall", &namespace_acaa3a2e::function_f39fdd43, ["tunnels", "vista", "streets"]);
-  skipto::function_eb91535d("rooftop", &namespace_acaa3a2e::rooftop_main, &namespace_acaa3a2e::rooftop_start, "ID Kraus", &namespace_acaa3a2e::rooftop_cleanup, ["vista", "streets", "tailor_and_alley"]);
-  skipto::function_eb91535d("street", &namespace_dd1bf157::main, &namespace_dd1bf157::start, "Berlin Street", &namespace_dd1bf157::function_dc6107f7, ["vista", "streets", "alley", "tailor_and_alley"]);
-  skipto::function_eb91535d("bar", &namespace_dd1bf157::function_9145f67a, &namespace_dd1bf157::function_ae924b50, "Bar Meet", &namespace_dd1bf157::function_34aae650, ["vista", "streets", "tailor_and_alley"]);
-  skipto::function_eb91535d("alley_1", &namespace_4dc9a074::function_b3837ddc, &namespace_4dc9a074::function_9de162de, "Back Alley 1", &namespace_4dc9a074::function_4f2cda6a, ["vista", "streets", "tailor_and_alley", "alley"]);
-  skipto::function_eb91535d("alley_2", &namespace_4dc9a074::function_34ee80b8, &namespace_4dc9a074::function_2d6c81be, "Back Alley 2", &namespace_4dc9a074::function_821fcf7c, ["streets", "tailor_and_alley", "alley"]);
-  skipto::function_eb91535d("alley_3", &namespace_4dc9a074::function_b4ae0031, &namespace_4dc9a074::function_8262abe1, "Back Alley 3", &namespace_4dc9a074::function_e73c0be, ["streets", "tailor_and_alley", "alley", "courtyard"]);
-  skipto::function_eb91535d("meetup", &namespace_afd0968c::main, &namespace_afd0968c::start, "Rendezvous", &namespace_afd0968c::function_7451d8da, ["courtyard", "electronics", "apartment_street", "apartment"]);
-  skipto::function_eb91535d("apt_street", &namespace_fba81a7f::main, &namespace_fba81a7f::start, "Infiltrate Apartment", &namespace_fba81a7f::function_f62cf54d, ["courtyard", "electronics", "apartment_street", "apartment"]);
-  skipto::function_eb91535d("apt_1", &namespace_e6b6aea1::function_b3837ddc, &namespace_e6b6aea1::function_9de162de, "Apartment Entry", &namespace_e6b6aea1::function_69c02b2b, ["courtyard", "electronics", "apartment_street", "apartment"]);
-  skipto::function_eb91535d("apt_2", &namespace_e6b6aea1::function_34ee80b8, &namespace_e6b6aea1::function_2d6c81be, "Plant Tracking Device", &namespace_e6b6aea1::function_a3c49bc0, ["courtyard", "electronics", "apartment_street", "apartment"]);
-  skipto::function_eb91535d("warehouse_intro", &namespace_f8073734::intro_main, &namespace_f8073734::intro_start, "Warehouse Intro", &namespace_f8073734::intro_catchup, "warehouse");
-  skipto::function_eb91535d("warehouse", &namespace_f8073734::main, &namespace_f8073734::start, "Warehouse", undefined, "warehouse");
-  skipto::function_eb91535d("warehouse_outro", &namespace_f8073734::outro_main, &namespace_f8073734::outro_start, "Warehouse Outro", undefined, "warehouse");
+function setup_skiptos() {
+  skipto::add_saved("train", &namespace_4dd4b998::main, &namespace_4dd4b998::start, "Train", &namespace_4dd4b998::cleanup, "train");
+  skipto::add_saved("ghost_station", &namespace_a613430e::main, &namespace_a613430e::start, "Ghost Station", &namespace_a613430e::cleanup, "tunnels");
+  skipto::add_saved("ghost_station_exit", &namespace_3aaa42f7::main, &namespace_3aaa42f7::start, "Ghost Station Exit", &namespace_3aaa42f7::cleanup, ["tunnels", "vista", "streets"]);
+  skipto::add_saved("wall", &namespace_acaa3a2e::function_cca0368, &namespace_acaa3a2e::wall_start, "Berlin Wall", &namespace_acaa3a2e::function_f39fdd43, ["tunnels", "vista", "streets"]);
+  skipto::add_saved("rooftop", &namespace_acaa3a2e::rooftop_main, &namespace_acaa3a2e::rooftop_start, "ID Kraus", &namespace_acaa3a2e::rooftop_cleanup, ["vista", "streets", "tailor_and_alley"]);
+  skipto::add_saved("street", &namespace_dd1bf157::main, &namespace_dd1bf157::start, "Berlin Street", &namespace_dd1bf157::street_cleanup, ["vista", "streets", "alley", "tailor_and_alley"]);
+  skipto::add_saved("bar", &namespace_dd1bf157::function_9145f67a, &namespace_dd1bf157::function_ae924b50, "Bar Meet", &namespace_dd1bf157::function_34aae650, ["vista", "streets", "tailor_and_alley"]);
+  skipto::add_saved("alley_1", &namespace_4dc9a074::function_b3837ddc, &namespace_4dc9a074::function_9de162de, "Back Alley 1", &namespace_4dc9a074::function_4f2cda6a, ["vista", "streets", "tailor_and_alley", "alley"]);
+  skipto::add_saved("alley_2", &namespace_4dc9a074::function_34ee80b8, &namespace_4dc9a074::start_2, "Back Alley 2", &namespace_4dc9a074::function_821fcf7c, ["streets", "tailor_and_alley", "alley"]);
+  skipto::add_saved("alley_3", &namespace_4dc9a074::function_b4ae0031, &namespace_4dc9a074::function_8262abe1, "Back Alley 3", &namespace_4dc9a074::function_e73c0be, ["streets", "tailor_and_alley", "alley", "courtyard"]);
+  skipto::add_saved("meetup", &namespace_afd0968c::main, &namespace_afd0968c::start, "Rendezvous", &namespace_afd0968c::function_7451d8da, ["courtyard", "electronics", "apartment_street", "apartment"]);
+  skipto::add_saved("apt_street", &namespace_fba81a7f::main, &namespace_fba81a7f::start, "Infiltrate Apartment", &namespace_fba81a7f::function_f62cf54d, ["courtyard", "electronics", "apartment_street", "apartment"]);
+  skipto::add_saved("apt_1", &namespace_e6b6aea1::function_b3837ddc, &namespace_e6b6aea1::function_9de162de, "Apartment Entry", &namespace_e6b6aea1::function_69c02b2b, ["courtyard", "electronics", "apartment_street", "apartment"]);
+  skipto::add_saved("apt_2", &namespace_e6b6aea1::function_34ee80b8, &namespace_e6b6aea1::start_2, "Plant Tracking Device", &namespace_e6b6aea1::function_a3c49bc0, ["courtyard", "electronics", "apartment_street", "apartment"]);
+  skipto::add_saved("warehouse_intro", &namespace_f8073734::intro_main, &namespace_f8073734::intro_start, "Warehouse Intro", &namespace_f8073734::intro_catchup, "warehouse");
+  skipto::add_saved("warehouse", &namespace_f8073734::main, &namespace_f8073734::start, "Warehouse", undefined, "warehouse");
+  skipto::add_saved("warehouse_outro", &namespace_f8073734::outro_main, &namespace_f8073734::outro_start, "Warehouse Outro", undefined, "warehouse");
 }
 
 function init_flags() {
@@ -126,10 +126,10 @@ function init_callbacks() {
 
 function on_player_connect() {
   if(isDefined(level.skipto_current_objective) && array::contains(level.skipto_current_objective, "train") || level.skipto_current_objective.size == 0) {
-    util::function_f3cadc9a("cp_ger_stakeout_train_ready");
+    util::set_player_start_flag("cp_ger_stakeout_train_ready");
 
-    if(isDefined(level.var_d7d201ba) && !self flag::exists(level.var_d7d201ba)) {
-      self flag::init(level.var_d7d201ba);
+    if(isDefined(level.str_player_start_flag) && !self flag::exists(level.str_player_start_flag)) {
+      self flag::init(level.str_player_start_flag);
     }
   }
 }
@@ -216,12 +216,12 @@ function function_356633ac() {
 
 function objective_init() {
   level flag::wait_till("game_start");
-  level thread function_c5a5ed9a();
+  level thread obj_start();
   function_94602e66();
   function_68d3f62d();
 }
 
-function function_c5a5ed9a() {
+function obj_start() {
   if(!level flag::get("identify_kraus_done")) {
     level flag::wait_till("train_adler_ready");
 

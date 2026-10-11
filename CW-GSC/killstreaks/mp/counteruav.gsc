@@ -331,7 +331,7 @@ function spawncounteruav(owner, killstreak_id, bundle, killstreaktype) {
   cuav.weapon = getweapon("counteruav");
   cuav setweapon(cuav.weapon);
   cuav.victimsoundmod = "vehicle";
-  cuav function_619a5c20();
+  cuav pingable();
   cuav setforcenocull();
   killstreak_detect::killstreaktargetset(cuav);
   cuav thread heatseekingmissile::missiletarget_proximitydetonateincomingmissile(bundle, "crashing", undefined, 1);

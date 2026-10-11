@@ -30,16 +30,16 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_7f5aeb59;
+#namespace doa_player_utility;
 
-function function_f3143608(localclientnum) {
+function playercreate(localclientnum) {
   self endon(#"disconnect");
   self.doa = spawnStruct();
   self.topdowncamera = 1;
   self.doa.cameramode = 1;
   self.doa.var_71122e79 = 0;
   self.doa.var_903d75b1 = undefined;
-  self namespace_ac2a80f5::function_278f20a3((75, 0, 0), namespace_ac2a80f5::function_ccf8a968(self.doa.cameramode));
+  self doa_camera::function_278f20a3((75, 0, 0), doa_camera::function_ccf8a968(self.doa.cameramode));
   self.doa.hintmask = 0;
   self.skits = undefined;
   self.doa.infps = 0;
@@ -52,7 +52,7 @@ function function_f3143608(localclientnum) {
   }
 
   namespace_6e90e490::function_9c238883(self getentitynumber(), self getlocalclientnumber(), 0);
-  self camerasetupdatecallback(&namespace_ac2a80f5::function_14f1aa2b);
+  self camerasetupdatecallback(&doa_camera::function_14f1aa2b);
   self function_4d692cc4(localclientnum, self.var_88a2ff29);
   self.fxorigin = namespace_ec06fe4a::spawnmodel(localclientnum, self.origin, undefined, undefined, "playerfxOrigin");
 
@@ -95,8 +95,8 @@ function function_f3143608(localclientnum) {
   }
 
   name = "player_trail_" + function_7b9bc9ff(self.entnum);
-  self thread namespace_83eb6304::function_e76f738(localclientnum, name, "tag_origin", 1);
-  self thread namespace_ac2a80f5::function_57ce3201(localclientnum);
+  self thread doa_fx::function_e76f738(localclientnum, name, "tag_origin", 1);
+  self thread doa_camera::function_57ce3201(localclientnum);
 
   if(islocalplayer(self) && is_true(level.doa.var_318aa67a)) {
     doa_player::function_f32984d0(localclientnum, 0, 1);
@@ -114,7 +114,7 @@ function function_ce6420c(localclientnum) {
     return;
   }
 
-  var_f3e30707 = 0.25;
+  tickrate = 0.25;
 
   if(!isDefined(self.doa.var_4aa817ed)) {
     self.doa.var_4aa817ed = (0, 0, 0);
@@ -126,7 +126,7 @@ function function_ce6420c(localclientnum) {
   latch = 1;
 
   while(true) {
-    wait var_f3e30707;
+    wait tickrate;
 
     if(!isDefined(self)) {
       return;
@@ -140,7 +140,7 @@ function function_ce6420c(localclientnum) {
       var_9756b1d4 = abs(yaw - lastyaw);
 
       if(var_9756b1d4 <= 1) {
-        var_183aaf3c += var_f3e30707;
+        var_183aaf3c += tickrate;
       } else {
         var_183aaf3c = 0;
         self serverfield::set("rstick_input_inc", 0);
@@ -168,7 +168,7 @@ function function_4fa1ee4f(localclientnum) {
     return;
   }
 
-  var_f3e30707 = 0.25;
+  tickrate = 0.25;
 
   if(!isDefined(self.doa.var_c8b6bcb0)) {
     self.doa.var_c8b6bcb0 = (0, 0, 0);
@@ -180,7 +180,7 @@ function function_4fa1ee4f(localclientnum) {
   latch = 1;
 
   while(true) {
-    wait var_f3e30707;
+    wait tickrate;
 
     if(!isDefined(self)) {
       return;
@@ -194,7 +194,7 @@ function function_4fa1ee4f(localclientnum) {
       var_9756b1d4 = abs(yaw - lastyaw);
 
       if(var_9756b1d4 <= 1) {
-        var_183aaf3c += var_f3e30707;
+        var_183aaf3c += tickrate;
       } else {
         var_183aaf3c = 0;
         self serverfield::set("lstick_input_inc", 0);

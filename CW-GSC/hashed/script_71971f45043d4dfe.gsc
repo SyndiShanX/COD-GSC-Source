@@ -79,7 +79,7 @@ function function_a485d734() {
   self.var_f979e699 = isDefined(self.subarchetype) ? 200 : 500;
   self.no_gib = 1;
   self.var_4dcf6637 = 1;
-  self.var_e66cd6fb = 1;
+  self.no_ragdoll = 1;
   self.zombie_move_speed = "walk";
   self.var_216935f8 = 1;
   self.var_c7121c91 = 1;
@@ -203,7 +203,7 @@ function function_aab3a5fc(inflictor, attacker, damage, dflags, mod, weapon, var
   }
 
   self.lastattacker = boneindex;
-  self.var_d429b0ce = offsettime;
+  self.lastinflictor = offsettime;
   return modelindex;
 }
 
@@ -211,7 +211,7 @@ function private get_enemy() {
   return isDefined(self.favoriteenemy) ? self.favoriteenemy : self.enemy;
 }
 
-function private function_b860fc37(enemy) {
+function private is_enemy_valid(enemy) {
   if(isPlayer(enemy)) {
     return (isalive(enemy) && !enemy inlaststand());
   }
@@ -332,7 +332,7 @@ function private function_3aa93442(entity) {
     }
 
     if(namespace_ec06fe4a::function_a8975c67(32)) {
-      if(function_b860fc37(enemy)) {
+      if(is_enemy_valid(enemy)) {
         target_origin = enemy.origin + (0, 0, 8);
         velocity = enemy getvelocity();
         target_origin += velocity;
@@ -343,8 +343,8 @@ function private function_3aa93442(entity) {
           org thread function_f7d9bc34();
         }
 
-        var_21e2ce99 = entity gettagorigin("J_EyeBall_RI");
-        magicbullet(weapon, var_21e2ce99, target_origin, entity);
+        source_origin = entity gettagorigin("J_EyeBall_RI");
+        magicbullet(weapon, source_origin, target_origin, entity);
       }
     }
 
@@ -358,11 +358,11 @@ function private function_3aa93442(entity) {
 
 function function_f7d9bc34() {
   self endon(#"disconnect");
-  self namespace_83eb6304::function_3ecfde67("incoming_impact");
+  self doa_fx::function_3ecfde67("incoming_impact");
   wait 1.2;
 
   if(isDefined(self)) {
-    self namespace_83eb6304::turnofffx("incoming_impact");
+    self doa_fx::turnofffx("incoming_impact");
   }
 }
 
@@ -499,7 +499,7 @@ function private function_7ff0ce68(inflictor, attacker, damage, flags, meansofde
 function private function_bf8080c1(entity) {
   enemy = entity get_enemy();
 
-  if(!function_b860fc37(enemy)) {
+  if(!is_enemy_valid(enemy)) {
     return false;
   }
 
@@ -516,8 +516,8 @@ function private function_bf8080c1(entity) {
   target_pos = var_6e3ad56b + (0, 0, 32);
   angles = vectortoangles(target_pos - entity.origin);
   dir = anglesToForward(angles);
-  var_8598bad6 = entity gettagorigin("tag_bombthrower_FX");
-  dist = distance(var_8598bad6, target_pos);
+  launch_pos = entity gettagorigin("tag_bombthrower_FX");
+  dist = distance(launch_pos, target_pos);
   velocity = vectorscale(dir, dist);
   velocity += (0, 0, 120);
 
@@ -526,7 +526,7 @@ function private function_bf8080c1(entity) {
     entity.org thread function_f7d9bc34();
   }
 
-  grenade = entity magicgrenadetype(getweapon(#"hash_7e3de6b5b2134623"), var_8598bad6, velocity);
+  grenade = entity magicgrenadetype(getweapon(#"hash_7e3de6b5b2134623"), launch_pos, velocity);
 
   if(isDefined(grenade)) {
     grenade.owner = entity;
@@ -616,7 +616,7 @@ function private function_fac064dc() {
   owner = self.owner;
 
   while(gettime() < var_6f13bbe0) {
-    self namespace_83eb6304::function_3ecfde67("electrical_explo");
+    self doa_fx::function_3ecfde67("electrical_explo");
     players = function_a1ef346b(undefined, origin, 36);
 
     foreach(player in players) {
@@ -687,13 +687,13 @@ function private function_ac56fb75() {
   self thread function_eafb4701(level.doa.var_c1781ccb, self.origin, health, var_488052a8, self.enemy);
   self thread function_eafb4701(level.doa.var_e6cf829d, self.origin, health, var_53d254e5, self.enemy);
   self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_steiner_split_explode");
-  self namespace_83eb6304::function_3ecfde67("zombie_generator_die");
-  self namespace_83eb6304::function_3ecfde67("nova_crawler_burst");
+  self doa_fx::function_3ecfde67("zombie_generator_die");
+  self doa_fx::function_3ecfde67("nova_crawler_burst");
   self namespace_ec06fe4a::function_8c808737();
   attacker = self.lastattacker;
 
-  if(isDefined(self.var_d429b0ce) && isDefined(self.var_d429b0ce.owner)) {
-    attacker = self.var_d429b0ce.owner;
+  if(isDefined(self.lastinflictor) && isDefined(self.lastinflictor.owner)) {
+    attacker = self.lastinflictor.owner;
   }
 
   self thread namespace_ec06fe4a::function_570729f0(0.4, attacker);

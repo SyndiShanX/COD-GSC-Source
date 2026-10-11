@@ -14,9 +14,9 @@
 function event_handler[level_init] main(eventstruct) {
   if(level.var_87c6c648 !== 1) {
     function_11e3e877(#"surface_enter", #"hash_7c6e0aa9d993a347");
-    function_11e3e877(#"hash_6be5853fe57d01b0", #"hash_318b453a5ae107ff");
-    function_11e3e877(#"hash_6251d9bc015e4542", #"hash_222183eb5b944f3f");
-    function_11e3e877(#"hash_6a2ccf46147cb7d8", #"hash_1a91f7e44ea66fa7");
+    function_11e3e877(#"surface_enter_bullet_xlarge", #"hash_318b453a5ae107ff");
+    function_11e3e877(#"surface_enter_bullet_small", #"hash_222183eb5b944f3f");
+    function_11e3e877(#"surface_enter_bullet_xsmall", #"hash_1a91f7e44ea66fa7");
   }
 
   setsaveddvar(#"enable_global_wind", 1);

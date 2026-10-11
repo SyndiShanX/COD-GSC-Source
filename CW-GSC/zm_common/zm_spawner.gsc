@@ -215,7 +215,7 @@ function zombie_spawn_init() {
   self zm_utility::disable_react();
   self.freezegun_damage = 0;
 
-  if(!is_true(self.ai.var_870d0893)) {
+  if(!is_true(self.ai.rex_mp_swamp_concrete_debris)) {
     self setavoidancemask("avoid none");
   }
 
@@ -1337,20 +1337,20 @@ function zombie_death_event(zombie) {
     }
 
     if(zombie.zm_ai_category === #"elite") {
-      var_a8dede81 = 1;
+      elite_killed = 1;
 
       if(isarray(zombie.var_e293f8ac)) {
         function_1eaaceab(zombie.var_e293f8ac);
-        var_a8dede81 = zombie.var_e293f8ac.size == 0;
+        elite_killed = zombie.var_e293f8ac.size == 0;
       }
 
-      if(is_true(var_a8dede81)) {
+      if(is_true(elite_killed)) {
         attacker zm_stats::increment_client_stat(#"kills_elite");
         attacker zm_stats::function_7bc347f6(#"kills_elite");
         attacker zm_stats::function_f1a1191d(#"kills_elite");
 
         if(isDefined(zombie.damageweapon)) {
-          attacker stats::function_e24eec31(zombie.damageweapon, #"hash_45814ac55657fc62", 1);
+          attacker stats::function_e24eec31(zombie.damageweapon, #"elite_kills", 1);
         }
       }
     }
@@ -1383,7 +1383,7 @@ function zombie_death_event(zombie) {
       attacker thread activecamo::function_896ac347(zombie.damageweapon, #"kills", 1);
       attacker zm_camos::function_7b29c2d2(zombie.damageweapon);
       attacker zm_stats::function_ef7d5199(zombie, zombie.damageweapon);
-      level thread telemetry::function_18135b72(#"hash_b88b6d2e0028e13", {
+      level thread telemetry::function_18135b72(#"callback_update_weapon_stats", {
         #player: attacker, #weapon: zombie.damageweapon, #statname: #"kills", #value: 1
       });
 
@@ -2168,7 +2168,7 @@ function function_814fc0d0(spot) {
   self function_45bb11e4(spot, 0);
 }
 
-function function_45bb11e4(spot, var_d3a04fcc = 1) {
+function function_45bb11e4(spot, is_in_playable_area = 1) {
   self endoncallback(&function_fe3cb19a, #"death");
   self.var_5535a47d = 1;
   self function_fe3cb19a();
@@ -2215,7 +2215,7 @@ function function_45bb11e4(spot, var_d3a04fcc = 1) {
   self thread function_2d97cae1();
   self notify(#"risen", spot.script_string);
 
-  if(is_true(var_d3a04fcc)) {
+  if(is_true(is_in_playable_area)) {
     self zombie_complete_emerging_into_playable_area();
     return;
   }

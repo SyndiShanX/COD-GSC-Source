@@ -57,10 +57,10 @@ function main(str_objective, b_starting) {
   level thread cp_nam_prisoner::function_1f911b89(next_obj);
   flag = "sniper_overlook";
   level flag::wait_till(flag + "_complete");
-  level skipto::function_4e3ab877(b_starting, 0);
+  level skipto::objective_completed(b_starting, 0);
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   wait 1;
   vehicle_plane_group1 = getEntArray("vehicle_plane_group1", "targetname");
   arrayremovevalue(vehicle_plane_group1, undefined);
@@ -132,7 +132,7 @@ function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   clip thread namespace_d9b153b9::ent_cleanup();
 }
 
-function function_c26b0bc0() {
+function flags_init() {
   level flag::init("flag_sniper_player_shot");
   level flag::init("sniper_overlook_complete");
   level flag::init("sniper_overlook_exited");
@@ -163,12 +163,12 @@ function sniper_overlook() {
   level thread savegame::checkpoint_save();
   var_2cf9fe23 = level.var_731c10af.var_42659717 + 1;
   str = "visit_" + var_2cf9fe23 + "_" + var_c79d614f;
-  bb::function_cd497743(str, level.player);
+  bb::logplayermapnotification(str, level.player);
   level thread function_58fc3ddf();
   level flag::set("flag_sniper_overlook_weapon");
 
   while(true) {
-    level thread namespace_d9b153b9::function_a57f6629(var_c79d614f);
+    level thread namespace_d9b153b9::notify_on_flag(var_c79d614f);
     level function_f92f5a29(var_c79d614f);
 
     if(level flag::get(var_c79d614f + "_complete")) {
@@ -588,7 +588,7 @@ function function_1ec20cd2() {
   }
 }
 
-function function_f4f616bb(str_objective) {
+function start_napalm(str_objective) {
   level flag::set("flag_sniper_napalm");
   level thread function_f46355f3();
 }
@@ -598,7 +598,7 @@ function function_5f076197(str_objective, b_starting) {
   sniper_napalm();
 }
 
-function function_f3b9155f(str_objective, b_starting, var_aa1a6455, player) {}
+function function_f3b9155f(str_objective, b_starting, b_direct, player) {}
 
 function sniper_napalm() {
   level endon(#"visit_restart");
@@ -1143,8 +1143,8 @@ function function_9a15793(var_9854cbf7) {
 
   foreach(sb in level.smart_bundle.var_84410238) {
     if(isDefined(sb.linkto) && isDefined(var_9854cbf7) && sb.linkto == var_9854cbf7) {
-      if(isDefined(sb.var_454745b9)) {
-        foreach(ent in sb.var_454745b9) {
+      if(isDefined(sb.smart_models_spawned)) {
+        foreach(ent in sb.smart_models_spawned) {
           if(isDefined(ent.model)) {
             ent setnosunshadow();
           }

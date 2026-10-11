@@ -17,8 +17,8 @@
 
 function event_handler[level_preinit] function_b489bb7b(eventstruct) {
   snd::function_d4ec748e(&function_f2a2832d);
-  snd::function_ce78b33b(&function_32ab045);
-  snd::function_5e69f468(&_objective);
+  snd::function_ce78b33b(&_targetname);
+  snd::skipto_init(&_objective);
   snd::trigger_init(&_trigger);
 }
 
@@ -28,7 +28,7 @@ function event_handler[event_cc819519] function_686b88aa(eventstruct) {
   audio::function_21f8b7c3();
 }
 
-function private function_32ab045(ent, name) {
+function private _targetname(ent, name) {
   switch (name) {
     case #"woods":
       level.woods = ent;
@@ -58,7 +58,7 @@ function private _trigger(player, trigger, var_ec80d14b) {
     case #"hash_2f729a7b8a49915c":
     case #"hash_349b30c47da883f7":
       break;
-    case #"hash_d51c18e8de6b968":
+    case #"motel_room":
     case #"hash_de86bed30711149":
     case #"hash_31e3a6f7cf5f48ed":
     case #"hash_58c23e8563e35e75":
@@ -73,9 +73,9 @@ function private _trigger(player, trigger, var_ec80d14b) {
 
 function private function_f2a2832d(player, msg) {
   switch (msg) {
-    case #"hash_37a62ab7a23cfc44":
+    case #"heli_intro_music":
       break;
-    case #"hash_515c6d481df889cb":
+    case #"heli_door_open":
       forceambientroom("chopper_interior_open");
       thread function_eb8c6b8e();
       break;
@@ -113,7 +113,7 @@ function private _objective(objective) {
       thread function_86127769();
       break;
     case #"tkdn_heli_convoy_aslt":
-      function_ed62c9c2("cp_sm_tkdn_heli_interior", 1);
+      clearsubmix("cp_sm_tkdn_heli_interior", 1);
       thread function_cae705ff();
       break;
     case #"tkdn_heli_trailer_park":
@@ -145,7 +145,7 @@ function function_327abcaf() {
   }
 
   level.var_a364c876 = 1;
-  function_5ea2c6e3("cp_sm_tkdn_intro_black", 0, 1);
+  addsubmix("cp_sm_tkdn_intro_black", 0, 1);
 }
 
 function function_86127769() {
@@ -154,10 +154,10 @@ function function_86127769() {
   }
 
   level.var_b422391c = 1;
-  function_5ea2c6e3("cp_sm_tkdn_intro_black", 0, 1);
+  addsubmix("cp_sm_tkdn_intro_black", 0, 1);
   wait 9;
-  function_ed62c9c2("cp_sm_tkdn_intro_black", 4);
-  function_5ea2c6e3("cp_sm_tkdn_heli_interior", 4, 1);
+  clearsubmix("cp_sm_tkdn_intro_black", 4);
+  addsubmix("cp_sm_tkdn_heli_interior", 4, 1);
 }
 
 function function_eb8c6b8e() {
@@ -166,11 +166,11 @@ function function_eb8c6b8e() {
   }
 
   level.var_75676a02 = 1;
-  function_5ea2c6e3("cp_sm_tkdn_heli_int_mus_down", 0.1, 1);
+  addsubmix("cp_sm_tkdn_heli_int_mus_down", 0.1, 1);
   wait 6;
-  function_ed62c9c2("cp_sm_tkdn_heli_int_mus_down", 2);
+  clearsubmix("cp_sm_tkdn_heli_int_mus_down", 2);
   wait 20;
-  function_ed62c9c2("cp_sm_tkdn_heli_interior", 6.5);
+  clearsubmix("cp_sm_tkdn_heli_interior", 6.5);
 }
 
 function function_cae705ff() {
@@ -179,7 +179,7 @@ function function_cae705ff() {
   }
 
   level.var_eabcd160 = 1;
-  function_5ea2c6e3("cp_sm_tkdn_combat", 1, 1);
+  addsubmix("cp_sm_tkdn_combat", 1, 1);
 }
 
 function function_85ebb65() {
@@ -188,16 +188,16 @@ function function_85ebb65() {
   }
 
   level.var_948dd971 = 1;
-  function_ed62c9c2("cp_sm_tkdn_combat", 1);
+  clearsubmix("cp_sm_tkdn_combat", 1);
 }
 
 function function_1477a4b9() {
   wait 1;
-  function_ed62c9c2("cp_sm_tkdn_combat", 1);
+  clearsubmix("cp_sm_tkdn_combat", 1);
   snd::play("evt_evac_chopper_cockpit_lp", 1);
   snd::play("veh_evac_chopper_jetwhine_lp", 1);
   snd::play("veh_evac_chopper_fake_dist_lp", 1);
-  function_5ea2c6e3("cp_sm_tkdn_evac_chopper", 1, 1);
+  addsubmix("cp_sm_tkdn_evac_chopper", 1, 1);
   snd::play("evt_evac_chopper_board");
 }
 
@@ -208,6 +208,6 @@ function function_f9003ea1() {
 
   level.var_3565723c = 1;
   wait 5;
-  function_ed62c9c2("cp_sm_tkdn_evac_chopper", 3.5);
-  function_5ea2c6e3("cp_sm_tkdn_outro_fadeout", 3.5, 1);
+  clearsubmix("cp_sm_tkdn_evac_chopper", 3.5);
+  addsubmix("cp_sm_tkdn_outro_fadeout", 3.5, 1);
 }

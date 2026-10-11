@@ -19,9 +19,9 @@
 
 function event_handler[level_preinit] function_b489bb7b(eventstruct) {
   snd::function_d4ec748e(&function_f2a2832d);
-  snd::function_ce78b33b(&function_32ab045);
+  snd::function_ce78b33b(&_targetname);
   snd::trigger_init(&_trigger);
-  snd::function_5e69f468(&_objective);
+  snd::skipto_init(&_objective);
 }
 
 function event_handler[event_cc819519] function_686b88aa(eventstruct) {
@@ -30,7 +30,7 @@ function event_handler[event_cc819519] function_686b88aa(eventstruct) {
   level thread snipercam();
 }
 
-function private function_32ab045(ent, name) {
+function private _targetname(ent, name) {
   switch (name) {
     case #"park":
       ent setsoundentcontext("npc_gender", "female");
@@ -66,14 +66,14 @@ function private _trigger(player, trigger, var_ec80d14b) {
 
 function private function_f2a2832d(player, msg) {
   switch (msg) {
-    case #"hash_770e0c1bde319120":
+    case #"compromised_init":
       level thread function_cd797f90();
       break;
-    case #"hash_5cc6be68301e650c":
-      level notify(#"hash_5cc6be68301e650c");
+    case #"compromised_fade":
+      level notify(#"compromised_fade");
       break;
     case #"hash_37663b49458855e1":
-      thread function_fe5617ab();
+      thread ambush_scene_start();
       break;
     case #"start_combat":
       thread function_cae705ff();
@@ -82,11 +82,11 @@ function private function_f2a2832d(player, msg) {
       level notify(#"hash_7ffd70d5d215f896");
       break;
     case #"hash_14488fae2db8c286":
-      function_5ea2c6e3("cp_duga_fadeout_adler_mus", 15);
+      addsubmix("cp_duga_fadeout_adler_mus", 15);
       break;
     case #"ending_fade_out":
       wait 0.5;
-      function_5ea2c6e3("cp_mute_amb", 4.5);
+      addsubmix("cp_mute_amb", 4.5);
       break;
     case #"musictrack_cp_duga_1":
     case #"musictrack_cp_duga_2":
@@ -160,9 +160,9 @@ function function_cd797f90() {
   var_7de9bf5e = snd::play("evt_cp_duga_intro_transmission_lp");
   snd::set_volume(var_7de9bf5e, 0);
   snd::set_volume(var_7de9bf5e, 1, 9, "linear");
-  function_5ea2c6e3("cp_mute_amb", 0);
-  level waittill(#"hash_5cc6be68301e650c");
-  function_ed62c9c2("cp_mute_amb", 5);
+  addsubmix("cp_mute_amb", 0);
+  level waittill(#"compromised_fade");
+  clearsubmix("cp_mute_amb", 5);
   snd::set_volume(var_7de9bf5e, 0, 15, "linear");
   wait 15;
   snd::stop(var_7de9bf5e);
@@ -172,21 +172,21 @@ function function_cd797f90() {
 function execution() {
   player = self;
   snd::play("uin_duga_player_death", player);
-  function_5ea2c6e3("cp_duga_death_plr", 0, 1);
+  addsubmix("cp_duga_death_plr", 0, 1);
   wait 4;
-  function_5ea2c6e3("cp_mute_amb", 3);
+  addsubmix("cp_mute_amb", 3);
   wait 3;
   wait 6;
-  function_ed62c9c2("cp_duga_death_plr", 3);
+  clearsubmix("cp_duga_death_plr", 3);
   soundsetmusicstate("");
 }
 
-function function_fe5617ab() {
-  if(is_true(level.var_fe5617ab)) {
+function ambush_scene_start() {
+  if(is_true(level.ambush_scene_start)) {
     return;
   }
 
-  level.var_fe5617ab = 1;
+  level.ambush_scene_start = 1;
   thread function_8a8739a();
   wait 0.78;
   snd::play("evt_ambush_trap_walla");
@@ -213,9 +213,9 @@ function function_8a8739a() {
   }
 
   level.var_8a8739a = 1;
-  function_5ea2c6e3("cp_rus_duga_ambush", 2.9, 1);
+  addsubmix("cp_rus_duga_ambush", 2.9, 1);
   level waittill(#"hash_5c0a0ad096590213");
-  function_ed62c9c2("cp_rus_duga_ambush", 0.65);
+  clearsubmix("cp_rus_duga_ambush", 0.65);
 }
 
 function function_d77090b3() {
@@ -224,9 +224,9 @@ function function_d77090b3() {
   }
 
   level.var_d77090b3 = 1;
-  function_5ea2c6e3("cp_rus_duga_ambush_wakeup", 0.2, 1);
+  addsubmix("cp_rus_duga_ambush_wakeup", 0.2, 1);
   wait 7;
-  function_ed62c9c2("cp_rus_duga_ambush_wakeup", 6);
+  clearsubmix("cp_rus_duga_ambush_wakeup", 6);
 }
 
 function function_cae705ff() {
@@ -235,7 +235,7 @@ function function_cae705ff() {
   }
 
   level.var_cae705ff = 1;
-  function_5ea2c6e3("cp_rus_duga_combat", 1, 1);
+  addsubmix("cp_rus_duga_combat", 1, 1);
 }
 
 function function_85ebb65() {
@@ -244,5 +244,5 @@ function function_85ebb65() {
   }
 
   level.var_85ebb65 = 1;
-  function_ed62c9c2("cp_rus_duga_combat", 1);
+  clearsubmix("cp_rus_duga_combat", 1);
 }

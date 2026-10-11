@@ -43,7 +43,7 @@ function init() {
 }
 
 function function_f69dda63() {
-  namespace_268747c0::function_96e2f261(level.doa.var_f5a14209, 1);
+  doa_hazard::function_96e2f261(level.doa.var_f5a14209, 1);
 }
 
 function function_ddb3fb8f() {

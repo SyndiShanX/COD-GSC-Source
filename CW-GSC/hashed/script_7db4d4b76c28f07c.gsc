@@ -78,10 +78,10 @@ function intro_main(str_skipto, b_starting) {
   level thread function_71b65ddf();
   level thread function_8e7c787a();
   exploder::exploder("radio_tower_lights");
-  level.player util::function_749362d7(1);
+  level.player util::set_low_ready(1);
   wait 7;
   var_4b971330 = skipto::function_99ddd76d();
-  level thread globallogic_ui::function_7bc0e4b9(1, var_4b971330);
+  level thread globallogic_ui::do_chyron_text(1, var_4b971330);
   snd::client_msg(#"hash_1b35e000cf122d8e");
   level flag::wait_till_clear(#"chyron_active");
   level flag::wait_till("over_black_vo_done");
@@ -93,10 +93,10 @@ function intro_main(str_skipto, b_starting) {
   player val::reset(#"temp_intro", "allowdeath");
   player val::reset(#"temp_intro", "hide");
   level flag::wait_till("missile_strike_landed");
-  level.player util::function_749362d7(0);
+  level.player util::set_low_ready(0);
   savegame::checkpoint_save();
   level flag::wait_till("tundra_intro_done");
-  skipto::function_4e3ab877("tundra_intro");
+  skipto::objective_completed("tundra_intro");
 }
 
 function init_flags() {}
@@ -197,8 +197,8 @@ function function_1b25bb39() {
 function function_2fb462dd() {
   level flag::wait_till("over_black_vo_done");
   level flag::wait_till("tundra_intro_obj_tower");
-  var_fda2e7e6 = getEnt("tundra_intro_tower", "targetname");
-  objectives::function_4eb5c04a("missile_obj", var_fda2e7e6.origin + (0, 0, 6300), undefined, 1, 1);
+  e_tower = getEnt("tundra_intro_tower", "targetname");
+  objectives::function_4eb5c04a("missile_obj", e_tower.origin + (0, 0, 6300), undefined, 1, 1);
   level flag::wait_till("missile_strike_landed");
   objectives::complete("missile_obj");
   level thread namespace_ba979a10::function_cb6a2e9b();
@@ -216,7 +216,7 @@ function function_8e7c787a() {
 
 function function_78b6b123() {
   level flag::wait_till("flag_spawn_ambient_trucks");
-  var_86827bb9 = spawner::simple_spawn("tundra_intro_patrol_enemies", &function_d158ddb4);
+  intro_enemies = spawner::simple_spawn("tundra_intro_patrol_enemies", &function_d158ddb4);
   var_ff6f8c02 = spawner::simple_spawn("tundra_intro_walk_enemies", &function_a9d32145);
 }
 
@@ -259,7 +259,7 @@ function function_d158ddb4() {
   self thread animation::enable_headlook_notorso(1);
   level flag::wait_till("missile_strike_landed");
   self ai::set_behavior_attribute("demeanor", "combat");
-  self lookatpos(level.var_8ef0b331);
+  self lookatpos(level.radio_tower_lookat);
   wait 2;
 
   if(isDefined(self) && self.script_noteworthy == "radar_reaction_enemy") {
@@ -319,20 +319,20 @@ function function_6423e5e1() {
   e_missile setscale(0.1);
   level flag::wait_till("launch_binoc_attack");
   wait 5.5;
-  var_fda2e7e6 = getEnt("tundra_intro_tower", "targetname");
+  e_tower = getEnt("tundra_intro_tower", "targetname");
   e_missile thread function_766b93f();
   level thread function_5453503d();
   level flag::wait_till("missile_strike_landed");
   exploder::exploder("fx_exp_vista_tower");
   wait 0.2;
   exploder::kill_exploder("radio_tower_lights");
-  level.player playRumbleOnEntity(#"hash_4250c3326e0f75e3");
+  level.player playRumbleOnEntity(#"infiltration_heli_rumble");
   wait 1;
-  var_fda2e7e6 delete();
+  e_tower delete();
 }
 
 function function_766b93f() {
-  var_fda2e7e6 = getEnt("tundra_intro_tower", "targetname");
+  e_tower = getEnt("tundra_intro_tower", "targetname");
   var_15164fa0 = getEnt("missile_strike_mid_flight", "targetname");
   self thread function_3011ebae();
   self moveTo(var_15164fa0.origin, 8);
@@ -340,7 +340,7 @@ function function_766b93f() {
   wait 4;
   level notify(#"hash_227caa557c6d6e99");
   playFXOnTag("maps/cp_side_tundra/fx9_missile_trail", self, "tag_fx");
-  self moveTo(var_fda2e7e6.origin, 4, 2);
+  self moveTo(e_tower.origin, 4, 2);
   wait 4;
   level flag::set("missile_strike_landed");
   level notify(#"hash_75e302a823ba736d");
@@ -362,13 +362,13 @@ function function_3011ebae() {
 }
 
 function function_5453503d() {
-  level.var_8ef0b331 = getEnt("turndra_radio_tower_lookat", "targetname");
+  level.radio_tower_lookat = getEnt("turndra_radio_tower_lookat", "targetname");
 }
 
 function function_a174d491() {
   level.player thread function_1dc9305a();
   level.player thread function_f469a600();
-  level thread namespace_ba979a10::function_d6af6077();
+  level thread namespace_ba979a10::player_kill_trigger();
   level flag::wait_till("player_is_rappelling");
   level flag::set("tundra_intro_done");
 }
@@ -396,9 +396,9 @@ function function_1dc9305a() {
   level thread scene::play("scene_sm_tundra_rappel_player", "rope_loop");
   level flag::wait_till("missile_strike_landed");
   level thread function_addf1082(420);
-  var_cb14744d = getEnt("intro_player_rappel", "targetname");
-  var_cb14744d util::create_cursor_hint("tag_origin", (0, 0, 5), #"hash_6c7bb285599937ba", 100, undefined, undefined, undefined, undefined, undefined, 0, 0);
-  var_cb14744d waittill(#"trigger");
+  obj_tag = getEnt("intro_player_rappel", "targetname");
+  obj_tag util::create_cursor_hint("tag_origin", (0, 0, 5), #"hash_6c7bb285599937ba", 100, undefined, undefined, undefined, undefined, undefined, 0, 0);
+  obj_tag waittill(#"trigger");
   level flag::set("player_is_rappelling");
   scene::stop("scene_sm_tundra_rappel");
   level.player setstance("stand");
@@ -445,7 +445,7 @@ function function_e22580b2() {
 function function_addf1082(time) {
   level endon(#"player_is_rappelling");
   wait time;
-  util::function_2a8f4806(#"hash_67c0d8cb1c978161", #"hash_4bac1239d9e0e0bd");
+  util::missionfailedwrapper_nodeath(#"hash_67c0d8cb1c978161", #"hash_4bac1239d9e0e0bd");
 }
 
 function function_58f45d60() {
@@ -454,13 +454,13 @@ function function_58f45d60() {
   player notifyonplayercommand("ability_activated_binocular", "+actionslot 4");
   level thread function_d156bb26();
   level thread function_c21ddb3d();
-  player spy_camera::function_8606cd15();
+  player spy_camera::give_binoculars();
   level flag::wait_till_clear(#"chyron_active");
   level thread function_d280457b();
   level thread function_975f72af();
   level thread function_71dd9e76();
   level flag::wait_till_all(array("launch_binoc_attack", "flag_player_end_binocular_ads"));
-  player spy_camera::function_d9015b8c();
+  player spy_camera::remove_binoculars();
 }
 
 function function_71dd9e76() {
@@ -468,7 +468,7 @@ function function_71dd9e76() {
 
   if(!flag::get("flag_player_end_binocular_ads")) {
     level flag::wait_till("player_is_rappelling");
-    player spy_camera::function_d9015b8c();
+    player spy_camera::remove_binoculars();
   }
 }
 
@@ -534,8 +534,8 @@ function function_d156bb26() {
     level flag::clear("cancel_hint_binoc_use");
     player util::show_hint_text(#"hash_13bb297b79e5adfc", undefined, undefined, 8);
     player waittill(#"ability_activated_binocular");
-    level.player util::function_749362d7(0);
-    level.player playRumbleOnEntity(#"hash_27471bde81e12116");
+    level.player util::set_low_ready(0);
+    level.player playRumbleOnEntity(#"pullout_small");
     level flag::set("cancel_ability_wheel_select_binoc_hint");
     wait 0.5;
     player util::show_hint_text(#"hash_4a6d69ecadd8052b", undefined, undefined, 8);
@@ -543,7 +543,7 @@ function function_d156bb26() {
     level flag::set("cancel_binoc_up_hint");
 
     if(s_waitresult._notify == "ability_deactivated_camera") {
-      level.player util::function_749362d7(1);
+      level.player util::set_low_ready(1);
       wait 0.5;
       continue;
     }
@@ -554,13 +554,13 @@ function function_d156bb26() {
     level flag::set("cancel_hint_binoc_use");
 
     if(s_waitresult._notify == "ability_deactivated_camera") {
-      level.player util::function_749362d7(1);
+      level.player util::set_low_ready(1);
       wait 0.5;
       continue;
     }
 
     s_waitresult = player waittill(#"ability_deactivated_camera");
-    level.player util::function_749362d7(1);
+    level.player util::set_low_ready(1);
     wait 0.5;
     continue;
   }
@@ -575,7 +575,7 @@ function function_c21ddb3d() {
   player waittill(#"ability_deactivated_camera");
 
   if(!level flag::get("missile_strike_landed")) {
-    level.player util::function_749362d7(1);
+    level.player util::set_low_ready(1);
   }
 
   level flag::set("flag_player_end_binocular_ads");

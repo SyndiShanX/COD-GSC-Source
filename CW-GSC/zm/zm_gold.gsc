@@ -81,7 +81,7 @@ function autoexec opt_in() {
 }
 
 function event_handler[level_init] main(eventstruct) {
-  level.var_dfee7fc2 = #"hash_7c313a787b088ec3";
+  level.var_dfee7fc2 = #"cin_zm_gold_intro";
   zm::init_fx();
   namespace_f7b3ed9::init();
   zm_gold_pap_quest::init();
@@ -289,18 +289,18 @@ function function_d4738f46() {
             }
           }
 
-          var_29be4020 = getPlayers();
+          a_players_to_check = getPlayers();
 
           for(i = 0; i < 4; i++) {
             b_safe = 1;
             s_loc = var_2ed46675[i];
 
-            foreach(var_56901085 in var_29be4020) {
-              if(var_56901085 == player) {
+            foreach(player_to_check in a_players_to_check) {
+              if(player_to_check == player) {
                 continue;
               }
 
-              var_91d1913b = distancesquared(s_loc.origin, var_56901085.origin);
+              var_91d1913b = distancesquared(s_loc.origin, player_to_check.origin);
 
               if(var_91d1913b < 1024) {
                 b_safe = 0;
@@ -352,9 +352,9 @@ function on_player_spawned() {
   self thread function_fab8c902();
 }
 
-function function_596712a4(var_383fe4d6, var_d7ca0fe) {
+function function_596712a4(var_383fe4d6, zone_names) {
   foreach(zone in level.zones) {
-    if(array::contains(var_d7ca0fe, zone.name)) {
+    if(array::contains(zone_names, zone.name)) {
       zone.var_7a10fbea = var_383fe4d6;
     }
   }
@@ -834,7 +834,7 @@ function function_8937f221(a_str_zone_names) {
 
 function function_64ed78df() {
   self callback::function_d8abfc3d(#"hash_29cb63a7ebb5d699", &function_b7bf6e96);
-  self callback::function_d8abfc3d(#"hash_484127e0cbd8f8cb", &function_64515cbe);
+  self callback::function_d8abfc3d(#"on_entity_revealed", &function_64515cbe);
 }
 
 function function_b7bf6e96(prop) {
@@ -898,8 +898,8 @@ function setupmusic() {
   zm_audio::musicstate_create("ee_song", 4, "egg");
 }
 
-function setupminimap(material, var_da0dddd2) {
-  corners = territory::function_1f583d2e("minimap_corner", "targetname");
+function setupminimap(material, area_name) {
+  corners = territory::get_ent_array("minimap_corner", "targetname");
   var_db594db = [];
   var_8e0a6036 = [];
 
@@ -926,11 +926,11 @@ function setupminimap(material, var_da0dddd2) {
 
   assert(var_db594db.size == 2 && var_8e0a6036.size == 2, "<dev string:xd0>");
 
-  if(var_da0dddd2 == "firebase") {
+  if(area_name == "firebase") {
     self compass::function_d6cba2e9(material, var_db594db[0].origin[0], var_db594db[0].origin[1], var_db594db[1].origin[0], var_db594db[1].origin[1]);
   }
 
-  if(var_da0dddd2 == "village") {
+  if(area_name == "village") {
     self compass::function_d6cba2e9(material, var_8e0a6036[0].origin[0], var_8e0a6036[0].origin[1], var_8e0a6036[1].origin[0], var_8e0a6036[1].origin[1]);
   }
 }
@@ -1220,7 +1220,7 @@ function function_e3e3f619() {
 }
 
 function function_109d90d3() {
-  level scene::init(#"hash_12ffbe477b23e132");
+  level scene::init(#"p9_fxanim_zm_gold_drawer_flat_bundle");
 }
 
 function function_e0a4ccda() {

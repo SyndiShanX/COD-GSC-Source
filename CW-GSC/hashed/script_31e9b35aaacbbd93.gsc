@@ -19,7 +19,7 @@
 #namespace namespace_a052577e;
 
 function private event_handler[level_preinit] function_b489bb7b(eventstruct) {
-  snd::function_5e69f468(&_objective);
+  snd::skipto_init(&_objective);
   snd::wait_init();
 }
 
@@ -209,7 +209,7 @@ function function_60f59158() {}
 function function_6591463() {
   wait 1;
   var_b22ada74 = snd::play("emt_tkd_police_radio_squelch_in", (19695, 18941, 69));
-  var_e7139ba1 = snd::play("emt_tkd_police_radio_static_bg_lp", (19695, 18941, 69));
+  bg_loop = snd::play("emt_tkd_police_radio_static_bg_lp", (19695, 18941, 69));
   wait 0.25;
   var_334e9d8b = snd::play("vox_cp_tdwn_09100_dplb_attentionallams_59", (19695, 18941, 69));
   wait 3;
@@ -219,7 +219,7 @@ function function_6591463() {
   level thread flag::wait_till("flag_move_on_to_alley");
   snd::play("emt_tkd_police_radio_squelch_out", (19695, 18941, 69));
   snd::stop(var_b22ada74);
-  snd::stop(var_e7139ba1);
+  snd::stop(bg_loop);
   snd::stop(var_334e9d8b);
   snd::stop(var_7e253337);
   snd::stop(var_8fcbd684);
@@ -297,7 +297,7 @@ function function_a7024b3c() {}
 
 function function_e88f8edb() {
   wait 5;
-  music::function_edda155f("3.1_throw_stinger");
+  music::playstinger("3.1_throw_stinger");
 }
 
 function function_60c0a46b() {
@@ -325,7 +325,7 @@ function function_92a6fd6a(planes) {
 
 function function_a42cfb58() {
   snd::waitforplayers();
-  music::function_edda155f("b1.5_airfield_reveal");
+  music::playstinger("b1.5_airfield_reveal");
   snd::client_msg("plane_idle");
 }
 

@@ -24,7 +24,7 @@ function private function_6c73be30() {
   level.killstreakweapons[getweapon(#"gun_ultimate_turret")] = "ultimate_turret";
   level.killstreakweapons[getweapon(#"ultimate_turret")] = "ultimate_turret";
   level.killstreakweapons[getweapon(#"hash_38ffd09564931482")] = "recon_car";
-  level.killstreakweapons[getweapon(#"hash_1734871fef9c0549")] = "chopper_gunner";
+  level.killstreakweapons[getweapon(#"chopper_gunner_turret")] = "chopper_gunner";
   level.killstreakweapons[getweapon(#"chopper_gunner")] = "ultimate_turret";
   level.killstreakweapons[getweapon(#"killstreak_remote")] = "chopper_gunner";
   level.killstreakweapons[getweapon(#"hero_pineapplegun")] = "hero_pineapplegun";
@@ -44,8 +44,8 @@ function private function_6c73be30() {
   level.killstreakweapons[getweapon(#"inventory_recon_car")] = "inventory_recon_car";
   level.killstreakweapons[getweapon(#"inventory_hero_pineapplegun")] = "inventory_hero_pineapplegun";
   level.killstreakweapons[getweapon(#"hash_561b772c6e726ebd")] = "inventory_planemortar";
-  level.killstreakweapons[getweapon(#"hash_72c14c150086340c")] = "napalm_strike_zm";
-  level.killstreakweapons[getweapon(#"hash_78a35da92bd92644")] = "napalm_strike_zm";
+  level.killstreakweapons[getweapon(#"napalm_strike_fire")] = "napalm_strike_zm";
+  level.killstreakweapons[getweapon(#"napalm_strike_fire_water")] = "napalm_strike_zm";
   level.killstreakweapons[getweapon(#"sig_bow_flame")] = "sig_bow_flame";
   level.killstreakweapons[getweapon(#"hash_183ddeea72e71f27")] = "napalm_strike_zm";
   level.killstreakweapons[getweapon(#"inventory_sig_bow_flame")] = "inventory_sig_bow_flame";

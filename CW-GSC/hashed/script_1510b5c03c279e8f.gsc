@@ -73,7 +73,7 @@ function function_66da4f00() {
   self.showdelay = 0.2;
   self setgoal(self.origin, 0, 1);
   self force_get_enemies();
-  self.overridevehicledamage = &function_725d9b34;
+  self.overridevehicledamage = &spider_callback_damage;
   self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_spider_spawn");
   self thread vehicle_ai::nudge_collision();
 
@@ -91,19 +91,19 @@ function function_66da4f00() {
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").update_func = &function_ae36dd9f;
+  self vehicle_ai::get_state_callbacks("combat").update_func = &state_range_combat_update;
   self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
   self vehicle_ai::get_state_callbacks("driving").update_func = &state_driving_update;
-  self vehicle_ai::add_state("meleeCombat", undefined, &function_aebf9e0f, undefined);
-  vehicle_ai::add_utility_connection("combat", "meleeCombat", &function_259536c8);
-  vehicle_ai::add_utility_connection("meleeCombat", "combat", &function_e32c6513);
+  self vehicle_ai::add_state("meleeCombat", undefined, &state_melee_combat_update, undefined);
+  vehicle_ai::add_utility_connection("combat", "meleeCombat", &should_switch_to_melee);
+  vehicle_ai::add_utility_connection("meleeCombat", "combat", &should_switch_to_range);
   self vehicle_ai::call_custom_add_state_callbacks();
   vehicle_ai::startinitialstate("combat");
 }
 
 function state_death_update(params) {
   self endon(#"death");
-  self namespace_83eb6304::function_3ecfde67("egg_explode");
+  self doa_fx::function_3ecfde67("egg_explode");
   self asmrequestsubstate("death@stationary");
   vehicle_ai::waittill_asm_complete("death@stationary", 2);
   level.doa.var_5b56a42c--;
@@ -122,7 +122,7 @@ function state_driving_update(params) {
   self asmrequestsubstate("locomotion@movement");
 }
 
-function function_be5ba736(enemy) {
+function getnextmoveposition_ranged(enemy) {
   if(self.goalforced) {
     return self.goalpos;
   }
@@ -225,7 +225,7 @@ function function_be5ba736(enemy) {
   return best_point.origin;
 }
 
-function function_ae36dd9f(params) {
+function state_range_combat_update(params) {
   self endon(#"change_state");
   self endon(#"death");
   self.pathfailcount = 0;
@@ -233,7 +233,7 @@ function function_ae36dd9f(params) {
   self util::cooldown("state_change", 2);
   self thread prevent_stuck();
   self thread nudge_collision();
-  self thread function_aea2bda3();
+  self thread state_range_combat_attack();
   self setspeed(self.settings.defaultmovespeed);
   self asmrequestsubstate("locomotion@movement");
   self.dont_move = undefined;
@@ -254,17 +254,17 @@ function function_ae36dd9f(params) {
       continue;
     }
 
-    if(isDefined(self.var_ebf5af53)) {
-      if(!self[[self.var_ebf5af53]]()) {
+    if(isDefined(self.can_reach_enemy)) {
+      if(!self[[self.can_reach_enemy]]()) {
         wait 0.1;
         continue;
       }
     }
 
     if(!self seerecently(self.enemy, 5)) {
-      self.current_pathto_pos = function_4417a164();
+      self.current_pathto_pos = spider_get_target_position();
     } else {
-      self.current_pathto_pos = function_be5ba736(self.enemy);
+      self.current_pathto_pos = getnextmoveposition_ranged(self.enemy);
     }
 
     if(isDefined(self.current_pathto_pos)) {
@@ -276,13 +276,13 @@ function function_ae36dd9f(params) {
   }
 }
 
-function function_aea2bda3() {
+function state_range_combat_attack() {
   self endon(#"change_state");
   self endon(#"death");
 
   for(;;) {
     state_params = spawnStruct();
-    state_params.var_cc308559 = 1;
+    state_params.playtransition = 1;
     self vehicle_ai::evaluate_connections(undefined, state_params);
 
     if(!isDefined(self.enemy)) {
@@ -290,7 +290,7 @@ function function_aea2bda3() {
       continue;
     }
 
-    var_f5ad2338 = 1;
+    can_attack = 1;
 
     foreach(player in getPlayers()) {
       self getperfectinfo(player, 0);
@@ -298,18 +298,18 @@ function function_aea2bda3() {
       if(player.b_is_designated_target === 1 && self.enemy.b_is_designated_target !== 1) {
         self getperfectinfo(player, 1);
         self setpersonalthreatbias(player, 100000, 2);
-        var_f5ad2338 = 0;
+        can_attack = 0;
       }
     }
 
-    if(var_f5ad2338) {
+    if(can_attack) {
       if(self cansee(self.enemy)) {
         self vehlookat(self.enemy);
         self turretsettarget(0, self.enemy);
       }
 
       if(distance2dsquared(self.origin, self.enemy.origin) < sqr(self.settings.engagementdistmax * 1.5) && util::iscooldownready("rocket") && self cansee(self.enemy)) {
-        self function_c7208b7d(self.enemy);
+        self do_ranged_attack(self.enemy);
         wait 0.5;
       }
     }
@@ -318,7 +318,7 @@ function function_aea2bda3() {
   }
 }
 
-function function_c7208b7d(enemy) {
+function do_ranged_attack(enemy) {
   self notify(#"near_goal");
   self endon(#"death");
   self vehicle_ai::clearallmovement(1);
@@ -359,19 +359,19 @@ function function_c7208b7d(enemy) {
 
 function function_f7d9bc34() {
   self endon(#"disconnect");
-  self namespace_83eb6304::function_3ecfde67("incoming_impact");
+  self doa_fx::function_3ecfde67("incoming_impact");
   wait 1.2;
 
   if(isDefined(self)) {
-    self namespace_83eb6304::turnofffx("incoming_impact");
+    self doa_fx::turnofffx("incoming_impact");
   }
 }
 
-function function_fb7f416c() {
-  self.var_fb7f416c = 1;
+function switch_to_melee() {
+  self.switch_to_melee = 1;
 }
 
-function function_259536c8(from_state, to_state, connection) {
+function should_switch_to_melee(from_state, to_state, connection) {
   if(!util::iscooldownready("state_change")) {
     return false;
   }
@@ -383,15 +383,15 @@ function function_259536c8(from_state, to_state, connection) {
   return true;
 }
 
-function function_aebf9e0f(params) {
+function state_melee_combat_update(params) {
   self endon(#"change_state");
   self endon(#"death");
   self util::cooldown("state_change", 8);
   self thread prevent_stuck();
   self thread nudge_collision();
-  self thread function_8a699cff();
+  self thread state_melee_combat_attack();
   self.pathfailcount = 0;
-  self.var_fb7f416c = undefined;
+  self.switch_to_melee = undefined;
   self setspeed(self.settings.defaultmovespeed * 1.5);
   self asmrequestsubstate("locomotion@movement");
   self.dont_move = undefined;
@@ -421,15 +421,15 @@ function function_aebf9e0f(params) {
       continue;
     }
 
-    if(isDefined(self.var_ebf5af53)) {
-      if(!self[[self.var_ebf5af53]]()) {
+    if(isDefined(self.can_reach_enemy)) {
+      if(!self[[self.can_reach_enemy]]()) {
         wait 0.1;
         continue;
       }
     }
 
     self.foundpath = 0;
-    targetpos = function_4417a164();
+    targetpos = spider_get_target_position();
 
     if(isDefined(targetpos)) {
       if(distancesquared(self.origin, targetpos) > sqr(1300) && self isposinclaimedlocation(targetpos)) {
@@ -498,7 +498,7 @@ function function_aebf9e0f(params) {
 
       if(self.foundpath) {
         self.current_pathto_pos = targetpos;
-        self thread function_b38859f();
+        self thread path_update_interrupt_melee();
         self.pathfailcount = 0;
         self vehicle_ai::waittill_pathing_done();
       }
@@ -520,7 +520,7 @@ function function_aebf9e0f(params) {
         point = queryresult.data[randomint(queryresult.data.size)];
         self function_a57c34b7(point.origin, 0, 0);
         self.current_pathto_pos = undefined;
-        self thread function_b38859f();
+        self thread path_update_interrupt_melee();
         wait 2;
         self notify(#"near_goal");
       }
@@ -530,13 +530,13 @@ function function_aebf9e0f(params) {
   }
 }
 
-function function_8a699cff() {
+function state_melee_combat_attack() {
   self endon(#"change_state");
   self endon(#"death");
 
   for(;;) {
     state_params = spawnStruct();
-    state_params.var_cc308559 = 1;
+    state_params.playtransition = 1;
 
     if(!isDefined(self.enemy)) {
       wait 0.1;
@@ -553,7 +553,7 @@ function function_8a699cff() {
 
     if(distance2dsquared(self.origin, self.enemy.origin) < sqr(48) && self cansee(self.enemy)) {
       if(bullettracepassed(self.origin + (0, 0, 10), self.enemy.origin + (0, 0, 20), 0, self, self.enemy, 0, 1)) {
-        self function_f7dc8837(self.enemy);
+        self do_melee_attack(self.enemy);
         wait 0.5;
       }
     }
@@ -562,7 +562,7 @@ function function_8a699cff() {
   }
 }
 
-function function_f7dc8837(enemy) {
+function do_melee_attack(enemy) {
   self notify(#"near_goal");
   self vehicle_ai::clearallmovement(1);
   self.dont_move = 1;
@@ -581,7 +581,7 @@ function function_f7dc8837(enemy) {
   self.dont_move = undefined;
 }
 
-function function_e32c6513(from_state, to_state, connection) {
+function should_switch_to_range(from_state, to_state, connection) {
   if(self.pathfailcount > 4) {
     return true;
   }
@@ -626,7 +626,7 @@ function prevent_stuck() {
   }
 }
 
-function function_4417a164() {
+function spider_get_target_position() {
   if(self.goalforced) {
     return self.goalpos;
   }
@@ -686,13 +686,13 @@ function function_4417a164() {
   return target_pos;
 }
 
-function function_b38859f() {
+function path_update_interrupt_melee() {
   self endon(#"death");
   self endon(#"change_state");
   self endon(#"near_goal");
   self endon(#"reached_end_node");
-  self notify(#"hash_49730fc0dae6993c");
-  self endon(#"hash_49730fc0dae6993c");
+  self notify(#"clear_interrupt_threads");
+  self endon(#"clear_interrupt_threads");
   wait 0.1;
 
   while(true) {
@@ -702,7 +702,7 @@ function function_b38859f() {
         self notify(#"near_goal");
       }
 
-      targetpos = function_4417a164();
+      targetpos = spider_get_target_position();
 
       if(isDefined(targetpos)) {
         if(distancesquared(self.origin, targetpos) > sqr(1000)) {
@@ -719,10 +719,10 @@ function function_b38859f() {
 
       if(isDefined(self.enemy) && isPlayer(self.enemy)) {
         forward = anglesToForward(self.enemy getplayerangles());
-        var_933b09a6 = self.origin - self.enemy.origin;
+        dir_to_raps = self.origin - self.enemy.origin;
         speedtouse = self.settings.defaultmovespeed * 2;
 
-        if(vectordot(forward, var_933b09a6) > 0) {
+        if(vectordot(forward, dir_to_raps) > 0) {
           self setspeed(speedtouse);
         } else {
           self setspeed(speedtouse * 0.75);
@@ -767,7 +767,7 @@ function force_get_enemies() {
   self namespace_250e9486::function_4b49bf0d();
 }
 
-function function_725d9b34(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
+function spider_callback_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
   if(isalive(partname) && partname.team === self.team) {
     return 0;
   }

@@ -73,11 +73,11 @@ function function_19c4a6dc() {
 }
 
 function survival_fire_hazard() {
-  var_89a60e8a = struct::get("survival_fire_hazard");
+  s_fire = struct::get("survival_fire_hazard");
 
-  if(isDefined(var_89a60e8a)) {
-    var_8248ec4d = spawn("trigger_radius", var_89a60e8a.origin, 0, int(var_89a60e8a.radius), int(var_89a60e8a.height));
-    var_8248ec4d callback::on_trigger(&function_3867e5d3);
+  if(isDefined(s_fire)) {
+    t_fire = spawn("trigger_radius", s_fire.origin, 0, int(s_fire.radius), int(s_fire.height));
+    t_fire callback::on_trigger(&function_3867e5d3);
   }
 }
 

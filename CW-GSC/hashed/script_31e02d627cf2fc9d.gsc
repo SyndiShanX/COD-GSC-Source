@@ -33,11 +33,11 @@
 function starting(str_skipto) {
   level.var_aece851d = [];
   level.var_33621ea7 = 1;
-  namespace_42da7c51::function_ed760ecb("woods");
+  namespace_42da7c51::hero_setup("woods");
   level thread function_3a28ce3b(level.woods);
   level thread objectives::follow("woods_hit1", level.woods);
   level.var_95a74232 = 1;
-  level battlechatter::function_2ab9360b(1);
+  level battlechatter::bc_allow(1);
   level.var_9a3944f4 thread namespace_42da7c51::function_76075c60();
   level flag::set("flag_assault_heli_1");
 }
@@ -45,7 +45,7 @@ function starting(str_skipto) {
 function main(str_skipto, b_starting) {
   level thread function_22755a86();
   level notify(#"hash_4f6dc93101e62ff5");
-  level.var_7c11765c = 0;
+  level.last_player_damage = 0;
   level.last_player_attacker = level;
   callback::on_player_damage(&namespace_42da7c51::function_aa3c5fab);
   level thread trailer_park_combat();
@@ -53,7 +53,7 @@ function main(str_skipto, b_starting) {
   level flag::wait_till("flag_trailer_park_complete");
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 }
 
@@ -65,10 +65,10 @@ function cleanup(name, starting, direct, player) {
 }
 
 function function_bab09690() {
-  var_d64a504a = vehicle::simple_spawn_single("veh_trailer_park_truck");
-  var_d64a504a vehicle::get_on_path("trailer_truck1_path_end", "targetname");
-  var_d64a504a vehicle::lights_off();
-  var_d64a504a vehicle::toggle_force_driver_taillights(0);
+  e_veh = vehicle::simple_spawn_single("veh_trailer_park_truck");
+  e_veh vehicle::get_on_path("trailer_truck1_path_end", "targetname");
+  e_veh vehicle::lights_off();
+  e_veh vehicle::toggle_force_driver_taillights(0);
   spawner::add_spawn_function_group("trailer_park_riders", "targetname", &namespace_42da7c51::function_2afe54);
 }
 
@@ -140,7 +140,7 @@ function trailer_park_combat() {
     var_1091fb7e = arraycombine(var_1091fb7e, a_ai);
   }
 
-  level thread namespace_42da7c51::function_d6fedf97(var_1091fb7e, int(ceil(var_1091fb7e.size * 0.8)), "flag_trailer_park_retreat1");
+  level thread namespace_42da7c51::ai_array_killcount_flag_set(var_1091fb7e, int(ceil(var_1091fb7e.size * 0.8)), "flag_trailer_park_retreat1");
   level flag::wait_till("flag_trailer_park_retreat1");
 
   if(isDefined(var_1091fb7e) && var_1091fb7e.size) {
@@ -152,7 +152,7 @@ function trailer_park_combat() {
   }
 
   var_3753c901 = ai::array_spawn("axis_trailer_park_2");
-  level thread namespace_42da7c51::function_d6fedf97(var_1091fb7e, int(ceil(var_1091fb7e.size)), "flag_trailer_park_retreat2");
+  level thread namespace_42da7c51::ai_array_killcount_flag_set(var_1091fb7e, int(ceil(var_1091fb7e.size)), "flag_trailer_park_retreat2");
   level flag::wait_till("flag_trailer_park_retreat2");
   var_1091fb7e = arraycombine(var_1091fb7e, getaiarray("trailer_park_riders", "targetname"));
 
@@ -164,7 +164,7 @@ function trailer_park_combat() {
     }
   }
 
-  level thread namespace_42da7c51::function_d6fedf97(var_3753c901, int(ceil(var_3753c901.size)), "flag_trailer_park_complete");
+  level thread namespace_42da7c51::ai_array_killcount_flag_set(var_3753c901, int(ceil(var_3753c901.size)), "flag_trailer_park_complete");
   level flag::wait_till("flag_trailer_park_complete");
 
   if(isDefined(var_3753c901) && var_3753c901.size) {
@@ -178,15 +178,15 @@ function trailer_park_combat() {
 
 function function_d9c93f85() {
   level flag::wait_till("flag_entering_trailer_park");
-  var_d64a504a = vehicle::simple_spawn_single_and_drive("veh_trailer_park_truck");
-  var_d64a504a thread namespace_42da7c51::function_3958f4d7("lights_trailers_truck_01");
-  var_d64a504a vehicle::toggle_force_driver_taillights(1);
+  e_veh = vehicle::simple_spawn_single_and_drive("veh_trailer_park_truck");
+  e_veh thread namespace_42da7c51::function_3958f4d7("lights_trailers_truck_01");
+  e_veh vehicle::toggle_force_driver_taillights(1);
 }
 
 function function_3a28ce3b(var_57e696c1) {
-  if(!isDefined(level.var_40b02b72)) {
-    level.var_40b02b72 = vehicle::simple_spawn_and_drive("trailer_park_heli");
-    level.var_9a3944f4 = level.var_40b02b72[0];
+  if(!isDefined(level.intro_helis)) {
+    level.intro_helis = vehicle::simple_spawn_and_drive("trailer_park_heli");
+    level.var_9a3944f4 = level.intro_helis[0];
     level.var_9a3944f4 thread namespace_42da7c51::function_fbb0d73f();
     thread namespace_42da7c51::heli_light(level.var_9a3944f4, "ally_heli_spot_light_bustout", "tag_fx_running_light_front_side_left_01", (-20, 12, 0), level.var_9a3944f4, 0, 1);
     level.var_9a3944f4 thread namespace_42da7c51::function_3cebcd1b();

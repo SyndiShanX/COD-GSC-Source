@@ -41,10 +41,10 @@ function starting(str_skipto) {
 
 function main(str_skipto, b_starting) {
   level flag::set("aslt_exfil_begin");
-  level battlechatter::function_2ab9360b(1);
+  level battlechatter::bc_allow(1);
 
   if(is_true(b_starting)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto, "adler_shotgun");
+    level.adler = namespace_e77bf565::adler_spawn(str_skipto, "adler_shotgun");
     level.adler kgb_aslt_escape_deploy_gas::function_dfe94ac6();
     level.adler kgb_aslt_escape_deploy_gas::function_7dbd8101();
     level.inside_man = namespace_e77bf565::function_e4660071(str_skipto, "inside_man_shotgun");
@@ -77,7 +77,7 @@ function main(str_skipto, b_starting) {
   level flag::wait_till("aslt_exfil_complete");
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
@@ -106,7 +106,7 @@ function init_clientfields() {
   clientfield::register("scriptmover", "clf_fx_c4_blink", 1, 1, "int");
 }
 
-function function_22b7fffd() {
+function init_scenes() {
   animation::add_notetrack_func("kgb_audio::snd_play_cin_kgb_exfil_amb_lp_lr", &namespace_353d803e::function_d4ea305a);
   animation::add_notetrack_func("kgb_aslt_exfil::c4_on", &function_3e23839f);
   animation::add_notetrack_func("kgb_aslt_exfil::lazar_vo", &function_52d9841f);
@@ -147,13 +147,13 @@ function function_67c25994(str_skipto) {
   wait 1;
   level.adler util::stop_magic_bullet_shield();
   level.adler delete();
-  level.adler = namespace_e77bf565::function_52fe0eb3(undefined, "adler_casual_killer");
+  level.adler = namespace_e77bf565::adler_spawn(undefined, "adler_casual_killer");
   level.adler kgb_aslt_escape_deploy_gas::function_f8337223();
   level.adler thread kgb_aslt_exfil_escape::function_8484087e();
   level.adler thread kgb_aslt_exfil_escape::give_lmg();
   level.inside_man util::stop_magic_bullet_shield();
   level.inside_man delete();
-  level.inside_man = namespace_e77bf565::function_52fe0eb3(undefined, "inside_man_casual_killer");
+  level.inside_man = namespace_e77bf565::adler_spawn(undefined, "inside_man_casual_killer");
   level.inside_man kgb_aslt_escape_deploy_gas::function_59131084();
   level.inside_man thread kgb_aslt_exfil_escape::function_8484087e();
   level.inside_man thread kgb_aslt_exfil_escape::give_lmg();
@@ -250,7 +250,7 @@ function function_e58b5a12() {
 function function_c230d01c(params) {
   level.player endon(#"death");
   level.player lui::screen_fade_out(0.1);
-  level.player namespace_e77bf565::function_eeb18216();
+  level.player namespace_e77bf565::gasmask_off();
   level.player thread lui::screen_fade_in(0.2);
 }
 

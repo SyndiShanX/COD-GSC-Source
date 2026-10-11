@@ -157,7 +157,7 @@ function function_ba7d9848(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_ded53cc6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(self function_da43934d()) {
     if(bwastimejump == 1 && fieldname != bwastimejump) {
-      self playSound(0, #"hash_7ba1b4b83540b238");
+      self playSound(0, #"uin_clear_to_jump");
     }
   }
 }
@@ -165,7 +165,7 @@ function function_ded53cc6(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_ea3cc318(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(self function_da43934d()) {
     if(bwastimejump == 1 && fieldname != bwastimejump) {
-      self playSound(0, #"hash_783bdfd900c11eed");
+      self playSound(0, #"uin_final_jump");
     }
   }
 }

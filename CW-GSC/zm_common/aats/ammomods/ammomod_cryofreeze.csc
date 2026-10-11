@@ -80,8 +80,8 @@ function function_a7a5e842(localclientnum, oldval, newval, bnewent, binitialsnap
     }
 
     if(!isDefined(self.var_f41344b)) {
-      self playSound(fieldname, #"hash_1b0ce890be5c595", self.origin + (0, 0, 50));
-      self.var_f41344b = self playLoopSound(#"hash_6274adb83dbbdbe");
+      self playSound(fieldname, #"zmb_ammomod_cryofreeze_impact", self.origin + (0, 0, 50));
+      self.var_f41344b = self playLoopSound(#"zmb_ammomod_cryofreeze_ai_lp");
     }
 
     self thread function_bfdbfcd(fieldname, 1);
@@ -187,6 +187,6 @@ function function_de7bde57(localclientnum, oldval, newval, bnewent, binitialsnap
   if(isDefined(self)) {
     str_tag = isDefined(self gettagorigin("j_spine4")) ? "j_spine4" : "tag_origin";
     util::playFXOnTag(bwastimejump, "zm_weapons/fx9_aat_cryofreeze_lvl5_aoe", self, str_tag);
-    self playSound(bwastimejump, #"hash_174fb9aaead8f904");
+    self playSound(bwastimejump, #"zmb_ammomod_cryofreeze_shatter");
   }
 }

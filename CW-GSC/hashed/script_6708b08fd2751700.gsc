@@ -170,11 +170,11 @@ function function_40e4c9de(params) {
 function function_ee280019(params) {
   location = level.contentmanager.locations[params.location];
 
-  if(!isDefined(location.spawnedinstance.var_4272a188)) {
+  if(!isDefined(location.spawnedinstance.starttrigger)) {
     return;
   }
 
-  function_55e20e75(params._id, location.spawnedinstance.var_4272a188.origin);
+  function_55e20e75(params._id, location.spawnedinstance.starttrigger.origin);
 }
 
 function function_fea33619(params) {
@@ -185,7 +185,7 @@ function function_fea33619(params) {
     return 0;
   }
 
-  location.spawnedinstance.var_4272a188 useby(player);
+  location.spawnedinstance.starttrigger useby(player);
 }
 
 function function_163c296a(params) {
@@ -241,7 +241,7 @@ function function_834d65f9(params) {
 function function_ad78fe8a() {
   player = [[level.rat.common.gethostplayer]]();
   portal = level.var_7d75c960.var_fb516651;
-  portal.var_56356783[0].mdl_gameobject gameobjects::use_object_onuse(player);
+  portal.a_mdl_switch[0].mdl_gameobject gameobjects::use_object_onuse(player);
 }
 
 function function_adb96ff1() {

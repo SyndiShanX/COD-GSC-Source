@@ -19,8 +19,8 @@ function private autoexec __init__system__() {
 }
 
 function private function_7718419d(var_c93cfecf = "") {
-  if(!namespace_61e6d095::exists(#"hash_541706109c2cadca")) {
-    namespace_61e6d095::create(#"hash_541706109c2cadca", #"hash_6db62876e543d679");
+  if(!scripted_widgets::exists(#"hash_541706109c2cadca")) {
+    scripted_widgets::create(#"hash_541706109c2cadca", #"hash_6db62876e543d679");
   }
 
   function_62443495(var_c93cfecf);
@@ -28,15 +28,15 @@ function private function_7718419d(var_c93cfecf = "") {
 
 function private function_62443495(var_c93cfecf = "") {
   if(var_c93cfecf == #"game_select") {
-    namespace_61e6d095::function_73c9a490(#"hash_541706109c2cadca", 1);
-    namespace_61e6d095::function_9ade1d9b(#"hash_541706109c2cadca", "useGameSelect", 1);
-    namespace_61e6d095::function_9ade1d9b(#"hash_541706109c2cadca", "gameRef", "");
+    scripted_widgets::function_73c9a490(#"hash_541706109c2cadca", 1);
+    scripted_widgets::function_9ade1d9b(#"hash_541706109c2cadca", "useGameSelect", 1);
+    scripted_widgets::function_9ade1d9b(#"hash_541706109c2cadca", "gameRef", "");
     return;
   }
 
   function_633f25cf(var_c93cfecf);
-  namespace_61e6d095::function_9ade1d9b(#"hash_541706109c2cadca", "useGameSelect", 0);
-  namespace_61e6d095::function_9ade1d9b(#"hash_541706109c2cadca", "gameRef", var_c93cfecf);
+  scripted_widgets::function_9ade1d9b(#"hash_541706109c2cadca", "useGameSelect", 0);
+  scripted_widgets::function_9ade1d9b(#"hash_541706109c2cadca", "gameRef", var_c93cfecf);
 }
 
 function function_633f25cf(var_c93cfecf) {
@@ -68,17 +68,17 @@ function function_633f25cf(var_c93cfecf) {
 }
 
 function private function_b2669077() {
-  namespace_61e6d095::function_9ade1d9b(#"hash_541706109c2cadca", "gameRef", "");
+  scripted_widgets::function_9ade1d9b(#"hash_541706109c2cadca", "gameRef", "");
 
-  if(namespace_61e6d095::exists(#"hash_541706109c2cadca")) {
-    namespace_61e6d095::remove(#"hash_541706109c2cadca");
-    namespace_61e6d095::function_29703592(#"hash_541706109c2cadca", 0);
+  if(scripted_widgets::exists(#"hash_541706109c2cadca")) {
+    scripted_widgets::remove(#"hash_541706109c2cadca");
+    scripted_widgets::function_29703592(#"hash_541706109c2cadca", 0);
   }
 }
 
 function function_5058f233(var_c93cfecf, var_c18a5a8b = 5) {
-  if(namespace_61e6d095::exists(#"hash_1f8eeac8bf3b0e9b")) {
-    namespace_61e6d095::remove(#"hash_1f8eeac8bf3b0e9b");
+  if(scripted_widgets::exists(#"hash_1f8eeac8bf3b0e9b")) {
+    scripted_widgets::remove(#"hash_1f8eeac8bf3b0e9b");
   }
 
   var_ae865aeb = getscriptbundle(var_c93cfecf);
@@ -88,16 +88,16 @@ function function_5058f233(var_c93cfecf, var_c18a5a8b = 5) {
     previewimage = var_ae865aeb.previewimage;
   }
 
-  namespace_61e6d095::create(#"hash_1f8eeac8bf3b0e9b", #"hash_11f17c2c3c32912d");
-  namespace_61e6d095::function_46df0bc7(#"hash_1f8eeac8bf3b0e9b", 5);
-  namespace_61e6d095::function_9ade1d9b(#"hash_1f8eeac8bf3b0e9b", "image", previewimage);
+  scripted_widgets::create(#"hash_1f8eeac8bf3b0e9b", #"hash_11f17c2c3c32912d");
+  scripted_widgets::function_46df0bc7(#"hash_1f8eeac8bf3b0e9b", 5);
+  scripted_widgets::function_9ade1d9b(#"hash_1f8eeac8bf3b0e9b", "image", previewimage);
 
   if(var_c18a5a8b >= float(function_60d95f53()) / 1000) {
     wait var_c18a5a8b;
   }
 
-  if(namespace_61e6d095::exists(#"hash_1f8eeac8bf3b0e9b")) {
-    namespace_61e6d095::remove(#"hash_1f8eeac8bf3b0e9b");
+  if(scripted_widgets::exists(#"hash_1f8eeac8bf3b0e9b")) {
+    scripted_widgets::remove(#"hash_1f8eeac8bf3b0e9b");
   }
 }
 
@@ -208,7 +208,7 @@ function exit() {
   level.player notify(#"hash_763ad9ddb7081df4");
 }
 
-function function_71510186() {
+function wait_for_exit() {
   if(!isDefined(level.player)) {
     level.player = getPlayers()[0];
   }
@@ -226,7 +226,7 @@ function private function_d6faeb2b() {
   while(true) {
     isusinggamepad = self gamepadusedlast();
 
-    if(isusinggamepad && self namespace_61e6d095::function_70217795() || !isusinggamepad && self useButtonPressed()) {
+    if(isusinggamepad && self scripted_widgets::function_70217795() || !isusinggamepad && self useButtonPressed()) {
       self notify(#"request_menu_exit");
       break;
     }

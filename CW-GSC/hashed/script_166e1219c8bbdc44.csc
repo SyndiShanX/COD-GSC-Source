@@ -791,7 +791,7 @@ function function_48f0fe69(localclientnum, oldval, newval, bnewent, binitialsnap
     self playrumblelooponentity(fieldname, var_fa5b0a8f);
 
     if(!isDefined(self.var_d7319ee)) {
-      self.var_d7319ee = self playLoopSound(#"hash_2689de11fa4c6d62");
+      self.var_d7319ee = self playLoopSound(#"prj_ieu_shockwave_lp");
     }
 
     self thread function_e7b3d40a(fieldname);
@@ -808,7 +808,7 @@ function function_e7b3d40a(localclientnum) {
   }
 
   if(isDefined(self.var_d7319ee)) {
-    self playSound(localclientnum, #"hash_392fc912529fa6b4");
+    self playSound(localclientnum, #"prj_ieu_shockwave_impact");
     self stoploopsound(self.var_d7319ee);
     self.var_d7319ee = undefined;
   }

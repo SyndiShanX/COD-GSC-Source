@@ -36,7 +36,7 @@
 #using scripts\cp_common\util;
 #namespace namespace_a613430e;
 
-function function_22b7fffd() {}
+function init_scenes() {}
 
 function start(var_1c513c79) {
   level flag::set("player_jumped_off_train");
@@ -46,7 +46,7 @@ function start(var_1c513c79) {
 
 function function_73c2b700() {
   scene::function_d0d7d9f7("cin_stakeout_train_jumpout", &namespace_4dd4b998::cin_stakeout_train_jumpout);
-  util::function_268bdf4f("adler", &namespace_11998b8f::function_2f0f0a84);
+  util::init_hero("adler", &namespace_11998b8f::function_2f0f0a84);
   level thread scene::play_from_time("cin_stakeout_train_jumpout", "jump_out_post_teleport", undefined, 10, 0, 1, 0, 1);
 }
 
@@ -82,10 +82,10 @@ function main(str_objective, b_starting) {
   level.stealth.threatsightratescale = undefined;
   level.stealth.threatsightdistscale = undefined;
   level flag::wait_till("ladder_vo_player");
-  skipto::function_4e3ab877("ghost_station");
+  skipto::objective_completed("ghost_station");
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   ghost_station_volumes = getEntArray("ghost_station_volumes", "script_noteworthy");
   array::delete_all(ghost_station_volumes);
 
@@ -107,7 +107,7 @@ function function_788e23aa() {
   self val::set("ghost_station", "ignoreall", 1);
   self val::set("ghost_station", "ignoreme", 1);
   self.holdfire = 1;
-  self battlechatter::function_2ab9360b(0);
+  self battlechatter::bc_allow(0);
   self ai::set_behavior_attribute("demeanor", "cqb");
   self thread function_1a1fde95();
   self flag::wait_till_clear(#"scriptedanim");
@@ -178,7 +178,7 @@ function function_8d9229cb() {
         self ai::set_behavior_attribute("disablearrivals", 0);
         self val::reset("ghost_station", "ignoreall");
         self val::reset("ghost_station", "ignoreme");
-        self battlechatter::function_2ab9360b(1);
+        self battlechatter::bc_allow(1);
         self.holdfire = 0;
         self allowedstances("stand", "crouch");
       }
@@ -213,7 +213,7 @@ function function_8d9229cb() {
         self val::set("ghost_station", "ignoreme", 1);
       }
 
-      self battlechatter::function_2ab9360b(0);
+      self battlechatter::bc_allow(0);
       self.holdfire = 1;
       self ai::set_behavior_attribute("demeanor", "cqb");
       self allowedstances("stand", "crouch");
@@ -326,7 +326,7 @@ function function_8ed36a5a() {
   level endon(#"ghost_station_done");
   self ai::set_behavior_attribute("demeanor", "cqb");
   level notify(#"hash_59bc0ffe214b3599");
-  self battlechatter::function_2ab9360b(0);
+  self battlechatter::bc_allow(0);
 
   if(!level flag::get("ally_on_left_platform")) {
     self function_cbc5c328();
@@ -372,9 +372,9 @@ function function_9ff740ab(a_ents) {
   mdl_door linkTo(a_ents[#"door_prop"], "j_prop_1", (0, 0, 0), (0, 0, 0));
 }
 
-function function_b1f03033(var_2a7f2052) {
+function function_b1f03033(door_flag) {
   level endon(#"ghost_station_done");
-  self namespace_11998b8f::function_b9a028e4("ghost_station_left_platform_enemies_cleared", var_2a7f2052, 1);
+  self namespace_11998b8f::function_b9a028e4("ghost_station_left_platform_enemies_cleared", door_flag, 1);
   level flag::set("guard_station_door_left_stop_animating");
   level flag::set("guard_station_doors_opened");
   wait 0.3;
@@ -408,9 +408,9 @@ function function_b1f03033(var_2a7f2052) {
   }
 }
 
-function function_9a500e88(var_2a7f2052, var_721023c5) {
+function function_9a500e88(door_flag, var_721023c5) {
   level endon(#"ghost_station_done");
-  self namespace_11998b8f::function_b9a028e4("ghost_station_left_platform_enemies_cleared", var_2a7f2052, var_721023c5);
+  self namespace_11998b8f::function_b9a028e4("ghost_station_left_platform_enemies_cleared", door_flag, var_721023c5);
 }
 
 function function_c08d83ac() {
@@ -692,7 +692,7 @@ function function_5eb57821() {
 function function_4e03739a() {
   self endon(#"death");
   self waittill(#"flashlight_on");
-  self flashlight::function_7c2f623b();
+  self flashlight::light_on();
 }
 
 function function_a8b99b8d() {
@@ -863,7 +863,7 @@ function function_78d10ca2() {
     result = level waittill(#"hash_a52424b9eaac1c5");
 
     switch (result.bundle) {
-      case #"hash_ac30731e7561675":
+      case #"conduit":
         level thread scene::play("p9_fxanim_cp_stakeout_subway_train_passing_conduit_bundle");
         break;
       case #"wires":

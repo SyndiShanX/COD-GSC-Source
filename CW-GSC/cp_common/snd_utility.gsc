@@ -220,7 +220,7 @@ function function_f218bff5(v) {
   return v;
 }
 
-function function_4b879845(var_7620540d, v) {
+function varrayadd(var_7620540d, v) {
   isarr = isarray(var_7620540d);
   isdef = isDefined(v);
 
@@ -235,9 +235,9 @@ function function_4b879845(var_7620540d, v) {
       var_7620540d = array(v);
     }
   } else if(isarr) {
-    var_44d6e1c4 = isinarray(var_7620540d, v);
+    isinarr = isinarray(var_7620540d, v);
 
-    if(!var_44d6e1c4) {
+    if(!isinarr) {
       var_7620540d[var_7620540d.size] = v;
     }
   }
@@ -245,7 +245,7 @@ function function_4b879845(var_7620540d, v) {
   return var_7620540d;
 }
 
-function function_16b5f116(var_7620540d, v) {
+function varrayremove(var_7620540d, v) {
   isarr = isarray(var_7620540d);
   isdef = isDefined(v);
 
@@ -256,9 +256,9 @@ function function_16b5f116(var_7620540d, v) {
   if(!isarr) {
     var_7620540d = undefined;
   } else if(isarr) {
-    var_44d6e1c4 = isinarray(var_7620540d, v);
+    isinarr = isinarray(var_7620540d, v);
 
-    if(var_44d6e1c4) {
+    if(isinarr) {
       arrayremovevalue(var_7620540d, v);
     }
   }
@@ -310,7 +310,7 @@ function hasnumber(s) {
   return false;
 }
 
-function function_d6053a8f(inputvalue, decimalcount) {
+function printdecimalcount(inputvalue, decimalcount) {
   if(isstring(inputvalue)) {
     return inputvalue;
   }
@@ -403,7 +403,7 @@ function function_322e32be(array) {
   return randomelement;
 }
 
-function function_2ba9b0fd(str) {
+function isstringinteger(str) {
   intvalue = int(str);
 
   if(intvalue > 0) {
@@ -424,10 +424,10 @@ function gettargetnames(target) {
   return targets;
 }
 
-function function_e8185c19(currentvalue, var_2901828, var_dc0a4660) {
-  if(var_dc0a4660 == 0) {
+function smoothvalue(currentvalue, var_2901828, smoothalpha) {
+  if(smoothalpha == 0) {
     return currentvalue;
-  } else if(var_dc0a4660 == 1) {
+  } else if(smoothalpha == 1) {
     text = "<dev string:xeb>";
     println(text);
     iprintlnbold(text);
@@ -435,9 +435,9 @@ function function_e8185c19(currentvalue, var_2901828, var_dc0a4660) {
     return var_2901828;
   }
 
-  var_dc0a4660 = math::clamp(var_dc0a4660, 0, 1);
-  inversealpha = 1 - var_dc0a4660;
-  var_2901828 = currentvalue * inversealpha + var_2901828 * var_dc0a4660;
+  smoothalpha = math::clamp(smoothalpha, 0, 1);
+  inversealpha = 1 - smoothalpha;
+  var_2901828 = currentvalue * inversealpha + var_2901828 * smoothalpha;
   return var_2901828;
 }
 
@@ -505,7 +505,7 @@ function waittilldistance(target, range) {
       randblue = randomfloatrange(0.5, 1);
       randomcolor = (randred, randgreen, randblue);
       randomcolor = vectorNormalize(randomcolor);
-      disttext = function_d6053a8f(current_distance, 0) + "<dev string:x128>" + armin;
+      disttext = printdecimalcount(current_distance, 0) + "<dev string:x128>" + armin;
 
       if(isfloat(rmax)) {
         disttext += "<dev string:x128>" + rmax;
@@ -676,9 +676,9 @@ function vectorclamp(v, min, max) {
     max = (max, max, max);
   }
 
-  var_350ab2ee = v;
-  var_350ab2ee = (math::clamp(var_350ab2ee[0], min[0], max[0]), math::clamp(var_350ab2ee[1], min[1], max[1]), math::clamp(var_350ab2ee[2], min[2], max[2]));
-  return var_350ab2ee;
+  clampedvector = v;
+  clampedvector = (math::clamp(clampedvector[0], min[0], max[0]), math::clamp(clampedvector[1], min[1], max[1]), math::clamp(clampedvector[2], min[2], max[2]));
+  return clampedvector;
 }
 
 function vectorscalenormalize(vector, scale) {
@@ -689,8 +689,8 @@ function vectorscalenormalize(vector, scale) {
 
 function function_2677a7e2(vector, scale) {
   scaledvector = vectorscale(vector, scale);
-  var_78886e0f = vectorclamp(scaledvector, (0, 0, 0), (1, 1, 1));
-  return var_78886e0f;
+  saturatedvector = vectorclamp(scaledvector, (0, 0, 0), (1, 1, 1));
+  return saturatedvector;
 }
 
 function utofeet(inches) {
@@ -713,26 +713,26 @@ function function_c8caaab4(point, sphere_origin, radius) {
   return false;
 }
 
-function function_160366e9(centerorigin, dist, var_3c67b910, elevation) {
+function orbitalposition(centerorigin, dist, azimuth, elevation) {
   if(isDefined(dist) == 0 || dist <= 0) {
     return centerorigin;
   }
 
-  var_3c67b910 = function_ea2f17d1(var_3c67b910, 0);
+  azimuth = function_ea2f17d1(azimuth, 0);
   elevation = function_ea2f17d1(elevation, 0);
-  var_3c67b910 += 180;
+  azimuth += 180;
   elevation += 270;
   posx = centerorigin[0];
   posy = centerorigin[1];
   posz = centerorigin[2];
-  posx += dist * sin(elevation) * cos(var_3c67b910);
-  posy += dist * sin(elevation) * sin(var_3c67b910);
+  posx += dist * sin(elevation) * cos(azimuth);
+  posy += dist * sin(elevation) * sin(azimuth);
   posz += dist * cos(elevation);
   position = (posx, posy, posz);
   return position;
 }
 
-function function_bf7c949(tagstr) {
+function gettagsafe(tagstr) {
   ent = self;
   tagname = "";
   tagorigin = undefined;
@@ -769,8 +769,8 @@ function function_1666c97e(origin, angles, extents) {
 }
 
 function function_827811b5() {
-  var_38c41a5e = 1920;
-  var_c13d121d = 1080;
+  vidwidth = 1920;
+  vidheight = 1080;
 
   if(ispc()) {
     isfullscreen = getdvarint(#"r_fullscreen", 0);
@@ -780,16 +780,16 @@ function function_827811b5() {
       dims = strtok(mode, "x");
 
       if(isarray(dims) && dims.size >= 2) {
-        var_38c41a5e = int(dims[0]);
-        var_c13d121d = int(dims[1]);
+        vidwidth = int(dims[0]);
+        vidheight = int(dims[1]);
       }
     } else {
-      var_38c41a5e = getdvarint(#"hash_799d70a49cc79c0f", 1920);
-      var_c13d121d = getdvarint(#"hash_526c340ae912bbd0", 1080);
+      vidwidth = getdvarint(#"hash_799d70a49cc79c0f", 1920);
+      vidheight = getdvarint(#"hash_526c340ae912bbd0", 1080);
     }
   }
 
-  resolution = array(var_38c41a5e, var_c13d121d);
+  resolution = array(vidwidth, vidheight);
   return resolution;
 }
 
@@ -849,27 +849,27 @@ function function_81fac19d(condition, alerttext) {
 
 function function_7b45efc6(volume) {
   var_aaa0f6d6 = log(float(volume)) / log(10);
-  var_13be1590 = 20 * var_aaa0f6d6;
-  return var_13be1590;
+  decibels = 20 * var_aaa0f6d6;
+  return decibels;
 }
 
-function function_359f7bac(var_13be1590) {
-  volume = pow(10, float(var_13be1590) / 20);
+function function_359f7bac(decibels) {
+  volume = pow(10, float(decibels) / 20);
   return volume;
 }
 
-function function_d8b24901(var_c787ff80) {
-  pitchscale = pow(2, float(var_c787ff80) / 12);
+function function_d8b24901(semitone) {
+  pitchscale = pow(2, float(semitone) / 12);
   return pitchscale;
 }
 
 function function_9bf57bf0(pitch) {
   pitchlog2 = log(float(pitch)) / log(2);
-  var_c787ff80 = 12 * pitchlog2;
-  return var_c787ff80;
+  semitone = 12 * pitchlog2;
+  return semitone;
 }
 
-function function_e75e9ba1(animname, animtree, notifyname, rate) {
+function rvplayanimation(animname, animtree, notifyname, rate) {
   if(isDefined(level.var_31efd858) == 0) {
     function_81fac19d(isDefined(level.var_31efd858) == 0, "rvPlayAnimation was not initialized!");
     return;
@@ -1129,7 +1129,7 @@ function function_cc1eeb91(hex) {
 
   for(i = 0; i < hex.size; i++) {
     nib = hex[i];
-    var_59c6ddd3 = 0;
+    nibvalue = 0;
 
     switch (nib) {
       case #"5":
@@ -1142,35 +1142,35 @@ function function_cc1eeb91(hex) {
       case #"2":
       case #"9":
       case #"8":
-        var_59c6ddd3 = int(nib);
+        nibvalue = int(nib);
         break;
       case #"a":
       case #"a":
-        var_59c6ddd3 = 10;
+        nibvalue = 10;
         break;
       case #"b":
       case #"b":
-        var_59c6ddd3 = 11;
+        nibvalue = 11;
         break;
       case #"c":
       case #"c":
-        var_59c6ddd3 = 12;
+        nibvalue = 12;
         break;
       case #"d":
       case #"d":
-        var_59c6ddd3 = 13;
+        nibvalue = 13;
         break;
       case #"e":
       case #"e":
-        var_59c6ddd3 = 14;
+        nibvalue = 14;
         break;
       case #"f":
       case #"f":
-        var_59c6ddd3 = 15;
+        nibvalue = 15;
         break;
     }
 
-    intvalue = int(intvalue << 4 | int(var_59c6ddd3));
+    intvalue = int(intvalue << 4 | int(nibvalue));
   }
 
   return intvalue;
@@ -1200,8 +1200,8 @@ function function_3626f311(hex) {
   return stringvalue;
 }
 
-function function_33ccce67(scenedef, var_1465c5e2) {
-  var_1465c5e2 = function_ea2f17d1(var_1465c5e2, 1);
+function function_33ccce67(scenedef, willexcludeplayers) {
+  willexcludeplayers = function_ea2f17d1(willexcludeplayers, 1);
   instances = array();
   var_558dab14 = struct::get_array(scenedef, "scriptbundlename");
   instances = arraycombine(var_558dab14, instances, 0, 0);
@@ -1217,7 +1217,7 @@ function function_33ccce67(scenedef, var_1465c5e2) {
         scenedef_ents = arraycombine(i.scene_ents, scenedef_ents, 0, 0);
         arrayremovevalue(scenedef_ents, undefined, 0);
 
-        if(var_1465c5e2) {
+        if(willexcludeplayers) {
           foreach(e in scenedef_ents) {
             if(isplayersafe(e)) {
               arrayremovevalue(scenedef_ents, e, 0);

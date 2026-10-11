@@ -551,7 +551,7 @@ function has_hero_weapon() {
 
 function function_3e5c3a27() {
   if(zm_utility::is_survival()) {
-    if(level.var_b48509f9 === 1) {
+    if(level.star_rating === 1) {
       self zm_score::set_player_score(500);
       return;
     }
@@ -571,7 +571,7 @@ function function_3e5c3a27() {
 
 function function_fc8ff147() {
   if(zm_utility::is_survival()) {
-    star_level = isDefined(level.var_b48509f9) ? level.var_b48509f9 : 0;
+    star_level = isDefined(level.star_rating) ? level.star_rating : 0;
     var_4ba090b7 = star_level * 5000;
     var_4ba090b7 = math::clamp(var_4ba090b7, 0, 25000);
   } else {
@@ -646,7 +646,7 @@ function give_start_weapon(b_switch_weapon) {
       var_91f1878f = var_9e4954fa || var_88cf3317;
       self function_3e5c3a27();
 
-      if(zm_utility::is_survival() && !var_9e4954fa && level.var_b48509f9 === 1) {
+      if(zm_utility::is_survival() && !var_9e4954fa && level.star_rating === 1) {
         self zm_score::set_player_score(level.player_starting_points);
       }
 

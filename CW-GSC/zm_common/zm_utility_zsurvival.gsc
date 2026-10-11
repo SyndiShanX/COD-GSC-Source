@@ -66,10 +66,10 @@ function function_8e066676() {
 
 function function_7c97e961(var_661691aa) {
   assert(isDefined(var_661691aa), "<dev string:x38>");
-  level.var_b48509f9 = var_661691aa;
+  level.star_rating = var_661691aa;
   setroundsplayed(var_661691aa);
 
-  switch (level.var_b48509f9) {
+  switch (level.star_rating) {
     case 1:
       level.realm = 1;
       break;
@@ -102,7 +102,7 @@ function switch_map(map_name) {
   level notify(#"switch_map");
   namespace_cf6efd05::function_ded56b14();
   namespace_cf6efd05::function_c484a9be(#"initialized", 1);
-  namespace_cf6efd05::function_c484a9be(#"hash_1601cc3215f4f8b3", level.var_b48509f9);
+  namespace_cf6efd05::function_c484a9be(#"star_rating", level.star_rating);
 
   foreach(player in getPlayers()) {
     if(is_true(player.var_e8bee75e)) {

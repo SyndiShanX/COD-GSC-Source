@@ -29,10 +29,10 @@ function private preinit() {
 function private postinit() {}
 
 function on_player_connect() {
-  self.var_d9fddbc5 = 0;
+  self.num_rockets_fired = 0;
   self.var_b37d3db2 = 0;
   self callback::add_callback(#"weapon_fired", &on_weapon_fired);
-  self callback::add_callback(#"weapon_change", &function_39ab0a6a);
+  self callback::add_callback(#"weapon_change", &on_weapon_changed);
   self thread function_f35fa4e7();
 }
 
@@ -50,7 +50,7 @@ function function_f35fa4e7() {
   }
 }
 
-function function_39ab0a6a(eventstruct) {
+function on_weapon_changed(eventstruct) {
   if(!isPlayer(self)) {
     return;
   }
@@ -83,12 +83,12 @@ function on_weapon_fired(eventstruct) {
       if(function_998f8321(w_base) >= 3) {
         if(level.zombie_weapons[w_base].weapon_classname == "launcher" || level.zombie_weapons[w_base].weapon_classname == "special") {
           if(!self perks::perk_hasperk(#"specialty_ammodrainsfromstockfirst")) {
-            self.var_d9fddbc5++;
+            self.num_rockets_fired++;
 
-            if(math::cointoss(25) || self.var_d9fddbc5 >= 4) {
+            if(math::cointoss(25) || self.num_rockets_fired >= 4) {
               self.var_b37d3db2 = 1;
               self perks::perk_setperk(#"specialty_ammodrainsfromstockfirst");
-              self.var_d9fddbc5 = 0;
+              self.num_rockets_fired = 0;
             }
 
             return;
@@ -97,7 +97,7 @@ function on_weapon_fired(eventstruct) {
           var_409524fd = 75;
 
           if(math::cointoss(var_409524fd)) {
-            self.var_d9fddbc5 = 0;
+            self.num_rockets_fired = 0;
             self perks::perk_unsetperk(#"specialty_ammodrainsfromstockfirst");
           }
         }

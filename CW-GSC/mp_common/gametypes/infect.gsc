@@ -661,7 +661,7 @@ function function_7a51569a() {
   var_6d6ee08e = function_170ee166(game.defenders);
 
   if(var_6d6ee08e.size < 1) {
-    level notify(#"hash_367e3645fd146620");
+    level notify(#"infect_stopcountdown");
   }
 }
 
@@ -734,7 +734,7 @@ function settimer(time) {
 }
 
 function choosefirstinfected() {
-  level endon(#"game_ended", #"hash_367e3645fd146620");
+  level endon(#"game_ended", #"infect_stopcountdown");
   level.infect_allowsuicide = 0;
   level.var_b93ecc24 = undefined;
 
@@ -786,7 +786,7 @@ function choosefirstinfected() {
 
 function function_a6489256() {
   while(true) {
-    waitresult = level waittill(#"game_ended", #"hash_367e3645fd146620");
+    waitresult = level waittill(#"game_ended", #"infect_stopcountdown");
 
     if(isDefined(level.infect_timerdisplay)) {
       level.infect_timerdisplay.alpha = 0;
@@ -863,7 +863,7 @@ function setfirstinfected() {
   }
 
   if(is_true(self.iscarrying)) {
-    self notify(#"hash_3c03f07896658fb7");
+    self notify(#"force_cancel_placement");
     waitframe(1);
   }
 

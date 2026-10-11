@@ -32,9 +32,9 @@ function main(str_objective, b_starting) {
   level thread namespace_d9b153b9::start_outro(b_starting);
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {}
+function cleanup(str_objective, b_starting, b_direct, player) {}
 
-function function_c26b0bc0() {
+function flags_init() {
   level flag::init("creek_path_completed");
   level flag::init("creek_path_visit1_anim_done");
   level flag::init("stop_creek_path_scene");
@@ -52,7 +52,7 @@ function creek_path() {
   level flag::wait_till("flag_" + var_c79d614f);
 
   while(true) {
-    level thread namespace_d9b153b9::function_a57f6629(var_c79d614f);
+    level thread namespace_d9b153b9::notify_on_flag(var_c79d614f);
     level function_167dbbfe(var_c79d614f);
 
     if(level flag::get(var_c79d614f + "_completed")) {
@@ -94,7 +94,7 @@ function function_167dbbfe(var_c79d614f) {
   level flag::set(var_c79d614f + "_completed");
   var_2cf9fe23 = level.var_731c10af.var_42659717 + 1;
   str = "visit_" + var_2cf9fe23 + "_" + var_c79d614f + "_" + level.var_731c10af.paths[var_c79d614f].count;
-  bb::function_cd497743(str, level.player);
+  bb::logplayermapnotification(str, level.player);
 }
 
 function function_cc015041(var_c79d614f) {
@@ -143,9 +143,9 @@ function creek1_visit1(var_c79d614f) {
 
 function function_49fc870a() {
   self endon(#"death");
-  self battlechatter::function_2ab9360b(0);
+  self battlechatter::bc_allow(0);
   level flag::wait_till("stealth_spotted");
-  self battlechatter::function_2ab9360b(1);
+  self battlechatter::bc_allow(1);
 }
 
 function function_d6f5e167() {
@@ -291,14 +291,14 @@ function function_51a866f6() {
   if(!level flag::get("flag_in_end_path")) {
     level.player playhitmarker(undefined, 5, undefined, 1);
     aienemies[0] disableaimassist();
-    aienemies[0] battlechatter::function_2ab9360b(0);
+    aienemies[0] battlechatter::bc_allow(0);
     aienemies[0].nodamagefeedback = 1;
     aienemies[0].diequietly = 1;
     aienemies[0].allowpain = 0;
     aienemies[0].team = "none";
     aienemies[0].ignoresuppression = 1;
     aienemies[0].disablebulletwhizbyreaction = 1;
-    aienemies[0].var_b81bb500 = 1;
+    aienemies[0].disablefriendlyfirereaction = 1;
     aienemies[0].dodangerreact = 0;
     aienemies[0].a.disablepain = 1;
     level thread scene::play("scene_creek_sniper_death", aienemies);

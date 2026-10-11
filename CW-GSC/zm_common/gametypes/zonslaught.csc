@@ -94,10 +94,10 @@ function function_bed6f88d(local_client_num, oldval, newval, bnewent, binitialsn
 
   if(bwastimejump == 2) {
     if(is_true(level.var_612d6a21) || util::get_game_type() === #"hash_75aa82b3ae89f54e" || is_true(level.var_e35c191f) || util::get_game_type() === #"hash_125fc0c0065c7dea") {
-      self.var_31a246b5 = util::playFXOnTag(fieldname, #"hash_60aef71494b594e5", self, "tag_origin");
+      self.spawn_cloud = util::playFXOnTag(fieldname, #"hash_60aef71494b594e5", self, "tag_origin");
       self playSound(fieldname, #"hash_5e9e10059b1e505c");
     } else {
-      self.var_31a246b5 = playFX(fieldname, level._effect[#"hash_d7a655f41aa4b03"], self.origin - (0, 0, 68));
+      self.spawn_cloud = playFX(fieldname, level._effect[#"hash_d7a655f41aa4b03"], self.origin - (0, 0, 68));
       self playSound(fieldname, #"hash_5e9e10059b1e505c", self.origin - (0, 0, 68));
     }
 
@@ -105,9 +105,9 @@ function function_bed6f88d(local_client_num, oldval, newval, bnewent, binitialsn
   }
 
   if(bwastimejump == 3) {
-    if(isDefined(self.var_31a246b5)) {
-      stopfx(fieldname, self.var_31a246b5);
-      self.var_31a246b5 = undefined;
+    if(isDefined(self.spawn_cloud)) {
+      stopfx(fieldname, self.spawn_cloud);
+      self.spawn_cloud = undefined;
     }
 
     return;
@@ -117,9 +117,9 @@ function function_bed6f88d(local_client_num, oldval, newval, bnewent, binitialsn
   self disableonradar();
   self function_811196d1(1);
 
-  if(isDefined(self.var_31a246b5)) {
-    stopfx(fieldname, self.var_31a246b5);
-    self.var_31a246b5 = undefined;
+  if(isDefined(self.spawn_cloud)) {
+    stopfx(fieldname, self.spawn_cloud);
+    self.spawn_cloud = undefined;
   }
 }
 
@@ -133,7 +133,7 @@ function orb_spawn(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
       level.var_df7b46d1.var_606d06a1 = util::spawn_model(bwastimejump, "tag_origin", v_spawn_pos, level.var_df7b46d1.angles);
       level.var_df7b46d1.var_606d06a1.var_fc558e74 = isDefined(level.var_a0b1f787[#"p7_zm_ctl_deathray_sphere"]) ? level.var_a0b1f787[#"p7_zm_ctl_deathray_sphere"] : undefined;
       level.var_df7b46d1.var_606d06a1 linkTo(level.var_df7b46d1, "tag_origin");
-      level.var_df7b46d1.var_606d06a1 function_619a5c20();
+      level.var_df7b46d1.var_606d06a1 pingable();
     }
   }
 }
@@ -189,7 +189,7 @@ function orb_soul_capture_fx(localclientnum, oldval, newval, bnewent, binitialsn
   if(bwasdemojump && isDefined(level.var_df7b46d1)) {
     e_fx = util::spawn_model(fieldname, "tag_origin", self.origin);
     e_fx playSound(fieldname, "zmb_onslaught_zsouls_start");
-    e_fx.sfx_id = e_fx playLoopSound(#"hash_58d856545ecf5e28");
+    e_fx.sfx_id = e_fx playLoopSound(#"zmb_onslaught_zsouls_lp");
     util::playFXOnTag(fieldname, level._effect[#"soul_fx"], e_fx, "tag_origin");
     wait 0.3;
     power = distance(e_fx.origin, level.var_df7b46d1.origin);
@@ -236,10 +236,10 @@ function function_40deac72(localclientnum) {
       continue;
     }
 
-    var_1826041c = (1 - n_scale) * 0.05;
+    earthquake_scale = (1 - n_scale) * 0.05;
 
-    if(var_1826041c > 0.01) {
-      earthquake(localclientnum, var_1826041c, 0.1, self.origin, 128);
+    if(earthquake_scale > 0.01) {
+      earthquake(localclientnum, earthquake_scale, 0.1, self.origin, 128);
     }
 
     e_player playRumbleOnEntity(localclientnum, "onslaught_orb");

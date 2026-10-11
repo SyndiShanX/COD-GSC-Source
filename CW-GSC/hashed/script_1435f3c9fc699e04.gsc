@@ -141,8 +141,8 @@ function get_num_touching(user) {
 function function_e4cad37() {
   var_95e19dc6 = [];
 
-  foreach(user, var_c4f3dc93 in self.users) {
-    if(var_c4f3dc93.touching.num > 0) {
+  foreach(user, huckleberries in self.users) {
+    if(huckleberries.touching.num > 0) {
       if(!isDefined(var_95e19dc6)) {
         var_95e19dc6 = [];
       } else if(!isarray(var_95e19dc6)) {
@@ -346,8 +346,8 @@ function function_6c27e90c(obj_id, team) {
 }
 
 function function_58901d83() {
-  self.var_5f35f19a = self.var_a4926509;
-  self.var_a4926509 = #"none";
+  self.var_5f35f19a = self.claimant;
+  self.claimant = #"none";
 }
 
 function function_7db44d1b(user) {
@@ -359,7 +359,7 @@ function function_7db44d1b(user) {
 }
 
 function function_350d0352() {
-  return function_7db44d1b(self.var_a4926509);
+  return function_7db44d1b(self.claimant);
 }
 
 function function_3e092344() {
@@ -367,15 +367,15 @@ function function_3e092344() {
 }
 
 function function_14fccbd9() {
-  return self.var_a4926509;
+  return self.claimant;
 }
 
 function function_4b64b7fd(team) {
-  if(!isDefined(self.var_a4926509)) {
+  if(!isDefined(self.claimant)) {
     return false;
   }
 
-  if(team == self.var_a4926509) {
+  if(team == self.claimant) {
     return true;
   }
 
@@ -383,11 +383,11 @@ function function_4b64b7fd(team) {
 }
 
 function function_abe3458c() {
-  if(!isDefined(self.var_a4926509)) {
+  if(!isDefined(self.claimant)) {
     return false;
   }
 
-  if(self.ownerteam == self.var_a4926509) {
+  if(self.ownerteam == self.claimant) {
     return true;
   }
 

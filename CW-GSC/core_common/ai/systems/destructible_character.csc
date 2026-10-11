@@ -38,7 +38,7 @@ function private preinit() {
       piecestruct.gibdynentfx = destructible.("piece" + index + "_gibdynentfx");
       piecestruct.gibfx = destructible.("piece" + index + "_gibfx");
       piecestruct.gibfxtag = destructible.("piece" + index + "_gibeffecttag");
-      piecestruct.var_ed372a00 = destructible.("piece" + index + "_gibfx2");
+      piecestruct.gibfx2 = destructible.("piece" + index + "_gibfx2");
       piecestruct.var_e230b617 = destructible.("piece" + index + "_gibeffecttag2");
       piecestruct.gibsound = destructible.("piece" + index + "_gibsound");
       piecestruct.hitlocation = destructible.("piece" + index + "_hitlocation");
@@ -113,7 +113,7 @@ function private _destructpiece(localclientnum, entity, piecenumber, shouldspawn
   if(isDefined(piece)) {
     if(shouldspawngibs) {
       gibclientutils::_playgibfx(localclientnum, entity, piece.gibfx, piece.gibfxtag);
-      gibclientutils::_playgibfx(localclientnum, entity, piece.var_ed372a00, piece.var_e230b617);
+      gibclientutils::_playgibfx(localclientnum, entity, piece.gibfx2, piece.var_e230b617);
       entity thread gibclientutils::_gibpiece(localclientnum, entity, piece.gibmodel, piece.gibtag, piece.gibdynentfx, piece.gibdir, piece.gibdirscale, 1 | 2 | 4);
       gibclientutils::_playgibsound(localclientnum, entity, piece.gibsound);
     } else if(isDefined(piece.gibfx) && function_9229eb67(piece.gibfx)) {

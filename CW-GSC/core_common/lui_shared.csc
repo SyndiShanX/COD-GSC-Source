@@ -70,17 +70,17 @@ class cluielem {
   }
 
   function setup_clientfields(menu_name) {
-    if(!isDefined(level.var_f70b6db)) {
-      level.var_f70b6db = associativearray();
+    if(!isDefined(level.luielemregistrations)) {
+      level.luielemregistrations = associativearray();
     }
 
-    if(!isDefined(level.var_f70b6db[hash(menu_name)])) {
-      level.var_f70b6db[hash(menu_name)] = 0;
+    if(!isDefined(level.luielemregistrations[hash(menu_name)])) {
+      level.luielemregistrations[hash(menu_name)] = 0;
     }
 
     var_d5213cbb = menu_name;
-    var_bf9c8c95 = level.var_f70b6db[hash(menu_name)];
-    level.var_f70b6db[hash(menu_name)]++;
+    var_bf9c8c95 = level.luielemregistrations[hash(menu_name)];
+    level.luielemregistrations[hash(menu_name)]++;
     var_47d8642e = 0;
   }
 

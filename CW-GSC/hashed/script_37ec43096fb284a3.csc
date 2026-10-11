@@ -138,7 +138,7 @@ function private function_d45dd62(localclientnum, intensity = 0, currentplayer) 
   }
 
   if(isDefined(currentplayer.var_103fdf58)) {
-    playSound(localclientnum, #"hash_37b1613c2cb4c8f3", (0, 0, 0));
+    playSound(localclientnum, #"evt_sr_phase_player_exit", (0, 0, 0));
     currentplayer stoploopsound(currentplayer.var_103fdf58);
     currentplayer.var_103fdf58 = undefined;
   }
@@ -159,7 +159,7 @@ function private function_d45dd62(localclientnum, intensity = 0, currentplayer) 
     self.var_7bd7bdc8 = postfx;
 
     if(!isDefined(currentplayer.var_103fdf58)) {
-      playSound(localclientnum, #"hash_7b5289d48cc02d77", (0, 0, 0));
+      playSound(localclientnum, #"evt_sr_phase_player_enter", (0, 0, 0));
       currentplayer.var_103fdf58 = currentplayer playLoopSound("evt_sr_phase_player_lp");
     }
   }

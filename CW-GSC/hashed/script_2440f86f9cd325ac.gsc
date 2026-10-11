@@ -50,20 +50,20 @@ function function_98acc465() {
   self waittill(#"pickup_timeout");
   wait 1;
   self namespace_e32bb68::function_3a59ec34("zmb_egg_hatch");
-  self namespace_83eb6304::function_3ecfde67("egg_hatch");
+  self doa_fx::function_3ecfde67("egg_hatch");
 
   if(isDefined(self.prize)) {
     prize = self.prize;
   } else {
-    prize = namespace_dfc652ee::function_2c9923d7(function_137dd3d5(self.type));
+    prize = doa_pickups::function_2c9923d7(function_137dd3d5(self.type));
   }
 
   origin = namespace_ec06fe4a::function_65ee50ba(self.origin, 10) + (0, 0, 12);
 
   if([[prize]] - > gettype() != 13) {
-    prize = namespace_dfc652ee::itemspawn(prize, origin, undefined, 1, 1);
+    prize = doa_pickups::itemspawn(prize, origin, undefined, 1, 1);
   } else {
-    prize = namespace_dfc652ee::function_b8f6a8cd(level.doa.var_9a6327ee, origin, 1, 1, randomfloatrange(1, 3));
+    prize = doa_pickups::function_b8f6a8cd(level.doa.var_9a6327ee, origin, 1, 1, randomfloatrange(1, 3));
   }
 
   level notify(#"hash_1ebd993fc32acc25", {
@@ -126,7 +126,7 @@ function function_5160690e() {
     for(i = 0; i < closezombies.size; i++) {
       zombie = closezombies[i];
 
-      if(is_true(zombie.var_1c8b76d3)) {
+      if(is_true(zombie.non_zombie)) {
         continue;
       }
 
@@ -137,7 +137,7 @@ function function_5160690e() {
 
       if(self.health < 0) {
         self namespace_e32bb68::function_3a59ec34("zmb_explode");
-        self namespace_83eb6304::function_3ecfde67("egg_explode");
+        self doa_fx::function_3ecfde67("egg_explode");
         physicsexplosionsphere(self.origin, 200, 128, 2);
         self radiusdamage(self.origin, 72, 2000, 1000);
         playrumbleonposition("grenade_rumble", self.origin);

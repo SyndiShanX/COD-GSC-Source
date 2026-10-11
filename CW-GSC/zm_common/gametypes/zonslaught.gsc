@@ -87,7 +87,7 @@ function event_handler[gametype_init] main(eventstruct) {
   level.var_1f966535 = 4;
   level.var_b20199e0 = &function_b20199e0;
   level.var_8179368e = &function_6398c8cb;
-  level.var_b48509f9 = 1;
+  level.star_rating = 1;
 
   switch (level.var_8de4d059) {
     case #"mp_cartel":

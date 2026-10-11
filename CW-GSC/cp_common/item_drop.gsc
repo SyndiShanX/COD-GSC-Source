@@ -16,12 +16,12 @@ function autoexec main() {
     level.item_drops = [];
   }
 
-  level thread function_1a93b6b0();
+  level thread watch_level_drops();
   waitframe(1);
-  callback::on_actor_killed(&function_4814ed2e);
+  callback::on_actor_killed(&actor_killed_check_drops);
 }
 
-function function_92cf5632(name, model, callback) {
+function add_drop(name, model, callback) {
   if(!isDefined(level.item_drops)) {
     level.item_drops = [];
   }
@@ -35,7 +35,7 @@ function function_92cf5632(name, model, callback) {
   level.item_drops[name].callback = callback;
 }
 
-function function_cd458f49(name, dropchance) {
+function add_drop_onaikilled(name, dropchance) {
   if(!isDefined(level.item_drops)) {
     level.item_drops = [];
   }
@@ -45,10 +45,10 @@ function function_cd458f49(name, dropchance) {
   }
 
   level.item_drops[name].name = name;
-  level.item_drops[name].var_d8b51b9f = dropchance;
+  level.item_drops[name].onaikilled = dropchance;
 }
 
-function function_2905ed47(name, spawnpoints) {
+function add_drop_spawnpoints(name, spawnpoints) {
   if(!isDefined(level.item_drops)) {
     level.item_drops = [];
   }
@@ -61,101 +61,101 @@ function function_2905ed47(name, spawnpoints) {
   level.item_drops[name].spawnpoints = spawnpoints;
 }
 
-function function_4814ed2e(params) {
+function actor_killed_check_drops(params) {
   if(level.script != "sp_proto_characters" && level.script != "challenge_bloodbath") {
     return;
   }
 
-  if(is_true(self.var_a269c536)) {
+  if(is_true(self.item_drops_checked)) {
     return;
   }
 
-  self.var_a269c536 = 1;
+  self.item_drops_checked = 1;
   drop = array::random(level.item_drops);
 
-  if(isDefined(drop.var_d8b51b9f)) {
-    drop.var_d8b51b9f = getdvarfloat("<dev string:x38>" + drop.name, 0);
+  if(isDefined(drop.onaikilled)) {
+    drop.onaikilled = getdvarfloat("<dev string:x38>" + drop.name, 0);
   }
 
-  if(getdvarint(#"hash_5b7b8e527835e75b", 0)) {
-    killer = self.var_493d1f73;
+  if(getdvarint(#"scr_drop_autorecover", 0)) {
+    killer = self.dds_dmg_attacker;
 
     if(isDefined(killer)) {
       if(isDefined(drop.callback)) {
-        multiplier = self function_fbd43d2f();
+        multiplier = self actor_drop_multiplier();
 
         if(!killer[[drop.callback]](multiplier)) {
           return;
         }
       }
 
-      playSoundAtPosition(#"hash_24560114c2498b4d", killer.origin);
+      playSoundAtPosition(#"fly_supply_bag_pick_up", killer.origin);
     }
 
     return;
   }
 
-  if(isDefined(drop.var_d8b51b9f) && randomfloat(1) < drop.var_d8b51b9f) {
+  if(isDefined(drop.onaikilled) && randomfloat(1) < drop.onaikilled) {
     origin = self.origin + (0, 0, 30);
-    newdrop = function_cdd56b7c(drop, origin);
-    newdrop.multiplier = self function_fbd43d2f();
-    level.var_96d850f9[level.var_96d850f9.size] = newdrop;
-    newdrop thread function_31747e4e();
+    newdrop = spawn_drop(drop, origin);
+    newdrop.multiplier = self actor_drop_multiplier();
+    level.item_drops_current[level.item_drops_current.size] = newdrop;
+    newdrop thread watch_player_pickup();
   }
 }
 
-function function_fbd43d2f() {
-  var_17f6707c = getdvarfloat(#"hash_6e30d1a44f5c3074", 0);
+function actor_drop_multiplier() {
+  min_mult = getdvarfloat(#"scr_drop_default_min", 0);
 
-  if(isDefined(self.var_527afdf8)) {
-    var_17f6707c = self.var_527afdf8;
+  if(isDefined(self.drop_min_multiplier)) {
+    min_mult = self.drop_min_multiplier;
   }
 
-  var_5c528a90 = getdvarfloat(#"hash_6e4bbfa44f72d996", 0);
+  max_mult = getdvarfloat(#"scr_drop_default_max", 0);
 
-  if(isDefined(self.var_308efffd)) {
-    var_5c528a90 = self.var_308efffd;
+  if(isDefined(self.drop_max_multiplier)) {
+    max_mult = self.drop_max_multiplier;
   }
 
-  if(var_17f6707c < var_5c528a90) {
-    return randomfloatrange(var_17f6707c, var_5c528a90);
+  if(min_mult < max_mult) {
+    return randomfloatrange(min_mult, max_mult);
   }
 
-  return var_17f6707c;
+  return min_mult;
 }
 
-function function_1a93b6b0() {
-  level.var_96d850f9 = [];
+function watch_level_drops() {
+  level.item_drops_current = [];
   level flag::wait_till("all_players_spawned");
 
   while(true) {
     wait 15;
 
-    if(level.var_96d850f9.size < 1 && level.item_drops.size > 0) {
+    if(level.item_drops_current.size < 1 && level.item_drops.size > 0) {
       drop = array::random(level.item_drops);
 
       if(isDefined(drop.spawnpoints)) {
         origin = array::random(drop.spawnpoints);
-        newdrop = function_cdd56b7c(drop, origin);
-        level.var_96d850f9[level.var_96d850f9.size] = newdrop;
-        newdrop thread function_31747e4e();
+        newdrop = spawn_drop(drop, origin);
+        level.item_drops_current[level.item_drops_current.size] = newdrop;
+        newdrop thread watch_player_pickup();
       }
     }
   }
 }
 
-function function_cdd56b7c(drop, origin) {
+function spawn_drop(drop, origin) {
   nd = spawnStruct();
   nd.drop = drop;
   nd.origin = origin;
   nd.model = spawn("script_model", nd.origin);
   nd.model setModel(drop.model);
-  nd.model thread function_24035033();
-  playSoundAtPosition(#"hash_daa5170584cefa3", origin);
+  nd.model thread spin_it();
+  playSoundAtPosition(#"fly_supply_bag_drop", origin);
   return nd;
 }
 
-function function_24035033() {
+function spin_it() {
   angle = 0;
   time = 0;
   self endon(#"death");
@@ -168,7 +168,7 @@ function function_24035033() {
   }
 }
 
-function function_31747e4e() {
+function watch_player_pickup() {
   trigger = spawn("trigger_radius", self.origin, 0, 60, 60);
   self.pickuptrigger = trigger;
 
@@ -196,8 +196,8 @@ function pickup(drop) {
     }
   }
 
-  playSoundAtPosition(#"hash_24560114c2498b4d", self.origin);
+  playSoundAtPosition(#"fly_supply_bag_pick_up", self.origin);
   drop.model delete();
-  arrayremovevalue(level.var_96d850f9, drop);
+  arrayremovevalue(level.item_drops_current, drop);
   return true;
 }

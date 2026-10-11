@@ -12,9 +12,9 @@
 function event_handler[level_init] main(eventstruct) {
   if(level.var_87c6c648 !== 1) {
     function_11e3e877(#"surface_enter", #"hash_6928446ee7176a2c");
-    function_11e3e877(#"hash_6251d9bc015e4542", #"hash_3ae5980d031edc20");
-    function_11e3e877(#"hash_6a2ccf46147cb7d8", #"hash_4c01b69a93976f42");
-    function_11e3e877(#"hash_6be5853fe57d01b0", #"hash_118e10d00498591e");
+    function_11e3e877(#"surface_enter_bullet_small", #"hash_3ae5980d031edc20");
+    function_11e3e877(#"surface_enter_bullet_xsmall", #"hash_4c01b69a93976f42");
+    function_11e3e877(#"surface_enter_bullet_xlarge", #"hash_118e10d00498591e");
   }
 
   if(function_be90acca(util::get_game_type()) === #"zsurvival") {

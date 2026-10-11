@@ -26,14 +26,14 @@ function private preinit() {
 }
 
 function open(var_738a6265, top_left, bottom_right, var_879505e1 = 1, var_ff0f9714 = 1, map_x, map_y, map_width, map_height, var_7ec0800f) {
-  if(!namespace_61e6d095::exists(#"interactive_map")) {
+  if(!scripted_widgets::exists(#"interactive_map")) {
     player = getPlayers()[0];
     player actions::function_6c59e78f(0);
-    player thread namespace_61e6d095::block_kbm_pause_menu("close_interactive_map");
+    player thread scripted_widgets::block_kbm_pause_menu("close_interactive_map");
     player val::set(#"hash_46ef83540c23a2f7", "freezecontrols", 1);
-    namespace_61e6d095::create(#"interactive_map", var_738a6265);
-    namespace_61e6d095::function_28027c42(#"interactive_map", [#"interactive_map", #"hint_tutorial", #"hash_72cc4740fa4d3da3"]);
-    namespace_61e6d095::function_24e5fa63(#"interactive_map", [#"ui_confirm", #"ui_cancel"], 1);
+    scripted_widgets::create(#"interactive_map", var_738a6265);
+    scripted_widgets::function_28027c42(#"interactive_map", [#"interactive_map", #"hint_tutorial", #"hash_72cc4740fa4d3da3"]);
+    scripted_widgets::function_24e5fa63(#"interactive_map", [#"ui_confirm", #"ui_cancel"], 1);
 
     if(!isDefined(top_left)) {
       top_left = getEnt("interactive_map_top_left", "targetname");
@@ -52,31 +52,31 @@ function open(var_738a6265, top_left, bottom_right, var_879505e1 = 1, var_ff0f97
     }
 
     if(isDefined(map_x)) {
-      namespace_61e6d095::set_x(#"interactive_map", map_x);
+      scripted_widgets::set_x(#"interactive_map", map_x);
     }
 
     if(isDefined(map_y)) {
-      namespace_61e6d095::set_y(#"interactive_map", map_y);
+      scripted_widgets::set_y(#"interactive_map", map_y);
     }
 
     if(isDefined(map_width)) {
-      namespace_61e6d095::set_width(#"interactive_map", map_width);
+      scripted_widgets::set_width(#"interactive_map", map_width);
     }
 
     if(isDefined(map_height)) {
-      namespace_61e6d095::set_height(#"interactive_map", map_height);
+      scripted_widgets::set_height(#"interactive_map", map_height);
     }
 
     if(is_true(var_7ec0800f) && isentity(top_left) && isentity(bottom_right)) {
-      namespace_61e6d095::function_9ade1d9b(#"interactive_map", "topLeftEntNum", top_left getentitynumber());
-      namespace_61e6d095::function_9ade1d9b(#"interactive_map", "bottomRightEntNum", bottom_right getentitynumber());
+      scripted_widgets::function_9ade1d9b(#"interactive_map", "topLeftEntNum", top_left getentitynumber());
+      scripted_widgets::function_9ade1d9b(#"interactive_map", "bottomRightEntNum", bottom_right getentitynumber());
     }
 
     x_axis = anglestoright(top_left.angles) * -1;
     y_axis = anglesToForward(top_left.angles);
-    var_2a5cff6e = bottom_right.origin - top_left.origin;
-    width = vectordot(var_2a5cff6e, x_axis);
-    height = vectordot(var_2a5cff6e, y_axis);
+    hypotenuse = bottom_right.origin - top_left.origin;
+    width = vectordot(hypotenuse, x_axis);
+    height = vectordot(hypotenuse, y_axis);
 
     if(!isDefined(level.interactive_map)) {
       level.interactive_map = {};
@@ -110,17 +110,17 @@ function open(var_738a6265, top_left, bottom_right, var_879505e1 = 1, var_ff0f97
 }
 
 function function_e0cc3b71(name, value) {
-  namespace_61e6d095::function_9ade1d9b(#"interactive_map", name, value);
+  scripted_widgets::function_9ade1d9b(#"interactive_map", name, value);
 }
 
 function function_879505e1(var_ff0f9714 = 1, var_509b0860 = #"hash_780067c4596705d7", var_74ac68df = #"hash_71f8107215effa5b") {
-  assert(namespace_61e6d095::exists(#"interactive_map"), "<dev string:x8f>");
+  assert(scripted_widgets::exists(#"interactive_map"), "<dev string:x8f>");
   function_23036faa(#"cursor", "uid", #"cursor");
   function_23036faa(#"cursor", "widgetName", var_509b0860);
   function_23036faa(#"cursor", "cursorImage", var_74ac68df);
   function_23036faa(#"cursor", "rightAligned", 0);
   function_23036faa(#"cursor", "bottomAligned", 0);
-  namespace_61e6d095::function_9ade1d9b(#"interactive_map", "cursor" + "." + "update", 1, 1, 0, 0, 1);
+  scripted_widgets::function_9ade1d9b(#"interactive_map", "cursor" + "." + "update", 1, 1, 0, 0, 1);
   function_41d66375(#"cursor", "descriptionList");
   function_41d66375(#"cursor", "interactionList");
   function_8b43da33();
@@ -214,12 +214,12 @@ function function_2fb5abd8() {
   util::wait_network_frame(2);
   player prompts::remove_group(#"cursor");
   function_23036faa(#"cursor", "widgetName", #"");
-  namespace_61e6d095::function_9ade1d9b(#"interactive_map", "cursor" + "." + "update", 1, 1, 0, 0, 1);
-  namespace_61e6d095::function_43525bc6(#"interactive_map", #"cursor", 1);
+  scripted_widgets::function_9ade1d9b(#"interactive_map", "cursor" + "." + "update", 1, 1, 0, 0, 1);
+  scripted_widgets::function_43525bc6(#"interactive_map", #"cursor", 1);
   level.interactive_map.var_2c15274b = undefined;
 }
 
-function add_object(uid, image = #"uie_map_lubyanka_marker_waypoint", var_6d62c29c, angle_offset, title, scale) {
+function add_object(uid, image = #"uie_map_lubyanka_marker_waypoint", update_angles, angle_offset, title, scale) {
   if(!isDefined(self.interactive_map)) {
     self.interactive_map = {};
   }
@@ -228,8 +228,8 @@ function add_object(uid, image = #"uie_map_lubyanka_marker_waypoint", var_6d62c2
     uid = self.interactive_map.uid;
   }
 
-  if(!isDefined(var_6d62c29c)) {
-    var_6d62c29c = self.interactive_map.var_6d62c29c;
+  if(!isDefined(update_angles)) {
+    update_angles = self.interactive_map.update_angles;
   }
 
   if(!isDefined(angle_offset)) {
@@ -260,12 +260,12 @@ function add_object(uid, image = #"uie_map_lubyanka_marker_waypoint", var_6d62c2
 
   self.interactive_map.uid = uid;
   self.interactive_map.image = image;
-  self.interactive_map.var_6d62c29c = var_6d62c29c;
+  self.interactive_map.update_angles = update_angles;
   self.interactive_map.angle_offset = angle_offset;
   self.interactive_map.title = title;
   self.interactive_map.scale = scale;
 
-  if(!namespace_61e6d095::exists(#"interactive_map")) {
+  if(!scripted_widgets::exists(#"interactive_map")) {
     return;
   }
 
@@ -274,7 +274,7 @@ function add_object(uid, image = #"uie_map_lubyanka_marker_waypoint", var_6d62c2
   function_d0243e5b(uid, "x", 0.5);
   function_d0243e5b(uid, "y", 0.5);
 
-  if(is_true(var_6d62c29c)) {
+  if(is_true(update_angles)) {
     function_d0243e5b(uid, "angle", 0);
   }
 
@@ -295,7 +295,7 @@ function add_object(uid, image = #"uie_map_lubyanka_marker_waypoint", var_6d62c2
     }
   }
 
-  self thread function_9dfe141f(uid, var_6d62c29c, angle_offset);
+  self thread function_9dfe141f(uid, update_angles, angle_offset);
 }
 
 function function_d76aae9f(uid, state) {
@@ -350,7 +350,7 @@ function remove_object(uid) {
   if(isDefined(level.interactive_map.objects[uid])) {
     level.interactive_map.objects[uid] notify(#"hash_7c1f9e1214f47b4e");
 
-    if(namespace_61e6d095::exists(#"interactive_map")) {
+    if(scripted_widgets::exists(#"interactive_map")) {
       function_455d4424(uid);
     }
 
@@ -359,7 +359,7 @@ function remove_object(uid) {
 }
 
 function function_87f0056b() {
-  if(namespace_61e6d095::exists(#"interactive_map")) {
+  if(scripted_widgets::exists(#"interactive_map")) {
     foreach(uid, object in level.interactive_map.objects) {
       level.interactive_map.objects[uid] notify(#"hash_7c1f9e1214f47b4e");
       function_455d4424(uid);
@@ -372,11 +372,11 @@ function function_87f0056b() {
 }
 
 function function_d0243e5b(uid, name, value) {
-  namespace_61e6d095::set_data(#"interactive_map", "mapObjects" + "." + uid + "." + name, value);
+  scripted_widgets::set_data(#"interactive_map", "mapObjects" + "." + uid + "." + name, value);
 }
 
 function function_dbf83dc4(uid, name) {
-  namespace_61e6d095::get_data(#"interactive_map", "mapObjects" + "." + uid + "." + name);
+  scripted_widgets::get_data(#"interactive_map", "mapObjects" + "." + uid + "." + name);
 }
 
 function function_68ec091e(uid, scale) {
@@ -384,11 +384,11 @@ function function_68ec091e(uid, scale) {
 }
 
 function function_23036faa(uid, name, value) {
-  namespace_61e6d095::function_9ade1d9b(#"interactive_map", "cursor." + "mapObjects" + "." + uid + "." + name, value);
+  scripted_widgets::function_9ade1d9b(#"interactive_map", "cursor." + "mapObjects" + "." + uid + "." + name, value);
 }
 
 function function_fce63823(uid, name) {
-  return namespace_61e6d095::function_f7c4c669(#"interactive_map", "cursor." + "mapObjects" + "." + uid + "." + name);
+  return scripted_widgets::function_f7c4c669(#"interactive_map", "cursor." + "mapObjects" + "." + uid + "." + name);
 }
 
 function function_835fb58e(scale) {
@@ -396,19 +396,19 @@ function function_835fb58e(scale) {
 }
 
 function function_41d66375(uid, list_name) {
-  namespace_61e6d095::function_330981ed(#"interactive_map", "cursor." + "mapObjects" + "." + uid + "." + list_name);
+  scripted_widgets::function_330981ed(#"interactive_map", "cursor." + "mapObjects" + "." + uid + "." + list_name);
 }
 
 function function_39d12272(uid, index, name, value, list_name) {
-  namespace_61e6d095::function_f2a9266(#"interactive_map", index, name, value, "cursor." + "mapObjects" + "." + uid + "." + list_name);
+  scripted_widgets::function_f2a9266(#"interactive_map", index, name, value, "cursor." + "mapObjects" + "." + uid + "." + list_name);
 }
 
 function function_dcedf7f(uid, index, list_name) {
-  namespace_61e6d095::function_7239e030(#"interactive_map", index, "cursor." + "mapObjects" + "." + uid + "." + list_name);
+  scripted_widgets::function_7239e030(#"interactive_map", index, "cursor." + "mapObjects" + "." + uid + "." + list_name);
 }
 
 function function_7793b318(uid, index, list_name) {
-  return namespace_61e6d095::function_cd59371c(uid, index, "cursor." + "mapObjects" + "." + uid + "." + list_name);
+  return scripted_widgets::function_cd59371c(uid, index, "cursor." + "mapObjects" + "." + uid + "." + list_name);
 }
 
 function function_9af7280f(objects) {
@@ -427,7 +427,7 @@ function function_6385c805() {
   map_pos = self.origin - level.interactive_map.dims.top_left;
   self.var_2ac0bdff = (vectordot(map_pos, level.interactive_map.dims.x_axis) / level.interactive_map.dims.width, vectordot(map_pos, level.interactive_map.dims.y_axis) / level.interactive_map.dims.height, 0);
 
-  if(namespace_61e6d095::exists(#"interactive_map") && isDefined(self.var_62d718e2)) {
+  if(scripted_widgets::exists(#"interactive_map") && isDefined(self.var_62d718e2)) {
     foreach(var_55633c65 in self.var_62d718e2) {
       function_e0cc3b71(var_55633c65.name, var_55633c65.cur_value);
     }
@@ -466,7 +466,7 @@ function function_4692570b(event, value) {
   if(isDefined(self.var_62d718e2[event])) {
     self.var_62d718e2[event].cur_value = value;
 
-    if(namespace_61e6d095::exists(#"interactive_map")) {
+    if(scripted_widgets::exists(#"interactive_map")) {
       if(isDefined(self.interactive_map.uid)) {
         function_d0243e5b(self.interactive_map.uid, self.var_62d718e2[event].name, self.var_62d718e2[event].cur_value);
         return;
@@ -530,10 +530,10 @@ function close(cleanup) {
   util::wait_network_frame(2);
   player prompts::remove_group(#"cursor");
   prompts::function_398ab9eb();
-  namespace_61e6d095::function_9ade1d9b(#"interactive_map", "cursor.update", 0, 1);
-  namespace_61e6d095::set_data(#"interactive_map", "update", 0, 1);
-  namespace_61e6d095::remove(#"interactive_map");
-  namespace_61e6d095::function_4279fd02(#"interactive_map");
+  scripted_widgets::function_9ade1d9b(#"interactive_map", "cursor.update", 0, 1);
+  scripted_widgets::set_data(#"interactive_map", "update", 0, 1);
+  scripted_widgets::remove(#"interactive_map");
+  scripted_widgets::function_4279fd02(#"interactive_map");
 
   if(is_true(cleanup)) {
     level.interactive_map = undefined;
@@ -601,21 +601,21 @@ function private function_db6cb581(uid, widget_name = #"hash_21fb68e196ffe610") 
 }
 
 function private function_455d4424(uid) {
-  if(level.interactive_map.cursor_object === self || level.interactive_map.var_1896103a === self) {
+  if(level.interactive_map.cursor_object === self || level.interactive_map.cursor_hotspot === self) {
     level.interactive_map.cursor_object = undefined;
-    level.interactive_map.var_1896103a = undefined;
+    level.interactive_map.cursor_hotspot = undefined;
     function_8b43da33();
   }
 
   function_d0243e5b(uid, "widgetName", #"");
-  namespace_61e6d095::clear_data(#"interactive_map", "mapObjects" + "." + uid, 1);
+  scripted_widgets::clear_data(#"interactive_map", "mapObjects" + "." + uid, 1);
   thread function_fa8087e3();
 }
 
-function private function_9dfe141f(uid, var_6d62c29c, angle_offset = 0) {
+function private function_9dfe141f(uid, update_angles, angle_offset = 0) {
   level endon(#"close_interactive_map", #"hash_64a3b02565bdf75f");
   self endon(#"death", #"hash_7c1f9e1214f47b4e");
-  self thread function_8e91c74c(uid);
+  self thread cleanup_on_death(uid);
 
   while(true) {
     pos = self.origin;
@@ -630,7 +630,7 @@ function private function_9dfe141f(uid, var_6d62c29c, angle_offset = 0) {
     function_d0243e5b(uid, "x", self.var_2ac0bdff[0]);
     function_d0243e5b(uid, "y", self.var_2ac0bdff[1]);
 
-    if(is_true(var_6d62c29c)) {
+    if(is_true(update_angles)) {
       function_d0243e5b(uid, "angle", angles[1] + angle_offset);
     }
 
@@ -638,7 +638,7 @@ function private function_9dfe141f(uid, var_6d62c29c, angle_offset = 0) {
   }
 }
 
-function private function_8e91c74c(uid) {
+function private cleanup_on_death(uid) {
   level endon(#"close_interactive_map", #"hash_64a3b02565bdf75f");
   self endon(#"hash_7c1f9e1214f47b4e");
   self waittill(#"death");
@@ -650,11 +650,11 @@ function private update_cursor(var_ff0f9714) {
   player = getPlayers()[0];
   player endon(#"death");
   level.interactive_map.cursor_object = undefined;
-  level.interactive_map.var_1896103a = undefined;
+  level.interactive_map.cursor_hotspot = undefined;
   cursor_object = undefined;
 
   while(true) {
-    if(namespace_61e6d095::should_hide(#"interactive_map")) {
+    if(scripted_widgets::should_hide(#"interactive_map")) {
       waitframe(1);
       continue;
     }
@@ -701,16 +701,16 @@ function private function_3fe61dc2(object) {
 }
 
 function private function_393ad031() {
-  if(isDefined(level.interactive_map.var_1896103a) && !function_4c186262(level.interactive_map.var_1896103a)) {
-    thread cursor_off(level.interactive_map.var_1896103a);
-    level.interactive_map.var_1896103a = undefined;
+  if(isDefined(level.interactive_map.cursor_hotspot) && !function_4c186262(level.interactive_map.cursor_hotspot)) {
+    thread cursor_off(level.interactive_map.cursor_hotspot);
+    level.interactive_map.cursor_hotspot = undefined;
     return;
   }
 
   foreach(hotspot in level.interactive_map.hotspots) {
-    if(hotspot !== level.interactive_map.var_1896103a && function_4c186262(hotspot)) {
+    if(hotspot !== level.interactive_map.cursor_hotspot && function_4c186262(hotspot)) {
       thread cursor_on(hotspot);
-      level.interactive_map.var_1896103a = hotspot;
+      level.interactive_map.cursor_hotspot = hotspot;
       break;
     }
   }
@@ -763,10 +763,10 @@ function private cursor_off(object) {
   }
 
   if(level.interactive_map.var_2c15274b.object === object) {
-    var_240f71c = object === level.interactive_map.var_1896103a;
-    var_6d991c4e = level.interactive_map.var_1896103a;
+    is_hotspot = object === level.interactive_map.cursor_hotspot;
+    var_6d991c4e = level.interactive_map.cursor_hotspot;
 
-    if(var_240f71c) {
+    if(is_hotspot) {
       var_6d991c4e = level.interactive_map.cursor_object;
     }
 
@@ -787,5 +787,5 @@ function private function_a246a802(object) {
 }
 
 function private function_fa8087e3() {
-  namespace_61e6d095::set_data(#"interactive_map", "update", 1, 1, 0, 0, 1);
+  scripted_widgets::set_data(#"interactive_map", "update", 1, 1, 0, 0, 1);
 }

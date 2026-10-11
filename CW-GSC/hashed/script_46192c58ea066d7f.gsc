@@ -139,9 +139,9 @@ function function_d5766919(var_4c42f7cf) {
 
 function function_e50b5cec(var_4c42f7cf) {
   assert(isPlayer(self));
-  var_6a4efe8e = self clientfield::get_player_uimodel("hud_items.selfReviveAvailable");
+  hasselfrevive = self clientfield::get_player_uimodel("hud_items.selfReviveAvailable");
 
-  if(var_6a4efe8e) {
+  if(hasselfrevive) {
     self clientfield::set_player_uimodel("hud_items.selfReviveAvailable", 0);
     itempoint = function_4ba8fde(#"hash_b8b2580ac5556e1");
     level thread item_drop::function_7910964d(var_4c42f7cf + 1, undefined, 1, 0, itempoint.id, self.origin, (0, randomintrange(0, 360), 0), 2);
@@ -160,7 +160,7 @@ function function_aecae28d(damage) {
     return damage;
   }
 
-  var_babbb09b = 0;
+  reduceddamage = 0;
   var_e67d2721 = damage - self.var_dba54111;
 
   if(var_e67d2721 < 0) {
@@ -170,7 +170,7 @@ function function_aecae28d(damage) {
   self.var_1181c08b -= var_e67d2721;
 
   if(self.var_1181c08b < 0) {
-    var_babbb09b = self.var_1181c08b;
+    reduceddamage = self.var_1181c08b;
   }
 
   self.var_1181c08b = max(self.var_1181c08b, 0);
@@ -182,7 +182,7 @@ function function_aecae28d(damage) {
 
   var_db01f8df = self.var_4a1cb171 <= 0 ? 0 : self.var_1181c08b / self.var_4a1cb171;
   self clientfield::set_player_uimodel("hudItems.radiationVestHealth", var_db01f8df);
-  return var_babbb09b;
+  return reduceddamage;
 }
 
 function function_b0000c15() {

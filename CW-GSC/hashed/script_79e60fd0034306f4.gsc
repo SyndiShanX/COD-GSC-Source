@@ -78,7 +78,7 @@ function intro_main(str_objective, b_starting) {
   level scene::init("p9_fxanim_cp_stakeout_elevated_train_01_bundle");
   level flag::set("no_corpse_pickup ");
   level notify(#"hash_617ae3084a75a5b0");
-  util::function_268bdf4f("park");
+  util::init_hero("park");
   level.lazar = spawner::simple_spawn_single("warehouse_lazar");
   level.lazar.is_hero = 1;
   level.lazar util::magic_bullet_shield();
@@ -95,10 +95,10 @@ function intro_main(str_objective, b_starting) {
   level flag::wait_till("warehouse_intro_done");
   clientfield::set("force_stream_warehouse", 0);
   util::function_3e65fe0b(0);
-  skipto::function_4e3ab877("warehouse_intro");
+  skipto::objective_completed("warehouse_intro");
 }
 
-function intro_catchup(str_objective, b_starting, var_aa1a6455, player) {
+function intro_catchup(str_objective, b_starting, b_direct, player) {
   clientfield::set("cull_rear_warehouse", 1);
 }
 
@@ -175,7 +175,7 @@ function function_131f5dc5() {
   waitframe(1);
   player = getPlayers()[0];
   player val::reset("apartment_to_warehouse", "freezecontrols");
-  level battlechatter::function_2ab9360b(0);
+  level battlechatter::bc_allow(0);
   level.adler val::set("warehouse_intro", "ignoreme", 1);
   level.lazar val::set("warehouse_intro", "ignoreme", 1);
   level.park val::set("warehouse_intro", "ignoreme", 1);
@@ -378,7 +378,7 @@ function function_1f6e9d44() {
 }
 
 function function_dc4b560d() {
-  level waittill(#"hash_2399d9df0270889e");
+  level waittill(#"pop_smoke");
   level thread function_332986a1("park_window_shatter", "warehouse_intro_gas_park_start", "warehouse_intro_gas_park_end");
   level thread function_332986a1("lazar_window_shatter", "warehouse_intro_gas_lazar_start", "warehouse_intro_gas_lazar_end");
   level thread function_332986a1("adler_window_shatter", "warehouse_intro_gas_adler_start", "warehouse_intro_gas_adler_end");
@@ -430,7 +430,7 @@ function function_1de6c9b7() {
 
 function function_9bb56737() {
   level waittill(#"hash_758faf8962d0ec61");
-  savegame::function_7790f03();
+  savegame::checkpoint_save_asap();
 }
 
 function function_853aef38() {
@@ -439,7 +439,7 @@ function function_853aef38() {
 }
 
 function start(str_objective) {
-  util::function_268bdf4f("park");
+  util::init_hero("park");
   level flag::set("warehouse_intro_done");
   level flag::set("warehouse_give_player_weapon");
   exploder::exploder("fx_exp_moon_card");
@@ -519,7 +519,7 @@ function main(str_objective, b_starting) {
   level thread warehouse_combat();
   level thread function_2f72365();
   level flag::wait_till("flag_warehouse_outro_door");
-  skipto::function_4e3ab877("warehouse");
+  skipto::objective_completed("warehouse");
   getPlayers()[0] namespace_6cecf2d8::function_9fa1a484();
 }
 
@@ -527,19 +527,19 @@ function function_ad178f3f() {
   player = getPlayers()[0];
   objectives::scripted(#"kill_or_capture_obj", undefined, #"hash_1c73a293c174c216");
   wait 0.5;
-  var_f8d522f5 = struct::get("obj_outro_door_pos", "targetname");
-  objectives::goto(#"outro_door", var_f8d522f5);
+  door_pos = struct::get("obj_outro_door_pos", "targetname");
+  objectives::goto(#"outro_door", door_pos);
   level flag::wait_till("flag_warehouse_combat_vo");
-  id = objectives::function_285e460(#"outro_door", var_f8d522f5);
+  id = objectives::function_285e460(#"outro_door", door_pos);
   thread objectives_ui::function_f3ac479c(id);
   player thread objectives_ui::show_objectives();
   level flag::wait_till("flag_warehouse_outro_door");
   objectives::remove(#"kill_or_capture_obj");
-  objectives::remove(#"outro_door", var_f8d522f5);
+  objectives::remove(#"outro_door", door_pos);
 }
 
 function warehouse_combat() {
-  level battlechatter::function_2ab9360b(1);
+  level battlechatter::bc_allow(1);
   level thread function_85177212();
   level thread function_2cc3a1be();
   level thread function_be7a4072();
@@ -618,15 +618,15 @@ function function_2f72365() {
 
 function function_db469dbf() {
   level flag::wait_till("warehouse_retreat_catwalk_enemies");
-  namespace_11998b8f::function_d0551a1b("warehouse_enemy_vol_03_catwalk", "warehouse_enemy_vol_04", 1, 2);
+  namespace_11998b8f::retreat_from_vol_to_vol("warehouse_enemy_vol_03_catwalk", "warehouse_enemy_vol_04", 1, 2);
 }
 
-function function_cfbae19c(var_28c216f0, disable_flag, seekers) {
+function function_cfbae19c(spawn_flag, disable_flag, seekers) {
   if(isDefined(disable_flag)) {
     level endon(disable_flag);
   }
 
-  level flag::wait_till(var_28c216f0);
+  level flag::wait_till(spawn_flag);
   var_897f3268 = spawner::simple_spawn(seekers, &function_73b1f5c7);
 }
 
@@ -783,7 +783,7 @@ function function_592bf7fa() {
 }
 
 function outro_start(str_objective) {
-  util::function_268bdf4f("park");
+  util::init_hero("park");
   doors::lock("warehouse_entrance_door");
   level flag::set("warehouse_intro_done");
   level flag::set("warehouse_give_player_weapon");
@@ -831,7 +831,7 @@ function outro_main(str_objective, b_starting) {
     level thread function_e47b21fa();
   }
 
-  level battlechatter::function_2ab9360b(0);
+  level battlechatter::bc_allow(0);
   level thread function_27777aad();
   level thread function_6b148d96();
 
@@ -849,11 +849,11 @@ function outro_main(str_objective, b_starting) {
   player.takedown.disabled = 1;
   level thread function_f038b760();
   level flag::wait_till("warehouse_outro_end");
-  skipto::function_4e3ab877(str_objective);
+  skipto::objective_completed(str_objective);
   player_decision::function_430ebd4b(6, 2);
   player_decision::function_430ebd4b(5, 3);
   player_decision::function_8c0836dd(0);
-  skipto::function_1c2dfc20("cp_rus_amerika");
+  skipto::level_completed("cp_rus_amerika");
 }
 
 function function_82d03a33() {
@@ -878,17 +878,17 @@ function function_b22fe3db() {
   level waittill(#"hash_6bc4c4f5b21da722");
 
   if(isalive(self) && isDefined(self)) {
-    level.var_cb14744d = util::spawn_model("tag_origin", self.origin, self.angles);
-    level.var_cb14744d linkTo(self);
-    level.var_cb14744d util::create_cursor_hint("tag_origin", (0, 0, 43), #"hash_42fb441288499922", 110, undefined, undefined, undefined, undefined, undefined, 0, 1);
-    level.var_cb14744d prompts::set_objective("kill_or_capture_obj");
-    level.var_cb14744d waittill(#"trigger");
+    level.obj_tag = util::spawn_model("tag_origin", self.origin, self.angles);
+    level.obj_tag linkTo(self);
+    level.obj_tag util::create_cursor_hint("tag_origin", (0, 0, 43), #"hash_42fb441288499922", 110, undefined, undefined, undefined, undefined, undefined, 0, 1);
+    level.obj_tag prompts::set_objective("kill_or_capture_obj");
+    level.obj_tag waittill(#"trigger");
     player playRumbleOnEntity(#"anim_med");
     level flag::set("flag_warehouse_outro_volkov_capture");
     self stopsounds();
     namespace_5ceacc03::music("17.0_capture_volkov");
     objectives::complete(#"kill_or_capture_obj");
-    level.var_cb14744d util::remove_cursor_hint();
+    level.obj_tag util::remove_cursor_hint();
     player player_decision::function_5d2eb7fa(0);
     player_decision::function_8c0836dd(2);
   }
@@ -910,8 +910,8 @@ function function_6aa51edd() {
   level scene::stop("scene_z_stk_warehouse_cornered");
   objectives::complete(#"kill_or_capture_obj");
 
-  if(isDefined(level.var_cb14744d)) {
-    level.var_cb14744d util::remove_cursor_hint();
+  if(isDefined(level.obj_tag)) {
+    level.obj_tag util::remove_cursor_hint();
   }
 
   player player_decision::function_5d2eb7fa(1);
@@ -1080,9 +1080,9 @@ function function_b7a12bcc() {
   var_cfb34b60 = getEnt("warehouse_concussion_end2", "targetname");
   var_2362d320 = getweapon(#"eq_slow_grenade");
   var_a54779bb = vectorNormalize(var_e27a70ee.origin - var_455bdfc6.origin) * 400;
-  var_2bc9761c = var_455bdfc6 magicgrenadetype(var_2362d320, var_455bdfc6.origin, var_a54779bb, 0.5);
+  e_grenade1 = var_455bdfc6 magicgrenadetype(var_2362d320, var_455bdfc6.origin, var_a54779bb, 0.5);
   var_b2f6951d = vectorNormalize(var_cfb34b60.origin - var_4788e488.origin) * 400;
-  var_6022a8e = var_4788e488 magicgrenadetype(var_2362d320, var_4788e488.origin, var_b2f6951d, 1);
+  e_grenade2 = var_4788e488 magicgrenadetype(var_2362d320, var_4788e488.origin, var_b2f6951d, 1);
   wait 1.2;
   var_7aa562ca = spawner::simple_spawn("warehouse_slowmo_enemies", &function_44ad2b11);
 
@@ -1223,17 +1223,17 @@ function function_639f072c() {
   }
 }
 
-function function_a099daab(var_9c878bb5) {
+function function_a099daab(str_triggername) {
   wait 1.5;
 
-  if(isDefined(getEnt(var_9c878bb5, "targetname"))) {
-    trigger::use(var_9c878bb5);
+  if(isDefined(getEnt(str_triggername, "targetname"))) {
+    trigger::use(str_triggername);
   }
 }
 
-function function_a2c72e4b(var_9c878bb5, set_flag) {
-  if(flag::get(set_flag) && isDefined(getEnt(var_9c878bb5, "targetname"))) {
-    trigger = getEnt(var_9c878bb5, "targetname");
+function function_a2c72e4b(str_triggername, set_flag) {
+  if(flag::get(set_flag) && isDefined(getEnt(str_triggername, "targetname"))) {
+    trigger = getEnt(str_triggername, "targetname");
     trigger delete();
   }
 }

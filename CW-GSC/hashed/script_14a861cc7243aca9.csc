@@ -22,14 +22,14 @@ function function_409efbe2(localclientnum, oldval, newval, bnewent, binitialsnap
     case 1:
       var_5b93750e = "pstfx_tronworld";
       setsoundcontext("dark_aether", "active");
-      playSound(fieldname, #"hash_2afe43c80293fb00", (0, 0, 0));
+      playSound(fieldname, #"evt_alt_transition", (0, 0, 0));
       var_1bb0b8aa = 1;
       level.mannequin_mode = var_5b93750e;
       break;
     case 2:
       var_5b93750e = "pstfx_tankworld";
       setsoundcontext("dark_aether", "active");
-      playSound(fieldname, #"hash_2afe43c80293fb00", (0, 0, 0));
+      playSound(fieldname, #"evt_alt_transition", (0, 0, 0));
       var_1bb0b8aa = 1;
       level.mannequin_mode = var_5b93750e;
       break;

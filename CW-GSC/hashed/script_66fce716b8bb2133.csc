@@ -23,5 +23,5 @@ function private function_9b3fe343(localclientnum) {
 
   if(is_true(level.debug_keyline_zombies)) {}
 
-  util::playFXOnTag(localclientnum, #"hash_1cb1e3e527bd121c", self, "tag_eye");
+  util::playFXOnTag(localclientnum, #"zm_ai/fx8_bat_eye_glow", self, "tag_eye");
 }

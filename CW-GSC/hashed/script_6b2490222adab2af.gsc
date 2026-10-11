@@ -33,7 +33,7 @@ function start(str_objective) {}
 function main(str_objective, b_starting) {
   hms_util::print("<dev string:x38>");
 
-  level thread globallogic_ui::function_7bc0e4b9();
+  level thread globallogic_ui::do_chyron_text();
   setsaveddvar(#"vt_reset", 1);
   snd::client_msg("audio_level_begin_duck_start");
   namespace_232ddc52::music("1.0_intro");
@@ -55,7 +55,7 @@ function main(str_objective, b_starting) {
   level.park setgoal(var_345f4332);
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   hms_util::print("<dev string:x49>");
 }
 

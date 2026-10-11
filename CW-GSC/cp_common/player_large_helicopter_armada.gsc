@@ -812,7 +812,7 @@ function function_7516cdbc(var_72dc2794, e_player) {
   self endon(#"death", #"disconnect", #"exit_vehicle", #"change_seat");
   self endon(var_72dc2794);
   e_player endon(#"death");
-  var_9e838eb2 = 0;
+  slow_speed = 0;
   var_95505aa4 = 30;
   var_83082aec = 120;
   var_77843477 = undefined;
@@ -821,7 +821,7 @@ function function_7516cdbc(var_72dc2794, e_player) {
     chopper_speed = self getspeedmph();
 
     if(isDefined(var_77843477)) {
-      if(chopper_speed > var_9e838eb2 && var_77843477 <= var_9e838eb2) {
+      if(chopper_speed > slow_speed && var_77843477 <= slow_speed) {
         e_player playrumblelooponentity("fallwind_loop_slow");
       } else if(chopper_speed < var_95505aa4 && var_77843477 >= var_95505aa4) {
         e_player stoprumble("fallwind_loop_rapid");

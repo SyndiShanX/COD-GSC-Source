@@ -555,7 +555,7 @@ function onplaceturret(turret) {
   }
 
   player deployable::function_6ec9ee30(turret.vehicle, getweapon("ultimate_turret"));
-  turret.vehicle playLoopSound(#"hash_69240c6db92da5bf", 0.25);
+  turret.vehicle playLoopSound(#"mpl_turret_amb_loop", 0.25);
 
   foreach(player in level.players) {
     turret.vehicle respectnottargetedbysentryperk(player);
@@ -583,7 +583,7 @@ function onplaceturret(turret) {
   gameobject gameobjects::allow_use(#"group_friendly");
   gameobject gameobjects::set_onbeginuse_event(&onbeginuse);
   gameobject gameobjects::set_onenduse_event(&onenduse);
-  gameobject gameobjects::set_onuse_event(&function_ff9ee951);
+  gameobject gameobjects::set_onuse_event(&pickup_turret);
   gameobject.requireslos = 1;
   gameobject.turret = turret;
   turret.vehicle.gameobject = gameobject;
@@ -624,7 +624,7 @@ function onenduse(team, player, success) {
   }
 }
 
-function function_ff9ee951(player) {
+function pickup_turret(player) {
   turret = self.turret;
   vehicle = turret.vehicle;
 
@@ -659,7 +659,7 @@ function function_ff9ee951(player) {
 
   player.pers[#"hash_55c15f9af76e4e68"][slot] = elapsedtime;
   player.pers[#"hash_38fcd8992f6cb9dc"][slot] = vehicle.damagetaken;
-  vehicle playSound(#"hash_9587de6d97f0f90");
+  vehicle playSound(#"mpl_turret_pickup");
   vehicle stoploopsound(0.5);
   vehicle function_3a9dddac();
   vehicle function_9813d292();
@@ -1207,7 +1207,7 @@ function function_145804c6() {
   return undefined;
 }
 
-function function_d103a3d0() {
+function acquire_target() {
   self.e_current_target = undefined;
   self setturretspinning(0);
   self.var_73998811 = undefined;
@@ -1331,7 +1331,7 @@ function turretscanning() {
   veh endon(#"death", #"death_started", #"end_turret_scanning");
   wait 0.8;
   veh playSound(#"mpl_turret_startup");
-  veh playLoopSound(#"hash_69240c6db92da5bf");
+  veh playLoopSound(#"mpl_turret_amb_loop");
   s_bundle = killstreaks::get_script_bundle("ultimate_turret");
   veh.maxsightdistsqrd = sqr(isDefined(s_bundle.var_2aeadfa0) ? s_bundle.var_2aeadfa0 : 3500);
   veh thread function_9d831b2f();
@@ -1347,7 +1347,7 @@ function turretscanning() {
     if(is_valid_target(veh.e_current_target)) {
       function_16ccb771(veh.e_current_target);
     } else {
-      function_d103a3d0();
+      acquire_target();
     }
 
     aim_at_target(isDefined(veh.var_c27dadc8) ? veh.var_c27dadc8 : veh.e_current_target);

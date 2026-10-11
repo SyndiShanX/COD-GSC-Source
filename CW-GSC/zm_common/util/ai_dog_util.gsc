@@ -448,7 +448,7 @@ function play_dog_round() {
   players[num] zm_audio::create_and_play_dialog(#"general", #"dog_spawn");
 }
 
-function private function_7d5fa17e() {
+function private should_explode_on_death() {
   return self.subarchetype != #"zombie_wolf" && self.subarchetype != #"hash_28e36e7b7d5421f" && self.subarchetype != #"hash_2a5479b83161cb35";
 }
 
@@ -489,7 +489,7 @@ function dog_init() {
   self.freezegun_damage = 0;
   self.zombie_move_speed = "sprint";
 
-  if(self function_7d5fa17e()) {
+  if(self should_explode_on_death()) {
     self.a.nodeath = 1;
   }
 
@@ -558,7 +558,7 @@ function dog_death() {
   self stoploopsound();
   self playSound(#"");
 
-  if(self function_7d5fa17e() && !is_true(self.a.nodeath)) {
+  if(self should_explode_on_death() && !is_true(self.a.nodeath)) {
     trace = groundtrace(self.origin + (0, 0, 10), self.origin - (0, 0, 30), 0, self);
 
     if(trace[#"fraction"] < 1) {
@@ -571,7 +571,7 @@ function dog_death() {
   }
 
   if(self.subarchetype != #"zombie_wolf" && isDefined(self.a.nodeath)) {
-    if(self.var_c39323b5 !== 1) {
+    if(self.b_cleaned_up !== 1) {
       level thread dog_explode_fx(self, self.origin);
       self ghost();
       self notsolid();

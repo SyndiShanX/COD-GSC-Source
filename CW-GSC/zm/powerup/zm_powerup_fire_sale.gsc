@@ -84,7 +84,7 @@ function start_fire_sale(item) {
   }
 
   zombie_utility::set_zombie_var(#"zombie_powerup_fire_sale_time", 30);
-  level notify(#"hash_7a941ba8e576862e");
+  level notify(#"pump_powerup_hud");
 
   if(bgb::is_team_enabled(#"zm_bgb_temporal_gift")) {
     zombie_utility::set_zombie_var(#"zombie_powerup_fire_sale_time", zombie_utility::get_zombie_var(#"zombie_powerup_fire_sale_time") + 30);

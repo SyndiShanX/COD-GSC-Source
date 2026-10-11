@@ -51,7 +51,7 @@ function function_7a20f9a3(watcher, owner) {
   }
 
   anim_model = util::spawn_model(self.model, self.origin, self.angles);
-  anim_model thread scene::play(#"hash_7de44b33b939963a", anim_model);
+  anim_model thread scene::play(#"p9_fxanim_zm_platinum_tempest_machine_lure_bundle", anim_model);
   waitframe(1);
   self hide();
   wait 1;

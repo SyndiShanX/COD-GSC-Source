@@ -29,7 +29,7 @@
 
 function init() {
   namespace_250e9486::function_252dff4d("margwa", 8, &function_e9608fd3);
-  spawner::add_archetype_spawn_function(#"margwa", &function_a8751f9b);
+  spawner::add_archetype_spawn_function(#"margwa", &archetypemargwablackboardinit);
   clientfield::register("actor", "margwa_head_left", 1, 2, "int");
   clientfield::register("actor", "margwa_head_mid", 1, 2, "int");
   clientfield::register("actor", "margwa_head_right", 1, 2, "int");
@@ -69,9 +69,9 @@ function registerbehaviorscriptfunctions() {
   assert(!isDefined(undefined) || isscriptfunctionptr(undefined));
   behaviortreenetworkutility::registerbehaviortreeaction("margwaReactStunAction", &margwareactstunaction, undefined, undefined);
   assert(!isDefined(&margwaswipeattackaction) || isscriptfunctionptr(&margwaswipeattackaction));
-  assert(!isDefined(&function_12a0b652) || isscriptfunctionptr(&function_12a0b652));
+  assert(!isDefined(&margwaswipeattackactionupdate) || isscriptfunctionptr(&margwaswipeattackactionupdate));
   assert(!isDefined(&function_9f21d288) || isscriptfunctionptr(&function_9f21d288));
-  behaviortreenetworkutility::registerbehaviortreeaction("margwaSwipeAttackAction", &margwaswipeattackaction, &function_12a0b652, &function_9f21d288);
+  behaviortreenetworkutility::registerbehaviortreeaction("margwaSwipeAttackAction", &margwaswipeattackaction, &margwaswipeattackactionupdate, &function_9f21d288);
   assert(isscriptfunctionptr(&margwaidlestart));
   behaviortreenetworkutility::registerbehaviortreescriptapi("margwaIdleStart", &margwaidlestart);
   assert(isscriptfunctionptr(&margwamovestart));
@@ -96,9 +96,9 @@ function registerbehaviorscriptfunctions() {
   behaviortreenetworkutility::registerbehaviortreescriptapi("margwaSwipeAttackStart", &margwaswipeattackstart);
   assert(isscriptfunctionptr(&margwaswipeattackterminate));
   behaviortreenetworkutility::registerbehaviortreescriptapi("margwaSwipeAttackTerminate", &margwaswipeattackterminate);
-  animationstatenetwork::registernotetrackhandlerfunction("margwa_smash_attack", &function_b4c86753);
-  animationstatenetwork::registernotetrackhandlerfunction("margwa_bodyfall large", &function_11199ef4);
-  animationstatenetwork::registernotetrackhandlerfunction("margwa_melee_fire", &function_badfb816);
+  animationstatenetwork::registernotetrackhandlerfunction("margwa_smash_attack", &margwanotetracksmashattack);
+  animationstatenetwork::registernotetrackhandlerfunction("margwa_bodyfall large", &margwanotetrackbodyfall);
+  animationstatenetwork::registernotetrackhandlerfunction("margwa_melee_fire", &margwanotetrackpainmelee);
 }
 
 function function_e9608fd3() {
@@ -118,48 +118,48 @@ function function_e9608fd3() {
   self.disableammodrop = 1;
   self.no_gib = 1;
   self.zombie_move_speed = "walk";
-  self.var_1c8b76d3 = 1;
-  self.overrideactordamage = &function_239ee36;
+  self.non_zombie = 1;
+  self.overrideactordamage = &margwadamage;
   self.candamage = 1;
-  self.var_887aaf49 = 3;
-  self.var_a5d387bf = 0;
+  self.headattached = 3;
+  self.headopen = 0;
 
   if(randomint(100) > 50) {
-    self function_195ee8be("c_zom_margwa_chunks_le", "j_chunk_head_bone_le");
-    self function_195ee8be("c_zom_margwa_chunks_ri", "j_chunk_head_bone_ri");
+    self margwainithead("c_zom_margwa_chunks_le", "j_chunk_head_bone_le");
+    self margwainithead("c_zom_margwa_chunks_ri", "j_chunk_head_bone_ri");
   } else {
-    self function_195ee8be("c_zom_margwa_chunks_ri", "j_chunk_head_bone_ri");
-    self function_195ee8be("c_zom_margwa_chunks_le", "j_chunk_head_bone_le");
+    self margwainithead("c_zom_margwa_chunks_ri", "j_chunk_head_bone_ri");
+    self margwainithead("c_zom_margwa_chunks_le", "j_chunk_head_bone_le");
   }
 
-  self function_195ee8be("c_zom_margwa_chunks_mid", "j_chunk_head_bone");
-  self.var_b3d3bd49 = 600;
-  self function_b705860f();
-  self thread function_ea39f784();
+  self margwainithead("c_zom_margwa_chunks_mid", "j_chunk_head_bone");
+  self.headhealthmax = 600;
+  self margwadisablestun();
+  self thread margwadeath();
   self.updatesight = 0;
   self.var_cccb0ad2 = 1;
   self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_margwa_spawn");
-  self thread namespace_9fc66ac::function_ba33d23d(#"zmb_vocals_margwa_ambient", #"zmb_vocals_margwa_ambient", #"");
+  self thread doa_sound::function_ba33d23d(#"zmb_vocals_margwa_ambient", #"zmb_vocals_margwa_ambient", #"");
   profilestop();
 }
 
-function private function_a8751f9b() {
+function private archetypemargwablackboardinit() {
   blackboard::createblackboardforentity(self);
   self setblackboardattribute("_locomotion_speed", "locomotion_speed_walk");
-  self.___archetypeonanimscriptedcallback = &function_46d5894d;
+  self.___archetypeonanimscriptedcallback = &archetypemargwaonanimscriptedcallback;
 }
 
-function private function_46d5894d(entity) {
+function private archetypemargwaonanimscriptedcallback(entity) {
   entity.__blackboard = undefined;
-  entity function_a8751f9b();
+  entity archetypemargwablackboardinit();
 }
 
-function private function_b4c86753(entity) {
+function private margwanotetracksmashattack(entity) {
   players = getPlayers();
 
   foreach(player in players) {
-    var_9f06b4e9 = entity.origin + vectorscale(anglesToForward(self.angles), 60);
-    distsq = distancesquared(var_9f06b4e9, player.origin);
+    smashpos = entity.origin + vectorscale(anglesToForward(self.angles), 60);
+    distsq = distancesquared(smashpos, player.origin);
 
     if(distsq < 20736) {
       if(!isgodmode(player)) {
@@ -168,10 +168,10 @@ function private function_b4c86753(entity) {
           attackdir = player.origin - self.origin;
 
           if(is_true(player.hasriotshieldequipped)) {
-            if(player function_6337506a(attackdir, 0.2)) {
+            if(player shieldfacing(attackdir, 0.2)) {
               damageshield = 1;
             }
-          } else if(player function_6337506a(attackdir, 0.2, 0)) {
+          } else if(player shieldfacing(attackdir, 0.2, 0)) {
             damageshield = 1;
           }
 
@@ -188,8 +188,8 @@ function private function_b4c86753(entity) {
           }
         }
 
-        if(isDefined(level.var_abc9fecd) && isfunctionptr(level.var_abc9fecd)) {
-          if(player[[level.var_abc9fecd]](self)) {
+        if(isDefined(level.margwa_smash_damage_callback) && isfunctionptr(level.margwa_smash_damage_callback)) {
+          if(player[[level.margwa_smash_damage_callback]](self)) {
             continue;
           }
         }
@@ -200,22 +200,22 @@ function private function_b4c86753(entity) {
     }
   }
 
-  if(isDefined(self.var_a567e412)) {
-    self[[self.var_a567e412]]();
+  if(isDefined(self.smashattackcb)) {
+    self[[self.smashattackcb]]();
   }
 }
 
-function private function_11199ef4(entity) {
+function private margwanotetrackbodyfall(entity) {
   if(self.archetype == #"margwa") {
     entity ghost();
 
-    if(isDefined(self.var_5ba15acc)) {
-      self[[self.var_5ba15acc]]();
+    if(isDefined(self.bodyfallcb)) {
+      self[[self.bodyfallcb]]();
     }
   }
 }
 
-function private function_badfb816(entity) {
+function private margwanotetrackpainmelee(entity) {
   entity melee();
 }
 
@@ -279,7 +279,7 @@ function private margwashouldshowpain(entity) {
 }
 
 function private margwashouldreactstun(entity) {
-  if(is_true(entity.var_b8239c7b)) {
+  if(is_true(entity.reactstun)) {
     return true;
   }
 
@@ -287,7 +287,7 @@ function private margwashouldreactstun(entity) {
 }
 
 function private margwashouldspawn(entity) {
-  if(is_true(entity.var_243b04fc)) {
+  if(is_true(entity.needspawn)) {
     return true;
   }
 
@@ -299,11 +299,11 @@ function private margwashouldreset(entity) {
     return true;
   }
 
-  if(is_true(entity.var_42b101a5)) {
+  if(is_true(entity.reactidgun)) {
     return true;
   }
 
-  if(is_true(entity.var_b8239c7b)) {
+  if(is_true(entity.reactstun)) {
     return true;
   }
 
@@ -312,10 +312,10 @@ function private margwashouldreset(entity) {
 
 function private margwareactstunaction(entity, asmstatename) {
   animationstatenetworkutility::requeststate(entity, asmstatename);
-  var_e369804c = entity astsearch(asmstatename);
-  var_30358842 = animationstatenetworkutility::searchanimationmap(entity, var_e369804c[#"animation"]);
-  closetime = int(getanimlength(var_30358842) * 1000);
-  entity function_e146597a(closetime);
+  stunactionast = entity astsearch(asmstatename);
+  stunactionanimation = animationstatenetworkutility::searchanimationmap(entity, stunactionast[#"animation"]);
+  closetime = int(getanimlength(stunactionanimation) * 1000);
+  entity margwacloseallheads(closetime);
   margwareactstunstart(entity);
   return 5;
 }
@@ -324,20 +324,20 @@ function private margwaswipeattackaction(entity, asmstatename) {
   animationstatenetworkutility::requeststate(entity, asmstatename);
 
   if(!isDefined(entity.var_514cf595)) {
-    var_d44a2fd7 = entity astsearch(asmstatename);
-    var_cb7794c3 = animationstatenetworkutility::searchanimationmap(entity, var_d44a2fd7[#"animation"]);
-    entity.var_514cf595 = int(getanimlength(var_cb7794c3) * 1000);
+    swipeactionast = entity astsearch(asmstatename);
+    swipeactionanimation = animationstatenetworkutility::searchanimationmap(entity, swipeactionast[#"animation"]);
+    entity.var_514cf595 = int(getanimlength(swipeactionanimation) * 1000);
   }
 
-  if(!isDefined(entity.var_4a40767b)) {
-    entity.var_4a40767b = gettime() + entity.var_514cf595;
+  if(!isDefined(entity.swipe_end_time)) {
+    entity.swipe_end_time = gettime() + entity.var_514cf595;
   }
 
   return 5;
 }
 
-function private function_12a0b652(entity, asmstatename) {
-  if(isDefined(asmstatename.var_4a40767b) && gettime() > asmstatename.var_4a40767b) {
+function private margwaswipeattackactionupdate(entity, asmstatename) {
+  if(isDefined(asmstatename.swipe_end_time) && gettime() > asmstatename.swipe_end_time) {
     return 4;
   }
 
@@ -345,14 +345,14 @@ function private function_12a0b652(entity, asmstatename) {
 }
 
 function private function_9f21d288(entity, asmstatename) {
-  asmstatename.var_4a40767b = undefined;
+  asmstatename.swipe_end_time = undefined;
   return 4;
 }
 
 function private margwaidlestart(entity) {
   entity orientmode("face enemy");
 
-  if(entity function_b92d6daa()) {
+  if(entity shouldupdatejaw()) {
     entity clientfield::set("margwa_jaw", 1);
   }
 }
@@ -360,7 +360,7 @@ function private margwaidlestart(entity) {
 function private margwamovestart(entity) {
   entity orientmode("face motion");
 
-  if(entity function_b92d6daa()) {
+  if(entity shouldupdatejaw()) {
     if(entity.zombie_move_speed == "run") {
       entity clientfield::set("margwa_jaw", 13);
       return;
@@ -370,13 +370,13 @@ function private margwamovestart(entity) {
   }
 }
 
-function private function_fa5c3a61(entity) {}
+function private margwadeathaction(entity) {}
 
 function private margwatraverseactionstart(entity) {
   entity setblackboardattribute("_traversal_type", entity.traversestartnode.animscript);
 
   if(isDefined(entity.traversestartnode.animscript)) {
-    if(entity function_b92d6daa()) {
+    if(entity shouldupdatejaw()) {
       switch (entity.traversestartnode.animscript) {
         case #"jump_down_36":
           entity clientfield::set("margwa_jaw", 21);
@@ -396,9 +396,9 @@ function private margwatraverseactionstart(entity) {
 }
 
 function private margwapainstart(entity) {
-  entity notify(#"hash_28b17b286ff6e084");
+  entity notify(#"stop_head_update");
 
-  if(entity function_b92d6daa()) {
+  if(entity shouldupdatejaw()) {
     head = self getblackboardattribute("_margwa_head");
 
     switch (head) {
@@ -415,33 +415,33 @@ function private margwapainstart(entity) {
   }
 
   entity.headdestroyed = undefined;
-  entity.var_aef14ab3 = 0;
+  entity.canstun = 0;
   entity.candamage = 0;
 }
 
 function private margwapainterminate(entity) {
   entity.headdestroyed = undefined;
-  entity.var_aef14ab3 = 1;
+  entity.canstun = 1;
   entity.candamage = 1;
-  entity function_e146597a(5000);
+  entity margwacloseallheads(5000);
   entity clearpath();
 }
 
 function private margwareactstunstart(entity) {
-  entity.var_b8239c7b = undefined;
-  entity.var_aef14ab3 = 0;
+  entity.reactstun = undefined;
+  entity.canstun = 0;
 
-  if(entity function_b92d6daa()) {
+  if(entity shouldupdatejaw()) {
     entity clientfield::set("margwa_jaw", 6);
   }
 }
 
 function margwareactstunterminate(entity) {
-  entity.var_aef14ab3 = 1;
+  entity.canstun = 1;
 }
 
 function private margwaspawnstart(entity) {
-  entity.var_243b04fc = 0;
+  entity.needspawn = 0;
 }
 
 function function_729da05c() {
@@ -485,7 +485,7 @@ function function_729da05c() {
 
   if(isDefined(obj)) {
     obj thread namespace_ec06fe4a::function_52afe5df(10);
-    obj namespace_83eb6304::function_3ecfde67("nova_crawler_burst");
+    obj doa_fx::function_3ecfde67("nova_crawler_burst");
     util::wait_network_frame();
     obj thread function_66a5466d(spot, 72);
   }
@@ -498,55 +498,55 @@ function function_66a5466d(origin, radius) {
     currentangle = randomint(360);
     var_5ccd914d = rotatepointaroundaxis((randomintrange(12, radius), 0, 0), (0, 0, 1), currentangle);
     self.origin = origin + var_5ccd914d;
-    self namespace_83eb6304::function_3ecfde67("nova_crawler_burst");
+    self doa_fx::function_3ecfde67("nova_crawler_burst");
     wait 0.5;
   }
 }
 
 function private margwasmashattackstart(entity) {
   entity.var_bec33427 = gettime() + randomintrange(3000, 10000);
-  entity function_59b4caf4();
+  entity margwaheadsmash();
   entity thread function_729da05c();
 
-  if(entity function_b92d6daa()) {
+  if(entity shouldupdatejaw()) {
     entity clientfield::set("margwa_jaw", 14);
   }
 }
 
 function margwasmashattackterminate(entity) {
   entity notify(#"hash_2b106aceb73a448d");
-  entity function_e146597a();
+  entity margwacloseallheads();
 }
 
 function margwaswipeattackstart(entity) {
-  if(entity function_b92d6daa()) {
+  if(entity shouldupdatejaw()) {
     entity clientfield::set("margwa_jaw", 16);
   }
 }
 
 function private margwaswipeattackterminate(entity) {
-  entity function_e146597a();
+  entity margwacloseallheads();
 }
 
-function private function_ea39f784() {
+function private margwadeath() {
   self waittill(#"death");
 
-  if(isDefined(self.var_f2bf0700)) {
-    self.var_f2bf0700 notify(#"margwa_kill");
+  if(isDefined(self.e_head_attacker)) {
+    self.e_head_attacker notify(#"margwa_kill");
   }
 }
 
-function function_c9bdb4b5() {
-  self.var_aef14ab3 = 1;
+function margwaenablestun() {
+  self.canstun = 1;
 }
 
-function private function_b705860f() {
-  self.var_aef14ab3 = 0;
+function private margwadisablestun() {
+  self.canstun = 0;
 }
 
-function private function_195ee8be(headmodel, var_755136c1) {
+function private margwainithead(headmodel, headtag) {
   model = headmodel;
-  var_ac8fb879 = undefined;
+  model_gore = undefined;
   self attach(model);
 
   if(!isDefined(self.head)) {
@@ -555,7 +555,7 @@ function private function_195ee8be(headmodel, var_755136c1) {
 
   self.head[model] = spawnStruct();
   self.head[model].model = model;
-  self.head[model].tag = var_755136c1;
+  self.head[model].tag = headtag;
   self.head[model].health = 70000 + int(50000 * namespace_ec06fe4a::function_ef369bae()) + level.doa.var_6c58d51 * 150000;
   self.head[model].candamage = 0;
   self.head[model].open = 1;
@@ -565,61 +565,61 @@ function private function_195ee8be(headmodel, var_755136c1) {
   switch (headmodel) {
     case #"c_zom_margwa_chunks_le":
       self.head[model].cf = "margwa_head_left";
-      self.head[model].var_2d048cdf = "margwa_head_left_hit";
+      self.head[model].impactcf = "margwa_head_left_hit";
       self.head[model].gore = "c_zom_margwa_gore_le";
 
-      if(isDefined(var_ac8fb879)) {
-        self.head[model].gore = var_ac8fb879;
+      if(isDefined(model_gore)) {
+        self.head[model].gore = model_gore;
       }
 
-      self.head[model].var_d3879c8e = 1;
-      self.var_94be3b8e = model;
+      self.head[model].killindex = 1;
+      self.head_left_model = model;
       break;
     case #"c_zom_margwa_chunks_mid":
       self.head[model].cf = "margwa_head_mid";
-      self.head[model].var_2d048cdf = "margwa_head_mid_hit";
+      self.head[model].impactcf = "margwa_head_mid_hit";
       self.head[model].gore = "c_zom_margwa_gore_mid";
 
-      if(isDefined(var_ac8fb879)) {
-        self.head[model].gore = var_ac8fb879;
+      if(isDefined(model_gore)) {
+        self.head[model].gore = model_gore;
       }
 
-      self.head[model].var_d3879c8e = 2;
-      self.var_a0986652 = model;
+      self.head[model].killindex = 2;
+      self.head_mid_model = model;
       break;
     case #"c_zom_margwa_chunks_ri":
       self.head[model].cf = "margwa_head_right";
-      self.head[model].var_2d048cdf = "margwa_head_right_hit";
+      self.head[model].impactcf = "margwa_head_right_hit";
       self.head[model].gore = "c_zom_margwa_gore_ri";
 
-      if(isDefined(var_ac8fb879)) {
-        self.head[model].gore = var_ac8fb879;
+      if(isDefined(model_gore)) {
+        self.head[model].gore = model_gore;
       }
 
-      self.head[model].var_d3879c8e = 3;
-      self.var_a285d7da = model;
+      self.head[model].killindex = 3;
+      self.head_right_model = model;
       break;
   }
 
-  self thread function_81b6b294(self.head[model]);
+  self thread margwaheadupdate(self.head[model]);
 }
 
-function function_b847ce75(health) {
-  self.var_b3d3bd49 = health;
+function margwasetheadhealth(health) {
+  self.headhealthmax = health;
 
   foreach(head in self.head) {
     head.health = health;
   }
 }
 
-function private function_4a60d0c7(min, max) {
+function private margwaresetheadtime(min, max) {
   time = gettime() + randomintrange(min, max);
   return time;
 }
 
-function private function_d150bac6() {
-  if(self.var_887aaf49 > 1) {
-    if(self.var_a5d387bf < self.var_887aaf49 - 1) {
+function private margwaheadcanopen() {
+  if(self.headattached > 1) {
+    if(self.headopen < self.headattached - 1) {
       return true;
     }
   } else {
@@ -629,10 +629,10 @@ function private function_d150bac6() {
   return false;
 }
 
-function private function_81b6b294(headinfo) {
-  self endon(#"death", #"hash_28b17b286ff6e084");
-  headinfo notify(#"hash_28b17b286ff6e084");
-  headinfo endon(#"hash_28b17b286ff6e084");
+function private margwaheadupdate(headinfo) {
+  self endon(#"death", #"stop_head_update");
+  headinfo notify(#"stop_head_update");
+  headinfo endon(#"stop_head_update");
 
   while(true) {
     if(self ispaused()) {
@@ -641,22 +641,22 @@ function private function_81b6b294(headinfo) {
     }
 
     if(!isDefined(headinfo.closetime)) {
-      if(self.var_887aaf49 == 1) {
-        headinfo.closetime = function_4a60d0c7(500, 1000);
+      if(self.headattached == 1) {
+        headinfo.closetime = margwaresetheadtime(500, 1000);
       } else {
-        headinfo.closetime = function_4a60d0c7(1500, 3500);
+        headinfo.closetime = margwaresetheadtime(1500, 3500);
       }
     }
 
-    if(gettime() > headinfo.closetime && self function_d150bac6()) {
-      self.var_a5d387bf++;
+    if(gettime() > headinfo.closetime && self margwaheadcanopen()) {
+      self.headopen++;
       headinfo.closetime = undefined;
     } else {
       util::wait_network_frame();
       continue;
     }
 
-    self function_efe04de1(headinfo, 1);
+    self margwaheaddamagedelay(headinfo, 1);
     self clientfield::set(headinfo.cf, headinfo.open);
 
     if(namespace_ec06fe4a::function_a8975c67()) {
@@ -665,11 +665,11 @@ function private function_81b6b294(headinfo) {
 
     while(true) {
       if(!isDefined(headinfo.opentime)) {
-        headinfo.opentime = function_4a60d0c7(3000, 5000);
+        headinfo.opentime = margwaresetheadtime(3000, 5000);
       }
 
       if(gettime() > headinfo.opentime) {
-        self.var_a5d387bf--;
+        self.headopen--;
         headinfo.opentime = undefined;
         break;
       }
@@ -678,31 +678,31 @@ function private function_81b6b294(headinfo) {
       continue;
     }
 
-    self function_efe04de1(headinfo, 0);
+    self margwaheaddamagedelay(headinfo, 0);
     self clientfield::set(headinfo.cf, headinfo.closed);
   }
 }
 
-function private function_efe04de1(headinfo, candamage) {
+function private margwaheaddamagedelay(headinfo, candamage) {
   self endon(#"death");
   wait 0.1;
   headinfo.candamage = candamage;
 }
 
-function private function_59b4caf4() {
-  self notify(#"hash_28b17b286ff6e084");
-  var_f04f8dd5 = [];
+function private margwaheadsmash() {
+  self notify(#"stop_head_update");
+  headalive = [];
 
   foreach(head in self.head) {
     if(head.health > 0) {
-      var_f04f8dd5[var_f04f8dd5.size] = head;
+      headalive[headalive.size] = head;
     }
   }
 
-  var_f04f8dd5 = array::randomize(var_f04f8dd5);
+  headalive = array::randomize(headalive);
   open = 0;
 
-  foreach(head in var_f04f8dd5) {
+  foreach(head in headalive) {
     if(!open) {
       head.candamage = 1;
       self clientfield::set(head.cf, head.smash);
@@ -710,16 +710,16 @@ function private function_59b4caf4() {
       continue;
     }
 
-    self function_c6899c2b(head);
+    self margwaclosehead(head);
   }
 }
 
-function private function_c6899c2b(headinfo) {
+function private margwaclosehead(headinfo) {
   headinfo.candamage = 0;
   self clientfield::set(headinfo.cf, headinfo.closed);
 }
 
-function private function_e146597a(closetime) {
+function private margwacloseallheads(closetime) {
   if(self ispaused()) {
     return;
   }
@@ -733,15 +733,15 @@ function private function_e146597a(closetime) {
         head.closetime = gettime() + closetime;
       }
 
-      self.var_a5d387bf = 0;
-      self function_c6899c2b(head);
-      self thread function_81b6b294(head);
+      self.headopen = 0;
+      self margwaclosehead(head);
+      self thread margwaheadupdate(head);
     }
   }
 }
 
-function function_a6af900e(var_71938d68, attacker) {
-  headinfo = self.head[var_71938d68];
+function margwakillhead(modelhit, attacker) {
+  headinfo = self.head[modelhit];
 
   if(is_true(headinfo.killed)) {
     return;
@@ -749,30 +749,30 @@ function function_a6af900e(var_71938d68, attacker) {
 
   headinfo.health = 0;
   headinfo.killed = 1;
-  headinfo notify(#"hash_28b17b286ff6e084");
+  headinfo notify(#"stop_head_update");
 
   if(is_true(headinfo.candamage)) {
-    self function_c6899c2b(headinfo);
-    self.var_a5d387bf--;
+    self margwaclosehead(headinfo);
+    self.headopen--;
   }
 
-  self function_e140363d();
-  self clientfield::set("margwa_head_killed", headinfo.var_d3879c8e);
+  self margwaupdatemovespeed();
+  self clientfield::set("margwa_head_killed", headinfo.killindex);
   self detach(headinfo.model);
   self attach(headinfo.gore);
-  self.var_887aaf49--;
+  self.headattached--;
 
-  if(self.var_887aaf49 <= 0) {
-    self.var_f2bf0700 = attacker;
+  if(self.headattached <= 0) {
+    self.e_head_attacker = attacker;
     return 1;
   } else {
-    self.headdestroyed = var_71938d68;
+    self.headdestroyed = modelhit;
   }
 
   return 0;
 }
 
-function function_71c049c4() {
+function margwacandamageanyhead() {
   foreach(head in self.head) {
     if(isDefined(head) && head.health > 0 && is_true(head.candamage)) {
       return true;
@@ -782,7 +782,7 @@ function function_71c049c4() {
   return false;
 }
 
-function function_bbaf72a2() {
+function margwacandamagehead() {
   if(isDefined(self) && self.health > 0 && is_true(self.candamage)) {
     return true;
   }
@@ -790,27 +790,27 @@ function function_bbaf72a2() {
   return false;
 }
 
-function function_239ee36(inflictor, attacker, damage, dflags, mod, weapon, var_fd90b0bb, point, dir, hitloc, offsettime, boneindex, modelindex) {
+function margwadamage(inflictor, attacker, damage, dflags, mod, weapon, var_fd90b0bb, point, dir, hitloc, offsettime, boneindex, modelindex) {
   if(is_true(self.marked_for_death)) {
     self namespace_ec06fe4a::function_2f4b0f9(self.health - boneindex);
     return boneindex;
   }
 
-  var_f04f8dd5 = [];
+  headalive = [];
 
   foreach(head in self.head) {
     if(head.health > 0) {
-      var_f04f8dd5[var_f04f8dd5.size] = head;
+      headalive[headalive.size] = head;
     }
   }
 
-  if(var_f04f8dd5.size) {
-    var_fe17e856 = var_f04f8dd5[0];
-    var_fe17e856.health -= boneindex;
-    self clientfield::increment(var_fe17e856.var_2d048cdf);
+  if(headalive.size) {
+    headclosest = headalive[0];
+    headclosest.health -= boneindex;
+    self clientfield::increment(headclosest.impactcf);
 
-    if(var_fe17e856.health <= 0) {
-      if(self function_a6af900e(var_fe17e856.model, offsettime)) {
+    if(headclosest.health <= 0) {
+      if(self margwakillhead(headclosest.model, offsettime)) {
         return self.health;
       }
     }
@@ -818,7 +818,7 @@ function function_239ee36(inflictor, attacker, damage, dflags, mod, weapon, var_
 
   if(boneindex > self.health) {
     foreach(head in self.head) {
-      self function_a6af900e(head.model, offsettime);
+      self margwakillhead(head.model, offsettime);
     }
   }
 
@@ -833,23 +833,23 @@ function function_239ee36(inflictor, attacker, damage, dflags, mod, weapon, var_
   return boneindex;
 }
 
-function private function_102d7140(entity, partname) {
+function private margwaheadhit(entity, partname) {
   switch (partname) {
     case #"j_chunk_head_bone_le":
     case #"j_jaw_lower_1_le":
-      return self.var_94be3b8e;
+      return self.head_left_model;
     case #"j_jaw_lower_1":
     case #"j_chunk_head_bone":
-      return self.var_a0986652;
+      return self.head_mid_model;
     case #"j_chunk_head_bone_ri":
     case #"j_jaw_lower_1_ri":
-      return self.var_a285d7da;
+      return self.head_right_model;
   }
 
   return undefined;
 }
 
-function private function_e140363d() {
+function private margwaupdatemovespeed() {
   if(self.zombie_move_speed == "walk") {
     self.zombie_move_speed = "run";
     self setblackboardattribute("_locomotion_speed", "locomotion_speed_run");
@@ -862,26 +862,26 @@ function private function_e140363d() {
   }
 }
 
-function function_6c6b91ed() {
+function margwaforcesprint() {
   self.zombie_move_speed = "sprint";
   self setblackboardattribute("_locomotion_speed", "locomotion_speed_sprint");
 }
 
-function private function_35709f56(var_71938d68) {}
+function private margwadestroyhead(modelhit) {}
 
-function function_b92d6daa() {
-  if(!is_true(self.var_180ce19e)) {
+function shouldupdatejaw() {
+  if(!is_true(self.jawanimenabled)) {
     return false;
   }
 
-  if(self.var_887aaf49 < 3) {
+  if(self.headattached < 3) {
     return true;
   }
 
   return false;
 }
 
-function function_6337506a(vdir, limit, front = 1) {
+function shieldfacing(vdir, limit, front = 1) {
   orientation = self getplayerangles();
   forwardvec = anglesToForward(orientation);
 
@@ -898,15 +898,15 @@ function function_6337506a(vdir, limit, front = 1) {
   return dotproduct > limit;
 }
 
-function private function_fe2eb01c(enemy) {
-  var_9f06b4e9 = self.origin;
+function private insmashattackrange(enemy) {
+  smashpos = self.origin;
   heightoffset = abs(self.origin[2] - enemy.origin[2]);
 
   if(heightoffset > 48) {
     return false;
   }
 
-  distsq = distancesquared(var_9f06b4e9, enemy.origin);
+  distsq = distancesquared(smashpos, enemy.origin);
 
   if(distsq > 2500 && distsq < 10000) {
     return true;

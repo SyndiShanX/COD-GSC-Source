@@ -17,9 +17,9 @@ function event_handler[gametype_init] main(eventstruct) {
   level.var_9c5e7d9 = #"hash_5b34830d9a8a7f52";
   level._effect[#"zoneedgemarker"] = [];
   level._effect[#"zoneedgemarker"][0] = #"ui/fx8_infil_marker_neutral";
-  level._effect[#"zoneedgemarker"][1] = #"hash_5c2ae9f4f331d4b9";
-  level._effect[#"zoneedgemarker"][2] = #"hash_7d1b0f001ea88b82";
-  level._effect[#"zoneedgemarker"][3] = #"hash_7981eb245ea536fc";
+  level._effect[#"zoneedgemarker"][1] = #"ui/fx8_infil_marker_frnd";
+  level._effect[#"zoneedgemarker"][2] = #"ui/fx8_infil_marker_enmy";
+  level._effect[#"zoneedgemarker"][3] = #"ui/fx8_infil_marker_contested";
   fields = getmapfields();
   level.var_117b4a3a = [];
   level.var_117b4a3a[0] = isDefined(fields.var_306136ca) ? fields.var_306136ca : #"hash_280d5153e1276d";

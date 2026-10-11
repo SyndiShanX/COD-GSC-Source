@@ -21,7 +21,7 @@ function preinit() {
   gametype = util::get_game_type();
 
   if(!isinarray(var_f7d8aaa7, gametype)) {
-    level thread scene::skipto_end(#"hash_6985968bcd70fea5");
+    level thread scene::skipto_end(#"p9_fxanim_mp_black_sea_davit_cables_drop_bundle");
   }
 }
 
@@ -32,20 +32,20 @@ function postinit() {
 }
 
 function event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
-  var_6031fb1f = eventstruct.vehicle;
+  jetski = eventstruct.vehicle;
 
-  if(isvehicle(var_6031fb1f) && is_true(var_6031fb1f.var_a419f368)) {
+  if(isvehicle(jetski) && is_true(jetski.var_a419f368)) {
     waitframe(1);
 
-    if(isalive(var_6031fb1f)) {
-      var_6031fb1f takeplayercontrol();
+    if(isalive(jetski)) {
+      jetski takeplayercontrol();
 
-      while(isalive(var_6031fb1f) && var_6031fb1f function_7548ecb2()) {
+      while(isalive(jetski) && jetski function_7548ecb2()) {
         waitframe(1);
       }
 
-      if(isalive(var_6031fb1f)) {
-        var_6031fb1f returnplayercontrol();
+      if(isalive(jetski)) {
+        jetski returnplayercontrol();
       }
     }
   }
@@ -53,11 +53,11 @@ function event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
 
 function on_vehicle_spawned() {
   level endon(#"game_ended");
-  var_6031fb1f = self;
+  jetski = self;
 
-  if(isDefined(var_6031fb1f.target)) {
-    var_6031fb1f.var_a419f368 = 1;
-    var_d8cde75b = struct::get(var_6031fb1f.target);
+  if(isDefined(jetski.target)) {
+    jetski.var_a419f368 = 1;
+    var_d8cde75b = struct::get(jetski.target);
 
     if(isDefined(var_d8cde75b.target)) {
       fall = struct::get(var_d8cde75b.target);
@@ -69,11 +69,11 @@ function on_vehicle_spawned() {
   wait 1;
   waitframe(1);
 
-  if(isDefined(var_6031fb1f) && isDefined(var_d8cde75b)) {
-    var_6031fb1f thread function_d765ccad();
+  if(isDefined(jetski) && isDefined(var_d8cde75b)) {
+    jetski thread function_d765ccad();
 
     if(isDefined(var_d8cde75b) && is_true(var_d8cde75b.var_2fdd4465) && getdvarint(#"hash_11091de0ff4dd715", 1)) {
-      var_6031fb1f player_vehicle::function_971ca64b();
+      jetski player_vehicle::function_971ca64b();
 
       if(!isDefined(var_d8cde75b.script_side)) {
         var_d8cde75b.script_side = "port";
@@ -81,16 +81,16 @@ function on_vehicle_spawned() {
 
       var_d487d45c = fall.scene_ents[#"prop 1"];
 
-      while(!isDefined(var_d487d45c) && isalive(var_6031fb1f)) {
+      while(!isDefined(var_d487d45c) && isalive(jetski)) {
         var_d487d45c = fall.scene_ents[#"prop 1"];
         waitframe(1);
       }
 
-      if(isalive(var_6031fb1f)) {
-        var_6031fb1f.var_369c83bd = 1;
-        var_6031fb1f.var_475b9991 = 1;
-        var_6031fb1f.var_c0381a15 = 1;
-        var_6031fb1f linkTo(var_d487d45c, "tag_jetski", (0, 0, 0), (0, 0, 0));
+      if(isalive(jetski)) {
+        jetski.var_369c83bd = 1;
+        jetski.var_475b9991 = 1;
+        jetski.var_c0381a15 = 1;
+        jetski linkTo(var_d487d45c, "tag_jetski", (0, 0, 0), (0, 0, 0));
       }
 
       var_c8229258 = "enter_vehicle";
@@ -99,25 +99,25 @@ function on_vehicle_spawned() {
         var_c8229258 = "deploy";
       }
 
-      if(isalive(var_6031fb1f)) {
-        var_71383cea = var_6031fb1f waittill(#"death", #"delete", var_c8229258);
+      if(isalive(jetski)) {
+        var_71383cea = jetski waittill(#"death", #"delete", var_c8229258);
 
         if(var_71383cea._notify === "death") {
-          if(isDefined(var_6031fb1f)) {
-            var_6031fb1f notsolid();
+          if(isDefined(jetski)) {
+            jetski notsolid();
 
-            while(isDefined(var_6031fb1f)) {
+            while(isDefined(jetski)) {
               waitframe(1);
             }
           }
         }
 
-        level thread function_9610785e(var_6031fb1f, var_c8229258);
+        level thread function_9610785e(jetski, var_c8229258);
       }
 
       var_75fd5da3 = 1;
 
-      if(isvehicle(var_6031fb1f) && function_a6b2f443(var_6031fb1f)) {
+      if(isvehicle(jetski) && function_a6b2f443(jetski)) {
         var_75fd5da3 = 1;
       }
 
@@ -125,58 +125,58 @@ function on_vehicle_spawned() {
         if(isDefined(fall) && isDefined(fall.scriptbundlename)) {
           fall thread scene::play(fall.scriptbundlename);
 
-          if(isalive(var_6031fb1f)) {
-            var_2e4576cb = groundtrace(var_6031fb1f.origin, var_6031fb1f.origin + (0, 0, -1024), 1, var_6031fb1f, 0, 0);
-            offset = vectorscale(anglestoright(var_6031fb1f.angles) * -1, 8);
+          if(isalive(jetski)) {
+            var_2e4576cb = groundtrace(jetski.origin, jetski.origin + (0, 0, -1024), 1, jetski, 0, 0);
+            offset = vectorscale(anglestoright(jetski.angles) * -1, 8);
             rotation = 42;
 
             if(var_d8cde75b.script_side == "starboard") {
               rotation = -42;
-              offset = vectorscale(anglestoright(var_6031fb1f.angles), 8);
+              offset = vectorscale(anglestoright(jetski.angles), 8);
             }
 
-            var_6b6fec6c = var_2e4576cb[#"position"] + offset;
-            fall_time = abs(distance(var_6031fb1f.origin, var_6b6fec6c) / 390);
+            fall_pos = var_2e4576cb[#"position"] + offset;
+            fall_time = abs(distance(jetski.origin, fall_pos) / 390);
 
-            if(isDefined(var_6031fb1f)) {
+            if(isDefined(jetski)) {
               if(var_75fd5da3) {
                 recenter_time = fall_time + 1;
-                var_6b6fec6c = var_6031fb1f.origin + offset;
+                fall_pos = jetski.origin + offset;
                 fall_time = 0.1;
               }
 
-              var_c11876a8 = util::spawn_model(#"tag_origin", var_6031fb1f.origin, var_6031fb1f.angles, undefined, 1);
+              var_c11876a8 = util::spawn_model(#"tag_origin", jetski.origin, jetski.angles, undefined, 1);
 
-              while(!isDefined(var_c11876a8) && isalive(var_6031fb1f)) {
+              while(!isDefined(var_c11876a8) && isalive(jetski)) {
                 waitframe(1);
               }
 
-              if(isalive(var_6031fb1f)) {
-                var_6031fb1f unlink();
-                var_6031fb1f linkTo(var_c11876a8);
+              if(isalive(jetski)) {
+                jetski unlink();
+                jetski linkTo(var_c11876a8);
                 var_c11876a8 rotateYaw(rotation, fall_time);
 
                 if(isDefined(var_c11876a8)) {
-                  var_c11876a8 moveTo(var_6b6fec6c, fall_time);
+                  var_c11876a8 moveTo(fall_pos, fall_time);
                   var_c11876a8 waittill(#"movedone");
                 }
               }
             }
 
-            player = var_6031fb1f.var_3ba86b09;
+            player = jetski.var_3ba86b09;
 
-            if(isalive(player) && isDefined(var_6031fb1f)) {
-              player setplayerangles(var_6031fb1f.angles);
+            if(isalive(player) && isDefined(jetski)) {
+              player setplayerangles(jetski.angles);
             }
           }
         }
 
-        if(isDefined(var_6031fb1f)) {
-          var_6031fb1f.var_369c83bd = 0;
-          var_6031fb1f.var_475b9991 = 0;
-          var_6031fb1f.var_c0381a15 = 0;
-          var_6031fb1f unlink();
-          var_6031fb1f.var_a419f368 = 0;
+        if(isDefined(jetski)) {
+          jetski.var_369c83bd = 0;
+          jetski.var_475b9991 = 0;
+          jetski.var_c0381a15 = 0;
+          jetski unlink();
+          jetski.var_a419f368 = 0;
         }
 
         if(isDefined(var_c11876a8)) {
@@ -186,8 +186,8 @@ function on_vehicle_spawned() {
 
       wait 10;
 
-      if(isalive(var_6031fb1f)) {
-        var_6031fb1f player_vehicle::function_a2626745();
+      if(isalive(jetski)) {
+        jetski player_vehicle::function_a2626745();
       }
     }
   }
@@ -352,13 +352,13 @@ function function_d40977b5(var_c11876a8) {
   }
 }
 
-function function_9610785e(var_6031fb1f, var_c8229258) {
+function function_9610785e(jetski, var_c8229258) {
   if(!getdvarint(#"hash_5e29e20bd416e7e1", 0)) {
     return;
   }
 
   foreach(vehicle in getvehiclearray()) {
-    if(var_6031fb1f !== vehicle && is_true(vehicle.var_a419f368)) {
+    if(jetski !== vehicle && is_true(vehicle.var_a419f368)) {
       waittillframeend();
       vehicle notify(var_c8229258);
     }

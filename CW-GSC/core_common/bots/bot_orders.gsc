@@ -15,12 +15,12 @@ function preinit() {
 
   level.var_d3b9615b = function_b6e6a59b();
   level.var_4b98dc10 = [];
-  level register_state(#"assault", &function_2fe359ab, &assault_start, &function_6a672c6d);
+  level register_state(#"assault", &assault_ready, &assault_start, &function_6a672c6d);
   level register_state(#"capture", &function_bcd00fa7, &capture_start, &function_423ecbc1);
-  level register_state(#"defend", &function_1ba5e803, &defend_start, &function_72084729);
+  level register_state(#"defend", &defend_ready, &defend_start, &function_72084729);
   level register_state(#"chase_enemy", &function_7c479af0, &function_6790cfd3, &function_63b3aa81);
   level register_state(#"hash_2fc0534d4a96a7ea", &function_199c516, &function_36d63786, &function_91d9d948);
-  level register_state(#"camp", &function_c5686e54, &function_c35b807e, &function_17d77980);
+  level register_state(#"camp", &function_c5686e54, &camp_start, &function_17d77980);
   level register_state(#"patrol", &function_82c1a3e9, &patrol_start, &patrol_think);
 
   level thread function_7a7ab1a2();
@@ -343,7 +343,7 @@ function private function_423ecbc1(objective) {
   self update_threat(objective);
 }
 
-function private function_1ba5e803(objective) {
+function private defend_ready(objective) {
   return self function_8b26cb41(objective);
 }
 
@@ -393,7 +393,7 @@ function private function_72084729(objective) {
   self update_threat(objective);
 }
 
-function private function_2fe359ab(objective) {
+function private assault_ready(objective) {
   return objective.info.var_dd2331cb.size > 0;
 }
 
@@ -413,7 +413,7 @@ function private function_c5686e54(objective) {
   return !self.bot.enemyvisible;
 }
 
-function private function_c35b807e(objective) {
+function private camp_start(objective) {
   regioncount = function_548ca110();
 
   if(regioncount <= 0) {
@@ -540,7 +540,7 @@ function private function_ca06456b(start, end, bounds, var_cdea01dc) {
   var_ccb07583 = length(var_22405e9b);
   var_f8c9ffb2 = vectortoangles(var_22405e9b);
   var_beaef07d = anglesToForward(var_f8c9ffb2);
-  var_75128d22 = anglestoright(var_f8c9ffb2);
+  middleright = anglestoright(var_f8c9ffb2);
 
   shouldrecord = self bot::should_record(#"hash_bb5c278818b000b");
 

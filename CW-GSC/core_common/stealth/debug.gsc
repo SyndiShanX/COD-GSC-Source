@@ -217,7 +217,7 @@ function thick_cylinder(start, end, radius, color) {
   }
 }
 
-function function_a8d5dec6(msg) {
+function stealth_debug_print(msg) {
   if(!level flag::get("<dev string:x12a>")) {
     return;
   }
@@ -242,8 +242,8 @@ function function_a8d5dec6(msg) {
   txt = "<dev string:x2e9>" + actor + "<dev string:x2fb>" + msg;
   println(txt);
 
-  if(getdvarint(#"hash_24e197c870156a5d", 0) == 1) {
-    self thread function_bd9767df(msg);
+  if(getdvarint(#"stealth_debug_prints", 0) == 1) {
+    self thread debug_message_ai(msg);
   }
 }
 
@@ -361,11 +361,11 @@ function function_314b7255(text, color, alpha, scale, offset, life) {
 
   if(!isDefined(self.stealth.debug_rising)) {
     self.stealth.debug_rising = [];
-    self.stealth.var_7555e1a1 = -1;
+    self.stealth.debug_rising_idx = -1;
   }
 
-  self.stealth.var_7555e1a1++;
-  myid = self.stealth.var_7555e1a1;
+  self.stealth.debug_rising_idx++;
+  myid = self.stealth.debug_rising_idx;
   self.stealth.debug_rising[myid] = offset;
   previd = myid - 1;
 
@@ -453,8 +453,8 @@ function function_d0c3b413() {
     animstr = self ai::get_behavior_attribute("<dev string:x362>");
   }
 
-  var_b2d4b874 = "<dev string:x36e>";
-  var_4fa3c3e0 = "<dev string:xf1>";
+  szstate = "<dev string:x36e>";
+  szsubstate = "<dev string:xf1>";
   bounded = 0;
   groupdata = stealth_group::getgroup(self.script_stealthgroup);
   pod = stealth_group::group_findpod(groupdata, self);
@@ -462,10 +462,10 @@ function function_d0c3b413() {
   if(isDefined(self.stealth.bsmstate)) {
     switch (self.stealth.bsmstate) {
       case 0:
-        var_b2d4b874 = "<dev string:x379>";
+        szstate = "<dev string:x379>";
         break;
       case 1:
-        var_b2d4b874 = "<dev string:x381>";
+        szstate = "<dev string:x381>";
 
         if(isDefined(level.stealth.investigate_volumes[self.script_stealthgroup])) {
           bounded = 1;
@@ -473,21 +473,21 @@ function function_d0c3b413() {
 
         break;
       case 2:
-        var_b2d4b874 = "<dev string:x388>";
+        szstate = "<dev string:x388>";
 
         if(isDefined(level.stealth.hunt_volumes[self.script_stealthgroup])) {
           bounded = 1;
         }
 
         if(!is_true(pod.bhunkering)) {
-          var_4fa3c3e0 = "<dev string:x390>";
+          szsubstate = "<dev string:x390>";
         } else {
-          var_4fa3c3e0 = "<dev string:x39d>";
+          szsubstate = "<dev string:x39d>";
         }
 
         break;
       case 3:
-        var_b2d4b874 = "<dev string:x3aa>";
+        szstate = "<dev string:x3aa>";
 
         if(isDefined(level.stealth.combat_volumes[self.script_stealthgroup])) {
           bounded = 1;
@@ -497,7 +497,7 @@ function function_d0c3b413() {
     }
   }
 
-  print3d(self.origin - (0, 0, count * space), self getentitynumber() + "<dev string:x3b4>" + var_b2d4b874 + var_4fa3c3e0, white, 1, size);
+  print3d(self.origin - (0, 0, count * space), self getentitynumber() + "<dev string:x3b4>" + szstate + szsubstate, white, 1, size);
   count++;
   print3d(self.origin - (0, 0, count * space), "<dev string:x3bf>" + animstr, white, 1, size);
   count++;
@@ -601,18 +601,18 @@ function draw_fov() {
     start = self gettagorigin("<dev string:x418>");
   }
 
-  var_16d2c066 = 10;
-  draw_arc(start, -1 * fov_yaw, fov_yaw, (0, eye_yaw, 0), viewdist, 1, var_16d2c066, color);
+  arc_segs = 10;
+  draw_arc(start, -1 * fov_yaw, fov_yaw, (0, eye_yaw, 0), viewdist, 1, arc_segs, color);
 
   if(self.fovcosinez > dot) {
     color *= 0.5;
     fov_pitch = acos(self.fovcosinez);
     eye_pitch = 0;
-    draw_arc(start, -1 * fov_pitch, fov_pitch, (eye_pitch, eye_yaw, 0), viewdist, 0, var_16d2c066, color);
+    draw_arc(start, -1 * fov_pitch, fov_pitch, (eye_pitch, eye_yaw, 0), viewdist, 0, arc_segs, color);
   }
 
   var_346c7ea3 = acos(self.fovcosineperiph);
-  draw_arc(start, -1 * var_346c7ea3, var_346c7ea3, (0, eye_yaw, 0), sqrt(self.fovcosineperiphmaxdistsq), 1, var_16d2c066, (0.5, 0.5, 0));
+  draw_arc(start, -1 * var_346c7ea3, var_346c7ea3, (0, eye_yaw, 0), sqrt(self.fovcosineperiphmaxdistsq), 1, arc_segs, (0.5, 0.5, 0));
 
   if(is_true(self.flashlight.on)) {
     start = self gettagorigin(self.flashlight.tag);
@@ -620,7 +620,7 @@ function draw_fov() {
 
     if(isDefined(start) && isDefined(yaw)) {
       fov_yaw = 30 * 0.5;
-      draw_arc(start, -1 * fov_yaw, fov_yaw, (0, yaw, 0), isDefined(self.var_1c936867) ? self.var_1c936867 : 850, 1, var_16d2c066, (1, 1, 0));
+      draw_arc(start, -1 * fov_yaw, fov_yaw, (0, yaw, 0), isDefined(self.var_1c936867) ? self.var_1c936867 : 850, 1, arc_segs, (1, 1, 0));
     }
   }
 }
@@ -677,9 +677,9 @@ function function_f5dd6400() {
   level.stealth.chatbox = [];
   level.stealth.var_855b67ea = 0;
   level.stealth.var_42d9f5df = 0;
-  var_b5a9b1ac = 50;
-  var_c6f9544b = 340;
-  var_1dccd487 = 17;
+  cstartx = 50;
+  cstarty = 340;
+  clinespacing = 17;
   cscale = 1;
   textcolor = (1, 1, 1);
   levelstealth = level.stealth;
@@ -689,7 +689,7 @@ function function_f5dd6400() {
       var_12febe81 = gettime() - cmaxtime;
 
       if(levelstealth.var_42d9f5df > 0) {
-        cury = var_c6f9544b;
+        cury = cstarty;
         curline = levelstealth.var_855b67ea;
 
         for(iline = 0; iline < levelstealth.var_42d9f5df; iline++) {
@@ -709,8 +709,8 @@ function function_f5dd6400() {
             }
 
             text += "<dev string:x2e3>" + levelstealth.chatbox[curline].text;
-            debug2dtext((var_b5a9b1ac, cury, 0), text, textcolor, 1, undefined, undefined, cscale);
-            cury += var_1dccd487;
+            debug2dtext((cstartx, cury, 0), text, textcolor, 1, undefined, undefined, cscale);
+            cury += clinespacing;
           }
 
           curline = (curline + 1) % 16;
@@ -752,9 +752,9 @@ function function_65b21ab8(speaker, line) {
   assert(stealth.var_42d9f5df <= 16);
 }
 
-function function_bd9767df(message, duration) {
-  self notify(#"hash_60765f522d73ffeb");
-  self endon(#"hash_60765f522d73ffeb");
+function debug_message_ai(message, duration) {
+  self notify(#"debug_message_ai");
+  self endon(#"debug_message_ai");
   self endon(#"death");
 
   if(!isDefined(duration)) {
@@ -886,7 +886,7 @@ function function_5a47b49c() {
       continue;
     }
 
-    var_7010df74 = [];
+    regionlocationlist = [];
 
     foreach(region in group_data.hunt_regions) {
       assert(isDefined(region.approx_location));

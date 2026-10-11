@@ -37,7 +37,7 @@ function private preinit() {
     return;
   }
 
-  function_2777823f();
+  register_client_fields();
   level.var_d89ef54a = getgametypesetting(#"hash_2f0beae14bf17810");
   level.var_9cddbf4e = [];
   level.var_9cddbf4e[#"p8_fxanim_wz_supply_stash_01_mod"] = {
@@ -45,13 +45,13 @@ function private preinit() {
   level.var_9cddbf4e[#"p8_fxanim_wz_supply_stash_04_mod"] = {
     #open_sound: #"evt_supply_stash_open", #var_b9492c6: #"hash_32f9ba3b1da75ed5"};
   level.var_9cddbf4e[#"p8_fxanim_wz_death_stash_mod"] = {
-    #open_sound: #"evt_death_stash_open", #var_b9492c6: #"hash_70fb2ee1b706a28a"};
-  level.var_9cddbf4e[#"hash_1dcbe8021fb16344"] = {
-    #open_sound: #"hash_56b5b65c141f4629", #var_b9492c6: #"hash_6fcb29cae6678d93"};
+    #open_sound: #"evt_death_stash_open", #var_b9492c6: #"evt_death_stash_open_ds"};
+  level.var_9cddbf4e[#"p8_fxanim_wz_supply_stash_magic_box_mod"] = {
+    #open_sound: #"evt_magic_box_open", #var_b9492c6: #"hash_6fcb29cae6678d93"};
   level.var_9cddbf4e[#"p8_fxanim_wz_supply_stash_ammo_mod"] = {
-    #open_sound: #"hash_f743d336f8b7764", #var_b9492c6: #"hash_3e62bcbd6460ff44"};
-  level.var_9cddbf4e[#"hash_574076754776e003"] = {
-    #open_sound: #"hash_36e23ce3e5f7e4c0", #var_b9492c6: #"hash_22f426a8593609e8"};
+    #open_sound: #"evt_ammo_stash_open", #var_b9492c6: #"evt_ammo_stash_open_ds"};
+  level.var_9cddbf4e[#"p8_fxanim_wz_supply_stash_health_mod"] = {
+    #open_sound: #"evt_health_stash_open", #var_b9492c6: #"evt_health_stash_open_ds"};
   callback::on_connect(&_on_player_connect);
   callback::on_disconnect(&_on_player_disconnect);
   callback::add_callback(#"popups_team_message", &function_9aefb438);
@@ -79,7 +79,7 @@ function private preinit() {
   level thread function_248022d9();
 }
 
-function private function_2777823f() {
+function private register_client_fields() {
   clientfield::register("world", "item_world_seed", 1, 31, "int");
   clientfield::register("world", "item_world_sanity_random", 1, 16, "int");
   clientfield::register("world", "item_world_disable", 1, 1, "int");

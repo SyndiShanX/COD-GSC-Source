@@ -42,12 +42,12 @@ function init_shared() {
 
 function function_4f3cd1f0() {
   if(self.subarchetype === #"hash_28e36e7b7d5421f") {
-    self.var_90d0c0ff = "anim_spawn_hellhound";
-    self callback::function_d8abfc3d(#"on_dog_killed", &function_84a3128e);
+    self.spawn_anim_alias = "anim_spawn_hellhound";
+    self callback::function_d8abfc3d(#"on_dog_killed", &start_fire);
   }
 }
 
-function function_84a3128e() {
+function start_fire() {
   if(!isDefined(self.exploded) && !is_true(self.var_270befd2)) {
     self.exploded = 1;
     self clientfield::set("" + #"hash_c5d06ae18fde4c0", 1);
@@ -477,7 +477,7 @@ function damageeffectarea(position, normal, weapon, radius_multiplier, var_e7640
     firesound = spawn("script_origin", fireeffectarea.origin + (0, 0, 75));
 
     if(isDefined(firesound)) {
-      firesound playLoopSound(#"hash_6993f289f9415bd1");
+      firesound playLoopSound(#"zmb_hellhound_molotov_fire_lp");
     }
   }
 
@@ -534,9 +534,9 @@ function function_1f077104(position, fireeffectarea, var_289a74bc, weapon, damag
   self endon(#"death");
 
   while(gettime() < damageendtime) {
-    var_9a43d78f = self function_ae0a22c4(position);
+    friendly_targets = self function_ae0a22c4(position);
 
-    foreach(target in var_9a43d78f) {
+    foreach(target in friendly_targets) {
       self function_851843a5(target, position, fireeffectarea, var_289a74bc, weapon);
     }
 
@@ -620,19 +620,19 @@ function getpotentialtargets(origin) {
     }
   }
 
-  var_739bcc52 = [];
+  vehicle_targets = [];
 
   foreach(vehicle in getvehiclearray()) {
     if(is_true(vehicle.isplayervehicle)) {
-      var_739bcc52[var_739bcc52.size] = vehicle;
+      vehicle_targets[vehicle_targets.size] = vehicle;
     }
   }
 
   all_targets = [];
-  var_739bcc52 = function_72d3bca6(var_739bcc52, origin, undefined, undefined, 120);
+  vehicle_targets = function_72d3bca6(vehicle_targets, origin, undefined, undefined, 120);
   all_targets = arraycombine(potential_targets, getaiarray(), 0, 0);
   all_targets = function_72d3bca6(all_targets, origin, undefined, undefined, 65);
-  all_targets = arraycombine(all_targets, var_739bcc52, 0, 0);
+  all_targets = arraycombine(all_targets, vehicle_targets, 0, 0);
 
   if(level.friendlyfire > 0) {
     return all_targets;
@@ -923,7 +923,7 @@ function function_59d981cc(origin, blast_radius, attacker, exploder) {
         var_9dea1e72 = int(var_9dea1e72);
         target dodamage(var_9dea1e72, origin, undefined, attacker, "none", "MOD_EXPLOSIVE", 0, undefined);
 
-        if(isDefined(exploder.var_ab1b3515) && exploder.var_ab1b3515.zm_ai_category === #"boss") {
+        if(isDefined(exploder.owner_ent) && exploder.owner_ent.zm_ai_category === #"boss") {
           occupants = target getvehoccupants();
 
           foreach(occupant in occupants) {
@@ -946,11 +946,11 @@ function sndfiredamage() {
   if(!isDefined(self.sndfireent)) {
     self.sndfireent = spawn("script_origin", self.origin);
     self.sndfireent linkTo(self);
-    self.sndfireent playSound(#"hash_42d7a7b01bd2b414");
+    self.sndfireent playSound(#"chr_molotov_burn_start");
     self thread sndfiredamage_deleteent(self.sndfireent);
   }
 
-  self.sndfireent playLoopSound(#"hash_aa65888a78201f4", 0.5);
+  self.sndfireent playLoopSound(#"chr_molotov_burn_lp", 0.5);
   wait 3;
 
   if(isDefined(self.sndfireent)) {
@@ -1023,10 +1023,10 @@ function function_1493c734(origin, radius, color, alpha, time) {
 
 function function_ccb2e201(position, radius) {
   a_zombies = getentitiesinradius(position, radius, 15);
-  var_eb2cabb5 = array::filter(a_zombies, 0, &function_53811067);
+  a_filtered_zombies = array::filter(a_zombies, 0, &function_53811067);
 
-  if(var_eb2cabb5.size > 0) {
-    foreach(zombie in var_eb2cabb5) {
+  if(a_filtered_zombies.size > 0) {
+    foreach(zombie in a_filtered_zombies) {
       zombie zombie_utility::setup_zombie_knockdown(position);
     }
   }
@@ -1045,7 +1045,7 @@ function private function_53811067(zombie) {
     return false;
   }
 
-  if(zombie.var_33fb0350 === 1) {
+  if(zombie.is_immune_to_knockdown === 1) {
     return false;
   }
 

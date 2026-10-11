@@ -99,7 +99,7 @@ function function_76f6cec6(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_b8b01a1f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!namespace_7f5aeb59::islocalplayer(self)) {
+  if(!doa_player_utility::islocalplayer(self)) {
     return;
   }
 

@@ -68,7 +68,7 @@ function main(str_objective, b_starting) {
   var_d929545b solid();
   level flag::wait_till("flg_defend_ready_to_start");
   objectives::complete("obj_rooftop_regroup");
-  skipto::function_4e3ab877("nic_rooftop");
+  skipto::objective_completed("nic_rooftop");
 }
 
 function function_cabf998b() {
@@ -91,7 +91,7 @@ function function_cabf998b() {
   }
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   hms_util::print("<dev string:x4c>");
 }
 

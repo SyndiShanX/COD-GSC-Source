@@ -1159,7 +1159,7 @@ function cratespawn(killstreak, killstreakid, owner, team, drop_origin, drop_ang
   crate.script_noteworthy = "care_package";
   crate.weapon = getweapon(#"supplydrop");
   crate setweapon(crate.weapon);
-  crate function_619a5c20();
+  crate pingable();
 
   if(!isDefined(_crate)) {
     if(killstreak === "tank_robot" || killstreak === "inventory_tank_robot") {

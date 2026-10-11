@@ -308,7 +308,7 @@ function private function_99ca1277(player, predictedspawn) {
     mpspawnpointsused = {
       #reason: "point used", #spawninstanceid: getplayerspawnid(player), #x: spawn_point[#"origin"][0], #y: spawn_point[#"origin"][1], #z: spawn_point[#"origin"][2], #var_50641dd5: 0
     };
-    function_92d1707f(#"hash_608dde355fff78f5", mpspawnpointsused);
+    function_92d1707f(#"dlog_event_mpspawnpointsused", mpspawnpointsused);
   }
 
   spawn = spawnStruct();

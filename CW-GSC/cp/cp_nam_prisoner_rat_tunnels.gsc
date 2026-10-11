@@ -56,10 +56,10 @@ function main(str_objective, b_starting) {
   level thread cp_nam_prisoner::function_1f911b89(next_obj);
   flag = "rat_tunnels";
   level flag::wait_till(flag + "_complete");
-  level skipto::function_4e3ab877(b_starting, 0);
+  level skipto::objective_completed(b_starting, 0);
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   wait 1;
   enemy_rat_tunnels_large = getEntArray("enemy_rat_tunnels_large", "targetname");
   array::thread_all(enemy_rat_tunnels_large, &namespace_d9b153b9::ent_cleanup);
@@ -71,7 +71,7 @@ function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   door_struct thread namespace_d9b153b9::ent_cleanup();
 }
 
-function function_c26b0bc0() {
+function flags_init() {
   level flag::init("rat_tunnels_complete");
   level flag::init("flag_rat_tunnels_obj_on");
   level flag::init("flag_disable_rat_tunnel_trap");
@@ -89,10 +89,10 @@ function rat_tunnels() {
   level thread savegame::checkpoint_save();
   var_2cf9fe23 = level.var_731c10af.var_42659717 + 1;
   str = "visit_" + var_2cf9fe23 + "_" + var_c79d614f;
-  bb::function_cd497743(str, level.player);
+  bb::logplayermapnotification(str, level.player);
 
   while(true) {
-    level thread namespace_d9b153b9::function_a57f6629(var_c79d614f);
+    level thread namespace_d9b153b9::notify_on_flag(var_c79d614f);
     level function_a7ec2e8f(var_c79d614f);
 
     if(level flag::get(var_c79d614f + "_complete")) {
@@ -412,7 +412,7 @@ function function_6b6ab2a9(params) {
       }
     }
 
-    util::function_323d3227();
+    util::cleanupactorcorpses();
     s_teleport = struct::get("struct_rat_tunnels2_lookat_door", "targetname");
     e_teleport = util::spawn_model("tag_origin", s_teleport.origin, s_teleport.angles);
     level.player setOrigin(e_teleport.origin);
@@ -528,7 +528,7 @@ function function_ef3d3d18(var_c79d614f) {
   level endon(#"visit_restart");
   level endon(#"start_outro");
   level endon(var_c79d614f + "_end");
-  var_798585bd = 1;
+  dark = 1;
   dialogue::radio("vox_cp_prsn_13500_adlr_atunnelyouuhyou_c8");
   level flag::wait_till("flag_rat_tunnels_entrance_map");
   childthread namespace_d9b153b9::function_f6cbf7fd(&function_d727891e, 1, 15, "flag_rat_tunnels_large_enter");

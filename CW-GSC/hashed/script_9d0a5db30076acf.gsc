@@ -38,8 +38,8 @@ function private function_83c9fd20(params) {
 function private set(var_5b36f17f, var_6a374e41) {
   level.player = isDefined(level.player) ? level.player : getPlayers()[0];
 
-  if(!namespace_61e6d095::exists(#"hash_1a9d78f69978a1f3")) {
-    namespace_61e6d095::create(#"hash_1a9d78f69978a1f3", #"hash_41ca08e341520d88");
+  if(!scripted_widgets::exists(#"hash_1a9d78f69978a1f3")) {
+    scripted_widgets::create(#"hash_1a9d78f69978a1f3", #"hash_41ca08e341520d88");
   }
 
   if(!isDefined(var_5b36f17f)) {
@@ -50,8 +50,8 @@ function private set(var_5b36f17f, var_6a374e41) {
     var_6a374e41 = #"hash_623eff21ed033aec";
   }
 
-  namespace_61e6d095::function_9ade1d9b(#"hash_1a9d78f69978a1f3", "time", var_5b36f17f);
-  namespace_61e6d095::function_9ade1d9b(#"hash_1a9d78f69978a1f3", "text", var_6a374e41);
+  scripted_widgets::function_9ade1d9b(#"hash_1a9d78f69978a1f3", "time", var_5b36f17f);
+  scripted_widgets::function_9ade1d9b(#"hash_1a9d78f69978a1f3", "text", var_6a374e41);
   level.player clientfield::set_to_player("return_to_combat_postfx", 1);
 }
 
@@ -64,8 +64,8 @@ function private close(var_67df10fb = 1) {
     wait var_67df10fb;
   }
 
-  if(namespace_61e6d095::exists(#"hash_1a9d78f69978a1f3")) {
-    namespace_61e6d095::remove(#"hash_1a9d78f69978a1f3");
+  if(scripted_widgets::exists(#"hash_1a9d78f69978a1f3")) {
+    scripted_widgets::remove(#"hash_1a9d78f69978a1f3");
   }
 
   level.player clientfield::set_to_player("return_to_combat_postfx", 0);

@@ -441,7 +441,7 @@ function private function_b4c74561(origin) {
   return origin;
 }
 
-function private function_60c3117b(startscale, goalscale, duration, var_8253fe22) {
+function private function_60c3117b(startscale, goalscale, duration, iscore) {
   self endon(#"death");
   level endon(#"game_ended");
   starttime = gettime();
@@ -450,7 +450,7 @@ function private function_60c3117b(startscale, goalscale, duration, var_8253fe22
     startscale = 0.1;
   }
 
-  self setscale(var_8253fe22 ? startscale / 10 : startscale);
+  self setscale(iscore ? startscale / 10 : startscale);
   waitframe(1);
 
   while(gettime() < starttime + int(duration * 1000)) {
@@ -462,9 +462,9 @@ function private function_60c3117b(startscale, goalscale, duration, var_8253fe22
       return;
     }
 
-    self setscale(var_8253fe22 ? scale / 10 : scale);
+    self setscale(iscore ? scale / 10 : scale);
 
-    if(var_8253fe22) {
+    if(iscore) {
       self.var_2c8491dd.var_8e392e0f = level.var_cd139dc0 * scale;
     } else {
       self.curradius = scale * self.var_2c8491dd.circleradius;
@@ -473,7 +473,7 @@ function private function_60c3117b(startscale, goalscale, duration, var_8253fe22
     waitframe(1);
   }
 
-  self setscale(var_8253fe22 ? goalscale / 10 : goalscale);
+  self setscale(iscore ? goalscale / 10 : goalscale);
 }
 
 function private function_6941b393(startscale, endscale, duration) {
@@ -540,7 +540,7 @@ function function_904efdb8() {
 function private function_64d94faa() {
   level endon(#"game_ended");
   level.var_8c48fd1 = 0;
-  level.var_a0cb7a38 = [];
+  level.radiating = [];
 
   while(true) {
     waitframe(1);
@@ -557,7 +557,7 @@ function private function_64d94faa() {
     players = getPlayers();
 
     foreach(player in players) {
-      if(player useButtonPressed() && !is_true(level.var_a0cb7a38[level.var_8c48fd1])) {
+      if(player useButtonPressed() && !is_true(level.radiating[level.var_8c48fd1])) {
         level.var_2f418a15[level.var_8c48fd1] thread function_33e28605(level.var_8c48fd1);
         level.var_8c48fd1++;
         level.var_8c48fd1 %= 3;
@@ -568,7 +568,7 @@ function private function_64d94faa() {
 }
 
 function private function_33e28605(var_f07efec7) {
-  level.var_a0cb7a38[var_f07efec7] = 1;
+  level.radiating[var_f07efec7] = 1;
   level.var_ac7be286[level.var_ac7be286.size] = self;
   self function_6a583613();
 
@@ -577,7 +577,7 @@ function private function_33e28605(var_f07efec7) {
   }
 
   self function_57172b7();
-  level.var_a0cb7a38[var_f07efec7] = 0;
+  level.radiating[var_f07efec7] = 0;
 }
 
 function private function_3d8141ab() {

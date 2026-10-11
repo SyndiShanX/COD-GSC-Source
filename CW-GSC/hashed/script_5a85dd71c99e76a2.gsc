@@ -37,7 +37,7 @@ function function_e39e219e() {}
 
 function function_37c8a043(str_objective, b_starting) {
   level thread scene::init("scene_yam_1010_hel_intro");
-  level thread globallogic_ui::function_7bc0e4b9();
+  level thread globallogic_ui::do_chyron_text();
   snd::client_msg("audio_level_begin_duck_start");
   level waittill(#"chyron_menu_closed");
   level.allowbattlechatter[#"allies"] = 0;
@@ -53,7 +53,7 @@ function function_37c8a043(str_objective, b_starting) {
   level thread function_e16fed8b();
   level.ai_woods clientfield::increment("ai_cold_breath");
   level thread objectives::scripted("obj_yamantau_1", undefined, #"hash_423da80c752f859f");
-  skipto::function_4e3ab877("intro_heli");
+  skipto::objective_completed("intro_heli");
   savegame::checkpoint_save(1);
 }
 
@@ -70,10 +70,10 @@ function function_fe3defb0() {
 }
 
 function function_38910b5f(str_objective) {
-  namespace_b73b9191::function_2683ec5d();
+  namespace_b73b9191::spawn_woods();
 }
 
-function function_a0b88490(str_objective, b_starting, var_aa1a6455, player) {
+function function_a0b88490(str_objective, b_starting, b_direct, player) {
   waitframe(1);
   level flag::set("chyron_menu_closed");
   namespace_b73b9191::function_15426f9d("cull_inside_satcom");
@@ -98,7 +98,7 @@ function function_3d1df8a6(str_objective, b_starting) {
   level thread namespace_7468806b::function_ec4c365f();
   level thread function_51d9d9c1();
   level flag::wait_till("flg_mountain_slide_woods_start");
-  skipto::function_4e3ab877("mountain_summit");
+  skipto::objective_completed("mountain_summit");
 }
 
 function function_407a3aaa() {
@@ -137,12 +137,12 @@ function function_e16fed8b() {
 }
 
 function function_51d9d9c1() {
-  level thread breadcrumb::function_61037c6c(#"hash_72504ca297c1cdf9");
+  level thread breadcrumb::start_chain(#"hash_72504ca297c1cdf9");
 }
 
 function function_d3655e70(str_objective) {
   level thread objectives::scripted("obj_yamantau_1", undefined, #"hash_423da80c752f859f");
-  namespace_b73b9191::function_2683ec5d();
+  namespace_b73b9191::spawn_woods();
   level thread function_e16fed8b();
   level thread function_fe3defb0();
   level flag::set("flg_intro_dialog_done");
@@ -153,7 +153,7 @@ function function_d3655e70(str_objective) {
   level.ai_woods forceteleport(s_mountain_woods_teleport.origin, s_mountain_woods_teleport.angles);
 }
 
-function function_fdbb9f1e(str_objective, b_starting, var_aa1a6455, player) {}
+function function_fdbb9f1e(str_objective, b_starting, b_direct, player) {}
 
 function function_ae06da18(str_objective, b_starting) {
   level.ai_woods.script_accuracy = 1;
@@ -170,7 +170,7 @@ function function_ae06da18(str_objective, b_starting) {
   savegame::checkpoint_save(1);
   level flag::wait_till("flg_ice_slide_complete");
   savegame::checkpoint_save(1);
-  skipto::function_4e3ab877("ice_slide");
+  skipto::objective_completed("ice_slide");
 }
 
 function function_92e93428() {
@@ -317,7 +317,7 @@ function function_3d8cac1b() {
   s_notify = self waittill(#"damage");
 
   if(isDefined(s_notify.weapon) && s_notify.weapon.name === "sniper_standard_t9") {
-    level.player playhitmarker(#"hash_31e38d8520839566", 5, undefined, 1);
+    level.player playhitmarker(#"mpl_hit_body_fatal", 5, undefined, 1);
     self namespace_979752dc::enable_stealth_for_ai(0);
     level flag::set("flg_rooftop_death_playing");
     level scene::play("scene_yam_0000_ambient_rooftop_guard_scan", "death");
@@ -358,7 +358,7 @@ function function_ea4df875(var_52be209f, ai_mountain_summit_2) {
 
 function function_bb34c64(str_objective) {
   level thread objectives::scripted("obj_yamantau_1", undefined, #"hash_423da80c752f859f");
-  namespace_b73b9191::function_2683ec5d();
+  namespace_b73b9191::spawn_woods();
   var_b4bb921 = struct::get("woods_ice_slide_teleport", "targetname");
   level.ai_woods forceteleport(var_b4bb921.origin, var_b4bb921.angles);
   level flag::set("flg_mountain_woods_slide_ready");
@@ -368,7 +368,7 @@ function function_bb34c64(str_objective) {
   level thread function_ed43d759(1);
 }
 
-function function_33fd8fa3(str_objective, b_starting, var_aa1a6455, player) {}
+function function_33fd8fa3(str_objective, b_starting, b_direct, player) {}
 
 function function_11648e12(str_objective, b_starting) {
   level.ai_woods.script_accuracy = 1;
@@ -418,7 +418,7 @@ function function_11648e12(str_objective, b_starting) {
   level.ai_woods.pushable = 1;
   objectives::complete(#"hash_164cecb161e0109b");
   level flag::wait_till("flg_mountains_zipline_end");
-  skipto::function_4e3ab877("zipline_intro");
+  skipto::objective_completed("zipline_intro");
 }
 
 function function_25160739() {
@@ -961,20 +961,20 @@ function function_40618920() {
   }
 
   var_49292204[var_49292204.size] = "flg_zipline_intro_engaging";
-  var_d250eb9f = 0;
+  b_looking = 0;
   s_zipline_intro_lookat_ref = struct::get("s_zipline_intro_lookat_ref", "targetname");
 
   while(!level flag::get_any(var_49292204)) {
     if(level.player util::is_looking_at(s_zipline_intro_lookat_ref.origin, 0.995)) {
-      var_d250eb9f = 1;
+      b_looking = 1;
     } else {
-      var_d250eb9f = 0;
+      b_looking = 0;
     }
 
     waitframe(1);
   }
 
-  if(var_d250eb9f == 1) {
+  if(b_looking == 1) {
     level flag::set("flg_zipline_intro_playing_looking");
   }
 }
@@ -1039,7 +1039,7 @@ function function_ef876547() {
 
 function function_b205e5be(str_objective) {
   level thread objectives::scripted("obj_yamantau_1", undefined, #"hash_423da80c752f859f");
-  namespace_b73b9191::function_2683ec5d();
+  namespace_b73b9191::spawn_woods();
   var_b4bb921 = struct::get("woods_zipline_teleport", "targetname");
   level.ai_woods forceteleport(var_b4bb921.origin, var_b4bb921.angles);
   level thread namespace_7468806b::function_79af70ae(1);
@@ -1048,7 +1048,7 @@ function function_b205e5be(str_objective) {
   level flag::set("flg_mountain_spotter_dead");
 }
 
-function function_71f05605(str_objective, b_starting, var_aa1a6455, player) {
+function function_71f05605(str_objective, b_starting, b_direct, player) {
   waitframe(1);
   namespace_b73b9191::function_ee83e03a("cull_inside_satcom");
 }

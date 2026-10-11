@@ -27,157 +27,157 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_9fc66ac;
+#namespace doa_sound;
 
 function init() {
   clientfield::register("world", "doa_announce", 1, 11, "int", &function_b9918ac7, 0, 0);
   level thread function_d32819b7();
   level.doa.var_f5ac1256 = array({
-    #id: 0, #audio: undefined, #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 0, #audio: undefined, #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 1, #audio: #"hash_5e6e1452ec83a970", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 1, #audio: #"vox_zdan_doa_mode_title", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 2, #audio: #"hash_2eb0dc04b23c744d", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 2, #audio: #"vox_zdan_doa_fate_feet", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 3, #audio: #"hash_7e54ced7572851c2", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 3, #audio: #"vox_zdan_doa_fate_firepower", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 4, #audio: #"hash_651f3b290bc84446", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 4, #audio: #"vox_zdan_doa_fate_fortune", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 5, #audio: #"hash_1fc99b8da3b17545", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 5, #audio: #"vox_zdan_doa_fate_friend", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 6, #audio: #"hash_28b747b591669a5d", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 6, #audio: #"vox_zdan_doa_fate_dvn_shield", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 7, #audio: #"hash_7c7a787a24f593b9", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 7, #audio: #"vox_zdan_doa_fate_dvn_chalice", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 8, #audio: #"hash_2e05ff4b6268eb8f", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 8, #audio: #"vox_zdan_doa_rof_choose", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 9, #audio: #"hash_6e6f540341ffa63e", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 9, #audio: #"vox_zdan_doa_rof_done", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 10, #audio: #"hash_43afff6856f17323", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 10, #audio: #"vox_zdan_doa_rof_hint", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 11, #audio: #"hash_1b1aedb93f9470ac", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 11, #audio: #"vox_zdan_doa_hurry", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 12, #audio: #"hash_2ee1c63f7404a4d", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 12, #audio: #"vox_zdan_doa_bns_rm_discover", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 13, #audio: #"hash_2c81ef7c33bb5cf8", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 13, #audio: #"vox_zdan_doa_bns_rm_armory", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 14, #audio: #"hash_3dc9e95c1bb57e9b", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 14, #audio: #"vox_zdan_doa_bns_rm_coop", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 15, #audio: #"hash_7d54a35ebdfd55bd", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 15, #audio: #"vox_zdan_doa_bns_rm_kaboom", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 16, #audio: #"hash_3a54bd27d22124f0", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 16, #audio: #"vox_zdan_doa_bns_rm_trade_pst", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 17, #audio: #"hash_5b52ce536f868c5e", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 17, #audio: #"vox_zdan_doa_bns_rm_veh_dpt", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 18, #audio: #"hash_1f86f42144bb9e8f", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 18, #audio: #"vox_zdan_doa_bns_rm_treasure", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 19, #audio: #"hash_1241db745382fb45", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 19, #audio: #"vox_zdan_doa_bns_area_discover", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 20, #audio: #"hash_160facb2f210d511", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 20, #audio: #"vox_zdan_doa_bns_area_cellar", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 21, #audio: #"hash_6ced3e7dc041cd89", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 21, #audio: #"vox_zdan_doa_bns_area_platform", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 22, #audio: #"hash_77520fd1edf0a38a", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 22, #audio: #"vox_zdan_doa_bns_area_crypt", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 23, #audio: #"hash_1bf394b62878774b", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 23, #audio: #"vox_zdan_doa_bns_area_temple", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 24, #audio: #"hash_5067551b940e90b5", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 24, #audio: #"vox_zdan_doa_item_ammo_can", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 25, #audio: #"hash_3d81295463455fe", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 25, #audio: #"vox_zdan_doa_item_arcade", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 26, #audio: #"hash_19ff2f6b0c853b6", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 26, #audio: #"vox_zdan_doa_item_barrel", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 27, #audio: #"hash_622c69a771466aae", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 27, #audio: #"vox_zdan_doa_item_booster", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 28, #audio: #"hash_46f6b3325650d2db", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 28, #audio: #"vox_zdan_doa_item_nuke", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 29, #audio: #"hash_38c6db33d9b9bb6b", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 29, #audio: #"vox_zdan_doa_item_boots", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 30, #audio: #"hash_6c635274e16696bd", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 30, #audio: #"vox_zdan_doa_item_boxing", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 31, #audio: #"hash_4d2fd562754a4f01", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 31, #audio: #"vox_zdan_doa_item_chicken", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 32, #audio: #"hash_670e9e1a3893d870", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 32, #audio: #"vox_zdan_doa_item_clock", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 33, #audio: #"hash_2b25bf7cb60724a1", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 33, #audio: #"vox_zdan_doa_item_coat_arms", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 34, #audio: #"hash_91466a80e98968f", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 34, #audio: #"vox_zdan_doa_item_egg", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 35, #audio: #"hash_72a785fee3fe1546", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 35, #audio: #"vox_zdan_doa_item_egg_gold", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 36, #audio: #"hash_5dcdc3449e3d853c", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 36, #audio: #"vox_zdan_doa_item_life", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 37, #audio: #"hash_70176ca9d7eadea2", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 37, #audio: #"vox_zdan_doa_item_1st_person", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 38, #audio: #"hash_17c7fe1f6f3a34f0", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 38, #audio: #"vox_zdan_doa_item_flashlight", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 39, #audio: #"hash_4dc16a7fdcca84cc", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 39, #audio: #"vox_zdan_doa_item_gift", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 40, #audio: #"hash_5db798a7f60563d7", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 40, #audio: #"vox_zdan_doa_item_hat", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 41, #audio: #"hash_459e9ed04815fe9c", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 41, #audio: #"vox_zdan_doa_item_health", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 42, #audio: #"hash_9274c6731fb7feb", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 42, #audio: #"vox_zdan_doa_item_hind", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 43, #audio: #"hash_5bf27744a0b10d1e", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 43, #audio: #"vox_zdan_doa_item_lantern", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 44, #audio: #"hash_1958839e85f66720", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 44, #audio: #"vox_zdan_doa_item_magnet", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 45, #audio: #"hash_1997e34d69a45b73", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 45, #audio: #"vox_zdan_doa_item_monkey", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 46, #audio: #"hash_113008b2061dab6b", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 46, #audio: #"vox_zdan_doa_item_sawblade", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 47, #audio: #"hash_2427c3aea88f9fd1", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 47, #audio: #"vox_zdan_doa_item_sentry", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 48, #audio: #"hash_6175054f39a3e1dd", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 48, #audio: #"vox_zdan_doa_item_skeleton", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 49, #audio: #"hash_37d228f1a7b7933d", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 49, #audio: #"vox_zdan_doa_item_skeleton_key", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 50, #audio: #"hash_3058c912ba06ce02", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 50, #audio: #"vox_zdan_doa_item_sprinkler", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 51, #audio: #"hash_6f7330fa470cb5e8", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 51, #audio: #"vox_zdan_doa_item_teddy", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 52, #audio: #"hash_5f4f49fa863187fd", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 52, #audio: #"vox_zdan_doa_item_tesla", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 53, #audio: #"hash_5be1c74545ae242a", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 53, #audio: #"vox_zdan_doa_item_umbrella", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 54, #audio: #"hash_18d7c7d333aa151e", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 54, #audio: #"vox_zdan_doa_item_vortex", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 55, #audio: #"hash_7742a96850eaf496", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 55, #audio: #"vox_zdan_doa_item_wpn_charge", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 56, #audio: #"hash_7522904a63119317", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 56, #audio: #"vox_zdan_doa_item_mech", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 57, #audio: #"hash_43c91102fff01c96", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 57, #audio: #"vox_zdan_doa_item_tank", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 58, #audio: #"hash_4a892234ff034660", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 58, #audio: #"vox_zdan_doa_item_sam_turret", #cooldown: 120000, #lastplayed: 0, #roll: 5
   }, {
-    #id: 59, #audio: #"hash_7286e11306aa412f", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 59, #audio: #"vox_zdan_doa_wild_enter", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 60, #audio: #"hash_31e0e727b7ea0fcb", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 60, #audio: #"vox_zdan_doa_wild_exit", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 61, #audio: #"hash_680b8403f9f66646", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 61, #audio: #"vox_zdan_doa_deadly_dungeon", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 62, #audio: #"hash_15428efb31882884", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 62, #audio: #"vox_zdan_doa_challenge_rnd", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 63, #audio: #"hash_7fb87667c443733d", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 63, #audio: #"vox_zdan_doa_boss_enc_enter", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 64, #audio: #"hash_2ff2890b37cb4b5d", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 64, #audio: #"vox_zdan_doa_monster_mashup", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 65, #audio: #"hash_175054f8f6fc7dde", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 65, #audio: #"vox_zdan_doa_boss_enc_skeleton", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 66, #audio: #"hash_4eb136f9afa3e768", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 66, #audio: #"vox_zdan_doa_boss_enc_margwa", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 67, #audio: #"hash_7708cf29dde5f73a", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 67, #audio: #"vox_zdan_doa_boss_enc_wwolf", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 68, #audio: #"hash_1aaf39243ecd3c87", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 68, #audio: #"vox_zdan_doa_boss_enc_gngnss", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 69, #audio: #"hash_5bf427da9381b39f", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 69, #audio: #"vox_zdan_doa_boss_enc_blight", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 70, #audio: #"hash_6838acfd05bcf2ab", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 70, #audio: #"vox_zdan_doa_mama_chase", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 71, #audio: #"hash_340c9ca061a5fde2", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 71, #audio: #"vox_zdan_doa_fate_room", #cooldown: 0, #lastplayed: 0, #roll: 100
   }, {
-    #id: 72, #audio: #"hash_6020f714caec40ab", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 72, #audio: #"vox_zdan_doa_game_over", #cooldown: 0, #lastplayed: 0, #roll: 100
   });
   function_32d5e898();
 }
@@ -245,7 +245,7 @@ function function_9a237f2f(localclientnum, voline, entity) {
 
 function announce(localclientnum, var_fa5e0d11) {
   line = level.doa.var_f5ac1256[var_fa5e0d11];
-  line.var_2c036085 = gettime() + line.cooldown;
+  line.lastplayed = gettime() + line.cooldown;
   function_9a237f2f(localclientnum, line.audio);
 }
 
@@ -258,11 +258,11 @@ function function_b9918ac7(localclientnum, oldval, newval, bnewent, binitialsnap
     return;
   }
 
-  var_971e1071 = bwastimejump & 15;
+  playermask = bwastimejump & 15;
   var_fa5e0d11 = bwastimejump >> 4;
   line = level.doa.var_f5ac1256[var_fa5e0d11];
 
-  if(line.var_2c036085 > gettime()) {
+  if(line.lastplayed > gettime()) {
     return;
   }
 
@@ -272,7 +272,7 @@ function function_b9918ac7(localclientnum, oldval, newval, bnewent, binitialsnap
     return;
   }
 
-  if(var_971e1071 == 15) {
+  if(playermask == 15) {
     announce(fieldname, var_fa5e0d11);
     return;
   }
@@ -286,7 +286,7 @@ function function_b9918ac7(localclientnum, oldval, newval, bnewent, binitialsnap
 
     var_a10d0ff1 = 1 << player.entnum;
 
-    if(var_a10d0ff1 &var_971e1071 == 0) {
+    if(var_a10d0ff1 &playermask == 0) {
       continue;
     }
 
@@ -296,11 +296,11 @@ function function_b9918ac7(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_32d5e898(localclientnum = 0) {
   level thread function_5521aa1c(localclientnum);
-  util::delay(2, "game_over", &function_5beeba99);
+  util::delay(2, "game_over", &arena_changed);
 
   for(i = 0; i < level.doa.var_f5ac1256.size; i++) {
     assert(i == level.doa.var_f5ac1256[i].id, "<dev string:x38>");
-    level.doa.var_f5ac1256[i].var_2c036085 = 0;
+    level.doa.var_f5ac1256[i].lastplayed = 0;
   }
 }
 
@@ -314,9 +314,9 @@ function function_a77649db(onoff, str_name) {
   function_f2198fe(level.var_1d1399b);
 }
 
-function function_5beeba99() {
-  if(isDefined(level.doa.var_72b899ad)) {
-    name = level.doa.var_72b899ad.script_noteworthy;
+function arena_changed() {
+  if(isDefined(level.doa.current_arena)) {
+    name = level.doa.current_arena.script_noteworthy;
     var_8576a4b1 = level.doa.roundnumber;
     function_30f7911(0, name);
   }
@@ -399,6 +399,6 @@ function function_d32819b7() {
 }
 
 function function_319e479e() {
-  audio::playloopat(#"hash_144636b68669b310", (1073, 7378, 1229));
-  audio::playloopat(#"hash_557b8a7ebb353029", (319, 7216, 1229));
+  audio::playloopat(#"amb_swamp_crickets_2", (1073, 7378, 1229));
+  audio::playloopat(#"amb_swamp_crickets", (319, 7216, 1229));
 }

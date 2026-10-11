@@ -85,8 +85,8 @@ function function_66027924(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_8d607c5a(localclientnum) {
-  self playSound(localclientnum, #"hash_13985582064d5e89");
-  self.var_5bea7e99 = self playLoopSound(#"hash_2353ca5802f38a90", undefined, (0, 0, 50));
+  self playSound(localclientnum, #"zmb_ai_steiner_spawn_stinger");
+  self.var_5bea7e99 = self playLoopSound(#"zmb_steiner_geiger_lp", undefined, (0, 0, 50));
   self thread function_c3ae0dcf();
   self thread function_ce1bd3f2(localclientnum);
 }

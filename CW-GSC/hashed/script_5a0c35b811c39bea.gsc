@@ -66,12 +66,12 @@ function private function_f34df3c() {
   self.var_721a3dbd = 1;
   self.var_8f61d7f4 = 1;
   self.var_4cc2bf28 = 0;
-  self.var_90d0c0ff = "anim_avogadro_spawn";
+  self.spawn_anim_alias = "anim_avogadro_spawn";
   self.var_ecbef856 = "anim_avogadro_despawn";
   self.despawn_anim = "ai_t9_zm_avogadro_exit";
   self.var_c11b8a5a = 1;
   self.var_e9c62827 = 1;
-  self.ai.var_870d0893 = 1;
+  self.ai.rex_mp_swamp_concrete_debris = 1;
   self.no_powerups = 1;
   self.var_b3c613a7 = [1, 1, 1, 1, 1];
   self.var_414bc881 = 1;
@@ -465,7 +465,7 @@ function function_1fef432(inflictor, attacker, damage, idflags, smeansofdeath, w
 }
 
 function function_8886bcc4(params) {
-  self playSound(#"hash_64bb457a8c6f828c");
+  self playSound(#"zmb_avogadro_death_imp");
   self clientfield::set("sndAwarenessChange", 0);
 
   if(!isPlayer(params.eattacker)) {

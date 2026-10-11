@@ -141,7 +141,7 @@ function private function_3be17ddc(exits, var_4e8e65e4, north) {
   return namespace_21dd166c::function_b5f93b3b(level.var_e1daf6fe[exits]);
 }
 
-function function_9ab6c6c6() {
+function level_generation() {
   self notify("4254f56e0f4d90df");
   self endon("4254f56e0f4d90df");
   level notify(#"hash_186e943c1cd0db52");
@@ -149,7 +149,7 @@ function function_9ab6c6c6() {
   function_f4b7f348("level_generation issuing REROLL NOTIFICATION");
   namespace_f27a9d0d::cleanup();
   function_f4b7f348("level_generation cleanup called and finished.");
-  namespace_21dd166c::function_c083433f();
+  namespace_21dd166c::generate_level();
   function_f4b7f348("level_generation generate_level called and finished.");
 
   if(!getdvarint(#"hash_55c78475b1ebf3de", 1)) {
@@ -164,18 +164,18 @@ function function_9ab6c6c6() {
 
   if(!getdvarint(#"hash_55c78475b1ebf3de", 1)) {
     level waittill(#"hash_766491787f94a437");
-    level thread namespace_f27a9d0d::function_b3f5992c();
+    level thread namespace_f27a9d0d::connect_all_rooms();
     function_f4b7f348("level_generation connect_all_rooms called and finished.");
     level waittill(#"hash_2afb084294b9f124");
   } else {
-    namespace_f27a9d0d::function_b3f5992c();
+    namespace_f27a9d0d::connect_all_rooms();
   }
 
-  namespace_f27a9d0d::function_612d8b4e();
+  namespace_f27a9d0d::calculate_door_depths();
   function_f4b7f348("level_generation calculate_door_depths called and finished.");
 
-  if(isDefined(level.var_3dd67d2d)) {
-    [[level.var_3dd67d2d]]();
+  if(isDefined(level.rg_postlevelgen_cb)) {
+    [[level.rg_postlevelgen_cb]]();
     function_f4b7f348("level_generation rg_postLevelGen_CB called and finished.");
   }
 
@@ -319,7 +319,7 @@ function function_1bce4bde(name) {
   function_f4b7f348("Generating Map:" + name);
   startloc = namespace_f27a9d0d::init(name);
   init(name);
-  level thread function_9ab6c6c6();
+  level thread level_generation();
   return startloc;
 }
 

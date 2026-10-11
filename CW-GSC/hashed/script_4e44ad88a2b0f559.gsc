@@ -107,7 +107,7 @@ function private function_b21ea513() {
   }
 
   enemies = self getenemiesinradius(self.origin, 1000);
-  var_8a75d6bc = undefined;
+  knownpos = undefined;
   var_6e4e5c17 = undefined;
 
   foreach(enemy in enemies) {
@@ -124,16 +124,16 @@ function private function_b21ea513() {
 
     if(!isDefined(var_6e4e5c17) || var_6e4e5c17 < var_f1e73cd) {
       var_6e4e5c17 = var_f1e73cd;
-      var_8a75d6bc = enemypos;
+      knownpos = enemypos;
     }
   }
 
-  if(!isDefined(var_8a75d6bc)) {
+  if(!isDefined(knownpos)) {
     return false;
   }
 
-  var_8a75d6bc += (0, 0, self getplayerviewheight());
-  self function_b5460039(var_8a75d6bc, #"hash_4d7ab907ebdddd3c", (1, 0.5, 0));
+  knownpos += (0, 0, self getplayerviewheight());
+  self function_b5460039(knownpos, #"hash_4d7ab907ebdddd3c", (1, 0.5, 0));
   return true;
 }
 
@@ -300,10 +300,10 @@ function private function_23401de9() {
 }
 
 function private function_b5460039(point, var_e125ba43, debugcolor) {
-  var_a3375299 = undefined;
+  initialpoint = undefined;
 
   if(isDefined(self.bot.var_32d8dabe)) {
-    var_a3375299 = point;
+    initialpoint = point;
     point += rotatepoint(self.bot.var_32d8dabe, self.angles + (0, 180, 0));
   }
 
@@ -311,12 +311,12 @@ function private function_b5460039(point, var_e125ba43, debugcolor) {
     recordbox(point, (-1.5, -1.5, -1.5), (1.5, 1.5, 1.5), self.angles[1], debugcolor, "<dev string:x49>", self);
     record3dtext(hashtostring(var_e125ba43), point + (0, 0, -0.75), (1, 1, 1), "<dev string:x49>", self, 0.5);
 
-    if(isDefined(var_a3375299)) {
-      recordbox(var_a3375299, (-1.5, -1.5, -1.5), (1.5, 1.5, 1.5), self.angles[1], (0.75, 0.75, 0.75), "<dev string:x49>", self);
-      recordline(var_a3375299, point, (0.75, 0.75, 0.75), "<dev string:x49>", self);
+    if(isDefined(initialpoint)) {
+      recordbox(initialpoint, (-1.5, -1.5, -1.5), (1.5, 1.5, 1.5), self.angles[1], (0.75, 0.75, 0.75), "<dev string:x49>", self);
+      recordline(initialpoint, point, (0.75, 0.75, 0.75), "<dev string:x49>", self);
 
       if(isDefined(self.bot.var_9e5aaf8d)) {
-        record3dtext(self.bot.var_9e5aaf8d + "<dev string:x53>", var_a3375299, (1, 1, 0), "<dev string:x49>", self, 0.5);
+        record3dtext(self.bot.var_9e5aaf8d + "<dev string:x53>", initialpoint, (1, 1, 0), "<dev string:x49>", self, 0.5);
       }
     }
   }

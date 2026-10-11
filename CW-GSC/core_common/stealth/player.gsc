@@ -96,7 +96,7 @@ function get_detect_range() {
 
 function combatstate_thread(enabled = 1) {
   if(!enabled) {
-    self notify(#"hash_4330b0368e7f1373");
+    self notify(#"stop_player_combat_state_thread");
     self.stealth.combatstate = undefined;
     return;
   } else if(isDefined(self.stealth.combatstate)) {
@@ -105,7 +105,7 @@ function combatstate_thread(enabled = 1) {
 
   self endon(#"death");
   self endon(#"stealth_disabled");
-  self endon(#"hash_4330b0368e7f1373");
+  self endon(#"stop_player_combat_state_thread");
   self endon(#"disconnect");
   self childthread playerattackedmonitor();
   self childthread combatstate_updatethread();
@@ -113,15 +113,15 @@ function combatstate_thread(enabled = 1) {
   self.stealth.combatstate.name = "stealth";
   self.stealth.combatstate.type = "idle";
   self.stealth.combatstate.updatefuncs = [];
-  var_e8c14f37 = [];
-  var_41b7c5cb = [];
+  oldcombatenemies = [];
+  oldhuntenemies = [];
 
   while(true) {
     self flag::wait_till("stealth_enabled");
-    arrayremovevalue(var_e8c14f37, undefined);
-    function_1eaaceab(var_e8c14f37);
-    arrayremovevalue(var_41b7c5cb, undefined);
-    function_1eaaceab(var_41b7c5cb);
+    arrayremovevalue(oldcombatenemies, undefined);
+    function_1eaaceab(oldcombatenemies);
+    arrayremovevalue(oldhuntenemies, undefined);
+    function_1eaaceab(oldhuntenemies);
     combatenemies = [];
     huntenemies = [];
     var_a01740d6 = 0;
@@ -135,7 +135,7 @@ function combatstate_thread(enabled = 1) {
         continue;
       }
 
-      if(!array::contains(var_e8c14f37, enemy)) {
+      if(!array::contains(oldcombatenemies, enemy)) {
         if(!isalive(enemy)) {
           continue;
         }
@@ -186,7 +186,7 @@ function combatstate_thread(enabled = 1) {
       if(combatenemies.size == 0) {
         name = "stealth";
 
-        if(arrayintersect(var_e8c14f37, huntenemies).size > 0) {
+        if(arrayintersect(oldcombatenemies, huntenemies).size > 0) {
           type = "hunt";
         } else if(huntenemies.size == 0) {
           type = "all_clear";
@@ -211,20 +211,20 @@ function combatstate_thread(enabled = 1) {
     if(name != lastname || isDefined(type) && type !== lasttype) {
       self.stealth.combatstate.name = name;
       self.stealth.combatstate.type = type;
-      self notify(#"hash_ec8c1a398bebc57", {
+      self notify(#"player_combat_state_updated", {
         #name: name, #type: type
       });
     }
 
-    var_e8c14f37 = combatenemies;
-    var_41b7c5cb = huntenemies;
+    oldcombatenemies = combatenemies;
+    oldhuntenemies = huntenemies;
     waitframe(1);
   }
 }
 
 function combatstate_updatethread() {
   while(true) {
-    result = self waittill(#"hash_ec8c1a398bebc57");
+    result = self waittill(#"player_combat_state_updated");
 
     foreach(func in self.stealth.combatstate.updatefuncs) {
       self thread[[func]](result.name, result.type);
@@ -252,7 +252,7 @@ function combatstate_removeupdatefunc(key) {
 
 function playerattackedmonitor() {
   while(true) {
-    level waittill(#"hash_58d740afedebc182", #"hash_58419cfa256da59b");
+    level waittill(#"an_enemy_shot", #"enemy_grenade_fire");
     self.lastattackedtime = gettime();
   }
 }

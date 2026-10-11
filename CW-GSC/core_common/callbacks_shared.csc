@@ -182,12 +182,12 @@ function remove_on_spawned(func, obj) {
   remove_callback(#"on_player_spawned", func, obj);
 }
 
-function function_675f0963(func, obj) {
-  add_callback(#"hash_1fc6e31d0d02aa3", func, obj);
+function on_actor_spawned(func, obj) {
+  add_callback(#"on_actor_spawned", func, obj);
 }
 
 function function_ce9bb4ec(func, obj) {
-  remove_callback(#"hash_1fc6e31d0d02aa3", func, obj);
+  remove_callback(#"on_actor_spawned", func, obj);
 }
 
 function on_vehicle_spawned(func, obj) {

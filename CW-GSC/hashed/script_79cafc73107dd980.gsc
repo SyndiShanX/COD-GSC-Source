@@ -47,23 +47,23 @@ function function_96a48049() {
   self.canbetargetedbyturnedzombies = 1;
   self.is_zombie = 1;
   self.zombie_move_speed = "sprint";
-  self.var_9658ee9f = 1;
+  self.sprintonly = 1;
   self.no_gib = 1;
   self.var_a592ffaa = 1;
   self.animrate = 1.15;
   self asmsetanimationrate(self.animrate);
-  self namespace_83eb6304::function_3ecfde67("nova_crawler_aura_fx");
+  self doa_fx::function_3ecfde67("nova_crawler_aura_fx");
 
   if(isDefined(self.var_d55f22cb)) {
-    self namespace_83eb6304::function_3ecfde67("nova_crawler_burst");
+    self doa_fx::function_3ecfde67("nova_crawler_burst");
   }
 
   self callback::function_d8abfc3d(#"on_ai_killed", &function_3dbef270);
-  self thread namespace_9fc66ac::function_ba33d23d(#"hash_3defcaf3d4381c5a", #"hash_3defcaf3d4381c5a", #"hash_2d7e37242c315034");
+  self thread doa_sound::function_ba33d23d(#"zmb_doa_ai_crawler_vocal_ambient", #"zmb_doa_ai_crawler_vocal_ambient", #"zmb_doa_ai_crawler_vocal_death");
 }
 
 function function_3dbef270(params) {
-  self namespace_83eb6304::function_3ecfde67("nova_crawler_burst");
+  self doa_fx::function_3ecfde67("nova_crawler_burst");
   self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_crawler_explo");
   trigger = namespace_ec06fe4a::spawntrigger("trigger_radius", self.origin, 2 | 1 | 512, 40, 50);
 

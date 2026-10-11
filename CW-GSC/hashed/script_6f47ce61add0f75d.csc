@@ -19,9 +19,9 @@
 
 function event_handler[level_preinit] function_b489bb7b(eventstruct) {
   snd::function_d4ec748e(&function_f2a2832d);
-  snd::function_ce78b33b(&function_32ab045);
+  snd::function_ce78b33b(&_targetname);
   snd::trigger_init(&_trigger);
-  snd::function_5e69f468(&_objective);
+  snd::skipto_init(&_objective);
 }
 
 function event_handler[event_cc819519] function_686b88aa(eventstruct) {
@@ -40,7 +40,7 @@ function function_4999d3f6() {
   snd::element_init("kgb_atrium", var_73f90778);
 }
 
-function private function_32ab045(ent, name) {
+function private _targetname(ent, name) {
   switch (name) {
     case #"player":
       level.player = ent;
@@ -94,10 +94,10 @@ function private function_f2a2832d(player, msg) {
       level notify(#"atrium_reveal");
       break;
     case #"map_submix_on":
-      function_5ea2c6e3("cp_rus_kgb_map", 0.3, 1);
+      addsubmix("cp_rus_kgb_map", 0.3, 1);
       break;
     case #"map_submix_off":
-      function_ed62c9c2("cp_rus_kgb_map", 0.15);
+      clearsubmix("cp_rus_kgb_map", 0.15);
       break;
     case #"hash_695d2aba2d66c4b2":
       thread function_f115b891();
@@ -132,10 +132,10 @@ function private function_f2a2832d(player, msg) {
       thread function_359db1e6();
       break;
     case #"hash_68f5c5f77549c363":
-      function_672403ca("cp_rus_kgb_briefing", 2, 0.5);
+      blendsubmix("cp_rus_kgb_briefing", 2, 0.5);
       break;
     case #"hash_4784d9dbd4d07023":
-      function_ed62c9c2("cp_rus_kgb_briefing", 1);
+      clearsubmix("cp_rus_kgb_briefing", 1);
       break;
     case #"hash_4692f2d7c81a7c95":
       thread function_1dd0dad7();
@@ -309,10 +309,10 @@ function private _objective(objective) {
   }
 }
 
-function function_f4062e4e() {
-  var_85107416 = snd::play("evt_kgb_intro_hallway_door_shut_lp", (-145, -722, 442));
+function intro_ambience() {
+  intro_amb = snd::play("evt_kgb_intro_hallway_door_shut_lp", (-145, -722, 442));
   level waittill(#"hash_351de52eb5de645d");
-  snd::stop(var_85107416, 1);
+  snd::stop(intro_amb, 1);
 }
 
 function function_f115b891() {
@@ -326,13 +326,13 @@ function function_f115b891() {
   snd::play("evt_kgb_intro_bootup_02");
   wait 0.9;
   snd::play("evt_kgb_computer_beep_01");
-  function_5ea2c6e3("cp_rus_kgb_intro_amb", 4, 1);
+  addsubmix("cp_rus_kgb_intro_amb", 4, 1);
   wait 6;
   thread function_4fb5552e();
   level waittill(#"atrium_reveal");
-  function_672403ca("cp_rus_kgb_intro_music", 3, 0.3);
+  blendsubmix("cp_rus_kgb_intro_music", 3, 0.3);
   wait 5;
-  function_672403ca("cp_rus_kgb_intro_music", 8, 0.5);
+  blendsubmix("cp_rus_kgb_intro_music", 8, 0.5);
 }
 
 function function_4fb5552e() {
@@ -341,7 +341,7 @@ function function_4fb5552e() {
   }
 
   level.var_72121827 = 1;
-  function_5ea2c6e3("cp_rus_kgb_intro_music", 4, 0.8);
+  addsubmix("cp_rus_kgb_intro_music", 4, 0.8);
 }
 
 function function_8362159() {
@@ -376,11 +376,11 @@ function function_3c3d7227() {
   wait 4.4;
   snd::play("evt_kgb_intro_door_open", (-157, -624, 440));
   level notify(#"hash_351de52eb5de645d");
-  function_ed62c9c2("cp_rus_kgb_intro_amb", 1);
+  clearsubmix("cp_rus_kgb_intro_amb", 1);
   wait 0.35;
   snd::play("evt_kgb_intro_door_walla", (-157, -624, 440));
   wait 4;
-  function_672403ca("cp_rus_kgb_intro_music", 4, 0.6);
+  blendsubmix("cp_rus_kgb_intro_music", 4, 0.6);
 }
 
 function function_6186bcc6() {
@@ -450,7 +450,7 @@ function function_9c460fd() {
 }
 
 function function_359db1e6() {
-  function_ed62c9c2("cp_rus_kgb_intro_music", 7);
+  clearsubmix("cp_rus_kgb_intro_music", 7);
 }
 
 function function_dbc25edd() {}
@@ -586,11 +586,11 @@ function function_aeb5c3be() {
 function function_c8547f0b() {
   snd::play("evt_kgb_deploygas_remote_activate");
   wait 0.45;
-  function_5ea2c6e3("cp_rus_kgb_deploygas_exp", 0.1, 1);
+  addsubmix("cp_rus_kgb_deploygas_exp", 0.1, 1);
   snd::play("cin_kgb_deploygas_detonate", (-3276, -494, -1539));
   thread function_478dc292();
   wait 6.7;
-  function_ed62c9c2("cp_rus_kgb_deploygas_exp", 2);
+  clearsubmix("cp_rus_kgb_deploygas_exp", 2);
   wait 5.7;
   thread function_95b3471f();
 }
@@ -630,12 +630,12 @@ function function_95b3471f() {
 }
 
 function function_6e29bca9() {
-  function_5ea2c6e3("cp_rus_kgb_pre_exfil_gearup", 0.1, 1);
+  addsubmix("cp_rus_kgb_pre_exfil_gearup", 0.1, 1);
   snd::play("evt_c4_bell_gearup_wpn_down");
   wait 6;
   snd::play("evt_c4_bell_gearup_fadeout");
   wait 6;
-  function_ed62c9c2("cp_rus_kgb_pre_exfil_gearup", 2);
+  clearsubmix("cp_rus_kgb_pre_exfil_gearup", 2);
 }
 
 function function_7ae3098e() {
@@ -655,10 +655,10 @@ function function_7ae3098e() {
 
 function function_65a78fed() {
   wait 2;
-  function_5ea2c6e3("cp_rus_kgb_c4_slowmo", 0.5, 1);
+  addsubmix("cp_rus_kgb_c4_slowmo", 0.5, 1);
   level waittill(#"hash_10c1d2c0d2f43070");
   snd::play("evt_c4_slowmo_stop");
-  function_ed62c9c2("cp_rus_kgb_c4_slowmo", 1);
+  clearsubmix("cp_rus_kgb_c4_slowmo", 1);
 }
 
 function function_a3b23b0f() {
@@ -678,7 +678,7 @@ function exfil_car_pullup() {
 function exfil_car_enter() {
   snd::play("cin_exfil_car_enter", level.player);
   wait 2.6;
-  function_5ea2c6e3("cp_rus_kgb_exfil", 0.25, 1);
+  addsubmix("cp_rus_kgb_exfil", 0.25, 1);
   snd::stop(level.var_c29a15da, 0.25);
   level.var_e8a77cb2 = snd::play([0, "cin_exfil_car_idle_interior_lp", 0.25], level.veh_escape_vehicle);
   level waittill(#"floor_it_drive");
@@ -687,28 +687,28 @@ function exfil_car_enter() {
   wait 0.6;
   snd::stop(level.var_e8a77cb2, 1);
   wait 4;
-  function_5ea2c6e3("cp_rus_kgb_exfil_crash", 2, 1);
+  addsubmix("cp_rus_kgb_exfil_crash", 2, 1);
   setsoundcontext("slowmo", "true");
   wait 6.05;
-  function_5ea2c6e3("cp_rus_kgb_exfil_crash2", 2, 1);
+  addsubmix("cp_rus_kgb_exfil_crash2", 2, 1);
   wait 2;
-  function_ed62c9c2("cp_rus_kgb_exfil_crash", 1);
-  function_ed62c9c2("cp_rus_kgb_exfil_crash2", 1);
+  clearsubmix("cp_rus_kgb_exfil_crash", 1);
+  clearsubmix("cp_rus_kgb_exfil_crash2", 1);
   setsoundcontext("slowmo", "");
 }
 
 function function_1f99f8ec() {
   level waittill(#"hash_2c0beb312425c5c7");
-  function_5ea2c6e3("cp_rus_kgb_exfil_slowmo", 0.25, 1);
+  addsubmix("cp_rus_kgb_exfil_slowmo", 0.25, 1);
   snd::play("cin_exfil_car_adler_slowmo");
   level waittill(#"hash_6498bbe6e48dc96d");
-  function_ed62c9c2("cp_rus_kgb_exfil_slowmo", 0.25);
+  clearsubmix("cp_rus_kgb_exfil_slowmo", 0.25);
   thread function_5b3d1f35();
 }
 
 function function_5b3d1f35() {
   wait 8;
-  function_5ea2c6e3("cp_rus_kgb_exfil_outro", 0.25, 1);
+  addsubmix("cp_rus_kgb_exfil_outro", 0.25, 1);
 }
 
 function function_f0a1a424() {

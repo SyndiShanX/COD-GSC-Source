@@ -17,12 +17,12 @@ function event_handler[level_init] main(eventstruct) {
   load::main();
   level thread function_3ffcd2d5();
   compass::setupminimap("");
-  var_ff7645b0 = spawn("script_model", (-1385, -667, 100));
-  var_ff7645b0.angles = (0, 295, 0);
-  var_ff7645b0 setModel("p8_box_case_metal_02_medium");
-  var_ecb8a035 = spawn("script_model", (-1362, -656, 100));
-  var_ecb8a035.angles = (0, 115, 0);
-  var_ecb8a035 setModel("p8_box_case_metal_02_medium");
+  crate01 = spawn("script_model", (-1385, -667, 100));
+  crate01.angles = (0, 295, 0);
+  crate01 setModel("p8_box_case_metal_02_medium");
+  crate02 = spawn("script_model", (-1362, -656, 100));
+  crate02.angles = (0, 115, 0);
+  crate02 setModel("p8_box_case_metal_02_medium");
   var_a41d0eff = spawn("script_model", (-1385, -667, 120));
   var_a41d0eff.angles = (0, 295, 0);
   var_a41d0eff setModel("p8_box_case_metal_02_medium");

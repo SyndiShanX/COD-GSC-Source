@@ -39,7 +39,7 @@ function preinit() {
 function function_a8e554a7() {
   function_db7f78a1();
   self flag::set(#"hash_7b1f9f26f086bf39");
-  self.ai.var_870d0893 = 1;
+  self.ai.rex_mp_swamp_concrete_debris = 1;
   setup_awareness(self);
   self.var_95ee6823 = 0.3;
   self callback::function_d8abfc3d(#"on_ai_killed", &function_914f5e7);

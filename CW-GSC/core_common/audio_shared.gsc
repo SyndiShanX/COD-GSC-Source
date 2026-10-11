@@ -157,29 +157,29 @@ function function_c25f7d1(params) {
 function unlockfrontendmusic(unlockname, allplayers) {}
 
 function function_30d4f8c4(attacker, smeansofdeath, weapon) {
-  str_alias = #"hash_4296e7b3cbb7f3de";
+  str_alias = #"chr_death_impact_default";
   var_90937e56 = function_bd53fa92(attacker, smeansofdeath, weapon);
 
   if(isDefined(var_90937e56)) {
     if(var_90937e56 === #"explosive") {
-      str_alias = #"hash_c43c0f6a63f7e0";
+      str_alias = #"chr_death_impact_explosion";
     }
 
     if(var_90937e56 === #"gas") {
-      str_alias = #"hash_291958f59b6be82";
+      str_alias = #"chr_death_impact_gas";
     }
 
     if(var_90937e56 === #"execution") {
-      str_alias = #"hash_58d3709b34454b17";
+      str_alias = #"evt_execution_kill_oneshot";
     }
 
     if(var_90937e56 === #"bullet") {
-      str_alias = #"hash_100370f52a9e0c99";
+      str_alias = #"chr_death_impact_bullet";
     }
   }
 
   if(weapon.name === #"hatchet") {
-    str_alias = #"hash_55bb02aa30e19da8";
+    str_alias = #"chr_death_impact_hatchet";
   }
 
   self playsoundtoplayer(str_alias, self);

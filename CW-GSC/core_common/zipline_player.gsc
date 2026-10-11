@@ -22,7 +22,7 @@ function private autoexec __init__system__() {
 function private preinit() {
   level.var_e02fab68 = struct::get_array("zipline_start", "script_noteworthy");
 
-  level thread function_be9add5();
+  level thread debug_zipline();
 
   level.var_8e1ba65f = [];
   level.var_58e84ce5 = getweapon(#"hash_3089757a990e0f6c");
@@ -121,7 +121,7 @@ function function_7205ee5e() {
 function private function_9194becb(n_delay = undefined) {
   self endon(#"disconnect");
   trigger_start = self.var_c09c6e0a;
-  var_487cfa48 = self.var_30b41973;
+  trigger_end = self.var_30b41973;
   self.var_c09c6e0a = undefined;
   self.var_30b41973 = undefined;
 
@@ -133,8 +133,8 @@ function private function_9194becb(n_delay = undefined) {
     trigger_start setvisibletoplayer(self);
   }
 
-  if(isDefined(var_487cfa48)) {
-    var_487cfa48 setvisibletoplayer(self);
+  if(isDefined(trigger_end)) {
+    trigger_end setvisibletoplayer(self);
   }
 }
 
@@ -188,16 +188,16 @@ function function_e415c864(var_5da09c55) {
     var_5da09c55.height = 128;
   }
 
-  var_912fa366 = spawn("trigger_radius_use", var_5da09c55.origin + (0, 0, 16), 0, var_5da09c55.radius, var_5da09c55.height);
-  var_912fa366.var_5da09c55 = var_5da09c55;
-  var_912fa366 triggerIgnoreTeam();
-  var_912fa366 setvisibletoall();
-  var_912fa366 setteamfortrigger(#"none");
-  var_912fa366 setCursorHint("HINT_NOICON");
+  zipline_trigger = spawn("trigger_radius_use", var_5da09c55.origin + (0, 0, 16), 0, var_5da09c55.radius, var_5da09c55.height);
+  zipline_trigger.var_5da09c55 = var_5da09c55;
+  zipline_trigger triggerIgnoreTeam();
+  zipline_trigger setvisibletoall();
+  zipline_trigger setteamfortrigger(#"none");
+  zipline_trigger setCursorHint("HINT_NOICON");
   hint = #"hash_5ca3696cb6c3bea9";
-  var_912fa366 setHintString(hint);
-  var_912fa366 callback::on_trigger(&zipline_use);
-  var_912fa366 function_2e7a1fba();
+  zipline_trigger setHintString(hint);
+  zipline_trigger callback::on_trigger(&zipline_use);
+  zipline_trigger function_2e7a1fba();
 
   if(sessionmodeiszombiesgame()) {
     if(!isDefined(level.var_f2db450a)) {
@@ -206,21 +206,21 @@ function function_e415c864(var_5da09c55) {
       level.var_f2db450a = array(level.var_f2db450a);
     }
 
-    if(!isinarray(level.var_f2db450a, var_912fa366)) {
-      level.var_f2db450a[level.var_f2db450a.size] = var_912fa366;
+    if(!isinarray(level.var_f2db450a, zipline_trigger)) {
+      level.var_f2db450a[level.var_f2db450a.size] = zipline_trigger;
     }
   }
 
-  return var_912fa366;
+  return zipline_trigger;
 }
 
 function function_77fde59c(var_5da09c55) {
-  var_912fa366 = spawn("trigger_radius", var_5da09c55.origin + (0, 0, 16), 0, 96, 128);
-  var_912fa366.var_5da09c55 = var_5da09c55;
-  var_912fa366 triggerIgnoreTeam();
-  var_912fa366 setvisibletoall();
-  var_912fa366 setteamfortrigger(#"none");
-  var_912fa366 callback::on_trigger(&function_5abc3f1f);
+  zipline_trigger = spawn("trigger_radius", var_5da09c55.origin + (0, 0, 16), 0, 96, 128);
+  zipline_trigger.var_5da09c55 = var_5da09c55;
+  zipline_trigger triggerIgnoreTeam();
+  zipline_trigger setvisibletoall();
+  zipline_trigger setteamfortrigger(#"none");
+  zipline_trigger callback::on_trigger(&function_5abc3f1f);
 
   if(sessionmodeiszombiesgame()) {
     if(!isDefined(level.var_f2db450a)) {
@@ -229,12 +229,12 @@ function function_77fde59c(var_5da09c55) {
       level.var_f2db450a = array(level.var_f2db450a);
     }
 
-    if(!isinarray(level.var_f2db450a, var_912fa366)) {
-      level.var_f2db450a[level.var_f2db450a.size] = var_912fa366;
+    if(!isinarray(level.var_f2db450a, zipline_trigger)) {
+      level.var_f2db450a[level.var_f2db450a.size] = zipline_trigger;
     }
   }
 
-  return var_912fa366;
+  return zipline_trigger;
 }
 
 function function_5abc3f1f(trigger_info) {
@@ -268,7 +268,7 @@ function function_5abc3f1f(trigger_info) {
     return;
   }
 
-  player function_827228db(self.var_5da09c55.endstruct.origin, self.var_5da09c55.origin, 1, self.var_5da09c55);
+  player start_zipline(self.var_5da09c55.endstruct.origin, self.var_5da09c55.origin, 1, self.var_5da09c55);
 }
 
 function function_2a1bd467(struct) {
@@ -356,10 +356,10 @@ function zipline_use(trigger_info) {
     }
   }
 
-  player function_827228db(var_5da09c55.endstruct.origin, var_5da09c55.origin, 0, var_5da09c55);
+  player start_zipline(var_5da09c55.endstruct.origin, var_5da09c55.origin, 0, var_5da09c55);
 }
 
-function function_827228db(target, start, inair, var_5da09c55) {
+function start_zipline(target, start, inair, var_5da09c55) {
   var_b527f10 = spawn("script_model", self.origin);
   var_b527f10 setModel("tag_origin");
   var_b527f10 setowner(self);
@@ -434,7 +434,7 @@ function function_c54ca80d(var_5da09c55) {
   }
 }
 
-function function_be9add5() {
+function debug_zipline() {
   if(!getdvarint(#"hash_13a9fb4be8e86e13", 0)) {
     return;
   }

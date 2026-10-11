@@ -27,11 +27,11 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_ed80aead;
+#namespace doa_gib;
 
 function init() {
   level.doa.var_1c58e161 = array(getweapon("zombietron_deathmachine"), getweapon("zombietron_deathmachine_1"), getweapon("zombietron_deathmachine_2"), getweapon("zombietron_shotgun_fullauto_t9"), getweapon("zombietron_shotgun_fullauto_t9_1"), getweapon("zombietron_shotgun_fullauto_t9_2"), getweapon("zombietron_launcher_1"), getweapon("zombietron_launcher_2"));
-  level.doa.var_d516e53 = array("MOD_GRENADE", "MOD_GRENADE_SPLASH", "MOD_PROJECTILE", "MOD_PROJECTIVLE_SPLASH", "MOD_EXPLOSIVE");
+  level.doa.damage_explosions = array("MOD_GRENADE", "MOD_GRENADE_SPLASH", "MOD_PROJECTILE", "MOD_PROJECTIVLE_SPLASH", "MOD_EXPLOSIVE");
   level.doa.hitlocs = array("left_hand", "left_arm_lower", "left_arm_upper", "right_hand", "right_arm_lower", "right_arm_upper");
 }
 
@@ -93,7 +93,7 @@ function function_c25b3c76(launchvector, attacker) {
     return;
   }
 
-  self namespace_83eb6304::function_3ecfde67("gut_explode");
+  self doa_fx::function_3ecfde67("gut_explode");
 
   if(isDefined(launchvector)) {
     self thread namespace_ec06fe4a::function_b4ff2191(launchvector, 100, undefined, attacker);
@@ -249,18 +249,18 @@ function function_5e680689(attacker, damage, meansofdeath, weapon, var_fd90b0bb,
 
   self.var_60368e1e = gettime();
   self endon(#"death");
-  isexplosive = isinarray(level.doa.var_d516e53, weapon);
+  isexplosive = isinarray(level.doa.damage_explosions, weapon);
   trygibbinglimb(self, meansofdeath, var_fd90b0bb, hitloc, vdir, isexplosive);
   trygibbinglegs(self, meansofdeath, var_fd90b0bb, hitloc, vdir, isexplosive, damage);
 
   if(meansofdeath >= self.health && gettime() > self.birthtime) {
     if(isinarray(level.doa.var_1c58e161, var_fd90b0bb)) {
-      self namespace_83eb6304::function_3ecfde67("zombie_chunk");
+      self doa_fx::function_3ecfde67("zombie_chunk");
     }
 
     if(var_fd90b0bb === level.doa.var_6a5eb56f || var_fd90b0bb === level.doa.var_3efdf9e5) {
       trygibbinghead(self, meansofdeath, var_fd90b0bb, hitloc, vdir, isexplosive);
-      self namespace_83eb6304::function_3ecfde67("boost_explode");
+      self doa_fx::function_3ecfde67("boost_explode");
     }
 
     if(var_fd90b0bb.doannihilate) {

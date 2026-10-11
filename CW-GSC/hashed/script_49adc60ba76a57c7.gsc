@@ -143,7 +143,7 @@ function function_295c9975() {
   level thread function_ea5dfa17();
   self.maxhealth += 150000 + int(75000 * namespace_ec06fe4a::function_ef369bae());
   self.health = self.maxhealth;
-  self.var_1c8b76d3 = 1;
+  self.non_zombie = 1;
   self namespace_250e9486::function_db744d28();
   self.no_gib = 1;
   self.overrideactordamage = &function_36603968;
@@ -221,7 +221,7 @@ function private function_36603968(inflictor, attacker, damage, flags, meansofda
   }
 
   self.lastattacker = offsettime;
-  self.var_d429b0ce = hitloc;
+  self.lastinflictor = hitloc;
 
   if(boneindex >= self.health) {
     level thread elephantstartdeath(self);
@@ -279,12 +279,12 @@ function elephantstartdeath(elephant) {
   elephant clientfield::set("towers_boss_eye_fx_cf", 0);
   attacker = elephant.lastattacker;
 
-  if(isDefined(elephant.var_d429b0ce) && isDefined(elephant.var_d429b0ce.owner)) {
-    attacker = elephant.var_d429b0ce.owner;
+  if(isDefined(elephant.lastinflictor) && isDefined(elephant.lastinflictor.owner)) {
+    attacker = elephant.lastinflictor.owner;
   }
 
   elephant.dying = 1;
-  elephant dodamage(elephant.health, elephant.origin, elephant.lastattacker, elephant.var_d429b0ce);
+  elephant dodamage(elephant.health, elephant.origin, elephant.lastattacker, elephant.lastinflictor);
   level thread function_106b6b29();
 }
 
@@ -330,7 +330,7 @@ function function_4b28fc8c(entity) {
   }
 
   if(namespace_ec06fe4a::function_a8975c67()) {
-    self playSound(#"hash_62894125ab280b62");
+    self playSound(#"zmb_ai_hellephant_head_attack_split");
   }
 
   self notify(#"head_launch_done");
@@ -768,22 +768,22 @@ function private function_f2c697c7(entity) {
 }
 
 function private function_5dee26ed(entity) {
-  if(!isDefined(entity.var_261ff182)) {
-    entity.var_261ff182 = entity.origin;
+  if(!isDefined(entity.previous_position)) {
+    entity.previous_position = entity.origin;
     entity.var_7ab66e6a = gettime() + 2000;
     return;
   }
 
   if(isDefined(entity.var_7ab66e6a) && entity.var_7ab66e6a < gettime()) {
-    var_eef47db = distance(entity.origin, entity.var_261ff182);
+    var_eef47db = distance(entity.origin, entity.previous_position);
 
     if(var_eef47db < 250) {
-      entity.var_261ff182 = undefined;
+      entity.previous_position = undefined;
       function_9c076ff9(entity);
       return;
     }
 
-    entity.var_261ff182 = entity.origin;
+    entity.previous_position = entity.origin;
     entity.var_7ab66e6a = gettime() + 2000;
   }
 }

@@ -175,9 +175,9 @@ function function_75789681(localclientnum, oldval, newval, bnewent, binitialsnap
       self easing::function_136edb11(undefined, 50, var_a0497201, #"linear");
       break;
     case 2:
-      var_d298ff03 = self getcamangles();
-      self easing::ease_camera_position(level.var_420bb8d1, var_67367725, var_a0497201, #"hash_2080bcb1cad7945c");
-      self easing::ease_camera_angles((angleclamp180(var_d298ff03[0]), angleclamp180(var_d298ff03[1]), angleclamp180(var_d298ff03[2])), var_8939da60, var_a0497201, #"hash_2080bcb1cad7945c");
+      v_old_angles = self getcamangles();
+      self easing::ease_camera_position(level.var_420bb8d1, var_67367725, var_a0497201, #"quintic");
+      self easing::ease_camera_angles((angleclamp180(v_old_angles[0]), angleclamp180(v_old_angles[1]), angleclamp180(v_old_angles[2])), var_8939da60, var_a0497201, #"quintic");
       break;
   }
 }

@@ -34,18 +34,18 @@ function preinit() {
 }
 
 function function_76433e31() {
-  self.ai.var_870d0893 = 1;
+  self.ai.rex_mp_swamp_concrete_debris = 1;
   self.var_1c0eb62a = 180;
   self.var_97ca51c7 = 4;
   self flag::set(#"hash_7b1f9f26f086bf39");
   self.melee_distance_check = &namespace_e292b080::function_e8983bf3;
   setup_awareness(self);
   self callback::function_d8abfc3d(#"hash_29cb63a7ebb5d699", &function_5c2b66f6);
-  self callback::function_d8abfc3d(#"hash_484127e0cbd8f8cb", &function_7c591227);
+  self callback::function_d8abfc3d(#"on_entity_revealed", &on_entity_revealed);
 }
 
 function function_820e5ac3() {
-  if(!is_true(self.var_2ca2d270) && isDefined(self.favoriteenemy)) {
+  if(!is_true(self.hidden_in_prop) && isDefined(self.favoriteenemy)) {
     awareness::set_state(self, #"chase");
     return;
   }
@@ -93,7 +93,7 @@ function function_5c2b66f6(prop) {
   awareness::pause(self);
 }
 
-function function_7c591227(params) {
+function on_entity_revealed(params) {
   awareness::resume(self);
   random_activator = array::random(params.activators);
   awareness::function_c241ef9a(self, random_activator, 10);
@@ -104,7 +104,7 @@ function function_7c29f2ef(entity) {
   entity endon(#"death");
   entity setblackboardattribute("_locomotion_speed", "locomotion_speed_walk");
 
-  if(is_true(entity.var_2ca2d270) || awareness::is_paused(entity)) {
+  if(is_true(entity.hidden_in_prop) || awareness::is_paused(entity)) {
     return;
   }
 
@@ -113,7 +113,7 @@ function function_7c29f2ef(entity) {
 
 function function_9853eadb(entity) {
   if(is_true(entity.aat_turned)) {
-    if(is_true(entity.var_2ca2d270) && isDefined(entity.trap_prop)) {
+    if(is_true(entity.hidden_in_prop) && isDefined(entity.trap_prop)) {
       mimic_prop_spawn::transform_spawn(entity.trap_prop, []);
     }
 
@@ -165,6 +165,6 @@ function function_64aa9d51(origin, var_783fc5e) {
   return [];
 }
 
-function function_f29dd47(var_d0f07bcd, var_3b5d9ccd) {
+function function_f29dd47(prop_origin, var_3b5d9ccd) {
   return array::random(var_3b5d9ccd);
 }

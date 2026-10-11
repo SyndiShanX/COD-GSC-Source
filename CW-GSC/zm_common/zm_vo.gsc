@@ -101,21 +101,21 @@ function function_318f41b6() {
     return;
   }
 
-  function_2cf4b07f(#"full_ammo", #"hash_15cb79e906605461");
-  function_2cf4b07f(#"double_points", #"hash_64189f4639819331");
-  function_2cf4b07f(#"insta_kill", #"hash_5075330907645a15");
-  function_2cf4b07f(#"fire_sale", #"hash_3ed5fa07d17a7cc2");
-  function_2cf4b07f(#"carpenter", #"hash_42d85f0b6534d522");
-  function_2cf4b07f(#"nuke", #"hash_3245913d882a8c0e");
-  function_2cf4b07f(#"bonus_points_team", #"hash_78c9bfab1a9278bd");
-  function_2cf4b07f(#"bonus_points_player", #"hash_78c9bfab1a9278bd");
-  function_2cf4b07f(#"bonus_points_player_shared", #"hash_78c9bfab1a9278bd");
-  function_2cf4b07f(#"hero_weapon_power", #"hash_3228b9bb6d91f7c6");
-  function_2cf4b07f(#"free_perk", #"hash_796989b8ef666e16");
-  function_2cf4b07f(#"ammo_mod", #"hash_69fb2ede79df7f3a");
-  function_2cf4b07f(#"dogstart", #"hash_28b132dc4f25cf4c");
-  function_2cf4b07f(#"boxmove", #"hash_69675122993fc5ca");
-  function_2cf4b07f(#"game_over", #"hash_3f1eca72dab56b29");
+  function_2cf4b07f(#"full_ammo", #"vox_powerup_max_ammo_zman_0");
+  function_2cf4b07f(#"double_points", #"vox_powerup_dbl_points_zman_1");
+  function_2cf4b07f(#"insta_kill", #"vox_powerup_instakill_zman_2");
+  function_2cf4b07f(#"fire_sale", #"vox_powerup_firesale_zman_3");
+  function_2cf4b07f(#"carpenter", #"vox_powerup_carpenter_zman_4");
+  function_2cf4b07f(#"nuke", #"vox_powerup_nuke_zman_5");
+  function_2cf4b07f(#"bonus_points_team", #"vox_powerup_bonus_points_zman_6");
+  function_2cf4b07f(#"bonus_points_player", #"vox_powerup_bonus_points_zman_6");
+  function_2cf4b07f(#"bonus_points_player_shared", #"vox_powerup_bonus_points_zman_6");
+  function_2cf4b07f(#"hero_weapon_power", #"vox_powerup_full_power_zman_7");
+  function_2cf4b07f(#"free_perk", #"vox_powerup_random_perk_zman_8");
+  function_2cf4b07f(#"ammo_mod", #"vox_powerup_ammo_mod_zman_9");
+  function_2cf4b07f(#"dogstart", #"vox_event_dogstart_zman_0");
+  function_2cf4b07f(#"boxmove", #"vox_event_magicbox_zman_0");
+  function_2cf4b07f(#"game_over", #"vox_event_laugh_complete_zman_0");
 }
 
 function private postinit() {}

@@ -146,7 +146,7 @@ function function_f002c513(localclientnum, oldval, newval, bnewent, binitialsnap
       self.var_3e1f31af = self playLoopSound(#"hash_3abb737de31477c1");
     }
 
-    self thread function_d233fb1f(fieldname);
+    self thread paintjob_stickers_s3_rokkr_majormaniak_base_ms(fieldname);
     return;
   }
 
@@ -183,24 +183,24 @@ function function_f002c513(localclientnum, oldval, newval, bnewent, binitialsnap
   self postfx::exitpostfxbundle(#"pstfx_speedblur");
 }
 
-function function_d233fb1f(localclientnum) {
+function paintjob_stickers_s3_rokkr_majormaniak_base_ms(localclientnum) {
   self endon(#"death", #"disconnect", #"stop_blur");
-  var_9b8a1091 = 0.01;
+  n_blur = 0.01;
   self playSound(localclientnum, #"hash_20493da3bbf6cbbe");
 
   while(true) {
-    self function_116b95e5(#"pstfx_speedblur", #"blur", var_9b8a1091);
+    self function_116b95e5(#"pstfx_speedblur", #"blur", n_blur);
     wait 0.08;
-    var_9b8a1091 += 0.01;
+    n_blur += 0.01;
 
-    if(var_9b8a1091 == 0.1) {
+    if(n_blur == 0.1) {
       self playRumbleOnEntity(localclientnum, "damage_light");
     }
 
-    if(var_9b8a1091 > 0.1) {
-      while(var_9b8a1091 > 0) {
-        var_9b8a1091 -= 0.01;
-        self function_116b95e5(#"pstfx_speedblur", #"blur", var_9b8a1091);
+    if(n_blur > 0.1) {
+      while(n_blur > 0) {
+        n_blur -= 0.01;
+        self function_116b95e5(#"pstfx_speedblur", #"blur", n_blur);
         wait 0.08;
       }
 
@@ -252,18 +252,18 @@ function function_4fd00e1f(localclientnum, oldval, newval, bnewent, binitialsnap
     level.var_3630f9c0 = [];
   }
 
-  var_47c85523 = self getentitynumber();
+  n_entity = self getentitynumber();
   var_e534cbe9 = 0;
 
-  if(isDefined(level.var_3630f9c0[var_47c85523][fieldname])) {
-    killfx(fieldname, level.var_3630f9c0[var_47c85523][fieldname]);
-    level.var_3630f9c0[var_47c85523][fieldname] = undefined;
+  if(isDefined(level.var_3630f9c0[n_entity][fieldname])) {
+    killfx(fieldname, level.var_3630f9c0[n_entity][fieldname]);
+    level.var_3630f9c0[n_entity][fieldname] = undefined;
     var_e534cbe9 = 1;
   }
 
   if(bwastimejump > 0) {
     if(!var_e534cbe9) {
-      self playSound(fieldname, #"hash_79a78504d4dbaf3f");
+      self playSound(fieldname, #"zmb_flashlight_turn_on");
     }
 
     if(self zm_utility::function_f8796df3(fieldname)) {
@@ -274,7 +274,7 @@ function function_4fd00e1f(localclientnum, oldval, newval, bnewent, binitialsnap
       }
 
       if(viewmodelhastag(fieldname, "tag_flashlight")) {
-        level.var_3630f9c0[var_47c85523][fieldname] = playviewmodelfx(fieldname, str_fx, "tag_flashlight");
+        level.var_3630f9c0[n_entity][fieldname] = playviewmodelfx(fieldname, str_fx, "tag_flashlight");
       }
     } else {
       if(bwastimejump == 2) {
@@ -283,7 +283,7 @@ function function_4fd00e1f(localclientnum, oldval, newval, bnewent, binitialsnap
         str_fx = #"hash_64e79a7456f58dec";
       }
 
-      level.var_3630f9c0[var_47c85523][fieldname] = util::playFXOnTag(fieldname, str_fx, self, "tag_flashlight");
+      level.var_3630f9c0[n_entity][fieldname] = util::playFXOnTag(fieldname, str_fx, self, "tag_flashlight");
     }
 
     if(self == function_5c10bd79(fieldname)) {
@@ -294,7 +294,7 @@ function function_4fd00e1f(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(var_e534cbe9) {
-    self playSound(fieldname, #"hash_13715035b161a0c3");
+    self playSound(fieldname, #"zmb_flashlight_turn_off");
   }
 
   if(self == function_5c10bd79(fieldname)) {
@@ -307,11 +307,11 @@ function function_53ab1c7(localclientnum, oldval, newval, bnewent, binitialsnap,
     return;
   }
 
-  var_47c85523 = self getentitynumber();
+  n_entity = self getentitynumber();
 
-  if(isDefined(level.var_3630f9c0[var_47c85523][bwastimejump])) {
-    killfx(bwastimejump, level.var_3630f9c0[var_47c85523][bwastimejump]);
-    level.var_3630f9c0[var_47c85523][bwastimejump] = undefined;
+  if(isDefined(level.var_3630f9c0[n_entity][bwastimejump])) {
+    killfx(bwastimejump, level.var_3630f9c0[n_entity][bwastimejump]);
+    level.var_3630f9c0[n_entity][bwastimejump] = undefined;
   }
 }
 

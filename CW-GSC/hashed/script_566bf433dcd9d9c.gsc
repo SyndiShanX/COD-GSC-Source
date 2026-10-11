@@ -205,22 +205,22 @@ function private waitfordooropen(var_91fea62e) {
       self.ai.door_opened = undefined;
       var_d9bc30fb = 1;
       cdooroffset = 160;
-      var_bc68bda9 = 2;
+      cdoorpadding = 2;
       targetspeed = length2d(self getvelocity());
 
       if(!is_true(var_91fea62e)) {
         dooranim = self astsearch(var_636f02cd);
       }
 
-      var_70e679e1 = var_d9bc30fb + cdooroffset + var_bc68bda9;
+      var_70e679e1 = var_d9bc30fb + cdooroffset + cdoorpadding;
       doorcenter = self[[self.fngetdoorcenter]](door);
-      var_56f2236d = distance2d(doorcenter, self.origin);
+      disttodoor = distance2d(doorcenter, self.origin);
 
-      if(var_56f2236d < var_70e679e1) {
+      if(disttodoor < var_70e679e1) {
         self thread closedoorifnecessary(door);
         framedurationseconds = function_60d95f53() / 1000;
 
-        if(is_true(var_91fea62e) || var_56f2236d < var_70e679e1 - targetspeed * 2 * framedurationseconds) {
+        if(is_true(var_91fea62e) || disttodoor < var_70e679e1 - targetspeed * 2 * framedurationseconds) {
           assert(isDefined(self.fndooropen));
           t = self opendooratreasonabletime();
 

@@ -135,7 +135,7 @@ function init() {
 
   callback::on_connect(&on_player_connect);
   callback::on_spawned(&on_player_spawned);
-  callback::add_callback(#"squad_wiped", &function_e86729f);
+  callback::add_callback(#"squad_wiped", &on_squad_wiped);
   scoreevents::registerscoreeventcallback("playerKilled", &scoreeventplayerkill);
   setDvar(#"hash_301150d9ff502ccc", 0);
   setDvar(#"hash_3b0f87edc15cba8b", 1);
@@ -727,7 +727,7 @@ function function_e402b74e(spawningplayer, targetplayer) {
     vehicleseat = function_f099b0f1(vehicle);
 
     if(isDefined(vehicleseat)) {
-      spawningplayer.spawn.var_cb738111 = 1;
+      spawningplayer.spawn.locationtype = 1;
       spawningplayer.spawn.vehicleseat = vehicleseat;
       var_6cff872f = 1;
     } else {
@@ -757,7 +757,7 @@ function function_e402b74e(spawningplayer, targetplayer) {
       var_8b889046 = groundtrace[#"position"];
     }
 
-    spawningplayer.spawn.var_cb738111 = 0;
+    spawningplayer.spawn.locationtype = 0;
     spawningplayer.spawn.var_276f15f0 = var_8b889046;
   }
 
@@ -825,7 +825,7 @@ function function_70c0ae61(spawningplayer, objectiveposition) {
     var_8b889046 = groundtrace[#"position"];
   }
 
-  spawningplayer.spawn.var_cb738111 = 0;
+  spawningplayer.spawn.locationtype = 0;
   spawningplayer.spawn.var_276f15f0 = var_8b889046;
   spawn_point = spawnStruct();
   spawn_point.origin = var_8b889046;
@@ -1117,7 +1117,7 @@ function function_f099b0f1(vehicle) {
 }
 
 function function_61e7d9a8(player) {
-  return isDefined(player.spawn.var_cb738111) && player.spawn.var_cb738111 == 1;
+  return isDefined(player.spawn.locationtype) && player.spawn.locationtype == 1;
 }
 
 function spawninvehicle(player) {
@@ -1161,7 +1161,7 @@ function on_player_spawned() {
   self.var_cc060afa = [];
 }
 
-function function_e86729f(params) {
+function on_squad_wiped(params) {
   if(is_true(level.var_5c49de55) && game.var_794ec97[self.team]) {
     return;
   }

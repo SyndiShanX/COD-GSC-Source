@@ -229,14 +229,14 @@ function private function_13339b58(supplydrop, var_d91c179d, index) {
   if(isDefined(var_d91c179d)) {
     switch (var_d91c179d.vehicletype) {
       case #"vehicle_t9_mil_fav_light":
-        var_13781019 = array(#"hash_43e87a7d1f494a6e", #"hash_aa76ca9894b87b", #"hash_19296420b7b82e4", #"hash_af5b730d0f9b749");
-        idleanimations = array(#"hash_44a6ed2c48d1a597", #"hash_2230d366d30fca2c", #"hash_126bd9e565a0db35", #"hash_4e468b786b07a70a");
-        var_1a8acc15 = array(#"hash_5f67889cb298ce95", #"hash_652fc868ed16b8b4", #"hash_1211c06c537d210b", #"hash_2a57c0307d341062");
+        var_13781019 = array(#"p9_fxanim_wz_parachute_supplydrop_veh_fav_01_open_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_fav_02_open_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_fav_03_open_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_fav_04_open_anim");
+        idleanimations = array(#"p9_fxanim_wz_parachute_supplydrop_veh_fav_01_open_idle_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_fav_02_open_idle_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_fav_03_open_idle_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_fav_04_open_idle_anim");
+        var_1a8acc15 = array(#"p9_fxanim_wz_parachute_supplydrop_veh_fav_01_drop_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_fav_02_drop_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_fav_03_drop_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_fav_04_drop_anim");
         break;
       default:
-        var_13781019 = array(#"hash_6481b506b1de6549", #"hash_37143952d1dbe3e8", #"hash_3d3b8beecf975e2f", #"hash_1d747853002df86e");
-        idleanimations = array(#"hash_1a22dfd4c582f10a", #"hash_6b21d5f85a66a061", #"hash_68385a0b5c4f0788", #"hash_10834188a34cef97");
-        var_1a8acc15 = array(#"hash_3e3be065e18be62", #"hash_49edbe5ac4e375c7", #"hash_2362c027dd6f5060", #"hash_38f38672937d7c95");
+        var_13781019 = array(#"p9_fxanim_wz_parachute_supplydrop_veh_tank_01_open_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_tank_02_open_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_tank_03_open_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_tank_04_open_anim");
+        idleanimations = array(#"p9_fxanim_wz_parachute_supplydrop_veh_tank_01_open_idle_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_tank_02_open_idle_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_tank_03_open_idle_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_tank_04_open_idle_anim");
+        var_1a8acc15 = array(#"p9_fxanim_wz_parachute_supplydrop_veh_tank_01_drop_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_tank_02_drop_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_tank_03_drop_anim", #"p9_fxanim_wz_parachute_supplydrop_veh_tank_04_drop_anim");
         break;
     }
   }
@@ -280,17 +280,17 @@ function private function_500a6615(itemspawnlist = #"t9_supply_drop_stash_parent
 
     if(isDefined(self.harness)) {
       var_6d9635e7 = #"hash_3ce4bc719a3ea6b";
-      var_36ff1928 = #"hash_7e54508e8fa9ef96";
+      var_36ff1928 = #"p9_fxanim_wz_parachute_supplydrop_harness_retract_anim";
 
       if(isDefined(supplydrop.var_d5552131)) {
         switch (supplydrop.var_d5552131.vehicletype) {
           case #"vehicle_t9_mil_fav_light":
             var_6d9635e7 = #"hash_3791502c5d089d79";
-            var_36ff1928 = #"hash_5e21433684751cdc";
+            var_36ff1928 = #"p9_fxanim_wz_parachute_supplydrop_veh_fav_harness_retract_anim";
             break;
           default:
             var_6d9635e7 = #"hash_66caa605c0a985bc";
-            var_36ff1928 = #"hash_382ac153f17ffc5b";
+            var_36ff1928 = #"p9_fxanim_wz_parachute_supplydrop_veh_tank_harness_retract_anim";
             break;
         }
       }
@@ -495,7 +495,7 @@ function private function_67d7d040(var_d91c179d) {
   supplydrop clientfield::set("dynamic_stash_type", 1);
   supplydrop.stash_type = 1;
   supplydrop setweapon(getweapon(#"item_supplydrop"));
-  supplydrop function_619a5c20();
+  supplydrop pingable();
   supplydrop.supplydropveh = var_d91c179d;
   return supplydrop;
 }

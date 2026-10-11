@@ -54,7 +54,7 @@ function function_95dc818f(str_scene_name, var_2b490ed3, var_53f71e6a, var_4e21c
 }
 
 function scene_amk_1030_per_reveal() {
-  var_4e21c010 = #"hash_4660b6aada428755";
+  var_4e21c010 = #"flg_forest_approaching_vista";
 
   if(level flag::get(var_4e21c010) == 1) {
     level flag::set("woods_at_reveal");
@@ -117,7 +117,7 @@ function function_4c27ed84() {
     waitframe(1);
   }
 
-  level.player util::delay(0.25, undefined, &util::function_749362d7, 0);
+  level.player util::delay(0.25, undefined, &util::set_low_ready, 0);
   level scene::play("scene_amk_1030_per_reveal", "player_start");
   level.player val::reset_all(#"hash_22754d9885e308f0");
   level flag::set("flg_forest_player_past_branch");
@@ -211,7 +211,7 @@ function scene_amk_3010_arc_enter() {
   level thread scene::play("scene_amk_3005_arc_approach", "arcade_door_idle");
   level flag::set("flg_tunnels_woods_at_arcade_entrance");
   var_164ab092 = array("arcade_door_nag01", "arcade_door_nag02");
-  var_4e21c010 = #"hash_106670b812548c9e";
+  var_4e21c010 = #"flg_arcade_entrance_vig_start";
   level function_95dc818f("scene_amk_3005_arc_approach", "arcade_door_idle", var_164ab092, var_4e21c010);
   level scene::stop("scene_amk_3005_arc_approach");
   level scene::play("scene_amk_3010_arc_enter", "arcade_enter");
@@ -302,7 +302,7 @@ function scene_amk_6010_tml_computer() {
   level flag::wait_till(#"hash_10227bcd8df77658");
   level scene::play(#"scene_amk_6010_tml_computer", "move_to_tapes");
   level thread scene::play(#"scene_amk_6010_tml_computer", "tapes_loop");
-  level flag::wait_till(#"hash_24f6f7540d220ba6");
+  level flag::wait_till(#"flg_greenlight_intel_printed");
   a_scene_ents = [];
   var_da03c083 = doors::get_doors("e_terminal_exit_door_animated", "targetname");
 

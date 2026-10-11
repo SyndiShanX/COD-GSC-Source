@@ -115,7 +115,7 @@ function private function_51f065c3(parms) {
 }
 
 function private function_7f8d6723(localclientnum, victim, var_d21483a5) {
-  parms = function_83d35e98(self, self getEye(), self getplayerangles(), victim, var_d21483a5);
+  parms = get_parms(self, self getEye(), self getplayerangles(), victim, var_d21483a5);
   setsaveddvar(#"hash_697fd86393b91fae", 1);
   setDvar(#"hash_54ba0940783c91c", 0);
   var_ef954e24 = spawn(localclientnum, parms.startpos, "script_model");
@@ -144,7 +144,7 @@ function private function_7f8d6723(localclientnum, victim, var_d21483a5) {
   bullet util::delay(parms.time, undefined, &hide);
 
   if(var_d21483a5 != 2) {
-    util::delay(parms.time + 0.1, undefined, &function_3992911, localclientnum, parms);
+    util::delay(parms.time + 0.1, undefined, &_death_fx, localclientnum, parms);
   }
 
   self thread function_9fb8e309(parms.time * 0.25);
@@ -305,7 +305,7 @@ function private function_63a2faff(startval, endval, lerptime) {
   self notify(#"hash_3999b38781a1f7c1");
 }
 
-function private function_3992911(localclientnum, parms) {
+function private _death_fx(localclientnum, parms) {
   death_face = level.var_be173d94[randomint(level.var_be173d94.size)];
   parms.victim function_8e5138f0(localclientnum, death_face);
   parms.victim._currentfacestate = "death";
@@ -338,7 +338,7 @@ function function_ff6d0f8b(localclientnum, parms, bullet) {
   }
 
   level notify(#"hash_19171afd2fb4533e", parms);
-  function_5ea2c6e3(submix, 0);
+  addsubmix(submix, 0);
   var_6ea8f898 = snd::play(var_74cca427, bullet);
   wait wait_time;
   level notify(#"snipercam_impact", parms);
@@ -346,7 +346,7 @@ function function_ff6d0f8b(localclientnum, parms, bullet) {
   wait 0.05;
   snd::play(var_bd1ad3a6, [parms.victim, "j_head"]);
   level waittill(#"hash_615d2d7ba347572b");
-  function_ed62c9c2(submix, 0.15);
+  clearsubmix(submix, 0.15);
 }
 
 function private function_8e5138f0(localclientnum, animation) {

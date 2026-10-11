@@ -87,7 +87,7 @@ function isprop() {
 
 function on_end_game() {}
 
-function function_74906a8b(var_8f9fbf19) {
+function function_74906a8b(vh_helicopter) {
   var_56411b8a = getEnt("prb_tn_us_heli_lg_cockpit", "targetname");
   var_2ad45d4e = getEnt("prb_tn_us_heli_lg_cabin", "targetname");
   var_56411b8a unlink();
@@ -95,43 +95,43 @@ function function_74906a8b(var_8f9fbf19) {
   var_56411b8a dontinterpolate();
   var_2ad45d4e dontinterpolate();
 
-  if(isDefined(var_8f9fbf19 gettagorigin("tag_probe_cockpit"))) {
-    var_56411b8a linkTo(var_8f9fbf19, "tag_probe_cockpit", (0, 0, 0), (0, 0, 0));
+  if(isDefined(vh_helicopter gettagorigin("tag_probe_cockpit"))) {
+    var_56411b8a linkTo(vh_helicopter, "tag_probe_cockpit", (0, 0, 0), (0, 0, 0));
   }
 
-  if(isDefined(var_8f9fbf19 gettagorigin("tag_probe_cabin"))) {
-    var_2ad45d4e linkTo(var_8f9fbf19, "tag_probe_cabin", (0, 0, 0), (0, 0, 0));
+  if(isDefined(vh_helicopter gettagorigin("tag_probe_cabin"))) {
+    var_2ad45d4e linkTo(vh_helicopter, "tag_probe_cabin", (0, 0, 0), (0, 0, 0));
   }
 }
 
 function function_7a9eb99a(a_ents) {
-  if(!isDefined(a_ents[#"hash_7adc8fdd333fd073"])) {
+  if(!isDefined(a_ents[#"helicopter1"])) {
     iprintlnbold("<dev string:x38>");
 
     return;
   }
 
-  function_74906a8b(a_ents[#"hash_7adc8fdd333fd073"]);
+  function_74906a8b(a_ents[#"helicopter1"]);
 }
 
 function function_9cb21c4a(a_ents) {
-  if(!isDefined(a_ents[#"hash_7adc8fdd333fd073"])) {
+  if(!isDefined(a_ents[#"helicopter1"])) {
     iprintlnbold("<dev string:x38>");
 
     return;
   }
 
-  function_74906a8b(a_ents[#"hash_7adc8fdd333fd073"]);
+  function_74906a8b(a_ents[#"helicopter1"]);
 }
 
 function function_8337682d(a_ents) {
-  if(!isDefined(a_ents[#"hash_7adc8fdd333fd073"])) {
+  if(!isDefined(a_ents[#"helicopter1"])) {
     iprintlnbold("<dev string:x38>");
 
     return;
   }
 
-  function_74906a8b(a_ents[#"hash_7adc8fdd333fd073"]);
+  function_74906a8b(a_ents[#"helicopter1"]);
 }
 
 function function_bb57ca1a() {

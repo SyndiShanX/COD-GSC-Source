@@ -114,10 +114,10 @@ function private function_afb0648d(vehicle) {
           if(!isDefined(self.var_7b87b98c)) {
             self.var_7b87b98c = 0;
           } else {
-            self.var_7b87b98c = (self.var_7b87b98c + 1) % var_45750595.var_50c23eb3.size;
+            self.var_7b87b98c = (self.var_7b87b98c + 1) % var_45750595.musictrack.size;
           }
 
-          track_name = var_45750595.var_50c23eb3[self.var_7b87b98c].track;
+          track_name = var_45750595.musictrack[self.var_7b87b98c].track;
 
           if(isDefined(track_name)) {
             var_3ee3065f = getscriptbundle(track_name);

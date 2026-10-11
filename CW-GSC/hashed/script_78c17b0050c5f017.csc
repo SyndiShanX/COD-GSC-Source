@@ -41,9 +41,9 @@ function sr_horde_hunt_fx(localclientnum, oldval, newval, bnewent, binitialsnap,
 
     function_239993de(fieldname, #"hash_6258a90cdd74e1e0", self, "tag_origin");
 
-    if(self.var_44ac8cdd === 1 && isDefined(self.var_a0bf769b)) {
-      stopfx(fieldname, self.var_a0bf769b);
-      self.var_a0bf769b = util::playFXOnTag(fieldname, #"zm_ai/fx9_mech_head_light", self, "tag_headlamp_FX");
+    if(self.headlamp_on === 1 && isDefined(self.headlight_fx)) {
+      stopfx(fieldname, self.headlight_fx);
+      self.headlight_fx = util::playFXOnTag(fieldname, #"zm_ai/fx9_mech_head_light", self, "tag_headlamp_FX");
       fxclientutils::stopfxbundle(fieldname, self, self.fxdef);
       fxclientutils::playfxbundle(fieldname, self, self.fxdef);
     }

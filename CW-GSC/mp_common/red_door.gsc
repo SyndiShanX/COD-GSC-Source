@@ -118,7 +118,7 @@ function private function_fdb3b5(var_a16f5b07, s_teleport_room, var_98b11ed9) {
   self setplayerangles(s_teleport_room.angles);
   self childthread function_e4af83af(s_teleport_room);
   waittillframeend();
-  self function_bc82f900(#"hash_5d8a1a68b12dfb24");
+  self function_bc82f900(#"zm_fasttravel_vortex_rumble");
   self clientfield::set_to_player("" + #"hash_3c5be6b25c626e06", var_98b11ed9);
 }
 
@@ -151,7 +151,7 @@ function function_82c1415f(var_291fc0f7, var_1f8fbe0b = 0) {
     self lui::play_movie(hash("mp_firebase_red_door_tunnel_movie"), "fullscreen", 0, 0, 0, #"", level.var_f3901984);
   }
 
-  self stoprumble(#"hash_5d8a1a68b12dfb24");
+  self stoprumble(#"zm_fasttravel_vortex_rumble");
   var_291fc0f7 struct::delete();
 }
 
@@ -422,7 +422,7 @@ function function_f86439bc() {
   while(var_e9a9a32a);
 }
 
-function door_setup(struct_targetname, struct, var_9409066b, var_f1096822, var_17716e4f) {
+function door_setup(struct_targetname, struct, var_9409066b, no_light, var_17716e4f) {
   if(isDefined(struct_targetname)) {
     door_struct = struct::get(struct_targetname, "targetname");
   } else if(isDefined(struct)) {
@@ -490,14 +490,14 @@ function door_setup(struct_targetname, struct, var_9409066b, var_f1096822, var_1
           case #"door_right":
             door_struct.door_right = ent;
             break;
-          case #"hash_474cd81e3615d473":
+          case #"door_frame":
             door_struct.door_frame = ent;
             break;
-          case #"hash_7d5f05ba8b4de0a4":
-            door_struct.var_113d9d43 = ent;
+          case #"door_script_brushmodels":
+            door_struct.door_script_brushmodels = ent;
             break;
           case #"hash_1d188472b888f844":
-            if(isDefined(var_f1096822)) {
+            if(isDefined(no_light)) {
               if(isDefined(ent.script_parameters) && ent.script_parameters == "door_light_script_model") {
                 ent delete();
                 break;
@@ -523,24 +523,24 @@ function door_setup(struct_targetname, struct, var_9409066b, var_f1096822, var_1
             door_struct.door_interact = ent;
             door_struct thread function_736b8a03(1);
             break;
-          case #"hash_4e931f37285562af":
-            if(isDefined(var_f1096822)) {
+          case #"door_lights":
+            if(isDefined(no_light)) {
               if(isDefined(ent)) {
                 ent delete();
               }
             } else {
-              if(!isDefined(door_struct.var_2c0374ca)) {
-                door_struct.var_2c0374ca = [];
+              if(!isDefined(door_struct.door_lights)) {
+                door_struct.door_lights = [];
               }
 
-              if(!isDefined(door_struct.var_2c0374ca)) {
-                door_struct.var_2c0374ca = [];
-              } else if(!isarray(door_struct.var_2c0374ca)) {
-                door_struct.var_2c0374ca = array(door_struct.var_2c0374ca);
+              if(!isDefined(door_struct.door_lights)) {
+                door_struct.door_lights = [];
+              } else if(!isarray(door_struct.door_lights)) {
+                door_struct.door_lights = array(door_struct.door_lights);
               }
 
-              if(!isinarray(door_struct.var_2c0374ca, ent)) {
-                door_struct.var_2c0374ca[door_struct.var_2c0374ca.size] = ent;
+              if(!isinarray(door_struct.door_lights, ent)) {
+                door_struct.door_lights[door_struct.door_lights.size] = ent;
               }
             }
 
@@ -687,8 +687,8 @@ function function_bb42a4ce(str_side, var_3b3f5ecb) {
 }
 
 function function_bc3bedde() {
-  var_2c251c2e = util::get_map_name();
-  adddebugcommand("<dev string:x18f>" + var_2c251c2e + "<dev string:x1a0>");
+  str_mapname = util::get_map_name();
+  adddebugcommand("<dev string:x18f>" + str_mapname + "<dev string:x1a0>");
   level thread devgui_think();
 }
 

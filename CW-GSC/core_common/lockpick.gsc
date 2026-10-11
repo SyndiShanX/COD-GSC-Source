@@ -52,12 +52,12 @@ class class_d28acd06: class_9e71c1a2 {
           }
 
           prompt_text = bundle.str_hint;
-          var_80778410 = rotatepoint(var_b5a03b21.origin - interact_location.c_door.m_e_door.origin, (0, 0, 0) - interact_location.c_door.m_e_door.angles);
+          local_offset = rotatepoint(var_b5a03b21.origin - interact_location.c_door.m_e_door.origin, (0, 0, 0) - interact_location.c_door.m_e_door.angles);
           var_de6f0004 = isDefined(bundle.n_trigger_use_time) ? bundle.n_trigger_use_time : 0;
           interact_location.c_door.m_e_door.var_645eee83 = self;
           interact_location.c_door.m_e_door.interact_location = interact_location;
           interact_location.c_door.m_e_door thread[[level.var_6a7fb742]](#"use", {
-            #prompt_text: prompt_text, #image: image, #var_71b9f0c0: 200, #offset: var_80778410, #var_754bedbb: 0, #var_87c991f3: 40, #var_de6f0004: var_de6f0004, #var_be77841a: 0, #var_531201f1: &minigame::function_cc2939a2, #complete_callback: &minigame::function_76974d96, #var_c9643122: 1, #var_67eb3347: &minigame::function_eb28f36
+            #prompt_text: prompt_text, #image: image, #var_71b9f0c0: 200, #offset: local_offset, #var_754bedbb: 0, #var_87c991f3: 40, #var_de6f0004: var_de6f0004, #var_be77841a: 0, #var_531201f1: &minigame::function_cc2939a2, #complete_callback: &minigame::function_76974d96, #var_c9643122: 1, #var_67eb3347: &minigame::function_eb28f36
           });
         }
       }
@@ -68,12 +68,12 @@ class class_d28acd06: class_9e71c1a2 {
     complete(e_player, n_new_val == 2, e_player.team);
   }
 
-  function function_6084622f(e_player) {
-    bb::function_cd497743("lockpick_fail", e_player);
+  function _fail(e_player) {
+    bb::logplayermapnotification("lockpick_fail", e_player);
     _reset();
   }
 
-  function function_613e65ee(e_player) {}
+  function _update(e_player) {}
 
   function _start(e_player) {
     e_player.var_ff7ce13b[m_s_bundle.type] = 0;
@@ -114,7 +114,7 @@ class class_d28acd06: class_9e71c1a2 {
     }
   }
 
-  function function_e28586b3(e_player) {
+  function _success(e_player) {
     if(isDefined(var_b5a03b21.target)) {
       if(!isDefined(var_b5a03b21.var_42c5101)) {
         var_b5a03b21.var_42c5101 = 1;
@@ -127,7 +127,7 @@ class class_d28acd06: class_9e71c1a2 {
       }
     }
 
-    bb::function_cd497743("lockpick_success", e_player);
+    bb::logplayermapnotification("lockpick_success", e_player);
     e_player notify(#"minigame_tutorial_complete");
     function_89999e9c(e_player, 0);
     _reset();

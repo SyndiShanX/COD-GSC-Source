@@ -41,13 +41,13 @@ function function_8f37f11(params) {
       }
     }
 
-    self thread function_912f52a1();
+    self thread update_compass_icon();
   }
 }
 
 function function_1ec626d7(params) {
   params.player clientfield::set_to_player("hind_gunner_postfx_active", 0);
-  self thread function_912f52a1();
+  self thread update_compass_icon();
 }
 
 function change_seat(params) {
@@ -63,11 +63,11 @@ function change_seat(params) {
       }
     }
 
-    self thread function_912f52a1();
+    self thread update_compass_icon();
   }
 }
 
-function function_912f52a1() {
+function update_compass_icon() {
   self endon(#"death");
   self notify("7cabfd7760270dbb");
   self endon("7cabfd7760270dbb");

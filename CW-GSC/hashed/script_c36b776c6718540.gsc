@@ -125,8 +125,8 @@ function function_63264d28(a_ents) {
 
 function function_485aed5c(a_ents) {
   var_3793dd70 = a_ents[#"belikov"];
-  var_3f59f311 = a_ents[#"heli"];
-  var_3793dd70 linkTo(var_3f59f311);
+  e_heli = a_ents[#"heli"];
+  var_3793dd70 linkTo(e_heli);
 }
 
 function function_f21e84b4() {

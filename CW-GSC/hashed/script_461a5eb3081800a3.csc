@@ -8,7 +8,7 @@
 #namespace namespace_bff7ce85;
 
 function event_handler[level_init] main(eventstruct) {
-  clientfield::register("scriptmover", "" + #"screen_left", 1, 1, "int", &function_471ae845, 0, 0);
+  clientfield::register("scriptmover", "" + #"screen_left", 1, 1, "int", &meleeblade, 0, 0);
   clientfield::register("scriptmover", "" + #"screen_right", 1, 1, "int", &function_fb755c48, 0, 0);
   clientfield::register("scriptmover", "" + #"screen_top", 1, 1, "int", &function_6115628b, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_225aa48dd3b91fe7", 1, 1, "int", &function_9fdbcf3f, 0, 0);
@@ -61,7 +61,7 @@ function function_fb755c48(localclientnum, oldval, newval, bnewent, binitialsnap
   self.var_52b34507 = util::playFXOnTag(fieldname, "sr/fx9_obj_console_defend_screen_ri_flicker", self, "tag_origin");
 }
 
-function function_471ae845(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function meleeblade(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
     if(isDefined(self.var_c387008e)) {
       stopfx(fieldname, self.var_c387008e);
@@ -103,7 +103,7 @@ function function_9fdbcf3f(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   self.var_dc761849 = self playLoopSound(#"hash_6510ab3b31555de5", undefined, (0, 0, 50));
-  playSound(fieldname, #"hash_789c0cb38cd0abb0", self.origin + (0, 0, 50));
+  playSound(fieldname, #"evt_sr_obj_def_success", self.origin + (0, 0, 50));
   playSound(fieldname, #"hash_61887905bfa93f51", self.origin + (0, 0, 50));
   util::playFXOnTag(fieldname, "sr/fx9_obj_console_defend_head_gib", self, "tag_origin");
 }

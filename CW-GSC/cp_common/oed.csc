@@ -17,13 +17,13 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("toplayer", "sitrep_toggle", 1, 1, "int", &function_8305981d, 0, 0);
-  clientfield::register("toplayer", "active_dni_fx", 1, 1, "counter", &function_81c8f4da, 0, 0);
+  clientfield::register("toplayer", "sitrep_toggle", 1, 1, "int", &sitrep_player_toggle, 0, 0);
+  clientfield::register("toplayer", "active_dni_fx", 1, 1, "counter", &active_dni_bootup_fx, 0, 0);
   clientfield::register("toplayer", "hack_dni_fx", 1, 1, "counter", &hack_dni_fx, 0, 0);
-  clientfield::register("actor", "sitrep_material", 1, 1, "int", &function_fb942d18, 0, 0);
-  clientfield::register("vehicle", "sitrep_material", 1, 1, "int", &function_fb942d18, 0, 0);
-  clientfield::register("scriptmover", "sitrep_material", 1, 1, "int", &function_fb942d18, 0, 0);
-  clientfield::register("item", "sitrep_material", 1, 1, "int", &function_fb942d18, 0, 0);
+  clientfield::register("actor", "sitrep_material", 1, 1, "int", &ent_material_callback, 0, 0);
+  clientfield::register("vehicle", "sitrep_material", 1, 1, "int", &ent_material_callback, 0, 0);
+  clientfield::register("scriptmover", "sitrep_material", 1, 1, "int", &ent_material_callback, 0, 0);
+  clientfield::register("item", "sitrep_material", 1, 1, "int", &ent_material_callback, 0, 0);
   clientfield::register("vehicle", "turret_keyline_render", 1, 1, "int", &function_c2b3ec13, 0, 0);
   clientfield::register("vehicle", "vehicle_keyline_toggle", 1, 1, "int", &vehicle_keyline_toggle, 0, 0);
   callback::on_spawned(&on_player_spawned);
@@ -31,15 +31,15 @@ function private preinit() {
 }
 
 function on_player_spawned(localclientnum) {
-  var_1d3b43d0 = 10500;
-  var_9abc8c03 = 3000;
+  n_ev_geo_range = 10500;
+  n_ev_target_range = 3000;
 
-  if(isDefined(level.var_8df232be)) {
-    var_1d3b43d0 = level.var_8df232be;
+  if(isDefined(level.n_override_ev_geo_range)) {
+    n_ev_geo_range = level.n_override_ev_geo_range;
   }
 
-  if(isDefined(level.var_9f5b2c84)) {
-    var_9abc8c03 = level.var_9f5b2c84;
+  if(isDefined(level.n_override_ev_target_range)) {
+    n_ev_target_range = level.n_override_ev_target_range;
   }
 
   self thread function_66d9f518(localclientnum);
@@ -47,16 +47,16 @@ function on_player_spawned(localclientnum) {
 
 function on_localplayer_shutdown(localclientnum) {}
 
-function function_81c8f4da(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self thread postfx::playpostfxbundle(#"hash_2ffa41d555c1e46e");
+function active_dni_bootup_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+  self thread postfx::playpostfxbundle(#"pstfx_tactical_bootup");
 }
 
 function hack_dni_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self thread postfx::playpostfxbundle(#"hash_28506c424004a886");
-  self playSound(0, #"hash_3afb4f0542190053");
+  self thread postfx::playpostfxbundle(#"pstfx_hacking_bootup");
+  self playSound(0, #"uin_hack_mode_activate");
 }
 
-function function_8305981d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function sitrep_player_toggle(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(!self function_21c0fa55()) {
     return;
   }
@@ -69,15 +69,15 @@ function function_8305981d(localclientnum, oldval, newval, bnewent, binitialsnap
     return;
   }
 
-  self thread function_182c5d6b(fieldname, bwastimejump);
+  self thread player_toggle_sitrep(fieldname, bwastimejump);
 }
 
-function function_182c5d6b(lcn, newval) {
-  self.var_bef05351 = newval;
+function player_toggle_sitrep(lcn, newval) {
+  self.sitrep_active = newval;
   level notify(#"player_sitrep_toggle");
 }
 
-function function_fb942d18(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function ent_material_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   assert(isDefined(self), "<dev string:x38>");
 
   if(bwastimejump == 1) {
@@ -129,43 +129,43 @@ function function_f8588df3(localclientnum, var_80583f56, var_1ca727c) {
 
   self endon(#"death", #"disconnect", #"keyline_disabled");
   e_player = function_5c10bd79(localclientnum);
-  self.var_cc9b9440 = 1;
+  self.b_keyline_enabled = 1;
 
   while(true) {
     waitresult = level waittill(#"igc_activated", #"player_sitrep_toggle");
 
     if(isigcactive(localclientnum)) {
-      if(self.var_cc9b9440) {
+      if(self.b_keyline_enabled) {
         self[[var_1ca727c]](localclientnum);
-        self.var_cc9b9440 = 0;
+        self.b_keyline_enabled = 0;
       }
 
       continue;
     }
 
     if(isDefined(e_player)) {
-      if(waitresult._notify == "igc_activated" && is_true(e_player.var_bef05351)) {
-        if(!waitresult.b_active && !self.var_cc9b9440) {
+      if(waitresult._notify == "igc_activated" && is_true(e_player.sitrep_active)) {
+        if(!waitresult.b_active && !self.b_keyline_enabled) {
           self[[var_80583f56]](localclientnum);
-          self.var_cc9b9440 = 1;
+          self.b_keyline_enabled = 1;
         }
 
         continue;
       }
 
-      if(waitresult._notify == "player_sitrep_toggle" && is_true(e_player.var_bef05351)) {
-        if(!self.var_cc9b9440) {
+      if(waitresult._notify == "player_sitrep_toggle" && is_true(e_player.sitrep_active)) {
+        if(!self.b_keyline_enabled) {
           self[[var_80583f56]](localclientnum);
-          self.var_cc9b9440 = 1;
+          self.b_keyline_enabled = 1;
         }
 
         continue;
       }
 
-      if(!is_true(e_player.var_bef05351)) {
-        if(self.var_cc9b9440) {
+      if(!is_true(e_player.sitrep_active)) {
+        if(self.b_keyline_enabled) {
           self[[var_1ca727c]](localclientnum);
-          self.var_cc9b9440 = 0;
+          self.b_keyline_enabled = 0;
         }
       }
     }
@@ -229,9 +229,9 @@ function vehicle_keyline_toggle(localclientnum, oldval, newval, bnewent, binitia
   vh_player = getplayervehicle(e_player);
 
   if(bwastimejump == 1) {
-    foreach(var_ac85c33a in getPlayers(fieldname)) {
-      if(isbot(var_ac85c33a) && var_ac85c33a.owner === e_player && vh_player === self && (self.archetype === "fighter" || self.scriptvehicletype === "player_fav")) {
-        var_ac85c33a thread function_39273849(1);
+    foreach(e_ally in getPlayers(fieldname)) {
+      if(isbot(e_ally) && e_ally.owner === e_player && vh_player === self && (self.archetype === "fighter" || self.scriptvehicletype === "player_fav")) {
+        e_ally thread function_39273849(1);
       }
     }
 
@@ -242,9 +242,9 @@ function vehicle_keyline_toggle(localclientnum, oldval, newval, bnewent, binitia
     return;
   }
 
-  foreach(var_ac85c33a in getPlayers(fieldname)) {
-    if(isbot(var_ac85c33a) && var_ac85c33a.owner === e_player && !isDefined(vh_player)) {
-      var_ac85c33a thread function_39273849(0);
+  foreach(e_ally in getPlayers(fieldname)) {
+    if(isbot(e_ally) && e_ally.owner === e_player && !isDefined(vh_player)) {
+      e_ally thread function_39273849(0);
     }
   }
 

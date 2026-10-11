@@ -80,7 +80,7 @@ function function_c3eb1449() {
 }
 
 function function_170c5fef() {
-  level.var_cb7eb1d8 = self;
+  level.waitress = self;
 }
 
 function function_f82142f8(notify_str, body_model) {
@@ -229,11 +229,11 @@ function function_53531f27(key, val = "targetname") {
 function function_5431431d() {
   plane = getEnt("cargo_plane", "targetname");
   plane notsolid();
-  var_853687bd = getEntArray("af_plane_triggers", "targetname");
-  var_853687bd = arraycombine(var_853687bd, getEntArray("plane_floor_clip", "targetname"));
-  var_853687bd = arraycombine(var_853687bd, getEntArray("plane_cargo", "targetname"));
+  things = getEntArray("af_plane_triggers", "targetname");
+  things = arraycombine(things, getEntArray("plane_floor_clip", "targetname"));
+  things = arraycombine(things, getEntArray("plane_cargo", "targetname"));
 
-  foreach(thing in var_853687bd) {
+  foreach(thing in things) {
     thing enablelinkTo();
     thing linkTo(plane, "tag_body_animate");
   }
@@ -318,7 +318,7 @@ function function_c8381339(plane, var_857b0901) {
 function function_1c77193b(plane) {
   level waittill(#"hash_1e1d8f91cb3b7e82");
   plane cp_takedown_fx::function_675a8b8c();
-  self waittill(#"hash_3678fbfcec341cb5");
+  self waittill(#"start_slowmo");
   plane cp_takedown_fx::function_ee23b003();
 }
 
@@ -329,9 +329,9 @@ function function_d60a1c78(plane) {
 }
 
 function function_19919872() {
-  level.var_2e151cca = spawner::simple_spawn("af_plane_guy");
+  level.cargo_guys = spawner::simple_spawn("af_plane_guy");
 
-  foreach(guy in level.var_2e151cca) {
+  foreach(guy in level.cargo_guys) {
     guy linkTo(level.af_plane, "tag_body_animate");
   }
 }

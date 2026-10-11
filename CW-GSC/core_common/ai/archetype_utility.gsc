@@ -420,7 +420,7 @@ function function_865ea8e6(entity) {
 }
 
 function private function_ba333ba3() {
-  if(is_true(self.var_a8f2b553)) {
+  if(is_true(self.onslope)) {
     return "SLOPE";
   }
 
@@ -495,13 +495,13 @@ function function_27675652(entity) {
   }
 
   startheight = mantlenode.origin[2] - startnode.origin[2];
-  var_b6b9b5f0 = mantlenode.origin[2] - endnode.origin[2];
+  endheight = mantlenode.origin[2] - endnode.origin[2];
 
-  if(startheight == 0 || var_b6b9b5f0 == 0) {
+  if(startheight == 0 || endheight == 0) {
     assertmsg("<dev string:x38>" + mantlenode.origin[0] + "<dev string:x62>" + mantlenode.origin[1] + "<dev string:x62>" + mantlenode.origin[2] + "<dev string:x68>");
   }
 
-  ratio = abs(var_b6b9b5f0 / startheight);
+  ratio = abs(endheight / startheight);
 
   if(ratio < entity.ai.var_e233df10[#"min"]) {
     return "_vault_jump_up_drop";
@@ -536,8 +536,8 @@ function private function_975e9355() {
     return undefined;
   }
 
-  var_b6b9b5f0 = abs(mantlenode.origin[2] - endnode.origin[2]);
-  return var_b6b9b5f0;
+  endheight = abs(mantlenode.origin[2] - endnode.origin[2]);
+  return endheight;
 }
 
 function private bb_gettraversalheight() {
@@ -619,9 +619,9 @@ function bb_getparametrictraversaltype() {
       }
 
       if(abs(endposition[2] - startposition[2]) <= 24) {
-        var_a4122588 = isendpointaboveorsamelevel ? "<dev string:x101>" : "<dev string:x10d>";
+        traversal_type = isendpointaboveorsamelevel ? "<dev string:x101>" : "<dev string:x10d>";
         height = endposition[2] - startposition[2];
-        println("<dev string:x11b>" + var_a4122588 + "<dev string:x128>" + height + "<dev string:x14a>" + startposition + "<dev string:x158>" + endposition + "<dev string:x163>");
+        println("<dev string:x11b>" + traversal_type + "<dev string:x128>" + height + "<dev string:x14a>" + startposition + "<dev string:x158>" + endposition + "<dev string:x163>");
       }
 
       if(isendpointaboveorsamelevel) {
@@ -1585,9 +1585,9 @@ function trygoingtoclosestnodetoenemybehavior(entity) {
           continue;
         }
 
-        var_c86d779 = anglesToForward(node.angles);
+        nodedir = anglesToForward(node.angles);
         dirtoenemy = vectorNormalize((lastknownpositionofenemy - node.origin) * (1, 1, 0));
-        dot = vectordot(var_c86d779, dirtoenemy);
+        dot = vectordot(nodedir, dirtoenemy);
 
         if(dot > 0.5) {
           var_e416dc99[var_e416dc99.size] = node;

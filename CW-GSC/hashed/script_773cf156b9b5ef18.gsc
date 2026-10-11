@@ -30,8 +30,8 @@ function main(str_objective, b_skipto) {
     waitframe(1);
   }
 
-  if(isDefined(level.var_d7d201ba) && isDefined(level.skipto_current_objective)) {
-    level.player flag::set(level.var_d7d201ba);
+  if(isDefined(level.str_player_start_flag) && isDefined(level.skipto_current_objective)) {
+    level.player flag::set(level.str_player_start_flag);
   }
 
   setDvar(#"hash_4d452c56afa2dc6", 0.4);
@@ -42,9 +42,9 @@ function main(str_objective, b_skipto) {
   thread function_62a6be7();
   scene::play("scene_hub_safehouse_burns");
   level ending::function_103cd64c();
-  skipto::function_4e3ab877(b_skipto);
-  skipto::function_f02f0c63();
-  skipto::function_1c2dfc20();
+  skipto::objective_completed(b_skipto);
+  skipto::set_final_level();
+  skipto::level_completed();
 }
 
 function cleanup(name, starting, direct, player) {}
@@ -321,9 +321,9 @@ function function_b0558ba2(var_690057e6) {
   var_581b24f5 thread function_42655283("t9_hub_env_clock_sh" + var_690057e6 + "_wash_dc", randomfloatrange(0.25, 0.45));
   var_2eb7eec2 = getEntArray("model_clock_amb", "targetname");
 
-  foreach(var_d96c2e88 in var_2eb7eec2) {
-    var_d96c2e88 useanimtree("generic");
-    var_d96c2e88 thread function_42655283("t9_hub_env_clock_sh" + var_690057e6 + "_germany", randomfloatrange(0.05, 0.25));
+  foreach(e_clock in var_2eb7eec2) {
+    e_clock useanimtree("generic");
+    e_clock thread function_42655283("t9_hub_env_clock_sh" + var_690057e6 + "_germany", randomfloatrange(0.05, 0.25));
   }
 }
 

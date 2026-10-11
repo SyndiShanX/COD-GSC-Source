@@ -32,10 +32,10 @@ function main() {
 function function_c6453062() {
   self notify("2f25b26e22f30a5c");
   self endon("2f25b26e22f30a5c");
-  self thread namespace_268747c0::function_978c05b5();
+  self thread doa_hazard::function_978c05b5();
   result = self waittill(#"destroy_hazard");
 
-  if(is_true(self.var_7c56394) && is_true(result.var_760a0807)) {
+  if(is_true(self.paged) && is_true(result.var_760a0807)) {
     arrayremovevalue(level.doa.var_ea40471b, self);
     namespace_1e25ad94::debugmsg("Deleting LogDrop trap permenently at:" + self.origin);
   }
@@ -43,7 +43,7 @@ function function_c6453062() {
   util::wait_network_frame();
 
   if(isDefined(self.trigger)) {
-    self.trigger namespace_268747c0::function_54f185a();
+    self.trigger doa_hazard::function_54f185a();
     self.trigger = undefined;
   }
 
@@ -52,7 +52,7 @@ function function_c6453062() {
   }
 }
 
-function function_cb1b5203(trap, var_7c56394 = 0) {
+function function_cb1b5203(trap, paged = 0) {
   hazard = namespace_ec06fe4a::spawnmodel(trap.origin, "p8_fxanim_zm_towers_trap_blade_01_mod");
 
   if(isDefined(hazard)) {
@@ -63,10 +63,10 @@ function function_cb1b5203(trap, var_7c56394 = 0) {
   }
 
   trap.script_model = hazard;
-  trap.var_7c56394 = var_7c56394;
+  trap.paged = paged;
 
   if(isDefined(trap.trigger)) {
-    trap.trigger namespace_268747c0::function_54f185a();
+    trap.trigger doa_hazard::function_54f185a();
     trap.trigger = undefined;
   }
 
@@ -184,7 +184,7 @@ function function_b31750de(lifetime) {
 
   while(isDefined(self) && self.state === 1) {
     if(!isDefined(self.trigger)) {
-      self.trigger = namespace_268747c0::function_5bfa98c9("logdrop", self.origin);
+      self.trigger = doa_hazard::function_5bfa98c9("logdrop", self.origin);
 
       if(isDefined(self.trigger)) {
         up = anglestoup(self.angles);
@@ -192,7 +192,7 @@ function function_b31750de(lifetime) {
         self.trigger.origin = self.origin + offset;
         self.trigger.angles = self.angles;
 
-        level thread namespace_1e25ad94::function_b57a9d84(self.trigger.origin, self.trigger.angles[1], self.trigger.length, self.trigger.width, self.trigger.height, lifetime);
+        level thread namespace_1e25ad94::debugbox(self.trigger.origin, self.trigger.angles[1], self.trigger.length, self.trigger.width, self.trigger.height, lifetime);
       }
     }
 
@@ -218,14 +218,14 @@ function function_b31750de(lifetime) {
         }
 
         if(guy.var_ef6bca09 < gettime()) {
-          guy namespace_83eb6304::function_3ecfde67("pungi_damage");
+          guy doa_fx::function_3ecfde67("pungi_damage");
           guy.var_ef6bca09 = gettime() + 1000;
         }
 
         if(isPlayer(guy)) {
           guy dodamage(guy.health + 100, guy.origin);
         } else {
-          guy thread namespace_ed80aead::function_586ef822();
+          guy thread doa_gib::function_586ef822();
         }
       }
 
@@ -236,7 +236,7 @@ function function_b31750de(lifetime) {
   }
 
   if(isDefined(self.trigger)) {
-    self.trigger namespace_268747c0::function_54f185a();
+    self.trigger doa_hazard::function_54f185a();
     self.trigger = undefined;
   }
 }
@@ -263,14 +263,14 @@ function function_62ba9be4() {
     self.script_model stopanimScripted();
     self.state = 0;
     wait 8 + randomint(5);
-    self.script_model namespace_268747c0::play_anim(#"p8_fxanim_zm_towers_trap_blade_01_start_anim", 1);
+    self.script_model doa_hazard::play_anim(#"p8_fxanim_zm_towers_trap_blade_01_start_anim", 1);
     self.script_model waittilltimeout(var_ba28dc68, #"end", #"scriptedanim", #"new_scripted_anim");
     self.state = 1;
     loops = randomintrange(5, 15);
     self thread function_b31750de(loops * var_fb7d52cb);
 
     while(loops) {
-      self.script_model namespace_268747c0::play_anim(#"p8_fxanim_zm_towers_trap_blade_01_loop_anim", 1);
+      self.script_model doa_hazard::play_anim(#"p8_fxanim_zm_towers_trap_blade_01_loop_anim", 1);
       self.script_model namespace_e32bb68::function_3a59ec34("zmb_traps_blade_lp");
       self.script_model waittilltimeout(var_fb7d52cb, #"end", #"scriptedanim", #"new_scripted_anim");
       loops--;
@@ -278,7 +278,7 @@ function function_62ba9be4() {
 
     self.state = 0;
     self.script_model namespace_e32bb68::function_ae271c0b("zmb_traps_blade_lp");
-    self.script_model namespace_268747c0::play_anim(#"p8_fxanim_zm_towers_trap_blade_01_end_anim", 1);
+    self.script_model doa_hazard::play_anim(#"p8_fxanim_zm_towers_trap_blade_01_end_anim", 1);
     self.script_model waittilltimeout(var_3493b9e, #"end", #"scriptedanim", #"new_scripted_anim");
   }
 }

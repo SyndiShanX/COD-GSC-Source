@@ -25,8 +25,8 @@ function preinit() {
   level._effect[#"fx9_mech_wpn_115_blob"] = "zm_ai/fx9_mech_wpn_115_blob";
   level._effect[#"fx9_mech_wpn_115_bul_trail"] = "zm_ai/fx9_mech_wpn_115_bul_trail";
   level._effect[#"fx9_mech_wpn_115_canister"] = "zm_ai/fx9_mech_wpn_115_canister";
-  level._effect[#"hash_3a6575aae8a7ccd4"] = "weapon/fx_prox_grenade_impact_player_spwner";
-  level._effect[#"hash_58bd536e46d7c711"] = "weapon/fx_prox_grenade_exp";
+  level._effect[#"electroball_grenade_player_shock"] = "weapon/fx_prox_grenade_impact_player_spwner";
+  level._effect[#"electroball_grenade_sparky_conversion"] = "weapon/fx_prox_grenade_exp";
   callback::add_weapon_type("electroball_grenade", &proximity_spawned);
 }
 
@@ -42,15 +42,15 @@ function proximity_spawned(localclientnum) {
 }
 
 function function_7ec61d7a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  fx = util::playFXOnTag(bwastimejump, level._effect[#"hash_3a6575aae8a7ccd4"], self, "J_SpineUpper");
+  fx = util::playFXOnTag(bwastimejump, level._effect[#"electroball_grenade_player_shock"], self, "J_SpineUpper");
 }
 
 function function_7b605b7b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isDefined(level.var_542ac835)) {
-    level.var_542ac835 = [];
+  if(!isDefined(level.a_electroball_grenades)) {
+    level.a_electroball_grenades = [];
   }
 
-  array::add(level.var_542ac835, self);
+  array::add(level.a_electroball_grenades, self);
   self callback::on_shutdown(&function_76787bb);
 
   if(isDefined(self.var_78b154ef)) {
@@ -71,7 +71,7 @@ function function_7b605b7b(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_76787bb(params) {
-  arrayremovevalue(level.var_542ac835, undefined);
+  arrayremovevalue(level.a_electroball_grenades, undefined);
 }
 
 function electroball_play_landed_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

@@ -31,14 +31,14 @@
 #namespace namespace_bf41daf8;
 
 function barrelupdate(model_name = "zombietron_barrel") {
-  self notify(#"hash_562d458e34274132");
+  self notify(#"kill_duplicate_shields");
 
   if(isPlayer(self)) {
     self endon(#"disconnect");
   }
 
   waitframe(1);
-  self endon(#"barrels_done", #"hash_562d458e34274132");
+  self endon(#"barrels_done", #"kill_duplicate_shields");
   org = namespace_ec06fe4a::spawnmodel(self.origin, "tag_origin");
 
   if(isDefined(org)) {
@@ -178,15 +178,15 @@ function private function_7c757878(player, mod = "MOD_UNKNOWN", var_70c63791) {
 }
 
 function private function_61888137(org) {
-  self endon(#"barrels_done", #"hash_562d458e34274132");
+  self endon(#"barrels_done", #"kill_duplicate_shields");
 
   if(isPlayer(self)) {
     self endon(#"disconnect");
   }
 
-  timeout = max(max(30, self namespace_1c2a96f9::function_4808b985(30)), self namespace_1c2a96f9::function_2ce61fb9(30));
+  timeout = max(max(30, self doa_fate::function_4808b985(30)), self doa_fate::function_2ce61fb9(30));
 
-  while(!namespace_dfc652ee::function_f759a457()) {
+  while(!doa_pickups::function_f759a457()) {
     waitframe(1);
   }
 
@@ -235,7 +235,7 @@ function private function_f0855523(org) {
     self endon(#"disconnect");
   }
 
-  self waittill(#"barrels_done", #"entering_last_stand", #"kill_shield", #"hash_df25520ab279dff", #"hash_562d458e34274132", #"player_died", #"enter_vehicle", #"clone_shutdown", #"death");
+  self waittill(#"barrels_done", #"entering_last_stand", #"kill_shield", #"doa_playervehiclepickup", #"kill_duplicate_shields", #"player_died", #"enter_vehicle", #"clone_shutdown", #"death");
 
   if(isDefined(self)) {
     self notify(#"barrels_done");

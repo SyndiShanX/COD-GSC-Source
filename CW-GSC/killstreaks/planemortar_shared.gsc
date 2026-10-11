@@ -132,7 +132,7 @@ function selectplanemortarlocation(hardpointtype) {
 
     clientfield::set_player_uimodel("hudItems.planeMortarShotsRemaining", selections - i - 1);
     self thread function_c47dc560(location.origin, killstreakid, params, i + 1, selections, yaw, self.usingkillstreakfrominventory, slot);
-    self playsoundtoplayer(#"hash_40ab546591b2ecfa", self);
+    self playsoundtoplayer(#"mpl_tablet_button_press", self);
     wait 0.2;
   }
 
@@ -162,11 +162,11 @@ function function_c47dc560(position, killstreakid, params, currentselection, var
 
   if(isDefined(self)) {
     wait 0.1;
-    self function_fd2f978f(params, position, team, yaw, killstreakid);
+    self doartillerystrike(params, position, team, yaw, killstreakid);
   }
 }
 
-function function_fd2f978f(params, position, team, yaw, killstreakid) {
+function doartillerystrike(params, position, team, yaw, killstreakid) {
   self endon(#"disconnect");
 
   if(isDefined(params.var_675bebb2)) {
@@ -260,22 +260,22 @@ function planemortar_watchforendnotify(team, killstreak_id, killstreaktype, isfr
 }
 
 function private function_ac3ad2f8(ents) {
-  var_5496c504 = ents[#"bomb"];
-  var_5496c504 endon(#"death");
-  var_5496c504 waittill(#"spawn_killcam");
+  fakebomb = ents[#"bomb"];
+  fakebomb endon(#"death");
+  fakebomb waittill(#"spawn_killcam");
   angles = (35, self.angles[1] - 180, 0);
   direction = anglesToForward(angles);
   scenelength = scene::function_12479eba(#"p9_fxanim_mp_planemortar_01_bundle");
   weapon = getweapon("planemortar");
-  killcament = spawn("script_model", var_5496c504 gettagorigin("tag_killcam") + vectorscale(direction, -1500));
+  killcament = spawn("script_model", fakebomb gettagorigin("tag_killcam") + vectorscale(direction, -1500));
   killcament util::deleteaftertime(scenelength * 2);
   killcament.starttime = gettime();
   killcament.angles = angles;
-  killcament linkTo(var_5496c504, "tag_killcam");
+  killcament linkTo(fakebomb, "tag_killcam");
   killcament setweapon(weapon);
   killcament killcam::store_killcam_entity_on_entity(self);
-  killcament thread function_6ffdbd95(var_5496c504);
-  var_5496c504 waittill(#"magic_missile");
+  killcament thread function_6ffdbd95(fakebomb);
+  fakebomb waittill(#"magic_missile");
 
   if(isDefined(self.owner)) {
     bomb = self.owner magicmissile(weapon, self.origin + (0, 0, 100), (0, 0, -5000));
@@ -284,25 +284,25 @@ function private function_ac3ad2f8(ents) {
   }
 }
 
-function function_6ffdbd95(var_5496c504) {
+function function_6ffdbd95(fakebomb) {
   self endon(#"death");
-  var_5496c504 endon(#"death");
+  fakebomb endon(#"death");
   self rotatepitch(15, 3.5);
   wait 3.5;
   self rotatepitch(-15, 3);
-  var_5496c504 waittill(#"unlink_killcam");
+  fakebomb waittill(#"unlink_killcam");
   self unlink();
 }
 
-function function_77ed0e9b(var_5496c504, fxanim) {
-  var_5496c504 endon(#"magic_missile");
+function function_77ed0e9b(fakebomb, fxanim) {
+  fakebomb endon(#"magic_missile");
 
   while(true) {
     println("<dev string:x38>" + fxanim.angles);
     println("<dev string:x4b>" + fxanim.origin);
-    println("<dev string:x5e>" + var_5496c504.origin);
+    println("<dev string:x5e>" + fakebomb.origin);
     println("<dev string:x6f>" + self.origin);
-    offset = var_5496c504.origin - self.origin;
+    offset = fakebomb.origin - self.origin;
     println("<dev string:x84>" + offset);
     var_2c942dba = vectorNormalize(offset);
     println("<dev string:x99>" + var_2c942dba);
@@ -362,7 +362,7 @@ function function_4ef32baf(position, yaw, team) {
   plane.killcament.starttime = gettime();
   plane.killcament linkTo(plane);
   start = (position[0], position[1], plane.origin[2]);
-  playSoundAtPosition(#"hash_5a17b7541482a04f", plane.origin);
+  playSoundAtPosition(#"mpl_kls_artillery_fire", plane.origin);
   impact = bulletTrace(start, start + (0, 0, -100000), 1, plane);
   plane moveTo(endpoint, 2 * 5 / 4, 0, 0);
   plane.killcament thread followbomb(plane, position, direction, impact, player);

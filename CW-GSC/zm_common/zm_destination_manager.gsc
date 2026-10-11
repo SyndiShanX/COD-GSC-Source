@@ -60,7 +60,7 @@ function function_f3be07d7(destination) {
   if(isDefined(var_9200b8df)) {
     var_5f03e419 = strtok(var_9200b8df, ",");
 
-    if(level.var_b48509f9 === 1 && var_5f03e419.size > 1 && util::get_map_name() === "mp_black_sea") {
+    if(level.star_rating === 1 && var_5f03e419.size > 1 && util::get_map_name() === "mp_black_sea") {
       arrayremovevalue(var_5f03e419, "3");
     }
 
@@ -80,8 +80,8 @@ function function_f3be07d7(destination) {
 
   level.contentmanager.nextspawn = var_58b02068;
   level flag::set(#"hash_10679ff0bf4d6c8d");
-  var_842cdacd = content_manager::get_children(var_58b02068);
-  return array::randomize(var_842cdacd);
+  a_spawn_points = content_manager::get_children(var_58b02068);
+  return array::randomize(a_spawn_points);
 }
 
 function function_e4254bac(destination, var_f281f968) {
@@ -185,10 +185,10 @@ function private function_1975f7db() {
       var_a3c51b07[i] = var_c0335359;
     }
 
-    var_6067a19c = var_a3c51b07[i - 1];
+    last_destination = var_a3c51b07[i - 1];
 
-    if(isDefined(var_6067a19c.var_e859e591[#"final_battle"])) {
-      var_6067a19c.final_battle = 1;
+    if(isDefined(last_destination.var_e859e591[#"final_battle"])) {
+      last_destination.final_battle = 1;
     }
 
     level.contentmanager.var_d60029a6 = var_a3c51b07;
@@ -204,7 +204,7 @@ function private function_1975f7db() {
 
 function function_786a9f4d(destinations) {
   level endon(#"game_ended");
-  level.contentmanager.var_46849b1b = 0;
+  level.contentmanager.destinationindex = 0;
 
   while(destinations.size) {
     foreach(destination in destinations) {
@@ -224,10 +224,10 @@ function function_786a9f4d(destinations) {
       }
 
       level thread namespace_591b4396::function_7c05a985(destination);
-      level.contentmanager.var_46849b1b++;
+      level.contentmanager.destinationindex++;
 
-      if(level.contentmanager.var_46849b1b >= destinations.size) {
-        level.contentmanager.var_46849b1b = 0;
+      if(level.contentmanager.destinationindex >= destinations.size) {
+        level.contentmanager.destinationindex = 0;
       }
 
       level waittill(#"portal_activated");
@@ -370,7 +370,7 @@ function activate(destination) {
 
   if(zm_utility::is_survival()) {
     level thread zm_wallbuy::function_669a830(destination);
-    level thread namespace_c09ae6c3::function_7b19802a(destination);
+    level thread namespace_c09ae6c3::spawn_ammo_cache(destination);
   }
 
   if(is_true(getgametypesetting(#"hash_7cc2f3e9453e060b"))) {
@@ -394,7 +394,7 @@ function deactivate(destination) {
   level callback::callback(#"hash_565739346fc951ae", {
     #destination: destination
   });
-  content_manager::function_690c4abe();
+  content_manager::cleanup_spawned_instances();
   level notify(#"hash_3b28fcaa0b9b4489");
 }
 

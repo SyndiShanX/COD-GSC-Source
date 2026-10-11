@@ -33,7 +33,7 @@ function private preinit() {
   }
 
   callback::on_connect(&function_80238885);
-  callback::on_connect(&function_d521a2c1);
+  callback::on_connect(&watch_exit_vehicle);
 }
 
 function private function_80238885() {
@@ -64,7 +64,7 @@ function private function_80238885() {
   }
 }
 
-function private function_d521a2c1() {
+function private watch_exit_vehicle() {
   self endon(#"death");
 
   while(true) {

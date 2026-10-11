@@ -18,7 +18,7 @@
 #namespace namespace_e1ccb37b;
 
 function private event_handler[level_preinit] function_b489bb7b(eventstruct) {
-  snd::function_5e69f468(&_objective);
+  snd::skipto_init(&_objective);
 }
 
 function private event_handler[event_cc819519] function_686b88aa(eventstruct) {
@@ -55,11 +55,11 @@ function private _objective(objective) {
 }
 
 function music(str_msg, n_delay = 0, var_37a6c96) {
-  level thread function_7edafa59(str_msg, n_delay, var_37a6c96);
+  level thread music_handler(str_msg, n_delay, var_37a6c96);
   level thread function_e80c0ccf(str_msg);
 }
 
-function function_7edafa59(str_msg, n_delay, var_37a6c96) {
+function music_handler(str_msg, n_delay, var_37a6c96) {
   switch (str_msg) {
     case #"4.1_adler_attack":
     case #"5.0_comrade":
@@ -79,7 +79,7 @@ function function_7edafa59(str_msg, n_delay, var_37a6c96) {
       snd::client_msg(#"hash_14488fae2db8c286");
       break;
     case #"hash_581c2b78798ae4fb":
-      music::function_edda155f(str_msg, n_delay);
+      music::playstinger(str_msg, n_delay);
       break;
     case #"hash_2193c42e21ea2e63":
       music::function_2af5f0ec(str_msg);

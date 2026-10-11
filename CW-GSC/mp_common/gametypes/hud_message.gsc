@@ -92,27 +92,27 @@ function function_a2f30ab4(var_68c25772, var_c1e98979, game_end, outcome) {
   result = structcopy(outcome);
   result.var_277c7d47 = undefined;
   result.var_68c25772 = var_68c25772;
-  result.var_14f94126 = "";
+  result.title_text = "";
   result.var_7d5c2c5f = 0;
 
   if(level.teambased) {
     result.var_44e9b5f9 = teams::getteamindex(result.team);
 
     if(function_82f36142(var_c1e98979)) {
-      result.var_14f94126 = function_460b0309(game_end);
+      result.title_text = function_460b0309(game_end);
       result.var_277c7d47 = 0;
     } else if(var_68c25772 == 2) {
-      result.var_14f94126 = game.strings[#"halftime"];
+      result.title_text = game.strings[#"halftime"];
       result.var_277c7d47 = 1;
     } else if(var_68c25772 == 3) {
-      result.var_14f94126 = game.strings[#"intermission"];
+      result.title_text = game.strings[#"intermission"];
       result.var_277c7d47 = 1;
     } else if(var_68c25772 == 4) {
-      result.var_14f94126 = game.strings[#"overtime"];
+      result.title_text = game.strings[#"overtime"];
       result.var_277c7d47 = 1;
     } else {
       if(outcome::get_flag(outcome, "tie")) {
-        result.var_14f94126 = function_460b0309(game_end);
+        result.title_text = function_460b0309(game_end);
       }
 
       result.var_277c7d47 = !game_end && !util::isoneround() && !util::waslastround();
@@ -121,9 +121,9 @@ function function_a2f30ab4(var_68c25772, var_c1e98979, game_end, outcome) {
     result.var_44e9b5f9 = 0;
 
     if(!util::isoneround() && game_end) {
-      result.var_14f94126 = game.strings[#"game_over"];
+      result.title_text = game.strings[#"game_over"];
     } else {
-      result.var_14f94126 = game.strings[#"defeat"];
+      result.title_text = game.strings[#"defeat"];
       result.var_7d5c2c5f = 1;
     }
   }
@@ -156,7 +156,7 @@ function teamoutcomenotify(outcome) {
   matchbonus = function_555e3f9f();
   winnerenum = outcome.var_44e9b5f9;
   winner = outcome.team;
-  var_14f94126 = outcome.var_14f94126;
+  title_text = outcome.title_text;
   var_277c7d47 = outcome.var_277c7d47;
 
   if(!isDefined(winner)) {
@@ -235,7 +235,7 @@ function teamoutcomenotify(outcome) {
       var_277c7d47 = 0;
     }
 
-    self luinotifyevent(#"show_outcome", 7, var_14f94126, outcometext, int(matchbonus), winnerenum, var_277c7d47, int(float(winningtime) / 1000), int(float(losingtime) / 1000));
+    self luinotifyevent(#"show_outcome", 7, title_text, outcometext, int(matchbonus), winnerenum, var_277c7d47, int(float(winningtime) / 1000), int(float(losingtime) / 1000));
     return;
   }
 
@@ -247,24 +247,24 @@ function teamoutcomenotify(outcome) {
     }
 
     if(team == #"spectator" && outcome.var_7d5c2c5f) {
-      var_14f94126 = game.strings[#"cod_caster_team_wins"];
+      title_text = game.strings[#"cod_caster_team_wins"];
       var_277c7d47 = 0;
     }
 
-    self luinotifyevent(#"show_outcome", 7, var_14f94126, outcometext, int(matchbonus), winnerenum, var_277c7d47, int(float(winningtime) / 1000), int(float(losingtime) / 1000));
+    self luinotifyevent(#"show_outcome", 7, title_text, outcometext, int(matchbonus), winnerenum, var_277c7d47, int(float(winningtime) / 1000), int(float(losingtime) / 1000));
     return;
   }
 
   if(team == #"spectator" && outcome.var_7d5c2c5f) {
     if(outcome.var_c1e98979 == 6) {
-      var_14f94126 = game.strings[#"cod_caster_team_eliminated"];
+      title_text = game.strings[#"cod_caster_team_eliminated"];
     }
 
-    var_14f94126 = game.strings[#"cod_caster_team_wins"];
+    title_text = game.strings[#"cod_caster_team_wins"];
     var_277c7d47 = 0;
   }
 
-  self luinotifyevent(#"show_outcome", 5, var_14f94126, outcometext, int(matchbonus), winnerenum, var_277c7d47);
+  self luinotifyevent(#"show_outcome", 5, title_text, outcometext, int(matchbonus), winnerenum, var_277c7d47);
 
   if(var_277c7d47 && game.roundsplayed < level.roundlimit) {
     self luinotifyevent(#"show_switching_sides");
@@ -284,11 +284,11 @@ function outcomenotify(outcome) {
 
   if(isDefined(team) && team == #"spectator" && outcome.var_7d5c2c5f) {
     outcometext = game.strings[#"cod_caster_team_wins"];
-    self luinotifyevent(#"show_outcome", 5, outcome.var_14f94126, outcometext, matchbonus, outcome::get_winner(outcome), 0);
+    self luinotifyevent(#"show_outcome", 5, outcome.title_text, outcometext, matchbonus, outcome::get_winner(outcome), 0);
     return;
   }
 
-  self luinotifyevent(#"show_outcome", 4, outcome.var_14f94126, outcometext, matchbonus, numclients);
+  self luinotifyevent(#"show_outcome", 4, outcome.title_text, outcometext, matchbonus, numclients);
 }
 
 function hide_outcome() {

@@ -60,8 +60,8 @@ function function_8d10f6be(var_fc3729bf) {
     var_fc3729bf.var_369a1b0e = var_fc3729bf.damage_min;
   }
 
-  if(isDefined(var_fc3729bf.var_a7069114) && var_fc3729bf.var_a7069114 != -1) {
-    var_fc3729bf.var_40545cd8 = var_fc3729bf.var_a7069114;
+  if(isDefined(var_fc3729bf.damage_max) && var_fc3729bf.damage_max != -1) {
+    var_fc3729bf.var_40545cd8 = var_fc3729bf.damage_max;
   }
 
   if(isDefined(var_fc3729bf.var_12000c02) && var_fc3729bf.var_12000c02 != -1) {
@@ -87,12 +87,12 @@ function function_fa18dccd() {
   while(!self.var_a5b25d88) {
     s_results = self waittill(#"damage");
 
-    if(s_results hms_util::function_1062a852() || s_results.mod === "MOD_PISTOL_BULLET" || s_results.mod === "MOD_RIFLE_BULLET") {
+    if(s_results hms_util::is_explosive() || s_results.mod === "MOD_PISTOL_BULLET" || s_results.mod === "MOD_RIFLE_BULLET") {
       self.var_a5b25d88 = 1;
     }
   }
 
-  if(isDefined(s_results.weapon) && s_results.weapon hms_util::function_17fe30b7() || s_results hms_util::function_1062a852()) {
+  if(isDefined(s_results.weapon) && s_results.weapon hms_util::function_17fe30b7() || s_results hms_util::is_explosive()) {
     self function_e8f2c360(s_results);
   } else if(isDefined(s_results.attacker) && isvehicle(s_results.attacker)) {
     self dodamage(10000, self.origin);
@@ -100,11 +100,11 @@ function function_fa18dccd() {
     self thread function_cba8ac4e();
   }
 
-  var_767445cc = undefined;
+  badplacename = undefined;
 
   if(self.health > 1) {
-    var_767445cc = "barrel" + self getentitynumber();
-    badplace_cylinder(var_767445cc, 0, self.origin, self.var_628bf12a, self.var_628bf12a, "allies", "axis", "neutral");
+    badplacename = "barrel" + self getentitynumber();
+    badplace_cylinder(badplacename, 0, self.origin, self.var_628bf12a, self.var_628bf12a, "allies", "axis", "neutral");
   }
 
   while(self.health > 1) {
@@ -113,8 +113,8 @@ function function_fa18dccd() {
     wait 0.1;
   }
 
-  if(isDefined(var_767445cc)) {
-    badplace_delete(var_767445cc);
+  if(isDefined(badplacename)) {
+    badplace_delete(badplacename);
   }
 
   waitframe(1);
@@ -136,7 +136,7 @@ function function_cba8ac4e() {
   while(true) {
     s_results = self waittill(#"damage");
 
-    if(isDefined(s_results.weapon) && s_results.weapon hms_util::function_17fe30b7() || s_results hms_util::function_1062a852()) {
+    if(isDefined(s_results.weapon) && s_results.weapon hms_util::function_17fe30b7() || s_results hms_util::is_explosive()) {
       self function_e8f2c360(s_results);
       continue;
     }

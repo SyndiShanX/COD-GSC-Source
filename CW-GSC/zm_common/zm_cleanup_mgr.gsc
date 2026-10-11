@@ -26,11 +26,11 @@ function force_check_now() {
   level notify(#"pump_distance_check");
 }
 
-function function_949dc047(var_c2526fee) {
-  level.n_cleanup_manager_restart_time = var_c2526fee;
+function function_949dc047(n_restart_time) {
+  level.n_cleanup_manager_restart_time = n_restart_time;
 
   if(!function_7415d2e2()) {
-    level notify(#"hash_15cc0436ec23c79c");
+    level notify(#"delay_zombie_cleanup");
   }
 }
 
@@ -84,7 +84,7 @@ function private cleanup_main() {
 }
 
 function private function_399d4af3(n_override_cleanup_dist_sq) {
-  level endon(#"hash_15cc0436ec23c79c");
+  level endon(#"delay_zombie_cleanup");
   a_ai_enemies = getaiteamarray(#"axis");
 
   foreach(ai_enemy in a_ai_enemies) {
@@ -276,7 +276,7 @@ function cleanup_zombie(var_a75dcb5b = 0) {
 
   self function_23621259();
   self zombie_utility::reset_attack_spot();
-  self.var_c39323b5 = 1;
+  self.b_cleaned_up = 1;
   self.var_e700d5e2 = 1;
   self.allowdeath = 1;
   self.var_98f1f37c = 1;
@@ -450,7 +450,7 @@ function function_c6ad3003(b_timeout = 0) {
 
     ai_enemy function_23621259(1);
     ai_enemy zombie_utility::reset_attack_spot();
-    ai_enemy.var_c39323b5 = 1;
+    ai_enemy.b_cleaned_up = 1;
     ai_enemy kill(undefined, undefined, undefined, undefined, undefined, 1);
     waitframe(1);
   }

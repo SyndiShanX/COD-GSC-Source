@@ -31,10 +31,10 @@ function main() {
 function function_49caf2d6() {
   self notify("5911fdf5a238fc16");
   self endon("5911fdf5a238fc16");
-  self thread namespace_268747c0::function_978c05b5();
+  self thread doa_hazard::function_978c05b5();
   result = self waittill(#"destroy_hazard");
 
-  if(is_true(self.var_7c56394) && is_true(result.var_760a0807)) {
+  if(is_true(self.paged) && is_true(result.var_760a0807)) {
     arrayremovevalue(level.doa.var_ed906439, self);
     namespace_1e25ad94::debugmsg("Deleting killzone trap permenently at:" + self.origin);
   }
@@ -42,7 +42,7 @@ function function_49caf2d6() {
   util::wait_network_frame();
 
   if(isDefined(self.trigger)) {
-    self.trigger namespace_268747c0::function_54f185a();
+    self.trigger doa_hazard::function_54f185a();
     self.trigger = undefined;
   }
 
@@ -51,7 +51,7 @@ function function_49caf2d6() {
   }
 }
 
-function function_4acf40a(trap, var_7c56394 = 0, modelname) {
+function function_4acf40a(trap, paged = 0, modelname) {
   if(isDefined(modelname)) {
     hazard = namespace_ec06fe4a::spawnmodel(trap.origin, modelname);
 
@@ -65,7 +65,7 @@ function function_4acf40a(trap, var_7c56394 = 0, modelname) {
     trap.script_model = hazard;
   }
 
-  trap.var_7c56394 = var_7c56394;
+  trap.paged = paged;
   trap thread function_e20d74b3();
   return trap;
 }
@@ -80,7 +80,7 @@ function function_7ae8d74a(trap, page = 0) {
     trap.height = int(args[2]);
     trap.teleport = 1;
     trap.damage = 50;
-    trap.var_f3e30707 = 1;
+    trap.tickrate = 1;
 
     if(args.size > 3) {
       trap.teleport = int(args[3]);
@@ -91,7 +91,7 @@ function function_7ae8d74a(trap, page = 0) {
     }
 
     if(args.size > 5) {
-      trap.var_f3e30707 = int(args[5]);
+      trap.tickrate = int(args[5]);
     }
 
     if(trap.type === #"acid") {
@@ -210,15 +210,15 @@ function function_e20d74b3() {
   wait randomfloatrange(0.1, 3);
 
   while(true) {
-    self.trigger = self namespace_268747c0::function_678eaf60("killzone", self.origin, 1024, 1, 256);
+    self.trigger = self doa_hazard::function_678eaf60("killzone", self.origin, 1024, 1, 256);
 
     if(self.trigger.radius != self.radius || self.trigger.height != self.height) {
       self.trigger delete();
-      namespace_268747c0::function_e8bbd3ad("killzone");
-      self.trigger = namespace_268747c0::function_3111b4b2("killzone", "trigger_radius", self.radius, self.height);
+      doa_hazard::function_e8bbd3ad("killzone");
+      self.trigger = doa_hazard::function_3111b4b2("killzone", "trigger_radius", self.radius, self.height);
 
       if(isDefined(self.trigger)) {
-        self.trigger namespace_268747c0::function_b3c196a(self, self.origin, self.angles);
+        self.trigger doa_hazard::function_b3c196a(self, self.origin, self.angles);
       }
     }
 
@@ -240,7 +240,7 @@ function function_d1b295d7(trap) {
   self endon("1e24548a9aeb5437");
   level endon(#"game_over");
   self endon(#"death", #"destroy_hazard", #"hash_5dc5b7f198cd1bec");
-  var_f3e30707 = (isDefined(trap.var_f3e30707) ? trap.var_f3e30707 : 1) * 1000;
+  tickrate = (isDefined(trap.tickrate) ? trap.tickrate : 1) * 1000;
 
   while(true) {
     result = self waittill(#"trigger");
@@ -272,7 +272,7 @@ function function_d1b295d7(trap) {
       continue;
     }
 
-    guy.var_386ce6f4 = time + var_f3e30707;
+    guy.var_386ce6f4 = time + tickrate;
 
     if(isPlayer(guy)) {
       guy dodamage(isDefined(trap.damage) ? trap.damage : guy.health + 100, guy.origin);
@@ -288,7 +288,7 @@ function function_d1b295d7(trap) {
 
       if(guy.var_a1500eee < gettime()) {
         if(trap.type === #"fire") {
-          guy namespace_83eb6304::function_3ecfde67("burn_zombie");
+          guy doa_fx::function_3ecfde67("burn_zombie");
         }
 
         guy.var_a1500eee = gettime() + 1000;

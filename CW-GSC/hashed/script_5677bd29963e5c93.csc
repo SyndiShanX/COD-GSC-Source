@@ -14,7 +14,7 @@ function private autoexec __init__system__() {
 function private _preload() {
   function_ad272ef4();
   function_90ceecf8();
-  function_7c9b0132();
+  _init_dvars();
   function_bc948200();
 }
 
@@ -29,10 +29,10 @@ function private function_ad272ef4() {
 function private function_90ceecf8() {
   animation::add_notetrack_func("vfx_cp_util::fire_weapon", &fire_weapon);
   animation::add_notetrack_func("vfx_cp_util::start_firing_weapon", &function_7b038ec3);
-  animation::add_notetrack_func("vfx_cp_util::stop_firing_weapon", &function_e6084ba1);
+  animation::add_notetrack_func("vfx_cp_util::stop_firing_weapon", &stop_firing_weapon);
 }
 
-function private function_7c9b0132() {}
+function private _init_dvars() {}
 
 function private function_bc948200() {}
 
@@ -82,6 +82,6 @@ function function_7b038ec3(parms) {
   }
 }
 
-function function_e6084ba1(parms) {
+function stop_firing_weapon(parms) {
   self notify(#"hash_53fdcb0020b4588c");
 }

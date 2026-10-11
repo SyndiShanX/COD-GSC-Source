@@ -57,14 +57,14 @@ function private function_4df027f2() {
 
 function function_b8e86206() {
   self callback::function_d8abfc3d(#"on_ai_melee", &namespace_85745671::zombie_on_melee);
-  self callback::function_d8abfc3d(#"hash_10ab46b52df7967a", &function_3076443);
+  self callback::function_d8abfc3d(#"hash_10ab46b52df7967a", &mechz_cleanup);
   self.var_12af7864 = 1;
   self.blockingpain = 1;
-  self.var_d8695234 = 1;
-  self.var_90d0c0ff = "anim_mechz_spawn";
+  self.is_elite = 1;
+  self.spawn_anim_alias = "anim_mechz_spawn";
   self.var_ecbef856 = "anim_mechz_despawn";
   self.should_zigzag = 0;
-  self.ai.var_870d0893 = 1;
+  self.ai.rex_mp_swamp_concrete_debris = 1;
   self.var_f7c8ccf5 = &function_f7c8ccf5;
   self.var_b3c613a7 = [1, 1.5, 1.5, 2, 2];
   self.var_414bc881 = 0.5;
@@ -85,7 +85,7 @@ function function_3f369eaa() {
   }
 }
 
-function function_3076443(params) {
+function mechz_cleanup(params) {
   self endon(#"death");
 
   if(isDefined(self.attackable)) {
@@ -138,11 +138,11 @@ function function_64072d21(entity) {
 }
 
 function private function_32309e80(entity) {
-  return isDefined(entity.var_a8e56aa3) && entity.var_a8e56aa3 > gettime();
+  return isDefined(entity.nextgrenadetime) && entity.nextgrenadetime > gettime();
 }
 
 function private function_cdbe8d0a(entity) {
-  return isDefined(entity.var_e05f2c0a) && entity.var_e05f2c0a > gettime();
+  return isDefined(entity.nextflametime) && entity.nextflametime > gettime();
 }
 
 function function_43c21e81(entity) {
@@ -178,12 +178,12 @@ function function_3715dbff(entity) {
   target = isDefined(entity.favoriteenemy) ? entity.favoriteenemy : entity.attackable;
 
   if(isDefined(target) && entity.var_9329a57c < gettime()) {
-    if(namespace_3444cb7b::mechzisinsafezone(entity) && entity cansee(target)) {
+    if(mechzbehavior::mechzisinsafezone(entity) && entity cansee(target)) {
       distsqr = distancesquared(entity.origin, entity.favoriteenemy.origin);
       record3dtext("<dev string:x38>" + 225 + "<dev string:x55>" + 600 + "<dev string:x5a>" + sqrt(distsqr), entity.origin, (0, 1, 0));
       recordline(entity.origin, target.origin, (0, 1, 0));
 
-      if(!namespace_3444cb7b::mechzshouldshootgrenade(entity)) {
+      if(!mechzbehavior::mechzshouldshootgrenade(entity)) {
         if(function_cdbe8d0a(entity)) {
           awareness::set_state(entity, #"relocate");
           return;
@@ -267,14 +267,14 @@ function function_3a6dfa8b(entity) {
   if(var_9da770d9) {} else if(isPlayer(enemy)) {
     player_yaw = enemy getplayerangles()[1];
     var_ae507841 = anglesToForward((0, player_yaw, 0));
-    var_ba9c64fa = enemy.origin + var_ae507841 * var_8daf3ac3;
+    player_view_pos = enemy.origin + var_ae507841 * var_8daf3ac3;
 
-    recordsphere(var_ba9c64fa, 10, (0, 1, 0), "<dev string:x66>");
+    recordsphere(player_view_pos, 10, (0, 1, 0), "<dev string:x66>");
 
     var_3393a039 = 2147483647;
 
     foreach(pos in var_5c85bc30) {
-      dist_sqr = distancesquared(var_ba9c64fa, pos);
+      dist_sqr = distancesquared(player_view_pos, pos);
 
       if(dist_sqr < var_3393a039) {
         var_3393a039 = dist_sqr;
@@ -304,7 +304,7 @@ function function_6e7d7d1(entity) {
     goalinfo = entity function_4794d6a3();
     var_127a38a7 = distancesquared(goalinfo.goalpos, entity.origin);
 
-    if(!namespace_3444cb7b::mechzisinsafezone(entity) || goalinfo.isatgoal || var_127a38a7 < sqr(64)) {
+    if(!mechzbehavior::mechzisinsafezone(entity) || goalinfo.isatgoal || var_127a38a7 < sqr(64)) {
       awareness::set_state(entity, #"chase");
     }
   }

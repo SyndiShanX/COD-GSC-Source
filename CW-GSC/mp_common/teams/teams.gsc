@@ -459,7 +459,7 @@ function get_flag_carry_model(teamref) {
   return game.carry_flagmodels[teamref];
 }
 
-function function_fd110460(teamref) {
+function get_flag_icon(teamref) {
   assert(isDefined(game.carry_icon));
   assert(isDefined(game.carry_icon[teamref]));
   return game.carry_icon[teamref];

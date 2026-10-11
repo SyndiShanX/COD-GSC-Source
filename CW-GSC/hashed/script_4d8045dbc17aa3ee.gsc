@@ -36,7 +36,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_e857b038;
+#namespace doa_dev;
 
 function init() {
   callback::on_spawned(&on_bot_spawned);
@@ -64,7 +64,7 @@ function setupdevgui() {
   level waittill(#"doa_game_initialized");
   execdevgui("<dev string:x38>");
   function_61b604bf();
-  level thread function_d379ba37();
+  level thread devguithink();
 
   level.doa.var_598305fe = 0;
   level.doa.var_2e491399 = 0;
@@ -76,15 +76,15 @@ function setupdevgui() {
     level thread function_507d29b2();
   }
 
-  if(getdvarint(#"hash_63b27cb45671e35c", 0)) {
+  if(getdvarint(#"scr_doa_kingme_soak_think", 0)) {
     level.var_e5d89122 = 0;
 
-    if(getdvarint(#"hash_63b27cb45671e35c", 1) == 2) {
+    if(getdvarint(#"scr_doa_kingme_soak_think", 1) == 2) {
       level.var_e5d89122 = 1;
     }
 
-    setDvar(#"hash_63b27cb45671e35c", 0);
-    setDvar(#"hash_d874e4e73e9f18", 1);
+    setDvar(#"scr_doa_kingme_soak_think", 0);
+    setDvar(#"scr_doa_soak_think", 1);
     level thread function_8cac3f8c();
   }
 
@@ -92,26 +92,26 @@ function setupdevgui() {
     level thread function_8cac3f8c();
   }
 
-  if(getdvarint(#"hash_d874e4e73e9f18", 0) && !is_true(level.var_a095060b)) {
+  if(getdvarint(#"scr_doa_soak_think", 0) && !is_true(level.var_a095060b)) {
     level thread function_1552e594();
   }
 }
 
-function function_d379ba37() {
+function devguithink() {
   setDvar(#"zombie_devgui", "");
-  setDvar(#"hash_116f154050454a80", "");
+  setDvar(#"scr_spawn_pickup", "");
   setDvar(#"hash_58c5fb7998861ea3", "basic_zombie");
   setDvar(#"hash_4e8b5bae739da5a", "zombietron_lmg");
-  setDvar(#"hash_1c923c83363c543b", "");
-  setDvar(#"hash_6a3de42f6f3e6fd7", "");
-  setDvar(#"hash_4cd093f275a4cf7d", "");
-  setDvar(#"hash_2bdf0b4b3b54f5f9", "");
-  setDvar(#"hash_442e0c29ec279820", "");
-  setDvar(#"hash_5668d121a9e929c8", "");
+  setDvar(#"scr_spawn_room_name", "");
+  setDvar(#"scr_spawn_room", "");
+  setDvar(#"scr_arena_activate", "");
+  setDvar(#"scr_bonus_room_activate", "");
+  setDvar(#"scr_spawn_enemy", "");
+  setDvar(#"scr_wild_activate", "");
   setDvar(#"hash_2d6ac7bedd2e2d8", "");
 
   while(true) {
-    if(getdvarint(#"hash_d874e4e73e9f18", 0)) {
+    if(getdvarint(#"scr_doa_soak_think", 0)) {
       if(!is_true(level.var_a095060b)) {
         level thread function_1552e594();
       }
@@ -126,7 +126,7 @@ function function_d379ba37() {
       continue;
     }
 
-    origin = namespace_7f5aeb59::function_23e1f90f()[0].origin;
+    origin = doa_player_utility::function_23e1f90f()[0].origin;
     namespace_1e25ad94::debugmsg("Devgui Cmd-->" + cmd);
 
     switch (cmd) {
@@ -240,21 +240,21 @@ function function_d379ba37() {
 
         break;
       case #"hash_192ba0c0796a9ce8":
-        var_28979c91 = array::randomize(level.doa.var_fe92efd8);
+        fates = array::randomize(level.doa.var_fe92efd8);
         i = 0;
 
         foreach(player in getPlayers()) {
-          fate = var_28979c91[i];
+          fate = fates[i];
           i++;
-          player thread namespace_1c2a96f9::function_15a789ab(fate.var_c8386627);
+          player thread doa_fate::function_15a789ab(fate.var_c8386627);
           wait 0.5;
         }
 
         break;
       case #"fate":
-        player = namespace_7f5aeb59::function_23e1f90f()[0];
-        var_c8386627 = int(getdvarstring(#"hash_116f154050454a80"));
-        player thread namespace_1c2a96f9::function_15a789ab(var_c8386627);
+        player = doa_player_utility::function_23e1f90f()[0];
+        var_c8386627 = int(getdvarstring(#"scr_spawn_pickup"));
+        player thread doa_fate::function_15a789ab(var_c8386627);
         break;
       case #"bonusroom":
         level notify(#"round_over");
@@ -262,13 +262,13 @@ function function_d379ba37() {
         level thread function_de70888a();
         level namespace_ec06fe4a::function_b6b79fd1();
         namespace_ec06fe4a::clearallcorpses();
-        level.doa.var_848746c8 = getdvarstring(#"hash_2bdf0b4b3b54f5f9");
+        level.doa.var_848746c8 = getdvarstring(#"scr_bonus_room_activate");
         namespace_1e25ad94::debugmsg("Bonus room being forced to: " + level.doa.var_848746c8);
         break;
       case #"bonusroomsoak":
-        level.doa.var_848746c8 = getdvarstring(#"hash_2bdf0b4b3b54f5f9");
+        level.doa.var_848746c8 = getdvarstring(#"scr_bonus_room_activate");
         namespace_1e25ad94::debugmsg("Bonus room soak being forced to: " + level.doa.var_848746c8);
-        level thread namespace_5a917022::function_e5c7bce7();
+        level thread doa_bonus_room::function_e5c7bce7();
         break;
       case #"enemy":
         if(!isDefined(level.doa.var_39e3fa99)) {
@@ -276,7 +276,7 @@ function function_d379ba37() {
         }
 
         spot = [[level.doa.var_39e3fa99]] - > function_70fb5745().origin;
-        ai = doa_enemy::function_4e8ae191(doa_enemy::function_d7c5adee(getdvarstring(#"hash_442e0c29ec279820")), 1, spot);
+        ai = doa_enemy::function_4e8ae191(doa_enemy::function_d7c5adee(getdvarstring(#"scr_spawn_enemy")), 1, spot);
 
         if(isDefined(ai)) {
           ai notify(#"hash_737e3431bf19a6aa");
@@ -287,8 +287,8 @@ function function_d379ba37() {
         level thread function_43548cd2();
         break;
       case #"infinite_round":
-        isset = getdvarint(#"hash_5c718b756a54aaba", 0);
-        setDvar(#"hash_5c718b756a54aaba", isset ? 0 : 1);
+        isset = getdvarint(#"scr_doa_infinite_round", 0);
+        setDvar(#"scr_doa_infinite_round", isset ? 0 : 1);
         break;
       case #"hash_308e49e861ae4bf5":
         isset = getdvarint(#"hash_4c32f1957a11eb6b", 0);
@@ -296,17 +296,17 @@ function function_d379ba37() {
         break;
       case #"fly":
 
-        player = namespace_7f5aeb59::function_23e1f90f()[0];
+        player = doa_player_utility::function_23e1f90f()[0];
 
         if(!is_true(player.doa.infps)) {
-          player thread namespace_a4bedd45::function_1f704cee(1);
+          player thread namespace_a4bedd45::playerfpsforatime(1);
           adddebugcommand("<dev string:x54>");
           setsaveddvar(#"hash_7aa67f68d1a1b28d", 10);
           level doa_banner::function_7a0e5387();
           objective_setstate(10, "<dev string:x5e>");
           namespace_1e25ad94::function_8225da57();
         } else {
-          player notify(#"hash_7893364bd228d63e", {
+          player notify(#"doa_playerdumpfps", {
             #var_cff8d1e: 1
           });
           adddebugcommand("<dev string:x54>");
@@ -314,7 +314,7 @@ function function_d379ba37() {
 
         break;
       case #"arena_safety":
-        foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+        foreach(player in doa_player_utility::function_23e1f90f()) {
           player.doa.var_3cf36932 = !player.doa.var_3cf36932;
           namespace_1e25ad94::debugmsg("Arena Saftey for player (" + player.doa.color + ") is set to:" + (player.doa.var_3cf36932 ? "ON" : "OFF"));
         }
@@ -323,8 +323,8 @@ function function_d379ba37() {
       case #"arena":
         level.doa.var_39459d49 = 0;
         level.doa.var_e5ef2ab4 = 0;
-        arenaid = namespace_8c04284b::function_a7c5291d(getdvarstring(#"hash_4cd093f275a4cf7d"));
-        level thread namespace_8c04284b::function_41e097fc(arenaid);
+        arenaid = doa_arena::function_a7c5291d(getdvarstring(#"scr_arena_activate"));
+        level thread doa_arena::function_41e097fc(arenaid);
         break;
       case #"hash_348a45c1bc20d9b6":
         namespace_1e25ad94::function_4e3cfad("Forcing waveSpawner to CLASSIC");
@@ -451,7 +451,7 @@ function function_d379ba37() {
           wait 1;
         }
 
-        cmd = getdvarstring(#"hash_5668d121a9e929c8");
+        cmd = getdvarstring(#"scr_wild_activate");
         args = strtok(cmd, "@");
         level.doa.var_e15152e6 = args[0];
         level.doa.var_baeb966b = int(args[1]);
@@ -464,7 +464,7 @@ function function_d379ba37() {
         namespace_ec06fe4a::clearallcorpses();
         break;
       case #"flip":
-        namespace_8c04284b::function_a70ff03e(!level.doa.var_ecff3871);
+        doa_arena::function_a70ff03e(!level.doa.var_ecff3871);
         break;
       case #"hash_4ce30f9f2b25ddae":
         namespace_1e25ad94::function_8225da57();
@@ -480,8 +480,8 @@ function function_d379ba37() {
         level.doa.var_dcb11150 = !level.doa.var_dcb11150;
         break;
       case #"pickup":
-        namespace_1e25ad94::debugmsg("spawning pickup " + getdvarstring(#"hash_116f154050454a80"));
-        item = namespace_dfc652ee::function_6265bde4(getdvarstring(#"hash_116f154050454a80"));
+        namespace_1e25ad94::debugmsg("spawning pickup " + getdvarstring(#"scr_spawn_pickup"));
+        item = doa_pickups::function_6265bde4(getdvarstring(#"scr_spawn_pickup"));
 
         if(isDefined(item)) {
           if(isDefined(level.doa.var_39e3fa99)) {
@@ -489,56 +489,56 @@ function function_d379ba37() {
           }
 
           if([[item]] - > gettype() == 13) {
-            level namespace_dfc652ee::function_d06cbfe8(origin, 1, 256, undefined, item, 1);
+            level doa_pickups::function_d06cbfe8(origin, 1, 256, undefined, item, 1);
           } else {
-            level namespace_dfc652ee::function_83aea294(origin, 5, 256, item, undefined, 1);
+            level doa_pickups::function_83aea294(origin, 5, 256, item, undefined, 1);
           }
         }
 
         break;
       case #"pickup_pile":
         namespace_1e25ad94::debugmsg("Here is a bunch of stuff for you!");
-        level namespace_dfc652ee::function_ad7ac41b(origin, 20, 256, 0, 1);
+        level doa_pickups::function_ad7ac41b(origin, 20, 256, 0, 1);
         break;
       case #"weapon_pile":
         namespace_1e25ad94::debugmsg("Weapon aresenal incomming!!");
-        level namespace_dfc652ee::function_ad7ac41b(origin, 20, 256, 6, 1);
+        level doa_pickups::function_ad7ac41b(origin, 20, 256, 6, 1);
         break;
       case #"money":
         namespace_1e25ad94::debugmsg("big money, BIG PRIZES!");
-        level namespace_dfc652ee::function_68442ee7(origin, 20, 256);
-        level namespace_dfc652ee::function_68442ee7(origin, 20, 128, 1);
+        level doa_pickups::function_68442ee7(origin, 20, 256);
+        level doa_pickups::function_68442ee7(origin, 20, 128, 1);
         break;
       case #"hash_340cf8f497c2fa9":
         namespace_1e25ad94::debugmsg("Max Score Multiplier!");
 
-        foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+        foreach(player in doa_player_utility::function_23e1f90f()) {
           player.doa.score.var_a928c52e = level.doa.var_88be0b68;
         }
 
         break;
       case #"gem":
         namespace_1e25ad94::debugmsg("Gems!");
-        namespace_dfc652ee::function_d06cbfe8(origin, 20, 256);
+        doa_pickups::function_d06cbfe8(origin, 20, 256);
         break;
       case #"gempop":
         namespace_1e25ad94::debugmsg("Gems Launching!");
-        namespace_dfc652ee::function_d06cbfe8(origin, 1, 128, 1);
+        doa_pickups::function_d06cbfe8(origin, 1, 128, 1);
         break;
       case #"king":
         namespace_1e25ad94::debugmsg("Hail to the King baby!");
 
-        foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
-          player thread function_ddde8af6();
+        foreach(player in doa_player_utility::function_23e1f90f()) {
+          player thread kingme();
         }
 
         break;
-      case #"hash_32f10e7eebda6ed5":
+      case #"unking":
         level notify(#"hash_6b0c389ef8ac36b4");
         break;
       case #"kill":
         namespace_1e25ad94::debugmsg("death has been notified ...");
-        players = namespace_7f5aeb59::function_23e1f90f();
+        players = doa_player_utility::function_23e1f90f();
 
         if(players.size == 1) {
           player = players[0];
@@ -550,7 +550,7 @@ function function_d379ba37() {
         break;
       case #"kill_all":
         namespace_1e25ad94::debugmsg("death to all...");
-        players = namespace_7f5aeb59::function_23e1f90f();
+        players = doa_player_utility::function_23e1f90f();
 
         foreach(player in players) {
           player dodamage(player.health + 100, player.origin);
@@ -559,7 +559,7 @@ function function_d379ba37() {
         break;
       case #"hash_ca0bb68723c267c":
         namespace_1e25ad94::debugmsg("death to all bots...");
-        players = namespace_7f5aeb59::function_23e1f90f();
+        players = doa_player_utility::function_23e1f90f();
         bots = [];
         var_c8dd979c = (0, 0, 0);
         targetplayer = players[randomint(players.size)];
@@ -580,7 +580,7 @@ function function_d379ba37() {
 
         break;
       case #"max_score":
-        foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+        foreach(player in doa_player_utility::function_23e1f90f()) {
           player.doa.score.var_1397c196 = 500000000;
           player.doa.score.var_96798a01 = player.doa.score.var_1397c196;
         }
@@ -590,19 +590,19 @@ function function_d379ba37() {
         level.doa.var_2e491399 = !level.doa.var_2e491399;
 
         if(level.doa.var_2e491399) {
-          foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
-            player thread namespace_7f5aeb59::function_19616199();
+          foreach(player in doa_player_utility::function_23e1f90f()) {
+            player thread doa_player_utility::function_19616199();
           }
         }
 
         break;
       case #"bonustimeoutdisabletoggle":
-        namespace_5a917022::function_9da359eb();
+        doa_bonus_room::function_9da359eb();
         break;
       case #"hash_7fafc90102def2d4":
         level.doa.var_8f710e5d = 1;
         setDvar(#"hash_267a8e5d4aab4191", 1);
-      case #"hash_10ad94be51c3eb8e":
+      case #"kill_all_enemy":
         level flag::clear("doa_round_spawning");
         level notify(#"round_over");
         namespace_1e25ad94::debugmsg("Killing all enemy AI");
@@ -612,11 +612,11 @@ function function_d379ba37() {
         level namespace_ec06fe4a::function_b6b79fd1();
         namespace_ec06fe4a::clearallcorpses();
         break;
-      case #"hash_7fe8e0602be387d1":
-        setDvar(#"hash_d874e4e73e9f18", getdvarint(#"hash_d874e4e73e9f18", 0) < 0 ? 1 : 0);
+      case #"doasoak":
+        setDvar(#"scr_doa_soak_think", getdvarint(#"scr_doa_soak_think", 0) < 0 ? 1 : 0);
         break;
-      case #"hash_2de1d3669fb18997":
-        setDvar(#"hash_d874e4e73e9f18", 2);
+      case #"doafastsoak":
+        setDvar(#"scr_doa_soak_think", 2);
 
         if(!isDefined(level.var_e5d89122)) {
           level.var_e5d89122 = 0;
@@ -625,16 +625,16 @@ function function_d379ba37() {
         level.var_e5d89122 = !level.var_e5d89122;
         break;
       case #"hash_5f8b768219110179":
-        setDvar(#"hash_d874e4e73e9f18", 3);
+        setDvar(#"scr_doa_soak_think", 3);
         break;
       case #"hash_7d4010bf3a19e3a9":
         level thread function_c019882();
         break;
       case #"hash_157b8f006d6b5973":
-        setDvar(#"hash_d874e4e73e9f18", 4);
+        setDvar(#"scr_doa_soak_think", 4);
         break;
       case #"hash_ea8a4f8c1fc16b7":
-        setDvar(#"hash_d874e4e73e9f18", 5);
+        setDvar(#"scr_doa_soak_think", 5);
         break;
       case #"hash_5701d70855a0ab97":
         namespace_4dae815d::function_21cd3890(level.doa.world_state == 4 ? 0 : 4);
@@ -642,7 +642,7 @@ function function_d379ba37() {
       case #"hash_733328256697a260":
         setDvar(#"hash_18f07d96e21f2083", 1);
       case #"gameover":
-        players = namespace_7f5aeb59::function_23e1f90f();
+        players = doa_player_utility::function_23e1f90f();
 
         foreach(player in players) {
           player.doa.score.lives = 0;
@@ -656,8 +656,8 @@ function function_d379ba37() {
         break;
       case #"hash_6f957c9ffba3bfe1":
         level.doa.roundnumber += 10;
-        level.doa.var_f4cf4e3 = namespace_8c04284b::function_f15b9f04(level.doa.roundnumber);
-        level.doa.zombie_health = namespace_8c04284b::function_962e9d92(level.doa.roundnumber);
+        level.doa.var_f4cf4e3 = doa_arena::function_f15b9f04(level.doa.roundnumber);
+        level.doa.zombie_health = doa_arena::function_962e9d92(level.doa.roundnumber);
         namespace_4dae815d::function_e22d3978(level.doa.roundnumber);
         namespace_1e25ad94::debugmsg("Round set to: " + level.doa.roundnumber);
         break;
@@ -668,8 +668,8 @@ function function_d379ba37() {
           level.doa.roundnumber = 1;
         }
 
-        level.doa.var_f4cf4e3 = namespace_8c04284b::function_f15b9f04(level.doa.roundnumber);
-        level.doa.zombie_health = namespace_8c04284b::function_962e9d92(level.doa.roundnumber);
+        level.doa.var_f4cf4e3 = doa_arena::function_f15b9f04(level.doa.roundnumber);
+        level.doa.zombie_health = doa_arena::function_962e9d92(level.doa.roundnumber);
         namespace_4dae815d::function_e22d3978(level.doa.roundnumber);
         namespace_1e25ad94::debugmsg("Round set to: " + level.doa.roundnumber);
         break;
@@ -678,12 +678,12 @@ function function_d379ba37() {
         break;
       case #"hash_609ef494db2ab837":
         player = getPlayers()[0];
-        level namespace_dfc652ee::itemspawn(namespace_dfc652ee::function_6265bde4(getDvar(#"hash_4e8b5bae739da5a", "zombietron_lmg")), player.origin, undefined, undefined, 1, undefined, undefined, undefined, player);
+        level doa_pickups::itemspawn(doa_pickups::function_6265bde4(getDvar(#"hash_4e8b5bae739da5a", "zombietron_lmg")), player.origin, undefined, undefined, 1, undefined, undefined, undefined, player);
         break;
     }
 
     setDvar(#"zombie_devgui", "");
-    setDvar(#"hash_116f154050454a80", "");
+    setDvar(#"scr_spawn_pickup", "");
   }
 }
 
@@ -714,8 +714,8 @@ function function_9ec06f93() {
   self endon("65cc86f4af8abd05");
   level endon(#"hash_5775b641c4a1dff6", #"game_over");
   level.doa.var_3beef3ad = 1;
-  var_4df46b9b = 100;
-  var_f956d12 = 200;
+  xoff = 100;
+  yoff = 200;
   level doa_banner::function_7a0e5387();
   itemdefs = [];
 
@@ -733,8 +733,8 @@ function function_9ec06f93() {
 
   while(true) {
     waitframe(1);
-    x = var_4df46b9b;
-    y = var_f956d12;
+    x = xoff;
+    y = yoff;
     namespace_1e25ad94::function_70e370a(x, y, "ITEM STATS", (1, 1, 1), 1, 2, 0.05);
     y += 40;
     var_914554bd = 0;
@@ -762,7 +762,7 @@ function function_9ec06f93() {
         }
       }
 
-      if(namespace_dfc652ee::function_4821dfcf([[def]] - > gettype())) {
+      if(doa_pickups::function_4821dfcf([[def]] - > gettype())) {
         other = 0;
 
         if((level.doa.var_ca7d285b & 4) == 0) {
@@ -774,7 +774,7 @@ function function_9ec06f93() {
         continue;
       }
 
-      var_914554bd += namespace_dfc652ee::function_72e8509(def);
+      var_914554bd += doa_pickups::function_72e8509(def);
     }
 
     text = "ITEMS SPAWNED: " + var_914554bd + " ITEM MASK - MONEY(" + ((level.doa.var_ca7d285b & 1) != 0 ? "ON" : "OFF") + ")WEAPONS(" + ((level.doa.var_ca7d285b & 2) != 0 ? "ON" : "OFF") + ")VEHICLES(" + ((level.doa.var_ca7d285b & 4) != 0 ? "ON" : "OFF") + ")OHTER(" + ((level.doa.var_ca7d285b & 8) != 0 ? "ON" : "OFF") + ")";
@@ -822,7 +822,7 @@ function function_9ec06f93() {
         }
       }
 
-      if(namespace_dfc652ee::function_4821dfcf([[def]] - > gettype())) {
+      if(doa_pickups::function_4821dfcf([[def]] - > gettype())) {
         other = 0;
 
         if((level.doa.var_ca7d285b & 4) == 0) {
@@ -875,7 +875,7 @@ function function_9ec06f93() {
       y += 20;
 
       if(y >= 1020) {
-        y = var_f956d12 + 70;
+        y = yoff + 70;
         x += 770;
       }
     }
@@ -911,18 +911,18 @@ function function_ec4525c8() {
   self endon("18b3bd30d8aff38c");
   level endon(#"hash_1468ab65b8d72e27", #"game_over");
   level.doa.var_b9615dfc = 1;
-  var_4df46b9b = 100;
-  var_f956d12 = 200;
+  xoff = 100;
+  yoff = 200;
   level doa_banner::function_7a0e5387();
 
-  foreach(room in level.doa.var_8f6ccf63) {
+  foreach(room in level.doa.bonus_rooms) {
     room.var_d52d06ee = 0;
   }
 
   while(true) {
     waitframe(1);
-    x = var_4df46b9b;
-    y = var_f956d12;
+    x = xoff;
+    y = yoff;
     namespace_1e25ad94::function_70e370a(x, y, "BONUS ROOM STATS", (1, 1, 1), 1, 2, 0.05);
     y += 40;
     text = "BONUS ROOMS SPAWNED: " + level.doa.var_ffb709d8 + "LAST ROUND: " + level.doa.var_f8e35dd0;
@@ -935,11 +935,11 @@ function function_ec4525c8() {
     text = "ROUND: " + level.doa.roundnumber + "RATIO: " + int(level.doa.var_ffb709d8 / level.doa.roundnumber * 100 + 0.5) + "%";
     namespace_1e25ad94::function_70e370a(x, y, text, (1, 1, 1), 1, 1.3, 0.05);
     y += 40;
-    text = "ROOMS: " + level.doa.var_8f6ccf63.size;
+    text = "ROOMS: " + level.doa.bonus_rooms.size;
     namespace_1e25ad94::function_70e370a(x, y, text, (1, 1, 1), 1, 1.3, 0.05);
     y += 30;
 
-    foreach(room in level.doa.var_8f6ccf63) {
+    foreach(room in level.doa.bonus_rooms) {
       color = (1, 1, 1);
 
       if(room === level.doa.var_6ab50f27) {
@@ -969,8 +969,8 @@ function function_e25eba77() {
   self endon("7a49d9e77ae9cf35");
   level endon(#"hash_58f1eda6545e88e3", #"game_over");
   level.doa.var_c8add526 = 1;
-  var_4df46b9b = 100;
-  var_f956d12 = 500;
+  xoff = 100;
+  yoff = 500;
 
   while(level.doa.var_c8add526) {
     waitframe(1);
@@ -979,8 +979,8 @@ function function_e25eba77() {
       continue;
     }
 
-    x = var_4df46b9b;
-    y = var_f956d12;
+    x = xoff;
+    y = yoff;
     namespace_1e25ad94::function_70e370a(x, y, "WILD STATS", (1, 1, 1), 1, 2, 0.05);
     y += 40;
 
@@ -1039,7 +1039,7 @@ function function_e25eba77() {
     text = "TOTAL PLAYER DEATHS: " + level.doa.var_bcc1fc05;
     namespace_1e25ad94::function_70e370a(x, y, text, (1, 1, 1), 1, 1, 0.05);
 
-    foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+    foreach(player in doa_player_utility::function_23e1f90f()) {
       if(isDefined(player.doa.color)) {
         y += 20;
         text = "PLAYER (" + player.doa.color + ") TARGETED BY " + player.doa.var_ab338943 + " BASIC AI" + (is_true(player.laststand) ? " (laststand)" : "");
@@ -1051,7 +1051,7 @@ function function_e25eba77() {
     text = "PLAYER PELTS";
     namespace_1e25ad94::function_70e370a(x, y, text, (1, 1, 1), 1, 1, 0.05);
 
-    foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+    foreach(player in doa_player_utility::function_23e1f90f()) {
       if(isDefined(player.doa.color)) {
         y += 20;
         text = "PLAYER (" + player.doa.color + ") PELTMASK: ";
@@ -1070,11 +1070,11 @@ function function_e25eba77() {
     text = "PLAYER GRIND";
     namespace_1e25ad94::function_70e370a(x, y, text, (1, 1, 1), 1, 1, 0.05);
 
-    foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+    foreach(player in doa_player_utility::function_23e1f90f()) {
       if(isDefined(player.doa.color)) {
         y += 20;
-        var_3c414369 = player.doa.var_370ac26d - player.doa.var_1f5b5d6b;
-        text = "PLAYER (" + player.doa.color + ")WILD XP_GAIN: " + var_3c414369 + " TOT XP_GAIN: " + player.doa.var_370ac26d + " GRIND CURRENCY: " + player.doa.var_3b5fa231 + " UNCOMMITTED GRIND CURRENCY: " + player.doa.var_d362196a;
+        var_3c414369 = player.doa.xp_gain - player.doa.var_1f5b5d6b;
+        text = "PLAYER (" + player.doa.color + ")WILD XP_GAIN: " + var_3c414369 + " TOT XP_GAIN: " + player.doa.xp_gain + " GRIND CURRENCY: " + player.doa.var_3b5fa231 + " UNCOMMITTED GRIND CURRENCY: " + player.doa.var_d362196a;
         namespace_1e25ad94::function_70e370a(x, y, text, (1, 1, 1), 1, 1, 0.05);
         y += 20;
         var_d69e87f7 = var_3c414369 / duration / 60000;
@@ -1092,8 +1092,8 @@ function function_8f024d05() {
   level.doa.var_c560430c = 1;
   var_bc153d9a = getdvarint(#"hash_5cc1c07efe048c56", 300);
   var_af82a000 = var_bc153d9a - 30;
-  var_4df46b9b = 100;
-  var_f956d12 = 150;
+  xoff = 100;
+  yoff = 150;
 
   while(true) {
     waitframe(1);
@@ -1106,8 +1106,8 @@ function function_8f024d05() {
       continue;
     }
 
-    x = var_4df46b9b;
-    y = var_f956d12;
+    x = xoff;
+    y = yoff;
     namespace_1e25ad94::function_70e370a(x, y, "ROUND " + level.doa.roundnumber + " STATS", (1, 1, 1), 1, 2, 0.05);
     y += 40;
 
@@ -1124,11 +1124,11 @@ function function_8f024d05() {
 
     var_acfdd742 = "(CLASSIC DOA)";
 
-    if(level.doa.var_6a0340ad === 2) {
+    if(level.doa.wavespawner === 2) {
       var_acfdd742 = "(HERD)";
     }
 
-    if(level.doa.var_6a0340ad === 3) {
+    if(level.doa.wavespawner === 3) {
       var_acfdd742 = "(GATEMASTER)";
     }
 
@@ -1163,7 +1163,7 @@ function function_8f024d05() {
       y += 20;
     }
 
-    if(level.doa.var_6a0340ad != 3) {
+    if(level.doa.wavespawner != 3) {
       text = "WAVES REMAINING: " + level.doa.var_aa7fba18;
     } else {
       remaining = float(level.doa.var_8f91d36b - gettime()) / 1000;
@@ -1183,7 +1183,7 @@ function function_8f024d05() {
       }
 
       text = "GATES OPEN: ";
-      var_8c2908e3 = namespace_8c04284b::function_53678480();
+      var_8c2908e3 = doa_arena::function_53678480();
 
       foreach(gate in var_8c2908e3) {
         text = text + gate + " ";
@@ -1193,7 +1193,7 @@ function function_8f024d05() {
     namespace_1e25ad94::function_70e370a(x, y, text, (1, 1, 1), 1, 1, 0.05);
     y += 20;
 
-    if(level.doa.var_6a0340ad == 2) {
+    if(level.doa.wavespawner == 2) {
       text = "QUEUE SPAWN ENTRIES: " + level.doa.var_dcbded2.size + " AI SPAWN EXPIRED: " + level.doa.var_2b4e2465;
       namespace_1e25ad94::function_70e370a(x, y, text, (1, 1, 1), 1, 1, 0.05);
       y += 20;
@@ -1244,7 +1244,7 @@ function function_8f024d05() {
     text = "TOTAL PLAYER DEATHS: " + level.doa.var_bcc1fc05;
     namespace_1e25ad94::function_70e370a(x, y, text, (1, 1, 1), 1, 1, 0.05);
 
-    foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+    foreach(player in doa_player_utility::function_23e1f90f()) {
       if(isDefined(player.doa.color)) {
         y += 20;
         text = "PLAYER (" + player.doa.color + ") TARGETED BY " + player.doa.var_ab338943 + " BASIC AI" + (is_true(player.laststand) ? " (laststand)" : "");
@@ -1256,7 +1256,7 @@ function function_8f024d05() {
     text = "PLAYER PELTS";
     namespace_1e25ad94::function_70e370a(x, y, text, (1, 1, 1), 1, 1, 0.05);
 
-    foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+    foreach(player in doa_player_utility::function_23e1f90f()) {
       if(isDefined(player.doa.color)) {
         y += 20;
         text = "PLAYER (" + player.doa.color + ") PELTMASK: ";
@@ -1275,10 +1275,10 @@ function function_8f024d05() {
     text = "PLAYER GRIND";
     namespace_1e25ad94::function_70e370a(x, y, text, (1, 1, 1), 1, 1, 0.05);
 
-    foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+    foreach(player in doa_player_utility::function_23e1f90f()) {
       if(isDefined(player.doa.color)) {
         y += 20;
-        text = "PLAYER (" + player.doa.color + ")XP_GAIN: " + player.doa.var_370ac26d + " GRIND CURRENCY: " + player.doa.var_3b5fa231 + " UNCOMMITTED GRIND CURRENCY: " + player.doa.var_d362196a;
+        text = "PLAYER (" + player.doa.color + ")XP_GAIN: " + player.doa.xp_gain + " GRIND CURRENCY: " + player.doa.var_3b5fa231 + " UNCOMMITTED GRIND CURRENCY: " + player.doa.var_d362196a;
         namespace_1e25ad94::function_70e370a(x, y, text, (1, 1, 1), 1, 1, 0.05);
       }
     }
@@ -1287,7 +1287,7 @@ function function_8f024d05() {
     text = "PLAYER ACTIVITY";
     namespace_1e25ad94::function_70e370a(x, y, text, (1, 1, 1), 1, 1, 0.05);
 
-    foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+    foreach(player in doa_player_utility::function_23e1f90f()) {
       if(!isDefined(player.doa.var_87c1cd32)) {
         player.doa.var_87c1cd32 = 0;
       }
@@ -1407,24 +1407,24 @@ function function_c93506fb() {
 }
 
 function function_507d29b2() {
-  while(namespace_7f5aeb59::function_23e1f90f().size == 0) {
+  while(doa_player_utility::function_23e1f90f().size == 0) {
     waitframe(1);
   }
 
-  foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
-    player thread namespace_7f5aeb59::function_19616199();
+  foreach(player in doa_player_utility::function_23e1f90f()) {
+    player thread doa_player_utility::function_19616199();
   }
 }
 
 function function_8cac3f8c() {
-  while(namespace_7f5aeb59::function_23e1f90f().size == 0) {
+  while(doa_player_utility::function_23e1f90f().size == 0) {
     waitframe(1);
   }
 
   namespace_1e25ad94::debugmsg("Hail to the King baby!");
 
-  foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
-    player thread function_ddde8af6(1);
+  foreach(player in doa_player_utility::function_23e1f90f()) {
+    player thread kingme(1);
   }
 }
 
@@ -1433,7 +1433,7 @@ function function_de70888a() {
   namespace_ec06fe4a::function_de70888a();
 }
 
-function function_ddde8af6(delay = 0.1) {
+function kingme(delay = 0.1) {
   self notify("213d301a5d2a55a2");
   self endon("213d301a5d2a55a2");
   self endon(#"disconnect");
@@ -1506,7 +1506,7 @@ function function_1552e594() {
 
   while(true) {
     waitframe(1);
-    guys = namespace_7f5aeb59::function_23e1f90f();
+    guys = doa_player_utility::function_23e1f90f();
 
     if(guys.size == 0) {
       continue;
@@ -1532,7 +1532,7 @@ function function_1552e594() {
       break;
     }
 
-    guys = namespace_7f5aeb59::function_23e1f90f();
+    guys = doa_player_utility::function_23e1f90f();
 
     if(isDefined(level.doa.var_39e3fa99)) {
       var_271662e8 = [[level.doa.var_39e3fa99]] - > function_dfb49846();
@@ -1573,14 +1573,14 @@ function function_1552e594() {
           if(isDefined(level.doa.var_a77e6349)) {
             if(name === "jungle_1" && section.id === 2) {
               loc = getEnt("room_of_fate_shaft_trigger", "targetname").origin;
-              guys = namespace_7f5aeb59::function_23e1f90f();
+              guys = doa_player_utility::function_23e1f90f();
               guys[0] setOrigin(loc + (0, 0, 32));
             } else {
               [[level.doa.var_a77e6349]] - > function_411b63ca();
             }
           }
 
-          namespace_7f5aeb59::function_f8645db3(estimate.xp);
+          doa_player_utility::function_f8645db3(estimate.xp);
         }
       }
     } else if(isDefined(level.doa.teleporter) && randomint(5) == 0) {
@@ -1635,7 +1635,7 @@ function function_1552e594() {
       continue;
     }
 
-    if(getdvarint(#"hash_d874e4e73e9f18", 0) != 5 && getdvarint(#"hash_4a0c2338e71a658e", 1) && getPlayers().size < 4 && randomint(100) < 30) {
+    if(getdvarint(#"scr_doa_soak_think", 0) != 5 && getdvarint(#"hash_4a0c2338e71a658e", 1) && getPlayers().size < 4 && randomint(100) < 30) {
       bot = bot::add_bot(#"allies", function_a161addf(), "DOA");
 
       if(isDefined(bot) && level.doa.world_state == 0 && isDefined(level.doa.var_39e3fa99)) {
@@ -1670,7 +1670,7 @@ function function_b255a702() {
         arena = 0;
       }
 
-      level thread namespace_8c04284b::function_41e097fc(arena);
+      level thread doa_arena::function_41e097fc(arena);
     }
 
     waitframe(1);
@@ -1680,7 +1680,7 @@ function function_b255a702() {
 function function_a161addf() {
   colors = array("green", "blue", "red", "yellow");
   used = [];
-  guys = namespace_7f5aeb59::function_23e1f90f();
+  guys = doa_player_utility::function_23e1f90f();
 
   foreach(guy in guys) {
     used[used.size] = guy.doa.color;
@@ -1697,7 +1697,7 @@ function function_b4d99705() {
   wait randomintrange(30, 180);
 
   if(level.doa.world_state == 4) {
-    guys = namespace_7f5aeb59::function_23e1f90f();
+    guys = doa_player_utility::function_23e1f90f();
 
     foreach(guy in guys) {
       guy setOrigin(guy.doa.var_11abc438);
@@ -1726,7 +1726,7 @@ function function_be602f7c() {
   }
 
   if(randomint(100) > 80) {
-    self notify(#"hash_7893364bd228d63e");
+    self notify(#"doa_playerdumpfps");
   }
 
   while(isDefined(self)) {
@@ -1738,16 +1738,16 @@ function function_be602f7c() {
 
     if(randomint(100) > 50) {
       var_9cf94ae9 = undefined;
-      var_d94778ea = getEntArray("a_pickup_item", "script_noteworthy");
+      pickupsitems = getEntArray("a_pickup_item", "script_noteworthy");
 
-      foreach(item in var_d94778ea) {
+      foreach(item in pickupsitems) {
         if([[item.def]] - > gettype() === 15) {
           var_9cf94ae9 = item;
         }
       }
 
-      if(var_d94778ea.size > 0 && !isDefined(var_9cf94ae9)) {
-        var_9cf94ae9 = var_d94778ea[randomint(var_d94778ea.size)];
+      if(pickupsitems.size > 0 && !isDefined(var_9cf94ae9)) {
+        var_9cf94ae9 = pickupsitems[randomint(pickupsitems.size)];
       }
 
       if(isDefined(var_9cf94ae9)) {
@@ -1780,8 +1780,8 @@ function function_a4037f83(pickup) {
     return;
   }
 
-  level thread namespace_1e25ad94::debugcircle(pickup.origin + (0, 0, 20), 30, 3, self namespace_7f5aeb59::function_5934bbc8());
-  level thread namespace_1e25ad94::debugline(self.origin + (0, 0, 20), pickup.origin + (0, 0, 20), 3, self namespace_7f5aeb59::function_5934bbc8());
+  level thread namespace_1e25ad94::debugcircle(pickup.origin + (0, 0, 20), 30, 3, self doa_player_utility::function_5934bbc8());
+  level thread namespace_1e25ad94::debugline(self.origin + (0, 0, 20), pickup.origin + (0, 0, 20), 3, self doa_player_utility::function_5934bbc8());
   tries = 5;
 
   while(isDefined(pickup) && tries) {
@@ -1830,17 +1830,17 @@ function function_3a2701da() {
   while(true) {
     wait 10;
 
-    if(namespace_dfc652ee::function_69cafbe0() < 5) {
-      namespace_dfc652ee::function_ad7ac41b(getPlayers()[0].origin, 12, 1024);
-      namespace_dfc652ee::function_ad7ac41b(getPlayers()[0].origin, 8, 1024, 6);
-      namespace_dfc652ee::function_ad7ac41b(getPlayers()[0].origin, 8, 1024, 1);
+    if(doa_pickups::function_69cafbe0() < 5) {
+      doa_pickups::function_ad7ac41b(getPlayers()[0].origin, 12, 1024);
+      doa_pickups::function_ad7ac41b(getPlayers()[0].origin, 8, 1024, 6);
+      doa_pickups::function_ad7ac41b(getPlayers()[0].origin, 8, 1024, 1);
     }
   }
 }
 
 function function_61b604bf() {
   var_663588d = "<dev string:x6b>";
-  var_b0d28a7 = "<dev string:x85>";
+  sep = "<dev string:x85>";
 
   foreach(def in level.doa.pickups.itemdefs) {
     if([[def]] - > gettype() == 1) {
@@ -1856,7 +1856,7 @@ function function_61b604bf() {
     }
 
     name = hashtostring([[def]] - > getname());
-    toks = strtok(name, var_b0d28a7);
+    toks = strtok(name, sep);
     label = var_663588d;
 
     for(i = 1; i < toks.size; i++) {
@@ -1879,7 +1879,7 @@ function function_61b604bf() {
     }
 
     name = hashtostring([[def]] - > getname());
-    toks = strtok(name, var_b0d28a7);
+    toks = strtok(name, sep);
     label = var_663588d;
 
     for(i = 1; i < toks.size; i++) {
@@ -1902,7 +1902,7 @@ function function_61b604bf() {
     }
 
     name = hashtostring([[def]] - > getname());
-    toks = strtok(name, var_b0d28a7);
+    toks = strtok(name, sep);
     label = var_663588d;
 
     for(i = 1; i < toks.size; i++) {
@@ -2044,7 +2044,7 @@ function function_598305fe() {
   wait 2;
   namespace_ec06fe4a::clearallcorpses();
   level.doa.var_ecff3871 = 0;
-  namespace_8c04284b::function_a70ff03e(level.doa.var_ecff3871);
+  doa_arena::function_a70ff03e(level.doa.var_ecff3871);
   doa_banner::function_7a0e5387();
   level notify(#"hash_40a4d01c20db352c");
   [[level.doa.var_39e3fa99]] - > setpaused(1);
@@ -2076,7 +2076,7 @@ function function_598305fe() {
       victim = doa_enemy::function_db55a448(doa_enemy::function_d7c5adee(var_94f3b914), level.doa.dev.var_85d6cfdf.origin);
       victim.var_6ea9e4cf = 1;
       victim.var_9540e8e7 = 1;
-      victim namespace_83eb6304::turnofffx("<dev string:x14b>");
+      victim doa_fx::turnofffx("<dev string:x14b>");
       victim.takedamage = 1;
       victim namespace_ec06fe4a::function_2f4b0f9(victim.health);
       victim forceteleport(level.doa.dev.var_85d6cfdf.origin, level.doa.dev.var_85d6cfdf.angles);
@@ -2233,12 +2233,12 @@ function function_ade3e372() {
     return;
   }
 
-  foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
-    player thread function_ddde8af6();
+  foreach(player in doa_player_utility::function_23e1f90f()) {
+    player thread kingme();
   }
 
   while(true) {
-    foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+    foreach(player in doa_player_utility::function_23e1f90f()) {
       player dodamage(player.health + 100, player.origin);
     }
 

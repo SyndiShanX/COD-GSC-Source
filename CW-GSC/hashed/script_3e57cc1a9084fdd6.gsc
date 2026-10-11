@@ -88,7 +88,7 @@ function private function_cef412a7(einflictor, eattacker, idamage, idflags, smea
 }
 
 function function_51d21736() {
-  self.ai.var_870d0893 = 1;
+  self.ai.rex_mp_swamp_concrete_debris = 1;
   self callback::function_d8abfc3d(#"on_ai_melee", &namespace_85745671::zombie_on_melee);
   self callback::function_d8abfc3d(#"hash_45b50cc48ee7f9d8", &function_69c3e2ac);
   self callback::function_d8abfc3d(#"hash_3bb51ce51020d0eb", &namespace_85745671::function_16e2f075);
@@ -124,7 +124,7 @@ function function_26a59150() {
 }
 
 function function_e79ec851() {
-  function_c2400b01();
+  function_84edfab0();
 }
 
 function function_2272dcba(params) {}
@@ -142,7 +142,7 @@ function private function_9c573bc6(entity) {
   self collidewithactors(1);
 }
 
-function function_c2400b01() {
+function function_84edfab0() {
   self endon(#"death");
   self.has_awareness = 1;
   self.ignorelaststandplayers = 1;
@@ -257,11 +257,11 @@ function private function_6f24d732(params) {
   self clientfield::set("sndAwarenessChange", 0);
 
   if(self.subarchetype === #"hash_2a5479b83161cb35") {
-    self playSound(#"hash_6e603d5f1970365b");
+    self playSound(#"zmb_vocals_plaguehound_death");
     return;
   }
 
-  self playSound(#"hash_120ccc6f833fa6dc");
+  self playSound(#"vox_ai_hellhound_death");
 }
 
 function private on_dog_killed(params) {
@@ -333,7 +333,7 @@ function function_80f985a4(behaviortreeentity) {
 }
 
 function function_2bf6dd1c(entity) {
-  barricade = entity.var_597f08bf;
+  barricade = entity.traversal_blocker;
 
   if(isDefined(barricade)) {
     playFX(#"hash_215c503e2406cf77", barricade.origin);

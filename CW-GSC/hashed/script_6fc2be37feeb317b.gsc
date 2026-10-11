@@ -185,7 +185,7 @@ function function_5b75a557(eventstruct) {
     }
 
     if(!level.var_2457162c sr_weapon_upgrade_menu::is_open(player) && !player clientfield::get_player_uimodel("hudItems.srOverlayOpen")) {
-      player notify(#"hash_5f178db4550eeae9");
+      player notify(#"sroverlayopened");
       level.var_2457162c sr_weapon_upgrade_menu::open(player, 0);
       player thread function_4609e67c(machine, self);
       player zm_utility_zsurvival::function_14bada94();
@@ -418,7 +418,7 @@ function function_d2b370d7(aat_name, var_c3317960) {
 }
 
 function function_4609e67c(machine, trigger) {
-  self endon(#"hash_5f178db4550eeae9");
+  self endon(#"sroverlayopened");
   trigger sethintstringforplayer(self, "");
 
   if(isDefined(machine.objectiveid)) {
@@ -527,13 +527,13 @@ function function_4609e67c(machine, trigger) {
                     self playlocalsound(#"hash_51ce55cb5e478c26");
                     break;
                   case #"ammomod_cryofreeze":
-                    self playlocalsound(#"hash_110bd5fceb403850");
+                    self playlocalsound(#"uin_weapupgrade_purchase_frostbite");
                     break;
                   case #"ammomod_brainrot":
-                    self playlocalsound(#"hash_26a2938f2f36ad31");
+                    self playlocalsound(#"uin_weapupgrade_purchase_brainrot");
                     break;
                   case #"ammomod_deadwire":
-                    self playlocalsound(#"hash_55e994939fce271b");
+                    self playlocalsound(#"uin_weapupgrade_purchase_deadwire");
                     break;
                 }
 
@@ -597,7 +597,7 @@ function function_4609e67c(machine, trigger) {
           }
 
           break;
-        case #"hash_383c519d3bdac984":
+        case #"upgrade_menu_close":
           self notify(#"hash_213991f4845a7f0f");
           self function_6c71e778(machine, trigger);
           return;

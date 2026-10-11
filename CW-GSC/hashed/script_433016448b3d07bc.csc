@@ -29,27 +29,27 @@ function function_91c6e82a() {
   var_f712f165 = struct::get_array("snd_power_fluorescent", "targetname");
 
   foreach(light in var_f712f165) {
-    playSound(0, #"hash_44278e96b96ae9d5", light.origin);
+    playSound(0, #"evt_power_fluorescent", light.origin);
   }
 
   var_da9a899e = struct::get_array("snd_power_tungsten", "targetname");
 
   foreach(light in var_da9a899e) {
-    playSound(0, #"hash_4c833a65c5fc579d", light.origin);
+    playSound(0, #"evt_power_tungsten", light.origin);
   }
 }
 
 function function_2f3017ad(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump) {
     if(bwasdemojump == 1) {
-      function_5ea2c6e3("cmn_duck_aux_2_0", 3, 1);
+      addsubmix("cmn_duck_aux_2_0", 3, 1);
     }
 
     function_21fee83f(bwasdemojump);
     return;
   }
 
-  function_ed62c9c2("cmn_duck_aux_2_0", 3);
+  clearsubmix("cmn_duck_aux_2_0", 3);
   function_21fee83f(0);
 }
 
@@ -66,8 +66,8 @@ function function_21fee83f(var_c4f44e2) {
   }
 
   if(var_c4f44e2 === 2) {
-    function_672403ca("mute_underscore_aboveground", 1, 1);
-    function_672403ca("mute_underscore_belowground", 1, 1);
+    blendsubmix("mute_underscore_aboveground", 1, 1);
+    blendsubmix("mute_underscore_belowground", 1, 1);
     level.var_c5cba082 = 1;
     return;
   }
@@ -88,19 +88,19 @@ function function_21fee83f(var_c4f44e2) {
     }
 
     if(var_c4f44e2 === 0) {
-      function_672403ca("mute_underscore_aboveground", 5, 0);
-      function_672403ca("mute_underscore_belowground", 5, 1);
+      blendsubmix("mute_underscore_aboveground", 5, 0);
+      blendsubmix("mute_underscore_belowground", 5, 1);
       return;
     }
 
-    function_672403ca("mute_underscore_aboveground", 5, 1);
-    function_672403ca("mute_underscore_belowground", 5, 0);
+    blendsubmix("mute_underscore_aboveground", 5, 1);
+    blendsubmix("mute_underscore_belowground", 5, 0);
   }
 }
 
 function function_12b1d8eb() {
-  function_5ea2c6e3("mute_underscore_aboveground", 0);
-  function_5ea2c6e3("mute_underscore_belowground", 0);
+  addsubmix("mute_underscore_aboveground", 0);
+  addsubmix("mute_underscore_belowground", 0);
   util::waitforclient(0);
   wait 50;
   audio::playloopat("mus_underscore_aboveground_loop_0", (0, 0, 0));
@@ -178,19 +178,19 @@ function function_ec54a907(localclientnum, oldval, newval, bnewent, binitialsnap
 
       foreach(location in var_27cb9568) {
         soundstoploopemitter("amb_train_alarm_bell_lp", location);
-        playSound(fieldname, #"hash_7d743a5e64a0e1d", location);
+        playSound(fieldname, #"amb_train_alarm_bell_stop", location);
         wait randomfloatrange(0.25, 0.75);
       }
 
       break;
     case 5:
-      function_5ea2c6e3("zmb_platinum_bossfight", 5, 1);
+      addsubmix("zmb_platinum_bossfight", 5, 1);
       break;
     case 6:
-      function_ed62c9c2("zmb_platinum_bossfight", 5);
+      clearsubmix("zmb_platinum_bossfight", 5);
       break;
     case 7:
-      function_5ea2c6e3("zmb_step_8", 1, 1);
+      addsubmix("zmb_step_8", 1, 1);
       break;
   }
 }

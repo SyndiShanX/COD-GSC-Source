@@ -106,11 +106,11 @@ function play_vehicle_anim(localclientnum, oldval, newval, bnewent, binitialsnap
           break;
         case #"exit_restore":
           str_vh_anim = s_rider.vehicleexitanim;
-          var_73ba4ab0 = 1;
+          skiptoend = 1;
           break;
         case #"exit_combat_restore":
           str_vh_anim = s_rider.var_cbf50c1d;
-          var_73ba4ab0 = 1;
+          skiptoend = 1;
           break;
       }
 
@@ -119,7 +119,7 @@ function play_vehicle_anim(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(isDefined(str_vh_anim)) {
-    if(is_true(var_73ba4ab0)) {
+    if(is_true(skiptoend)) {
       self setanim(str_vh_anim, 1, 0, 1, undefined);
       self setanimtime(str_vh_anim, 1);
       return;

@@ -95,15 +95,15 @@ function function_3e0af5bf(var_a276c861) {
   var_73888042 = getEnt("pizza_kitchen_door", "targetname");
   var_73888042 disconnectPaths();
   var_5a015138 = struct::get("ronnie_the_baker", "targetname");
-  scene::add_scene_func(#"hash_414c49236edfc1d4", &function_a7cf8b16, "show");
-  level thread scene::play(#"hash_414c49236edfc1d4", "show");
+  scene::add_scene_func(#"p9_fxanim_zm_tungsten_baker_ronnie_raygun", &function_a7cf8b16, "show");
+  level thread scene::play(#"p9_fxanim_zm_tungsten_baker_ronnie_raygun", "show");
   level thread function_abd5cecb();
   var_363dd5ac = getEnt("vol_pizza_kitchen", "targetname");
 
-  while(!level flag::get(#"hash_75daa75b71ca3c65")) {
+  while(!level flag::get(#"player_in_kitchen")) {
     foreach(player in getPlayers()) {
       if(istouching(player.origin, var_363dd5ac)) {
-        level flag::set(#"hash_75daa75b71ca3c65");
+        level flag::set(#"player_in_kitchen");
         break;
       }
     }
@@ -158,7 +158,7 @@ function function_16dfcdea() {
     level.var_a70c997e += 1;
     hidemiscmodels("ts_pz_bx_" + level.var_a70c997e);
     var_1efd6e0f = struct::get("pizza_box_loc");
-    playSoundAtPosition(#"hash_5ee8279df26f0e2a", var_1efd6e0f.origin);
+    playSoundAtPosition(#"zmb_tung_sq_pizza_pickup", var_1efd6e0f.origin);
     e_player thread function_51989322(45);
   }
 }
@@ -182,7 +182,7 @@ function function_51989322(n_time) {
   level waittilltimeout(n_time, #"hash_4836d98aa6574edc");
   self flag::clear(#"hash_467e4279ccacfd8a");
   self notify(#"hash_59a3fb539c4b93af");
-  self playsoundtoplayer(#"hash_3c67d7e5a42f65d5", self);
+  self playsoundtoplayer(#"zmb_tung_sq_pizza_fail_2d", self);
 
   if(level.var_55fd9380 luielemtext::is_open(self)) {
     level.var_55fd9380 luielemtext::close(self);
@@ -266,8 +266,8 @@ function function_a7cf8b16(a_ents) {
 function function_abd5cecb() {
   level endon(#"end_game");
   level flag::wait_till(#"hash_4836d98aa6574edc");
-  scene::remove_scene_func(#"hash_414c49236edfc1d4", &function_a7cf8b16, "show");
-  level thread scene::play(#"hash_414c49236edfc1d4", "dead");
+  scene::remove_scene_func(#"p9_fxanim_zm_tungsten_baker_ronnie_raygun", &function_a7cf8b16, "show");
+  level thread scene::play(#"p9_fxanim_zm_tungsten_baker_ronnie_raygun", "dead");
 
   foreach(player in getPlayers()) {
     player flag::clear(#"hash_467e4279ccacfd8a");
@@ -335,7 +335,7 @@ function function_4e808365() {
   e_activator flag::clear(#"hash_467e4279ccacfd8a");
   e_activator flag::set(#"hash_56cc1795fa5f8e21");
   util::spawn_model(self.model, self.origin, self.angles);
-  playSoundAtPosition(#"hash_2b489ac23b273781", self.origin + (0, 0, 5));
+  playSoundAtPosition(#"zmb_tung_sq_pizza_place", self.origin + (0, 0, 5));
 }
 
 function function_56d84(e_player) {
@@ -505,14 +505,14 @@ function cmd(var_acfb518f) {
 
   switch (var_acfb518f) {
     case #"hash_7acad1e41b4b7af3":
-      foreach(var_f271f008 in var_329d95fb) {
-        var_f271f008 thread function_b7549e2f(1);
+      foreach(e_dest in var_329d95fb) {
+        e_dest thread function_b7549e2f(1);
       }
 
       break;
     case #"hash_37bd682457b237c8":
-      foreach(var_f271f008 in var_329d95fb) {
-        var_f271f008 thread function_b7549e2f(0);
+      foreach(e_dest in var_329d95fb) {
+        e_dest thread function_b7549e2f(0);
       }
 
       break;

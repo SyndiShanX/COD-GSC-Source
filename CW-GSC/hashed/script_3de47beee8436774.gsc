@@ -131,8 +131,8 @@ function function_6ad1ac64(str_skipto, b_starting) {
   level.overrideplayerdamage = undefined;
   next_obj = "armada_mortar_start";
   savegame::function_379f84b3();
-  level skipto::function_4e3ab877("armada_mortar_orbit", 0);
-  level skipto::function_51726ac8([next_obj], 0, level.player);
+  level skipto::objective_completed("armada_mortar_orbit", 0);
+  level skipto::set_level_objective([next_obj], 0, level.player);
   level clientfield::set("toggle_dynsignage_mortartown", 0);
 }
 
@@ -293,17 +293,17 @@ function function_e7152de8() {
   }
 
   var_53bb8ef2 = level.var_1a2a8b6f;
-  var_4cd42d59 = 0;
+  n_damage_level = 0;
 
   for(i = 0; i < 4; i++) {
     if(var_53bb8ef2.var_cfa81957 <= var_be81a997 - var_82c2d032 * i) {
-      var_4cd42d59 = i;
+      n_damage_level = i;
     }
   }
 
-  if(var_53bb8ef2.var_9df3157 != var_4cd42d59) {
-    self vehicle::set_damage_fx_level(var_4cd42d59);
-    var_53bb8ef2.var_9df3157 = var_4cd42d59;
+  if(var_53bb8ef2.var_9df3157 != n_damage_level) {
+    self vehicle::set_damage_fx_level(n_damage_level);
+    var_53bb8ef2.var_9df3157 = n_damage_level;
   }
 }
 
@@ -349,16 +349,16 @@ function function_9ca7e163() {
   level endon(#"flag_mortar_orbit_complete", #"flag_bell_tower_destroyed");
   trigger = getEnt("trigger_bell_tower_damage", "targetname");
   hidemiscmodels("bell_tower_final");
-  var_4e227252 = 0;
+  n_damage_total = 0;
   level clientfield::set("" + #"hash_147afd2c82d374fe", 1);
 
   while(true) {
     s_waitresult = trigger waittill(#"damage");
 
     if(s_waitresult.attacker === level.player) {
-      var_4e227252 += s_waitresult.amount;
+      n_damage_total += s_waitresult.amount;
 
-      if(var_4e227252 >= 250) {
+      if(n_damage_total >= 250) {
         level thread function_2c4d7184();
       }
     }
@@ -370,7 +370,7 @@ function function_7ed7f625() {
     s_target = struct::get("mortar_orbit_bell_tower_target");
 
     if(isDefined(level.var_52874eb2)) {
-      level.var_52874eb2 thread function_8060162f(s_target.origin);
+      level.var_52874eb2 thread chopper_fire_at_target(s_target.origin);
     }
 
     wait 2;
@@ -401,7 +401,7 @@ function function_19288a46() {
   wait 1;
   level util::delay(0.65, undefined, &namespace_b7cfe907::pstfx_teleport, 0, 2.5);
   level util::delay(0.65, undefined, &snd::client_msg, #"hash_4a41082a1d97f925");
-  namespace_72b0499b::music("4.0_chopper_combat", 0.65);
+  armada_audio::music("4.0_chopper_combat", 0.65);
   snd::client_msg(#"hash_3d8cbffebe7b249f");
   self clientfield::set("" + #"hash_4ddf67f7aa0f6884", 1);
   self thread scene::play(#"hash_40dd76ac89c3fdb5", a_ents);
@@ -415,7 +415,7 @@ function function_19288a46() {
   wait 2;
   level.var_7466d419 setvehicletype(#"hash_56f2823854475ea7");
   level thread function_e4c44785();
-  level savegame::function_7790f03();
+  level savegame::checkpoint_save_asap();
 }
 
 function function_e4c44785() {
@@ -437,8 +437,8 @@ function function_e4c44785() {
   }
 }
 
-function function_713a956d(var_1728e1fe = vectortoangles(level.vip.origin - level.player.origin)) {
-  level.player setplayerangles(var_1728e1fe);
+function function_713a956d(turret_angles = vectortoangles(level.vip.origin - level.player.origin)) {
+  level.player setplayerangles(turret_angles);
 }
 
 function function_6cce8b8e() {
@@ -477,12 +477,12 @@ function function_6acbfbb1(b_starting = 0) {
     n_dist = distance(level.var_7466d419.origin, var_8720c122.origin);
     n_time = n_dist / n_speed;
     self thread function_27b92aed(n_time);
-    var_67ae4496 = util::spawn_model(#"tag_origin", level.var_7466d419.origin, level.var_7466d419.angles);
-    level.var_7466d419 linkTo(var_67ae4496);
-    var_67ae4496 moveTo(var_8720c122.origin, n_time);
-    var_67ae4496 rotateTo(var_8720c122.angles, n_time, 1);
-    var_67ae4496 waittill(#"movedone", #"rotatedone");
-    var_67ae4496 delete();
+    mdl_link = util::spawn_model(#"tag_origin", level.var_7466d419.origin, level.var_7466d419.angles);
+    level.var_7466d419 linkTo(mdl_link);
+    mdl_link moveTo(var_8720c122.origin, n_time);
+    mdl_link rotateTo(var_8720c122.angles, n_time, 1);
+    mdl_link waittill(#"movedone", #"rotatedone");
+    mdl_link delete();
   }
 
   level.var_7466d419 clientfield::set("" + #"hash_354296015ca81fd", 0);
@@ -557,7 +557,7 @@ function function_15739fec() {
 }
 
 function function_5f51bebf() {
-  level.player util::function_749362d7(0);
+  level.player util::set_low_ready(0);
   level.player setmovespeedscale(1);
   level.player val::reset_all(#"armada_intro");
 }
@@ -680,13 +680,13 @@ function function_6610ecb5() {
   level.var_7466d419 endon(#"death");
   trigger::wait_till("trigger_mortar_orbit_rpg_attack");
   ai_enemy = spawner::simple_spawn_single("mortar_orbit_tower_rpg_enemy");
-  var_33d2e98f = struct::get("mortar_orbit_tower_upper");
+  s_launch = struct::get("mortar_orbit_tower_upper");
   s_target = struct::get("mortar_orbit_rpg_end_1");
-  var_98997b7 = getweapon(#"hash_513c26c6a751d20e");
-  v_velocity = vectorNormalize(s_target.origin - var_33d2e98f.origin) * 2000;
+  w_launcher = getweapon(#"hash_513c26c6a751d20e");
+  v_velocity = vectorNormalize(s_target.origin - s_launch.origin) * 2000;
 
   for(i = 0; i < 3; i++) {
-    missle = ai_enemy magicmissile(var_98997b7, var_33d2e98f.origin, v_velocity);
+    missle = ai_enemy magicmissile(w_launcher, s_launch.origin, v_velocity);
     missle thread function_48ac87db();
     wait 0.1;
   }
@@ -696,9 +696,9 @@ function function_6610ecb5() {
   }
 
   trigger::wait_till("mortar_orbit_courtyard");
-  var_697fc91a = getaiarray("mortar_tower_rpg_enemy", "script_noteworthy");
+  a_ai_enemy = getaiarray("mortar_tower_rpg_enemy", "script_noteworthy");
 
-  foreach(ai_enemy in var_697fc91a) {
+  foreach(ai_enemy in a_ai_enemy) {
     ai_enemy.script_accuracy = 1000;
     ai_enemy setpersonalthreatbias(level.var_7466d419, 100000);
   }
@@ -744,7 +744,7 @@ function function_94a21d8b(str_skipto, b_starting) {
   level scene::stop(#"hash_1fb12697821542a1", 1);
   level scene::stop(#"hash_1464d638ee5e23aa", 1);
   function_92d60a9d();
-  namespace_72b0499b::music("5.0_village_combat");
+  armada_audio::music("5.0_village_combat");
   level thread function_a65af49d();
   level.player function_6acbfbb1(b_starting);
   level flag::set("flag_play_landed_vo");
@@ -759,8 +759,8 @@ function function_94a21d8b(str_skipto, b_starting) {
   spawner::remove_spawn_function_ai_group("mortar_ai_wave_3_right", &function_287230c8);
   spawner::remove_spawn_function_ai_group("mortar_ai_wave_3_left", &function_287230c8);
   savegame::function_379f84b3();
-  level skipto::function_4e3ab877(str_skipto, 0);
-  level skipto::function_51726ac8(["armada_mortar_exfil"], 0, level.player);
+  level skipto::objective_completed(str_skipto, 0);
+  level skipto::set_level_objective(["armada_mortar_exfil"], 0, level.player);
 }
 
 function function_a65af49d() {
@@ -897,7 +897,7 @@ function function_ab1c35d7() {
       s_anchor = function_478310c9(var_777b7e33, var_a9ad8d56);
 
       if(isDefined(s_anchor)) {
-        s_anchor.var_6281c93d = 1;
+        s_anchor.b_override = 1;
       }
     }
 
@@ -992,28 +992,28 @@ function function_f1b25856(s_anchor, var_d94e669c = 1) {
 }
 
 function function_5ebe746e() {
-  var_b23598c7 = struct::get("mortar_courtyard_sign_target");
+  s_sign = struct::get("mortar_courtyard_sign_target");
   level flag::wait_till_any(array("flag_fire_at_courtyard_sign", "flag_destory_courtyard_sign"));
 
   if(!level flag::get("flag_destory_courtyard_sign")) {
-    while(!level.player util::is_looking_at(var_b23598c7, 0.96, 1) && !level flag::get("flag_destory_courtyard_sign")) {
+    while(!level.player util::is_looking_at(s_sign, 0.96, 1) && !level flag::get("flag_destory_courtyard_sign")) {
       wait 0.5;
     }
   }
 
-  level.var_52874eb2 thread function_382a326a();
+  level.var_52874eb2 thread chopper_fire_rockets();
   wait 0.3;
   level notify(#"destory_courtyard_sign");
 }
 
-function function_382a326a() {
+function chopper_fire_rockets() {
   s_target = struct::get("mortar_courtyard_sign_target");
-  var_98997b7 = getweapon(#"hash_513c26c6a751d20e");
+  w_launcher = getweapon(#"hash_513c26c6a751d20e");
   rocketorigin = self gettagorigin("tag_flash");
   v_velocity = vectorNormalize(s_target.origin - rocketorigin) * 2000;
 
   for(i = 0; i < 3; i++) {
-    self magicmissile(var_98997b7, rocketorigin, v_velocity);
+    self magicmissile(w_launcher, rocketorigin, v_velocity);
     wait 0.1;
   }
 }
@@ -1089,7 +1089,7 @@ function function_f7dc2ff0(var_90df9642, s_anchor, var_777b7e33, var_a9ad8d56) {
   self notify("303ef9c9f0be2c59");
   self endon("303ef9c9f0be2c59");
 
-  if(!is_true(s_anchor.var_6281c93d)) {
+  if(!is_true(s_anchor.b_override)) {
     self thread function_7882569f(s_anchor, var_777b7e33, var_a9ad8d56);
   }
 
@@ -1125,7 +1125,7 @@ function function_82ba400e(s_target) {
   self waittill(#"hash_3ea4db032aff8725");
 
   if(isDefined(s_target)) {
-    self function_8060162f(s_target.origin, 1);
+    self chopper_fire_at_target(s_target.origin, 1);
   }
 
   a_ai_enemies = getaiteamarray(#"axis");
@@ -1142,11 +1142,11 @@ function function_82ba400e(s_target) {
   }
 
   if(isDefined(e_target_1)) {
-    self thread function_8060162f(e_target_1.origin, 1);
+    self thread chopper_fire_at_target(e_target_1.origin, 1);
   }
 }
 
-function function_8060162f(v_target, n_index = 1) {
+function chopper_fire_at_target(v_target, n_index = 1) {
   self endon(#"death");
 
   if(n_index == 1) {
@@ -1154,7 +1154,7 @@ function function_8060162f(v_target, n_index = 1) {
     var_1620c159 = #"hash_10f4fd64af1dfe61";
   } else {
     var_9012c9b0 = getweapon(#"hash_73d955d55fddba26");
-    var_1620c159 = #"hash_6d6d720fe18d9609";
+    var_1620c159 = #"weapon/fx_muz_veh_minigun_xlg_3p";
   }
 
   for(i = 0; i < 50; i++) {
@@ -1367,7 +1367,7 @@ function function_119bac80(attacker) {
 
 function function_c1a275eb(attacker) {
   if(isPlayer(attacker)) {
-    attacker playhitmarker(#"hash_31e38d8520839566", 5, undefined, 1);
+    attacker playhitmarker(#"mpl_hit_body_fatal", 5, undefined, 1);
   }
 }
 
@@ -1542,7 +1542,7 @@ function function_67118793(ents) {
 function function_6ca545eb() {
   self endon(#"death");
   self waittill(#"hash_35611a5995a2a1d7");
-  level.var_52874eb2 thread function_8060162f(self.origin, 1);
+  level.var_52874eb2 thread chopper_fire_at_target(self.origin, 1);
 }
 
 function function_f2cbcaaa() {
@@ -1570,12 +1570,12 @@ function function_aaf84792() {
 function function_c25d3a03() {
   self endon(#"death");
   self thread scene::play(#"hash_23d756fc375caf0b", "break_glass", self);
-  var_cc8a06e0 = getEnt("windowbash_shutter_left", "targetname");
-  var_706eb820 = getEnt("windowbash_shutter_right", "targetname");
+  shutter_left = getEnt("windowbash_shutter_left", "targetname");
+  shutter_right = getEnt("windowbash_shutter_right", "targetname");
   var_9914920b = getEnt("windowbash_shutter_collision", "targetname");
   self waittill(#"hash_55c9dfd739723702");
-  var_cc8a06e0 rotateTo((0, 290, 0), 0.1);
-  var_706eb820 rotateTo((0, 170, 0), 0.1);
+  shutter_left rotateTo((0, 290, 0), 0.1);
+  shutter_right rotateTo((0, 170, 0), 0.1);
   var_9914920b delete();
 
   if(isDefined(level.var_52874eb2)) {
@@ -2015,26 +2015,26 @@ function function_de2d35ad() {
   level endon(#"hash_4bed89f9695b49f4");
   var_2c462f31 = function_ac42a1bb();
   trigger::wait_till("mg_spawn_go");
-  var_5deea171 = spawner::simple_spawn_single("mortar_combat_enemy_spawner_main_turret");
+  ai_gunner = spawner::simple_spawn_single("mortar_combat_enemy_spawner_main_turret");
 
-  if(isDefined(var_5deea171)) {
-    var_5deea171.health *= 2;
-    var_5deea171 thread function_250de527();
-    var_5deea171 thread function_8ed36c06();
+  if(isDefined(ai_gunner)) {
+    ai_gunner.health *= 2;
+    ai_gunner thread function_250de527();
+    ai_gunner thread function_8ed36c06();
   }
 
   var_2c462f31[0] thread function_ce707a4(var_2c462f31[1]);
 }
 
 function function_ac42a1bb() {
-  var_d93ed883 = getnode("mortar_alley_turret_node", "targetname");
-  var_1280faf3 = function_1a2a3760(var_d93ed883);
+  nd_turret = getnode("mortar_alley_turret_node", "targetname");
+  vh_turret = function_1a2a3760(nd_turret);
 
-  if(!is_true(var_1280faf3.magic_bullet_shield)) {
-    var_1280faf3 util::magic_bullet_shield();
+  if(!is_true(vh_turret.magic_bullet_shield)) {
+    vh_turret util::magic_bullet_shield();
   }
 
-  return [var_1280faf3, var_d93ed883];
+  return [vh_turret, nd_turret];
 }
 
 function function_8ed36c06() {
@@ -2051,7 +2051,7 @@ function function_250de527() {
   level notify(#"hash_2ddc22588860a7a5");
 }
 
-function function_ce707a4(var_d93ed883) {
+function function_ce707a4(nd_turret) {
   self endon(#"death");
 
   if(!isalive(level.player)) {
@@ -2069,11 +2069,11 @@ function function_ce707a4(var_d93ed883) {
   self turret::set_target(level.player);
   self turret::function_49c3b892(level.player);
   self val::set(#"mg_turret", "ignoreme", 1);
-  self thread function_7b37dd50(var_d93ed883);
+  self thread function_7b37dd50(nd_turret);
   level waittill(#"hash_443f87164a353a53");
-  setenablenode(var_d93ed883, 0);
+  setenablenode(nd_turret, 0);
   s_weapon = struct::get("mg42_weapon_spawn_loc");
-  var_e77bdd5f = util::spawn_model(s_weapon.model, s_weapon.origin, s_weapon.angles);
+  mdl_gun = util::spawn_model(s_weapon.model, s_weapon.origin, s_weapon.angles);
   waitframe(1);
   self util::stop_magic_bullet_shield();
 
@@ -2082,21 +2082,21 @@ function function_ce707a4(var_d93ed883) {
   }
 }
 
-function function_7b37dd50(var_d93ed883) {
+function function_7b37dd50(nd_turret) {
   level endon(#"hash_443f87164a353a53");
   self endon(#"death");
 
   while(true) {
     level function_ad03d12c(1);
     level function_ad03d12c(0);
-    setenablenode(var_d93ed883, 0);
+    setenablenode(nd_turret, 0);
 
     if(issentient(self)) {
       self function_60d50ea4();
     }
 
     wait randomintrange(15, 20);
-    setenablenode(var_d93ed883, 1);
+    setenablenode(nd_turret, 1);
 
     if(!issentient(self)) {
       self makesentient();
@@ -2129,8 +2129,8 @@ function function_3d691322() {
   var_e361d345 = struct::get("obj_mortar_bunker_door", "targetname");
   obj_mortar_bunker = struct::get("obj_mortar_bunker", "targetname");
   var_83809bc3 = struct::get("obj_upper_mortar_dossier", "targetname");
-  level thread namespace_72b0499b::function_132ea7de();
-  namespace_72b0499b::music("6.0_red_door_stinger", undefined, "flag_reached_tea_house_upper_floor_hallway");
+  level thread armada_audio::function_132ea7de();
+  armada_audio::music("6.0_red_door_stinger", undefined, "flag_reached_tea_house_upper_floor_hallway");
   level objectives::goto("armada_obj_mortar_goto_red_door", struct::get("obj_mortar_alley").origin, #"hash_56b4845f8e5f7fe6");
   level objectives::function_67f87f80("armada_obj_mortar_goto_red_door", undefined, #"hash_51461abc9db00516");
   level flag::wait_till_any(array("flag_mortar_alley_reached", "flag_mortar_upper_mortar_building_reached", "flag_reached_tea_house_upper_floor", "flag_mortar_reached_red_door"));
@@ -2149,9 +2149,9 @@ function function_3d691322() {
   var_e361d345 prompts::set_objective("armada_obj_mortar_open_red_door");
   var_e361d345 waittill(#"trigger");
   playSoundAtPosition(#"hash_122a651ea798052a", (0, 0, 0));
-  namespace_72b0499b::music("7.0_intel");
+  armada_audio::music("7.0_intel");
   level notify(#"hash_1c61fc6e80974e9");
-  level function_315508be();
+  level mortar_cleanup();
 
   if(isDefined(getEnt("mortar_brush_main_door_closed", "targetname"))) {
     getEnt("mortar_brush_main_door_closed", "targetname") delete();
@@ -2171,7 +2171,7 @@ function function_3d691322() {
   objectives::complete("armada_obj_mortar_pickup_dossier");
   level thread function_a1de7ea2();
   level waittill(#"hash_5084b114ffe7e4aa");
-  namespace_72b0499b::music("8.0_landing");
+  armada_audio::music("8.0_landing");
 
   if(isDefined(getEnt("mortar_brush_exfil_door_closed", "targetname"))) {
     getEnt("mortar_brush_exfil_door_closed", "targetname") delete();
@@ -2181,13 +2181,13 @@ function function_3d691322() {
   level flag::set("flag_mortar_site_a_complete");
   level notify(#"hash_85243554b3f96e1");
   callback::remove_on_ai_killed(&function_a02983f8);
-  level savegame::function_7790f03();
+  level savegame::checkpoint_save_asap();
 }
 
 function function_a6fea06f(params) {
   if(isDefined(level.player)) {
     level.player setmovespeedscale(1);
-    level.player util::function_749362d7(0);
+    level.player util::set_low_ready(0);
     level.player val::reset(#"hash_34ed04d5046328af", "show_crosshair");
   }
 }
@@ -2249,7 +2249,7 @@ function function_110866d(b_init = 0) {
   level thread scene::play(#"hash_604c13090504ecb1", "open_door", a_ents);
   level waittill(#"hash_688abb2ff6189b0b");
   level.player setmovespeedscale(0.43);
-  level.player util::function_749362d7(1);
+  level.player util::set_low_ready(1);
 }
 
 function function_766af271() {
@@ -2349,7 +2349,7 @@ function function_cb65a5e8(var_43baa908) {
   self val::reset(#"hash_2cb3bfd28a6ec1d8", "ignoreme");
 }
 
-function function_315508be() {
+function mortar_cleanup() {
   foreach(enemy in getaiteamarray(#"axis")) {
     enemy util::stop_magic_bullet_shield();
     enemy deletedelay();
@@ -2365,7 +2365,7 @@ function function_997dda5e(str_skipto, b_starting) {
     level util::delay(0.5, undefined, &clientfield::set, "toggle_dynsignage_mortartown", 0);
     level thread namespace_b7cfe907::function_2647f901("mortar_village_completed");
     level thread util::screen_fade_in(1.5, "black", "mortar_exfil_flow_fade");
-    level.player util::function_749362d7(1);
+    level.player util::set_low_ready(1);
     level function_a1de7ea2();
     level.buddy thread colors::set_force_color("g");
     level thread function_92d60a9d();
@@ -2384,9 +2384,9 @@ function function_997dda5e(str_skipto, b_starting) {
   level.var_7466d419 vehicle_ai::clearallmovement(1);
   level.var_7466d419 function_24c9e377();
   level flag::set("mortar_village_completed");
-  level skipto::function_4e3ab877(str_skipto, 0);
+  level skipto::objective_completed(str_skipto, 0);
   next_obj = "player_controlled_huey_01";
-  level skipto::function_51726ac8([next_obj], 0, level.player);
+  level skipto::set_level_objective([next_obj], 0, level.player);
   level.buddy ai::disable_careful();
   level.buddy thread colors::set_force_color("b");
   level.buddy.allowbattlechatter[#"bc"] = 1;
@@ -2475,12 +2475,12 @@ function function_e6ca6b4d() {
 }
 
 function function_9c91c0b5(a_ents) {
-  var_1f3a4780 = getnodearray("mortar_exit_cover_nodes", "targetname");
+  a_nd_cover = getnodearray("mortar_exit_cover_nodes", "targetname");
 
   foreach(ent in a_ents) {
     if(isalive(ent)) {
       ent.script_objective = "armada_mortar_exfil";
-      nd_cover = arraygetclosest(ent.origin, var_1f3a4780);
+      nd_cover = arraygetclosest(ent.origin, a_nd_cover);
 
       if(isDefined(nd_cover)) {
         ent thread ai::force_goal(nd_cover);
@@ -2499,7 +2499,7 @@ function function_79299255() {
   level scene::play(#"hash_15f9f35b939d1d86", self);
 }
 
-function function_7cbced04() {
+function strafing_run() {
   self playSound("evt_chopper_strafe_flyby");
   wait 0.3;
   self thread function_be014f32();
@@ -2508,14 +2508,14 @@ function function_7cbced04() {
   self notify(#"hash_254e7fb941cc8d9d");
 }
 
-function function_7c644fb3(ai, var_9114191, var_8b118adb) {
+function function_7c644fb3(ai, n_turret_index, var_8b118adb) {
   if(!isDefined(ai)) {
     return;
   }
 
   ai endon(#"death");
   self endon(#"death");
-  self thread turret::function_1bc8c31c(ai, undefined, var_9114191, var_8b118adb);
+  self thread turret::function_1bc8c31c(ai, undefined, n_turret_index, var_8b118adb);
   wait randomfloatrange(0.3, 0.7);
 
   if(isalive(ai) && is_true(ai.allowdeath)) {
@@ -2556,7 +2556,7 @@ function function_58771ad7() {
   level.buddy sethighdetail(1);
   level clientfield::set("" + #"hash_4ee03d623b77b0c2", 1);
   level.var_7466d419 makevehicleunusable();
-  level.var_7466d419 thread function_7cbced04();
+  level.var_7466d419 thread strafing_run();
   level.buddy thread function_79299255();
   level scene::play(#"hash_3ed153e5b694beab", "arrival", a_ents);
   level scene::play(#"hash_3ed153e5b694beab", "in", a_ents);
@@ -2567,7 +2567,7 @@ function function_58771ad7() {
   level thread scene::play(#"hash_3ed153e5b694beab", "loop", a_ents);
   level flag::set("obj_flag_mortar_exfil");
   level function_cdf5e193();
-  namespace_72b0499b::music("9.0_flying");
+  armada_audio::music("9.0_flying");
   level flag::set("flag_start_mortar_exfil");
   level scene::stop(#"hash_15f9f35b939d1d86");
   level.var_7466d419 turretsettargetangles(1, (0, 0, 0));
@@ -2763,8 +2763,8 @@ function function_13d13395(n_index) {
   self setteam(#"axis");
   self.health = int(self.health * 0.1);
   self callback::function_d8abfc3d(#"on_vehicle_killed", &namespace_722cc932::function_edf88bbb);
-  var_8be533d2 = "nd_pch_convoy_01_0" + n_index + 1;
-  nd_path = getvehiclenode(var_8be533d2, "targetname");
+  str_path = "nd_pch_convoy_01_0" + n_index + 1;
+  nd_path = getvehiclenode(str_path, "targetname");
   self thread vehicle::get_on_and_go_path(nd_path);
   level flag::wait_till("flag_mortar_orbit_site_b_enemies_spawn");
   wait 5;

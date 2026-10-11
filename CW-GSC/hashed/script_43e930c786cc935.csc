@@ -33,7 +33,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_268747c0;
+#namespace doa_hazard;
 
 function init() {
   clientfield::register("scriptmover", "dragonTrapState", 1, 2, "int", &dragontrapstate, 0, 0);
@@ -42,7 +42,7 @@ function init() {
 
 function function_32d5e898(localclientnum) {}
 
-function function_79445831() {
+function deathwatch() {
   self notify("18d073f66f509708");
   self endon("18d073f66f509708");
   fakemodel = self.fakemodel;
@@ -62,7 +62,7 @@ function function_6f3ad355(localclientnum) {
   self.fakemodel = spawn(localclientnum, self.origin, "script_model");
   self.fakemodel setModel("zombietron_dragonhead_trap");
   self.fakemodel.angles = self.angles;
-  self thread function_79445831();
+  self thread deathwatch();
 }
 
 function dragontrapstate(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -87,7 +87,7 @@ function dragontrapstate(localclientnum, oldval, newval, bnewent, binitialsnap, 
       stopforcestreamingxmodel(#"zombietron_dragonhead_trap");
       forcestreamxmodel(#"zombietron_dragonhead_trap_active");
       namespace_1e25ad94::debugmsg("Setting dragonhead trap (" + self getentitynumber() + ") at origin:" + self.origin + " to model zombietron_dragonhead_trap");
-      self.fakemodel thread namespace_83eb6304::function_8b1a4e9c(fieldname, "dragonTrap");
+      self.fakemodel thread doa_fx::function_8b1a4e9c(fieldname, "dragonTrap");
       break;
     case 3:
       if(!isDefined(self.fakemodel)) {
@@ -102,7 +102,7 @@ function dragontrapstate(localclientnum, oldval, newval, bnewent, binitialsnap, 
       wait 1;
 
       if(isDefined(self.fakemodel)) {
-        self.fakemodel thread namespace_83eb6304::function_f58618d7(fieldname, "dragonTrap", "tag_mouth_fx_anim");
+        self.fakemodel thread doa_fx::function_f58618d7(fieldname, "dragonTrap", "tag_mouth_fx_anim");
       }
 
       break;

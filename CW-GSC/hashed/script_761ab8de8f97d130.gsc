@@ -92,7 +92,7 @@ function function_7f78da() {
     self.zombie_move_speed = math::cointoss() ? "sprint" : "run";
   }
 
-  self thread namespace_9fc66ac::function_ba33d23d(#"hash_6298fe3f8c45ac9f", #"hash_8c6429df541c34c", #"hash_774f44ae3771ad84");
+  self thread doa_sound::function_ba33d23d(#"zmb_doa_ai_zombie_vocal_slow", #"zmb_doa_ai_zombie_vocal_fast", #"zmb_doa_ai_zombie_vocal_death");
 }
 
 function function_c291edbd() {
@@ -183,7 +183,7 @@ function function_9bca3cb6() {
 
   while(true) {
     wait randomfloatrange(0.3, 0.6);
-    self namespace_83eb6304::function_3ecfde67("pole_zombie_elecBurst");
+    self doa_fx::function_3ecfde67("pole_zombie_elecBurst");
   }
 }
 
@@ -208,7 +208,7 @@ function function_711927a1(origin) {
   pole moveTo(origin, 2);
 
   while(isDefined(org)) {
-    org namespace_83eb6304::function_3ecfde67("pole_blast");
+    org doa_fx::function_3ecfde67("pole_blast");
     wait randomfloatrange(0.5, 1.2);
   }
 }
@@ -250,7 +250,7 @@ function function_83a2d68c() {
   self.var_596fb6ed = "shadow_appear";
   self.var_bb68380c = namespace_4dae815d::function_59a9cf1d() == 0;
   self.shouldspawn = 1;
-  self.var_c5348ec8 = randomint(2) + 1;
+  self.teleports = randomint(2) + 1;
   self.zombie_move_speed = isDefined(level.doa.var_13e8f9c9) ? level.doa.var_13e8f9c9 : "sprint";
 
   if(isDefined(level.doa.var_a598a835)) {
@@ -268,7 +268,7 @@ function function_83a2d68c() {
     self.org thread namespace_ec06fe4a::function_d55f042c(self, "death");
   }
 
-  self.var_e66cd6fb = 1;
+  self.no_ragdoll = 1;
   self.no_armor = 1;
   self.var_4dcf6637 = 1;
   aiutility::addaioverridedamagecallback(self, &function_a86c6bf8);
@@ -287,25 +287,25 @@ function shadowteleportmenow(initial = 0, origin = self.origin) {
     return;
   }
 
-  assert(self.var_c5348ec8 > 0);
+  assert(self.teleports > 0);
   self.intransition = 1;
 
   if(!initial) {
-    self.var_c5348ec8--;
+    self.teleports--;
   }
 
   spot = [[level.doa.var_39e3fa99]] - > function_70fb5745(origin, 256, 1400).origin;
   self.ignoreall = 1;
   self.takedamage = 0;
-  self namespace_83eb6304::function_3ecfde67("shadow_fade");
-  self namespace_83eb6304::function_3ecfde67("spawnZombie");
+  self doa_fx::function_3ecfde67("shadow_fade");
+  self doa_fx::function_3ecfde67("spawnZombie");
   wait 0.1;
 
   if(isDefined(self.org)) {
     self.org.origin = self.origin + (0, 0, 40);
     util::wait_network_frame();
-    self.org namespace_83eb6304::function_3ecfde67("shadow_move");
-    self.org namespace_83eb6304::function_3ecfde67("shadow_glow");
+    self.org doa_fx::function_3ecfde67("shadow_move");
+    self.org doa_fx::function_3ecfde67("shadow_glow");
     self namespace_e32bb68::function_ae271c0b("zmb_doa_ai_smokeman_lp");
     self.org namespace_e32bb68::function_3a59ec34("zmb_doa_ai_smokeman_teleport_out");
     wait 0.3;
@@ -315,7 +315,7 @@ function shadowteleportmenow(initial = 0, origin = self.origin) {
     self linkTo(self.org);
     self.org moveTo(spot + (0, 0, 40), 2);
     self.org waittilltimeout(2.1, #"movedone");
-    self.org namespace_83eb6304::function_3ecfde67("shadow_appear");
+    self.org doa_fx::function_3ecfde67("shadow_appear");
     self.org namespace_e32bb68::function_3a59ec34("zmb_doa_ai_smokeman_teleport_in_pre");
     wait 1.9;
     self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_smokeman_teleport_in");
@@ -324,12 +324,12 @@ function shadowteleportmenow(initial = 0, origin = self.origin) {
     self namespace_ec06fe4a::function_4f72130c();
     self solid();
     self setPlayerCollision(1);
-    self.org namespace_83eb6304::turnofffx("shadow_move");
-    self.org namespace_83eb6304::turnofffx("shadow_glow");
+    self.org doa_fx::turnofffx("shadow_move");
+    self.org doa_fx::turnofffx("shadow_glow");
     self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_smokeman_lp");
   }
 
-  self namespace_83eb6304::function_3ecfde67("spawnZombie");
+  self doa_fx::function_3ecfde67("spawnZombie");
   wait 1;
   self.ignoreall = 0;
   self.takedamage = 1;
@@ -338,7 +338,7 @@ function shadowteleportmenow(initial = 0, origin = self.origin) {
 }
 
 function function_a86c6bf8(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, vdamageorigin, timeoffset, boneindex, modelindex, surfacetype, surfacenormal) {
-  if(self.var_c5348ec8 > 0) {
+  if(self.teleports > 0) {
     if(surfacenormal >= self.health) {
       surfacenormal = self.health - 1;
     }
@@ -353,7 +353,7 @@ function function_a86c6bf8(einflictor, eattacker, idamage, idflags, smeansofdeat
 
     if(isDefined(orb)) {
       orb thread namespace_ec06fe4a::function_52afe5df(0.4);
-      orb namespace_83eb6304::function_3ecfde67("shadow_die");
+      orb doa_fx::function_3ecfde67("shadow_die");
       orb namespace_e32bb68::function_3a59ec34("zmb_doa_ai_smokeman_death");
     }
   }
@@ -409,7 +409,7 @@ function function_e6634b0c(var_11b86a4c = 45) {
 }
 
 function function_f637b05d(behaviortreeentity) {
-  behaviortreeentity.var_93a62fe = namespace_7f5aeb59::function_7781556b(behaviortreeentity.origin, 1);
+  behaviortreeentity.var_93a62fe = doa_player_utility::function_7781556b(behaviortreeentity.origin, 1);
 }
 
 function zombietraversalservice(entity) {
@@ -438,7 +438,7 @@ function private function_b9b03294(entity) {
 function private function_4402c40a(entity) {
   if(!is_true(entity.var_e5ad72a0)) {
     if(isDefined(entity.var_1038c5e0)) {
-      entity namespace_83eb6304::function_3ecfde67(entity.var_1038c5e0);
+      entity doa_fx::function_3ecfde67(entity.var_1038c5e0);
     }
 
     entity.var_c0bd8c06 = undefined;
@@ -463,7 +463,7 @@ function private function_55b7ea22(entity) {
     entity solid();
 
     if(isDefined(entity.var_596fb6ed)) {
-      entity namespace_83eb6304::function_3ecfde67(entity.var_596fb6ed);
+      entity doa_fx::function_3ecfde67(entity.var_596fb6ed);
     }
 
     entity pathmode("dont move");

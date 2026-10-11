@@ -41,7 +41,7 @@ function event_handler[level_init] main(eventstruct) {
   setDvar(#"hash_6b57212fd4fcdd3a", 350);
   setDvar(#"hash_4ad75035d6026ea2", 0.819);
 
-  level thread hms_util::function_5056f90d();
+  level thread hms_util::display_player_health();
   level thread function_37fa595();
 }
 
@@ -53,33 +53,33 @@ function preload() {
   callback::on_ai_spawned(&ai_cold_breath);
   callback::on_spawned(&function_2675a176);
   callback::on_ai_killed(&namespace_b73b9191::function_91e76e2e);
-  level util::function_d96391ba();
+  level util::init_breath_fx();
   level cp_rus_yamantau_flashlight::preload();
   level namespace_c8bf7287::preload();
   init_clientfields();
-  function_37dfd679();
+  init_skiptos();
   level thread namespace_ecdab0f4::function_b68e2d37();
 }
 
-function function_37dfd679() {
-  skipto::function_eb91535d("intro_heli", &namespace_cbf28e01::function_37c8a043, &namespace_cbf28e01::function_38910b5f, undefined, &namespace_cbf28e01::function_a0b88490);
-  skipto::function_eb91535d("mountain_summit", &namespace_cbf28e01::function_3d1df8a6, &namespace_cbf28e01::function_d3655e70, undefined, &namespace_cbf28e01::function_fdbb9f1e);
-  skipto::function_eb91535d("ice_slide", &namespace_cbf28e01::function_ae06da18, &namespace_cbf28e01::function_bb34c64, undefined, &namespace_cbf28e01::function_33fd8fa3);
-  skipto::function_eb91535d("zipline_intro", &namespace_cbf28e01::function_11648e12, &namespace_cbf28e01::function_b205e5be, undefined, &namespace_cbf28e01::function_71f05605);
-  skipto::function_eb91535d("satcom_approach", &namespace_94dc1844::function_56b991c1, &namespace_94dc1844::function_c73772c6, undefined, &namespace_94dc1844::function_844967aa);
-  skipto::function_eb91535d("satcom", &namespace_94dc1844::function_8cc2cc25, &namespace_94dc1844::function_f6f8cdca, undefined, &namespace_94dc1844::function_a46dc345);
-  skipto::function_eb91535d("catwalks", &namespace_a2d2e744::function_32d297d8, &namespace_a2d2e744::function_2445d847, undefined, &namespace_a2d2e744::function_dfe7cd78);
+function init_skiptos() {
+  skipto::add_saved("intro_heli", &namespace_cbf28e01::function_37c8a043, &namespace_cbf28e01::function_38910b5f, undefined, &namespace_cbf28e01::function_a0b88490);
+  skipto::add_saved("mountain_summit", &namespace_cbf28e01::function_3d1df8a6, &namespace_cbf28e01::function_d3655e70, undefined, &namespace_cbf28e01::function_fdbb9f1e);
+  skipto::add_saved("ice_slide", &namespace_cbf28e01::function_ae06da18, &namespace_cbf28e01::function_bb34c64, undefined, &namespace_cbf28e01::function_33fd8fa3);
+  skipto::add_saved("zipline_intro", &namespace_cbf28e01::function_11648e12, &namespace_cbf28e01::function_b205e5be, undefined, &namespace_cbf28e01::function_71f05605);
+  skipto::add_saved("satcom_approach", &namespace_94dc1844::function_56b991c1, &namespace_94dc1844::function_c73772c6, undefined, &namespace_94dc1844::function_844967aa);
+  skipto::add_saved("satcom", &namespace_94dc1844::function_8cc2cc25, &namespace_94dc1844::function_f6f8cdca, undefined, &namespace_94dc1844::function_a46dc345);
+  skipto::add_saved("catwalks", &namespace_a2d2e744::function_32d297d8, &namespace_a2d2e744::function_2445d847, undefined, &namespace_a2d2e744::function_dfe7cd78);
   skipto::add_dev("dev_catwalks_stealth", &namespace_a2d2e744::function_965213e6, &namespace_a2d2e744::function_2445d847, undefined, &namespace_a2d2e744::function_dfe7cd78);
-  skipto::function_eb91535d("zipline_fall", &namespace_a2d2e744::function_198e08b8, &namespace_a2d2e744::function_9539fa90, undefined, &namespace_a2d2e744::function_b366b7a9);
-  skipto::function_eb91535d("bunker_explore", &namespace_73841f48::function_599d30fb, &namespace_73841f48::function_c3ccbcc8, undefined, &namespace_73841f48::function_f46b6ef);
-  skipto::function_eb91535d("bunker_encounter", &namespace_73841f48::function_eea0086d, &namespace_73841f48::function_b47dd82e, undefined, &namespace_73841f48::function_511f3559);
-  skipto::function_eb91535d("woods_regroup", &namespace_73841f48::function_4e75b98e, &namespace_73841f48::function_4d07bf4e, undefined, &namespace_73841f48::function_53b51eb0);
-  skipto::function_eb91535d("excavation", &namespace_9e8d4ac3::function_6d9e84ea, &namespace_9e8d4ac3::function_ab15a34c, undefined, &namespace_9e8d4ac3::function_1e5a768a);
-  skipto::function_eb91535d("excavation_finale", &namespace_9e8d4ac3::function_e30ea9da, &namespace_9e8d4ac3::function_4a1a74fe, undefined, &namespace_9e8d4ac3::function_888e9b6b);
-  skipto::function_eb91535d("server_reveal", &namespace_7ef9d872::function_87560e1a, &namespace_7ef9d872::function_dba43792, undefined, &namespace_7ef9d872::function_bb405879);
-  skipto::function_eb91535d("server_ascent", &namespace_7ef9d872::function_e936fbf4, &namespace_7ef9d872::function_f59af500, undefined, &namespace_7ef9d872::function_b80cf494);
+  skipto::add_saved("zipline_fall", &namespace_a2d2e744::function_198e08b8, &namespace_a2d2e744::function_9539fa90, undefined, &namespace_a2d2e744::function_b366b7a9);
+  skipto::add_saved("bunker_explore", &namespace_73841f48::function_599d30fb, &namespace_73841f48::function_c3ccbcc8, undefined, &namespace_73841f48::function_f46b6ef);
+  skipto::add_saved("bunker_encounter", &namespace_73841f48::function_eea0086d, &namespace_73841f48::function_b47dd82e, undefined, &namespace_73841f48::function_511f3559);
+  skipto::add_saved("woods_regroup", &namespace_73841f48::function_4e75b98e, &namespace_73841f48::function_4d07bf4e, undefined, &namespace_73841f48::function_53b51eb0);
+  skipto::add_saved("excavation", &namespace_9e8d4ac3::function_6d9e84ea, &namespace_9e8d4ac3::function_ab15a34c, undefined, &namespace_9e8d4ac3::function_1e5a768a);
+  skipto::add_saved("excavation_finale", &namespace_9e8d4ac3::function_e30ea9da, &namespace_9e8d4ac3::function_4a1a74fe, undefined, &namespace_9e8d4ac3::function_888e9b6b);
+  skipto::add_saved("server_reveal", &namespace_7ef9d872::function_87560e1a, &namespace_7ef9d872::function_dba43792, undefined, &namespace_7ef9d872::function_bb405879);
+  skipto::add_saved("server_ascent", &namespace_7ef9d872::function_e936fbf4, &namespace_7ef9d872::function_f59af500, undefined, &namespace_7ef9d872::function_b80cf494);
   skipto::add_dev("dev_satcom_shot", &namespace_94dc1844::function_22e1ef3a, &namespace_94dc1844::function_cc91ce1f, undefined, &namespace_94dc1844::function_a46dc345);
-  skipto::function_46d8992a("intro_heli");
+  skipto::default_skipto("intro_heli");
 }
 
 function init_clientfields() {
@@ -128,24 +128,24 @@ function function_2675a176() {
       w_primary = getweapon(#"sniper_standard_t9", "suppressed2");
       w_secondary = getweapon(#"pistol_burst_t9", "suppressed2");
       var_deeb6741 = getweapon(#"frag_grenade");
-      var_2586eb45 = getweapon(#"eq_flash_grenade");
-      hms_util::function_2e7c81f6(w_primary, w_secondary, var_deeb6741, var_2586eb45);
+      w_tactical = getweapon(#"eq_flash_grenade");
+      hms_util::function_2e7c81f6(w_primary, w_secondary, var_deeb6741, w_tactical);
       break;
     case #"bunker_explore":
     case #"bunker_encounter":
       w_primary = getweapon(#"knife_loadout");
       var_deeb6741 = getweapon(#"frag_grenade");
-      var_2586eb45 = getweapon(#"eq_flash_grenade");
-      hms_util::function_2e7c81f6(w_primary, undefined, var_deeb6741, var_2586eb45);
+      w_tactical = getweapon(#"eq_flash_grenade");
+      hms_util::function_2e7c81f6(w_primary, undefined, var_deeb6741, w_tactical);
       break;
     case #"woods_regroup":
     case #"excavation":
-      var_6bacd91d = #"smg_standard_t9";
+      str_primary = #"smg_standard_t9";
       w_secondary = getweapon(#"pistol_semiauto_t9");
 
       if(namespace_b73b9191::function_34163738()) {
         if(isinarray(level.var_7334dc42, #"hash_165cf52ce418f5a1")) {
-          var_6bacd91d = #"hash_165cf52ce418f5a1";
+          str_primary = #"hash_165cf52ce418f5a1";
         }
 
         if(isinarray(level.var_7334dc42, #"hash_3ed4419427e0d85a")) {
@@ -153,10 +153,10 @@ function function_2675a176() {
         }
       }
 
-      w_primary = getweapon(var_6bacd91d);
+      w_primary = getweapon(str_primary);
       var_deeb6741 = getweapon(#"frag_grenade");
-      var_2586eb45 = getweapon(#"eq_flash_grenade");
-      hms_util::function_2e7c81f6(w_primary, w_secondary, var_deeb6741, var_2586eb45);
+      w_tactical = getweapon(#"eq_flash_grenade");
+      hms_util::function_2e7c81f6(w_primary, w_secondary, var_deeb6741, w_tactical);
       break;
     case #"excavation_finale":
     case #"server_reveal":
@@ -175,15 +175,15 @@ function function_2675a176() {
       }
 
       var_deeb6741 = getweapon(#"frag_grenade");
-      var_2586eb45 = getweapon(#"eq_flash_grenade");
-      hms_util::function_2e7c81f6(w_primary, w_secondary, var_deeb6741, var_2586eb45);
+      w_tactical = getweapon(#"eq_flash_grenade");
+      hms_util::function_2e7c81f6(w_primary, w_secondary, var_deeb6741, w_tactical);
       break;
     default:
       w_primary = getweapon(#"sniper_standard_t9", "suppressed2");
       w_secondary = getweapon(#"pistol_burst_t9", "suppressed2");
       var_deeb6741 = getweapon(#"frag_grenade");
-      var_2586eb45 = getweapon(#"eq_flash_grenade");
-      hms_util::function_2e7c81f6(w_primary, w_secondary, var_deeb6741, var_2586eb45);
+      w_tactical = getweapon(#"eq_flash_grenade");
+      hms_util::function_2e7c81f6(w_primary, w_secondary, var_deeb6741, w_tactical);
       break;
   }
 }
@@ -231,7 +231,7 @@ function function_bdb2b948() {
 }
 
 function private function_37fa595() {
-  var_2c251c2e = util::get_map_name();
+  str_mapname = util::get_map_name();
   adddebugcommand("<dev string:x38>");
   adddebugcommand("<dev string:x91>");
   adddebugcommand("<dev string:xed>");
@@ -259,10 +259,10 @@ function private function_37fa595() {
 }
 
 function function_23d342b7() {
-  transient = savegame::function_6440b06b(#"transient");
+  transient = savegame::get_mission_data(#"transient");
   transient.var_296ec611 = 1;
-  savegame::function_7790f03(1);
+  savegame::checkpoint_save_asap(1);
   wait 0.5;
-  skipto::function_8722a51a("<dev string:x14a>");
+  skipto::set_current_skipto("<dev string:x14a>");
   map_restart();
 }

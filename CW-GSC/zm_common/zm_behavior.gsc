@@ -643,7 +643,7 @@ function zmzombieshouldmelee(entity) {
 }
 
 function findfleshservice(behaviortreeentity) {
-  if(is_true(behaviortreeentity.ai.var_870d0893)) {
+  if(is_true(behaviortreeentity.ai.rex_mp_swamp_concrete_debris)) {
     return;
   }
 
@@ -923,7 +923,7 @@ function private function_9d92b55a(behaviortreeentity) {
 }
 
 function function_f637b05d(behaviortreeentity) {
-  if(is_true(behaviortreeentity.ai.var_870d0893)) {
+  if(is_true(behaviortreeentity.ai.rex_mp_swamp_concrete_debris)) {
     return;
   }
 
@@ -1222,7 +1222,7 @@ function zombieupdategoalcode() {
 }
 
 function zombieenteredplayable(behaviortreeentity) {
-  if(is_true(behaviortreeentity.ai.var_870d0893)) {
+  if(is_true(behaviortreeentity.ai.rex_mp_swamp_concrete_debris)) {
     return;
   }
 
@@ -1407,7 +1407,7 @@ function zombieispushed(behaviortreeentity) {
 }
 
 function function_22d21726(behaviortreeentity) {
-  if(is_true(behaviortreeentity.var_687de2a9)) {
+  if(is_true(behaviortreeentity.crystallized)) {
     return true;
   }
 
@@ -1744,7 +1744,7 @@ function function_4c12882b(behaviortreeentity) {
 
   node = behaviortreeentity.var_a5add0c0;
 
-  if(isDefined(node.var_597f08bf) && node.var_597f08bf.targetname === "barricade_window") {
+  if(isDefined(node.traversal_blocker) && node.traversal_blocker.targetname === "barricade_window") {
     return true;
   }
 
@@ -1752,10 +1752,10 @@ function function_4c12882b(behaviortreeentity) {
 }
 
 function function_b86a1b9d(behaviortreeentity) {
-  barricades = [isDefined(behaviortreeentity.var_a5add0c0.var_597f08bf) ? behaviortreeentity.var_a5add0c0.var_597f08bf : undefined, behaviortreeentity.first_node];
+  barricades = [isDefined(behaviortreeentity.var_a5add0c0.traversal_blocker) ? behaviortreeentity.var_a5add0c0.traversal_blocker : undefined, behaviortreeentity.first_node];
 
   foreach(barricade in barricades) {
-    if(namespace_85745671::function_f4087909(barricade)) {
+    if(namespace_85745671::is_blocker_valid(barricade)) {
       if(getdvarint(#"hash_2f078c2224f40586", 0) && isDefined(barricade.zbarrier)) {
         record3dtext("<dev string:x68>" + barricade.zbarrier getentnum(), behaviortreeentity.origin, (1, 0.5, 0), "<dev string:x5a>", behaviortreeentity);
       }
@@ -1877,8 +1877,8 @@ function findnodesservice(behaviortreeentity) {
 function function_92d348e2(behaviortreeentity) {
   node = behaviortreeentity.traversestartnode;
 
-  if(isDefined(node.var_597f08bf)) {
-    barricade = node.var_597f08bf;
+  if(isDefined(node.traversal_blocker)) {
+    barricade = node.traversal_blocker;
     barricade notify(#"hash_5cfbbb6ee8378665");
     return true;
   }
@@ -1887,7 +1887,7 @@ function function_92d348e2(behaviortreeentity) {
 }
 
 function zombieattackableobjectservice(behaviortreeentity) {
-  if(is_true(behaviortreeentity.ai.var_870d0893)) {
+  if(is_true(behaviortreeentity.ai.rex_mp_swamp_concrete_debris)) {
     return;
   }
 
@@ -2705,7 +2705,7 @@ function function_95578a3c(willbekilled, inflictor, attacker, damage, flags, mod
   }
 }
 
-function function_92dcde87(start_pos, end_pos, velocity, var_781a6f9a, enemy) {
+function function_92dcde87(start_pos, end_pos, velocity, impact_time, enemy) {
   gravity = getdvarfloat(#"bg_lowgravity");
 
   if(velocity[2] > 0) {
@@ -2732,23 +2732,23 @@ function function_92dcde87(start_pos, end_pos, velocity, var_781a6f9a, enemy) {
 
   tmidfar = tapex + var_3ebd279c;
 
-  if(!isDefined(var_781a6f9a)) {
-    var_781a6f9a = tmidfar;
+  if(!isDefined(impact_time)) {
+    impact_time = tmidfar;
   }
 
   times = [tmidnear, tapex, tmidfar];
   points = [start_pos];
 
   for(i = 0; i < times.size; i++) {
-    if(var_781a6f9a < times[i]) {
+    if(impact_time < times[i]) {
       break;
     }
 
     points[points.size] = (start_pos[0] + times[i] * velocity[0], start_pos[1] + times[i] * velocity[1], start_pos[2] + times[i] * (velocity[2] - 0.5 * gravity * times[i]));
   }
 
-  if(var_781a6f9a != times[times.size - 1]) {
-    var_7f856c1e = (start_pos[0] + var_781a6f9a * velocity[0], start_pos[1] + var_781a6f9a * velocity[1], start_pos[2] + var_781a6f9a * (velocity[2] - 0.5 * gravity * var_781a6f9a));
+  if(impact_time != times[times.size - 1]) {
+    var_7f856c1e = (start_pos[0] + impact_time * velocity[0], start_pos[1] + impact_time * velocity[1], start_pos[2] + impact_time * (velocity[2] - 0.5 * gravity * impact_time));
 
     if(points.size <= 1 && distancesquared(start_pos, end_pos) < distancesquared(start_pos, var_7f856c1e)) {
       points[points.size] = end_pos;

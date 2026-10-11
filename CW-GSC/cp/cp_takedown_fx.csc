@@ -259,9 +259,9 @@ function private function_d4cb569b(localclientnum, fxid, end_notify) {
   self waittill(#"death", #"fx_death", end_notify);
   stopfx(localclientnum, fxid);
 
-  if(isDefined(self.var_2aa68449)) {
-    snd::stop(self.var_2aa68449);
-    self.var_2aa68449 = undefined;
+  if(isDefined(self.loopsnd)) {
+    snd::stop(self.loopsnd);
+    self.loopsnd = undefined;
   }
 }
 
@@ -343,7 +343,7 @@ function private function_3383f5e2(localclientnum, state) {
     println("<dev string:x1db>");
     fxid = util::playFXOnTag(localclientnum, "maps/cp_takedown/fx9_td_rc_light_green", self, "tag_fx_light_rear");
     self thread function_d4cb569b(localclientnum, fxid, "stop_proximity_fx");
-    self.var_2aa68449 = snd::play("wpn_tkd_rcxd_detonate_timer_ready", [self, "tag_fx_light_rear"]);
+    self.loopsnd = snd::play("wpn_tkd_rcxd_detonate_timer_ready", [self, "tag_fx_light_rear"]);
     return;
   }
 
@@ -409,7 +409,7 @@ function private function_54f94439(localclientnum) {
   }
 
   self util::waittill_dobj(localclientnum);
-  level._fx.var_56d8a882 = self;
+  level._fx.bronco = self;
 }
 
 function private function_979cbf76(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -533,16 +533,16 @@ function private function_23f6671d() {
     scalar = level._fx.rc_car.velocity[0] / 1100;
     scalar = max(0, min(1, scalar));
     var_75128a58 = 1 - scalar;
-    var_69954662 = level._fx.rc_car.velocity[1] / 20;
-    var_69954662 = max(-1, min(1, var_69954662));
-    var_69954662 *= 0.5;
-    var_50bfab0d = level._fx.rc_car.origin + anglesToForward(level._fx.rc_car.angles) * 100 + (0, 0, 15);
-    screenpos = self function_a6a764a9(var_50bfab0d, 1);
+    lateral = level._fx.rc_car.velocity[1] / 20;
+    lateral = max(-1, min(1, lateral));
+    lateral *= 0.5;
+    focal_point = level._fx.rc_car.origin + anglesToForward(level._fx.rc_car.angles) * 100 + (0, 0, 15);
+    screenpos = self function_a6a764a9(focal_point, 1);
 
     if(isDefined(screenpos)) {
       self postfx::function_c8b5f318("pstfx_speedblur", "X Offset", screenpos[0]);
       self postfx::function_c8b5f318("pstfx_speedblur", "Y Offset", screenpos[1]);
-      self postfx::function_c8b5f318("pstfx_rain_loop_tkdn_rccar", "Origin X", screenpos[0] + var_69954662);
+      self postfx::function_c8b5f318("pstfx_rain_loop_tkdn_rccar", "Origin X", screenpos[0] + lateral);
       self postfx::function_c8b5f318("pstfx_rain_loop_tkdn_rccar", "Origin Y", screenpos[1]);
     }
 

@@ -88,15 +88,15 @@ function private door_manage_openers(c_door) {
     }
 
     closestdist = distance2d(mycenter, opener.origin);
-    var_17b1d600 = 110;
+    dooropendist = 110;
     var_af33ff77 = length(opener getvelocity());
 
     if(var_af33ff77 > 90) {
-      var_17b1d600 = 180;
+      dooropendist = 180;
     }
 
-    if(closestdist <= var_17b1d600 && abs(mycenter[2] - opener.origin[2]) < var_1bb1d9d4 && !is_true(c_door.breached)) {
-      results = opener function_a847c61f(4096, var_17b1d600 + 50);
+    if(closestdist <= dooropendist && abs(mycenter[2] - opener.origin[2]) < var_1bb1d9d4 && !is_true(c_door.breached)) {
+      results = opener function_a847c61f(4096, dooropendist + 50);
 
       if(results.var_4e035bb7) {
         c_door thread door_manager_try_ai_opener(opener);
@@ -247,19 +247,19 @@ function private function_a07f8293() {
 function private update_debug(newmsg, oldmsg) {
   self notify(#"new_msg");
   self endon(#"new_msg");
-  var_852f740c = 1;
+  oldmsgalpha = 1;
   displaytime = 5;
   steps = displaytime * 20;
-  var_18c3a98a = var_852f740c / steps;
+  var_18c3a98a = oldmsgalpha / steps;
   time = gettime();
 
   while(gettime() < time + displaytime * 1000) {
     if(getdvarint(#"hash_33928bcf1b3e5487", 0)) {
       print3d(self getEye() + (0, 0, 15), newmsg, (1, 1, 1), 1, 0.3, 1);
-      print3d(self getEye() + (0, 0, 10), oldmsg, (0.7, 0.7, 0.7), var_852f740c, 0.3, 1);
+      print3d(self getEye() + (0, 0, 10), oldmsg, (0.7, 0.7, 0.7), oldmsgalpha, 0.3, 1);
     }
 
-    var_852f740c -= var_18c3a98a;
+    oldmsgalpha -= var_18c3a98a;
     wait 0.05;
   }
 }
@@ -310,9 +310,9 @@ function function_b0731097(var_59e58a96, maxcheckdist) {
       hitent = results[#"entity"];
 
       if(isDefined(hitent.c_door)) {
-        var_fe505a43 = hitent function_808e656();
+        doorflags = hitent function_808e656();
 
-        if(var_fe505a43 &var_59e58a96) {
+        if(doorflags &var_59e58a96) {
           hitpos = results[#"position"];
           distance += distance(prevpos, hitpos);
 

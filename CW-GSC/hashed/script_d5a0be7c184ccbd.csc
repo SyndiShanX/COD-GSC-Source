@@ -17,9 +17,9 @@
 
 function event_handler[level_preinit] function_b489bb7b(eventstruct) {
   snd::function_d4ec748e(&function_f2a2832d);
-  snd::function_ce78b33b(&function_32ab045);
+  snd::function_ce78b33b(&_targetname);
   snd::trigger_init(&_trigger);
-  snd::function_5e69f468(&_objective);
+  snd::skipto_init(&_objective);
 }
 
 function event_handler[event_cc819519] function_686b88aa(eventstruct) {
@@ -44,7 +44,7 @@ function event_handler[event_cc819519] function_686b88aa(eventstruct) {
   thread function_5a97f38f();
 }
 
-function private function_32ab045(ent, name) {
+function private _targetname(ent, name) {
   switch (name) {
     case #"evt_audio_vig_forest_flyby":
       vh_heli = ent;
@@ -65,14 +65,14 @@ function private function_32ab045(ent, name) {
       vh_perimeter_vig_apc_threat = undefined;
       break;
     case #"audio_side_door_apc_go":
-      var_127d9a14 = ent;
+      vh_apc = ent;
       thread audio_side_door_apc_go(ent);
       ent waittill(#"death");
       level notify(#"hash_74a73f5954822211");
       var_f712b673 = undefined;
       break;
     case #"audio_side_door_apc_stop":
-      var_127d9a14 = ent;
+      vh_apc = ent;
       thread audio_side_door_apc_stop(ent);
       ent waittill(#"death");
       level notify(#"hash_74a73f5954822211");
@@ -212,7 +212,7 @@ function private function_f2a2832d(player, msg) {
       thread function_dc569745();
       break;
     case #"audio_stop_terminal_computer_duck":
-      function_ed62c9c2("cp_rus_amerika_terminal_computer_duck", 0.3);
+      clearsubmix("cp_rus_amerika_terminal_computer_duck", 0.3);
       break;
     case #"flg_audio_terminal_alarm_start":
       thread function_b676524d();
@@ -238,7 +238,7 @@ function private function_f2a2832d(player, msg) {
       break;
     case #"outro_movie":
       level notify(#"hash_6163ece11287ae21");
-      function_ed62c9c2("cp_rus_amerika_apc_ride_scene", 1);
+      clearsubmix("cp_rus_amerika_apc_ride_scene", 1);
       audio::snd_set_snapshot("cmn_duck_all_but_movie");
       break;
     case #"sfx_explode_reaction":
@@ -371,15 +371,15 @@ function private function_e098a17a(alias, v_position, var_7423a2af, var_ed8c72a9
   }
 }
 
-function function_37294a47(var_47544845) {
+function function_37294a47(e_dynent) {
   self endon(#"death");
 
   while(true) {
-    var_2564fee0 = var_47544845.origin + anglestoright(var_47544845.angles) * 12;
-    var_2564fee0 += anglestoup(var_47544845.angles) * 10;
+    var_2564fee0 = e_dynent.origin + anglestoright(e_dynent.angles) * 12;
+    var_2564fee0 += anglestoup(e_dynent.angles) * 10;
     self.origin = var_2564fee0;
 
-    if(var_47544845.health <= 0) {
+    if(e_dynent.health <= 0) {
       self delete();
     }
 
@@ -402,11 +402,11 @@ function function_befba10a() {
 }
 
 function function_563a791() {
-  function_5ea2c6e3("cp_rus_amerika_level_begin");
+  addsubmix("cp_rus_amerika_level_begin");
 }
 
 function function_1cfbed4a() {
-  function_ed62c9c2("cp_rus_amerika_level_begin");
+  clearsubmix("cp_rus_amerika_level_begin");
 }
 
 function function_7ecccb98() {
@@ -683,17 +683,17 @@ function function_329bafc9() {
 }
 
 function function_b18c414e() {
-  function_5ea2c6e3("cp_rus_amk_arcade_game_interacts", 0, 1);
+  addsubmix("cp_rus_amk_arcade_game_interacts", 0, 1);
   level waittill(#"flg_arcade_emulator_stop");
-  function_ed62c9c2("cp_rus_amk_arcade_game_interacts", 1);
+  clearsubmix("cp_rus_amk_arcade_game_interacts", 1);
 }
 
 function function_db555295(ent) {
   wait 0.5;
   snd::play("evt_enemy_truck_drive_up", ent);
-  var_76a03a09 = snd::play([2.1, "evt_enemy_truck_drive_up_idle", 0.25], ent);
+  truck_idle = snd::play([2.1, "evt_enemy_truck_drive_up_idle", 0.25], ent);
   level waittill(#"flg_audio_truck_engine_idle_stop");
-  snd::stop(var_76a03a09, 0.25);
+  snd::stop(truck_idle, 0.25);
 }
 
 function function_55f97b00() {
@@ -752,7 +752,7 @@ function function_8f849679() {
 }
 
 function function_dc569745() {
-  function_5ea2c6e3("cp_rus_amerika_terminal_computer_duck", 0, 1);
+  addsubmix("cp_rus_amerika_terminal_computer_duck", 0, 1);
 }
 
 function function_b676524d() {
@@ -808,12 +808,12 @@ function function_9bb82dae() {
 }
 
 function function_8656b058() {
-  function_5ea2c6e3("cp_rus_amerika_apc_wpn", 0, 1);
+  addsubmix("cp_rus_amerika_apc_wpn", 0, 1);
 }
 
 function function_c8cd1f84() {
   snd::play("evt_motor_pool_rollup_door", (9674, 1318, -403));
-  function_ed62c9c2("cp_rus_amerika_apc_wpn", 0);
+  clearsubmix("cp_rus_amerika_apc_wpn", 0);
   level notify(#"hash_4867a529b7eb5c2d");
 }
 
@@ -843,7 +843,7 @@ function function_f958a41b() {
   level flag::set("flg_audio_apc_started");
   wait 2;
   snd::play("veh_apc_ride_full_lr");
-  function_5ea2c6e3("cp_rus_amerika_apc_ride_scene", 0, 1);
+  addsubmix("cp_rus_amerika_apc_ride_scene", 0, 1);
 }
 
 function function_85f15df8() {
@@ -853,7 +853,7 @@ function function_85f15df8() {
 
   level flag::set("flg_audio_apc_started");
   snd::play([0, "veh_apc_ride_courtyard_lr", 0.5]);
-  function_5ea2c6e3("cp_rus_amerika_apc_ride_scene", 0, 1);
+  addsubmix("cp_rus_amerika_apc_ride_scene", 0, 1);
 }
 
 function function_4c2bbef4() {
@@ -863,7 +863,7 @@ function function_4c2bbef4() {
 
   level flag::set("flg_audio_apc_started");
   snd::play([0, "veh_apc_ride_mall_lr", 0.5]);
-  function_5ea2c6e3("cp_rus_amerika_apc_ride_scene", 0, 1);
+  addsubmix("cp_rus_amerika_apc_ride_scene", 0, 1);
 }
 
 function function_bd18b7b8() {

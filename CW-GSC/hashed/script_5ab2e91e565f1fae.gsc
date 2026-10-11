@@ -69,7 +69,7 @@ function function_9c0ed7ec() {
   namespace_232ddc52::music("3.0_plaza");
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   hms_util::print("<dev string:x4b>");
 }
 

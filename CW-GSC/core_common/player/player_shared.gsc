@@ -106,7 +106,7 @@ function on_player_spawned() {
     return;
   }
 
-  self function_619a5c20();
+  self pingable();
 
   if(!isDefined(level.var_2386648b)) {
     level.var_2386648b = 0;
@@ -510,29 +510,29 @@ function weapondata_give(weapondata) {
   }
 }
 
-function switch_to_primary_weapon(b_immediate = 0, var_61bb3b76 = 0) {
+function switch_to_primary_weapon(b_immediate = 0, b_force_switch = 0) {
   weapon = self loadout::function_18a77b37("primary");
 
   if(is_valid_weapon(weapon)) {
     if(b_immediate) {
-      self switchtoweaponimmediate(weapon, var_61bb3b76);
+      self switchtoweaponimmediate(weapon, b_force_switch);
       return;
     }
 
-    self switchtoweapon(weapon, var_61bb3b76);
+    self switchtoweapon(weapon, b_force_switch);
   }
 }
 
-function function_1bff13a1(b_immediate = 0, var_61bb3b76 = 0) {
+function function_1bff13a1(b_immediate = 0, b_force_switch = 0) {
   weapon = self loadout::function_18a77b37("secondary");
 
   if(is_valid_weapon(weapon)) {
     if(b_immediate) {
-      self switchtoweaponimmediate(weapon, var_61bb3b76);
+      self switchtoweaponimmediate(weapon, b_force_switch);
       return;
     }
 
-    self switchtoweapon(weapon, var_61bb3b76);
+    self switchtoweapon(weapon, b_force_switch);
   }
 }
 

@@ -190,14 +190,14 @@ function function_1f89b047() {
   var_f743e210 = 0;
 
   if(game.outcome.var_3c5fdf73.size > 1) {
-    var_cdf943df = undefined;
+    streakteam = undefined;
 
     for(index = game.outcome.var_3c5fdf73.size - 2; index >= 0; index--) {
-      if(!isDefined(var_cdf943df)) {
-        var_cdf943df = game.outcome.var_3c5fdf73[index].team;
+      if(!isDefined(streakteam)) {
+        streakteam = game.outcome.var_3c5fdf73[index].team;
       }
 
-      if(var_cdf943df != game.outcome.var_3c5fdf73[index].team) {
+      if(streakteam != game.outcome.var_3c5fdf73[index].team) {
         break;
       }
 
@@ -208,7 +208,7 @@ function function_1f89b047() {
   var_d70a4dd2 = game.outcome.var_3c5fdf73[game.outcome.var_3c5fdf73.size - 1].team;
   var_b66d2861 = 0;
 
-  if(var_d70a4dd2 === var_cdf943df) {
+  if(var_d70a4dd2 === streakteam) {
     var_f743e210++;
   } else if(var_f743e210 > 1) {
     var_b66d2861 = 1;

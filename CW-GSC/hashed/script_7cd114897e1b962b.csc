@@ -56,7 +56,7 @@ function function_6e338a1c() {
     namespace_1c7b37c6::item_replacer(var_f8a4c541, #"level_7_gun_list", #"level_7_onslaught_gun_list");
     namespace_1c7b37c6::item_replacer(var_f8a4c541, #"level_8_gun_list", #"level_8_onslaught_gun_list");
 
-    if(str_gametype === #"hash_1aecd78b7244ff81") {
+    if(str_gametype === #"zonslaught_lotto_loadouts") {
       namespace_1c7b37c6::item_replacer(var_f8a4c541, #"level_1_onslaught_gun_list", #"t9_empty_global");
       namespace_1c7b37c6::item_replacer(var_f8a4c541, #"level_2_onslaught_gun_list", #"t9_empty_global");
       namespace_1c7b37c6::item_replacer(var_f8a4c541, #"level_3_onslaught_gun_list", #"t9_empty_global");

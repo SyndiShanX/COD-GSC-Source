@@ -462,7 +462,7 @@ function function_f081ea1a() {
 }
 
 function function_3424c790() {
-  snd::stop(self.minigame.audio.var_f1ed0ff0, 0.25);
+  snd::stop(self.minigame.audio.tension_loop, 0.25);
 }
 
 function private function_80847fa6(localclientnum) {
@@ -546,9 +546,9 @@ function private function_efaef15b(localclientnum, state) {
   setuimodelvalue(getuimodel(rootmodel, "wrenchState"), state);
 
   if(state == 1 && self.minigame.audio.var_78430c0a == 0) {
-    self.minigame.audio.var_f1ed0ff0 = snd::play("evt_lockpick_wrench_tension_loop", self);
+    self.minigame.audio.tension_loop = snd::play("evt_lockpick_wrench_tension_loop", self);
   } else if(state == 0 && self.minigame.audio.var_78430c0a == 1) {
-    snd::stop(self.minigame.audio.var_f1ed0ff0, 0.25);
+    snd::stop(self.minigame.audio.tension_loop, 0.25);
   }
 
   self.minigame.audio.var_78430c0a = state;

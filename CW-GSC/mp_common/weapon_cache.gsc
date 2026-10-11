@@ -42,7 +42,7 @@ function finalize() {
     return;
   }
 
-  var_b5f67dff = territory::function_5c7345a3("weapon_cache");
+  var_b5f67dff = territory::get_struct_array("weapon_cache");
 
   foreach(var_73b9e48e in var_b5f67dff) {
     var_73b9e48e.var_331b8fa4 = 0;
@@ -95,14 +95,14 @@ function function_692bd0bc(player) {
 
   player.var_864fb19 = gettime();
   player notify(#"resupply");
-  player playsoundtoplayer(#"hash_da34d63dbce7ba7", player);
+  player playsoundtoplayer(#"mpl_ammocrate_ammoget", player);
   player thread function_2909dca6(self.var_73b9e48e);
   player thread function_f9502d83();
 }
 
 function function_f9502d83() {
   self endon(#"disconnect");
-  var_b5f67dff = territory::function_5c7345a3("weapon_cache");
+  var_b5f67dff = territory::get_struct_array("weapon_cache");
   self clientfield::set_to_player("weapon_cache_ammo_cooldown", 1);
   level.var_50c35573[self getentitynumber()] = 0;
 
@@ -140,7 +140,7 @@ function function_f830a9db() {
 }
 
 function private function_6f438290() {
-  var_b5f67dff = territory::function_5c7345a3("weapon_cache");
+  var_b5f67dff = territory::get_struct_array("weapon_cache");
   var_8794b467 = arraysortclosest(var_b5f67dff, self.origin);
   return var_8794b467[0];
 }

@@ -37,7 +37,7 @@ function function_25a6167c(str_objective) {
   namespace_534279a::spawn_allies("catacombs_start");
   level thread namespace_9e5ef376::function_b7e649c0(1);
   var_dbdb0082 = getEntArray("veh_courtyard_static", "targetname");
-  array::run_all(var_dbdb0082, &val::set, #"hash_7d97d109d0838d04", "ignoreme", 1);
+  array::run_all(var_dbdb0082, &val::set, #"courtyard_vehicles", "ignoreme", 1);
   var_fd4c649f = getEnt("aa_courtyard", "targetname");
   var_fd4c649f namespace_534279a::function_86201bb7();
 }
@@ -50,8 +50,8 @@ function function_41e4735f(str_objective, b_starting) {
 
   namespace_95f223d5::music("3.0_catacombs");
   level thread hms_util::function_eaa0342e("catacombs_containment_warn", "catacombs_containment_fail");
-  level.mason val::set(#"hash_427e34b7109385d2", "ignoreme", 1);
-  level.woods val::set(#"hash_427e34b7109385d2", "ignoreme", 1);
+  level.mason val::set(#"ignore_allies", "ignoreme", 1);
+  level.woods val::set(#"ignore_allies", "ignoreme", 1);
   level thread function_861ceb4d(0);
   level thread function_9583a1e8();
   level thread function_5fc8eb8b();
@@ -62,10 +62,10 @@ function function_41e4735f(str_objective, b_starting) {
   level.player namespace_534279a::function_a3c3a2b0();
   namespace_534279a::function_4f981a25("right_path_catacombs_juggernaut_group", 1, "flg_catacombs_complete");
   level flag::wait_till("flg_catacombs_complete");
-  level thread skipto::function_4e3ab877("catacombs");
+  level thread skipto::objective_completed("catacombs");
 }
 
-function function_fa1a97a3(str_objective, b_starting, var_aa1a6455, player) {}
+function function_fa1a97a3(str_objective, b_starting, b_direct, player) {}
 
 function function_116c72af() {
   level.adler ai::set_behavior_attribute("disablelean", 1);
@@ -199,8 +199,8 @@ function private function_9583a1e8() {
   savegame::checkpoint_save();
 }
 
-function private function_d044d1e1(var_14b6bdf, var_dab80c52) {
-  a_ai = getaiarray(var_14b6bdf, "script_string");
+function private function_d044d1e1(str_script_string, var_dab80c52) {
+  a_ai = getaiarray(str_script_string, "script_string");
 
   if(isDefined(a_ai)) {
     function_1eaaceab(a_ai);
@@ -340,7 +340,7 @@ function function_e369720f(var_fed62d00) {
 function private function_45fc7e20() {
   var_b4ce85e2 = getEntArray("t_catacombs_jugg_adler_movement", "targetname");
   array::thread_all(var_b4ce85e2, &function_59a85291);
-  level.adler colors::function_4156cb7d("c", #"allies");
+  level.adler colors::clear_color_order_from_team("c", #"allies");
 }
 
 function private function_59a85291() {
@@ -413,8 +413,8 @@ function function_794e687() {
 
 function function_842a2f86() {
   var_ce25a17e = getPlayers()[0];
-  var_9499e890 = ["chapel", "st_nicholas_church_02", "west_wall_blockout", "bell_tower_complete", "church_back_tower_01", "west_wall_blockout", "interior_cathedral_01"];
-  level thread function_b43558fa(var_ce25a17e, var_9499e890);
+  a_districts = ["chapel", "st_nicholas_church_02", "west_wall_blockout", "bell_tower_complete", "church_back_tower_01", "west_wall_blockout", "interior_cathedral_01"];
+  level thread function_b43558fa(var_ce25a17e, a_districts);
   level flag::wait_till("flg_catacomb_all_juggernauts_killed");
   var_ce25a17e districts::function_a7d79fcb("graveyard");
 }

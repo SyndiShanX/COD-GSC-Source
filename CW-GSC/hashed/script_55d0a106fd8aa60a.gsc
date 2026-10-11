@@ -73,7 +73,7 @@ function function_87560e1a(str_objective, b_starting) {
   vol_server_reveal_upper_left = getEnt("vol_server_reveal_upper_left", "targetname");
   level.ai_woods thread function_8767f7a7();
   level flag::wait_till("flg_server_slide_complete");
-  savegame::function_7790f03(1);
+  savegame::checkpoint_save_asap(1);
   level flag::wait_till_any(array("flg_server_woods_slide", "flg_server_woods_front", "flg_cleanup_server_approach"));
 
   if(!level flag::get("flg_cleanup_server_approach")) {
@@ -90,7 +90,7 @@ function function_87560e1a(str_objective, b_starting) {
   level notify(#"stop_server_nag");
   objectives::complete("server_clear");
   namespace_b73b9191::function_29b49cb5();
-  skipto::function_4e3ab877(str_objective);
+  skipto::objective_completed(str_objective);
 }
 
 function function_4fa7fc78() {
@@ -206,10 +206,10 @@ function function_8767f7a7() {
 }
 
 function function_79905291(heli_targetname) {
-  level.var_ebbd5cf8 = namespace_b73b9191::function_f206e65e(heli_targetname, "sp_excavation_helo_pilot", 0);
-  level.var_ebbd5cf8 val::set("server_heli", "ignoreme", 1);
-  level thread scene::play("scene_yam_7090_exc_heli_flyover", "heli_loop", level.var_ebbd5cf8);
-  snd::client_targetname(level.var_ebbd5cf8, "audio_srv_heli");
+  level.vh_hind = namespace_b73b9191::function_f206e65e(heli_targetname, "sp_excavation_helo_pilot", 0);
+  level.vh_hind val::set("server_heli", "ignoreme", 1);
+  level thread scene::play("scene_yam_7090_exc_heli_flyover", "heli_loop", level.vh_hind);
+  snd::client_targetname(level.vh_hind, "audio_srv_heli");
   wait 1;
   level thread namespace_7468806b::function_18babf5c();
 }
@@ -218,14 +218,14 @@ function function_dba43792(str_objective) {
   objectives::complete("obj_yamantau_3");
   level thread objectives::scripted("obj_yamantau_4", undefined, #"hash_74aac1baed0971dd");
   level thread scene::play("scene_yam_7010_exc_extraction", "stage3");
-  level thread breadcrumb::function_61037c6c(#"hash_28557f9975795d89");
+  level thread breadcrumb::start_chain(#"hash_28557f9975795d89");
   level namespace_5d7a2dac::music("11.0_dig_site");
-  namespace_b73b9191::function_2683ec5d();
+  namespace_b73b9191::spawn_woods();
   var_8c37586a = struct::get("server_reveal_woods_start", "targetname");
   level.ai_woods forceteleport(var_8c37586a.origin, var_8c37586a.angles);
 }
 
-function function_bb405879(str_objective, b_starting, var_aa1a6455, player) {}
+function function_bb405879(str_objective, b_starting, b_direct, player) {}
 
 function function_4cf852d1() {
   self endon(#"death");
@@ -269,7 +269,7 @@ function function_7360ee80() {
   level flag::wait_till("all_players_connected");
   wait 0.2;
   var_f4d1ff11 prompts::function_a4a9acfc(#"use", &function_7ef3c789);
-  transient = savegame::function_6440b06b(#"transient");
+  transient = savegame::get_mission_data(#"transient");
 
   if(!is_true(transient.var_be621aea)) {
     s_server_locker.var_589053fc = 1;
@@ -308,7 +308,7 @@ function function_e936fbf4(str_objective, b_starting) {
   if(b_starting) {
     level thread server_attach_interact();
     snd::client_msg("audio_sever_heli_custom");
-    snd::client_targetname(level.var_ebbd5cf8, "audio_srv_heli");
+    snd::client_targetname(level.vh_hind, "audio_srv_heli");
     function_6137f397();
   }
 
@@ -329,14 +329,14 @@ function function_e936fbf4(str_objective, b_starting) {
   var_be7ede03[0] setgoal(nd_server_lift_guard_01, 1);
   var_be7ede03[1] setgoal(nd_server_lift_guard_02, 1);
   level waittill(#"hash_23f689b82d9c89ab");
-  level.var_6cc58e4b = 1;
+  level.usefpsdeathcam = 1;
   level callback::on_player_killed(&function_ce966826);
   wait 0.2;
   level.player actions::function_fc288808();
   level thread function_6dcdd6a6();
   level flag::wait_till("flg_server_cable_attached");
   level.ai_woods linkTo(level.var_17d7d4dc.var_121c5e14);
-  savegame::function_7790f03(1);
+  savegame::checkpoint_save_asap(1);
   objectives::complete("obj_yamantau_5");
   objectives::scripted("obj_yamantau_6", undefined, #"hash_20bf411b274bfe85");
   level thread function_f5c1bd9b();
@@ -344,9 +344,9 @@ function function_e936fbf4(str_objective, b_starting) {
   level.var_5da01f0e = 0;
   level.var_decec793 = 0;
   callback::on_ai_killed(&on_ai_killed);
-  var_233809e = getEntArray("cp_explosive_barrel", "targetname");
+  a_barrels = getEntArray("cp_explosive_barrel", "targetname");
 
-  foreach(barrel in var_233809e) {
+  foreach(barrel in a_barrels) {
     barrel.health = 5;
     barrel thread function_c78b88a0();
   }
@@ -356,14 +356,14 @@ function function_e936fbf4(str_objective, b_starting) {
   namespace_1d6bb8b4::function_3b57a70e();
   level thread function_b62fff3d();
   level waittill(#"hash_2fe46a0db2c6edd1");
-  skipto::function_4e3ab877(str_objective);
+  skipto::objective_completed(str_objective);
   level thread lui::screen_fade_out(1);
   snd::client_msg("outro_movie");
   wait 1;
   player_decision::function_430ebd4b(2, 5);
   player_decision::function_8c0836dd(1);
   player_decision::function_8c0836dd(0);
-  skipto::function_1c2dfc20("cp_ger_hub_post_yamantau");
+  skipto::level_completed("cp_ger_hub_post_yamantau");
 }
 
 function function_1996ff21(params) {
@@ -514,7 +514,7 @@ function function_f5c1bd9b() {
   wait 0.2;
 
   if(level.var_decec793 < 3) {
-    util::function_2a8f4806(#"hash_60f2b2121e40a7ff", #"hash_546f9aea6c8b668a");
+    util::missionfailedwrapper_nodeath(#"hash_60f2b2121e40a7ff", #"hash_546f9aea6c8b668a");
   }
 
   level waittill(#"hash_7fd5b46a8ecf57ef");
@@ -544,16 +544,16 @@ function function_f5c1bd9b() {
 }
 
 function function_f59af500(str_objective) {
-  level.var_ebbd5cf8 = namespace_b73b9191::function_f206e65e("vh_kgb_server_lift_hind", "sp_excavation_helo_pilot", 0);
-  level.var_ebbd5cf8 val::set("server_heli", "ignoreme", 1);
+  level.vh_hind = namespace_b73b9191::function_f206e65e("vh_kgb_server_lift_hind", "sp_excavation_helo_pilot", 0);
+  level.vh_hind val::set("server_heli", "ignoreme", 1);
   level thread scene::play("scene_yam_7010_exc_extraction", "stage3");
   level namespace_5d7a2dac::music("11.0_dig_site");
-  namespace_b73b9191::function_2683ec5d();
+  namespace_b73b9191::spawn_woods();
   var_b4bb921 = struct::get("woods_server_attach_teleport", "targetname");
   level.ai_woods forceteleport(var_b4bb921.origin, var_b4bb921.angles);
 }
 
-function function_b80cf494(str_objective, b_starting, var_aa1a6455, player) {}
+function function_b80cf494(str_objective, b_starting, b_direct, player) {}
 
 function function_fef400d0() {
   self endon(#"death");
@@ -595,9 +595,9 @@ function function_c78b88a0() {
 function function_ce966826(s_params) {
   waitframe(1);
   player_pos = self getplayercamerapos();
-  var_cac40761 = self getplayerangles();
-  v_forward = vectorNormalize(anglesToForward(var_cac40761)) * 50 + (0, 0, 30);
-  e_anchor = util::spawn_model(#"tag_origin", player_pos - v_forward, var_cac40761);
+  player_ang = self getplayerangles();
+  v_forward = vectorNormalize(anglesToForward(player_ang)) * 50 + (0, 0, 30);
+  e_anchor = util::spawn_model(#"tag_origin", player_pos - v_forward, player_ang);
   var_121c5e14 = getEnt("vault_lift", "targetname");
   e_anchor linkTo(var_121c5e14);
 

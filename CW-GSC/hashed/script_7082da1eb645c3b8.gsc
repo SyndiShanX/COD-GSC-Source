@@ -62,10 +62,10 @@ function elevator_main(str_objective, b_starting) {
   doors::function_f35467ac("e_terminal_entrance_door");
   level flag::wait_till("flg_elevator_end");
   cp_rus_amerika::function_cee29c87("terminal");
-  skipto::function_4e3ab877(str_objective);
+  skipto::objective_completed(str_objective);
 }
 
-function function_987cb73(str_objective, b_starting, var_aa1a6455, player) {
+function function_987cb73(str_objective, b_starting, b_direct, player) {
   if(player) {
     function_46490d4e(1);
     level flag::set("flg_elevator_end");
@@ -146,7 +146,7 @@ function function_c73d21cc() {
   level.woods val::set(#"woods_elevator", "ignoreall", 1);
   level.woods val::set(#"woods_elevator", "ignoreme", 1);
   level.woods ai::set_behavior_attribute("vignette_mode", "fast");
-  level.woods battlechatter::function_2ab9360b(0);
+  level.woods battlechatter::bc_allow(0);
 
   if(var_63d2d7ec._notify === #"flg_elevator_all_enemies_dead") {
     level thread namespace_4bd68414::function_ffca973f();
@@ -170,7 +170,7 @@ function function_c73d21cc() {
   level flag::wait_till("flg_control_tower_elevator_at_top");
   level thread namespace_4bd68414::function_13e6b28c();
   level.woods ai::set_behavior_attribute("demeanor", "combat");
-  level.woods battlechatter::function_2ab9360b(1);
+  level.woods battlechatter::bc_allow(1);
   level.woods unlink();
   level.woods val::set(#"woods_elevator", "ignoreall", 0);
   level.woods val::set(#"woods_elevator", "ignoreme", 0);
@@ -187,7 +187,7 @@ function function_c73d21cc() {
   level.woods ai::set_behavior_attribute("disablelean", 1);
   level.woods ai::set_behavior_attribute("disablepeek", 1);
   level.woods ai::set_behavior_attribute("vignette_mode", "fast");
-  level.woods battlechatter::function_2ab9360b(0);
+  level.woods battlechatter::bc_allow(0);
   level scene::play("scene_amk_6010_tml_computer", "room_enter");
   level flag::set("flg_elevator_woods_in_terminal_room");
 
@@ -283,8 +283,8 @@ function function_fef9a6fd() {
     var_e0f6457b[0] = self;
     level scene::init(#"hash_221910ad2b77a8e3", var_e0f6457b);
     level thread scene::play(#"hash_221910ad2b77a8e3", var_e0f6457b);
-    var_facf831 = scene::function_8582657c(#"hash_221910ad2b77a8e3", "enter");
-    wait var_facf831 - 1;
+    n_anim_time = scene::function_8582657c(#"hash_221910ad2b77a8e3", "enter");
+    wait n_anim_time - 1;
     self ai::set_pacifist(0);
     self.goalradius = 32;
     nd_elevator_hallway = getnode("nd_elevator_hallway", "targetname");
@@ -346,10 +346,10 @@ function function_da9636d5(str_objective, b_starting) {
   level thread function_37b57088();
   function_b53a12d0();
   level flag::wait_till("flg_terminal_end");
-  skipto::function_4e3ab877(b_starting);
+  skipto::objective_completed(b_starting);
 }
 
-function function_207b0552(str_objective, b_starting, var_aa1a6455, player) {
+function function_207b0552(str_objective, b_starting, b_direct, player) {
   clientfield::set("cull_courtyard", 1);
   var_5c5d4c59 = getactorteamarray("axis");
 
@@ -403,7 +403,7 @@ function function_fb9fa5af() {
   level.woods ai::set_behavior_attribute("disablelean", 1);
   level.woods ai::set_behavior_attribute("disablepeek", 1);
   level.woods ai::set_behavior_attribute("vignette_mode", "fast");
-  level.woods battlechatter::function_2ab9360b(0);
+  level.woods battlechatter::bc_allow(0);
   level namespace_2977687d::scene_amk_6010_tml_computer();
   level.woods flag::set("flg_terminal_woods_open_door");
   level thread namespace_fc3e8cb::function_5c5b6ea7("nd_observation_woods_start");
@@ -412,7 +412,7 @@ function function_fb9fa5af() {
   level.woods ai::set_behavior_attribute("disablelean", 0);
   level.woods ai::set_behavior_attribute("disablepeek", 0);
   level.woods ai::function_3a5e9945(1);
-  level.woods battlechatter::function_2ab9360b(0);
+  level.woods battlechatter::bc_allow(0);
 }
 
 function function_b53a12d0() {
@@ -753,15 +753,15 @@ function function_4f772681() {
 
     if(flag::get("flg_terminal_gun_low_ready")) {
       if(level.player getcurrentweapon() == level.var_e3f5eafc && var_229a8637) {
-        level.player util::function_749362d7(0);
+        level.player util::set_low_ready(0);
         var_229a8637 = 0;
       } else if(level.player getcurrentweapon() != level.var_e3f5eafc && !var_229a8637) {
-        level.player util::function_749362d7(1, #"hash_79d8239db87989b0");
+        level.player util::set_low_ready(1, #"hash_79d8239db87989b0");
         var_229a8637 = 1;
       }
     } else if(!flag::get("flg_terminal_gun_low_ready") && var_229a8637) {
       var_229a8637 = 0;
-      level.player util::function_749362d7(0);
+      level.player util::set_low_ready(0);
     }
 
     wait 0.25;
@@ -771,7 +771,7 @@ function function_4f772681() {
 }
 
 function private function_458ecc56() {
-  level.player util::function_749362d7(0);
+  level.player util::set_low_ready(0);
   level.player util::blend_movespeedscale_default(1);
   level.player val::reset(#"hash_6496005f6f13ed07", "show_weapon_hud");
   var_2ad20c99 = getEnt("t_terminal_gun_low_ready_volume", "targetname");
@@ -788,7 +788,7 @@ function function_7ff0a4d3(str_objective, b_starting) {
   namespace_fc3e8cb::function_44a6fc04(str_objective);
 
   if(!b_starting) {
-    savegame::function_7790f03();
+    savegame::checkpoint_save_asap();
   }
 
   level thread function_31224772();
@@ -806,7 +806,7 @@ function function_7ff0a4d3(str_objective, b_starting) {
   level.vh_town_square_apc thread vehicle::get_on_and_go_path(nd_vh_town_square_apc_observation_start);
   level thread function_bea61ad6();
   level flag::wait_till("flg_observation_end");
-  skipto::function_4e3ab877(str_objective);
+  skipto::objective_completed(str_objective);
 }
 
 function function_9df17fc0() {
@@ -821,7 +821,7 @@ function function_9df17fc0() {
   }
 }
 
-function function_123e9b38(str_objective, b_starting, var_aa1a6455, player) {
+function function_123e9b38(str_objective, b_starting, b_direct, player) {
   if(player == 0) {
     level thread namespace_f6d09d1a::function_7b9feaa3("lgtexp_motorpool_vista", 0);
     level flag::set("flg_terminal_end_gundown");
@@ -845,7 +845,7 @@ function function_3005c939() {
   level.woods ai::set_behavior_attribute("vignette_mode", "fast");
   level.woods ai::set_behavior_attribute("disablepeek", 1);
   level.woods ai::set_behavior_attribute("disablelean", 1);
-  level.woods battlechatter::function_2ab9360b(0);
+  level.woods battlechatter::bc_allow(0);
   level thread namespace_fc3e8cb::function_5c5b6ea7("nd_observation_woods_approaching_catwalk");
   level flag::wait_till("flg_terminal_end");
   level namespace_fc3e8cb::function_92dea087("flg_observation_approaching_window", "flg_terminal_end");

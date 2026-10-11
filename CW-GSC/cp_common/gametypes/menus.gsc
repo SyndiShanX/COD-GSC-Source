@@ -232,7 +232,7 @@ function on_menu_response() {
     }
 
     if(menu == game.menu[#"menu_changeclass"] || menu == game.menu[#"menu_changeclass_offline"]) {
-      if(response != "back" && response != "cancel" && (!isDefined(self.var_efc9bc54) || !self.var_efc9bc54)) {
+      if(response != "back" && response != "cancel" && (!isDefined(self.disableclasscallback) || !self.disableclasscallback)) {
         self closeingamemenu();
         self.selectedclass = 1;
         self[[level.curclass]](response);
@@ -281,18 +281,18 @@ function private function_c35a1bfc() {
   player savegame::set_player_data("savegame_assists", undefined);
   player savegame::set_player_data("savegame_incaps", undefined);
   player savegame::set_player_data("savegame_revives", undefined);
-  player savegame::function_81534803(#"transient");
+  player savegame::clear_mission_data(#"transient");
   player clearallnoncheckpointdata();
-  world.var_b86bf11e = undefined;
+  world.checkpoint_used = undefined;
   globallogic_ui::function_760546ce();
-  missionname = savegame::function_8136eb5a();
+  missionname = savegame::get_mission_name();
   mapbundle = getmapscriptbundle(missionname);
 
   if(isDefined(mapbundle) && isDefined(mapbundle.var_a04dfce6)) {
     var_a04dfce6 = mapbundle.var_a04dfce6;
 
     if(var_a04dfce6 != "") {
-      skipto::function_8722a51a(var_a04dfce6, 1);
+      skipto::set_current_skipto(var_a04dfce6, 1);
       map_restart();
     }
 
@@ -331,5 +331,5 @@ function private function_d7c2965() {
     return;
   }
 
-  function_f31af5ab();
+  checkpointrestart();
 }

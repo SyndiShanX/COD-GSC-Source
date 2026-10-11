@@ -36,9 +36,9 @@ function main(str_objective, b_starting) {
   level thread namespace_d9b153b9::start_outro(b_starting);
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {}
+function cleanup(str_objective, b_starting, b_direct, player) {}
 
-function function_c26b0bc0() {
+function flags_init() {
   level flag::init("waterfall_path_completed");
   level flag::init("flag_waterfall_path_intro_complete");
   level flag::init("flag_waterfall_path_heli_complete");
@@ -92,7 +92,7 @@ function waterfall_path() {
   level flag::wait_till("flag_" + var_c79d614f);
 
   while(true) {
-    level thread namespace_d9b153b9::function_a57f6629(var_c79d614f);
+    level thread namespace_d9b153b9::notify_on_flag(var_c79d614f);
     level function_22aed800(var_c79d614f);
 
     if(level flag::get(var_c79d614f + "_completed")) {
@@ -139,7 +139,7 @@ function function_22aed800(var_c79d614f) {
   level flag::set(var_c79d614f + "_completed");
   var_2cf9fe23 = level.var_731c10af.var_42659717 + 1;
   str = "visit_" + var_2cf9fe23 + "_" + var_c79d614f + "_" + level.var_731c10af.paths[var_c79d614f].count;
-  bb::function_cd497743(str, level.player);
+  bb::logplayermapnotification(str, level.player);
 }
 
 function function_56f79bad(var_c79d614f) {
@@ -239,12 +239,12 @@ function function_3e6220d0() {
   self thread function_c1c860ba();
 
   if(isDefined(self.animname) && self.animname == "enemy1") {
-    self.var_bb9c0d50 = "scene_pri_waterfall_kill_enemy1_react";
+    self.react_scene = "scene_pri_waterfall_kill_enemy1_react";
     level.var_8df0c78a = self;
   }
 
   if(isDefined(self.animname) && self.animname == "enemy2") {
-    self.var_bb9c0d50 = "scene_pri_waterfall_kill_enemy2_react";
+    self.react_scene = "scene_pri_waterfall_kill_enemy2_react";
     self detach(self.hatmodel);
 
     if(isDefined(self.destructibledef)) {
@@ -253,11 +253,11 @@ function function_3e6220d0() {
   }
 
   if(isDefined(self.animname) && self.animname == "enemy3") {
-    self.var_bb9c0d50 = "scene_pri_waterfall_kill_enemy3_react";
+    self.react_scene = "scene_pri_waterfall_kill_enemy3_react";
   }
 
   if(isDefined(self.animname) && self.animname == "enemy4") {
-    self.var_bb9c0d50 = "scene_pri_waterfall_kill_enemy4_react";
+    self.react_scene = "scene_pri_waterfall_kill_enemy4_react";
     level.var_df54795 = self;
   }
 
@@ -401,11 +401,11 @@ function function_6444a0e8() {
 
 function function_306abb40(a_allies, a_enemies) {
   wait 0.25;
-  var_a6be88da = arraycombine(a_allies, a_enemies);
+  a_guys = arraycombine(a_allies, a_enemies);
 
   if(level flag::get("flag_waterfall_path_intro_complete") && level flag::get("flag_waterfall_path_heli_complete") || level flag::get("flag_waterfall_path_player_melee")) {
     if(flag::get("flag_waterfall_path_player_melee")) {
-      foreach(ai in var_a6be88da) {
+      foreach(ai in a_guys) {
         if(isalive(ai)) {
           ai val::set("waterfall_wake", "ignoreall", 1);
 
@@ -420,7 +420,7 @@ function function_306abb40(a_allies, a_enemies) {
 
     var_c8b44cd7 = [];
 
-    foreach(guy in var_a6be88da) {
+    foreach(guy in a_guys) {
       if(isalive(guy) && (guy.animname == "enemy1" || guy.animname == "enemy4")) {
         var_c8b44cd7[var_c8b44cd7.size] = guy;
       }
@@ -519,7 +519,7 @@ function function_690c742d(a_allies) {
   }
 }
 
-function function_d1f683f0(var_a6be88da, triggername, shotname, var_74ad35de) {
+function function_d1f683f0(a_guys, triggername, shotname, var_74ad35de) {
   level endon(#"flag_waterfall_path_exit_water");
   level endon(#"stealth_spotted");
   childthread function_db10087a(triggername, shotname, var_74ad35de);
@@ -538,7 +538,7 @@ function function_d1f683f0(var_a6be88da, triggername, shotname, var_74ad35de) {
   objectives::function_67f87f80(shotname, undefined, #"hash_3c73b6445c421b5");
 }
 
-function function_db10087a(var_a6be88da, var_74ad35de, shotname) {
+function function_db10087a(a_guys, var_74ad35de, shotname) {
   level.player endon(#"death");
   level endon(#"flag_waterfall_path_exit_water");
   level endon(#"flag_waterfall_path_player_melee");
@@ -553,7 +553,7 @@ function function_db10087a(var_a6be88da, var_74ad35de, shotname) {
       waitframe(1);
     }
 
-    thread function_71f5f1ab(var_a6be88da, shotname);
+    thread function_71f5f1ab(a_guys, shotname);
 
     if(!isDefined(trigger)) {
       break;
@@ -563,20 +563,20 @@ function function_db10087a(var_a6be88da, var_74ad35de, shotname) {
       waitframe(1);
     }
 
-    function_4115b6f(var_a6be88da);
+    function_4115b6f(a_guys);
     waitframe(1);
     level notify(#"hash_20cd41bb32936407");
   }
 }
 
-function function_71f5f1ab(var_a6be88da, shotname) {
+function function_71f5f1ab(a_guys, shotname) {
   level endon(#"flag_waterfall_path_exit_water");
   level endon(#"hash_20cd41bb32936407");
   level.player endon(#"death");
   level.player val::set("waterfall", "allow_melee", 0);
   level.player.var_c681e4c1 = 1;
 
-  foreach(guy in var_a6be88da) {
+  foreach(guy in a_guys) {
     if(isalive(guy)) {
       guy.var_c681e4c1 = 1;
       guy val::set("waterfall_wake", "ignoreall", 1);
@@ -590,7 +590,7 @@ function function_71f5f1ab(var_a6be88da, shotname) {
   flag::set("flag_waterfall_path_player_melee");
   objectives::complete("flag_waterfall_path_player_right_trigger");
   objectives::complete("flag_waterfall_path_player_left_trigger");
-  function_ca41480a(var_a6be88da, shotname);
+  function_ca41480a(a_guys, shotname);
 }
 
 function function_9b6d9815(off = 1) {
@@ -606,7 +606,7 @@ function function_9b6d9815(off = 1) {
   level.player val::reset_all("player_swap_moment");
 }
 
-function function_4115b6f(var_a6be88da) {
+function function_4115b6f(a_guys) {
   thread hint_tutorial::function_9f427d88();
   objectives::complete("flag_waterfall_path_player_right_trigger");
   objectives::complete("flag_waterfall_path_player_left_trigger");
@@ -616,8 +616,8 @@ function function_4115b6f(var_a6be88da) {
     level.player.var_c681e4c1 = 0;
   }
 
-  if(isDefined(var_a6be88da) && var_a6be88da.size > 0) {
-    foreach(guy in var_a6be88da) {
+  if(isDefined(a_guys) && a_guys.size > 0) {
+    foreach(guy in a_guys) {
       if(isalive(guy)) {
         guy.var_c681e4c1 = 0;
         guy val::set("waterfall_wake", "ignoreall", 0);
@@ -626,17 +626,17 @@ function function_4115b6f(var_a6be88da) {
   }
 }
 
-function function_ca41480a(var_a6be88da, shotname) {
+function function_ca41480a(a_guys, shotname) {
   level.player endon(#"death");
   var_4e5d86e6 = [];
 
-  foreach(guy in var_a6be88da) {
+  foreach(guy in a_guys) {
     if(isalive(guy) && (guy.animname == "enemy2" || guy.animname == "enemy3")) {
       var_4e5d86e6[var_4e5d86e6.size] = guy;
     }
   }
 
-  setsaveddvar(#"hash_7bf40e4b6a830d11", 0);
+  setsaveddvar(#"ai_threatsightdisplay", 0);
   currentweapon = level.player getcurrentweapon();
   level.player switchtoweapon();
   wait 0.25;
@@ -659,7 +659,7 @@ function function_ca41480a(var_a6be88da, shotname) {
   wait 0.25;
   level.player takeweapon(weapon);
   level.player enableweaponcycling();
-  setsaveddvar(#"hash_7bf40e4b6a830d11", 1);
+  setsaveddvar(#"ai_threatsightdisplay", 1);
   thread namespace_b6fe1dbe::waterfall_slowmo_stop();
   setslowmotion(0.25, 1, 0.25);
   level.player clientfield::set_to_player("lerp_fov", 4);
@@ -669,7 +669,7 @@ function function_ca41480a(var_a6be88da, shotname) {
   }
 
   level.player freezecontrolsallowlook(0);
-  thread function_4115b6f(var_a6be88da);
+  thread function_4115b6f(a_guys);
   level flag::set("flag_waterfall_path_exit_water");
 }
 
@@ -837,8 +837,8 @@ function function_182d1f98() {
 
   if(!level flag::get("flag_waterfall_path_player_melee") && isDefined(self.animname) && (self.animname == "enemy2" || self.animname == "enemy3")) {
     if(!level flag::get("flag_waterfall_path_heli_complete")) {
-      if(isDefined(self.var_bb9c0d50)) {
-        level scene::play(self.var_bb9c0d50, self);
+      if(isDefined(self.react_scene)) {
+        level scene::play(self.react_scene, self);
       }
     }
 
@@ -850,8 +850,8 @@ function function_182d1f98() {
   } else if(!level flag::get("flag_waterfall_path_player_melee")) {
     if(!level flag::get_all(array("flag_waterfall_path_intro_complete", "flag_waterfall_path_heli_complete")) || level flag::get_all(array("flag_waterfall_path_intro_complete", "flag_waterfall_path_heli_complete")) && isDefined(self.var_d3ed217c) && !isalive(self.var_d3ed217c)) {
       if(!level flag::get("flag_waterfall_path_heli_complete")) {
-        if(isDefined(self.var_bb9c0d50)) {
-          level scene::play(self.var_bb9c0d50, self);
+        if(isDefined(self.react_scene)) {
+          level scene::play(self.react_scene, self);
         }
       }
 
@@ -1119,8 +1119,8 @@ function function_b6caf72b() {
   level.player endon(#"death");
   var_8dfbed88 = smart_bundle::function_6c12ff6("waterfall1_visit2_bundle1");
   var_8dfbed88 smart_bundle::function_e47ac090();
-  var_8564fb5f = spawner::get_ai_group_ai("waterfall1_visit2");
-  level ai::waittill_dead(var_8564fb5f, 1);
+  aguys = spawner::get_ai_group_ai("waterfall1_visit2");
+  level ai::waittill_dead(aguys, 1);
   level flag::set("flag_waterfall_path_player_shot2");
 }
 

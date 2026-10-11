@@ -73,17 +73,17 @@ function private function_a534560c() {
       continue;
     }
 
-    if(isDefined(dropitem.itementry.var_fa988b4b) && dropitem.itementry.var_fa988b4b > 0) {
+    if(isDefined(dropitem.itementry.droptimeout) && dropitem.itementry.droptimeout > 0) {
       var_e12c37ee = float(time - dropitem.droptime) / 1000;
 
-      if(var_e12c37ee >= dropitem.itementry.var_fa988b4b) {
+      if(var_e12c37ee >= dropitem.itementry.droptimeout) {
         item_world::consume_item(dropitem, 1);
         waitframe(1);
         time = gettime();
         continue;
       }
 
-      if(isDefined(dropitem.itementry.var_68c62574) && dropitem.itementry.var_68c62574 > 0 && var_e12c37ee >= dropitem.itementry.var_fa988b4b - dropitem.itementry.var_68c62574) {
+      if(isDefined(dropitem.itementry.var_68c62574) && dropitem.itementry.var_68c62574 > 0 && var_e12c37ee >= dropitem.itementry.droptimeout - dropitem.itementry.var_68c62574) {
         dropitem clientfield::set("dynamic_item_timing_out", 1);
       }
     }

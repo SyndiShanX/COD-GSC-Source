@@ -26,7 +26,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  spawner::add_archetype_spawn_function(#"raz", &function_3113cf8f);
+  spawner::add_archetype_spawn_function(#"raz", &razspawnsetup);
   zm_round_spawning::register_archetype(#"raz", &function_d4f11e3c, &round_spawn, undefined, 25);
   zm_round_spawning::function_306ce518(#"raz", &function_f1355240);
   zm_cleanup::function_cdf5a512(#"raz", &function_54993e2);
@@ -34,20 +34,20 @@ function private preinit() {
 
 function function_4df027f2() {}
 
-function function_3113cf8f() {
+function razspawnsetup() {
   self.closest_player_override = &zm_utility::function_3d70ba7a;
   self.melee_distance_check = &namespace_e292b080::function_e8983bf3;
 }
 
 function spawn_single(b_force_spawn, var_eb3a8721 = 0, var_bc66d64b) {
-  if(!var_eb3a8721 && !function_9230ac9a()) {
+  if(!var_eb3a8721 && !can_spawn_raz()) {
     return undefined;
   }
 
   if(isDefined(var_bc66d64b)) {
     s_spawn_loc = var_bc66d64b;
-  } else if(isDefined(level.var_2e33420c)) {
-    s_spawn_loc = [[level.var_2e33420c]]();
+  } else if(isDefined(level.raz_spawn_func)) {
+    s_spawn_loc = [[level.raz_spawn_func]]();
   } else if(level.zm_loc_types[#"raz_location"].size > 0) {
     s_spawn_loc = array::random(level.zm_loc_types[#"raz_location"]);
   }
@@ -83,11 +83,11 @@ function round_spawn() {
   return false;
 }
 
-function function_9230ac9a() {
-  var_2c3c71f0 = function_d29d5032();
+function can_spawn_raz() {
+  n_raz_alive = get_current_raz_count();
   var_ea840c7e = function_62f1faf9();
 
-  if(!is_true(level.var_76934955) && (is_true(level.var_fe2bb2ac) || var_2c3c71f0 >= var_ea840c7e || !level flag::get("spawn_zombies"))) {
+  if(!is_true(level.var_76934955) && (is_true(level.var_fe2bb2ac) || n_raz_alive >= var_ea840c7e || !level flag::get("spawn_zombies"))) {
     return false;
   }
 
@@ -116,17 +116,17 @@ function function_62f1faf9() {
   }
 }
 
-function function_d29d5032() {
+function get_current_raz_count() {
   a_ai_raz = getaiarchetypearray(#"raz");
-  var_2c3c71f0 = a_ai_raz.size;
+  n_raz_alive = a_ai_raz.size;
 
   foreach(ai_raz in a_ai_raz) {
     if(!isalive(ai_raz)) {
-      var_2c3c71f0--;
+      n_raz_alive--;
     }
   }
 
-  return var_2c3c71f0;
+  return n_raz_alive;
 }
 
 function function_d4f11e3c(var_dbce0c44) {
@@ -172,8 +172,8 @@ function function_f1355240(n_round_number) {
 }
 
 function function_54993e2() {
-  if(isDefined(level.var_2e33420c)) {
-    var_d7eff26a = [[level.var_2e33420c]]();
+  if(isDefined(level.raz_spawn_func)) {
+    var_d7eff26a = [[level.raz_spawn_func]]();
   } else {
     var_91562d8c = level.zm_loc_types[#"raz_location"];
 
@@ -199,7 +199,7 @@ function function_54993e2() {
 function function_1f9940b8() {
   self endon(#"death");
   playFX(#"zombie/fx9_onslaught_spawn_sm", self.origin);
-  playSoundAtPosition(#"hash_14247392847093a6", self.origin + (0, 0, 75));
+  playSoundAtPosition(#"zmb_ai_raz_spawn_portal", self.origin + (0, 0, 75));
   self.in_the_ground = 1;
   self ghost();
   self pathmode("dont move", 1);
@@ -212,7 +212,7 @@ function function_1f9940b8() {
   self orientmode("face default");
 
   if(!self isragdoll()) {
-    self playSound(#"hash_4b49f05e8c054fd9");
+    self playSound(#"zmb_ai_raz_spawn_jumpland");
     self animScripted("rise_anim", self.origin, self.angles, #"ai_t9_zm_zombie_base_traverse_ground_dugup", "normal");
     waitframe(1);
   }

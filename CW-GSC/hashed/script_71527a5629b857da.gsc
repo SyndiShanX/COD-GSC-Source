@@ -16,7 +16,7 @@ function function_4e82b483() {
   while(true) {
     level waittill(#"hash_5e64e62033b849ba");
 
-    while(level.smart_bundle.var_78371b11 < level.smart_bundle.spawnq.size) {
+    while(level.smart_bundle.spawnq_next < level.smart_bundle.spawnq.size) {
       waittillframeend();
 
       if(isDefined(level.smart_bundle.spawn_wait)) {
@@ -24,12 +24,12 @@ function function_4e82b483() {
         level.smart_bundle.spawn_wait = undefined;
       }
 
-      if(!(level.smart_bundle.spawnq[level.smart_bundle.var_78371b11].var_9785b19e.var_39a8d200 == "active" || level.smart_bundle.spawnq[level.smart_bundle.var_78371b11].var_9785b19e.var_39a8d200 == "wait_deactivate")) {
-        level.smart_bundle.var_78371b11++;
+      if(!(level.smart_bundle.spawnq[level.smart_bundle.spawnq_next].var_9785b19e.var_39a8d200 == "active" || level.smart_bundle.spawnq[level.smart_bundle.spawnq_next].var_9785b19e.var_39a8d200 == "wait_deactivate")) {
+        level.smart_bundle.spawnq_next++;
         continue;
       }
 
-      spawner = level.smart_bundle.spawnq[level.smart_bundle.var_78371b11];
+      spawner = level.smart_bundle.spawnq[level.smart_bundle.spawnq_next];
 
       if(spawner.classname == "script_vehicle") {
         ai = spawner spawner::spawn(1);
@@ -48,12 +48,12 @@ function function_4e82b483() {
       }
 
       spawner.var_9785b19e thread function_c0ea60b9(spawner, ai);
-      level.smart_bundle.var_78371b11++;
+      level.smart_bundle.spawnq_next++;
       waitframe(1);
     }
 
     level.smart_bundle.spawnq = [];
-    level.smart_bundle.var_78371b11 = 0;
+    level.smart_bundle.spawnq_next = 0;
     level notify(#"hash_383aa92c3a20edcd");
   }
 }

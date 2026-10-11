@@ -82,30 +82,30 @@ function findcurposonroute(curpos, route) {
   var_5a1a59a4 = -1;
   var_5b94af06 = 0;
 
-  for(var_6bc1390 = 0; var_6bc1390 < var_6a605059; var_6bc1390++) {
-    nextpt = (var_6bc1390 + 1) % var_6a605059;
-    starttoend = route[nextpt].origin - route[var_6bc1390].origin;
+  for(ipt = 0; ipt < var_6a605059; ipt++) {
+    nextpt = (ipt + 1) % var_6a605059;
+    starttoend = route[nextpt].origin - route[ipt].origin;
     var_5e9b5f9f = length(starttoend);
     starttoend /= var_5e9b5f9f;
-    var_4fbaae92 = curpos - route[var_6bc1390].origin;
-    var_98883cf9 = vectordot(starttoend, var_4fbaae92);
+    var_4fbaae92 = curpos - route[ipt].origin;
+    distdownline = vectordot(starttoend, var_4fbaae92);
 
-    if(bestscore > 0 && (var_98883cf9 < 0 || var_98883cf9 > var_5e9b5f9f)) {
+    if(bestscore > 0 && (distdownline < 0 || distdownline > var_5e9b5f9f)) {
       continue;
     }
 
     var_bb8e7f0d = (starttoend[1], -1 * starttoend[0], 0);
     var_bb8e7f0d = vectorNormalize(var_bb8e7f0d);
-    var_c79274d2 = abs(vectordot(var_bb8e7f0d, var_4fbaae92));
+    distfromline = abs(vectordot(var_bb8e7f0d, var_4fbaae92));
 
-    if(bestscore <= 0 || var_c79274d2 < bestscore) {
-      bestscore = var_c79274d2;
+    if(bestscore <= 0 || distfromline < bestscore) {
+      bestscore = distfromline;
       var_747c2571 = nextpt;
     }
 
-    if(var_5b94af06 <= 0 || var_c79274d2 < var_5b94af06) {
+    if(var_5b94af06 <= 0 || distfromline < var_5b94af06) {
       if(!isDefined(route[nextpt].var_4ff89bee) || gettime() > route[nextpt].var_4ff89bee) {
-        var_5b94af06 = var_c79274d2;
+        var_5b94af06 = distfromline;
         var_5a1a59a4 = nextpt;
       }
     }
@@ -314,28 +314,28 @@ function buildhuntstealthgroupgraphdata() {
         continue;
       }
 
-      var_fb678b1c = 0;
-      var_ebcfaa4d = 0;
+      path_length = 0;
+      segment_length = 0;
       i = 1;
 
       for(i = 1; i < region.route_points.size; i++) {
-        var_ebcfaa4d = length(region.route_points[i].origin - region.route_points[i - 1].origin);
-        var_fb678b1c += var_ebcfaa4d;
+        segment_length = length(region.route_points[i].origin - region.route_points[i - 1].origin);
+        path_length += segment_length;
       }
 
-      var_fb678b1c *= 0.5;
+      path_length *= 0.5;
 
       for(i = 0; i < region.route_points.size - 1; i++) {
-        var_ebcfaa4d = length(region.route_points[i].origin - region.route_points[i + 1].origin);
+        segment_length = length(region.route_points[i].origin - region.route_points[i + 1].origin);
 
-        if(var_fb678b1c - var_ebcfaa4d < 0) {
+        if(path_length - segment_length < 0) {
           break;
         }
 
-        var_fb678b1c -= var_ebcfaa4d;
+        path_length -= segment_length;
       }
 
-      fraction = var_fb678b1c / var_ebcfaa4d;
+      fraction = path_length / segment_length;
       region.approx_location = vectorlerp(region.route_points[i].origin, region.route_points[i + 1].origin, fraction);
     }
   }
@@ -494,25 +494,25 @@ function inithuntregiondata() {
         point = region.route_points[curidx];
         target = point.target;
         j = 0;
-        var_e1c83c67 = undefined;
+        found_point = undefined;
 
         while(j < region.route_points.size) {
           target_point = region.route_points[j];
           targetname = target_point.targetname;
 
           if(isDefined(targetname) && target == targetname) {
-            var_e1c83c67 = target_point;
+            found_point = target_point;
             break;
           }
 
           j++;
         }
 
-        if(!isDefined(var_e1c83c67)) {
+        if(!isDefined(found_point)) {
           assertmsg("<dev string:x183>");
         }
 
-        buffer[i] = var_e1c83c67;
+        buffer[i] = found_point;
         curidx = j;
       }
 

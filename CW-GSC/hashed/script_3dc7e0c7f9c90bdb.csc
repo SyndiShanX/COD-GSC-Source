@@ -58,7 +58,7 @@ function soul_capture_leave(localclientnum, oldval, newval, bnewent, binitialsna
 
     if(!isDefined(self.soundorigin)) {
       self.soundorigin = self.origin;
-      playSound(fieldname, #"hash_46461ba72b8ab7a2", self.soundorigin);
+      playSound(fieldname, #"evt_sur_we_portal_common_start", self.soundorigin);
       soundloopemitter("evt_sur_we_portal_common_lp", self.soundorigin);
     }
 
@@ -70,7 +70,7 @@ function soul_capture_leave(localclientnum, oldval, newval, bnewent, binitialsna
   }
 
   if(isDefined(self.soundorigin)) {
-    playSound(fieldname, #"hash_3c03699766f040c7", self.soundorigin);
+    playSound(fieldname, #"evt_sur_we_portal_common_end", self.soundorigin);
     soundstoploopemitter("evt_sur_we_portal_common_lp", self.soundorigin);
     self.soundorigin = undefined;
   }

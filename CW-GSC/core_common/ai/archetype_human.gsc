@@ -67,8 +67,8 @@ function private function_2f2d0057() {
     waitresult = self waittill(#"trigger");
     other = waitresult.activator;
 
-    if(!is_true(other.var_a8f2b553)) {
-      other.var_a8f2b553 = 1;
+    if(!is_true(other.onslope)) {
+      other.onslope = 1;
       other thread function_168bc21c(self);
     }
   }
@@ -81,7 +81,7 @@ function private function_168bc21c(trigger) {
     waitframe(1);
   }
 
-  self.var_a8f2b553 = undefined;
+  self.onslope = undefined;
 }
 
 function function_1ed72d78(params) {
@@ -109,7 +109,7 @@ function private archetypehumanblackboardinit() {
   self.___archetypeonanimscriptedcallback = &archetypehumanonanimscriptedcallback;
   self.___archetypeonbehavecallback = &archetypehumanonbehavecallback;
 
-  if(self.accuratefire && self.var_ee448041) {
+  if(self.accuratefire && self.sniperglint) {
     self thread aiutility::function_7bbe1407(self);
     self thread aiutility::function_efed8903(self);
   }
@@ -579,7 +579,7 @@ function function_88dcd11f() {
 function private function_aa0b0ac5() {
   self notify(#"hash_484aea430942b919");
   self endon(#"hash_484aea430942b919", #"death");
-  self.var_31162969 = angleclamp180(self.var_55a3f1d3 + 180);
+  self.var_31162969 = angleclamp180(self.strafeyaw + 180);
   self.var_dd1cd771 = 1;
   self waittilltimeout(1, #"corner");
   self.var_dd1cd771 = undefined;

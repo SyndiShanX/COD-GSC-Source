@@ -89,7 +89,7 @@ function private enter_critical_health(localclientnum) {
 function private play_critical_health_rumble(localclientnum) {
   self endon(#"death", #"disconnect", #"critical_health_end", #"spawned");
   var_cf155b98 = "new_health_stage_critical";
-  sound = #"hash_318f22e4d70ee6d3";
+  sound = #"chr_player_heartbeat";
 
   if(is_true(getgametypesetting(#"hash_1e8998fd7f271bb7"))) {
     sound = #"hash_5bbb0f2e7cbf753c";
@@ -336,9 +336,9 @@ function private function_b51756a0(localclientnum, splatter, damage) {
 }
 
 function private splatter_postfx(localclientnum, player, damage, var_cd141ca2, death, dot) {
-  var_97b5c837 = localclientnum + "splatter_postfx" + var_cd141ca2;
-  level notify(var_97b5c837);
-  level endon(var_97b5c837);
+  notify_event = localclientnum + "splatter_postfx" + var_cd141ca2;
+  level notify(notify_event);
+  level endon(notify_event);
   blur = 0;
   opacity = 0;
   ramp_in_time = 0;
@@ -389,9 +389,9 @@ function private splatter_postfx(localclientnum, player, damage, var_cd141ca2, d
 }
 
 function function_23901270(localclientnum, ramptime, var_cd141ca2, var_9f153e5b, var_a3c5be40) {
-  var_97b5c837 = localclientnum + "rampSplatterValue" + var_cd141ca2;
-  level notify(var_97b5c837);
-  level endon(var_97b5c837);
+  notify_event = localclientnum + "rampSplatterValue" + var_cd141ca2;
+  level notify(notify_event);
+  level endon(notify_event);
   localplayer = function_5c10bd79(localclientnum);
 
   if(!isDefined(localplayer)) {
@@ -449,9 +449,9 @@ function function_23901270(localclientnum, ramptime, var_cd141ca2, var_9f153e5b,
 }
 
 function function_90064049(localclientnum, ramptime, var_cd141ca2, var_9f153e5b, var_a3c5be40, var_1f06be44, var_b19159d7) {
-  var_97b5c837 = localclientnum + "rampSplatterValue" + var_cd141ca2;
-  level notify(var_97b5c837);
-  level endon(var_97b5c837);
+  notify_event = localclientnum + "rampSplatterValue" + var_cd141ca2;
+  level notify(notify_event);
+  level endon(notify_event);
   localplayer = function_5c10bd79(localclientnum);
 
   if(!isDefined(localplayer)) {
@@ -868,9 +868,9 @@ function function_8fe966f4(localclientnum, var_bfd952c7, new_stage, ramptime, po
 
 function function_c0cdd1f2(localclientnum, stagefrom, stageto, ramptime, key, postfx) {
   self endon(#"death", #"endramppostfx");
-  var_97b5c837 = "rampPostFx" + key + postfx;
-  self notify(var_97b5c837);
-  self endon(var_97b5c837);
+  notify_event = "rampPostFx" + key + postfx;
+  self notify(notify_event);
+  self endon(notify_event);
   localplayer = function_5c10bd79(localclientnum);
 
   if(!isDefined(localplayer)) {
@@ -1225,10 +1225,10 @@ function private function_22302b4b() {
 
 function private function_6deee27e(localclientnum) {
   level notify(localclientnum + "splatter_postfx");
-  var_97b5c837 = localclientnum + "rampSplatterValue";
+  notify_event = localclientnum + "rampSplatterValue";
 
   for(i = 0; i < 4; i++) {
-    level notify(var_97b5c837 + i);
+    level notify(notify_event + i);
   }
 }
 

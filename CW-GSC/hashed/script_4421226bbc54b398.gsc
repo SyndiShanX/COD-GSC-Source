@@ -123,9 +123,9 @@ function function_e439076f(var_5937b8ee) {
     #attacker: self, #scoreevent: var_5937b8ee
   });
   assert(isDefined(level.scoreinfo[var_5937b8ee][#"xp"]), "<dev string:x38>");
-  var_370ac26d = level.scoreinfo[var_5937b8ee][#"xp"];
-  self luinotifyevent(#"hash_6743fb07d8c3b4b0", 1, var_370ac26d);
-  namespace_8d0ae0b4::function_b9cd2b6c(var_370ac26d);
+  xp_gain = level.scoreinfo[var_5937b8ee][#"xp"];
+  self luinotifyevent(#"hash_6743fb07d8c3b4b0", 1, xp_gain);
+  namespace_8d0ae0b4::function_b9cd2b6c(xp_gain);
 }
 
 function private function_2ea9419c(type, amount = 1, var_8e592166 = 1) {
@@ -239,8 +239,8 @@ function function_37c1c391(eventstruct) {
   }
 }
 
-function private function_3e6a3070(var_b48509f9) {
-  switch (var_b48509f9) {
+function private function_3e6a3070(star_rating) {
+  switch (star_rating) {
     case 1:
       return "exfil_sr_rank_1";
     case 2:
@@ -315,8 +315,8 @@ function private function_75ecd524(var_14326bba) {
   return undefined;
 }
 
-function function_9ab33c13(var_b48509f9 = 1) {
-  switch (var_b48509f9) {
+function function_9ab33c13(star_rating = 1) {
+  switch (star_rating) {
     case 1:
     case 2:
     case 3:
@@ -336,8 +336,8 @@ function function_9ab33c13(var_b48509f9 = 1) {
   return 0;
 }
 
-function function_1cda88b8(var_b48509f9 = 1) {
-  switch (var_b48509f9) {
+function function_1cda88b8(star_rating = 1) {
+  switch (star_rating) {
     case 1:
       return 0;
     case 2:
@@ -385,8 +385,8 @@ function function_b299bcd5(round = 10) {
   return 0;
 }
 
-function function_15c36044(var_b48509f9 = 1) {
-  switch (var_b48509f9) {
+function function_15c36044(star_rating = 1) {
+  switch (star_rating) {
     case 1:
     case 2:
       return false;
@@ -405,13 +405,13 @@ function function_e6a712db(var_8e592166 = 1) {
   self thread function_7b6ac8d5(4);
 
   if(zm_utility::is_survival()) {
-    var_b48509f9 = zm_utility::function_e3025ca5();
-    var_3bf72bdb = function_9ab33c13(var_b48509f9);
+    star_rating = zm_utility::function_e3025ca5();
+    var_3bf72bdb = function_9ab33c13(star_rating);
     function_d59d7b74(var_3bf72bdb, var_8e592166);
 
     if(is_true(getgametypesetting(#"hash_534a70940dadf3e7"))) {
-      var_8f88887b = function_1cda88b8(var_b48509f9);
-      var_a1b51775 = function_15c36044(var_b48509f9);
+      var_8f88887b = function_1cda88b8(star_rating);
+      var_a1b51775 = function_15c36044(star_rating);
 
       if(var_8f88887b > 0) {
         function_89a45cd4(var_8f88887b, var_8e592166);
@@ -560,15 +560,15 @@ function function_3a2e46e0(var_8e592166 = 1) {
   self thread function_7b6ac8d5(1);
 
   if(zm_utility::is_survival()) {
-    var_b48509f9 = zm_utility::function_e3025ca5();
-    var_5937b8ee = function_3e6a3070(var_b48509f9);
+    star_rating = zm_utility::function_e3025ca5();
+    var_5937b8ee = function_3e6a3070(star_rating);
     self thread function_e439076f(var_5937b8ee);
-    var_3bf72bdb = function_9ab33c13(var_b48509f9);
+    var_3bf72bdb = function_9ab33c13(star_rating);
     function_d59d7b74(var_3bf72bdb, var_8e592166);
 
     if(is_true(getgametypesetting(#"hash_534a70940dadf3e7"))) {
-      var_8f88887b = function_1cda88b8(var_b48509f9);
-      var_a1b51775 = function_15c36044(var_b48509f9);
+      var_8f88887b = function_1cda88b8(star_rating);
+      var_a1b51775 = function_15c36044(star_rating);
 
       if(var_8f88887b > 0) {
         function_89a45cd4(var_8f88887b, var_8e592166);
@@ -840,17 +840,17 @@ function function_73cddc69(var_8e592166 = 1) {
 
   if(zm_utility::is_survival()) {
     self thread function_7b6ac8d5(3);
-    var_b48509f9 = zm_utility::function_e3025ca5();
-    self function_a2d61378(var_b48509f9);
-    self function_e32813ee(var_b48509f9);
-    var_64bd84cc = function_4f5dff62(var_b48509f9, #"rare");
+    star_rating = zm_utility::function_e3025ca5();
+    self function_a2d61378(star_rating);
+    self function_e32813ee(star_rating);
+    var_64bd84cc = function_4f5dff62(star_rating, #"rare");
     self function_d59d7b74(var_64bd84cc, var_8e592166);
 
     if(is_true(getgametypesetting(#"hash_534a70940dadf3e7"))) {
-      var_bc3885e0 = function_4f5dff62(var_b48509f9, #"epic");
-      var_629196dd = function_4f5dff62(var_b48509f9, #"legendary");
+      var_bc3885e0 = function_4f5dff62(star_rating, #"epic");
+      var_629196dd = function_4f5dff62(star_rating, #"legendary");
 
-      if(var_b48509f9 <= 2 && var_bc3885e0 > 0) {
+      if(star_rating <= 2 && var_bc3885e0 > 0) {
         if(!is_true(level.var_7d3f22bd)) {
           level.var_7d3f22bd = 1;
 
@@ -866,7 +866,7 @@ function function_73cddc69(var_8e592166 = 1) {
         self function_89a45cd4(var_bc3885e0, var_8e592166);
       }
 
-      if(var_b48509f9 <= 3 && var_629196dd > 0) {
+      if(star_rating <= 3 && var_629196dd > 0) {
         if(!is_true(level.var_5ed8f6ba)) {
           level.var_5ed8f6ba = 1;
 
@@ -961,14 +961,14 @@ function function_73cddc69(var_8e592166 = 1) {
   }
 }
 
-function function_a2d61378(var_b48509f9, var_2993280f = 1) {
-  if(var_b48509f9 <= 1) {
+function function_a2d61378(star_rating, var_2993280f = 1) {
+  if(star_rating <= 1) {
     var_b8bcc6d = 1000 * var_2993280f;
     self thread zm_score::add_to_player_score(var_b8bcc6d);
     return;
   }
 
-  score = 2500 * (var_b48509f9 - 1) * var_2993280f;
+  score = 2500 * (star_rating - 1) * var_2993280f;
 
   if(var_2993280f <= 1) {
     score = math::clamp(score, 0, 15000);
@@ -977,15 +977,15 @@ function function_a2d61378(var_b48509f9, var_2993280f = 1) {
   self thread zm_score::add_to_player_score(int(score));
 }
 
-function function_e32813ee(var_b48509f9, var_eb3616b4 = 1, var_492ebc70 = 1) {
-  var_36bda4b = function_ef580a0c(var_b48509f9);
+function function_e32813ee(star_rating, var_eb3616b4 = 1, var_492ebc70 = 1) {
+  var_36bda4b = function_ef580a0c(star_rating);
   var_ef5aac55 = var_36bda4b * 100 * var_eb3616b4;
 
   if(var_eb3616b4 <= 1) {
     var_ef5aac55 = math::clamp(var_ef5aac55, 0, 500);
   }
 
-  var_1ac981fc = function_b03d7dd0(var_b48509f9);
+  var_1ac981fc = function_b03d7dd0(star_rating);
   var_a9b93bb4 = var_1ac981fc * 50 * var_492ebc70;
 
   if(var_492ebc70 <= 1) {

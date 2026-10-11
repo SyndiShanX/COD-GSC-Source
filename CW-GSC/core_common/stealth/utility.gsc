@@ -701,10 +701,10 @@ function set_disguised_default(disguised = 0) {
     level.stealth.proximity_combat_radius_bump = 0;
     level.stealth.proximity_combat_radius_sight = 0;
     level.stealth.proximity_combat_radius_fake_sight = 0;
-    setsaveddvar(#"hash_12c53cd4a01caff3", 0.25);
-    setsaveddvar(#"hash_5edb3c8437c5990e", cos(90));
-    setsaveddvar(#"hash_30eedc859ec98ad", 0.025);
-    setsaveddvar(#"hash_5aaea648688ff01e", 0.25);
+    setsaveddvar(#"ai_threatsightfacingscale", 0.25);
+    setsaveddvar(#"ai_threatsightfacingscaledot", cos(90));
+    setsaveddvar(#"ai_threatsightdisplayspikepoint", 0.025);
+    setsaveddvar(#"ai_threatsightdisplayspikevalue", 0.25);
   } else {
     level.stealth.disguised = undefined;
     level.stealth.threatsightratescale = undefined;
@@ -712,15 +712,15 @@ function set_disguised_default(disguised = 0) {
     level.stealth.proximity_combat_radius_bump = 50;
     level.stealth.proximity_combat_radius_sight = 100;
     level.stealth.proximity_combat_radius_fake_sight = 60;
-    setsaveddvar(#"hash_12c53cd4a01caff3", 0.5);
-    setsaveddvar(#"hash_5edb3c8437c5990e", cos(180));
-    setsaveddvar(#"hash_30eedc859ec98ad", 0.01);
-    setsaveddvar(#"hash_5aaea648688ff01e", 0.1);
+    setsaveddvar(#"ai_threatsightfacingscale", 0.5);
+    setsaveddvar(#"ai_threatsightfacingscaledot", cos(180));
+    setsaveddvar(#"ai_threatsightdisplayspikepoint", 0.01);
+    setsaveddvar(#"ai_threatsightdisplayspikevalue", 0.1);
   }
 
-  var_210a8489 = getactorarray();
+  ailist = getactorarray();
 
-  foreach(ai in var_210a8489) {
+  foreach(ai in ailist) {
     if(!isalive(ai)) {
       continue;
     }

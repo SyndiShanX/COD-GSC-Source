@@ -115,9 +115,9 @@ function private function_f43fb0d3(marker) {
   if(isDefined(marker.origin) && isDefined(marker.var_595cc3a1)) {
     viewpos = marker.origin;
     var_c3515577 = anglestoright((0, marker.angles[1], 0));
-    var_3ed2a1cf = vectortoangles(var_c3515577);
+    viewangle = vectortoangles(var_c3515577);
     self function_116b95e5("pstfx_napalm_strike_bundle", "Position " + marker.var_595cc3a1, viewpos[0], viewpos[1], viewpos[2]);
-    self function_116b95e5("pstfx_napalm_strike_bundle", "Rotation Angle " + marker.var_595cc3a1, var_3ed2a1cf[1]);
+    self function_116b95e5("pstfx_napalm_strike_bundle", "Rotation Angle " + marker.var_595cc3a1, viewangle[1]);
   }
 }
 

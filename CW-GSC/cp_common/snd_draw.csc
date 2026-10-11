@@ -35,23 +35,23 @@ function function_9f4eb444(text, scale) {
     scale = 1;
   }
 
-  var_1790a507 = function_827811b5();
-  var_38c41a5e = var_1790a507[0];
-  var_c13d121d = var_1790a507[1];
+  vidresolution = function_827811b5();
+  vidwidth = vidresolution[0];
+  vidheight = vidresolution[1];
   textlength = text.size;
   textwidth = textlength * 11 * scale;
-  centerx = var_38c41a5e * 0.5 - textwidth * 0.5;
-  centery = var_c13d121d * 0.5 - 12;
+  centerx = vidwidth * 0.5 - textwidth * 0.5;
+  centery = vidheight * 0.5 - 12;
   center = array(centerx, centery);
   return center;
 }
 
 function function_409c06e5(text, scale) {
   centerpos = function_9f4eb444(text, scale);
-  var_fad221f1 = centerpos[0];
-  var_ec8f856c = centerpos[1];
-  var_ec8f856c = var_ec8f856c * 0.5 + 12;
-  defaultpos = array(var_fad221f1, var_ec8f856c);
+  defaultposx = centerpos[0];
+  defaultposy = centerpos[1];
+  defaultposy = defaultposy * 0.5 + 12;
+  defaultpos = array(defaultposx, defaultposy);
   return defaultpos;
 }
 
@@ -145,16 +145,16 @@ function function_4e22152d(origin, text, color, alpha, scale, duration, right) {
   print3d(text, color, alpha, scale, duration, right, 1);
 }
 
-function function_65bb0ccd(text, x, y, scale, var_6c897a55, color, alpha, shadowcolor, shadowalpha, lightcolor, lightalpha, duration) {
+function function_65bb0ccd(text, x, y, scale, justify, color, alpha, shadowcolor, shadowalpha, lightcolor, lightalpha, duration) {
   color = function_ea2f17d1(color, (1, 1, 1));
   alpha = function_ea2f17d1(alpha, 1);
   scale = function_ea2f17d1(scale, 1);
-  var_6c897a55 = function_ea2f17d1(var_6c897a55, "<dev string:x4c>");
+  justify = function_ea2f17d1(justify, "<dev string:x4c>");
   duration = function_ea2f17d1(duration, 1);
   offset = (0, 0, 0);
   width = 11 * scale * text.size;
 
-  switch (var_6c897a55) {
+  switch (justify) {
     case 0:
     case #"left":
     case #"l":
@@ -197,11 +197,11 @@ function function_65bb0ccd(text, x, y, scale, var_6c897a55, color, alpha, shadow
   function_669c57bc(position[0], position[1], text, color, alpha, scale, duration);
 }
 
-function print3dplus(text, origin, scale, var_6c897a55, color, alpha, shadowcolor, shadowalpha, lightcolor, lightalpha, duration) {
+function print3dplus(text, origin, scale, justify, color, alpha, shadowcolor, shadowalpha, lightcolor, lightalpha, duration) {
   color = function_ea2f17d1(color, (1, 1, 1));
   alpha = function_ea2f17d1(alpha, 1);
   scale = function_ea2f17d1(scale, 1);
-  var_6c897a55 = function_ea2f17d1(var_6c897a55, "<dev string:x4c>");
+  justify = function_ea2f17d1(justify, "<dev string:x4c>");
   duration = int(function_ea2f17d1(duration, 1));
   contsize = scale < 0;
   scale = abs(scale);
@@ -236,8 +236,8 @@ function print3dplus(text, origin, scale, var_6c897a55, color, alpha, shadowcolo
 
     if(contsize) {
       dist = distance(origin, vieworigin);
-      var_7295dcac = dist * 0.00133333;
-      scale *= var_7295dcac;
+      fixeddistscalar = dist * 0.00133333;
+      scale *= fixeddistscalar;
     }
   }
 
@@ -247,7 +247,7 @@ function print3dplus(text, origin, scale, var_6c897a55, color, alpha, shadowcolo
   offsetup = viewanglesup * offset[2];
   centered = 0;
 
-  switch (var_6c897a55) {
+  switch (justify) {
     case 0:
     case #"left":
     case #"l":
@@ -331,21 +331,21 @@ function private function_6ee9efa7(color, depthtest, duration, offset) {
   self endon(#"hash_2605f8ddd93ed8f9");
 
   while(drawpatharray.size > 0) {
-    var_c6150a06 = array();
+    temppatharray = array();
 
     if(framecount >= duration) {
       for(i = 1; i < drawpatharray.size; i++) {
-        var_c6150a06[i - 1] = drawpatharray[i];
+        temppatharray[i - 1] = drawpatharray[i];
       }
     } else {
-      var_c6150a06 = drawpatharray;
+      temppatharray = drawpatharray;
     }
 
     if(isDefined(self) == 1 && isDefined(self.origin) == 1 && isremovedentity(self) == 0) {
-      var_c6150a06[var_c6150a06.size] = self.origin;
+      temppatharray[temppatharray.size] = self.origin;
     }
 
-    drawpatharray = var_c6150a06;
+    drawpatharray = temppatharray;
     function_bfdce45f(color, depthtest, drawpatharray, offset);
     framecount++;
     waitframe(1);
@@ -483,19 +483,19 @@ function function_79f31114(screenheight) {
   return var_bfd4f22d;
 }
 
-function function_df9f894b(var_841c640a, screensize) {
+function function_df9f894b(coordinates, screensize) {
   screensize = function_ea2f17d1(screensize, function_827811b5());
   var_bfd4f22d = function_79f31114(screensize[1]);
-  hudwidth = var_841c640a[0] * var_bfd4f22d;
-  hudheight = var_841c640a[1] * var_bfd4f22d;
+  hudwidth = coordinates[0] * var_bfd4f22d;
+  hudheight = coordinates[1] * var_bfd4f22d;
   return array(int(hudwidth), int(hudheight));
 }
 
-function function_da7b7c0e(var_841c640a, screensize) {
+function function_da7b7c0e(coordinates, screensize) {
   screensize = function_ea2f17d1(screensize, function_827811b5());
   var_bfd4f22d = function_79f31114(screensize[1]);
-  hudx = var_841c640a[0] * var_bfd4f22d;
-  hudy = var_841c640a[1] * var_bfd4f22d;
+  hudx = coordinates[0] * var_bfd4f22d;
+  hudy = coordinates[1] * var_bfd4f22d;
   screenaspect = screensize[0] / screensize[1];
   var_73ea373d = screenaspect * 480;
   hudxoffset = -0.5 * (var_73ea373d - 640);

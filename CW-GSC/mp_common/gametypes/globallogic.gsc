@@ -1309,7 +1309,7 @@ function recordplaystyleinformation() {
   mpplaystyles = {
     #averagekilldistance: avgkilldistance, #percentageoftimemoving: percenttimemoving, #averagespeedduringmatch: avgspeedofplayerwhenmoving
   };
-  function_92d1707f(#"hash_5cee5eb6de3811d0", mpplaystyles);
+  function_92d1707f(#"dlog_event_mpplaystyles", mpplaystyles);
 }
 
 function updateandfinalizematchrecord() {
@@ -1482,7 +1482,7 @@ function function_9022da4e() {
     mpmatchfacts = {
       #gametime: function_f8d53445(), #winner: match::get_winner(), #killstreakcount: level.globalkillstreakscalled
     };
-    function_92d1707f(#"hash_7784f98b4b9750ec", mpmatchfacts);
+    function_92d1707f(#"dlog_event_mpmatchfacts", mpmatchfacts);
   }
 }
 
@@ -2379,7 +2379,7 @@ function bbplayermatchend(gamelength, var_c1e98979, gameover) {
   mpplayermatchfacts = {
     #score: self.pers[#"score"], #momentum: self.pers[#"momentum"], #endreason: var_c1e98979, #sessionrank: playerrank, #playtime: int(totaltimeplayed), #xuid: xuid, #gameover: gameover, #team: self.team, #specialist: self getspecialistindex()
   };
-  function_92d1707f(#"hash_7c173cd9201d5271", mpplayermatchfacts);
+  function_92d1707f(#"dlog_event_mpplayermatchfacts", mpplayermatchfacts);
 }
 
 function roundenddof() {
@@ -3022,9 +3022,9 @@ function updateallalivetimes() {
   }
 }
 
-function function_b6caec44(score, var_d0266750) {
+function function_b6caec44(score, round_score) {
   assert(isDefined(score));
-  assert(isDefined(var_d0266750));
+  assert(isDefined(round_score));
 
   if(level.scorelimit <= 0) {
     return;
@@ -3038,7 +3038,7 @@ function function_b6caec44(score, var_d0266750) {
     return;
   }
 
-  timeleft = globallogic_utils::getestimatedtimeuntilscorelimit(score, var_d0266750);
+  timeleft = globallogic_utils::getestimatedtimeuntilscorelimit(score, round_score);
 
   if(timeleft < 1) {
     level notify(#"match_ending_soon", {
@@ -3093,7 +3093,7 @@ function timelimitclock() {
     clockobject.targetname = "timeLimitClock";
   }
 
-  var_df4e70cd = #"hash_6c97261a8e7dd055";
+  var_df4e70cd = #"uin_ingame_countdown_timer_tick";
 
   while(!gamestate::is_game_over() && is_true(level.var_8e3a3faf)) {
     using_tickets_as_time = level.timelimit == 0 && isDefined(level.low_tickets_enabled) && isDefined(level.get_tickets_as_time);

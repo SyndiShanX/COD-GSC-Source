@@ -55,7 +55,7 @@ function stealth_noteworthy_thread(enabled, callouts) {
     level flag::wait_till("stealth_enabled");
     level flag::wait_till_clear("stealth_spotted");
     bestdot = -1;
-    var_17280c7c = undefined;
+    besttgt = undefined;
 
     if(self playerads() > level.stealth.noteworthy.stealth_noteworthy_min_ads) {
       eye = self getplayercamerapos();
@@ -76,13 +76,13 @@ function stealth_noteworthy_thread(enabled, callouts) {
         if(dot > level.stealth.noteworthy.stealth_noteworthy_min_dot && dot > bestdot) {
           if(sighttracepassed(tgteye, eye, 0, self)) {
             bestdot = dot;
-            var_17280c7c = tgt;
+            besttgt = tgt;
           }
         }
       }
 
-      if(isDefined(var_17280c7c)) {
-        self thread stealth_noteworthy_delayed("aim", var_17280c7c);
+      if(isDefined(besttgt)) {
+        self thread stealth_noteworthy_delayed("aim", besttgt);
       }
 
       foreach(entnum, ent in self.stealth.stealth_noted) {

@@ -19,14 +19,14 @@ function function_69258685(localclientnum, flashlightfx = "light/fx9_light_cp_fl
 
   var_5a528883 = self.flashlight.fx !== flashlightfx;
   var_f49dadc4 = self.flashlight.fxtag !== flashlightfxtag;
-  var_5a9e0eeb = var_5a528883 && flashlightfx !== "light/fx9_light_cp_flashlight" ? flashlightfx : undefined;
+  newfx = var_5a528883 && flashlightfx !== "light/fx9_light_cp_flashlight" ? flashlightfx : undefined;
   var_9acb6f5e = var_f49dadc4 && flashlightfxtag !== "tag_light" ? flashlightfxtag : undefined;
 
-  if(!isDefined(self.flashlight) && (isDefined(var_5a9e0eeb) || isDefined(var_9acb6f5e))) {
+  if(!isDefined(self.flashlight) && (isDefined(newfx) || isDefined(var_9acb6f5e))) {
     self.flashlight = {};
   }
 
-  self.flashlight.fx = var_5a9e0eeb;
+  self.flashlight.fx = newfx;
   self.flashlight.fxtag = var_9acb6f5e;
 
   if(self == level) {
@@ -37,8 +37,8 @@ function function_69258685(localclientnum, flashlightfx = "light/fx9_light_cp_fl
   flashlight_on = isDefined(self.flashlight.fxid);
 
   if(flashlight_on && (var_5a528883 || var_f49dadc4)) {
-    self function_24a560cf(localclientnum);
-    self function_69fc092e(localclientnum);
+    self fx_stop(localclientnum);
+    self fx_play(localclientnum);
   }
 }
 
@@ -85,18 +85,18 @@ function private function_2573297e(localclientnum, flashlight_on) {
     var_17716e4f = isDefined(self.flashlight.fxid);
 
     if(var_17716e4f && !isfxplaying(localclientnum, self.flashlight.fxid)) {
-      self function_24a560cf(localclientnum);
+      self fx_stop(localclientnum);
     }
 
     if(!isDefined(self.flashlight.fxid)) {
-      self function_69fc092e(localclientnum);
+      self fx_play(localclientnum);
     }
 
     return;
   }
 
   if(flashlight_on == 0 && isDefined(self.flashlight.fxid)) {
-    self function_24a560cf(localclientnum);
+    self fx_stop(localclientnum);
   }
 }
 
@@ -148,7 +148,7 @@ function private function_2b580006(localclientnum) {
   self function_a530c545(localclientnum, 0);
 }
 
-function private function_69fc092e(localclientnum) {
+function private fx_play(localclientnum) {
   if(!isDefined(self.flashlight)) {
     self.flashlight = {};
   }
@@ -173,7 +173,7 @@ function private function_69fc092e(localclientnum) {
   self thread function_54557944(localclientnum);
 }
 
-function private function_24a560cf(localclientnum) {
+function private fx_stop(localclientnum) {
   if(isDefined(self.flashlight.fxid)) {
     killfx(localclientnum, self.flashlight.fxid);
     self.flashlight.fxid = undefined;
@@ -189,6 +189,6 @@ function private function_54557944(localclientnum) {
   self endon("261acc760efea5e1");
   self endon(#"death");
   level waittill(#"hash_3832e59879eaf7fd");
-  self function_24a560cf(localclientnum);
-  self function_69fc092e(localclientnum);
+  self fx_stop(localclientnum);
+  self fx_play(localclientnum);
 }

@@ -55,12 +55,12 @@ function init() {
   spawner::add_archetype_spawn_function(#"zod_companion", &function_95d547cd);
   spawner::add_archetype_spawn_function(#"zod_companion", &function_d47881a3);
   var_8f2f30f5 = getEntArray("klaus_radio", "targetname");
-  array::run_all(var_8f2f30f5, &function_619a5c20);
+  array::run_all(var_8f2f30f5, &pingable);
   level.var_bc98869d = struct::get_array("klaus_exfil_loc", "targetname");
   level.var_7030d9f = struct::get("tag_align_klaus_sit", "targetname");
   level thread function_e61b4631();
   callback::on_revived(&on_player_revived);
-  callback::on_actor_killed(&function_b3791df9);
+  callback::on_actor_killed(&on_zombie_killed);
   callback::add_callback(#"on_host_migration_end", &on_host_migration_end);
 }
 
@@ -410,11 +410,11 @@ function private function_e9e410c2() {
 
 function function_9f1d395(a_ents) {
   level.var_7f5dece9 = a_ents[#"hash_3ff4f1ad9bf348f6"];
-  level.var_7f5dece9 function_619a5c20();
+  level.var_7f5dece9 pingable();
 }
 
-function function_5f47a7c2(var_9b0beac5) {
-  switch (var_9b0beac5) {
+function function_5f47a7c2(str_trigger_type) {
+  switch (str_trigger_type) {
     case #"hand_trigger":
       if(level flag::get(#"hash_20e3ef55ace43370")) {
         zm_unitrigger::unregister_unitrigger(level.var_7030d9f.s_unitrigger);
@@ -519,19 +519,19 @@ function private function_eff5258f(var_ba86b46) {
       level.var_86967fca delete();
     }
 
-    level.klaus playSound(#"hash_959c459c39ed856");
+    level.klaus playSound(#"evt_klaus_unlock_arms_place");
     level thread function_f0bfb4bb(var_ba86b46);
   }
 }
 
 function private function_83b1ebd5(var_ba86b46) {
   var_40f19a2b = struct::get(#"hash_62ef3afbc8fb21e", "targetname");
-  var_af3fc617 = util::spawn_model(#"p9_zm_platinum_battery_pack", var_40f19a2b.origin, var_40f19a2b.angles);
-  var_af3fc617 playSound(#"hash_59d0bfe69e34e2a");
+  mdl_battery = util::spawn_model(#"p9_zm_platinum_battery_pack", var_40f19a2b.origin, var_40f19a2b.angles);
+  mdl_battery playSound(#"evt_klaus_unlock_battery_place");
   wait 1;
   level scene::play(#"hash_e667b7bb5057190", "close_hatch", level.klaus);
   level thread scene::play(#"hash_e667b7bb5057190", "sit_loop_with_hatch_closed", level.klaus);
-  var_af3fc617 delete();
+  mdl_battery delete();
   level thread function_f0bfb4bb(var_ba86b46);
 }
 
@@ -582,13 +582,13 @@ function private function_e61f50db() {
   level flag::wait_till(#"hash_5503fb2f49e6a242");
   function_b503a4ce(2);
 
-  foreach(var_a9fd9d6d in var_3cf3aa06) {
-    if(var_a9fd9d6d.script_noteworthy === "sh_kl_rd") {
-      var_a9fd9d6d zm_unitrigger::create(&function_cd37638e, (36, 64, 64), &function_b88fcac5);
+  foreach(radio_struct in var_3cf3aa06) {
+    if(radio_struct.script_noteworthy === "sh_kl_rd") {
+      radio_struct zm_unitrigger::create(&function_cd37638e, (36, 64, 64), &function_b88fcac5);
       continue;
     }
 
-    var_a9fd9d6d zm_unitrigger::create(&function_cd37638e, 64, &function_b88fcac5);
+    radio_struct zm_unitrigger::create(&function_cd37638e, 64, &function_b88fcac5);
   }
 }
 
@@ -614,12 +614,12 @@ function private function_b503a4ce(n_state) {
       if(isarray(level.var_8f2f30f5)) {
         foreach(radio in level.var_8f2f30f5) {
           radio setModel(#"p9_zm_platinum_radio_call_boxes_on");
-          radio function_619a5c20();
-          radio playSound(#"hash_694ca8a2f30e0e55");
+          radio pingable();
+          radio playSound(#"zmb_klaus_radio_on");
           radio clientfield::set("" + #"klaus_radio_obj", 1);
 
           if(!isDefined(radio.var_7ecc12d9)) {
-            radio.var_7ecc12d9 = radio playLoopSound(#"hash_27a52bcb771fe5e5");
+            radio.var_7ecc12d9 = radio playLoopSound(#"zmb_klaus_radio_amb_lp");
           }
         }
       }
@@ -628,8 +628,8 @@ function private function_b503a4ce(n_state) {
     case 2:
       foreach(radio in level.var_8f2f30f5) {
         radio setModel(#"p9_zm_platinum_radio_call_boxes_off");
-        radio function_619a5c20();
-        radio playSound(#"hash_7b6bafe300f8cd31");
+        radio pingable();
+        radio playSound(#"zmb_klaus_radio_off");
         radio clientfield::set("" + #"klaus_radio_obj", 0);
 
         if(isDefined(radio.var_7ecc12d9)) {
@@ -675,7 +675,7 @@ function function_b88fcac5() {
       }
 
       if(e_player zm_score::can_player_purchase(level.var_dd86d7a7)) {
-        playSoundAtPosition(#"hash_101e63a672483dad", self.origin);
+        playSoundAtPosition(#"zmb_klaus_radio_activate", self.origin);
         e_player zm_score::minus_to_player_score(level.var_dd86d7a7);
         level.var_dd86d7a7 = 2000;
         function_b503a4ce(2);
@@ -770,12 +770,12 @@ function function_9215d4c0(s_params) {
   }
 }
 
-function private function_8d5c5a84(var_a5839c5b, var_1e447653 = 0) {
+function private function_8d5c5a84(follow_player, var_1e447653 = 0) {
   level flag::set(#"hash_6d16c284cbb301d1");
   callback::on_ai_killed(&function_9215d4c0);
 
   if(var_1e447653) {
-    level thread function_8f45af77(var_a5839c5b);
+    level thread function_8f45af77(follow_player);
     level flag::set(#"hash_2629dab56bd39ff5");
 
     if(isDefined(level.klaus)) {
@@ -794,12 +794,12 @@ function private function_8d5c5a84(var_a5839c5b, var_1e447653 = 0) {
     level flag::set(#"hash_19be6db4d7ab2200");
     zm_utility::function_d729de6a(0, [#"zone_safe_house"]);
   } else if(isDefined(level.klaus)) {
-    var_22043f8e = var_a5839c5b.origin;
-    level.klaus zodcompanionutility::function_3fb3f41e(var_a5839c5b);
+    land_pos = follow_player.origin;
+    level.klaus zodcompanionutility::function_3fb3f41e(follow_player);
     level.klaus zodcompanionutility::function_681263de();
     level.klaus playSound(#"hash_260545f3283bead9");
     level thread function_9eef76d4();
-    var_d15867da = var_a5839c5b.cached_zone_name;
+    var_d15867da = follow_player.cached_zone_name;
 
     if(isDefined(var_d15867da)) {
       if(isinarray(level.var_65c43c31, var_d15867da)) {
@@ -809,8 +809,8 @@ function private function_8d5c5a84(var_a5839c5b, var_1e447653 = 0) {
         level scene::play(#"hash_e667b7bb5057190", "stand_up", level.klaus);
         level scene::play(#"hash_e667b7bb5057190", "walk_fly_out", level.klaus);
 
-        if(isDefined(var_a5839c5b) && isDefined(var_22043f8e)) {
-          level.klaus forceteleport(getclosestpointonnavmesh(var_22043f8e, 999, 100));
+        if(isDefined(follow_player) && isDefined(land_pos)) {
+          level.klaus forceteleport(getclosestpointonnavmesh(land_pos, 999, 100));
         } else {
           var_6b90fdca = struct::get("klaus_backup_land_pos", "targetname");
           level.klaus forceteleport(getclosestpointonnavmesh(var_6b90fdca.origin, 300, 100));
@@ -822,7 +822,7 @@ function private function_8d5c5a84(var_a5839c5b, var_1e447653 = 0) {
       }
     }
 
-    level thread namespace_33c196c8::function_e7136ed2(var_a5839c5b);
+    level thread namespace_33c196c8::function_e7136ed2(follow_player);
     level flag::set(#"hash_279a97271de2b7e1");
   }
 
@@ -851,11 +851,11 @@ function private function_5df1db76(var_ba86b46) {
   level scene::stop(#"hash_e667b7bb5057190");
 }
 
-function private function_8f45af77(var_a5839c5b) {
+function private function_8f45af77(follow_player) {
   level flag::wait_till(#"hash_720384d338d58cf4");
 
   if(isDefined(level.klaus)) {
-    level.klaus zodcompanionutility::function_3fb3f41e(var_a5839c5b);
+    level.klaus zodcompanionutility::function_3fb3f41e(follow_player);
   }
 }
 
@@ -1091,7 +1091,7 @@ function on_player_revived(params) {
   }
 }
 
-function function_b3791df9(params) {
+function on_zombie_killed(params) {
   if(isDefined(params.eattacker)) {
     if(level.klaus === params.eattacker && params.smeansofdeath == "MOD_RIFLE_BULLET") {
       level.klaus thread zm_platinum_vo::function_63803452();
@@ -1187,9 +1187,9 @@ function function_953cbff5() {
     }
 
     if(isarray(var_3cf3aa06)) {
-      foreach(var_927876a9 in var_3cf3aa06) {
-        circle(var_927876a9.origin, 30, (0, 1, 0));
-        print3d(var_927876a9.origin, "<dev string:x445>", (0, 1, 0));
+      foreach(s_radio in var_3cf3aa06) {
+        circle(s_radio.origin, 30, (0, 1, 0));
+        print3d(s_radio.origin, "<dev string:x445>", (0, 1, 0));
       }
     }
 

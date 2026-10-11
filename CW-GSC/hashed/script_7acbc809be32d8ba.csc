@@ -472,34 +472,34 @@ function function_2fa08804(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_61987d28(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(isDefined(self.var_accb4770)) {
-    util::playFXOnTag(bwastimejump, self.var_accb4770.var_515e20e6 ? #"hash_77e7d9c6c1c5cb2b" : #"hash_52f32fbd7a1126ba", self.var_accb4770, "tag_flash");
+  if(isDefined(self.copycat)) {
+    util::playFXOnTag(bwastimejump, self.copycat.var_515e20e6 ? #"hash_77e7d9c6c1c5cb2b" : #"hash_52f32fbd7a1126ba", self.copycat, "tag_flash");
   }
 }
 
 function function_53bb1917(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    if(!isDefined(self.var_accb4770)) {
+    if(!isDefined(self.copycat)) {
       weapon = self function_d2c2b168().rootweapon;
-      var_accb4770 = util::spawn_model(fieldname, #"p9_fxanim_ww_mega_barrel_fullauto_copycat_circle_mod");
-      var_accb4770.var_515e20e6 = weapon.name === #"ww_mega_barrel_fullauto_copycat_t9_upgraded";
-      var_accb4770 linktocamera();
-      var_accb4770 setforcenocull();
-      var_accb4770 thread scene::play(#"p9_fxanim_ww_mega_barrel_fullauto_copycat_circle_bundle", var_accb4770);
-      var_accb4770 thread function_2ed768c7(self, #"p9_fxanim_ww_mega_barrel_fullauto_copycat_circle_bundle");
-      var_accb4770 playrenderoverridebundle(#"hash_225a66106179e9bb");
-      util::playFXOnTag(fieldname, var_accb4770.var_515e20e6 ? #"hash_2eabcf6f328bb46b" : #"hash_2ac49f49b148a4fa", var_accb4770, "tag_flash");
-      self.var_accb4770 = var_accb4770;
+      copycat = util::spawn_model(fieldname, #"p9_fxanim_ww_mega_barrel_fullauto_copycat_circle_mod");
+      copycat.var_515e20e6 = weapon.name === #"ww_mega_barrel_fullauto_copycat_t9_upgraded";
+      copycat linktocamera();
+      copycat setforcenocull();
+      copycat thread scene::play(#"p9_fxanim_ww_mega_barrel_fullauto_copycat_circle_bundle", copycat);
+      copycat thread function_2ed768c7(self, #"p9_fxanim_ww_mega_barrel_fullauto_copycat_circle_bundle");
+      copycat playrenderoverridebundle(#"hash_225a66106179e9bb");
+      util::playFXOnTag(fieldname, copycat.var_515e20e6 ? #"hash_2eabcf6f328bb46b" : #"hash_2ac49f49b148a4fa", copycat, "tag_flash");
+      self.copycat = copycat;
     }
 
     return;
   }
 
-  if(isDefined(self.var_accb4770)) {
-    self.var_accb4770 scene::stop(#"p9_fxanim_ww_mega_barrel_fullauto_copycat_circle_bundle", undefined, undefined, undefined, undefined, 1);
+  if(isDefined(self.copycat)) {
+    self.copycat scene::stop(#"p9_fxanim_ww_mega_barrel_fullauto_copycat_circle_bundle", undefined, undefined, undefined, undefined, 1);
 
-    if(isDefined(self.var_accb4770)) {
-      self.var_accb4770 delete();
+    if(isDefined(self.copycat)) {
+      self.copycat delete();
     }
   }
 }
@@ -509,9 +509,9 @@ function function_778e494b(localclientnum, oldval, newval, bnewent, binitialsnap
     self function_4e818189(#"hash_23e50ec84718e9aa");
     self function_6b945d59(#"hash_225a66106179e9bb");
 
-    if(isDefined(self.var_accb4770)) {
-      self.var_accb4770 playrenderoverridebundle(#"hash_23e50ec84718e9aa");
-      self.var_accb4770 stoprenderoverridebundle(#"hash_225a66106179e9bb");
+    if(isDefined(self.copycat)) {
+      self.copycat playrenderoverridebundle(#"hash_23e50ec84718e9aa");
+      self.copycat stoprenderoverridebundle(#"hash_225a66106179e9bb");
     }
 
     return;
@@ -521,9 +521,9 @@ function function_778e494b(localclientnum, oldval, newval, bnewent, binitialsnap
     self function_4e818189(#"hash_225a66106179e9bb");
     self function_6b945d59(#"hash_23e50ec84718e9aa");
 
-    if(isDefined(self.var_accb4770)) {
-      self.var_accb4770 playrenderoverridebundle(#"hash_225a66106179e9bb");
-      self.var_accb4770 stoprenderoverridebundle(#"hash_23e50ec84718e9aa");
+    if(isDefined(self.copycat)) {
+      self.copycat playrenderoverridebundle(#"hash_225a66106179e9bb");
+      self.copycat stoprenderoverridebundle(#"hash_23e50ec84718e9aa");
     }
 
     return;
@@ -532,9 +532,9 @@ function function_778e494b(localclientnum, oldval, newval, bnewent, binitialsnap
   self function_6b945d59(#"hash_225a66106179e9bb");
   self function_6b945d59(#"hash_23e50ec84718e9aa");
 
-  if(isDefined(self.var_accb4770)) {
-    self.var_accb4770 playrenderoverridebundle(#"hash_225a66106179e9bb");
-    self.var_accb4770 stoprenderoverridebundle(#"hash_23e50ec84718e9aa");
+  if(isDefined(self.copycat)) {
+    self.copycat playrenderoverridebundle(#"hash_225a66106179e9bb");
+    self.copycat stoprenderoverridebundle(#"hash_23e50ec84718e9aa");
   }
 }
 

@@ -48,8 +48,8 @@ function function_5836955d() {
   self.health = self.maxhealth;
   self.animrate = 1.15;
   self asmsetanimationrate(self.animrate);
-  self.var_e66cd6fb = 1;
-  self.var_1c8b76d3 = 1;
+  self.no_ragdoll = 1;
+  self.non_zombie = 1;
   self.no_gib = 1;
   self.var_af545843 = 1;
   self.var_abe67a20 = 1;
@@ -73,7 +73,7 @@ function private function_b8c581fb(inflictor, attacker, damage, flags, meansofda
 
     if(isDefined(orb)) {
       orb thread namespace_ec06fe4a::function_52afe5df(1);
-      orb namespace_83eb6304::function_3ecfde67("electrical_explo");
+      orb doa_fx::function_3ecfde67("electrical_explo");
       orb namespace_e32bb68::function_3a59ec34("zmb_doa_ai_ghost_explo");
     }
   }
@@ -114,7 +114,7 @@ function function_d8e8920a() {
       }
 
       self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_ghost_warp_out");
-      self namespace_83eb6304::function_3ecfde67("ethereal_vapors");
+      self doa_fx::function_3ecfde67("ethereal_vapors");
       self.ignoreall = 1;
       self setgoal(self.origin);
       angles = self.enemy.angles + (0, 180, 0);
@@ -125,7 +125,7 @@ function function_d8e8920a() {
       wait 0.3;
       self.takedamage = 1;
       self namespace_ec06fe4a::function_4f72130c();
-      self namespace_83eb6304::function_3ecfde67("ethereal_vapors");
+      self doa_fx::function_3ecfde67("ethereal_vapors");
       self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_ghost_warp_in");
       wait 0.5;
       self.ignoreall = 0;

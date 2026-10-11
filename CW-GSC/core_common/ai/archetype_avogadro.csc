@@ -47,7 +47,7 @@ function function_8dede8a3(localclientnum) {
   self endon(#"shutdown", #"death");
 
   while(isDefined(self)) {
-    self playSound(localclientnum, #"hash_6f92148122930a");
+    self playSound(localclientnum, #"zmb_vocals_avogadro_ambient");
     wait randomintrange(3, 10);
   }
 }
@@ -173,8 +173,8 @@ function private function_6ddf79a2(localclientnum, oldval, newval, bnewent, bini
 
   var_905cc9f0 = level.var_c42e1dca[id].model;
   var_ecde63d5 = self;
-  playSound(binitialsnap, #"hash_45cd897c902f8c6d", var_ecde63d5.origin);
-  playSound(binitialsnap, #"hash_1e6ec35a55d2046b", var_905cc9f0.origin);
+  playSound(binitialsnap, #"zmb_avogadro_warp_stay", var_ecde63d5.origin);
+  playSound(binitialsnap, #"zmb_avogadro_warp_in", var_905cc9f0.origin);
   level.var_c42e1dca[id].beam_id = beamlaunch(binitialsnap, var_ecde63d5, "tag_origin", var_905cc9f0, "tag_origin", "beam9_zm_avogadro_elec_teleport");
 }
 

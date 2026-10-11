@@ -21,13 +21,13 @@ function private preinit() {
     return;
   }
 
-  function_2777823f();
+  register_client_fields();
   level.item_spawn_drops = [];
   level.var_624588d5 = [];
   level.var_2b5a36e1 = [];
 }
 
-function private function_2777823f() {
+function private register_client_fields() {
   clientfield::register("missile", "dynamic_item_drop_falling", 1, 1, "int", undefined, 0, 0);
   clientfield::register("missile", "dynamic_item_drop_count", 1, 10, "int", &function_fd47982d, 0, 0);
   clientfield::register("missile", "dynamic_item_drop", 1, 4, "int", &function_a517a859, 0, 0);

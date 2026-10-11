@@ -542,11 +542,11 @@ function function_45a520db(params) {
     switch (self.zm_ai_category) {
       case #"special":
         var_487ba56d = 5;
-        playSoundAtPosition(#"hash_57559c7467fac3a5", self.origin);
+        playSoundAtPosition(#"zmb_rush_points_x5", self.origin);
         break;
       case #"elite":
         var_487ba56d = 10;
-        playSoundAtPosition(#"hash_612ef6ccaf0effeb", self.origin);
+        playSoundAtPosition(#"zmb_rush_points_x10", self.origin);
         break;
       case #"boss":
         var_487ba56d = 15;
@@ -787,7 +787,7 @@ function tube_gruesome() {
   self endon(#"hash_18be4b1da8bbed9b", #"disconnect", #"zm_arcade_kill", #"damage", #"bled_out", #"player_downed", #"bonus_points_player_grabbed", #"player_defend_area_waiting", #"player_grabbed_key", #"multiplier_timeout");
 
   while(true) {
-    self playsoundtoplayer(#"hash_11d338092fefba12", self);
+    self playsoundtoplayer(#"zmb_rush_lose_alert", self);
     wait 0.55;
   }
 }
@@ -1175,8 +1175,8 @@ function init_powerups() {
   zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_3", 9);
   zombie_utility::set_zombie_var(#"zombie_powerup_drop_min_4", 6);
   zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_4", 10);
-  zombie_utility::set_zombie_var(#"hash_604cec237ec939f", 6);
-  zombie_utility::set_zombie_var(#"hash_8b80080184dcb1d", 10);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_min_5", 6);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_5", 10);
   zombie_utility::set_zombie_var(#"zombie_powerup_ammo_spacing_min", 8);
   zombie_utility::set_zombie_var(#"zombie_powerup_ammo_spacing_max", 14);
   level.zm_genesis_robot_pay_towardsreactswordstart = randomintrange(zombie_utility::get_zombie_var(#"zombie_powerup_ammo_spacing_min"), zombie_utility::get_zombie_var(#"zombie_powerup_ammo_spacing_max"));
@@ -1465,7 +1465,7 @@ function function_7acf9d9b(e_door) {
     level notify(#"hash_4ffec9c5f552e6fc", {
       #e_door: e_door
     });
-    playSoundAtPosition(#"hash_27dc220231c7b8b3", e_door.origin);
+    playSoundAtPosition(#"zmb_rush_key_used", e_door.origin);
     return 1;
   }
 
@@ -1886,7 +1886,7 @@ function function_21669ebc(restart = 0) {
 
     if(!function_5a2c9b1c(level.round_number) && zm_utility::function_e12de7f5(level.round_number) || function_77ee3cd2(level.round_number)) {
       if(!level flag::get("started_defend_area")) {
-        util::playsoundonplayers(#"hash_2d1265adbba422cf");
+        util::playsoundonplayers(#"mus_arcade_round_change");
       }
     }
 

@@ -53,8 +53,8 @@ function function_cc03b772(localclientnum, oldval, newval, bnewent, binitialsnap
     level thread function_58710bd2(fieldname);
     level thread function_cbcbd56d(fieldname);
     setsoundcontext("spawn_select_screen", "true");
-    function_5ea2c6e3("uin_overhead_map", 0.1, 1);
-    soundloopemitter(#"hash_5ef60d86d79dc9a1", (0, 0, 0));
+    addsubmix("uin_overhead_map", 0.1, 1);
+    soundloopemitter(#"uin_overhead_map_background_loop", (0, 0, 0));
 
     if(isDefined(level.squadspawnactive)) {
       [[level.squadspawnactive]](fieldname);
@@ -66,8 +66,8 @@ function function_cc03b772(localclientnum, oldval, newval, bnewent, binitialsnap
   level thread function_c97b609d(fieldname);
   level thread function_48811bf4(fieldname);
   setsoundcontext("spawn_select_screen", "");
-  function_ed62c9c2("uin_overhead_map", 2);
-  soundstoploopemitter(#"hash_5ef60d86d79dc9a1", (0, 0, 0));
+  clearsubmix("uin_overhead_map", 2);
+  soundstoploopemitter(#"uin_overhead_map_background_loop", (0, 0, 0));
 
   if(isDefined(level.var_6ed4a19b)) {
     [[level.var_6ed4a19b]](fieldname);
@@ -96,7 +96,7 @@ function function_48811bf4(localclientnum) {
 
 function function_a58f32b0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    playSound(fieldname, #"hash_5d2e54389286b7f8");
+    playSound(fieldname, #"uin_squad_wiped");
   }
 }
 
@@ -132,8 +132,8 @@ function function_429c452(localclientnum, should_play) {
 
 function private on_game_ended(localclientnum) {
   setsoundcontext("spawn_select_screen", "");
-  function_ed62c9c2("uin_overhead_map", 0.5);
-  soundstoploopemitter(#"hash_5ef60d86d79dc9a1", (0, 0, 0));
+  clearsubmix("uin_overhead_map", 0.5);
+  soundstoploopemitter(#"uin_overhead_map_background_loop", (0, 0, 0));
   function_c97b609d(localclientnum);
 }
 
@@ -214,7 +214,7 @@ function private function_58710bd2(localclientnum) {
       }
     }
 
-    function_ac750979(localclientnum, level.var_ac260ded);
+    function_ac750979(localclientnum, level.uavs);
     function_ac750979(localclientnum, level.counteruavs);
     function_ac750979(localclientnum, level.var_a25fd5e1);
     waitframe(1);
@@ -252,7 +252,7 @@ function private function_c97b609d(localclientnum) {
     }
   }
 
-  function_bebd8395(localclientnum, level.var_ac260ded);
+  function_bebd8395(localclientnum, level.uavs);
   function_bebd8395(localclientnum, level.counteruavs);
   function_bebd8395(localclientnum, level.var_a25fd5e1);
 }

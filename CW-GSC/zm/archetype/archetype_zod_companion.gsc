@@ -952,12 +952,12 @@ function zod_companion_revive_player(player) {
 
   self pathmode(pathmode);
   waitframe(1);
-  var_4ac740f2 = is_true(player.var_b895a3ff) ? player.var_dc4f101.revivetrigger : player.revivetrigger;
+  revive_trigger = is_true(player.var_b895a3ff) ? player.var_dc4f101.revivetrigger : player.revivetrigger;
   target_point = is_true(player.var_b895a3ff) ? player.var_dc4f101.origin : player.origin;
 
-  if(isPlayer(player) && isDefined(var_4ac740f2)) {
+  if(isPlayer(player) && isDefined(revive_trigger)) {
     level.var_ee623e8 = 1;
-    var_4ac740f2.beingrevived = 1;
+    revive_trigger.beingrevived = 1;
     player.being_revived_by_robot = 1;
     player.var_c6a6f334 = 1;
     vector = vectorNormalize(target_point - self.origin);
@@ -1743,8 +1743,8 @@ function define_new_leader() {
   }
 
   foreach(potential_leader in a_potential_leaders) {
-    if(potential_leader.var_5478eb1b < closest_distance) {
-      closest_distance = potential_leader.var_5478eb1b;
+    if(potential_leader.path_distance < closest_distance) {
+      closest_distance = potential_leader.path_distance;
       self.leader = potential_leader.entity;
     }
   }
@@ -1790,7 +1790,7 @@ function get_potential_leaders(companion, var_4266300b) {
   for(i = 0; i < var_674755ca.size; i++) {
     if(var_674755ca[i] >= 0) {
       leader = {
-        #var_5478eb1b: var_674755ca[i], #goal_pos: var_8d6705e8[i], #entity: potential_targets[i]
+        #path_distance: var_674755ca[i], #goal_pos: var_8d6705e8[i], #entity: potential_targets[i]
       };
       a_potential_leaders[a_potential_leaders.size] = leader;
     }
@@ -1837,9 +1837,9 @@ function function_14f3d97b(goalpos, var_ff1d11ed = 0) {
   return var_5a7117fb;
 }
 
-function function_3fb3f41e(var_a5839c5b) {
-  if(isDefined(var_a5839c5b)) {
-    self.leader = var_a5839c5b;
+function function_3fb3f41e(follow_player) {
+  if(isDefined(follow_player)) {
+    self.leader = follow_player;
     self.leader.eligible_leader = 1;
   }
 }

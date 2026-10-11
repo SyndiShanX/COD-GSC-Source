@@ -66,7 +66,7 @@ function starting(str_skipto) {
   level.qasim thread namespace_b100dd86::swap_head(undefined, "c_t9_cp_ira_militant_vip_qasim_head_nohat_injured");
   level.qasim thread namespace_b100dd86::function_f82142f8(undefined, "c_t9_cp_ira_militant_vip_qasim_tkd_body");
   level thread scene::skipto_end("scene_tkd_hit2_rooftop_slide_enemy2", "Shot 1", undefined, 1, 0);
-  player util::delay(1, undefined, &util::function_749362d7, 1);
+  player util::delay(1, undefined, &util::set_low_ready, 1);
 }
 
 function function_daaa52d5() {
@@ -141,7 +141,7 @@ function main(str_skipto, b_starting) {
     level.raid_woods = level.woods;
   }
 
-  level battlechatter::function_2ab9360b(0);
+  level battlechatter::bc_allow(0);
   player thread function_c0b643d5();
   level thread function_26e6230d();
   level thread function_ba74fe83();
@@ -165,7 +165,7 @@ function main(str_skipto, b_starting) {
   wait 0.5;
   player setstance("stand");
   player freezecontrols(1);
-  player util::function_749362d7(0);
+  player util::set_low_ready(0);
   tkdn_af_hill::function_a2015343();
   level thread scene::init("scene_tkd_hit3_intro");
   wait 2.5;
@@ -190,7 +190,7 @@ function main(str_skipto, b_starting) {
   }
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
@@ -406,7 +406,7 @@ function function_6321f3d1() {
 
 function function_80b14544() {
   level thread scene::play("scene_tkd_hit2_rooftop", "dt_end_1_throw");
-  music::function_edda155f("3.2_kill_stinger");
+  music::playstinger("3.2_kill_stinger");
   player = getPlayers()[0];
   player waittillmatch({
     #notetrack: "end"}, #"hash_b1f863e899edc77");
@@ -434,12 +434,12 @@ function function_1998b542() {
 }
 
 function function_4f4627e4() {
-  util::delay(1, undefined, &dialogue::function_96171f6d, "vox_cp_tdwn_05100_masn_thereyougo_99");
+  util::delay(1, undefined, &dialogue::player_say, "vox_cp_tdwn_05100_masn_thereyougo_99");
   level thread scene::play("scene_tkd_hit2_rooftop", "dt_5_res");
   self thread function_95707bc7();
   level.qasim thread function_f48f4f4f();
   player = getPlayers()[0];
-  player util::delay(2, undefined, &util::function_749362d7, 0);
+  player util::delay(2, undefined, &util::set_low_ready, 0);
   player waittillmatch({
     #notetrack: "end"}, #"hash_576c5aac6ddaa60a");
 }
@@ -474,11 +474,11 @@ function function_95707bc7() {
 }
 
 function function_e65b6174() {
-  level.qasim thread function_230fc686();
+  level.qasim thread head_shot();
   level.qasim thread function_c5f7e209();
 }
 
-function function_230fc686() {
+function head_shot() {
   self dialogue::queue("evt_qasim_headshot");
   self dialogue::function_47b06180();
 }
@@ -493,7 +493,7 @@ function function_c5881277(inflictor, attacker, damage, idflags, meansofdeath, w
   level endon(#"hash_19e8d79db3b9786a");
 
   if(vsurfacenormal === "helmet" || vsurfacenormal === "head") {
-    level.qasim thread function_230fc686();
+    level.qasim thread head_shot();
     return partname;
   } else {
     level.qasim thread function_c5f7e209();
@@ -608,7 +608,7 @@ function init_flags() {}
 
 function init_clientfields() {}
 
-function function_22b7fffd() {}
+function init_scenes() {}
 
 function function_2d0aefe0(height, time = 3) {
   self disableweapons();

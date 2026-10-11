@@ -512,18 +512,18 @@ function addweaponobject(watcher, weapon_instance, weapon) {
 
 function function_6d8aa6a0(player, watcher) {
   self endon(#"death", #"hacked", #"hash_3a9500a4f045d0f3");
-  var_e1d8c33c = ["joined_team", "joined_spectators", "disconnect", "changed_specialist"];
+  waittills = ["joined_team", "joined_spectators", "disconnect", "changed_specialist"];
 
   if(isDefined(watcher.weapon.dieonrespawn) ? watcher.weapon.dieonrespawn : 0) {
-    var_e1d8c33c[var_e1d8c33c.size] = "spawned";
+    waittills[waittills.size] = "spawned";
   }
 
   if(isDefined(watcher.var_10efd558)) {
-    var_e1d8c33c[var_e1d8c33c.size] = watcher.var_10efd558;
+    waittills[waittills.size] = watcher.var_10efd558;
   }
 
   while(isDefined(player)) {
-    result = player waittill(var_e1d8c33c);
+    result = player waittill(waittills);
 
     if(is_true(result.var_51246a31) && is_true(self.ishacked)) {
       continue;
@@ -1257,7 +1257,7 @@ function function_d5d6b91(params) {
   }
 
   if(is_true(weapon_instance.var_da2aa27a)) {
-    weapon_instance function_619a5c20();
+    weapon_instance pingable();
   }
 
   if(isPlayer(self) && weapon.setusedstat && !self util::ishacked()) {

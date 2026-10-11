@@ -181,9 +181,9 @@ function start_timed_vortex(effect_version, v_vortex_origin, n_vortex_radius, n_
   }
 
   n_time_to_wait_for_explosion = n_vortex_time_cl - n_vortex_time_sv + 0.35;
-  var_784b8be6 = getaiteamarray(team);
+  a_all_zombies = getaiteamarray(team);
 
-  foreach(ai_zombie in var_784b8be6) {
+  foreach(ai_zombie in a_all_zombies) {
     if(is_true(ai_zombie.interdimensional_gun_kill) && ai_zombie.var_ecd5b1b9 === svortex) {
       ai_zombie.interdimensional_gun_kill = undefined;
     }

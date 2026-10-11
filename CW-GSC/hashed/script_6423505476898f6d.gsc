@@ -527,7 +527,7 @@ function door_is_open_at_least(checkangle) {
   return false;
 }
 
-function suspicious_door_stealth_check(var_ffd1df9a) {
+function suspicious_door_stealth_check(issuspicious) {
   if(!isDefined(level.stealth)) {
     return;
   }
@@ -536,7 +536,7 @@ function suspicious_door_stealth_check(var_ffd1df9a) {
     return;
   }
 
-  if(var_ffd1df9a) {
+  if(issuspicious) {
     level.stealth.suspicious_door.doors[level.stealth.suspicious_door.doors.size] = self;
     return;
   }
@@ -555,7 +555,7 @@ function private try_push_sound() {
   }
 }
 
-function private door_creak_sound(scale_volume, var_a09fee2c) {
+function private door_creak_sound(scale_volume, scale_time) {
   self.m_e_door endon(#"entitydeleted");
   self notify(#"hash_751ece30abc106fd");
   alias = self.m_s_bundle.var_69358708;
@@ -685,9 +685,9 @@ function function_c152a0ca(user) {
   var_86c03756 = math::sign(var_79467049);
 
   if(isPlayer(user)) {
-    var_22efce82 = user getnormalizedmovement();
-    var_22efce82 = (var_22efce82[0], var_22efce82[1] * -1, 0);
-    v_movement = rotatepoint(var_22efce82, user.angles);
+    v_stick = user getnormalizedmovement();
+    v_stick = (v_stick[0], v_stick[1] * -1, 0);
+    v_movement = rotatepoint(v_stick, user.angles);
     v_movement = vectorNormalize(v_movement);
   } else {
     v_movement = user getvelocity();

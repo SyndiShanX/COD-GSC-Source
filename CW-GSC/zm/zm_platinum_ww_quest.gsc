@@ -80,7 +80,7 @@ function function_c6de5d3d(b_skipped) {
   var_2ad81caf thread function_7c943428(var_be8a80d6);
   level thread function_3eafd069(var_be8a80d6);
   var_be8a80d6 waittill(#"locker_opened");
-  var_be8a80d6 function_619a5c20();
+  var_be8a80d6 pingable();
 }
 
 function function_863fc0f1(b_skipped, var_19e802fa) {
@@ -89,7 +89,7 @@ function function_863fc0f1(b_skipped, var_19e802fa) {
     level thread function_3eafd069(var_be8a80d6);
     var_be8a80d6 thread scene::play("p9_fxanim_platinum_lockers_metal_tall_bundle", var_be8a80d6);
     var_be8a80d6 notify(#"locker_opened");
-    var_be8a80d6 function_619a5c20();
+    var_be8a80d6 pingable();
   }
 }
 
@@ -200,10 +200,10 @@ function function_743996c0() {
   item_ww = item_drop::drop_item(0, wonder_weapon, 1, 0, point.id, var_222825ae.origin, var_222825ae.angles, 0);
   item_ww.var_dd21aec2 = 1 | 16;
   item_ww.var_2f21f7ff = 1;
-  item_ww.itementry.var_fa988b4b = undefined;
+  item_ww.itementry.droptimeout = undefined;
   item_ww.amount = isDefined(wonder_weapon.clipsize) ? wonder_weapon.clipsize : 25;
   spawncollision(#"collision_clip_32x32x128", "collider", (-4058.5, 9117.75, 420), (0, 230, 0));
-  level.var_6a086277 scene::play(#"hash_5a121f0591383986", "play", level.var_6a086277);
+  level.var_6a086277 scene::play(#"p9_zm_gold_man_wall_safe_bundle", "play", level.var_6a086277);
 }
 
 function function_58b582cc() {

@@ -461,7 +461,7 @@ function player_health_regen() {
   player.var_4d9b2bc3 = 1;
   player.breathingstoptime = -10000;
   player.var_dc77251f = {
-    #var_ba47a7a3: 0, #time_now: 0, #time_elapsed: 0, #ratio: 0, #var_ec8863bf: 0, #var_e65dca8d: 0, #var_215539de: 0, #var_dae4d7ea: 0, #old_health: player.health, #var_7cb44c56: 0, #var_d1e06a5f: gettime()
+    #var_ba47a7a3: 0, #time_now: 0, #time_elapsed: 0, #ratio: 0, #var_ec8863bf: 0, #var_e65dca8d: 0, #var_215539de: 0, #var_dae4d7ea: 0, #old_health: player.health, #var_7cb44c56: 0, #last_update_time: gettime()
   };
   player j_sticks_front1_end_le1();
 }
@@ -519,7 +519,7 @@ function private function_8f2722f6(now, var_677a3e37) {
     player.breathingstoptime = now + 6000;
     var_dc77251f.var_ba47a7a3 = now;
   } else {
-    var_dc77251f.time_elapsed = now - var_dc77251f.var_d1e06a5f;
+    var_dc77251f.time_elapsed = now - var_dc77251f.last_update_time;
     player heal(var_dc77251f);
 
     if(var_dc77251f.var_ec8863bf <= 0) {
@@ -559,7 +559,7 @@ function private function_b506b922() {
       }
 
       player function_8f2722f6(now, var_677a3e37);
-      player.var_dc77251f.var_d1e06a5f = now;
+      player.var_dc77251f.last_update_time = now;
     }
 
     profilestop();

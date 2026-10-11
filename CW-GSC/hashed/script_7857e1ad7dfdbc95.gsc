@@ -175,8 +175,8 @@ function private function_c91fa191() {
   self endon("7debe29bdea3f840");
 
   while(true) {
-    result = self waittill(#"hash_4c72e79bdad8315e");
-    result.ai namespace_83eb6304::function_3ecfde67("lightningStrike");
+    result = self waittill(#"ai_queue_spawned");
+    result.ai doa_fx::function_3ecfde67("lightningStrike");
   }
 }
 
@@ -185,20 +185,20 @@ function private function_e855118e() {
   self notify("497f128207c281cf");
   self endon("497f128207c281cf");
   self waittill(#"lightning");
-  self namespace_83eb6304::function_3ecfde67("skeleton_hand_lightning");
+  self doa_fx::function_3ecfde67("skeleton_hand_lightning");
   self waittill(#"lightning");
-  self namespace_83eb6304::function_3ecfde67("skeleton_hand_lightning");
+  self doa_fx::function_3ecfde67("skeleton_hand_lightning");
   self waittill(#"lightning");
-  self namespace_83eb6304::function_3ecfde67("skeleton_hand_lightning");
+  self doa_fx::function_3ecfde67("skeleton_hand_lightning");
   self waittill(#"hash_1ccd672f2fb11598");
-  self namespace_83eb6304::function_3ecfde67("skeleton_hand_energy");
+  self doa_fx::function_3ecfde67("skeleton_hand_energy");
   self waittill(#"hash_2201232e09d14552");
-  self namespace_83eb6304::turnofffx("skeleton_hand_energy");
+  self doa_fx::turnofffx("skeleton_hand_energy");
   self thread function_c91fa191();
   amount = randomintrange(4, 8) + getPlayers().size * randomint(4);
   doa_enemy::function_a6b807ea(self.var_33dcf942, randomintrange(4, 8), self.origin + anglesToForward(self.angles) * 40, 50, undefined, self.enemy, self, undefined, undefined, 1);
   self waittill(#"hash_2201232e09d14552");
-  self namespace_83eb6304::turnofffx("skeleton_hand_energy");
+  self doa_fx::turnofffx("skeleton_hand_energy");
 }
 
 function private function_b4537f07(entity) {
@@ -220,10 +220,10 @@ function private function_fe8bad69() {
     launchorigin += up * (0, 0, -10);
     v_dir = anglesToForward(launchangles) * 50;
     v_right = anglestoright(launchangles) * 10;
-    var_ce35a286 = launchorigin + v_dir + (0, 0, 80);
+    aimspot = launchorigin + v_dir + (0, 0, 80);
 
     if(namespace_ec06fe4a::function_a8975c67()) {
-      missile = magicbullet(self.var_5ab15c1a, launchorigin + v_right, var_ce35a286, self, self.enemy);
+      missile = magicbullet(self.var_5ab15c1a, launchorigin + v_right, aimspot, self, self.enemy);
       missile thread function_d63e2f4a();
     }
 
@@ -231,7 +231,7 @@ function private function_fe8bad69() {
 
     if(namespace_ec06fe4a::function_a8975c67()) {
       if(isDefined(self.enemy)) {
-        missile = magicbullet(self.var_5ab15c1a, launchorigin - v_right, var_ce35a286, self, self.enemy);
+        missile = magicbullet(self.var_5ab15c1a, launchorigin - v_right, aimspot, self, self.enemy);
         missile thread function_d63e2f4a();
       }
     }
@@ -267,10 +267,10 @@ function private function_165f51f1() {
   var_29efcb02 = self gettagorigin("j_ball_ri");
   earthquake(1, 1, var_29efcb02, 64);
   playFX("doa/fx9_impact_turret_land", var_29efcb02);
-  self namespace_83eb6304::function_3ecfde67("skel_stomp_impact");
+  self doa_fx::function_3ecfde67("skel_stomp_impact");
   var_4d891710 = sqr(64);
 
-  foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+  foreach(player in doa_player_utility::function_23e1f90f()) {
     if(distancesquared(var_29efcb02, player.origin) > var_4d891710) {
       continue;
     }
@@ -297,7 +297,7 @@ function private function_724727fb() {
   playFX("explosions/fx_exp_grenade_dirt", var_29efcb02);
   var_4d891710 = sqr(92);
 
-  foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+  foreach(player in doa_player_utility::function_23e1f90f()) {
     if(distancesquared(var_29efcb02, player.origin) > var_4d891710) {
       continue;
     }
@@ -355,12 +355,12 @@ function function_30a4da95() {
   self.var_60188515 = self.var_6e5b38d9 + randomint(10000);
   self.var_249206b6 = self.var_6e5b38d9 + randomint(10000);
   self.zombie_move_speed = "walk";
-  self.var_f00db61 = 1;
+  self.walkonly = 1;
   self.var_490042cd = gettime();
   self attach("zombietron_skeleton_sword_giant", "tag_weapon_right");
   self enableaimassist();
   self attach("zombietron_giant_skeleton_heart", "j_spinelower");
-  self namespace_83eb6304::function_3ecfde67("giantSkelHeartGlow");
+  self doa_fx::function_3ecfde67("giantSkelHeartGlow");
   self.var_5ab15c1a = getweapon("zombietron_giant_skeleton_blaster");
   self.var_33dcf942 = doa_enemy::function_d7c5adee("skeleton");
   self thread function_e7667c0d();
@@ -400,10 +400,10 @@ function function_2ee0142d() {
   self.maxhealth = self.health;
   self.var_490042cd = gettime();
   self callback::function_d8abfc3d(#"on_ai_killed", &function_4ac532fd);
-  self namespace_83eb6304::function_3ecfde67("ai_zombie_riser");
+  self doa_fx::function_3ecfde67("ai_zombie_riser");
   namespace_81245006::initweakpoints(self);
   self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_skeleton_spawn");
-  self thread namespace_9fc66ac::function_ba33d23d(#"hash_2c08738c0df69ea0", #"hash_3ad61af02a6bb837", #"hash_18df36d19c573215");
+  self thread doa_sound::function_ba33d23d(#"zmb_doa_ai_skeleton_vocal_slow", #"zmb_doa_ai_skeleton_vocal_fast", #"zmb_doa_ai_skeleton_vocal_death");
 }
 
 function function_a54cde8b() {
@@ -506,7 +506,7 @@ function private function_af85a094(inflictor, attacker, damage, idflags, meansof
         self.var_992c3917 = 1;
 
         if(namespace_ec06fe4a::function_a8975c67()) {
-          self playsoundontag(#"hash_7241c61ae34b51a1", "j_head");
+          self playsoundontag(#"zmb_spartoi_helmet_hit", "j_head");
         }
       }
 
@@ -542,9 +542,9 @@ function private function_af85a094(inflictor, attacker, damage, idflags, meansof
       org thread namespace_ec06fe4a::function_52afe5df(1);
 
       if(is_true(self.boss)) {
-        org namespace_83eb6304::function_3ecfde67("skeleton_giant_death");
+        org doa_fx::function_3ecfde67("skeleton_giant_death");
       } else {
-        org namespace_83eb6304::function_3ecfde67("skeleton_death");
+        org doa_fx::function_3ecfde67("skeleton_death");
       }
     }
   }
@@ -642,7 +642,7 @@ function private function_42a1dabd() {
       var_cee6fc30 = #"ai_t8_zm_red_spar_spear_rebuild_01";
     }
 
-    var_93a62fe = namespace_7f5aeb59::function_7781556b(self.origin);
+    var_93a62fe = doa_player_utility::function_7781556b(self.origin);
 
     if(isDefined(var_93a62fe)) {
       angles = vectortoangles(vectorNormalize(var_93a62fe.origin - self.origin));
@@ -656,7 +656,7 @@ function private function_42a1dabd() {
     var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_no_helm_bundle";
 
     if(is_true(self.var_3420e847)) {
-      var_704f0f40 = #"hash_27a8f88c6e23290e";
+      var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_no_helm_no_shield_bundle";
     }
 
     if(self.subarchetype == #"skeleton_helmet_sword_and_shield" && !is_true(self.var_992c3917)) {

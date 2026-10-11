@@ -188,7 +188,7 @@ function private function_d6070ac5(localclientnum) {
 
 function function_64c47bbc(localclientnum) {
   var_4972e475 = util::spawn_model(localclientnum, #"p7_zm_power_up", self.origin);
-  var_4972e475 function_619a5c20();
+  var_4972e475 pingable();
   var_4972e475.var_fc558e74 = isDefined(level.var_a0b1f787[self.model]) ? level.var_a0b1f787[self.model] : undefined;
   self.var_4972e475 = var_4972e475;
   callback::on_shutdown(&function_3c61c865);
@@ -214,8 +214,8 @@ function private play_powerup_fx(localclientnum, str_fx, var_6df65756 = 0) {
   }
 
   if(var_6df65756 && !isDefined(self.var_71e06c56)) {
-    self playSound(localclientnum, #"hash_2b64fe9035ff0dda");
-    self.var_71e06c56 = self playLoopSound(#"hash_53c07a5f8f84189b");
+    self playSound(localclientnum, #"zmb_powerup_default_intro_spawn");
+    self.var_71e06c56 = self playLoopSound(#"zmb_powerup_default_intro_lp");
   }
 
   self.n_powerup_fx = util::playFXOnTag(localclientnum, str_fx, self, "tag_origin");

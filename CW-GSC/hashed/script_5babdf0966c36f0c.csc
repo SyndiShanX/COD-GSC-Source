@@ -111,8 +111,8 @@ function private function_372485e9(localclientnum, oldval, newval, bnewent, bini
     return;
   }
 
-  if(isDefined(self.var_d61d7100)) {
-    stopfx(fieldname, self.var_d61d7100);
+  if(isDefined(self.swarm_fx)) {
+    stopfx(fieldname, self.swarm_fx);
   }
 
   fx = undefined;
@@ -144,7 +144,7 @@ function private function_372485e9(localclientnum, oldval, newval, bnewent, bini
     self callback::on_shutdown(&function_5dbf2fbf);
   }
 
-  self.var_d61d7100 = util::playFXOnTag(fieldname, fx, self, "tag_origin");
+  self.swarm_fx = util::playFXOnTag(fieldname, fx, self, "tag_origin");
 }
 
 function private function_5dbf2fbf(localclientnum) {

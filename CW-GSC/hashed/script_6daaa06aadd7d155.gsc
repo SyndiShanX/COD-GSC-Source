@@ -45,12 +45,12 @@ function function_4b8cec86(str_skipto) {
   level flag::set("player_is_rappelling");
   level flag::set("player_rappel_done");
   level flag::set("flag_picture_vo_finished");
-  level battlechatter::function_2ab9360b(1);
+  level battlechatter::bc_allow(1);
   level thread namespace_ba979a10::setup_allies();
   level.var_85b00b2b = undefined;
   waitframe(1);
   level.woods thread namespace_ba979a10::function_c70f5d3();
-  level thread namespace_ba979a10::function_d6af6077();
+  level thread namespace_ba979a10::player_kill_trigger();
   level thread namespace_ba979a10::function_7fe34c6e();
 }
 
@@ -91,7 +91,7 @@ function outro_main(str_skipto, b_starting) {
   wait 3;
   safehouse = skipto::function_6914f647();
   skipto = skipto::function_547ca7d2(safehouse);
-  skipto::function_1c2dfc20(safehouse, skipto);
+  skipto::level_completed(safehouse, skipto);
   level waittill(#"never");
 }
 
@@ -300,7 +300,7 @@ function function_df7926cc(b_starting) {
   grenade makegrenadedud();
   ret = grenade waittilltimeout(10, ["death", #"projectile_impact", #"explode"]);
   level.var_a16d9e19 = grenade.origin;
-  evac::function_d1e14c76(level.var_a16d9e19);
+  evac::smoke_start(level.var_a16d9e19);
   e_vol = getEnt("volume_evac_loc", "targetname");
 
   if(isDefined(e_vol) && isDefined(level.var_dc8cac2a)) {
@@ -312,10 +312,10 @@ function function_df7926cc(b_starting) {
   wait 2;
   level flag::set("smoke_tossed");
   level thread namespace_c1cfab6c::function_ac85ea08();
-  level thread function_c32ef30a();
+  level thread indicative();
 }
 
-function function_c32ef30a() {
+function indicative() {
   level waittill(#"evac_chopper_landed");
   level.var_85b00b2b = #"hash_73070752ddd02cad";
   level flag::set("woods_pause_overwatch");
@@ -374,8 +374,8 @@ function function_f0b82c4a(org) {
   var_6eacda7b = struct::get("bunker_center_struct", "targetname");
 
   if(isDefined(var_6eacda7b) && distance2d(var_6eacda7b.origin, org) < 1024) {
-    foreach(var_af1a2359 in var_c85f2d8e) {
-      vehs[vehs.size] = vehicle::simple_spawn_single_and_drive(var_af1a2359);
+    foreach(veh_to_spawn in var_c85f2d8e) {
+      vehs[vehs.size] = vehicle::simple_spawn_single_and_drive(veh_to_spawn);
       waitframe(1);
     }
   }

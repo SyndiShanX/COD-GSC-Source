@@ -43,7 +43,7 @@ function event_handler[level_init] main(eventstruct) {
   clientfield::register("toplayer", "" + #"hash_7a769c728c89b6b5", 1, 1, "counter", &function_83c1bbf4, 0, 0);
   clientfield::register("toplayer", "" + #"hash_20d620050345e82", 6000, 1, "int", &function_f16e4af0, 0, 0);
   setsoundcontext("dark_aether", "inactive");
-  function_5ea2c6e3("mute_blizzard", 1, 1);
+  addsubmix("mute_blizzard", 1, 1);
   callback::on_localplayer_spawned(&on_localplayer_spawned);
   level.setupcustomcharacterexerts = &setup_personality_character_exerts;
   level.var_a396a670 = 1;
@@ -113,7 +113,7 @@ function function_ce2c0029(localclientnum, oldval, newval, bnewent, binitialsnap
       var_2de789b = 0.1;
       var_2d090e03 = 0.5;
       e_player thread function_65490f35(fieldname, var_2de789b, var_2d090e03);
-      function_5ea2c6e3("mute_blizzard", 30, 1);
+      addsubmix("mute_blizzard", 30, 1);
       break;
     case 1:
       var_92d85419 = 1;
@@ -125,7 +125,7 @@ function function_ce2c0029(localclientnum, oldval, newval, bnewent, binitialsnap
       var_2de789b = 0.5;
       var_2d090e03 = 0.1;
       e_player thread function_65490f35(fieldname, var_2de789b, var_2d090e03);
-      function_ed62c9c2("mute_blizzard", 30);
+      clearsubmix("mute_blizzard", 30);
       break;
     case 2:
       level notify(#"dog_round_start");
@@ -134,7 +134,7 @@ function function_ce2c0029(localclientnum, oldval, newval, bnewent, binitialsnap
       var_2de789b = 0.1;
       var_2d090e03 = 0.5;
       e_player thread function_65490f35(fieldname, var_2de789b, var_2d090e03);
-      function_5ea2c6e3("mute_blizzard", 8, 1);
+      addsubmix("mute_blizzard", 8, 1);
       break;
     case 3:
       function_be93487f(fieldname, 9, 0, 0, 0, 1);
@@ -144,7 +144,7 @@ function function_ce2c0029(localclientnum, oldval, newval, bnewent, binitialsnap
       var_2de789b = 0.1;
       var_2d090e03 = 0.1;
       e_player thread function_65490f35(fieldname, var_2de789b, var_2d090e03);
-      function_ed62c9c2("mute_blizzard", 8);
+      clearsubmix("mute_blizzard", 8);
       level.var_25fd57f3 = 0;
       level.var_653fb8f8 = 1;
       break;

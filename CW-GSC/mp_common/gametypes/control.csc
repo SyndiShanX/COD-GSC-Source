@@ -17,7 +17,7 @@ function event_handler[gametype_init] main(eventstruct) {
   level.visuals = [];
   level.warzonefx = [];
   level.zones = [];
-  level.var_2c71eaf8 = [];
+  level.zoneobjectives = [];
   level.zoneindices = [];
 
   for(i = 0; i < 4; i++) {
@@ -37,14 +37,14 @@ function event_handler[gametype_init] main(eventstruct) {
   level.effect_scriptbundles[#"zoneedgemarkerwndw"] = getscriptbundle("teamcolorfx_koth_edge_marker_window");
   level._effect[#"zoneedgemarker"] = [];
   level._effect[#"zoneedgemarker"][0] = #"ui/fx8_infil_marker_neutral";
-  level._effect[#"zoneedgemarker"][1] = #"hash_5c2ae9f4f331d4b9";
-  level._effect[#"zoneedgemarker"][2] = #"hash_7d1b0f001ea88b82";
-  level._effect[#"zoneedgemarker"][3] = #"hash_7981eb245ea536fc";
+  level._effect[#"zoneedgemarker"][1] = #"ui/fx8_infil_marker_frnd";
+  level._effect[#"zoneedgemarker"][2] = #"ui/fx8_infil_marker_enmy";
+  level._effect[#"zoneedgemarker"][3] = #"ui/fx8_infil_marker_contested";
   level._effect[#"zoneedgemarkerwndw"] = [];
   level._effect[#"zoneedgemarkerwndw"][0] = #"ui/fx8_infil_marker_neutral_window";
-  level._effect[#"zoneedgemarkerwndw"][1] = #"hash_5565c3fc2c7742fe";
-  level._effect[#"zoneedgemarkerwndw"][2] = #"hash_3283b765fe480df7";
-  level._effect[#"zoneedgemarkerwndw"][3] = #"hash_6a512c225256a2e9";
+  level._effect[#"zoneedgemarkerwndw"][1] = #"ui/fx8_infil_marker_frnd_window";
+  level._effect[#"zoneedgemarkerwndw"][2] = #"ui/fx8_infil_marker_enmy_window";
+  level._effect[#"zoneedgemarkerwndw"][3] = #"ui/fx8_infil_marker_contested_window";
   level.mission_bundle = getscriptbundle("mission_settings_control");
   level.mission_bundle = getscriptbundle("mission_settings_control");
   callback::on_localclient_connect(&on_localclient_connect);
@@ -80,7 +80,7 @@ function function_3022f6ba(eventstruct) {
 }
 
 function function_dd2493cc(local_client_num, objid) {
-  while(!isDefined(level.var_2c71eaf8[0])) {
+  while(!isDefined(level.zoneobjectives[0])) {
     waitframe(1);
   }
 
@@ -195,17 +195,17 @@ function function_e116df6c(localclientnum, oldval, newval, bnewent, binitialsnap
 function on_localclient_connect(local_client_num) {
   zone_count = 3;
 
-  while(!isDefined(level.var_2c71eaf8[0])) {
+  while(!isDefined(level.zoneobjectives[0])) {
     for(zi = 0; zi < zone_count; zi++) {
-      level.var_2c71eaf8[zi] = serverobjective_getobjective(local_client_num, "control_" + zi);
+      level.zoneobjectives[zi] = serverobjective_getobjective(local_client_num, "control_" + zi);
     }
 
     waitframe(1);
   }
 
   for(zi = 0; zi < zone_count; zi++) {
-    if(isDefined(level.var_2c71eaf8[zi])) {
-      level.zoneindices[level.var_2c71eaf8[zi]] = zi + 1;
+    if(isDefined(level.zoneobjectives[zi])) {
+      level.zoneindices[level.zoneobjectives[zi]] = zi + 1;
     }
   }
 
@@ -280,7 +280,7 @@ function function_6e3affdc() {
   local_client_num = self getlocalclientnumber();
 
   if(isDefined(local_client_num)) {
-    foreach(objid in level.var_2c71eaf8) {
+    foreach(objid in level.zoneobjectives) {
       function_dd2493cc(local_client_num, objid);
     }
 
@@ -519,7 +519,7 @@ function function_185b0894(localclientnum, oldval, newval) {
         }
       } else {
         if(!zone.var_ce6accbd) {
-          zone.soundid = zone.objectiveentity playLoopSound(#"hash_5a0b392405d5f148");
+          zone.soundid = zone.objectiveentity playLoopSound(#"mpl_infiltration_capture_lp_3d");
           zone.var_ce6accbd = 1;
         }
 

@@ -68,10 +68,10 @@ function on_game_playing() {
 }
 
 function function_c0e7257() {
-  var_286f8241 = getEnt("fire_trigger_hurt", "targetname");
+  fire_trig = getEnt("fire_trigger_hurt", "targetname");
 
-  if(isDefined(var_286f8241)) {
-    var_286f8241 callback::on_trigger(&function_6691af0e);
+  if(isDefined(fire_trig)) {
+    fire_trig callback::on_trigger(&function_6691af0e);
   }
 }
 

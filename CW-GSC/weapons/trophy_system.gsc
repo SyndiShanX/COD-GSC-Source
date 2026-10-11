@@ -78,7 +78,7 @@ function function_720ddf7f(func) {
 }
 
 function register() {
-  clientfield::register("missile", "" + #"hash_644cb829d0133e99", 1, 1, "int");
+  clientfield::register("missile", "" + #"trophy_system_deploy", 1, 1, "int");
   clientfield::register("missile", "" + #"hash_78a094001c919359", 1, 7, "float");
 }
 
@@ -135,8 +135,8 @@ function ontrophysystemspawn(watcher, player) {
   self.var_515d6dda = 1;
   self setweapon(self.weapon);
   self.ammo = player ammo_get(self.weapon);
-  self.var_bf03cf85 = 0;
-  self function_619a5c20();
+  self.interceptions = 0;
+  self pingable();
   player stats::function_e24eec31(self.weapon, #"used", 1);
   player notify(#"hash_50994ef63f120738");
   self thread deployanim();
@@ -291,15 +291,15 @@ function trophyactive(owner) {
       }
 
       owner projectileexplode(grenade, self, fwd, up);
-      self.var_bf03cf85++;
+      self.interceptions++;
       break;
     }
 
     if(self.ammo <= 0) {
-      if(self.var_bf03cf85 > 1) {
+      if(self.interceptions > 1) {
         scoreevents::processscoreevent(#"hash_37f14ae291c32c04", owner, undefined, self.weapon);
 
-        if(self.var_bf03cf85 >= 4) {
+        if(self.interceptions >= 4) {
           owner contracts::increment_contract(#"hash_6c0438d5a54313d", 1);
         }
 
@@ -580,13 +580,13 @@ function ammo_weapon_pickup(ammo) {
 function deployanim() {
   self endon(#"death");
   self setanim(#"hash_70b2041b1f6ad89", 1, 0, 0);
-  self clientfield::set("" + #"hash_644cb829d0133e99", 1);
+  self clientfield::set("" + #"trophy_system_deploy", 1);
   self waittill(#"trophysystemstopped");
   wait 0.1;
   self setanim(#"hash_70b2041b1f6ad89");
-  self clientfield::set("" + #"hash_644cb829d0133e99", 0);
+  self clientfield::set("" + #"trophy_system_deploy", 0);
   self playSound(#"wpn_trophy_deploy_start");
-  self playLoopSound(#"hash_656f8209ae1d1424", 0.25);
+  self playLoopSound(#"wpn_trophy_amb", 0.25);
   wait getanimlength(#"hash_70b2041b1f6ad89");
   self clearanim(#"hash_70b2041b1f6ad89", 0);
   self setanim(#"hash_3c4ee18df7d43dc7", 1, 0, 2);

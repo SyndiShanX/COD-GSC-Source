@@ -84,12 +84,12 @@ function main(str_objective, b_starting) {
   savegame::checkpoint_save();
 
   if(isDefined(level.park)) {
-    level.park battlechatter::function_2ab9360b(0);
+    level.park battlechatter::bc_allow(0);
   }
 
   if(isDefined(level.lazar)) {
     level.lazar ai::set_behavior_attribute("demeanor", "combat");
-    level.lazar battlechatter::function_2ab9360b(0);
+    level.lazar battlechatter::bc_allow(0);
   }
 
   level flag::set("flg_red_shirts_split");
@@ -98,27 +98,27 @@ function main(str_objective, b_starting) {
     level.woods colors::disable();
     level.woods.goalradius = 8;
     level.woods ai::set_behavior_attribute("demeanor", "combat");
-    level.woods val::set(#"hash_6599567569045808", "ignoreall", 1);
-    level.woods val::set(#"hash_6599567569045808", "ignoreme", 1);
-    level.woods battlechatter::function_2ab9360b(0);
+    level.woods val::set(#"squad_2", "ignoreall", 1);
+    level.woods val::set(#"squad_2", "ignoreme", 1);
+    level.woods battlechatter::bc_allow(0);
   }
 
   if(isDefined(level.mason)) {
     level.mason colors::disable();
     level.mason.goalradius = 8;
     level.mason ai::set_behavior_attribute("demeanor", "combat");
-    level.mason val::set(#"hash_6599567569045808", "ignoreall", 1);
-    level.mason val::set(#"hash_6599567569045808", "ignoreme", 1);
-    level.mason battlechatter::function_2ab9360b(0);
+    level.mason val::set(#"squad_2", "ignoreall", 1);
+    level.mason val::set(#"squad_2", "ignoreme", 1);
+    level.mason battlechatter::bc_allow(0);
   }
 
   if(isDefined(level.adler)) {
     level.adler colors::disable();
     level.adler.goalradius = 8;
     level.adler ai::set_behavior_attribute("demeanor", "combat");
-    level.adler val::set(#"hash_6599567569045808", "ignoreall", 1);
-    level.adler val::set(#"hash_6599567569045808", "ignoreme", 1);
-    level.adler battlechatter::function_2ab9360b(0);
+    level.adler val::set(#"squad_2", "ignoreall", 1);
+    level.adler val::set(#"squad_2", "ignoreme", 1);
+    level.adler battlechatter::bc_allow(0);
   }
 
   cctv_entrance_door_clip = getEnt("cctv_entrance_door_clip", "targetname");
@@ -126,7 +126,7 @@ function main(str_objective, b_starting) {
   cctv_entrance_door_clip notsolid();
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   hms_util::print("<dev string:x4e>");
 
   level notify(#"hash_2fb605a6c7053f96");
@@ -143,11 +143,11 @@ function cleanup(str_objective, b_starting, var_aa1a6455, player) {
 
 function function_d7a2bda8() {
   objectives::scripted("obj_goto_security_room", undefined, #"hash_64b4beed7c03f4a2");
-  level breadcrumb::function_61037c6c("bc_first_floor_objective");
+  level breadcrumb::start_chain("bc_first_floor_objective");
   level flag::wait_till("flg_security_room_entered");
   level breadcrumb::function_e261021e("bc_first_floor_objective");
   objectives::complete("obj_goto_security_room");
-  skipto::function_4e3ab877("1st_floor");
+  skipto::objective_completed("1st_floor");
 }
 
 function function_aeab0158() {
@@ -299,11 +299,11 @@ function function_f46ca8fb(var_4b433742 = 500, var_97055d22 = 1) {
   self setgoal(level.player, 0, var_4b433742);
 }
 
-function function_1bdb683(var_9608b240, min_delay = 2.5, max_delay = 5) {
+function function_1bdb683(volume_targetname, min_delay = 2.5, max_delay = 5) {
   self endon(#"death");
   wait randomfloatrange(min_delay, max_delay);
   self ai::set_pacifist(1);
-  self ai::set_goal(var_9608b240, "targetname", 1);
+  self ai::set_goal(volume_targetname, "targetname", 1);
   self waittilltimeout(3, #"goal");
   self ai::set_pacifist(0);
 }
@@ -423,10 +423,10 @@ function function_82b2bc5e() {
     ai delete();
   }
 
-  var_7bacf73f = level spawner::simple_spawn("cctv_guards");
+  a_ai_guys = level spawner::simple_spawn("cctv_guards");
   a_actors = [];
-  a_actors[#"actor 1"] = var_7bacf73f[0];
-  a_actors[#"actor 2"] = var_7bacf73f[1];
+  a_actors[#"actor 1"] = a_ai_guys[0];
+  a_actors[#"actor 2"] = a_ai_guys[1];
   a_actors[#"actor 1"] thread function_c4edad62();
   a_actors[#"actor 2"] thread function_34c5b067();
   a_actors[#"actor 1"] val::set(#"door_kick", "takedamage", 0);
@@ -438,7 +438,7 @@ function function_82b2bc5e() {
   a_actors[#"actor 2"] val::reset(#"door_kick", "takedamage");
   doors::function_f35467ac("cctv_entrance_door_01", "targetname");
   thread function_40626d6c();
-  ai::waittill_dead_or_dying(var_7bacf73f, var_7bacf73f.size);
+  ai::waittill_dead_or_dying(a_ai_guys, a_ai_guys.size);
   wait 0.2;
   trigger::use("allies_enter_cctv_room", "targetname");
   savegame::checkpoint_save(1);
@@ -562,11 +562,11 @@ function function_8269cbf() {
   level.player endon(#"death");
 
   if(isDefined(level.park)) {
-    level.park battlechatter::function_2ab9360b(0);
+    level.park battlechatter::bc_allow(0);
   }
 
   if(isDefined(level.lazar)) {
-    level.lazar battlechatter::function_2ab9360b(0);
+    level.lazar battlechatter::bc_allow(0);
   }
 
   var_241fd810 = getEnt("t_extra_vo_talk", "targetname");
@@ -617,11 +617,11 @@ function function_8269cbf() {
   level.park hms_util::dialogue("vox_cp_cbcr_02400_park_ambush_81");
 
   if(isDefined(level.park)) {
-    level.park battlechatter::function_2ab9360b(1);
+    level.park battlechatter::bc_allow(1);
   }
 
   if(isDefined(level.lazar)) {
-    level.lazar battlechatter::function_2ab9360b(1);
+    level.lazar battlechatter::bc_allow(1);
   }
 
   level flag::wait_till("flg_balcony_rpg_fire");
@@ -634,11 +634,11 @@ function function_8269cbf() {
   var_bb84ad51 = 0;
 
   if(isDefined(level.park)) {
-    level.park battlechatter::function_2ab9360b(0);
+    level.park battlechatter::bc_allow(0);
   }
 
   if(isDefined(level.lazar)) {
-    level.lazar battlechatter::function_2ab9360b(0);
+    level.lazar battlechatter::bc_allow(0);
   }
 
   while(level.player istouching(var_241fd810)) {
@@ -694,10 +694,10 @@ function function_da0bfdde() {
   }
 }
 
-function function_8880c1e3(var_305d3956) {
+function function_8880c1e3(a_vo_lines) {
   var_16bf64d2 = randomintrangeinclusive(0, 3);
-  level.park hms_util::dialogue(var_305d3956[var_16bf64d2]);
-  array::remove_index(var_305d3956, var_16bf64d2);
+  level.park hms_util::dialogue(a_vo_lines[var_16bf64d2]);
+  array::remove_index(a_vo_lines, var_16bf64d2);
 }
 
 function function_efdab146() {
@@ -713,7 +713,7 @@ function function_1a77e8e2(t_trig, var_c68d51a8) {
   var_9e332b5a = getEnt(t_trig, "targetname");
   var_9e332b5a waittill(#"trigger");
   veh = vehicle::simple_spawn_and_drive(var_c68d51a8);
-  var_a974a435 = getEntArray("floor_1_riders", "targetname");
+  a_ai_riders = getEntArray("floor_1_riders", "targetname");
 
   foreach(v in veh) {
     v val::set("first_vignette", "ignoreme", 1);
@@ -726,7 +726,7 @@ function function_1a77e8e2(t_trig, var_c68d51a8) {
 
   snd::stop_alias("veh_ext_truck_lp", veh);
 
-  foreach(v in var_a974a435) {
+  foreach(v in a_ai_riders) {
     if(isDefined(v)) {
       v deletedelay();
     }
@@ -759,13 +759,13 @@ function function_4becb74d(t_trig) {
       }
 
       wait randomfloatrange(0.25, 1.25);
-      var_c26707f = vehicle::simple_spawn_and_drive("cctv_drive_loop_2_2");
+      veh2 = vehicle::simple_spawn_and_drive("cctv_drive_loop_2_2");
 
-      foreach(v in var_c26707f) {
+      foreach(v in veh2) {
         v val::set("v3", "ignoreme", 1);
       }
 
-      snd::play("veh_cctv_truck_driveby_lp", var_c26707f);
+      snd::play("veh_cctv_truck_driveby_lp", veh2);
       break;
     case 2:
       wait randomfloatrange(0.25, 1.25);
@@ -777,21 +777,21 @@ function function_4becb74d(t_trig) {
 
       snd::play("veh_cctv_truck_driveby_lp", veh);
       wait randomfloatrange(0.25, 1.25);
-      var_c26707f = vehicle::simple_spawn_and_drive("cctv_drive_drop_off_2");
+      veh2 = vehicle::simple_spawn_and_drive("cctv_drive_drop_off_2");
 
-      foreach(v in var_c26707f) {
+      foreach(v in veh2) {
         v val::set("v5", "ignoreme", 1);
       }
 
-      snd::play("veh_cctv_truck_driveby_lp", var_c26707f);
+      snd::play("veh_cctv_truck_driveby_lp", veh2);
       wait randomfloatrange(0.25, 1.25);
-      var_8c12f056 = vehicle::simple_spawn_and_drive("cctv_drive_drop_off_3");
+      veh3 = vehicle::simple_spawn_and_drive("cctv_drive_drop_off_3");
 
-      foreach(v in var_8c12f056) {
+      foreach(v in veh3) {
         v val::set("v6", "ignoreme", 1);
       }
 
-      snd::play("veh_cctv_truck_driveby_lp", var_8c12f056);
+      snd::play("veh_cctv_truck_driveby_lp", veh3);
       break;
   }
 

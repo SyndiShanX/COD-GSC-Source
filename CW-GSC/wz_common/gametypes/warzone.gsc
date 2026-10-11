@@ -29,10 +29,10 @@ function event_handler[gametype_init] main(eventstruct) {
   level.onroundswitch = &on_round_switch;
   level.givecustomloadout = &give_custom_loadout;
   level.var_c4dc9178 = &function_f81c3cc9;
-  level.var_5c14d2e6 = &function_b82fbeb8;
+  level.var_5c14d2e6 = &give_default_loadout;
 }
 
-function function_b82fbeb8() {
+function give_default_loadout() {
   assert(isPlayer(self));
 
   if(!isPlayer(self) || !isalive(self)) {
@@ -177,35 +177,35 @@ function function_6541c917() {
   wz_loadouts::give_weapon(#"pistol_semiauto_t9_item");
   wz_loadouts::give_weapon(#"smg_standard_t9_item");
   wz_loadouts::give_item(#"frag_t9_item");
-  wz_loadouts::give_item(#"hash_37c187ff34a0dde1");
+  wz_loadouts::give_item(#"health_regen_t9_item");
 }
 
 function function_ae5cdb4c() {
   wz_loadouts::give_weapon(#"pistol_semiauto_t9_item");
   wz_loadouts::give_weapon(#"ar_accurate_t9_item");
   wz_loadouts::give_item(#"frag_t9_item");
-  wz_loadouts::give_item(#"hash_37c187ff34a0dde1");
+  wz_loadouts::give_item(#"health_regen_t9_item");
 }
 
 function function_a0a43fdb() {
   wz_loadouts::give_weapon(#"pistol_semiauto_t9_item");
   wz_loadouts::give_weapon(#"lmg_accurate_t9_item");
   wz_loadouts::give_item(#"frag_t9_item");
-  wz_loadouts::give_item(#"hash_37c187ff34a0dde1");
+  wz_loadouts::give_item(#"health_regen_t9_item");
 }
 
 function function_343266f9() {
   wz_loadouts::give_weapon(#"pistol_semiauto_t9_item");
   wz_loadouts::give_weapon(#"tr_powerburst_t9_item");
   wz_loadouts::give_item(#"frag_t9_item");
-  wz_loadouts::give_item(#"hash_37c187ff34a0dde1");
+  wz_loadouts::give_item(#"health_regen_t9_item");
 }
 
 function function_2e725b79() {
   wz_loadouts::give_weapon(#"pistol_semiauto_t9_item");
   wz_loadouts::give_weapon(#"sniper_quickscope_t9_item");
   wz_loadouts::give_item(#"frag_t9_item");
-  wz_loadouts::give_item(#"hash_37c187ff34a0dde1");
+  wz_loadouts::give_item(#"health_regen_t9_item");
 }
 
 function give_max_ammo() {

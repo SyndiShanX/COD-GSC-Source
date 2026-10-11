@@ -1097,7 +1097,7 @@ function function_aa56f6a0(killstreaktype, isfrominventory) {
     scorestreakdata = {
       #gametime: function_f8d53445(), #killstreak: killstreaktype, #activatedby: getplayerspawnid(self)
     };
-    function_92d1707f(#"hash_1aa07f199266e0c7", scorestreakdata);
+    function_92d1707f(#"dlog_event_scorestreakdata", scorestreakdata);
 
     if(is_true(isfrominventory)) {
       remove_used_killstreak(killstreaktype);
@@ -3300,14 +3300,14 @@ function function_fc82c544(killstreaktype) {
       function_92d1707f(var_8756d70f, mpkillstreakuses);
 
       if(result._notify === #"death") {
-        var_e72137e8 = #"player_died";
+        end_reason = #"player_died";
 
         if(isDefined(result.weapon)) {
           player function_4aad9803(killstreaktype, -1, result.weapon);
         }
       }
 
-      player function_fda235cf(killstreaktype, -1, var_e72137e8);
+      player function_fda235cf(killstreaktype, -1, end_reason);
 
       if(isDefined(level.var_f9922f0b)) {
         player[[level.var_f9922f0b]](killstreak_weapon);

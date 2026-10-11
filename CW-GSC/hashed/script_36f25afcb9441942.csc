@@ -433,7 +433,7 @@ function function_a4c07e18(name) {
   }
 }
 
-function function_1210f64b(unused1, unused2, var_26f1324c) {
+function function_1210f64b(unused1, unused2, unused3) {
   return undefined;
 }
 
@@ -446,19 +446,19 @@ function function_18276de3(name = "") {
     default:
       level.doa.var_3d1f118d[#"wall"][#"torch"][0] = {
         #model: #"zombietron_torch_wall_no_shadow", #yaw_offset: 0, #scale: 1, #weight: 1, #fx: "fx_fire_torch_wall_lit_castle"};
-      level.doa.var_3d1f118d[#"wall"][#"hash_2ec1ad0b894eb316"][0] = {
+      level.doa.var_3d1f118d[#"wall"][#"sconce"][0] = {
         #model: #"zombietron_gargoyle_sconce_1", #yaw_offset: -90, #scale: 1, #weight: 1
       };
-      level.doa.var_3d1f118d[#"wall"][#"hash_2ec1ad0b894eb316"][1] = {
+      level.doa.var_3d1f118d[#"wall"][#"sconce"][1] = {
         #model: #"zombietron_gargoyle_sconce_2", #yaw_offset: 180, #scale: 1, #weight: 1
       };
-      level.doa.var_3d1f118d[#"wall"][#"hash_2ec1ad0b894eb316"][2] = {
+      level.doa.var_3d1f118d[#"wall"][#"sconce"][2] = {
         #model: #"zombietron_gargoyle_sconce_3", #yaw_offset: 0, #scale: 1, #weight: 1
       };
-      level.doa.var_3d1f118d[#"wall"][#"hash_2ec1ad0b894eb316"][3] = {
+      level.doa.var_3d1f118d[#"wall"][#"sconce"][3] = {
         #model: #"zombietron_gargoyle_sconce_4", #yaw_offset: 180, #scale: 1, #weight: 1
       };
-      level.doa.var_3d1f118d[#"wall"][#"hash_2ec1ad0b894eb316"][4] = {
+      level.doa.var_3d1f118d[#"wall"][#"sconce"][4] = {
         #model: #"zombietron_treasure_mask_gold", #yaw_offset: 0, #scale: 3, #weight: 1
       };
       level.doa.var_3d1f118d[#"floor"][#"statue"][0] = {

@@ -67,8 +67,8 @@ function function_8cff66e5() {
   self.health = 600 + getPlayers().size * 400;
   self.no_gib = 1;
   self asmsetanimationrate(self.animrate);
-  self namespace_83eb6304::function_3ecfde67("demon_burst");
-  self thread namespace_9fc66ac::function_ba33d23d(#"hash_4fb3839181258631", #"hash_4fb3839181258631", #"hash_3da6894b4a02a91b");
+  self doa_fx::function_3ecfde67("demon_burst");
+  self thread doa_sound::function_ba33d23d(#"zmb_doa_ai_demon_vocal_ambient", #"zmb_doa_ai_demon_vocal_ambient", #"zmb_doa_ai_demon_vocal_death");
   self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_demon_spawn");
 }
 

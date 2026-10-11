@@ -536,7 +536,7 @@ function bloody_death(n_delay, hit_loc) {
     hit_loc = array::random(array("helmet", "head", "neck", "torso_upper", "torso_mid", "torso_lower", "right_arm_upper", "left_arm_upper", "right_arm_lower", "left_arm_lower", "right_hand", "left_hand", "right_leg_upper", "left_leg_upper", "right_leg_lower", "left_leg_lower", "right_foot", "left_foot", "gun", "riotshield"));
   }
 
-  if(is_true(self.var_4b5540a0)) {
+  if(is_true(self.in_bodyshield)) {
     self delete();
     return;
   }
@@ -787,10 +787,10 @@ function enable_careful() {
 function disable_careful() {
   assert(isai(self), "<dev string:x609>");
   self.script_careful = 0;
-  self notify(#"hash_365fd8fda5a5a322");
+  self notify(#"stop_being_careful");
 }
 
-function look_at(look_at, priority = 2, var_9e364106 = 1, duration = 0, var_152044ef, var_71e42546, var_a806de0b = 1, no_head = 0, var_3777d080 = 0, blend_time = 0.5, weight = 1) {
+function look_at(look_at, priority = 2, var_9e364106 = 1, duration = 0, var_152044ef, is_angles, var_a806de0b = 1, no_head = 0, var_3777d080 = 0, blend_time = 0.5, weight = 1) {
   assert(isai(self), "<dev string:x648>");
   assert(priority >= 0 && priority < 4, "<dev string:x687>");
 
@@ -804,8 +804,8 @@ function look_at(look_at, priority = 2, var_9e364106 = 1, duration = 0, var_1520
 
   function_e1c5902(var_9e364106);
   self.var_8a068c50[priority].object = look_at;
-  self.var_8a068c50[priority].var_8fbcda45 = var_152044ef;
-  self.var_8a068c50[priority].var_eba0d1fe = var_71e42546;
+  self.var_8a068c50[priority].doaim = var_152044ef;
+  self.var_8a068c50[priority].var_eba0d1fe = is_angles;
   self.var_8a068c50[priority].var_a806de0b = var_a806de0b;
   self.var_8a068c50[priority].no_head = no_head;
   self.var_8a068c50[priority].var_3777d080 = var_3777d080;
@@ -817,7 +817,7 @@ function look_at(look_at, priority = 2, var_9e364106 = 1, duration = 0, var_1520
   }
 
   if(duration > 0 && duration < 1) {
-    self.var_8a068c50[priority].var_51bcf38d = 1;
+    self.var_8a068c50[priority].glance = 1;
   }
 
   self notify("look_at_" + string(priority) + "_updated");
@@ -862,7 +862,7 @@ function private function_91692eaa() {
   }
 
   self.lookat = {
-    #var_51bcf38d: 0
+    #glance: 0
   };
 }
 
@@ -907,7 +907,7 @@ function function_5e5653d3() {
 function private function_fcd4fcb7() {
   function_91692eaa();
   object = self.lookat.object;
-  var_8fbcda45 = self.lookat.var_8fbcda45;
+  doaim = self.lookat.doaim;
   var_eba0d1fe = self.lookat.var_eba0d1fe;
   var_a806de0b = self.lookat.var_a806de0b;
   no_head = self.lookat.no_head;
@@ -923,7 +923,7 @@ function private function_fcd4fcb7() {
     var_9d112229 = &lookatentity;
     var_77a9fe9e = &lookatpos;
 
-    if(is_true(var_8fbcda45)) {
+    if(is_true(doaim)) {
       var_9d112229 = &aimatentityik;
 
       if(is_true(var_eba0d1fe)) {
@@ -957,7 +957,7 @@ function private function_fcd4fcb7() {
     self lookatpos(undefined);
   }
 
-  self thread function_1571b7b6(object, is_true(self.lookat.var_51bcf38d));
+  self thread function_1571b7b6(object, is_true(self.lookat.glance));
 }
 
 function private function_1571b7b6(object, var_dfb8e94b) {
@@ -1031,14 +1031,14 @@ function function_71915b43(target, tag) {
   self aimatentityik(self.var_875e35a2);
 }
 
-function poi_enable(shouldenable, firstpoint, var_8fbcda45) {
+function poi_enable(shouldenable, firstpoint, doaim) {
   if(isfunctionptr(level.poi.fnenable)) {
-    self thread[[level.poi.fnenable]](shouldenable, firstpoint, var_8fbcda45);
+    self thread[[level.poi.fnenable]](shouldenable, firstpoint, doaim);
   }
 }
 
-function function_3a5e9945(shouldenable, yawmin, yawmax, pitchmin, pitchmax, var_8fbcda45) {
+function function_3a5e9945(shouldenable, yawmin, yawmax, pitchmin, pitchmax, doaim) {
   if(isfunctionptr(level.poi.var_38974483)) {
-    self thread[[level.poi.var_38974483]](shouldenable, yawmin, yawmax, pitchmin, pitchmax, var_8fbcda45);
+    self thread[[level.poi.var_38974483]](shouldenable, yawmin, yawmax, pitchmin, pitchmax, doaim);
   }
 }

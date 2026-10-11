@@ -101,7 +101,7 @@ function threat_sight_set_state_parameters(statename) {
   var_bb0a10d2 = min(200, var_218126c3 * 0.33);
 
   switch (statename) {
-    case #"hash_5689f41e8c0ad00":
+    case #"flashlight_in_dark":
     case #"investigate":
       self.threatsightratemin = 0.6 * var_8c0a9bbb;
       self.threatsightratemax = 0.5 * var_8c0a9bbb;
@@ -124,7 +124,7 @@ function threat_sight_set_state_parameters(statename) {
   self.threatsightdistmax = max(self.threatsightdistmin, var_218126c3 * distscale);
 }
 
-function threat_sight_player_sight_audio(anycansee, maxthreat, var_2107b994) {
+function threat_sight_player_sight_audio(anycansee, maxthreat, willdebugprint) {
   var_999aef6a = 180;
   var_4d4a8597 = 0.01;
   var_f41a2c65 = 0.05;
@@ -134,8 +134,8 @@ function threat_sight_player_sight_audio(anycansee, maxthreat, var_2107b994) {
   self notify(#"threat_sight_player_sight_audio");
   self endon(#"threat_sight_player_sight_audio");
 
-  if(!isDefined(var_2107b994)) {
-    var_2107b994 = 0;
+  if(!isDefined(willdebugprint)) {
+    willdebugprint = 0;
   }
 
   aliases = ["ui_stealth_threat_low_lp", "ui_stealth_threat_med_lp", "ui_stealth_threat_high_lp"];
@@ -162,7 +162,7 @@ function threat_sight_player_sight_audio(anycansee, maxthreat, var_2107b994) {
     }
   }
 
-  if(var_2107b994) {
+  if(willdebugprint) {
     debug2dtext((32, 492, 0), "<dev string:x83>" + maxthreat + "<dev string:x94>" + anycansee + "<dev string:x9a>", (1, 1, 1), 1.5);
   }
 
@@ -183,8 +183,8 @@ function threat_sight_player_sight_audio(anycansee, maxthreat, var_2107b994) {
 
     if(maxthreat > 0) {
       if(maxthreat < var_f41a2c65) {
-        var_9afcb603 = math::clamp(maxthreat, 0, var_f41a2c65);
-        mu = var_9afcb603 / var_f41a2c65;
+        threat_clamped = math::clamp(maxthreat, 0, var_f41a2c65);
+        mu = threat_clamped / var_f41a2c65;
         vol_delta = 1 - var_4d4a8597;
         vol_lerp = var_4d4a8597 + vol_delta * mu;
         self.stealth.threat_sight_snd_vol = vol_lerp;
@@ -198,7 +198,7 @@ function threat_sight_player_sight_audio(anycansee, maxthreat, var_2107b994) {
 
     self.stealth.threat_sight_snd_vol = math::clamp(self.stealth.threat_sight_snd_vol, 0, 1);
 
-    if(var_2107b994) {
+    if(willdebugprint) {
       debug2dtext((32, 508, 0), "<dev string:x9f>" + self.stealth.threat_sight_snd_threat, (1, 1, 1), 1.5);
       debug2dtext((32, 524, 0), "<dev string:xb0>" + self.stealth.threat_sight_snd_vol, (1, 1, 1), 1.5);
     }
@@ -247,7 +247,7 @@ function threat_sight_player_sight_audio(anycansee, maxthreat, var_2107b994) {
         snd_ent.isplaying = 0;
       }
 
-      if(var_2107b994) {
+      if(willdebugprint) {
         debug2dtext((32, 540 + index * 16, 0), "<dev string:xc1>" + index + "<dev string:xcb>" + vol, (1, 1, 1), 1.5);
         debug2dtext((384, 540 + index * 16, 0), "<dev string:xd5>" + coef, (1, 1, 1), 1.5);
       }

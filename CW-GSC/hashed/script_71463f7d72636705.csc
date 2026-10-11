@@ -46,15 +46,15 @@ function function_9a82b890(localclientnum, duration, startsound, var_ed2d4562, e
 }
 
 function event_handler[event_b19fdc1e] event_watcher(eventstruct) {
-  if(!isDefined(level.var_73eeec22[eventstruct.weapon.var_b57f13ef])) {
-    level.var_73eeec22[eventstruct.weapon.var_b57f13ef] = getscriptbundle(eventstruct.weapon.var_b57f13ef);
+  if(!isDefined(level.tinnitus[eventstruct.weapon.var_b57f13ef])) {
+    level.tinnitus[eventstruct.weapon.var_b57f13ef] = getscriptbundle(eventstruct.weapon.var_b57f13ef);
 
-    if(!isDefined(level.var_73eeec22[eventstruct.weapon.var_b57f13ef])) {
+    if(!isDefined(level.tinnitus[eventstruct.weapon.var_b57f13ef])) {
       return;
     }
   }
 
-  var_73eeec22 = level.var_73eeec22[eventstruct.weapon.var_b57f13ef];
+  tinnitus = level.tinnitus[eventstruct.weapon.var_b57f13ef];
   local_player = function_5c10bd79(eventstruct.localclientnum);
 
   if(!function_56e2eaa8(local_player)) {
@@ -65,7 +65,7 @@ function event_handler[event_b19fdc1e] event_watcher(eventstruct) {
     return;
   }
 
-  if(distancesquared(local_player.origin, eventstruct.position) < var_73eeec22.maxrange * var_73eeec22.maxrange) {
+  if(distancesquared(local_player.origin, eventstruct.position) < tinnitus.maxrange * tinnitus.maxrange) {
     if(!isDefined(level.var_2b64ba11)) {
       level.var_2b64ba11 = 0;
     }
@@ -81,18 +81,18 @@ function event_handler[event_b19fdc1e] event_watcher(eventstruct) {
     local_player function_3edb40f5(eventstruct.weapon, eventstruct.position, var_6059f1ff, dirtotarget * -1);
 
     if(var_1978c7fc >= 0.5) {
-      local_player thread function_9a82b890(eventstruct.localclientnum, var_73eeec22.duration, var_73eeec22.var_499e1c7f, var_73eeec22.var_d45165cb, var_73eeec22.var_82c14e93);
+      local_player thread function_9a82b890(eventstruct.localclientnum, tinnitus.duration, tinnitus.var_499e1c7f, tinnitus.var_d45165cb, tinnitus.var_82c14e93);
     } else if(var_1978c7fc <= -0.5) {
-      local_player thread function_9a82b890(eventstruct.localclientnum, var_73eeec22.duration, var_73eeec22.var_f3b0d4f, var_73eeec22.var_9d3d0581, var_73eeec22.var_efce6189);
+      local_player thread function_9a82b890(eventstruct.localclientnum, tinnitus.duration, tinnitus.var_f3b0d4f, tinnitus.var_9d3d0581, tinnitus.var_efce6189);
     }
 
     if(rightdot >= 0.5) {
-      local_player thread function_9a82b890(eventstruct.localclientnum, var_73eeec22.duration, var_73eeec22.var_3db06635, var_73eeec22.var_5dddb8e8, var_73eeec22.var_edcc1468);
+      local_player thread function_9a82b890(eventstruct.localclientnum, tinnitus.duration, tinnitus.var_3db06635, tinnitus.var_5dddb8e8, tinnitus.var_edcc1468);
       return;
     }
 
     if(rightdot <= -0.5) {
-      local_player thread function_9a82b890(eventstruct.localclientnum, var_73eeec22.duration, var_73eeec22.var_90c3ef0c, var_73eeec22.var_60e944e1, var_73eeec22.var_94f03120);
+      local_player thread function_9a82b890(eventstruct.localclientnum, tinnitus.duration, tinnitus.var_90c3ef0c, tinnitus.var_60e944e1, tinnitus.var_94f03120);
     }
   }
 }

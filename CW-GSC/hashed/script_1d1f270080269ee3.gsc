@@ -35,7 +35,7 @@ function starting(str_skipto) {
 function main(str_skipto, b_starting) {
   level.player endon(#"death");
   level flag::set("aslt_bunker_begin");
-  level battlechatter::function_2ab9360b(1);
+  level battlechatter::bc_allow(1);
   spawner::add_spawn_function_ai_group("bunker_intro_security", &function_5f5e32bd);
 
   if(is_true(b_starting)) {
@@ -53,7 +53,7 @@ function main(str_skipto, b_starting) {
   level thread function_c8052750();
 
   if(!isDefined(level.adler)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto);
+    level.adler = namespace_e77bf565::adler_spawn(str_skipto);
     level.adler namespace_e77bf565::function_5770c74("assault");
   }
 
@@ -68,7 +68,7 @@ function main(str_skipto, b_starting) {
   level flag::wait_till("aslt_bunker_complete");
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
@@ -207,10 +207,10 @@ function init_flags() {
 
 function init_clientfields() {}
 
-function function_22b7fffd() {}
+function init_scenes() {}
 
 function function_8279b9f2() {
-  level.var_8dad5090 = "React_Fast";
+  level.react_shot = "React_Fast";
   level.bunker_intro_phone = util::spawn_anim_model("rus_phone_wall_01_anim");
   var_6b5c13c2 = [];
   var_6b5c13c2[#"bunker_intro_phone"] = level.bunker_intro_phone;
@@ -240,19 +240,19 @@ function function_8279b9f2() {
     }
   }
 
-  scene::add_scene_func("scene_kgb_bunker_intro_guard01", &function_97192259, level.var_8dad5090);
-  level thread scene::play("scene_kgb_bunker_intro_guard01", level.var_8dad5090);
-  scene::add_scene_func("scene_kgb_bunker_intro_guard02", &function_1cb30cf6, level.var_8dad5090);
-  level thread scene::play("scene_kgb_bunker_intro_guard02", level.var_8dad5090);
-  scene::add_scene_func("scene_kgb_bunker_intro_guard03", &function_82cb64f1, level.var_8dad5090);
-  level thread scene::play("scene_kgb_bunker_intro_guard03", level.var_8dad5090);
-  level thread scene::play("scene_kgb_bunker_intro_guard04", level.var_8dad5090);
-  level thread scene::play("scene_kgb_bunker_intro_phone", level.var_8dad5090);
+  scene::add_scene_func("scene_kgb_bunker_intro_guard01", &function_97192259, level.react_shot);
+  level thread scene::play("scene_kgb_bunker_intro_guard01", level.react_shot);
+  scene::add_scene_func("scene_kgb_bunker_intro_guard02", &function_1cb30cf6, level.react_shot);
+  level thread scene::play("scene_kgb_bunker_intro_guard02", level.react_shot);
+  scene::add_scene_func("scene_kgb_bunker_intro_guard03", &function_82cb64f1, level.react_shot);
+  level thread scene::play("scene_kgb_bunker_intro_guard03", level.react_shot);
+  level thread scene::play("scene_kgb_bunker_intro_guard04", level.react_shot);
+  level thread scene::play("scene_kgb_bunker_intro_phone", level.react_shot);
 }
 
 function function_c8052750() {
   level waittill(#"hash_619863a87e777fd1");
-  level.var_8dad5090 = "React";
+  level.react_shot = "React";
   level.var_e2e2c645 = 1;
   level notify(#"hash_49ad3ddc839a715c");
 }

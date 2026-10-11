@@ -114,8 +114,8 @@ class csceneplayer: csceneobject {
       a_players = [[_func_get]](_o_scene._str_team);
 
       if(!a_players.size && is_true(_o_scene._b_testing)) {
-        var_169da9db = util::get_enemy_team(_o_scene._str_team);
-        a_players = [[_func_get]](var_169da9db);
+        str_enemy_team = util::get_enemy_team(_o_scene._str_team);
+        a_players = [[_func_get]](str_enemy_team);
       }
 
       foreach(player in a_players) {
@@ -261,7 +261,7 @@ class csceneplayer: csceneobject {
     player notify(#"hash_3fdc27904c7ef691");
   }
 
-  function function_39ab0a6a(player, params) {
+  function on_weapon_changed(player, params) {
     if(player === _e && player::is_valid_weapon(params.last_weapon)) {
       player.var_d3d25842 = params.last_weapon;
     }
@@ -1069,7 +1069,7 @@ class csceneplayer: csceneobject {
   }
 
   function function_9339d69d(player) {
-    if(is_true(_s.var_6d72caf2) && !csceneobject::function_27898329(_str_current_anim) && (csceneobject::function_b260bdcc(_str_shot) || scene::function_6a0b0afe(_o_scene._str_mode))) {
+    if(is_true(_s.firstweaponraise) && !csceneobject::function_27898329(_str_current_anim) && (csceneobject::function_b260bdcc(_str_shot) || scene::function_6a0b0afe(_o_scene._str_mode))) {
       self notify("4f895ebd7b592448");
       self endon("4f895ebd7b592448");
       player endon(#"disconnect");
@@ -1491,7 +1491,7 @@ class csceneplayer: csceneobject {
       return;
     }
 
-    player callback::function_52ac9652(#"weapon_change", &function_39ab0a6a, self);
+    player callback::function_52ac9652(#"weapon_change", &on_weapon_changed, self);
 
     if(isDefined(player.var_777951c)) {
       if(!is_true(_s.var_1a95895f) && !is_true(_s.var_b538acac) || (is_true(_s.var_1a95895f) || is_true(_s.var_b538acac)) && (scene::function_6a0b0afe(_o_scene._str_mode) || scene::function_b260bdcc(_o_scene._str_name, _str_shot) || is_true(_o_scene.scene_stopping))) {
@@ -1644,7 +1644,7 @@ class csceneplayer: csceneobject {
       function_c26a4e8b(player, 0);
     }
 
-    player callback::function_d8abfc3d(#"weapon_change", &function_39ab0a6a, self);
+    player callback::function_d8abfc3d(#"weapon_change", &on_weapon_changed, self);
   }
 
   function function_dd8a2de2(player) {
@@ -1735,7 +1735,7 @@ class csceneplayer: csceneobject {
           }
 
           _e.var_777951c = current_weapon;
-          _e.var_3b97696d = player getplayergendertype();
+          _e.str_gender = player getplayergendertype();
         }
       }
     }

@@ -451,10 +451,10 @@ function private function_2c718f9e(ai_actor, n_index) {
     self turretsettargetangles(n_index, (0, 0, 0));
     waitframe(2);
 
-    if(isDefined(s_turret.var_bf6d793d) && isDefined(s_turret.var_bf6d793d.var_81610bb0)) {
+    if(isDefined(s_turret.var_bf6d793d) && isDefined(s_turret.var_bf6d793d.pain_anims)) {
       for(i = 0; i < 10; i++) {
-        if(isDefined(s_turret.var_bf6d793d.var_81610bb0[i])) {
-          var_1e713ee7 = s_turret.var_bf6d793d.var_81610bb0[i].xanim;
+        if(isDefined(s_turret.var_bf6d793d.pain_anims[i])) {
+          var_1e713ee7 = s_turret.var_bf6d793d.pain_anims[i].xanim;
 
           if(isDefined(var_1e713ee7)) {
             anim_time = ai_actor getanimtime(var_1e713ee7);
@@ -543,7 +543,7 @@ function function_1bc8c31c(target, v_offset, n_index = 0, b_just_once = 0) {
   function_21827343(n_index);
 }
 
-function function_aecc6bed(var_502298b8, n_shots, n_index = 0, var_c3e16ce = undefined, var_702f0a7e = undefined) {
+function function_aecc6bed(var_502298b8, n_shots, n_index = 0, n_fire_delay = undefined, var_702f0a7e = undefined) {
   assert(isarray(var_502298b8), "<dev string:x14b>");
   assert(n_shots > 0, "<dev string:x180>");
   var_17b7891d = "1a325e0f6397cbea" + _index(n_index);
@@ -552,7 +552,7 @@ function function_aecc6bed(var_502298b8, n_shots, n_index = 0, var_c3e16ce = und
   function_9c04d437(1, n_index);
   self endon(#"drone_death", #"death", "_stop_turret" + _index(n_index), "turret_disabled" + _index(n_index), #"terminate_all_turrets_firing", #"exit_vehicle", "turret manual" + _index(n_index));
   w_weapon = get_weapon(n_index);
-  n_fire_time = isDefined(var_c3e16ce) ? var_c3e16ce : w_weapon.firetime;
+  n_fire_time = isDefined(n_fire_delay) ? n_fire_delay : w_weapon.firetime;
   function_14223170(n_index);
 
   foreach(point in var_502298b8) {
@@ -1089,17 +1089,17 @@ function _debug_turret_think(n_index) {
     }
 
     var_83570f5f[var_83570f5f.size] = var_3be47a2d;
-    var_c88d0be9 = "<dev string:x296>";
+    str_behavior = "<dev string:x296>";
 
     if(isDefined(s_turret.var_50fbd548) && isvec(s_turret.target) && s_turret.target == s_turret.var_50fbd548) {
-      var_c88d0be9 += "<dev string:x2a5>";
+      str_behavior += "<dev string:x2a5>";
     } else if(s_turret flag::get(#"turret manual")) {
-      var_c88d0be9 += "<dev string:x2bb>";
+      str_behavior += "<dev string:x2bb>";
     } else {
-      var_c88d0be9 += "<dev string:x2ca>";
+      str_behavior += "<dev string:x2ca>";
     }
 
-    var_83570f5f[var_83570f5f.size] = var_c88d0be9;
+    var_83570f5f[var_83570f5f.size] = str_behavior;
     var_83570f5f[var_83570f5f.size] = "<dev string:x2db>" + (isDefined(s_turret.favoriteenemy) ? "<dev string:x2f0>" + s_turret.favoriteenemy getentnum() : "<dev string:x263>");
     var_83570f5f[var_83570f5f.size] = "<dev string:x2fb>" + is_true(s_turret.var_cd8600bd);
     var_83570f5f[var_83570f5f.size] = "<dev string:x314>" + is_true(s_turret.b_ignore_line_of_sight);

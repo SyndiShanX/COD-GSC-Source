@@ -37,7 +37,7 @@ function init_shared() {
 
 function function_4f3cd1f0() {
   if(self.subarchetype === #"hash_2a5479b83161cb35") {
-    self.var_90d0c0ff = "anim_spawn_plaguehound";
+    self.spawn_anim_alias = "anim_spawn_plaguehound";
     self clientfield::set("pustule_pulse_plague", 1);
     self callback::function_d8abfc3d(#"on_dog_killed", &function_a6c93300);
   }
@@ -92,18 +92,18 @@ function function_659d1778(attacker) {
       self delete();
     }
 
-    var_739bcc52 = [];
+    vehicle_targets = [];
 
     foreach(vehicle in getvehiclearray()) {
       if(is_true(vehicle.isplayervehicle)) {
-        var_739bcc52[var_739bcc52.size] = vehicle;
+        vehicle_targets[vehicle_targets.size] = vehicle;
       }
     }
 
     all_targets = [];
-    var_739bcc52 = function_72d3bca6(var_739bcc52, self.origin, undefined, undefined, 120);
+    vehicle_targets = function_72d3bca6(vehicle_targets, self.origin, undefined, undefined, 120);
     ai_targets = getentitiesinradius(self.origin, 110, 15);
-    ai_targets = arraycombine(var_739bcc52, ai_targets, 0, 0);
+    ai_targets = arraycombine(vehicle_targets, ai_targets, 0, 0);
 
     foreach(ai in ai_targets) {
       waitframe(1);

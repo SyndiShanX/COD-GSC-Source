@@ -61,11 +61,11 @@ function main(str_objective, b_starting) {
   level flag::wait_till("flg_nuke_room_obj_done");
   objectives::complete("obj_photo");
   level flag::wait_till_all(array("flg_vo_in_nuke_room_complete", "obj_photo_done"));
-  skipto::function_4e3ab877("vip_room");
+  skipto::objective_completed("vip_room");
   level.park lookatentity();
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   hms_util::print("<dev string:x4d>");
 }
 

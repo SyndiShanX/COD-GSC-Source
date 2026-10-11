@@ -177,7 +177,7 @@ function function_7db73593() {
   }
 }
 
-function function_7c2f623b() {
+function light_on() {
   if(!isDefined(self.flashlight.model)) {
     self function_65e5c8c8(1);
   }
@@ -302,7 +302,7 @@ function private function_fb6fb7ad() {
 
   self.var_710f0e6e = &function_65e5c8c8;
   self.fnstealthflashlightdetach = &function_bfffb3fe;
-  self.fnstealthflashlighton = &function_7c2f623b;
+  self.fnstealthflashlighton = &light_on;
   self.fnstealthflashlightoff = &light_off;
   self setblackboardattribute("_flashlight", "flashlight_stow");
 }

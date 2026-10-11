@@ -23,7 +23,7 @@
 #namespace zm_platinum_zones;
 
 function autoexec init() {
-  callback::on_spawned(&function_44b1279a);
+  callback::on_spawned(&minimap_update);
   level.var_28a7d418 = ["zone_american_sector_street", "zone_american_sector_right_building", "zone_american_sector_left_building"];
   level.var_57c0b4c1 = ["zone_american_sector_street", "zone_american_sector_right_building", "zone_american_sector_left_building", "zone_no_mans_land_1", "zone_no_mans_land_2", "zone_no_mans_land_3", "zone_sewers_and_escape_tunnel", "zone_secret_spy_tunnel", "zone_power_substation"];
   level.var_27028b8e = &function_27028b8e;
@@ -148,7 +148,7 @@ function zone_init() {
   namespace_f0b43eb5::create_challenge(#"hash_49b405ab99ad6f84", 90, "zone_control_room", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_control_room", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
 }
 
-function function_44b1279a() {
+function minimap_update() {
   self notify("7088b04e5517e48d");
   self endon("7088b04e5517e48d");
   self endon(#"disconnect");
@@ -217,7 +217,7 @@ function function_5b3aabe6() {
 
 function private function_f63d1381(a_ents) {
   e_door = a_ents[#"zipline_door"];
-  e_door function_619a5c20();
+  e_door pingable();
 }
 
 function private function_88c5fdab(a_ents) {
@@ -242,10 +242,10 @@ function function_59d4fec2() {
     e_door thread scene::play("p9_fxanim_zm_platinum_zipline_bundle");
   }
 
-  var_4eb19bad = struct::get("zipline_destroyed_rooftops_upper");
-  var_8b0c7673 = struct::get(var_4eb19bad.target);
+  s_zipline_start = struct::get("zipline_destroyed_rooftops_upper");
+  var_8b0c7673 = struct::get(s_zipline_start.target);
   level clientfield::set("" + #"hash_2971ea22ea5a646a", 2);
-  zipline_player::function_2a1bd467(var_4eb19bad);
+  zipline_player::function_2a1bd467(s_zipline_start);
   zipline_player::function_2a1bd467(var_8b0c7673);
 }
 
@@ -267,10 +267,10 @@ function function_fc7b3c20() {
     e_door thread scene::play("p9_fxanim_zm_platinum_zipline_bundle");
   }
 
-  var_4eb19bad = struct::get("zipline_rooftop_interior");
-  var_8b0c7673 = struct::get(var_4eb19bad.target);
+  s_zipline_start = struct::get("zipline_rooftop_interior");
+  var_8b0c7673 = struct::get(s_zipline_start.target);
   level clientfield::set("" + #"hash_2971ea22ea5a646a", 3);
-  zipline_player::function_2a1bd467(var_4eb19bad);
+  zipline_player::function_2a1bd467(s_zipline_start);
   zipline_player::function_2a1bd467(var_8b0c7673);
 }
 
@@ -291,10 +291,10 @@ function function_6453e9bd() {
     e_door thread scene::play("p9_fxanim_zm_platinum_zipline_bundle");
   }
 
-  var_4eb19bad = struct::get("zipline_korber_rooftop");
-  var_8b0c7673 = struct::get(var_4eb19bad.target);
+  s_zipline_start = struct::get("zipline_korber_rooftop");
+  var_8b0c7673 = struct::get(s_zipline_start.target);
   level clientfield::set("" + #"hash_2971ea22ea5a646a", 4);
-  zipline_player::function_2a1bd467(var_4eb19bad);
+  zipline_player::function_2a1bd467(s_zipline_start);
   zipline_player::function_2a1bd467(var_8b0c7673);
 }
 
@@ -310,7 +310,7 @@ function function_89bc492d() {
     e_door thread scene::init("p9_fxanim_zm_platinum_rappel_bundle");
   }
 
-  level thread scene::init(#"hash_1aaf6533fa8de56");
+  level thread scene::init(#"p9_fxanim_zm_platinum_zipline_cable_bundle");
   level flag::wait_till("power_on");
   level clientfield::set("" + #"hash_2971ea22ea5a646a", 0);
   zm_zonemgr::enable_zone("zone_secret_spy_tunnel");
@@ -320,10 +320,10 @@ function function_89bc492d() {
   zm_zonemgr::enable_zone("zone_american_sector_right_building");
   zm_zonemgr::enable_zone("zone_american_sector_left_building");
   zm_zonemgr::enable_zone("zone_no_mans_land_1");
-  var_4eb19bad = struct::get("zipline_nomans_wberlinhotel");
-  zipline_player::function_2a1bd467(var_4eb19bad);
-  var_4eb19bad = struct::get("zipline_nomans_cafe");
-  zipline_player::function_2a1bd467(var_4eb19bad);
+  s_zipline_start = struct::get("zipline_nomans_wberlinhotel");
+  zipline_player::function_2a1bd467(s_zipline_start);
+  s_zipline_start = struct::get("zipline_nomans_cafe");
+  zipline_player::function_2a1bd467(s_zipline_start);
   wait 1;
 
   foreach(e_door in var_f3e03c80) {
@@ -331,13 +331,13 @@ function function_89bc492d() {
     waitframe(1);
   }
 
-  scene::add_scene_func(#"hash_1aaf6533fa8de56", &function_d8b4a70b, "play");
-  level thread scene::play(#"hash_1aaf6533fa8de56");
+  scene::add_scene_func(#"p9_fxanim_zm_platinum_zipline_cable_bundle", &function_d8b4a70b, "play");
+  level thread scene::play(#"p9_fxanim_zm_platinum_zipline_cable_bundle");
 }
 
 function private function_d8b4a70b(a_ents) {
   var_4e7f8723 = a_ents[#"rappel_cable"];
-  var_4e7f8723 function_619a5c20();
+  var_4e7f8723 pingable();
 }
 
 function function_8aecc4f0() {

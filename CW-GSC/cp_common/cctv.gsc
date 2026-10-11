@@ -26,8 +26,8 @@ function private function_bc948200() {
 function function_c238a64a(var_d7eb0053, var_cfa5cedf, var_de721607, var_1aebd615, var_dd3b452) {
   level.player = isDefined(level.player) ? level.player : getPlayers()[0];
 
-  if(!namespace_61e6d095::exists(#"hash_48087cf592ac15d8")) {
-    namespace_61e6d095::create(#"hash_48087cf592ac15d8", #"cctv");
+  if(!scripted_widgets::exists(#"hash_48087cf592ac15d8")) {
+    scripted_widgets::create(#"hash_48087cf592ac15d8", #"cctv");
   }
 
   namespace_82bfe441::fade(1, "FadeImmediate");
@@ -52,11 +52,11 @@ function function_c238a64a(var_d7eb0053, var_cfa5cedf, var_de721607, var_1aebd61
     var_dd3b452 = 1;
   }
 
-  namespace_61e6d095::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_name", var_d7eb0053);
-  namespace_61e6d095::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_location", var_cfa5cedf);
-  namespace_61e6d095::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_date", var_de721607);
-  namespace_61e6d095::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_timer_start", var_1aebd615);
-  namespace_61e6d095::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_zoom", var_dd3b452);
+  scripted_widgets::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_name", var_d7eb0053);
+  scripted_widgets::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_location", var_cfa5cedf);
+  scripted_widgets::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_date", var_de721607);
+  scripted_widgets::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_timer_start", var_1aebd615);
+  scripted_widgets::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_zoom", var_dd3b452);
   level.player clientfield::set_to_player("cctv_postfx", 1);
   namespace_c8e236da::removelist();
   namespace_c8e236da::function_ebf737f8(#"hash_4d41512a9dd19c05");
@@ -64,18 +64,18 @@ function function_c238a64a(var_d7eb0053, var_cfa5cedf, var_de721607, var_1aebd61
   namespace_c8e236da::function_ebf737f8(#"hash_4e10d70903ef5630");
 }
 
-function function_bd2b7003(var_6acccd9c = #"", var_7a6d5da7 = #"") {
-  namespace_61e6d095::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_name", var_6acccd9c);
-  namespace_61e6d095::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_location", var_7a6d5da7);
+function function_bd2b7003(cam_name = #"", var_7a6d5da7 = #"") {
+  scripted_widgets::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_name", cam_name);
+  scripted_widgets::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_location", var_7a6d5da7);
 }
 
 function function_6e6cbceb(var_862f0a8a = #"", var_d3e70c7c = 0) {
-  namespace_61e6d095::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_date", var_862f0a8a);
-  namespace_61e6d095::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_timer_start", var_d3e70c7c);
+  scripted_widgets::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_date", var_862f0a8a);
+  scripted_widgets::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_timer_start", var_d3e70c7c);
 }
 
-function function_b0adb9ba(var_5bb68104) {
-  namespace_61e6d095::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_zoom", var_5bb68104);
+function function_b0adb9ba(cam_zoom) {
+  scripted_widgets::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_zoom", cam_zoom);
 }
 
 function function_173bb173(var_67df10fb = 1) {
@@ -87,16 +87,16 @@ function function_173bb173(var_67df10fb = 1) {
     wait var_67df10fb;
   }
 
-  if(namespace_61e6d095::exists(#"hash_48087cf592ac15d8")) {
-    namespace_61e6d095::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_fade_out_time", var_67df10fb);
+  if(scripted_widgets::exists(#"hash_48087cf592ac15d8")) {
+    scripted_widgets::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_fade_out_time", var_67df10fb);
   }
 
   if(var_67df10fb > 0) {
     wait 2;
   }
 
-  if(namespace_61e6d095::exists(#"hash_48087cf592ac15d8")) {
-    namespace_61e6d095::remove(#"hash_48087cf592ac15d8");
+  if(scripted_widgets::exists(#"hash_48087cf592ac15d8")) {
+    scripted_widgets::remove(#"hash_48087cf592ac15d8");
   }
 
   namespace_c8e236da::removelist();

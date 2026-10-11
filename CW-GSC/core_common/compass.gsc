@@ -9,7 +9,7 @@
 
 function setupminimap(material, zone = "") {
   requiredmapaspectratio = getdvarfloat(#"scr_requiredmapaspectratio", 0);
-  corners = territory::function_1f583d2e("minimap_corner", "targetname");
+  corners = territory::get_ent_array("minimap_corner", "targetname");
 
   if(corners.size == 0) {
     corners = territory::function_1deaf019("minimap_corner", "targetname", "");

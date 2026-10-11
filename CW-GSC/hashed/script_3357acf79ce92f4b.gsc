@@ -1017,8 +1017,8 @@ function function_5c40e824(entity) {
 
   if(var_5e1a4c24 >= 0) {
     if(isPlayer(potential_targets[var_5e1a4c24])) {
-      var_9741c29b = function_d0939c67(entity, potential_targets[var_5e1a4c24], 32);
-      var_8d6705e8[var_5e1a4c24] = isDefined(var_9741c29b) ? var_9741c29b : var_8d6705e8[var_5e1a4c24];
+      last_known_pos = function_d0939c67(entity, potential_targets[var_5e1a4c24], 32);
+      var_8d6705e8[var_5e1a4c24] = isDefined(last_known_pos) ? last_known_pos : var_8d6705e8[var_5e1a4c24];
     }
 
     target_pos = var_8d6705e8[var_5e1a4c24];
@@ -1189,14 +1189,14 @@ function function_5c40e824(entity) {
     if(!is_true(entity.var_982e6932)) {
       if(closest_target == var_9b606bab) {
         entity.var_982e6932 = 1;
-        entity.var_927ef4c0 = gettime() + 3000;
+        entity.update_target_time = gettime() + 3000;
         entity.var_448aebc7 = undefined;
         entity.var_29a3768c = undefined;
       }
 
       entity.favoriteenemy = var_9b606bab;
     } else {
-      if(gettime() > entity.var_927ef4c0) {
+      if(gettime() > entity.update_target_time) {
         entity.var_982e6932 = 0;
       }
 
@@ -1217,16 +1217,16 @@ function function_5c40e824(entity) {
 
   if(!var_a3d9315b && abs(entity.favoriteenemy.last_valid_position[2] - entity.favoriteenemy.origin[2]) < var_c547b913) {
     var_b2450377 = getdvarfloat(#"hash_1bb1a9eaa1745b09", 85);
-    var_9741c29b = function_d0939c67(entity, entity.favoriteenemy, 32);
+    last_known_pos = function_d0939c67(entity, entity.favoriteenemy, 32);
     speed = length2d(entity.favoriteenemy getvelocity());
 
-    if(isDefined(var_9741c29b) && distance2dsquared(var_9741c29b, entity.favoriteenemy.origin) < sqr(var_b2450377 + speed)) {
+    if(isDefined(last_known_pos) && distance2dsquared(last_known_pos, entity.favoriteenemy.origin) < sqr(var_b2450377 + speed)) {
       var_a3d9315b = 1;
     }
 
     var_b1dcdb65 = getdvarfloat(#"hash_30c908bc9e328183", 100);
 
-    if(var_a3d9315b && distancesquared(var_9741c29b, entity.origin) < sqr(var_b1dcdb65) && abs(entity.origin[2] - entity.favoriteenemy.origin[2]) > (isDefined(entity.var_737e8510) ? entity.var_737e8510 : 64)) {
+    if(var_a3d9315b && distancesquared(last_known_pos, entity.origin) < sqr(var_b1dcdb65) && abs(entity.origin[2] - entity.favoriteenemy.origin[2]) > (isDefined(entity.var_737e8510) ? entity.var_737e8510 : 64)) {
       var_a3d9315b = 0;
     }
   }
@@ -1561,11 +1561,11 @@ function function_7c72a5c7(entity) {
   entity.var_26088aea = entity.var_a5add0c0;
 
   if(isDefined(entity.var_a5add0c0)) {
-    blocker = entity.var_a5add0c0.var_597f08bf;
+    blocker = entity.var_a5add0c0.traversal_blocker;
 
     if(isDefined(blocker.targetname) && blocker.targetname === "barricade_window") {
       entity.first_node = blocker;
-      entity.var_597f08bf = blocker;
+      entity.traversal_blocker = blocker;
       entity.barrier_align = blocker.barrier_align;
 
       if(!is_true(entity.var_ffc6fe22)) {

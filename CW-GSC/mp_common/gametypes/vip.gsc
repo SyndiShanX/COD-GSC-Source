@@ -67,7 +67,7 @@ function event_handler[gametype_init] main(eventstruct) {
   level.ononeleftevent = &ononeleftevent;
   level.ontimelimit = &globallogic::function_61e80d63;
   level.var_f7b64ada = &function_f7b64ada;
-  level.can_revive = &function_45a85e5b;
+  level.can_revive = &canrevive;
   level.var_1a0c2b72 = &function_1a0c2b72;
   level.onplayerdamage = &onplayerdamage;
   player::function_cf3aa03d(&onplayerkilled);
@@ -515,10 +515,10 @@ function private function_ca777d9a() {
   fx setModel(#"wpn_t9_eqp_smoke_grenade_world");
   playFX(#"hash_6c0862bb0e561d0d", fx.origin);
   playFX(#"hash_39f9530da901280", fx.origin);
-  fx playSound(#"hash_7e287e6b6da3c9cd");
+  fx playSound(#"mpl_vip_smoke_start");
   fx.sndent = spawn("script_origin", fx.origin);
   fx.sndent linkTo(fx);
-  fx.sndent playLoopSound(#"hash_686d0823355faccd");
+  fx.sndent playLoopSound(#"mpl_vip_smoke_loop");
   self.var_13c60627 = fx;
 
   self thread function_78ae3a87(fx);
@@ -664,7 +664,7 @@ function function_3d8678e3(talents) {
     self addtalent(talent.talent + level.game_mode_suffix);
   }
 
-  self addtalent(#"hash_25c2dcf9ec4c42e2");
+  self addtalent(#"talent_extraequipment_mp");
   perks = self getloadoutperks(0);
 
   foreach(perk in perks) {
@@ -897,7 +897,7 @@ function private function_f7ef4642() {
   }
 }
 
-function private function_45a85e5b(revivee) {
+function private canrevive(revivee) {
   return self.var_e6c45375 !== 1;
 }
 
@@ -1145,7 +1145,7 @@ function private function_9bbc1c91(origin, angles) {
 
 function function_1c85a66(helicopter) {
   helicopter endon(#"death");
-  helicopter.var_2dd14343 = util::spawn_anim_model(#"hash_71aea3bbaef3e00c", helicopter.origin);
+  helicopter.var_2dd14343 = util::spawn_anim_model(#"c_t9_usa_chopper_pilot_02", helicopter.origin);
   helicopter.var_2dd14343 endon(#"death");
 
   if(isDefined(helicopter.var_2dd14343)) {
@@ -1294,7 +1294,7 @@ function private function_ce44e2a8(helicopter) {
   helicopter.rope endon(#"death");
   helicopter notify(#"hash_4c9df8896f727a2e");
   var_2e2c7ee7 = 0.5;
-  helicopter.rope animation::play(#"hash_3f5deb4729726f2c", helicopter, "tag_origin_animate", var_2e2c7ee7, 0.2, 0.1, undefined, undefined, undefined, 0);
+  helicopter.rope animation::play(#"p9_fxanim_gp_vehicle_heli_lrg_vip_rope_retrieve_anim", helicopter, "tag_origin_animate", var_2e2c7ee7, 0.2, 0.1, undefined, undefined, undefined, 0);
   function_1d3cfe48(helicopter);
 }
 
@@ -1592,7 +1592,7 @@ function function_9ffc1856(goalpos, stop) {
 function function_5187ec98() {
   self helicopter::create_flare_ent((0, 0, -95));
   playFXOnTag(#"hash_3690812c1bb1b5d9", self.flare_ent, "tag_origin");
-  self playSound(#"hash_5e070a23d3527269");
+  self playSound(#"mpl_vip_helicopter_chaff");
 }
 
 function pause_time() {

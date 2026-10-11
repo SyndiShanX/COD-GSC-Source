@@ -63,9 +63,9 @@ function private function_c96b0450() {
     if(self getblackboardattribute(#"_civ_mode") == "panic") {
       if(isDefined(level.players) && level.players.size > 0 && function_9308c21b()) {
         player = level.players[0];
-        var_49122837 = distance2dsquared(self.origin, player.origin);
+        distance2dsq = distance2dsquared(self.origin, player.origin);
 
-        if(var_49122837 < sqr(300)) {
+        if(distance2dsq < sqr(300)) {
           player_angles = player getplayerangles();
           player_facing = anglesToForward(player_angles);
           var_3495bfe6 = self.origin - player.origin;
@@ -365,7 +365,7 @@ function function_b0876f77(value) {
     case #"umbrella_left":
       function_5c56272f("par_umbrella_open_01", "tag_accessory_left", "UMBRELLA_LEFT");
       break;
-    case #"hash_4ac48798a0be234b":
+    case #"umbrella_left_and_briefcase_right":
       function_5c56272f("par_umbrella_open_01_anim", "tag_accessory_left", "UMBRELLA_LEFT");
       function_5c56272f("z_briefcase_01_closed", "tag_accessory_right", "BRIEFCASE_RIGHT");
       break;

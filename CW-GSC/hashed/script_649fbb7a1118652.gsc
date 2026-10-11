@@ -27,26 +27,26 @@ function function_8e1c74f9() {
   }
 
   foreach(fastrope_point in var_e8290a75) {
-    var_f15d0100 = fastrope_point;
-    end_spot = struct::get(var_f15d0100.target);
+    start_spot = fastrope_point;
+    end_spot = struct::get(start_spot.target);
 
-    if(!isDefined(var_f15d0100.triggers)) {
-      var_f15d0100.triggers = [];
+    if(!isDefined(start_spot.triggers)) {
+      start_spot.triggers = [];
     }
 
     if(!isDefined(end_spot.triggers)) {
       end_spot.triggers = [];
     }
 
-    var_6a4d6895 = spawn("trigger_radius_use", var_f15d0100.origin + (0, 0, 16), 0, 128, 128);
+    var_6a4d6895 = spawn("trigger_radius_use", start_spot.origin + (0, 0, 16), 0, 128, 128);
 
-    if(!isDefined(var_f15d0100.triggers)) {
-      var_f15d0100.triggers = [];
-    } else if(!isarray(var_f15d0100.triggers)) {
-      var_f15d0100.triggers = array(var_f15d0100.triggers);
+    if(!isDefined(start_spot.triggers)) {
+      start_spot.triggers = [];
+    } else if(!isarray(start_spot.triggers)) {
+      start_spot.triggers = array(start_spot.triggers);
     }
 
-    var_f15d0100.triggers[var_f15d0100.triggers.size] = var_6a4d6895;
+    start_spot.triggers[start_spot.triggers.size] = var_6a4d6895;
 
     if(!isDefined(end_spot.triggers)) {
       end_spot.triggers = [];
@@ -55,7 +55,7 @@ function function_8e1c74f9() {
     }
 
     end_spot.triggers[end_spot.triggers.size] = var_6a4d6895;
-    var_6a4d6895.var_f15d0100 = var_f15d0100;
+    var_6a4d6895.start_spot = start_spot;
     var_6a4d6895.end_spot = end_spot;
     var_6a4d6895 triggerIgnoreTeam();
     var_6a4d6895 setvisibletoall();
@@ -64,14 +64,14 @@ function function_8e1c74f9() {
     hint = #"hash_3836c584d365660c";
     var_4fbbe184 = &function_4d3d6ee0;
 
-    if(is_true(var_f15d0100.var_a94720c2)) {
+    if(is_true(start_spot.var_a94720c2)) {
       hint = #"hash_3836c584d365660c";
     }
 
     var_6a4d6895 setHintString(hint);
     var_6a4d6895 callback::on_trigger(var_4fbbe184);
 
-    level thread function_be9add5(fastrope_point, end_spot.origin);
+    level thread debug_zipline(fastrope_point, end_spot.origin);
   }
 }
 
@@ -79,13 +79,13 @@ function function_4d3d6ee0(var_19a365) {
   level endon(#"game_ended");
   trigger = self;
   player = var_19a365.activator;
-  var_f15d0100 = self.var_f15d0100;
+  start_spot = self.start_spot;
   end_spot = self.end_spot;
 
   if(isPlayer(player) && isalive(player) && !is_true(player.is_ziplining) && isDefined(trigger)) {
-    array::run_all(var_f15d0100.triggers, &setinvisibletoplayer, player);
+    array::run_all(start_spot.triggers, &setinvisibletoplayer, player);
     array::run_all(end_spot.triggers, &setinvisibletoplayer, player);
-    start_pos = var_f15d0100.origin + (0, 0, 4);
+    start_pos = start_spot.origin + (0, 0, 4);
     end_pos = end_spot.origin + (0, 0, 4);
     var_45040e1f = 1;
     var_4332eb06 = -4;
@@ -93,7 +93,7 @@ function function_4d3d6ee0(var_19a365) {
     hint = #"hash_58bfd99072aeba6a";
     speed = getdvarint(#"hash_779091360c2d4e41", 300);
 
-    if(is_true(var_f15d0100.var_a94720c2)) {
+    if(is_true(start_spot.var_a94720c2)) {
       var_45040e1f = 0;
       var_4332eb06 = 1;
       var_d3e534b8 = 1;
@@ -102,9 +102,9 @@ function function_4d3d6ee0(var_19a365) {
     }
 
     player.is_ziplining = 1;
-    start_offset = start_pos + vectorscale(anglesToForward(var_f15d0100.angles), var_4332eb06);
-    end_offset = end_pos + vectorscale(anglesToForward(var_f15d0100.angles), var_d3e534b8);
-    zipline = util::spawn_model(#"tag_origin", start_offset, var_f15d0100.angles);
+    start_offset = start_pos + vectorscale(anglesToForward(start_spot.angles), var_4332eb06);
+    end_offset = end_pos + vectorscale(anglesToForward(start_spot.angles), var_d3e534b8);
+    zipline = util::spawn_model(#"tag_origin", start_offset, start_spot.angles);
     var_137ae0b1 = spawn("trigger_radius_use", player.origin, 0, 32, 32);
     zipline playSound("evt_rappel_start");
     zipline playLoopSound("evt_rappel_loop");
@@ -126,7 +126,7 @@ function function_4d3d6ee0(var_19a365) {
       level thread function_cec4ff58(player, zipline);
       player allowprone(0);
       player allowjump(0);
-      distance = distance(var_f15d0100.origin, end_pos);
+      distance = distance(start_spot.origin, end_pos);
       time = distance / speed;
       zipline moveTo(end_pos, time, 0.2, 0.2);
       zipline waittilltimeout(time, #"death", #"player_bailed");
@@ -170,7 +170,7 @@ function function_4d3d6ee0(var_19a365) {
       player waittilltimeout(1.4, #"death", #"disconnect");
 
       if(isDefined(player)) {
-        array::run_all(var_f15d0100.triggers, &setvisibletoplayer, player);
+        array::run_all(start_spot.triggers, &setvisibletoplayer, player);
         array::run_all(end_spot.triggers, &setvisibletoplayer, player);
       }
     }
@@ -203,7 +203,7 @@ function function_cec4ff58(player, zipline) {
   }
 }
 
-function function_be9add5(fastrope_point, var_17f29e11) {
+function debug_zipline(fastrope_point, var_17f29e11) {
   var_86660d95 = fastrope_point.origin;
   var_5c8079f3 = "<dev string:x38>";
 

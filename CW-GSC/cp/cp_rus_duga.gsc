@@ -32,16 +32,16 @@ function event_handler[level_init] main(eventstruct) {
   setclearanceceiling(16);
   init_callbacks();
   init_clientfields();
-  function_37dfd679();
+  init_skiptos();
   load::main();
-  level function_cf9b0986();
+  level init_spawnfuncs();
   setDvar(#"compassmaxrange", "2100");
 }
 
-function function_37dfd679() {
-  skipto::function_eb91535d("comprimised", &namespace_d6f0b09d::function_60a583d8, &namespace_d6f0b09d::function_ad4c4af2, "Intro", &namespace_d6f0b09d::function_be4e11a7);
-  skipto::function_eb91535d("ambush", &duga_ambush::main, &duga_ambush::starting, "Ambush", &duga_ambush::cleanup);
-  skipto::function_eb91535d("loose_ends", &namespace_3562695::main, &namespace_3562695::starting, "Loose Ends", &namespace_3562695::cleanup);
+function init_skiptos() {
+  skipto::add_saved("comprimised", &namespace_d6f0b09d::function_60a583d8, &namespace_d6f0b09d::function_ad4c4af2, "Intro", &namespace_d6f0b09d::function_be4e11a7);
+  skipto::add_saved("ambush", &duga_ambush::main, &duga_ambush::starting, "Ambush", &duga_ambush::cleanup);
+  skipto::add_saved("loose_ends", &namespace_3562695::main, &namespace_3562695::starting, "Loose Ends", &namespace_3562695::cleanup);
 
   skipto::add_dev("<dev string:x38>", &namespace_3562695::function_dbe8c8f4, &namespace_3562695::function_f5d9adcd, "<dev string:x4e>");
   skipto::add_dev("<dev string:x60>", &function_b679cee1, &function_4c352dc6, "<dev string:x71>");
@@ -49,9 +49,9 @@ function function_37dfd679() {
   skipto::add_dev("<dev string:xae>", &function_7eb26947, &function_ef6b71e7, "<dev string:xcd>");
 }
 
-function function_b679cee1(var_805ed574, b_starting) {}
+function function_b679cee1(str_obj, b_starting) {}
 
-function function_4c352dc6(var_805ed574) {}
+function function_4c352dc6(str_obj) {}
 
 function init_clientfields() {
   clientfield::register("toplayer", "pstfx_slow_motion", 1, 1, "int");
@@ -101,7 +101,7 @@ function function_48737ebb() {
   }
 }
 
-function function_cf9b0986() {
+function init_spawnfuncs() {
   sp = getEnt("lazar", "targetname");
   sp spawner::add_spawn_function(&function_9995e4d5);
   sp = getEnt("park", "targetname");
@@ -116,10 +116,10 @@ function on_connect() {
   self function_48737ebb();
 
   if(isDefined(level.skipto_current_objective) && array::contains(level.skipto_current_objective, "comprimised") || level.skipto_current_objective.size == 0) {
-    util::function_f3cadc9a("cp_duga_player_ready");
+    util::set_player_start_flag("cp_duga_player_ready");
 
-    if(isDefined(level.var_d7d201ba) && !self flag::exists(level.var_d7d201ba)) {
-      self flag::init(level.var_d7d201ba);
+    if(isDefined(level.str_player_start_flag) && !self flag::exists(level.str_player_start_flag)) {
+      self flag::init(level.str_player_start_flag);
     }
   }
 }
@@ -142,10 +142,10 @@ function on_spawned() {
 
   switch (level.skipto_current_objective[0]) {
     case #"comprimised":
-      self thread namespace_ac5221d7::function_292592aa(1);
+      self thread namespace_ac5221d7::loadout_default(1);
       break;
     case #"ambush":
-      self thread namespace_ac5221d7::function_292592aa(1);
+      self thread namespace_ac5221d7::loadout_default(1);
       break;
     case #"loose_ends":
       self thread namespace_ac5221d7::function_a22db743(1);

@@ -46,17 +46,17 @@ function function_30e98aee() {
     var_748b77e9 = getscriptbundle(bundle_name);
     var_df565943 = spawnStruct();
     var_df565943.var_256f0fd3 = isDefined(var_748b77e9.var_256f0fd3) ? var_748b77e9.var_256f0fd3 : 0;
-    var_df565943.var_17e8c06b = isDefined(var_748b77e9.var_17e8c06b) ? var_748b77e9.var_17e8c06b : "";
+    var_df565943.keyslot = isDefined(var_748b77e9.keyslot) ? var_748b77e9.keyslot : "";
     var_df565943.var_3ae94a37 = isDefined(var_748b77e9.var_3ae94a37) ? var_748b77e9.var_3ae94a37 : 0;
 
     if(isstring(var_748b77e9.var_d8ed7f46) && var_748b77e9.var_d8ed7f46 != "") {
-      var_df565943.var_d8ed7f46 = function_8764fdff(var_748b77e9.var_d8ed7f46, 3, var_df565943.var_256f0fd3, var_df565943.var_3ae94a37, var_df565943.var_17e8c06b);
+      var_df565943.var_d8ed7f46 = function_8764fdff(var_748b77e9.var_d8ed7f46, 3, var_df565943.var_256f0fd3, var_df565943.var_3ae94a37, var_df565943.keyslot);
     }
 
     var_df565943.var_c95c96b3 = isDefined(var_748b77e9.var_c95c96b3) ? var_748b77e9.var_c95c96b3 : 0;
 
     if(isstring(var_748b77e9.var_2d627fdd) && var_748b77e9.var_2d627fdd != "") {
-      var_df565943.var_2d627fdd = function_8764fdff(var_748b77e9.var_2d627fdd, 1, var_df565943.var_256f0fd3, var_df565943.var_c95c96b3, var_df565943.var_17e8c06b);
+      var_df565943.var_2d627fdd = function_8764fdff(var_748b77e9.var_2d627fdd, 1, var_df565943.var_256f0fd3, var_df565943.var_c95c96b3, var_df565943.keyslot);
     }
 
     level.var_1c6fe905[index] = var_df565943;
@@ -85,7 +85,7 @@ function function_30e98aee() {
   if(spy::function_3d83e588(1)) {
     function_c329fcd3(#"combat_bow", undefined, undefined, undefined, undefined, undefined, undefined, &function_9deb70f);
     function_c329fcd3(#"attack_helicopter", undefined, undefined, undefined, undefined, undefined, undefined, &function_9deb70f);
-    function_c329fcd3(#"hash_3cda454c67af897f", undefined, undefined, undefined, undefined, undefined, undefined, &function_9deb70f);
+    function_c329fcd3(#"counter_spy_plane", undefined, undefined, undefined, undefined, undefined, undefined, &function_9deb70f);
     function_c329fcd3(#"tear_gas", undefined, undefined, undefined, undefined, undefined, undefined, &function_9deb70f);
   }
 
@@ -110,7 +110,7 @@ function private function_8764fdff(var_952fc2b4, role, var_229cbfe0, var_8bf1051
   skill.credit = var_8bf10510;
   skill.var_df565943 = var_229cbfe0;
   skill.cooldown = isDefined(var_6669664.cooldown) ? var_6669664.cooldown : 0;
-  skill.var_3e32dc53 = isDefined(var_6669664.var_a58f84b8) ? var_6669664.var_a58f84b8 : 0;
+  skill.var_3e32dc53 = isDefined(var_6669664.validtime) ? var_6669664.validtime : 0;
   skill.var_501386ad = isDefined(var_6669664.casttime) ? var_6669664.casttime : 0;
   skill.var_2f423d19 = isDefined(var_6669664.var_65bbf236) ? var_6669664.var_65bbf236 : "";
   skill.var_b33aa4ce = isDefined(var_6669664.var_aefe2d36) ? var_6669664.var_aefe2d36 : "";
@@ -315,9 +315,9 @@ function function_c59f835(skill) {
   }
 }
 
-function function_5648ed56(var_41d6bb00) {
-  if(isstring(var_41d6bb00)) {
-    switch (var_41d6bb00) {
+function function_5648ed56(action_slot) {
+  if(isstring(action_slot)) {
+    switch (action_slot) {
       case #"+actionslot 1":
         return 0;
       case #"+actionslot 2":
@@ -1034,7 +1034,7 @@ function function_eba95887(credit) {
   }
 }
 
-function function_53a81144(credit) {
+function addcredit(credit) {
   assert(isPlayer(self));
   assert(isint(self.credit));
   credit = int(isDefined(credit) ? credit : 0);
@@ -1095,7 +1095,7 @@ function function_f77996e9(attacker, victim) {
       }
     }
 
-    player function_53a81144(reward);
+    player addcredit(reward);
   }
 }
 
@@ -1124,12 +1124,12 @@ function function_9e75b1a6() {
       role = player spy::function_da8679c7();
 
       if(role == 3) {
-        player function_53a81144(level.var_7e569431.var_5da13983);
+        player addcredit(level.var_7e569431.var_5da13983);
         continue;
       }
 
       if(role == 1) {
-        player function_53a81144(level.var_7e569431.var_6cc03c67);
+        player addcredit(level.var_7e569431.var_6cc03c67);
       }
     }
   }
@@ -1417,7 +1417,7 @@ function private function_14bb4ccb(dvar) {
   if(dvar.value != 0) {
     foreach(player in level.players) {
       if(!isbot(player)) {
-        player function_53a81144(dvar.value);
+        player addcredit(dvar.value);
       }
     }
 

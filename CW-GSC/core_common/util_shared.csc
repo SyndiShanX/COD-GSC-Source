@@ -752,7 +752,7 @@ function private event_handler[security_watcher] function_9a464797(eventstruct) 
   level endon(eventstruct.var_e81ce538);
   wait randomintrange(10, 30);
   println("<dev string:x1d3>" + eventstruct.var_e81ce538);
-  function_17cf7de1(2);
+  sendctgstrace(2);
 }
 
 function field_set_lighting_ent(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -968,7 +968,7 @@ function note_elapsed_times(&elapsed_time_array, label = "unspecified") {
   iprintlnbold(msg);
 }
 
-function function_53966f9c(&elapsed_time_array, label = "unspecified", var_5461755f = 10, var_fe4c69e3 = 100, var_d09034b4) {
+function function_53966f9c(&elapsed_time_array, label = "unspecified", var_5461755f = 10, reset_count = 100, var_d09034b4) {
   if(!isDefined(var_d09034b4)) {
     var_d09034b4 = elapsed_time_array.size;
   }
@@ -977,7 +977,7 @@ function function_53966f9c(&elapsed_time_array, label = "unspecified", var_54617
     note_elapsed_times(elapsed_time_array, label);
   }
 
-  if(var_fe4c69e3 != 0 && elapsed_time_array.size >= var_fe4c69e3) {
+  if(reset_count != 0 && elapsed_time_array.size >= reset_count) {
     keys = getarraykeys(elapsed_time_array);
 
     foreach(key in keys) {
@@ -1058,11 +1058,11 @@ function function_f5b24d2d(localclientnum, entity, var_d0ada253, state) {
   teamcolor = (1, 1, 1);
 
   if(state == 1 || state == 4 || state == 6) {
-    teamcolor = function_45a33458(localclientnum, #"allies", 1);
+    teamcolor = getteamcolor(localclientnum, #"allies", 1);
   } else if(state == 2 || state == 5 || state == 7) {
-    teamcolor = function_45a33458(localclientnum, #"axis", 1);
+    teamcolor = getteamcolor(localclientnum, #"axis", 1);
   } else if(state == 3) {
-    teamcolor = function_45a33458(localclientnum, #"axis", 1);
+    teamcolor = getteamcolor(localclientnum, #"axis", 1);
 
     if(isDefined(teamcolor)) {
       entity function_78233d29(var_d0ada253, "", #"hash_15e64a875216af23", teamcolor[0]);
@@ -1071,7 +1071,7 @@ function function_f5b24d2d(localclientnum, entity, var_d0ada253, state) {
       entity function_78233d29(var_d0ada253, "", #"hash_6ecae9ba3282976b", 1);
     }
 
-    teamcolor = function_45a33458(localclientnum, #"allies", 1);
+    teamcolor = getteamcolor(localclientnum, #"allies", 1);
   }
 
   if(isDefined(teamcolor)) {

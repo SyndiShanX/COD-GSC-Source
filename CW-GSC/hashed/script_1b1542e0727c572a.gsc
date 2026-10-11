@@ -32,10 +32,10 @@ function main(str_objective, b_starting) {
   level thread function_ba67eb3b();
   level thread function_a2982a04();
   level flag::wait_till("flag_siege_activate_approach");
-  skipto::function_4e3ab877("rail_ride");
+  skipto::objective_completed("rail_ride");
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {}
+function cleanup(str_objective, b_starting, b_direct, player) {}
 
 function function_ba67eb3b() {
   level flag::wait_till("flg_wall_rpg");
@@ -51,8 +51,8 @@ function function_a2982a04() {
   level flag::wait_till("flg_siege_guard_station_cleanup");
   a_ai = spawner::get_ai_group_ai("guard_station_group");
   array::run_all(a_ai, &deletedelay);
-  var_f2623ee2 = getEntArray("veh_guard_station", "targetname");
-  array::run_all(var_f2623ee2, &deletedelay);
+  a_veh = getEntArray("veh_guard_station", "targetname");
+  array::run_all(a_veh, &deletedelay);
   level flag::wait_till("flg_siege_tower_cleanup");
   a_ai = spawner::get_ai_group_ai("tower_group");
   array::run_all(a_ai, &deletedelay);

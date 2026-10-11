@@ -29,9 +29,9 @@
 #namespace namespace_a2d2e744;
 
 function function_965213e6(str_objective, b_starting) {
-  transient = savegame::function_6440b06b(#"transient");
+  transient = savegame::get_mission_data(#"transient");
   transient.var_296ec611 = 1;
-  savegame::function_7790f03(1);
+  savegame::checkpoint_save_asap(1);
   wait 0.1;
   level thread function_32d297d8();
 }
@@ -59,7 +59,7 @@ function function_32d297d8(str_objective, b_starting) {
     }
   }
 
-  transient = savegame::function_6440b06b(#"transient");
+  transient = savegame::get_mission_data(#"transient");
   level thread function_9dd6ca05();
   level thread function_b528b50();
   level flag::wait_till("f_catwalks_catwalk_vig_1");
@@ -80,7 +80,7 @@ function function_32d297d8(str_objective, b_starting) {
   level flag::wait_till("flg_off_catwalks");
   level flag::clear("no_corpse_pickup");
   level.ai_woods pushplayer(0);
-  savegame::function_7790f03(1);
+  savegame::checkpoint_save_asap(1);
   level thread function_171d6b6c();
 
   if(is_true(transient.var_296ec611)) {
@@ -109,9 +109,9 @@ function function_32d297d8(str_objective, b_starting) {
     var_a4af17f3 = spawner::simple_spawn("ai_catwalks_second_wave");
 
     if(level flag::get("flg_catwalks_upper_approach")) {
-      var_75bfdd78 = struct::get_array("s_catwalks_second_wave_upper", "targetname");
-      var_a4af17f3[0] forceteleport(var_75bfdd78[0].origin, var_75bfdd78[0].angles);
-      var_a4af17f3[1] forceteleport(var_75bfdd78[1].origin, var_75bfdd78[1].angles);
+      a_s_teleports = struct::get_array("s_catwalks_second_wave_upper", "targetname");
+      var_a4af17f3[0] forceteleport(a_s_teleports[0].origin, a_s_teleports[0].angles);
+      var_a4af17f3[1] forceteleport(a_s_teleports[1].origin, a_s_teleports[1].angles);
     }
 
     var_a4af17f3[0] setgoal(level.player);
@@ -132,8 +132,8 @@ function function_32d297d8(str_objective, b_starting) {
 
   level thread namespace_b73b9191::function_5d981106("ai_catwalks", 2, "f_catwalks_combat_end");
   level flag::wait_till_any(array("f_catwalks_combat_end", "flg_zipline_snap_approach"));
-  level thread breadcrumb::function_61037c6c("bc_zipline_fall_1");
-  skipto::function_4e3ab877("catwalks");
+  level thread breadcrumb::start_chain("bc_zipline_fall_1");
+  skipto::objective_completed("catwalks");
 }
 
 function function_9dd6ca05() {
@@ -170,7 +170,7 @@ function function_2445d847(str_objective) {
   level thread objectives::scripted("obj_yamantau_1", undefined, #"hash_423da80c752f859f");
   var_5b7b93ad = getspawnerarray("woods", "targetname");
   var_5b7b93ad[0] colors::set_force_color_spawner("o");
-  namespace_b73b9191::function_2683ec5d();
+  namespace_b73b9191::spawn_woods();
   var_b4bb921 = struct::get("woods_catwalks_teleport", "targetname");
   level.ai_woods forceteleport(var_b4bb921.origin, var_b4bb921.angles);
   doors::unlock("satcom_exit_door", "targetname", 1);
@@ -201,8 +201,8 @@ function function_490c69f() {
   level.var_7c0c1b3d = spawner::simple_spawn("ai_catwalks_upper", &function_8c4596c);
   var_a38a8f8c = struct::get("ambush_grenade_origin", "targetname");
   var_1fb4acab = struct::get("ambush_grenade_target", "targetname");
-  var_c6d90c31 = getweapon(#"frag_grenade");
-  w_grenade = level.var_7c0c1b3d[0] magicgrenade(var_a38a8f8c.origin, var_1fb4acab.origin, 5, var_c6d90c31);
+  w_frag = getweapon(#"frag_grenade");
+  w_grenade = level.var_7c0c1b3d[0] magicgrenade(var_a38a8f8c.origin, var_1fb4acab.origin, 5, w_frag);
   var_9f4465f = spawner::simple_spawn("ai_catwalks_lower", &function_b12f2f76);
   var_d25787b0 = spawner::simple_spawn("ai_catwalks_rear", &function_76f8ca3b);
   ai_catwalks_anchor = spawner::simple_spawn_single("ai_catwalks_anchor", &function_76f8ca3b);
@@ -341,7 +341,7 @@ function function_46e76f7d() {
   function_76f8ca3b();
 }
 
-function function_dfe7cd78(str_objective, b_starting, var_aa1a6455, player) {
+function function_dfe7cd78(str_objective, b_starting, b_direct, player) {
   waitframe(1);
   namespace_b73b9191::function_ee83e03a("cull_inside_bunkerext");
 }
@@ -372,7 +372,7 @@ function function_198e08b8(str_objective, b_starting) {
   level.player clientfield::set_to_player("zipline_player_free_fall_fx", 0);
   level waittill(#"hash_7abd2158f9add682");
   level.player.var_4d9b2bc3 = 1;
-  skipto::function_4e3ab877("zipline_fall");
+  skipto::objective_completed("zipline_fall");
 }
 
 function function_98887da() {
@@ -471,10 +471,10 @@ function function_f1f4ca3e() {
 
 function function_9539fa90(str_objective) {
   level thread objectives::scripted("obj_yamantau_1", undefined, #"hash_423da80c752f859f");
-  namespace_b73b9191::function_2683ec5d();
+  namespace_b73b9191::spawn_woods();
   var_b4bb921 = struct::get("woods_zipline_fall_teleport", "targetname");
   level.ai_woods forceteleport(var_b4bb921.origin, var_b4bb921.angles);
-  level thread breadcrumb::function_61037c6c("bc_zipline_fall_2");
+  level thread breadcrumb::start_chain("bc_zipline_fall_2");
   level thread namespace_7468806b::function_ba5a28f(1);
   e_catwalks_floor2_blocker = getEnt("e_catwalks_floor2_blocker", "targetname");
   e_catwalks_floor2_blocker delete();
@@ -482,4 +482,4 @@ function function_9539fa90(str_objective) {
   level flag::set("flg_satcom_birds_trigger");
 }
 
-function function_b366b7a9(str_objective, b_starting, var_aa1a6455, player) {}
+function function_b366b7a9(str_objective, b_starting, b_direct, player) {}

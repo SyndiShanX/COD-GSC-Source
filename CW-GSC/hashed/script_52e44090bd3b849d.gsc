@@ -40,14 +40,14 @@
 #namespace namespace_fe8e156a;
 
 function starting(str_skipto) {
-  namespace_42da7c51::function_ed760ecb("woods");
+  namespace_42da7c51::hero_setup("woods");
   level.var_9a3944f4 = ai::array_spawn("exfil_heli")[0];
   level.var_9a3944f4 thread namespace_42da7c51::function_fbb0d73f();
   level thread namespace_42da7c51::heli_light(level.var_9a3944f4, "ally_heli_spot_light_bustout", "tag_fx_running_light_front_side_left_01", (-20, 12, 0), level.var_9a3944f4, 0, 1);
   level.var_9a3944f4 thread namespace_42da7c51::function_3cebcd1b();
   level.var_9a3944f4 util::delay_notify(0.2, "lights_on");
   callback::on_player_damage(&function_aa3c5fab);
-  level.var_7c11765c = 0;
+  level.last_player_damage = 0;
   level.last_player_attacker = level;
   level flag::set(#"hash_5601fb6019314f30");
   level flag::set("aldrich_kill_confirmed");
@@ -74,12 +74,12 @@ function main(str_skipto, b_starting) {
   level flag::wait_till("gas_station_escape_complete");
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 
   safehouse = skipto::function_6914f647();
   skipto = skipto::function_547ca7d2(safehouse);
-  skipto::function_1c2dfc20(safehouse, skipto);
+  skipto::level_completed(safehouse, skipto);
 }
 
 function cleanup(name, starting, direct, player) {}
@@ -104,7 +104,7 @@ function function_3a20dd4c(b_starting) {
   level.woods thread ai::force_goal(getnode("woods_exfil_cover", "targetname"));
   level flag::wait_till("heli_explosion_done");
   level thread savegame::checkpoint_save();
-  level battlechatter::function_2ab9360b(1);
+  level battlechatter::bc_allow(1);
   var_defad5b2 = ai::array_spawn("parking_lot_baddies");
   trucks = vehicle::simple_spawn_and_drive("parking_lot_truck");
 
@@ -351,10 +351,10 @@ function heli_logic() {
   level.var_9a3944f4 thread vehicle::get_on_and_go_path("nd_exfil_heli_dies");
   var_3a924007 = 2.25;
   wait var_3a924007;
-  var_377893ba = struct::get("org_heli_missile_launch", "targetname");
+  s_missile_org = struct::get("org_heli_missile_launch", "targetname");
   level flag::delay_set(3, "heli_explosion_done");
-  v_vel = vectorNormalize(level.var_9a3944f4.origin - var_377893ba.origin) * 100;
-  m = level.woods magicmissile(getweapon(#"launcher_standard_t9"), var_377893ba.origin, v_vel, level.var_9a3944f4);
+  v_vel = vectorNormalize(level.var_9a3944f4.origin - s_missile_org.origin) * 100;
+  m = level.woods magicmissile(getweapon(#"launcher_standard_t9"), s_missile_org.origin, v_vel, level.var_9a3944f4);
   org = util::spawn_model("tag_origin", m.origin, m.angles);
   org linkTo(m);
   org clientfield::set("heli_rpg_trail", 1);
@@ -412,12 +412,12 @@ function function_aa3c5fab(params) {
 
     if(attacker == level.last_player_attacker) {
       level.var_9a3944f4 thread namespace_42da7c51::function_cbe25a41(attacker, "tag_searchlight_fx", 1);
-      level.var_7c11765c = gettime();
+      level.last_player_damage = gettime();
       return;
     }
 
-    if(level.var_7c11765c < gettime() - 3000 || !isalive(level.last_player_attacker)) {
-      level.var_7c11765c = gettime();
+    if(level.last_player_damage < gettime() - 3000 || !isalive(level.last_player_attacker)) {
+      level.last_player_damage = gettime();
       level.last_player_attacker = attacker;
       level.var_9a3944f4 thread namespace_42da7c51::function_cbe25a41(attacker, "tag_searchlight_fx", 1);
     }

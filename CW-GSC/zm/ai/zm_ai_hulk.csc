@@ -99,7 +99,7 @@ function dog_projectile_fx(localclientnum, oldval, newval, bnewent, binitialsnap
 function private dog_launcher_explode_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
     self.fx = playFX(fieldname, #"hash_1a93b9b31b5d1d3b", self.origin + (0, 0, 18), anglestoup(self.angles));
-    self playSound(fieldname, #"hash_6a76932cce379c66");
+    self playSound(fieldname, #"zmb_hellhound_molotov_explo");
     function_16f54168(fieldname, self.origin, 750, 0.75, 0.3, 0.75, 0.5);
   }
 }
@@ -108,8 +108,8 @@ function private function_440e968(localclientnum, oldval, newval, bnewent, binit
   self endon(#"death");
   self util::waittill_dobj(fieldname);
 
-  if(isDefined(self.var_d61d7100)) {
-    stopfx(fieldname, self.var_d61d7100);
+  if(isDefined(self.swarm_fx)) {
+    stopfx(fieldname, self.swarm_fx);
   }
 
   fx = undefined;
@@ -140,7 +140,7 @@ function private function_440e968(localclientnum, oldval, newval, bnewent, binit
     self callback::on_shutdown(&function_95dc19b0);
   }
 
-  self.var_d61d7100 = util::playFXOnTag(fieldname, fx, self, "tag_origin");
+  self.swarm_fx = util::playFXOnTag(fieldname, fx, self, "tag_origin");
 }
 
 function private function_95dc19b0(localclientnum) {
@@ -333,9 +333,9 @@ function function_1b79e37c(localclientnum, start, end) {
   dir = (dir[0], dir[1], 0);
   dir = vectorNormalize(dir);
   time = int(0.75 * 1000);
-  var_199c57d2 = distance2d / time;
+  speedxy = distance2d / time;
   var_ef97a46c = (end[2] - start[2] + 0.5 * gravity * sqr(time)) / time;
-  vel = (dir[0] * var_199c57d2, dir[1] * var_199c57d2, var_ef97a46c);
+  vel = (dir[0] * speedxy, dir[1] * speedxy, var_ef97a46c);
   end_time = gettime() + time;
   self.origin = start;
   handle = function_239993de(localclientnum, #"hash_50b57e69b1f1837b", self, "tag_origin");

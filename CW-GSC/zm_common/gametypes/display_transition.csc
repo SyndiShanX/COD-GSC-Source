@@ -136,8 +136,8 @@ function function_7adce590(local_client_num, oldval, newval, bnewent, binitialsn
       array::add(var_ec067cd3, fake_model);
     }
 
-    var_5acf682c = function_4259f9f8(bwastimejump, "top_squad_cam");
-    array::add(var_ec067cd3, var_5acf682c);
+    cam_model = function_4259f9f8(bwastimejump, "top_squad_cam");
+    array::add(var_ec067cd3, cam_model);
   }
 
   level scene::play("cin_mp_outro", var_ec067cd3);

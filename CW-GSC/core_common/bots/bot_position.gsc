@@ -142,7 +142,7 @@ function think() {
   }
 
   if(self.bot.enemyseen) {
-    if(!self function_e8a55078(info.overridegoalpos, info) || is_true(info.var_9e404264)) {
+    if(!self point_in_goal(info.overridegoalpos, info) || is_true(info.var_9e404264)) {
       if(!self function_7832483e(info)) {
         self function_d45bace(info);
       }
@@ -155,7 +155,7 @@ function think() {
         }
       }
     }
-  } else if(!self function_e8a55078(info.overridegoalpos, info)) {
+  } else if(!self point_in_goal(info.overridegoalpos, info)) {
     self function_d45bace(info);
   } else if(is_true(info.var_9e404264)) {
     if(isDefined(self.bot.var_aa94cd1b)) {
@@ -176,7 +176,7 @@ function think() {
   pixendevent();
 }
 
-function private function_e8a55078(point, info) {
+function private point_in_goal(point, info) {
   if(!isDefined(point)) {
     return 0;
   }

@@ -46,7 +46,7 @@ function init_flags() {
 }
 
 function start(var_1c513c79) {
-  util::function_268bdf4f("adler", &namespace_11998b8f::function_2f0f0a84);
+  util::init_hero("adler", &namespace_11998b8f::function_2f0f0a84);
   level thread scene::skipto_end("p9_fxanim_cp_stakeout_subway_door_breach_bundle");
   level thread scene::play("aib_vign_stakeout_ghost_station_guard_station_adler", "ladder_wait");
   level flag::set("flag_adler_at_ladder");
@@ -92,10 +92,10 @@ function main(str_objective, b_starting) {
   snd::play("amb_thunder_rumble");
   level flag::wait_till("ghost_station_exit_done");
   namespace_979752dc::function_740dbf99();
-  skipto::function_4e3ab877("ghost_station_exit");
+  skipto::objective_completed("ghost_station_exit");
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   if(isDefined(level.var_91ee8248) && level.var_91ee8248.size > 0) {
     foreach(guy in level.var_91ee8248) {
       if(isDefined(guy)) {
@@ -153,10 +153,10 @@ function function_ffe1ec0d(a_ents) {
   level.var_527ee575 linkTo(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_3", (0, 0, 0), (0, 0, 0));
   level.var_8d300d6a = a_ents[#"enemy1"];
   level.var_aff752f8 = a_ents[#"enemy2"];
-  level.var_8d300d6a battlechatter::function_2ab9360b(0);
+  level.var_8d300d6a battlechatter::bc_allow(0);
   level.var_8d300d6a.var_5b22d53 = 0;
   level.var_8d300d6a.var_c681e4c1 = 1;
-  level.var_aff752f8 battlechatter::function_2ab9360b(0);
+  level.var_aff752f8 battlechatter::bc_allow(0);
   level.var_aff752f8.var_c681e4c1 = 1;
   level.player endon(#"death");
   level.var_aff752f8 waittill(#"death");
@@ -192,7 +192,7 @@ function function_5010c6ad(a_ents) {
   }
 }
 
-function function_1ac3c612(var_243d9caf, str_tag) {
+function function_1ac3c612(e_linked, str_tag) {
   if(!isDefined(str_tag)) {
     str_tag = "<dev string:x38>";
   }
@@ -201,7 +201,7 @@ function function_1ac3c612(var_243d9caf, str_tag) {
   level endon(#"manhole_guards_dead");
 
   while(true) {
-    var_a272d6b0 = var_243d9caf gettagorigin(str_tag);
+    var_a272d6b0 = e_linked gettagorigin(str_tag);
     print3d(self.origin, hashtostring(self.model), (1, 0, 0), 1, 0.5);
     circle(self.origin, 30, (1, 0, 0));
     print3d(var_a272d6b0, hashtostring(str_tag), (0, 1, 0), 1, 0.5);
@@ -517,20 +517,20 @@ function function_31306fa8() {
 }
 
 function function_d1bc79a0(door_name, var_2202211f) {
-  var_3707ab7 = getEnt(door_name, "targetname");
-  var_5d4c31a5 = getEnt(var_3707ab7.target, "targetname");
-  var_3707ab7.original_origin = var_3707ab7.origin;
-  var_3707ab7.original_angles = var_3707ab7.angles;
+  alley_door = getEnt(door_name, "targetname");
+  var_5d4c31a5 = getEnt(alley_door.target, "targetname");
+  alley_door.original_origin = alley_door.origin;
+  alley_door.original_angles = alley_door.angles;
 
   if(isDefined(var_2202211f.var_44732bb0)) {
     var_2202211f.var_44732bb0 unlink();
   }
 
-  var_5d4c31a5 linkTo(var_3707ab7);
+  var_5d4c31a5 linkTo(alley_door);
   waitframe(1);
-  var_3707ab7 linkTo(var_2202211f, "j_prop_1", (0, 0, 0), (0, 0, 0));
+  alley_door linkTo(var_2202211f, "j_prop_1", (0, 0, 0), (0, 0, 0));
   var_5d4c31a5 connectpaths();
-  var_2202211f.var_44732bb0 = var_3707ab7;
+  var_2202211f.var_44732bb0 = alley_door;
   return var_2202211f;
 }
 

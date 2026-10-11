@@ -33,10 +33,10 @@ function starting(str_skipto) {
 
 function main(str_skipto, b_starting) {
   level flag::set("aslt_vault_approach_begin");
-  level battlechatter::function_2ab9360b(1);
+  level battlechatter::bc_allow(1);
 
   if(is_true(b_starting)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto);
+    level.adler = namespace_e77bf565::adler_spawn(str_skipto);
     level.adler namespace_e77bf565::function_5770c74("assault");
     level thread scene::skipto_end_noai("scene_kgb_door_kick", "Last_Frame", undefined, 1);
     level thread scene::init("scene_kgb_utility_room_adler");
@@ -55,7 +55,7 @@ function main(str_skipto, b_starting) {
   level flag::wait_till("aslt_vault_approach_complete");
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
@@ -73,7 +73,7 @@ function init_flags() {
 
 function init_clientfields() {}
 
-function function_22b7fffd() {
+function init_scenes() {
   animation::add_notetrack_func("kgb_aslt_vault_approach::vault_approach_runners", &vault_approach_runners);
   scene::add_scene_func("scene_kgb_elevator_intro", &function_dacdaa59, "init");
 }

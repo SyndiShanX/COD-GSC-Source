@@ -67,8 +67,8 @@ function start() {
   level thread function_e568ca74();
   var_ef325671 = getEntArray("sr_boundary_clip", "targetname");
 
-  foreach(var_b3a455bb in var_ef325671) {
-    var_b3a455bb setforcenocull();
+  foreach(e_brush in var_ef325671) {
+    e_brush setforcenocull();
   }
 }
 
@@ -298,7 +298,7 @@ function function_dc15ad60() {
             }
 
             player dodamage(var_9d778583, player.origin, undefined, undefined, undefined, "MOD_TRIGGER_HURT", 8192);
-            player playsoundtoplayer(#"hash_11f49f9aedeeff5e", player);
+            player playsoundtoplayer(#"evt_sr_phase_player_dot", player);
             player function_bc82f900(#"damage_light");
 
             if(time >= player.var_6a2e2f41) {

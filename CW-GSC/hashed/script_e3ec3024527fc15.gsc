@@ -109,7 +109,7 @@ function function_a73b8839() {
 
 function function_880b83fd(flg_exit_fav) {
   level waittill(flg_exit_fav);
-  level.player namespace_534279a::function_6e9256df();
+  level.player namespace_534279a::set_loadout();
   level.player namespace_534279a::function_a3c3a2b0();
   level.var_77be18d2 makevehicleusable();
   level.var_77be18d2 usevehicle(level.player, 5);

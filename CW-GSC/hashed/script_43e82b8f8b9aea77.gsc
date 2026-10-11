@@ -48,15 +48,15 @@ function function_f50bc4b9() {
 function starting(str_skipto) {}
 
 function main(str_skipto, b_starting) {
-  if(level.var_b28c2c3a == "dev_post_prisoner_park_survived") {
+  if(level.skipto_point == "dev_post_prisoner_park_survived") {
     level.player player_decision::function_ff7e19cb(0);
   }
 
-  if(level.var_b28c2c3a == "dev_post_prisoner_lazar_survived") {
+  if(level.skipto_point == "dev_post_prisoner_lazar_survived") {
     level.player player_decision::function_ff7e19cb(1);
   }
 
-  if(level.var_b28c2c3a == "dev_post_prisoner_no_survivors") {
+  if(level.skipto_point == "dev_post_prisoner_no_survivors") {
     level.player player_decision::function_ff7e19cb(2);
   }
 
@@ -68,7 +68,7 @@ function main(str_skipto, b_starting) {
   level thread namespace_31c67f6d::function_12e3ea01();
   level namespace_31c67f6d::function_6194f34a("post_prisoner", 1);
   level thread function_dbf5481b();
-  level thread namespace_4ed3ce47::function_7edafa59(b_starting + "_briefing");
+  level thread namespace_4ed3ce47::music_handler(b_starting + "_briefing");
   level thread exploder::exploder("exp_post_armada_lazar_workbench");
   level thread exploder::exploder("exp_lgt_post_prioner_dialog");
   collision = getEnt("gurney_collision", "targetname");
@@ -76,7 +76,7 @@ function main(str_skipto, b_starting) {
   level thread function_c21e258e();
   level thread namespace_31c67f6d::function_b0558ba2("8");
   level function_3b9f24df();
-  skipto::function_4e3ab877("post_prisoner");
+  skipto::objective_completed("post_prisoner");
 }
 
 function function_3b9f24df() {
@@ -98,15 +98,15 @@ function function_3b9f24df() {
   level thread function_474dc7d3();
   wait 2;
 
-  if(isDefined(level.var_d7d201ba) && isDefined(level.skipto_current_objective)) {
-    level.player flag::set(level.var_d7d201ba);
+  if(isDefined(level.str_player_start_flag) && isDefined(level.skipto_current_objective)) {
+    level.player flag::set(level.str_player_start_flag);
   }
 
   level flag::wait_till(#"gameplay_started");
   level thread namespace_31c67f6d::pstfx_teleport(2, 1, 1, 1);
   wait 2;
   level thread function_f8e379f0();
-  level thread util::delay(1, undefined, &globallogic_ui::function_7bc0e4b9, 0, 0);
+  level thread util::delay(1, undefined, &globallogic_ui::do_chyron_text, 0, 0);
   level function_3812af3b();
   level function_5091c7b2();
   level function_5e48631f();
@@ -217,7 +217,7 @@ function function_b663575e() {
 }
 
 function function_cbd66c4c() {
-  setsaveddvar(#"hash_7bf40e4b6a830d11", 0);
+  setsaveddvar(#"ai_threatsightdisplay", 0);
   level.player setcinematicmotionoverride("cinematicmotion_handheld_heavy");
   level.player playrumblelooponentity("chopper_gunner_rumble_intro");
   vehicle::add_spawn_function_group("airport_truck_approach", "targetname", &function_78bc26d5);
@@ -234,9 +234,9 @@ function function_cbd66c4c() {
   level thread scene::play_from_time("scene_hub_post_prisoner_flashback_overlook", "overlook_shot", [level.arash, level.var_e2e0716f]);
   level thread scene::play_from_time("scene_tkd_hit3_intro_overlook", "overlook_shot", undefined);
   level thread scene::play_from_time("scene_tkd_hit3_intro_overlook_enemy4", "overlook_shot", undefined);
-  level thread util::delay("play_b3.0_iced_mus", undefined, &music::function_edda155f, "b3.0_iced");
+  level thread util::delay("play_b3.0_iced_mus", undefined, &music::playstinger, "b3.0_iced");
   level thread util::delay("play_b3.0_iced_mus", undefined, &music::setmusicstate, "b4.0_hold_fire");
-  level thread util::delay("play_b4.1_identify_mus", undefined, &music::function_edda155f, "b4.1_identify");
+  level thread util::delay("play_b4.1_identify_mus", undefined, &music::playstinger, "b4.1_identify");
   wait 1;
   level.player val::set(#"overlook", "ignoreme", 1);
   wait 50;
@@ -301,11 +301,11 @@ function function_cd682321(guys, plane) {
 function function_5431431d() {
   plane = getEnt("cargo_plane", "targetname");
   plane notsolid();
-  var_853687bd = getEntArray("af_plane_triggers", "targetname");
-  var_853687bd = arraycombine(var_853687bd, getEntArray("plane_floor_clip", "targetname"));
-  var_853687bd = arraycombine(var_853687bd, getEntArray("plane_cargo", "targetname"));
+  things = getEntArray("af_plane_triggers", "targetname");
+  things = arraycombine(things, getEntArray("plane_floor_clip", "targetname"));
+  things = arraycombine(things, getEntArray("plane_cargo", "targetname"));
 
-  foreach(thing in var_853687bd) {
+  foreach(thing in things) {
     thing enablelinkTo();
     thing linkTo(plane, "tag_body_animate");
   }
@@ -505,7 +505,7 @@ function function_49bbba06() {
   level.adler.var_d924535c = dialog_tree::new_tree(undefined, undefined, 1, 1, level.str_scene_name);
   level.adler.var_d924535c dialog_tree::add_option(#"hash_4543be1afb05e83a", undefined, "dt_4a", "dt_04_waiting_idle");
   level.adler.var_d924535c dialog_tree::add_option(#"hash_4546a61afb07f549", undefined, "dt_4b", "dt_04_waiting_idle");
-  level.adler.var_d924535c.var_2fad984e = level.adler.var_d924535c dialog_tree::add_option(#"hash_454a8a1afb0bae8c", undefined, "dt_4c", "dt_05_waiting_idle", 1);
+  level.adler.var_d924535c.option3 = level.adler.var_d924535c dialog_tree::add_option(#"hash_454a8a1afb0bae8c", undefined, "dt_4c", "dt_05_waiting_idle", 1);
   level dialog_tree::function_21780fc5(level.adler.var_d924535c, array(240, 650));
   level.adler.var_d924535c dialog_tree::run(level.adler);
 }
@@ -696,26 +696,26 @@ function function_82c37b22(str_skipto, b_starting) {
     waitframe(1);
   }
 
-  if(isDefined(level.var_d7d201ba) && isDefined(level.skipto_current_objective)) {
-    level.player flag::set(level.var_d7d201ba);
+  if(isDefined(level.str_player_start_flag) && isDefined(level.skipto_current_objective)) {
+    level.player flag::set(level.str_player_start_flag);
   }
 
   level function_d6d3bd92();
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 }
 
 function function_d6d3bd92() {
   if(level flag::get("flag_post_prisoner_truth")) {
     wait 5;
-    skipto::function_1c2dfc20("cp_rus_siege");
+    skipto::level_completed("cp_rus_siege");
     return;
   }
 
   if(level flag::get("flag_post_prisoner_lie")) {
-    level thread savegame::function_7790f03();
+    level thread savegame::checkpoint_save_asap();
     level thread namespace_4ed3ce47::function_e25181b5();
     level.player enableweapons();
     level.player playgestureviewmodel("dem_lowreadyup");
@@ -731,7 +731,7 @@ function function_d6d3bd92() {
       wait 5;
     }
 
-    skipto::function_1c2dfc20("cp_rus_duga");
+    skipto::level_completed("cp_rus_duga");
   }
 }
 
@@ -828,7 +828,7 @@ function function_c21e258e() {
   level.player player_decision::function_cde4f4e9(0);
 }
 
-function function_fb10b77d(str_skipto) {}
+function burn_start(str_skipto) {}
 
 function function_cbf93ca7(str_skipto, b_starting) {
   level thread namespace_31c67f6d::function_f2cd5fc0();
@@ -844,8 +844,8 @@ function function_cbf93ca7(str_skipto, b_starting) {
   wait 3;
   level.player stopgestureviewmodel();
 
-  if(isDefined(level.var_d7d201ba) && isDefined(level.skipto_current_objective)) {
-    level.player flag::set(level.var_d7d201ba);
+  if(isDefined(level.str_player_start_flag) && isDefined(level.skipto_current_objective)) {
+    level.player flag::set(level.str_player_start_flag);
   }
 
   setlightingstate(1);
@@ -873,7 +873,7 @@ function function_62a6be7() {
   namespace_4ed3ce47::function_8d5b23ae();
 }
 
-function function_6bb0fd28(str_objective, b_starting, var_aa1a6455, player) {}
+function function_6bb0fd28(str_objective, b_starting, b_direct, player) {}
 
 function function_cb6a2e9b() {
   wait 7;

@@ -579,7 +579,7 @@ function round_start() {
   }
 
   level.realm = 1;
-  level.var_b48509f9 = 1;
+  level.star_rating = 1;
   level thread[[level.round_think_func]]();
 }
 
@@ -886,7 +886,7 @@ function round_think(restart = 0) {
       level clientfield::set("round_complete_num", level.round_number);
     }
 
-    level.var_b48509f9 = int(floor(level.round_number / 5) + 1);
+    level.star_rating = int(floor(level.round_number / 5) + 1);
 
     if(level flag::get("round_reset")) {
       if(isDefined(level.var_495d3112)) {

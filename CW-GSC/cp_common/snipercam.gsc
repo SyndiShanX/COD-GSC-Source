@@ -93,7 +93,7 @@ function private function_856a28c3(var_afe2c3af, einflictor, eattacker, idamage,
   }
 
   player flag::set("snipercam");
-  namespace_61e6d095::function_28027c42(#"sniper_cam");
+  scripted_widgets::function_28027c42(#"sniper_cam");
   player val::set(#"snipercam", "freezecontrols", 1);
   player val::set(#"snipercam", "takedamage", 0);
   player val::set(#"snipercam", "show_weapon_hud", 0);
@@ -101,8 +101,8 @@ function private function_856a28c3(var_afe2c3af, einflictor, eattacker, idamage,
   player val::set(#"snipercam", "show_compass", 0);
   player val::set(#"snipercam", "show_crosshair", 0);
   hint_tutorial::function_57a24ab5(0);
-  parms = function_83d35e98(player, player getEye(), player getplayerangles(), self, self.var_ca3bd64e);
-  player.var_35ee6252 = undefined;
+  parms = get_parms(player, player getEye(), player getplayerangles(), self, self.var_ca3bd64e);
+  player.holdingbreath = undefined;
   setslowmotion(1, 0.5, 0);
   self clientfield::set("start_snipercam", self.var_ca3bd64e);
   var_b487436a = 1.3 * 0.1;
@@ -130,5 +130,5 @@ function private function_856a28c3(var_afe2c3af, einflictor, eattacker, idamage,
   player show();
   self clientfield::set("stop_snipercam", 0);
   player flag::clear("snipercam");
-  namespace_61e6d095::function_4279fd02(#"sniper_cam");
+  scripted_widgets::function_4279fd02(#"sniper_cam");
 }

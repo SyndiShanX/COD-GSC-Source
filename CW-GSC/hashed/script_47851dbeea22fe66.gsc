@@ -56,7 +56,7 @@ function function_c1e0cc87(name, unused1, unused2, var_f80dfd0d = 0) {
 }
 
 function function_593b9cbb(&queue, flag) {
-  for(var_f53e8844 = 20; var_f53e8844 > 0; var_f53e8844--) {
+  for(pumps = 20; pumps > 0; pumps--) {
     if(queue.size > 0) {
       var_8d3272cf = queue[0];
       self clientfield::set(flag, var_8d3272cf.id);
@@ -73,7 +73,7 @@ function function_593b9cbb(&queue, flag) {
     }
 
     if(queue.size > 0) {
-      var_f53e8844 = 20;
+      pumps = 20;
       continue;
     }
   }

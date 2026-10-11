@@ -26,7 +26,7 @@ class class_1beae0: cluielem {
     cluielem::register_clientside("LUIelemCounter");
   }
 
-  function function_5d4dff63(localclientnum, value) {
+  function set_number(localclientnum, value) {
     set_data(localclientnum, "number", value);
   }
 
@@ -144,8 +144,8 @@ function set_blue(localclientnum, value) {
   [[self]] - > set_blue(localclientnum, value);
 }
 
-function function_5d4dff63(localclientnum, value) {
-  [[self]] - > function_5d4dff63(localclientnum, value);
+function set_number(localclientnum, value) {
+  [[self]] - > set_number(localclientnum, value);
 }
 
 function set_horizontal_alignment(localclientnum, value) {

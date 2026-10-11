@@ -440,7 +440,7 @@ function function_646f5566() {
     self.var_669f67cf++;
 
     if(self.var_669f67cf >= 8) {
-      self function_a0ef7452();
+      self vortex_explode();
       break;
     }
 
@@ -448,7 +448,7 @@ function function_646f5566() {
   }
 }
 
-function function_a0ef7452() {
+function vortex_explode() {
   self function_6a0ad00("<dev string:x4a>");
 
   if(!is_true(self.exploded)) {
@@ -469,14 +469,14 @@ function function_a0ef7452() {
     if(isPlayer(player)) {
       weapon1 = player.inventory.items[17 + 1];
       weapon2 = player.inventory.items[17 + 1 + 8 + 1];
-      var_5df29481 = player.inventory.items[17 + 1 + 8 + 1 + 8 + 1];
+      weapon3 = player.inventory.items[17 + 1 + 8 + 1 + 8 + 1];
 
       if(weapon1.var_627c698b.altweapon.rootweapon === damage_weapon.rootweapon) {
         damage_weapon = weapon1.var_627c698b.altweapon;
       } else if(weapon2.var_627c698b.altweapon.rootweapon === damage_weapon.rootweapon) {
         damage_weapon = weapon2.var_627c698b.altweapon;
-      } else if(var_5df29481.var_627c698b.altweapon.rootweapon === damage_weapon.rootweapon) {
-        damage_weapon = var_5df29481.var_627c698b.altweapon;
+      } else if(weapon3.var_627c698b.altweapon.rootweapon === damage_weapon.rootweapon) {
+        damage_weapon = weapon3.var_627c698b.altweapon;
       }
     }
 
@@ -564,14 +564,14 @@ function function_70240b1b() {
     if(isPlayer(player)) {
       weapon1 = player.inventory.items[17 + 1];
       weapon2 = player.inventory.items[17 + 1 + 8 + 1];
-      var_5df29481 = player.inventory.items[17 + 1 + 8 + 1 + 8 + 1];
+      weapon3 = player.inventory.items[17 + 1 + 8 + 1 + 8 + 1];
 
       if(weapon1.var_627c698b.altweapon.rootweapon === damage_weapon.rootweapon) {
         damage_weapon = weapon1.var_627c698b.altweapon;
       } else if(weapon2.var_627c698b.altweapon.rootweapon === damage_weapon.rootweapon) {
         damage_weapon = weapon2.var_627c698b.altweapon;
-      } else if(var_5df29481.var_627c698b.altweapon.rootweapon === damage_weapon.rootweapon) {
-        damage_weapon = var_5df29481.var_627c698b.altweapon;
+      } else if(weapon3.var_627c698b.altweapon.rootweapon === damage_weapon.rootweapon) {
+        damage_weapon = weapon3.var_627c698b.altweapon;
       }
     }
 
@@ -662,8 +662,8 @@ function function_bdb8126a() {
 
   self function_f9b43587();
   entitynum = self getentitynumber();
-  var_6f4262ed = level.var_1a4cc228[self.aitype];
-  self setModel(var_6f4262ed[entitynum % var_6f4262ed.size]);
+  a_characters = level.var_1a4cc228[self.aitype];
+  self setModel(a_characters[entitynum % a_characters.size]);
 
   if(isDefined(self.gib_state)) {
     gibserverutils::function_96bedd91(self);

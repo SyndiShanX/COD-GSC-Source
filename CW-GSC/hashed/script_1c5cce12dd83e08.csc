@@ -130,7 +130,7 @@ function function_9f72eb8b(localclientnum, oldval, newval, bnewent, binitialsnap
   self endon(#"death");
   self util::waittill_dobj(bwastimejump);
   earthquake(bwastimejump, 0.3, 2, self.origin, 2500);
-  function_36e4ebd4(bwastimejump, #"hash_28f3f7b037cdb4bc");
+  function_36e4ebd4(bwastimejump, #"zm_mansion_boss_intro_roar");
 
   if(isDefined(self) && isDefined(bwastimejump)) {
     self playSound(bwastimejump, #"hash_6916591c817c7bf8");

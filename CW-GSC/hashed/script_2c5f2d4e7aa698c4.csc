@@ -152,18 +152,18 @@ function function_b5557b14(localclientnum, oldval, newval, bnewent, binitialsnap
       str_model = #"hash_3408d07d4023960a";
       break;
     case 2:
-      str_model = #"hash_22c3f2b14a8af39";
+      str_model = #"p9_sur_machine_computer_screen_no_trial";
       break;
     case 3:
-      str_model = #"hash_78d1631457df7faa";
+      str_model = #"p9_sur_machine_computer_screen_no_intel_trial";
       break;
     case 4:
-      str_model = #"hash_51840445e2753066";
+      str_model = #"p9_sur_machine_computer_screen_no_document";
       break;
     case 5:
       var_d5fa8477 = self zm_intel::function_2bcfd899(fieldname, #"hash_71c51f24f7f3037d");
       str_model = zm_intel::function_12e3769(var_d5fa8477);
-      str_model = isDefined(str_model) ? str_model : #"hash_51840445e2753066";
+      str_model = isDefined(str_model) ? str_model : #"p9_sur_machine_computer_screen_no_document";
 
       iprintlnbold("<dev string:x38>");
 
@@ -185,7 +185,7 @@ function function_b5557b14(localclientnum, oldval, newval, bnewent, binitialsnap
     case 9:
       var_d5fa8477 = self zm_intel::function_2bcfd899(fieldname, #"hash_71c51f24f7f3037d");
       str_model = zm_intel::function_12e3769(var_d5fa8477);
-      str_model = isDefined(str_model) ? str_model : #"hash_30acea553928ba42";
+      str_model = isDefined(str_model) ? str_model : #"p9_sur_machine_computer_screen_no_recv_transmc";
 
       iprintlnbold("<dev string:x64>");
 

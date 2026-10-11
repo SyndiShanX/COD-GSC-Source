@@ -55,7 +55,7 @@ function private preinit() {
   callback::on_connect(&on_player_connect);
   callback::on_disconnect(&on_player_disconnect);
   callback::on_spawned(&on_spawned);
-  callback::on_disconnect(&function_4d3cb10);
+  callback::on_disconnect(&check_self_revive_for_hotjoin);
   callback::on_ai_killed(&on_ai_killed);
   callback::on_item_pickup(&on_item_pickup);
   callback::on_player_killed(&on_player_killed);
@@ -332,7 +332,7 @@ function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, v
   self thread auto_revive_on_notify();
 
   if(self function_1a2fa922()) {
-    self playSound(#"hash_19b37c3454f86a4a");
+    self playSound(#"zmb_player_down_alert");
   }
 
   self thread function_3ddb9d13();
@@ -984,9 +984,9 @@ function is_suiciding(revivee) {
   return self useButtonPressed() && can_suicide();
 }
 
-function function_4d3cb10() {
-  level notify(#"hash_ec82a2f41cadbea");
-  level endon(#"hash_ec82a2f41cadbea");
+function check_self_revive_for_hotjoin() {
+  level notify(#"notify_check_self_revive_for_hotjoin");
+  level endon(#"notify_check_self_revive_for_hotjoin");
   var_9156a121 = 0;
   var_972a361b = 0;
   waitframe(1);
@@ -1055,7 +1055,7 @@ function function_b7c101fa() {
   self.var_308dc243 = 0;
   self.var_d66589da = int(zombie_utility::get_zombie_var(#"self_revive_count_solo"));
   self.var_5d4c5daf = int(zombie_utility::get_zombie_var(#"self_revive_count_coop"));
-  level thread function_4d3cb10();
+  level thread check_self_revive_for_hotjoin();
   self waittill(#"spawned");
 
   if(!zm_utility::is_survival()) {
@@ -1975,7 +1975,7 @@ function on_ai_killed(s_params) {
 
     if(e_player namespace_791d0451::function_56cedda7(#"hash_504b3df717f88c4e")) {
       e_player namespace_791d0451::function_4c1d0e25(#"hash_504b3df717f88c4e");
-      e_player playsoundtoplayer(#"hash_35072c2a43dd40ad", e_player);
+      e_player playsoundtoplayer(#"evt_qr_tier_5", e_player);
     }
 
     e_player zm_stats::increment_challenge_stat(#"hash_57991934859bfc0");
@@ -2008,14 +2008,14 @@ function function_94cd8c0f() {
   return false;
 }
 
-function function_800268ed(var_4a13f016) {
-  return isPlayer(var_4a13f016.var_1ff8de20);
+function function_800268ed(e_clone) {
+  return isPlayer(e_clone.var_1ff8de20);
 }
 
 function function_2520e865() {
-  var_4a13f016 = self.var_dc4f101;
+  e_clone = self.var_dc4f101;
 
-  if(isDefined(var_4a13f016) && isDefined(var_4a13f016.revivetrigger) && (is_true(var_4a13f016.revivetrigger.beingrevived) || is_true(var_4a13f016.var_d1e03242))) {
+  if(isDefined(e_clone) && isDefined(e_clone.revivetrigger) && (is_true(e_clone.revivetrigger.beingrevived) || is_true(e_clone.var_d1e03242))) {
     return true;
   }
 

@@ -57,7 +57,7 @@ function new_hud(hud_name, msg, x, y, scale) {
   return hud;
 }
 
-function function_7cafeca(hud_name) {
+function remove_hud(hud_name) {
   if(!isDefined(level.hud_array[hud_name])) {
     return;
   }
@@ -65,13 +65,13 @@ function function_7cafeca(hud_name) {
   huds = level.hud_array[hud_name];
 
   for(i = 0; i < huds.size; i++) {
-    function_2a064f4f(huds[i]);
+    destroy_hud(huds[i]);
   }
 
   level.hud_array[hud_name] = undefined;
 }
 
-function function_2a064f4f(hud) {
+function destroy_hud(hud) {
   if(isDefined(hud)) {
     hud destroy();
   }

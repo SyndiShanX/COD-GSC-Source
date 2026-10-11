@@ -113,14 +113,14 @@ function function_5a395617() {
     }
   }
 
-  level.var_19cf69db = var_7bb83649;
+  level.collectible_table = var_7bb83649;
   level.var_997b5425 = var_bdf7b99d;
 }
 
-function function_28bfb57e(mission_name = savegame::function_8136eb5a()) {
+function function_28bfb57e(mission_name = savegame::get_mission_name()) {
   var_1494351b = [];
 
-  foreach(collectible in level.var_19cf69db) {
+  foreach(collectible in level.collectible_table) {
     if(collectible.UnlockMap == mission_name) {
       if(!isDefined(var_1494351b)) {
         var_1494351b = [];
@@ -172,55 +172,55 @@ function function_ab921f3d(var_2a51713) {
   return 0;
 }
 
-function function_316c48a3(var_d13a0347, var_28c9f917, var_bfb1faa4 = 1) {
+function function_316c48a3(var_d13a0347, collectible_index, var_bfb1faa4 = 1) {
   assert(isDefined(var_d13a0347));
-  assert(isDefined(var_28c9f917));
+  assert(isDefined(collectible_index));
   player = getPlayers()[0];
   assert(isPlayer(player));
 
-  if(var_bfb1faa4 == function_1fe63475(var_d13a0347, var_28c9f917)) {
+  if(var_bfb1faa4 == function_1fe63475(var_d13a0347, collectible_index)) {
     return;
   }
 
-  player stats::set_stat(#"mapdata", var_d13a0347, #"evidence", var_28c9f917, var_bfb1faa4);
-  player stats::set_stat(#"mapdata", var_d13a0347, #"hash_42b984266100b32", var_28c9f917, var_bfb1faa4);
+  player stats::set_stat(#"mapdata", var_d13a0347, #"evidence", collectible_index, var_bfb1faa4);
+  player stats::set_stat(#"mapdata", var_d13a0347, #"hash_42b984266100b32", collectible_index, var_bfb1faa4);
   uploadstats(player);
 }
 
-function function_1fe63475(var_d13a0347, var_28c9f917) {
+function function_1fe63475(var_d13a0347, collectible_index) {
   assert(isDefined(var_d13a0347));
-  assert(isDefined(var_28c9f917));
+  assert(isDefined(collectible_index));
   player = getPlayers()[0];
   assert(isPlayer(player));
-  isunlocked = is_true(player stats::get_stat(#"mapdata", var_d13a0347, #"evidence", var_28c9f917));
+  isunlocked = is_true(player stats::get_stat(#"mapdata", var_d13a0347, #"evidence", collectible_index));
   return isunlocked;
 }
 
-function function_ee216b9e(var_d13a0347, var_28c9f917) {
+function function_ee216b9e(var_d13a0347, collectible_index) {
   assert(isDefined(var_d13a0347));
-  assert(isDefined(var_28c9f917));
+  assert(isDefined(collectible_index));
   player = getPlayers()[0];
   assert(isPlayer(player));
-  isnew = is_true(player stats::get_stat(#"mapdata", var_d13a0347, #"hash_42b984266100b32", var_28c9f917));
+  isnew = is_true(player stats::get_stat(#"mapdata", var_d13a0347, #"hash_42b984266100b32", collectible_index));
   return isnew;
 }
 
-function function_55fb73ea(var_d13a0347, var_28c9f917) {
+function function_55fb73ea(var_d13a0347, collectible_index) {
   assert(isDefined(var_d13a0347));
-  assert(isDefined(var_28c9f917));
+  assert(isDefined(collectible_index));
   player = getPlayers()[0];
   assert(isPlayer(player));
 
-  if(!function_ee216b9e(var_d13a0347, var_28c9f917)) {
+  if(!function_ee216b9e(var_d13a0347, collectible_index)) {
     return;
   }
 
-  player stats::set_stat(#"mapdata", var_d13a0347, #"hash_42b984266100b32", var_28c9f917, 0);
+  player stats::set_stat(#"mapdata", var_d13a0347, #"hash_42b984266100b32", collectible_index, 0);
   uploadstats(player);
 }
 
-function function_e8d5de2c(mission_name = savegame::function_8136eb5a()) {
-  foreach(collectible in level.var_19cf69db) {
+function function_e8d5de2c(mission_name = savegame::get_mission_name()) {
+  foreach(collectible in level.collectible_table) {
     if(collectible.UnlockMap == mission_name) {
       return true;
     }
@@ -230,13 +230,13 @@ function function_e8d5de2c(mission_name = savegame::function_8136eb5a()) {
 }
 
 function function_9f455dbc() {
-  return level.var_19cf69db.size;
+  return level.collectible_table.size;
 }
 
-function function_9f976c54(mission_name = savegame::function_8136eb5a()) {
+function function_9f976c54(mission_name = savegame::get_mission_name()) {
   var_80fc6600 = 0;
 
-  foreach(collectible in level.var_19cf69db) {
+  foreach(collectible in level.collectible_table) {
     if(collectible.UnlockMap == mission_name) {
       var_80fc6600++;
     }
@@ -252,7 +252,7 @@ function function_99c4aa1(var_d13a0347) {
 
   var_80fc6600 = 0;
 
-  foreach(collectible in level.var_19cf69db) {
+  foreach(collectible in level.collectible_table) {
     if(collectible.var_430d1d6a == var_d13a0347) {
       var_80fc6600++;
     }
@@ -264,7 +264,7 @@ function function_99c4aa1(var_d13a0347) {
 function function_ee839c3b() {
   var_9a849009 = 0;
 
-  foreach(collectible in level.var_19cf69db) {
+  foreach(collectible in level.collectible_table) {
     if(is_true(function_ab921f3d(collectible.var_f3575c58))) {
       var_9a849009++;
     }
@@ -273,10 +273,10 @@ function function_ee839c3b() {
   return var_9a849009;
 }
 
-function function_7be39f53(mission_name = savegame::function_8136eb5a()) {
+function function_7be39f53(mission_name = savegame::get_mission_name()) {
   var_9a849009 = 0;
 
-  foreach(collectible in level.var_19cf69db) {
+  foreach(collectible in level.collectible_table) {
     if(collectible.UnlockMap == mission_name) {
       if(is_true(function_ab921f3d(collectible.var_f3575c58))) {
         var_9a849009++;
@@ -294,7 +294,7 @@ function function_5d5166dd(var_d13a0347) {
 
   var_9a849009 = 0;
 
-  foreach(collectible in level.var_19cf69db) {
+  foreach(collectible in level.collectible_table) {
     if(collectible.var_430d1d6a == var_d13a0347) {
       if(is_true(function_ab921f3d(collectible.var_f3575c58))) {
         var_9a849009++;
@@ -310,24 +310,24 @@ function function_d06c5a39() {
   self prompts::function_309bf7c2(#"hash_1ca962038953ec7a");
 }
 
-function function_6cd091d2(var_2a51713, var_c05d6) {
+function function_6cd091d2(var_2a51713, splash_delay) {
   if(is_true(function_ab921f3d(var_2a51713))) {
     return;
   }
 
   function_cb8ff1b9(var_2a51713, 1);
   function_5b42ccea();
-  collectible = level.var_19cf69db[var_2a51713];
-  var_4bf53b01 = collectible.var_34754728;
+  collectible = level.collectible_table[var_2a51713];
+  var_4bf53b01 = collectible.unlocktext;
   var_76e98c1f = collectible.var_444770d3;
   var_2a015e7e = function_5d5166dd(collectible.var_430d1d6a);
   var_f8f020e3 = function_99c4aa1(collectible.var_430d1d6a);
-  thread namespace_a43d1663::init(var_4bf53b01, var_76e98c1f, var_2a015e7e, var_f8f020e3, var_c05d6);
+  thread namespace_a43d1663::init(var_4bf53b01, var_76e98c1f, var_2a015e7e, var_f8f020e3, splash_delay);
 }
 
 function private function_cb8ff1b9(var_2a51713, is_unlocked) {
   function_c57acbc9(var_2a51713, is_unlocked);
-  collectible = level.var_19cf69db[var_2a51713];
+  collectible = level.collectible_table[var_2a51713];
   function_316c48a3(collectible.var_430d1d6a, collectible.index, is_unlocked);
 }
 
@@ -351,13 +351,13 @@ function function_f539a1fa(collectible, params) {
 }
 
 function function_a66b8474() {
-  foreach(id, collectible in level.var_19cf69db) {
+  foreach(id, collectible in level.collectible_table) {
     function_cb8ff1b9(id, 0);
   }
 }
 
 function function_4e4a7021() {
-  foreach(id, collectible in level.var_19cf69db) {
+  foreach(id, collectible in level.collectible_table) {
     function_cb8ff1b9(id, 1);
   }
 }

@@ -58,12 +58,12 @@ function function_fa8186e9() {
   level flag::wait_till(#"all_players_spawned");
   mdl_door = util::spawn_model("p9_duga_checkpoint_gate", s_org.origin, s_org.angles);
   mdl_door.animname = "gate_left";
-  var_1ac40948 = util::spawn_model("veh_t9_civ_us_truck_4x4_cp_duga", s_org.origin, s_org.angles);
-  var_1ac40948.animname = "adler_truck";
+  mdl_truck = util::spawn_model("veh_t9_civ_us_truck_4x4_cp_duga", s_org.origin, s_org.angles);
+  mdl_truck.animname = "adler_truck";
   mdl_door useanimtree("generic");
-  var_1ac40948 useanimtree("generic");
+  mdl_truck useanimtree("generic");
   mdl_door animation::last_frame("t9_duga_intro_dt_gate_idle", s_org);
-  var_1ac40948 animation::last_frame("t9_duga_intro_dt_truck_idle", s_org);
+  mdl_truck animation::last_frame("t9_duga_intro_dt_truck_idle", s_org);
 }
 
 function function_73f39397() {
@@ -113,7 +113,7 @@ function function_d64a7119() {
 
 function function_60a583d8(str_objective, b_starting) {
   level.var_c0c469ea = 2.5;
-  level battlechatter::function_2ab9360b(0);
+  level battlechatter::bc_allow(0);
   level thread function_7de1bd9d();
   var_5a17d5a0 = getEnt("lazar", "targetname");
   var_ad36234a = getEnt("park", "targetname");
@@ -124,30 +124,30 @@ function function_60a583d8(str_objective, b_starting) {
   namespace_82bfe441::fade(1, "FadeImmediate");
   e_player takeallweapons();
   var_9e22157a = getweapon(#"ar_standard_t9", array("stalker"));
-  var_d9338b9c = getweapon(#"pistol_semiauto_t9", array("extbarrel", "fastreload"));
+  w_s = getweapon(#"pistol_semiauto_t9", array("extbarrel", "fastreload"));
   e_player giveweapon(var_9e22157a);
   e_player givemaxammo(var_9e22157a);
-  e_player giveweapon(var_d9338b9c);
-  e_player givemaxammo(var_d9338b9c);
+  e_player giveweapon(w_s);
+  e_player givemaxammo(w_s);
   e_player shoulddoinitialweaponraise(var_9e22157a, 0);
   e_player switchtoweaponimmediate(var_9e22157a);
   level function_1a0d08a6();
   level thread namespace_e1ccb37b::function_83409f31(level.var_c0c469ea);
   level thread function_3047261f();
   clientfield::set("stream_intro_truck", 1);
-  level namespace_ac5221d7::function_ed760ecb("adler");
-  level namespace_ac5221d7::function_ed760ecb("woods");
-  level namespace_ac5221d7::function_ed760ecb("mason");
+  level namespace_ac5221d7::hero_setup("adler");
+  level namespace_ac5221d7::hero_setup("woods");
+  level namespace_ac5221d7::hero_setup("mason");
   a_ar = getweapon(#"ar_accurate_t9");
   level.adler hms_util::function_65d14a19(a_ar);
   a_actors = [level.woods, level.mason];
 
   if(isDefined(level.var_deda09e)) {
-    level namespace_ac5221d7::function_ed760ecb(namespace_ac5221d7::function_7b37895());
+    level namespace_ac5221d7::hero_setup(namespace_ac5221d7::function_7b37895());
     array::add(a_actors, level.var_c1881cdd);
   }
 
-  e_player flag::set(level.var_d7d201ba);
+  e_player flag::set(level.str_player_start_flag);
   scene::function_d0d7d9f7("scene_duga_intro", &namespace_ac5221d7::function_6f94ced5);
   a_actors = [level.woods, level.mason];
 
@@ -171,20 +171,20 @@ function function_60a583d8(str_objective, b_starting) {
 
   if(s_result._notify === "flag_ambush_signaled") {
     level flag::set("flag_comprimised_complete");
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
     return;
   }
 
   function_73f39397();
   level.var_9706ce90 = 1;
   level namespace_ac5221d7::function_ae1eba32();
-  skipto::function_f02f0c63();
-  skipto::function_1c2dfc20();
+  skipto::set_final_level();
+  skipto::level_completed();
 }
 
 function function_3047261f() {
   level waittill(#"hash_3eb5622b1b945f73");
-  level thread globallogic_ui::function_7bc0e4b9(0);
+  level thread globallogic_ui::do_chyron_text(0);
 }
 
 function function_e240f461() {

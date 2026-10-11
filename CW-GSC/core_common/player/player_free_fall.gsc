@@ -31,29 +31,29 @@ function private preinit() {
   level thread function_1fc427dc();
 }
 
-function function_a0950b54(var_23c2e47f) {
+function function_a0950b54(event_params) {
   self val::set(#"player_free_fall", "show_weapon_hud", 0);
   self callback::function_d8abfc3d(#"death", &function_c76a70ab);
   self callback::function_d8abfc3d(#"on_player_laststand", &function_18e58cf4);
 }
 
-function function_c75bd5cb(var_23c2e47f) {
+function function_c75bd5cb(event_params) {
   self val::set(#"player_free_fall", "show_weapon_hud", 0);
 }
 
-function function_f99c2453(var_23c2e47f) {
+function function_f99c2453(event_params) {
   self val::reset(#"player_free_fall", "show_weapon_hud");
   self callback::function_52ac9652(#"death", &function_c76a70ab);
   self callback::function_52ac9652(#"on_player_laststand", &function_18e58cf4);
 }
 
-function function_c76a70ab(var_23c2e47f) {
+function function_c76a70ab(event_params) {
   self val::reset(#"player_free_fall", "show_weapon_hud");
   self callback::function_52ac9652(#"death", &function_c76a70ab);
   self callback::function_52ac9652(#"on_player_laststand", &function_18e58cf4);
 }
 
-function function_18e58cf4(var_23c2e47f) {
+function function_18e58cf4(event_params) {
   self val::reset(#"player_free_fall", "show_weapon_hud");
   self callback::function_52ac9652(#"death", &function_c76a70ab);
   self callback::function_52ac9652(#"on_player_laststand", &function_18e58cf4);
@@ -116,12 +116,12 @@ function function_7705a7fc(fall_time, velocity) {
 
   self function_b02c52b();
   wait fall_time;
-  self thread function_a1fa2219();
+  self thread pull_chute();
 }
 
 function parachutemidairdeathwatcher() {}
 
-function function_a1fa2219() {
+function pull_chute() {
   self endon(#"death", #"disconnect");
   self thread function_2979b1be(3);
   self waittill(#"skydive_deployparachute");

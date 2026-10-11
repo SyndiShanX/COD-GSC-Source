@@ -180,7 +180,7 @@ function processscoreevent(event, player, victim, weapon, playersaffected, var_d
       var_de0c8b34 = newgunxp - gunxp;
 
       if(var_de0c8b34 > 0) {
-        level thread telemetry::function_18135b72(#"hash_b88b6d2e0028e13", {
+        level thread telemetry::function_18135b72(#"callback_update_weapon_stats", {
           #player: player, #weapon: weapon, #statname: #"xpearned", #value: var_de0c8b34, #weaponpickedup: pickedup
         });
       }

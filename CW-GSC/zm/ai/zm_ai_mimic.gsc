@@ -104,7 +104,7 @@ function function_76433e31() {
   self.var_f6fd2062 = &function_c8444dac;
   self.closest_player_override = &zm_utility::function_3d70ba7a;
   self.melee_distance_check = &namespace_e292b080::function_e8983bf3;
-  self callback::function_d8abfc3d(#"hash_484127e0cbd8f8cb", &function_7c591227);
+  self callback::function_d8abfc3d(#"on_entity_revealed", &on_entity_revealed);
   aiutility::addaioverridedamagecallback(self, &function_fe78c504);
   level thread zm_spawner::zombie_death_event(self);
 }
@@ -117,9 +117,9 @@ function function_820e5ac3() {
   self.var_154478e3 = 8192;
   self callback::function_d8abfc3d(#"hash_29cb63a7ebb5d699", &function_5c2b66f6);
 
-  if(!is_true(self.var_2ca2d270) && is_true(self.var_7a5e475)) {
+  if(!is_true(self.hidden_in_prop) && is_true(self.var_7a5e475)) {
     self function_8b6bfa1();
-  } else if(!is_true(self.var_2ca2d270)) {
+  } else if(!is_true(self.hidden_in_prop)) {
     self function_c0b09ab0();
   }
 
@@ -142,7 +142,7 @@ function function_c8444dac(player) {
   return zm_utility::is_player_valid(player, 1, 0, 0, 0);
 }
 
-function function_7c591227(params) {
+function on_entity_revealed(params) {
   self.b_ignore_cleanup = undefined;
   self val::reset_all(#"hash_195d34d606e6ced8");
   self clientfield::set("mimic_show_on_minimap", 0);
@@ -573,9 +573,9 @@ function function_218c4ce8() {
       instance = location.instances[#"loot_pods"];
 
       if(isDefined(instance.a_models) && isarray(instance.a_models)) {
-        foreach(var_37180a9f in instance.a_models) {
+        foreach(e_pod in instance.a_models) {
           var_926eb7ac = {
-            #lure_prop_type: 2, #prop: var_37180a9f, #angles: var_37180a9f.angles, #origin: var_37180a9f.origin
+            #lure_prop_type: 2, #prop: e_pod, #angles: e_pod.angles, #origin: e_pod.origin
           };
           level.var_6e175eb[level.var_6e175eb.size] = var_926eb7ac;
         }
@@ -601,7 +601,7 @@ function function_218c4ce8() {
 }
 
 function private function_8fa4773e(vehicle, player) {
-  if(is_true(vehicle.var_2e8a136f)) {
+  if(is_true(vehicle.is_mimic)) {
     mimic_prop_spawn::function_95f8029e(player);
     return 0;
   }
@@ -711,8 +711,8 @@ function private function_c41a996d(einflictor, eattacker, idamage, idflags, smea
   };
 }
 
-function function_f29dd47(var_d0f07bcd, var_3b5d9ccd) {
-  zone_name = zm_zonemgr::function_49d8d29f(var_d0f07bcd, 1);
+function function_f29dd47(prop_origin, var_3b5d9ccd) {
+  zone_name = zm_zonemgr::function_49d8d29f(prop_origin, 1);
 
   if(!isDefined(zone_name)) {
     return undefined;

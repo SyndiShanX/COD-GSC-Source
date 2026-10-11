@@ -28,7 +28,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_5a917022;
+#namespace doa_bonus_room;
 
 function init() {
   clientfield::register("world", "set_bonus_room", 1, 5, "int", &function_40356127, 0, 0);
@@ -36,17 +36,17 @@ function init() {
 }
 
 function function_32d5e898(localclientnum) {
-  level.doa.var_8f6ccf63 = [];
+  level.doa.bonus_rooms = [];
   level.doa.var_938e4f08 = 0;
   rooms = struct::get_array("zombietron_bonus_room", "targetname");
 
   foreach(room in rooms) {
     if(isDefined(room.script_parameters)) {
       args = strtok(room.script_parameters, ";");
-      room.var_899e2128 = int(args[0]);
+      room.freecam = int(args[0]);
     }
 
-    level.doa.var_8f6ccf63[room.script_noteworthy] = room;
+    level.doa.bonus_rooms[room.script_noteworthy] = room;
   }
 }
 
@@ -113,30 +113,30 @@ function function_a7ff1fc3(localclientnum) {
   }
 
   if(isDefined(player.doa.var_903d75b1)) {
-    player.doa.cameramode = player namespace_ac2a80f5::function_f7736714(localclientnum, player.doa.var_903d75b1);
+    player.doa.cameramode = player doa_camera::function_f7736714(localclientnum, player.doa.var_903d75b1);
   } else {
     player.doa.cameramode = 1;
   }
 
-  player namespace_ac2a80f5::changecamera(player.doa.cameramode);
-  namespace_9fc66ac::function_a77649db(0);
+  player doa_camera::changecamera(player.doa.cameramode);
+  doa_sound::function_a77649db(0);
   namespace_4dae815d::function_b6e8ef46();
 }
 
 function function_d2e02ee(localclientnum, name) {
-  assert(isDefined(level.doa.var_8f6ccf63[name]));
-  room = level.doa.var_8f6ccf63[name];
+  assert(isDefined(level.doa.bonus_rooms[name]));
+  room = level.doa.bonus_rooms[name];
   player = function_5c10bd79(localclientnum);
 
   if(!isDefined(player.doa)) {
     return;
   }
 
-  if(!is_true(room.var_899e2128)) {
+  if(!is_true(room.freecam)) {
     player.doa.cameramode = 7;
   }
 
   level.doa.var_b73cc08.origin = room.origin;
   level.doa.var_b73cc08.angles = room.angles;
-  namespace_9fc66ac::function_a77649db(1, name);
+  doa_sound::function_a77649db(1, name);
 }

@@ -19,12 +19,12 @@ function init_shared() {
     level.var_ac78d00e = {};
   }
 
-  weaponobjects::function_e6400478(#"satchel_charge", &function_a8a4341, 1);
+  weaponobjects::function_e6400478(#"satchel_charge", &createsatchelwatcher, 1);
   callback::on_player_killed(&onplayerkilled);
   clientfield::register("missile", "satchelChargeWarning", 1, 1, "int");
 }
 
-function function_a8a4341(watcher) {
+function createsatchelwatcher(watcher) {
   if(sessionmodeiszombiesgame()) {
     watcher.onspawnretrievetriggers = &function_4ba658e5;
     watcher.deleteonplayerspawn = 0;
@@ -40,12 +40,12 @@ function function_a8a4341(watcher) {
   watcher.hackertoolradius = level.equipmenthackertoolradius;
   watcher.hackertooltimems = level.equipmenthackertooltimems;
   watcher.ondetonatecallback = &function_b96af076;
-  watcher.onspawn = &function_af3365b5;
+  watcher.onspawn = &satchelspawn;
   watcher.onstun = &weaponobjects::weaponstun;
   watcher.stuntime = 1;
   watcher.ownergetsassist = 1;
   watcher.detonatestationary = 1;
-  watcher.detonationdelay = getdvarfloat(#"hash_6639441fa6223b36", 0);
+  watcher.detonationdelay = getdvarfloat(#"scr_satchel_detonation_delay", 0);
   watcher.immunespecialty = "specialty_immunetriggerc4";
   watcher.var_296e14ab = 1;
   watcher.var_2fd8b883 = 1;
@@ -55,10 +55,10 @@ function function_a8a4341(watcher) {
   }
 }
 
-function function_af3365b5(watcher, owner) {
+function satchelspawn(watcher, owner) {
   self endon(#"death", #"hacked", #"detonating");
   self thread weaponobjects::onspawnuseweaponobject(watcher, owner);
-  self function_619a5c20();
+  self pingable();
 
   if(isDefined(owner)) {
     owner stats::function_e24eec31(self.weapon, #"used", 1);
@@ -80,7 +80,7 @@ function function_af3365b5(watcher, owner) {
     owner.var_1e593689[owner.var_1e593689.size] = self;
   }
 
-  self.var_3f9bd15 = &function_9b8337c3;
+  self.var_3f9bd15 = &onvehiclekilled;
 
   if(function_a2f3d962()) {
     self thread function_939d8a36(watcher);
@@ -347,7 +347,7 @@ function onplayerkilled(params) {
   }
 }
 
-function function_9b8337c3(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, occupants) {
+function onvehiclekilled(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, occupants) {
   if(isDefined(occupants.size) && occupants.size > 0) {
     foreach(occupant in occupants) {
       if(psoffsettime util::isenemyplayer(occupant)) {

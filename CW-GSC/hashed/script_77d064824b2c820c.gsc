@@ -58,10 +58,10 @@ function function_bb5a40cc(str_objective, b_starting) {
   level thread function_20d4e36c();
   level thread function_2bd1a728();
   level flag::wait_till("flg_facades_end");
-  skipto::function_4e3ab877(b_starting);
+  skipto::objective_completed(b_starting);
 }
 
-function function_7c8934a0(str_objective, b_starting, var_aa1a6455, player) {
+function function_7c8934a0(str_objective, b_starting, b_direct, player) {
   level flag::set("flg_facades_dropdown");
 }
 
@@ -80,7 +80,7 @@ function function_c691e305(var_630bb80a) {
   }
 
   objectives::scripted("obj_courtyard_main", undefined, #"hash_34b5d949ba5c2a1b", 0);
-  level breadcrumb::function_61037c6c(var_630bb80a);
+  level breadcrumb::start_chain(var_630bb80a);
   level flag::wait_till("flg_storage_end");
   objectives::complete("obj_courtyard_main");
 }
@@ -95,7 +95,7 @@ function ai_t8_zm_twrs_tgr_stalk_turn_l_90() {
   level.woods ai::set_behavior_attribute("vignette_mode", "fast");
   level.woods ai::set_behavior_attribute("disablepeek", 1);
   level.woods ai::set_behavior_attribute("disablelean", 1);
-  level.woods battlechatter::function_2ab9360b(0);
+  level.woods battlechatter::bc_allow(0);
   level.player util::blend_movespeedscale(0.9, 1);
   level.woods ai::set_behavior_attribute("sprint", 1);
   level.woods.forcesprint = 1;
@@ -142,7 +142,7 @@ function ai_t8_zm_twrs_tgr_stalk_turn_l_90() {
   level.woods ai::set_behavior_attribute("sprint", 0);
   level.woods.forcesprint = 0;
   level.woods function_9ae1c50();
-  level.woods battlechatter::function_2ab9360b(1);
+  level.woods battlechatter::bc_allow(1);
 }
 
 function function_659aef1f() {
@@ -181,7 +181,7 @@ function function_20d4e36c() {
   level.vh_town_square_apc.aim_only_no_shooting = 1;
   level namespace_fc3e8cb::function_92dea087("flg_facades_start", "flg_facades_dropdown");
   level flag::set("flg_facades_intro_apc");
-  level.vh_town_square_apc.var_21c17c08 thread namespace_4bd68414::function_75a9fa51();
+  level.vh_town_square_apc.loudspeaker thread namespace_4bd68414::function_75a9fa51();
   level.vh_town_square_apc.aim_only_no_shooting = undefined;
   level.vh_town_square_apc thread namespace_fc3e8cb::function_a57ce26d(var_10a7296c, "end_facades_intro_fake_shooting");
   level.vh_town_square_apc turret::function_aecc6bed(var_10a7296c, 1, 0, 0.15);
@@ -222,7 +222,7 @@ function function_e8e989b6() {
 function function_9a4d45a4() {
   level namespace_fc3e8cb::function_92dea087("flg_facades_corridor_midpoint", "flg_facades_destruction_2_play");
   level flag::set("flg_facades_destruction_scene_2");
-  level.vh_town_square_apc.var_21c17c08 thread namespace_4bd68414::function_c7c2eb9c();
+  level.vh_town_square_apc.loudspeaker thread namespace_4bd68414::function_c7c2eb9c();
   s_scene = struct::get("s_facades_destruction_scene_2", "targetname");
   s_scene thread scene::play_from_time("play");
   s_scene function_8cc9e7c2();
@@ -269,10 +269,10 @@ function function_8cc9e7c2(var_43182387 = 0) {
   w_weapon = turret::get_weapon(0);
   s_turret = level.vh_town_square_apc.a_turrets[0];
   a_targets = function_63c5e2dc(var_f487c534);
-  var_ba051ef5 = 0;
+  n_target_index = 0;
 
   if(a_targets.size) {
-    level.vh_town_square_apc turret::set_target(a_targets[var_ba051ef5], undefined, 0);
+    level.vh_town_square_apc turret::set_target(a_targets[n_target_index], undefined, 0);
   }
 
   while(true) {
@@ -285,10 +285,10 @@ function function_8cc9e7c2(var_43182387 = 0) {
     v_end_pos = var_f487c534 gettagorigin(return_val.tag_name);
     level.vh_town_square_apc hms_util::function_b5da96ca(v_end_pos, 0, 0);
     earthquake(0.3, 0.3, v_end_pos, 600);
-    var_ba051ef5++;
+    n_target_index++;
 
-    if(var_ba051ef5 < a_targets.size) {
-      level.vh_town_square_apc turret::set_target(a_targets[var_ba051ef5], undefined, 0);
+    if(n_target_index < a_targets.size) {
+      level.vh_town_square_apc turret::set_target(a_targets[n_target_index], undefined, 0);
     }
 
     var_51b8d0b4 = distance2dsquared(level.player.origin, v_end_pos);
@@ -377,10 +377,10 @@ function rooftops_main(str_objective, b_starting) {
   level thread function_999d0913();
   level thread function_b3e9c19d();
   level flag::wait_till("flg_rooftops_end");
-  skipto::function_4e3ab877(str_objective);
+  skipto::objective_completed(str_objective);
 }
 
-function function_21fbbfb2(str_objective, b_starting, var_aa1a6455, player) {
+function function_21fbbfb2(str_objective, b_starting, b_direct, player) {
   if(!isDefined(level.vh_escape_apc)) {
     level.vh_escape_apc = vehicle::simple_spawn_single("vh_escape_apc");
     level.vh_escape_apc util::magic_bullet_shield();
@@ -491,7 +491,7 @@ function function_999d0913() {
 }
 
 function function_a5be8514() {
-  self flashlight::function_7c2f623b();
+  self flashlight::light_on();
 }
 
 function function_69d1435d(str_objective) {
@@ -515,10 +515,10 @@ function function_f13abd77(str_objective, b_starting) {
   level thread function_502e1c27();
   level thread function_d505ce28();
   level flag::wait_till("flg_storage_end");
-  skipto::function_4e3ab877(str_objective);
+  skipto::objective_completed(str_objective);
 }
 
-function function_80555a03(str_objective, b_starting, var_aa1a6455, player) {
+function function_80555a03(str_objective, b_starting, b_direct, player) {
   level thread namespace_fc3e8cb::function_6fe40e14("storage_gun_rack4", "storage_gun_rack5", "storage_gun_rack6");
 }
 
@@ -546,7 +546,7 @@ function function_502e3f72() {
   level.vh_town_square_apc hms_util::function_c21ef1d8("scripted", var_b8e95930[0].origin);
   level.vh_town_square_apc.aim_only_no_shooting = 1;
   level flag::wait_till("flg_bank_destruction_play");
-  level.vh_town_square_apc.var_21c17c08 thread namespace_4bd68414::function_d6d8868f();
+  level.vh_town_square_apc.loudspeaker thread namespace_4bd68414::function_d6d8868f();
   level.vh_town_square_apc.aim_only_no_shooting = undefined;
   level.vh_town_square_apc thread namespace_fc3e8cb::function_a57ce26d(var_b8e95930, "end_facades_intro_fake_shooting");
   level.vh_town_square_apc turret::function_aecc6bed(var_b8e95930, 1, 0, 0.2);
@@ -584,10 +584,10 @@ function function_3b55ec61(str_objective, b_starting) {
   level thread function_14fb9b43();
   level flag::wait_till_any(["flg_escape_apc_interact_triggered", "flg_motor_pool_all_enemies_dead"]);
   level flag::set("flg_motor_pool_end");
-  skipto::function_4e3ab877(str_objective);
+  skipto::objective_completed(str_objective);
 }
 
-function function_b78a9ad4(str_objective, b_starting, var_aa1a6455, player) {
+function function_b78a9ad4(str_objective, b_starting, b_direct, player) {
   level thread namespace_f6d09d1a::function_7b9feaa3("lgtexp_perf_facades", 1);
 
   if(player) {
@@ -643,7 +643,7 @@ function function_b415da85() {
   level.woods.grenadeammo = 0;
   level.woods val::set(#"hash_7f4af3d9057acdb8", "ignoreme", 1);
   level.woods ai::set_pacifist(1);
-  level.woods battlechatter::function_2ab9360b(0);
+  level.woods battlechatter::bc_allow(0);
   level flag::wait_till("flg_motor_pool_door_player_interact");
 
   if(level flag::get("flg_storage_woods_at_exit") == 0) {
@@ -654,7 +654,7 @@ function function_b415da85() {
   }
 
   level flag::wait_till("flg_motor_pool_entry_door_open");
-  savegame::function_7790f03(1);
+  savegame::checkpoint_save_asap(1);
   level thread namespace_4bd68414::function_bd85f877();
   level.woods ai::function_3a5e9945(0);
   level thread namespace_fc3e8cb::function_5c5b6ea7("nd_motor_pool_woods_door");
@@ -1029,11 +1029,11 @@ function function_7f87d6ab() {
 
   foreach(ai in var_69297501) {
     if(ai.script_noteworthy == "ai_juggernaut_motor_pool_front") {
-      ai namespace_631d466b::function_6aedb63(s_motor_pool_jugpos_paths.origin, s_motor_pool_jugpos_paths.radius, s_motor_pool_jugpos_paths.var_ed151f4c);
+      ai namespace_631d466b::function_6aedb63(s_motor_pool_jugpos_paths.origin, s_motor_pool_jugpos_paths.radius, s_motor_pool_jugpos_paths.goal_height);
       continue;
     }
 
-    ai namespace_631d466b::function_6aedb63(s_motor_pool_jugpos_mid.origin, s_motor_pool_jugpos_mid.radius, s_motor_pool_jugpos_mid.var_ed151f4c);
+    ai namespace_631d466b::function_6aedb63(s_motor_pool_jugpos_mid.origin, s_motor_pool_jugpos_mid.radius, s_motor_pool_jugpos_mid.goal_height);
     self.favoriteenemy = level.player;
   }
 
@@ -1063,7 +1063,7 @@ function function_1b30661c() {
   self namespace_631d466b::function_712776a6(0);
 
   if(self.script_noteworthy == "ai_juggernaut_motor_pool_front") {
-    self namespace_631d466b::function_6aedb63(s_motor_pool_jugpos_paths.origin, s_motor_pool_jugpos_paths.radius, s_motor_pool_jugpos_paths.var_ed151f4c);
+    self namespace_631d466b::function_6aedb63(s_motor_pool_jugpos_paths.origin, s_motor_pool_jugpos_paths.radius, s_motor_pool_jugpos_paths.goal_height);
   }
 
   self.favoriteenemy = level.player;

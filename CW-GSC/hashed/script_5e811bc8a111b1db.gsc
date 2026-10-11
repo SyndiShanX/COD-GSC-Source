@@ -200,17 +200,17 @@ function function_bf79a643() {
           index = randomint(zone.var_6284d1b2.size);
         }
 
-        var_e779ff3c = 0;
+        player_can_see = 0;
         players_in_range = getPlayers(undefined, zone.var_6284d1b2[index].origin, 740);
         players = getPlayers();
 
         foreach(player in players) {
           if(player util::is_looking_at(zone.var_6284d1b2[index], 0.8, 1, (0, 0, 32))) {
-            var_e779ff3c = 1;
+            player_can_see = 1;
           }
         }
 
-        if(is_true(zone.var_9c75f552) || var_e779ff3c === 0 && players_in_range.size === 0 && (!isDefined(zone.var_6284d1b2[index].var_9ae54d14) || zone.var_6284d1b2[index].var_9ae54d14 < gettime() - 30000)) {
+        if(is_true(zone.var_9c75f552) || player_can_see === 0 && players_in_range.size === 0 && (!isDefined(zone.var_6284d1b2[index].var_9ae54d14) || zone.var_6284d1b2[index].var_9ae54d14 < gettime() - 30000)) {
           zone.var_6284d1b2[index] function_4d68903d(zone);
           arrayremoveindex(zone.var_6284d1b2, index);
         }
@@ -227,17 +227,17 @@ function function_bf79a643() {
           index = randomint(zone.var_6284d1b2.size);
         }
 
-        var_e779ff3c = 0;
+        player_can_see = 0;
         players_in_range = getPlayers(undefined, zone.var_6284d1b2[index].origin, 740);
         players = getPlayers();
 
         foreach(player in players) {
           if(player util::is_looking_at(zone.var_6284d1b2[index], 0.8, 1, (0, 0, 16))) {
-            var_e779ff3c = 1;
+            player_can_see = 1;
           }
         }
 
-        if(is_true(zone.var_9c75f552) || var_e779ff3c === 0 && players_in_range.size === 0) {
+        if(is_true(zone.var_9c75f552) || player_can_see === 0 && players_in_range.size === 0) {
           zone.var_6284d1b2[index] function_f5527ca2(zone);
           arrayremoveindex(zone.var_6284d1b2, index);
         }
@@ -399,7 +399,7 @@ function function_f5527ca2(zone) {
   snowball_pile.zone = zone;
   snowball_pile.zone.var_6cff21f5++;
   snowball_pile.model_state = 1;
-  snowball_pile function_619a5c20();
+  snowball_pile pingable();
   snowball_pile zm_unitrigger::create(&function_dd028fcb, 64);
   snowball_pile.s_unitrigger.origin += (0, 0, 32);
   function_1eaaceab(zone.var_a5015123);
@@ -550,7 +550,7 @@ function function_a9114898(origin, angles) {
   fwd = anglesToForward(angles);
   up = anglestoup(angles);
   playFX("maps/ltm/fx9_winter_snowman_dest", origin, fwd, up);
-  playSoundAtPosition(#"hash_a00a48925a72e55", origin + (0, 0, 30));
+  playSoundAtPosition(#"zmb_snowman_burst", origin + (0, 0, 30));
 }
 
 function function_dc8f034(snowman) {

@@ -7,7 +7,7 @@
 #using scripts\core_common\exploder_shared;
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\fx_shared;
-#namespace namespace_9a981837;
+#namespace armada_fx;
 
 function function_c44464c8() {
   clientfield::register("toplayer", "pstfx_sprite_rain_loop", 1, 1, "int");
@@ -131,25 +131,25 @@ function function_a9a0debb(params) {
 
 function auto_dof(f_fstop, f_fstop_time) {
   if(isDefined(level.player)) {
-    level.player thread fx::function_82104e32(f_fstop, f_fstop_time);
+    level.player thread fx::fob_dof(f_fstop, f_fstop_time);
     return;
   }
 
   wait 1;
-  level.player thread fx::function_82104e32(f_fstop, f_fstop_time);
+  level.player thread fx::fob_dof(f_fstop, f_fstop_time);
 }
 
-function function_7e002ff8() {
+function clear_dof() {
   level.player flag::clear("flag_autofocus_on");
 }
 
 function function_633130e5(a_ents) {
   level.player thread fx::lighting_target_dof(a_ents[0], 0.025, 0.05);
   wait 7;
-  thread function_7e002ff8();
+  thread clear_dof();
 }
 
-function function_5c261946() {
+function reset_dof() {
   setDvar(#"r_dofmode", 1);
 }
 

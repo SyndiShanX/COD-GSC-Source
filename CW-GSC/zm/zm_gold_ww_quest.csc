@@ -156,6 +156,6 @@ function function_aa1d2bf6(localclientnum, oldval, newval, bnewent, binitialsnap
     board_rotate_origin = getEnt(fieldname, "board_rotate_origin", "targetname");
     var_79bb44c5 linkTo(board_rotate_origin);
     board_rotate_origin rotateTo(board_rotate_origin.angles + (0, 90, 0), 3);
-    var_79bb44c5 playSound(fieldname, #"hash_1500984cecfd6a57");
+    var_79bb44c5 playSound(fieldname, #"zmb_quest_ww_dartboard_open");
   }
 }

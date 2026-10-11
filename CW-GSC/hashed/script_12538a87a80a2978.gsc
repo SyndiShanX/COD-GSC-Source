@@ -36,7 +36,7 @@ function finalize() {
 
 function function_a92a93e9(v_location, v_angles, var_75b5cef0 = 0, n_delay = 1) {
   foreach(player in getPlayers()) {
-    switch (level.var_b48509f9) {
+    switch (level.star_rating) {
       default:
         level scoreevents::doscoreeventcallback("scoreEventZM", {
           #attacker: player, #scoreevent: "objective_complete_capsule_1"});

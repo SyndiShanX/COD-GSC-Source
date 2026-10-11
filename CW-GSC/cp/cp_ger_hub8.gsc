@@ -16,7 +16,7 @@
 
 function event_handler[level_init] main(eventstruct) {
   setclearanceceiling(16);
-  namespace_31c67f6d::function_1c920347();
+  namespace_31c67f6d::main_pre_load();
   level thread lui::add_luimenu("full_screen_movie", &full_screen_movie::register);
   level function_5b503df2();
   init_clientfields();
@@ -28,7 +28,7 @@ function function_5b503df2() {
   skipto::add("post_prisoner", &namespace_fdde5f3d::main, &namespace_fdde5f3d::starting, undefined, undefined, "safehouse");
   skipto::add("post_prisoner_lie", &namespace_fdde5f3d::function_82c37b22, &namespace_fdde5f3d::function_c649acda, undefined, undefined, "safehouse");
 
-  skipto::add_dev("<dev string:x38>", &namespace_fdde5f3d::function_cbf93ca7, &namespace_fdde5f3d::function_fb10b77d, "<dev string:x38>", &namespace_fdde5f3d::function_6bb0fd28, undefined, undefined, "<dev string:x4e>");
+  skipto::add_dev("<dev string:x38>", &namespace_fdde5f3d::function_cbf93ca7, &namespace_fdde5f3d::burn_start, "<dev string:x38>", &namespace_fdde5f3d::function_6bb0fd28, undefined, undefined, "<dev string:x4e>");
   skipto::add_dev("<dev string:x5b>", &rescue_main, &function_f4db46d4, "<dev string:x73>", &rescue_cleanup, undefined, undefined, "<dev string:x91>");
 
   skipto::add_dev("<dev string:x9d>", &namespace_fdde5f3d::main, &namespace_fdde5f3d::starting, "<dev string:xc0>");
@@ -66,8 +66,8 @@ function rescue_main(str_skipto, b_starting) {
     waitframe(1);
   }
 
-  if(isDefined(level.var_d7d201ba) && isDefined(level.skipto_current_objective)) {
-    level.player flag::set(level.var_d7d201ba);
+  if(isDefined(level.str_player_start_flag) && isDefined(level.skipto_current_objective)) {
+    level.player flag::set(level.str_player_start_flag);
   }
 
   scene::init("scene_hub_post_prisoner_brainwash_find_bell");
@@ -76,4 +76,4 @@ function rescue_main(str_skipto, b_starting) {
   scene::stop("scene_hub_post_prisoner_brainwash_find_bell", 1);
 }
 
-function rescue_cleanup(str_objective, b_starting, var_aa1a6455, player) {}
+function rescue_cleanup(str_objective, b_starting, b_direct, player) {}

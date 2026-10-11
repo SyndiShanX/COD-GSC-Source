@@ -61,7 +61,7 @@ function function_56b991c1(str_objective, b_starting) {
   level.allowbattlechatter[#"allies"] = 0;
   level.allowbattlechatter[#"axis"] = 0;
   level flag::wait_till("flg_satcom_approach_end");
-  transient = savegame::function_6440b06b(#"transient");
+  transient = savegame::get_mission_data(#"transient");
 
   if(!level flag::get("flg_satcom_approach_unsilenced_weapon_fired")) {
     transient.var_296ec611 = 1;
@@ -69,7 +69,7 @@ function function_56b991c1(str_objective, b_starting) {
     transient.var_296ec611 = 0;
   }
 
-  skipto::function_4e3ab877("satcom_approach");
+  skipto::objective_completed("satcom_approach");
 }
 
 function function_d272f105() {
@@ -130,7 +130,7 @@ function function_de27b0eb() {
 
   savegame::checkpoint_save(1);
   level thread namespace_7468806b::function_7163fd33();
-  level thread breadcrumb::function_61037c6c(#"hash_4c535a07614a40af");
+  level thread breadcrumb::start_chain(#"hash_4c535a07614a40af");
   level flag::wait_till("flg_satcom_exterior_approaching");
   level.ai_woods ai::set_behavior_attribute("demeanor", "combat");
   level namespace_5d7a2dac::music("5.0_combat_1");
@@ -187,7 +187,7 @@ function function_7233c5ee() {
   level namespace_5d7a2dac::music("5.8_tension_2");
 
   if(!level flag::get("flg_satcom_exiting")) {
-    level thread breadcrumb::function_61037c6c(#"hash_29c606a3feaa95a");
+    level thread breadcrumb::start_chain(#"hash_29c606a3feaa95a");
   }
 }
 
@@ -482,7 +482,7 @@ function function_cd0539f4() {
 function function_c73772c6(str_objective) {
   function_afb0a04c();
   level thread objectives::scripted("obj_yamantau_1", undefined, #"hash_423da80c752f859f");
-  namespace_b73b9191::function_2683ec5d();
+  namespace_b73b9191::spawn_woods();
   level flag::set("flg_zipline_intro_zipliner_killed");
   var_b4bb921 = struct::get("woods_satcom_approach_teleport", "targetname");
   level.ai_woods forceteleport(var_b4bb921.origin, var_b4bb921.angles);
@@ -492,7 +492,7 @@ function function_c73772c6(str_objective) {
   level flag::set("flg_satcom_birds_trigger");
 }
 
-function function_844967aa(str_objective, b_starting, var_aa1a6455, player) {}
+function function_844967aa(str_objective, b_starting, b_direct, player) {}
 
 function function_8cc2cc25(str_objective, b_starting) {
   if(b_starting) {
@@ -516,7 +516,7 @@ function function_8cc2cc25(str_objective, b_starting) {
   }
 
   savegame::checkpoint_save(1);
-  skipto::function_4e3ab877("satcom");
+  skipto::objective_completed("satcom");
 }
 
 function function_a94c664a() {
@@ -539,7 +539,7 @@ function function_a94c664a() {
 function function_f6f8cdca(str_objective) {
   function_afb0a04c();
   level thread objectives::scripted("obj_yamantau_1", undefined, #"hash_423da80c752f859f");
-  namespace_b73b9191::function_2683ec5d();
+  namespace_b73b9191::spawn_woods();
   var_b4bb921 = struct::get("woods_satcom_teleport", "targetname");
   level.ai_woods forceteleport(var_b4bb921.origin, var_b4bb921.angles);
   level thread namespace_7468806b::function_79af70ae(1);
@@ -552,6 +552,6 @@ function function_f6f8cdca(str_objective) {
   level.var_13434d89 = [];
 }
 
-function function_a46dc345(str_objective, b_starting, var_aa1a6455, player) {
+function function_a46dc345(str_objective, b_starting, b_direct, player) {
   level callback::remove_on_ai_killed(&function_dbc98faf);
 }

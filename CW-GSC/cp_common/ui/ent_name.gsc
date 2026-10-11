@@ -13,7 +13,7 @@ function add(name, team = 1) {
     level.var_479cdca1 = [];
   }
 
-  var_b40f1dcd = level.var_479cdca1.size == 0;
+  start_think = level.var_479cdca1.size == 0;
 
   if(ishash(team)) {
     if(team == #"axis" || team == #"enemy") {
@@ -27,7 +27,7 @@ function add(name, team = 1) {
     #name: name, #team: team
   };
 
-  if(var_b40f1dcd) {
+  if(start_think) {
     thread _think();
   }
 
@@ -72,11 +72,11 @@ function private _think() {
   player endoncallback(&_cleanup, #"death");
   level.var_435c3a22 = [];
   util::init_dvar("cg_maxActorNameDist", 500, &function_e65ba67);
-  namespace_61e6d095::create(#"entname", #"hash_1624d8814bab0c71");
+  scripted_widgets::create(#"entname", #"hash_1624d8814bab0c71");
   name = #"";
   team = 0;
-  namespace_61e6d095::set_text(#"entname", name);
-  namespace_61e6d095::set_state(#"entname", team);
+  scripted_widgets::set_text(#"entname", name);
+  scripted_widgets::set_state(#"entname", team);
 
   while(isDefined(level.var_479cdca1)) {
     new_name = #"";
@@ -95,14 +95,14 @@ function private _think() {
     if(name != new_name) {
       name = new_name;
       team = new_team;
-      namespace_61e6d095::set_text(#"entname", name);
-      namespace_61e6d095::set_state(#"entname", team);
+      scripted_widgets::set_text(#"entname", name);
+      scripted_widgets::set_state(#"entname", team);
     }
 
     waitframe(1);
   }
 
-  namespace_61e6d095::remove(#"entname");
+  scripted_widgets::remove(#"entname");
   _cleanup();
 }
 

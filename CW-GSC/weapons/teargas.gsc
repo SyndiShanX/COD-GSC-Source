@@ -135,7 +135,7 @@ function function_7641afa6(watcher, player) {
   self.delete_on_death = 1;
   self.var_48d842c3 = 1;
   self.var_515d6dda = 1;
-  self function_619a5c20();
+  self pingable();
   player notify(#"hash_228d061be1b2a83a");
   var_e6fbac16 = getscriptbundle(self.weapon.customsettings);
   self.var_b2ed661a = var_e6fbac16.teargasduration + 3;
@@ -165,7 +165,7 @@ function function_f82566e8(attacker, weapon, target) {
       playFX(level._equipment_explode_fx, self.origin);
     }
 
-    self playSound(#"hash_16dfe84ea21fd143");
+    self playSound(#"exp_tear_gas");
     self delete();
     return;
   }
@@ -334,7 +334,7 @@ function private function_78d7002(var_7e6e7f9f, owner, grenadeent) {
   dot.killcament = grenadeent.killcament;
   dot.sourceent = grenadeent;
   self thread status_effect::status_effect_apply(dot, var_7e6e7f9f, owner, 0, undefined, undefined, grenadeent.origin);
-  self playsoundtoplayer(#"hash_569fa11d8a4005ba", self);
+  self playsoundtoplayer(#"wpn_tear_gas_shock", self);
 
   foreach(stage, var_c62d6d34 in level.var_29115f03) {
     self.var_1b05dcde = stage;

@@ -31,7 +31,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_268747c0;
+#namespace doa_hazard;
 
 function init() {
   level.doa.var_90dc2431 = [];

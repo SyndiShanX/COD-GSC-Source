@@ -45,11 +45,11 @@ function function_2435d3e(str_objective, b_starting) {
   }
 
   level thread function_50f30bc3();
-  level battlechatter::function_2ab9360b(0);
-  namespace_61e6d095::create(#"hash_26ccd69d3e6f3b56", #"hash_28d1565bae3236e");
-  namespace_61e6d095::set_color(#"hash_26ccd69d3e6f3b56", 0, 0, 0);
-  namespace_61e6d095::function_39710437(#"hash_26ccd69d3e6f3b56", "fullscreen");
-  namespace_61e6d095::function_46df0bc7(#"hash_26ccd69d3e6f3b56", 999);
+  level battlechatter::bc_allow(0);
+  scripted_widgets::create(#"hash_26ccd69d3e6f3b56", #"hash_28d1565bae3236e");
+  scripted_widgets::set_color(#"hash_26ccd69d3e6f3b56", 0, 0, 0);
+  scripted_widgets::function_39710437(#"hash_26ccd69d3e6f3b56", "fullscreen");
+  scripted_widgets::function_46df0bc7(#"hash_26ccd69d3e6f3b56", 999);
   e_player = getPlayers()[0];
   e_player val::set(#"hash_75e1db7c3af8ae06", "freezecontrols", 1);
   e_player val::set(#"hash_383e66ab943657f9", "disable_weapons", 0);
@@ -61,7 +61,7 @@ function function_2435d3e(str_objective, b_starting) {
   e_player switchtoweapon(pistol, 1);
   level ending::function_103cd64c();
   e_player val::reset(#"hash_fa9cf212730562d", "show_hud");
-  namespace_61e6d095::remove(#"hash_26ccd69d3e6f3b56");
+  scripted_widgets::remove(#"hash_26ccd69d3e6f3b56");
   level util::screen_fade_out(0);
   var_8a3bb97c = getspawnerarray("adler_looseends", "targetname");
   level.var_8a9babf4 = var_8a3bb97c[0] spawner::spawn(1);
@@ -75,7 +75,7 @@ function function_2435d3e(str_objective, b_starting) {
   snd::client_msg("loose_ends_start");
   wait 2;
   level util::screen_fade_in(5);
-  level waittill(#"hash_3678fbfcec341cb5");
+  level waittill(#"start_slowmo");
   snd::client_msg("loose_ends_slow");
   var_6d369e51 = 4;
   var_c8ae7644 = 0.1;
@@ -101,8 +101,8 @@ function function_2435d3e(str_objective, b_starting) {
   wait 15;
   level.player freezecontrols(0);
   activities::function_59e67711("_exit");
-  skipto::function_f02f0c63();
-  skipto::function_1c2dfc20();
+  skipto::set_final_level();
+  skipto::level_completed();
 }
 
 function function_2daa05b8() {
@@ -120,7 +120,7 @@ function function_f1c8f3ad() {
   level.player notifyonplayercommand("gun_shot", "+attack");
 }
 
-function function_8f77588(str_objective, b_starting, var_aa1a6455, player) {}
+function function_8f77588(str_objective, b_starting, b_direct, player) {}
 
 function function_50f30bc3() {
   wait 0.1;

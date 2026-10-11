@@ -592,7 +592,7 @@ function private bgb_limit_monitor() {
   self notify(#"bgb_limit_monitor");
   self endon(#"bgb_limit_monitor", #"death", #"bgb_update");
   self clientfield::set_player_uimodel("zmhud.bgb_display", 1);
-  self playsoundtoplayer(#"hash_56cc165edb993de8", self);
+  self playsoundtoplayer(#"zmb_elixir_common_activate", self);
 
   switch (level.bgb[self.bgb].limit_type) {
     case #"activated":
@@ -624,7 +624,7 @@ function private bgb_limit_monitor() {
         level.bgb[self.bgb].var_dbe7d224 = 0;
       }
 
-      self playsoundtoplayer(#"hash_b8e60131176554b", self);
+      self playsoundtoplayer(#"zmb_elixir_common_deactivate", self);
 
       if(isDefined(self.bgb) && isDefined(level.bgb[self.bgb])) {
         self set_timer(0, level.bgb[self.bgb].limit);
@@ -641,7 +641,7 @@ function private bgb_limit_monitor() {
 
       self thread run_timer(level.bgb[self.bgb].limit);
       self waittill(#"bgb_run_timer_cleared");
-      self playsoundtoplayer(#"hash_b8e60131176554b", self);
+      self playsoundtoplayer(#"zmb_elixir_common_deactivate", self);
       break;
     case #"rounds":
 
@@ -658,7 +658,7 @@ function private bgb_limit_monitor() {
         level waittill(#"end_of_round");
       }
 
-      self playsoundtoplayer(#"hash_b8e60131176554b", self);
+      self playsoundtoplayer(#"zmb_elixir_common_deactivate", self);
       break;
     case #"event":
 
@@ -666,7 +666,7 @@ function private bgb_limit_monitor() {
 
       self bgb_set_timer_clientfield(1);
       self[[level.bgb[self.bgb].limit]]();
-      self playsoundtoplayer(#"hash_b8e60131176554b", self);
+      self playsoundtoplayer(#"zmb_elixir_common_deactivate", self);
       break;
     default:
       assert(0, "<dev string:x1c3>" + self.bgb + "<dev string:x1e6>" + level.bgb[self.bgb].limit_type + "<dev string:x1f9>");

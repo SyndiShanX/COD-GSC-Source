@@ -46,26 +46,26 @@ function private finalize_init() {
 
 function function_7364a587() {
   level.var_9d6b3096 = [];
-  level.var_9d6b3096[#"hash_35a6541d081acef5"] = spawnStruct();
-  level.var_9d6b3096[#"hash_594c4ab1d31aa150"] = spawnStruct();
+  level.var_9d6b3096[#"koth_cdl"] = spawnStruct();
+  level.var_9d6b3096[#"control_cdl"] = spawnStruct();
   level.var_9d6b3096[#"sd_cdl"] = spawnStruct();
-  level.var_9d6b3096[#"hash_35a6541d081acef5"].var_9dd75c18 = 3000;
-  level.var_9d6b3096[#"hash_594c4ab1d31aa150"].var_9dd75c18 = 2500;
+  level.var_9d6b3096[#"koth_cdl"].var_9dd75c18 = 3000;
+  level.var_9d6b3096[#"control_cdl"].var_9dd75c18 = 2500;
   level.var_9d6b3096[#"sd_cdl"].var_9dd75c18 = 500;
-  level.var_9d6b3096[#"hash_35a6541d081acef5"].var_9a5a8dcf = 4000;
-  level.var_9d6b3096[#"hash_594c4ab1d31aa150"].var_9a5a8dcf = 3000;
+  level.var_9d6b3096[#"koth_cdl"].var_9a5a8dcf = 4000;
+  level.var_9d6b3096[#"control_cdl"].var_9a5a8dcf = 3000;
   level.var_9d6b3096[#"sd_cdl"].var_9a5a8dcf = 1000;
-  level.var_9d6b3096[#"hash_35a6541d081acef5"].var_f703cb6c = 20;
-  level.var_9d6b3096[#"hash_594c4ab1d31aa150"].var_f703cb6c = 15;
+  level.var_9d6b3096[#"koth_cdl"].var_f703cb6c = 20;
+  level.var_9d6b3096[#"control_cdl"].var_f703cb6c = 15;
   level.var_9d6b3096[#"sd_cdl"].var_f703cb6c = 4;
-  level.var_9d6b3096[#"hash_35a6541d081acef5"].var_39027dc7 = 30;
-  level.var_9d6b3096[#"hash_594c4ab1d31aa150"].var_39027dc7 = 25;
+  level.var_9d6b3096[#"koth_cdl"].var_39027dc7 = 30;
+  level.var_9d6b3096[#"control_cdl"].var_39027dc7 = 25;
   level.var_9d6b3096[#"sd_cdl"].var_39027dc7 = 7;
-  level.var_9d6b3096[#"hash_35a6541d081acef5"].var_81bbb381 = 3500;
-  level.var_9d6b3096[#"hash_594c4ab1d31aa150"].var_81bbb381 = 3000;
+  level.var_9d6b3096[#"koth_cdl"].var_81bbb381 = 3500;
+  level.var_9d6b3096[#"control_cdl"].var_81bbb381 = 3000;
   level.var_9d6b3096[#"sd_cdl"].var_81bbb381 = 750;
-  level.var_9d6b3096[#"hash_35a6541d081acef5"].var_9037b57b = 15;
-  level.var_9d6b3096[#"hash_594c4ab1d31aa150"].var_9037b57b = 10;
+  level.var_9d6b3096[#"koth_cdl"].var_9037b57b = 15;
+  level.var_9d6b3096[#"control_cdl"].var_9037b57b = 10;
   level.var_9d6b3096[#"sd_cdl"].var_9037b57b = 1;
 }
 
@@ -115,10 +115,10 @@ function on_player_score(new_score, delta_score) {
       player function_ccf82192(#"contract_wl_score_per_mode");
 
       switch (gametype) {
-        case #"hash_35a6541d081acef5":
+        case #"koth_cdl":
           player function_ccf82192(#"hash_ae762b8f099ea78");
           break;
-        case #"hash_594c4ab1d31aa150":
+        case #"control_cdl":
           player function_ccf82192(#"hash_7f6444fe885ce68c");
           break;
         case #"sd_cdl":
@@ -151,10 +151,10 @@ function on_ekia(weapon, victim) {
     player function_ccf82192(#"hash_1d1b3fe36f24b6ac");
 
     switch (level.gametype) {
-      case #"hash_35a6541d081acef5":
+      case #"koth_cdl":
         player function_ccf82192(#"hash_5094a25541df9380");
         break;
-      case #"hash_594c4ab1d31aa150":
+      case #"control_cdl":
         player function_ccf82192(#"hash_4a7745c3b4819d04");
         break;
       case #"sd_cdl":
@@ -184,10 +184,10 @@ function on_objective_ekia() {
     player function_ccf82192(#"hash_518ce6f8a5567a08");
 
     switch (level.gametype) {
-      case #"hash_35a6541d081acef5":
+      case #"koth_cdl":
         player function_ccf82192(#"hash_2b23579cbf8999f4");
         break;
-      case #"hash_594c4ab1d31aa150":
+      case #"control_cdl":
         player function_ccf82192(#"hash_7182bb77d8974488");
         break;
       case #"sd_cdl":
@@ -215,10 +215,10 @@ function on_damagedone(damagedone) {
       player function_ccf82192(#"hash_783240d7e11018c9");
 
       switch (level.gametype) {
-        case #"hash_35a6541d081acef5":
+        case #"koth_cdl":
           player function_ccf82192(#"hash_41263195cd7fa7f");
           break;
-        case #"hash_594c4ab1d31aa150":
+        case #"control_cdl":
           player function_ccf82192(#"hash_5579ada75c110186");
           break;
         case #"sd_cdl":
@@ -302,10 +302,10 @@ function function_a4c8ce2a(data) {
   player function_ccf82192(#"contract_wl_play_games");
 
   switch (level.gametype) {
-    case #"hash_35a6541d081acef5":
+    case #"koth_cdl":
       player function_ccf82192(#"hash_c3dd6c976fd6da0");
       break;
-    case #"hash_594c4ab1d31aa150":
+    case #"control_cdl":
       player function_ccf82192(#"hash_59ddf56a06fffa34");
       break;
     case #"sd_cdl":
@@ -342,10 +342,10 @@ function contract_win(winner) {
   winner function_ccf82192(#"contract_wl_win_games_hard");
 
   switch (level.gametype) {
-    case #"hash_35a6541d081acef5":
+    case #"koth_cdl":
       winner function_ccf82192(#"hash_7ad97dfb4e13dcf5");
       break;
-    case #"hash_594c4ab1d31aa150":
+    case #"control_cdl":
       winner function_ccf82192(#"hash_1d7c20fdd4a3cef1");
       break;
     case #"sd_cdl":

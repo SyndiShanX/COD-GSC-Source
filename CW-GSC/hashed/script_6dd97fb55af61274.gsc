@@ -21,16 +21,16 @@ function private autoexec __init__system__() {
 function private preinit() {
   spawner::add_archetype_spawn_function(#"raz", &function_ce3b36df);
   spawner::function_89a2cd87(#"raz", &function_e7ad996);
-  function_c7bb75d5();
+  initrazbehaviorsandasm();
 }
 
 function function_4df027f2() {}
 
-function private function_c7bb75d5() {}
+function private initrazbehaviorsandasm() {}
 
 function function_ce3b36df() {
   if(is_true(level.is_survival)) {
-    self.ai.var_870d0893 = 1;
+    self.ai.rex_mp_swamp_concrete_debris = 1;
     self.completed_emerging_into_playable_area = 1;
   }
 
@@ -47,7 +47,7 @@ function function_ce3b36df() {
 }
 
 function function_e7ad996() {
-  if(is_true(self.ai.var_870d0893)) {
+  if(is_true(self.ai.rex_mp_swamp_concrete_debris)) {
     setup_awareness(self);
   }
 }
@@ -140,7 +140,7 @@ function private function_333a7b23(entity) {
         entity.var_ba3e3319 = gettime() + int(1 * 1000);
         goal_info = entity function_4794d6a3();
         var_136a3202 = 0;
-        target_point = namespace_b619101e::function_3848e282(enemy);
+        target_point = razbehavior::function_3848e282(enemy);
 
         if(isDefined(goal_info.goalpos)) {
           var_a2904933 = entity gettagorigin("tag_weapon_right") - entity.origin;
@@ -162,8 +162,8 @@ function private function_333a7b23(entity) {
         }
 
         if(is_true(goal_info.isatgoal)) {
-          var_d799417b = vectortoangles(to_enemy);
-          entity forceteleport(entity.origin, (0, var_d799417b[1], 0), 0);
+          to_enemy_angles = vectortoangles(to_enemy);
+          entity forceteleport(entity.origin, (0, to_enemy_angles[1], 0), 0);
         }
       }
 
@@ -178,8 +178,8 @@ function private function_333a7b23(entity) {
 
       if(is_true(goal_info.isatgoal) && isDefined(enemy)) {
         to_enemy = enemy.origin - self.origin;
-        var_d799417b = vectortoangles(to_enemy);
-        entity forceteleport(entity.origin, (0, var_d799417b[1], 0), 0);
+        to_enemy_angles = vectortoangles(to_enemy);
+        entity forceteleport(entity.origin, (0, to_enemy_angles[1], 0), 0);
       }
     }
   }

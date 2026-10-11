@@ -40,7 +40,7 @@ function register() {
   clientfield::register("allplayers", "electroball_shock", 1, 1, "int");
 }
 
-function function_5d95c1d() {
+function createelectroballgrenadewatcher() {
   watcher = self weaponobjects::createwatcher("electroball_grenade", undefined, 0);
   watcher.watchforfire = 1;
   watcher.hackable = 0;
@@ -59,10 +59,10 @@ function function_5d95c1d() {
   watcher.activationdelay = 0.05;
   watcher.activatesound = "wpn_claymore_alert";
   watcher.immunespecialty = "specialty_immunetriggershock";
-  watcher.onspawn = &function_5aeaf7bc;
+  watcher.onspawn = &onspawnelectroballgrenadeweaponobject;
 }
 
-function function_5aeaf7bc(watcher, owner) {
+function onspawnelectroballgrenadeweaponobject(watcher, owner) {
   self thread setupkillcament();
 
   if(isPlayer(owner)) {
@@ -171,14 +171,14 @@ function watch_death() {
 
 function on_player_spawned() {
   if(isPlayer(self)) {
-    self thread function_5d95c1d();
+    self thread createelectroballgrenadewatcher();
     self callback::on_player_damage(&function_4e48c752);
   }
 }
 
 function on_ai_spawned() {
   if(self.archetype === "mechz") {
-    self thread function_5d95c1d();
+    self thread createelectroballgrenadewatcher();
   }
 }
 
@@ -195,9 +195,9 @@ function function_8e671a22() {
   self setModel("tag_origin");
   self clientfield::set("electroball_play_landed_fx", 1);
 
-  if(!isDefined(level.var_542ac835)) {
-    level.var_542ac835 = [];
+  if(!isDefined(level.a_electroball_grenades)) {
+    level.a_electroball_grenades = [];
   }
 
-  array::add(level.var_542ac835, self);
+  array::add(level.a_electroball_grenades, self);
 }

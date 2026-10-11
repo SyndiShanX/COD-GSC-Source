@@ -23,7 +23,7 @@
 #namespace namespace_5ceacc03;
 
 function private event_handler[level_preinit] function_b489bb7b(eventstruct) {
-  snd::function_5e69f468(&_objective);
+  snd::skipto_init(&_objective);
   level.var_81065eb = [];
 }
 
@@ -125,7 +125,7 @@ function private _objective(objective) {
       level thread function_a20133bd();
       level flag::wait_till("player_in_bar");
       break;
-    case #"hash_7c9606c7fc0bc2c6":
+    case #"alley_1":
       level thread function_a20133bd();
       thread function_bb969e94();
       thread function_36cc557();
@@ -133,7 +133,7 @@ function private _objective(objective) {
       wait 1;
       snd::client_msg("police_build_up_bar");
       break;
-    case #"hash_7c9605c7fc0bc113":
+    case #"alley_2":
       level thread function_a20133bd();
       level thread stealth_music();
       thread function_bb969e94();
@@ -150,20 +150,20 @@ function private _objective(objective) {
       break;
     case #"meetup":
       level thread function_a20133bd();
-      level thread function_3eec13f8("9.0_informant_safehouse");
+      level thread stop_stealth_music("9.0_informant_safehouse");
       thread function_bb969e94();
       thread function_36cc557();
       break;
     case #"apt_street":
       level thread function_a20133bd();
-      level thread function_3eec13f8("13.0_apartment");
+      level thread stop_stealth_music("13.0_apartment");
       thread function_bb969e94();
       thread function_36cc557();
       break;
-    case #"hash_5316a2a443ccd594":
+    case #"apt_1":
       function_4b193e02();
       break;
-    case #"hash_5316a5a443ccdaad":
+    case #"apt_2":
       function_4b193e02();
       break;
     case #"warehouse_intro":
@@ -181,7 +181,7 @@ function private _objective(objective) {
       level notify(#"warehouse_guns_start");
       thread function_a4a301cb();
       break;
-    case #"hash_48642c08eff0a94c":
+    case #"warehouse_outro":
       function_4b193e02();
       thread function_a4a301cb();
       break;
@@ -196,33 +196,33 @@ function private _objective(objective) {
 }
 
 function music(str_msg, n_delay = 0) {
-  level thread function_7edafa59(str_msg, n_delay);
+  level thread music_handler(str_msg, n_delay);
   level thread function_e80c0ccf(str_msg);
 }
 
-function function_7edafa59(str_msg, n_delay) {
+function music_handler(str_msg, n_delay) {
   switch (str_msg) {
     case #"8.0_low_profile":
     case #"9.0_informant_safehouse":
     case #"6.0_incoming":
     case #"14.0_find_briefcase":
-    case #"hash_19e6ebac6ad70854":
+    case #"15.1_volkov":
     case #"hash_1acc529b509e310e":
-    case #"hash_1e0888670e800fc6":
+    case #"17.0_kill_volkov":
     case #"1.0_train":
     case #"10.0_informant_combat":
-    case #"hash_2c7e72eef7c943cd":
+    case #"17.0_kill_or_capture":
     case #"hash_38e044116cdb55fd":
     case #"9.0_informant_safehouse_2":
     case #"6.0_incoming_skipto":
     case #"4.0_rooftops":
-    case #"hash_4bcc9fef87077870":
+    case #"15.0_captured":
     case #"13.0_apartment":
     case #"9.0_informant_safehouse_stinger":
-    case #"hash_4f417dd0d24a9d04":
-    case #"hash_51e60bc34c1efac4":
-    case #"hash_5867d18cd788d96e":
-    case #"hash_6bc99a264a7eb868":
+    case #"3.0_combat_stinger":
+    case #"17.0_capture_volkov":
+    case #"16.0_finale":
+    case #"2.0_tracks":
     case #"12.0_company":
     case #"5.0_kraus":
       music::setmusicstate(str_msg, undefined, n_delay);
@@ -233,7 +233,7 @@ function function_7edafa59(str_msg, n_delay) {
     case #"4.0_rooftops_stinger_2":
     case #"4.0_rooftops_stinger_1":
     case #"13.0_apartment_stinger":
-      music::function_edda155f(str_msg, n_delay);
+      music::playstinger(str_msg, n_delay);
       break;
     case #"deactivate_1.0_train":
     case #"deactivate_5.0_kraus":
@@ -260,7 +260,7 @@ function function_e80c0ccf(str_msg) {
     case #"14.0_find_briefcase":
       snd::client_msg(#"musictrack_cp_stakeout_3");
       break;
-    case #"hash_5867d18cd788d96e":
+    case #"16.0_finale":
       snd::client_msg(#"musictrack_cp_stakeout_4");
       break;
   }
@@ -533,7 +533,7 @@ function stealth_music() {
   }
 }
 
-function function_3eec13f8(state = "9.0_informant_safehouse") {
+function stop_stealth_music(state = "9.0_informant_safehouse") {
   level notify(#"hash_5bea67cbe769538");
   music::setmusicstate(state);
 }
@@ -614,12 +614,12 @@ function function_9c504c29() {
     locs[i] = player.origin + (randomintrange(-3000, 0), randomintrange(-100, 100), 20);
   }
 
-  var_93408f70 = snd::play("emt_train_end_cars_screech_lp", locs);
+  whooshes = snd::play("emt_train_end_cars_screech_lp", locs);
 
-  foreach(var_819cb54 in var_93408f70) {}
+  foreach(whoosh in whooshes) {}
 
   wait 5;
-  snd::stop(var_93408f70, 0.5);
+  snd::stop(whooshes, 0.5);
 }
 
 function function_a6b9fbbd() {
@@ -669,9 +669,9 @@ function function_46b43795() {}
 function function_f6a3d7df() {
   level flag::wait_till_any(array("guard_station_doors_opened", "player_in_guard_room"));
   wait 1;
-  var_981ab364 = snd::play([0.1, "env_stk_gs_radio_static_lp", 1], (-5750, 10945, -305));
+  radio_static = snd::play([0.1, "env_stk_gs_radio_static_lp", 1], (-5750, 10945, -305));
   level flag::wait_till("ghost_station_done");
-  snd::stop(var_981ab364, 1);
+  snd::stop(radio_static, 1);
 }
 
 function function_60ca00d0() {
@@ -736,13 +736,13 @@ function function_bc932ea6() {
   snd::play("amb_door_open_rain_city_thunder_3d", (-2623, 14247, 856));
 }
 
-function function_11e5f1bd(var_cafbbb40) {
-  var_cafbbb40 endon(#"death");
+function function_11e5f1bd(pigeon) {
+  pigeon endon(#"death");
   level endon(#"street_done");
 
   while(true) {
     wait randomfloatrange(2, 6);
-    snd::play("emt_pigeons_cooing", var_cafbbb40.origin);
+    snd::play("emt_pigeons_cooing", pigeon.origin);
   }
 }
 
@@ -998,12 +998,12 @@ function function_81b3f069(volume) {
 
   while(!level flag::get("flag_phone_receiver_picked_up")) {
     level.var_b159d30f = 1;
-    level.var_9d6e61f8 = snd::play([0.05, "evt_stk_apt_phone_ring_lp"], phone);
-    snd::set_volume(level.var_9d6e61f8, level.var_2a973211);
+    level.phone_ring = snd::play([0.05, "evt_stk_apt_phone_ring_lp"], phone);
+    snd::set_volume(level.phone_ring, level.var_2a973211);
     wait 2;
     level.var_1e5c72de = snd::play([0.05, "evt_stk_apt_phone_ring_end"], phone);
-    snd::set_volume(level.var_9d6e61f8, level.var_2a973211);
-    snd::stop(level.var_9d6e61f8, 0.05);
+    snd::set_volume(level.phone_ring, level.var_2a973211);
+    snd::stop(level.phone_ring, 0.05);
     level.var_b159d30f = 0;
     wait 3;
   }
@@ -1013,8 +1013,8 @@ function function_db3e2ed5(phone) {
   level flag::wait_till_any(array("flag_apartment_door_open", "flag_1st_entry_kitchen"));
   level.var_2a973211 = 1;
 
-  if(isDefined(level.var_9d6e61f8)) {
-    snd::set_volume(level.var_9d6e61f8, level.var_2a973211, 1.5);
+  if(isDefined(level.phone_ring)) {
+    snd::set_volume(level.phone_ring, level.var_2a973211, 1.5);
   }
 
   if(isDefined(level.var_1e5c72de)) {
@@ -1024,9 +1024,9 @@ function function_db3e2ed5(phone) {
   level waittill(#"hash_205bf17f449d4088");
   level flag::set("flag_phone_receiver_picked_up");
 
-  if(isDefined(level.var_9d6e61f8) && level.var_b159d30f == 1) {
+  if(isDefined(level.phone_ring) && level.var_b159d30f == 1) {
     snd::play("evt_stk_apt_phone_ring_end", phone);
-    snd::stop(level.var_9d6e61f8, 0.05);
+    snd::stop(level.phone_ring, 0.05);
     snd::stop(level.var_1e5c72de, 0.05);
   }
 }

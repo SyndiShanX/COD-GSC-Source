@@ -39,7 +39,7 @@
 function function_945def6e(str_skipto, b_starting) {
   level function_7b315e60();
   level clientfield::set("" + #"hash_16a1381cc22da440", 1);
-  level battlechatter::function_2ab9360b(0);
+  level battlechatter::bc_allow(0);
   level flag::set("flag_vo_crash_rpg");
 
   if(isDefined(level.var_7466d419.var_6bbdd0a5)) {
@@ -81,7 +81,7 @@ function function_945def6e(str_skipto, b_starting) {
   a_ents[#"hash_4972abe0166bbc73"] = level.var_7466d419;
   level scene::play(#"armada_crash_start", a_ents);
   objectives::complete(#"nuke_return");
-  skipto::function_4e3ab877(str_skipto);
+  skipto::objective_completed(str_skipto);
 }
 
 function function_7b315e60() {
@@ -145,7 +145,7 @@ function function_58ef8b05(str_objective, b_starting) {
   util::function_3e65fe0b(0);
   level snd::client_msg(#"hash_66209bfcf3bd11ca");
   level snd::client_msg(#"hash_4a41082a1d97f925");
-  level battlechatter::function_2ab9360b(0);
+  level battlechatter::bc_allow(0);
   spawner::add_global_spawn_function(#"axis", &function_21c6bdaa, 500);
 
   if(!isDefined(level.var_d3e0f34c)) {
@@ -176,7 +176,7 @@ function function_58ef8b05(str_objective, b_starting) {
   util::delay(20, undefined, &objectives::scripted, #"last_stand", undefined, #"hash_512f51804b601599", 1);
   level scene::init(#"hash_30c1ba04c9ba0bf3");
   level function_3dda2db1(b_starting);
-  namespace_72b0499b::music("12.0_turret");
+  armada_audio::music("12.0_turret");
   level thread scene::play(#"hash_30c1ba04c9ba0bf3", "intro");
   level.player flag::wait_till_clear(#"scene");
   level.player flag::set("no_deaths_door_warning");
@@ -194,12 +194,12 @@ function function_58ef8b05(str_objective, b_starting) {
   level.vip val::reset(#"gunner", "ignoreme");
   var_cbfab426 = getEnt("trig_gunner_player_damage", "targetname");
   var_cbfab426 thread function_5477c29();
-  level thread savegame::function_7790f03(1);
+  level thread savegame::checkpoint_save_asap(1);
   function_9283a7e2();
   var_cbfab426 delete();
-  skipto::function_4e3ab877("armada_crash_part_1_gunner");
+  skipto::objective_completed("armada_crash_part_1_gunner");
   level.player flag::clear("no_deaths_door_warning");
-  level skipto::function_51726ac8(["armada_crash_part_4_laststand"], 0);
+  level skipto::set_level_objective(["armada_crash_part_4_laststand"], 0);
 }
 
 function function_3dda2db1(b_starting = 0) {
@@ -320,12 +320,12 @@ function m16(a_ents) {
 
 function function_cd3c6f53(str_objective, b_starting) {
   level.player endon(#"death");
-  level battlechatter::function_2ab9360b(0);
-  callback::on_ai_spawned(&function_9a7a2ede);
+  level battlechatter::bc_allow(0);
+  callback::on_ai_spawned(&last_stand_ai);
   spawner::add_global_spawn_function(#"axis", &function_21c6bdaa);
   level snd::client_msg(#"hash_2086d5e690a6ff1b");
   level snd::client_msg(#"hash_763d59f6976503eb");
-  namespace_72b0499b::music("13.0_last_stand");
+  armada_audio::music("13.0_last_stand");
   util::delay(6, undefined, &spawn_manager::enable, "last_stand_spawn_manager");
   level.player clientfield::set_to_player("" + #"force_stream_weapons", 2);
   scene::add_scene_func(#"hash_30c1ba04c9ba0bf3", &function_151b3bc9, "transition");
@@ -338,7 +338,7 @@ function function_cd3c6f53(str_objective, b_starting) {
   level thread scene::play(#"hash_30c1ba04c9ba0bf3", "outro");
   level.player takeallweapons();
   level.player waittill(#"gun_up");
-  level.player util::function_5f1df718(#"hash_58e6030bfae1aaff");
+  level.player util::function_5f1df718(#"cinematicmotion_body_shield");
   level.player giveweapon(getweapon("frag_grenade"));
   level.player givemaxammo(getweapon("frag_grenade"));
   level.player giveweapon(getweapon("pistol_semiauto_t9"));
@@ -346,8 +346,8 @@ function function_cd3c6f53(str_objective, b_starting) {
   level.player giveweapon(getweapon("lmg_slowfire_t9"));
   level.player givemaxammo(getweapon("lmg_slowfire_t9"));
   level.player switchtoweapon(getweapon("lmg_slowfire_t9"));
-  level battlechatter::function_2ab9360b(1);
-  level thread savegame::function_7790f03(1);
+  level battlechatter::bc_allow(1);
+  level thread savegame::checkpoint_save_asap(1);
   namespace_82bfe441::fade(0, "FadeFast");
   var_d0979dcb = getnode("adler_last_stand_node", "targetname");
   level.vip setgoal(var_d0979dcb, 1, 50);
@@ -369,12 +369,12 @@ function function_cd3c6f53(str_objective, b_starting) {
   wait 6;
   level thread function_25d5fbb();
   wait 9;
-  battlechatter::function_2ab9360b(0);
+  battlechatter::bc_allow(0);
   level.vip thread dialogue::queue("vox_cp_armd_00008_adlr_wait_1f");
   wait 1.5;
   level.vip thread dialogue::queue("vox_cp_armd_00008_adlr_hereitcomes_d9");
   level notify(#"hash_6290710bbbe1a88e");
-  function_313a56fa();
+  stop_grenades();
   wait 2.5;
   spawn_manager::kill("last_stand_spawn_manager");
   spawn_manager::kill("last_stand_spawn_manager2");
@@ -389,7 +389,7 @@ function function_cd3c6f53(str_objective, b_starting) {
   level.player action_utility::function_396e2076();
   level.player flag::set("no_deaths_door_warning");
   function_7081d8a6();
-  namespace_72b0499b::music("deactivate_13.0_last_stand");
+  armada_audio::music("deactivate_13.0_last_stand");
   snd::client_msg(#"hash_1b69ee637e8a6a94");
   level thread function_e8d36b28();
   namespace_82bfe441::fade(1, "FadeFast");
@@ -399,11 +399,11 @@ function function_cd3c6f53(str_objective, b_starting) {
   level notify(#"hash_73a21eed3846c3a9");
   array::run_all(getactorarray(), &delete_ai);
   wait 2;
-  level thread function_caa27b0b();
+  level thread sndfadeout();
   util::function_3e65fe0b(1);
   level util::delay("complete_objective", undefined, &objectives::complete, #"last_stand", undefined, 1);
   level scene::play(#"hash_30c1ba04c9ba0bf3", "ending");
-  skipto::function_1c2dfc20("cp_ger_hub_post_armada");
+  skipto::level_completed("cp_ger_hub_post_armada");
 }
 
 function function_be831785() {
@@ -413,11 +413,11 @@ function function_be831785() {
 }
 
 function function_151b3bc9(a_ents) {
-  var_1280faf3 = a_ents[#"spawner_player_chopper_crashed"];
+  vh_turret = a_ents[#"spawner_player_chopper_crashed"];
 
-  if(isDefined(var_1280faf3)) {
-    var_1280faf3 val::set(#"last_stand", "takedamage", 0);
-    var_1280faf3 val::set(#"last_stand", "allowdeath", 0);
+  if(isDefined(vh_turret)) {
+    vh_turret val::set(#"last_stand", "takedamage", 0);
+    vh_turret val::set(#"last_stand", "allowdeath", 0);
   }
 }
 
@@ -434,11 +434,11 @@ function function_88a1aa83() {
 function function_e8d36b28() {
   level waittill(#"hash_1fad4c55a48536fa");
   snd::client_msg(#"hash_5589c3a538ff9235");
-  namespace_72b0499b::music("tmp_armada_outro");
+  armada_audio::music("tmp_armada_outro");
 }
 
-function function_caa27b0b() {
-  level waittill(#"hash_3d97e5c1f87dea1a");
+function sndfadeout() {
+  level waittill(#"sndfadeout");
   snd::client_msg(#"hash_3dfb68a565cdf08");
 }
 
@@ -492,16 +492,16 @@ function function_7081d8a6() {
   rpg = magicbullet(getweapon("launcher_freefire_t9"), s_source.origin, s_dest.origin);
   rpg waittilltimeout(3, #"death");
   playFX(#"hash_347ec3991abdca5f", level.player getplayercamerapos() + anglesToForward(level.player getplayerangles()) * 20);
-  function_313a56fa(1);
+  stop_grenades(1);
   wait 0.2;
 }
 
 function safe_trigger() {
   self endon(#"death");
-  var_73f57f25 = getEnt("last_stand_safe_trigger", "targetname", 1);
+  t_safe = getEnt("last_stand_safe_trigger", "targetname", 1);
 
   while(true) {
-    if(self istouching(var_73f57f25)) {
+    if(self istouching(t_safe)) {
       self val::set(#"safe_area", "allowdeath", 0);
     } else {
       self val::reset(#"safe_area", "allowdeath");
@@ -561,7 +561,7 @@ function function_25d5fbb() {
   }
 }
 
-function function_313a56fa(var_af75d221 = 0) {
+function stop_grenades(var_af75d221 = 0) {
   level.var_810bc44d = 1;
 
   foreach(ai in getactorarray()) {
@@ -579,7 +579,7 @@ function function_313a56fa(var_af75d221 = 0) {
   }
 }
 
-function function_9a7a2ede() {
+function last_stand_ai() {
   self.script_accuracy = 0.5;
 
   if(is_true(level.var_810bc44d)) {

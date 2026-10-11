@@ -14,7 +14,7 @@ function private autoexec __init__system__() {
 
 function private _preload() {
   function_bc948200();
-  function_7c9b0132();
+  _init_dvars();
 }
 
 function private function_fa076c68() {}
@@ -37,7 +37,7 @@ function private function_bc948200() {
   clientfield::register("actor", "clf_rob_snipercam_blood", 1, 2, "int");
 }
 
-function private function_7c9b0132() {
+function private _init_dvars() {
   function_5ac4dc99("<dev string:x38>", 0);
   function_cd140ee9("<dev string:x38>", &function_7db8d681);
   function_5ac4dc99("<dev string:x50>", 2);

@@ -389,7 +389,7 @@ class cinteractobj {
 }
 
 function private event_handler[createstruct] function_e0a8e4ba(struct) {
-  foreach(var_d335d6ef, k in ["script_carry_object_key_target", "script_paired_gameobject"]) {
+  foreach(__k43, k in ["script_carry_object_key_target", "script_paired_gameobject"]) {
     if(!isDefined(level.var_41204f29)) {
       level.var_41204f29 = [];
     } else if(!isarray(level.var_41204f29)) {
@@ -2334,7 +2334,7 @@ function use_object_onuse(player) {
 function get_earliest_claim_player() {
   assert(function_350d0352());
   earliestplayer = self.claimplayer;
-  user = self.var_a4926509;
+  user = self.claimant;
 
   if(self.users[user].touching.players.size > 0) {
     earliesttime = undefined;
@@ -2364,8 +2364,8 @@ function remove_player_use_modifiers(e_player) {
 
 function private function_76f3a4cd() {
   if(self.cancontestclaim) {
-    num = self get_num_touching(self.var_a4926509);
-    numother = self function_3a7a2963(self.var_a4926509);
+    num = self get_num_touching(self.claimant);
+    numother = self function_3a7a2963(self.claimant);
 
     if(num && numother) {
       if(!level.gameobjectscontestedmajoritywins || num === numother) {
@@ -2390,12 +2390,12 @@ function private function_4783042a() {
 }
 
 function private function_d897ff7() {
-  numclaimants = isDefined(get_num_touching(self.var_a4926509)) ? get_num_touching(self.var_a4926509) : 0;
+  numclaimants = isDefined(get_num_touching(self.claimant)) ? get_num_touching(self.claimant) : 0;
 
   if(numclaimants == 0) {
     return true;
   } else if(level.gameobjectscontestedmajoritywins) {
-    numother = isDefined(function_3a7a2963(self.var_a4926509)) ? function_3a7a2963(self.var_a4926509) : 0;
+    numother = isDefined(function_3a7a2963(self.claimant)) ? function_3a7a2963(self.claimant) : 0;
     return (numother > numclaimants);
   }
 
@@ -2407,7 +2407,7 @@ function private function_72307b09(progress) {
     return;
   }
 
-  user = self.var_a4926509;
+  user = self.claimant;
 
   if(!isDefined(user) || !isDefined(self.users[user]) || !isDefined(self.users[user].contributors)) {
     return;
@@ -2445,7 +2445,7 @@ function use_object_prox_think() {
       continue;
     }
 
-    if(self.usetime && self.curprogress >= self.usetime || self.usetime <= 0 && get_num_touching(self.var_a4926509) > 0) {
+    if(self.usetime && self.curprogress >= self.usetime || self.usetime <= 0 && get_num_touching(self.claimant) > 0) {
       creditplayer = get_earliest_claim_player();
 
       if(isDefined(self.onenduse)) {
@@ -2578,7 +2578,7 @@ function use_object_prox_think() {
           if(is_true(hadprogress) && isDefined(self.ondecaycomplete) && self.curprogress <= (isDefined(self.decayprogressmin) ? self.decayprogressmin : 0)) {
             self[[self.ondecaycomplete]]();
           }
-        } else if(get_num_touching(self.var_a4926509) == 0) {
+        } else if(get_num_touching(self.claimant) == 0) {
           self.inuse = 0;
 
           if(isDefined(self.onenduse)) {
@@ -2629,7 +2629,7 @@ function use_object_prox_think() {
           self function_58901d83();
           self.claimplayer = undefined;
         }
-      } else if(get_num_touching(self.var_a4926509) == 0) {
+      } else if(get_num_touching(self.claimant) == 0) {
         self.inuse = 0;
 
         if(isDefined(self.onunoccupied)) {
@@ -2716,7 +2716,7 @@ function can_claim(sentient) {
     }
   }
 
-  if(self.var_a4926509 == function_4e3386a8(sentient.team)) {
+  if(self.claimant == function_4e3386a8(sentient.team)) {
     return false;
   }
 
@@ -2796,7 +2796,7 @@ function private function_bbb55f41(sentient) {
     } else if(isDefined(self.oncantuse)) {
       self[[self.oncantuse]](sentient);
     }
-  } else if(self function_4b64b7fd(sentient.team) && self can_claim(sentient) && get_num_touching(self.var_a4926509) == 0) {
+  } else if(self function_4b64b7fd(sentient.team) && self can_claim(sentient) && get_num_touching(self.claimant) == 0) {
     return true;
   }
 
@@ -2862,7 +2862,7 @@ function function_3510971a(enabled) {
 
 function set_claim_team(newteam) {
   new_user = newteam;
-  assert(new_user != self.var_a4926509);
+  assert(new_user != self.claimant);
 
   if(self.var_5083077c !== 1) {
     if(!self.decayprogress && !self function_350d0352() && gettime() - self.lastclaimtime > int(self.claimgraceperiod * 1000)) {
@@ -2872,9 +2872,9 @@ function set_claim_team(newteam) {
     }
   }
 
-  self.var_5f35f19a = self.var_a4926509;
+  self.var_5f35f19a = self.claimant;
   self.lastclaimtime = gettime();
-  self.var_a4926509 = new_user;
+  self.claimant = new_user;
   self update_use_rate();
 }
 
@@ -2982,7 +2982,7 @@ function trigger_touch_think(object) {
 
   if(is_true(self.var_17bc9194)) {
     object.curprogress = object.usetime + 1;
-    object.users[object.var_a4926509].touching.num = 1;
+    object.users[object.claimant].touching.num = 1;
     self.var_17bc9194 = undefined;
 
     while(object.curprogress >= 1) {
@@ -3043,11 +3043,11 @@ function trigger_touch_think(object) {
 }
 
 function update_use_rate() {
-  numclaimants = get_num_touching(self.var_a4926509);
-  claimantsuserate = function_9f894584(self.var_a4926509);
+  numclaimants = get_num_touching(self.claimant);
+  claimantsuserate = function_9f894584(self.claimant);
   numother = 0;
-  numother = function_3a7a2963(self.var_a4926509);
-  otheruserate = function_a7dbb00b(self.var_a4926509);
+  numother = function_3a7a2963(self.claimant);
+  otheruserate = function_a7dbb00b(self.claimant);
   self.userate = 0;
 
   if(self.decayprogress) {
@@ -4586,7 +4586,7 @@ function function_c6fa00c2() {
   if(isDefined(self.users[user]) && isDefined(self.users[user].contributors) && self.users[user].contributors.size > 0) {
     var_1dbb2b2b = self.users[user].contributors;
   } else {
-    user = self.var_a4926509;
+    user = self.claimant;
 
     if(isDefined(self.users[user]) && isDefined(self.users[user].contributors) && self.users[user].contributors.size > 0) {
       var_1dbb2b2b = self.users[user].contributors;

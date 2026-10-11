@@ -43,10 +43,10 @@ function function_613a7ccc(b_success = 0) {
 
 function function_878fd065() {
   var_5d1883b2 = spawn("script_origin", (-6006, 18086, 1905));
-  var_5d1883b2 playLoopSound(#"hash_26cc6394ce6f97c7");
+  var_5d1883b2 playLoopSound(#"amb_air_raid_siren");
   wait 1;
   var_c40f5b72 = spawn("script_origin", (3145, 15829, 1497));
-  var_c40f5b72 playLoopSound(#"hash_1aebb2a9c94effb3");
+  var_c40f5b72 playLoopSound(#"amb_air_raid_siren_dly");
 
   while(level.round_number < 3) {
     wait 3;
@@ -69,7 +69,7 @@ function function_3e83eb5e() {
 function function_8e50d09b() {
   while(true) {
     wait 65;
-    playSoundAtPosition(#"hash_62c19eac25ff3f3c", (-6006, 18086, 1905));
+    playSoundAtPosition(#"amb_city_thunder_flux", (-6006, 18086, 1905));
   }
 }
 

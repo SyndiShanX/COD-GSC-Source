@@ -114,7 +114,7 @@ function function_db05041b(struct, hint_string, callbackfunction) {
 
   scriptmodel clientfield::set("crafting_Table_spawn_fx", 1);
   scriptmodel clientfield::set("item_machine_spawn_rob", 1);
-  scriptmodel playLoopSound(#"hash_35de7277c46bb30f");
+  scriptmodel playLoopSound(#"zmb_crafting_table_lp");
   playFX("sr/fx9_safehouse_mchn_workbench_spawn", struct.origin);
 }
 
@@ -137,7 +137,7 @@ function function_e3ad9f54(eventstruct) {
     }
 
     if(!level.var_3ed9fd33 sr_crafting_table_menu::is_open(player) && !player clientfield::get_player_uimodel("hudItems.srOverlayOpen")) {
-      player notify(#"hash_5f178db4550eeae9");
+      player notify(#"sroverlayopened");
       level.var_3ed9fd33 sr_crafting_table_menu::open(player, 0);
 
       if(!isDefined(player.var_ac1e78a5)) {
@@ -351,7 +351,7 @@ function function_3c3d4f17(var_1a988176) {
 }
 
 function function_4b23ad31(machine, trigger) {
-  self endon(#"hash_5f178db4550eeae9");
+  self endon(#"sroverlayopened");
   trigger sethintstringforplayer(self, "");
 
   if(isDefined(machine.objectiveid)) {
@@ -502,7 +502,7 @@ function function_4b23ad31(machine, trigger) {
           }
 
           break;
-        case #"hash_383c519d3bdac984":
+        case #"upgrade_menu_close":
           self notify(#"hash_8a8d04156e14d76");
           self function_6c71e778(machine, trigger);
           return;

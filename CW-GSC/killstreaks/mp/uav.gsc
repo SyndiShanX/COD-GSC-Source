@@ -206,7 +206,7 @@ function activateuav(killstreaktype) {
   uav setenemymodel(bundle.var_aa0b97e1);
   uav.weapon = getweapon("uav");
   uav setweapon(uav.weapon);
-  uav function_619a5c20();
+  uav pingable();
   uav setforcenocull();
   uav.targetname = "uav";
   uav util::make_sentient();

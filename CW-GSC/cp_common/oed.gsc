@@ -31,10 +31,10 @@ function private preinit() {
   clientfield::register("vehicle", "turret_keyline_render", 1, 1, "int");
   clientfield::register("vehicle", "vehicle_keyline_toggle", 1, 1, "int");
   callback::on_spawned(&on_player_spawned);
-  spawner::add_global_spawn_function(#"axis", &function_9eccf6c1);
-  spawner::add_global_spawn_function(#"allies", &function_9eccf6c1);
-  level.var_3cebd57f = 1;
-  level.var_7813404f = 0;
+  spawner::add_global_spawn_function(#"axis", &enable_thermal_on_spawned);
+  spawner::add_global_spawn_function(#"allies", &enable_thermal_on_spawned);
+  level.b_enhanced_vision_enabled = 1;
+  level.b_player_scene_active = 0;
   level.enable_thermal = &enable_thermal;
   level.disable_thermal = &disable_thermal;
 }
@@ -42,23 +42,23 @@ function private preinit() {
 function private postinit() {}
 
 function on_player_spawned() {
-  self.var_3cebd57f = level.var_3cebd57f;
-  self.var_a12ca713 = 0;
-  self function_4b06932(self.var_a12ca713);
-  var_92ea5533 = 0;
+  self.b_enhanced_vision_enabled = level.b_enhanced_vision_enabled;
+  self.ev_state = 0;
+  self ev_activate_on_player(self.ev_state);
+  b_playsound = 0;
   self clientfield::set_to_player("sitrep_toggle", 1);
 }
 
 function event_handler[button_bit_actionslot_1_pressed] function_84d84898() {
-  if(is_true(level.var_3cebd57f) && is_true(self.var_3cebd57f)) {
+  if(is_true(level.b_enhanced_vision_enabled) && is_true(self.b_enhanced_vision_enabled)) {
     if(!scene::is_igc_active()) {
-      self.var_a12ca713 = !is_true(self.var_a12ca713);
-      self function_4b06932(self.var_a12ca713);
+      self.ev_state = !is_true(self.ev_state);
+      self ev_activate_on_player(self.ev_state);
     }
   }
 }
 
-function function_9eccf6c1() {
+function enable_thermal_on_spawned() {
   if(self.team == #"axis") {
     self enable_thermal();
     return;
@@ -69,17 +69,17 @@ function function_9eccf6c1() {
   }
 }
 
-function enable_thermal(var_5bf5152f) {
+function enable_thermal(str_disable) {
   self endon(#"death");
-  self thread function_5feac491();
+  self thread disable_thermal_on_death();
 
-  if(isDefined(var_5bf5152f)) {
-    level waittill(var_5bf5152f);
+  if(isDefined(str_disable)) {
+    level waittill(str_disable);
     self disable_thermal();
   }
 }
 
-function function_5feac491() {
+function disable_thermal_on_death() {
   self endon(#"disable_thermal");
   self waittill(#"death");
 
@@ -92,76 +92,76 @@ function disable_thermal() {
   self notify(#"disable_thermal");
 }
 
-function function_9ce86e2d(b_enabled = 1) {
-  level.var_3cebd57f = b_enabled;
+function toggle_thermal_mode_for_players(b_enabled = 1) {
+  level.b_enhanced_vision_enabled = b_enabled;
 
   foreach(e_player in level.players) {
-    e_player.var_3cebd57f = b_enabled;
+    e_player.b_enhanced_vision_enabled = b_enabled;
   }
 }
 
 function enable_ev(b_enabled = 1) {
-  self.var_3cebd57f = b_enabled;
+  self.b_enhanced_vision_enabled = b_enabled;
 
   if(!b_enabled) {
-    self function_4b06932(b_enabled);
+    self ev_activate_on_player(b_enabled);
   }
 }
 
-function function_4b06932(b_enabled = 1) {
-  self.var_a12ca713 = b_enabled;
+function ev_activate_on_player(b_enabled = 1) {
+  self.ev_state = b_enabled;
 
-  if(self.var_a12ca713) {
-    self notify(#"hash_4bf84da81ef07fa4");
+  if(self.ev_state) {
+    self notify(#"enhanced_vision_activated");
     return;
   }
 
-  self notify(#"hash_2e8449934db3fd9d");
+  self notify(#"enhanced_vision_deactivated");
 }
 
-function function_f2a6c166(var_af4a3f3e, var_5bf5152f) {
+function enable_keyline(b_interact, str_disable) {
   self endon(#"death");
   self clientfield::set("sitrep_material", 1);
-  self thread function_99b61739();
+  self thread disable_on_death();
 
-  if(isDefined(var_5bf5152f)) {
-    level waittill(var_5bf5152f);
-    self function_b925bd3c();
+  if(isDefined(str_disable)) {
+    level waittill(str_disable);
+    self disable_keyline();
   }
 }
 
-function function_99b61739() {
+function disable_on_death() {
   self waittill(#"death");
 
   if(isDefined(self)) {
-    self function_b925bd3c();
+    self disable_keyline();
   }
 }
 
-function function_b925bd3c() {
+function disable_keyline() {
   self clientfield::set("sitrep_material", 0);
 }
 
-function function_19b0de13(b_active) {
+function toggle_sitrep_for_players(b_active) {
   foreach(player in level.players) {
-    player.var_bef05351 = !is_true(player.var_bef05351);
-    player clientfield::set_to_player("sitrep_toggle", player.var_bef05351);
+    player.sitrep_active = !is_true(player.sitrep_active);
+    player clientfield::set_to_player("sitrep_toggle", player.sitrep_active);
   }
 }
 
-function function_8c3be026() {
+function init_sitrep_model() {
   if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
   }
 
-  var_57f4c959 = level.scriptbundles[#"sitrep"][self.scriptbundlename];
-  var_7343683f = util::spawn_model(var_57f4c959.model, self.origin, self.angles);
+  s_sitrep_bundle = level.scriptbundles[#"sitrep"][self.scriptbundlename];
+  e_sitrep = util::spawn_model(s_sitrep_bundle.model, self.origin, self.angles);
 
-  if(isDefined(var_57f4c959.var_2e0f906a)) {
-    var_7343683f.var_280ea1f = var_57f4c959.var_2e0f906a;
+  if(isDefined(s_sitrep_bundle.sitrep_interact)) {
+    e_sitrep.script_sitrep_id = s_sitrep_bundle.sitrep_interact;
   } else {
-    var_7343683f.var_280ea1f = 0;
+    e_sitrep.script_sitrep_id = 0;
   }
 
-  return var_7343683f;
+  return e_sitrep;
 }

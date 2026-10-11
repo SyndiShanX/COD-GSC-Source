@@ -69,7 +69,7 @@ function siegebot_initialize() {
     self hidepart("tag_turret_panel_03_d0");
     self hidepart("tag_turret_panel_04_d0");
     self hidepart("tag_turret_panel_05_d0");
-  } else if(self.vehicletype == #"hash_962ecc6fc2eca01") {
+  } else if(self.vehicletype == #"zombietron_veh_siegebot") {
     self asmsetanimationrate(2);
   }
 
@@ -155,7 +155,7 @@ function state_death_update(params) {
   self stopmovementandsetbrake();
   badplace_box("", 0, self.origin, 50, "all");
   self vehicle::set_damage_fx_level(0);
-  self playSound(#"hash_69ea4c3143042b15");
+  self playSound(#"veh_quadtank_sparks");
 
   if(self.vehicletype === "spawner_enemy_boss_siegebot_zombietron") {
     self asmsetanimationrate(1);
@@ -399,7 +399,7 @@ function state_jump_update(params) {
     self asmsetanimationrate(1);
   }
 
-  self asmrequestsubstate(#"hash_513a4bf9337d7336");
+  self asmrequestsubstate(#"inair@jump");
   self waittill(#"engine_startup");
   self vehicle::impact_fx(self.settings.startupfx1);
   self waittill(#"leave_ground");
@@ -427,7 +427,7 @@ function state_jump_update(params) {
     velocity += velocityforward + params.gravityforce + antigravity;
 
     if(oldverticlespeed > 0 && velocity[2] < 0) {
-      self asmrequestsubstate(#"hash_7ed8f3dbe3df1eec");
+      self asmrequestsubstate(#"fall@jump");
     }
 
     if(velocity[2] < 0 && self.jump.linkent.origin[2] + velocity[2] < goal[2]) {
@@ -716,9 +716,9 @@ function function_e177d7af(target) {
     self turretsettarget(3, target, (0, 0, -10));
     self waittilltimeout(1, #"turret_on_target");
     var_628cb978 = getweapon(#"hash_2a42cf9b8d71ff7e");
-    var_7f98edcc = target.origin;
+    v_aim_pos = target.origin;
     v_origin = self gettagorigin("tag_gunner_flash2");
-    v_dir = vectorNormalize(var_7f98edcc - v_origin);
+    v_dir = vectorNormalize(v_aim_pos - v_origin);
     var_a64609fe = v_dir * 1000;
     self magicmissile(var_628cb978, v_origin, var_a64609fe, target);
     self turretcleartarget(2);

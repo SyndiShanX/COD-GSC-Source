@@ -46,8 +46,8 @@ function private finalize_init() {
     register_player_contract_event(#"ekia", &on_ekia, 2);
     register_player_contract_event(#"objective_ekia", &on_objective_ekia);
     register_player_contract_event(#"objective_kill", &function_23ddb75);
-    register_player_contract_event(#"offender_kill", &function_c933f2f5);
-    register_player_contract_event(#"defender_kill", &function_9aa7974e);
+    register_player_contract_event(#"offender_kill", &on_offender_kill);
+    register_player_contract_event(#"defender_kill", &on_defender_kill);
     register_player_contract_event(#"hash_2f3b5cfd90466f60", &function_fb608f0a, 1);
     register_player_contract_event(#"hash_32ed5d2b274397c1", &function_4b024d04);
     register_player_contract_event(#"killstreak_activated", &function_2065738f, 1);
@@ -400,11 +400,11 @@ function on_ekia(weapon, victim) {
     attacker increment_contract(#"hash_31a6484e36a0a20f");
   }
 
-  var_29d5cadd = attacker gettotalunlockedweaponattachments(weapon);
+  total_unlocked = attacker gettotalunlockedweaponattachments(weapon);
   loadout_primary_weapon = attacker loadout::function_18a77b37("primary");
   loadout_secondary_weapon = attacker loadout::function_18a77b37("secondary");
 
-  if(var_29d5cadd >= 3) {
+  if(total_unlocked >= 3) {
     if(loadout_primary_weapon === weapon) {
       attacker function_fd9fb79b(#"contract_mp_attachments3_primary_ekia");
     } else if(loadout_secondary_weapon === weapon) {
@@ -412,7 +412,7 @@ function on_ekia(weapon, victim) {
     }
   }
 
-  if(var_29d5cadd >= 5) {
+  if(total_unlocked >= 5) {
     if(loadout_primary_weapon === weapon) {
       attacker function_fd9fb79b(#"hash_d18e3651f508489");
     } else if(loadout_secondary_weapon === weapon) {
@@ -483,11 +483,11 @@ function function_23ddb75() {
   self increment_contract(#"hash_210a710134dbdaaa");
 }
 
-function function_c933f2f5() {
+function on_offender_kill() {
   self increment_contract(#"hash_71d34a613b3ac387");
 }
 
-function function_9aa7974e() {
+function on_defender_kill() {
   self increment_contract(#"hash_23648f4b37ee8ba1");
 }
 

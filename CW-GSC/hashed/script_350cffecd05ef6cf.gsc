@@ -30,7 +30,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_1c2a96f9;
+#namespace doa_fate;
 
 function init() {
   level.doa.var_fe92efd8 = array({
@@ -139,13 +139,13 @@ function function_15a789ab(var_c8386627, delay = 0, banner = 1) {
     }
 
     if(self function_d17f9bcb()) {
-      self.doa.var_e5805edb = 1;
-      self setmovespeedscale(self.doa.var_e5805edb);
-      self namespace_83eb6304::turnofffx("fast_feet");
+      self.doa.default_movespeed = 1;
+      self setmovespeedscale(self.doa.default_movespeed);
+      self doa_fx::turnofffx("fast_feet");
     }
 
     if(self function_d5b51f1e() && isDefined(self.var_10948967)) {
-      self.var_10948967 namespace_4ff32993::function_a7be9625();
+      self.var_10948967 doa_chicken::function_a7be9625();
       self.var_10948967 = undefined;
     }
 
@@ -163,7 +163,7 @@ function function_15a789ab(var_c8386627, delay = 0, banner = 1) {
 
   if(!function_afe89b8c(var_c8386627)) {
     self thread namespace_6e90e490::function_47e11416(4);
-    level thread function_86515c3b(self, function_e8822b3b(var_c8386627), banner);
+    level thread awardfate(self, function_e8822b3b(var_c8386627), banner);
     namespace_1e25ad94::debugmsg("Player awarded fate:" + var_c8386627);
     return;
   }
@@ -182,7 +182,7 @@ function function_42b0778(var_4198fa33, player, roj) {
     roj = undefined;
   }
 
-  function_86515c3b(player, fate);
+  awardfate(player, fate);
 
   if(isDefined(roj)) {
     if(roj == 0) {
@@ -196,9 +196,9 @@ function function_42b0778(var_4198fa33, player, roj) {
   }
 }
 
-function function_86515c3b(player, var_191ca105, banner = 1) {
+function awardfate(player, var_191ca105, banner = 1) {
   player endon(#"disconnect");
-  player namespace_83eb6304::function_3ecfde67("lightningStrike");
+  player doa_fx::function_3ecfde67("lightningStrike");
   player namespace_e32bb68::function_3a59ec34("evt_doa_lightning_bolt");
 
   if(!isDefined(player.entnum)) {
@@ -208,7 +208,7 @@ function function_86515c3b(player, var_191ca105, banner = 1) {
   if(is_true(banner)) {
     var_6b186658 = var_191ca105.var_af104f33 + (player.entnum << 4);
     level clientfield::set("banner_eventplayer", var_6b186658);
-    level thread namespace_9fc66ac::announce(var_191ca105.announce, 1 << player.entnum);
+    level thread doa_sound::announce(var_191ca105.announce, 1 << player.entnum);
   }
 
   player namespace_d2efac9a::function_9d3fe107();
@@ -216,10 +216,10 @@ function function_86515c3b(player, var_191ca105, banner = 1) {
 
   if(isDefined(var_f1bda869)) {
     var_f1bda869.angles = var_191ca105.var_d75b5b21;
-    var_f1bda869 thread namespace_dfc652ee::function_7e4e4b8a(player, 0);
+    var_f1bda869 thread doa_pickups::function_7e4e4b8a(player, 0);
     var_f1bda869 waittilltimeout(3.5, #"bombsaway");
     var_f1bda869 delete();
-    player namespace_83eb6304::function_3ecfde67(var_191ca105.fx);
+    player doa_fx::function_3ecfde67(var_191ca105.fx);
     player namespace_e32bb68::function_3a59ec34(var_191ca105.sfx);
   }
 
@@ -248,12 +248,12 @@ function function_86515c3b(player, var_191ca105, banner = 1) {
       player.doa.var_9c7d56c1 = [[player.doa.weaponpack]] - > function_91c18b19(weaponlevel);
       weaponlevel = math::clamp(player.doa.weaponlevel + level.doa.var_6c58d51, player.doa.weaponlevel, 2);
       player.doa.var_4eda72ee = [[player.doa.weaponpack]] - > function_91c18b19(weaponlevel);
-      player.var_10948967 = player namespace_4ff32993::function_f69400ca("zombietron_fated_chicken", 1, 1.2);
+      player.var_10948967 = player doa_chicken::chickenpickup("zombietron_fated_chicken", 1, 1.2);
       break;
     case 8:
-      player.doa.var_e5805edb = 1.5;
-      player setmovespeedscale(player.doa.var_e5805edb);
-      player namespace_83eb6304::function_3ecfde67("fast_feet");
+      player.doa.default_movespeed = 1.5;
+      player setmovespeedscale(player.doa.default_movespeed);
+      player doa_fx::function_3ecfde67("fast_feet");
       break;
     case 32:
       player.doa.var_96ca2395 = 5;
@@ -268,11 +268,11 @@ function function_86515c3b(player, var_191ca105, banner = 1) {
       roll = randomint(30);
 
       if(roll < 10) {
-        level namespace_dfc652ee::itemspawn(namespace_dfc652ee::function_6265bde4("zombietron_barrel"), player.origin, undefined, undefined, 1, undefined, undefined, undefined, player);
+        level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_barrel"), player.origin, undefined, undefined, 1, undefined, undefined, undefined, player);
       } else if(roll < 10) {
-        level namespace_dfc652ee::itemspawn(namespace_dfc652ee::function_6265bde4("zombietron_boxing_glove"), player.origin, undefined, undefined, 1, undefined, undefined, undefined, player);
+        level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_boxing_glove"), player.origin, undefined, undefined, 1, undefined, undefined, undefined, player);
       } else {
-        level namespace_dfc652ee::itemspawn(namespace_dfc652ee::function_6265bde4("zombietron_sawblade"), player.origin, undefined, undefined, 1, undefined, undefined, undefined, player);
+        level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_sawblade"), player.origin, undefined, undefined, 1, undefined, undefined, undefined, player);
       }
 
       player thread namespace_b754744b::function_b784c6bd(46);
@@ -443,14 +443,14 @@ function function_11463552() {
   util::wait_network_frame();
 
   foreach(player in getPlayers()) {
-    player thread namespace_7f5aeb59::turnplayershieldon(0);
+    player thread doa_player_utility::turnplayershieldon(0);
 
     if(player === result.activator) {
       continue;
     }
 
     if(!isalive(player) || is_true(player.doa.respawning)) {
-      player namespace_7f5aeb59::function_513831e1();
+      player doa_player_utility::function_513831e1();
     }
 
     player setOrigin(var_637c4df.origin);
@@ -466,7 +466,7 @@ function function_11463552() {
   wait 1;
   level doa_banner::function_7a0e5387(44);
   wait 2;
-  level thread namespace_9fc66ac::announce(71);
+  level thread doa_sound::announce(71);
   wait 2;
   wait 4;
   namespace_1e25ad94::debugmsg("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ F A T ER O C K S $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
@@ -533,7 +533,7 @@ function function_11463552() {
   warning = timeout - 15000;
   lasttime = gettime();
   alldone = 0;
-  level thread namespace_9fc66ac::announce(8);
+  level thread doa_sound::announce(8);
 
   while(!alldone) {
     time = gettime();
@@ -544,14 +544,14 @@ function function_11463552() {
 
     if(lasttime <= warning && time > warning) {
       level doa_banner::function_7a0e5387(45);
-      level thread namespace_9fc66ac::announce(11);
+      level thread doa_sound::announce(11);
     }
 
     lasttime = time;
     wait 1;
     alldone = 1;
 
-    foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+    foreach(player in doa_player_utility::function_23e1f90f()) {
       if(!isDefined(player.doa.rof)) {
         alldone = 0;
         break;
@@ -578,11 +578,11 @@ function function_11463552() {
     }
   }
 
-  level thread namespace_9fc66ac::announce(9);
+  level thread doa_sound::announce(9);
   level notify(#"hash_7626a6770055d63c", {
     #banner: 46
   });
-  namespace_7f5aeb59::function_f8645db3(getdvarint(#"hash_3ee59243c26b309e", 1750) + getdvarint(#"hash_3ee59243c26b309e", 1250), getdvarint(#"hash_7c5b80d878427a83", 1000) + getdvarint(#"hash_6bf35a0be925bbac", 1000));
+  doa_player_utility::function_f8645db3(getdvarint(#"hash_3ee59243c26b309e", 1750) + getdvarint(#"hash_3ee59243c26b309e", 1250), getdvarint(#"hash_7c5b80d878427a83", 1000) + getdvarint(#"hash_6bf35a0be925bbac", 1000));
 }
 
 function function_e4867f1d(fate, roj = 0) {
@@ -591,7 +591,7 @@ function function_e4867f1d(fate, roj = 0) {
   self moveTo(self.dest, 1);
   self thread namespace_ec06fe4a::function_d55f042c(level, "game_over");
   wait 0.9;
-  self namespace_83eb6304::function_3ecfde67("fate_landing");
+  self doa_fx::function_3ecfde67("fate_landing");
   self namespace_e32bb68::function_3a59ec34("zmb_hellhound_bolt");
   wait 1;
   trigger = namespace_ec06fe4a::spawntrigger("trigger_radius", self.dest + (0, 0, -72), 0, 80, 256);
@@ -632,7 +632,7 @@ function function_e4867f1d(fate, roj = 0) {
       }
 
       if(!player function_afe89b8c(fate.var_c8386627)) {
-        self namespace_83eb6304::function_3ecfde67("lightningStrike");
+        self doa_fx::function_3ecfde67("lightningStrike");
         self namespace_e32bb68::function_3a59ec34("evt_doa_lightning_bolt");
         break;
       }
@@ -644,7 +644,7 @@ function function_e4867f1d(fate, roj = 0) {
       player.doa.var_cb8b16a = 1;
     }
 
-    self namespace_83eb6304::function_3ecfde67("fate_explo");
+    self doa_fx::function_3ecfde67("fate_explo");
     objective_setstate(self.objectiveid, "invisible");
     level thread function_42b0778(self, player, roj);
     player giveachievement(#"doa_achievement_fated");
@@ -703,7 +703,7 @@ function function_41d66855(var_419d3eb7 = 0) {
 
   if(var_419d3eb7) {
     level doa_banner::function_7a0e5387(55);
-    namespace_7f5aeb59::function_f8645db3(getdvarint(#"hash_68ba61d82ed34879", 1000));
+    doa_player_utility::function_f8645db3(getdvarint(#"hash_68ba61d82ed34879", 1000));
   } else {
     level doa_banner::function_7a0e5387(56);
   }
@@ -739,7 +739,7 @@ function function_41d66855(var_419d3eb7 = 0) {
   warning = timeout - 15000;
   lasttime = gettime();
   alldone = 0;
-  level thread namespace_9fc66ac::announce(8);
+  level thread doa_sound::announce(8);
 
   while(!alldone) {
     time = gettime();
@@ -750,14 +750,14 @@ function function_41d66855(var_419d3eb7 = 0) {
 
     if(lasttime <= warning && time > warning) {
       level doa_banner::function_7a0e5387(45);
-      level thread namespace_9fc66ac::announce(11);
+      level thread doa_sound::announce(11);
     }
 
     lasttime = time;
     wait 1;
     alldone = 1;
 
-    foreach(player in namespace_7f5aeb59::function_23e1f90f()) {
+    foreach(player in doa_player_utility::function_23e1f90f()) {
       if(!isDefined(player.doa.roj)) {
         alldone = 0;
         break;
@@ -784,5 +784,5 @@ function function_41d66855(var_419d3eb7 = 0) {
     }
   }
 
-  level thread namespace_9fc66ac::announce(9);
+  level thread doa_sound::announce(9);
 }

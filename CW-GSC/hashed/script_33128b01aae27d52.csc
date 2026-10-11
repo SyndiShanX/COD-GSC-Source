@@ -10,15 +10,15 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_b7d49cfd;
+#namespace doa_outro;
 
 function init() {
   if(!isDefined(level.doa.var_258d537d)) {
     level.doa.var_258d537d = spawnStruct();
     level.doa.var_258d537d.var_a6b0949b = [];
 
-    for(var_36f009bd = 0; true; var_36f009bd++) {
-      shot = struct::get("podium_camera_shot" + var_36f009bd);
+    for(shotnumber = 0; true; shotnumber++) {
+      shot = struct::get("podium_camera_shot" + shotnumber);
 
       if(!isDefined(shot)) {
         break;

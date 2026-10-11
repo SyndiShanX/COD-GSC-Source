@@ -85,7 +85,7 @@ function function_df47057f(team, label, var_2f64048d, spawnpoints) {
 }
 
 function function_25e7711a(list_type, team, label, var_2f64048d) {
-  spawnpoints = function_82061144(list_type, team);
+  spawnpoints = getspawnpoints(list_type, team);
   function_df47057f(team, label, var_2f64048d, spawnpoints);
 }
 

@@ -5,14 +5,14 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\system_shared;
-#namespace namespace_2d7ccca3;
+#namespace field_upgrades;
 
 function private autoexec __init__system__() {
-  system::register(#"hash_3dcfc06bf6bfc5f5", &preinit, undefined, undefined, undefined);
+  system::register(#"field_upgrades", &preinit, undefined, undefined, undefined);
 }
 
 function private preinit() {
-  clientfield::register_clientuimodel("hudItems.ammoCooldowns.fieldUpgrade", #"hud_items", [#"hash_2f126bd99a74de8b", #"fieldupgrade"], 1, 5, "float", undefined, 0, 0);
+  clientfield::register_clientuimodel("hudItems.ammoCooldowns.fieldUpgrade", #"hud_items", [#"ammocooldowns", #"fieldupgrade"], 1, 5, "float", undefined, 0, 0);
   clientfield::register("missile", "fieldUpgradeActive", 1, 1, "int", &function_5fbd38e2, 0, 0);
 }
 

@@ -161,7 +161,7 @@ function private function_a5c8dce5(var_c282fd0f, str_type, params = undefined) {
     }
 
     var_c282fd0f.var_4e14a19 = 1;
-    var_c282fd0f function_619a5c20();
+    var_c282fd0f pingable();
   } else if(isstruct(var_c282fd0f)) {
     if(is_true(var_c282fd0f.var_4e14a19)) {
       return;
@@ -304,7 +304,7 @@ function door_init() {
     return;
   }
 
-  if(self.clip.script_string === "dynamite" && !is_true(self.var_3474efbf)) {
+  if(self.clip.script_string === "dynamite" && !is_true(self.script_num)) {
     self zm_utility::set_hint_string(self, "default_buy_debris", cost);
     return;
   }
@@ -721,7 +721,7 @@ function door_activate(time, open = 1, quick, use_blocker_clip_for_pathing) {
           self hide();
         }
 
-        playSoundAtPosition(#"hash_5679e16b17c350a1", self.origin);
+        playSoundAtPosition(#"exp_blocker_debris", self.origin);
       }
 
       break;
@@ -1759,7 +1759,7 @@ function blocker_init() {
       }
 
       self.zbarrier = targets[j];
-      self.zbarrier function_619a5c20();
+      self.zbarrier pingable();
       self.zbarrier zm_ping::function_550247bd(12);
       self.zbarrier.chunk_health = [];
 

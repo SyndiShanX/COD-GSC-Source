@@ -118,9 +118,9 @@ function private play_critical_health_rumble(localclientnum) {
     }
 
     if(name == #"reaper") {
-      sound = #"hash_14e9bc45552b1ab9";
+      sound = #"chr_player_reaper_heartbeat";
     } else {
-      sound = #"hash_318f22e4d70ee6d3";
+      sound = #"chr_player_heartbeat";
     }
 
     if(!is_true(self.var_e9dd2ca0)) {
@@ -801,9 +801,9 @@ function function_8fe966f4(localclientnum, var_bfd952c7, new_stage, ramptime, po
 
 function function_c0cdd1f2(localclientnum, stagefrom, stageto, ramptime, key, postfx) {
   self endon(#"death", #"death_gesture", #"endramppostfx");
-  var_97b5c837 = "rampPostFx" + key + postfx;
-  self notify(var_97b5c837);
-  self endon(var_97b5c837);
+  notify_event = "rampPostFx" + key + postfx;
+  self notify(notify_event);
+  self endon(notify_event);
   localplayer = function_5c10bd79(localclientnum);
 
   if(!isDefined(localplayer)) {
@@ -1498,13 +1498,13 @@ function death_gesture(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 function function_6ad98c9c() {
   level.blood.gameskill = 1;
 
-  if(!isDefined(level.blood.var_286fcc75)) {
-    level.blood.var_286fcc75 = [];
-    level.blood.var_286fcc75[0] = getscriptbundle(#"gamedifficulty_recruit");
-    level.blood.var_286fcc75[1] = getscriptbundle(#"gamedifficulty_regular");
-    level.blood.var_286fcc75[2] = getscriptbundle(#"gamedifficulty_hardened");
-    level.blood.var_286fcc75[3] = getscriptbundle(#"gamedifficulty_veteran");
-    level.blood.var_286fcc75[4] = getscriptbundle(#"gamedifficulty_realistic");
+  if(!isDefined(level.blood.game_difficulty)) {
+    level.blood.game_difficulty = [];
+    level.blood.game_difficulty[0] = getscriptbundle(#"gamedifficulty_recruit");
+    level.blood.game_difficulty[1] = getscriptbundle(#"gamedifficulty_regular");
+    level.blood.game_difficulty[2] = getscriptbundle(#"gamedifficulty_hardened");
+    level.blood.game_difficulty[3] = getscriptbundle(#"gamedifficulty_veteran");
+    level.blood.game_difficulty[4] = getscriptbundle(#"gamedifficulty_realistic");
   }
 }
 
@@ -1519,7 +1519,7 @@ function private function_17323bb3(localclientnum) {
   self endon("7fdb2f58d63647d4");
   self endon(#"death", #"death_gesture", #"disconnect");
   gameskill = util::function_5a407dc8(localclientnum);
-  shieldtime = level.blood.var_286fcc75[gameskill].player_deathinvulnerabletime;
+  shieldtime = level.blood.game_difficulty[gameskill].player_deathinvulnerabletime;
   ramptime = 0.25;
 
   while(!isDefined(self.pstfx_blood)) {

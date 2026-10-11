@@ -30,7 +30,7 @@ class ccp_chyron: cluielem {
     cluielem::register_clientside("cp_chyron");
   }
 
-  function function_90bde5d3(localclientnum, value) {
+  function set_index(localclientnum, value) {
     set_data(localclientnum, "index", value);
   }
 
@@ -118,6 +118,6 @@ function function_2a377de3(localclientnum, value) {
   [[self]] - > function_2a377de3(localclientnum, value);
 }
 
-function function_90bde5d3(localclientnum, value) {
-  [[self]] - > function_90bde5d3(localclientnum, value);
+function set_index(localclientnum, value) {
+  [[self]] - > set_index(localclientnum, value);
 }

@@ -75,7 +75,7 @@ function function_19a410e2(var_a370eede) {
   }
 
   self clientfield::set("" + #"highlight_dial", var_4d05aafa);
-  self.var_2cc651d5 clientfield::set("" + #"highlight_dial", var_4d05aafa | 8);
+  self.e_arrow clientfield::set("" + #"highlight_dial", var_4d05aafa | 8);
 }
 
 function function_faf723a() {
@@ -83,15 +83,15 @@ function function_faf723a() {
   self.safe = e_safe;
 
   for(i = 0; i < 3; i++) {
-    var_9a00bf02 = "tag_dial_" + i;
-    v_origin = e_safe gettagorigin(var_9a00bf02);
-    v_angles = e_safe gettagangles(var_9a00bf02);
+    tag_dial = "tag_dial_" + i;
+    v_origin = e_safe gettagorigin(tag_dial);
+    v_angles = e_safe gettagangles(tag_dial);
     e_lock = util::spawn_model(#"hash_4f1e10f734edcd48" + i, v_origin, v_angles);
-    var_2cc651d5 = util::spawn_model(#"hash_32784def46e0e975" + i, v_origin, v_angles);
-    e_lock linkTo(e_safe, var_9a00bf02);
-    var_2cc651d5 linkTo(e_safe, var_9a00bf02);
+    e_arrow = util::spawn_model(#"hash_32784def46e0e975" + i, v_origin, v_angles);
+    e_lock linkTo(e_safe, tag_dial);
+    e_arrow linkTo(e_safe, tag_dial);
     e_lock.n_index = i;
-    e_lock.var_2cc651d5 = var_2cc651d5;
+    e_lock.e_arrow = e_arrow;
 
     if(!isDefined(self.locks)) {
       self.locks = [];
@@ -106,20 +106,20 @@ function function_faf723a() {
 }
 
 function function_4395371c() {
-  var_8468438a = self getplayercamerapos();
+  v_eye_pos = self getplayercamerapos();
   var_a364d7fa = anglesToForward(self getplayerangles());
-  var_c575b928 = 0.9744;
+  n_cos = 0.9744;
   var_afa4131f = undefined;
 
   foreach(e_lock in level.var_ea51eeb9.locks) {
-    var_d5d9a61a = e_lock.origin - var_8468438a;
+    var_d5d9a61a = e_lock.origin - v_eye_pos;
     n_dist = length(var_d5d9a61a);
 
     if(n_dist <= 45) {
       n_fov = vectordot(var_d5d9a61a / n_dist, var_a364d7fa);
 
-      if(n_fov > var_c575b928) {
-        var_c575b928 = n_fov;
+      if(n_fov > n_cos) {
+        n_cos = n_fov;
         var_afa4131f = e_lock;
       }
     }
@@ -193,7 +193,7 @@ function function_8b40c670(e_trigger) {
       if(input != 0) {
         n_index = self.var_9e8e7b78.n_index;
         level.var_ea51eeb9.input[n_index] = (level.var_ea51eeb9.input[n_index] + input + 40) % 40;
-        playSoundAtPosition(#"hash_16474e80e8a1f9d", self.var_9e8e7b78.origin);
+        playSoundAtPosition(#"zmb_quest_ww_safe_dial_turn", self.var_9e8e7b78.origin);
 
         iprintlnbold("<dev string:x38>" + n_index + "<dev string:x40>" + level.var_ea51eeb9.input[n_index] + "<dev string:x4f>" + level.var_ea51eeb9.numbers[n_index]);
 
@@ -219,16 +219,16 @@ function function_8b40c670(e_trigger) {
 }
 
 function function_7d0eaace() {
-  var_8b27029a = 1;
+  b_unlock = 1;
 
   for(i = 0; i < 3; i++) {
     if(level.var_ea51eeb9.input[i] != level.var_ea51eeb9.numbers[i]) {
-      var_8b27029a = 0;
+      b_unlock = 0;
       break;
     }
   }
 
-  if(var_8b27029a) {
+  if(b_unlock) {
     level flag::set(#"hash_358a79602429d556");
 
     iprintlnbold("<dev string:x5e>");

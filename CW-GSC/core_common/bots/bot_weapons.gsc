@@ -190,7 +190,7 @@ function private function_d4db3361() {
 
 function private function_a79f6dfb() {
   if(level.gametype == #"dropkick") {
-    bot_action::register_weapon(#"hash_29ab150f9f8964f", &function_6aa40bb4, &use_pistol);
+    bot_action::register_weapon(#"dropkick_weapon", &function_6aa40bb4, &use_pistol);
   }
 }
 
@@ -782,7 +782,7 @@ function private function_bd46948a(actionparams) {
   return 94;
 }
 
-function private function_55d06cb0(actionparams) {
+function private eq_stimshot(actionparams) {
   self.bot.offhandcooldown = gettime() + int(5 * 1000);
   self bottapbutton(15);
 }
@@ -2203,9 +2203,9 @@ function private function_9160a207(currentweapon) {
       mindist = var_8a2cf681 * 500;
       falloffdist = self.bot.enemydist - mindist;
       var_f4b40c21 = var_8a2cf681 * 2500 - mindist;
-      var_66a04f11 = isDefined(self.bot.difficulty.var_65a25108) ? self.bot.difficulty.var_65a25108 : 0;
-      var_7e2f0732 = isDefined(self.bot.difficulty.var_e0e4be1b) ? self.bot.difficulty.var_e0e4be1b : 0;
-      falloff = lerpfloat(var_66a04f11, var_7e2f0732, falloffdist / var_f4b40c21);
+      falloffmin = isDefined(self.bot.difficulty.var_65a25108) ? self.bot.difficulty.var_65a25108 : 0;
+      falloffmax = isDefined(self.bot.difficulty.var_e0e4be1b) ? self.bot.difficulty.var_e0e4be1b : 0;
+      falloff = lerpfloat(falloffmin, falloffmax, falloffdist / var_f4b40c21);
       var_f519fbc6 *= falloff;
     }
 
@@ -2223,8 +2223,8 @@ function private function_9160a207(currentweapon) {
   return randomfloat(100) < var_f519fbc6;
 }
 
-function private function_e3b275f0(enemy, var_755136c1) {
-  if(!isDefined(enemy gettagorigin(var_755136c1))) {
+function private function_e3b275f0(enemy, headtag) {
+  if(!isDefined(enemy gettagorigin(headtag))) {
     return false;
   }
 

@@ -54,7 +54,7 @@ function function_a8fc3bf1(s_info) {
       assert(isDefined(self.str_location), "<dev string:x38>");
 
       switch (self.str_location) {
-        case #"hash_615b4319c8177682":
+        case #"mountain":
           e_player clientfield::set_to_player("ice_slide_looping_fx", 1);
           e_player thread clientfield::set_to_player("ice_slide_dof", 1);
           break;
@@ -96,7 +96,7 @@ function function_a8fc3bf1(s_info) {
           case #"server_reveal":
             e_player thread clientfield::set_to_player("ice_slide_dof", 3);
             break;
-          case #"hash_615b4319c8177682":
+          case #"mountain":
           case #"server_descent":
           case #"amerika":
             e_player thread clientfield::set_to_player("ice_slide_dof", 4);

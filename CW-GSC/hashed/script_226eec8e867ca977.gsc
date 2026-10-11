@@ -34,10 +34,10 @@ function main() {
 function function_81853592() {
   self notify("64d873247a66697a");
   self endon("64d873247a66697a");
-  self thread namespace_268747c0::function_978c05b5();
+  self thread doa_hazard::function_978c05b5();
   result = self waittill(#"destroy_hazard");
 
-  if(is_true(self.var_7c56394) && is_true(result.var_760a0807)) {
+  if(is_true(self.paged) && is_true(result.var_760a0807)) {
     arrayremovevalue(level.doa.var_18f8e489, self);
     namespace_1e25ad94::debugmsg("Deleting Flogger trap permenently at:" + self.origin);
   }
@@ -46,7 +46,7 @@ function function_81853592() {
     triggers = arraycopy(self.trigger);
 
     foreach(trigger in triggers) {
-      trigger namespace_268747c0::function_54f185a();
+      trigger doa_hazard::function_54f185a();
     }
 
     self.trigger = [];
@@ -59,7 +59,7 @@ function function_81853592() {
   self.var_13c99cf7 = gettime() + 1000;
 }
 
-function function_ecfc6c75(trap, var_7c56394 = 0) {
+function function_ecfc6c75(trap, paged = 0) {
   hazard = namespace_ec06fe4a::spawnmodel(trap.origin, "p8_fxanim_mp_zmuseum_flogger_trap_mod");
 
   if(isDefined(hazard)) {
@@ -70,7 +70,7 @@ function function_ecfc6c75(trap, var_7c56394 = 0) {
   }
 
   trap.script_model = hazard;
-  trap.var_7c56394 = var_7c56394;
+  trap.paged = paged;
   trap.trigger = [];
   trap.spinrate = 1;
   trap.minwait = 3;
@@ -223,13 +223,13 @@ function function_80eed528() {
   triggers = arraycopy(self.trigger);
 
   foreach(trigger in triggers) {
-    trigger namespace_268747c0::function_54f185a();
+    trigger doa_hazard::function_54f185a();
   }
 
   self.trigger = [];
 
   while(self.trigger.size < 2) {
-    self.trigger[self.trigger.size] = self namespace_268747c0::function_678eaf60("flogger", self.origin, 512, 1, 256);
+    self.trigger[self.trigger.size] = self doa_hazard::function_678eaf60("flogger", self.origin, 512, 1, 256);
   }
 
   self.trigger[0] unlink();
@@ -264,7 +264,7 @@ function function_80eed528() {
   triggers = arraycopy(self.trigger);
 
   foreach(trigger in triggers) {
-    trigger namespace_268747c0::function_54f185a();
+    trigger doa_hazard::function_54f185a();
   }
 
   self.trigger = [];
@@ -300,7 +300,7 @@ function function_ab141bd8(model, trap) {
 
       if(guy.var_62abb118 < gettime()) {
         guy.var_62abb118 = gettime() + 500;
-        guy namespace_83eb6304::function_3ecfde67("pungi_damage");
+        guy doa_fx::function_3ecfde67("pungi_damage");
         model namespace_e32bb68::function_3a59ec34("evt_doa_hazard_flogger_impact");
       }
 
@@ -319,7 +319,7 @@ function function_ab141bd8(model, trap) {
         continue;
       }
 
-      if(!is_true(guy.var_e66cd6fb)) {
+      if(!is_true(guy.no_ragdoll)) {
         v_centroid = guy getcentroid();
         v_away_from_source = vectorNormalize(self.origin - v_centroid);
         v_away_from_source *= 128;
@@ -328,7 +328,7 @@ function function_ab141bd8(model, trap) {
         continue;
       }
 
-      guy thread namespace_ed80aead::function_586ef822();
+      guy thread doa_gib::function_586ef822();
     }
   }
 }

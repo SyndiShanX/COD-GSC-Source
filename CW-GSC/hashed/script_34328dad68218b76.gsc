@@ -69,10 +69,10 @@ function function_b3a6e0bc(eventstruct) {
     self.ai_hulk.var_98f1f37c = 1;
     self.ai_hulk.allowdeath = 1;
     self.ai_hulk callback::callback(#"hash_10ab46b52df7967a");
-    var_c39323b5 = 1;
+    b_cleaned_up = 1;
   }
 
-  if(is_true(var_c39323b5) || !isDefined(self.ai_hulk) || !isalive(self.ai_hulk)) {
+  if(is_true(b_cleaned_up) || !isDefined(self.ai_hulk) || !isalive(self.ai_hulk)) {
     if(isDefined(self.n_obj_id)) {
       objective_clearentity(self.n_obj_id);
       zm_utility::function_bc5a54a8(self.n_obj_id);

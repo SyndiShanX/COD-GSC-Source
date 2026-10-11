@@ -346,8 +346,8 @@ function function_996f5d0f(localclientnum, oldval, newval, bnewent, binitialsnap
     }
 
     if(!isDefined(self.var_38a54dff)) {
-      self playSound(fieldname, #"hash_2769cc33e55105ad");
-      self.var_38a54dff = self playLoopSound(#"hash_1bcf487baf93b873");
+      self playSound(fieldname, #"zmb_gold_mq_7_radiation_start");
+      self.var_38a54dff = self playLoopSound(#"zmb_gold_mq_7_radiation_lp");
     }
 
     return;
@@ -367,7 +367,7 @@ function function_996f5d0f(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(isDefined(self.var_38a54dff)) {
-    self playSound(fieldname, #"hash_585da2b2a9d85b4");
+    self playSound(fieldname, #"zmb_gold_mq_7_radiation_end");
     self stoploopsound(self.var_38a54dff);
     self.var_38a54dff = undefined;
   }

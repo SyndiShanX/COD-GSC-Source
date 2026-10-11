@@ -50,7 +50,7 @@ function get_team_color(localclientnum, team, colorindex) {
       team = #"axis";
     }
 
-    teamcolor = function_45a33458(localclientnum, team, colorindex);
+    teamcolor = getteamcolor(localclientnum, team, colorindex);
   }
 
   return teamcolor;
@@ -246,16 +246,16 @@ function function_471909d9(localclientnum, entity, settings, localplayerteam) {
     }
 
     if(!function_9e39e246(localclientnum)) {
-      var_7a7c5b7d = is_friendly(localclientnum, #"allies") ? #"allies" : #"axis";
+      alliesteam = is_friendly(localclientnum, #"allies") ? #"allies" : #"axis";
     } else if(localplayerteam == #"spectator" || localplayerteam == #"allies") {
-      var_7a7c5b7d = #"allies";
+      alliesteam = #"allies";
     } else {
-      var_7a7c5b7d = #"axis";
+      alliesteam = #"axis";
     }
 
-    var_3be52391 = util::get_enemy_team(var_7a7c5b7d);
+    var_3be52391 = util::get_enemy_team(alliesteam);
 
-    if(var_6f36c5bc == 0 || entity.team == var_7a7c5b7d && var_6f36c5bc == 1 || entity.team == var_3be52391 && var_6f36c5bc == 2) {
+    if(var_6f36c5bc == 0 || entity.team == alliesteam && var_6f36c5bc == 1 || entity.team == var_3be52391 && var_6f36c5bc == 2) {
       return true;
     }
   } else if(var_349e9a55 == 0 || var_349e9a55 == 2) {

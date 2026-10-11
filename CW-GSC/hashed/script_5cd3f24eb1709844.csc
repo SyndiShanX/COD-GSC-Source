@@ -21,21 +21,21 @@ function init() {
 
 function function_968feb60(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump == 1) {
-    if(isDefined(self.var_9fae3db4)) {
-      stopfx(fieldname, self.var_9fae3db4);
-      self.var_9fae3db4 = undefined;
+    if(isDefined(self.spotlight_fx)) {
+      stopfx(fieldname, self.spotlight_fx);
+      self.spotlight_fx = undefined;
     }
 
-    self.var_9fae3db4 = util::playFXOnTag(fieldname, #"hash_1fb650ed35a01358", self, "tag_origin");
+    self.spotlight_fx = util::playFXOnTag(fieldname, #"hash_1fb650ed35a01358", self, "tag_origin");
   }
 
   if(bwasdemojump == 2) {
-    if(isDefined(self.var_9fae3db4)) {
-      stopfx(fieldname, self.var_9fae3db4);
-      self.var_9fae3db4 = undefined;
+    if(isDefined(self.spotlight_fx)) {
+      stopfx(fieldname, self.spotlight_fx);
+      self.spotlight_fx = undefined;
     }
 
-    self.var_9fae3db4 = util::playFXOnTag(fieldname, #"hash_60791ecaad8f98e6", self, "tag_origin");
+    self.spotlight_fx = util::playFXOnTag(fieldname, #"hash_60791ecaad8f98e6", self, "tag_origin");
   }
 }
 

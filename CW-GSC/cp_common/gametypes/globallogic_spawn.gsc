@@ -128,7 +128,7 @@ function mayspawn() {
     return false;
   }
 
-  if(is_true(self.var_f68bc076)) {
+  if(is_true(self.inhibit_respawn)) {
     return false;
   }
 
@@ -160,8 +160,8 @@ function timeuntilwavespawn(minimumwait) {
     return 0;
   }
 
-  var_a0122c26 = 50;
-  var_e0fb0ad5 = var_a0122c26 * (isDefined(self.wavespawnindex) ? self.wavespawnindex : 0);
+  framedelay = 50;
+  var_e0fb0ad5 = framedelay * (isDefined(self.wavespawnindex) ? self.wavespawnindex : 0);
   elapsed = max(0, earliestspawntime - lastwavetime - var_e0fb0ad5);
   numwavespassedearliestspawntime = elapsed / wavedelay;
   numwaves = ceil(numwavespassedearliestspawntime);
@@ -232,26 +232,26 @@ function spawnplayer() {
   pixbeginevent(#"");
   assert(globallogic_utils::isvalidclass(self.curclass) || isbot(self));
   self loadout::setclass(self.curclass);
-  var_db3f2906 = self savegame::function_2ee66e93("altPlayerID", undefined);
-  var_d4a479a1 = undefined;
+  var_db3f2906 = self savegame::get_player_data("altPlayerID", undefined);
+  altplayer = undefined;
 
   if(isDefined(var_db3f2906)) {
-    foreach(var_88ad84f4 in level.players) {
-      if(var_88ad84f4 getxuid() === var_db3f2906) {
-        var_d4a479a1 = var_88ad84f4;
+    foreach(possibleplayer in level.players) {
+      if(possibleplayer getxuid() === var_db3f2906) {
+        altplayer = possibleplayer;
         break;
       }
     }
 
-    if(!isDefined(var_d4a479a1)) {
+    if(!isDefined(altplayer)) {
       self savegame::set_player_data("altPlayerID", undefined);
     }
   }
 
-  self thread loadout::giveloadout(self.team, self.curclass, var_d4a479a1);
+  self thread loadout::giveloadout(self.team, self.curclass, altplayer);
 
-  if(is_true(self.var_c071a13e)) {
-    self.var_c071a13e = undefined;
+  if(is_true(self.restoringcheckpoint)) {
+    self.restoringcheckpoint = undefined;
   } else {
     self lui::screen_close_menu();
   }
@@ -301,7 +301,7 @@ function spawnplayer() {
   if(!getdvarint(#"art_review", 0)) {
     self.var_913d3fca = 0;
     self.last_damaged_time = 0;
-    self.var_63a30c1 = 0;
+    self.last_kill_time = 0;
     self.var_7e008e0c = 0;
     callback::callback(#"on_player_spawned");
 
@@ -314,7 +314,7 @@ function spawnplayer() {
   print("<dev string:x8b>" + self.origin[0] + "<dev string:x91>" + self.origin[1] + "<dev string:x91>" + self.origin[2] + "<dev string:x96>");
 
   setDvar(#"scr_selecting_location", "");
-  self thread function_e3b1cd54();
+  self thread vehicledeathwaiter();
   self util::set_lighting_state();
   self util::set_sun_shadow_split_distance();
   self.firstspawn = 0;
@@ -322,9 +322,9 @@ function spawnplayer() {
   self thread util::cleanup_fancycam();
 }
 
-function function_e3b1cd54() {
-  self notify(#"hash_587f51dc5f621d5d");
-  self endon(#"hash_587f51dc5f621d5d", #"disconnect");
+function vehicledeathwaiter() {
+  self notify(#"vehicledeathwaiter");
+  self endon(#"vehicledeathwaiter", #"disconnect");
 
   while(true) {
     waitresult = self waittill(#"vehicle_death");
@@ -334,7 +334,7 @@ function function_e3b1cd54() {
       continue;
     }
 
-    self.var_e961196c = 1;
+    self.diedonturret = 1;
   }
 }
 
@@ -384,7 +384,7 @@ function spectatorthirdpersonness() {
 }
 
 function forcespawn(time) {
-  self endon(#"death", #"hash_54543f163347573c", #"spawned");
+  self endon(#"death", #"diconnect", #"spawned");
 
   if(!isDefined(time)) {
     time = 60;
@@ -635,7 +635,7 @@ function waitandspawnclient(timealreadypassed) {
 
   spawnedasspectator = 0;
 
-  if(is_true(level.var_41cd8311) && is_true(self.var_30a1aeee)) {
+  if(is_true(level.usecpkillcam) && is_true(self.var_30a1aeee)) {
     if(isDefined(level.var_31c6ebd4)) {
       self[[level.var_31c6ebd4]]();
     }
@@ -711,9 +711,9 @@ function waitandspawnclient(timealreadypassed) {
     self notify(#"stop_wait_safe_spawn_button");
   }
 
-  if(isDefined(level.var_515c3797)) {
-    if(isDefined(level.var_84a50edd) && !spawnedasspectator) {
-      spawnedasspectator = self[[level.var_84a50edd]]();
+  if(isDefined(level.gametypespawnwaiter)) {
+    if(isDefined(level.gametypespawnedasspectator) && !spawnedasspectator) {
+      spawnedasspectator = self[[level.gametypespawnedasspectator]]();
     }
 
     if(!spawnedasspectator) {
@@ -722,7 +722,7 @@ function waitandspawnclient(timealreadypassed) {
 
     spawnedasspectator = 1;
 
-    if(!self[[level.var_515c3797]]()) {
+    if(!self[[level.gametypespawnwaiter]]()) {
       self.waitingtospawn = 0;
       self hud_message::clearlowermessage();
       self.wavespawnindex = undefined;
@@ -767,7 +767,7 @@ function waitandspawnclient(timealreadypassed) {
     self waittill(#"end_killcam");
   }
 
-  self notify(#"hash_4bd20f5c626eb3f0");
+  self notify(#"camera_sequence_completed");
 
   if(isDefined(self.var_ca00be20)) {
     self.var_ca00be20.alpha = 0;

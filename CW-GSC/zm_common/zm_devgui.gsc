@@ -3222,9 +3222,9 @@ function zombie_devgui_pack_current_weapon() {
     if(!players[i] laststand::player_is_in_laststand() && players[i].sessionstate !== "<dev string:xe53>") {
       weap = players[i] getcurrentweapon();
       item = players[i] item_inventory::function_230ceec4(weap);
-      var_27751b99 = namespace_4b9fccd8::get_pap_level(item);
+      n_pap_level = namespace_4b9fccd8::get_pap_level(item);
 
-      if(isDefined(item) && var_27751b99 == 0 && item.networkid != 32767) {
+      if(isDefined(item) && n_pap_level == 0 && item.networkid != 32767) {
         players[i] item_inventory::function_73ae3380(item, 1);
         continue;
       }

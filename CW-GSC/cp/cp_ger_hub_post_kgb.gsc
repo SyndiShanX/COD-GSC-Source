@@ -43,7 +43,7 @@ function main(str_skipto, b_starting) {
   level waittill(#"start_ambient");
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 }
 
@@ -95,9 +95,9 @@ function function_2ed9170() {
 
 function function_22967a29() {
   self waittill(#"dialog_ready");
-  transient = savegame::function_6440b06b(#"transient");
-  transient.var_16e4161b = 1;
-  level thread savegame::function_7790f03();
+  transient = savegame::get_mission_data(#"transient");
+  transient.briefing_complete = 1;
+  level thread savegame::checkpoint_save_asap();
 }
 
 function function_d762b8f7() {
@@ -249,10 +249,10 @@ function function_223f05aa(str_skipto, b_starting) {
   flag::wait_till("flag_post_kgb_complete");
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 
-  if(isDefined(level.var_d7d201ba) && isDefined(level.skipto_current_objective)) {
-    level.player flag::set(level.var_d7d201ba);
+  if(isDefined(level.str_player_start_flag) && isDefined(level.skipto_current_objective)) {
+    level.player flag::set(level.str_player_start_flag);
   }
 }

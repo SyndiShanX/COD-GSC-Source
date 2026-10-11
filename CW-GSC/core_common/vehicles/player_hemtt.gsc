@@ -9,7 +9,7 @@
 #namespace player_hemtt;
 
 function private autoexec __init__system__() {
-  system::register(#"hash_5b215c4eff8f5759", &preinit, undefined, undefined, #"player_vehicle");
+  system::register(#"player_hemtt", &preinit, undefined, undefined, #"player_vehicle");
 }
 
 function private preinit() {

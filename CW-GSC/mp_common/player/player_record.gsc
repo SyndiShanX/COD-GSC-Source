@@ -281,7 +281,7 @@ function function_96d38b95(result) {
   end_match_specialist.specialist_legs = player function_cde23658();
   end_match_specialist.specialist_torso = player function_92ea4100();
   end_match_specialist.specialist_showcase = showcaseweapon.weapon.name;
-  function_92d1707f(#"hash_4c5946fa1191bc64", #"end_match_info", end_match_info, #"hash_4682ee0eb5071d2", var_811ed119, #"end_match_loadout", end_match_loadout, #"hash_43cb38816354c3aa", var_b65d83f5, #"end_match_contracts", end_match_contracts, #"end_match_specialist", end_match_specialist);
+  function_92d1707f(#"dlog_event_end_match", #"end_match_info", end_match_info, #"hash_4682ee0eb5071d2", var_811ed119, #"end_match_loadout", end_match_loadout, #"hash_43cb38816354c3aa", var_b65d83f5, #"end_match_contracts", end_match_contracts, #"end_match_specialist", end_match_specialist);
 }
 
 function record_special_move_data_for_life(killer) {
@@ -460,7 +460,7 @@ function function_7569c0fb() {
     case #"control_hc":
     case #"dom10v10":
     case #"hash_2561ffe336f1f9e3":
-    case #"hash_26d903aae5afc467":
+    case #"sd_cdlpro":
     case #"war":
     case #"war12v12":
     case #"hash_5a63e4bb11fd4fa8":
@@ -473,7 +473,7 @@ function function_7569c0fb() {
     case #"hash_35e9174ce58d5bc2":
     case #"escort":
     case #"fireteam_dirty_bomb":
-    case #"hash_594c4ab1d31aa150":
+    case #"control_cdl":
     case #"hash_55786ad6106fde1c":
     case #"hash_7020e89c237486d0":
     case #"clean_bb":
@@ -487,8 +487,8 @@ function function_7569c0fb() {
       break;
     case #"koth10v10":
     case #"koth":
-    case #"hash_156594d96f8a6568":
-    case #"hash_35a6541d081acef5":
+    case #"koth_cdlpro":
+    case #"koth_cdl":
     case #"hash_111d8ed9a9337f7b":
     case #"koth_hc":
     case #"koth_bb":

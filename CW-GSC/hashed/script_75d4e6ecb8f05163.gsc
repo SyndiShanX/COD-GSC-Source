@@ -23,7 +23,7 @@ function function_26ecdeeb() {
       count++;
 
       if(count >= 5) {
-        function_17cf7de1(1);
+        sendctgstrace(1);
         return;
       }
 
@@ -106,7 +106,7 @@ function function_8e536d77() {
       }
 
       if(val >= item.threshold) {
-        function_17cf7de1(item.trace);
+        sendctgstrace(item.trace);
         var_760d7bc4 = 1;
       }
     }
@@ -122,15 +122,15 @@ function function_35cb919f(params) {
     return;
   }
 
-  var_3749a388 = self.spawn_pos.spawned_timestamp;
+  n_birth_time = self.spawn_pos.spawned_timestamp;
 
-  if(!isDefined(var_3749a388)) {
+  if(!isDefined(n_birth_time)) {
     return;
   }
 
   n_current_time = gettime();
 
-  if(n_current_time - var_3749a388 < int(1 * 1000)) {
+  if(n_current_time - n_birth_time < int(1 * 1000)) {
     n_distance = distance(self.spawn_pos.origin, self.origin);
 
     if(n_distance > 1000) {
@@ -152,7 +152,7 @@ function function_b36f8acc() {
   wait 5;
 
   if(level.var_11f03ada >= 10) {
-    function_17cf7de1(22);
+    sendctgstrace(22);
     level flag::set(#"hash_61e567fec60cf9b9");
   }
 

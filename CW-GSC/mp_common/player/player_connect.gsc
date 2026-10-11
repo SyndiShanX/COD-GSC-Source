@@ -320,16 +320,16 @@ function callback_playerconnect() {
 }
 
 function function_b7c4c231() {
-  var_f18c60b3 = undefined;
+  spawn_function = undefined;
 
   if(self.pers[#"team"] == #"spectator") {
     [[level.spawnspectator]]();
     self thread namespace_66d6aa44::function_a8f822ee();
     return;
   } else if(util::function_52d401ed() && self globallogic_spawn::mayspawn()) {
-    var_f18c60b3 = &globallogic_spawn::function_886521e2;
+    spawn_function = &globallogic_spawn::function_886521e2;
   } else {
-    var_f18c60b3 = level.spawnspectator;
+    spawn_function = level.spawnspectator;
 
     if(level flag::get(#"hash_263f55e6bcaa1891")) {
       self thread namespace_66d6aa44::function_a8f822ee();
@@ -340,14 +340,14 @@ function function_b7c4c231() {
 
   if(isDefined(spawn)) {
     var_50747a19 = spawn.origin + (0, 0, 60);
-    self[[var_f18c60b3]](var_50747a19, spawn.angles);
+    self[[spawn_function]](var_50747a19, spawn.angles);
     return;
   }
 
   spawnpoint = spawning::get_random_intermission_point();
 
   if(isDefined(spawnpoint)) {
-    self[[var_f18c60b3]](spawnpoint.origin, spawnpoint.angles);
+    self[[spawn_function]](spawnpoint.origin, spawnpoint.angles);
     return;
   }
 
@@ -417,8 +417,8 @@ function private function_db0c0406() {
     self.pers[#"spawns"] = 0;
   }
 
-  if(!isDefined(self.pers[#"hash_104ec9727c3d4ef7"])) {
-    self.pers[#"hash_104ec9727c3d4ef7"] = 0;
+  if(!isDefined(self.pers[#"totalmultikills"])) {
+    self.pers[#"totalmultikills"] = 0;
   }
 
   if(!isDefined(self.pers[#"highestmultikill"])) {

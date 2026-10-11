@@ -266,7 +266,7 @@ function function_c89f6305() {
 }
 
 function function_8a080c79() {
-  self namespace_ed80aead::function_586ef822();
+  self doa_gib::function_586ef822();
 }
 
 function killme() {
@@ -417,15 +417,15 @@ function function_7292bc() {
       }
 
       spawner::global_spawn_throttle();
-      var_d42ab4a6 = 0;
+      scanned = 0;
 
       while(level.doa.var_dcbded2.size) {
         queueitem = level.doa.var_dcbded2[0];
-        var_d42ab4a6++;
+        scanned++;
 
-        if(var_d42ab4a6 > 20) {
+        if(scanned > 20) {
           waitframe(1);
-          var_d42ab4a6 = 0;
+          scanned = 0;
         }
 
         if(queueitem.count <= 0) {
@@ -477,12 +477,12 @@ function function_7292bc() {
       }
 
       if(queueitem.radius > 0) {
-        var_190085e3 = namespace_ec06fe4a::function_65ee50ba(queueitem.targetpoint + (randomintrange(queueitem.radius * -1, queueitem.radius), randomintrange(queueitem.radius * -1, queueitem.radius), 0));
+        spawn_spot = namespace_ec06fe4a::function_65ee50ba(queueitem.targetpoint + (randomintrange(queueitem.radius * -1, queueitem.radius), randomintrange(queueitem.radius * -1, queueitem.radius), 0));
       } else {
-        var_190085e3 = queueitem.targetpoint;
+        spawn_spot = queueitem.targetpoint;
       }
 
-      ai = spawnai(queueitem, var_190085e3);
+      ai = spawnai(queueitem, spawn_spot);
 
       if(isDefined(ai)) {
         if(isDefined(ai)) {
@@ -549,7 +549,7 @@ function spawnai(spawnparams, spawnloc) {
 
     if(isDefined(spawnparams.notifyent)) {
       namespace_1e25ad94::debugmsg("ai_queue_spawned notify sending for ent:" + ai getentitynumber() + " at: " + gettime());
-      spawnparams.notifyent notify(#"hash_4c72e79bdad8315e", {
+      spawnparams.notifyent notify(#"ai_queue_spawned", {
         #ai: ai, #time: gettime()
       });
     }
@@ -560,14 +560,14 @@ function spawnai(spawnparams, spawnloc) {
   return ai;
 }
 
-function function_db55a448(spawndef, var_190085e3, enemy, target) {
+function function_db55a448(spawndef, spawn_spot, enemy, target) {
   spawner = [[spawndef]] - > getspawner();
 
-  if(isDefined(var_190085e3)) {
-    spawner.origin = var_190085e3;
+  if(isDefined(spawn_spot)) {
+    spawner.origin = spawn_spot;
   }
 
-  ai = spawner spawner::spawn(1, undefined, var_190085e3);
+  ai = spawner spawner::spawn(1, undefined, spawn_spot);
 
   if(isDefined(ai)) {
     ai.var_e53efa7e = [[spawndef]] - > gettype();

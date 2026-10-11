@@ -34,10 +34,10 @@ function starting(str_skipto) {
 
 function main(str_skipto, b_starting) {
   level flag::set("aslt_bunker_escape_begin");
-  level battlechatter::function_2ab9360b(1);
+  level battlechatter::bc_allow(1);
 
   if(is_true(b_starting)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto, "adler_shotgun");
+    level.adler = namespace_e77bf565::adler_spawn(str_skipto, "adler_shotgun");
     level thread scene::skipto_end_noai("scene_kgb_door_kick", "Last_Frame", undefined, 1);
     level thread scene::skipto_end_noai("scene_kgb_utility_room_adler", "Door_Closed", undefined, 1);
     level thread scene::play_from_time("scene_kgb_open_vault", "Enemies_Breach_Vault", undefined, 1, 1, 1, 0, 0);
@@ -78,7 +78,7 @@ function main(str_skipto, b_starting) {
   level thread scene::init("scene_kgb_tunnel_catwalk_transition");
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
@@ -93,7 +93,7 @@ function init_clientfields() {
   clientfield::register("world", "vault_explosion_dynents", 1, 1, "int");
 }
 
-function function_22b7fffd() {}
+function init_scenes() {}
 
 function function_b735db01() {
   bunker_escape_adler_start_node = getnode("bunker_escape_adler_start_node", "targetname");
@@ -118,11 +118,11 @@ function function_b735db01() {
   level flag::wait_till("bunker_escape_catwalk_enemies_cleared");
 }
 
-function function_bfe40bf0(var_b1e77977) {
+function function_bfe40bf0(bon) {
   vault_ai_nav_clip = getEnt("vault_ai_nav_clip", "targetname");
 
   if(isDefined(vault_ai_nav_clip)) {
-    if(is_true(var_b1e77977)) {
+    if(is_true(bon)) {
       vault_ai_nav_clip solid();
       vault_ai_nav_clip disconnectPaths();
       return;

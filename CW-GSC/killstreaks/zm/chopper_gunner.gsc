@@ -49,7 +49,7 @@ function private function_3675de8b() {
 }
 
 function on_ai_killed(params) {
-  if(isDefined(level.chopper_gunner) && level.chopper_gunner.owner === params.eattacker && params.weapon === getweapon(#"hash_1734871fef9c0549")) {
+  if(isDefined(level.chopper_gunner) && level.chopper_gunner.owner === params.eattacker && params.weapon === getweapon(#"chopper_gunner_turret")) {
     level.chopper_gunner endon(#"killed", #"death");
     params.eattacker endon(#"gunner_left");
     level.chopper_gunner namespace_e8c18978::function_631f02c5();
@@ -136,7 +136,7 @@ function private function_5160bb1e(killstreaktype) {
     }
   }
 
-  player thread function_8afd7b25();
+  player thread watch_for_laststand();
 
   if(!player isonground()) {
     var_d6940e18 = 0;
@@ -246,7 +246,7 @@ function function_48170f5e() {
   }
 }
 
-function function_8afd7b25() {
+function watch_for_laststand() {
   level endon(#"end_game");
   self endon(#"disconnect", #"gunner_left");
 
@@ -304,7 +304,7 @@ function function_25d9a09f(vehicle) {
 }
 
 function private function_728f72a5(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
-  if(shitloc === self && psoffsettime == getweapon(#"hash_1734871fef9c0549")) {
+  if(shitloc === self && psoffsettime == getweapon(#"chopper_gunner_turret")) {
     return 0;
   }
 

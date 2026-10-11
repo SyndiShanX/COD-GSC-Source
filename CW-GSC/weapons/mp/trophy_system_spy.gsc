@@ -75,8 +75,8 @@ function ontrophysystemspawn(watcher, player) {
   self.var_515d6dda = 1;
   self setweapon(self.weapon);
   self.ammo = player ammo_get(self.weapon);
-  self.var_bf03cf85 = 0;
-  self function_619a5c20();
+  self.interceptions = 0;
+  self pingable();
   player stats::function_e24eec31(self.weapon, #"used", 1);
   player notify(#"hash_50994ef63f120738");
   self thread deployanim();

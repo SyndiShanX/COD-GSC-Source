@@ -151,8 +151,8 @@ function function_e23b5b30() {
   level waittill(#"enable_firebase_zone", #"fasttravel_bought");
   zm_vo::function_3c173d37();
 
-  for(var_dbe98535 = 1; var_dbe98535 <= 5; var_dbe98535++) {
-    level scene::stop("aib_t9_zm_vign_cust_frbz_rav_vignette_01_alt_0" + var_dbe98535);
+  for(scene_index = 1; scene_index <= 5; scene_index++) {
+    level scene::stop("aib_t9_zm_vign_cust_frbz_rav_vignette_01_alt_0" + scene_index);
   }
 
   if(isDefined(level.ravenov)) {

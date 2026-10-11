@@ -42,9 +42,9 @@ function function_3aea3305(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_140c21d6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump == 1) {
-    var_d263d14a = anglestoright(self.angles) * 3;
+    v_fx_offset = anglestoright(self.angles) * 3;
     var_9e6bf193 = (-90, 0, 0);
-    self.fx_tag = util::spawn_model(fieldname, "tag_origin", self.origin + var_d263d14a, self.angles + var_9e6bf193);
+    self.fx_tag = util::spawn_model(fieldname, "tag_origin", self.origin + v_fx_offset, self.angles + var_9e6bf193);
     self.fx_tag linkTo(self);
     self.fx_tag.var_c6cd7dce = util::playFXOnTag(fieldname, #"hash_1863acf2e22ff6ba", self.fx_tag, "tag_origin");
     return;

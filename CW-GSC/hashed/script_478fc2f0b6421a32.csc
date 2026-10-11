@@ -19,7 +19,7 @@ function init_clientfields() {
 
 function function_f1c7d9e3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self.var_ddd3b139 = util::playFXOnTag(fieldname, #"hash_67ab48748fb2d398", self, "j_eyeball_le");
+    self.var_ddd3b139 = util::playFXOnTag(fieldname, #"zombie/fx_glow_eye_red", self, "j_eyeball_le");
     return;
   }
 

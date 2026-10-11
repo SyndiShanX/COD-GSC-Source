@@ -35,16 +35,16 @@ function function_d28e9b17() {
     self endon(#"disconnect");
   }
 
-  self notify(#"hash_562d458e34274132");
+  self notify(#"kill_duplicate_shields");
   waitframe(1);
-  self endon(#"hash_1e2c098e8231a30f", #"hash_562d458e34274132");
+  self endon(#"hash_1e2c098e8231a30f", #"kill_duplicate_shields");
   org = namespace_ec06fe4a::spawnmodel(self.origin, "tag_origin");
 
   if(isDefined(org)) {
     org.targetname = "boxingPickupUpdate";
     org.angles = (0, randomint(180), 0);
     org setModel("tag_origin");
-    self.doa.var_c3159deb = org;
+    self.doa.boxing_gloves = org;
   } else {
     return;
   }
@@ -94,11 +94,11 @@ function function_d28e9b17() {
 }
 
 function function_c2d94d61() {
-  self namespace_83eb6304::function_3ecfde67("boxing_stars");
+  self doa_fx::function_3ecfde67("boxing_stars");
   waitresult = self waittilltimeout(2, #"actor_corpse", #"entitydeleted");
 
   if(isDefined(waitresult.corpse)) {
-    waitresult.corpse namespace_83eb6304::function_3ecfde67("boxing_stars");
+    waitresult.corpse doa_fx::function_3ecfde67("boxing_stars");
   }
 }
 
@@ -143,7 +143,7 @@ function private function_7c757878(player, mod = "MOD_UNKNOWN", var_70c63791) {
 
     guy.var_f84f4372 = curtime;
     guy namespace_e32bb68::function_3a59ec34("evt_doa_pickup_boxers_active_impact");
-    guy namespace_83eb6304::function_3ecfde67("boxing_pow");
+    guy doa_fx::function_3ecfde67("boxing_pow");
 
     if(isDefined(var_70c63791)) {
       guy thread[[var_70c63791]]();
@@ -161,15 +161,15 @@ function private function_7c757878(player, mod = "MOD_UNKNOWN", var_70c63791) {
 }
 
 function private function_61888137(org) {
-  self endon(#"hash_1e2c098e8231a30f", #"hash_562d458e34274132");
+  self endon(#"hash_1e2c098e8231a30f", #"kill_duplicate_shields");
 
   if(isPlayer(self)) {
     self endon(#"disconnect");
   }
 
-  timeout = max(max(30, self namespace_1c2a96f9::function_4808b985(30)), self namespace_1c2a96f9::function_2ce61fb9(30));
+  timeout = max(max(30, self doa_fate::function_4808b985(30)), self doa_fate::function_2ce61fb9(30));
 
-  while(!namespace_dfc652ee::function_f759a457()) {
+  while(!doa_pickups::function_f759a457()) {
     waitframe(1);
   }
 
@@ -185,7 +185,7 @@ function private function_61888137(org) {
 }
 
 function private function_f0855523(org) {
-  result = self waittill(#"hash_1e2c098e8231a30f", #"entering_last_stand", #"kill_shield", #"hash_df25520ab279dff", #"hash_562d458e34274132", #"player_died", #"disconnect", #"enter_vehicle", #"death", #"clone_shutdown");
+  result = self waittill(#"hash_1e2c098e8231a30f", #"entering_last_stand", #"kill_shield", #"doa_playervehiclepickup", #"kill_duplicate_shields", #"player_died", #"disconnect", #"enter_vehicle", #"death", #"clone_shutdown");
   self notify(#"hash_1e2c098e8231a30f");
 
   if(isDefined(org) && isDefined(org.trigger1)) {
@@ -215,7 +215,7 @@ function private function_f0855523(org) {
       org.var_b981836 physicslaunch(org.var_b981836.origin, vel);
     }
 
-    self.doa.var_c3159deb = undefined;
+    self.doa.boxing_gloves = undefined;
   }
 
   wait 5;

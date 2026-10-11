@@ -51,11 +51,11 @@ function main(str_skipto, b_starting) {
   }
 
   plane = getEnt("cargo_plane", "targetname");
-  var_853687bd = getEntArray("af_plane_triggers", "targetname");
-  var_853687bd = arraycombine(var_853687bd, getEntArray("plane_floor_clip", "targetname"));
-  var_853687bd = arraycombine(var_853687bd, getEntArray("plane_cargo", "targetname"));
+  things = getEntArray("af_plane_triggers", "targetname");
+  things = arraycombine(things, getEntArray("plane_floor_clip", "targetname"));
+  things = arraycombine(things, getEntArray("plane_cargo", "targetname"));
 
-  foreach(thing in var_853687bd) {
+  foreach(thing in things) {
     thing delete();
   }
 
@@ -72,7 +72,7 @@ function main(str_skipto, b_starting) {
 
   player = getPlayers()[0];
   player setmovespeedscale(0.4);
-  player util::function_749362d7(1);
+  player util::set_low_ready(1);
   exploder::exploder("hit3_pcrash_end_embers");
   exploder::exploder("airfield_crash_lighting");
   exploder::exploder("hit3_pcrash_end_embers_02");
@@ -92,7 +92,7 @@ function main(str_skipto, b_starting) {
   level lui::screen_fade_out(2.5);
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 
   wait 1;
@@ -109,7 +109,7 @@ function main(str_skipto, b_starting) {
   level lui::screen_fade_out(0);
   player_decision::function_430ebd4b(3, 1);
   player_decision::function_8c0836dd(0);
-  skipto::function_1c2dfc20("cp_ger_hub", "character_creation");
+  skipto::level_completed("cp_ger_hub", "character_creation");
 }
 
 function function_fa3409bb() {
@@ -133,7 +133,7 @@ function init_clientfields() {
   clientfield::register("toplayer", "wreck_vision", 1, 1, "int");
 }
 
-function function_22b7fffd() {}
+function init_scenes() {}
 
 function function_cf191fff() {}
 

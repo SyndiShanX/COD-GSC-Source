@@ -75,7 +75,7 @@ function function_4e83ff35(category, type, modifier) {
   return level.bctable[category][key].probability;
 }
 
-function function_2d2570e3(category, type, modifier) {
+function get_delay(category, type, modifier) {
   key = categorykey(category, type, modifier);
 
   if(!exists(category, type, modifier)) {

@@ -31,11 +31,11 @@ function private function_613baf1b() {
   level function_626826e8(var_fe4c20ac, level.terminal.group);
 }
 
-function private function_26d68622(v_center, var_50721d66) {
+function private function_26d68622(v_center, n_group) {
   var_4fb7e8bb = struct::get("satellite_computer_screen", "targetname");
   var_91b180f0 = {};
   var_91b180f0.entity = getEnt("mq_sat_scr", "targetname");
-  var_91b180f0.model = #"hash_3bc4ed2f30d82d31" + var_50721d66;
+  var_91b180f0.model = #"hash_3bc4ed2f30d82d31" + n_group;
   var_91b180f0.info = util::spawn_model("tag_origin", var_91b180f0.entity.origin, var_91b180f0.entity.angles);
   var_91b180f0.info hide();
   var_91b180f0.center = v_center;
@@ -50,9 +50,9 @@ function private function_18e95e2b(var_e9a27711, s_screen) {
   level.terminal.control = var_91baf01e;
 }
 
-function private function_626826e8(v_center, var_50721d66) {
+function private function_626826e8(v_center, n_group) {
   var_3277c11d = [];
-  n_index = var_50721d66 - 1;
+  n_index = n_group - 1;
   var_9e6970bc = [[(0, -15.7, 5.9), (0, -13.7, -2.5)], [(0, -13.7, -2.5), (0, 12.9, -2.3)], [(0, 20, -2.2), (0, -12.4, -7.1)], [(0, 10.9, -7.7), (0, 0.6, 8.4)], [(0, 2.5, 9.5), (0, 19.6, -2.3)]];
 
   foreach(v_offset in var_9e6970bc[n_index]) {
@@ -109,8 +109,8 @@ function function_902089af(e_player) {
   e_player zm_utility_zsurvival::function_14bada94();
   e_player zm_gold_util::function_b488623(1);
   level.terminal.screen.entity setModel(level.terminal.screen.model);
-  level.terminal.screen.entity playSound(#"hash_50335038922faab3");
-  level.terminal.screen.entity playLoopSound(#"hash_5037543892339a56");
+  level.terminal.screen.entity playSound(#"zmb_gold_mq_9_screen_on");
+  level.terminal.screen.entity playLoopSound(#"zmb_gold_mq_9_screen_lp");
   level.terminal.control clientfield::set("" + #"hash_4545e81f76244b", 1);
   level thread function_d59c42ab(level.terminal);
   s_result = e_player function_f3c47da1(level.terminal, self);
@@ -118,7 +118,7 @@ function function_902089af(e_player) {
   level.terminal.screen.info function_92c05efb(undefined);
   level.terminal.control clientfield::set("" + #"hash_4545e81f76244b", 0);
   level.terminal.screen.entity stoploopsound();
-  level.terminal.screen.entity playSound(#"hash_76f715206715f477");
+  level.terminal.screen.entity playSound(#"zmb_gold_mq_9_screen_off");
   level.terminal.screen.entity setModel(#"p9_zm_gold_screen_02_off");
 
   if(isDefined(e_player)) {
@@ -155,24 +155,24 @@ function private function_4b648627(var_e9a27711) {
   return sqr(v_delta[1]) + sqr(v_delta[2]) <= 0.25;
 }
 
-function function_d59c42ab(var_3f94a5b6) {
+function function_d59c42ab(s_terminal) {
   level endon(#"terminal_off");
-  var_3f94a5b6.screen.info function_92c05efb(var_3f94a5b6.target);
+  s_terminal.screen.info function_92c05efb(s_terminal.target);
 
   while(true) {
-    if(!isDefined(var_3f94a5b6.target) || !var_3f94a5b6.target function_4b648627(var_3f94a5b6.cursor)) {
+    if(!isDefined(s_terminal.target) || !s_terminal.target function_4b648627(s_terminal.cursor)) {
       profilestart();
-      var_3f94a5b6.target = undefined;
+      s_terminal.target = undefined;
 
       foreach(var_9da78756 in level.terminal.satellites) {
-        if(var_9da78756 function_4b648627(var_3f94a5b6.cursor)) {
-          var_3f94a5b6.target = var_9da78756;
+        if(var_9da78756 function_4b648627(s_terminal.cursor)) {
+          s_terminal.target = var_9da78756;
           break;
         }
       }
 
       profilestop();
-      var_3f94a5b6.screen.info function_92c05efb(var_3f94a5b6.target);
+      s_terminal.screen.info function_92c05efb(s_terminal.target);
     }
 
     waitframe(1);
@@ -201,35 +201,35 @@ function function_92c05efb(var_9da78756) {
   self hide();
 }
 
-function private function_1e3823bc(var_3f94a5b6) {
+function private function_1e3823bc(s_terminal) {
   s_input = {
-    #updown: 0, #var_93354cc2: 0
+    #updown: 0, #leftright: 0
   };
 
-  if(self buttonbitstate(var_3f94a5b6.var_a666ab6e[0])) {
+  if(self buttonbitstate(s_terminal.keybinds[0])) {
     s_input.updown += 1;
-  } else if(self buttonbitstate(var_3f94a5b6.var_a666ab6e[1])) {
+  } else if(self buttonbitstate(s_terminal.keybinds[1])) {
     s_input.updown -= 1;
   }
 
-  if(self buttonbitstate(var_3f94a5b6.var_a666ab6e[2])) {
-    s_input.var_93354cc2 -= 1;
-  } else if(self buttonbitstate(var_3f94a5b6.var_a666ab6e[3])) {
-    s_input.var_93354cc2 += 1;
+  if(self buttonbitstate(s_terminal.keybinds[2])) {
+    s_input.leftright -= 1;
+  } else if(self buttonbitstate(s_terminal.keybinds[3])) {
+    s_input.leftright += 1;
   }
 
   return s_input;
 }
 
-function private function_d25d2a9(var_e9a27711, s_screen, var_7b1452d6, n_active = 0) {
+function private function_d25d2a9(var_e9a27711, s_screen, e_control, n_active = 0) {
   var_2b6fca73[0] = distance(var_e9a27711, s_screen.center + (0, 60, -20));
   var_2b6fca73[1] = distance(var_e9a27711, s_screen.center + (0, -40, -80));
   a_angles[0] = acos(abs(s_screen.center[1] + (0, 60, -20)[1] - var_e9a27711[1]) / var_2b6fca73[0]);
   a_angles[1] = acos(abs(s_screen.center[2] + (0, -40, -80)[2] - var_e9a27711[2]) / var_2b6fca73[1]);
-  var_7b1452d6.radius = (var_2b6fca73[0], var_2b6fca73[1], 0);
-  var_7b1452d6.origin = var_7b1452d6.radius * 10000;
-  var_7b1452d6.origin = (var_7b1452d6.origin[0], var_7b1452d6.origin[1], n_active);
-  var_7b1452d6.angles = (a_angles[0], a_angles[1], 0);
+  e_control.radius = (var_2b6fca73[0], var_2b6fca73[1], 0);
+  e_control.origin = e_control.radius * 10000;
+  e_control.origin = (e_control.origin[0], e_control.origin[1], n_active);
+  e_control.angles = (a_angles[0], a_angles[1], 0);
 }
 
 function private function_dae63c17() {
@@ -244,31 +244,31 @@ function private function_dae63c17() {
   }
 }
 
-function function_b699cdc8(var_3f94a5b6) {
+function function_b699cdc8(s_terminal) {
   var_1806c69c = self gamepadusedlast();
 
-  if(var_1806c69c !== var_3f94a5b6.gamepad) {
+  if(var_1806c69c !== s_terminal.gamepad) {
     if(var_1806c69c) {
-      var_3f94a5b6.var_a666ab6e[0] = "BUTTON_BIT_ACTIONSLOT_1";
-      var_3f94a5b6.var_a666ab6e[1] = "BUTTON_BIT_ACTIONSLOT_2";
-      var_3f94a5b6.var_a666ab6e[2] = "BUTTON_BIT_ACTIONSLOT_3";
-      var_3f94a5b6.var_a666ab6e[3] = "BUTTON_BIT_ACTIONSLOT_4";
-      var_3f94a5b6.var_a666ab6e[4] = "BUTTON_BIT_ACTION";
-      var_3f94a5b6.var_a666ab6e[5] = "BUTTON_BIT_STANCE";
+      s_terminal.keybinds[0] = "BUTTON_BIT_ACTIONSLOT_1";
+      s_terminal.keybinds[1] = "BUTTON_BIT_ACTIONSLOT_2";
+      s_terminal.keybinds[2] = "BUTTON_BIT_ACTIONSLOT_3";
+      s_terminal.keybinds[3] = "BUTTON_BIT_ACTIONSLOT_4";
+      s_terminal.keybinds[4] = "BUTTON_BIT_ACTION";
+      s_terminal.keybinds[5] = "BUTTON_BIT_STANCE";
     } else {
-      var_3f94a5b6.var_a666ab6e[0] = "BUTTON_BIT_RELOAD";
-      var_3f94a5b6.var_a666ab6e[1] = "BUTTON_BIT_FRAG";
-      var_3f94a5b6.var_a666ab6e[2] = "BUTTON_BIT_OFFHANDSECONDARY";
-      var_3f94a5b6.var_a666ab6e[3] = "BUTTON_BIT_MELEE";
-      var_3f94a5b6.var_a666ab6e[4] = "BUTTON_BIT_ACTIVATE";
-      var_3f94a5b6.var_a666ab6e[5] = "BUTTON_BIT_CROUCH";
+      s_terminal.keybinds[0] = "BUTTON_BIT_RELOAD";
+      s_terminal.keybinds[1] = "BUTTON_BIT_FRAG";
+      s_terminal.keybinds[2] = "BUTTON_BIT_OFFHANDSECONDARY";
+      s_terminal.keybinds[3] = "BUTTON_BIT_MELEE";
+      s_terminal.keybinds[4] = "BUTTON_BIT_ACTIVATE";
+      s_terminal.keybinds[5] = "BUTTON_BIT_CROUCH";
     }
 
-    var_3f94a5b6.gamepad = var_1806c69c;
+    s_terminal.gamepad = var_1806c69c;
   }
 }
 
-function private function_d228e8b0(var_3f94a5b6) {
+function private function_d228e8b0(s_terminal) {
   level endon(#"terminal_off");
   self endon(#"disconnect", #"death");
 
@@ -280,17 +280,17 @@ function private function_d228e8b0(var_3f94a5b6) {
     if(menu == #"zm_gold_align_satellite_hud") {
       switch (waitresult.response) {
         case #"hash_72b3080b298c200b":
-          var_3f94a5b6.var_fa7400be[self getentitynumber()][4] = 1;
+          s_terminal.var_fa7400be[self getentitynumber()][4] = 1;
           break;
-        case #"hash_383c519d3bdac984":
-          var_3f94a5b6.var_fa7400be[self getentitynumber()][5] = 1;
+        case #"upgrade_menu_close":
+          s_terminal.var_fa7400be[self getentitynumber()][5] = 1;
           break;
       }
     }
   }
 }
 
-function function_f3c47da1(var_3f94a5b6, e_trigger) {
+function function_f3c47da1(s_terminal, e_trigger) {
   level endon(#"terminal_off");
   self endon(#"disconnect", #"death");
   e_trigger endon(#"death");
@@ -298,37 +298,37 @@ function function_f3c47da1(var_3f94a5b6, e_trigger) {
 
   self thread function_dae63c17();
 
-  if(!isDefined(var_3f94a5b6.var_a666ab6e)) {
-    var_3f94a5b6.var_a666ab6e = [];
+  if(!isDefined(s_terminal.keybinds)) {
+    s_terminal.keybinds = [];
   }
 
-  if(!isDefined(var_3f94a5b6.var_fa7400be)) {
-    var_3f94a5b6.var_fa7400be = [];
+  if(!isDefined(s_terminal.var_fa7400be)) {
+    s_terminal.var_fa7400be = [];
   }
 
-  if(!isDefined(var_3f94a5b6.var_fa7400be[self getentitynumber()])) {
-    var_3f94a5b6.var_fa7400be[self getentitynumber()] = [];
+  if(!isDefined(s_terminal.var_fa7400be[self getentitynumber()])) {
+    s_terminal.var_fa7400be[self getentitynumber()] = [];
   }
 
-  var_3f94a5b6.gamepad = undefined;
-  self thread function_d228e8b0(var_3f94a5b6);
+  s_terminal.gamepad = undefined;
+  self thread function_d228e8b0(s_terminal);
 
   while(self useButtonPressed()) {
     waitframe(1);
   }
 
   while(self istouching(e_trigger)) {
-    self function_b699cdc8(var_3f94a5b6);
+    self function_b699cdc8(s_terminal);
 
-    if(self buttonbitstate(var_3f94a5b6.var_a666ab6e[4]) || is_true(var_3f94a5b6.var_fa7400be[self getentitynumber()][4])) {
-      var_3f94a5b6.var_fa7400be[self getentitynumber()][4] = 0;
-      b_success = var_3f94a5b6.target.type === 3;
+    if(self buttonbitstate(s_terminal.keybinds[4]) || is_true(s_terminal.var_fa7400be[self getentitynumber()][4])) {
+      s_terminal.var_fa7400be[self getentitynumber()][4] = 0;
+      b_success = s_terminal.target.type === 3;
 
-      if(var_3f94a5b6.target.type === 3 || var_3f94a5b6.target.type === 1 || var_3f94a5b6.target.type === 2) {
+      if(s_terminal.target.type === 3 || s_terminal.target.type === 1 || s_terminal.target.type === 2) {
         if(b_success) {
-          level.terminal.screen.entity playSound(#"hash_3a135283f2131a84");
+          level.terminal.screen.entity playSound(#"zmb_gold_mq_9_selection_right");
         } else {
-          level.terminal.screen.entity playSound(#"hash_5fefa13a2bdf38d3");
+          level.terminal.screen.entity playSound(#"zmb_gold_mq_9_selection_wrong");
           level thread zm_gold_vo::function_8cc97115();
           wait 0.5;
           b_warning = 1;
@@ -337,8 +337,8 @@ function function_f3c47da1(var_3f94a5b6, e_trigger) {
         s_result = {
           #success: b_success
         };
-        v_delta = var_3f94a5b6.cursor - var_3f94a5b6.screen.center;
-        s_result.yaw = v_delta[1] / var_3f94a5b6.screen.half_size[1] + 0.5;
+        v_delta = s_terminal.cursor - s_terminal.screen.center;
+        s_result.yaw = v_delta[1] / s_terminal.screen.half_size[1] + 0.5;
 
         if(s_result.yaw < 0) {
           s_result.yaw = 0;
@@ -346,7 +346,7 @@ function function_f3c47da1(var_3f94a5b6, e_trigger) {
           s_result.yaw = 1;
         }
 
-        s_result.pitch = v_delta[2] / var_3f94a5b6.screen.half_size[2] + 0.5;
+        s_result.pitch = v_delta[2] / s_terminal.screen.half_size[2] + 0.5;
 
         if(s_result.pitch < 0) {
           s_result.pitch = 0;
@@ -356,22 +356,22 @@ function function_f3c47da1(var_3f94a5b6, e_trigger) {
 
         break;
       }
-    } else if(self buttonbitstate(var_3f94a5b6.var_a666ab6e[5]) || is_true(var_3f94a5b6.var_fa7400be[self getentitynumber()][5])) {
-      var_3f94a5b6.var_fa7400be[self getentitynumber()][5] = 0;
+    } else if(self buttonbitstate(s_terminal.keybinds[5]) || is_true(s_terminal.var_fa7400be[self getentitynumber()][5])) {
+      s_terminal.var_fa7400be[self getentitynumber()][5] = 0;
       break;
     }
 
-    s_input = self function_1e3823bc(var_3f94a5b6);
-    s_screen = var_3f94a5b6.screen;
+    s_input = self function_1e3823bc(s_terminal);
+    s_screen = s_terminal.screen;
 
     box(s_screen.center, s_screen.half_size * -1, s_screen.half_size, 0, (1, 0, 0), 1, 0);
-    linesphere(var_3f94a5b6.cursor, 0.2, (1, 0, 0), 1, 0);
+    linesphere(s_terminal.cursor, 0.2, (1, 0, 0), 1, 0);
 
-    foreach(var_9da78756 in var_3f94a5b6.satellites) {
+    foreach(var_9da78756 in s_terminal.satellites) {
       debugstar(var_9da78756.origin, 1, (1, 1, 0), var_9da78756.type, 0.1);
     }
 
-    if(s_input.updown != 0 || s_input.var_93354cc2 != 0) {
+    if(s_input.updown != 0 || s_input.leftright != 0) {
       b_warning = 0;
       a_angles = [];
       var_37503ff5 = [];
@@ -379,16 +379,16 @@ function function_f3c47da1(var_3f94a5b6, e_trigger) {
 
       if(s_input.updown != 0) {
         v_anchor = (0, 60, -20);
-        n_radius = var_3f94a5b6.control.radius[0];
-        n_angle = var_3f94a5b6.control.angles[0];
+        n_radius = s_terminal.control.radius[0];
+        n_angle = s_terminal.control.angles[0];
 
-        line(s_screen.center + v_anchor, var_3f94a5b6.cursor, (0, 1, 0), 1, 0);
-        print3d(var_3f94a5b6.cursor + (0, 0, 2), n_angle + "<dev string:x9b>" + n_radius, (0, 1, 0), 1, 0.1);
+        line(s_screen.center + v_anchor, s_terminal.cursor, (0, 1, 0), 1, 0);
+        print3d(s_terminal.cursor + (0, 0, 2), n_angle + "<dev string:x9b>" + n_radius, (0, 1, 0), 1, 0.1);
 
-        var_26c827e8 = abs(v_anchor[2] + s_screen.half_size[2]) / n_radius;
-        a_angles[0] = var_26c827e8 < 1 ? asin(var_26c827e8) : 0;
-        var_c575b928 = abs(v_anchor[1] + s_screen.half_size[1]) / n_radius;
-        a_angles[1] = var_c575b928 < 1 ? acos(var_c575b928) : 0;
+        n_sin = abs(v_anchor[2] + s_screen.half_size[2]) / n_radius;
+        a_angles[0] = n_sin < 1 ? asin(n_sin) : 0;
+        n_cos = abs(v_anchor[1] + s_screen.half_size[1]) / n_radius;
+        a_angles[1] = n_cos < 1 ? acos(n_cos) : 0;
 
         if(a_angles[0] > a_angles[1]) {
           var_37503ff5[0] = a_angles[0];
@@ -403,10 +403,10 @@ function function_f3c47da1(var_3f94a5b6, e_trigger) {
         line(s_screen.center + v_anchor, v_intersection, (1, 0, 0), 1, 0);
         print3d(v_intersection, var_37503ff5[0], (0, 1, 0), 1, 0.1);
 
-        var_26c827e8 = abs(v_anchor[2] - s_screen.half_size[2]) / n_radius;
-        a_angles[0] = var_26c827e8 < 1 ? asin(var_26c827e8) : 90;
-        var_c575b928 = abs(v_anchor[1] - s_screen.half_size[1]) / n_radius;
-        a_angles[1] = var_c575b928 < 1 ? acos(var_c575b928) : 90;
+        n_sin = abs(v_anchor[2] - s_screen.half_size[2]) / n_radius;
+        a_angles[0] = n_sin < 1 ? asin(n_sin) : 90;
+        n_cos = abs(v_anchor[1] - s_screen.half_size[1]) / n_radius;
+        a_angles[1] = n_cos < 1 ? acos(n_cos) : 90;
 
         if(a_angles[0] < a_angles[1]) {
           var_37503ff5[1] = a_angles[0];
@@ -433,16 +433,16 @@ function function_f3c47da1(var_3f94a5b6, e_trigger) {
         n_active = 1;
       } else {
         v_anchor = (0, -40, -80);
-        n_radius = var_3f94a5b6.control.radius[1];
-        n_angle = var_3f94a5b6.control.angles[1];
+        n_radius = s_terminal.control.radius[1];
+        n_angle = s_terminal.control.angles[1];
 
-        line(s_screen.center + v_anchor, var_3f94a5b6.cursor, (0, 0, 1), 1, 0);
-        print3d(var_3f94a5b6.cursor - (0, 0, 2), n_angle + "<dev string:x9b>" + n_radius, (0, 0, 1), 1, 0.1);
+        line(s_screen.center + v_anchor, s_terminal.cursor, (0, 0, 1), 1, 0);
+        print3d(s_terminal.cursor - (0, 0, 2), n_angle + "<dev string:x9b>" + n_radius, (0, 0, 1), 1, 0.1);
 
-        var_c575b928 = abs(v_anchor[2] - s_screen.half_size[2]) / n_radius;
-        a_angles[0] = var_c575b928 < 1 ? acos(var_c575b928) : 0;
-        var_26c827e8 = abs(v_anchor[1] + s_screen.half_size[1]) / n_radius;
-        a_angles[1] = var_26c827e8 < 1 ? asin(var_26c827e8) : 0;
+        n_cos = abs(v_anchor[2] - s_screen.half_size[2]) / n_radius;
+        a_angles[0] = n_cos < 1 ? acos(n_cos) : 0;
+        n_sin = abs(v_anchor[1] + s_screen.half_size[1]) / n_radius;
+        a_angles[1] = n_sin < 1 ? asin(n_sin) : 0;
 
         if(a_angles[0] > a_angles[1]) {
           var_37503ff5[0] = a_angles[0];
@@ -457,10 +457,10 @@ function function_f3c47da1(var_3f94a5b6, e_trigger) {
         line(s_screen.center + v_anchor, v_intersection, (1, 0, 0), 1, 0);
         print3d(v_intersection, var_37503ff5[0], (0, 0, 1), 1, 0.1);
 
-        var_c575b928 = abs(v_anchor[2] + s_screen.half_size[2]) / n_radius;
-        a_angles[0] = var_c575b928 < 1 ? acos(var_c575b928) : 90;
-        var_26c827e8 = abs(v_anchor[1] - s_screen.half_size[1]) / n_radius;
-        a_angles[1] = var_26c827e8 < 1 ? asin(var_26c827e8) : 90;
+        n_cos = abs(v_anchor[2] + s_screen.half_size[2]) / n_radius;
+        a_angles[0] = n_cos < 1 ? acos(n_cos) : 90;
+        n_sin = abs(v_anchor[1] - s_screen.half_size[1]) / n_radius;
+        a_angles[1] = n_sin < 1 ? asin(n_sin) : 90;
 
         if(a_angles[0] < a_angles[1]) {
           var_37503ff5[1] = a_angles[0];
@@ -475,7 +475,7 @@ function function_f3c47da1(var_3f94a5b6, e_trigger) {
         line(s_screen.center + v_anchor, v_intersection, (1, 0, 0), 1, 0);
         print3d(v_intersection, var_37503ff5[1], (0, 0, 1), 1, 0.1);
 
-        var_9c66888e = n_angle + s_input.var_93354cc2 * 20 / n_radius;
+        var_9c66888e = n_angle + s_input.leftright * 20 / n_radius;
 
         if(var_9c66888e < var_37503ff5[0]) {
           var_9c66888e = var_37503ff5[0];
@@ -487,10 +487,10 @@ function function_f3c47da1(var_3f94a5b6, e_trigger) {
         n_active = 2;
       }
 
-      line(var_3f94a5b6.cursor, v_target, (1, 1, 0), 1, 0, 10);
+      line(s_terminal.cursor, v_target, (1, 1, 0), 1, 0, 10);
 
-      var_3f94a5b6.cursor = v_target;
-      level function_d25d2a9(var_3f94a5b6.cursor, s_screen, var_3f94a5b6.control, n_active);
+      s_terminal.cursor = v_target;
+      level function_d25d2a9(s_terminal.cursor, s_screen, s_terminal.control, n_active);
       wait 0.05;
       continue;
     }

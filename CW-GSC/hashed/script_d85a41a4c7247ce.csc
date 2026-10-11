@@ -54,9 +54,9 @@ function function_41bc60b6(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_89fa474d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
-    if(isDefined(self.var_956e61df)) {
-      killfx(fieldname, self.var_956e61df);
-      self.var_956e61df = undefined;
+    if(isDefined(self.stop_id)) {
+      killfx(fieldname, self.stop_id);
+      self.stop_id = undefined;
     }
 
     if(isDefined(self gettagorigin("tag_body_animate"))) {
@@ -93,7 +93,7 @@ function function_89fa474d(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(isDefined(self gettagorigin("tag_body_animate"))) {
-    self.var_956e61df = function_239993de(fieldname, "sr/fx9_veh_payload_light_brake_side", self, "tag_body_animate");
+    self.stop_id = function_239993de(fieldname, "sr/fx9_veh_payload_light_brake_side", self, "tag_body_animate");
   }
 
   if(isDefined(self.var_d811dda6)) {
@@ -230,7 +230,7 @@ function function_fa7a206b(localclientnum, oldval, newval, bnewent, binitialsnap
     self postfx::playpostfxbundle(#"pstfx_speedblur");
     self function_116b95e5(#"pstfx_speedblur", #"inner mask", 0.3);
     self function_116b95e5(#"pstfx_speedblur", #"outer mask", 0.8);
-    self thread function_d233fb1f();
+    self thread paintjob_stickers_s3_rokkr_majormaniak_base_ms();
     return;
   }
 
@@ -244,16 +244,16 @@ function function_fa7a206b(localclientnum, oldval, newval, bnewent, binitialsnap
   self postfx::exitpostfxbundle(#"pstfx_speedblur");
 }
 
-function function_d233fb1f() {
+function paintjob_stickers_s3_rokkr_majormaniak_base_ms() {
   self endon(#"death", #"disconnect", #"stop_blur");
-  var_9b8a1091 = 0.01;
+  n_blur = 0.01;
 
   while(true) {
-    self function_116b95e5(#"pstfx_speedblur", #"blur", var_9b8a1091);
+    self function_116b95e5(#"pstfx_speedblur", #"blur", n_blur);
     wait 0.08;
 
-    if(var_9b8a1091 < 0.3) {
-      var_9b8a1091 += 0.01;
+    if(n_blur < 0.3) {
+      n_blur += 0.01;
     }
   }
 }

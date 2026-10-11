@@ -214,8 +214,8 @@ function private function_5d3cc643(loadoutclass, var_3b0cd6f4) {
   self function_4426827d(loadoutclass, var_414c7d4d, bonuses.var_1c89585f, &function_9a75f033);
   var_6a79474d = function_20d254c4(var_3b0cd6f4.var_6a79474d, 1, #"hash_60b994f55d1226dd");
   self function_4426827d(loadoutclass, var_6a79474d, 0, &function_ac5568db);
-  var_137939d4 = function_20d254c4(var_3b0cd6f4.var_137939d4, 1, #"hash_539a0aed726d68e0");
-  self function_4426827d(loadoutclass, var_137939d4, 0, &function_493daf47);
+  specialgrenades = function_20d254c4(var_3b0cd6f4.specialgrenades, 1, #"hash_539a0aed726d68e0");
+  self function_4426827d(loadoutclass, specialgrenades, 0, &function_493daf47);
   var_378cddbe = function_20d254c4(var_3b0cd6f4.var_378cddbe, 5, #"hash_7e8686a7207f1d0f");
   var_455c795d = function_20d254c4(var_3b0cd6f4.var_455c795d, 5, #"hash_7e8687a7207f1ec2");
   var_4c2986fb = function_20d254c4(var_3b0cd6f4.var_4c2986fb, 5, #"hash_7e8688a7207f2075");
@@ -246,8 +246,8 @@ function private function_5d3cc643(loadoutclass, var_3b0cd6f4) {
   }
 }
 
-function private function_fccfb0af(loadoutclass, &var_19546df5, var_38e0e278, count, var_c2575532, var_1b426c77) {
-  weaponname = function_ec884214(var_19546df5);
+function private function_fccfb0af(loadoutclass, &weaponnames, var_38e0e278, count, var_c2575532, var_1b426c77) {
+  weaponname = function_ec884214(weaponnames);
 
   if(!isDefined(weaponname)) {
     return;

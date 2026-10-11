@@ -23,22 +23,22 @@ function starting(str_skipto) {}
 function main(str_skipto, b_starting) {
   level thread namespace_31c67f6d::function_f2cd5fc0();
 
-  if(level.var_b28c2c3a == "dev_post_cuba_park_survived") {
+  if(level.skipto_point == "dev_post_cuba_park_survived") {
     level.player player_decision::function_ff7e19cb(0);
   }
 
-  if(level.var_b28c2c3a == "dev_post_cuba_lazar_survived") {
+  if(level.skipto_point == "dev_post_cuba_lazar_survived") {
     level.player player_decision::function_ff7e19cb(1);
   }
 
-  if(level.var_b28c2c3a == "dev_post_cuba_no_survivors") {
+  if(level.skipto_point == "dev_post_cuba_no_survivors") {
     level.player player_decision::function_ff7e19cb(2);
   }
 
   level namespace_31c67f6d::function_6194f34a("post_cuba", 1);
   level namespace_31c67f6d::init_notetracks_postcuba();
   level thread function_ff7cb1bd();
-  level thread namespace_4ed3ce47::function_7edafa59(b_starting + "_briefing");
+  level thread namespace_4ed3ce47::music_handler(b_starting + "_briefing");
   setlightingstate(3);
   level thread namespace_31c67f6d::function_29279de1("post_cuba");
   level thread namespace_31c67f6d::function_b0558ba2("7");
@@ -46,10 +46,10 @@ function main(str_skipto, b_starting) {
   level function_107195fb();
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 
-  skipto::function_1c2dfc20("cp_nam_prisoner");
+  skipto::level_completed("cp_nam_prisoner");
 }
 
 function function_26282537() {
@@ -58,7 +58,7 @@ function function_26282537() {
 }
 
 function function_eeb6e2e1() {
-  level waittill(#"hash_6e37b7c047667b8e");
+  level waittill(#"ambient_int_override");
   level thread namespace_4ed3ce47::ambient_int_override();
 }
 
@@ -97,8 +97,8 @@ function function_276264f4(str_scene) {
   level thread namespace_4ed3ce47::allies_init();
   wait 3;
 
-  if(isDefined(level.var_d7d201ba) && isDefined(level.skipto_current_objective)) {
-    level.player flag::set(level.var_d7d201ba);
+  if(isDefined(level.str_player_start_flag) && isDefined(level.skipto_current_objective)) {
+    level.player flag::set(level.str_player_start_flag);
   }
 
   level flag::wait_till(#"gameplay_started");

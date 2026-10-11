@@ -30,7 +30,7 @@ function main() {
 function function_f5114543() {
   self notify("4e7c7f84f1757943");
   self endon("4e7c7f84f1757943");
-  self thread namespace_268747c0::function_978c05b5();
+  self thread doa_hazard::function_978c05b5();
   result = self waittill(#"destroy_hazard");
   arrayremovevalue(level.doa.var_584a046, self);
 
@@ -59,12 +59,12 @@ function function_2c3d65c4(platform) {
       platform.destination = platform.origin + (0, 0, diffz);
     } else if(platform.type == 1) {
       diffx = target.origin[0] - platform.origin[0];
-      var_289dea4a = target.origin[1] - platform.origin[1];
+      diffy = target.origin[1] - platform.origin[1];
 
-      if(diffx > var_289dea4a) {
+      if(diffx > diffy) {
         platform.destination = platform.origin + (diffx, 0, 0);
       } else {
-        platform.destination = platform.origin + (0, var_289dea4a, 0);
+        platform.destination = platform.origin + (0, diffy, 0);
       }
     }
   }

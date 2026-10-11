@@ -26,7 +26,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_83eb6304;
+#namespace doa_fx;
 
 function init() {
   level.doa.var_11c4dca4 = [];
@@ -41,20 +41,20 @@ function init() {
   namespace_7e1ec234::function_10d1200d();
 }
 
-function function_4060ccb4(name, unused1, var_f80dfd0d, unused2, var_26f1324c = 0) {
+function function_4060ccb4(name, unused1, var_f80dfd0d, unused2, unused3 = 0) {
   var_318e5b78 = level.doa.var_11c4dca4.size;
   assert(var_318e5b78 < 256, "<dev string:x38>");
   assert(!isDefined(level.doa.var_11c4dca4[unused2]), "<dev string:x55>");
   level.doa.var_11c4dca4[unused2] = {
-    #name: unused2, #id: var_318e5b78, #clear: var_26f1324c
+    #name: unused2, #id: var_318e5b78, #clear: unused3
   };
 }
 
 function function_13be6e83(&queue) {
-  var_f53e8844 = 20;
+  pumps = 20;
   var_dcf59f7c = 0;
 
-  while(var_f53e8844 > 0) {
+  while(pumps > 0) {
     if(!isDefined(self)) {
       return;
     }
@@ -91,11 +91,11 @@ function function_13be6e83(&queue) {
       self clientfield::set("play_fx", 0);
       self clientfield::set("stop_fx", 0);
       waitframe(1);
-      var_f53e8844--;
+      pumps--;
     }
 
     if(queue.size > 0) {
-      var_f53e8844 = 20;
+      pumps = 20;
     }
   }
 

@@ -94,7 +94,7 @@ function private function_555656fe(localclientnum, oldval, newval, bnewent, bini
     if(self postfx::function_556665f2(postfxbundle) == 0) {
       self codeplaypostfxbundle(postfxbundle);
       function_7415e9d3(binitialsnap, self.team, 15, 1);
-      callback::function_675f0963(&function_e6d3dbbc);
+      callback::on_actor_spawned(&function_e6d3dbbc);
       function_7415e9d3(binitialsnap, self.team, 12, 1);
       callback::on_vehicle_spawned(&function_e6d3dbbc);
     }

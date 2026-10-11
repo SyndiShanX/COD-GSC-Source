@@ -43,8 +43,8 @@ function private function_b9014159(userdata) {
   } else if(distancetoplayer <= distancemin) {
     self.var_404d1644.distanceattenuation = 1;
   } else {
-    var_96454505 = distancemax - distancemin;
-    distancefrac = 1 - (distancetoplayer - distancemin) / var_96454505;
+    distancedelta = distancemax - distancemin;
+    distancefrac = 1 - (distancetoplayer - distancemin) / distancedelta;
   }
 
   self.var_404d1644.time = now;
@@ -73,8 +73,8 @@ function private function_e2782c4a(inputvalue, userdata) {
       if(var_453b3fb3.var_404d1644.distanceattenuation > var_ab57c0be) {
         var_ab57c0be = var_453b3fb3.var_404d1644.distanceattenuation;
 
-        if(isDefined(var_453b3fb3.var_404d1644.var_d89a17f3) == 1) {
-          var_ab57c0be *= var_453b3fb3.var_404d1644.var_d89a17f3;
+        if(isDefined(var_453b3fb3.var_404d1644.submixscale) == 1) {
+          var_ab57c0be *= var_453b3fb3.var_404d1644.submixscale;
         }
       }
     }
@@ -132,13 +132,13 @@ function private function_77a1c8ae(userdata) {
   }
 }
 
-function private function_bfea3a77(submix, var_d89a17f3, distancemin, distancemax, var_16fc9737) {
+function private function_bfea3a77(submix, submixscale, distancemin, distancemax, var_16fc9737) {
   var_5a696c5d = self;
   assert(isDefined(var_5a696c5d) == 1, "<dev string:x6e>");
   assert(isDefined(submix) == 1, "<dev string:x8e>");
 
-  if(isDefined(var_d89a17f3) == 0) {
-    var_d89a17f3 = 1;
+  if(isDefined(submixscale) == 0) {
+    submixscale = 1;
   }
 
   if(isDefined(distancemin) == 0 || isDefined(distancemax) == 0 || isDefined(var_16fc9737) == 0) {
@@ -165,7 +165,7 @@ function private function_bfea3a77(submix, var_d89a17f3, distancemin, distancema
   var_b9fe5640.distancemax = distancemax;
   var_b9fe5640.var_16fc9737 = var_16fc9737;
   var_b9fe5640.submix = submix;
-  var_b9fe5640.var_d89a17f3 = var_d89a17f3;
+  var_b9fe5640.submixscale = submixscale;
   var_b9fe5640.time = 0;
   var_5a696c5d.var_404d1644 = var_b9fe5640;
 
@@ -181,8 +181,8 @@ function private function_bfea3a77(submix, var_d89a17f3, distancemin, distancema
   level.var_28778381[submix][var_3e7ec58e] = var_5a696c5d;
 }
 
-function function_90dcaacf(submix, var_d89a17f3, distancemin, distancemax, var_16fc9737) {
-  self thread function_bfea3a77(submix, var_d89a17f3, distancemin, distancemax, var_16fc9737);
+function function_90dcaacf(submix, submixscale, distancemin, distancemax, var_16fc9737) {
+  self thread function_bfea3a77(submix, submixscale, distancemin, distancemax, var_16fc9737);
 }
 
 function function_38e71eb0() {
@@ -207,7 +207,7 @@ function function_90509715(dimvolume, dimbutton) {
 
 function private function_44a0fc4(dimvolume, dimbutton, dimbuttontime) {
   volume_dvar = "<dev string:xa8>";
-  var_c8c21635 = 0;
+  isdimmed = 0;
   isbuttonpressed = 0;
   defaultvolume = 0.8;
 
@@ -227,7 +227,7 @@ function private function_44a0fc4(dimvolume, dimbutton, dimbuttontime) {
   lastbuttonpressed = isbuttonpressed;
   dimhud = undefined;
   buttondowntime = 0;
-  assert(isDefined(var_c8c21635));
+  assert(isDefined(isdimmed));
   assert(isDefined(defaultvolume));
   assert(isDefined(dimvolume));
   assert(isDefined(lastvolume));
@@ -245,24 +245,24 @@ function private function_44a0fc4(dimvolume, dimbutton, dimbuttontime) {
     }
 
     if(isbuttonpressed == 1 && buttondowntime > 0) {
-      var_e497ff20 = gettime() - buttondowntime;
+      buttonholdtime = gettime() - buttondowntime;
 
-      if(var_e497ff20 >= dimbuttontime) {
+      if(buttonholdtime >= dimbuttontime) {
         var_5cbd7bfa = 1;
         buttondowntime = 0;
       }
     }
 
     if(var_5cbd7bfa == 1) {
-      var_c8c21635 = !var_c8c21635;
+      isdimmed = !isdimmed;
 
-      switch (var_c8c21635) {
+      switch (isdimmed) {
         default:
           break;
       }
     }
 
-    if(var_c8c21635 == 1 && isDefined(dimhud) == 0) {
+    if(isdimmed == 1 && isDefined(dimhud) == 0) {
       color = (1, 0.623529, 0.498039);
       alpha = 0.333;
       fontscale = 2;
@@ -284,7 +284,7 @@ function private function_44a0fc4(dimvolume, dimbutton, dimbuttontime) {
       dimhud.shadowed = 1;
       dimhud.foreground = 1;
       dimhud.label = dimstring;
-    } else if(var_c8c21635 == 0 && isDefined(dimhud) == 1) {
+    } else if(isdimmed == 0 && isDefined(dimhud) == 1) {
       dimhud destroy();
       dimhud = undefined;
     }
@@ -589,10 +589,10 @@ function function_518f6be7() {
 function function_e963e8e(time_min, time_max, random_curve) {
   values = [];
   values[0] = time_min;
-  var_99adf0c9 = level.var_9c638f25[random_curve].size;
-  step = (time_max - time_min) / (var_99adf0c9 - 1);
+  values_cnt = level.var_9c638f25[random_curve].size;
+  step = (time_max - time_min) / (values_cnt - 1);
 
-  for(i = 1; i < var_99adf0c9 - 1; i++) {
+  for(i = 1; i < values_cnt - 1; i++) {
     values[i] = values[i - 1] + step;
   }
 
@@ -619,12 +619,12 @@ function function_7bde8914(w, amount) {
 }
 
 function function_4dca3057(w, v) {
-  var_99adf0c9 = w.size;
+  values_cnt = w.size;
   r = randomfloat(1);
   total = 0;
   ret_value = v[v.size - 1];
 
-  for(i = 0; i < var_99adf0c9; i++) {
+  for(i = 0; i < values_cnt; i++) {
     total += w[i];
 
     if(r < total) {
@@ -637,12 +637,12 @@ function function_4dca3057(w, v) {
 }
 
 function function_7a111e9c(w) {
-  var_99adf0c9 = w.size;
+  values_cnt = w.size;
   r = randomfloat(1);
   total = 0;
   ret_value = w.size - 1;
 
-  for(i = 0; i < var_99adf0c9; i++) {
+  for(i = 0; i < values_cnt; i++) {
     total += w[i];
 
     if(r < total) {
@@ -775,9 +775,9 @@ function function_da704a02(alias, submix, scale, attack, release, radio) {
   }
 
   if(var_2c0edc54 == 1) {
-    var_66a04f11 = 24;
-    var_7e2f0732 = 2400;
-    thresh = var_7e2f0732 * 0.5;
+    falloffmin = 24;
+    falloffmax = 2400;
+    thresh = falloffmax * 0.5;
 
     if(isDefined(ent) && isDefined(ent.origin) && radio == 0) {
       dist = distance(ent.origin, level.player.origin);
@@ -877,7 +877,7 @@ function function_9299618(var_16ae04ab, var_5b2df2a0, endons) {
 
       if(self.var_2de4672c > 0) {
         nexttime = self.var_2de4672c / 1000 - now / 1000;
-        var_a8dca3b9 = function_d6053a8f(nexttime, 2);
+        var_a8dca3b9 = printdecimalcount(nexttime, 2);
       }
 
       var_ed98e4bb = "<dev string:x23e>";
@@ -890,7 +890,7 @@ function function_9299618(var_16ae04ab, var_5b2df2a0, endons) {
   }
 }
 
-function function_6967f975(actor_ent, soundalias, var_793802a, var_7ca3f45d, frame_rate, stop_notify, fadeout_time) {
+function snd_pcap_play_vo(actor_ent, soundalias, var_793802a, var_7ca3f45d, frame_rate, stop_notify, fadeout_time) {
   thread function_f253a9d9(actor_ent, soundalias, var_793802a, var_7ca3f45d, frame_rate, stop_notify, fadeout_time);
 }
 
@@ -909,7 +909,7 @@ function private function_f253a9d9(actor_ent, soundalias, var_793802a, var_7ca3f
   sndobj = play(soundalias, sound_target);
 
   if(isstring(stop_notify)) {
-    function_d4e10f97(sndobj, var_7ca3f45d, fadeout_time);
+    stop_on_level_notify(sndobj, var_7ca3f45d, fadeout_time);
   }
 }
 
@@ -922,7 +922,7 @@ function private function_56a60177(var_793802a, frame_rate) {
   wait wait_time;
 }
 
-function function_c9ebfa2(xanim, notetrack, var_596cbb65) {
+function snd_pcap_add_notetrack_mapping(xanim, notetrack, var_596cbb65) {
   info = function_643b5581(var_596cbb65);
   animname = info[#"animname"];
   anime = info[#"anime"];
@@ -1058,9 +1058,9 @@ function snd_timer(totaltime, tickalias, tockalias, endalias, pitchlo, pitchhi, 
 }
 
 function private function_c71c2a61(var_5229451c) {
-  level endon(#"hash_1fc826e0acca152f");
-  var_bb25ac71 = [];
-  var_ad5f1285 = [];
+  level endon(#"radioconvostop");
+  radioconvo = [];
+  lastconvo = [];
   assert(isarray(level.var_cfbd198a) == 1);
   waitforplayers();
 
@@ -1070,14 +1070,14 @@ function private function_c71c2a61(var_5229451c) {
 
     if(isDefined(level.var_a5a54d7a) == 0 || level.var_a5a54d7a.size == 0) {
       function_4bb3b8d9();
-      arrayremovevalue(level.var_a5a54d7a, var_ad5f1285, 1);
+      arrayremovevalue(level.var_a5a54d7a, lastconvo, 1);
     }
 
-    var_bb25ac71 = level.var_a5a54d7a[0];
-    var_ad5f1285 = var_bb25ac71;
+    radioconvo = level.var_a5a54d7a[0];
+    lastconvo = radioconvo;
 
-    while(isarray(var_bb25ac71) == 1 && var_bb25ac71.size > 0) {
-      radioline = var_bb25ac71[0];
+    while(isarray(radioconvo) == 1 && radioconvo.size > 0) {
+      radioline = radioconvo[0];
 
       if(soundexists(radioline) == 1) {
         playtime = soundgetplaybacktime(radioline) / 1000;
@@ -1090,10 +1090,10 @@ function private function_c71c2a61(var_5229451c) {
         wait 0.666;
       }
 
-      arrayremovevalue(var_bb25ac71, radioline, 1);
+      arrayremovevalue(radioconvo, radioline, 1);
     }
 
-    arrayremovevalue(level.var_a5a54d7a, var_ad5f1285, 1);
+    arrayremovevalue(level.var_a5a54d7a, lastconvo, 1);
   }
 }
 
@@ -1105,23 +1105,23 @@ function function_a1446973(var_5229451c) {
   level thread function_c71c2a61(var_5229451c);
 }
 
-function function_3c463326() {
-  level notify(#"hash_1fc826e0acca152f");
+function radioconvostop() {
+  level notify(#"radioconvostop");
 }
 
 function function_4bb3b8d9() {
   if(isDefined(level.var_cfbd198a) == 1) {}
 }
 
-function function_6c69eaba(flag_name, var_2ce1e8bb, fade_in_time, fade_out_time) {
-  level thread function_d2c66f6e(flag_name, var_2ce1e8bb, fade_in_time, fade_out_time);
+function submix_flag(flag_name, submix_name, fade_in_time, fade_out_time) {
+  level thread function_d2c66f6e(flag_name, submix_name, fade_in_time, fade_out_time);
 }
 
-function private function_d2c66f6e(flag_name, var_2ce1e8bb, fade_in_time, fade_out_time) {
+function private function_d2c66f6e(flag_name, submix_name, fade_in_time, fade_out_time) {
   level.player endon(#"death");
 
-  if(!flag::exists(var_2ce1e8bb)) {
-    flag::init(var_2ce1e8bb);
+  if(!flag::exists(submix_name)) {
+    flag::init(submix_name);
   }
 
   if(!isDefined(fade_in_time)) {
@@ -1133,8 +1133,8 @@ function private function_d2c66f6e(flag_name, var_2ce1e8bb, fade_in_time, fade_o
   }
 
   while(true) {
-    flag::wait_till(var_2ce1e8bb);
-    flag::wait_till_clear(var_2ce1e8bb);
+    flag::wait_till(submix_name);
+    flag::wait_till_clear(submix_name);
   }
 }
 

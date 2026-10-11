@@ -123,8 +123,8 @@ function main(str_objective, b_starting) {
   var_5a6ad0b9 = struct::get_array("plaza_wave_1_smoke", "targetname");
   level flag::set("flg_smoke_deployed");
 
-  foreach(var_10ed23ba in var_5a6ad0b9) {
-    e_grenade = level.player magicgrenadeplayer(getweapon(#"willy_pete"), var_10ed23ba.origin, (0, 0, 0));
+  foreach(s_smoke in var_5a6ad0b9) {
+    e_grenade = level.player magicgrenadeplayer(getweapon(#"willy_pete"), s_smoke.origin, (0, 0, 0));
     e_grenade.var_3791d005 = 0;
     wait 2.5;
   }
@@ -332,26 +332,26 @@ function function_f8d17019(var_63610c73) {
   radiusdamage(self.origin, 100, 1000, 200, level.player, "MOD_EXPLOSIVE");
 }
 
-function function_1bdb683(var_9608b240, min_delay = 2, max_delay = 8) {
+function function_1bdb683(volume_targetname, min_delay = 2, max_delay = 8) {
   self endon(#"death");
   level endon(#"flag_obj_plaza_done");
   wait randomfloatrange(min_delay, max_delay);
   self val::set(#"hash_58e0e1db15cf1334", "ignoreall", 1);
-  fallback_vol = getEnt(var_9608b240, "targetname");
+  fallback_vol = getEnt(volume_targetname, "targetname");
   self ai::force_goal(fallback_vol, 0);
   self waittill(#"goal");
   self val::reset(#"hash_58e0e1db15cf1334", "ignoreall");
 }
 
-function function_302b4058(var_9608b240, min_delay = 1, max_delay = 4, var_226603c5 = 0) {
+function function_302b4058(volume_targetname, min_delay = 1, max_delay = 4, var_226603c5 = 0) {
   self endon(#"death");
   level endon(#"flag_obj_plaza_done");
   wait randomfloatrange(min_delay, max_delay);
-  fallback_vol = getEnt(var_9608b240, "targetname");
+  fallback_vol = getEnt(volume_targetname, "targetname");
   self ai::force_goal(fallback_vol, var_226603c5);
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   hms_util::print("<dev string:xde>");
 
   level notify(#"hash_4b94195c7c990e8f");
@@ -463,8 +463,8 @@ function function_838b0689() {
   level flag::wait_till("flg_sniper_wave_2_spawned");
   var_88d2bb65 = spawner::get_ai_group_ai("sniper_group_2");
 
-  foreach(var_8933ebaf in var_88d2bb65) {
-    var_8933ebaf thread function_e0be8177();
+  foreach(ai_2 in var_88d2bb65) {
+    ai_2 thread function_e0be8177();
 
     hms_util::print("<dev string:x146>");
   }
@@ -524,7 +524,7 @@ function function_a6d837d0() {
   savegame::checkpoint_save();
   level flag::wait_till("flg_plaza_column_destruction_ready");
   level thread namespace_a789f8ae::function_c68fb2ec();
-  magicbullet(getweapon(#"hash_3ce617d496140d52"), var_a765d3ea.origin, var_da43ffcd.origin);
+  magicbullet(getweapon(#"launcher_standard_t9_takedown_chase"), var_a765d3ea.origin, var_da43ffcd.origin);
 }
 
 function function_399b4bd4() {

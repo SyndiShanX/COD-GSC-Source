@@ -65,8 +65,8 @@ function function_3bab499f(localclientnum, oldval, newval, bnewent, binitialsnap
 
     if(isDefined(s_portal)) {
       s_portal.fx_tag = util::spawn_model(fieldname, "tag_origin", s_portal.origin, s_portal.angles);
-      s_portal.fx_tag playSound(fieldname, #"hash_61bdec1c1b35a33a");
-      s_portal.fx_tag.var_68cf83c = s_portal.fx_tag playLoopSound(#"hash_e94363edb1efe");
+      s_portal.fx_tag playSound(fieldname, #"zmb_tung_sq_burgerboy_portal_open");
+      s_portal.fx_tag.var_68cf83c = s_portal.fx_tag playLoopSound(#"zmb_tung_sq_burgerboy_portal_lp");
       s_portal.fx_tag.var_fa63b371 = playFX(fieldname, #"hash_57ae7e6f9140093f", s_portal.fx_tag.origin, anglesToForward(s_portal.fx_tag.angles), anglestoup(s_portal.fx_tag.angles));
     }
 
@@ -77,7 +77,7 @@ function function_3bab499f(localclientnum, oldval, newval, bnewent, binitialsnap
 
   foreach(s_portal in var_328baab5) {
     if(isDefined(s_portal.fx_tag.var_68cf83c)) {
-      s_portal.fx_tag playSound(fieldname, #"hash_10ab48d5915334e");
+      s_portal.fx_tag playSound(fieldname, #"zmb_tung_sq_burgerboy_portal_close");
       s_portal.fx_tag stoploopsound(s_portal.fx_tag.var_68cf83c);
       s_portal.fx_tag.var_68cf83c = undefined;
     }
@@ -217,7 +217,7 @@ function function_b6ea5740(localclientnum, oldval, newval, bnewent, binitialsnap
 
   e_fx = util::spawn_model(bwasdemojump, "tag_origin", self gettagorigin("J_Spine4"));
   util::playFXOnTag(bwasdemojump, #"hash_61e3c7a179d7cdfb", e_fx, "tag_origin");
-  e_fx playSound(bwasdemojump, #"hash_14182939d9e547b2");
+  e_fx playSound(bwasdemojump, #"zmb_tung_wwq_soul_start");
   e_fx.var_1398d03 = e_fx playLoopSound(#"hash_20b1d2b1a7ca4646");
   e_fx moveTo(e_fx.origin + (0, 0, 40), 0.8);
   wait 0.75;
@@ -225,7 +225,7 @@ function function_b6ea5740(localclientnum, oldval, newval, bnewent, binitialsnap
   n_time = distance(e_fx.origin, var_5f90c92a.origin) / 400;
   e_fx moveTo(var_5f90c92a.origin + (0, 0, 32), n_time);
   e_fx waittill(#"movedone");
-  e_fx playSound(bwasdemojump, #"hash_282ba4e04a5fa817");
+  e_fx playSound(bwasdemojump, #"zmb_tung_wwq_soul_end");
   e_fx stoploopsound(e_fx.var_1398d03);
   level thread function_db00ff4a(bwasdemojump, var_5f90c92a);
   wait 0.3;
@@ -339,7 +339,7 @@ function function_3493f111(localclientnum, oldval, newval, bnewent, binitialsnap
 
     e_player postfx::playpostfxbundle(#"hash_7fbc9bc489aea188");
     e_player playSound(bwastimejump, #"hash_56a9d9da20064c3f");
-    function_5ea2c6e3("zm_silver_darkaether_leadin", 7);
+    addsubmix("zm_silver_darkaether_leadin", 7);
   }
 }
 
@@ -350,7 +350,7 @@ function function_30aa821d(localclientnum, oldval, newval, bnewent, binitialsnap
     foreach(var_2b30e4c7 in var_30e5780e) {
       if(!isDefined(var_2b30e4c7.fx_tag) && !isDefined(var_2b30e4c7.fx_tag.var_a3701ec9)) {
         var_2b30e4c7.fx_tag = util::spawn_model(fieldname, "tag_origin", var_2b30e4c7.origin, var_2b30e4c7.angles);
-        var_2b30e4c7.fx_tag.var_a3701ec9 = util::playFXOnTag(fieldname, #"hash_860f2d43123c954", var_2b30e4c7.fx_tag, "tag_origin");
+        var_2b30e4c7.fx_tag.var_a3701ec9 = util::playFXOnTag(fieldname, #"zombie/fx_aat_fireworks_zmb", var_2b30e4c7.fx_tag, "tag_origin");
       }
 
       playSound(fieldname, #"hash_5147e3b5f415d707", var_2b30e4c7.origin + (0, 0, 20));
@@ -363,7 +363,7 @@ function function_30aa821d(localclientnum, oldval, newval, bnewent, binitialsnap
     foreach(var_2b30e4c7 in var_6a116a65) {
       if(!isDefined(var_2b30e4c7.fx_tag) && !isDefined(var_2b30e4c7.fx_tag.var_a3701ec9)) {
         var_2b30e4c7.fx_tag = util::spawn_model(fieldname, "tag_origin", var_2b30e4c7.origin, var_2b30e4c7.angles);
-        var_2b30e4c7.fx_tag.var_a3701ec9 = util::playFXOnTag(fieldname, #"hash_860f2d43123c954", var_2b30e4c7.fx_tag, "tag_origin");
+        var_2b30e4c7.fx_tag.var_a3701ec9 = util::playFXOnTag(fieldname, #"zombie/fx_aat_fireworks_zmb", var_2b30e4c7.fx_tag, "tag_origin");
       }
 
       playSound(fieldname, #"hash_5147e3b5f415d707", var_2b30e4c7.origin + (0, 0, 20));

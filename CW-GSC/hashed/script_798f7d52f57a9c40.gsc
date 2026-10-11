@@ -42,10 +42,10 @@ function starting(str_skipto) {
 
 function main(str_skipto, b_starting) {
   level flag::set("aslt_vault_begin");
-  level battlechatter::function_2ab9360b(1);
+  level battlechatter::bc_allow(1);
 
   if(is_true(b_starting)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto);
+    level.adler = namespace_e77bf565::adler_spawn(str_skipto);
     level.adler namespace_e77bf565::function_5770c74("assault");
     level thread scene::skipto_end_noai("scene_kgb_door_kick", "Last_Frame", undefined, 1);
     level thread scene::skipto_end_noai("scene_kgb_utility_room_adler", "Door_Closed", undefined, 1);
@@ -73,7 +73,7 @@ function main(str_skipto, b_starting) {
   level flag::wait_till("aslt_vault_complete");
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
@@ -121,7 +121,7 @@ function init_clientfields() {
   clientfield::register("scriptmover", "vault_hanging_light_flicker_vfx", 1, 1, "int");
 }
 
-function function_22b7fffd() {
+function init_scenes() {
   scene::add_scene_func("scene_kgb_vault_breach_weld", &function_8981072f, "Shot_0");
   animation::add_notetrack_func("kgb_aslt_vault::destroy_vault_control_panel", &function_66b280b8);
 }
@@ -137,7 +137,7 @@ function function_b735db01() {
   level scene::stop("scene_kgb_vault_approach");
   level.adler util::stop_magic_bullet_shield();
   level.adler delete();
-  level.adler = namespace_e77bf565::function_52fe0eb3(undefined, "adler_shotgun");
+  level.adler = namespace_e77bf565::adler_spawn(undefined, "adler_shotgun");
   vault_adler_node = getnode("vault_adler_node", "targetname");
   level.adler forceteleport(vault_adler_node.origin, vault_adler_node.angles);
   level.adler allowedstances("crouch", "stand");
@@ -461,7 +461,7 @@ function function_833a9413(b_starting = 0) {
   array::thread_all(var_708f97a7, &function_74aac033, "scene_kgb_env_server_loops_no_glass", b_starting);
 }
 
-function function_74aac033(var_40498194, b_starting = 0) {
+function function_74aac033(sscenename, b_starting = 0) {
   level endon(#"aslt_bunker_escape_complete");
   loops = [];
   loops[loops.size] = "loop_a";
@@ -469,12 +469,12 @@ function function_74aac033(var_40498194, b_starting = 0) {
   loops[loops.size] = "loop_c";
 
   if(is_true(b_starting)) {
-    self scene::play(var_40498194, array::random(loops));
+    self scene::play(sscenename, array::random(loops));
   }
 
   while(true) {
     wait randomfloatrange(0, 8);
-    self scene::play(var_40498194, array::random(loops));
+    self scene::play(sscenename, array::random(loops));
   }
 }
 

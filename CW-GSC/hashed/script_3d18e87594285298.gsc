@@ -30,7 +30,7 @@ function private preinit() {
   if(!isDefined(level.body_shield.var_30c92ca9)) {
     level.body_shield.var_30c92ca9 = 1;
     animation::add_global_notetrack_handler("contact", &function_faf4a34d, 0);
-    animation::add_global_notetrack_handler("slomo", &function_dec110ef, 0);
+    animation::add_global_notetrack_handler("slomo", &bullet_time_start, 0);
     animation::add_global_notetrack_handler("hide", &function_85d6c09b, 0);
     animation::add_global_notetrack_handler("grenade_detonate", &grenade_explode, 0);
     animation::add_global_notetrack_handler("push_enable", &function_9c87450d, 0);
@@ -125,7 +125,7 @@ function function_faf4a34d(guy) {
   player playRumbleOnEntity("damage_heavy");
 }
 
-function function_dec110ef(guy) {
+function bullet_time_start(guy) {
   player = getPlayers()[0];
 
   if(player.var_2cb06cc6.name == "body_shield_grenade") {
@@ -257,7 +257,7 @@ function function_8ba805b3() {
 
 function function_5053f358(action, body) {
   self function_5e89af5d(action, body, undefined, 1);
-  bb::function_cd497743("bodyshield_grenade", self);
+  bb::logplayermapnotification("bodyshield_grenade", self);
   scene = array::random(["td_scene_bodyshield_grenade_a", "td_scene_bodyshield_grenade_b"]);
   animation = function_11b042fc(scene, "victim");
   body thread function_17414a13(body);
@@ -282,10 +282,10 @@ function function_6c9ddc07(action, body = self.takedown.body) {
   if(self.takedown.body_shield.drop === "dead") {
     var_6e477ca8 = "td_scene_bodyshield_drop";
     var_de098861 = "ges_body_shield_rifle_drop";
-    bb::function_cd497743("bodyshield_drop", self);
+    bb::logplayermapnotification("bodyshield_drop", self);
     self function_5e89af5d(action, body, undefined, 1, 1);
   } else {
-    bb::function_cd497743("bodyshield_kill", self);
+    bb::logplayermapnotification("bodyshield_kill", self);
     self function_5e89af5d(action, body);
   }
 
@@ -395,10 +395,10 @@ function function_1058ffa1(guy = self) {
 
 function function_17414a13(guy) {
   guy waittill(#"death");
-  function_30e6300b(guy);
+  grenade_drop(guy);
 }
 
-function function_30e6300b(var_5fb1bd74) {
+function grenade_drop(var_5fb1bd74) {
   if(isDefined(var_5fb1bd74.var_54163419) && isDefined(var_5fb1bd74.var_bc2602c8) && !is_true(var_5fb1bd74.var_54163419.dropped)) {
     var_5fb1bd74.var_54163419.dropped = 1;
     launchforce = var_5fb1bd74.var_bc2602c8 * 2;
@@ -446,7 +446,7 @@ function function_6794cd13(params) {
   }
 
   self.var_bc2602c8 = params.original.var_bc2602c8;
-  function_30e6300b(self);
+  grenade_drop(self);
 }
 
 function function_a3d6cc6(params) {

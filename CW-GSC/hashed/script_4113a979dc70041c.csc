@@ -106,7 +106,7 @@ function private function_f33e1112(localclientnum, oldval, newval, bnewent, bini
   self util::waittill_dobj(fieldname);
 
   if(bwastimejump == 1) {
-    if(self.model === #"hash_30876ea41ba82413") {
+    if(self.model === #"p9_zm_gold_turret_ammo") {
       self.n_fx_id = function_239993de(fieldname, #"hash_10e51613cc775f48", self, "tag_origin");
     } else {
       self.n_fx_id = function_239993de(fieldname, #"hash_709af4fd54580701", self, "tag_origin");
@@ -262,7 +262,7 @@ function private ambient_fx(localclientnum, oldval, newval, bnewent, binitialsna
 
     if(!isDefined(self.var_e1cd0eb7)) {
       self.var_e1cd0eb7 = self.origin + (0, 0, 500);
-      playSound(fieldname, #"hash_46461ba72b8ab7a2", self.var_e1cd0eb7);
+      playSound(fieldname, #"evt_sur_we_portal_common_start", self.var_e1cd0eb7);
     }
 
     wait 2.9;

@@ -52,7 +52,7 @@ function main(str_objective, b_starting) {
 
   if(b_starting) {
     level thread namespace_11998b8f::function_7ad4f5cb();
-    util::function_268bdf4f("lazar", &namespace_11998b8f::function_2f0f0a84);
+    util::init_hero("lazar", &namespace_11998b8f::function_2f0f0a84);
     level.lazar val::set("meetup", "ignoreme", 1);
     level.lazar val::set("meetup", "ignoreall", 1);
     level thread scene::play("scene_z_stk_electronics_store", "end_loops");
@@ -100,7 +100,7 @@ function main(str_objective, b_starting) {
   }
 
   level.var_3559e9e animation::first_frame("z_stk_apt_front_door_entry_wife_answers_phone", level.var_54b83d35);
-  skipto::function_4e3ab877(str_objective);
+  skipto::objective_completed(str_objective);
   level flag::wait_till("flag_close_front_door");
   util::unmake_hero("lazar", 1);
   util::unmake_hero("park", 1);
@@ -130,57 +130,57 @@ function function_720adc4e() {
 
 function function_847bd54f() {
   level endon(#"apt_street_done");
-  var_22386ba3 = getEntArray("apartment_light1_fill", "targetname");
-  var_13f6cf20 = getEnt("apartment_light1_spot", "targetname");
-  var_f5b792a2 = getEntArray("apartment_light2_fill", "targetname");
-  var_6799f665 = getEnt("apartment_light2_spot", "targetname");
+  light_01 = getEntArray("apartment_light1_fill", "targetname");
+  light_02 = getEnt("apartment_light1_spot", "targetname");
+  light_03 = getEntArray("apartment_light2_fill", "targetname");
+  light_04 = getEnt("apartment_light2_spot", "targetname");
 
-  foreach(light in var_22386ba3) {
+  foreach(light in light_01) {
     light.default_intensity = light getlightintensity();
   }
 
-  var_13f6cf20.default_intensity = var_13f6cf20 getlightintensity();
+  light_02.default_intensity = light_02 getlightintensity();
 
-  foreach(light in var_f5b792a2) {
+  foreach(light in light_03) {
     light.default_intensity = light getlightintensity();
   }
 
-  var_6799f665.default_intensity = var_6799f665 getlightintensity();
+  light_04.default_intensity = light_04 getlightintensity();
 
   while(true) {
     level flag::wait_till("flag_remove_apt_fake_lights");
 
-    foreach(light in var_22386ba3) {
+    foreach(light in light_01) {
       light setlightintensity(0);
     }
 
-    var_13f6cf20 setlightintensity(0);
+    light_02 setlightintensity(0);
 
-    foreach(light in var_f5b792a2) {
+    foreach(light in light_03) {
       light setlightintensity(0);
     }
 
-    var_6799f665 setlightintensity(0);
+    light_04 setlightintensity(0);
     level flag::wait_till_clear("flag_remove_apt_fake_lights");
 
-    foreach(light in var_22386ba3) {
+    foreach(light in light_01) {
       if(isDefined(light.default_intensity)) {
         light setlightintensity(light.default_intensity);
       }
     }
 
     if(isDefined(light.default_intensity)) {
-      var_13f6cf20 setlightintensity(var_13f6cf20.default_intensity);
+      light_02 setlightintensity(light_02.default_intensity);
     }
 
-    foreach(light in var_f5b792a2) {
+    foreach(light in light_03) {
       if(isDefined(light.default_intensity)) {
         light setlightintensity(light.default_intensity);
       }
     }
 
     if(isDefined(light.default_intensity)) {
-      var_6799f665 setlightintensity(var_6799f665.default_intensity);
+      light_04 setlightintensity(light_04.default_intensity);
     }
   }
 }
@@ -470,7 +470,7 @@ function function_26a2480e() {
   self deletedelay();
 }
 
-function function_f62cf54d(str_objective, b_starting, var_aa1a6455, player) {
+function function_f62cf54d(str_objective, b_starting, b_direct, player) {
   if(player) {
     level flag::set("flag_dart_gun_ready");
     level flag::set("apt_street_done");

@@ -384,8 +384,8 @@ function function_d36fb590(var_aa4f9213, var_6c9485fc, n_fx_type = 3) {
   mdl_reward = util::spawn_model(var_24a867e4, var_8b84b3ce, v_spawn_angles);
   self.var_642ed51a.var_f693bf0b clientfield::set("" + #"reward_fx", 1);
   self.var_642ed51a.var_f92a5f81 = mdl_reward;
-  mdl_reward playSound(#"hash_52de50e5184d1c7");
-  mdl_reward playLoopSound(#"hash_601ae32339098104");
+  mdl_reward playSound(#"zmb_powerup_default_spawn");
+  mdl_reward playLoopSound(#"zmb_powerup_default_lp");
   mdl_reward.hint = level.zombie_powerups[var_6c9485fc].hint;
   b_give_reward = self function_dcda5d87(mdl_reward, 1, 1, 0);
 
@@ -393,7 +393,7 @@ function function_d36fb590(var_aa4f9213, var_6c9485fc, n_fx_type = 3) {
     if(var_6c9485fc == "self_revive") {
       if(self zm_laststand::function_618fd37e() < 1) {
         self zm_laststand::function_3a00302e();
-        self playSound(#"hash_9dbd105c3060c91");
+        self playSound(#"zmb_powerup_default_grabbed");
       }
     } else {
       mdl_reward[[level._custom_powerups[var_6c9485fc].grab_powerup]](self);
@@ -1038,7 +1038,7 @@ function function_fc6ae19f() {
     var_9a9544b8 = self aat::getaatonweapon(current_weapon, 1);
     self aat::acquire(current_weapon, undefined, var_9a9544b8);
     self thread zm_vo::function_8abe0568(#"ammo_mod", 0.5);
-    self playSound(#"hash_9dbd105c3060c91");
+    self playSound(#"zmb_powerup_default_grabbed");
   }
 }
 
@@ -1638,12 +1638,12 @@ function function_c45635c7(mdl_reward, b_rotate, var_b9b24, var_d1bb6924 = 1) {
       n_dist_sq = distance2dsquared(player.origin, mdl_reward.origin);
 
       if(n_dist_sq < 4096) {
-        var_f281afef = player;
+        player_pickup = player;
         break;
       }
     }
 
-    if(isDefined(var_f281afef)) {
+    if(isDefined(player_pickup)) {
       break;
     }
 
@@ -1660,17 +1660,17 @@ function function_c45635c7(mdl_reward, b_rotate, var_b9b24, var_d1bb6924 = 1) {
 
   if(is_true(b_timeout)) {
     return undefined;
-  } else if(isPlayer(var_f281afef)) {
+  } else if(isPlayer(player_pickup)) {
     s_powerup = level.zombie_powerups[var_f0de9b92];
 
     if(isDefined(s_powerup.var_6029fea3.var_721ec012)) {
-      var_f281afef playSound(s_powerup.var_6029fea3.var_721ec012);
+      player_pickup playSound(s_powerup.var_6029fea3.var_721ec012);
     } else {
-      var_f281afef playSound(#"hash_9dbd105c3060c91");
+      player_pickup playSound(#"zmb_powerup_default_grabbed");
     }
   }
 
-  return var_f281afef;
+  return player_pickup;
 }
 
 function function_ed4a5d52(var_f0de9b92) {
@@ -1752,7 +1752,7 @@ function function_2ae77bb7(var_ff48959, b_enable = 1) {
 
       if(isDefined(self.var_642ed51a)) {
         self.var_642ed51a namespace_f0b43eb5::function_e1dd6a53(#"reward");
-        self.var_642ed51a function_619a5c20();
+        self.var_642ed51a pingable();
       }
     }
 

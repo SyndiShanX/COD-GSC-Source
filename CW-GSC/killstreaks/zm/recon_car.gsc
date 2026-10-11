@@ -290,7 +290,7 @@ function function_2087b17f() {
     playFX(explosionfx, fxorigin, (0, 0, 1));
   }
 
-  playSoundAtPosition(#"hash_7723f91638b2361f", self.origin + (0, 0, 25));
+  playSoundAtPosition(#"mpl_veh_arcxd_exp", self.origin + (0, 0, 25));
 }
 
 function function_76817ccc() {

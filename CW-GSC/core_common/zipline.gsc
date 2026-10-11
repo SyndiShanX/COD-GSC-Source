@@ -256,7 +256,7 @@ function private function_8956c060(entity, asmstatename) {
   return 5;
 }
 
-function private function_55f3b1df(var_1948a97, zipline_start, normalized_distance) {
+function private function_55f3b1df(zipline_vehicle, zipline_start, normalized_distance) {
   if(normalized_distance < 0) {
     normalized_distance = 0;
   } else if(normalized_distance > 1) {
@@ -266,7 +266,7 @@ function private function_55f3b1df(var_1948a97, zipline_start, normalized_distan
   var_4be77411 = zipline_start.var_cf56bb8f.var_afbab71e;
   var_a7a79831 = length(var_4be77411.origin - zipline_start.origin);
   distance = var_a7a79831 * normalized_distance;
-  var_1948a97 function_ded6dd2e(zipline_start, distance);
+  zipline_vehicle function_ded6dd2e(zipline_start, distance);
 }
 
 function private function_c7c70177(entity, asmstatename) {

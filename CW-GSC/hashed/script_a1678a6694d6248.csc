@@ -248,9 +248,9 @@ function function_cb96958d(localclientnum, weapon) {
   if(isDefined(altweapon)) {
     var_726cb2b4 = getweaponammoclip(localclientnum, altweapon);
     var_698d1f70 = self getweaponammostock(localclientnum, altweapon);
-    var_84a2de70 = altweapon.maxammo;
+    max_stock_ammo = altweapon.maxammo;
 
-    if(var_698d1f70 == var_84a2de70) {
+    if(var_698d1f70 == max_stock_ammo) {
       return 2;
     } else if(var_698d1f70 == 0 && var_726cb2b4 == 0) {
       return 0;
@@ -454,12 +454,12 @@ function function_f564024f(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(bwastimejump == 1) {
-    self.var_bab1a4cb = self playLoopSound(#"hash_4166b3feb34a26ae", undefined, (0, 0, 50));
+    self.var_bab1a4cb = self playLoopSound(#"wpn_melee_crystalaxe_ambient_lp", undefined, (0, 0, 50));
     return;
   }
 
   if(bwastimejump == 2) {
-    self.var_bab1a4cb = self playLoopSound(#"hash_2204d8749b6a599b", undefined, (0, 0, 50));
+    self.var_bab1a4cb = self playLoopSound(#"wpn_smg_crystalaxe_ambient_lp", undefined, (0, 0, 50));
   }
 }
 

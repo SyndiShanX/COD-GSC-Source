@@ -86,7 +86,7 @@ function onscorelimit() {
 
 function end_round() {
   level childthread function_1a67afed();
-  level childthread function_f7c2fc80();
+  level childthread do_rumble();
   level childthread function_86ca9275();
   level childthread function_311e397d();
   level childthread function_68f13f40();
@@ -279,45 +279,45 @@ function function_4e92a5e8() {
   var_e9f2629a[0] = spawn("script_model", var_791ffffd.origin);
   var_e9f2629a[0] setModel(#"wpn_t9_eqp_briefcase_world");
   var_e9f2629a[0].angles = var_791ffffd.angles;
-  var_4cabc96 = gameobjects::create_carry_object(#"neutral", trigger, var_e9f2629a, (0, 0, 0), #"dropkick_football");
-  var_4cabc96 gameobjects::allow_carry(#"group_all");
-  var_4cabc96 gameobjects::set_visible(#"group_all");
-  var_4cabc96 gameobjects::set_use_time(level.var_8abcfbb8);
-  var_4cabc96 gameobjects::set_objective_entity(var_4cabc96);
-  var_4cabc96 gameobjects::function_a8c842d6(isDefined(getgametypesetting(#"carrier_manualdrop")) ? getgametypesetting(#"carrier_manualdrop") : 0, 1, 1);
-  var_4cabc96 gameobjects::set_onpickup_event(&function_3dbc9c80);
-  var_4cabc96 gameobjects::function_13798243(&function_279b8022);
-  var_4cabc96 gameobjects::set_onbeginuse_event(&onbeginuse);
-  var_4cabc96 gameobjects::set_onenduse_event(&onenduse);
-  var_4cabc96.onreset = &onreset;
-  var_4cabc96.objectiveonself = 1;
-  var_4cabc96.allowweapons = 1;
-  var_4cabc96.var_22389d70 = 0;
+  football = gameobjects::create_carry_object(#"neutral", trigger, var_e9f2629a, (0, 0, 0), #"dropkick_football");
+  football gameobjects::allow_carry(#"group_all");
+  football gameobjects::set_visible(#"group_all");
+  football gameobjects::set_use_time(level.var_8abcfbb8);
+  football gameobjects::set_objective_entity(football);
+  football gameobjects::function_a8c842d6(isDefined(getgametypesetting(#"carrier_manualdrop")) ? getgametypesetting(#"carrier_manualdrop") : 0, 1, 1);
+  football gameobjects::set_onpickup_event(&function_3dbc9c80);
+  football gameobjects::function_13798243(&function_279b8022);
+  football gameobjects::set_onbeginuse_event(&onbeginuse);
+  football gameobjects::set_onenduse_event(&onenduse);
+  football.onreset = &onreset;
+  football.objectiveonself = 1;
+  football.allowweapons = 1;
+  football.var_22389d70 = 0;
 
   if(true) {
-    var_4cabc96.enemyobjid = gameobjects::get_next_obj_id();
-    objective_add(var_4cabc96.enemyobjid, "invisible", var_791ffffd.origin, #"hash_7a7d8800746ef2a5");
+    football.enemyobjid = gameobjects::get_next_obj_id();
+    objective_add(football.enemyobjid, "invisible", var_791ffffd.origin, #"hash_7a7d8800746ef2a5");
   }
 
-  level.var_bb695b91 = var_4cabc96;
+  level.var_bb695b91 = football;
 }
 
 function function_b256c6a7() {
-  var_4cabc96 = level.var_bb695b91;
+  football = level.var_bb695b91;
 
-  if(!isDefined(var_4cabc96)) {
+  if(!isDefined(football)) {
     return;
   }
 
-  var_4cabc96 gameobjects::set_visible(#"group_none");
-  var_4cabc96.trigger setinvisibletoall();
+  football gameobjects::set_visible(#"group_none");
+  football.trigger setinvisibletoall();
 
-  if(isDefined(var_4cabc96.droptrigger)) {
-    var_4cabc96.droptrigger setinvisibletoall();
+  if(isDefined(football.droptrigger)) {
+    football.droptrigger setinvisibletoall();
   }
 
-  if(isDefined(var_4cabc96.enemyobjid)) {
-    objective_setstate(var_4cabc96.enemyobjid, "invisible");
+  if(isDefined(football.enemyobjid)) {
+    objective_setstate(football.enemyobjid, "invisible");
   }
 }
 
@@ -328,7 +328,7 @@ function function_3dbc9c80(player) {
 
   assert(isDefined(player) && isDefined(player.team));
   ownerteam = player.team;
-  var_4cabc96 = self;
+  football = self;
   self gameobjects::set_owner_team(ownerteam);
   self.visuals[0] notsolid();
 
@@ -424,7 +424,7 @@ function function_279b8022(player) {
   self thread function_aa074770();
 
   foreach(person in getPlayers()) {
-    person playlocalsound(#"hash_2e71f0773ee8286a");
+    person playlocalsound(#"mpl_dropkick_drop");
   }
 }
 
@@ -546,7 +546,7 @@ function function_96a10724() {
 }
 
 function function_e9921723() {
-  primaryweapon = getweapon(#"hash_29ab150f9f8964f");
+  primaryweapon = getweapon(#"dropkick_weapon");
   self giveweapon(primaryweapon);
   self givestartammo(primaryweapon);
   self switchtoweapon(primaryweapon, 1);
@@ -555,7 +555,7 @@ function function_e9921723() {
   self val::set(#"hash_57686500ed84dbcc", "disable_weapon_pickup", 1);
   self loadout::function_442539("primary", primaryweapon);
   self.droppeddeathweapon = 1;
-  gestures::function_a5202150(#"hash_6c5354e57d5054f6", #"hash_29ab150f9f8964f");
+  gestures::function_a5202150(#"hash_6c5354e57d5054f6", #"dropkick_weapon");
 }
 
 function function_b64329fe() {
@@ -563,7 +563,7 @@ function function_b64329fe() {
 }
 
 function function_f58ec571() {
-  primaryweapon = getweapon(#"hash_29ab150f9f8964f");
+  primaryweapon = getweapon(#"dropkick_weapon");
 
   if(self hasweapon(primaryweapon)) {
     self takeweapon(primaryweapon);
@@ -574,9 +574,9 @@ function function_f58ec571() {
   self.droppeddeathweapon = undefined;
 }
 
-function remove_influencers(var_4cabc96, carrier) {
-  if(isDefined(level.var_adb77100) && isDefined(var_4cabc96)) {
-    var_4cabc96 influencers::remove_influencer(level.var_adb77100);
+function remove_influencers(football, carrier) {
+  if(isDefined(level.var_adb77100) && isDefined(football)) {
+    football influencers::remove_influencer(level.var_adb77100);
     level.var_adb77100 = undefined;
   }
 
@@ -628,16 +628,16 @@ function private function_311e397d() {
     return;
   }
 
-  var_a996ef6 = var_5ac13eb1[randomint(var_5ac13eb1.size)];
+  nuke_fx = var_5ac13eb1[randomint(var_5ac13eb1.size)];
 
   if(isDefined(var_1c3c21f1)) {
-    var_a996ef6 = var_1c3c21f1;
+    nuke_fx = var_1c3c21f1;
   }
 
-  origin = var_a996ef6.origin;
-  forward = anglesToForward(var_a996ef6.angles);
-  up = anglestoup(var_a996ef6.angles);
-  playSoundAtPosition(#"hash_36412d3d8dabf70e", (0, 0, 0));
+  origin = nuke_fx.origin;
+  forward = anglesToForward(nuke_fx.angles);
+  up = anglestoup(nuke_fx.angles);
+  playSoundAtPosition(#"evt_nuke_explosion", (0, 0, 0));
   playFX(#"hash_76b02047787f0357", origin, forward, up, 1);
 }
 
@@ -653,7 +653,7 @@ function private function_ec196fb0() {
   return level.var_4c887efb;
 }
 
-function private function_f7c2fc80() {
+function private do_rumble() {
   wait 2;
 
   foreach(player in getPlayers()) {

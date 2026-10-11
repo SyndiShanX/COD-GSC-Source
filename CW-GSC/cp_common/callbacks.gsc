@@ -53,7 +53,7 @@ function set_default_callbacks() {
   level.callbackvehiclekilled = &globallogic_vehicle::callback_vehiclekilled;
   level.callbackvehicleradiusdamage = &globallogic_vehicle::callback_vehicleradiusdamage;
   level.callbackplayermigrated = &globallogic_player::callback_playermigrated;
-  level.callbackdecorationawarded = &challenges::function_f901cb3c;
+  level.callbackdecorationawarded = &challenges::callback_decoration_awarded;
   level.var_69959686 = &deployable::function_209fda28;
   level._custom_weapon_damage_func = &callback_weapon_damage;
   level._gametype_default = "coop";

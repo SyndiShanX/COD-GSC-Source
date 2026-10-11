@@ -38,7 +38,7 @@ function main(str_skipto, b_starting) {
   level flag::wait_till("heli_convoy_aslt_complete");
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 }
 
@@ -53,7 +53,7 @@ function init_flags() {
 
 function init_clientfields() {}
 
-function function_22b7fffd() {}
+function init_scenes() {}
 
 function function_46693791() {
   driver = getEnt("intro_driver_assassinate", "targetname", 1);
@@ -195,7 +195,7 @@ function function_d8f00fe0(truck) {
 function function_a7dc18f3() {
   aiarray = array();
 
-  if(!isDefined(level.var_40b02b72)) {
+  if(!isDefined(level.intro_helis)) {
     player = getPlayers()[0];
     player val::set("takedown_hit1_intro", "show_weapon_hud", 0);
     thread tkdn_heli_intro::function_c6662dbb("intro_enemy_trucks", 1);

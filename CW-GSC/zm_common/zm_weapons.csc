@@ -122,10 +122,10 @@ function function_2bcaec6f(localclientnum, itementry) {
   var_3ccb716f = get_base_weapon(itementry.weapon);
   weapon1 = data.inventory.items[17 + 1];
   weapon2 = data.inventory.items[17 + 1 + 8 + 1];
-  var_5df29481 = data.inventory.items[17 + 1 + 8 + 1 + 8 + 1];
+  weapon3 = data.inventory.items[17 + 1 + 8 + 1 + 8 + 1];
   weapon1 = self item_inventory_util::function_2b83d3ff(weapon1);
   weapon2 = self item_inventory_util::function_2b83d3ff(weapon2);
-  var_5df29481 = self item_inventory_util::function_2b83d3ff(var_5df29481);
+  weapon3 = self item_inventory_util::function_2b83d3ff(weapon3);
 
   if(!(isDefined(weapon1) && isDefined(weapon2))) {
     return 1;
@@ -134,8 +134,8 @@ function function_2bcaec6f(localclientnum, itementry) {
   weapon1 = get_base_weapon(weapon1);
   weapon2 = get_base_weapon(weapon2);
 
-  if(isDefined(var_5df29481)) {
-    var_5df29481 = get_base_weapon(var_5df29481);
+  if(isDefined(weapon3)) {
+    weapon3 = get_base_weapon(weapon3);
   }
 
   if(isarray(level.var_11173af4[var_3ccb716f])) {
@@ -143,7 +143,7 @@ function function_2bcaec6f(localclientnum, itementry) {
     var_7bdcb52a = 0;
 
     foreach(var_6ae93843 in level.var_11173af4[var_3ccb716f]) {
-      if(weapon1 == var_6ae93843 || weapon2 == var_6ae93843 || var_5df29481 === var_6ae93843) {
+      if(weapon1 == var_6ae93843 || weapon2 == var_6ae93843 || weapon3 === var_6ae93843) {
         var_36e0edce = 1;
         break;
       }
@@ -151,7 +151,7 @@ function function_2bcaec6f(localclientnum, itementry) {
 
     foreach(var_6ae93843 in level.var_11173af4[var_3ccb716f]) {
       if(self hastalent(localclientnum, #"talent_mulekick_5")) {
-        if(current_weapon == var_6ae93843 && isDefined(var_5df29481)) {
+        if(current_weapon == var_6ae93843 && isDefined(weapon3)) {
           var_7bdcb52a = 1;
         } else {
           var_7bdcb52a = 0;
@@ -166,7 +166,7 @@ function function_2bcaec6f(localclientnum, itementry) {
     }
 
     if(self hastalent(localclientnum, #"talent_mulekick_5")) {
-      if(var_36e0edce && current_weapon == var_3ccb716f && !var_7bdcb52a && !isDefined(var_5df29481)) {
+      if(var_36e0edce && current_weapon == var_3ccb716f && !var_7bdcb52a && !isDefined(weapon3)) {
         return 0;
       } else if(var_36e0edce && current_weapon != var_3ccb716f && !var_7bdcb52a) {
         return 0;

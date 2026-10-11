@@ -21,7 +21,7 @@ function private preinit() {
   }
 
   renderoverridebundle::function_f72f089c(#"hash_77f7418d2f2a7890", #"rob_sonar_set_enemyequip", &function_62888a11);
-  renderoverridebundle::function_f72f089c(#"hash_61c696df3d5a1765", #"hash_44adc567f9f60d61", &function_b52a94e5);
+  renderoverridebundle::function_f72f089c(#"hash_61c696df3d5a1765", #"rob_sonar_set_neutral_mp", &function_b52a94e5);
   callback::on_localplayer_spawned(&on_localplayer_spawned);
 }
 

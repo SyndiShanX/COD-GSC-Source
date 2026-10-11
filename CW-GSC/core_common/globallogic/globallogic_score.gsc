@@ -260,13 +260,13 @@ function function_a890cac2(attacker, owningteam, weapon, scoreevents, objectiveo
   }
 }
 
-function function_2e33e275(einflictor, attacker, weapon, var_5b1d28ec) {
-  if(!isPlayer(attacker) || !isPlayer(self) || !isDefined(weapon) || !isDefined(var_5b1d28ec)) {
+function function_2e33e275(einflictor, attacker, weapon, objectivetrigger) {
+  if(!isPlayer(attacker) || !isPlayer(self) || !isDefined(weapon) || !isDefined(objectivetrigger)) {
     return false;
   }
 
-  if(!self istouching(var_5b1d28ec)) {
-    if(!isDefined(einflictor) || einflictor != attacker || !attacker istouching(var_5b1d28ec)) {
+  if(!self istouching(objectivetrigger)) {
+    if(!isDefined(einflictor) || einflictor != attacker || !attacker istouching(objectivetrigger)) {
       return false;
     }
   }
@@ -274,7 +274,7 @@ function function_2e33e275(einflictor, attacker, weapon, var_5b1d28ec) {
   return true;
 }
 
-function function_7d830bc(einflictor, attacker, weapon, var_5b1d28ec, owningteam) {
+function function_7d830bc(einflictor, attacker, weapon, objectivetrigger, owningteam) {
   attacker endon(#"disconnect", #"death");
   level endon(#"game_ended");
   self notify("1a696f65f272be70");
@@ -282,9 +282,9 @@ function function_7d830bc(einflictor, attacker, weapon, var_5b1d28ec, owningteam
   self.var_60a9eae7 = 1;
   attacker.var_f46a73a1 = weapon;
   attacker.var_60f43bac = gettime();
-  attacker.var_e3d30669 = var_5b1d28ec;
+  attacker.var_e3d30669 = objectivetrigger;
   scoreevents = function_3cbc4c6c(weapon.var_2e4a8800);
-  self function_a890cac2(attacker, owningteam, weapon, scoreevents, var_5b1d28ec);
+  self function_a890cac2(attacker, owningteam, weapon, scoreevents, objectivetrigger);
 
   if(isarray(level.specweapons)) {
     foreach(var_25f92d1d in level.specweapons) {
@@ -293,7 +293,7 @@ function function_7d830bc(einflictor, attacker, weapon, var_5b1d28ec, owningteam
       }
 
       var_bbe53115 = function_3cbc4c6c(var_25f92d1d.weapon.var_2e4a8800);
-      self function_a890cac2(attacker, owningteam, var_25f92d1d.weapon, var_bbe53115, var_5b1d28ec);
+      self function_a890cac2(attacker, owningteam, var_25f92d1d.weapon, var_bbe53115, objectivetrigger);
     }
   }
 }
@@ -485,27 +485,27 @@ function function_f7f7b14e(data) {
   profilestop();
 }
 
-function function_706caaf3(meansofdeath, var_38e70910, victim, weapon) {
+function function_706caaf3(meansofdeath, executioner, victim, weapon) {
   if(meansofdeath == "MOD_EXECUTION") {
-    scoreevents::processscoreevent(#"hash_21b62e7a039a069f", var_38e70910, victim);
-    var_38e70910 contracts::increment_contract(#"hash_ba2b17c3904e2d6");
-    var_38e70910 challenges::function_38ad2427(#"hash_7397ba07e9e0325d", 1);
-    var_38e70910 stats::function_dad108fa(#"hash_723bd70b9a80a581", 1);
-    var_38e70910 stats::function_dad108fa(#"hash_1a31e9546b33c22d", 1);
-    var_38e70910 stats::function_dad108fa(#"hash_26ab65b8fbfeab28", 1);
-    var_38e70910 stats::function_dad108fa(#"hash_52b5cb629bbde814", 1);
+    scoreevents::processscoreevent(#"hash_21b62e7a039a069f", executioner, victim);
+    executioner contracts::increment_contract(#"hash_ba2b17c3904e2d6");
+    executioner challenges::function_38ad2427(#"hash_7397ba07e9e0325d", 1);
+    executioner stats::function_dad108fa(#"hash_723bd70b9a80a581", 1);
+    executioner stats::function_dad108fa(#"hash_1a31e9546b33c22d", 1);
+    executioner stats::function_dad108fa(#"hash_26ab65b8fbfeab28", 1);
+    executioner stats::function_dad108fa(#"hash_52b5cb629bbde814", 1);
 
     if(isDefined(weapon) && weapon != level.weaponnone) {
-      var_38e70910 stats::function_e24eec31(weapon, #"hash_21b62e7a039a069f", 1);
+      executioner stats::function_e24eec31(weapon, #"hash_21b62e7a039a069f", 1);
 
-      if(!isDefined(var_38e70910.pers[#"hash_33dcd1468cbdb9c2"])) {
-        var_38e70910.pers[#"hash_33dcd1468cbdb9c2"] = 0;
+      if(!isDefined(executioner.pers[#"hash_33dcd1468cbdb9c2"])) {
+        executioner.pers[#"hash_33dcd1468cbdb9c2"] = 0;
       }
 
-      var_38e70910.pers[#"hash_33dcd1468cbdb9c2"]++;
+      executioner.pers[#"hash_33dcd1468cbdb9c2"]++;
 
-      if(var_38e70910.pers[#"hash_33dcd1468cbdb9c2"] == 2) {
-        var_38e70910 stats::function_d0de7686(#"hash_2dc09a051d45038d", 1, #"hash_653135ec012bf674");
+      if(executioner.pers[#"hash_33dcd1468cbdb9c2"] == 2) {
+        executioner stats::function_d0de7686(#"hash_2dc09a051d45038d", 1, #"hash_653135ec012bf674");
       }
     }
   }

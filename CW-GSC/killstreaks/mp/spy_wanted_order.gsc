@@ -39,7 +39,7 @@ function function_cd089b2e(killstreaktype) {
   player disableoffhandweapons();
   player allowmovement(0);
   player function_fe89725a(1);
-  player function_205350ab();
+  player disableweaponreload();
   player disableweaponcycling();
   player setclientuivisibilityflag("hud_visible", 0);
 
@@ -80,7 +80,7 @@ function function_cd089b2e(killstreaktype) {
   player enableoffhandweapons();
   player allowmovement(1);
   player function_fe89725a(0);
-  player function_6e1804bd();
+  player enableweaponreload();
   player enableweaponcycling();
   player setclientuivisibilityflag("hud_visible", 1);
   return result;

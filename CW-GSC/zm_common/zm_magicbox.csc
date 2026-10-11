@@ -18,7 +18,7 @@ function private autoexec __init__system__() {
 function private preinit() {
   level._effect[#"hash_63f729c169af0c3e"] = #"hash_43a26488c9e5ce57";
   level._effect[#"chest_light_closed"] = #"zombie/fx_weapon_box_closed_glow_zmb";
-  level._effect[#"t8_leave_fx"] = #"hash_5f376e9395e16666";
+  level._effect[#"t8_leave_fx"] = #"zombie/fx8_magicbox_depart";
   level._effect[#"fire_runner"] = #"hash_409439bf8b3dd862";
   level._effect[#"hash_6778cbcf34bfebef"] = #"hash_43a26488c9e5ce57";
   level._effect[#"hash_5f2da0ff081c1699"] = #"hash_43a26488c9e5ce57";
@@ -77,11 +77,11 @@ function force_stream_magicbox_leave(localclientnum, oldval, newval, bnewent, bi
 }
 
 function magicbox_show_sounds_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  playSound(bwastimejump, #"hash_607b61ab8f244087", self.origin);
+  playSound(bwastimejump, #"zmb_box_poof_land", self.origin);
 }
 
 function magicbox_leave_sounds_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  audio::stoploopat(#"hash_1b59c1bfb1aa5d37", self.origin);
+  audio::stoploopat(#"zmb_magicbox_idle_open", self.origin);
 }
 
 function function_8f69e904(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -166,13 +166,13 @@ function function_b4b9937(localclientnum, newval, str_state) {
             str_fx = level._effect[#"hash_63f729c169af0c3e"];
             var_4c5fde13 = self.var_7e616d59[localclientnum];
             str_tag = "tag_origin";
-            audio::playloopat(#"hash_1b59c1bfb1aa5d37", self.origin);
+            audio::playloopat(#"zmb_magicbox_idle_open", self.origin);
             break;
           case #"closed":
             str_fx = level._effect[#"chest_light_closed"];
             var_4c5fde13 = self.var_93e0dfa9[localclientnum];
             str_tag = "tag_origin";
-            audio::stoploopat(#"hash_1b59c1bfb1aa5d37", self.origin);
+            audio::stoploopat(#"zmb_magicbox_idle_open", self.origin);
             break;
         }
 
@@ -187,7 +187,7 @@ function function_b4b9937(localclientnum, newval, str_state) {
     }
 
     if(isDefined(self) && str_state == "leave") {
-      audio::stoploopat(#"hash_1b59c1bfb1aa5d37", self.origin);
+      audio::stoploopat(#"zmb_magicbox_idle_open", self.origin);
       var_e5fdeba3 = [self zbarriergetpiece(0), self zbarriergetpiece(1), self zbarriergetpiece(2)];
 
       foreach(piece in var_e5fdeba3) {
@@ -244,30 +244,30 @@ function function_abe84c14(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 3:
       self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[#"hash_63697be07cc11490"], mdl_piece, "tag_origin");
-      playSound(fieldname, #"hash_604498b9077301d9", self.origin);
+      playSound(fieldname, #"evt_magicbox_common", self.origin);
       break;
     case 4:
       self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[#"hash_360e9275d6096589"], mdl_piece, "tag_origin");
-      playSound(fieldname, #"hash_6c870d0f85573f60", self.origin);
+      playSound(fieldname, #"evt_magicbox_rare", self.origin);
       break;
     case 5:
       self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[#"hash_66be32f919d8b4a4"], mdl_piece, "tag_origin");
-      playSound(fieldname, #"hash_65ae6ba40cb558cd", self.origin);
+      playSound(fieldname, #"evt_magicbox_epic", self.origin);
       break;
     case 6:
       self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[#"hash_638a4ec653717ef6"], mdl_piece, "tag_origin");
-      playSound(fieldname, #"hash_66f3cff29be77acd", self.origin);
+      playSound(fieldname, #"evt_magicbox_legendary", self.origin);
       break;
     case 7:
       self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[#"hash_1fa861cbe30adda9"], mdl_piece, "tag_origin");
-      playSound(fieldname, #"hash_30dce35bee22371a", self.origin);
+      playSound(fieldname, #"evt_magicbox_ultra", self.origin);
       break;
     case 0:
     default:
       if(isDefined(self.var_5ad9ac45)) {
         stopfx(fieldname, self.var_5ad9ac45);
         self.var_5ad9ac45 = undefined;
-        audio::stoploopat(#"hash_1b59c1bfb1aa5d37", self.origin);
+        audio::stoploopat(#"zmb_magicbox_idle_open", self.origin);
       }
 
       break;

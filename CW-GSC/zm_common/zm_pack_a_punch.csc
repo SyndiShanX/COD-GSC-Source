@@ -23,7 +23,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  level._effect[#"pap_idle_fxx"] = #"hash_669f8d1e3151a677";
+  level._effect[#"pap_idle_fxx"] = #"zombie/fx8_pap_idle";
   clientfield::register("zbarrier", "pap_working_fx", 1, 1, "int", &pap_working_fx_handler, 0, 0);
   clientfield::register("zbarrier", "pap_idle_fx", 1, 1, "int", &function_2a80c24d, 0, 0);
   clientfield::register("world", "pap_force_stream", 1, 1, "int", &pap_force_stream, 0, 0);
@@ -51,7 +51,7 @@ function on_localplayer_spawned(localclientnum) {
   }
 
   if(n_story == 2) {
-    forcestreamxmodel(#"hash_4efdd19dfd268f23", 1, 0);
+    forcestreamxmodel(#"p8_fxanim_zm_pap_stationary_mod", 1, 0);
   }
 }
 
@@ -64,7 +64,7 @@ function pap_force_stream(localclientnum, oldval, newval, bnewent, binitialsnap,
     } else if(n_story == 1) {
       forcestreamxmodel(#"p7_zm_vending_packapunch_on");
     } else if(n_story == 2) {
-      forcestreamxmodel(#"hash_4efdd19dfd268f23");
+      forcestreamxmodel(#"p8_fxanim_zm_pap_stationary_mod");
     }
 
     return;
@@ -81,7 +81,7 @@ function pap_force_stream(localclientnum, oldval, newval, bnewent, binitialsnap,
   }
 
   if(n_story == 2) {
-    stopforcestreamingxmodel(#"hash_4efdd19dfd268f23");
+    stopforcestreamingxmodel(#"p8_fxanim_zm_pap_stationary_mod");
   }
 }
 

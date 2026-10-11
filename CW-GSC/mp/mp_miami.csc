@@ -40,13 +40,13 @@ function neon_rob(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     return;
   }
 
-  if(is_true(self.var_f74923b)) {
-    self.var_f74923b = 0;
+  if(is_true(self.neon)) {
+    self.neon = 0;
     self stoprenderoverridebundle("rob_miami_neon");
     return;
   }
 
-  self.var_f74923b = 1;
+  self.neon = 1;
   self playrenderoverridebundle("rob_miami_neon");
 }
 

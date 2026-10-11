@@ -102,7 +102,7 @@ function private function_5010aab6(localclientnum, oldvalue, newvalue, bnewent, 
   self.threat_sight.var_97c4563c = self clientfield::get("threat_state");
 
   if(!isDefined(self.threat_sight.elem)) {
-    if(!getdvarint(#"hash_7bf40e4b6a830d11", 1)) {
+    if(!getdvarint(#"ai_threatsightdisplay", 1)) {
       return;
     }
 
@@ -116,7 +116,7 @@ function private function_5010aab6(localclientnum, oldvalue, newvalue, bnewent, 
   if(isDefined(self.threat_sight.elem)) {
     var_fdd79624 = "<dev string:x53>";
 
-    if(!getdvarint(#"hash_7bf40e4b6a830d11", 1)) {
+    if(!getdvarint(#"ai_threatsightdisplay", 1)) {
       var_fdd79624 = "<dev string:x57>";
     }
 
@@ -133,7 +133,7 @@ function private function_5010aab6(localclientnum, oldvalue, newvalue, bnewent, 
       self.threat_sight.elem stealth_meter_display::set_entnum(wasdemojump, entnum);
     }
 
-    if(getdvarint(#"hash_7bf40e4b6a830d11", 1)) {
+    if(getdvarint(#"ai_threatsightdisplay", 1)) {
       self.threat_sight.elem stealth_meter_display::function_4d628707(wasdemojump, self.threat_sight.var_97c4563c);
       self.threat_sight.elem stealth_meter_display::function_7425637b(wasdemojump, self.threat_sight.sight);
       self.threat_sight.elem stealth_meter_display::function_fae2a569(wasdemojump, 1);

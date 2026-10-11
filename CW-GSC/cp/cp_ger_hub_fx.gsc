@@ -23,4 +23,4 @@ function private function_fa076c68() {}
 
 function private function_bc948200() {}
 
-function function_22b7fffd() {}
+function init_scenes() {}

@@ -12,147 +12,147 @@
 #namespace raz;
 
 function autoexec main() {
-  clientfield::register("scriptmover", "raz_detonate_ground_torpedo", 1, 1, "int", &namespace_fe3871d9::function_e7290ec2, 0, 0);
-  clientfield::register("scriptmover", "raz_torpedo_play_fx_on_self", 1, 1, "int", &namespace_fe3871d9::function_dc17c6d6, 0, 0);
-  clientfield::register("scriptmover", "raz_torpedo_play_trail", 1, 1, "counter", &namespace_fe3871d9::function_868b328b, 0, 0);
-  clientfield::register("actor", "raz_gun_weakpoint_hit", 1, 1, "counter", &namespace_fe3871d9::function_250b46c7, 0, 0);
-  ai::add_archetype_spawn_function(#"raz", &namespace_fe3871d9::function_e94574ae);
+  clientfield::register("scriptmover", "raz_detonate_ground_torpedo", 1, 1, "int", &razclientutils::razdetonategroundtorpedo, 0, 0);
+  clientfield::register("scriptmover", "raz_torpedo_play_fx_on_self", 1, 1, "int", &razclientutils::razplayselffx, 0, 0);
+  clientfield::register("scriptmover", "raz_torpedo_play_trail", 1, 1, "counter", &razclientutils::raztorpedoplaytrailfx, 0, 0);
+  clientfield::register("actor", "raz_gun_weakpoint_hit", 1, 1, "counter", &razclientutils::razgunweakpointhitfx, 0, 0);
+  ai::add_archetype_spawn_function(#"raz", &razclientutils::razspawn);
 }
 
 function autoexec precache() {
   level._effect[#"fx_mech_foot_step"] = "dlc1/castle/fx_mech_foot_step";
-  level._effect[#"hash_c824652e58b5fdf"] = "zm_ai/fx9_raz_mc_shockwave_projectile_impact";
+  level._effect[#"fx_raz_mc_shockwave_projectile_impact"] = "zm_ai/fx9_raz_mc_shockwave_projectile_impact";
   level._effect[#"fx_bul_impact_concrete_xtreme"] = "impacts/fx_bul_impact_concrete_xtreme";
-  level._effect[#"hash_7d199c49ab77b780"] = "zm_ai/fx9_raz_mc_shockwave_projectile";
-  level._effect[#"hash_494b459d33f13b6"] = "zm_ai/fx9_raz_dest_weak_point_exp";
-  level._effect[#"hash_656c73c7e4336a47"] = "zm_ai/fx9_raz_dest_weak_point_sparking_loop";
-  level._effect[#"hash_7badd093aab9e236"] = "zm_ai/fx9_raz_dmg_weak_point";
-  level._effect[#"hash_4faeb86b1620aac4"] = "zm_ai/fx9_raz_dest_weak_point_exp_generic";
-  level.var_b8d03316 = [];
+  level._effect[#"fx_raz_mc_shockwave_projectile"] = "zm_ai/fx9_raz_mc_shockwave_projectile";
+  level._effect[#"fx_raz_dest_weak_point_exp"] = "zm_ai/fx9_raz_dest_weak_point_exp";
+  level._effect[#"fx_raz_dest_weak_point_sparking_loop"] = "zm_ai/fx9_raz_dest_weak_point_sparking_loop";
+  level._effect[#"fx_raz_dmg_weak_point"] = "zm_ai/fx9_raz_dmg_weak_point";
+  level._effect[#"fx_raz_dest_weak_point_exp_generic"] = "zm_ai/fx9_raz_dest_weak_point_exp_generic";
+  level._raz_taunts = [];
 
-  if(!isDefined(level.var_b8d03316)) {
-    level.var_b8d03316 = [];
-  } else if(!isarray(level.var_b8d03316)) {
-    level.var_b8d03316 = array(level.var_b8d03316);
+  if(!isDefined(level._raz_taunts)) {
+    level._raz_taunts = [];
+  } else if(!isarray(level._raz_taunts)) {
+    level._raz_taunts = array(level._raz_taunts);
   }
 
-  level.var_b8d03316[level.var_b8d03316.size] = "vox_mang_mangler_taunt_0";
+  level._raz_taunts[level._raz_taunts.size] = "vox_mang_mangler_taunt_0";
 
-  if(!isDefined(level.var_b8d03316)) {
-    level.var_b8d03316 = [];
-  } else if(!isarray(level.var_b8d03316)) {
-    level.var_b8d03316 = array(level.var_b8d03316);
+  if(!isDefined(level._raz_taunts)) {
+    level._raz_taunts = [];
+  } else if(!isarray(level._raz_taunts)) {
+    level._raz_taunts = array(level._raz_taunts);
   }
 
-  level.var_b8d03316[level.var_b8d03316.size] = "vox_mang_mangler_taunt_1";
+  level._raz_taunts[level._raz_taunts.size] = "vox_mang_mangler_taunt_1";
 
-  if(!isDefined(level.var_b8d03316)) {
-    level.var_b8d03316 = [];
-  } else if(!isarray(level.var_b8d03316)) {
-    level.var_b8d03316 = array(level.var_b8d03316);
+  if(!isDefined(level._raz_taunts)) {
+    level._raz_taunts = [];
+  } else if(!isarray(level._raz_taunts)) {
+    level._raz_taunts = array(level._raz_taunts);
   }
 
-  level.var_b8d03316[level.var_b8d03316.size] = "vox_mang_mangler_taunt_2";
+  level._raz_taunts[level._raz_taunts.size] = "vox_mang_mangler_taunt_2";
 
-  if(!isDefined(level.var_b8d03316)) {
-    level.var_b8d03316 = [];
-  } else if(!isarray(level.var_b8d03316)) {
-    level.var_b8d03316 = array(level.var_b8d03316);
+  if(!isDefined(level._raz_taunts)) {
+    level._raz_taunts = [];
+  } else if(!isarray(level._raz_taunts)) {
+    level._raz_taunts = array(level._raz_taunts);
   }
 
-  level.var_b8d03316[level.var_b8d03316.size] = "vox_mang_mangler_taunt_3";
+  level._raz_taunts[level._raz_taunts.size] = "vox_mang_mangler_taunt_3";
 
-  if(!isDefined(level.var_b8d03316)) {
-    level.var_b8d03316 = [];
-  } else if(!isarray(level.var_b8d03316)) {
-    level.var_b8d03316 = array(level.var_b8d03316);
+  if(!isDefined(level._raz_taunts)) {
+    level._raz_taunts = [];
+  } else if(!isarray(level._raz_taunts)) {
+    level._raz_taunts = array(level._raz_taunts);
   }
 
-  level.var_b8d03316[level.var_b8d03316.size] = "vox_mang_mangler_taunt_4";
+  level._raz_taunts[level._raz_taunts.size] = "vox_mang_mangler_taunt_4";
 
-  if(!isDefined(level.var_b8d03316)) {
-    level.var_b8d03316 = [];
-  } else if(!isarray(level.var_b8d03316)) {
-    level.var_b8d03316 = array(level.var_b8d03316);
+  if(!isDefined(level._raz_taunts)) {
+    level._raz_taunts = [];
+  } else if(!isarray(level._raz_taunts)) {
+    level._raz_taunts = array(level._raz_taunts);
   }
 
-  level.var_b8d03316[level.var_b8d03316.size] = "vox_mang_mangler_taunt_5";
+  level._raz_taunts[level._raz_taunts.size] = "vox_mang_mangler_taunt_5";
 
-  if(!isDefined(level.var_b8d03316)) {
-    level.var_b8d03316 = [];
-  } else if(!isarray(level.var_b8d03316)) {
-    level.var_b8d03316 = array(level.var_b8d03316);
+  if(!isDefined(level._raz_taunts)) {
+    level._raz_taunts = [];
+  } else if(!isarray(level._raz_taunts)) {
+    level._raz_taunts = array(level._raz_taunts);
   }
 
-  level.var_b8d03316[level.var_b8d03316.size] = "vox_mang_mangler_taunt_6";
+  level._raz_taunts[level._raz_taunts.size] = "vox_mang_mangler_taunt_6";
 
-  if(!isDefined(level.var_b8d03316)) {
-    level.var_b8d03316 = [];
-  } else if(!isarray(level.var_b8d03316)) {
-    level.var_b8d03316 = array(level.var_b8d03316);
+  if(!isDefined(level._raz_taunts)) {
+    level._raz_taunts = [];
+  } else if(!isarray(level._raz_taunts)) {
+    level._raz_taunts = array(level._raz_taunts);
   }
 
-  level.var_b8d03316[level.var_b8d03316.size] = "vox_mang_mangler_taunt_7";
+  level._raz_taunts[level._raz_taunts.size] = "vox_mang_mangler_taunt_7";
 
-  if(!isDefined(level.var_b8d03316)) {
-    level.var_b8d03316 = [];
-  } else if(!isarray(level.var_b8d03316)) {
-    level.var_b8d03316 = array(level.var_b8d03316);
+  if(!isDefined(level._raz_taunts)) {
+    level._raz_taunts = [];
+  } else if(!isarray(level._raz_taunts)) {
+    level._raz_taunts = array(level._raz_taunts);
   }
 
-  level.var_b8d03316[level.var_b8d03316.size] = "vox_mang_mangler_taunt_8";
+  level._raz_taunts[level._raz_taunts.size] = "vox_mang_mangler_taunt_8";
 
-  if(!isDefined(level.var_b8d03316)) {
-    level.var_b8d03316 = [];
-  } else if(!isarray(level.var_b8d03316)) {
-    level.var_b8d03316 = array(level.var_b8d03316);
+  if(!isDefined(level._raz_taunts)) {
+    level._raz_taunts = [];
+  } else if(!isarray(level._raz_taunts)) {
+    level._raz_taunts = array(level._raz_taunts);
   }
 
-  level.var_b8d03316[level.var_b8d03316.size] = "vox_mang_mangler_taunt_9";
+  level._raz_taunts[level._raz_taunts.size] = "vox_mang_mangler_taunt_9";
 
-  if(!isDefined(level.var_b8d03316)) {
-    level.var_b8d03316 = [];
-  } else if(!isarray(level.var_b8d03316)) {
-    level.var_b8d03316 = array(level.var_b8d03316);
+  if(!isDefined(level._raz_taunts)) {
+    level._raz_taunts = [];
+  } else if(!isarray(level._raz_taunts)) {
+    level._raz_taunts = array(level._raz_taunts);
   }
 
-  level.var_b8d03316[level.var_b8d03316.size] = "vox_mang_mangler_taunt_10";
+  level._raz_taunts[level._raz_taunts.size] = "vox_mang_mangler_taunt_10";
 
-  if(!isDefined(level.var_b8d03316)) {
-    level.var_b8d03316 = [];
-  } else if(!isarray(level.var_b8d03316)) {
-    level.var_b8d03316 = array(level.var_b8d03316);
+  if(!isDefined(level._raz_taunts)) {
+    level._raz_taunts = [];
+  } else if(!isarray(level._raz_taunts)) {
+    level._raz_taunts = array(level._raz_taunts);
   }
 
-  level.var_b8d03316[level.var_b8d03316.size] = "vox_mang_mangler_taunt_11";
+  level._raz_taunts[level._raz_taunts.size] = "vox_mang_mangler_taunt_11";
 
-  if(!isDefined(level.var_b8d03316)) {
-    level.var_b8d03316 = [];
-  } else if(!isarray(level.var_b8d03316)) {
-    level.var_b8d03316 = array(level.var_b8d03316);
+  if(!isDefined(level._raz_taunts)) {
+    level._raz_taunts = [];
+  } else if(!isarray(level._raz_taunts)) {
+    level._raz_taunts = array(level._raz_taunts);
   }
 
-  level.var_b8d03316[level.var_b8d03316.size] = "vox_mang_mangler_taunt_12";
+  level._raz_taunts[level._raz_taunts.size] = "vox_mang_mangler_taunt_12";
 
-  if(!isDefined(level.var_b8d03316)) {
-    level.var_b8d03316 = [];
-  } else if(!isarray(level.var_b8d03316)) {
-    level.var_b8d03316 = array(level.var_b8d03316);
+  if(!isDefined(level._raz_taunts)) {
+    level._raz_taunts = [];
+  } else if(!isarray(level._raz_taunts)) {
+    level._raz_taunts = array(level._raz_taunts);
   }
 
-  level.var_b8d03316[level.var_b8d03316.size] = "vox_mang_mangler_taunt_13";
+  level._raz_taunts[level._raz_taunts.size] = "vox_mang_mangler_taunt_13";
 }
 
-#namespace namespace_fe3871d9;
+#namespace razclientutils;
 
-function private function_e94574ae(localclientnum) {
-  level._footstepcbfuncs[self.archetype] = &function_525f8122;
-  self thread function_3f40a429(localclientnum);
+function private razspawn(localclientnum) {
+  level._footstepcbfuncs[self.archetype] = &razprocessfootstep;
+  self thread razplayfireemissiveshader(localclientnum);
   util::waittill_dobj(localclientnum);
   fxclientutils::playfxbundle(localclientnum, self, self.fxdef);
 }
 
-function private function_3f40a429(localclientnum) {
+function private razplayfireemissiveshader(localclientnum) {
   self endon(#"death");
 
   while(isDefined(self)) {
@@ -163,7 +163,7 @@ function private function_3f40a429(localclientnum) {
   }
 }
 
-function private function_baf6efda(localclientnum) {
+function private razplayroarsound(localclientnum) {
   self endon(#"death");
 
   while(isDefined(self)) {
@@ -183,13 +183,13 @@ function function_d0d17a03(localclientnum) {
   }
 }
 
-function function_525f8122(localclientnum, pos, surface, notetrack, bone) {
+function razprocessfootstep(localclientnum, pos, surface, notetrack, bone) {
   e_player = function_5c10bd79(surface);
   n_dist = distancesquared(notetrack, e_player.origin);
-  var_775e0d4 = 160000;
+  n_raz_dist = 160000;
 
-  if(var_775e0d4 > 0) {
-    n_scale = (var_775e0d4 - n_dist) / var_775e0d4;
+  if(n_raz_dist > 0) {
+    n_scale = (n_raz_dist - n_dist) / n_raz_dist;
   } else {
     return;
   }
@@ -202,10 +202,10 @@ function function_525f8122(localclientnum, pos, surface, notetrack, bone) {
     return;
   }
 
-  var_1826041c = n_scale * 0.1;
+  earthquake_scale = n_scale * 0.1;
 
-  if(var_1826041c > 0.01) {
-    earthquake(surface, var_1826041c, 0.1, notetrack, n_dist);
+  if(earthquake_scale > 0.01) {
+    earthquake(surface, earthquake_scale, 0.1, notetrack, n_dist);
   }
 
   if(n_scale <= 1 && n_scale > 0.8) {
@@ -219,33 +219,33 @@ function function_525f8122(localclientnum, pos, surface, notetrack, bone) {
   fx = util::playFXOnTag(surface, level._effect[#"fx_mech_foot_step"], self, bone);
 }
 
-function private function_e7290ec2(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  fx = playFX(wasdemojump, level._effect[#"hash_c824652e58b5fdf"], self.origin);
+function private razdetonategroundtorpedo(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
+  fx = playFX(wasdemojump, level._effect[#"fx_raz_mc_shockwave_projectile_impact"], self.origin);
 }
 
-function private function_868b328b(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
+function private raztorpedoplaytrailfx(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   fx = playFX(wasdemojump, level._effect[#"fx_bul_impact_concrete_xtreme"], self.origin);
 }
 
-function private function_dc17c6d6(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  if(wasdemojump == 0 && isDefined(self.var_475864c)) {
-    stopfx(fieldname, self.var_475864c);
-    self.var_475864c = undefined;
+function private razplayselffx(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
+  if(wasdemojump == 0 && isDefined(self.raz_torpedo_self_fx)) {
+    stopfx(fieldname, self.raz_torpedo_self_fx);
+    self.raz_torpedo_self_fx = undefined;
   }
 
-  if(wasdemojump == 1 && !isDefined(self.var_475864c)) {
-    self.var_475864c = util::playFXOnTag(fieldname, level._effect[#"hash_7d199c49ab77b780"], self, "tag_origin");
+  if(wasdemojump == 1 && !isDefined(self.raz_torpedo_self_fx)) {
+    self.raz_torpedo_self_fx = util::playFXOnTag(fieldname, level._effect[#"fx_raz_mc_shockwave_projectile"], self, "tag_origin");
   }
 }
 
-function private function_16686fd4(localclientnum, model, pos, angles, hitpos, var_243511ab = 1, direction) {
+function private razcreatedynentandlaunch(localclientnum, model, pos, angles, hitpos, vel_factor = 1, direction) {
   if(!isDefined(angles) || !isDefined(hitpos)) {
     return;
   }
 
   velocity = self getvelocity();
-  var_9ec7627b = vectorNormalize(velocity);
-  var_bab6cdb7 = length(velocity);
+  velocity_normal = vectorNormalize(velocity);
+  velocity_length = length(velocity);
 
   if(isDefined(direction) && direction == "back") {
     launch_dir = anglesToForward(self.angles) * -1;
@@ -253,29 +253,29 @@ function private function_16686fd4(localclientnum, model, pos, angles, hitpos, v
     launch_dir = anglesToForward(self.angles);
   }
 
-  var_bab6cdb7 *= 0.1;
+  velocity_length *= 0.1;
 
-  if(var_bab6cdb7 < 10) {
-    var_bab6cdb7 = 10;
+  if(velocity_length < 10) {
+    velocity_length = 10;
   }
 
-  launch_dir = launch_dir * 0.5 + var_9ec7627b * 0.5;
-  launch_dir *= var_bab6cdb7;
-  createdynentandlaunch(model, pos, angles, hitpos, self.origin, launch_dir * var_243511ab);
+  launch_dir = launch_dir * 0.5 + velocity_normal * 0.5;
+  launch_dir *= velocity_length;
+  createdynentandlaunch(model, pos, angles, hitpos, self.origin, launch_dir * vel_factor);
 }
 
-function private function_27830d87(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  fx = util::playFXOnTag(wasdemojump, level._effect[#"hash_494b459d33f13b6"], self, "TAG_FX_Shoulder_RI_GIB");
-  var_96f5534c = self gettagorigin("j_elbow_ri");
-  var_bcffa218 = self gettagangles("j_elbow_ri");
-  var_2c37b16f = self gettagorigin("j_shouldertwist_ri_attach");
-  var_7c071f82 = self gettagangles("j_shouldertwist_ri_attach");
-  dynent = function_16686fd4(wasdemojump, "c_zom_dlc3_raz_s_armcannon", var_96f5534c, var_bcffa218, self.origin, 1.3, "back");
+function private razdetachgunfx(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
+  fx = util::playFXOnTag(wasdemojump, level._effect[#"fx_raz_dest_weak_point_exp"], self, "TAG_FX_Shoulder_RI_GIB");
+  gun_pos = self gettagorigin("j_elbow_ri");
+  gun_ang = self gettagangles("j_elbow_ri");
+  gun_core_pos = self gettagorigin("j_shouldertwist_ri_attach");
+  gun_core_ang = self gettagangles("j_shouldertwist_ri_attach");
+  dynent = razcreatedynentandlaunch(wasdemojump, "c_zom_dlc3_raz_s_armcannon", gun_pos, gun_ang, self.origin, 1.3, "back");
   self playSound(wasdemojump, "zmb_raz_gun_explo", self gettagorigin("tag_eye"));
 }
 
-function private function_250b46c7(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  fx = util::playFXOnTag(wasdemojump, level._effect[#"hash_7badd093aab9e236"], self, "j_shoulder_ri");
+function private razgunweakpointhitfx(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
+  fx = util::playFXOnTag(wasdemojump, level._effect[#"fx_raz_dmg_weak_point"], self, "j_shoulder_ri");
 }
 
 function private applynewfaceanim(localclientnum, animation) {

@@ -319,11 +319,11 @@ function private function_edd0777f(entity) {
 
 function function_f7d9bc34() {
   self endon(#"disconnect");
-  self namespace_83eb6304::function_3ecfde67("incoming_impact");
+  self doa_fx::function_3ecfde67("incoming_impact");
   wait 1.2;
 
   if(isDefined(self)) {
-    self namespace_83eb6304::turnofffx("incoming_impact");
+    self doa_fx::turnofffx("incoming_impact");
   }
 }
 
@@ -822,11 +822,11 @@ function function_5af2c5ef() {
   self.health = self.maxhealth;
   self.var_f979e699 = 250;
   self.no_gib = 1;
-  self.var_e66cd6fb = 1;
+  self.no_ragdoll = 1;
   self.goalradius = 60;
   self.var_9a9a0311 = [];
   self.var_f46fbf3f = 1;
-  self.closest_player_override = &namespace_7f5aeb59::function_7781556b;
+  self.closest_player_override = &doa_player_utility::function_7781556b;
   self.doa.var_74e4ded8 = 1;
   self setblackboardattribute("_locomotion_speed", "locomotion_speed_walk");
   self.zombie_move_speed = "walk";
@@ -835,7 +835,7 @@ function function_5af2c5ef() {
   if(self.subarchetype == #"gladiator_destroyer") {
     self.var_3a001247 = 1;
     self function_f6a04c04();
-    self thread namespace_9fc66ac::function_ba33d23d(#"hash_6be5064b066a7b98", #"hash_6be5064b066a7b98", #"hash_33fa791e022eebca");
+    self thread doa_sound::function_ba33d23d(#"zmb_vocals_destroyer_ambient", #"zmb_vocals_destroyer_ambient", #"zmb_vocals_destroyer_death");
     self namespace_e32bb68::function_3a59ec34("zmb_ai_gladiator_spawn_des");
     self.org = namespace_ec06fe4a::spawnmodel(self.origin, "tag_origin", (0, 0, 0), "gladiator org");
 
@@ -845,7 +845,7 @@ function function_5af2c5ef() {
   } else if(self.subarchetype == #"gladiator_marauder") {
     self function_2617ff14();
     self.next_leap_time = gettime() + 3000;
-    self thread namespace_9fc66ac::function_ba33d23d(#"hash_777f818e6f3092bc", #"hash_777f818e6f3092bc", #"hash_2abe1fa45408f3b6");
+    self thread doa_sound::function_ba33d23d(#"zmb_vocals_marauder_ambient", #"zmb_vocals_marauder_ambient", #"zmb_vocals_marauder_death");
     self namespace_e32bb68::function_3a59ec34("zmb_ai_gladiator_spawn_mar");
   }
 
@@ -874,7 +874,7 @@ function private function_75f32da6(inflictor, attacker, damage, idflags, meansof
     return 0;
   }
 
-  if(is_true(self.var_6dc6e670) || meansofdeath === #"mod_unknown" || meansofdeath === #"mod_crush") {
+  if(is_true(self.nukedeath) || meansofdeath === #"mod_unknown" || meansofdeath === #"mod_crush") {
     return (self.health + 187);
   }
 
@@ -1042,24 +1042,24 @@ function private function_3b8907b9(s_params) {
   if(self isattached("c_t8_zmb_dlc0_zombie_destroyer_axe1", "tag_weapon_left")) {
     var_ae295f0 = self gettagorigin("tag_weapon_left");
     var_5ad95b22 = self gettagangles("tag_weapon_left");
-    var_2f69def6 = namespace_ec06fe4a::spawnmodel(var_ae295f0, "c_t8_zmb_dlc0_zombie_destroyer_axe1");
+    axel = namespace_ec06fe4a::spawnmodel(var_ae295f0, "c_t8_zmb_dlc0_zombie_destroyer_axe1");
 
-    if(isDefined(var_2f69def6)) {
-      var_2f69def6 thread namespace_ec06fe4a::function_52afe5df(8);
-      var_2f69def6.angles = var_5ad95b22;
-      var_2f69def6 physicslaunch(self.origin, impulse);
+    if(isDefined(axel)) {
+      axel thread namespace_ec06fe4a::function_52afe5df(8);
+      axel.angles = var_5ad95b22;
+      axel physicslaunch(self.origin, impulse);
     }
   }
 
   if(self isattached("c_t8_zmb_dlc0_zombie_destroyer_axe1", "tag_weapon_right")) {
     var_9d073a3b = self gettagorigin("tag_weapon_right");
     var_9219c99e = self gettagangles("tag_weapon_right");
-    var_53e8a7f3 = namespace_ec06fe4a::spawnmodel(var_9d073a3b, "c_t8_zmb_dlc0_zombie_destroyer_axe1");
+    axer = namespace_ec06fe4a::spawnmodel(var_9d073a3b, "c_t8_zmb_dlc0_zombie_destroyer_axe1");
 
-    if(isDefined(var_53e8a7f3)) {
-      var_53e8a7f3 thread namespace_ec06fe4a::function_52afe5df(8);
-      var_53e8a7f3.angles = var_9219c99e;
-      var_53e8a7f3 physicslaunch(self.origin, impulse);
+    if(isDefined(axer)) {
+      axer thread namespace_ec06fe4a::function_52afe5df(8);
+      axer.angles = var_9219c99e;
+      axer physicslaunch(self.origin, impulse);
     }
   }
 
@@ -1073,13 +1073,13 @@ function private function_33247080(owner) {
   owner waittill(#"death");
   impulse = anglesToForward(self.angles) + (0, 0, 1);
   impulse = vectorscale(impulse, 3);
-  self namespace_83eb6304::turnofffx("axe_trail");
-  self namespace_83eb6304::turnofffx("red_shield");
-  var_2f69def6 = namespace_ec06fe4a::spawnmodel(self.origin, "c_t8_zmb_dlc0_zombie_destroyer_axe1", self.angles, "gladiator axe");
+  self doa_fx::turnofffx("axe_trail");
+  self doa_fx::turnofffx("red_shield");
+  axel = namespace_ec06fe4a::spawnmodel(self.origin, "c_t8_zmb_dlc0_zombie_destroyer_axe1", self.angles, "gladiator axe");
 
-  if(isDefined(var_2f69def6)) {
-    var_2f69def6 thread namespace_ec06fe4a::function_52afe5df(12);
-    var_2f69def6 physicslaunch(var_2f69def6.origin, impulse);
+  if(isDefined(axel)) {
+    axel thread namespace_ec06fe4a::function_52afe5df(12);
+    axel physicslaunch(axel.origin, impulse);
   }
 
   self delete();
@@ -1105,8 +1105,8 @@ function private function_fbc2806e(var_a4388d06, spin_dir) {
   axe thread function_33247080(self);
   axe.angles = var_ecc54f32;
   self.var_9a9a0311[var_a4388d06] = axe;
-  axe namespace_83eb6304::function_3ecfde67("axe_trail");
-  axe namespace_83eb6304::function_3ecfde67("red_shield");
+  axe doa_fx::function_3ecfde67("axe_trail");
+  axe doa_fx::function_3ecfde67("red_shield");
   axe namespace_e32bb68::function_3a59ec34("zmb_ai_gladiator_axe_lp");
   enemy = self.favoriteenemy;
 
@@ -1229,8 +1229,8 @@ function private function_137ed431(axe, var_a4388d06, spin_dir) {
     }
   }
 
-  var_a4388d06 namespace_83eb6304::turnofffx("axe_trail");
-  var_a4388d06 namespace_83eb6304::turnofffx("red_shield");
+  var_a4388d06 doa_fx::turnofffx("axe_trail");
+  var_a4388d06 doa_fx::turnofffx("red_shield");
   var_a4388d06 namespace_e32bb68::function_ae271c0b("zmb_ai_gladiator_axe_lp");
   self.var_9a9a0311[spin_dir] = undefined;
   var_a4388d06 delete();
@@ -1301,7 +1301,7 @@ function private function_5be18f96(display = 1) {
   }
 }
 
-function private function_8a8841b0(var_49e4e4be) {
+function private function_8a8841b0(targetspot) {
   if(self.health <= 0) {
     return;
   }
@@ -1309,7 +1309,7 @@ function private function_8a8841b0(var_49e4e4be) {
   self namespace_e32bb68::function_3a59ec34("zmb_ai_gladiator_axe_throw");
 
   if(isDefined(self.org)) {
-    self.org.origin = var_49e4e4be;
+    self.org.origin = targetspot;
     self.org thread function_f7d9bc34();
   }
 

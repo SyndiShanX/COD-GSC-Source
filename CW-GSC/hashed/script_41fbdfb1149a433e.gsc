@@ -42,7 +42,7 @@ function function_da7439a2() {
 
   foreach(loot in level.doa.var_51400a66) {
     if(isDefined(loot.item.var_c8386627)) {
-      namespace_1c2a96f9::function_85da1646(loot.item.var_c8386627);
+      doa_fate::function_85da1646(loot.item.var_c8386627);
     }
 
     if(isDefined(loot.spawninfo)) {
@@ -119,7 +119,7 @@ function function_417fd9b() {
         }
 
         if(isDefined(loot.item.var_c8386627)) {
-          namespace_1c2a96f9::function_85da1646(loot.item.var_c8386627);
+          doa_fate::function_85da1646(loot.item.var_c8386627);
         }
 
         loot.item delete();

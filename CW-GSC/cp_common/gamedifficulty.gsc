@@ -15,60 +15,60 @@
 
 function autoexec init() {
   level.gameskill = 1;
-  level.var_3426461d = &function_8ffb61a;
+  level.var_3426461d = &get_player_xp_difficulty_multiplier;
 }
 
-function setskill(reset, var_648a2ef0) {
+function setskill(reset, skill_override) {
   if(!isDefined(level.script)) {
     level.script = util::get_map_name();
   }
 
   if(!is_true(reset)) {
-    if(is_true(level.var_a26aa64a)) {
+    if(is_true(level.b_gameskillset)) {
       return;
     }
 
-    thread function_f4a93c9c();
+    thread playerhealthdebug();
 
-    level.var_a26aa64a = 1;
+    level.b_gameskillset = 1;
   }
 
-  level thread function_57ba1474(var_648a2ef0);
-  level.var_b6db9d5a = 1;
+  level thread update_skill_level(skill_override);
+  level.auto_adjust_threatbias = 1;
   set_difficulty_from_locked_settings();
   level function_4ba867b();
 }
 
-function function_c0aae431(var_7317b1dc) {
-  level.playerhealth_regularregendelay = function_a34942a0();
+function apply_difficulty_var_with_func(difficulty_func) {
+  level.playerhealth_regularregendelay = get_player_health_regular_regen_delay();
 
-  if(level.var_b6db9d5a) {
-    thread function_f80a8b13(var_7317b1dc);
+  if(level.auto_adjust_threatbias) {
+    thread apply_threat_bias_to_all_players(difficulty_func);
   }
 
-  level.longregentime = function_faea9c9e();
-  level.animation.misstimeconstant = function_5ae527c5();
-  level.animation.misstimedistancefactor = function_f2ec5636();
+  level.longregentime = get_long_regen_time();
+  level.animation.misstimeconstant = get_miss_time_constant();
+  level.animation.misstimedistancefactor = get_miss_time_distance_factor();
 }
 
-function function_f80a8b13(var_7317b1dc) {
+function apply_threat_bias_to_all_players(difficulty_func) {
   level flag::wait_till("all_players_connected");
   players = level.players;
 
   for(i = 0; i < players.size; i++) {
-    players[i].threatbias = int(function_1cfd1920());
+    players[i].threatbias = int(get_player_threat_bias());
   }
 }
 
 function set_difficulty_from_locked_settings() {
-  function_c0aae431(&function_66c52cbf);
+  apply_difficulty_var_with_func(&get_locked_difficulty_val);
 }
 
-function function_66c52cbf(msg, ignored) {
+function get_locked_difficulty_val(msg, ignored) {
   return level.difficultysettings[ignored][level.currentdifficulty];
 }
 
-function function_f4a93c9c() {
+function playerhealthdebug() {
   waittillframeend();
 
   while(true) {
@@ -80,7 +80,7 @@ function function_f4a93c9c() {
       wait 0.5;
     }
 
-    thread function_fe49c4b4();
+    thread printhealthdebug();
 
     while(true) {
       if(!getdvarint(#"scr_health_debug", 0)) {
@@ -90,30 +90,30 @@ function function_f4a93c9c() {
       wait 0.5;
     }
 
-    level notify(#"hash_4fff5870dd60a939");
-    function_d1f1cf52();
+    level notify(#"stop_printing_grenade_timers");
+    destroyhealthdebug();
   }
 }
 
-function function_fe49c4b4() {
-  level notify(#"hash_7eabe7ecd3c67fd");
-  level endon(#"hash_7eabe7ecd3c67fd");
+function printhealthdebug() {
+  level notify(#"stop_printing_health_bars");
+  level endon(#"stop_printing_health_bars");
   y = 40;
-  level.var_60023d69 = [];
-  level.var_1c9484[0] = "<dev string:x38>";
-  level.var_1c9484[1] = "<dev string:x42>";
-  level.var_1c9484[2] = "<dev string:x51>";
+  level.healthbarhudelems = [];
+  level.healthbarkeys[0] = "<dev string:x38>";
+  level.healthbarkeys[1] = "<dev string:x42>";
+  level.healthbarkeys[2] = "<dev string:x51>";
 
-  if(!isDefined(level.var_5a1abaae)) {
-    level.var_5a1abaae = 0;
+  if(!isDefined(level.playerinvultimeend)) {
+    level.playerinvultimeend = 0;
   }
 
   if(!isDefined(level.var_30235742)) {
     level.var_30235742 = 0;
   }
 
-  for(i = 0; i < level.var_1c9484.size; i++) {
-    key = level.var_1c9484[i];
+  for(i = 0; i < level.healthbarkeys.size; i++) {
+    key = level.healthbarkeys[i];
     textelem = newdebughudelem();
     textelem.x = 150;
     textelem.y = y;
@@ -146,7 +146,7 @@ function function_fe49c4b4() {
     textelem.bgbar = bgbar;
     textelem.key = key;
     y += 10;
-    level.var_60023d69[key] = textelem;
+    level.healthbarhudelems[key] = textelem;
   }
 
   level flag::wait_till("<dev string:x7d>");
@@ -155,25 +155,25 @@ function function_fe49c4b4() {
     waitframe(1);
     players = level.players;
 
-    for(i = 0; i < level.var_1c9484.size && players.size > 0; i++) {
-      key = level.var_1c9484[i];
+    for(i = 0; i < level.healthbarkeys.size && players.size > 0; i++) {
+      key = level.healthbarkeys[i];
       player = players[0];
       width = 0;
 
       if(i == 0) {
         width = player.health / player.maxhealth * 300;
-        level.var_60023d69[key] settext(level.var_1c9484[0] + "<dev string:x94>" + player.health);
+        level.healthbarhudelems[key] settext(level.healthbarkeys[0] + "<dev string:x94>" + player.health);
       } else if(i == 1) {
-        width = (level.var_5a1abaae - gettime()) / 1000 * 40;
+        width = (level.playerinvultimeend - gettime()) / 1000 * 40;
       } else if(i == 2) {
         width = (level.var_30235742 - gettime()) / 1000 * 40;
       }
 
       width = int(max(width, 1));
       width = int(min(width, 300));
-      bar = level.var_60023d69[key].bar;
+      bar = level.healthbarhudelems[key].bar;
       bar setshader(#"black", width, 8);
-      bgbar = level.var_60023d69[key].bgbar;
+      bgbar = level.healthbarhudelems[key].bgbar;
 
       if(width + 2 > bgbar.maxwidth) {
         bgbar.maxwidth = width + 2;
@@ -184,21 +184,21 @@ function function_fe49c4b4() {
   }
 }
 
-function function_d1f1cf52() {
-  level notify(#"hash_7eabe7ecd3c67fd");
+function destroyhealthdebug() {
+  level notify(#"stop_printing_health_bars");
 
-  if(!isDefined(level.var_60023d69)) {
+  if(!isDefined(level.healthbarhudelems)) {
     return;
   }
 
-  for(i = 0; i < level.var_1c9484.size; i++) {
-    level.var_60023d69[level.var_1c9484[i]].bgbar destroy();
-    level.var_60023d69[level.var_1c9484[i]].bar destroy();
-    level.var_60023d69[level.var_1c9484[i]] destroy();
+  for(i = 0; i < level.healthbarkeys.size; i++) {
+    level.healthbarhudelems[level.healthbarkeys[i]].bgbar destroy();
+    level.healthbarhudelems[level.healthbarkeys[i]].bar destroy();
+    level.healthbarhudelems[level.healthbarkeys[i]] destroy();
   }
 }
 
-function function_c6f98249() {
+function playerhurtcheck() {
   self notify("54802cc95ae5ac77");
   self endon("54802cc95ae5ac77");
   self endon(#"death");
@@ -223,16 +223,16 @@ function function_c6f98249() {
 }
 
 function function_2339ca92() {
-  var_9b6ba81f = function_ad49ef5b();
+  player_death_invulnerability_time = get_player_death_invulnerable_time();
 
-  if(var_9b6ba81f > 0) {
-    self thread function_22107f87(var_9b6ba81f);
+  if(player_death_invulnerability_time > 0) {
+    self thread playerinvul(player_death_invulnerability_time);
   }
 
-  level.var_5a1abaae = gettime() + var_9b6ba81f * 1000;
+  level.playerinvultimeend = gettime() + player_death_invulnerability_time * 1000;
 }
 
-function private function_22107f87(timer) {
+function private playerinvul(timer) {
   self endon(#"death", #"disconnect");
 
   if(self flag::get("player_is_invulnerable")) {
@@ -240,7 +240,7 @@ function private function_22107f87(timer) {
   }
 
   self flag::set("player_is_invulnerable");
-  level notify(#"hash_245285a0c17aa5cb");
+  level notify(#"player_becoming_invulnerable");
   var_ae0703af = self getnoncheckpointdata("DeathsDoorWarnings");
   var_5273c86b = self getnoncheckpointdata("DeathsDoorWarningTime");
 
@@ -250,7 +250,7 @@ function private function_22107f87(timer) {
     self thread warning_message::create(#"hash_1b8a733f0d461a2c", [#"hash_2b62b2990144ebf6", #"healing", "no_deaths_door_warning"], 1, ["death", "in_igc"]);
   }
 
-  self thread function_ab69b983();
+  self thread monitor_player_death_invulnerability_eligibility();
 
   if(timer > 0) {
     function_fef4c10f(timer, 1);
@@ -268,8 +268,8 @@ function function_fef4c10f(timer, var_19c9196 = 0) {
 
   self endon(#"hash_61ab322c075ab540", #"death");
 
-  if(!isDefined(self.var_c040f22f)) {
-    self.var_c040f22f = self.attackeraccuracy;
+  if(!isDefined(self.oldattackeraccuracy)) {
+    self.oldattackeraccuracy = self.attackeraccuracy;
   } else {
     assert(self.attackeraccuracy == 0, "<dev string:x99>");
   }
@@ -286,15 +286,15 @@ function private function_f5c273fc() {
 
 function private function_b9d6a17c() {
   self flag::clear("player_zero_attacker_accuracy");
-  assert(isDefined(self.var_c040f22f), "<dev string:xe0>");
-  assert(self.var_c040f22f != 0, "<dev string:x127>");
-  self.attackeraccuracy = self.var_c040f22f;
-  self.var_c040f22f = undefined;
+  assert(isDefined(self.oldattackeraccuracy), "<dev string:xe0>");
+  assert(self.oldattackeraccuracy != 0, "<dev string:x127>");
+  self.attackeraccuracy = self.oldattackeraccuracy;
+  self.oldattackeraccuracy = undefined;
 }
 
-function private function_ab69b983() {
+function private monitor_player_death_invulnerability_eligibility() {
   self endon(#"death");
-  self.var_2869a26a = 0;
+  self.eligible_for_death_invulnerability = 0;
   assert(self flag::get("<dev string:x173>"));
   self flag::wait_till_clear("player_is_invulnerable");
   cooldowntime = function_81e40993();
@@ -302,25 +302,25 @@ function private function_ab69b983() {
   level.var_30235742 = gettime() + cooldowntime * 1000;
 
   wait cooldowntime;
-  self.var_2869a26a = 1;
+  self.eligible_for_death_invulnerability = 1;
 }
 
-function function_57ba1474(var_648a2ef0) {
-  level notify(#"hash_75a2e0ea99b6eba1");
-  level endon(#"hash_75a2e0ea99b6eba1");
-  transient = savegame::function_6440b06b(#"transient");
+function update_skill_level(skill_override) {
+  level notify(#"update_skill_from_profile");
+  level endon(#"update_skill_from_profile");
+  transient = savegame::get_mission_data(#"transient");
 
-  if(!isDefined(transient.var_9ac9bc79)) {
-    transient.var_9ac9bc79 = 9999;
+  if(!isDefined(transient.gameskilllowest)) {
+    transient.gameskilllowest = 9999;
   }
 
-  if(!isDefined(transient.var_a0bc0e2c)) {
-    transient.var_a0bc0e2c = 0;
+  if(!isDefined(transient.gameskillhighest)) {
+    transient.gameskillhighest = 0;
   }
 
-  var_d92990c1 = -1;
+  n_last_gameskill = -1;
 
-  while(!isDefined(var_648a2ef0)) {
+  while(!isDefined(skill_override)) {
     level.gameskill = getlocalprofileint("g_gameskill");
 
     var_89694459 = getdvarstring(#"overridedifficulty", "<dev string:x18d>");
@@ -343,7 +343,7 @@ function function_57ba1474(var_648a2ef0) {
         break;
     }
 
-    if(level.gameskill != var_d92990c1) {
+    if(level.gameskill != n_last_gameskill) {
       if(!isDefined(level.gameskill)) {
         level.gameskill = 1;
       }
@@ -375,12 +375,12 @@ function function_57ba1474(var_648a2ef0) {
       setDvar(#"saved_gameskill", level.gameskill);
       setlocalprofilevar("g_gameskill", level.gameskill);
 
-      if(level.gameskill < transient.var_9ac9bc79) {
-        transient.var_9ac9bc79 = level.gameskill;
+      if(level.gameskill < transient.gameskilllowest) {
+        transient.gameskilllowest = level.gameskill;
       }
 
-      if(level.gameskill > transient.var_a0bc0e2c) {
-        transient.var_a0bc0e2c = level.gameskill;
+      if(level.gameskill > transient.gameskillhighest) {
+        transient.gameskillhighest = level.gameskill;
       }
 
       level flag::wait_till("all_players_connected");
@@ -391,246 +391,246 @@ function function_57ba1474(var_648a2ef0) {
         uploadstats(player);
         var_ae0703af = player getnoncheckpointdata("DeathsDoorWarnings");
 
-        if(!isDefined(var_ae0703af) || var_d92990c1 == -1) {
+        if(!isDefined(var_ae0703af) || n_last_gameskill == -1) {
           player setnoncheckpointdata("DeathsDoorWarnings", 4 - level.gameskill);
           continue;
         }
 
-        player setnoncheckpointdata("DeathsDoorWarnings", int(max(0, 4 - level.gameskill - 4 - var_d92990c1 - var_ae0703af)));
+        player setnoncheckpointdata("DeathsDoorWarnings", int(max(0, 4 - level.gameskill - 4 - n_last_gameskill - var_ae0703af)));
       }
 
-      var_d92990c1 = level.gameskill;
+      n_last_gameskill = level.gameskill;
     }
 
     wait 1;
   }
 }
 
-function function_c7551020() {
-  if(!isDefined(level.var_21347b32)) {
-    level.var_21347b32 = [];
-    level.var_21347b32[0] = getscriptbundle(#"gamedifficulty_recruit");
-    level.var_21347b32[1] = getscriptbundle(#"gamedifficulty_regular");
-    level.var_21347b32[2] = getscriptbundle(#"gamedifficulty_hardened");
-    level.var_21347b32[3] = getscriptbundle(#"gamedifficulty_veteran");
-    level.var_21347b32[4] = getscriptbundle(#"gamedifficulty_realistic");
+function setdiffstructarrays() {
+  if(!isDefined(level.s_game_difficulty)) {
+    level.s_game_difficulty = [];
+    level.s_game_difficulty[0] = getscriptbundle(#"gamedifficulty_recruit");
+    level.s_game_difficulty[1] = getscriptbundle(#"gamedifficulty_regular");
+    level.s_game_difficulty[2] = getscriptbundle(#"gamedifficulty_hardened");
+    level.s_game_difficulty[3] = getscriptbundle(#"gamedifficulty_veteran");
+    level.s_game_difficulty[4] = getscriptbundle(#"gamedifficulty_realistic");
   }
 }
 
-function function_1cfd1920() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].threatbias;
+function get_player_threat_bias() {
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].threatbias;
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
   return 0;
 }
 
-function function_8ffb61a(event) {
-  function_c7551020();
-  var_2b9b388d = level.var_21347b32[level.gameskill].difficulty_xp_multiplier;
+function get_player_xp_difficulty_multiplier(event) {
+  setdiffstructarrays();
+  diff_xp_mult = level.s_game_difficulty[level.gameskill].difficulty_xp_multiplier;
 
-  if(isDefined(var_2b9b388d)) {
-    return var_2b9b388d;
+  if(isDefined(diff_xp_mult)) {
+    return diff_xp_mult;
   }
 
   return 1;
 }
 
-function function_4a1bd46e() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].healthoverlaycutoff;
+function get_health_overlay_cutoff() {
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].healthoverlaycutoff;
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
   return 0;
 }
 
-function function_f6f41f76() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].var_ff7fb6bb;
+function get_enemy_pain_chance() {
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].enemypainchance;
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
   return 0;
 }
 
-function function_ad49ef5b() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].player_deathinvulnerabletime;
+function get_player_death_invulnerable_time() {
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].player_deathinvulnerabletime;
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
   return 0;
 }
 
 function function_81e40993() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].var_40865ff8;
-  return isDefined(var_b0210d64) ? var_b0210d64 : 0;
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].var_40865ff8;
+  return isDefined(diff_struct_value) ? diff_struct_value : 0;
 }
 
-function function_e4046aa6() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].base_enemy_accuracy;
+function get_base_enemy_accuracy() {
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].base_enemy_accuracy;
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
   return 0;
 }
 
-function function_eb59c79() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].playerdifficultyhealth;
+function get_player_difficulty_health() {
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].playerdifficultyhealth;
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
   return 100;
 }
 
-function function_5ae527c5() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].misstimeconstant;
+function get_miss_time_constant() {
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].misstimeconstant;
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
   return 0;
 }
 
-function function_22fc6679() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].misstimeresetdelay;
+function get_miss_time_reset_delay() {
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].misstimeresetdelay;
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
   return 0;
 }
 
-function function_f2ec5636() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].misstimedistancefactor;
+function get_miss_time_distance_factor() {
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].misstimedistancefactor;
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
   return 0;
 }
 
-function function_f754b1bc() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].dog_health;
+function get_dog_health() {
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].dog_health;
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
   return 0;
 }
 
-function function_ad6fb6da() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].var_f84eb1d6;
+function get_dog_press_time() {
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].dog_presstime;
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
   return 0;
 }
 
-function function_8bf0a382() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].var_bd3beebd;
+function get_dog_hits_before_kill() {
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].dog_hits_before_kill;
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
   return 0;
 }
 
-function function_faea9c9e() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].longregentime;
+function get_long_regen_time() {
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].longregentime;
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
   return 0;
 }
 
-function function_a34942a0() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].playerhealth_regularregendelay;
+function get_player_health_regular_regen_delay() {
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].playerhealth_regularregendelay;
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
   return 0;
 }
 
-function function_f4052850() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].worthydamageratio;
+function get_worthy_damage_ratio() {
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].worthydamageratio;
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
   return 0;
 }
 
 function function_b5b7d60e() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].var_b768020b;
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].var_b768020b;
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
   return 2;
 }
 
 function function_5151f9d0() {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].var_5657206f;
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].var_5657206f;
 
-  if(isDefined(var_b0210d64)) {
-    return var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    return diff_struct_value;
   }
 
   return 4.5;
 }
 
 function function_52f56aea(var_d020b056) {
-  function_c7551020();
-  var_b0210d64 = level.var_21347b32[level.gameskill].var_bb4e24d2;
+  setdiffstructarrays();
+  diff_struct_value = level.s_game_difficulty[level.gameskill].var_bb4e24d2;
 
-  if(isDefined(var_b0210d64)) {
-    misstime = var_b0210d64;
+  if(isDefined(diff_struct_value)) {
+    misstime = diff_struct_value;
   } else {
     misstime = 0.3;
   }
@@ -656,20 +656,20 @@ function get_general_difficulty_level() {
   return value;
 }
 
-function function_7dbe6a66() {
+function player_eligible_for_death_invulnerability() {
   player = self;
 
-  if(function_ad49ef5b() == 0) {
+  if(get_player_death_invulnerable_time() == 0) {
     return 0;
   }
 
-  return is_true(self.var_2869a26a);
+  return is_true(self.eligible_for_death_invulnerability);
 }
 
-function function_2aed7a44(player, eattacker, einflictor, idamage, weapon, shitloc, var_b646048d) {
-  if((var_b646048d == "MOD_MELEE" || var_b646048d == "MOD_MELEE_WEAPON_BUTT") && isentity(weapon) && !isPlayer(weapon)) {
+function adjust_melee_damage(player, eattacker, einflictor, idamage, weapon, shitloc, smeansofdamage) {
+  if((smeansofdamage == "MOD_MELEE" || smeansofdamage == "MOD_MELEE_WEAPON_BUTT") && isentity(weapon) && !isPlayer(weapon)) {
     if(isactor(weapon)) {
-      var_c86b4d97 = int(function_eb59c79() * 0.8);
+      var_c86b4d97 = int(get_player_difficulty_health() * 0.8);
       return var_c86b4d97;
     }
   }
@@ -677,25 +677,25 @@ function function_2aed7a44(player, eattacker, einflictor, idamage, weapon, shitl
   return shitloc;
 }
 
-function function_23dcd1f6(player, eattacker, einflictor, idamage, weapon, shitloc, var_b646048d) {
-  var_68bc2059 = float(function_eb59c79());
+function function_23dcd1f6(player, eattacker, einflictor, idamage, weapon, shitloc, smeansofdamage) {
+  var_68bc2059 = float(get_player_difficulty_health());
   assert(var_68bc2059 > 0);
   var_86342214 = float(100) / var_68bc2059;
-  return max(var_b646048d * var_86342214, min(1, var_b646048d));
+  return max(smeansofdamage * var_86342214, min(1, smeansofdamage));
 }
 
 function function_4ba867b() {
-  function_c7551020();
-  var_938ce325 = level.var_21347b32[level.gameskill].player_laststandbleedouttime;
-  var_4cfdf1fc = level.var_21347b32[level.gameskill].var_949c9924;
-  var_22e7a516 = level.var_21347b32[level.gameskill].player_laststandsuicidedelay;
-  var_33682ca0 = level.var_21347b32[level.gameskill].var_58500288;
-  var_fd9d63a8 = level.var_21347b32[level.gameskill].player_respawndelay;
-  var_dd639ef7 = level.var_21347b32[level.gameskill].var_1bc10f3a;
-  var_8c4f976a = level.var_21347b32[level.gameskill].var_c5c20d41;
-  var_88dcf868 = level.var_21347b32[level.gameskill].var_4ca741c2;
-  var_8f59489c = level.var_21347b32[level.gameskill].var_e3e8d3a1;
-  var_880dfe56 = level.var_21347b32[level.gameskill].var_7b55ea2b;
+  setdiffstructarrays();
+  var_938ce325 = level.s_game_difficulty[level.gameskill].player_laststandbleedouttime;
+  var_4cfdf1fc = level.s_game_difficulty[level.gameskill].var_949c9924;
+  var_22e7a516 = level.s_game_difficulty[level.gameskill].player_laststandsuicidedelay;
+  var_33682ca0 = level.s_game_difficulty[level.gameskill].var_58500288;
+  var_fd9d63a8 = level.s_game_difficulty[level.gameskill].player_respawndelay;
+  var_dd639ef7 = level.s_game_difficulty[level.gameskill].var_1bc10f3a;
+  var_8c4f976a = level.s_game_difficulty[level.gameskill].var_c5c20d41;
+  var_88dcf868 = level.s_game_difficulty[level.gameskill].var_4ca741c2;
+  var_8f59489c = level.s_game_difficulty[level.gameskill].var_e3e8d3a1;
+  var_880dfe56 = level.s_game_difficulty[level.gameskill].var_7b55ea2b;
   setDvar(#"player_laststandbleedouttime", var_938ce325);
   setDvar(#"player_laststandrevivehealth", var_4cfdf1fc);
   setDvar(#"player_laststandsuicidedelay", var_22e7a516);

@@ -30,9 +30,9 @@
 #using scripts\core_common\util_shared;
 #namespace namespace_ad27dfd8;
 
-function function_8dbbde01(player, origin) {
-  var_d98803e1 = namespace_ec06fe4a::function_65ee50ba(origin);
-  origin = (origin[0], origin[1], var_d98803e1[2]);
+function teamshifterupdate(player, origin) {
+  hitp = namespace_ec06fe4a::function_65ee50ba(origin);
+  origin = (origin[0], origin[1], hitp[2]);
   coat = namespace_ec06fe4a::spawnmodel(origin + (0, 0, 36));
 
   if(!isDefined(coat)) {
@@ -69,12 +69,12 @@ function function_8dbbde01(player, origin) {
   trigger.opentime = 3000;
   trigger.var_6de1c43b = gettime() + trigger.opentime;
   trigger.radiussq = sqr(245);
-  timetowait = player namespace_1c2a96f9::function_4808b985(3.1);
+  timetowait = player doa_fate::function_4808b985(3.1);
 
-  org namespace_83eb6304::function_3ecfde67("teamshift");
+  org doa_fx::function_3ecfde67("teamshift");
   trigger thread function_7649c09d();
   waitresult = player waittilltimeout(timetowait, #"death", #"entering_last_stand", #"doa_exit_taken", #"disconnect");
-  org namespace_83eb6304::turnofffx("teamshift");
+  org doa_fx::turnofffx("teamshift");
   coat namespace_e32bb68::function_ae271c0b("evt_doa_pickup_coatofarms_active_lp");
   coat namespace_e32bb68::function_3a59ec34("evt_doa_pickup_coatofarms_active_end");
   wait 1;
@@ -97,7 +97,7 @@ function private function_8ff2eaf3(trigger) {
   self notify("7dfb8ca7d01dea77");
   self endon("7dfb8ca7d01dea77");
   self.var_d55daa7c = 1;
-  self namespace_83eb6304::function_3ecfde67("teamshift_contact");
+  self doa_fx::function_3ecfde67("teamshift_contact");
   self namespace_e32bb68::function_3a59ec34("evt_doa_pickup_coatofarms_zombie_lp");
   self.oldteam = self.team;
   var_c5107c6c = self.meleedamage;
@@ -122,7 +122,7 @@ function private function_8ff2eaf3(trigger) {
     }
   }
 
-  self namespace_83eb6304::turnofffx("teamshift_contact");
+  self doa_fx::turnofffx("teamshift_contact");
   self namespace_e32bb68::function_ae271c0b("evt_doa_pickup_coatofarms_zombie_lp");
   arrayremovevalue(level.doa.var_e2e8967b, self);
   self clearenemy();

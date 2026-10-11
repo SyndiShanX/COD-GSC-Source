@@ -333,7 +333,7 @@ function function_c5e5e928(var_e14b4254) {
     v_dir = v_teleport - self.origin;
     v_dir = (v_dir[0], v_dir[1], 1);
     v_dir = vectorNormalize(v_dir);
-    self playSound(#"hash_3d03d5d52c39fe35");
+    self playSound(#"zmb_fieldup_aethershroud_teleport");
     var_dcbe57af = self getvelocity();
     n_length = length(var_dcbe57af);
     var_7bfb3e25 = var_dcbe57af + v_dir * n_length;

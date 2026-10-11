@@ -44,7 +44,7 @@ function function_599d30fb(str_objective, b_starting) {
   level thread function_bb3bfb17();
   level thread namespace_8a404420::function_876b3ae7();
   level thread function_34d6e3ab();
-  savegame::function_7790f03(1);
+  savegame::checkpoint_save_asap(1);
 
   if(!namespace_b73b9191::function_315b14d6()) {
     level flag::set("flg_bunker_crossbow_bolt_interacts_active");
@@ -73,7 +73,7 @@ function function_599d30fb(str_objective, b_starting) {
   level flag::wait_till("flg_bunker_explore_encounter_start");
   level notify(#"hash_2add1d7af9007b93");
   savegame::checkpoint_save(1);
-  skipto::function_4e3ab877("bunker_explore");
+  skipto::objective_completed("bunker_explore");
 }
 
 function function_c5b389f1() {
@@ -108,12 +108,12 @@ function function_b2e9a7bb(weapon) {
 }
 
 function function_c3ccbcc8(str_objective) {
-  namespace_b73b9191::function_2683ec5d();
+  namespace_b73b9191::spawn_woods();
   var_b4bb921 = struct::get("woods_bunker_explore", "targetname");
   level.ai_woods forceteleport(var_b4bb921.origin, var_b4bb921.angles);
 }
 
-function function_f46b6ef(str_objective, b_starting, var_aa1a6455, player) {
+function function_f46b6ef(str_objective, b_starting, b_direct, player) {
   waitframe(1);
 }
 
@@ -178,7 +178,7 @@ function function_eea0086d(str_objective, b_starting) {
 
   level.player namespace_9c83b58d::function_a3b724c6(0);
   namespace_b73b9191::function_29b49cb5();
-  skipto::function_4e3ab877("bunker_encounter");
+  skipto::objective_completed("bunker_encounter");
 }
 
 function function_e6316fa2() {
@@ -190,7 +190,7 @@ function function_e6316fa2() {
 function function_8232a129() {
   level flag::wait_till("flg_bunker_encounter_patrol_cleared");
   wait 3;
-  level thread breadcrumb::function_61037c6c(#"hash_6191b396f75dbc49");
+  level thread breadcrumb::start_chain(#"hash_6191b396f75dbc49");
 }
 
 function function_228e46b7() {
@@ -345,7 +345,7 @@ function function_cb78f179() {
   level.player playRumbleOnEntity("reload_small");
   e_bunker_optional_key delete();
   level flag::set("flg_bunker_optional_key_found");
-  transient = savegame::function_6440b06b(#"transient");
+  transient = savegame::get_mission_data(#"transient");
   transient.var_be621aea = 1;
 
   if(!level flag::get("flg_bunker_optional_safe_found")) {
@@ -451,20 +451,20 @@ function function_7a370566() {
   self setgoal(goal, 1);
 }
 
-function function_4e376bb9(var_c5db42b9) {
+function function_4e376bb9(flg_cleanup) {
   self endon(#"death");
   self ai::poi_enable(1);
   self thread function_9137290b();
   self namespace_979752dc::function_bf1fb16f();
   self.grenadeammo = 0;
-  self thread function_3a9ba510(var_c5db42b9);
+  self thread function_3a9ba510(flg_cleanup);
   self.stealth.corpse_nexttime = 2147483647;
   self ai::set_behavior_attribute("demeanor", "cqb");
   self.flashlightoverride = 1;
   self clientfield::set("set_flashlight_fx", 1);
 
   if(!level flag::get("flg_bunker_stealth_fail")) {
-    self util::delay(0.2, "death", &flashlight::function_7c2f623b);
+    self util::delay(0.2, "death", &flashlight::light_on);
   }
 
   self.var_1c936867 = 600;
@@ -472,9 +472,9 @@ function function_4e376bb9(var_c5db42b9) {
   self ai::poi_enable(0);
 }
 
-function function_3a9ba510(var_c5db42b9) {
+function function_3a9ba510(flg_cleanup) {
   self endon(#"death");
-  level flag::wait_till(var_c5db42b9);
+  level flag::wait_till(flg_cleanup);
   self delete();
 }
 
@@ -483,7 +483,7 @@ function function_b47dd82e(str_objective) {
   level thread objectives::scripted("obj_yamantau_2", undefined, #"hash_282aa5eed264a248");
 }
 
-function function_511f3559(str_objective, b_starting, var_aa1a6455, player) {
+function function_511f3559(str_objective, b_starting, b_direct, player) {
   if(!namespace_b73b9191::function_315b14d6()) {
     level flag::clear("flg_bunker_crossbow_bolt_interacts_active");
     namespace_b73b9191::function_2e5072b5("bunker");
@@ -495,7 +495,7 @@ function function_511f3559(str_objective, b_starting, var_aa1a6455, player) {
 }
 
 function function_4e75b98e(str_objective, b_starting) {
-  namespace_b73b9191::function_2683ec5d();
+  namespace_b73b9191::spawn_woods();
   level thread function_34d6e3ab();
 
   if(b_starting) {
@@ -520,7 +520,7 @@ function function_4e75b98e(str_objective, b_starting) {
   var_b9e9c95f = getnode("woods_office_enter", "targetname");
   level.ai_woods setgoal(var_b9e9c95f);
   level flag::wait_till("flg_bunker_office_approach");
-  level.player util::function_749362d7(1, #"hash_320ff7b9723b7e5d");
+  level.player util::set_low_ready(1, #"hash_320ff7b9723b7e5d");
   level thread namespace_7468806b::function_1363110();
   level thread namespace_8a404420::function_2468cb92();
   level flag::wait_till("flg_bunker_office_woods_anim_start");
@@ -548,7 +548,7 @@ function function_4e75b98e(str_objective, b_starting) {
   level waittill(#"survey_equipment_completed");
   level notify(#"hash_2add1d7af9007b93");
   namespace_b73b9191::function_29b49cb5();
-  skipto::function_4e3ab877("woods_regroup");
+  skipto::objective_completed("woods_regroup");
 }
 
 function function_89f8f4f8() {
@@ -571,13 +571,13 @@ function function_bfc063c6() {
 }
 
 function function_90350d0d() {
-  level thread breadcrumb::function_61037c6c(#"hash_4972f0176f3f0bff");
+  level thread breadcrumb::start_chain(#"hash_4972f0176f3f0bff");
   thread function_ea0c2bef();
 }
 
 function function_ea0c2bef() {
   level flag::wait_till("flg_bunker_office_approach");
-  level thread breadcrumb::function_61037c6c(#"hash_3b2d107a1774074b");
+  level thread breadcrumb::start_chain(#"hash_3b2d107a1774074b");
 }
 
 function function_471879c2() {
@@ -604,7 +604,7 @@ function function_4d07bf4e(str_objective) {
   level thread function_cb78f179();
 }
 
-function function_53b51eb0(str_objective, b_starting, var_aa1a6455, player) {
+function function_53b51eb0(str_objective, b_starting, b_direct, player) {
   waitframe(1);
   namespace_b73b9191::function_ee83e03a("cull_inside_finale");
   namespace_b73b9191::function_ee83e03a("cull_inside_excavation");
@@ -689,10 +689,10 @@ function function_34d6e3ab() {
   while(true) {
     f1 = level flag::get("flg_bunker_office_light_issue_area");
     f2 = level flag::get("flg_woods_regroup_light_issue_area");
-    var_9ba7566d = level flag::get("flg_bunker_elevator_light_issue_area");
+    f3 = level flag::get("flg_bunker_elevator_light_issue_area");
     var_5247fd9d = getDvar(#"hash_19b5d46719678445");
 
-    if(f1 || f2 || var_9ba7566d) {
+    if(f1 || f2 || f3) {
       if(!var_5247fd9d) {
         level.player clientfield::set_to_player("set_sun_color_black", 1);
       }

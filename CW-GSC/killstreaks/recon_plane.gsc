@@ -199,7 +199,7 @@ function function_732dcb56(killstreaktype) {
   weapon = getweapon("recon_plane");
   recon_plane setModel(bundle.ksmodel);
   recon_plane setenemymodel(bundle.var_aa0b97e1);
-  recon_plane function_619a5c20();
+  recon_plane pingable();
   recon_plane setweapon(weapon);
   recon_plane setforcenocull();
   recon_plane.killstreak_id = killstreak_id;

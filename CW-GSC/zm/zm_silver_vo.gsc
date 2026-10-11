@@ -94,12 +94,12 @@ function function_df33ea46() {
 
   if(is_true(level.var_5eb2de5e)) {
     level.var_5eb2de5e = 0;
-    self zm_vo::function_d6f8bbd9(#"hash_43c238c3de424c52");
+    self zm_vo::function_d6f8bbd9(#"vox_mq_4_return_dk_aether_megaton_ol_mgol_0");
   }
 
   if(is_true(level.var_988e3b51)) {
     level.var_988e3b51 = 0;
-    self zm_vo::function_d6f8bbd9(#"hash_717ac87ac16d7f03");
+    self zm_vo::function_d6f8bbd9(#"vox_mq_7_rtrn_dk_aether2_megaton_ol_mgol_0");
   }
 
   if(!level flag::get(#"hash_6d5f0babef82cff6")) {
@@ -247,8 +247,8 @@ function function_3633608() {
   }
 
   level flag::wait_till(#"power_on");
-  level zm_vo::function_d6f8bbd9(#"hash_fe61de910d51e7", undefined, function_a1ef346b());
-  level zm_vo::function_d6f8bbd9(#"hash_7db209e28051b399", undefined, function_a1ef346b());
+  level zm_vo::function_d6f8bbd9(#"vox_power_on_psys_0", undefined, function_a1ef346b());
+  level zm_vo::function_d6f8bbd9(#"vox_obj_stabilize_accelerator_psys_0", undefined, function_a1ef346b());
   level flag::wait_till_all(["terminal_1_is_on", "terminal_2_is_on"]);
   wait 12;
   level.random_vo = randomintrangeinclusive(1, 3);
@@ -563,8 +563,8 @@ function function_61e91466() {
   level endon(#"end_game", #"game_ended");
   level.var_5eb2de5e = 1;
   level flag::wait_till(#"hash_6ddc7fc43d014f02");
-  level zm_vo::function_d6f8bbd9(#"hash_1a439eaaa23e129a", undefined, function_a1ef346b());
-  level zm_vo::function_d6f8bbd9(#"hash_4427f4ac84d6ca61", 1, function_a1ef346b());
+  level zm_vo::function_d6f8bbd9(#"vox_mq_4_decon_agent_installed_psys_0", undefined, function_a1ef346b());
+  level zm_vo::function_d6f8bbd9(#"vox_mq_5_obj_secure_subject_psys_0", 1, function_a1ef346b());
 
   switch (level.var_4d16d15f) {
     case #"strauss":
@@ -587,11 +587,11 @@ function function_946d553b() {
 function function_afe33aa6() {
   level endon(#"end_game", #"game_ended");
   level notify(#"hash_321aa1bcb0bb18bd");
-  level zm_vo::function_d6f8bbd9(#"hash_497e0e37a7afc66", undefined, function_a1ef346b());
+  level zm_vo::function_d6f8bbd9(#"vox_mq_6_decontamination_start_psys_0", undefined, function_a1ef346b());
   level flag::wait_till(#"steiner_merge_done");
-  level zm_vo::function_d6f8bbd9(#"hash_48e985ab475cb061", undefined, function_a1ef346b());
+  level zm_vo::function_d6f8bbd9(#"vox_mq_6_decontamination_complete_psys_0", undefined, function_a1ef346b());
   level flag::wait_till(#"hash_821afd1816759c2");
-  level zm_vo::function_d6f8bbd9(#"hash_7f5ce38acf75a8f4", undefined, function_a1ef346b());
+  level zm_vo::function_d6f8bbd9(#"vox_mq_6_restored_orlov_escapes_psys_0", undefined, function_a1ef346b());
 
   switch (level.var_4d16d15f) {
     case #"strauss":
@@ -659,34 +659,34 @@ function function_7def382e() {
   level flag::set(#"hash_2406ec20430ec032");
   level thread function_c7ca9f21();
   level flag::wait_till(#"hash_3a617ab5e651c2a9");
-  level thread zm_vo::function_d6f8bbd9(#"hash_66e5d1c8e5c7f95f", undefined, function_a1ef346b());
+  level thread zm_vo::function_d6f8bbd9(#"vox_mq_def_1st_ovrld_psys_0", undefined, function_a1ef346b());
 
   if(isDefined(level.var_b0eb5e2)) {
-    level.var_b0eb5e2 zm_vo::function_d6f8bbd9(#"hash_1ae92cebff80b19a");
+    level.var_b0eb5e2 zm_vo::function_d6f8bbd9(#"vox_mq_def_1st_ovrld_rsp_rsto_0");
   }
 
   level flag::wait_till(#"hash_4f6940328c97b402");
 
   if(isDefined(level.var_b0eb5e2)) {
-    level.var_b0eb5e2 zm_vo::function_d6f8bbd9(#"hash_49776d7f856030ce");
+    level.var_b0eb5e2 zm_vo::function_d6f8bbd9(#"vox_mq_def_2nd_term_start_rsto_0");
   }
 
   level flag::wait_till(#"hash_4a49aa778b3cdd8");
-  level zm_vo::function_d6f8bbd9(#"hash_e1a00c5df96472b", undefined, function_a1ef346b());
-  level thread zm_vo::function_d6f8bbd9(#"hash_e19ffc5df964578", undefined, function_a1ef346b());
+  level zm_vo::function_d6f8bbd9(#"vox_mq_def_2nd_ovrld_psys_0", undefined, function_a1ef346b());
+  level thread zm_vo::function_d6f8bbd9(#"vox_mq_def_2nd_ovrld_psys_1", undefined, function_a1ef346b());
 
   if(isDefined(level.var_b0eb5e2)) {
-    level.var_b0eb5e2 zm_vo::function_d6f8bbd9(#"hash_79f31fb265dc37ae");
+    level.var_b0eb5e2 zm_vo::function_d6f8bbd9(#"vox_mq_def_2nd_ovrld_rsp_rsto_0");
   }
 
   level flag::wait_till(#"hash_4f693f328c97b24f");
 
   if(isDefined(level.var_b0eb5e2)) {
-    level.var_b0eb5e2 zm_vo::function_d6f8bbd9(#"hash_3106c3a5a6c00979");
+    level.var_b0eb5e2 zm_vo::function_d6f8bbd9(#"vox_mq_def_3rd_term_start_rsto_0");
   }
 
   level flag::wait_till(#"hash_1aab687832f4e02b");
-  level zm_vo::function_d6f8bbd9(#"hash_39f6b9475a0e656e", undefined, function_a1ef346b());
+  level zm_vo::function_d6f8bbd9(#"vox_mq_def_3rd_ovrld_psys_0", undefined, function_a1ef346b());
   level flag::set(#"hash_3dc9f09d14c418d9");
 }
 
@@ -694,15 +694,15 @@ function function_ddb84db5() {
   level endon(#"end_game", #"game_ended");
 
   if(isDefined(level.var_b0eb5e2)) {
-    level.var_b0eb5e2 zm_vo::function_d6f8bbd9(#"hash_71d10005e47c7063");
-    level.var_b0eb5e2 zm_vo::function_d6f8bbd9(#"hash_2936eabf5e3d451f");
+    level.var_b0eb5e2 zm_vo::function_d6f8bbd9(#"vox_mq_def_3rd_ovrld_rsp_rsto_0");
+    level.var_b0eb5e2 zm_vo::function_d6f8bbd9(#"vox_mq_9_obj_exfil_rsto_1");
     wait 2;
-    level.var_b0eb5e2 zm_vo::function_d6f8bbd9(#"hash_71d0ff05e47c6eb0");
+    level.var_b0eb5e2 zm_vo::function_d6f8bbd9(#"vox_mq_def_3rd_ovrld_rsp_rsto_1");
   }
 
   level function_14a92dc6(#"hash_312eab510083e1e2");
   level notify(#"hash_4e734bad5161c1e7");
-  level thread zm_vo::function_d6f8bbd9(#"hash_39f6ba475a0e6721", undefined, function_a1ef346b());
+  level thread zm_vo::function_d6f8bbd9(#"vox_mq_def_3rd_ovrld_psys_1", undefined, function_a1ef346b());
   level thread function_479619db();
   level thread function_6276b243();
 }
@@ -865,17 +865,17 @@ function function_ee2c526b() {
 
     switch (s_notify._notify) {
       case #"incorrect_subject":
-        level zm_vo::function_d6f8bbd9(#"hash_227fbd78a7fbe481", 1, function_a1ef346b());
+        level zm_vo::function_d6f8bbd9(#"vox_mq_5_incorrect_subject_psys_0", 1, function_a1ef346b());
         break;
       case #"hash_4337abdaab1fc730":
-        level zm_vo::function_d6f8bbd9(#"hash_564984dea1b6179f", 1, function_a1ef346b());
-        level zm_vo::function_d6f8bbd9(#"hash_40bf227fb6f54b9", 1, function_a1ef346b());
+        level zm_vo::function_d6f8bbd9(#"vox_mq_5_compatible_subjects_psys_0", 1, function_a1ef346b());
+        level zm_vo::function_d6f8bbd9(#"vox_mq_5_awaiting_second_subject_psys_0", 1, function_a1ef346b());
         break;
       case #"hash_3f9e5836a14975bc":
-        level zm_vo::function_d6f8bbd9(#"hash_262142d01923bd24", 1, function_a1ef346b());
+        level zm_vo::function_d6f8bbd9(#"vox_mq_5_incompatible_subjects_psys_0", 1, function_a1ef346b());
         break;
       case #"hash_395eb3958f40a0cd":
-        level zm_vo::function_d6f8bbd9(#"hash_2c81383a9069770f", 1, function_a1ef346b());
+        level zm_vo::function_d6f8bbd9(#"vox_mq_6_obj_commence_primary_funct_psys_0", 1, function_a1ef346b());
         wait 15;
         var_448b5a02 = getEnt("vol_medical_lab_ctrlrm", "script_noteworthy");
         players = getPlayers();
@@ -961,8 +961,8 @@ function private function_c5b386e2(cmd) {
       level thread function_14a92dc6(#"hash_28272cdbefb5f54d");
       break;
     case #"hash_6608e2e55937727e":
-      level zm_vo::function_d6f8bbd9(#"hash_fe61de910d51e7", undefined, function_a1ef346b(), undefined);
-      level zm_vo::function_d6f8bbd9(#"hash_6d907d6921a5eb66", undefined, function_a1ef346b(), undefined);
+      level zm_vo::function_d6f8bbd9(#"vox_power_on_psys_0", undefined, function_a1ef346b(), undefined);
+      level zm_vo::function_d6f8bbd9(#"vox_mq_0_interact_first_terminal_cycl_0", undefined, function_a1ef346b(), undefined);
     default:
       break;
   }

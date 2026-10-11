@@ -66,7 +66,7 @@ function function_cbeeecf() {
   }
 }
 
-function function_edda155f(str_alias, n_delay) {
+function playstinger(str_alias, n_delay) {
   level thread function_2b18b6d6(#"mus_" + str_alias + "_intro", n_delay);
 }
 

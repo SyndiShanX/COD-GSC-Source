@@ -546,7 +546,7 @@ function function_8f12abec(localclientnum) {
     var_4972e475.var_ed875153 = name_hash;
   }
 
-  var_4972e475 function_619a5c20();
+  var_4972e475 pingable();
   self.var_4972e475 = var_4972e475;
 }
 

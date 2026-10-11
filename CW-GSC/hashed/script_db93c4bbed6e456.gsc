@@ -17,7 +17,7 @@ function autoexec main() {
   clientfield::register("toplayer", "player_cam_fire", 1, 1, "int");
 }
 
-function function_906e8496(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
+function apply_firstperson_player_cam(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
   self endon(#"disconnect");
 
   while(self util::isusingremote()) {
@@ -36,42 +36,42 @@ function function_906e8496(einflictor, attacker, idamage, smeansofdeath, weapon,
     } else if(value == 4) {
       vdir = "MOD_DROWN";
     } else if(value == 5) {
-      self thread function_3f6f166(idamage, smeansofdeath, weapon, shitloc, psoffsettime, deathanimduration);
+      self thread firstperson_player_cam_fall(idamage, smeansofdeath, weapon, shitloc, psoffsettime, deathanimduration);
       return;
     }
   }
 
   if(vdir === "MOD_EXPLOSIVE" || vdir === "MOD_PROJECTILE" || vdir === "MOD_PROJECTILE_SPLASH" || vdir === "MOD_GRENADE" || vdir === "MOD_GRENADE_SPLASH") {
-    self thread function_16679050(idamage, smeansofdeath, weapon, shitloc, psoffsettime, deathanimduration);
+    self thread firstperson_player_cam_explosion(idamage, smeansofdeath, weapon, shitloc, psoffsettime, deathanimduration);
     return;
   }
 
   if(vdir === "MOD_BULLET" || vdir === "MOD_RIFLE_BULLET" || vdir === "MOD_PISTOL_BULLET") {
-    self thread function_feefffe4(idamage, smeansofdeath, weapon, shitloc, psoffsettime, deathanimduration);
+    self thread firstperson_player_cam_bullet(idamage, smeansofdeath, weapon, shitloc, psoffsettime, deathanimduration);
     return;
   }
 
   if(vdir === "MOD_BURNED") {
-    self thread function_49f83e8a(idamage, smeansofdeath, weapon, shitloc, psoffsettime, deathanimduration);
+    self thread firstperson_player_cam_burned(idamage, smeansofdeath, weapon, shitloc, psoffsettime, deathanimduration);
     return;
   }
 
   if(vdir === "MOD_DROWN") {
-    self thread function_f4d74d85(idamage, smeansofdeath, weapon, shitloc, psoffsettime, deathanimduration);
+    self thread firstperson_player_cam_bubbles(idamage, smeansofdeath, weapon, shitloc, psoffsettime, deathanimduration);
     return;
   }
 
   if(isDefined(smeansofdeath) && smeansofdeath.classname == "trigger_hurt" && isDefined(smeansofdeath.script_noteworthy) && smeansofdeath.script_noteworthy == "fall_death") {
-    self thread function_3f6f166(idamage, smeansofdeath, weapon, shitloc, psoffsettime, deathanimduration);
+    self thread firstperson_player_cam_fall(idamage, smeansofdeath, weapon, shitloc, psoffsettime, deathanimduration);
     return;
   }
 
   if(vdir === "MOD_MELEE" || vdir === "MOD_MELEE_WEAPON_BUTT") {
-    self thread function_f8c107(idamage, smeansofdeath, weapon, shitloc, psoffsettime, deathanimduration);
+    self thread firstperson_player_cam_melee(idamage, smeansofdeath, weapon, shitloc, psoffsettime, deathanimduration);
     return;
   }
 
-  self thread function_6b51f704(idamage, smeansofdeath, weapon, shitloc, undefined, deathanimduration);
+  self thread firstperson_player_cam_suicide(idamage, smeansofdeath, weapon, shitloc, undefined, deathanimduration);
 }
 
 function function_c6491fb8() {
@@ -81,9 +81,9 @@ function function_c6491fb8() {
 
 function function_6f822dd3() {
   self endon(#"disconnect");
-  self thread util::function_b5d0a39e("<dev string:x38>", undefined, undefined, 200, 10000);
+  self thread util::screen_message_create_client("<dev string:x38>", undefined, undefined, 200, 10000);
   wait 3;
-  self thread util::function_2e0c1f7d();
+  self thread util::screen_message_delete_client();
 }
 
 function get_trace(old_position, new_position) {
@@ -114,9 +114,9 @@ function is_falling(position) {
   return is_valid_new_pos(position, position + (0, 0, -500));
 }
 
-function function_33141024(vdir, tweentime, var_c69fe125, var_eebc8ec0, var_3cbc1198, var_d7e15204, var_f2499291, var_dda415f2, lookdir, var_a571008b, var_eea7b52e) {
-  self endon(#"disconnect", #"hash_eb0317ca3976bf9");
-  epsilon = getdvarint(#"hash_7dce5a6d3fbfa376", 2);
+function movecamera(vdir, tweentime, max_f_length, max_z_length, position_f_speed, position_z_speed, camerapitch, cameraroll, lookdir, var_a571008b, var_eea7b52e) {
+  self endon(#"disconnect", #"cp_deathcam_ended");
+  epsilon = getdvarint(#"movecamera_epsilon", 2);
   original_position = self getplayercamerapos();
   position = original_position;
   angles = self getplayerangles();
@@ -138,76 +138,76 @@ function function_33141024(vdir, tweentime, var_c69fe125, var_eebc8ec0, var_3cbc
     target_angles = vectortoangles(lookdir);
   }
 
-  if(!isDefined(var_f2499291)) {
-    var_f2499291 = absangleclamp360(target_angles[0]);
+  if(!isDefined(camerapitch)) {
+    camerapitch = absangleclamp360(target_angles[0]);
   }
 
-  if(!isDefined(var_dda415f2)) {
-    var_dda415f2 = absangleclamp360(target_angles[2]);
+  if(!isDefined(cameraroll)) {
+    cameraroll = absangleclamp360(target_angles[2]);
   }
 
-  target_angles = (var_f2499291, absangleclamp360(target_angles[1]), var_dda415f2);
+  target_angles = (camerapitch, absangleclamp360(target_angles[1]), cameraroll);
   angles = (absangleclamp360(target_angles[0]), absangleclamp360(target_angles[1]), angleclamp180(target_angles[2]));
 
-  if(isDefined(var_c69fe125) && vdir[0] != 0) {
-    var_8abc8992 = 0;
+  if(isDefined(max_f_length) && vdir[0] != 0) {
+    b_position_f = 0;
   } else {
-    var_c69fe125 = 0;
-    var_3cbc1198 = 0;
-    var_8abc8992 = 1;
+    max_f_length = 0;
+    position_f_speed = 0;
+    b_position_f = 1;
   }
 
-  if(isDefined(var_eebc8ec0) && vdir[2] != 0) {
-    var_39a26763 = 0;
+  if(isDefined(max_z_length) && vdir[2] != 0) {
+    b_position_z = 0;
   } else {
-    var_eebc8ec0 = 0;
-    var_d7e15204 = 0;
-    var_39a26763 = 1;
+    max_z_length = 0;
+    position_z_speed = 0;
+    b_position_z = 1;
   }
 
   forwardvec = (vdir[0], vdir[1], 0);
   forwardvec = vectorNormalize(forwardvec);
 
-  while(!(is_true(var_8abc8992) && is_true(var_39a26763))) {
-    if(!is_true(var_8abc8992)) {
-      var_a2384064 = vectorscale(forwardvec, var_3cbc1198);
-      var_fdb8844a = length(var_a2384064);
-      var_5b945107 = position - original_position;
-      var_c028b81a = length((var_5b945107[0], var_5b945107[1], 0));
+  while(!(is_true(b_position_f) && is_true(b_position_z))) {
+    if(!is_true(b_position_f)) {
+      added_vect = vectorscale(forwardvec, position_f_speed);
+      added_length = length(added_vect);
+      diff_forward_pos = position - original_position;
+      current_forward_length = length((diff_forward_pos[0], diff_forward_pos[1], 0));
 
-      if(var_c028b81a + var_fdb8844a >= var_c69fe125) {
-        var_fdb8844a = var_c69fe125 - var_c028b81a;
-        var_8abc8992 = 1;
+      if(current_forward_length + added_length >= max_f_length) {
+        added_length = max_f_length - current_forward_length;
+        b_position_f = 1;
       }
 
-      new_position = position - vectorscale(forwardvec, var_fdb8844a);
-      var_d2ca9e9b = position - vectorscale(forwardvec, var_fdb8844a + epsilon);
+      new_position = position - vectorscale(forwardvec, added_length);
+      var_d2ca9e9b = position - vectorscale(forwardvec, added_length + epsilon);
 
       if(is_valid_new_pos(position, var_d2ca9e9b)) {
         position = new_position;
       } else {
-        var_8abc8992 = 1;
+        b_position_f = 1;
       }
     }
 
-    if(!is_true(var_39a26763)) {
-      var_35187b11 = var_d7e15204;
-      var_d8ef58d1 = abs(original_position[2] - position[2]);
+    if(!is_true(b_position_z)) {
+      subtracted_height = position_z_speed;
+      current_z_length = abs(original_position[2] - position[2]);
 
-      if(var_d8ef58d1 + var_35187b11 >= var_eebc8ec0) {
-        var_35187b11 = var_eebc8ec0 - var_d8ef58d1;
-        var_39a26763 = 1;
+      if(current_z_length + subtracted_height >= max_z_length) {
+        subtracted_height = max_z_length - current_z_length;
+        b_position_z = 1;
       }
 
-      new_position = (position[0], position[1], position[2] - var_35187b11);
-      var_d2ca9e9b = (position[0], position[1], position[2] - var_35187b11 - epsilon);
+      new_position = (position[0], position[1], position[2] - subtracted_height);
+      var_d2ca9e9b = (position[0], position[1], position[2] - subtracted_height - epsilon);
 
       if(is_valid_new_pos(position, var_d2ca9e9b)) {
         position = new_position;
         continue;
       }
 
-      var_39a26763 = 1;
+      b_position_z = 1;
     }
   }
 
@@ -233,12 +233,12 @@ function function_33141024(vdir, tweentime, var_c69fe125, var_eebc8ec0, var_3cbc
     var_eb5d6347 = length(position - original_position);
     var_40fa243f = var_eb5d6347 * tweentime;
     player_speed = max(player_speed, var_40fa243f);
-    var_63bee101 = getdvarint(#"hash_382786cbe040485d", -2000);
-    var_abbbc8f5 = getdvarint(#"hash_348a9bee991e8abf", 500);
-    var_4cd4f3fd = function_26d91402(position, position + (0, 0, var_63bee101));
+    move_max_falling_height = getdvarint(#"move_max_falling_height", -2000);
+    move_min_falling_speed = getdvarint(#"move_min_falling_speed", 500);
+    var_4cd4f3fd = function_26d91402(position, position + (0, 0, move_max_falling_height));
     var_3cd7b116 = length(var_4cd4f3fd - position);
     var_80600e54 = (-88, absangleclamp360(angles[1]), 0);
-    var_74a88e20 = max(player_speed, var_abbbc8f5);
+    var_74a88e20 = max(player_speed, move_min_falling_speed);
     var_8c8446ec = var_3cd7b116 / var_74a88e20;
     self camerasetposition(var_4cd4f3fd, var_80600e54);
     self startcameratween(var_8c8446ec, 1);
@@ -248,22 +248,22 @@ function function_33141024(vdir, tweentime, var_c69fe125, var_eebc8ec0, var_3cbc
 }
 
 function function_eea7b52e(position) {
-  var_ca72a18a = getdvarfloat(#"hash_37a43469da3f24c3", 0.4);
-  var_1da018a5 = getdvarfloat(#"hash_60702fda0f15330f", 0.1);
-  var_13c80859 = getdvarfloat(#"hash_6bc3c7f0011db1a9", 5);
-  earthquake(var_ca72a18a, var_1da018a5, position, var_13c80859);
+  dc_quake_scale = getdvarfloat(#"dc_quake_scale", 0.4);
+  dc_quake_duration = getdvarfloat(#"dc_quake_duration", 0.1);
+  dc_quake_radius = getdvarfloat(#"dc_quake_radius", 5);
+  earthquake(dc_quake_scale, dc_quake_duration, position, dc_quake_radius);
 }
 
 function function_992fb1fd(position, angles, var_eea7b52e) {
   self endon(#"disconnect");
-  var_85817a90 = getdvarfloat(#"hash_34ede8fbda967c29", 10);
-  var_6328d523 = position + (0, 0, var_85817a90);
+  dc_drop_length = getdvarfloat(#"dc_drop_length", 10);
+  var_6328d523 = position + (0, 0, dc_drop_length);
   self camerasetposition(var_6328d523, angles);
   waitframe(1);
-  var_be296d93 = getdvarfloat(#"hash_161f389ff9e2a549", 0.1);
+  dc_drop_quickly_tween_time = getdvarfloat(#"dc_drop_quickly_tween_time", 0.1);
   self camerasetposition(position, angles);
-  self startcameratween(var_be296d93, 1);
-  wait var_be296d93;
+  self startcameratween(dc_drop_quickly_tween_time, 1);
+  wait dc_drop_quickly_tween_time;
 
   if(is_true(var_eea7b52e)) {
     function_eea7b52e(position);
@@ -280,59 +280,59 @@ function function_e9de215e() {
   return -1;
 }
 
-function function_feefffe4(einflictor, attacker, idamage, weapon, vdir, shitloc) {
+function firstperson_player_cam_bullet(einflictor, attacker, idamage, weapon, vdir, shitloc) {
   self endon(#"disconnect");
   self clientfield::set_to_player("player_cam_blur", 1);
-  var_d7e15204 = getdvarfloat(#"hash_165efe9d47c44db0", 20);
-  var_3cbc1198 = getdvarfloat(#"hash_27d49da325083574", 20);
-  var_eebc8ec0 = getdvarfloat(#"hash_5e4bfece8a54504a", 50);
-  var_c69fe125 = getdvarfloat(#"hash_3a46da3b6f33171e", 50);
-  var_7240f970 = getdvarfloat(#"hash_6261c9b56ae2db5d", 2.75);
+  position_z_speed = getdvarfloat(#"cam_bullet_position_z_speed", 20);
+  position_f_speed = getdvarfloat(#"cam_bullet_position_f_speed", 20);
+  max_z_length = getdvarfloat(#"cam_bullet_max_z_length", 50);
+  max_f_length = getdvarfloat(#"cam_bullet_max_f_length", 50);
+  end_wait = getdvarfloat(#"cam_bullet_end_wait", 2.75);
   sign = self function_e9de215e();
-  thread function_33141024(shitloc, 0, var_c69fe125, var_eebc8ec0, var_3cbc1198, var_d7e15204, undefined, 60 * sign, undefined, undefined, 1);
+  thread movecamera(shitloc, 0, max_f_length, max_z_length, position_f_speed, position_z_speed, undefined, 60 * sign, undefined, undefined, 1);
   self playRumbleOnEntity("damage_heavy");
-  wait var_7240f970;
-  self notify(#"hash_eb0317ca3976bf9");
+  wait end_wait;
+  self notify(#"cp_deathcam_ended");
 }
 
-function function_f8c107(einflictor, attacker, idamage, weapon, vdir, shitloc) {
+function firstperson_player_cam_melee(einflictor, attacker, idamage, weapon, vdir, shitloc) {
   self endon(#"disconnect");
   self clientfield::set_to_player("player_cam_blur", 1);
-  var_d7e15204 = getdvarfloat(#"hash_165efe9d47c44db0", 20);
-  var_3cbc1198 = getdvarfloat(#"hash_27d49da325083574", 20);
-  var_eebc8ec0 = getdvarfloat(#"hash_5e4bfece8a54504a", 50);
-  var_c69fe125 = getdvarfloat(#"hash_3a46da3b6f33171e", 50);
-  var_7240f970 = getdvarfloat(#"hash_6261c9b56ae2db5d", 2.75);
+  position_z_speed = getdvarfloat(#"cam_bullet_position_z_speed", 20);
+  position_f_speed = getdvarfloat(#"cam_bullet_position_f_speed", 20);
+  max_z_length = getdvarfloat(#"cam_bullet_max_z_length", 50);
+  max_f_length = getdvarfloat(#"cam_bullet_max_f_length", 50);
+  end_wait = getdvarfloat(#"cam_bullet_end_wait", 2.75);
   sign = self function_e9de215e();
   self playRumbleOnEntity("damage_heavy");
-  thread function_33141024(shitloc, 0, var_c69fe125, var_eebc8ec0, var_3cbc1198, var_d7e15204, undefined, 60 * sign);
-  wait var_7240f970;
-  self notify(#"hash_eb0317ca3976bf9");
+  thread movecamera(shitloc, 0, max_f_length, max_z_length, position_f_speed, position_z_speed, undefined, 60 * sign);
+  wait end_wait;
+  self notify(#"cp_deathcam_ended");
 }
 
-function function_6b51f704(einflictor, attacker, idamage, weapon, vdir, shitloc) {
+function firstperson_player_cam_suicide(einflictor, attacker, idamage, weapon, vdir, shitloc) {
   self endon(#"disconnect");
   self clientfield::set_to_player("player_cam_blur", 1);
   sign = self function_e9de215e();
-  var_d7e15204 = getdvarfloat(#"hash_165efe9d47c44db0", 8);
-  var_3cbc1198 = getdvarfloat(#"hash_27d49da325083574", 10);
-  var_eebc8ec0 = getdvarfloat(#"hash_5e4bfece8a54504a", 50);
-  var_c69fe125 = getdvarfloat(#"hash_3a46da3b6f33171e", 50);
-  var_7240f970 = getdvarfloat(#"hash_6261c9b56ae2db5d", 2.75);
-  thread function_33141024(undefined, 0, var_c69fe125, var_eebc8ec0, var_3cbc1198, var_d7e15204, undefined, 60 * sign, undefined, undefined, 1);
+  position_z_speed = getdvarfloat(#"cam_bullet_position_z_speed", 8);
+  position_f_speed = getdvarfloat(#"cam_bullet_position_f_speed", 10);
+  max_z_length = getdvarfloat(#"cam_bullet_max_z_length", 50);
+  max_f_length = getdvarfloat(#"cam_bullet_max_f_length", 50);
+  end_wait = getdvarfloat(#"cam_bullet_end_wait", 2.75);
+  thread movecamera(undefined, 0, max_f_length, max_z_length, position_f_speed, position_z_speed, undefined, 60 * sign, undefined, undefined, 1);
   self playRumbleOnEntity("damage_heavy");
-  wait var_7240f970;
-  self notify(#"hash_eb0317ca3976bf9");
+  wait end_wait;
+  self notify(#"cp_deathcam_ended");
 }
 
-function function_16679050(einflictor, attacker, idamage, weapon, vdir, shitloc) {
+function firstperson_player_cam_explosion(einflictor, attacker, idamage, weapon, vdir, shitloc) {
   self endon(#"disconnect");
   self clientfield::set_to_player("player_cam_blur", 1);
-  var_d7e15204 = getdvarfloat(#"hash_30765f3cd8aff8ef", 8);
-  var_3cbc1198 = getdvarfloat(#"hash_6f30d762a2b77323", 10);
-  var_eebc8ec0 = getdvarfloat(#"hash_1a9f5eeb3f4a4361", 50);
-  var_c69fe125 = getdvarfloat(#"hash_3501bf4ef71770d5", 100);
-  var_2296fd89 = getdvarfloat(#"hash_6f6d4d410a6ad5c", 1);
+  position_z_speed = getdvarfloat(#"cam_explosion_position_z_speed", 8);
+  position_f_speed = getdvarfloat(#"cam_explosion_position_f_speed", 10);
+  max_z_length = getdvarfloat(#"cam_explosion_max_z_length", 50);
+  max_f_length = getdvarfloat(#"cam_explosion_max_f_length", 100);
+  shake_vector_max = getdvarfloat(#"cam_explosion_shake_vector_max", 1);
   lookdir = undefined;
 
   if(isDefined(vdir) && vdir != self) {
@@ -341,62 +341,62 @@ function function_16679050(einflictor, attacker, idamage, weapon, vdir, shitloc)
     lookdir = vectorNormalize(lookdir);
   }
 
-  var_3f9ef4b0 = getdvarfloat(#"hash_7fcc94875235d5d9", 0);
-  var_25234855 = getdvarfloat(#"hash_3b48f7d2de097c94", 0.4);
-  var_7f7a879b = getdvarfloat(#"hash_35f372e3d66c138", 0.4);
-  var_2323c739 = getdvarfloat(#"hash_2cc1c3972b8ab6b3", 0.8);
-  var_c80c7a11 = getdvarfloat(#"hash_17b036b05dba5077", 2);
+  second_fade_value = getdvarfloat(#"cam_explosion_fade_value", 0);
+  first_fade_time = getdvarfloat(#"cam_explosion_first_fade_time", 0.4);
+  second_fade_time = getdvarfloat(#"cam_explosion_second_fade_time", 0.4);
+  first_wait = getdvarfloat(#"cam_explosion_first_wait", 0.8);
+  second_wait = getdvarfloat(#"cam_explosion_second_wait", 2);
   sign = self function_e9de215e();
-  thread function_33141024(shitloc, 0, var_c69fe125, var_eebc8ec0, var_3cbc1198, var_d7e15204, undefined, 60 * sign, lookdir, undefined, 1);
+  thread movecamera(shitloc, 0, max_f_length, max_z_length, position_f_speed, position_z_speed, undefined, 60 * sign, lookdir, undefined, 1);
   self playRumbleOnEntity("damage_heavy");
-  wait var_c80c7a11;
-  self notify(#"hash_eb0317ca3976bf9");
+  wait second_wait;
+  self notify(#"cp_deathcam_ended");
 }
 
-function function_49f83e8a(einflictor, attacker, idamage, weapon, vdir, shitloc) {
+function firstperson_player_cam_burned(einflictor, attacker, idamage, weapon, vdir, shitloc) {
   self endon(#"disconnect");
   self clientfield::set_to_player("player_cam_fire", 1);
   angles = self getplayerangles();
   forwarddir = anglesToForward(angles);
-  var_eebc8ec0 = getdvarfloat(#"hash_1a9f5eeb3f4a4361", 50);
-  var_d7e15204 = getdvarfloat(#"hash_30765f3cd8aff8ef", 10);
+  max_z_length = getdvarfloat(#"cam_explosion_max_z_length", 50);
+  position_z_speed = getdvarfloat(#"cam_explosion_position_z_speed", 10);
   sign = self function_e9de215e();
-  thread function_33141024(undefined, 0.2, 0, var_eebc8ec0, 0, var_d7e15204, undefined, 50 * sign, forwarddir);
+  thread movecamera(undefined, 0.2, 0, max_z_length, 0, position_z_speed, undefined, 50 * sign, forwarddir);
   wait 2;
-  self.var_f0f3daef = 1;
+  self.fade_to_white = 1;
   self thread lui::screen_fade(1, 1, 0, "white", 0);
   wait 1;
-  self notify(#"hash_eb0317ca3976bf9");
+  self notify(#"cp_deathcam_ended");
 }
 
-function function_f4d74d85(einflictor, attacker, idamage, weapon, vdir, shitloc) {
+function firstperson_player_cam_bubbles(einflictor, attacker, idamage, weapon, vdir, shitloc) {
   self endon(#"disconnect");
   self clientfield::set_to_player("player_cam_bubbles", 1);
   angles = self getplayerangles();
   forwarddir = anglesToForward(angles);
-  var_eebc8ec0 = getdvarfloat(#"hash_1a9f5eeb3f4a4361", 50);
-  var_d7e15204 = getdvarfloat(#"hash_30765f3cd8aff8ef", 10);
-  thread function_33141024(undefined, 3, 0, var_eebc8ec0, 0, var_d7e15204, undefined, undefined, forwarddir);
-  var_94a9de4b = getdvarfloat(#"hash_227fa8da13da6e00", 3);
-  wait var_94a9de4b;
+  max_z_length = getdvarfloat(#"cam_explosion_max_z_length", 50);
+  position_z_speed = getdvarfloat(#"cam_explosion_position_z_speed", 10);
+  thread movecamera(undefined, 3, 0, max_z_length, 0, position_z_speed, undefined, undefined, forwarddir);
+  bubbles_wait = getdvarfloat(#"cam_bubbles_wait", 3);
+  wait bubbles_wait;
   self clientfield::set_to_player("player_cam_bubbles", 0);
-  self notify(#"hash_eb0317ca3976bf9");
+  self notify(#"cp_deathcam_ended");
 }
 
-function function_3f6f166(einflictor, attacker, idamage, weapon, vdir, shitloc) {
+function firstperson_player_cam_fall(einflictor, attacker, idamage, weapon, vdir, shitloc) {
   self endon(#"disconnect");
-  var_d7e15204 = getdvarfloat(#"hash_4d3288e8d44e7297", 500);
-  var_3cbc1198 = getdvarfloat(#"hash_6e3b3c6f29e0589b", 0);
-  var_eebc8ec0 = getdvarfloat(#"hash_24bd9fbf9d33d209", 500);
-  var_c69fe125 = getdvarfloat(#"hash_61031e6aea993ad", 0);
-  var_7240f970 = getdvarfloat(#"hash_319ec6563198ff7a", 2);
-  thread function_33141024(undefined, 1, undefined, var_eebc8ec0, 0, var_d7e15204, -88, 1, undefined, 1, 1);
-  wait var_7240f970;
-  self notify(#"hash_eb0317ca3976bf9");
+  position_z_speed = getdvarfloat(#"cam_fall_position_z_speed", 500);
+  position_f_speed = getdvarfloat(#"cam_fall_position_f_speed", 0);
+  max_z_length = getdvarfloat(#"cam_fall_max_z_length", 500);
+  max_f_length = getdvarfloat(#"cam_fall_max_f_length", 0);
+  end_wait = getdvarfloat(#"cam_fall_end_wait", 2);
+  thread movecamera(undefined, 1, undefined, max_z_length, 0, position_z_speed, -88, 1, undefined, 1, 1);
+  wait end_wait;
+  self notify(#"cp_deathcam_ended");
 }
 
 function function_f73fe25f() {
   self endon(#"disconnect");
   waitframe(1);
-  self notify(#"hash_eb0317ca3976bf9");
+  self notify(#"cp_deathcam_ended");
 }

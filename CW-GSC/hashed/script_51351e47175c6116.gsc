@@ -36,17 +36,17 @@ function function_32160152(player, modelname, origin, angles, scale = 1) {
 
   if(isDefined(model)) {
     model setscale(scale);
-    scenedef = #"hash_30c46dd666dd7707";
+    scenedef = #"p9_fxanim_zombietron_chest_smash_high_bundle";
     var_2468c36a = "fireworks";
-    model namespace_83eb6304::function_3ecfde67("glow_white");
+    model doa_fx::function_3ecfde67("glow_white");
     model namespace_e32bb68::function_3a59ec34("evt_doa_pickup_giftbox_activated");
     model scene::play(scenedef, model);
     model waittill(#"scenes_done");
     model namespace_e32bb68::function_3a59ec34("evt_doa_pickup_giftbox_explode");
     model namespace_ec06fe4a::function_8c808737();
     model thread namespace_ec06fe4a::function_52afe5df(1);
-    model namespace_83eb6304::turnofffx("glow_yellow");
-    model namespace_83eb6304::turnofffx("player_trail_yellow");
+    model doa_fx::turnofffx("glow_yellow");
+    model doa_fx::turnofffx("player_trail_yellow");
     waitframe(1);
     roll = randomint(100);
 
@@ -62,7 +62,7 @@ function function_32160152(player, modelname, origin, angles, scale = 1) {
         distsq = distancesquared(player.doa.vehicle.origin, spawnorigin);
 
         if(distsq < sqr(64)) {
-          namespace_dfc652ee::function_ad7ac41b(spawnorigin, 1, 32, 27, 1);
+          doa_pickups::function_ad7ac41b(spawnorigin, 1, 32, 27, 1);
           return;
         }
       }
@@ -71,34 +71,34 @@ function function_32160152(player, modelname, origin, angles, scale = 1) {
       return;
     }
 
-    model namespace_83eb6304::function_3ecfde67("fireworks");
+    model doa_fx::function_3ecfde67("fireworks");
     model namespace_e32bb68::function_3a59ec34("evt_doa_pickup_giftbox_fireworks");
 
     if(roll == 99) {
-      namespace_dfc652ee::function_ad7ac41b(origin, 1, 32, 14, 1);
+      doa_pickups::function_ad7ac41b(origin, 1, 32, 14, 1);
       return;
     }
 
     if(roll > 92) {
-      namespace_dfc652ee::function_ad7ac41b(origin, 1, 32, 16, 1);
+      doa_pickups::function_ad7ac41b(origin, 1, 32, 16, 1);
       return;
     }
 
     if(roll > 85) {
-      namespace_dfc652ee::function_ad7ac41b(origin, 1, 32, 46, 1);
+      doa_pickups::function_ad7ac41b(origin, 1, 32, 46, 1);
       return;
     }
 
     if(roll > 80) {
-      namespace_dfc652ee::function_ad7ac41b(origin, 1, 32, 8, 1);
+      doa_pickups::function_ad7ac41b(origin, 1, 32, 8, 1);
       return;
     }
 
     if(roll > 65) {
-      namespace_dfc652ee::function_ad7ac41b(origin, 1, 32, 9, 1);
+      doa_pickups::function_ad7ac41b(origin, 1, 32, 9, 1);
       return;
     }
 
-    namespace_dfc652ee::function_ad7ac41b(origin, 1, 32, 32, 1);
+    doa_pickups::function_ad7ac41b(origin, 1, 32, 32, 1);
   }
 }

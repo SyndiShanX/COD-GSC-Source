@@ -37,11 +37,11 @@ function main(str_objective, b_starting) {
   level.var_7b278a4f vehicle::unload("all");
   level.var_5d798cf2 val::set(#"hash_5ba8a98bf94ed750", "ignoreme", 1);
   level.var_5d798cf2 vehicle::unload("all");
-  level thread skipto::function_4e3ab877("wall_breach");
+  level thread skipto::objective_completed("wall_breach");
   level flag::set("flg_fav_exit_hint");
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {}
+function cleanup(str_objective, b_starting, b_direct, player) {}
 
 function private function_28dee3ce() {
   level waittill(#"hash_3a698db448edb3a");

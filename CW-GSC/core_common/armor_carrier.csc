@@ -17,7 +17,7 @@ function private preinit() {
   clientfield::register_clientuimodel("hudItems.armorPlateCount", #"hud_items", #"armorplatecount", 1, 4, "int", undefined, 0, 0);
   clientfield::register_clientuimodel("hudItems.armorPlateMaxCarry", #"hud_items", #"armorplatemaxcarry", 1, 4, "int", undefined, 0, 0);
   level.var_a05cd64e = &function_a05cd64e;
-  level.var_8ef8b9e8 = getweapon(#"armor_plate");
+  level.armorplateweapon = getweapon(#"armor_plate");
   callback::on_localclient_connect(&on_localclient_connect);
   callback::on_localplayer_spawned(&on_localplayer_spawned);
   serverfield::register("armor_plate_behavior", 1, 1, "int");
@@ -60,7 +60,7 @@ function private function_a05cd64e(localclientnum) {
 
   if(self function_86b9a404()) {
     function_321bb79b(localclientnum);
-    switchtoweapon(localclientnum, level.var_8ef8b9e8);
+    switchtoweapon(localclientnum, level.armorplateweapon);
     return 1;
   }
 
@@ -84,7 +84,7 @@ function private function_86b9a404() {
 
   currentweapon = getcurrentweapon(localclientnum);
 
-  if(currentweapon === level.var_8ef8b9e8 || currentweapon === level.weaponnone) {
+  if(currentweapon === level.armorplateweapon || currentweapon === level.weaponnone) {
     function_ad64a47("<dev string:x8e>");
 
     return false;
@@ -104,7 +104,7 @@ function private function_86b9a404() {
     }
   }
 
-  var_6aae821e = hasweapon(localclientnum, level.var_8ef8b9e8);
+  var_6aae821e = hasweapon(localclientnum, level.armorplateweapon);
   currentcount = self clientfield::get_player_uimodel("hudItems.armorPlateCount");
   currentarmor = self getplayerarmor();
 

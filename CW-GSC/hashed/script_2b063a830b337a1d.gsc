@@ -58,7 +58,7 @@ class class_fb1bfa12: cluielem {
   }
 }
 
-function function_326329cb(player, var_ba420c60) {
+function set_display_info(player, var_ba420c60) {
   function_c063a71c(player, var_ba420c60.levelname);
 }
 

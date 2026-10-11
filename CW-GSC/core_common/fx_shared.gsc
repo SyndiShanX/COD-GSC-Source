@@ -164,7 +164,7 @@ function lighting_target_dof(target, f_fstop, var_bef008a5, f_fstop_time, var_14
   self thread function_13fa0731();
 }
 
-function function_82104e32(f_fstop, f_fstop_time) {
+function fob_dof(f_fstop, f_fstop_time) {
   self flag::set("flag_autofocus_on");
   function_5ac4dc99("_internal_fob_i_playernum", -1);
   function_5ac4dc99("_internal_fob_f_fstop", -1);

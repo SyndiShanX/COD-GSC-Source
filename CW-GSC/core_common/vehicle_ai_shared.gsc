@@ -1902,12 +1902,12 @@ function function_1e0d693b(goal, enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[#"hash_6c444b535ec20313"])) {
-      point._scoredebug[#"hash_6c444b535ec20313"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"distfromorigin"])) {
+      point._scoredebug[#"distfromorigin"] = spawnStruct();
     }
 
-    point._scoredebug[#"hash_6c444b535ec20313"].score = mapfloat(0, prefereddistawayfromorigin, -5000, 0, point.disttoorigin2d);
-    point._scoredebug[#"hash_6c444b535ec20313"].scorename = "<dev string:x183>";
+    point._scoredebug[#"distfromorigin"].score = mapfloat(0, prefereddistawayfromorigin, -5000, 0, point.disttoorigin2d);
+    point._scoredebug[#"distfromorigin"].scorename = "<dev string:x183>";
 
     point.score += mapfloat(0, prefereddistawayfromorigin, -5000, 0, point.disttoorigin2d);
 

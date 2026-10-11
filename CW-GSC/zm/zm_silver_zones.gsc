@@ -15,7 +15,7 @@
 #namespace zm_silver_zones;
 
 function autoexec init() {
-  callback::on_spawned(&function_44b1279a);
+  callback::on_spawned(&minimap_update);
   level.var_65c43c31 = ["zone_tunnel_interior", "zone_power_room", "zone_power_room_outside", "zone_power_trans_north", "zone_power_trans_south", "zone_trans_north", "zone_trans_south", "zone_center_upper_west", "zone_center_upper_north", "zone_center_upper", "zone_center_lower", "zone_power_tunnel", "zone_trans_south_tunnel", "zone_trans_north_pap_room", "zone_trans_south_pap_room"];
   level.var_aa3b88c5 = &function_27028b8e;
   level.var_27028b8e = &function_27028b8e;
@@ -161,7 +161,7 @@ function function_64c67df3(zone_path) {
   }
 }
 
-function function_44b1279a() {
+function minimap_update() {
   self notify("5fce8be004d71149");
   self endon("5fce8be004d71149");
   self endon(#"disconnect");

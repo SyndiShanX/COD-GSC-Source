@@ -40,8 +40,8 @@ function start(str_objective) {
   level hms_util::function_ee1d1df6("lazar", "Lazar", "lazar_escape_struct");
   level thread namespace_a789f8ae::function_ad98871a();
   level notify(#"hash_73e317451c95becb");
-  var_602672df = getEnt("vip_door_player_clip", "targetname");
-  var_602672df delete();
+  e_player_clip = getEnt("vip_door_player_clip", "targetname");
+  e_player_clip delete();
 }
 
 function main(str_objective, b_starting) {
@@ -70,7 +70,7 @@ function main(str_objective, b_starting) {
   level thread function_d9227637();
 
   if(b_starting) {
-    level.player util::function_749362d7(1);
+    level.player util::set_low_ready(1);
     level thread namespace_307260b8::function_529afded(0);
     level notify(#"hash_73e317451c95becb");
   }
@@ -78,13 +78,13 @@ function main(str_objective, b_starting) {
   savegame::checkpoint_save();
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   hms_util::print("<dev string:x4b>");
 
   level notify(#"hash_494ec42a5050d27f");
 
-  if(isDefined(level.var_f4389c9d.var_7bacf73f)) {
-    foreach(ai in level.var_f4389c9d.var_7bacf73f) {
+  if(isDefined(level.var_f4389c9d.a_ai_guys)) {
+    foreach(ai in level.var_f4389c9d.a_ai_guys) {
       if(isDefined(ai)) {
         ai deletedelay();
       }
@@ -171,11 +171,11 @@ function function_dd101d55() {
   var_662759db = struct::get("ai_woods_radio", "targetname");
 
   if(isDefined(level.park)) {
-    level.park battlechatter::function_2ab9360b(0);
+    level.park battlechatter::bc_allow(0);
   }
 
   if(isDefined(level.lazar)) {
-    level.lazar battlechatter::function_2ab9360b(0);
+    level.lazar battlechatter::bc_allow(0);
   }
 
   level waittill(#"hash_73e317451c95becb");
@@ -185,11 +185,11 @@ function function_dd101d55() {
   var_662759db thread hms_util::dialogue("vox_cp_cbcr_01700_wood_dontlooknowbutt_ac", 1, "allies", "Woods");
 
   if(isDefined(level.park)) {
-    level.park battlechatter::function_2ab9360b(1);
+    level.park battlechatter::bc_allow(1);
   }
 
   if(isDefined(level.lazar)) {
-    level.lazar battlechatter::function_2ab9360b(1);
+    level.lazar battlechatter::bc_allow(1);
   }
 
   level flag::set("flg_initial_break_down_door_vo");
@@ -226,8 +226,8 @@ function function_dd101d55() {
 
 function function_d9227637() {
   level endon(#"flg_door_kicked");
-  var_cad35a6 = doors::get_doors("escape_breach_door");
-  s_door = var_cad35a6[0];
+  a_s_doors = doors::get_doors("escape_breach_door");
+  s_door = a_s_doors[0];
 
   while(!s_door doors::is_open()) {
     waitframe(1);
@@ -317,9 +317,9 @@ function private function_ef7a3626() {
   level flag::wait_till("flg_allies_advance_to_ambush");
   wait 1;
   a_ai = [];
-  var_841e373 = getEntArray("bullet_vignette_spawner", "targetname");
+  a_sp = getEntArray("bullet_vignette_spawner", "targetname");
 
-  foreach(sp in var_841e373) {
+  foreach(sp in a_sp) {
     ai = spawner::simple_spawn_single(sp);
 
     if(isDefined(ai)) {

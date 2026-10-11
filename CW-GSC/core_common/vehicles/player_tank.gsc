@@ -189,7 +189,7 @@ function function_eba4498a(player) {
 
 function private on_vehicle_damage(params) {
   if(isPlayer(params.eattacker) && params.eattacker isinvehicle() && params.smeansofdeath === "MOD_PROJECTILE") {
-    self playSound(#"hash_301ede6e928927f2");
+    self playSound(#"wpn_tank_shell_hit");
   }
 }
 

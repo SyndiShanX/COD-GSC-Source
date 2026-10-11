@@ -32,10 +32,10 @@ function starting(str_skipto) {
 
 function main(str_skipto, b_starting) {
   level flag::set("aslt_vault_breach_begin");
-  level battlechatter::function_2ab9360b(1);
+  level battlechatter::bc_allow(1);
 
   if(is_true(b_starting)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto);
+    level.adler = namespace_e77bf565::adler_spawn(str_skipto);
     level.adler namespace_e77bf565::function_5770c74("assault");
     level thread scene::skipto_end_noai("scene_kgb_door_kick", "Last_Frame", undefined, 1);
     level thread scene::init("scene_kgb_open_vault");
@@ -51,7 +51,7 @@ function main(str_skipto, b_starting) {
   level flag::wait_till("aslt_vault_breach_complete");
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
@@ -69,7 +69,7 @@ function init_flags() {
 
 function init_clientfields() {}
 
-function function_22b7fffd() {
+function init_scenes() {
   scene::add_scene_func("scene_kgb_open_vault", &function_d0e338f0, "init");
   scene::add_scene_func("scene_kgb_open_vault", &function_d0e338f0);
   scene::add_scene_func("scene_kgb_open_vault", &function_d0e338f0, "done");
@@ -151,19 +151,19 @@ function function_50f19d5b() {
 
 function function_d0e338f0(a_ents) {
   if(isDefined(a_ents[#"vault_door"])) {
-    if(!isDefined(a_ents[#"vault_door"].var_89ce14f1)) {
-      a_ents[#"vault_door"].var_89ce14f1 = getEnt("vault_door_clip_left", "targetname");
+    if(!isDefined(a_ents[#"vault_door"].left_clip)) {
+      a_ents[#"vault_door"].left_clip = getEnt("vault_door_clip_left", "targetname");
 
-      if(isDefined(a_ents[#"vault_door"].var_89ce14f1)) {
-        a_ents[#"vault_door"].var_89ce14f1 linkTo(a_ents[#"vault_door"], "j_hinge_le", (0, 0, 0), (0, 180, 0));
+      if(isDefined(a_ents[#"vault_door"].left_clip)) {
+        a_ents[#"vault_door"].left_clip linkTo(a_ents[#"vault_door"], "j_hinge_le", (0, 0, 0), (0, 180, 0));
       }
     }
 
-    if(!isDefined(a_ents[#"vault_door"].var_82cafee)) {
-      a_ents[#"vault_door"].var_82cafee = getEnt("vault_door_clip_right", "targetname");
+    if(!isDefined(a_ents[#"vault_door"].right_clip)) {
+      a_ents[#"vault_door"].right_clip = getEnt("vault_door_clip_right", "targetname");
 
-      if(isDefined(a_ents[#"vault_door"].var_82cafee)) {
-        a_ents[#"vault_door"].var_82cafee linkTo(a_ents[#"vault_door"], "j_hinge_ri", (-18, 0, 0), (0, 0, 0));
+      if(isDefined(a_ents[#"vault_door"].right_clip)) {
+        a_ents[#"vault_door"].right_clip linkTo(a_ents[#"vault_door"], "j_hinge_ri", (-18, 0, 0), (0, 0, 0));
       }
     }
   }

@@ -32,7 +32,7 @@ function event_handler[gametype_start] main(eventstruct) {
 function mannequin_init() {
   mannequins = getEntArray("ee_mannequin", "script_noteworthy");
   var_ecf867b5 = getEntArray("ee_mannequin_clip", "targetname");
-  var_1c94845d = [];
+  healthbarkeys5d = [];
   mannequins = array::randomize(mannequins);
   var_8091ece = mannequins.size;
 
@@ -57,16 +57,16 @@ function mannequin_init() {
       var_4c9b75d1 delete();
     }
 
-    if(!isDefined(var_1c94845d)) {
-      var_1c94845d = [];
-    } else if(!isarray(var_1c94845d)) {
-      var_1c94845d = array(var_1c94845d);
+    if(!isDefined(healthbarkeys5d)) {
+      healthbarkeys5d = [];
+    } else if(!isarray(healthbarkeys5d)) {
+      healthbarkeys5d = array(healthbarkeys5d);
     }
 
-    var_1c94845d[var_1c94845d.size] = mannequin;
+    healthbarkeys5d[healthbarkeys5d.size] = mannequin;
   }
 
-  array::delete_all(var_1c94845d);
+  array::delete_all(healthbarkeys5d);
 
   if(getdvarint(#"hash_42a5a4b0b2854ca1", 0)) {
     foreach(mannequin in mannequins) {

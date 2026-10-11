@@ -19,7 +19,7 @@
 #namespace namespace_b6fe1dbe;
 
 function private event_handler[level_preinit] function_b489bb7b(eventstruct) {
-  snd::function_5e69f468(&_objective);
+  snd::skipto_init(&_objective);
   snd::wait_init();
 }
 
@@ -50,11 +50,11 @@ function private _objective(objective) {
 }
 
 function music(str_msg, n_delay = 0) {
-  level thread function_7edafa59(str_msg, n_delay);
+  level thread music_handler(str_msg, n_delay);
   level thread function_e80c0ccf(str_msg);
 }
 
-function function_7edafa59(str_msg, n_delay) {
+function music_handler(str_msg, n_delay) {
   if(!isDefined(level.var_41fc1341)) {
     level.var_41fc1341 = "";
   }
@@ -72,10 +72,10 @@ function function_7edafa59(str_msg, n_delay) {
   switch (str_msg) {
     case #"23.0_napalm_ending":
     case #"hash_80d6e8de9a9b724":
-    case #"hash_fa148e8ff49700b":
+    case #"16.0_village":
     case #"3.0_ruins_1":
-    case #"hash_14551414b13cbe8f":
-    case #"hash_1d1e507e9e90544e":
+    case #"5.0_door_1":
+    case #"10.0_door_2":
     case #"12.0_reset_2":
     case #"17.0_door_3":
     case #"11.0_lab":
@@ -88,8 +88,8 @@ function function_7edafa59(str_msg, n_delay) {
     case #"9.0_zombies":
     case #"1.0_intro":
     case #"13.0_paddy_3":
-    case #"hash_569fd9d5a21b5d1e":
-    case #"hash_61febcbde8b3db9b":
+    case #"21.0_crazy_doors":
+    case #"4.0_cave":
     case #"20.0_reset_3":
     case #"2.0_paddy_1":
     case #"14.0_ruin_3":
@@ -112,7 +112,7 @@ function function_7edafa59(str_msg, n_delay) {
     case #"11.3_window_stinger_3":
     case #"11.2_window_stinger_2":
     case #"11.1_window_stinger_1":
-      music::function_edda155f(str_msg, n_delay);
+      music::playstinger(str_msg, n_delay);
       break;
     case #"deactivate_21.0_crazy_doors":
     case #"deactivate_3.0_ruins_1":
@@ -276,9 +276,9 @@ function emi_night_play() {
 function function_3587d33f() {}
 
 function function_a24fb2ab(entity, threshold) {
-  var_f5c0126e = 0;
+  same = 0;
 
-  while(var_f5c0126e == 0) {
+  while(same == 0) {
     players = snd::function_da785aa8();
     player = players[0];
 
@@ -286,7 +286,7 @@ function function_a24fb2ab(entity, threshold) {
       var_3a170e9c = entity.origin[2] - player.origin[2];
 
       if(abs(var_3a170e9c) < threshold) {
-        var_f5c0126e = 1;
+        same = 1;
       }
     }
 
@@ -433,7 +433,7 @@ function function_f34d98f2(origin, threshold) {
   level endon(#"visit_restart");
   level endon(#"start_outro");
   buzz = snd::play("amb_cp_nam_prisoner_crt_buzz_lp_path", origin);
-  var_a24ddf98 = snd::play("amb_cp_nam_prisoner_crt_fuzz_lp_path", origin);
+  fuzz = snd::play("amb_cp_nam_prisoner_crt_fuzz_lp_path", origin);
 
   while(!level flag::get("flag_in_end_path")) {
     players = snd::function_da785aa8();
@@ -449,7 +449,7 @@ function function_f34d98f2(origin, threshold) {
   }
 
   snd::stop(buzz);
-  snd::stop(var_a24ddf98);
+  snd::stop(fuzz);
 }
 
 function function_616b3f40() {
@@ -796,32 +796,32 @@ function function_46e4b64f() {
 function function_d4255748() {
   org = (-1704, 9214, -1216);
   adler = snd::play(["evt_adler_hallway_drone_lp", 4], org);
-  level waittill(#"hash_54d5f64c5f92585d");
+  level waittill(#"corridor_3_door_4");
   snd::play("evt_adler_hallway_drone_end", org);
   snd::stop(adler, 0.05);
 }
 
 function function_1302e69b(line) {
   switch (line) {
-    case #"hash_50e76364eb487ee7":
+    case #"vox_cp_prsn_09000_adlr_whyisbellrepeat_f9":
       snd::client_msg("hallway_voice_1");
       break;
-    case #"hash_50e70b64eb47e95f":
+    case #"vox_cp_prsn_09000_adlr_whyisbellrepeat_fa":
       snd::client_msg("hallway_voice_2");
       break;
-    case #"hash_52016a64ec381281":
+    case #"vox_cp_prsn_09000_adlr_whyisbellrepeat_56":
       snd::client_msg("hallway_voice_3");
       break;
-    case #"hash_299931c6bee06b56":
+    case #"vox_cp_prsn_09000_adlr_bellstopspeakin_2d":
       snd::client_msg("hallway_voice_4");
       break;
-    case #"hash_6574041af1ef9d8b":
+    case #"vox_cp_prsn_09000_adlr_stopwastingmyti_8c":
       snd::client_msg("hallway_voice_5");
       break;
-    case #"hash_5c474edbfa219fbb":
+    case #"vox_cp_prsn_09000_adlr_turnaroundbell_4b":
       snd::client_msg("hallway_voice_6");
       break;
-    case #"hash_2e9614d78554ddd6":
+    case #"vox_cp_prsn_09000_adlr_bellgothroughad_38":
       snd::client_msg("hallway_voice_7");
       break;
     default:

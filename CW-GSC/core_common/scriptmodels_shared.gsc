@@ -32,12 +32,12 @@ function private function_9abee270(model) {
     model.takedamage = 1;
   }
 
-  if(is_true(model.var_3ee8e0e2)) {
+  if(is_true(model.script_makesentient)) {
     model util::make_sentient();
   }
 
   if(is_true(model.var_5d16ec51)) {
-    model function_619a5c20();
+    model pingable();
   }
 
   if(isDefined(model.script_team) && model.script_team != "none") {

@@ -1339,7 +1339,7 @@ function function_ce8e453c() {
     return;
   }
 
-  self.vehicle thread function_991034a3(self, self.vehicle);
+  self.vehicle thread handle_vehicle_death(self, self.vehicle);
   self.skipdeath = 1;
   self.var_14926c = 0;
   self flag::set("dead_in_vehicle");
@@ -1351,7 +1351,7 @@ function function_ce8e453c() {
   }
 }
 
-function private function_991034a3(ai, vehicle) {
+function private handle_vehicle_death(ai, vehicle) {
   ai endon(#"exiting_vehicle");
   vehicle waittill(#"death", #"entitydeleted");
 

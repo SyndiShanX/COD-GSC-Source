@@ -53,7 +53,7 @@ function function_5890c14e() {
   self savegame::set_player_data("saved_rig2_upgraded", undefined);
 }
 
-function function_bac6b417(equipment_name) {
+function isequipmentallowed(equipment_name) {
   if(isDefined(level.weapontacticalinsertion) && equipment_name == level.weapontacticalinsertion.name && level.disabletacinsert) {
     return false;
   }
@@ -80,7 +80,7 @@ function private function_5536bd9e() {
   self healthoverlay::restart_player_health_regen();
 }
 
-function giveloadout(team, weaponclass, var_d4a479a1) {
+function giveloadout(team, weaponclass, altplayer) {
   pixbeginevent(#"");
   defaultweapon = getweapon("ar_accurate_t9");
   self takeallweapons();
@@ -96,8 +96,8 @@ function giveloadout(team, weaponclass, var_d4a479a1) {
   self notify(#"give_map");
   self.class_num = 0;
   function_5536bd9e();
-  self.var_699ca781 = 0;
-  self.var_b204c655 = 0;
+  self.primaryweaponkill = 0;
+  self.secondaryweaponkill = 0;
   self.grenadetypeprimary = level.weaponnone;
   self.grenadetypeprimarycount = 0;
   self.grenadetypesecondary = level.weaponnone;
@@ -132,7 +132,7 @@ function isexplosivedamage(meansofdeath) {
   return false;
 }
 
-function function_88c673cf(player) {
+function hastacticalmask(player) {
   return player hasperk(#"specialty_stunprotection") || player hasperk(#"specialty_flashprotection") || player hasperk(#"specialty_proximityprotection");
 }
 

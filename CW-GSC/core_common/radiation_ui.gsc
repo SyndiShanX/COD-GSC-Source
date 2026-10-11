@@ -54,10 +54,10 @@ function function_59621e3c(player, sickness) {
   }
 
   var_d4393988 = player clientfield::get_to_player("radiation");
-  var_4e56b794 = var_d4393988 >> 3;
-  var_4e56b794 |= 1 << var_2ba8769e;
+  radiationsickness = var_d4393988 >> 3;
+  radiationsickness |= 1 << var_2ba8769e;
   var_66bba724 = radiationlevel;
-  var_d4393988 = var_4e56b794 << 3 | var_66bba724;
+  var_d4393988 = radiationsickness << 3 | var_66bba724;
   player clientfield::set_to_player("radiation", var_d4393988);
 }
 
@@ -91,9 +91,9 @@ function function_5cf1c0a(player, sickness) {
   }
 
   var_d4393988 = player clientfield::get_to_player("radiation");
-  var_4e56b794 = var_d4393988 >> 3;
-  var_4e56b794 &= ~(1 << var_2ba8769e);
-  var_d4393988 = var_4e56b794 << 3 | var_66bba724;
+  radiationsickness = var_d4393988 >> 3;
+  radiationsickness &= ~(1 << var_2ba8769e);
+  var_d4393988 = radiationsickness << 3 | var_66bba724;
   player clientfield::set_to_player("radiation", var_d4393988);
 }
 

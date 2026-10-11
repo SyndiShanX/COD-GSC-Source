@@ -119,13 +119,13 @@ function function_eb81be7e(attacker, weapon, shitloc, vpoint) {
   playFXOnTag("zm_weapons/fx9_aat_shatterblast_lvl5_aoe_trail", var_5309adad, "tag_origin");
   time1 = randomfloatrange(0.4, 0.7);
   time2 = randomfloatrange(0.4, 0.7);
-  var_846e9d0 = randomfloatrange(0.4, 0.7);
+  time3 = randomfloatrange(0.4, 0.7);
   var_ae78e48a thread function_a97aaed0(attacker, weapon, shitloc, var_624e473c);
   wait time1;
   var_3c3a800f thread function_a97aaed0(attacker, weapon, shitloc, var_6f76e171);
   wait time2;
   var_5309adad thread function_a97aaed0(attacker, weapon, shitloc, var_623746f2);
-  wait var_846e9d0;
+  wait time3;
 }
 
 function function_a97aaed0(attacker, weapon, shitloc, point) {

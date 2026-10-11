@@ -51,7 +51,7 @@ function logplayerevent(player, eventname) {
   zmplayerevents.currentscore = player.score;
   zmplayerevents.totalscore = player.score_total;
   zmplayerevents.beastmodeon = beastmodeactive;
-  function_92d1707f(#"hash_5bd2a2e3f75111c8", zmplayerevents);
+  function_92d1707f(#"dlog_event_zmplayerevents", zmplayerevents);
 }
 
 function logpurchaseevent(player, sellerent, cost, itemname, itemupgraded, itemtype, eventname) {
@@ -75,7 +75,7 @@ function logpurchaseevent(player, sellerent, cost, itemname, itemupgraded, itemt
   zmpurchases.playercurrentscore = sellerent.score;
   zmpurchases.playertotalscore = sellerent.score_total;
   zmpurchases.zone_name = sellerent.zone_name;
-  function_92d1707f(#"hash_22cb254982ca97dc", zmpurchases);
+  function_92d1707f(#"dlog_event_zmpurchases", zmpurchases);
 }
 
 function logpowerupevent(powerup, optplayer, eventname) {
@@ -97,7 +97,7 @@ function logpowerupevent(powerup, optplayer, eventname) {
   zmpowerups.eventname = eventname;
   zmpowerups.playerspawnid = playerspawnid;
   zmpowerups.playername = playername;
-  function_92d1707f(#"hash_7edbd2a2dee992e9", zmpowerups);
+  function_92d1707f(#"dlog_event_zmpowerups", zmpowerups);
 
   foreach(player in getPlayers()) {
     logplayerevent(player, "powerup_" + powerup.powerup_name + "_" + eventname);

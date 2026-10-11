@@ -62,16 +62,16 @@ function function_143fa1b9() {
   playerdata = {};
   playerdata.utc_connect_time_s = 0;
   playerdata.utc_disconnect_time_s = 0;
-  playerdata.var_37b8e421 = 0;
+  playerdata.connected_time_s = 0;
   utc = getutc();
 
   if(isDefined(self.pers[#"telemetry"].utc_connect_time_s)) {
     playerdata.utc_connect_time_s = self.pers[#"telemetry"].utc_connect_time_s;
     playerdata.utc_disconnect_time_s = utc;
-    playerdata.var_37b8e421 = utc - playerdata.utc_connect_time_s;
+    playerdata.connected_time_s = utc - playerdata.utc_connect_time_s;
   }
 
-  playerdata.var_6ba64843 = isDefined(self.doa.entnum) ? self.doa.entnum : 0;
+  playerdata.connect_index = isDefined(self.doa.entnum) ? self.doa.entnum : 0;
   playerdata.score = self.score;
   playerdata.kills = self.kills;
   playerdata.deaths = self.deaths;
@@ -80,8 +80,8 @@ function function_143fa1b9() {
   playerdata.downs = self.downs;
   playerdata.xp_at_start = isDefined(self.pers[#"telemetry"].xp_at_start) ? self.pers[#"telemetry"].xp_at_start : 0;
   playerdata.xp_at_end = self rank::getrankxp();
-  playerdata.var_9f177532 = isDefined(self.pers[#"telemetry"].var_9f177532) ? self.pers[#"telemetry"].var_9f177532 : 0;
-  playerdata.var_735f5996 = self rank::getrank();
+  playerdata.rank_at_start = isDefined(self.pers[#"telemetry"].rank_at_start) ? self.pers[#"telemetry"].rank_at_start : 0;
+  playerdata.rank_at_end = self rank::getrank();
   playerdata.var_161a9fc9 = 0;
 
   if(!is_true(level.gameended)) {
@@ -89,7 +89,7 @@ function function_143fa1b9() {
   }
 
   self function_678f57c8(#"hash_60754262dd09efac", playerdata);
-  self function_e5d9f30(playerdata.score, playerdata.kills, playerdata.deaths, playerdata.headshots, 0, playerdata.xp_at_start, playerdata.xp_at_end, playerdata.var_9f177532, playerdata.var_735f5996, level.doa.roundnumber, playerdata.var_37b8e421);
+  self function_e5d9f30(playerdata.score, playerdata.kills, playerdata.deaths, playerdata.headshots, 0, playerdata.xp_at_start, playerdata.xp_at_end, playerdata.rank_at_start, playerdata.rank_at_end, level.doa.roundnumber, playerdata.connected_time_s);
 }
 
 function function_72c32279() {
@@ -104,16 +104,16 @@ function function_72c32279() {
   matchstart.map = hash(util::get_map_name());
   matchstart.game_type = hash(level.gametype);
   matchstart.var_c8019fa4 = sessionmodeisprivateonlinegame();
-  matchstart.var_137fea24 = sessionmodeissystemlink();
+  matchstart.is_offline = sessionmodeissystemlink();
   matchstart.is_dedicated = isdedicated();
   matchstart.playlist_id = currentplaylistid();
   matchstart.playlist_name = hash(function_970f37d1());
-  matchstart.var_65dcfd4a = getdvarint(#"hash_4c63a0806012e032", 0);
+  matchstart.is_playtest = getdvarint(#"hash_4c63a0806012e032", 0);
   matchstart.var_a14949d8 = getdvarstring(#"hash_164a9a28628343ef", "");
   function_92d1707f(#"hash_2976350adaf61c93", matchstart);
 
   if(isDefined(game.telemetry)) {
-    game.telemetry.var_29d0de09 = function_f8d53445();
+    game.telemetry.round_start_time_ms = function_f8d53445();
   }
 
   level.doa.var_664849f3 = gettime();
@@ -133,16 +133,16 @@ function function_d519e318() {
   matchend.map = hash(util::get_map_name());
   matchend.game_type = hash(level.gametype);
   matchend.var_c8019fa4 = sessionmodeisprivateonlinegame();
-  matchend.var_137fea24 = sessionmodeissystemlink();
+  matchend.is_offline = sessionmodeissystemlink();
   matchend.is_dedicated = isdedicated();
   matchend.playlist_id = currentplaylistid();
   matchend.playlist_name = hash(function_970f37d1());
-  matchend.var_65dcfd4a = getdvarint(#"hash_4c63a0806012e032", 0);
+  matchend.is_playtest = getdvarint(#"hash_4c63a0806012e032", 0);
   matchend.var_a14949d8 = getdvarstring(#"hash_164a9a28628343ef", "");
   matchend.end_round = level.doa.roundnumber;
 
   if(isDefined(game.telemetry)) {
-    game.telemetry.var_36b58be2 = 1;
+    game.telemetry.match_ended = 1;
   }
 
   if(isDefined(game.telemetry.utc_start_time_s)) {
@@ -220,10 +220,10 @@ function initplayer() {
     self.pers[#"telemetry"].utc_connect_time_s = getutc();
     self.pers[#"telemetry"].connected = 1;
     self.pers[#"telemetry"].xp_at_start = self rank::getrankxp();
-    self.pers[#"telemetry"].var_9f177532 = self rank::getrank();
+    self.pers[#"telemetry"].rank_at_start = self rank::getrank();
     playerdata = {};
     playerdata.utc_connect_time_s = self.pers[#"telemetry"].utc_connect_time_s;
-    playerdata.var_6ba64843 = isDefined(self.doa.entnum) ? self.doa.entnum : 0;
+    playerdata.connect_index = isDefined(self.doa.entnum) ? self.doa.entnum : 0;
     playerdata.var_524ab934 = self function_d40f1a0e();
     playerdata.var_504e19f4 = self function_21f71ac8();
     playerdata.var_68441d6f = self function_325dc923();
@@ -322,7 +322,7 @@ function function_9cbd5b89(typemask) {
   }
 }
 
-function function_3f112727(commit = 1) {
+function bossdefeated(commit = 1) {
   if(is_true(level.doa.nostats)) {
     return;
   }
@@ -331,17 +331,17 @@ function function_3f112727(commit = 1) {
     return;
   }
 
-  if(!isDefined(self.doa.var_90e186f2)) {
-    self.doa.var_90e186f2 = 0;
+  if(!isDefined(self.doa.silverbackkills)) {
+    self.doa.silverbackkills = 0;
   }
 
-  self.doa.var_90e186f2++;
+  self.doa.silverbackkills++;
 
-  if(!isDefined(self.doa.var_5598fe58)) {
-    self.doa.var_5598fe58 = 0;
+  if(!isDefined(self.doa.silverbacks)) {
+    self.doa.silverbacks = 0;
   }
 
-  self.doa.var_5598fe58++;
+  self.doa.silverbacks++;
   val = stats::get_stat_global(#"hash_77660914e8c70a14");
 
   if(val == 0) {
@@ -852,10 +852,10 @@ function commitstats(gameover) {
     var_98285479 += self.doa.score.var_96798a01;
 
     if(var_c35ec960 >= 999999999) {
-      val = stats::get_stat_global(#"hash_40b4e16c1b39585");
+      val = stats::get_stat_global(#"doa_darkops_score");
 
       if(val == 0) {
-        self stats::function_dad108fa(#"hash_40b4e16c1b39585", 1);
+        self stats::function_dad108fa(#"doa_darkops_score", 1);
       }
     }
 
@@ -885,9 +885,9 @@ function commitstats(gameover) {
       self stats::inc_stat(self.doa.var_bcfd90a5, idx, #"deaths", self.doa.score.deaths);
       self globallogic_score::incpersstat(#"deaths", self.doa.score.deaths, 1, 1);
       self.doa.score.deaths = 0;
-      self stats::inc_stat(#"doaglobalstats", #"hash_30c3377dea0ec672", self.doa.var_90e186f2);
-      self stats::inc_stat(self.doa.var_bcfd90a5, idx, #"hash_16bf05d4f1efc4eb", self.doa.var_90e186f2);
-      self.doa.var_90e186f2 = 0;
+      self stats::inc_stat(#"doaglobalstats", #"hash_30c3377dea0ec672", self.doa.silverbackkills);
+      self stats::inc_stat(self.doa.var_bcfd90a5, idx, #"hash_16bf05d4f1efc4eb", self.doa.silverbackkills);
+      self.doa.silverbackkills = 0;
 
       if(level.doa.var_72b32209 === 1) {
         var_f0ac2041 = self stats::get_stat(#"doaglobalstats", #"hash_5a6bd78423046ffb");
@@ -996,7 +996,7 @@ function function_47498d07(gameover = 0, var_87786b84 = 0, var_5262eeaf = 0) {
 
 function function_d717ee7b() {
   self.doa.var_e46a9e57 = {
-    #round_number: 0, #var_89e0691d: self rank::getrankxp(), #var_967bd40d: 0, #var_832beab2: 0, #var_dded67ba: 0, #var_8f4c7e23: 0, #total_points: 0, #var_4b3c11c6: gettime(), #var_4b01218: 0, #lives: 0, #keys: 0, #var_e519217b: 0, #var_3ff9fc8: #"", #var_9a5b8400: #"", #var_827195e5: 0, #var_920f0053: 0, #var_52df118f: 0
+    #round_number: 0, #var_89e0691d: self rank::getrankxp(), #var_967bd40d: 0, #round_kills: 0, #var_dded67ba: 0, #var_8f4c7e23: 0, #total_points: 0, #var_4b3c11c6: gettime(), #var_4b01218: 0, #lives: 0, #keys: 0, #var_e519217b: 0, #var_3ff9fc8: #"", #var_9a5b8400: #"", #var_827195e5: 0, #var_920f0053: 0, #var_52df118f: 0
   };
 }
 
@@ -1014,7 +1014,7 @@ function function_ca0ffc09(var_87786b84, gameover, var_5262eeaf) {
       self.doa.var_e46a9e57.var_920f0053 = var_5262eeaf || isDefined(level.doa.var_a77e6349);
       self.doa.var_e46a9e57.var_52df118f = is_true(level.doa.advancedstart);
       self.doa.var_e46a9e57.var_242fdb49 = getdvarfloat(#"hash_351b291e47172d46", 1);
-      self.doa.var_e46a9e57.var_6db34ef = self.doa.score.var_194c59ae;
+      self.doa.var_e46a9e57.score_multiplier = self.doa.score.var_194c59ae;
       function_92d1707f(#"hash_3883bd1d3adcf11c", self.doa.var_e46a9e57);
       function_d717ee7b();
     }

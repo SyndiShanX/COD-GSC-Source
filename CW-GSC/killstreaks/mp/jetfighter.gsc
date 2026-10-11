@@ -139,7 +139,7 @@ function private function_4b3b25af(killstreak_id) {
   }
 
   targets = level function_ce402c10(bundle, team, var_d44b8c3e);
-  playSoundAtPosition(#"hash_2fbfd58a6c32dd81", var_ce2c18d3.origin);
+  playSoundAtPosition(#"mpl_jetfighter_flyover_boom", var_ce2c18d3.origin);
   var_ce2c18d3 function_c578ef61(targets, killstreak_id);
   wait 4;
 
@@ -505,18 +505,18 @@ function private function_f7961216() {
   self function_da1b219d();
 }
 
-function private function_c3c5d5e1(var_f7d31a7) {
-  foreach(jet in var_f7d31a7) {
+function private function_c3c5d5e1(jets) {
+  foreach(jet in jets) {
     jet killstreaks::configure_team("jetfighter", self.killstreak_id, self.owner, undefined, undefined, undefined);
     jet thread killstreaks::function_5a7ecb6b();
     jet clientfield::set("jetfighter_contrail", 1);
-    jet playLoopSound(#"hash_1245719ce362e37");
+    jet playLoopSound(#"veh_jetfighter_base");
   }
 
   scenelength = scene::function_12479eba(#"p9_fxanim_mp_jetfighter_bundle");
   wait scenelength - 1.5;
 
-  foreach(jet in var_f7d31a7) {
+  foreach(jet in jets) {
     if(isDefined(jet)) {
       jet clientfield::set("jetfighter_contrail", 0);
       jet thread killstreaks::outro_scaling();

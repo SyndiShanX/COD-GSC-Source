@@ -665,19 +665,19 @@ function traversesetup(behaviortreeentity, asmstatename) {
       }
 
       if(self.var_eae10402 >= 5) {
-        var_8d9b91de = function_9cc082d2(self.traversalendpos, 100);
+        teleport_point = function_9cc082d2(self.traversalendpos, 100);
 
-        if(isDefined(var_8d9b91de)) {
-          var_8d9b91de = var_8d9b91de[#"point"];
+        if(isDefined(teleport_point)) {
+          teleport_point = teleport_point[#"point"];
 
-          recordstar(var_8d9b91de, (1, 0.5, 0), "<dev string:x242>", self);
+          recordstar(teleport_point, (1, 0.5, 0), "<dev string:x242>", self);
         }
 
-        var_8d9b91de = isDefined(var_8d9b91de) ? var_8d9b91de : self.traversalendpos;
+        teleport_point = isDefined(teleport_point) ? teleport_point : self.traversalendpos;
 
-        recordstar(var_8d9b91de, (0, 0, 1), "<dev string:x242>", self);
+        recordstar(teleport_point, (0, 0, 1), "<dev string:x242>", self);
 
-        self forceteleport(var_8d9b91de, self.angles);
+        self forceteleport(teleport_point, self.angles);
         self.var_eae10402 = 0;
       }
 
@@ -769,9 +769,9 @@ function private function_37e22c7(entity) {
 }
 
 function function_c94f0d1(entity) {
-  var_55a3f1d3 = entity function_144f21ef();
+  strafeyaw = entity function_144f21ef();
 
-  if(var_55a3f1d3 < -60 || var_55a3f1d3 > 60) {
+  if(strafeyaw < -60 || strafeyaw > 60) {
     return false;
   }
 

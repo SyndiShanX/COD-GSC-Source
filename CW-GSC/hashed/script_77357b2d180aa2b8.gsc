@@ -85,7 +85,7 @@ function function_2a1e5c1f(origin, angles, modelname, type = 1, var_5653e2ee = 2
       }
 
       if(args.size > 5) {
-        door_model.var_5710d551 = args[5];
+        door_model.levelnote = args[5];
       }
     }
   }
@@ -110,19 +110,19 @@ function function_49957ef3(door, ignore = 1, activator) {
   door notify(#"hash_46e32085692bcb4b");
   door endon(#"death", #"hash_46e32085692bcb4b");
 
-  if(isDefined(door.var_5710d551)) {
-    level notify(door.var_5710d551, {
+  if(isDefined(door.levelnote)) {
+    level notify(door.levelnote, {
       #door: door, #activator: activator
     });
   }
 
   if(door.type == 4) {
-    door namespace_83eb6304::function_3ecfde67("magic_door_open");
+    door doa_fx::function_3ecfde67("magic_door_open");
     door notsolid();
     door namespace_e32bb68::function_3a59ec34("zmb_magic_door_open");
     door scene::play(#"hash_7898f4b9a394157e", door);
     door waittill(#"scenes_done");
-    door namespace_83eb6304::function_3ecfde67("magic_door_open");
+    door doa_fx::function_3ecfde67("magic_door_open");
     door namespace_ec06fe4a::function_8c808737();
     door connectpaths();
     wait 0.5;

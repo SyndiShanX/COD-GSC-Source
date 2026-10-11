@@ -80,13 +80,13 @@ function function_6192b162() {
 
 function jump_pad_amb_sound_lp(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self.var_c50612a2 = self playLoopSound(#"hash_67d068901551222c");
+    self.var_c50612a2 = self playLoopSound(#"evt_jumppad_amb_lp");
   }
 }
 
 function jump_pad_wind_sound(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self.var_dbe88563 = self playLoopSound(#"hash_296e1c756ae8ae2b");
+    self.var_dbe88563 = self playLoopSound(#"evt_jumppad_wind");
     self thread function_ca483953(fieldname);
     self thread function_6b3f6fa7(fieldname);
     self thread function_d80deb1d();

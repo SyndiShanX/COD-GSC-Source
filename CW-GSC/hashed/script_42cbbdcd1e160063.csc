@@ -28,7 +28,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_83eb6304;
+#namespace doa_fx;
 
 function init() {
   level.var_11c4dca4 = [];
@@ -49,8 +49,8 @@ function init() {
   level._effect[#"gib_fx"] = "zombie/fx_blood_torso_explo_zmb";
   level._effect[#"gibtrail_fx"] = "blood/fx_blood_trail_zmb";
   level._effect[#"zombie_guts_explosion"] = "zombie/fx_blood_torso_explo_lg_os_zmb";
-  level._effect[#"hash_551e1d0fcdb105e6"] = "zombie/fx_fire_arm_left_os_doa";
-  level._effect[#"hash_4b37c12194af9a3b"] = "zombie/fx_fire_arm_right_os_doa";
+  level._effect[#"fire_limb_left"] = "zombie/fx_fire_arm_left_os_doa";
+  level._effect[#"fire_limb_right"] = "zombie/fx_fire_arm_right_os_doa";
   level._effect[#"fire_torso"] = "zombie/fx_fire_torso_os_doa";
   level._effect[#"hash_1d9e53a201883cb"] = "doa/fx_fire_arm_left_purple_os_doa";
   level._effect[#"gem_trail_red"] = "doa/fx_trail_gem_red_doa";
@@ -142,7 +142,7 @@ function init() {
   level._effect[#"shadow_appear"] = "doa/fx_ai_raven_teleport_in";
   level._effect[#"shadow_die"] = "doa/fx_ai_raven_juke_out";
   level._effect[#"shadow_rez_in"] = "doa/fx_ai_dni_rez_in";
-  level._effect[#"hash_7fb19df63df2dd4c"] = "doa/fx_ai_dni_rez_out_clean";
+  level._effect[#"shadow_rez_out"] = "doa/fx_ai_dni_rez_out_clean";
   level._effect[#"shadow_emerge"] = "doa/fx_raven_teleport_doa";
   level._effect[#"shadow_glow"] = "doa/fx_glow_smokeman_doa";
   level._effect[#"heart_explode"] = "zombie/fx_blood_torso_explo_lg_os_zmb";
@@ -208,7 +208,7 @@ function init() {
   level._effect[#"water_boil_deathzone"] = "doa/fx9_water_boil_death_area_rnr";
   level._effect[#"remote_player_busy"] = "doa/fx9_marker_lightbulb";
   namespace_7e1ec234::function_10d1200d();
-  level.var_8056ac44 = array(level._effect[#"hash_551e1d0fcdb105e6"], level._effect[#"hash_4b37c12194af9a3b"], level._effect[#"fire_torso"], level._effect[#"hash_551e1d0fcdb105e6"], level._effect[#"hash_4b37c12194af9a3b"]);
+  level.var_8056ac44 = array(level._effect[#"fire_limb_left"], level._effect[#"fire_limb_right"], level._effect[#"fire_torso"], level._effect[#"fire_limb_left"], level._effect[#"fire_limb_right"]);
   level.var_75aaaa81 = array("j_elbow_le", "j_elbow_ri", "j_spine4", "j_knee_le", "j_knee_ri");
   level.gibresettime = 0.5;
   level.gibmaxcount = 3;
@@ -512,10 +512,10 @@ function function_d8c789b8(localclientnum, name, tag) {
       self zombie_gut_explosion(name);
       break;
     case #"saw_explode":
-      self function_e5d3c2b4(name);
+      self zombie_saw_explosion(name);
       break;
     case #"boost_explode":
-      self function_96d7f2e2(name);
+      self zombie_rhino_explosion(name);
       break;
     case #"delay_explode":
       self zombie_wait_explode(name);
@@ -541,7 +541,7 @@ function function_d8c789b8(localclientnum, name, tag) {
       var_5ccd914d = rotatepointaroundaxis((1, 0, 0), (0, 0, 1), currentangle);
       playFX(name, level._effect[#"pole_zombie_elecburst"], self.origin, var_5ccd914d, (0, 0, 1));
       break;
-    case #"hash_2488c7de86684bbd":
+    case #"cow_sacred":
       if(isDefined(self.var_a7bcf699[tag])) {
         foreach(fx in self.var_a7bcf699[tag]) {
           stopfx(name, fx);
@@ -549,11 +549,11 @@ function function_d8c789b8(localclientnum, name, tag) {
       }
 
       self.var_a7bcf699[tag] = [];
-      self.var_a7bcf699[tag][self.var_a7bcf699[tag].size] = util::playFXOnTag(name, level._effect[#"hash_2488c7de86684bbd"], self, "j_belly");
-      self.var_a7bcf699[tag][self.var_a7bcf699[tag].size] = util::playFXOnTag(name, level._effect[#"hash_2fbce616d1238481"], self, "j_ankle_le");
-      self.var_a7bcf699[tag][self.var_a7bcf699[tag].size] = util::playFXOnTag(name, level._effect[#"hash_2fbce616d1238481"], self, "j_ankle_ri");
-      self.var_a7bcf699[tag][self.var_a7bcf699[tag].size] = util::playFXOnTag(name, level._effect[#"hash_2fbce616d1238481"], self, "j_wrist_le");
-      self.var_a7bcf699[tag][self.var_a7bcf699[tag].size] = util::playFXOnTag(name, level._effect[#"hash_2fbce616d1238481"], self, "j_wrist_ri");
+      self.var_a7bcf699[tag][self.var_a7bcf699[tag].size] = util::playFXOnTag(name, level._effect[#"cow_sacred"], self, "j_belly");
+      self.var_a7bcf699[tag][self.var_a7bcf699[tag].size] = util::playFXOnTag(name, level._effect[#"cow_hoof"], self, "j_ankle_le");
+      self.var_a7bcf699[tag][self.var_a7bcf699[tag].size] = util::playFXOnTag(name, level._effect[#"cow_hoof"], self, "j_ankle_ri");
+      self.var_a7bcf699[tag][self.var_a7bcf699[tag].size] = util::playFXOnTag(name, level._effect[#"cow_hoof"], self, "j_wrist_le");
+      self.var_a7bcf699[tag][self.var_a7bcf699[tag].size] = util::playFXOnTag(name, level._effect[#"cow_hoof"], self, "j_wrist_ri");
       break;
     case #"shadow_appear":
       playFX(name, level._effect[#"shadow_appear"], self.origin);
@@ -563,7 +563,7 @@ function function_d8c789b8(localclientnum, name, tag) {
     case #"shadow_die":
       playFX(name, level._effect[#"shadow_fade"], self.origin);
       playFX(name, level._effect[#"heart_explode"], self.origin);
-      playFX(name, level._effect[#"hash_7fb19df63df2dd4c"], self.origin);
+      playFX(name, level._effect[#"shadow_rez_out"], self.origin);
       break;
     case #"hazard_electric_trap_active":
       if(isDefined(self.var_a7bcf699[tag])) {
@@ -646,7 +646,7 @@ function zombie_gut_explosion(localclientnum) {
   }
 }
 
-function function_e5d3c2b4(localclientnum) {
+function zombie_saw_explosion(localclientnum) {
   if(isDefined(level._effect[#"zombie_guts_explosion"]) && util::is_mature()) {
     where = self gettagorigin("J_SpineLower");
 
@@ -659,7 +659,7 @@ function function_e5d3c2b4(localclientnum) {
   }
 }
 
-function function_96d7f2e2(localclientnum) {
+function zombie_rhino_explosion(localclientnum) {
   if(isDefined(level._effect[#"gif_fx"]) && util::is_mature()) {
     where = self gettagorigin("J_SpineLower");
 
@@ -726,14 +726,14 @@ function function_8fd3b08d(localclientnum, mask) {
     return;
   }
 
-  if(!isDefined(self.var_48dac788)) {
-    self.var_48dac788 = 0;
+  if(!isDefined(self.lastburned)) {
+    self.lastburned = 0;
   }
 
-  if(gettime() < self.var_48dac788) {
+  if(gettime() < self.lastburned) {
     return;
   }
 
-  self.var_48dac788 = gettime() + getdvarint(#"hash_75f1994694418afc", 1500);
+  self.lastburned = gettime() + getdvarint(#"scr_doa_burn_interval", 1500);
   self function_9b1a8f91(localclientnum, mask);
 }

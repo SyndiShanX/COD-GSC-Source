@@ -15,11 +15,11 @@
 #using scripts\cp_common\util;
 #namespace cp_nam_prisoner_fx;
 
-function function_e5b8c5f(var_e5c02698) {
-  level.var_731c10af.paths[var_e5c02698].var_97ee53a9 = [];
-  array = level.var_731c10af.paths[var_e5c02698].var_97ee53a9;
+function function_e5b8c5f(path_name) {
+  level.var_731c10af.paths[path_name].var_97ee53a9 = [];
+  array = level.var_731c10af.paths[path_name].var_97ee53a9;
 
-  switch (var_e5c02698) {
+  switch (path_name) {
     case #"intro":
       break;
     case #"rice_paddies":
@@ -34,14 +34,14 @@ function function_e5b8c5f(var_e5c02698) {
     case #"waterfall_path":
       array[array.size] = "AmbFx_Waterfall_Path";
       break;
-    case #"hash_37049c08cb142cc7":
+    case #"creek_path":
       array[array.size] = "AmbFx_Creek_Path";
       array[array.size] = "AmbFx_Creek_Path_Waterfall";
       break;
-    case #"hash_5a141a81a5112819":
+    case #"river_path":
       array[array.size] = "AmbFx_River_Path";
       break;
-    case #"hash_40947083f371555e":
+    case #"bridge_path":
       break;
     case #"sniper_overlook":
       array[array.size] = "AmbFx_Sniper_Overlook";
@@ -63,13 +63,13 @@ function function_e5b8c5f(var_e5c02698) {
   }
 }
 
-function function_158c95d7(var_e5c02698) {
+function function_158c95d7(path_name) {
   while(true) {
-    if(!level flag::get("flag_fx_exploder_start_" + var_e5c02698)) {
-      level flag::wait_till("flag_fx_exploder_start_" + var_e5c02698);
-      level flag::clear("flag_fx_exploder_end_" + var_e5c02698);
+    if(!level flag::get("flag_fx_exploder_start_" + path_name)) {
+      level flag::wait_till("flag_fx_exploder_start_" + path_name);
+      level flag::clear("flag_fx_exploder_end_" + path_name);
 
-      foreach(exploder_string in level.var_731c10af.paths[var_e5c02698].var_97ee53a9) {
+      foreach(exploder_string in level.var_731c10af.paths[path_name].var_97ee53a9) {
         exploder::exploder(exploder_string);
         waitframe(1);
       }
@@ -77,11 +77,11 @@ function function_158c95d7(var_e5c02698) {
 
     waitframe(1);
 
-    if(!level flag::get("flag_fx_exploder_end_" + var_e5c02698)) {
-      level flag::wait_till("flag_fx_exploder_end_" + var_e5c02698);
-      level flag::clear("flag_fx_exploder_start_" + var_e5c02698);
+    if(!level flag::get("flag_fx_exploder_end_" + path_name)) {
+      level flag::wait_till("flag_fx_exploder_end_" + path_name);
+      level flag::clear("flag_fx_exploder_start_" + path_name);
 
-      foreach(exploder_string in level.var_731c10af.paths[var_e5c02698].var_97ee53a9) {
+      foreach(exploder_string in level.var_731c10af.paths[path_name].var_97ee53a9) {
         exploder::stop_exploder(exploder_string);
         waitframe(1);
       }
@@ -110,10 +110,10 @@ function function_65ad625d(exploder, state) {
 function function_20aac67e() {
   level.var_ebdc56a7 = [];
   level.var_ebdc56a7[level.var_ebdc56a7.size] = "maps/cp_prisoner/fx9_prisoner_ambwar_gren_water_01";
-  namespace_9fe28d6e::create("ambwar_grp_rpad_water", level.var_ebdc56a7, 1, 2.5, 600, 2000);
-  namespace_9fe28d6e::start("ambwar_grp_rpad_water");
+  vfx_ambientwar::create("ambwar_grp_rpad_water", level.var_ebdc56a7, 1, 2.5, 600, 2000);
+  vfx_ambientwar::start("ambwar_grp_rpad_water");
   level flag::wait_till_any(array("rice_paddies_enemies_dead", "rice_paddies_final_retreat", "flag_jungle_path"));
-  namespace_9fe28d6e::stop("ambwar_grp_rpad_water");
+  vfx_ambientwar::stop("ambwar_grp_rpad_water");
 }
 
 function function_f5f449bd() {
@@ -122,18 +122,18 @@ function function_f5f449bd() {
   level.var_42d51557 = [];
   level.var_42d51557[level.var_42d51557.size] = "maps/cp_prisoner/fx9_prisoner_ambwar_gren_mud_01";
   level.var_42d51557[level.var_42d51557.size] = "maps/cp_prisoner/fx9_prisoner_ambwar_gren_dirt_01";
-  namespace_9fe28d6e::create("ambwar_grp_vlg_int_stg1", level.var_eff9e015, 3, 4.5, 700, 1000);
-  namespace_9fe28d6e::create("ambwar_grp_vlg_ext_stg1", level.var_42d51557, 2.5, 3.5, 700, 1000);
-  namespace_9fe28d6e::create("ambwar_grp_vlg_int_stg2", level.var_eff9e015, 3, 4.5, 700, 1000);
-  namespace_9fe28d6e::create("ambwar_grp_vlg_ext_stg2", level.var_42d51557, 2.5, 3.5, 700, 1000);
-  namespace_9fe28d6e::start("ambwar_grp_vlg_int_stg1");
-  namespace_9fe28d6e::start("ambwar_grp_vlg_ext_stg1");
-  namespace_9fe28d6e::start("ambwar_grp_vlg_int_stg2");
-  namespace_9fe28d6e::start("ambwar_grp_vlg_ext_stg2");
+  vfx_ambientwar::create("ambwar_grp_vlg_int_stg1", level.var_eff9e015, 3, 4.5, 700, 1000);
+  vfx_ambientwar::create("ambwar_grp_vlg_ext_stg1", level.var_42d51557, 2.5, 3.5, 700, 1000);
+  vfx_ambientwar::create("ambwar_grp_vlg_int_stg2", level.var_eff9e015, 3, 4.5, 700, 1000);
+  vfx_ambientwar::create("ambwar_grp_vlg_ext_stg2", level.var_42d51557, 2.5, 3.5, 700, 1000);
+  vfx_ambientwar::start("ambwar_grp_vlg_int_stg1");
+  vfx_ambientwar::start("ambwar_grp_vlg_ext_stg1");
+  vfx_ambientwar::start("ambwar_grp_vlg_int_stg2");
+  vfx_ambientwar::start("ambwar_grp_vlg_ext_stg2");
   level flag::wait_till_any(array("flag_village_start_wave_03"));
-  namespace_9fe28d6e::stop("ambwar_grp_vlg_int_stg1");
-  namespace_9fe28d6e::stop("ambwar_grp_vlg_ext_stg1");
+  vfx_ambientwar::stop("ambwar_grp_vlg_int_stg1");
+  vfx_ambientwar::stop("ambwar_grp_vlg_ext_stg1");
   level flag::wait_till_any(array("village_heli_missile"));
-  namespace_9fe28d6e::stop("ambwar_grp_vlg_int_stg2");
-  namespace_9fe28d6e::stop("ambwar_grp_vlg_ext_stg2");
+  vfx_ambientwar::stop("ambwar_grp_vlg_int_stg2");
+  vfx_ambientwar::stop("ambwar_grp_vlg_ext_stg2");
 }

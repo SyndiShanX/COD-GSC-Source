@@ -17,7 +17,7 @@
 #namespace vehicle_death;
 
 function private event_handler[createstruct] function_e0a8e4ba(struct) {
-  foreach(var_74ab9700, k in ["script_crashpath_scene"]) {
+  foreach(__k18, k in ["script_crashpath_scene"]) {
     if(!isDefined(level.var_41204f29)) {
       level.var_41204f29 = [];
     } else if(!isarray(level.var_41204f29)) {
@@ -587,12 +587,12 @@ function helicopter_collision() {
 }
 
 function play_crashing_loop() {
-  var_cc04d521 = #"hash_624d3da70bb7d2f";
+  var_cc04d521 = #"exp_veh_chopper_spinout";
 
   if(isDefined(self.vehicletype)) {
     switch (self.vehicletype) {
       case #"hash_10e49116dd0a922f":
-        var_cc04d521 = #"hash_4b5b2baa68a0e53b";
+        var_cc04d521 = #"exp_veh_hoverjet_spinout";
         break;
     }
   }
@@ -602,7 +602,7 @@ function play_crashing_loop() {
   ent linkTo(self);
   ent playLoopSound(var_cc04d521);
   self waittill(#"death", #"snd_impact");
-  ent playSound(#"hash_626995667a4ff5c");
+  ent playSound(#"exp_veh_chopper");
   ent delete();
 }
 

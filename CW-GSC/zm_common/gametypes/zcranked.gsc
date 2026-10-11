@@ -107,7 +107,7 @@ function event_handler[gametype_init] main(eventstruct) {
   callback::add_callback(#"hash_3b7d3ed9e484ef72", &give_match_bonus);
   callback::on_spawned(&on_player_spawn);
   callback::on_revived(&on_player_revived);
-  callback::on_actor_killed(&function_b3791df9);
+  callback::on_actor_killed(&on_zombie_killed);
   callback::on_actor_damage(&function_3d2684c5);
 }
 
@@ -299,8 +299,8 @@ function function_b03d7dd0(round) {
 
 function on_round_end() {
   playSoundAtPosition(#"hash_409b69424385812a", (0, 0, 0));
-  var_370ac26d = zm::function_d3113f01().var_bd588afd;
-  luinotifyevent(#"hash_3e6dd0ad7b864154", 1, var_370ac26d);
+  xp_gain = zm::function_d3113f01().var_bd588afd;
+  luinotifyevent(#"hash_3e6dd0ad7b864154", 1, xp_gain);
 
   foreach(player in getPlayers()) {
     if(!isDefined(player.var_8d41c907)) {
@@ -308,8 +308,8 @@ function on_round_end() {
     }
 
     if(zm_utility::function_1a01f2f7(player)) {
-      player addrankxpvalue("round_end_xp", var_370ac26d, 4);
-      player.var_8d41c907 -= var_370ac26d;
+      player addrankxpvalue("round_end_xp", xp_gain, 4);
+      player.var_8d41c907 -= xp_gain;
     }
 
     if(!isDefined(player.var_a160c21d) || player.var_a160c21d === 0) {
@@ -376,16 +376,16 @@ function give_match_bonus(data) {
 
     var_103c65cc = player.var_8d41c907;
     var_7a7b21ad = player zm_round_logic::function_f4c57bbe();
-    var_370ac26d = var_103c65cc + var_7a7b21ad;
-    var_370ac26d = int(max(var_370ac26d, 0));
+    xp_gain = var_103c65cc + var_7a7b21ad;
+    xp_gain = int(max(xp_gain, 0));
 
     if(zm_utility::get_round_number() > 3) {
-      var_370ac26d = int(max(var_370ac26d, randomintrangeinclusive(1000, 1250)));
+      xp_gain = int(max(xp_gain, randomintrangeinclusive(1000, 1250)));
     }
 
-    player zm::function_78e7b549(var_370ac26d);
+    player zm::function_78e7b549(xp_gain);
 
-    println("<dev string:x72>" + player getentnum() + "<dev string:x8b>" + player.name + "<dev string:x91>" + var_370ac26d);
+    println("<dev string:x72>" + player getentnum() + "<dev string:x8b>" + player.name + "<dev string:x91>" + xp_gain);
     println("<dev string:x99>" + var_22ba849f);
     println("<dev string:xa6>" + var_103c65cc);
     println("<dev string:xbb>" + var_7a7b21ad);
@@ -493,8 +493,8 @@ function private function_3d2684c5(params) {
   }
 }
 
-function private function_b3791df9(params) {
-  if(is_true(self.var_c39323b5)) {
+function private on_zombie_killed(params) {
+  if(is_true(self.b_cleaned_up)) {
     return;
   }
 

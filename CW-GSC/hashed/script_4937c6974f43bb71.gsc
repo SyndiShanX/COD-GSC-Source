@@ -7,8 +7,8 @@
 #using scripts\cp_common\gametypes\globallogic_ui;
 #namespace namespace_82bfe441;
 
-function fade(var_564144a4, var_b8e08e16 = "FadeImmediate", var_ee0e1f8 = 0) {
-  globallogic_ui::function_9ed5232e("hudItems.cpHudFadeControl.fadeSpeed", var_b8e08e16);
-  globallogic_ui::function_9ed5232e("hudItems.cpHudFadeControl.customFadeSpeed", var_ee0e1f8);
-  globallogic_ui::function_9ed5232e("hudItems.cpHudFadeControl.doFadeOut", var_564144a4);
+function fade(dofadeout, fadespeed = "FadeImmediate", customfadespeed = 0) {
+  globallogic_ui::function_9ed5232e("hudItems.cpHudFadeControl.fadeSpeed", fadespeed);
+  globallogic_ui::function_9ed5232e("hudItems.cpHudFadeControl.customFadeSpeed", customfadespeed);
+  globallogic_ui::function_9ed5232e("hudItems.cpHudFadeControl.doFadeOut", dofadeout);
 }

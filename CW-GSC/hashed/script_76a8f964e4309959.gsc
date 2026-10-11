@@ -143,11 +143,11 @@ function function_9f679c3c() {
 function function_5e09bd0f() {
   self endon(#"death", #"entitydeleted", #"endambientvox");
   wait 1.1;
-  self playsoundontag(#"hash_65eb1e22e2f9a826", "j_head");
+  self playsoundontag(#"zmb_vocals_tormentor_spawn", "j_head");
   wait 2;
 
   while(true) {
-    self playsoundontag(#"hash_a3c5d5d69e0fc95", "j_head");
+    self playsoundontag(#"zmb_vocals_tormentor_ambient", "j_head");
     wait randomfloatrange(1.9, 2.4);
   }
 }

@@ -82,5 +82,5 @@ function supply_drop_portal_fx(localclientnum, oldval, newval, bnewent, binitial
 
 function supply_drop_vehicle_landed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self playRumbleOnEntity(bwastimejump, #"hash_6ee3e7be4dd47bed");
-  self playSound(0, #"hash_531aa4857265e186");
+  self playSound(0, #"evt_supply_drop_ground");
 }

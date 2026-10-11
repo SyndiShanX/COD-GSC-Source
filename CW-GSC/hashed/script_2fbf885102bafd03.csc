@@ -64,7 +64,7 @@ function function_41109d42(localclientnum, oldval, newval, bnewent, binitialsnap
   assert(fieldname >= 0 && fieldname <= 1);
   var_eb6dbadd = bwastimejump & 15;
   entnum = bwastimejump >> 4;
-  color = namespace_7f5aeb59::function_144f26b2(entnum);
+  color = doa_player_utility::function_144f26b2(entnum);
 
   switch (entnum) {
     case 0:
@@ -218,7 +218,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       var_8d552f67.y = 280;
       var_8d552f67.timeout = 25;
 
-      if(isDefined(level.doa) && isDefined(level.doa.var_72b899ad) && level.doa.var_72b899ad.script_noteworthy == #"wintercave") {
+      if(isDefined(level.doa) && isDefined(level.doa.current_arena) && level.doa.current_arena.script_noteworthy == #"wintercave") {
         var_8d552f67.timeout = 9999;
       }
 
@@ -372,7 +372,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
     case 22:
     case 23:
     case 28:
-      level thread namespace_9fc66ac::announce(fieldname, 19);
+      level thread doa_sound::announce(fieldname, 19);
       var_936d31f7 = spawnStruct();
       var_936d31f7.text = #"hash_30cfa520b05f1c31";
       assert(isDefined(var_936d31f7.text));
@@ -394,7 +394,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
     case 24:
     case 27:
     case 26:
-      level thread namespace_9fc66ac::announce(fieldname, 12);
+      level thread doa_sound::announce(fieldname, 12);
       var_936d31f7 = spawnStruct();
       var_936d31f7.text = #"hash_7baa5fa3bb1a720b";
       assert(isDefined(var_936d31f7.text));
@@ -847,7 +847,7 @@ function function_9a92c603(localclientnum, var_150143d0) {
   }
 
   if(isDefined(var_150143d0.announce)) {
-    level thread namespace_9fc66ac::announce(localclientnum, var_150143d0.announce);
+    level thread doa_sound::announce(localclientnum, var_150143d0.announce);
   }
 
   if(!self doa_textelement::is_open(localclientnum) && isDefined(text)) {

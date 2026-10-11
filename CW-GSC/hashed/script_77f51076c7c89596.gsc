@@ -31,8 +31,8 @@ function spawn_allies(var_1ace1e2) {
     }
   }
 
-  var_5ca6956f = getweapon(#"smg_standard_t9");
-  level.adler hms_util::function_65d14a19(var_5ca6956f);
+  w_smg = getweapon(#"smg_standard_t9");
+  level.adler hms_util::function_65d14a19(w_smg);
 
   if(!isDefined(level.mason)) {
     hms_util::function_ee1d1df6("mason", "Mason");
@@ -42,8 +42,8 @@ function spawn_allies(var_1ace1e2) {
     }
   }
 
-  var_f0935a68 = getweapon(#"ar_accurate_t9");
-  level.mason hms_util::function_65d14a19(var_f0935a68);
+  w_ar = getweapon(#"ar_accurate_t9");
+  level.mason hms_util::function_65d14a19(w_ar);
 
   if(!isDefined(level.woods)) {
     hms_util::function_ee1d1df6("woods", "Woods");
@@ -53,8 +53,8 @@ function spawn_allies(var_1ace1e2) {
     }
   }
 
-  var_f0935a68 = getweapon(#"ar_accurate_t9");
-  level.woods hms_util::function_65d14a19(var_f0935a68);
+  w_ar = getweapon(#"ar_accurate_t9");
+  level.woods hms_util::function_65d14a19(w_ar);
   level.sims = getEnt("e_sims_proxy", "targetname");
   level.sims.name = "Sims";
   level.sims.team = "allies";
@@ -75,7 +75,7 @@ function function_980c6cc6(ai_ally, var_1ace1e2) {
   }
 }
 
-function function_6e9256df() {
+function set_loadout() {
   if(!isDefined(level.player)) {
     level.player = self;
   }
@@ -94,18 +94,18 @@ function function_6e9256df() {
   w_secondary = getweapon(#"shotgun_pump_t9", "barrel", "elo", "extclip2");
   var_dc8a1ef2 = getweapon(#"hash_154127ac67af815e", "steadyaim", "fastreload");
   w_lethal = getweapon(#"frag_grenade");
-  var_2586eb45 = getweapon(#"willy_pete");
+  w_tactical = getweapon(#"willy_pete");
   var_dc8a1ef2.var_4d97c40b = 1;
   var_dc8a1ef2.var_a2e7031d = 1;
   level.player giveweapon(w_primary);
   level.player giveweapon(w_secondary);
   level.player giveweapon(var_dc8a1ef2);
   level.player giveweapon(w_lethal);
-  level.player giveweapon(var_2586eb45);
+  level.player giveweapon(w_tactical);
   level.player givemaxammo(w_primary);
   level.player givemaxammo(w_secondary);
   level.player givemaxammo(w_lethal);
-  level.player givemaxammo(var_2586eb45);
+  level.player givemaxammo(w_tactical);
   level.player switchtoweapon(w_primary);
 }
 
@@ -132,12 +132,12 @@ function function_7149a8() {
   level.player setweaponammoclip(var_dc8a1ef2, 36);
 }
 
-function function_b5e4f3bc(var_8be63fee, var_30fe31f7, var_b2d7eb20 = "targetname", b_shoot = 1, b_should_sprint = 0) {
-  assert(isDefined(var_8be63fee), "<dev string:x54>");
+function function_b5e4f3bc(str_ai_group, var_30fe31f7, str_volume_key = "targetname", b_shoot = 1, b_should_sprint = 0) {
+  assert(isDefined(str_ai_group), "<dev string:x54>");
   assert(isDefined(var_30fe31f7), "<dev string:x74>");
-  var_cf2dc0e8 = getEnt(var_30fe31f7, var_b2d7eb20);
+  var_cf2dc0e8 = getEnt(var_30fe31f7, str_volume_key);
   assert(isDefined(var_cf2dc0e8), var_30fe31f7 + "<dev string:x97>");
-  var_63bea14 = spawner::get_ai_group_ai(var_8be63fee);
+  var_63bea14 = spawner::get_ai_group_ai(str_ai_group);
 
   if(isDefined(var_63bea14)) {
     array::thread_all(var_63bea14, &ai::force_goal, var_cf2dc0e8, b_shoot, undefined, undefined, b_should_sprint);
@@ -148,9 +148,9 @@ function function_da412d49(var_1e598384) {
   assert(isarray(var_1e598384), "<dev string:xa9>");
   a_ai = [];
 
-  foreach(var_8be63fee in var_1e598384) {
-    assert(isstring(var_8be63fee), "<dev string:xcb>");
-    a_ai = arraycombine(a_ai, spawner::get_ai_group_ai(var_8be63fee));
+  foreach(str_ai_group in var_1e598384) {
+    assert(isstring(str_ai_group), "<dev string:xcb>");
+    a_ai = arraycombine(a_ai, spawner::get_ai_group_ai(str_ai_group));
   }
 
   return a_ai;
@@ -207,13 +207,13 @@ function function_c5063901(var_91eb2583) {
     v_from = (self.var_a2d4664b.origin[0] + randomintrange(-1 * int(cos(10) * 100), int(cos(10) * 100)), self.var_a2d4664b.origin[1] + randomintrange(int(cos(10) * 100) * -1, int(cos(10) * 100)), self.var_a2d4664b.origin[2] + 100);
     v_to = (self.var_a2d4664b.origin[0] + randomintrange(-1 * int(cos(10) * 100), int(cos(10) * 100)), self.var_a2d4664b.origin[1] + randomintrange(int(cos(10) * 100) * -1, int(cos(10) * 100)), self.var_a2d4664b.origin[2] + 100);
     n_shots = randomintrange(7, 21);
-    self function_beb5d779(v_from, v_to, n_shots, var_91eb2583);
-    var_30aa35ed = randomfloatrange(1, 5);
-    wait var_30aa35ed;
+    self aa_fire(v_from, v_to, n_shots, var_91eb2583);
+    n_pause = randomfloatrange(1, 5);
+    wait n_pause;
   }
 }
 
-function function_beb5d779(v_from, v_to, n_shots, var_91eb2583) {
+function aa_fire(v_from, v_to, n_shots, var_91eb2583) {
   level endon("end_" + var_91eb2583);
 
   for(i = 0; i < n_shots; i++) {
@@ -383,13 +383,13 @@ function function_f547cd72(var_959e2242) {
 
 function function_9f9e880e() {
   wait 0.5;
-  uid = level namespace_61e6d095::create_waypoint("c4", self, #"hud_icon_c4", undefined, (0, 0, 10), undefined, 0);
-  namespace_61e6d095::function_fdb73881(uid, 0, 750);
-  namespace_61e6d095::set_state(uid, 1);
+  uid = level scripted_widgets::create_waypoint("c4", self, #"hud_icon_c4", undefined, (0, 0, 10), undefined, 0);
+  scripted_widgets::function_fdb73881(uid, 0, 750);
+  scripted_widgets::set_state(uid, 1);
   level waittill(#"hud_icon_c4_red");
-  namespace_61e6d095::function_309bf7c2(uid, #"hud_icon_c4_red");
+  scripted_widgets::function_309bf7c2(uid, #"hud_icon_c4_red");
   level waittill(#"hash_4135b76d6e69e9ef");
-  namespace_61e6d095::remove(uid);
+  scripted_widgets::remove(uid);
 }
 
 function play_concussion_sound() {
@@ -430,27 +430,27 @@ function function_7bd54d9c(v_center, v_angle) {
   leader playSound(#"mpl_lightning_flyover_boom");
   right = anglestoright(leader.angles);
   forward = anglesToForward(leader.angles);
-  var_391cdbb7 = spawn("script_model", leader.origin + right * -777 + forward * -777);
-  var_391cdbb7.angles = leader.angles;
-  var_391cdbb7 setModel("veh_t8_mil_air_jet_fighter_mp_light");
-  var_391cdbb7 clientfield::set("planemortar_contrail", 1);
-  var_94e09305 = spawn("script_model", leader.origin + right * 2 * -777 + forward * 2 * -777);
-  var_94e09305.angles = leader.angles;
-  var_94e09305 setModel("veh_t8_mil_air_jet_fighter_mp_light");
-  var_94e09305 clientfield::set("planemortar_contrail", 1);
-  var_283227ae = spawn("script_model", leader.origin + right * -1 * -777 + forward * -777);
-  var_283227ae.angles = leader.angles;
-  var_283227ae setModel("veh_t8_mil_air_jet_fighter_mp_light");
-  var_283227ae clientfield::set("planemortar_contrail", 1);
-  var_a838a7c1 = spawn("script_model", leader.origin + right * -2 * -777 + forward * 2 * -777);
-  var_a838a7c1.angles = leader.angles;
-  var_a838a7c1 setModel("veh_t8_mil_air_jet_fighter_mp_light");
-  var_a838a7c1 clientfield::set("planemortar_contrail", 1);
+  right_1 = spawn("script_model", leader.origin + right * -777 + forward * -777);
+  right_1.angles = leader.angles;
+  right_1 setModel("veh_t8_mil_air_jet_fighter_mp_light");
+  right_1 clientfield::set("planemortar_contrail", 1);
+  right_2 = spawn("script_model", leader.origin + right * 2 * -777 + forward * 2 * -777);
+  right_2.angles = leader.angles;
+  right_2 setModel("veh_t8_mil_air_jet_fighter_mp_light");
+  right_2 clientfield::set("planemortar_contrail", 1);
+  left_1 = spawn("script_model", leader.origin + right * -1 * -777 + forward * -777);
+  left_1.angles = leader.angles;
+  left_1 setModel("veh_t8_mil_air_jet_fighter_mp_light");
+  left_1 clientfield::set("planemortar_contrail", 1);
+  left_2 = spawn("script_model", leader.origin + right * -2 * -777 + forward * 2 * -777);
+  left_2.angles = leader.angles;
+  left_2 setModel("veh_t8_mil_air_jet_fighter_mp_light");
+  left_2 clientfield::set("planemortar_contrail", 1);
   leader moveTo(leader.origin + forward * 70000, 10, 0, 0);
-  var_391cdbb7 moveTo(var_391cdbb7.origin + anglesToForward(var_391cdbb7.angles) * 70000, 10, 0, 0);
-  var_94e09305 moveTo(var_94e09305.origin + anglesToForward(var_94e09305.angles) * 70000, 10, 0, 0);
-  var_283227ae moveTo(var_283227ae.origin + anglesToForward(var_283227ae.angles) * 70000, 10, 0, 0);
-  var_a838a7c1 moveTo(var_a838a7c1.origin + anglesToForward(var_a838a7c1.angles) * 70000, 10, 0, 0);
+  right_1 moveTo(right_1.origin + anglesToForward(right_1.angles) * 70000, 10, 0, 0);
+  right_2 moveTo(right_2.origin + anglesToForward(right_2.angles) * 70000, 10, 0, 0);
+  left_1 moveTo(left_1.origin + anglesToForward(left_1.angles) * 70000, 10, 0, 0);
+  left_2 moveTo(left_2.origin + anglesToForward(left_2.angles) * 70000, 10, 0, 0);
 }
 
 function function_d8bbc9ee(str_targetname, var_1f74a2ae) {

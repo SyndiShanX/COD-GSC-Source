@@ -28,7 +28,7 @@ function private link_to_camera(localclientnum, oldval, newval, bnewent, binitia
   }
 
   self notify(#"hash_97425a408a077df");
-  self function_a052b638();
+  self unlinkfromcamera();
 }
 
 function private fake_ads(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -59,7 +59,7 @@ function private function_bd9c7275(oldtype, newtype) {
   self endon(#"hash_97425a408a077df");
 
   if(is_true(oldtype) && is_true(newtype) && oldtype != newtype) {
-    self function_a052b638();
+    self unlinkfromcamera();
   }
 
   if((isDefined(newtype) ? newtype : 1) == 2) {
@@ -69,5 +69,5 @@ function private function_bd9c7275(oldtype, newtype) {
   }
 
   self waittill(#"death", #"entitydeleted");
-  self function_a052b638();
+  self unlinkfromcamera();
 }

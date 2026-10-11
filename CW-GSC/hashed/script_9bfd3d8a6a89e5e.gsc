@@ -68,7 +68,7 @@ function function_e3e4c03c(action, body) {
     return;
   }
 
-  bb::function_cd497743("bodyshield_grab", self);
+  bb::logplayermapnotification("bodyshield_grab", self);
   victim_scene = self actions::function_abaa32c("body_shield");
 
   if(!isDefined(victim_scene)) {
@@ -81,7 +81,7 @@ function function_e3e4c03c(action, body) {
 
   self flag::set("body_shield_active");
   self flag::set("body_shield_gun_up");
-  self thread function_257c21b5(action);
+  self thread player_body_shield_cleanup(action);
   self.var_d3b4e4f4 = &function_fc288808;
   self.var_852e84c9 = &actions::function_e972f9a5;
 
@@ -106,7 +106,7 @@ function function_e3e4c03c(action, body) {
   }
 
   for(i = 0; i < body getattachsize(); i++) {
-    self.takedown.body_shield.var_cf230c0[i] = body getattachmodelname(i);
+    self.takedown.body_shield.attach_model[i] = body getattachmodelname(i);
     self.takedown.body_shield.attach_tag[i] = body getattachtagname(i);
   }
 
@@ -119,7 +119,7 @@ function function_e3e4c03c(action, body) {
     self.takedown.body.animname = "generic";
   }
 
-  self.takedown.body.var_69defa17 = 1;
+  self.takedown.body.takedown_live = 1;
   self.takedown.body show();
   self.takedown.body util::delay(0.2, undefined, &prompts::remove_group, #"actions");
   self util::delay(0.5, undefined, &function_40622d99);
@@ -237,10 +237,10 @@ function function_756e29bb(action, anim_name, var_c09e9b1c, var_d60fb210, var_2e
 
   while(true) {
     adspressed = self action_utility::function_29fd0abd();
-    var_fcd67307 = self action_utility::function_bda1ed48();
+    iswalking = self action_utility::is_walking();
     doreload = self function_1dcff2c3(weapon);
 
-    if(!doreload && (adspressed !== self.var_de5476af || var_fcd67307 !== self.var_a7f1f0d6)) {
+    if(!doreload && (adspressed !== self.var_de5476af || iswalking !== self.var_a7f1f0d6)) {
       var_adb7de30 = undefined;
 
       if(adspressed !== self.var_de5476af) {
@@ -262,7 +262,7 @@ function function_756e29bb(action, anim_name, var_c09e9b1c, var_d60fb210, var_2e
       }
 
       self.var_de5476af = adspressed;
-      self.var_a7f1f0d6 = var_fcd67307;
+      self.var_a7f1f0d6 = iswalking;
 
       if(!is_true(var_2e7da7fb)) {
         transtime = 0.2;
@@ -375,7 +375,7 @@ function function_8ebed231(action) {
 
 function function_501ef65d(weapon) {
   self action_utility::allow_weapon(0, undefined, "ges_body_shield_reload");
-  var_5a130b17 = self getweaponammostock(weapon);
+  ammo_in_stock = self getweaponammostock(weapon);
   ammo_in_clip = self getweaponammoclip(weapon);
   wait 0.5;
 
@@ -406,11 +406,11 @@ function function_501ef65d(weapon) {
       break;
   }
 
-  delta = min(var_5a130b17, weapon.clipsize - ammo_in_clip);
+  delta = min(ammo_in_stock, weapon.clipsize - ammo_in_clip);
 
   if(self hasweapon(weapon)) {
     self setweaponammoclip(weapon, int(ammo_in_clip + delta));
-    self setweaponammostock(weapon, int(var_5a130b17 - delta));
+    self setweaponammostock(weapon, int(ammo_in_stock - delta));
   }
 
   self action_utility::allow_weapon(1);
@@ -427,9 +427,9 @@ function function_1dcff2c3(weapon) {
 
   clip_size = weapon.clipsize;
   ammo_in_clip = self getweaponammoclip(weapon);
-  var_5a130b17 = self getweaponammostock(weapon);
-  var_b8b29a85 = var_5a130b17 > 0 && ammo_in_clip < clip_size;
-  self.takedown.showreload = var_b8b29a85 && ammo_in_clip < clip_size * 0.33;
+  ammo_in_stock = self getweaponammostock(weapon);
+  canreload = ammo_in_stock > 0 && ammo_in_clip < clip_size;
+  self.takedown.showreload = canreload && ammo_in_clip < clip_size * 0.33;
 
   if(ammo_in_clip == 0) {
     self.takedown.var_6cf436f += float(function_60d95f53()) / 1000;
@@ -437,7 +437,7 @@ function function_1dcff2c3(weapon) {
     self.takedown.var_6cf436f = 0;
   }
 
-  doreload = var_b8b29a85 && (self.takedown.var_6cf436f > 0.2 || self reloadbuttonPressed());
+  doreload = canreload && (self.takedown.var_6cf436f > 0.2 || self reloadbuttonPressed());
   return doreload;
 }
 
@@ -453,8 +453,8 @@ function function_9c53ef0a() {
   self action_utility::gesture_stop();
 }
 
-function function_257c21b5(action, immediate) {
-  self endon(#"hash_28d504c4e7c5eef0");
+function player_body_shield_cleanup(action, immediate) {
+  self endon(#"player_body_shield_cleanup");
 
   if(!is_true(immediate)) {
     self waittill(action.ender);
@@ -474,7 +474,7 @@ function function_257c21b5(action, immediate) {
     action_utility::function_3fbe0931(action);
   }
 
-  self notify(#"hash_28d504c4e7c5eef0");
+  self notify(#"player_body_shield_cleanup");
 }
 
 function function_f077863a(gesture) {
@@ -588,7 +588,7 @@ function function_b25119b6(action) {
   }
 
   self function_bec58af5();
-  self function_257c21b5(action, 1);
+  self player_body_shield_cleanup(action, 1);
   self.takedown.body delete();
   self.takedown.body = undefined;
   self action_utility::function_2795d678(0);

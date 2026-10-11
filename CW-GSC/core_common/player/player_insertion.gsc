@@ -1318,13 +1318,13 @@ function private function_8ab37f3b(aircraft) {
     }
 
     if(friendly islinkedto(aircraft)) {
-      aircraft playsoundtoplayer(#"hash_30b8de3aeaf8d338", friendly);
+      aircraft playsoundtoplayer(#"evt_deploy_team", friendly);
       var_d603dbcf = 0;
     }
   }
 
   if(var_d603dbcf) {
-    self playsoundtoplayer(#"hash_2181506039f121cb", self);
+    self playsoundtoplayer(#"evt_deploy_alarm_last", self);
   }
 }
 
@@ -1348,11 +1348,11 @@ function function_5b3ac9f2(aircraft) {
   self function_8ab37f3b(aircraft);
   self function_1c06c249(aircraft);
   self startcameratween(1);
-  self thread function_eac07dca(aircraft);
+  self thread player_exit_vehicle(aircraft);
   util::wait_network_frame();
   self cameraactivate(0);
   self setclientthirdperson(0);
-  self function_598b7862(aircraft);
+  self jump_anim(aircraft);
   self death_circle::function_b57e3cde(0);
   self clientfield::set_to_player("inside_infiltration_vehicle", 0);
 
@@ -1368,7 +1368,7 @@ function function_5b3ac9f2(aircraft) {
   });
 }
 
-function function_598b7862(aircraft) {
+function jump_anim(aircraft) {
   self endon(#"death");
   self unlink();
   self setOrigin(self.var_df1a9210.origin);
@@ -1405,7 +1405,7 @@ function function_598b7862(aircraft) {
   self.var_df1a9210 delete();
 }
 
-function function_eac07dca(aircraft) {
+function player_exit_vehicle(aircraft) {
   self notify("590f0ead60132337");
   self endon("590f0ead60132337");
   self endon(#"disconnect");
@@ -1719,9 +1719,9 @@ function function_ed4c9a32(falltime, popinstant, var_921a1f7e, startingvelocity,
     var_a58af056 = is_true(player.inlaststand);
     bisland = player isonground() && (player.ffsm_state == 3 || player function_b9370594());
     var_b1f6ff7a = player isplayerswimming() && (player.ffsm_state == 3 || player function_b9370594());
-    var_91d1c5fd = !isalive(player);
+    bisdead = !isalive(player);
 
-    if(var_a58af056 || bisland || var_b1f6ff7a || var_91d1c5fd) {
+    if(var_a58af056 || bisland || var_b1f6ff7a || bisdead) {
       player ffsm_onground_stateenter();
       player.ffsm_state = undefined;
       player.ffsm_isgulagrespawn = undefined;

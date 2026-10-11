@@ -8,7 +8,7 @@
 #namespace namespace_f27a9d0d;
 
 function private event_handler[createstruct] function_e0a8e4ba(struct) {
-  foreach(var_7b62a41a, k in ["rg_tag_type"]) {
+  foreach(__k15, k in ["rg_tag_type"]) {
     if(!isDefined(level.var_41204f29)) {
       level.var_41204f29 = [];
     } else if(!isarray(level.var_41204f29)) {
@@ -95,14 +95,14 @@ function private function_8396377c(var_57617236, origin, angles) {
   door.tags = [];
 
   foreach(var_5cf84433 in var_57617236.tags) {
-    var_df2b5097 = spawnStruct();
-    var_df2b5097.id = var_5cf84433.id;
-    var_df2b5097.owner = door;
-    var_df2b5097.origin = coordtransform(var_5cf84433.origin, door.spawned_origin, door.var_66b667b0);
-    var_df2b5097.angles = combineangles(door.var_66b667b0, var_5cf84433.angles);
-    var_df2b5097.type = var_5cf84433.type;
-    function_e667ba34(var_df2b5097, var_5cf84433);
-    door.tags[door.tags.size] = var_df2b5097;
+    door_tag = spawnStruct();
+    door_tag.id = var_5cf84433.id;
+    door_tag.owner = door;
+    door_tag.origin = coordtransform(var_5cf84433.origin, door.spawned_origin, door.var_66b667b0);
+    door_tag.angles = combineangles(door.var_66b667b0, var_5cf84433.angles);
+    door_tag.type = var_5cf84433.type;
+    function_e667ba34(door_tag, var_5cf84433);
+    door.tags[door.tags.size] = door_tag;
   }
 
   level.var_e5ed336c[door.targetname] = door;
@@ -145,15 +145,15 @@ function private function_9a75d6e9(var_64f87a02, origin, angles) {
   return room;
 }
 
-function private function_700ae446(var_c71df200, var_6a0a1cc4) {
-  if(isDefined(self.var_12650ad6[var_c71df200])) {
+function private function_700ae446(tag_id, var_6a0a1cc4) {
+  if(isDefined(self.var_12650ad6[tag_id])) {
     return false;
   }
 
-  self.var_12650ad6[var_c71df200] = var_6a0a1cc4;
+  self.var_12650ad6[tag_id] = var_6a0a1cc4;
 
   if(isDefined(var_6a0a1cc4.owner)) {
-    self.neighbors[var_c71df200] = var_6a0a1cc4.owner;
+    self.neighbors[tag_id] = var_6a0a1cc4.owner;
   }
 
   return true;
@@ -175,7 +175,7 @@ function private function_71b94f8a(tag1, tag2) {
   return true;
 }
 
-function function_b3f5992c() {
+function connect_all_rooms() {
   self notify("34fbc225b71f70d5");
   self endon("34fbc225b71f70d5");
   level endon(#"hash_186e943c1cd0db52");
@@ -253,7 +253,7 @@ function function_f4b7f348(text) {
   println("<dev string:x4a>" + text);
 }
 
-function function_3a9f29b2(room) {
+function cleanroom(room) {
   if(!isDefined(room)) {
     return;
   }
@@ -289,7 +289,7 @@ function cleanup(full = 0) {
   if(isDefined(level.var_c97eeeb4)) {
     foreach(room in level.var_c97eeeb4) {
       if(isDefined(room)) {
-        function_3a9f29b2(room);
+        cleanroom(room);
       }
 
       if(!getdvarint(#"hash_55c78475b1ebf3de", 1)) {
@@ -303,7 +303,7 @@ function cleanup(full = 0) {
   if(isDefined(level.var_e5ed336c)) {
     foreach(door in level.var_e5ed336c) {
       if(isDefined(door)) {
-        function_3a9f29b2(door);
+        cleanroom(door);
       }
 
       if(!getdvarint(#"hash_55c78475b1ebf3de", 1)) {
@@ -462,10 +462,10 @@ function function_5165998(key, value) {
   return found.size < 0 ? undefined : found[0];
 }
 
-function function_eaad15e2(attach_tag, var_da1a882e, var_c71df200) {
-  var_64f87a02 = level.var_a40e1682[var_da1a882e];
+function function_eaad15e2(attach_tag, room_name, tag_id) {
+  var_64f87a02 = level.var_a40e1682[room_name];
   assert(isDefined(var_64f87a02));
-  var_103a1f3b = var_64f87a02 function_5165998("id", var_c71df200);
+  var_103a1f3b = var_64f87a02 function_5165998("id", tag_id);
   assert(isDefined(var_103a1f3b));
   var_cde36dad = vectortoangles(anglesToForward(attach_tag.angles) * -1);
   var_e3438a3b = function_bdd10bae(var_cde36dad, var_103a1f3b.angles);
@@ -486,8 +486,8 @@ function function_5b611d11(attach_tag, door_name) {
   return door;
 }
 
-function function_40681754(var_da1a882e, x, y, var_603479c6) {
-  var_64f87a02 = level.var_a40e1682[var_da1a882e];
+function function_40681754(room_name, x, y, var_603479c6) {
+  var_64f87a02 = level.var_a40e1682[room_name];
   assert(isDefined(var_64f87a02));
   var_103a1f3b = var_64f87a02 function_5165998("type", "room_center");
   assert(isDefined(var_103a1f3b));
@@ -559,7 +559,7 @@ function function_39736661(var_816442c9) {
   return result;
 }
 
-function function_612d8b4e() {
+function calculate_door_depths() {
   assert(isDefined(level.var_ee250665));
 
   foreach(room in level.var_c97eeeb4) {

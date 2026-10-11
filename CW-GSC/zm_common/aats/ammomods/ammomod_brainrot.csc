@@ -87,8 +87,8 @@ function function_d500905a(localclientnum, oldval, newval, bnewent, binitialsnap
     }
 
     if(!isDefined(self.var_85f16cb5)) {
-      self playSound(fieldname, #"hash_2d155a1b76096d88");
-      self.var_85f16cb5 = self playLoopSound(#"hash_530331283b555ef9");
+      self playSound(fieldname, #"zmb_ammomod_brainrot_impact");
+      self.var_85f16cb5 = self playLoopSound(#"zmb_ammomod_brainrot_ai_lp");
     }
 
     if(isDefined(self.var_5da36454)) {
@@ -140,5 +140,5 @@ function function_1d8434b9(localclientnum, oldval, newval, bnewent, binitialsnap
     util::playFXOnTag(bwastimejump, "zm_weapons/fx9_aat_brain_rot_lvl5_aoe", self, "j_head");
   }
 
-  self playSound(0, #"hash_70173e20912069e7");
+  self playSound(0, #"zmb_ammomod_brainrot_explode");
 }

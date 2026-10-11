@@ -382,12 +382,12 @@ function play_loop_on_machine() {
   }
 
   sound_ent = spawn("script_origin", self.origin + (0, 0, 50));
-  sound_ent playSound(#"hash_1ac5c65e0bb6f52e");
+  sound_ent playSound(#"zmb_perkmachine_power_on");
   sound_ent playLoopSound(#"zmb_perkmachine_power_on_lp");
   sound_ent linkTo(self);
   self waittill(#"stop_loopsound");
   sound_ent unlink();
-  sound_ent playSound(#"hash_34ea69cde7cc1cd0");
+  sound_ent playSound(#"zmb_perkmachine_power_off");
   sound_ent delete();
 }
 
@@ -623,7 +623,7 @@ function vending_trigger_think() {
       }
 
       if(cheat != 1) {
-        player playsoundtoplayer(#"hash_5334aa3b6d25f949", player);
+        player playsoundtoplayer(#"uin_perkmachine_purchase_denied", player);
         continue;
       }
     }
@@ -656,13 +656,13 @@ function vending_trigger_think() {
     }
 
     if(!player zm_score::can_player_purchase(current_cost)) {
-      player playsoundtoplayer(#"hash_5334aa3b6d25f949", player);
+      player playsoundtoplayer(#"uin_perkmachine_purchase_denied", player);
       player zm_audio::create_and_play_dialog(#"general", #"outofmoney");
       continue;
     }
 
     if(!player zm_utility::can_player_purchase_perk()) {
-      player playsoundtoplayer(#"hash_5334aa3b6d25f949", player);
+      player playsoundtoplayer(#"uin_perkmachine_purchase_denied", player);
       continue;
     }
 
@@ -838,7 +838,7 @@ function perk_think(perk) {
     self.var_ab375b18--;
   }
 
-  self notify(#"hash_648c7603829277a1");
+  self notify(#"extra_perk_lost");
 }
 
 function set_perk_clientfield(perk, state) {
@@ -1287,7 +1287,7 @@ function perk_machine_spawn_init() {
         s_spawn_pos.var_8d3fc50c = undefined;
       }
 
-      perk_machine function_619a5c20();
+      perk_machine pingable();
 
       if(is_true(level._no_vending_machine_bump_trigs)) {
         bump_trigger = undefined;

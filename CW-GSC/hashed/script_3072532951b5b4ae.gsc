@@ -266,16 +266,16 @@ function stealth_enemy_updateeveryframe(behaviortreeentity) {
     return true;
   }
 
-  var_e8c7dd7e = level flag::get("react_to_dynolights");
+  shouldupdatelightmeter = level flag::get("react_to_dynolights");
 
-  if(var_e8c7dd7e && !isDefined(self.lightmeter)) {
+  if(shouldupdatelightmeter && !isDefined(self.lightmeter)) {
     namespace_979752dc::update_light_meter();
-    var_e8c7dd7e = 0;
+    shouldupdatelightmeter = 0;
   }
 
   self updatelightbasedflashlight(self.stealth.bsmstate, 0.5);
 
-  if(var_e8c7dd7e) {
+  if(shouldupdatelightmeter) {
     entnum = self getentitynumber();
     frametime = level.frameduration;
     assert(isDefined(frametime));
@@ -286,7 +286,7 @@ function stealth_enemy_updateeveryframe(behaviortreeentity) {
   }
 
   self function_d19483ee();
-  self namespace_cc4354b9::corpse_sight();
+  self stealth_corpse::corpse_sight();
   self ai::look_at(self.cqb_target);
   return stealth_reacter_updateeveryframe(behaviortreeentity);
 }
@@ -508,8 +508,8 @@ function function_fe3c7909(behaviortreeentity) {
 
 function function_6f8594d4(var_b7d36d34) {
   if(isDefined(self.stealth.corpse.ent) && distancesquared(self.stealth.corpse.ent.origin, self.origin) < sqr(var_b7d36d34)) {
-    if(!is_true(self.stealth.corpse.ent.var_f03da639)) {
-      self.stealth.corpse.ent.var_f03da639 = 1;
+    if(!is_true(self.stealth.corpse.ent.investigated)) {
+      self.stealth.corpse.ent.investigated = 1;
       return true;
     }
   }
@@ -593,18 +593,18 @@ function function_5db27177(behaviortreeentity) {
 
 function idle_updatecurious(behaviortreeentity) {
   target = undefined;
-  var_d37db7af = 0;
+  highestthreatsight = 0;
 
   foreach(player in getPlayers()) {
     threatsight = self getthreatsight(player);
 
-    if(!isDefined(target) || threatsight > var_d37db7af) {
+    if(!isDefined(target) || threatsight > highestthreatsight) {
       target = player;
-      var_d37db7af = threatsight;
+      highestthreatsight = threatsight;
     }
   }
 
-  threatsight = var_d37db7af;
+  threatsight = highestthreatsight;
   var_85153501 = 0.25;
 
   if(self.stealth.bidlecurious) {
@@ -670,7 +670,7 @@ function idle_init(behaviortreeentity) {
   self.dontattackme = 1;
   self.shootposoverride = undefined;
   self.stealth.reachedinvestigate = 0;
-  self thread namespace_cc4354b9::corpse_clear();
+  self thread stealth_corpse::corpse_clear();
   idle_updatestyle(self.bt.instancedata[taskid]);
   self.combatmode = "no_cover";
 
@@ -1463,7 +1463,7 @@ function function_445c5acf(behaviortreeentity) {
   }
 
   self.stealth.bexaminerequested = undefined;
-  self namespace_cc4354b9::corpse_clear();
+  self stealth_corpse::corpse_clear();
   return true;
 }
 
@@ -1718,7 +1718,7 @@ function investigate_terminate() {
   self.moveplaybackrate = 1;
   self.cqb_target = undefined;
   self function_f2887688();
-  self namespace_cc4354b9::corpse_clear();
+  self stealth_corpse::corpse_clear();
   return true;
 }
 
@@ -2249,7 +2249,7 @@ function hunt_move_init(behaviortreeentity) {
 }
 
 function hunt_sidechecks(instancedata) {
-  var_843ecdc0 = 36;
+  clookaheaddist = 36;
   var_2be49714 = 36;
   var_bea9b15e = 36;
   curtime = gettime();
@@ -2264,7 +2264,7 @@ function hunt_sidechecks(instancedata) {
   }
 
   if(!isDefined(instancedata.cornerchecknode) && !is_true(self.isarriving) && self.lookaheaddist > 32 && self getpathlength() > 128) {
-    lookaheadpos = self getposonpath(var_843ecdc0);
+    lookaheadpos = self getposonpath(clookaheaddist);
     meforward = anglesToForward(self.angles);
     var_273da0db = getnodesinradius(lookaheadpos, var_bea9b15e, 0, 60, "Cover");
 
@@ -2288,8 +2288,8 @@ function hunt_sidechecks(instancedata) {
           continue;
         }
 
-        var_c86d779 = anglesToForward(node.angles);
-        dot = vectordot(var_c86d779, meforward);
+        nodedir = anglesToForward(node.angles);
+        dot = vectordot(nodedir, meforward);
 
         if(dot > 0.5 || dot < -0.5) {
           continue;

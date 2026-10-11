@@ -45,16 +45,16 @@ function function_6b39d9c5(count) {
   foreach(point in spawnpoints) {
     if(!isinarray(var_baa683fe, point) && zm_utility::check_point_in_enabled_zone(point.origin) && zm_utility::check_point_in_playable_area(point.origin)) {
       a_e_players = function_a1ef346b(undefined, point.origin, 275);
-      var_68298325 = 0;
+      b_player_near = 0;
 
       foreach(e_player in a_e_players) {
         if(!e_player laststand::player_is_in_laststand()) {
-          var_68298325 = 1;
+          b_player_near = 1;
           break;
         }
       }
 
-      if(var_68298325) {
+      if(b_player_near) {
         continue;
       }
 
@@ -206,12 +206,12 @@ function function_eccc5dbd() {
   v_direction = anglesToForward(v_direction) * 500;
   eye = player getEye();
   trace = bulletTrace(eye, eye + v_direction, 0, undefined);
-  var_770ed480 = positionquery_source_navigation(trace[#"position"], 64, 256, 512, 20);
+  query_result = positionquery_source_navigation(trace[#"position"], 64, 256, 512, 20);
   spot = spawn("<dev string:x16c>", player.origin);
   spot setModel("<dev string:x17c>");
 
-  if(isDefined(var_770ed480) && var_770ed480.data.size > 0) {
-    spot.origin = var_770ed480.data[0].origin;
+  if(isDefined(query_result) && query_result.data.size > 0) {
+    spot.origin = query_result.data[0].origin;
   }
 
   println("<dev string:x18a>" + spot.origin);

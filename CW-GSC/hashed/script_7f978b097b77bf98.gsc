@@ -94,9 +94,9 @@ function private function_b0c8ef74(eventstruct) {
     self triggerenable(0);
     s_chest = self.instance.contentgroups[#"chest"][0];
     self.instance.mdl_chest thread scene::play(#"p9_fxanim_zm_gp_chest_01_lrg_black_bundle", self.instance.mdl_chest);
-    self.instance.var_85c920d0 = content_manager::spawn_script_model(s_chest, #"hash_2641cfb5c2cdcc85");
+    self.instance.var_85c920d0 = content_manager::spawn_script_model(s_chest, #"c_t9_zmb_gold_demented_echo_dark");
     self.instance.var_85c920d0 clientfield::set("sr_demented_echo_fx", 1);
-    self.instance.var_85c920d0 playSound(#"hash_36ac898552727197");
+    self.instance.var_85c920d0 playSound(#"evt_sur_we_bc_ghost_intro");
     self.instance.var_85c920d0 playLoopSound(#"evt_sur_we_bc_ghost_lp");
     s_chest thread scene::play(#"aib_t9_zm_sr_echo_chest_spawn", self.instance.var_85c920d0);
     level thread function_7914c7ef(self.instance.var_85c920d0, s_chest);
@@ -189,16 +189,16 @@ function private function_5338581(instance) {
   instance.mdl_chest thread zm_vo::function_d6f8bbd9(#"hash_15b09a217e61af64", 2.5);
   instance.var_fc398f5e = 0;
   s_chest = instance.contentgroups[#"chest"][0];
-  var_5d7b56a9 = anglestoup(s_chest.angles) * 58;
+  v_height_offset = anglestoup(s_chest.angles) * 58;
   var_5086009e = anglestoright(s_chest.angles) * 12;
   var_42cc652b = anglestoup(s_chest.angles) * -8;
   var_2d0a39a7 = anglestoright(s_chest.angles) * -12;
   var_6ef72e62 = spawnStruct();
   var_5a4d050e = spawnStruct();
   var_440ed88e = spawnStruct();
-  var_6ef72e62.origin = s_chest.origin + var_5d7b56a9 + var_5086009e;
-  var_5a4d050e.origin = s_chest.origin + var_5d7b56a9 + var_42cc652b;
-  var_440ed88e.origin = s_chest.origin + var_5d7b56a9 + var_2d0a39a7;
+  var_6ef72e62.origin = s_chest.origin + v_height_offset + var_5086009e;
+  var_5a4d050e.origin = s_chest.origin + v_height_offset + var_42cc652b;
+  var_440ed88e.origin = s_chest.origin + v_height_offset + var_2d0a39a7;
   var_21a5c532 = instance.contentgroups[#"hash_5e01f407a95da14a"][0];
   var_306462af = instance.contentgroups[#"hash_5e01f307a95d9f97"][0];
   var_b02fe248 = instance.contentgroups[#"hash_5e01f207a95d9de4"][0];
@@ -212,7 +212,7 @@ function private function_ed1e62c9(instance, var_5ec5a681, s_spawn) {
     return;
   }
 
-  var_d4358084 = content_manager::spawn_script_model(s_spawn, #"hash_7a7aadfb584e0859");
+  var_d4358084 = content_manager::spawn_script_model(s_spawn, #"wpn_t9_sr_swarm_hulking_summoner");
   var_d4358084 clientfield::set("sr_black_chest_swarm_fx", 1);
   var_d4358084 val::set(#"black_chest_swarm", "allowdeath", 0);
   var_d4358084.var_e8280122 = var_5ec5a681.origin;
@@ -323,7 +323,7 @@ function private function_66afafad(attacker) {
       v_loc = self.origin;
     }
 
-    level namespace_2c949ef8::function_8b6ae460(v_loc, undefined, 350, 750, undefined, undefined, var_c8c520ef, "black_chest_zombie", 80);
+    level namespace_2c949ef8::do_ambush(v_loc, undefined, 350, 750, undefined, undefined, var_c8c520ef, "black_chest_zombie", 80);
     v_loc = undefined;
     var_c8c520ef = 0;
     wait 5;
@@ -342,7 +342,7 @@ function private function_7914c7ef(var_85c920d0, s_chest) {
   wait 1;
   s_chest thread zm_vo::function_d6f8bbd9(#"hash_3d0849b352e60084");
   wait 3;
-  s_chest playSound(#"hash_47ee04e03e4bdd6");
+  s_chest playSound(#"evt_sur_we_bc_ghost_outro");
   s_chest stoploopsound();
   s_chest clientfield::set("sr_demented_echo_fx", 2);
   wait 0.5;
@@ -376,7 +376,7 @@ function private function_7914c7ef(var_85c920d0, s_chest) {
       s_chest show();
       s_chest thread fx::play(#"hash_6e08ff9234426629", var_ff1022f3.origin + (0, 0, 48), var_ff1022f3.angles);
       s_chest clientfield::set("sr_demented_echo_fx", 1);
-      s_chest playSound(#"hash_36ac898552727197");
+      s_chest playSound(#"evt_sur_we_bc_ghost_intro");
       s_chest playLoopSound("evt_sur_we_bc_ghost_lp");
       s_chest thread scene::play(#"ai_t9_zm_sr_echo_world_spawn", s_chest);
       str_vo = array::function_a3b0f814(s_chest.a_str_vo, 0);
@@ -396,7 +396,7 @@ function private function_7914c7ef(var_85c920d0, s_chest) {
       s_chest thread scene::play(#"ai_t9_zm_sr_echo_world_spawn", "outro", s_chest);
       wait 0.5;
       s_chest clientfield::set("sr_demented_echo_fx", 0);
-      s_chest playSound(#"hash_47ee04e03e4bdd6");
+      s_chest playSound(#"evt_sur_we_bc_ghost_outro");
       s_chest stoploopsound();
       wait 0.5;
       s_chest ghost();

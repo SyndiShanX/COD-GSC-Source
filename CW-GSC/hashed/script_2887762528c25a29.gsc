@@ -30,10 +30,10 @@ function main() {
 function function_e073d92f() {
   self notify("3b218896f68a5246");
   self endon("3b218896f68a5246");
-  self thread namespace_268747c0::function_978c05b5();
+  self thread doa_hazard::function_978c05b5();
   result = self waittill(#"destroy_hazard");
 
-  if(is_true(self.var_7c56394) && is_true(result.var_760a0807)) {
+  if(is_true(self.paged) && is_true(result.var_760a0807)) {
     arrayremovevalue(level.doa.var_6733605b, self);
     namespace_1e25ad94::debugmsg("Deleting Pressure Plate trap permenently at:" + self.origin);
   }
@@ -41,7 +41,7 @@ function function_e073d92f() {
   util::wait_network_frame();
 
   if(isDefined(self.trigger)) {
-    self.trigger namespace_268747c0::function_54f185a();
+    self.trigger doa_hazard::function_54f185a();
     self.trigger = undefined;
   }
 
@@ -61,7 +61,7 @@ function function_e073d92f() {
   }
 }
 
-function function_a2e3342e(trap, var_7c56394 = 0) {
+function function_a2e3342e(trap, paged = 0) {
   assert(isDefined(trap.target), "<dev string:x38>");
   trap.script_model = namespace_ec06fe4a::spawnmodel(trap.origin, "zombietron_pressure_plate", trap.angles);
 
@@ -71,7 +71,7 @@ function function_a2e3342e(trap, var_7c56394 = 0) {
   }
 
   trap.var_1de20e4f = namespace_ec06fe4a::spawnmodel(trap.origin, "zombietron_pressure_plate_holder", trap.angles);
-  trap.var_7c56394 = var_7c56394;
+  trap.paged = paged;
   trap.var_84a0207b = getEntArray(trap.target, "targetname");
 
   if(trap.var_84a0207b.size == 0) {
@@ -200,7 +200,7 @@ function function_3864f6a5() {
     waitframe(1);
 
     if(!isDefined(self.trigger)) {
-      self.trigger = namespace_268747c0::function_5bfa98c9("pressureplate", self.origin);
+      self.trigger = doa_hazard::function_5bfa98c9("pressureplate", self.origin);
 
       if(isDefined(self.trigger)) {
         self.trigger.origin = self.origin + (0, 0, 36);

@@ -58,9 +58,9 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
   same_team = isDefined(eattacker) && (self.team === eattacker.team || util::function_9b7092ef(self.team, eattacker.team));
 
   if(isDefined(level.friendlyfiredisabled) && !level.friendlyfiredisabled) {
-    if(isDefined(level.var_edbfa7b)) {
+    if(isDefined(level.friendlyfiredamagepercentage)) {
       if(isPlayer(eattacker) && same_team) {
-        idamage = int(idamage * level.var_edbfa7b);
+        idamage = int(idamage * level.friendlyfiredamagepercentage);
 
         if(idamage < 1) {
           idamage = 1;
@@ -105,10 +105,10 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
 
   if(isDefined(eattacker)) {
     if(isPlayer(eattacker)) {
-      level thread friendlyfire::function_1ad87afd(self, idamage, eattacker, smeansofdeath, weapon, einflictor);
+      level thread friendlyfire::friendly_fire_callback(self, idamage, eattacker, smeansofdeath, weapon, einflictor);
 
-      if(isDefined(self.var_5753eaa5)) {
-        self thread[[self.var_5753eaa5]]();
+      if(isDefined(self.playercausedactordamage)) {
+        self thread[[self.playercausedactordamage]]();
       }
 
       self thread challenges::actordamaged(eattacker, eattacker, idamage, weapon, shitloc);
@@ -147,7 +147,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
   if(weapons::isflashorstundamage(weapon, smeansofdeath)) {
     if(isDefined(self.type)) {
       if(weapon.isflash && self.type == "human") {
-        self.var_f0cb2572 = self.idflagstime;
+        self.lastflashedtime = self.idflagstime;
       } else if(weapon.isstun && self.type == "human") {
         self.var_189fd299 = self.idflagstime;
       }
@@ -160,7 +160,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
   if(weapon.isemp && isDefined(self.type) && self.type == "robot") {
     if(weapon.name == #"emp_grenade") {
       self.var_e6e7d1c1 = self.idflagstime;
-    } else if(weapon.name == #"hash_8820860b9c7d979" || weapon.name == #"hash_294001bc58d294f8") {
+    } else if(weapon.name == #"ravage_core_emp_grenade" || weapon.name == #"ravage_core_emp_grenade_upg") {
       self.var_cc76f50a = self.idflagstime;
     }
   }
@@ -311,7 +311,7 @@ function callback_actorkilled(einflictor, eattacker, idamage, smeansofdeath, wea
     if(!is_true(self.disable_score_events)) {
       if(!level.teambased || self.team != player.pers[#"team"]) {
         self thread challenges::actorkilled(einflictor, player, idamage, smeansofdeath, weapon, shitloc);
-        self function_bb02eb15(einflictor, player, weapon, player.team);
+        self actorkilled_awardassists(einflictor, player, weapon, player.team);
       }
     }
   }
@@ -322,7 +322,7 @@ function callback_actorcloned(original) {
   gibserverutils::copygibstate(original, self);
 }
 
-function function_bb02eb15(einflictor, eattacker, weapon, lpattackteam) {
+function actorkilled_awardassists(einflictor, eattacker, weapon, lpattackteam) {
   pixbeginevent(#"");
 
   if(isDefined(self.attackers)) {

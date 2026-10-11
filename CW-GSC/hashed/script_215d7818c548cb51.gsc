@@ -74,11 +74,11 @@ function function_cc8342e0(string = #"hash_6c919cffb550417a", opentime = 10) {
   }
 }
 
-function function_81cad6d6(vector, angle) {
-  var_c575b928 = cos(angle);
-  var_26c827e8 = sin(angle);
-  x = vector[0] * var_c575b928 - vector[1] * var_26c827e8;
-  y = vector[0] * var_26c827e8 + vector[1] * var_c575b928;
+function rotate_vector(vector, angle) {
+  n_cos = cos(angle);
+  n_sin = sin(angle);
+  x = vector[0] * n_cos - vector[1] * n_sin;
+  y = vector[0] * n_sin + vector[1] * n_cos;
   z = vector[2];
   return (x, y, z);
 }

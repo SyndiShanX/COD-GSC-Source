@@ -33,7 +33,7 @@ function preinit(bundlename) {
   clientfield::register("toplayer", "" + #"hash_7c907650b14abbbe", 1, 1, "int");
   clientfield::register("vehicle", "" + #"hash_4ddf67f7aa0f6884", 1, 1, "int");
   clientfield::register("vehicle", "" + #"hash_46646871455cab15", 1, 2, "int");
-  clientfield::register("vehicle", "" + #"hash_6cf1a3b26118d892", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"chopper_gunner_crash", 1, 1, "int");
   init_shared();
   killstreaks::register_killstreak(bundlename, &activatemaingunner);
   profilestop();
@@ -99,7 +99,7 @@ function function_5160bb1e(killstreaktype) {
   level.destructible_callbacks[#"turret_destroyed"] = &function_aecfdb77;
   level.chopper_gunner.shuttingdown = 0;
   level.chopper_gunner.completely_shutdown = 0;
-  level.chopper_gunner thread heatseekingmissile::playlockonsoundsthread(self, #"hash_fa62d8cec85b1a0", #"hash_1683ed70beb3f2");
+  level.chopper_gunner thread heatseekingmissile::playlockonsoundsthread(self, #"uin_ac130_e_targeting", #"uin_ac130_e_target_lock");
   level.chopper_gunner.maxhealth = isDefined(killstreak_bundles::get_max_health("chopper_gunner")) ? killstreak_bundles::get_max_health("chopper_gunner") : 5000;
   level.chopper_gunner.original_health = level.chopper_gunner.maxhealth;
   level.chopper_gunner.health = level.chopper_gunner.maxhealth;
@@ -670,7 +670,7 @@ function function_77784598(einflictor, eattacker, idamage, idflags, smeansofdeat
 
   if(handleasrocketdamage) {
     self function_ece62582();
-    self playSound(#"hash_ddcd9d25e056016");
+    self playSound(#"uin_ac130_alarm_damage");
   }
 
   var_902cbab5 = self.health - smeansofdeath;
@@ -761,7 +761,7 @@ function function_80ae938e(point, dir) {
   }
 
   self thread vehicle_death::helicopter_crash(point, dir, 2.75);
-  self clientfield::set("" + #"hash_6cf1a3b26118d892", 1);
+  self clientfield::set("" + #"chopper_gunner_crash", 1);
   self waittilltimeout(2.25, #"death");
   function_cf58dcdd(self.owner, 0);
 }

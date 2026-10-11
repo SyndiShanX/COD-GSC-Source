@@ -125,7 +125,7 @@ function function_abddd809(inflictor, attacker, damage, flags, meansofdeath, wea
           damage.var_4caed594 = gettime();
         }
 
-        damage thread function_751b9d86(w_aat);
+        damage thread unset_aat_override(w_aat);
       }
     }
   }
@@ -133,7 +133,7 @@ function function_abddd809(inflictor, attacker, damage, flags, meansofdeath, wea
   return flags;
 }
 
-function function_751b9d86(w_aat) {
+function unset_aat_override(w_aat) {
   self endon(#"death");
   self notify("3b0a02adb5fc6c9b");
   self endon("3b0a02adb5fc6c9b");
@@ -260,7 +260,7 @@ function function_a26b7152() {
 
       self thread elemental_pop_reload_fx(n_fraction);
       self notify(#"hash_410b85a0d0e82dc1");
-      self playSound(#"hash_44f5e332b770413c");
+      self playSound(#"zmb_vapor_elementalpop_activate");
       a_zombies = getaiteamarray(level.zombie_team);
       a_zombies = arraysortclosest(a_zombies, self.origin, undefined, undefined, perk_radius);
       n_zombies_hit = 0;
@@ -429,7 +429,7 @@ function function_70c2d1b6() {
 
   if(isDefined(self)) {
     playFX(#"hash_70912cde462752a8", self.origin);
-    self playSound(#"hash_75ba32e48680203a");
+    self playSound(#"zmb_vapor_electriccherry_activate");
     self notify(#"hash_410b85a0d0e82dc1");
     waitframe(1);
     a_zombies = getaiteamarray(level.zombie_team);

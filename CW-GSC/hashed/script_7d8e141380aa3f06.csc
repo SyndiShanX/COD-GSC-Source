@@ -19,7 +19,7 @@ function preinit() {
 function function_2376fab8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump == 1) {
     util::playFXOnTag(fieldname, #"hash_48761360bb67e8a9", self, "tag_origin");
-    self.var_a3b04735 = self playLoopSound(#"hash_722697efdfb3562f");
+    self.var_a3b04735 = self playLoopSound(#"zmb_gold_teleporter_lp");
   }
 }
 

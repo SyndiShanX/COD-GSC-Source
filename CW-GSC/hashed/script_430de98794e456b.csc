@@ -48,7 +48,7 @@ function function_9f1f304b(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function private function_ea74c7dc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
-    self playSound(fieldname, #"hash_44071fbabf0a1211");
+    self playSound(fieldname, #"zmb_orda_portal_open");
     level.var_66477fdf = playFX(fieldname, #"zm_ai/fx9_orda_spawn_portal_c", self.origin + (0, 0, 7000), anglesToForward(self.angles), anglestoup(self.angles + (90, 0, 0)));
     level.var_636214dd = playFX(fieldname, #"sr/fx9_orda_aether_portal_beam", self.origin, anglesToForward(self.angles), anglestoup(self.angles));
     return;
@@ -74,9 +74,9 @@ function function_773a9730(localclientnum, oldval, newval, bnewent, binitialsnap
     return;
   }
 
-  var_edb60b5f = struct::get_array(#"control_point_pos");
+  a_s_origins = struct::get_array(#"control_point_pos");
 
-  foreach(s_origin in var_edb60b5f) {
+  foreach(s_origin in a_s_origins) {
     if(s_origin.script_int == bwastimejump) {
       break;
     }

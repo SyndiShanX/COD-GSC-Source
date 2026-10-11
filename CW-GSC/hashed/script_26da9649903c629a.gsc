@@ -35,7 +35,7 @@ function function_b26dad22(level_notify) {
   setDvar(#"bottom_distance", bottom_distance);
   setDvar(#"middle_distance", 1200);
   setDvar(#"top_distance", top_distance);
-  var_270e748f = 0;
+  lighton = 0;
   var_9ddd4d57 = undefined;
   level.var_7466d419.var_2939dba = #"hash_5cad1a1b9fdc43ee";
 
@@ -78,23 +78,23 @@ function function_b26dad22(level_notify) {
           iprintlnbold("You're flying too high get down!");
           level.player clientfield::set_to_player("pstfx_script_vignette", 1);
 
-          if(var_270e748f == 0) {
+          if(lighton == 0) {
             thread function_36cc1830();
             var_9ddd4d57 = spawn("script_model", level.var_7466d419.origin);
             var_9ddd4d57 setModel(#"tag_origin");
             var_9ddd4d57 linkTo(level.var_7466d419, "tag_attach", (0, 0, 0), (0, 0, 0));
             playFXOnTag(level.var_7466d419.var_2939dba, var_9ddd4d57, "tag_origin");
-            var_270e748f = 1;
+            lighton = 1;
           }
         } else if(var_b4d6bef6 > bottom_distance && var_168492dd <= bottom_distance) {
           level notify(#"stop");
           level notify(#"out_of_zone");
           level.player clientfield::set_to_player("pstfx_script_vignette", 0);
 
-          if(var_270e748f == 1) {
+          if(lighton == 1) {
             var_9ddd4d57 delete();
             var_9ddd4d57 = undefined;
-            var_270e748f = 0;
+            lighton = 0;
           }
         }
       }
@@ -125,8 +125,8 @@ function function_4b0f12f6(level_notify) {
     }
 
     tag = ["tag_door_rear_left_null", "tag_door_mid_right_null", "tag_door_rear_right_null", "tag_rotor_attach"];
-    var_44960a56 = array::random(tag);
-    var_9d5321a = level.var_7466d419 gettagorigin(var_44960a56);
+    chopper_target = array::random(tag);
+    var_9d5321a = level.var_7466d419 gettagorigin(chopper_target);
     var_5a3aa491 = (random_x, random_y, random_z);
     var_f4d3e08a = rotatepoint(var_5a3aa491, level.var_7466d419.angles) + level.var_7466d419.origin;
     thread function_f4567c7c("stop");
@@ -176,7 +176,7 @@ function function_ad449a1b(level_notify) {
         offset = (4000, 0, 0);
         var_6d32c483 = rotatepoint(offset, level.var_7466d419.angles) + level.var_7466d419.origin;
         missle = magicbullet(weapon, var_f4d3e08a, var_6d32c483);
-        level.var_c95e0d20 = missle;
+        level.kill_missile = missle;
 
         if(num_shots <= 1) {
           missle.var_30dc969d = 1;
@@ -187,7 +187,7 @@ function function_ad449a1b(level_notify) {
         }
       } else if(chopper_speed <= 10) {
         missle = magicbullet(weapon, var_f4d3e08a, level.var_7466d419.origin);
-        level.var_c95e0d20 = missle;
+        level.kill_missile = missle;
 
         if(num_shots <= 1) {
           missle.var_30dc969d = 1;
@@ -297,7 +297,7 @@ function function_d39d4a5b(params) {
     return;
   }
 
-  if(isDefined(einflictor) && isDefined(level.var_c95e0d20) && einflictor === level.var_c95e0d20) {
+  if(isDefined(einflictor) && isDefined(level.kill_missile) && einflictor === level.kill_missile) {
     level.var_7466d419 dodamage(50000, level.var_7466d419.origin);
   }
 }

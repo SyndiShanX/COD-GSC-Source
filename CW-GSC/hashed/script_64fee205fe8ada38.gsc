@@ -52,10 +52,10 @@ function function_4b462025(enemy, b_ignore_cleanup) {
   angles = vectortoangles(target_pos - self gettagorigin("j_pocket5_le"));
   dir = anglesToForward(angles);
   launch_offset = dir * 10;
-  var_8598bad6 = self gettagorigin("j_pocket5_le") + launch_offset;
-  dist = distance(var_8598bad6, target_pos);
+  launch_pos = self gettagorigin("j_pocket5_le") + launch_offset;
+  dist = distance(launch_pos, target_pos);
   velocity = dir * var_dd6bc3a6;
-  to_target = target_pos - var_8598bad6;
+  to_target = target_pos - launch_pos;
   time = length((to_target[0], to_target[1], to_target[2])) / var_dd6bc3a6;
 
   if(time <= 0) {
@@ -81,14 +81,14 @@ function function_4b462025(enemy, b_ignore_cleanup) {
 
   if(getdvarint(#"hash_23c79bd6109328a", 0)) {
     sphere(target_pos, 16, (1, 1, 0), 1, 1, 8, 300);
-    thread debug::drawdebugline(var_8598bad6, target_pos, (1, 1, 0), 300);
+    thread debug::drawdebugline(launch_pos, target_pos, (1, 1, 0), 300);
     println("<dev string:x38>" + enemy.origin + "<dev string:x65>" + target_pos);
     i = 0;
-    last_pos = var_8598bad6;
+    last_pos = launch_pos;
 
     while(i <= time) {
-      height = var_8598bad6[2] + launch_speed * i - 0.5 * getdvarint(#"bg_gravity", 800) * sqr(i);
-      debug_pos = (var_8598bad6[0] + velocity[0] * i, var_8598bad6[1] + velocity[1] * i, height);
+      height = launch_pos[2] + launch_speed * i - 0.5 * getdvarint(#"bg_gravity", 800) * sqr(i);
+      debug_pos = (launch_pos[0] + velocity[0] * i, launch_pos[1] + velocity[1] * i, height);
       sphere(debug_pos, 8, (0, 1, 0), 1, 1, 8, 300);
       thread debug::drawdebugline(last_pos, debug_pos, (0, 1, 0), 300);
       last_pos = debug_pos;
@@ -101,10 +101,10 @@ function function_4b462025(enemy, b_ignore_cleanup) {
     }
   }
 
-  grenade = self magicgrenadetype(var_d54a1968, var_8598bad6, velocity);
-  playSoundAtPosition(#"hash_4897d1a140f146f5", var_8598bad6);
+  grenade = self magicgrenadetype(var_d54a1968, launch_pos, velocity);
+  playSoundAtPosition(#"hash_4897d1a140f146f5", launch_pos);
   var_9f0ffc57 = (0, 0, 30);
-  var_b1d0a64 = util::spawn_model(#"c_t9_zmb_hellhound", var_8598bad6 + var_9f0ffc57, grenade.angles);
+  var_b1d0a64 = util::spawn_model(#"c_t9_zmb_hellhound", launch_pos + var_9f0ffc57, grenade.angles);
   var_b1d0a64 clientfield::set("" + #"dog_projectile_fx", 1);
   var_b1d0a64 linkTo(grenade, "tag_origin", var_9f0ffc57);
   var_b1d0a64 useanimtree("generic");
@@ -306,21 +306,21 @@ function function_f2b0a2e1() {
 
 function private function_9fc2b867() {
   origin = vectorlerp(self gettagorigin("j_shoulder_le"), self gettagorigin("j_shoulder_ri"), 0.5);
-  swarm = util::spawn_model(#"hash_7a7aadfb584e0859", origin);
+  swarm = util::spawn_model(#"wpn_t9_sr_swarm_hulking_summoner", origin);
   swarm playLoopSound(#"hash_4c9124e9213250df");
   swarm.var_66a3d186 = self;
 
-  if(!isDefined(self.var_36225742)) {
-    self.var_36225742 = [];
+  if(!isDefined(self.swarms)) {
+    self.swarms = [];
   }
 
-  if(!isDefined(self.var_36225742)) {
-    self.var_36225742 = [];
-  } else if(!isarray(self.var_36225742)) {
-    self.var_36225742 = array(self.var_36225742);
+  if(!isDefined(self.swarms)) {
+    self.swarms = [];
+  } else if(!isarray(self.swarms)) {
+    self.swarms = array(self.swarms);
   }
 
-  self.var_36225742[self.var_36225742.size] = swarm;
+  self.swarms[self.swarms.size] = swarm;
   swarm thread function_187bcbe();
   swarm thread function_e57b9f29();
 }
@@ -354,15 +354,15 @@ function private function_187bcbe() {
 
       var_f6107d1 = (self.origin[0], self.origin[1], var_2f769fb1[2] + sin(var_2d0b175) * 100);
       var_2d0b175 += 0.02;
-      var_8a380e81 = vectorNormalize(var_2f769fb1 - var_f6107d1);
-      circle_pos = -1 * var_8a380e81 * 200 + var_2f769fb1;
+      dir_to_target = vectorNormalize(var_2f769fb1 - var_f6107d1);
+      circle_pos = -1 * dir_to_target * 200 + var_2f769fb1;
 
       if(getdvarint(#"hash_7b1300b093008e51", 0) > 0) {
         debugstar(circle_pos, 20, (0, 1, 0));
       }
 
       z_axis = (0, 0, clockwise);
-      var_dc77dd5c = vectorcross(var_8a380e81, z_axis);
+      var_dc77dd5c = vectorcross(dir_to_target, z_axis);
       target_pos = circle_pos + var_dc77dd5c * self.var_88b20e7f;
       self function_c9bcf1cb(target_pos);
 
@@ -475,7 +475,7 @@ function private function_c9bcf1cb(var_2f769fb1, var_1f14bda8, var_4717cb50) {
 }
 
 function private function_953cead6() {
-  if(!isDefined(self.var_36225742) || self.var_36225742.size === 0) {
+  if(!isDefined(self.swarms) || self.swarms.size === 0) {
     return;
   }
 
@@ -489,10 +489,10 @@ function private function_953cead6() {
         continue;
       }
 
-      if(isDefined(self.var_36225742)) {
+      if(isDefined(self.swarms)) {
         var_ebfb164 = 0;
 
-        foreach(swarm in self.var_36225742) {
+        foreach(swarm in self.swarms) {
           if(isDefined(swarm.target_ent) && swarm.target_ent == player) {
             var_ebfb164 = 1;
             break;

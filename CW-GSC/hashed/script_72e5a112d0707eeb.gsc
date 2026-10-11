@@ -79,13 +79,13 @@ function main(str_objective, b_starting) {
   level.park colors::disable();
   var_7caf50bf = getnode("rooftop_park_node", "targetname");
   level.park setgoal(var_7caf50bf);
-  level.park battlechatter::function_2ab9360b(0);
+  level.park battlechatter::bc_allow(0);
   level.lazar.ignoreall = 0;
   level.lazar.script_accuracy = 1;
   level.lazar colors::disable();
   var_cb77324d = getnode("rooftop_lazar_node", "targetname");
   level.lazar setgoal(var_cb77324d);
-  level.lazar battlechatter::function_2ab9360b(0);
+  level.lazar battlechatter::bc_allow(0);
   createthreatbiasgroup("allies");
   createthreatbiasgroup("enemies");
   setthreatbias("allies", "enemies", 400);
@@ -150,19 +150,19 @@ function main(str_objective, b_starting) {
 
   if(isDefined(level.redshirt_2)) {
     level.redshirt_2 val::set(#"hash_34296d85d30e4cc7", "magic_bullet_shield", 0);
-    var_8a7d768 = struct::get("redshirt_2_bullet_origin", "targetname");
+    bullet_origin = struct::get("redshirt_2_bullet_origin", "targetname");
     var_feeb1a4b = struct::get("redshirt_2_bullet_end_1", "targetname");
     var_7eca9a0c = struct::get("redshirt_2_bullet_end_2", "targetname");
     var_b1197ea9 = struct::get("redshirt_2_bullet_end_3", "targetname");
     eye_pos = level.redshirt_2 getEye();
     level.redshirt_2.health = 1;
-    magicbullet(getweapon(#"ar_accurate_t9"), var_8a7d768.origin, eye_pos);
+    magicbullet(getweapon(#"ar_accurate_t9"), bullet_origin.origin, eye_pos);
     wait randomfloatrange(0.4, 0.5);
-    magicbullet(getweapon(#"ar_accurate_t9"), var_8a7d768.origin, var_feeb1a4b.origin);
+    magicbullet(getweapon(#"ar_accurate_t9"), bullet_origin.origin, var_feeb1a4b.origin);
     wait randomfloatrange(0.2, 0.5);
-    magicbullet(getweapon(#"ar_accurate_t9"), var_8a7d768.origin, var_7eca9a0c.origin);
+    magicbullet(getweapon(#"ar_accurate_t9"), bullet_origin.origin, var_7eca9a0c.origin);
     wait randomfloatrange(0.3, 0.5);
-    magicbullet(getweapon(#"ar_accurate_t9"), var_8a7d768.origin, var_b1197ea9.origin);
+    magicbullet(getweapon(#"ar_accurate_t9"), bullet_origin.origin, var_b1197ea9.origin);
 
     if(isalive(level.redshirt_2)) {
       level.redshirt_2 kill();
@@ -217,7 +217,7 @@ function main(str_objective, b_starting) {
   hms_util::print("<dev string:x65>");
 
   objectives::complete("obj_defend");
-  skipto::function_4e3ab877("rooftop_defend_1");
+  skipto::objective_completed("rooftop_defend_1");
 }
 
 function function_f6c194ca() {
@@ -244,17 +244,17 @@ function function_f6c194ca() {
   level flag::set("flg_redshirts_killed");
 }
 
-function function_1bdb683(var_9608b240, min_delay = 0.5, max_delay = 2.5) {
+function function_1bdb683(volume_targetname, min_delay = 0.5, max_delay = 2.5) {
   self endon(#"death");
   wait randomfloatrange(min_delay, max_delay);
-  self ai::set_goal(var_9608b240, "targetname", 1);
+  self ai::set_goal(volume_targetname, "targetname", 1);
 }
 
 function function_860ecc4b() {
   var_4409ee01 = struct::get_array("wave_2_smoke", "targetname");
 
-  foreach(var_10ed23ba in var_4409ee01) {
-    e_grenade = level.player magicgrenadeplayer(getweapon(#"willy_pete"), var_10ed23ba.origin, (0, 0, 0));
+  foreach(s_smoke in var_4409ee01) {
+    e_grenade = level.player magicgrenadeplayer(getweapon(#"willy_pete"), s_smoke.origin, (0, 0, 0));
     e_grenade.var_3791d005 = 0;
     wait randomfloatrange(1, 3);
   }
@@ -283,11 +283,11 @@ function function_7f3b71b8() {
   level thread function_611ca16();
 
   if(isDefined(level.park)) {
-    level.park battlechatter::function_2ab9360b(0);
+    level.park battlechatter::bc_allow(0);
   }
 
   if(isDefined(level.lazar)) {
-    level.lazar battlechatter::function_2ab9360b(0);
+    level.lazar battlechatter::bc_allow(0);
   }
 
   level flag::wait_till("flg_redshirts_killed");
@@ -318,7 +318,7 @@ function function_98346614() {
   wait randomfloatrange(2, 4);
 
   if(isDefined(level.redshirt_2)) {
-    level.redshirt_2 battlechatter::function_2ab9360b(0);
+    level.redshirt_2 battlechatter::bc_allow(0);
   }
 
   level.redshirt_2 hms_util::dialogue("vox_cp_cbcr_02300_cia1_weresittingduck_0b", 0, "allies", "CIA Operative");
@@ -326,11 +326,11 @@ function function_98346614() {
   level.redshirt_2 hms_util::dialogue("vox_cp_cbcr_02300_cia1_theyrebackingof_d7", 0, "allies", "CIA Operative");
 
   if(isDefined(level.redshirt_2)) {
-    level.redshirt_2 battlechatter::function_2ab9360b(1);
+    level.redshirt_2 battlechatter::bc_allow(1);
   }
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   hms_util::print("<dev string:x78>");
 }
 

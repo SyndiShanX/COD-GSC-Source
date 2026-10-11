@@ -37,8 +37,8 @@ function init() {
 }
 
 function function_cb06f399() {
-  if(isDefined(self.var_cd42b9c0)) {
-    self.var_cd42b9c0 delete();
+  if(isDefined(self.mapobject)) {
+    self.mapobject delete();
   }
 
   if(isDefined(self.walldecor)) {
@@ -255,7 +255,7 @@ function function_e71841a() {
       height = int(args[3]);
       var_5e62902b.trigger = namespace_ec06fe4a::spawntrigger("trigger_box", var_5e62902b.origin, 2, length, height, width);
       assert(isDefined(var_f6198c5b.script_noteworthy), "<dev string:x51>");
-      var_5e62902b.room = namespace_5a917022::function_c8892b0f(var_f6198c5b.script_noteworthy);
+      var_5e62902b.room = doa_bonus_room::function_c8892b0f(var_f6198c5b.script_noteworthy);
       assert(isDefined(var_5e62902b.room), "<dev string:x72>");
 
       if(isDefined(args[4])) {
@@ -291,7 +291,7 @@ function function_e71841a() {
         }
       }
 
-      var_5e62902b.trigger thread namespace_5a917022::function_23ea6695(var_5e62902b.trigger, var_5e62902b.room);
+      var_5e62902b.trigger thread doa_bonus_room::function_23ea6695(var_5e62902b.trigger, var_5e62902b.room);
     }
 
     self.wallbuy[self.wallbuy.size] = var_5e62902b;

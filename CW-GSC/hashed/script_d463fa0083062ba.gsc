@@ -41,7 +41,7 @@ function starting(str_skipto) {
   level thread scene::init("scene_kgb_elevator_holdup");
   level thread scene::init("scene_kgb_walkup_adler");
   level thread scene::init("scene_kgb_poison_tea");
-  level battlechatter::function_2ab9360b(0);
+  level battlechatter::bc_allow(0);
   level.checkpoint_clip = getEnt("checkpoint_clip", "targetname");
   level.checkpoint_clip notsolid();
   level.checkpoint_clip_right = getEnt("checkpoint_clip_right", "targetname");
@@ -57,7 +57,7 @@ function main(str_skipto, b_starting) {
   namespace_e77bf565::function_e2e72d4(1);
 
   if(is_true(b_starting)) {
-    kgb_ins_prepare::function_52f0fcb3(str_skipto);
+    kgb_ins_prepare::office_guys(str_skipto);
     kgb_ins_prepare::function_84d00884();
     level thread namespace_99e99ffa::function_99e99ffa(str_skipto);
     level thread namespace_e77bf565::function_ada6d016();
@@ -67,7 +67,7 @@ function main(str_skipto, b_starting) {
   level flag::wait_till("ins_briefing_complete");
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
@@ -77,7 +77,7 @@ function init_flags() {}
 
 function init_clientfields() {}
 
-function function_22b7fffd() {}
+function init_scenes() {}
 
 function function_e526d368() {
   location = struct::get("briefing_entrance", "targetname");
@@ -223,8 +223,8 @@ function function_823fd8b5() {
 function function_20ecf97d(a_ents) {
   level.var_1588c3c8 = a_ents[#"hash_39b2b3e2b4b9deaa"];
   level.var_1588c3c8 thread entname::add(#"hash_a566926dd89b47", #"axis");
-  var_7198a076 = a_ents[#"hash_713540a10ff22151"];
-  var_7198a076 thread entname::add(#"hash_6a1195604c394694", #"axis");
+  zakhaev = a_ents[#"zakhaev"];
+  zakhaev thread entname::add(#"hash_6a1195604c394694", #"axis");
   kravchenko = a_ents[#"kravchenko"];
   kravchenko thread entname::add(#"hash_3a5989f4b42dab1e", #"axis");
   general = a_ents[#"hash_1b438d741661c069"];

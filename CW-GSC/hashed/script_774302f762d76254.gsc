@@ -56,11 +56,11 @@ function init() {
   level.doa.var_cf250523 = &doa_player::callback_playerkilled;
   level.doa.var_abe40be4 = &doa_player::callback_playerdamage;
   level.doa.var_cd10d20a = &doa_player::callback_playerlaststand;
-  level.doa.var_16a35e94 = &namespace_7f5aeb59::function_ebcb2cca;
+  level.doa.var_16a35e94 = &doa_player_utility::function_ebcb2cca;
   level.doa.var_abd5eb1e = &function_d41688e3;
   level.doa.var_99ee4341 = &function_ce7e12de;
-  level.doa.var_3bc55386 = &namespace_6e90e490::function_3332c6a1;
-  level.doa.var_d0b39b1a = &namespace_eccff4fb::initplayer;
+  level.doa.var_3bc55386 = &namespace_6e90e490::initplayerhud;
+  level.doa.var_d0b39b1a = &doa_score::initplayer;
   level.doa.var_502e9288 = &namespace_d2efac9a::initplayer;
   level.doa.var_318aa67a = getdvarint(#"hash_670ddb067d311f3d", 0);
   level.doa.hardcoremode = getdvarint(#"hash_47849a8681a67ce7", 0);
@@ -149,7 +149,7 @@ function function_32d5e898() {
   level.doa.var_4cfbc260 = 0;
   level.doa.var_997a0313 = 0;
   level.doa.var_6c58d51 = 0;
-  level.doa.var_b456a02b = 0;
+  level.doa.game_duration = 0;
   level.doa.enemy_died = 0;
   level.doa.var_3e7292fc = 100;
   level.doa.var_9f7a910d = undefined;
@@ -159,7 +159,7 @@ function function_32d5e898() {
   level.doa.var_1f2c7d5f = undefined;
   level.doa.var_a3e53b88 = undefined;
   level.doa.var_8f710e5d = undefined;
-  level.doa.var_41adf604 = undefined;
+  level.doa.bossround = undefined;
   level.doa.var_318aa67a = getdvarint(#"hash_670ddb067d311f3d", 0);
   level.doa.hardcoremode = getdvarint(#"hash_47849a8681a67ce7", 0);
   level.var_7dcdbe16 = level.doa.var_318aa67a;
@@ -184,19 +184,19 @@ function function_32d5e898() {
   level flag::clear("doa_rof_visited");
   level flag::clear("doa_roj_visited");
   level flag::clear("doa_podium_showPlaces");
-  level.doa.var_a4af7793 = [];
+  level.doa.downedplayers = [];
   level.var_68de7e10 = 0;
   level.var_52f56101 = undefined;
 
-  if(isDefined(level.doa.var_5598fe58)) {
-    foreach(silverback in level.doa.var_5598fe58) {
+  if(isDefined(level.doa.silverbacks)) {
+    foreach(silverback in level.doa.silverbacks) {
       if(isDefined(silverback)) {
         silverback delete();
       }
     }
   }
 
-  level.doa.var_5598fe58 = [];
+  level.doa.silverbacks = [];
   level.doa.var_65a70dc = doa_enemy::function_d7c5adee("basic_zombie");
   resetdynents();
   function_9ad4988();
@@ -218,31 +218,31 @@ function function_170b90e5() {
   level flag::init("doa_rof_visited", 0);
   level flag::init("doa_roj_visited", 0);
   level flag::init("doa_podium_showPlaces", 0);
-  namespace_8c04284b::init();
+  doa_arena::init();
   namespace_77eccc4f::init();
   doa_banner::init();
-  namespace_5a917022::init();
+  doa_bonus_room::init();
   namespace_1e25ad94::init();
   namespace_41cb996::init();
   doa_enemy::init();
-  namespace_1c2a96f9::init();
-  namespace_83eb6304::init();
-  namespace_ed80aead::init();
-  namespace_268747c0::init();
+  doa_fate::init();
+  doa_fx::init();
+  doa_gib::init();
+  doa_hazard::init();
   namespace_6e90e490::init();
-  namespace_b7d49cfd::init();
-  namespace_dfc652ee::init();
+  doa_outro::init();
+  doa_pickups::init();
   doa_player::init();
-  namespace_eccff4fb::init();
+  doa_score::init();
   namespace_e32bb68::init();
   namespace_d2efac9a::init();
-  namespace_9fc66ac::init();
+  doa_sound::init();
   namespace_c85a46fe::init();
   doa_wild::init();
   namespace_491fa2b2::init();
   namespace_a6056a45::init();
   level thread namespace_981c1f3c::init();
-  level thread namespace_e857b038::init();
+  level thread doa_dev::init();
   level flag::set("doa_game_initialized");
   level.doa.var_be74bf2c = -1;
   waitframe(1);
@@ -274,7 +274,7 @@ function function_e22d3978(number = level.doa.roundnumber) {
   }
 
   setroundsplayed(level.doa.roundnumber);
-  namespace_9fc66ac::function_2fc07d61();
+  doa_sound::function_2fc07d61();
 }
 
 function function_59a9cf1d() {
@@ -286,7 +286,7 @@ function function_21cd3890(state) {
   level.doa.world_state = state;
   level clientfield::set("world_state", level.doa.world_state);
   level clientfield::set_world_uimodel("DOA_GLOBALUIMODEL_WORLDSTATE", level.doa.world_state);
-  namespace_9fc66ac::function_65fcd877();
+  doa_sound::function_65fcd877();
   level notify(#"hash_460213205489abb4", {
     #state: state
   });
@@ -305,7 +305,7 @@ function game_reset() {
   level thread function_8682e93e();
   level thread function_e591be12();
   level thread function_e60cadb8();
-  namespace_dfc652ee::function_18372b20();
+  doa_pickups::function_18372b20();
   namespace_491fa2b2::main();
   namespace_a6056a45::main();
   namespace_ec06fe4a::function_de70888a();
@@ -317,13 +317,13 @@ function game_reset() {
   level thread namespace_981c1f3c::main();
   level thread namespace_6e90e490::function_db945ce9();
   level thread doa_player::main();
-  level thread namespace_8c04284b::main();
+  level thread doa_arena::main();
   level thread doa_enemy::main();
-  level thread namespace_1c2a96f9::main();
+  level thread doa_fate::main();
   level thread doa_wild::main();
-  level thread namespace_268747c0::main();
-  level thread namespace_5a917022::main();
-  level thread namespace_9fc66ac::main();
+  level thread doa_hazard::main();
+  level thread doa_bonus_room::main();
+  level thread doa_sound::main();
   level thread namespace_d2efac9a::main();
   level thread main();
 }
@@ -377,10 +377,10 @@ function main() {
   util::wait_network_frame();
 
   foreach(player in getPlayers()) {
-    player notify(#"hash_7893364bd228d63e", {
+    player notify(#"doa_playerdumpfps", {
       #var_cff8d1e: 1
     });
-    player namespace_7f5aeb59::function_5b373dae();
+    player doa_player_utility::function_5b373dae();
   }
 
   if(isDefined(level.doa.var_99ee4341)) {
@@ -415,7 +415,7 @@ function function_ce7e12de(var_c042523 = 0) {
   level notify(#"game_over");
   namespace_ec06fe4a::function_445bad70();
   level thread namespace_ec06fe4a::function_de70888a(0);
-  level notify(#"hash_7893364bd228d63e");
+  level notify(#"doa_playerdumpfps");
   level namespace_6e90e490::function_fa6f7ba7();
 
   if(var_c042523 == 0 && isDefined(level.doa.var_cb342cbc)) {
@@ -424,17 +424,17 @@ function function_ce7e12de(var_c042523 = 0) {
 
   function_21cd3890(1);
   level doa_banner::function_7a0e5387(59);
-  level thread namespace_9fc66ac::announce(72);
+  level thread doa_sound::announce(72);
   luinotifyevent(#"force_scoreboard", 1, 0);
   wait 7;
   util::preload_frontend();
   wait 3;
-  level namespace_7f5aeb59::function_67f054d7();
+  level doa_player_utility::function_67f054d7();
   level notify(#"hash_659967997e5f426e");
 }
 
 function function_a511c7c4() {
-  if(is_true(level.doa.var_41adf604)) {
+  if(is_true(level.doa.bossround)) {
     return false;
   }
 
@@ -442,7 +442,7 @@ function function_a511c7c4() {
     return false;
   }
 
-  players = namespace_7f5aeb59::function_23e1f90f();
+  players = doa_player_utility::function_23e1f90f();
 
   if(players.size > 1) {
     return false;
@@ -601,7 +601,7 @@ function function_8682e93e() {
     level thread function_8682e93e();
   }
 
-  level thread namespace_1c2a96f9::function_11463552();
+  level thread doa_fate::function_11463552();
   level waittill(#"hash_325440d5433be263", #"game_over");
   level thread function_8682e93e();
 }

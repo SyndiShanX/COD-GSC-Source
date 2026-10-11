@@ -18,8 +18,8 @@ function function_12b1d8eb() {
   audio::playloopat("mus_underscore_aboveground_loop_0", (0, 0, 0));
   audio::playloopat("mus_underscore_belowground_loop_0", (0, 0, 0));
   audio::playloopat(#"amb_computer", (156, 2017, -211));
-  function_5ea2c6e3("mute_underscore_aboveground", 0);
-  function_5ea2c6e3("mute_underscore_belowground", 0);
+  addsubmix("mute_underscore_aboveground", 0);
+  addsubmix("mute_underscore_belowground", 0);
   level waittill(#"end_game");
   audio::stoploopat("mus_underscore_aboveground_loop_0", (0, 0, 0));
   audio::stoploopat("mus_underscore_belowground_loop_0", (0, 0, 0));
@@ -102,16 +102,16 @@ function function_91c6e82a() {
   level waittill(#"power_on");
   playSound(0, #"hash_507a8d3d4874b9ca", (984, -658, -207));
   wait 0.25;
-  playSound(0, #"hash_61832f7330aa03c", (524, -84, -268));
-  playSound(0, #"hash_129c564608f837b6", (524, -84, -268));
+  playSound(0, #"zmb_bunker_power_up", (524, -84, -268));
+  playSound(0, #"zmb_bunker_power_alarm", (524, -84, -268));
   wait 0.1;
-  playSound(0, #"hash_487cbd8d6e939533", (524, -84, -268));
+  playSound(0, #"zmb_spark_shower", (524, -84, -268));
   wait 0.4;
-  playSound(0, #"hash_43dad678bc35ddb7", (524, -84, -268));
+  playSound(0, #"zmb_switch_circuit", (524, -84, -268));
   wait 0.5;
-  playSound(0, #"hash_43dad678bc35ddb7", (-744, -1392, -322));
+  playSound(0, #"zmb_switch_circuit", (-744, -1392, -322));
   wait 0.5;
-  playSound(0, #"hash_43dad678bc35ddb7", (1641, 970, -360));
+  playSound(0, #"zmb_switch_circuit", (1641, 970, -360));
 }
 
 function function_2f3017ad(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -136,8 +136,8 @@ function function_21fee83f(var_c4f44e2) {
   }
 
   if(var_c4f44e2 === 2) {
-    function_672403ca("mute_underscore_aboveground", 1, 1);
-    function_672403ca("mute_underscore_belowground", 1, 1);
+    blendsubmix("mute_underscore_aboveground", 1, 1);
+    blendsubmix("mute_underscore_belowground", 1, 1);
     level.var_c5cba082 = 1;
     return;
   }
@@ -158,13 +158,13 @@ function function_21fee83f(var_c4f44e2) {
     }
 
     if(var_c4f44e2 === 0) {
-      function_672403ca("mute_underscore_aboveground", 5, 0);
-      function_672403ca("mute_underscore_belowground", 5, 1);
+      blendsubmix("mute_underscore_aboveground", 5, 0);
+      blendsubmix("mute_underscore_belowground", 5, 1);
       return;
     }
 
-    function_672403ca("mute_underscore_aboveground", 5, 1);
-    function_672403ca("mute_underscore_belowground", 5, 0);
+    blendsubmix("mute_underscore_aboveground", 5, 1);
+    blendsubmix("mute_underscore_belowground", 5, 0);
   }
 }
 

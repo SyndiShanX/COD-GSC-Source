@@ -17,9 +17,9 @@
 
 function event_handler[level_preinit] function_b489bb7b(eventstruct) {
   snd::function_d4ec748e(&function_f2a2832d);
-  snd::function_ce78b33b(&function_32ab045);
+  snd::function_ce78b33b(&_targetname);
   snd::trigger_init(&_trigger);
-  snd::function_5e69f468(&_objective);
+  snd::skipto_init(&_objective);
 }
 
 function event_handler[event_cc819519] function_686b88aa(eventstruct) {
@@ -28,50 +28,50 @@ function event_handler[event_cc819519] function_686b88aa(eventstruct) {
   audio::function_21f8b7c3();
   element_init();
   level.var_936dc3f3 = 0;
-  function_5ea2c6e3("cp_ger_hub_plrfly_down", 0, 1);
+  addsubmix("cp_ger_hub_plrfly_down", 0, 1);
 }
 
-function private function_32ab045(ent, name) {
+function private _targetname(ent, name) {
   switch (name) {
     case #"adler":
       level.adler = ent;
-      level.adler thread function_952e21e3(ent, name);
+      level.adler thread allies_context_init(ent, name);
       level.adler waittill(#"death");
       level.adler = undefined;
       break;
     case #"lazar":
       level.lazar = ent;
-      level.lazar thread function_952e21e3(ent, name);
+      level.lazar thread allies_context_init(ent, name);
       level.lazar waittill(#"death");
       level.lazar = undefined;
       break;
     case #"park":
       level.park = ent;
-      level.park thread function_952e21e3(ent, name);
+      level.park thread allies_context_init(ent, name);
       level.park waittill(#"death");
       level.park = undefined;
       break;
     case #"sims":
       level.sims = ent;
-      level.sims thread function_952e21e3(ent, name);
+      level.sims thread allies_context_init(ent, name);
       level.sims waittill(#"death");
       level.sims = undefined;
       break;
     case #"hudson":
       level.hudson = ent;
-      level.hudson thread function_952e21e3(ent, name);
+      level.hudson thread allies_context_init(ent, name);
       level.hudson waittill(#"death");
       level.hudson = undefined;
       break;
     case #"woods":
       level.woods = ent;
-      level.woods thread function_952e21e3(ent, name);
+      level.woods thread allies_context_init(ent, name);
       level.woods waittill(#"death");
       level.woods = undefined;
       break;
     case #"mason":
       level.mason = ent;
-      level.mason thread function_952e21e3(ent, name);
+      level.mason thread allies_context_init(ent, name);
       level.mason waittill(#"death");
       level.mason = undefined;
       break;
@@ -126,10 +126,10 @@ function private function_f2a2832d(player, msg) {
       function_a269371b();
       break;
     case #"hash_1b78b54c338981ad":
-      function_5ea2c6e3("cp_ger_hub8_submix", 0, 1);
+      addsubmix("cp_ger_hub8_submix", 0, 1);
       break;
     case #"hash_5c379cf8b486919b":
-      function_ed62c9c2("cp_ger_hub8_submix", 1);
+      clearsubmix("cp_ger_hub8_submix", 1);
       break;
     case #"post_prisoner_burn_scene":
       setsoundcontext("visit", "post_prisoner_burn_scene");
@@ -141,16 +141,16 @@ function private function_f2a2832d(player, msg) {
       level.var_28b99ea7 = "yamantau";
       function_a269371b();
       break;
-    case #"hash_774f81b7fe6ee1f6":
+    case #"duck_evidence_board_enter":
       audio::snd_set_snapshot("cp_ger_hub_evidenceboard_enter");
       break;
-    case #"hash_3f89f51c820e2ec0":
+    case #"duck_evidence_board_exit":
       audio::snd_set_snapshot("");
       break;
-    case #"hash_3e89d014789ae73b":
+    case #"duck_cp_ger_hub_arcade_machine_enter":
       audio::snd_set_snapshot("cp_ger_hub_arcade_machine");
       break;
-    case #"hash_3992190071e0da2f":
+    case #"duck_cp_ger_hub_arcade_machine_exit":
       audio::snd_set_snapshot("");
       break;
     case #"snd_overlook_scene":
@@ -171,37 +171,37 @@ function private function_f2a2832d(player, msg) {
     case #"ambient_ext_override":
       thread function_26282537();
       break;
-    case #"hash_6e37b7c047667b8e":
+    case #"ambient_int_override":
       thread function_eeb6e2e1();
       break;
     case #"ambient_override_return_to_normal":
       thread ambient_override_return_to_normal();
       break;
-    case #"hash_72dc7d49e5a3096a":
+    case #"dia_focus_on":
       thread dia_focus_on();
       break;
-    case #"hash_4f97009133f1b2dc":
+    case #"dia_focus_off":
       thread dia_focus_off();
       break;
-    case #"hash_3031949ab2125e03":
+    case #"amb_takedown":
       function_5af45515();
       break;
     case #"amb_armada":
       function_f4c3ff4f();
       break;
-    case #"hash_5b6ae81610d69a78":
+    case #"amb_yamantau":
       function_d701d197();
       break;
-    case #"hash_2a6c48d5e64b11f4":
+    case #"amb_kgb":
       function_91962847();
       break;
-    case #"hash_6fbdea34819cb7c5":
+    case #"amb_cuba":
       function_351d940();
       break;
     case #"amb_prisoner":
       function_d3856f8a();
       break;
-    case #"hash_4e3a33825e832ae6":
+    case #"amb_burns":
       function_ef8c9b18();
       break;
     default:
@@ -332,7 +332,7 @@ function allies_init() {
   arrayremovevalue(level.var_dafd41b2, undefined, 1);
 }
 
-function function_952e21e3(ent, name) {
+function allies_context_init(ent, name) {
   self endon(#"death");
 
   while(!isDefined(level.var_28b99ea7)) {
@@ -365,7 +365,7 @@ function function_a269371b() {
 
   if(isarray(level.var_dafd41b2)) {
     foreach(ally_name, ally in level.var_dafd41b2) {
-      ally thread function_952e21e3(ally, ally_name);
+      ally thread allies_context_init(ally, ally_name);
     }
   }
 }

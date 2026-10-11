@@ -34,7 +34,7 @@ class class_ab111f2c: cluielem {
     cluielem::add_clientfield("display_noblink", 1, 1, "counter");
   }
 
-  function function_a16f86c1(player, value) {
+  function set_hint_text(player, value) {
     player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "hint_text", value);
   }
 
@@ -61,8 +61,8 @@ function is_open(player) {
   return [[self]] - > function_7bfd10e6(player);
 }
 
-function function_a16f86c1(player, value) {
-  [[self]] - > function_a16f86c1(player, value);
+function set_hint_text(player, value) {
+  [[self]] - > set_hint_text(player, value);
 }
 
 function function_64d95cad(player) {

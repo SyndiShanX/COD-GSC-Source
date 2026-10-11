@@ -17,9 +17,9 @@
 
 function event_handler[level_preinit] function_b489bb7b(eventstruct) {
   snd::function_d4ec748e(&function_f2a2832d);
-  snd::function_ce78b33b(&function_32ab045);
+  snd::function_ce78b33b(&_targetname);
   snd::trigger_init(&_trigger);
-  snd::function_5e69f468(&_objective);
+  snd::skipto_init(&_objective);
 }
 
 function event_handler[event_cc819519] function_686b88aa(eventstruct) {
@@ -34,13 +34,13 @@ function event_handler[event_cc819519] function_686b88aa(eventstruct) {
   thread function_31b78e7d();
 }
 
-function private function_32ab045(ent, name) {
+function private _targetname(ent, name) {
   switch (name) {
     case #"audio_srv_heli":
-      level.var_ebbd5cf8 = ent;
+      level.vh_hind = ent;
       thread function_f2ee7a27(ent);
       ent waittill(#"death");
-      level.var_ebbd5cf8 = undefined;
+      level.vh_hind = undefined;
       break;
     case #"hash_65e6eae762f128ac":
       break;
@@ -115,7 +115,7 @@ function private function_f2a2832d(player, msg) {
     case #"audio_level_begin_duck_stop":
       thread function_1cfbed4a();
       break;
-    case #"hash_42ab199f7f0a951a":
+    case #"audio_player_zipline_start":
       thread function_d27488d();
       break;
     case #"audio_level_triton_verb_disable":
@@ -124,10 +124,10 @@ function private function_f2a2832d(player, msg) {
     case #"audio_level_triton_verb_enable":
       audio::function_d3790fe();
       break;
-    case #"hash_5fdce3012e88ffac":
+    case #"audio_server_lift_start":
       thread function_58caa4cd();
       break;
-    case #"hash_48b5a2ae2037fea":
+    case #"audio_sever_heli_custom":
       waitframe(1);
       level notify(#"hash_6dde5f256f8081a8");
       break;
@@ -198,11 +198,11 @@ function function_befba10a() {
 }
 
 function function_563a791() {
-  function_5ea2c6e3("cp_rus_yamnantau_level_begin");
+  addsubmix("cp_rus_yamnantau_level_begin");
 }
 
 function function_1cfbed4a() {
-  function_ed62c9c2("cp_rus_yamnantau_level_begin");
+  clearsubmix("cp_rus_yamnantau_level_begin");
 }
 
 function function_6c2fc08e() {
@@ -248,7 +248,7 @@ function function_f2ee7a27(ent) {
 }
 
 function function_58caa4cd() {
-  function_5ea2c6e3("cp_rus_yamantau_server_lift_submix", 4, 1);
+  addsubmix("cp_rus_yamantau_server_lift_submix", 4, 1);
 }
 
 function function_956b43e5() {

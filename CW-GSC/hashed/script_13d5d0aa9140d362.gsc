@@ -84,7 +84,7 @@ function function_76468d55(a_ai_zombies, v_org, eattacker) {
           self thread function_912eedf3(a_ai_zombies[i], eattacker);
         }
       } else if(isDefined(eattacker) && isDefined(self)) {
-        a_ai_zombies[i] thread function_e1c4e1c2(v_org, eattacker, self);
+        a_ai_zombies[i] thread knockdown_zombie(v_org, eattacker, self);
       }
     }
 
@@ -123,12 +123,12 @@ function function_139ba789(zombie, eattacker) {
     return;
   }
 
-  var_a0d520ae = zombie.zm_ai_category === #"special";
+  isspecial = zombie.zm_ai_category === #"special";
   iselite = zombie.zm_ai_category === #"elite";
   [[level.var_153ff55b]] - > waitinqueue(zombie);
 
   if(isPlayer(eattacker)) {
-    if(var_a0d520ae) {
+    if(isspecial) {
       scoreevents::processscoreevent("driver_kia_special_zm", eattacker, zombie);
     } else if(iselite) {
       scoreevents::processscoreevent("driver_kia_elite_zm", eattacker, zombie);
@@ -163,7 +163,7 @@ function function_912eedf3(zombie, eattacker) {
   }
 }
 
-function function_e1c4e1c2(v_org, eattacker, einflictor) {
+function knockdown_zombie(v_org, eattacker, einflictor) {
   self endon(#"death");
 
   if(isalive(self)) {
@@ -575,7 +575,7 @@ function function_cddedd63(var_1028910, v_angle_offset = (0, 0, 0), n_x_offset) 
   struct = spawnStruct();
   struct.origin = self.origin + v_origin_offset;
   struct.angles = self.angles + v_angle_offset;
-  struct.var_90d0c0ff = var_1028910;
+  struct.spawn_anim_alias = var_1028910;
   trigger.vehicle = self;
   trigger.vehicle_position = self.origin;
   trigger.spawn_struct = struct;
@@ -583,20 +583,20 @@ function function_cddedd63(var_1028910, v_angle_offset = (0, 0, 0), n_x_offset) 
 }
 
 function event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
-  var_6031fb1f = eventstruct.vehicle;
+  jetski = eventstruct.vehicle;
 
-  if(isvehicle(var_6031fb1f) && is_true(var_6031fb1f.var_a419f368)) {
+  if(isvehicle(jetski) && is_true(jetski.var_a419f368)) {
     waitframe(1);
 
-    if(isalive(var_6031fb1f)) {
-      var_6031fb1f takeplayercontrol();
+    if(isalive(jetski)) {
+      jetski takeplayercontrol();
 
-      while(isalive(var_6031fb1f) && var_6031fb1f function_7548ecb2()) {
+      while(isalive(jetski) && jetski function_7548ecb2()) {
         waitframe(1);
       }
 
-      if(isalive(var_6031fb1f)) {
-        var_6031fb1f returnplayercontrol();
+      if(isalive(jetski)) {
+        jetski returnplayercontrol();
       }
     }
   }
@@ -609,14 +609,14 @@ function on_vehicle_spawned() {
     return;
   }
 
-  var_6031fb1f = self;
+  jetski = self;
 
-  if(isDefined(var_6031fb1f.var_df2f9ba4)) {
-    var_6031fb1f.var_a419f368 = 1;
-    bundles = struct::get_script_bundle_instances("scene", ["scene_jetski_deploy_" + var_6031fb1f.var_df2f9ba4, "targetname"]);
+  if(isDefined(jetski.var_df2f9ba4)) {
+    jetski.var_a419f368 = 1;
+    bundles = struct::get_script_bundle_instances("scene", ["scene_jetski_deploy_" + jetski.var_df2f9ba4, "targetname"]);
 
     foreach(bundle in bundles) {
-      if(bundle.var_df2f9ba4 === var_6031fb1f.var_df2f9ba4) {
+      if(bundle.var_df2f9ba4 === jetski.var_df2f9ba4) {
         bundle.targetname = undefined;
         bundle thread scene::init(bundle.scriptbundlename);
       }
@@ -626,9 +626,9 @@ function on_vehicle_spawned() {
   wait 1;
   waitframe(1);
 
-  if(isDefined(var_6031fb1f)) {
+  if(isDefined(jetski)) {
     if(isDefined(bundle)) {
-      var_6031fb1f player_vehicle::function_971ca64b();
+      jetski player_vehicle::function_971ca64b();
 
       if(!isDefined(bundle.script_side)) {
         bundle.script_side = "port";
@@ -636,16 +636,16 @@ function on_vehicle_spawned() {
 
       var_d487d45c = bundle.scene_ents[#"prop 1"];
 
-      while(!isDefined(var_d487d45c) && isalive(var_6031fb1f)) {
+      while(!isDefined(var_d487d45c) && isalive(jetski)) {
         var_d487d45c = bundle.scene_ents[#"prop 1"];
         waitframe(1);
       }
 
-      if(isalive(var_6031fb1f)) {
-        var_6031fb1f.var_369c83bd = 1;
-        var_6031fb1f.var_475b9991 = 1;
-        var_6031fb1f.var_c0381a15 = 1;
-        var_6031fb1f linkTo(var_d487d45c, "tag_jetski", (0, 0, 0), (0, 0, 0));
+      if(isalive(jetski)) {
+        jetski.var_369c83bd = 1;
+        jetski.var_475b9991 = 1;
+        jetski.var_c0381a15 = 1;
+        jetski linkTo(var_d487d45c, "tag_jetski", (0, 0, 0), (0, 0, 0));
       }
 
       var_c8229258 = "enter_vehicle";
@@ -654,14 +654,14 @@ function on_vehicle_spawned() {
         var_c8229258 = "deploy";
       }
 
-      if(isalive(var_6031fb1f)) {
-        var_71383cea = var_6031fb1f waittill(#"death", #"delete", var_c8229258);
+      if(isalive(jetski)) {
+        var_71383cea = jetski waittill(#"death", #"delete", var_c8229258);
 
         if(var_71383cea._notify === "death") {
-          if(isDefined(var_6031fb1f)) {
-            var_6031fb1f notsolid();
+          if(isDefined(jetski)) {
+            jetski notsolid();
 
-            while(isDefined(var_6031fb1f)) {
+            while(isDefined(jetski)) {
               waitframe(1);
             }
           }
@@ -670,7 +670,7 @@ function on_vehicle_spawned() {
 
       var_75fd5da3 = 1;
 
-      if(isvehicle(var_6031fb1f) && function_a6b2f443(var_6031fb1f)) {
+      if(isvehicle(jetski) && function_a6b2f443(jetski)) {
         var_75fd5da3 = 1;
       }
 
@@ -678,58 +678,58 @@ function on_vehicle_spawned() {
         if(isDefined(bundle) && isDefined(bundle.scriptbundlename)) {
           bundle thread scene::play(bundle.scriptbundlename);
 
-          if(isalive(var_6031fb1f)) {
-            var_2e4576cb = groundtrace(var_6031fb1f.origin, var_6031fb1f.origin + (0, 0, -1024), 1, var_6031fb1f, 0, 0);
-            offset = vectorscale(anglestoright(var_6031fb1f.angles) * -1, 8);
+          if(isalive(jetski)) {
+            var_2e4576cb = groundtrace(jetski.origin, jetski.origin + (0, 0, -1024), 1, jetski, 0, 0);
+            offset = vectorscale(anglestoright(jetski.angles) * -1, 8);
             rotation = 42;
 
             if(bundle.script_side == "starboard") {
               rotation = -42;
-              offset = vectorscale(anglestoright(var_6031fb1f.angles), 8);
+              offset = vectorscale(anglestoright(jetski.angles), 8);
             }
 
-            var_6b6fec6c = var_2e4576cb[#"position"] + offset;
-            fall_time = abs(distance(var_6031fb1f.origin, var_6b6fec6c) / 390);
+            fall_pos = var_2e4576cb[#"position"] + offset;
+            fall_time = abs(distance(jetski.origin, fall_pos) / 390);
 
-            if(isDefined(var_6031fb1f)) {
+            if(isDefined(jetski)) {
               if(var_75fd5da3) {
                 recenter_time = fall_time + 1;
-                var_6b6fec6c = var_6031fb1f.origin + offset;
+                fall_pos = jetski.origin + offset;
                 fall_time = 0.1;
               }
 
-              var_c11876a8 = util::spawn_model(#"tag_origin", var_6031fb1f.origin, var_6031fb1f.angles, undefined, 1);
+              var_c11876a8 = util::spawn_model(#"tag_origin", jetski.origin, jetski.angles, undefined, 1);
 
-              while(!isDefined(var_c11876a8) && isalive(var_6031fb1f)) {
+              while(!isDefined(var_c11876a8) && isalive(jetski)) {
                 waitframe(1);
               }
 
-              if(isalive(var_6031fb1f)) {
-                var_6031fb1f unlink();
-                var_6031fb1f linkTo(var_c11876a8);
+              if(isalive(jetski)) {
+                jetski unlink();
+                jetski linkTo(var_c11876a8);
                 var_c11876a8 rotateYaw(rotation, fall_time);
 
                 if(isDefined(var_c11876a8)) {
-                  var_c11876a8 moveTo(var_6b6fec6c, fall_time);
+                  var_c11876a8 moveTo(fall_pos, fall_time);
                   var_c11876a8 waittill(#"movedone");
                 }
               }
             }
 
-            player = var_6031fb1f.var_3ba86b09;
+            player = jetski.var_3ba86b09;
 
-            if(isalive(player) && isDefined(var_6031fb1f)) {
-              player setplayerangles(var_6031fb1f.angles);
+            if(isalive(player) && isDefined(jetski)) {
+              player setplayerangles(jetski.angles);
             }
           }
         }
 
-        if(isDefined(var_6031fb1f)) {
-          var_6031fb1f.var_369c83bd = 0;
-          var_6031fb1f.var_475b9991 = 0;
-          var_6031fb1f.var_c0381a15 = 0;
-          var_6031fb1f unlink();
-          var_6031fb1f.var_a419f368 = 0;
+        if(isDefined(jetski)) {
+          jetski.var_369c83bd = 0;
+          jetski.var_475b9991 = 0;
+          jetski.var_c0381a15 = 0;
+          jetski unlink();
+          jetski.var_a419f368 = 0;
         }
 
         if(isDefined(var_c11876a8)) {
@@ -739,8 +739,8 @@ function on_vehicle_spawned() {
 
       wait 10;
 
-      if(isalive(var_6031fb1f)) {
-        var_6031fb1f player_vehicle::function_a2626745();
+      if(isalive(jetski)) {
+        jetski player_vehicle::function_a2626745();
       }
     }
   }

@@ -26,7 +26,7 @@
 #using scripts\cp_common\util;
 #namespace namespace_b73b9191;
 
-function function_2683ec5d() {
+function spawn_woods() {
   if(isDefined(level.skipto_current_objective[0])) {
     switch (level.skipto_current_objective[0]) {
       case #"excavation_finale":
@@ -52,11 +52,11 @@ function function_2683ec5d() {
     }
   }
 
-  var_5b7b93ad[0] spawner::add_spawn_function(&function_2341d661);
+  var_5b7b93ad[0] spawner::add_spawn_function(&setup_woods);
   level.ai_woods = var_5b7b93ad[0] spawner::spawn(1);
 }
 
-function function_2341d661() {
+function setup_woods() {
   self.goalradius = 64;
   self val::set(#"woods", "allowdeath", 0);
   self ai::set_behavior_attribute("demeanor", "combat");
@@ -121,8 +121,8 @@ function function_48a0851a() {
   self setgoal(level.player);
 }
 
-function function_5d981106(var_8be63fee, n_count, str_flag) {
-  spawner::waittill_ai_group_ai_count(var_8be63fee, n_count);
+function function_5d981106(str_ai_group, n_count, str_flag) {
+  spawner::waittill_ai_group_ai_count(str_ai_group, n_count);
 
   if(isalive(level.player)) {
     level flag::set(str_flag);
@@ -403,7 +403,7 @@ function function_700c9104() {
   level.player thread function_d7ce9e77(1);
   snd::play("evt_yam_frozen_body_examine", self);
   level flag::set("flg_crossbow_bolt_corpse_interacted_with");
-  transient = savegame::function_6440b06b(#"transient");
+  transient = savegame::get_mission_data(#"transient");
   transient.var_c99708b8 = 1;
   level thread namespace_7468806b::function_6b5bf445(self.str_location);
   level thread function_2e5072b5(self.str_location);
@@ -421,7 +421,7 @@ function function_2e5072b5(str_location) {
 }
 
 function function_315b14d6() {
-  transient = savegame::function_6440b06b(#"transient");
+  transient = savegame::get_mission_data(#"transient");
 
   if(level flag::get("flg_crossbow_bolt_corpse_interacted_with") || is_true(transient.var_c99708b8)) {
     return true;
@@ -451,17 +451,17 @@ function function_346d9c79() {
 function function_cfb0039f(var_c33719f5) {
   level endon(#"save_restore");
   level flag::wait_till("all_players_connected");
-  var_615bb7b5 = getEnt(var_c33719f5, "targetname");
+  p8_kit_zt8_thi_01_door_10_right_painted_wood_01_grunge = getEnt(var_c33719f5, "targetname");
 
-  if(isDefined(var_615bb7b5)) {
+  if(isDefined(p8_kit_zt8_thi_01_door_10_right_painted_wood_01_grunge)) {
     if(collectibles::function_ab921f3d(5)) {
-      var_615bb7b5 delete();
+      p8_kit_zt8_thi_01_door_10_right_painted_wood_01_grunge delete();
       return;
     }
 
-    var_615bb7b5 util::create_cursor_hint("tag_origin", (0, 0, 4), #"hash_681addf148e5303");
-    var_615bb7b5 thread collectibles::function_d06c5a39();
-    var_615bb7b5 util::waittill_any_ents(var_615bb7b5, "trigger", level, "flg_collectible_found");
+    p8_kit_zt8_thi_01_door_10_right_painted_wood_01_grunge util::create_cursor_hint("tag_origin", (0, 0, 4), #"hash_681addf148e5303");
+    p8_kit_zt8_thi_01_door_10_right_painted_wood_01_grunge thread collectibles::function_d06c5a39();
+    p8_kit_zt8_thi_01_door_10_right_painted_wood_01_grunge util::waittill_any_ents(p8_kit_zt8_thi_01_door_10_right_painted_wood_01_grunge, "trigger", level, "flg_collectible_found");
 
     if(!level flag::get("flg_collectible_found")) {
       level flag::set("flg_collectible_found");
@@ -470,8 +470,8 @@ function function_cfb0039f(var_c33719f5) {
       snd::play("evt_collectible_gesture_cloth");
     }
 
-    if(isDefined(var_615bb7b5)) {
-      var_615bb7b5 delete();
+    if(isDefined(p8_kit_zt8_thi_01_door_10_right_painted_wood_01_grunge)) {
+      p8_kit_zt8_thi_01_door_10_right_painted_wood_01_grunge delete();
     }
   }
 }
@@ -484,12 +484,12 @@ function function_97822284(s_params) {
 }
 
 function function_29b49cb5() {
-  missionid = savegame::function_8136eb5a();
+  missionid = savegame::get_mission_name();
   var_212d7370 = getweapon(#"hash_3ed4419427e0d85a");
-  var_a44b6842 = getweapon(#"hash_165cf52ce418f5a1");
+  w_bow = getweapon(#"hash_165cf52ce418f5a1");
   a_weapon_list = level.player getweaponslist();
 
-  if(isinarray(a_weapon_list, var_212d7370) || isinarray(a_weapon_list, var_a44b6842)) {
+  if(isinarray(a_weapon_list, var_212d7370) || isinarray(a_weapon_list, w_bow)) {
     savegame::function_379f84b3();
     return;
   }
@@ -502,7 +502,7 @@ function function_29b49cb5() {
 }
 
 function function_34163738() {
-  missionid = savegame::function_8136eb5a();
+  missionid = savegame::get_mission_name();
 
   if(isDefined(world.mapdata[missionid][#"transient"].var_2e7c022f)) {
     level.var_7334dc42 = world.mapdata[missionid][#"transient"].var_2e7c022f;

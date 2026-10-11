@@ -27,7 +27,7 @@ function preinit() {
 function function_9666c7b1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
     self.fx = playFX(fieldname, #"hash_1a93b9b31b5d1d3b", self.origin + (0, 0, 18), anglestoup(self.angles));
-    self playSound(fieldname, #"hash_6a76932cce379c66");
+    self playSound(fieldname, #"zmb_hellhound_molotov_explo");
     return;
   }
 
@@ -41,8 +41,8 @@ function private function_440e968(localclientnum, oldval, newval, bnewent, binit
   self endon(#"death");
   self util::waittill_dobj(fieldname);
 
-  if(isDefined(self.var_d61d7100)) {
-    stopfx(fieldname, self.var_d61d7100);
+  if(isDefined(self.swarm_fx)) {
+    stopfx(fieldname, self.swarm_fx);
   }
 
   fx = undefined;
@@ -60,7 +60,7 @@ function private function_440e968(localclientnum, oldval, newval, bnewent, binit
     self callback::on_shutdown(&function_95dc19b0);
   }
 
-  self.var_d61d7100 = util::playFXOnTag(fieldname, fx, self, "tag_origin");
+  self.swarm_fx = util::playFXOnTag(fieldname, fx, self, "tag_origin");
 }
 
 function private function_95dc19b0(localclientnum) {

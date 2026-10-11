@@ -384,7 +384,7 @@ function attack_thread_rocket() {
         wait 1.5;
       }
 
-      var_bfd1e88 = 0;
+      b_should_fire = 0;
       eye = self.origin;
 
       if(isDefined(enemy)) {
@@ -392,13 +392,13 @@ function attack_thread_rocket() {
         angles = anglestotarget - self.angles;
 
         if(-30 < angles[0] && angles[0] < 60 && -70 < angles[1] && angles[1] < 70) {
-          var_bfd1e88 = 1;
+          b_should_fire = 1;
         }
       }
 
-      if(var_bfd1e88) {
+      if(b_should_fire) {
         if(math::cointoss() || is_true(enemy.var_918b6ecc)) {
-          if(var_bfd1e88) {
+          if(b_should_fire) {
             if(is_true(enemy.var_918b6ecc)) {
               self function_b9e0d497(2, target, undefined, enemy);
             } else {
@@ -415,11 +415,11 @@ function attack_thread_rocket() {
             angles = vectortoangles(enemy.origin - eye) - self.angles;
 
             if(-30 < angles[0] && angles[0] < 60 && -70 < angles[1] && angles[1] < 70) {
-              var_bfd1e88 = 1;
+              b_should_fire = 1;
             }
           }
 
-          if(var_bfd1e88) {
+          if(b_should_fire) {
             if(is_true(enemy.var_918b6ecc)) {
               self function_b9e0d497(3, target, undefined, enemy);
             } else {
@@ -926,12 +926,12 @@ function function_1e0d693b(goal, enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[#"hash_6c444b535ec20313"])) {
-      point._scoredebug[#"hash_6c444b535ec20313"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"distfromorigin"])) {
+      point._scoredebug[#"distfromorigin"] = spawnStruct();
     }
 
-    point._scoredebug[#"hash_6c444b535ec20313"].score = mapfloat(0, prefereddistawayfromorigin, -5000, 0, point.disttoorigin2d);
-    point._scoredebug[#"hash_6c444b535ec20313"].scorename = "<dev string:xbb>";
+    point._scoredebug[#"distfromorigin"].score = mapfloat(0, prefereddistawayfromorigin, -5000, 0, point.disttoorigin2d);
+    point._scoredebug[#"distfromorigin"].scorename = "<dev string:xbb>";
 
     point.score += mapfloat(0, prefereddistawayfromorigin, -5000, 0, point.disttoorigin2d);
 

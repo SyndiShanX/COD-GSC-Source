@@ -9,7 +9,7 @@
 
 function preload() {
   clientfield::register("toplayer", "optional_objective_camera_fx", 1, 1, "int", &optional_objective_camera_fx, 0, 0);
-  clientfield::register("toplayer", "set_sun_color_black", 1, 1, "int", &function_1f548758, 0, 0);
+  clientfield::register("toplayer", "set_sun_color_black", 1, 1, "int", &set_sun_color, 0, 0);
 }
 
 function postload() {
@@ -27,7 +27,7 @@ function optional_objective_camera_fx(localclientnum, oldval, newval, bnewent, b
   }
 }
 
-function function_1f548758(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, wasdemojump) {
+function set_sun_color(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(wasdemojump) {
     util::function_8d617b62((0, 0, 0), 12.5);
     return;

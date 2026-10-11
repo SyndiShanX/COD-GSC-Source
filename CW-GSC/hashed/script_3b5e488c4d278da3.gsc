@@ -46,7 +46,7 @@ function init() {
     namespace_679a22ba::function_3ba2f5dd(#"hash_539facc2c096b82", #"silver_ai_zombie_heavy_xmas");
     namespace_679a22ba::function_3ba2f5dd(#"hash_208e2483f559ccd2", #"silver_ai_dog_xmas");
     namespace_679a22ba::function_3ba2f5dd(#"hash_47bae14a2b1b4511", #"silver_ai_zombie_mega_xmas");
-    level.var_8f576c00 = [#"hash_5214ebcccbd95a36": #"hash_796dff2ea842c1ac", #"hash_19ef16d1ba01a5": #"hash_7725a0435b44b1e5", #"hash_12a17ab3df5889eb": #"hash_2792674ef4fce09f", #"hash_53f4e0daa341a161": #"hash_156c697af81feaf9", #"spawner_zm_steiner": #"hash_43b8d4f24851653e", #"hash_7f957e36b4f6160f": #"hash_5e24e4aa952bb1bb", #"spawner_zm_steiner_split_radiation_blast": #"hash_2c0da7720a1c2f90", #"hash_6904f5c7bef64405": #"hash_1d599c94a087ca05", #"spawner_zm_steiner_split_radiation_bomb": #"hash_16d309f1ce9e015a"];
+    level.var_8f576c00 = [#"spawner_zm_zombie_ndu": #"hash_796dff2ea842c1ac", #"hash_19ef16d1ba01a5": #"hash_7725a0435b44b1e5", #"hash_12a17ab3df5889eb": #"hash_2792674ef4fce09f", #"hash_53f4e0daa341a161": #"hash_156c697af81feaf9", #"spawner_zm_steiner": #"hash_43b8d4f24851653e", #"hash_7f957e36b4f6160f": #"hash_5e24e4aa952bb1bb", #"spawner_zm_steiner_split_radiation_blast": #"hash_2c0da7720a1c2f90", #"hash_6904f5c7bef64405": #"hash_1d599c94a087ca05", #"spawner_zm_steiner_split_radiation_bomb": #"hash_16d309f1ce9e015a"];
     level.overridezombiespawn = &function_767a6a84;
     level.var_9d098364 = #"hash_43b8d4f24851653e";
     level.var_c42bdd1b = #"hash_2c0da7720a1c2f90";
@@ -224,17 +224,17 @@ function function_bf79a643() {
           index = randomint(zone.var_45d884e6.size);
         }
 
-        var_e779ff3c = 0;
+        player_can_see = 0;
         players_in_range = getPlayers(undefined, zone.var_45d884e6[index].origin, 910);
         players = getPlayers();
 
         foreach(player in players) {
           if(player util::is_looking_at(zone.var_45d884e6[index], 0.8, 1, (0, 0, 16))) {
-            var_e779ff3c = 1;
+            player_can_see = 1;
           }
         }
 
-        if(is_true(zone.var_fbc00b53) || var_e779ff3c === 0 && players_in_range.size === 0) {
+        if(is_true(zone.var_fbc00b53) || player_can_see === 0 && players_in_range.size === 0) {
           zone.var_45d884e6[index] function_f5527ca2(zone);
           arrayremoveindex(zone.var_45d884e6, index);
         }
@@ -261,17 +261,17 @@ function function_bf79a643() {
           index = randomint(zone.var_6284d1b2.size);
         }
 
-        var_e779ff3c = 0;
+        player_can_see = 0;
         players_in_range = getPlayers(undefined, zone.var_6284d1b2[index].origin, 910);
         players = getPlayers();
 
         foreach(player in players) {
           if(player util::is_looking_at(zone.var_6284d1b2[index], 0.8, 1, (0, 0, 32))) {
-            var_e779ff3c = 1;
+            player_can_see = 1;
           }
         }
 
-        if(is_true(zone.var_b5490369) || var_e779ff3c === 0 && players_in_range.size === 0 && (!isDefined(zone.var_6284d1b2[index].var_9ae54d14) || zone.var_6284d1b2[index].var_9ae54d14 < gettime() - 30000)) {
+        if(is_true(zone.var_b5490369) || player_can_see === 0 && players_in_range.size === 0 && (!isDefined(zone.var_6284d1b2[index].var_9ae54d14) || zone.var_6284d1b2[index].var_9ae54d14 < gettime() - 30000)) {
           zone.var_6284d1b2[index] function_4d68903d(zone);
           arrayremoveindex(zone.var_6284d1b2, index);
         }
@@ -434,7 +434,7 @@ function function_f5527ca2(zone) {
   snowball_pile.zone = zone;
   snowball_pile.zone.var_6cff21f5++;
   snowball_pile.model_state = 1;
-  snowball_pile function_619a5c20();
+  snowball_pile pingable();
   snowball_pile zm_unitrigger::create(&function_dd028fcb, 64);
   snowball_pile.s_unitrigger.origin += (0, 0, 32);
   function_1eaaceab(zone.var_4acb65df);
@@ -563,7 +563,7 @@ function function_a9114898(origin, angles) {
   fwd = anglesToForward(angles);
   up = anglestoup(angles);
   playFX("maps/ltm/fx9_winter_snowman_dest", origin, fwd, up);
-  playSoundAtPosition(#"hash_a00a48925a72e55", origin + (0, 0, 30));
+  playSoundAtPosition(#"zmb_snowman_burst", origin + (0, 0, 30));
 }
 
 function function_dc8f034(snowman) {

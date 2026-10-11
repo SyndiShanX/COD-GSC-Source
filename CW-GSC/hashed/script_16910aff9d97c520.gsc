@@ -32,10 +32,10 @@ function main() {
 function function_49caf2d6() {
   self notify("7982aa19a2f9f78d");
   self endon("7982aa19a2f9f78d");
-  self thread namespace_268747c0::function_978c05b5();
+  self thread doa_hazard::function_978c05b5();
   result = self waittill(#"destroy_hazard");
 
-  if(is_true(self.var_7c56394) && is_true(result.var_760a0807)) {
+  if(is_true(self.paged) && is_true(result.var_760a0807)) {
     arrayremovevalue(level.doa.var_e60dfadc, self);
     namespace_1e25ad94::debugmsg("Deleting killbox trap permenently at:" + self.origin);
   }
@@ -43,7 +43,7 @@ function function_49caf2d6() {
   util::wait_network_frame();
 
   if(isDefined(self.trigger)) {
-    self.trigger namespace_268747c0::function_54f185a();
+    self.trigger doa_hazard::function_54f185a();
     self.trigger = undefined;
   }
 
@@ -52,7 +52,7 @@ function function_49caf2d6() {
   }
 }
 
-function function_7023aae4(trap, var_7c56394 = 0, modelname) {
+function function_7023aae4(trap, paged = 0, modelname) {
   if(isDefined(modelname)) {
     hazard = namespace_ec06fe4a::spawnmodel(trap.origin, modelname);
 
@@ -66,7 +66,7 @@ function function_7023aae4(trap, var_7c56394 = 0, modelname) {
     trap.script_model = hazard;
   }
 
-  trap.var_7c56394 = var_7c56394;
+  trap.paged = paged;
   trap thread function_e7b3a3fe();
   return trap;
 }
@@ -87,14 +87,14 @@ function function_bbdbcaa5(trap, page = 0) {
     }
 
     trap.damage = 50;
-    trap.var_f3e30707 = 1;
+    trap.tickrate = 1;
 
     if(args.size > 5) {
       trap.damage = int(args[5]);
     }
 
     if(args.size > 6) {
-      trap.var_f3e30707 = int(args[6]);
+      trap.tickrate = int(args[6]);
     }
 
     if(trap.type === #"acid") {
@@ -213,15 +213,15 @@ function function_e7b3a3fe() {
   wait randomfloatrange(0.1, 3);
 
   while(true) {
-    self.trigger = self namespace_268747c0::function_678eaf60("killbox", self.origin, 1024, 1, 256);
+    self.trigger = self doa_hazard::function_678eaf60("killbox", self.origin, 1024, 1, 256);
 
     if(self.trigger.width != self.width || self.trigger.length != self.length || self.trigger.height != self.height) {
       self.trigger delete();
-      namespace_268747c0::function_e8bbd3ad("killbox");
-      self.trigger = namespace_268747c0::function_3111b4b2("killbox", "trigger_box", self.length, self.height, self.width);
+      doa_hazard::function_e8bbd3ad("killbox");
+      self.trigger = doa_hazard::function_3111b4b2("killbox", "trigger_box", self.length, self.height, self.width);
 
       if(isDefined(self.trigger)) {
-        self.trigger namespace_268747c0::function_b3c196a(self, self.origin, self.angles);
+        self.trigger doa_hazard::function_b3c196a(self, self.origin, self.angles);
       }
     }
 
@@ -248,7 +248,7 @@ function function_d1b295d7(trap) {
   self endon("10130a76d58d799d");
   level endon(#"game_over");
   self endon(#"death", #"destroy_hazard", #"hash_5dc5b7f198cd1bec");
-  var_f3e30707 = (isDefined(trap.var_f3e30707) ? trap.var_f3e30707 : 1) * 1000;
+  tickrate = (isDefined(trap.tickrate) ? trap.tickrate : 1) * 1000;
 
   while(true) {
     result = self waittill(#"trigger");
@@ -280,7 +280,7 @@ function function_d1b295d7(trap) {
       continue;
     }
 
-    guy.var_a138f7e0 = time + var_f3e30707;
+    guy.var_a138f7e0 = time + tickrate;
 
     if(isPlayer(guy)) {
       guy dodamage(isDefined(trap.damage) ? trap.damage : guy.health + 100, guy.origin);
@@ -296,7 +296,7 @@ function function_d1b295d7(trap) {
 
       if(guy.var_4ff10643 < gettime()) {
         if(trap.type === #"fire") {
-          guy namespace_83eb6304::function_3ecfde67("burn_zombie");
+          guy doa_fx::function_3ecfde67("burn_zombie");
         }
 
         guy.var_4ff10643 = gettime() + 1000;
@@ -306,8 +306,8 @@ function function_d1b295d7(trap) {
         guy thread namespace_ec06fe4a::function_570729f0(randomfloatrange(0.5, 2.2));
       }
 
-      if(trap.type === #"hash_1af42a1c565c45de") {
-        guy thread namespace_ed80aead::function_586ef822();
+      if(trap.type === #"chipper") {
+        guy thread doa_gib::function_586ef822();
       } else {
         guy thread namespace_ec06fe4a::function_570729f0(0.1);
       }

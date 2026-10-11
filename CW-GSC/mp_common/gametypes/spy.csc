@@ -139,8 +139,8 @@ function function_f8e1b7(local_client_num, oldval, newval, bnewent, binitialsnap
   var_493fffa1 = undefined;
   var_d35e9a2 = undefined;
   var_d5c64c00 = -1;
-  var_7bc93714 = #"hash_178cac301a36cf2";
-  var_603e6dd8 = #"hash_473f17e761b0de5b";
+  string_prefix = #"hash_178cac301a36cf2";
+  string_suffix = #"hash_473f17e761b0de5b";
 
   if(level.var_78904b18 <= 25) {
     var_81131a47 = function_70873aee(fieldname, level.var_78904b18);
@@ -151,11 +151,11 @@ function function_f8e1b7(local_client_num, oldval, newval, bnewent, binitialsnap
 
     var_5e8846d4 = self getentitynumber();
     var_c7901c77 = function_f714ed75(fieldname, var_5e8846d4);
-    var_23bebb9 = function_8565908c(fieldname, level.var_78904b18);
+    observer = function_8565908c(fieldname, level.var_78904b18);
     var_d35e9a2 = "";
 
-    if(isDefined(var_23bebb9)) {
-      var_d35e9a2 = var_23bebb9 getplayername();
+    if(isDefined(observer)) {
+      var_d35e9a2 = observer getplayername();
     } else if(isDefined(level.deadplayers[level.var_78904b18])) {
       var_d35e9a2 = level.deadplayers[level.var_78904b18];
     }
@@ -177,8 +177,8 @@ function function_f8e1b7(local_client_num, oldval, newval, bnewent, binitialsnap
       var_d5c64c00 = -1;
     }
 
-    var_7bc93714 = #"hash_1380f38b1a748dfe";
-    var_603e6dd8 = undefined;
+    string_prefix = #"hash_1380f38b1a748dfe";
+    string_suffix = undefined;
   }
 
   var_30c494d1 = function_70873aee(fieldname, level.corpse_client_num);
@@ -195,7 +195,7 @@ function function_f8e1b7(local_client_num, oldval, newval, bnewent, binitialsnap
     corpse_name = level.deadplayers[level.corpse_client_num];
   }
 
-  function_c79ecd60(fieldname, var_d35e9a2, var_d5c64c00, var_493fffa1, var_7bc93714, -1, var_6ede17a0, corpse_name, var_dc321c79, var_701cb7a4, var_603e6dd8, -1, 1);
+  function_c79ecd60(fieldname, var_d35e9a2, var_d5c64c00, var_493fffa1, string_prefix, -1, var_6ede17a0, corpse_name, var_dc321c79, var_701cb7a4, string_suffix, -1, 1);
   level.var_d47b6a0b = undefined;
   level.corpse_client_num = undefined;
   level.var_9b867835 = undefined;
@@ -405,7 +405,7 @@ function show_spy_numbers_fx(local_client_num, oldval, newval, bnewent, binitial
   if(bwastimejump == 1) {
     if(!self postfx::function_556665f2("pstfx_mason_numbers")) {
       self postfx::playpostfxbundle("pstfx_mason_numbers");
-      playSound(fieldname, #"hash_3a5560ecf23b047e");
+      playSound(fieldname, #"evt_spy_numbers");
     }
 
     if(!self postfx::function_556665f2("pstfx_mason_numbers_add")) {

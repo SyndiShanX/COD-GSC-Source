@@ -95,12 +95,12 @@ function init() {
   level.teambased = 0;
   level.teamcount = getgametypesetting(#"teamcount");
   level.multiteam = level.teamcount > 2;
-  level.var_2216ae6c = level.teamcount + 1;
+  level.enemy_ai_team_index = level.teamcount + 1;
 
-  if(2 == level.var_2216ae6c) {
-    level.var_c20ad7aa = #"axis";
+  if(2 == level.enemy_ai_team_index) {
+    level.enemy_ai_team = #"axis";
   } else {
-    level.var_c20ad7aa = "team" + level.var_2216ae6c;
+    level.enemy_ai_team = "team" + level.enemy_ai_team_index;
   }
 
   gametype::init();
@@ -147,7 +147,7 @@ function init() {
   level.placement[#"all"] = [];
   level.postroundtime = 7;
   level.inovertime = 0;
-  level.var_6cc58e4b = 1;
+  level.usefpsdeathcam = 1;
   level.defaultoffenseradius = 560;
   level.dropteam = getdvarint(#"sv_maxclients", 0);
   globallogic_ui::init();
@@ -231,7 +231,7 @@ function setupcallbacks() {
   level.onalivecountchange = &globallogic_defaults::default_onalivecountchange;
   level.ondeadevent = &globallogic_defaults::default_ondeadevent;
   level.ononeleftevent = &globallogic_defaults::default_ononeleftevent;
-  level.onlastteamaliveevent = &globallogic_defaults::function_9fd1cc80;
+  level.onlastteamaliveevent = &globallogic_defaults::default_onlastteamaliveevent;
   level.gettimepassed = &globallogic_utils::gettimepassed;
   level.gettimeremaining = &globallogic_utils::gettimeremaining;
   level.gettimelimit = &globallogic_defaults::default_gettimelimit;
@@ -287,18 +287,18 @@ function precache_mp_leaderboards() {
   }
 
   gamemodeleaderboard = " LB_MP_GM_" + level.gametype;
-  var_f4eddf23 = " LB_MP_GM_" + level.gametype + "_EXT";
-  var_7ac4078e = "";
-  var_1c6c690f = "";
+  gamemodeleaderboardext = " LB_MP_GM_" + level.gametype + "_EXT";
+  gamemodehcleaderboard = "";
+  gamemodehcleaderboardext = "";
   hardcoremode = getgametypesetting(#"hardcoremode");
 
   if(isDefined(hardcoremode) && hardcoremode) {
-    var_7ac4078e = gamemodeleaderboard + "_HC";
-    var_1c6c690f = var_f4eddf23 + "_HC";
+    gamemodehcleaderboard = gamemodeleaderboard + "_HC";
+    gamemodehcleaderboardext = gamemodeleaderboardext + "_HC";
   }
 
   mapleaderboard = " LB_MP_MAP_" + getsubstr(mapname, 3, mapname.size);
-  precacheleaderboards(globalleaderboards + careerleaderboard + gamemodeleaderboard + var_f4eddf23 + var_7ac4078e + var_1c6c690f + mapleaderboard);
+  precacheleaderboards(globalleaderboards + careerleaderboard + gamemodeleaderboard + gamemodeleaderboardext + gamemodehcleaderboard + gamemodehcleaderboardext + mapleaderboard);
 }
 
 function compareteambygamestat(gamestat, teama, teamb, previous_winner_score) {
@@ -381,9 +381,9 @@ function determineteamwinnerbyteamscore() {
 }
 
 function forceend() {
-  level.var_42237904 = undefined;
-  level.var_3be4bfc9 = undefined;
-  level.var_8a801996 = undefined;
+  level.nextbsptoload = undefined;
+  level.nextbspgamemode = undefined;
+  level.nextbsplightingstate = undefined;
 
   if(level.hostforcedend || level.forcedend) {
     return;
@@ -435,13 +435,13 @@ function checkifteamforfeits(team) {
   return false;
 }
 
-function function_a39c3df6() {
-  var_f8765cbc = 0;
-  var_64d2b1d6 = undefined;
+function checkforforfeit() {
+  forfeit_count = 0;
+  valid_team = undefined;
 
   foreach(team, _ in level.teams) {
     if(checkifteamforfeits(team)) {
-      var_f8765cbc++;
+      forfeit_count++;
 
       if(!level.multiteam) {
         thread[[level.onforfeit]](team);
@@ -451,11 +451,11 @@ function function_a39c3df6() {
       continue;
     }
 
-    var_64d2b1d6 = team;
+    valid_team = team;
   }
 
-  if(level.multiteam && var_f8765cbc == level.teams.size - 1) {
-    thread[[level.onforfeit]](var_64d2b1d6);
+  if(level.multiteam && forfeit_count == level.teams.size - 1) {
+    thread[[level.onforfeit]](valid_team);
     return true;
   }
 
@@ -484,9 +484,9 @@ function areallteamsdead() {
   return true;
 }
 
-function function_f2a0d980() {
+function getlastteamalive() {
   count = 0;
-  var_91f4d3aa = 0;
+  everexistedcount = 0;
   aliveteam = undefined;
 
   foreach(team, _ in level.teams) {
@@ -496,11 +496,11 @@ function function_f2a0d980() {
         count++;
       }
 
-      var_91f4d3aa++;
+      everexistedcount++;
     }
   }
 
-  if(var_91f4d3aa > 1 && count == 1) {
+  if(everexistedcount > 1 && count == 1) {
     return aliveteam;
   }
 
@@ -519,10 +519,10 @@ function dodeadeventupdates() {
     }
 
     if(!isDefined(level.ondeadevent)) {
-      var_207e906a = function_f2a0d980();
+      lastteamalive = getlastteamalive();
 
-      if(isDefined(var_207e906a)) {
-        [[level.onlastteamaliveevent]](var_207e906a);
+      if(isDefined(lastteamalive)) {
+        [[level.onlastteamaliveevent]](lastteamalive);
         return true;
       }
     } else {
@@ -569,7 +569,7 @@ function updategameevents() {
   if((level.rankedmatch || level.leaguematch) && !level.ingraceperiod) {
     if(level.teambased) {
       if(!level.gameforfeited) {
-        if(game.state == "playing" && function_a39c3df6()) {
+        if(game.state == "playing" && checkforforfeit()) {
           return;
         }
       } else if(atleasttwoteams()) {
@@ -764,21 +764,21 @@ function sendafteractionreport(winner) {
       player stats::function_7a850245(#"matchwon", 0);
     }
 
-    var_f5f2abb6 = 0;
-    var_8d14d7e = 0;
-    var_8ea28d75 = 0;
+    revivemaster = 0;
+    assistmaster = 0;
+    killmaster = 0;
 
     for(index = 0; index < level.players.size; index++) {
-      if(level.players[index].kills > level.players[var_8ea28d75].kills) {
-        var_8ea28d75 = index;
+      if(level.players[index].kills > level.players[killmaster].kills) {
+        killmaster = index;
       }
 
-      if(level.players[index].assists > level.players[var_8d14d7e].assists) {
-        var_8d14d7e = index;
+      if(level.players[index].assists > level.players[assistmaster].assists) {
+        assistmaster = index;
       }
 
-      if(level.players[index].revives > level.players[var_f5f2abb6].revives) {
-        var_f5f2abb6 = index;
+      if(level.players[index].revives > level.players[revivemaster].revives) {
+        revivemaster = index;
       }
     }
 
@@ -935,7 +935,7 @@ function resetoutcomeforallplayers() {
   }
 }
 
-function function_c2cd8bf7(winner, endreasontext) {
+function startnextround(winner, endreasontext) {
   if(!util::isoneround()) {
     displayroundend(winner, endreasontext);
     globallogic_utils::executepostroundevents();
@@ -1395,7 +1395,7 @@ function totalplayerlives() {
   return count;
 }
 
-function function_b102e4be() {
+function totallaststandcount() {
   count = 0;
 
   foreach(team, _ in level.teams) {
@@ -1471,14 +1471,14 @@ function updateteamstatus() {
 function function_2905c18e() {
   foreach(player in getPlayers()) {
     team = player.team;
-    var_c5c29dab = player.curclass;
+    str_class = player.curclass;
     level.playercount[team]++;
 
     if(isbot(player)) {
       level.botscount[team]++;
     }
 
-    if(team != #"spectator" && isDefined(var_c5c29dab) && var_c5c29dab != "") {
+    if(team != #"spectator" && isDefined(str_class) && str_class != "") {
       level.playercount[team]++;
 
       if(player.sessionstate == "playing") {
@@ -2088,7 +2088,7 @@ function checkroundswitch() {
 }
 
 function listenforgameend() {
-  self endon(#"disconnect", #"hash_29be0e7a46c3a236");
+  self endon(#"disconnect", #"killgameendmonitor");
   self waittill(#"host_sucks_end_game");
   level.skipvote = 1;
 

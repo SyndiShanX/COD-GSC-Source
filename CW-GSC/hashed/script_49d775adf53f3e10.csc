@@ -18,8 +18,8 @@ function init_clientfields() {
   clientfield::register("allplayers", "" + #"hash_31c153af499657fd", 1, 1, "int", &function_4a0e5efb, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_5822132672ad230f", 1, 1, "int", &function_2c087855, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_6219dce209d171ed", 1, 2, "int", &function_fccba5d0, 0, 0);
-  zm_ping::function_5ae4a10c("p9_zm_gold_jumppads_machine_mod", "gold_jump_pad", #"hash_7f09cfa60a53e5da", undefined, #"hash_78c19a4e1e68d0c4", 1, -20);
-  zm_ping::function_5ae4a10c("p9_zm_gold_jumppads_machine_sub", "gold_landing_pad", #"hash_5d6fe9e2bb10532d", undefined, #"hash_3a19bc129f8b2b4b");
+  zm_ping::function_5ae4a10c("p9_zm_gold_jumppads_machine_mod", "gold_jump_pad", #"hash_7f09cfa60a53e5da", undefined, #"ui_hud_minimap_jump_pad", 1, -20);
+  zm_ping::function_5ae4a10c("p9_zm_gold_jumppads_machine_sub", "gold_landing_pad", #"hash_5d6fe9e2bb10532d", undefined, #"ui_hud_minimap_landing_pad");
 }
 
 function function_9199e921(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -34,7 +34,7 @@ function function_9199e921(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_4a0e5efb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
-    self.var_1749c2a9 = self playLoopSound(#"hash_64c2dcc38c5547e2");
+    self.var_1749c2a9 = self playLoopSound(#"evt_jumppad_breeze");
     return;
   }
 
@@ -47,7 +47,7 @@ function function_4a0e5efb(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_2c087855(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
     if(!isDefined(self.var_c9480534)) {
-      self.var_c9480534 = self playLoopSound(#"hash_67d068901551222c");
+      self.var_c9480534 = self playLoopSound(#"evt_jumppad_amb_lp");
     }
 
     return;

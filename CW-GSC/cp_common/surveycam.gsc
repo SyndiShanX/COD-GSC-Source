@@ -30,16 +30,16 @@ function function_87b9c1ef(var_27169374 = 25, var_25c457e2 = 60) {
 
   level.player = isDefined(level.player) ? level.player : getPlayers()[0];
 
-  if(!namespace_61e6d095::exists(#"hash_71351bf35e6d6353")) {
-    namespace_61e6d095::create(#"hash_71351bf35e6d6353", #"surveycam");
+  if(!scripted_widgets::exists(#"hash_71351bf35e6d6353")) {
+    scripted_widgets::create(#"hash_71351bf35e6d6353", #"surveycam");
   }
 
   namespace_82bfe441::fade(1, "FadeImmediate");
   level.player clientfield::set_to_player("surveycam_min_focal_length", var_27169374);
   level.player clientfield::set_to_player("surveycam_max_focal_length", var_25c457e2);
-  namespace_61e6d095::function_9ade1d9b(#"hash_71351bf35e6d6353", "pitch", 0);
-  namespace_61e6d095::function_9ade1d9b(#"hash_71351bf35e6d6353", "yaw", 0);
-  namespace_61e6d095::function_9ade1d9b(#"hash_71351bf35e6d6353", "zoom", 1);
+  scripted_widgets::function_9ade1d9b(#"hash_71351bf35e6d6353", "pitch", 0);
+  scripted_widgets::function_9ade1d9b(#"hash_71351bf35e6d6353", "yaw", 0);
+  scripted_widgets::function_9ade1d9b(#"hash_71351bf35e6d6353", "zoom", 1);
   level.player clientfield::set_to_player("surveycam_state", 1);
 }
 
@@ -51,16 +51,16 @@ function function_56d93dca(var_67df10fb = 1) {
     wait var_67df10fb;
   }
 
-  if(namespace_61e6d095::exists(#"hash_71351bf35e6d6353")) {
-    namespace_61e6d095::function_9ade1d9b(#"hash_71351bf35e6d6353", "camera_fade_out_time", var_67df10fb);
+  if(scripted_widgets::exists(#"hash_71351bf35e6d6353")) {
+    scripted_widgets::function_9ade1d9b(#"hash_71351bf35e6d6353", "camera_fade_out_time", var_67df10fb);
   }
 
   if(var_67df10fb > 0) {
     wait 2;
   }
 
-  if(namespace_61e6d095::exists(#"hash_71351bf35e6d6353")) {
-    namespace_61e6d095::remove(#"hash_71351bf35e6d6353");
+  if(scripted_widgets::exists(#"hash_71351bf35e6d6353")) {
+    scripted_widgets::remove(#"hash_71351bf35e6d6353");
   }
 
   namespace_82bfe441::fade(0, "FadeMedium");

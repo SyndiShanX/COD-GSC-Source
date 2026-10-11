@@ -444,8 +444,8 @@ function function_ee725386() {
       level.zonedestroyedbytimer = 0;
     }
 
-    foreach(var_c40e7bb5 in level.active_zones) {
-      thread function_50a7f9ac(var_c40e7bb5);
+    foreach(active_zone in level.active_zones) {
+      thread function_50a7f9ac(active_zone);
     }
 
     level waittill(#"zone_moved");
@@ -700,10 +700,10 @@ function give_capture_credit(touchlist, string, capturetime, capture_team, lastc
 
       scoreevents::processscoreevent(#"koth_secure", player, undefined, undefined);
       player recordgameevent("capture");
-      level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+      level thread telemetry::function_18135b72(#"callback_on_game_event", {
         #player: player, #eventtype: #"capture"});
       player recordgameevent("hardpoint_captured");
-      level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+      level thread telemetry::function_18135b72(#"callback_on_game_event", {
         #player: player, #eventtype: #"hardpoint_captured"});
       battlechatter::function_924699f4(player, self);
 
@@ -741,7 +741,7 @@ function function_32b7bf67() {
   self.wasleftunoccupied = 1;
   self.iscontested = 0;
   self recordgameeventnonplayer("hardpoint_empty");
-  level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+  level thread telemetry::function_18135b72(#"callback_on_game_event", {
     #eventtype: #"capture"});
   resume_time();
   self.mustmaintainclaim = 0;
@@ -752,7 +752,7 @@ function function_e4bd126f() {
   self.wascontested = 1;
   self.iscontested = 1;
   self recordgameeventnonplayer("hardpoint_contested");
-  level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+  level thread telemetry::function_18135b72(#"callback_on_game_event", {
     #eventtype: #"hardpoint_contested"});
   resume_time();
   util::function_a3f7de13(8, #"none");
@@ -775,7 +775,7 @@ function function_2a6caaff(lastclaimteam) {
   self gameobjects::set_claim_team(lastclaimteam);
   self recordgameeventnonplayer("hardpoint_uncontested");
   level notify(#"hardpoint_uncontested");
-  level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+  level thread telemetry::function_18135b72(#"callback_on_game_event", {
     #eventtype: #"hardpoint_uncontested"});
 }
 
@@ -828,7 +828,7 @@ function function_4a415293(time) {
     zone.gameobject recordgameeventnonplayer("hardpoint_moved");
   }
 
-  level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+  level thread telemetry::function_18135b72(#"callback_on_game_event", {
     #eventtype: #"hardpoint_moved"});
   playSoundAtPosition(#"mpl_hardpoint_move", (0, 0, 0));
 
@@ -909,7 +909,7 @@ function award_capture_points(team, lastcaptureteam) {
 
   if(level.active_zones.size > 1) {
     time = gettime();
-    var_560f3751 = 0;
+    sync_time = 0;
 
     foreach(zone in level.active_zones) {
       if(isDefined(zone.var_72767cc4) && time - zone.var_72767cc4 < 1000) {
@@ -1208,8 +1208,8 @@ function function_a65ee551() {
 }
 
 function function_7c9bf7e1(zone) {
-  foreach(var_c40e7bb5 in level.active_zones) {
-    if(zone == var_c40e7bb5) {
+  foreach(active_zone in level.active_zones) {
+    if(zone == active_zone) {
       return true;
     }
   }
@@ -1263,9 +1263,9 @@ function function_1949044f() {
 }
 
 function function_2ff26e21() {
-  foreach(var_c40e7bb5 in level.active_zones) {
-    if(self istouching(var_c40e7bb5.trig)) {
-      return var_c40e7bb5;
+  foreach(active_zone in level.active_zones) {
+    if(self istouching(active_zone.trig)) {
+      return active_zone;
     }
   }
 
@@ -1363,7 +1363,7 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
             attacker medals::defenseglobalcount();
             attacker thread challenges::killedbasedefender(zone.trig);
             attacker recordgameevent("defending");
-            level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+            level thread telemetry::function_18135b72(#"callback_on_game_event", {
               #player: attacker, #eventtype: #"defending"});
           }
 
@@ -1430,7 +1430,7 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
             attacker medals::defenseglobalcount();
             attacker thread challenges::killedbasedefender(zone.trig);
             attacker recordgameevent("defending");
-            level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+            level thread telemetry::function_18135b72(#"callback_on_game_event", {
               #player: attacker, #eventtype: #"defending"});
           }
 

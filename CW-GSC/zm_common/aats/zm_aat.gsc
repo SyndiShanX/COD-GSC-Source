@@ -54,10 +54,10 @@ function private _on_player_connect() {
 }
 
 function private function_8cff617(params) {
-  self thread function_134b933a();
+  self thread watch_player_melee();
 }
 
-function function_134b933a() {
+function watch_player_melee() {
   self notify("78f291d585d59a8f");
   self endon("78f291d585d59a8f");
   self endon(#"death");

@@ -66,7 +66,7 @@ function preinit() {
   level.weapon_position[#"bonuscard1"] = struct::get("cac_weapon_position_wildcard");
   level.weapon_position[#"gunsmith"] = struct::get("gunsmith_weapon_position");
   level.weapon_position[#"wrist_accessory"] = struct::get("cac_weapon_position_wrist_accessory");
-  var_97d766d2 = getscriptbundlelist(#"hash_5225176172b7189f");
+  var_97d766d2 = getscriptbundlelist(#"wristaccessory_list");
   level.var_95471a83 = var_97d766d2;
   function_875dd2fe();
   level.var_a9b637b1 = &function_1f5168a3;
@@ -171,9 +171,9 @@ function function_bf9f3492(var_d4c489c0) {
 }
 
 function function_cc770c92(weapon) {
-  var_de496121 = function_34668e22(weapon);
+  s_settings = function_34668e22(weapon);
 
-  if(is_true(weapon.islauncher) || is_true(var_de496121.var_1967779)) {
+  if(is_true(weapon.islauncher) || is_true(s_settings.var_1967779)) {
     return true;
   }
 
@@ -187,7 +187,7 @@ function function_1cd1374d(var_1d35315f, var_d4c489c0 = #"primary", var_e81ceea 
 
   if(var_d4c489c0 == #"gunsmith") {
     s_info = function_5f70d1c8(var_1d35315f, var_e81ceea);
-  } else if(var_d4c489c0 == #"hash_2fda3f64c5caa89e") {
+  } else if(var_d4c489c0 == #"weapon_inspect") {
     s_info = function_fa001ebb(var_1d35315f);
   } else if(var_d4c489c0 == #"charm") {
     s_info = function_add95f58(var_1d35315f);
@@ -271,7 +271,7 @@ function function_1cd1374d(var_1d35315f, var_d4c489c0 = #"primary", var_e81ceea 
       break;
     case #"gunsmith":
     case #"charm":
-    case #"hash_2fda3f64c5caa89e":
+    case #"weapon_inspect":
     case #"stickers":
       s_location = level.weapon_position[#"gunsmith"];
       break;
@@ -436,7 +436,7 @@ function function_3de4843(localclientnum, var_8a4ba442, b_show = 0, weapon, s_in
     case #"bonuscard1":
       break;
     case #"gunsmith":
-    case #"hash_2fda3f64c5caa89e":
+    case #"weapon_inspect":
       break;
   }
 }
@@ -553,7 +553,7 @@ function function_4aa0a8f6(var_ccf52c44) {
     case #"secondary":
     case #"primarygrenade":
     case #"secondarygrenade":
-      var_d8ebd573 = 1;
+      stat_offset = 1;
       break;
     case #"talent3":
     case #"talent2":
@@ -562,19 +562,19 @@ function function_4aa0a8f6(var_ccf52c44) {
     case #"talent5":
     case #"talent4":
     case #"talent":
-      var_d8ebd573 = 5;
+      stat_offset = 5;
       break;
     case #"bonuscard1":
-      var_d8ebd573 = 6;
+      stat_offset = 6;
       break;
     case #"specialty":
-      var_d8ebd573 = 3;
+      stat_offset = 3;
     default:
-      var_d8ebd573 = 0;
+      stat_offset = 0;
       break;
   }
 
-  return var_d8ebd573;
+  return stat_offset;
 }
 
 function function_de681e67(localclientnum, var_73cd9b6e, var_1eee7d73) {
@@ -983,10 +983,10 @@ function function_a4cbc5a8(localclientnum) {
 
     if(level.var_da0b979c[#"legendary"][localclientnum] > 0) {
       if(!isDefined(level.var_9543e4da[#"legendary"][localclientnum])) {
-        var_d2ee34ea = struct::get(#"cac_zm_weapon_position_crystal_legendary");
-        level.var_9543e4da[#"legendary"][localclientnum] = util::spawn_model(localclientnum, var_d2ee34ea.model, var_d2ee34ea.origin, var_d2ee34ea.angles);
+        s_crystal = struct::get(#"cac_zm_weapon_position_crystal_legendary");
+        level.var_9543e4da[#"legendary"][localclientnum] = util::spawn_model(localclientnum, s_crystal.model, s_crystal.origin, s_crystal.angles);
         forcestreamxmodel(level.var_9543e4da[#"legendary"][localclientnum].model);
-        level.var_9543e4da[#"legendary"][localclientnum] setscale(isDefined(var_d2ee34ea.modelscale) ? var_d2ee34ea.modelscale : 1);
+        level.var_9543e4da[#"legendary"][localclientnum] setscale(isDefined(s_crystal.modelscale) ? s_crystal.modelscale : 1);
       }
 
       level.var_9543e4da[#"legendary"][localclientnum] sethighdetail(level.var_636c2236, level.var_636c2236);
@@ -1000,10 +1000,10 @@ function function_a4cbc5a8(localclientnum) {
 
     if(level.var_da0b979c[#"epic"][localclientnum] > 0) {
       if(!isDefined(level.var_9543e4da[#"epic"][localclientnum])) {
-        var_d2ee34ea = struct::get(#"cac_zm_weapon_position_crystal_epic");
-        level.var_9543e4da[#"epic"][localclientnum] = util::spawn_model(localclientnum, var_d2ee34ea.model, var_d2ee34ea.origin, var_d2ee34ea.angles);
+        s_crystal = struct::get(#"cac_zm_weapon_position_crystal_epic");
+        level.var_9543e4da[#"epic"][localclientnum] = util::spawn_model(localclientnum, s_crystal.model, s_crystal.origin, s_crystal.angles);
         forcestreamxmodel(level.var_9543e4da[#"epic"][localclientnum].model);
-        level.var_9543e4da[#"epic"][localclientnum] setscale(isDefined(var_d2ee34ea.modelscale) ? var_d2ee34ea.modelscale : 1);
+        level.var_9543e4da[#"epic"][localclientnum] setscale(isDefined(s_crystal.modelscale) ? s_crystal.modelscale : 1);
       }
 
       level.var_9543e4da[#"epic"][localclientnum] sethighdetail(level.var_636c2236, level.var_636c2236);
@@ -1017,10 +1017,10 @@ function function_a4cbc5a8(localclientnum) {
 
     if(level.var_da0b979c[#"rare"][localclientnum] > 0) {
       if(!isDefined(level.var_9543e4da[#"rare"][localclientnum])) {
-        var_d2ee34ea = struct::get(#"cac_zm_weapon_position_crystal_rare");
-        level.var_9543e4da[#"rare"][localclientnum] = util::spawn_model(localclientnum, var_d2ee34ea.model, var_d2ee34ea.origin, var_d2ee34ea.angles);
+        s_crystal = struct::get(#"cac_zm_weapon_position_crystal_rare");
+        level.var_9543e4da[#"rare"][localclientnum] = util::spawn_model(localclientnum, s_crystal.model, s_crystal.origin, s_crystal.angles);
         forcestreamxmodel(level.var_9543e4da[#"rare"][localclientnum].model);
-        level.var_9543e4da[#"rare"][localclientnum] setscale(isDefined(var_d2ee34ea.modelscale) ? var_d2ee34ea.modelscale : 1);
+        level.var_9543e4da[#"rare"][localclientnum] setscale(isDefined(s_crystal.modelscale) ? s_crystal.modelscale : 1);
       }
 
       level.var_9543e4da[#"rare"][localclientnum] sethighdetail(level.var_636c2236, level.var_636c2236);
@@ -1056,7 +1056,7 @@ function function_f1216c02(localclientnum, var_8a4ba442, str_rarity) {
   }
 
   if(isDefined(level.var_5caba701)) {
-    if(var_8a4ba442 === #"hash_2fda3f64c5caa89e" && isDefined(str_rarity)) {
+    if(var_8a4ba442 === #"weapon_inspect" && isDefined(str_rarity)) {
       switch (str_rarity) {
         case #"common":
           level.var_5caba701 setModel(#"p9_core_frontend_weapon_inspect_common");
@@ -1265,12 +1265,12 @@ function custom_class_update(localclientnum) {
     arrayremovevalue(level.weapon_script_model[localclientnum], undefined, 1);
   }
 
-  if(base_weapon_slot !== #"hash_2fda3f64c5caa89e" && isDefined(level.weapon_script_model[localclientnum][#"hash_2fda3f64c5caa89e"])) {
+  if(base_weapon_slot !== #"weapon_inspect" && isDefined(level.weapon_script_model[localclientnum][#"weapon_inspect"])) {
     function_2dab3077(localclientnum);
-    level.weapon_script_model[localclientnum][#"hash_2fda3f64c5caa89e"] forcedelete();
+    level.weapon_script_model[localclientnum][#"weapon_inspect"] forcedelete();
 
-    if(isDefined(level.preload_weapon_model[localclientnum][#"hash_2fda3f64c5caa89e"])) {
-      level.preload_weapon_model[localclientnum][#"hash_2fda3f64c5caa89e"] delete();
+    if(isDefined(level.preload_weapon_model[localclientnum][#"weapon_inspect"])) {
+      level.preload_weapon_model[localclientnum][#"weapon_inspect"] delete();
     }
 
     arrayremovevalue(level.weapon_script_model[localclientnum], undefined, 1);
@@ -1323,7 +1323,7 @@ function custom_class_update(localclientnum) {
 
     if(base_weapon_slot === #"gunsmith") {
       function_f87ec9a8(var_e81ceea, var_f0bf9259, var_f2af4049);
-    } else if(base_weapon_slot === #"hash_2fda3f64c5caa89e") {
+    } else if(base_weapon_slot === #"weapon_inspect") {
       function_f87ec9a8(var_e81ceea, var_f0bf9259, 0, base_weapon_slot);
       var_ef88e3c8 = function_fa001ebb(level.current_weapon[localclientnum]);
       level.weapon_script_model[localclientnum][base_weapon_slot].origin += var_ef88e3c8.origin;
@@ -1340,7 +1340,7 @@ function custom_class_update(localclientnum) {
       function_2a14a545(localclientnum, base_weapon_slot);
     }
 
-    if(base_weapon_slot === #"hash_2fda3f64c5caa89e") {
+    if(base_weapon_slot === #"weapon_inspect") {
       toggle_postfx(localclientnum, 0, #"pstfx_frontend");
     } else {
       toggle_postfx(localclientnum, 1, #"pstfx_frontend");
@@ -1742,7 +1742,7 @@ function function_f87ec9a8(var_e81ceea = "", str_weapon, var_f2af4049 = 0, var_2
 
   if(var_f2af4049 && scene::function_9730988a(level.var_f0a17a7b, "overview")) {
     var_7dae7df8 = "overview";
-  } else if(var_227ba79b === #"hash_2fda3f64c5caa89e" && scene::function_9730988a(level.var_f0a17a7b, "inspect")) {
+  } else if(var_227ba79b === #"weapon_inspect" && scene::function_9730988a(level.var_f0a17a7b, "inspect")) {
     var_7dae7df8 = "inspect";
   } else if(var_227ba79b === #"charm" && scene::function_9730988a(level.var_f0a17a7b, "charms")) {
     var_7dae7df8 = "charms";
@@ -1845,7 +1845,7 @@ function function_f70cc07c(array) {
 }
 
 function function_d896247b(var_ccf52c44) {
-  return var_ccf52c44 == #"primary" || var_ccf52c44 == #"secondary" || var_ccf52c44 == #"gunsmith" || var_ccf52c44 == #"hash_2fda3f64c5caa89e" || var_ccf52c44 == #"charm" || var_ccf52c44 == #"stickers";
+  return var_ccf52c44 == #"primary" || var_ccf52c44 == #"secondary" || var_ccf52c44 == #"gunsmith" || var_ccf52c44 == #"weapon_inspect" || var_ccf52c44 == #"charm" || var_ccf52c44 == #"stickers";
 }
 
 function function_3a1dd26(localclientnum, var_ccf52c44, camo_index) {
@@ -2038,7 +2038,7 @@ function function_15cbf06e(localclientnum, var_ccf52c44, var_415dfdfa) {
 }
 
 function function_162e1121(localclientnum, var_ccf52c44, var_571f2574) {
-  if(!(var_ccf52c44 == #"primary" || var_ccf52c44 == #"secondary" || var_ccf52c44 == #"gunsmith" || var_ccf52c44 == #"charm" || var_ccf52c44 == #"hash_2fda3f64c5caa89e")) {
+  if(!(var_ccf52c44 == #"primary" || var_ccf52c44 == #"secondary" || var_ccf52c44 == #"gunsmith" || var_ccf52c44 == #"charm" || var_ccf52c44 == #"weapon_inspect")) {
     return;
   }
 
@@ -2058,7 +2058,7 @@ function function_162e1121(localclientnum, var_ccf52c44, var_571f2574) {
 }
 
 function function_52145a0d(localclientnum, var_ccf52c44) {
-  if(!(var_ccf52c44 == #"primary" || var_ccf52c44 == #"secondary" || var_ccf52c44 == #"gunsmith" || var_ccf52c44 == #"charm" || var_ccf52c44 == #"hash_2fda3f64c5caa89e")) {
+  if(!(var_ccf52c44 == #"primary" || var_ccf52c44 == #"secondary" || var_ccf52c44 == #"gunsmith" || var_ccf52c44 == #"charm" || var_ccf52c44 == #"weapon_inspect")) {
     return 0;
   }
 
@@ -2107,7 +2107,7 @@ function function_998e2be7(localclientnum, var_ccf52c44, weapon_options_param, v
 }
 
 function get_weapon_options(localclientnum, var_ccf52c44) {
-  if(var_ccf52c44 == #"primary" || var_ccf52c44 == #"secondary" || var_ccf52c44 == #"gunsmith" || var_ccf52c44 == #"charm" || var_ccf52c44 == #"stickers" || var_ccf52c44 == #"hash_2fda3f64c5caa89e") {
+  if(var_ccf52c44 == #"primary" || var_ccf52c44 == #"secondary" || var_ccf52c44 == #"gunsmith" || var_ccf52c44 == #"charm" || var_ccf52c44 == #"stickers" || var_ccf52c44 == #"weapon_inspect") {
     camo_index = get_camo_index(localclientnum, var_ccf52c44);
     reticle_index = get_reticle_index(localclientnum);
     paintshop = get_show_paintshop(localclientnum);
@@ -2264,7 +2264,7 @@ function update_weapon_script_model(localclientnum, newweaponstring, var_f020955
       thread function_370fbe8f(newweaponstring, fx);
     }
 
-    if(var_8a4ba442 === #"hash_2fda3f64c5caa89e") {
+    if(var_8a4ba442 === #"weapon_inspect") {
       function_975f521b(var_571f2574);
     }
 
@@ -2407,7 +2407,7 @@ function function_75af31e2(localclientnum, var_addf3c2f) {
     case #"aether_shroud_5":
     case #"aether_shroud_4":
     case #"aether_shroud":
-      self setModel(#"hash_31c57957830a468b");
+      self setModel(#"wpn_t9_zm_wand_cannister_aether_shroud_prop");
       self.var_125d962d = util::playFXOnTag(localclientnum, #"hash_63a413ea4517d35e", self, "tag_origin");
       break;
     case #"energy_mine":
@@ -2470,7 +2470,7 @@ function function_75af31e2(localclientnum, var_addf3c2f) {
     case #"lightning_links_4":
     case #"lightning_links_5":
     case #"lightning_links":
-      self setModel(#"hash_49ac5305b1f71eba");
+      self setModel(#"wpn_t9_zm_wand_cannister_lightning_links_view");
       self.var_125d962d = util::playFXOnTag(localclientnum, #"hash_69585875feada15d", self, "tag_origin");
       break;
   }
@@ -2480,12 +2480,12 @@ function function_75af31e2(localclientnum, var_addf3c2f) {
   level.var_e287b16f[localclientnum] = var_addf3c2f;
 }
 
-function function_4dcbc16b(localclientnum, var_3f5552f9, var_53f950ea) {
+function function_4dcbc16b(localclientnum, var_3f5552f9, weapon_current) {
   if(var_3f5552f9 === #"primary" || var_3f5552f9 === #"secondary") {
-    var_4f84f11f = getloadoutweapon(localclientnum, level.var_41c1f7b9, #"primary");
-    var_e6cbc2be = getloadoutweapon(localclientnum, level.var_41c1f7b9, #"secondary");
+    weapon_primary = getloadoutweapon(localclientnum, level.var_41c1f7b9, #"primary");
+    weapon_secondary = getloadoutweapon(localclientnum, level.var_41c1f7b9, #"secondary");
 
-    if(function_cc770c92(var_4f84f11f) && function_cc770c92(var_e6cbc2be) || function_cc770c92(var_53f950ea) && var_3f5552f9 === #"primary" && function_cc770c92(var_e6cbc2be) || function_cc770c92(var_53f950ea) && var_3f5552f9 === #"secondary" && function_cc770c92(var_4f84f11f) || isDefined(level.var_fe51f5a8) && var_3f5552f9 === #"primary" && level.var_fe51f5a8 === var_4f84f11f || isDefined(level.var_fe51f5a8) && var_3f5552f9 === #"secondary" && level.var_fe51f5a8 === var_e6cbc2be) {
+    if(function_cc770c92(weapon_primary) && function_cc770c92(weapon_secondary) || function_cc770c92(weapon_current) && var_3f5552f9 === #"primary" && function_cc770c92(weapon_secondary) || function_cc770c92(weapon_current) && var_3f5552f9 === #"secondary" && function_cc770c92(weapon_primary) || isDefined(level.var_fe51f5a8) && var_3f5552f9 === #"primary" && level.var_fe51f5a8 === weapon_primary || isDefined(level.var_fe51f5a8) && var_3f5552f9 === #"secondary" && level.var_fe51f5a8 === weapon_secondary) {
       return true;
     }
   }
@@ -2595,7 +2595,7 @@ function function_5f70d1c8(weapon, var_e81ceea = "") {
       var_dd6869e3 = (isDefined(settings.var_8f5ed804) ? settings.var_8f5ed804 : 0, isDefined(settings.var_81b53cb1) ? settings.var_81b53cb1 : 0, isDefined(settings.var_23e08109) ? settings.var_23e08109 : 0);
       var_d098ea88 = isDefined(settings.var_72dfbab8) ? settings.var_72dfbab8 : 0;
     } else if(function_cd84dead(weapon, "barrel")) {
-      var_f3d83915 = (isDefined(settings.var_ba85afd3) ? settings.var_ba85afd3 : 0, isDefined(settings.var_a84b0b5e) ? settings.var_a84b0b5e : 0, isDefined(settings.var_d50064c8) ? settings.var_d50064c8 : 0);
+      var_f3d83915 = (isDefined(settings.com_pallet_2) ? settings.com_pallet_2 : 0, isDefined(settings.var_a84b0b5e) ? settings.var_a84b0b5e : 0, isDefined(settings.var_d50064c8) ? settings.var_d50064c8 : 0);
       var_dd6869e3 = (isDefined(settings.var_a903d0e5) ? settings.var_a903d0e5 : 0, isDefined(settings.var_bb36754a) ? settings.var_bb36754a : 0, isDefined(settings.var_cd7899ce) ? settings.var_cd7899ce : 0);
       var_d098ea88 = isDefined(settings.var_12bacd52) ? settings.var_12bacd52 : 0;
     } else if(function_cd84dead(weapon, "stock")) {
@@ -2793,7 +2793,7 @@ function function_ae73f57f(localclientnum, var_8a4ba442, var_e81ceea) {
       case #"gunsmith":
         s_info = function_5f70d1c8(level.current_weapon[localclientnum], var_e81ceea);
         break;
-      case #"hash_2fda3f64c5caa89e":
+      case #"weapon_inspect":
         s_info = function_fa001ebb(level.current_weapon[localclientnum]);
         break;
       case #"charm":

@@ -87,7 +87,7 @@ function function_29307fae(struct) {
     var_cf8192ca.var_ccd7223 = var_cf8192ca.origin;
     var_cf8192ca hide();
     playSoundAtPosition(#"hash_20c4f0485930af2a", struct.origin);
-    var_16129dba function_619a5c20();
+    var_16129dba pingable();
   }
 }
 

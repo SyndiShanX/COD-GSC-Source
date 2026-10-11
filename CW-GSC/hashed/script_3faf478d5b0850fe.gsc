@@ -27,7 +27,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_9fc66ac;
+#namespace doa_sound;
 
 function init() {
   clientfield::register("world", "doa_announce", 1, 11, "int");
@@ -37,13 +37,13 @@ function main() {
   level clientfield::set("doa_announce", 0);
 }
 
-function announce(id, var_971e1071 = 15) {
+function announce(id, playermask = 15) {
   if(!isDefined(id)) {
     return;
   }
 
   assert(id >= 0 && id <= 72, "<dev string:x38>");
-  payload = (id << 4) + var_971e1071;
+  payload = (id << 4) + playermask;
   level clientfield::set("doa_announce", payload);
   util::wait_network_frame();
   level clientfield::set("doa_announce", 0);
@@ -65,7 +65,7 @@ function function_a77649db(name, onoff) {
   function_5e3127a5(undefined, level.var_7704256);
 }
 
-function function_5beeba99() {
+function arena_changed() {
   if(!isDefined(level.doa.var_39e3fa99)) {
     return;
   }

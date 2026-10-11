@@ -9,7 +9,7 @@
 #using scripts\cp_common\snd_utility;
 #namespace snd;
 
-function function_ce893a25() {
+function snd_debug_init() {
   level thread function_926b63ee();
   level thread function_222f3594();
   dvar("<dev string:x38>", "<dev string:x4b>", &function_29bb1234);
@@ -20,12 +20,12 @@ function function_ce893a25() {
 
 function private function_1c3e68dd(linenum) {
   var_d63a89fd = level._snd._debug.hud_y;
-  var_1790a507 = function_827811b5();
-  var_38c41a5e = var_1790a507[0];
-  var_c13d121d = var_1790a507[1];
+  vidresolution = function_827811b5();
+  vidwidth = vidresolution[0];
+  vidheight = vidresolution[1];
 
   if(var_d63a89fd < 0) {
-    var_d63a89fd = var_c13d121d + var_d63a89fd;
+    var_d63a89fd = vidheight + var_d63a89fd;
   }
 
   posy = var_d63a89fd + 32 * linenum;
@@ -34,16 +34,16 @@ function private function_1c3e68dd(linenum) {
 
 function private function_d34c1a24(xoffset, linenum, text, color) {
   var_7ab7d2f1 = level._snd._debug.hud_x;
-  var_1790a507 = function_827811b5();
-  var_38c41a5e = var_1790a507[0];
-  var_c13d121d = var_1790a507[1];
+  vidresolution = function_827811b5();
+  vidwidth = vidresolution[0];
+  vidheight = vidresolution[1];
 
   if(isDefined(color) == 0) {
     color = (1, 1, 1);
   }
 
   if(var_7ab7d2f1 < 0) {
-    var_7ab7d2f1 = var_38c41a5e + var_7ab7d2f1;
+    var_7ab7d2f1 = vidwidth + var_7ab7d2f1;
   }
 
   function_65bb0ccd(text, var_7ab7d2f1 + xoffset, function_1c3e68dd(linenum), 1.33333, "<dev string:x98>", color, 0.854248, (0, 0, 0), 0.72974, (1, 1, 1), 0.72974);
@@ -108,9 +108,9 @@ function private function_7814c6ed(player, playerview, playerangles, cosfov, max
   soundalias = self function_738e0260();
   origin = undefined;
   assert(isDefined(soundalias) == 1);
-  var_688ce44d = function_c41f829d(soundalias);
+  isalias3d = function_c41f829d(soundalias);
 
-  if(isDefined(var_688ce44d) && var_688ce44d == 0) {
+  if(isDefined(isalias3d) && isalias3d == 0) {
     return -1;
   }
 
@@ -160,7 +160,7 @@ function private function_7814c6ed(player, playerview, playerangles, cosfov, max
   return dist;
 }
 
-function private function_a3b46281(var_22a4e6a0, array, player, playerview, playerangles, cosfov, maxdistance) {
+function private function_a3b46281(visiblesndents, array, player, playerview, playerangles, cosfov, maxdistance) {
   playerforward = anglesToForward(cosfov);
   playerfov = playerview getplayerfov();
   visible = [];
@@ -189,7 +189,7 @@ function private function_a3b46281(var_22a4e6a0, array, player, playerview, play
 function private function_9386ad03(player, var_977d0bf3) {
   maxdistance = level._snd._debug.distance_max;
   maxdistance = maxdistance <= 0 ? 262144 : maxdistance;
-  var_22a4e6a0 = [];
+  visiblesndents = [];
   assert(isDefined(player) == 1);
   assert(isDefined(var_977d0bf3) == 1);
   playerview = player getplayervieworigin();
@@ -198,14 +198,14 @@ function private function_9386ad03(player, var_977d0bf3) {
   cosfov = cos(fov);
 
   if(isDefined(level.var_b7d2deb) == 1 && var_977d0bf3 >= 3) {
-    var_22a4e6a0 = function_a3b46281(var_22a4e6a0, level.var_b7d2deb, player, playerview, playerangles, cosfov, maxdistance);
+    visiblesndents = function_a3b46281(visiblesndents, level.var_b7d2deb, player, playerview, playerangles, cosfov, maxdistance);
   }
 
   if(isDefined(level._snd) == 1 && isDefined(level._snd.var_3cc765a3) == 1) {
-    var_22a4e6a0 = function_a3b46281(var_22a4e6a0, level._snd.var_3cc765a3, player, playerview, playerangles, cosfov, maxdistance);
+    visiblesndents = function_a3b46281(visiblesndents, level._snd.var_3cc765a3, player, playerview, playerangles, cosfov, maxdistance);
   }
 
-  return var_22a4e6a0;
+  return visiblesndents;
 }
 
 function private function_bf58f58b() {
@@ -264,18 +264,18 @@ function private function_bf58f58b() {
   linesphere(origin, radius, color, line_alpha, 0, 1);
 }
 
-function private function_17547f34(player, var_22a4e6a0, var_977d0bf3) {
-  if(isDefined(var_22a4e6a0.var_6d42228d)) {
-    return var_22a4e6a0.var_6d42228d;
+function private function_17547f34(player, visiblesndents, var_977d0bf3) {
+  if(isDefined(visiblesndents.var_6d42228d)) {
+    return visiblesndents.var_6d42228d;
   }
 
-  crosshairradius = level._snd._debug.var_4b824b64;
-  fov = var_22a4e6a0 getplayerfov();
-  playerview = var_22a4e6a0 getplayervieworigin();
-  playerangles = var_22a4e6a0 getplayerviewangles();
+  crosshairradius = level._snd._debug.xhair_radius;
+  fov = visiblesndents getplayerfov();
+  playerview = visiblesndents getplayervieworigin();
+  playerangles = visiblesndents getplayerviewangles();
   playerforward = anglesToForward(playerangles);
   highlightdot = level._snd._debug.dot;
-  var_f45e7cd0 = 0;
+  reticleentdot = 0;
   reticleent = undefined;
   visiblesndent = function_9ade037c(playerview, playerforward, var_977d0bf3);
 
@@ -285,8 +285,8 @@ function private function_17547f34(player, var_22a4e6a0, var_977d0bf3) {
     normal = vectorNormalize(deltapos);
     dot = vectordot(playerforward, normal);
 
-    if(dot > highlightdot && dot > var_f45e7cd0) {
-      var_f45e7cd0 = dot;
+    if(dot > highlightdot && dot > reticleentdot) {
+      reticleentdot = dot;
       reticleent = visiblesndent;
     }
   }
@@ -337,8 +337,8 @@ function private function_b78b1ab1(player, var_977d0bf3) {
       mapfloat(radiusmin, radiusmax + safetymax, 1, 0.5, dist);
     }
 
-    var_7295dcac = dist * 0.00133333;
-    print3dplus(soundalias, origin + (0, 0, -1.666 * var_7295dcac * debugscale * 24), -1.666 * debugscale, "<dev string:xd7>", selectioncolor, alpha, (0, 0, 0), alphasq, (1, 1, 1), alphasq, 1);
+    fixeddistscalar = dist * 0.00133333;
+    print3dplus(soundalias, origin + (0, 0, -1.666 * fixeddistscalar * debugscale * 24), -1.666 * debugscale, "<dev string:xd7>", selectioncolor, alpha, (0, 0, 0), alphasq, (1, 1, 1), alphasq, 1);
     detail_text = "<dev string:x4b>";
 
     if(is_true(level._snd.var_2dd09170)) {
@@ -349,8 +349,8 @@ function private function_b78b1ab1(player, var_977d0bf3) {
       detail_text = "<dev string:xeb>";
     }
 
-    detail_text += "<dev string:xf5>" + function_d6053a8f(radiusmin) + "<dev string:x100>" + function_d6053a8f(dist) + "<dev string:x100>" + function_d6053a8f(radiusmax);
-    print3dplus(detail_text, origin + (0, 0, -2.666 * var_7295dcac * debugscale * 24), -1.333 * debugscale, "<dev string:xd7>", selectioncolor, alpha, (0, 0, 0), alphasq, (1, 1, 1), alphasq, 1);
+    detail_text += "<dev string:xf5>" + printdecimalcount(radiusmin) + "<dev string:x100>" + printdecimalcount(dist) + "<dev string:x100>" + printdecimalcount(radiusmax);
+    print3dplus(detail_text, origin + (0, 0, -2.666 * fixeddistscalar * debugscale * 24), -1.333 * debugscale, "<dev string:xd7>", selectioncolor, alpha, (0, 0, 0), alphasq, (1, 1, 1), alphasq, 1);
   }
 
   if(isDefined(radiusmax) == 1 && isnumber(radiusmax) == 1 && radiusmax > 0) {
@@ -383,13 +383,13 @@ function private function_c5ac5c05(var_977d0bf3) {
   var_82d451c6 = 0;
 
   if(level.var_dbe59aee.size >= drawlimit) {
-    var_d8515b45 = [];
+    allplayersviews = [];
 
     foreach(player in players) {
-      var_d8515b45[var_d8515b45.size] = player getplayervieworigin();
+      allplayersviews[allplayersviews.size] = player getplayervieworigin();
     }
 
-    var_2ccfcb0e = vectoraverage(var_d8515b45);
+    var_2ccfcb0e = vectoraverage(allplayersviews);
     level.var_dbe59aee = arraysortclosest(level.var_dbe59aee, var_2ccfcb0e);
 
     foreach(ent in level.var_dbe59aee) {
@@ -428,9 +428,9 @@ function private function_3d58f598(var_977d0bf3) {
   var_56ac818e = 0;
   var_da38b6bb = 0;
   sndentcount = 0;
-  var_52e339ad = "<dev string:x4b>";
-  var_89cff76c = "<dev string:x4b>";
-  var_a91ca488 = 0;
+  sndentvisiblestring = "<dev string:x4b>";
+  sndentfilterstring = "<dev string:x4b>";
+  sndparamcount = 0;
 
   if(isDefined(level.var_b7d2deb) == 1) {
     assert(isDefined(level.var_c8afcee6) == 1);
@@ -444,15 +444,15 @@ function private function_3d58f598(var_977d0bf3) {
   }
 
   if(isDefined(level.var_dbe59aee) == 1 && level.var_dbe59aee.size > 0 && var_977d0bf3 >= 3) {
-    var_52e339ad += "<dev string:x11d>" + level.var_dbe59aee.size + "<dev string:x123>";
+    sndentvisiblestring += "<dev string:x11d>" + level.var_dbe59aee.size + "<dev string:x123>";
   }
 
   if(isDefined(filterstring) == 1 && filterstring != "<dev string:x4b>") {
-    var_89cff76c += "<dev string:x130>" + filterstring + "<dev string:x130>";
+    sndentfilterstring += "<dev string:x130>" + filterstring + "<dev string:x130>";
   }
 
   if(isDefined(level.var_ba9b4ed) == 1) {
-    var_a91ca488 = level.var_ba9b4ed.size;
+    sndparamcount = level.var_ba9b4ed.size;
   }
 
   row = -4;
@@ -500,7 +500,7 @@ function private function_3d58f598(var_977d0bf3) {
   }
 
   row++;
-  function_d34c1a24(0, row, "<dev string:x18c>" + var_a91ca488);
+  function_d34c1a24(0, row, "<dev string:x18c>" + sndparamcount);
   row++;
 
   if(var_977d0bf3 >= 3) {
@@ -517,7 +517,7 @@ function private function_3d58f598(var_977d0bf3) {
     }
 
     if(isDefined(filterstring) == 1 && filterstring != "<dev string:x4b>") {
-      visiblestring += "<dev string:x11d>" + var_89cff76c + "<dev string:x1e6>";
+      visiblestring += "<dev string:x11d>" + sndentfilterstring + "<dev string:x1e6>";
     }
 
     function_d34c1a24(0, row, "<dev string:x1eb>" + visiblestring);
@@ -637,11 +637,11 @@ function private function_fcbbe789(key, value) {
       break;
     case #"hash_5ba24ffba2d85322":
     case #"hash_5ba24ffba2d85322":
-      level._snd._debug.var_4c5d0455 = float(value);
+      level._snd._debug.xhair_alpha = float(value);
       break;
     case #"hash_3d649e7c9abdc358":
     case #"hash_3d649e7c9abdc358":
-      level._snd._debug.var_4b824b64 = int(value);
+      level._snd._debug.xhair_radius = int(value);
       break;
   }
 }
@@ -687,8 +687,8 @@ function private function_926b63ee() {
   level._snd._debug.dot = 0.99;
   level._snd._debug.draw_limit = 0;
   level._snd._debug.xhair = 0;
-  level._snd._debug.var_4c5d0455 = 0.1;
-  level._snd._debug.var_4b824b64 = 5;
+  level._snd._debug.xhair_alpha = 0.1;
+  level._snd._debug.xhair_radius = 5;
   util::init_dvar("<dev string:x295>", level._snd._debug.debuglevel, &function_a3f5c17f);
   util::init_dvar("<dev string:x2a5>", level._snd._debug.filter, &function_a3f5c17f);
   util::init_dvar("<dev string:x2bb>", level._snd._debug.hud_x, &function_a3f5c17f);
@@ -702,8 +702,8 @@ function private function_926b63ee() {
   util::init_dvar("<dev string:x36e>", level._snd._debug.dot, &function_a3f5c17f);
   util::init_dvar("<dev string:x381>", level._snd._debug.draw_limit, &function_a3f5c17f);
   util::init_dvar("<dev string:x39a>", level._snd._debug.xhair, &function_a3f5c17f);
-  util::init_dvar("<dev string:x3b3>", level._snd._debug.var_4c5d0455, &function_a3f5c17f);
-  util::init_dvar("<dev string:x3d1>", level._snd._debug.var_4b824b64, &function_a3f5c17f);
+  util::init_dvar("<dev string:x3b3>", level._snd._debug.xhair_alpha, &function_a3f5c17f);
+  util::init_dvar("<dev string:x3d1>", level._snd._debug.xhair_radius, &function_a3f5c17f);
 }
 
 function private function_222f3594() {
@@ -738,9 +738,9 @@ function private function_fa2bfbd1() {
   player endon(#"hash_1c8039ff7519235");
 
   while(!isremovedentity(player)) {
-    var_5e193409 = function_827811b5();
-    var_9e35ce44 = var_5e193409[0] * 0.5;
-    var_749dfb19 = var_5e193409[1] * 0.5;
+    vidsize = function_827811b5();
+    var_9e35ce44 = vidsize[0] * 0.5;
+    var_749dfb19 = vidsize[1] * 0.5;
     eyeorigin = player getplayervieworigin();
     eyeangles = player getplayerviewangles();
     eyeforward = anglesToForward(eyeangles);
@@ -902,16 +902,16 @@ function private function_40f589b7() {
   level endon(#"hash_2036f819b394154");
 
   while(true) {
-    var_1790a507 = function_827811b5();
-    var_38c41a5e = var_1790a507[0];
-    var_c13d121d = var_1790a507[1];
-    pos = (var_38c41a5e * 0.5, var_c13d121d * 0.5, 0);
+    vidresolution = function_827811b5();
+    vidwidth = vidresolution[0];
+    vidheight = vidresolution[1];
+    pos = (vidwidth * 0.5, vidheight * 0.5, 0);
     txt = "<dev string:x4ae>";
     skipto = function_bdd32fcc();
 
     if(is_true(level._snd.var_8c37ff34)) {
       txt = "<dev string:x4b4>";
-      pos = (var_38c41a5e * 0.5, 32 + var_c13d121d * 0.5, 0);
+      pos = (vidwidth * 0.5, 32 + vidheight * 0.5, 0);
     }
 
     txt += "<dev string:x4ba>";

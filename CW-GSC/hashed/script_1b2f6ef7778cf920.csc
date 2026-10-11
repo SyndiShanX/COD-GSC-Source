@@ -64,24 +64,24 @@ function init() {
 function function_170b90e5() {
   function_32d5e898();
   namespace_981c1f3c::init();
-  namespace_8c04284b::init();
+  doa_arena::init();
   namespace_77eccc4f::init();
   doa_banner::init();
-  namespace_5a917022::init();
-  namespace_ac2a80f5::init();
+  doa_bonus_room::init();
+  doa_camera::init();
   doa_enemy::init();
   namespace_250e9486::init();
-  namespace_1c2a96f9::init();
-  namespace_ed80aead::init();
-  namespace_268747c0::init();
+  doa_fate::init();
+  doa_gib::init();
+  doa_hazard::init();
   namespace_6e90e490::init();
-  namespace_b7d49cfd::init();
-  namespace_dfc652ee::init();
+  doa_outro::init();
+  doa_pickups::init();
   doa_player::init();
-  namespace_83eb6304::init();
-  namespace_eccff4fb::init();
+  doa_fx::init();
+  doa_score::init();
   namespace_e32bb68::init();
-  namespace_9fc66ac::init();
+  doa_sound::init();
   namespace_c85a46fe::init();
   doa_wild::init();
   namespace_491fa2b2::init();
@@ -95,13 +95,13 @@ function function_fefe581c(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   level.doa.world_state = bwastimejump;
-  namespace_9fc66ac::function_65fcd877();
+  doa_sound::function_65fcd877();
   level.var_fb0679ad = 0;
   function_b6e8ef46();
 
   if(level.doa.world_state == 2) {
     player = getPlayers(binitialsnap)[0];
-    player thread namespace_7f5aeb59::function_4d692cc4(binitialsnap, "default");
+    player thread doa_player_utility::function_4d692cc4(binitialsnap, "default");
   }
 
   if(level.doa.world_state == 1) {
@@ -133,7 +133,7 @@ function function_5b2f0c51(localclientnum, oldval, newval, bnewent, binitialsnap
     }
   }
 
-  namespace_9fc66ac::function_2fc07d61();
+  doa_sound::function_2fc07d61();
 }
 
 function function_32d5e898(localclientnum = 0, restart = 0) {
@@ -148,22 +148,22 @@ function function_32d5e898(localclientnum = 0, restart = 0) {
   level.doa.hardcoremode = getdvarint(#"hash_47849a8681a67ce7", 0);
 
   if(restart) {
-    namespace_8c04284b::function_32d5e898(localclientnum);
+    doa_arena::function_32d5e898(localclientnum);
     namespace_77eccc4f::function_32d5e898(localclientnum);
     doa_banner::function_32d5e898(localclientnum);
-    namespace_5a917022::function_32d5e898(localclientnum);
-    namespace_ac2a80f5::function_32d5e898(localclientnum);
+    doa_bonus_room::function_32d5e898(localclientnum);
+    doa_camera::function_32d5e898(localclientnum);
     doa_enemy::function_32d5e898(localclientnum);
     namespace_250e9486::function_32d5e898(localclientnum);
-    namespace_ed80aead::function_32d5e898(localclientnum);
-    namespace_1c2a96f9::function_32d5e898(localclientnum);
-    namespace_268747c0::function_32d5e898(localclientnum);
+    doa_gib::function_32d5e898(localclientnum);
+    doa_fate::function_32d5e898(localclientnum);
+    doa_hazard::function_32d5e898(localclientnum);
     namespace_6e90e490::function_32d5e898(localclientnum);
-    namespace_dfc652ee::function_32d5e898(localclientnum);
+    doa_pickups::function_32d5e898(localclientnum);
     doa_player::function_32d5e898(localclientnum);
-    namespace_eccff4fb::function_32d5e898(localclientnum);
+    doa_score::function_32d5e898(localclientnum);
     namespace_e32bb68::function_32d5e898(localclientnum);
-    namespace_9fc66ac::function_32d5e898(localclientnum);
+    doa_sound::function_32d5e898(localclientnum);
     namespace_c85a46fe::function_32d5e898(localclientnum);
     doa_wild::function_32d5e898(localclientnum);
     namespace_491fa2b2::function_32d5e898(localclientnum);

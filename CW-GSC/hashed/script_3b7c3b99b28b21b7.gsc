@@ -58,7 +58,7 @@ function init_flags() {
   level flag::init("kraus_reached_bar");
 }
 
-function function_22b7fffd() {
+function init_scenes() {
   animation::add_notetrack_func("cp_ger_stakeout_wall::assign_my_umbrella", &function_39369cca);
   scene::add_scene_func("aib_vign_stakeout_harass_check_papers", &function_5e77e85, "play");
   var_cbd9930a = getEntArray("checkpoint_trunk_props", "targetname");
@@ -66,7 +66,7 @@ function function_22b7fffd() {
 }
 
 function wall_start(str_objective) {
-  util::function_268bdf4f("adler", &namespace_11998b8f::function_2f0f0a84);
+  util::init_hero("adler", &namespace_11998b8f::function_2f0f0a84);
   level flag::set("start_berlin_wall_lighting");
   var_27e33204 = struct::get("ghost_station_open_manhole_anim_org");
   var_27e33204 struct::delete();
@@ -110,10 +110,10 @@ function function_cca0368(str_objective, b_starting) {
   level flag::set("at_street_overlook");
   namespace_5ceacc03::music("4.0_rooftops_stinger_2");
   level flag::set("wall_done");
-  skipto::function_4e3ab877("wall");
+  skipto::objective_completed("wall");
 }
 
-function function_f39fdd43(str_objective, b_starting, var_aa1a6455, player) {
+function function_f39fdd43(str_objective, b_starting, b_direct, player) {
   if(player) {
     level flag::set("climbed_out_of_sewer");
     level flag::set("at_street_overlook");
@@ -190,9 +190,9 @@ function function_f39fdd43(str_objective, b_starting, var_aa1a6455, player) {
 
 function function_4e2b941a() {
   level flag::wait_till("player_out_of_doors");
-  var_62f78985 = getEnt("adler_roof_door1", "targetname");
-  var_62f78985 unlink();
-  var_62f78985 rotateTo(var_62f78985.original_angles, 0.5);
+  rooftop_door = getEnt("adler_roof_door1", "targetname");
+  rooftop_door unlink();
+  rooftop_door rotateTo(rooftop_door.original_angles, 0.5);
   wait 0.5;
   districts::function_930f8c81("tunnels");
   districts::function_a7d79fcb("tailor_and_alley");
@@ -315,7 +315,7 @@ function function_6a048393() {
     scripted_node = struct::get(self.target, "targetname");
     self flashlight::function_65e5c8c8(1);
     self.flashlightfxoverridetag = "tag_light";
-    self flashlight::function_7c2f623b();
+    self flashlight::light_on();
     scripted_node thread scene::play("aib_vign_stakeout_wall_flashlight_idle", "flashlight_idle_1");
     return;
   }
@@ -677,8 +677,8 @@ function function_13778421(skipto) {
 }
 
 function function_30b688c0(a_ents) {
-  var_cafbbb40 = a_ents[#"prop 1"];
-  thread namespace_5ceacc03::function_11e5f1bd(var_cafbbb40);
+  pigeon = a_ents[#"prop 1"];
+  thread namespace_5ceacc03::function_11e5f1bd(pigeon);
 }
 
 function function_59b4c034() {
@@ -700,7 +700,7 @@ function function_3fae1e4a() {
 }
 
 function rooftop_start(str_objective) {
-  util::function_268bdf4f("adler", &namespace_11998b8f::function_2f0f0a84);
+  util::init_hero("adler", &namespace_11998b8f::function_2f0f0a84);
   level flag::set("start_berlin_wall_lighting");
   level thread scene::play("aib_vign_stakeout_wall_gl", "wall_finish_loop");
   level thread function_e76b838d(1);
@@ -740,7 +740,7 @@ function rooftop_main(str_objective, b_starting) {
   }
 
   level flag::set("rooftop_done");
-  skipto::function_4e3ab877("rooftop");
+  skipto::objective_completed("rooftop");
 }
 
 function function_85133ec9() {
@@ -751,7 +751,7 @@ function function_85133ec9() {
   }
 }
 
-function rooftop_cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function rooftop_cleanup(str_objective, b_starting, b_direct, player) {
   if(player) {
     level flag::set("identify_kraus_done");
     level flag::set("rooftop_done");
@@ -893,7 +893,7 @@ function function_aefb4fb1() {
   self sethighdetail(0);
   self.var_34fc6abf sethighdetail(0);
   self.briefcase sethighdetail(0);
-  waitresult = level waittill(#"hash_14642cad37b9cf06", #"kraus_reached_bar");
+  waitresult = level waittill(#"start_rooftop_descend_alley", #"kraus_reached_bar");
   self thread function_9a126ef9();
 }
 

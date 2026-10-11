@@ -25,9 +25,9 @@ function private debug() {
       recordcircle(horde.origin, horde.radius, (0, 0, 1), "<dev string:x38>");
       recordcircle(horde.origin, 20, (0, 0, 1), "<dev string:x38>");
 
-      foreach(var_812bc6e0 in horde.goal_points) {
-        recordline(horde.origin, var_812bc6e0.origin, (0, 1, 0), "<dev string:x38>");
-        recordcircle(var_812bc6e0.origin, 20, (0, 1, 0), "<dev string:x38>");
+      foreach(goal_point in horde.goal_points) {
+        recordline(horde.origin, goal_point.origin, (0, 1, 0), "<dev string:x38>");
+        recordcircle(goal_point.origin, 20, (0, 1, 0), "<dev string:x38>");
       }
 
       if(isDefined(horde.path)) {
@@ -60,7 +60,7 @@ function private function_88b2dd98(numpoints) {
   for(i = 0; i < numpoints; i++) {
     point_found = 0;
     attempts = 0;
-    var_812bc6e0 = spawnStruct();
+    goal_point = spawnStruct();
 
     while(!point_found && attempts < 10) {
       spawn_angle = randomint(360);
@@ -70,11 +70,11 @@ function private function_88b2dd98(numpoints) {
       spawnx = self.origin[0] + spawn_radius * cos(spawn_angle);
       spawny = self.origin[1] + spawn_radius * sin(spawn_angle);
       spawnz = self.origin[2];
-      var_812bc6e0.origin = (spawnx, spawny, spawnz);
+      goal_point.origin = (spawnx, spawny, spawnz);
       point_found = 1;
 
       foreach(var_a4e6f42c in goal_points) {
-        if(distance2dsquared(var_812bc6e0.origin, var_a4e6f42c.origin) < 2500) {
+        if(distance2dsquared(goal_point.origin, var_a4e6f42c.origin) < 2500) {
           point_found = 0;
         }
       }
@@ -82,9 +82,9 @@ function private function_88b2dd98(numpoints) {
       attempts++;
     }
 
-    var_812bc6e0.zombie = undefined;
-    var_812bc6e0.offset = self.origin - var_812bc6e0.origin;
-    goal_points[i] = var_812bc6e0;
+    goal_point.zombie = undefined;
+    goal_point.offset = self.origin - goal_point.origin;
+    goal_points[i] = goal_point;
   }
 
   self.goal_points = goal_points;
@@ -95,13 +95,13 @@ function function_11280436(var_f9289185, origin, angles, radius, var_aae3fc82) {
   horde function_88b2dd98(var_aae3fc82);
 
   for(i = 0; i < horde.goal_points.size; i++) {
-    var_812bc6e0 = horde.goal_points[i];
+    goal_point = horde.goal_points[i];
     spawn_angles = (0, randomint(360), 0);
-    zombie = spawnactor("spawner_boct_zombie_wz", var_812bc6e0.origin, spawn_angles, "radial_zombie");
+    zombie = spawnactor("spawner_boct_zombie_wz", goal_point.origin, spawn_angles, "radial_zombie");
     zombie.variant_type = randomint(level.var_9ee73630[zombie.zombie_move_speed][zombie.zombie_arms_position]);
     zombie.ignoreall = 1;
     zombie pathmode("dont move", 1);
-    var_812bc6e0.zombie = zombie;
+    goal_point.zombie = zombie;
   }
 
   level.var_e051b3bc[level.var_e051b3bc.size] = horde;
@@ -159,9 +159,9 @@ function private function_3e88b567() {
 }
 
 function private function_18ca9034() {
-  foreach(var_812bc6e0 in self.goal_points) {
-    var_812bc6e0.origin = getclosestpointonnavmesh(self.origin - var_812bc6e0.offset, 200, 32);
-    zombie = var_812bc6e0.zombie;
+  foreach(goal_point in self.goal_points) {
+    goal_point.origin = getclosestpointonnavmesh(self.origin - goal_point.offset, 200, 32);
+    zombie = goal_point.zombie;
 
     if(!isDefined(zombie) || !isalive(zombie)) {
       continue;
@@ -171,8 +171,8 @@ function private function_18ca9034() {
       zombie function_d1e55248(#"zombie_moving", 1);
     }
 
-    zombie function_a57c34b7(var_812bc6e0.origin);
-    distancetogoalsq = distance2dsquared(var_812bc6e0.origin, zombie.origin);
+    zombie function_a57c34b7(goal_point.origin);
+    distancetogoalsq = distance2dsquared(goal_point.origin, zombie.origin);
 
     if(distancetogoalsq > 40000 || zombie.zombie_move_speed == "sprint" && distancetogoalsq > 6400) {
       zombie function_9758722("sprint");

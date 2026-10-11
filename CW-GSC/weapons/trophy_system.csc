@@ -8,7 +8,7 @@
 #namespace trophy_system;
 
 function init_shared() {
-  clientfield::register("missile", "" + #"hash_644cb829d0133e99", 1, 1, "int", &function_a485f3cf, 0, 0);
+  clientfield::register("missile", "" + #"trophy_system_deploy", 1, 1, "int", &function_a485f3cf, 0, 0);
   clientfield::register("missile", "" + #"hash_78a094001c919359", 1, 7, "float", &function_799a68b6, 0, 0);
 }
 

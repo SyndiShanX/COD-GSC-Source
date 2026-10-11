@@ -5,7 +5,7 @@
 
 #namespace delete;
 
-function private event_handler[delete] function_55217f7b(eventstruct) {
+function private event_handler[delete] _delete(eventstruct) {
   assert(isDefined(self));
 
   if(isDefined(self)) {

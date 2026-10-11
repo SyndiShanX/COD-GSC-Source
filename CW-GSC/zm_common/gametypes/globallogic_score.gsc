@@ -121,12 +121,12 @@ function function_144d0392(event, player, victim, descvalue, var_dbaa74e2) {
   xp = victim rank::getscoreinfoxp(player);
   assert(isDefined(xp));
   label = rank::getscoreinfolabel(player);
-  var_b393387d = victim.pers[#"score"];
+  current_score = victim.pers[#"score"];
   pixbeginevent(#"");
   [[level.onplayerscore]](player, victim, descvalue);
   newscore = victim.pers[#"score"];
   pixendevent();
-  var_89b2d9e4 = newscore - var_b393387d;
+  var_89b2d9e4 = newscore - current_score;
   var_10d67c1a = {
     #type: ishash(player) ? player : hash(player), #player: victim.name, #delta: var_89b2d9e4
   };
@@ -252,7 +252,7 @@ function _setplayerscore(player, score) {
   player.pers[#"score"] = score;
   player.score = player.pers[#"score"];
   recordplayerstats(player, "score", player.pers[#"score"]);
-  player notify(#"hash_e456bbcb1359350");
+  player notify(#"update_playerscore_hud");
   player thread globallogic::checkscorelimit();
   player thread globallogic::checkplayerscorelimitsoon();
 }

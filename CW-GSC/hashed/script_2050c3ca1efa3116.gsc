@@ -30,10 +30,10 @@ function main() {
 function function_be14ecd2() {
   self notify("5634ec87c8202e49");
   self endon("5634ec87c8202e49");
-  self thread namespace_268747c0::function_978c05b5();
+  self thread doa_hazard::function_978c05b5();
   result = self waittill(#"destroy_hazard");
 
-  if(is_true(self.var_7c56394) && is_true(result.var_760a0807)) {
+  if(is_true(self.paged) && is_true(result.var_760a0807)) {
     arrayremovevalue(level.doa.var_f9d893a7, self);
     namespace_1e25ad94::debugmsg("Deleting Pungi trap permenently at:" + self.origin);
   }
@@ -41,7 +41,7 @@ function function_be14ecd2() {
   util::wait_network_frame();
 
   if(isDefined(self.trigger)) {
-    self.trigger namespace_268747c0::function_54f185a();
+    self.trigger doa_hazard::function_54f185a();
     self.trigger = undefined;
   }
 
@@ -50,7 +50,7 @@ function function_be14ecd2() {
   }
 }
 
-function function_c5cbd3bf(trap, var_7c56394 = 0) {
+function function_c5cbd3bf(trap, paged = 0) {
   hazard = namespace_ec06fe4a::spawnmodel(trap.origin, "zombietron_pungi_sticks");
 
   if(isDefined(hazard)) {
@@ -60,7 +60,7 @@ function function_c5cbd3bf(trap, var_7c56394 = 0) {
   }
 
   trap.script_model = hazard;
-  trap.var_7c56394 = var_7c56394;
+  trap.paged = paged;
   trap thread function_20cf5ee5();
   return trap;
 }
@@ -182,7 +182,7 @@ function function_20cf5ee5() {
   self.state = 1;
 
   if(isDefined(self.trigger)) {
-    self.trigger namespace_268747c0::function_54f185a();
+    self.trigger doa_hazard::function_54f185a();
     self.trigger = undefined;
   }
 
@@ -203,15 +203,15 @@ function function_20cf5ee5() {
     self.script_model moveTo(self.origin + var_16ddcf3, 0.15);
     self.script_model waittill(#"movedone");
     self.script_model namespace_e32bb68::function_3a59ec34("evt_doa_hazard_pungi_spike_set");
-    self.script_model namespace_83eb6304::function_3ecfde67("pungi_hint");
+    self.script_model doa_fx::function_3ecfde67("pungi_hint");
     wait 3;
     self.state = 3;
     self thread function_1e690b43(0.15, 6);
     self.script_model namespace_e32bb68::function_3a59ec34("evt_doa_hazard_pungi_spike_up");
-    self.script_model namespace_83eb6304::function_3ecfde67("pungi_activate");
+    self.script_model doa_fx::function_3ecfde67("pungi_activate");
     self.script_model moveTo(self.origin, 0.15);
     wait 6;
-    self.script_model namespace_83eb6304::turnofffx("pungi_hint");
+    self.script_model doa_fx::turnofffx("pungi_hint");
   }
 }
 
@@ -223,7 +223,7 @@ function function_1e690b43(movetime, lifetime) {
 
   while(isDefined(self) && self.state === 3) {
     if(!isDefined(self.trigger)) {
-      self.trigger = namespace_268747c0::function_5bfa98c9("pungi", self.origin);
+      self.trigger = doa_hazard::function_5bfa98c9("pungi", self.origin);
 
       if(isDefined(self.trigger)) {
         up = anglestoup(self.angles);
@@ -231,7 +231,7 @@ function function_1e690b43(movetime, lifetime) {
         self.trigger.origin = self.origin + offset;
         self.trigger.angles = self.angles;
 
-        level thread namespace_1e25ad94::function_b57a9d84(self.trigger.origin, self.trigger.angles[1], self.trigger.length, self.trigger.width, self.trigger.height, lifetime);
+        level thread namespace_1e25ad94::debugbox(self.trigger.origin, self.trigger.angles[1], self.trigger.length, self.trigger.width, self.trigger.height, lifetime);
       }
     }
 
@@ -258,7 +258,7 @@ function function_1e690b43(movetime, lifetime) {
 
         if(guy.var_69a33279 < gettime()) {
           guy namespace_e32bb68::function_3a59ec34("evt_doa_hazard_pungi_spike_impact");
-          guy namespace_83eb6304::function_3ecfde67("pungi_damage");
+          guy doa_fx::function_3ecfde67("pungi_damage");
           guy.var_69a33279 = gettime() + 1000;
         }
 
@@ -276,7 +276,7 @@ function function_1e690b43(movetime, lifetime) {
   }
 
   if(isDefined(self.trigger)) {
-    self.trigger namespace_268747c0::function_54f185a();
+    self.trigger doa_hazard::function_54f185a();
     self.trigger = undefined;
   }
 }

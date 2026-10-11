@@ -38,23 +38,23 @@ function function_44cc3493(var_2177e1d4 = 2, player) {
 
   while(var_2177e1d4 > 0) {
     var_77e4cc0b = arraysortclosest(getaiteamarray(#"axis"), self.origin);
-    var_bca95f5f = [];
+    potentials = [];
 
     foreach(guy in var_77e4cc0b) {
       if(is_true(guy.var_85a0c6e6)) {
         continue;
       }
 
-      if(!isDefined(var_bca95f5f)) {
-        var_bca95f5f = [];
-      } else if(!isarray(var_bca95f5f)) {
-        var_bca95f5f = array(var_bca95f5f);
+      if(!isDefined(potentials)) {
+        potentials = [];
+      } else if(!isarray(potentials)) {
+        potentials = array(potentials);
       }
 
-      var_bca95f5f[var_bca95f5f.size] = guy;
+      potentials[potentials.size] = guy;
     }
 
-    foreach(guy in var_bca95f5f) {
+    foreach(guy in potentials) {
       if(isDefined(guy)) {
         if(is_true(guy.boss)) {
           continue;
@@ -74,14 +74,14 @@ function function_44cc3493(var_2177e1d4 = 2, player) {
           continue;
         }
 
-        self namespace_83eb6304::function_3ecfde67("teleporter_disabled");
+        self doa_fx::function_3ecfde67("teleporter_disabled");
         var_2177e1d4--;
         guy.var_85a0c6e6 = 1;
         self.org.origin = self.origin + (0, 0, 40);
-        self.org namespace_83eb6304::function_3ecfde67("tesla_trail");
+        self.org doa_fx::function_3ecfde67("tesla_trail");
         self.org moveTo(guy.origin + (0, 0, 40), 0.4);
         wait 0.4;
-        self.org namespace_83eb6304::turnofffx("tesla_trail");
+        self.org doa_fx::turnofffx("tesla_trail");
         level thread namespace_9038b9d9::function_8d45f3be(guy, player);
         wait randomfloatrange(0.4, 2);
       }
@@ -92,7 +92,7 @@ function function_44cc3493(var_2177e1d4 = 2, player) {
 }
 
 function function_465aaf09(player, origin) {
-  if(is_true(level.doa.var_41adf604)) {
+  if(is_true(level.doa.bossround)) {
     return;
   }
 
@@ -100,8 +100,8 @@ function function_465aaf09(player, origin) {
     return;
   }
 
-  var_d98803e1 = namespace_ec06fe4a::function_65ee50ba(origin);
-  origin = (origin[0], origin[1], var_d98803e1[2]);
+  hitp = namespace_ec06fe4a::function_65ee50ba(origin);
+  origin = (origin[0], origin[1], hitp[2]);
   arcademachine = namespace_ec06fe4a::spawnmodel(origin + (0, 0, 12), "zombietron_arcademachine", player.angles + (0, 180, 0), "zombietron_arcademachine");
 
   if(!isDefined(arcademachine)) {
@@ -131,7 +131,7 @@ function function_465aaf09(player, origin) {
     }
 
     result = level waittilltimeout(randomfloatrange(1, 4), #"exit_taken", #"arena_completed");
-    arcademachine namespace_83eb6304::function_3ecfde67("lightningStrike");
+    arcademachine doa_fx::function_3ecfde67("lightningStrike");
     arcademachine namespace_e32bb68::function_3a59ec34("evt_doa_lightning_bolt");
     arcademachine thread function_44cc3493(randomintrange(1, 5), player);
 
@@ -140,16 +140,16 @@ function function_465aaf09(player, origin) {
     }
   }
 
-  arcademachine namespace_83eb6304::function_3ecfde67("arcade_spark");
+  arcademachine doa_fx::function_3ecfde67("arcade_spark");
   arcademachine notify(#"hash_7bf2519960a3852a");
-  arcademachine namespace_83eb6304::function_3ecfde67("wild_portal_radial_burst");
+  arcademachine doa_fx::function_3ecfde67("wild_portal_radial_burst");
   arcademachine namespace_e32bb68::function_3a59ec34("evt_doa_teleporter_wilds_burst");
-  arcademachine namespace_83eb6304::function_3ecfde67("turret_impact");
+  arcademachine doa_fx::function_3ecfde67("turret_impact");
   arcademachine namespace_e32bb68::function_3a59ec34("evt_doa_pickup_sentry_land");
   arcademachine moveTo(arcademachine.origin + (0, 0, 3000), 1);
   level.doa.var_54c5c3e6 = undefined;
   wait 1;
-  arcademachine.org namespace_83eb6304::turnofffx("tesla_trail");
+  arcademachine.org doa_fx::turnofffx("tesla_trail");
   arcademachine.org delete();
   arcademachine delete();
 }

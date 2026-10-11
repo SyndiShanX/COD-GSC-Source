@@ -42,7 +42,7 @@ function stop(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
   }
 }
 
-function function_d9475fc(var_dccfb95, var_72b185dd, aberration, reveal_threshold) {
+function function_d9475fc(var_dccfb95, blur_amount, aberration, reveal_threshold) {
   if(!postfx::function_556665f2(self.bundle)) {
     waitframe(1);
   }
@@ -51,8 +51,8 @@ function function_d9475fc(var_dccfb95, var_72b185dd, aberration, reveal_threshol
     self postfx::function_c8b5f318(self.bundle, "Vignette Fade", var_dccfb95);
   }
 
-  if(isDefined(var_72b185dd) && function_72a9e321()) {
-    self postfx::function_c8b5f318(self.bundle, "Blur Amount", var_72b185dd);
+  if(isDefined(blur_amount) && function_72a9e321()) {
+    self postfx::function_c8b5f318(self.bundle, "Blur Amount", blur_amount);
   }
 
   if(isDefined(aberration) && function_72a9e321()) {

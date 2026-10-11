@@ -98,19 +98,19 @@ function main(str_skipto, b_starting) {
   player setmovespeedscale(0.3);
   namespace_b100dd86::function_5aabc3fb();
 
-  if(isDefined(level.var_d7d201ba)) {
-    player flag::clear(level.var_d7d201ba);
+  if(isDefined(level.str_player_start_flag)) {
+    player flag::clear(level.str_player_start_flag);
   }
 
   player tkdn::function_43593d7d();
   player enableweapons();
-  player util::delay(1, undefined, &util::function_749362d7, 0);
+  player util::delay(1, undefined, &util::set_low_ready, 0);
   player setlowready(0);
   player showcrosshair(1);
   level.adler ai::set_behavior_attribute("demeanor", "cqb");
   level.woods ai::set_behavior_attribute("demeanor", "cqb");
   level waittill(#"hash_42c2d836748c8726");
-  music::function_edda155f("b1.5_airfield_reveal");
+  music::playstinger("b1.5_airfield_reveal");
   player util::blend_movespeedscale(0.6, 2);
   namespace_82bfe441::fade(0, "FadeSlow");
   plane_flyover = vehicle::simple_spawn_and_drive("plane_flyover");
@@ -118,7 +118,7 @@ function main(str_skipto, b_starting) {
   level flag::wait_till("start_tarmac");
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 }
 
@@ -163,7 +163,7 @@ function init_flags() {
 
 function init_clientfields() {}
 
-function function_22b7fffd() {}
+function init_scenes() {}
 
 function function_78bc26d5() {
   self vehicle::lights_on();

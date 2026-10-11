@@ -17,7 +17,7 @@
 #namespace namespace_61150688;
 
 function private event_handler[level_preinit] function_b489bb7b(eventstruct) {
-  snd::function_5e69f468(&_objective);
+  snd::skipto_init(&_objective);
 }
 
 function private event_handler[event_cc819519] function_686b88aa(eventstruct) {

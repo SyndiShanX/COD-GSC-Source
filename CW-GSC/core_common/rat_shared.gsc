@@ -17,7 +17,7 @@ function init() {
     level.rat.playerskilled = 0;
     level.rat.botskilled = 0;
     callback::on_player_killed(&function_cecf7c3d);
-    level.rat.var_44083397 = [];
+    level.rat.player_did_melee = [];
     addratscriptcmd("<dev string:x38>", &function_5fd1a95b);
     addratscriptcmd("<dev string:x4e>", &rscteleport);
     addratscriptcmd("<dev string:x5a>", &function_51706559);
@@ -153,10 +153,10 @@ function function_ccc8790a(params) {
   level endon(#"hash_5ce872746ed86569");
   player = getplayer(params);
   xuid = int(player getxuid(1));
-  level.rat.var_44083397[xuid] = 0;
+  level.rat.player_did_melee[xuid] = 0;
 
-  while(!level.rat.var_44083397[xuid]) {
-    level.rat.var_44083397[xuid] = player ismeleeing();
+  while(!level.rat.player_did_melee[xuid]) {
+    level.rat.player_did_melee[xuid] = player ismeleeing();
     wait 0.01;
   }
 }
@@ -168,7 +168,7 @@ function function_d5c8e330(params) {
 function function_dff6f575(params) {
   player = getplayer(params);
   xuid = int(player getxuid(1));
-  var_faf86e88 = level.rat.var_44083397[xuid];
+  var_faf86e88 = level.rat.player_did_melee[xuid];
 
   if(!var_faf86e88) {
     level notify(#"hash_5ce872746ed86569");

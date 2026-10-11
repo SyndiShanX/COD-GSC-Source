@@ -68,11 +68,11 @@ function function_dc5b7ee6() {
 function function_97c413ba() {
   level.var_1845db12 = [];
   level.var_1845db12[#"neutral"] = {
-    #losing: "warLosingNeutral", #var_c8bc87ae: "warTakingNeutral", #lost: "warLostNeutral", #captured: "objSecured"};
+    #losing: "warLosingNeutral", #taking: "warTakingNeutral", #lost: "warLostNeutral", #captured: "objSecured"};
   level.var_1845db12[#"friendly"] = {
-    #losing: "warLosingFriendly", #var_c8bc87ae: "warTakingFriendly", #lost: "warLostFriendly", #captured: "objSecured"};
+    #losing: "warLosingFriendly", #taking: "warTakingFriendly", #lost: "warLostFriendly", #captured: "objSecured"};
   level.var_1845db12[#"enemy"] = {
-    #losing: "warLosingEnemey", #var_c8bc87ae: "warTakingEnemey", #lost: "warLostEnemey", #captured: "objSecured"};
+    #losing: "warLosingEnemey", #taking: "warTakingEnemey", #lost: "warLostEnemey", #captured: "objSecured"};
 }
 
 function gettimelimit() {
@@ -152,24 +152,24 @@ function function_1804ad1c() {
 
   if(overtime::is_overtime_round()) {
     function_7de91713();
-    var_1871ddeb = function_582a1641();
+    startzone = function_582a1641();
     thread function_b4530b39();
   } else {
     function_7c88d456();
-    var_1871ddeb = function_582a1641();
+    startzone = function_582a1641();
 
     foreach(zoneindex in getarraykeys(level.var_1b3b480b)) {
-      if(zoneindex == var_1871ddeb) {
+      if(zoneindex == startzone) {
         continue;
       }
 
-      if(zoneindex < var_1871ddeb) {
+      if(zoneindex < startzone) {
         level.var_1b3b480b[zoneindex] gameobjects::set_owner_team(#"allies");
         level.var_1b3b480b[zoneindex].team = #"allies";
         continue;
       }
 
-      if(zoneindex > var_1871ddeb) {
+      if(zoneindex > startzone) {
         level.var_1b3b480b[zoneindex] gameobjects::set_owner_team(#"axis");
         level.var_1b3b480b[zoneindex].team = #"axis";
       }
@@ -238,8 +238,8 @@ function function_2f51eb67() {
     waitframe(1);
   }
 
-  var_1871ddeb = function_582a1641();
-  thread function_a8049ffd(var_1871ddeb, 10);
+  startzone = function_582a1641();
+  thread function_a8049ffd(startzone, 10);
 }
 
 function private function_7de91713() {
@@ -437,17 +437,17 @@ function private function_547ca9df() {
   state = self.var_6e4f06e2;
   team = self.var_d2711fe1;
   numallies = isDefined(self gameobjects::get_num_touching(#"allies")) ? self gameobjects::get_num_touching(#"allies") : 0;
-  var_794d4493 = isDefined(self gameobjects::get_num_touching(#"axis")) ? self gameobjects::get_num_touching(#"axis") : 0;
+  numaxis = isDefined(self gameobjects::get_num_touching(#"axis")) ? self gameobjects::get_num_touching(#"axis") : 0;
 
-  if(numallies == 0 && var_794d4493 == 0) {
+  if(numallies == 0 && numaxis == 0) {
     state = 0;
     team = #"none";
-  } else if(numallies == var_794d4493) {
+  } else if(numallies == numaxis) {
     state = 3;
     team = #"none";
-  } else if(level.gameobjectscontestedmajoritywins === 1 || numallies == 0 || var_794d4493 == 0) {
-    state = numallies < var_794d4493 ? 2 : 1;
-    team = numallies < var_794d4493 ? #"axis" : #"allies";
+  } else if(level.gameobjectscontestedmajoritywins === 1 || numallies == 0 || numaxis == 0) {
+    state = numallies < numaxis ? 2 : 1;
+    team = numallies < numaxis ? #"axis" : #"allies";
   } else {
     state = 3;
     team = #"none";
@@ -521,7 +521,7 @@ function function_8df8131e(zone, team, progress) {
         var_971743e7 = #"friendly";
       }
 
-      function_7a4fcbfe(zone, level.var_1845db12[var_ecdd36b6].var_c8bc87ae, team, level.var_1845db12[var_971743e7].losing, otherteam);
+      function_7a4fcbfe(zone, level.var_1845db12[var_ecdd36b6].taking, team, level.var_1845db12[var_971743e7].losing, otherteam);
     }
 
     zone.var_42388c6f[team] = 1;
@@ -540,11 +540,11 @@ function function_b4ed1ea0(capturingteam) {
   var_6d179b9d = function_a1ef346b(losingteam);
 
   foreach(player in var_e6d916f3) {
-    player playsoundtoplayer(#"hash_5739d2bc3554b3f9", player);
+    player playsoundtoplayer(#"mpl_dom_capture_start_friendly", player);
   }
 
   foreach(player in var_6d179b9d) {
-    player playsoundtoplayer(#"hash_3d00e79976c2e9da", player);
+    player playsoundtoplayer(#"mpl_dom_capture_start_enemy", player);
   }
 }
 
@@ -570,16 +570,16 @@ function on_touch_use(player) {
 
   if(isDefined(team) && team != #"none") {
     if(team == player.team) {
-      player playsoundtoplayer(#"hash_5739d2bc3554b3f9", player);
+      player playsoundtoplayer(#"mpl_dom_capture_start_friendly", player);
     } else {
-      player playsoundtoplayer(#"hash_3d00e79976c2e9da", player);
+      player playsoundtoplayer(#"mpl_dom_capture_start_enemy", player);
     }
 
     battlechatter::function_98898d14(player, self);
   }
 }
 
-function getuseratemultiplier(var_a4926509) {
+function getuseratemultiplier(claimant) {
   return isDefined(level.var_fcf0897a[self.var_d2711fe1].multiplier) ? level.var_fcf0897a[self.var_d2711fe1].multiplier : 1;
 }
 
@@ -777,7 +777,7 @@ function credit_player(player, string, var_24672ed6, var_81b74b24, neutralizing,
   time.pers[#"objectives"]++;
   time.objectives = time.pers[#"objectives"];
   time recordgameevent("capture");
-  level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+  level thread telemetry::function_18135b72(#"callback_on_game_event", {
     #player: time, #eventtype: #"capture"});
   demo::bookmark(#"event", gettime(), time);
   potm::bookmark(#"event", gettime(), time);
@@ -1002,7 +1002,7 @@ function function_15cbf89(gameobject) {
     currentprogress = gameobject.curprogress;
     var_f802a6b1 = gameobject.usetime;
     currentpercentage = currentprogress / var_f802a6b1;
-    var_5b37f77b = gameobject.var_a4926509;
+    var_5b37f77b = gameobject.claimant;
     iscontested = (isDefined(gameobject.var_6e4f06e2) ? gameobject.var_6e4f06e2 : 0) === 3;
 
     if(!is_true(gameobject.var_cddc87d1)) {

@@ -38,7 +38,7 @@ function function_f92fe90c() {
   level thread function_7858899c(var_2555a1ec);
 }
 
-function function_7858899c(var_37473ebc) {
+function function_7858899c(signs) {
   level endon(#"game_ended");
 
   while(!isDefined(level.var_58bc5d04)) {
@@ -46,7 +46,7 @@ function function_7858899c(var_37473ebc) {
   }
 
   while(true) {
-    foreach(sign in var_37473ebc) {
+    foreach(sign in signs) {
       if(!isDefined(sign)) {
         continue;
       }

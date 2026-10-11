@@ -35,12 +35,12 @@ function starting(str_skipto) {
 
 function main(str_skipto, b_starting) {
   level flag::set("aslt_bunker_escape_lights_out_begin");
-  level battlechatter::function_2ab9360b(1);
+  level battlechatter::bc_allow(1);
   namespace_353d803e::function_7ecf08d8();
-  setsaveddvar(#"hash_7bf40e4b6a830d11", 0);
+  setsaveddvar(#"ai_threatsightdisplay", 0);
 
   if(is_true(b_starting)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto, "adler_shotgun");
+    level.adler = namespace_e77bf565::adler_spawn(str_skipto, "adler_shotgun");
     level thread scene::skipto_end_noai("scene_kgb_door_kick", "Last_Frame", undefined, 1);
     level thread scene::skipto_end_noai("scene_kgb_utility_room_adler", "Door_Closed", undefined, 1);
     level thread scene::init("scene_kgb_tunnel_catwalk_transition");
@@ -49,7 +49,7 @@ function main(str_skipto, b_starting) {
     level thread namespace_e77bf565::function_1067ebf5("rotating_object_bunker", "player_grabbed_armor");
   }
 
-  level.adler battlechatter::function_2ab9360b(0);
+  level.adler battlechatter::bc_allow(0);
   spawner::add_spawn_function_group("ambient_cqb_searcher", "script_noteworthy", &function_dfeaa423);
   spawner::add_spawn_function_group("ambusher", "script_noteworthy", &function_adbd78ad);
   level thread namespace_e77bf565::escape_objective(str_skipto, b_starting);
@@ -59,7 +59,7 @@ function main(str_skipto, b_starting) {
   level flag::wait_till("aslt_bunker_escape_lights_out_complete");
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
@@ -76,7 +76,7 @@ function init_clientfields() {
   clientfield::register("actor", "set_flashlight_gun_tag", 1, 1, "int");
 }
 
-function function_22b7fffd() {}
+function init_scenes() {}
 
 function function_a0d18564() {
   exploder::exploder("lights_out_group_back_100");
@@ -194,7 +194,7 @@ function function_adbd78ad() {
   self.grenadeammo = 0;
   self.ignoreme = 1;
   self.ignoreall = 1;
-  self battlechatter::function_2ab9360b(0);
+  self battlechatter::bc_allow(0);
   self thread function_411f4f72();
   self thread function_5b8d4a66();
   self thread function_2f5a3b31();
@@ -229,7 +229,7 @@ function function_adbd78ad() {
   self thread function_f1c7e164();
   self.ignoreme = 0;
   self.var_e7ea517e = 1;
-  self battlechatter::function_2ab9360b(1);
+  self battlechatter::bc_allow(1);
   wait 2;
   self ai::set_behavior_attribute("disablepeek", 0);
   self ai::set_behavior_attribute("disablelean", 0);

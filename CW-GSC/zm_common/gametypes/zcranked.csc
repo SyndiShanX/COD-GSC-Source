@@ -46,7 +46,7 @@ function onstartgametype() {
 function on_gameplay_started(localclientnum) {
   waitframe(1);
   util::function_8eb5d4b0(3500, 2.5);
-  function_5ea2c6e3("zmb_cranked_neardeath", 0, 0);
+  addsubmix("zmb_cranked_neardeath", 0, 0);
 }
 
 function cranked_explode_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -81,7 +81,7 @@ function function_ee85e4e3(localclientnum) {
   waitframe(1);
   n_timer = self clientfield::get_to_player("sr_defend_timer");
   str_alias = #"hash_43c0fcbfe93e6423";
-  function_672403ca("zmb_cranked_neardeath", 0, 0);
+  blendsubmix("zmb_cranked_neardeath", 0, 0);
 
   if(is_true(self.var_5a72f7c9)) {
     self.var_5a72f7c9 = 0;
@@ -103,7 +103,7 @@ function function_ee85e4e3(localclientnum) {
         blendscale = 0;
       }
 
-      function_672403ca("zmb_cranked_neardeath", 1, blendscale);
+      blendsubmix("zmb_cranked_neardeath", 1, blendscale);
       self.var_5a72f7c9 = 1;
       str_alias = #"hash_37a0bf7f61bc3362" + n_timer;
       self playRumbleOnEntity(localclientnum, #"infiltration_rumble");

@@ -22,8 +22,8 @@ function event_handler[gametype_init] main(eventstruct) {
   clientfield::function_5b7d846d("CTFLevelInfo.flagStateAllies", #"hash_2e6d7a783938b052", #"flagstateallies", 17000, 2, "int", undefined, 0, 0);
   clientfield::function_5b7d846d("CTFLevelInfo.flagStateAxis", #"hash_2e6d7a783938b052", #"flagstateaxis", 17000, 2, "int", undefined, 0, 0);
   clientfield::function_5b7d846d("ctf_reset_score", #"hash_2e6d7a783938b052", #"ctf_reset_score", 17000, 1, "int", &ctf_reset_score, 0, 0);
-  forcestreamxmodel(#"hash_1f046ad8773b6c3", 8, -1);
-  forcestreamxmodel(#"hash_4409a354dd61569e", 8, -1);
+  forcestreamxmodel(#"p9_ctf_flag_nato_blue", 8, -1);
+  forcestreamxmodel(#"p9_ctf_flag_warsaw_blue", 8, -1);
   forcestreamxmodel(#"hash_104d7846da83e67e", 8, -1);
   forcestreamxmodel(#"hash_34ce58df766f54dd", 8, -1);
 }

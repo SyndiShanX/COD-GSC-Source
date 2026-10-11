@@ -591,7 +591,7 @@ function function_3172cf59(player, newscore, weapon, mpplayerscore) {
   scorediff = mpplayerscore.delta;
 
   if(sessionmodeismultiplayergame() && !isbot(player)) {
-    player function_678f57c8(#"hash_120b2cf3162c3bc1", mpplayerscore);
+    player function_678f57c8(#"dlog_event_mpplayerscore", mpplayerscore);
   }
 
   player bb::add_to_stat("score", mpplayerscore.delta);
@@ -955,13 +955,13 @@ function function_4301d2e0(player) {
       }
 
       var_d152ff83 = player function_95ecfff8();
-      var_c64c6d64 = var_464ac60 * var_b961672f - var_d152ff83;
+      deathpenalty = var_464ac60 * var_b961672f - var_d152ff83;
 
-      if(var_c64c6d64 < 0) {
-        var_c64c6d64 = 0;
+      if(deathpenalty < 0) {
+        deathpenalty = 0;
       }
 
-      var_dc3a7628 = int(floor((var_464ac60 - var_c64c6d64) / 10) * 10);
+      var_dc3a7628 = int(floor((var_464ac60 - deathpenalty) / 10) * 10);
       var_dc3a7628 = math::clamp(var_dc3a7628, 0, getdvarint(#"hash_6cc2b9f9d4cbe073", 20000));
     }
 
@@ -992,13 +992,13 @@ function function_fd1f8965(player) {
 function function_fdbd4189(player) {
   oldmomentum = player.pers[#"momentum"];
   var_d152ff83 = player function_95ecfff8();
-  var_c64c6d64 = oldmomentum * level.var_b961672f - var_d152ff83;
+  deathpenalty = oldmomentum * level.var_b961672f - var_d152ff83;
 
-  if(var_c64c6d64 < 0) {
-    var_c64c6d64 = 0;
+  if(deathpenalty < 0) {
+    deathpenalty = 0;
   }
 
-  var_4c619c7a = int(floor((oldmomentum - var_c64c6d64) / 10) * 10);
+  var_4c619c7a = int(floor((oldmomentum - deathpenalty) / 10) * 10);
   var_4c619c7a = math::clamp(var_4c619c7a, 0, getdvarint(#"hash_6cc2b9f9d4cbe073", 20000));
   player.pers[#"momentum"] = var_4c619c7a;
   player.momentum = player.pers[#"momentum"];
@@ -1019,13 +1019,13 @@ function function_b58be5d(player) {
   oldmomentum = player.pers[#"momentum"];
   var_d152ff83 = player function_95ecfff8();
   var_559e5a31 = math::clamp(player function_3ef59ab3(), 0, 1);
-  var_c64c6d64 = oldmomentum * var_559e5a31 - var_d152ff83;
+  deathpenalty = oldmomentum * var_559e5a31 - var_d152ff83;
 
-  if(var_c64c6d64 < 0) {
-    var_c64c6d64 = 0;
+  if(deathpenalty < 0) {
+    deathpenalty = 0;
   }
 
-  new_momentum = int(oldmomentum - var_c64c6d64);
+  new_momentum = int(oldmomentum - deathpenalty);
   _setplayermomentum(player, new_momentum);
 
   if(getdvarint(#"hash_4f17b3fc9d5ba79a", 0) > 0) {
@@ -1459,7 +1459,7 @@ function giveteamscoreforobjective_delaypostprocessing(team, score) {
     mpteamobjscores = {
       #gametime: function_f8d53445(), #team: team, #diff: newscore - teamscore, #score: newscore
     };
-    function_92d1707f(#"hash_22921c2c027fa389", mpteamobjscores);
+    function_92d1707f(#"dlog_event_mpteamobjscores", mpteamobjscores);
   }
 
   if(teamscore == newscore) {
@@ -1488,7 +1488,7 @@ function giveteamscoreforobjective(team, score) {
     mpteamobjscores = {
       #gametime: function_f8d53445(), #team: team, #diff: newscore - teamscore, #score: newscore
     };
-    function_92d1707f(#"hash_22921c2c027fa389", mpteamobjscores);
+    function_92d1707f(#"dlog_event_mpteamobjscores", mpteamobjscores);
   }
 
   if(teamscore == newscore) {
@@ -1542,8 +1542,8 @@ function resetplayerscores() {
 function updateteamscores(team) {
   setteamscore(team, game.stat[#"teamscores"][team]);
   score = getteamscore(team);
-  var_d0266750 = globallogic_utils::function_fd90317f(team, score);
-  level thread globallogic::function_b6caec44(score, var_d0266750);
+  round_score = globallogic_utils::function_fd90317f(team, score);
+  level thread globallogic::function_b6caec44(score, round_score);
 }
 
 function updateallteamscores() {

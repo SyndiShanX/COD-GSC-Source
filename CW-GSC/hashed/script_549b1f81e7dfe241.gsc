@@ -34,7 +34,7 @@
 #using scripts\weapons\cp\spy_camera;
 #namespace namespace_afd0968c;
 
-function function_22b7fffd() {
+function init_scenes() {
   scene::add_scene_func("scene_z_stk_electronics_store", &function_9df174aa, "init");
 }
 
@@ -45,7 +45,7 @@ function start(str_objective) {
   level thread namespace_fba81a7f::function_47620ece();
   doors::unlock("alley_1_tutorial_door");
   doors::open("alley_1_tutorial_door");
-  util::function_268bdf4f("lazar", &namespace_11998b8f::function_2f0f0a84);
+  util::init_hero("lazar", &namespace_11998b8f::function_2f0f0a84);
   level.lazar val::set("meetup", "ignoreme", 1);
   level.lazar val::set("meetup", "ignoreall", 1);
   level thread scene::init("scene_z_stk_electronics_store");
@@ -60,7 +60,7 @@ function main(str_objective, b_starting) {
 
   if(b_starting) {
     level thread namespace_11998b8f::function_973a721b("alley_3_car");
-    player util::delay(0.25, undefined, &util::function_749362d7, 1);
+    player util::delay(0.25, undefined, &util::set_low_ready, 1);
     level thread scene::play("scene_z_stk_electronics_store", "rr_wait_loop");
     level flag::wait_till("flag_go_in_store");
     thread namespace_5ceacc03::function_8a2f9a04();
@@ -105,7 +105,7 @@ function main(str_objective, b_starting) {
   util::function_3e65fe0b(0);
   level thread function_a168b5dc();
   level thread namespace_11998b8f::function_25120710();
-  skipto::function_4e3ab877(str_objective);
+  skipto::objective_completed(str_objective);
   level.lazar flag::wait_till_clear(#"scriptedanim");
   level thread scene::play("scene_z_stk_electronics_store", "end_loops");
 }
@@ -113,7 +113,7 @@ function main(str_objective, b_starting) {
 function function_a3fa5d6f() {
   player = getPlayers()[0];
   player val::set("electronics_store", "disable_weapons", 1);
-  player util::function_749362d7(0);
+  player util::set_low_ready(0);
   wait 0.7;
   a_weapons = player getweaponslistprimaries();
 
@@ -193,7 +193,7 @@ function function_8d76ed51() {
   level.var_49a292bb animation::last_frame(#"z_stk_surveillance_desk_kraus_exit", level.var_bd5c9b86);
 }
 
-function function_7451d8da(str_objective, b_starting, var_aa1a6455, player) {
+function function_7451d8da(str_objective, b_starting, b_direct, player) {
   if(player) {
     level flag::set("flag_meetup_park");
     level flag::set("meetup_done");

@@ -34,7 +34,7 @@ class ccp_chyron: cluielem {
     cluielem::close_luielem(player);
   }
 
-  function function_90bde5d3(player, value) {
+  function set_index(player, value) {
     player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "index", value);
   }
 
@@ -91,6 +91,6 @@ function function_2a377de3(player, value) {
   [[self]] - > function_2a377de3(player, value);
 }
 
-function function_90bde5d3(player, value) {
-  [[self]] - > function_90bde5d3(player, value);
+function set_index(player, value) {
+  [[self]] - > set_index(player, value);
 }

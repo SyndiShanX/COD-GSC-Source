@@ -1193,7 +1193,7 @@ class class_7da27482 {
     }
   }
 
-  function function_c4baf89b(showcase_weapon) {
+  function set_showcase_weapon(showcase_weapon) {
     var_87449256 = showcase_weapon;
     var_b627749c = 1;
   }

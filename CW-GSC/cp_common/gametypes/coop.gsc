@@ -63,10 +63,10 @@ function event_handler[gametype_init] main(eventstruct) {
   level.livesdonotreset = 1;
   level.ondeadevent = undefined;
   level.var_31c6ebd4 = &function_31c6ebd4;
-  callback::on_bleedout(&function_27945f);
+  callback::on_bleedout(&onplayerbleedout);
   callback::on_mission_failed(&on_mission_failed);
-  level.var_84a50edd = &spawnedasspectator;
-  level thread function_7f1305bc();
+  level.gametypespawnedasspectator = &spawnedasspectator;
+  level thread checkpointfadein();
   level.endgameonscorelimit = 0;
   level.endgameontimelimit = 0;
   level.var_e23fea8c = &function_ddc47ed1;
@@ -77,14 +77,14 @@ function event_handler[gametype_init] main(eventstruct) {
   game.dialog[#"gametype_hardcore"] = "hccoop_start";
   game.dialog[#"offense_obj"] = "generic_boost";
   game.dialog[#"defense_obj"] = "generic_boost";
-  setDvar(#"hash_c9bd2003951a4a8", 1);
+  setDvar(#"force_no_cac", 1);
 }
 
 function on_mission_failed() {
-  level thread function_34459363(level.var_85b00b2b, level.var_30eb363);
+  level thread fadeoutandloadcheckpoint(level.var_85b00b2b, level.var_30eb363);
 
   foreach(player in getPlayers()) {
-    bb::function_cd497743("mission_fail", player);
+    bb::logplayermapnotification("mission_fail", player);
   }
 }
 
@@ -119,14 +119,14 @@ function function_45b62760() {
   self recordloadoutperksandkillstreaks(primaryweapon, secondaryweapon, grenadetypeprimary, grenadetypesecondary, killstreaks[0], killstreaks[1], killstreaks[2]);
 }
 
-function function_7f1305bc() {
+function checkpointfadein() {
   while(true) {
     level waittill(#"save_restore");
     player = getPlayers()[0];
     level thread lui::screen_fade(0, 1, 1, "black");
     globallogic_ui::function_cdbb5c49(1, 1);
     player function_a7af3a2a();
-    util::function_323d3227();
+    util::cleanupactorcorpses();
     matchrecorderincrementheaderstat("checkpointRestoreCount", 1);
 
     foreach(player in level.players) {
@@ -151,25 +151,25 @@ function function_7f1305bc() {
 
       player thread val::set_for_time(3, "checkpoint_restore", "takedamage", 0);
 
-      if(!is_true(world.var_b86bf11e)) {
-        world.var_b86bf11e = 1;
+      if(!is_true(world.checkpoint_used)) {
+        world.checkpoint_used = 1;
       }
 
       player function_45b62760();
     }
 
     player endon(#"death");
-    player val::set(#"hash_342acf3710210ee2", "show_crosshair", 0);
-    player val::set(#"hash_342acf3710210ee2", "freezecontrols", 1);
-    player val::set(#"hash_342acf3710210ee2", "takedamage", 0);
-    player val::set(#"hash_342acf3710210ee2", "allowdeath", 0);
-    player val::set(#"hash_342acf3710210ee2", "pre_load_ghost", 1);
+    player val::set(#"checkpointfadein", "show_crosshair", 0);
+    player val::set(#"checkpointfadein", "freezecontrols", 1);
+    player val::set(#"checkpointfadein", "takedamage", 0);
+    player val::set(#"checkpointfadein", "allowdeath", 0);
+    player val::set(#"checkpointfadein", "pre_load_ghost", 1);
     player function_a7af3a2a();
     level util::delay(0.05, undefined, &lui::screen_fade, 0.25, 0, 1, "black", 1);
     player util::function_8b0c9d28(undefined, 5);
     wait 0.4;
     level flag::wait_till(#"gameplay_started");
-    player val::reset_all(#"hash_342acf3710210ee2");
+    player val::reset_all(#"checkpointfadein");
     globallogic_ui::function_cdbb5c49(0);
   }
 }
@@ -203,12 +203,12 @@ function onstartgametype() {
   setmapcenter(level.mapcenter);
   spawnpoint = spawning::get_random_intermission_point();
   setdemointermissionpoint(spawnpoint.origin, spawnpoint.angles);
-  level thread function_5a6ac1d8();
+  level thread respawn_spectators_on_objective_change();
   function_ddc47ed1();
   level flag::wait_till("first_player_spawned");
 
   foreach(player in level.players) {
-    bb::function_47cb52f6("_level", player, "start");
+    bb::logobjectivestatuschange("_level", player, "start");
   }
 }
 
@@ -217,7 +217,7 @@ function function_ddc47ed1() {
 }
 
 function private spawnplayer_internal() {
-  spawns = skipto::function_ffdc86a2(level.var_cd012e52);
+  spawns = skipto::filter_player_spawnpoints(level.var_cd012e52);
   self spawn(spawns[0].origin, spawns[0].angles);
   self.lastspawntime = gettime();
 }
@@ -227,8 +227,8 @@ function onspawnplayer(predictedspawn, question) {
   self.usingobj = undefined;
   self spawnplayer_internal();
   self thread function_bb5fae75();
-  self.var_2869a26a = 1;
-  self thread gamedifficulty::function_c6f98249();
+  self.eligible_for_death_invulnerability = 1;
+  self thread gamedifficulty::playerhurtcheck();
   pixendevent();
 }
 
@@ -294,78 +294,78 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
   level.dead_player = self;
 
   if(isDefined(level.var_85b00b2b)) {
-    var_f695d653 = level.var_85b00b2b;
+    fail_reason = level.var_85b00b2b;
   }
 
   if(level.players.size == 1) {
     if(!self util::function_a1d6293()) {
-      self playsoundtoplayer(#"hash_7dcd120ea369ea68", self);
+      self playsoundtoplayer(#"evt_death_down", self);
     }
 
-    if(is_true(level.var_6cc58e4b)) {
+    if(is_true(level.usefpsdeathcam)) {
       self.var_e36aebf2 = 1;
 
-      if(is_true(level.var_41cd8311) && is_true(self.var_30a1aeee)) {
+      if(is_true(level.usecpkillcam) && is_true(self.var_30a1aeee)) {
         self thread function_ffac0e3();
       }
 
-      self waittilltimeout(5, #"hash_eb0317ca3976bf9");
+      self waittilltimeout(5, #"cp_deathcam_ended");
     }
 
-    level thread function_34459363(var_f695d653, level.var_30eb363);
+    level thread fadeoutandloadcheckpoint(fail_reason, level.var_30eb363);
     return;
   }
 
   if(level.gameskill >= 2) {
-    playSoundAtPosition(#"hash_7dcd120ea369ea68", (0, 0, 0));
-    level thread function_34459363(var_f695d653, level.var_30eb363);
+    playSoundAtPosition(#"evt_death_down", (0, 0, 0));
+    level thread fadeoutandloadcheckpoint(fail_reason, level.var_30eb363);
   }
 }
 
-function function_34459363(var_e9724d01, var_d2b863b2) {
+function fadeoutandloadcheckpoint(str_reason_for_fail, str_hint_to_not_fail) {
   level.var_5be43b2d = 1;
   setslowmotion(1);
   level flag::set(#"mission_failed");
 
-  if(!isDefined(var_e9724d01)) {
-    var_e9724d01 = #"";
+  if(!isDefined(str_reason_for_fail)) {
+    str_reason_for_fail = #"";
   }
 
-  if(!isDefined(var_d2b863b2)) {
-    var_d2b863b2 = #"";
+  if(!isDefined(str_hint_to_not_fail)) {
+    str_hint_to_not_fail = #"";
   }
 
   foreach(player in level.players) {
     player thread util::hide_hint_text(0);
     player val::set(#"load_checkpoint", "show_hud", 0);
-    bb::function_47cb52f6(level.var_b28c2c3a, player, "restart");
-    player val::set(#"hash_5677fd1c5f50cf38", "freezecontrols");
-    player.var_c071a13e = 1;
+    bb::logobjectivestatuschange(level.skipto_point, player, "restart");
+    player val::set(#"fadeoutandloadcheckpoint", "freezecontrols");
+    player.restoringcheckpoint = 1;
 
     if(!isDefined(level.var_59f4be9a)) {
       level thread lui::screen_fade(0, 0.001, 0.001, "black", 0);
       waitframe(1);
     }
 
-    player.var_c341be0e = player openluimenu("CPMissionFailed");
-    player setluimenudata(player.var_c341be0e, #"missionfailreason", var_e9724d01);
-    globallogic_ui::function_9ed5232e("hudItems.cpMissionFailedEntry.MissionFailHint", var_d2b863b2, 0, 1);
-    globallogic_ui::function_9ed5232e("hudItems.cpMissionFailedEntry.MissionFailReason", var_e9724d01, 0, 1);
+    player.mission_fail_menu = player openluimenu("CPMissionFailed");
+    player setluimenudata(player.mission_fail_menu, #"missionfailreason", str_reason_for_fail);
+    globallogic_ui::function_9ed5232e("hudItems.cpMissionFailedEntry.MissionFailHint", str_hint_to_not_fail, 0, 1);
+    globallogic_ui::function_9ed5232e("hudItems.cpMissionFailedEntry.MissionFailReason", str_reason_for_fail, 0, 1);
 
     if(isalive(player)) {
       snd::play("uin_cp_failure");
     }
 
-    player setluimenudata(player.var_c341be0e, #"missionfailhint", var_d2b863b2);
+    player setluimenudata(player.mission_fail_menu, #"missionfailhint", str_hint_to_not_fail);
   }
 
   var_effac39e = 1.25;
 
   if(isDefined(level.dead_player)) {
-    if(is_true(level.var_41cd8311)) {
+    if(is_true(level.usecpkillcam)) {
       foreach(player in level.players) {
         if(is_true(player.var_8fc85657)) {
-          level.dead_player waittill(#"end_killcam", #"hash_769655bf42475c20");
+          level.dead_player waittill(#"end_killcam", #"fade_out_killcam");
 
           if(isDefined(level.dead_player.var_55180cd8)) {
             var_effac39e = level.dead_player.var_55180cd8;
@@ -381,9 +381,9 @@ function function_34459363(var_e9724d01, var_d2b863b2) {
       wait var_effac39e;
     }
 
-    var_b80196ac = 1;
+    screen_faded = 1;
 
-    if(is_true(level.var_41cd8311)) {
+    if(is_true(level.usecpkillcam)) {
       foreach(player in level.players) {
         if(is_true(player.var_8fc85657)) {
           player clientfield::set_to_player("killcam_menu", 0);
@@ -392,12 +392,12 @@ function function_34459363(var_e9724d01, var_d2b863b2) {
     }
   }
 
-  if(!isDefined(var_b80196ac)) {
+  if(!isDefined(screen_faded)) {
     level thread lui::screen_fade(var_effac39e, 1, 0, "black", 0);
     wait var_effac39e;
   }
 
-  if(var_e9724d01 != #"" || var_d2b863b2 != #"") {
+  if(str_reason_for_fail != #"" || str_hint_to_not_fail != #"") {
     wait 2.6;
   }
 
@@ -406,9 +406,9 @@ function function_34459363(var_e9724d01, var_d2b863b2) {
   }
 
   foreach(player in level.players) {
-    player notify(#"hash_4bd20f5c626eb3f0");
+    player notify(#"camera_sequence_completed");
     player cameraactivate(0);
-    player val::reset(#"hash_5677fd1c5f50cf38", "freezecontrols");
+    player val::reset(#"fadeoutandloadcheckpoint", "freezecontrols");
   }
 
   if(isDefined(level.heroes)) {
@@ -427,17 +427,17 @@ function function_34459363(var_e9724d01, var_d2b863b2) {
   globallogic_ui::function_760546ce();
   globallogic_ui::function_cdbb5c49(1, 1);
 
-  if(isDefined(player.var_c341be0e)) {
-    player setluimenudata(player.var_c341be0e, #"missionfailreason", #"");
-    player setluimenudata(player.var_c341be0e, #"missionfailhint", #"");
+  if(isDefined(player.mission_fail_menu)) {
+    player setluimenudata(player.mission_fail_menu, #"missionfailreason", #"");
+    player setluimenudata(player.mission_fail_menu, #"missionfailhint", #"");
     player closemenu("CPMissionFailed");
   }
 
-  function_f31af5ab();
+  checkpointrestart();
 }
 
 function function_ffac0e3() {
-  self endon(#"disconnect", #"hash_4bd20f5c626eb3f0");
+  self endon(#"disconnect", #"camera_sequence_completed");
   level endon(#"game_ended");
   self clientfield::set_to_player("killcam_menu", 1);
 
@@ -482,7 +482,7 @@ function function_c5eb768b() {
 }
 
 function function_31c6ebd4() {
-  self endon(#"disconnect", #"hash_4bd20f5c626eb3f0", #"end_respawn");
+  self endon(#"disconnect", #"camera_sequence_completed", #"end_respawn");
   level endon(#"game_ended");
 
   self function_c5eb768b();
@@ -500,7 +500,7 @@ function function_31c6ebd4() {
   self.var_ca00be20.alpha = 0;
 }
 
-function function_27945f() {
+function onplayerbleedout() {
   if(!is_true(level.var_ba2a141)) {
     foreach(player in level.players) {
       if(player != self && player.sessionstate != "dead" && player.sessionstate != "spectator") {
@@ -510,7 +510,7 @@ function function_27945f() {
   }
 
   if(!is_true(level.level_ending)) {
-    level thread function_34459363();
+    level thread fadeoutandloadcheckpoint();
   }
 
   level.level_ending = 1;
@@ -521,11 +521,11 @@ function function_27945f() {
 }
 
 function wait_to_spawn() {
-  self notify(#"hash_6baa8d54b54f762e");
-  self endon(#"hash_6baa8d54b54f762e");
+  self notify(#"wait_to_spawn_singleton");
+  self endon(#"wait_to_spawn_singleton");
 
-  if(is_true(level.inprematchperiod) || !isDefined(self.var_56e5037e)) {
-    self.var_56e5037e = 1;
+  if(is_true(level.inprematchperiod) || !isDefined(self.completedinitialspawn)) {
+    self.completedinitialspawn = 1;
     return true;
   }
 
@@ -534,7 +534,7 @@ function wait_to_spawn() {
   return true;
 }
 
-function function_5a6ac1d8() {
+function respawn_spectators_on_objective_change() {
   level flag::wait_till("all_players_spawned");
 
   while(true) {
@@ -549,7 +549,7 @@ function function_5a6ac1d8() {
 }
 
 function spawnedasspectator() {
-  if(!isDefined(self.var_56e5037e)) {
+  if(!isDefined(self.completedinitialspawn)) {
     return true;
   }
 
@@ -597,7 +597,7 @@ function function_fd5dfc25() {
               }
 
               break;
-            case #"hash_7549b2fcdf36145a":
+            case #"micromissile_launcher":
               if(self.var_83f25fdb < 10) {
                 self util::show_hint_text(#"hash_50d6975fce35fa60");
               }

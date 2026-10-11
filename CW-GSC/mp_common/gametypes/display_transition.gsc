@@ -311,7 +311,7 @@ function private function_26bbb839(transition, outcome) {
   thread function_b8e20f5f(transition, outcome, transition.slowdown, transition.slowdowntimestart, &function_9185f489);
   thread function_b8e20f5f(transition, outcome, transition.freezeplayers, transition.freezetime, &function_a3b4d41d);
   thread function_b8e20f5f(transition, outcome, transition.announcehalftime, transition.var_8d7c57a2, &function_8feabee3);
-  thread function_b8e20f5f(transition, outcome, transition.var_738bf790, transition.var_8dc11094, &function_a3c90acf);
+  thread function_b8e20f5f(transition, outcome, transition.announcestreak, transition.var_8dc11094, &function_a3c90acf);
   thread function_b8e20f5f(transition, outcome, transition.announceencouragement, transition.var_73f860db, &function_b7fec738);
   thread function_b8e20f5f(transition, outcome, transition.announceroundswitchsides, transition.var_a803fe51, &function_66713ac);
   thread function_b8e20f5f(transition, outcome, transition.announceendgame, transition.var_de820e2d, &function_654c0030);
@@ -381,7 +381,7 @@ function private function_7285f7e1(e1, e2, b_lowest_first = 0) {
 }
 
 function private function_6b33e951() {
-  var_9a829482 = 6;
+  max_team_size = 6;
   winning_team = match::get_winning_team();
 
   if(winning_team == #"none") {
@@ -392,12 +392,12 @@ function private function_6b33e951() {
   winners = array::merge_sort(winners, &function_7285f7e1, 0);
   var_860af94a = array();
 
-  for(i = 0; i < var_9a829482; i++) {
+  for(i = 0; i < max_team_size; i++) {
     client_num = isDefined(winners[i]) ? winners[i].entnum : -1;
     array::add(var_860af94a, client_num);
   }
 
-  luinotifyevent(#"top_squad", var_9a829482, var_860af94a[0], var_860af94a[1], var_860af94a[2], var_860af94a[3], var_860af94a[4], var_860af94a[5]);
+  luinotifyevent(#"top_squad", max_team_size, var_860af94a[0], var_860af94a[1], var_860af94a[2], var_860af94a[3], var_860af94a[4], var_860af94a[5]);
 }
 
 function private function_87a832a5(transition, outcome) {

@@ -65,7 +65,7 @@ function main(str_skipto, b_starting) {
   setDvar(#"hash_3d9a09e7ecea2271", 1);
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 }
 
@@ -80,7 +80,7 @@ function init_flags() {
 
 function init_clientfields() {}
 
-function function_22b7fffd() {}
+function init_scenes() {}
 
 function function_def1eb14(name_array) {
   level.var_515a88e0 = [];
@@ -167,7 +167,7 @@ function function_71a64494(player, guy) {
   guy waittill(#"weapon_fired");
   level.player playhitmarker(undefined, 5, undefined, 1);
   wait 0.01;
-  level notify(#"hash_79d44a2e92237673");
+  level notify(#"stop_slowmo");
 }
 
 function function_c2f81a50(notification) {

@@ -23,7 +23,7 @@ function private preinit() {
 }
 
 function init_clientfields() {
-  clientfield::register("allplayers", "" + #"hash_57c792bbf6365c17", 1, 1, "counter", &function_e10bfb69, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_57c792bbf6365c17", 1, 1, "counter", &ksar, 0, 0);
   clientfield::register("allplayers", "" + #"hash_520c94f4af55e3b8", 1, 1, "counter", &function_afb3813c, 0, 0);
   clientfield::register("allplayers", "" + #"hash_60d81b0a1fcd2454", 1, 1, "counter", &function_76090e23, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_7948e032082fdac", 1, 2, "int", &function_1d5c7052, 0, 0);
@@ -108,7 +108,7 @@ function function_76090e23(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 }
 
-function function_e10bfb69(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function ksar(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump != fieldname) {
     if(bwastimejump) {
       exploder::exploder("fxexp_red_door_enter_mall");

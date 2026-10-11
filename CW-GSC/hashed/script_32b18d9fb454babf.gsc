@@ -109,7 +109,7 @@ function function_62a42ce(destination) {
 function function_74c76da9(destination) {
   level thread namespace_ce1f29cc::deactivate_hotzones(destination);
   namespace_d0ab5955::function_f1ad7968(destination);
-  zm_utility_zsurvival::function_7c97e961(level.var_b48509f9 + 1);
+  zm_utility_zsurvival::function_7c97e961(level.star_rating + 1);
   level thread namespace_e51c1e80::function_c772bd2c(destination);
 }
 
@@ -238,7 +238,7 @@ function private function_66855ea6(destination, str_type) {
 }
 
 function private function_9b9c7696(destination, str_type) {
-  if(str_type === #"hulking_summoner" && level.var_b48509f9 < 2 && !getdvarint(#"hash_730311c63805303a", 0) && !is_true(getgametypesetting(#"hash_1e1a5ebefe2772ba"))) {
+  if(str_type === #"hulking_summoner" && level.star_rating < 2 && !getdvarint(#"hash_730311c63805303a", 0) && !is_true(getgametypesetting(#"hash_1e1a5ebefe2772ba"))) {
     return 0;
   }
 
@@ -424,8 +424,8 @@ function private function_b3dda48(s_destination) {
       content_manager::spawn_instance(s_location.instances[#"amplify"]);
     }
 
-    if(isDefined(s_location.instances[#"hash_1f5e56ff4b3c50e2"])) {
-      content_manager::spawn_instance(s_location.instances[#"hash_1f5e56ff4b3c50e2"]);
+    if(isDefined(s_location.instances[#"applause"])) {
+      content_manager::spawn_instance(s_location.instances[#"applause"]);
     }
 
     if(isDefined(s_location.instances[#"observe"])) {
@@ -735,7 +735,7 @@ function function_63b54d8c() {
     return;
   }
 
-  if(level.var_b48509f9 === 1 && level.contentmanager.var_407236bf.list[0] === #"hunt") {
+  if(level.star_rating === 1 && level.contentmanager.var_407236bf.list[0] === #"hunt") {
     if(isDefined(level.contentmanager.var_9614b1d2[#"hunt"])) {
       arrayremovevalue(level.contentmanager.var_9614b1d2[#"hunt"].list, #"hunt_steiner");
       arrayremovevalue(level.contentmanager.var_9614b1d2[#"hunt"].list, #"hunt_mechz");
@@ -744,14 +744,14 @@ function function_63b54d8c() {
     }
   }
 
-  if(level.var_b48509f9 === 2 && level.contentmanager.var_407236bf.list[1] === #"hunt") {
+  if(level.star_rating === 2 && level.contentmanager.var_407236bf.list[1] === #"hunt") {
     if(isDefined(level.contentmanager.var_9614b1d2[#"hunt"])) {
       arrayremovevalue(level.contentmanager.var_9614b1d2[#"hunt"].list, #"hunt_mechz");
       arrayinsert(level.contentmanager.var_9614b1d2[#"hunt"].list, #"hunt_mechz", randomintrangeinclusive(2, level.contentmanager.var_9614b1d2[#"hunt"].list.size));
     }
   }
 
-  if(level.var_b48509f9 === 1 && level.contentmanager.var_407236bf.list[0] === #"payload") {
+  if(level.star_rating === 1 && level.contentmanager.var_407236bf.list[0] === #"payload") {
     if(isDefined(level.contentmanager.var_9614b1d2.list[#"payload"])) {
       level.contentmanager.var_9614b1d2[#"payload"].list = [#"payload_noteleport", #"payload_teleport"];
     }

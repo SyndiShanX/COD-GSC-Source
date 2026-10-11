@@ -60,14 +60,14 @@ function private function_8ba92985(s_instance) {
     var_3ba64fe9.radius = 10000;
   }
 
-  var_8e27c3fd = spawn("trigger_radius", var_3ba64fe9.origin, 256, var_3ba64fe9.radius, var_3ba64fe9.height);
-  s_instance.var_8e27c3fd = var_8e27c3fd;
-  var_8e27c3fd.target = s_chest.targetname;
+  portal_trigger = spawn("trigger_radius", var_3ba64fe9.origin, 256, var_3ba64fe9.radius, var_3ba64fe9.height);
+  s_instance.portal_trigger = portal_trigger;
+  portal_trigger.target = s_chest.targetname;
   var_69b86a0a = spawn("trigger_radius", s_chest.origin - (0, 0, var_3ba64fe9.height / 2), 0, 1000, var_3ba64fe9.height);
-  var_69b86a0a thread function_4dccab86(var_8e27c3fd);
+  var_69b86a0a thread function_4dccab86(portal_trigger);
 
   while(true) {
-    var_8e27c3fd waittill(#"trigger_look", #"proximity");
+    portal_trigger waittill(#"trigger_look", #"proximity");
 
     if(level flag::get(#"objective_locked")) {
       level flag::wait_till_clear(#"objective_locked");
@@ -77,7 +77,7 @@ function private function_8ba92985(s_instance) {
     break;
   }
 
-  var_8e27c3fd delete();
+  portal_trigger delete();
   var_69b86a0a delete();
   function_9212e29c(s_instance, s_chest);
 }
@@ -90,14 +90,14 @@ function function_a1ca0279(v_origin_or_ent, params) {
   return true;
 }
 
-function private function_4dccab86(var_8e27c3fd) {
+function private function_4dccab86(portal_trigger) {
   self endon(#"death");
 
   while(true) {
     self waittill(#"trigger");
 
-    if(isDefined(var_8e27c3fd)) {
-      var_8e27c3fd notify(#"proximity");
+    if(isDefined(portal_trigger)) {
+      portal_trigger notify(#"proximity");
     }
 
     wait 1;
@@ -108,8 +108,8 @@ function function_db97f0ee() {
   self flag::set("cleanup");
   namespace_58949729::function_ccf9be41(self);
 
-  if(isDefined(self.var_8e27c3fd)) {
-    self.var_8e27c3fd delete();
+  if(isDefined(self.portal_trigger)) {
+    self.portal_trigger delete();
   }
 
   if(isDefined(self.ambush_trigger)) {
@@ -140,14 +140,14 @@ function function_9212e29c(s_instance, s_chest) {
   mdl_fx = util::spawn_model("tag_origin", s_chest.origin);
   mdl_fx fx::play(#"hash_2bfc50a526c67da3", mdl_fx.origin, mdl_fx.angles, 9.5 + 1);
   mdl_fx fx::play(#"hash_714bb51c21bb3c4", mdl_fx.origin + (0, 0, 5000), mdl_fx.angles, 9.5 + 1);
-  mdl_fx playSound(#"hash_149945a98c1798a6");
-  mdl_fx playLoopSound(#"hash_3b2e8e212c9bfb8a");
+  mdl_fx playSound(#"evt_sur_we_portal_common_beam_start");
+  mdl_fx playLoopSound(#"evt_sur_we_portal_common_beam_lp");
   wait 1;
   s_chest.scriptmodel = content_manager::spawn_script_model(struct, #"p9_fxanim_zm_gp_chest_01_lrg_gold_xmodel", 1);
   s_chest.var_422ae63e = #"p9_fxanim_zm_gp_chest_01_lrg_bundle";
   mdl_chest = s_chest.scriptmodel;
   mdl_chest notsolid();
-  mdl_chest function_619a5c20();
+  mdl_chest pingable();
   mdl_chest moveTo(s_chest.origin, 9.5);
   mdl_chest rotatevelocity((0, 1080 / 9.5, 0), 9.5);
   wait 9.5;
@@ -155,7 +155,7 @@ function function_9212e29c(s_instance, s_chest) {
   mdl_chest clientfield::set("sr_supply_drop_chest_fx", 1);
   glassradiusdamage(mdl_chest.origin, 600, 800, 400);
   mdl_fx stoploopsound();
-  mdl_fx playSound(#"hash_6eca5f5eaa236ce3");
+  mdl_fx playSound(#"evt_sur_we_portal_common_beam_end");
   mdl_fx util::deleteaftertime(3);
   trigger = content_manager::spawn_interact(s_chest, &function_19490940, #"hash_409a53f32f7cae42", undefined, 96, undefined, undefined, (0, 0, 16));
   trigger.struct = s_chest;
@@ -204,7 +204,7 @@ function function_19490940(eventstruct) {
   self setinvisibletoall();
   mdl_chest clientfield::set("sr_supply_drop_chest_fx", 2);
   wait 2;
-  namespace_2c949ef8::function_8b6ae460(var_571f5454, function_873ab308(), 500, 1500, undefined, undefined, undefined, undefined, undefined, 1);
+  namespace_2c949ef8::do_ambush(var_571f5454, function_873ab308(), 500, 1500, undefined, undefined, undefined, undefined, undefined, 1);
   self setHintString(#"survival/supply_drop_open");
   self setvisibletoall();
   mdl_chest clientfield::set("sr_supply_drop_chest_fx", 3);

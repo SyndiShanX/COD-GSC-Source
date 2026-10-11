@@ -172,9 +172,9 @@ function function_b546cde6(b_skipped) {
   var_9039575a = getEnt("klaus_upgrade_station", "targetname");
   var_9039575a.is_active = 1;
   var_9039575a disconnectPaths();
-  var_1baed918 = struct::get_array(var_9039575a.target, "targetname");
+  a_target_pos = struct::get_array(var_9039575a.target, "targetname");
 
-  foreach(target_pos in var_1baed918) {
+  foreach(target_pos in a_target_pos) {
     if(target_pos.script_noteworthy == "klaus_enter_pos") {
       var_9039575a.klaus_enter_pos = target_pos;
     }
@@ -367,8 +367,8 @@ function function_dc580b92() {
   self waittill(#"trigger");
 
   if(isDefined(self.stub.script_model.sub_dis_pos)) {
-    var_55ce5b28 = util::spawn_model(#"hash_5ca33d5114f5bccd", self.stub.script_model.sub_dis_pos.origin, self.stub.script_model.sub_dis_pos.angles);
-    var_55ce5b28 playSound(#"hash_5e8619a5e50dcd1d");
+    var_55ce5b28 = util::spawn_model(#"p9_zm_platinum_computer_console_hvt_01_dish", self.stub.script_model.sub_dis_pos.origin, self.stub.script_model.sub_dis_pos.angles);
+    var_55ce5b28 playSound(#"evt_klaus_upgradeq_microwave_place");
   }
 
   level flag::set(#"hash_2fea433a677a8531");
@@ -471,7 +471,7 @@ function function_f0be2da6() {
         level thread function_f26e6dd8();
         level.klaus animation::stop();
         level.klaus thread scene::play(#"hash_423ce4528e7aaf1f", "upgrade_loop_" + level.var_7c745515, level.klaus);
-        var_9039575a thread scene::play(#"hash_a4fed5bd30bd26b", "play1", var_9039575a);
+        var_9039575a thread scene::play(#"p9_fxanim_zm_platinum_armor_station_bundle", "play1", var_9039575a);
 
         if(!is_true(level.var_3944a299)) {
           level thread zm_platinum_vo::function_e250a72f(#"hash_1a1fbf7523691c89");
@@ -528,7 +528,7 @@ function function_f26e6dd8() {
     #var_f019ea1a: 1500, #slots: slots
   };
   level.attackables[level.attackables.size] = var_9039575a;
-  var_9039575a.var_6332d14f = spawn("trigger_damage", var_9039575a.origin + (0, 0, 20), 0, 64, 128);
+  var_9039575a.damage_proxy = spawn("trigger_damage", var_9039575a.origin + (0, 0, 20), 0, 64, 128);
 
   box(var_9039575a.origin + (0, 0, 20), (-32, -32, -64), (32, 32, 64), var_9039575a.angles, (1, 0, 0), 1, 0, 20000);
 
@@ -556,7 +556,7 @@ function function_4ffd09e4() {
   zm_sq::function_2398ab16("cleanup_objective_bar");
 
   while(true) {
-    result = self.var_6332d14f waittill(#"damage");
+    result = self.damage_proxy waittill(#"damage");
 
     if(!isPlayer(result.attacker)) {
       self clientfield::increment("" + #"hash_85303d8249a5451");
@@ -591,7 +591,7 @@ function function_4ffd09e4() {
           level.klaus clientfield::set("" + #"hash_703543ca871a0f75", 1);
         }
 
-        self scene::stop(#"hash_a4fed5bd30bd26b");
+        self scene::stop(#"p9_fxanim_zm_platinum_armor_station_bundle");
 
         if(isDefined(level.klaus)) {
           zm_sq::objective_complete(#"hash_7a3926f32c4410eb", level.klaus);
@@ -613,7 +613,7 @@ function function_4ffd09e4() {
     }
   }
 
-  self.var_6332d14f deletedelay();
+  self.damage_proxy deletedelay();
 }
 
 function function_b20e6cff() {
@@ -651,7 +651,7 @@ function function_b20e6cff() {
 
   wait 0.5;
   level thread zm_platinum_main_quest::function_e8799ac6(self, 512);
-  self scene::stop(#"hash_a4fed5bd30bd26b");
+  self scene::stop(#"p9_fxanim_zm_platinum_armor_station_bundle");
   level util::delay(1, "end_game", &zm_platinum_vo::function_e250a72f, #"hash_2b45e84695664cf0", var_55033b92);
   var_55033b92 clientfield::increment("" + #"hash_3d52751d686c4865", 1);
   var_55033b92 function_a7642f50(#"hash_423ce4528e7aaf1f", "upgrade_outro_" + level.var_7c745515);
@@ -782,7 +782,7 @@ function private function_1bf091a7() {
   }
 }
 
-function function_2a26db52(var_c7498e44) {
+function function_2a26db52(max_spawn_count) {
   level endon(#"end_game", #"hash_30bd3fb769cba5e7");
   self endon(#"defend_succeed", #"defend_failed");
   zone_name = zm_zonemgr::get_zone_from_position(self.klaus_enter_pos.origin, 1, 1);
@@ -798,7 +798,7 @@ function function_2a26db52(var_c7498e44) {
       function_1eaaceab(self.var_d42830e6);
     }
 
-    if(self.var_d42830e6.size < var_c7498e44) {
+    if(self.var_d42830e6.size < max_spawn_count) {
       spawn_ai = zm_utility::function_cce73165("tempest_location", "spawner_bo5_soa", zone_name);
 
       if(isDefined(spawn_ai)) {
@@ -829,7 +829,7 @@ function function_2a26db52(var_c7498e44) {
   }
 }
 
-function function_a07758b0(var_c7498e44) {
+function function_a07758b0(max_spawn_count) {
   level endon(#"end_game", #"hash_30bd3fb769cba5e7");
   self endon(#"defend_succeed", #"defend_failed");
 
@@ -838,24 +838,24 @@ function function_a07758b0(var_c7498e44) {
       function_1eaaceab(self.var_d42830e6);
     }
 
-    if(self.var_d42830e6.size < var_c7498e44) {
-      var_a96b643a = [];
+    if(self.var_d42830e6.size < max_spawn_count) {
+      active_spawners = [];
       var_dbc18a74 = struct::get_array("spawn_location", "script_noteworthy");
 
       foreach(spawner in var_dbc18a74) {
         if("zone_korber_sewing_room" === spawner.zone_name) {
-          if(!isDefined(var_a96b643a)) {
-            var_a96b643a = [];
-          } else if(!isarray(var_a96b643a)) {
-            var_a96b643a = array(var_a96b643a);
+          if(!isDefined(active_spawners)) {
+            active_spawners = [];
+          } else if(!isarray(active_spawners)) {
+            active_spawners = array(active_spawners);
           }
 
-          var_a96b643a[var_a96b643a.size] = spawner;
+          active_spawners[active_spawners.size] = spawner;
         }
       }
 
-      if(var_a96b643a.size > 0) {
-        var_958f8634 = var_a96b643a[randomint(var_a96b643a.size)];
+      if(active_spawners.size > 0) {
+        var_958f8634 = active_spawners[randomint(active_spawners.size)];
       } else {
         continue;
       }
@@ -1089,9 +1089,9 @@ function function_9d903a8e(index) {
   }
 
   var_9039575a = getEnt("klaus_upgrade_station", "targetname");
-  var_9039575a thread scene::play(#"hash_a4fed5bd30bd26b", "play1", var_9039575a);
+  var_9039575a thread scene::play(#"p9_fxanim_zm_platinum_armor_station_bundle", "play1", var_9039575a);
   wait 5;
-  var_9039575a scene::stop(#"hash_a4fed5bd30bd26b");
+  var_9039575a scene::stop(#"p9_fxanim_zm_platinum_armor_station_bundle");
 
   switch (index) {
     case 2:
@@ -1179,9 +1179,9 @@ function function_e243a545() {
   }
 
   var_9039575a = getEnt("klaus_upgrade_station", "targetname");
-  var_9039575a thread scene::play(#"hash_a4fed5bd30bd26b", "play1", var_9039575a);
+  var_9039575a thread scene::play(#"p9_fxanim_zm_platinum_armor_station_bundle", "play1", var_9039575a);
   wait 5;
-  var_9039575a scene::stop(#"hash_a4fed5bd30bd26b");
+  var_9039575a scene::stop(#"p9_fxanim_zm_platinum_armor_station_bundle");
 
   if(isDefined(level.klaus)) {
     level.klaus animation::stop();
@@ -1192,7 +1192,7 @@ function function_e243a545() {
 
     switch (level.klaus.var_553d761a) {
       case 1:
-        level.klaus setModel(#"hash_47a239d0808fb616");
+        level.klaus setModel(#"c_t9_zmb_dlc4_dummy_protector");
         level.klaus clientfield::increment("" + #"hash_3d52751d686c4865", 1);
         level.klaus.var_553d761a = 2;
         break;

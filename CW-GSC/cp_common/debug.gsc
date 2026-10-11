@@ -25,11 +25,11 @@ function private autoexec __init__system__() {
 
 function private preinit() {
   level.animsound_hudlimit = 14;
-  level.var_99e12d63 = [];
-  level.var_99e12d63[#"axis"] = (1, 0, 0);
-  level.var_99e12d63[#"allies"] = (0, 1, 0);
-  level.var_99e12d63[#"team3"] = (1, 1, 0);
-  level.var_99e12d63[#"neutral"] = (1, 1, 1);
+  level.debugteamcolors = [];
+  level.debugteamcolors[#"axis"] = (1, 0, 0);
+  level.debugteamcolors[#"allies"] = (0, 1, 0);
+  level.debugteamcolors[#"team3"] = (1, 1, 0);
+  level.debugteamcolors[#"neutral"] = (1, 1, 1);
   thread debugdvars();
   thread engagement_distance_debug_toggle();
 }
@@ -45,7 +45,7 @@ function drawenttag(num) {
     ai[i] thread dragtaguntildeath(getdvarstring(#"debug_tag"));
   }
 
-  setDvar(#"hash_4f53ce2aad8845e2", "<dev string:x38>");
+  setDvar(#"debug_enttag", "<dev string:x38>");
 }
 
 function drawtag(tag, opcolor) {
@@ -54,21 +54,21 @@ function drawtag(tag, opcolor) {
   drawarrow(org, ang, opcolor);
 }
 
-function function_73d54326(opcolor) {
+function draworgforever(opcolor) {
   for(;;) {
     drawarrow(self.origin, self.angles, opcolor);
     waitframe(1);
   }
 }
 
-function function_cc26947c(org, ang) {
+function drawarrowforever(org, ang) {
   for(;;) {
     drawarrow(org, ang);
     waitframe(1);
   }
 }
 
-function function_9b38e79c() {
+function draworiginforever() {
   for(;;) {
     drawarrow(self.origin, self.angles);
     waitframe(1);
@@ -120,7 +120,7 @@ function drawarrow(org, ang, opcolor, var_40dcdbad, var_6e4eeae5, var_5f9d71c2) 
   }
 }
 
-function function_738cf60a() {
+function drawplayerviewforever() {
   for(;;) {
     drawarrow(level.player.origin, level.player getplayerangles(), (1, 1, 1));
     waitframe(1);
@@ -201,8 +201,8 @@ function createlineconstantly(ent) {
 }
 
 function debugmisstime() {
-  self notify(#"hash_5ec34db59fed84d9");
-  self endon(#"hash_5ec34db59fed84d9", #"death");
+  self notify(#"stopdebugmisstime");
+  self endon(#"stopdebugmisstime", #"death");
 
   for(;;) {
     if(self.a.misstime <= 0) {
@@ -216,10 +216,10 @@ function debugmisstime() {
 }
 
 function debugmisstimeoff() {
-  self notify(#"hash_5ec34db59fed84d9");
+  self notify(#"stopdebugmisstime");
 }
 
-function function_24a0ab5e(dvar, setting) {
+function setemptydvar(dvar, setting) {
   if(getdvarstring(dvar) == "<dev string:x38>") {
     setDvar(dvar, setting);
   }
@@ -240,46 +240,46 @@ function debugjump(num) {
 }
 
 function debugdvars() {
-  if(getdvarstring(#"hash_5f6154a37f067e0e") == "<dev string:x38>") {
-    setDvar(#"hash_5f6154a37f067e0e", "<dev string:x73>");
+  if(getdvarstring(#"level_transition_test") == "<dev string:x38>") {
+    setDvar(#"level_transition_test", "<dev string:x73>");
   }
 
-  if(getdvarstring(#"hash_392e0e2c79fbffac") == "<dev string:x38>") {
-    setDvar(#"hash_392e0e2c79fbffac", "<dev string:x73>");
+  if(getdvarstring(#"level_completeall") == "<dev string:x38>") {
+    setDvar(#"level_completeall", "<dev string:x73>");
   }
 
-  if(getdvarstring(#"hash_21b7a22ce9c6275b") == "<dev string:x38>") {
-    setDvar(#"hash_21b7a22ce9c6275b", "<dev string:x73>");
+  if(getdvarstring(#"level_clear_all") == "<dev string:x38>") {
+    setDvar(#"level_clear_all", "<dev string:x73>");
   }
 
-  function_24a0ab5e("<dev string:x7a>", "<dev string:x73>");
+  setemptydvar("<dev string:x7a>", "<dev string:x73>");
 
-  if(getdvarstring(#"hash_481d2a6e8d396b6d") == "<dev string:x38>") {
-    setDvar(#"hash_481d2a6e8d396b6d", "<dev string:x73>");
+  if(getdvarstring(#"debug_lookangle") == "<dev string:x38>") {
+    setDvar(#"debug_lookangle", "<dev string:x73>");
   }
 
-  if(getdvarstring(#"hash_4914e697f9fc2671") == "<dev string:x38>") {
-    setDvar(#"hash_4914e697f9fc2671", "<dev string:x73>");
+  if(getdvarstring(#"debug_grenademiss") == "<dev string:x38>") {
+    setDvar(#"debug_grenademiss", "<dev string:x73>");
   }
 
-  if(getdvarstring(#"hash_7cb3964103d64b39") == "<dev string:x38>") {
-    setDvar(#"hash_7cb3964103d64b39", "<dev string:x93>");
+  if(getdvarstring(#"debug_dotshow") == "<dev string:x38>") {
+    setDvar(#"debug_dotshow", "<dev string:x93>");
   }
 
-  if(getdvarstring(#"hash_3ff91657730a45a4") == "<dev string:x38>") {
-    setDvar(#"hash_3ff91657730a45a4", "<dev string:x93>");
+  if(getdvarstring(#"debug_replayenemypos") == "<dev string:x38>") {
+    setDvar(#"debug_replayenemypos", "<dev string:x93>");
   }
 
   if(getdvarstring(#"debug_tag") == "<dev string:x38>") {
     setDvar(#"debug_tag", "<dev string:x38>");
   }
 
-  if(getdvarstring(#"hash_4656023913ce3f58") == "<dev string:x38>") {
-    setDvar(#"hash_4656023913ce3f58", "<dev string:x38>");
+  if(getdvarstring(#"debug_chatlook") == "<dev string:x38>") {
+    setDvar(#"debug_chatlook", "<dev string:x38>");
   }
 
-  if(getdvarstring(#"hash_46799eb73d1021e5") == "<dev string:x38>") {
-    setDvar(#"hash_46799eb73d1021e5", "<dev string:x38>");
+  if(getdvarstring(#"debug_vehicletag") == "<dev string:x38>") {
+    setDvar(#"debug_vehicletag", "<dev string:x38>");
   }
 
   if(getdvarstring(#"debug_goalradius") == "<dev string:x38>") {
@@ -298,8 +298,8 @@ function debugdvars() {
     setDvar(#"debug_engagedist", "<dev string:x73>");
   }
 
-  if(getdvarstring(#"hash_294a430f19483cbb") == "<dev string:x38>") {
-    setDvar(#"hash_294a430f19483cbb", "<dev string:x73>");
+  if(getdvarstring(#"debug_animreach") == "<dev string:x38>") {
+    setDvar(#"debug_animreach", "<dev string:x73>");
   }
 
   if(getdvarstring(#"debug_hatmodel") == "<dev string:x38>") {
@@ -310,26 +310,26 @@ function debugdvars() {
     setDvar(#"hash_15af95544805e487", "<dev string:x73>");
   }
 
-  level.var_979b0066 = 0;
+  level.debug_badpath = 0;
 
-  if(getdvarstring(#"hash_1828e38c6e01052f") == "<dev string:x38>") {
-    setDvar(#"hash_1828e38c6e01052f", "<dev string:x73>");
+  if(getdvarstring(#"debug_badpath") == "<dev string:x38>") {
+    setDvar(#"debug_badpath", "<dev string:x73>");
   }
 
-  if(getdvarstring(#"hash_4bc852aa6aeb7bd8") == "<dev string:x38>") {
-    setDvar(#"hash_37bed2af009035a0", "<dev string:x73>");
+  if(getdvarstring(#"anim_lastsightpos") == "<dev string:x38>") {
+    setDvar(#"debug_lastsightpos", "<dev string:x73>");
   }
 
-  if(getdvarstring(#"hash_543b88a4a8d9f9a9") == "<dev string:x38>") {
-    setDvar(#"hash_543b88a4a8d9f9a9", "<dev string:x38>");
+  if(getdvarstring(#"debug_dog_sound") == "<dev string:x38>") {
+    setDvar(#"debug_dog_sound", "<dev string:x38>");
   }
 
   if(getdvarstring(#"debug_nuke") == "<dev string:x38>") {
     setDvar(#"debug_nuke", "<dev string:x73>");
   }
 
-  if(getdvarstring(#"hash_14cb1b9851034a23") == "<dev string:x99>") {
-    setDvar(#"hash_14cb1b9851034a23", "<dev string:x73>");
+  if(getdvarstring(#"debug_deathents") == "<dev string:x99>") {
+    setDvar(#"debug_deathents", "<dev string:x73>");
   }
 
   if(getdvarstring(#"debug_jump") == "<dev string:x38>") {
@@ -354,8 +354,8 @@ function debugdvars() {
     }
   }
 
-  if(getdvarstring(#"hash_685827e90be8c03d") == "<dev string:x38>") {
-    setDvar(#"hash_685827e90be8c03d", "<dev string:x38>");
+  if(getdvarstring(#"animsound_save") == "<dev string:x38>") {
+    setDvar(#"animsound_save", "<dev string:x38>");
   }
 
   if(getdvarstring(#"debug_depth") == "<dev string:x38>") {
@@ -384,18 +384,18 @@ function debugdvars() {
     setDvar(#"debug_character_count", "<dev string:x73>");
   }
 
-  var_375b9d88 = getdvarstring(#"hash_3e63b96becc87615") == "<dev string:x99>";
+  noanimscripts = getdvarstring(#"debug_noanimscripts") == "<dev string:x99>";
 
   for(;;) {
-    if(getdvarint(#"hash_328d096ed229649d", 0) == 1) {
+    if(getdvarint(#"npcdeathtracking_save", 0) == 1) {
       level thread function_f48a99b9();
     }
 
     if(getdvarstring(#"debug_tag") != "<dev string:x38>") {
       thread viewtag("<dev string:x3c>", getdvarstring(#"debug_tag"));
 
-      if(getdvarint(#"hash_4f53ce2aad8845e2", 0) > 0) {
-        thread drawenttag(getdvarint(#"hash_4f53ce2aad8845e2", 0));
+      if(getdvarint(#"debug_enttag", 0) > 0) {
+        thread drawenttag(getdvarint(#"debug_enttag", 0));
       }
     }
 
@@ -415,11 +415,11 @@ function debugdvars() {
       level thread debug_engagedist();
     }
 
-    if(getdvarstring(#"hash_46799eb73d1021e5") != "<dev string:x38>") {
-      thread viewtag("<dev string:xa6>", getdvarstring(#"hash_46799eb73d1021e5"));
+    if(getdvarstring(#"debug_vehicletag") != "<dev string:x38>") {
+      thread viewtag("<dev string:xa6>", getdvarstring(#"debug_vehicletag"));
     }
 
-    thread function_b03ecdf3();
+    thread debug_animsound();
 
     if(getdvarstring(#"tag") != "<dev string:x38>") {
       thread debug_animsoundtagselected();
@@ -431,8 +431,8 @@ function debugdvars() {
       }
     }
 
-    if(getdvarstring(#"hash_685827e90be8c03d") != "<dev string:x38>") {
-      thread function_119a2b9f();
+    if(getdvarstring(#"animsound_save") != "<dev string:x38>") {
+      thread debug_animsoundsave();
     }
 
     if(getdvarstring(#"debug_nuke") != "<dev string:x73>") {
@@ -447,7 +447,7 @@ function debugdvars() {
       array::thread_all(getaiarray(), &debugmisstimeoff);
     }
 
-    if(getdvarstring(#"hash_14cb1b9851034a23") == "<dev string:x99>") {
+    if(getdvarstring(#"debug_deathents") == "<dev string:x99>") {
       thread deathspawnerpreview();
     }
 
@@ -470,57 +470,57 @@ function debugdvars() {
     }
 
     if(getdvarstring(#"debug_depth") == "<dev string:x99>") {
-      thread function_fdfcc52();
+      thread fogcheck();
     }
 
     if(getdvarstring(#"debug_threat") != "<dev string:x93>" && getdvarstring(#"debug_threat") != "<dev string:x38>") {
       debugthreat();
     }
 
-    level.var_979b0066 = getdvarstring(#"hash_1828e38c6e01052f") == "<dev string:x99>";
+    level.debug_badpath = getdvarstring(#"debug_badpath") == "<dev string:x99>";
 
-    if(!var_375b9d88 && getdvarstring(#"hash_3e63b96becc87615") == "<dev string:x99>") {
-      var_375b9d88 = 1;
+    if(!noanimscripts && getdvarstring(#"debug_noanimscripts") == "<dev string:x99>") {
+      noanimscripts = 1;
     }
 
-    if(var_375b9d88 && getdvarstring(#"hash_3e63b96becc87615") == "<dev string:x73>") {
+    if(noanimscripts && getdvarstring(#"debug_noanimscripts") == "<dev string:x73>") {
       level.animation.defaultexception = &util::void;
       level.animation notify(#"hash_1c96242baab724dd");
-      var_375b9d88 = 0;
+      noanimscripts = 0;
     }
 
-    if(getdvarint(#"debug_dynamic_ai_spawning", 0) == 1 && (!isDefined(level.var_5c403878) || level.var_5c403878 == 0)) {
-      level.var_5c403878 = 1;
-      thread function_2fcd7502();
-    } else if(getdvarint(#"debug_dynamic_ai_spawning", 0) == 0 && isDefined(level.var_5c403878) && level.var_5c403878 == 1) {
-      level.var_5c403878 = 0;
+    if(getdvarint(#"debug_dynamic_ai_spawning", 0) == 1 && (!isDefined(level.spawn_anywhere_active) || level.spawn_anywhere_active == 0)) {
+      level.spawn_anywhere_active = 1;
+      thread dynamic_ai_spawner();
+    } else if(getdvarint(#"debug_dynamic_ai_spawning", 0) == 0 && isDefined(level.spawn_anywhere_active) && level.spawn_anywhere_active == 1) {
+      level.spawn_anywhere_active = 0;
       level notify(#"hash_34e65f3c6ffc6a39");
     }
 
-    function_d851fc3c();
+    debug_ik_on_actors();
     waitframe(1);
   }
 }
 
-function function_d851fc3c() {
+function debug_ik_on_actors() {
   toggleon = getdvarint(#"hash_1a7527951f30d85d", 0);
 
   if(!toggleon) {
     return;
   }
 
-  var_cb0c64e2 = getdvarint(#"hash_5fb2bcff79d1e458", 0);
-  var_e429284b = getdvarint(#"hash_457f0b340b899504", 0);
+  togglelegik = getdvarint(#"hash_5fb2bcff79d1e458", 0);
+  toggleheadik = getdvarint(#"hash_457f0b340b899504", 0);
   ais = getactorarray();
 
   foreach(ai in ais) {
-    if(var_cb0c64e2) {
+    if(togglelegik) {
       ai.enableterrainik = 1;
     } else {
       ai.enableterrainik = 0;
     }
 
-    if(var_e429284b) {
+    if(toggleheadik) {
       ai lookatentity(level.players[0]);
       continue;
     }
@@ -561,7 +561,7 @@ function hatmodel() {
       return;
     }
 
-    var_3eea2550 = [];
+    nohat = [];
     ai = getaiarray();
 
     for(i = 0; i < ai.size; i++) {
@@ -569,28 +569,28 @@ function hatmodel() {
         continue;
       }
 
-      var_b7d2e573 = 0;
+      alreadyknown = 0;
 
-      for(p = 0; p < var_3eea2550.size; p++) {
-        if(var_3eea2550[p] != ai[i].classname) {
+      for(p = 0; p < nohat.size; p++) {
+        if(nohat[p] != ai[i].classname) {
           continue;
         }
 
-        var_b7d2e573 = 1;
+        alreadyknown = 1;
         break;
       }
 
-      if(!var_b7d2e573) {
-        var_3eea2550[var_3eea2550.size] = ai[i].classname;
+      if(!alreadyknown) {
+        nohat[nohat.size] = ai[i].classname;
       }
     }
 
-    if(var_3eea2550.size) {
+    if(nohat.size) {
       println("<dev string:xba>");
       println("<dev string:xbf>");
 
-      for(i = 0; i < var_3eea2550.size; i++) {
-        println("<dev string:x114>", var_3eea2550[i]);
+      for(i = 0; i < nohat.size; i++) {
+        println("<dev string:x114>", nohat[i]);
       }
 
       println("<dev string:x123>");
@@ -639,7 +639,7 @@ function debug_nuke() {
 function debug_misstime() {}
 
 function freeplayer() {
-  setDvar(#"hash_5aa2b9b0db0dfc6c", 0);
+  setDvar(#"cl_freemove", 0);
 }
 
 function deathspawnerpreview() {
@@ -709,21 +709,21 @@ function vecscale(vec, scalar) {
   return (vec[0] * scalar, vec[1] * scalar, vec[2] * scalar);
 }
 
-function function_e05e43c3(origin) {
+function islookingatorigin(origin) {
   normalvec = vectorNormalize(origin - self getshootatpos());
-  var_b9593434 = vectorNormalize(origin - (0, 0, 24) - self getshootatpos());
-  var_c2a09695 = vectordot(normalvec, var_b9593434);
-  var_8194ae5a = anglesToForward(self getplayerangles());
-  vectordot = vectordot(var_8194ae5a, normalvec);
+  veccomp = vectorNormalize(origin - (0, 0, 24) - self getshootatpos());
+  insidedot = vectordot(normalvec, veccomp);
+  anglevec = anglesToForward(self getplayerangles());
+  vectordot = vectordot(anglevec, normalvec);
 
-  if(vectordot > var_c2a09695) {
+  if(vectordot > insidedot) {
     return 1;
   }
 
   return 0;
 }
 
-function function_fdfcc52() {
+function fogcheck() {
   close = getdvarint(#"depth_close", 0);
   far = getdvarint(#"depth_far", 1500);
   setexpfog(close, far, 1, 1, 1, 0);
@@ -850,8 +850,8 @@ function init_notetracks_for_animname(animname) {
     notetrack = v[#"notetrack"];
     level.animsound_aliases[animname][anime][notetrack][#"soundalias"] = soundalias;
 
-    if(isDefined(v[#"hash_3bcdf8e8541b5d4a"])) {
-      level.animsound_aliases[animname][anime][notetrack][#"hash_3bcdf8e8541b5d4a"] = 1;
+    if(isDefined(v[#"created_by_animsound"])) {
+      level.animsound_aliases[animname][anime][notetrack][#"created_by_animsound"] = 1;
     }
   }
 }
@@ -863,131 +863,131 @@ function init_animsounds_for_animname(animname) {
     anime = animes[i];
     soundalias = level.scr_animsound[animname][anime];
     level.animsound_aliases[animname][anime]["<dev string:x1f8>" + anime][#"soundalias"] = soundalias;
-    level.animsound_aliases[animname][anime]["<dev string:x1f8>" + anime][#"hash_3bcdf8e8541b5d4a"] = 1;
+    level.animsound_aliases[animname][anime]["<dev string:x1f8>" + anime][#"created_by_animsound"] = 1;
   }
 }
 
-function function_90b2a0b0(x, y, msg) {
-  var_5e39fc46 = newdebughudelem();
-  var_5e39fc46.alignx = "<dev string:x1fd>";
-  var_5e39fc46.aligny = "<dev string:x205>";
-  var_5e39fc46.x = x;
-  var_5e39fc46.y = y;
-  var_5e39fc46.alpha = 1;
-  var_5e39fc46.fontscale = 1;
-  var_5e39fc46.label = msg;
-  level.var_e8a7658[level.var_e8a7658.size] = var_5e39fc46;
-  return var_5e39fc46;
+function add_hud_line(x, y, msg) {
+  hudelm = newdebughudelem();
+  hudelm.alignx = "<dev string:x1fd>";
+  hudelm.aligny = "<dev string:x205>";
+  hudelm.x = x;
+  hudelm.y = y;
+  hudelm.alpha = 1;
+  hudelm.fontscale = 1;
+  hudelm.label = msg;
+  level.animsound_hud_extralines[level.animsound_hud_extralines.size] = hudelm;
+  return hudelm;
 }
 
-function function_b03ecdf3() {
+function debug_animsound() {
   enabled = getdvarstring(#"animsound") == "<dev string:x99>";
 
-  if(!isDefined(level.var_100db28b)) {
+  if(!isDefined(level.animsound_hud)) {
     if(!enabled) {
       return;
     }
 
-    level.var_d7c96297 = 0;
-    level.var_7e2e9d77 = "<dev string:x20f>";
-    level.var_100db28b = [];
-    level.var_eef171c = [];
-    level.var_c22fdb8f = [];
-    level.var_e8a7658 = [];
-    level.var_969ba98a = 0;
-    level.var_9c80d401 = 0;
-    level.var_fe79cec = function_90b2a0b0(-30, 180, "<dev string:x217>");
-    level.var_77ea7dca = function_90b2a0b0(100, 180, "<dev string:x222>");
-    function_90b2a0b0(10, 190, "<dev string:x22c>");
-    function_90b2a0b0(-30, 190, "<dev string:x242>");
-    function_90b2a0b0(-30, 160, "<dev string:x24d>");
-    function_90b2a0b0(-30, 150, "<dev string:x270>");
-    function_90b2a0b0(-30, 140, "<dev string:x287>");
-    level.var_bf8f879e = function_90b2a0b0(-30, 170, "<dev string:x2ba>");
-    level.var_bf8f879e.alpha = 0;
+    level.animsound_selected = 0;
+    level.animsound_input = "<dev string:x20f>";
+    level.animsound_hud = [];
+    level.animsound_hud_timer = [];
+    level.animsound_hud_alias = [];
+    level.animsound_hud_extralines = [];
+    level.animsound_locked = 0;
+    level.animsound_locked_pressed = 0;
+    level.animsound_hud_animname = add_hud_line(-30, 180, "<dev string:x217>");
+    level.animsound_hud_anime = add_hud_line(100, 180, "<dev string:x222>");
+    add_hud_line(10, 190, "<dev string:x22c>");
+    add_hud_line(-30, 190, "<dev string:x242>");
+    add_hud_line(-30, 160, "<dev string:x24d>");
+    add_hud_line(-30, 150, "<dev string:x270>");
+    add_hud_line(-30, 140, "<dev string:x287>");
+    level.animsound_hud_locked = add_hud_line(-30, 170, "<dev string:x2ba>");
+    level.animsound_hud_locked.alpha = 0;
 
     for(i = 0; i < level.animsound_hudlimit; i++) {
-      var_5e39fc46 = newdebughudelem();
-      var_5e39fc46.alignx = "<dev string:x1fd>";
-      var_5e39fc46.aligny = "<dev string:x205>";
-      var_5e39fc46.x = 10;
-      var_5e39fc46.y = 200 + i * 10;
-      var_5e39fc46.alpha = 1;
-      var_5e39fc46.fontscale = 1;
-      var_5e39fc46.label = "<dev string:x38>";
-      level.var_100db28b[level.var_100db28b.size] = var_5e39fc46;
-      var_5e39fc46 = newdebughudelem();
-      var_5e39fc46.alignx = "<dev string:x2c6>";
-      var_5e39fc46.aligny = "<dev string:x205>";
-      var_5e39fc46.x = -10;
-      var_5e39fc46.y = 200 + i * 10;
-      var_5e39fc46.alpha = 1;
-      var_5e39fc46.fontscale = 1;
-      var_5e39fc46.label = "<dev string:x38>";
-      level.var_eef171c[level.var_eef171c.size] = var_5e39fc46;
-      var_5e39fc46 = newdebughudelem();
-      var_5e39fc46.alignx = "<dev string:x2c6>";
-      var_5e39fc46.aligny = "<dev string:x205>";
-      var_5e39fc46.x = 210;
-      var_5e39fc46.y = 200 + i * 10;
-      var_5e39fc46.alpha = 1;
-      var_5e39fc46.fontscale = 1;
-      var_5e39fc46.label = "<dev string:x38>";
-      level.var_c22fdb8f[level.var_c22fdb8f.size] = var_5e39fc46;
+      hudelm = newdebughudelem();
+      hudelm.alignx = "<dev string:x1fd>";
+      hudelm.aligny = "<dev string:x205>";
+      hudelm.x = 10;
+      hudelm.y = 200 + i * 10;
+      hudelm.alpha = 1;
+      hudelm.fontscale = 1;
+      hudelm.label = "<dev string:x38>";
+      level.animsound_hud[level.animsound_hud.size] = hudelm;
+      hudelm = newdebughudelem();
+      hudelm.alignx = "<dev string:x2c6>";
+      hudelm.aligny = "<dev string:x205>";
+      hudelm.x = -10;
+      hudelm.y = 200 + i * 10;
+      hudelm.alpha = 1;
+      hudelm.fontscale = 1;
+      hudelm.label = "<dev string:x38>";
+      level.animsound_hud_timer[level.animsound_hud_timer.size] = hudelm;
+      hudelm = newdebughudelem();
+      hudelm.alignx = "<dev string:x2c6>";
+      hudelm.aligny = "<dev string:x205>";
+      hudelm.x = 210;
+      hudelm.y = 200 + i * 10;
+      hudelm.alpha = 1;
+      hudelm.fontscale = 1;
+      hudelm.label = "<dev string:x38>";
+      level.animsound_hud_alias[level.animsound_hud_alias.size] = hudelm;
     }
 
-    level.var_100db28b[0].color = (1, 1, 0);
-    level.var_eef171c[0].color = (1, 1, 0);
+    level.animsound_hud[0].color = (1, 1, 0);
+    level.animsound_hud_timer[0].color = (1, 1, 0);
   } else if(!enabled) {
     for(i = 0; i < level.animsound_hudlimit; i++) {
-      level.var_100db28b[i] destroy();
-      level.var_eef171c[i] destroy();
-      level.var_c22fdb8f[i] destroy();
+      level.animsound_hud[i] destroy();
+      level.animsound_hud_timer[i] destroy();
+      level.animsound_hud_alias[i] destroy();
     }
 
-    for(i = 0; i < level.var_e8a7658.size; i++) {
-      level.var_e8a7658[i] destroy();
+    for(i = 0; i < level.animsound_hud_extralines.size; i++) {
+      level.animsound_hud_extralines[i] destroy();
     }
 
-    level.var_100db28b = undefined;
-    level.var_eef171c = undefined;
-    level.var_c22fdb8f = undefined;
-    level.var_e8a7658 = undefined;
+    level.animsound_hud = undefined;
+    level.animsound_hud_timer = undefined;
+    level.animsound_hud_alias = undefined;
+    level.animsound_hud_extralines = undefined;
     level.animsounds = undefined;
     return;
   }
 
   if(!isDefined(level.animsound_tagged)) {
-    level.var_969ba98a = 0;
+    level.animsound_locked = 0;
   }
 
-  if(level.var_969ba98a) {
-    level.var_bf8f879e.alpha = 1;
+  if(level.animsound_locked) {
+    level.animsound_hud_locked.alpha = 1;
   } else {
-    level.var_bf8f879e.alpha = 0;
+    level.animsound_hud_locked.alpha = 0;
   }
 
   if(!isDefined(level.animsounds)) {
     init_animsounds();
   }
 
-  level.var_b19c1dfd = [];
+  level.animsounds_thisframe = [];
   arrayremovevalue(level.animsounds, undefined);
-  array::thread_all(level.animsounds, &function_e5ad4202);
+  array::thread_all(level.animsounds, &display_animsound);
   players = getPlayers();
 
-  if(level.var_969ba98a) {
-    for(i = 0; i < level.var_b19c1dfd.size; i++) {
-      animsound = level.var_b19c1dfd[i];
-      animsound.var_cdbf6838 = (0.5, 0.5, 0.5);
+  if(level.animsound_locked) {
+    for(i = 0; i < level.animsounds_thisframe.size; i++) {
+      animsound = level.animsounds_thisframe[i];
+      animsound.animsound_color = (0.5, 0.5, 0.5);
     }
   } else if(players.size > 0) {
     dot = 0.85;
     forward = anglesToForward(players[0] getplayerangles());
 
-    for(i = 0; i < level.var_b19c1dfd.size; i++) {
-      animsound = level.var_b19c1dfd[i];
-      animsound.var_cdbf6838 = (0.25, 1, 0.5);
+    for(i = 0; i < level.animsounds_thisframe.size; i++) {
+      animsound = level.animsounds_thisframe[i];
+      animsound.animsound_color = (0.25, 1, 0.5);
       difference = vectorNormalize(animsound.origin + (0, 0, 40) - players[0].origin + (0, 0, 55));
       newdot = vectordot(forward, difference);
 
@@ -1001,28 +1001,28 @@ function function_b03ecdf3() {
   }
 
   if(isDefined(level.animsound_tagged)) {
-    level.animsound_tagged.var_cdbf6838 = (1, 1, 0);
+    level.animsound_tagged.animsound_color = (1, 1, 0);
   }
 
-  var_86c85a76 = isDefined(level.animsound_tagged);
+  is_tagged = isDefined(level.animsound_tagged);
 
-  for(i = 0; i < level.var_b19c1dfd.size; i++) {
-    animsound = level.var_b19c1dfd[i];
+  for(i = 0; i < level.animsounds_thisframe.size; i++) {
+    animsound = level.animsounds_thisframe[i];
     msg = "<dev string:x2cf>";
 
-    if(level.var_969ba98a) {
+    if(level.animsound_locked) {
       msg = "<dev string:x2d4>";
     }
 
-    print3d(animsound.origin + (0, 0, 40), msg + animsound.animsounds.size, animsound.var_cdbf6838, 1, 1);
+    print3d(animsound.origin + (0, 0, 40), msg + animsound.animsounds.size, animsound.animsound_color, 1, 1);
   }
 
-  if(var_86c85a76) {
-    function_21619947();
+  if(is_tagged) {
+    draw_animsounds_in_hud();
   }
 }
 
-function function_21619947() {
+function draw_animsounds_in_hud() {
   guy = level.animsound_tagged;
   animsounds = guy.animsounds;
   animname = "<dev string:x2dd>";
@@ -1031,44 +1031,44 @@ function function_21619947() {
     animname = guy.animname;
   }
 
-  level.var_fe79cec.label = "<dev string:x217>" + animname;
+  level.animsound_hud_animname.label = "<dev string:x217>" + animname;
   players = getPlayers();
 
   if(players[0] buttonPressed("<dev string:x2e8>")) {
-    if(!level.var_9c80d401) {
-      level.var_969ba98a = !level.var_969ba98a;
-      level.var_9c80d401 = 1;
+    if(!level.animsound_locked_pressed) {
+      level.animsound_locked = !level.animsound_locked;
+      level.animsound_locked_pressed = 1;
     }
   } else {
-    level.var_9c80d401 = 0;
+    level.animsound_locked_pressed = 0;
   }
 
   if(players[0] buttonPressed("<dev string:x2ef>")) {
-    if(level.var_7e2e9d77 != "<dev string:x2fa>") {
-      level.var_d7c96297--;
+    if(level.animsound_input != "<dev string:x2fa>") {
+      level.animsound_selected--;
     }
 
-    level.var_7e2e9d77 = "<dev string:x2fa>";
+    level.animsound_input = "<dev string:x2fa>";
   } else if(players[0] buttonPressed("<dev string:x300>")) {
-    if(level.var_7e2e9d77 != "<dev string:x30d>") {
-      level.var_d7c96297++;
+    if(level.animsound_input != "<dev string:x30d>") {
+      level.animsound_selected++;
     }
 
-    level.var_7e2e9d77 = "<dev string:x30d>";
+    level.animsound_input = "<dev string:x30d>";
   } else {
-    level.var_7e2e9d77 = "<dev string:x20f>";
+    level.animsound_input = "<dev string:x20f>";
   }
 
   for(i = 0; i < level.animsound_hudlimit; i++) {
-    var_5e39fc46 = level.var_100db28b[i];
-    var_5e39fc46.label = "<dev string:x38>";
-    var_5e39fc46.color = (1, 1, 1);
-    var_5e39fc46 = level.var_eef171c[i];
-    var_5e39fc46.label = "<dev string:x38>";
-    var_5e39fc46.color = (1, 1, 1);
-    var_5e39fc46 = level.var_c22fdb8f[i];
-    var_5e39fc46.label = "<dev string:x38>";
-    var_5e39fc46.color = (1, 1, 1);
+    hudelm = level.animsound_hud[i];
+    hudelm.label = "<dev string:x38>";
+    hudelm.color = (1, 1, 1);
+    hudelm = level.animsound_hud_timer[i];
+    hudelm.label = "<dev string:x38>";
+    hudelm.color = (1, 1, 1);
+    hudelm = level.animsound_hud_alias[i];
+    hudelm.label = "<dev string:x38>";
+    hudelm.color = (1, 1, 1);
   }
 
   keys = getarraykeys(animsounds);
@@ -1084,47 +1084,47 @@ function function_21619947() {
     return;
   }
 
-  if(level.var_d7c96297 > highest) {
-    level.var_d7c96297 = highest;
+  if(level.animsound_selected > highest) {
+    level.animsound_selected = highest;
   }
 
-  if(level.var_d7c96297 < 0) {
-    level.var_d7c96297 = 0;
+  if(level.animsound_selected < 0) {
+    level.animsound_selected = 0;
   }
 
   for(;;) {
-    if(isDefined(animsounds[level.var_d7c96297])) {
+    if(isDefined(animsounds[level.animsound_selected])) {
       break;
     }
 
-    level.var_d7c96297--;
+    level.animsound_selected--;
 
-    if(level.var_d7c96297 < 0) {
-      level.var_d7c96297 = highest;
+    if(level.animsound_selected < 0) {
+      level.animsound_selected = highest;
     }
   }
 
-  level.var_77ea7dca.label = "<dev string:x222>" + animsounds[level.var_d7c96297].anime;
-  level.var_100db28b[level.var_d7c96297].color = (1, 1, 0);
-  level.var_eef171c[level.var_d7c96297].color = (1, 1, 0);
-  level.var_c22fdb8f[level.var_d7c96297].color = (1, 1, 0);
+  level.animsound_hud_anime.label = "<dev string:x222>" + animsounds[level.animsound_selected].anime;
+  level.animsound_hud[level.animsound_selected].color = (1, 1, 0);
+  level.animsound_hud_timer[level.animsound_selected].color = (1, 1, 0);
+  level.animsound_hud_alias[level.animsound_selected].color = (1, 1, 0);
   time = gettime();
 
   for(i = 0; i < keys.size; i++) {
     key = keys[i];
     animsound = animsounds[key];
-    var_5e39fc46 = level.var_100db28b[key];
+    hudelm = level.animsound_hud[key];
     soundalias = get_alias_from_stored(animsound);
-    var_5e39fc46.label = key + 1 + "<dev string:x315>" + animsound.notetrack;
-    var_5e39fc46 = level.var_eef171c[key];
-    var_5e39fc46.label = int((time - animsound.end_time - 60000) * 0.001);
+    hudelm.label = key + 1 + "<dev string:x315>" + animsound.notetrack;
+    hudelm = level.animsound_hud_timer[key];
+    hudelm.label = int((time - animsound.end_time - 60000) * 0.001);
 
     if(isDefined(soundalias)) {
-      var_5e39fc46 = level.var_c22fdb8f[key];
-      var_5e39fc46.label = soundalias;
+      hudelm = level.animsound_hud_alias[key];
+      hudelm.label = soundalias;
 
       if(!is_from_animsound(animsound.animname, animsound.anime, animsound.notetrack)) {
-        var_5e39fc46.color = (0.7, 0.7, 0.7);
+        hudelm.color = (0.7, 0.7, 0.7);
       }
     }
   }
@@ -1132,7 +1132,7 @@ function function_21619947() {
   players = getPlayers();
 
   if(players[0] buttonPressed("<dev string:x31b>")) {
-    animsound = animsounds[level.var_d7c96297];
+    animsound = animsounds[level.animsound_selected];
     soundalias = get_alias_from_stored(animsound);
 
     if(!isDefined(soundalias)) {
@@ -1144,7 +1144,7 @@ function function_21619947() {
     }
 
     level.animsound_aliases[animsound.animname][animsound.anime][animsound.notetrack] = undefined;
-    function_119a2b9f();
+    debug_animsoundsave();
   }
 }
 
@@ -1165,17 +1165,17 @@ function get_alias_from_stored(animsound) {
 }
 
 function is_from_animsound(animname, anime, notetrack) {
-  return isDefined(level.animsound_aliases[animname][anime][notetrack][#"hash_3bcdf8e8541b5d4a"]);
+  return isDefined(level.animsound_aliases[animname][anime][notetrack][#"created_by_animsound"]);
 }
 
-function function_e5ad4202() {
+function display_animsound() {
   players = getPlayers();
 
   if(distance(players[0].origin, self.origin) > 1500) {
     return;
   }
 
-  level.var_b19c1dfd[level.var_b19c1dfd.size] = self;
+  level.animsounds_thisframe[level.animsounds_thisframe.size] = self;
 }
 
 function debug_animsoundtag(tagnum) {
@@ -1198,7 +1198,7 @@ function debug_animsoundtagselected() {
     return;
   }
 
-  tag_sound(tag, level.var_d7c96297);
+  tag_sound(tag, level.animsound_selected);
   setDvar(#"tag", "<dev string:x38>");
 }
 
@@ -1216,12 +1216,12 @@ function tag_sound(tag, tagnum) {
 
   if(!isDefined(soundalias) || is_from_animsound(animsound.animname, animsound.anime, animsound.notetrack)) {
     level.animsound_aliases[animsound.animname][animsound.anime][animsound.notetrack][#"soundalias"] = tag;
-    level.animsound_aliases[animsound.animname][animsound.anime][animsound.notetrack][#"hash_3bcdf8e8541b5d4a"] = 1;
-    function_119a2b9f();
+    level.animsound_aliases[animsound.animname][animsound.anime][animsound.notetrack][#"created_by_animsound"] = 1;
+    debug_animsoundsave();
   }
 }
 
-function function_119a2b9f() {
+function debug_animsoundsave() {
   filename = "<dev string:x37b>" + level.script + "<dev string:x388>";
   file = openfile(filename, "<dev string:x396>");
 
@@ -1231,12 +1231,12 @@ function function_119a2b9f() {
   }
 
   iprintlnbold("<dev string:x3d9>" + filename);
-  function_eaaa729a(file);
+  print_aliases_to_file(file);
   saved = closefile(file);
-  setDvar(#"hash_685827e90be8c03d", "<dev string:x38>");
+  setDvar(#"animsound_save", "<dev string:x38>");
 }
 
-function function_eaaa729a(file) {
+function print_aliases_to_file(file) {
   tab = "<dev string:x3e6>";
   fprintln(file, "<dev string:x3ee>");
   fprintln(file, "<dev string:x409>");
@@ -1281,14 +1281,14 @@ function function_eaaa729a(file) {
 }
 
 function function_f48a99b9() {
-  setDvar(#"hash_328d096ed229649d", 0);
+  setDvar(#"npcdeathtracking_save", 0);
 
-  if(!isDefined(level.var_31c87253) || getdvarint(#"enablenpcdeathtracking", 0) != 1) {
+  if(!isDefined(level.a_npcdeaths) || getdvarint(#"enablenpcdeathtracking", 0) != 1) {
     return;
   }
 
   players = getPlayers();
-  filename = "<dev string:x556>" + level.var_3a8f95b4 + "<dev string:x56f>" + players[0].playername + "<dev string:x574>";
+  filename = "<dev string:x556>" + level.savename + "<dev string:x56f>" + players[0].playername + "<dev string:x574>";
 
   file = openfile(filename, "<dev string:x57c>");
 
@@ -1297,25 +1297,25 @@ function function_f48a99b9() {
     return;
   }
 
-  if(isDefined(level.var_c2ccaeac)) {
-    fprintln(file, "<dev string:x5c7>" + level.var_c2ccaeac + "<dev string:x5d4>");
+  if(isDefined(level.current_skipto)) {
+    fprintln(file, "<dev string:x5c7>" + level.current_skipto + "<dev string:x5d4>");
   } else {
     fprintln(file, "<dev string:x5f7>");
   }
 
-  if(level.var_31c87253.size <= 0) {
+  if(level.a_npcdeaths.size <= 0) {
     fprintln(file, "<dev string:x62b>");
   }
 
-  foreach(var_1f53424f in level.var_31c87253) {
-    fprintln(file, var_1f53424f.var_8c76324 + "<dev string:x64f>" + var_1f53424f.icount + "<dev string:x64f>" + var_1f53424f.var_d8daf812 + "<dev string:x64f>" + var_1f53424f.var_23ba749);
+  foreach(deadnpctypecount in level.a_npcdeaths) {
+    fprintln(file, deadnpctypecount.strscoretype + "<dev string:x64f>" + deadnpctypecount.icount + "<dev string:x64f>" + deadnpctypecount.ikilledbyplayercount + "<dev string:x64f>" + deadnpctypecount.ixpvaluesum);
   }
 
   fprintln(file, "<dev string:x38>");
   iprintlnbold("<dev string:x654>" + filename);
   saved = closefile(file);
 
-  level.var_31c87253 = [];
+  level.a_npcdeaths = [];
 }
 
 function tostr(str) {
@@ -1350,14 +1350,14 @@ function new_hud(hud_name, msg, x, y, scale) {
 }
 
 function debug_show_viewpos() {
-  var_1071292 = newdebughudelem();
-  var_1071292.x = 10;
-  var_1071292.y = 300;
-  var_1071292.alpha = 0;
-  var_1071292.alignx = "<dev string:x1fd>";
-  var_1071292.fontscale = 1.2;
-  var_1071292 settext(#"hash_59d12e465ccbab9a");
-  x_pos = var_1071292.x + 50;
+  hud_title = newdebughudelem();
+  hud_title.x = 10;
+  hud_title.y = 300;
+  hud_title.alpha = 0;
+  hud_title.alignx = "<dev string:x1fd>";
+  hud_title.fontscale = 1.2;
+  hud_title settext(#"hash_59d12e465ccbab9a");
+  x_pos = hud_title.x + 50;
   hud_x = newdebughudelem();
   hud_x.x = x_pos;
   hud_x.y = 300;
@@ -1372,62 +1372,62 @@ function debug_show_viewpos() {
   hud_y.alignx = "<dev string:x1fd>";
   hud_y.fontscale = 1.2;
   hud_y setvalue(0);
-  var_7125033d = newdebughudelem();
-  var_7125033d.x = 10;
-  var_7125033d.y = 300;
-  var_7125033d.alpha = 0;
-  var_7125033d.alignx = "<dev string:x1fd>";
-  var_7125033d.fontscale = 1.2;
-  var_7125033d setvalue(0);
+  hud_z = newdebughudelem();
+  hud_z.x = 10;
+  hud_z.y = 300;
+  hud_z.alpha = 0;
+  hud_z.alignx = "<dev string:x1fd>";
+  hud_z.fontscale = 1.2;
+  hud_z setvalue(0);
   setDvar(#"debug_show_viewpos", 0);
   players = getPlayers();
 
   while(true) {
     if(getdvarint(#"debug_show_viewpos", 0) > 0) {
-      var_1071292.alpha = 1;
+      hud_title.alpha = 1;
       hud_x.alpha = 1;
       hud_y.alpha = 1;
-      var_7125033d.alpha = 1;
+      hud_z.alpha = 1;
       x = players[0].origin[0];
       y = players[0].origin[1];
       z = players[0].origin[2];
-      var_41568b91 = (2 + function_d2d39ee5(x)) * 8 + 10;
-      var_b2c0ee64 = (2 + function_d2d39ee5(y)) * 8 + 10;
-      hud_y.x = x_pos + var_41568b91;
-      var_7125033d.x = x_pos + var_41568b91 + var_b2c0ee64;
-      hud_x setvalue(function_6334846f(x, 100));
-      hud_y setvalue(function_6334846f(y, 100));
-      var_7125033d setvalue(function_6334846f(z, 100));
+      spacing1 = (2 + number_before_decimal(x)) * 8 + 10;
+      spacing2 = (2 + number_before_decimal(y)) * 8 + 10;
+      hud_y.x = x_pos + spacing1;
+      hud_z.x = x_pos + spacing1 + spacing2;
+      hud_x setvalue(round_to(x, 100));
+      hud_y setvalue(round_to(y, 100));
+      hud_z setvalue(round_to(z, 100));
     } else {
-      var_1071292.alpha = 0;
+      hud_title.alpha = 0;
       hud_x.alpha = 0;
       hud_y.alpha = 0;
-      var_7125033d.alpha = 0;
+      hud_z.alpha = 0;
     }
 
     wait 0.5;
   }
 }
 
-function function_d2d39ee5(num) {
-  var_dd9c91de = abs(num);
+function number_before_decimal(num) {
+  abs_num = abs(num);
   count = 0;
 
   while(true) {
-    var_dd9c91de *= 0.1;
+    abs_num *= 0.1;
     count += 1;
 
-    if(var_dd9c91de < 1) {
+    if(abs_num < 1) {
       return count;
     }
   }
 }
 
-function function_6334846f(val, num) {
+function round_to(val, num) {
   return int(val * num) / num;
 }
 
-function function_1261f881() {
+function get_playerone() {
   return level.players[0];
 }
 
@@ -1441,7 +1441,7 @@ function engagement_distance_debug_toggle() {
     if(dvar_turned_on(currentstate) && !dvar_turned_on(laststate)) {
       weapon_engage_dists_init();
       thread debug_realtime_engage_dist();
-      thread function_16b58d7f();
+      thread debug_ai_engage_dist();
       laststate = currentstate;
     } else if(!dvar_turned_on(currentstate) && dvar_turned_on(laststate)) {
       level notify(#"kill_all_engage_dist_debug");
@@ -1564,7 +1564,7 @@ function engage_dists_watcher() {
   level endon(#"kill_all_engage_dist_debug", #"kill_engage_dists_watcher");
 
   while(true) {
-    player = function_1261f881();
+    player = get_playerone();
     playerweapon = player getcurrentweapon();
 
     if(!isDefined(player.lastweapon)) {
@@ -1589,7 +1589,7 @@ function engage_dists_watcher() {
 
 function debug_realtime_engage_dist() {
   level endon(#"kill_all_engage_dist_debug", #"kill_realtime_engagement_distance_debug");
-  player = function_1261f881();
+  player = get_playerone();
   hudobjarray = engagement_distance_debug_init(player);
   level thread engage_dist_debug_hud_destroy(hudobjarray, "<dev string:x6de>");
   level.debugrtengagedistcolor = (0, 1, 0);
@@ -1691,9 +1691,9 @@ function engagedist_hud_changetext(engagedisttype, units) {
   level.lastdisttype = engagedisttype;
 }
 
-function function_16b58d7f() {
-  level endon(#"kill_all_engage_dist_debug", #"hash_55d49f3fca6a3bdc");
-  player = function_1261f881();
+function debug_ai_engage_dist() {
+  level endon(#"kill_all_engage_dist_debug", #"kill_ai_engagement_distance_debug");
+  player = get_playerone();
 
   while(true) {
     axis = getaiteamarray(#"axis");
@@ -1710,23 +1710,23 @@ function function_16b58d7f() {
           drawcolor = (1, 1, 1);
           drawstring = "<dev string:x56f>";
           engagedistmin = ai.engagemindist;
-          var_686e2a66 = ai.engageminfalloffdist;
-          var_109383f6 = ai.engagemaxfalloffdist;
+          engagedistfalloffmin = ai.engageminfalloffdist;
+          engagedistfalloffmax = ai.engagemaxfalloffdist;
           engagedistmax = ai.engagemaxdist;
 
           if(dist >= engagedistmin && dist <= engagedistmax) {
             drawcolor = (0, 1, 0);
             drawstring = "<dev string:x796>";
-          } else if(dist < engagedistmin && dist >= var_686e2a66) {
+          } else if(dist < engagedistmin && dist >= engagedistfalloffmin) {
             drawcolor = (1, 1, 0);
             drawstring = "<dev string:x79e>";
-          } else if(dist > engagedistmax && dist <= var_109383f6) {
+          } else if(dist > engagedistmax && dist <= engagedistfalloffmax) {
             drawcolor = (1, 1, 0);
             drawstring = "<dev string:x7af>";
-          } else if(dist > var_109383f6) {
+          } else if(dist > engagedistfalloffmax) {
             drawcolor = (1, 0, 0);
             drawstring = "<dev string:x7be>";
-          } else if(dist < var_686e2a66) {
+          } else if(dist < engagedistfalloffmin) {
             drawcolor = (1, 0, 0);
             drawstring = "<dev string:x7c9>";
           }
@@ -1741,13 +1741,13 @@ function function_16b58d7f() {
   }
 }
 
-function function_2fcd7502() {
-  if(!isDefined(level.var_4c576f0)) {
-    function_3171027d();
-    level.var_4c576f0 = 1;
+function dynamic_ai_spawner() {
+  if(!isDefined(level.debug_dynamic_ai_spawner)) {
+    dynamic_ai_spawner_find_spawners();
+    level.debug_dynamic_ai_spawner = 1;
   }
 
-  getPlayers()[0] thread function_90edec37();
+  getPlayers()[0] thread spawn_guy_placement();
   level waittill(#"hash_34e65f3c6ffc6a39");
 
   if(isDefined(level.dynamic_spawn_hud)) {
@@ -1759,15 +1759,15 @@ function function_2fcd7502() {
   }
 }
 
-function function_3171027d() {
+function dynamic_ai_spawner_find_spawners() {
   spawners = getspawnerarray();
   level.aitypes = [];
-  level.var_9f54edf5 = 0;
-  var_362d54a0 = [];
+  level.aitype_index = 0;
+  foundspawners = [];
 
   foreach(spawner in spawners) {
-    if(!isDefined(var_362d54a0[spawner.classname])) {
-      var_362d54a0[spawner.classname] = 1;
+    if(!isDefined(foundspawners[spawner.classname])) {
+      foundspawners[spawner.classname] = 1;
       struct = spawnStruct();
       classname = spawner.classname;
       vehicletype = spawner.vehicletype;
@@ -1786,7 +1786,7 @@ function function_3171027d() {
   }
 }
 
-function function_90edec37() {
+function spawn_guy_placement() {
   level endon(#"hash_34e65f3c6ffc6a39");
   assert(isDefined(level.aitypes) && level.aitypes.size > 0, "<dev string:x7e0>");
   level.dynamic_spawn_hud = newdebughudelem(getPlayers()[0]);
@@ -1805,48 +1805,48 @@ function function_90edec37() {
     trace_dist = 4000;
     trace = bulletTrace(eye, eye + vectorscale(direction_vec, trace_dist), 0, level.dynamic_spawn_dummy_model);
     dist = distance(eye, trace[#"position"]);
-    position = eye + vectorscale(direction_vec, dist - level.aitypes[level.var_9f54edf5].radius);
+    position = eye + vectorscale(direction_vec, dist - level.aitypes[level.aitype_index].radius);
     origin = position;
     angles = self.angles + (0, 180, 0);
     level.dynamic_spawn_dummy_model.origin = position;
     level.dynamic_spawn_dummy_model.angles = angles;
-    level.dynamic_spawn_hud settext("<dev string:x83b>" + level.var_9f54edf5 + 1 + "<dev string:x88b>" + level.aitypes.size + "<dev string:x890>" + level.aitypes[level.var_9f54edf5].classname);
+    level.dynamic_spawn_hud settext("<dev string:x83b>" + level.aitype_index + 1 + "<dev string:x88b>" + level.aitypes.size + "<dev string:x890>" + level.aitypes[level.aitype_index].classname);
     level.dynamic_spawn_dummy_model detachall();
-    level.dynamic_spawn_dummy_model setModel(level.aitypes[level.var_9f54edf5].classname);
+    level.dynamic_spawn_dummy_model setModel(level.aitypes[level.aitype_index].classname);
     level.dynamic_spawn_dummy_model show();
     level.dynamic_spawn_dummy_model notsolid();
 
     if(self useButtonPressed() || self buttonPressed("<dev string:x897>")) {
       level.dynamic_spawn_dummy_model hide();
 
-      if(level.aitypes[level.var_9f54edf5].isvehicle) {
-        spawn = spawnVehicle(level.aitypes[level.var_9f54edf5].classname, origin, angles, "<dev string:x8a1>");
+      if(level.aitypes[level.aitype_index].isvehicle) {
+        spawn = spawnVehicle(level.aitypes[level.aitype_index].classname, origin, angles, "<dev string:x8a1>");
       } else {
-        spawn = spawnactor(level.aitypes[level.var_9f54edf5].classname, origin, angles, "<dev string:x8a1>", 1);
+        spawn = spawnactor(level.aitypes[level.aitype_index].classname, origin, angles, "<dev string:x8a1>", 1);
       }
 
       var_ec8949ef = getdvarint(#"debug_dynamic_ai_ignoreme", 0);
       var_a127c98a = getdvarint(#"debug_dynamic_ai_ignoreall", 0);
       spawn.pacifist = getdvarint(#"debug_dynamic_ai_pacifist", 0);
-      spawn val::set(#"hash_624cb07df0cbb198", "<dev string:x8b5>", var_ec8949ef);
-      spawn val::set(#"hash_624cb07df0cbb198", "<dev string:x8c1>", var_a127c98a);
+      spawn val::set(#"spawn_guy_placement", "<dev string:x8b5>", var_ec8949ef);
+      spawn val::set(#"spawn_guy_placement", "<dev string:x8c1>", var_a127c98a);
       spawn.fixednode = 0;
       wait 0.3;
     } else if(self buttonPressed("<dev string:x8ce>") || self buttonPressed("<dev string:x8dc>")) {
       level.dynamic_spawn_dummy_model hide();
-      level.var_9f54edf5++;
+      level.aitype_index++;
 
-      if(level.var_9f54edf5 >= level.aitypes.size) {
-        level.var_9f54edf5 = 0;
+      if(level.aitype_index >= level.aitypes.size) {
+        level.aitype_index = 0;
       }
 
       wait 0.3;
     } else if(self buttonPressed("<dev string:x8ea>") || self buttonPressed("<dev string:x8f7>")) {
       level.dynamic_spawn_dummy_model hide();
-      level.var_9f54edf5--;
+      level.aitype_index--;
 
-      if(level.var_9f54edf5 < 0) {
-        level.var_9f54edf5 = level.aitypes.size - 1;
+      if(level.aitype_index < 0) {
+        level.aitype_index = level.aitypes.size - 1;
       }
 
       wait 0.3;
@@ -1858,7 +1858,7 @@ function function_90edec37() {
   }
 }
 
-function function_11228d34() {
+function display_module_text() {
   wait 1;
   iprintlnbold("<dev string:x91b>" + level.script + "<dev string:x934>");
 }
@@ -1892,28 +1892,28 @@ function function_3a215729() {
 }
 
 function debug_health() {
-  var_d4d10882 = (0, 0, 0);
+  v_print_pos = (0, 0, 0);
   guys = getaiarray();
 
   for(i = 0; i < guys.size; i++) {
     if(isDefined(guys[i] gettagorigin("<dev string:x965>"))) {
-      var_d4d10882 = guys[i] gettagorigin("<dev string:x965>") + (0, 0, 15);
+      v_print_pos = guys[i] gettagorigin("<dev string:x965>") + (0, 0, 15);
     } else {
-      var_d4d10882 = guys[i] getorigin() + (0, 0, 70);
+      v_print_pos = guys[i] getorigin() + (0, 0, 70);
     }
 
-    print3d(var_d4d10882, isDefined(guys[i].health) ? "<dev string:x38>" + guys[i].health : "<dev string:x38>", level.var_99e12d63[guys[i].team], 1, 0.5);
-    recordenttext(isDefined(guys[i].health) ? "<dev string:x38>" + guys[i].health : "<dev string:x38>", guys[i], level.var_99e12d63[guys[i].team], "<dev string:x957>");
+    print3d(v_print_pos, isDefined(guys[i].health) ? "<dev string:x38>" + guys[i].health : "<dev string:x38>", level.debugteamcolors[guys[i].team], 1, 0.5);
+    recordenttext(isDefined(guys[i].health) ? "<dev string:x38>" + guys[i].health : "<dev string:x38>", guys[i], level.debugteamcolors[guys[i].team], "<dev string:x957>");
   }
 
   vehicles = getvehiclearray();
 
   for(i = 0; i < vehicles.size; i++) {
-    recordenttext(isDefined(vehicles[i].health) ? "<dev string:x38>" + vehicles[i].health : "<dev string:x38>", vehicles[i], level.var_99e12d63[vehicles[i].team], "<dev string:x957>");
+    recordenttext(isDefined(vehicles[i].health) ? "<dev string:x38>" + vehicles[i].health : "<dev string:x38>", vehicles[i], level.debugteamcolors[vehicles[i].team], "<dev string:x957>");
   }
 
   if(isDefined(level.player)) {
-    recordenttext(isDefined(level.player.health) ? "<dev string:x38>" + level.player.health : "<dev string:x38>", level.player, level.var_99e12d63[#"allies"], "<dev string:x957>");
+    recordenttext(isDefined(level.player.health) ? "<dev string:x38>" + level.player.health : "<dev string:x38>", level.player, level.debugteamcolors[#"allies"], "<dev string:x957>");
   }
 }
 
@@ -1922,7 +1922,7 @@ function debug_engagedist() {
 
   for(i = 0; i < guys.size; i++) {
     diststring = guys[i].engageminfalloffdist + "<dev string:x970>" + guys[i].engagemindist + "<dev string:x970>" + guys[i].engagemaxdist + "<dev string:x970>" + guys[i].engagemaxfalloffdist;
-    recordenttext(diststring, guys[i], level.var_99e12d63[guys[i].team], "<dev string:x957>");
+    recordenttext(diststring, guys[i], level.debugteamcolors[guys[i].team], "<dev string:x957>");
   }
 }
 

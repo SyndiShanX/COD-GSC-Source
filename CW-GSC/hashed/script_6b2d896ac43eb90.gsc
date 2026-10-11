@@ -87,7 +87,7 @@ function function_e28ce6d9(struct) {
   callback::callback(#"hash_4d2442503e03c0e8", {
     #mdl_beacon: mdl_beacon
   });
-  s_result = level waittill(#"hash_3e765c26047c9f54", #"portal_activated");
+  s_result = level waittill(#"start_exfil", #"portal_activated");
   struct zm_utility::function_48d9a9c9();
   trigger delete();
 }
@@ -97,14 +97,14 @@ function function_1fab9ee0(eventstruct) {
   machine = self.scriptmodel;
   assert(isDefined(machine), "<dev string:x38>");
 
-  if(isPlayer(player) && !level flag::get(#"hash_23350b678001fece")) {
-    if(is_true(getgametypesetting(#"hash_5cc58dfc6675a68e")) && level.var_b48509f9 >= 3) {
+  if(isPlayer(player) && !level flag::get(#"beacon_trigger_used")) {
+    if(is_true(getgametypesetting(#"hash_5cc58dfc6675a68e")) && level.star_rating >= 3) {
       player call_exfil(machine);
       return;
     }
 
     if(!level.var_8bef1f53 sr_beacon_menu::is_open(player) && !player clientfield::get_player_uimodel("hudItems.srOverlayOpen")) {
-      player notify(#"hash_5f178db4550eeae9");
+      player notify(#"sroverlayopened");
       level.var_8bef1f53 sr_beacon_menu::open(player, 0);
       player thread function_21ba74a1(machine, self);
       player zm_utility_zsurvival::function_14bada94();
@@ -156,11 +156,11 @@ function function_6c71e778(machine, trigger, var_4bbc024b = 0) {
     self zm_utility_zsurvival::function_548f282();
   }
 
-  self notify(#"hash_11ed79645f6768e1");
+  self notify(#"beacon_dist_endon");
 }
 
 function function_755edc7e(machine, trigger) {
-  self endon(#"disconnect", #"death", #"hash_11ed79645f6768e1");
+  self endon(#"disconnect", #"death", #"beacon_dist_endon");
   start_origin = self.origin;
 
   while(distance2d(self.origin, start_origin) < 32 && !self laststand::player_is_in_laststand() && !self isinvehicle()) {
@@ -177,7 +177,7 @@ function function_755edc7e(machine, trigger) {
 }
 
 function function_8319d39() {
-  self notify(#"hash_5f178db4550eeae9");
+  self notify(#"sroverlayopened");
   level.var_2457162c sr_weapon_upgrade_menu::close(self);
   level.var_5df76d0 sr_perk_machine_choice::close(self);
   level.var_2a994cc0 sr_armor_menu::close(self);
@@ -198,24 +198,24 @@ function function_2f7447a7(mdl_beacon) {
 }
 
 function warp(mdl_beacon) {
-  if(level flag::get(#"hash_23350b678001fece")) {
+  if(level flag::get(#"beacon_trigger_used")) {
     return;
   }
 
-  level flag::set(#"hash_23350b678001fece");
+  level flag::set(#"beacon_trigger_used");
 
   if(getgametypesetting(#"hash_704e4a94667cfe72")) {
     b_passed = zm_vote::function_c65468ef(self, 2, #"hash_4ef08498325828d6");
 
     if(!b_passed) {
-      level flag::clear(#"hash_23350b678001fece");
+      level flag::clear(#"beacon_trigger_used");
       self function_6c71e778(mdl_beacon, mdl_beacon.trigger);
       return;
     }
   }
 
   if(isDefined(level.var_fdcaf3a6)) {
-    level flag::clear(#"hash_23350b678001fece");
+    level flag::clear(#"beacon_trigger_used");
     return;
   }
 
@@ -227,12 +227,12 @@ function warp(mdl_beacon) {
     player clientfield::increment_to_player("" + #"teleport_started", 1);
   }
 
-  destination = level.contentmanager.var_d60029a6[level.contentmanager.var_46849b1b];
+  destination = level.contentmanager.var_d60029a6[level.contentmanager.destinationindex];
   level thread zm_destination_manager::function_ab94c270(destination);
   function_526a0df4(destination.targetname);
   level.var_fe6ca5e8 = 1;
-  level notify(#"hash_29edd9425510b40d");
-  level callback::callback(#"hash_29edd9425510b40d");
+  level notify(#"portal_countdown_started");
+  level callback::callback(#"portal_countdown_started");
   level thread function_2f7447a7(mdl_beacon);
   zm_utility::function_bc5a54a8(mdl_beacon.objectiveid);
   mdl_beacon.objectiveid = undefined;
@@ -245,7 +245,7 @@ function warp(mdl_beacon) {
   objective_manager::function_a8ad6895(destination);
   var_b2e24cfc = zm_destination_manager::function_f3be07d7(destination);
   assert(var_b2e24cfc.size >= 4, "<dev string:x5f>" + destination.targetname);
-  level flag::clear(#"hash_23350b678001fece");
+  level flag::clear(#"beacon_trigger_used");
   level notify(#"portal_activated");
   level.var_fe6ca5e8 = undefined;
   namespace_9b972177::function_5a47adab("capsule_teleport");
@@ -312,19 +312,19 @@ function function_e12efc1f() {
 }
 
 function call_exfil(mdl_beacon) {
-  if(level flag::get(#"hash_23350b678001fece")) {
+  if(level flag::get(#"beacon_trigger_used")) {
     return;
   }
 
-  level flag::set(#"hash_23350b678001fece");
+  level flag::set(#"beacon_trigger_used");
   streamermodelhint(#"p9_fxanim_zm_ndu_essence_bomb_body_mod", 45);
   streamermodelhint(#"p9_fxanim_sv_tesla_tower_dmg_mod", 45);
 
   if(getgametypesetting(#"hash_704e4a94667cfe72")) {
-    b_passed = zm_vote::function_c65468ef(self, 1, #"hash_37a354c147ec32f0");
+    b_passed = zm_vote::function_c65468ef(self, 1, #"survival/vote_prompt_exfil_failed");
 
     if(!b_passed) {
-      level flag::clear(#"hash_23350b678001fece");
+      level flag::clear(#"beacon_trigger_used");
       self function_6c71e778(mdl_beacon, mdl_beacon.trigger);
       return;
     }
@@ -341,11 +341,11 @@ function call_exfil(mdl_beacon) {
   mdl_beacon.objectiveid = undefined;
   self thread destroy_beacon(mdl_beacon);
   wait 2;
-  level flag::set(#"hash_3e765c26047c9f54");
+  level flag::set(#"start_exfil");
 }
 
 function function_21ba74a1(machine, trigger) {
-  self endon(#"hash_5f178db4550eeae9");
+  self endon(#"sroverlayopened");
   trigger sethintstringforplayer(self, "");
 
   if(isDefined(machine.objectiveid)) {
@@ -363,25 +363,25 @@ function function_21ba74a1(machine, trigger) {
 
     if(menu == #"sr_beacon_menu") {
       switch (waitresult.response) {
-        case #"hash_4d6bf94bcefe50c0":
-          self notify(#"hash_11ed79645f6768e1");
+        case #"beacon_choice_warp":
+          self notify(#"beacon_dist_endon");
           self function_6c71e778(machine, trigger, 1);
           self thread warp(machine);
           return;
-        case #"hash_a1f795a11ddf7be":
-          self notify(#"hash_11ed79645f6768e1");
+        case #"beacon_choice_exfil":
+          self notify(#"beacon_dist_endon");
           self function_6c71e778(machine, trigger, 1);
           self thread call_exfil(machine);
           return;
-        case #"hash_383c519d3bdac984":
-          self notify(#"hash_11ed79645f6768e1");
+        case #"upgrade_menu_close":
+          self notify(#"beacon_dist_endon");
           self function_6c71e778(machine, trigger);
           return;
         default:
           var_3f5e47c5 = level.var_47926ab6[response];
 
           if(isfunctionptr(var_3f5e47c5)) {
-            self notify(#"hash_11ed79645f6768e1");
+            self notify(#"beacon_dist_endon");
             self function_6c71e778(machine, trigger);
             self thread[[var_3f5e47c5]](machine, trigger);
             return;
@@ -458,7 +458,7 @@ function destroy_beacon(mdl_beacon, var_fcfc4edd = 10, var_495727a3) {
 }
 
 function function_22aada64() {
-  if(level.var_b48509f9 > 4 || isDefined(level.var_fdcaf3a6)) {
+  if(level.star_rating > 4 || isDefined(level.var_fdcaf3a6)) {
     return;
   }
 
@@ -470,7 +470,7 @@ function function_22aada64() {
   self val::set(#"beacon", "takedamage", 1);
   self val::set(#"beacon", "allowdeath", 0);
   n_damage = 0;
-  n_threshold = 1000 * getPlayers().size * level.var_b48509f9;
+  n_threshold = 1000 * getPlayers().size * level.star_rating;
 
   while(true) {
     s_result = self waittill(#"damage");
@@ -489,7 +489,7 @@ function function_22aada64() {
       }
 
       level waittill(#"portal_activated");
-      zm_utility_zsurvival::function_7c97e961(level.var_b48509f9 + 1);
+      zm_utility_zsurvival::function_7c97e961(level.star_rating + 1);
       break;
     }
   }

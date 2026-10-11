@@ -160,7 +160,7 @@ function function_8950260c(menu_name, from_state = "__default__", to_state = "__
   menu.states.var_b80d1ad4[to_state] = str_shot;
 }
 
-function function_de0ab(menu_name, var_42d665b7) {
+function function_de0ab(menu_name, custom_open_fn) {
   assert(isDefined(level.client_menus[menu_name]));
 
   if(!isDefined(level.client_menus[menu_name].var_1f199068)) {
@@ -169,10 +169,10 @@ function function_de0ab(menu_name, var_42d665b7) {
     level.client_menus[menu_name].var_1f199068 = array(level.client_menus[menu_name].var_1f199068);
   }
 
-  level.client_menus[menu_name].var_1f199068[level.client_menus[menu_name].var_1f199068.size] = var_42d665b7;
+  level.client_menus[menu_name].var_1f199068[level.client_menus[menu_name].var_1f199068.size] = custom_open_fn;
 }
 
-function function_13b48f53(menu_name, var_34fd6dc0) {
+function function_13b48f53(menu_name, custom_close_fn) {
   assert(isDefined(level.client_menus[menu_name]));
 
   if(!isDefined(level.client_menus[menu_name].var_2c679be0)) {
@@ -181,7 +181,7 @@ function function_13b48f53(menu_name, var_34fd6dc0) {
     level.client_menus[menu_name].var_2c679be0 = array(level.client_menus[menu_name].var_2c679be0);
   }
 
-  level.client_menus[menu_name].var_2c679be0[level.client_menus[menu_name].var_2c679be0.size] = var_34fd6dc0;
+  level.client_menus[menu_name].var_2c679be0[level.client_menus[menu_name].var_2c679be0.size] = custom_close_fn;
 }
 
 function function_ffa1213e(var_8de6b51a, var_e3315405) {

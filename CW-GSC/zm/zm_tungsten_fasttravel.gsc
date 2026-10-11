@@ -45,7 +45,7 @@ function start_fasttravel() {
 
 function private function_becf7525(var_a04ebe57) {
   e_portal = getEnt(var_a04ebe57, "targetname");
-  playSoundAtPosition(#"hash_5f27432854b069c9", e_portal.origin);
+  playSoundAtPosition(#"evt_teleporter_activate", e_portal.origin);
 }
 
 function function_af65fe93(t_teleporter) {
@@ -65,9 +65,9 @@ function function_af65fe93(t_teleporter) {
 
 function function_cb6d7ad5() {
   self endon(#"disconnect");
-  self scene::function_27f5972e(#"hash_6252caedac411934");
+  self scene::function_27f5972e(#"p9_fxanim_zm_tungsten_shutter_bundle");
   self waittill(#"death", #"fasttravel_over");
-  self scene::function_f81475ae(#"hash_6252caedac411934");
+  self scene::function_f81475ae(#"p9_fxanim_zm_tungsten_shutter_bundle");
 }
 
 function function_c52e8ba(player, var_8d5d092c) {

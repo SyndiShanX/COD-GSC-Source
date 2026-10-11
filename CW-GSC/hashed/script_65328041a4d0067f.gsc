@@ -29,10 +29,10 @@ function function_f554eb14(str_objective, b_starting) {
 
   function_6ea2cd94();
   objectives::complete(#"hash_75d3caceed12ab7d");
-  level thread skipto::function_4e3ab877("parapet");
+  level thread skipto::objective_completed("parapet");
 }
 
-function function_23b06946(str_objective, b_starting, var_aa1a6455, player) {}
+function function_23b06946(str_objective, b_starting, b_direct, player) {}
 
 function function_596aab36() {}
 

@@ -173,19 +173,19 @@ function function_d3af9ddb(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 }
 
-function function_d233fb1f() {
+function paintjob_stickers_s3_rokkr_majormaniak_base_ms() {
   self endon(#"death", #"disconnect", #"stop_blur");
-  var_9b8a1091 = 0.01;
+  n_blur = 0.01;
 
   while(true) {
-    self function_116b95e5(#"pstfx_retrieve", #"blur", var_9b8a1091);
+    self function_116b95e5(#"pstfx_retrieve", #"blur", n_blur);
     wait 0.08;
-    var_9b8a1091 += 0.01;
+    n_blur += 0.01;
 
-    if(var_9b8a1091 > 0.1) {
-      while(var_9b8a1091 > 0) {
-        var_9b8a1091 -= 0.01;
-        self function_116b95e5(#"pstfx_retrieve", #"blur", var_9b8a1091);
+    if(n_blur > 0.1) {
+      while(n_blur > 0) {
+        n_blur -= 0.01;
+        self function_116b95e5(#"pstfx_retrieve", #"blur", n_blur);
         wait 0.08;
       }
     }

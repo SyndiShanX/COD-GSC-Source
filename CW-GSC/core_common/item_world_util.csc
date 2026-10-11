@@ -236,8 +236,8 @@ function function_58020907(field_upgrade) {
     if(sessionmodeiszombiesgame()) {
       return;
     } else {
-      level.var_58f0d63e[#"gadget_jammer"] = #"hash_3f154f45479130ed";
-      level.var_58f0d63e[#"land_mine"] = #"hash_2c9b75b17410f2de";
+      level.var_58f0d63e[#"gadget_jammer"] = #"jammer_t9_item";
+      level.var_58f0d63e[#"land_mine"] = #"land_mine_t9_item";
       level.var_58f0d63e[#"listening_device"] = #"hash_6364b7050271a94d";
       level.var_58f0d63e[#"missile_turret"] = #"hash_2344c458b3acacf2";
       level.var_58f0d63e[#"ability_smart_cover"] = #"hash_3744693ba7d32972";

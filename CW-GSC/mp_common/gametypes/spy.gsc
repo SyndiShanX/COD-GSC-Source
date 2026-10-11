@@ -135,7 +135,7 @@ function event_handler[gametype_init] main(eventstruct) {
   if(level.var_a1f33484 === 1) {
     var_f8a4c541 = &item_world_fixup::function_6991057;
     namespace_1c7b37c6::item_replacer(var_f8a4c541, #"t9_spy_weapons", #"hash_72184d98be62d1da");
-    namespace_1c7b37c6::item_replacer(var_f8a4c541, #"hash_2d2fc99bcc8605af", #"hash_72184d98be62d1da");
+    namespace_1c7b37c6::item_replacer(var_f8a4c541, #"t9_spy_special", #"hash_72184d98be62d1da");
     namespace_1c7b37c6::item_replacer(var_f8a4c541, #"t9_spy_launcher", #"hash_72184d98be62d1da");
     namespace_1c7b37c6::item_replacer(var_f8a4c541, #"hash_609ca802282ea18e", #"hash_72184d98be62d1da");
     namespace_1c7b37c6::item_replacer(var_f8a4c541, #"hash_352dba5e0d178c05", #"hash_72184d98be62d1da");
@@ -343,7 +343,7 @@ function function_9e23f471() {
 function function_fa414efa() {
   level.var_6196feea = [];
   level.var_6196feea[1] = #"pistol_semiauto_t9_item";
-  level.var_6196feea[2] = #"hash_218f6b7797b8ccfc";
+  level.var_6196feea[2] = #"melee_sledgehammer_t9_item";
   level.var_6196feea[3] = #"hash_cf3994dfed6c15f";
   level.var_6196feea[4] = #"hash_593b4312a751497f";
   level.var_6196feea[5] = #"hash_53e92e3233adce70";
@@ -393,7 +393,7 @@ function function_3d83e588(playerrole) {
 function ontimelimit() {
   thread globallogic::function_a3e3bd39(#"allies", 13);
   game.telemetry.var_8b9e841f = #"hash_37c13a8a191d2108";
-  game.telemetry.var_e72137e8 = #"timeout";
+  game.telemetry.end_reason = #"timeout";
 }
 
 function onendround(var_c1e98979) {
@@ -504,8 +504,8 @@ function givecustomloadout() {
     self.var_7ec4f7d7 = array(self.var_7ec4f7d7);
   }
 
-  if(!isinarray(self.var_7ec4f7d7, #"hash_25c2dcf9ec4c42e2")) {
-    self.var_7ec4f7d7[self.var_7ec4f7d7.size] = #"hash_25c2dcf9ec4c42e2";
+  if(!isinarray(self.var_7ec4f7d7, #"talent_extraequipment_mp")) {
+    self.var_7ec4f7d7[self.var_7ec4f7d7.size] = #"talent_extraequipment_mp";
   }
 
   if(!isDefined(self.var_7ec4f7d7)) {
@@ -526,11 +526,11 @@ function givecustomloadout() {
     self item_world::function_de2018e3(weapon, self, var_fa3df96);
     var_2f1b52af = item_inventory_util::function_2b83d3ff(weapon);
   } else {
-    var_d9ddb3b8 = level.var_60fa96d6;
-    self giveweapon(var_d9ddb3b8);
-    self switchtoweapon(var_d9ddb3b8, 1);
-    self loadout::function_442539(#"primary", var_d9ddb3b8);
-    var_2f1b52af = var_d9ddb3b8;
+    weapontogive = level.var_60fa96d6;
+    self giveweapon(weapontogive);
+    self switchtoweapon(weapontogive, 1);
+    self loadout::function_442539(#"primary", weapontogive);
+    var_2f1b52af = weapontogive;
   }
 
   primaryoffhand = level.var_34d27b26;
@@ -999,23 +999,23 @@ function function_6a1d53f3() {
   if(var_8577fb12 == 0 && aliveplayercount > 0) {
     thread globallogic::function_a3e3bd39(#"allies", 14);
     game.telemetry.var_8b9e841f = #"hash_37c13a8a191d2108";
-    game.telemetry.var_e72137e8 = #"hash_2b0828f67a90160d";
+    game.telemetry.end_reason = #"hash_2b0828f67a90160d";
   } else if(!function_b106923d(3) && !function_b106923d(2)) {
     thread globallogic::function_a3e3bd39(#"axis", 12);
     game.telemetry.var_8b9e841f = #"hash_7c4041b358f9cfe";
-    game.telemetry.var_e72137e8 = #"hash_61cf92141266b6eb";
+    game.telemetry.end_reason = #"hash_61cf92141266b6eb";
   }
 
   if(level.var_d815e50d != 1 && is_true(getdvarint(#"hash_388a565a02f4a632")) && level.var_346345d6.size == 0) {
     thread globallogic::function_a3e3bd39(#"axis", 15);
     game.telemetry.var_8b9e841f = #"hash_7c4041b358f9cfe";
-    game.telemetry.var_e72137e8 = #"hash_702839005c1c3dd7";
+    game.telemetry.end_reason = #"hash_702839005c1c3dd7";
   }
 }
 
 function private function_effcb5d1(player) {
-  var_20ad403d = player.spyRole === 1 ? #"hash_7f0c9c0ec4410623" : #"hash_14b3ab2971ce1112";
-  var_4bf709a4 = player.spyRole === 1 ? #"hash_14b3ab2971ce1112" : #"hash_7f0c9c0ec4410623";
+  var_20ad403d = player.spyRole === 1 ? #"mpl_gunfight_enemy_score" : #"mpl_gunfight_team_score";
+  var_4bf709a4 = player.spyRole === 1 ? #"mpl_gunfight_team_score" : #"mpl_gunfight_enemy_score";
   globallogic_audio::function_abf21f69(var_20ad403d, function_3919b452(1));
   globallogic_audio::function_abf21f69(var_4bf709a4, function_3919b452(2));
   globallogic_audio::function_abf21f69(var_4bf709a4, function_3919b452(3));
@@ -1151,7 +1151,7 @@ function function_7ef70910() {
 
     foreach(player in getPlayers()) {
       if(player.spyRole === 3) {
-        player spy_skill::function_53a81144(reward);
+        player spy_skill::addcredit(reward);
       }
     }
   }
@@ -1522,7 +1522,7 @@ function function_aecae28d(damage) {
     return 0;
   }
 
-  var_babbb09b = 0;
+  reduceddamage = 0;
   var_e67d2721 = damage - self.var_dba54111;
 
   if(var_e67d2721 < 0) {
@@ -1532,7 +1532,7 @@ function function_aecae28d(damage) {
   self.var_1181c08b -= var_e67d2721;
 
   if(self.var_1181c08b < 0) {
-    var_babbb09b = self.var_1181c08b;
+    reduceddamage = self.var_1181c08b;
   }
 
   self.var_1181c08b = max(self.var_1181c08b, 0);
@@ -1544,7 +1544,7 @@ function function_aecae28d(damage) {
 
   var_db01f8df = self.var_4a1cb171 <= 0 ? 0 : self.var_1181c08b / self.var_4a1cb171;
   self clientfield::set_player_uimodel("hudItems.radiationVestHealth", var_db01f8df);
-  return var_babbb09b;
+  return reduceddamage;
 }
 
 function function_5536bd9e() {
@@ -2419,7 +2419,7 @@ function private function_48a1200f(attacker) {
       damage_done = self.attackerdamage[player.clientid].damage;
 
       if(isDefined(player.currentweapon)) {
-        function_92d1707f(#"hash_d1357992f4715f0", {
+        function_92d1707f(#"dlog_event_mpassists", {
           #gametime: function_f8d53445(), #assistspawnid: getplayerspawnid(player), #assistspecialist: function_b14806c6(player player_role::get(), currentsessionmode()), #assistweapon: player.currentweapon.name
         });
       }
@@ -2508,7 +2508,7 @@ function private all_players_spawned() {
 
 function function_d0482a08() {
   var_a9afec80 = {};
-  var_a9afec80.var_e394d7c0 = util::getroundsplayed();
+  var_a9afec80.rounds_played = util::getroundsplayed();
   var_a9afec80.var_afff0ce5 = function_f8d53445();
 
   if(isDefined(game.telemetry.var_8b9e841f)) {
@@ -2516,9 +2516,9 @@ function function_d0482a08() {
     var_a9afec80.var_8b9e841f = game.telemetry.var_8b9e841f;
   }
 
-  if(isDefined(game.telemetry.var_e72137e8)) {
-    println("<dev string:x88>" + game.telemetry.var_e72137e8);
-    var_a9afec80.var_e72137e8 = game.telemetry.var_e72137e8;
+  if(isDefined(game.telemetry.end_reason)) {
+    println("<dev string:x88>" + game.telemetry.end_reason);
+    var_a9afec80.end_reason = game.telemetry.end_reason;
   }
 
   if(isDefined(game.telemetry.var_21144a84)) {
@@ -2617,7 +2617,7 @@ function function_645d656f(data) {
   }
 
   var_5a1edd.means_of_death = hash(isDefined(data.smeansofdeath) ? data.smeansofdeath : "");
-  var_5a1edd.var_6b9d614a = function_f8d53445();
+  var_5a1edd.death_time = function_f8d53445();
   data.victim function_678f57c8(#"hash_73daf022e6184456", var_5a1edd);
 }
 

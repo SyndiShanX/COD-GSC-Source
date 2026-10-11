@@ -160,9 +160,9 @@ function function_cde018a9(var_c1c9cf07) {
 
 function function_8b313976(var_c1c9cf07) {
   n_tier = function_e75318e9(var_c1c9cf07);
-  var_3abc663e = function_cde018a9(var_c1c9cf07);
+  str_base = function_cde018a9(var_c1c9cf07);
 
-  switch (var_3abc663e) {
+  switch (str_base) {
     case #"hash_47d7a8105237c88":
       return self function_71680faf(n_tier);
     case #"talent_quickrevive":

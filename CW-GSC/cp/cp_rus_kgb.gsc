@@ -38,14 +38,14 @@ function event_handler[level_init] main(eventstruct) {
   setclearanceceiling(16);
   init_flags();
   init_clientfields();
-  function_37dfd679();
+  init_skiptos();
   namespace_e77bf565::function_26312171();
   namespace_e77bf565::function_85d3a678();
   namespace_e77bf565::function_95feac9c();
   kgb_aslt_exfil_escape::function_8346d62f();
   level thread kgb_aslt_vault::vault_close_player_clip();
   load::main();
-  function_22b7fffd();
+  init_scenes();
   init_callbacks();
   level thread kgb_aslt_exfil_escape::function_3253f5dc();
   level thread kgb_aslt_vault::function_de62c0a0();
@@ -61,24 +61,24 @@ function event_handler[level_init] main(eventstruct) {
   setDvar(#"hash_4ad75035d6026ea2", 0.819);
 }
 
-function function_37dfd679() {
-  skipto::function_eb91535d("kgb_ins_activation", &kgb_ins_activation::main, &kgb_ins_activation::starting, undefined, &kgb_ins_activation::cleanup, ["kgb_hq_front_04"]);
-  skipto::function_eb91535d("kgb_ins_briefing", &kgb_ins_briefing::main, &kgb_ins_briefing::starting, undefined, &kgb_ins_briefing::cleanup, ["kgb_hq_front_04", "kgb_hq_intersection", "kgb_hq_east_wing", "kgb_hq_prison_stairs", "kgb_hq_elevator", "kgb_hq_armory_wing", "kgb_hq_courtyard", "kgb_hq_second_floor", "kgb_hq_conference_v2"]);
-  skipto::function_eb91535d("kgb_ins_tutorial", &kgb_ins_prepare::function_79e00661, &kgb_ins_prepare::function_a79c8909, undefined, &kgb_ins_prepare::function_b791ea12, ["kgb_hq_front_04", "kgb_hq_intersection", "kgb_hq_east_wing", "kgb_hq_prison_stairs", "kgb_hq_elevator", "kgb_hq_armory_wing", "kgb_hq_courtyard", "kgb_hq_second_floor", "kgb_hq_conference_v2"]);
-  skipto::function_eb91535d("kgb_ins_prepare", &kgb_ins_prepare::main, &kgb_ins_prepare::starting, undefined, &kgb_ins_prepare::cleanup, ["kgb_hq_front_04", "kgb_hq_intersection", "kgb_hq_east_wing", "kgb_hq_prison_stairs", "kgb_hq_elevator", "kgb_hq_armory_wing", "kgb_hq_courtyard", "kgb_hq_second_floor"]);
-  skipto::function_eb91535d("kgb_ins_rv", &kgb_ins_rv::main, &kgb_ins_rv::starting, undefined, &kgb_ins_rv::cleanup, ["kgb_hq_front_04", "kgb_hq_intersection", "kgb_hq_east_wing", "kgb_hq_prison_stairs", "kgb_hq_elevator", "kgb_hq_armory_wing", "kgb_hq_courtyard", "kgb_hq_second_floor", "kgb_hq_basement"]);
-  skipto::function_eb91535d("kgb_aslt_entry", &kgb_aslt_entry::main, &kgb_aslt_entry::starting, undefined, &kgb_aslt_entry::cleanup, ["kgb_hq_front_04", "kgb_hq_intersection", "kgb_hq_east_wing", "kgb_hq_prison_stairs", "kgb_hq_elevator", "kgb_hq_armory_wing", "kgb_hq_courtyard", "kgb_hq_second_floor", "kgb_hq_basement"]);
-  skipto::function_eb91535d("kgb_aslt_elev_down", &kgb_aslt_elev_down::main, &kgb_aslt_elev_down::starting, undefined, &kgb_aslt_elev_down::cleanup, ["kgb_hq_front_04", "kgb_hq_intersection", "kgb_hq_east_wing", "kgb_hq_prison_stairs", "kgb_hq_elevator", "kgb_hq_armory_wing", "kgb_hq_courtyard", "kgb_hq_second_floor"]);
-  skipto::function_eb91535d("kgb_aslt_bunker", &kgb_aslt_bunker::main, &kgb_aslt_bunker::starting, undefined, &kgb_aslt_bunker::cleanup, ["kgb_und_vault_bunker_main"]);
-  skipto::function_eb91535d("kgb_aslt_vault_approach", &kgb_aslt_vault_approach::main, &kgb_aslt_vault_approach::starting, undefined, &kgb_aslt_vault_approach::cleanup, ["kgb_und_vault_bunker_main", "kgb_und_vault_red_tunnels_and_vault_area"]);
-  skipto::function_eb91535d("kgb_aslt_vault_breach", &kgb_aslt_vault_breach::main, &kgb_aslt_vault_breach::starting, undefined, &kgb_aslt_vault_breach::cleanup, ["kgb_und_vault_bunker_main", "kgb_und_vault_red_tunnels_and_vault_area"]);
-  skipto::function_eb91535d("kgb_aslt_vault", &kgb_aslt_vault::main, &kgb_aslt_vault::starting, undefined, &kgb_aslt_vault::cleanup, ["kgb_und_vault_bunker_main", "kgb_und_vault_red_tunnels_and_vault_area"]);
-  skipto::function_eb91535d("kgb_aslt_bunker_escape", &kgb_aslt_bunker_escape::main, &kgb_aslt_bunker_escape::starting, undefined, &kgb_aslt_bunker_escape::cleanup, ["kgb_und_vault_bunker_main", "kgb_und_vault_red_tunnels_and_vault_area"]);
-  skipto::function_eb91535d("kgb_aslt_escape_lights_out", &kgb_aslt_escape_lights_out::main, &kgb_aslt_escape_lights_out::starting, undefined, &kgb_aslt_escape_lights_out::cleanup, ["kgb_und_vault_bunker_main", "kgb_und_vault_red_tunnels_and_vault_area"]);
-  skipto::function_eb91535d("kgb_aslt_escape_deploy_gas", &kgb_aslt_escape_deploy_gas::main, &kgb_aslt_escape_deploy_gas::starting, undefined, &kgb_aslt_escape_deploy_gas::cleanup, ["kgb_und_vault_bunker_main"]);
-  skipto::function_eb91535d("kgb_aslt_exfil", &kgb_aslt_exfil::main, &kgb_aslt_exfil::starting, undefined, &kgb_aslt_exfil::cleanup, ["kgb_und_vault_bunker_main"]);
-  skipto::function_eb91535d("kgb_aslt_exfil_escape", &kgb_aslt_exfil_escape::main, &kgb_aslt_exfil_escape::starting, undefined, &kgb_aslt_exfil_escape::cleanup, ["kgb_hq_front_04", "kgb_hq_intersection", "kgb_hq_east_wing", "kgb_hq_elevator", "kgb_hq_armory_wing", "kgb_hq_courtyard", "kgb_hq_second_floor"]);
-  skipto::function_46d8992a("kgb_ins_activation");
+function init_skiptos() {
+  skipto::add_saved("kgb_ins_activation", &kgb_ins_activation::main, &kgb_ins_activation::starting, undefined, &kgb_ins_activation::cleanup, ["kgb_hq_front_04"]);
+  skipto::add_saved("kgb_ins_briefing", &kgb_ins_briefing::main, &kgb_ins_briefing::starting, undefined, &kgb_ins_briefing::cleanup, ["kgb_hq_front_04", "kgb_hq_intersection", "kgb_hq_east_wing", "kgb_hq_prison_stairs", "kgb_hq_elevator", "kgb_hq_armory_wing", "kgb_hq_courtyard", "kgb_hq_second_floor", "kgb_hq_conference_v2"]);
+  skipto::add_saved("kgb_ins_tutorial", &kgb_ins_prepare::function_79e00661, &kgb_ins_prepare::function_a79c8909, undefined, &kgb_ins_prepare::function_b791ea12, ["kgb_hq_front_04", "kgb_hq_intersection", "kgb_hq_east_wing", "kgb_hq_prison_stairs", "kgb_hq_elevator", "kgb_hq_armory_wing", "kgb_hq_courtyard", "kgb_hq_second_floor", "kgb_hq_conference_v2"]);
+  skipto::add_saved("kgb_ins_prepare", &kgb_ins_prepare::main, &kgb_ins_prepare::starting, undefined, &kgb_ins_prepare::cleanup, ["kgb_hq_front_04", "kgb_hq_intersection", "kgb_hq_east_wing", "kgb_hq_prison_stairs", "kgb_hq_elevator", "kgb_hq_armory_wing", "kgb_hq_courtyard", "kgb_hq_second_floor"]);
+  skipto::add_saved("kgb_ins_rv", &kgb_ins_rv::main, &kgb_ins_rv::starting, undefined, &kgb_ins_rv::cleanup, ["kgb_hq_front_04", "kgb_hq_intersection", "kgb_hq_east_wing", "kgb_hq_prison_stairs", "kgb_hq_elevator", "kgb_hq_armory_wing", "kgb_hq_courtyard", "kgb_hq_second_floor", "kgb_hq_basement"]);
+  skipto::add_saved("kgb_aslt_entry", &kgb_aslt_entry::main, &kgb_aslt_entry::starting, undefined, &kgb_aslt_entry::cleanup, ["kgb_hq_front_04", "kgb_hq_intersection", "kgb_hq_east_wing", "kgb_hq_prison_stairs", "kgb_hq_elevator", "kgb_hq_armory_wing", "kgb_hq_courtyard", "kgb_hq_second_floor", "kgb_hq_basement"]);
+  skipto::add_saved("kgb_aslt_elev_down", &kgb_aslt_elev_down::main, &kgb_aslt_elev_down::starting, undefined, &kgb_aslt_elev_down::cleanup, ["kgb_hq_front_04", "kgb_hq_intersection", "kgb_hq_east_wing", "kgb_hq_prison_stairs", "kgb_hq_elevator", "kgb_hq_armory_wing", "kgb_hq_courtyard", "kgb_hq_second_floor"]);
+  skipto::add_saved("kgb_aslt_bunker", &kgb_aslt_bunker::main, &kgb_aslt_bunker::starting, undefined, &kgb_aslt_bunker::cleanup, ["kgb_und_vault_bunker_main"]);
+  skipto::add_saved("kgb_aslt_vault_approach", &kgb_aslt_vault_approach::main, &kgb_aslt_vault_approach::starting, undefined, &kgb_aslt_vault_approach::cleanup, ["kgb_und_vault_bunker_main", "kgb_und_vault_red_tunnels_and_vault_area"]);
+  skipto::add_saved("kgb_aslt_vault_breach", &kgb_aslt_vault_breach::main, &kgb_aslt_vault_breach::starting, undefined, &kgb_aslt_vault_breach::cleanup, ["kgb_und_vault_bunker_main", "kgb_und_vault_red_tunnels_and_vault_area"]);
+  skipto::add_saved("kgb_aslt_vault", &kgb_aslt_vault::main, &kgb_aslt_vault::starting, undefined, &kgb_aslt_vault::cleanup, ["kgb_und_vault_bunker_main", "kgb_und_vault_red_tunnels_and_vault_area"]);
+  skipto::add_saved("kgb_aslt_bunker_escape", &kgb_aslt_bunker_escape::main, &kgb_aslt_bunker_escape::starting, undefined, &kgb_aslt_bunker_escape::cleanup, ["kgb_und_vault_bunker_main", "kgb_und_vault_red_tunnels_and_vault_area"]);
+  skipto::add_saved("kgb_aslt_escape_lights_out", &kgb_aslt_escape_lights_out::main, &kgb_aslt_escape_lights_out::starting, undefined, &kgb_aslt_escape_lights_out::cleanup, ["kgb_und_vault_bunker_main", "kgb_und_vault_red_tunnels_and_vault_area"]);
+  skipto::add_saved("kgb_aslt_escape_deploy_gas", &kgb_aslt_escape_deploy_gas::main, &kgb_aslt_escape_deploy_gas::starting, undefined, &kgb_aslt_escape_deploy_gas::cleanup, ["kgb_und_vault_bunker_main"]);
+  skipto::add_saved("kgb_aslt_exfil", &kgb_aslt_exfil::main, &kgb_aslt_exfil::starting, undefined, &kgb_aslt_exfil::cleanup, ["kgb_und_vault_bunker_main"]);
+  skipto::add_saved("kgb_aslt_exfil_escape", &kgb_aslt_exfil_escape::main, &kgb_aslt_exfil_escape::starting, undefined, &kgb_aslt_exfil_escape::cleanup, ["kgb_hq_front_04", "kgb_hq_intersection", "kgb_hq_east_wing", "kgb_hq_elevator", "kgb_hq_armory_wing", "kgb_hq_courtyard", "kgb_hq_second_floor"]);
+  skipto::default_skipto("kgb_ins_activation");
 
   skipto::add_dev("<dev string:x38>", &function_1d4d824f);
   skipto::add_dev("<dev string:x49>", &function_1d4d824f);
@@ -127,23 +127,23 @@ function init_clientfields() {
   level thread kgb_aslt_exfil_escape::init_clientfields();
 }
 
-function function_22b7fffd() {
-  level thread namespace_e77bf565::function_22b7fffd();
-  level thread kgb_ins_activation::function_22b7fffd();
-  level thread kgb_ins_briefing::function_22b7fffd();
-  level thread kgb_ins_prepare::function_22b7fffd();
-  level thread kgb_ins_rv::function_22b7fffd();
-  level thread kgb_aslt_entry::function_22b7fffd();
-  level thread kgb_aslt_elev_down::function_22b7fffd();
-  level thread kgb_aslt_bunker::function_22b7fffd();
-  level thread kgb_aslt_vault_approach::function_22b7fffd();
-  level thread kgb_aslt_vault_breach::function_22b7fffd();
-  level thread kgb_aslt_vault::function_22b7fffd();
-  level thread kgb_aslt_bunker_escape::function_22b7fffd();
-  level thread kgb_aslt_escape_lights_out::function_22b7fffd();
-  level thread kgb_aslt_escape_deploy_gas::function_22b7fffd();
-  level thread kgb_aslt_exfil::function_22b7fffd();
-  level thread kgb_aslt_exfil_escape::function_22b7fffd();
+function init_scenes() {
+  level thread namespace_e77bf565::init_scenes();
+  level thread kgb_ins_activation::init_scenes();
+  level thread kgb_ins_briefing::init_scenes();
+  level thread kgb_ins_prepare::init_scenes();
+  level thread kgb_ins_rv::init_scenes();
+  level thread kgb_aslt_entry::init_scenes();
+  level thread kgb_aslt_elev_down::init_scenes();
+  level thread kgb_aslt_bunker::init_scenes();
+  level thread kgb_aslt_vault_approach::init_scenes();
+  level thread kgb_aslt_vault_breach::init_scenes();
+  level thread kgb_aslt_vault::init_scenes();
+  level thread kgb_aslt_bunker_escape::init_scenes();
+  level thread kgb_aslt_escape_lights_out::init_scenes();
+  level thread kgb_aslt_escape_deploy_gas::init_scenes();
+  level thread kgb_aslt_exfil::init_scenes();
+  level thread kgb_aslt_exfil_escape::init_scenes();
 }
 
 function init_callbacks() {
@@ -153,7 +153,7 @@ function init_callbacks() {
 
 function function_7b24434e() {
   if(isDefined(level.skipto_current_objective) && isinarray(level.skipto_current_objective, "kgb_ins_activation") || level.skipto_current_objective.size == 0) {
-    util::function_f3cadc9a("cp_rus_kgb_player_ready");
+    util::set_player_start_flag("cp_rus_kgb_player_ready");
   }
 }
 
@@ -259,7 +259,7 @@ function armor_player_damage(einflictor, eattacker, idamage, idflags, smeansofde
   }
 
   if(isDefined(shitloc) && shitloc == "MOD_GRENADE_SPLASH") {
-    if(isDefined(var_fd90b0bb) && is_true(var_fd90b0bb.var_83323dfb)) {
+    if(isDefined(var_fd90b0bb) && is_true(var_fd90b0bb.breach_explosion)) {
       screenshake(modelindex, 0.5, 0.5, 0.5, 0.5);
       self playRumbleOnEntity("damage_heavy");
       damage = 0;
@@ -281,9 +281,9 @@ function armor_player_damage(einflictor, eattacker, idamage, idflags, smeansofde
 }
 
 function function_c235774c(var_7aefd93) {
-  var_6f805071 = getweapon(#"lmg_light_t9", "extclip2", "grip");
-  var_ec227e6e = getweapon(#"shotgun_semiauto_t9", "extclip2", "fastreload");
-  var_5ca6956f = getweapon(#"smg_standard_t9", "holo", "steadyaim", "extclip2", "quickdraw");
+  w_lmg = getweapon(#"lmg_light_t9", "extclip2", "grip");
+  w_shotgun = getweapon(#"shotgun_semiauto_t9", "extclip2", "fastreload");
+  w_smg = getweapon(#"smg_standard_t9", "holo", "steadyaim", "extclip2", "quickdraw");
   var_4f2ba130 = self getweaponslist(1);
 
   foreach(e_w in var_4f2ba130) {
@@ -291,17 +291,17 @@ function function_c235774c(var_7aefd93) {
   }
 
   if(is_true(var_7aefd93)) {
-    self giveweapon(var_6f805071);
-    self givemaxammo(var_6f805071);
-    self giveweapon(var_ec227e6e);
-    self givemaxammo(var_ec227e6e);
-    self switchtoweaponimmediate(var_6f805071, 1);
+    self giveweapon(w_lmg);
+    self givemaxammo(w_lmg);
+    self giveweapon(w_shotgun);
+    self givemaxammo(w_shotgun);
+    self switchtoweaponimmediate(w_lmg, 1);
   } else {
-    self giveweapon(var_5ca6956f);
-    self givemaxammo(var_5ca6956f);
-    self giveweapon(var_ec227e6e);
-    self givemaxammo(var_ec227e6e);
-    self switchtoweaponimmediate(var_5ca6956f, 1);
+    self giveweapon(w_smg);
+    self givemaxammo(w_smg);
+    self giveweapon(w_shotgun);
+    self givemaxammo(w_shotgun);
+    self switchtoweaponimmediate(w_smg, 1);
   }
 
   grenade = getweapon(#"frag_grenade");
@@ -341,7 +341,7 @@ function function_e876a652(var_18cf1709, var_79a934ad = 1) {
 function function_ff99024a(str_skipto, b_starting) {
   car = getEnt("escape_vehicle", "targetname");
   car delete();
-  level.adler = namespace_e77bf565::function_52fe0eb3(b_starting);
+  level.adler = namespace_e77bf565::adler_spawn(b_starting);
   waitframe(1);
   tag = spawn("script_model", level.adler.origin);
   tag setModel("tag_origin");

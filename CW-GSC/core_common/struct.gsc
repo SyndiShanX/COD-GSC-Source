@@ -6,7 +6,7 @@
 #namespace struct;
 
 function private event_handler[createstruct] function_e0a8e4ba(struct) {
-  foreach(var_c2d95ef4, k in ["targetname", "target", "scriptbundlename", "variantname", "groupname", "classname", "script_noteworthy", "linkto", "linkname", "script_linkname", "script_label", "script_string"]) {
+  foreach(__k3, k in ["targetname", "target", "scriptbundlename", "variantname", "groupname", "classname", "script_noteworthy", "linkto", "linkname", "script_linkname", "script_label", "script_string"]) {
     if(!isDefined(level.var_41204f29)) {
       level.var_41204f29 = [];
     } else if(!isarray(level.var_41204f29)) {

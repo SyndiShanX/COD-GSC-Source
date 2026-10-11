@@ -32,8 +32,8 @@ function main(str_objective, b_starting) {
   var_3f8b5025 = struct::get("s_obj_exfil", "targetname");
   objectives::goto("obj_skyhook", var_3f8b5025.origin, #"hash_1434d5e6bc8057d2");
   objectives::complete("obj_skyhook");
-  skipto::function_4e3ab877("rooftop_defend_2");
-  skipto::function_1c2dfc20("cp_ger_hub_post_cuba");
+  skipto::objective_completed("rooftop_defend_2");
+  skipto::level_completed("cp_ger_hub_post_cuba");
 }
 
 function function_5a5ce08a() {
@@ -41,6 +41,6 @@ function function_5a5ce08a() {
   hms_util::dialogue("(Spanish) There they are!", undefined, "axis", "Sandinista 01");
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   hms_util::print("<dev string:x55>");
 }

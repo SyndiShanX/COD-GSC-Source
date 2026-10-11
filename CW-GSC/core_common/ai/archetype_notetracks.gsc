@@ -165,15 +165,15 @@ function private notetrackstartragdoll(entity) {
     entity launchragdoll(entity.var_cc6f2563);
   }
 
-  var_89953da0 = entity asmgetcurrentdeltaanimation();
+  current_anim = entity asmgetcurrentdeltaanimation();
   text = "<dev string:x38>";
 
-  if(isDefined(var_89953da0) && var_89953da0 != "<dev string:x51>") {
-    text += "<dev string:x55>" + hashtostring(var_89953da0);
-    notetracks = getnotetracktimes(var_89953da0, "<dev string:x5c>");
+  if(isDefined(current_anim) && current_anim != "<dev string:x51>") {
+    text += "<dev string:x55>" + hashtostring(current_anim);
+    notetracks = getnotetracktimes(current_anim, "<dev string:x5c>");
 
     if(notetracks.size == 1) {
-      time = entity getanimtime(var_89953da0);
+      time = entity getanimtime(current_anim);
       text += "<dev string:x6d>" + notetracks[0] + "<dev string:x84>" + time;
     } else {
       text += "<dev string:x99>" + notetracks.size;

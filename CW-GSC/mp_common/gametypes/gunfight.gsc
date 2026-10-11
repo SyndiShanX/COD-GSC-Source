@@ -249,7 +249,7 @@ function setloadout(loadout) {
   self takeallweapons();
   self clearperks();
   self cleartalents();
-  self function_44244433(loadout);
+  self giveweapons(loadout);
   self loadout::function_6573eeeb();
   self setperk(#"specialty_sprint");
   self setperk(#"specialty_slide");
@@ -311,11 +311,11 @@ function ondisconnect() {
 
 function private function_8f5272b2(player) {
   if(isDefined(player.team)) {
-    globallogic_audio::play_2d_on_team(#"hash_7f0c9c0ec4410623", player.team);
+    globallogic_audio::play_2d_on_team(#"mpl_gunfight_enemy_score", player.team);
     otherteam = util::getotherteam(player.team);
 
     if(isDefined(otherteam) && otherteam != player.team) {
-      globallogic_audio::play_2d_on_team(#"hash_14b3ab2971ce1112", otherteam);
+      globallogic_audio::play_2d_on_team(#"mpl_gunfight_team_score", otherteam);
     }
   }
 }
@@ -437,7 +437,7 @@ function function_770b76d3() {
   }
 }
 
-function function_44244433(loadout) {
+function giveweapons(loadout) {
   self givetalents(loadout.talents, loadout.var_1c89585f, loadout.var_285151c1);
   primaryweaponstruct = function_d98e2783(loadout, "primary");
   primaryweapon = primaryweaponstruct.weapon;
@@ -557,7 +557,7 @@ function givetalents(talents, var_1c89585f, var_285151c1) {
 
   if(var_1c89585f === 1) {
     talents[talents.size] = {
-      #talent: #"hash_7716cb3888f5dd8a"};
+      #talent: #"talent_extraequipment"};
   }
 
   if(var_285151c1 === 1) {
@@ -654,7 +654,7 @@ function setupzones() {
       othervisuals[j] notsolid();
     }
 
-    zone.gameobject = gameobjects::create_use_object(#"neutral", zone.trig, visuals, (0, 0, 0), #"hash_56c11247a60bfd3c");
+    zone.gameobject = gameobjects::create_use_object(#"neutral", zone.trig, visuals, (0, 0, 0), #"gunfight_flag");
     zone.gameobject gameobjects::allow_use(#"group_none");
     zone.gameobject gameobjects::set_model_visibility(0, 1);
     function_18fbab10(zone.gameobject.objectiveid, #"hash_5ccb65c83273cdc9");
@@ -708,7 +708,7 @@ function overtime() {
   thread globallogic::timelimitclock();
   level.usingextratime = 1;
   level thread globallogic::updategametypedvars();
-  playSoundAtPosition(#"hash_6a5f99378f4a93c1", (0, 0, 0));
+  playSoundAtPosition(#"mpl_gunfight_time_extended", (0, 0, 0));
   music::setmusicstate("gunfight_time_extended");
 
   if(!isDefined(zone)) {

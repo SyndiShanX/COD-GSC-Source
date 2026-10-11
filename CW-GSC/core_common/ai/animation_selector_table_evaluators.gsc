@@ -511,7 +511,7 @@ function private planhumanturnanimations(entity, animations) {
     if(isDefined(var_bff64930)) {
       splittime = function_382b0cfb(var_bff64930);
       halftime = splittime * 0.5;
-      speed = animation::function_a23b2a60(var_bff64930, 0, halftime);
+      speed = animation::anim_speed(var_bff64930, 0, halftime);
 
       record3dtext("<dev string:x3e2>" + gettime() + "<dev string:x4f7>" + hashtostring(var_bff64930) + "<dev string:x50e>" + speed, entity.origin, (1, 0.5, 0), "<dev string:x38>", entity);
 

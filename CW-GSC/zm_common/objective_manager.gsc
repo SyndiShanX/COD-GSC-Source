@@ -215,7 +215,7 @@ function function_a8ad6895(destination, var_2923cf48 = 0) {
     } else if(category === #"defend_prime" || category === #"defend_alt") {
       variant = category;
       category = #"defend";
-    } else if(category === #"hash_3a562a601777fa88" || category === #"hash_716fb03a307ed1cc") {
+    } else if(category === #"holdout_alt" || category === #"holdout_prime") {
       variant = category;
       category = #"holdout";
     } else if(category === #"retrieval_alt" || category === #"retrieval_prime") {
@@ -391,7 +391,7 @@ function private function_4e8b29ac(instance) {
 
 function private function_8239a941(struct, instance, hintstring) {
   a_s_models = [];
-  a_s_models = instance.contentgroups[#"hash_310e58f653ae315d"];
+  a_s_models = instance.contentgroups[#"interact_dressing"];
 
   if(isDefined(a_s_models) && a_s_models.size > 0) {
     foreach(var_528a3a32 in a_s_models) {
@@ -404,7 +404,7 @@ function private function_8239a941(struct, instance, hintstring) {
   trigger.origin += (0, 0, 0);
   trigger.instance = instance;
   trigger.scriptmodel = scriptmodel;
-  instance.var_4272a188 = trigger;
+  instance.starttrigger = trigger;
   return trigger;
 }
 
@@ -414,7 +414,7 @@ function private function_cec3c94c(params) {
   }
 
   waittillframeend();
-  self.instance.var_4272a188 = undefined;
+  self.instance.starttrigger = undefined;
   self delete();
 }
 
@@ -494,11 +494,11 @@ function private function_654c5d3b() {
         objective_setstate(instance.var_e55c8b4e, "invisible");
       }
 
-      if(isDefined(instance.var_4272a188)) {
-        instance.var_4272a188 triggerenable(0);
+      if(isDefined(instance.starttrigger)) {
+        instance.starttrigger triggerenable(0);
 
-        if(isDefined(instance.var_4272a188.scriptmodel)) {
-          instance.var_4272a188.scriptmodel ghost();
+        if(isDefined(instance.starttrigger.scriptmodel)) {
+          instance.starttrigger.scriptmodel ghost();
         }
       }
     }
@@ -512,11 +512,11 @@ function private function_2fe379cd() {
         objective_setstate(instance.var_e55c8b4e, "active");
       }
 
-      if(isDefined(instance.var_4272a188)) {
-        instance.var_4272a188 triggerenable(1);
+      if(isDefined(instance.starttrigger)) {
+        instance.starttrigger triggerenable(1);
 
-        if(isDefined(instance.var_4272a188.scriptmodel)) {
-          instance.var_4272a188.scriptmodel show();
+        if(isDefined(instance.starttrigger.scriptmodel)) {
+          instance.starttrigger.scriptmodel show();
         }
       }
     }
@@ -527,11 +527,11 @@ function private function_fa47c63e(scriptname) {
   level endon(#"game_ended");
   level flag::wait_till(#"all_players_connected");
   script_struct = content_manager::get_script(scriptname);
-  var_5fc990bf = isDefined(script_struct.var_b4fae213) ? script_struct.var_b4fae213 : 0;
+  objectivenum = isDefined(script_struct.var_b4fae213) ? script_struct.var_b4fae213 : 0;
   players = getPlayers();
 
   foreach(player in players) {
-    player luinotifyevent(#"hash_5159e35a62fb7083", 3, 0, var_5fc990bf, level.var_b48509f9);
+    player luinotifyevent(#"hash_5159e35a62fb7083", 3, 0, objectivenum, level.star_rating);
   }
 }
 
@@ -588,7 +588,7 @@ function function_bdeca498(params) {
 }
 
 function function_d3b93d12(n_seconds, str_label = #"", var_7ae7852d) {
-  level endoncallback(&function_c30c5e91, #"game_ended", #"timer_stop", "timer_" + str_label);
+  level endoncallback(&timer_update_thread_ended, #"game_ended", #"timer_stop", "timer_" + str_label);
   level.var_2ca7afd8 = n_seconds;
   level.var_74d92ff6 = 0;
 
@@ -598,7 +598,7 @@ function function_d3b93d12(n_seconds, str_label = #"", var_7ae7852d) {
 
   while(level.var_74d92ff6 < n_seconds) {
     if(var_7ae7852d) {
-      str_alias = #"hash_aae61b4002c2d97";
+      str_alias = #"uin_zombies_countdown_timer_tick";
 
       if(level.var_2ca7afd8 - level.var_74d92ff6 <= 10) {
         str_alias = #"hash_1d660b56dca8c84";
@@ -612,7 +612,7 @@ function function_d3b93d12(n_seconds, str_label = #"", var_7ae7852d) {
   }
 }
 
-function function_c30c5e91(str_notify) {
+function timer_update_thread_ended(str_notify) {
   level.var_2ca7afd8 = undefined;
   level.var_74d92ff6 = undefined;
 
@@ -647,7 +647,7 @@ function stop_timer() {
     player clientfield::set_to_player("sr_defend_timer", 0);
   }
 
-  level notify(#"hash_5a7f014b541eb7a6");
+  level notify(#"objective_timer_reset");
   level notify(#"timer_stop");
 }
 
@@ -668,10 +668,10 @@ function function_9d4e6125(scriptname) {
   wait 5;
   level endon(#"game_ended");
   level flag::wait_till(#"all_players_connected");
-  var_5fc990bf = 0;
+  objectivenum = 0;
 
   if(isDefined(scriptname)) {
-    var_5fc990bf = function_ae039b4(scriptname);
+    objectivenum = function_ae039b4(scriptname);
   } else {
     return;
   }
@@ -679,14 +679,14 @@ function function_9d4e6125(scriptname) {
   players = getPlayers();
 
   foreach(player in players) {
-    player luinotifyevent(#"hash_5159e35a62fb7083", 3, 2, var_5fc990bf, level.var_b48509f9);
+    player luinotifyevent(#"hash_5159e35a62fb7083", 3, 2, objectivenum, level.star_rating);
   }
 }
 
 function function_ae039b4(objective) {
   script_struct = content_manager::get_script(objective);
-  var_5fc990bf = isDefined(script_struct.var_b4fae213) ? script_struct.var_b4fae213 : 0;
-  return var_5fc990bf;
+  objectivenum = isDefined(script_struct.var_b4fae213) ? script_struct.var_b4fae213 : 0;
+  return objectivenum;
 }
 
 function function_2f9d355c() {
@@ -785,19 +785,19 @@ function function_67b313bb() {
   a_str_colors = array((1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 0), (1, 0.5, 0), (0, 1, 1), (1, 0, 1), (0.439216, 0.501961, 0.564706), (0, 0, 0), (0.501961, 0.501961, 0), (0.545098, 0.270588, 0.0745098));
 
   while(true) {
-    foreach(index, var_83aaaa47 in var_b49d430f) {
+    foreach(index, str_objective_type in var_b49d430f) {
       v_color = a_str_colors[index];
-      var_2cd4e005 = struct::get_array(var_83aaaa47, "<dev string:x381>");
+      var_2cd4e005 = struct::get_array(str_objective_type, "<dev string:x381>");
 
       foreach(s_objective in var_2cd4e005) {
-        print3d(s_objective.origin, "<dev string:x398>" + var_83aaaa47 + "<dev string:x3a9>" + (isDefined(s_objective.targetname) ? s_objective.targetname : "<dev string:x3ba>"), (1, 1, 0), undefined, 1);
+        print3d(s_objective.origin, "<dev string:x398>" + str_objective_type + "<dev string:x3a9>" + (isDefined(s_objective.targetname) ? s_objective.targetname : "<dev string:x3ba>"), (1, 1, 0), undefined, 1);
         n_distance = distance(getPlayers()[0].origin, s_objective.origin);
         var_5d97a083 = 150 * n_distance * 0.0001;
         var_5d97a083 = max(150 / 1.5, var_5d97a083);
         sphere(s_objective.origin, var_5d97a083, v_color);
       }
 
-      debug2dtext((100, 500 + 25 * index, 0), var_83aaaa47 + "<dev string:x3cd>" + var_2cd4e005.size + "<dev string:x3d2>", v_color, undefined, undefined, undefined, 1.5);
+      debug2dtext((100, 500 + 25 * index, 0), str_objective_type + "<dev string:x3cd>" + var_2cd4e005.size + "<dev string:x3d2>", v_color, undefined, undefined, undefined, 1.5);
     }
 
     waitframe(1);
@@ -819,19 +819,19 @@ function function_7a7ab1a2(params) {
   switch (tokens[0]) {
     case #"hash_f6faed38fbaaaa5":
       level.var_cf558bf++;
-      zm_utility_zsurvival::function_7c97e961(level.var_b48509f9 + 1);
+      zm_utility_zsurvival::function_7c97e961(level.star_rating + 1);
 
       foreach(player in getPlayers()) {
-        player luinotifyevent(#"hash_5b1ff06d07e9002a", 3, 2, level.var_b48509f9, 0);
+        player luinotifyevent(#"hash_5b1ff06d07e9002a", 3, 2, level.star_rating, 0);
       }
 
       break;
     case #"hash_7c2f98129d7c2219":
       level.var_cf558bf--;
-      zm_utility_zsurvival::function_7c97e961(level.var_b48509f9 - 1);
+      zm_utility_zsurvival::function_7c97e961(level.star_rating - 1);
 
       foreach(player in getPlayers()) {
-        player luinotifyevent(#"hash_5b1ff06d07e9002a", 3, 2, level.var_b48509f9, 0);
+        player luinotifyevent(#"hash_5b1ff06d07e9002a", 3, 2, level.star_rating, 0);
       }
 
       break;
@@ -908,18 +908,18 @@ function private function_3a388f32() {
       if(isDefined(s_instance.var_d5b937da)) {
         var_e0c65bee = strtok(s_instance.var_d5b937da, "<dev string:x497>");
 
-        foreach(var_f78a0aff in var_e0c65bee) {
-          if(var_f78a0aff === 1) {
+        foreach(str_safehouse in var_e0c65bee) {
+          if(str_safehouse === 1) {
             var_c147464d++;
             continue;
           }
 
-          if(var_f78a0aff === 2) {
+          if(str_safehouse === 2) {
             var_9c4efc51++;
             continue;
           }
 
-          if(var_f78a0aff === 3) {
+          if(str_safehouse === 3) {
             var_869cd0ed++;
             continue;
           }

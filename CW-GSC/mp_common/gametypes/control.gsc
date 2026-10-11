@@ -1224,7 +1224,7 @@ function private on_zone_capture(sentient) {
 
   if(isPlayer(sentient)) {
     sentient recordgameevent("hardpoint_captured");
-    level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+    level thread telemetry::function_18135b72(#"callback_on_game_event", {
       #player: sentient, #eventtype: #"hardpoint_captured"});
     bb::function_95a5b5c2("exited_control_point_captured", self.zoneindex, sentient.team, sentient.origin, sentient);
     self notify(#"hash_68e3332f714afbbc");
@@ -1335,7 +1335,7 @@ function private on_zone_capture_neutral(sentient) {
 
   if(isPlayer(sentient)) {
     sentient recordgameevent("hardpoint_captured");
-    level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+    level thread telemetry::function_18135b72(#"callback_on_game_event", {
       #player: sentient, #eventtype: #"hardpoint_captured"});
   }
 
@@ -1415,7 +1415,7 @@ function private credit_player(player, string, capturetime, capture_team, lastca
     scoreevents::processscoreevent(#"war_captured_zone", string, undefined, undefined);
     string contracts::increment_contract(#"hash_afec1ad46ac353");
     string recordgameevent("capture");
-    level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+    level thread telemetry::function_18135b72(#"callback_on_game_event", {
       #player: string, #eventtype: #"capture"});
 
     if(var_a84f97bf) {
@@ -1725,17 +1725,17 @@ function private update_team_client_field() {
     flags = 0;
 
     if(is_true(level.neutralzone)) {
-      if(!gameobj gameobjects::function_350d0352() || !isDefined(level.teamindex[gameobj.var_a4926509])) {
+      if(!gameobj gameobjects::function_350d0352() || !isDefined(level.teamindex[gameobj.claimant])) {
         flags = 0;
       } else {
-        flags = level.teamindex[gameobj.var_a4926509];
+        flags = level.teamindex[gameobj.claimant];
       }
     } else if(is_zone_contested(gameobj)) {
       state = 3;
-    } else if(!gameobj gameobjects::function_350d0352() && gameobj gameobjects::get_num_touching(gameobj.var_a4926509) > 0) {
-      if(gameobj.var_a4926509 == game.attackers) {
+    } else if(!gameobj gameobjects::function_350d0352() && gameobj gameobjects::get_num_touching(gameobj.claimant) > 0) {
+      if(gameobj.claimant == game.attackers) {
         state = 2;
-        flags = level.teamindex[gameobj.var_a4926509];
+        flags = level.teamindex[gameobj.claimant];
       } else {
         state = 1;
       }
@@ -1885,11 +1885,11 @@ function on_use_update(team, progress, change) {
 
     foreach(player in players) {
       if(player.team == game.attackers) {
-        player playsoundtoplayer(#"hash_3cca41b3702f764a", player);
+        player playsoundtoplayer(#"mpl_control_capture_start_friendly", player);
         continue;
       }
 
-      player playsoundtoplayer(#"hash_2bb2a0ec776ba8f7", player);
+      player playsoundtoplayer(#"mpl_control_capture_start_enemy", player);
     }
   } else if(change == 0 && !self.currentlyunoccupied) {
     level.numzonesoccupied--;
@@ -2263,7 +2263,7 @@ function function_15cbf89(gameobject) {
     currentprogress = gameobject.curprogress;
     var_f802a6b1 = gameobject.usetime;
     currentpercentage = currentprogress / var_f802a6b1;
-    var_5b37f77b = gameobject.var_a4926509;
+    var_5b37f77b = gameobject.claimant;
     iscontested = isDefined(gameobject.contested) ? gameobject.contested : 0;
 
     if(iscontested) {

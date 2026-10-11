@@ -31,10 +31,10 @@ function main() {
 function function_5529395e() {
   self notify("21a1deafb5f08486");
   self endon("21a1deafb5f08486");
-  self thread namespace_268747c0::function_978c05b5();
+  self thread doa_hazard::function_978c05b5();
   result = self waittill(#"destroy_hazard");
 
-  if(is_true(self.var_7c56394) && is_true(result.var_760a0807)) {
+  if(is_true(self.paged) && is_true(result.var_760a0807)) {
     arrayremovevalue(level.doa.var_17228d33, self);
     namespace_1e25ad94::debugmsg("Deleting physics box trap permenently at:" + self.origin);
   }
@@ -42,7 +42,7 @@ function function_5529395e() {
   util::wait_network_frame();
 
   if(isDefined(self.trigger)) {
-    self.trigger namespace_268747c0::function_54f185a();
+    self.trigger doa_hazard::function_54f185a();
     self.trigger = undefined;
   }
 
@@ -52,7 +52,7 @@ function function_5529395e() {
   }
 }
 
-function function_8b014c60(trap, var_7c56394 = 0) {
+function function_8b014c60(trap, paged = 0) {
   assert(isDefined(trap.script_parameters), "<dev string:x38>");
   args = strtok(trap.script_parameters, ";");
   trap.var_b7a27a3a = 0;
@@ -79,7 +79,7 @@ function function_8b014c60(trap, var_7c56394 = 0) {
     trap.script_model.var_fd5301f9 = "physicsbox";
   }
 
-  trap.var_7c56394 = var_7c56394;
+  trap.paged = paged;
   trap thread function_d74e40c3();
   return trap;
 }
@@ -199,7 +199,7 @@ function function_d74e40c3() {
     waitframe(1);
 
     if(!isDefined(self.trigger)) {
-      self.trigger = self namespace_268747c0::function_678eaf60("physicsbox", self.origin, 256, 1, 128);
+      self.trigger = self doa_hazard::function_678eaf60("physicsbox", self.origin, 256, 1, 128);
       self.trigger.origin += (0, 0, self.var_b7a27a3a);
       self.trigger triggerenable(1);
       continue;
@@ -227,7 +227,7 @@ function function_d74e40c3() {
             guy setvelocity(localvelocity);
 
             if(namespace_4dae815d::function_59a9cf1d() != 0) {
-              guy thread namespace_7f5aeb59::function_a74228bc();
+              guy thread doa_player_utility::function_a74228bc();
             }
 
             guy namespace_e32bb68::function_3a59ec34("evt_doa_springboard");
@@ -249,7 +249,7 @@ function function_d74e40c3() {
             continue;
           }
 
-          if(!is_true(guy.var_e66cd6fb)) {
+          if(!is_true(guy.no_ragdoll)) {
             guy.launched = 1;
             guy thread namespace_ec06fe4a::function_b4ff2191(self.velocityvector, 180, 0.3);
             guy namespace_e32bb68::function_3a59ec34("zmb_ragdoll_launched");

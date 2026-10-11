@@ -231,9 +231,9 @@ class class_c4926dee {
       }
 
       if(isPlayer(shitloc)) {
-        shitloc namespace_eccff4fb::enemykill(undefined, 2500);
+        shitloc doa_score::enemykill(undefined, 2500);
         xp = [[generator]] - > isactive() ? getdvarint(#"hash_68999e371537612e", 350) : getdvarint(#"hash_1a9633163aac4fab", 100);
-        namespace_7f5aeb59::function_f8645db3(xp);
+        doa_player_utility::function_f8645db3(xp);
         level.doa.var_148272df++;
       }
 
@@ -247,7 +247,7 @@ class class_c4926dee {
 
       doa_enemy::function_f7086924(self);
 
-      foreach(ai in [[generator]] - > function_4d5eefc7()) {
+      foreach(ai in [[generator]] - > getai()) {
         if(!isDefined(ai)) {
           continue;
         }
@@ -266,7 +266,7 @@ class class_c4926dee {
       points = int(psoffsettime / 25) * 25;
       points >>= 2;
       points = int(points / 25) * 25;
-      shitloc namespace_eccff4fb::enemykill(undefined, points);
+      shitloc doa_score::enemykill(undefined, points);
     }
 
     return psoffsettime;
@@ -351,12 +351,12 @@ class class_c4926dee {
       m_active &= function_d8b78bb3();
 
       if(last && !m_active) {
-        m_model namespace_83eb6304::turnofffx(function_45ee8bad());
+        m_model doa_fx::turnofffx(function_45ee8bad());
         m_model clientfield::set("show_health_bar", 0);
         m_model namespace_c85a46fe::function_a5c8be46();
         doa_enemy::function_f7086924(m_model);
       } else if(!last && m_active) {
-        m_model namespace_83eb6304::function_3ecfde67(function_45ee8bad());
+        m_model doa_fx::function_3ecfde67(function_45ee8bad());
         m_model clientfield::set("show_health_bar", 1);
         m_model namespace_c85a46fe::showonradar();
 
@@ -378,7 +378,7 @@ class class_c4926dee {
     return var_1d308eec;
   }
 
-  function function_4d5eefc7(ai) {
+  function getai(ai) {
     return var_71c23335;
   }
 
@@ -523,7 +523,7 @@ class class_c4926dee {
         }
 
         if(isDefined(model) && isDefined(spawnfx)) {
-          model namespace_83eb6304::function_3ecfde67(spawnfx);
+          model doa_fx::function_3ecfde67(spawnfx);
 
           if(isDefined(var_36ca64f1)) {
             model namespace_e32bb68::function_3a59ec34(var_36ca64f1);
@@ -532,14 +532,14 @@ class class_c4926dee {
           wait[[generator]] - > function_bf5fc68();
 
           if(isDefined(model)) {
-            model namespace_83eb6304::turnofffx(spawnfx);
+            model doa_fx::turnofffx(spawnfx);
           }
         }
 
         doa_enemy::function_a6b807ea(spawndef, 1, origin, 0, generator);
 
         if(getdvarint(#"hash_14f8549e0645635d", 0)) {
-          level thread namespace_1e25ad94::function_1d1f2c26(origin, var_6d14cf9d, 12, (1, 0, 0));
+          level thread namespace_1e25ad94::debugpoint(origin, var_6d14cf9d, 12, (1, 0, 0));
         }
 
         wait var_6d14cf9d;
@@ -665,7 +665,7 @@ class class_c4926dee {
     return isactive();
   }
 
-  function function_f4238fe4() {
+  function getcontext() {
     return m_context;
   }
 }
@@ -700,7 +700,7 @@ function init() {
 }
 
 function function_40ec656b(model, var_3ac6a87b, var_c4a370ce) {
-  model namespace_83eb6304::function_3ecfde67(var_3ac6a87b);
+  model doa_fx::function_3ecfde67(var_3ac6a87b);
 
   if(namespace_ec06fe4a::function_a8975c67() && isDefined(var_c4a370ce) && validateorigin(model.origin)) {
     playSoundAtPosition(var_c4a370ce, model.origin);
@@ -750,7 +750,7 @@ function function_5db81c1c() {
 
 function function_782e605e(name) {
   generators = struct::get_array(name + "_doa_generator", "targetname");
-  var_d613e783 = (getPlayers().size - 1) * 10;
+  handicap = (getPlayers().size - 1) * 10;
 
   foreach(item in generators) {
     var_9b3d6734 = 100;
@@ -772,7 +772,7 @@ function function_782e605e(name) {
       }
     }
 
-    var_9b3d6734 += var_d613e783;
+    var_9b3d6734 += handicap;
 
     if(var_9b3d6734 < 100 && randomint(100) > var_9b3d6734) {
       continue;
@@ -799,7 +799,7 @@ function function_edfcfa44(context = 0) {
     var_29287f31 = [];
 
     foreach(generator in level.doa.var_8acd67ef) {
-      if(context == [[generator]] - > function_f4238fe4()) {
+      if(context == [[generator]] - > getcontext()) {
         var_29287f31[var_29287f31.size] = generator;
       }
     }

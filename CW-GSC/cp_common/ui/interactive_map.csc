@@ -69,8 +69,8 @@ function private function_f4804ac(localclientnum) {
         cursor_delta = function_6593be12(localclientnum);
         cursor_pos += cursor_delta;
         var_ecec29b6 = math::clamp(cursor_pos[0], 0, var_5068885e[0] - var_498c84ce);
-        var_9031f03b = math::clamp(cursor_pos[1], 0, var_5068885e[1] - var_860de4e5);
-        cursor_pos = (var_ecec29b6, var_9031f03b, 0);
+        cursory = math::clamp(cursor_pos[1], 0, var_5068885e[1] - var_860de4e5);
+        cursor_pos = (var_ecec29b6, cursory, 0);
       }
 
       var_bc1b26be = (cursor_pos[0] - left) / width;

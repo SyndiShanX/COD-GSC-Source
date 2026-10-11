@@ -64,15 +64,15 @@ function main(str_objective, b_starting) {
   level thread rice_paddies(str_objective);
   level flag::wait_till(var_c79d614f + "_complete");
   savegame::function_379f84b3();
-  skipto::function_4e3ab877(str_objective);
+  skipto::objective_completed(str_objective);
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   intro_anim_trees = getEntArray("intro_anim_trees", "targetname");
   array::thread_all(intro_anim_trees, &namespace_d9b153b9::ent_cleanup);
 }
 
-function function_c26b0bc0() {
+function flags_init() {
   level flag::init("player_intro_anim_done");
   level flag::init("rice_paddies_weapon_one");
   level flag::init("rice_paddies_weapon_two");
@@ -413,10 +413,10 @@ function function_96e425c7(struct_targetname) {
 
 function function_cc5291ff(a_ents) {
   level.var_c90d21e1 = a_ents[#"rice_paddies_intro_heli"];
-  level.var_6c3ab26f = a_ents[#"hash_49b1db5963fdcbf5"];
+  level.var_6c3ab26f = a_ents[#"wounded_guy"];
   level.var_b517b599 = a_ents[#"hash_32bf1e4d7ae150d1"];
   level.var_ebf4a352 = a_ents[#"hash_32bf1b4d7ae14bb8"];
-  level.var_b918d422 = a_ents[#"hash_68b1bc1b32394e13"];
+  level.var_b918d422 = a_ents[#"dead_guy"];
   level.var_2d5aba86 = a_ents[#"hash_3a4fbd4603e2ae1d"];
   level.var_80c622e = a_ents[#"hash_3be12fabbc392116"];
   level.var_e2e84654 = a_ents[#"dguy"];
@@ -684,7 +684,7 @@ function function_559733b4(var_c79d614f) {
 }
 
 function function_a8a33b69() {
-  level battlechatter::function_2ab9360b(0);
+  level battlechatter::bc_allow(0);
 }
 
 function function_61ff6bfe(a_enemies) {
@@ -921,7 +921,7 @@ function function_e3d37fd6() {
   level flag::delay_set(5, "rice_paddies_v1_initial_wave_part_2");
   rice_paddies_v1_sb1 = smart_bundle::function_6c12ff6("rice_paddies_v1_sb1");
   level thread function_e041c214(rice_paddies_v1_sb1);
-  level thread function_95d06832(rice_paddies_v1_sb1, 3);
+  level thread thin_the_herd(rice_paddies_v1_sb1, 3);
   level thread rice_paddies_enemies_dead(rice_paddies_v1_sb1);
   rice_paddies_v1_sb1 thread smart_bundle::function_f059be95("rice_paddies_one_enemy_dead", 1);
   rice_paddies_v1_sb1 thread smart_bundle::function_f059be95("rice_paddies_v1_wave_1", 2);
@@ -1004,12 +1004,12 @@ function function_1a0d3f6(var_b2a24c22, var_dcd97b9c, num_to_spawn) {
   }
 }
 
-function function_95d06832(smart_bundle, var_44dcf448) {
+function thin_the_herd(smart_bundle, num_left) {
   level endon(#"visit_restart");
   level endon(#"start_outro");
 
   if(isDefined(smart_bundle) && isDefined(smart_bundle.var_f0a4c650)) {
-    var_268d3aa4 = smart_bundle.var_f0a4c650.size - var_44dcf448;
+    var_268d3aa4 = smart_bundle.var_f0a4c650.size - num_left;
     smart_bundle smart_bundle::function_f029622c(var_268d3aa4);
     ai_array = smart_bundle smart_bundle::function_44cbaa85();
 
@@ -1062,14 +1062,14 @@ function function_4071af21() {
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "rice_paddies_ally_4") {
     level flag::wait_till("rice_paddies_allies_move_up_1");
-    self thread function_2a48fb2d(5);
+    self thread kill_in_time(5);
     return;
   }
 
   level flag::wait_till_any(array("rice_paddies_v1_wave_1", "flag_rice_paddies_enemies_retreat_1"));
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "rice_paddies_ally_3") {
-    self thread function_2a48fb2d(10);
+    self thread kill_in_time(10);
     return;
   }
 
@@ -1086,13 +1086,13 @@ function function_4071af21() {
   }
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == level.var_e5b7895f) {
-    self thread function_2a48fb2d(10);
+    self thread kill_in_time(10);
   }
 
   level flag::wait_till_any(array("rice_paddies_v1_wave_4", "flag_rice_paddies_enemies_retreat_4"));
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == level.var_aa567810) {
-    self thread function_2a48fb2d(5);
+    self thread kill_in_time(5);
   }
 }
 
@@ -1147,7 +1147,7 @@ function function_d3cfa58d() {
   self.health = 1;
 }
 
-function function_2a48fb2d(time_to_wait) {
+function kill_in_time(time_to_wait) {
   self endon(#"death");
   level.player endon(#"death");
 
@@ -1263,7 +1263,7 @@ function function_e041c214(smart_bundle) {
     level thread util::delay(6, "flag_rice_paddies_enemies_retreat_1", &function_95246a18, smart_bundle, var_a4c09f1, var_61bbe946, "flag_rice_paddies_enemies_retreat_1");
     level thread util::delay(6, "flag_rice_paddies_enemies_retreat_2", &function_95246a18, smart_bundle, var_61bbe946, var_2af845e, "flag_rice_paddies_enemies_retreat_2");
     level thread util::delay(6, "flag_rice_paddies_enemies_retreat_3", &function_95246a18, smart_bundle, var_2af845e, var_6cc537cb, "flag_rice_paddies_enemies_retreat_3");
-    level thread function_d79447e6(smart_bundle);
+    level thread final_retreat(smart_bundle);
     level endon(#"rice_paddies_final_retreat");
   }
 
@@ -1312,7 +1312,7 @@ function function_2e55ad19(smart_bundle) {
   }
 }
 
-function function_d79447e6(smart_bundle) {
+function final_retreat(smart_bundle) {
   level endon(#"visit_restart");
   level endon(#"start_outro");
   level flag::wait_till("rice_paddies_v1_wave_4");
@@ -1601,7 +1601,7 @@ function rice_paddies_visit_2_nosight_noclip(var_c79d614f) {
 
 function function_385cd8e0() {
   self endon(#"death");
-  self battlechatter::function_2ab9360b(0);
+  self battlechatter::bc_allow(0);
 
   if(!isDefined(level.var_6725979c)) {
     level.var_6725979c = [];
@@ -1622,7 +1622,7 @@ function function_385cd8e0() {
   }
 
   level flag::wait_till("rice_paddies_stealth_fail");
-  self battlechatter::function_2ab9360b(1);
+  self battlechatter::bc_allow(1);
 }
 
 function function_10eb2478() {}

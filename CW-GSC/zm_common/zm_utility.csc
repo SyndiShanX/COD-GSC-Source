@@ -347,7 +347,7 @@ function zm_zone_out_of_bounds(localclientnum, oldval, newval, bnewent, binitial
   }
 
   if(bwastimejump) {
-    level.var_20861007[fieldname] playLoopSound(#"hash_6da7ae12f538ef5e", 0.5);
+    level.var_20861007[fieldname] playLoopSound(#"zmb_rush_out_of_bounds", 0.5);
     self postfx::playpostfxbundle(#"hash_798237aa1bad3d7d");
     return;
   }
@@ -478,18 +478,18 @@ function function_a1290dca(localclientnum, str_objective, n_range = 1500) {
   wait 0.016 * (level.var_cef2e607[#"hash_2aeea3ff25adc082"] % int(0.5 / 0.016) + 1);
 
   while(true) {
-    var_30300360 = 0;
+    b_player_nearby = 0;
     player = function_5c10bd79(localclientnum);
 
     if(isDefined(player) && function_9023da2d(player, self, n_range)) {
-      var_30300360 = 1;
+      b_player_nearby = 1;
     }
 
-    if(var_30300360 && !isDefined(self.n_obj_id)) {
+    if(b_player_nearby && !isDefined(self.n_obj_id)) {
       self.n_obj_id = util::getnextobjid(localclientnum);
       objective_add(localclientnum, self.n_obj_id, "active", str_objective, self.origin);
       objective_onentity(localclientnum, self.n_obj_id, self, 0, 1, 0);
-    } else if(!var_30300360 && isDefined(self.n_obj_id)) {
+    } else if(!b_player_nearby && isDefined(self.n_obj_id)) {
       util::releaseobjid(localclientnum, self.n_obj_id);
       objective_delete(localclientnum, self.n_obj_id);
       self.n_obj_id = undefined;
@@ -638,15 +638,15 @@ function function_725e99fb(localclientnum) {
         continue;
       }
 
-      var_30300360 = 0;
+      b_player_nearby = 0;
       player = function_5c10bd79(localclientnum);
 
       if(isDefined(player) && function_7757350c(player, machine)) {
-        var_30300360 = 1;
+        b_player_nearby = 1;
       }
 
       if(isDefined(machine)) {
-        if(var_30300360 && !is_true(machine.var_c02c4d66)) {
+        if(b_player_nearby && !is_true(machine.var_c02c4d66)) {
           util::lock_model(machine.model);
           machine.var_c02c4d66 = 1;
 
@@ -655,7 +655,7 @@ function function_725e99fb(localclientnum) {
               util::lock_model(var_61794186);
             }
           }
-        } else if(!var_30300360 && is_true(machine.var_c02c4d66)) {
+        } else if(!b_player_nearby && is_true(machine.var_c02c4d66)) {
           util::unlock_model(machine.model);
           machine.var_c02c4d66 = undefined;
 
@@ -675,24 +675,24 @@ function function_725e99fb(localclientnum) {
 }
 
 function function_7757350c(player, machine) {
-  var_2cdb84bb = machine function_2cfe56d8();
+  v_midpoint = machine get_midpoint();
   v_eye = player getEye();
-  n_height_diff = abs(v_eye[2] - var_2cdb84bb[2]);
+  n_height_diff = abs(v_eye[2] - v_midpoint[2]);
 
-  if(n_height_diff < 140 && distance2dsquared(v_eye, var_2cdb84bb) < 360000) {
+  if(n_height_diff < 140 && distance2dsquared(v_eye, v_midpoint) < 360000) {
     return true;
   }
 
-  if(util::within_fov(v_eye, player.angles, var_2cdb84bb, 0.75) && bullettracepassed(v_eye, var_2cdb84bb, 0, machine, player)) {
+  if(util::within_fov(v_eye, player.angles, v_midpoint, 0.75) && bullettracepassed(v_eye, v_midpoint, 0, machine, player)) {
     return true;
   }
 
   return false;
 }
 
-function private function_2cfe56d8() {
-  var_2cdb84bb = self.origin + (0, 0, 24) + anglesToForward(self.angles) * 24;
-  return var_2cdb84bb;
+function private get_midpoint() {
+  v_midpoint = self.origin + (0, 0, 24) + anglesToForward(self.angles) * 24;
+  return v_midpoint;
 }
 
 function function_3a919d3f(params) {
@@ -715,17 +715,17 @@ function private function_538799c4() {
 
       foreach(e_machine in level.var_c427e93b) {
         if(isDefined(e_machine)) {
-          var_2cdb84bb = e_machine function_2cfe56d8();
+          v_midpoint = e_machine get_midpoint();
           i++;
 
           if(is_true(e_machine.var_c02c4d66)) {
             debug2dtext((325, 200, 0) + (0, 20, 0) * (i + 1), hashtostring(e_machine.model), (0, 1, 0));
-            circle(var_2cdb84bb, 64, (0, 1, 0));
+            circle(v_midpoint, 64, (0, 1, 0));
             continue;
           }
 
           debug2dtext((325, 200, 0) + (0, 20, 0) * (i + 1), hashtostring(e_machine.model), (1, 0, 0));
-          circle(var_2cdb84bb, 64, (1, 0, 0));
+          circle(v_midpoint, 64, (1, 0, 0));
         }
       }
     }

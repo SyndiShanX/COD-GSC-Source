@@ -33,9 +33,9 @@
 
 function function_ef6de0f0() {
   function_771e686b();
-  level dialogue::function_96171f6d("vox_cp_rkgb_01000_adlr_andonemorething_89");
+  level dialogue::player_say("vox_cp_rkgb_01000_adlr_andonemorething_89");
   wait 0.7;
-  level dialogue::function_96171f6d("vox_cp_rkgb_01000_adlr_heknowstoomucha_c9");
+  level dialogue::player_say("vox_cp_rkgb_01000_adlr_heknowstoomucha_c9");
   var_6ac302b4 = dialog_tree::new_tree(undefined, undefined, 1, 1);
   var_6ac302b4 dialog_tree::add_option(#"hash_32b4eefcf1a1af51", undefined, undefined, undefined, 1, undefined, undefined, &kgb_ins_activation::function_3d2a48a7, "vox_cp_rkgb_01000_adlr_goodmannowiknow_b0");
   var_6ac302b4 dialog_tree::add_option(#"hash_32b4edfcf1a1ad9e", undefined, undefined, undefined, 1, undefined, undefined, &kgb_ins_activation::function_3d2a48a7, "vox_cp_rkgb_01000_adlr_understood_55");
@@ -69,10 +69,10 @@ function function_9b596d4d() {
   level.var_a21e79c9 = getEnt("vol_recruitmentoffice", "targetname");
 
   if(!function_11b2b847()) {
-    var_9dce83fe = getEnt("sm_informant_file_model", "targetname");
+    folder = getEnt("sm_informant_file_model", "targetname");
 
-    if(isDefined(var_9dce83fe)) {
-      var_9dce83fe delete();
+    if(isDefined(folder)) {
+      folder delete();
     }
 
     if(isDefined(level.var_a21e79c9)) {
@@ -112,9 +112,9 @@ function function_b7d0119e() {
   waitframe(1);
 
   if(level flag::get("flag_keycard_acquired")) {
-    level dialogue::function_96171f6d("vox_cp_rkgb_01650_blkv_thattakescareof_b8");
+    level dialogue::player_say("vox_cp_rkgb_01650_blkv_thattakescareof_b8");
   } else {
-    level dialogue::function_96171f6d("vox_cp_rkgb_01650_blkv_adlerwillbeplea_e6");
+    level dialogue::player_say("vox_cp_rkgb_01650_blkv_adlerwillbeplea_e6");
   }
 
   while(true) {
@@ -128,7 +128,7 @@ function function_b7d0119e() {
   }
 
   level thread savegame::checkpoint_save(1);
-  level dialogue::function_96171f6d("vox_cp_rkgb_01650_blkv_itisnoteasybein_9a");
+  level dialogue::player_say("vox_cp_rkgb_01650_blkv_itisnoteasybein_9a");
 }
 
 function function_429cb29f() {
@@ -136,7 +136,7 @@ function function_429cb29f() {
   self setteam("axis");
   self thread function_72472b59();
   self thread function_7fb0c444();
-  self battlechatter::function_2ab9360b(0);
+  self battlechatter::bc_allow(0);
   level thread scene::play("scene_kgb_office_informant");
   self namespace_979752dc::function_2324f175(0);
   self.threatsight = 0;
@@ -149,10 +149,10 @@ function function_429cb29f() {
   self.var_4f8ed4b2 = #"hash_6a4c1594be34b79f";
   self.var_59212ad0 = "td_scene_nonlethal_behind_b_informant";
   self.var_f535b314 = #"hash_6a4c1594be34b79f";
-  self.var_1f1bd6ed = chair.origin;
-  self.var_598a8a9 = chair.angles;
-  self.var_caa295ea = 0;
-  self.var_7b026ceb = 48;
+  self.takedown_origin = chair.origin;
+  self.takedown_angles = chair.angles;
+  self.takedown_ragdoll = 0;
+  self.takedown_range = 48;
   self thread kgb_ins_prepare::function_6f070100();
   self function_3d5afd29();
   level flag::wait_till("flag_player_swap");
@@ -169,7 +169,7 @@ function function_5f368d67(event) {
 
   if(!level flag::get_any(level.var_dae73e42) && level flag::get("player_doing_stealth_action")) {
     self.spotted = 1;
-    level.var_f695d653 = kgb_ins_prepare::function_37c2fed8();
+    level.fail_reason = kgb_ins_prepare::function_37c2fed8();
     level flag::set("kgb_fail_mission");
     level flag::set("stealth_spotted");
     self namespace_979752dc::function_2324f175(0);
@@ -265,7 +265,7 @@ function function_acea38c0(prompt_struct) {
   level.player notifyonplayercommandremove("show_itin", "+actionslot 4");
   level.player note_display::function_97c69304(#"hash_5ca93292f4e979ef");
   namespace_353d803e::function_28897188();
-  level.player namespace_61e6d095::function_b0bad5ff(undefined, undefined, 1);
+  level.player scripted_widgets::function_b0bad5ff(undefined, undefined, 1);
   hint_tutorial::function_9f427d88(0);
   level.player notifyonplayercommand("show_itin", "+actionslot 4");
   level.player val::reset(#"hash_2463ab97c65a943c", "freezecontrols");
@@ -284,10 +284,10 @@ function function_11b2b847() {
 }
 
 function function_aa622b93() {
-  var_9dce83fe = getEnt("sm_informant_file_model", "targetname");
+  folder = getEnt("sm_informant_file_model", "targetname");
 
-  if(isDefined(var_9dce83fe)) {
-    var_9dce83fe delete();
+  if(isDefined(folder)) {
+    folder delete();
   }
 
   chair = getEnt("informant_chair", "targetname");

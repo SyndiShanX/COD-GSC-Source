@@ -65,21 +65,21 @@ function function_fbc17248() {
   snd::play("evt_church_door_open", self);
 }
 
-function wait_for_death(var_bc2b55eb) {
+function wait_for_death(s_name) {
   self endon(#"death");
-  self waittill(var_bc2b55eb + "_die");
+  self waittill(s_name + "_die");
   self animation::stop();
   self kill();
 }
 
 function function_c68fb2ec() {
-  var_13fa77c6 = getEnt("pillar_rpg_collapse_clip", "targetname");
+  clp = getEnt("pillar_rpg_collapse_clip", "targetname");
   wait 2.3;
   level scene::play("p9_fxanim_gp_pillar_rpg_collapse_scene", "play");
   wait 1;
 
-  if(isDefined(var_13fa77c6)) {
-    var_13fa77c6 delete();
+  if(isDefined(clp)) {
+    clp delete();
   }
 }
 
@@ -130,9 +130,9 @@ function function_3a0e41ed() {
   a_ents = [];
   level flag::wait_till("play_scene_hands_up");
   a_ents[#"hash_86fe5b596d46e2f"] = spawner::simple_spawn_single(getEnt("vig_handsup_contra_spawner", "targetname"));
-  a_ents[#"hash_5dd01c989f26191b"] = spawner::simple_spawn_single(getEnt("vig_handsup_civ_spawner", "targetname"));
+  a_ents[#"civilian1"] = spawner::simple_spawn_single(getEnt("vig_handsup_civ_spawner", "targetname"));
   a_ents[#"hash_86fe5b596d46e2f"] endon(#"death");
-  a_ents[#"hash_5dd01c989f26191b"] endon(#"death");
+  a_ents[#"civilian1"] endon(#"death");
   level scene::init("scene_vig_0000_amb_execution_wall_handsup", a_ents);
 
   foreach(guy in a_ents) {
@@ -140,7 +140,7 @@ function function_3a0e41ed() {
   }
 
   a_ents[#"hash_86fe5b596d46e2f"] function_628aec92("scene_vig_0000_amb_execution_wall_handsup");
-  a_ents[#"hash_5dd01c989f26191b"] function_628aec92("scene_vig_0000_amb_execution_wall_handsup");
+  a_ents[#"civilian1"] function_628aec92("scene_vig_0000_amb_execution_wall_handsup");
   level scene::play("scene_vig_0000_amb_execution_wall_handsup", "enter", a_ents);
   level scene::play("scene_vig_0000_amb_execution_wall_handsup", "loop", a_ents);
 }
@@ -149,9 +149,9 @@ function function_d13f90cb() {
   a_ents = [];
   level flag::wait_till("play_scene_civ_ground");
   a_ents[#"hash_86fe5b596d46e2f"] = spawner::simple_spawn_single(getEnt("vig_struggle_contra_spawner", "targetname"));
-  a_ents[#"hash_5dd01c989f26191b"] = spawner::simple_spawn_single(getEnt("vig_struggle_civ_spawner", "targetname"));
+  a_ents[#"civilian1"] = spawner::simple_spawn_single(getEnt("vig_struggle_civ_spawner", "targetname"));
   a_ents[#"hash_86fe5b596d46e2f"] endon(#"death");
-  a_ents[#"hash_5dd01c989f26191b"] endon(#"death");
+  a_ents[#"civilian1"] endon(#"death");
   level scene::init("scene_vig_0000_amb_struggle_ground", a_ents);
 
   foreach(guy in a_ents) {
@@ -159,7 +159,7 @@ function function_d13f90cb() {
   }
 
   a_ents[#"hash_86fe5b596d46e2f"] function_628aec92("scene_vig_0000_amb_struggle_ground");
-  a_ents[#"hash_5dd01c989f26191b"] function_628aec92("scene_vig_0000_amb_struggle_ground");
+  a_ents[#"civilian1"] function_628aec92("scene_vig_0000_amb_struggle_ground");
   level scene::play("scene_vig_0000_amb_struggle_ground", "enter", a_ents);
   level thread scene::play("scene_vig_0000_amb_struggle_ground", "loop", a_ents);
   wait 5;
@@ -167,14 +167,14 @@ function function_d13f90cb() {
 }
 
 function function_cca11e21() {
-  var_b5ee4ca5 = getEntArray("surrender_scene_enemy_spawner", "targetname");
+  a_enemy_spawners = getEntArray("surrender_scene_enemy_spawner", "targetname");
   var_b98ae473 = getEntArray("surrender_scene_contra_spawner", "targetname");
   a_ents = [];
   level flag::wait_till("play_scene_civ_ground");
-  var_3d261bd8 = spawner::simple_spawn(var_b5ee4ca5);
+  var_3d261bd8 = spawner::simple_spawn(a_enemy_spawners);
   var_8e714466 = spawner::simple_spawn(var_b98ae473);
-  a_ents[#"hash_24f28c860161bc0c"] = var_8e714466[0];
-  a_ents[#"hash_24f28f860161c125"] = var_8e714466[1];
+  a_ents[#"ally01"] = var_8e714466[0];
+  a_ents[#"ally02"] = var_8e714466[1];
   a_ents[#"enemy01"] = var_3d261bd8[0];
   a_ents[#"enemy02"] = var_3d261bd8[1];
   level scene::init("scene_rev_0000_ambient_surrender", a_ents);
@@ -206,9 +206,9 @@ function function_3499a2c7() {
   while(true) {
     within_fov = util::within_fov(level.player getplayercamerapos(), level.player getplayerangles(), var_4a3daa0b.origin, cos(45));
     var_19433220 = sighttracepassed(level.player getplayercamerapos(), var_4a3daa0b.origin, 0, undefined);
-    var_265622ec = distance2d(level.player.origin, var_4a3daa0b.origin);
+    distance_check = distance2d(level.player.origin, var_4a3daa0b.origin);
 
-    if(within_fov == 1 && var_19433220 == 1 || var_265622ec < 200) {
+    if(within_fov == 1 && var_19433220 == 1 || distance_check < 200) {
       hms_util::print("<dev string:x38>");
 
       break;
@@ -229,10 +229,10 @@ function function_3499a2c7() {
 
 function function_b1f33833(var_541d697) {
   var_541d697 endoncallback(&function_6ea46f39, #"death");
-  var_e189955e = self.scene_ents[#"hash_363ff12eba02d468"];
-  var_e189955e waittill(#"flip");
+  e_table = self.scene_ents[#"hash_363ff12eba02d468"];
+  e_table waittill(#"flip");
   snd::client_msg("audio_table_flip");
-  physicsexplosionsphere(var_e189955e.origin + (0, -16, 32), 60, 0, 0.06);
+  physicsexplosionsphere(e_table.origin + (0, -16, 32), 60, 0, 0.06);
 }
 
 function function_6ea46f39(str_notify) {
@@ -391,7 +391,7 @@ function function_7d86c1d() {
 }
 
 function function_c1f6c87c() {
-  level endon(#"hash_4a17bb3c36a854c4");
+  level endon(#"flg_panic_room_camera");
   level endon(#"flg_cctv_finished");
   var_e534dcb = struct::get("ai_alder_radio", "targetname");
   level.park thread hms_util::dialogue("vox_cp_cbcr_01400_park_thereholdit_f8");
@@ -404,8 +404,8 @@ function function_c1f6c87c() {
 
 function function_c54af28a() {
   s_scene = struct::get("cctv_nuke_room_scene");
-  var_34d58d57 = getEnt("clean_room_door", "targetname");
-  var_34d58d57 hide();
+  outer_door = getEnt("clean_room_door", "targetname");
+  outer_door hide();
   s_scene scene::init();
   s_scene.scene_ents[#"guy01"] thread function_d46f031f(["gut"], "hastings");
   s_scene.scene_ents[#"guy02"] thread function_d46f031f(["shoulder", "head"], "scientist");
@@ -421,7 +421,7 @@ function function_c54af28a() {
   s_scene thread scene::play();
   level thread function_c1f6c87c();
   level flag::wait_till("flg_cctv_finished");
-  var_34d58d57 show();
+  outer_door show();
   s_scene scene::stop(1);
 }
 
@@ -555,9 +555,9 @@ function function_8d918610(var_57ef78ed) {
 function function_39beb73c(actors) {
   level flag::wait_till("flg_cctv_int");
   level notify(#"hash_604e61bc28aebaeb");
-  var_2cdf7dae = getactorteamarray("axis");
+  first_floor_enemies = getactorteamarray("axis");
 
-  foreach(guy in var_2cdf7dae) {
+  foreach(guy in first_floor_enemies) {
     if(isDefined(guy.anim_debug_name) && guy.anim_debug_name != "perseus") {
       guy util::stop_magic_bullet_shield();
       guy deletedelay();
@@ -665,11 +665,11 @@ function function_ee30e713() {
 
 function function_b91f9a58(var_57ef78ed) {
   a_ents = [];
-  var_602672df = getEnt("vip_door_player_clip", "targetname");
+  e_player_clip = getEnt("vip_door_player_clip", "targetname");
 
   hms_util::print("<dev string:x88>");
 
-  var_602672df hide();
+  e_player_clip hide();
   a_ents[#"park"] = getEnt("park", "targetname", 1);
   a_ents[#"scientist"] = spawner::simple_spawn_single(getEnt("vip_room_scientist_spawner", "targetname"));
   a_ents[#"scientist"] setModel("c_t9_cp_cub_civ_scientist_hastings_bloody");
@@ -684,11 +684,11 @@ function function_b91f9a58(var_57ef78ed) {
     level flag::wait_till("flg_player_nearing_vip_room_vo");
   }
 
-  var_602672df show();
+  e_player_clip show();
 
   hms_util::print("<dev string:x95>");
 
-  var_602672df thread function_ee30e713();
+  e_player_clip thread function_ee30e713();
   level scene::play("scene_rev_4010_nuke_room_lazar", "park_enter", a_ents);
   level.lazar val::set("nuke_room_ignore_all", "ignoreall", 1);
 
@@ -716,7 +716,7 @@ function function_b91f9a58(var_57ef78ed) {
 }
 
 function function_c2bb9d98() {
-  self waittill(#"hash_5844b9b98619c009");
+  self waittill(#"show_gun");
   self show();
 }
 
@@ -810,8 +810,8 @@ function function_59320958() {
 }
 
 function function_a1651470() {
-  var_cad35a6 = doors::get_doors("escape_breach_door");
-  c_door = var_cad35a6[0].c_door;
+  a_s_doors = doors::get_doors("escape_breach_door");
+  c_door = a_s_doors[0].c_door;
   [[c_door]] - > function_e7be6e76(0, 1, 0, 0);
   level thread function_9f83193();
   a_ents = [];
@@ -850,19 +850,19 @@ function function_a1651470() {
 }
 
 function function_9f83193() {
-  var_a2ac77ba = getEntArray("escape_front_right_civ_spawner", "targetname", 1);
+  a_civs = getEntArray("escape_front_right_civ_spawner", "targetname", 1);
 
-  while(!isDefined(var_a2ac77ba[1])) {
-    var_a2ac77ba = getEntArray("escape_front_right_civ_spawner", "targetname", 1);
+  while(!isDefined(a_civs[1])) {
+    a_civs = getEntArray("escape_front_right_civ_spawner", "targetname", 1);
     wait 0.1;
   }
 
-  if(isDefined(var_a2ac77ba[1])) {
-    var_a2ac77ba[1] thread function_82205464("scene_rev_0000_ambient_cower13", 500);
+  if(isDefined(a_civs[1])) {
+    a_civs[1] thread civ_cower("scene_rev_0000_ambient_cower13", 500);
   }
 
-  if(isDefined(var_a2ac77ba[2])) {
-    var_a2ac77ba[2] thread function_82205464("scene_rev_0000_ambient_cower14", 500);
+  if(isDefined(a_civs[2])) {
+    a_civs[2] thread civ_cower("scene_rev_0000_ambient_cower14", 500);
   }
 }
 
@@ -871,8 +871,8 @@ function function_aecde30d(ents) {
   [[c_door]] - > function_e7be6e76(0, 0, 0, 0);
 }
 
-function function_8aab62a1(scene, var_3a51c5dc, loop_anim, ents) {
-  level scene::play(scene, var_3a51c5dc, ents);
+function function_8aab62a1(scene, intro_anim, loop_anim, ents) {
+  level scene::play(scene, intro_anim, ents);
   level scene::play(scene, loop_anim, ents);
 }
 
@@ -1010,7 +1010,7 @@ function function_28cf7333() {
   level scene::play("scene_rev_5055_rtp_soldiers_clear", "enter");
 }
 
-function function_82205464(var_fa359e06, var_67b4e975) {
+function civ_cower(var_fa359e06, var_67b4e975) {
   self endon(#"death");
   actors[#"guy"] = self;
   level thread scene::play(var_fa359e06, "cower_loop", actors);
@@ -1042,7 +1042,7 @@ function function_dbd5c057() {
 
 function function_eff61506() {
   level.player endon(#"death");
-  level endon(#"hash_2ca0e7bbee5cd2e3");
+  level endon(#"nic_rooftop");
   level thread scene::init("scene_rev_0000_ambient_dead_scientist_01");
   level thread scene::init("scene_rev_0000_ambient_dead_scientist_03");
   level thread scene::init("scene_rev_0000_ambient_dead_scientist_04");

@@ -17,7 +17,7 @@
 #namespace namespace_95f223d5;
 
 function private event_handler[level_preinit] function_b489bb7b(eventstruct) {
-  snd::function_5e69f468(&_objective);
+  snd::skipto_init(&_objective);
 }
 
 function private event_handler[event_cc819519] function_686b88aa(eventstruct) {
@@ -38,7 +38,7 @@ function private _objective(objective) {
       break;
     case #"graveyard":
       break;
-    case #"hash_7433baf853004942":
+    case #"outtro":
       break;
     case #"looseends":
       break;
@@ -53,21 +53,21 @@ function private _objective(objective) {
 }
 
 function music(str_msg, n_delay = 0, var_37a6c96) {
-  level thread function_7edafa59(str_msg, n_delay, var_37a6c96);
+  level thread music_handler(str_msg, n_delay, var_37a6c96);
   level thread function_e80c0ccf(str_msg);
 }
 
-function function_7edafa59(str_msg, n_delay, var_37a6c96) {
+function music_handler(str_msg, n_delay, var_37a6c96) {
   switch (str_msg) {
     case #"hash_285fcad4eed33c36":
     case #"5.0_graveyard":
-    case #"hash_311870cc10f713f7":
+    case #"2.0_courtyard":
     case #"1.5_approach_checkpoint":
-    case #"hash_3bc476ac50672ed8":
-    case #"hash_3e2efa7311d0cb4c":
+    case #"9.2_loose_ends":
+    case #"3.0_catacombs":
     case #"6.0_danger_close":
     case #"1.0_approach":
-    case #"hash_7eaa1ee46f7c9913":
+    case #"9.1_loose_ends":
       if(isDefined(var_37a6c96)) {
         flag::wait_till(var_37a6c96);
       }
@@ -75,12 +75,12 @@ function function_7edafa59(str_msg, n_delay, var_37a6c96) {
       music::setmusicstate(str_msg, undefined, n_delay);
       break;
     case #"hash_581c2b78798ae4fb":
-      music::function_edda155f(str_msg, n_delay);
+      music::playstinger(str_msg, n_delay);
       break;
     case #"hash_2193c42e21ea2e63":
       music::function_2af5f0ec(str_msg);
       break;
-    case #"hash_31402ddc8eade354":
+    case #"deactivate_2.0_courtyard":
       if(isDefined(var_37a6c96)) {
         flag::wait_till(var_37a6c96);
       }
@@ -100,7 +100,7 @@ function function_e80c0ccf(str_msg) {
     case #"1.0_approach":
       snd::client_msg(#"musictrack_cp_siege_1");
       break;
-    case #"hash_311870cc10f713f7":
+    case #"2.0_courtyard":
       snd::client_msg(#"musictrack_cp_siege_2");
       break;
   }

@@ -25,7 +25,7 @@ function init_clientfield() {
   clientfield::register("world", "" + #"hash_266f6fe481bab1bc", 1, 1, "int", &function_4dff5056, 0, 0);
   clientfield::register("toplayer", "" + #"hash_1fa45e1c3652d753", 1, 1, "int", &function_6902ffa4, 0, 0);
   clientfield::register("toplayer", "" + #"hash_c34d1c4bd1aa84a", 1, 1, "counter", &function_b56e6c7e, 0, 0);
-  clientfield::register("toplayer", "" + #"hash_385053c55d081e0d", 1, 1, "counter", &function_ceb6041f, 0, 0);
+  clientfield::register("toplayer", "" + #"particle_accelerator_rumble", 1, 1, "counter", &particle_accelerator_rumble, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_7ec80a02e9bb051a", 1, 1, "int", &function_760c94c, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_5a293ad1c677dc7e", 1, 1, "int", &function_2424f2ac, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_7919b736a767a0f5", 1, 2, "int", &function_e5ffabef, 0, 0);
@@ -33,7 +33,7 @@ function init_clientfield() {
   clientfield::register("world", "" + #"hash_51ed1d1064cfb0e", 1, 1, "int", &function_32b2a189, 0, 0);
 }
 
-function function_ceb6041f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function particle_accelerator_rumble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
     self playRumbleOnEntity(fieldname, #"hash_44eeee909d5a03fd");
   }
@@ -110,7 +110,7 @@ function function_33082eb4(localclientnum, oldval, newval, bnewent, binitialsnap
   if(isDefined(e_player)) {
     e_player postfx::playpostfxbundle(#"hash_7fbc9bc489aea188");
     e_player playSound(bwastimejump, #"hash_56a9d9da20064c3f");
-    function_5ea2c6e3("zm_silver_darkaether_leadin", 7);
+    addsubmix("zm_silver_darkaether_leadin", 7);
   }
 }
 
@@ -155,8 +155,8 @@ function function_760c94c(localclientnum, oldval, newval, bnewent, binitialsnap,
     self.portal_fx = util::playFXOnTag(fieldname, #"hash_6b812867a0d2dde5", self, "tag_origin");
 
     if(!isDefined(self.var_abc21e11)) {
-      self playSound(fieldname, #"hash_4a04fd9edb696634");
-      self.var_abc21e11 = self playLoopSound(#"hash_61bfd6cc3f47194");
+      self playSound(fieldname, #"zmb_darkaether_mass_start");
+      self.var_abc21e11 = self playLoopSound(#"zmb_darkaether_mass_lp");
     }
 
     return;
@@ -164,7 +164,7 @@ function function_760c94c(localclientnum, oldval, newval, bnewent, binitialsnap,
 
   if(isDefined(self.var_abc21e11)) {
     killfx(fieldname, self.portal_fx);
-    self playSound(fieldname, #"hash_257a16d125ce57ed");
+    self playSound(fieldname, #"zmb_darkaether_mass_end");
     self stoploopsound(self.var_abc21e11);
     self.var_abc21e11 = undefined;
   }
@@ -179,17 +179,17 @@ function function_2424f2ac(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_32b2a189(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
     setsoundcontext("dark_aether", "active");
-    function_ed62c9c2("zm_silver_darkaether_leadin", 1.5);
-    function_5ea2c6e3("lpf_pacc_opening_lp", 1);
-    function_5ea2c6e3("lpf_pacc_lp", 1);
+    clearsubmix("zm_silver_darkaether_leadin", 1.5);
+    addsubmix("lpf_pacc_opening_lp", 1);
+    addsubmix("lpf_pacc_lp", 1);
     audio::playloopat("zmb_darkaether_bg_loop", (0, 0, 0));
     return;
   }
 
   setsoundcontext("dark_aether", "inactive");
-  function_ed62c9c2("zm_silver_darkaether_leadin", 1.5);
-  function_ed62c9c2("lpf_pacc_opening_lp", 1);
-  function_ed62c9c2("lpf_pacc_lp", 1);
+  clearsubmix("zm_silver_darkaether_leadin", 1.5);
+  clearsubmix("lpf_pacc_opening_lp", 1);
+  clearsubmix("lpf_pacc_lp", 1);
   audio::stoploopat("zmb_darkaether_bg_loop", (0, 0, 0));
 }
 

@@ -128,11 +128,11 @@ function pap_portal_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 function pap_quest_beam_start(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   a_s_start = struct::get_array("pap_quest_beam_start");
   a_s_start = array::sort_by_script_int(a_s_start, 1);
-  var_c2f24bc = struct::get_array("pap_quest_beam_end");
-  var_c2f24bc = array::sort_by_script_int(var_c2f24bc, 1);
+  a_s_end = struct::get_array("pap_quest_beam_end");
+  a_s_end = array::sort_by_script_int(a_s_end, 1);
   n_index = bwastimejump - 1;
   s_start = a_s_start[n_index];
-  s_end = var_c2f24bc[n_index];
+  s_end = a_s_end[n_index];
 
   if(isDefined(s_start) && isDefined(s_end) && !(isDefined(s_start.mdl_start) && isDefined(s_end.mdl_end))) {
     v_start_origin = s_start.origin;
@@ -148,11 +148,11 @@ function pap_quest_beam_start(localclientnum, oldval, newval, bnewent, binitials
 function function_c6f8ff7b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   a_s_start = struct::get_array("pap_quest_beam_start");
   a_s_start = array::sort_by_script_int(a_s_start, 1);
-  var_c2f24bc = struct::get_array("pap_quest_beam_end");
-  var_c2f24bc = array::sort_by_script_int(var_c2f24bc, 1);
+  a_s_end = struct::get_array("pap_quest_beam_end");
+  a_s_end = array::sort_by_script_int(a_s_end, 1);
   n_index = bwastimejump - 1;
   s_start = a_s_start[n_index];
-  s_end = var_c2f24bc[n_index];
+  s_end = a_s_end[n_index];
 
   if(isDefined(s_start.mdl_start) && isDefined(s_end) && isDefined(s_start) && isDefined(s_end.mdl_end)) {
     level beam::kill(s_start.mdl_start, "tag_origin", s_end.mdl_end, "tag_origin", "beam9_zm_platinum_pap_beam");

@@ -19,7 +19,7 @@
 #namespace namespace_353d803e;
 
 function private event_handler[level_preinit] function_b489bb7b(eventstruct) {
-  snd::function_5e69f468(&_objective);
+  snd::skipto_init(&_objective);
   snd::wait_init();
 }
 
@@ -34,7 +34,7 @@ function private event_handler[event_cc819519] function_686b88aa(eventstruct) {
   snd::dvar("<dev string:x52>", "<dev string:x4e>" + 30, &function_5e7cc862);
 
   snd::client_targetname(players[0], "player");
-  thread function_f48103c7();
+  thread sandwich();
   thread function_7932589a();
   init_flags();
 }
@@ -115,10 +115,10 @@ function private _objective(objective) {
 }
 
 function music(str_msg, n_delay = 0) {
-  level thread function_7edafa59(str_msg, n_delay);
+  level thread music_handler(str_msg, n_delay);
 }
 
-function function_7edafa59(str_msg, n_delay) {
+function music_handler(str_msg, n_delay) {
   if(isDefined(str_msg) && (str_msg == "4.2_search_stingers" || str_msg == "4.3_tension_stingers")) {
     var_8bbe21f1 = 1;
   } else {
@@ -127,28 +127,28 @@ function function_7edafa59(str_msg, n_delay) {
 
   switch (str_msg) {
     case #"13.3_lockdown_tension":
-    case #"hash_d96dba6e7a99f85":
+    case #"13.0_combat3":
     case #"11.3_combat2":
     case #"11.0_sabotage":
     case #"13.7_holding_belikov":
     case #"14.0_knockout":
     case #"13.5_lockdown":
-    case #"hash_1d433b9a413139d4":
+    case #"2.0_call":
     case #"hash_2256b0dea87465d2":
     case #"8.0_undercover":
     case #"5.0_unlock":
-    case #"hash_2910ae132ebdc558":
+    case #"15.0_car":
     case #"10.0_combat_intro":
     case #"6.0_basement":
     case #"9.0_infiltrating":
     case #"5.2_kill":
-    case #"hash_2d88f0176ae057fb":
+    case #"12.0_intel":
     case #"14.0b_full_alert":
     case #"8.1_gate":
-    case #"hash_78d371826c395268":
-    case #"hash_35dacd4322564668":
+    case #"14.1_elevator":
+    case #"13.6_lockdown_2":
     case #"10.2_combat_loop":
-    case #"hash_3f88adcdc052e5b6":
+    case #"3.0_meeting":
     case #"7.0_tunnels":
       music::setmusicstate(str_msg, undefined, n_delay);
       break;
@@ -168,16 +168,16 @@ function function_7edafa59(str_msg, n_delay) {
       music::function_2af5f0ec(str_msg);
       break;
     case #"7.1_attack_sting":
-      music::function_edda155f(str_msg, n_delay);
+      music::playstinger(str_msg, n_delay);
       break;
     case #"hash_2966b4a1e4a3a38d":
     case #"deactivate_11.3_combat2":
-    case #"hash_33d1bd1987cf9ec5":
+    case #"deactivate_13.5_lockdown":
     case #"deactivate_6.0_basement":
-    case #"hash_63d49b1407be692c":
-    case #"hash_5a5ac38c04395a49":
-    case #"hash_5cb44079caf0d925":
-    case #"hash_5cde78352f0969e3":
+    case #"deactivate_14.0b_full_alert":
+    case #"deactivate_15.0_car":
+    case #"deactivate_9.0_infiltrating":
+    case #"deactivate_14.1_elevator":
       music::setmusicstate("none", undefined, n_delay);
       break;
     default:
@@ -190,7 +190,7 @@ function function_7edafa59(str_msg, n_delay) {
 
 function function_e80c0ccf(str_msg) {
   switch (str_msg) {
-    case #"hash_1d433b9a413139d4":
+    case #"2.0_call":
       snd::client_msg(#"musictrack_cp_kgb_1");
       break;
     case #"hash_2256b0dea87465d2":
@@ -1053,7 +1053,7 @@ function function_ad8a133d() {
   snd::play("evt_exfil_adler_grenade_explo_trans", (-1505, -156, 440));
 }
 
-function function_f48103c7() {
+function sandwich() {
   level flag::wait_till("sandwich_vo");
   level.player dialogue::queue("vox_cp_rkgb_01650_blkv_theketchupisdis_c0");
 }

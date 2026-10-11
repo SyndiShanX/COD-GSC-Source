@@ -14,4 +14,4 @@ function private autoexec __init__system__() {
 
 function private preinit() {}
 
-function private function_b9c8f3cf(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {}
+function private medpack_placed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {}

@@ -21,13 +21,13 @@ function private autoexec __init__system__() {
 function private preinit() {
   if(is_true(getgametypesetting(#"hash_4751990deae37e66"))) {
     callback::on_localclient_connect(&on_localclient_connect);
-    callback::function_675f0963(&function_675f0963);
+    callback::on_actor_spawned(&on_actor_spawned);
     clientfield::register("actor", "" + #"hash_477ed992854f5645", 28000, 1, "counter", &function_3b11146f, 0, 0);
     level thread function_ff03ce49();
   }
 }
 
-function function_675f0963(localclientnum) {
+function on_actor_spawned(localclientnum) {
   self endon(#"death");
 
   if(isDefined(self.archetype) && self.team === "axis") {
@@ -35,7 +35,7 @@ function function_675f0963(localclientnum) {
       case #"tormentor":
       case #"zombie":
       case #"avogadro":
-        self.var_6ffc5953 = array::random([#"hash_3b9bc9fd7d3450e8", #"hash_3b9bccfd7d345601", #"hash_3b9bcbfd7d34544e"]);
+        self.var_6ffc5953 = array::random([#"c_t9_zmb_zombie_pumpkin_head1", #"c_t9_zmb_zombie_pumpkin_head2", #"c_t9_zmb_zombie_pumpkin_head3"]);
         self.var_dee85a7a = "j_head";
         break;
       case #"zombie_dog":
@@ -91,10 +91,10 @@ function function_3b11146f(localclientnum, oldval, newval, bnewent, binitialsnap
     }
 
     var_297c3a3d = isDefined(self.var_fbfc64db) ? self.var_fbfc64db : #"hash_2990c4a0be6af31e";
-    var_ea8a7e41 = self gettagorigin(self.var_dee85a7a);
+    v_fx_pos = self gettagorigin(self.var_dee85a7a);
 
-    if(isDefined(var_ea8a7e41)) {
-      playFX(bwastimejump, var_297c3a3d, var_ea8a7e41);
+    if(isDefined(v_fx_pos)) {
+      playFX(bwastimejump, var_297c3a3d, v_fx_pos);
     }
 
     playSound(bwastimejump, #"hash_15d4351d6a8d884e", self gettagorigin(self.var_dee85a7a));
@@ -112,9 +112,9 @@ function function_ff03ce49() {
   force_stream_model(#"hash_2d158c5af72b951c", 4, 1);
   force_stream_model(#"hash_279687d633e3788b", 4, 1);
   force_stream_model(#"hash_208ba71db2a5843e", 4, 1);
-  force_stream_model(#"hash_3b9bc9fd7d3450e8", 4, 1);
-  force_stream_model(#"hash_3b9bccfd7d345601", 4, 1);
-  force_stream_model(#"hash_3b9bcbfd7d34544e", 4, 1);
+  force_stream_model(#"c_t9_zmb_zombie_pumpkin_head1", 4, 1);
+  force_stream_model(#"c_t9_zmb_zombie_pumpkin_head2", 4, 1);
+  force_stream_model(#"c_t9_zmb_zombie_pumpkin_head3", 4, 1);
 }
 
 function private force_stream_model(str_asset, var_9940b166, mip) {

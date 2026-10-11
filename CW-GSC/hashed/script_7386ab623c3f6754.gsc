@@ -119,10 +119,10 @@ function private function_ef5cde9f(str_weapon_name) {
 function on_ai_killed(params) {
   if(params.weapon.name === #"toxic_growth_5" && is_true(self.var_d0de7f41) && params.einflictor.weapon === params.weapon) {
     self clientfield::increment("" + #"hash_6a9eb737488c81c7", 1);
-    var_a0722b6e = getaiteamarray(level.zombie_team);
-    var_a0722b6e = arraysortclosest(var_a0722b6e, self.origin, undefined, 0, 64);
+    a_enemies_nearby = getaiteamarray(level.zombie_team);
+    a_enemies_nearby = arraysortclosest(a_enemies_nearby, self.origin, undefined, 0, 64);
 
-    foreach(ai in var_a0722b6e) {
+    foreach(ai in a_enemies_nearby) {
       if(ai != self && ai function_3fc6f786()) {
         ai.var_7fb7de87 = 1;
         ai.var_10552fac = 1;

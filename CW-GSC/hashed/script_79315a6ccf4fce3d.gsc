@@ -29,16 +29,16 @@ function function_dcb0d632(damaged = 0, var_3463bd5c) {
   self notify("2b7ecfa4758d736a");
   self endon("2b7ecfa4758d736a");
   self endon(#"death");
-  self thread namespace_268747c0::function_978c05b5();
+  self thread doa_hazard::function_978c05b5();
 
   if(damaged) {
-    self thread namespace_268747c0::function_5418a00f();
+    self thread doa_hazard::function_5418a00f();
     result = self waittilltimeout(30, #"destroy_hazard");
   } else {
     result = self waittill(#"destroy_hazard");
   }
 
-  if(isDefined(var_3463bd5c) && is_true(var_3463bd5c.var_7c56394) && (is_true(result.var_760a0807) || damaged)) {
+  if(isDefined(var_3463bd5c) && is_true(var_3463bd5c.paged) && (is_true(result.var_760a0807) || damaged)) {
     arrayremovevalue(level.doa.var_d1534e45, self);
     namespace_1e25ad94::debugmsg("Deleting barrel trap permenently at:" + self.origin);
   }
@@ -46,8 +46,8 @@ function function_dcb0d632(damaged = 0, var_3463bd5c) {
   self namespace_ec06fe4a::function_8c808737();
   self namespace_e32bb68::function_ae271c0b("barrel_ignite");
   self namespace_e32bb68::function_ae271c0b("barrel_warn");
-  self namespace_83eb6304::turnofffx("barrel_fire");
-  self namespace_83eb6304::turnofffx("barrel_fire_top");
+  self doa_fx::turnofffx("barrel_fire");
+  self doa_fx::turnofffx("barrel_fire_top");
   wait 0.5;
   self delete();
 }
@@ -124,7 +124,7 @@ function function_d971ecbd(time) {
   self notify("259362ec3a4b2b9e");
   self endon("259362ec3a4b2b9e");
   self endon(#"death");
-  self namespace_83eb6304::function_3ecfde67("barrel_fire_top");
+  self doa_fx::function_3ecfde67("barrel_fire_top");
   self namespace_e32bb68::function_3a59ec34("evt_doa_hazard_redbarrel_ignite");
   self namespace_e32bb68::function_3a59ec34("evt_doa_hazard_redbarrel_fuse_lp");
   detonationtime = gettime() + time * 1000;
@@ -149,16 +149,16 @@ function function_d971ecbd(time) {
 
     if(!var_38ec2561 && time > stage1) {
       var_38ec2561 = 1;
-      self namespace_83eb6304::function_3ecfde67("explo_warning_light");
+      self doa_fx::function_3ecfde67("explo_warning_light");
       self namespace_e32bb68::function_3a59ec34("evt_doa_hazard_redbarrel_warning");
     }
   }
 
   self notsolid();
-  self namespace_83eb6304::function_3ecfde67("explode_red_barrel");
-  self namespace_83eb6304::turnofffx("barrel_fire_top");
-  self namespace_83eb6304::turnofffx("red_shield_os");
-  self namespace_83eb6304::turnofffx("explo_warning_light");
+  self doa_fx::function_3ecfde67("explode_red_barrel");
+  self doa_fx::turnofffx("barrel_fire_top");
+  self doa_fx::turnofffx("red_shield_os");
+  self doa_fx::turnofffx("explo_warning_light");
   self namespace_e32bb68::function_3a59ec34("evt_doa_hazard_redbarrel_explosion");
   self namespace_e32bb68::function_ae271c0b("evt_doa_hazard_redbarrel_fuse_lp");
   self.takedamage = 0;
@@ -171,7 +171,7 @@ function function_d971ecbd(time) {
     self solid();
     self physicslaunch(self.origin, (randomintrange(-10, 10), randomintrange(-10, 10), 5));
     self namespace_ec06fe4a::function_ecec1794();
-    self namespace_83eb6304::function_3ecfde67("barrel_fire");
+    self doa_fx::function_3ecfde67("barrel_fire");
     self notsolid();
     return;
   }
@@ -235,7 +235,7 @@ function function_f1ca69a7(model, var_639facc4, origin, angles, disconnect = 1) 
   return hazard;
 }
 
-function function_647017bd(trap, var_7c56394 = 0, modelname = "zombietron_explosive_barrel", var_639facc4) {
+function function_647017bd(trap, paged = 0, modelname = "zombietron_explosive_barrel", var_639facc4) {
   if(isDefined(trap.script_string)) {
     args = strtok(trap.script_string, ";");
 
@@ -250,7 +250,7 @@ function function_647017bd(trap, var_7c56394 = 0, modelname = "zombietron_explos
 
   hazard = trap function_f1ca69a7(modelname, var_639facc4, trap.origin, trap.angles);
   trap.script_model = hazard;
-  trap.var_7c56394 = var_7c56394;
+  trap.paged = paged;
   return trap;
 }
 

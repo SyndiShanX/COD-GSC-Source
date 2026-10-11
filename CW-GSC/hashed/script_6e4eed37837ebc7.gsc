@@ -7,10 +7,10 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_2d7ccca3;
+#namespace field_upgrades;
 
 function private autoexec __init__system__() {
-  system::register(#"hash_3dcfc06bf6bfc5f5", &preinit, undefined, undefined, undefined);
+  system::register(#"field_upgrades", &preinit, undefined, undefined, undefined);
 }
 
 function private preinit() {

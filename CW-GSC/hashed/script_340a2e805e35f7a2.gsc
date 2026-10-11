@@ -776,16 +776,16 @@ function private function_9db93def() {
   assert(self.target !== self.targetname, "<dev string:xef>" + self.origin + "<dev string:x130>" + self.target + "<dev string:x16d>");
 }
 
-function private function_a8e0dc24(itementry, data, limit, var_a3a56d95, maxattachments) {
+function private function_a8e0dc24(itementry, data, limit, minattachments, maxattachments) {
   assert(isstruct(itementry));
   assert(itementry.itemtype == #"weapon");
-  assert(maxattachments >= var_a3a56d95);
+  assert(maxattachments >= minattachments);
   assert(isarray(data.currentattachments));
   assert(isarray(data.possibleattachments));
   assert(isarray(data.availableslots));
   attachments = data.currentattachments;
 
-  if(maxattachments < var_a3a56d95) {
+  if(maxattachments < minattachments) {
     return attachments;
   }
 
@@ -799,11 +799,11 @@ function private function_a8e0dc24(itementry, data, limit, var_a3a56d95, maxatta
     possibleattachments[attachmentkeys[index]] = tempid;
   }
 
-  var_a3a56d95 = int(min(var_a3a56d95, possibleattachments.size));
+  minattachments = int(min(minattachments, possibleattachments.size));
   maxattachments = int(min(maxattachments, possibleattachments.size));
-  assert(maxattachments >= var_a3a56d95);
-  var_5f5def05 = var_a3a56d95;
-  var_ac516129 = maxattachments - var_a3a56d95;
+  assert(maxattachments >= minattachments);
+  var_5f5def05 = minattachments;
+  var_ac516129 = maxattachments - minattachments;
 
   if(var_ac516129 > 0) {
     var_5f5def05 += function_d59c2d03(var_ac516129);
@@ -885,23 +885,23 @@ function function_67456242(itementry) {
     }
   }
 
-  var_a3a56d95 = isDefined(itementry.var_8e212f46) ? itementry.var_8e212f46 : 0;
+  minattachments = isDefined(itementry.var_8e212f46) ? itementry.var_8e212f46 : 0;
   maxattachments = isDefined(itementry.var_d0e99a2a) ? itementry.var_d0e99a2a : 0;
-  assert(maxattachments >= var_a3a56d95);
+  assert(maxattachments >= minattachments);
   data = spawnStruct();
   data.currentattachments = attachments;
   data.availableslots = availableslots;
 
   if(isDefined(itementry.var_3e805062)) {
     data.possibleattachments = itementry.var_3e805062;
-    data.currentattachments = function_a8e0dc24(itementry, data, 1, var_a3a56d95, maxattachments);
+    data.currentattachments = function_a8e0dc24(itementry, data, 1, minattachments, maxattachments);
     weapon = getweapon(itementry.weapon.name, data.currentattachments);
     weapon = function_1242e467(weapon);
   }
 
   if(isDefined(itementry.random_attachments)) {
     data.possibleattachments = itementry.random_attachments;
-    data.currentattachments = function_a8e0dc24(itementry, data, 2147483647, var_a3a56d95, maxattachments);
+    data.currentattachments = function_a8e0dc24(itementry, data, 2147483647, minattachments, maxattachments);
     weapon = getweapon(itementry.weapon.name, data.currentattachments);
     weapon = function_1242e467(weapon);
   }

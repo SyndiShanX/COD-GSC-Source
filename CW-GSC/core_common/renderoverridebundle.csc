@@ -102,13 +102,13 @@ function function_e04728e4(local_client_num) {
         continue;
       }
 
-      var_2bd670bd = 1;
+      should_update = 1;
 
       if(function_397ed5ed(entity)) {
-        var_2bd670bd = isalive(entity);
+        should_update = isalive(entity);
       }
 
-      if(var_2bd670bd) {
+      if(should_update) {
         if(var_b8fe9b52) {
           foreach(flag, var_166900a8 in entity_array) {
             if(var_166900a8 == #"hash_48a9d99bb016fbd3" || var_166900a8 == #"hash_2fff175ca0ba28b2" || var_166900a8 == #"hash_2476e7ae62469f70" || var_166900a8 == #"hash_2476eaae6246a489") {

@@ -12,69 +12,69 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  level.var_62079b93 = [];
-  level.var_6722c38a = [];
-  level.var_8c80c829 = [];
+  level.cheatstates = [];
+  level.cheatfuncs = [];
+  level.cheatdvars = [];
   level flag::init("has_cheated");
   level thread death_monitor();
 }
 
 function player_init() {
-  self thread function_ae608e1a();
+  self thread specialfeaturesmenu();
 }
 
 function death_monitor() {
-  function_e380068d();
+  setdvars_based_on_varibles();
 }
 
-function function_e380068d() {
-  for(index = 0; index < level.var_8c80c829.size; index++) {
-    setDvar(level.var_8c80c829[index], level.var_62079b93[level.var_8c80c829[index]]);
+function setdvars_based_on_varibles() {
+  for(index = 0; index < level.cheatdvars.size; index++) {
+    setDvar(level.cheatdvars[index], level.cheatstates[level.cheatdvars[index]]);
   }
 }
 
-function function_8fb30e85(var_db66e5f5, var_beef13ae) {
-  setDvar(var_db66e5f5, 0);
+function addcheat(toggledvar, cheatfunc) {
+  setDvar(toggledvar, 0);
 
-  level.var_62079b93[var_db66e5f5] = getdvarint(var_db66e5f5, 0);
-  level.var_6722c38a[var_db66e5f5] = var_beef13ae;
+  level.cheatstates[toggledvar] = getdvarint(toggledvar, 0);
+  level.cheatfuncs[toggledvar] = cheatfunc;
 
-  if(level.var_62079b93[var_db66e5f5]) {
-    [[var_beef13ae]](level.var_62079b93[var_db66e5f5]);
+  if(level.cheatstates[toggledvar]) {
+    [[cheatfunc]](level.cheatstates[toggledvar]);
   }
 }
 
-function function_7f7b42b7(var_db66e5f5) {
-  var_d8568d2f = getdvarint(var_db66e5f5, 0);
+function checkcheatchanged(toggledvar) {
+  cheatvalue = getdvarint(toggledvar, 0);
 
-  if(level.var_62079b93[var_db66e5f5] == var_d8568d2f) {
+  if(level.cheatstates[toggledvar] == cheatvalue) {
     return;
   }
 
-  if(var_d8568d2f) {
+  if(cheatvalue) {
     level flag::set("has_cheated");
   }
 
-  level.var_62079b93[var_db66e5f5] = var_d8568d2f;
-  [[level.var_6722c38a[var_db66e5f5]]](var_d8568d2f);
+  level.cheatstates[toggledvar] = cheatvalue;
+  [[level.cheatfuncs[toggledvar]]](cheatvalue);
 }
 
-function function_ae608e1a() {
+function specialfeaturesmenu() {
   level endon(#"unloaded");
-  function_8fb30e85("sf_use_ignoreammo", &function_b68f06ea);
-  level.var_8c80c829 = getarraykeys(level.var_62079b93);
+  addcheat("sf_use_ignoreammo", &ignore_ammomode);
+  level.cheatdvars = getarraykeys(level.cheatstates);
 
   for(;;) {
-    for(index = 0; index < level.var_8c80c829.size; index++) {
-      function_7f7b42b7(level.var_8c80c829[index]);
+    for(index = 0; index < level.cheatdvars.size; index++) {
+      checkcheatchanged(level.cheatdvars[index]);
     }
 
     wait 0.5;
   }
 }
 
-function function_b68f06ea(var_d8568d2f) {
-  if(var_d8568d2f) {
+function ignore_ammomode(cheatvalue) {
+  if(cheatvalue) {
     setsaveddvar(#"player_sustainammo", 1);
     return;
   }

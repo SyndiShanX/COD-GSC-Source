@@ -613,7 +613,7 @@ function private function_c84c77d8(loadoutslot) {
   return true;
 }
 
-function give_talents(var_b280cc48 = 1) {
+function give_talents(givingloadout = 1) {
   pixbeginevent(#"");
   self.var_c8836f02 = self function_fd62a2aa(self.class_num);
 
@@ -641,10 +641,10 @@ function give_talents(var_b280cc48 = 1) {
   }
 
   if(var_621c7d1e) {
-    self addtalent(#"hash_25c2dcf9ec4c42e2");
+    self addtalent(#"talent_extraequipment_mp");
     var_72c4edde = 0;
 
-    if(var_b280cc48) {
+    if(givingloadout) {
       if(self function_b958b70d(self.class_num, "secondarygrenade") == #"eq_stimshot") {
         var_72c4edde = 1;
       }
@@ -1392,10 +1392,10 @@ function give_loadout(team, weaponclass, var_e0f216b9) {
   secondary_weapon = function_18a77b37("secondary");
   self function_43048d33(self.spawnweapon, primary_weapon, var_e0f216b9);
   self notify(#"loadout_given");
-  var_19546df5 = [];
-  var_19546df5[0] = primary_weapon.name;
-  var_19546df5[1] = secondary_weapon.name;
-  self function_bfb53a23(var_19546df5);
+  weaponnames = [];
+  weaponnames[0] = primary_weapon.name;
+  weaponnames[1] = secondary_weapon.name;
+  self function_bfb53a23(weaponnames);
   callback::callback(#"on_loadout");
   self thread function_b61852e1();
   pixendevent();

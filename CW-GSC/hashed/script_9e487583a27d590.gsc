@@ -45,7 +45,7 @@ function main(str_skipto, b_starting) {
   level namespace_31c67f6d::function_7fd3a4d8(undefined, undefined, 7, 5);
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 }
 
@@ -55,9 +55,9 @@ function function_ce65b08f() {
   }
 
   level.adler waittill(#"dialog_ready");
-  transient = savegame::function_6440b06b(#"transient");
-  transient.var_16e4161b = 1;
-  level thread savegame::function_7790f03();
+  transient = savegame::get_mission_data(#"transient");
+  transient.briefing_complete = 1;
+  level thread savegame::checkpoint_save_asap();
 }
 
 function function_a18b30d() {
@@ -289,7 +289,7 @@ function function_e695c6d4(str_skipto, b_starting) {
   level flag::wait_till("flag_post_takedown_ambient_scene_started");
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 }
 
@@ -465,7 +465,7 @@ function function_7fb12c66(str_skipto, b_starting) {
   flag::wait_till("flag_post_takedown_complete");
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {}
+function cleanup(str_objective, b_starting, b_direct, player) {}
 
 function function_a74a977e() {
   level thread function_5ad45a0();

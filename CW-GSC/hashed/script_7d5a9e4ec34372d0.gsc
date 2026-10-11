@@ -150,11 +150,11 @@ function function_91f37293() {
     if(owner zm_score::can_player_purchase(self.stub.var_4326facc.var_c1b23abb)) {
       owner thread zm_score::minus_to_player_score(self.stub.var_4326facc.var_c1b23abb);
       self.stub.var_4326facc.var_37db5cf = 1;
-      self.stub.var_4326facc playSound(#"hash_33440052dad5d98b");
+      self.stub.var_4326facc playSound(#"zmb_switch_rotate");
       self.stub.var_4326facc.var_fdec2822 rotateTo(self.angles + (179, 0, 0), 0.3);
       self.stub.var_4326facc.var_fdec2822 waittill(#"rotatedone");
       self.stub.var_4326facc function_7265ebeb(1);
-      self.stub.var_4326facc playSound(#"hash_43dad678bc35ddb7");
+      self.stub.var_4326facc playSound(#"zmb_switch_circuit");
       self.stub.var_4326facc.var_fdec2822 clientfield::increment("" + #"hash_575d68a64ff032b2", 1);
       self.stub.var_4326facc.var_d6b3b6e0 clientfield::set("" + #"hash_16e5e4d2ea0716b7", 2);
       self.stub.var_4326facc thread function_4dd91c93(owner);
@@ -192,9 +192,9 @@ function function_f86fba0f() {
   level endon(#"end_game");
   wait 30;
   self.var_fdec2822 rotateTo(self.angles + (90, 0, 0), 0.3);
-  self playSound(#"hash_33440052dad5d98b");
+  self playSound(#"zmb_switch_rotate");
   wait 0.3;
-  self playSound(#"hash_43dad678bc35ddb7");
+  self playSound(#"zmb_switch_circuit");
   self function_7265ebeb(0);
   self.var_d6b3b6e0 clientfield::set("" + #"hash_16e5e4d2ea0716b7", 1);
   level.var_9040138a = 0.2;
@@ -210,9 +210,9 @@ function function_f86fba0f() {
   wait 60;
   self.var_37db5cf = 0;
   self.var_fdec2822 rotateTo(self.angles, 0.3);
-  self playSound(#"hash_33440052dad5d98b");
+  self playSound(#"zmb_switch_rotate");
   wait 0.3;
-  self playSound(#"hash_43dad678bc35ddb7");
+  self playSound(#"zmb_switch_circuit");
   callback::remove_on_ai_killed(&function_ae0208d3);
 }
 
@@ -320,7 +320,7 @@ function function_f35a7c49(target) {
   iprintlnbold("<dev string:x38>");
 }
 
-function private function_d103a3d0(entity) {
+function private acquire_target(entity) {
   if(isDefined(entity)) {
     self.target_enemy = entity;
 
@@ -333,7 +333,7 @@ function private function_d103a3d0(entity) {
       }
     }
 
-    self notify(#"hash_3ddbfa242007e625");
+    self notify(#"enemy_in_sight");
     self.var_603547e4 = 0;
     self function_15cee126(self.var_2268588c.origin, entity.origin);
     return;
@@ -382,7 +382,7 @@ function function_fef32ab1(var_74bebc57) {
         self.var_603547e4 = 0;
         self function_15cee126(self.var_2268588c.origin, self.target_enemy.origin);
       } else {
-        self function_d103a3d0(undefined);
+        self acquire_target(undefined);
       }
     } else {
       e_target = undefined;
@@ -414,7 +414,7 @@ function function_fef32ab1(var_74bebc57) {
         self function_a76ab7f7();
       }
 
-      self function_d103a3d0(e_target);
+      self acquire_target(e_target);
     }
 
     self function_a76ab7f7();
@@ -458,13 +458,13 @@ function function_c46f0aa(var_edfffb43, target_entity, var_bb839e1, cone_angle, 
   return false;
 }
 
-function function_bace8f77(var_d7ca0fe) {
+function function_bace8f77(zone_names) {
   var_4bd85725 = [];
   alive_enemies = self getenemies();
 
   foreach(enemy in alive_enemies) {
     if(isDefined(enemy) && !isvehicle(enemy)) {
-      foreach(zone_name in var_d7ca0fe) {
+      foreach(zone_name in zone_names) {
         if(is_true(enemy zm_zonemgr::entity_in_zone(zone_name))) {
           if(!isDefined(var_4bd85725)) {
             var_4bd85725 = [];
@@ -489,7 +489,7 @@ function function_6ecaca22() {
   self notify("1cf7bcb5f2082076");
   self endon("1cf7bcb5f2082076");
   level endon(#"end_game");
-  self endon(#"hash_3ddbfa242007e625");
+  self endon(#"enemy_in_sight");
   self.var_603547e4 = 1;
 
   while(true) {
@@ -620,7 +620,7 @@ function turretscanning() {
   veh endon(#"death", #"death_started", #"end_turret_scanning");
   wait 0.8;
   veh playSound(#"mpl_turret_startup");
-  veh playLoopSound(#"hash_69240c6db92da5bf");
+  veh playLoopSound(#"mpl_turret_amb_loop");
   s_bundle = killstreaks::get_script_bundle("ultimate_turret");
   veh.maxsightdistsqrd = sqr(isDefined(s_bundle.var_2aeadfa0) ? s_bundle.var_2aeadfa0 : 3500);
   veh thread function_9d831b2f();

@@ -85,7 +85,7 @@ function function_f05c9e0a() {
   function_8341771e(function_91b29d2a("location_items_ski_slopes"), 8000, #"hash_448fb59468f176f9", array((-4880, -2985.5, 3625)));
 }
 
-function function_8341771e(locations, radius, name, var_1c36d5ca = []) {
+function function_8341771e(locations, radius, name, removes = []) {
   var_32948f8f = function_91b29d2a("dirty_bomb_stash");
 
   foreach(location in locations) {
@@ -95,7 +95,7 @@ function function_8341771e(locations, radius, name, var_1c36d5ca = []) {
         var_d196e508 = var_64b8ecb8.origin;
         item_world_fixup::function_a997e342(var_d196e508, 16);
 
-        foreach(remove_item in var_1c36d5ca) {
+        foreach(remove_item in removes) {
           if(distance2dsquared(remove_item, var_64b8ecb8.origin) <= 1024) {
             remove = 1;
           }

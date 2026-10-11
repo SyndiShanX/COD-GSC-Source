@@ -318,7 +318,7 @@ function on_vehicle_damage(params) {
 
         switch (params.smeansofdeath) {
           case #"mod_projectile":
-            self playsoundtoplayer(#"hash_4cf0470b5276e61a", occupant);
+            self playsoundtoplayer(#"prj_rocket_impact_player_vehicle", occupant);
             break;
           case #"mod_rifle_bullet":
           case #"mod_pistol_bullet":

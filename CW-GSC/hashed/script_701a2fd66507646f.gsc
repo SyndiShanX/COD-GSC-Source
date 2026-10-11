@@ -36,7 +36,7 @@ function private preload() {
   collectibles::add_callback("chaos_newspaper", &newspaper);
   collectibles::add_callback("chaos_radio_broadcast", &radio_broadcast);
   collectibles::add_callback("chaos_coded_message", &coded_message);
-  collectibles::add_callback("chaos_floppy_disk", &function_af235cd2);
+  collectibles::add_callback("chaos_floppy_disk", &floppy_disk);
 
   if(!isDefined(level.var_455ccc8b)) {
     level.var_455ccc8b = [];
@@ -73,7 +73,7 @@ function private function_db698ba5(dvar) {
     thread function_d444c39c(1);
     setDvar(#"hash_743976f5cb9fa81c", 0);
 
-    if(namespace_61e6d095::exists(#"anagrams")) {
+    if(scripted_widgets::exists(#"anagrams")) {
       player = getPlayers()[0];
 
       if(isDefined(player)) {
@@ -84,7 +84,7 @@ function private function_db698ba5(dvar) {
       }
     }
 
-    if(namespace_61e6d095::exists(#"coded_message")) {
+    if(scripted_widgets::exists(#"coded_message")) {
       player = getPlayers()[0];
 
       if(isDefined(player)) {
@@ -125,7 +125,7 @@ function private function_d444c39c(reset) {
   player endon(#"death");
   language = getdvarint(#"loc_language");
 
-  if(!reset && language !== savegame::function_2ee66e93(#"hash_182064942fb1b0ac")) {
+  if(!reset && language !== savegame::get_player_data(#"hash_182064942fb1b0ac")) {
     reset = 1;
   }
 
@@ -135,18 +135,18 @@ function private function_d444c39c(reset) {
     player flag::clear("anagram_solution_set");
   }
 
-  if(!isDefined(savegame::function_2ee66e93(#"hash_5dd320f3ff491aed")) || !isDefined(savegame::function_2ee66e93(#"hash_6ac9f93e38b74633")) || !isDefined(savegame::function_2ee66e93(#"hash_1cec68d3f5bf55f8")) || !isDefined(savegame::function_2ee66e93(#"hash_35b29e7e753dc631")) || !isDefined(savegame::function_2ee66e93(#"hash_100ec76505ac8673"))) {
+  if(!isDefined(savegame::get_player_data(#"hash_5dd320f3ff491aed")) || !isDefined(savegame::get_player_data(#"hash_6ac9f93e38b74633")) || !isDefined(savegame::get_player_data(#"hash_1cec68d3f5bf55f8")) || !isDefined(savegame::get_player_data(#"hash_35b29e7e753dc631")) || !isDefined(savegame::get_player_data(#"hash_100ec76505ac8673"))) {
     player clientfield::set_to_player("get_anagram_solution", 1);
     player flag::wait_till("anagram_solution_set");
     player clientfield::set_to_player("get_anagram_solution", 0);
     return;
   }
 
-  player globallogic_ui::function_9ed5232e("OperationChaos.passphraseIndex", savegame::function_2ee66e93(#"hash_5dd320f3ff491aed"));
-  player globallogic_ui::function_9ed5232e("OperationChaos.code", savegame::function_2ee66e93(#"hash_6ac9f93e38b74633"));
-  player globallogic_ui::function_9ed5232e("OperationChaos.anagramIndex", savegame::function_2ee66e93(#"hash_1cec68d3f5bf55f8"));
-  player globallogic_ui::function_9ed5232e("OperationChaos.number_sequence", savegame::function_2ee66e93(#"hash_35b29e7e753dc631"));
-  player globallogic_ui::function_9ed5232e("OperationChaos.seed", savegame::function_2ee66e93(#"hash_100ec76505ac8673"));
+  player globallogic_ui::function_9ed5232e("OperationChaos.passphraseIndex", savegame::get_player_data(#"hash_5dd320f3ff491aed"));
+  player globallogic_ui::function_9ed5232e("OperationChaos.code", savegame::get_player_data(#"hash_6ac9f93e38b74633"));
+  player globallogic_ui::function_9ed5232e("OperationChaos.anagramIndex", savegame::get_player_data(#"hash_1cec68d3f5bf55f8"));
+  player globallogic_ui::function_9ed5232e("OperationChaos.number_sequence", savegame::get_player_data(#"hash_35b29e7e753dc631"));
+  player globallogic_ui::function_9ed5232e("OperationChaos.seed", savegame::get_player_data(#"hash_100ec76505ac8673"));
   player globallogic_ui::function_9ed5232e("OperationChaos.passphraseRequiresList", 0);
   player globallogic_ui::function_9ed5232e("OperationChaos.floppyEntry.selectedPassphraseIndex", -1);
 }
@@ -195,7 +195,7 @@ function private function_5ecf5ec2(oldval, newval) {
 function private function_8b02e139(vox, var_577c1b53) {
   player = self;
 
-  if(is_true(savegame::function_2ee66e93(var_577c1b53))) {
+  if(is_true(savegame::get_player_data(var_577c1b53))) {
     return;
   }
 
@@ -212,14 +212,14 @@ function private function_b9938441(str_notify) {
 function newspaper() {
   player = getPlayers()[0];
   player endon(#"death");
-  var_43381ccf = savegame::function_2ee66e93(#"hash_1cec68d3f5bf55f8");
-  seed = savegame::function_2ee66e93(#"hash_100ec76505ac8673");
-  player globallogic_ui::function_9ed5232e("OperationChaos.anagramIndex", var_43381ccf);
+  anagramindex = savegame::get_player_data(#"hash_1cec68d3f5bf55f8");
+  seed = savegame::get_player_data(#"hash_100ec76505ac8673");
+  player globallogic_ui::function_9ed5232e("OperationChaos.anagramIndex", anagramindex);
   player globallogic_ui::function_9ed5232e("OperationChaos.seed", seed);
   uid = #"newspaper";
-  namespace_61e6d095::create(uid, #"hash_2f387cc5510b5100");
-  namespace_61e6d095::function_d3c3e5c3(uid, #"interactive_map");
-  namespace_61e6d095::set_state(uid, #"defaultstate");
+  scripted_widgets::create(uid, #"hash_2f387cc5510b5100");
+  scripted_widgets::function_d3c3e5c3(uid, #"interactive_map");
+  scripted_widgets::set_state(uid, #"defaultstate");
   var_bc8da67d = player namespace_70eba6e6::function_b6a02677();
   vox = "vox_cp_chao_01200_sims_sometimesthered_c7";
 
@@ -237,16 +237,16 @@ function newspaper() {
 
   player thread function_8b02e139(vox, #"hash_af0385a1ce3480a");
   wait 0.5;
-  namespace_61e6d095::set_state(uid, #"highlight");
+  scripted_widgets::set_state(uid, #"highlight");
 
   if(is_true(level.var_455ccc8b[#"hash_2db6dee0f1729341"])) {
-    namespace_61e6d095::function_29703592(uid);
+    scripted_widgets::function_29703592(uid);
   }
 
-  player namespace_61e6d095::function_b0bad5ff(#"hash_66c52f852ccf249f");
+  player scripted_widgets::function_b0bad5ff(#"hash_66c52f852ccf249f");
   player notify(#"hash_56811b455b9b0e25");
   player dialogue::function_9e580f95();
-  namespace_61e6d095::remove(uid);
+  scripted_widgets::remove(uid);
 }
 
 function radio_broadcast(params, num_entries = 10) {
@@ -254,20 +254,20 @@ function radio_broadcast(params, num_entries = 10) {
   player endon(#"death");
   player thread function_8b02e139("vox_cp_chao_01300_sims_youdidgoodfindi_15", #"hash_1a4a28d720563dea");
   var_9487875 = getscriptbundle("operation_chaos_anagrams");
-  var_e9ef7dab = savegame::function_2ee66e93(#"hash_5dd320f3ff491aed");
-  code = savegame::function_2ee66e93(#"hash_6ac9f93e38b74633");
-  var_bf871b87 = int(abs(savegame::function_2ee66e93(#"hash_1cec68d3f5bf55f8")));
-  var_2d96435a = savegame::function_2ee66e93(#"hash_35b29e7e753dc631");
-  seed = savegame::function_2ee66e93(#"hash_100ec76505ac8673");
+  var_e9ef7dab = savegame::get_player_data(#"hash_5dd320f3ff491aed");
+  code = savegame::get_player_data(#"hash_6ac9f93e38b74633");
+  var_bf871b87 = int(abs(savegame::get_player_data(#"hash_1cec68d3f5bf55f8")));
+  var_2d96435a = savegame::get_player_data(#"hash_35b29e7e753dc631");
+  seed = savegame::get_player_data(#"hash_100ec76505ac8673");
   var_721f874b = getarraykeys(var_9487875.anagrams);
   arrayremovevalue(var_721f874b, var_e9ef7dab);
   arrayremovevalue(var_721f874b, var_bf871b87);
   var_28ddca2c = [];
   var_28ddca2c[var_28ddca2c.size] = {
-    #var_a34b4160: var_9487875.anagrams[var_e9ef7dab].var_d0354c50, #code: var_2d96435a, #vox: var_9487875.anagrams[var_e9ef7dab].var_21d92d5d
+    #passphrase: var_9487875.anagrams[var_e9ef7dab].anagram, #code: var_2d96435a, #vox: var_9487875.anagrams[var_e9ef7dab].var_21d92d5d
   };
   var_28ddca2c[var_28ddca2c.size] = {
-    #var_a34b4160: var_9487875.anagrams[var_bf871b87].var_d0354c50, #code: code, #vox: var_9487875.anagrams[var_bf871b87].var_21d92d5d
+    #passphrase: var_9487875.anagrams[var_bf871b87].anagram, #code: code, #vox: var_9487875.anagrams[var_bf871b87].var_21d92d5d
   };
 
   for(i = 3; i <= num_entries; i++) {
@@ -306,11 +306,11 @@ function radio_broadcast(params, num_entries = 10) {
 
     rand = function_c9e9e505(seed, var_721f874b.size);
     seed = rand.seed;
-    var_a34b4160 = var_9487875.anagrams[var_721f874b[rand.rand]].var_d0354c50;
+    passphrase = var_9487875.anagrams[var_721f874b[rand.rand]].anagram;
     vox = var_9487875.anagrams[var_721f874b[rand.rand]].var_21d92d5d;
     arrayremoveindex(var_721f874b, rand.rand);
     var_28ddca2c[var_28ddca2c.size] = {
-      #var_a34b4160: var_a34b4160, #code: code, #vox: vox
+      #passphrase: passphrase, #code: code, #vox: vox
     };
   }
 
@@ -323,28 +323,28 @@ function radio_broadcast(params, num_entries = 10) {
   }
 
   uid = #"radio_broadcast";
-  namespace_61e6d095::create(uid, #"hash_7c7836c3804a86a6");
-  namespace_61e6d095::function_d3c3e5c3(uid, #"interactive_map");
-  namespace_61e6d095::function_46df0bc7(uid, 50);
+  scripted_widgets::create(uid, #"hash_7c7836c3804a86a6");
+  scripted_widgets::function_d3c3e5c3(uid, #"interactive_map");
+  scripted_widgets::function_46df0bc7(uid, 50);
 
   if(is_true(level.var_455ccc8b[#"hash_24e6120d6a8d655d"])) {
-    namespace_61e6d095::function_29703592(uid);
+    scripted_widgets::function_29703592(uid);
   }
 
-  namespace_61e6d095::function_9ade1d9b(uid, "title", params.title);
-  namespace_61e6d095::function_9ade1d9b(uid, "layout", 1);
+  scripted_widgets::function_9ade1d9b(uid, "title", params.title);
+  scripted_widgets::function_9ade1d9b(uid, "layout", 1);
 
   for(i = 0; i < var_28ddca2c.size; i++) {
-    namespace_61e6d095::function_f2a9266(uid, i, "name", var_28ddca2c[i].var_a34b4160);
+    scripted_widgets::function_f2a9266(uid, i, "name", var_28ddca2c[i].passphrase);
     var_d03b4642 = string(var_28ddca2c[i].code, 4);
-    namespace_61e6d095::function_f2a9266(uid, i, "subtitle", var_d03b4642[0] + "," + var_d03b4642[1] + "," + var_d03b4642[2] + "," + var_d03b4642[3]);
+    scripted_widgets::function_f2a9266(uid, i, "subtitle", var_d03b4642[0] + "," + var_d03b4642[1] + "," + var_d03b4642[2] + "," + var_d03b4642[3]);
   }
 
   player childthread function_a3fafde(uid, var_28ddca2c);
-  player namespace_61e6d095::function_b0bad5ff();
+  player scripted_widgets::function_b0bad5ff();
   player notify(#"hash_56811b455b9b0e25");
   player dialogue::function_9e580f95();
-  namespace_61e6d095::remove(uid);
+  scripted_widgets::remove(uid);
   snd::stop(level.var_fe8836d6);
   snd::stop(level.var_f0aaf5b5);
   snd::stop(level.var_751ee7b2);
@@ -359,13 +359,13 @@ function radio_broadcast(params, num_entries = 10) {
 function private function_a3fafde(uid, var_28ddca2c) {
   self endon(#"death", #"hash_56811b455b9b0e25");
 
-  for(var_57431990 = 0; true; var_57431990 = 1) {
+  for(isreplay = 0; true; isreplay = 1) {
     var_674fe008 = ["vox_cp_sh0_02000_fbro_zero_a0", "vox_cp_chao_02000_fbro_one_22", "vox_cp_chao_02000_fbro_two_3a", "vox_cp_chao_02000_fbro_three_f8", "vox_cp_chao_02000_fbro_four_9c", "vox_cp_chao_02000_fbro_five_8a", "vox_cp_chao_02000_fbro_six_34", "vox_cp_chao_02000_fbro_seven_01", "vox_cp_chao_02000_fbro_eight_f1", "vox_cp_chao_02000_fbro_nine_8a"];
     snd::play("uin_evidence_broadcast_start");
     level.var_751ee7b2 = snd::play("uin_evidence_broadcast_static_loop");
     self flag::set(#"hash_44be91b15efaf83d");
 
-    if(!var_57431990 && isDefined(self.player_radio_emitter)) {
+    if(!isreplay && isDefined(self.player_radio_emitter)) {
       self.player_radio_emitter waittill(#"hash_655372c132a19d0a");
       level.var_fe8836d6 = snd::play("uin_evidence_broadcast_static_melody");
       wait 4;
@@ -374,15 +374,15 @@ function private function_a3fafde(uid, var_28ddca2c) {
     for(i = 0; i < var_28ddca2c.size; i++) {
       wait randomfloatrange(0.5, 0.7);
       level.var_f0aaf5b5 = snd::play("uin_evidence_broadcast_beeps_between_lines");
-      namespace_61e6d095::function_9ade1d9b(uid, "audioWave", randomintrange(1, 4));
+      scripted_widgets::function_9ade1d9b(uid, "audioWave", randomintrange(1, 4));
       wait randomfloatrange(0.9, 1.1);
       self dialogue::radio(var_28ddca2c[i].vox);
-      namespace_61e6d095::function_9ade1d9b(uid, "audioWave", randomintrange(1, 4));
+      scripted_widgets::function_9ade1d9b(uid, "audioWave", randomintrange(1, 4));
       wait randomfloatrange(0.3, 0.5);
       var_a70a37a2 = string(var_28ddca2c[i].code, 4);
 
       for(str_index = 0; str_index < 4; str_index++) {
-        namespace_61e6d095::function_9ade1d9b(uid, "audioWave", randomintrange(1, 4));
+        scripted_widgets::function_9ade1d9b(uid, "audioWave", randomintrange(1, 4));
         self dialogue::radio(var_674fe008[int(getsubstr(var_a70a37a2, str_index, str_index + 1))]);
         wait randomfloatrange(0.15, 0.3);
       }
@@ -392,7 +392,7 @@ function private function_a3fafde(uid, var_28ddca2c) {
     snd::play("uin_evidence_broadcast_end");
     wait 0.3;
     snd::stop(level.var_751ee7b2);
-    namespace_61e6d095::function_9ade1d9b(uid, "audioWave", 0);
+    scripted_widgets::function_9ade1d9b(uid, "audioWave", 0);
     wait 1;
     namespace_c8e236da::removelist();
     namespace_c8e236da::function_ebf737f8(#"hash_3893375dc8d4a2a2");
@@ -406,32 +406,32 @@ function private function_a3fafde(uid, var_28ddca2c) {
 function coded_message() {
   player = getPlayers()[0];
   player endon(#"death");
-  code = savegame::function_2ee66e93(#"hash_35b29e7e753dc631");
-  seed = savegame::function_2ee66e93(#"hash_100ec76505ac8673");
+  code = savegame::get_player_data(#"hash_35b29e7e753dc631");
+  seed = savegame::get_player_data(#"hash_100ec76505ac8673");
   player globallogic_ui::function_9ed5232e("OperationChaos.number_sequence", code);
   player globallogic_ui::function_9ed5232e("OperationChaos.seed", seed);
   uid = #"coded_message";
-  namespace_61e6d095::create(uid, #"hash_29246bd6b5d544d2");
-  namespace_61e6d095::function_d3c3e5c3(uid, #"interactive_map");
-  namespace_61e6d095::function_f942c3ed(uid, "DefaultClip");
+  scripted_widgets::create(uid, #"hash_29246bd6b5d544d2");
+  scripted_widgets::function_d3c3e5c3(uid, #"interactive_map");
+  scripted_widgets::function_f942c3ed(uid, "DefaultClip");
 
   if(is_true(level.var_455ccc8b[#"hash_1412afe4a2259541"])) {
-    namespace_61e6d095::function_29703592(uid);
+    scripted_widgets::function_29703592(uid);
   }
 
   player thread function_8b02e139("vox_cp_chao_01400_sims_aftermasonbroug_51", #"hash_7cb97d07f8fd21fc");
   waitframe(1);
-  namespace_61e6d095::function_f942c3ed(uid, "Reveal");
-  player namespace_61e6d095::function_b0bad5ff(#"hash_4d971fa74eb99bb7");
+  scripted_widgets::function_f942c3ed(uid, "Reveal");
+  player scripted_widgets::function_b0bad5ff(#"hash_4d971fa74eb99bb7");
   player notify(#"hash_56811b455b9b0e25");
   player dialogue::function_9e580f95();
-  namespace_61e6d095::remove(uid);
+  scripted_widgets::remove(uid);
 }
 
-function function_af235cd2() {
+function floppy_disk() {
   player = getPlayers()[0];
   player endon(#"death");
-  var_239b86f4 = player_decision::function_ee124ba3();
+  decrypted = player_decision::function_ee124ba3();
 
   if(!player gamepadusedlast()) {
     namespace_c8e236da::removelist();
@@ -442,14 +442,14 @@ function function_af235cd2() {
   namespace_6f1d35e1::function_b2911127(0);
   var_2f8f8378 = clientfield::get_to_player("set_hub_dof");
   var_5a0a6894 = clientfield::get_to_player("set_hub_fov");
-  var_1464e28f = player clientfield::get_to_player("pstfx_t9_cp_hub_eboard_vignette");
+  vig = player clientfield::get_to_player("pstfx_t9_cp_hub_eboard_vignette");
   overview = player clientfield::get_to_player("pstfx_t9_cp_hub_eboard_overview");
   link_ent = player getlinkedent();
   playerpos = player getplayercamerapos();
   playerangles = player getplayerangles();
   wait 0.25;
 
-  if(!var_239b86f4) {
+  if(!decrypted) {
     player thread function_8b02e139("vox_cp_chao_01500_sims_ifwedecryptthep_4d", #"hash_74dace636845482f");
   }
 
@@ -472,9 +472,9 @@ function function_af235cd2() {
   var_7ab1a25c = struct::get("computer_camera_position");
   player camerasetposition(var_7ab1a25c.origin, var_7ab1a25c.angles);
   thread util::screen_fade_in(0.25);
-  namespace_61e6d095::function_4279fd02(#"interactive_map");
+  scripted_widgets::function_4279fd02(#"interactive_map");
 
-  if(var_239b86f4) {
+  if(decrypted) {
     namespace_6f1d35e1::function_eea42dd9(#"hash_53e6026705a8bb51", 1);
     namespace_6f1d35e1::function_487b4340(#"hash_678fbc89038dae9a", 0);
     namespace_6f1d35e1::function_5d2e6f6a(1);
@@ -486,7 +486,7 @@ function function_af235cd2() {
     namespace_6f1d35e1::function_d599de13(2);
     player playSound(#"hash_630b57e974ec901a");
     namespace_6f1d35e1::function_4951a2c8(1, 2);
-    namespace_61e6d095::function_b0bad5ff();
+    scripted_widgets::function_b0bad5ff();
   } else {
     var_795ae76c = 1;
 
@@ -614,7 +614,7 @@ function function_af235cd2() {
               namespace_6f1d35e1::function_d599de13(1);
               var_795ae76c = 0;
 
-              if(!is_true(savegame::function_2ee66e93(#"hash_84cb867109a043e"))) {
+              if(!is_true(savegame::get_player_data(#"hash_84cb867109a043e"))) {
                 player dialogue::function_9e580f95();
                 player util::delay(1, undefined, &dialogue::radio, "vox_cp_chao_01600_sims_hellyeahthatsit_51");
               }
@@ -644,7 +644,7 @@ function function_af235cd2() {
       wait 6;
       player_decision::function_557c31b1();
 
-      if(is_true(savegame::function_2ee66e93(#"hash_84cb867109a043e"))) {
+      if(is_true(savegame::get_player_data(#"hash_84cb867109a043e"))) {
         savegame::set_player_data(#"hash_84cb867109a043e", 1);
       }
 
@@ -657,7 +657,7 @@ function function_af235cd2() {
   wait 0.15;
   player clientfield::set_to_player("set_hub_dof", var_2f8f8378);
   player clientfield::set_to_player("set_hub_fov", var_5a0a6894);
-  player clientfield::set_to_player("pstfx_t9_cp_hub_eboard_vignette", var_1464e28f);
+  player clientfield::set_to_player("pstfx_t9_cp_hub_eboard_vignette", vig);
   player clientfield::set_to_player("pstfx_t9_cp_hub_eboard_overview", overview);
   player unlink();
   player playerlinkTo(link_ent, "tag_origin");
@@ -672,33 +672,33 @@ function function_af235cd2() {
   namespace_6f1d35e1::function_b2911127(0);
   thread util::screen_fade_in(0.15);
   wait 0.15;
-  namespace_61e6d095::function_28027c42(#"interactive_map");
+  scripted_widgets::function_28027c42(#"interactive_map");
 }
 
 function private function_5b15c4b3() {
   var_9487875 = getscriptbundle("operation_chaos_anagrams");
-  namespace_61e6d095::create(#"dialog_tree", #"hash_5ee7619b9b614d34");
-  namespace_61e6d095::function_d3c3e5c3(#"dialog_tree", [#"interactive_map", #"computer", #"dialog_tree"]);
-  namespace_61e6d095::set_x(#"dialog_tree", 590);
-  namespace_61e6d095::set_y(#"dialog_tree", 500);
-  namespace_61e6d095::function_9ade1d9b(#"dialog_tree", "index", 0);
-  namespace_61e6d095::function_9ade1d9b(#"dialog_tree", "timeOut", 0);
-  namespace_61e6d095::function_9ade1d9b(#"dialog_tree", "stateIndex", 1);
-  namespace_61e6d095::function_9ade1d9b(#"dialog_tree", "optionSelected", 0);
-  namespace_61e6d095::function_9ade1d9b(#"dialog_tree", "kbmIndexSelected", -1);
-  namespace_61e6d095::function_9ade1d9b(#"dialog_tree", "isActive", 1);
-  namespace_61e6d095::function_9ade1d9b(#"dialog_tree", "listVcount", 6);
+  scripted_widgets::create(#"dialog_tree", #"hash_5ee7619b9b614d34");
+  scripted_widgets::function_d3c3e5c3(#"dialog_tree", [#"interactive_map", #"computer", #"dialog_tree"]);
+  scripted_widgets::set_x(#"dialog_tree", 590);
+  scripted_widgets::set_y(#"dialog_tree", 500);
+  scripted_widgets::function_9ade1d9b(#"dialog_tree", "index", 0);
+  scripted_widgets::function_9ade1d9b(#"dialog_tree", "timeOut", 0);
+  scripted_widgets::function_9ade1d9b(#"dialog_tree", "stateIndex", 1);
+  scripted_widgets::function_9ade1d9b(#"dialog_tree", "optionSelected", 0);
+  scripted_widgets::function_9ade1d9b(#"dialog_tree", "kbmIndexSelected", -1);
+  scripted_widgets::function_9ade1d9b(#"dialog_tree", "isActive", 1);
+  scripted_widgets::function_9ade1d9b(#"dialog_tree", "listVcount", 6);
 
-  foreach(index, var_d0354c50 in var_9487875.anagrams) {
-    namespace_61e6d095::function_f2a9266(#"dialog_tree", index, "dialogString", var_d0354c50.var_d0354c50);
+  foreach(index, anagram in var_9487875.anagrams) {
+    scripted_widgets::function_f2a9266(#"dialog_tree", index, "dialogString", anagram.anagram);
   }
 
-  namespace_61e6d095::function_73c9a490(#"dialog_tree", 1);
+  scripted_widgets::function_73c9a490(#"dialog_tree", 1);
   namespace_6f1d35e1::function_f6fbe41(2, #"");
   selected = level waittill(#"dialog_tree_option_selected");
   self globallogic_ui::function_9ed5232e("OperationChaos.floppyEntry.selectedPassphraseIndex", selected.optindex);
-  namespace_6f1d35e1::function_f6fbe41(2, var_9487875.anagrams[selected.optindex].var_d0354c50);
-  namespace_61e6d095::remove(#"dialog_tree");
+  namespace_6f1d35e1::function_f6fbe41(2, var_9487875.anagrams[selected.optindex].anagram);
+  scripted_widgets::remove(#"dialog_tree");
 }
 
 function private function_7cfb600() {

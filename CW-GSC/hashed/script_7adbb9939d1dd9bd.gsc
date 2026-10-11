@@ -33,7 +33,7 @@ function private preinit() {
 
   if(devbuild) {
     level thread function_97346595();
-    level thread function_d379ba37();
+    level thread devguithink();
   }
 }
 
@@ -144,7 +144,7 @@ function private function_c5342e8d() {
   self val::set(#"bot_soak", "takedamage", 0);
 }
 
-function function_d379ba37() {
+function devguithink() {
   setDvar(#"hash_429bdf1368d1a22c", "");
 
   while(true) {

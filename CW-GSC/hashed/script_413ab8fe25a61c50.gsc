@@ -45,7 +45,7 @@ function function_93e7ee52(challengetype = 0, name) {
 
   switch (challengetype) {
     case 1:
-      level thread namespace_9fc66ac::announce(62);
+      level thread doa_sound::announce(62);
       def = doa_enemy::function_251ee3bd("barreler_zombie");
       [[def]] - > function_7edd7727(6);
       level.doa.var_a77e4601[level.doa.var_a77e4601.size] = def;
@@ -54,18 +54,18 @@ function function_93e7ee52(challengetype = 0, name) {
       level.doa.var_a77e4601[level.doa.var_a77e4601.size] = def;
       break;
     case 2:
-      level thread namespace_9fc66ac::announce(62);
+      level thread doa_sound::announce(62);
       level thread function_d1dc367c();
       def = doa_enemy::function_251ee3bd("riser_zombie");
       break;
     case 3:
-      level thread namespace_9fc66ac::announce(62);
+      level thread doa_sound::announce(62);
       level thread function_97aae609();
       def = doa_enemy::function_251ee3bd("smoke_zombie");
       [[def]] - > function_7edd7727(6);
       break;
     case 4:
-      level thread namespace_9fc66ac::announce(62);
+      level thread doa_sound::announce(62);
       def = doa_enemy::function_251ee3bd("gladiator_destroyer");
       [[def]] - > function_7edd7727(6);
       level.doa.var_a77e4601[level.doa.var_a77e4601.size] = def;
@@ -80,25 +80,25 @@ function function_93e7ee52(challengetype = 0, name) {
 
       break;
     case 5:
-      level thread namespace_9fc66ac::announce(62);
+      level thread doa_sound::announce(62);
       def = doa_enemy::function_251ee3bd("ghost_zombie");
       [[def]] - > function_7edd7727(6);
       level.doa.var_a77e4601[level.doa.var_a77e4601.size] = def;
       break;
     case 6:
-      level thread namespace_9fc66ac::announce(63);
+      level thread doa_sound::announce(63);
       level thread function_17f47e92();
       break;
     case 7:
-      level thread namespace_9fc66ac::announce(62);
+      level thread doa_sound::announce(62);
       level thread function_9f6da3ff();
       break;
     case 8:
-      level thread namespace_9fc66ac::announce(62);
+      level thread doa_sound::announce(62);
       level thread function_cd4e6a10();
       break;
     case 9:
-      level thread namespace_9fc66ac::announce(62);
+      level thread doa_sound::announce(62);
       def = doa_enemy::function_251ee3bd("pole_zombie");
 
       for(count = getPlayers().size; count; count--) {
@@ -113,15 +113,15 @@ function function_93e7ee52(challengetype = 0, name) {
       level.doa.var_a77e4601[level.doa.var_a77e4601.size] = def;
       break;
     case 10:
-      level thread namespace_9fc66ac::announce(63);
+      level thread doa_sound::announce(63);
       level thread function_382bc607();
       break;
     case 11:
-      level thread namespace_9fc66ac::announce(62);
+      level thread doa_sound::announce(62);
       level thread function_bd313167();
       break;
     case 12:
-      level thread namespace_9fc66ac::announce(63);
+      level thread doa_sound::announce(63);
       level thread function_c6834d32();
       break;
   }
@@ -132,10 +132,10 @@ function function_93e7ee52(challengetype = 0, name) {
     if(isDefined(loot.script_noteworthy)) {
       items = strtok(loot.script_noteworthy, ";");
       item = items[randomint(items.size)];
-      def = namespace_dfc652ee::function_6265bde4(item);
+      def = doa_pickups::function_6265bde4(item);
 
       if(isDefined(def)) {
-        pickup = level namespace_dfc652ee::itemspawn(def, loot.origin, undefined, undefined, 1);
+        pickup = level doa_pickups::itemspawn(def, loot.origin, undefined, undefined, 1);
 
         if(isDefined(pickup)) {
           pickup.origin = loot.origin;
@@ -143,8 +143,8 @@ function function_93e7ee52(challengetype = 0, name) {
 
           if(isDefined(pickup.glowfx) && pickup.glowfx !== "glow_yellow") {
             util::wait_network_frame();
-            pickup namespace_83eb6304::turnofffx(pickup.glowfx);
-            pickup namespace_83eb6304::function_3ecfde67("glow_yellow");
+            pickup doa_fx::turnofffx(pickup.glowfx);
+            pickup doa_fx::function_3ecfde67("glow_yellow");
           }
         }
       }
@@ -267,7 +267,7 @@ function function_d1dc367c() {
   waves = 5 + 4 * level.doa.var_6c58d51;
   var_87b290c9 = level.doa.var_ccbf8c33.size;
   level.doa.var_13e8f9c9 = "walk";
-  players = namespace_7f5aeb59::function_23e1f90f();
+  players = doa_player_utility::function_23e1f90f();
   var_58bd90cd = 2;
 
   while(waves) {
@@ -319,7 +319,7 @@ function function_97aae609() {
 
     for(regular = randomintrange(5, 15); regular; regular--) {
       spot = [[level.doa.var_39e3fa99]] - > function_21d1be3d(function_7802d126());
-      namespace_8c04284b::function_24058346(spot);
+      doa_arena::function_24058346(spot);
     }
 
     wait 10;
@@ -350,8 +350,8 @@ function function_7802d126() {
   return "bottom";
 }
 
-function function_d1603826(var_94f3b914, var_9e20508c = 15) {
-  doa_enemy::function_a6b807ea(var_94f3b914, var_9e20508c, level.doa.var_6d072a34.origin, 0, undefined, undefined, undefined, level.doa.var_39e3fa99);
+function function_d1603826(var_94f3b914, qty = 15) {
+  doa_enemy::function_a6b807ea(var_94f3b914, qty, level.doa.var_6d072a34.origin, 0, undefined, undefined, undefined, level.doa.var_39e3fa99);
 }
 
 function function_6876f78c() {
@@ -388,14 +388,14 @@ function function_17f47e92() {
     level.doa.var_d15a522 = doa_enemy::function_d7c5adee("blight_father");
   }
 
-  var_f8ff628e = doa_enemy::function_db55a448(level.doa.var_d15a522, level.doa.var_6d072a34.origin);
+  underboss = doa_enemy::function_db55a448(level.doa.var_d15a522, level.doa.var_6d072a34.origin);
 
   if(is_true(level.var_a095060b)) {
-    var_f8ff628e thread namespace_ec06fe4a::function_3b3bb5c(0.1, 600);
+    underboss thread namespace_ec06fe4a::function_3b3bb5c(0.1, 600);
   }
 
-  if(isDefined(var_f8ff628e)) {
-    var_f8ff628e waittill(#"death");
+  if(isDefined(underboss)) {
+    underboss waittill(#"death");
   }
 
   [[level.doa.var_39e3fa99]] - > function_6d5262dc(maxai);
@@ -494,20 +494,20 @@ function function_cd4e6a10() {
     level.doa.var_ce4f409c = doa_enemy::function_d7c5adee("werewolf");
   }
 
-  var_f8ff628e = doa_enemy::function_db55a448(level.doa.var_ce4f409c, origin);
+  underboss = doa_enemy::function_db55a448(level.doa.var_ce4f409c, origin);
 
-  if(isDefined(var_f8ff628e)) {
+  if(isDefined(underboss)) {
     level doa_banner::function_7a0e5387(37);
-    level thread namespace_9fc66ac::announce(63);
+    level thread doa_sound::announce(63);
 
     if(is_true(level.var_a095060b)) {
-      var_f8ff628e thread namespace_ec06fe4a::function_3b3bb5c(0.1, 1500);
+      underboss thread namespace_ec06fe4a::function_3b3bb5c(0.1, 1500);
     }
 
-    var_f8ff628e waittill(#"death");
+    underboss waittill(#"death");
   }
 
-  namespace_8c04284b::function_c8462f96();
+  doa_arena::function_c8462f96();
   level namespace_ec06fe4a::function_de70888a();
   [[level.doa.var_39e3fa99]] - > function_6d5262dc(maxai);
 }
@@ -617,16 +617,16 @@ function function_382bc607() {
     level.doa.var_59bbfb44 = doa_enemy::function_d7c5adee("gegenees");
   }
 
-  var_f8ff628e = doa_enemy::function_db55a448(level.doa.var_59bbfb44, level.doa.var_6d072a34.origin);
+  underboss = doa_enemy::function_db55a448(level.doa.var_59bbfb44, level.doa.var_6d072a34.origin);
 
-  if(isDefined(var_f8ff628e)) {
+  if(isDefined(underboss)) {
     if(is_true(level.var_a095060b)) {
-      var_f8ff628e thread namespace_ec06fe4a::function_3b3bb5c(0.1, 600);
+      underboss thread namespace_ec06fe4a::function_3b3bb5c(0.1, 600);
     }
 
-    var_f8ff628e waittill(#"death");
+    underboss waittill(#"death");
   }
 
-  namespace_8c04284b::function_c8462f96();
+  doa_arena::function_c8462f96();
   level namespace_ec06fe4a::function_de70888a();
 }

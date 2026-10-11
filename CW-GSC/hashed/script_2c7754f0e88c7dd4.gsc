@@ -74,24 +74,24 @@ function function_fd051611(s_params) {
 
   if(isDefined(def)) {
     invul = gettime() + 1000;
-    var_3dcc592c = doa_enemy::function_db55a448(def, origin + (0, 0, 8), enemy);
-    var_5001fd97 = doa_enemy::function_db55a448(def, origin + (0, 0, 32), enemy);
+    ai1 = doa_enemy::function_db55a448(def, origin + (0, 0, 8), enemy);
+    ai2 = doa_enemy::function_db55a448(def, origin + (0, 0, 32), enemy);
 
-    if(isDefined(var_3dcc592c)) {
-      var_3dcc592c.var_9cb9d79f = invul;
-      var_3dcc592c namespace_83eb6304::function_3ecfde67("demon_burst");
+    if(isDefined(ai1)) {
+      ai1.var_9cb9d79f = invul;
+      ai1 doa_fx::function_3ecfde67("demon_burst");
 
-      if(is_true(self.shieldhit) || is_true(self.var_6dc6e670)) {
-        var_3dcc592c launchvehicle((randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(75, 120)));
+      if(is_true(self.shieldhit) || is_true(self.nukedeath)) {
+        ai1 launchvehicle((randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(75, 120)));
       }
     }
 
-    if(isDefined(var_5001fd97)) {
-      var_5001fd97.var_9cb9d79f = invul;
-      var_5001fd97 namespace_83eb6304::function_3ecfde67("demon_burst");
+    if(isDefined(ai2)) {
+      ai2.var_9cb9d79f = invul;
+      ai2 doa_fx::function_3ecfde67("demon_burst");
 
-      if(is_true(self.shieldhit) || is_true(self.var_6dc6e670)) {
-        var_5001fd97 launchvehicle((randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(75, 120)));
+      if(is_true(self.shieldhit) || is_true(self.nukedeath)) {
+        ai2 launchvehicle((randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(75, 120)));
       }
     }
   }

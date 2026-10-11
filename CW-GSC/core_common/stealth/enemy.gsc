@@ -79,7 +79,7 @@ function init_settings() {
   self.stealth.var_29672bb5 = "<dev string:x38>";
 
   self.newenemyreactiondistsq = sqr(400);
-  self namespace_cc4354b9::corpse_init_entity();
+  self stealth_corpse::corpse_init_entity();
   self.stealth.event_escalation_scalar = 0;
 
   if(!isDefined(level.stealth.damage_auto_range)) {
@@ -184,7 +184,7 @@ function proximity_check() {
   }
 
   var_9f447779 = 11025;
-  var_2b2af503 = undefined;
+  myeye = undefined;
   playereye = undefined;
 
   foreach(player in getPlayers()) {
@@ -336,10 +336,10 @@ function set_sight_state(state) {
       self.fovcosineperiph = 0.01;
       self.fovcosineperiphmaxdistsq = 16384;
       break;
-    case #"hash_5689f41e8c0ad00":
+    case #"flashlight_in_dark":
       assertmsg("<dev string:x6b>");
       break;
-    case #"hash_2689c03316776ffb":
+    case #"townhouse":
       assertmsg("<dev string:x6b>");
       break;
     case #"elevated":
@@ -390,7 +390,7 @@ function set_alert_level(type, event) {
   self thread stealth_debug::debug_alert(type);
 
   self namespace_979752dc::set_stealth_state(type);
-  self notify(#"hash_1969930500784d9a", type);
+  self notify(#"stealth_alertlevel_change", type);
   self.alertlevel = namespace_979752dc::alertlevel_script_to_exe(type);
   iscombat = self.alertlevelint >= level.stealth.alert_levels_exe[#"combat"];
   self stealth_event::event_entity_core_set_enabled(!iscombat);
@@ -520,8 +520,8 @@ function headtrack_player_toggle(bool) {
 
 function lock_player_headtracking_off(duration) {
   self endon(#"death");
-  self notify(#"hash_602f82a12f43d586");
-  self endon(#"hash_602f82a12f43d586");
+  self notify(#"lock_headtracking_off");
+  self endon(#"lock_headtracking_off");
   self disable_player_headtracking();
   wait duration;
   self enable_player_headtracking();

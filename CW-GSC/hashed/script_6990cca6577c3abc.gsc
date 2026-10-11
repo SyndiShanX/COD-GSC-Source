@@ -123,10 +123,10 @@ function postinit() {
 }
 
 function private on_player_connect() {
-  self thread function_b4b736a0();
+  self thread player_watch_max_ammo();
 }
 
-function private function_b4b736a0() {
+function private player_watch_max_ammo() {
   self notify("35a5a9395d21a138");
   self endon("35a5a9395d21a138");
   self endon(#"death");
@@ -805,7 +805,7 @@ function function_709843c2(params) {
 
   b_death = params.idamage > self.health;
 
-  if(is_true(self.var_687de2a9)) {
+  if(is_true(self.crystallized)) {
     self.var_d7b66cd8 += params.idamage;
 
     if(self.var_d7b66cd8 >= 3000 || params.smeansofdeath === "MOD_MELEE") {
@@ -841,7 +841,7 @@ function function_d1534cde(params) {
 }
 
 function function_f81a3f00(params) {
-  self.var_687de2a9 = 1;
+  self.crystallized = 1;
   self clientfield::set("" + #"hash_d1d4ed99da50a4b", 1);
   self.var_d7b66cd8 = 0;
   self.var_3af9cf02 = 0;
@@ -1016,11 +1016,11 @@ function on_item_drop(params) {
   }
 }
 
-function function_e5469f27(weapon, var_131779dd) {
+function function_e5469f27(weapon, is_axe) {
   var_55687712 = self item_inventory::function_230ceec4(weapon);
 
   if(isDefined(var_55687712.paplv)) {
-    if(is_true(var_131779dd)) {
+    if(is_true(is_axe)) {
       switch (var_55687712.paplv) {
         case 1:
           return 2;

@@ -148,7 +148,7 @@ function entityspawned(localclientnum) {
       self thread[[level._customactorcbfunc]](localclientnum);
     }
 
-    self callback(#"hash_1fc6e31d0d02aa3", localclientnum);
+    self callback(#"on_actor_spawned", localclientnum);
     return;
   }
 

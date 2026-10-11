@@ -167,13 +167,13 @@ function private function_ef6f1667() {
 
   while(isDefined(level.var_9c2f3e27) == 1) {
     now = gettime();
-    var_4359175b = array();
+    audiodebughuds = array();
 
     foreach(hud in level.var_9c2f3e27) {
       assert(isremovedentity(hud) == 0);
 
       if(hud.duration > 0) {
-        var_4359175b[var_4359175b.size] = hud;
+        audiodebughuds[audiodebughuds.size] = hud;
 
         if(hud.time == now) {
           continue;
@@ -192,7 +192,7 @@ function private function_ef6f1667() {
       hud destroy();
     }
 
-    level.var_9c2f3e27 = var_4359175b;
+    level.var_9c2f3e27 = audiodebughuds;
     waitframe(1);
   }
 }
@@ -226,14 +226,14 @@ function private function_b506ee85(duration) {
 function private function_2f282ca2(posx, posy, text, color, alpha, scale, duration) {
   hud_width = 640;
   hud_height = 480;
-  var_b03b36b6 = hud_width / hud_height;
-  var_1790a507 = function_827811b5();
-  var_38c41a5e = var_1790a507[0];
-  var_c13d121d = var_1790a507[1];
-  var_60d4d877 = var_38c41a5e / var_c13d121d;
-  widthoffset = -0.5 * (hud_height * var_60d4d877 - hud_width);
-  hudx = posx / var_38c41a5e * hud_width + (1 - posx / var_38c41a5e * 0.5) * widthoffset;
-  hudy = posy / var_c13d121d * hud_height;
+  hud_aspect = hud_width / hud_height;
+  vidresolution = function_827811b5();
+  vidwidth = vidresolution[0];
+  vidheight = vidresolution[1];
+  vidaspect = vidwidth / vidheight;
+  widthoffset = -0.5 * (hud_height * vidaspect - hud_width);
+  hudx = posx / vidwidth * hud_width + (1 - posx / vidwidth * 0.5) * widthoffset;
+  hudy = posy / vidheight * hud_height;
 
   if(isDefined(level.var_9c2f3e27) == 0) {
     level.var_9c2f3e27 = array();
@@ -251,7 +251,7 @@ function private function_2f282ca2(posx, posy, text, color, alpha, scale, durati
   hud.font = "<dev string:x6b>";
   hud.alignx = "<dev string:x5f>";
   hud.aligny = "<dev string:x79>";
-  hud.var_eeaee6a5 = "<dev string:x83>";
+  hud.horizalign = "<dev string:x83>";
   hud.vertalign = "<dev string:x83>";
   hud.xoffset = 0;
   hud.yoffset = 0;

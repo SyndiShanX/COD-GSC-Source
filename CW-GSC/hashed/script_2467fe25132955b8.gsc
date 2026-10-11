@@ -63,29 +63,29 @@ function vecscale(vec, scalar) {
 function function_6736205c(var_638b775a = 0) {
   self endon(#"death", #"hash_34e7ef4239d22ba9");
   self namespace_1b527536::function_460882e2(1);
-  var_189ef5f2 = spawnStruct();
+  frost_blast_aoe = spawnStruct();
   v_forward = vecscale(vectorNormalize(anglesToForward(self.angles)), 64);
-  var_189ef5f2.origin = self.origin;
-  var_189ef5f2.origin += v_forward;
+  frost_blast_aoe.origin = self.origin;
+  frost_blast_aoe.origin += v_forward;
 
   switch (var_638b775a) {
     case 0:
-      playFX("zm_weapons/fx9_fld_frost_blast_lvl0_3p", var_189ef5f2.origin);
+      playFX("zm_weapons/fx9_fld_frost_blast_lvl0_3p", frost_blast_aoe.origin);
       self clientfield::increment_to_player("fx_frost_blast_1p_lv1_clientfield", 1);
       break;
     case 1:
     case 2:
-      playFX("zm_weapons/fx9_fld_frost_blast_lvl1_3p", var_189ef5f2.origin);
+      playFX("zm_weapons/fx9_fld_frost_blast_lvl1_3p", frost_blast_aoe.origin);
       self clientfield::increment_to_player("fx_frost_blast_1p_lv3_clientfield", 1);
       break;
     case 3:
     case 4:
     case 5:
-      playFX("zm_weapons/fx9_fld_frost_blast_lvl3_3p", var_189ef5f2.origin);
+      playFX("zm_weapons/fx9_fld_frost_blast_lvl3_3p", frost_blast_aoe.origin);
       self clientfield::increment_to_player("fx_frost_blast_1p_lv3_clientfield", 1);
       break;
     default:
-      playFX("zm_weapons/fx9_fld_frost_blast_lvl1_3p", var_189ef5f2.origin);
+      playFX("zm_weapons/fx9_fld_frost_blast_lvl1_3p", frost_blast_aoe.origin);
       self clientfield::increment_to_player("fx_frost_blast_1p_lv3_clientfield", 1);
       break;
   }
@@ -94,7 +94,7 @@ function function_6736205c(var_638b775a = 0) {
   duration = 3;
   damage = 100;
   weapon = getweapon(#"frost_blast");
-  var_3decbda2 = #"hash_59f3861d4983e53";
+  var_3decbda2 = #"zmb_fieldup_frostblast_activate";
   var_89ae2770 = #"hash_6096d838f90bc781";
   slowdown = #"frost_blast";
 
@@ -127,7 +127,7 @@ function function_6736205c(var_638b775a = 0) {
 
   self playSound(var_3decbda2);
   playSoundAtPosition(var_89ae2770, self.origin);
-  nearbyzombies = getentitiesinradius(var_189ef5f2.origin, radius, 15);
+  nearbyzombies = getentitiesinradius(frost_blast_aoe.origin, radius, 15);
 
   foreach(zombie in nearbyzombies) {
     if(isalive(zombie) && zombie.team === level.zombie_team) {
@@ -140,7 +140,7 @@ function function_6736205c(var_638b775a = 0) {
   }
 
   while(true) {
-    nearbyzombies = getentitiesinradius(var_189ef5f2.origin, radius, 15);
+    nearbyzombies = getentitiesinradius(frost_blast_aoe.origin, radius, 15);
 
     foreach(zombie in nearbyzombies) {
       if(isalive(zombie) && zombie.team === level.zombie_team && (zombie.zm_ai_category === #"normal" || zombie.archetype === #"zombie_dog" || var_638b775a >= 3 && zombie.zm_ai_category === #"special")) {

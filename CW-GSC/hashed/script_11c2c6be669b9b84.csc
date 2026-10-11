@@ -6,10 +6,10 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\system_shared;
-#namespace namespace_61e6d095;
+#namespace scripted_widgets;
 
 function private autoexec __init__system__() {
-  system::register(#"hash_7f2a4dd4a17f2f59", &preload, undefined, undefined, undefined);
+  system::register(#"scripted_widgets", &preload, undefined, undefined, undefined);
 }
 
 function private preload() {
@@ -29,7 +29,7 @@ function on_player_spawn(localclientnum) {
   inputs[#"ui_navright"] = "navright";
   inputs[#"ui_prevtab"] = "prevtab";
   inputs[#"ui_nexttab"] = "nexttab";
-  inputs[#"hash_5686e6f2a8315663"] = "backspace";
+  inputs[#"ui_backspace"] = "backspace";
 
   foreach(key, value in inputs) {
     self flag::clear(key);
@@ -82,7 +82,7 @@ function function_1e9035e9() {
 }
 
 function function_57799116() {
-  return self flag::get(#"hash_5686e6f2a8315663");
+  return self flag::get(#"ui_backspace");
 }
 
 function function_9c365c3b() {

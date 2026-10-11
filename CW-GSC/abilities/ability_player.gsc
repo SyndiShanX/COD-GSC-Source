@@ -626,7 +626,7 @@ function turn_gadget_on(slot, weapon) {
     mpheropowerevents = {
       #spawnid: getplayerspawnid(self), #gametime: function_f8d53445(), #name: self._gadgets_player[slot].name, #powerstate: "activated", #playername: self.name, #xuid: xuid
     };
-    function_92d1707f(#"hash_2d561b2f8bbe1aac", mpheropowerevents);
+    function_92d1707f(#"dlog_event_mpheropowerevents", mpheropowerevents);
   }
 
   battlechatter::function_26dd1669(weapon);
@@ -689,7 +689,7 @@ function turn_gadget_off(slot, weapon) {
     mpheropowerevents = {
       #spawnid: getplayerspawnid(self), #gametime: function_f8d53445(), #name: self._gadgets_player[slot].name, #powerstate: "expired", #playername: self.name, #xuid: xuid
     };
-    function_92d1707f(#"hash_2d561b2f8bbe1aac", mpheropowerevents);
+    function_92d1707f(#"dlog_event_mpheropowerevents", mpheropowerevents);
   }
 
   if(is_true(level.oldschool)) {
@@ -879,7 +879,7 @@ function gadget_ready(slot, weapon) {
     mpheropowerevents = {
       #spawnid: getplayerspawnid(self), #gametime: function_f8d53445(), #name: self._gadgets_player[slot].name, #powerstate: "ready", #playername: self.name, #xuid: xuid
     };
-    function_92d1707f(#"hash_2d561b2f8bbe1aac", mpheropowerevents);
+    function_92d1707f(#"dlog_event_mpheropowerevents", mpheropowerevents);
   }
 
   if(isDefined(type) && isDefined(level._gadgets_level[type]) && isDefined(level._gadgets_level[type].on_ready)) {

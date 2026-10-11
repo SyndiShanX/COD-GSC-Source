@@ -35,10 +35,10 @@ function main() {
 function function_49caf2d6() {
   self notify("6879420b153ee8d7");
   self endon("6879420b153ee8d7");
-  self thread namespace_268747c0::function_978c05b5();
+  self thread doa_hazard::function_978c05b5();
   result = self waittill(#"destroy_hazard");
 
-  if(is_true(self.var_7c56394) && is_true(result.var_760a0807)) {
+  if(is_true(self.paged) && is_true(result.var_760a0807)) {
     arrayremovevalue(level.doa.var_dfb9e943, self);
     namespace_1e25ad94::debugmsg("Deleting dragonhead trap permenently at:" + self.origin);
   }
@@ -46,7 +46,7 @@ function function_49caf2d6() {
   util::wait_network_frame();
 
   if(isDefined(self.trigger)) {
-    self.trigger namespace_268747c0::function_54f185a();
+    self.trigger doa_hazard::function_54f185a();
     self.trigger = undefined;
   }
 
@@ -58,12 +58,12 @@ function function_49caf2d6() {
 
   self.script_model = undefined;
   self.damage = undefined;
-  self.var_f3e30707 = undefined;
+  self.tickrate = undefined;
   self.var_2e485cc = undefined;
-  self.var_7c56394 = undefined;
+  self.paged = undefined;
 }
 
-function function_54989f74(trap, var_7c56394 = 0) {
+function function_54989f74(trap, paged = 0) {
   hazard = namespace_ec06fe4a::spawnmodel(trap.origin, "tag_origin");
 
   if(isDefined(hazard)) {
@@ -76,9 +76,9 @@ function function_54989f74(trap, var_7c56394 = 0) {
 
   trap.script_model = hazard;
   trap.damage = 50;
-  trap.var_f3e30707 = 1;
+  trap.tickrate = 1;
   trap.var_2e485cc = getstatuseffect(#"hash_69374f563cb01313");
-  trap.var_7c56394 = var_7c56394;
+  trap.paged = paged;
   trap thread function_b853a1c6();
   return trap;
 }
@@ -204,7 +204,7 @@ function function_b853a1c6() {
     }
 
     wait randomintrange(3, 10);
-    self.trigger = self namespace_268747c0::function_678eaf60("dragonhead", self.origin, 1024, 1, 256);
+    self.trigger = self doa_hazard::function_678eaf60("dragonhead", self.origin, 1024, 1, 256);
     var_5ccd914d = rotatepointaroundaxis((0, 170, -150), (0, 0, 1), self.angles[1] - 90);
     self.trigger.origin = self.origin + var_5ccd914d;
     self.trigger thread function_d1b295d7(self);
@@ -231,7 +231,7 @@ function function_d1b295d7(trap) {
   self notify("6480039efba6256a");
   self endon("6480039efba6256a");
   self endon(#"death", #"hash_5dc5b7f198cd1bec");
-  var_f3e30707 = (isDefined(trap.var_f3e30707) ? trap.var_f3e30707 : 1) * 1000;
+  tickrate = (isDefined(trap.tickrate) ? trap.tickrate : 1) * 1000;
 
   while(isDefined(self)) {
     result = self waittill(#"trigger");
@@ -263,12 +263,12 @@ function function_d1b295d7(trap) {
       continue;
     }
 
-    guy.var_d93d3433 = time + var_f3e30707;
+    guy.var_d93d3433 = time + tickrate;
 
     if(isPlayer(guy)) {
       guy dodamage(isDefined(trap.damage) ? trap.damage : guy.health + 100, guy.origin);
       guy playRumbleOnEntity("mechz_footstep_medium");
-      guy namespace_83eb6304::function_3ecfde67("burn_zombie");
+      guy doa_fx::function_3ecfde67("burn_zombie");
 
       if(isDefined(trap.var_2e485cc) && guy.birthtime != gettime()) {
         guy thread status_effect::status_effect_apply(trap.var_2e485cc, guy.currentweapon, self, 1);
@@ -277,8 +277,8 @@ function function_d1b295d7(trap) {
       continue;
     }
 
-    if(!is_true(guy.var_1b41b0e8) && isactor(guy)) {
-      guy namespace_83eb6304::function_3ecfde67("burn_zombie");
+    if(!is_true(guy.nofire) && isactor(guy)) {
+      guy doa_fx::function_3ecfde67("burn_zombie");
     }
 
     guy thread namespace_ec06fe4a::function_570729f0(randomfloatrange(0.5, 2.2));

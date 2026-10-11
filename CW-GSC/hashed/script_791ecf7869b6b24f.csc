@@ -47,7 +47,7 @@ function damaged_smoke(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 
   if(bwasdemojump == 1) {
     self.damaged_smoke = playFX(fieldname, #"hash_7c6ddeef1245e0ea", self.origin + (0, 0, 30), (0, 0, 1), anglesToForward(self.angles));
-    self.var_52f9dfc0 = self playLoopSound(#"hash_184650f042012414");
+    self.var_52f9dfc0 = self playLoopSound(#"evt_control_unit_damaged_lp");
   }
 }
 
@@ -110,7 +110,7 @@ function function_bb5d646a(localclientnum, oldval, newval, bnewent, binitialsnap
   self zombie_eye_glow::good_barricade_damaged(bwasdemojump);
   self playrenderoverridebundle(#"hash_9f31d2c3b11a51c");
   e_fx = util::spawn_model(bwasdemojump, "tag_origin", self gettagorigin("J_Spine4"));
-  playSound(bwasdemojump, #"hash_61be08677fe8683", e_fx.origin);
+  playSound(bwasdemojump, #"evt_gold_zsouls_start", e_fx.origin);
   var_5e7d1e09 = struct::get_array("satellite_pos", "script_noteworthy");
   satellite_pos = arraygetclosest(self.origin, var_5e7d1e09);
   util::playFXOnTag(bwasdemojump, #"zombie/fx9_onslaught_orb_soul", e_fx, "tag_origin");
@@ -120,7 +120,7 @@ function function_bb5d646a(localclientnum, oldval, newval, bnewent, binitialsnap
   e_fx moveTo(satellite_pos.origin + (0, 0, 50), n_time);
   e_fx waittill(#"movedone");
   util::playFXOnTag(bwasdemojump, #"maps/zm_red/fx8_soul_charge_purple", e_fx, "tag_origin");
-  playSound(bwasdemojump, #"hash_77a638eb74142796", e_fx.origin);
+  playSound(bwasdemojump, #"evt_gold_zsouls_end", e_fx.origin);
   wait 0.3;
   e_fx delete();
 }

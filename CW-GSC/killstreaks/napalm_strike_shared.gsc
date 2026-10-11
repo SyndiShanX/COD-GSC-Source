@@ -183,8 +183,8 @@ function private spawnplane(startnode, owner, killstreak_id, killstreakbundle, k
   plane.team = team;
   plane setteam(team);
   plane.targetname = "napalm_strike";
-  plane playLoopSound(#"hash_44d9bd79e59735d5");
-  plane playSound(#"hash_77c59806b7c6a576");
+  plane playLoopSound(#"veh_napalm_aircraft_base");
+  plane playSound(#"veh_napalm_aircraft_sonic_boom");
   plane setModel(#"veh_t9_mil_us_air_napalm_strike");
   plane setforcenocull();
   fakevehicle setforcenocull();
@@ -238,20 +238,20 @@ function private function_888e0e9f(killstreaktype, killstreak_id, plane, startno
   }
 
   fakevehicle thread vehicle::get_on_and_go_path(startnode);
-  fakevehicle function_c248485(plane, targetpoint, team, self, dosound, location);
+  fakevehicle bombrun(plane, targetpoint, team, self, dosound, location);
 }
 
-function private function_c248485(plane, targetpoint, team, owner, dosound = 0, location) {
+function private bombrun(plane, targetpoint, team, owner, dosound = 0, location) {
   self endon(#"death");
   bundlename = sessionmodeiszombiesgame() ? "napalm_strike_zm" : "napalm_strike";
   killstreakbundle = killstreaks::get_script_bundle(bundlename);
   plane.var_42d5aa88 = [];
 
   for(i = 0; i < killstreakbundle.var_2df25e4a; i++) {
-    var_5496c504 = util::spawn_model(#"veh_t9_mil_us_air_napalm_bomb_projectile", self.origin);
-    var_5496c504 ghost();
-    var_5496c504 notsolid();
-    plane.var_42d5aa88[i] = var_5496c504;
+    fakebomb = util::spawn_model(#"veh_t9_mil_us_air_napalm_bomb_projectile", self.origin);
+    fakebomb ghost();
+    fakebomb notsolid();
+    plane.var_42d5aa88[i] = fakebomb;
     waitframe(1);
   }
 
@@ -259,7 +259,7 @@ function private function_c248485(plane, targetpoint, team, owner, dosound = 0, 
   self waittill(#"drop_bombs");
 
   if(dosound) {
-    plane playSound(#"hash_699143303b7cad0f");
+    plane playSound(#"wpn_napalm_bomb_release");
   }
 
   var_1d6434c4 = 1;
@@ -285,7 +285,7 @@ function private function_c248485(plane, targetpoint, team, owner, dosound = 0, 
     }
 
     if(dosound && i == killstreakbundle.var_2df25e4a / 2) {
-      playSoundAtPosition(#"hash_18c79f680760b8c8", targetpoint);
+      playSoundAtPosition(#"exp_napalm_flame", targetpoint);
     }
 
     var_1d6434c4 -= killstreakbundle.var_4bb1a46b;
@@ -294,7 +294,7 @@ function private function_c248485(plane, targetpoint, team, owner, dosound = 0, 
   }
 }
 
-function private function_c4cbfac7(plane, team, killstreakbundle, var_8be94730, var_1d6434c4, var_c3aa02d8, location, killcament, var_5496c504) {
+function private function_c4cbfac7(plane, team, killstreakbundle, var_8be94730, var_1d6434c4, var_c3aa02d8, location, killcament, fakebomb) {
   bombspeedscale = killstreakbundle.var_e72831e2;
   forwardspeed = bombspeedscale * 4800 * var_1d6434c4;
   angles = (0, plane.angles[1], 0);
@@ -305,19 +305,19 @@ function private function_c4cbfac7(plane, team, killstreakbundle, var_8be94730, 
   bomb = self magicmissile(weapon, startposition, bombvelocity);
 
   if(!isDefined(bomb)) {
-    var_5496c504 deletedelay();
+    fakebomb deletedelay();
     return;
   }
 
   bomb thread function_4947d695();
-  var_5496c504.origin = bomb.origin;
-  var_5496c504.angles = bomb.angles;
-  var_5496c504 linkTo(bomb);
-  var_5496c504 show();
+  fakebomb.origin = bomb.origin;
+  fakebomb.angles = bomb.angles;
+  fakebomb linkTo(bomb);
+  fakebomb show();
   bomb ghost();
   bomb.angles = angles;
   bomb.soundmod = "heli";
-  bomb playSound(#"hash_136cf29747992813");
+  bomb playSound(#"prj_napalm_bomb_incoming");
   bomb.team = team;
   bomb setteam(team);
   bomb.killcament = killcament;
@@ -325,14 +325,14 @@ function private function_c4cbfac7(plane, team, killstreakbundle, var_8be94730, 
   bomb.killstreakid = plane.killstreakid;
   bomb.var_813987b5 = plane.birthtime;
   shot = level.var_ea918548[randomint(level.var_ea918548.size)];
-  bomb thread scene::play(#"p9_fxanim_mp_napalm_strike_spin", shot, array(var_5496c504));
+  bomb thread scene::play(#"p9_fxanim_mp_napalm_strike_spin", shot, array(fakebomb));
   killcament unlink();
   killcament linkTo(bomb);
   result = bomb waittill(#"projectile_impact_explode", #"entitydeleted");
   location notify(#"napalm_explode");
 
-  if(isDefined(var_5496c504)) {
-    var_5496c504 deletedelay();
+  if(isDefined(fakebomb)) {
+    fakebomb deletedelay();
   }
 
   if(isDefined(bomb)) {
@@ -456,8 +456,8 @@ function function_985141f2(owner, startpos, normal, direction, killcament, team,
     }
   }
 
-  var_54715763 = getweapon(#"hash_72c14c150086340c");
-  var_b366de9c = getweapon(#"hash_78a35da92bd92644");
+  var_54715763 = getweapon(#"napalm_strike_fire");
+  var_b366de9c = getweapon(#"napalm_strike_fire_water");
   fireduration = killstreakbundle.var_b5f47b94;
   firesound = spawn("script_origin", startpos);
   firesound playLoopSound(#"hash_8e00d255f2085d5");
@@ -544,7 +544,7 @@ function private function_e3bc95f2(killstreakbundle) {
   level endon(#"game_ended");
   var_e9c2375d = killstreakbundle.var_95280bcc;
   var_4122ca21 = 0;
-  var_54715763 = getweapon(#"hash_72c14c150086340c");
+  var_54715763 = getweapon(#"napalm_strike_fire");
 
   while(level.napalmstrike.var_cf856437.size || level.napalmstrike.var_9bac810c.size) {
     var_e5a58a70 = [];

@@ -39,7 +39,7 @@ function private autoexec function_4047919b() {
   clientfield::register("scriptmover", "clientFieldSndTargetScriptMover", 1, 11, "int", &function_201a102c, 0, 0);
   function_3ffa0089();
 
-  level thread function_ce893a25();
+  level thread snd_debug_init();
   dvar("<dev string:x38>", "<dev string:x58>", &function_360bb421);
   dvar("<dev string:x5c>", "<dev string:x58>", &function_360bb421);
   dvar("<dev string:x7c>", "<dev string:x58>", &function_360bb421);
@@ -291,12 +291,12 @@ function function_ce78b33b(callback) {
 
 #namespace namespace_afa8e18b;
 
-function function_2761fc04(ent, var_1d25915, linkedentity, var_e330010e) {
+function function_2761fc04(ent, var_1d25915, linkedentity, linkedbonetag) {
   assert(isDefined(ent), "<dev string:xd4>");
   assert(isDefined(ent.soundkey), "<dev string:xee>");
 
   if(isDefined(linkedentity)) {
-    var_e330010e = linkedentity snd::function_bf7c949(var_e330010e);
+    linkedbonetag = linkedentity snd::gettagsafe(linkedbonetag);
     linkedoffset = (0, 0, 0);
     linkedangles = (0, 0, 0);
 
@@ -304,10 +304,10 @@ function function_2761fc04(ent, var_1d25915, linkedentity, var_e330010e) {
       linkedoffset = var_1d25915;
     }
 
-    assert(isDefined(var_e330010e), "<dev string:x109>");
+    assert(isDefined(linkedbonetag), "<dev string:x109>");
 
-    if(isstring(var_e330010e) && var_e330010e != "" && var_e330010e != "tag_origin") {
-      ent linkTo(linkedentity, var_e330010e);
+    if(isstring(linkedbonetag) && linkedbonetag != "" && linkedbonetag != "tag_origin") {
+      ent linkTo(linkedentity, linkedbonetag);
     } else {
       ent linkTo(linkedentity);
     }
@@ -323,15 +323,15 @@ function function_2761fc04(ent, var_1d25915, linkedentity, var_e330010e) {
   level._snd.var_92f63ad0[ent.soundkey] = ent;
 }
 
-function function_5275752c(soundalias, var_1d25915, linkedentity, var_e330010e) {
+function function_5275752c(soundalias, var_1d25915, linkedentity, linkedbonetag) {
   ent = undefined;
   spawnorigin = undefined;
 
-  if(isDefined(linkedentity) && isDefined(var_e330010e) && isDefined(var_1d25915)) {
-    spawnorigin = linkedentity gettagorigin(var_e330010e);
+  if(isDefined(linkedentity) && isDefined(linkedbonetag) && isDefined(var_1d25915)) {
+    spawnorigin = linkedentity gettagorigin(linkedbonetag);
     spawnorigin += var_1d25915;
-  } else if(isDefined(linkedentity) && isDefined(var_e330010e)) {
-    spawnorigin = linkedentity gettagorigin(var_e330010e);
+  } else if(isDefined(linkedentity) && isDefined(linkedbonetag)) {
+    spawnorigin = linkedentity gettagorigin(linkedbonetag);
   } else if(isDefined(linkedentity) && isDefined(var_1d25915)) {
     spawnorigin = linkedentity.origin;
     spawnorigin += var_1d25915;
@@ -355,7 +355,7 @@ function function_5275752c(soundalias, var_1d25915, linkedentity, var_e330010e) 
   }
 
   assert(isDefined(ent), "<dev string:x129>");
-  ent.var_90c86b97 = linkedentity;
+  ent.soundlinkedentity = linkedentity;
   ent.soundtype = #"centity";
   ent.soundkey = ent getentitynumber();
   ent.targetname = "snd " + soundalias;
@@ -371,8 +371,8 @@ function function_bdc44456(ent) {
     return;
   }
 
-  if(isDefined(ent.var_90c86b97) && isarray(ent.var_90c86b97.var_a415b6d6)) {
-    linkedentity = ent.var_90c86b97;
+  if(isDefined(ent.soundlinkedentity) && isarray(ent.soundlinkedentity.var_a415b6d6)) {
+    linkedentity = ent.soundlinkedentity;
     var_5244aa9 = isDefined(linkedentity.var_a415b6d6[ent.soundkey]);
 
     if(var_5244aa9 == 1) {
@@ -492,11 +492,11 @@ function private function_297cdf07(done, soundhandle) {
   function_bdc44456(ent);
 }
 
-function function_b5959278(ent, var_1d25915, linkedentity, var_e330010e) {
+function function_b5959278(ent, var_1d25915, linkedentity, linkedbonetag) {
   assert(0, "<dev string:x16f>");
 }
 
-function function_85daf9f0(soundalias, var_1d25915, linkedentity, var_e330010e) {
+function function_85daf9f0(soundalias, var_1d25915, linkedentity, linkedbonetag) {
   assert(0, "<dev string:x16f>");
   return undefined;
 }
@@ -589,19 +589,19 @@ function private function_6c660df4(scalefunc) {
   assert(isDefined(scalefunc) == 1, "<dev string:x192>");
 
   if(scalefunc == &function_5803da43) {
-    self.var_aceb47b0.var_6d865326 = undefined;
+    self.var_aceb47b0.isscalingvolume = undefined;
     scalestring = "volume";
   }
 
   if(scalefunc == &function_d7b79aea) {
-    self.var_aceb47b0.var_a1666553 = undefined;
+    self.var_aceb47b0.isscalingpitch = undefined;
     scalestring = "pitch";
   }
 
   assert(isDefined(scalestring) == 1);
   self.var_aceb47b0.threads[scalestring] = undefined;
 
-  if(isDefined(self.var_aceb47b0.var_6d865326) == 0 && isDefined(self.var_aceb47b0.var_a1666553) == 0) {
+  if(isDefined(self.var_aceb47b0.isscalingvolume) == 0 && isDefined(self.var_aceb47b0.isscalingpitch) == 0) {
     self.var_aceb47b0.isscaling = undefined;
   }
 
@@ -621,17 +621,17 @@ function private function_48e190dd(curve, scale, time, scalefunc, callbackfunc) 
   timeremainder = function_a18ae88f(float(time), frametime);
   time = float(time) + frametime - timeremainder;
   timeinterval = float(time) / float(curvepts);
-  var_aeb0a629 = function_a18ae88f(timeinterval, frametime);
-  timeinterval = timeinterval + frametime - var_aeb0a629;
+  timeintervalremainder = function_a18ae88f(timeinterval, frametime);
+  timeinterval = timeinterval + frametime - timeintervalremainder;
   timeinterval = max(timeinterval, frametime);
-  var_a7ce73cd = int(timeinterval * 1000 + 0.5);
+  timeintervalms = int(timeinterval * 1000 + 0.5);
   timems = int(time * 1000 + 0.5);
-  var_5bd40646 = int(0);
+  timecounterms = int(0);
 
   if(isDefined(self.var_aceb47b0.isscaling) == 1) {
     var_e971cedf = 0;
 
-    if(isDefined(self.var_aceb47b0.var_6d865326) == 1 && scalefunc == &function_5803da43 || isDefined(self.var_aceb47b0.var_a1666553) == 1 && scalefunc == &function_d7b79aea) {
+    if(isDefined(self.var_aceb47b0.isscalingvolume) == 1 && scalefunc == &function_5803da43 || isDefined(self.var_aceb47b0.isscalingpitch) == 1 && scalefunc == &function_d7b79aea) {
       var_e971cedf = 1;
     }
 
@@ -659,12 +659,12 @@ function private function_48e190dd(curve, scale, time, scalefunc, callbackfunc) 
   scalestring = undefined;
 
   if(scalefunc == &function_5803da43) {
-    self.var_aceb47b0.var_6d865326 = 1;
+    self.var_aceb47b0.isscalingvolume = 1;
     scalestring = "volume";
   }
 
   if(scalefunc == &function_d7b79aea) {
-    self.var_aceb47b0.var_a1666553 = 1;
+    self.var_aceb47b0.isscalingpitch = 1;
     scalestring = "pitch";
   }
 
@@ -672,16 +672,16 @@ function private function_48e190dd(curve, scale, time, scalefunc, callbackfunc) 
   self.var_aceb47b0.threads[scalestring] = 1;
   self endon("snd_stop_scale_" + scalestring);
 
-  while(var_5bd40646 < timems && isDefined(self) == 1 && isDefined(self.var_aceb47b0.threads[scalestring]) == 1) {
-    remainingtime = (timems - var_5bd40646) * 0.001;
+  while(timecounterms < timems && isDefined(self) == 1 && isDefined(self.var_aceb47b0.threads[scalestring]) == 1) {
+    remainingtime = (timems - timecounterms) * 0.001;
 
     if(isDefined(self.var_aceb47b0.waitinterval) == 1) {
       timeinterval = max(self.var_aceb47b0.waitinterval, frametime);
     }
 
     waittime = min(timeinterval, remainingtime);
-    var_5bd40646 += int(waittime * 1000 + 0.5);
-    timefrac = float(var_5bd40646) / float(timems);
+    timecounterms += int(waittime * 1000 + 0.5);
+    timefrac = float(timecounterms) / float(timems);
     scalevalue = 1;
 
     if(inversecurve > 0) {
@@ -739,7 +739,7 @@ function snd_scale(soundobject, scalewhat, value, time, curve, callbackfunc) {
   assert(isremovedentity(soundobject) == 0, "<dev string:x1e5>");
   assert(isDefined(value) == 1);
   function_3323ac64(soundobject);
-  var_e127d44f = value;
+  clampedvalue = value;
   scalefunc = undefined;
   scalestring = undefined;
 
@@ -753,8 +753,8 @@ function snd_scale(soundobject, scalewhat, value, time, curve, callbackfunc) {
       curve = function_ea2f17d1(curve, "easeout");
       scalefunc = &function_5803da43;
       scalestring = "volume";
-      var_e127d44f = math::clamp(value, var_7a9a68cb, var_69111be2);
-      function_81fac19d(value != var_e127d44f, "snd_scale: clamped volume " + value + " -> " + var_e127d44f);
+      clampedvalue = math::clamp(value, var_7a9a68cb, var_69111be2);
+      function_81fac19d(value != clampedvalue, "snd_scale: clamped volume " + value + " -> " + clampedvalue);
       break;
     case #"p":
     case #"p":
@@ -763,26 +763,26 @@ function snd_scale(soundobject, scalewhat, value, time, curve, callbackfunc) {
       curve = function_ea2f17d1(curve, "linear");
       scalefunc = &function_d7b79aea;
       scalestring = "pitch";
-      var_e127d44f = math::clamp(value, var_43b6ef7d, var_16f452ed);
-      function_81fac19d(value != var_e127d44f, "snd_scale: clamped pitch " + value + " -> " + var_e127d44f);
+      clampedvalue = math::clamp(value, var_43b6ef7d, var_16f452ed);
+      function_81fac19d(value != clampedvalue, "snd_scale: clamped pitch " + value + " -> " + clampedvalue);
       break;
   }
 
   assert(isDefined(soundobject) == 1);
 
   if(isDefined(time) == 0 || time == 0) {
-    [[scalefunc]](soundobject, var_e127d44f, 0);
-    function_d72fc2b9(soundobject, var_e127d44f, scalefunc);
+    [[scalefunc]](soundobject, clampedvalue, 0);
+    function_d72fc2b9(soundobject, clampedvalue, scalefunc);
     soundobject notify(#"hash_2178ab9046055607", scalefunc);
     soundobject notify(#"hash_6e1c0f8335cc603c");
     soundobject notify("snd_stop_scale_" + scalestring);
     return;
   }
 
-  soundobject thread function_48e190dd(curve, var_e127d44f, time, scalefunc, callbackfunc);
+  soundobject thread function_48e190dd(curve, clampedvalue, time, scalefunc, callbackfunc);
 
   if(scalefunc == &function_5803da43) {
-    soundobject notify(#"hash_501fa67f084af993");
+    soundobject notify(#"stopfade");
   }
 }
 

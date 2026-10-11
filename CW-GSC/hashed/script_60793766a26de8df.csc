@@ -52,13 +52,13 @@ function private function_7ec99c76(localclientnum) {
 }
 
 function function_8d607c5a(localclientnum) {
-  self playSound(localclientnum, #"hash_13985582064d5e89");
+  self playSound(localclientnum, #"zmb_ai_steiner_spawn_stinger");
 
   if(!is_true(level.var_12da60e6)) {
-    self playSound(localclientnum, #"hash_152bc9d7c6ad1991");
+    self playSound(localclientnum, #"zmb_ai_steiner_spawn_stinger_mus");
   }
 
-  self.var_5bea7e99 = self playLoopSound(#"hash_2353ca5802f38a90", undefined, (0, 0, 50));
+  self.var_5bea7e99 = self playLoopSound(#"zmb_steiner_geiger_lp", undefined, (0, 0, 50));
   self thread function_c3ae0dcf();
   self thread function_ce1bd3f2(localclientnum);
 }

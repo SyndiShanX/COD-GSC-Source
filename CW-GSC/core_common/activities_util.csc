@@ -6,7 +6,7 @@
 #using scripts\core_common\util_shared;
 #namespace activities;
 
-function private function_10de102b(outcome = "failed") {
+function private level_end(outcome = "failed") {
   foreach(player in getlocalplayers()) {
     player function_4877c948(level.activities.mapname, outcome);
   }
@@ -14,7 +14,7 @@ function private function_10de102b(outcome = "failed") {
   level.activities = undefined;
 }
 
-function private function_4c80102b() {
+function private level_start() {
   foreach(player in getlocalplayers()) {
     player function_bbe3235(level.activities.mapname, level.activities.gametype, player getchrname(), level.activities.difficulty);
   }
@@ -82,11 +82,11 @@ function private event_handler[systemstatechange] function_406f0371(eventstruct)
     } else if(var_6dfed201) {
       function_be258f26();
     } else {
-      function_4c80102b();
+      level_start();
     }
 
     if(task == "_exit") {
-      function_10de102b("completed");
+      level_end("completed");
       return;
     }
 

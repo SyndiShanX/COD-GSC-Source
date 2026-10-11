@@ -39,10 +39,10 @@ function main(str_objective, b_starting) {
   level.player setplayerangles(level.player.angles + (0, -90, 0));
   level.player hms_util::function_2e7c81f6(#"lmg_light_t9");
   savegame::checkpoint_save();
-  skipto::function_4e3ab877("rooftop_exit");
+  skipto::objective_completed("rooftop_exit");
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   hms_util::print("<dev string:x51>");
 }
 
@@ -65,6 +65,6 @@ function play_smoke_fx(str_targetname) {
   var_1fa85f59 = struct::get_array(str_targetname);
 
   foreach(var_d83df459 in var_1fa85f59) {
-    playFX(level._effect[#"hash_b63f0232a3d5f82"], var_d83df459.origin);
+    playFX(level._effect[#"smoke_grenade_fx"], var_d83df459.origin);
   }
 }

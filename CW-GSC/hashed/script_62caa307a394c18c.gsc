@@ -94,19 +94,19 @@ function function_1b3815a7(element) {
 }
 
 function function_9caeb2f3(var_a4a310f7) {
-  var_2bce48e0 = [];
+  weaknesses = [];
 
   if(!isDefined(var_a4a310f7)) {
-    return var_2bce48e0;
+    return weaknesses;
   }
 
   foreach(entry in var_a4a310f7) {
     if(isDefined(entry.type) && is_true(entry.weakness)) {
-      var_2bce48e0[entry.type] = 1;
+      weaknesses[entry.type] = 1;
     }
   }
 
-  return var_2bce48e0;
+  return weaknesses;
 }
 
 function function_9fbcd067(element, inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {

@@ -9,7 +9,7 @@
 #using scripts\cp_common\snd;
 #using scripts\cp_common\snd_sp;
 #using scripts\cp_common\snd_utility;
-#namespace namespace_72b0499b;
+#namespace armada_audio;
 
 function init_audio() {}
 
@@ -172,29 +172,29 @@ function function_132ea7de() {
 }
 
 function music(str_msg, n_delay = 0, var_37a6c96) {
-  level thread function_7edafa59(str_msg, n_delay, var_37a6c96);
+  level thread music_handler(str_msg, n_delay, var_37a6c96);
   level thread function_e80c0ccf(str_msg);
 }
 
-function function_7edafa59(str_msg, n_delay, var_37a6c96) {
+function music_handler(str_msg, n_delay, var_37a6c96) {
   switch (str_msg) {
-    case #"hash_6d6826a83750847":
-    case #"hash_6d6826a83750847":
+    case #"7.0_intel":
+    case #"7.0_intel":
     case #"2.0_briefing":
-    case #"hash_2c622a30dc731207":
-    case #"hash_35d3f2d1bf79eb35":
-    case #"hash_4c5ac549022188d4":
+    case #"13.0_last_stand":
+    case #"8.0_landing":
+    case #"9.0_flying":
     case #"12.0_turret":
-    case #"hash_572e961104184b52":
+    case #"10.0_assault":
     case #"5.0_village_combat":
-    case #"hash_63ee253a845cbefd":
+    case #"tmp_armada_outro":
       if(isDefined(var_37a6c96)) {
         flag::wait_till(var_37a6c96);
       }
 
       music::setmusicstate(str_msg, undefined, n_delay);
       break;
-    case #"hash_15d512eeb8abc51e":
+    case #"11.0_asset":
       if(isDefined(var_37a6c96)) {
         flag::wait_till(var_37a6c96);
       }
@@ -203,25 +203,25 @@ function function_7edafa59(str_msg, n_delay, var_37a6c96) {
       wait 1;
       music::setmusicstate("12.0_turret");
       break;
-    case #"hash_2375b08205562389":
+    case #"6.0_red_door_stinger":
       if(isDefined(var_37a6c96)) {
         flag::wait_till(var_37a6c96);
       }
 
       music::setmusicstate(str_msg, undefined, n_delay);
       break;
-    case #"hash_3c930a111db30f46":
+    case #"4.0_chopper_combat":
       music::setmusicstate(str_msg, undefined, n_delay);
       wait 5;
       music::setmusicstate("5.0_village_combat");
       break;
     case #"hash_7a72528b9f2c2f90":
-      music::function_edda155f(str_msg, n_delay);
+      music::playstinger(str_msg, n_delay);
       break;
     case #"hash_2193c42e21ea2e63":
       music::function_2af5f0ec(str_msg);
       break;
-    case #"hash_4c4e6fe764aec250":
+    case #"deactivate_13.0_last_stand":
       music::setmusicstate("explo_stinger", undefined, n_delay);
       break;
     default:
@@ -239,14 +239,14 @@ function function_e80c0ccf(str_msg) {
       waitframe(1);
       snd::client_msg(#"musictrack_cp_armada_2");
       break;
-    case #"hash_3c930a111db30f46":
+    case #"4.0_chopper_combat":
     case #"5.0_village_combat":
       snd::client_msg(#"musictrack_cp_armada_3");
       break;
-    case #"hash_6d6826a83750847":
+    case #"7.0_intel":
       snd::client_msg(#"musictrack_cp_armada_4");
       break;
-    case #"hash_4c5ac549022188d4":
+    case #"9.0_flying":
       snd::client_msg(#"musictrack_cp_armada_5");
       break;
   }

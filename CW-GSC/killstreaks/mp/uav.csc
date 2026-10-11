@@ -16,7 +16,7 @@ function private preinit() {
   clientfield::register("scriptmover", "uav", 1, 1, "int", &spawned, 0, 0);
   clientfield::register("scriptmover", "uav_fx", 1, 1, "int", &function_5a528883, 0, 0);
   level.uav_bundle = getscriptbundle(function_6fe2ffad());
-  level.var_ac260ded = [];
+  level.uavs = [];
 }
 
 function spawned(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -39,11 +39,11 @@ function private function_6fe2ffad() {
 }
 
 function uav_think(localclientnum) {
-  arrayremovevalue(level.var_ac260ded, undefined, 0);
-  level.var_ac260ded[level.var_ac260ded.size] = self;
+  arrayremovevalue(level.uavs, undefined, 0);
+  level.uavs[level.uavs.size] = self;
   self waittill(#"death", #"uav_off");
   function_74ef482c(localclientnum, self getentitynumber());
-  arrayremovevalue(level.var_ac260ded, self, 0);
+  arrayremovevalue(level.uavs, self, 0);
 }
 
 function function_9784b3bf() {

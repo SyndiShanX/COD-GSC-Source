@@ -182,7 +182,7 @@ function dev_cac_dpad_think(part_name, cycle_function, tag) {
   dpad_left = 0;
   dpad_right = 0;
   var_4b4b4a13 = 0;
-  var_fed1b26 = 0;
+  arrow_right = 0;
 
   if(!isDefined(level.var_5a507627)) {
     level.var_5a507627 = self function_a8bbc98a(3);
@@ -216,11 +216,11 @@ function dev_cac_dpad_think(part_name, cycle_function, tag) {
       var_4b4b4a13 = 0;
     }
 
-    if(!var_fed1b26 && self buttonPressed("<dev string:x3ea>")) {
+    if(!arrow_right && self buttonPressed("<dev string:x3ea>")) {
       [[cycle_function]](1, tag);
-      var_fed1b26 = 1;
+      arrow_right = 1;
     } else if(!self buttonPressed("<dev string:x3ea>")) {
-      var_fed1b26 = 0;
+      arrow_right = 0;
     }
 
     waitframe(1);

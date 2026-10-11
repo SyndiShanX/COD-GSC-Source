@@ -27,10 +27,10 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_1c2a96f9;
+#namespace doa_fate;
 
 function init() {}
 
 function function_32d5e898(localclientnum) {}
 
-function function_86515c3b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {}
+function awardfate(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {}

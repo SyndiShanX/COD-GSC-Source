@@ -298,7 +298,7 @@ function function_66d92f6(n_sequence = 1, n_delay) {
   }
 
   if(n_sequence == 2) {
-    level.var_107cca82 playLoopSound(#"hash_6a9177839f11ac2c");
+    level.var_107cca82 playLoopSound(#"amb_dac_message");
 
     if(level.var_107cca82 isattached(#"p9_sur_machine_computer_side_screen_on_seq_01", "tag_origin")) {
       level.var_107cca82 detach(#"p9_sur_machine_computer_side_screen_on_seq_01", "tag_origin");
@@ -889,7 +889,7 @@ function function_6d69e771() {
 
     if(level.var_2dffd020 == 1 || level.var_2dffd020 == 2) {
       if(e_player zm_score::can_player_purchase(level.var_d3a8f03b)) {
-        level.var_107cca82 playSound(#"hash_564affa7c572ff4c");
+        level.var_107cca82 playSound(#"zmb_dac_activate_trial");
         e_player function_bc82f900(#"zm_interact_rumble");
         e_player thread zm_score::minus_to_player_score(level.var_d3a8f03b);
         level thread start_challenge(e_player);
@@ -936,7 +936,7 @@ function stop_challenge(var_d46ce3db = 0) {
 
   foreach(player in getPlayers()) {
     player thread function_7e30f24c();
-    player playlocalsound(#"hash_7645f386d2902a9c");
+    player playlocalsound(#"uin_dac_challenge_end");
 
     if(var_d46ce3db) {
       player thread function_34b03961();
@@ -996,8 +996,8 @@ function function_34b03961(var_851cec80 = 0) {
     self.var_11507a67 = 1;
     self.var_207f01b0 = 0;
 
-    switch (var_19a3087c.var_9be0526e) {
-      case #"hash_daeb8129dc8e394":
+    switch (var_19a3087c.inteltype) {
+      case #"document":
         var_3e22312c = 4;
         var_2a2ba09f = 5;
         break;
@@ -1064,7 +1064,7 @@ function function_8f0594cb(s_challenge) {
   level.var_62ecc169 = float(gettime()) / 1000;
 
   foreach(player in getPlayers()) {
-    player playlocalsound(#"hash_747fc6d3b1a2412a");
+    player playlocalsound(#"uin_dac_challenge_activate");
     player.var_6b3806e8 = 0;
     player thread set_challenge_text(level.s_active_challenge.var_4365b81b);
   }
@@ -1105,9 +1105,9 @@ function function_8f0594cb(s_challenge) {
       }
 
       if(n_time_remaining == 1) {
-        array::run_all(getPlayers(), &playlocalsound, #"hash_5952b2eecab41e38");
+        array::run_all(getPlayers(), &playlocalsound, #"uin_dac_challenge_timer_tick");
       } else {
-        array::run_all(getPlayers(), &playlocalsound, #"hash_4474c2da74d7cdb9");
+        array::run_all(getPlayers(), &playlocalsound, #"uin_dac_challenge_timer_tick_last");
       }
     }
 
@@ -1536,7 +1536,7 @@ function is_active() {
 }
 
 function game_over() {
-  level waittill(#"end_game", #"exfil_complete", #"hash_29edd9425510b40d");
+  level waittill(#"end_game", #"exfil_complete", #"portal_countdown_started");
 
   if(is_active()) {
     stop_challenge();

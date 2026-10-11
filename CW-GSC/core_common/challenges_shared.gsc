@@ -1835,9 +1835,9 @@ function playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, shit
     if(victim.vehicleposition === 0) {
       data.var_8099aa99 = 1;
     } else {
-      var_e082d5c = var_8e0c4587 seatgetweapon(victim.vehicleposition);
+      vehicleweapon = var_8e0c4587 seatgetweapon(victim.vehicleposition);
 
-      if(is_true(var_e082d5c.isvehicleturret)) {
+      if(is_true(vehicleweapon.isvehicleturret)) {
         data.var_58ecc225 = 1;
       }
     }
@@ -1849,9 +1849,9 @@ function playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, shit
     if(victim.var_65b3d786 === 0) {
       data.var_8099aa99 = 1;
     } else if(isDefined(victim.var_6309c512)) {
-      var_e082d5c = victim.var_6309c512 seatgetweapon(victim.var_65b3d786);
+      vehicleweapon = victim.var_6309c512 seatgetweapon(victim.var_65b3d786);
 
-      if(is_true(var_e082d5c.isvehicleturret)) {
+      if(is_true(vehicleweapon.isvehicleturret)) {
         data.var_58ecc225 = 1;
       }
     }
@@ -2147,7 +2147,7 @@ function playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, shit
 
     if(isweapon(einflictor.item) && einflictor.item.islethalgrenade && util::function_ed82a8a(einflictor.item).loadoutslotname === "primarygrenade") {
       data.var_e8c642a1 = einflictor.birthtime;
-      data.var_3d8f6ba2 = einflictor.var_c6c56953;
+      data.var_3d8f6ba2 = einflictor.throworigin;
     }
   } else {
     data.inflictoriscooked = 0;
@@ -2164,7 +2164,7 @@ function playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, shit
       data.var_254ce896 = einflictor.birthtime;
     }
 
-    data.var_b75b215 = 1;
+    data.explosivekill = 1;
   }
 
   if(level.var_268c70a7 === 1) {
@@ -2530,13 +2530,13 @@ function function_d43316bd(var_f737f85f, eventstruct) {
 }
 
 function function_38ad2427(var_b7b748b7, amount) {
-  var_94583a5d = 0;
+  gated = 0;
 
   if(getdvarint(#"hash_f46d80ea72f539c", 0) != 0) {
-    var_94583a5d = 1;
+    gated = 1;
   }
 
-  if(var_94583a5d) {
+  if(gated) {
     return;
   }
 

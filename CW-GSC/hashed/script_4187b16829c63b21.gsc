@@ -21,13 +21,13 @@ function init() {
       turret_pos.var_e12c4557 = 1;
       turret_pos.activate = 0;
       turret_pos.in_use = 0;
-      var_a9504f50 = turret_pos zm_unitrigger::create(&function_a5680385, 64, &function_5b0907b8);
-      var_a9504f50.turret_pos = turret_pos;
+      turret_trigger = turret_pos zm_unitrigger::create(&function_a5680385, 64, &function_5b0907b8);
+      turret_trigger.turret_pos = turret_pos;
       var_51c78859 = getEnt(turret_pos.target, "targetname");
 
       if(isDefined(var_51c78859)) {
         turret_pos.var_51c78859 = var_51c78859;
-        var_51c78859 function_619a5c20();
+        var_51c78859 pingable();
       }
     }
   }

@@ -23,14 +23,14 @@ function prematch_init() {
 
 function init_train() {
   level endon(#"game_ended");
-  level scene::add_scene_func(#"hash_2084b22fe6837c77", &function_bfe6ca0b, "init");
-  level scene::add_scene_func(#"hash_2084b22fe6837c77", &function_43561aca, "play");
-  level scene::add_scene_func(#"hash_2084b22fe6837c77", &function_963b1a99, "done");
-  level scene::init(#"hash_2084b22fe6837c77");
+  level scene::add_scene_func(#"p9_fxanim_mp_russianbase_train_bundle", &function_bfe6ca0b, "init");
+  level scene::add_scene_func(#"p9_fxanim_mp_russianbase_train_bundle", &function_43561aca, "play");
+  level scene::add_scene_func(#"p9_fxanim_mp_russianbase_train_bundle", &function_963b1a99, "done");
+  level scene::init(#"p9_fxanim_mp_russianbase_train_bundle");
 
   while(true) {
     if(math::cointoss()) {
-      level scene::play(#"hash_2084b22fe6837c77");
+      level scene::play(#"p9_fxanim_mp_russianbase_train_bundle");
     }
 
     wait randomintrange(100, 130);

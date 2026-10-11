@@ -19,11 +19,11 @@ function private preinit() {
 
   if(zm_powerups::function_cc33adc8()) {
     if(zm_utility::function_c200446c()) {
-      zm_powerups::add_zombie_powerup("hero_weapon_power", "p8_zm_powerup_full_power", #"hash_50af8943ead42bcc", &function_7e51ac0f, 0, 0, 0);
+      zm_powerups::add_zombie_powerup("hero_weapon_power", "p8_zm_powerup_full_power", #"zombie/powerup_hero_weapon_power", &function_7e51ac0f, 0, 0, 0);
       return;
     }
 
-    zm_powerups::add_zombie_powerup("hero_weapon_power", "p8_zm_powerup_full_power", #"hash_50af8943ead42bcc", &zm_powerups::func_should_never_drop, 0, 0, 0);
+    zm_powerups::add_zombie_powerup("hero_weapon_power", "p8_zm_powerup_full_power", #"zombie/powerup_hero_weapon_power", &zm_powerups::func_should_never_drop, 0, 0, 0);
   }
 }
 
@@ -41,13 +41,13 @@ function hero_weapon_power(e_player) {
       continue;
     }
 
-    var_41db60bc = player.inventory.items[12].count;
+    n_current_count = player.inventory.items[12].count;
 
-    if(var_41db60bc < player.var_c9448182) {
+    if(n_current_count < player.var_c9448182) {
       player namespace_1b527536::function_6457e4cd(player.var_87f72f8);
-      var_41db60bc = player.inventory.items[12].count;
+      n_current_count = player.inventory.items[12].count;
 
-      if(var_41db60bc == player.var_c9448182) {
+      if(n_current_count == player.var_c9448182) {
         player.var_8da24ed0 = player.var_fc8023b4;
         player clientfield::set_player_uimodel("hud_items.ammoCooldowns.fieldUpgrade", 1);
       }

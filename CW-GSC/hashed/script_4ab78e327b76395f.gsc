@@ -193,7 +193,7 @@ function function_5654f611(body) {
     body_origin = body gettagorigin(body.var_3e95b88f.prompts[#"use"].tag);
   }
 
-  result.var_ef504ed6 = body_origin;
+  result.base_origin = body_origin;
   result.origin = vectorlerp(self.origin, body_origin, 0.5);
   result.origin = (result.origin[0], result.origin[1], self.origin[2]);
   result.angles = (0, vectortoyaw(result.origin - self.origin), 0);
@@ -212,7 +212,7 @@ function function_b8268bd6(action, victim, override_scene, var_65ff9d5a) {
   self notify("421a6bca2547c56f");
   self endon("421a6bca2547c56f");
   self endoncallback(&function_39f2df3d, action.ender, #"hash_750a24acc68f40a1");
-  bb::function_cd497743("body_pickup", self);
+  bb::logplayermapnotification("body_pickup", self);
   self flag::set("body_pickup");
   self flag::set("in_action");
   self.var_9ebbaa46.active = 1;
@@ -225,7 +225,7 @@ function function_b8268bd6(action, victim, override_scene, var_65ff9d5a) {
     self.takedown.body = bodymodel;
     scene = "bodycarry_pickup";
 
-    if(var_6fbe856d.var_ef504ed6[2] - self.origin[2] > 20) {
+    if(var_6fbe856d.base_origin[2] - self.origin[2] > 20) {
       scene = "bodycarry_pickup_high";
     }
 
@@ -349,9 +349,9 @@ function function_32d8a3e0(victim) {
   bodymodel detachall();
 
   for(i = 0; i < victim getattachsize(); i++) {
-    bodymodel.var_cf230c0[i] = victim getattachmodelname(i);
+    bodymodel.attach_model[i] = victim getattachmodelname(i);
     bodymodel.attach_tag[i] = victim getattachtagname(i);
-    bodymodel attach(bodymodel.var_cf230c0[i], bodymodel.attach_tag[i]);
+    bodymodel attach(bodymodel.attach_model[i], bodymodel.attach_tag[i]);
   }
 
   bodymodel function_d374e33d();
@@ -386,7 +386,7 @@ function body_drop(victim) {
   self notify(#"hash_7c3b085512be9978");
   self prompts::remove(#"stance");
   self notify(#"hash_6e2a24679f8eca8e");
-  bb::function_cd497743("body_drop", self);
+  bb::logplayermapnotification("body_drop", self);
   self action_utility::gesture_play("ges_body_carry_exit");
   override = self actions::function_abaa32c("body_carry");
   anim_name = isDefined(override.anim_name) ? override.anim_name : "body_carry";

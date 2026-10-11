@@ -43,8 +43,8 @@ function function_dd46bc90(localclientnum, oldval, newval, bnewent, binitialsnap
       self.var_4334046f = util::playFXOnTag(fieldname, #"hash_3c2b3ed125f236e6", self, "tag_origin");
     }
 
-    self playSound(fieldname, #"hash_15c9e639d18c2ca5");
-    self.var_40c9b27f = self playLoopSound(#"hash_4a6b09eca7bf93b4");
+    self playSound(fieldname, #"evt_aether_portal");
+    self.var_40c9b27f = self playLoopSound(#"evt_aether_portal_loop");
     return;
   }
 
@@ -59,7 +59,7 @@ function function_dd46bc90(localclientnum, oldval, newval, bnewent, binitialsnap
       self.var_40c9b27f = undefined;
     }
 
-    self.var_d5ddfab5 = self playLoopSound(#"hash_b13eb4ecd72cf20");
+    self.var_d5ddfab5 = self playLoopSound(#"evt_aether_portal_loop_large");
 
     if(b_upgraded) {
       self.var_3b5344ab = util::playFXOnTag(fieldname, #"hash_5a8d432da25c54e0", self, "tag_origin");

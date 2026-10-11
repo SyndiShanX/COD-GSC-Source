@@ -23,14 +23,14 @@
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_vo;
 #using scripts\zm_common\zm_weapons;
-#namespace namespace_e6fea84d;
+#namespace zonslaught_lotto_loadouts;
 
 function private autoexec __init__system__() {
-  system::register(#"hash_1aecd78b7244ff81", &preinit, undefined, undefined, undefined);
+  system::register(#"zonslaught_lotto_loadouts", &preinit, undefined, undefined, undefined);
 }
 
 function private preinit() {
-  if(util::get_game_type() === #"hash_1aecd78b7244ff81") {
+  if(util::get_game_type() === #"zonslaught_lotto_loadouts") {
     callback::add_callback(#"hash_7852c3cae4d4082a", &function_2d9abf0f);
     callback::add_callback(#"hash_75d9baf9eed8610b", &function_4e9f972a);
     callback::add_callback(#"hash_668017ea3d415b3b", &function_bc1832a2);
@@ -174,27 +174,27 @@ function function_e3871553(var_4d2ad93e) {
     case 2:
       str_item_name = isDefined(level.var_29d88fe5[str_weapon_name][#"green"]) ? level.var_29d88fe5[str_weapon_name][#"green"] : level.var_ec04a8a4[str_weapon_name][#"green"];
       n_rarity = 0;
-      var_27751b99 = 0;
+      n_pap_level = 0;
       break;
     case 3:
     case 4:
       str_item_name = isDefined(level.var_29d88fe5[str_weapon_name][#"blue"]) ? level.var_29d88fe5[str_weapon_name][#"blue"] : level.var_ec04a8a4[str_weapon_name][#"blue"];
       n_rarity = 1;
-      var_27751b99 = 1;
+      n_pap_level = 1;
       break;
     case 5:
     case 6:
     case 7:
       str_item_name = isDefined(level.var_29d88fe5[str_weapon_name][#"purple"]) ? level.var_29d88fe5[str_weapon_name][#"purple"] : level.var_ec04a8a4[str_weapon_name][#"purple"];
       n_rarity = 2;
-      var_27751b99 = 2;
+      n_pap_level = 2;
       str_aat = array::random(["ammomod_brainrot", "ammomod_cryofreeze", "ammomod_deadwire", "ammomod_napalmburst", "ammomod_shatterblast"]);
       break;
     case 8:
     default:
       str_item_name = isDefined(level.var_29d88fe5[str_weapon_name][#"orange"]) ? level.var_29d88fe5[str_weapon_name][#"orange"] : level.var_ec04a8a4[str_weapon_name][#"orange"];
       n_rarity = 3;
-      var_27751b99 = 3;
+      n_pap_level = 3;
       str_aat = array::random(["ammomod_brainrot", "ammomod_cryofreeze", "ammomod_deadwire", "ammomod_napalmburst", "ammomod_shatterblast"]);
       break;
   }
@@ -202,7 +202,7 @@ function function_e3871553(var_4d2ad93e) {
   if(isDefined(str_item_name)) {
     point = function_4ba8fde(str_item_name);
 
-    if(isDefined(point.itementry) && var_27751b99 > 0 && isDefined(level.var_fee1eaaf)) {
+    if(isDefined(point.itementry) && n_pap_level > 0 && isDefined(level.var_fee1eaaf)) {
       random_attachments = point.itementry.random_attachments;
       var_d0e99a2a = point.itementry.var_d0e99a2a;
       var_8e212f46 = point.itementry.var_8e212f46;
@@ -211,7 +211,7 @@ function function_e3871553(var_4d2ad93e) {
 
       if(isDefined(new_item)) {
         point = new_item;
-        point.paplv = var_27751b99;
+        point.paplv = n_pap_level;
         point.itementry.random_attachments = random_attachments;
         point.itementry.var_d0e99a2a = var_d0e99a2a;
         point.itementry.var_8e212f46 = var_8e212f46;
@@ -233,8 +233,8 @@ function function_e3871553(var_4d2ad93e) {
       self zm_weapons::function_98776900(point, 0, 0, 1);
     }
 
-    if(var_27751b99 > 0) {
-      self item_inventory::function_d92c6b5b(self.currentweapon, 0, var_27751b99, point);
+    if(n_pap_level > 0) {
+      self item_inventory::function_d92c6b5b(self.currentweapon, 0, n_pap_level, point);
       maxammo = self.currentweapon.maxammo;
       maxclip = self getclipsize(self.currentweapon);
       self setweaponammoclip(self.currentweapon, maxclip);
@@ -246,7 +246,7 @@ function function_e3871553(var_4d2ad93e) {
   if(isDefined(self.currentweapon)) {
     weapon = zm_weapons::get_base_weapon(self.currentweapon);
 
-    if((weapon.weapclass === "melee" || is_true(weapon.issniperweapon) || weapon.weapclass === #"pistol") && (level.wave_number % 3 == 0 || level.wave_number >= 6) || is_true(weapon.islauncher) && var_27751b99 == 0 || weapon.name === #"special_crossbow_t9" && level.wave_number >= 3) {
+    if((weapon.weapclass === "melee" || is_true(weapon.issniperweapon) || weapon.weapclass === #"pistol") && (level.wave_number % 3 == 0 || level.wave_number >= 6) || is_true(weapon.islauncher) && n_pap_level == 0 || weapon.name === #"special_crossbow_t9" && level.wave_number >= 3) {
       self thread zm_vo::function_8abe0568(#"game_over");
     }
   }
@@ -267,8 +267,8 @@ function function_e3871553(var_4d2ad93e) {
     var_a781b3e1 = item_inventory::get_inventory_item(networkid);
     weapon = item_inventory::get_current_weapon();
 
-    if(var_27751b99 > 0) {
-      var_a781b3e1.paplv = var_27751b99;
+    if(n_pap_level > 0) {
+      var_a781b3e1.paplv = n_pap_level;
     }
 
     var_a781b3e1.aat = str_aat;

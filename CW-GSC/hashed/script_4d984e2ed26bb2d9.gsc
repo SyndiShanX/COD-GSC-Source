@@ -11,7 +11,7 @@
 
 function postload() {
   level.var_17d7d4dc = spawnStruct();
-  level.var_17d7d4dc.var_d337de55 = 1;
+  level.var_17d7d4dc.shadowbase_face_overlays = 1;
   var_121c5e14 = getEnt("vault_lift", "targetname");
   level.var_17d7d4dc.var_121c5e14 = var_121c5e14;
   var_5a8a0179 = getEnt(var_121c5e14.target, "targetname");
@@ -30,9 +30,9 @@ function function_3b57a70e() {
   snd::client_msg("audio_server_lift_start");
   level.ai_woods linkTo(level.var_17d7d4dc.var_121c5e14);
   level.ai_woods thread scene::play("scene_yam_8020_sra_server_ascent_woods");
-  level scene::play("scene_yam_8015_sra_server_ascent", array(level.e_server_cable, level.var_ebbd5cf8, level.e_server_hook, level.var_17d7d4dc.var_121c5e14));
+  level scene::play("scene_yam_8015_sra_server_ascent", array(level.e_server_cable, level.vh_hind, level.e_server_hook, level.var_17d7d4dc.var_121c5e14));
   level notify(#"hash_3c878f4d1248ed7f");
-  level thread scene::play("scene_yam_9010_out_heli_outro", array(level.e_server_cable, level.var_ebbd5cf8, level.e_server_hook, level.var_17d7d4dc.var_121c5e14));
+  level thread scene::play("scene_yam_9010_out_heli_outro", array(level.e_server_cable, level.vh_hind, level.e_server_hook, level.var_17d7d4dc.var_121c5e14));
   level.ai_woods thread scene::play("scene_yam_9010_out_heli_outro_woods", level.ai_woods);
 }
 

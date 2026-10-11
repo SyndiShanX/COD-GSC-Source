@@ -36,9 +36,9 @@ function function_45d79d27(localclientnum, oldval, newval, bnewent, binitialsnap
       color = #"none";
       break;
     case 1:
-      if(isDefined(room) && isDefined(room.var_cd42b9c0)) {
+      if(isDefined(room) && isDefined(room.mapobject)) {
         iconname = namespace_c004634e::function_4e886036(room) + "_reveal";
-        room.var_cd42b9c0 setcompassicon(iconname);
+        room.mapobject setcompassicon(iconname);
       }
 
       break;
@@ -46,8 +46,8 @@ function function_45d79d27(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
   }
 
-  if(isDefined(color) && isDefined(room) && isDefined(room.var_cd42b9c0)) {
-    room.var_cd42b9c0 function_a5edb367(color);
+  if(isDefined(color) && isDefined(room) && isDefined(room.mapobject)) {
+    room.mapobject function_a5edb367(color);
   }
 }
 
@@ -68,15 +68,15 @@ function function_e71841a() {
     }
   }
 
-  self.var_cd42b9c0 = namespace_ec06fe4a::spawnmodel(0, var_f445d580.origin, "tag_origin", var_f445d580.angles, "dungeon mapObject");
+  self.mapobject = namespace_ec06fe4a::spawnmodel(0, var_f445d580.origin, "tag_origin", var_f445d580.angles, "dungeon mapObject");
 
-  if(isDefined(self.var_cd42b9c0)) {
+  if(isDefined(self.mapobject)) {
     iconname = namespace_c004634e::function_4e886036(self);
 
     if(isDefined(iconname)) {
-      self.var_cd42b9c0 setcompassicon(iconname);
-      self.var_cd42b9c0 function_811196d1(0);
-      self.var_cd42b9c0 function_5e00861(1024, 1);
+      self.mapobject setcompassicon(iconname);
+      self.mapobject function_811196d1(0);
+      self.mapobject function_5e00861(1024, 1);
     }
   }
 
@@ -98,8 +98,8 @@ function function_e71841a() {
 }
 
 function function_cb06f399() {
-  if(isDefined(self.var_cd42b9c0)) {
-    self.var_cd42b9c0 delete();
+  if(isDefined(self.mapobject)) {
+    self.mapobject delete();
   }
 
   if(isDefined(self.walldecor)) {

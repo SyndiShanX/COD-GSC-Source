@@ -61,10 +61,10 @@ function main(str_objective, b_starting) {
   level thread cp_nam_prisoner::function_1f911b89(next_obj);
   flag = "village";
   level flag::wait_till(flag + "_complete");
-  level skipto::function_4e3ab877(b_starting, 0);
+  level skipto::objective_completed(b_starting, 0);
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   wait 1;
   village_heli = getEntArray("village_heli", "targetname");
 
@@ -94,19 +94,19 @@ function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   var_fc3729bf = getEnt("village_barrel", "targetname");
 
   if(isDefined(var_fc3729bf)) {
-    var_233809e = getEntArray(var_fc3729bf.target, "targetname");
+    a_barrels = getEntArray(var_fc3729bf.target, "targetname");
   }
 
-  if(isDefined(var_233809e)) {
-    if(!isDefined(var_233809e)) {
-      var_233809e = [];
-    } else if(!isarray(var_233809e)) {
-      var_233809e = array(var_233809e);
+  if(isDefined(a_barrels)) {
+    if(!isDefined(a_barrels)) {
+      a_barrels = [];
+    } else if(!isarray(a_barrels)) {
+      a_barrels = array(a_barrels);
     }
 
-    var_233809e[var_233809e.size] = var_fc3729bf;
-    arrayremovevalue(var_233809e, undefined);
-    array::thread_all(var_233809e, &namespace_d9b153b9::ent_cleanup);
+    a_barrels[a_barrels.size] = var_fc3729bf;
+    arrayremovevalue(a_barrels, undefined);
+    array::thread_all(a_barrels, &namespace_d9b153b9::ent_cleanup);
   }
 
   village_barrels_clip = getEntArray("village_barrels_clip", "targetname");
@@ -129,7 +129,7 @@ function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   door_struct thread namespace_d9b153b9::ent_cleanup();
 }
 
-function function_c26b0bc0() {
+function flags_init() {
   level flag::init("start_village_ally_vo");
   level flag::init("village_complete");
   level flag::init("flag_village_heli_exit");
@@ -148,7 +148,7 @@ function village() {
   level thread savegame::checkpoint_save();
   var_2cf9fe23 = level.var_731c10af.var_42659717 + 1;
   str = "visit_" + var_2cf9fe23 + "_" + var_c79d614f;
-  bb::function_cd497743(str, level.player);
+  bb::logplayermapnotification(str, level.player);
   level thread function_6f9e660();
   level thread namespace_979752dc::disable_stealth_system();
   level flag::set("no_corpse_pickup ");
@@ -593,8 +593,8 @@ function function_66311af9() {
   level flag::set("village_missile_strike_explo_2");
   wait 0.3;
   var_fc3729bf = getEnt("village_barrel", "targetname");
-  var_233809e = getEntArray(var_fc3729bf.target, "targetname");
-  array::delete_all(var_233809e);
+  a_barrels = getEntArray(var_fc3729bf.target, "targetname");
+  array::delete_all(a_barrels);
   var_fc3729bf delete();
   village_barrels_clip = getEntArray("village_barrels_clip", "targetname");
   array::thread_all(village_barrels_clip, &namespace_d9b153b9::ent_cleanup);
@@ -976,11 +976,11 @@ function function_b94d034f(var_c79d614f) {
   level flag::set("<dev string:x112>");
 }
 
-function function_a099daab(var_9c878bb5) {
+function function_a099daab(str_triggername) {
   wait 3;
 
-  if(isDefined(getEnt(var_9c878bb5, "targetname"))) {
-    trigger::use(var_9c878bb5);
+  if(isDefined(getEnt(str_triggername, "targetname"))) {
+    trigger::use(str_triggername);
   }
 }
 

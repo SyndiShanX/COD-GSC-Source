@@ -40,7 +40,7 @@
 function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(1);
   level thread scene::init("scene_kgb_poison_tea");
-  level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto);
+  level.adler = namespace_e77bf565::adler_spawn(str_skipto);
   level.adler.ignoreme = 1;
   level.adler.ignoreall = 1;
   level thread scene::init("scene_kgb_elevator_holdup");
@@ -53,7 +53,7 @@ function starting(str_skipto) {
 function main(str_skipto, b_starting) {
   level.player endon(#"death");
   level flag::set("aslt_elev_down_start");
-  level thread function_a8bd0b05();
+  level thread elevator_scene();
   level thread function_84594864();
   var_92ce6586 = getEntArray("fake_basement_elevator", "targetname");
 
@@ -65,7 +65,7 @@ function main(str_skipto, b_starting) {
   level.player.ignoreall = 1;
 
   if(is_true(b_starting)) {
-    kgb_ins_prepare::function_52f0fcb3(str_skipto);
+    kgb_ins_prepare::office_guys(str_skipto);
     kgb_ins_prepare::function_84d00884();
     level thread namespace_99e99ffa::function_99e99ffa(str_skipto);
     level thread namespace_e77bf565::function_ada6d016();
@@ -84,7 +84,7 @@ function main(str_skipto, b_starting) {
   level thread namespace_e77bf565::cleanup_corpses();
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
@@ -156,9 +156,9 @@ function init_clientfields() {
   scene::add_scene_func("scene_kgb_elevator_holdup", &function_9165ed13, "Question1");
 }
 
-function function_22b7fffd() {}
+function init_scenes() {}
 
-function function_a8bd0b05() {
+function elevator_scene() {
   level function_dbef1d1a();
   level flag::set("aslt_elev_down_complete");
 }
@@ -278,21 +278,21 @@ function function_dbef1d1a() {
 }
 
 function function_56ebd96e() {
-  var_38e8431f = dialog_tree::new_tree(undefined, undefined, 1, 1);
-  var_38e8431f dialog_tree::add_option(#"hash_109e8c5a813dbd41", undefined, undefined, undefined, 1, undefined, undefined, &function_ec2ce1aa);
-  var_38e8431f dialog_tree::add_option(#"hash_109e895a813db828", undefined, undefined, undefined, 1, undefined, undefined, &function_ec2ce1aa);
-  var_38e8431f dialog_tree::add_option(#"hash_109e8a5a813db9db", undefined, undefined, undefined, 1, undefined, undefined, &function_ec2ce1aa);
-  var_38e8431f dialog_tree::add_option(#"hash_6ab903ee7d727152", undefined, undefined, undefined, 1, "knock_out_boris", undefined, &knock_out_boris);
-  var_38e8431f dialog_tree::run(undefined, undefined, 6);
+  dialog_1 = dialog_tree::new_tree(undefined, undefined, 1, 1);
+  dialog_1 dialog_tree::add_option(#"hash_109e8c5a813dbd41", undefined, undefined, undefined, 1, undefined, undefined, &function_ec2ce1aa);
+  dialog_1 dialog_tree::add_option(#"hash_109e895a813db828", undefined, undefined, undefined, 1, undefined, undefined, &function_ec2ce1aa);
+  dialog_1 dialog_tree::add_option(#"hash_109e8a5a813db9db", undefined, undefined, undefined, 1, undefined, undefined, &function_ec2ce1aa);
+  dialog_1 dialog_tree::add_option(#"hash_6ab903ee7d727152", undefined, undefined, undefined, 1, "knock_out_boris", undefined, &knock_out_boris);
+  dialog_1 dialog_tree::run(undefined, undefined, 6);
 }
 
 function function_8d79f364() {
-  var_4ea26e93 = dialog_tree::new_tree(undefined, undefined, 1, 1);
-  var_4ea26e93 dialog_tree::add_option(#"hash_74bf855a70ebbd1c", undefined, undefined, undefined, 1, undefined, undefined, &function_5af4b73);
-  var_4ea26e93 dialog_tree::add_option(#"hash_74bf885a70ebc235", undefined, undefined, undefined, 1, undefined, undefined, &function_ec2ce1aa);
-  var_4ea26e93 dialog_tree::add_option(#"hash_74bf875a70ebc082", undefined, undefined, undefined, 1, undefined, undefined, &function_5af4b73);
-  var_4ea26e93 dialog_tree::add_option(#"hash_6ab903ee7d727152", undefined, undefined, undefined, 1, "knock_out_boris", undefined, &knock_out_boris);
-  var_4ea26e93 dialog_tree::run(undefined, undefined, 6);
+  dialog_2 = dialog_tree::new_tree(undefined, undefined, 1, 1);
+  dialog_2 dialog_tree::add_option(#"hash_74bf855a70ebbd1c", undefined, undefined, undefined, 1, undefined, undefined, &function_5af4b73);
+  dialog_2 dialog_tree::add_option(#"hash_74bf885a70ebc235", undefined, undefined, undefined, 1, undefined, undefined, &function_ec2ce1aa);
+  dialog_2 dialog_tree::add_option(#"hash_74bf875a70ebc082", undefined, undefined, undefined, 1, undefined, undefined, &function_5af4b73);
+  dialog_2 dialog_tree::add_option(#"hash_6ab903ee7d727152", undefined, undefined, undefined, 1, "knock_out_boris", undefined, &knock_out_boris);
+  dialog_2 dialog_tree::run(undefined, undefined, 6);
 }
 
 function function_ff8e7eb0() {
@@ -381,7 +381,7 @@ function function_ca1bfb16() {
   level.player playRumbleOnEntity(#"hash_599c601d51bf76cf");
 }
 
-function function_beefb420() {
+function elevator_open() {
   wait 5;
   playrumbleonposition(#"hash_599c601d51bf76cf", level.elevator.origin);
 }

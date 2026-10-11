@@ -40,7 +40,7 @@ function function_9c00eeec(params) {
   occupants = self getvehoccupants();
 
   if(!isDefined(occupants) || occupants.size <= 1) {
-    self playSound(#"hash_50ca37222ffa9505");
+    self playSound(#"fly_car_door_window");
     self vehicle::toggle_control_bone_group(1, 1);
   }
 }
@@ -59,7 +59,7 @@ function function_9303f902(params) {
   occupants = self getvehoccupants();
 
   if(!isDefined(occupants) || occupants.size == 0) {
-    self playSound(#"hash_50ca37222ffa9505");
+    self playSound(#"fly_car_door_window");
     self vehicle::toggle_control_bone_group(1, 0);
   }
 }

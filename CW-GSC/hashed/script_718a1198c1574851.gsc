@@ -35,8 +35,8 @@ function event_handler[gametype_init] main(eventstruct) {
   level.var_894b9d74 = 1;
   level.var_405a6738 = 25000;
   level.var_c7f8ccf6 = 50;
-  level.var_5c14d2e6 = &function_b82fbeb8;
-  level.var_317fb13c = &function_b82fbeb8;
+  level.var_5c14d2e6 = &give_default_loadout;
+  level.var_317fb13c = &give_default_loadout;
   level.var_5cb948b1 = &function_6de0bb32;
   player_reinsertion::function_b5ee47fa(&function_807b902);
 }
@@ -92,7 +92,7 @@ function give_custom_loadout(takeoldweapon = 0) {
   return bare_hands;
 }
 
-function function_b82fbeb8() {
+function give_default_loadout() {
   assert(isPlayer(self));
 
   if(!isPlayer(self) || !isalive(self)) {
@@ -180,7 +180,7 @@ function on_player_killed(params) {
   self.var_26074a5b = undefined;
 
   if(!isDefined(self.reinsertionvehicle)) {
-    vehicle = spawnVehicle(#"hash_3effd1dd89ee3d36", (0, 0, 0), (0, 0, 0));
+    vehicle = spawnVehicle(#"flying_camera_drone_wz_escape_infil", (0, 0, 0), (0, 0, 0));
 
     if(isDefined(vehicle)) {
       vehicle.targetname = "reinsertionvehicle";
@@ -343,19 +343,19 @@ function function_2613549d(origin, var_6b4313e9) {
   self endon(#"disconnect", #"end_respawn");
   self setOrigin(origin);
   fwd = var_6b4313e9 - origin;
-  var_7d48f39e = vectortoangles(fwd);
+  fwdangles = vectortoangles(fwd);
   launchvelocity = fwd;
   vehicle = self.reinsertionvehicle;
 
   if(isDefined(vehicle)) {
     vehicle.origin = origin;
-    vehicle.angles = var_7d48f39e;
+    vehicle.angles = fwdangles;
     self ghost();
     self notsolid();
     self dontinterpolate();
     self setclientthirdperson(1);
     self function_648c1f6(vehicle, undefined, 0, 180, 180, 180, 180, 0);
-    self setplayerangles(var_7d48f39e);
+    self setplayerangles(fwdangles);
     wait 0;
     self setclientthirdperson(0);
     self startcameratween(0);

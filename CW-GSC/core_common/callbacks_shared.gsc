@@ -927,7 +927,7 @@ function event_handler[slide_end] function_e1b7e658(eventstruct) {
   }
 }
 
-function event_handler[jump_begin] function_b0353bef(eventstruct) {
+function event_handler[jump_begin] codecallback_playerjump(eventstruct) {
   self endon(#"disconnect");
 
   if(isDefined(level.var_6c3038dc)) {

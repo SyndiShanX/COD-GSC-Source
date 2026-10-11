@@ -78,7 +78,7 @@ function function_1d787beb() {
   if(isentity(self)) {
     self thread namespace_361e505d::function_8a959784(self);
     self zm_ai_utility::function_a8dc3363(var_d7eff26a);
-    self thread namespace_361e505d::function_940cd1d8();
+    self thread namespace_361e505d::spawn_fade_in();
   }
 
   return true;
@@ -118,7 +118,7 @@ function function_2995325f() {
               #origin: var_9f0bcfaa
             });
             self.completed_emerging_into_playable_area = 1;
-            self thread namespace_361e505d::function_940cd1d8();
+            self thread namespace_361e505d::spawn_fade_in();
           }
         }
       } else {
@@ -323,7 +323,7 @@ function function_9282dcac(n_round_number) {
 function private function_3ec01d7a() {
   level endon(#"end_game");
   self endon(#"death");
-  var_201abbfd = 0;
+  bad_path_count = 0;
   var_37c90cfe = 0;
   var_686cf729 = undefined;
   last_pos = undefined;
@@ -347,12 +347,12 @@ function private function_3ec01d7a() {
 
         if(!isDefined(var_686cf729) || goalinfo.goalpos !== var_686cf729) {
           var_686cf729 = goalinfo.goalpos;
-          var_201abbfd = 1;
+          bad_path_count = 1;
         } else {
-          var_201abbfd++;
+          bad_path_count++;
         }
 
-        if(var_201abbfd >= 15) {
+        if(bad_path_count >= 15) {
           var_c84ba99b = 1;
         }
       }
@@ -378,7 +378,7 @@ function private function_3ec01d7a() {
         println("<dev string:x6f>" + "<dev string:x82>" + self.origin + "<dev string:x8f>");
       }
 
-      var_201abbfd = 0;
+      bad_path_count = 0;
       var_37c90cfe = 0;
       self function_1d787beb();
     }

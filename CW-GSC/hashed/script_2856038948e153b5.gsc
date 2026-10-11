@@ -42,13 +42,13 @@ function main(str_skipto, b_starting) {
   level flag::set("aslt_bunker_escape_deploy_gas_begin");
 
   if(is_true(b_starting)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto, "adler_shotgun");
+    level.adler = namespace_e77bf565::adler_spawn(str_skipto, "adler_shotgun");
     level thread scene::skipto_end_noai("scene_kgb_door_kick", "Last_Frame", undefined, 1);
     level thread scene::skipto_end_noai("scene_kgb_utility_room_adler", "Door_Closed", undefined, 1);
     level thread namespace_e77bf565::function_1067ebf5("rotating_object_bunker", "player_grabbed_armor");
   }
 
-  level.adler battlechatter::function_2ab9360b(0);
+  level.adler battlechatter::bc_allow(0);
   level thread namespace_e77bf565::escape_objective(str_skipto, b_starting);
   level thread function_b735db01();
   level thread function_d0ef0702(str_skipto);
@@ -70,7 +70,7 @@ function main(str_skipto, b_starting) {
   level flag::wait_till("aslt_bunker_escape_deploy_gas_complete");
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
@@ -78,7 +78,7 @@ function function_2adf5677() {
   self.ignoreall = 1;
   self.ignoreme = 1;
   self.var_c681e4c1 = 1;
-  self battlechatter::function_2ab9360b(0);
+  self battlechatter::bc_allow(0);
 }
 
 function function_2f389b60() {
@@ -87,7 +87,7 @@ function function_2f389b60() {
   self.var_c681e4c1 = 1;
   self ai::gun_remove();
   self.dontdropweapon = 1;
-  self battlechatter::function_2ab9360b(0);
+  self battlechatter::bc_allow(0);
 }
 
 function cleanup(name, starting, direct, player) {}
@@ -112,7 +112,7 @@ function init_clientfields() {
   clientfield::register("toplayer", "set_player_pbg_bank", 1, 2, "int");
 }
 
-function function_22b7fffd() {
+function init_scenes() {
   animation::add_notetrack_func("kgb_aslt_escape_deploy_gas::adler_swap_to_gas_mask_head", &function_dfe94ac6);
   animation::add_notetrack_func("kgb_aslt_escape_deploy_gas::adler_attach_gas_mask", &function_7dbd8101);
   animation::add_notetrack_func("kgb_aslt_escape_deploy_gas::adler_detach_gas_mask", &function_f8337223);
@@ -141,8 +141,8 @@ function function_d0ef0702(str_skipto) {
   level.inside_man dialogue::queue("vox_cp_rkgb_05300_blkv_weneedtoarmours_51");
   wait 1;
   level.inside_man dialogue::queue("vox_cp_rkgb_05300_blkv_keepmovingthege_d6");
-  level.inside_man battlechatter::function_2ab9360b(1);
-  level.adler battlechatter::function_2ab9360b(1);
+  level.inside_man battlechatter::bc_allow(1);
+  level.adler battlechatter::bc_allow(1);
   level thread savegame::checkpoint_save();
 }
 
@@ -186,7 +186,7 @@ function function_36e68765(str_skipto) {
   level flag::wait_till("adler_exit_walkup_loop");
   wait 4.5;
   level.inside_man = namespace_e77bf565::function_e4660071(undefined, "inside_man_shotgun");
-  level.inside_man battlechatter::function_2ab9360b(0);
+  level.inside_man battlechatter::bc_allow(0);
   level.inside_man.primaryweapon = getweapon(#"shotgun_pump_t9");
   level.gas_guards = spawner::simple_spawn("gas_guards");
   level thread scene::play("scene_kgb_inside_man_on_knees", "Intro", level.gas_guards);
@@ -277,12 +277,12 @@ function function_b735db01() {
 function function_d32b06fc() {
   self endon(#"death");
   self.og_maxsightdistsqrd = self.maxsightdistsqrd;
-  self.var_4285accc = self.newenemyreactiondistsq;
+  self.og_newenemyreactiondistsq = self.newenemyreactiondistsq;
   self.maxsightdistsqrd = 1000000;
   self.newenemyreactiondistsq = 1000000;
   level flag::wait_till("reset_gas_masked_enemy_sighting");
   self.maxsightdistsqrd = self.og_maxsightdistsqrd;
-  self.newenemyreactiondistsq = self.var_4285accc;
+  self.newenemyreactiondistsq = self.og_newenemyreactiondistsq;
 }
 
 function function_7fa2d5b9() {
@@ -471,13 +471,13 @@ function function_92d72c13() {
   self endon(#"death");
   self ai::set_behavior_attribute("demeanor", "cqb");
   self.og_maxsightdistsqrd = self.maxsightdistsqrd;
-  self.var_4285accc = self.newenemyreactiondistsq;
+  self.og_newenemyreactiondistsq = self.newenemyreactiondistsq;
   self.maxsightdistsqrd = 1000000;
   self.newenemyreactiondistsq = 1000000;
   level flag::wait_till("reset_gas_masked_enemy_sighting");
   self ai::set_behavior_attribute("demeanor", "combat");
   self.maxsightdistsqrd = self.og_maxsightdistsqrd;
-  self.newenemyreactiondistsq = self.var_4285accc;
+  self.newenemyreactiondistsq = self.og_newenemyreactiondistsq;
 }
 
 function function_15d8d7cd() {

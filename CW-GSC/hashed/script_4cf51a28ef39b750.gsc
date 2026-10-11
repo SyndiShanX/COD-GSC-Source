@@ -222,13 +222,13 @@ function private function_e663b61e() {
   level flag::set("connect_zone_trans_south_pap_room_to_zone_trans_south");
   var_a801f97d connectpaths();
   var_a801f97d linkTo(var_8e0d050c);
-  var_8e0d050c playSound(#"hash_2170098ce6c0016");
+  var_8e0d050c playSound(#"zmb_door_armory");
   var_8e0d050c moveTo(var_8e0d050c.origin + (0, 0, 90), 2, 0.5, 0.5);
 }
 
 function function_12f1a9dd() {
   level endon(#"end_game");
-  level waittill(#"hash_3e765c26047c9f54");
+  level waittill(#"start_exfil");
   function_2b30b25d();
 
   while(true) {
@@ -251,7 +251,7 @@ function function_12f1a9dd() {
     var_7692d390 = getEnt("script_plane_collision", "targetname");
     var_7692d390 disconnectPaths();
     var_7692d390 solid();
-    level scene::play(#"hash_2f425040d5e62683", "drop");
+    level scene::play(#"p9_fxanim_zm_ndu_bomber_nose_bundle", "drop");
     level.var_1cffd28c = 0;
   }
 
@@ -259,7 +259,7 @@ function function_12f1a9dd() {
     truckcollision = getEnt("script_truck_collision", "targetname");
     truckcollision disconnectPaths();
     truckcollision solid();
-    level scene::play(#"hash_3b239490a05b582e", "drop");
+    level scene::play(#"p9_fxanim_zm_ndu_halftruck_bundle", "drop");
     level.var_5a953d3d = 0;
   }
 }

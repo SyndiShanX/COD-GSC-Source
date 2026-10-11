@@ -11,11 +11,11 @@
 #namespace satchel_charge;
 
 function init_shared(localclientnum) {
-  callback::add_weapon_type(#"satchel_charge", &function_34e248b6);
+  callback::add_weapon_type(#"satchel_charge", &satchel_spawned);
   clientfield::register("missile", "satchelChargeWarning", 1, 1, "int", &function_e402bf2c, 0, 0);
 }
 
-function function_34e248b6(localclientnum) {
+function satchel_spawned(localclientnum) {
   self endon(#"death");
 
   if(self isgrenadedud()) {

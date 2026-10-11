@@ -41,7 +41,7 @@ function on_localclient_connect(localclientnum) {
   }
 
   objid = util::getnextobjid(localclientnum);
-  objective_add(localclientnum, objid, "invisible", #"hash_19462339fa3faabe");
+  objective_add(localclientnum, objid, "invisible", #"autopsy");
   objective_setprogress(localclientnum, objid, 0);
   objective_setstate(localclientnum, objid, "invisible");
   level.var_f3c7bd5b[localclientnum] = objid;

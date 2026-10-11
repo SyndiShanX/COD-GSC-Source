@@ -203,8 +203,8 @@ function on_round_end() {
 function function_26b21477(chalk, new_rarity) {
   if(isDefined(chalk.trigger.chalk_model)) {
     chalk.trigger.chalk_model delete();
-    var_a2a22fe0 = chalk.contentgroups[#"wallbuy_gun"][0];
-    var_324ad795 = function_d26435e4(var_a2a22fe0, new_rarity, chalk.trigger.weapon.name);
+    wallbuy_struct = chalk.contentgroups[#"wallbuy_gun"][0];
+    var_324ad795 = function_d26435e4(wallbuy_struct, new_rarity, chalk.trigger.weapon.name);
     chalk_model = self content_manager::spawn_script_model(chalk, var_324ad795, 0, 0);
     chalk_model clientfield::set("set_compass_icon", 1);
     fx_pos = chalk_model getcentroid();
@@ -224,12 +224,12 @@ function function_26b21477(chalk, new_rarity) {
 
 function function_8183be86() {
   if(zm_utility::is_survival()) {
-    var_b48509f9 = zm_utility::function_e3025ca5();
+    star_rating = zm_utility::function_e3025ca5();
     n_roll = randomint(100);
-    var_df3ef88a = 2 * var_b48509f9;
-    var_ce91127 = 4 * var_b48509f9;
-    var_2081b742 = 16 * var_b48509f9;
-    var_990f9df7 = 32 * var_b48509f9;
+    var_df3ef88a = 2 * star_rating;
+    var_ce91127 = 4 * star_rating;
+    var_2081b742 = 16 * star_rating;
+    var_990f9df7 = 32 * star_rating;
     var_df3ef88a = math::clamp(var_df3ef88a, 0, 100);
     var_ce91127 = math::clamp(var_ce91127, 0, 100);
     var_2081b742 = math::clamp(var_2081b742, 0, 100);
@@ -240,9 +240,9 @@ function function_8183be86() {
     var_31890740 = 100 - var_990f9df7;
 
     if(is_true(getgametypesetting(#"hash_1e8998fd7f271bb7"))) {
-      if(var_b48509f9 == 1) {
+      if(star_rating == 1) {
         return #"green";
-      } else if(var_b48509f9 == 2) {
+      } else if(star_rating == 2) {
         if(n_roll >= var_8ec9324e) {
           return #"blue";
         } else if(n_roll >= var_7d403093) {
@@ -254,7 +254,7 @@ function function_8183be86() {
         } else {
           return #"green";
         }
-      } else if(var_b48509f9 == 3) {
+      } else if(star_rating == 3) {
         if(n_roll >= var_8ec9324e) {
           return #"purple";
         } else if(n_roll >= var_7d403093) {
@@ -364,7 +364,7 @@ function function_a1a1d2(weapon_name, var_e9040287, item_name, chalk_model, inde
   tempmodel = var_e9040287 content_manager::spawn_script_model(var_e9040287, weapon.worldmodel);
   tempmodel useweaponmodel(weapon);
 
-  if(isDefined(var_e9040287.var_3474efbf)) {
+  if(isDefined(var_e9040287.script_num)) {
     var_e27c9160 = tempmodel worldtolocalcoords(tempmodel.origin);
     var_e27c9160 = (var_e27c9160[0] + var_492e21a0, var_e27c9160[1], var_e27c9160[2] + var_58bd64f1);
     tempmodel.origin = tempmodel localtoworldcoords(var_e27c9160);
@@ -437,7 +437,7 @@ function function_d77fb9ee(s_instance) {
 
     self.rarity = rarity;
     item_name = level.var_29d88fe5[weapon_name][rarity];
-    var_2c9ef3be = function_d26435e4(wallbuy, rarity, weapon_name);
+    mdl_chalk = function_d26435e4(wallbuy, rarity, weapon_name);
     var_492e21a0 = 0;
     var_de5dab41 = 0;
 
@@ -633,7 +633,7 @@ function function_d77fb9ee(s_instance) {
         break;
     }
 
-    wallbuy function_a1a1d2(weapon_name, var_e9040287, item_name, var_2c9ef3be, count, var_492e21a0, var_de5dab41, rarity);
+    wallbuy function_a1a1d2(weapon_name, var_e9040287, item_name, mdl_chalk, count, var_492e21a0, var_de5dab41, rarity);
     count++;
   }
 }

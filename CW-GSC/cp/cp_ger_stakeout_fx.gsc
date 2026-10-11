@@ -30,7 +30,7 @@ function private function_bc948200() {
   clientfield::register("scriptmover", "clf_contact_cig_smoke", 1, 1, "int");
 }
 
-function function_22b7fffd() {
+function init_scenes() {
   animation::add_notetrack_func("cp_ger_stakeout_fx::umbrella_drips_on", &function_7ac85f6e);
   animation::add_notetrack_func("cp_ger_stakeout_fx::umbrella_drips_off", &function_a2a2a7e9);
 }

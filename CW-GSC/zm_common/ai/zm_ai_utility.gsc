@@ -89,7 +89,7 @@ function private function_637778cf() {
     return;
   }
 
-  self function_619a5c20();
+  self pingable();
   self.zm_ai_category = settingsbundle.category;
   self.var_c588eb = settingsbundle.ishvt;
   self.var_9f536dbe = settingsbundle.var_604a84a1;

@@ -456,9 +456,9 @@ function objective_set(var_6cc77d4e, var_54829af, var_8c7ec5ce = 1, var_441061cd
         var_ff48959 = var_ff48959.origin;
       }
 
-      var_b9431d90 = getPlayers();
+      a_all_players = getPlayers();
 
-      foreach(player in var_b9431d90) {
+      foreach(player in a_all_players) {
         if(isinarray(a_players, player)) {
           if(!isDefined(player.var_e453e8a5[var_4cfa0710])) {
             player.var_e453e8a5[var_4cfa0710] = [];
@@ -815,8 +815,8 @@ function function_3029d343(var_7f440703, a_targets) {
 function function_97aa577f() {
   if(isPlayer(self)) {
     if(isDefined(self.var_e453e8a5)) {
-      foreach(var_cd2db28c in self.var_e453e8a5) {
-        foreach(objective_id in var_cd2db28c) {
+      foreach(objective_ids in self.var_e453e8a5) {
+        foreach(objective_id in objective_ids) {
           zm_utility::function_e8f4d47b(self, objective_id, 1);
           objective_setinvisibletoplayer(objective_id, self);
         }
@@ -830,8 +830,8 @@ function function_97aa577f() {
 
   foreach(player in a_players) {
     if(isDefined(player.var_e453e8a5)) {
-      foreach(var_cd2db28c in player.var_e453e8a5) {
-        foreach(objective_id in var_cd2db28c) {
+      foreach(objective_ids in player.var_e453e8a5) {
+        foreach(objective_id in objective_ids) {
           zm_utility::function_e8f4d47b(player, objective_id, 1);
           objective_setinvisibletoplayer(objective_id, player);
         }
@@ -843,8 +843,8 @@ function function_97aa577f() {
 function function_87bf9705() {
   if(isPlayer(self)) {
     if(isDefined(self.var_e453e8a5)) {
-      foreach(var_cd2db28c in self.var_e453e8a5) {
-        foreach(objective_id in var_cd2db28c) {
+      foreach(objective_ids in self.var_e453e8a5) {
+        foreach(objective_id in objective_ids) {
           zm_utility::function_e8f4d47b(self, objective_id, 0);
           objective_setvisibletoplayer(objective_id, self);
         }
@@ -858,8 +858,8 @@ function function_87bf9705() {
 
   foreach(player in a_players) {
     if(isDefined(player.var_e453e8a5)) {
-      foreach(var_cd2db28c in player.var_e453e8a5) {
-        foreach(objective_id in var_cd2db28c) {
+      foreach(objective_ids in player.var_e453e8a5) {
+        foreach(objective_id in objective_ids) {
           zm_utility::function_e8f4d47b(player, objective_id, 0);
           objective_setvisibletoplayer(objective_id, player);
         }

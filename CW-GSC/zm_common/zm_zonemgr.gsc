@@ -30,7 +30,7 @@ function private preinit() {
   level.zone_paths = [];
   level.var_e046d333 = [];
   level.zone_nodes = [];
-  level.var_541a988b = [];
+  level.zone_volumes = [];
   level.zone_scanning_active = 0;
   level.str_zone_mgr_mode = "occupied_and_adjacent";
   level.create_spawner_list_func = &create_spawner_list;
@@ -429,7 +429,7 @@ function zone_init(zone_name, zone_tag) {
     }
   }
 
-  level.var_541a988b = arraycombine(level.var_541a988b, zone.volumes, 0);
+  level.zone_volumes = arraycombine(level.zone_volumes, zone.volumes, 0);
   assert(isDefined(zone.volumes[0]) || isDefined(zone.nodes[0]), "<dev string:x16e>" + zone_name);
 
   zone.total_spawn_count = 0;

@@ -15,22 +15,22 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  function_a8fdd433();
+  enable_sleight_of_hand_perk_for_level();
 }
 
-function function_a8fdd433() {
-  zm_perks::register_perk_clientfields(#"talent_speedcola", &function_38dda839, &function_3bdb96bc);
+function enable_sleight_of_hand_perk_for_level() {
+  zm_perks::register_perk_clientfields(#"talent_speedcola", &sleight_of_hand_client_field_func, &sleight_of_hand_code_callback_func);
   zm_perks::register_perk_effects(#"talent_speedcola", "sleight_light");
-  zm_perks::register_perk_init_thread(#"talent_speedcola", &function_7d2154f5);
+  zm_perks::register_perk_init_thread(#"talent_speedcola", &init_sleight_of_hand);
   zm_perks::function_f3c80d73("zombie_perk_bottle_sleight");
 }
 
-function function_7d2154f5() {
+function init_sleight_of_hand() {
   if(is_true(level.enable_magic)) {
     level._effect[#"sleight_light"] = "zombie/fx_perk_speedcola_ndu";
   }
 }
 
-function function_38dda839() {}
+function sleight_of_hand_client_field_func() {}
 
-function function_3bdb96bc() {}
+function sleight_of_hand_code_callback_func() {}

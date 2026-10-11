@@ -99,7 +99,7 @@ function function_81c73263(localclientnum, rob) {
 
 function function_f0e03255(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   trace_result = physicstrace(self.origin + (0, 0, 64), self.origin + (0, 0, -64), (0, 0, 0), (0, 0, 0), self);
-  var_ab1d2284 = trace_result[#"position"];
-  playFX(bwastimejump, "zm_ai/fx9_mimic_prop_shake", var_ab1d2284);
-  playSound(bwastimejump, #"hash_76bf07d326e705c0", var_ab1d2284 + (0, 0, 20));
+  fx_point = trace_result[#"position"];
+  playFX(bwastimejump, "zm_ai/fx9_mimic_prop_shake", fx_point);
+  playSound(bwastimejump, #"zmb_mimic_prop_emerge", fx_point + (0, 0, 20));
 }

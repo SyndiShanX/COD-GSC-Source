@@ -12,7 +12,7 @@
 
 function scalevolume(ent, vol) {}
 
-#namespace namespace_cc4354b9;
+#namespace stealth_corpse;
 
 function corpse_init_entity() {
   assert(isDefined(self.stealth));
@@ -194,9 +194,9 @@ function corpse_sight() {
     }
 
     sight = anglesToForward(self gettagangles("tag_eye"));
-    var_b455e74a = vectorNormalize(corpseorigin + (0, 0, 30) - self getEye());
+    vec_to_corpse = vectorNormalize(corpseorigin + (0, 0, 30) - self getEye());
 
-    if(vectordot(sight, var_b455e74a) > 0.55) {
+    if(vectordot(sight, vec_to_corpse) > 0.55) {
       if(!isDefined(corpse.seen) && self cansee(corpse)) {
         saw_corpse = corpse;
         break;
@@ -337,8 +337,8 @@ function suspicious_door_sighting() {
         continue;
       }
 
-      var_7e90842d = self.stealth.suspicious_door.ent.origin;
-      dist2sq = distancesquared(self.origin, var_7e90842d);
+      doororiginnew = self.stealth.suspicious_door.ent.origin;
+      dist2sq = distancesquared(self.origin, doororiginnew);
 
       if(dist2sq <= distsq) {
         continue;

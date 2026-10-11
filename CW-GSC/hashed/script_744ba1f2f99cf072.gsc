@@ -58,17 +58,17 @@ function main(str_skipto, b_starting) {
   snd::client_msg(#"hash_7527c0556d529822");
   snd::client_msg(#"hash_695d2aba2d66c4b2");
   level thread function_ea6a0033();
-  kgb_ins_prepare::function_52f0fcb3(b_starting);
+  kgb_ins_prepare::office_guys(b_starting);
   kgb_ins_prepare::function_84d00884();
   level thread namespace_99e99ffa::function_99e99ffa(b_starting);
   level thread scene::play("scene_kgb_ambient_security_vignette");
   level thread namespace_e77bf565::function_ada6d016();
-  level battlechatter::function_2ab9360b(0);
+  level battlechatter::bc_allow(0);
   level thread namespace_e77bf565::function_1067ebf5("rotating_object_inside_man", "team_in_elevator");
   function_30c2cc8f();
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 
   level flag::wait_till("ins_activation_complete");
@@ -137,7 +137,7 @@ function init_flags() {
 
 function init_clientfields() {}
 
-function function_22b7fffd() {
+function init_scenes() {
   level thread scene::init("scene_kgb_activation");
   level thread scene::init("scene_kgb_briefing_doorman");
   level scene::add_scene_func("scene_kgb_activation", &function_6b348535, "init");
@@ -161,12 +161,12 @@ function function_30c2cc8f() {
   level.player endon(#"death");
   level.player flag::set("cp_rus_kgb_player_ready");
   namespace_e77bf565::function_f6eb250d("cinematicmotion_kgb_computer");
-  level thread globallogic_ui::function_7bc0e4b9(0);
+  level thread globallogic_ui::do_chyron_text(0);
   level scene::play("scene_kgb_activation", "Start");
   districts::function_a7d79fcb(["kgb_hq_front_04", "kgb_hq_intersection", "kgb_hq_east_wing", "kgb_hq_prison_stairs", "kgb_hq_elevator", "kgb_hq_armory_wing", "kgb_hq_courtyard", "kgb_hq_second_floor", "kgb_hq_conference_v2"]);
   level thread scene::play("scene_kgb_activation", "Intro_Loop");
   wait 1.75;
-  level dialogue::function_96171f6d("vox_cp_rkgb_01000_adlr_imsorryithought_58");
+  level dialogue::player_say("vox_cp_rkgb_01000_adlr_imsorryithought_58");
   var_e077503c = dialog_tree::new_tree(undefined, undefined, 1, 1);
   var_e077503c dialog_tree::function_6bb91351(1);
   var_e077503c dialog_tree::add_option(#"hash_54efabbe2388ef19", undefined, undefined, undefined, 1, undefined, undefined);
@@ -204,7 +204,7 @@ function function_30c2cc8f() {
     namespace_94c47ce5::function_ef6de0f0();
   }
 
-  level dialogue::function_96171f6d("vox_cp_rkgb_01000_adlr_wellmeetyouatth_b1");
+  level dialogue::player_say("vox_cp_rkgb_01000_adlr_wellmeetyouatth_b1");
   snd::client_msg(#"hash_72fda24008633c70");
   var_8fd5aef6 = dialog_tree::new_tree(undefined, undefined, 1, 1);
   var_8fd5aef6 dialog_tree::function_6bb91351(1);
@@ -231,14 +231,14 @@ function function_30c2cc8f() {
   namespace_e77bf565::function_f6eb250d();
 }
 
-function function_3d2a48a7(var_ef7f50ee) {
-  if(!isarray(var_ef7f50ee)) {
-    level dialogue::function_96171f6d(var_ef7f50ee);
+function function_3d2a48a7(vox_line) {
+  if(!isarray(vox_line)) {
+    level dialogue::player_say(vox_line);
     return;
   }
 
-  for(i = 0; i < var_ef7f50ee.size; i++) {
-    iprintlnbold(var_ef7f50ee[i]);
+  for(i = 0; i < vox_line.size; i++) {
+    iprintlnbold(vox_line[i]);
     wait 0.5;
   }
 }

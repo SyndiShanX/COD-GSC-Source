@@ -64,7 +64,7 @@ function starting(str_objective) {
 }
 
 function main(str_objective, b_skipto) {
-  level battlechatter::function_2ab9360b(0);
+  level battlechatter::bc_allow(0);
   box02 = getEnt("box02", "targetname");
   box02.animname = "box02";
   box03 = getEnt("box03", "targetname");
@@ -125,10 +125,10 @@ function main(str_objective, b_skipto) {
   }
 
   level namespace_ac5221d7::function_ae1eba32();
-  skipto::function_4e3ab877(b_skipto);
+  skipto::objective_completed(b_skipto);
   activities::function_59e67711("_exit");
-  skipto::function_f02f0c63();
-  skipto::function_1c2dfc20();
+  skipto::set_final_level();
+  skipto::level_completed();
 }
 
 function cleanup(name, starting, direct, player) {}
@@ -268,7 +268,7 @@ function function_45405080() {
   level.perseus waittill(#"trigger");
   namespace_e1ccb37b::music("5.0_comrade", 9.666);
   namespace_82bfe441::fade(1, "FadeMedium");
-  e_player val::set(#"hash_23bfeea7d10f466b", "disable_weapons", 1);
+  e_player val::set(#"reveal_scene", "disable_weapons", 1);
   level.perseus.propername = #"hash_1208e1b319606beb";
   level thread scene::play(str_scene, "reveal", [level.perseus, e_player]);
   a_actors = [level.perseus, e_player];
@@ -294,8 +294,8 @@ function function_bf27d987(params) {
     return;
   }
 
-  var_fd343efd = 3;
-  level lui::screen_fade_out(var_fd343efd, "black");
+  n_fade_time = 3;
+  level lui::screen_fade_out(n_fade_time, "black");
   level.player val::set(#"hash_7aa136191c3f47ce", "freezecontrols", 1);
   level.perseus.fixednode = 1;
   level.perseus.goalradius = 8;
@@ -332,7 +332,7 @@ function function_d2a61d5e() {
   str_scene = "scene_duga_loose_ends";
   e_player = getPlayers()[0];
   e_player setstance("stand");
-  level.player thread util::function_749362d7(1);
+  level.player thread util::set_low_ready(1);
   a_actors = [e_player, level.perseus];
   scene::add_scene_func(str_scene, &function_e0799719, "quick_response");
   scene::add_scene_func(str_scene, &function_e0799719, "slow_response");
@@ -382,11 +382,11 @@ function function_3babb313() {
     }
 
     if(var_bb34c906 != var_9b3e2106) {
-      var_facf831 = 1 - level.player getanimtime(var_9b3e2106);
+      n_anim_time = 1 - level.player getanimtime(var_9b3e2106);
       var_9b3e2106 = var_bb34c906;
       var_6969be79 = var_b807e01e;
-      level.player thread animation::play(var_9b3e2106, s_org, undefined, abs(var_f01a6b5d), undefined, undefined, undefined, var_facf831);
-      level.adler thread animation::play(var_6969be79, s_org, undefined, abs(var_f01a6b5d), undefined, undefined, undefined, var_facf831);
+      level.player thread animation::play(var_9b3e2106, s_org, undefined, abs(var_f01a6b5d), undefined, undefined, undefined, n_anim_time);
+      level.adler thread animation::play(var_6969be79, s_org, undefined, abs(var_f01a6b5d), undefined, undefined, undefined, n_anim_time);
     }
 
     if(var_9b3e2106 === "t9_duga_loose_ends_tappy_player_struggle_bwd" && level.player getanimtime(var_9b3e2106) >= 0.9) {
@@ -396,9 +396,9 @@ function function_3babb313() {
       var_3f6d9c15 = gettime() + var_943b5c70;
 
       if(var_9b3e2106 === "t9_duga_loose_ends_tappy_player_struggle_fwd") {
-        var_facf831 = level.player getanimtime(var_9b3e2106);
+        n_anim_time = level.player getanimtime(var_9b3e2106);
       } else {
-        var_facf831 = 1 - level.player getanimtime(var_9b3e2106);
+        n_anim_time = 1 - level.player getanimtime(var_9b3e2106);
       }
 
       level.player thread animation::play(var_9b3e2106, s_org, undefined, abs(var_f01a6b5d), undefined, undefined, undefined, level.player getanimtime(var_9b3e2106));
@@ -436,17 +436,17 @@ function function_3babb313() {
   level thread function_f6da646d();
 
   if(var_9b3e2106 === "t9_duga_loose_ends_tappy_player_struggle_fwd") {
-    var_facf831 = 1 - level.player getanimtime(var_9b3e2106);
+    n_anim_time = 1 - level.player getanimtime(var_9b3e2106);
     var_c5c054a5 = 1 - level.adler getanimtime(var_6969be79);
     var_9b3e2106 = "t9_duga_loose_ends_tappy_player_struggle_bwd";
     var_6969be79 = "t9_duga_loose_ends_tappy_adler_struggle_bwd";
-    level.player thread animation::play(var_9b3e2106, s_org, undefined, var_f01a6b5d, undefined, undefined, undefined, var_facf831);
+    level.player thread animation::play(var_9b3e2106, s_org, undefined, var_f01a6b5d, undefined, undefined, undefined, n_anim_time);
     level.player thread function_5235e07c();
     level.adler animation::play(var_6969be79, s_org, undefined, var_f01a6b5d, undefined, undefined, undefined, var_c5c054a5);
   } else {
-    var_facf831 = level.player getanimtime(var_9b3e2106);
+    n_anim_time = level.player getanimtime(var_9b3e2106);
     var_c5c054a5 = level.adler getanimtime(var_6969be79);
-    level.player thread animation::play(var_9b3e2106, s_org, undefined, 1, undefined, undefined, undefined, var_facf831);
+    level.player thread animation::play(var_9b3e2106, s_org, undefined, 1, undefined, undefined, undefined, n_anim_time);
     level.player thread function_5235e07c();
     level.adler animation::play(var_6969be79, s_org, undefined, 1, undefined, undefined, undefined, var_c5c054a5);
   }
@@ -470,7 +470,7 @@ function function_a444d829() {
   level endon(#"flag_adler_killed_no_tappy");
   level.player.var_38ea0d27 = gettime();
   level.player.var_bfd336b0 = level.player.var_38ea0d27 + 12000;
-  level.player thread util::function_749362d7(0);
+  level.player thread util::set_low_ready(0);
   level.adler thread function_699d75f9();
   namespace_82bfe441::fade(0, "FadeSlow");
   level.player showcrosshair(1);
@@ -705,7 +705,7 @@ function function_dbe8c8f4(str_objective, b_skipto) {
   namespace_e1ccb37b::music("5.0_comrade", 9.666);
   namespace_82bfe441::fade(1, "FadeMedium");
   e_player showcrosshair(0);
-  e_player val::set(#"hash_23bfeea7d10f466b", "disable_weapons", 1);
+  e_player val::set(#"reveal_scene", "disable_weapons", 1);
   level thread scene::play(str_scene, "reveal", [level.perseus, e_player]);
   level waittill(#"hash_6166ba3b67203b5b");
   a_actors = [level.perseus, e_player];

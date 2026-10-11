@@ -169,10 +169,10 @@ function function_95ec9598(var_3a72e7b7) {
 
   if(isDefined(self) && isalive(player) && !is_true(self.activated) && player function_64fefea()) {
     level endon(#"game_ended");
-    scene = struct::get(#"hash_2467352290a052f7", "scriptbundlename");
+    scene = struct::get(#"p9_fxanim_mp_tundra_rope_bridge_bundle", "scriptbundlename");
     bridge = scene.scene_ents[#"prop 1"];
     self.activated = 1;
-    level thread scene::play(#"hash_2467352290a052f7", "Shot 2");
+    level thread scene::play(#"p9_fxanim_mp_tundra_rope_bridge_bundle", "Shot 2");
 
     while(self function_86072b19()) {
       waitframe(1);
@@ -181,9 +181,9 @@ function function_95ec9598(var_3a72e7b7) {
     bridge waittill(#"loop_done", #"death");
 
     if(function_acf0ca42() && !function_86072b19()) {
-      level thread scene::stop(#"hash_2467352290a052f7");
+      level thread scene::stop(#"p9_fxanim_mp_tundra_rope_bridge_bundle");
     } else if(!function_acf0ca42()) {
-      level thread scene::play(#"hash_2467352290a052f7", "Shot 1");
+      level thread scene::play(#"p9_fxanim_mp_tundra_rope_bridge_bundle", "Shot 1");
     }
 
     self.activated = 0;

@@ -165,7 +165,7 @@ function load_checkpoint_on_notify() {
     }
 
     level.var_5be43b2d = 1;
-    function_f31af5ab();
+    checkpointrestart();
   }
 }
 

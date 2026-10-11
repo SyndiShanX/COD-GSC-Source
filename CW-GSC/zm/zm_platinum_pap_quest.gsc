@@ -313,8 +313,8 @@ function function_b1db8691() {
   wait 3;
   n_players = zm_utility::get_number_of_valid_players();
   var_95421a26 = 0;
-  var_509132fd = arraycombine(struct::get_array("zone_no_mans_land_1_spawns"), struct::get_array("zone_no_mans_land_2_spawns"));
-  var_509132fd = array::filter(var_509132fd, 0, &function_e01b301e);
+  a_s_spawner = arraycombine(struct::get_array("zone_no_mans_land_1_spawns"), struct::get_array("zone_no_mans_land_2_spawns"));
+  a_s_spawner = array::filter(a_s_spawner, 0, &function_e01b301e);
 
   switch (n_players) {
     case 1:
@@ -345,7 +345,7 @@ function function_b1db8691() {
     spawner = zm_platinum::function_ddc13fd6();
 
     while(!isDefined(ai_zombie)) {
-      ai_zombie = zombie_utility::spawn_zombie(spawner, "pap_quest_ai", array::random(var_509132fd), level.round_number);
+      ai_zombie = zombie_utility::spawn_zombie(spawner, "pap_quest_ai", array::random(a_s_spawner), level.round_number);
       waitframe(1);
     }
 
@@ -386,21 +386,21 @@ function function_6a8117ab() {
 function function_8ff08856() {
   level endon(#"end_game", #"hash_20afa38b1f1c339e");
   wait randomintrange(8, 16);
-  var_f490e876 = undefined;
+  ai_mechz = undefined;
   s_spawn_loc = struct::get("s_pap_quest_mechz_spawn");
-  var_8a9b34b3 = getEnt("spawner_bo5_mechz_sr", "targetname");
-  var_8a9b34b3.script_forcespawn = 1;
+  mechz_spawner = getEnt("spawner_bo5_mechz_sr", "targetname");
+  mechz_spawner.script_forcespawn = 1;
 
-  while(!isDefined(var_f490e876)) {
-    var_f490e876 = zombie_utility::spawn_zombie(var_8a9b34b3, "pap_quest_ai", s_spawn_loc);
+  while(!isDefined(ai_mechz)) {
+    ai_mechz = zombie_utility::spawn_zombie(mechz_spawner, "pap_quest_ai", s_spawn_loc);
     waitframe(1);
   }
 
-  var_f490e876.var_126d7bef = 1;
-  var_f490e876.ignore_round_spawn_failsafe = 1;
-  var_f490e876.b_ignore_cleanup = 1;
-  var_f490e876.ignore_enemy_count = 1;
-  var_f490e876.no_powerups = 1;
+  ai_mechz.var_126d7bef = 1;
+  ai_mechz.ignore_round_spawn_failsafe = 1;
+  ai_mechz.b_ignore_cleanup = 1;
+  ai_mechz.ignore_enemy_count = 1;
+  ai_mechz.no_powerups = 1;
 }
 
 function function_f8cbb582() {

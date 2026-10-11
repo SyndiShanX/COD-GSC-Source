@@ -70,14 +70,14 @@ function private function_b3ec7529() {
     }
 
     if(is_true(obj.script_auto_use)) {
-      if(!isDefined(obj.var_7087ad5d)) {
-        obj.var_7087ad5d = 0;
+      if(!isDefined(obj.script_auto_use_radius)) {
+        obj.script_auto_use_radius = 0;
       }
 
-      obj.var_2edb5d76 = sqr(obj.var_7087ad5d);
+      obj.var_2edb5d76 = sqr(obj.script_auto_use_radius);
     } else {
       obj.script_auto_use = undefined;
-      obj.var_7087ad5d = undefined;
+      obj.script_auto_use_radius = undefined;
       obj.var_2edb5d76 = undefined;
     }
 
@@ -97,7 +97,7 @@ function private function_b3ec7529() {
 
 function private function_6e730e66() {
   self.shots = scene::get_all_shot_names(self.scriptbundlename);
-  self.var_db740c43 = [];
+  self.intros = [];
 
   if(!isDefined(self.goalradius)) {
     self.goalradius = 16;
@@ -108,7 +108,7 @@ function private function_6e730e66() {
       intro = self function_3b013edc(shotname);
 
       if(isDefined(intro.origin)) {
-        self.var_db740c43[self.var_db740c43.size] = intro;
+        self.intros[self.intros.size] = intro;
         self.goalradius = max(self.goalradius, distance(self.origin, intro.origin) + 60);
         continue;
       }
@@ -123,11 +123,11 @@ function private function_6e730e66() {
 
   self.hasdeath = function_5ff18583(self.shots, "death");
 
-  if(self.var_db740c43.size == 0 && array::contains(self.shots, "main")) {
+  if(self.intros.size == 0 && array::contains(self.shots, "main")) {
     intro = self function_3b013edc("main");
 
     if(isDefined(intro.origin)) {
-      self.var_db740c43[self.var_db740c43.size] = intro;
+      self.intros[self.intros.size] = intro;
       self.goalradius = max(self.goalradius, distance(self.origin, intro.origin));
       return;
     }
@@ -219,11 +219,11 @@ function function_5e77c231(ai) {
   var_ee9cbc26 = {};
   intro = undefined;
 
-  if(self.var_db740c43.size > 0) {
-    intro = self.var_db740c43[0];
+  if(self.intros.size > 0) {
+    intro = self.intros[0];
 
-    if(self.var_db740c43.size > 1) {
-      var_36b33936 = arraysortclosest(arraycopy(self.var_db740c43), ai.origin, 1);
+    if(self.intros.size > 1) {
+      var_36b33936 = arraysortclosest(arraycopy(self.intros), ai.origin, 1);
       intro = var_36b33936[0];
     }
   }
@@ -423,8 +423,8 @@ function private function_2e6e8631(&shots, var_68a5d6c0, yaw) {
 
   var_c209edb = function_92be8cbf(yaw);
 
-  foreach(var_a06ab73 in var_c209edb) {
-    var_33ae3ae9 = var_68a5d6c0 + var_a06ab73;
+  foreach(pronounceness in var_c209edb) {
+    var_33ae3ae9 = var_68a5d6c0 + pronounceness;
 
     if(array::contains(shots, var_33ae3ae9)) {
       result = var_33ae3ae9;
@@ -496,7 +496,7 @@ function get_goal() {
   str_shot = undefined;
   result = self;
 
-  if(self.var_db740c43.size <= 1) {
+  if(self.intros.size <= 1) {
     if(array::contains(self.shots, "intro")) {
       str_shot = "intro";
     } else if(array::contains(self.shots, "main")) {
@@ -522,12 +522,12 @@ function function_ab981ed(desiredpos, volume, var_ce60cc2e, var_2889f642 = 0) {
 
   aiprofile_beginentry("GetBestSmartObject");
   var_3424891f = var_ce60cc2e * var_ce60cc2e;
-  var_6debb24 = arraysortclosest(level.smartobjectpoints, desiredpos);
-  var_43a2b258 = var_6debb24.size;
+  allsmartobjects = arraysortclosest(level.smartobjectpoints, desiredpos);
+  numsmartobjects = allsmartobjects.size;
   smartobject = undefined;
 
-  for(iobj = 0; iobj < var_43a2b258; iobj++) {
-    object = var_6debb24[iobj];
+  for(iobj = 0; iobj < numsmartobjects; iobj++) {
+    object = allsmartobjects[iobj];
 
     if(distancesquared(object.origin, desiredpos) > var_3424891f) {
       break;
@@ -585,15 +585,15 @@ function function_b69b2de4(obj) {
   return true;
 }
 
-function function_b03cc199(obj) {
+function is_player_near(obj) {
   radiussq = 1600;
   zdiffsq = 4096;
 
   foreach(player in getPlayers()) {
     if(distance2dsquared(obj.origin, player.origin) < radiussq && sqr(obj.origin[2] - player.origin[2]) < zdiffsq) {
-      var_f9938c4c = vectortoyaw(player.origin - obj.origin);
+      objtoplayeryaw = vectortoyaw(player.origin - obj.origin);
 
-      if(abs(angleclamp180(var_f9938c4c - obj.angles[1])) < 90) {
+      if(abs(angleclamp180(objtoplayeryaw - obj.angles[1])) < 90) {
         return true;
       }
     }
@@ -610,7 +610,7 @@ function function_a49ba261(startpos, endpos, region, volume, var_9da4df29, var_a
   }
 
   var_d01a742 = 60;
-  var_b079b771 = 60;
+  clineheight = 60;
   var_62b1322 = 5184;
   var_26653e4b = 48;
 
@@ -626,15 +626,15 @@ function function_a49ba261(startpos, endpos, region, volume, var_9da4df29, var_a
 
   starttoend = endpos - startpos;
   linelen = length(starttoend);
-  var_8afe96be = starttoend / linelen;
-  var_38bbcdf7 = vectorNormalize((var_8afe96be[1], -1 * var_8afe96be[0], 0));
-  var_1d23c510 = 0;
+  starttoenddir = starttoend / linelen;
+  starttoendnormal = vectorNormalize((starttoenddir[1], -1 * starttoenddir[0], 0));
+  bdrawdebug = 0;
   drawtime = undefined;
 
   drawtime = 40;
-  var_1d23c510 = getdvarint(#"hash_6c470450dd7dffd2", -1) == self getentitynumber();
+  bdrawdebug = getdvarint(#"hash_6c470450dd7dffd2", -1) == self getentitynumber();
 
-  if(var_1d23c510) {
+  if(bdrawdebug) {
     line(startpos + (0, 0, 6), endpos + (0, 0, 6), (0, 0.5, 0.7), 1, 0, drawtime);
   }
 
@@ -645,11 +645,11 @@ function function_a49ba261(startpos, endpos, region, volume, var_9da4df29, var_a
   var_c9b0ff8d = 300000;
   var_fda73bba = 0.001;
   bestobj = undefined;
-  var_ef1e44f4 = -9999;
+  bestobjscore = -9999;
 
   foreach(obj in region.smart_objects) {
     if(distancesquared(obj.origin, self.origin) < var_62b1322) {
-      if(var_1d23c510) {
+      if(bdrawdebug) {
         box(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.9, 0.4, 0), 0, drawtime);
         print3d(obj.origin + (0, 0, 24), "<dev string:xc4>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
@@ -658,7 +658,7 @@ function function_a49ba261(startpos, endpos, region, volume, var_9da4df29, var_a
     }
 
     if(!self can_claim(obj)) {
-      if(var_1d23c510) {
+      if(bdrawdebug) {
         box(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.9, 0.4, 0), 0, drawtime);
         print3d(obj.origin + (0, 0, 24), "<dev string:xcb>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
@@ -667,7 +667,7 @@ function function_a49ba261(startpos, endpos, region, volume, var_9da4df29, var_a
     }
 
     if(!is_true(var_a3a26744) && !self can_use(obj)) {
-      if(var_1d23c510) {
+      if(bdrawdebug) {
         box(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.9, 0.4, 0), 0, drawtime);
         print3d(obj.origin + (0, 0, 24), "<dev string:xd2>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
@@ -676,7 +676,7 @@ function function_a49ba261(startpos, endpos, region, volume, var_9da4df29, var_a
     }
 
     if(!is_true(obj.script_auto_use)) {
-      if(var_1d23c510) {
+      if(bdrawdebug) {
         box(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.9, 0.4, 0), 0, drawtime);
         print3d(obj.origin + (0, 0, 24), "<dev string:xda>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
@@ -685,10 +685,10 @@ function function_a49ba261(startpos, endpos, region, volume, var_9da4df29, var_a
     }
 
     var_5c084b53 = obj.origin - startpos;
-    var_98883cf9 = vectordot(var_8afe96be, var_5c084b53);
+    distdownline = vectordot(starttoenddir, var_5c084b53);
 
-    if(var_98883cf9 < var_9da4df29) {
-      if(var_1d23c510) {
+    if(distdownline < var_9da4df29) {
+      if(bdrawdebug) {
         box(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.9, 0.4, 0), 0, drawtime);
         print3d(obj.origin + (0, 0, 24), "<dev string:xe5>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
@@ -696,8 +696,8 @@ function function_a49ba261(startpos, endpos, region, volume, var_9da4df29, var_a
       continue;
     }
 
-    if(var_98883cf9 > linelen + var_d01a742) {
-      if(var_1d23c510) {
+    if(distdownline > linelen + var_d01a742) {
+      if(bdrawdebug) {
         box(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.9, 0.4, 0), 0, drawtime);
         print3d(obj.origin + (0, 0, 24), "<dev string:xec>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
@@ -705,10 +705,10 @@ function function_a49ba261(startpos, endpos, region, volume, var_9da4df29, var_a
       continue;
     }
 
-    var_c79274d2 = abs(vectordot(var_38bbcdf7, var_5c084b53));
+    distfromline = abs(vectordot(starttoendnormal, var_5c084b53));
 
-    if(var_c79274d2 * var_c79274d2 > obj.var_2edb5d76) {
-      if(var_1d23c510) {
+    if(distfromline * distfromline > obj.var_2edb5d76) {
+      if(bdrawdebug) {
         box(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.9, 0.4, 0), 0, drawtime);
         print3d(obj.origin + (0, 0, 24), "<dev string:xf3>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
@@ -718,12 +718,12 @@ function function_a49ba261(startpos, endpos, region, volume, var_9da4df29, var_a
 
     var_fbf46d73 = var_3f5ef53e;
 
-    if(linelen - var_c79274d2 < 60) {
+    if(linelen - distfromline < 60) {
       var_fbf46d73 *= 0.5;
     }
 
-    if(var_c79274d2 > var_fbf46d73) {
-      if(var_1d23c510) {
+    if(distfromline > var_fbf46d73) {
+      if(bdrawdebug) {
         box(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.9, 0.4, 0), 0, drawtime);
         print3d(obj.origin + (0, 0, 24), "<dev string:xf8>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
@@ -732,7 +732,7 @@ function function_a49ba261(startpos, endpos, region, volume, var_9da4df29, var_a
     }
 
     if(isDefined(volume) && !volume istouching(obj.origin)) {
-      if(var_1d23c510) {
+      if(bdrawdebug) {
         box(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.9, 0.4, 0), 0, drawtime);
         print3d(obj.origin + (0, 0, 24), "<dev string:xff>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
@@ -740,27 +740,27 @@ function function_a49ba261(startpos, endpos, region, volume, var_9da4df29, var_a
       continue;
     }
 
-    var_fff54d0b = linelen - var_9da4df29;
-    var_1f6e7bb3 = var_98883cf9 - var_9da4df29;
+    adjustedlinelen = linelen - var_9da4df29;
+    var_1f6e7bb3 = distdownline - var_9da4df29;
     var_429175fd = var_aea7aa5b - var_9da4df29;
 
     if(var_1f6e7bb3 < var_429175fd) {
       score = var_fafda79b + var_c7d9d665 * (1 - (var_429175fd - var_1f6e7bb3) / var_429175fd);
     } else {
-      var_fff54d0b = linelen - var_aea7aa5b + var_d01a742;
-      var_1f6e7bb3 = var_98883cf9 - var_aea7aa5b;
-      score = var_fafda79b + var_c7d9d665 * (var_fff54d0b - var_1f6e7bb3) / var_fff54d0b;
+      adjustedlinelen = linelen - var_aea7aa5b + var_d01a742;
+      var_1f6e7bb3 = distdownline - var_aea7aa5b;
+      score = var_fafda79b + var_c7d9d665 * (adjustedlinelen - var_1f6e7bb3) / adjustedlinelen;
     }
 
-    if(var_c79274d2 > var_26653e4b) {
-      var_7324080 = var_c79274d2 - var_26653e4b;
-      score *= var_b11744c0 + (1 - var_7324080 / (var_fbf46d73 - var_26653e4b)) * (1 - var_b11744c0);
+    if(distfromline > var_26653e4b) {
+      distfrompreferred = distfromline - var_26653e4b;
+      score *= var_b11744c0 + (1 - distfrompreferred / (var_fbf46d73 - var_26653e4b)) * (1 - var_b11744c0);
     }
 
-    if(function_b03cc199(obj)) {
+    if(is_player_near(obj)) {
       score *= var_d5260937;
 
-      if(var_1d23c510) {
+      if(bdrawdebug) {
         print3d(obj.origin + (0, 0, 20), "<dev string:x107>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
     }
@@ -773,12 +773,12 @@ function function_a49ba261(startpos, endpos, region, volume, var_9da4df29, var_a
       }
     }
 
-    if(score > var_ef1e44f4) {
-      var_ef1e44f4 = score;
+    if(score > bestobjscore) {
+      bestobjscore = score;
       bestobj = obj;
     }
 
-    if(var_1d23c510) {
+    if(bdrawdebug) {
       box(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.8, 0.8, 0), 0, drawtime);
       print3d(obj.origin + (0, 0, 24), "<dev string:x10c>" + score, (0.5, 0.5, 0.5), 1, 0.2, drawtime);
     }
@@ -952,8 +952,8 @@ function private function_23eef632() {
       print3d(obj.origin + (0, 0, 80), scriptbundlename, (0.5, 0.5, 0), 1, 0.25, 1, 1);
       util::draw_arrow(obj.origin + (0, 0, 1), obj.origin + (0, 0, 1) + anglesToForward(obj.angles) * 16, (0.5, 0.5, 0));
 
-      if(obj.var_db740c43.size > 0) {
-        foreach(intro in obj.var_db740c43) {
+      if(obj.intros.size > 0) {
+        foreach(intro in obj.intros) {
           print3d(intro.origin + (0, 0, 5), intro.shot, (0.5, 0.5, 0.5), 0.5, 0.1, 1, 1);
           line(intro.origin + (0, 0, 1), obj.origin + (0, 0, 1), (0.5, 0.5, 0.5), 0.5, 1, 1);
         }

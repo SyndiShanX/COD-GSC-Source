@@ -16,7 +16,7 @@ function sb_flags() {
   flag::init("sb_reset_all");
 }
 
-function function_b904b36d() {
+function gather_sb() {
   self.var_60b8c535 = gettime();
 
   self.var_84410238 = struct::get_array("smart_bundle", "script_noteworthy");
@@ -105,11 +105,11 @@ function function_8eabba5() {
           case #"start_active":
             self.start_active = 1;
             break;
-          case #"hash_4ce8ffa2208104d1":
-            self.var_8c524d0b = 1;
+          case #"flags_from_tname":
+            self.flags_from_tname = 1;
             break;
-          case #"hash_6bc7f996db1c551e":
-            self.var_43db0d3e = 1;
+          case #"ai_respawn_until_all_dead":
+            self.ai_respawn_until_all_dead = 1;
             break;
           default:
 
@@ -121,7 +121,7 @@ function function_8eabba5() {
     }
   }
 
-  if(is_true(self.var_8c524d0b)) {
+  if(is_true(self.flags_from_tname)) {
     if(isDefined(self.targetname)) {
       if(!isDefined(self.script_flag_true)) {
         self.script_flag_true = "";
@@ -228,7 +228,7 @@ function function_e4a02f4e() {
     return;
   }
 
-  self.var_b5f8363 = undefined;
+  self.wait_array_match_count = undefined;
 
   while(true) {
     time_check = gettime();
@@ -324,7 +324,7 @@ function function_30c324b5() {
     return;
   }
 
-  self.var_454745b9 = [];
+  self.smart_models_spawned = [];
 
   foreach(sm in self.smart_models) {
     var_75026f76 = util::spawn_model(sm.model, sm.origin, sm.angles, 0, 1);
@@ -353,17 +353,17 @@ function function_30c324b5() {
       var_75026f76 setscale(sm.modelscale);
     }
 
-    self.var_454745b9[self.var_454745b9.size] = var_75026f76;
+    self.smart_models_spawned[self.smart_models_spawned.size] = var_75026f76;
   }
 
   waittillframeend();
-  self notify(#"hash_2c5cc8d3d6ed8b34");
+  self notify(#"smart_models_spawned");
 }
 
 function function_1ae872f3() {
-  if(isDefined(self.var_454745b9)) {
-    array::delete_all(self.var_454745b9);
-    self.var_454745b9 = undefined;
+  if(isDefined(self.smart_models_spawned)) {
+    array::delete_all(self.smart_models_spawned);
+    self.smart_models_spawned = undefined;
   }
 }
 
@@ -672,7 +672,7 @@ function function_6410533e(obj_struct) {
   obj_struct.var_262caa7f = 0;
   assert(isDefined(obj_struct.targetname), "<dev string:x292>");
 
-  foreach(token in obj_struct.var_3803ef1e) {
+  foreach(token in obj_struct.parm_tokens) {
     switch (token) {
       case #"search_area":
         obj_struct.var_dffd37e7 = 1;
@@ -858,7 +858,7 @@ function search_area_handling(obj_struct) {
   while(true) {
     if(isDefined(obj_struct.radius)) {
       real_dist = distance(obj_struct.origin, level.player getorigin());
-      var_333a51b7 = real_dist * mul;
+      mul_dist = real_dist * mul;
       dist = distance(obj_struct.origin, level.player getorigin()) - obj_struct.radius * mul;
 
       if(!inside) {
@@ -918,11 +918,11 @@ function function_981cea53(obj_id) {
   return false;
 }
 
-function function_a55d27bf(objectivename, objstate, objposition, objdescription, objlabel, var_ab2ea29a, objzoffset, var_fb9adc05, var_264b768b, var_4aba5bae, var_1444b216, var_a5a362, var_616ed336, objtype) {
+function function_a55d27bf(objectivename, objstate, objposition, objdescription, objlabel, objiconname, objzoffset, objshowdistance, objshowprogress, objisoptional, objparentobjective, objplayintro, objshowoncompass, objtype) {
   return false;
 }
 
-function function_945b8496(objectivename, objstate, objposition, objdescription, objlabel, var_ab2ea29a, objzoffset, var_fb9adc05, var_264b768b, var_4aba5bae, var_1444b216, var_a5a362, var_616ed336, objtype) {
+function function_945b8496(objectivename, objstate, objposition, objdescription, objlabel, objiconname, objzoffset, objshowdistance, objshowprogress, objisoptional, objparentobjective, objplayintro, objshowoncompass, objtype) {
   return false;
 }
 
@@ -947,8 +947,8 @@ function function_fc5d17bb(objectivename) {
 }
 
 function create_flags_and_return_tokens(flag_string) {
-  var_8042aabd = strtok(flag_string, " ");
-  return var_8042aabd;
+  ret_array = strtok(flag_string, " ");
+  return ret_array;
 }
 
 function function_51029384() {
@@ -968,7 +968,7 @@ function function_459301ea() {
 
   for(i = 0; i < self.var_4961c57a.size; i++) {
     if(isDefined(self.var_4961c57a[i].script_parameters)) {
-      self.var_4961c57a[i].var_3803ef1e = strtok(self.var_4961c57a[i].script_parameters, " ");
+      self.var_4961c57a[i].parm_tokens = strtok(self.var_4961c57a[i].script_parameters, " ");
     }
 
     if(isDefined(self.var_4961c57a[i].script_noteworthy) && self.var_4961c57a[i].script_noteworthy == "objective_info") {
@@ -1022,13 +1022,13 @@ function function_48b43844(array, state) {
 
 function function_879a654e(var_5e752bb5) {
   ent = spawnStruct();
-  ent.var_b5f8363 = var_5e752bb5.size;
+  ent.wait_array_match_count = var_5e752bb5.size;
 
-  for(i = 0; i < ent.var_b5f8363; i++) {
+  for(i = 0; i < ent.wait_array_match_count; i++) {
     self childthread function_212661b4(var_5e752bb5[i], ent);
   }
 
-  while(ent.var_b5f8363 > 0) {
+  while(ent.wait_array_match_count > 0) {
     ent waittill(#"hash_600eff9ce29513a0");
     waittillframeend();
   }
@@ -1038,7 +1038,7 @@ function function_879a654e(var_5e752bb5) {
 
 function function_212661b4(wait_on, ent) {
   level waittill(wait_on);
-  ent.var_b5f8363--;
+  ent.wait_array_match_count--;
   ent notify(#"hash_600eff9ce29513a0");
 }
 

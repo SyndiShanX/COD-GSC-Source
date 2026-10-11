@@ -36,7 +36,7 @@ function main(str_skipto, b_starting) {
   level namespace_31c67f6d::function_7fd3a4d8(undefined, undefined, 3, 1);
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 }
 
@@ -48,9 +48,9 @@ function function_cfce0b24() {
   clip = getEnt("clip_post_yamantau_briefing", "script_string");
   wait 46;
   clip delete();
-  transient = savegame::function_6440b06b(#"transient");
-  transient.var_16e4161b = 1;
-  level thread savegame::function_7790f03();
+  transient = savegame::get_mission_data(#"transient");
+  transient.briefing_complete = 1;
+  level thread savegame::checkpoint_save_asap();
 }
 
 function function_ae2b72b9() {}
@@ -150,7 +150,7 @@ function function_f5cec8cd() {
   self.var_ba1eee16.s_tree dialog_tree::add_option(#"hash_93b8d1965912d88", undefined, "dt_1b", "waiting_idle");
   self.var_ba1eee16.s_tree dialog_tree::function_9e36808(#"hash_415e7c2795b0b30e", undefined, "dt_1b_2", "waiting_idle");
 
-  if(int(level.player savegame::function_2ee66e93(#"hash_30b0b66be957c385", 0))) {
+  if(int(level.player savegame::get_player_data(#"hash_30b0b66be957c385", 0))) {
     self.var_ba1eee16.s_tree dialog_tree::add_option(#"hash_93b8e1965912f3b", undefined, "dt_1c_alt_adler", "waiting_idle", 1, "ask_about_parks_scar", undefined, &function_42091602);
   } else {
     self.var_ba1eee16.s_tree dialog_tree::add_option(#"hash_93b8e1965912f3b", undefined, "dt_1c", "waiting_idle", 1, "ask_about_parks_scar", undefined, &function_42091602);
@@ -206,7 +206,7 @@ function function_93672bfc() {
 
 function function_eb65bc98() {
   self setModel(#"c_t9_cp_usa_hero_sims_safehouse_body");
-  namespace_31c67f6d::function_a0abc8d3(#"c_t9_usa_hero_sims_head1_safehouse_hair");
+  namespace_31c67f6d::head_swap(#"c_t9_usa_hero_sims_head1_safehouse_hair");
   self.var_ba1eee16 = spawnStruct();
   self.var_ba1eee16.var_962cbf19[0] = ["vox_cp_sh5_05300_sims_nope_c0", 0.5];
   self.var_ba1eee16.var_962cbf19[1] = ["vox_cp_sh5_05400_sims_donttouchmylegs_d2", 0.5];
@@ -345,7 +345,7 @@ function function_29390787(str_skipto, b_starting) {
   flag::wait_till("flag_post_yamantau_complete");
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 }
 

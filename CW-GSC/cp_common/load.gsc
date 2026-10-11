@@ -51,7 +51,7 @@
 #namespace load;
 
 function private event_handler[createstruct] function_e0a8e4ba(struct) {
-  foreach(var_55e4dfcf, k in ["script_objective", "script_likelyenemy"]) {
+  foreach(__k79, k in ["script_objective", "script_likelyenemy"]) {
     if(!isDefined(level.var_41204f29)) {
       level.var_41204f29 = [];
     } else if(!isarray(level.var_41204f29)) {
@@ -91,7 +91,7 @@ function function_5e443ed1() {
 
   level._loadstarted = 1;
   function_fbb2b180();
-  setDvar(#"hash_2b7eabe1e310b191", 0);
+  setDvar(#"playerenenergy_enabled", 0);
   setDvar(#"g_speed", 160);
   setDvar(#"ik_terrain_vel_min", 120);
   setDvar(#"ik_terrain_vel_max", 150);
@@ -106,22 +106,22 @@ function function_5e443ed1() {
   level thread register_clientfields();
   setup_traversals();
   level thread onallplayersready();
-  gamedifficulty::setskill(undefined, level.var_648a2ef0);
+  gamedifficulty::setskill(undefined, level.skill_override);
   system::function_c11b0642();
   art_review();
   level.growing_hitmarker = 1;
   level.var_6454ed48 = 0;
   level flag::set(#"load_main_complete");
   level flag::set("draft_complete");
-  level.var_f320af85 = &function_e029c994;
+  level.cybercomtargetlockrequirementcb = &cybercom_out_of_bounds_check;
 
-  if(isDefined(level.var_b28c2c3a) && isDefined(level.var_46d8992a)) {
-    if(level.var_b28c2c3a == level.var_46d8992a) {
-      world.var_b86bf11e = undefined;
+  if(isDefined(level.skipto_point) && isDefined(level.default_skipto)) {
+    if(level.skipto_point == level.default_skipto) {
+      world.checkpoint_used = undefined;
     }
   }
 
-  level thread function_c9740807();
+  level thread save_start_checkpoints();
   level thread function_2dd7fc9e();
 }
 
@@ -162,7 +162,7 @@ function function_bc5d59fb() {
 }
 
 function function_ba5622e() {
-  util::function_49cd62a8("level_is_go");
+  util::set_level_start_flag("level_is_go");
 }
 
 function function_eb7b7382() {
@@ -171,7 +171,7 @@ function function_eb7b7382() {
   level flag::set("level_is_go");
 }
 
-function function_c9740807() {
+function save_start_checkpoints() {
   player = getPlayers()[0];
 
   if(isPlayer(player) && player util::function_a1d6293()) {
@@ -192,7 +192,7 @@ function function_c9740807() {
   checkpointcommit();
 }
 
-function function_e029c994(player, target, weapon) {
+function cybercom_out_of_bounds_check(player, target, weapon) {
   return !weapon oob::isoutofbounds();
 }
 
@@ -245,7 +245,7 @@ function function_f97a8023(mission_name) {
   return function_dd83f1b6(mission_name);
 }
 
-function function_c9154eb7(var_83104433, var_585e39fb) {
+function next_mission(var_83104433, var_585e39fb) {
   if(isDefined(var_83104433)) {
     if(!isDefined(var_585e39fb)) {
       var_585e39fb = skipto::function_455cb6c5(var_83104433);
@@ -264,7 +264,7 @@ function function_d44ed07e(var_83104433 = skipto::function_60ca00f5(), var_585e3
   }
 
   if(isDefined(var_585e39fb)) {
-    skipto::function_8722a51a(var_585e39fb, 1);
+    skipto::set_current_skipto(var_585e39fb, 1);
   }
 
   var_7c9eb9c6 = getrootmapname(var_83104433);
@@ -282,7 +282,7 @@ function function_ff52baa2() {
 }
 
 function function_cc51116c(var_83104433, var_585e39fb = "") {
-  skipto::function_8722a51a(var_585e39fb, 1);
+  skipto::set_current_skipto(var_585e39fb, 1);
   var_31924550 = getuimodel(function_5f72e972(#"lobby_root"), "transitionMapIdOverride");
   setuimodelvalue(var_31924550, hash(var_83104433));
 
@@ -363,14 +363,14 @@ function player_intermission(var_1ed3b46b = 1) {
         target_point = isDefined(struct::get(points[i].target, "targetname")) ? struct::get(points[i].target, "targetname") : getEnt(points[i].target, "targetname");
         dist = distance(points[i].origin, target_point.origin);
         time = dist / speed;
-        var_91c3f3c4 = time * 0.25;
+        q_time = time * 0.25;
 
-        if(var_91c3f3c4 > 1) {
-          var_91c3f3c4 = 1;
+        if(q_time > 1) {
+          q_time = 1;
         }
 
-        org moveTo(target_point.origin, time, var_91c3f3c4, var_91c3f3c4);
-        org rotateTo(target_point.angles, time, var_91c3f3c4, var_91c3f3c4);
+        org moveTo(target_point.origin, time, q_time, q_time);
+        org rotateTo(target_point.angles, time, q_time, q_time);
         wait time;
         continue;
       }
@@ -388,8 +388,8 @@ function onallplayersready() {
 
   do {
     waitframe(1);
-    var_72e2b734 = getnumconnectedplayers();
-    var_73f084c = getnumexpectedplayers(1);
+    n_connected = getnumconnectedplayers();
+    n_expected = getnumexpectedplayers(1);
     player_count_actual = 0;
 
     for(i = 0; i < level.players.size; i++) {
@@ -399,13 +399,13 @@ function onallplayersready() {
     }
 
     if(var_f884532 % 10 == 0) {
-      println("<dev string:xad>" + var_72e2b734 + "<dev string:xc6>" + var_73f084c);
+      println("<dev string:xad>" + n_connected + "<dev string:xc6>" + n_expected);
       println("<dev string:xd6>" + player_count_actual + "<dev string:xf3>" + level.players.size);
     }
 
     var_f884532++;
   }
-  while(var_72e2b734 < var_73f084c || player_count_actual < var_73f084c);
+  while(n_connected < n_expected || player_count_actual < n_expected);
 
   setinitialplayersconnected();
 

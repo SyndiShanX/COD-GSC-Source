@@ -94,8 +94,8 @@ function tesla_death_fx_callback(localclientnum, oldval, newval, bnewent, biniti
     }
 
     if(!isDefined(self.var_16e53a57)) {
-      self playSound(fieldname, #"hash_444d07230f4c95bf");
-      self.var_16e53a57 = self playLoopSound(#"hash_b02589e63759483");
+      self playSound(fieldname, #"zmb_vapor_elementalpop_zmb_imp");
+      self.var_16e53a57 = self playLoopSound(#"zmb_vapor_elementalpop_zmb_lp");
     }
 
     self.n_death_fx = util::playFXOnTag(fieldname, #"hash_43be23bab63afdc6", self, str_tag);
@@ -135,8 +135,8 @@ function tesla_shock_eyes_fx_callback(localclientnum, oldval, newval, bnewent, b
     }
 
     if(!isDefined(self.var_16e53a57)) {
-      self playSound(fieldname, #"hash_3b277f4572603015");
-      self.var_16e53a57 = self playLoopSound(#"hash_2f0f235f7f6fc84d");
+      self playSound(fieldname, #"zmb_vapor_electriccherry_zmb_imp");
+      self.var_16e53a57 = self playLoopSound(#"zmb_vapor_electriccherry_zmb_lp");
     }
 
     self.n_shock_eyes_fx = util::playFXOnTag(fieldname, #"hash_335e2bb9ccc18354", self, "J_Eyeball_LE");

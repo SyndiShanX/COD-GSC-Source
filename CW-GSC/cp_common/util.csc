@@ -49,13 +49,13 @@ function private function_2e48b28e(localclientnum, oldval, newval, bnewent, bini
 
   target = float(!bwastimejump);
   time_total = abs(target - self.var_86c3a9a2) / var_a6f59e30 * 1000;
-  var_2e1d5239 = self getclienttime();
+  time_start = self getclienttime();
   start = self.var_86c3a9a2;
 
   while(self.var_86c3a9a2 != target) {
     waitframe(1);
     time_now = self getclienttime();
-    time_delta = time_now - var_2e1d5239;
+    time_delta = time_now - time_start;
     coef = math::clamp(time_delta / time_total, 0, 1);
     self.var_86c3a9a2 = start + (target - start) * coef;
     self function_97c2dab8(self.var_86c3a9a2);
@@ -90,20 +90,20 @@ function function_d2554df(str_id) {
   level.var_54ce800f[str_id] = luielemimage::register();
 }
 
-function function_f3906128(func, var_c9ec2dc3) {
-  level.var_4530c925 = func;
-  clientfield::register("world", "force_streamer", 1, getminbitcountfornum(var_c9ec2dc3), "int", &function_70df4eb1, 0, 0);
+function set_streamer_hint_function(func, number_of_zones) {
+  level.func_streamer_hint = func;
+  clientfield::register("world", "force_streamer", 1, getminbitcountfornum(number_of_zones), "int", &_force_streamer, 0, 0);
 }
 
-function function_70df4eb1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, var_f2e0ac2e) {
-  if(var_f2e0ac2e == 0) {
+function _force_streamer(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojumpid) {
+  if(bwasdemojumpid == 0) {
     stopforcingstreamer();
     return;
   }
 
-  [[level.var_4530c925]](var_f2e0ac2e);
+  [[level.func_streamer_hint]](bwasdemojumpid);
   level waittilltimeout(15, #"streamer_100");
-  streamernotify(var_f2e0ac2e);
+  streamernotify(bwasdemojumpid);
 }
 
 function force_stream_weapons(localclientnum, weaponarray) {
@@ -135,39 +135,39 @@ function force_stream_weapons(localclientnum, weaponarray) {
   }
 }
 
-function function_d96391ba() {
-  level.var_dd9e1cd5 = [];
-  level._effect[#"player_cold_breath"] = #"hash_3276d891dff1f743";
-  level._effect[#"ai_cold_breath"] = #"hash_326fec91dfebfa91";
-  clientfield::register("toplayer", "player_cold_breath", 1, 1, "int", &function_73d83dae, 0, 0);
-  clientfield::register("actor", "ai_cold_breath", 1, 1, "counter", &function_f39fc31d, 0, 0);
+function init_breath_fx() {
+  level.cold_breath = [];
+  level._effect[#"player_cold_breath"] = #"player/fx_plyr_breath_steam_1p";
+  level._effect[#"ai_cold_breath"] = #"player/fx_plyr_breath_steam_3p";
+  clientfield::register("toplayer", "player_cold_breath", 1, 1, "int", &handle_cold_breath, 0, 0);
+  clientfield::register("actor", "ai_cold_breath", 1, 1, "counter", &handle_ai_breath, 0, 0);
 }
 
-function function_73d83dae(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function handle_cold_breath(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
-    if(is_true(level.var_dd9e1cd5[fieldname])) {
+    if(is_true(level.cold_breath[fieldname])) {
       return;
     }
 
-    level.var_dd9e1cd5[fieldname] = 1;
-    self thread function_9340eb56(fieldname);
+    level.cold_breath[fieldname] = 1;
+    self thread player_breath_1p(fieldname);
     return;
   }
 
-  level.var_dd9e1cd5[fieldname] = 0;
+  level.cold_breath[fieldname] = 0;
 }
 
-function function_9340eb56(localclientnum) {
+function player_breath_1p(localclientnum) {
   self endon(#"disconnect");
   self endon(#"death");
 
-  while(is_true(level.var_dd9e1cd5[localclientnum])) {
+  while(is_true(level.cold_breath[localclientnum])) {
     wait randomintrange(5, 7);
     playfxoncamera(localclientnum, level._effect[#"player_cold_breath"], (0, 0, 0), (1, 0, 0), (0, 0, 1));
   }
 }
 
-function function_f39fc31d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function handle_ai_breath(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon(#"death");
 
   while(isalive(self)) {
@@ -190,7 +190,7 @@ function player_keyline_render(localclientnum) {
   level.var_8530f39a[level.var_8530f39a.size] = self;
 
   if(self function_21c0fa55()) {
-    self function_dc7fced6();
+    self init_duplicaterender_settings();
     self thread force_update_player_clientfields(localclientnum);
   }
 
@@ -220,7 +220,7 @@ function force_update_player_clientfields(localclientnum) {
   self processclientfieldsasifnew();
 }
 
-function function_dc7fced6() {}
+function init_duplicaterender_settings() {}
 
 function function_8e4d84eb(localclientnum, bundlename) {
   player = self;

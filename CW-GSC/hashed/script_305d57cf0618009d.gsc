@@ -307,7 +307,7 @@ function private fly_path(insertion, var_1d83d08d, fly_over_point, var_59526dd5)
     debug_sphere(endpoint, 75, (1, 0.5, 0));
     debug_line(var_82b0af47, startpoint, (1, 0, 0));
     debug_line(var_ee07e61a, endpoint, (1, 0, 0));
-    minimaporigins = territory::function_1f583d2e("<dev string:x38>", "<dev string:x46>");
+    minimaporigins = territory::get_ent_array("<dev string:x38>", "<dev string:x46>");
 
     if(minimaporigins.size == 2) {
       maxheight = float(max(minimaporigins[0].origin[2], minimaporigins[1].origin[2]));

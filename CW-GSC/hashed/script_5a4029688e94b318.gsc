@@ -70,10 +70,10 @@ function function_6bd1bb5a(str_objective, b_starting) {
   }
 
   level flag::wait_till("flg_apc_turret_end");
-  skipto::function_4e3ab877(str_objective);
+  skipto::objective_completed(str_objective);
 }
 
-function function_54337d3f(str_objective, b_starting, var_aa1a6455, player) {
+function function_54337d3f(str_objective, b_starting, b_direct, player) {
   level flag::set("flg_escape_apc_interact_triggered");
   level thread function_17316c5e();
   level thread namespace_f6d09d1a::function_bdf9ac3e();
@@ -190,11 +190,11 @@ function function_47e3ca7b() {
   }
 
   do {
-    var_9b647c99 = distance2dsquared(level.player.origin, level.vh_escape_apc.origin) < 640000;
+    is_player_close = distance2dsquared(level.player.origin, level.vh_escape_apc.origin) < 640000;
     var_82e1e4b = util::within_fov(level.player getplayercamerapos(), level.player getplayerangles(), level.vh_escape_apc.origin, 0.5);
     wait 0.5;
   }
-  while(!(var_9b647c99 && var_82e1e4b));
+  while(!(is_player_close && var_82e1e4b));
 
   level thread namespace_4bd68414::function_616aaf6e();
   level thread function_eec2fa5b();
@@ -319,11 +319,11 @@ function function_a668e580(str_objective, b_starting) {
   level flag::wait_till("flg_apc_ride_duck_audio");
   wait 0.5;
   level flag::wait_till("flg_apc_ride_end");
-  skipto::function_4e3ab877(str_objective);
+  skipto::objective_completed(str_objective);
   player_decision::function_430ebd4b(2, 4);
   player_decision::function_8c0836dd(1);
   player_decision::function_8c0836dd(0);
-  skipto::function_1c2dfc20("cp_rus_yamantau");
+  skipto::level_completed("cp_rus_yamantau");
 }
 
 function function_13cde8e() {
@@ -332,7 +332,7 @@ function function_13cde8e() {
   namespace_b61bbd82::music("deactivate_12.1_exit");
 }
 
-function function_28117f7e(str_objective, b_starting, var_aa1a6455, player) {}
+function function_28117f7e(str_objective, b_starting, b_direct, player) {}
 
 function function_de15d472() {
   if(!isDefined(objectives::function_285e460("obj_apc_ride_main"))) {
@@ -345,15 +345,15 @@ function function_de15d472() {
   objectives::complete("obj_apc_ride_main");
 }
 
-function function_e3ba2154(var_b1b1f410) {
+function function_e3ba2154(flg_endon) {
   level flag::wait_till("flg_amk_player_spawned");
   level.player endon(#"death");
   level endon(#"flg_apc_ride_end");
   objectives::kill("obj_apc_ride_kill", self, undefined, 0, 0, 0);
   objectives::function_67f87f80("obj_apc_ride_kill", self, #"hash_6ba8a06ef5a1abad");
 
-  if(isDefined(var_b1b1f410)) {
-    level flag::wait_till(var_b1b1f410);
+  if(isDefined(flg_endon)) {
+    level flag::wait_till(flg_endon);
     objectives::hide("obj_apc_ride_kill", self);
     objectives::complete("obj_apc_ride_kill");
   }
@@ -399,7 +399,7 @@ function function_24b65377(str_objective) {
         var_59c98490[#"car1"] = level.var_9bdc49b5;
         var_59c98490[#"car2"] = level.var_8d81ad00;
         var_59c98490[#"car3"] = level.var_8237966c;
-        var_59c98490[#"hash_35619e90e87bcd4f"] = level.var_74f57be8;
+        var_59c98490[#"car4"] = level.var_74f57be8;
         level scene::play("scene_amk_7050_apc_mall", var_59c98490);
       }
 
@@ -611,8 +611,8 @@ function function_448bf40() {
   level thread namespace_fc3e8cb::function_18e5080e("flg_apc_ride_mall_transition_end", var_e4d9f640);
 }
 
-function function_d88afd7(var_697fc91a) {
-  foreach(ai_enemy in var_697fc91a) {
+function function_d88afd7(a_ai_enemy) {
+  foreach(ai_enemy in a_ai_enemy) {
     if(isDefined(ai_enemy)) {
       vol = getEnt("vol_apc_ride_town_square_road", "targetname");
       ai_enemy ai::force_goal(vol, math::cointoss(75), undefined, 0, math::cointoss(75));
@@ -672,7 +672,7 @@ function function_d209720a() {
   level flag::wait_till("flg_apc_ride_town_square_enter");
   level.vh_town_square_apc thread function_e3ba2154("flg_apc_ride_apc_town_square_apc_dead");
   level.vh_town_square_apc hms_util::function_c21ef1d8("miss_apc");
-  level.vh_town_square_apc.var_21c17c08 thread namespace_4bd68414::function_cd66d03e();
+  level.vh_town_square_apc.loudspeaker thread namespace_4bd68414::function_cd66d03e();
   level flag::wait_till("flg_apc_ride_town_square_midpoint");
   level.vh_town_square_apc hms_util::function_c21ef1d8("shoot_apc");
   level.vh_town_square_apc util::stop_magic_bullet_shield();
@@ -843,9 +843,9 @@ function function_32ac3f51() {
 
 function function_3d7d695c(str_gate, str_exploder) {
   s_gate = struct::get(str_gate);
-  var_9d8fad40 = getEnt(str_gate + "_clip", "targetname");
+  e_gate_clip = getEnt(str_gate + "_clip", "targetname");
   e_trigger = spawn("trigger_radius", s_gate.origin, 16, 160, 160);
-  e_trigger thread function_db8b1513(var_9d8fad40, 0, str_exploder);
+  e_trigger thread function_db8b1513(e_gate_clip, 0, str_exploder);
 }
 
 function function_a735636c() {

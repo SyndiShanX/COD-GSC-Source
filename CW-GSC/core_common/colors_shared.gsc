@@ -444,7 +444,7 @@ function goto_current_colorindex() {
   println("<dev string:x11b>" + self.export+"<dev string:xe0>");
 }
 
-function function_4156cb7d(var_e6f7de4c, str_team) {
+function clear_color_order_from_team(var_e6f7de4c, str_team) {
   color = undefined;
 
   foreach(color in level.colorlist) {
@@ -1007,9 +1007,9 @@ function process_color_order_to_ai(node, trigger, counter) {
   while(true) {
     waitresult = self waittill(#"node_relinquished");
     waitframe(1);
-    var_e8de8dba = getnodeowner(node);
+    nodeowner = getnodeowner(node);
 
-    if(self.prevnode !== node || !isDefined(var_e8de8dba) || !isPlayer(var_e8de8dba)) {
+    if(self.prevnode !== node || !isDefined(nodeowner) || !isPlayer(nodeowner)) {
       continue;
     }
 
@@ -1748,7 +1748,7 @@ function is_color_ai() {
 }
 
 function private function_e4e541a8(node, volume) {
-  self endon(#"death", #"hash_365fd8fda5a5a322", #"stop_going_to_node");
+  self endon(#"death", #"stop_being_careful", #"stop_going_to_node");
 
   if(!isDefined(self.var_69acdce1)) {
     self.var_69acdce1 = self.fixednode;
@@ -1767,7 +1767,7 @@ function private function_e4e541a8(node, volume) {
 
 function private recover_from_careful_disable(node) {
   self endon(#"death", #"stop_going_to_node");
-  self waittill(#"hash_365fd8fda5a5a322");
+  self waittill(#"stop_being_careful");
   self.fixednode = self.var_69acdce1;
   self.var_69acdce1 = undefined;
   set_goal_and_volume(node);

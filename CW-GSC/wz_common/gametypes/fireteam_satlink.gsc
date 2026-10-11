@@ -247,7 +247,7 @@ function function_aa9e57ab() {
     satlink.var_aee3e62d = 0;
     satlink.var_cfec45a8 = "hud_items_fireteam.satLinkBoosters." + i + ".activeCount";
     satlink.var_9c417693 = "hud_items_fireteam.satLinkBoosters." + i + ".expiring";
-    satlink.var_eb2545e9 = [];
+    satlink.playerstouching = [];
     satlink.var_e305235f = 0;
 
     if(isDefined(satlink.target)) {
@@ -282,8 +282,8 @@ function function_db7c16c8() {
   self.model = spawn("script_model", self.origin);
   self.model.angles = self.angles;
   self.model setModel("p9_fxanim_mp_objective_sat_link_mod");
-  self.model function_619a5c20();
-  self.model thread scene::init(#"hash_3f208262ef475029", self.model);
+  self.model pingable();
+  self.model thread scene::init(#"p9_fxanim_mp_objective_sat_link_bundle", self.model);
   self.model playLoopSound(#"hash_405628bbd4201492");
 }
 
@@ -327,9 +327,9 @@ function function_7d353922() {
     prevtime = currtime;
 
     foreach(satlink in level.satlinks) {
-      var_8f6204ef = [];
+      touchingplayers = [];
 
-      foreach(team, players in satlink.var_eb2545e9) {
+      foreach(team, players in satlink.playerstouching) {
         foreach(player in players) {
           if(!player function_c5b5d604(satlink)) {
             if(isDefined(player)) {
@@ -340,22 +340,22 @@ function function_7d353922() {
             continue;
           }
 
-          if(!isDefined(var_8f6204ef)) {
-            var_8f6204ef = [];
-          } else if(!isarray(var_8f6204ef)) {
-            var_8f6204ef = array(var_8f6204ef);
+          if(!isDefined(touchingplayers)) {
+            touchingplayers = [];
+          } else if(!isarray(touchingplayers)) {
+            touchingplayers = array(touchingplayers);
           }
 
-          var_8f6204ef[var_8f6204ef.size] = player;
+          touchingplayers[touchingplayers.size] = player;
         }
 
         if(players.size == 0) {
-          satlink.var_eb2545e9[team] = undefined;
+          satlink.playerstouching[team] = undefined;
         }
       }
 
-      arrayremovevalue(satlink.var_eb2545e9, undefined, 1);
-      var_4a744a6a = getarraykeys(satlink.var_eb2545e9);
+      arrayremovevalue(satlink.playerstouching, undefined, 1);
+      var_4a744a6a = getarraykeys(satlink.playerstouching);
 
       if(var_4a744a6a.size == 0) {
         satlink function_32e15bbc(deltatime);
@@ -364,16 +364,16 @@ function function_7d353922() {
 
       if(var_4a744a6a.size == 1) {
         if(satlink.team === var_4a744a6a[0]) {
-          satlink function_20cea7a4(var_8f6204ef, deltatime);
+          satlink function_20cea7a4(touchingplayers, deltatime);
           satlink function_32e15bbc(deltatime);
         } else {
-          satlink function_6a9d41cd(var_8f6204ef, deltatime);
+          satlink function_6a9d41cd(touchingplayers, deltatime);
         }
 
         continue;
       }
 
-      satlink function_e8000cda(var_8f6204ef, deltatime);
+      satlink function_e8000cda(touchingplayers, deltatime);
     }
   }
 }
@@ -426,7 +426,7 @@ function function_20cea7a4(players, deltatime) {
         self.var_a8aaaaa6++;
         player.var_dd6923b0 -= level.var_1ff15218;
         clientfield::set_world_uimodel(self.var_cfec45a8, self.var_a8aaaaa6);
-        self.model playsoundontag(#"hash_1389df41a19d0c4f", "swivel_jnt");
+        self.model playsoundontag(#"evt_signalbooster_activate", "swivel_jnt");
         [[level.var_37d62931]](player, 1);
         player.pers[#"satlink_deposits"] = (isDefined(player.pers[#"satlink_deposits"]) ? player.pers[#"satlink_deposits"] : 0) + 1;
         player.satlink_deposits = player.pers[#"satlink_deposits"];
@@ -526,17 +526,17 @@ function function_bd096dfe(triggerstruct) {
 }
 
 function function_b1dd9185(player) {
-  if(!isDefined(self.var_eb2545e9[player.team])) {
-    self.var_eb2545e9[player.team] = [];
+  if(!isDefined(self.playerstouching[player.team])) {
+    self.playerstouching[player.team] = [];
   }
 
-  if(!isDefined(self.var_eb2545e9[player.team])) {
-    self.var_eb2545e9[player.team] = [];
-  } else if(!isarray(self.var_eb2545e9[player.team])) {
-    self.var_eb2545e9[player.team] = array(self.var_eb2545e9[player.team]);
+  if(!isDefined(self.playerstouching[player.team])) {
+    self.playerstouching[player.team] = [];
+  } else if(!isarray(self.playerstouching[player.team])) {
+    self.playerstouching[player.team] = array(self.playerstouching[player.team]);
   }
 
-  self.var_eb2545e9[player.team][self.var_eb2545e9[player.team].size] = player;
+  self.playerstouching[player.team][self.playerstouching[player.team].size] = player;
   player.var_bcd73e99 = 1;
   player.var_dd6923b0 = 0;
 }
@@ -584,11 +584,11 @@ function function_c5b5d604(satlink) {
 }
 
 function private function_f60cbb01() {
-  var_e74281a8 = self.team;
+  previousteam = self.team;
   self.team = self.claimteam;
 
-  if(isarray(self.var_eb2545e9[self.team])) {
-    foreach(player in self.var_eb2545e9[self.team]) {
+  if(isarray(self.playerstouching[self.team])) {
+    foreach(player in self.playerstouching[self.team]) {
       if(isDefined(self.objectiveid)) {
         objective_clearplayerusing(self.objectiveid, player);
       }
@@ -620,8 +620,8 @@ function private function_f60cbb01() {
     objective_setprogress(self.objectiveid, 0);
   }
 
-  if(!isDefined(var_e74281a8)) {
-    self.model thread scene::play(#"hash_3f208262ef475029", self.model);
+  if(!isDefined(previousteam)) {
+    self.model thread scene::play(#"p9_fxanim_mp_objective_sat_link_bundle", self.model);
   }
 
   foreach(team in level.teams) {
@@ -630,12 +630,12 @@ function private function_f60cbb01() {
       continue;
     }
 
-    if(!isDefined(var_e74281a8)) {
+    if(!isDefined(previousteam)) {
       globallogic_audio::leader_dialog("satlinkLinkEstablishedEnemy" + self.objectiveid, team);
       continue;
     }
 
-    if(var_e74281a8 === team) {
+    if(previousteam === team) {
       globallogic_audio::leader_dialog("satlinkLinkCapturedEnemy" + self.objectiveid, team);
     }
   }
@@ -689,7 +689,7 @@ function private function_d9f345c3(activator) {
   self.var_b20bc5cc setinvisibletoall();
   self.var_b20bc5cc setvisibletoplayer(activator);
   self.var_b20bc5cc setHintString(#"");
-  self.model playLoopSound(#"hash_5093c3a0e7047aa", 0.5);
+  self.model playLoopSound(#"fly_uranium_priming_lp_3p", 0.5);
 
   if(isDefined(self.objectiveid)) {
     objective_setplayerusing(self.objectiveid, activator);
@@ -707,7 +707,7 @@ function private function_50e94589() {
       objective_clearplayerusing(self.objectiveid, self.activator);
     }
 
-    assists = self.var_eb2545e9[self.activator.team];
+    assists = self.playerstouching[self.activator.team];
 
     if(isarray(assists)) {
       foreach(player in assists) {
@@ -748,22 +748,22 @@ function private function_d0a78df6(activator) {
       return;
     }
 
-    var_82377973 = [];
+    assistingplayers = [];
 
-    if(isarray(self.var_eb2545e9[activator.team])) {
-      foreach(player in self.var_eb2545e9[activator.team]) {
+    if(isarray(self.playerstouching[activator.team])) {
+      foreach(player in self.playerstouching[activator.team]) {
         if(player == activator) {
           continue;
         }
 
         if(player function_11cf329c(self)) {
-          if(!isDefined(var_82377973)) {
-            var_82377973 = [];
-          } else if(!isarray(var_82377973)) {
-            var_82377973 = array(var_82377973);
+          if(!isDefined(assistingplayers)) {
+            assistingplayers = [];
+          } else if(!isarray(assistingplayers)) {
+            assistingplayers = array(assistingplayers);
           }
 
-          var_82377973[var_82377973.size] = player;
+          assistingplayers[assistingplayers.size] = player;
           continue;
         }
 
@@ -773,7 +773,7 @@ function private function_d0a78df6(activator) {
 
     currtime = gettime();
     deltatime = currtime - prevtime;
-    progress = deltatime * (1 + var_82377973.size);
+    progress = deltatime * (1 + assistingplayers.size);
     progress = min(progress, var_b1c451bf);
     totalprogress += progress;
 
@@ -784,12 +784,12 @@ function private function_d0a78df6(activator) {
 
     if(totalprogress > 0) {
       activator function_1d2864b2(totalprogress / var_e18791f4);
-      activator function_7a6bb352(var_82377973.size + 1);
+      activator function_7a6bb352(assistingplayers.size + 1);
 
-      foreach(var_99e52a8c in var_82377973) {
+      foreach(var_99e52a8c in assistingplayers) {
         var_99e52a8c function_8955434b(#"hash_59e0e869fbae7705");
         var_99e52a8c function_1d2864b2(totalprogress / var_e18791f4);
-        var_99e52a8c function_7a6bb352(var_82377973.size + 1);
+        var_99e52a8c function_7a6bb352(assistingplayers.size + 1);
       }
     }
 
@@ -835,7 +835,7 @@ function function_4e33414c(satlink) {
     return false;
   }
 
-  if(self getcurrentweapon() === level.var_8ef8b9e8) {
+  if(self getcurrentweapon() === level.armorplateweapon) {
     return false;
   }
 
@@ -879,7 +879,7 @@ function function_11cf329c(satlink) {
     return false;
   }
 
-  if(self getcurrentweapon() === level.var_8ef8b9e8) {
+  if(self getcurrentweapon() === level.armorplateweapon) {
     return false;
   }
 
@@ -890,7 +890,7 @@ function private function_c21d7618(activator) {
   activator function_cef13ead();
   self function_50e94589();
   self.var_e305235f = gettime() + level.var_ab27794e;
-  self.model playsoundontag(#"hash_2c7e2b247d4d2f84", "swivel_jnt");
+  self.model playsoundontag(#"evt_battery_activate", "swivel_jnt");
 
   if(isDefined(self.objectiveid)) {
     objective_setgamemodeflags(self.objectiveid, 1);
@@ -1129,7 +1129,7 @@ function private function_a22bb806(item, player, networkid, itemid, itemcount, i
     return false;
   }
 
-  if(slot getcurrentweapon() === level.var_8ef8b9e8) {
+  if(slot getcurrentweapon() === level.armorplateweapon) {
     return false;
   }
 

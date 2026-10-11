@@ -448,7 +448,7 @@ function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansof
       self zm_score::player_reduce_points("points_lost_on_hit_value", level.var_39e18a71);
 
       if(zm_trial::is_trial_mode()) {
-        self playsoundtoplayer(#"hash_3109126d3731f3d2", self);
+        self playsoundtoplayer(#"zmb_trials_points_loss", self);
       }
     }
 
@@ -573,9 +573,9 @@ function function_8ef51109(var_fb6fa3e1, var_bbbf9a69) {
     }
 
     assert(getdvarint(#"hash_6d3c5317001d4fc6", 0) == 0, "<dev string:x139>");
-    level flag::set(#"hash_4e5756202af6ae94");
+    level flag::set(#"all_players_dead");
     level notify(#"end_game", {
-      #reason: #"hash_4e5756202af6ae94"});
+      #reason: #"all_players_dead"});
   }
 }
 
@@ -1980,7 +1980,7 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
     zm::increment_dog_round_stat("lost");
   }
 
-  level flag::set(#"hash_4e5756202af6ae94");
+  level flag::set(#"all_players_dead");
   level notify(#"end_game", {
     #reason: #"last_player_died"});
   return 0;

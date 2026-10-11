@@ -1167,8 +1167,8 @@ function eye_trace(hitents) {
 
   angles = self getplayerangles();
   fwd = anglesToForward(angles);
-  var_98b02a87 = self getplayerviewheight();
-  eye = self.origin + (0, 0, var_98b02a87);
+  eyeheight = self getplayerviewheight();
+  eye = self.origin + (0, 0, eyeheight);
   end = eye + fwd * 8000;
   return bulletTrace(eye, end, hitents, self);
 }

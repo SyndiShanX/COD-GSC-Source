@@ -76,7 +76,7 @@ function function_93a99046(struct) {
   assert(isstruct(struct), "<dev string:x38>");
 
   if(zm_utility::is_survival() || is_true(level.var_1b57c9ca)) {
-    model = #"hash_6847db4bdfca2dc8";
+    model = #"p9_fxanim_zm_gp_armor_station_low_xmodel";
 
     if(zm_utility::is_survival()) {
       var_c6d25878 = &zm_utility::function_f5a222a8;
@@ -151,8 +151,8 @@ function function_ab8eee07() {
 }
 
 function function_38ac8b73() {
-  if(!self flag::get(#"hash_1fdaddc50f1d62c5")) {
-    self flag::set(#"hash_1fdaddc50f1d62c5");
+  if(!self flag::get(#"first_power_on")) {
+    self flag::set(#"first_power_on");
     self thread scene::play("p9_fxanim_zm_gp_armor_station_bundle", "Shot 1", self);
   }
 
@@ -170,7 +170,7 @@ function function_fe5f8894(eventstruct) {
 
   if(isPlayer(player)) {
     if(!level.var_2a994cc0 sr_armor_menu::is_open(player) && !player clientfield::get_player_uimodel("hudItems.srOverlayOpen") && machine.script_noteworthy !== "power") {
-      player notify(#"hash_5f178db4550eeae9");
+      player notify(#"sroverlayopened");
       level.var_2a994cc0 sr_armor_menu::open(player, 0);
       player thread function_cb2d9b9b(machine, self);
       player zm_utility_zsurvival::function_14bada94();
@@ -350,7 +350,7 @@ function function_5aad4a79() {
 }
 
 function function_cb2d9b9b(machine, trigger) {
-  self endon(#"hash_5f178db4550eeae9");
+  self endon(#"sroverlayopened");
   trigger sethintstringforplayer(self, "");
 
   if(isDefined(machine.objectiveid)) {
@@ -514,7 +514,7 @@ function function_cb2d9b9b(machine, trigger) {
           }
 
           break;
-        case #"hash_383c519d3bdac984":
+        case #"upgrade_menu_close":
           self notify(#"hash_5e4c1bf6d3ef5df0");
           self function_6c71e778(machine, trigger);
           return;

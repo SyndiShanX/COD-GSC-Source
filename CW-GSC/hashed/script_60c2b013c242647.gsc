@@ -55,8 +55,8 @@ function function_922745a1(player) {
 }
 
 function function_d275f769(player, origin) {
-  var_497e327b = origin + (0, 0, 800);
-  sprinkler = namespace_ec06fe4a::spawnmodel(var_497e327b, "zombietron_sprinkler");
+  dropspot = origin + (0, 0, 800);
+  sprinkler = namespace_ec06fe4a::spawnmodel(dropspot, "zombietron_sprinkler");
 
   if(!isDefined(sprinkler)) {
     return;
@@ -74,24 +74,24 @@ function function_d275f769(player, origin) {
   sprinkler moveTo(mark, 0.5);
   sprinkler waittilltimeout(1, #"movedone");
   sprinkler namespace_e32bb68::function_3a59ec34("evt_doa_pickup_sprinkler_land");
-  sprinkler namespace_83eb6304::function_3ecfde67("sprinkler_land");
+  sprinkler doa_fx::function_3ecfde67("sprinkler_land");
   physicsexplosionsphere(mark, 200, 128, 2);
   playrumbleonposition("grenade_rumble", mark);
   wait 1;
 
   if(isDefined(player)) {
-    sprinkler namespace_83eb6304::function_3ecfde67("sprinkler_active");
+    sprinkler doa_fx::function_3ecfde67("sprinkler_active");
     sprinkler thread function_922745a1(player);
-    timeout = player namespace_1c2a96f9::function_4808b985(10);
+    timeout = player doa_fate::function_4808b985(10);
     player waittilltimeout(timeout, #"disconnect");
   }
 
   sprinkler notify(#"hash_1e744934a54fe4bc");
-  sprinkler namespace_83eb6304::turnofffx("sprinkler_active");
+  sprinkler doa_fx::turnofffx("sprinkler_active");
   wait 2;
   sprinkler namespace_e32bb68::function_3a59ec34("evt_doa_pickup_sprinkler_takeoff");
-  sprinkler namespace_83eb6304::function_3ecfde67("sprinkler_takeoff");
-  sprinkler moveTo(var_497e327b, 0.5);
+  sprinkler doa_fx::function_3ecfde67("sprinkler_takeoff");
+  sprinkler moveTo(dropspot, 0.5);
   sprinkler waittilltimeout(1, #"movedone");
   sprinkler delete();
 }

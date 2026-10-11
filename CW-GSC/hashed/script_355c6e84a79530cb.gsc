@@ -273,7 +273,7 @@ function function_ae44cb3d(instance, var_eece1f6a) {
   switch (var_eece1f6a) {
     case #"perk_machine_choice":
       if(zm_utility::is_survival()) {
-        var_78a3e26a = #"hash_6e47d6576612543c";
+        var_78a3e26a = #"p9_fxanim_zm_gp_wunderfizz_on_low_xmodel";
       } else {
         var_78a3e26a = #"p9_fxanim_zm_gp_wunderfizz_on_xmodel";
       }

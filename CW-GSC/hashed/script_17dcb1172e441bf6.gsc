@@ -50,21 +50,21 @@ function debugline(p1, p2, seconds, color) {
   line(p1, p2, color, 1, 0, int(seconds * 20));
 }
 
-function function_1d1f2c26(point, timesec, size, color) {
+function debugpoint(point, timesec, size, color) {
   self endon(#"hash_20de371f231f3e8a");
   end = gettime() + timesec * 1000;
   halfwidth = int(size / 2);
-  var_692eeaa1 = point + (halfwidth * -1, 0, 0);
+  l1 = point + (halfwidth * -1, 0, 0);
   l2 = point + (halfwidth, 0, 0);
-  var_74d6c120 = point + (0, halfwidth * -1, 0);
-  var_be7dd479 = point + (0, halfwidth, 0);
-  var_cfbcbc57 = point + (0, 0, halfwidth * -1);
-  var_9e09d8f2 = point + (0, 0, halfwidth);
+  w1 = point + (0, halfwidth * -1, 0);
+  w2 = point + (0, halfwidth, 0);
+  h1 = point + (0, 0, halfwidth * -1);
+  h2 = point + (0, 0, halfwidth);
 
   while(end > gettime()) {
-    line(var_692eeaa1, l2, color, 1, 0, 1);
-    line(var_74d6c120, var_be7dd479, color, 1, 0, 1);
-    line(var_cfbcbc57, var_9e09d8f2, color, 1, 0, 1);
+    line(l1, l2, color, 1, 0, 1);
+    line(w1, w2, color, 1, 0, 1);
+    line(h1, h2, color, 1, 0, 1);
     waitframe(1);
   }
 }
@@ -76,15 +76,15 @@ function debugorigin(timesec, size, color) {
 
   while(isDefined(self) && end > gettime()) {
     point = self.origin;
-    var_692eeaa1 = point + (halfwidth * -1, 0, 0);
+    l1 = point + (halfwidth * -1, 0, 0);
     l2 = point + (halfwidth, 0, 0);
-    var_74d6c120 = point + (0, halfwidth * -1, 0);
-    var_be7dd479 = point + (0, halfwidth, 0);
-    var_cfbcbc57 = point + (0, 0, halfwidth * -1);
-    var_9e09d8f2 = point + (0, 0, halfwidth);
-    line(var_692eeaa1, l2, color, 1, 0, 1);
-    line(var_74d6c120, var_be7dd479, color, 1, 0, 1);
-    line(var_cfbcbc57, var_9e09d8f2, color, 1, 0, 1);
+    w1 = point + (0, halfwidth * -1, 0);
+    w2 = point + (0, halfwidth, 0);
+    h1 = point + (0, 0, halfwidth * -1);
+    h2 = point + (0, 0, halfwidth);
+    line(l1, l2, color, 1, 0, 1);
+    line(w1, w2, color, 1, 0, 1);
+    line(h1, h2, color, 1, 0, 1);
     waitframe(1);
   }
 }
@@ -102,7 +102,7 @@ function debugmsg(txt, critical = 0) {
 
 function function_75ebaff2(txt, timesec, entity) {
   end = gettime() + timesec * 1000;
-  origin = namespace_7f5aeb59::function_23e1f90f()[0].origin;
+  origin = doa_player_utility::function_23e1f90f()[0].origin;
 
   while(end > gettime()) {
     if(isDefined(entity)) {
@@ -114,7 +114,7 @@ function function_75ebaff2(txt, timesec, entity) {
   }
 }
 
-function function_b57a9d84(vcenter, yaw, length, width, height, timesec = 1, color = (1, 0, 0)) {
+function debugbox(vcenter, yaw, length, width, height, timesec = 1, color = (1, 0, 0)) {
   end = gettime() + timesec * 1000;
   mins = (length * -1 / 2, width * -1 / 2, height * -1 / 2);
   maxs = (length / 2, width / 2, height / 2);
@@ -142,7 +142,7 @@ function function_99069e31() {
 
     if(level.doa.var_62f60f27.size && isDefined(level.doa.var_39e3fa99)) {
       if(level.doa.world_state == 4) {
-        origin = namespace_7f5aeb59::function_23e1f90f()[0].origin;
+        origin = doa_player_utility::function_23e1f90f()[0].origin;
       } else {
         origin = [[level.doa.var_39e3fa99]] - > function_ffcf1d1();
       }
@@ -170,9 +170,9 @@ function function_8225da57() {
 function function_72f01f3f(origin, radius, time, color = (0, 1, 0)) {
   level endon(#"hash_54ce4a6a8260618e");
   self endon(#"death");
-  var_264789d0 = 0.05;
+  hangtime = 0.05;
   circleres = 16;
-  var_d013a31 = circleres / 2;
+  hemires = circleres / 2;
   circleinc = 360 / circleres;
   circleres++;
   timer = gettime() + time * 1000;
@@ -180,7 +180,7 @@ function function_72f01f3f(origin, radius, time, color = (0, 1, 0)) {
   while(gettime() < timer) {
     plotpoints = [];
     rad = 0;
-    wait var_264789d0;
+    wait hangtime;
     players = getPlayers();
     angletoplayer = vectortoangles(origin - players[0].origin);
 
@@ -189,20 +189,20 @@ function function_72f01f3f(origin, radius, time, color = (0, 1, 0)) {
       rad += circleinc;
     }
 
-    function_f8c6064(plotpoints, color, var_264789d0);
+    function_f8c6064(plotpoints, color, hangtime);
   }
 }
 
-function function_f8c6064(plotpoints, var_2bd0b8bf, var_f491dcf7 = 1) {
+function function_f8c6064(plotpoints, var_2bd0b8bf, server_frames = 1) {
   if(plotpoints.size == 0) {
     return;
   }
 
   lastpoint = plotpoints[0];
 
-  for(var_f491dcf7 = int(var_f491dcf7); var_f491dcf7; var_f491dcf7--) {
+  for(server_frames = int(server_frames); server_frames; server_frames--) {
     for(i = 1; i < plotpoints.size; i++) {
-      line(lastpoint, plotpoints[i], var_2bd0b8bf, 1, var_f491dcf7);
+      line(lastpoint, plotpoints[i], var_2bd0b8bf, 1, server_frames);
       lastpoint = plotpoints[i];
     }
 
@@ -210,13 +210,13 @@ function function_f8c6064(plotpoints, var_2bd0b8bf, var_f491dcf7 = 1) {
   }
 }
 
-function function_e8f2d12c(pos, rad, height, var_f491dcf7 = 1, color = (0, 0, 0)) {
+function function_e8f2d12c(pos, rad, height, server_frames = 1, color = (0, 0, 0)) {
   self endon(#"stop_cylinder");
   self endon(#"death");
   currad = rad;
   curheight = height;
 
-  for(var_f491dcf7 = int(var_f491dcf7); var_f491dcf7; var_f491dcf7--) {
+  for(server_frames = int(server_frames); server_frames; server_frames--) {
     for(r = 0; r < 20; r++) {
       theta = r / 20 * 360;
       theta2 = (r + 1) / 20 * 360;

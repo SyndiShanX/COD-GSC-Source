@@ -98,7 +98,7 @@ function function_c487d6b1(archetype, fx, joint, gibflag) {
 function function_c8e3a0dc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(isDefined(self)) {
     str_tag = isDefined(self gettagorigin("j_spine4")) ? "j_spine4" : "tag_origin";
-    self playSound(bwastimejump, #"hash_1b3441156c512173");
+    self playSound(bwastimejump, #"zmb_ammomod_napalmburst_explode");
     self util::playFXOnTag(bwastimejump, "zm_weapons/fx9_aat_burnination_lvl5_aoe", self, str_tag);
   }
 }
@@ -168,8 +168,8 @@ function function_a681160a(localclientnum, is_vehicle = 0) {
   }
 
   if(!isDefined(self.var_428ce87c)) {
-    self playSound(localclientnum, #"hash_60984c7920920c54", self.origin + (0, 0, 50));
-    self.var_428ce87c = self playLoopSound(#"hash_aed7c693cd1b7cd");
+    self playSound(localclientnum, #"zmb_ammomod_napalmburst_impact", self.origin + (0, 0, 50));
+    self.var_428ce87c = self playLoopSound(#"zmb_ammomod_napalmburst_ai_lp");
   }
 }
 

@@ -476,9 +476,9 @@ function group_checkrequestbackupoutsideofvolume(e) {
 
 function group_eventinvestigate(groupname, guy, e) {
   groupdata = getgroup(groupname);
-  var_89808178 = group_assigntoinvestigatepod(groupdata, guy, e.investigate_pos);
+  bnewpod = group_assigntoinvestigatepod(groupdata, guy, e.investigate_pos);
 
-  if(var_89808178) {
+  if(bnewpod) {
     guy thread group_investigate_seekbackup(e);
   }
 }
@@ -655,19 +655,19 @@ function group_getinvestigatepoint(guy, volume) {
     }
   }
 
-  var_2e04480f = distfromcenter;
+  desireddist = distfromcenter;
 
   if(distfromcenter > var_ee7f3a11) {
-    var_2e04480f = max(60, randomfloatrange(distfromcenter - var_f64a59e * 2, distfromcenter - var_f64a59e));
+    desireddist = max(60, randomfloatrange(distfromcenter - var_f64a59e * 2, distfromcenter - var_f64a59e));
   } else if(distfromcenter > var_dc7be821) {
-    var_2e04480f = randomfloatrange(distfromcenter + var_5c49f737, distfromcenter + var_f64a59e);
+    desireddist = randomfloatrange(distfromcenter + var_5c49f737, distfromcenter + var_f64a59e);
   } else {
-    var_2e04480f = randomfloatrange(distfromcenter, distfromcenter + var_f64a59e);
+    desireddist = randomfloatrange(distfromcenter, distfromcenter + var_f64a59e);
   }
 
   var_dc04453c = (0.5 + var_73f7fb2a + randomfloatrange(-0.5, 0.5)) * lanewidth;
   var_8bfbd3f = (cos(var_dc04453c), sin(var_dc04453c), 0);
-  desiredpos = pod.origin + var_2e04480f * var_8bfbd3f;
+  desiredpos = pod.origin + desireddist * var_8bfbd3f;
   var_9ea07d03 = pod.state == 2;
   smartobject = smart_object::function_ab981ed(desiredpos, pod.volume, 512, var_9ea07d03);
 
@@ -742,9 +742,9 @@ function ispointinlane(point, pod, var_941fad23, lanewidth, distfromcenter, var_
 function group_eventcoverblown(groupname, guy, e) {
   groupdata = getgroup(groupname);
   groupdata thread group_delayedcoverblownpropagation(guy);
-  var_89808178 = group_assigntoinvestigatepod(groupdata, guy, e.investigate_pos);
+  bnewpod = group_assigntoinvestigatepod(groupdata, guy, e.investigate_pos);
 
-  if(var_89808178) {
+  if(bnewpod) {
     self thread group_coverblown_seekbackup(groupdata, e);
   }
 }
@@ -1180,8 +1180,8 @@ function pod_settocombat(var_3f01ab8a, enemy) {
 }
 
 function groups_combat_checklosttarget() {
-  level notify(#"hash_231bf1036978b7d8");
-  level endon(#"hash_231bf1036978b7d8");
+  level notify(#"cancel_group_combat_checklosttarget");
+  level endon(#"cancel_group_combat_checklosttarget");
   waitframe(1);
 
   while(is_true(level.stealth.var_ffa24aff)) {
@@ -1250,8 +1250,8 @@ function pod_haslostenemy() {
   var_2f31a4a5 = undefined;
 
   foreach(guy in self.members) {
-    if(isDefined(guy.stealth.funcs) && isDefined(guy.stealth.funcs[#"hash_6fc6e860faaf2da5"])) {
-      return guy[[guy.stealth.funcs[#"hash_6fc6e860faaf2da5"]]]();
+    if(isDefined(guy.stealth.funcs) && isDefined(guy.stealth.funcs[#"has_lost_enemy"])) {
+      return guy[[guy.stealth.funcs[#"has_lost_enemy"]]]();
     }
 
     enemy = guy.enemy;

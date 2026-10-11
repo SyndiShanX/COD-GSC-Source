@@ -15,7 +15,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  zm_perks::register_perk_clientfields(#"hash_47d7a8105237c88", &function_2d2b95b0, &function_6c832af6);
+  zm_perks::register_perk_clientfields(#"hash_47d7a8105237c88", &juggernaut_client_field_func, &juggernaut_code_callback_func);
   zm_perks::register_perk_effects(#"hash_47d7a8105237c88", "jugger_light");
   zm_perks::register_perk_init_thread(#"hash_47d7a8105237c88", &init_juggernaut);
   zm_perks::function_f3c80d73("zombie_perk_bottle_jugg");
@@ -27,6 +27,6 @@ function init_juggernaut() {
   }
 }
 
-function function_2d2b95b0() {}
+function juggernaut_client_field_func() {}
 
-function function_6c832af6() {}
+function juggernaut_code_callback_func() {}

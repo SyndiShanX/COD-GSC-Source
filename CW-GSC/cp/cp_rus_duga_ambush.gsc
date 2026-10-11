@@ -49,22 +49,22 @@ function starting(str_objective) {
   a_actors = [];
 
   if(isDefined(level.var_deda09e)) {
-    level namespace_ac5221d7::function_ed760ecb(namespace_ac5221d7::function_7b37895());
+    level namespace_ac5221d7::hero_setup(namespace_ac5221d7::function_7b37895());
   }
 
   snd::client_msg("start_combat");
-  level namespace_ac5221d7::function_ed760ecb("woods");
-  level namespace_ac5221d7::function_ed760ecb("mason");
-  level namespace_ac5221d7::function_ed760ecb("adler");
+  level namespace_ac5221d7::hero_setup("woods");
+  level namespace_ac5221d7::hero_setup("mason");
+  level namespace_ac5221d7::hero_setup("adler");
   array::thread_all(level.allies, &colors::disable);
   scene::init("scene_duga_ambush", level.allies);
   level.adler val::set(#"ambush", "ignoreme", 1);
-  level battlechatter::function_2ab9360b(0);
+  level battlechatter::bc_allow(0);
 }
 
 function main(str_objective, b_skipto) {
   e_player = getPlayers()[0];
-  e_player namespace_ac5221d7::function_292592aa();
+  e_player namespace_ac5221d7::loadout_default();
   e_player actions::function_b0868791("body_shield_grenade", 0);
   level thread spawn_funcs();
   level thread objectives();
@@ -75,7 +75,7 @@ function main(str_objective, b_skipto) {
   level thread function_afde770b();
   level flag::wait_till("flag_ambush_complete");
   trigger::use("trigger_last_perseus_color", "targetname");
-  skipto::function_4e3ab877(b_skipto);
+  skipto::objective_completed(b_skipto);
 }
 
 function function_afde770b() {
@@ -286,8 +286,8 @@ function function_4f102082() {
 }
 
 function function_38c7f077() {
-  var_ece5e59a = ["vox_cp_duga_01400_adlr_keepfighting_16", "vox_cp_duga_01400_adlr_dontbackdown_66", "vox_cp_duga_01400_adlr_stayinit_b6"];
-  level.player dialogue::queue(var_ece5e59a[randomintrange(0, var_ece5e59a.size)]);
+  a_str_aliases = ["vox_cp_duga_01400_adlr_keepfighting_16", "vox_cp_duga_01400_adlr_dontbackdown_66", "vox_cp_duga_01400_adlr_stayinit_b6"];
+  level.player dialogue::queue(a_str_aliases[randomintrange(0, a_str_aliases.size)]);
 }
 
 function function_14918351(var_1ba4f070) {
@@ -320,14 +320,14 @@ function ambush_vehicles() {
   gunship setrotorspeed(1);
   level flag::wait_till("flag_play_gunship_sound");
   obj = snd::play("tmp_veh_helicopter_flyby_close_slow", gunship);
-  snd::function_f4f3a2a(obj, gunship);
+  snd::stop_on_ent_death(obj, gunship);
 }
 
 function function_c8e55c36() {
   level.var_a01307ee = spawner::simple_spawn("spawner_perseus_forces_ambience");
   array::run_all(level.var_a01307ee, &setteam, #"allies");
   array::thread_all(level.var_a01307ee, &util::magic_bullet_shield);
-  level waittill(#"hash_3a1e61f4b8c22889");
+  level waittill(#"delete_all_ai");
 
   if(isDefined(level.allies) && level.allies.size) {
     foreach(guy in level.allies) {
@@ -338,8 +338,8 @@ function function_c8e55c36() {
     }
   }
 
-  level thread colors::function_4156cb7d("r", #"allies");
-  level thread colors::function_4156cb7d("r", #"axis");
+  level thread colors::clear_color_order_from_team("r", #"allies");
+  level thread colors::clear_color_order_from_team("r", #"axis");
   var_c5735292 = getnodearray("nd_disable_for_combat", "script_noteworthy");
 
   foreach(n in var_c5735292) {
@@ -387,22 +387,22 @@ function combat() {
 
   foreach(guy in a_heroes) {
     guy.var_8a3fb9e2 = 100;
-    var_f95b722f = "obj_duga_hero_kill_" + guy.targetname;
-    guy thread objectives::kill(var_f95b722f, guy, undefined, 0, 1, 0, #"hash_6ee2b2ad3a511429");
-    objectives::function_6a43edf3(var_f95b722f, guy);
+    str_obj_id = "obj_duga_hero_kill_" + guy.targetname;
+    guy thread objectives::kill(str_obj_id, guy, undefined, 0, 1, 0, #"hash_6ee2b2ad3a511429");
+    objectives::function_6a43edf3(str_obj_id, guy);
 
     switch (guy.targetname) {
       case #"ambush_hero_woods":
-        objectives::function_67f87f80(var_f95b722f, guy, #"hash_19b8d38e0f3b4a7b");
+        objectives::function_67f87f80(str_obj_id, guy, #"hash_19b8d38e0f3b4a7b");
         break;
       case #"ambush_hero_mason":
-        objectives::function_67f87f80(var_f95b722f, guy, #"hash_6406649fc8fbed87");
+        objectives::function_67f87f80(str_obj_id, guy, #"hash_6406649fc8fbed87");
         break;
       case #"hash_479849dc827c578b":
-        objectives::function_67f87f80(var_f95b722f, guy, #"hash_6d82fbc8379ff4a7");
+        objectives::function_67f87f80(str_obj_id, guy, #"hash_6d82fbc8379ff4a7");
         break;
       case #"hash_26630c1ef7708da5":
-        objectives::function_67f87f80(var_f95b722f, guy, #"hash_1ce5d2e21e8f8b51");
+        objectives::function_67f87f80(str_obj_id, guy, #"hash_1ce5d2e21e8f8b51");
         break;
     }
   }
@@ -470,14 +470,14 @@ function function_58a5048() {
   var_c4c06aca = array::random(var_d3eaca6b);
   level.perseus dialogue::queue(var_c4c06aca);
   level flag::wait_till("flag_building_retreat");
-  var_1026ae9b = var_c4c06aca;
+  str_new_line = var_c4c06aca;
 
-  while(var_1026ae9b === var_c4c06aca) {
-    var_1026ae9b = array::random(var_d3eaca6b);
+  while(str_new_line === var_c4c06aca) {
+    str_new_line = array::random(var_d3eaca6b);
     waitframe(1);
   }
 
-  var_c4c06aca = var_1026ae9b;
+  var_c4c06aca = str_new_line;
   level.perseus dialogue::queue(var_c4c06aca);
 }
 
@@ -513,10 +513,10 @@ function function_9ea2e3bb(ents) {
     ents[#"enemy04"] colors::set_force_color("o");
   }
 
-  if(isDefined(ents[#"hash_7dff85d726898e5c"])) {
-    util::magic_bullet_shield(ents[#"hash_7dff85d726898e5c"]);
-    ents[#"hash_7dff85d726898e5c"] setteam(#"allies");
-    ents[#"hash_7dff85d726898e5c"] colors::set_force_color("y");
+  if(isDefined(ents[#"enemy05"])) {
+    util::magic_bullet_shield(ents[#"enemy05"]);
+    ents[#"enemy05"] setteam(#"allies");
+    ents[#"enemy05"] colors::set_force_color("y");
   }
 
   if(isDefined(ents[#"perseus"])) {
@@ -581,12 +581,12 @@ function function_d5f016b9() {
   namespace_e1ccb37b::music("2.0_ambush");
   snd::client_msg(#"hash_37663b49458855e1");
   var_e9fc0486 = getaiarray("spawners_intro_redshirts", "targetname");
-  var_8a044272 = 1.9;
+  n_delete_delay = 1.9;
 
   if(var_e9fc0486.size) {
     foreach(guy in var_e9fc0486) {
       if(isDefined(guy) && isalive(guy)) {
-        guy util::delay(var_8a044272, undefined, &delete);
+        guy util::delay(n_delete_delay, undefined, &delete);
       }
     }
   }
@@ -596,15 +596,15 @@ function function_d5f016b9() {
   exploder::exploder_duration("cin_ambush_smoke_grenade", 18);
   level thread scene::play("scene_duga_ambush", "ambush", a_actors);
   level thread function_69003993();
-  var_e9a73714 = getanimlength("t9_duga_ambush_player");
-  wait var_e9a73714;
+  n_player_anim_length = getanimlength("t9_duga_ambush_player");
+  wait n_player_anim_length;
   level flag::set("flag_getup_complete");
-  savegame::function_7790f03(1);
+  savegame::checkpoint_save_asap(1);
   e_player namespace_ac5221d7::function_a22db743();
   e_player val::reset(#"hold_fire", "disable_weapon_fire");
   e_player val::reset_all(#"hash_74901644ca8bb461");
   e_player showcrosshair(1);
-  level battlechatter::function_2ab9360b(1);
+  level battlechatter::bc_allow(1);
   namespace_82bfe441::fade(0, "FadeMedium");
 }
 

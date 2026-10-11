@@ -108,7 +108,7 @@ function hellstorm_deploy(localclientnum, oldval, newval, bnewent, binitialsnap,
 
     if(isDefined(player) && isDefined(self) && self.owner === player) {
       self useanimtree("generic");
-      self setanim(#"hash_21fa3a72d877f87a", 1);
+      self setanim(#"p9_fxanim_mp_remote_missile_jet_01_anim", 1);
 
       if(isDefined(level.var_bb1f7e1e.var_1050ff32)) {
         self.cloudfx = util::playFXOnTag(fieldname, #"hash_75b6b7edc8c8900", self, "tag_origin");
@@ -127,10 +127,10 @@ function hellstorm_deploy(localclientnum, oldval, newval, bnewent, binitialsnap,
 }
 
 function function_6d66e75a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self thread function_90b75549(bwastimejump);
+  self thread vox_tvoi_tutor_noma_slide_16_5(bwastimejump);
 }
 
-function function_90b75549(localclientnum) {
+function vox_tvoi_tutor_noma_slide_16_5(localclientnum) {
   self notify(#"hash_3f127346d8e9769f");
   self endon(#"hash_3f127346d8e9769f", #"death");
   player = function_5c10bd79(localclientnum);

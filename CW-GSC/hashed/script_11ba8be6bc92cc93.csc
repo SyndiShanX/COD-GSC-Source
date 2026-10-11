@@ -27,7 +27,7 @@ function init() {
 function function_d45ef8ea(localclientnum) {
   self.breath_fx = util::playFXOnTag(localclientnum, "zm_ai/fx8_werewolf_breath", self, "j_head");
   self.var_f87f8fa0 = "tag_eye";
-  self zombie_eye_glow::function_3a020b0f(localclientnum, "rob_zm_eyes_orange", #"hash_524decea28717b7c");
+  self zombie_eye_glow::function_3a020b0f(localclientnum, "rob_zm_eyes_orange", #"zm_ai/fx8_werewolf_eye_glow");
   self callback::on_shutdown(&on_entity_shutdown);
   self playrenderoverridebundle("rob_zm_man_werewolf_nonboss_weakpoint");
 }

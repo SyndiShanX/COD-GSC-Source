@@ -39,7 +39,7 @@ function starting(str_skipto) {
   setDvar(#"hash_76c0d7e6385ee6de", 0.05);
   level scene::init("scene_tkd_hit3_intro_overlook", "initial_loop");
   level thread util::delay(0.2, undefined, &scene::stop, "scene_tkd_hit3_intro_overlook");
-  setsaveddvar(#"hash_7bf40e4b6a830d11", 0);
+  setsaveddvar(#"ai_threatsightdisplay", 0);
   thread namespace_a052577e::function_4074e9b1();
   guys = ai::array_spawn("af_unloader_guy");
   array::thread_all(guys, &namespace_979752dc::function_2324f175, 0);
@@ -80,11 +80,11 @@ function main(str_skipto, b_starting) {
   thread function_b3df3ebf();
   thread function_565588e1();
   level flag::wait_till("woods_to_truck");
-  level.woods thread util::function_27f5f662(["vox_cp_tdwn_07200_wood_getarash_50", "vox_cp_tdwn_07200_wood_quickbeforethep_01", "vox_cp_tdwn_07200_wood_hurry_3b"], "woods_to_truck", 2);
+  level.woods thread util::handle_nags(["vox_cp_tdwn_07200_wood_getarash_50", "vox_cp_tdwn_07200_wood_quickbeforethep_01", "vox_cp_tdwn_07200_wood_hurry_3b"], "woods_to_truck", 2);
   level flag::wait_till("af_tarmac_complete");
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 }
 
@@ -98,7 +98,7 @@ function init_clientfields() {
   clientfield::register("world", "prop_wash", 1, 1, "int");
 }
 
-function function_22b7fffd() {}
+function init_scenes() {}
 
 function function_b3df3ebf() {
   level.player endon(#"death");
@@ -131,7 +131,7 @@ function function_565588e1() {
   level endon(#"af_player_get_in_left");
   level endon(#"af_player_get_in_right");
   level flag::wait_till("woods_to_truck");
-  level.woods thread util::delay(3, undefined, &util::function_27f5f662, ["vox_cp_tdwn_07200_adlr_wehavetocatchth_c8", "vox_cp_tdwn_07200_wood_gettothattruck_5e"], "forever", 4);
+  level.woods thread util::delay(3, undefined, &util::handle_nags, ["vox_cp_tdwn_07200_adlr_wehavetocatchth_c8", "vox_cp_tdwn_07200_wood_gettothattruck_5e"], "forever", 4);
 
   while(!isDefined(level.chase_truck)) {
     waitframe(1);
@@ -145,7 +145,7 @@ function function_565588e1() {
   level.woods.script_fixednode = 1;
 
   if(level flag::get("woods_get_in_truck")) {
-    level endon(#"hash_6d8d592b136c4266");
+    level endon(#"player_lookdown");
   } else {
     level endon(#"woods_get_in_truck");
   }

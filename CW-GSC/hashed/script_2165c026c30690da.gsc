@@ -30,7 +30,7 @@ function preinit() {
 }
 
 function function_b82e0a5d() {
-  self.ai.var_870d0893 = 1;
+  self.ai.rex_mp_swamp_concrete_debris = 1;
   self flag::set(#"hash_7b1f9f26f086bf39");
   setup_awareness(self);
   self thread function_a1667de7();
@@ -85,7 +85,7 @@ function function_a1667de7() {
           wait 1;
           self dontinterpolate();
           self forceteleport(spawn_pos, isDefined(self.angles) ? self.angles : (0, 0, 0), 0, 1);
-          self thread namespace_361e505d::function_940cd1d8();
+          self thread namespace_361e505d::spawn_fade_in();
         }
       } else {
         var_976a5e89 = 0;
@@ -101,7 +101,7 @@ function function_a1667de7() {
 function private function_2b6f50fd() {
   level endon(#"end_game");
   self endon(#"death");
-  var_201abbfd = 0;
+  bad_path_count = 0;
   var_37c90cfe = 0;
   var_686cf729 = undefined;
   last_pos = undefined;
@@ -124,12 +124,12 @@ function private function_2b6f50fd() {
 
       if(!isDefined(var_686cf729) || goalinfo.goalpos !== var_686cf729) {
         var_686cf729 = goalinfo.goalpos;
-        var_201abbfd = 1;
+        bad_path_count = 1;
       } else {
-        var_201abbfd++;
+        bad_path_count++;
       }
 
-      if(var_201abbfd >= 20) {
+      if(bad_path_count >= 20) {
         var_2251b11e = 1;
       }
     }
@@ -139,7 +139,7 @@ function private function_2b6f50fd() {
         println("<dev string:x38>" + "<dev string:x4b>" + self.origin + "<dev string:x58>");
       }
 
-      var_201abbfd = 0;
+      bad_path_count = 0;
       var_37c90cfe = 0;
       enemy = undefined;
 

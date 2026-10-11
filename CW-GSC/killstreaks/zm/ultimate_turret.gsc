@@ -36,14 +36,14 @@ function private preinit() {
 }
 
 function function_634677dd() {
-  if(self.vehicletype === #"hash_d57fa1b1aacffc7") {
+  if(self.vehicletype === #"veh_ultimate_turret_zm") {
     level.var_6f2028c7--;
     level.var_6f2028c7 = math::clamp(level.var_6f2028c7, 0, 4);
   }
 }
 
 function function_bf97d10(params) {
-  if(self.vehicletype === #"hash_d57fa1b1aacffc7") {
+  if(self.vehicletype === #"veh_ultimate_turret_zm") {
     self.var_4a64e878 = 1;
     val::set(#"ultimate_turret_zm", "takedamage", 0);
     level.var_6f2028c7++;
@@ -79,7 +79,7 @@ function turretscanning() {
   veh endon(#"death", #"death_started", #"end_turret_scanning");
   wait 0.8;
   veh playSound(#"mpl_turret_startup");
-  veh playLoopSound(#"hash_69240c6db92da5bf");
+  veh playLoopSound(#"mpl_turret_amb_loop");
   s_bundle = killstreaks::get_script_bundle("ultimate_turret");
   veh.maxsightdistsqrd = sqr(isDefined(s_bundle.var_2aeadfa0) ? s_bundle.var_2aeadfa0 : 3500);
   veh thread function_9d831b2f();
@@ -95,7 +95,7 @@ function turretscanning() {
     if(is_valid_target(veh.e_current_target)) {
       function_16ccb771(veh.e_current_target);
     } else {
-      function_d103a3d0();
+      acquire_target();
     }
 
     aim_at_target(isDefined(veh.var_c27dadc8) ? veh.var_c27dadc8 : veh.e_current_target);

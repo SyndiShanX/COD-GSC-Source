@@ -19,8 +19,8 @@ function private autoexec __init__system__() {
 
 function private preinit() {
   callback::on_start_gametype(&init);
-  var_1d952608 = getactorspawnerarray();
-  callback::on_ai_spawned(&function_b791d0e4);
+  aispawnerarray = getactorspawnerarray();
+  callback::on_ai_spawned(&on_joined_ai);
 
   function_5ac4dc99("<dev string:x38>", 0);
 
@@ -53,7 +53,7 @@ function is_hero(ai) {
 }
 
 function function_51759b03(var_84d1299, eventstruct = undefined) {
-  if(is_true(level.var_cc83507)) {
+  if(is_true(level.deadops)) {
     return false;
   }
 
@@ -104,24 +104,24 @@ function function_4a19b47a() {
   assert(isDefined(self.voiceprefix));
 
   if(is_hero(self)) {
-    self.var_3d0026c9 = "";
+    self.bcvoicenumber = "";
     return;
   }
 
   switch (self.voiceprefix) {
     case #"hash_6600f5c535189183":
-      self.var_3d0026c9 = randomintrange(1, 3);
+      self.bcvoicenumber = randomintrange(1, 3);
       break;
     case #"hash_6d6e10c538f37ef3":
-      self.var_3d0026c9 = randomintrange(1, 5);
+      self.bcvoicenumber = randomintrange(1, 5);
       break;
     default:
-      self.var_3d0026c9 = randomintrange(1, 4);
+      self.bcvoicenumber = randomintrange(1, 4);
       break;
   }
 }
 
-function function_b791d0e4() {
+function on_joined_ai() {
   self endon(#"disconnect");
 
   if(!self function_51759b03()) {
@@ -155,7 +155,7 @@ function private function_158cbf3() {
     result = self waittill(#"asm_notify");
 
     if(self function_2346ea47(result.param)) {
-      self function_bd51deb1(result.param);
+      self bc_ainotifyconvert(result.param);
     }
   }
 }
@@ -167,7 +167,7 @@ function function_e1c920f9() {
     result = self waittill(#"damage");
 
     if(isPlayer(result.attacker) && damage_is_valid_for_friendlyfire_warning(result.mod)) {
-      self function_bd51deb1("friendlyfire");
+      self bc_ainotifyconvert("friendlyfire");
     }
   }
 }
@@ -202,7 +202,7 @@ function event_handler[actor_killed] function_a94f4749(eventstruct) {
     return;
   }
 
-  if(!isDefined(self.voiceprefix) || !isDefined(self.var_3d0026c9)) {
+  if(!isDefined(self.voiceprefix) || !isDefined(self.bcvoicenumber)) {
     return;
   }
 
@@ -212,9 +212,9 @@ function event_handler[actor_killed] function_a94f4749(eventstruct) {
   if(isDefined(self.archetype) && self.archetype == #"robot") {
     if(isDefined(attacker) && !isPlayer(attacker)) {
       if(meansofdeath == "MOD_MELEE") {
-        attacker thread function_bd51deb1("meleeKill");
+        attacker thread bc_ainotifyconvert("meleeKill");
       } else {
-        attacker thread function_bd51deb1("enemyKill");
+        attacker thread bc_ainotifyconvert("enemyKill");
       }
     }
 
@@ -225,45 +225,45 @@ function event_handler[actor_killed] function_a94f4749(eventstruct) {
     meleeassassinate = isDefined(meansofdeath) && meansofdeath == "MOD_MELEE_ASSASSINATE";
 
     if(isDefined(self.archetype) && self.archetype == "warlord") {
-      self playSound(#"hash_2083f6ebc94b5bc7");
+      self playSound(#"chr_warlord_death");
     }
 
-    if(!is_true(self.var_ff22950d) && !meleeassassinate && isDefined(attacker)) {
+    if(!is_true(self.quiet_death) && !meleeassassinate && isDefined(attacker)) {
       if(battlechatter_table::function_4e83ff35("combat", "announce", meansofdeath) > 0) {
-        self thread function_bd51deb1(meansofdeath);
+        self thread bc_ainotifyconvert(meansofdeath);
       } else {
-        self thread function_bd51deb1("death");
+        self thread bc_ainotifyconvert("death");
       }
 
       self.var_c719b698 = 1;
     }
 
-    if(is_true(self.var_e598a03f) && isDefined(attacker) && !isPlayer(attacker)) {
-      attacker thread function_bd51deb1("sniperdown");
+    if(is_true(self.sndissniper) && isDefined(attacker) && !isPlayer(attacker)) {
+      attacker thread bc_ainotifyconvert("sniperdown");
       return;
     }
 
     if(isDefined(attacker) && !isPlayer(attacker)) {
       if(meansofdeath == "MOD_MELEE") {
-        attacker thread function_bd51deb1("meleeKill");
+        attacker thread bc_ainotifyconvert("meleeKill");
       } else {
-        attacker thread function_bd51deb1("enemyKill");
+        attacker thread bc_ainotifyconvert("enemyKill");
       }
     }
 
     sniper = isDefined(attacker) && isDefined(attacker.scoretype) && attacker.scoretype == "_sniper";
 
     if(!meleeassassinate) {
-      close_ai = function_c17c8a8e(self);
+      close_ai = get_closest_ai_on_sameteam(self);
 
-      if(isDefined(close_ai) && !is_true(close_ai.var_ff22950d)) {
+      if(isDefined(close_ai) && !is_true(close_ai.quiet_death)) {
         if(sniper) {
-          attacker.var_e598a03f = 1;
-          close_ai thread function_bd51deb1("sniperthreat");
+          attacker.sndissniper = 1;
+          close_ai thread bc_ainotifyconvert("sniperthreat");
           return;
         }
 
-        close_ai thread function_bd51deb1("friendlydown");
+        close_ai thread bc_ainotifyconvert("friendlydown");
       }
     }
   }
@@ -282,12 +282,12 @@ function event_handler[bhtn_action_start] function_8f82e45e(eventstruct) {
     return;
   }
 
-  self thread function_bd51deb1(eventstruct.action);
+  self thread bc_ainotifyconvert(eventstruct.action);
 }
 
 function event_handler[bhtn_action_terminate] function_535f1141(eventstruct) {}
 
-function function_bd51deb1(notify_string) {
+function bc_ainotifyconvert(notify_string) {
   self function_4e7b6f6d("combat", "announce", notify_string);
   var_73691c34 = level.var_69427377[notify_string];
 
@@ -295,7 +295,7 @@ function function_bd51deb1(notify_string) {
     var_97a035a7 = self function_fb35fc43(1, 15);
 
     if(var_97a035a7.size > 0) {
-      var_97a035a7[randomint(var_97a035a7.size)] function_bd51deb1(var_73691c34);
+      var_97a035a7[randomint(var_97a035a7.size)] bc_ainotifyconvert(var_73691c34);
     }
   }
 }
@@ -309,7 +309,7 @@ function function_4e7b6f6d(category, type, modifier) {
   probability = battlechatter_table::function_4e83ff35(category, type, modifier);
 
   if(probability >= 100 || randomfloatrange(0, 100) <= probability) {
-    delay = battlechatter_table::function_2d2570e3(category, type, modifier);
+    delay = battlechatter_table::get_delay(category, type, modifier);
     key = modifier;
 
     if(!ishash(modifier)) {
@@ -323,7 +323,7 @@ function function_4e7b6f6d(category, type, modifier) {
 
       if(isDefined(var_cba6af0b) && isDefined(var_cba6af0b[0]) && var_cba6af0b[0] != "") {
         alias = var_cba6af0b[randomint(var_cba6af0b.size)];
-        self function_9cb2c120(self, alias, undefined, undefined, 1, undefined, is_death);
+        self bc_makeline(self, alias, undefined, undefined, 1, undefined, is_death);
 
         if(delay > 0) {
           level.var_5eabfd9[key] = gettime() + delay * 1000;
@@ -347,19 +347,19 @@ function event_handler[grenade_fire] function_edd0c161(eventstruct) {
   grenade = eventstruct.projectile;
   weapon = eventstruct.weapon;
 
-  if(weapon.name == #"eq_frag_grenade" || weapon.name == #"frag_grenade" || weapon.name == #"hash_15ed0347f1459a04") {
-    self thread function_bd51deb1("grenadetoss");
-    level thread function_8be08180(self, grenade, "grenadeincoming");
+  if(weapon.name == #"eq_frag_grenade" || weapon.name == #"frag_grenade" || weapon.name == #"frag_grenade_invisible") {
+    self thread bc_ainotifyconvert("grenadetoss");
+    level thread bc_incominggrenadewatcher(self, grenade, "grenadeincoming");
     return;
   }
 
   if(weapon.name == #"eq_flash_grenade" || weapon.name == #"flash_grenade" || weapon.name == #"hash_ae7d40bb12f5ab6") {
-    self thread function_bd51deb1("flashtoss");
-    level thread function_8be08180(self, grenade, "flashincoming");
+    self thread bc_ainotifyconvert("flashtoss");
+    level thread bc_incominggrenadewatcher(self, grenade, "flashincoming");
   }
 }
 
-function function_8be08180(thrower, grenade, event) {
+function bc_incominggrenadewatcher(thrower, grenade, event) {
   wait 1;
 
   if(!isDefined(thrower) || !isDefined(grenade)) {
@@ -372,10 +372,10 @@ function function_8be08180(thrower, grenade, event) {
     team = #"allies";
   }
 
-  ai = function_c9f7a37c(team, grenade);
+  ai = get_closest_ai_to_object(team, grenade);
 
   if(isDefined(ai)) {
-    ai thread function_bd51deb1(event);
+    ai thread bc_ainotifyconvert(event);
   }
 }
 
@@ -395,7 +395,7 @@ function event_handler[grenade_stuck] function_2a82bb92(eventstruct) {
   }
 
   if(isalive(self)) {
-    self thread function_bd51deb1("stickyincoming");
+    self thread bc_ainotifyconvert("stickyincoming");
   }
 }
 
@@ -407,40 +407,40 @@ function function_e0d850d2() {
 
   if(isDefined(attacker) && !isPlayer(attacker)) {
     if(meansofdeath == "MOD_MELEE") {
-      attacker thread function_bd51deb1("meleeKill");
+      attacker thread bc_ainotifyconvert("meleeKill");
       return;
     }
 
-    attacker thread function_bd51deb1("enemyKill");
+    attacker thread bc_ainotifyconvert("enemyKill");
   }
 }
 
-function function_413ce774(object, type) {
+function bc_ainearexplodable(object, type) {
   wait randomfloatrange(0.1, 0.4);
-  ai = function_c9f7a37c("both", object, 500);
+  ai = get_closest_ai_to_object("both", object, 500);
 
   if(isDefined(ai)) {
     if(type == "car") {
-      level thread function_9cb2c120(ai, "destructiblecar");
+      level thread bc_makeline(ai, "destructiblecar");
       return;
     }
 
-    level thread function_9cb2c120(ai, "destructiblebarrel");
+    level thread bc_makeline(ai, "destructiblebarrel");
   }
 }
 
-function function_bf0a663a() {
+function bc_robotbehindvox() {
   level endon(#"unloaded");
   self endon(#"death", #"disconnect", #"cybercom_action");
 
-  if(!isDefined(level.var_85c7869d)) {
-    level.var_85c7869d = 0;
+  if(!isDefined(level._bc_robotbehindvoxtime)) {
+    level._bc_robotbehindvoxtime = 0;
     enemies = getaiteamarray(#"axis", #"team3");
-    level.var_ecbd73e7 = array();
+    level._bc_robotbehindarray = array();
 
     foreach(enemy in enemies) {
       if(isDefined(enemy.archetype) && enemy.archetype == #"robot") {
-        array::add(level.var_ecbd73e7, enemy, 0);
+        array::add(level._bc_robotbehindarray, enemy, 0);
       }
     }
   }
@@ -449,26 +449,26 @@ function function_bf0a663a() {
     wait 1;
     t = gettime();
 
-    if(t > level.var_85c7869d + 1000) {
-      level.var_85c7869d = t;
+    if(t > level._bc_robotbehindvoxtime + 1000) {
+      level._bc_robotbehindvoxtime = t;
       enemies = getaiteamarray(#"axis", #"team3");
-      function_1eaaceab(level.var_ecbd73e7);
-      arrayremovevalue(level.var_ecbd73e7, undefined);
+      function_1eaaceab(level._bc_robotbehindarray);
+      arrayremovevalue(level._bc_robotbehindarray, undefined);
 
       foreach(enemy in enemies) {
         if(isDefined(enemy.archetype) && enemy.archetype == #"robot") {
-          array::add(level.var_ecbd73e7, enemy, 0);
+          array::add(level._bc_robotbehindarray, enemy, 0);
         }
       }
     }
 
-    if(level.var_ecbd73e7.size <= 0) {
+    if(level._bc_robotbehindarray.size <= 0) {
       continue;
     }
 
     played_sound = 0;
 
-    foreach(robot in level.var_ecbd73e7) {
+    foreach(robot in level._bc_robotbehindarray) {
       if(!isDefined(robot)) {
         continue;
       }
@@ -490,7 +490,7 @@ function function_bf0a663a() {
         diff = self.origin[2] - robot.origin[2];
 
         if((yaw < -95 || yaw > 95) && abs(diff) < 200) {
-          robot playSound(#"hash_49057ee50c660740");
+          robot playSound(#"chr_robot_behind");
           played_sound = 1;
           break;
         }
@@ -515,28 +515,28 @@ function getyaw(org) {
   return angles[1];
 }
 
-function private event_handler[battlechatter] function_bf4d6a54(parms) {
-  self function_9cb2c120(self, parms.suffix, undefined, undefined, 1);
+function private event_handler[battlechatter] battlechatterevent(parms) {
+  self bc_makeline(self, parms.suffix, undefined, undefined, 1);
 }
 
-function function_9cb2c120(ai, line, var_7488e05b, category, var_954826ad, var_a8bd89dd, is_death = 0) {
+function bc_makeline(ai, line, causeresponse, category, alwaysplay, var_a8bd89dd, is_death = 0) {
   if(!isDefined(ai)) {
     return;
   }
 
   ai endon(#"death", #"disconnect");
 
-  if(isDefined(var_7488e05b)) {
+  if(isDefined(causeresponse)) {
     assert(!isDefined(var_a8bd89dd));
     var_a8bd89dd = [line + "_response"];
   }
 
-  if(!isDefined(ai.voiceprefix) || !isDefined(ai.var_3d0026c9)) {
+  if(!isDefined(ai.voiceprefix) || !isDefined(ai.bcvoicenumber)) {
     return;
   }
 
   if(isDefined(ai.archetype) && ai.archetype == #"robot") {
-    soundalias = ai.voiceprefix + ai.var_3d0026c9 + "_" + "chatter";
+    soundalias = ai.voiceprefix + ai.bcvoicenumber + "_" + "chatter";
   } else if(!is_hero(ai) && strstartswith(line, "exert_")) {
     if(line == "exert_immolation") {
       line = "exert_death_scream";
@@ -544,23 +544,23 @@ function function_9cb2c120(ai, line, var_7488e05b, category, var_954826ad, var_a
 
     soundalias = "vox_male_" + line;
   } else {
-    soundalias = ai.voiceprefix + ai.var_3d0026c9 + "_" + line;
+    soundalias = ai.voiceprefix + ai.bcvoicenumber + "_" + line;
   }
 
-  ai thread function_7e56a9a1(soundalias, var_954826ad, var_a8bd89dd, category, is_death);
+  ai thread do_sound(soundalias, alwaysplay, var_a8bd89dd, category, is_death);
 }
 
-function function_7e56a9a1(soundalias, var_954826ad, var_a8bd89dd, category, is_death = 0) {
+function do_sound(soundalias, alwaysplay, var_a8bd89dd, category, is_death = 0) {
   if(!isDefined(soundalias)) {
     return;
   }
 
-  if(!isDefined(var_954826ad)) {
-    var_954826ad = 0;
+  if(!isDefined(alwaysplay)) {
+    alwaysplay = 0;
   }
 
-  if(self function_96dd94f5(category) && (!is_true(self.isspeaking) || var_954826ad)) {
-    if(!isDefined(self.enemy) && !var_954826ad) {
+  if(self bc_allowed(category) && (!is_true(self.isspeaking) || alwaysplay)) {
+    if(!isDefined(self.enemy) && !alwaysplay) {
       return;
     }
 
@@ -601,10 +601,10 @@ function function_7e56a9a1(soundalias, var_954826ad, var_a8bd89dd, category, is_
           if(isDefined(var_a8bd89dd) && var_a8bd89dd.size > 0) {
             response = var_a8bd89dd[0];
             arrayremovevalue(var_a8bd89dd, response);
-            ai = function_c17c8a8e(self);
+            ai = get_closest_ai_on_sameteam(self);
 
             if(isDefined(ai) && isDefined(response)) {
-              level thread function_9cb2c120(ai, response, undefined, undefined, undefined, var_a8bd89dd);
+              level thread bc_makeline(ai, response, undefined, undefined, undefined, var_a8bd89dd);
             }
           }
         } else if(result._notify == "bc_interrupt") {
@@ -642,7 +642,7 @@ function function_aacf773a() {
   }
 }
 
-function function_96dd94f5(str_category = "bc") {
+function bc_allowed(str_category = "bc") {
   if(isDefined(level.allowbattlechatter) && !is_true(level.allowbattlechatter[str_category])) {
     return false;
   }
@@ -657,17 +657,17 @@ function function_96dd94f5(str_category = "bc") {
 function on_player_spawned() {
   self endon(#"disconnect");
   self.soundmod = "player";
-  self.var_c7a2467a = 0;
-  self.var_2503219f = 1;
+  self.voxshouldgasp = 0;
+  self.voxshouldgasploop = 1;
   self.isspeaking = 0;
   self thread pain_vox();
-  self thread function_bf0a663a();
+  self thread bc_robotbehindvox();
 }
 
-function function_a0ec1dc0(suffix) {
+function bc_doplayervox(suffix) {
   soundalias = "vox_plyr_" + suffix;
 
-  if(self function_96dd94f5() && !is_true(self.istalking) && !is_true(self.isspeaking)) {
+  if(self bc_allowed() && !is_true(self.istalking) && !is_true(self.isspeaking)) {
     self playsoundtoplayer(soundalias, self);
     self thread wait_playback_time(soundalias);
   }
@@ -677,21 +677,21 @@ function pain_vox() {
   self endon(#"death", #"disconnect");
 
   while(true) {
-    waitresult = self waittill(#"hash_3ac4241a987b394f");
+    waitresult = self waittill(#"snd_pain_player");
 
     if(randomintrange(0, 100) <= 100) {
       if(isalive(self)) {
         if(waitresult.mod == "MOD_DROWN") {
           soundalias = "chr_swimming_drown";
-          self.var_c7a2467a = 1;
+          self.voxshouldgasp = 1;
 
-          if(self.var_2503219f) {
-            self thread function_5ef33d49();
+          if(self.voxshouldgasploop) {
+            self thread water_gasp();
           }
         }
 
         soundalias = "vox_plyr_exert_pain";
-        self thread function_7e56a9a1(soundalias, 1);
+        self thread do_sound(soundalias, 1);
       }
     }
 
@@ -699,16 +699,16 @@ function pain_vox() {
   }
 }
 
-function function_5ef33d49() {
+function water_gasp() {
   self endon(#"death", #"disconnect", #"snd_gasp");
   level endon(#"game_ended");
-  self.var_2503219f = 0;
+  self.voxshouldgasploop = 0;
 
   while(true) {
-    if(!self isplayerunderwater() && self.var_c7a2467a) {
-      self.var_c7a2467a = 0;
-      self.var_2503219f = 1;
-      self thread function_7e56a9a1("vox_pm1_gas_gasp", 1);
+    if(!self isplayerunderwater() && self.voxshouldgasp) {
+      self.voxshouldgasp = 0;
+      self.voxshouldgasploop = 1;
+      self thread do_sound("vox_pm1_gas_gasp", 1);
       self notify(#"snd_gasp");
     }
 
@@ -732,25 +732,25 @@ function wait_playback_time(soundalias, timeout) {
   self.isspeaking = 0;
 }
 
-function function_c17c8a8e(var_928cff8, maxdist) {
-  if(isDefined(var_928cff8)) {
-    aiarray = getaiteamarray(var_928cff8.team);
-    aiarray = arraysort(aiarray, var_928cff8.origin);
+function get_closest_ai_on_sameteam(some_ai, maxdist) {
+  if(isDefined(some_ai)) {
+    aiarray = getaiteamarray(some_ai.team);
+    aiarray = arraysort(aiarray, some_ai.origin);
 
     if(!isDefined(maxdist)) {
       maxdist = 1000;
     }
 
     foreach(dude in aiarray) {
-      if(!isDefined(var_928cff8)) {
+      if(!isDefined(some_ai)) {
         return undefined;
       }
 
-      if(!isDefined(dude) || !isalive(dude) || !isDefined(dude.var_3d0026c9)) {
+      if(!isDefined(dude) || !isalive(dude) || !isDefined(dude.bcvoicenumber)) {
         continue;
       }
 
-      if(dude == var_928cff8) {
+      if(dude == some_ai) {
         continue;
       }
 
@@ -762,13 +762,13 @@ function function_c17c8a8e(var_928cff8, maxdist) {
         continue;
       }
 
-      if(!is_hero(dude) && !is_hero(var_928cff8)) {
-        if(dude.var_3d0026c9 == var_928cff8.var_3d0026c9) {
+      if(!is_hero(dude) && !is_hero(some_ai)) {
+        if(dude.bcvoicenumber == some_ai.bcvoicenumber) {
           continue;
         }
       }
 
-      if(distance(var_928cff8.origin, dude.origin) > maxdist) {
+      if(distance(some_ai.origin, dude.origin) > maxdist) {
         continue;
       }
 
@@ -779,7 +779,7 @@ function function_c17c8a8e(var_928cff8, maxdist) {
   return undefined;
 }
 
-function function_c9f7a37c(team, object, maxdist) {
+function get_closest_ai_to_object(team, object, maxdist) {
   if(!isDefined(object)) {
     return;
   }
@@ -809,7 +809,7 @@ function function_c9f7a37c(team, object, maxdist) {
       continue;
     }
 
-    if(!isDefined(dude.voiceprefix) || !isDefined(dude.var_3d0026c9)) {
+    if(!isDefined(dude.voiceprefix) || !isDefined(dude.bcvoicenumber)) {
       continue;
     }
 
@@ -823,7 +823,7 @@ function function_c9f7a37c(team, object, maxdist) {
   return undefined;
 }
 
-function function_2ab9360b(b_allow, str_category = "bc") {
+function bc_allow(b_allow, str_category = "bc") {
   assert(isDefined(b_allow), "<dev string:x44>");
   self.allowbattlechatter[str_category] = b_allow;
 }
@@ -841,6 +841,6 @@ function function_124ccedf() {
   self waittill(#"death");
 
   if(isDefined(self)) {
-    self playSound(#"hash_4c37db042a332449");
+    self playSound(#"aml_dog_death");
   }
 }

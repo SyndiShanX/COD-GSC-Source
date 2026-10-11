@@ -90,7 +90,7 @@ function spawnac130(killstreaktype) {
   level.destructible_callbacks[#"turret_destroyed"] = &vtoldestructiblecallback;
   level.ac130.shuttingdown = 0;
   level.ac130.completely_shutdown = 0;
-  level.ac130 thread heatseekingmissile::playlockonsoundsthread(self, #"hash_fa62d8cec85b1a0", #"hash_1683ed70beb3f2");
+  level.ac130 thread heatseekingmissile::playlockonsoundsthread(self, #"uin_ac130_e_targeting", #"uin_ac130_e_target_lock");
   level.ac130 thread helicopter::wait_for_killed();
   level.ac130.maxhealth = isDefined(killstreak_bundles::get_max_health("ac130")) ? killstreak_bundles::get_max_health("ac130") : 5000;
   level.ac130.original_health = level.ac130.maxhealth;
@@ -595,13 +595,13 @@ function function_41f0e35b(ac130) {
   wait 0.1;
   var_74a46de6 = ac130 function_90d45d34(0);
   view_pos = self getplayercamerapos();
-  var_a120a51b = level.mapcenter;
+  lookat_pos = level.mapcenter;
 
   if(isDefined(level.var_e2a77deb)) {
-    var_a120a51b = level.var_e2a77deb;
+    lookat_pos = level.var_e2a77deb;
   }
 
-  self setplayerangles(vectortoangles(var_a120a51b - view_pos) - var_74a46de6);
+  self setplayerangles(vectortoangles(lookat_pos - view_pos) - var_74a46de6);
 }
 
 function function_5cdcce1e(player) {
@@ -778,7 +778,7 @@ function function_dea7ec6a(einflictor, eattacker, idamage, idflags, smeansofdeat
 
   if(handleasrocketdamage) {
     ac130 function_c4aa4bb2();
-    ac130 playSound(#"hash_ddcd9d25e056016");
+    ac130 playSound(#"uin_ac130_alarm_damage");
   }
 
   var_902cbab5 = self.health - smeansofdeath;

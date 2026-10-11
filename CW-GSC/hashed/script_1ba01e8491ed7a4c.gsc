@@ -47,17 +47,17 @@ function function_c17355e(str_skipto) {
   level flag::set("tundra_intro_done");
   level flag::set("player_is_rappelling");
   level flag::set("player_rappel_done");
-  level battlechatter::function_2ab9360b(1);
+  level battlechatter::bc_allow(1);
   level thread namespace_ba979a10::setup_allies();
   level thread namespace_ba979a10::function_cb6a2e9b();
   level thread namespace_ba979a10::function_ee211e0d();
-  level thread namespace_ba979a10::function_d6af6077();
+  level thread namespace_ba979a10::player_kill_trigger();
 }
 
 function function_baff9422(str_skipto, b_starting) {
   thread function_896664a1();
   wait 1;
-  skipto::function_4e3ab877("dev_vip_active");
+  skipto::objective_completed("dev_vip_active");
 }
 
 function function_896664a1() {
@@ -92,8 +92,8 @@ function function_bf8d2448(str_skipto, b_starting) {
   level thread function_bee56462("flag_spawn_fuel_depot_enemies", "flag_spawn_motor_pool_enemies", "motor_pool_ext_enemies");
   level thread function_bee56462("flag_spawn_motor_pool_enemies", "flag_spawn_fuel_depot_enemies", "fuel_depot_ext_enemies");
   level thread doors::unlock("tundra_final_door");
-  level battlechatter::function_2ab9360b(1);
-  level.woods battlechatter::function_2ab9360b(0);
+  level battlechatter::bc_allow(1);
+  level.woods battlechatter::bc_allow(0);
   level.woods ai::set_behavior_attribute("demeanor", "combat");
   level.player val::set("intro", "ignoreme", 0);
   level thread namespace_ba979a10::function_14f72bec();
@@ -105,7 +105,7 @@ function function_bf8d2448(str_skipto, b_starting) {
   level flag::wait_till("flag_tundra_vip_kill_confirmed");
   level flag::set("flag_spawn_fuel_depot_enemies");
   level flag::set("flag_spawn_motor_pool_enemies");
-  skipto::function_4e3ab877("tundra_combat");
+  skipto::objective_completed("tundra_combat");
   level namespace_ba979a10::function_d6b495cf();
   level thread namespace_ba979a10::function_abde7b6d();
 }
@@ -187,8 +187,8 @@ function function_3d8085b3() {
   level flag::set("buiding_1_cleared");
   cleared = level flag::wait_till_any(clear_flags);
   arrayremovevalue(clear_flags, cleared._notify);
-  var_ebe5de4 = getsubstr(clear_flags[0], 17, 18);
-  var_ebe5de4 = int(var_ebe5de4);
+  building = getsubstr(clear_flags[0], 17, 18);
+  building = int(building);
 
   if(!flag::get("flag_rudnik_truck_drive")) {
     level.player dialogue::queue("vox_cp_rcir_01200_masn_clear_08");
@@ -304,7 +304,7 @@ function function_dd9d2a4a() {
   level thread function_9c60849e("flag_bunker_vehicle_4", "tundra_final_bunker_veh4", "tundra_bunker_veh4_riders");
 }
 
-function function_9c60849e(var_28c216f0, vehicle, riders) {
+function function_9c60849e(spawn_flag, vehicle, riders) {
   level flag::wait_till(vehicle);
   e_vehicle = vehicle::simple_spawn_single_and_drive(riders);
   e_vehicle.health = 3000;

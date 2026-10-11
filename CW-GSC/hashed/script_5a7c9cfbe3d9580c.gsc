@@ -93,7 +93,7 @@ function function_690ab87a(str_objective, b_starting) {
     level thread namespace_d9b153b9::function_49b8435c();
     var_2cf9fe23 = level.var_731c10af.var_42659717 + 1;
     str = "visit_" + var_2cf9fe23 + "_" + str_objective + "_obey";
-    bb::function_cd497743(str, level.player);
+    bb::logplayermapnotification(str, level.player);
     obey(str_objective);
     level thread namespace_d9b153b9::function_1a8b3140();
     var_ae9e693 = str_objective + "_obey";
@@ -117,7 +117,7 @@ function function_690ab87a(str_objective, b_starting) {
     level thread namespace_d9b153b9::function_eab02ceb();
     var_2cf9fe23 = level.var_731c10af.var_42659717 + 1;
     str = "visit_" + var_2cf9fe23 + "_" + str_objective + "_disobey";
-    bb::function_cd497743(str, level.player);
+    bb::logplayermapnotification(str, level.player);
     disobey(str_objective);
     level thread namespace_d9b153b9::function_821d8772();
     level thread namespace_d9b153b9::function_1a8b3140();
@@ -183,11 +183,11 @@ function function_690ab87a(str_objective, b_starting) {
   }
 
   level flag::clear("flag_in_memory");
-  level skipto::function_4e3ab877(str_objective);
+  level skipto::objective_completed(str_objective);
 
   if(level flag::get("flag_memory_4")) {
     player_decision::function_8c0836dd(0);
-    skipto::function_1c2dfc20("cp_ger_hub8");
+    skipto::level_completed("cp_ger_hub8");
   }
 }
 
@@ -198,7 +198,7 @@ function function_cae2d8f5() {
   setDvar(#"r_lightingsunshadowdisabledynamicdraw", 0);
 }
 
-function function_e4f91def(str_objective, b_starting, var_aa1a6455, player) {
+function function_e4f91def(str_objective, b_starting, b_direct, player) {
   if(player == "memory_1") {}
 
   if(player == "memory_2") {
@@ -212,7 +212,7 @@ function function_e4f91def(str_objective, b_starting, var_aa1a6455, player) {
   }
 }
 
-function function_c26b0bc0() {
+function flags_init() {
   level flag::init("flag_in_memory");
   level flag::init("caves_door_opened");
   level flag::init("village_door_opened");
@@ -356,7 +356,7 @@ function function_c70cb408() {
 
 function obey(var_c79d614f) {
   if(isDefined(level.var_872cf153)) {
-    level thread function_b8252dde(var_c79d614f);
+    level thread bunker_room(var_c79d614f);
     level thread function_5ab2ed57(var_c79d614f);
     return;
   }
@@ -387,7 +387,7 @@ function obey(var_c79d614f) {
     level thread function_f59ac31d(level.var_2986f812);
   }
 
-  level thread function_b8252dde(var_c79d614f);
+  level thread bunker_room(var_c79d614f);
   level thread function_5ab2ed57(var_c79d614f);
 }
 
@@ -433,7 +433,7 @@ function disobey(var_c79d614f) {
     level flag::set("flag_start_memory_end");
   } else if(level.var_731c10af.var_e15e5b51.size == 3) {
     level function_f59ac31d(level.var_2986f812);
-    level thread function_b8252dde(var_c79d614f);
+    level thread bunker_room(var_c79d614f);
   }
 
   level thread function_5ab2ed57(var_c79d614f);
@@ -792,7 +792,7 @@ function check_input(struct) {
 
     isusinggamepad = self gamepadusedlast();
 
-    if(namespace_61e6d095::function_70217795(1)) {
+    if(scripted_widgets::function_70217795(1)) {
       level flag::set("stop_bunker_puzzle_room_hint");
       level.player unlink();
       break;
@@ -1158,9 +1158,9 @@ function function_ed113f39(hide, door_name, key_name) {
 }
 
 function function_810379ec(str_door_name) {
-  var_cad35a6 = struct::get_array("final_door_struct", "targetname");
+  a_s_doors = struct::get_array("final_door_struct", "targetname");
 
-  foreach(s_door in var_cad35a6) {
+  foreach(s_door in a_s_doors) {
     s_door = namespace_d9b153b9::door_setup(undefined, s_door, 1);
     level function_ed113f39(1, s_door, "struct");
   }
@@ -1235,7 +1235,7 @@ function function_b332d74d(str_trigger_name, str_door_name, var_690e93a6) {
   s_door function_133140de("memory_4_obey", "disobey");
 }
 
-function function_b8252dde(var_c79d614f, var_bd555ec2) {
+function bunker_room(var_c79d614f, var_bd555ec2) {
   level thread savegame::checkpoint_save();
   level.player allowjump(0);
   level.player allowsprint(0);
@@ -1502,7 +1502,7 @@ function bunker_room_final() {
   }
 
   level thread namespace_d9b153b9::pstfx_teleport(1, 1, "bunker1");
-  var_111fbf0c = snd::play([0.5, "amb_final_briefing_tvs_lp", 1], (-1123, 11249, -1039));
+  tv_sound = snd::play([0.5, "amb_final_briefing_tvs_lp", 1], (-1123, 11249, -1039));
   wait 0.5;
   tag_align_bunker_4 scene::stop("scene_pri_bunker_room_final", 1);
   tag_align_bunker_4 thread scene::play("scene_pri_bunker_room_final", "loop");
@@ -1514,7 +1514,7 @@ function bunker_room_final() {
   level thread function_c0b1e5dc();
   wait 1;
   level waittill(#"slam");
-  snd::stop(var_111fbf0c, 0.5);
+  snd::stop(tv_sound, 0.5);
   level thread lui::screen_fade_out(0, "white");
   level thread namespace_d9b153b9::pstfx_teleport(1, 0, "bunker2");
   videostop("cp_prisoner_tv_footage_grid_v2");

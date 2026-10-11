@@ -13,7 +13,7 @@ function private autoexec __init__system__() {
 function private _preload() {
   function_ad272ef4();
   function_90ceecf8();
-  function_7c9b0132();
+  _init_dvars();
   function_bc948200();
 }
 
@@ -27,6 +27,6 @@ function private function_ad272ef4() {
 
 function private function_90ceecf8() {}
 
-function private function_7c9b0132() {}
+function private _init_dvars() {}
 
 function private function_bc948200() {}

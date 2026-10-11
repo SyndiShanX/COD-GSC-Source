@@ -179,7 +179,7 @@ function hintobjectivehint_updat(weapon) {
     }
   }
 
-  self playlocalsound(#"hash_6c2a2fee191330a0");
+  self playlocalsound(#"uin_goldenammo_kill");
 }
 
 function function_92856c6(attacker, victim, weapon, attackerweapon, meansofdeath) {
@@ -200,7 +200,7 @@ function function_92856c6(attacker, victim, weapon, attackerweapon, meansofdeath
       }
     }
 
-    victim playlocalsound(#"hash_6c2a2fee191330a0");
+    victim playlocalsound(#"uin_goldenammo_kill");
     return true;
   }
 
@@ -639,7 +639,7 @@ function function_9abdee8c(watcher, object) {
   player gadgetpowerreset(slot);
   player gadgetpowerset(slot, 0);
   supplypod = spawn("script_model", object.origin);
-  supplypod function_619a5c20();
+  supplypod pingable();
   supplypod setModel(level.var_934fb97.weapon.var_22082a57);
   object.supplypod = supplypod;
   supplypod.var_2d045452 = object;

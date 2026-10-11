@@ -197,24 +197,24 @@ function private function_3e9077b(localclientnum) {
         continue;
       }
 
-      var_448a2e21 = undefined;
+      has_los = undefined;
       trace_dist = length(to_self);
       trace_end = player_eye_pos + vectorscale(player_forward, trace_dist);
       trace = bulletTrace(player_eye_pos, trace_end, 1, player);
 
       if(trace[#"fraction"] === 1) {
-        var_448a2e21 = 1;
+        has_los = 1;
 
         debug_line(player_eye_pos, trace_end, (0, 1, 0));
       } else {
         debug_line(player_eye_pos, trace[#"position"], (1, 0, 0));
       }
 
-      if(var_448a2e21 !== 1) {
+      if(has_los !== 1) {
         trace = bulletTrace(player_eye_pos, self_eye, 1, player);
 
         if(trace[#"fraction"] === 1) {
-          var_448a2e21 = 1;
+          has_los = 1;
 
           debug_line(player_eye_pos, self_eye, (0, 1, 0));
         } else {
@@ -224,7 +224,7 @@ function private function_3e9077b(localclientnum) {
         }
       }
 
-      if(var_448a2e21 === 1) {
+      if(has_los === 1) {
         var_7cefa3dc = #"hash_73a3e9d9afd7f5b9";
 
         debug_sphere(self.origin, 10, (0, 1, 0));

@@ -50,7 +50,7 @@ function threat_sight_set_enabled(enabled) {
   threat_sight_set_dvar(enabled);
 
   if(!enabled && wasenabled) {
-    level notify(#"hash_34d443ce908d0498");
+    level notify(#"threat_sight_disabled");
 
     foreach(player in getPlayers()) {
       player.stealth.threat_thread = undefined;
@@ -86,7 +86,7 @@ function threat_sight_set_dvar_display(enabled) {
   }
 
   if(level.var_53ad6e22[#"ai_threatusedisplay"]) {
-    setsaveddvar(#"hash_7bf40e4b6a830d11", enabled);
+    setsaveddvar(#"ai_threatsightdisplay", enabled);
   }
 
   setDvar(#"hash_28758912434b7866", enabled);
@@ -130,7 +130,7 @@ function threat_sight_set_state(statename) {
     case #"investigate":
       self.threatsight = 1;
       break;
-    case #"hash_5689f41e8c0ad00":
+    case #"flashlight_in_dark":
     case #"combat_hunt":
       self.threatsight = 1;
       break;
@@ -494,7 +494,7 @@ function function_7af4fa05(entity) {
 
 function threat_sight_player_entity_state_thread() {
   self endon(#"death");
-  level endon(#"hash_34d443ce908d0498");
+  level endon(#"threat_sight_disabled");
   var_94603cb7 = 0;
 
   while(true) {
@@ -615,8 +615,8 @@ function threat_sight_fake(origin, amount) {
   self thread threat_sight_player_sight_audio(0, max(self.stealth.maxthreat, amount));
 }
 
-function threat_sight_player_sight_audio(anycansee, maxthreat, var_2107b994) {
+function threat_sight_player_sight_audio(anycansee, maxthreat, willdebugprint) {
   if(isDefined(level.stealth) && isDefined(level.stealth.fnthreatsightplayersightaudio)) {
-    self thread[[level.stealth.fnthreatsightplayersightaudio]](anycansee, maxthreat, var_2107b994);
+    self thread[[level.stealth.fnthreatsightplayersightaudio]](anycansee, maxthreat, willdebugprint);
   }
 }

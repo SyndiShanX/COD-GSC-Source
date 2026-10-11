@@ -206,7 +206,7 @@ function function_b4f071cd() {
     return;
   }
 
-  spawns = function_82061144("start_spawn", #"allies");
+  spawns = getspawnpoints("start_spawn", #"allies");
 
   if(spawns.size == 0) {
     println("<dev string:x83>");

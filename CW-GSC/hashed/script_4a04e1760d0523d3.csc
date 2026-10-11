@@ -186,20 +186,20 @@ function function_84d33874() {
       total_offset = (0, 0, 0);
       var_2932eb0b = 0;
 
-      foreach(var_483a1937 in var_4f67e1b.var_7351c8e1) {
-        if(!isDefined(var_483a1937.origin) || !isDefined(var_483a1937.scale)) {
+      foreach(zonecircle in var_4f67e1b.var_7351c8e1) {
+        if(!isDefined(zonecircle.origin) || !isDefined(zonecircle.scale)) {
           continue;
         }
 
-        var_9a8acd88 = distance2dsquared(player.origin, var_483a1937.origin);
-        radius = level.var_cd139dc0 * var_483a1937.scale * 10;
+        var_9a8acd88 = distance2dsquared(player.origin, zonecircle.origin);
+        radius = level.var_cd139dc0 * zonecircle.scale * 10;
         radius += 600;
 
         if(radius * radius < var_9a8acd88) {
           continue;
         }
 
-        var_8675da3 = player.origin - var_483a1937.origin;
+        var_8675da3 = player.origin - zonecircle.origin;
         var_8675da3 = (var_8675da3[0], var_8675da3[1], 0);
         var_bd581e61 = vectorNormalize(var_8675da3) * radius;
 
@@ -210,18 +210,18 @@ function function_84d33874() {
         }
 
         if(isDefined(target)) {
-          var_d43dd174 = target - player.origin;
-          var_d43dd174 = (var_d43dd174[0], var_d43dd174[1], 0);
-          a = vectordot(var_d43dd174, var_d43dd174);
-          b = 2 * vectordot(var_8675da3, var_d43dd174);
+          playertotarget = target - player.origin;
+          playertotarget = (playertotarget[0], playertotarget[1], 0);
+          a = vectordot(playertotarget, playertotarget);
+          b = 2 * vectordot(var_8675da3, playertotarget);
           c = vectordot(var_8675da3, var_8675da3) - radius * radius;
           d = sqrt(b * b - 4 * a * c);
 
           if(a) {
             t = (d - b) / 2 * a;
-            var_14ff2ad5 = t * var_d43dd174;
+            var_14ff2ad5 = t * playertotarget;
           } else {
-            var_14ff2ad5 = var_d43dd174;
+            var_14ff2ad5 = playertotarget;
           }
         } else {
           var_14ff2ad5 = var_bd581e61 - var_8675da3;
@@ -231,7 +231,7 @@ function function_84d33874() {
         var_2932eb0b = 1;
       }
 
-      if(isDefined(var_d43dd174) && length2dsquared(total_offset) > length2dsquared(var_d43dd174)) {
+      if(isDefined(playertotarget) && length2dsquared(total_offset) > length2dsquared(playertotarget)) {
         total_offset = target;
       } else {
         total_offset += player.origin;

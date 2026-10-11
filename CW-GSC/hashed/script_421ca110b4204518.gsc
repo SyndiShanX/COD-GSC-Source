@@ -216,7 +216,7 @@ function private function_64a3f9c6(var_dfbbc9a0 = 0, var_feefd408 = 0, var_cf53a
         player.var_d93ab65[player.var_d93ab65.size] = self;
 
         if(self.owner === player) {
-          player.var_a25e160d = 0;
+          player.ring_of_fire_kills = 0;
         }
 
         continue;
@@ -226,7 +226,7 @@ function private function_64a3f9c6(var_dfbbc9a0 = 0, var_feefd408 = 0, var_cf53a
         arrayremovevalue(player.var_d93ab65, self);
 
         if(self.owner === player) {
-          player.var_a25e160d = undefined;
+          player.ring_of_fire_kills = undefined;
         }
 
         if(!player.var_d93ab65.size) {

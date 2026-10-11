@@ -17,7 +17,7 @@
 #namespace namespace_b61bbd82;
 
 function private event_handler[level_preinit] function_b489bb7b(eventstruct) {
-  snd::function_5e69f468(&_objective);
+  snd::skipto_init(&_objective);
 }
 
 function private event_handler[event_cc819519] function_686b88aa(eventstruct) {
@@ -41,11 +41,11 @@ function private _objective(objective) {
 }
 
 function music(str_msg, n_delay = 0) {
-  level thread function_7edafa59(str_msg, n_delay);
+  level thread music_handler(str_msg, n_delay);
   level thread function_e80c0ccf(str_msg);
 }
 
-function function_7edafa59(str_msg, n_delay) {
+function music_handler(str_msg, n_delay) {
   switch (str_msg) {
     case #"1.0_reveal":
       music::setmusicstate("1.0_reveal");
@@ -55,12 +55,12 @@ function function_7edafa59(str_msg, n_delay) {
     case #"2.0_infiltrate":
       music::setmusicstate("2.0_infiltrate");
       break;
-    case #"hash_3aa13d9b3e84a5e":
+    case #"10.0_hacking":
     case #"3.0_caught":
     case #"4.0_inside":
-    case #"hash_295b43f1ba4d8a85":
-    case #"hash_2eeeec22953a0720":
-    case #"hash_59962f70d8fcb45c":
+    case #"6.0_main_street":
+    case #"8.0_elevator":
+    case #"12.0_breach":
     case #"12.1_exit":
       music::setmusicstate(str_msg, undefined, n_delay);
       break;
@@ -73,10 +73,10 @@ function function_7edafa59(str_msg, n_delay) {
       music::function_2af5f0ec(str_msg);
       break;
     case #"hash_5349acae0cf9701c":
-      music::function_edda155f(str_msg, n_delay);
+      music::playstinger(str_msg, n_delay);
       break;
-    case #"hash_27b12368b44b3734":
-    case #"hash_658daa8929a955ab":
+    case #"deactivate_7.0_juggernaut":
+    case #"deactivate_4.0_inside":
     case #"deactivate_12.1_exit":
       music::setmusicstate("none", undefined, n_delay);
       break;
@@ -93,10 +93,10 @@ function function_e80c0ccf(str_msg) {
     case #"1.0_reveal":
       snd::client_msg(#"musictrack_cp_amerika_1");
       break;
-    case #"hash_295b43f1ba4d8a85":
+    case #"6.0_main_street":
       snd::client_msg(#"musictrack_cp_amerika_2");
       break;
-    case #"hash_3aa13d9b3e84a5e":
+    case #"10.0_hacking":
       snd::client_msg(#"musictrack_cp_amerika_3");
       break;
     case #"12.1_exit":

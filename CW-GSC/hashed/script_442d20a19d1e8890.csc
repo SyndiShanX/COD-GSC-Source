@@ -56,7 +56,7 @@ class class_7c3faeda: cluielem {
       return;
     }
 
-    if(#"hash_30029804cf01e828" == state_name) {
+    if(#"planecrash" == state_name) {
       set_data(localclientnum, "_state", 7);
       return;
     }

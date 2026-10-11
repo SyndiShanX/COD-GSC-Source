@@ -66,7 +66,7 @@ function main(str_objective, b_starting) {
   savegame::checkpoint_save();
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   hms_util::print("<dev string:x4e>");
 
   level notify(#"hash_24b259ee7a18193a");
@@ -91,7 +91,7 @@ function function_949d7906(var_5a04e6d6, var_b9f33580) {
 
 function function_acf07bae() {
   objectives::scripted("obj_goto_bomb", undefined, #"hash_110b2d9474b5420f");
-  level breadcrumb::function_61037c6c("bc_second_floor_objective");
+  level breadcrumb::start_chain("bc_second_floor_objective");
   level flag::wait_till("flg_floor_two_end");
   var_4a3daa0b = struct::get("nuke_room_door_look_at", "targetname");
 
@@ -110,7 +110,7 @@ function function_acf07bae() {
   level flag::wait_till("flg_pre_nuke_room_vo_complete");
   objectives::complete("obj_goto_bomb");
   level notify(#"hash_2e47b50259ab3bec");
-  skipto::function_4e3ab877("2nd_floor");
+  skipto::objective_completed("2nd_floor");
 }
 
 function function_393a7ac3() {
@@ -146,29 +146,29 @@ function function_74774e71() {
   wait 1.75;
 
   if(isDefined(level.park)) {
-    level.park battlechatter::function_2ab9360b(0);
+    level.park battlechatter::bc_allow(0);
   }
 
   if(isDefined(level.lazar)) {
-    level.lazar battlechatter::function_2ab9360b(0);
+    level.lazar battlechatter::bc_allow(0);
   }
 
   level.park hms_util::dialogue("vox_cp_cbcr_02300_park_adlerweremoving_f5");
   var_e534dcb hms_util::dialogue("vox_cp_cbcr_02200_adlr_werepinneddownm_81", 1, "allies", "adler");
 
   if(isDefined(level.park)) {
-    level.park battlechatter::function_2ab9360b(1);
+    level.park battlechatter::bc_allow(1);
   }
 
   if(isDefined(level.lazar)) {
-    level.lazar battlechatter::function_2ab9360b(1);
+    level.lazar battlechatter::bc_allow(1);
   }
 
   level thread function_98d37226();
   level thread function_dd58d582();
   level flag::wait_till("flg_spotted_mg");
 
-  if(isalive(level.var_5deea171)) {
+  if(isalive(level.ai_gunner)) {
     level.lazar hms_util::dialogue("vox_cp_cbcr_02400_lazr_theyrereallyhun_99");
     level.park hms_util::dialogue("vox_cp_cbcr_02400_park_takeoutthatheav_e0");
   }
@@ -176,11 +176,11 @@ function function_74774e71() {
   level flag::wait_till("flg_player_nearing_vip_room_vo");
 
   if(isDefined(level.park)) {
-    level.park battlechatter::function_2ab9360b(0);
+    level.park battlechatter::bc_allow(0);
   }
 
   if(isDefined(level.lazar)) {
-    level.lazar battlechatter::function_2ab9360b(0);
+    level.lazar battlechatter::bc_allow(0);
   }
 
   level.park hms_util::dialogue("vox_cp_cbcr_01500_park_27badlerweregoi_54");
@@ -477,11 +477,11 @@ function function_c7c21ff9() {
   var_5b23cbdd = getEnt("vip_last_stand_trigger", "targetname");
   var_2c3b91fc = struct::get_array("turret_points");
   e_turret = getEnt("mg_nest_2nd_floor", "targetname");
-  level.var_5deea171 = namespace_307260b8::function_516b7ec("2nd_floor_turret_gunner", "2nd_floor_support_turret");
+  level.ai_gunner = namespace_307260b8::function_516b7ec("2nd_floor_turret_gunner", "2nd_floor_support_turret");
   var_5b23cbdd waittill(#"trigger");
   n_shots = 5;
 
-  if(isalive(level.var_5deea171)) {
+  if(isalive(level.ai_gunner)) {
     e_turret turret::enable(0, 1, undefined);
     e_turret turret::function_aecc6bed(var_2c3b91fc, n_shots, 0);
   }
@@ -502,7 +502,7 @@ function function_d1cabeee() {
   level endoncallback(&function_8604d848, #"hash_4c719d73886d1dee");
   var_1623c030 = getEnt("vip_guards_flank_encounter_trigger", "targetname");
 
-  if(isDefined(var_1623c030) && isalive(level.var_5deea171)) {
+  if(isDefined(var_1623c030) && isalive(level.ai_gunner)) {
     var_1623c030 waittill(#"trigger");
 
     hms_util::print("<dev string:xec>");
@@ -549,11 +549,11 @@ function function_687b1b14() {
   self delete();
 }
 
-function function_5e5f8f2(ai_rider, var_9114191) {
+function function_5e5f8f2(ai_rider, n_turret_index) {
   ai_rider waittill(#"death");
   self vehicle::kill_rider(ai_rider);
-  self turretcleartarget(var_9114191);
-  self notify("turret_disabled" + var_9114191);
+  self turretcleartarget(n_turret_index);
+  self notify("turret_disabled" + n_turret_index);
 }
 
 function function_dda2c76e(var_bf6c8bb9) {

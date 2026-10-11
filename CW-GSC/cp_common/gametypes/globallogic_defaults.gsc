@@ -64,7 +64,7 @@ function default_onforfeit(team) {
 
 function default_ondeadevent(team) {
   if(team == "all") {
-    winner = level.var_c20ad7aa;
+    winner = level.enemy_ai_team;
     globallogic_utils::logteamwinstring("team eliminated", winner);
     thread globallogic::endgame();
     return;
@@ -75,7 +75,7 @@ function default_ondeadevent(team) {
   thread globallogic::endgame();
 }
 
-function function_9fd1cc80(team) {
+function default_onlastteamaliveevent(team) {
   if(isDefined(level.teams[team])) {
     eliminatedstring = game.strings[#"enemies_eliminated"];
     iprintln(eliminatedstring);
@@ -97,12 +97,12 @@ function function_9fd1cc80(team) {
   thread globallogic::endgame();
 }
 
-function function_8fd32d09(team) {
+function things_exist_which_could_revive_player(team) {
   return false;
 }
 
-function function_b8fe203b(team) {
-  if(function_8fd32d09(team)) {
+function team_can_be_revived(team) {
+  if(things_exist_which_could_revive_player(team)) {
     return true;
   }
 
@@ -117,8 +117,8 @@ function function_b8fe203b(team) {
   return false;
 }
 
-function function_b322d0f3(team) {
-  if(function_b8fe203b(team)) {
+function default_onlaststandevent(team) {
+  if(team_can_be_revived(team)) {
     return;
   }
 

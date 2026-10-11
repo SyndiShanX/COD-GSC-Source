@@ -27,7 +27,7 @@ function init_clientfields() {
 function function_64e04297(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
     self.var_1f3cb09a = util::playFXOnTag(fieldname, #"hash_6c8d478322adcc6a", self, "j_mainroot");
-    playSound(fieldname, #"hash_765e6e49f551f97c", self.origin);
+    playSound(fieldname, #"zmb_bunnyquest_stp2_bunny_spawn", self.origin);
     self.var_eb074a88 = self playLoopSound("zmb_bunnyquest_stp2_bunny_lp");
     return;
   }
@@ -40,12 +40,12 @@ function function_64e04297(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   self.explode_fx = util::playFXOnTag(fieldname, #"hash_5cde32c15506b440", self, "j_mainroot");
-  playSound(fieldname, #"hash_7534e74a4fd1c56d", self.origin);
+  playSound(fieldname, #"zmb_bunnyquest_stp2_bunny_despawn", self.origin);
 }
 
 function function_f3b46741(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
-    function_5ea2c6e3("zmb_sr_dropallaudioby4", 1, 1);
+    addsubmix("zmb_sr_dropallaudioby4", 1, 1);
     return;
   }
 
@@ -54,7 +54,7 @@ function function_f3b46741(localclientnum, oldval, newval, bnewent, binitialsnap
     return;
   }
 
-  function_ed62c9c2("zmb_sr_dropallaudioby4", 1);
+  clearsubmix("zmb_sr_dropallaudioby4", 1);
   soundstoploopemitter(#"hash_5c8e172b662df768", (3239, 10251, -770));
 }
 
@@ -68,7 +68,7 @@ function function_c2924276(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_95190421(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   playFX(bwastimejump, #"zombie/fx9_onslaught_spawn_sm", self.origin);
-  playSound(bwastimejump, #"hash_58611db3b1d6494e", self.origin + (0, 0, 35));
+  playSound(bwastimejump, #"zmb_bunnyquest_stp2_zombie_spawn", self.origin + (0, 0, 35));
 }
 
 function function_eebdf718(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

@@ -36,10 +36,10 @@ function main() {
 function function_cddc7db1() {
   self notify("aa86a08f233597e");
   self endon("aa86a08f233597e");
-  self thread namespace_268747c0::function_978c05b5();
+  self thread doa_hazard::function_978c05b5();
   result = self waittill(#"destroy_hazard");
 
-  if(is_true(self.var_7c56394) && is_true(result.var_760a0807)) {
+  if(is_true(self.paged) && is_true(result.var_760a0807)) {
     arrayremovevalue(level.doa.var_a8a43931, self);
     namespace_1e25ad94::debugmsg("Deleting Fireball trap permenently at:" + self.origin);
   }
@@ -51,7 +51,7 @@ function function_cddc7db1() {
   }
 }
 
-function function_b9c75c0(trap, var_7c56394 = 0) {
+function function_b9c75c0(trap, paged = 0) {
   trap.weapon = level.doa.var_45c191a4;
   trap.var_5a546472 = 0;
 
@@ -125,7 +125,7 @@ function function_b9c75c0(trap, var_7c56394 = 0) {
   }
 
   trap.script_model = hazard;
-  trap.var_7c56394 = var_7c56394;
+  trap.paged = paged;
   trap.velocity = isDefined(trap.script_int) ? int(trap.script_int) : 200;
   trap thread function_14a55bfa();
   return trap;
@@ -257,7 +257,7 @@ function function_14a55bfa() {
   maxwait = isDefined(self.waittimemin) ? self.waittimemin << 1 : 10;
 
   while(true) {
-    var_37deefd = namespace_7f5aeb59::function_aab26933(self.origin, 1800);
+    var_37deefd = doa_player_utility::function_aab26933(self.origin, 1800);
 
     if(var_37deefd == 0) {
       wait 2;

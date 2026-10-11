@@ -121,8 +121,8 @@ function private function_d5fc8564(s_info) {
 
     if(var_2a9d371 > 0) {
       player function_990bc6e();
-      var_415ecc8d = n_current + var_2a9d371;
-      player setweaponammoclip(self.w_grenade, var_415ecc8d);
+      n_new = n_current + var_2a9d371;
+      player setweaponammoclip(self.w_grenade, n_new);
       self function_417045b(self.w_grenade, self.n_count - var_2a9d371);
     } else {
       player util::show_hint_text(#"hash_ac26921ef49b2d7", 1, undefined, 1.5);

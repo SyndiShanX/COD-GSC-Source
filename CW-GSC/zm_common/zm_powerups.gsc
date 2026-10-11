@@ -60,8 +60,8 @@ function init() {
   zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_3", zmsettings.var_5fe12525, 0);
   zombie_utility::set_zombie_var(#"zombie_powerup_drop_min_4", zmsettings.var_59ffe642, 0);
   zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_4", zmsettings.var_ae3f41e0, 0);
-  zombie_utility::set_zombie_var(#"hash_604cec237ec939f", zmsettings.var_4447bad2, 0);
-  zombie_utility::set_zombie_var(#"hash_8b80080184dcb1d", zmsettings.var_d9a798b0, 0);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_min_5", zmsettings.var_4447bad2, 0);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_5", zmsettings.var_d9a798b0, 0);
   zombie_utility::set_zombie_var(#"zombie_powerup_ammo_spacing_min", zmsettings.var_1a3fd396, 0);
   zombie_utility::set_zombie_var(#"zombie_powerup_ammo_spacing_max", zmsettings.var_1e290818, 0);
 
@@ -172,7 +172,7 @@ function powerup_hud_monitor() {
   while(true) {
     waittillframeend();
     players = getPlayers();
-    var_eb020d2 = 0;
+    active_powerup = 0;
 
     for(playerindex = 0; playerindex < players.size; playerindex++) {
       player = players[playerindex];
@@ -215,7 +215,7 @@ function powerup_hud_monitor() {
         }
 
         if(isDefined(powerup_timer) && isDefined(powerup_on)) {
-          var_eb020d2 |= powerup_on;
+          active_powerup |= powerup_on;
           player set_clientfield_powerups(client_field_name, var_b79536ad, powerup_timer, powerup_on, flashing_timers, flashing_values);
           continue;
         }
@@ -226,8 +226,8 @@ function powerup_hud_monitor() {
       waitframe(1);
     }
 
-    if(!var_eb020d2) {
-      level waittill(#"hash_7a941ba8e576862e");
+    if(!active_powerup) {
+      level waittill(#"pump_powerup_hud");
     }
   }
 }
@@ -1009,8 +1009,8 @@ function powerup_setup(powerup_override, powerup_team, powerup_location, powerup
       self playSound(struct.var_6029fea3.var_64ae47e);
       self playLoopSound(struct.var_6029fea3.var_9c464736);
     } else {
-      self playSound(#"hash_52de50e5184d1c7");
-      self playLoopSound(#"hash_601ae32339098104");
+      self playSound(#"zmb_powerup_default_spawn");
+      self playLoopSound(#"zmb_powerup_default_lp");
     }
   }
 
@@ -1235,7 +1235,7 @@ function powerup_grab(powerup_team) {
           }
 
           if(!b_ignore) {
-            player playSound(#"hash_9dbd105c3060c91");
+            player playSound(#"zmb_powerup_default_grabbed");
           }
         }
 
@@ -1386,7 +1386,7 @@ function function_80b4c5e0(var_f0de9b92, b_disable = 1) {
   }
 }
 
-function function_59f7f2c6(var_f0de9b92, var_64ae47e = #"hash_52de50e5184d1c7", var_9c464736 = #"hash_601ae32339098104", var_721ec012 = #"hash_9dbd105c3060c91") {
+function function_59f7f2c6(var_f0de9b92, var_64ae47e = #"zmb_powerup_default_spawn", var_9c464736 = #"zmb_powerup_default_lp", var_721ec012 = #"zmb_powerup_default_grabbed") {
   if(isDefined(level.zombie_powerups[var_f0de9b92])) {
     level.zombie_powerups[var_f0de9b92].var_6029fea3 = spawnStruct();
     level.zombie_powerups[var_f0de9b92].var_6029fea3.var_64ae47e = var_64ae47e;
@@ -1824,7 +1824,7 @@ function function_5091b029(str_powerup, time = 30) {
 
   self zombie_utility::set_zombie_var_player(str_index_on, 1);
   self thread function_de41121d(str_powerup, time);
-  level notify(#"hash_7a941ba8e576862e");
+  level notify(#"pump_powerup_hud");
 }
 
 function function_de41121d(str_powerup, time = 30) {
@@ -1860,7 +1860,7 @@ function show_on_hud(player_team, str_powerup, time = 30) {
 
   zombie_utility::set_zombie_var_team(str_index_on, player_team, 1);
   level thread time_remaining_on_powerup(player_team, str_powerup, time);
-  level notify(#"hash_7a941ba8e576862e");
+  level notify(#"pump_powerup_hud");
 }
 
 function time_remaining_on_powerup(player_team, str_powerup, time = 30) {

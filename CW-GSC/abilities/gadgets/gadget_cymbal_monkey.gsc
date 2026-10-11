@@ -179,10 +179,10 @@ function private function_1beaca16() {
   self.var_9473fdb8 = [];
 
   for(i = 0; i < var_4eed21d6; i++) {
-    var_45889380 = queryresult.data[i].origin;
+    spot_pos = queryresult.data[i].origin;
 
-    if(!tracepassedonnavmesh(var_7162cf15, var_45889380, 15)) {
-      recordstar(var_45889380, (1, 0, 0));
+    if(!tracepassedonnavmesh(var_7162cf15, spot_pos, 15)) {
+      recordstar(spot_pos, (1, 0, 0));
       record3dtext("<dev string:x38>", queryresult.data[i].origin + (0, 0, 8), (1, 0, 0));
 
       continue;
@@ -202,7 +202,7 @@ function private function_1beaca16() {
       self.var_9473fdb8 = array(self.var_9473fdb8);
     }
 
-    self.var_9473fdb8[self.var_9473fdb8.size] = var_45889380;
+    self.var_9473fdb8[self.var_9473fdb8.size] = spot_pos;
   }
 
   arraysortclosest(self.var_9473fdb8, var_7162cf15);

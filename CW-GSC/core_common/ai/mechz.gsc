@@ -40,17 +40,17 @@
 #using scripts\zm_common\ai\zm_ai_utility;
 #using scripts\zm_common\zm_audio;
 #using scripts\zm_common\zm_spawner;
-#namespace namespace_3444cb7b;
+#namespace mechzbehavior;
 
 function private autoexec __init__system__() {
   system::register(#"mechz", &init, undefined, &finalize, undefined);
 }
 
 function init() {
-  function_eebf86a4();
-  spawner::add_archetype_spawn_function(#"mechz", &function_b19391ae);
-  spawner::add_archetype_spawn_function(#"mechz", &namespace_8681f0e2::function_3b8b6e80);
-  spawner::function_89a2cd87(#"mechz", &namespace_8681f0e2::function_5d873f78);
+  initmechzbehaviorsandasm();
+  spawner::add_archetype_spawn_function(#"mechz", &archetypemechzblackboardinit);
+  spawner::add_archetype_spawn_function(#"mechz", &mechzserverutils::mechzspawnsetup);
+  spawner::function_89a2cd87(#"mechz", &mechzserverutils::function_5d873f78);
   clientfield::register("actor", "mechz_ft", 1, 1, "int");
   clientfield::register("actor", "mechz_faceplate_detached", 1, 1, "int");
   clientfield::register("actor", "mechz_powercap_detached", 1, 1, "int");
@@ -60,7 +60,7 @@ function init() {
   clientfield::register("actor", "mechz_long_jump", 1, 1, "counter");
   clientfield::register("actor", "mechz_jetpack_explosion", 1, 1, "int");
   clientfield::register("actor", "mechz_face", 1, 3, "int");
-  level.var_92e56a0f[#"mechz"] = &namespace_8681f0e2::function_669e8e27;
+  level.var_92e56a0f[#"mechz"] = &mechzserverutils::function_669e8e27;
 }
 
 function finalize() {
@@ -70,7 +70,7 @@ function finalize() {
   level thread aat::register_immunity("ammomod_napalmburst", #"mechz", 1, 1, 1);
 }
 
-function private function_eebf86a4() {
+function private initmechzbehaviorsandasm() {
   assert(isscriptfunctionptr(&mechztargetservice));
   behaviortreenetworkutility::registerbehaviortreescriptapi("mechzTargetService", &mechztargetservice);
   assert(isscriptfunctionptr(&mechzgrenadeservice));
@@ -101,14 +101,14 @@ function private function_eebf86a4() {
   behaviortreenetworkutility::registerbehaviortreescriptapi("mechzIsInSafeZone", &mechzisinsafezone);
   assert(isscriptfunctionptr(&mechzshouldturninplacebeforeidle));
   behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldTurnInPlaceBeforeIdle", &mechzshouldturninplacebeforeidle);
-  assert(!isDefined(&function_db525b31) || isscriptfunctionptr(&function_db525b31));
-  assert(!isDefined(&function_c21030e3) || isscriptfunctionptr(&function_c21030e3));
-  assert(!isDefined(&function_c13b8a0c) || isscriptfunctionptr(&function_c13b8a0c));
-  behaviortreenetworkutility::registerbehaviortreeaction("mechzStumbleLoop", &function_db525b31, &function_c21030e3, &function_c13b8a0c);
-  assert(!isDefined(&function_5a7ad15e) || isscriptfunctionptr(&function_5a7ad15e));
-  assert(!isDefined(&function_a3c24f6a) || isscriptfunctionptr(&function_a3c24f6a));
-  assert(!isDefined(&function_d58e0db5) || isscriptfunctionptr(&function_d58e0db5));
-  behaviortreenetworkutility::registerbehaviortreeaction("mechzShootFlameAction", &function_5a7ad15e, &function_a3c24f6a, &function_d58e0db5);
+  assert(!isDefined(&mechzstumblestart) || isscriptfunctionptr(&mechzstumblestart));
+  assert(!isDefined(&mechzstumbleupdate) || isscriptfunctionptr(&mechzstumbleupdate));
+  assert(!isDefined(&mechzstumbleend) || isscriptfunctionptr(&mechzstumbleend));
+  behaviortreenetworkutility::registerbehaviortreeaction("mechzStumbleLoop", &mechzstumblestart, &mechzstumbleupdate, &mechzstumbleend);
+  assert(!isDefined(&mechzshootflameactionstart) || isscriptfunctionptr(&mechzshootflameactionstart));
+  assert(!isDefined(&mechzshootflameactionupdate) || isscriptfunctionptr(&mechzshootflameactionupdate));
+  assert(!isDefined(&mechzshootflameactionend) || isscriptfunctionptr(&mechzshootflameactionend));
+  behaviortreenetworkutility::registerbehaviortreeaction("mechzShootFlameAction", &mechzshootflameactionstart, &mechzshootflameactionupdate, &mechzshootflameactionend);
   assert(isscriptfunctionptr(&mechzpreptoshootgrenadestart));
   behaviortreenetworkutility::registerbehaviortreescriptapi("mechzPrepToShootGrenadeStart", &mechzpreptoshootgrenadestart);
   assert(isscriptfunctionptr(&mechzpreptoshootgrenadestart));
@@ -149,46 +149,46 @@ function private function_eebf86a4() {
   behaviortreenetworkutility::registerbehaviortreescriptapi("mechzPainTerminate", &mechzpainterminate);
   assert(isscriptfunctionptr(&mechzjetpackpainterminate));
   behaviortreenetworkutility::registerbehaviortreescriptapi("mechzJetpackPainTerminate", &mechzjetpackpainterminate);
-  animationstatenetwork::registernotetrackhandlerfunction("melee_soldat", &function_d9de8431);
-  animationstatenetwork::registernotetrackhandlerfunction("fire_chaingun", &function_e26728bc);
+  animationstatenetwork::registernotetrackhandlerfunction("melee_soldat", &mechznotetrackmelee);
+  animationstatenetwork::registernotetrackhandlerfunction("fire_chaingun", &mechznotetrackshootgrenade);
   animationstatenetwork::registernotetrackhandlerfunction("jump_shake", &function_4e89924a);
 }
 
-function private function_b19391ae() {
+function private archetypemechzblackboardinit() {
   blackboard::createblackboardforentity(self);
-  self.___archetypeonanimscriptedcallback = &function_dd01e0e4;
+  self.___archetypeonanimscriptedcallback = &archetypemechzonanimscriptedcallback;
 }
 
-function private function_dd01e0e4(entity) {
+function private archetypemechzonanimscriptedcallback(entity) {
   entity.__blackboard = undefined;
-  entity function_b19391ae();
+  entity archetypemechzblackboardinit();
 }
 
-function private function_d9de8431(entity) {
-  if(isDefined(entity.var_9d23af0d)) {
-    entity thread[[entity.var_9d23af0d]]();
+function private mechznotetrackmelee(entity) {
+  if(isDefined(entity.mechz_melee_knockdown_function)) {
+    entity thread[[entity.mechz_melee_knockdown_function]]();
   }
 
   entity melee();
 }
 
-function private function_e26728bc(entity) {
+function private mechznotetrackshootgrenade(entity) {
   if(!isDefined(entity.enemy)) {
     return;
   }
 
-  var_3e3a3402 = entity.enemy.origin;
+  base_target_pos = entity.enemy.origin;
   v_velocity = entity.enemy getvelocity();
   var_b6897326 = randomfloatrange(1, 2.5);
-  var_3e3a3402 += v_velocity * var_b6897326;
-  var_736d384 = math::randomsign() * randomint(48);
-  var_6b1c9b42 = math::randomsign() * randomint(48);
-  target_pos = var_3e3a3402 + (var_736d384, var_6b1c9b42, 0);
+  base_target_pos += v_velocity * var_b6897326;
+  target_pos_offset_x = math::randomsign() * randomint(48);
+  target_pos_offset_y = math::randomsign() * randomint(48);
+  target_pos = base_target_pos + (target_pos_offset_x, target_pos_offset_y, 0);
   dir = vectortoangles(target_pos - entity.origin);
   dir = anglesToForward(dir);
   launch_offset = dir * 5;
-  var_8598bad6 = entity gettagorigin("tag_gun_barrel2") + launch_offset;
-  dist = distance(var_8598bad6, target_pos);
+  launch_pos = entity gettagorigin("tag_gun_barrel2") + launch_offset;
+  dist = distance(launch_pos, target_pos);
   velocity = dir * dist;
   velocity += (0, 0, 120);
   val = 1;
@@ -199,7 +199,7 @@ function private function_e26728bc(entity) {
   }
 
   entity clientfield::set("mechz_115_gun_firing", val);
-  entity magicgrenadetype(getweapon("eq_mechz_firebomb"), var_8598bad6, velocity);
+  entity magicgrenadetype(getweapon("eq_mechz_firebomb"), launch_pos, velocity);
 }
 
 function function_4e89924a(entity) {
@@ -211,7 +211,7 @@ function mechztargetservice(entity) {
     return 0;
   }
 
-  if(isDefined(entity.var_11efa4b6)) {
+  if(isDefined(entity.destroy_octobomb)) {
     return 0;
   }
 
@@ -227,7 +227,7 @@ function mechztargetservice(entity) {
       entity.ignore_player = [];
     }
 
-    if(is_true(level.var_19bb726b)) {
+    if(is_true(level.b_mechz_true_ignore)) {
       entity setgoal(entity.origin);
 
       if(isDefined(entity.var_9d92b55a)) {
@@ -251,10 +251,10 @@ function mechztargetservice(entity) {
   }
 
   if(isDefined(level.enemy_location_override_func)) {
-    var_2c9acc81 = [[level.enemy_location_override_func]](entity, player);
+    enemy_ground_pos = [[level.enemy_location_override_func]](entity, player);
 
-    if(isDefined(var_2c9acc81)) {
-      entity setgoal(var_2c9acc81);
+    if(isDefined(enemy_ground_pos)) {
+      entity setgoal(enemy_ground_pos);
 
       if(isDefined(entity.var_9d92b55a)) {
         [[entity.var_9d92b55a]](entity);
@@ -286,27 +286,27 @@ function mechztargetservice(entity) {
 }
 
 function private mechzgrenadeservice(entity) {
-  if(!isDefined(entity.var_a0e09fde)) {
-    entity.var_a0e09fde = 0;
+  if(!isDefined(entity.burstgrenadesfired)) {
+    entity.burstgrenadesfired = 0;
   }
 
-  if(entity.var_a0e09fde >= 1) {
-    if(gettime() > entity.var_a8e56aa3) {
-      entity.var_a0e09fde = 0;
+  if(entity.burstgrenadesfired >= 1) {
+    if(gettime() > entity.nextgrenadetime) {
+      entity.burstgrenadesfired = 0;
     }
   }
 
-  if(isDefined(level.var_542ac835)) {
-    arrayremovevalue(level.var_542ac835, undefined);
-    var_a4615441 = array::filter(level.var_542ac835, 0, &function_424646a8, entity);
-    entity.var_856a7b8a = var_a4615441.size;
+  if(isDefined(level.a_electroball_grenades)) {
+    arrayremovevalue(level.a_electroball_grenades, undefined);
+    a_active_grenades = array::filter(level.a_electroball_grenades, 0, &mechzfiltergrenadesbyowner, entity);
+    entity.activegrenades = a_active_grenades.size;
     return;
   }
 
-  entity.var_856a7b8a = 0;
+  entity.activegrenades = 0;
 }
 
-function private function_424646a8(grenade, mechz) {
+function private mechzfiltergrenadesbyowner(grenade, mechz) {
   if(grenade.owner === mechz) {
     return true;
   }
@@ -316,26 +316,26 @@ function private function_424646a8(grenade, mechz) {
 
 function private mechzberserkknockdownservice(entity) {
   velocity = entity getvelocity();
-  var_b98d779c = 0.3;
-  predicted_pos = entity.origin + velocity * var_b98d779c;
+  predict_time = 0.3;
+  predicted_pos = entity.origin + velocity * predict_time;
   move_dist_sq = distancesquared(predicted_pos, entity.origin);
-  speed = move_dist_sq / var_b98d779c;
+  speed = move_dist_sq / predict_time;
 
   if(speed >= 10) {
     a_zombies = getentitiesinradius(entity.origin, 48, 15);
-    var_eb2cabb5 = array::filter(a_zombies, 0, &function_c01bcef, entity, predicted_pos);
+    a_filtered_zombies = array::filter(a_zombies, 0, &mechzzombieeligibleforberserkknockdown, entity, predicted_pos);
 
-    if(var_eb2cabb5.size > 0) {
-      foreach(zombie in var_eb2cabb5) {
+    if(a_filtered_zombies.size > 0) {
+      foreach(zombie in a_filtered_zombies) {
         zombie.knockdown = 1;
         zombie.knockdown_type = "knockdown_shoved";
-        var_c255a411 = entity.origin - zombie.origin;
-        var_3355d62f = vectorNormalize((var_c255a411[0], var_c255a411[1], 0));
+        zombie_to_mechz = entity.origin - zombie.origin;
+        zombie_to_mechz_2d = vectorNormalize((zombie_to_mechz[0], zombie_to_mechz[1], 0));
         zombie_forward = anglesToForward(zombie.angles);
         zombie_forward_2d = vectorNormalize((zombie_forward[0], zombie_forward[1], 0));
         zombie_right = anglestoright(zombie.angles);
         zombie_right_2d = vectorNormalize((zombie_right[0], zombie_right[1], 0));
-        dot = vectordot(var_3355d62f, zombie_forward_2d);
+        dot = vectordot(zombie_to_mechz_2d, zombie_forward_2d);
 
         if(dot >= 0.5) {
           zombie.knockdown_direction = "front";
@@ -344,7 +344,7 @@ function private mechzberserkknockdownservice(entity) {
         }
 
         if(dot < 0.5 && dot > -0.5) {
-          dot = vectordot(var_3355d62f, zombie_right_2d);
+          dot = vectordot(zombie_to_mechz_2d, zombie_right_2d);
 
           if(dot > 0) {
             zombie.knockdown_direction = "right";
@@ -369,7 +369,7 @@ function private mechzberserkknockdownservice(entity) {
   }
 }
 
-function private function_c01bcef(zombie, mechz, predicted_pos) {
+function private mechzzombieeligibleforberserkknockdown(zombie, mechz, predicted_pos) {
   if(!isDefined(mechz) || !isDefined(predicted_pos)) {
     return false;
   }
@@ -382,18 +382,18 @@ function private function_c01bcef(zombie, mechz, predicted_pos) {
     return false;
   }
 
-  if(mechz.var_33fb0350 === 1) {
+  if(mechz.is_immune_to_knockdown === 1) {
     return false;
   }
 
   origin = predicted_pos.origin;
   facing_vec = anglesToForward(predicted_pos.angles);
   enemy_vec = mechz.origin - origin;
-  var_660d1fec = (enemy_vec[0], enemy_vec[1], 0);
-  var_58877074 = (facing_vec[0], facing_vec[1], 0);
-  var_660d1fec = vectorNormalize(var_660d1fec);
-  var_58877074 = vectorNormalize(var_58877074);
-  enemy_dot = vectordot(var_58877074, var_660d1fec);
+  enemy_yaw_vec = (enemy_vec[0], enemy_vec[1], 0);
+  facing_yaw_vec = (facing_vec[0], facing_vec[1], 0);
+  enemy_yaw_vec = vectorNormalize(enemy_yaw_vec);
+  facing_yaw_vec = vectorNormalize(facing_yaw_vec);
+  enemy_dot = vectordot(facing_yaw_vec, enemy_yaw_vec);
 
   if(enemy_dot < 0) {
     return false;
@@ -425,7 +425,7 @@ function mechzshouldmelee(entity) {
 }
 
 function private mechzshouldshowpain(entity) {
-  if(entity.var_bc17791c === 1) {
+  if(entity.partdestroyed === 1) {
     return true;
   }
 
@@ -441,7 +441,7 @@ function private mechzshouldshowjetpackpain(entity) {
 }
 
 function private mechzenemyinaim(entity) {
-  if(entity namespace_8681f0e2::function_923942a7()) {
+  if(entity mechzserverutils::mechzcheckinarc()) {
     return true;
   }
 
@@ -457,7 +457,7 @@ function mechzshouldshootgrenade(entity) {
     return false;
   }
 
-  if(entity.var_d03c4664 !== 1) {
+  if(entity.gun_attached !== 1) {
     return false;
   }
 
@@ -483,11 +483,11 @@ function mechzshouldshootgrenade(entity) {
     return false;
   }
 
-  if(!isDefined(entity.var_a0e09fde) || entity.var_a0e09fde >= 1) {
+  if(!isDefined(entity.burstgrenadesfired) || entity.burstgrenadesfired >= 1) {
     return false;
   }
 
-  if(entity.var_856a7b8a >= 3) {
+  if(entity.activegrenades >= 3) {
     return false;
   }
 
@@ -518,7 +518,7 @@ function mechzshouldshootgrenade(entity) {
 }
 
 function mechzshouldshootflame(entity) {
-  if(is_true(entity.var_7b41c3ce)) {
+  if(is_true(entity.shoot_flame)) {
     return true;
   }
 
@@ -526,7 +526,7 @@ function mechzshouldshootflame(entity) {
     return false;
   }
 
-  if(is_true(entity.var_492622ad) && gettime() < entity.var_b25ccf7) {
+  if(is_true(entity.isshootingflame) && gettime() < entity.stopshootingflametime) {
     return true;
   }
 
@@ -536,15 +536,15 @@ function mechzshouldshootflame(entity) {
     return false;
   }
 
-  if(entity.var_492622ad === 1 && entity.var_b25ccf7 <= gettime()) {
+  if(entity.isshootingflame === 1 && entity.stopshootingflametime <= gettime()) {
     return false;
   }
 
-  if(entity.var_e05f2c0a > gettime() || entity.var_9329a57c > gettime()) {
+  if(entity.nextflametime > gettime() || entity.var_9329a57c > gettime()) {
     return false;
   }
 
-  if(!entity namespace_8681f0e2::function_923942a7(26)) {
+  if(!entity mechzserverutils::mechzcheckinarc(26)) {
     return false;
   }
 
@@ -559,7 +559,7 @@ function mechzshouldshootflame(entity) {
   can_see = bullettracepassed(entity.origin + (0, 0, 36), enemy.origin + (0, 0, 36), 0, undefined);
 
   if(!can_see && !in_vehicle) {
-    entity.var_e05f2c0a = gettime() + 2500;
+    entity.nextflametime = gettime() + 2500;
     return false;
   }
 
@@ -590,11 +590,11 @@ function private mechzshouldshootflamesweep(entity) {
 }
 
 function private mechzshouldturnberserk(entity) {
-  if(entity.berserk === 1 && entity.var_5eca4346 !== 1) {
+  if(entity.berserk === 1 && entity.hasturnedberserk !== 1) {
     return true;
   }
 
-  if(is_true(entity.var_10552fac) && !is_true(entity.berserk) && !is_true(entity.var_5eca4346)) {
+  if(is_true(entity.var_10552fac) && !is_true(entity.berserk) && !is_true(entity.hasturnedberserk)) {
     return true;
   }
 
@@ -630,55 +630,55 @@ function mechzshouldturninplacebeforeidle(entity) {
     return false;
   }
 
-  if(entity namespace_8681f0e2::function_923942a7(26)) {
+  if(entity mechzserverutils::mechzcheckinarc(26)) {
     return false;
   }
 
   return true;
 }
 
-function private function_cc7ec28(entity, asmstatename) {
+function private mechzshootgrenadeaction(entity, asmstatename) {
   animationstatenetworkutility::requeststate(entity, asmstatename);
-  entity.var_83ce7c8f = gettime() + 3000;
+  entity.grenadestarttime = gettime() + 3000;
   return 5;
 }
 
-function private function_d09ba7f5(entity, asmstatename) {
-  if(!is_true(asmstatename.var_2cf1dc08)) {
+function private mechzshootgrenadeactionupdate(entity, asmstatename) {
+  if(!is_true(asmstatename.shoot_grenade)) {
     return 4;
   }
 
   return 5;
 }
 
-function private function_db525b31(entity, asmstatename) {
+function private mechzstumblestart(entity, asmstatename) {
   animationstatenetworkutility::requeststate(entity, asmstatename);
-  entity.var_773b5b9a = gettime() + 500;
+  entity.stumbletime = gettime() + 500;
   return 5;
 }
 
-function private function_c21030e3(entity, asmstatename) {
-  if(gettime() > asmstatename.var_773b5b9a) {
+function private mechzstumbleupdate(entity, asmstatename) {
+  if(gettime() > asmstatename.stumbletime) {
     return 4;
   }
 
   return 5;
 }
 
-function private function_c13b8a0c(entity, asmstatename) {
+function private mechzstumbleend(entity, asmstatename) {
   asmstatename.stumble = 0;
-  asmstatename.var_57fca545 = gettime() + 10000;
+  asmstatename.stumble_stun_cooldown_time = gettime() + 10000;
   return 4;
 }
 
-function function_5a7ad15e(entity, asmstatename) {
+function mechzshootflameactionstart(entity, asmstatename) {
   animationstatenetworkutility::requeststate(entity, asmstatename);
   mechzshootflame(entity);
   entity.blindaim = 1;
   return 5;
 }
 
-function function_a3c24f6a(entity, asmstatename) {
+function mechzshootflameactionupdate(entity, asmstatename) {
   if(is_true(asmstatename.berserk)) {
     mechzstopflame(asmstatename);
     return 4;
@@ -691,8 +691,8 @@ function function_a3c24f6a(entity, asmstatename) {
     return 4;
   }
 
-  if(is_true(asmstatename.var_492622ad)) {
-    if(isDefined(asmstatename.var_b25ccf7) && gettime() > asmstatename.var_b25ccf7) {
+  if(is_true(asmstatename.isshootingflame)) {
+    if(isDefined(asmstatename.stopshootingflametime) && gettime() > asmstatename.stopshootingflametime) {
       mechzstopflame(asmstatename);
       return 4;
     }
@@ -703,7 +703,7 @@ function function_a3c24f6a(entity, asmstatename) {
   return 5;
 }
 
-function function_d58e0db5(entity, asmstatename) {
+function mechzshootflameactionend(entity, asmstatename) {
   mechzstopflame(asmstatename);
   asmstatename.blindaim = 0;
   return 4;
@@ -720,10 +720,10 @@ function private mechzpreptoshootgrenadesterminate(entity) {
 }
 
 function private mechzshootgrenadestart(entity) {
-  entity.var_a0e09fde++;
+  entity.burstgrenadesfired++;
 
-  if(entity.var_a0e09fde >= 1) {
-    entity.var_a8e56aa3 = gettime() + 6000;
+  if(entity.burstgrenadesfired >= 1) {
+    entity.nextgrenadetime = gettime() + 6000;
   }
 
   entity.blindaim = 1;
@@ -752,26 +752,26 @@ function private mechzsetspeedrun(entity) {
 }
 
 function private mechzshootflame(entity) {
-  entity thread function_35c0aac1();
+  entity thread mechzdelayflame();
 }
 
-function private function_35c0aac1() {
+function private mechzdelayflame() {
   self endon(#"death");
-  self notify(#"hash_35afb115cb92d570");
-  self endon(#"hash_35afb115cb92d570");
+  self notify(#"mechzdelayflame");
+  self endon(#"mechzdelayflame");
   wait 0.3;
   self clientfield::set("mechz_ft", 1);
-  self.var_492622ad = 1;
-  self.var_b25ccf7 = gettime() + 2500;
+  self.isshootingflame = 1;
+  self.stopshootingflametime = gettime() + 2500;
 }
 
 function private mechzupdateflame(entity) {
-  if(!isDefined(entity.var_1df3d140)) {
+  if(!isDefined(entity.flametrigger)) {
     return;
   }
 
-  if(isDefined(level.var_27748d3)) {
-    [[level.var_27748d3]](entity);
+  if(isDefined(level.mechz_flamethrower_player_callback)) {
+    [[level.mechz_flamethrower_player_callback]](entity);
   } else {
     players = getPlayers();
 
@@ -784,13 +784,13 @@ function private mechzupdateflame(entity) {
       }
 
       if(!is_true(player.is_burning) && !is_true(var_86d02e70)) {
-        if(player istouching(entity.var_1df3d140)) {
-          if(isDefined(entity.var_13fbc6ec)) {
-            player thread[[entity.var_13fbc6ec]]();
+        if(player istouching(entity.flametrigger)) {
+          if(isDefined(entity.mechzflamedamage)) {
+            player thread[[entity.mechzflamedamage]]();
             continue;
           }
 
-          player thread function_5afe5280(entity);
+          player thread playerflamedamage(entity);
         }
       }
     }
@@ -809,7 +809,7 @@ function private mechzupdateflame(entity) {
     }
 
     foreach(vehicle in entity.var_15978c43) {
-      if(isvehicle(vehicle) && vehicle istouching(entity.var_1df3d140)) {
+      if(isvehicle(vehicle) && vehicle istouching(entity.flametrigger)) {
         vehicle thread function_fd99ea48(entity);
 
         if(!is_true(vehicle.var_9a6644f2)) {
@@ -817,7 +817,7 @@ function private mechzupdateflame(entity) {
 
           foreach(occupant in occupants) {
             if(!is_true(occupant.burning)) {
-              occupant thread function_5afe5280(entity);
+              occupant thread playerflamedamage(entity);
             }
           }
         }
@@ -825,12 +825,12 @@ function private mechzupdateflame(entity) {
     }
   }
 
-  if(isDefined(level.var_449f9dce)) {
-    [[level.var_449f9dce]](entity);
+  if(isDefined(level.mechz_flamethrower_ai_callback)) {
+    [[level.mechz_flamethrower_ai_callback]](entity);
   }
 }
 
-function function_5afe5280(mechz) {
+function playerflamedamage(mechz) {
   self endon(#"death");
   self endon(#"disconnect");
 
@@ -868,39 +868,39 @@ function function_fd99ea48(mechz) {
 }
 
 function mechzstopflame(entity) {
-  self notify(#"hash_35afb115cb92d570");
+  self notify(#"mechzdelayflame");
   entity clientfield::set("mechz_ft", 0);
-  entity.var_492622ad = 0;
+  entity.isshootingflame = 0;
   var_82d51e42 = randomintrange(2500, 3500);
-  entity.var_e05f2c0a = gettime() + var_82d51e42;
+  entity.nextflametime = gettime() + var_82d51e42;
   entity.var_9329a57c = gettime() + 2000;
-  entity.var_b25ccf7 = undefined;
+  entity.stopshootingflametime = undefined;
 }
 
-function function_34d763b5() {
+function mechzgoberserk() {
   entity = self;
   g_time = gettime();
-  entity.var_c109fa4b = g_time + 10000;
+  entity.berserkendtime = g_time + 10000;
 
   if(entity.berserk !== 1) {
     entity.berserk = 1;
-    entity thread function_9e135033();
+    entity thread mechzendberserk();
     entity setblackboardattribute("_locomotion_speed", "locomotion_speed_sprint");
   }
 }
 
 function private mechzplayedberserkintro(entity) {
-  entity.var_5eca4346 = 1;
+  entity.hasturnedberserk = 1;
 }
 
-function private function_9e135033() {
+function private mechzendberserk() {
   self endon(#"death");
   self endon(#"disconnect");
 
   while(self.berserk === 1) {
-    if(gettime() >= self.var_c109fa4b) {
+    if(gettime() >= self.berserkendtime) {
       self.berserk = 0;
-      self.var_5eca4346 = 0;
+      self.hasturnedberserk = 0;
 
       if(!isDefined(self.var_19ec2cc3)) {
         self asmsetanimationrate(1);
@@ -930,8 +930,8 @@ function private mechzpainstart(entity) {
 }
 
 function private mechzpainterminate(entity) {
-  entity.var_bc17791c = 0;
-  entity.var_54db22a4 = undefined;
+  entity.partdestroyed = 0;
+  entity.show_pain_from_explosive_dmg = undefined;
 }
 
 function private mechzjetpackpainterminate(entity) {
@@ -939,40 +939,40 @@ function private mechzjetpackpainterminate(entity) {
   mechzpainterminate(entity);
 }
 
-#namespace namespace_8681f0e2;
+#namespace mechzserverutils;
 
-function private function_3b8b6e80() {
+function private mechzspawnsetup() {
   self.disableammodrop = 1;
   self.no_gib = 1;
   self.ignore_nuke = 1;
   self.ignore_enemy_count = 1;
-  self.var_262a6cba = 1;
+  self.ignore_round_robbin_death = 1;
   self.var_1c0eb62a = 180;
   self.zombie_move_speed = "run";
   self setblackboardattribute("_locomotion_speed", "locomotion_speed_run");
   self.var_cccb0ad2 = 1;
   self.grenadecount = 3;
-  self.var_e05f2c0a = gettime();
-  self.var_57fca545 = gettime();
+  self.nextflametime = gettime();
+  self.stumble_stun_cooldown_time = gettime();
   self.var_9329a57c = gettime();
   self.var_e9c62827 = 1;
   self weaponobjects::createwatcher("eq_mechz_firebomb", &function_d0651b24, 1);
 
   self.debug_traversal_ast = "<dev string:x38>";
 
-  self.var_1df3d140 = spawn("trigger_box", self.origin, 0, 700, 50, 25);
-  self thread deleteondeath(self.var_1df3d140);
-  self.var_1df3d140 enablelinkTo();
-  self.var_1df3d140.origin = self gettagorigin("tag_flamethrower_fx");
-  self.var_1df3d140.angles = self gettagangles("tag_flamethrower_fx");
-  self.var_1df3d140 linkTo(self, "tag_flamethrower_fx");
+  self.flametrigger = spawn("trigger_box", self.origin, 0, 700, 50, 25);
+  self thread deleteondeath(self.flametrigger);
+  self.flametrigger enablelinkTo();
+  self.flametrigger.origin = self gettagorigin("tag_flamethrower_fx");
+  self.flametrigger.angles = self gettagangles("tag_flamethrower_fx");
+  self.flametrigger linkTo(self, "tag_flamethrower_fx");
   self thread weaponobjects::watchweaponobjectspawn();
   self.pers = [];
   self.pers[#"team"] = self.team;
   self destructserverutils::togglespawngibs(self, 1);
   self.var_28621cf4 = "j_neck";
   self.var_e5365d8a = (0, 0, 6);
-  aiutility::addaioverridedamagecallback(self, &function_679ee5b3);
+  aiutility::addaioverridedamagecallback(self, &mechzdamagecallback);
   self thread function_fe2419fc();
   self namespace_47c5b560::function_904442b2();
   self.var_6d409ca1 = &function_6d409ca1;
@@ -989,7 +989,7 @@ function private function_6d409ca1() {
 }
 
 function function_5d873f78() {
-  self function_7202e3df();
+  self mechzaddattachments();
   namespace_81245006::initweakpoints(self);
   self.completed_emerging_into_playable_area = 1;
   self.canbetargetedbyturnedzombies = 1;
@@ -1007,12 +1007,12 @@ function deleteondeath(object) {
   }
 }
 
-function private function_769e329() {
+function private mechzflamewatcher() {
   self endon(#"death");
 
   while(true) {
     if(isDefined(self.favoriteenemy)) {
-      if(self.var_1df3d140 istouching(self.favoriteenemy)) {
+      if(self.flametrigger istouching(self.favoriteenemy)) {
         printtoprightln("<dev string:x4a>");
       }
     }
@@ -1021,20 +1021,20 @@ function private function_769e329() {
   }
 }
 
-function private function_7202e3df() {
+function private mechzaddattachments() {
   self.var_7c4488fd = 1;
-  self.var_d03c4664 = 1;
-  self.var_c646abf1 = 1;
-  self.var_e5dc4e62 = 1;
-  self.var_5a91b92e = 1;
+  self.gun_attached = 1;
+  self.has_faceplate = 1;
+  self.has_powercap = 1;
+  self.powercap_covered = 1;
 }
 
-function function_679ee5b3(inflictor, attacker, damage, dflags, mod, weapon, var_fd90b0bb, point, dir, hitloc, offsettime, boneindex, modelindex) {
+function mechzdamagecallback(inflictor, attacker, damage, dflags, mod, weapon, var_fd90b0bb, point, dir, hitloc, offsettime, boneindex, modelindex) {
   if(damage === self || !util::function_fbce7263(damage.team, self.team)) {
     return 0;
   }
 
-  if(isDefined(self.var_28d6380a) && !is_true(self.var_28d6380a)) {
+  if(isDefined(self.b_flyin_done) && !is_true(self.b_flyin_done)) {
     return 0;
   }
 
@@ -1047,24 +1047,24 @@ function function_679ee5b3(inflictor, attacker, damage, dflags, mod, weapon, var
   }
 
   if(is_true(self.stumble)) {
-    if(self.var_57fca545 < gettime() && !is_true(self.berserk)) {
-      self[[level.var_df70a9a7]](attacker, damage, dflags, mod, weapon, var_fd90b0bb, point, dir, hitloc, offsettime, boneindex, modelindex);
+    if(self.stumble_stun_cooldown_time < gettime() && !is_true(self.berserk)) {
+      self[[level.mechz_should_stun_override]](attacker, damage, dflags, mod, weapon, var_fd90b0bb, point, dir, hitloc, offsettime, boneindex, modelindex);
     }
   }
 
-  dflags = function_311ae556(dflags, var_fd90b0bb);
+  dflags = mechzweapondamagemodifier(dflags, var_fd90b0bb);
 
-  if(isDefined(level.var_bb85b5a3)) {
-    dflags = [[level.var_bb85b5a3]](damage, dflags);
+  if(isDefined(level.mechz_damage_override)) {
+    dflags = [[level.mechz_damage_override]](damage, dflags);
   }
 
-  if(!isDefined(self.var_c7b2318c) || gettime() >= self.var_c7b2318c) {
-    self thread function_7101cd45();
-    self.var_c7b2318c = gettime() + 250 + randomint(500);
+  if(!isDefined(self.next_pain_time) || gettime() >= self.next_pain_time) {
+    self thread mechz_play_pain_audio();
+    self.next_pain_time = gettime() + 250 + randomint(500);
   }
 
-  if(isDefined(self.var_50a0c385)) {
-    self[[self.var_50a0c385]](attacker, damage, dflags, mod, weapon, var_fd90b0bb, point, dir, hitloc, offsettime, boneindex, modelindex);
+  if(isDefined(self.damage_scoring_function)) {
+    self[[self.damage_scoring_function]](attacker, damage, dflags, mod, weapon, var_fd90b0bb, point, dir, hitloc, offsettime, boneindex, modelindex);
   }
 
   if(is_true(level.var_85a39c96)) {
@@ -1202,7 +1202,7 @@ function private function_669e8e27(entity, weakpoint, attacker, damage, weapon, 
   return var_6dd5345c;
 }
 
-function private function_311ae556(damage, weapon) {
+function private mechzweapondamagemodifier(damage, weapon) {
   if(isDefined(weapon) && isDefined(weapon.name)) {
     if(weapon.name == #"eq_mechz_firebomb") {
       return 0;
@@ -1216,7 +1216,7 @@ function private function_311ae556(damage, weapon) {
   return damage;
 }
 
-function function_7101cd45() {
+function mechz_play_pain_audio() {
   self playSound("zmb_ai_mechz_destruction");
 }
 
@@ -1224,36 +1224,36 @@ function show_hit_marker() {
   self util::show_hit_marker();
 }
 
-function hide_part(var_7527000) {
-  if(self haspart(var_7527000)) {
-    self hidepart(var_7527000);
+function hide_part(strtag) {
+  if(self haspart(strtag)) {
+    self hidepart(strtag);
   }
 }
 
 function function_40c68562() {
   self clientfield::set("mechz_faceplate_detached", 1);
-  self.var_c646abf1 = 0;
-  self function_ee30c07();
-  self.var_bc17791c = 1;
+  self.has_faceplate = 0;
+  self mechz_turn_off_headlamp();
+  self.partdestroyed = 1;
   self setblackboardattribute("_mechz_part", "mechz_faceplate");
-  self namespace_3444cb7b::function_34d763b5();
+  self mechzbehavior::mechzgoberserk();
   level notify(#"mechz_faceplate_detached");
 }
 
 function function_3ebf4258() {
   self clientfield::set("mechz_powercap_detached", 1);
-  self.var_5a91b92e = 0;
-  self.var_bc17791c = 1;
+  self.powercap_covered = 0;
+  self.partdestroyed = 1;
   self setblackboardattribute("_mechz_part", "mechz_powercore");
 }
 
 function function_39d47bef(attacker, weapon, mod, inflictor) {
   self clientfield::set("mechz_claw_detached", 1);
-  self.var_e5dc4e62 = 0;
-  self.var_d03c4664 = 0;
-  self.var_bc17791c = 1;
+  self.has_powercap = 0;
+  self.gun_attached = 0;
+  self.partdestroyed = 1;
   self setblackboardattribute("_mechz_part", "mechz_gun");
-  level notify(#"hash_37e527c370856cf2");
+  level notify(#"mechz_gun_detached");
   var_4f88297a = self.maxhealth * 0.1;
   self zombie_utility::function_6975aa10(weapon);
   self dodamage(var_4f88297a, self.origin, attacker, inflictor, "none", mod, 0, weapon);
@@ -1264,7 +1264,7 @@ function function_4c489c31(attacker) {
   self clientfield::set("mechz_jetpack_explosion", 1);
   self.var_7c4488fd = 0;
   self.var_97601164 = 1;
-  self.var_bc17791c = 1;
+  self.partdestroyed = 1;
 
   if(isPlayer(attacker)) {
     attacker.var_6de2953f = gettime();
@@ -1277,7 +1277,7 @@ function function_4c489c31(attacker) {
   }
 }
 
-function function_923942a7(right_offset, aim_tag, var_40f25562 = 0.5) {
+function mechzcheckinarc(right_offset, aim_tag, var_40f25562 = 0.5) {
   origin = self.origin;
   angles = self.angles;
 
@@ -1287,8 +1287,8 @@ function function_923942a7(right_offset, aim_tag, var_40f25562 = 0.5) {
   }
 
   if(isDefined(right_offset)) {
-    var_b7ff6051 = anglestoright(angles);
-    origin += var_b7ff6051 * right_offset;
+    right_angle = anglestoright(angles);
+    origin += right_angle * right_offset;
   }
 
   facing_vec = anglesToForward(angles);
@@ -1299,27 +1299,27 @@ function function_923942a7(right_offset, aim_tag, var_40f25562 = 0.5) {
   }
 
   enemy_vec = enemy.origin - origin;
-  var_660d1fec = (enemy_vec[0], enemy_vec[1], 0);
-  var_58877074 = (facing_vec[0], facing_vec[1], 0);
-  var_660d1fec = vectorNormalize(var_660d1fec);
-  var_58877074 = vectorNormalize(var_58877074);
-  enemy_dot = vectordot(var_58877074, var_660d1fec);
+  enemy_yaw_vec = (enemy_vec[0], enemy_vec[1], 0);
+  facing_yaw_vec = (facing_vec[0], facing_vec[1], 0);
+  enemy_yaw_vec = vectorNormalize(enemy_yaw_vec);
+  facing_yaw_vec = vectorNormalize(facing_yaw_vec);
+  enemy_dot = vectordot(facing_yaw_vec, enemy_yaw_vec);
 
   if(enemy_dot < var_40f25562) {
     return false;
   }
 
-  var_529624a4 = vectortoangles(enemy_vec);
+  enemy_angles = vectortoangles(enemy_vec);
 
-  if(!is_true(self.var_1fa24724) && abs(angleclamp180(var_529624a4[0])) > 60) {
+  if(!is_true(self.var_1fa24724) && abs(angleclamp180(enemy_angles[0])) > 60) {
     return false;
   }
 
   return true;
 }
 
-function function_ee30c07(var_832f96cf) {
-  if(var_832f96cf !== 1) {
+function mechz_turn_off_headlamp(headlamp_broken) {
+  if(headlamp_broken !== 1) {
     self clientfield::set("mechz_headlamp_off", 1);
     return;
   }
@@ -1339,20 +1339,20 @@ function function_53f176ae(eventstruct) {
 
   notify_string = eventstruct.action;
   str_alias = notify_string;
-  var_6281c93d = 0;
+  b_override = 0;
   n_priority = 1;
   var_c8109157 = 0;
 
   switch (notify_string) {
     case #"arrive":
     case #"death":
-      var_6281c93d = 1;
+      b_override = 1;
       n_priority = 4;
       break;
     case #"pain":
     case #"land":
     case #"weapon_fire":
-      var_6281c93d = 1;
+      b_override = 1;
       n_priority = 3;
       break;
     case #"summon":
@@ -1360,7 +1360,7 @@ function function_53f176ae(eventstruct) {
     case #"enrage":
     case #"pain_jetpack":
     case #"melee_notetrack_2":
-      var_6281c93d = 1;
+      b_override = 1;
       n_priority = 3;
       var_c8109157 = 1;
       break;
@@ -1369,7 +1369,7 @@ function function_53f176ae(eventstruct) {
     case #"stun_intro":
     case #"jump":
     case #"lose_enemy":
-      var_6281c93d = 1;
+      b_override = 1;
       n_priority = 2;
       var_c8109157 = 1;
       break;
@@ -1385,7 +1385,7 @@ function function_53f176ae(eventstruct) {
       break;
   }
 
-  level thread zm_audio::zmbaivox_playvox(self, str_alias, var_6281c93d, n_priority, var_c8109157);
+  level thread zm_audio::zmbaivox_playvox(self, str_alias, b_override, n_priority, var_c8109157);
 }
 
 function function_fb451f53() {
@@ -1415,5 +1415,5 @@ function function_fb451f53() {
 }
 
 function function_9d12d0d2(params) {
-  self namespace_3444cb7b::function_34d763b5();
+  self mechzbehavior::mechzgoberserk();
 }

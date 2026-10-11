@@ -21,7 +21,7 @@
 #namespace namespace_7589cf5c;
 
 function function_df911075() {
-  switch (level.var_b48509f9) {
+  switch (level.star_rating) {
     case 1:
       var_5e36739b = undefined;
       break;
@@ -52,7 +52,7 @@ function function_82e262cf(str_aitype) {
 }
 
 function function_b9e4c169() {
-  switch (level.var_b48509f9) {
+  switch (level.star_rating) {
     case 1:
     case 2:
       if(math::cointoss()) {
@@ -77,7 +77,7 @@ function function_b9e4c169() {
 function function_1b53cdc7() {
   n_players = getPlayers().size;
 
-  switch (level.var_b48509f9) {
+  switch (level.star_rating) {
     case 1:
       var_61c57c53 = 0;
       break;
@@ -106,7 +106,7 @@ function function_1b53cdc7() {
       var_61c57c53 = max(n_players + 6, 8);
       break;
     default:
-      var_61c57c53 = min(level.var_b48509f9, n_players + 7);
+      var_61c57c53 = min(level.star_rating, n_players + 7);
       break;
   }
 
@@ -116,7 +116,7 @@ function function_1b53cdc7() {
 function function_56fa33d9() {
   n_players = getPlayers().size;
 
-  switch (level.var_b48509f9) {
+  switch (level.star_rating) {
     case 1:
       var_b803db9c = 0;
       break;
@@ -139,7 +139,7 @@ function function_56fa33d9() {
       var_b803db9c = max(n_players + 2, 4);
       break;
     default:
-      var_b803db9c = min(level.var_b48509f9 - 3, n_players + 4);
+      var_b803db9c = min(level.star_rating - 3, n_players + 4);
       break;
   }
 
@@ -147,7 +147,7 @@ function function_56fa33d9() {
 }
 
 function function_190c51a9() {
-  n_cooldown = 120 / level.var_b48509f9;
+  n_cooldown = 120 / level.star_rating;
   return n_cooldown;
 }
 
@@ -339,11 +339,11 @@ function function_8eafd734() {
 }
 
 function kill_zombies(v_org) {
-  var_a940cf88 = getaiarray();
+  a_ai_attackers = getaiarray();
 
-  for(i = 0; i < var_a940cf88.size; i++) {
-    if(is_true(var_a940cf88[i].allowdeath) && isalive(var_a940cf88[i]) && distancesquared(v_org, var_a940cf88[i].origin) <= sqr(5000)) {
-      var_a940cf88[i] kill(undefined, undefined, undefined, undefined, undefined, 1);
+  for(i = 0; i < a_ai_attackers.size; i++) {
+    if(is_true(a_ai_attackers[i].allowdeath) && isalive(a_ai_attackers[i]) && distancesquared(v_org, a_ai_attackers[i].origin) <= sqr(5000)) {
+      a_ai_attackers[i] kill(undefined, undefined, undefined, undefined, undefined, 1);
     }
 
     waitframe(1);
@@ -373,7 +373,7 @@ function function_3899cfea(v_org, n_radius) {
 }
 
 function function_8ab565fc() {
-  switch (level.var_b48509f9) {
+  switch (level.star_rating) {
     case 1:
       return 50;
     case 2:
@@ -390,7 +390,7 @@ function function_8ab565fc() {
 }
 
 function function_4bd02b61() {
-  switch (level.var_b48509f9) {
+  switch (level.star_rating) {
     case 1:
       return 30;
     case 2:

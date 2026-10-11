@@ -74,7 +74,7 @@ function function_93a73145(owner) {
     self.var_acdc8d71 = getclosestpointonnavmesh(self.origin, 100, 15.1875);
 
     if(isDefined(self.var_acdc8d71)) {
-      level thread function_f576c273(self);
+      level thread black_hole_bomb_teleport_init(self);
       self thread zombie_vortex::start_timed_vortex(1, self.var_acdc8d71, 275, level.var_2e1abf5f.explosionradius, owner, level.var_2e1abf5f, &function_9c0c8ac3, &vortex_explosion);
       successful = 1;
     }
@@ -113,7 +113,7 @@ function private function_600a82c(player) {
   }
 }
 
-function function_f576c273(var_a495cbed) {
+function black_hole_bomb_teleport_init(var_a495cbed) {
   if(!isDefined(var_a495cbed)) {
     return;
   }
@@ -126,9 +126,9 @@ function function_f576c273(var_a495cbed) {
   }
 
   teleport_trigger = spawn("trigger_radius", var_a495cbed.var_acdc8d71, 0, 64, 70);
-  var_a495cbed thread function_c2f76b45(teleport_trigger);
+  var_a495cbed thread black_hole_bomb_trigger_monitor(teleport_trigger);
   var_a495cbed waittill(#"explode");
-  teleport_trigger notify(#"hash_5e52043e21f343d7");
+  teleport_trigger notify(#"black_hole_complete");
   wait 0.1;
   teleport_trigger delete();
 }
@@ -177,16 +177,16 @@ function function_7ceb96bf(player, endon_condition) {
     return;
   }
 
-  endon_condition function_13fce2b({
+  endon_condition black_hole_teleport({
     #origin: origin, #angles: angles
   });
 }
 
-function function_c2f76b45(var_69cf75ad) {
-  var_69cf75ad endon(#"hash_5e52043e21f343d7");
+function black_hole_bomb_trigger_monitor(ent_trigger) {
+  ent_trigger endon(#"black_hole_complete");
 
   while(true) {
-    waitresult = var_69cf75ad waittill(#"trigger");
+    waitresult = ent_trigger waittill(#"trigger");
     ent_player = waitresult.activator;
 
     if(is_true(level.var_b54157cf)) {
@@ -194,24 +194,24 @@ function function_c2f76b45(var_69cf75ad) {
     }
 
     if(isPlayer(ent_player) && !ent_player isonground() && !is_true(ent_player.lander) && !ent_player function_b4813488() && !ent_player isonladder() && !ent_player isziplining()) {
-      var_69cf75ad thread function_f6b48774(ent_player, &function_7ceb96bf, &function_a0b4dce9);
+      ent_trigger thread black_hole_teleport_trigger_thread(ent_player, &function_7ceb96bf, &black_hole_teleport_cancel);
     }
 
     wait 0.1;
   }
 }
 
-function function_a0b4dce9(ent_player) {}
+function black_hole_teleport_cancel(ent_player) {}
 
-function function_f6b48774(ent, on_enter_payload, on_exit_payload) {
+function black_hole_teleport_trigger_thread(ent, on_enter_payload, on_exit_payload) {
   ent endon(#"death");
-  self endon(#"hash_5e52043e21f343d7");
+  self endon(#"black_hole_complete");
 
-  if(ent function_fa82badd(self)) {
+  if(ent black_hole_teleport_ent_already_in_trigger(self)) {
     return;
   }
 
-  self function_8658dbc9(ent);
+  self black_hole_teleport_add_trigger_to_ent(ent);
   endon_condition = "leave_trigger_" + self getentitynumber();
 
   if(isDefined(on_enter_payload)) {
@@ -229,11 +229,11 @@ function function_f6b48774(ent, on_enter_payload, on_exit_payload) {
   }
 
   if(isDefined(ent)) {
-    self function_570c993c(ent);
+    self black_hole_teleport_remove_trigger_from_ent(ent);
   }
 }
 
-function function_fa82badd(trig) {
+function black_hole_teleport_ent_already_in_trigger(trig) {
   if(!isDefined(self._triggers)) {
     return false;
   }
@@ -249,7 +249,7 @@ function function_fa82badd(trig) {
   return true;
 }
 
-function function_8658dbc9(ent) {
+function black_hole_teleport_add_trigger_to_ent(ent) {
   if(!isDefined(ent._triggers)) {
     ent._triggers = [];
   }
@@ -257,7 +257,7 @@ function function_8658dbc9(ent) {
   ent._triggers[self getentitynumber()] = 1;
 }
 
-function function_570c993c(ent) {
+function black_hole_teleport_remove_trigger_from_ent(ent) {
   if(!isDefined(ent._triggers)) {
     return;
   }
@@ -269,60 +269,60 @@ function function_570c993c(ent) {
   ent._triggers[self getentitynumber()] = 0;
 }
 
-function function_13fce2b(var_9e4b7aff) {
+function black_hole_teleport(struct_dest) {
   self endon(#"death");
 
-  if(!isDefined(var_9e4b7aff)) {
+  if(!isDefined(struct_dest)) {
     return;
   }
 
   prone_offset = (0, 0, 49);
   crouch_offset = (0, 0, 20);
-  var_3334a329 = (0, 0, 0);
+  stand_offset = (0, 0, 0);
   destination = undefined;
-  playSoundAtPosition(#"hash_89afcb430026d5c", self.origin + (0, 0, 50));
+  playSoundAtPosition(#"wpn_bhbomb_teleport_out", self.origin + (0, 0, 50));
 
   if(self getstance() == "prone") {
-    destination = var_9e4b7aff.origin + prone_offset;
+    destination = struct_dest.origin + prone_offset;
   } else if(self getstance() == "crouch") {
-    destination = var_9e4b7aff.origin + crouch_offset;
+    destination = struct_dest.origin + crouch_offset;
   } else {
-    destination = var_9e4b7aff.origin + var_3334a329;
+    destination = struct_dest.origin + stand_offset;
   }
 
-  if(isDefined(level.var_6ca5d247)) {
-    level[[level.var_6ca5d247]](self);
+  if(isDefined(level._black_hole_teleport_override)) {
+    level[[level._black_hole_teleport_override]](self);
   }
 
-  function_16713f43(var_9e4b7aff.origin);
+  black_hole_bomb_create_exit_portal(struct_dest.origin);
   self val::set(#"bhb_teleport", "freezecontrols", 1);
   self val::set(#"bhb_teleport", "disable_offhand_weapons", 1);
   self val::set(#"bhb_teleport", "disable_weapons", 1);
-  self playSound(#"hash_2bdcf53469acd60d");
+  self playSound(#"wpn_bhbomb_teleport_player");
   self dontinterpolate();
   self setOrigin(destination);
-  self setplayerangles(var_9e4b7aff.angles);
+  self setplayerangles(struct_dest.angles);
   self val::reset(#"bhb_teleport", "freezecontrols");
   self val::reset(#"bhb_teleport", "disable_offhand_weapons");
   self val::reset(#"bhb_teleport", "disable_weapons");
   self zm_stats::increment_challenge_stat(#"hash_5a6d38dd5c5f950d");
-  self thread function_e788f77();
+  self thread slightly_delayed_player_response();
 }
 
-function function_16713f43(pos) {
-  var_d3d9d70c = spawn("script_model", pos);
-  var_d3d9d70c setModel("tag_origin");
-  playFXOnTag(#"hash_78a8b7d254316482", var_d3d9d70c, "tag_origin");
-  var_d3d9d70c playSound(#"hash_2f24566e72d6e2ab");
-  var_d3d9d70c playLoopSound(#"hash_172aa3c3eb38f9a7");
-  var_d3d9d70c thread function_f7e9dfd7();
+function black_hole_bomb_create_exit_portal(pos) {
+  exit_portal_fx_spot = spawn("script_model", pos);
+  exit_portal_fx_spot setModel("tag_origin");
+  playFXOnTag(#"hash_78a8b7d254316482", exit_portal_fx_spot, "tag_origin");
+  exit_portal_fx_spot playSound(#"wpn_bhbomb_exit_start");
+  exit_portal_fx_spot playLoopSound(#"wpn_bhbomb_exit_loop");
+  exit_portal_fx_spot thread black_hole_bomb_exit_clean_up();
 }
 
-function function_e788f77() {
+function slightly_delayed_player_response() {
   wait 1;
 }
 
-function function_f7e9dfd7() {
+function black_hole_bomb_exit_clean_up() {
   wait 2;
   playSoundAtPosition("wpn_bhbomb_exit_end", self.origin);
   self delete();

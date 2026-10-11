@@ -413,7 +413,7 @@ function function_8d9ddc22(player, var_e7772c37) {
     level flag::set("exchange_base_back");
   }
 
-  self function_e0d166a9();
+  self open_crate();
 
   if(isalive(player) && !player inlaststand()) {
     var_4e4f65c9 = player item_inventory::function_2e711614(17 + 1);
@@ -513,7 +513,7 @@ function function_8d9ddc22(player, var_e7772c37) {
   }
 }
 
-function private function_e0d166a9() {
+function private open_crate() {
   if(getdvarint(#"hash_7dae47192308f053", 1)) {
     self scene::play(#"p9_fxanim_zm_ndu_contain_crate_rust_bundle", "open", self);
     return;

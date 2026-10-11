@@ -8,7 +8,7 @@
 #namespace warning_message;
 
 function create(message, var_400e244b, pulse, endons) {
-  if(namespace_61e6d095::exists(#"hash_71bae6f32cec8a8e")) {
+  if(scripted_widgets::exists(#"hash_71bae6f32cec8a8e")) {
     assertmsg("<dev string:x38>");
     return;
   }
@@ -17,9 +17,9 @@ function create(message, var_400e244b, pulse, endons) {
     self endoncallback(&remove, endons);
   }
 
-  namespace_61e6d095::create(#"hash_71bae6f32cec8a8e", #"hash_6e2caf9e3aa6b810");
-  namespace_61e6d095::set_text(#"hash_71bae6f32cec8a8e", message);
-  namespace_61e6d095::set_state(#"hash_71bae6f32cec8a8e", #"defaultstate");
+  scripted_widgets::create(#"hash_71bae6f32cec8a8e", #"hash_6e2caf9e3aa6b810");
+  scripted_widgets::set_text(#"hash_71bae6f32cec8a8e", message);
+  scripted_widgets::set_state(#"hash_71bae6f32cec8a8e", #"defaultstate");
 
   if(is_true(pulse)) {
     util::delay(float(function_60d95f53()) / 1000, endons, &function_b4af2e7, 1);
@@ -37,24 +37,24 @@ function create(message, var_400e244b, pulse, endons) {
 }
 
 function set_message(message) {
-  if(namespace_61e6d095::exists(#"hash_71bae6f32cec8a8e")) {
-    namespace_61e6d095::set_text(#"hash_71bae6f32cec8a8e", message);
+  if(scripted_widgets::exists(#"hash_71bae6f32cec8a8e")) {
+    scripted_widgets::set_text(#"hash_71bae6f32cec8a8e", message);
   }
 }
 
 function function_b4af2e7(pulse) {
-  if(namespace_61e6d095::exists(#"hash_71bae6f32cec8a8e")) {
+  if(scripted_widgets::exists(#"hash_71bae6f32cec8a8e")) {
     if(is_true(pulse)) {
-      namespace_61e6d095::set_state(#"hash_71bae6f32cec8a8e", #"pulse");
+      scripted_widgets::set_state(#"hash_71bae6f32cec8a8e", #"pulse");
       return;
     }
 
-    namespace_61e6d095::set_state(#"hash_71bae6f32cec8a8e", #"defaultstate");
+    scripted_widgets::set_state(#"hash_71bae6f32cec8a8e", #"defaultstate");
   }
 }
 
 function remove(params) {
-  if(namespace_61e6d095::exists(#"hash_71bae6f32cec8a8e")) {
-    namespace_61e6d095::remove(#"hash_71bae6f32cec8a8e");
+  if(scripted_widgets::exists(#"hash_71bae6f32cec8a8e")) {
+    scripted_widgets::remove(#"hash_71bae6f32cec8a8e");
   }
 }

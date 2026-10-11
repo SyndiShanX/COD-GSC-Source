@@ -9,12 +9,12 @@
 
 function main() {
   function_1e311986();
-  level thread function_d7b0c8d8();
+  level thread start_dialogue_threads();
 }
 
 function function_1e311986() {}
 
-function function_d7b0c8d8() {
+function start_dialogue_threads() {
   while(!isDefined(level.player)) {
     waitframe(1);
   }
@@ -60,7 +60,7 @@ function function_62380b23() {
 
 function function_29c5050c() {
   level endon(#"flag_intro_player_boarded_chopper");
-  var_6aa6a4ac = [];
+  nag_array = [];
 
   while(true) {
     delay = 10;
@@ -68,18 +68,18 @@ function function_29c5050c() {
     var_29a0fa27 = 0;
 
     if(level flag::get("flag_intro_adler_walk_talk_pos_2")) {
-      var_6aa6a4ac = ["vox_cp_armd_00002_adlr_dammitbellgotta_57"];
+      nag_array = ["vox_cp_armd_00002_adlr_dammitbellgotta_57"];
     } else if(level flag::get("flag_intro_adler_walk_talk_pos_1")) {
-      var_6aa6a4ac = ["vox_cp_armd_00002_adlr_gotagoodfeeling_18", "vox_cp_armd_00002_adlr_whatyoustillasl_40"];
+      nag_array = ["vox_cp_armd_00002_adlr_gotagoodfeeling_18", "vox_cp_armd_00002_adlr_whatyoustillasl_40"];
     } else {
-      var_6aa6a4ac = ["vox_cp_armd_00002_adlr_stillwithmebell_e0", "vox_cp_armd_00002_adlr_comeonbellwegot_df"];
+      nag_array = ["vox_cp_armd_00002_adlr_stillwithmebell_e0", "vox_cp_armd_00002_adlr_comeonbellwegot_df"];
     }
 
     wait 15;
 
-    while(flag::get("flag_vo_intro_walk_and_talk_nags") && var_29a0fa27 < var_6aa6a4ac.size) {
-      if(soundexists(var_6aa6a4ac[var_29a0fa27]) && !is_true(level.vip.istalking)) {
-        level.vip dialogue::queue(var_6aa6a4ac[var_29a0fa27]);
+    while(flag::get("flag_vo_intro_walk_and_talk_nags") && var_29a0fa27 < nag_array.size) {
+      if(soundexists(nag_array[var_29a0fa27]) && !is_true(level.vip.istalking)) {
+        level.vip dialogue::queue(nag_array[var_29a0fa27]);
       }
 
       var_29a0fa27++;
@@ -211,11 +211,11 @@ function function_1db51e3c() {
   while(true) {
     level waittill(#"hash_3eb3c24dcfb40680");
 
-    if(level.var_74bc4f87 == 1) {
+    if(level.mortars_cleared == 1) {
       level.player dialogue::queue("vox_guid209f24c873734908b0ad786d93b17272");
-    } else if(level.var_74bc4f87 == 2) {
+    } else if(level.mortars_cleared == 2) {
       level.player dialogue::queue("vox_guid2261c2948feb4164bb989eb4dceaa1f1");
-    } else if(level.var_74bc4f87 == 3) {
+    } else if(level.mortars_cleared == 3) {
       if(level flag::get("flag_bamboo_end_end")) {
         level.player dialogue::queue("vox_guid657ffe94d4c047b584f7a283e35815e4");
         level.player dialogue::queue("vox_guid725c30a8efdd445faa5731684412fc9c");

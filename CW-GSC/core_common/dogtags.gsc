@@ -165,7 +165,7 @@ function spawn_dog_tag(victim, attacker, on_use_function, objectives_for_attacke
   dogtag.var_d3faea9b = var_1c1cfb90;
 
   if(level.var_70e5d775 === 1) {
-    dogtag playLoopSound(#"hash_68969eb52942d6a4");
+    dogtag playLoopSound(#"mpl_killconfirm_hearts_loop");
   }
 
   if((isDefined(getgametypesetting("dogTagTimeOut")) ? getgametypesetting("dogTagTimeOut") : 0) > 0) {
@@ -288,7 +288,7 @@ function onuse(player) {
 
   if(player haspart("j_head") && !is_true(level.var_46b16649)) {
     if(level.var_70e5d775 === 1) {
-      player playsoundontag(#"hash_792564c36f9555aa", "j_head");
+      player playsoundontag(#"mpl_killconfirm_hearts_pickup", "j_head");
     } else {
       player playsoundontag("mpl_killconfirm_tags_pickup", "j_head");
     }
@@ -300,7 +300,7 @@ function onuse(player) {
     if(!util::function_fbce7263(player.team, self.victimteam)) {
       player stats::function_dad108fa(#"killsdenied", 1);
       player recordgameevent("return");
-      level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+      level thread telemetry::function_18135b72(#"callback_on_game_event", {
         #player: player, #eventtype: #"return"});
       event = "kill_denied";
 
@@ -325,7 +325,7 @@ function onuse(player) {
 
       player stats::function_dad108fa(#"killsconfirmed", 1);
       player recordgameevent("capture");
-      level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+      level thread telemetry::function_18135b72(#"callback_on_game_event", {
         #player: player, #eventtype: #"capture"});
 
       if(isDefined(self.attacker) && self.attacker != player && !util::function_fbce7263(player.team, self.attacker.team)) {

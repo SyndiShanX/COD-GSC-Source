@@ -17,7 +17,7 @@
 #namespace zm_gold_zones;
 
 function autoexec init() {
-  callback::on_spawned(&function_44b1279a);
+  callback::on_spawned(&minimap_update);
   level.var_4b35561a = ["zone_firebase", "zone_firebase2", "zone_firebase3", "zone_armory", "zone_trenches", "zone_chopper_gunner", "zone_chopper_gunner2", "zone_chopper_gunner3", "zone_artillery_strike", "zone_artillery_strike2", "zone_artillery_strike_outdoor", "zone_armory2", "zone_burnt_forest_defend", "zone_tents", "zone_tents2", "zone_rocky_slope_defend", "zone_napalm_strike", "zone_napalm_strike2", "zone_hillside_road_defend", "zone_hillside_road_defend_outside", "zone_rocky_slope_defend_outside", "zone_burnt_forest_defend_outside", "zone_opc_room", "zone_field_hospital", "zone_walkway", "zone_weapon_lab", "zone_lot", "zone_opc", "zone_trenches_office", "zone_trenches_garage", "zone_tents_a", "zone_tents_b", "zone_colonel_office", "zone_armory2_outside"];
   level.var_aa31c120 = ["zone_village", "zone_village2", "zone_village3", "zone_atrium", "zone_scientist", "zone_peck_quarters", "zone_village_house", "zone_village_house2", "zone_portal_transfer", "zone_radio_room"];
   level thread function_19f5e3fa();
@@ -390,7 +390,7 @@ function function_a2cfeff5() {
   }
 }
 
-function function_44b1279a() {
+function minimap_update() {
   self notify("55c572a8dde62114");
   self endon("55c572a8dde62114");
   self endon(#"death");
@@ -429,9 +429,9 @@ function function_19f5e3fa() {
 
   while(!b_in_zone) {
     foreach(player in function_a1ef346b()) {
-      var_765b3144 = zm_zonemgr::get_zone_from_position(player.origin, 1);
+      s_player_zone = zm_zonemgr::get_zone_from_position(player.origin, 1);
 
-      if(var_765b3144 === "zone_firebase" || var_765b3144 === "zone_firebase2" || var_765b3144 === "zone_firebase3") {
+      if(s_player_zone === "zone_firebase" || s_player_zone === "zone_firebase2" || s_player_zone === "zone_firebase3") {
         b_in_zone = 1;
         level flag::set("enable_firebase_zone");
         break;

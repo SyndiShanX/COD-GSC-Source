@@ -49,7 +49,7 @@ function init_clientfields() {
   clientfield::register("toplayer", "knock_out_vision", 1, 1, "int", &function_5568fbbb, 1, 0);
   clientfield::register("toplayer", "camera_focal_distance_electronics_store", 1, 1, "int", &function_c44b561f, 1, 0);
   clientfield::register("toplayer", "force_stream_weapons", 1, 1, "int", &force_stream_weapons, 1, 1);
-  clientfield::register("scriptmover", "guard_room_light", 1, 1, "int", &function_e80b775e, 0, 0);
+  clientfield::register("scriptmover", "guard_room_light", 1, 1, "int", &ghost_station_guard_room_light, 0, 0);
   clientfield::register("scriptmover", "sewer_exit_flashlight_fx", 1, 1, "int", &sewer_exit_flashlight_fx, 0, 0);
   clientfield::register("scriptmover", "darkroom_light", 1, 1, "int", &darkroom_light, 0, 0);
   clientfield::register("scriptmover", "rooftop_spotlight", 1, 1, "int", &rooftop_spotlight, 0, 0);
@@ -69,7 +69,7 @@ function force_stream_weapons(localclientnum, oldval, newval, bnewent, binitials
       break;
     default:
       weapons[weapons.size] = getweapon(#"pistol_semiauto_t9", "suppressed");
-      weapons[weapons.size] = getweapon(#"hash_808100ca097e40c");
+      weapons[weapons.size] = getweapon(#"eq_dart_gun");
       weapons[weapons.size] = getweapon(#"eq_spy_camera");
       break;
   }
@@ -426,7 +426,7 @@ function function_cd8c0e74() {
   self thread postfx::exitpostfxbundle("pstfx_head_trauma");
 }
 
-function function_e80b775e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+function ghost_station_guard_room_light(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump) {
     self.var_9028faf2 = util::playFXOnTag(fieldname, level._effect[#"guard_room_light"], self, "tag_fx");
     return;
@@ -529,7 +529,7 @@ function render_emissive_blacklight_material(localclientnum, oldval, newval, bne
     min_dist = 10;
     min_dist_squared = min_dist * min_dist;
     max_dist = 400;
-    var_11ecc9fe = max_dist * max_dist;
+    max_dist_squared = max_dist * max_dist;
 
     while(self flag::get("draw_mat")) {
       eye = getlocalclienteyepos(0);
@@ -540,7 +540,7 @@ function render_emissive_blacklight_material(localclientnum, oldval, newval, bne
       vector_dot = vectordot(dir, fwd);
       dist = distance2dsquared(self.origin, eye);
 
-      if(vector_dot > dotlimit && dist < var_11ecc9fe) {
+      if(vector_dot > dotlimit && dist < max_dist_squared) {
         range = 0.0256;
         self.threshold = 1 - (1 - vector_dot) / range;
 

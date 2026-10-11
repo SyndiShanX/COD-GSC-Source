@@ -77,7 +77,7 @@ function function_78f4a9dc(localclientnum, oldval, newval, bnewent, binitialsnap
     case 3:
     case 4:
       if(!isDefined(self.var_1b11d1e)) {
-        self.var_1b11d1e = self playLoopSound(#"hash_7ee016c54396fd0e");
+        self.var_1b11d1e = self playLoopSound(#"zmb_fieldup_frostblast_lp");
       }
 
       self thread function_46e16bf3(fieldname, 1);
@@ -94,7 +94,7 @@ function function_78f4a9dc(localclientnum, oldval, newval, bnewent, binitialsnap
       }
 
       if(!isDefined(self.var_1b11d1e)) {
-        self.var_1b11d1e = self playLoopSound(#"hash_7ee016c54396fd0e");
+        self.var_1b11d1e = self playLoopSound(#"zmb_fieldup_frostblast_lp");
       }
 
       self thread function_46e16bf3(fieldname, 1);

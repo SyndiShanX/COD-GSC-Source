@@ -34,7 +34,7 @@
 function event_handler[level_init] main(eventstruct) {
   setclearanceceiling(16);
   init_clientfields();
-  function_bf4b4b7e();
+  setup_skiptos();
   namespace_f942705d::preload();
   level thread lui::add_luimenu("full_screen_movie", &full_screen_movie::register);
   load::main();
@@ -43,7 +43,7 @@ function event_handler[level_init] main(eventstruct) {
   namespace_2977687d::init();
   setDvar(#"compassmaxrange", "2100");
   level.disablestattracking = 1;
-  level namespace_fc3e8cb::function_a23603cf();
+  level namespace_fc3e8cb::set_stealth_ranges();
   setDvar(#"hash_7fb1be9520b9a725", 100);
   setDvar(#"hash_6b57212fd4fcdd3a", 350);
   setDvar(#"hash_4ad75035d6026ea2", 0.819);
@@ -60,28 +60,28 @@ function event_handler[level_init] main(eventstruct) {
   thread function_a2f341e2("targetname", "female_mannequin_trigger", "terminal_ent_clean_trig", "main_street_aabb_min", "main_street_aabb_max");
 }
 
-function function_bf4b4b7e() {
-  skipto::function_eb91535d("forest", &namespace_e967dd33::function_d033814a, &namespace_e967dd33::function_2c620a1d, "Forest", &namespace_e967dd33::function_34489c64);
-  skipto::function_eb91535d("perimeter", &namespace_e967dd33::function_ccc536c3, &namespace_e967dd33::function_bdf1abf6, "Perimeter", &namespace_e967dd33::function_1399c3c8);
-  skipto::function_eb91535d("helipad", &namespace_e967dd33::function_4f9d9de3, &namespace_e967dd33::function_b53f913c, "Helipad", &namespace_e967dd33::function_f83ba620);
+function setup_skiptos() {
+  skipto::add_saved("forest", &namespace_e967dd33::forest_main, &namespace_e967dd33::function_2c620a1d, "Forest", &namespace_e967dd33::function_34489c64);
+  skipto::add_saved("perimeter", &namespace_e967dd33::function_ccc536c3, &namespace_e967dd33::function_bdf1abf6, "Perimeter", &namespace_e967dd33::function_1399c3c8);
+  skipto::add_saved("helipad", &namespace_e967dd33::function_4f9d9de3, &namespace_e967dd33::function_b53f913c, "Helipad", &namespace_e967dd33::function_f83ba620);
   skipto::add("side_door", &namespace_e967dd33::function_d27fe3f3, &namespace_e967dd33::function_908a5d78, "Side Door", &namespace_e967dd33::function_56a40f23);
   skipto::add("lockpick", &namespace_96add23c::function_709fd94e, &namespace_96add23c::function_a5ad7a90, "Lockpick Door", &namespace_96add23c::function_70073b6b);
-  skipto::function_eb91535d("tunnels", &namespace_96add23c::tunnels_main, &namespace_96add23c::function_debfe625, "Maintenance Tunnels", &namespace_96add23c::tunnels_cleanup);
+  skipto::add_saved("tunnels", &namespace_96add23c::tunnels_main, &namespace_96add23c::function_debfe625, "Maintenance Tunnels", &namespace_96add23c::tunnels_cleanup);
   skipto::add("arcade", &namespace_aad1a8fc::function_f31f54a0, &namespace_aad1a8fc::function_c4dc0c81, "Arcade", &namespace_aad1a8fc::function_bb767617);
-  skipto::function_eb91535d("video_store", &namespace_b767a37e::function_6fc923cc, &namespace_b767a37e::function_1bfb5e75, "Video Store", &namespace_b767a37e::function_b85d7b0c);
+  skipto::add_saved("video_store", &namespace_b767a37e::function_6fc923cc, &namespace_b767a37e::function_1bfb5e75, "Video Store", &namespace_b767a37e::function_b85d7b0c);
   skipto::add("main_street", &namespace_b767a37e::function_c5b43ce, &namespace_b767a37e::function_bc754782, "Main Street", &namespace_b767a37e::function_c76d36b0);
-  skipto::function_eb91535d("elevator_fight", &namespace_b767a37e::function_f7a489fd, &namespace_b767a37e::function_e169c9d8, "Elevator Fight", &namespace_b767a37e::function_5ce25b5);
-  skipto::function_eb91535d("elevator", &namespace_be0b7a4::elevator_main, &namespace_be0b7a4::function_cc475eed, "Elevator", &namespace_be0b7a4::function_987cb73);
-  skipto::function_eb91535d("terminal", &namespace_be0b7a4::function_da9636d5, &namespace_be0b7a4::function_4254583f, "Terminal", &namespace_be0b7a4::function_207b0552);
-  skipto::function_eb91535d("observation", &namespace_be0b7a4::function_7ff0a4d3, &namespace_be0b7a4::function_170cfeb3, "Observation", &namespace_be0b7a4::function_123e9b38);
-  skipto::function_eb91535d("facades", &namespace_4c1dd357::function_bb5a40cc, &namespace_4c1dd357::function_ad51fa26, "Facades", &namespace_4c1dd357::function_7c8934a0);
+  skipto::add_saved("elevator_fight", &namespace_b767a37e::function_f7a489fd, &namespace_b767a37e::function_e169c9d8, "Elevator Fight", &namespace_b767a37e::function_5ce25b5);
+  skipto::add_saved("elevator", &namespace_be0b7a4::elevator_main, &namespace_be0b7a4::function_cc475eed, "Elevator", &namespace_be0b7a4::function_987cb73);
+  skipto::add_saved("terminal", &namespace_be0b7a4::function_da9636d5, &namespace_be0b7a4::function_4254583f, "Terminal", &namespace_be0b7a4::function_207b0552);
+  skipto::add_saved("observation", &namespace_be0b7a4::function_7ff0a4d3, &namespace_be0b7a4::function_170cfeb3, "Observation", &namespace_be0b7a4::function_123e9b38);
+  skipto::add_saved("facades", &namespace_4c1dd357::function_bb5a40cc, &namespace_4c1dd357::function_ad51fa26, "Facades", &namespace_4c1dd357::function_7c8934a0);
   skipto::add("rooftops", &namespace_4c1dd357::rooftops_main, &namespace_4c1dd357::function_3c9f8a88, "Rooftops", &namespace_4c1dd357::function_21fbbfb2);
   skipto::add("storage", &namespace_4c1dd357::function_f13abd77, &namespace_4c1dd357::function_69d1435d, "Storage", &namespace_4c1dd357::function_80555a03);
-  skipto::function_eb91535d("motor_pool", &namespace_4c1dd357::function_3b55ec61, &namespace_4c1dd357::function_36c18ca, "Motor Pool", &namespace_4c1dd357::function_b78a9ad4);
-  skipto::function_eb91535d("apc_turret", &namespace_80316bc8::function_6bd1bb5a, &namespace_80316bc8::function_757efcb6, "APC Turret", &namespace_80316bc8::function_54337d3f);
-  skipto::function_eb91535d("apc_townsquare", &namespace_80316bc8::function_a668e580, &namespace_80316bc8::function_7da641f5, "APC Townsquare", &namespace_80316bc8::function_28117f7e);
+  skipto::add_saved("motor_pool", &namespace_4c1dd357::function_3b55ec61, &namespace_4c1dd357::function_36c18ca, "Motor Pool", &namespace_4c1dd357::function_b78a9ad4);
+  skipto::add_saved("apc_turret", &namespace_80316bc8::function_6bd1bb5a, &namespace_80316bc8::function_757efcb6, "APC Turret", &namespace_80316bc8::function_54337d3f);
+  skipto::add_saved("apc_townsquare", &namespace_80316bc8::function_a668e580, &namespace_80316bc8::function_7da641f5, "APC Townsquare", &namespace_80316bc8::function_28117f7e);
   skipto::add("apc_mall", &namespace_80316bc8::function_a668e580, &namespace_80316bc8::function_7da641f5, "APC Mall", &namespace_80316bc8::function_28117f7e);
-  skipto::function_46d8992a("forest");
+  skipto::default_skipto("forest");
 
   level.var_965c6227[#"forest"] = ["<dev string:x38>", "<dev string:x42>", "<dev string:x4d>", "<dev string:x57>"];
   level.var_965c6227[#"perimeter"] = ["<dev string:x65>", "<dev string:x42>", "<dev string:x4d>", "<dev string:x57>"];
@@ -248,7 +248,7 @@ function function_a5db1760() {
 
 function function_90fab2ab() {
   level.var_c9de7735 = [];
-  var_efa5472a = skipto::function_5a61e21a()[0];
+  var_efa5472a = skipto::get_current_skiptos()[0];
   var_47580e79 = getEntArray("cp_explosive_barrel", "targetname");
 
   foreach(var_fc3729bf in var_47580e79) {

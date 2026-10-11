@@ -410,7 +410,7 @@ function demoteplayer(attacker) {
   if(isDefined(attacker)) {
     self stats::function_bb7eedf0(#"humiliate_attacker", 1);
     attacker recordgameevent("capture");
-    level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+    level thread telemetry::function_18135b72(#"callback_on_game_event", {
       #player: attacker, #eventtype: #"capture"});
   }
 
@@ -418,7 +418,7 @@ function demoteplayer(attacker) {
   self.pers[#"humiliated"]++;
   self.humiliated = self.pers[#"humiliated"];
   self recordgameevent("return");
-  level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+  level thread telemetry::function_18135b72(#"callback_on_game_event", {
     #player: self, #eventtype: #"return"});
   self playlocalsound(#"mpl_wager_humiliate");
   self globallogic_audio::leader_dialog_on_player("humiliated");

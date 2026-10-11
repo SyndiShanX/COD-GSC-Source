@@ -136,10 +136,10 @@ function function_20cfd8b5(team) {
 
     if(isDefined(teamindex)) {
       var_504bfad6 = map::function_596f8772();
-      var_7c3dac8 = var_504bfad6.faction[teamindex].var_d2446fa0;
+      faction_name = var_504bfad6.faction[teamindex].var_d2446fa0;
 
-      if(isDefined(var_7c3dac8)) {
-        return getscriptbundle(var_7c3dac8);
+      if(isDefined(faction_name)) {
+        return getscriptbundle(faction_name);
       }
     }
   }

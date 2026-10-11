@@ -92,12 +92,12 @@ class csceneobject {
       }
 
       if(isPlayer(player)) {
-        var_3b97696d = player getplayergendertype();
+        str_gender = player getplayergendertype();
       } else {
-        var_3b97696d = player.var_3b97696d;
+        str_gender = player.str_gender;
       }
 
-      var_c4a23d1d = function_5b2306f5(weapon, var_3b97696d, b_camera);
+      var_c4a23d1d = function_5b2306f5(weapon, str_gender, b_camera);
 
       if(isDefined(var_c4a23d1d)) {
         return var_c4a23d1d;
@@ -117,32 +117,32 @@ class csceneobject {
         }
       } else {
         if(weapons::ispunch(weapon)) {
-          if(var_3b97696d === "female") {
+          if(str_gender === "female") {
             var_c4a23d1d = isDefined(var_55b4f21e.var_8cf3a21a) ? var_55b4f21e.var_8cf3a21a : var_55b4f21e.var_a190f06e;
           } else {
             var_c4a23d1d = var_55b4f21e.var_a190f06e;
           }
         } else if(weapons::isnonbarehandsmelee(weapon)) {
-          if(var_3b97696d === "female") {
+          if(str_gender === "female") {
             var_c4a23d1d = isDefined(var_55b4f21e.var_3be9d7cf) ? var_55b4f21e.var_3be9d7cf : var_55b4f21e.var_bb64ee8c;
           } else {
             var_c4a23d1d = var_55b4f21e.var_bb64ee8c;
           }
         } else if(is_true(weapon.isrocketlauncher)) {
-          if(var_3b97696d === "female") {
+          if(str_gender === "female") {
             var_c4a23d1d = isDefined(var_55b4f21e.var_dee605a0) ? var_55b4f21e.var_dee605a0 : var_55b4f21e.var_51c09589;
           } else {
             var_c4a23d1d = var_55b4f21e.var_51c09589;
           }
         } else if(weapons::ispistol(weapon, 1)) {
-          if(var_3b97696d === "female") {
+          if(str_gender === "female") {
             var_c4a23d1d = isDefined(var_55b4f21e.var_91ecd04) ? var_55b4f21e.var_91ecd04 : var_55b4f21e.var_389b3f9b;
           } else {
             var_c4a23d1d = var_55b4f21e.var_389b3f9b;
           }
         }
 
-        if(var_3b97696d === "female") {
+        if(str_gender === "female") {
           var_c4a23d1d = isDefined(var_c4a23d1d) ? var_c4a23d1d : var_55b4f21e.var_1f836d8f;
         }
       }
@@ -671,7 +671,7 @@ class csceneobject {
     }
 
     s_align = function_bc0facbb();
-    actor animation::reach(str_animation, s_align.ent, s_align.tag, disablearrivals, undefined, s_shot.var_8d3cc141);
+    actor animation::reach(str_animation, s_align.ent, s_align.tag, disablearrivals, undefined, s_shot.demeanorstart);
   }
 
   function function_48382a1c() {
@@ -753,7 +753,7 @@ class csceneobject {
     return true;
   }
 
-  function function_5b2306f5(weapon, var_3b97696d, b_camera = 0) {
+  function function_5b2306f5(weapon, str_gender, b_camera = 0) {
     if(isDefined(var_55b4f21e.var_37f7b010)) {
       var_eadfb674 = getscriptbundle(var_55b4f21e.var_37f7b010);
     }
@@ -761,14 +761,14 @@ class csceneobject {
     if(isarray(var_eadfb674.var_37f7b010) && var_eadfb674.var_37f7b010.size) {
       foreach(var_de282754 in var_eadfb674.var_37f7b010) {
         if(b_camera) {
-          if(isDefined(var_de282754.camera) && weapon.name === var_de282754.weapon && (!isDefined(var_de282754.gender) || var_3b97696d === var_de282754.gender)) {
+          if(isDefined(var_de282754.camera) && weapon.name === var_de282754.weapon && (!isDefined(var_de282754.gender) || str_gender === var_de282754.gender)) {
             return var_de282754.camera;
           }
 
           continue;
         }
 
-        if(isDefined(var_de282754.animation) && weapon.name === var_de282754.weapon && (!isDefined(var_de282754.gender) || var_3b97696d === var_de282754.gender)) {
+        if(isDefined(var_de282754.animation) && weapon.name === var_de282754.weapon && (!isDefined(var_de282754.gender) || str_gender === var_de282754.gender)) {
           return var_de282754.animation;
         }
       }
@@ -1103,8 +1103,8 @@ class csceneobject {
         _o_scene.n_start_time = 0.99;
       }
 
-      if(isactor(_e) && isDefined(var_55b4f21e.var_bd5fe690) && _e ai::has_behavior_attribute("demeanor")) {
-        _e ai::set_behavior_attribute("demeanor", var_55b4f21e.var_bd5fe690);
+      if(isactor(_e) && isDefined(var_55b4f21e.demeanorend) && _e ai::has_behavior_attribute("demeanor")) {
+        _e ai::set_behavior_attribute("demeanor", var_55b4f21e.demeanorend);
       }
 
       if(isactor(_e)) {
@@ -2311,16 +2311,16 @@ class cscene {
     }
   }
 
-  function function_13804c36(ent, var_3b0de5fa) {
-    if(ent.script_animname === var_3b0de5fa || isstring(ent.script_animname) && tolower(ent.script_animname) === var_3b0de5fa) {
+  function function_13804c36(ent, str_obj_name) {
+    if(ent.script_animname === str_obj_name || isstring(ent.script_animname) && tolower(ent.script_animname) === str_obj_name) {
       return true;
     }
 
-    if(ent.animname === var_3b0de5fa || isstring(ent.animname) && tolower(ent.animname) === var_3b0de5fa) {
+    if(ent.animname === str_obj_name || isstring(ent.animname) && tolower(ent.animname) === str_obj_name) {
       return true;
     }
 
-    if(ent.targetname === var_3b0de5fa || isstring(ent.targetname) && tolower(ent.targetname) === var_3b0de5fa) {
+    if(ent.targetname === str_obj_name || isstring(ent.targetname) && tolower(ent.targetname) === str_obj_name) {
       return true;
     }
 

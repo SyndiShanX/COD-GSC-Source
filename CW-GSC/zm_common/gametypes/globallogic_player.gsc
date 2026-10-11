@@ -468,7 +468,7 @@ function function_7314957c(player, result) {
   end_match_zm.revives = player player::function_2abc116("revives");
   end_match_zm.doors = player player::function_2abc116("doors_purchased");
   end_match_zm.downs = player player::function_2abc116("downs");
-  function_92d1707f(#"hash_4c5946fa1191bc64", #"end_match_info", end_match_info, #"hash_4682ee0eb5071d2", var_811ed119, #"end_match_loadout", end_match_loadout, #"end_match_zm", end_match_zm);
+  function_92d1707f(#"dlog_event_end_match", #"end_match_info", end_match_info, #"hash_4682ee0eb5071d2", var_811ed119, #"end_match_loadout", end_match_loadout, #"end_match_zm", end_match_zm);
 }
 
 function callback_playerdisconnect() {

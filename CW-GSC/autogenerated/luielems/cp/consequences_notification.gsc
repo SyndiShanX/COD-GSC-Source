@@ -71,8 +71,8 @@ function function_cd2efd2d(player, ref) {
     index = 0;
     var_b7c59076 = getscriptbundlelist(field.var_2f3c2756);
 
-    foreach(var_773e2a17 in var_b7c59076) {
-      if(var_773e2a17 == ref) {
+    foreach(consequence in var_b7c59076) {
+      if(consequence == ref) {
         [[self]] - > function_afdd9f65(player, index);
         return true;
       }

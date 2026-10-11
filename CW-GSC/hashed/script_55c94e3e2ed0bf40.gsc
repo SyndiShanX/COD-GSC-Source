@@ -54,10 +54,10 @@ function function_709fd94e(str_objective, b_starting) {
   level thread function_bb9839d8();
   level thread namespace_979752dc::function_740dbf99();
   level flag::wait_till(#"hash_6ddc7c0cf621eef8");
-  skipto::function_4e3ab877(b_starting);
+  skipto::objective_completed(b_starting);
 }
 
-function function_70073b6b(str_objective, b_starting, var_aa1a6455, player) {
+function function_70073b6b(str_objective, b_starting, b_direct, player) {
   level flag::clear("flg_woods_radio");
 
   if(player) {
@@ -76,7 +76,7 @@ function function_70073b6b(str_objective, b_starting, var_aa1a6455, player) {
     }
   }
 
-  level thread namespace_fc3e8cb::function_a23603cf(0);
+  level thread namespace_fc3e8cb::set_stealth_ranges(0);
   clientfield::set("cull_allinterior", 1);
   level thread namespace_f6d09d1a::function_7b9feaa3("lgtexp_perf_exterior", 1);
 }
@@ -116,7 +116,7 @@ function function_b9596ad1() {
   var_d1a24548 setModel(#"c_t9_cp_rus_kgb_guard_body_officer_a");
   var_d1a24548 val::set(#"hash_70f48a440e25a27c", "magic_bullet_shield", 1);
   var_12baf921 = spawner::simple_spawn_single("lockpick_scene_enemy_desk", &function_87f353f6, #"c_t9_shg_npc_e_reshetnikov");
-  level.var_eea5b22[#"hash_65d78c2acf2a7732"] = var_d1a24548;
+  level.var_eea5b22[#"soldier_door"] = var_d1a24548;
   level.var_eea5b22[#"hash_3c251f2afff5ae77"] = var_12baf921;
   var_4c5366ee = doors::get_doors("e_lockpick_door", "targetname")[0];
   level.var_eea5b22[#"door"] = var_4c5366ee.c_door.m_e_door;
@@ -125,7 +125,7 @@ function function_b9596ad1() {
   animation::add_notetrack_func("amerika_tunnels:lockpick_takedown_player_shellshock", &function_8ad67270);
   animation::add_notetrack_func("amerika_tunnels:lockpick_takedown_player_slowmo", &function_29962dd8);
   level scene::init(#"hash_24e544fc76d24b96", level.var_eea5b22);
-  level.player.var_4d448bdb setcontents(0);
+  level.player.mdl_clone setcontents(0);
   var_12baf921 val::set(#"hash_70f48a440e25a27c", "magic_bullet_shield", 1);
   var_12baf921 val::set(#"hash_70f48a440e25a27c", "takedamage", 1);
   level thread function_761c8a8d(var_d1a24548, var_12baf921);
@@ -139,23 +139,23 @@ function private function_761c8a8d(var_d1a24548, var_12baf921) {
 
 function function_4f4f437b() {
   level flag::wait_till("flg_amk_player_spawned");
-  level.player.var_4d448bdb = util::spawn_player_clone(level.player);
+  level.player.mdl_clone = util::spawn_player_clone(level.player);
   mdl_head = level.player startquantity();
 
-  if(isDefined(mdl_head) && level.player.var_4d448bdb isattached(mdl_head)) {
-    level.player.var_4d448bdb detach(mdl_head);
+  if(isDefined(mdl_head) && level.player.mdl_clone isattached(mdl_head)) {
+    level.player.mdl_clone detach(mdl_head);
   }
 
   var_60298582 = level.player function_92ea4100();
 
-  if(isDefined(var_60298582) && level.player.var_4d448bdb isattached(var_60298582)) {
-    level.player.var_4d448bdb detach(var_60298582);
+  if(isDefined(var_60298582) && level.player.mdl_clone isattached(var_60298582)) {
+    level.player.mdl_clone detach(var_60298582);
   }
 
-  level.player.var_4d448bdb function_1fac41e4(level.player function_19124308());
-  level.player.var_4d448bdb.anim_debug_name = level.player.name + " clone";
-  level.player.var_4d448bdb hide();
-  level.var_eea5b22[#"player_clone"] = level.player.var_4d448bdb;
+  level.player.mdl_clone function_1fac41e4(level.player function_19124308());
+  level.player.mdl_clone.anim_debug_name = level.player.name + " clone";
+  level.player.mdl_clone hide();
+  level.var_eea5b22[#"player_clone"] = level.player.mdl_clone;
 }
 
 function private function_87f353f6(mdl_head) {
@@ -190,7 +190,7 @@ function private function_bb9839d8() {
   clientfield::set("SetPBGExposureBank", 2);
   level flag::set(#"flg_side_door_scene_start");
   namespace_b61bbd82::music("3.0_caught");
-  var_2a16bfbe = level.var_eea5b22[#"hash_65d78c2acf2a7732"];
+  var_2a16bfbe = level.var_eea5b22[#"soldier_door"];
   var_2a16bfbe notsolid();
   level.player thread function_ed97bf94();
   level scene::play(#"hash_24e544fc76d24b96", "open_door_start", level.var_eea5b22);
@@ -270,39 +270,39 @@ function private function_2ea0a58() {
 function private function_6fac81f3(params) {
   w_pistol = getweapon(#"pistol_semiauto_t9");
   level.player function_77569ccb(w_pistol);
-  level.player.var_4d448bdb util::delay(0.5, undefined, &show);
+  level.player.mdl_clone util::delay(0.5, undefined, &show);
   level.player hideviewmodel();
-  var_2586eb45 = getweapon(#"eq_flash_grenade");
-  assert(var_2586eb45 != level.weaponnone);
+  w_tactical = getweapon(#"eq_flash_grenade");
+  assert(w_tactical != level.weaponnone);
   var_c3a1484c = 0;
 
-  if(level.player hasweapon(var_2586eb45)) {
-    var_c3a1484c = level.player getweaponammoclip(var_2586eb45);
-    level.player takeweapon(var_2586eb45);
+  if(level.player hasweapon(w_tactical)) {
+    var_c3a1484c = level.player getweaponammoclip(w_tactical);
+    level.player takeweapon(w_tactical);
     var_4f0f327c = 1;
   }
 
   level waittill(#"hash_30b0b368a6b10931");
-  level.player.var_4d448bdb hide();
+  level.player.mdl_clone hide();
   level.player val::reset(#"hash_70f48a440e25a27c", "disable_weapons");
   level.player showviewmodel();
   level flag::wait_till(#"hash_3dac34734cfb07f4");
-  level.player util::function_749362d7(1, #"hash_79d8239db87989b0");
+  level.player util::set_low_ready(1, #"hash_79d8239db87989b0");
   level waittill(#"hash_50d0ee914946a0ae");
   level.player hideviewmodel();
   level.player val::set(#"hash_70f48a440e25a27c", "disable_weapons", 2);
-  level.player.var_4d448bdb show();
+  level.player.mdl_clone show();
   level waittill(#"hash_30b0b368a6b10931");
   level.player function_9f0dc392(w_pistol);
-  level.player util::function_749362d7(0);
-  level.player.var_4d448bdb hide();
+  level.player util::set_low_ready(0);
+  level.player.mdl_clone hide();
   level.player val::reset(#"hash_70f48a440e25a27c", "disable_weapons");
   level.player showviewmodel();
   level waittill(#"hash_3fdce2a6c2be9794");
 
   if(is_true(var_4f0f327c)) {
-    level.player giveweapon(var_2586eb45);
-    level.player setweaponammoclip(var_2586eb45, var_c3a1484c);
+    level.player giveweapon(w_tactical);
+    level.player setweaponammoclip(w_tactical, var_c3a1484c);
   }
 
   level.player function_7437ab12();
@@ -314,12 +314,12 @@ function private function_7eb32768() {
   self val::set(#"hash_70f48a440e25a27c", "allow_prone", 0);
   self val::set(#"hash_70f48a440e25a27c", "show_weapon_hud", 0);
   self sethighdetail(1);
-  self playerlinktoblend(level.player.var_4d448bdb, "tag_player", 0.25, 0.25 * 0.5, 0, 0.25, 0.25 * 0.5, 0);
+  self playerlinktoblend(level.player.mdl_clone, "tag_player", 0.25, 0.25 * 0.5, 0, 0.25, 0.25 * 0.5, 0);
   wait 0.25;
-  self playerlinktodelta(level.player.var_4d448bdb, "tag_player", 1, 5, 5, 5, 5, 1, 0, 1);
+  self playerlinktodelta(level.player.mdl_clone, "tag_player", 1, 5, 5, 5, 5, 1, 0, 1);
   self val::reset(#"hash_70f48a440e25a27c", "freezecontrols");
   level flag::wait_till(#"hash_525a26a0b7957925");
-  self playerlinktodelta(level.player.var_4d448bdb, "tag_player", 1, 20, 15, 10, 10, 1, 0, 1);
+  self playerlinktodelta(level.player.mdl_clone, "tag_player", 1, 20, 15, 10, 10, 1, 0, 1);
 }
 
 function private function_7437ab12() {
@@ -327,8 +327,8 @@ function private function_7437ab12() {
   self unlink();
   self sethighdetail(0);
 
-  if(isDefined(level.player.var_4d448bdb)) {
-    level.player.var_4d448bdb delete();
+  if(isDefined(level.player.mdl_clone)) {
+    level.player.mdl_clone delete();
   }
 
   util::nvidiaansel_scriptdisable(0);
@@ -365,7 +365,7 @@ function private function_9f0dc392(var_bcf157b) {
 }
 
 function private function_8ad67270(params) {
-  var_2a16bfbe = level.var_eea5b22[#"hash_65d78c2acf2a7732"];
+  var_2a16bfbe = level.var_eea5b22[#"soldier_door"];
   effect = getstatuseffect(#"blurred");
   var_711343eb = level.player getnormalhealth() * 0.4;
   level.player setnormalhealth(var_711343eb);
@@ -424,14 +424,14 @@ function function_debfe625(str_objective) {
 function tunnels_main(str_objective, b_starting) {
   namespace_fc3e8cb::function_44a6fc04(str_objective);
 
-  transient = savegame::function_6440b06b(#"transient");
+  transient = savegame::get_mission_data(#"transient");
 
   if(is_true(transient.var_4886f850)) {
     level.player stats::function_dad108fa(#"hash_5846fb59bec18f77", 1);
   }
 
   if(!b_starting) {
-    savegame::function_7790f03();
+    savegame::checkpoint_save_asap();
   }
 
   level thread function_52dbef3a();
@@ -442,10 +442,10 @@ function tunnels_main(str_objective, b_starting) {
   level thread function_e174a8d1();
   level thread function_663b296d();
   flag::wait_till("goto_arcade");
-  skipto::function_4e3ab877(str_objective);
+  skipto::objective_completed(str_objective);
 }
 
-function tunnels_cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function tunnels_cleanup(str_objective, b_starting, b_direct, player) {
   clientfield::set("cull_mainstreet", 1);
   clientfield::set("cull_helipad", 2);
   level thread namespace_f6d09d1a::function_7b9feaa3("lgtexp_perf_townsquare_keys", 1, "flg_terminal_end");
@@ -508,7 +508,7 @@ function function_ff20ab50() {
   level.woods ai::set_behavior_attribute("vignette_mode", "fast");
   level.woods ai::set_behavior_attribute("disablepeek", 1);
   level.woods ai::set_behavior_attribute("disablelean", 1);
-  level.woods battlechatter::function_2ab9360b(0);
+  level.woods battlechatter::bc_allow(0);
   level namespace_fc3e8cb::function_92dea087("flg_tunnels_end", "flg_tunnels_midpoint");
   level.woods notify(#"end_woods_tunnels_follow2");
   level.woods.grenadeammo = 99;

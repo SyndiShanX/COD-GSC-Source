@@ -37,7 +37,7 @@ function function_9eb59632(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   var_d1dc644a = playFX(bwastimejump, #"hash_2de6c1300bec68cd", self.origin + (0, 0, 36), anglestoup(self.angles));
-  playSound(bwastimejump, #"hash_22dd31bb07fa0a72", self.origin + (0, 0, 36));
+  playSound(bwastimejump, #"zmb_tormentor_spawn_prespawn", self.origin + (0, 0, 36));
   wait 1;
 
   if(isDefined(var_d1dc644a)) {
@@ -46,6 +46,6 @@ function function_9eb59632(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(isDefined(self)) {
     var_b064d016 = playFX(bwastimejump, #"hash_44214bf58f0e6d87", self.origin + (0, 0, 36), anglestoup(self.angles));
-    playSound(bwastimejump, #"hash_2b575d8db3a60a95", self.origin + (0, 0, 36));
+    playSound(bwastimejump, #"zmb_tormentor_spawn", self.origin + (0, 0, 36));
   }
 }

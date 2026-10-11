@@ -27,7 +27,7 @@ function private preinit() {
     return;
   }
 
-  function_2777823f();
+  register_client_fields();
 
   if(!isDefined(level.var_98d0ae2b)) {
     level.var_98d0ae2b = new throttle();
@@ -49,7 +49,7 @@ function private preinit() {
   function_344f8c02();
 }
 
-function private function_2777823f() {
+function private register_client_fields() {
   clientfield::register("missile", "dynamic_item_drop", 1, 4, "int");
   clientfield::register("missile", "dynamic_item_drop_count", 1, 10, "int");
   clientfield::register("missile", "dynamic_item_drop_falling", 1, 1, "int");
@@ -1242,9 +1242,9 @@ function private function_6abcd75d(item, droptime) {
 function private function_567cbe1c(item, droptime) {
   item endon(#"death");
   var_7c26e82a = (isDefined(item.itementry.var_d22413f4) ? item.itementry.var_d22413f4 : 0, isDefined(item.itementry.var_c3d47751) ? item.itementry.var_c3d47751 : 0, isDefined(item.itementry.var_f47bd8a3) ? item.itementry.var_f47bd8a3 : 0);
-  var_88d33a4b = (isDefined(item.itementry.var_2e8b17a8) ? item.itementry.var_2e8b17a8 : 0, isDefined(item.itementry.var_48644b5a) ? item.itementry.var_48644b5a : 0, isDefined(item.itementry.var_fa2d2eed) ? item.itementry.var_fa2d2eed : 0);
+  rotatedirection = (isDefined(item.itementry.var_2e8b17a8) ? item.itementry.var_2e8b17a8 : 0, isDefined(item.itementry.var_48644b5a) ? item.itementry.var_48644b5a : 0, isDefined(item.itementry.var_fa2d2eed) ? item.itementry.var_fa2d2eed : 0);
 
-  if(lengthsquared(var_7c26e82a) <= 0.01 && lengthsquared(var_88d33a4b) <= 0.01) {
+  if(lengthsquared(var_7c26e82a) <= 0.01 && lengthsquared(rotatedirection) <= 0.01) {
     return;
   }
 
@@ -1255,7 +1255,7 @@ function private function_567cbe1c(item, droptime) {
   var_696605c2 = isDefined(item.itementry.var_9e569978) ? item.itementry.var_9e569978 : 1;
   var_488074a5 = isDefined(item.itementry.var_3af59a99) ? item.itementry.var_3af59a99 : 1;
   item bobbing(var_7c26e82a, var_696605c2 * randomfloatrange(1, 1.1), var_488074a5 * randomfloatrange(1, 1.1));
-  item rotate(var_88d33a4b);
+  item rotate(rotatedirection);
 }
 
 function drop_item(index = 0, weapon = undefined, count = 0, amount = 0, itemid, position, angles = (0, 0, 0), falling = 2) {

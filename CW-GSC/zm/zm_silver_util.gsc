@@ -69,7 +69,7 @@ function function_b9adea4e() {
 
       if(!var_573efcf5) {
         self playsoundtoplayer(#"hash_361ed2e67423ebbb", self);
-        self thread zm_vo::function_d6f8bbd9(#"hash_5fe32f7cc1d6606e", undefined, self);
+        self thread zm_vo::function_d6f8bbd9(#"vox_mq_1_aetherscope_processing_athr_0", undefined, self);
         var_573efcf5 = 1;
       }
     } else if(self flag::get(#"hash_1154242c9b1e4518")) {
@@ -77,7 +77,7 @@ function function_b9adea4e() {
 
       if(!var_fc700937) {
         self playsoundtoplayer(#"hash_361ed1e67423ea08", self);
-        self thread zm_vo::function_d6f8bbd9(#"hash_2356723908acaf7b", undefined, self);
+        self thread zm_vo::function_d6f8bbd9(#"vox_mq_1_aetherscope_anomaly_detected_athr_0", undefined, self);
         var_fc700937 = 1;
       }
     } else {
@@ -166,7 +166,7 @@ function function_4cc5fca6() {
 }
 
 function function_dd9482b7(e_player) {
-  if(level flag::get(#"hash_3e765c26047c9f54") || level flag::get("in_exfil_event")) {
+  if(level flag::get(#"start_exfil") || level flag::get("in_exfil_event")) {
     return false;
   }
 

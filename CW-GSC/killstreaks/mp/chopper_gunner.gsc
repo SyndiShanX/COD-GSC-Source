@@ -48,7 +48,7 @@ function function_d45a1f8d(einflictor, attacker, idamage, smeansofdeath, weapon,
     return;
   }
 
-  if(shitloc.owner == psoffsettime && deathanimduration == getweapon(#"hash_1734871fef9c0549")) {
+  if(shitloc.owner == psoffsettime && deathanimduration == getweapon(#"chopper_gunner_turret")) {
     level.chopper_gunner namespace_e8c18978::function_631f02c5();
   }
 }

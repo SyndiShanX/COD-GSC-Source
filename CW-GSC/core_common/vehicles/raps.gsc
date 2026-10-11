@@ -96,7 +96,7 @@ function initsounds() {
 
   if(isDefined(self.vehicletype) && (self.vehicletype == #"spawner_enemy_zombie_vehicle_raps_suicide" || self.vehicletype == #"spawner_zombietron_veh_meatball" || self.vehicletype == #"spawner_zombietron_veh_meatball_med" || self.vehicletype == #"spawner_zombietron_veh_meatball_small")) {
     self.sndalias[#"inair"] = undefined;
-    self.sndalias[#"land"] = #"hash_7cbf89ceaf15bb25";
+    self.sndalias[#"land"] = #"zmb_doa_ai_meatball_land";
     self.sndalias[#"spawn"] = undefined;
     self.sndalias[#"direction"] = undefined;
     self.sndalias[#"jump_up"] = undefined;
@@ -104,7 +104,7 @@ function initsounds() {
     self.sndalias[#"vehclose1500"] = undefined;
     self.sndalias[#"vehtargeting"] = undefined;
     self.sndalias[#"vehalarm"] = undefined;
-    self.sndalias[#"vehcollision"] = #"hash_33eb98c2a2669c78";
+    self.sndalias[#"vehcollision"] = #"zmb_doa_ai_meatball_collision";
   }
 
   if(isDefined(self.vehicletype) && self.vehicletype == #"hash_22f2770b0b570f88") {

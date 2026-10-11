@@ -21,7 +21,7 @@ function private preinit() {
   forcestreamxmodel(#"p8_zm_wall_buy_ar_fastfire");
   forcestreamxmodel(#"p8_zm_wall_buy_ar_modular");
   forcestreamxmodel(#"p8_zm_wall_buy_ar_stealth");
-  forcestreamxmodel(#"hash_6af4a0ff3d4ea44c");
+  forcestreamxmodel(#"p8_zm_wall_buy_bowie_knife");
   forcestreamxmodel(#"p8_zm_wall_buy_lmg_titan");
   forcestreamxmodel(#"p8_zm_wall_buy_pistol_burst");
   forcestreamxmodel(#"p8_zm_wall_buy_pistol_standard");

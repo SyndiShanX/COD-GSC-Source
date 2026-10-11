@@ -105,16 +105,16 @@ class cscene: cscriptbundlebase {
     }
   }
 
-  function function_13804c36(ent, var_3b0de5fa) {
-    if(ent.script_animname === var_3b0de5fa || isstring(ent.script_animname) && tolower(ent.script_animname) === var_3b0de5fa) {
+  function function_13804c36(ent, str_obj_name) {
+    if(ent.script_animname === str_obj_name || isstring(ent.script_animname) && tolower(ent.script_animname) === str_obj_name) {
       return true;
     }
 
-    if(ent.animname === var_3b0de5fa || isstring(ent.animname) && tolower(ent.animname) === var_3b0de5fa) {
+    if(ent.animname === str_obj_name || isstring(ent.animname) && tolower(ent.animname) === str_obj_name) {
       return true;
     }
 
-    if(ent.targetname === var_3b0de5fa || isstring(ent.targetname) && tolower(ent.targetname) === var_3b0de5fa) {
+    if(ent.targetname === str_obj_name || isstring(ent.targetname) && tolower(ent.targetname) === str_obj_name) {
       return true;
     }
 
@@ -745,7 +745,7 @@ class csceneobject: cscriptbundleobjectbase {
   function function_9a43e31(clientnum, var_6410e385, b_camera = 0) {
     if(_s.type === #"fakeplayer" || _s.type === #"player") {
       if(isDefined(level.var_29369e8c)) {
-        var_3b97696d = self[[level.var_29369e8c]](clientnum, isDefined(_s.var_1b22ecf4) ? _s.var_1b22ecf4 : 0);
+        str_gender = self[[level.var_29369e8c]](clientnum, isDefined(_s.var_1b22ecf4) ? _s.var_1b22ecf4 : 0);
       }
 
       if(isDefined(level.var_1c6f63ee)) {
@@ -761,7 +761,7 @@ class csceneobject: cscriptbundleobjectbase {
       }
     }
 
-    var_c4a23d1d = function_5b2306f5(weapon, var_3b97696d, b_camera, var_db140778);
+    var_c4a23d1d = function_5b2306f5(weapon, str_gender, b_camera, var_db140778);
 
     if(isDefined(var_c4a23d1d)) {
       return var_c4a23d1d;
@@ -781,7 +781,7 @@ class csceneobject: cscriptbundleobjectbase {
       }
     } else {
       if(!isDefined(weapon)) {
-        if(var_3b97696d === "female") {
+        if(str_gender === "female") {
           return (isDefined(var_55b4f21e.var_1f836d8f) ? var_55b4f21e.var_1f836d8f : var_6410e385);
         } else {
           return var_6410e385;
@@ -789,32 +789,32 @@ class csceneobject: cscriptbundleobjectbase {
       }
 
       if(weapons::ispunch(weapon)) {
-        if(var_3b97696d === "female") {
+        if(str_gender === "female") {
           var_c4a23d1d = isDefined(var_55b4f21e.var_8cf3a21a) ? var_55b4f21e.var_8cf3a21a : var_55b4f21e.var_a190f06e;
         } else {
           var_c4a23d1d = var_55b4f21e.var_a190f06e;
         }
       } else if(weapons::isnonbarehandsmelee(weapon)) {
-        if(var_3b97696d === "female") {
+        if(str_gender === "female") {
           var_c4a23d1d = isDefined(var_55b4f21e.var_3be9d7cf) ? var_55b4f21e.var_3be9d7cf : var_55b4f21e.var_bb64ee8c;
         } else {
           var_c4a23d1d = var_55b4f21e.var_bb64ee8c;
         }
       } else if(is_true(weapon.isrocketlauncher)) {
-        if(var_3b97696d === "female") {
+        if(str_gender === "female") {
           var_c4a23d1d = isDefined(var_55b4f21e.var_dee605a0) ? var_55b4f21e.var_dee605a0 : var_55b4f21e.var_51c09589;
         } else {
           var_c4a23d1d = var_55b4f21e.var_51c09589;
         }
       } else if(weapons::ispistol(weapon)) {
-        if(var_3b97696d === "female") {
+        if(str_gender === "female") {
           var_c4a23d1d = isDefined(var_55b4f21e.var_91ecd04) ? var_55b4f21e.var_91ecd04 : var_55b4f21e.var_389b3f9b;
         } else {
           var_c4a23d1d = var_55b4f21e.var_389b3f9b;
         }
       }
 
-      if(var_3b97696d === "female") {
+      if(str_gender === "female") {
         var_c4a23d1d = isDefined(var_c4a23d1d) ? var_c4a23d1d : var_55b4f21e.var_1f836d8f;
       }
     }
@@ -1050,7 +1050,7 @@ class csceneobject: cscriptbundleobjectbase {
     var_84ca3312 = isDefined(var_55b4f21e.blendcurve) ? var_55b4f21e.blendcurve : "linear";
   }
 
-  function function_5b2306f5(weapon, var_3b97696d, b_camera = 0, var_db140778) {
+  function function_5b2306f5(weapon, str_gender, b_camera = 0, var_db140778) {
     if(isDefined(var_55b4f21e.var_37f7b010)) {
       var_eadfb674 = getscriptbundle(var_55b4f21e.var_37f7b010);
     }
@@ -1059,14 +1059,14 @@ class csceneobject: cscriptbundleobjectbase {
       if(isDefined(var_db140778)) {
         var_3c7940f2 = [[var_db140778]] - > function_b06080fb();
         var_26820123 = [[var_db140778]] - > function_e8b0acef();
-        var_4cd13922 = var_26820123.fullname;
+        str_character_name = var_26820123.fullname;
 
         foreach(var_de282754 in var_eadfb674.var_37f7b010) {
           if(!isDefined(var_de282754.charactername) || !isDefined(var_de282754.var_18ed9498)) {
             continue;
           }
 
-          if(var_4cd13922 === var_de282754.charactername && var_3c7940f2 === var_de282754.var_18ed9498 && function_70b46cb3(var_de282754, weapon)) {
+          if(str_character_name === var_de282754.charactername && var_3c7940f2 === var_de282754.var_18ed9498 && function_70b46cb3(var_de282754, weapon)) {
             str_anim = function_24562f80(var_de282754, weapon, b_camera);
 
             if(isDefined(str_anim)) {
@@ -1080,7 +1080,7 @@ class csceneobject: cscriptbundleobjectbase {
             continue;
           }
 
-          if(var_4cd13922 === var_de282754.charactername && function_70b46cb3(var_de282754, weapon)) {
+          if(str_character_name === var_de282754.charactername && function_70b46cb3(var_de282754, weapon)) {
             str_anim = function_24562f80(var_de282754, weapon, b_camera);
 
             if(isDefined(str_anim)) {
@@ -1095,7 +1095,7 @@ class csceneobject: cscriptbundleobjectbase {
           continue;
         }
 
-        if(var_3b97696d === var_de282754.gender && function_70b46cb3(var_de282754, weapon)) {
+        if(str_gender === var_de282754.gender && function_70b46cb3(var_de282754, weapon)) {
           str_anim = function_24562f80(var_de282754, weapon, b_camera);
 
           if(isDefined(str_anim)) {
@@ -2898,10 +2898,10 @@ function stop(arg1, arg2, arg3, b_cancel, b_no_assert = 0, var_cd6fa4e2 = 0) {
 }
 
 function _stop_instance(b_clear = 0, str_scenedef, b_cancel = 0, var_cd6fa4e2 = 0) {
-  var_c7d7111 = function_6d520c81(self, str_scenedef);
+  e_root = function_6d520c81(self, str_scenedef);
 
-  if(isDefined(var_c7d7111.scenes)) {
-    foreach(o_scene in arraycopy(var_c7d7111.scenes)) {
+  if(isDefined(e_root.scenes)) {
+    foreach(o_scene in arraycopy(e_root.scenes)) {
       str_scene_name = o_scene._str_name;
 
       if(!isDefined(str_scenedef) || str_scene_name == str_scenedef) {
@@ -2951,10 +2951,10 @@ function delete_scene_spawned_ents(localclientnum, arg1) {
 }
 
 function _delete_scene_spawned_ents(localclientnum, str_scene) {
-  var_c7d7111 = function_6d520c81(self, str_scene);
+  e_root = function_6d520c81(self, str_scene);
 
-  if(isarray(var_c7d7111.scene_ents) && isarray(var_c7d7111.scene_ents[localclientnum])) {
-    foreach(ent in var_c7d7111.scene_ents[localclientnum]) {
+  if(isarray(e_root.scene_ents) && isarray(e_root.scene_ents[localclientnum])) {
+    foreach(ent in e_root.scene_ents[localclientnum]) {
       if(isDefined(ent) && isDefined(ent.scene_spawned)) {
         ent delete();
       }
@@ -3082,10 +3082,10 @@ function function_6d520c81(var_27aba8fd, str_scenedef) {
 }
 
 function get_active_scene(str_scenedef) {
-  var_c7d7111 = function_6d520c81(self, str_scenedef);
+  e_root = function_6d520c81(self, str_scenedef);
 
-  if(isDefined(str_scenedef) && isDefined(var_c7d7111.scenes)) {
-    foreach(o_scene in var_c7d7111.scenes) {
+  if(isDefined(str_scenedef) && isDefined(e_root.scenes)) {
+    foreach(o_scene in e_root.scenes) {
       if(o_scene._str_name == str_scenedef) {
         return o_scene;
       }

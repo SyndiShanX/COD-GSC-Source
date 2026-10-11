@@ -98,9 +98,9 @@ function function_aee99628(player) {
 
     foreach(zombie in a_potential_targets) {
       if(isalive(zombie) && zombie.team === level.zombie_team) {
-        var_6e084471 = vectorNormalize(zombie.origin - self.origin);
-        rightdot = vectordot(right, var_6e084471);
-        leftdot = vectordot(left, var_6e084471);
+        tozombie = vectorNormalize(zombie.origin - self.origin);
+        rightdot = vectordot(right, tozombie);
+        leftdot = vectordot(left, tozombie);
 
         if(rightdot <= 0.866025 && rightdot > 0 || leftdot <= 0.866025 && leftdot > 0) {
           damage = zm_equipment::function_379f6b5d(150, undefined, zombie.zm_ai_category, zombie.maxhealth);

@@ -55,14 +55,14 @@ function function_602f1c7e(instance) {
   instance flag::clear("cleanup");
   instance callback::function_d8abfc3d(#"portal_activated", &function_a3780cd3);
   level callback::add_callback(#"hash_594217387367ebb4", &function_a3780cd3, instance);
-  var_927876a9 = instance.contentgroups[#"radio"][0];
-  var_364b8f56 = isDefined(instance.contentgroups[#"hash_2a62eb308e140655"]) ? instance.contentgroups[#"hash_2a62eb308e140655"] : [];
+  s_radio = instance.contentgroups[#"radio"][0];
+  var_364b8f56 = isDefined(instance.contentgroups[#"amplifiers"]) ? instance.contentgroups[#"amplifiers"] : [];
 
   if(!is_true(instance.var_600aeeb9)) {
-    instance.var_74554a28 = zm_utility::function_f5a222a8(#"hash_496b373a4a051d25", var_927876a9.origin, &function_f128aae9);
+    instance.var_74554a28 = zm_utility::function_f5a222a8(#"hash_496b373a4a051d25", s_radio.origin, &function_f128aae9);
   }
 
-  instance.mdl_radio = content_manager::spawn_script_model(var_927876a9, #"rus_radio_05");
+  instance.mdl_radio = content_manager::spawn_script_model(s_radio, #"rus_radio_05");
   instance.mdl_radio fx::play(#"hash_6615a4858493260b", instance.mdl_radio.origin, instance.mdl_radio.angles, #"light_change");
   instance.var_364b8f56 = var_364b8f56;
 
@@ -75,10 +75,10 @@ function function_602f1c7e(instance) {
   instance.s_start = s_start;
   instance.trigger = content_manager::spawn_interact(s_start, &function_1d6f6f32, #"hash_4f14ba599385295e", undefined, 64);
   instance.trigger.instance = instance;
-  var_7f1aa846 = #"hash_2c156700f31bca97";
+  var_7f1aa846 = #"evt_sur_we_rt_radio_idle_lp";
 
   if(instance.content_script_name === "amplify") {
-    var_7f1aa846 = #"hash_47ed2b712bc3aa56";
+    var_7f1aa846 = #"evt_sur_mq1_stp1_radio_idle_lp";
   }
 
   instance.mdl_radio playLoopSound(var_7f1aa846);
@@ -140,17 +140,17 @@ function function_556eed55(trigger) {
 function function_ba971eed(instance) {
   instance endon(#"cleanup");
   instance.mdl_radio stoploopsound();
-  var_a2f3927f = #"hash_7e7c603e2ee4fc35";
+  var_a2f3927f = #"evt_sur_we_rt_radio_activate";
 
   if(instance.content_script_name === "amplify") {
-    var_a2f3927f = #"hash_e5c05e974fad1d6";
+    var_a2f3927f = #"evt_sur_mq1_stp1_radio_activate";
   }
 
   instance.mdl_radio playSound(var_a2f3927f);
   instance.mdl_radio notify(#"light_change");
   instance.mdl_radio fx::play(#"hash_2461617b51991e17", instance.mdl_radio.origin, instance.mdl_radio.angles, #"light_change");
   wait 0.5;
-  instance.mdl_radio playLoopSound(#"hash_6f36df54622394e0");
+  instance.mdl_radio playLoopSound(#"evt_sur_we_rt_radio_feedback_lp");
   instance.mdl_radio thread function_35bafcde(instance, "feedback", "radio");
   instance.mdl_radio notify(#"light_change");
   instance.mdl_radio fx::play(#"hash_6615a4858493260b", instance.mdl_radio.origin, instance.mdl_radio.angles, #"light_change");
@@ -159,11 +159,11 @@ function function_ba971eed(instance) {
   instance flag::set("first_ambush_complete");
   instance.mdl_radio notify(#"light_change");
   instance.mdl_radio fx::play(#"hash_2461617b51991e17", instance.mdl_radio.origin, instance.mdl_radio.angles, #"light_change");
-  instance.mdl_radio playSound(#"hash_4d16320cccbd00fc");
+  instance.mdl_radio playSound(#"evt_sur_we_rt_amplifier_switch");
   instance.var_3875a0bb = randomintrangeinclusive(1, 8);
   instance.mdl_radio playLoopSound(#"hash_15bd285132a5e267" + instance.var_3875a0bb);
   instance.mdl_radio thread function_35bafcde(instance, instance.var_3875a0bb, "radio");
-  var_364b8f56 = isDefined(instance.contentgroups[#"hash_2a62eb308e140655"]) ? instance.contentgroups[#"hash_2a62eb308e140655"] : [];
+  var_364b8f56 = isDefined(instance.contentgroups[#"amplifiers"]) ? instance.contentgroups[#"amplifiers"] : [];
 
   foreach(var_c42af4d6 in var_364b8f56) {
     var_c42af4d6.var_e43750de thread function_42d1d544(instance);
@@ -172,10 +172,10 @@ function function_ba971eed(instance) {
   level thread function_2c1d994f(instance);
   instance flag::wait_till("radio_tuning_success");
   instance.mdl_radio stoploopsound();
-  var_84152d93 = #"hash_7395bde5c5f8e1b9";
+  var_84152d93 = #"evt_sur_we_rt_radio_activate_success";
 
   if(instance.content_script_name === "amplify") {
-    var_84152d93 = #"hash_7306f4c002ca0976";
+    var_84152d93 = #"evt_sur_mq1_stp1_radio_activate_success";
   }
 
   instance.mdl_radio playSound(var_84152d93);
@@ -219,7 +219,7 @@ function function_42d1d544(instance) {
   usetrigger useTriggerRequireLookAt();
   usetrigger setHintString(#"hash_62ab4ca34f5b97d6");
   self.usetrigger = usetrigger;
-  self playLoopSound(#"hash_76a8c4dd7f9da5f3");
+  self playLoopSound(#"evt_sur_we_rt_amplifier_idle_lp");
   self thread function_35bafcde(instance, "idle");
   self fx::play(#"hash_33d3573cec691428", self.origin, self.angles, #"light_change");
 
@@ -234,7 +234,7 @@ function function_42d1d544(instance) {
     usetrigger setHintString("");
     usetrigger setinvisibletoall();
     self stoploopsound();
-    self playSound(#"hash_4d16320cccbd00fc");
+    self playSound(#"evt_sur_we_rt_amplifier_switch");
     var_fb400364 = function_d3b57053(instance);
 
     if(is_true(var_fb400364) && !self.var_cb78e59d) {
@@ -247,10 +247,10 @@ function function_42d1d544(instance) {
       }
 
       self.var_cb78e59d = 1;
-      self playLoopSound(#"hash_3b453b7c6a3141d4");
+      self playLoopSound(#"evt_sur_we_rt_amplifier_feedback_lp");
       self thread function_35bafcde(instance, "feedback");
       level function_334316f8(self.origin, 30);
-      self playSound(#"hash_4d16320cccbd00fc");
+      self playSound(#"evt_sur_we_rt_amplifier_switch");
     } else {
       wait 0.5;
     }
@@ -484,6 +484,6 @@ function function_97d03d85(s_params) {
 }
 
 function function_334316f8(var_cefe6e34, n_time) {
-  level thread namespace_2c949ef8::function_8b6ae460(var_cefe6e34, undefined, 500, 1500, undefined, n_time, 0);
+  level thread namespace_2c949ef8::do_ambush(var_cefe6e34, undefined, 500, 1500, undefined, n_time, 0);
   wait n_time;
 }

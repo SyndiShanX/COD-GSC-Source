@@ -303,7 +303,7 @@ function scavenged_primary_grenade(params) {
   self.challenge_scavengedcount++;
 }
 
-function function_2bc84a5f(var_23c2e47f) {
+function function_2bc84a5f(event_params) {
   if(isPlayer(self)) {
     level thread function_53813a83(self);
   }
@@ -1647,7 +1647,7 @@ function challengekills(data) {
     player function_ea966b4a(killstreak, var_18db7a57, weapon);
   }
 
-  if(data.var_b75b215 === 1) {
+  if(data.explosivekill === 1) {
     player stats::function_dad108fa(#"hash_1793c828270825be", 1);
     player stats::function_dad108fa(#"hash_7adb8f843b82a52a", 1);
     player stats::function_42277145(#"hash_3a26c3202d86e874", 1);
@@ -4182,7 +4182,7 @@ function longdistancekillmp(weapon, meansofdeath, var_ccf15c41) {
   }
 }
 
-function function_ffdecc69(attacker, weapon, weaponclass) {
+function pointblankkill(attacker, weapon, weaponclass) {
   attacker stats::function_e24eec31(weapon, #"hash_56ede06b1821a561", 1);
   attacker stats::function_dad108fa(#"hash_396f347b1d4c7db7", 1);
   attacker stats::function_dad108fa(#"hash_534a88a25d5f0737", 1);
@@ -4320,9 +4320,9 @@ function vehiclekilled(inflictor, attacker, damage, mod, weapon, hitloc) {
       break;
     }
 
-    var_e082d5c = self seatgetweapon(i);
+    vehicleweapon = self seatgetweapon(i);
 
-    if(isDefined(var_e082d5c) && var_e082d5c.isvehicleturret && !var_e082d5c.var_9a789947) {
+    if(isDefined(vehicleweapon) && vehicleweapon.isvehicleturret && !vehicleweapon.var_9a789947) {
       data.var_c8757561 = 1;
       break;
     }
@@ -4331,7 +4331,7 @@ function vehiclekilled(inflictor, attacker, damage, mod, weapon, hitloc) {
   data.isgroundvehicle = self.vehicleclass === "4 wheel" || self.vehicleclass === "motorcycle" || self.vehicleclass === "tank";
   data.var_a14dfd03 = isairborne(self);
   function_94d6aade(data);
-  data.attacker notify(#"hash_56b121e50d70ac18");
+  data.attacker notify(#"vehiclekilledchallengesprocessed");
 }
 
 function function_94d6aade(data) {

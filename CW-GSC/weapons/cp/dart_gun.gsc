@@ -25,7 +25,7 @@ function private function_bc51baa3(eattacker, einflictor, weapon, meansofdeath, 
   self notify(#"dart_gunned");
 
   if(isPlayer(damage)) {
-    bb::function_cd497743("dart_gunned", damage);
+    bb::logplayermapnotification("dart_gunned", damage);
   }
 
   self endon(#"death");

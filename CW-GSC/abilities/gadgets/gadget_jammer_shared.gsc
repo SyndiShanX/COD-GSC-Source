@@ -53,7 +53,7 @@ function init_shared() {
   level.var_578f7c6d.var_18b294e4 = int(level.var_578f7c6d.customsettings.var_647be42c * 1000);
   level.var_578f7c6d.var_b164e007 = [];
   level.var_578f7c6d.var_14cb9b30 = [];
-  level.var_578f7c6d.var_5c3f49c1 = [];
+  level.var_578f7c6d.hiddenplayers = [];
   setupcallbacks();
   deployable::register_deployable(level.var_578f7c6d.weapon);
 }
@@ -175,7 +175,7 @@ function private function_7d81a4ff(watcher, player) {
   self setweapon(level.var_578f7c6d.weapon);
   self setteam(player getteam());
   self.team = player getteam();
-  self function_619a5c20();
+  self pingable();
   self.delete_on_death = 1;
   self.var_48d842c3 = 1;
   self clientfield::set("enemyequip", 1);
@@ -202,10 +202,10 @@ function function_9da52774() {
     level.var_578f7c6d.var_14cb9b30[key] = 0;
   }
 
-  var_5306fc83 = getarraykeys(level.var_578f7c6d.var_5c3f49c1);
+  var_5306fc83 = getarraykeys(level.var_578f7c6d.hiddenplayers);
 
   foreach(key in var_5306fc83) {
-    level.var_578f7c6d.var_5c3f49c1[key] = 0;
+    level.var_578f7c6d.hiddenplayers[key] = 0;
   }
 
   foreach(jammer in level.var_578f7c6d.var_b164e007) {
@@ -254,11 +254,11 @@ function function_9da52774() {
         if(function_2fdf3111(entity, jammer.owner)) {
           entitynumber = entity getentitynumber();
 
-          if(!isDefined(level.var_578f7c6d.var_5c3f49c1[entitynumber])) {
-            level.var_578f7c6d.var_5c3f49c1[entitynumber] = 0;
+          if(!isDefined(level.var_578f7c6d.hiddenplayers[entitynumber])) {
+            level.var_578f7c6d.hiddenplayers[entitynumber] = 0;
           }
 
-          level.var_578f7c6d.var_5c3f49c1[entitynumber]++;
+          level.var_578f7c6d.hiddenplayers[entitynumber]++;
         }
       }
     }
@@ -314,7 +314,7 @@ function function_af165064() {
   }
 
   arrayremovevalue(level.var_578f7c6d.var_14cb9b30, undefined, 1);
-  var_5306fc83 = getarraykeys(level.var_578f7c6d.var_5c3f49c1);
+  var_5306fc83 = getarraykeys(level.var_578f7c6d.hiddenplayers);
 
   foreach(key in var_5306fc83) {
     entity = getentbynum(key);
@@ -323,11 +323,11 @@ function function_af165064() {
       continue;
     }
 
-    var_f7bd3349 = level.var_578f7c6d.var_5c3f49c1[key];
+    var_f7bd3349 = level.var_578f7c6d.hiddenplayers[key];
     entity clientfield::set("isHiddenByFriendlyJammer", var_f7bd3349 < 0 ? 0 : 1);
   }
 
-  arrayremovevalue(level.var_578f7c6d.var_5c3f49c1, undefined, 1);
+  arrayremovevalue(level.var_578f7c6d.hiddenplayers, undefined, 1);
 }
 
 function private function_3500dad3() {

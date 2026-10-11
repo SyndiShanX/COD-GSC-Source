@@ -60,14 +60,14 @@ function function_b0e9f5e8(localclientnum) {
 function function_99d4cf57(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
     forcestreamxmodel(#"hash_b7cea188cbd2e02");
-    forcestreamxmodel(#"hash_49275da2ee5d6c3f");
+    forcestreamxmodel(#"c_t9_zmb_forsaken_head");
     forcestreamxmodel(#"c_t9_zmb_berlin_sam_maxis_body");
     forcestreamxmodel(#"c_t9_zmb_berlin_sam_maxis_head");
     return;
   }
 
   stopforcestreamingxmodel(#"hash_b7cea188cbd2e02");
-  stopforcestreamingxmodel(#"hash_49275da2ee5d6c3f");
+  stopforcestreamingxmodel(#"c_t9_zmb_forsaken_head");
   stopforcestreamingxmodel(#"c_t9_zmb_berlin_sam_maxis_body");
   stopforcestreamingxmodel(#"c_t9_zmb_berlin_sam_maxis_head");
 }
@@ -110,7 +110,7 @@ function function_82b63a0e(localclientnum, oldval, newval, bnewent, binitialsnap
       self.var_59419da4[self.var_59419da4.size] = util::playFXOnTag(fieldname, #"hash_5340c6af5d451fad", self, "tag_origin");
     }
 
-    soundloopemitter(#"hash_75e463968d66b62f", (8399, 1766, -387));
+    soundloopemitter(#"zmb_mq_boss_idle_lp", (8399, 1766, -387));
     return;
   }
 
@@ -122,7 +122,7 @@ function function_82b63a0e(localclientnum, oldval, newval, bnewent, binitialsnap
     self.var_59419da4 = undefined;
   }
 
-  soundstoploopemitter(#"hash_75e463968d66b62f", (8399, 1766, -387));
+  soundstoploopemitter(#"zmb_mq_boss_idle_lp", (8399, 1766, -387));
 }
 
 function function_221e0766(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -397,8 +397,8 @@ function function_864952a1(localclientnum, oldval, newval, bnewent, binitialsnap
     }
 
     if(!isDefined(self.var_1fe1c04)) {
-      self playSound(fieldname, #"hash_380c713d04ca5ffc");
-      self.var_1fe1c04 = self playLoopSound(#"hash_2c9aea267802ab5c");
+      self playSound(fieldname, #"zmb_mq_boss_soul_start");
+      self.var_1fe1c04 = self playLoopSound(#"zmb_mq_boss_soul_lp");
     }
 
     return;
@@ -410,7 +410,7 @@ function function_864952a1(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(isDefined(self.var_1fe1c04)) {
-    self playSound(fieldname, #"hash_10dece5dc9da6845");
+    self playSound(fieldname, #"zmb_mq_boss_soul_end");
     self stoploopsound(self.var_1fe1c04);
     self.var_1fe1c04 = undefined;
   }
@@ -575,14 +575,14 @@ function function_cd3073f5(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 }
 
-function function_294b258e(localclientnum, var_1280faf3) {
-  if(!isDefined(var_1280faf3)) {
+function function_294b258e(localclientnum, vh_turret) {
+  if(!isDefined(vh_turret)) {
     return;
   }
 
   level.var_75a7d6 notify(#"hash_39be4308f05abd9c");
   level.var_75a7d6 endon(#"hash_39be4308f05abd9c");
-  var_1280faf3 endon(#"death");
+  vh_turret endon(#"death");
 
   foreach(str_tag in ["tag_muzzle_flash_le", "tag_muzzle_flash_ri"]) {
     var_969f45da = undefined;
@@ -592,8 +592,8 @@ function function_294b258e(localclientnum, var_1280faf3) {
       mdl_beam = undefined;
 
       while(true) {
-        v_angles = var_1280faf3 gettagangles(str_tag);
-        v_origin = var_1280faf3 gettagorigin(str_tag);
+        v_angles = vh_turret gettagangles(str_tag);
+        v_origin = vh_turret gettagorigin(str_tag);
 
         if(i > 0) {
           v_origin += anglesToForward(v_angles) * 2048;
@@ -608,17 +608,17 @@ function function_294b258e(localclientnum, var_1280faf3) {
         waitframe(1);
       }
 
-      if(!isDefined(var_1280faf3.var_e5a9ba3)) {
-        var_1280faf3.var_e5a9ba3 = [];
-      } else if(!isarray(var_1280faf3.var_e5a9ba3)) {
-        var_1280faf3.var_e5a9ba3 = array(var_1280faf3.var_e5a9ba3);
+      if(!isDefined(vh_turret.var_e5a9ba3)) {
+        vh_turret.var_e5a9ba3 = [];
+      } else if(!isarray(vh_turret.var_e5a9ba3)) {
+        vh_turret.var_e5a9ba3 = array(vh_turret.var_e5a9ba3);
       }
 
-      var_1280faf3.var_e5a9ba3[var_1280faf3.var_e5a9ba3.size] = mdl_beam;
+      vh_turret.var_e5a9ba3[vh_turret.var_e5a9ba3.size] = mdl_beam;
 
       if(i <= 0) {
         var_969f45da = mdl_beam;
-        var_969f45da linkTo(var_1280faf3, str_tag);
+        var_969f45da linkTo(vh_turret, str_tag);
         continue;
       }
 
@@ -632,8 +632,8 @@ function function_294b258e(localclientnum, var_1280faf3) {
     level beam::launch(var_969f45da, "tag_origin", var_96ce3194, "tag_origin", "beam9_zm_laser_cannon_electrical", 1);
   }
 
-  var_1280faf3 playSound(localclientnum, #"hash_3aaa4313132aa95f");
-  var_1280faf3.var_d1c055ab = var_1280faf3 playLoopSound(#"hash_71b2b4f6127ebf2b");
+  vh_turret playSound(localclientnum, #"hash_3aaa4313132aa95f");
+  vh_turret.var_d1c055ab = vh_turret playLoopSound(#"hash_71b2b4f6127ebf2b");
 }
 
 function function_d8ef7c9f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -652,7 +652,7 @@ function function_ec6e5c0f(var_ce34262e, localclientnum, newval, var_6613bb76, v
 
   if(newval <= 0) {
     util::playFXOnTag(localclientnum, #"hash_6d871318982dbd15", var_ce34262e, "tag_origin");
-    var_ce34262e playSound(localclientnum, #"hash_74835763c1be56ff");
+    var_ce34262e playSound(localclientnum, #"zmb_mq_boss_weakpoint_destroy");
     return;
   }
 
@@ -662,7 +662,7 @@ function function_ec6e5c0f(var_ce34262e, localclientnum, newval, var_6613bb76, v
     if(newval >= 2) {
       str_fx = var_8fc86e2f;
       util::playFXOnTag(localclientnum, #"hash_6ebb188a3ac0122b", var_ce34262e, "tag_origin");
-      var_ce34262e playSound(localclientnum, #"hash_19df6934105bd84");
+      var_ce34262e playSound(localclientnum, #"zmb_mq_boss_weakpoint_shatter");
     }
 
     var_ce34262e.var_1734c720 = util::playFXOnTag(localclientnum, str_fx, var_ce34262e, "tag_origin");
@@ -771,8 +771,8 @@ function function_6a8fde9(localclientnum, oldval, newval, bnewent, binitialsnap,
     if(!isDefined(self.var_b2aafb65)) {
       playFX(fieldname, #"hash_380f0bd424656b20", self.origin, anglesToForward(self.angles), anglestoup(self.angles));
       self.var_b2aafb65 = playFX(fieldname, #"hash_1b10bcd57cf5d1c3", self.origin, anglesToForward(self.angles), anglestoup(self.angles));
-      self playSound(fieldname, #"hash_6793481a4cd5a49a");
-      self.var_c3df0b27 = self playLoopSound(#"hash_7797e47cd5880d2e");
+      self playSound(fieldname, #"zmb_mq_boss_intermission_teleporter_start");
+      self.var_c3df0b27 = self playLoopSound(#"zmb_mq_boss_intermission_teleporter_lp");
     }
 
     return;
@@ -864,7 +864,7 @@ function function_3d6afbe8(localclientnum, oldval, newval, bnewent, binitialsnap
       self playrumblelooponentity(fieldname, #"hash_4ae42716eaebc67e");
 
       if(!isDefined(self.var_b0b9013f)) {
-        self.var_b0b9013f = self playLoopSound(#"hash_288ef8a977bff14e");
+        self.var_b0b9013f = self playLoopSound(#"zmb_mq_boss_eyebeam_impact_lp");
         soundloopemitter("zmb_mq_boss_eyebeam_loop", level.var_75a7d6.mdl_body.origin + (0, 0, 200));
       }
 
@@ -920,8 +920,8 @@ function function_7ebf8c0a(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(isDefined(level.var_269acd85)) {
-    foreach(var_7b926b32 in level.var_269acd85) {
-      soundstoplineemitter("zmb_mq_boss_endsequence_beam_lp", var_7b926b32[0], var_7b926b32[1]);
+    foreach(sndarray in level.var_269acd85) {
+      soundstoplineemitter("zmb_mq_boss_endsequence_beam_lp", sndarray[0], sndarray[1]);
     }
   }
 
@@ -1028,7 +1028,7 @@ function function_1b6ef5b3(localclientnum, start_point, end_point) {
   array = level.var_269acd85;
   array[array.size] = [start_point, end_point];
   var_41a0028b = array[array.size - 1];
-  playSound(localclientnum, #"hash_48072d7004fcd081", var_41a0028b[0]);
+  playSound(localclientnum, #"zmb_mq_boss_endsequence_beam_start", var_41a0028b[0]);
   soundlineemitter("zmb_mq_boss_endsequence_beam_lp", var_41a0028b[0], var_41a0028b[1]);
 }
 
@@ -1047,12 +1047,12 @@ function function_381bdf6a(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(bwastimejump) {
-    playSound(fieldname, #"hash_2a56b00d8e86a0f4", (0, 0, 0));
+    playSound(fieldname, #"zmb_mq_boss_phase_player_enter", (0, 0, 0));
     soundloopemitter("zmb_mq_boss_phase_player_lp", (7, 7, 7));
     return;
   }
 
-  playSound(fieldname, #"hash_1ea3bc9a4a37d9a", (0, 0, 0));
+  playSound(fieldname, #"zmb_mq_boss_phase_player_exit", (0, 0, 0));
   soundstoploopemitter("zmb_mq_boss_phase_player_lp", (7, 7, 7));
 }
 

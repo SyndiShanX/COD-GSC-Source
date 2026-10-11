@@ -2452,12 +2452,12 @@ function respawnplayer() {
 function waittillcanspawnclient() {
   self endon(#"started_spawnplayer", #"disconnect");
   level endon(#"game_ended");
-  var_e74281a8 = self.team;
+  previousteam = self.team;
 
   for(;;) {
     wait 0.05;
 
-    if(self.var_4e6d7877 === 1 || self.team !== var_e74281a8) {
+    if(self.var_4e6d7877 === 1 || self.team !== previousteam) {
       self.var_4e6d7877 = 1;
       return;
     }

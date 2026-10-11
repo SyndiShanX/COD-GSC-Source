@@ -36,7 +36,7 @@ function starting(str_skipto) {
   level thread scene::init_streamer("scene_tkd_hit1_intro_fly_in_trucks", getPlayers());
   level.var_aece851d = [];
   flag::set("heli_door_opening");
-  namespace_42da7c51::function_ed760ecb("woods");
+  namespace_42da7c51::hero_setup("woods");
 }
 
 function main(str_skipto, b_starting) {
@@ -46,7 +46,7 @@ function main(str_skipto, b_starting) {
   level flag::wait_till("heli_convoy_aslt_complete");
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 }
 
@@ -75,7 +75,7 @@ function function_46693791() {
   objectives::follow("woods_hit1", level.woods);
   level.var_95a74232 = 1;
   aiarray = getaiarray("intro_enemy_truck_guys", "script_noteworthy");
-  level thread namespace_42da7c51::function_d6fedf97(aiarray, int(ceil(aiarray.size * 0.75)), "convoy_retreat");
+  level thread namespace_42da7c51::ai_array_killcount_flag_set(aiarray, int(ceil(aiarray.size * 0.75)), "convoy_retreat");
   level thread function_67924661(aiarray);
   level flag::wait_till("convoy_retreat");
   level thread savegame::checkpoint_save();
@@ -129,7 +129,7 @@ function function_a7dc18f3() {
   level flag::wait_till("fly_in_scene_finished");
   level.var_9a3944f4 thread namespace_42da7c51::function_76075c60();
   level thread function_f4ac4681();
-  level battlechatter::function_2ab9360b(1);
+  level battlechatter::bc_allow(1);
   level.var_9a3944f4 vehicle_ai::set_state("combat");
 }
 

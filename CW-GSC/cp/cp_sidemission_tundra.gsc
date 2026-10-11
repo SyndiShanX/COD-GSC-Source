@@ -30,7 +30,7 @@
 function event_handler[level_init] main(eventstruct) {
   setclearanceceiling(16);
   init_clientfields();
-  function_37dfd679();
+  init_skiptos();
   setDvar(#"hkai_pathfinditerationlimit", 5000);
   load::main();
   init_callbacks();
@@ -42,11 +42,11 @@ function event_handler[level_init] main(eventstruct) {
   vehicle::add_spawn_function_by_type("vehicle_t9_mil_ru_truck_light_cp_canvas_top", &util::delay, 1, undefined, &setteam, "axis");
 }
 
-function function_37dfd679() {
-  skipto::function_eb91535d("tundra_intro", &namespace_4e717b5b::intro_main, &namespace_4e717b5b::function_ae18fec1, "tundra_intro", &namespace_4e717b5b::cleanup);
+function init_skiptos() {
+  skipto::add_saved("tundra_intro", &namespace_4e717b5b::intro_main, &namespace_4e717b5b::function_ae18fec1, "tundra_intro", &namespace_4e717b5b::cleanup);
   skipto::add_dev("dev_vip_active", &namespace_da32b76a::function_baff9422, &namespace_da32b76a::function_c17355e, "dev_vip_active", undefined, undefined, "tundra_combat");
-  skipto::function_eb91535d("tundra_combat", &namespace_da32b76a::function_bf8d2448, &namespace_da32b76a::function_c17355e, "tundra_combat", &namespace_da32b76a::cleanup);
-  skipto::function_eb91535d("tundra_outro", &namespace_19fc4094::outro_main, &namespace_19fc4094::function_4b8cec86, "tundra_outro", &namespace_19fc4094::cleanup);
+  skipto::add_saved("tundra_combat", &namespace_da32b76a::function_bf8d2448, &namespace_da32b76a::function_c17355e, "tundra_combat", &namespace_da32b76a::cleanup);
+  skipto::add_saved("tundra_outro", &namespace_19fc4094::outro_main, &namespace_19fc4094::function_4b8cec86, "tundra_outro", &namespace_19fc4094::cleanup);
 }
 
 function init_clientfields() {}
@@ -58,7 +58,7 @@ function init_callbacks() {
 
 function function_283abac2() {
   if(skipto::function_c0f982ff()[0] === "tundra_intro") {
-    level.var_a7b99722 = "finish_tundra_initial_black";
+    level.str_level_start_flag = "finish_tundra_initial_black";
   }
 
   self setcharacterbodytype(1);
@@ -76,12 +76,12 @@ function function_2b05a144() {
     self takeweapon(e_w);
   }
 
-  level.var_f0935a68 = getweapon(#"ar_standard_t9", "acog", "heavy", "grip", "extclip", "steadyaim");
+  level.w_ar = getweapon(#"ar_standard_t9", "acog", "heavy", "grip", "extclip", "steadyaim");
   var_2105d8b1 = getweapon(#"sniper_quickscope_t9", "heavy", "fastreload", "compensator");
-  self giveweapon(level.var_f0935a68);
+  self giveweapon(level.w_ar);
   self giveweapon(var_2105d8b1);
-  self switchtoweapon(level.var_f0935a68);
-  self givemaxammo(level.var_f0935a68);
+  self switchtoweapon(level.w_ar);
+  self givemaxammo(level.w_ar);
   self givemaxammo(var_2105d8b1);
   self thread function_f32834b0();
   self thread function_1e41c00b();

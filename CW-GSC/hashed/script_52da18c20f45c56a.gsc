@@ -44,15 +44,15 @@ function function_30b535ff(inuse) {
   return self.var_30b535ff;
 }
 
-function function_77af90aa(var_cf230c0, attach_tag) {
+function function_77af90aa(attach_model, attach_tag) {
   self detachall();
 
-  if(isDefined(var_cf230c0)) {
+  if(isDefined(attach_model)) {
     assert(isDefined(attach_tag));
-    assert(var_cf230c0.size == attach_tag.size);
+    assert(attach_model.size == attach_tag.size);
 
-    for(i = 0; i < var_cf230c0.size; i++) {
-      self attach(var_cf230c0[i], attach_tag[i], 1);
+    for(i = 0; i < attach_model.size; i++) {
+      self attach(attach_model[i], attach_tag[i], 1);
     }
   }
 }
@@ -134,7 +134,7 @@ function function_e46cbbf7() {
   return level.player_actions.var_671420ae;
 }
 
-function function_31df4786(var_165b239b = 1, allow_ads = 1) {
+function function_31df4786(allow_weapons = 1, allow_ads = 1) {
   assert(!isDefined(self.var_31df4786));
   self.var_31df4786 = 1;
   self val::set(#"hash_681a4eb9df49482f", "disable_weapon_cycling", 1);
@@ -151,7 +151,7 @@ function function_31df4786(var_165b239b = 1, allow_ads = 1) {
   self val::set(#"hash_681a4eb9df49482f", "allow_mantle", 0);
   self val::set(#"hash_681a4eb9df49482f", "allow_melee_victim", 0);
 
-  if(!var_165b239b) {
+  if(!allow_weapons) {
     self val::set(#"hash_681a4eb9df49482f", "disable_weapons", 1);
   }
 
@@ -169,13 +169,13 @@ function function_9123bbf0() {
   self.var_31df4786 = undefined;
 }
 
-function function_2795d678(encumbered, var_165b239b, var_37e68004, allow_ads, var_6a87e928) {
+function function_2795d678(encumbered, allow_weapons, var_37e68004, allow_ads, cinematic_motion) {
   player = self;
   assert(isPlayer(player));
   pistol = undefined;
 
-  if(!isDefined(var_165b239b)) {
-    var_165b239b = 1;
+  if(!isDefined(allow_weapons)) {
+    allow_weapons = 1;
   }
 
   if(!isDefined(var_37e68004)) {
@@ -189,7 +189,7 @@ function function_2795d678(encumbered, var_165b239b, var_37e68004, allow_ads, va
   if(encumbered) {
     if(!isDefined(player.var_74c52b3d)) {
       self.var_74c52b3d = spawnStruct();
-      self function_31df4786(var_165b239b, allow_ads);
+      self function_31df4786(allow_weapons, allow_ads);
       player.var_74c52b3d.movespeedscale = player getmovespeedscale();
       player.var_74c52b3d.var_c9e720e2 = getDvar(#"bg_viewbobamplitudestanding");
       player.var_74c52b3d.var_c9e720e2 = string(player.var_74c52b3d.var_c9e720e2[0]) + " " + string(player.var_74c52b3d.var_c9e720e2[1]);
@@ -197,9 +197,9 @@ function function_2795d678(encumbered, var_165b239b, var_37e68004, allow_ads, va
       player.var_74c52b3d.var_945795a5 = getdvarint(#"bg_bobtranstime");
       var_b56db8c = function_e46cbbf7();
       player setmovespeedscale(var_b56db8c);
-      player thread function_854fc491(var_6a87e928);
+      player thread function_854fc491(cinematic_motion);
 
-      if(var_165b239b) {
+      if(allow_weapons) {
         if(var_37e68004) {
           pistol = player function_d338e637();
 
@@ -255,35 +255,35 @@ function function_2795d678(encumbered, var_165b239b, var_37e68004, allow_ads, va
   player.var_74c52b3d = undefined;
 }
 
-function function_854fc491(var_6a87e928) {
+function function_854fc491(cinematic_motion) {
   player = self;
   assert(isPlayer(player));
   player endon(#"death");
   self notify("74e9614dd06b695a");
   self endon("74e9614dd06b695a");
 
-  if(isDefined(var_6a87e928)) {
-    if(!isDefined(var_6a87e928)) {
-      var_6a87e928 = [];
-    } else if(!isarray(var_6a87e928)) {
-      var_6a87e928 = array(var_6a87e928);
+  if(isDefined(cinematic_motion)) {
+    if(!isDefined(cinematic_motion)) {
+      cinematic_motion = [];
+    } else if(!isarray(cinematic_motion)) {
+      cinematic_motion = array(cinematic_motion);
     }
   }
 
-  if(isDefined(var_6a87e928)) {
+  if(isDefined(cinematic_motion)) {
     lastmode = -1;
 
     while(true) {
       newmode = lastmode;
 
-      if(player function_29fd0abd() && var_6a87e928.size > 1) {
+      if(player function_29fd0abd() && cinematic_motion.size > 1) {
         newmode = 1;
       } else {
         newmode = 0;
       }
 
       if(lastmode != newmode) {
-        player util::function_5f1df718(var_6a87e928[newmode]);
+        player util::function_5f1df718(cinematic_motion[newmode]);
       }
 
       lastmode = newmode;
@@ -369,7 +369,7 @@ function function_b82cae8f(linktype, var_5596253c = 1) {
   }
 }
 
-function function_bda1ed48() {
+function is_walking() {
   var_9d19b745 = 400;
   assert(isPlayer(self));
   return lengthsquared(self getvelocity()) > var_9d19b745;
@@ -480,7 +480,7 @@ function function_b5d8286c(action, scene_root, anim_ents, anim_name, victim, pha
     ent.var_3f4de57b = undefined;
   }
 
-  return var_fc8116b2.var_da0c6cb;
+  return var_fc8116b2.overridden;
 }
 
 function function_aee5f6a6(var_b56433f8) {
@@ -547,20 +547,20 @@ function function_3f4de57b(animnameplay, blendtime = isDefined(level.player_acti
   }
 }
 
-function function_d621e6d6(var_eea30707, blendtime) {
-  if(isDefined(self.var_d621e6d6) && self.var_d621e6d6 == level.player_actions.anims[self.animname][var_eea30707]) {
+function function_d621e6d6(animloopname, blendtime) {
+  if(isDefined(self.var_d621e6d6) && self.var_d621e6d6 == level.player_actions.anims[self.animname][animloopname]) {
     return;
   }
 
   if(!isDefined(blendtime)) {
-    blendtime = isDefined(level.player_actions.blend[self.animname][var_eea30707]) ? level.player_actions.blend[self.animname][var_eea30707] : 0.2;
+    blendtime = isDefined(level.player_actions.blend[self.animname][animloopname]) ? level.player_actions.blend[self.animname][animloopname] : 0.2;
   }
 
   self function_1e132b9f(blendtime);
   self endon(#"death");
   self endon(#"entitydeleted");
   self endon(#"hash_23e6132220ac0e4d");
-  animloop = level.player_actions.anims[self.animname][var_eea30707];
+  animloop = level.player_actions.anims[self.animname][animloopname];
   self thread animation::play(animloop, self.origin, self.angles, 1, blendtime, blendtime);
   self.var_d621e6d6 = animloop;
 
@@ -580,7 +580,7 @@ function function_47ffa6b8(var_b56433f8) {
 
   suffix += "_loop";
 
-  if(self function_bda1ed48()) {
+  if(self is_walking()) {
     suffix += "_walk";
   }
 
@@ -603,7 +603,7 @@ function function_462c34d0(action, scene_root, anim_name, victim, phase) {
   result = spawnStruct();
   result.anim_name = anim_name;
   result.scene_root = scene_root;
-  result.var_da0c6cb = 0;
+  result.overridden = 0;
   result.blend_time = 0.2;
 
   if(isDefined(var_b3d30f5f)) {
@@ -614,7 +614,7 @@ function function_462c34d0(action, scene_root, anim_name, victim, phase) {
       result.var_5e5653b2 = 1;
     }
 
-    result.var_da0c6cb = 1;
+    result.overridden = 1;
   }
 
   var_386b7517 = self.var_6639d45b.animname;
@@ -716,25 +716,25 @@ function function_98f117ad(var_36a368e3, type = "") {
   return var_36a368e3 + suffix + type;
 }
 
-function function_35d0bd11(var_4b5540a0) {
+function function_35d0bd11(in_bodyshield) {
   assert(isai(self));
   self flag::clear("stealth_enabled");
 
-  if(is_true(var_4b5540a0)) {
+  if(is_true(in_bodyshield)) {
     self.ignoreall = 1;
     self.ignoreme = 1;
-    self battlechatter::function_2ab9360b(0);
+    self battlechatter::bc_allow(0);
     self notsolid();
     self clearenemy();
     self setgoal(self.origin);
     self thread function_91639a4c(1);
     self animcustom(&function_e9aef609);
-    self.var_4b5540a0 = 1;
+    self.in_bodyshield = 1;
     return;
   }
 
   self.ignoreme = 0;
-  self battlechatter::function_2ab9360b(1);
+  self battlechatter::bc_allow(1);
   self util::delay(float(function_60d95f53()) / 1000, undefined, &solid);
   self setgoal(self.origin);
   self thread function_91639a4c(0);
@@ -743,7 +743,7 @@ function function_35d0bd11(var_4b5540a0) {
     self util::stop_magic_bullet_shield();
   }
 
-  self.var_4b5540a0 = undefined;
+  self.in_bodyshield = undefined;
 }
 
 function function_e9aef609() {
@@ -990,7 +990,7 @@ function function_71180c30(isolated) {
       victim[[victim.var_d26a48de]]();
     }
 
-    victim.var_419b4b2.var_c2eaacf4 = victim spawner::function_461ce3e9();
+    victim.var_419b4b2.goto_node = victim spawner::function_461ce3e9();
     victim notify(#"killanimscript");
 
     if(!is_true(victim.delayeddeath)) {
@@ -1024,8 +1024,8 @@ function function_71180c30(isolated) {
       victim thread util::stop_magic_bullet_shield();
     }
 
-    if(isDefined(victim.var_419b4b2.var_c2eaacf4)) {
-      victim spawner::go_to_node(victim.var_419b4b2.var_c2eaacf4);
+    if(isDefined(victim.var_419b4b2.goto_node)) {
+      victim spawner::go_to_node(victim.var_419b4b2.goto_node);
     }
 
     victim.var_419b4b2 = undefined;

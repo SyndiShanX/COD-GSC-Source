@@ -34,7 +34,7 @@ class class_ab111f2c: cluielem {
     cluielem::add_clientfield("display_noblink", 1, 1, "counter", var_101d8535);
   }
 
-  function function_a16f86c1(localclientnum, value) {
+  function set_hint_text(localclientnum, value) {
     set_data(localclientnum, "hint_text", value);
   }
 
@@ -92,8 +92,8 @@ function is_open(localclientnum) {
   return [[self]] - > is_open(localclientnum);
 }
 
-function function_a16f86c1(localclientnum, value) {
-  [[self]] - > function_a16f86c1(localclientnum, value);
+function set_hint_text(localclientnum, value) {
+  [[self]] - > set_hint_text(localclientnum, value);
 }
 
 function function_64d95cad(localclientnum) {

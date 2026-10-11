@@ -18,7 +18,7 @@
 #namespace namespace_c1cfab6c;
 
 function private event_handler[level_preinit] function_b489bb7b(eventstruct) {
-  snd::function_5e69f468(&_objective);
+  snd::skipto_init(&_objective);
 }
 
 function private event_handler[event_cc819519] function_686b88aa(eventstruct) {
@@ -102,10 +102,10 @@ function function_eb09e7df() {
   cleared = -1;
 
   while(cleared < 3) {
-    var_6fd94a1c = function_53e12236();
+    test_cleared = function_53e12236();
 
-    if(cleared != var_6fd94a1c) {
-      cleared = var_6fd94a1c;
+    if(cleared != test_cleared) {
+      cleared = test_cleared;
       wait 3;
       var_b12adf3 = function_95410ce0();
       music(var_b12adf3);
@@ -163,7 +163,7 @@ function function_241c95b4() {
   level waittill(#"hash_2f4020343cecc6f0");
   thread function_c0f7776d();
   var_ec619483 = snd::play("veh_evac_chopper_jetwhine_lp", level.vehicle_evac_heli);
-  snd::function_f4f3a2a(var_ec619483, level.vehicle_evac_heli);
+  snd::stop_on_ent_death(var_ec619483, level.vehicle_evac_heli);
 }
 
 function function_c0f7776d() {

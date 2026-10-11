@@ -36,7 +36,7 @@ function private preinit() {
   callback::add_callback(#"hash_7c6da2f2c9ef947a", &function_30a3d1d2);
   globallogic_score::register_kill_callback(weapon, &function_dedc78a9);
   globallogic_score::function_c1e9b86b(weapon, &function_24e13681);
-  weaponobjects::function_e6400478(weapon_name, &function_713a08b, 1);
+  weaponobjects::function_e6400478(weapon_name, &createdecoywatcher, 1);
 
   if(isDefined(level.var_a5dacbea)) {
     [[level.var_a5dacbea]](weapon, &function_6ab1797f);
@@ -47,7 +47,7 @@ function private preinit() {
   }
 }
 
-function private function_713a08b(watcher) {
+function private createdecoywatcher(watcher) {
   watcher.ignoredirection = 1;
   watcher.ondestroyed = &function_81619d12;
   watcher.ondamage = &function_acc36c55;
@@ -181,7 +181,7 @@ function private function_7dfb4daa(decoygrenade) {
 
   decoygrenade.var_20a0f018 clientfield::set("isJammed", 0);
   decoygrenade.var_20a0f018 clientfield::set("" + #"hash_7c2ee5bfa7cad803", 1);
-  decoygrenade.var_20a0f018 playLoopSound(#"hash_6e07f5906d35471");
+  decoygrenade.var_20a0f018 playLoopSound(#"wpn_nightingale_static_lp");
   decoygrenade thread scene::play(#"scene_grenade_decoy_footsteps", decoygrenade.var_20a0f018);
 }
 
@@ -246,7 +246,7 @@ function function_db24f032() {
   } else {
     self thread scene::play(#"scene_grenade_decoy_footsteps", decoy);
     decoy clientfield::set("" + #"hash_7c2ee5bfa7cad803", 1);
-    decoy playLoopSound(#"hash_6e07f5906d35471");
+    decoy playLoopSound(#"wpn_nightingale_static_lp");
   }
 
   self notify(#"deployed");

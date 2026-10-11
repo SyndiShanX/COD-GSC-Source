@@ -119,7 +119,7 @@ function function_8bdff396(watcher, player) {
   self.weapon = getweapon(#"listening_device");
   self.var_48d842c3 = 1;
   self.var_515d6dda = 1;
-  self function_619a5c20();
+  self pingable();
 
   if(!isDefined(level.var_b7bd6b6d)) {
     level.var_b7bd6b6d = [];

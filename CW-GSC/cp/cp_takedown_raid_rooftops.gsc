@@ -50,12 +50,12 @@ function starting(str_skipto) {
   level.adler forceteleport(var_fcbd93e0.origin, var_fcbd93e0.angles);
   level.woods forceteleport(var_1100faeb.origin, var_1100faeb.angles);
   player = getPlayers()[0];
-  var_5ca6956f = getweapon(#"ar_accurate_t9", "steadyaim", "reflex");
+  w_smg = getweapon(#"ar_accurate_t9", "steadyaim", "reflex");
   var_a3379ef0 = getweapon(#"ar_standard_t9", "steadyaim", "reflex");
   level.woods setweapon(var_a3379ef0);
-  level.adler setweapon(var_5ca6956f);
-  player giveweapon(var_5ca6956f);
-  player switchtoweapon(var_5ca6956f);
+  level.adler setweapon(w_smg);
+  player giveweapon(w_smg);
+  player switchtoweapon(w_smg);
   var_d1a2cc43 = getspawnerarray("qasim_runner", "script_noteworthy");
 
   foreach(spawner in var_d1a2cc43) {
@@ -85,7 +85,7 @@ function main(str_skipto, b_starting) {
     var_efac709f = getEnt("player_breach_clip", "targetname");
     var_efac709f connectpaths();
     var_efac709f delete();
-    level battlechatter::function_2ab9360b(1);
+    level battlechatter::bc_allow(1);
   }
 
   level thread savegame::checkpoint_save(1);
@@ -95,14 +95,14 @@ function main(str_skipto, b_starting) {
   var_6097a10b = getspawnerarray("qasim_vault", "targetname");
   var_6097a10b[0] spawner::add_spawn_function(&function_a1d9cae0);
   level thread takedown_tutorial();
-  level thread function_fb0dffdf();
+  level thread rooftop_combat();
   level thread rooftop_vo();
   thread namespace_a052577e::function_38a8c5b0();
   self util::blend_movespeedscale(0.85, 1);
   level flag::wait_till("raid_roof_complete");
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
@@ -124,12 +124,12 @@ function takedown_tutorial() {
 
   if(isDefined(victim)) {
     victim.takedamage = 1;
-    victim.var_ab101371 = #"hash_10e2d6b9f9bef6a3";
+    victim.takedown_scene = #"hash_10e2d6b9f9bef6a3";
     player.takedown.victim[#"takedown"] = victim;
-    player.takedown.scene[#"takedown"] = victim.var_ab101371;
+    player.takedown.scene[#"takedown"] = victim.takedown_scene;
     player.takedown.victim[#"body_shield"] = victim;
     action = level.player_actions.actions[#"takedown"];
-    player namespace_9c83b58d::function_7a061b23(0, "takedown");
+    player namespace_9c83b58d::takedown_allow_melee(0, "takedown");
     player actions::function_8488e359("melee");
   }
 
@@ -180,7 +180,7 @@ function function_c39dde0e() {
   }
 }
 
-function function_fb0dffdf() {
+function rooftop_combat() {
   player = getPlayers()[0];
   player endon(#"death");
   level scene::init("scene_tkd_hit2_roof_chase_enemy_spawn_01");
@@ -196,12 +196,12 @@ function function_fb0dffdf() {
   var_35447b42 = getspawnerarray("rooftop_door_guy1", "targetname");
   array::run_all(var_35447b42, &spawner::add_spawn_function, &function_f57c8f19);
   level flag::wait_till("flag_qasim_on_roof");
-  level thread savegame::function_7790f03(0);
+  level thread savegame::checkpoint_save_asap(0);
   level flag::wait_till("flag_start_rooftop_combat");
   level.adler ai::set_behavior_attribute("demeanor", "combat");
   level.woods ai::set_behavior_attribute("demeanor", "combat");
   var_8c129dc2 = array_spawn_targetname("initial_rooftop_guys");
-  level thread function_8ddafa22(var_8c129dc2, "trig_rooftop_combat", undefined);
+  level thread waittill_array_dead(var_8c129dc2, "trig_rooftop_combat", undefined);
   level flag::wait_till("flag_rooftop_combat_wave2");
   savegame::checkpoint_save(0);
   var_3d1b4310 = array_spawn_targetname("rootop_ledge_guys");
@@ -210,7 +210,7 @@ function function_fb0dffdf() {
     guy.ignoresuppression = 1;
   }
 
-  level thread function_8ddafa22(var_3d1b4310, "trig_rooftop_combat_wave3", "trig_colors_roof1", 1);
+  level thread waittill_array_dead(var_3d1b4310, "trig_rooftop_combat_wave3", "trig_colors_roof1", 1);
   level flag::wait_till("flag_rooftop_combat_wave3");
   savegame::checkpoint_save(0);
   wait 2;
@@ -231,7 +231,7 @@ function function_fb0dffdf() {
     guy.ignoresuppression = 1;
   }
 
-  level thread function_8ddafa22(var_70b55036, "trig_colors_roof4");
+  level thread waittill_array_dead(var_70b55036, "trig_colors_roof4");
 }
 
 function function_4ae05934() {
@@ -332,7 +332,7 @@ function function_a1d9cae0() {
   level thread namespace_b100dd86::function_c212022b(180);
 }
 
-function function_8ddafa22(array, trigger, var_cc856f8d, var_c550e48f) {
+function waittill_array_dead(array, trigger, var_cc856f8d, var_c550e48f) {
   if(isDefined(var_cc856f8d)) {
     var_bb96f34c = getEnt(var_cc856f8d, "targetname");
   }
@@ -421,4 +421,4 @@ function init_flags() {
 
 function init_clientfields() {}
 
-function function_22b7fffd() {}
+function init_scenes() {}

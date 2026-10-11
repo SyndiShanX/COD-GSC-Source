@@ -33,7 +33,7 @@ function preinit() {
 }
 
 function function_49bf8a32() {
-  self.ai.var_870d0893 = 1;
+  self.ai.rex_mp_swamp_concrete_debris = 1;
   self.var_97ca51c7 = 0;
   self flag::set(#"hash_7b1f9f26f086bf39");
   self flag::set(#"hash_290cba33c13ddac5");
@@ -144,9 +144,9 @@ function private function_21eb9d09(entity) {
   var_6d4f3481 = entity.team !== level.zombie_team;
 
   if(isDefined(var_cc7597dc) && !var_6d4f3481 && namespace_19c99142::function_85d7a413(entity, var_cc7597dc)) {
-    var_4d21f369 = namespace_19c99142::function_da71e09a(entity);
+    movement_state = namespace_19c99142::function_da71e09a(entity);
 
-    if(var_4d21f369 !== #"hash_6192d8af630c6c07") {
+    if(movement_state !== #"hash_6192d8af630c6c07") {
       namespace_19c99142::function_708afe1d(entity, #"hash_6192d8af630c6c07");
     }
 
@@ -161,9 +161,9 @@ function function_440337c2(entity) {
   entity.goalradius = entity getpathfindingradius() * 2;
   var_6d4f3481 = entity.team !== level.zombie_team;
   var_2929f2e0 = isDefined(entity.attackable);
-  var_4d21f369 = namespace_19c99142::function_da71e09a(entity);
+  movement_state = namespace_19c99142::function_da71e09a(entity);
 
-  switch (var_4d21f369) {
+  switch (movement_state) {
     case #"chase":
       if(namespace_19c99142::function_264f914c(entity) && !var_6d4f3481 && !var_2929f2e0) {
         if(isDefined(var_cc7597dc) && namespace_19c99142::function_85d7a413(entity, var_cc7597dc)) {
@@ -208,9 +208,9 @@ function function_440337c2(entity) {
       break;
   }
 
-  var_4d21f369 = namespace_19c99142::function_da71e09a(entity);
+  movement_state = namespace_19c99142::function_da71e09a(entity);
 
-  switch (var_4d21f369) {
+  switch (movement_state) {
     case #"chase":
       if(namespace_19c99142::function_3c14ef44(entity)) {
         if(entity.var_7418f498 !== entity.favoriteenemy && !var_2929f2e0) {
@@ -247,9 +247,9 @@ function function_440337c2(entity) {
 }
 
 function private function_d2e99333(entity) {
-  var_4d21f369 = namespace_19c99142::function_da71e09a(entity);
+  movement_state = namespace_19c99142::function_da71e09a(entity);
 
-  switch (var_4d21f369) {
+  switch (movement_state) {
     case #"circle":
       var_b9dab425 = zm_ai_utility::function_825317c(entity);
 
@@ -276,9 +276,9 @@ function private function_1ea26b11(entity) {
 
   namespace_19c99142::function_d9fe2b0(entity);
   soa = namespace_19c99142::function_9dd68a24(entity);
-  var_4d21f369 = namespace_19c99142::function_2905c7db(entity);
+  movement_state = namespace_19c99142::function_2905c7db(entity);
 
-  if(var_4d21f369 === #"attacking") {
+  if(movement_state === #"attacking") {
     var_c50ad196 = !awareness::function_2bc424fd(entity.favoriteenemy);
 
     if(entity.favoriteenemy !== soa.favoriteenemy || var_c50ad196) {
@@ -288,21 +288,21 @@ function private function_1ea26b11(entity) {
     }
   }
 
-  if(var_4d21f369 === #"following") {
+  if(movement_state === #"following") {
     if(isDefined(soa.favoriteenemy) && entity cansee(soa.favoriteenemy)) {
       namespace_19c99142::function_c33fb385(entity, #"attacking");
     }
   }
 
-  var_4d21f369 = namespace_19c99142::function_2905c7db(entity);
+  movement_state = namespace_19c99142::function_2905c7db(entity);
 
-  if(var_4d21f369 === #"following") {
+  if(movement_state === #"following") {
     goal = namespace_19c99142::function_dd116fa9(entity);
     entity namespace_e292b080::zombieupdategoal(goal);
     return;
   }
 
-  if(var_4d21f369 === #"attacking") {
+  if(movement_state === #"attacking") {
     awareness::function_39da6c3c(entity);
   }
 }
@@ -325,10 +325,10 @@ function private function_39ab6f8d(entity) {
   }
 
   soa = namespace_19c99142::function_9dd68a24(entity);
-  var_4d21f369 = namespace_19c99142::function_2905c7db(entity);
+  movement_state = namespace_19c99142::function_2905c7db(entity);
   var_15cfc4f4 = 0;
 
-  if(var_4d21f369 === #"attacking") {
+  if(movement_state === #"attacking") {
     if(isPlayer(soa.favoriteenemy) && is_true(entity.var_ff3cbd9e) && !getdvarint(#"hash_6f7afa24d5871b86", 0) > 0) {
       var_ce42b625 = zm_utility::function_d89330e6(soa.favoriteenemy);
 

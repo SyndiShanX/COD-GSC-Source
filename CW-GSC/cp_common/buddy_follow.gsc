@@ -7,14 +7,14 @@
 #using scripts\core_common\flag_shared;
 #namespace buddy_follow;
 
-function setup_group(a_ai_allies, var_77bf059, origin_destination, var_b05557d5, var_7b06dc88, var_90c75dbe, var_92c0650f) {
+function setup_group(a_ai_allies, str_flag_name, origin_destination, var_b05557d5, var_7b06dc88, var_90c75dbe, var_92c0650f) {
   foreach(ai_ally in a_ai_allies) {
-    thread setup(ai_ally, var_77bf059, origin_destination, var_b05557d5, var_7b06dc88, var_90c75dbe, var_92c0650f);
+    thread setup(ai_ally, str_flag_name, origin_destination, var_b05557d5, var_7b06dc88, var_90c75dbe, var_92c0650f);
     waitframe(1);
   }
 }
 
-function setup(ai_ally, var_77bf059, origin_destination, var_b05557d5, var_7b06dc88, var_90c75dbe, var_92c0650f) {
+function setup(ai_ally, str_flag_name, origin_destination, var_b05557d5, var_7b06dc88, var_90c75dbe, var_92c0650f) {
   setDvar(#"hash_38c88655f7992f1", 0);
   ai_ally notify(#"hash_b28e3170e3298cc");
   ai_ally notify(#"hash_7328a58406b403f2");
@@ -22,25 +22,25 @@ function setup(ai_ally, var_77bf059, origin_destination, var_b05557d5, var_7b06d
   ai_ally endon(#"death");
   ai_ally thread function_26516a6b();
 
-  if(!isDefined(var_77bf059)) {
-    var_77bf059 = "flag_buddy_follow";
+  if(!isDefined(str_flag_name)) {
+    str_flag_name = "flag_buddy_follow";
 
-    if(!flag::exists(var_77bf059)) {
-      flag::init(var_77bf059);
+    if(!flag::exists(str_flag_name)) {
+      flag::init(str_flag_name);
     }
 
-    flag::set(var_77bf059);
+    flag::set(str_flag_name);
   }
 
-  if(!flag::exists(var_77bf059)) {
-    flag::init(var_77bf059);
+  if(!flag::exists(str_flag_name)) {
+    flag::init(str_flag_name);
   }
 
   while(true) {
-    level flag::wait_till(var_77bf059);
+    level flag::wait_till(str_flag_name);
     thread enable(ai_ally, origin_destination, var_b05557d5, var_7b06dc88, var_90c75dbe, var_92c0650f);
     wait 5;
-    level flag::wait_till_clear(var_77bf059);
+    level flag::wait_till_clear(str_flag_name);
     thread disable(ai_ally);
     wait 5;
   }
@@ -108,7 +108,7 @@ function private function_3bec0f16(origin_destination, var_b05557d5, var_7b06dc8
   var_e9aa7ce8 = var_90c75dbe * var_90c75dbe;
   self.var_974e3fcf = 0;
   e_player = getPlayers()[0];
-  self childthread function_dceb4d78(5);
+  self childthread move_to_player(5);
 
   self childthread debug(e_player, var_90c75dbe);
 
@@ -256,7 +256,7 @@ function private function_3bec0f16(origin_destination, var_b05557d5, var_7b06dc8
   }
 }
 
-function private function_dceb4d78(var_e9430cc4) {
+function private move_to_player(var_e9430cc4) {
   e_player = getPlayers()[0];
 
   if(!isDefined(level.var_f1028da5)) {

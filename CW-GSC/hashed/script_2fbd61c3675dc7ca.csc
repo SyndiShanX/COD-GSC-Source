@@ -52,8 +52,8 @@ function function_910d2164(localclientnum, oldval, newval, bnewent, binitialsnap
     }
 
     if(!isDefined(self.var_2095c8d1)) {
-      self playSound(fieldname, #"hash_2acf7e3b4d9caf20");
-      self.var_2095c8d1 = self playLoopSound(#"hash_a0772e7b77f2cd0");
+      self playSound(fieldname, #"zmb_mq_boss_invulnerable_start");
+      self.var_2095c8d1 = self playLoopSound(#"zmb_mq_boss_invulnerable_lp");
     }
 
     wait 1;
@@ -76,7 +76,7 @@ function function_910d2164(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(isDefined(self.var_2095c8d1)) {
-    self playSound(fieldname, #"hash_60da5cd1a4e517a4");
+    self playSound(fieldname, #"zmb_mq_boss_invulnerable_stop");
     self stoploopsound(self.var_2095c8d1);
     self.var_2095c8d1 = undefined;
   }
@@ -121,8 +121,8 @@ function function_7e8bc554(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_b42a918(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump) {
     if(!isDefined(self.var_491b980f)) {
-      self playSound(fieldname, #"hash_5bde8748cc69381b");
-      self.var_491b980f = self playLoopSound(#"hash_5bbf9148cc4e988a");
+      self playSound(fieldname, #"zmb_mq_boss_shield_up");
+      self.var_491b980f = self playLoopSound(#"zmb_mq_boss_shield_lp");
     }
 
     level thread function_b1dafc36(fieldname, self);
@@ -140,7 +140,7 @@ function function_b42a918(localclientnum, oldval, newval, bnewent, binitialsnap,
   if(isDefined(self.var_491b980f)) {
     self stoploopsound(self.var_491b980f);
     self.var_491b980f = undefined;
-    self playSound(fieldname, #"hash_72b7532d47bd53ee");
+    self playSound(fieldname, #"zmb_mq_boss_shield_down");
   }
 }
 
@@ -169,8 +169,8 @@ function function_adfd1e5b(localclientnum, oldval, newval, bnewent, binitialsnap
     }
 
     if(!isDefined(self.var_15039a49)) {
-      self playSound(fieldname, #"hash_2acf7e3b4d9caf20");
-      self.var_15039a49 = self playLoopSound(#"hash_a0772e7b77f2cd0");
+      self playSound(fieldname, #"zmb_mq_boss_invulnerable_start");
+      self.var_15039a49 = self playLoopSound(#"zmb_mq_boss_invulnerable_lp");
     }
 
     return;
@@ -182,8 +182,8 @@ function function_adfd1e5b(localclientnum, oldval, newval, bnewent, binitialsnap
     }
 
     if(!isDefined(self.var_15039a49)) {
-      self playSound(fieldname, #"hash_1e3422ea889ea71e");
-      self.var_15039a49 = self playLoopSound(#"hash_34c2153dde27eda2");
+      self playSound(fieldname, #"zmb_mq_small_invulnerable_start");
+      self.var_15039a49 = self playLoopSound(#"zmb_mq_small_invulnerable_lp");
       self.var_ecf22cc9 = 1;
     }
 
@@ -196,10 +196,10 @@ function function_adfd1e5b(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(isDefined(self.var_15039a49)) {
-    var_6fa5e5b7 = #"hash_60da5cd1a4e517a4";
+    var_6fa5e5b7 = #"zmb_mq_boss_invulnerable_stop";
 
     if(is_true(self.var_ecf22cc9)) {
-      var_6fa5e5b7 = #"hash_4dd42218144c8aa6";
+      var_6fa5e5b7 = #"zmb_mq_small_invulnerable_stop";
     }
 
     self playSound(fieldname, var_6fa5e5b7);
@@ -394,7 +394,7 @@ function function_1e07ed6f(localclientnum, oldval, newval, bnewent, binitialsnap
 
       break;
     case 1:
-      self playSound(fieldname, #"hash_6a8d5841140aeb5a");
+      self playSound(fieldname, #"zmb_ai_hellhound_molotov_spawn_bolt");
       self.var_3e5319de = self playLoopSound(#"zmb_hellhound_loop_fire");
       break;
     case 2:
@@ -523,7 +523,7 @@ function function_ab076c2e(localclientnum, var_b39864d6) {
   var_b39864d6 playrumblelooponentity(localclientnum, #"hash_23123e376b6cba91");
 
   while(true) {
-    var_b39864d6 playSound(localclientnum, #"hash_5de409a4b5a08239");
+    var_b39864d6 playSound(localclientnum, #"zmb_mq_boss_wipe_pulse");
     wait 1;
   }
 }

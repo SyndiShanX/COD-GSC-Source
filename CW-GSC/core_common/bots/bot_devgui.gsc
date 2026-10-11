@@ -443,8 +443,8 @@ function private devgui_add_fixed_spawn_bots(botarg, var_b27e53da, countarg) {
     countarg = 1;
   }
 
-  var_c6e7a9ca = max(int(countarg), 1);
-  count = var_c6e7a9ca;
+  original_count = max(int(countarg), 1);
+  count = original_count;
   players = getPlayers(team);
   max_players = player::function_d36b6597();
 
@@ -480,7 +480,7 @@ function private devgui_add_fixed_spawn_bots(botarg, var_b27e53da, countarg) {
     }
   }
 
-  println("<dev string:x10f>" + botarg + "<dev string:x133>" + var_c6e7a9ca + "<dev string:x133>" + origin[0] + "<dev string:x133>" + origin[1] + "<dev string:x133>" + origin[2] + "<dev string:x133>" + spawnangles[1]);
+  println("<dev string:x10f>" + botarg + "<dev string:x133>" + original_count + "<dev string:x133>" + origin[0] + "<dev string:x133>" + origin[1] + "<dev string:x133>" + origin[2] + "<dev string:x133>" + spawnangles[1]);
 }
 
 function private function_57d0759d(botarg, var_b27e53da, countarg, origin, angle) {
@@ -1032,8 +1032,8 @@ function private function_85e7342b() {
 function private eye_trace(hitents = 0, var_18daeece = 0) {
   angles = self getplayerangles();
   fwd = anglesToForward(angles);
-  var_98b02a87 = self getplayerviewheight();
-  eye = self.origin + (0, 0, var_98b02a87);
+  eyeheight = self getplayerviewheight();
+  eye = self.origin + (0, 0, eyeheight);
   end = eye + fwd * 8000;
   return bulletTrace(eye, end, hitents, self, var_18daeece);
 }

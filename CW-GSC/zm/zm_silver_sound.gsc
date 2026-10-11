@@ -20,11 +20,11 @@ function init() {
 function function_c1db8d1a() {
   level waittill(#"bfm");
   var_581d3017 = getEnt("audio_bfm", "targetname");
-  playSoundAtPosition(#"hash_4ec7d60ade69984c", var_581d3017.origin);
+  playSoundAtPosition(#"evt_bfm_alarm", var_581d3017.origin);
   wait 1;
-  playSoundAtPosition(#"hash_189fe24269ad58d", var_581d3017.origin);
+  playSoundAtPosition(#"evt_bfm_start", var_581d3017.origin);
   wait 1;
-  var_581d3017 playLoopSound(#"hash_6890863e534ae68d");
+  var_581d3017 playLoopSound(#"evt_bfm_loop");
 }
 
 function function_acd83a15() {
@@ -49,7 +49,7 @@ function function_acd83a15() {
   }
 }
 
-function function_44cea26f(str_msg, n_delay = 0) {
+function sound_event(str_msg, n_delay = 0) {
   level thread function_30d9d43(str_msg, n_delay);
 }
 
@@ -76,7 +76,7 @@ function function_30d9d43(str_msg, n_delay) {
 
 function function_2cf67660() {
   level waittill(#"snddooropening");
-  playSoundAtPosition(#"hash_38b699d43c500e2e", (0, 0, 0));
+  playSoundAtPosition(#"mus_door_horror", (0, 0, 0));
 }
 
 function function_cb5a4b1a() {

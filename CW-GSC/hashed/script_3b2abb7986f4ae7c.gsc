@@ -70,7 +70,7 @@ function function_95c09591(destination) {
       return;
     }
 
-    if(isDefined(level.var_e1011305) && isDefined(level.var_b48509f9) && level.var_e1011305 > 0 && level.var_b48509f9 - level.var_e1011305 <= 2) {
+    if(isDefined(level.var_e1011305) && isDefined(level.star_rating) && level.var_e1011305 > 0 && level.star_rating - level.var_e1011305 <= 2) {
       return;
     }
   }
@@ -176,7 +176,7 @@ function function_685a8288(instance) {
     vh_heli turretsettargetangles(0, (0, 0, 0));
   }
 
-  level.var_e1011305 = level.var_b48509f9;
+  level.var_e1011305 = level.star_rating;
   namespace_cf6efd05::function_c484a9be(#"hash_3d1c462f6d4757c2", level.var_e1011305);
   level thread helicopter::function_eca18f00(vh_heli, #"hash_5793213ec26a2aa5");
   vh_heli.instance = instance;
@@ -220,7 +220,7 @@ function function_685a8288(instance) {
   }
 
   if(!isDefined(vh_heli.e_crate)) {
-    vh_heli.e_crate = function_974be700(vh_heli.origin, vh_heli.angles, instance);
+    vh_heli.e_crate = spawn_crate(vh_heli.origin, vh_heli.angles, instance);
   }
 
   if(vh_heli.e_crate clientfield::is_registered("perk_death_perception_item_marked_for_rob")) {
@@ -410,7 +410,7 @@ function function_2a05a8c6(params) {
   }
 }
 
-function function_974be700(v_origin, v_angles, instance) {
+function spawn_crate(v_origin, v_angles, instance) {
   crate = content_manager::spawn_script_model(instance, #"wpn_t9_streak_care_package_friendly_world", 1, 1);
   crate dontinterpolate();
   crate.origin = v_origin;
@@ -418,16 +418,16 @@ function function_974be700(v_origin, v_angles, instance) {
   instance.scriptmodel = crate;
   crate.weapon = getweapon(#"supplydrop_zm");
   crate setweapon(crate.weapon);
-  crate function_619a5c20();
+  crate pingable();
   return crate;
 }
 
 function drop_crate(instance, var_f9972216, var_f16f4b37) {
-  var_a53bb2cc = isDefined(var_f9972216) ? var_f9972216 : self.origin;
+  v_drop_origin = isDefined(var_f9972216) ? var_f9972216 : self.origin;
   var_55ab02db = isDefined(var_f16f4b37) ? var_f16f4b37 : self.angles;
 
   if(!isDefined(self.e_crate)) {
-    self.e_crate = function_974be700(var_a53bb2cc, var_55ab02db, instance);
+    self.e_crate = spawn_crate(v_drop_origin, var_55ab02db, instance);
   }
 
   self playSound(#"veh_supply_drop");
@@ -435,8 +435,8 @@ function drop_crate(instance, var_f9972216, var_f16f4b37) {
   radius = 30;
   trace = physicstrace(self.e_crate.origin + (0, 0, -100), self.e_crate.origin + (0, 0, -10000), (radius * -1, radius * -1, 0), (radius, radius, 2 * radius), undefined, mask);
   v_target_location = trace[#"position"];
-  var_3a68f655 = distance(self.e_crate.origin, v_target_location);
-  n_drop_time = mapfloat(0, 1000, 1, 10, var_3a68f655);
+  n_distance_to_target = distance(self.e_crate.origin, v_target_location);
+  n_drop_time = mapfloat(0, 1000, 1, 10, n_distance_to_target);
 
   if(getdvarint(#"hash_6f70975791322a26", 0)) {
     self.e_crate.n_obj_id = zm_utility::function_f5a222a8(#"hash_550113857d521cf0", self.e_crate);

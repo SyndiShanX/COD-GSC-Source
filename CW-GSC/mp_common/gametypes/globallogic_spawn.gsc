@@ -200,11 +200,11 @@ function mayspawn() {
 function function_ac5b273c(minimumwait) {
   earliestspawntime = gettime() + int(minimumwait * 1000);
 
-  if(!isDefined(level.deathcircle.var_d60fd7cd)) {
+  if(!isDefined(level.deathcircle.collapsetime)) {
     return 0;
   }
 
-  return max(float(level.deathcircle.var_d60fd7cd - gettime()) / 1000, 0);
+  return max(float(level.deathcircle.collapsetime - gettime()) / 1000, 0);
 }
 
 function timeuntilwavespawn(minimumwait) {
@@ -216,8 +216,8 @@ function timeuntilwavespawn(minimumwait) {
     return 0;
   }
 
-  var_a0122c26 = 50;
-  var_e0fb0ad5 = var_a0122c26 * (isDefined(self.wavespawnindex) ? self.wavespawnindex : 0);
+  framedelay = 50;
+  var_e0fb0ad5 = framedelay * (isDefined(self.wavespawnindex) ? self.wavespawnindex : 0);
   elapsed = max(0, earliestspawntime - lastwavetime - var_e0fb0ad5);
   numwavespassedearliestspawntime = elapsed / wavedelay;
   numwaves = ceil(numwavespassedearliestspawntime);

@@ -32,7 +32,7 @@ function set(str_objective, a_targets, var_8c7ec5ce, var_4cfa0710 = str_objectiv
 
     if(a_targets.size > 1) {
       scripted(var_4cfa0710, undefined, var_690561dc, show_splash, var_bfcac307);
-      function_1de88d60(var_4cfa0710, undefined, 0, a_targets.size);
+      set_counter(var_4cfa0710, undefined, 0, a_targets.size);
     }
 
     foreach(target in a_targets) {
@@ -133,7 +133,7 @@ function area(var_4cfa0710, var_8343acf6, radius, var_690561dc, show_splash, sho
   function_64eaa790(var_4cfa0710, var_8343acf6, radius);
 }
 
-function goto(var_4cfa0710, position, var_690561dc, show_splash, show_waypoint, var_c3056ba3 = #"hash_7057d3992f70bf08") {
+function goto(var_4cfa0710, position, var_690561dc, show_splash, show_waypoint, var_c3056ba3 = #"cp_waypoint_breadcrumb") {
   if(isDefined(mission.var_c68f10d0[var_4cfa0710])) {
     update_position(var_4cfa0710, position);
     return;
@@ -321,7 +321,7 @@ function hide(str_objective, a_targets, e_player) {
   }
 }
 
-function function_9dfb43fc() {
+function hide_all() {
   globallogic_ui::function_9ed5232e("hudItems.hideWaypoints", 1);
 }
 
@@ -346,7 +346,7 @@ function function_630d2576(str_objective, a_targets, var_4f8b76db) {
   }
 }
 
-function function_1de88d60(str_objective, a_targets, var_177f646b, var_d126f60d) {
+function set_counter(str_objective, a_targets, var_177f646b, var_d126f60d) {
   a_n_objective_ids = function_d849bbf2(str_objective, a_targets);
 
   foreach(n_objective_id in a_n_objective_ids) {

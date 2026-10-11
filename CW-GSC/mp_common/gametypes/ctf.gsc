@@ -100,11 +100,11 @@ function event_handler[gametype_init] main(eventstruct) {
   level.var_537d7278[#"axis"].enemy = #"hash_34ce58df766f54dd";
   level thread ctf_icon_hide();
   game.flagmodels[#"allies"] = spawnStruct();
-  game.flagmodels[#"allies"].allies = #"hash_1f046ad8773b6c3";
-  game.flagmodels[#"allies"].axis = #"hash_1001e79caa6049ce";
+  game.flagmodels[#"allies"].allies = #"p9_ctf_flag_nato_blue";
+  game.flagmodels[#"allies"].axis = #"p9_ctf_flag_nato_red";
   game.flagmodels[#"axis"] = spawnStruct();
-  game.flagmodels[#"axis"].axis = #"hash_4409a354dd61569e";
-  game.flagmodels[#"axis"].allies = #"hash_592aa91190e3938d";
+  game.flagmodels[#"axis"].axis = #"p9_ctf_flag_warsaw_blue";
+  game.flagmodels[#"axis"].allies = #"p9_ctf_flag_warsaw_red";
   game.carry_flagmodels[#"allies"] = #"hash_284308e81d362553";
   game.carry_flagmodels[#"axis"] = #"hash_5a946f3f24347a8e";
 }
@@ -384,11 +384,11 @@ function createflag(trigger) {
   visuals[0] setModel(game.flagmodels[entityteam].allies);
   visuals[0] setteam(entityteam);
   visuals[0] notsolid();
-  visuals[0] function_619a5c20();
+  visuals[0] pingable();
   visuals[1] setModel(game.flagmodels[entityteam].axis);
   visuals[1] setteam(entityteam);
   visuals[1] notsolid();
-  visuals[1] function_619a5c20();
+  visuals[1] pingable();
   flag = gameobjects::create_carry_object(entityteam, trigger, visuals, (0, 0, 0), entityteam + "_flag");
   flag gameobjects::function_3c3a122f(#"group_friendly", level.flagtouchreturntime);
   flag gameobjects::function_3c3a122f(#"group_enemy", level.flagcapturetime);
@@ -738,7 +738,7 @@ function onpickup(player) {
     self function_ef8d5fb5();
     bb::function_95a5b5c2("ctf_flagreturn", undefined, team, player.origin);
     player recordgameevent("return");
-    level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+    level thread telemetry::function_18135b72(#"callback_on_game_event", {
       #player: player, #eventtype: #"return"});
     [[level.var_37d62931]](player, 1);
     self returnflag();
@@ -755,7 +755,7 @@ function onpickup(player) {
 
   bb::function_95a5b5c2("ctf_flagpickup", undefined, team, player.origin);
   player recordgameevent("pickup");
-  level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+  level thread telemetry::function_18135b72(#"callback_on_game_event", {
     #player: player, #eventtype: #"pickup"});
   util::function_a3f7de13(9, player.team, player getentitynumber());
   scoreevents::processscoreevent(#"flag_grab", player, undefined, undefined);
@@ -976,7 +976,7 @@ function oncapture(player) {
 function giveflagcapturexp(player) {
   scoreevents::processscoreevent(#"flag_capture", player, undefined, undefined);
   player recordgameevent("capture");
-  level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+  level thread telemetry::function_18135b72(#"callback_on_game_event", {
     #player: player, #eventtype: #"capture"});
   util::function_a3f7de13(10, player.team, player getentitynumber());
 }
@@ -1139,7 +1139,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
     }
 
     psoffsettime recordgameevent("kill_carrier");
-    level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+    level thread telemetry::function_18135b72(#"callback_on_game_event", {
       #player: psoffsettime, #eventtype: #"kill_carrier"});
     level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
       #player: self, #var_bdc4bbd2: #"carrying"});

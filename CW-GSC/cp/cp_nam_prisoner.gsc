@@ -53,7 +53,7 @@
 #namespace cp_nam_prisoner;
 
 function private event_handler[createstruct] function_e0a8e4ba(struct) {
-  foreach(var_7a2f53d3, k in ["vfx_ambientwar_group_id"]) {
+  foreach(__k135, k in ["vfx_ambientwar_group_id"]) {
     if(!isDefined(level.var_41204f29)) {
       level.var_41204f29 = [];
     } else if(!isarray(level.var_41204f29)) {
@@ -79,15 +79,15 @@ function private event_handler[createstruct] function_e0a8e4ba(struct) {
   function_6c07201b("CreateStruct", &function_e0a8e4ba);
 }
 
-function autoexec function_c2a965f4() {
+function autoexec setup_rex_starts() {
   util::add_gametype("coop");
 }
 
 function event_handler[level_init] main(eventstruct) {
   setclearanceceiling(16);
-  level.missionid = savegame::function_8136eb5a();
-  function_bf4b4b7e();
-  function_c26b0bc0();
+  level.missionid = savegame::get_mission_name();
+  setup_skiptos();
+  flags_init();
   init_clientfields();
   function_6890cc65();
   function_31b460ba();
@@ -108,11 +108,11 @@ function event_handler[level_init] main(eventstruct) {
     }
   }
 
-  level battlechatter::function_2ab9360b(1);
+  level battlechatter::bc_allow(1);
   level function_767a5911();
   level thread function_d56266e4();
   level thread function_7a4dcbd4();
-  level thread function_a8f776a0();
+  level thread exit_door();
   level thread function_42ad70e6();
   level thread namespace_d9b153b9::function_c318ce4a("river_path_rob_light");
   level thread namespace_d9b153b9::function_c318ce4a("bridge_path_rob_light");
@@ -155,26 +155,26 @@ function init_clientfields() {
   clientfield::register("toplayer", "force_stream_weapons", 1, 7, "int");
 }
 
-function function_bf4b4b7e() {
-  skipto::function_eb91535d("intro", &namespace_3ab3b856::main, &namespace_3ab3b856::start, "Intro", &namespace_3ab3b856::cleanup, ["rice_paddies", "jungle_path"]);
-  skipto::function_eb91535d("rice_paddies_1", &namespace_c6aa31df::main, &namespace_c6aa31df::start, "Rice Paddies 1", &namespace_c6aa31df::cleanup, ["rice_paddies", "jungle_path"]);
-  skipto::function_eb91535d("jungle_path_1", &namespace_1bc068e2::main, &namespace_1bc068e2::start, "Jungle Path 1", &namespace_1bc068e2::cleanup);
-  skipto::function_eb91535d("middle_paths_1", &function_a0bcc84e, &function_38e5adc8, "Middle Paths 1", &function_b78161a2);
-  skipto::function_eb91535d("path_end_1", &function_1f911b89, &function_89a69212, "Path End 1", &function_aa96d24b);
-  skipto::function_eb91535d("memory_1", &namespace_b508dca::function_690ab87a, &namespace_b508dca::function_99791793, "Memory 1", &namespace_b508dca::function_e4f91def);
-  skipto::function_eb91535d("rice_paddies_2", &namespace_c6aa31df::main, &namespace_c6aa31df::start, "Rice Paddies 2", &namespace_c6aa31df::cleanup, ["rice_paddies", "jungle_path"]);
-  skipto::function_eb91535d("jungle_path_2", &namespace_1bc068e2::main, &namespace_1bc068e2::start, "Jungle Path 2", &namespace_1bc068e2::cleanup);
-  skipto::function_eb91535d("middle_paths_2", &function_a0bcc84e, &function_38e5adc8, "Middle Paths 2", &function_b78161a2);
-  skipto::function_eb91535d("path_end_2", &function_1f911b89, &function_89a69212, "Path End 2", &function_aa96d24b);
-  skipto::function_eb91535d("memory_2", &namespace_b508dca::function_690ab87a, &namespace_b508dca::function_99791793, "Memory 2", &namespace_b508dca::function_e4f91def);
-  skipto::function_eb91535d("rice_paddies_3", &namespace_c6aa31df::main, &namespace_c6aa31df::start, "Rice Paddies 3", &namespace_c6aa31df::cleanup, ["rice_paddies", "jungle_path", "memory_3"]);
-  skipto::function_eb91535d("jungle_path_3", &namespace_1bc068e2::main, &namespace_1bc068e2::start, "Jungle Path 3", &namespace_1bc068e2::cleanup);
-  skipto::function_eb91535d("middle_paths_3", &function_a0bcc84e, &function_38e5adc8, "Middle Paths 3", &function_b78161a2);
-  skipto::function_eb91535d("path_end_3", &function_1f911b89, &function_89a69212, "Path End 3", &function_aa96d24b);
-  skipto::function_eb91535d("memory_3", &namespace_b508dca::function_690ab87a, &namespace_b508dca::function_99791793, "Memory 3", &namespace_b508dca::function_e4f91def);
-  skipto::function_eb91535d("rice_paddies_4", &namespace_c6aa31df::main, &namespace_c6aa31df::start, "Rice Paddies 4", &namespace_c6aa31df::cleanup, ["rice_paddies", "jungle_path", "middle_paths", "memory_3"]);
-  skipto::function_eb91535d("middle_paths_4", &function_a0bcc84e, &function_38e5adc8, "Middle Paths 4", &function_b78161a2);
-  skipto::function_eb91535d("memory_4", &namespace_b508dca::function_690ab87a, &namespace_b508dca::function_99791793, "Memory 4", &namespace_b508dca::function_e4f91def);
+function setup_skiptos() {
+  skipto::add_saved("intro", &namespace_3ab3b856::main, &namespace_3ab3b856::start, "Intro", &namespace_3ab3b856::cleanup, ["rice_paddies", "jungle_path"]);
+  skipto::add_saved("rice_paddies_1", &namespace_c6aa31df::main, &namespace_c6aa31df::start, "Rice Paddies 1", &namespace_c6aa31df::cleanup, ["rice_paddies", "jungle_path"]);
+  skipto::add_saved("jungle_path_1", &namespace_1bc068e2::main, &namespace_1bc068e2::start, "Jungle Path 1", &namespace_1bc068e2::cleanup);
+  skipto::add_saved("middle_paths_1", &function_a0bcc84e, &function_38e5adc8, "Middle Paths 1", &function_b78161a2);
+  skipto::add_saved("path_end_1", &function_1f911b89, &function_89a69212, "Path End 1", &function_aa96d24b);
+  skipto::add_saved("memory_1", &namespace_b508dca::function_690ab87a, &namespace_b508dca::function_99791793, "Memory 1", &namespace_b508dca::function_e4f91def);
+  skipto::add_saved("rice_paddies_2", &namespace_c6aa31df::main, &namespace_c6aa31df::start, "Rice Paddies 2", &namespace_c6aa31df::cleanup, ["rice_paddies", "jungle_path"]);
+  skipto::add_saved("jungle_path_2", &namespace_1bc068e2::main, &namespace_1bc068e2::start, "Jungle Path 2", &namespace_1bc068e2::cleanup);
+  skipto::add_saved("middle_paths_2", &function_a0bcc84e, &function_38e5adc8, "Middle Paths 2", &function_b78161a2);
+  skipto::add_saved("path_end_2", &function_1f911b89, &function_89a69212, "Path End 2", &function_aa96d24b);
+  skipto::add_saved("memory_2", &namespace_b508dca::function_690ab87a, &namespace_b508dca::function_99791793, "Memory 2", &namespace_b508dca::function_e4f91def);
+  skipto::add_saved("rice_paddies_3", &namespace_c6aa31df::main, &namespace_c6aa31df::start, "Rice Paddies 3", &namespace_c6aa31df::cleanup, ["rice_paddies", "jungle_path", "memory_3"]);
+  skipto::add_saved("jungle_path_3", &namespace_1bc068e2::main, &namespace_1bc068e2::start, "Jungle Path 3", &namespace_1bc068e2::cleanup);
+  skipto::add_saved("middle_paths_3", &function_a0bcc84e, &function_38e5adc8, "Middle Paths 3", &function_b78161a2);
+  skipto::add_saved("path_end_3", &function_1f911b89, &function_89a69212, "Path End 3", &function_aa96d24b);
+  skipto::add_saved("memory_3", &namespace_b508dca::function_690ab87a, &namespace_b508dca::function_99791793, "Memory 3", &namespace_b508dca::function_e4f91def);
+  skipto::add_saved("rice_paddies_4", &namespace_c6aa31df::main, &namespace_c6aa31df::start, "Rice Paddies 4", &namespace_c6aa31df::cleanup, ["rice_paddies", "jungle_path", "middle_paths", "memory_3"]);
+  skipto::add_saved("middle_paths_4", &function_a0bcc84e, &function_38e5adc8, "Middle Paths 4", &function_b78161a2);
+  skipto::add_saved("memory_4", &namespace_b508dca::function_690ab87a, &namespace_b508dca::function_99791793, "Memory 4", &namespace_b508dca::function_e4f91def);
 
   skipto::add_dev("<dev string:x38>", &function_a0bcc84e, &function_38e5adc8, "<dev string:x4a>", &function_b78161a2, undefined, undefined, ["<dev string:x58>", "<dev string:x68>", "<dev string:x77>", "<dev string:x87>", "<dev string:xa3>", "<dev string:xae>", "<dev string:xc0>"]);
   skipto::add_dev("<dev string:xd8>", &function_a0bcc84e, &function_38e5adc8, "<dev string:xeb>", &function_b78161a2, undefined, undefined, ["<dev string:x68>", "<dev string:x77>", "<dev string:x87>", "<dev string:xa3>", "<dev string:xae>", "<dev string:xc0>"]);
@@ -184,7 +184,7 @@ function function_bf4b4b7e() {
   skipto::add_dev("<dev string:x161>", &namespace_dfa5ee23::main, &namespace_dfa5ee23::start, "<dev string:x170>", &namespace_dfa5ee23::cleanup, undefined, undefined, ["<dev string:x68>", "<dev string:x77>", "<dev string:xa3>"]);
   skipto::add_dev("<dev string:x17b>", &namespace_dfa5ee23::function_909afeee, undefined, "<dev string:x18f>", undefined, undefined, undefined, ["<dev string:x68>", "<dev string:x77>", "<dev string:xa3>"]);
   skipto::add_dev("<dev string:x19f>", &namespace_d12540d8::main, &namespace_d12540d8::start, "<dev string:x1b6>", &namespace_d12540d8::cleanup, undefined, undefined, ["<dev string:x68>", "<dev string:x77>", "<dev string:x87>", "<dev string:x1c9>", "<dev string:xa3>"]);
-  skipto::add_dev("<dev string:x1dc>", &namespace_d12540d8::function_5f076197, &namespace_d12540d8::function_f4f616bb, "<dev string:x1f1>", &namespace_d12540d8::function_f3b9155f, undefined, undefined, ["<dev string:x87>", "<dev string:x1c9>"]);
+  skipto::add_dev("<dev string:x1dc>", &namespace_d12540d8::function_5f076197, &namespace_d12540d8::start_napalm, "<dev string:x1f1>", &namespace_d12540d8::function_f3b9155f, undefined, undefined, ["<dev string:x87>", "<dev string:x1c9>"]);
   skipto::add_dev("<dev string:x209>", &cp_nam_prisoner_rat_tunnels::main, &cp_nam_prisoner_rat_tunnels::start, "<dev string:x21c>", &cp_nam_prisoner_rat_tunnels::cleanup, undefined, undefined, ["<dev string:x68>", "<dev string:x77>", "<dev string:x87>", "<dev string:xa3>", "<dev string:xae>", "<dev string:xc0>"]);
   skipto::add_dev("<dev string:x22b>", &function_12df253a, &function_b171555f, "<dev string:x23f>", &function_442af1f7, undefined, undefined, ["<dev string:x24f>", "<dev string:x259>"]);
   skipto::add_dev("<dev string:x260>", &function_12df253a, &function_b171555f, "<dev string:x278>", &function_442af1f7, undefined, undefined, ["<dev string:x259>"]);
@@ -316,17 +316,17 @@ function function_a0bcc84e(str_objective, b_starting) {
     }
   }
 
-  level skipto::function_4e3ab877(str_objective, 0);
-  level skipto::function_51726ac8([next_obj], 0, level.player);
+  level skipto::objective_completed(str_objective, 0);
+  level skipto::set_level_objective([next_obj], 0, level.player);
 }
 
-function function_d2f93be3(var_290853ad, var_3a44f626, turn_off, districts) {
+function function_d2f93be3(flag_1, flag_2, turn_off, districts) {
   level endon(#"flag_in_end_path");
-  level flag::clear(var_290853ad);
-  level flag::clear(var_3a44f626);
+  level flag::clear(flag_1);
+  level flag::clear(flag_2);
 
   while(true) {
-    level flag::wait_till(var_290853ad);
+    level flag::wait_till(flag_1);
 
     if(isDefined(turn_off) && is_true(turn_off)) {
       level districts::function_930f8c81(districts);
@@ -335,7 +335,7 @@ function function_d2f93be3(var_290853ad, var_3a44f626, turn_off, districts) {
     }
 
     waitframe(1);
-    level flag::wait_till(var_3a44f626);
+    level flag::wait_till(flag_2);
 
     if(isDefined(turn_off) && is_true(turn_off)) {
       level districts::function_a7d79fcb(districts);
@@ -347,7 +347,7 @@ function function_d2f93be3(var_290853ad, var_3a44f626, turn_off, districts) {
   }
 }
 
-function function_b78161a2(str_objective, b_starting, var_aa1a6455, player) {
+function function_b78161a2(str_objective, b_starting, b_direct, player) {
   if(player == "middle_paths_1") {
     level thread namespace_c6aa31df::function_c8f499c5("rice_paddies_1");
   }
@@ -506,10 +506,10 @@ function function_1f911b89(str_objective, b_starting) {
   }
 
   level flag::clear("flag_in_end_path");
-  level skipto::function_4e3ab877(b_starting);
+  level skipto::objective_completed(b_starting);
 }
 
-function function_aa96d24b(str_objective, b_starting, var_aa1a6455, player) {
+function function_aa96d24b(str_objective, b_starting, b_direct, player) {
   level thread namespace_d9b153b9::function_5f3438c4();
 
   if(player == "path_end_1") {
@@ -556,7 +556,7 @@ function function_aa96d24b(str_objective, b_starting, var_aa1a6455, player) {
   }
 }
 
-function function_c26b0bc0() {
+function flags_init() {
   level flag::init("visit_start");
   level flag::init("visit_restart");
   level flag::init("exit_ready");
@@ -567,19 +567,19 @@ function function_c26b0bc0() {
   level flag::init("flag_mem_count_3");
   level flag::init("flag_mem_count_4");
   level flag::init("flag_in_end_path");
-  level thread namespace_3ab3b856::function_c26b0bc0();
-  level thread namespace_c6aa31df::function_c26b0bc0();
-  level thread namespace_1bc068e2::function_c26b0bc0();
-  level thread namespace_d09d57dd::function_c26b0bc0();
-  level thread namespace_371f22ea::function_c26b0bc0();
-  level thread namespace_18c72e49::function_c26b0bc0();
-  level thread namespace_6020b123::function_c26b0bc0();
-  level thread namespace_d12540d8::function_c26b0bc0();
-  level thread namespace_dfa5ee23::function_c26b0bc0();
-  level thread namespace_bf7b1fb2::function_c26b0bc0();
-  level thread cp_nam_prisoner_rat_tunnels::function_c26b0bc0();
-  level thread namespace_b508dca::function_c26b0bc0();
-  level thread namespace_b092382c::function_c26b0bc0();
+  level thread namespace_3ab3b856::flags_init();
+  level thread namespace_c6aa31df::flags_init();
+  level thread namespace_1bc068e2::flags_init();
+  level thread namespace_d09d57dd::flags_init();
+  level thread namespace_371f22ea::flags_init();
+  level thread namespace_18c72e49::flags_init();
+  level thread namespace_6020b123::flags_init();
+  level thread namespace_d12540d8::flags_init();
+  level thread namespace_dfa5ee23::flags_init();
+  level thread namespace_bf7b1fb2::flags_init();
+  level thread cp_nam_prisoner_rat_tunnels::flags_init();
+  level thread namespace_b508dca::flags_init();
+  level thread namespace_b092382c::flags_init();
 }
 
 function function_6890cc65() {
@@ -621,7 +621,7 @@ function function_8c5f16dd(volume) {
 }
 
 function function_31b460ba() {
-  transient = savegame::function_6440b06b();
+  transient = savegame::get_mission_data();
 
   if(!isDefined(transient.var_731c10af)) {
     level.var_8b493c47 = 1;
@@ -652,7 +652,7 @@ function function_31b460ba() {
   function_3fbf16c1("memory_2");
   function_3fbf16c1("memory_3");
   function_3fbf16c1("memory_4");
-  persistent = savegame::function_6440b06b(#"persistent");
+  persistent = savegame::get_mission_data(#"persistent");
 
   if(!isDefined(persistent.var_9fd1c625)) {
     persistent.var_9fd1c625 = spawnStruct();
@@ -669,29 +669,29 @@ function function_31b460ba() {
   level.var_9fd1c625.var_204d167f = persistent.var_9fd1c625.var_204d167f;
 }
 
-function function_3fbf16c1(var_e5c02698) {
-  transient = savegame::function_6440b06b();
+function function_3fbf16c1(path_name) {
+  transient = savegame::get_mission_data();
 
-  if(!isDefined(transient.var_731c10af.paths[var_e5c02698])) {
-    transient.var_731c10af.paths[var_e5c02698] = spawnStruct();
-    transient.var_731c10af.paths[var_e5c02698].str = var_e5c02698;
-    transient.var_731c10af.paths[var_e5c02698].count = 0;
+  if(!isDefined(transient.var_731c10af.paths[path_name])) {
+    transient.var_731c10af.paths[path_name] = spawnStruct();
+    transient.var_731c10af.paths[path_name].str = path_name;
+    transient.var_731c10af.paths[path_name].count = 0;
   }
 
-  level.var_731c10af.paths[var_e5c02698] = transient.var_731c10af.paths[var_e5c02698];
-  level.var_731c10af.paths[var_e5c02698].str = transient.var_731c10af.paths[var_e5c02698].str;
-  level.var_731c10af.paths[var_e5c02698].count = transient.var_731c10af.paths[var_e5c02698].count;
-  namespace_d9b153b9::function_e106e062(var_e5c02698, transient.var_731c10af.paths[var_e5c02698].count);
-  level cp_nam_prisoner_fx::function_e5b8c5f(var_e5c02698);
-  level thread cp_nam_prisoner_fx::function_158c95d7(var_e5c02698);
+  level.var_731c10af.paths[path_name] = transient.var_731c10af.paths[path_name];
+  level.var_731c10af.paths[path_name].str = transient.var_731c10af.paths[path_name].str;
+  level.var_731c10af.paths[path_name].count = transient.var_731c10af.paths[path_name].count;
+  namespace_d9b153b9::function_e106e062(path_name, transient.var_731c10af.paths[path_name].count);
+  level cp_nam_prisoner_fx::function_e5b8c5f(path_name);
+  level thread cp_nam_prisoner_fx::function_158c95d7(path_name);
 }
 
 function on_player_connect() {
   if(isDefined(level.skipto_current_objective) && array::contains(level.skipto_current_objective, "intro") || level.skipto_current_objective.size == 0) {
-    util::function_f3cadc9a("cp_nam_prisoner_player_ready");
+    util::set_player_start_flag("cp_nam_prisoner_player_ready");
 
-    if(isDefined(level.var_d7d201ba) && !self flag::exists(level.var_d7d201ba)) {
-      self flag::init(level.var_d7d201ba);
+    if(isDefined(level.str_player_start_flag) && !self flag::exists(level.str_player_start_flag)) {
+      self flag::init(level.str_player_start_flag);
     }
   }
 
@@ -1330,7 +1330,7 @@ function function_42ad70e6() {
   }
 }
 
-function function_a8f776a0() {
+function exit_door() {
   level flag::wait_till("visit_start");
 
   if(!level flag::get("exit_ready")) {
@@ -1386,7 +1386,7 @@ function function_12df253a(str_objective, b_starting) {
     }
 
     level flag::wait_till("<dev string:x544>");
-    level skipto::function_4e3ab877(b_starting, 0);
+    level skipto::objective_completed(b_starting, 0);
   } else if(b_starting == "<dev string:x4ab>") {
     level thread function_796816e2(3);
     level flag::set("<dev string:x555>");
@@ -1402,7 +1402,7 @@ function function_12df253a(str_objective, b_starting) {
     level thread namespace_d9b153b9::force_weapon_loadout("<dev string:x344>");
     level thread function_796816e2(3);
     level flag::wait_till("<dev string:x544>");
-    level skipto::function_4e3ab877(b_starting, 0);
+    level skipto::objective_completed(b_starting, 0);
   }
 
   if(b_starting == "<dev string:x344>") {
@@ -1417,7 +1417,7 @@ function function_12df253a(str_objective, b_starting) {
 
     level.infinite_hallway_exit_unlock_door_struct.door_left setModel("<dev string:x51f>");
     level flag::wait_till("<dev string:x544>");
-    level skipto::function_4e3ab877(b_starting, 0);
+    level skipto::objective_completed(b_starting, 0);
   }
 
   if(b_starting == "<dev string:x37e>") {
@@ -1432,7 +1432,7 @@ function function_12df253a(str_objective, b_starting) {
 
     level.infinite_hallway_exit_unlock_door_struct.door_left setModel("<dev string:x51f>");
     level flag::wait_till("<dev string:x544>");
-    level skipto::function_4e3ab877(b_starting, 0);
+    level skipto::objective_completed(b_starting, 0);
   }
 
   if(b_starting == "<dev string:x3b9>") {
@@ -1448,7 +1448,7 @@ function function_12df253a(str_objective, b_starting) {
 
     level.infinite_hallway_exit_unlock_door_struct.door_left setModel("<dev string:x51f>");
     level flag::wait_till("<dev string:x544>");
-    level skipto::function_4e3ab877(b_starting, 0);
+    level skipto::objective_completed(b_starting, 0);
   }
 }
 
@@ -1475,7 +1475,7 @@ function function_796816e2(visit) {
   }
 }
 
-function function_442af1f7(str_objective, b_starting, var_aa1a6455, player) {
+function function_442af1f7(str_objective, b_starting, b_direct, player) {
   if(player == "<dev string:x260>") {
     level thread namespace_b508dca::function_e4f91def("<dev string:x4d9>");
   }

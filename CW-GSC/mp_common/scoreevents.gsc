@@ -455,7 +455,7 @@ function scoreeventplayerkill(data, time) {
       }
 
       util::function_a3f7de13(22, attacker.team, attacker getentitynumber());
-      data.results.var_a5aabf71 = 1;
+      data.results.is_first_blood = 1;
     } else {
       if(isDefined(attacker.lastkilledby)) {
         if(attacker.lastkilledby == victim) {
@@ -468,7 +468,7 @@ function scoreeventplayerkill(data, time) {
           level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
             #player: victim, #var_bdc4bbd2: #"revenge"});
           attacker.lastkilledby = undefined;
-          data.results.var_905bd140 = 1;
+          data.results.is_revenge_kill = 1;
         }
       }
 
@@ -509,7 +509,7 @@ function scoreeventplayerkill(data, time) {
         attacker.pers[#"longshots"]++;
         level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
           #player: victim, #var_bdc4bbd2: #"longshot"});
-        data.results.var_91b86b21 = 1;
+        data.results.is_longshot_kill = 1;
 
         if(isDefined(attacker.var_ea1458aa)) {
           if(!isDefined(attacker.var_ea1458aa.longshot_kills)) {
@@ -526,7 +526,7 @@ function scoreeventplayerkill(data, time) {
 
       if(var_dca08887 <= sqr(115)) {
         processscoreevent(#"hash_56ede06b1821a561", attacker, victim, weapon);
-        challenges::function_ffdecc69(attacker, weapon, weaponclass);
+        challenges::pointblankkill(attacker, weapon, weaponclass);
 
         if(weaponclass === #"weapon_pistol") {
           victimyaw = victimangles[1];
@@ -638,7 +638,7 @@ function scoreeventplayerkill(data, time) {
 
         attacker.pers[#"backstabs"]++;
       } else if(!is_true(weapon.var_cfc07f04) && (anglediff < -30 || anglediff > 70 || is_true(victim.laststand))) {
-        if(meansofdeath == "MOD_MELEE_WEAPON_BUTT" && weapon.name != #"ball" && weapon.name != #"hash_29ab150f9f8964f") {
+        if(meansofdeath == "MOD_MELEE_WEAPON_BUTT" && weapon.name != #"ball" && weapon.name != #"dropkick_weapon") {
           processscoreevent(#"kill_enemy_with_gunbutt", attacker, victim, weapon);
         } else if(weapons::ispunch(weapon)) {
           processscoreevent(#"kill_enemy_with_fists", attacker, victim, weapon);
@@ -1202,14 +1202,14 @@ function multikill(killcount, weapon) {
     self contracts::increment_contract(#"contract_wl_multikill_2_or_better");
   }
 
-  self.pers[#"hash_104ec9727c3d4ef7"]++;
+  self.pers[#"totalmultikills"]++;
 
   if(self.pers[#"highestmultikill"] < killcount) {
     self.pers[#"highestmultikill"] = killcount;
 
-    if(level.var_268c70a7 === 1 && isDefined(self.var_a504287b.var_fc1e4ef3)) {
-      if(killcount > self.var_a504287b.var_fc1e4ef3) {
-        self.var_a504287b.var_fc1e4ef3 = killcount;
+    if(level.var_268c70a7 === 1 && isDefined(self.var_a504287b.highest_multikill)) {
+      if(killcount > self.var_a504287b.highest_multikill) {
+        self.var_a504287b.highest_multikill = killcount;
       }
     }
   }

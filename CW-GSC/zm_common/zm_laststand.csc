@@ -113,7 +113,7 @@ function function_50d4c00a(localclientnum, oldval, newval, bnewent, binitialsnap
   if(self == function_5c10bd79(fieldname)) {
     self notify(#"hash_2f1dc2ea83ba9e2");
     self postfx::exitpostfxbundle("pstfx_zm_last_stand");
-    function_ed62c9c2("zmb_laststand_riser", 0.25);
+    clearsubmix("zmb_laststand_riser", 0.25);
 
     if(isDefined(self.var_e781ace2)) {
       self stoploopsound(self.var_e781ace2);
@@ -156,7 +156,7 @@ function function_be34e28f(localclientnum, var_d2c301e0) {
     var_f384f371 = mapfloat(var_d2c301e0, var_6c2f58e2, 0, 0.6, n_current_time);
 
     if(!is_true(level.var_21ece77b)) {
-      function_5ea2c6e3("zmb_laststand_riser", 0.05, var_f384f371);
+      addsubmix("zmb_laststand_riser", 0.05, var_f384f371);
     }
 
     setsoundvolume(self.var_e781ace2, var_22cd2467);
@@ -167,7 +167,7 @@ function function_be34e28f(localclientnum, var_d2c301e0) {
 function function_ac994c83(var_c34665fc) {
   if(var_c34665fc == "death" && isDefined(self)) {
     self postfx::exitpostfxbundle("pstfx_zm_last_stand");
-    function_ed62c9c2("zmb_laststand_riser", 0.25);
+    clearsubmix("zmb_laststand_riser", 0.25);
 
     if(isDefined(self.var_e781ace2)) {
       self stoploopsound(self.var_e781ace2);

@@ -31,8 +31,8 @@
 #namespace namespace_e7f07a2a;
 
 function timeshifterupdate(player, origin) {
-  var_d98803e1 = namespace_ec06fe4a::function_65ee50ba(origin);
-  origin = (origin[0], origin[1], var_d98803e1[2]);
+  hitp = namespace_ec06fe4a::function_65ee50ba(origin);
+  origin = (origin[0], origin[1], hitp[2]);
   clock = namespace_ec06fe4a::spawnmodel(origin + (0, 0, 12));
 
   if(!isDefined(clock)) {
@@ -65,14 +65,14 @@ function timeshifterupdate(player, origin) {
   trigger.opentime = 3000;
   trigger.var_6de1c43b = gettime() + trigger.opentime;
   trigger.radiussq = sqr(245);
-  timetowait = player namespace_1c2a96f9::function_4808b985(20);
+  timetowait = player doa_fate::function_4808b985(20);
 
-  org namespace_83eb6304::function_3ecfde67("timeshift");
+  org doa_fx::function_3ecfde67("timeshift");
   clock thread namespace_ec06fe4a::function_2d920b3c(0.6, 0);
   trigger thread function_dd66aa61();
   waitresult = player waittilltimeout(timetowait, #"death", #"entering_last_stand", #"doa_exit_taken", #"disconnect");
-  org namespace_83eb6304::turnofffx("timeshift");
-  org namespace_83eb6304::function_3ecfde67("timeshift_fade");
+  org doa_fx::turnofffx("timeshift");
+  org doa_fx::function_3ecfde67("timeshift_fade");
   clock namespace_e32bb68::function_ae271c0b("evt_doa_pickup_clock_active_lp");
   clock namespace_e32bb68::function_3a59ec34("evt_doa_pickup_clock_active_end");
   wait 1;
@@ -95,14 +95,14 @@ function private function_91bc1c0d(trigger) {
   self notify("5c87918814496529");
   self endon("5c87918814496529");
   self.var_d33de52f = 1;
-  self namespace_83eb6304::function_3ecfde67("timeshift_contact");
+  self doa_fx::function_3ecfde67("timeshift_contact");
   self asmsetanimationrate(0.65);
 
   while(isalive(self) && isDefined(trigger) && self istouching(trigger)) {
     wait 0.5;
   }
 
-  self namespace_83eb6304::turnofffx("timeshift_contact");
+  self doa_fx::turnofffx("timeshift_contact");
   wait 0.75;
   self asmsetanimationrate(isDefined(self.doa.anim_rate) ? self.doa.anim_rate : 1);
   self.var_d33de52f = undefined;

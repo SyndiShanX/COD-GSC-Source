@@ -47,7 +47,7 @@
 #using scripts\cp_common\util;
 #namespace namespace_e6b6aea1;
 
-function function_22b7fffd() {
+function init_scenes() {
   animation::add_notetrack_func("cp_ger_stakeout_apt::vo_edda_reaction", &function_63dd294e);
   animation::add_notetrack_func("cp_ger_stakeout_apt::vo_kraus_reaction", &function_27cda4ce);
 }
@@ -113,7 +113,7 @@ function function_b3837ddc(str_objective, b_starting) {
     array::delete_all(level.apt_street_police);
   }
 
-  skipto::function_4e3ab877(str_objective);
+  skipto::objective_completed(str_objective);
 }
 
 function function_9cddf76d() {
@@ -187,10 +187,10 @@ function function_d62ceccf() {
   level.stealth.proximity_combat_radius_bump = 60;
   level.stealth.proximity_combat_radius_sight = 120;
   level.stealth.proximity_combat_radius_fake_sight = 80;
-  setsaveddvar(#"hash_12c53cd4a01caff3", 0.95);
-  setsaveddvar(#"hash_5edb3c8437c5990e", cos(180));
-  setsaveddvar(#"hash_30eedc859ec98ad", 0.025);
-  setsaveddvar(#"hash_5aaea648688ff01e", 0.25);
+  setsaveddvar(#"ai_threatsightfacingscale", 0.95);
+  setsaveddvar(#"ai_threatsightfacingscaledot", cos(180));
+  setsaveddvar(#"ai_threatsightdisplayspikepoint", 0.025);
+  setsaveddvar(#"ai_threatsightdisplayspikevalue", 0.25);
 
   if(isDefined(level.var_49a292bb.stealth) && isDefined(level.var_49a292bb.stealth.threat_sight_state)) {
     level.var_49a292bb stealth_threat_sight::threat_sight_set_state_parameters();
@@ -205,7 +205,7 @@ function function_c0a7c66() {
   array[#"sight_dist"] = 2500;
   array[#"detect_dist"] = 800;
   array[#"found_dist"] = 800;
-  namespace_cc4354b9::set_corpse_ranges(array);
+  stealth_corpse::set_corpse_ranges(array);
 }
 
 function function_1610ce5e() {
@@ -250,7 +250,7 @@ function function_fb12384e() {
   level.apt_umbrella = getEnt("apt_umbrella", "targetname");
   level.apt_umbrella.animname = "apt_umbrella";
   scene::add_scene_func("aib_vign_stakeout_apt_kraus", &function_a6a7797f, "init");
-  scene::add_scene_func("cin_stakeout_apt_bodycarry_pickup_apt_gl_exit", &function_7adcc91a, "done");
+  scene::add_scene_func("cin_stakeout_apt_bodycarry_pickup_apt_gl_exit", &underbeadle, "done");
   level scene::init("aib_vign_stakeout_apt_wife");
   level scene::init("aib_vign_stakeout_apt_kraus");
   level scene::init("aib_vign_stakeout_apt_child");
@@ -322,7 +322,7 @@ function function_7fc4cb95() {
   kitchen_window_left_open delete();
 }
 
-function function_7adcc91a(a_ents) {
+function underbeadle(a_ents) {
   victim = a_ents[#"victim"];
   victim endon(#"death");
   level flag::wait_till("apartment_2_done");
@@ -1121,7 +1121,7 @@ function function_1f314257() {
 function function_3d01b9fd() {
   level endon(#"hash_4717a055a4ba889e", #"hash_7538d0f49c08fc76");
   self endon(#"death", #"darted");
-  self waittill(#"hash_21e9694b28caa6c4");
+  self waittill(#"hide_gun");
   level.var_6a64a507 hide();
   level notify(#"hash_5c3d7a6dbf4a8ddf");
 }
@@ -1148,7 +1148,7 @@ function function_73f8fadd() {
   level endon(#"hash_7538d0f49c08fc76");
   level endon(#"flag_wife_placed_on_couch");
   level flag::wait_till("flag_edda_is_corpse");
-  var_11ecc9fe = 200704;
+  max_dist_squared = 200704;
   corpse_origin = undefined;
 
   while(!level flag::get("kraus_found_corpse")) {
@@ -1165,7 +1165,7 @@ function function_73f8fadd() {
         vector_dot = vectordot(dir, fwd);
         dist = distance2dsquared(corpse_origin, eye);
 
-        if(vector_dot > dotlimit && dist < var_11ecc9fe) {
+        if(vector_dot > dotlimit && dist < max_dist_squared) {
           if(bullettracepassed(eye, corpse_origin + (0, 0, 8), 1, self, corpse)) {
             level flag::set("kraus_found_corpse");
           }
@@ -1410,7 +1410,7 @@ function function_af031d54() {
   if(!isDefined(objectives::function_285e460(#"hash_6cee2d43ad1f55e6"))) {
     objectives::scripted(#"hash_6cee2d43ad1f55e6", undefined, #"hash_1133bb730a6dcbf0");
     apt_search_area = getEnt("apt_search_area", "targetname");
-    objectives::area(#"hash_7ef23308971af956", apt_search_area, undefined, undefined, 0, 0, undefined, #"hash_b1305ea2f0825bd");
+    objectives::area(#"hash_7ef23308971af956", apt_search_area, undefined, undefined, 0, 0, undefined, #"cp_waypoint_area_no_compass");
   }
 
   level flag::wait_till("flag_darkroom_light_on");
@@ -1503,9 +1503,9 @@ function function_d07f9e90() {
 function function_db844d6d() {
   level endon(#"hash_66dd1fb05a674d8f", #"hash_39a52174f2055f52");
   door = getEnt(self.script_parameters, "targetname");
-  var_af01916d = struct::get(door.target, "targetname");
+  door_dest = struct::get(door.target, "targetname");
   namespace_5ceacc03::function_c32bc34f();
-  door moveTo(var_af01916d.origin, 1, 0.5, 0.5);
+  door moveTo(door_dest.origin, 1, 0.5, 0.5);
   player = getPlayers()[0];
   player playRumbleOnEntity(#"anim_med");
   wait 1.5;
@@ -1591,12 +1591,12 @@ function function_a3233bf5() {
   level notify(#"hash_6317f16a37432c3a");
 }
 
-function function_69c02b2b(str_objective, b_starting, var_aa1a6455, player) {
+function function_69c02b2b(str_objective, b_starting, b_direct, player) {
   level flag::set("flag_see_kraus_shadow_failsafe");
   level flag::set("flag_kraus_umbrella_done");
 }
 
-function function_2d6c81be(str_objective) {
+function start_2(str_objective) {
   level thread function_fb12384e();
   exploder::exploder("lgt_exp_target_building_01");
   exploder::exploder("lgt_exp_target_building_02");
@@ -1679,7 +1679,7 @@ function function_34ee80b8(str_objective, b_starting) {
   player setplayerangles(s_teleport.angles);
   level.player val::set("knock_out", "show_crosshair", 0);
   wait 5;
-  skipto::function_4e3ab877(str_objective);
+  skipto::objective_completed(str_objective);
 }
 
 function function_8b571528() {
@@ -1703,7 +1703,7 @@ function function_85fbc73e(wait_notify, flagname) {
   level waittill(wait_notify);
   timer = 6;
   var_617f3755 = getEnt("secret_wall_panel", "targetname");
-  var_b227bb98 = getEnt("secret_picture", "targetname");
+  picture = getEnt("secret_picture", "targetname");
 
   while(!level flag::get("darkroom_door_open")) {
     self util::create_cursor_hint(undefined, undefined, #"hash_6c7bb285599937ba");
@@ -1716,7 +1716,7 @@ function function_85fbc73e(wait_notify, flagname) {
     }
 
     if(flagname == "picture_interact_pressed") {
-      var_b227bb98 thread function_3ce22f0b(timer);
+      picture thread function_3ce22f0b(timer);
     }
 
     wait timer;
@@ -1739,10 +1739,10 @@ function function_3ce22f0b(timer) {
   level.player playRumbleOnEntity(#"anim_med");
   snd::play("evt_stk_apt_puzzle_picture_open", self);
   wait 0.5;
-  var_13ad4669 = (timer - 0.5) / 6;
+  time_inc = (timer - 0.5) / 6;
 
   for(i = 0; i < 6; i++) {
-    wait var_13ad4669;
+    wait time_inc;
     self rotateroll(2, 0.1, 0.05, 0.05);
   }
 }
@@ -1918,10 +1918,10 @@ function function_6b7988be() {
     var_617f3755 delete();
   }
 
-  var_b227bb98 = getEnt("secret_picture", "targetname");
+  picture = getEnt("secret_picture", "targetname");
 
-  if(isDefined(var_b227bb98)) {
-    var_b227bb98 delete();
+  if(isDefined(picture)) {
+    picture delete();
   }
 
   drawer = getEnt("desk_office_drawer_01", "targetname");
@@ -1997,28 +1997,28 @@ function function_d2de5ec5(scenedef) {
   }
 }
 
-function function_a3c49bc0(str_objective, b_starting, var_aa1a6455, player) {
+function function_a3c49bc0(str_objective, b_starting, b_direct, player) {
   level thread function_6b7988be();
   level flag::set("apartment_2_done");
 }
 
 function function_be8d91b2() {
-  var_22386ba3 = getEntArray("apartment_light1_fill", "targetname");
-  var_13f6cf20 = getEnt("apartment_light1_spot", "targetname");
-  var_f5b792a2 = getEntArray("apartment_light2_fill", "targetname");
-  var_6799f665 = getEnt("apartment_light2_spot", "targetname");
+  light_01 = getEntArray("apartment_light1_fill", "targetname");
+  light_02 = getEnt("apartment_light1_spot", "targetname");
+  light_03 = getEntArray("apartment_light2_fill", "targetname");
+  light_04 = getEnt("apartment_light2_spot", "targetname");
 
-  foreach(light in var_22386ba3) {
+  foreach(light in light_01) {
     light setlightintensity(0);
   }
 
-  var_13f6cf20 setlightintensity(0);
+  light_02 setlightintensity(0);
 
-  foreach(light in var_f5b792a2) {
+  foreach(light in light_03) {
     light setlightintensity(0);
   }
 
-  var_6799f665 setlightintensity(0);
+  light_04 setlightintensity(0);
 }
 
 function spawn_tag_origin(origin = self.origin, angles = self.angles) {

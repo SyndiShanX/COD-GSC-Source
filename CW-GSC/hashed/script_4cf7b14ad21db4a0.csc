@@ -17,9 +17,9 @@
 
 function event_handler[level_preinit] function_b489bb7b(eventstruct) {
   snd::function_d4ec748e(&function_f2a2832d);
-  snd::function_ce78b33b(&function_32ab045);
+  snd::function_ce78b33b(&_targetname);
   snd::trigger_init(&_trigger);
-  snd::function_5e69f468(&_objective);
+  snd::skipto_init(&_objective);
 }
 
 function event_handler[event_cc819519] function_686b88aa(eventstruct) {
@@ -30,7 +30,7 @@ function event_handler[event_cc819519] function_686b88aa(eventstruct) {
   function_62ff8d93(1);
 }
 
-function private function_32ab045(ent, name) {
+function private _targetname(ent, name) {
   switch (name) {
     case #"heli":
       ent thread heli();
@@ -41,15 +41,15 @@ function private function_32ab045(ent, name) {
     case #"ai_truck":
       ent thread ai_truck();
       break;
-    case #"hash_5c1cf640998f4b32":
-      ent thread function_4ada6bd4();
+    case #"rudnik_truck":
+      ent thread rudnik_truck();
       break;
     case #"missile":
       ent thread missile();
       break;
     case #"smoke_grenade":
       var_b6d070fb = snd::play("wpn_smoke_hiss_lp", ent);
-      snd::function_f4f3a2a(var_b6d070fb, ent, 1);
+      snd::stop_on_ent_death(var_b6d070fb, ent, 1);
       break;
     default:
 
@@ -161,8 +161,8 @@ function private truck() {
   var_9fd84ef1[#"speed"] = [0, 6];
   var_9fd84ef1[#"scale"] = [0.1, 1];
   var_9fd84ef1[#"curve"] = ["xfade"];
-  var_de483b4c = snd::speed(truck, "veh_jeep_engine_lp", var_4c5ca2df, var_9fd84ef1);
-  snd::function_f4f3a2a(var_de483b4c, truck);
+  truck_loop = snd::speed(truck, "veh_jeep_engine_lp", var_4c5ca2df, var_9fd84ef1);
+  snd::stop_on_ent_death(truck_loop, truck);
 }
 
 function private ai_truck() {
@@ -175,11 +175,11 @@ function private ai_truck() {
   var_9fd84ef1[#"speed"] = [0, 6];
   var_9fd84ef1[#"scale"] = [0.1, 1];
   var_9fd84ef1[#"curve"] = ["xfade"];
-  var_de483b4c = snd::speed(truck, "veh_jeep_engine_lp", var_4c5ca2df, var_9fd84ef1);
-  snd::function_f4f3a2a(var_de483b4c, truck);
+  truck_loop = snd::speed(truck, "veh_jeep_engine_lp", var_4c5ca2df, var_9fd84ef1);
+  snd::stop_on_ent_death(truck_loop, truck);
 }
 
-function private function_4ada6bd4() {
+function private rudnik_truck() {
   truck = self;
   var_4c5ca2df = [];
   var_4c5ca2df[#"speed"] = [0, 18];
@@ -189,8 +189,8 @@ function private function_4ada6bd4() {
   var_9fd84ef1[#"speed"] = [0, 6];
   var_9fd84ef1[#"scale"] = [0.1, 1];
   var_9fd84ef1[#"curve"] = ["xfade"];
-  var_de483b4c = snd::speed(truck, "veh_jeep_engine_lp", var_4c5ca2df, var_9fd84ef1);
-  snd::function_f4f3a2a(var_de483b4c, truck);
+  truck_loop = snd::speed(truck, "veh_jeep_engine_lp", var_4c5ca2df, var_9fd84ef1);
+  snd::stop_on_ent_death(truck_loop, truck);
 }
 
 function private missile() {
@@ -254,7 +254,7 @@ function function_ac9af666() {
   }
 
   level.var_e4af65d2 = 1;
-  function_5ea2c6e3("cp_sm_tundra_combat", 1, 1);
+  addsubmix("cp_sm_tundra_combat", 1, 1);
 }
 
 function function_58c7f87f() {
@@ -263,12 +263,12 @@ function function_58c7f87f() {
   }
 
   level.var_c6ed3d2f = 1;
-  function_ed62c9c2("cp_sm_tundra_combat", 1);
+  clearsubmix("cp_sm_tundra_combat", 1);
 }
 
 function function_1477a4b9() {
   wait 1;
-  function_5ea2c6e3("cp_sm_tundra_evac_chopper", 2.5);
+  addsubmix("cp_sm_tundra_evac_chopper", 2.5);
   snd::play("evt_evac_chopper_cockpit_lp");
   snd::play("evt_evac_chopper_board");
   wait 2.5;
@@ -276,5 +276,5 @@ function function_1477a4b9() {
 }
 
 function function_f9003ea1() {
-  function_5ea2c6e3("cp_sm_tundra_outro_fadeout", 5);
+  addsubmix("cp_sm_tundra_outro_fadeout", 5);
 }

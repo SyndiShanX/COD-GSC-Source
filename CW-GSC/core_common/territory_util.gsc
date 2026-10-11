@@ -141,7 +141,7 @@ function function_b3791221(maxattempts = 10, territory = level.territory) {
   }
 }
 
-function function_5c7345a3(name, key, territory = level.territory) {
+function get_struct_array(name, key, territory = level.territory) {
   structs = struct::get_array(name, key);
   return function_39dd704c(structs, territory);
 }

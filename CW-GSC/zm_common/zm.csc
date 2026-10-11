@@ -545,7 +545,7 @@ function rob_zm_prop_fade(localclientnum, oldval, newval, bnewent, binitialsnap,
     self playrenderoverridebundle(#"rob_zm_prop_fade");
 
     if(!isDefined(self.sndlooper)) {
-      self.sndlooper = self playLoopSound(#"hash_66df9cab2c64f968");
+      self.sndlooper = self playLoopSound(#"zmb_sentinel_artifact_ghosted_lp");
     }
 
     return;

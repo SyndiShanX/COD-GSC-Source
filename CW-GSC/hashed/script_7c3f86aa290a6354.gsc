@@ -60,7 +60,7 @@ function init_doors() {
     door_model.health = 10000000;
     door_model setCanDamage(1);
     door_model setModel("p8_wz_door_01");
-    door_model.var_1c553fa4 = 1;
+    door_model.b_can_damage = 1;
     door_model.damage_level = 0;
     door_model.var_27a45076 = 0;
     door_model.reinforced = 0;
@@ -83,13 +83,13 @@ function function_6a3e8a89() {
   while(true) {
     waitresult = self waittill(#"trigger");
     player = waitresult.activator;
-    var_b1336156 = gettime();
+    timer_start = gettime();
     elapsed_time = 0;
     parent_struct = self.parent_struct;
     door = self.parent_struct.door;
 
     while(isalive(player) && player istouching(self) && player useButtonPressed() && elapsed_time < 0.5) {
-      elapsed_time = float(gettime() - var_b1336156) / 1000;
+      elapsed_time = float(gettime() - timer_start) / 1000;
       progress = elapsed_time / 0.5;
       n_resource = player zm_score::get_player_score();
 
@@ -249,7 +249,7 @@ function function_ae47792b(eventstruct) {
   self.health = 10000000;
   parent_struct = self.parent_struct;
 
-  if(!is_true(self.var_1c553fa4)) {
+  if(!is_true(self.b_can_damage)) {
     return;
   }
 
@@ -278,7 +278,7 @@ function function_ae47792b(eventstruct) {
     if(!self.reinforced) {
       self playSound(#"hash_75beb5fd873ee815");
     } else {
-      self playSound(#"hash_15d3a67feb395a2a");
+      self playSound(#"evt_door_reinforced_destroy");
     }
 
     function_be2c24a3(self.parent_struct.target, 1);
@@ -293,7 +293,7 @@ function function_ae47792b(eventstruct) {
       self.parent_struct.fx_org clientfield::increment("" + #"hash_322ed89801938bb9");
     }
 
-    self playSound(#"hash_7c72cea06ae4906c");
+    self playSound(#"evt_door_reinforced_dmg");
     self setModel(parent_struct.var_a7417bea[self.damage_level]);
     self.origin = parent_struct.s_boards.origin;
     self setscale(parent_struct.s_boards.modelscale);
@@ -303,9 +303,9 @@ function function_ae47792b(eventstruct) {
 
 function function_9801cde9() {
   self endon(#"death");
-  self.var_1c553fa4 = 0;
+  self.b_can_damage = 0;
   wait 1;
-  self.var_1c553fa4 = 1;
+  self.b_can_damage = 1;
 }
 
 function function_55859752() {
@@ -326,13 +326,13 @@ function function_55859752() {
   }
 
   door.damage_level = 0;
-  door.var_1c553fa4 = 1;
+  door.b_can_damage = 1;
   door setModel(self.var_a7417bea[door.damage_level]);
   door.origin = self.s_boards.origin;
   door setscale(self.s_boards.modelscale);
   door.reinforced = 1;
   namespace_85745671::function_1ede0cd3(self.target, self.door);
-  door playSound(#"hash_4ef96dfa0f645331");
+  door playSound(#"evt_door_reinforce");
   return true;
 }
 
@@ -371,12 +371,12 @@ function private function_51095a3d() {
     waitresult = self waittill(#"trigger");
     player = waitresult.activator;
     parent_struct = self.parent_struct;
-    var_b1336156 = gettime();
+    timer_start = gettime();
     elapsed_time = 0;
 
     if(!isDefined(self.window_boards.window.model) || isDefined(self.window_boards.window.damage_level) && self.window_boards.window.damage_level > 0) {
       while(isalive(player) && player istouching(self) && player util::is_player_looking_at(self.parent_struct.origin, 0.8) && player useButtonPressed() && elapsed_time < 1.5) {
-        elapsed_time = float(gettime() - var_b1336156) / 1000;
+        elapsed_time = float(gettime() - timer_start) / 1000;
         progress = elapsed_time / 1.5;
         n_resource = player zm_score::get_player_score();
 
@@ -409,7 +409,7 @@ function private function_51095a3d() {
 
       if(isDefined(n_resource) && n_resource >= var_b9fbcc94) {
         if(isDefined(n_resource) && n_resource >= var_b9fbcc94) {
-          var_c598073c = parent_struct function_673a485();
+          var_c598073c = parent_struct reinforce_window();
 
           if(var_c598073c) {
             player zm_score::minus_to_player_score(var_b9fbcc94);
@@ -437,7 +437,7 @@ function private function_994e81b7(eventstruct) {
   self endon(#"death", #"destroyed");
   self.health = 10000000;
 
-  if(!is_true(self.var_1c553fa4)) {
+  if(!is_true(self.b_can_damage)) {
     return;
   }
 
@@ -453,7 +453,7 @@ function private function_994e81b7(eventstruct) {
 
   if(self.damage_level > 5) {
     self.parent_struct.fx_org clientfield::increment("" + #"hash_4719ef7fda616f3a");
-    self playSound(#"hash_bf0f566d836c8a2");
+    self playSound(#"evt_window_reinforced_destroy");
     self.parent_struct.trigger setHintString(#"hash_3766e0d30f6782ad");
     waittillframeend();
     self delete();
@@ -465,7 +465,7 @@ function private function_994e81b7(eventstruct) {
       self.parent_struct.fx_org clientfield::increment("" + #"hash_1f232116f775fa91");
     }
 
-    self playSound(#"hash_6d3a81cd3c4049f4");
+    self playSound(#"evt_window_reinforced_dmg");
     self setModel(self.parent_struct.var_811c2d3a[self.damage_level]);
     self.parent_struct.trigger setHintString(#"hash_7b18ee0053fc3a7b");
 
@@ -477,12 +477,12 @@ function private function_994e81b7(eventstruct) {
 
 function function_82c85f70() {
   self endon(#"death");
-  self.var_1c553fa4 = 0;
+  self.b_can_damage = 0;
   wait 0.5;
-  self.var_1c553fa4 = 1;
+  self.b_can_damage = 1;
 }
 
-function function_673a485() {
+function reinforce_window() {
   window = self.window;
 
   if(!isDefined(window)) {
@@ -498,9 +498,9 @@ function function_673a485() {
   }
 
   window.damage_level = 0;
-  window.var_1c553fa4 = 1;
+  window.b_can_damage = 1;
   window setModel(self.var_811c2d3a[window.damage_level]);
-  window playSound(#"hash_65d45ffe1b39c009");
+  window playSound(#"evt_window_reinforce");
   namespace_85745671::function_1ede0cd3(self.target, self.window);
   return true;
 }

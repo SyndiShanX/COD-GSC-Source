@@ -47,13 +47,13 @@ function function_d9576449(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_7d5ce4d9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self.var_805054e7 = util::playFXOnTag(fieldname, #"hash_58d5e856ce222a5d", self, "tag_origin");
+    self.lightning_fx = util::playFXOnTag(fieldname, #"hash_58d5e856ce222a5d", self, "tag_origin");
     return;
   }
 
-  if(isDefined(self.var_805054e7)) {
-    stopfx(fieldname, self.var_805054e7);
-    self.var_805054e7 = undefined;
+  if(isDefined(self.lightning_fx)) {
+    stopfx(fieldname, self.lightning_fx);
+    self.lightning_fx = undefined;
   }
 }
 

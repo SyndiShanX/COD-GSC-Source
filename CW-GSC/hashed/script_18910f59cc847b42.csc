@@ -27,7 +27,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_ac2a80f5;
+#namespace doa_camera;
 
 function init() {
   function_32d5e898();
@@ -79,7 +79,7 @@ function function_57ce3201(localclientnum) {
         }
       }
 
-      self namespace_7f5aeb59::function_4d692cc4(localclientnum, self.var_88a2ff29);
+      self doa_player_utility::function_4d692cc4(localclientnum, self.var_88a2ff29);
     }
   }
 }
@@ -190,20 +190,20 @@ function function_14f1aa2b(localclientnum, delta_time) {
       mins = (1e+06, 1e+06, 1e+06);
       maxs = (-1e+06, -1e+06, -1e+06);
 
-      if(level.doa.world_state == 0 && isDefined(level.doa.var_72b899ad)) {
-        mins = function_2d9b1c4e(level.doa.var_72b899ad.origin, mins);
-        maxs = function_663f7227(level.doa.var_72b899ad.origin, maxs);
+      if(level.doa.world_state == 0 && isDefined(level.doa.current_arena)) {
+        mins = add_point_to_mins(level.doa.current_arena.origin, mins);
+        maxs = add_point_to_maxs(level.doa.current_arena.origin, maxs);
       }
 
       foreach(player in getlocalplayers()) {
-        mins = function_2d9b1c4e(player.origin, mins);
-        maxs = function_663f7227(player.origin, maxs);
+        mins = add_point_to_mins(player.origin, mins);
+        maxs = add_point_to_maxs(player.origin, maxs);
       }
 
       dims = maxs - mins;
       playercenter = (mins + maxs) * 0.5;
-    } else if(isDefined(level.doa.var_72b899ad)) {
-      dirtocenter = level.doa.var_72b899ad.origin - localplayer.origin;
+    } else if(isDefined(level.doa.current_arena)) {
+      dirtocenter = level.doa.current_arena.origin - localplayer.origin;
       playercenter = localplayer.origin + dirtocenter * 0.25;
     }
   }
@@ -233,34 +233,34 @@ function function_14f1aa2b(localclientnum, delta_time) {
   cam_pos += var_be529a4e * localplayer.doa.var_f793b3d3;
   cam_pos += var_7dd1941e * -20;
 
-  if(level.localplayers.size > 1 && cameramode == 4 && isDefined(level.doa.var_72b899ad)) {
+  if(level.localplayers.size > 1 && cameramode == 4 && isDefined(level.doa.current_arena)) {
     var_8172ec08 = 200;
     var_cfa24a5 = 1800;
     var_8d932466 = 450;
     var_5bdd9694 = abs(dims[1]);
-    var_189a34e8 = 0;
+    t_y = 0;
 
     if(var_5bdd9694 > var_8172ec08) {
-      var_189a34e8 = (var_5bdd9694 - var_8172ec08) / (var_cfa24a5 - var_8172ec08);
+      t_y = (var_5bdd9694 - var_8172ec08) / (var_cfa24a5 - var_8172ec08);
     }
 
     var_5c03fa4 = 50;
     var_d946d37e = 500;
     var_49a6f227 = abs(dims[0]);
-    var_2280804 = 0;
+    t_x = 0;
 
     if(var_49a6f227 > var_5c03fa4) {
-      var_2280804 = (var_49a6f227 - var_5c03fa4) / (var_d946d37e - var_5c03fa4);
-      frac = math::clamp(var_2280804, 0, 1);
-      center_y = level.doa.var_72b899ad.origin[1];
-      var_9fe93364 = cam_pos[1] + (center_y - cam_pos[1]) * frac;
-      cam_pos = (cam_pos[0], var_9fe93364, cam_pos[2]);
+      t_x = (var_49a6f227 - var_5c03fa4) / (var_d946d37e - var_5c03fa4);
+      frac = math::clamp(t_x, 0, 1);
+      center_y = level.doa.current_arena.origin[1];
+      new_y = cam_pos[1] + (center_y - cam_pos[1]) * frac;
+      cam_pos = (cam_pos[0], new_y, cam_pos[2]);
     }
 
-    t = var_189a34e8;
+    t = t_y;
 
-    if(var_2280804 > t) {
-      t = var_2280804;
+    if(t_x > t) {
+      t = t_x;
     }
 
     var_fa5416a8 = var_8d932466;
@@ -322,7 +322,7 @@ function function_14f1aa2b(localclientnum, delta_time) {
   localplayer.var_2d592f5b = angles;
 }
 
-function function_2d9b1c4e(vec, mins) {
+function add_point_to_mins(vec, mins) {
   if(vec[0] < mins[0]) {
     mins = (vec[0], mins[1], mins[2]);
   }
@@ -338,7 +338,7 @@ function function_2d9b1c4e(vec, mins) {
   return mins;
 }
 
-function function_663f7227(vec, maxs) {
+function add_point_to_maxs(vec, maxs) {
   if(vec[0] > maxs[0]) {
     maxs = (vec[0], maxs[1], maxs[2]);
   }
@@ -389,16 +389,16 @@ function changecamera(mode) {
 
   height = function_ccf8a968(self.doa.cameramode);
 
-  if(isDefined(level.doa.var_72b899ad) && isDefined(level.doa.var_72b899ad.camera_max_height)) {
-    if(height > level.doa.var_72b899ad.camera_max_height) {
-      height = level.doa.var_72b899ad.camera_max_height;
+  if(isDefined(level.doa.current_arena) && isDefined(level.doa.current_arena.camera_max_height)) {
+    if(height > level.doa.current_arena.camera_max_height) {
+      height = level.doa.current_arena.camera_max_height;
     }
   }
 
   if(level.doa.world_state == 0) {
-    assert(isDefined(isDefined(level.doa.var_72b899ad)));
-    normalangle = level.doa.var_72b899ad.var_13ea8aea;
-    var_1d83376c = level.doa.var_72b899ad.var_46f3a17d;
+    assert(isDefined(isDefined(level.doa.current_arena)));
+    normalangle = level.doa.current_arena.var_13ea8aea;
+    var_1d83376c = level.doa.current_arena.var_46f3a17d;
   } else {
     normalangle = (75, 0, 0);
     var_1d83376c = (75, 180, 0);

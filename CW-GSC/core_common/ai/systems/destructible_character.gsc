@@ -56,13 +56,13 @@ function private preinit() {
         piecestruct.hittags = [];
 
         foreach(var_9c2171bc in destructible.("piece" + index + "_additionalhitlocations")) {
-          if(!isDefined(piecestruct.var_47627399)) {
-            piecestruct.var_47627399 = [];
-          } else if(!isarray(piecestruct.var_47627399)) {
-            piecestruct.var_47627399 = array(piecestruct.var_47627399);
+          if(!isDefined(piecestruct.additionalhitlocations)) {
+            piecestruct.additionalhitlocations = [];
+          } else if(!isarray(piecestruct.additionalhitlocations)) {
+            piecestruct.additionalhitlocations = array(piecestruct.additionalhitlocations);
           }
 
-          piecestruct.var_47627399[piecestruct.var_47627399.size] = var_9c2171bc.hitlocation;
+          piecestruct.additionalhitlocations[piecestruct.additionalhitlocations.size] = var_9c2171bc.hitlocation;
         }
       }
 
@@ -125,7 +125,7 @@ function destructhitlocpieces(entity, hitloc) {
     for(index = 1; index <= destructbundle.pieces.size; index++) {
       piece = destructbundle.pieces[index - 1];
 
-      if(isDefined(piece.hitlocation) && piece.hitlocation === hitloc || isDefined(piece.var_47627399) && isinarray(piece.var_47627399, hitloc)) {
+      if(isDefined(piece.hitlocation) && piece.hitlocation === hitloc || isDefined(piece.additionalhitlocations) && isinarray(piece.additionalhitlocations, hitloc)) {
         destructpiece(entity, index);
       }
     }

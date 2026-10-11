@@ -100,7 +100,7 @@ function onusedogtag(player) {
     player clientfield::set("footsteps_victim_entity_num", dogtag.clientnum + 1);
 
     if(dogtag.var_1f0e2977 == 0) {
-      player spy_skill::function_53a81144(level.var_7e569431.var_6f25263a);
+      player spy_skill::addcredit(level.var_7e569431.var_6f25263a);
       scoreevents::processscoreevent(#"hash_71166628df9e773e", player);
       dogtag.var_1f0e2977 = 1;
     }
@@ -109,19 +109,19 @@ function onusedogtag(player) {
   }
 }
 
-function function_74eed3d3(dogtag, var_eb0c09b) {
+function function_74eed3d3(dogtag, confirmer) {
   level thread function_a9490fb5();
-  level clientfield::set_world_uimodel("hudItems.spyMatchData." + var_eb0c09b.var_588e0374 + ".identityIsKnown", 1);
+  level clientfield::set_world_uimodel("hudItems.spyMatchData." + confirmer.var_588e0374 + ".identityIsKnown", 1);
 }
 
-function function_59d9033e(var_eb0c09b, corpse_client_num, var_d47b6a0b) {
+function function_59d9033e(confirmer, corpse_client_num, var_d47b6a0b) {
   level endon(#"game_ended");
   var_78904b18 = 26;
   var_9b867835 = 2;
 
-  if(isPlayer(var_eb0c09b)) {
-    var_78904b18 = var_eb0c09b getentitynumber();
-    var_9b867835 = var_eb0c09b function_da8679c7();
+  if(isPlayer(confirmer)) {
+    var_78904b18 = confirmer getentitynumber();
+    var_9b867835 = confirmer function_da8679c7();
   }
 
   level clientfield::set("corpse_observer_client_num", 31);
@@ -205,12 +205,12 @@ function function_23ed3ead(origin) {
   }
 
   if(isDefined(dogtag)) {
-    var_73ab2455 = int((gettime() - dogtag.deathtime) / 1000);
-    player function_a69e656f(dogtag, var_73ab2455);
+    timesincedeath = int((gettime() - dogtag.deathtime) / 1000);
+    player function_a69e656f(dogtag, timesincedeath);
 
     foreach(spectator in self.var_4ea906ac) {
       if(isDefined(spectator)) {
-        spectator function_a69e656f(dogtag, var_73ab2455);
+        spectator function_a69e656f(dogtag, timesincedeath);
       }
     }
 
@@ -220,11 +220,11 @@ function function_23ed3ead(origin) {
   player clientfield::set_to_player("corpse_entity_num", 26);
 }
 
-function function_a69e656f(dogtag, var_73ab2455) {
+function function_a69e656f(dogtag, timesincedeath) {
   level.spyhud hud_spy::function_82bcc7df(self, dogtag.spyRole);
   level.spyhud hud_spy::function_8b74df97(self, dogtag.clientnum + 1);
   level.spyhud hud_spy::function_cf7a3ce6(self, dogtag.var_588e0374);
-  level.spyhud hud_spy::function_b58e0471(self, var_73ab2455);
+  level.spyhud hud_spy::function_b58e0471(self, timesincedeath);
   level.spyhud hud_spy::function_ec7b95(self, dogtag.meansofdeath);
   level.spyhud hud_spy::function_a2471efa(self, dogtag.var_5b3a4d0a);
   self clientfield::set_to_player("corpse_entity_num", dogtag.clientnum);

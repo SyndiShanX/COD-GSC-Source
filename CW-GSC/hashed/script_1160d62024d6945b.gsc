@@ -349,7 +349,7 @@ function private function_e674d71a(vehicle) {
       case #"cargo_truck_wz":
         respawntime = getgametypesetting(#"hash_4201d2890785fb14");
         break;
-      case #"hash_5b215c4eff8f5759":
+      case #"player_hemtt":
         respawntime = getgametypesetting(#"hash_22c53ddb2cb67f13");
         break;
       case #"player_pbr":
@@ -423,7 +423,7 @@ function private function_f77a9b1b(vehicle) {
       case #"cargo_truck_wz":
         respawntime = getgametypesetting(#"hash_1974892bc7266bab");
         break;
-      case #"hash_5b215c4eff8f5759":
+      case #"player_hemtt":
         respawntime = getgametypesetting(#"hash_273d049136c76afa");
         break;
       case #"player_pbr":

@@ -24,12 +24,12 @@ function private preinit() {
 }
 
 function init_abilities() {
-  if(!isDefined(self.var_25fa785)) {
-    self.var_25fa785 = spawnStruct();
+  if(!isDefined(self._abilities)) {
+    self._abilities = spawnStruct();
   }
 
-  if(!isDefined(self.var_25fa785.var_b10e8797)) {
-    self.var_25fa785.var_b10e8797 = 0;
+  if(!isDefined(self._abilities.optoutflags)) {
+    self._abilities.optoutflags = 0;
   }
 }
 

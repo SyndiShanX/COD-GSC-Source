@@ -175,7 +175,7 @@ function function_67d3750a(einflictor, eattacker, idamage, idflags, smeansofdeat
   return int(imodelindex);
 }
 
-function function_bbf9ef52() {
+function missiledeath() {
   level endon(#"game_ended");
   waitresult = self waittill(#"death");
 
@@ -219,7 +219,7 @@ function function_d33f46a4(spawnpoint, index) {
   missile linkTo(vehicle, "tag_interior_d0", level.missileoffset, (78, 0, 0));
   missile.var_f990f05b = 78;
   missile.truck = vehicle;
-  missile thread function_bbf9ef52();
+  missile thread missiledeath();
   thread function_f4ad14e2(vehicle, index);
   return vehicle;
 }

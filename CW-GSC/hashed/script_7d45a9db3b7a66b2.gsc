@@ -27,7 +27,7 @@
 #using scripts\cp_common\util;
 #namespace namespace_b092382c;
 
-function function_c26b0bc0() {
+function flags_init() {
   level flag::init("player_in_infinite_hallway");
   level flag::init("infinite_hallway_visit_1");
   level flag::init("infinite_hallway_visit_2");
@@ -243,7 +243,7 @@ function function_e0c00554() {
   level endon(#"infinite_hallway_exited");
   level flag::set("flag_corridor_1_hall");
   corridor_1_hall_sb = smart_bundle::function_6c12ff6("corridor_1_hall_sb");
-  corridor_1_hall_sb waittill(#"hash_2c5cc8d3d6ed8b34");
+  corridor_1_hall_sb waittill(#"smart_models_spawned");
   level.var_57e54c86 = getEntArray("corridor_1_corner", "targetname");
   level.var_4620ea49 = getEntArray("corridor_1_hall", "targetname");
   level.var_cf2a2b72 = struct::get("corridor_1_corner_start", "targetname");
@@ -261,10 +261,10 @@ function function_bb1aba0a() {
   level endon(#"infinite_hallway_exited");
   level flag::set("flag_corridor_2_corner");
   corridor_2_corner_sb = smart_bundle::function_6c12ff6("corridor_2_corner_sb");
-  corridor_2_corner_sb waittill(#"hash_2c5cc8d3d6ed8b34");
+  corridor_2_corner_sb waittill(#"smart_models_spawned");
   level flag::set("flag_corridor_2_hall");
   corridor_2_hall_sb = smart_bundle::function_6c12ff6("corridor_2_hall_sb");
-  corridor_2_hall_sb waittill(#"hash_2c5cc8d3d6ed8b34");
+  corridor_2_hall_sb waittill(#"smart_models_spawned");
   level.var_be8a7ed0 = getEntArray("corridor_2_corner", "targetname");
   level.var_30d625b7 = getEntArray("corridor_2_hall", "targetname");
   level.var_dcfead6b = struct::get("corridor_2_corner_start", "targetname");
@@ -290,10 +290,10 @@ function function_8eda618a() {
   level endon(#"infinite_hallway_exited");
   level flag::set("flag_corridor_3_corner");
   corridor_3_corner_sb = smart_bundle::function_6c12ff6("corridor_3_corner_sb");
-  corridor_3_corner_sb waittill(#"hash_2c5cc8d3d6ed8b34");
+  corridor_3_corner_sb waittill(#"smart_models_spawned");
   level flag::set("flag_corridor_3_hall");
   corridor_3_hall_sb = smart_bundle::function_6c12ff6("corridor_3_hall_sb");
-  corridor_3_hall_sb waittill(#"hash_2c5cc8d3d6ed8b34");
+  corridor_3_hall_sb waittill(#"smart_models_spawned");
   level.var_340b140b = getEntArray("corridor_3_corner", "targetname");
   level.var_723c531e = getEntArray("corridor_3_hall", "targetname");
   level.var_9bae4ba1 = struct::get("corridor_3_corner_start", "targetname");
@@ -319,10 +319,10 @@ function function_d7ce7371() {
   level endon(#"infinite_hallway_exited");
   level flag::set("flag_corridor_4_corner");
   corridor_4_corner_sb = smart_bundle::function_6c12ff6("corridor_4_corner_sb");
-  corridor_4_corner_sb waittill(#"hash_2c5cc8d3d6ed8b34");
+  corridor_4_corner_sb waittill(#"smart_models_spawned");
   level flag::set("flag_corridor_4_hall");
   corridor_4_hall_sb = smart_bundle::function_6c12ff6("corridor_4_hall_sb");
-  corridor_4_hall_sb waittill(#"hash_2c5cc8d3d6ed8b34");
+  corridor_4_hall_sb waittill(#"smart_models_spawned");
   level.var_8f1b4e46 = getEntArray("corridor_4_corner", "targetname");
   level.var_624718c0 = getEntArray("corridor_4_hall", "targetname");
   level.var_9c6cfa20 = struct::get("corridor_4_corner_start", "targetname");
@@ -642,7 +642,7 @@ function infinite_hallway_visit_1() {
   level.infinite_hallway_exit_unlock_door_struct.door_left setModel("p9_vnm_door_bunker_metal_01c_gray");
 }
 
-function function_19d60154(var_35b4eb77) {
+function function_19d60154(facade) {
   level.var_ffd4e184 = spawn("script_model", self.origin);
   level.var_ffd4e184.angles = self.angles;
 
@@ -653,7 +653,7 @@ function function_19d60154(var_35b4eb77) {
     }
   }
 
-  foreach(ent in var_35b4eb77) {
+  foreach(ent in facade) {
     if(isDefined(ent)) {
       ent enablelinkTo();
       ent linkTo(level.var_ffd4e184);
@@ -731,7 +731,7 @@ function function_45d4b385() {
   level.player val::reset("intro_player_anim", "allow_sprint");
 }
 
-function function_eb3444fe() {
+function heartbeat_rumble() {
   level.player endon(#"death");
 
   while(!level flag::get("flag_start_door_jump_3")) {
@@ -945,8 +945,8 @@ function function_5f2165df(hide, var_6cd0b669) {
 function function_bf2933ed(var_158dfaa2, loop_count, activate) {
   level endon(#"infinite_hallway_visit_loop_complete");
   var_6dcda4d1 = getEnt("corridor_" + var_158dfaa2 + "_volume", "targetname");
-  var_5f7546ed = "infinite_hallway_corridor_loop_" + loop_count;
-  var_c79810e5 = struct::get_array(var_5f7546ed, "targetname");
+  loop_name = "infinite_hallway_corridor_loop_" + loop_count;
+  var_c79810e5 = struct::get_array(loop_name, "targetname");
   var_6cd0b669 = "infinite_hallway_corridor_" + var_158dfaa2 + "_loop_" + loop_count;
   var_7525f383 = struct::get_array("infinite_hallway_corridor_" + var_158dfaa2 + "_loop_" + loop_count, "targetname");
 
@@ -958,7 +958,7 @@ function function_bf2933ed(var_158dfaa2, loop_count, activate) {
         if(isDefined(struct.script_noteworthy) && issubstr(struct.script_noteworthy, "corridor_" + var_158dfaa2) && struct.script_noteworthy != "corridor_2_door_6") {
           struct.door_left function_3f816598(1, 0.05);
           wait 0.05;
-          struct thread function_acfb9b2d(var_5f7546ed);
+          struct thread function_acfb9b2d(loop_name);
         }
       }
 
@@ -1686,9 +1686,9 @@ function function_14147c77() {
   }
 }
 
-function function_acfb9b2d(var_5f7546ed) {
+function function_acfb9b2d(loop_name) {
   level endon(#"infinite_hallway_exited");
-  level endon(var_5f7546ed);
+  level endon(loop_name);
   self.door_left thread namespace_b6fe1dbe::function_46e4b64f();
   var_1403135a = struct::get(self.script_noteworthy + "_magicbullet_start", "targetname");
 

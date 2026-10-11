@@ -49,9 +49,9 @@ function start(str_objective) {
   player clientfield::set_to_player("force_stream_train", 1);
   level thread scene::init_streamer(#"cin_stakeout_train_intro", getPlayers());
   level thread namespace_5ceacc03::function_d7739931();
-  util::function_268bdf4f("adler", &namespace_11998b8f::function_2f0f0a84);
-  util::function_268bdf4f("lazar");
-  util::function_268bdf4f("park");
+  util::init_hero("adler", &namespace_11998b8f::function_2f0f0a84);
+  util::init_hero("lazar");
+  util::init_hero("park");
   level thread function_805f1669();
   level scene::init("cin_stakeout_train_intro");
 }
@@ -96,14 +96,14 @@ function main(str_objective, b_starting) {
   level thread namespace_5ceacc03::function_e40ab25f();
   namespace_5ceacc03::music("1.0_train");
   wait 4;
-  level globallogic_ui::function_7bc0e4b9();
+  level globallogic_ui::do_chyron_text();
   wait 2;
   dialogue::radio("vox_cp_stkt_02001_park_wejustpassedund_65");
   wait 1;
   level flag::set("flag_train_fadein_start");
 
-  if(isDefined(level.var_d7d201ba)) {
-    level.player flag::set(level.var_d7d201ba);
+  if(isDefined(level.str_player_start_flag)) {
+    level.player flag::set(level.str_player_start_flag);
   }
 
   level thread namespace_5ceacc03::train_fade_up_from_black();
@@ -158,7 +158,7 @@ function main(str_objective, b_starting) {
   level scene::play("cin_stakeout_train_jumpout", "jump_out_pre_teleport");
   level flag::set("flag_prep_teleport_train_player");
   getPlayers()[0] playersetgroundreferenceent(undefined);
-  level.var_77e3cd5f delete();
+  level.ref_ent delete();
   level scene::stop("cin_stakeout_train_cam_shake", 1);
   level scene::stop("cin_stakeout_train_car_2");
   level thread scene::play("cin_stakeout_train_jumpout", "jump_out_post_teleport");
@@ -169,10 +169,10 @@ function main(str_objective, b_starting) {
   level flag::set("player_jumped_off_train");
   level flag::set("train_done");
   level flag::delay_set(4, "flag_post_train_weapons");
-  skipto::function_4e3ab877("train");
+  skipto::objective_completed("train");
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   if(player) {
     train_tunnel_01 = function_dd407ea1(getEntArray("train_tunnel_01", "targetname"));
     train_tunnel_02 = function_dd407ea1(getEntArray("train_tunnel_02", "targetname"));
@@ -230,10 +230,10 @@ function function_e9812a44(a_ents, str_shot) {
 }
 
 function function_6c744934(a_ents) {
-  level.var_77e3cd5f = util::spawn_model("tag_origin");
+  level.ref_ent = util::spawn_model("tag_origin");
   player = getPlayers()[0];
-  level.var_77e3cd5f linkTo(a_ents[#"hash_475ee55621b83ca0"], "j_prop_1", (0, 0, 0), (0, 0, 0));
-  player playersetgroundreferenceent(level.var_77e3cd5f);
+  level.ref_ent linkTo(a_ents[#"hash_475ee55621b83ca0"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+  player playersetgroundreferenceent(level.ref_ent);
 }
 
 function function_63886603(a_ents, str_shot) {
@@ -369,7 +369,7 @@ function function_e1e726bd(rig, var_81b1bc71, var_391b674) {
 
 function private function_6d1d0dc8() {
   self endon(#"death");
-  self util::function_749362d7(1);
+  self util::set_low_ready(1);
   self val::set("train", "allow_crouch", 0);
   self val::set("train", "allow_prone", 0);
   self setmovespeedscale(0.4);
@@ -377,7 +377,7 @@ function private function_6d1d0dc8() {
   level waittill(#"hash_415b311f108f4f7c");
   self clientfield::set_to_player("lerp_fov", 2);
   level flag::wait_till("flag_post_train_weapons");
-  self util::function_749362d7(0);
+  self util::set_low_ready(0);
   self val::reset("train", "allow_crouch");
   self val::reset("train", "allow_prone");
   self util::blend_movespeedscale(0.72, 0.5);
@@ -645,9 +645,9 @@ function function_49848b62(a_ents) {
     a_ents[#"guy09"].script_objective = "train";
   }
 
-  if(isDefined(a_ents[#"hash_70069c227825c3b9"])) {
-    a_ents[#"hash_70069c227825c3b9"] setModel(#"hash_d884dd6d2814092");
-    a_ents[#"hash_70069c227825c3b9"].script_objective = "train";
+  if(isDefined(a_ents[#"guy10"])) {
+    a_ents[#"guy10"] setModel(#"hash_d884dd6d2814092");
+    a_ents[#"guy10"].script_objective = "train";
   }
 }
 
@@ -760,9 +760,9 @@ function function_5ecc0c9d() {
 }
 
 function function_4cb25b61(str_objective) {
-  util::function_268bdf4f("adler", &namespace_11998b8f::function_2f0f0a84);
-  util::function_268bdf4f("lazar");
-  util::function_268bdf4f("park");
+  util::init_hero("adler", &namespace_11998b8f::function_2f0f0a84);
+  util::init_hero("lazar");
+  util::init_hero("park");
   level thread namespace_5ceacc03::function_d7739931();
   level thread function_805f1669();
 }

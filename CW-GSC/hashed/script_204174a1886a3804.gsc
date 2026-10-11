@@ -60,7 +60,7 @@ class class_7c3faeda: cluielem {
       return;
     }
 
-    if(#"hash_30029804cf01e828" == state_name) {
+    if(#"planecrash" == state_name) {
       player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "_state", 7);
       return;
     }

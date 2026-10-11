@@ -7,7 +7,7 @@
 #using scripts\cp_common\bb;
 #namespace abilities;
 
-function function_9b38e79c() {
+function draworiginforever() {
   self endon(#"death");
 
   for(;;) {
@@ -56,7 +56,7 @@ function debug_circle(origin, radius, seconds, color) {
   circle(origin, radius, color, 0, 1, frames);
 }
 
-function function_519ae1ed(origin, entarray, max) {
+function getclosestto(origin, entarray, max) {
   if(!isDefined(entarray)) {
     return;
   }
@@ -69,59 +69,59 @@ function function_519ae1ed(origin, entarray, max) {
   return entarray[0];
 }
 
-function function_f9b48b95(name) {}
+function cybercom_aioptoutgetflag(name) {}
 
 function function_23c1f0b0() {
   if(!isDefined(self)) {
     return;
   }
 
-  self function_6d4cf28e();
+  self cybercom_initentityfields();
 
   foreach(ability in level.abilities.abilities) {
     if(!isDefined(ability)) {
       continue;
     }
 
-    flag = function_f9b48b95(ability.name);
+    flag = cybercom_aioptoutgetflag(ability.name);
 
     if(isDefined(flag)) {
-      self.abilities.var_b10e8797 |= flag;
+      self.abilities.optoutflags |= flag;
     }
   }
 }
 
-function function_f204ea98(name) {
+function cybercom_aioptout(name) {
   if(!isDefined(self)) {
     return;
   }
 
-  flag = function_f9b48b95(name);
+  flag = cybercom_aioptoutgetflag(name);
 
   if(!isDefined(flag)) {
     return;
   }
 
-  self function_6d4cf28e();
-  self.abilities.var_b10e8797 |= flag;
+  self cybercom_initentityfields();
+  self.abilities.optoutflags |= flag;
 }
 
-function function_8fe77681(name) {
+function cybercom_aiclearoptout(name) {
   if(!isDefined(self)) {
     return;
   }
 
-  self function_6d4cf28e();
-  flag = function_f9b48b95(name);
+  self cybercom_initentityfields();
+  flag = cybercom_aioptoutgetflag(name);
 
   if(!isDefined(flag)) {
     return;
   }
 
-  self.abilities.var_b10e8797 &= ~flag;
+  self.abilities.optoutflags &= ~flag;
 }
 
-function function_113a6123(name) {
+function cybercom_aicheckoptout(name) {
   if(!isDefined(self)) {
     return false;
   }
@@ -130,43 +130,43 @@ function function_113a6123(name) {
     return true;
   }
 
-  self function_6d4cf28e();
-  flag = function_f9b48b95(name);
+  self cybercom_initentityfields();
+  flag = cybercom_aioptoutgetflag(name);
 
   if(!isDefined(flag)) {
     return false;
   }
 
-  if(self.abilities.var_b10e8797 &flag) {
+  if(self.abilities.optoutflags &flag) {
     return true;
   }
 
   return false;
 }
 
-function function_6d4cf28e() {
+function cybercom_initentityfields() {
   if(!isDefined(self.abilities)) {
     self.abilities = spawnStruct();
   }
 
-  if(!isDefined(self.abilities.var_b10e8797)) {
-    self.abilities.var_b10e8797 = 0;
+  if(!isDefined(self.abilities.optoutflags)) {
+    self.abilities.optoutflags = 0;
   }
 }
 
-function function_571f1a4b(note, animname) {
+function notifymeonmatchend(note, animname) {
   self endon(note, #"death");
   self waittillmatch({
     #notetrack: "end"}, animname);
   self notify(note);
 }
 
-function function_196c351c(note, animname, kill = 0, attacker, weapon) {
+function stopanimscriptedonnotify(note, animname, kill = 0, attacker, weapon) {
   self notify("stopOnNotify" + note + animname);
   self endon("stopOnNotify" + note + animname);
 
   if(isDefined(animname)) {
-    self thread function_571f1a4b("stopOnNotify" + note + animname, animname);
+    self thread notifymeonmatchend("stopOnNotify" + note + animname, animname);
   }
 
   self waittill(note, #"death");
@@ -180,22 +180,22 @@ function function_196c351c(note, animname, kill = 0, attacker, weapon) {
   }
 }
 
-function function_ee76cb20() {
+function isinstantkill() {
   if(isDefined(self.allowdeath)) {
     if(self.allowdeath == 0) {
       return false;
     }
   }
 
-  if(is_true(self.var_4bc8b4c4)) {
+  if(is_true(self.instant_cybercom_death)) {
     return true;
   }
 
-  if(isDefined(self.var_8fbb3e63)) {
+  if(isDefined(self.rider_info)) {
     return true;
   }
 
-  if(isDefined(self.archetype) && self.archetype == "robot" && !function_4b870e5a(self)) {
+  if(isDefined(self.archetype) && self.archetype == "robot" && !hasbothlegs(self)) {
     return true;
   }
 
@@ -210,7 +210,7 @@ function islinked() {
   return isDefined(self getlinkedent());
 }
 
-function function_733a4915(context, max = 2) {
+function seedanimationvariant(context, max = 2) {
   if(!isDefined(self.abilities.variants)) {
     self.abilities.variants = [];
   }
@@ -220,15 +220,15 @@ function function_733a4915(context, max = 2) {
   }
 
   self.abilities.variants[context] = spawnStruct();
-  self.abilities.variants[context].var_20f37629 = 0;
-  self.abilities.variants[context].var_67ce2ba5 = max;
+  self.abilities.variants[context].curvariant = 0;
+  self.abilities.variants[context].maxvariant = max;
 }
 
-function function_566e25f9(context) {
+function getanimationvariant(context) {
   return "";
 }
 
-function function_e20f02eb(origin, mins, maxs, yaw, frames, color) {
+function debug_box(origin, mins, maxs, yaw, frames, color) {
   if(!isDefined(yaw)) {
     yaw = 0;
   }
@@ -261,19 +261,19 @@ function debug_sphere(origin, radius, color, alpha, timeframes) {
   sphere(origin, radius, color, alpha, 1, sides, timeframes);
 }
 
-function function_eb47c624(note, seconds) {
+function notifymeinnsec(note, seconds) {
   self endon(note, #"death");
   wait seconds;
   self notify(note);
 }
 
-function function_2a64e6ca(note, var_9b99ed8a) {
+function notifymeonnote(note, waitnote) {
   self endon(note, #"death");
-  self waittill(var_9b99ed8a);
+  self waittill(waitnote);
   self notify(note);
 }
 
-function function_edf9c875(note, ent) {
+function deleteentonnote(note, ent) {
   ent endon(#"death");
   self waittill(note);
 
@@ -294,7 +294,7 @@ function getentitypose() {
   }
 }
 
-function function_650c0f8f() {
+function getanimprefixforpose() {
   assert(isactor(self) || isPlayer(self), "<dev string:x38>");
   stance = self getentitypose();
 
@@ -313,7 +313,7 @@ function debugmsg(txt) {
   println("<dev string:x62>" + txt);
 }
 
-function function_4b870e5a(entity) {
+function hasbothlegs(entity) {
   if(is_true(entity.missinglegs)) {
     return 0;
   }
@@ -325,9 +325,9 @@ function function_4b870e5a(entity) {
   return gibserverutils::isgibbed(entity, 384) == 0 ? 1 : 0;
 }
 
-function function_e0a4efa(slot, weapon, var_55cd789e, endnote) {
+function gadgetoffonnotify(slot, weapon, watchnote, endnote) {
   self endon(#"death", endnote);
-  self waittill(var_55cd789e);
+  self waittill(watchnote);
   self gadgetdeactivate(slot, weapon);
 }
 
@@ -373,7 +373,7 @@ function function_cc83a141(eattacker, eplayer, idamage) {
 }
 
 function function_8107e1c2() {
-  if(isDefined(self.currentweapon) && (self.currentweapon == getweapon(#"gadget_unstoppable_force") || self.currentweapon == getweapon(#"hash_583cae2af0db7ab8"))) {
+  if(isDefined(self.currentweapon) && (self.currentweapon == getweapon(#"gadget_unstoppable_force") || self.currentweapon == getweapon(#"gadget_unstoppable_force_upgraded"))) {
     return true;
   }
 

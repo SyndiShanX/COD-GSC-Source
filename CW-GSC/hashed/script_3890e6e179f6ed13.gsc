@@ -43,7 +43,7 @@ function starting(str_skipto) {
   level thread scene::init_streamer(#"scene_tkd_hit1_intro_fly_in_trucks", getPlayers());
   level thread function_c6662dbb("intro_enemy_trucks");
   level thread function_3d66ebcc("intro_heli_player");
-  namespace_42da7c51::function_ed760ecb("woods", 0);
+  namespace_42da7c51::hero_setup("woods", 0);
   level.fake_player = util::spawn_player_clone(level.player);
   level.fake_player.targetname = "FakePlayer";
   actors = [];
@@ -61,7 +61,7 @@ function main(str_skipto, b_starting) {
   level thread intro_vo();
   var_4b971330 = skipto::function_99ddd76d();
   clientfield::set("stream_heli", 1);
-  level globallogic_ui::function_7bc0e4b9(1, var_4b971330);
+  level globallogic_ui::do_chyron_text(1, var_4b971330);
   clientfield::set("stream_heli_woods", 1);
   level thread function_6577ae08();
   level.player takeallweapons();
@@ -76,7 +76,7 @@ function main(str_skipto, b_starting) {
   level.player_heli sethighdetail(0);
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 }
 
@@ -113,12 +113,12 @@ function function_c9c8c2f5(var_799ecb8e = 0) {
   spawner::add_spawn_function_group("intro_enemy_truck_guys", "targetname", &namespace_42da7c51::function_2afe54);
   level flag::wait_till(#"all_players_spawned");
   function_c6662dbb("intro_enemy_trucks");
-  level scene::add_scene_func("scene_tkd_hit1_intro_fly_in_trucks", &function_6e628723);
+  level scene::add_scene_func("scene_tkd_hit1_intro_fly_in_trucks", &delete_all_ai);
   level thread scene::play_from_time("scene_tkd_hit1_intro_fly_in_trucks", level.var_abaa6487, undefined, 0.95, 1);
   level.player clientfield::set_to_player("toggle_gameplayer_character_vis", 1);
 }
 
-function function_6e628723(a_ents) {
+function delete_all_ai(a_ents) {
   foreach(ent in a_ents) {
     if(isactor(ent) && !isvehicle(ent)) {
       ent delete();
@@ -163,34 +163,34 @@ function function_bff76496(f) {
 function function_3b697267() {
   level.player dontinterpolate();
   level.player playerlinktodelta(level.fake_player, "tag_player", 1, 30, 15, 15, 30, 1, 1);
-  level.player util::function_749362d7(1);
+  level.player util::set_low_ready(1);
   level flag::wait_till("heli_player_gets_weapon");
   level.player namespace_42da7c51::function_6154e4c2();
   level flag::wait_till("heli_intro_complete");
   level.player playerlinktoblend(level.fake_player, "tag_player", 0.5);
   level.fake_player hide();
   level.player unlink();
-  level.player util::function_749362d7(0);
+  level.player util::set_low_ready(0);
   wait 0.5;
   level.player val::reset_all("takedown_hit1_intro");
   level notify(#"hash_2769bf067f3ba0cb");
 }
 
 function function_3d66ebcc(tname) {
-  level.var_40b02b72 = vehicle::simple_spawn(tname);
-  level.var_40b02b72[level.var_40b02b72.size] = vehicle::simple_spawn_single("intro_heli_ally");
-  level.player_heli = level.var_40b02b72[0];
-  level.var_9a3944f4 = level.var_40b02b72[1];
+  level.intro_helis = vehicle::simple_spawn(tname);
+  level.intro_helis[level.intro_helis.size] = vehicle::simple_spawn_single("intro_heli_ally");
+  level.player_heli = level.intro_helis[0];
+  level.var_9a3944f4 = level.intro_helis[1];
 
-  if(isDefined(level.var_40b02b72[1].script_noteworthy)) {
-    level.player_heli = level.var_40b02b72[1];
-    level.var_9a3944f4 = level.var_40b02b72[0];
+  if(isDefined(level.intro_helis[1].script_noteworthy)) {
+    level.player_heli = level.intro_helis[1];
+    level.var_9a3944f4 = level.intro_helis[0];
   }
 
   level.player_heli sethighdetail(1);
   level.player_heli flag::init("player_heli_landing");
 
-  foreach(chopper in level.var_40b02b72) {
+  foreach(chopper in level.intro_helis) {
     chopper thread namespace_42da7c51::function_fbb0d73f();
   }
 
@@ -219,10 +219,10 @@ function function_6577ae08(skipto_end = 0) {
   actors[level.player_heli.targetname] = level.player_heli;
   actors[level.var_9a3944f4.targetname] = level.var_9a3944f4;
   actors[#"fakeplayer"] = level.fake_player;
-  var_841e373 = getspawnerarray("intro_heli_crew", "script_noteworthy");
+  a_sp = getspawnerarray("intro_heli_crew", "script_noteworthy");
   crew = [];
 
-  foreach(sp in var_841e373) {
+  foreach(sp in a_sp) {
     crew[crew.size] = sp spawner::spawn(1);
   }
 
@@ -431,7 +431,7 @@ function function_c6662dbb(trucks) {
       level.var_aece851d[level.var_aece851d.size] = truck;
     }
 
-    truck.overridevehicledamage = &function_5d6e9494;
+    truck.overridevehicledamage = &truck_damage_override;
     truck thread function_b71a77f8();
     truck thread function_8b2eeb69();
   }
@@ -439,7 +439,7 @@ function function_c6662dbb(trucks) {
   thread function_149bd557();
 }
 
-function function_5d6e9494(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
+function truck_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
   if(!isPlayer(partname)) {
     return 0;
   }
@@ -551,10 +551,10 @@ function function_30c1067c() {
   }
 }
 
-function function_b7a8db11(var_6e20f48) {
+function function_b7a8db11(str_part_name) {
   e_light = undefined;
 
-  switch (var_6e20f48) {
+  switch (str_part_name) {
     case #"tag_headlight_left_d0":
       e_light = self.var_68f755af[#"front_left"];
       break;

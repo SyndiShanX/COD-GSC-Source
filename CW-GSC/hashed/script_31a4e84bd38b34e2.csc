@@ -30,10 +30,10 @@ function player_cam_blur(localclientnum, oldval, newval, bnewent, binitialsnap, 
 function function_3c4a545b(localclientnum) {
   self endon(#"disconnect");
   self endon(#"hash_31875ebd426b00c1");
-  var_f052fbf4 = 0.5;
+  blur_level = 0.5;
 
-  while(var_f052fbf4 <= 1) {
-    var_f052fbf4 += 0.04;
+  while(blur_level <= 1) {
+    blur_level += 0.04;
     waitframe(1);
   }
 }
@@ -60,7 +60,7 @@ function player_cam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, 
     return;
   }
 
-  function_97a0dd0a();
+  burn_off_postfx();
 }
 
 function burn_on_postfx() {
@@ -69,7 +69,7 @@ function burn_on_postfx() {
   self thread postfx::playpostfxbundle(#"pstfx_burn_loop");
 }
 
-function function_97a0dd0a() {
+function burn_off_postfx() {
   self notify(#"hash_8098b25d66c781c");
   self postfx::stoppostfxbundle("pstfx_burn_loop");
 }

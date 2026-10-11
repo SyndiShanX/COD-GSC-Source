@@ -36,12 +36,12 @@ function main(str_objective, b_starting) {
   level thread jungle_path();
   level flag::wait_till(var_c79d614f + "_complete");
   savegame::function_379f84b3();
-  skipto::function_4e3ab877(b_starting);
+  skipto::objective_completed(b_starting);
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {}
+function cleanup(str_objective, b_starting, b_direct, player) {}
 
-function function_c26b0bc0() {
+function flags_init() {
   level flag::init("flag_final_visit");
   level flag::init("jungle_path_complete");
   level flag::init("flag_jungle_path_has_idled");
@@ -210,20 +210,20 @@ function function_b9a049cb() {
   dialogue::radio("vox_cp_prsn_12200_adlr_bellperseussaid_6a");
   wait 3;
   dialogue::radio("vox_cp_prsn_12200_adlr_bellthedoorbeat_3b");
-  var_e823bd96 = [];
-  var_e823bd96[0] = "vox_cp_prsn_12200_adlr_bellgointothebu_18";
-  var_e823bd96[1] = "vox_cp_prsn_12200_adlr_bellopenthedoor_e0";
-  var_e823bd96[2] = "vox_cp_prsn_12200_adlr_tellmeaboutpers_f3";
-  var_e823bd96[3] = "vox_cp_prsn_12200_adlr_whathappenedint_02";
-  var_e823bd96[4] = "vox_cp_prsn_12200_adlr_bellperseussaid_6a";
-  var_e823bd96[5] = "vox_cp_prsn_12200_adlr_bellthedoorbeat_3b";
+  a_str_vo_lines = [];
+  a_str_vo_lines[0] = "vox_cp_prsn_12200_adlr_bellgointothebu_18";
+  a_str_vo_lines[1] = "vox_cp_prsn_12200_adlr_bellopenthedoor_e0";
+  a_str_vo_lines[2] = "vox_cp_prsn_12200_adlr_tellmeaboutpers_f3";
+  a_str_vo_lines[3] = "vox_cp_prsn_12200_adlr_whathappenedint_02";
+  a_str_vo_lines[4] = "vox_cp_prsn_12200_adlr_bellperseussaid_6a";
+  a_str_vo_lines[5] = "vox_cp_prsn_12200_adlr_bellthedoorbeat_3b";
   var_d84d4c40 = 10;
 
   while(true) {
     wait var_d84d4c40;
     var_d84d4c40 += var_d84d4c40 / 2;
-    i_random = randomint(var_e823bd96.size);
-    dialogue::radio(var_e823bd96[i_random]);
+    i_random = randomint(a_str_vo_lines.size);
+    dialogue::radio(a_str_vo_lines[i_random]);
   }
 }
 

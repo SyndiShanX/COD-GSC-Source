@@ -149,7 +149,7 @@ function function_2a230737() {
   explosioneffect = spawnfx(fx, explosionorigin, (0, 0, 1), (cos(var_7825522a), sin(var_7825522a), 0));
   triggerfx(explosioneffect);
   thread sound::play_in_space(sound, explosionorigin);
-  self thread function_98abc2e2();
+  self thread gib_player();
 
   if(isDefined(self.var_313fc9f2) && self.var_313fc9f2 <= 0) {
     var_c0652821 = "MOD_DIEHARD";
@@ -161,7 +161,7 @@ function function_2a230737() {
   radiusdamage(explosionorigin, radius, damage, damage, self, "MOD_EXPLOSIVE");
 }
 
-function function_98abc2e2() {
+function gib_player() {
   level endon(#"game_ended");
   waittillframeend();
 

@@ -69,18 +69,18 @@ function main(str_objective, b_starting) {
   level thread namespace_a789f8ae::function_223dbff(0);
   objectives::goto(#"hash_52f6c243fa81b016", var_8ee8e2ae.origin, #"hash_49beec353dd041ea");
   level flag::wait_till("flg_door_breached_to_second_floor");
-  var_2cdf7dae = getactorteamarray("axis");
+  first_floor_enemies = getactorteamarray("axis");
 
-  foreach(guy in var_2cdf7dae) {
+  foreach(guy in first_floor_enemies) {
     guy util::stop_magic_bullet_shield();
     guy deletedelay();
   }
 
   objectives::complete(#"hash_52f6c243fa81b016");
-  skipto::function_4e3ab877("1st_floor_cctv");
+  skipto::objective_completed("1st_floor_cctv");
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   hms_util::print("<dev string:x53>");
 
   actors[#"door2"] = getEnt("cctv_exit_door_left", "targetname");
@@ -92,11 +92,11 @@ function function_4e1b35c5() {
   level.player endon(#"death");
 
   if(isDefined(level.park)) {
-    level.park battlechatter::function_2ab9360b(0);
+    level.park battlechatter::bc_allow(0);
   }
 
   if(isDefined(level.lazar)) {
-    level.lazar battlechatter::function_2ab9360b(0);
+    level.lazar battlechatter::bc_allow(0);
   }
 
   var_e534dcb = struct::get("ai_alder_radio", "targetname");
@@ -155,28 +155,28 @@ function function_cd7802ed() {
   var_192f645a = struct::get("cctv_interact", "targetname");
   var_192f645a.var_ab2bc4e8 = [];
   var_192f645a.var_b785b365 = [];
-  var_121737f7 = getvehiclearray("cctv_camera", "targetname");
-  var_121737f7 = hms_util::function_a7607f(var_121737f7, "script_int");
-  var_121737f7[0] turretsettargetangles(0, (8, -10, 0));
-  var_121737f7[1] turretsettargetangles(0, (21, -13, 0));
-  var_121737f7[2] turretsettargetangles(0, (29, 5, 0));
-  var_121737f7[3] turretsettargetangles(0, (21, -10, 0));
+  a_vh_cameras = getvehiclearray("cctv_camera", "targetname");
+  a_vh_cameras = hms_util::function_a7607f(a_vh_cameras, "script_int");
+  a_vh_cameras[0] turretsettargetangles(0, (8, -10, 0));
+  a_vh_cameras[1] turretsettargetangles(0, (21, -13, 0));
+  a_vh_cameras[2] turretsettargetangles(0, (29, 5, 0));
+  a_vh_cameras[3] turretsettargetangles(0, (21, -10, 0));
   var_192f645a.var_ab2bc4e8[0] = {
-    #var_cb0e9f8e: var_121737f7[1], #var_9f8f8d9c: "play_scene_civ_execute", #str_loc: #"hash_662777978e4da185"};
+    #var_cb0e9f8e: a_vh_cameras[1], #var_9f8f8d9c: "play_scene_civ_execute", #str_loc: #"hash_662777978e4da185"};
   var_192f645a.var_ab2bc4e8[1] = {
-    #var_cb0e9f8e: var_121737f7[2], #var_9f8f8d9c: "play_scene_civ_ground", #str_loc: #"hash_662774978e4d9c6c"};
+    #var_cb0e9f8e: a_vh_cameras[2], #var_9f8f8d9c: "play_scene_civ_ground", #str_loc: #"hash_662774978e4d9c6c"};
   var_192f645a.var_ab2bc4e8[2] = {
-    #var_cb0e9f8e: var_121737f7[3], #var_9f8f8d9c: "flg_VIP_spotted_in_cctv", #str_loc: #"hash_662776978e4d9fd2", #var_3b88bfc: 1
+    #var_cb0e9f8e: a_vh_cameras[3], #var_9f8f8d9c: "flg_VIP_spotted_in_cctv", #str_loc: #"hash_662776978e4d9fd2", #var_3b88bfc: 1
   };
   var_192f645a.var_b785b365[0] = {
-    #var_cb0e9f8e: var_121737f7[0], #var_9f8f8d9c: "flg_lobby_camera", #str_name: #"hash_39eb5d8aff350df5", #str_loc: #"hash_662775978e4d9e1f"};
+    #var_cb0e9f8e: a_vh_cameras[0], #var_9f8f8d9c: "flg_lobby_camera", #str_name: #"hash_39eb5d8aff350df5", #str_loc: #"hash_662775978e4d9e1f"};
   var_192f645a.var_b785b365[1] = {
     #str_name: #"hash_39eb5a8aff3508dc"};
   var_192f645a.var_b785b365[2] = {
     #str_name: #"hash_39eb5b8aff350a8f"};
   var_192f645a.var_b785b365[3] = {
     #str_name: #"hash_39eb588aff350576"};
-  var_192f645a.var_47c25f3a = 0;
+  var_192f645a.n_cam_index = 0;
   var_192f645a.var_cec44276 = 0;
   var_192f645a.var_1fe4c663 = 0;
   var_192f645a util::create_cursor_hint(undefined, undefined, #"hash_5e5ae431113fb2a0", 64, undefined, &function_89cbd640);
@@ -218,7 +218,7 @@ function function_89cbd640(s_info) {
   }
 
   cctv::function_6e6cbceb(#"hash_1f55281c1c11158a", 51180 + var_9e659f52);
-  self function_5839f96b(self.var_47c25f3a);
+  self function_5839f96b(self.n_cam_index);
   self.e_user thread function_2d03467(self);
   self thread function_ed61bebf();
   snd::client_msg("flg_cctv_cam_start_audio");
@@ -237,8 +237,8 @@ function create_streamer_hint(n_index) {
 }
 
 function function_a58ec60c() {
-  prev_index = hms_util::function_65ec34cf(self.var_47c25f3a, -1, 0, self.var_b785b365.size - 1);
-  next_index = hms_util::function_65ec34cf(self.var_47c25f3a, 1, 0, self.var_b785b365.size - 1);
+  prev_index = hms_util::function_65ec34cf(self.n_cam_index, -1, 0, self.var_b785b365.size - 1);
+  next_index = hms_util::function_65ec34cf(self.n_cam_index, 1, 0, self.var_b785b365.size - 1);
   level util::function_f6847a11();
 
   if(self.var_cec44276) {
@@ -257,7 +257,7 @@ function function_5839f96b(n_index) {
   }
 
   self.e_user cp_nic_revolucion_fx::function_383d3084();
-  var_38e89473 = self.var_b785b365[self.var_47c25f3a];
+  var_38e89473 = self.var_b785b365[self.n_cam_index];
 
   if(isDefined(var_38e89473.var_3b88bfc)) {
     level.player clientfield::set_to_player("cull_outside_nuke_room", 0);
@@ -280,7 +280,7 @@ function function_5839f96b(n_index) {
     level flag::set(s_cam.var_9f8f8d9c);
   }
 
-  self.var_47c25f3a = n_index;
+  self.n_cam_index = n_index;
   function_a58ec60c();
 }
 
@@ -292,20 +292,20 @@ function function_7792a165(var_abfda0e9) {
   self.var_3b88bfc = s_info.var_3b88bfc;
 }
 
-function function_cc8891cc(var_a6d518ba) {
+function function_cc8891cc(n_change) {
   self.e_user util::hide_hint_text(0);
-  n_index = hms_util::function_65ec34cf(self.var_47c25f3a, var_a6d518ba, 0, self.var_b785b365.size - 1);
+  n_index = hms_util::function_65ec34cf(self.n_cam_index, n_change, 0, self.var_b785b365.size - 1);
   self function_5839f96b(n_index);
 }
 
 function function_521b9615() {
   var_34ea9b2b = self gamepadusedlast();
-  return var_34ea9b2b && self namespace_61e6d095::function_d0beaa6e() || !var_34ea9b2b && self moveleftbuttonPressed();
+  return var_34ea9b2b && self scripted_widgets::function_d0beaa6e() || !var_34ea9b2b && self moveleftbuttonPressed();
 }
 
 function function_ce2a13d7() {
   var_34ea9b2b = self gamepadusedlast();
-  return var_34ea9b2b && self namespace_61e6d095::function_1e9035e9() || !var_34ea9b2b && self moverightbuttonPressed();
+  return var_34ea9b2b && self scripted_widgets::function_1e9035e9() || !var_34ea9b2b && self moverightbuttonPressed();
 }
 
 function function_2d03467(var_abfda0e9) {
@@ -316,9 +316,9 @@ function function_2d03467(var_abfda0e9) {
   level trigger::use("allies_cctv_stack_up_color_trig", "targetname");
   cctv_entrance_door_clip = getEnt("cctv_entrance_door_clip", "targetname");
   wait 2;
-  self childthread namespace_61e6d095::block_kbm_pause_menu("exit_cctv");
+  self childthread scripted_widgets::block_kbm_pause_menu("exit_cctv");
 
-  while(!var_abfda0e9.var_cec44276 || !self namespace_61e6d095::function_70217795()) {
+  while(!var_abfda0e9.var_cec44276 || !self scripted_widgets::function_70217795()) {
     if(self function_ce2a13d7()) {
       level.player playRumbleOnEntity("key_press");
       var_abfda0e9 function_cc8891cc(1);
@@ -392,7 +392,7 @@ function function_944ac60c() {
   self endon(#"death");
   level waittill(#"hash_1d8ebf8f6d683686");
 
-  if(isDefined(self.var_b785b365[self.var_47c25f3a].var_3b88bfc) && function_26ddb694()) {
+  if(isDefined(self.var_b785b365[self.n_cam_index].var_3b88bfc) && function_26ddb694()) {
     snd::client_msg("flg_cctv_cam_broken_static");
     self.e_user function_8b835fbf(1);
   }
@@ -442,13 +442,13 @@ function function_2d471b16() {
 
 function function_1bcc08b8() {
   var_a688c776 = getEnt("ready_to_plant_trig", "targetname");
-  var_bd11e136 = getEnt("second_floor_stairway_door", "targetname");
+  stairwell_door = getEnt("second_floor_stairway_door", "targetname");
   var_f103298 = getEnt("second_floor_stairway_door_clip", "targetname");
   var_c6b0b733 = struct::get("door_breach_fx_pos", "targetname");
 
-  if(isDefined(var_bd11e136)) {
-    var_f103298 linkTo(var_bd11e136);
-    var_bd11e136 disconnectPaths();
+  if(isDefined(stairwell_door)) {
+    var_f103298 linkTo(stairwell_door);
+    stairwell_door disconnectPaths();
   }
 
   var_a688c776 waittill(#"trigger");
@@ -471,19 +471,19 @@ function function_1bcc08b8() {
   level.park.allowpain = 0;
   radiusdamage(var_6becf11c.origin, 200, 50, 0);
   physicsexplosionsphere(var_6becf11c.origin, 290, 0, 2);
-  playrumbleonposition(#"hash_3caa002da3fb9904", var_2b96c77c.scene_ents[#"bomb"].origin);
+  playrumbleonposition(#"satchel_charge_explode", var_2b96c77c.scene_ents[#"bomb"].origin);
   level.lazar.allowpain = 1;
   level.park.allowpain = 1;
   level notify(#"hash_1ebf62c7b43dbd5e");
   level flag::set("flg_door_breached_to_second_floor");
   playFX(level._effect[#"hash_70902b0842168222"], var_c6b0b733.origin);
-  snd::client_targetname(var_bd11e136, "audio_gate_breach_explosion");
+  snd::client_targetname(stairwell_door, "audio_gate_breach_explosion");
   earthquake(0.25, 0.25, var_93e9d0ab.origin, 350);
   var_93e9d0ab delete();
 
-  if(isDefined(var_bd11e136)) {
-    var_bd11e136 connectpaths();
-    var_bd11e136 deletedelay();
+  if(isDefined(stairwell_door)) {
+    stairwell_door connectpaths();
+    stairwell_door deletedelay();
   }
 
   if(isDefined(var_f103298)) {
@@ -502,14 +502,14 @@ function function_1bcc08b8() {
 
 function function_9f9e880e() {
   wait 0.5;
-  uid = level namespace_61e6d095::create_waypoint("c4", self, #"hud_icon_c4", undefined, (0, 0, 0), undefined, 0);
-  namespace_61e6d095::function_fdb73881(uid, 0, 250);
-  namespace_61e6d095::set_state(uid, 1);
+  uid = level scripted_widgets::create_waypoint("c4", self, #"hud_icon_c4", undefined, (0, 0, 0), undefined, 0);
+  scripted_widgets::function_fdb73881(uid, 0, 250);
+  scripted_widgets::set_state(uid, 1);
   level waittill(#"hud_icon_c4_red");
-  namespace_61e6d095::function_309bf7c2(uid, #"hud_icon_c4_red");
+  scripted_widgets::function_309bf7c2(uid, #"hud_icon_c4_red");
   snd::client_msg("audio_c4_beeps");
   level waittill(#"hash_1ebf62c7b43dbd5e");
-  namespace_61e6d095::remove(uid);
+  scripted_widgets::remove(uid);
   self delete();
 }
 

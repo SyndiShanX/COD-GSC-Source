@@ -60,7 +60,7 @@ function init(var_e00524ce) {
   a_ai = getaiarray();
 
   foreach(ai in a_ai) {
-    if(isalive(ai) && isDefined(ai.var_5b67d687)) {
+    if(isalive(ai) && isDefined(ai.listening_func)) {
       level.parabolic_mic.ai[level.parabolic_mic.ai.size] = ai;
       ai.var_62a70840 = 0;
     }
@@ -193,7 +193,7 @@ function private trace() {
   min_dist = 300;
   min_dist_squared = min_dist * min_dist;
   max_dist = 4096;
-  var_11ecc9fe = max_dist * max_dist;
+  max_dist_squared = max_dist * max_dist;
   eye = self getEye();
   fwd = anglesToForward(self getplayerangles());
   dotlimit = 0.9986;
@@ -245,7 +245,7 @@ function private trace() {
     vector_dot = vectordot(dir, fwd);
     dist = distance2dsquared(item.origin, eye);
 
-    if(vector_dot > dotlimit && dist < var_11ecc9fe) {
+    if(vector_dot > dotlimit && dist < max_dist_squared) {
       if(sighttracepassed(eye + fwd * min_dist, item.origin, 1, self, item)) {
         if(getdvarint(#"hash_1a81e6400daa0c60")) {
           print3d(item.origin + (0, 0, 4), "<dev string:x70>" + item.script_noteworthy + "<dev string:x83>", (1, 1, 1), 1, 0.35, 2);
@@ -275,7 +275,7 @@ function private trace() {
     vector_dot = vectordot(dir, fwd);
     dist = distance2dsquared(offset, eye);
 
-    if(vector_dot > dotlimit && dist < var_11ecc9fe) {
+    if(vector_dot > dotlimit && dist < max_dist_squared) {
       if(sighttracepassed(eye + fwd * min_dist, item.origin, 1, self, item)) {
         if(getdvarint(#"hash_1a81e6400daa0c60")) {
           print3d(offset + (0, 0, 26), "<dev string:x70>" + item.script_noteworthy + "<dev string:x8d>", (1, 1, 1), 1, 0.35, 2);
@@ -559,12 +559,12 @@ function private function_51ee7f9b(var_f6287736, var_b62cd9d4) {
   self clientfield::set(var_b62cd9d4, var_f6287736);
 }
 
-function function_18b589f0(alias, var_21290857 = 0, var_7b80750a, endnotify, var_43a9c16) {
+function function_18b589f0(alias, add_delay = 0, var_7b80750a, endnotify, waitnotify) {
   if(soundislooping(alias) === 1 && !isDefined(endnotify)) {
     assertmsg("<dev string:xb8>" + alias + "<dev string:xe9>");
   }
 
-  self.queue[self.queue.size] = [alias, float(soundgetplaybacktime(alias)) / 1000, var_21290857, var_7b80750a, endnotify, var_43a9c16];
+  self.queue[self.queue.size] = [alias, float(soundgetplaybacktime(alias)) / 1000, add_delay, var_7b80750a, endnotify, waitnotify];
 }
 
 function private function_4383ffd(ent) {
@@ -587,10 +587,10 @@ function private function_4383ffd(ent) {
     return;
   }
 
-  self thread function_bcd711ec(ent);
+  self thread prep_sound(ent);
 }
 
-function private function_bcd711ec(ent) {
+function private prep_sound(ent) {
   ent endon(#"entitydeleted");
   ent endon(#"death");
   soundent = util::spawn_model("tag_origin", self getEye());
@@ -611,8 +611,8 @@ function private function_bcd711ec(ent) {
 function private play_sound() {
   strfunc = undefined;
 
-  if(isDefined(self.traceent.var_5b67d687)) {
-    strfunc = self.traceent.var_5b67d687;
+  if(isDefined(self.traceent.listening_func)) {
+    strfunc = self.traceent.listening_func;
   } else if(isDefined(self.traceent.script_noteworthy)) {
     strfunc = self.traceent.script_noteworthy;
   }
@@ -644,14 +644,14 @@ function private function_622d474a(data) {
 
   foreach(item in data.queue) {
     alias = item[0];
-    var_d6819a9f = item[1];
+    soundtime = item[1];
     delaytime = item[2];
     var_7b80750a = item[3];
     endnotify = item[4];
-    var_43a9c16 = item[5];
+    waitnotify = item[5];
 
-    if(isDefined(var_43a9c16)) {
-      level waittill(var_43a9c16);
+    if(isDefined(waitnotify)) {
+      level waittill(waitnotify);
     }
 
     if(delaytime !== 0) {
@@ -681,8 +681,8 @@ function private function_622d474a(data) {
 
     self playSound(alias);
 
-    if(var_d6819a9f > 0) {
-      wait var_d6819a9f;
+    if(soundtime > 0) {
+      wait soundtime;
     }
 
     if(isDefined(endnotify)) {
@@ -716,11 +716,11 @@ function private function_85eb609f() {
   self delete();
 }
 
-function private function_8a7dffe8(var_a8cdbaa5, var_53bfdf6b) {
+function private function_8a7dffe8(var_a8cdbaa5, localvar) {
   if(isDefined(var_a8cdbaa5)) {
     value = var_a8cdbaa5;
   } else {
-    value = var_53bfdf6b;
+    value = localvar;
   }
 
   return value;

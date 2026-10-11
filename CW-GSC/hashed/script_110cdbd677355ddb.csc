@@ -23,8 +23,8 @@ function private get_anagram_solution(localclientnum, oldval, newval, bnewent, b
     var_9487875 = getscriptbundle("operation_chaos_anagrams");
     anagrams = [];
 
-    foreach(idx, var_d0354c50 in var_9487875.anagrams) {
-      anagrams[idx] = var_d0354c50.var_d0354c50;
+    foreach(idx, anagram in var_9487875.anagrams) {
+      anagrams[idx] = anagram.anagram;
     }
 
     var_e33f731b = function_e9a1119d(var_9487875.message, anagrams);

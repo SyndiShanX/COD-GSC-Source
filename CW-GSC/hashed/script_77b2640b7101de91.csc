@@ -16,7 +16,7 @@ function function_4286bd2c(soundobject, fadeoutseconds) {
 }
 
 function function_2e9b6265(soundobject, levelnotifystring, fadeoutseconds) {
-  function_d4e10f97(soundobject, levelnotifystring, fadeoutseconds);
+  stop_on_level_notify(soundobject, levelnotifystring, fadeoutseconds);
 }
 
 function function_b33d1cfe(soundobject, volume, timeinseconds) {

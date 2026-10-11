@@ -36,15 +36,15 @@
 #using scripts\weapons\weapon_utils;
 #namespace namespace_ac5221d7;
 
-function function_292592aa(b_starting) {
+function loadout_default(b_starting) {
   self flag::wait_till(#"loadout_given");
   self takeallweapons();
   var_9e22157a = getweapon(#"ar_standard_t9", array("stalker"));
-  var_d9338b9c = getweapon(#"pistol_semiauto_t9", array("extbarrel", "fastreload"));
+  w_s = getweapon(#"pistol_semiauto_t9", array("extbarrel", "fastreload"));
   self giveweapon(var_9e22157a);
   self givemaxammo(var_9e22157a);
-  self giveweapon(var_d9338b9c);
-  self givemaxammo(var_d9338b9c);
+  self giveweapon(w_s);
+  self givemaxammo(w_s);
   self shoulddoinitialweaponraise(var_9e22157a, 0);
   self switchtoweaponimmediate(var_9e22157a);
 }
@@ -53,11 +53,11 @@ function function_a22db743(b_starting) {
   self flag::wait_till(#"loadout_given");
   self takeallweapons();
   var_9e22157a = getweapon(#"ar_damage_t9", array("scope4x", "stalker", "fastreload", "speedgrip"));
-  var_d9338b9c = getweapon(#"sniper_standard_t9", array());
+  w_s = getweapon(#"sniper_standard_t9", array());
   self giveweapon(var_9e22157a);
   self givemaxammo(var_9e22157a);
-  self giveweapon(var_d9338b9c);
-  self givemaxammo(var_d9338b9c);
+  self giveweapon(w_s);
+  self givemaxammo(w_s);
   self switchtoweaponimmediate(var_9e22157a);
 }
 
@@ -112,7 +112,7 @@ function function_6f94ced5(a_ents, str_shot) {
   }
 }
 
-function function_ed760ecb(var_a7f24c3d, var_b895b611 = 1, str_skipto = level.skipto_current_objective[0]) {
+function hero_setup(var_a7f24c3d, var_b895b611 = 1, str_skipto = level.skipto_current_objective[0]) {
   ai = getEnt(var_a7f24c3d, "targetname", 1);
 
   if(!isalive(ai)) {
@@ -142,15 +142,15 @@ function function_ed760ecb(var_a7f24c3d, var_b895b611 = 1, str_skipto = level.sk
 }
 
 function function_55623c92(str_skipto = level.skipto_current_objective[0], str_name = self.targetname) {
-  var_142cfe56 = str_skipto + "_" + str_name;
-  s_org = struct::get(var_142cfe56, "targetname");
+  str_struct_name = str_skipto + "_" + str_name;
+  s_org = struct::get(str_struct_name, "targetname");
 
   if(isDefined(s_org)) {
     self forceteleport(s_org.origin, s_org.angles);
     return;
   }
 
-  iprintln("<dev string:x38>" + str_name + "<dev string:x3f>" + level.var_c2ccaeac + "<dev string:x68>");
+  iprintln("<dev string:x38>" + str_name + "<dev string:x3f>" + level.current_skipto + "<dev string:x68>");
 }
 
 function function_7b37895() {
@@ -164,7 +164,7 @@ function function_cfc94b81(guys, count, flag) {
   level flag::set(flag);
 }
 
-function function_d6fedf97(guys, killcount, sflag, timeout) {
+function ai_array_killcount_flag_set(guys, killcount, sflag, timeout) {
   ai::waittill_dead_or_dying(guys, killcount, timeout);
   level flag::set(sflag);
 }
@@ -187,7 +187,7 @@ function function_603d935(var_c5827a95, n_goalradius = 200, var_dd47e22 = 0.1, v
   e_vol = getEnt(var_c5827a95, "targetname");
   wait randomfloatrange(var_dd47e22, var_27ff9e4);
   self notify(#"stop_going_to_node");
-  self val::set(#"hash_4629ea2949a36bbb", "goalradius", n_goalradius);
+  self val::set(#"ai_retreat", "goalradius", n_goalradius);
   self thread ai::set_goal_ent(e_vol);
   self.ignoresuppression = 1;
   self.grenadeawareness = 0;
@@ -196,7 +196,7 @@ function function_603d935(var_c5827a95, n_goalradius = 200, var_dd47e22 = 0.1, v
   self.ignoresuppression = 0;
   self.grenadeawareness = 1;
   self ai::set_behavior_attribute("sprint", 0);
-  self val::reset_all(#"hash_4629ea2949a36bbb");
+  self val::reset_all(#"ai_retreat");
 }
 
 function function_f42f6f14() {
@@ -210,10 +210,10 @@ function function_f42f6f14() {
 }
 
 function function_ae1eba32() {
-  namespace_61e6d095::create(#"hash_26ccd69d3e6f3b56", #"hash_28d1565bae3236e");
-  namespace_61e6d095::set_color(#"hash_26ccd69d3e6f3b56", 0, 0, 0);
-  namespace_61e6d095::function_39710437(#"hash_26ccd69d3e6f3b56", "fullscreen");
-  namespace_61e6d095::function_46df0bc7(#"hash_26ccd69d3e6f3b56", 999);
+  scripted_widgets::create(#"hash_26ccd69d3e6f3b56", #"hash_28d1565bae3236e");
+  scripted_widgets::set_color(#"hash_26ccd69d3e6f3b56", 0, 0, 0);
+  scripted_widgets::function_39710437(#"hash_26ccd69d3e6f3b56", "fullscreen");
+  scripted_widgets::function_46df0bc7(#"hash_26ccd69d3e6f3b56", 999);
   e_player = getPlayers()[0];
   e_player val::set(#"hash_75e1db7c3af8ae06", "freezecontrols", 1);
   e_player val::set(#"hash_383e66ab943657f9", "disable_weapons", 1);

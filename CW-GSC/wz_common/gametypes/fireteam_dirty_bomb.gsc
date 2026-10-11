@@ -64,7 +64,7 @@ function event_handler[gametype_init] main(eventstruct) {
   clientfield::function_5b7d846d("hud_items_dirty_bomb.bomb_respawn_disabled", 1, 1, "int");
   laststand_mp::function_eb8c0e47(&onplayerrevived);
   level.var_574cc797 = &namespace_234f0efc::function_588a586d;
-  level.can_revive = &function_45a85e5b;
+  level.can_revive = &canrevive;
   level.dirtybombusebar = dirtybomb_usebar::register();
   level.var_b7821ed9 = &function_b7821ed9;
   level.var_82b353bf = &function_82b353bf;
@@ -1047,7 +1047,7 @@ function private function_f37d284() {
   self.model = spawn("script_model", self.origin + (0, 0, 0));
   self.model.angles = self.angles;
   self.model setModel("p9_wz_dirty_bomb_01");
-  self.model function_619a5c20();
+  self.model pingable();
   self.model.killcament = spawn("script_model", self.model.origin + (0, 0, 40));
   self.model.killcament setModel(#"tag_origin");
   self.model.killcament.angles = (0, 0, 0);
@@ -1098,7 +1098,7 @@ function private function_fcc87504(triggerstruct) {
     return;
   }
 
-  activator playLoopSound(#"hash_444112674e0eba78");
+  activator playLoopSound(#"fly_uranium_deposit_lp_3p");
   activator.var_c83d0859 = 1;
 
   for(success = activator function_99898a2d(bomb); is_true(success) && bomb.state == 2; success = activator function_99898a2d(bomb)) {
@@ -1134,7 +1134,7 @@ function private function_fcc87504(triggerstruct) {
   var_a5d31314 = activator clientfield::get_player_uimodel("hudItems.uraniumCarryCount");
 
   if(bomb.state == 2 && var_a5d31314 <= 0) {
-    bomb.model playsoundtoplayer(#"hash_1cc6a788d45a7d48", activator);
+    bomb.model playsoundtoplayer(#"fly_uranium_deposit_lp_end", activator);
   }
 
   activator function_80d6d39b();
@@ -1179,7 +1179,7 @@ function private function_99898a2d(bomb) {
   return success;
 }
 
-function private function_45a85e5b(revivee) {
+function private canrevive(revivee) {
   if(!isDefined(self) || !isDefined(revivee)) {
     return false;
   }
@@ -1439,7 +1439,7 @@ function function_b43466d5() {
 function function_5c84cd7c() {
   self.state = 3;
   objective_setgamemodeflags(self.objectiveid, 5);
-  self.model playSound(#"hash_2013c3b9f7d5a632");
+  self.model playSound(#"fly_uranium_deposit_done");
   self.trigger delete();
 }
 
@@ -1599,7 +1599,7 @@ function private function_f9f4b255() {
 
   while(isDefined(bomb) && bomb.state == 4) {
     if(isDefined(self.activator)) {
-      bomb.model playLoopSound(#"hash_5093c3a0e7047aa", 0.5);
+      bomb.model playLoopSound(#"fly_uranium_priming_lp_3p", 0.5);
       var_39c4d694 = !self.activator function_8e1791eb(bomb);
 
       if(var_39c4d694) {
@@ -1731,7 +1731,7 @@ function function_8e1791eb(bomb) {
     return false;
   }
 
-  if(self getcurrentweapon() === level.var_8ef8b9e8) {
+  if(self getcurrentweapon() === level.armorplateweapon) {
     return false;
   }
 
@@ -2046,7 +2046,7 @@ function bombcountdown(player) {
   }
 
   if(level.var_46f2c796 != 0) {
-    self.model playLoopSound(#"hash_78cdfb1438b360bf", 1);
+    self.model playLoopSound(#"evt_dirtybomb_alarm", 1);
     wait level.var_46f2c796;
 
     if(isDefined(self.model)) {
@@ -2112,7 +2112,7 @@ function function_91c39737(player, team) {
     self.objectiveid = undefined;
   }
 
-  var_f1db48c8 = level.var_2f418a15.size;
+  oldsize = level.var_2f418a15.size;
 
   for(i = 0; i < level.var_2f418a15.size; i++) {
     if(level.var_2f418a15[i] == self) {

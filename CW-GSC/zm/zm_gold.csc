@@ -105,18 +105,18 @@ function function_4fd00e1f(localclientnum, oldval, newval, bnewent, binitialsnap
     level.var_3630f9c0 = [];
   }
 
-  var_47c85523 = self getentitynumber();
+  n_entity = self getentitynumber();
   var_e534cbe9 = 0;
 
-  if(isDefined(level.var_3630f9c0[var_47c85523][fieldname])) {
-    killfx(fieldname, level.var_3630f9c0[var_47c85523][fieldname]);
-    level.var_3630f9c0[var_47c85523][fieldname] = undefined;
+  if(isDefined(level.var_3630f9c0[n_entity][fieldname])) {
+    killfx(fieldname, level.var_3630f9c0[n_entity][fieldname]);
+    level.var_3630f9c0[n_entity][fieldname] = undefined;
     var_e534cbe9 = 1;
   }
 
   if(bwastimejump > 0) {
     if(!var_e534cbe9) {
-      self playSound(fieldname, #"hash_79a78504d4dbaf3f");
+      self playSound(fieldname, #"zmb_flashlight_turn_on");
     }
 
     if(self zm_utility::function_f8796df3(fieldname)) {
@@ -127,11 +127,11 @@ function function_4fd00e1f(localclientnum, oldval, newval, bnewent, binitialsnap
       }
 
       if(viewmodelhastag(fieldname, "tag_flashlight")) {
-        level.var_3630f9c0[var_47c85523][fieldname] = playviewmodelfx(fieldname, str_fx, "tag_flashlight");
+        level.var_3630f9c0[n_entity][fieldname] = playviewmodelfx(fieldname, str_fx, "tag_flashlight");
       }
 
-      if(!isDefined(level.var_3630f9c0[var_47c85523][fieldname])) {
-        level.var_3630f9c0[var_47c85523][fieldname] = playviewmodelfx(fieldname, str_fx, "<dev string:x38>");
+      if(!isDefined(level.var_3630f9c0[n_entity][fieldname])) {
+        level.var_3630f9c0[n_entity][fieldname] = playviewmodelfx(fieldname, str_fx, "<dev string:x38>");
       }
     } else {
       if(bwastimejump == 1) {
@@ -140,7 +140,7 @@ function function_4fd00e1f(localclientnum, oldval, newval, bnewent, binitialsnap
         str_fx = #"hash_626d3f491b870eb1";
       }
 
-      level.var_3630f9c0[var_47c85523][fieldname] = util::playFXOnTag(fieldname, str_fx, self, "tag_flashlight");
+      level.var_3630f9c0[n_entity][fieldname] = util::playFXOnTag(fieldname, str_fx, self, "tag_flashlight");
     }
 
     if(self == function_5c10bd79(fieldname)) {
@@ -151,7 +151,7 @@ function function_4fd00e1f(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(var_e534cbe9) {
-    self playSound(fieldname, #"hash_13715035b161a0c3");
+    self playSound(fieldname, #"zmb_flashlight_turn_off");
   }
 
   if(self == function_5c10bd79(fieldname)) {

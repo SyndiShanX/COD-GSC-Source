@@ -17,8 +17,8 @@
 function autoexec __init__() {}
 
 function function_39da2f0() {
-  clientfield::register("vehicle", "" + #"hash_7882b7772f4ea0a8", 9000, 1, "int");
-  clientfield::register("scriptmover", "" + #"hash_7882b7772f4ea0a8", 9000, 1, "int");
+  clientfield::register("vehicle", "" + #"train_moving", 9000, 1, "int");
+  clientfield::register("scriptmover", "" + #"train_moving", 9000, 1, "int");
   clientfield::register("vehicle", "" + #"hash_5dd246706762931", 9000, 1, "int");
 }
 
@@ -67,7 +67,7 @@ function main() {
   var_e79162ea[20] setModel("p9_rm_exp_bullet_train_engine_reverse_01");
   var_e79162ea[20] ghost();
   var_e79162ea[20].script_cheap = 1;
-  level thread function_872decff(var_82b681fa, var_2f5e0848, var_1011159c, var_e79162ea, nd_start);
+  level thread train_think(var_82b681fa, var_2f5e0848, var_1011159c, var_e79162ea, nd_start);
 
   function_bc3bedde();
   level thread devgui_think();
@@ -79,7 +79,7 @@ function on_player_corpse(params) {
   }
 }
 
-function function_872decff(var_82b681fa, var_2f5e0848, var_1011159c, var_166a40ad, nd_start) {
+function train_think(var_82b681fa, var_2f5e0848, var_1011159c, train_cars, nd_start) {
   level endon(#"game_ended");
   waittillframeend();
 
@@ -109,19 +109,19 @@ function function_872decff(var_82b681fa, var_2f5e0848, var_1011159c, var_166a40a
       playSoundAtPosition("amb_train_incomming_beep", (1368, -2341, 180));
     }
 
-    var_6a3e5efa = getdvarfloat(#"hash_26a82847c1444a57", 3.6);
+    var_6a3e5efa = getdvarfloat(#"scr_express_gatedownwait", 3.6);
     wait var_6a3e5efa;
-    train_engine = var_166a40ad[0];
+    train_engine = train_cars[0];
     train_engine thread function_70406b5f();
     train_engine thread vehicle::get_on_and_go_path(nd_start);
-    train_engine thread function_3bd4a776();
-    train_engine thread function_ae88ee4b();
+    train_engine thread record_positions();
+    train_engine thread watch_end();
     train_engine thread function_3c65801();
     train_engine.killcament.starttime = gettime();
     var_d32723ab = "";
 
-    foreach(index, var_49360986 in var_166a40ad) {
-      if(var_49360986 != train_engine) {
+    foreach(index, train_car in train_cars) {
+      if(train_car != train_engine) {
         if(index == 20) {
           wait 0.46;
         } else if(index > 1) {
@@ -130,13 +130,13 @@ function function_872decff(var_82b681fa, var_2f5e0848, var_1011159c, var_166a40a
           wait 0.36;
         }
 
-        var_49360986 thread function_5efe9259();
-        var_49360986 thread function_d5152215();
+        train_car thread watch_player_touch();
+        train_car thread car_move();
       }
 
-      var_49360986 show();
-      var_49360986 clientfield::set("" + #"hash_7882b7772f4ea0a8", 1);
-      var_49360986 playLoopSound("amb_train_lp" + var_d32723ab);
+      train_car show();
+      train_car clientfield::set("" + #"train_moving", 1);
+      train_car playLoopSound("amb_train_lp" + var_d32723ab);
 
       switch (var_d32723ab) {
         case #"_b":
@@ -154,7 +154,7 @@ function function_872decff(var_82b681fa, var_2f5e0848, var_1011159c, var_166a40a
       }
     }
 
-    var_a12b6fb3 = getdvarfloat(#"hash_1acb572ef7a8d8de", 10.5);
+    var_a12b6fb3 = getdvarfloat(#"scr_express_gateupwait", 10.5);
     wait var_a12b6fb3;
     level thread function_e121c532(var_2f5e0848, var_1011159c, var_82b681fa, 1);
 
@@ -164,7 +164,7 @@ function function_872decff(var_82b681fa, var_2f5e0848, var_1011159c, var_166a40a
   }
 }
 
-function function_5efe9259() {
+function watch_player_touch() {
   level endon(#"train_done");
   self endon(#"death");
   self.disablefinalkillcam = 1;
@@ -183,10 +183,10 @@ function function_5efe9259() {
   }
 }
 
-function function_d5152215() {
-  for(i = 0; i < level.var_9b3f92c7.size; i++) {
-    self.origin = level.var_9b3f92c7[i];
-    self.angles = level.var_2e3456da[i];
+function car_move() {
+  for(i = 0; i < level.train_positions.size; i++) {
+    self.origin = level.train_positions[i];
+    self.angles = level.train_angles[i];
     waitframe(1);
 
     if(i == 4) {
@@ -194,9 +194,9 @@ function function_d5152215() {
     }
   }
 
-  self notify(#"hash_644079e27ed61486");
+  self notify(#"end_of_track");
   self ghost();
-  self clientfield::set("" + #"hash_7882b7772f4ea0a8", 0);
+  self clientfield::set("" + #"train_moving", 0);
   self stoploopsound(0.2);
   self playSound("amb_train_end");
 }
@@ -206,21 +206,21 @@ function function_f99792ae(n_time) {
   self show();
 }
 
-function function_3bd4a776() {
+function record_positions() {
   self endon(#"reached_end_node");
-  level.var_9b3f92c7 = [];
-  level.var_2e3456da = [];
+  level.train_positions = [];
+  level.train_angles = [];
 
   while(true) {
-    level.var_9b3f92c7[level.var_9b3f92c7.size] = self.origin;
-    level.var_2e3456da[level.var_2e3456da.size] = self.angles;
+    level.train_positions[level.train_positions.size] = self.origin;
+    level.train_angles[level.train_angles.size] = self.angles;
     waitframe(1);
   }
 }
 
-function function_ae88ee4b() {
+function watch_end() {
   self waittill(#"reached_end_node");
-  self clientfield::set("" + #"hash_7882b7772f4ea0a8", 0);
+  self clientfield::set("" + #"train_moving", 0);
   self ghost();
   self stoploopsound(0.2);
   self playSound("amb_train_end");
@@ -292,7 +292,7 @@ function function_70406b5f() {
 
 function function_3c65801() {
   self endon(#"death");
-  self waittill(#"hash_26f91f11d12e4a44");
+  self waittill(#"start_dust");
   self clientfield::set("" + #"hash_5dd246706762931", 1);
   self waittill(#"debris_a");
   level thread function_f704054e("fxexp_trigger_train_debris_a");
@@ -322,7 +322,7 @@ function function_3c65801() {
   level thread function_f704054e("fxexp_trigger_train_debris_g");
   self waittill(#"sparks_g");
   level thread function_f704054e("fxexp_trigger_train_sparks_g");
-  self waittill(#"hash_7e23976f90243496");
+  self waittill(#"stop_dust");
   self clientfield::set("" + #"hash_5dd246706762931", 0);
 }
 
@@ -335,23 +335,23 @@ function function_f704054e(explodername) {
 function function_e121c532(var_2f5e0848, var_1011159c, var_82b681fa, var_c5e4331b) {
   if(var_c5e4331b) {
     exploder::exploder("fxexp_trigger_train_gate_bot_dust");
-    var_2f5e0848 function_141b453d();
-    var_1011159c function_141b453d();
-    array::thread_all(var_82b681fa, &function_141b453d);
+    var_2f5e0848 gate_move();
+    var_1011159c gate_move();
+    array::thread_all(var_82b681fa, &gate_move);
     var_1011159c waittill(#"movedone");
     exploder::exploder("fxexp_trigger_train_gate_top_dust");
     return;
   }
 
   exploder::exploder("fxexp_trigger_train_gate_top_dust");
-  var_2f5e0848 function_141b453d(-186);
-  var_1011159c function_141b453d(-186);
-  array::thread_all(var_82b681fa, &function_141b453d, -186);
+  var_2f5e0848 gate_move(-186);
+  var_1011159c gate_move(-186);
+  array::thread_all(var_82b681fa, &gate_move, -186);
   var_1011159c waittill(#"movedone");
   exploder::exploder("fxexp_trigger_train_gate_bot_dust");
 }
 
-function function_141b453d(var_fb3621dd) {
+function gate_move(var_fb3621dd) {
   if(isDefined(self.mdl_clip)) {
     self thread gate_move_think(isDefined(var_fb3621dd));
   }
@@ -362,20 +362,20 @@ function function_141b453d(var_fb3621dd) {
   }
 
   self movez(var_fb3621dd, 5);
-  self playSound(#"hash_a9b40237bd6f7a8");
-  self playLoopSound(#"hash_2e622899c2b9f6fa");
+  self playSound(#"amb_gate_start");
+  self playLoopSound(#"amb_gate_loop");
   self thread function_b62d86d3();
 }
 
 function function_b62d86d3() {
   self waittill(#"movedone");
   self stoploopsound(2);
-  self playSound(#"hash_7a3009b4e3648bb9");
+  self playSound(#"amb_gate_end");
 }
 
 function function_d8ff4388(n_time, n_distance) {
   wait n_time;
-  self function_141b453d(n_distance);
+  self gate_move(n_distance);
 }
 
 function gate_move_think(var_325c7304) {
@@ -453,8 +453,8 @@ function destroy_corpses() {
 }
 
 function function_bc3bedde() {
-  var_2c251c2e = util::get_map_name();
-  adddebugcommand("<dev string:x38>" + var_2c251c2e + "<dev string:x49>");
+  str_mapname = util::get_map_name();
+  adddebugcommand("<dev string:x38>" + str_mapname + "<dev string:x49>");
 }
 
 function devgui_think() {

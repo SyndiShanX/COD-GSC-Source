@@ -51,7 +51,7 @@ function give_achievement(achievement, var_a299f0b3) {
 function on_player_connect() {
   self endon(#"disconnect");
   self.var_8e5e0541 = spawnStruct();
-  self.var_8e5e0541.var_d3879c8e = 0;
+  self.var_8e5e0541.killindex = 0;
   self.var_8e5e0541.var_ca87baa4 = 0;
   self.var_8e5e0541.kills = [];
   self.var_8e5e0541.var_f79c95f9 = [];
@@ -74,10 +74,10 @@ function function_cc2216e2(eplayer) {
     var_b0abc67b[index] = 0;
   }
 
-  var_cf1f3586 = skipto::function_228558fd(0, 0);
+  mission_list = skipto::function_228558fd(0, 0);
   var_d8222c25 = 0;
 
-  foreach(msn in var_cf1f3586) {
+  foreach(msn in mission_list) {
     if(!eplayer stats::get_stat(#"mapdata", msn, #"complete")) {
       continue;
     }
@@ -92,7 +92,7 @@ function function_cc2216e2(eplayer) {
     var_d8222c25++;
   }
 
-  var_7a34e971 = var_cf1f3586.size - 1;
+  var_7a34e971 = mission_list.size - 1;
 
   if(var_d8222c25 == var_7a34e971) {
     eplayer give_achievement(#"cp_achievement_combat_recruit");
@@ -121,7 +121,7 @@ function on_ai_damage(s_params) {
 }
 
 function on_player_death(s_params) {
-  self.var_8e5e0541.var_d3879c8e = 0;
+  self.var_8e5e0541.killindex = 0;
   self.var_8e5e0541.var_ca87baa4 = 0;
   self.var_8e5e0541.kills = [];
   self.var_8e5e0541.var_f79c95f9 = [];
@@ -131,25 +131,25 @@ function private function_467369b2(var_668b29af, evictim) {
   var_a8f62552 = distance(var_668b29af.origin, evictim.origin);
 
   if(var_a8f62552 >= 3937) {
-    var_41db60bc = var_668b29af stats::get_stat(#"achievements", #"hash_5740a8698a4d0345");
-    var_41db60bc++;
+    n_current_count = var_668b29af stats::get_stat(#"achievements", #"cp_distance_kill");
+    n_current_count++;
 
-    printtoprightln("<dev string:x73>" + var_a8f62552 + "<dev string:x77>" + var_41db60bc, (1, 1, 1));
+    printtoprightln("<dev string:x73>" + var_a8f62552 + "<dev string:x77>" + n_current_count, (1, 1, 1));
 
-    if(var_41db60bc >= 5) {
-      var_668b29af give_achievement(#"hash_5740a8698a4d0345");
+    if(n_current_count >= 5) {
+      var_668b29af give_achievement(#"cp_distance_kill");
       return;
     }
 
-    var_668b29af stats::set_stat(#"achievements", #"hash_5740a8698a4d0345", var_41db60bc);
+    var_668b29af stats::set_stat(#"achievements", #"cp_distance_kill", n_current_count);
   }
 }
 
 function private function_4239da84(player, var_6d2d969a, weapon) {
   weapon.var_8e5e0541.var_ca87baa4++;
-  currentindex = weapon.var_8e5e0541.var_d3879c8e;
+  currentindex = weapon.var_8e5e0541.killindex;
   weapon.var_8e5e0541.kills[currentindex] = gettime();
-  weapon.var_8e5e0541.var_d3879c8e = (currentindex + 1) % 10;
+  weapon.var_8e5e0541.killindex = (currentindex + 1) % 10;
 
   if(weapon.var_8e5e0541.var_ca87baa4 < 10) {
     return;
@@ -160,7 +160,7 @@ function private function_4239da84(player, var_6d2d969a, weapon) {
   endtime = weapon.var_8e5e0541.kills[currentindex];
 
   if(weapon.var_8e5e0541.var_ca87baa4 >= 10 && endtime - starttime <= 3000) {
-    weapon give_achievement(#"hash_1e7fe721b8911e57");
+    weapon give_achievement(#"cp_timed_kill");
   }
 }
 
@@ -186,12 +186,12 @@ function private function_b25a404e(player, weapon) {
   }
 
   if(var_5f546d20 >= 5) {
-    player give_achievement(#"hash_1a6ca2f96f903656");
+    player give_achievement(#"cp_different_gun_kill");
   }
 }
 
 function function_2240fcb8(eattacker, evictim, eweapon) {
-  if(isDefined(eweapon.var_628ca13e) && isPlayer(eweapon.var_628ca13e)) {
+  if(isDefined(eweapon.iffowner) && isPlayer(eweapon.iffowner)) {
     if(isDefined(eweapon.killcount)) {
       eweapon.killcount++;
       return;
@@ -203,7 +203,7 @@ function function_2240fcb8(eattacker, evictim, eweapon) {
 
 function function_8b531812(eplayer, evictim) {
   if(isDefined(evictim.var_e2f6147a) && evictim.var_e2f6147a == eplayer && evictim.team !== #"allies") {
-    eplayer give_achievement(#"hash_1f0a3ec94eff5513");
+    eplayer give_achievement(#"cp_obstructed_kill");
   }
 }
 
@@ -211,7 +211,7 @@ function function_6e3f345f(eplayer) {
   var_71c7cc3a = eplayer getmeleechaincount();
 
   if(2 <= var_71c7cc3a) {
-    eplayer give_achievement(#"hash_42303e6214910391");
+    eplayer give_achievement(#"cp_melee_combo_kill");
   }
 }
 
@@ -239,15 +239,15 @@ function private function_fd51b8a8() {
     waitresult = self waittill(#"gun_level_complete");
 
     if(waitresult.is_last_rank && waitresult.item_index >= 1 && waitresult.item_index <= 60) {
-      self give_achievement(#"hash_30b6860e2869b596");
+      self give_achievement(#"cp_all_weapon_attachments");
       break;
     }
   }
 }
 
-function function_c3541c14(var_71d636c6) {
-  if(var_71d636c6 == 3) {
-    self give_achievement(#"hash_5f39b2b443875e95");
+function checkweaponchallengecomplete(challenge_tier) {
+  if(challenge_tier == 3) {
+    self give_achievement(#"cp_all_weapon_camos");
   }
 }
 

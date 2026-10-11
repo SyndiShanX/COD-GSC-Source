@@ -105,7 +105,7 @@ function function_a9cee9e2() {
   waitframe(1);
   var_b22820f2 = struct::get("survey_camera", "targetname");
   var_b22820f2.var_721fe4cf = self.origin;
-  var_b22820f2.var_d298ff03 = self.angles;
+  var_b22820f2.v_old_angles = self.angles;
   level.var_b22820f2 = var_b22820f2;
   self thread lui::screen_flash(0.15, 0.4, 0.15, 1, "black");
   wait 0.35;
@@ -133,7 +133,7 @@ function function_86617714() {
   var_b22820f2.var_afe8c0dc unlink();
   var_b22820f2.var_afe8c0dc delete();
   self setOrigin(var_b22820f2.var_721fe4cf);
-  self setplayerangles(var_b22820f2.var_d298ff03);
+  self setplayerangles(var_b22820f2.v_old_angles);
   self showviewmodel();
   setslowmotion(0.999, 1, 0.1, 0.45, 1);
   wait 0.35;
@@ -142,7 +142,7 @@ function function_86617714() {
 function private function_feadce70() {
   self endon(#"death");
   waitframe(1);
-  self namespace_61e6d095::function_b0bad5ff();
+  self scripted_widgets::function_b0bad5ff();
   self notify(#"survey_equipment_exit");
 }
 

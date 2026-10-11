@@ -40,7 +40,7 @@ function function_f44fbe7c() {
       self.doa.var_121de807 linkTo(self);
       self.doa.var_121de807 thread function_510ce803(self);
       self namespace_e32bb68::function_3a59ec34("evt_doa_pickup_teddybear_active_lp");
-      self namespace_83eb6304::function_3ecfde67("stunbear");
+      self doa_fx::function_3ecfde67("stunbear");
     }
   }
 
@@ -53,7 +53,7 @@ function private function_79cb4037() {
   self endon("36c490e4e613efc0");
   self endon(#"death");
   self.doa.stunned = 1;
-  self namespace_83eb6304::function_3ecfde67("stunbear_affected");
+  self doa_fx::function_3ecfde67("stunbear_affected");
 
   if(!is_true(self.doa.var_74e4ded8)) {
     self.doa.var_db417b61 = self.doa.original_origin;
@@ -71,7 +71,7 @@ function private function_79cb4037() {
   }
 
   self.doa.stunned = 0;
-  self namespace_83eb6304::turnofffx("stunbear_affected");
+  self doa_fx::turnofffx("stunbear_affected");
   self.ignoreall = 0;
   self clearenemy();
   self.favoriteenemy = undefined;
@@ -88,7 +88,7 @@ function private function_79cb4037() {
 function private function_510ce803(player) {
   self notify("38569382751b81b1");
   self endon("38569382751b81b1");
-  player endon(#"hash_26b5087b9dec0906");
+  player endon(#"end_teddybear_stun");
 
   if(isPlayer(player)) {
     player endon(#"disconnect");
@@ -110,7 +110,7 @@ function private function_510ce803(player) {
 
     if(guy.doa.stunned === 0) {
       guy namespace_e32bb68::function_3a59ec34("evt_doa_pickup_teddybear_repulse");
-      guy namespace_83eb6304::function_3ecfde67("stunbear_contact");
+      guy doa_fx::function_3ecfde67("stunbear_contact");
       player playRumbleOnEntity("slide_rumble");
       guy thread function_79cb4037();
     }
@@ -120,26 +120,26 @@ function private function_510ce803(player) {
 function private function_6a9ffef0() {
   self notify("4f772c13159aefb3");
   self endon("4f772c13159aefb3");
-  self endon(#"hash_26b5087b9dec0906");
+  self endon(#"end_teddybear_stun");
 
   if(isPlayer(self)) {
     self endon(#"disconnect");
   }
 
-  timeout = self namespace_1c2a96f9::function_4808b985(20);
+  timeout = self doa_fate::function_4808b985(20);
   self waittilltimeout(timeout, #"entering_last_stand", #"doa_exit_taken", #"player_died", #"death");
-  self notify(#"hash_26b5087b9dec0906");
+  self notify(#"end_teddybear_stun");
 }
 
 function private function_7343529d(trigger) {
   self notify("38070fbe679eeaab");
   self endon("38070fbe679eeaab");
-  self waittill(#"hash_26b5087b9dec0906", #"disconnect", #"doa_exit_taken", #"clone_shutdown");
+  self waittill(#"end_teddybear_stun", #"disconnect", #"doa_exit_taken", #"clone_shutdown");
 
   if(isDefined(self)) {
-    self notify(#"hash_26b5087b9dec0906");
-    self namespace_83eb6304::turnofffx("stunbear");
-    self namespace_83eb6304::function_3ecfde67("stunbear_fade");
+    self notify(#"end_teddybear_stun");
+    self doa_fx::turnofffx("stunbear");
+    self doa_fx::function_3ecfde67("stunbear_fade");
     self stoploopsound(2);
   }
 
@@ -149,7 +149,7 @@ function private function_7343529d(trigger) {
   if(isDefined(self)) {
     self namespace_e32bb68::function_ae271c0b("evt_doa_pickup_teddybear_active_lp");
     self namespace_e32bb68::function_3a59ec34("evt_doa_pickup_teddybear_active_end");
-    self namespace_83eb6304::turnofffx("stunbear_fade");
+    self doa_fx::turnofffx("stunbear_fade");
   }
 
   if(isDefined(trigger)) {

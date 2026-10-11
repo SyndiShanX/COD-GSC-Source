@@ -31,7 +31,7 @@ function function_870656e3(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(bwastimejump) {
     self.death_fx = function_239993de(fieldname, "zm_ai/fx9_hound_hell_dth_aoe", self, "j_spine4");
-    self playSound(fieldname, #"hash_6a76932cce379c66");
+    self playSound(fieldname, #"zmb_hellhound_molotov_explo");
     return;
   }
 

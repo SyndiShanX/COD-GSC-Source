@@ -288,21 +288,21 @@ function getscoreremaining(score) {
   return level.scorelimit - score;
 }
 
-function function_fd90317f(user, var_b393387d) {
+function function_fd90317f(user, current_score) {
   if(level.cumulativeroundscores && isDefined(game.lastroundscore[user])) {
-    return (var_b393387d - game.lastroundscore[user]);
+    return (current_score - game.lastroundscore[user]);
   }
 
-  return var_b393387d;
+  return current_score;
 }
 
-function getscoreperminute(var_d0266750) {
+function getscoreperminute(round_score) {
   minutespassed = gettimepassed() / int(60 * 1000) + 0.0001;
-  return var_d0266750 / minutespassed;
+  return round_score / minutespassed;
 }
 
-function getestimatedtimeuntilscorelimit(total_score, var_d0266750) {
-  scoreperminute = self getscoreperminute(var_d0266750);
+function getestimatedtimeuntilscorelimit(total_score, round_score) {
+  scoreperminute = self getscoreperminute(round_score);
   scoreremaining = self getscoreremaining(total_score);
 
   if(!scoreperminute) {

@@ -140,7 +140,7 @@ function function_6de171e9(slot = 4) {
   self.var_390003ff = slot;
 }
 
-function function_8606cd15(slot = 4) {
+function give_binoculars(slot = 4) {
   assert(level.var_42db149f != level.weaponnone);
   self giveweapon(level.var_42db149f);
   self setactionslot(slot, "weapon", level.var_42db149f);
@@ -166,7 +166,7 @@ function function_b83af2a9() {
   }
 }
 
-function function_d9015b8c() {
+function remove_binoculars() {
   player = undefined;
 
   if(isPlayer(self)) {
@@ -264,7 +264,7 @@ function private function_b917e313(camera, ads_gesture, var_c5c03b2) {
 
           if(var_c5c03b2) {
             self clientfield::set_to_player("binoculars_overlay", 1);
-            namespace_61e6d095::create(#"binoculars", #"hash_1703896731dc6998");
+            scripted_widgets::create(#"binoculars", #"hash_1703896731dc6998");
           }
 
           self thread function_376f686f();
@@ -343,7 +343,7 @@ function private function_b917e313(camera, ads_gesture, var_c5c03b2) {
 
         if(var_c5c03b2) {
           self clientfield::set_to_player("binoculars_overlay", 0);
-          namespace_61e6d095::remove(#"binoculars");
+          scripted_widgets::remove(#"binoculars");
         }
 
         self lui::screen_fade_in(0.05);
@@ -396,9 +396,9 @@ function private function_d704edcd(var_c5c03b2) {
   namespace_82bfe441::fade(0, "FadeFast");
   self lui::function_a6eb5334(0);
 
-  if(namespace_61e6d095::exists(#"binoculars")) {
+  if(scripted_widgets::exists(#"binoculars")) {
     self clientfield::set_to_player("binoculars_overlay", 0);
-    namespace_61e6d095::remove(#"binoculars");
+    scripted_widgets::remove(#"binoculars");
   }
 
   self notify(#"hash_2977cbecfddfcab6");

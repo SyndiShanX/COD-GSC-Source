@@ -156,7 +156,7 @@ function function_72989645(localclientnum) {
   self.var_dd5aa0f5 = [-1, -1, -1];
   self.var_a2a062e1 = &function_369b5617;
   level._footstepcbfuncs[self.archetype] = &function_9f15588;
-  self playSound(0, #"hash_3dcd119a8a1fbd51");
+  self playSound(0, #"zmb_ai_abom_spawn");
 }
 
 function function_9f15588(localclientnum, pos, surface, notetrack, bone) {
@@ -280,7 +280,7 @@ function private function_bfde165(localclientnum, entity) {
   }
 }
 
-function private function_187b10a5(localclientnum, var_c7821f8) {
+function private function_187b10a5(localclientnum, is_spawning) {
   assert(isDefined(level.var_cfc8a231), "<dev string:x38>");
 
   if(!isDefined(level.var_f9fd59d1)) {
@@ -306,7 +306,7 @@ function private function_187b10a5(localclientnum, var_c7821f8) {
       }
     }
 
-    fx = is_true(var_c7821f8) ? fx_struct.spawn_fx : fx_struct.death_fx;
+    fx = is_true(is_spawning) ? fx_struct.spawn_fx : fx_struct.death_fx;
     level.var_f9fd59d1[level.var_f9fd59d1.size] = util::playFXOnTag(localclientnum, fx, self, fx_struct.tag);
   }
 }
@@ -401,19 +401,19 @@ function function_5d8c2808(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_757801a6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self endon(#"death");
   self util::waittill_dobj(fieldname);
-  function_8cddfdf6(fieldname, bwasdemojump, 0, "tag_fx_head_le_throat", #"hash_6e6c4d24ebf7f73c", #"hash_62a1a153307fb3ff");
+  function_8cddfdf6(fieldname, bwasdemojump, 0, "tag_fx_head_le_throat", #"ai_t9_zm_abom_run_01_l_add", #"hash_62a1a153307fb3ff");
 }
 
 function function_9b9a5f77(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self endon(#"death");
   self util::waittill_dobj(fieldname);
-  function_8cddfdf6(fieldname, bwasdemojump, 1, "tag_fx_head_center_throat", #"hash_73986354896a78ef", #"hash_2c639591caf1074c");
+  function_8cddfdf6(fieldname, bwasdemojump, 1, "tag_fx_head_center_throat", #"ai_t9_zm_abom_run_01_m_add", #"hash_2c639591caf1074c");
 }
 
 function function_94de7e4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self endon(#"death");
   self util::waittill_dobj(fieldname);
-  function_8cddfdf6(fieldname, bwasdemojump, 2, "tag_fx_head_ri_throat", #"hash_28ba8b5ddd8c7a8a", #"hash_5fb010b599c470a5");
+  function_8cddfdf6(fieldname, bwasdemojump, 2, "tag_fx_head_ri_throat", #"ai_t9_zm_abom_run_01_r_add", #"hash_5fb010b599c470a5");
 }
 
 function private function_8cddfdf6(localclientnum, enable, head, tag, anim, var_b8377082) {

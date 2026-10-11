@@ -39,7 +39,7 @@ function main(str_skipto, b_starting) {
   level namespace_31c67f6d::function_7fd3a4d8(undefined, undefined, 3, 1);
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 }
 
@@ -123,7 +123,7 @@ function function_be5b3167() {
 
 function function_650cdcc9() {
   self setModel(#"c_t9_eng_hero_park_undercover_berlin_body1");
-  namespace_31c67f6d::function_a0abc8d3(#"c_t9_cp_eng_hero_park_head_undcvr_stakeout");
+  namespace_31c67f6d::head_swap(#"c_t9_cp_eng_hero_park_head_undcvr_stakeout");
   self.var_ba1eee16 = spawnStruct();
   self.var_ba1eee16.var_c5c9acca[0] = ["vox_cp_sh2p_00500_park_thatintelyoufou_db", 0.8, 0.5];
   self.var_ba1eee16.var_c5c9acca[1] = ["vox_cp_sh2p_00500_park_bell_be", 0.9, 0.5];
@@ -197,7 +197,7 @@ function function_7b83d7d() {
 
 function function_5312ebff() {
   self setModel(#"c_t9_cp_usa_hero_sims_berlin_undercover_body1");
-  namespace_31c67f6d::function_a0abc8d3(#"c_t9_usa_hero_sims_head1_berlin");
+  namespace_31c67f6d::head_swap(#"c_t9_usa_hero_sims_head1_berlin");
   self.var_ba1eee16 = spawnStruct();
   self.var_ba1eee16.var_c5c9acca[0] = ["vox_cp_sh2_02200_sims_heretoentertain_a2", 0.5];
   self.var_ba1eee16.var_c5c9acca[1] = ["vox_cp_sh2_02200_sims_hello_22", 0.5];
@@ -266,9 +266,9 @@ function function_ae2b7b0f() {
 
 function function_4d1189ac() {
   self waittill(#"dialog_ready");
-  transient = savegame::function_6440b06b(#"transient");
-  transient.var_16e4161b = 1;
-  level thread savegame::function_7790f03();
+  transient = savegame::get_mission_data(#"transient");
+  transient.briefing_complete = 1;
+  level thread savegame::checkpoint_save_asap();
 }
 
 function function_f856db57() {
@@ -298,7 +298,7 @@ function function_428d9889(str_skipto, b_starting) {
   level flag::wait_till("flag_post_armada_ambient_scene_started");
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 }
 
@@ -409,10 +409,10 @@ function function_13b55e88() {
   level flag::clear("post_armada_phone_call_happening");
 }
 
-function function_c8bbb8b0(var_6b68fbe2, var_da5872f1, idle_scene) {
+function function_c8bbb8b0(var_6b68fbe2, the_shot, idle_scene) {
   self notify(#"hash_7d22c6f32f3a3cdb");
   self flag::set("flag_in_scene");
-  level scene::play(var_6b68fbe2, var_da5872f1);
+  level scene::play(var_6b68fbe2, the_shot);
   self flag::clear("flag_in_scene");
   level thread scene::play(idle_scene, "zone_idle");
 }

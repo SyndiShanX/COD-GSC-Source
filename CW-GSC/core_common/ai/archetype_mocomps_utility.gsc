@@ -1152,8 +1152,8 @@ function function_f79866a1(entity, mocompanim, mocompanimblendouttime, mocompani
   enemy = isDefined(mocompduration.attackable) ? mocompduration.attackable : mocompduration.enemy;
 
   if(isDefined(enemy) && isDefined(enemy.health) && enemy.health > 0 && mocompduration function_ebbebf56() > 0.5) {
-    var_1b0f41cd = isDefined(self.var_6c5c29fb) ? self.var_6c5c29fb : enemy.origin;
-    toenemy = var_1b0f41cd - mocompduration.origin;
+    attack_pos = isDefined(self.var_6c5c29fb) ? self.var_6c5c29fb : enemy.origin;
+    toenemy = attack_pos - mocompduration.origin;
     var_8e08536c = vectortoangles(toenemy);
     mocompduration orientmode("face angle", var_8e08536c);
   }

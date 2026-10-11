@@ -414,12 +414,12 @@ function function_5409b584() {
         var_f7259b16 = undefined;
       }
 
-      player thread function_82104e32(var_904e61ce, var_f7259b16);
+      player thread fob_dof(var_904e61ce, var_f7259b16);
     }
   }
 }
 
-function function_82104e32(var_904e61ce, var_f7259b16, var_ff9d26ff) {
+function fob_dof(var_904e61ce, var_f7259b16, var_ff9d26ff) {
   self notify(#"hash_1481a83e14539c4");
   self endon(#"hash_1481a83e14539c4");
   self endon(#"death");
@@ -486,12 +486,12 @@ function function_82104e32(var_904e61ce, var_f7259b16, var_ff9d26ff) {
 function trace_distance() {
   tracedist = 500;
   playereye = self getEye();
-  var_a6cb20ff = self getplayerangles();
+  playeranglesrel = self getplayerangles();
 
   if(isDefined(self.dof_ref_ent)) {
-    playerangles = combineangles(self.dof_ref_ent.angles, var_a6cb20ff);
+    playerangles = combineangles(self.dof_ref_ent.angles, playeranglesrel);
   } else {
-    playerangles = var_a6cb20ff;
+    playerangles = playeranglesrel;
   }
 
   playerforward = vectorNormalize(anglesToForward(playerangles));

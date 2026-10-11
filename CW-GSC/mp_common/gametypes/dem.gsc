@@ -46,7 +46,7 @@ function event_handler[gametype_init] main(eventstruct) {
   util::registerscorelimit(0, 500);
   level.onstartgametype = &onstartgametype;
   level.onspawnplayer = &onspawnplayer;
-  level.playerspawnedcb = &function_fcf8c3f3;
+  level.playerspawnedcb = &dem_playerspawnedcb;
   player::function_cf3aa03d(&onplayerkilled);
   level.ondeadevent = &ondeadevent;
   level.ononeleftevent = &ononeleftevent;
@@ -56,11 +56,11 @@ function event_handler[gametype_init] main(eventstruct) {
   level.shouldplayovertimeround = &shouldplayovertimeround;
   level.var_17ae20ae = &function_17ae20ae;
   level.var_6c4ec3fc = &function_8af3b312;
-  level.var_21479330 = undefined;
-  level.var_3b2307bb = undefined;
+  level.lastbombexplodetime = undefined;
+  level.lastbombexplodebyteam = undefined;
   level.ddbombmodel = [];
   level.endgameonscorelimit = 0;
-  level.var_cbdf9ba4 = "bombzone_dem";
+  level.dembombzonename = "bombzone_dem";
   level.var_ce802423 = 1;
   globallogic_defaults::function_daa7e9d5();
   spawning::addsupportedspawnpointtype("dem");
@@ -162,10 +162,10 @@ function onstartgametype() {
   game.strings[#"bomb_defused"] = #"mp/bomb_defused";
   level._effect[#"bombexplosion"] = #"hash_1811460fd925f1f8";
   level._effect[#"hash_568509fa2561a75d"] = #"hash_4d29da75039cfce";
-  bombzones = getEntArray(level.var_cbdf9ba4, "targetname");
+  bombzones = getEntArray(level.dembombzonename, "targetname");
 
   if(bombzones.size == 0) {
-    level.var_cbdf9ba4 = "bombzone";
+    level.dembombzonename = "bombzone";
   }
 
   thread updategametypedvars();
@@ -203,7 +203,7 @@ function isdefending(player) {
   return game.defenders == player.team;
 }
 
-function function_fcf8c3f3() {
+function dem_playerspawnedcb() {
   level notify(#"spawned_player");
 }
 
@@ -241,13 +241,13 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 
   if(isDefined(bombzone) && isPlayer(attacker) && attacker.pers[#"team"] != self.pers[#"team"]) {
     if(bombzone gameobjects::get_owner_team() != attacker.team) {
-      if(!isDefined(attacker.var_28c6734a)) {
-        attacker.var_28c6734a = 0;
+      if(!isDefined(attacker.dem_offends)) {
+        attacker.dem_offends = 0;
       }
 
-      attacker.var_28c6734a++;
+      attacker.dem_offends++;
 
-      if(level.playeroffensivemax >= attacker.var_28c6734a) {
+      if(level.playeroffensivemax >= attacker.dem_offends) {
         attacker medals::offenseglobalcount();
         attacker thread challenges::killedbasedefender(bombzone.trigger);
         scoreevents::processscoreevent("killed_defender", attacker, self, weapon);
@@ -262,13 +262,13 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
         attacker iprintlnbold("<dev string:x38>");
       }
     } else {
-      if(!isDefined(attacker.var_b9f51a5d)) {
-        attacker.var_b9f51a5d = 0;
+      if(!isDefined(attacker.dem_defends)) {
+        attacker.dem_defends = 0;
       }
 
-      attacker.var_b9f51a5d++;
+      attacker.dem_defends++;
 
-      if(level.playerdefensivemax >= attacker.var_b9f51a5d) {
+      if(level.playerdefensivemax >= attacker.dem_defends) {
         if(isDefined(attacker.pers[#"defends"])) {
           attacker.pers[#"defends"]++;
           attacker.defends = attacker.pers[#"defends"];
@@ -383,15 +383,15 @@ function ontimelimit() {
   }
 
   if(level.teambased) {
-    var_3c6bbe27 = 0;
+    bombzonesleft = 0;
 
     for(index = 0; index < level.bombzones.size; index++) {
       if(!isDefined(level.bombzones[index].bombexploded) || !level.bombzones[index].bombexploded) {
-        var_3c6bbe27++;
+        bombzonesleft++;
       }
     }
 
-    if(var_3c6bbe27 == 0 || level.var_e8b70364 === 1) {
+    if(bombzonesleft == 0 || level.var_e8b70364 === 1) {
       function_92164b1c(game.attackers, 1);
     } else {
       function_92164b1c(game.defenders, 2);
@@ -462,8 +462,8 @@ function updategametypedvars() {
   level.overtimetimelimit = getgametypesetting(#"overtimetimelimit");
   level.teamkillpenaltymultiplier = getgametypesetting(#"teamkillpenalty");
   level.teamkillscoremultiplier = getgametypesetting(#"teamkillscore");
-  level.var_3db672a4 = getgametypesetting(#"maxplayereventsperminute");
-  level.var_f5ae264 = getgametypesetting(#"maxobjectiveeventsperminute");
+  level.playereventslpm = getgametypesetting(#"maxplayereventsperminute");
+  level.bombeventslpm = getgametypesetting(#"maxobjectiveeventsperminute");
   level.playeroffensivemax = getgametypesetting(#"maxplayeroffensive");
   level.playerdefensivemax = getgametypesetting(#"maxplayerdefensive");
 }
@@ -488,8 +488,8 @@ function setupfordefusing() {
 }
 
 function bombs() {
-  level.var_ea8469b5 = 0;
-  level.var_119e12f4 = 0;
+  level.bombaplanted = 0;
+  level.bombbplanted = 0;
   level.bombplanted = 0;
   level.bombdefused = 0;
   level.bombexploded = 0;
@@ -500,7 +500,7 @@ function bombs() {
   }
 
   level.bombzones = [];
-  bombzones = getEntArray(level.var_cbdf9ba4, "targetname");
+  bombzones = getEntArray(level.dembombzonename, "targetname");
 
   for(index = 0; index < bombzones.size; index++) {
     trigger = bombzones[index];
@@ -508,8 +508,8 @@ function bombs() {
     visuals = getEntArray(bombzones[index].target, "targetname");
     clipbrushes = getEntArray("bombzone_clip" + scriptlabel, "targetname");
     defusetrig = getEnt(visuals[0].target, "targetname");
-    var_b3c46dd0 = game.defenders;
-    var_2b4ef22b = #"group_enemy";
+    bombsiteteamowner = game.defenders;
+    bombsiteallowuse = #"group_enemy";
 
     if(overtime::is_overtime_round()) {
       if(scriptlabel != "_overtime") {
@@ -524,8 +524,8 @@ function bombs() {
         continue;
       }
 
-      var_b3c46dd0 = #"neutral";
-      var_2b4ef22b = #"group_all";
+      bombsiteteamowner = #"neutral";
+      bombsiteallowuse = #"group_all";
       scriptlabel = "_a";
     } else if(scriptlabel == "_overtime") {
       trigger delete();
@@ -544,8 +544,8 @@ function bombs() {
     trigger usetriggerignoreuseholdtime();
     trigger function_268e4500();
     trigger function_682f34cf(-800);
-    bombzone = gameobjects::create_use_object(var_b3c46dd0, trigger, visuals, (0, 0, 0), name, 1, 1);
-    bombzone gameobjects::allow_use(var_2b4ef22b);
+    bombzone = gameobjects::create_use_object(bombsiteteamowner, trigger, visuals, (0, 0, 0), name, 1, 1);
+    bombzone gameobjects::allow_use(bombsiteallowuse);
     bombzone gameobjects::set_use_time(level.planttime);
     bombzone.label = scriptlabel;
     bombzone.index = index;
@@ -636,7 +636,7 @@ function onbeginuse(player) {
     player.isdefusing = 1;
     player thread setbomboverheatingafterweaponchange(self, 0, 0);
     bestdistance = 9000000;
-    var_fa43ed99 = undefined;
+    closestbomb = undefined;
 
     if(isDefined(level.ddbombmodel)) {
       keys = getarraykeys(level.ddbombmodel);
@@ -652,13 +652,13 @@ function onbeginuse(player) {
 
         if(dist < bestdistance) {
           bestdistance = dist;
-          var_fa43ed99 = bomb;
+          closestbomb = bomb;
         }
       }
 
-      assert(isDefined(var_fa43ed99));
-      player.defusing = var_fa43ed99;
-      var_fa43ed99 hide();
+      assert(isDefined(closestbomb));
+      player.defusing = closestbomb;
+      closestbomb hide();
     }
 
     return;
@@ -678,7 +678,7 @@ function onenduse(team, player, result) {
     return;
   }
 
-  if(!level.var_ea8469b5 && !level.var_119e12f4) {
+  if(!level.bombaplanted && !level.bombbplanted) {
     globallogic_utils::resumetimer();
     level.timerpaused = 0;
   }
@@ -701,8 +701,8 @@ function oncantuse(player) {
 function onuseobject(player) {
   team = player.team;
   enemyteam = util::getotherteam(team);
-  self function_1e4847e();
-  player function_1e4847e();
+  self updateeventsperminute();
+  player updateeventsperminute();
 
   if(!self function_208ed5d5(team)) {
     self gameobjects::set_flags(1);
@@ -728,7 +728,7 @@ function onuseobject(player) {
       player stats::function_dad108fa(#"plants_defuses", 1);
       scoreevents::processscoreevent("planted_bomb", player, undefined, undefined);
       player recordgameevent("plant");
-      level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+      level thread telemetry::function_18135b72(#"callback_on_game_event", {
         #player: player, #eventtype: #"plant"});
     } else {
       player iprintlnbold("<dev string:xde>");
@@ -762,7 +762,7 @@ function onuseobject(player) {
     player stats::function_dad108fa(#"plants_defuses", 1);
     scoreevents::processscoreevent("defused_bomb", player, undefined, undefined);
     player recordgameevent("defuse");
-    level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+    level thread telemetry::function_18135b72(#"callback_on_game_event", {
       #player: player, #eventtype: #"defuse"});
   } else {
     player iprintlnbold("<dev string:x136>");
@@ -803,18 +803,18 @@ function onpickup(player) {
 
 function onreset() {}
 
-function function_c15fc31f(label, reason) {
+function bombreset(label, reason) {
   if(label == "_a") {
-    level.var_ea8469b5 = 0;
+    level.bombaplanted = 0;
     setbombtimer("A", 0);
   } else {
-    level.var_119e12f4 = 0;
+    level.bombbplanted = 0;
     setbombtimer("B", 0);
   }
 
   setmatchflag("bomb_timer" + label, 0);
 
-  if(!level.var_ea8469b5 && !level.var_119e12f4) {
+  if(!level.bombaplanted && !level.bombbplanted) {
     level.timerpaused = 0;
     globallogic_utils::resumetimer();
   }
@@ -902,7 +902,7 @@ function bombplanted(destroyedobj, player) {
   level thread function_ee6e5993();
   label = destroyedobj.label;
   detonatetime = gettime() + int(level.bombtimer * 1000);
-  function_789dbdd3(label, detonatetime);
+  updatebombtimers(label, detonatetime);
   destroyedobj.detonatetime = detonatetime;
   trace = bulletTrace(player.origin + (0, 0, 20), player.origin - (0, 0, 2000), 0, player);
   self dropbombmodel(player, destroyedobj.label);
@@ -915,8 +915,8 @@ function bombplanted(destroyedobj, player) {
 
   destroyedobj setupfordefusing();
   game.challenge[team][#"plantedbomb"] = 1;
-  destroyedobj function_473a1738(label, level.bombtimer);
-  destroyedobj function_c15fc31f(label, "bomb_exploded");
+  destroyedobj waitlongdurationwithbombtimeupdate(label, level.bombtimer);
+  destroyedobj bombreset(label, "bomb_exploded");
 
   if(level.gameended) {
     return;
@@ -943,7 +943,7 @@ function bombplanted(destroyedobj, player) {
     }
 
     player recordgameevent("destroy");
-    level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+    level thread telemetry::function_18135b72(#"callback_on_game_event", {
       #player: player, #eventtype: #"destroy"});
   } else {
     destroyedobj.visuals[0] radiusdamage(explosionorigin, 512, 200, 20, undefined, "MOD_EXPLOSIVE", getweapon(#"briefcase_bomb"));
@@ -951,8 +951,8 @@ function bombplanted(destroyedobj, player) {
 
   currenttime = gettime();
 
-  if(isDefined(level.var_21479330) && level.var_3b2307bb == team) {
-    if(level.var_21479330 + 10000 > currenttime) {
+  if(isDefined(level.lastbombexplodetime) && level.lastbombexplodebyteam == team) {
+    if(level.lastbombexplodetime + 10000 > currenttime) {
       for(i = 0; i < level.players.size; i++) {
         if(level.players[i].team == team) {
           level.players[i] challenges::bothbombsdetonatewithintime();
@@ -961,8 +961,8 @@ function bombplanted(destroyedobj, player) {
     }
   }
 
-  level.var_21479330 = currenttime;
-  level.var_3b2307bb = team;
+  level.lastbombexplodetime = currenttime;
+  level.lastbombexplodebyteam = team;
   rot = randomfloat(360);
   explosioneffect = spawnfx(level._effect[#"bombexplosion"], explosionorigin + (0, 0, 50), (0, 0, 1), (cos(rot), sin(rot), 0));
   triggerfx(explosioneffect);
@@ -973,15 +973,15 @@ function bombplanted(destroyedobj, player) {
     exploder::exploder(destroyedobj.exploderindex);
   }
 
-  var_3c6bbe27 = 0;
+  bombzonesleft = 0;
 
   for(index = 0; index < level.bombzones.size; index++) {
     if(!isDefined(level.bombzones[index].bombexploded) || !level.bombzones[index].bombexploded) {
-      var_3c6bbe27++;
+      bombzonesleft++;
     }
   }
 
-  if(var_3c6bbe27 == 0) {
+  if(bombzonesleft == 0) {
     level.var_e8b70364 = 1;
     globallogic_utils::pausetimer();
     level.timerpaused = 1;
@@ -1052,7 +1052,7 @@ function shouldplayovertimeround() {
   return false;
 }
 
-function function_473a1738(var_d40f7c9f, duration) {
+function waitlongdurationwithbombtimeupdate(whichbomb, duration) {
   if(duration == 0) {
     return;
   }
@@ -1066,7 +1066,7 @@ function function_473a1738(var_d40f7c9f, duration) {
 
     while(isDefined(level.hostmigrationtimer)) {
       endtime += 250;
-      function_789dbdd3(var_d40f7c9f, endtime);
+      updatebombtimers(whichbomb, endtime);
       wait 0.25;
     }
   }
@@ -1077,23 +1077,23 @@ function function_473a1738(var_d40f7c9f, duration) {
 
   while(isDefined(level.hostmigrationtimer)) {
     endtime += 250;
-    function_789dbdd3(var_d40f7c9f, endtime);
+    updatebombtimers(whichbomb, endtime);
     wait 0.25;
   }
 
   return gettime() - starttime;
 }
 
-function function_789dbdd3(var_d40f7c9f, detonatetime) {
-  if(var_d40f7c9f == "_a") {
-    level.var_ea8469b5 = 1;
+function updatebombtimers(whichbomb, detonatetime) {
+  if(whichbomb == "_a") {
+    level.bombaplanted = 1;
     setbombtimer("A", int(detonatetime));
   } else {
-    level.var_119e12f4 = 1;
+    level.bombbplanted = 1;
     setbombtimer("B", int(detonatetime));
   }
 
-  setmatchflag("bomb_timer" + var_d40f7c9f, int(detonatetime));
+  setmatchflag("bomb_timer" + whichbomb, int(detonatetime));
 }
 
 function bombdefused(player) {
@@ -1103,13 +1103,13 @@ function bombdefused(player) {
   self.bombdefused = 1;
   self notify(#"bomb_defused");
   self.bombplanted = 0;
-  self function_c15fc31f(self.label, "bomb_defused");
+  self bombreset(self.label, "bomb_defused");
   player setweaponoverheating(1, 100, self.useweapon);
   player playbombdefuse();
   level thread function_b98a264e();
 }
 
-function function_ae26fe4(team, enemyteam) {
+function play_one_left_underscore(team, enemyteam) {
   wait 3;
 
   if(!isDefined(team) || !isDefined(enemyteam)) {
@@ -1117,23 +1117,23 @@ function function_ae26fe4(team, enemyteam) {
   }
 }
 
-function function_1e4847e() {
-  if(!isDefined(self.var_a6766873)) {
-    self.var_57260b12 = 0;
-    self.var_a6766873 = 0;
+function updateeventsperminute() {
+  if(!isDefined(self.eventsperminute)) {
+    self.numbombevents = 0;
+    self.eventsperminute = 0;
   }
 
-  self.var_57260b12++;
+  self.numbombevents++;
   minutespassed = float(globallogic_utils::gettimepassed()) / 60000;
 
   if(isPlayer(self) && isDefined(self.timeplayed[#"total"])) {
     minutespassed = self.timeplayed[#"total"] / 60;
   }
 
-  self.var_a6766873 = self.var_57260b12 / minutespassed;
+  self.eventsperminute = self.numbombevents / minutespassed;
 
-  if(self.var_a6766873 > self.var_57260b12) {
-    self.var_a6766873 = self.var_57260b12;
+  if(self.eventsperminute > self.numbombevents) {
+    self.eventsperminute = self.numbombevents;
   }
 }
 
@@ -1142,11 +1142,11 @@ function isscoreboosting(player, flag) {
     return false;
   }
 
-  if(player.var_a6766873 > level.var_3db672a4) {
+  if(player.eventsperminute > level.playereventslpm) {
     return true;
   }
 
-  if(flag.var_a6766873 > level.var_f5ae264) {
+  if(flag.eventsperminute > level.bombeventslpm) {
     return true;
   }
 
@@ -1171,7 +1171,7 @@ function function_b98a264e(var_96a07b96 = 0) {
     return;
   }
 
-  if(level.var_ea8469b5 || level.var_119e12f4) {
+  if(level.bombaplanted || level.bombbplanted) {
     return;
   }
 

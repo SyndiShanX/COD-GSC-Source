@@ -28,7 +28,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_dfc652ee;
+#namespace doa_pickups;
 
 function init() {
   clientfield::register("scriptmover", "pickuprotate", 1, 1, "int", &pickuprotate, 0, 0);
@@ -63,7 +63,7 @@ function function_c1018360(modelname, type, variant, rarity, modelscale, angles,
   level.doa.pickups[level.doa.pickups.size] = pickup;
 }
 
-function function_3c872f01() {
+function rotateself() {
   self notify("18efc16b8ff7b50c");
   self endon("18efc16b8ff7b50c");
   self endon(#"hash_326008b133edf46a", #"death", #"entityshutdown");
@@ -112,7 +112,7 @@ function pickuprotate(localclientnum, oldval, newval, bnewent, binitialsnap, fie
   self.fakemodel.angles = self.angles;
 
   if(bwastimejump) {
-    self.fakemodel thread function_3c872f01();
+    self.fakemodel thread rotateself();
     return;
   }
 
@@ -232,7 +232,7 @@ function function_4ecd84a8(player, flipped = 0) {
       y = 0 - y;
     }
 
-    var_a3046af4 = player.origin;
+    end_pt = player.origin;
     entnum = player getentitynumber();
 
     if(entnum == 1) {
@@ -244,11 +244,11 @@ function function_4ecd84a8(player, flipped = 0) {
       x = 0 - x;
     }
 
-    var_a3046af4 += (x, y, z);
+    end_pt += (x, y, z);
   } else {
-    var_a3046af4 = self.origin + (0, 0, 3000);
+    end_pt = self.origin + (0, 0, 3000);
   }
 
   waitframe(1);
-  self moveTo(var_a3046af4, 2, 0, 0);
+  self moveTo(end_pt, 2, 0, 0);
 }

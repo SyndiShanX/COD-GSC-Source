@@ -18,7 +18,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  level.var_8ef8b9e8 = getweapon(#"armor_plate");
+  level.armorplateweapon = getweapon(#"armor_plate");
   clientfield::register_clientuimodel("hudItems.armorPlateCount", 1, 4, "int", 0);
   clientfield::register_clientuimodel("hudItems.armorPlateMaxCarry", 1, 4, "int");
   callback::on_spawned(&on_player_spawned);
@@ -53,8 +53,8 @@ function private on_player_spawned() {
 }
 
 function private on_player_loadout() {
-  self giveweapon(level.var_8ef8b9e8);
-  self lockweapon(level.var_8ef8b9e8, 1, 1);
+  self giveweapon(level.armorplateweapon);
+  self lockweapon(level.armorplateweapon, 1, 1);
 
   if(is_true(getgametypesetting(#"hash_5700fdc9d17186f7"))) {
     self armor::set_armor(225, 225, 3, 0.4, 1, 0.5, 0, 1, 1, 1);
@@ -85,14 +85,14 @@ function private function_86b9a404() {
   return self.armorplatecount > 0 && armor::get_armor() < 225;
 }
 
-function function_e12c220a(var_16888a24) {
+function function_e12c220a(maxplates) {
   assert(isPlayer(self));
 
   if(!isPlayer(self)) {
     return;
   }
 
-  self.var_c52363ab = var_16888a24;
+  self.var_c52363ab = maxplates;
   self clientfield::set_player_uimodel("hudItems.armorPlateMaxCarry", self.var_c52363ab);
 }
 
@@ -113,13 +113,13 @@ function private function_d66636df() {
 function private function_a7879258(lastweapon) {
   self endon(#"disconnect");
 
-  if(lastweapon === level.var_8ef8b9e8 || lastweapon === level.weaponnone) {
+  if(lastweapon === level.armorplateweapon || lastweapon === level.weaponnone) {
     lastweapon = undefined;
   }
 
   var_b2cde03b = function_ce353466(lastweapon);
 
-  if(self getcurrentweapon() === level.var_8ef8b9e8 && !self isswitchingweapons()) {
+  if(self getcurrentweapon() === level.armorplateweapon && !self isswitchingweapons()) {
     self weapons::function_d571ac59(lastweapon, 0, 0, var_b2cde03b);
     return;
   }
@@ -131,7 +131,7 @@ function private function_a7879258(lastweapon) {
     return;
   }
 
-  if(self getcurrentweapon() === level.var_8ef8b9e8) {
+  if(self getcurrentweapon() === level.armorplateweapon) {
     if(!isDefined(self.armor_plate_behavior)) {
       self.armor_plate_behavior = isDefined(self serverfield::get("armor_plate_behavior")) ? self serverfield::get("armor_plate_behavior") : 0;
     }
@@ -156,7 +156,7 @@ function private function_a7879258(lastweapon) {
         return;
       }
 
-      if(self getcurrentweapon() !== level.var_8ef8b9e8 || self isdroppingweapon()) {
+      if(self getcurrentweapon() !== level.armorplateweapon || self isdroppingweapon()) {
         break;
       }
 
@@ -170,13 +170,13 @@ function private function_a7879258(lastweapon) {
 
   currentweapon = self getcurrentweapon();
 
-  if(currentweapon === level.var_8ef8b9e8 || currentweapon === level.weaponnone) {
+  if(currentweapon === level.armorplateweapon || currentweapon === level.weaponnone) {
     self weapons::function_d571ac59(lastweapon, 0, 0, var_b2cde03b);
   }
 }
 
 function private function_ce353466(last_weapon) {
-  if(!isDefined(last_weapon) || last_weapon === level.weaponnone || last_weapon === level.var_8ef8b9e8) {
+  if(!isDefined(last_weapon) || last_weapon === level.weaponnone || last_weapon === level.armorplateweapon) {
     return false;
   }
 
@@ -203,7 +203,7 @@ function private function_c81e4a7c() {
   self endon(#"disconnect");
   self.var_32b4a72a = 0;
 
-  while(isalive(self) && (self weaponswitchbuttonPressed() || self function_315b0f70()) && self getcurrentweapon() === level.var_8ef8b9e8 && !self isdroppingweapon()) {
+  while(isalive(self) && (self weaponswitchbuttonPressed() || self function_315b0f70()) && self getcurrentweapon() === level.armorplateweapon && !self isdroppingweapon()) {
     waitframe(1);
   }
 
@@ -211,7 +211,7 @@ function private function_c81e4a7c() {
 }
 
 function event_handler[weapon_change] function_62befac0(eventstruct) {
-  if(eventstruct.weapon === level.var_8ef8b9e8) {
+  if(eventstruct.weapon === level.armorplateweapon) {
     self thread function_a7879258(eventstruct.last_weapon);
   }
 }

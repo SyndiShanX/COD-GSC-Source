@@ -43,5 +43,5 @@ function on_gameplay_started(localclientnum) {
 }
 
 function function_b1c181b9() {
-  audio::playloopat(#"hash_85f5d79551f8b65", (1509, 4267, 8793));
+  audio::playloopat(#"amb_forest_quad_sp", (1509, 4267, 8793));
 }

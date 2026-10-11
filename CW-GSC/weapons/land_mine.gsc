@@ -44,33 +44,33 @@ function finalize() {
   }
 }
 
-function function_14428e95(var_cd03ffa) {
-  var_cd03ffa.watchforfire = 1;
-  var_cd03ffa.ownergetsassist = 1;
-  var_cd03ffa.ignoredirection = 1;
-  var_cd03ffa.immediatedetonation = 1;
-  var_cd03ffa.immunespecialty = "specialty_landminetrigger";
-  var_cd03ffa.var_8eda8949 = (0, 0, 0);
-  var_cd03ffa.detectiongraceperiod = 0;
-  var_cd03ffa.stuntime = 1;
-  var_cd03ffa.var_10efd558 = "switched_field_upgrade";
+function function_14428e95(swatcher) {
+  swatcher.watchforfire = 1;
+  swatcher.ownergetsassist = 1;
+  swatcher.ignoredirection = 1;
+  swatcher.immediatedetonation = 1;
+  swatcher.immunespecialty = "specialty_landminetrigger";
+  swatcher.var_8eda8949 = (0, 0, 0);
+  swatcher.detectiongraceperiod = 0;
+  swatcher.stuntime = 1;
+  swatcher.var_10efd558 = "switched_field_upgrade";
 
-  if(isDefined(var_cd03ffa.weapon.customsettings)) {
-    var_6f1c6122 = getscriptbundle(var_cd03ffa.weapon.customsettings);
+  if(isDefined(swatcher.weapon.customsettings)) {
+    var_6f1c6122 = getscriptbundle(swatcher.weapon.customsettings);
     assert(isDefined(var_6f1c6122));
     level.var_261f640c.var_a74161cc = var_6f1c6122;
-    var_cd03ffa.activationdelay = isDefined(level.var_261f640c.var_a74161cc.var_a3fd61e7) ? level.var_261f640c.var_a74161cc.var_a3fd61e7 : 0;
-    var_cd03ffa.timeout = isDefined(level.var_261f640c.var_a74161cc.var_bd063370) ? level.var_261f640c.var_a74161cc.var_bd063370 : 3000;
+    swatcher.activationdelay = isDefined(level.var_261f640c.var_a74161cc.var_a3fd61e7) ? level.var_261f640c.var_a74161cc.var_a3fd61e7 : 0;
+    swatcher.timeout = isDefined(level.var_261f640c.var_a74161cc.var_bd063370) ? level.var_261f640c.var_a74161cc.var_bd063370 : 3000;
   }
 
-  var_cd03ffa.ondetonatecallback = &function_3bcaeef4;
-  var_cd03ffa.onspawn = &function_6392cd30;
-  var_cd03ffa.ondamage = &function_6d1a12d3;
-  var_cd03ffa.stun = &weaponobjects::weaponstun;
-  var_cd03ffa.onfizzleout = &weaponobjects::weaponobjectfizzleout;
-  var_cd03ffa.ontimeout = &weaponobjects::weaponobjectfizzleout;
-  var_cd03ffa.var_994b472b = &function_fb1ccfa6;
-  level.var_261f640c.var_74ac4720 = var_cd03ffa;
+  swatcher.ondetonatecallback = &function_3bcaeef4;
+  swatcher.onspawn = &function_6392cd30;
+  swatcher.ondamage = &function_6d1a12d3;
+  swatcher.stun = &weaponobjects::weaponstun;
+  swatcher.onfizzleout = &weaponobjects::weaponobjectfizzleout;
+  swatcher.ontimeout = &weaponobjects::weaponobjectfizzleout;
+  swatcher.var_994b472b = &function_fb1ccfa6;
+  level.var_261f640c.var_74ac4720 = swatcher;
 }
 
 function function_80b82a4d() {
@@ -471,16 +471,16 @@ function function_fb1ccfa6(player) {
   weaponobjects::weaponobjectfizzleout();
 }
 
-function function_6392cd30(var_cd03ffa, owner) {
+function function_6392cd30(swatcher, owner) {
   self endon(#"death");
   callback::function_d8abfc3d(#"on_entity_deleted", &function_ee5d9464);
   self.var_e744cea3 = &function_df5749e2;
-  self.var_3f9bd15 = &function_9b8337c3;
+  self.var_3f9bd15 = &onvehiclekilled;
   self.var_63be5750 = &function_7bc9fe48;
   self.delete_on_death = 1;
   self.var_48d842c3 = 1;
   self.var_515d6dda = 1;
-  self function_619a5c20();
+  self pingable();
   self.var_937978c9 = int((isDefined(level.var_261f640c.var_a74161cc.var_af22b5dc) ? level.var_261f640c.var_a74161cc.var_af22b5dc : 3) * 1000);
   self.var_9a25b7e0 = int((isDefined(level.var_261f640c.var_a74161cc.var_af22b5dc) ? level.var_261f640c.var_a74161cc.var_af22b5dc : 3) * 1000);
   self.var_5a64415f = int((isDefined(level.var_261f640c.var_a74161cc.var_98ba0e9b) ? level.var_261f640c.var_a74161cc.var_98ba0e9b : 0) * 1000);
@@ -490,8 +490,8 @@ function function_6392cd30(var_cd03ffa, owner) {
     weaponobjects::weaponobjectfizzleout();
   }
 
-  if(var_cd03ffa.activationdelay) {
-    wait var_cd03ffa.activationdelay;
+  if(swatcher.activationdelay) {
+    wait swatcher.activationdelay;
   }
 
   self playSound(#"hash_59ac94ba0cea7587");
@@ -512,7 +512,7 @@ function function_ee5d9464() {
   arrayremoveindex(level.var_261f640c.var_9e2c9bc2, self getentitynumber());
 }
 
-function function_6d1a12d3(var_cd03ffa) {
+function function_6d1a12d3(swatcher) {
   self endon(#"death");
   self setCanDamage(1);
   self.maxhealth = 100000;
@@ -536,8 +536,8 @@ function function_6d1a12d3(var_cd03ffa) {
     if(isDefined(weapon)) {
       self weaponobjects::weapon_object_do_damagefeedback(weapon, eattacker, type, var_cc5d20f7.inflictor);
 
-      if(var_cd03ffa.stuntime > 0 && weapon.dostun) {
-        self thread weaponobjects::stunstart(var_cd03ffa, var_cd03ffa.stuntime);
+      if(swatcher.stuntime > 0 && weapon.dostun) {
+        self thread weaponobjects::stunstart(swatcher, swatcher.stuntime);
         continue;
       }
     }
@@ -558,7 +558,7 @@ function function_6d1a12d3(var_cd03ffa) {
       continue;
     }
 
-    if(isDefined(var_cd03ffa.isfataldamage) && !self[[var_cd03ffa.isfataldamage]](var_cd03ffa, eattacker, weapon, ndamage)) {
+    if(isDefined(swatcher.isfataldamage) && !self[[swatcher.isfataldamage]](swatcher, eattacker, weapon, ndamage)) {
       continue;
     }
 
@@ -680,10 +680,10 @@ function onplayerkilled(params) {
 }
 
 function function_7bc9fe48(eattacker, einflictor, weapon, smeansofdeath, damage) {
-  self shellshock(#"hash_160e95f6745dddf3", 0.5);
+  self shellshock(#"land_mine_shellshock", 0.5);
 }
 
-function function_9b8337c3(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, occupants) {
+function onvehiclekilled(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, occupants) {
   if(isDefined(occupants.size) && occupants.size > 0) {
     foreach(occupant in occupants) {
       if(psoffsettime util::isenemyplayer(occupant)) {

@@ -739,7 +739,7 @@ function function_3e9d8a8e(var_11868f5d) {
     case #"talent_doubletap":
     case #"talent_doubletap":
     case #"talent_doubletap":
-      str_alias = #"hash_25791821a46525d9";
+      str_alias = #"mus_perks_doubletap_sting";
       break;
     case #"hash_59dbe8f72baaa2a3":
     case #"hash_59dbecf72baaa96f":

@@ -158,8 +158,8 @@ function player_isjammed(localclientnum, oldval, newval, bnewent, binitialsnap, 
 
   if(fieldname == 1) {
     self notify(#"stop_sounds");
-    playSound(bnewent, #"hash_4a43757dd4b02977");
-    level.var_6d8e6535[bnewent] = function_604c9983(bnewent, #"hash_3330b85ee1abeb2b");
+    playSound(bnewent, #"mpl_emp_static_impact");
+    level.var_6d8e6535[bnewent] = function_604c9983(bnewent, #"mpl_jammer_static_loop");
     self thread function_e9e14905(bnewent);
     setuimodelvalue(var_da91b79d, 1);
     self notify(#"hash_55123a0e484012d5");
@@ -168,7 +168,7 @@ function player_isjammed(localclientnum, oldval, newval, bnewent, binitialsnap, 
 
   if(fieldname == 0) {
     if(isDefined(level.var_6d8e6535[bnewent]) && !bwastimejump) {
-      playSound(bnewent, #"hash_112352517abf5b11");
+      playSound(bnewent, #"mpl_emp_static_done");
     }
 
     self notify(#"stop_sounds");

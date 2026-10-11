@@ -510,7 +510,7 @@ function function_8bdff396(watcher, player) {
   self.weapon = getweapon(#"listening_device_spy");
   self.var_48d842c3 = 1;
   self.var_515d6dda = 1;
-  self function_619a5c20();
+  self pingable();
 
   if(!isDefined(level.var_b7bd6b6d)) {
     level.var_b7bd6b6d = [];
@@ -900,7 +900,7 @@ function function_10a5e8b5() {
 function private function_f37d284() {
   level endon(#"game_ended");
   self.model = util::spawn_model(#"p9_wz_dirty_bomb_01", self.origin, self.angles);
-  self.model function_619a5c20();
+  self.model pingable();
   self.bombindex = int(self.script_noteworthy) - 1;
   self.objective_id = gameobjects::get_next_obj_id();
   objective = undefined;
@@ -1245,7 +1245,7 @@ function function_5c0f763b(player) {
   player function_80d6d39b();
   player.var_9dc65a85 = 0;
   player function_5b2918e4();
-  player spy_skill::function_53a81144(level.var_7e569431.var_133ba5a7);
+  player spy_skill::addcredit(level.var_7e569431.var_133ba5a7);
   objective_delete(self.objective_id);
   objective = undefined;
 
@@ -1349,7 +1349,7 @@ function bombcountdown(player) {
     wait level.var_18a272f7;
     countdown = level.var_46f2c796;
     soundfade = 2;
-    self.model playLoopSound(#"hash_78cdfb1438b360bf", soundfade);
+    self.model playLoopSound(#"evt_dirtybomb_alarm", soundfade);
     var_5384fdb3 = int(level.var_46f2c796 / 3) * 2;
     soundfade /= 2;
 
@@ -1360,7 +1360,7 @@ function bombcountdown(player) {
 
       if(countdown == var_5384fdb3) {
         var_5384fdb3 -= int(level.var_46f2c796 / 3);
-        self.model playLoopSound(#"hash_78cdfb1438b360bf", soundfade);
+        self.model playLoopSound(#"evt_dirtybomb_alarm", soundfade);
         soundfade /= 2;
       }
 
@@ -1776,15 +1776,15 @@ function function_152264b8() {
 function function_fde3532a() {
   level flag::wait_till("spy_role_assigned");
 
-  foreach(var_22a29e8a in level.var_7fc395cf) {
+  foreach(spyplane in level.var_7fc395cf) {
     point = function_4ba8fde(level.var_1a4fbac2);
-    var_22a29e8a.var_46cb1dbc = item_drop::drop_item(0, point.itementry.weapon, 1, 0, point.id, var_22a29e8a.origin, undefined, 1);
-    var_22a29e8a.var_46cb1dbc.var_22a29e8a = var_22a29e8a;
-    var_22a29e8a.objectiveid = gameobjects::get_next_obj_id();
-    var_22a29e8a thread function_94dd997d(var_22a29e8a.objectiveid, var_22a29e8a.var_46cb1dbc.origin, #"hash_71f9e2ce6583bd40");
-    var_22a29e8a.state = 0;
+    spyplane.var_46cb1dbc = item_drop::drop_item(0, point.itementry.weapon, 1, 0, point.id, spyplane.origin, undefined, 1);
+    spyplane.var_46cb1dbc.spyplane = spyplane;
+    spyplane.objectiveid = gameobjects::get_next_obj_id();
+    spyplane thread function_94dd997d(spyplane.objectiveid, spyplane.var_46cb1dbc.origin, #"hash_71f9e2ce6583bd40");
+    spyplane.state = 0;
 
-    var_22a29e8a thread function_7542188d();
+    spyplane thread function_7542188d();
   }
 }
 
@@ -1799,10 +1799,10 @@ function function_29b3a0db(s_params) {
       self switchtoweapon(var_742e7b3d);
     }
 
-    var_22a29e8a = s_params.item.var_22a29e8a;
-    arrayremovevalue(level.var_7fc395cf, var_22a29e8a);
-    var_22a29e8a function_f3da38fe();
-    var_22a29e8a.state = 1;
+    spyplane = s_params.item.spyplane;
+    arrayremovevalue(level.var_7fc395cf, spyplane);
+    spyplane function_f3da38fe();
+    spyplane.state = 1;
     level thread function_b432a6dd();
     scoreevents::processscoreevent(#"hash_54b8a8460c0e6ba0", self);
   }
@@ -1891,15 +1891,15 @@ function function_70b57ee6() {
   startpoint = goalpath.start;
   endpoint = goalpath.path[0];
   var_57e06aea = item_supply_drop::function_47ec98c4(startpoint, endpoint, heli_drop_goal, 0, undefined, undefined, undefined, #"hash_579c1ac14abd2355");
-  var_7b3f193d = level.supplydrop;
+  air_drop = level.supplydrop;
   var_b29eedbb = level.supplydropveh;
   var_b29eedbb clientfield::set("" + #"hash_508b8b3b9ba62e53", 1);
   level thread function_2398866a(13);
   level thread function_4f53c9a2(1);
-  stashes = getEntArray(var_7b3f193d.targetname, "targetname");
+  stashes = getEntArray(air_drop.targetname, "targetname");
 
   if(isDefined(stashes) && stashes.size > 0) {
-    stashes = arraysortclosest(stashes, var_7b3f193d.origin, 1, 0, 16);
+    stashes = arraysortclosest(stashes, air_drop.origin, 1, 0, 16);
 
     if(stashes.size <= 0) {
       return;
@@ -1908,8 +1908,8 @@ function function_70b57ee6() {
     stash = stashes[0];
   }
 
-  var_7b3f193d.objectiveid = gameobjects::get_next_obj_id();
-  objective_add(var_7b3f193d.objectiveid, "active", var_7b3f193d, #"hash_840cc34cfa7f52b");
+  air_drop.objectiveid = gameobjects::get_next_obj_id();
+  objective_add(air_drop.objectiveid, "active", air_drop, #"hash_840cc34cfa7f52b");
 
   if(!isDefined(level.var_a08e14c4)) {
     level.var_a08e14c4 = [];
@@ -1917,11 +1917,11 @@ function function_70b57ee6() {
     level.var_a08e14c4 = array(level.var_a08e14c4);
   }
 
-  if(!isinarray(level.var_a08e14c4, var_7b3f193d.objectiveid)) {
-    level.var_a08e14c4[level.var_a08e14c4.size] = var_7b3f193d.objectiveid;
+  if(!isinarray(level.var_a08e14c4, air_drop.objectiveid)) {
+    level.var_a08e14c4[level.var_a08e14c4.size] = air_drop.objectiveid;
   }
 
-  var_7b3f193d thread function_c72e273f(stash);
+  air_drop thread function_c72e273f(stash);
 
   level thread function_2dad9f7b();
 }
@@ -1991,7 +1991,7 @@ function function_b134cd55() {
 
 function function_fabc8042() {
   foreach(encodedradio in level.var_e27df64e) {
-    encodedradio.ent = util::spawn_model(#"hash_1a3554b5405e3cbf", encodedradio.origin, encodedradio.angles);
+    encodedradio.ent = util::spawn_model(#"p9_nt6_whi_radio_02", encodedradio.origin, encodedradio.angles);
     offsets = (0, 0, 0);
     encodedradio.state = 0;
     encodedradio.objectiveid = gameobjects::get_next_obj_id();
@@ -2098,8 +2098,8 @@ function private function_9d70f23a(offsets, trigger_length, trigger_height) {
   self.trigger setHintString(#"hash_76430d002eba2777");
   self.trigger.encodedradio = self;
   self.ent clientfield::set("" + #"hash_3b8f220452f1fe4c", 1);
-  self.ent playSound(#"hash_54c2b44022415883");
-  self.ent playLoopSound(#"hash_61dcb32e56041c08");
+  self.ent playSound(#"mpl_spy_radio_on");
+  self.ent playLoopSound(#"mpl_spy_radio_on_lp");
   util::wait_network_frame();
   self.trigger callback::on_trigger(&function_ce60e248);
   self.trigger thread function_467c95a7();
@@ -2143,13 +2143,13 @@ function function_96b85abd(state, player) {
 
     self.trigger setinvisibletoplayer(player, 1);
     player.var_94cae451 = self.trigger;
-    player function_20fdcbf2(player.var_94cae451, #"hash_5fba3d476e0b33f8");
+    player function_20fdcbf2(player.var_94cae451, #"decoding");
   }
 
   player.var_2597016d = 1;
 }
 
-function private function_20fdcbf2(var_fbdcd95b, state) {
+function private function_20fdcbf2(radiotrigger, state) {
   if(!level.encodedradiousebar encodedradio_usebar::is_open(self)) {
     level.encodedradiousebar encodedradio_usebar::open(self, 4);
   }
@@ -2274,7 +2274,7 @@ function function_da63c523(player) {
   scoreevents::processscoreevent(#"hash_7d0ad10dce7ed467", player);
 
   if(isDefined(self.ent)) {
-    self.ent playSound(#"hash_594c96bfb3d7852b");
+    self.ent playSound(#"mpl_spy_radio_activate");
     self.ent stoploopsound();
   }
 
@@ -2389,37 +2389,37 @@ function function_61a3a6a0() {
       level.var_5fd149b8 += 1 << 2;
       util::wait_network_frame();
       level thread function_2398866a(16, undefined);
-      var_9af06a57 = level.var_83b6f354;
+      suspect = level.var_83b6f354;
 
-      if(isDefined(var_9af06a57.origin)) {
-        marker = spawn("script_model", var_9af06a57.origin);
+      if(isDefined(suspect.origin)) {
+        marker = spawn("script_model", suspect.origin);
         level.var_efd26964 = marker;
         var_7b57a803 = #"hash_65104254ebf2ada";
         var_ff1915b9 = #"hash_74d87a56f6e58bc7";
         marker.objidfriendly = gameobjects::get_next_obj_id();
-        marker.var_81e11916 = gameobjects::get_next_obj_id();
+        marker.objidenemy = gameobjects::get_next_obj_id();
         objective_add(marker.objidfriendly, "active", marker.origin, var_7b57a803);
-        objective_add(marker.var_81e11916, "active", marker.origin, var_ff1915b9);
+        objective_add(marker.objidenemy, "active", marker.origin, var_ff1915b9);
         objective_setinvisibletoall(marker.objidfriendly);
-        objective_setinvisibletoall(marker.var_81e11916);
-        marker function_a19ce5a8(var_9af06a57.origin, 400);
+        objective_setinvisibletoall(marker.objidenemy);
+        marker function_a19ce5a8(suspect.origin, 400);
         util::wait_network_frame();
         marker clientfield::set("" + #"hash_3cb0242230f3f716", 1);
         marker function_61203128();
         wait 10;
-        marker function_a19ce5a8(var_9af06a57.origin, 300);
+        marker function_a19ce5a8(suspect.origin, 300);
         util::wait_network_frame();
         marker clientfield::set("" + #"hash_3cb0242230f3f716", 2);
         marker function_61203128();
         wait 10;
-        marker function_a19ce5a8(var_9af06a57.origin, 200);
+        marker function_a19ce5a8(suspect.origin, 200);
         util::wait_network_frame();
         marker clientfield::set("" + #"hash_3cb0242230f3f716", 3);
         marker function_61203128();
         wait 10;
         marker clientfield::set("" + #"hash_3cb0242230f3f716", 0);
         objective_delete(marker.objidfriendly);
-        objective_delete(marker.var_81e11916);
+        objective_delete(marker.objidenemy);
         util::wait_network_frame();
         level.var_efd26964 = undefined;
         marker delete();
@@ -2439,21 +2439,21 @@ function function_61a3a6a0() {
 }
 
 function function_61203128() {
-  if(!isDefined(self.objidfriendly) || !isDefined(self.var_81e11916)) {
+  if(!isDefined(self.objidfriendly) || !isDefined(self.objidenemy)) {
     return;
   }
 
   objective_setposition(self.objidfriendly, self.origin);
-  objective_setposition(self.var_81e11916, self.origin);
+  objective_setposition(self.objidenemy, self.origin);
 
   foreach(player in getPlayers()) {
     if(player.spyRole === 1) {
       objective_setvisibletoplayer(self.objidfriendly, player);
-      objective_setinvisibletoplayer(self.var_81e11916, player);
+      objective_setinvisibletoplayer(self.objidenemy, player);
       continue;
     }
 
-    objective_setvisibletoplayer(self.var_81e11916, player);
+    objective_setvisibletoplayer(self.objidenemy, player);
     objective_setinvisibletoplayer(self.objidfriendly, player);
   }
 }
@@ -2466,20 +2466,20 @@ function function_a19ce5a8(playerorigin, var_d17e4c1e) {
 }
 
 function function_1dc93253(var_38ef2f1a) {
-  foreach(var_dfe526e8 in getPlayers()) {
-    level.spyhud hud_spy::function_adf24ba3(var_dfe526e8, var_38ef2f1a);
+  foreach(a_player in getPlayers()) {
+    level.spyhud hud_spy::function_adf24ba3(a_player, var_38ef2f1a);
   }
 }
 
 function function_b455be75(suspect_gender_type) {
-  foreach(var_dfe526e8 in getPlayers()) {
-    level.spyhud hud_spy::function_ddf21dbe(var_dfe526e8, suspect_gender_type);
+  foreach(a_player in getPlayers()) {
+    level.spyhud hud_spy::function_ddf21dbe(a_player, suspect_gender_type);
   }
 }
 
 function function_57cab68b(suspect_id_number) {
-  foreach(var_dfe526e8 in getPlayers()) {
-    level.spyhud hud_spy::function_410e8b54(var_dfe526e8, suspect_id_number);
+  foreach(a_player in getPlayers()) {
+    level.spyhud hud_spy::function_410e8b54(a_player, suspect_id_number);
   }
 }
 
@@ -2488,13 +2488,13 @@ function function_cd002276() {
 
   while(true) {
     if(isDefined(level.var_83b6f354)) {
-      var_9af06a57 = level.var_83b6f354;
-      var_9af06a57 waittill(#"death", #"disconnect");
+      suspect = level.var_83b6f354;
+      suspect waittill(#"death", #"disconnect");
       level notify(#"hash_969b770cce81997");
       level.var_83b6f354 = undefined;
 
-      if(!is_true(level.var_2179a6bf) && isPlayer(var_9af06a57)) {
-        var_9af06a57 thread globallogic_audio::function_c246758e("none");
+      if(!is_true(level.var_2179a6bf) && isPlayer(suspect)) {
+        suspect thread globallogic_audio::function_c246758e("none");
       }
 
       foreach(player in getPlayers()) {
@@ -2519,10 +2519,10 @@ function function_cd002276() {
             marker.objidfriendly = undefined;
           }
 
-          if(isDefined(marker.var_81e11916)) {
-            gameobjects::release_obj_id(marker.var_81e11916);
-            objective_delete(marker.var_81e11916);
-            marker.var_81e11916 = undefined;
+          if(isDefined(marker.objidenemy)) {
+            gameobjects::release_obj_id(marker.objidenemy);
+            objective_delete(marker.objidenemy);
+            marker.objidenemy = undefined;
           }
 
           level.var_efd26964 = undefined;
@@ -2754,11 +2754,11 @@ function function_83abdf0f() {
 function function_1d3f6978() {
   level endon(#"game_ended");
   level.var_75689606 = [];
-  var_882ee981 = struct::get("spy_waypoint_weapon_spawn_a", "targetname");
-  assert(isDefined(var_882ee981), "<dev string:x52>");
+  target0 = struct::get("spy_waypoint_weapon_spawn_a", "targetname");
+  assert(isDefined(target0), "<dev string:x52>");
 
-  if(isDefined(var_882ee981.origin)) {
-    level.var_75689606[0] = function_48d2ab4c(0, var_882ee981.origin);
+  if(isDefined(target0.origin)) {
+    level.var_75689606[0] = function_48d2ab4c(0, target0.origin);
   }
 
   target1 = struct::get("spy_waypoint_weapon_spawn_b", "targetname");

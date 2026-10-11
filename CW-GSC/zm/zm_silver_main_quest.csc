@@ -29,7 +29,7 @@ function init() {
   clientfield::register("toplayer", "" + #"hash_3f49ce049c9da7d", 1, 1, "int", &function_be9e97b1, 0, 0);
   clientfield::register("toplayer", "" + #"hash_404a977ff0098cf", 1, 1, "counter", &function_d23b3778, 0, 0);
   clientfield::register("toplayer", "" + #"hash_3cc984f9a32f1508", 1, 1, "int", &function_11e1fa9a, 0, 0);
-  clientfield::register("toplayer", "" + #"hash_41658211f38c2b02", 1, 1, "int", &function_2929e754, 0, 0);
+  clientfield::register("toplayer", "" + #"exfil_failure", 1, 1, "int", &exfil_failure, 0, 0);
   clientfield::register("world", "" + #"hash_5c2cc65ae866b3f4", 1, 1, "int", &function_52eda57a, 0, 0);
   clientfield::register("world", "" + #"hash_48df238a087c684e", 1, 1, "int", &function_fdc7d35f, 0, 1);
   clientfield::register("world", "" + #"hash_17466a1bb2380af6", 1, getminbitcountfornum(4), "int", &function_fdd966d7, 0, 1);
@@ -42,11 +42,11 @@ function init() {
 
 function function_85d502d3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump == 1) {
-    function_5ea2c6e3("mq_8", 5, 1);
+    addsubmix("mq_8", 5, 1);
     return;
   }
 
-  function_ed62c9c2("mq_8", 5);
+  clearsubmix("mq_8", 5);
 }
 
 function function_7593da3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -91,7 +91,7 @@ function function_7593da3(localclientnum, oldval, newval, bnewent, binitialsnap,
 function function_f8d671e1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump == 1) {
     util::playFXOnTag(fieldname, #"hash_6472f03fb85c98a9", self, "tag_gold_container_top_fx");
-    self playLoopSound(#"hash_52564c7ae0120bdb");
+    self playLoopSound(#"zmb_silver_mq_4_container_elec_lp");
   }
 }
 
@@ -104,7 +104,7 @@ function function_11e1fa9a(localclientnum, oldval, newval, bnewent, binitialsnap
   self stoprumble(fieldname, #"hash_3ee98a89cb99582b");
 }
 
-function function_2929e754(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+function exfil_failure(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump == 1) {
     util::playFXOnTag(fieldname, #"hash_46c19b70a3135f71", self, "tag_origin");
     self playRumbleOnEntity(fieldname, #"hash_24058bbba58fef26");
@@ -387,8 +387,8 @@ function function_6f615c6d(localclientnum, oldval, newval, bnewent, binitialsnap
 
   level notify(#"hash_3bbf8d3383f43cdf");
   audio::stoploopat(#"zmb_silver_mq_6_alarm_2_lp", (-144, 2019, -170));
-  playSound(fieldname, #"hash_3d7e471c91f5482c", (-144, 2019, -170));
-  playSound(fieldname, #"hash_3d7e471c91f5482c", (565, 2137, -178));
+  playSound(fieldname, #"zmb_silver_mq_6_alarm_end", (-144, 2019, -170));
+  playSound(fieldname, #"zmb_silver_mq_6_alarm_end", (565, 2137, -178));
 }
 
 function function_9d39f661(localclientnum) {
@@ -399,7 +399,7 @@ function function_9d39f661(localclientnum) {
   wait 0.75;
 
   while(true) {
-    playSound(localclientnum, #"hash_1a12eda2416ca0a", (565, 2137, -178));
+    playSound(localclientnum, #"zmb_silver_mq_6_alarm_1", (565, 2137, -178));
     wait 2;
   }
 }

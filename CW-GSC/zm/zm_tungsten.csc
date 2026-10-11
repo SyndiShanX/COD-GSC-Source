@@ -165,7 +165,7 @@ function function_f2b7289d(localclientnum, oldval, newval, bnewent, binitialsnap
     foreach(var_4b07d80a in var_92c5226e) {
       var_4b07d80a.var_cc1c5020 = util::spawn_model(fieldname, var_4b07d80a.model, var_4b07d80a.origin, var_4b07d80a.angles);
       var_4b07d80a.var_cc1c5020.var_fc558e74 = "platinum_zipline_obj";
-      var_4b07d80a.var_cc1c5020 function_619a5c20();
+      var_4b07d80a.var_cc1c5020 pingable();
     }
   }
 }
@@ -177,7 +177,7 @@ function function_61297264(localclientnum, oldval, newval, bnewent, binitialsnap
     foreach(var_4b07d80a in var_e303ba30) {
       var_4b07d80a.var_cc1c5020 = util::spawn_model(fieldname, var_4b07d80a.model, var_4b07d80a.origin, var_4b07d80a.angles);
       var_4b07d80a.var_cc1c5020.var_fc558e74 = "platinum_rappel_obj";
-      var_4b07d80a.var_cc1c5020 function_619a5c20();
+      var_4b07d80a.var_cc1c5020 pingable();
     }
   }
 }
@@ -198,30 +198,30 @@ function function_6b66a9a3(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_fd7a1df2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   switch (bwastimejump) {
     case 0:
-      stopforcestreamingxmodel(#"hash_76dd4f827daef371");
-      stopforcestreamingxmodel(#"hash_72d2ae42e9973cad");
+      stopforcestreamingxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_checkpoint_from_staging");
+      stopforcestreamingxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_observation_from_staging");
       stopforcestreamingxmodel(#"hash_5c35207bb157a661");
-      stopforcestreamingxmodel(#"hash_2f9ea46c29003241");
+      stopforcestreamingxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_anytown_from_main");
       stopforcestreamingxmodel(#"hash_5d6f46eb355ec1cb");
       stopforcestreamingxmodel(#"hash_62e92c3479ce24e2");
-      stopforcestreamingxmodel(#"hash_7689d161576092c2");
+      stopforcestreamingxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_anytown_from_under");
       stopforcestreamingxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_observation_from_under");
       stopforcestreamingxmodel(#"hash_1d67a5d0f60e1ea");
       stopforcestreamingxmodel(#"hash_697445b9607e9d53");
       break;
     case 1:
-      forcestreamxmodel(#"hash_76dd4f827daef371");
-      forcestreamxmodel(#"hash_72d2ae42e9973cad");
+      forcestreamxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_checkpoint_from_staging");
+      forcestreamxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_observation_from_staging");
       stopforcestreamingxmodel(#"hash_5c35207bb157a661");
-      stopforcestreamingxmodel(#"hash_2f9ea46c29003241");
+      stopforcestreamingxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_anytown_from_main");
       stopforcestreamingxmodel(#"hash_1d67a5d0f60e1ea");
       stopforcestreamingxmodel(#"hash_697445b9607e9d53");
       break;
     case 2:
       forcestreamxmodel(#"hash_5c35207bb157a661");
-      forcestreamxmodel(#"hash_2f9ea46c29003241");
-      stopforcestreamingxmodel(#"hash_76dd4f827daef371");
-      stopforcestreamingxmodel(#"hash_72d2ae42e9973cad");
+      forcestreamxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_anytown_from_main");
+      stopforcestreamingxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_checkpoint_from_staging");
+      stopforcestreamingxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_observation_from_staging");
       stopforcestreamingxmodel(#"hash_5d6f46eb355ec1cb");
       stopforcestreamingxmodel(#"hash_62e92c3479ce24e2");
       break;
@@ -229,12 +229,12 @@ function function_fd7a1df2(localclientnum, oldval, newval, bnewent, binitialsnap
       forcestreamxmodel(#"hash_5d6f46eb355ec1cb");
       forcestreamxmodel(#"hash_62e92c3479ce24e2");
       stopforcestreamingxmodel(#"hash_5c35207bb157a661");
-      stopforcestreamingxmodel(#"hash_2f9ea46c29003241");
-      stopforcestreamingxmodel(#"hash_7689d161576092c2");
+      stopforcestreamingxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_anytown_from_main");
+      stopforcestreamingxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_anytown_from_under");
       stopforcestreamingxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_observation_from_under");
       break;
     case 4:
-      forcestreamxmodel(#"hash_7689d161576092c2");
+      forcestreamxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_anytown_from_under");
       forcestreamxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_observation_from_under");
       stopforcestreamingxmodel(#"hash_5d6f46eb355ec1cb");
       stopforcestreamingxmodel(#"hash_62e92c3479ce24e2");
@@ -244,10 +244,10 @@ function function_fd7a1df2(localclientnum, oldval, newval, bnewent, binitialsnap
     case 5:
       forcestreamxmodel(#"hash_1d67a5d0f60e1ea");
       forcestreamxmodel(#"hash_697445b9607e9d53");
-      stopforcestreamingxmodel(#"hash_7689d161576092c2");
+      stopforcestreamingxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_anytown_from_under");
       stopforcestreamingxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_observation_from_under");
-      stopforcestreamingxmodel(#"hash_76dd4f827daef371");
-      stopforcestreamingxmodel(#"hash_72d2ae42e9973cad");
+      stopforcestreamingxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_checkpoint_from_staging");
+      stopforcestreamingxmodel(#"p9_fxp_zm_portal_aether_modular_dest_amerika_to_observation_from_staging");
       break;
   }
 }
@@ -434,7 +434,7 @@ function function_33082eb4(localclientnum, oldval, newval, bnewent, binitialsnap
 
     e_player postfx::playpostfxbundle(#"hash_413b0a0d47ce8d45");
     e_player playSound(bwastimejump, #"hash_56a9d9da20064c3f");
-    function_5ea2c6e3("zm_silver_darkaether_leadin", 2);
+    addsubmix("zm_silver_darkaether_leadin", 2);
   }
 }
 
@@ -448,11 +448,11 @@ function function_a146ac0f(localclientnum, oldval, newval, bnewent, binitialsnap
       }
 
       if(!isDefined(s_portal.var_82f9314e[fieldname])) {
-        var_c39b3c14 = util::spawn_model(fieldname, "tag_origin", s_portal.origin, s_portal.angles);
-        var_c39b3c14 playSound(fieldname, #"hash_61bdec1c1b35a33a");
-        var_c39b3c14.var_68cf83c = var_c39b3c14 playLoopSound(#"hash_e94363edb1efe");
-        var_c39b3c14.var_fa63b371 = playFX(fieldname, #"hash_57ae7e6f9140093f", var_c39b3c14.origin, anglesToForward(var_c39b3c14.angles), anglestoup(var_c39b3c14.angles));
-        s_portal.var_82f9314e[fieldname] = var_c39b3c14;
+        e_fx_tag = util::spawn_model(fieldname, "tag_origin", s_portal.origin, s_portal.angles);
+        e_fx_tag playSound(fieldname, #"zmb_tung_sq_burgerboy_portal_open");
+        e_fx_tag.var_68cf83c = e_fx_tag playLoopSound(#"zmb_tung_sq_burgerboy_portal_lp");
+        e_fx_tag.var_fa63b371 = playFX(fieldname, #"hash_57ae7e6f9140093f", e_fx_tag.origin, anglesToForward(e_fx_tag.angles), anglestoup(e_fx_tag.angles));
+        s_portal.var_82f9314e[fieldname] = e_fx_tag;
       }
     }
 
@@ -464,23 +464,23 @@ function function_a146ac0f(localclientnum, oldval, newval, bnewent, binitialsnap
       s_portal.var_82f9314e = [];
     }
 
-    var_c39b3c14 = s_portal.var_82f9314e[fieldname];
+    e_fx_tag = s_portal.var_82f9314e[fieldname];
 
-    if(isDefined(var_c39b3c14.var_68cf83c)) {
-      var_c39b3c14 playSound(fieldname, #"hash_10ab48d5915334e");
-      var_c39b3c14 stoploopsound(var_c39b3c14.var_68cf83c);
-      var_c39b3c14.var_68cf83c = undefined;
+    if(isDefined(e_fx_tag.var_68cf83c)) {
+      e_fx_tag playSound(fieldname, #"zmb_tung_sq_burgerboy_portal_close");
+      e_fx_tag stoploopsound(e_fx_tag.var_68cf83c);
+      e_fx_tag.var_68cf83c = undefined;
     }
 
-    if(isDefined(var_c39b3c14.var_fa63b371)) {
-      var_c39b3c14 playSound(fieldname, #"hash_10ab48d5915334e");
-      playFX(fieldname, #"hash_2786498a222adb04", var_c39b3c14.origin, anglesToForward(var_c39b3c14.angles), anglestoup(var_c39b3c14.angles));
-      killfx(fieldname, var_c39b3c14.var_fa63b371);
-      var_c39b3c14.var_fa63b371 = undefined;
+    if(isDefined(e_fx_tag.var_fa63b371)) {
+      e_fx_tag playSound(fieldname, #"zmb_tung_sq_burgerboy_portal_close");
+      playFX(fieldname, #"hash_2786498a222adb04", e_fx_tag.origin, anglesToForward(e_fx_tag.angles), anglestoup(e_fx_tag.angles));
+      killfx(fieldname, e_fx_tag.var_fa63b371);
+      e_fx_tag.var_fa63b371 = undefined;
     }
 
-    if(isDefined(var_c39b3c14)) {
-      var_c39b3c14 delete();
+    if(isDefined(e_fx_tag)) {
+      e_fx_tag delete();
     }
 
     s_portal.var_82f9314e[fieldname] = undefined;

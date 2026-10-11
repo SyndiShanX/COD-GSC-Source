@@ -77,12 +77,12 @@ function function_433aff96(targetname) {
   return train;
 }
 
-function function_a6404b66(var_6bb2ecd7) {
-  self linkTo(var_6bb2ecd7, "tag_origin", (0, 0, 0), (0, 0, 0));
+function function_a6404b66(s_animnode) {
+  self linkTo(s_animnode, "tag_origin", (0, 0, 0), (0, 0, 0));
 }
 
-function function_4df0bafb(var_6bb2ecd7, num) {
-  if(!isDefined(var_6bb2ecd7)) {
+function function_4df0bafb(s_animnode, num) {
+  if(!isDefined(s_animnode)) {
     return;
   }
 
@@ -95,13 +95,13 @@ function function_4df0bafb(var_6bb2ecd7, num) {
 
     if(level.var_91ee8248.size < level.var_5679f947) {
       if(issubstr(var_eed40cce, "lady")) {
-        actor = spawner::simple_spawn_single("vista_train_civ_f", &function_a6404b66, var_6bb2ecd7);
+        actor = spawner::simple_spawn_single("vista_train_civ_f", &function_a6404b66, s_animnode);
       } else {
-        actor = spawner::simple_spawn_single("vista_train_civ_m", &function_a6404b66, var_6bb2ecd7);
+        actor = spawner::simple_spawn_single("vista_train_civ_m", &function_a6404b66, s_animnode);
       }
 
       waitframe(1);
-      var_6bb2ecd7 thread scene::play(var_eed40cce, actor);
+      s_animnode thread scene::play(var_eed40cce, actor);
 
       if(isDefined(actor)) {
         self.var_34cf0f0b[self.var_34cf0f0b.size] = actor;
@@ -144,14 +144,14 @@ function function_44e94ea4(a_ents) {
   function_1eaaceab(level.var_91ee8248);
 }
 
-function function_26c67eeb(var_8387d95e, var_403c008b, var_12e2a31c, speed, passengers, force_end) {
-  var_49360986 = util::spawn_model(var_403c008b.model, var_12e2a31c.origin);
-  var_49360986.bottom = util::spawn_model("stk_train_exterior_bottom_01", var_12e2a31c.origin);
-  var_49360986.bottom linkTo(var_49360986);
-  var_49360986.targetname = var_403c008b.targetname;
-  var_49360986.angles = var_12e2a31c.angles;
-  var_37d06fc9 = util::spawn_model("tag_origin", var_49360986.origin, var_49360986.angles);
-  var_49360986 linkTo(var_37d06fc9);
+function function_26c67eeb(train_car_struct, var_403c008b, var_12e2a31c, speed, passengers, force_end) {
+  train_car = util::spawn_model(var_403c008b.model, var_12e2a31c.origin);
+  train_car.bottom = util::spawn_model("stk_train_exterior_bottom_01", var_12e2a31c.origin);
+  train_car.bottom linkTo(train_car);
+  train_car.targetname = var_403c008b.targetname;
+  train_car.angles = var_12e2a31c.angles;
+  var_37d06fc9 = util::spawn_model("tag_origin", train_car.origin, train_car.angles);
+  train_car linkTo(var_37d06fc9);
 
   if(isDefined(var_403c008b.linkto)) {
     linkedents = getEntArray(var_403c008b.linkto, "linkname");
@@ -170,9 +170,9 @@ function function_26c67eeb(var_8387d95e, var_403c008b, var_12e2a31c, speed, pass
               }
 
               var_403c008b.damage_trigger = ent;
-              var_49360986.damage_trigger = ent;
+              train_car.damage_trigger = ent;
               ent enablelinkTo();
-              ent linkTo(var_49360986);
+              ent linkTo(train_car);
               ent thread function_33cbff44();
             } else {
               ent delete();
@@ -190,8 +190,8 @@ function function_26c67eeb(var_8387d95e, var_403c008b, var_12e2a31c, speed, pass
               }
 
               var_403c008b.clip = ent;
-              var_49360986.clip = ent;
-              ent linkTo(var_49360986);
+              train_car.clip = ent;
+              ent linkTo(train_car);
             } else {
               ent delete();
             }
@@ -205,10 +205,10 @@ function function_26c67eeb(var_8387d95e, var_403c008b, var_12e2a31c, speed, pass
   }
 
   if(is_true(force_end)) {
-    var_37d06fc9 thread train_car_force_end(var_49360986);
+    var_37d06fc9 thread train_car_force_end(train_car);
   }
 
-  var_37d06fc9 thread function_d0b79cca(var_49360986, var_12e2a31c, speed, passengers);
+  var_37d06fc9 thread function_d0b79cca(train_car, var_12e2a31c, speed, passengers);
 
   if(!isDefined(level.var_e0c474ad)) {
     level.var_e0c474ad = 0;
@@ -236,41 +236,41 @@ function function_33cbff44() {
   }
 }
 
-function train_car_force_end(var_49360986) {
+function train_car_force_end(train_car) {
   self endon(#"death");
   level flag::wait_till("train_car_force_end");
-  self thread function_5d649161(var_49360986);
+  self thread function_5d649161(train_car);
 }
 
-function function_5d649161(var_49360986) {
-  if(isDefined(var_49360986.clip)) {
-    var_49360986.clip unlink();
-    var_49360986.clip dontinterpolate();
-    var_49360986.clip.origin = var_49360986.clip.original_origin;
-    var_49360986.clip.angles = var_49360986.clip.original_angles;
+function function_5d649161(train_car) {
+  if(isDefined(train_car.clip)) {
+    train_car.clip unlink();
+    train_car.clip dontinterpolate();
+    train_car.clip.origin = train_car.clip.original_origin;
+    train_car.clip.angles = train_car.clip.original_angles;
   }
 
-  if(isDefined(var_49360986.damage_trigger)) {
-    var_49360986.damage_trigger unlink();
-    var_49360986.damage_trigger dontinterpolate();
-    var_49360986.damage_trigger.origin = var_49360986.damage_trigger.original_origin;
-    var_49360986.damage_trigger.angles = var_49360986.damage_trigger.original_angles;
+  if(isDefined(train_car.damage_trigger)) {
+    train_car.damage_trigger unlink();
+    train_car.damage_trigger dontinterpolate();
+    train_car.damage_trigger.origin = train_car.damage_trigger.original_origin;
+    train_car.damage_trigger.angles = train_car.damage_trigger.original_angles;
   }
 
-  if(isDefined(var_49360986.var_34cf0f0b)) {
-    array::delete_all(var_49360986.var_34cf0f0b);
+  if(isDefined(train_car.var_34cf0f0b)) {
+    array::delete_all(train_car.var_34cf0f0b);
   }
 
-  if(isDefined(var_49360986.animnode)) {
-    var_49360986.animnode delete();
+  if(isDefined(train_car.animnode)) {
+    train_car.animnode delete();
   }
 
-  if(isDefined(var_49360986.bottom)) {
-    var_49360986.bottom delete();
+  if(isDefined(train_car.bottom)) {
+    train_car.bottom delete();
   }
 
-  if(isDefined(var_49360986)) {
-    var_49360986 delete();
+  if(isDefined(train_car)) {
+    train_car delete();
   }
 
   if(isDefined(self)) {
@@ -280,7 +280,7 @@ function function_5d649161(var_49360986) {
   level.var_e0c474ad--;
 }
 
-function function_d0b79cca(var_49360986, var_403c008b, var_12e2a31c, speed = 600) {
+function function_d0b79cca(train_car, var_403c008b, var_12e2a31c, speed = 600) {
   level endon(#"train_car_force_end");
   self endon(#"death");
   wait 0.05;
@@ -298,7 +298,7 @@ function function_d0b79cca(var_49360986, var_403c008b, var_12e2a31c, speed = 600
           case #"hash_4f6e67d0d79e009d":
             level.var_2c3f2c7d += 1;
             break;
-          case #"hash_6b37faebe309d06a":
+          case #"train_leaving":
             level.var_2c3f2c7d -= 1;
             break;
         }

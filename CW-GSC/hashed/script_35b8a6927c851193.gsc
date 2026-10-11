@@ -100,7 +100,7 @@ function initzombiebehaviors() {
 }
 
 function private function_42151b1b() {
-  self.ai.var_870d0893 = 1;
+  self.ai.rex_mp_swamp_concrete_debris = 1;
   self callback::function_d8abfc3d(#"on_ai_damage", &zombie_gib_on_damage);
   self callback::function_d8abfc3d(#"on_ai_melee", &namespace_85745671::zombie_on_melee);
   self callback::function_d8abfc3d(#"hash_3bb51ce51020d0eb", &namespace_85745671::function_16e2f075);
@@ -114,7 +114,7 @@ function private function_42151b1b() {
   self.var_b8c61fc5 = 1;
   self.var_20e07206 = 1;
   self.var_16dd87ad = 0.1;
-  self.var_90d0c0ff = "anim_spawn_from_ground";
+  self.spawn_anim_alias = "anim_spawn_from_ground";
   self.clamptonavmesh = 1;
   self.var_958e7ee4 = 10;
   self.var_eb3258b = 15;
@@ -347,7 +347,7 @@ function private function_6f78caa9() {
 
   if(waitresult._notify == #"projectile_impact_player" && isDefined(waitresult.player)) {
     player = waitresult.player;
-    player playSound(#"hash_7531b73b4b99b19d");
+    player playSound(#"prj_zombie_projectile_imp");
     player dodamage(self.weapon.damagevalues[0], start_pos, attacker, self);
     var_622f0175 = player.origin - self.origin;
     var_f1ff3ca1 = vectorNormalize((var_622f0175[0], var_622f0175[1], 0));
@@ -388,7 +388,7 @@ function private function_6f78caa9() {
 }
 
 function private setup_awareness(entity) {
-  if(is_true(entity.ai.var_870d0893)) {
+  if(is_true(entity.ai.rex_mp_swamp_concrete_debris)) {
     entity.has_awareness = 1;
     entity.ignorelaststandplayers = 1;
     entity callback::function_d8abfc3d(#"on_ai_damage", &awareness::function_5f511313);

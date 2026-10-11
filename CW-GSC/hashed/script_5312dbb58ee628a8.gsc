@@ -393,7 +393,7 @@ function onplaceturret(turret) {
 
   player deployable::function_6ec9ee30(turret.vehicle, weapon);
   player battlechatter::function_fc82b10(weapon, turret.origin, turret);
-  turret.vehicle playLoopSound(#"hash_69240c6db92da5bf", 0.25);
+  turret.vehicle playLoopSound(#"mpl_turret_amb_loop", 0.25);
   turret.vehicle.turret_enabled = 1;
   target_set(turret.vehicle);
   turret.vehicle unlink();
@@ -412,7 +412,7 @@ function onplaceturret(turret) {
     gameobject gameobjects::set_visible(#"group_all");
     gameobject gameobjects::allow_use(#"group_friendly");
     gameobject gameobjects::set_onenduse_event();
-    gameobject gameobjects::set_onuse_event(&function_ff9ee951);
+    gameobject gameobjects::set_onuse_event(&pickup_turret);
     gameobject.requireslos = 1;
     gameobject.turret = turret;
     turret.vehicle.gameobject = gameobject;
@@ -425,7 +425,7 @@ function onplaceturret(turret) {
   });
 }
 
-function function_ff9ee951(player) {
+function pickup_turret(player) {
   turret = self.turret;
   vehicle = turret.vehicle;
   assert(isDefined(vehicle));
@@ -651,15 +651,15 @@ function function_baa22b40(str_id) {
   return var_2a81938c;
 }
 
-function function_a51316b2(e_target) {
+function is_enemy_target(e_target) {
   assert(isDefined(e_target));
-  var_3f7c79aa = util::function_fbce7263(self.team, e_target.team);
+  is_enemy = util::function_fbce7263(self.team, e_target.team);
 
-  if(!var_3f7c79aa) {
+  if(!is_enemy) {
     function_600ab97b("<dev string:xfb>" + e_target getentitynumber() + "<dev string:x106>", 3);
   }
 
-  return var_3f7c79aa;
+  return is_enemy;
 }
 
 function function_3276039d(e_target) {
@@ -749,7 +749,7 @@ function function_8e56c5e3(vehicle) {
 }
 
 function function_cb172aba(var_2d51cbbc) {
-  return isDefined(var_2d51cbbc) && var_2d51cbbc != self && function_ad8b366c(var_2d51cbbc) && !var_2d51cbbc function_baa22b40(var_2d51cbbc.killstreaktype) && function_a51316b2(var_2d51cbbc) && !function_2aa33bf1(var_2d51cbbc) && function_b70b3595(var_2d51cbbc) && function_4359e9e(var_2d51cbbc);
+  return isDefined(var_2d51cbbc) && var_2d51cbbc != self && function_ad8b366c(var_2d51cbbc) && !var_2d51cbbc function_baa22b40(var_2d51cbbc.killstreaktype) && is_enemy_target(var_2d51cbbc) && !function_2aa33bf1(var_2d51cbbc) && function_b70b3595(var_2d51cbbc) && function_4359e9e(var_2d51cbbc);
 }
 
 function is_valid_target(e_target) {
@@ -822,12 +822,12 @@ function function_42bacd5b() {
 
   if(!isDefined(self.var_ec2f1ab4) || self.var_ec2f1ab4 + 5000 < gettime()) {
     self stoploopsound();
-    self playLoopSound(#"hash_4296223bbff4e0d9");
+    self playLoopSound(#"mpl_missile_turret_lockon");
     self.var_ec2f1ab4 = gettime();
   }
 }
 
-function function_d103a3d0() {
+function acquire_target() {
   if(isDefined(self.e_current_target)) {
     function_422fb6dd();
   }
@@ -835,7 +835,7 @@ function function_d103a3d0() {
   if(!isDefined(self.scanning) || self.scanning == 0) {
     self stoploopsound();
     self.scanning = 1;
-    self playLoopSound(#"hash_7f63867c7aa494d8");
+    self playLoopSound(#"mpl_missile_turret_scanning");
   }
 
   if(isDefined(self.var_c27dadc8)) {
@@ -1045,8 +1045,8 @@ function turretscanning() {
   veh = self;
   veh endon(#"death", #"end_turret_scanning");
   wait 0.8;
-  veh playSound(#"hash_5ecc6c2c01b49468");
-  veh playLoopSound(#"hash_40636cc7faf7855c");
+  veh playSound(#"mpl_missile_turret_startup");
+  veh playLoopSound(#"mpl_missile_turret_amb_loop");
   self thread function_9d831b2f();
 
   self thread function_bc71337c();
@@ -1062,7 +1062,7 @@ function turretscanning() {
     if(is_valid_target(self.e_current_target)) {
       function_16ccb771();
     } else {
-      function_d103a3d0();
+      acquire_target();
     }
 
     waitframe(1);
@@ -1294,8 +1294,8 @@ function function_bc71337c() {
   if(getdvarint(#"hash_7a06f4366ad184cb", 0) >= 1) {
     var_4c7bb5d2 = 20;
 
-    for(var_d6f7b785 = 0;; var_d6f7b785++) {
-      if(var_d6f7b785 % var_4c7bb5d2 == 0) {
+    for(n_frame_count = 0;; n_frame_count++) {
+      if(n_frame_count % var_4c7bb5d2 == 0) {
         util::drawcylinder(self.origin, sqrt(self.turret.var_ddf7efa7), 100000, float(function_60d95f53()) / 1000 * var_4c7bb5d2, undefined, (1, 0.85, 0));
       }
 

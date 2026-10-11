@@ -96,7 +96,7 @@ function function_1b3fc8e4() {
   self namespace_250e9486::function_db744d28();
   self.maxhealth += 250000 + int(100000 * namespace_ec06fe4a::function_ef369bae()) + level.doa.var_6c58d51 * 300000;
   self.health = self.maxhealth;
-  self.var_1c8b76d3 = 1;
+  self.non_zombie = 1;
   self.no_gib = 1;
   self.meleedistsq = sqr(72);
   self.goalradius = 68;
@@ -109,7 +109,7 @@ function function_1b3fc8e4() {
   self callback::on_ai_killed(&function_a231dd3b);
   target_set(self);
   self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_gegenees_spawn");
-  self thread namespace_9fc66ac::function_ba33d23d(#"hash_2f8e9463ad366ab0", #"hash_2f8e9463ad366ab0", #"hash_4fbc2a660ed47842");
+  self thread doa_sound::function_ba33d23d(#"zmb_vocals_gegenees_ambient", #"zmb_vocals_gegenees_ambient", #"zmb_vocals_gegenees_death");
   self attach("c_t8_zmb_dlc2_gegenees_shield", "tag_weapon_left");
   self attach("c_t8_zmb_dlc2_gegenees_sword", "tag_weapon_right");
   self attach("c_t8_zmb_dlc2_gegenees_helmet1", "j_head");
@@ -206,11 +206,11 @@ function function_7f34a57c(entity) {
 
 function function_f7d9bc34() {
   self endon(#"disconnect");
-  self namespace_83eb6304::function_3ecfde67("incoming_impact");
+  self doa_fx::function_3ecfde67("incoming_impact");
   wait 1.2;
 
   if(isDefined(self)) {
-    self namespace_83eb6304::turnofffx("incoming_impact");
+    self doa_fx::turnofffx("incoming_impact");
   }
 }
 
@@ -693,7 +693,7 @@ function private function_ca5688e3(inflictor, attacker, damage, idflags, meansof
 
         if(isDefined(point)) {
           if(namespace_ec06fe4a::function_a8975c67()) {
-            playSoundAtPosition(#"hash_72db6f3f0e602a33", point);
+            playSoundAtPosition(#"zmb_ai_gegenees_hit_shield", point);
           }
         }
       }

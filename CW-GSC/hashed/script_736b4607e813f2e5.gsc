@@ -97,7 +97,7 @@ function function_22de5bc1() {
   self namespace_250e9486::function_db744d28();
   self.maxhealth += 250000 + int(100000 * namespace_ec06fe4a::function_ef369bae()) + level.doa.var_6c58d51 * 300000;
   self.health = self.maxhealth;
-  self.var_1c8b76d3 = 1;
+  self.non_zombie = 1;
   self.no_gib = 1;
   self.var_3a001247 = 1;
   self.zombie_move_speed = "sprint";
@@ -123,7 +123,7 @@ function function_22de5bc1() {
   target_set(self);
   namespace_81245006::initweakpoints(self);
   self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_bfather_spawn");
-  self thread namespace_9fc66ac::function_ba33d23d(#"hash_4d91ba683ffb7c6e", #"hash_4d91ba683ffb7c6e", #"hash_5f3161f401802be0");
+  self thread doa_sound::function_ba33d23d(#"zmb_doa_ai_bfather_vocal_ambient", #"zmb_doa_ai_bfather_vocal_ambient", #"zmb_doa_ai_bfather_vocal_death");
   level.doa.var_da713110++;
 }
 
@@ -223,7 +223,7 @@ function private function_764f26b5(entity) {
 function private function_643a6055(entity, asmstate) {
   animationstatenetworkutility::requeststate(entity, asmstate);
   entity.var_eaacf62b = 1;
-  entity namespace_83eb6304::function_3ecfde67("blightfather_vomit");
+  entity doa_fx::function_3ecfde67("blightfather_vomit");
   entity namespace_e32bb68::function_3a59ec34("zmb_doa_ai_bfather_vocal_puke_start");
   entity namespace_e32bb68::function_3a59ec34("zmb_doa_ai_bfather_vocal_puke_lp");
   entity.var_f4c4ff2c = gettime() + randomintrange(3000, 6000);
@@ -246,7 +246,7 @@ function private function_d6ccc9e9(entity, asmstate) {
   asmstate.var_c28230ee = gettime() + randomintrange(5000, 15000);
 
   if(is_true(asmstate.var_eaacf62b)) {
-    asmstate namespace_83eb6304::turnofffx("blightfather_vomit");
+    asmstate doa_fx::turnofffx("blightfather_vomit");
     asmstate namespace_e32bb68::function_3a59ec34("zmb_doa_ai_bfather_vocal_puke_end");
     asmstate namespace_e32bb68::function_ae271c0b("zmb_doa_ai_bfather_vocal_puke_lp");
   }
@@ -276,7 +276,7 @@ function private function_9251853b() {
 
   self.takedamage = 0;
   self.health = 1;
-  self namespace_83eb6304::function_3ecfde67("egg_explode");
+  self doa_fx::function_3ecfde67("egg_explode");
   self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_bfather_egg_explode");
   self namespace_ec06fe4a::function_8c808737();
   self thread namespace_ec06fe4a::function_52afe5df(0.2);
@@ -291,7 +291,7 @@ function function_475aaa85() {
 
   if(distsq < sqr(1000)) {
     self.health = 1;
-    self namespace_83eb6304::function_3ecfde67("egg_explode");
+    self doa_fx::function_3ecfde67("egg_explode");
     self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_bfather_egg_explode");
     self namespace_ec06fe4a::function_8c808737();
     self thread namespace_ec06fe4a::function_52afe5df(0.2);
@@ -335,8 +335,8 @@ function private function_7512b675(launchdir) {
     waitframe(1);
   }
 
-  self namespace_83eb6304::function_3ecfde67("nova_crawler_burst");
-  self namespace_83eb6304::function_3ecfde67("egg_explode");
+  self doa_fx::function_3ecfde67("nova_crawler_burst");
+  self doa_fx::function_3ecfde67("egg_explode");
   self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_bfather_egg_spawn");
   self namespace_ec06fe4a::function_8c808737();
   ai = doa_enemy::function_db55a448(level.doa.var_6b8705f1, self.origin);
@@ -357,7 +357,7 @@ function private blightfatherdeathstart(entity) {
       return;
     }
 
-    gib_model animScripted(#"hash_56a346d1e0dd61cd", gib_model.origin, gib_model.angles, #"hash_3e937fff0e0a4362", "normal");
+    gib_model animScripted(#"hash_56a346d1e0dd61cd", gib_model.origin, gib_model.angles, #"ai_t8_zm_zod_bltfthr_dth_destroy_head_01_nofx", "normal");
     gib_model thread function_529b7fb9();
     entity.gib_model = gib_model;
   }
@@ -942,7 +942,7 @@ function private function_124486ee(delay) {
     e_blightfather = var_892397fd.var_52334e8c;
     w_weapon = getweapon(#"none");
     var_892397fd function_8e8b1dfc(var_c45ef84c, e_blightfather, w_weapon);
-    var_892397fd namespace_83eb6304::function_3ecfde67("nova_crawler_burst");
+    var_892397fd doa_fx::function_3ecfde67("nova_crawler_burst");
     var_892397fd namespace_e32bb68::function_3a59ec34("zmb_doa_ai_bfather_missile_imp");
     var_892397fd namespace_e32bb68::function_ae271c0b("zmb_doa_ai_bfather_missile_lp");
     offset = (0, 0, 18);

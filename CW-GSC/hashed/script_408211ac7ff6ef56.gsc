@@ -32,7 +32,7 @@ function drop_item(index, origin, angles, var_98c867cd, random_yaw = 1, origin_o
   var_ad49c795 = getdvarint(#"hash_730e73fdf6a44e00", 0);
 
   if(var_ad49c795) {
-    self thread function_f6480a82(time);
+    self thread draw_trail(time);
   }
 
   return time;
@@ -64,7 +64,7 @@ function function_350c0e2b(index, origin, angles, var_98c867cd) {
   assert(0);
 }
 
-function function_9345a4f7(var_98c867cd, index, baseorigin, baseangles, ignoreent, var_8c967549, var_a17c7804, traces = 1) {
+function function_9345a4f7(var_98c867cd, index, baseorigin, baseangles, ignoreent, var_8c967549, optionaloverridedist, traces = 1) {
   assert(!isDefined(ignoreent) || isentity(ignoreent));
   trace_active = traces;
   var_ad49c795 = getdvarint(#"hash_730e73fdf6a44e00", 0);
@@ -99,8 +99,8 @@ function function_9345a4f7(var_98c867cd, index, baseorigin, baseangles, ignoreen
     yaw = baseangles[1] + var_8c967549;
   }
 
-  if(isDefined(var_a17c7804)) {
-    dist = var_a17c7804;
+  if(isDefined(optionaloverridedist)) {
+    dist = optionaloverridedist;
   }
 
   angles = (0, yaw, 0);
@@ -279,7 +279,7 @@ function function_7289b47(index, name, start, end, traceresults) {
   line(start, end, (1, 1, 1), 1, 0, var_e011538a);
 }
 
-function function_f6480a82(time) {
+function draw_trail(time) {
   var_e011538a = 2000;
   self endon(#"death");
   last_origin = self.origin;

@@ -95,7 +95,7 @@ function main(str_skipto, b_starting) {
   array::thread_all(guys, &namespace_979752dc::function_2324f175, 0);
   level flag::wait_till("af_start_overlook_scene");
   level flag::wait_till_all_timeout(8, ["af_woods_at_overlook", "af_adler_at_overlook"]);
-  thread function_76b7bfa7();
+  thread handle_intro_dialog();
   clips = getEntArray("plane_floor_clip", "targetname");
 
   foreach(clip in clips) {
@@ -115,9 +115,9 @@ function main(str_skipto, b_starting) {
   level thread scene::play("scene_tkd_hit3_intro_overlook_arash", "overlook_shot", [level.arash]);
   level thread scene::play("scene_tkd_hit3_intro_overlook_adler", "overlook_shot", [level.woods, level.adler]);
   level thread scene::play("scene_tkd_hit3_intro_overlook", "overlook_shot");
-  level thread util::delay("play_b3.0_iced_mus", undefined, &music::function_edda155f, "b3.0_iced");
+  level thread util::delay("play_b3.0_iced_mus", undefined, &music::playstinger, "b3.0_iced");
   level thread util::delay("play_b3.0_iced_mus", undefined, &music::setmusicstate, "b4.0_hold_fire");
-  level thread util::delay("play_b4.1_identify_mus", undefined, &music::function_edda155f, "b4.1_identify");
+  level thread util::delay("play_b4.1_identify_mus", undefined, &music::playstinger, "b4.1_identify");
   level waittill(#"start_sniping", #"hash_380fe6172e5e75ed");
   level flag::set("start_sniping");
   snd::client_msg("start_sniping");
@@ -137,7 +137,7 @@ function main(str_skipto, b_starting) {
 
   if(res._notify != #"timeout") {
     level music::setmusicstate("none");
-    level music::function_edda155f("b4.2_shot");
+    level music::playstinger("b4.2_shot");
     var_7810080a = level.arash waittilltimeout(0.5, #"hash_ae39942308147bf", #"damage");
   }
 
@@ -173,7 +173,7 @@ function main(str_skipto, b_starting) {
   thread function_254c9ae();
   thread tkdn_af_chase::function_9d8f5cd3();
   waitframe(1);
-  savegame::function_7790f03(1);
+  savegame::checkpoint_save_asap(1);
   level flag::wait_till_any(["overlook_guys_done", "woods_to_truck"]);
 
   if(!level flag::get("player_break_stealth_fired")) {
@@ -185,7 +185,7 @@ function main(str_skipto, b_starting) {
   level flag::wait_till("arash_in_plane");
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 }
 
@@ -223,12 +223,12 @@ function function_32398bfb(player) {
   guy = getaiarray("af_enemy4", "targetname")[0];
   guy stopanimScripted();
   level.arash stopanimScripted();
-  player.var_35ee6252 = undefined;
+  player.holdingbreath = undefined;
   setslowmotion(1, 0.5, 0);
   player_org = player.origin;
-  var_cac40761 = player.angles;
+  player_ang = player.angles;
   var_ca71a1c8 = "black";
-  thread namespace_61e6d095::function_28027c42(#"hash_4fe4ea6c5e05ffb7");
+  thread scripted_widgets::function_28027c42(#"hash_4fe4ea6c5e05ffb7");
   exploder::exploder("airfield_sniper_bullet_light");
   level thread scene::play("scene_tkd_hit3_intro_overlook_bullet_cam", "fancy_bulletcam", [level.arash]);
   snd::client_msg(#"hash_1533b6e574c5cfe7");
@@ -245,8 +245,8 @@ function function_32398bfb(player) {
   snd::client_msg(#"hash_3620fe1626778dde");
   waitframe(1);
   player setOrigin(player_org);
-  player setplayerangles(var_cac40761);
-  namespace_61e6d095::function_4279fd02(#"hash_4fe4ea6c5e05ffb7");
+  player setplayerangles(player_ang);
+  scripted_widgets::function_4279fd02(#"hash_4fe4ea6c5e05ffb7");
   waitframe(1);
 }
 
@@ -356,7 +356,7 @@ function init_clientfields() {
   clientfield::register("world", "fake_snipercam_slomo", 1, 1, "int");
 }
 
-function function_22b7fffd() {
+function init_scenes() {
   scene::add_scene_func("scene_tkd_hit3_intro_overlook", &function_2fc20b49, "initial_loop");
   scene::add_scene_func("scene_tkd_hit3_intro_overlook", &function_309e4828, "overlook_shot");
   scene::add_scene_func("scene_tkd_hit3_intro_overlook", &function_9b3565b1, "overlook_shot");
@@ -411,7 +411,7 @@ function function_f7c7ce51() {
   level.arash namespace_979752dc::function_2324f175(0);
 }
 
-function function_dd77a447() {
+function handle_camera() {
   level endoncallback(&function_8c38a6f0, #"car_arrive");
   player = getPlayers()[0];
   player util::show_hint_text(#"hash_a9076dcaa02f4e", 0, "camera_up", -1);
@@ -446,10 +446,10 @@ function private function_8c38a6f0(parms) {
   getPlayers()[0] notifyonplayercommandremove("binoculars", "+actionslot 4");
 }
 
-function function_76b7bfa7() {
+function handle_intro_dialog() {
   level flag::wait_till("af_start_overlook_scene");
   level.adler thread dialogue::queue("vox_cp_tdwn_07100_adlr_masoncheckitout_eb");
-  thread function_dd77a447();
+  thread handle_camera();
 }
 
 function function_8c011eca() {
@@ -490,7 +490,7 @@ function function_d75e55a1(targets, lines, fov = 2, var_dc8ec980 = 5) {
     waitframe(1);
   }
 
-  var_dd9a54cd = cos(fov);
+  fov_cos = cos(fov);
 
   while(i < lines.size) {
     while(player getcurrentweapon().name != "eq_binoculars" || !player adsButtonPressed()) {
@@ -505,7 +505,7 @@ function function_d75e55a1(targets, lines, fov = 2, var_dc8ec980 = 5) {
       eye_dir = anglesToForward(eye_angles);
 
       foreach(targ in targets) {
-        if(!is_true(targ.var_181d1cf5) && targ function_e779ff3c(player, eye_pos, eye_angles, var_dd9a54cd, eye_dir, fov)) {
+        if(!is_true(targ.var_181d1cf5) && targ player_can_see(player, eye_pos, eye_angles, fov_cos, eye_dir, fov)) {
           var_32a7c3bf = targ;
           break;
         }
@@ -527,7 +527,7 @@ function function_d75e55a1(targets, lines, fov = 2, var_dc8ec980 = 5) {
   }
 }
 
-function function_e779ff3c(player, eye_pos, eye_angles, var_dd9a54cd, eye_dir, fov) {
+function player_can_see(player, eye_pos, eye_angles, fov_cos, eye_dir, fov) {
   level endon(#"car_arrive");
   self endon(#"death");
   target_pos = self.origin + (0, 0, 30);
@@ -536,7 +536,7 @@ function function_e779ff3c(player, eye_pos, eye_angles, var_dd9a54cd, eye_dir, f
     return false;
   }
 
-  if(util::within_fov(var_dd9a54cd, eye_dir, target_pos, fov)) {
+  if(util::within_fov(fov_cos, eye_dir, target_pos, fov)) {
     return true;
   }
 
@@ -561,12 +561,12 @@ function function_b12fabe5(player) {
   }
 }
 
-function function_9967d19b(var_5077b72a) {
+function function_9967d19b(excludes) {
   guys = getaiarray("af_intro_enemies", "script_noteworthy");
   guys = array::exclude(guys, level.arash);
 
-  if(isDefined(var_5077b72a)) {
-    guys = array::exclude(guys, var_5077b72a);
+  if(isDefined(excludes)) {
+    guys = array::exclude(guys, excludes);
   }
 
   array::thread_all(guys, &function_f1f9011d);

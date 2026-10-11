@@ -17,7 +17,7 @@
 #namespace namespace_4ed3ce47;
 
 function private event_handler[level_preinit] function_b489bb7b(eventstruct) {
-  snd::function_5e69f468(&_objective);
+  snd::skipto_init(&_objective);
   snd::wait_init();
 }
 
@@ -392,7 +392,7 @@ function emt_projector_slide_change_forward() {
   snd::play("emt_projector_slide_change_forward", (72, 261, 46));
 }
 
-function function_7edafa59(str_msg) {
+function music_handler(str_msg) {
   if(isDefined(level.var_41fc1341)) {
     if(level.var_41fc1341 != str_msg) {
       level.var_2c9b406b = level.var_41fc1341;
@@ -408,7 +408,7 @@ function function_7edafa59(str_msg) {
       level.var_41fc1341 = str_msg;
       music::setmusicstate("evidence_board_main");
       break;
-    case #"hash_75e670280bd9b6de":
+    case #"evidence_board_mission":
       level.var_41fc1341 = str_msg;
       break;
     case #"post_takedown_briefing":
@@ -507,85 +507,85 @@ function fly_arcade_machine_interact_hub_quit() {
 
 function function_e043da15() {
   level waittill(#"hash_30a43574a5dc7eaf");
-  level thread function_7edafa59("ambient");
+  level thread music_handler("ambient");
 }
 
 function function_9ac95ec9() {
   level waittill(#"hash_1c9f12be6eb51878");
-  level thread function_7edafa59("ambient");
+  level thread music_handler("ambient");
 }
 
 function function_37c997de() {
   level waittill(#"hash_55da63f0f51c5d6c");
-  level thread function_7edafa59("ambient");
+  level thread music_handler("ambient");
 }
 
 function function_4aa573e7() {
   level waittill(#"hash_2a423f7844789ffa");
-  level thread function_7edafa59("ambient");
+  level thread music_handler("ambient");
 }
 
 function function_d89aa829() {
   level waittill(#"hash_117dd9247812a234");
-  level thread function_7edafa59("ambient");
+  level thread music_handler("ambient");
 }
 
 function function_46f173b2() {
   level waittill(#"hash_3b68231254fe41c0");
-  level thread function_7edafa59("ambient");
+  level thread music_handler("ambient");
 }
 
 function function_849d7772() {
   level waittill(#"hash_62067a3d17f16ce0");
-  level thread function_7edafa59("ambient");
+  level thread music_handler("ambient");
 }
 
 function function_e25181b5() {
-  level thread function_7edafa59("prisoner_lie");
+  level thread music_handler("prisoner_lie");
 }
 
 function function_a0289367() {
-  level thread function_7edafa59("none");
+  level thread music_handler("none");
 }
 
 function function_bc5cf85e() {
-  level thread function_7edafa59("character_creation_screen");
+  level thread music_handler("character_creation_screen");
 }
 
 function function_e522e5de() {
-  level thread function_7edafa59("prisoner_part1_safehouse");
+  level thread music_handler("prisoner_part1_safehouse");
 }
 
 function function_a59705f8() {
-  level thread function_7edafa59("prisoner_part2_takedown_flashback");
+  level thread music_handler("prisoner_part2_takedown_flashback");
 }
 
 function function_f526df02() {
-  level thread function_7edafa59("prisoner_part3_safehouse");
+  level thread music_handler("prisoner_part3_safehouse");
 }
 
 function function_3f60bc38() {
-  level thread function_7edafa59("prisoner_part4_vietnam_flashback");
+  level thread music_handler("prisoner_part4_vietnam_flashback");
 }
 
 function function_4825c155() {
-  level thread function_7edafa59("prisoner_part5_safehouse");
+  level thread music_handler("prisoner_part5_safehouse");
 }
 
 function function_85d1dd20() {
-  level thread function_7edafa59("prisoner_part6_reddoor_flashback");
+  level thread music_handler("prisoner_part6_reddoor_flashback");
 }
 
 function function_32eb5fd4() {
-  level thread function_7edafa59("prisoner_part7_safehouse");
+  level thread music_handler("prisoner_part7_safehouse");
 }
 
 function function_d73cc011() {
-  level thread function_7edafa59("prisoner_part8_perseus_flashback");
+  level thread music_handler("prisoner_part8_perseus_flashback");
 }
 
 function function_7aef4705() {
-  level thread function_7edafa59("prisoner_part9_safehouse");
+  level thread music_handler("prisoner_part9_safehouse");
 }
 
 function duck_evidence_board_enter() {

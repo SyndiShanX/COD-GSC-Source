@@ -83,11 +83,11 @@ function main(str_skipto, b_starting) {
   var_1fbc6848 = getspawnerarray("ledge_lmg_guy", "script_noteworthy");
   var_1fbc6848[0] spawner::add_spawn_function(&function_b8018dce);
   level endon(#"hash_7d9928c92b67b6b2");
-  level battlechatter::function_2ab9360b(0);
+  level battlechatter::bc_allow(0);
   player util::blend_movespeedscale(0.87, 1);
   level.adler ai::set_behavior_attribute("demeanor", "combat");
   level.woods ai::set_behavior_attribute("demeanor", "combat");
-  var_5ca6956f = getweapon(#"ar_accurate_t9");
+  w_smg = getweapon(#"ar_accurate_t9");
   w_pistol = getweapon(#"pistol_semiauto_t9", "steadyaim", "fastreload", "reflex_pistol");
   thread function_1f6d0353();
   level flag::wait_till("flag_qasim_roof_run3");
@@ -167,12 +167,12 @@ function main(str_skipto, b_starting) {
   player unlink();
   fake_player delete();
   util::nvidiaansel_scriptdisable(0);
-  player util::function_749362d7(1);
+  player util::set_low_ready(1);
   player enableweapons();
   player util::blend_movespeedscale(0.5, 1);
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
@@ -214,11 +214,11 @@ function give_player_max_ammo() {
 
 function function_624525f() {
   level endon(#"shot_slide_enemy1");
-  var_b84b1bf9 = getEnt("mb_slide_enemy1", "targetname");
+  dmg_pos = getEnt("mb_slide_enemy1", "targetname");
   level waittill(#"land_rumble");
 
   if(isalive(level.slide_enemy1) && !isDefined(level.slide_enemy1.var_b481f04a)) {
-    magicbullet(getweapon(#"ar_standard_t9"), var_b84b1bf9.origin, level.slide_enemy1.origin + (0, 0, 50));
+    magicbullet(getweapon(#"ar_standard_t9"), dmg_pos.origin, level.slide_enemy1.origin + (0, 0, 50));
   }
 }
 
@@ -352,4 +352,4 @@ function init_flags() {
 
 function init_clientfields() {}
 
-function function_22b7fffd() {}
+function init_scenes() {}

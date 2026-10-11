@@ -129,7 +129,7 @@ function private function_7daf5356(player, endnote) {
       vel = vectorscale(self.origin - player.origin, 0.2);
 
       if(!is_true(guy.no_gib)) {
-        guy namespace_ed80aead::function_1f275794(vel, player);
+        guy doa_gib::function_1f275794(vel, player);
         guy thread namespace_ec06fe4a::function_570729f0(randomintrange(5, 10), player);
         guy dodamage(guy.maxhealth >> 1, guy.origin, player, player, "none", "MOD_UNKNOWN");
       } else {
@@ -150,9 +150,9 @@ function private function_40fc311d(org, endnote) {
     self endon(#"disconnect");
   }
 
-  timeout = max(max(40, self namespace_1c2a96f9::function_4808b985(40)), self namespace_1c2a96f9::function_2ce61fb9(40));
+  timeout = max(max(40, self doa_fate::function_4808b985(40)), self doa_fate::function_2ce61fb9(40));
 
-  while(!namespace_dfc652ee::function_f759a457()) {
+  while(!doa_pickups::function_f759a457()) {
     waitframe(1);
   }
 
@@ -161,7 +161,7 @@ function private function_40fc311d(org, endnote) {
 }
 
 function private function_20139eee(org, endnote) {
-  self waittill(endnote, #"player_died", #"kill_shield", #"disconnect", #"death", #"enter_vehicle", #"hash_df25520ab279dff", #"clone_shutdown");
+  self waittill(endnote, #"player_died", #"kill_shield", #"disconnect", #"death", #"enter_vehicle", #"doa_playervehiclepickup", #"clone_shutdown");
 
   if(isDefined(self)) {
     self notify(endnote);

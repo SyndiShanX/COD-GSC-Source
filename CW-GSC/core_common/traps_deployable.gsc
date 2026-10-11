@@ -138,7 +138,7 @@ function function_5726a711() {
         }
 
         var_a8539bf6.var_5b026504 = var_5e63b00d.script_objective;
-        var_a8539bf6.var_ef146db5 = var_5e63b00d.var_d513a1cb;
+        var_a8539bf6.var_ef146db5 = var_5e63b00d.script_flag_clean;
         var_a8539bf6.gameobject = gameobject;
 
         if(var_a8539bf6 register_trap(var_2d727ba0)) {
@@ -156,7 +156,7 @@ function function_5726a711() {
             var_5e63b00d thread function_69996073(var_a8539bf6.mdl_gameobject.var_3af54106);
           }
 
-          level function_8f66239f(var_5e63b00d.var_d513a1cb);
+          level function_8f66239f(var_5e63b00d.script_flag_clean);
 
           var_5e63b00d function_ef942626();
         }

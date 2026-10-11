@@ -57,7 +57,7 @@ function event_handler[checkpoint_restore] function_d49b3ac5() {
 
 function event_handler[event_6aa1189e] function_c6a7519f() {
   player = self;
-  player.var_35ee6252 = 1;
+  player.holdingbreath = 1;
   setslowmotion(1, 0.2, 0.5);
 }
 
@@ -69,8 +69,8 @@ function event_handler[event_822128d0] function_255956d5() {
 function private function_9220f819() {
   player = self;
 
-  if(is_true(player.var_35ee6252)) {
-    player.var_35ee6252 = undefined;
+  if(is_true(player.holdingbreath)) {
+    player.holdingbreath = undefined;
     setslowmotion(0.2, 1, 0.1);
   }
 }

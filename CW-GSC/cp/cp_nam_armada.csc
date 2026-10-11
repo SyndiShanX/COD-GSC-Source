@@ -27,7 +27,7 @@ function event_handler[level_init] main(eventstruct) {
   init_clientfields();
   level._effect[#"hash_12368454c367c6fc"] = #"hash_41db1a73a41027b";
   load::main();
-  level thread namespace_72b0499b::init_audio();
+  level thread armada_audio::init_audio();
   util::waitforclient(0);
   level thread function_578ff07e();
   players = getlocalplayers();

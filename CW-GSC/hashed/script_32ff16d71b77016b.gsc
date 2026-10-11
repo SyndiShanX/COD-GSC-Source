@@ -65,7 +65,7 @@ function private function_8069a99d() {
     if(isDefined(self.script_moveoverride)) {
       self thread function_35f3d336();
     } else {
-      self thread function_54f05251();
+      self thread move_on_path();
     }
 
     return;
@@ -131,9 +131,9 @@ function private function_beea5074() {
   }
 
   same_team = isDefined(eattacker) && (self.team === eattacker.team || util::function_9b7092ef(self.team, eattacker.team));
-  var_24c578bc = !isDefined(self.script_allowdeath) || self.script_allowdeath;
+  can_die = !isDefined(self.script_allowdeath) || self.script_allowdeath;
 
-  if(same_team || !var_24c578bc) {
+  if(same_team || !can_die) {
     self.health = self.maxhealth;
 
     if(same_team) {
@@ -145,19 +145,19 @@ function private function_beea5074() {
   if(isDefined(eattacker) && eattacker != self) {
     if(!isDefined(einflictor) || !isai(einflictor) || isvehicle(einflictor) && einflictor getseatoccupant(0) === eattacker) {
       if(idamage > 0 && !same_team && self.team != #"neutral" && shitloc !== "riotshield") {
-        fatal = var_24c578bc && self.health <= 0;
+        fatal = can_die && self.health <= 0;
         eattacker thread damagefeedback::update(smeansofdeath, einflictor, undefined, weapon, self, undefined, shitloc, fatal);
       }
     }
   }
 
-  if(!var_24c578bc) {
+  if(!can_die) {
     self thread function_beea5074();
     return;
   }
 
   if(!isDefined(self.script_friendly_fire_disable)) {
-    self thread friendlyfire::function_1ad87afd(self, idamage, eattacker, smeansofdeath, undefined, einflictor);
+    self thread friendlyfire::friendly_fire_callback(self, idamage, eattacker, smeansofdeath, undefined, einflictor);
   }
 
   s_params = {
@@ -201,7 +201,7 @@ function kill_drone(s_params) {
     self notsolid();
 
     if(!isDefined(self.drone.nocorpsedelete)) {
-      self thread function_e7956bb6();
+      self thread delete_corpse();
     }
 
     if(isDefined(level.var_9c483e1)) {
@@ -210,7 +210,7 @@ function kill_drone(s_params) {
   }
 }
 
-function private function_e7956bb6() {
+function private delete_corpse() {
   self endon(#"entitydeleted");
   wait 5;
   self.drone.var_9e843395 = 0;
@@ -241,14 +241,14 @@ function private function_19f971bb() {
   self moveTo(self.origin, 0.05);
   self rotateTo(self.angles, 0.05);
   wait 0.1;
-  var_361f5589 = getfakeaiarray();
+  all_drones = getfakeaiarray();
   var_9789086c = 54;
   var_6076a7b7 = 10;
   var_d5f6126 = [];
   var_c2b552df = [];
   var_b6cd5ad8 = [];
 
-  foreach(drone in var_361f5589) {
+  foreach(drone in all_drones) {
     if(drone != self && !isalive(drone)) {
       var_d5f6126[var_d5f6126.size] = drone;
 
@@ -317,7 +317,7 @@ function private function_44dd1cfb(var_ceb8c425, var_e325076f) {
   return hasanim;
 }
 
-function private function_f2582c66(var_ceb8c425, var_e325076f) {
+function private get_anim(var_ceb8c425, var_e325076f) {
   if(self function_44dd1cfb(var_ceb8c425, var_e325076f)) {
     randomindex = randomintrange(0, self.drone.var_fe46433f[var_ceb8c425][var_e325076f].size);
     var_302d3447 = self.drone.var_fe46433f[var_ceb8c425][var_e325076f][randomindex];
@@ -330,7 +330,7 @@ function private play_anim(droneanim, rate, mode) {
   play_single_anim(droneanim, rate, mode);
 }
 
-function private function_98f16d76(droneanim, rate, mode) {
+function private play_idle_anim(droneanim, rate, mode) {
   play_single_anim(droneanim, rate, mode);
 }
 
@@ -365,7 +365,7 @@ function drone_idle(stance) {
         idleanim = self.drone.var_fe46433f[stance][#"idle"][randomindex];
       }
 
-      self thread function_98f16d76(idleanim);
+      self thread play_idle_anim(idleanim);
       var_447218d2 = getanimlength(idleanim);
       wait var_447218d2 - 0.2;
     }
@@ -395,7 +395,7 @@ function private function_eaea34d2(lastnode) {
 }
 
 function drone_fight(stance) {
-  self endon(#"death", #"entitydeleted", #"hash_1b1ebb63b6197fd7");
+  self endon(#"death", #"entitydeleted", #"stop_drone_fighting");
   self.drone.stance = stance;
   self thread drone_idle(stance);
   wait 0.3;
@@ -411,7 +411,7 @@ function drone_fight(stance) {
         var_c10115e8 = 1;
 
         if(self function_44dd1cfb(stance, "IDLE_TO_ATTACK")) {
-          animation = self function_f2582c66(stance, "IDLE_TO_ATTACK");
+          animation = self get_anim(stance, "IDLE_TO_ATTACK");
           self play_anim(animation);
           waittime = getanimlength(animation) - 0.1;
           wait waittime;
@@ -422,7 +422,7 @@ function drone_fight(stance) {
 
       if(self function_44dd1cfb(stance, "ATTACK")) {
         if(var_c10115e8) {
-          animation = self function_f2582c66(stance, "ATTACK");
+          animation = self get_anim(stance, "ATTACK");
           self thread play_anim(animation);
           wait 0.1;
         }
@@ -439,7 +439,7 @@ function drone_fight(stance) {
 
       if(var_c10115e8) {
         if(self function_44dd1cfb(stance, "ATTACK_TO_IDLE")) {
-          animation = self function_f2582c66(stance, "ATTACK_TO_IDLE");
+          animation = self get_anim(stance, "ATTACK_TO_IDLE");
           self play_anim(animation);
           waittime = getanimlength(animation) - 0.1;
           wait waittime;
@@ -452,7 +452,7 @@ function drone_fight(stance) {
       wait 0.3;
 
       if(self function_44dd1cfb(stance, "RELOAD") && math::cointoss()) {
-        animation = self function_f2582c66(stance, "RELOAD");
+        animation = self get_anim(stance, "RELOAD");
         self play_anim(animation);
         waittime = getanimlength(animation) - 0.1;
         wait waittime;
@@ -515,7 +515,7 @@ function private drone_shoot() {
     self thread function_d3d685b8();
   }
 
-  fireanim = self function_f2582c66(self.drone.stance, "ATTACK");
+  fireanim = self get_anim(self.drone.stance, "ATTACK");
   self thread animation::play(fireanim, self.origin, self.angles, 1, 1, 0.2);
   util::delay(0.25, undefined, &clearanim, fireanim, 0);
 }
@@ -543,7 +543,7 @@ function private function_d3d685b8() {
 function private function_35f3d336() {
   self endon(#"death", #"entitydeleted");
   self waittill(#"move");
-  self thread function_54f05251();
+  self thread move_on_path();
 }
 
 function private get_anim_data(runanim) {
@@ -566,7 +566,7 @@ function private get_anim_data(runanim) {
 }
 
 function function_f89df05b() {
-  runanim = self function_f2582c66("cover_exposed", "RUN");
+  runanim = self get_anim("cover_exposed", "RUN");
   var_6fc8022e = get_anim_data(runanim);
 
   if(!is_true(self.var_c2c86d65)) {
@@ -576,7 +576,7 @@ function function_f89df05b() {
   self thread play_anim(runanim, self.drone.moveplaybackrate, "mover");
 }
 
-function private function_54f05251() {
+function private move_on_path() {
   self endon(#"death", #"entitydeleted");
   self.node = undefined;
   wait 0.05;
@@ -640,18 +640,18 @@ function private function_54f05251() {
       }
     }
 
-    var_d7e06ec6 = distance / self.drone.run_speed * self.drone.moveplaybackrate;
+    timeofmove = distance / self.drone.run_speed * self.drone.moveplaybackrate;
     self.drone.var_544c8017 = destination;
 
     if(var_23273fef) {
-      self thread function_35b3aa66((0, path[path.size - 1][#"angles"][1], 0), min(var_d7e06ec6, 0.25), var_d7e06ec6 - 0.35);
+      self thread function_35b3aa66((0, path[path.size - 1][#"angles"][1], 0), min(timeofmove, 0.25), timeofmove - 0.35);
     } else {
-      var_df8541a5 = vectortoangles(destination - self.origin);
-      self rotateTo((0, var_df8541a5[1], 0), min(0.5, var_d7e06ec6));
+      characterfacedirection = vectortoangles(destination - self.origin);
+      self rotateTo((0, characterfacedirection[1], 0), min(0.5, timeofmove));
     }
 
-    self moveTo(destination, var_d7e06ec6);
-    wait var_d7e06ec6;
+    self moveTo(destination, timeofmove);
+    wait timeofmove;
 
     if(isDefined(path[path_index][#"notify"])) {
       self notify(path[path_index][#"notify"]);
@@ -679,14 +679,14 @@ function private function_35b3aa66(angle, duration, delay) {
   self rotateTo(angle, duration);
 }
 
-function private function_7bce6b25(var_3d70749c, var_a3375299) {
-  assert(isDefined(var_3d70749c));
-  assert(isDefined(var_a3375299));
+function private function_7bce6b25(firsttargetname, initialpoint) {
+  assert(isDefined(firsttargetname));
+  assert(isDefined(initialpoint));
   hasnextnode = 0;
   index = 0;
   nodes = [];
   var_62e82494 = [];
-  currentnode = spawner::get_goal(var_3d70749c);
+  currentnode = spawner::get_goal(firsttargetname);
 
   if(isDefined(currentnode)) {
     hasnextnode = 1;

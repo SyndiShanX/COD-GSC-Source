@@ -27,7 +27,7 @@ function preload() {
   setsaveddvar(#"wind_global_low_altitude", 0);
   setsaveddvar(#"wind_global_hi_altitude", 10000);
   setsaveddvar(#"wind_global_low_strength_percent", 100);
-  level util::function_d96391ba();
+  level util::init_breath_fx();
   level namespace_1d4ee4f8::preload();
   level cp_rus_yamantau_flashlight::preload();
   level namespace_c8bf7287::preload();

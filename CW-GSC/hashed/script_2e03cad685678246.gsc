@@ -74,8 +74,8 @@ function function_1acebbc0(str_targetname, var_a375f19a = 1, var_dc6e66ea = 1, z
 
 function private function_84ca6381() {
   n_distance = distance(self.v_start_pos, self.v_end_pos);
-  var_fce4ba4e = self.v_start_pos[2] - self.v_end_pos[2];
-  var_dcd5b4c5 = asin(var_fce4ba4e / n_distance);
+  n_rise = self.v_start_pos[2] - self.v_end_pos[2];
+  var_dcd5b4c5 = asin(n_rise / n_distance);
   assert(var_dcd5b4c5 >= 2, "<dev string:xbf>" + var_dcd5b4c5 + "<dev string:xdf>");
   assert(var_dcd5b4c5 <= 25, "<dev string:xbf>" + var_dcd5b4c5 + "<dev string:x123>");
   var_aff2bad6 = 6.5;
@@ -127,13 +127,13 @@ function function_819ed9b3(s_info) {
   result = 0;
 
   if(isDefined(self.var_cf56bb8f)) {
-    result = self.var_cf56bb8f function_c2f40095();
+    result = self.var_cf56bb8f player_can_use_zipline();
   }
 
   return result;
 }
 
-function private function_c2f40095() {
+function private player_can_use_zipline() {
   result = 1;
   player = getPlayers()[0];
 
@@ -160,7 +160,7 @@ function private function_d41f7e0e() {
   while(true) {
     self.var_9f483599 waittill(#"trigger");
 
-    if(function_c2f40095()) {
+    if(player_can_use_zipline()) {
       var_1a43c7ac = self.n_distance;
       var_56a048f8 = self.var_dcd5b4c5;
       var_900ff2c3 = self.var_aff2bad6 * self.var_a375f19a;
@@ -380,14 +380,14 @@ function function_4a7a6dd7() {
   }
 }
 
-function function_b6764a75(var_88dc621c) {
+function function_b6764a75(e_info_volume) {
   self endon(#"player_zipline_complete", #"death");
-  var_f5558cea = var_88dc621c.n_distance * var_88dc621c.n_distance;
+  var_f5558cea = e_info_volume.n_distance * e_info_volume.n_distance;
   n_time = 0;
   wait 0.25;
 
   while(true) {
-    var_5b7a38e7 = var_f5558cea - distancesquared(self.origin, var_88dc621c.v_end_pos);
+    var_5b7a38e7 = var_f5558cea - distancesquared(self.origin, e_info_volume.v_end_pos);
 
     if(var_5b7a38e7 < 0) {
       var_5b7a38e7 = 0;

@@ -219,7 +219,7 @@ function function_a73e6a64() {
   getPlayers()[0] val::reset("stakeout_stow_weapon", "disable_weapons");
 }
 
-function function_b9a028e4(endon_flag, var_335a8dcc, var_721023c5 = 0) {
+function function_b9a028e4(endon_flag, flag_to_set, var_721023c5 = 0) {
   level endon(endon_flag);
 
   while(true) {
@@ -232,11 +232,11 @@ function function_b9a028e4(endon_flag, var_335a8dcc, var_721023c5 = 0) {
     waitframe(1);
   }
 
-  level flag::set(var_335a8dcc);
+  level flag::set(flag_to_set);
 }
 
 function function_2cba9c65() {
-  level endon(#"hash_2b9e9acd890ef61f");
+  level endon(#"end_ghost_station_stealth_volume_check");
   e_vol = getEnt("vol_touching_tracks", "targetname");
   var_69a21fc0 = getEnt("vol_player_left_platform", "targetname");
   var_e9bf9ff9 = getEnt("vol_player_right_platform", "targetname");
@@ -516,7 +516,7 @@ function function_9d5ae353(a_ents) {
       if(issubstr(guy.animname, "guard1")) {
         vo_guard = guy;
       } else if(issubstr(guy.animname, "civ1")) {
-        var_2020cd93 = guy;
+        vo_guy = guy;
       }
     }
 
@@ -544,10 +544,10 @@ function function_9d5ae353(a_ents) {
   }
 
   var_f430b579 = undefined;
-  var_f430b579 = self function_77fe8bb5(vo_guard, var_2020cd93);
+  var_f430b579 = self function_77fe8bb5(vo_guard, vo_guy);
 
   if(isDefined(var_f430b579)) {
-    level thread function_a809c979(vo_guard, var_2020cd93, undefined, var_f430b579);
+    level thread function_a809c979(vo_guard, vo_guy, undefined, var_f430b579);
   }
 
   util::waittill_any_ents_two(level, self.var_8964d1a4, self, "one_off_scene_cleanup");
@@ -617,7 +617,7 @@ function function_45d01f40(a_ents) {
       if(issubstr(guy.animname, "guard2")) {
         var_e1b2a82b = guy;
       } else if(issubstr(guy.animname, "_man")) {
-        var_2020cd93 = guy;
+        vo_guy = guy;
       } else if(issubstr(guy.animname, "_woman")) {
         var_467706bc = guy;
       }
@@ -680,23 +680,23 @@ function function_45d01f40(a_ents) {
 
   var_f430b579 = undefined;
 
-  if(!isDefined(var_2020cd93)) {
+  if(!isDefined(vo_guy)) {
     var_f430b579 = self function_77fe8bb5(vo_guard, var_467706bc);
 
     if(isDefined(var_f430b579)) {
       level thread function_a809c979(vo_guard, var_467706bc, undefined, var_f430b579);
     }
   } else if(isDefined(var_e1b2a82b)) {
-    var_f430b579 = self function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b);
+    var_f430b579 = self function_77fe8bb5(vo_guard, vo_guy, var_e1b2a82b);
 
     if(isDefined(var_f430b579)) {
-      level thread function_a809c979(vo_guard, var_2020cd93, var_e1b2a82b, var_f430b579);
+      level thread function_a809c979(vo_guard, vo_guy, var_e1b2a82b, var_f430b579);
     }
   } else {
-    var_f430b579 = self function_77fe8bb5(vo_guard, var_2020cd93);
+    var_f430b579 = self function_77fe8bb5(vo_guard, vo_guy);
 
     if(isDefined(var_f430b579)) {
-      level thread function_a809c979(vo_guard, var_2020cd93, undefined, var_f430b579);
+      level thread function_a809c979(vo_guard, vo_guy, undefined, var_f430b579);
     }
   }
 
@@ -720,7 +720,7 @@ function function_e24505b7(a_ents) {
       } else if(key == "guard2") {
         var_e1b2a82b = guy;
       } else if(key == "civ1") {
-        var_2020cd93 = guy;
+        vo_guy = guy;
       }
 
       guy.var_3ed97f8 = arraycopy(a_ents);
@@ -740,10 +740,10 @@ function function_e24505b7(a_ents) {
   self.var_61d3da92 = spawnStruct();
   self.var_61d3da92.script_animation = "alley_2_intro";
   var_f430b579 = undefined;
-  var_f430b579 = self function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b);
+  var_f430b579 = self function_77fe8bb5(vo_guard, vo_guy, var_e1b2a82b);
 
   if(isDefined(var_f430b579)) {
-    level thread function_a809c979(vo_guard, var_2020cd93, var_e1b2a82b, var_f430b579);
+    level thread function_a809c979(vo_guard, vo_guy, var_e1b2a82b, var_f430b579);
   }
 
   level flag::wait_till("alley_2_done");
@@ -759,7 +759,7 @@ function function_e24505b7(a_ents) {
 }
 
 function function_c1bc96cf(a_ents) {
-  level.var_b86d4e0 = a_ents[#"hash_79e6bb91445af567"];
+  level.var_b86d4e0 = a_ents[#"enemy6"];
 
   foreach(guy in a_ents) {
     if(isai(guy)) {
@@ -1016,7 +1016,7 @@ function function_958168b9(is_civ, var_3d23fb80) {
   }
 }
 
-function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
+function function_77fe8bb5(vo_guard, vo_guy, var_e1b2a82b, var_6b1c6e7d) {
   if(!isDefined(self.var_61d3da92.script_animation)) {
     return;
   }
@@ -1027,7 +1027,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579 = [];
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06160_gms1_whendidyoulasts_70";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1037,7 +1037,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06160_gms1_anddidyouknowhe_d3";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1047,7 +1047,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06160_gms1_imafraidhespart_c1";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1064,7 +1064,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06170_gms3_andyousayyouhew_ef";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1074,7 +1074,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06170_gms3_haveyoueverseen_2d";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1084,7 +1084,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06170_gms3_okaycouldyoudes_72";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
       }
@@ -1095,7 +1095,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579 = [];
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06120_gms3_isthereanything_61";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1105,7 +1105,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06120_gms3_whatsinthebacks_f7";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1115,7 +1115,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06120_gms3_wheresyourfrien_2f";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1125,14 +1125,14 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06120_gms3_thisisbigcaritw_66";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
       } else {
         var_f430b579 = [];
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06130_gms1_thiscarfitsthed_ca";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1142,7 +1142,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06130_gms1_doyouknowanyone_9e";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1152,7 +1152,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06130_gms1_didyoutakeyourc_d7";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1162,12 +1162,12 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06130_gms1_thenineedtoknow_2e";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06130_gmc1_whymybrotherwou_ee";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
       }
@@ -1178,7 +1178,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579 = [];
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06140_gms3_yesyourpapersar_33";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1188,7 +1188,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06140_gms3_soifiweretotake_67";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1198,7 +1198,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06140_gms3_woulditnowyouse_28";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1210,7 +1210,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579 = [];
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06150_gms2_thatmaybemrfisc_14";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1220,7 +1220,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06150_gms2_areyouafriendof_62";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1230,7 +1230,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06150_gms2_hegaveusyournam_15";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1246,7 +1246,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579 = [];
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06100_gms1_wherewereyougoi_63";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1256,7 +1256,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06100_gms1_nowyouregoingto_d5";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1266,12 +1266,12 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06100_gms1_noimafraidnot_e0";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 0.5;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06100_gms1_itsmyjobtoquest_e1";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
       } else {
@@ -1283,7 +1283,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06110_gms2_doyouknowwhosco_ea";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1293,7 +1293,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06110_gms2_whywouldsomeone_aa";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
@@ -1303,7 +1303,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
         var_f430b579[var_f430b579.size] = voline;
         voline = spawnStruct();
         voline.alias = "vox_cp_stkt_06110_gms2_whichiswhyiwill_5c";
-        voline.ent = var_2020cd93;
+        voline.ent = vo_guy;
         voline.postdelay = 1;
         var_f430b579[var_f430b579.size] = voline;
       }
@@ -1318,7 +1318,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_09350_gms3_theyreoutofdate_c5";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
@@ -1328,7 +1328,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_09350_gms3_thatsnotmyconce_ac";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 0.5;
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
@@ -1338,7 +1338,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_09350_gms3_havingexpiredpa_3a";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       break;
@@ -1346,7 +1346,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       var_f430b579 = [];
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_09300_gms2_whatareyoudoing_61";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
@@ -1356,7 +1356,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_09300_gms2_whydontyouhavea_83";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
@@ -1366,7 +1366,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_09300_gms2_whathospitaldoy_9f";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 0.5;
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
@@ -1376,7 +1376,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_09300_gms2_howlonghaveyouw_62";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
@@ -1386,7 +1386,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_09300_gms2_noatleastnotyet_24";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 0.5;
       var_f430b579[var_f430b579.size] = voline;
       break;
@@ -1399,7 +1399,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_09310_gms3_yesbutthatdoesn_6c";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
@@ -1414,7 +1414,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_09310_gms3_youriskgoingout_36";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       break;
@@ -1422,7 +1422,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       var_f430b579 = [];
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_09330_gms1_explainitagaino_62";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
@@ -1437,7 +1437,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_09330_gms1_wasthatsohardno_96";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
@@ -1460,7 +1460,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_07120_gms3_wecanalwaystell_54";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
@@ -1475,7 +1475,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_07120_gms3_youmusthavehada_6e";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
@@ -1489,7 +1489,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       var_f430b579 = [];
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_06100_gms1_wherewereyougoi_63";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
@@ -1499,7 +1499,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_06100_gms1_nowyouregoingto_d5";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
@@ -1509,12 +1509,12 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_06100_gms1_noimafraidnot_e0";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 0.5;
       var_f430b579[var_f430b579.size] = voline;
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_06100_gms1_itsmyjobtoquest_e1";
-      voline.ent = var_2020cd93;
+      voline.ent = vo_guy;
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       break;
@@ -1610,7 +1610,7 @@ function function_ca7fdd25(color) {
   }
 
   if(color == "maroon") {
-    self setModel(#"hash_3953cd9757fd1247");
+    self setModel(#"par_umbrella_open_01_maroon_anim");
     return;
   }
 
@@ -1763,11 +1763,11 @@ function function_4dab0d59() {
     return 0;
   }
 
-  var_23d4571c = anglesToForward(self.angles);
+  lookvector = anglesToForward(self.angles);
   normalizedvec = vectorNormalize(player.origin - self.origin);
-  var_aa74cdcb = vectordot(var_23d4571c, normalizedvec);
+  vecdot = vectordot(lookvector, normalizedvec);
 
-  if(var_aa74cdcb >= cos(70)) {
+  if(vecdot >= cos(70)) {
     var_aaeeba00 = 1;
   } else {
     return 0;
@@ -1783,11 +1783,11 @@ function function_4dab0d59() {
 }
 
 function function_a09d85a9() {
-  var_3bfdd11b = spawn("trigger_radius", self.origin, 0, 64, 72);
-  var_3bfdd11b enablelinkTo();
-  var_3bfdd11b linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  shadow_trigger = spawn("trigger_radius", self.origin, 0, 64, 72);
+  shadow_trigger enablelinkTo();
+  shadow_trigger linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   self waittill(#"death");
-  var_3bfdd11b delete();
+  shadow_trigger delete();
 }
 
 function function_ec76072d(initialwait, var_38d138fb, var_25941f2e, ender, var_420c424d) {
@@ -1836,17 +1836,17 @@ function function_a44394f7(animation) {
   self setanimknobrestart(isDefined(animation) ? animation : #"hash_52ac61c625d5d151");
 }
 
-function function_d0551a1b(from_vol, retreat_vol, delay_min, delay_max) {
+function retreat_from_vol_to_vol(from_vol, retreat_vol, delay_min, delay_max) {
   checkvol = getEnt(from_vol, "targetname");
-  var_3e1bc9cc = checkvol ai::function_18c4ff86("axis", "human");
+  retreaters = checkvol ai::function_18c4ff86("axis", "human");
   goalvolume = getEnt(retreat_vol, "targetname");
 
-  foreach(retreater in var_3e1bc9cc) {
+  foreach(retreater in retreaters) {
     retreater thread function_3817d3c4(delay_min, delay_max, goalvolume);
   }
 
-  function_1eaaceab(var_3e1bc9cc);
-  return var_3e1bc9cc;
+  function_1eaaceab(retreaters);
+  return retreaters;
 }
 
 function function_3817d3c4(delay_min, delay_max, goalvolume) {
@@ -1867,7 +1867,7 @@ function function_3817d3c4(delay_min, delay_max, goalvolume) {
   }
 }
 
-function function_d6fedf97(guys, killcount, sflag, timeout) {
+function ai_array_killcount_flag_set(guys, killcount, sflag, timeout) {
   ai::waittill_dead_or_dying(guys, killcount, timeout);
   flag::set(sflag);
 }
@@ -2060,13 +2060,13 @@ function showcone(angle, range, color) {
   }
 }
 
-function function_638d18a(var_8964d1a4, var_55440d21) {
+function rotate_fan(var_8964d1a4, rotatespeed) {
   self endon(#"death");
   self thread delete_on_flag(var_8964d1a4);
   wait randomfloat(0.3);
 
   while(true) {
-    self rotateYaw(360, var_55440d21);
+    self rotateYaw(360, rotatespeed);
     self waittill(#"rotatedone");
   }
 }
@@ -2150,7 +2150,7 @@ function private function_f78628e6() {
     }
 
     self arcade_machine::play();
-    self arcade_machine::function_71510186();
+    self arcade_machine::wait_for_exit();
     self arcade_machine::exit();
   }
 
@@ -2161,7 +2161,7 @@ function private function_f78628e6() {
 function function_23f254a8() {
   level.player endon(#"death");
   level flag::wait_till("level_is_go");
-  level.var_74226976 = 0;
+  level.corpse_counter = 0;
   level.var_7247a717 = getEntArray("vol_body_hide", "targetname");
 
   for(i = 0; i < level.var_7247a717.size; i++) {
@@ -2194,7 +2194,7 @@ function hide_body() {
     return;
   }
 
-  level.var_74226976 += 1;
+  level.corpse_counter += 1;
   count = 0;
   var_115f509b = hash("dead_body" + string(count));
 

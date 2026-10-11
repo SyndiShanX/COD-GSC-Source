@@ -222,8 +222,8 @@ function play_fasttravel_end_fx(localclientnum, var_b8763ebc = "fasttravel_end")
 function fasttravel_rail_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
     if(!isDefined(self.sfx_fasttravel)) {
-      self playSound(fieldname, #"hash_7204b092c976136b");
-      self.sfx_fasttravel = self playLoopSound(#"hash_33b6a998603c309d");
+      self playSound(fieldname, #"zmb_fasttravel_cmn_start");
+      self.sfx_fasttravel = self playLoopSound(#"zmb_fasttravel_cmn_lp");
     }
 
     if(!isDefined(self.var_a6b9f4c1)) {
@@ -270,7 +270,7 @@ function fasttravel_rail_fx(localclientnum, oldval, newval, bnewent, binitialsna
 
   if(bwastimejump == 0) {
     if(isDefined(self.sfx_fasttravel)) {
-      self playSound(fieldname, #"hash_588047eba8deb34e");
+      self playSound(fieldname, #"zmb_fasttravel_cmn_end");
       self stoploopsound(self.sfx_fasttravel);
       self.sfx_fasttravel = undefined;
     }
@@ -320,8 +320,8 @@ function function_7287c2e4(localclientnum, oldval, newval, bnewent, binitialsnap
     }
 
     if(!isDefined(self.var_efa99dd5)) {
-      self playSound(fieldname, #"hash_525507bf80e4399", self.origin + (0, 0, 75));
-      self.var_efa99dd5 = self playLoopSound(#"hash_8cab833a49210df", undefined, (0, 0, 75));
+      self playSound(fieldname, #"zmb_fasttravel_aethershroud_start", self.origin + (0, 0, 75));
+      self.var_efa99dd5 = self playLoopSound(#"zmb_fasttravel_aethershroud_lp", undefined, (0, 0, 75));
     }
 
     return;
@@ -357,7 +357,7 @@ function function_7287c2e4(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(isDefined(self.var_efa99dd5)) {
-    self playSound(fieldname, #"hash_4025d3c0c7607b08", self.origin + (0, 0, 75));
+    self playSound(fieldname, #"zmb_fasttravel_aethershroud_end", self.origin + (0, 0, 75));
     self stoploopsound(self.var_efa99dd5);
     self.var_efa99dd5 = undefined;
   }

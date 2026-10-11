@@ -38,7 +38,7 @@ function function_86bd7962(player, spot = player.origin, mg = 1) {
     sentry = level.doa.pickups.var_9eec57e8 spawner::spawn(1, "zombietron_grenade_spawner");
   }
 
-  var_540d3e16 = namespace_ec06fe4a::spawnmodel(sentry.origin);
+  faketarget = namespace_ec06fe4a::spawnmodel(sentry.origin);
 
   if(!isDefined(sentry)) {
     return;
@@ -47,17 +47,17 @@ function function_86bd7962(player, spot = player.origin, mg = 1) {
   sentry endon(#"death");
   team = player.team;
   sentry.ismissile = !mg;
-  sentry.var_540d3e16 = var_540d3e16;
+  sentry.faketarget = faketarget;
 
-  if(isDefined(sentry.var_540d3e16)) {
-    sentry.var_540d3e16 thread namespace_ec06fe4a::function_d55f042c(sentry, "death");
+  if(isDefined(sentry.faketarget)) {
+    sentry.faketarget thread namespace_ec06fe4a::function_d55f042c(sentry, "death");
   }
 
   sentry.origin = spot + (0, 0, 2200);
   sentry.angles = (player.angles[0], player.angles[1], 0);
   sentry.weapon = sentry seatgetweapon(0);
   sentry turretsetontargettolerance(0, 10);
-  sentry namespace_83eb6304::function_3ecfde67("player_trail_" + player.doa.color);
+  sentry doa_fx::function_3ecfde67("player_trail_" + player.doa.color);
   sentry thread namespace_ec06fe4a::function_1a117d29(spot, 0.5);
   sentry waittill(#"movedone");
   sentry.angles = (sentry.angles[0], sentry.angles[1], 0);
@@ -66,18 +66,18 @@ function function_86bd7962(player, spot = player.origin, mg = 1) {
   sentry.takedamage = 0;
   sentry setteam(team);
   sentry notsolid();
-  sentry namespace_83eb6304::function_3ecfde67("turret_impact");
+  sentry doa_fx::function_3ecfde67("turret_impact");
   sentry namespace_e32bb68::function_3a59ec34("evt_doa_pickup_sentry_land");
   sentry thread function_229ed59f();
   sentry thread function_5945a362();
   physicsexplosionsphere(spot, 200, 128, 2);
   playrumbleonposition("grenade_rumble", spot);
   timeout = mg ? 40 : 20;
-  timeout = player namespace_1c2a96f9::function_4808b985(timeout);
+  timeout = player doa_fate::function_4808b985(timeout);
   level waittilltimeout(timeout, #"round_over", #"game_over");
   sentry notify(#"all_done");
   sentry namespace_e32bb68::function_3a59ec34("evt_doa_pickup_sentry_takeoff");
-  sentry namespace_83eb6304::function_3ecfde67("turret_impact");
+  sentry doa_fx::function_3ecfde67("turret_impact");
   sentry thread namespace_ec06fe4a::function_1a117d29(sentry.origin + (0, 0, 2200), 0.5);
   sentry waittill(#"movedone");
   sentry delete();
@@ -86,12 +86,12 @@ function function_86bd7962(player, spot = player.origin, mg = 1) {
 function function_b44f2805() {
   self endon(#"death");
 
-  while(isDefined(self.var_540d3e16)) {
+  while(isDefined(self.faketarget)) {
     if(isDefined(self.favoriteenemy)) {
       if(is_true(self.ismissile)) {
-        self.var_540d3e16.origin = self.origin + (self.favoriteenemy.origin - self.origin) * 0.5 + (0, 0, 1000);
+        self.faketarget.origin = self.origin + (self.favoriteenemy.origin - self.origin) * 0.5 + (0, 0, 1000);
       } else {
-        self.var_540d3e16.origin = self.favoriteenemy.origin + (0, 0, 30);
+        self.faketarget.origin = self.favoriteenemy.origin + (0, 0, 30);
       }
     }
 
@@ -127,8 +127,8 @@ function function_229ed59f() {
 
     if(!isDefined(self.favoriteenemy)) {
       self turretsettargetangles(0, (0, 0, 0));
-    } else if(isDefined(self.var_540d3e16)) {
-      self turretsettarget(0, self.var_540d3e16.origin);
+    } else if(isDefined(self.faketarget)) {
+      self turretsettarget(0, self.faketarget.origin);
     } else {
       self turretsettarget(0, self.favoriteenemy.origin + (0, 0, 30));
     }
@@ -202,8 +202,8 @@ function function_5945a362() {
         }
       }
 
-      if(isDefined(self.var_540d3e16)) {
-        self turretsettarget(0, self.var_540d3e16.origin);
+      if(isDefined(self.faketarget)) {
+        self turretsettarget(0, self.faketarget.origin);
       } else {
         self turretsettarget(0, self.favoriteenemy.origin + (0, 0, 30));
       }
@@ -212,8 +212,8 @@ function function_5945a362() {
       expiretime = gettime() + firetime * 1000;
       enemy = self.favoriteenemy;
 
-      if(isDefined(self.var_540d3e16)) {
-        enemy = self.var_540d3e16;
+      if(isDefined(self.faketarget)) {
+        enemy = self.faketarget;
         enemy.var_c80846be = self.favoriteenemy;
       }
 
@@ -268,7 +268,7 @@ function function_aa217b6c(enemy) {
 
   if(namespace_ec06fe4a::function_a8975c67(64)) {
     missile = owner magicmissile(level.doa.var_23e902a0, self gettagorigin("tag_flash"), var_a64609fe, enemy);
-    self namespace_83eb6304::function_3ecfde67("muzzleFlash_md");
+    self doa_fx::function_3ecfde67("muzzleFlash_md");
     self namespace_e32bb68::function_3a59ec34("evt_doa_pickup_missileturret_fire");
   }
 

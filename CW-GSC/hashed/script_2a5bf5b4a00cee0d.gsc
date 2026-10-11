@@ -58,7 +58,7 @@ function addpoi(ent) {
   level.doa.var_af6d47dd[level.doa.var_af6d47dd.size] = ent;
 }
 
-function function_ff7594d7(origin, var_5e23c42a = sqr(200)) {
+function getclosestpoi(origin, var_5e23c42a = sqr(200)) {
   arrayremovevalue(level.doa.var_af6d47dd, undefined);
 
   if(level.doa.var_af6d47dd.size > 0) {
@@ -259,7 +259,7 @@ function freezeplayercontrols(frozen = 1) {
 }
 
 function function_445bad70(frozen = 1) {
-  players = namespace_7f5aeb59::function_23e1f90f();
+  players = doa_player_utility::function_23e1f90f();
 
   foreach(player in players) {
     player freezeplayercontrols(frozen);
@@ -353,7 +353,7 @@ function function_570729f0(time = 0, attacker, mod = "MOD_UNKNOWN", weapon) {
 function function_4adce635(dir, var_594fccd3 = 100) {
   profilestart();
 
-  if(is_true(self.var_e66cd6fb)) {
+  if(is_true(self.no_ragdoll)) {
     profilestop();
     return;
   }
@@ -579,11 +579,11 @@ function function_3390402b() {
   return "doa_dynamic_" + level.doa.var_8f229afa;
 }
 
-function function_9d713536(vel) {
+function velocity_to_mph(vel) {
   return length(vel) * 0.0568182;
 }
 
-function function_f506b4c7(time = 4) {
+function rotateme(time = 4) {
   self thread function_2d920b3c(time);
 }
 
@@ -622,13 +622,13 @@ function function_8b1ae345(time = 2, dist = 24, killnote) {
 
 function function_1ebe83a7(startscale, endscale = 1, timems = 3000) {
   self endon(#"death");
-  var_44bf347e = startscale;
+  curscale = startscale;
   var_c7fbfa53 = (endscale - startscale) / timems / 50;
   endtime = gettime() + timems;
 
   while(isDefined(self) && gettime() < endtime) {
-    var_44bf347e += var_c7fbfa53;
-    self setscale(var_44bf347e);
+    curscale += var_c7fbfa53;
+    self setscale(curscale);
     waitframe(1);
   }
 }
@@ -809,14 +809,14 @@ function function_8c808737() {
   if(isDefined(self)) {
     self notify(#"hash_5251ab0953e7989f");
     self ghost();
-    self.var_cd7dffa1 = 1;
+    self.ghosted = 1;
   }
 }
 
 function function_4f72130c() {
   if(isDefined(self)) {
     self show();
-    self.var_cd7dffa1 = 0;
+    self.ghosted = 0;
   }
 }
 
@@ -986,13 +986,13 @@ function function_2017393e(array, weights) {
   return undefined;
 }
 
-function function_73d79e7d(parent, var_b1f98440 = 0, offset = (0, 0, 0)) {
+function function_73d79e7d(parent, onlyz = 0, offset = (0, 0, 0)) {
   self notify("2c50a80bfa941a0d");
   self endon("2c50a80bfa941a0d");
   self endon(#"death", #"unlink");
 
   while(isDefined(parent)) {
-    if(var_b1f98440) {
+    if(onlyz) {
       self.origin = (self.origin[0], self.origin[1], parent.origin[2]);
     } else {
       self.origin = parent.origin;

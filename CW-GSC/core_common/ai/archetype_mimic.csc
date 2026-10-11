@@ -67,8 +67,8 @@ function function_807a046(localclientnum, oldval, newval, bnewent, binitialsnap,
   var_e50d2931 = self.origin;
   var_675c08c1 = anglesToForward(self.angles);
   playFX(bwastimejump, "zm_ai/fx9_mimic_emerge_base", var_e50d2931, var_675c08c1);
-  playSound(bwastimejump, #"hash_4f37c259b7d6bd76", var_e50d2931 + (0, 0, 20));
-  playSound(bwastimejump, #"hash_10d33a1d9ba04133", var_e50d2931);
+  playSound(bwastimejump, #"zmb_vocals_mimic_spawn_flash", var_e50d2931 + (0, 0, 20));
+  playSound(bwastimejump, #"zmb_vocals_mimic_spawn", var_e50d2931);
 }
 
 function mimic_attack_hit(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

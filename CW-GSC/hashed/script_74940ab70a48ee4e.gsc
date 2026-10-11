@@ -11,25 +11,25 @@
 function set_display(state, text, desc) {
   getPlayers()[0] val::set(#"hash_6420a4a05af52d6e", "show_crosshair", 0);
 
-  if(!namespace_61e6d095::exists(#"hash_767355dc5e1cddfb")) {
-    namespace_61e6d095::create(#"hash_767355dc5e1cddfb", #"hash_6420a4a05af52d6e");
+  if(!scripted_widgets::exists(#"hash_767355dc5e1cddfb")) {
+    scripted_widgets::create(#"hash_767355dc5e1cddfb", #"hash_6420a4a05af52d6e");
   }
 
   if(isDefined(text)) {
-    namespace_61e6d095::set_text(#"hash_767355dc5e1cddfb", text);
+    scripted_widgets::set_text(#"hash_767355dc5e1cddfb", text);
   }
 
   if(isDefined(desc)) {
-    namespace_61e6d095::function_bfdab223(#"hash_767355dc5e1cddfb", desc);
+    scripted_widgets::function_bfdab223(#"hash_767355dc5e1cddfb", desc);
   }
 
   waitframe(1);
-  namespace_61e6d095::set_state(#"hash_767355dc5e1cddfb", state);
+  scripted_widgets::set_state(#"hash_767355dc5e1cddfb", state);
 }
 
 function remove() {
-  if(namespace_61e6d095::exists(#"hash_767355dc5e1cddfb")) {
-    namespace_61e6d095::remove(#"hash_767355dc5e1cddfb");
+  if(scripted_widgets::exists(#"hash_767355dc5e1cddfb")) {
+    scripted_widgets::remove(#"hash_767355dc5e1cddfb");
   }
 
   getPlayers()[0] val::reset_all();

@@ -113,7 +113,7 @@ function event_handler[level_init] main(eventstruct) {
   zm_silver_util::init();
   zm_silver_sound::init();
   namespace_c3c0ef6f::init();
-  level._effect[#"large_ceiling_dust"] = #"hash_32cd6b127f58a7bf";
+  level._effect[#"large_ceiling_dust"] = #"dirt/fx8_dust_fall_impact_lg";
   level._effect[#"hash_10dedae3d37c056f"] = #"hash_28bb64d8996beecf";
   level._effect[#"hash_10dedbe3d37c0722"] = #"hash_4065776f701ae199";
   level._effect[#"hash_10dedce3d37c08d5"] = #"hash_310a2d10fb7f56d9";
@@ -655,7 +655,7 @@ function function_7a15a086() {
       foreach(player in a_players) {
         foreach(vol in var_b6596672) {
           if(isalive(player) && player istouching(vol)) {
-            player function_bc82f900(#"hash_385053c55d081e0d");
+            player function_bc82f900(#"particle_accelerator_rumble");
             break;
           }
         }
@@ -670,9 +670,9 @@ function function_85bd89cb() {
   level endon(#"end_game");
   level flag::wait_till("start_zombie_round_logic");
   toy_horse_trigger = getEnt("toy_horse_trigger", "targetname");
-  level thread scene::init(#"hash_4054de8e8701c4d");
+  level thread scene::init(#"p9_fxanim_zm_ndu_cob_toy_horse_fall_bundle");
   toy_horse_trigger waittill(#"trigger");
-  level thread scene::play(#"hash_4054de8e8701c4d");
+  level thread scene::play(#"p9_fxanim_zm_ndu_cob_toy_horse_fall_bundle");
   toy_horse_trigger delete();
 }
 

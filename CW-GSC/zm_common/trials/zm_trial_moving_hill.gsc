@@ -196,7 +196,7 @@ function private start_timer(n_timeout, str_return) {
     level.var_f995ece6 zm_trial_timer::set_timer_text(self, str_return);
     level.var_f995ece6 zm_trial_timer::set_under_round_rules(self, 1);
     self zm_trial_util::start_timer(n_timeout);
-    self playsoundtoplayer(#"hash_18aab7ffde259877", self);
+    self playsoundtoplayer(#"zmb_trials_hud_restored", self);
   }
 }
 

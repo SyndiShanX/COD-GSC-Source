@@ -960,26 +960,26 @@ function function_34f85f1b(str_flag, var_1303e212) {
       continue;
     }
 
-    var_842cdacd = [];
+    a_spawn_points = [];
 
     if(var_1303e212) {
       hotzone = arraygetclosest(getPlayers()[0].origin, level.hotzones);
-      var_842cdacd = struct::get_array(hotzone.targetname, "<dev string:x131>");
+      a_spawn_points = struct::get_array(hotzone.targetname, "<dev string:x131>");
     } else {
       trigger = arraygetclosest(getPlayers()[0].origin, getEntArray("<dev string:x9c5>", "<dev string:x6c3>"));
 
       if(isDefined(trigger.target)) {
-        var_842cdacd = struct::get_array(trigger.target, "<dev string:x6c3>");
+        a_spawn_points = struct::get_array(trigger.target, "<dev string:x6c3>");
       }
     }
 
-    if(!var_842cdacd.size) {
+    if(!a_spawn_points.size) {
       wait 1;
       continue;
     }
 
-    foreach(spawn_point in var_842cdacd) {
-      while(level flag::get(str_flag) && (level.var_78b6c3a4 >= var_842cdacd.size || getaicount() >= getailimit())) {
+    foreach(spawn_point in a_spawn_points) {
+      while(level flag::get(str_flag) && (level.var_78b6c3a4 >= a_spawn_points.size || getaicount() >= getailimit())) {
         wait 1;
       }
 
@@ -994,15 +994,15 @@ function function_34f85f1b(str_flag, var_1303e212) {
         debugstar(spawn_point.origin, 30, (1, 0, 0), "<dev string:xa00>");
       }
 
-      if(isDefined(spawn_point.var_90d0c0ff) && function_c4cb6239(#"hash_7cba8a05511ceedf", spawn_point.var_90d0c0ff)) {
-        new_ai.var_c9b11cb3 = spawn_point.var_90d0c0ff;
+      if(isDefined(spawn_point.spawn_anim_alias) && function_c4cb6239(#"hash_7cba8a05511ceedf", spawn_point.spawn_anim_alias)) {
+        new_ai.var_c9b11cb3 = spawn_point.spawn_anim_alias;
       }
 
       level.var_78b6c3a4++;
       new_ai thread function_8245d8a0();
 
-      if(isDefined(spawn_point.var_90d0c0ff)) {
-        debugstar(spawn_point.origin, 100, (1, 1, 1), "<dev string:xa16>" + spawn_point.var_90d0c0ff, 0.65);
+      if(isDefined(spawn_point.spawn_anim_alias)) {
+        debugstar(spawn_point.origin, 100, (1, 1, 1), "<dev string:xa16>" + spawn_point.spawn_anim_alias, 0.65);
       }
     }
   }
@@ -1146,8 +1146,8 @@ function function_103c90c0(spawn_point, var_957493b8) {
     level.var_d3582224 += 1;
   }
 
-  if(isDefined(spawn_point.var_90d0c0ff) && function_c4cb6239(#"hash_7cba8a05511ceedf", spawn_point.var_90d0c0ff)) {
-    new_ai.var_c9b11cb3 = spawn_point.var_90d0c0ff;
+  if(isDefined(spawn_point.spawn_anim_alias) && function_c4cb6239(#"hash_7cba8a05511ceedf", spawn_point.spawn_anim_alias)) {
+    new_ai.var_c9b11cb3 = spawn_point.spawn_anim_alias;
   }
 
   new_ai thread function_fabd315d(spawn_point, var_957493b8);
@@ -1170,16 +1170,16 @@ function function_fabd315d(spawn_point, var_957493b8) {
     if(isDefined(level.var_135a36f7)) {
       errormsg = "<dev string:xc47>" + spawn_point.origin;
 
-      if(isDefined(self.var_90d0c0ff) && isDefined(self.var_1a02009e)) {
-        errormsg += "<dev string:xc70>" + self.var_90d0c0ff + "<dev string:xc7d>" + hashtostring(self.var_1a02009e);
+      if(isDefined(self.spawn_anim_alias) && isDefined(self.var_1a02009e)) {
+        errormsg += "<dev string:xc70>" + self.spawn_anim_alias + "<dev string:xc7d>" + hashtostring(self.var_1a02009e);
       }
 
       level.var_135a36f7[level.var_135a36f7.size] = errormsg;
     } else {
       errormsg = "<dev string:xc47>" + spawn_point.origin;
 
-      if(isDefined(self.var_90d0c0ff) && isDefined(self.var_1a02009e)) {
-        errormsg += "<dev string:xc70>" + self.var_90d0c0ff + "<dev string:xc7d>" + hashtostring(self.var_1a02009e);
+      if(isDefined(self.spawn_anim_alias) && isDefined(self.var_1a02009e)) {
+        errormsg += "<dev string:xc70>" + self.spawn_anim_alias + "<dev string:xc7d>" + hashtostring(self.var_1a02009e);
       }
 
       println("<dev string:xc89>" + errormsg);
@@ -1213,8 +1213,8 @@ function function_fabd315d(spawn_point, var_957493b8) {
       if(isDefined(level.var_135a36f7)) {
         errormsg = "<dev string:xcee>" + spawn_point.origin;
 
-        if(isDefined(self.var_90d0c0ff) && isDefined(self.var_1a02009e)) {
-          errormsg += "<dev string:xc70>" + self.var_90d0c0ff + "<dev string:xc7d>" + hashtostring(self.var_1a02009e);
+        if(isDefined(self.spawn_anim_alias) && isDefined(self.var_1a02009e)) {
+          errormsg += "<dev string:xc70>" + self.spawn_anim_alias + "<dev string:xc7d>" + hashtostring(self.var_1a02009e);
         }
 
         level.var_135a36f7[level.var_135a36f7.size] = errormsg;

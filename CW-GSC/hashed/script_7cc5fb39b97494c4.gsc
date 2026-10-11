@@ -39,11 +39,11 @@ class class_9e71c1a2 {
   var var_b5a03b21;
   var var_bb0d53c3;
   var var_d411c5b6;
-  var var_dc5b4677;
+  var m_a_callbacks;
   var var_fcc5a4dd;
 
   constructor() {
-    var_dc5b4677 = [];
+    m_a_callbacks = [];
     var_63e8057 = [];
     var_884c51e = [];
     var_6697e3b5 = [];
@@ -248,15 +248,15 @@ class class_9e71c1a2 {
     _reset(str_team);
   }
 
-  function function_5ce6ff92(e_player) {
+  function show_tutorial_text(e_player) {
     if(isfunctionptr(level.var_84bcc5b0)) {
       e_player[[level.var_84bcc5b0]](self);
     }
   }
 
-  function function_6084622f(e_player) {}
+  function _fail(e_player) {}
 
-  function function_613e65ee(e_player) {}
+  function _update(e_player) {}
 
   function function_673813fe(e_player) {
     if(isfunctionptr(level.var_e30ae574)) {
@@ -310,7 +310,7 @@ class class_9e71c1a2 {
       }
     }
 
-    function_6084622f(e_player);
+    _fail(e_player);
     self function_dc915c86(#"on_fail", e_player);
 
     if(is_true(var_b5a03b21.var_8f001ddb)) {
@@ -453,7 +453,7 @@ class class_9e71c1a2 {
         ent.var_645eee83 = self;
         ent.interact_location = interact_location;
         ent thread[[level.var_6a7fb742]](#"use", {
-          #prompt_text: prompt_text, #image: image, #var_71b9f0c0: 200, #offset: interact_location.var_80778410, #var_754bedbb: 0, #var_87c991f3: 40, #var_de6f0004: var_de6f0004, #var_be77841a: 0, #var_531201f1: &minigame::function_cc2939a2, #complete_callback: &minigame::function_76974d96, #var_c9643122: 1, #var_67eb3347: &minigame::function_eb28f36
+          #prompt_text: prompt_text, #image: image, #var_71b9f0c0: 200, #offset: interact_location.local_offset, #var_754bedbb: 0, #var_87c991f3: 40, #var_de6f0004: var_de6f0004, #var_be77841a: 0, #var_531201f1: &minigame::function_cc2939a2, #complete_callback: &minigame::function_76974d96, #var_c9643122: 1, #var_67eb3347: &minigame::function_eb28f36
         });
       }
     }
@@ -625,7 +625,7 @@ class class_9e71c1a2 {
       }
     }
 
-    function_e28586b3(e_player);
+    _success(e_player);
     self function_dc915c86(#"on_success", e_player);
 
     if(is_true(var_b5a03b21.script_delete)) {
@@ -754,7 +754,7 @@ class class_9e71c1a2 {
     function_a466ed26(e_player);
 
     while(self function_37b8d51b(e_player)) {
-      function_613e65ee(e_player);
+      _update(e_player);
       waitframe(1);
     }
 
@@ -781,7 +781,7 @@ class class_9e71c1a2 {
     }
 
     if(!e_player.var_ff7ce13b[m_s_bundle.type] && isDefined(var_b4563cfa)) {
-      function_5ce6ff92(e_player);
+      show_tutorial_text(e_player);
       s_waitresult = e_player waittill(#"minigame_tutorial_complete", #"hash_226f6717c97d10d6", #"death", #"entering_last_stand");
       function_673813fe(e_player);
 
@@ -853,7 +853,7 @@ class class_9e71c1a2 {
     }
   }
 
-  function function_e28586b3(e_player) {}
+  function _success(e_player) {}
 
   function function_e43bda22(e_player, var_f8d01c02, interact_location) {
     var_b5a03b21 flag::set("playing");
@@ -914,7 +914,7 @@ class class_9e71c1a2 {
 }
 
 function private event_handler[createstruct] function_e0a8e4ba(struct) {
-  foreach(var_8041af38, k in ["script_minigame_interact"]) {
+  foreach(__k28, k in ["script_minigame_interact"]) {
     if(!isDefined(level.var_41204f29)) {
       level.var_41204f29 = [];
     } else if(!isarray(level.var_41204f29)) {
@@ -1405,8 +1405,8 @@ function private function_cfb72f6(var_178e6cb5) {
 function private function_ab30c8b9(s_minigame) {
   self endon(#"death", #"entering_last_stand");
   level endon(#"game_ended");
-  var_d5d783f8 = [1: 6, 2: 8, 3: 10, 4: 12];
-  playtime = var_d5d783f8[s_minigame.var_ff3c99c5.var_9e3fdeff];
+  playtimes = [1: 6, 2: 8, 3: 10, 4: 12];
+  playtime = playtimes[s_minigame.var_ff3c99c5.var_9e3fdeff];
   playtime += randomfloatrange(-1, 1);
   wait playtime;
 

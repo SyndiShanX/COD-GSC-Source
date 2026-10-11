@@ -76,7 +76,7 @@ function function_29b682f8(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   self playRumbleOnEntity(bwasdemojump, "zm_plague_hound_bite_rumble");
-  self playSound(bwasdemojump, #"hash_34a8404fc3e64767");
+  self playSound(bwasdemojump, #"zmb_ai_plaguehound_bite_player");
 }
 
 function function_bdc0d799(localclientnum) {
@@ -127,11 +127,11 @@ function function_87a4de18(localclientnum) {
 
   var_348db091 = playFX(localclientnum, "zm_ai/fx9_hound_plague_dth_aoe", self.origin + (0, 0, 18), anglestoup(self.angles));
   var_18407835 = self.origin + (0, 0, 18);
-  self playSound(localclientnum, #"hash_1cbebe710791b56c");
-  audio::playloopat(#"hash_155791cb3cba6094", var_18407835);
+  self playSound(localclientnum, #"zmb_hellhound_plague_explo");
+  audio::playloopat(#"zmb_hellhound_plague_cloud_lp", var_18407835);
   wait 3.9;
   stopfx(localclientnum, var_348db091);
-  audio::stoploopat(#"hash_155791cb3cba6094", var_18407835);
+  audio::stoploopat(#"zmb_hellhound_plague_cloud_lp", var_18407835);
 }
 
 function function_a17af3df(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

@@ -23,7 +23,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  killstreaks::register_killstreak("killstreak_nuke", &function_41743630);
+  killstreaks::register_killstreak("killstreak_nuke", &activatenuke);
   clientfield::register("scriptmover", "" + #"hash_494d8af20db4dc73", 1, 1, "int");
   clientfield::register("world", "" + #"hash_6a6a21b8c5e1528e", 1, 1, "int");
   clientfield::register("world", "" + #"hash_1559e8163efbdb7a", 1, 1, "int");
@@ -42,7 +42,7 @@ function function_5fb139ea(params) {
   function_70159dea();
 }
 
-function function_41743630(killstreaktype) {
+function activatenuke(killstreaktype) {
   if(self killstreakrules::iskillstreakallowed("nuke", self.team) == 0) {
     return false;
   }
@@ -72,7 +72,7 @@ function private function_65cd04d7(killstreak_id) {
   var_b39c9060.team = self.team;
   var_b39c9060.killstreak_id = killstreak_id;
   var_b39c9060.owner = self;
-  playSoundAtPosition(#"hash_7d507d7d8807c64d", (0, 0, 0));
+  playSoundAtPosition(#"mpl_d_hard_nuke_timer", (0, 0, 0));
   level thread function_5649bd08();
   level.var_e4c3d310++;
   function_221192e6();
@@ -122,7 +122,7 @@ function function_5649bd08() {
 
 function private function_36f60a32(delay) {
   wait isDefined(delay) ? delay : 0;
-  playSoundAtPosition(#"hash_36412d3d8dabf70e", (0, 0, 0));
+  playSoundAtPosition(#"evt_nuke_explosion", (0, 0, 0));
   var_1c3c21f1 = function_ec196fb0();
   var_5ac13eb1 = struct::get_array(#"hash_4b493e0124411b31", "targetname");
 

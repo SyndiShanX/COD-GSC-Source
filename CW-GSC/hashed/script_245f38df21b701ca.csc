@@ -27,7 +27,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_8c04284b;
+#namespace doa_arena;
 
 function init() {
   clientfield::register("world", "setArena", 1, 5, "int", &setarena, 0, 0);
@@ -37,7 +37,7 @@ function init() {
 
 function function_32d5e898(localclientnum) {
   level.doa.arenas = [];
-  level.doa.var_72b899ad = undefined;
+  level.doa.current_arena = undefined;
   arenas = struct::get_array("arena_center", "targetname");
   var_7f6c6c04 = [];
 
@@ -66,19 +66,19 @@ function function_32d5e898(localclientnum) {
     }
   }
 
-  level.doa.var_72b899ad = level.doa.arenas[0];
+  level.doa.current_arena = level.doa.arenas[0];
   level.doa.arenas[3].camera_max_height = 1000;
   level.doa.arenas[14].camera_max_height = 1100;
 }
 
 function setarena(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   cleanupspawneddynents();
-  level.doa.var_72b899ad = undefined;
+  level.doa.current_arena = undefined;
 
   if(bwastimejump != 32 - 1) {
-    level.doa.var_72b899ad = level.doa.arenas[bwastimejump];
+    level.doa.current_arena = level.doa.arenas[bwastimejump];
 
-    namespace_1e25ad94::debugmsg("<dev string:x38>" + level.doa.var_72b899ad.script_noteworthy);
+    namespace_1e25ad94::debugmsg("<dev string:x38>" + level.doa.current_arena.script_noteworthy);
   }
 
   defaultcamera = 1;
@@ -88,10 +88,10 @@ function setarena(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   foreach(player in getlocalplayers()) {
-    player namespace_ac2a80f5::changecamera(isDefined(player.doa) ? player.doa.cameramode : defaultcamera);
+    player doa_camera::changecamera(isDefined(player.doa) ? player.doa.cameramode : defaultcamera);
   }
 
-  namespace_9fc66ac::function_5beeba99();
+  doa_sound::arena_changed();
 }
 
 function settod(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -100,7 +100,7 @@ function settod(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
     level.doa.var_1fc44fbc = undefined;
   }
 
-  if(!isDefined(level.doa.var_72b899ad)) {
+  if(!isDefined(level.doa.current_arena)) {
     return;
   }
 
@@ -129,9 +129,9 @@ function settod(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
       break;
   }
 
-  namespace_1e25ad94::debugmsg("<dev string:x4a>" + level.doa.var_72b899ad.script_noteworthy + "<dev string:x54>" + level.doa.var_3303cb0d);
+  namespace_1e25ad94::debugmsg("<dev string:x4a>" + level.doa.current_arena.script_noteworthy + "<dev string:x54>" + level.doa.var_3303cb0d);
 
-  level.doa.var_1fc44fbc = "fxexp_" + level.doa.var_72b899ad.script_noteworthy + "_" + level.doa.var_3303cb0d;
+  level.doa.var_1fc44fbc = "fxexp_" + level.doa.current_arena.script_noteworthy + "_" + level.doa.var_3303cb0d;
 
   namespace_1e25ad94::debugmsg("<dev string:x6e>" + level.doa.var_1fc44fbc + "<dev string:x87>" + fieldname);
 

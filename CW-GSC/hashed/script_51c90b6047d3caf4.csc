@@ -18,15 +18,15 @@ function private preinit() {
 
 function function_6142e681(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self.var_30598532 = util::playFXOnTag(fieldname, #"hash_2acd20deb7d56350", self, "tag_animate");
+    self.lure_fx = util::playFXOnTag(fieldname, #"hash_2acd20deb7d56350", self, "tag_animate");
     playSound(fieldname, #"hash_5fe175ffa66e0218", self.origin + (0, 0, 8));
     self.var_bc20b97b = self playLoopSound(#"hash_4aa06f01cb7030a8");
     return;
   }
 
-  if(isDefined(self.var_30598532)) {
-    stopfx(fieldname, self.var_30598532);
-    self.var_30598532 = undefined;
+  if(isDefined(self.lure_fx)) {
+    stopfx(fieldname, self.lure_fx);
+    self.lure_fx = undefined;
   }
 
   if(isDefined(self.var_bc20b97b)) {

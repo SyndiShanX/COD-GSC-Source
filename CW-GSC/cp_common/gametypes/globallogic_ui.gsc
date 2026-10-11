@@ -33,7 +33,7 @@ function init() {
   level.var_84bcc5b0 = &function_75788ef4;
   level.var_e30ae574 = &function_2793ce76;
   level.var_659c87ff = &function_760546ce;
-  transient = savegame::function_6440b06b(#"transient");
+  transient = savegame::get_mission_data(#"transient");
   transient.var_c42c3d = [];
   level flag::init("all_players_class_choice_completed");
   thread function_1cb458b4();
@@ -49,7 +49,7 @@ function function_11bcbb57() {
 
 function on_player_spawn() {
   self thread function_36e052();
-  self thread function_261cbef4();
+  self thread watch_player_in_combat();
 
   if(!is_true(level.var_2ca580c2) || isbot(self)) {
     self function_251fa54a();
@@ -116,22 +116,22 @@ function function_5e65cc6f(luimenu) {
 function function_760546ce() {
   level flag::set("restoring_ui_models");
   level flag::set("level_restarting");
-  level.var_815395f5 = 1;
+  level.no_checkpoint_save = 1;
   player = getPlayers()[0];
 
   if(isDefined(player)) {
     player flag::set("level_restarting");
   }
 
-  namespace_61e6d095::remove_all();
+  scripted_widgets::remove_all();
   objectives_ui::remove_all();
   waitframe(1);
   function_3e57e536(1);
-  savegame::function_6440b06b(#"transient").var_c42c3d = [];
+  savegame::get_mission_data(#"transient").var_c42c3d = [];
 
-  if(isDefined(player.var_c341be0e)) {
-    player setluimenudata(player.var_c341be0e, #"missionfailreason", #"");
-    player setluimenudata(player.var_c341be0e, #"missionfailhint", #"");
+  if(isDefined(player.mission_fail_menu)) {
+    player setluimenudata(player.mission_fail_menu, #"missionfailreason", #"");
+    player setluimenudata(player.mission_fail_menu, #"missionfailhint", #"");
     player closemenu("CPMissionFailed");
   }
 
@@ -176,7 +176,7 @@ function private function_52da41bb(model_name, var_832d6681, var_ec71f60a, var_2
     return;
   }
 
-  transient = savegame::function_6440b06b(#"transient");
+  transient = savegame::get_mission_data(#"transient");
 
   if(!isDefined(transient.var_c42c3d)) {
     transient.var_c42c3d = [];
@@ -195,7 +195,7 @@ function private function_52da41bb(model_name, var_832d6681, var_ec71f60a, var_2
 
 function function_3f278444() {
   level flag::set("restoring_ui_models");
-  transient = savegame::function_6440b06b(#"transient");
+  transient = savegame::get_mission_data(#"transient");
 
   if(!isDefined(transient.var_c42c3d)) {
     transient.var_c42c3d = [];
@@ -215,7 +215,7 @@ function function_2ec075a9(model_name, var_c15ae58d) {
     return;
   }
 
-  transient = savegame::function_6440b06b(#"transient");
+  transient = savegame::get_mission_data(#"transient");
 
   if(!isDefined(transient.var_c42c3d)) {
     transient.var_c42c3d = [];
@@ -277,7 +277,7 @@ function function_e299661a(var_8e4097ab) {
   function_2ec075a9("ScriptedWidgetData.overlay");
 }
 
-function function_8f0a7b3b(playerent) {
+function isanyaiattackingtheplayer(playerent) {
   ais = getaiteamarray(util::getotherteam(playerent.team));
   ais = arraycombine(ais, getaiteamarray(#"team3"), 0, 0);
 
@@ -296,7 +296,7 @@ function function_8f0a7b3b(playerent) {
   return false;
 }
 
-function function_ff5a6c36(playerent) {
+function isanyaiawareofplayer(playerent) {
   ais = getaiteamarray(util::getotherteam(playerent.team));
   ais = arraycombine(ais, getaiteamarray(#"team3"), 0, 0);
 
@@ -311,16 +311,16 @@ function function_ff5a6c36(playerent) {
   return false;
 }
 
-function function_b0604e5b(playerent) {
+function isplayerhurt(playerent) {
   return playerent.health < playerent.maxhealth;
 }
 
-function function_261cbef4() {
-  self notify(#"hash_4f9f0ce07fc8ab8c");
-  self endon(#"hash_4f9f0ce07fc8ab8c", #"disconnect");
+function watch_player_in_combat() {
+  self notify(#"kill_watch_player_in_combat");
+  self endon(#"kill_watch_player_in_combat", #"disconnect");
 
   while(true) {
-    if(function_b0604e5b(self) || function_8f0a7b3b(self)) {
+    if(isplayerhurt(self) || isanyaiattackingtheplayer(self)) {
       self clientfield::set_player_uimodel("hudItems.playerInCombat", 1);
     } else {
       self clientfield::set_player_uimodel("hudItems.playerInCombat", 0);
@@ -583,9 +583,9 @@ function beginclasschoice() {
     self thread function_ac6e682a();
   }
 
-  var_2bd8b207 = getdvarint(#"hash_c9bd2003951a4a8", 0);
+  b_disable_cac = getdvarint(#"force_no_cac", 0);
 
-  if(!getdvarint(#"force_cac", 0) || var_2bd8b207) {
+  if(!getdvarint(#"force_cac", 0) || b_disable_cac) {
     if(isDefined(world.var_f2c8b0cb)) {
       if(isDefined(world.var_f2c8b0cb[self.name])) {
         self savegame::set_player_data("playerClass", world.var_f2c8b0cb[self.name]);
@@ -601,9 +601,9 @@ function beginclasschoice() {
       }
     }
 
-    prevclass = self savegame::function_2ee66e93("playerClass", undefined);
+    prevclass = self savegame::get_player_data("playerClass", undefined);
 
-    if(isDefined(prevclass) || var_2bd8b207 || function_ee6b4b2b() || getdvarint(#"migration_soak", 0) == 1 || getdvarint(#"art_review", 0)) {
+    if(isDefined(prevclass) || b_disable_cac || function_ee6b4b2b() || getdvarint(#"migration_soak", 0) == 1 || getdvarint(#"art_review", 0)) {
       self thread spawn_player(prevclass);
       self function_251fa54a();
       return;
@@ -697,19 +697,19 @@ function function_ac6e682a() {
   self val::set(#"initial_black", "takedamage", 0);
   self val::set(#"initial_black", "allowdeath", 0);
   self val::set(#"initial_black", "hide");
-  var_d723471a = level flag::get(#"loaded");
+  b_hot_joining = level flag::get(#"loaded");
   level flag::wait_till(#"loaded");
   waitframe(1);
 
-  if(isDefined(level.var_a7b99722) || isDefined(level.var_d7d201ba)) {
-    function_894987d3();
+  if(isDefined(level.str_level_start_flag) || isDefined(level.str_player_start_flag)) {
+    init_start_flags();
 
-    if(isDefined(level.var_a7b99722)) {
-      level flag::wait_till(level.var_a7b99722);
+    if(isDefined(level.str_level_start_flag)) {
+      level flag::wait_till(level.str_level_start_flag);
     }
 
-    if(isDefined(level.var_d7d201ba)) {
-      self flag::wait_till(level.var_d7d201ba);
+    if(isDefined(level.str_player_start_flag)) {
+      self flag::wait_till(level.str_player_start_flag);
     }
   }
 
@@ -750,13 +750,13 @@ function function_ac6e682a() {
   self val::reset(#"initial_black", "disable_oob");
 }
 
-function function_894987d3() {
-  if(isDefined(level.var_d7d201ba) && !self flag::exists(level.var_d7d201ba)) {
-    self flag::init(level.var_d7d201ba);
+function init_start_flags() {
+  if(isDefined(level.str_player_start_flag) && !self flag::exists(level.str_player_start_flag)) {
+    self flag::init(level.str_player_start_flag);
   }
 
-  if(isDefined(level.var_a7b99722) && !level flag::exists(level.var_a7b99722)) {
-    level flag::init(level.var_a7b99722);
+  if(isDefined(level.str_level_start_flag) && !level flag::exists(level.str_level_start_flag)) {
+    level flag::init(level.str_level_start_flag);
   }
 }
 
@@ -828,7 +828,7 @@ function removespawnmessageshortly(delay) {
   self hud_message::clearlowermessage();
 }
 
-function function_b4057fae(var_426fecc3) {
+function weakpoint_anim_watch(precachedbonename) {
   self endon(#"death", #"weakpoint_destroyed");
 
   while(true) {
@@ -836,11 +836,11 @@ function function_b4057fae(var_426fecc3) {
     bonename = waitresult.bone_name;
     event = waitresult.event;
 
-    if(bonename == var_426fecc3) {
+    if(bonename == precachedbonename) {
       if(event == "damage") {
-        luinotifyevent(#"weakpoint_update", 3, 2, self getentitynumber(), var_426fecc3);
+        luinotifyevent(#"weakpoint_update", 3, 2, self getentitynumber(), precachedbonename);
       } else if(event == "repulse") {
-        luinotifyevent(#"weakpoint_update", 3, 3, self getentitynumber(), var_426fecc3);
+        luinotifyevent(#"weakpoint_update", 3, 3, self getentitynumber(), precachedbonename);
       }
 
       wait 0.5;
@@ -848,12 +848,12 @@ function function_b4057fae(var_426fecc3) {
   }
 }
 
-function destroyweakpointwidget(var_426fecc3) {
-  luinotifyevent(#"weakpoint_update", 3, 0, self getentitynumber(), var_426fecc3);
+function destroyweakpointwidget(precachedbonename) {
+  luinotifyevent(#"weakpoint_update", 3, 0, self getentitynumber(), precachedbonename);
   self notify(#"weakpoint_destroyed");
 }
 
-function createweakpointwidget(var_426fecc3, closestatemaxdistance = undefined, mediumstatemaxdistance = undefined) {
+function createweakpointwidget(precachedbonename, closestatemaxdistance = undefined, mediumstatemaxdistance = undefined) {
   if(!isDefined(closestatemaxdistance)) {
     closestatemaxdistance = getdvarint(#"ui_weakpointindicatornear", 1050);
   }
@@ -862,18 +862,18 @@ function createweakpointwidget(var_426fecc3, closestatemaxdistance = undefined, 
     mediumstatemaxdistance = getdvarint(#"ui_weakpointindicatormedium", 1900);
   }
 
-  luinotifyevent(#"weakpoint_update", 5, 1, self getentitynumber(), var_426fecc3, closestatemaxdistance, mediumstatemaxdistance);
-  self thread function_b4057fae(var_426fecc3);
+  luinotifyevent(#"weakpoint_update", 5, 1, self getentitynumber(), precachedbonename, closestatemaxdistance, mediumstatemaxdistance);
+  self thread weakpoint_anim_watch(precachedbonename);
 }
 
-function triggerweakpointdamage(var_426fecc3) {
+function triggerweakpointdamage(precachedbonename) {
   self notify(#"weakpoint_update", {
-    #bone_name: var_426fecc3, #event: "damage"});
+    #bone_name: precachedbonename, #event: "damage"});
 }
 
-function function_b03b1c3c(var_426fecc3) {
+function triggerweakpointrepulsed(precachedbonename) {
   self notify(#"weakpoint_update", {
-    #bone_name: var_426fecc3, #event: "repulse"});
+    #bone_name: precachedbonename, #event: "repulse"});
 }
 
 function function_4b3da818() {
@@ -892,7 +892,7 @@ function function_d679cb5b() {
   clientfield::set_player_uimodel("hudItems.cpInstructionText", getlocalizedstringindex(#""));
 }
 
-function function_7bc0e4b9(var_4146002e = 1, var_d76d90ac = 0) {
+function do_chyron_text(var_4146002e = 1, var_d76d90ac = 0) {
   level.chyron_text_active = 1;
   level flag::set(#"chyron_active");
 
@@ -916,7 +916,7 @@ function private function_36e939c(var_4146002e = 1, var_d76d90ac = 0) {
   assert(var_d76d90ac >= 0);
   assert(var_d76d90ac <= 15);
   cp_chyron = lui::get_luimenu("cpChyron");
-  cp_chyron cp_chyron::function_90bde5d3(self, var_d76d90ac);
+  cp_chyron cp_chyron::set_index(self, var_d76d90ac);
   cp_chyron cp_chyron::close(self);
   cp_chyron cp_chyron::open(self);
 
@@ -980,19 +980,19 @@ function function_909d9a15(player) {
 
 function function_5b3d23d5(model_name, var_f566006a, var_1f7d0ca0) {
   function_909d9a15();
-  var_1b3a1e73 = undefined;
+  parent_model = undefined;
 
   if(is_true(var_f566006a)) {
-    var_1b3a1e73 = getglobaluimodel();
+    parent_model = getglobaluimodel();
   } else {
-    var_1b3a1e73 = function_5c2e399f();
+    parent_model = function_5c2e399f();
   }
 
   if(is_true(var_1f7d0ca0)) {
     model_name = string(#"hash_34625569b2422261", 16) + "." + model_name;
   }
 
-  return getuimodel(var_1b3a1e73, model_name);
+  return getuimodel(parent_model, model_name);
 }
 
 function function_f053dcd4(model_name, var_f566006a, var_1f7d0ca0) {

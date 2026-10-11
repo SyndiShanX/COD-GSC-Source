@@ -254,7 +254,7 @@ function function_b5433e55(bookmark) {
   potm_bookmarks.overrideentitycamera = bookmark.overrideentitycamera;
   potm_bookmarks.tableindex = bookmark.eventdata.tableindex;
   potm_bookmarks.event_info = bookmark.eventdata.event_info;
-  function_92d1707f(#"hash_4782850b19da4089", potm_bookmarks);
+  function_92d1707f(#"dlog_event_potm_bookmarks", potm_bookmarks);
 }
 
 function function_b5633c73(preparinginformation) {
@@ -300,7 +300,7 @@ function function_b0bc26b3(deathtime, starttime) {
   game.var_a1e9e96a = gettime() + timetowait * 1000;
   wait timetowait;
   util::setclientsysstate("levelNotify", "sndFKsl");
-  self playlocalsound(#"hash_2b537a3a26b6b64a");
+  self playlocalsound(#"uin_gameendscore_potm_slowdown");
   setslowmotion(1, 0.25, waitbeforedeath);
   wait waitbeforedeath;
   self playlocalsound(#"hash_6cc0ea056038c67c");

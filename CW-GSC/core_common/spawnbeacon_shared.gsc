@@ -551,7 +551,7 @@ function destroyspawnbeacon(destroyedbyenemy) {
 
   var_8fec56c4 = anglesToForward(var_505e3308);
   var_61753233 = anglestoup(var_505e3308);
-  playFX(#"hash_695b2e7e4b63a645", var_b0e81be9, var_8fec56c4, var_61753233);
+  playFX(#"weapon/fx8_equip_spwnbcn_exp", var_b0e81be9, var_8fec56c4, var_61753233);
 
   if(!(isDefined(spawnbeacon.var_4fc7245b) ? spawnbeacon.var_4fc7245b : 0) && (isDefined(level.var_6cd68fbe) ? level.var_6cd68fbe : 0) && isDefined(player)) {
     player.pers[#"lives"]--;

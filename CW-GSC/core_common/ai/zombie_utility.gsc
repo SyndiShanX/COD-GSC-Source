@@ -30,7 +30,7 @@ function zombiespawnsetup() {
 
   self function_df5afb5e(0);
 
-  if(!is_true(self.ai.var_870d0893)) {
+  if(!is_true(self.ai.rex_mp_swamp_concrete_debris)) {
     self setavoidancemask("avoid none");
   }
 

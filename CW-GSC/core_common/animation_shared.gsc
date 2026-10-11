@@ -351,12 +351,12 @@ function teleport(animation, v_origin_or_ent, v_angles_or_tag, time = 0) {
   util::teleport(v_pos, v_ang);
 }
 
-function function_a23b2a60(animation, var_f9e56773 = 0, var_d7b4a07c = 1) {
-  assert(var_d7b4a07c > var_f9e56773);
-  localdelta = getmovedelta(animation, var_f9e56773, var_d7b4a07c);
+function anim_speed(animation, start_anim_time = 0, var_d7b4a07c = 1) {
+  assert(var_d7b4a07c > start_anim_time);
+  localdelta = getmovedelta(animation, start_anim_time, var_d7b4a07c);
   animtime = getanimlength(animation);
   length = length2d(localdelta);
-  speed = length / animtime * (var_d7b4a07c - var_f9e56773);
+  speed = length / animtime * (var_d7b4a07c - start_anim_time);
   return speed;
 }
 
@@ -443,7 +443,7 @@ function _reach(s_tracker, animation, v_origin_or_ent, v_angles_or_tag, b_disabl
 
 function function_d7627522(animation, v_goal, radius = 100) {
   radiussq = sqr(radius);
-  var_f11838cd = function_a23b2a60(animation, 0, 0.1);
+  var_f11838cd = anim_speed(animation, 0, 0.1);
 
   if(var_f11838cd <= 1 || var_f11838cd >= 300) {
     return;
@@ -776,7 +776,7 @@ function fire_weapon(str_tag, var_58b849e) {
   }
 }
 
-function function_71d33ba3(var_9114191, var_58b849e) {
+function function_71d33ba3(n_turret_index, var_58b849e) {
   if(isvehicle(self)) {
     if(!isDefined(var_58b849e) || var_58b849e === "") {
       var_58b849e = 0;

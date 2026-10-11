@@ -369,11 +369,11 @@ function function_ffe2bb2f() {
 function function_742f2da3(damage = 0, attacker, weapon) {
   if(self flag::get(#"deadwire_stun")) {
     self.health = damage + 1;
-    self thread function_851db518(attacker, weapon);
+    self thread wait_till_stun_end(attacker, weapon);
   }
 }
 
-function function_851db518(attacker, weapon) {
+function wait_till_stun_end(attacker, weapon) {
   self notify("4d0ff4a6c6cb4c74");
   self endon("4d0ff4a6c6cb4c74");
   self endon(#"death");

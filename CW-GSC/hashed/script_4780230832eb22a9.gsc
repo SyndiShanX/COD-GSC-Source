@@ -259,8 +259,8 @@ function autoexec ignore_systems() {
   system::ignore(#"zm_bgb_always_done_swiftly");
   system::ignore(#"zm_bgb_anti_entrapment");
   system::ignore(#"zm_bgb_anywhere_but_here");
-  system::ignore(#"hash_40f40e23fffa0965");
-  system::ignore(#"hash_78ffc0adb81ec8d1");
+  system::ignore(#"zm_bgb_armamental_accomplishment");
+  system::ignore(#"zm_bgb_arms_grace");
   system::ignore(#"zm_bgb_arsenal_accelerator");
   system::ignore(#"zm_bgb_blood_debt");
   system::ignore(#"hash_5f90cc4bac8e9ee1");
@@ -344,7 +344,7 @@ function autoexec ignore_systems() {
   system::ignore(#"zm_magicbox");
   system::ignore(#"zm_pack_a_punch");
   system::ignore(#"zm_perk_deadshot");
-  system::ignore(#"hash_1dd6f32b3d8bdd42");
+  system::ignore(#"zm_perk_doubletap2");
   system::ignore(#"zm_perk_juggernaut");
   system::ignore(#"zm_perk_quick_revive");
   system::ignore(#"zm_perk_sleight_of_hand");

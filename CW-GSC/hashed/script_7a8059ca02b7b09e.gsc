@@ -12,36 +12,36 @@ function add_callback(callback_id, callback_func) {
 }
 
 function function_98df8818(callback, func) {
-  if(!isDefined(level.var_1bebdc8e)) {
-    level.var_1bebdc8e = [];
+  if(!isDefined(level.telemetry_callbacks)) {
+    level.telemetry_callbacks = [];
   }
 
-  if(!isDefined(level.var_1bebdc8e[callback])) {
-    level.var_1bebdc8e[callback] = [];
+  if(!isDefined(level.telemetry_callbacks[callback])) {
+    level.telemetry_callbacks[callback] = [];
   }
 
-  level.var_1bebdc8e[callback][level.var_1bebdc8e[callback].size] = func;
+  level.telemetry_callbacks[callback][level.telemetry_callbacks[callback].size] = func;
 }
 
 function function_18135b72(callback, data) {
-  if(!isDefined(level.var_1bebdc8e)) {
+  if(!isDefined(level.telemetry_callbacks)) {
     return;
   }
 
-  if(!isDefined(level.var_1bebdc8e[callback])) {
+  if(!isDefined(level.telemetry_callbacks[callback])) {
     return;
   }
 
   if(isDefined(data)) {
-    for(i = 0; i < level.var_1bebdc8e[callback].size; i++) {
-      thread[[level.var_1bebdc8e[callback][i]]](data);
+    for(i = 0; i < level.telemetry_callbacks[callback].size; i++) {
+      thread[[level.telemetry_callbacks[callback][i]]](data);
     }
 
     return;
   }
 
-  for(i = 0; i < level.var_1bebdc8e[callback].size; i++) {
-    thread[[level.var_1bebdc8e[callback][i]]]();
+  for(i = 0; i < level.telemetry_callbacks[callback].size; i++) {
+    thread[[level.telemetry_callbacks[callback][i]]]();
   }
 }
 

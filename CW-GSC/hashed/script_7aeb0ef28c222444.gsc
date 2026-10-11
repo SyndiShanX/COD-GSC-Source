@@ -39,7 +39,7 @@ function function_90cdf7ba(type, origin) {
     case 34:
       count = randomintrange(5, 10);
       name = "skeleton_spear";
-      var_2d8ae5ef = "player_trail_" + self.doa.color;
+      ownerfx = "player_trail_" + self.doa.color;
       killnote = array("doa_exit_taken", "arena_completed", "game_over");
       var_4d5cf4b2 = level;
       namespace_e32bb68::function_3a59ec34("guardian_type_skeleton");
@@ -65,8 +65,8 @@ function function_90cdf7ba(type, origin) {
       if(isDefined(ai)) {
         ai.owner = self;
 
-        if(isDefined(var_2d8ae5ef)) {
-          ai namespace_83eb6304::function_3ecfde67(var_2d8ae5ef);
+        if(isDefined(ownerfx)) {
+          ai doa_fx::function_3ecfde67(ownerfx);
         }
 
         if(isDefined(var_e254c3ed)) {

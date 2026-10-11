@@ -30,9 +30,9 @@ function function_fcaaa05f() {
   level.smart_bundle.var_84410238 = [];
   level.smart_bundle.spawned_axis = [];
   level.smart_bundle.spawnq = [];
-  level.smart_bundle.var_78371b11 = 0;
+  level.smart_bundle.spawnq_next = 0;
   level.smart_bundle.unique_id = 0;
-  level.smart_bundle function_b904b36d();
+  level.smart_bundle gather_sb();
   level.smart_bundle thread sb_tick();
   level.smart_bundle thread function_4e82b483();
   waitframe(3);
@@ -123,7 +123,7 @@ function function_f029622c(var_268d3aa4) {
 
   self notify("smart_bundle_" + string(var_268d3aa4) + "_ai_killed");
 
-  if(is_true(self.var_43db0d3e)) {
+  if(is_true(self.ai_respawn_until_all_dead)) {
     self.var_2b96e535 = 0;
     self notify(#"hash_66e053d24034aa6f");
   }

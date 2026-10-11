@@ -122,7 +122,7 @@ function function_de7fb95(var_c904ca7c, context = 0) {
 
       if(toks.size > 4) {
         switch (toks[4]) {
-          case #"hash_6b07679758a7acc":
+          case #"pickone":
             if(target.lootitems.size > 1) {
               item = target.lootitems[randomint(target.lootitems.size)];
               target.lootitems = [];
@@ -169,9 +169,9 @@ function function_9592df27() {
           }
 
           assert(isDefined(item.script_parameters), "<dev string:x171>");
-          def = namespace_dfc652ee::function_6265bde4(item.script_parameters);
+          def = doa_pickups::function_6265bde4(item.script_parameters);
           assert(isDefined(def), "<dev string:x199>");
-          pickupitem = namespace_dfc652ee::itemspawn(def, item.origin, item.angles, undefined, 1);
+          pickupitem = doa_pickups::itemspawn(def, item.origin, item.angles, undefined, 1);
 
           if(isDefined(pickupitem)) {
             pickupitem thread namespace_ec06fe4a::function_73d79e7d(self.script_model, 1, (0, 0, 20));
@@ -202,13 +202,13 @@ function function_9592df27() {
   }
 }
 
-function function_1efdf194(var_705bb15a, totaltime, totaldist) {
-  if(var_705bb15a == self.origin[2]) {
+function function_1efdf194(desiredz, totaltime, totaldist) {
+  if(desiredz == self.origin[2]) {
     deltaz = abs(self.origin[2] - self.script_model.origin[2]);
     desiredpos = self.origin;
   }
 
-  if(var_705bb15a == self.var_cb52058d[2]) {
+  if(desiredz == self.var_cb52058d[2]) {
     deltaz = abs(self.script_model.origin[2] - self.var_cb52058d[2]);
     desiredpos = self.var_cb52058d;
   }
@@ -229,9 +229,9 @@ function function_92bae57c() {
           }
 
           assert(isDefined(item.script_parameters), "<dev string:x171>");
-          def = namespace_dfc652ee::function_6265bde4(item.script_parameters);
+          def = doa_pickups::function_6265bde4(item.script_parameters);
           assert(isDefined(def), "<dev string:x199>");
-          pickupitem = namespace_dfc652ee::itemspawn(def, item.origin, item.angles, undefined, 1);
+          pickupitem = doa_pickups::itemspawn(def, item.origin, item.angles, undefined, 1);
 
           if(isDefined(pickupitem)) {
             pickupitem thread namespace_ec06fe4a::function_73d79e7d(self, 1, (0, 0, 20));
@@ -264,13 +264,13 @@ function function_92bae57c() {
   }
 }
 
-function function_4b059395(var_705bb15a, totaltime, totaldist) {
-  if(var_705bb15a == self.startpos[2]) {
+function function_4b059395(desiredz, totaltime, totaldist) {
+  if(desiredz == self.startpos[2]) {
     deltaz = abs(self.startpos[2] - self.origin[2]);
     desiredpos = self.startpos;
   }
 
-  if(var_705bb15a == self.var_cb52058d[2]) {
+  if(desiredz == self.var_cb52058d[2]) {
     deltaz = abs(self.origin[2] - self.var_cb52058d[2]);
     desiredpos = self.var_cb52058d;
   }

@@ -33,14 +33,14 @@ function init() {
   clientfield::register("world", "setWildTOD", 1, 3, "int", &settod, 0, 0);
   clientfield::register("world", "setWildSection", 1, 3, "int", &setsection, 0, 0);
   clientfield::register("world", "wilddeactivated", 1, 1, "counter", &wilddeactivated, 0, 0);
-  var_581c8f9a = struct::get_array("doa_wild");
-  level.doa.var_581c8f9a = [];
+  wilds = struct::get_array("doa_wild");
+  level.doa.wilds = [];
 
-  foreach(wild in var_581c8f9a) {
+  foreach(wild in wilds) {
     var_f784a248 = spawnStruct();
     var_f784a248.name = wild.script_noteworthy;
     var_f784a248.id = int(wild.script_int);
-    level.doa.var_581c8f9a[level.doa.var_581c8f9a.size] = var_f784a248;
+    level.doa.wilds[level.doa.wilds.size] = var_f784a248;
   }
 
   function_32d5e898();
@@ -64,7 +64,7 @@ function wilddeactivated(localclientnum, oldval, newval, bnewent, binitialsnap, 
 function setwild(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   level.doa.var_47dcd1f = undefined;
 
-  foreach(wild in level.doa.var_581c8f9a) {
+  foreach(wild in level.doa.wilds) {
     if(wild.id == bwastimejump) {
       level.doa.var_47dcd1f = wild;
       return;

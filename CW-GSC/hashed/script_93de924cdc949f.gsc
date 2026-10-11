@@ -61,9 +61,9 @@ function function_b733d218(var_accd268b, var_159584a6 = "targetname", turn_on) {
 
   if(isDefined(turn_on)) {
     foreach(light in light_array) {
-      var_8b4ea7bd = light getlightintensity();
+      current_intensity = light getlightintensity();
 
-      if(var_8b4ea7bd != light.default_intensity) {
+      if(current_intensity != light.default_intensity) {
         light setlightintensity(light.default_intensity);
       }
     }
@@ -72,9 +72,9 @@ function function_b733d218(var_accd268b, var_159584a6 = "targetname", turn_on) {
   }
 
   foreach(light in light_array) {
-    var_8b4ea7bd = light getlightintensity();
+    current_intensity = light getlightintensity();
 
-    if(var_8b4ea7bd != 0) {
+    if(current_intensity != 0) {
       light setlightintensity(0);
     }
   }

@@ -79,7 +79,7 @@ function open_door(a_str_door_names, var_47eb646a = 0, var_91ccb2d7, b_play_audi
       zombie_door.script_flag_wait = undefined;
       zombie_door notify(#"power_on");
       zombie_door.b_opened = 1;
-      playSoundAtPosition(#"hash_27dc220231c7b8b3", zombie_door.origin);
+      playSoundAtPosition(#"zmb_rush_key_used", zombie_door.origin);
     }
 
     if(var_47eb646a) {
@@ -371,7 +371,7 @@ function function_279ca150() {
       if(var_b30c192b <= var_f1e10d43 || n_chance < level.var_4ffadb4c) {
         s_key.var_6faa5e34 = 1;
 
-        if(!var_ebcac3c2 && (is_true(self.var_c39323b5) || !(check_point_in_playable_area(v_start) && check_point_in_enabled_zone(v_start)) || is_true(self.nuked))) {
+        if(!var_ebcac3c2 && (is_true(self.b_cleaned_up) || !(check_point_in_playable_area(v_start) && check_point_in_enabled_zone(v_start)) || is_true(self.nuked))) {
           e_player = arraygetclosest(v_start, function_a1ef346b());
           v_start = e_player.origin;
           s_result = positionquery_source_navigation(v_start, 96, 512, 64, 64, 1);
@@ -757,7 +757,7 @@ function function_33798535(var_31721422, a_str_zones, var_ed1db1a7, var_6cc77d4e
   if(!isDefined(level.var_ae5daa6e)) {
     s_defend_area = struct::get(var_ed1db1a7);
     level.var_ae5daa6e = s_defend_area.origin;
-    playSoundAtPosition(#"hash_6124e4ccaf068cd0", level.var_ae5daa6e);
+    playSoundAtPosition(#"zmb_rush_points_x20", level.var_ae5daa6e);
     level thread function_4a25b584(level.var_ae5daa6e, 20, 800, 1, 0.25);
     callback::remove_on_ai_killed(&function_cff5da11);
     callback::remove_on_ai_killed(&function_d40910b4);
@@ -816,7 +816,7 @@ function function_3b09971f(var_ed1db1a7, var_de0f1997, a_str_zones) {
     }
 
     if(b_any_player_in_zone && n_time_elapsed >= 5) {
-      playSoundAtPosition(#"hash_5755957467fab7c0", s_defend_area.origin);
+      playSoundAtPosition(#"zmb_rush_points_x2", s_defend_area.origin);
       var_d2f964c9++;
 
       switch (var_d2f964c9) {
@@ -878,7 +878,7 @@ function function_d40910b4(params) {
   if(!is_true(self.ignore_enemy_count) && a_ai_zombies.size == 1 && level.zombie_total <= 0 && !level flag::get("infinite_round_spawning")) {
     v_start = self.origin + (0, 0, 8);
 
-    if(is_true(self.var_c39323b5) || !(check_point_in_playable_area(v_start) && check_point_in_enabled_zone(v_start)) || is_true(self.nuked)) {
+    if(is_true(self.b_cleaned_up) || !(check_point_in_playable_area(v_start) && check_point_in_enabled_zone(v_start)) || is_true(self.nuked)) {
       if(isDefined(level.var_9149f3ac)) {
         s_defend_area = struct::get(level.var_9149f3ac);
         v_start = s_defend_area.origin;
@@ -886,7 +886,7 @@ function function_d40910b4(params) {
     }
 
     level.var_ae5daa6e = v_start;
-    playSoundAtPosition(#"hash_6124e4ccaf068cd0", level.var_ae5daa6e);
+    playSoundAtPosition(#"zmb_rush_points_x20", level.var_ae5daa6e);
     level thread function_4a25b584(level.var_ae5daa6e, 20, 800, 1, 0.25);
     callback::remove_on_ai_killed(&function_cff5da11);
     callback::remove_on_ai_killed(&function_d40910b4);
@@ -966,7 +966,7 @@ function function_766eff6(var_31721422, a_str_zones, var_de0f1997, var_f7c3c527)
 
   while(n_time >= 0) {
     if(n_time <= 30 && n_time % 5 == 0 || n_time <= 10) {
-      self playsoundtoplayer(#"hash_531658e82d2845f7", self);
+      self playsoundtoplayer(#"zmb_rush_timer_countdown", self);
     }
 
     var_cb24ec97 = 1;

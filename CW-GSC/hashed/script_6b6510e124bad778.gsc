@@ -107,7 +107,7 @@ function function_db945ce9() {
   }
 }
 
-function function_3332c6a1() {
+function initplayerhud() {
   toks = strtok("doaGlobal.player$.hudVisible", "$");
   self.doa.score.var_d252ca7f = toks[0] + self.doa.entnum + 1 + toks[1];
   toks = strtok("doaGlobal.player$.bombs", "$");
@@ -198,7 +198,7 @@ function updatehud() {
   level clientfield::set_world_uimodel(self.doa.score.var_52144f6f, self.doa.weapontype);
   level clientfield::set_world_uimodel(self.doa.score.var_18b2a561, self.doa.weaponlevel);
   level clientfield::set_world_uimodel(self.doa.score.var_a5236080, self.doa.var_d8955419 / 1024);
-  level clientfield::set_world_uimodel(self.doa.score.var_68162a1e, namespace_eccff4fb::function_f3b382da(self));
+  level clientfield::set_world_uimodel(self.doa.score.var_68162a1e, doa_score::function_f3b382da(self));
   var_20367411 = self.doa.score.gems - self.doa.score.var_6ec1ad9d;
   var_fd0181fe = self.doa.score.var_e49e3de7 - self.doa.score.var_6ec1ad9d;
   level clientfield::set_world_uimodel(self.doa.score.var_16ec5307, var_20367411 / var_fd0181fe);

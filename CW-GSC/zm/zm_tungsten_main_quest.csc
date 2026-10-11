@@ -84,7 +84,7 @@ function private function_347f52dd(localclientnum) {
 function private function_d45dd62(localclientnum, b_state, currentplayer) {
   if(b_state == 1) {
     if(!isDefined(currentplayer.var_103fdf58)) {
-      playSound(localclientnum, #"hash_7b5289d48cc02d77", (0, 0, 0));
+      playSound(localclientnum, #"evt_sr_phase_player_enter", (0, 0, 0));
       currentplayer.var_103fdf58 = currentplayer playLoopSound("evt_sr_phase_player_lp");
     }
 
@@ -97,7 +97,7 @@ function private function_d45dd62(localclientnum, b_state, currentplayer) {
   }
 
   if(isDefined(currentplayer.var_103fdf58)) {
-    playSound(localclientnum, #"hash_37b1613c2cb4c8f3", (0, 0, 0));
+    playSound(localclientnum, #"evt_sr_phase_player_exit", (0, 0, 0));
     currentplayer stoploopsound(currentplayer.var_103fdf58);
     currentplayer.var_103fdf58 = undefined;
   }
@@ -588,23 +588,23 @@ function function_aecabc8a(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_6b85db33(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump === 1) {
     level.var_5ac1ae9c = 1;
-    forcestreamxmodel(#"hash_2676ba5ee50e609b");
-    forcestreamxmodel(#"hash_2676bf5ee50e691a");
-    forcestreamxmodel(#"hash_2676be5ee50e6767");
-    forcestreamxmodel(#"hash_5d5d8e4791668a70");
-    forcestreamxmodel(#"hash_5d5d8f4791668c23");
-    forcestreamxmodel(#"hash_5d5d9447916694a2");
-    forcestreamxmodel(#"hash_5d5d954791669655");
-    forcestreamxmodel(#"hash_5d5d92479166913c");
+    forcestreamxmodel(#"p9_zm_tungsten_screen_weaver_ring_02");
+    forcestreamxmodel(#"p9_zm_tungsten_screen_weaver_ring_05");
+    forcestreamxmodel(#"p9_zm_tungsten_screen_weaver_ring_06");
+    forcestreamxmodel(#"p9_zm_tungsten_screen_weaver_02");
+    forcestreamxmodel(#"p9_zm_tungsten_screen_weaver_03");
+    forcestreamxmodel(#"p9_zm_tungsten_screen_weaver_04");
+    forcestreamxmodel(#"p9_zm_tungsten_screen_weaver_05");
+    forcestreamxmodel(#"p9_zm_tungsten_screen_weaver_06");
   } else if(fieldname === 1) {
-    stopforcestreamingxmodel(#"hash_2676ba5ee50e609b");
-    stopforcestreamingxmodel(#"hash_2676bf5ee50e691a");
-    stopforcestreamingxmodel(#"hash_2676be5ee50e6767");
-    stopforcestreamingxmodel(#"hash_5d5d8e4791668a70");
-    stopforcestreamingxmodel(#"hash_5d5d8f4791668c23");
-    stopforcestreamingxmodel(#"hash_5d5d9447916694a2");
-    stopforcestreamingxmodel(#"hash_5d5d954791669655");
-    stopforcestreamingxmodel(#"hash_5d5d92479166913c");
+    stopforcestreamingxmodel(#"p9_zm_tungsten_screen_weaver_ring_02");
+    stopforcestreamingxmodel(#"p9_zm_tungsten_screen_weaver_ring_05");
+    stopforcestreamingxmodel(#"p9_zm_tungsten_screen_weaver_ring_06");
+    stopforcestreamingxmodel(#"p9_zm_tungsten_screen_weaver_02");
+    stopforcestreamingxmodel(#"p9_zm_tungsten_screen_weaver_03");
+    stopforcestreamingxmodel(#"p9_zm_tungsten_screen_weaver_04");
+    stopforcestreamingxmodel(#"p9_zm_tungsten_screen_weaver_05");
+    stopforcestreamingxmodel(#"p9_zm_tungsten_screen_weaver_06");
   }
 
   if(bwastimejump === 2) {
@@ -618,21 +618,21 @@ function function_6b85db33(localclientnum, oldval, newval, bnewent, binitialsnap
   if(bwastimejump === 3) {
     forcestreamxmodel(#"p9_zm_tungsten_screen_directoroffice_01");
     forcestreamxmodel(#"p9_zm_tungsten_screen_directoroffice_03");
-    forcestreamxmodel(#"hash_4f29ef57be52ff53");
-    forcestreamxmodel(#"hash_77c9ad3e788f76e0");
-    forcestreamxmodel(#"hash_4d930f46137443f5");
-    forcestreamxmodel(#"hash_7dde0d6fcb87c79a");
-    forcestreamxmodel(#"hash_54e30f7b1638eb6f");
+    forcestreamxmodel(#"p9_zm_tungsten_screen_r_01_on");
+    forcestreamxmodel(#"p9_zm_tungsten_screen_r_02_on");
+    forcestreamxmodel(#"p9_zm_tungsten_screen_r_03_on");
+    forcestreamxmodel(#"p9_zm_tungsten_screen_r_04_on");
+    forcestreamxmodel(#"p9_zm_tungsten_screen_r_05_on");
     return;
   }
 
   if(fieldname === 3) {
     stopforcestreamingxmodel(#"p9_zm_tungsten_screen_directoroffice_01");
     stopforcestreamingxmodel(#"p9_zm_tungsten_screen_directoroffice_03");
-    stopforcestreamingxmodel(#"hash_4f29ef57be52ff53");
-    stopforcestreamingxmodel(#"hash_77c9ad3e788f76e0");
-    stopforcestreamingxmodel(#"hash_4d930f46137443f5");
-    stopforcestreamingxmodel(#"hash_7dde0d6fcb87c79a");
-    stopforcestreamingxmodel(#"hash_54e30f7b1638eb6f");
+    stopforcestreamingxmodel(#"p9_zm_tungsten_screen_r_01_on");
+    stopforcestreamingxmodel(#"p9_zm_tungsten_screen_r_02_on");
+    stopforcestreamingxmodel(#"p9_zm_tungsten_screen_r_03_on");
+    stopforcestreamingxmodel(#"p9_zm_tungsten_screen_r_04_on");
+    stopforcestreamingxmodel(#"p9_zm_tungsten_screen_r_05_on");
   }
 }

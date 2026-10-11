@@ -736,7 +736,7 @@ function function_d4896942(bundle, killstreakname, customendon) {
 
   while(true) {
     self waittill(#"flare_deployed");
-    self playSound(#"hash_713a3ce01967434e");
+    self playSound(#"wpn_ac130_chaff");
     self.var_7132bbb7 = 1;
     self namespace_f9b02f80::play_pilot_dialog_on_owner("damageEvaded", killstreakname, self.killstreak_id);
     self.var_b6286a42 = gettime() + 5000;

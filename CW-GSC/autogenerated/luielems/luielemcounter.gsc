@@ -29,7 +29,7 @@ class class_1beae0: cluielem {
     cluielem::close_luielem(player);
   }
 
-  function function_5d4dff63(player, value) {
+  function set_number(player, value) {
     player lui::function_bb6bcb89(hash(var_d5213cbb), var_bf9c8c95, 9, value, 0);
   }
 
@@ -112,8 +112,8 @@ function set_blue(player, value) {
   [[self]] - > set_blue(player, value);
 }
 
-function function_5d4dff63(player, value) {
-  [[self]] - > function_5d4dff63(player, value);
+function set_number(player, value) {
+  [[self]] - > set_number(player, value);
 }
 
 function set_horizontal_alignment(player, value) {

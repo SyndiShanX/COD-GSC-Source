@@ -159,10 +159,10 @@ function private function_95da1d88(instance, var_eece1f6a, var_f8dfa2cf) {
   var_9911be33 = "<dev string:x33f>" + var_eece1f6a;
 
   while(true) {
-    var_794c9d5f = getdvarint(var_9911be33, 0);
+    n_debug = getdvarint(var_9911be33, 0);
 
-    if(var_794c9d5f) {
-      if(var_794c9d5f == 2) {
+    if(n_debug) {
+      if(n_debug == 2) {
         setDvar(var_9911be33, 1);
         iprintlnbold("<dev string:x349>" + hashtostring(var_eece1f6a) + "<dev string:x35a>");
 
@@ -190,7 +190,7 @@ function private function_95da1d88(instance, var_eece1f6a, var_f8dfa2cf) {
         sphere(spawn.origin, n_radius, str_color, 1, 0, 7, 5);
       }
 
-      if(var_794c9d5f == 3) {
+      if(n_debug == 3) {
         setDvar(var_9911be33, 1);
 
         if(n_spawn >= a_spawns.size - 1) {

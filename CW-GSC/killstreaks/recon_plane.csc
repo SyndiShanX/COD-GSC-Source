@@ -63,7 +63,7 @@ function function_1f842f91(localclientnum, oldval, newval, bnewent, binitialsnap
       self enablevisioncircle(fieldname, var_2c9baa0c);
 
       if(!self function_ca024039()) {
-        self.var_2695439d = self playLoopSound(#"hash_539cae233d8f2036", 1);
+        self.var_2695439d = self playLoopSound(#"veh_harp_engine_loop", 1);
       }
 
       self thread function_4ee8c344(fieldname);
@@ -115,20 +115,20 @@ function private function_6f689c85(localclientnum) {
 
   while(level.var_d84f0c02.size) {
     player = function_27673a7(localclientnum);
-    var_6685c065 = 0;
+    playerinrange = 0;
 
     if(isalive(player)) {
       foreach(var_82d4c496 in level.var_d84f0c02) {
         if(distance2dsquared(player.origin, var_82d4c496.origin) <= var_c2b8dfe0) {
-          var_6685c065 = 1;
+          playerinrange = 1;
           break;
         }
       }
     }
 
-    if(var_6685c065) {
+    if(playerinrange) {
       if(!isDefined(player.var_59f39e8a)) {
-        player.var_59f39e8a = player playLoopSound(#"hash_4665942676cd6feb");
+        player.var_59f39e8a = player playLoopSound(#"uin_harp_static_loop");
       }
     } else if(isDefined(player.var_59f39e8a)) {
       player stoploopsound(player.var_59f39e8a);

@@ -50,7 +50,7 @@ function function_3bb686a9(localclientnum, oldval, newval, bnewent, binitialsnap
   if(bwastimejump == 1) {
     var_c2e428e = struct::get("switch_spark_loc", "targetname");
     level.var_c76e5c41 = playFX(fieldname, #"hash_179a76b8d709e8bb", var_c2e428e.origin, anglesToForward(var_c2e428e.angles), (0, 0, 1));
-    playSound(fieldname, #"hash_487cbd8d6e939533", var_c2e428e.origin);
+    playSound(fieldname, #"zmb_spark_shower", var_c2e428e.origin);
     return;
   }
 
@@ -64,6 +64,6 @@ function function_d3e5f256(localclientnum, oldval, newval, bnewent, binitialsnap
   if(bwastimejump == 1) {
     var_a546a03e = struct::get("fuse_box_loc", "targetname");
     level.var_f9a78d10 = playFX(fieldname, #"hash_179a76b8d709e8bb", var_a546a03e.origin, anglesToForward(var_a546a03e.angles), (0, 0, 1));
-    playSound(fieldname, #"hash_487cbd8d6e939533", var_a546a03e.origin);
+    playSound(fieldname, #"zmb_spark_shower", var_a546a03e.origin);
   }
 }

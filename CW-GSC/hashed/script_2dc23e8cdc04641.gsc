@@ -284,11 +284,11 @@ function function_5a5ce08a() {
   level endon(#"flg_choice_made");
 
   if(isDefined(level.park)) {
-    level.park battlechatter::function_2ab9360b(0);
+    level.park battlechatter::bc_allow(0);
   }
 
   if(isDefined(level.lazar)) {
-    level.lazar battlechatter::function_2ab9360b(0);
+    level.lazar battlechatter::bc_allow(0);
   }
 
   var_7cb820ce = struct::get("ai_mason_radio", "targetname");
@@ -389,7 +389,7 @@ function function_b35624bf() {
   level waittill(#"hash_a70f40cee5c3f00");
   level.player clientfield::set_to_player("skyhook_speedblur", 0);
   player_decision::function_8c0836dd(0);
-  skipto::function_1c2dfc20("cp_ger_hub_post_cuba");
+  skipto::level_completed("cp_ger_hub_post_cuba");
 }
 
 function function_6edd5850(s_info) {
@@ -409,7 +409,7 @@ function function_6edd5850(s_info) {
   level.player clientfield::set_to_player("skyhook_speedblur", 0);
   player_decision::function_8c0836dd(2);
   player_decision::function_8c0836dd(0);
-  skipto::function_1c2dfc20("cp_ger_hub_post_cuba");
+  skipto::level_completed("cp_ger_hub_post_cuba");
 }
 
 function function_e179de40() {
@@ -440,11 +440,11 @@ function function_4c0cb050(s_info) {
   level.player clientfield::set_to_player("skyhook_speedblur", 0);
   player_decision::function_8c0836dd(1);
   player_decision::function_8c0836dd(0);
-  skipto::function_1c2dfc20("cp_ger_hub_post_cuba");
+  skipto::level_completed("cp_ger_hub_post_cuba");
 }
 
 function function_bfdf76e6(var_25d15bed) {
-  persistent = savegame::function_6440b06b(#"persistent");
+  persistent = savegame::get_mission_data(#"persistent");
 
   if(var_25d15bed) {
     level.player stats::function_505387a6(#"hash_4450cbdb180d702", #"hash_38712d5dfff8ad31", 1);
@@ -477,8 +477,8 @@ function function_cc48b106() {
   level endon(#"flg_choice_made");
   var_e8a9ad8 = struct::get_array("wave_3_smoke", "targetname");
 
-  foreach(var_10ed23ba in var_e8a9ad8) {
-    e_grenade = level.player magicgrenadeplayer(getweapon(#"willy_pete"), var_10ed23ba.origin, (0, 0, 0));
+  foreach(s_smoke in var_e8a9ad8) {
+    e_grenade = level.player magicgrenadeplayer(getweapon(#"willy_pete"), s_smoke.origin, (0, 0, 0));
     e_grenade.var_3791d005 = 0;
     wait randomfloatrange(0.5, 1);
   }
@@ -654,7 +654,7 @@ function private function_b8f67d09(origin) {
   highlight_ent delete();
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   hms_util::print("<dev string:x8c>");
 
   level.player stoprumble("fallwind_loop_fast");

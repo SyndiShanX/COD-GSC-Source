@@ -55,43 +55,43 @@ function private function_727338d1(triggerstruct) {
   }
 
   victim_origin = victim.origin + (0, 0, 40);
-  var_38c235fa = vehicle gettagorigin(vehicle.var_f3652bd);
+  rotor_pos = vehicle gettagorigin(vehicle.var_f3652bd);
 
   if(getdvarint(#"hash_3b9aedd563f16da4", 0) > 0) {
-    sphere(var_38c235fa, vehicle.rotor_radius, (0, 1, 1), 0.3);
+    sphere(rotor_pos, vehicle.rotor_radius, (0, 1, 1), 0.3);
     sphere(victim_origin, 40, (1, 1, 0), 0.3);
   }
 
-  if(distancesquared(var_38c235fa, victim_origin) > sqr(40 + vehicle.rotor_radius)) {
+  if(distancesquared(rotor_pos, victim_origin) > sqr(40 + vehicle.rotor_radius)) {
     return;
   }
 
   var_38609e65 = anglestoup(vehicle getangles());
 
   if(getdvarint(#"hash_3b9aedd563f16da4", 0) > 0) {
-    line(var_38c235fa, var_38c235fa + var_38609e65 * 100, (1, 0, 0));
+    line(rotor_pos, rotor_pos + var_38609e65 * 100, (1, 0, 0));
   }
 
-  projected = vectorprojection(victim_origin - var_38c235fa, var_38609e65);
+  projected = vectorprojection(victim_origin - rotor_pos, var_38609e65);
 
   if(lengthsquared(projected) > sqr(40)) {
     return;
   }
 
-  trace = bulletTrace(var_38c235fa, victim_origin, 0, vehicle, 1, 1);
+  trace = bulletTrace(rotor_pos, victim_origin, 0, vehicle, 1, 1);
 
   if(trace[#"fraction"] == 1) {
     killer = isDefined(vehicle getseatoccupant(0)) ? vehicle getseatoccupant(0) : vehicle;
     victim.var_f5dc0dbf = 1;
-    victim dodamage(victim.health, var_38c235fa, killer, vehicle, "", "MOD_CRUSH", 0, vehicle.settings.var_81a2bc21);
+    victim dodamage(victim.health, rotor_pos, killer, vehicle, "", "MOD_CRUSH", 0, vehicle.settings.var_81a2bc21);
   }
 }
 
 function private function_b5c0079f() {
-  var_38c235fa = self gettagorigin(self.var_f3652bd);
+  rotor_pos = self gettagorigin(self.var_f3652bd);
 
-  if(isDefined(var_38c235fa)) {
-    self.rotor_trigger = spawn("trigger_radius", var_38c235fa - (0, 0, self.rotor_radius * 0.5), 0, self.rotor_radius, self.rotor_radius);
+  if(isDefined(rotor_pos)) {
+    self.rotor_trigger = spawn("trigger_radius", rotor_pos - (0, 0, self.rotor_radius * 0.5), 0, self.rotor_radius, self.rotor_radius);
     driver = self getseatoccupant(0);
     self.rotor_trigger enablelinkTo();
     self.rotor_trigger linkTo(self, self.var_f3652bd);
@@ -169,7 +169,7 @@ function function_a2b127e3() {
   self.var_38800c0 = 0;
 }
 
-function private function_edd50d7d() {
+function private landed_start() {
   self takeplayercontrol();
   self function_803e9bf3(0);
   self setrotorspeed(1);
@@ -764,7 +764,7 @@ function private check_landed() {
     }
 
     if(self function_479389f3() && !getdvarint(#"hash_4381be5e131dc9aa", 0)) {
-      function_edd50d7d();
+      landed_start();
       self notify(#"exit_flying");
       break;
     }
@@ -785,7 +785,7 @@ function private function_7a66682a() {
       if(!isDefined(occupants) || !occupants.size) {
         self function_e55e182a();
       } else {
-        function_edd50d7d();
+        landed_start();
       }
 
       self notify(#"hash_74bba4f3dddf9fc3");
@@ -808,7 +808,7 @@ function private function_637d1595() {
       if(!isDefined(occupants) || !occupants.size) {
         self function_e55e182a();
       } else {
-        function_edd50d7d();
+        landed_start();
       }
 
       self notify(#"hash_573e89d990d75799");

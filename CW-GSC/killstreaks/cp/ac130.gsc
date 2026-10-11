@@ -50,7 +50,7 @@ function private function_a4b36d9a() {
   self notify("485efef24bc199cf");
   self endon("485efef24bc199cf");
   player thread util::function_658a8750(1);
-  namespace_61e6d095::function_28027c42(#"ac130", [#"hash_72cc4740fa4d3da3"]);
+  scripted_widgets::function_28027c42(#"ac130", [#"hash_72cc4740fa4d3da3"]);
   namespace_c8e236da::removelist();
   namespace_c8e236da::function_ebf737f8(#"hash_c7d583ff53f896");
   namespace_c8e236da::function_ebf737f8(#"hash_6fca5ea0f3afc2a7");
@@ -62,7 +62,7 @@ function private function_a4b36d9a() {
 
   util::waittill_any_ents(level, "game_ended", player, "disconnect", player, "death", player, "gunner_left");
   namespace_c8e236da::removelist();
-  namespace_61e6d095::function_4279fd02(#"ac130");
+  scripted_widgets::function_4279fd02(#"ac130");
 }
 
 function function_1c110d7a(var_c3fb6cc9, var_d836f7aa, var_a6a9d503 = undefined) {

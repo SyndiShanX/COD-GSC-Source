@@ -68,24 +68,24 @@ function function_8c61edee(localclientnum, oldval, newval, bnewent, binitialsnap
 
     if(isDefined(var_f3133091) && isDefined(v_up)) {
       self.e_vortex = util::spawn_model(fieldname, "tag_origin", var_f3133091.origin + (0, 0, 50));
-      self.var_b5bdd2b9 = util::spawn_model(fieldname, "tag_origin", v_up);
+      self.e_harvester = util::spawn_model(fieldname, "tag_origin", v_up);
     }
 
     wait 0.1;
 
-    if(isDefined(self) && isDefined(self.e_vortex) && isDefined(self.var_b5bdd2b9)) {
-      self.var_b5bdd2b9.angles = (-90, 0, 0);
+    if(isDefined(self) && isDefined(self.e_vortex) && isDefined(self.e_harvester)) {
+      self.e_harvester.angles = (-90, 0, 0);
 
       if(bwastimejump == 1) {
         self.var_40433812 = util::playFXOnTag(fieldname, "sr/fx9_harvester_extraction_source_01", self.e_vortex, "tag_origin");
-        self.var_221b7b06 = util::playFXOnTag(fieldname, "sr/fx9_harvester_extraction_target_01", self.var_b5bdd2b9, "tag_origin");
+        self.n_target_id = util::playFXOnTag(fieldname, "sr/fx9_harvester_extraction_target_01", self.e_harvester, "tag_origin");
         self.var_b3f4d513 = self playLoopSound(#"hash_61133944ebd5c4ea");
       } else {
         wait 0.2;
 
-        if(isDefined(self) && isDefined(self.e_vortex) && isDefined(self.var_b5bdd2b9)) {
+        if(isDefined(self) && isDefined(self.e_vortex) && isDefined(self.e_harvester)) {
           self.var_40433812 = util::playFXOnTag(fieldname, "sr/fx9_harvester_extraction_source_02", self.e_vortex, "tag_origin");
-          self.var_221b7b06 = util::playFXOnTag(fieldname, "sr/fx9_harvester_extraction_target_02", self.var_b5bdd2b9, "tag_origin");
+          self.n_target_id = util::playFXOnTag(fieldname, "sr/fx9_harvester_extraction_target_02", self.e_harvester, "tag_origin");
           self.var_b3f4d513 = self playLoopSound(#"hash_61133944ebd5c4ea");
         }
       }
@@ -99,9 +99,9 @@ function function_8c61edee(localclientnum, oldval, newval, bnewent, binitialsnap
     self.var_40433812 = undefined;
   }
 
-  if(isDefined(self.var_221b7b06)) {
-    stopfx(fieldname, self.var_221b7b06);
-    self.var_221b7b06 = undefined;
+  if(isDefined(self.n_target_id)) {
+    stopfx(fieldname, self.n_target_id);
+    self.n_target_id = undefined;
   }
 
   if(isDefined(self.var_b3f4d513)) {

@@ -47,8 +47,8 @@ function onstartgametype() {
   level.flagbasefxid = [];
   level thread function_873b25c7();
 
-  foreach(var_85344832 in level.domflags) {
-    spawn_beacon::addprotectedzone(var_85344832.trigger);
+  foreach(capture_zone in level.domflags) {
+    spawn_beacon::addprotectedzone(capture_zone.trigger);
   }
 
   function_4e5d7f76();
@@ -92,21 +92,21 @@ function function_171b6c0() {
 }
 
 function onendround(var_c1e98979) {
-  foreach(var_85344832 in level.domflags) {
-    if(var_85344832.var_45438686 == 1) {
-      team = var_85344832 gameobjects::get_owner_team();
-      label = var_85344832 gameobjects::get_label();
+  foreach(capture_zone in level.domflags) {
+    if(capture_zone.var_45438686 == 1) {
+      team = capture_zone gameobjects::get_owner_team();
+      label = capture_zone gameobjects::get_label();
       challenges::holdflagentirematch(team, label);
     }
 
-    if(isDefined(var_85344832.var_56d394cd)) {
-      if(!isDefined(var_85344832.var_249009fd)) {
-        var_85344832.var_249009fd = [];
-      } else if(!isarray(var_85344832.var_249009fd)) {
-        var_85344832.var_249009fd = array(var_85344832.var_249009fd);
+    if(isDefined(capture_zone.var_56d394cd)) {
+      if(!isDefined(capture_zone.var_249009fd)) {
+        capture_zone.var_249009fd = [];
+      } else if(!isarray(capture_zone.var_249009fd)) {
+        capture_zone.var_249009fd = array(capture_zone.var_249009fd);
       }
 
-      var_85344832.var_249009fd[var_85344832.var_249009fd.size] = gettime() - var_85344832.var_56d394cd;
+      capture_zone.var_249009fd[capture_zone.var_249009fd.size] = gettime() - capture_zone.var_56d394cd;
     }
   }
 
@@ -254,7 +254,7 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
               attacker.pers[#"defends"]++;
               attacker.defends = attacker.pers[#"defends"];
               attacker recordgameevent("return");
-              level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
+              level thread telemetry::function_18135b72(#"callback_on_game_event", {
                 #player: attacker, #eventtype: #"return"});
               attacker thread challenges::killedbaseoffender(trigger, weapon, victim);
               attacker challenges::killedzoneattacker(weapon);
@@ -342,8 +342,8 @@ function function_a800815(victim, attacker) {
 }
 
 function function_d3a438fb(entity) {
-  foreach(var_85344832 in level.domflags) {
-    if(entity istouching(var_85344832.trigger)) {
+  foreach(capture_zone in level.domflags) {
+    if(entity istouching(capture_zone.trigger)) {
       return true;
     }
   }
@@ -412,12 +412,12 @@ function function_4e5d7f76() {
   descriptorsbylinkname = [];
   descriptors = getEntArray("flag_descriptor", "targetname");
 
-  foreach(var_85344832 in level.domflags) {
+  foreach(capture_zone in level.domflags) {
     closestdist = undefined;
     closestdesc = undefined;
 
     for(j = 0; j < descriptors.size; j++) {
-      dist = distance(var_85344832.trigger.origin, descriptors[j].origin);
+      dist = distance(capture_zone.trigger.origin, descriptors[j].origin);
 
       if(!isDefined(closestdist) || dist < closestdist) {
         closestdist = dist;
@@ -435,8 +435,8 @@ function function_4e5d7f76() {
       continue;
     }
 
-    var_85344832.trigger.descriptor = closestdesc;
-    closestdesc.flag = var_85344832.trigger;
+    capture_zone.trigger.descriptor = closestdesc;
+    closestdesc.flag = capture_zone.trigger;
     descriptorsbylinkname[closestdesc.script_linkname] = closestdesc;
   }
 
@@ -476,6 +476,6 @@ function function_1609a882(var_c1e98979) {
     flagcapturedata = {
       #gametime: function_f8d53445(), #round: game.roundsplayed, #label: domflag gameobjects::get_label(), #averagetimeheld: isDefined(averagetime) ? averagetime : 0
     };
-    function_92d1707f(#"hash_4b747d11b8ad1b23", flagcapturedata);
+    function_92d1707f(#"dlog_event_flagcapturedata", flagcapturedata);
   }
 }

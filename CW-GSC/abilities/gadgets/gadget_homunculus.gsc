@@ -127,10 +127,10 @@ function private event_handler[grenade_fire] function_4776caf4(eventstruct) {
     var_66ae7054 = 0;
 
     if(math::cointoss() && math::cointoss()) {
-      homunculus playSound(#"hash_8d020e5460f4a95");
+      homunculus playSound(#"vox_homun_throw_homu");
       var_66ae7054 = 1;
     } else {
-      homunculus playSound(#"hash_689f11fd8983d1a6");
+      homunculus playSound(#"vox_homun_throw_exert_homu");
     }
 
     homunculus thread scene::play(#"aib_t8_zm_zod_homunculus_throw_loop_01", homunculus);
@@ -152,12 +152,12 @@ function private event_handler[grenade_fire] function_4776caf4(eventstruct) {
         level.var_2da60c10[level.var_2da60c10.size] = homunculus;
         homunculus.despawn_time = gettime() + int(120 * 1000);
         playFX(#"zm_weapons/fx8_equip_homunc_spawn", homunculus.origin);
-        homunculus playSound(#"hash_21206f1b7fb27f81");
+        homunculus playSound(#"wpn_homunculus_spawn_explo");
 
         if(math::cointoss() && math::cointoss() && !var_66ae7054) {
-          homunculus playSound(#"hash_6b4fa8bf14690e0c");
+          homunculus playSound(#"vox_homun_land_homu");
         } else {
-          homunculus playSound(#"hash_1d6e8d28eabdb1fb");
+          homunculus playSound(#"vox_homun_land_exert_homu");
         }
 
         mover = util::spawn_model("tag_origin", homunculus.origin, homunculus.angles);
@@ -203,7 +203,7 @@ function private function_bb17ec5a() {
           start_attack = undefined;
 
           if(math::cointoss() && math::cointoss()) {
-            self playSound(#"hash_22c88cff01a4691b");
+            self playSound(#"vox_homun_jump_homu");
           }
 
           self.mover scene::stop();
@@ -288,10 +288,10 @@ function private function_c8f642f6(enemy, n_time) {
 
     if(isalive(enemy)) {
       if(math::cointoss() && math::cointoss()) {
-        self playSound(#"hash_ba5815eb0dc4d97");
+        self playSound(#"vox_homun_kill_homu");
       }
 
-      enemy playSound(#"hash_3a99f739009a77fa");
+      enemy playSound(#"wpn_homunculus_melee_imp");
       enemy dodamage(enemy.health + 666, enemy.origin, self.player, undefined, undefined, "MOD_UNKNOWN", 0, getweapon(#"homunculus"));
       gibserverutils::gibhead(enemy, 0);
     }
@@ -299,7 +299,7 @@ function private function_c8f642f6(enemy, n_time) {
 }
 
 function function_7bfc867f() {
-  self playSound(#"hash_6e471fde121d0263");
+  self playSound(#"vox_homun_death_homu");
   self drop_to_ground();
   self.mover scene::stop();
   self.mover scene::play(#"aib_t8_zm_zod_homunculus_dth_01", self);

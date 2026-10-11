@@ -167,14 +167,14 @@ function private archetypezombieonanimscriptedcallback(entity) {
 }
 
 function function_eb55349f() {
-  var_1690db4a = [#"c_t9_zmb_ndu_zombie_shirtless2", #"hash_16837b6c9b7a1881", #"hash_50fdc172aee097e6", #"hash_ef041655f01ad34", #"hash_502c60e0a94ba04b"];
+  var_1690db4a = [#"c_t9_zmb_ndu_zombie_shirtless2", #"hash_16837b6c9b7a1881", #"hash_50fdc172aee097e6", #"c_t9_zmb_gold_zombie_male_shirtless2", #"hash_502c60e0a94ba04b"];
 
   if(self.model === #"c_t9_zmb_zombie_light_body2" || isDefined(self.model) && isinarray(var_1690db4a, self.model)) {
     self clientfield::set("pustule_pulse_cf", 1);
     self callback::function_d8abfc3d(#"on_ai_killed", &function_5b8201e0);
   }
 
-  self callback::function_d8abfc3d(#"on_actor_damage", &function_f771a3f8);
+  self callback::function_d8abfc3d(#"on_actor_damage", &onzombiedamaged);
   self callback::function_d8abfc3d(#"hash_7f690ab86160d4f6", &function_5d873c56);
   self callback::function_d8abfc3d(#"hash_40f6b51ae82126a4", &function_d8235fb0);
 }
@@ -216,7 +216,7 @@ function function_d8235fb0(params) {
   self clientfield::set("pustule_pulse_cf", 1);
 }
 
-function function_f771a3f8(params) {
+function onzombiedamaged(params) {
   switch (params.smeansofdeath) {
     case #"mod_explosive":
     case #"mod_grenade":

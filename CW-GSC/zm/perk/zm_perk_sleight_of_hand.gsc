@@ -20,20 +20,20 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  function_a8fdd433();
+  enable_sleight_of_hand_perk_for_level();
 }
 
-function function_a8fdd433() {
+function enable_sleight_of_hand_perk_for_level() {
   zm_perks::register_perk_basic_info(#"talent_speedcola", #"perk_sleight_of_hand", 3000, #"hash_1fe685096c4f7bd2", getweapon("zombie_perk_bottle_sleight"), undefined, #"zmperksspeed");
-  zm_perks::register_perk_precache_func(#"talent_speedcola", &function_2ae165ac);
-  zm_perks::register_perk_clientfields(#"talent_speedcola", &function_dbaed146, &function_c6ce3670);
-  zm_perks::register_perk_machine(#"talent_speedcola", &function_e5c86da9, undefined, "p9_fxanim_zm_gp_speed_cola_bundle");
+  zm_perks::register_perk_precache_func(#"talent_speedcola", &sleight_of_hand_precache);
+  zm_perks::register_perk_clientfields(#"talent_speedcola", &sleight_of_hand_register_clientfield, &sleight_of_hand_set_clientfield);
+  zm_perks::register_perk_machine(#"talent_speedcola", &sleight_of_hand_perk_machine_setup, undefined, "p9_fxanim_zm_gp_speed_cola_bundle");
   zm_perks::register_perk_host_migration_params(#"talent_speedcola", "vending_sleight", "sleight_light");
 }
 
-function function_2ae165ac() {
-  if(isDefined(level.var_f3775b53)) {
-    [[level.var_f3775b53]]();
+function sleight_of_hand_precache() {
+  if(isDefined(level.sleight_of_hand_precache_override_func)) {
+    [[level.sleight_of_hand_precache_override_func]]();
     return;
   }
 
@@ -44,11 +44,11 @@ function function_2ae165ac() {
   level.machine_assets[#"talent_speedcola"].on_model = "p9_sur_machine_speed_cola";
 }
 
-function function_dbaed146() {}
+function sleight_of_hand_register_clientfield() {}
 
-function function_c6ce3670(state) {}
+function sleight_of_hand_set_clientfield(state) {}
 
-function function_e5c86da9(use_trigger, perk_machine, bump_trigger, collision) {
+function sleight_of_hand_perk_machine_setup(use_trigger, perk_machine, bump_trigger, collision) {
   perk_machine.script_sound = "mus_perks_speed_jingle";
   perk_machine.script_string = "speedcola_perk";
   perk_machine.script_label = "mus_perks_speed_sting";

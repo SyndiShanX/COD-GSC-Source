@@ -60,7 +60,7 @@ function function_2d43051c() {
 function function_fc49d802() {
   level endon(#"hash_607dade1cb80a138");
   self endon(#"death");
-  self waittill(#"hash_60f75ee59e5d030f");
+  self waittill(#"raz_arm_detach");
 
   if(zm_utility::check_point_in_playable_area(self.origin)) {
     level notify(#"hash_712ab943a79224a7", {
@@ -287,11 +287,11 @@ function function_c2088edf(b_skipped) {
   dimitri_eyes_pos = struct::get("dimitri_eyes_pos", "targetname");
   var_95614195 = dimitri_eyes_pos util::spawn_model(#"hash_59fe28273eedc6e3", dimitri_eyes_pos.origin, dimitri_eyes_pos.angles);
   var_535d61f8 = getEnt("retinal_scan", "targetname");
-  var_535d61f8 scene::play(#"hash_291b7cbc6012c485", "up", var_535d61f8);
+  var_535d61f8 scene::play(#"p9_fxanim_zm_gold_retinal_scanner_bundle", "up", var_535d61f8);
   var_535d61f8 clientfield::set("" + #"hash_438f8800ecce6fba", 1);
   wait 4;
-  var_535d61f8 scene::stop(#"hash_291b7cbc6012c485");
-  var_535d61f8 thread scene::play(#"hash_291b7cbc6012c485", "down", var_535d61f8);
+  var_535d61f8 scene::stop(#"p9_fxanim_zm_gold_retinal_scanner_bundle");
+  var_535d61f8 thread scene::play(#"p9_fxanim_zm_gold_retinal_scanner_bundle", "down", var_535d61f8);
   var_611c4091 playSound(#"hash_30cc6f636c8bdec1");
 
   iprintlnbold("<dev string:x9e>");
@@ -349,7 +349,7 @@ function function_fd185787() {
   wait 3;
   var_33229741 = struct::get(var_79bb44c5.target, "targetname");
   var_5d7d58f2 = function_ade87eb5(#"hash_11a77d8a90e047f1", var_79bb44c5, 0);
-  var_3180c9b8 playSound(#"hash_783d3d061bcb79ae");
+  var_3180c9b8 playSound(#"zmb_quest_ww_dartboard_spawn");
   n_power = length(var_79bb44c5.origin - var_33229741.origin);
   drop_time = var_5d7d58f2 zm_utility::fake_physicslaunch(var_33229741.origin, n_power);
   wait 1;
@@ -616,12 +616,12 @@ function function_d196daba(e_computer, var_77d81993) {
   level endoncallback(&function_85d6a457, #"hash_76c7837322a67981");
   level clientfield::increment("" + #"hash_4bbd14acfb65a055");
   var_35fc9135 = struct::get("go_co_sc_lo", "targetname");
-  playSoundAtPosition(#"hash_5cffc6d32c1f7512", var_35fc9135.origin);
+  playSoundAtPosition(#"zmb_quest_ww_computer_ready", var_35fc9135.origin);
 
   while(true) {
     activator = e_computer zm_unitrigger::function_fac87205(#"hash_6766f9d6a024ee72", 64);
     activator function_bc82f900(#"zm_gold_interact_rumble_small");
-    playSoundAtPosition(#"hash_3874b1f24664c38a", var_35fc9135.origin);
+    playSoundAtPosition(#"zmb_quest_ww_computer_use", var_35fc9135.origin);
     level function_d7d376af(var_77d81993);
   }
 }
@@ -636,7 +636,7 @@ function function_2d9c01e4() {
   activator function_bc82f900(#"zm_gold_interact_rumble_small");
   var_3875fad7 = level.round_number + 2;
   power_cell = util::spawn_model(#"p9_zm_gold_ray_rifle_component_charged_power", power_cell_pos.origin, power_cell_pos.angles);
-  playSoundAtPosition(#"hash_70b82b4de231f767", power_cell_pos.origin);
+  playSoundAtPosition(#"zmb_quest_ww_cell_place", power_cell_pos.origin);
   level clientfield::set("" + #"play_charge_fx", 1);
   var_c6adbe4d = power_cell_pos zm_unitrigger::create(#"hash_107c45e6dc18900f", 64, &function_e08e775b);
 
@@ -737,7 +737,7 @@ function function_63eefce1(b_skipped, var_19e802fa) {
   }
 }
 
-function function_37ad9539(var_1377a1e8) {
+function function_37ad9539(e_crafter) {
   level flag::set(#"hash_6eeca22c4519b770");
 
   iprintlnbold("<dev string:x15f>");
@@ -795,7 +795,7 @@ function function_6de8eec4() {
     }
 
     if(is_true(self.stub.var_dad14d36.var_58d0878f)) {
-      playSoundAtPosition(#"hash_1faff36484237fbb", self.origin);
+      playSoundAtPosition(#"zmb_quest_ww_diary_pickup", self.origin);
 
       iprintlnbold("<dev string:x171>");
 

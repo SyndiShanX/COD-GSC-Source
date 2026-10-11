@@ -330,7 +330,7 @@ function update_players_stats_at_match_end(players) {
     player function_9daadcaa("total_points", player.score_total);
 
     if(zm_utility::is_survival()) {
-      player function_9daadcaa("highest_round_reached", level.var_b48509f9);
+      player function_9daadcaa("highest_round_reached", level.star_rating);
     } else {
       player function_9daadcaa("HIGHEST_ROUND_REACHED", var_600fbe9f);
     }
@@ -1212,13 +1212,13 @@ function function_69317807(stat_name, value) {
 }
 
 function function_61e39bb6(var_b7b748b7, amount) {
-  var_94583a5d = 0;
+  gated = 0;
 
   if(getdvarint(#"hash_f46d80ea72f539c", 0) != 0) {
-    var_94583a5d = 1;
+    gated = 1;
   }
 
-  if(var_94583a5d) {
+  if(gated) {
     return;
   }
 

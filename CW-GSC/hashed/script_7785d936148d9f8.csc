@@ -52,7 +52,7 @@ function function_7d090e7e(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(isDefined(e_player)) {
     e_player postfx::playpostfxbundle(#"hash_413b0a0d47ce8d45");
-    function_5ea2c6e3("zm_silver_darkaether_leadin", 1);
+    addsubmix("zm_silver_darkaether_leadin", 1);
   }
 }
 

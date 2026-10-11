@@ -855,7 +855,7 @@ function fasttravel_spline(var_5314bd63, nd_path_start, var_384528) {
 
 function function_62686dda(var_6c365dbf) {
   var_a16f5b07 = self.origin;
-  self playRumbleOnEntity(#"hash_5d8a1a68b12dfb24");
+  self playRumbleOnEntity(#"zm_fasttravel_vortex_rumble");
   wait 0.5;
   self clientfield::set_to_player("player_stargate_fx", 1);
 
@@ -1010,7 +1010,7 @@ function function_1ab837f6() {
 function function_ab80021(var_384528) {
   level endon(#"end_game");
   self endon(#"disconnect", #"switch_rail");
-  self playrumblelooponentity(#"hash_5d8a1a68b12dfb24");
+  self playrumblelooponentity(#"zm_fasttravel_vortex_rumble");
 
   if(isDefined(self.vh_rail)) {
     self.vh_rail vehicle::go_path();
@@ -1031,7 +1031,7 @@ function function_ab80021(var_384528) {
     }
   }
 
-  self stoprumble(#"hash_5d8a1a68b12dfb24");
+  self stoprumble(#"zm_fasttravel_vortex_rumble");
   self notify(#"fasttravel_over");
   self unlink();
   wait 0.3;
@@ -1045,13 +1045,13 @@ function private function_e4af83af(s_teleport_room) {
   util::wait_network_frame();
   self.var_805b8325 = spawn("script_origin", s_teleport_room.origin);
   self.var_805b8325.angles = s_teleport_room.angles;
-  var_d271f921 = self;
+  e_linker = self;
 
   if(isDefined(self.var_e1fd941b)) {
-    var_d271f921 = self.var_e1fd941b;
+    e_linker = self.var_e1fd941b;
   }
 
-  var_d271f921 linkTo(self.var_805b8325);
+  e_linker linkTo(self.var_805b8325);
 }
 
 function private function_fdb3b5(var_a16f5b07, s_teleport_room, var_98b11ed9) {
@@ -1076,7 +1076,7 @@ function private function_fdb3b5(var_a16f5b07, s_teleport_room, var_98b11ed9) {
   println("<dev string:x2cd>" + self getplayercamerapos());
   self childthread function_e4af83af(s_teleport_room);
   waittillframeend();
-  self playrumblelooponentity(#"hash_5d8a1a68b12dfb24");
+  self playrumblelooponentity(#"zm_fasttravel_vortex_rumble");
   self clientfield::set_to_player("" + #"hash_638ce9451eb0ea49", var_98b11ed9);
 }
 
@@ -1178,7 +1178,7 @@ function function_b6e62bc1() {
 
 function function_c88e13b1(duration = 1) {
   wait duration;
-  level notify(#"hash_62c65dd69ca5fbf5");
+  level notify(#"halfway_done_with_vortex_fx");
 }
 
 function function_82c1415f(var_291fc0f7, var_1f8fbe0b = 0) {
@@ -1207,7 +1207,7 @@ function function_82c1415f(var_291fc0f7, var_1f8fbe0b = 0) {
     var_291fc0f7 thread scene::stop(var_e830c896);
   }
 
-  self stoprumble(#"hash_5d8a1a68b12dfb24");
+  self stoprumble(#"zm_fasttravel_vortex_rumble");
   var_291fc0f7 struct::delete();
 }
 

@@ -22,8 +22,8 @@ function private preinit() {
   zm_powerups::register_powerup("bonus_points_player_shared", &function_ec014d54);
 
   if(zm_powerups::function_cc33adc8()) {
-    zm_powerups::add_zombie_powerup("bonus_points_player", "zombie_z_money_icon", #"hash_5162c283a9d6ee16", &zm_powerups::func_should_never_drop, 1, 0, 0);
-    zm_powerups::add_zombie_powerup("bonus_points_player_shared", "zombie_z_money_icon", #"hash_5162c283a9d6ee16", &zm_powerups::func_should_never_drop, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("bonus_points_player", "zombie_z_money_icon", #"zombie/powerup_bonus_points", &zm_powerups::func_should_never_drop, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("bonus_points_player_shared", "zombie_z_money_icon", #"zombie/powerup_bonus_points", &zm_powerups::func_should_never_drop, 1, 0, 0);
   }
 }
 

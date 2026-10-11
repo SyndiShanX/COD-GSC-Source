@@ -40,8 +40,8 @@ function main(str_skipto, b_starting) {
     thread function_27c66141();
     thread bustout_house_guys();
     thread function_e78650d8();
-    thread function_f9d1756b();
-    level.var_7c11765c = 0;
+    thread player_exits_house();
+    level.last_player_damage = 0;
     level.last_player_attacker = level;
     callback::on_player_damage(&function_aa3c5fab);
     level flag::wait_till("heli_target_complete");
@@ -51,7 +51,7 @@ function main(str_skipto, b_starting) {
   }
 
   if(isDefined(b_starting)) {
-    skipto::function_4e3ab877(b_starting);
+    skipto::objective_completed(b_starting);
   }
 }
 
@@ -65,12 +65,12 @@ function function_aa3c5fab(params) {
 
   if(attacker == level.last_player_attacker) {
     level.var_9a3944f4 thread tkdn_heli_intro::function_cbe25a41(attacker, "tag_glass_front_left_lower_d0", 1);
-    level.var_7c11765c = gettime();
+    level.last_player_damage = gettime();
     return;
   }
 
-  if(level.var_7c11765c < gettime() - 3000 || !isalive(level.last_player_attacker)) {
-    level.var_7c11765c = gettime();
+  if(level.last_player_damage < gettime() - 3000 || !isalive(level.last_player_attacker)) {
+    level.last_player_damage = gettime();
     level.last_player_attacker = attacker;
     level.var_9a3944f4 thread tkdn_heli_intro::function_cbe25a41(attacker, "tag_glass_front_left_lower_d0", 1);
   }
@@ -85,14 +85,14 @@ function bustout(str_skipto, b_starting) {
     level.var_664fd741 = spawners[0] spawner::spawn(1);
     level thread util::magic_bullet_shield(level.var_664fd741);
 
-    if(!isDefined(level.var_40b02b72)) {
-      level.var_40b02b72 = vehicle::simple_spawn_and_drive("intro_heli_bustout_truck");
-      level.var_9a3944f4 = level.var_40b02b72[0];
+    if(!isDefined(level.intro_helis)) {
+      level.intro_helis = vehicle::simple_spawn_and_drive("intro_heli_bustout_truck");
+      level.var_9a3944f4 = level.intro_helis[0];
       level.var_9a3944f4 setModel("veh_t8_mil_helicopter_uh1d_cp_takedown");
       level.var_9a3944f4 thread tkdn_heli_intro::function_fbb0d73f();
       thread tkdn_heli_intro::heli_light(level.var_9a3944f4, "ally_heli_spot_light_bustout", "tag_glass_front_left_lower_d0", (-20, 12, 0), level.var_9a3944f4, 0, 1);
       level.var_9a3944f4 util::delay_notify(0.2, "lights_on");
-      thread function_f9d1756b();
+      thread player_exits_house();
     }
 
     thread function_e78650d8();
@@ -104,11 +104,11 @@ function bustout(str_skipto, b_starting) {
   level lui::play_movie(#"hash_61b3a08db9dd71b0", "fullscreen", 1, 0, 0);
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
-function function_f9d1756b() {
+function player_exits_house() {
   level flag::wait_till("bustout_pre_player_start");
   level.var_9a3944f4.forward_scalar = 1;
   level.var_9a3944f4 util::delay(0.4, undefined, &tkdn_heli_intro::function_cbe25a41, level.var_664fd741, "tag_glass_front_left_lower_d0");
@@ -253,9 +253,9 @@ function function_c000638d() {
 function function_b4a74554(var_dd0a1cc3) {
   aim = struct::get("bustout_shoot_house_aim");
 
-  if(!isDefined(level.var_40b02b72)) {
-    level.var_40b02b72 = vehicle::simple_spawn_and_drive("intro_heli_bustout");
-    level.var_9a3944f4 = level.var_40b02b72[0];
+  if(!isDefined(level.intro_helis)) {
+    level.intro_helis = vehicle::simple_spawn_and_drive("intro_heli_bustout");
+    level.var_9a3944f4 = level.intro_helis[0];
     level.var_9a3944f4 setModel("veh_t8_mil_helicopter_uh1d_cp_takedown");
     level.var_9a3944f4 thread tkdn_heli_intro::function_fbb0d73f();
     level.var_9a3944f4 thread tkdn_heli_intro::function_3cebcd1b();
@@ -366,8 +366,8 @@ function function_768f9ea9(name, starting, direct, player) {
     }
   }
 
-  if(isDefined(level.var_40b02b72)) {
-    foreach(veh in level.var_40b02b72) {
+  if(isDefined(level.intro_helis)) {
+    foreach(veh in level.intro_helis) {
       if(isalive(veh)) {
         veh.delete_on_death = 1;
         veh delete();
@@ -397,4 +397,4 @@ function init_flags() {
 
 function init_clientfields() {}
 
-function function_22b7fffd() {}
+function init_scenes() {}

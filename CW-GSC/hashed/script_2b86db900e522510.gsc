@@ -35,7 +35,7 @@ class class_ba33e0c1: cluielem {
       return;
     }
 
-    if(#"hash_5fba3d476e0b33f8" == state_name) {
+    if(#"decoding" == state_name) {
       player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "_state", 1);
       return;
     }

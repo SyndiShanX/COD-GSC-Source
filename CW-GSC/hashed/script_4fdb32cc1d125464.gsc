@@ -47,10 +47,10 @@ function starting(str_skipto) {
 
 function main(str_skipto, b_starting) {
   level flag::set("aslt_exfil_escape_begin");
-  level battlechatter::function_2ab9360b(1);
+  level battlechatter::bc_allow(1);
 
   if(is_true(b_starting)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto, "adler_casual_killer");
+    level.adler = namespace_e77bf565::adler_spawn(str_skipto, "adler_casual_killer");
     level.inside_man = namespace_e77bf565::function_e4660071(str_skipto, "inside_man_casual_killer");
     level thread alarm_lights();
     level thread namespace_353d803e::function_d4ea305a();
@@ -90,12 +90,12 @@ function main(str_skipto, b_starting) {
   level flag::wait_till("aslt_exfil_escape_complete");
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 
   player_decision::function_430ebd4b(3, 6);
   player_decision::function_8c0836dd(0);
-  skipto::function_1c2dfc20("cp_ger_hub_post_kgb");
+  skipto::level_completed("cp_ger_hub_post_kgb");
 }
 
 function break_c4_explosion_dynents(b_starting) {
@@ -134,7 +134,7 @@ function init_clientfields() {
   clientfield::register("world", "toggle_occluder", 1, 1, "int");
 }
 
-function function_22b7fffd() {
+function init_scenes() {
   animation::add_notetrack_func("kgb_aslt_exfil_escape::exfil_escape_elevator_guards_explosion", &function_10d1e2b8);
   animation::add_notetrack_func("kgb_util::start_firing_magic_bullets", &namespace_e77bf565::function_7264e049);
   animation::add_notetrack_func("kgb_aslt_exfil_escape::attach_armor", &function_8484087e);
@@ -275,7 +275,7 @@ function function_1ad415e() {
 function function_4ab39cb8() {
   self.ignoresuppression = 1;
   self.disablebulletwhizbyreaction = 1;
-  self.var_b81bb500 = 1;
+  self.disablefriendlyfirereaction = 1;
   self.dodangerreact = 0;
 }
 
@@ -291,7 +291,7 @@ function function_10d1e2b8(params) {
   screenshake(exfil_escape_elevator_explosion_org.origin, 8, 7, 5, 0.5, 0, -1, 0, 15, 13, 6, 8);
   screenshake(exfil_escape_elevator_explosion_org.origin, 1, 1, 1, 2.5, 0, -1, 0, 50, 5, 1, 4);
   e_grenade = level.player magicgrenadetype(getweapon(#"hash_3d69608df21d9085"), exfil_escape_elevator_explosion_org.origin, (0, 0, 0), 0);
-  e_grenade.var_83323dfb = 1;
+  e_grenade.breach_explosion = 1;
   origin = exfil_escape_elevator_explosion_org.origin;
   radius = exfil_escape_elevator_explosion_org.radius;
   wait 0.1;
@@ -303,7 +303,7 @@ function function_10d1e2b8(params) {
 
 function function_e6fcee54() {
   level.lazar = spawner::simple_spawn_single("lazar");
-  level.lazar battlechatter::function_2ab9360b(0);
+  level.lazar battlechatter::bc_allow(0);
   level.escape_vehicle = getEnt("escape_vehicle", "targetname");
   level.var_fb380007 = [];
   level.var_fb380007[#"lazar"] = level.lazar;
@@ -332,8 +332,8 @@ function function_77668431() {
   level.var_ea185900 prompts::set_objective("obj_goto");
   level thread function_72bfe030();
   level.var_ea185900 waittill(#"trigger");
-  level.adler battlechatter::function_2ab9360b(0);
-  level.inside_man battlechatter::function_2ab9360b(0);
+  level.adler battlechatter::bc_allow(0);
+  level.inside_man battlechatter::bc_allow(0);
   level.var_ea185900 util::remove_cursor_hint();
   level.player disableweapons();
   level.player enableinvulnerability();
@@ -462,8 +462,8 @@ function function_8c7969b4() {
   namespace_353d803e::function_ad8a133d();
   spawn_manager::disable("exfil_escape_courtyard_tunnel_backup_spawn_manager");
   guys = spawner::get_ai_group_ai("exfil_escape_courtyard_tunnel_backup");
-  var_2eb84b6c = spawn_manager::get_ai("exfil_escape_courtyard_tunnel_backup_spawn_manager");
-  var_db641a18 = arraycombine(guys, var_2eb84b6c);
+  guys2 = spawn_manager::get_ai("exfil_escape_courtyard_tunnel_backup_spawn_manager");
+  var_db641a18 = arraycombine(guys, guys2);
 
   foreach(guy in var_db641a18) {
     guy dodamage(99999, (-950, -180, 440), level.adler, guy, "none", "MOD_EXPLOSIVE");
@@ -556,7 +556,7 @@ function function_8484087e(params) {
   self.var_c681e4c1 = 1;
   self.ignoresuppression = 1;
   self.disablebulletwhizbyreaction = 1;
-  self.var_b81bb500 = 1;
+  self.disablefriendlyfirereaction = 1;
   self.dodangerreact = 0;
   self.allowpain = 0;
   self ai::set_behavior_attribute(#"can_be_meleed", 0);

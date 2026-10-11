@@ -20,7 +20,7 @@
 #namespace zm_tungsten_zones;
 
 function autoexec init() {
-  callback::on_spawned(&function_44b1279a);
+  callback::on_spawned(&minimap_update);
   level.var_65c43c31 = ["zone_bunker_entrance_01", "zone_bunker_entrance_02", "zone_bunker_entrance_03", "zone_service_tunnels_01", "zone_service_tunnels_02", "zone_service_tunnels_03", "zone_board_room_01", "zone_board_room_02", "zone_pa_room_01", "zone_pa_room_02", "zone_bunker_entrance", "zone_service_tunnels", "zone_board_room", "zone_board_office"];
   level.var_707f916f = ["zone_helipads", "zone_helipads_3", "zone_helipads_portal_room", "zone_main_street_backlot", "zone_xxx_club_roof", "zone_high_tide_bar_roof", "zone_main_street_bridge", "zone_anytown_usa_backlot", "zone_video_store_roof", "zone_bunker_entrance_01", "zone_service_tunnels_03", "zone_observation"];
   level.var_dc2ca204 = ["zone_helipads", "zone_helipads_2", "zone_helipads_3", "zone_helipads_4", "zone_helipads_portal_room"];
@@ -442,7 +442,7 @@ function function_dde97037() {
   flag::set("connect_tv_to_cinema_concessions");
 }
 
-function function_44b1279a() {
+function minimap_update() {
   self notify("b16a9f8e903683d");
   self endon("b16a9f8e903683d");
   self endon(#"disconnect", #"death");
@@ -491,8 +491,8 @@ function function_44b1279a() {
   }
 }
 
-function setupminimap(material, var_da0dddd2) {
-  corners = territory::function_1f583d2e("minimap_corner", "targetname");
+function setupminimap(material, area_name) {
+  corners = territory::get_ent_array("minimap_corner", "targetname");
   var_32af51c9 = [];
   var_aa9f20e7 = [];
 
@@ -519,11 +519,11 @@ function setupminimap(material, var_da0dddd2) {
 
   assert(var_32af51c9.size == 2 && var_aa9f20e7.size == 2, "<dev string:x49>");
 
-  if(var_da0dddd2 == "tunnel") {
+  if(area_name == "tunnel") {
     self compass::function_d6cba2e9(material, var_32af51c9[0].origin[0], var_32af51c9[0].origin[1], var_32af51c9[1].origin[0], var_32af51c9[1].origin[1]);
   }
 
-  if(var_da0dddd2 == "amerika") {
+  if(area_name == "amerika") {
     self compass::function_d6cba2e9(material, var_aa9f20e7[0].origin[0], var_aa9f20e7[0].origin[1], var_aa9f20e7[1].origin[0], var_aa9f20e7[1].origin[1]);
   }
 }
@@ -699,7 +699,7 @@ function function_49779a9c() {
 
 function private function_8d8f7e79(a_ents) {
   e_door = a_ents[#"zipline_door"];
-  e_door function_619a5c20();
+  e_door pingable();
   e_door.var_72910c52 = zm_utility::function_4a4cf79a(#"hash_1b7c3d825c8b5c1a", e_door.origin);
 }
 
@@ -714,7 +714,7 @@ function private function_2a1cfabb(a_ents) {
 
 function private function_f63d1381(a_ents) {
   e_door = a_ents[#"zipline_door"];
-  e_door function_619a5c20();
+  e_door pingable();
 }
 
 function private function_88c5fdab(a_ents) {

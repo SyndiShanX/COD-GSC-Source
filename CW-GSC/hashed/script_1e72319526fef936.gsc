@@ -42,7 +42,7 @@ function private preinit() {
 
 function function_ea2db6a9(instance) {
   var_d4f4d124 = isDefined(instance.contentgroups[#"hash_1381b446e6ab7a37"]) ? instance.contentgroups[#"hash_1381b446e6ab7a37"] : [];
-  instance.var_75bfdd78 = isDefined(instance.contentgroups[#"teleport"]) ? instance.contentgroups[#"teleport"] : [];
+  instance.a_s_teleports = isDefined(instance.contentgroups[#"teleport"]) ? instance.contentgroups[#"teleport"] : [];
   instance.a_triggers = [];
   v_offset = (0, 0, -32);
   level.var_ff7bf48c = [];
@@ -87,8 +87,8 @@ function function_1c5803d9(eventstruct) {
   mdl_portal = self.mdl_portal;
   var_85e930e6 = [];
 
-  if(!isDefined(var_2b357ce9.s_teleport) && isarray(instance.var_75bfdd78)) {
-    var_2b357ce9.s_teleport = array::function_a3b0f814(instance.var_75bfdd78, 0);
+  if(!isDefined(var_2b357ce9.s_teleport) && isarray(instance.a_s_teleports)) {
+    var_2b357ce9.s_teleport = array::function_a3b0f814(instance.a_s_teleports, 0);
   }
 
   s_teleport = var_2b357ce9.s_teleport;
@@ -131,8 +131,8 @@ function function_1c5803d9(eventstruct) {
       }
     }
 
-    if(!is_true(vehicle.var_b591d382)) {
-      vehicle.var_b591d382 = 1;
+    if(!is_true(vehicle.is_teleporting)) {
+      vehicle.is_teleporting = 1;
       vehicle makevehicleunusable();
     }
 
@@ -197,9 +197,9 @@ function private function_dda69211(player, vehicle, var_2b357ce9) {
 
     if(isDefined(vehicle)) {
       vehicle clientfield::increment("" + #"vehicle_teleport");
-      var_9cfd0ea9 = vehicle getvehoccupants();
+      a_riders = vehicle getvehoccupants();
 
-      foreach(rider in var_9cfd0ea9) {
+      foreach(rider in a_riders) {
         rider unlink();
       }
     }
@@ -251,7 +251,7 @@ function private function_dda69211(player, vehicle, var_2b357ce9) {
     if(isDefined(vehicle)) {
       vehicle val::reset_all(#"hash_2ff0859bce056c66");
       vehicle makevehicleusable();
-      vehicle.var_b591d382 = undefined;
+      vehicle.is_teleporting = undefined;
     }
 
     wait 3;
@@ -285,7 +285,7 @@ function function_a41c43bd(var_2b357ce9, mdl_portal, vehicle) {
   }
 
   s_teleport = mdl_portal.s_teleport;
-  v_powerup = namespace_77bd50da::function_81cad6d6(s_teleport.v_launch / 35, s_teleport.angles[1]) + s_teleport.origin;
+  v_powerup = namespace_77bd50da::rotate_vector(s_teleport.v_launch / 35, s_teleport.angles[1]) + s_teleport.origin;
   powerup = util::spawn_model("tag_origin", v_powerup);
 
   if(isDefined(powerup)) {

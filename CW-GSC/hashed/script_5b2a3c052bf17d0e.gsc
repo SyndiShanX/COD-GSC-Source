@@ -35,7 +35,7 @@ function preinit() {
     return;
   }
 
-  content_manager::register_script(#"hash_77bdab265fe2ca2c", &function_e7e5c90d);
+  content_manager::register_script(#"jump_pads", &function_e7e5c90d);
   clientfield::register("scriptmover", "jump_pad_active", 1, 1, "int");
   clientfield::register("scriptmover", "jump_pad_essence_fx", 1, 1, "int");
   clientfield::register("scriptmover", "jump_pad_amb_sound_lp", 1, 1, "int");
@@ -49,8 +49,8 @@ function function_4317fa79(destination) {
   }
 
   foreach(s_location in destination.locations) {
-    if(isDefined(s_location.instances[#"hash_77bdab265fe2ca2c"])) {
-      content_manager::spawn_instance(s_location.instances[#"hash_77bdab265fe2ca2c"]);
+    if(isDefined(s_location.instances[#"jump_pads"])) {
+      content_manager::spawn_instance(s_location.instances[#"jump_pads"]);
       break;
     }
   }
@@ -108,7 +108,7 @@ function private function_e7e5c90d(s_instance) {
     }
 
     s_instance.var_193b9763[s_instance.var_193b9763.size] = var_5207017;
-    var_5207017.var_30b30aea = content_manager::spawn_script_model(var_5207017, #"hash_2ce231d4d16efcac", 1);
+    var_5207017.var_30b30aea = content_manager::spawn_script_model(var_5207017, #"p9_zm_gold_jumppads_machine_carver", 1);
     var_5207017.var_30b30aea hide();
     var_5207017.var_126a8ffb = content_manager::spawn_script_model(var_5207017, #"hash_31994e81355d0644");
     var_5207017.var_126a8ffb setforcenocull();
@@ -240,10 +240,10 @@ function function_59d43f02(var_5207017, player, var_545e45) {
   }
 
   visionset_mgr::activate("overlay", "sr_jump_pad_visionset", player);
-  var_91418561 = getdvarint(#"bg_gravity", 800);
+  n_gravity = getdvarint(#"bg_gravity", 800);
 
   if(isDefined(var_5207017.s_target)) {
-    v_launch = vectorNormalize(var_5207017.s_target.origin - player.origin) * var_91418561;
+    v_launch = vectorNormalize(var_5207017.s_target.origin - player.origin) * n_gravity;
     v_dest = var_5207017.s_target.origin;
 
     debugstar(var_5207017.s_target.origin, 500, (0, 1, 0));
@@ -253,15 +253,15 @@ function function_59d43f02(var_5207017, player, var_545e45) {
     v_launch = (0, 450, 1300);
   }
 
-  v_launch = namespace_77bd50da::function_81cad6d6(v_launch, var_5207017.angles[1]);
+  v_launch = namespace_77bd50da::rotate_vector(v_launch, var_5207017.angles[1]);
 
   if(!isDefined(v_dest)) {
     v_dest = v_launch + player.origin;
   }
 
   n_dist = distance(player.origin, v_dest);
-  var_fd6264f6 = n_dist / var_91418561;
-  playSoundAtPosition(#"hash_7ff8d8dbf89e6f0d", player.origin);
+  var_fd6264f6 = n_dist / n_gravity;
+  playSoundAtPosition(#"evt_jumppad_fling", player.origin);
   player clientfield::set_to_player("jump_pad_wind_sound", 1);
   player thread flag::set_for_time(2, #"hash_4e5451766f737d14");
 
@@ -285,7 +285,7 @@ function function_59d43f02(var_5207017, player, var_545e45) {
     }
   }
 
-  player thread function_4267539(var_545e45);
+  player thread track_velocity(var_545e45);
 
   if(isDefined(level.var_24a17c08)) {
     player thread[[level.var_24a17c08]]();
@@ -311,7 +311,7 @@ function private function_340128cf(v_launch, vehicle) {
   }
 }
 
-function private function_4267539(var_545e45) {
+function private track_velocity(var_545e45) {
   self endon(#"death");
 
   if(isDefined(var_545e45)) {

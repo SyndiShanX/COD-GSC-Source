@@ -42,13 +42,13 @@ function function_14354831() {
     foreach(s_part in a_s_parts) {
       if(s_part.script_noteworthy === "barrier_align") {
         var_721fe4cf = self.origin;
-        var_d298ff03 = self.angles;
+        v_old_angles = self.angles;
         self.origin = s_part.origin;
         self.angles = s_part.angles;
         self.e_barricade = content_manager::spawn_zbarrier(self, "zbarrier_" + self.zbarrier);
         self.e_barricade.targetname = str_target;
         self.origin = var_721fe4cf;
-        self.angles = var_d298ff03;
+        self.angles = v_old_angles;
         break;
       }
     }
@@ -77,7 +77,7 @@ function function_14354831() {
       }
 
       self.zbarrier = targets[j];
-      self.zbarrier function_619a5c20();
+      self.zbarrier pingable();
       self.zbarrier zm_ping::function_550247bd(12);
       self.zbarrier.chunk_health = [];
 

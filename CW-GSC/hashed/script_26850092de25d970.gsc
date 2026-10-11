@@ -66,8 +66,8 @@ function main(str_skipto, b_starting) {
     level.raid_car = getEnt("raid_car", "targetname");
     level thread scene::play("scene_tkd_hit2_intro_bar_v2", "Adler_part_3", [level.raid_car]);
 
-    if(isDefined(level.var_d7d201ba)) {
-      player flag::set(level.var_d7d201ba);
+    if(isDefined(level.str_player_start_flag)) {
+      player flag::set(level.str_player_start_flag);
     }
   }
 
@@ -110,11 +110,11 @@ function main(str_skipto, b_starting) {
   thread namespace_a052577e::function_11062617();
   level flag::wait_till("flag_setup_apartment_combat");
   level notify(#"hash_1ab7d54e8692f78a");
-  level thread savegame::function_7790f03(1);
+  level thread savegame::checkpoint_save_asap(1);
   level thread scene::play("scene_tkd_hit2_adler_alley", "Yard");
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
@@ -211,4 +211,4 @@ function init_flags() {
 
 function init_clientfields() {}
 
-function function_22b7fffd() {}
+function init_scenes() {}

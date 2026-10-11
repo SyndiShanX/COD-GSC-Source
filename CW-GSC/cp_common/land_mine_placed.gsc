@@ -67,7 +67,7 @@ function function_fbf401a1(b_shot = 0) {
 
 function function_72be8a4f(eattacker, einflictor, weapon, meansofdeath, damage) {
   if(isPlayer(self)) {
-    self shellshock(#"hash_160e95f6745dddf3", 0.5);
+    self shellshock(#"land_mine_shellshock", 0.5);
   }
 }
 
@@ -112,7 +112,7 @@ function function_2371350(s_info) {
 
 function function_dc857fe9(s_notify) {
   if(isDefined(self.var_c1286f25)) {
-    level namespace_61e6d095::remove(self.var_c1286f25);
+    level scripted_widgets::remove(self.var_c1286f25);
   }
 
   badplace_delete(self.var_a003405c);

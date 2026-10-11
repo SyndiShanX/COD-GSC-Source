@@ -32,7 +32,7 @@ function enabled(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   if(bwastimejump) {
     self renderoverridebundle::function_f4eab437(fieldname, 1, #"rob_sonar_set_enemy");
     function_e5a9ae33(fieldname, self getentitynumber(), level.var_a03cd507.var_c23de6e6);
-    self thread function_c2aa1607(fieldname);
+    self thread counteruav_think(fieldname);
     self.killstreakbundle = level.var_a03cd507;
     return;
   }
@@ -40,7 +40,7 @@ function enabled(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   self notify(#"counteruav_off");
 }
 
-function function_c2aa1607(localclientnum) {
+function counteruav_think(localclientnum) {
   arrayremovevalue(level.counteruavs, undefined, 0);
   level.counteruavs[level.counteruavs.size] = self;
   self waittill(#"death", #"counteruav_off");

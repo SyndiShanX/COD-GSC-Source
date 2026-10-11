@@ -98,8 +98,8 @@ function scoreeventsr(params) {
 function function_b122e75f() {
   var_237b2ba0 = "";
 
-  if(isDefined(level.var_b48509f9)) {
-    var_237b2ba0 = "event_complete_capsule_" + level.var_b48509f9;
+  if(isDefined(level.star_rating)) {
+    var_237b2ba0 = "event_complete_capsule_" + level.star_rating;
     level doscoreeventcallback("scoreEventZM", {
       #attacker: self, #scoreevent: var_237b2ba0
     });

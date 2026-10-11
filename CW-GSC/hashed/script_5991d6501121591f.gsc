@@ -17,7 +17,7 @@
 #namespace namespace_232ddc52;
 
 function private event_handler[level_preinit] function_b489bb7b(eventstruct) {
-  snd::function_5e69f468(&_objective);
+  snd::skipto_init(&_objective);
 }
 
 function private event_handler[event_cc819519] function_686b88aa(eventstruct) {
@@ -41,24 +41,24 @@ function private _objective(objective) {
 }
 
 function music(str_msg, n_delay = 0, var_37a6c96) {
-  level thread function_7edafa59(str_msg, n_delay, var_37a6c96);
+  level thread music_handler(str_msg, n_delay, var_37a6c96);
   level thread function_e80c0ccf(str_msg);
 }
 
-function function_7edafa59(str_msg, n_delay, var_37a6c96) {
+function music_handler(str_msg, n_delay, var_37a6c96) {
   switch (str_msg) {
-    case #"hash_15fb340cedd54be0":
+    case #"9.0_c4":
     case #"12.0_contact":
     case #"6.0_courtyard":
-    case #"hash_3a9df7a31adcbe86":
-    case #"hash_43dc315825596956":
-    case #"hash_4a2df20c6bf3fde8":
+    case #"8.0_cctv":
+    case #"2.0_tension":
+    case #"11.0_nukeroom":
     case #"14.0_airhook":
     case #"13.1_rooftop":
     case #"1.0_intro":
     case #"4.0_palace":
-    case #"hash_5caedcc33eee2ae5":
-    case #"hash_68e666f52326ec97":
+    case #"13.0_rooftop_transition":
+    case #"10.0_skirmish":
     case #"5.0_minefield":
     case #"3.0_plaza":
       if(isDefined(var_37a6c96)) {
@@ -68,12 +68,12 @@ function function_7edafa59(str_msg, n_delay, var_37a6c96) {
       music::setmusicstate(str_msg, undefined, n_delay);
       break;
     case #"hash_5d430841fdfe87c0":
-      music::function_edda155f(str_msg, n_delay);
+      music::playstinger(str_msg, n_delay);
       break;
     case #"14.2_airhook_lazar":
     case #"14.1_airhook_park":
     case #"14.3_airhook_fail":
-      music::function_edda155f(str_msg, n_delay);
+      music::playstinger(str_msg, n_delay);
       music::setmusicstate("none", undefined, n_delay);
       break;
     case #"hash_2193c42e21ea2e63":
@@ -103,10 +103,10 @@ function function_e80c0ccf(str_msg) {
     case #"4.0_palace":
       snd::client_msg(#"musictrack_cp_cuba_2");
       break;
-    case #"hash_3a9df7a31adcbe86":
+    case #"8.0_cctv":
       snd::client_msg(#"musictrack_cp_cuba_3");
       break;
-    case #"hash_4a2df20c6bf3fde8":
+    case #"11.0_nukeroom":
       snd::client_msg(#"musictrack_cp_cuba_4");
       break;
     case #"13.1_rooftop":

@@ -103,8 +103,8 @@ function function_5e379549(a_ents) {
 
 function function_46c6575() {
   var_f391a8ff = getspawnerarray("lobby_and_checkpoint_civ_walker", "targetname");
-  var_51f76890 = getspawnerarray("atrium_civ_walker", "targetname");
-  var_e0213fec = arraycombine(var_f391a8ff, var_51f76890);
+  atrium_walkers = getspawnerarray("atrium_civ_walker", "targetname");
+  var_e0213fec = arraycombine(var_f391a8ff, atrium_walkers);
 
   foreach(spawner in var_e0213fec) {
     spawner spawner::add_spawn_function(&function_ff82cb1a);
@@ -112,8 +112,8 @@ function function_46c6575() {
   }
 }
 
-function function_1b3a9d9f(var_620e7062, scenename, var_4d5f9024, var_daffc6cc) {
-  if(var_620e7062 == "play") {
+function function_1b3a9d9f(verb, scenename, var_4d5f9024, var_daffc6cc) {
+  if(verb == "play") {
     if(isDefined(var_daffc6cc) && var_daffc6cc == 1) {
       if(isDefined(var_4d5f9024)) {
         if(level.var_d22e9216.size < level.var_89838737) {
@@ -137,7 +137,7 @@ function function_1b3a9d9f(var_620e7062, scenename, var_4d5f9024, var_daffc6cc) 
     return;
   }
 
-  if(var_620e7062 == "stop") {
+  if(verb == "stop") {
     if(isDefined(var_daffc6cc) && var_daffc6cc == 1) {
       if(isDefined(var_4d5f9024)) {
         level thread scene::stop(scenename, var_4d5f9024);
@@ -1330,14 +1330,14 @@ function function_6353b83d() {
     eye_pos = level.player getplayercamerapos();
     eye_angles = level.player getplayerangles();
     eye_dir = anglesToForward(eye_angles);
-    var_dd9a54cd = cos(45);
+    fov_cos = cos(45);
     target_pos = self.origin + (0, 0, 30);
 
-    if(util::within_fov(eye_pos, eye_angles, target_pos, var_dd9a54cd)) {
+    if(util::within_fov(eye_pos, eye_angles, target_pos, fov_cos)) {
       if(distance > max_distance) {
-        var_d94cabb4 = sighttracepassed(level.player getEye(), target_pos, 0, undefined);
+        b_sight_trace = sighttracepassed(level.player getEye(), target_pos, 0, undefined);
 
-        if(!var_d94cabb4) {
+        if(!b_sight_trace) {
           if(count >= max_time) {
             break;
           } else {
@@ -1378,7 +1378,7 @@ function function_ff82cb1a(a_ents) {
   while(isDefined(level.player)) {
     if(istouching(self.origin, level.player, (18, 18, 100)) && var_ed8b22a4 < 2) {
       self.goalradius = 2048;
-      var_f94ad79f = spawner::function_461ce3e9();
+      original_path = spawner::function_461ce3e9();
       self setgoal(self.origin);
       self ai::look_at(level.player, 0, undefined, 5, 0, undefined, 1);
       self dialogue::queue(var_26a3b8ce[var_ed8b22a4]);
@@ -1392,7 +1392,7 @@ function function_ff82cb1a(a_ents) {
 
       var_ed8b22a4++;
       self pushplayer(0);
-      thread spawner::go_to_node(var_f94ad79f);
+      thread spawner::go_to_node(original_path);
       self.goalradius = 16;
       continue;
     }
@@ -1420,7 +1420,7 @@ function function_13c0420d(flag) {
 function function_24a7c694() {
   level endon(#"flag_west_hall_civ_walker");
   trigger = getEnt("west_hall_civ_walker_trigger", "targetname");
-  trigger.door = trigger namespace_e77bf565::function_3203f263();
+  trigger.door = trigger namespace_e77bf565::check_for_door();
   trigger.door doors::waittill_door_opened();
   level flag::set("flag_west_hall_civ_walker");
 }
@@ -1827,19 +1827,19 @@ function function_4cc65f99(a_ents) {
 
 function function_9b3f6c1e(a_ents) {
   level endon(#"kgb_aslt_elev_down_completed");
-  var_4f3a9c97 = a_ents[#"hash_72c69989e63ce232"];
+  civ_female = a_ents[#"civ_female"];
   civ_male = a_ents[#"civ_male"];
 
-  if(isDefined(var_4f3a9c97._scene_object._o_scene._e_root.targetname) && issubstr(var_4f3a9c97._scene_object._o_scene._e_root.targetname, "lobby")) {
+  if(isDefined(civ_female._scene_object._o_scene._e_root.targetname) && issubstr(civ_female._scene_object._o_scene._e_root.targetname, "lobby")) {
     script_struct = struct::get("scene_kgb_ambient_talking_duo_standing_mixed_a_lobby_triggerstruct");
   } else {
     script_struct = struct::get("scene_kgb_ambient_talking_duo_standing_mixed_a_atrium_triggerstruct");
   }
 
-  var_4f3a9c97 endon(#"death", #"delete");
+  civ_female endon(#"death", #"delete");
   civ_male endon(#"death", #"delete");
 
-  if(issubstr(var_4f3a9c97._scene_object._o_scene._e_root.targetname, "atrium")) {
+  if(issubstr(civ_female._scene_object._o_scene._e_root.targetname, "atrium")) {
     location = "atrium";
   } else {
     location = "lobby";
@@ -1851,13 +1851,13 @@ function function_9b3f6c1e(a_ents) {
 
   waitframe(1);
   trigger = spawn("trigger_radius", script_struct.origin, 0, script_struct.radius, script_struct.height);
-  var_4f3a9c97.trigger = trigger;
-  var_4f3a9c97 callback::function_d8abfc3d(#"on_ai_killed", &function_dc6db93b);
-  var_4f3a9c97 callback::function_d8abfc3d(#"on_entity_deleted", &function_dc6db93b);
+  civ_female.trigger = trigger;
+  civ_female callback::function_d8abfc3d(#"on_ai_killed", &function_dc6db93b);
+  civ_female callback::function_d8abfc3d(#"on_entity_deleted", &function_dc6db93b);
   trigger waittill(#"trigger");
 
-  if(isDefined(var_4f3a9c97.trigger)) {
-    var_4f3a9c97.trigger delete();
+  if(isDefined(civ_female.trigger)) {
+    civ_female.trigger delete();
   }
 
   while(true) {
@@ -1865,27 +1865,27 @@ function function_9b3f6c1e(a_ents) {
       arrayinsert(level.var_f83c3b53.locations[location].var_a4ec1473, "scene_kgb_ambient_talking_duo_standing_mixed_a", 0);
     }
 
-    if(isDefined(var_4f3a9c97._scene_object._o_scene._e_root.targetname) && issubstr(var_4f3a9c97._scene_object._o_scene._e_root.targetname, "atrium")) {
-      var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09240_rfc1_itshumblingtose_c5");
+    if(isDefined(civ_female._scene_object._o_scene._e_root.targetname) && issubstr(civ_female._scene_object._o_scene._e_root.targetname, "atrium")) {
+      civ_female dialogue::queue("vox_cp_rkgb_09240_rfc1_itshumblingtose_c5");
       wait randomfloatrange(0.5, 1.5);
       civ_male dialogue::queue("vox_cp_rkgb_09240_rmc1_yesitsquitebrea_a6");
       wait randomfloatrange(0.5, 1.5);
-      var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09240_rfc1_thearchitecture_01");
+      civ_female dialogue::queue("vox_cp_rkgb_09240_rfc1_thearchitecture_01");
       civ_male dialogue::queue("vox_cp_rkgb_09240_rmc1_laughtheysayyou_fd");
       wait randomfloatrange(0.5, 1.5);
-      var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09240_rfc1_sergeitheycanpr_24");
+      civ_female dialogue::queue("vox_cp_rkgb_09240_rfc1_sergeitheycanpr_24");
       civ_male dialogue::queue("vox_cp_rkgb_09240_rmc1_lightlaughyesso_a4");
     } else {
       civ_male dialogue::queue("vox_cp_rkgb_09320_rmc4_lastnightwefina_e9");
       wait randomfloatrange(0.5, 1.5);
-      var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09320_rfc2_youwenttoolomou_af");
+      civ_female dialogue::queue("vox_cp_rkgb_09320_rfc2_youwenttoolomou_af");
       wait randomfloatrange(0.5, 1.5);
       civ_male dialogue::queue("vox_cp_rkgb_09320_rmc4_tellthemeveryth_41");
       wait randomfloatrange(0.5, 1.5);
-      var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09320_rfc2_thestroganoffis_84");
+      civ_female dialogue::queue("vox_cp_rkgb_09320_rfc2_thestroganoffis_84");
       wait randomfloatrange(0.5, 1.5);
       civ_male dialogue::queue("vox_cp_rkgb_09320_rmc4_haveyoueverbeen_a8");
-      var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09320_rfc2_dontsayitiateth_77");
+      civ_female dialogue::queue("vox_cp_rkgb_09320_rfc2_dontsayitiateth_77");
       wait randomfloatrange(0.5, 1.5);
       civ_male dialogue::queue("vox_cp_rkgb_09320_rmc4_ohirinaiwasjust_53");
     }
@@ -1957,11 +1957,11 @@ function function_9feb02eb(a_ents, str_shot) {
 
 function function_26300964(a_ents) {
   level endon(#"kgb_aslt_elev_down_completed");
-  var_4f3a9c97 = a_ents[#"actor 2"];
+  civ_female = a_ents[#"actor 2"];
   civ_male = a_ents[#"actor 1"];
-  var_4f3a9c97 endon(#"death", #"delete");
+  civ_female endon(#"death", #"delete");
   civ_male endon(#"death", #"delete");
-  var_4f3a9c97 thread function_3aa52402();
+  civ_female thread function_3aa52402();
   civ_male thread function_3aa52402();
 
   while(!function_7042f8ce("scene_kgb_ambient_breakroom_counter_duo", "breakroom")) {
@@ -1969,14 +1969,14 @@ function function_26300964(a_ents) {
   }
 
   waitframe(1);
-  trigger = spawn("trigger_radius", var_4f3a9c97.origin, 0, level.var_9aa07a0, level.var_30b3395f);
-  var_4f3a9c97.trigger = trigger;
-  var_4f3a9c97 callback::function_d8abfc3d(#"on_ai_killed", &function_dc6db93b);
-  var_4f3a9c97 callback::function_d8abfc3d(#"on_entity_deleted", &function_dc6db93b);
+  trigger = spawn("trigger_radius", civ_female.origin, 0, level.var_9aa07a0, level.var_30b3395f);
+  civ_female.trigger = trigger;
+  civ_female callback::function_d8abfc3d(#"on_ai_killed", &function_dc6db93b);
+  civ_female callback::function_d8abfc3d(#"on_entity_deleted", &function_dc6db93b);
   trigger waittill(#"trigger");
 
-  if(isDefined(var_4f3a9c97.trigger)) {
-    var_4f3a9c97.trigger delete();
+  if(isDefined(civ_female.trigger)) {
+    civ_female.trigger delete();
   }
 
   while(true) {
@@ -1986,27 +1986,27 @@ function function_26300964(a_ents) {
 
     civ_male function_1e9f3294("vox_cp_rkgb_09252_rmc2_icantbelievethe_76");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 function_1e9f3294("vox_cp_rkgb_09252_rfc1_idontmindititdo_80");
+    civ_female function_1e9f3294("vox_cp_rkgb_09252_rfc1_idontmindititdo_80");
     wait randomfloatrange(0.5, 1.5);
     civ_male function_1e9f3294("vox_cp_rkgb_09252_rmc2_withenoughsugar_0c");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 function_1e9f3294("vox_cp_rkgb_09252_rfc1_ialwaysthoughti_4f");
+    civ_female function_1e9f3294("vox_cp_rkgb_09252_rfc1_ialwaysthoughti_4f");
     wait randomfloatrange(0.5, 1.5);
     civ_male function_1e9f3294("vox_cp_rkgb_09252_rmc2_whyisthat_44");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 function_1e9f3294("vox_cp_rkgb_09252_rfc1_imeanwhodoesntw_44");
+    civ_female function_1e9f3294("vox_cp_rkgb_09252_rfc1_imeanwhodoesntw_44");
     wait randomfloatrange(0.5, 1.5);
     civ_male function_1e9f3294("vox_cp_rkgb_09252_rmc2_cannotsayihavee_c2");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 function_1e9f3294("vox_cp_rkgb_09252_rfc1_andprobablyalit_dc");
+    civ_female function_1e9f3294("vox_cp_rkgb_09252_rfc1_andprobablyalit_dc");
     wait randomfloatrange(0.5, 1.5);
     civ_male function_1e9f3294("vox_cp_rkgb_09252_rmc2_dontyouworkinle_47");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 function_1e9f3294("vox_cp_rkgb_09252_rfc1_yes_5f");
+    civ_female function_1e9f3294("vox_cp_rkgb_09252_rfc1_yes_5f");
     wait randomfloatrange(0.5, 1.5);
     civ_male function_1e9f3294("vox_cp_rkgb_09252_rmc2_thatcanbeexciti_ee");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 function_1e9f3294("vox_cp_rkgb_09252_rfc1_isupposeso_a8");
+    civ_female function_1e9f3294("vox_cp_rkgb_09252_rfc1_isupposeso_a8");
     arrayremovevalue(level.var_f83c3b53.locations[#"breakroom"].var_a4ec1473, "scene_kgb_ambient_breakroom_counter_duo");
     wait randomfloatrange(level.var_4ce95d22, level.var_bb9797b9);
 
@@ -2018,11 +2018,11 @@ function function_26300964(a_ents) {
 
 function function_a7b81626(a_ents) {
   level endon(#"kgb_aslt_elev_down_completed");
-  var_4f3a9c97 = a_ents[#"actor 2"];
+  civ_female = a_ents[#"actor 2"];
   civ_male = a_ents[#"actor 1"];
-  var_4f3a9c97 endon(#"death", #"delete");
+  civ_female endon(#"death", #"delete");
   civ_male endon(#"death", #"delete");
-  var_4f3a9c97 thread function_3aa52402();
+  civ_female thread function_3aa52402();
   civ_male thread function_3aa52402();
 
   while(!function_7042f8ce("scene_kgb_ambient_breakroom_watercooler_duo", "breakroom")) {
@@ -2030,14 +2030,14 @@ function function_a7b81626(a_ents) {
   }
 
   waitframe(1);
-  trigger = spawn("trigger_radius", var_4f3a9c97.origin, 0, level.var_9aa07a0, level.var_30b3395f);
-  var_4f3a9c97.trigger = trigger;
-  var_4f3a9c97 callback::function_d8abfc3d(#"on_ai_killed", &function_dc6db93b);
-  var_4f3a9c97 callback::function_d8abfc3d(#"on_entity_deleted", &function_dc6db93b);
+  trigger = spawn("trigger_radius", civ_female.origin, 0, level.var_9aa07a0, level.var_30b3395f);
+  civ_female.trigger = trigger;
+  civ_female callback::function_d8abfc3d(#"on_ai_killed", &function_dc6db93b);
+  civ_female callback::function_d8abfc3d(#"on_entity_deleted", &function_dc6db93b);
   trigger waittill(#"trigger");
 
-  if(isDefined(var_4f3a9c97.trigger)) {
-    var_4f3a9c97.trigger delete();
+  if(isDefined(civ_female.trigger)) {
+    civ_female.trigger delete();
   }
 
   while(true) {
@@ -2047,23 +2047,23 @@ function function_a7b81626(a_ents) {
 
     civ_male function_1e9f3294("vox_cp_rkgb_09254_rmc3_iamprettysurehe_f4");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 function_1e9f3294("vox_cp_rkgb_09254_rfc2_whatgaveitaway_65");
+    civ_female function_1e9f3294("vox_cp_rkgb_09254_rfc2_whatgaveitaway_65");
     wait randomfloatrange(0.5, 1.5);
     civ_male function_1e9f3294("vox_cp_rkgb_09254_rmc3_besidesthebagsu_63");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 function_1e9f3294("vox_cp_rkgb_09254_rfc2_arentyouasnoop_70");
+    civ_female function_1e9f3294("vox_cp_rkgb_09254_rfc2_arentyouasnoop_70");
     wait randomfloatrange(0.5, 1.5);
     civ_male function_1e9f3294("vox_cp_rkgb_09254_rmc3_iamjustlookingo_7f");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 function_1e9f3294("vox_cp_rkgb_09254_rfc2_itisabusytimefo_0e");
+    civ_female function_1e9f3294("vox_cp_rkgb_09254_rfc2_itisabusytimefo_0e");
     wait randomfloatrange(0.5, 1.5);
     civ_male function_1e9f3294("vox_cp_rkgb_09254_rmc3_idontthinkhisas_87");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 function_1e9f3294("vox_cp_rkgb_09254_rfc2_yeahthatguyispr_0d");
+    civ_female function_1e9f3294("vox_cp_rkgb_09254_rfc2_yeahthatguyispr_0d");
     wait randomfloatrange(0.5, 1.5);
     civ_male function_1e9f3294("vox_cp_rkgb_09254_rmc3_thatdoesntsurpr_f6");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 function_1e9f3294("vox_cp_rkgb_09254_rfc2_icantbelievehes_29");
+    civ_female function_1e9f3294("vox_cp_rkgb_09254_rfc2_icantbelievehes_29");
     wait randomfloatrange(0.5, 1.5);
     civ_male function_1e9f3294("vox_cp_rkgb_09254_rmc3_youmighthaveapo_6b");
     arrayremovevalue(level.var_f83c3b53.locations[#"breakroom"].var_a4ec1473, "scene_kgb_ambient_breakroom_watercooler_duo");
@@ -2077,9 +2077,9 @@ function function_a7b81626(a_ents) {
 
 function function_6b4f4409(a_ents) {
   level endon(#"kgb_aslt_elev_down_completed");
-  var_4f3a9c97 = a_ents[#"hash_316f37d6bad3208e"];
+  civ_female = a_ents[#"hash_316f37d6bad3208e"];
   civ_male = a_ents[#"hash_65ce105def67e4a1"];
-  var_4f3a9c97 endon(#"death", #"delete");
+  civ_female endon(#"death", #"delete");
   civ_male endon(#"death", #"delete");
 
   if(!isDefined(level.var_a88fc2c9)) {
@@ -2104,18 +2104,18 @@ function function_6b4f4409(a_ents) {
 
     civ_male dialogue::queue("vox_cp_rkgb_09260_rmc1_comeonewaillpic_b3");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09260_rfc1_wouldntyouknowi_c4");
+    civ_female dialogue::queue("vox_cp_rkgb_09260_rfc1_wouldntyouknowi_c4");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09260_rmc1_nikoyoutwoneedt_44");
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09260_rfc1_laughohyeswellg_27");
+    civ_female dialogue::queue("vox_cp_rkgb_09260_rfc1_laughohyeswellg_27");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09260_rmc1_ewaimanintellig_71");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09260_rfc1_unrivaledpersis_4e");
+    civ_female dialogue::queue("vox_cp_rkgb_09260_rfc1_unrivaledpersis_4e");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09260_rmc1_thenitson_18");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09260_rfc1_ifbyonyoumeanmy_4e");
+    civ_female dialogue::queue("vox_cp_rkgb_09260_rfc1_ifbyonyoumeanmy_4e");
     arrayremovevalue(level.var_f83c3b53.locations[#"mailroom"].var_a4ec1473, "scene_kgb_ambient_talking_duo_desk_a_mixed");
     wait randomfloatrange(level.var_4ce95d22, level.var_bb9797b9);
 
@@ -2127,11 +2127,11 @@ function function_6b4f4409(a_ents) {
 
 function function_45eaefef(a_ents) {
   level endon(#"kgb_aslt_elev_down_completed");
-  var_4f3a9c97 = a_ents[#"hash_72c69989e63ce232"];
+  civ_female = a_ents[#"civ_female"];
   civ_male = a_ents[#"civ_male"];
   var_6c6006 = a_ents[#"hash_6e83c9503d67b052"];
   script_struct = struct::get("scene_kgb_ambient_talking_trio_standing_mixed_a_triggerstruct");
-  var_4f3a9c97 endon(#"death", #"delete");
+  civ_female endon(#"death", #"delete");
   civ_male endon(#"death", #"delete");
   var_6c6006 endon(#"death", #"delete");
 
@@ -2141,13 +2141,13 @@ function function_45eaefef(a_ents) {
 
   waitframe(1);
   trigger = spawn("trigger_radius", script_struct.origin, 0, script_struct.radius, script_struct.height);
-  var_4f3a9c97.trigger = trigger;
-  var_4f3a9c97 callback::function_d8abfc3d(#"on_ai_killed", &function_dc6db93b);
-  var_4f3a9c97 callback::function_d8abfc3d(#"on_entity_deleted", &function_dc6db93b);
+  civ_female.trigger = trigger;
+  civ_female callback::function_d8abfc3d(#"on_ai_killed", &function_dc6db93b);
+  civ_female callback::function_d8abfc3d(#"on_entity_deleted", &function_dc6db93b);
   trigger waittill(#"trigger");
 
-  if(isDefined(var_4f3a9c97.trigger)) {
-    var_4f3a9c97.trigger delete();
+  if(isDefined(civ_female.trigger)) {
+    civ_female.trigger delete();
   }
 
   while(true) {
@@ -2155,11 +2155,11 @@ function function_45eaefef(a_ents) {
       arrayinsert(level.var_f83c3b53.locations[#"lobby"].var_a4ec1473, "scene_kgb_ambient_talking_trio_standing_mixed_a", 0);
     }
 
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09265_rmc3_thecabshouldhav_d4");
+    civ_female dialogue::queue("vox_cp_rkgb_09265_rmc3_thecabshouldhav_d4");
     wait randomfloatrange(0.5, 1.5);
     var_6c6006 dialogue::queue("vox_cp_rkgb_09265_rmc2_iconfirmedthepi_78");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09265_rmc3_wecantkeepmrbog_6a");
+    civ_female dialogue::queue("vox_cp_rkgb_09265_rmc3_wecantkeepmrbog_6a");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09265_rfc1_ifwehadwalkedli_6b");
     wait randomfloatrange(0.5, 1.5);
@@ -2285,22 +2285,22 @@ function function_792c3bbe(a_ents) {
     return;
   }
 
-  var_4f3a9c97 = a_ents[#"hash_39f8c33aac6f91c7"];
+  civ_female = a_ents[#"hash_39f8c33aac6f91c7"];
   civ_male = a_ents[#"hash_318b89fa118b1a88"];
   script_struct = struct::get("scene_kgb_ambient_atrium_talk_secretary_triggerstruct");
-  var_4f3a9c97 endon(#"death", #"delete");
+  civ_female endon(#"death", #"delete");
   civ_male endon(#"death", #"delete");
 
-  if(isDefined(var_4f3a9c97)) {
-    if(isDefined(var_4f3a9c97.model) && var_4f3a9c97.model != "c_t9_cp_rus_civ_female_office_01_body_e") {
-      var_4f3a9c97 setModel("c_t9_cp_rus_civ_female_office_01_body_e");
+  if(isDefined(civ_female)) {
+    if(isDefined(civ_female.model) && civ_female.model != "c_t9_cp_rus_civ_female_office_01_body_e") {
+      civ_female setModel("c_t9_cp_rus_civ_female_office_01_body_e");
     }
 
     waitframe(1);
 
-    if(!var_4f3a9c97 isattached("c_t9_ger_civ_female_head04")) {
-      var_4f3a9c97 detach(var_4f3a9c97.head);
-      var_4f3a9c97 attach("c_t9_ger_civ_female_head04");
+    if(!civ_female isattached("c_t9_ger_civ_female_head04")) {
+      civ_female detach(civ_female.head);
+      civ_female attach("c_t9_ger_civ_female_head04");
     }
   }
 
@@ -2329,23 +2329,23 @@ function function_792c3bbe(a_ents) {
   }
 
   while(true) {
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09280_rfc2_howmayihelpyou_83");
+    civ_female dialogue::queue("vox_cp_rkgb_09280_rfc2_howmayihelpyou_83");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09280_rmc2_imheretopickupo_41");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09280_rfc2_andyournamesare_cd");
+    civ_female dialogue::queue("vox_cp_rkgb_09280_rfc2_andyournamesare_cd");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09280_rmc2_yurisuslovandre_dc");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09280_rfc2_letmeseeahyesyo_02");
+    civ_female dialogue::queue("vox_cp_rkgb_09280_rfc2_letmeseeahyesyo_02");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09280_rmc2_yescomrade_66");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09280_rfc2_underordersfrom_a3");
+    civ_female dialogue::queue("vox_cp_rkgb_09280_rfc2_underordersfrom_a3");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09280_rmc2_thatscorrect_3f");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09280_rfc2_illputyourpaper_4d");
+    civ_female dialogue::queue("vox_cp_rkgb_09280_rfc2_illputyourpaper_4d");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09280_rmc2_thankyoucomrade_a8");
     wait randomfloatrange(level.var_4ce95d22, level.var_bb9797b9);
@@ -2357,11 +2357,11 @@ function function_a44bd33e(a_ents, str_shot) {
   civ_male = a_ents[#"hash_318b89fa118b1a88"];
   var_6c6006 = a_ents[#"hash_318b8cfa118b1fa1"];
   var_f5b94aac = a_ents[#"hash_318b8bfa118b1dee"];
-  var_4f3a9c97 = a_ents[#"hash_39f8c33aac6f91c7"];
+  civ_female = a_ents[#"hash_39f8c33aac6f91c7"];
   civ_male endon(#"death", #"delete");
   var_6c6006 endon(#"death", #"delete");
   var_f5b94aac endon(#"death", #"delete");
-  var_4f3a9c97 endon(#"death", #"delete");
+  civ_female endon(#"death", #"delete");
 
   if(isDefined(civ_male)) {
     if(isDefined(civ_male.model) && civ_male.model != "c_t9_ger_civ_male_urban_body1") {
@@ -2402,16 +2402,16 @@ function function_a44bd33e(a_ents, str_shot) {
     }
   }
 
-  if(isDefined(var_4f3a9c97)) {
-    if(isDefined(var_4f3a9c97.model) && var_4f3a9c97.model != "c_t9_cp_rus_civ_female_office_01_body_e") {
-      var_4f3a9c97 setModel("c_t9_cp_rus_civ_female_office_01_body_e");
+  if(isDefined(civ_female)) {
+    if(isDefined(civ_female.model) && civ_female.model != "c_t9_cp_rus_civ_female_office_01_body_e") {
+      civ_female setModel("c_t9_cp_rus_civ_female_office_01_body_e");
     }
 
     waitframe(1);
 
-    if(!var_4f3a9c97 isattached("c_t9_ger_civ_female_head04")) {
-      var_4f3a9c97 detach(var_4f3a9c97.head);
-      var_4f3a9c97 attach("c_t9_ger_civ_female_head04");
+    if(!civ_female isattached("c_t9_ger_civ_female_head04")) {
+      civ_female detach(civ_female.head);
+      civ_female attach("c_t9_ger_civ_female_head04");
     }
   }
 
@@ -2456,9 +2456,9 @@ function function_a44bd33e(a_ents, str_shot) {
 
 function function_858c98d(a_ents) {
   level endon(#"kgb_aslt_elev_down_completed");
-  var_4f3a9c97 = a_ents[#"hash_2b3082be7a0d9955"];
+  civ_female = a_ents[#"hash_2b3082be7a0d9955"];
   civ_male = a_ents[#"hash_338d1396aeba7252"];
-  var_4f3a9c97 endon(#"death", #"delete");
+  civ_female endon(#"death", #"delete");
   civ_male endon(#"death", #"delete");
 
   if(!isDefined(level.var_a88fc2c9)) {
@@ -2481,23 +2481,23 @@ function function_858c98d(a_ents) {
       arrayinsert(level.var_f83c3b53.locations[#"mailroom"].var_a4ec1473, "scene_kgb_ambient_talking_duo_desk_d_mixed", 0);
     }
 
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09290_rfc2_andyousaidyouha_8f");
+    civ_female dialogue::queue("vox_cp_rkgb_09290_rfc2_andyousaidyouha_8f");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09290_rmc1_withcomradeusti_89");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09290_rfc2_couldyourepeaty_9e");
+    civ_female dialogue::queue("vox_cp_rkgb_09290_rfc2_couldyourepeaty_9e");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09290_rmc1_valentinutkin_9a");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09290_rfc2_department_53");
+    civ_female dialogue::queue("vox_cp_rkgb_09290_rfc2_department_53");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09290_rmc1_gdrbureau_8f");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09290_rfc2_andyourbusiness_8e");
+    civ_female dialogue::queue("vox_cp_rkgb_09290_rfc2_andyourbusiness_8e");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09290_rmc1_idrathernotsayr_16");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09290_rfc2_thingsareabitun_4e");
+    civ_female dialogue::queue("vox_cp_rkgb_09290_rfc2_thingsareabitun_4e");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09290_rmc1_thatsfine_ef");
     arrayremovevalue(level.var_f83c3b53.locations[#"mailroom"].var_a4ec1473, "scene_kgb_ambient_talking_duo_desk_d_mixed");
@@ -2511,9 +2511,9 @@ function function_858c98d(a_ents) {
 
 function function_6bd39879(a_ents) {
   level endon(#"kgb_aslt_elev_down_completed");
-  var_4f3a9c97 = a_ents[#"hash_3b65ea69f89ba5d4"];
+  civ_female = a_ents[#"hash_3b65ea69f89ba5d4"];
   civ_male = a_ents[#"hash_36441969acaf17cf"];
-  var_4f3a9c97 endon(#"death", #"delete");
+  civ_female endon(#"death", #"delete");
   civ_male endon(#"death", #"delete");
 
   if(isDefined(civ_male)) {
@@ -2542,23 +2542,23 @@ function function_6bd39879(a_ents) {
       arrayinsert(level.var_f83c3b53.locations[#"mailroom"].var_a4ec1473, "scene_kgb_ambient_talking_duo_desk_c_mixed", 0);
     }
 
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09295_rfc1_comradesmirnova_f2");
+    civ_female dialogue::queue("vox_cp_rkgb_09295_rfc1_comradesmirnova_f2");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09295_rmc3_yesthatstrueiwa_d3");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09295_rfc1_strictsecurityp_68");
+    civ_female dialogue::queue("vox_cp_rkgb_09295_rfc1_strictsecurityp_68");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09295_rmc3_yescomradeimawa_95");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09295_rfc1_doyouadmittorai_ff");
+    civ_female dialogue::queue("vox_cp_rkgb_09295_rfc1_doyouadmittorai_ff");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09295_rmc3_idocomrade_71");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09295_rfc1_andyoualsoadmit_38");
+    civ_female dialogue::queue("vox_cp_rkgb_09295_rfc1_andyoualsoadmit_38");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09295_rmc3_yesthatseemstob_82");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09295_rfc1_pleasereportwit_1e");
+    civ_female dialogue::queue("vox_cp_rkgb_09295_rfc1_pleasereportwit_1e");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09295_rmc3_areyouseriousid_6e");
     arrayremovevalue(level.var_f83c3b53.locations[#"mailroom"].var_a4ec1473, "scene_kgb_ambient_talking_duo_desk_c_mixed");
@@ -2572,14 +2572,14 @@ function function_6bd39879(a_ents) {
 
 function function_ae1c1004(a_ents) {
   level endon(#"kgb_aslt_elev_down_completed");
-  var_4f3a9c97 = a_ents[#"hash_7c83cf8c388f5def"];
+  civ_female = a_ents[#"hash_7c83cf8c388f5def"];
   civ_male = a_ents[#"hash_5b5c01597811fdb4"];
-  var_4f3a9c97 endon(#"death", #"delete");
+  civ_female endon(#"death", #"delete");
   civ_male endon(#"death", #"delete");
 
-  if(isDefined(var_4f3a9c97)) {
-    if(isDefined(var_4f3a9c97.model) && var_4f3a9c97.model != "c_t9_cp_rus_civ_female_office_03_body_b") {
-      var_4f3a9c97 setModel("c_t9_cp_rus_civ_female_office_03_body_b");
+  if(isDefined(civ_female)) {
+    if(isDefined(civ_female.model) && civ_female.model != "c_t9_cp_rus_civ_female_office_03_body_b") {
+      civ_female setModel("c_t9_cp_rus_civ_female_office_03_body_b");
     }
   }
 
@@ -2595,14 +2595,14 @@ function function_ae1c1004(a_ents) {
   }
 
   while(true) {
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09300_rfc1_comradezakhaevi_ff");
+    civ_female dialogue::queue("vox_cp_rkgb_09300_rfc1_comradezakhaevi_ff");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09300_rmc1_tryholdingthepo_52");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09300_rfc1_okaysighareyous_d7");
+    civ_female dialogue::queue("vox_cp_rkgb_09300_rfc1_okaysighareyous_d7");
     civ_male dialogue::queue("vox_cp_rkgb_09300_rmc1_laughohgoodluck_ee");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09300_rfc1_icandream_f2");
+    civ_female dialogue::queue("vox_cp_rkgb_09300_rfc1_icandream_f2");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09300_rmc1_indeed_77");
     wait randomfloatrange(level.var_4ce95d22, level.var_bb9797b9);
@@ -2665,10 +2665,10 @@ function function_838eb65b(a_ents) {
 
 function function_dedcb768(a_ents) {
   level endon(#"kgb_aslt_elev_down_completed");
-  var_4f3a9c97 = a_ents[#"actor 2"];
+  civ_female = a_ents[#"actor 2"];
   civ_male = a_ents[#"actor 1"];
   script_struct = struct::get("scene_kgb_ambient_talking_duo_standing_mixed_b_triggerstruct");
-  var_4f3a9c97 endon(#"death", #"delete");
+  civ_female endon(#"death", #"delete");
   civ_male endon(#"death", #"delete");
 
   while(!function_7042f8ce("scene_kgb_ambient_talking_duo_standing_mixed_b", "atrium")) {
@@ -2677,13 +2677,13 @@ function function_dedcb768(a_ents) {
 
   waitframe(1);
   trigger = spawn("trigger_radius", script_struct.origin, 0, script_struct.radius, script_struct.height);
-  var_4f3a9c97.trigger = trigger;
-  var_4f3a9c97 callback::function_d8abfc3d(#"on_ai_killed", &function_dc6db93b);
-  var_4f3a9c97 callback::function_d8abfc3d(#"on_entity_deleted", &function_dc6db93b);
+  civ_female.trigger = trigger;
+  civ_female callback::function_d8abfc3d(#"on_ai_killed", &function_dc6db93b);
+  civ_female callback::function_d8abfc3d(#"on_entity_deleted", &function_dc6db93b);
   trigger waittill(#"trigger");
 
-  if(isDefined(var_4f3a9c97.trigger)) {
-    var_4f3a9c97.trigger delete();
+  if(isDefined(civ_female.trigger)) {
+    civ_female.trigger delete();
   }
 
   while(true) {
@@ -2693,15 +2693,15 @@ function function_dedcb768(a_ents) {
 
     civ_male dialogue::queue("vox_cp_rkgb_09310_rmc2_itsfartoohotinh_12");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09310_rfc2_thatsbecausewej_42");
+    civ_female dialogue::queue("vox_cp_rkgb_09310_rfc2_thatsbecausewej_42");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09310_rmc2_iheartheyhavead_dd");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09310_rfc2_shushstepanyouk_e9");
+    civ_female dialogue::queue("vox_cp_rkgb_09310_rfc2_shushstepanyouk_e9");
     wait randomfloatrange(0.5, 1.5);
     civ_male dialogue::queue("vox_cp_rkgb_09310_rmc2_alliwantisaradi_31");
     wait randomfloatrange(0.5, 1.5);
-    var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09310_rfc2_keepitdownstepa_77");
+    civ_female dialogue::queue("vox_cp_rkgb_09310_rfc2_keepitdownstepa_77");
     arrayremovevalue(level.var_f83c3b53.locations[#"atrium"].var_a4ec1473, "scene_kgb_ambient_talking_duo_standing_mixed_b");
     wait randomfloatrange(level.var_4ce95d22, level.var_bb9797b9);
 
@@ -2713,8 +2713,8 @@ function function_dedcb768(a_ents) {
 
 function function_d99a120(a_ents) {
   level endon(#"kgb_aslt_elev_down_completed");
-  var_4f3a9c97 = a_ents[#"actor 1"];
-  var_4f3a9c97 endon(#"death", #"delete");
+  civ_female = a_ents[#"actor 1"];
+  civ_female endon(#"death", #"delete");
 
   if(!isDefined(level.var_a88fc2c9)) {
     trigger_struct = struct::get("scene_kgb_ambient_mailroom_triggerstruct", "targetname");
@@ -2738,13 +2738,13 @@ function function_d99a120(a_ents) {
 
     switch (randomintrange(1, 4)) {
       case 1:
-        var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09315_rfc1_canyouguyspleas_e0");
+        civ_female dialogue::queue("vox_cp_rkgb_09315_rfc1_canyouguyspleas_e0");
         break;
       case 2:
-        var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09315_rfc1_loudsigh_d0");
+        civ_female dialogue::queue("vox_cp_rkgb_09315_rfc1_loudsigh_d0");
         break;
       case 3:
-        var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09315_rfc1_loudlyclearsthr_36");
+        civ_female dialogue::queue("vox_cp_rkgb_09315_rfc1_loudlyclearsthr_36");
         break;
     }
 
@@ -3238,37 +3238,37 @@ function function_dfbd6bbc(a_ents) {
 
 function function_265c4b2b(a_ents) {
   level endon(#"kgb_aslt_elev_down_completed");
-  var_4f3a9c97 = a_ents[#"hash_439b879f5b00af06"];
-  var_4f3a9c97 endon(#"death", #"delete");
+  civ_female = a_ents[#"hash_439b879f5b00af06"];
+  civ_female endon(#"death", #"delete");
 
-  if(isDefined(var_4f3a9c97)) {
-    if(isDefined(var_4f3a9c97.model) && var_4f3a9c97.model != "c_t9_cp_rus_civ_female_office_02_body_e") {
-      var_4f3a9c97 setModel("c_t9_cp_rus_civ_female_office_02_body_e");
+  if(isDefined(civ_female)) {
+    if(isDefined(civ_female.model) && civ_female.model != "c_t9_cp_rus_civ_female_office_02_body_e") {
+      civ_female setModel("c_t9_cp_rus_civ_female_office_02_body_e");
     }
 
     waitframe(1);
 
-    if(!var_4f3a9c97 isattached("c_t9_ger_civ_female_head06")) {
-      var_4f3a9c97 detach(var_4f3a9c97.head);
-      var_4f3a9c97 attach("c_t9_ger_civ_female_head06");
+    if(!civ_female isattached("c_t9_ger_civ_female_head06")) {
+      civ_female detach(civ_female.head);
+      civ_female attach("c_t9_ger_civ_female_head06");
     }
   }
 
   waitframe(1);
-  trigger = spawn("trigger_radius", var_4f3a9c97.origin, 0, 128, 64);
-  var_4f3a9c97.trigger = trigger;
-  var_4f3a9c97 callback::function_d8abfc3d(#"on_ai_killed", &function_dc6db93b);
-  var_4f3a9c97 callback::function_d8abfc3d(#"on_entity_deleted", &function_dc6db93b);
+  trigger = spawn("trigger_radius", civ_female.origin, 0, 128, 64);
+  civ_female.trigger = trigger;
+  civ_female callback::function_d8abfc3d(#"on_ai_killed", &function_dc6db93b);
+  civ_female callback::function_d8abfc3d(#"on_entity_deleted", &function_dc6db93b);
 
   while(true) {
     trigger waittill(#"trigger");
-    var_4f3a9c97 ai::look_at(level.player, 0, undefined, 10, 0, undefined, 1);
+    civ_female ai::look_at(level.player, 0, undefined, 10, 0, undefined, 1);
     wait 1;
 
     if(math::cointoss()) {
-      var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09390_rfc2_goodmorning_d1");
+      civ_female dialogue::queue("vox_cp_rkgb_09390_rfc2_goodmorning_d1");
     } else {
-      var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09390_rfc2_hello_22");
+      civ_female dialogue::queue("vox_cp_rkgb_09390_rfc2_hello_22");
     }
 
     wait randomfloatrange(30, 60);
@@ -3392,7 +3392,7 @@ function function_75c06a2f(a_ents) {
 function function_789de3e1(a_ents) {
   level endon(#"kgb_aslt_elev_down_completed");
   guard = a_ents[#"hash_371d509595ac85a4"];
-  var_cd0ea04d = a_ents[#"hash_371d539595ac8abd"];
+  guard_02 = a_ents[#"hash_371d539595ac8abd"];
   civ_male = a_ents[#"hash_5e382a0b608737da"];
 
   if(isDefined(guard._scene_object._o_scene._e_root.targetname) && issubstr(guard._scene_object._o_scene._e_root.targetname, "lobby")) {
@@ -3402,7 +3402,7 @@ function function_789de3e1(a_ents) {
   }
 
   guard endon(#"death", #"delete");
-  var_cd0ea04d endon(#"death", #"delete");
+  guard_02 endon(#"death", #"delete");
   civ_male endon(#"death", #"delete");
   waitframe(1);
   trigger = spawn("trigger_radius", script_struct.origin, 0, script_struct.radius, script_struct.height);
@@ -3423,7 +3423,7 @@ function function_789de3e1(a_ents) {
       wait randomfloatrange(0.5, 1.5);
       civ_male dialogue::queue("vox_cp_rkgb_09410_rmc3_idontknowanythi_4b");
       wait randomfloatrange(0.5, 1.5);
-      var_cd0ea04d dialogue::queue("vox_cp_rkgb_09410_rms4_yesalottobeconc_b8");
+      guard_02 dialogue::queue("vox_cp_rkgb_09410_rms4_yesalottobeconc_b8");
       wait randomfloatrange(0.5, 1.5);
       civ_male dialogue::queue("vox_cp_rkgb_09410_rmc3_imsorryillletyo_8d");
     } else {
@@ -3435,7 +3435,7 @@ function function_789de3e1(a_ents) {
       wait randomfloatrange(0.5, 1.5);
       civ_male dialogue::queue("vox_cp_rkgb_09415_rmc1_iwishiknewwhatw_65");
       wait randomfloatrange(0.5, 1.5);
-      var_cd0ea04d dialogue::queue("vox_cp_rkgb_09415_rms3_didyouhaveaprio_ca");
+      guard_02 dialogue::queue("vox_cp_rkgb_09415_rms3_didyouhaveaprio_ca");
       wait randomfloatrange(0.5, 1.5);
       civ_male dialogue::queue("vox_cp_rkgb_09415_rmc1_huh_64");
     }
@@ -3447,9 +3447,9 @@ function function_789de3e1(a_ents) {
 function function_8dcdb8c9(a_ents) {
   level endon(#"kgb_aslt_elev_down_completed");
   guard = a_ents[#"hash_2dbc076c79842779"];
-  var_cd0ea04d = a_ents[#"hash_2dbc046c79842260"];
+  guard_02 = a_ents[#"hash_2dbc046c79842260"];
   civ_male = a_ents[#"hash_2b50d92ebdd550d7"];
-  var_4f3a9c97 = a_ents[#"hash_6dfdafd9fe6b62cd"];
+  civ_female = a_ents[#"hash_6dfdafd9fe6b62cd"];
 
   if(isDefined(guard._scene_object._o_scene._e_root.targetname) && issubstr(guard._scene_object._o_scene._e_root.targetname, "lobby")) {
     script_struct = struct::get("scene_kgb_ambient_harass_check_papers_lobby_triggerstruct");
@@ -3458,9 +3458,9 @@ function function_8dcdb8c9(a_ents) {
   }
 
   guard endon(#"death", #"delete");
-  var_cd0ea04d endon(#"death", #"delete");
+  guard_02 endon(#"death", #"delete");
   civ_male endon(#"death", #"delete");
-  var_4f3a9c97 endon(#"death", #"delete");
+  civ_female endon(#"death", #"delete");
   waitframe(1);
   trigger = spawn("trigger_radius", script_struct.origin, 0, script_struct.radius, script_struct.height);
   guard.trigger = trigger;
@@ -3478,35 +3478,35 @@ function function_8dcdb8c9(a_ents) {
       wait randomfloatrange(0.5, 1.5);
       guard dialogue::queue("vox_cp_rkgb_09420_rms2_nooneisgoingino_aa");
       wait randomfloatrange(0.5, 1.5);
-      var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09420_rfc1_itsjustthatweve_ee");
+      civ_female dialogue::queue("vox_cp_rkgb_09420_rfc1_itsjustthatweve_ee");
       wait randomfloatrange(0.5, 1.5);
-      var_cd0ea04d dialogue::queue("vox_cp_rkgb_09420_rms3_justfollowourin_4b");
+      guard_02 dialogue::queue("vox_cp_rkgb_09420_rms3_justfollowourin_4b");
       wait randomfloatrange(0.5, 1.5);
       guard dialogue::queue("vox_cp_rkgb_09420_rms2_yourbirthdatema_a8");
       wait randomfloatrange(0.5, 1.5);
-      var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09420_rfc1_may22nd1954_ca");
+      civ_female dialogue::queue("vox_cp_rkgb_09420_rfc1_may22nd1954_ca");
       wait randomfloatrange(0.5, 1.5);
       guard dialogue::queue("vox_cp_rkgb_09420_rms2_thankyouandyour_47");
       wait randomfloatrange(0.5, 1.5);
       civ_male dialogue::queue("vox_cp_rkgb_09420_rmc1_areyougoingtote_57");
       wait randomfloatrange(0.5, 1.5);
-      var_cd0ea04d dialogue::queue("vox_cp_rkgb_09420_rms3_andwhowasityour_67");
+      guard_02 dialogue::queue("vox_cp_rkgb_09420_rms3_andwhowasityour_67");
     } else {
       civ_male dialogue::queue("vox_cp_rkgb_09420_rmc2_wellthisisnew_1f");
       wait randomfloatrange(0.5, 1.5);
-      var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09420_rfc2_isthisnecessary_c0");
+      civ_female dialogue::queue("vox_cp_rkgb_09420_rfc2_isthisnecessary_c0");
       wait randomfloatrange(0.5, 1.5);
       guard dialogue::queue("vox_cp_rkgb_09420_rms1_weareexperienci_bb");
       wait randomfloatrange(0.5, 1.5);
-      var_cd0ea04d dialogue::queue("vox_cp_rkgb_09420_rms4_itsforyoursafet_14");
+      guard_02 dialogue::queue("vox_cp_rkgb_09420_rms4_itsforyoursafet_14");
       wait randomfloatrange(0.5, 1.5);
       civ_male dialogue::queue("vox_cp_rkgb_09420_rmc2_mybusinessiwork_c2");
       wait randomfloatrange(0.5, 1.5);
-      var_4f3a9c97 dialogue::queue("vox_cp_rkgb_09420_rfc2_sorryhejusthate_1e");
+      civ_female dialogue::queue("vox_cp_rkgb_09420_rfc2_sorryhejusthate_1e");
       wait randomfloatrange(0.5, 1.5);
       civ_male dialogue::queue("vox_cp_rkgb_09420_rmc2_itsnotlikewehav_98");
       wait randomfloatrange(0.5, 1.5);
-      var_cd0ea04d dialogue::queue("vox_cp_rkgb_09420_rms4_justasyouseethe_01");
+      guard_02 dialogue::queue("vox_cp_rkgb_09420_rms4_justasyouseethe_01");
       wait randomfloatrange(0.5, 1.5);
       guard dialogue::queue("vox_cp_rkgb_09420_rms1_yoursupervisorw_8f");
     }
@@ -3518,12 +3518,12 @@ function function_8dcdb8c9(a_ents) {
 function function_c2e8e3e2(a_ents) {
   level endon(#"kgb_aslt_elev_down_completed");
   guard = a_ents[#"hash_2872d42d037e3ca9"];
-  var_cd0ea04d = a_ents[#"hash_2872d12d037e3790"];
+  guard_02 = a_ents[#"hash_2872d12d037e3790"];
   civ_male = a_ents[#"hash_75cd1b9fa8049707"];
   script_struct = struct::get("scene_kgb_ambient_harass_pat_down_triggerstruct");
   civ_male endon(#"death", #"delete");
   guard endon(#"death", #"delete");
-  var_cd0ea04d endon(#"death", #"delete");
+  guard_02 endon(#"death", #"delete");
   waitframe(1);
   trigger = spawn("trigger_radius", script_struct.origin, 0, script_struct.radius, script_struct.height);
   civ_male.trigger = trigger;
@@ -3548,7 +3548,7 @@ function function_c2e8e3e2(a_ents) {
     wait randomfloatrange(0.5, 1.5);
     guard dialogue::queue("vox_cp_rkgb_09425_rms3_whatdoyouthinka_1a");
     wait randomfloatrange(0.5, 1.5);
-    var_cd0ea04d dialogue::queue("vox_cp_rkgb_09425_rms4_ithinkhemaybely_33");
+    guard_02 dialogue::queue("vox_cp_rkgb_09425_rms4_ithinkhemaybely_33");
     wait randomfloatrange(0.5, 1.5);
     guard dialogue::queue("vox_cp_rkgb_09425_rms3_tellusmoreabout_41");
     wait randomfloatrange(level.var_4ce95d22, level.var_bb9797b9);
@@ -3600,65 +3600,65 @@ function function_b8bc6f25(a_ents) {
 function function_645c6620(a_ents) {
   level endon(#"kgb_aslt_elev_down_completed");
   level endon(#"hash_184a766cab2b78a7");
-  var_7198a076 = a_ents[#"hash_713540a10ff22151"];
+  zakhaev = a_ents[#"zakhaev"];
   kravchenko = a_ents[#"kravchenko"];
-  var_7198a076 endon(#"death", #"delete");
+  zakhaev endon(#"death", #"delete");
   kravchenko endon(#"death", #"delete");
   waitframe(1);
-  thread function_fe077ca7(var_7198a076, kravchenko);
-  var_7c29e364 = spawn("trigger_radius", var_7198a076.origin, 0, 256, 64);
-  var_7198a076.trigger = var_7c29e364;
-  var_7198a076 callback::function_d8abfc3d(#"on_ai_killed", &function_dc6db93b);
-  var_7198a076 callback::function_d8abfc3d(#"on_entity_deleted", &function_dc6db93b);
+  thread function_fe077ca7(zakhaev, kravchenko);
+  var_7c29e364 = spawn("trigger_radius", zakhaev.origin, 0, 256, 64);
+  zakhaev.trigger = var_7c29e364;
+  zakhaev callback::function_d8abfc3d(#"on_ai_killed", &function_dc6db93b);
+  zakhaev callback::function_d8abfc3d(#"on_entity_deleted", &function_dc6db93b);
   var_7c29e364 waittill(#"trigger");
 
-  if(isDefined(var_7198a076.trigger)) {
-    var_7198a076.trigger delete();
+  if(isDefined(zakhaev.trigger)) {
+    zakhaev.trigger delete();
   }
 
   while(true) {
-    var_7198a076 dialogue::queue("vox_cp_rkgb_09430_zakh_andyoubelievehi_29");
+    zakhaev dialogue::queue("vox_cp_rkgb_09430_zakh_andyoubelievehi_29");
     wait randomfloatrange(0.5, 1.5);
     kravchenko dialogue::queue("vox_cp_rkgb_09430_krav_idontknowwhatto_14");
     wait randomfloatrange(0.5, 1.5);
-    var_7198a076 dialogue::queue("vox_cp_rkgb_09430_zakh_charkovandbelik_2c");
+    zakhaev dialogue::queue("vox_cp_rkgb_09430_zakh_charkovandbelik_2c");
     wait randomfloatrange(0.5, 1.5);
     kravchenko dialogue::queue("vox_cp_rkgb_09430_krav_theydo_bb");
     wait randomfloatrange(0.5, 1.5);
     kravchenko dialogue::queue("vox_cp_rkgb_09430_krav_imstilltryingto_d5");
     wait randomfloatrange(0.5, 1.5);
-    var_7198a076 dialogue::queue("vox_cp_rkgb_09430_zakh_findbelikoviwan_54");
+    zakhaev dialogue::queue("vox_cp_rkgb_09430_zakh_findbelikoviwan_54");
     wait randomfloatrange(0.5, 1.5);
     kravchenko dialogue::queue("vox_cp_rkgb_09430_krav_accordingtochar_40");
     wait randomfloatrange(level.var_4ce95d22, level.var_bb9797b9);
   }
 }
 
-function function_fe077ca7(var_7198a076, kravchenko) {
+function function_fe077ca7(zakhaev, kravchenko) {
   level.player endon(#"death");
-  var_7198a076 endon(#"death", #"delete");
+  zakhaev endon(#"death", #"delete");
   level endon(#"kgb_aslt_elev_down_completed");
-  var_633aa908 = spawn("trigger_radius", var_7198a076.origin, 0, 96, 64);
-  var_7198a076.var_c84284f1 = var_633aa908;
-  var_7198a076 callback::function_d8abfc3d(#"on_ai_killed", &function_ec8e9354);
-  var_7198a076 callback::function_d8abfc3d(#"on_entity_deleted", &function_ec8e9354);
+  var_633aa908 = spawn("trigger_radius", zakhaev.origin, 0, 96, 64);
+  zakhaev.var_c84284f1 = var_633aa908;
+  zakhaev callback::function_d8abfc3d(#"on_ai_killed", &function_ec8e9354);
+  zakhaev callback::function_d8abfc3d(#"on_entity_deleted", &function_ec8e9354);
   var_633aa908 waittill(#"trigger");
 
-  if(isDefined(var_7198a076.var_c84284f1)) {
-    var_7198a076.var_c84284f1 delete();
+  if(isDefined(zakhaev.var_c84284f1)) {
+    zakhaev.var_c84284f1 delete();
   }
 
   level notify(#"hash_184a766cab2b78a7");
-  var_7198a076 ai::look_at(level.player, 0, undefined, 600, 0, undefined, 1);
+  zakhaev ai::look_at(level.player, 0, undefined, 600, 0, undefined, 1);
   kravchenko ai::look_at(level.player, 0, undefined, 600, 0, undefined, 1);
-  var_7198a076 thread dialogue::function_47b06180();
+  zakhaev thread dialogue::function_47b06180();
   kravchenko thread dialogue::function_47b06180();
   level notify(#"hash_184a766cab2b78a7");
 
   if(math::cointoss()) {
     kravchenko dialogue::queue("vox_cp_rkgb_09430_krav_waitamoment_f4", undefined, 1);
   } else {
-    var_7198a076 dialogue::queue("vox_cp_rkgb_09430_zakh_holdon_b2", undefined, 1);
+    zakhaev dialogue::queue("vox_cp_rkgb_09430_zakh_holdon_b2", undefined, 1);
   }
 
   wait randomfloatrange(1.5, 2.5);
@@ -3666,7 +3666,7 @@ function function_fe077ca7(var_7198a076, kravchenko) {
   if(math::cointoss()) {
     kravchenko dialogue::queue("vox_cp_rkgb_09430_krav_doyouseesomethi_86");
   } else {
-    var_7198a076 dialogue::queue("vox_cp_rkgb_09430_zakh_canihelpyou_00");
+    zakhaev dialogue::queue("vox_cp_rkgb_09430_zakh_canihelpyou_00");
   }
 
   wait randomfloatrange(1.5, 2.5);
@@ -3676,7 +3676,7 @@ function function_fe077ca7(var_7198a076, kravchenko) {
     return;
   }
 
-  var_7198a076 dialogue::queue("vox_cp_rkgb_09430_zakh_perhapsyoushoul_24");
+  zakhaev dialogue::queue("vox_cp_rkgb_09430_zakh_perhapsyoushoul_24");
 }
 
 function function_dc6db93b() {

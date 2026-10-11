@@ -30,7 +30,7 @@
 function event_handler[level_init] main(eventstruct) {
   setclearanceceiling(16);
   preload();
-  function_37dfd679();
+  init_skiptos();
   load::main();
   profilestart();
 
@@ -38,16 +38,16 @@ function event_handler[level_init] main(eventstruct) {
 
   level flag::set("no_corpse_pickup ");
   setDvar(#"compassmaxrange", "2100");
-  callback::on_spawned(&namespace_534279a::function_6e9256df);
-  hms_util::function_2f3616f8();
+  callback::on_spawned(&namespace_534279a::set_loadout);
+  hms_util::init_containment();
   level thread namespace_9e5ef376::blocker_init();
   level thread namespace_534279a::function_ce0f72f4();
-  level thread namespace_604e2e22::function_1e2a0690("aa_parapet", "parapet_aa_gunner", "scene_sge_0000_ambient_aa_gun_graveyard");
+  level thread namespace_604e2e22::aa_gun("aa_parapet", "parapet_aa_gunner", "scene_sge_0000_ambient_aa_gun_graveyard");
   level thread namespace_604e2e22::function_b9170a35("aa_north");
   level thread namespace_604e2e22::function_b9170a35("aa_west");
 
   level thread hms_util::function_32397759();
-  level thread hms_util::function_5056f90d();
+  level thread hms_util::display_player_health();
 
   profilestop();
 }
@@ -63,14 +63,14 @@ function preload() {
   clientfield::register("toplayer", "stream_intro_assets", 1, 1, "int");
 }
 
-function function_37dfd679() {
-  skipto::function_eb91535d("infil", &namespace_ce17746::main, &namespace_ce17746::starting, "Infil", &namespace_ce17746::cleanup, "interior_cathedral_01");
-  skipto::function_eb91535d("emp_flash", &namespace_b11c1856::main, &namespace_b11c1856::starting, "EMP", &namespace_b11c1856::cleanup, "vista_buildings_main_street");
-  skipto::function_eb91535d("courtyard", &namespace_9e5ef376::function_802a0aed, &namespace_9e5ef376::function_abfa576, "Courtyard", &namespace_9e5ef376::function_77335d30, ["west_wall_blockout", "st_nicholas_church_02", "bell_tower_complete", "church_back_tower_01", "chapel", "interior_cathedral_01"]);
-  skipto::function_eb91535d("catacombs", &namespace_c34cd176::function_41e4735f, &namespace_c34cd176::function_25a6167c, "Catacombs", &namespace_c34cd176::function_fa1a97a3, ["catacombs", "west_wall_blockout", "st_nicholas_church_02", "bell_tower_complete", "church_back_tower_01", "chapel", "interior_cathedral_01"]);
-  skipto::function_eb91535d("graveyard", &namespace_9940c067::function_8b10d19c, &namespace_9940c067::function_d7e02379, "Graveyard", &namespace_9940c067::function_cdf0a865, ["catacombs", "graveyard", "graveyard_extra_structures", "radar_towers", "chapel", "interior_cathedral_01"]);
-  skipto::function_eb91535d("outro", &namespace_9e5ef376::outro_main, &namespace_9e5ef376::function_4b8cec86, "Outro", &namespace_9e5ef376::outro_cleanup, ["ending_geo", "graveyard", "graveyard_extra_structures", "radar_towers"]);
-  skipto::function_eb91535d("looseends", &namespace_ef60e103::function_2435d3e, &namespace_ef60e103::function_7ab616c1, "Loose Ends", &namespace_ef60e103::function_8f77588);
+function init_skiptos() {
+  skipto::add_saved("infil", &namespace_ce17746::main, &namespace_ce17746::starting, "Infil", &namespace_ce17746::cleanup, "interior_cathedral_01");
+  skipto::add_saved("emp_flash", &namespace_b11c1856::main, &namespace_b11c1856::starting, "EMP", &namespace_b11c1856::cleanup, "vista_buildings_main_street");
+  skipto::add_saved("courtyard", &namespace_9e5ef376::courtyard_main, &namespace_9e5ef376::function_abfa576, "Courtyard", &namespace_9e5ef376::courtyard_cleanup, ["west_wall_blockout", "st_nicholas_church_02", "bell_tower_complete", "church_back_tower_01", "chapel", "interior_cathedral_01"]);
+  skipto::add_saved("catacombs", &namespace_c34cd176::function_41e4735f, &namespace_c34cd176::function_25a6167c, "Catacombs", &namespace_c34cd176::function_fa1a97a3, ["catacombs", "west_wall_blockout", "st_nicholas_church_02", "bell_tower_complete", "church_back_tower_01", "chapel", "interior_cathedral_01"]);
+  skipto::add_saved("graveyard", &namespace_9940c067::graveyard_main, &namespace_9940c067::function_d7e02379, "Graveyard", &namespace_9940c067::function_cdf0a865, ["catacombs", "graveyard", "graveyard_extra_structures", "radar_towers", "chapel", "interior_cathedral_01"]);
+  skipto::add_saved("outro", &namespace_9e5ef376::outro_main, &namespace_9e5ef376::function_4b8cec86, "Outro", &namespace_9e5ef376::outro_cleanup, ["ending_geo", "graveyard", "graveyard_extra_structures", "radar_towers"]);
+  skipto::add_saved("looseends", &namespace_ef60e103::function_2435d3e, &namespace_ef60e103::function_7ab616c1, "Loose Ends", &namespace_ef60e103::function_8f77588);
 
   level.var_965c6227[#"infil"] = ["<dev string:x38>", "<dev string:x41>", "<dev string:x4c>", "<dev string:x56>"];
   level.var_965c6227[#"emp_flash"] = ["<dev string:x62>", "<dev string:x41>", "<dev string:x69>", "<dev string:x56>"];

@@ -132,13 +132,13 @@ function private function_ed1b1a8e(n_index) {
   }
 }
 
-function event_handler[button_bit_actionslot_1_pressed] function_58d265ea() {}
+function event_handler[button_bit_actionslot_1_pressed] dpad_up_pressed() {}
 
-function event_handler[button_bit_actionslot_2_pressed] function_3c626fd() {}
+function event_handler[button_bit_actionslot_2_pressed] dpad_down_pressed() {}
 
 function event_handler[button_bit_actionslot_3_pressed] dpad_left_pressed() {}
 
-function event_handler[button_bit_actionslot_4_pressed] function_f05fb7a0() {}
+function event_handler[button_bit_actionslot_4_pressed] dpad_right_pressed() {}
 
 function function_40849636() {
   self.var_bd0d5874 = 0;
@@ -303,7 +303,7 @@ function function_23b7cdd8(n_index) {
 
   if(!is_true(self.var_7148f2c)) {
     self.var_7148f2c = 1;
-    self playlocalsound(#"hash_678b4eee9797e94f");
+    self playlocalsound(#"zmb_elixir_common_deny");
 
     switch (n_index) {
       case 0:
@@ -501,7 +501,7 @@ function global_cooldown(n_index) {
   if(self.var_22fbe1cc >= 4) {
     self function_f2173c97(1);
   } else {
-    self playlocalsound(#"hash_2a9d100a5cbc7dbe");
+    self playlocalsound(#"zmb_elixir_common_cooldown_all_end");
   }
 
   self.var_bd0d5874 = 0;
@@ -606,7 +606,7 @@ function slot_cooldown(n_index) {
   }
 
   if(self.var_2d8082a0[n_index] <= 0 || is_true(var_10b7b97a)) {
-    self playsoundtoplayer(#"hash_78bd6c84a567b714", self);
+    self playsoundtoplayer(#"zmb_elixir_common_cooldown_solo_end", self);
     self notify("end_slot_cooldown" + n_index);
     self function_1d5d39b0(n_index, 1);
     self function_b2308cd(n_index, 0);
@@ -754,9 +754,9 @@ function function_a1f97e79(var_707fd977, n_index, var_10b7b97a) {
 
 function private function_f2173c97(var_607319eb) {
   if(var_607319eb) {
-    self playsoundtoplayer(#"hash_54adb87d474be3d2", self);
+    self playsoundtoplayer(#"zmb_elixir_common_lockdown", self);
   } else {
-    self playsoundtoplayer(#"hash_686b41e25622cb04", self);
+    self playsoundtoplayer(#"zmb_elixir_common_lockdown_end", self);
   }
 
   for(x = 0; x < 4; x++) {

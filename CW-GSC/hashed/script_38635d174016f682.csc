@@ -45,21 +45,21 @@ function debug_line(p1, p2, seconds, color) {
   line(p1, p2, color, 1, 0, int(seconds * 20));
 }
 
-function function_1d1f2c26(point, timesec, size, color) {
+function debugpoint(point, timesec, size, color) {
   self endon(#"hash_20de371f231f3e8a");
   end = gettime() + timesec * 1000;
   halfwidth = int(size / 2);
-  var_692eeaa1 = point + (halfwidth * -1, 0, 0);
+  l1 = point + (halfwidth * -1, 0, 0);
   l2 = point + (halfwidth, 0, 0);
-  var_74d6c120 = point + (0, halfwidth * -1, 0);
-  var_be7dd479 = point + (0, halfwidth, 0);
-  var_cfbcbc57 = point + (0, 0, halfwidth * -1);
-  var_9e09d8f2 = point + (0, 0, halfwidth);
+  w1 = point + (0, halfwidth * -1, 0);
+  w2 = point + (0, halfwidth, 0);
+  h1 = point + (0, 0, halfwidth * -1);
+  h2 = point + (0, 0, halfwidth);
 
   while(end > gettime()) {
-    line(var_692eeaa1, l2, color, 1, 0, 1);
-    line(var_74d6c120, var_be7dd479, color, 1, 0, 1);
-    line(var_cfbcbc57, var_9e09d8f2, color, 1, 0, 1);
+    line(l1, l2, color, 1, 0, 1);
+    line(w1, w2, color, 1, 0, 1);
+    line(h1, h2, color, 1, 0, 1);
     wait 0.05;
   }
 }
@@ -71,15 +71,15 @@ function debugorigin(timesec, size, color) {
 
   while(end > gettime()) {
     point = self.origin;
-    var_692eeaa1 = point + (halfwidth * -1, 0, 0);
+    l1 = point + (halfwidth * -1, 0, 0);
     l2 = point + (halfwidth, 0, 0);
-    var_74d6c120 = point + (0, halfwidth * -1, 0);
-    var_be7dd479 = point + (0, halfwidth, 0);
-    var_cfbcbc57 = point + (0, 0, halfwidth * -1);
-    var_9e09d8f2 = point + (0, 0, halfwidth);
-    line(var_692eeaa1, l2, color, 1, 0, 1);
-    line(var_74d6c120, var_be7dd479, color, 1, 0, 1);
-    line(var_cfbcbc57, var_9e09d8f2, color, 1, 0, 1);
+    w1 = point + (0, halfwidth * -1, 0);
+    w2 = point + (0, halfwidth, 0);
+    h1 = point + (0, 0, halfwidth * -1);
+    h2 = point + (0, 0, halfwidth);
+    line(l1, l2, color, 1, 0, 1);
+    line(w1, w2, color, 1, 0, 1);
+    line(h1, h2, color, 1, 0, 1);
     wait 0.05;
   }
 }

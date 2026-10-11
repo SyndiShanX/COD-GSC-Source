@@ -245,7 +245,7 @@ function function_2be39078(last_weapon) {
   return true;
 }
 
-function function_d571ac59(last_weapon = undefined, immediate = 0, awayfromball = 0, var_81af68a5 = 0) {
+function function_d571ac59(last_weapon = undefined, immediate = 0, awayfromball = 0, forceswitch = 0) {
   ball = getweapon(#"ball");
 
   if(isDefined(ball) && self hasweapon(ball) && !is_true(awayfromball)) {
@@ -261,7 +261,7 @@ function function_d571ac59(last_weapon = undefined, immediate = 0, awayfromball 
   } else {
     to_weapon = undefined;
 
-    if(var_81af68a5 || function_2be39078(last_weapon)) {
+    if(forceswitch || function_2be39078(last_weapon)) {
       to_weapon = last_weapon;
     }
 
@@ -326,7 +326,7 @@ function update_last_held_weapon_timings(newtime, var_d75fdbe3 = self.currentwea
       }
 
       self stats::function_eec52333(var_d75fdbe3, #"timeused", totaltime, self.class_num, weaponpickedup);
-      level thread telemetry::function_18135b72(#"hash_b88b6d2e0028e13", {
+      level thread telemetry::function_18135b72(#"callback_update_weapon_stats", {
         #player: self, #weapon: var_d75fdbe3, #statname: #"timeused", #value: totaltime, #weaponpickedup: weaponpickedup
       });
       self.currentweaponstarttime = newtime;
@@ -490,7 +490,7 @@ function drop_for_death(attacker, sweapon, smeansofdeath, damage, var_1940b58e =
     if(isDefined(lastdroppableweapon)) {
       var_cef01b32.lastdroppableweapon = lastdroppableweapon;
       var_cef01b32.weaponammoclip = self getweaponammoclip(lastdroppableweapon);
-      var_cef01b32.var_bf0fb76a = self getweaponammostock(lastdroppableweapon);
+      var_cef01b32.weaponammostock = self getweaponammostock(lastdroppableweapon);
       var_cef01b32.anyammoforweaponmodes = self anyammoforweaponmodes(lastdroppableweapon);
     }
 
@@ -513,7 +513,7 @@ function drop_for_death(attacker, sweapon, smeansofdeath, damage, var_1940b58e =
   self function_6cf6f3fb(attacker, sweapon, smeansofdeath, damage, var_1940b58e);
 }
 
-function private function_6cf6f3fb(attacker, sweapon, smeansofdeath, damage, var_1940b58e = 1, var_8211a4fa) {
+function private function_6cf6f3fb(attacker, sweapon, smeansofdeath, damage, var_1940b58e = 1, cachedinfo) {
   if(level.disableweapondrop == 1) {
     return;
   }
@@ -522,7 +522,7 @@ function private function_6cf6f3fb(attacker, sweapon, smeansofdeath, damage, var
     return;
   }
 
-  weapon = isDefined(var_8211a4fa) ? var_8211a4fa.lastdroppableweapon : self.lastdroppableweapon;
+  weapon = isDefined(cachedinfo) ? cachedinfo.lastdroppableweapon : self.lastdroppableweapon;
 
   if(isDefined(self.droppeddeathweapon)) {
     return;
@@ -552,7 +552,7 @@ function private function_6cf6f3fb(attacker, sweapon, smeansofdeath, damage, var
     return;
   }
 
-  if(!(isDefined(var_8211a4fa.anyammoforweaponmodes) ? var_8211a4fa.anyammoforweaponmodes : self anyammoforweaponmodes(weapon))) {
+  if(!(isDefined(cachedinfo.anyammoforweaponmodes) ? cachedinfo.anyammoforweaponmodes : self anyammoforweaponmodes(weapon))) {
     if(getdvarint(#"scr_dropdebug", 0) == 1) {
       println("<dev string:xb5>");
     }
@@ -568,8 +568,8 @@ function private function_6cf6f3fb(attacker, sweapon, smeansofdeath, damage, var
     return;
   }
 
-  clipammo = isDefined(var_8211a4fa.weaponammoclip) ? var_8211a4fa.weaponammoclip : self getweaponammoclip(weapon);
-  stockammo = isDefined(var_8211a4fa.var_182b7344) ? var_8211a4fa.var_182b7344 : self getweaponammostock(weapon);
+  clipammo = isDefined(cachedinfo.weaponammoclip) ? cachedinfo.weaponammoclip : self getweaponammoclip(weapon);
+  stockammo = isDefined(cachedinfo.var_182b7344) ? cachedinfo.var_182b7344 : self getweaponammostock(weapon);
   clip_and_stock_ammo = clipammo + stockammo;
 
   if(!clip_and_stock_ammo && !is_true(weapon.unlimitedammo)) {
@@ -866,18 +866,18 @@ function track_fire(curweapon) {
   if(isDefined(self.pickedupweapons) && isDefined(self.pickedupweapons[curweapon])) {
     weaponpickedup = 1;
   } else {
-    level thread telemetry::function_18135b72(#"hash_b88b6d2e0028e13", {
+    level thread telemetry::function_18135b72(#"callback_update_weapon_stats", {
       #player: self, #weapon: curweapon, #statname: #"shots", #value: shotsfired, #weaponpickedup: weaponpickedup
     });
-    level thread telemetry::function_18135b72(#"hash_b88b6d2e0028e13", {
+    level thread telemetry::function_18135b72(#"callback_update_weapon_stats", {
       #player: self, #weapon: curweapon, #statname: #"hits", #value: isDefined(self.hits) ? self.hits : 0, #weaponpickedup: weaponpickedup
     });
   }
 
   self trackweaponfirenative(curweapon, shotsfired, isDefined(self.hits) ? self.hits : 0, isDefined(self.headshothits) ? self.headshothits : 0, 1, self.class_num, weaponpickedup);
 
-  if(isDefined(self.var_fd243db7) && isDefined(self.var_fd243db7.var_245ad74)) {
-    foreach(entry in self.var_fd243db7.var_245ad74) {
+  if(isDefined(self.combatrecord) && isDefined(self.combatrecord.var_245ad74)) {
+    foreach(entry in self.combatrecord.var_245ad74) {
       self stats::function_328bc34a(curweapon.statname, entry.shitloc, entry.hitcount);
     }
 
@@ -1121,14 +1121,14 @@ function begin_grenade_tracking() {
   }
 
   structname = #"mpequipmentuses";
-  eventname = #"hash_7cbbee88c5db5494";
+  eventname = #"dlog_event_mpequipmentuses";
 
   if(sessionmodeiscampaigngame()) {
     structname = #"cpequipmentuses";
-    eventname = #"hash_4b0d58055ad60c5a";
+    eventname = #"dlog_event_cpequipmentuses";
   } else if(sessionmodeiszombiesgame()) {
     structname = #"zmequipmentuses";
-    eventname = #"hash_637ce41bcec9842c";
+    eventname = #"dlog_event_zmequipmentuses";
   }
 
   function_92d1707f(eventname, structname, {
@@ -1187,7 +1187,7 @@ function event_handler[grenade_fire] function_e2b6d5a5(eventstruct) {
 
   grenade = eventstruct.projectile;
   weapon = eventstruct.weapon;
-  grenade.var_c6c56953 = grenade.origin;
+  grenade.throworigin = grenade.origin;
 
   if(grenade util::ishacked()) {
     return;

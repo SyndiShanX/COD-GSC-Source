@@ -125,7 +125,7 @@ function function_65c306e7(var_71398223) {
   list = [];
 
   foreach(struct in var_71398223) {
-    list[list.size] = struct.var_210a8489;
+    list[list.size] = struct.ailist;
   }
 
   return list;
@@ -188,8 +188,8 @@ function function_c43e2960(var_89bd79c0, tunables) {
 
 function function_ba8b8ba3(&spawn_points) {
   foreach(point in spawn_points) {
-    if(point.var_90d0c0ff === #" ") {
-      point.var_90d0c0ff = undefined;
+    if(point.spawn_anim_alias === #" ") {
+      point.spawn_anim_alias = undefined;
     }
 
     if(point.archetype === #" ") {
@@ -526,7 +526,7 @@ function function_89116a1e(&var_e592e473, var_8437e990, aitype) {
     var_8437e990.spawn_point_index = (var_8437e990.spawn_point_index + 1) % var_e592e473.size;
     spawn_point = var_e592e473[var_8437e990.spawn_point_index];
 
-    if(getPlayers(undefined, spawn_point.origin, 256).size || isDefined(aitype) && isDefined(spawn_point.var_90d0c0ff) && !function_ee71d10f(aitype, spawn_point.var_90d0c0ff)) {
+    if(getPlayers(undefined, spawn_point.origin, 256).size || isDefined(aitype) && isDefined(spawn_point.spawn_anim_alias) && !function_ee71d10f(aitype, spawn_point.spawn_anim_alias)) {
       continue;
     }
 
@@ -892,8 +892,8 @@ function spawn_ai(hotzone) {
     new_ai.var_c37d7f3b = 4000;
     new_ai.hotzone = hotzone;
 
-    if(isDefined(spawn_point.var_90d0c0ff) && function_ee71d10f(spawn_info.aitype_name, spawn_point.var_90d0c0ff)) {
-      new_ai.var_c9b11cb3 = spawn_point.var_90d0c0ff;
+    if(isDefined(spawn_point.spawn_anim_alias) && function_ee71d10f(spawn_info.aitype_name, spawn_point.spawn_anim_alias)) {
+      new_ai.var_c9b11cb3 = spawn_point.spawn_anim_alias;
     }
 
     if(var_9f9ede51 == #"hash_729b116cf9d044" && !level flag::get(#"hash_ad588d53f52329a")) {
@@ -1428,7 +1428,7 @@ function function_3de1c8ac(var_2da12984) {
 
     if(isarray(options.var_2269342d.player_info)) {
       foreach(info in options.var_2269342d.player_info) {
-        function_af647be2(info);
+        draw_player(info);
       }
     }
 
@@ -1496,23 +1496,23 @@ function function_1a530376(hotzone, array_index, scale) {
   }
 
   if(is_true(options.var_5ff49272)) {
-    function_59a41525(hotzone.origin, hotzone.radius, hotzone.height, (1, 0, 1), 1);
+    draw_cylinder(hotzone.origin, hotzone.radius, hotzone.height, (1, 0, 1), 1);
   }
 
   if(is_true(options.var_4bff9c78)) {
     if(hotzone.instance.current_state !== 0) {
-      function_59a41525(hotzone.origin, 3000, hotzone.height, (1, 0.5, 0), 1);
+      draw_cylinder(hotzone.origin, 3000, hotzone.height, (1, 0.5, 0), 1);
     }
   }
 
   if(is_true(options.var_b3795227)) {
     if(hotzone.instance.current_state !== 0) {
-      function_59a41525(hotzone.origin, 4000, hotzone.height, (0.4, 0.4, 0.4), 1);
+      draw_cylinder(hotzone.origin, 4000, hotzone.height, (0.4, 0.4, 0.4), 1);
     }
   }
 
   if(is_true(options.var_3eef4d41) && !is_true(hotzone.var_19e89e4e)) {
-    function_59a41525(hotzone.origin, hotzone.spawn_radius, hotzone.spawn_height, (1, 1, 0), 1);
+    draw_cylinder(hotzone.origin, hotzone.spawn_radius, hotzone.spawn_height, (1, 1, 0), 1);
     return;
   }
 
@@ -1661,7 +1661,7 @@ function function_89a74781(hotzone) {
   }
 }
 
-function function_59a41525(origin, radius, height, color, depthtest) {
+function draw_cylinder(origin, radius, height, color, depthtest) {
   circle(origin, radius, color, depthtest, 1, 1);
   circle(origin + (0, 0, height), radius, color, depthtest, 1, 1);
   line(origin, origin + (0, 0, height), color, 1, depthtest, 1);
@@ -1683,7 +1683,7 @@ function function_9c8936c1(&var_af4acf6e, origin, color) {
     debugstar(point.origin, 1, color);
     line(point.origin, origin, color);
 
-    if(is_true(level.var_70da9652.var_22a4a482) && isDefined(point.var_90d0c0ff)) {
+    if(is_true(level.var_70da9652.var_22a4a482) && isDefined(point.spawn_anim_alias)) {
       draw_box(point.origin, point.angles, 8, 8, 8, (1, 0.752941, 0.796078), 1);
       index = function_774fd83c(point, color, index, 0.75, 1);
     }
@@ -1696,13 +1696,13 @@ function function_9c8936c1(&var_af4acf6e, origin, color) {
 }
 
 function function_774fd83c(spawn_point, color, index, scale, alpha) {
-  print3d(spawn_point.origin + (0, 0, index), spawn_point.var_90d0c0ff, color, alpha, scale * scale, 1, 1);
+  print3d(spawn_point.origin + (0, 0, index), spawn_point.spawn_anim_alias, color, alpha, scale * scale, 1, 1);
   index += 17 * scale * scale;
   draw_arrow(spawn_point.origin, spawn_point.origin + anglesToForward(spawn_point.angles) * 15, (1, 0.752941, 0.796078), 6);
   return index;
 }
 
-function function_af647be2(player) {
+function draw_player(player) {
   line(player.origin + (0, 0, 72), player.origin + (0, 0, 572), (0, 1, 1));
   draw_box(player.origin, player.angles, 32, 32, 72, (0, 1, 1));
   var_9029dbde = rotatepointaroundaxis((256, 0, 0), (0, 0, 1), angleclamp180(player.angles[1] + 45));

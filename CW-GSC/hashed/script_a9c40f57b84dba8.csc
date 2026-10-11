@@ -41,8 +41,8 @@ function preinit() {
   }
 
   zm_ping::function_5ae4a10c(#"sr_ee_hulk_wild_thing", "sr_ee_hulk_wild_thing", undefined, undefined, #"ui_icon_general_feedback_cymbalmonkey");
-  zm_ping::function_5ae4a10c(#"hash_7b7cbb4eb2fd70e3", "sr_ee_hulk_interest", #"hash_c614bf6db74b718", undefined, #"hash_336559c6c8ed5192");
-  zm_ping::function_5ae4a10c(#"p9_fxanim_zm_gold_essence_trap_mod", "sr_ee_hulk_interest_fake", #"hash_c614bf6db74b718", undefined, #"hash_336559c6c8ed5192");
+  zm_ping::function_5ae4a10c(#"hash_7b7cbb4eb2fd70e3", "sr_ee_hulk_interest", #"hash_c614bf6db74b718", undefined, #"uie_ui_icon_equipment_widget_essence_trap");
+  zm_ping::function_5ae4a10c(#"p9_fxanim_zm_gold_essence_trap_mod", "sr_ee_hulk_interest_fake", #"hash_c614bf6db74b718", undefined, #"uie_ui_icon_equipment_widget_essence_trap");
 }
 
 function function_a233f763(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -113,7 +113,7 @@ function function_bbadd47c(localclientnum, oldval, newval, bnewent, binitialsnap
       }
 
       if(!isDefined(self.var_b892704e)) {
-        playSound(fieldname, #"hash_7b5289d48cc02d77", (0, 0, 0));
+        playSound(fieldname, #"evt_sr_phase_player_enter", (0, 0, 0));
         self.var_b892704e = self playLoopSound(#"evt_sr_phase_player_lp");
       }
 
@@ -128,7 +128,7 @@ function function_bbadd47c(localclientnum, oldval, newval, bnewent, binitialsnap
       }
 
       if(isDefined(self.var_b892704e)) {
-        playSound(fieldname, #"hash_37b1613c2cb4c8f3", (0, 0, 0));
+        playSound(fieldname, #"evt_sr_phase_player_exit", (0, 0, 0));
         self stoploopsound(self.var_b892704e);
         self.var_b892704e = undefined;
       }
@@ -168,7 +168,7 @@ function function_42b24a10(localclientnum, oldval, newval, bnewent, binitialsnap
     }
 
     if(!var_e534cbe9) {
-      self playSound(fieldname, #"hash_79a78504d4dbaf3f");
+      self playSound(fieldname, #"zmb_flashlight_turn_on");
     }
 
     if(self zm_utility::function_f8796df3(fieldname)) {
@@ -187,7 +187,7 @@ function function_42b24a10(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(var_e534cbe9) {
-    self playSound(fieldname, #"hash_13715035b161a0c3");
+    self playSound(fieldname, #"zmb_flashlight_turn_off");
   }
 
   if(self == function_5c10bd79(fieldname)) {
@@ -261,14 +261,14 @@ function function_5e51d561(localclientnum, oldval, newval, bnewent, binitialsnap
 
       foreach(location in a_locations) {
         audio::playloopat(#"evt_sur_we_portal_common_lp", location);
-        playSound(fieldname, #"hash_46461ba72b8ab7a2", location);
+        playSound(fieldname, #"evt_sur_we_portal_common_start", location);
         wait 0.05;
       }
 
       var_ca4b2a1e = (-4653, -4608, 300);
       audio::playloopat(#"hash_1c57ae0803680c93", var_ca4b2a1e);
       playSound(fieldname, #"hash_735ba59f382594d", var_ca4b2a1e);
-      function_5ea2c6e3("zmb_sr_dropallaudioby4", 1, 1);
+      addsubmix("zmb_sr_dropallaudioby4", 1, 1);
       break;
     case 5:
       var_ca4b2a1e = (-4653, -4608, 300);
@@ -282,7 +282,7 @@ function function_5e51d561(localclientnum, oldval, newval, bnewent, binitialsnap
 
       foreach(location in a_locations) {
         audio::stoploopat(#"evt_sur_we_portal_common_lp", location);
-        playSound(fieldname, #"hash_3c03699766f040c7", location);
+        playSound(fieldname, #"evt_sur_we_portal_common_end", location);
         wait 0.05;
       }
 
@@ -362,7 +362,7 @@ function function_54098fb4(localclientnum, oldval, newval, bnewent, binitialsnap
 
             if(!isDefined(var_b4488d57.var_e1cd0eb7)) {
               var_b4488d57.var_e1cd0eb7 = self.origin + (0, 0, 500);
-              playSound(fieldname, #"hash_46461ba72b8ab7a2", var_b4488d57.var_e1cd0eb7);
+              playSound(fieldname, #"evt_sur_we_portal_common_start", var_b4488d57.var_e1cd0eb7);
               audio::playloopat(#"evt_sur_we_portal_common_lp", var_b4488d57.var_e1cd0eb7);
             }
 
@@ -379,7 +379,7 @@ function function_54098fb4(localclientnum, oldval, newval, bnewent, binitialsnap
             }
 
             if(isDefined(var_b4488d57.var_e1cd0eb7)) {
-              playSound(fieldname, #"hash_3c03699766f040c7", var_b4488d57.var_e1cd0eb7);
+              playSound(fieldname, #"evt_sur_we_portal_common_end", var_b4488d57.var_e1cd0eb7);
               audio::stoploopat(#"evt_sur_we_portal_common_lp", var_b4488d57.var_e1cd0eb7);
               var_b4488d57.var_e1cd0eb7 = undefined;
             }

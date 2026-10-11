@@ -329,7 +329,7 @@ function private function_de8f0d0e(notifyhash) {
   self.bot.var_9d03fb75 = undefined;
   self.bot.var_fad934a1 = undefined;
   self.bot.var_36df6398 = undefined;
-  self function_f9a34a68();
+  self clear_stuck();
   self bot_action::shutdown();
   self bot_orders::shutdown();
   self bot_position::shutdown();
@@ -563,7 +563,7 @@ function private function_1b14ddcf() {
   self.bot.var_36df6398 = undefined;
 }
 
-function private function_f9a34a68() {
+function private clear_stuck() {
   self.bot.var_4208fe0e = undefined;
   self.bot.var_fc10153f = undefined;
   self.bot.var_ad331541 = undefined;
@@ -575,16 +575,16 @@ function private check_stuck() {
   movedir = self move_dir();
 
   if(length2dsquared(movedir) <= 0 || self status_effect::function_4617032e(2)) {
-    self function_f9a34a68();
+    self clear_stuck();
     pixendevent();
     return;
   }
 
-  if(!isDefined(self.bot.var_383e17de)) {
-    self.bot.var_383e17de = [];
+  if(!isDefined(self.bot.positionhistory)) {
+    self.bot.positionhistory = [];
   }
 
-  history = self.bot.var_383e17de;
+  history = self.bot.positionhistory;
   history[history.size] = self.origin;
 
   if(history.size < level.var_38c34301) {
@@ -656,9 +656,9 @@ function private check_stuck() {
     self.bot.var_8e60176d = 0;
   }
 
-  var_c40ef0b0 = anglesToForward(self getplayerangles() + (0, self.bot.var_8e60176d, 0));
+  tracefwd = anglesToForward(self getplayerangles() + (0, self.bot.var_8e60176d, 0));
   self.bot.var_8e60176d = (self.bot.var_8e60176d + 36) % 360;
-  end = eye + var_c40ef0b0 * 20;
+  end = eye + tracefwd * 20;
   trace = bulletTrace(eye, end, 0, self);
   surfacetype = trace[#"surfacetype"];
 

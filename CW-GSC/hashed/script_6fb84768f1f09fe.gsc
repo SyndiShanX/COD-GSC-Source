@@ -5,7 +5,7 @@
 
 #namespace snipercam;
 
-function function_83d35e98(attacker, var_4fa5c66a, attackerangles, victim, mode = 1) {
+function get_parms(attacker, var_4fa5c66a, attackerangles, victim, mode = 1) {
   parms = spawnStruct();
   var_83ca76ef = 200;
   var_3d5fa3d5 = 30;

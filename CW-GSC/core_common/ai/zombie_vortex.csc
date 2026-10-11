@@ -51,8 +51,8 @@ function start_vortex(localclientnum, oldval, newval, bnewent, binitialsnap, fie
     audio::playloopat("evt_doa_pickup_vortex_active_lp", vposition);
   } else if(bwastimejump == 1) {
     vortex_fx_handle = playFX(binitialsnap, registerplayer_lift_clipbamfupdate, vposition, (1, 0, 0), (0, 0, 1));
-    self.var_ccc1f809 = self playLoopSound(#"hash_67abdd3a81520702");
-    self playSound(binitialsnap, #"hash_60f3b643131bd830");
+    self.var_ccc1f809 = self playLoopSound(#"wpn_bhbomb_loop");
+    self playSound(binitialsnap, #"wpn_bhbomb_start");
   }
 
   setfxignorepause(binitialsnap, vortex_fx_handle, 1);
@@ -103,7 +103,7 @@ function function_2dd3c5bc(localclientnum, vortex_fx_handle, vposition, fx_vorte
   } else if(var_c385f09c == 1) {
     vortex_explosion_fx_handle = playFX(localclientnum, fx_vortex_explosion, vposition, (1, 0, 0), (0, 0, 1));
     self stoploopsound(self.var_ccc1f809);
-    self playSound(localclientnum, #"hash_a594ffd27037691");
+    self playSound(localclientnum, #"wpn_bhbomb_explode");
   }
 
   setfxignorepause(localclientnum, vortex_explosion_fx_handle, 1);

@@ -108,7 +108,7 @@ function function_830c306e(localclientnum, oldval, newval, bnewent, binitialsnap
       }
 
       self.var_87fd74a7 = util::playFXOnTag(fieldname, #"hash_3354e735e33805a7", self, "tag_animate");
-      self playSound(fieldname, #"hash_534278acb9340669");
+      self playSound(fieldname, #"wpn_essence_trap_close_rattle");
       self notify(#"hash_52be29763bc2391e");
       break;
     case 3:
@@ -152,19 +152,19 @@ function function_d9150e58(localclientnum) {
   }
 }
 
-function function_d99e101d(localclientnum, var_86cccd7b) {
+function function_d99e101d(localclientnum, target_zombie) {
   level endon(#"end_game");
   self endon(#"death", #"hash_52be29763bc2391e");
-  var_86cccd7b endon(#"death");
+  target_zombie endon(#"death");
   var_c848a436 = array("j_elbow_le", "j_elbow_ri", "j_shoulder_le", "j_shoulder_ri", "j_spine4", "j_head");
 
-  if(var_86cccd7b.archetype == #"zombie_dog") {
+  if(target_zombie.archetype == #"zombie_dog") {
     var_c848a436 = array("j_spine2", "j_spine3", "j_spine4", "j_neck", "j_head");
   }
 
   while(true) {
     tag = array::random(var_c848a436);
-    start_pos = var_86cccd7b gettagorigin(tag);
+    start_pos = target_zombie gettagorigin(tag);
 
     if(!isDefined(start_pos)) {
       continue;

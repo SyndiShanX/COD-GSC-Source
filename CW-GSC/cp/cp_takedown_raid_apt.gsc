@@ -80,11 +80,11 @@ function main(str_skipto, b_starting) {
   player = getPlayers()[0];
 
   if(b_starting) {
-    player util::function_749362d7(1);
+    player util::set_low_ready(1);
   }
 
   level.player = getPlayers()[0];
-  level battlechatter::function_2ab9360b(0);
+  level battlechatter::bc_allow(0);
   var_d1a2cc43 = getspawnerarray("qasim_runner", "script_noteworthy");
 
   foreach(spawner in var_d1a2cc43) {
@@ -118,7 +118,7 @@ function main(str_skipto, b_starting) {
   videostop("cp_shared_1981_dutch_soccer_game");
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
@@ -147,7 +147,7 @@ function function_7eba1826() {
 
 function function_a8e1bcc4() {
   level flag::wait_till("flag_setup_apartment_combat");
-  level thread function_486a4628();
+  level thread gate_close();
   self thread function_c71b0701();
   scene::add_scene_func("scene_tkd_hit2_apt_door_kick", &function_f7ceb1f2, "start");
   level scene::init("scene_tkd_hit2_apt_door_kick");
@@ -155,7 +155,7 @@ function function_a8e1bcc4() {
   level thread function_20215540();
   self thread function_c3919cdc();
   level thread function_8c4bd0ee();
-  self thread function_85249ea7();
+  self thread monitor_grenades();
   level waittill(#"hash_218ae3aa673068a9");
   level notify(#"hash_2d7f82360e399f87");
   level.var_efac709f connectpaths();
@@ -188,7 +188,7 @@ function function_a8e1bcc4() {
   wait 1;
   var_a79e4694 = snd::play("vox_cp_tdwn_03750_adlr_gogogo_c5", [level.adler, "j_head"]);
   level thread scene::play("scene_tkd_hit2_apt_door_kick", "start");
-  level battlechatter::function_2ab9360b(1);
+  level battlechatter::bc_allow(1);
   wait 1;
   util::delay(3.5, undefined, &exploder::exploder, "hit2_pool_table_papers");
   level thread function_596afdef();
@@ -221,7 +221,7 @@ function function_f7ceb1f2(a_ents) {
 function function_c71b0701() {
   player = getPlayers()[0];
   level flag::wait_till("flag_player_lowready_apt");
-  player util::function_749362d7(0);
+  player util::set_low_ready(0);
   level util::function_3e65fe0b(0);
   self enableoffhandweapons();
   self clientfield::set_to_player("lerp_fov", 0);
@@ -233,7 +233,7 @@ function function_20215540() {
   level flag::set("flag_adler_through_gate");
 }
 
-function function_486a4628() {
+function gate_close() {
   level flag::wait_till_all(array("flag_player_lowready_apt", "flag_woods_through_gate"));
   level scene::play("scene_tkd_hit2_adler_alley", "gate_closed");
 }
@@ -253,7 +253,7 @@ function function_8c4bd0ee() {
   level notify(#"hash_218ae3aa673068a9");
 }
 
-function function_85249ea7() {
+function monitor_grenades() {
   waitresult = self waittill(#"grenade_fire");
   grenade = waitresult.projectile;
   grenade waittill(#"explode");
@@ -265,9 +265,9 @@ function function_aeaba0c9(pos, dest, delay) {
     wait delay;
   }
 
-  var_b84b1bf9 = struct::get(pos, "targetname");
+  dmg_pos = struct::get(pos, "targetname");
   var_c19f5c0 = struct::get(dest, "targetname");
-  magicbullet(getweapon(#"ar_standard_t9"), var_b84b1bf9.origin, var_c19f5c0.origin);
+  magicbullet(getweapon(#"ar_standard_t9"), dmg_pos.origin, var_c19f5c0.origin);
 }
 
 function function_9800206d(timer, delay) {
@@ -299,7 +299,7 @@ function function_25e67322() {
 
 function function_306807e5() {
   self endon(#"death");
-  self endon(#"hash_10622d7e7f80ce71");
+  self endon(#"played_death_anim");
   self.var_c681e4c1 = 1;
 
   if(self.script_noteworthy == "kitchen_enemy4") {
@@ -360,8 +360,8 @@ function function_69b8767f() {
   self scene::play("scene_ai_sdr_com_intro_run_slide01_to_cover_right_crouch_short_4", "Shot 1");
 }
 
-function function_8dac85e(scene, var_a3671203, var_5505b07f, loop) {
-  self notify(#"hash_10622d7e7f80ce71");
+function function_8dac85e(scene, death_shot, var_5505b07f, loop) {
+  self notify(#"played_death_anim");
   level.player playhitmarker(undefined, 5, undefined, 1);
   level thread scene::play(var_5505b07f, loop, self);
   self val::set(#"kitchen_guy", "ignoreme", 1);
@@ -495,4 +495,4 @@ function init_flags() {
 
 function init_clientfields() {}
 
-function function_22b7fffd() {}
+function init_scenes() {}

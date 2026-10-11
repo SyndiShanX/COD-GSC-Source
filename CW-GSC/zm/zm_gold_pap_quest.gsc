@@ -136,10 +136,10 @@ function function_31abb662() {
     }
 
     level flag::set(#"hash_7b872eebd26623c5");
-    var_dbe98535 = randomintrange(1, 6);
-    level thread zm_vo::function_7622cb70(#"hash_3afb47d4b7211560" + var_dbe98535);
-    level scene::play("aib_t9_zm_vign_cust_frbz_rav_vignette_01_alt_0" + var_dbe98535, level.var_3ebc9062);
-    level scene::stop("aib_t9_zm_vign_cust_frbz_rav_vignette_01_alt_0" + var_dbe98535);
+    scene_index = randomintrange(1, 6);
+    level thread zm_vo::function_7622cb70(#"hash_3afb47d4b7211560" + scene_index);
+    level scene::play("aib_t9_zm_vign_cust_frbz_rav_vignette_01_alt_0" + scene_index, level.var_3ebc9062);
+    level scene::stop("aib_t9_zm_vign_cust_frbz_rav_vignette_01_alt_0" + scene_index);
     level.ravenov_chair animation::stop();
     zm_utility::function_d729de6a(0, [#"zone_atrium"]);
   }
@@ -194,7 +194,7 @@ function private function_63193c65() {
 }
 
 function function_db073473(e_player) {
-  if(level flag::get(#"hash_3e765c26047c9f54") || level flag::get(#"hash_7b872eebd26623c5")) {
+  if(level flag::get(#"start_exfil") || level flag::get(#"hash_7b872eebd26623c5")) {
     return false;
   }
 
@@ -214,7 +214,7 @@ function function_5a72edf0() {
 }
 
 function function_da010d65(b_skipped) {
-  level endon(#"end_game", #"hash_4351d45c325720cc" + "_ended_early", #"hash_3e765c26047c9f54");
+  level endon(#"end_game", #"hash_4351d45c325720cc" + "_ended_early", #"start_exfil");
   level.var_2645bbc0 = 2;
 
   if(b_skipped || zm_utility::function_c4b020f8()) {
@@ -243,7 +243,7 @@ function function_da010d65(b_skipped) {
 }
 
 function function_c3ff2857(b_skipped, var_19e802fa) {
-  if(!level flag::get(#"hash_3e765c26047c9f54") && (b_skipped || var_19e802fa)) {
+  if(!level flag::get(#"start_exfil") && (b_skipped || var_19e802fa)) {
     level flag::set(#"hash_31d6edbd6e9f7243");
     level.var_2645bbc0 = 2;
     zm_sq::objective_complete(#"hash_69cca9825b7edc33");
@@ -257,9 +257,9 @@ function function_ed6d34fb() {
     var_73524bb4 = getEntArray("portal_fx", "targetname");
 
     foreach(portal_fx in var_73524bb4) {
-      portal_fx.var_2c517d4c = util::spawn_model("tag_origin", portal_fx.origin, portal_fx.angles);
+      portal_fx.portal_pos = util::spawn_model("tag_origin", portal_fx.origin, portal_fx.angles);
       level clientfield::set("" + #"hash_666ad912cb4541f1", 1);
-      playSoundAtPosition(#"hash_5f27432854b069c9", portal_fx.var_2c517d4c.origin);
+      playSoundAtPosition(#"evt_teleporter_activate", portal_fx.portal_pos.origin);
     }
   }
 }
@@ -269,7 +269,7 @@ function function_e7aacbc9() {
 }
 
 function function_1574da8d(b_skipped) {
-  level endon(#"end_game", #"hash_2a1f2228a0ffb82e" + "_ended_early", #"hash_3e765c26047c9f54");
+  level endon(#"end_game", #"hash_2a1f2228a0ffb82e" + "_ended_early", #"start_exfil");
 
   if(b_skipped) {
     return;
@@ -290,7 +290,7 @@ function function_1574da8d(b_skipped) {
 }
 
 function function_40d62928(b_skipped, var_19e802fa) {
-  if(!level flag::get(#"hash_3e765c26047c9f54") && (b_skipped || var_19e802fa)) {
+  if(!level flag::get(#"start_exfil") && (b_skipped || var_19e802fa)) {
     zm_power::turn_power_on_and_open_doors(1);
     zm_power::turn_power_on_and_open_doors(2);
     zm_power::turn_power_on_and_open_doors(3);
@@ -326,7 +326,7 @@ function function_b8854133() {
 }
 
 function function_9855e2a1(b_skipped) {
-  level endon(#"end_game", #"hash_3163e5e53e7ce6fc" + "_ended_early", #"hash_3e765c26047c9f54");
+  level endon(#"end_game", #"hash_3163e5e53e7ce6fc" + "_ended_early", #"start_exfil");
 
   if(b_skipped || zm_utility::function_c4b020f8()) {
     return;
@@ -360,7 +360,7 @@ function function_9855e2a1(b_skipped) {
 }
 
 function function_db63534f(b_skipped, var_19e802fa) {
-  if(!level flag::get(#"hash_3e765c26047c9f54") && (b_skipped || var_19e802fa)) {
+  if(!level flag::get(#"start_exfil") && (b_skipped || var_19e802fa)) {
     function_e361ce1b();
     zm_sq::objective_complete(#"hash_968256af57af0db");
     zm_sq::objective_complete(#"hash_69cca9825b7edc33");
@@ -387,7 +387,7 @@ function function_9d367ce1() {
 }
 
 function private function_a2854e57() {
-  level endon(#"enable_firebase_zone", #"hash_3e765c26047c9f54");
+  level endon(#"enable_firebase_zone", #"start_exfil");
 
   while(true) {
     a_players = function_a1ef346b();

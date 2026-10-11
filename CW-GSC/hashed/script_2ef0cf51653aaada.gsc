@@ -46,7 +46,7 @@ function starting(str_objective) {
   level.var_5d798cf2 = vehicle::simple_spawn_single("ally_fav_right");
   level.var_82e50b77 = vehicle::simple_spawn_single("redshirt_fav");
   level util::function_3e65fe0b(1);
-  level thread namespace_604e2e22::function_1e2a0690("aa_courtyard", "courtyard_aa_gunner", "scene_sge_0000_ambient_aa_gun");
+  level thread namespace_604e2e22::aa_gun("aa_courtyard", "courtyard_aa_gunner", "scene_sge_0000_ambient_aa_gun");
 }
 
 function main(str_objective, b_starting) {
@@ -55,7 +55,7 @@ function main(str_objective, b_starting) {
   setDvar(#"hash_6f9f3341a7820247", 0.2);
   namespace_95f223d5::music("1.0_approach");
   snd::client_msg("audio_intro_triton_disable");
-  level globallogic_ui::function_7bc0e4b9();
+  level globallogic_ui::do_chyron_text();
   exploder::exploder("fxexp_env_fx_set_courtyard");
   level util::create_streamer_hint((7833.92, -3391.2, 161.25), (0, 200, 0), 0.5);
 
@@ -91,7 +91,7 @@ function main(str_objective, b_starting) {
   level thread function_91d00da9();
   level.var_77be18d2 thread vehicle::lights_on();
   level thread intro_objectives();
-  level thread function_4665de46();
+  level thread intro_dialog();
   level thread function_c08c908f();
   level thread function_9f7b1c2();
   level thread namespace_604e2e22::function_4a3de7f5("infil");
@@ -128,17 +128,17 @@ function main(str_objective, b_starting) {
   setDvar(#"hash_6f9f3341a7820247", 1.8);
   level flag::wait_till("flg_emp_blast");
   level util::function_3e65fe0b(0);
-  skipto::function_4e3ab877("infil");
+  skipto::objective_completed("infil");
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {}
+function cleanup(str_objective, b_starting, b_direct, player) {}
 
 function intro_objectives() {
   level waittill(#"hash_34379201e08ecdef");
   objectives::set(#"cp_scripted", undefined, undefined, #"hash_62624188ae803d4f", #"hash_4e609fa5c5db92c2");
 }
 
-function function_4665de46() {
+function intro_dialog() {
   level waittill(#"hash_48ade2ded2e42ff3");
   var_25418acc = level.player player_decision::function_1c4fb6d4();
 
@@ -181,7 +181,7 @@ function function_c08c908f() {
 }
 
 function function_9f7b1c2() {
-  level waittill(#"hash_7375d56c49712b45");
+  level waittill(#"emp_shockwave");
   exploder::exploder("fxexp_nuke_shockwave");
   snd::client_msg("evt_emp_blast_shockwave");
 }
@@ -206,8 +206,8 @@ function function_ee43d0f7() {
     bottom_right.scene = var_7f05924f;
     bottom_right.trigger1 = bottom_left;
     bottom_right.trigger2 = top_right;
-    bottom_right.var_fd38508 = top_middle;
-    bottom_right.var_1e132187 = top_left;
+    bottom_right.trigger3 = top_middle;
+    bottom_right.trigger4 = top_left;
     bottom_right.location = "bottom_right";
     bottom_right.floor = var_6848a619;
     bottom_right.var_b683c71b = var_b683c71b;
@@ -220,8 +220,8 @@ function function_ee43d0f7() {
     bottom_left.scene = var_7f05924f;
     bottom_left.trigger1 = bottom_right;
     bottom_left.trigger2 = top_right;
-    bottom_left.var_fd38508 = top_middle;
-    bottom_left.var_1e132187 = top_left;
+    bottom_left.trigger3 = top_middle;
+    bottom_left.trigger4 = top_left;
     bottom_left.location = "bottom_left";
     bottom_left.floor = var_6848a619;
     bottom_left.var_b683c71b = var_b683c71b;
@@ -234,8 +234,8 @@ function function_ee43d0f7() {
     top_right.scene = var_7f05924f;
     top_right.trigger1 = bottom_right;
     top_right.trigger2 = bottom_left;
-    top_right.var_fd38508 = top_middle;
-    top_right.var_1e132187 = top_left;
+    top_right.trigger3 = top_middle;
+    top_right.trigger4 = top_left;
     top_right.location = "top_right";
     top_right.floor = var_6848a619;
     top_right.var_b683c71b = var_b683c71b;
@@ -248,8 +248,8 @@ function function_ee43d0f7() {
     top_middle.scene = var_7f05924f;
     top_middle.trigger1 = bottom_right;
     top_middle.trigger2 = bottom_left;
-    top_middle.var_fd38508 = top_right;
-    top_middle.var_1e132187 = top_left;
+    top_middle.trigger3 = top_right;
+    top_middle.trigger4 = top_left;
     top_middle.location = "top_middle";
     top_middle.floor = var_6848a619;
     top_middle.var_b683c71b = var_b683c71b;
@@ -262,8 +262,8 @@ function function_ee43d0f7() {
     top_left.scene = var_7f05924f;
     top_left.trigger1 = bottom_right;
     top_left.trigger2 = bottom_left;
-    top_left.var_fd38508 = top_right;
-    top_left.var_1e132187 = top_middle;
+    top_left.trigger3 = top_right;
+    top_left.trigger4 = top_middle;
     top_left.location = "top_left";
     top_left.floor = var_6848a619;
     top_left.var_b683c71b = var_b683c71b;
@@ -299,10 +299,10 @@ function function_2e153a87() {
       case #"grenade":
         level.player.var_ee4032c4 = (isDefined(level.player.var_ee4032c4) ? level.player.var_ee4032c4 : 0) + 1;
         snd::play("evt_tower_explo", self);
-        self function_b1cd831c();
+        self tower_destruction();
         return;
       case #"rocketlauncher":
-        self function_b1cd831c();
+        self tower_destruction();
         return;
       default:
         break;
@@ -310,12 +310,12 @@ function function_2e153a87() {
   }
 }
 
-function function_b1cd831c() {
+function tower_destruction() {
   self endon(#"death");
   self.trigger1 delete();
   self.trigger2 delete();
-  self.var_fd38508 delete();
-  self.var_1e132187 delete();
+  self.trigger3 delete();
+  self.trigger4 delete();
   self.floor delete();
   self.var_b683c71b delete();
   self.var_6be00677 delete();
@@ -341,11 +341,11 @@ function function_b1cd831c() {
     }
   }
 
-  var_fb90e03a = getEntArray("emp_mg_objective_1", "targetname");
-  var_fb90e03a = arraycombine(var_fb90e03a, getEntArray("emp_mg_objective_2", "targetname"));
-  var_fb90e03a = arraycombine(var_fb90e03a, getEntArray("emp_mg_objective_3", "targetname"));
-  var_fb90e03a = arraysortclosest(var_fb90e03a, self.origin);
-  var_fb90e03a[0] notify(#"hash_690490dc48ae49b8");
+  a_e = getEntArray("emp_mg_objective_1", "targetname");
+  a_e = arraycombine(a_e, getEntArray("emp_mg_objective_2", "targetname"));
+  a_e = arraycombine(a_e, getEntArray("emp_mg_objective_3", "targetname"));
+  a_e = arraysortclosest(a_e, self.origin);
+  a_e[0] notify(#"remove_objective_marker");
   self.scene notify(#"death");
   location = self.location;
   self thread function_6943404();
@@ -359,7 +359,7 @@ function function_6943404() {
 }
 
 function function_53c16fe1() {
-  var_d10853ff = getEnt("wood_gate_trigger", "targetname");
-  var_d10853ff trigger::wait_till();
+  gate_trigger = getEnt("wood_gate_trigger", "targetname");
+  gate_trigger trigger::wait_till();
   scene::play_from_time("p9_fxanim_cp_siege_wood_gate_bundle", "play");
 }

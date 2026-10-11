@@ -69,7 +69,7 @@ function function_bb5d646a(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   e_fx = util::spawn_model(bwasdemojump, "tag_origin", self gettagorigin("J_Spine4"));
-  playSound(bwasdemojump, #"hash_56121885ac540542", e_fx.origin);
+  playSound(bwasdemojump, #"evt_zsouls_start", e_fx.origin);
   capture_points = struct::get_array("capture_point", "targetname");
   capture_point = arraygetclosest(self.origin, capture_points);
   util::playFXOnTag(bwasdemojump, "sr/fx9_obj_secure_soul_trail", e_fx, "tag_origin");
@@ -84,7 +84,7 @@ function function_bb5d646a(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(isDefined(e_fx)) {
     util::playFXOnTag(bwasdemojump, "sr/fx9_obj_secure_rocket_essence_absorb", e_fx, "tag_origin");
-    playSound(bwasdemojump, #"hash_39b5234db35e67", e_fx.origin);
+    playSound(bwasdemojump, #"evt_zsouls_end", e_fx.origin);
   }
 
   wait 0.3;
@@ -109,7 +109,7 @@ function function_55b89b40(localclientnum, oldval, newval, bnewent, binitialsnap
   if(bwastimejump == 1) {
     self endon(#"death");
     forcestreamxmodel(#"p9_sur_machine_rocket_01");
-    forcestreamxmodel(#"hash_2eb7d391abf00e32");
+    forcestreamxmodel(#"p9_sur_machine_rocket_legs_goo");
     self.var_48650596 = util::playFXOnTag(fieldname, "sr/fx9_obj_secure_rocket_entry", self, "tag_origin");
     self playSound(fieldname, #"hash_73e7cc85bfce53d0");
     wait 3.6;

@@ -107,16 +107,16 @@ function function_3a3787ec() {
 
 function function_e199d168() {
   self.var_af9beb09 = getEnt(self.target, "targetname");
-  self.var_af9beb09 function_619a5c20();
+  self.var_af9beb09 pingable();
   self.var_af9beb09 clientfield::set("set_compass_icon", 1);
   self.var_af9beb09.control_point = self;
-  self.var_af9beb09 scene::init(#"hash_5ee79d3fbd128d25", self.var_af9beb09);
+  self.var_af9beb09 scene::init(#"p9_fxanim_zm_gold_control_point_main_bundle", self.var_af9beb09);
 }
 
 function function_60f09fb9() {
-  self scene::init(#"hash_e47497b4ff880f5");
+  self scene::init(#"p9_fxanim_zm_gold_control_point_collector_bundle");
   self.mdl = self.scene_ents[#"prop 1"];
-  self.mdl function_619a5c20();
+  self.mdl pingable();
   self.mdl clientfield::set("set_compass_icon", 1);
   self.mdl.control_point = self;
   self.objective_pos = struct::get(self.target, "targetname");
@@ -130,9 +130,9 @@ function function_ef4139d1() {
       control_point_pos.var_547f9dd5 = [];
       control_point_pos.var_56d2adea = 0;
       control_point_pos.var_269ad176 = 0;
-      var_1baed918 = struct::get_array(control_point_pos.target, "targetname");
+      a_target_pos = struct::get_array(control_point_pos.target, "targetname");
 
-      foreach(target_pos in var_1baed918) {
+      foreach(target_pos in a_target_pos) {
         if(target_pos.script_noteworthy === "satellite_pos") {
           if(!isDefined(control_point_pos.var_547f9dd5)) {
             control_point_pos.var_547f9dd5 = [];
@@ -245,8 +245,8 @@ function function_b7c45db1(control_point, e_player) {
     level zm_ui_inventory::function_7df6bb60(#"hash_41f1715c1f176f3b", 2);
   }
 
-  control_point.var_93623c13 = control_point util::spawn_model(#"p9_fxanim_zm_gold_control_point_crystal_02_mod", control_point.origin, control_point.angles);
-  control_point.var_93623c13 thread function_6ed4e713();
+  control_point.crystal_model = control_point util::spawn_model(#"p9_fxanim_zm_gold_control_point_crystal_02_mod", control_point.origin, control_point.angles);
+  control_point.crystal_model thread function_6ed4e713();
   control_point.var_4e953b00 = 1;
   level flag::set(#"insert_crystal" + control_point.script_int);
   level.var_2912d8c5++;
@@ -276,14 +276,14 @@ function function_b7c45db1(control_point, e_player) {
 }
 
 function function_6ed4e713() {
-  self scene::play(#"hash_17724c22a7ab4091", "up", self);
-  self scene::stop(#"hash_17724c22a7ab4091");
-  self thread scene::play(#"hash_17724c22a7ab4091", "idle", self);
+  self scene::play(#"p9_fxanim_zm_gold_control_point_crystal_02_bundle", "up", self);
+  self scene::stop(#"p9_fxanim_zm_gold_control_point_crystal_02_bundle");
+  self thread scene::play(#"p9_fxanim_zm_gold_control_point_crystal_02_bundle", "idle", self);
 }
 
 function function_7df47abd() {
-  level endon(#"end_game", #"hash_3e765c26047c9f54");
-  playSoundAtPosition(#"hash_2ea7b4a593646089", self.origin);
+  level endon(#"end_game", #"start_exfil");
+  playSoundAtPosition(#"evt_control_unit_activate", self.origin);
   level flag::set(#"hash_1c70d74ceb5e9aa2");
   level flag::set(#"hash_5dce120a8e013b48");
   thread namespace_4ce4e65e::function_4f292ffc();
@@ -315,31 +315,31 @@ function function_7df47abd() {
     case 1:
     default:
       n_count_min = 10;
-      var_b90dca7b = 12;
+      n_count_max = 12;
       break;
     case 2:
       n_count_min = 13;
-      var_b90dca7b = 15;
+      n_count_max = 15;
       break;
     case 3:
       n_count_min = 16;
-      var_b90dca7b = 18;
+      n_count_max = 18;
       break;
     case 4:
       n_count_min = 19;
-      var_b90dca7b = 21;
+      n_count_max = 21;
       break;
   }
 
   var_37c20fcf = 5;
-  var_4340bf8a = var_b90dca7b - n_count_min;
+  var_4340bf8a = n_count_max - n_count_min;
   var_3b3dba11 = var_4340bf8a / var_37c20fcf;
   n_count = int(n_count_min + var_3b3dba11 * (n_round - var_37c20fcf));
 
   if(n_count < n_count_min) {
     n_count = n_count_min;
-  } else if(n_count > var_b90dca7b) {
-    n_count = var_b90dca7b;
+  } else if(n_count > n_count_max) {
+    n_count = n_count_max;
   }
 
   level.var_6fad6ea9 = level.zombie_ai_limit - n_count;
@@ -379,7 +379,7 @@ function function_de517a00() {
   self notify("5fadc52d5fa39e8c");
   self endon("5fadc52d5fa39e8c");
   self endon(#"death");
-  level endon(#"hash_397aa803a58d2ea3", #"hash_3e765c26047c9f54");
+  level endon(#"hash_397aa803a58d2ea3", #"start_exfil");
   self.var_6d81bf5c = self.var_126d7bef;
   self.var_c8a896e3 = self.ignore_round_spawn_failsafe;
   self.var_4e219048 = self.b_ignore_cleanup;
@@ -423,7 +423,7 @@ function function_9112b94e(ai_zombie) {
 }
 
 function function_1ef4bcd6(var_14a22ccd = 0) {
-  level endon(#"end_game", #"hash_3e765c26047c9f54");
+  level endon(#"end_game", #"start_exfil");
   level flag::clear("failed_control_point" + self.script_int);
   self.var_16ad7e31 = 0;
   self.var_ff770ca = 0;
@@ -517,8 +517,8 @@ function function_1ef4bcd6(var_14a22ccd = 0) {
 
 function function_c1bde2a0() {
   self endon(#"anim_deactivate");
-  self.var_af9beb09 scene::play(#"hash_5ee79d3fbd128d25", "activate", self.var_af9beb09);
-  self.var_af9beb09 thread scene::play(#"hash_5ee79d3fbd128d25", "activate_idle", self.var_af9beb09);
+  self.var_af9beb09 scene::play(#"p9_fxanim_zm_gold_control_point_main_bundle", "activate", self.var_af9beb09);
+  self.var_af9beb09 thread scene::play(#"p9_fxanim_zm_gold_control_point_main_bundle", "activate_idle", self.var_af9beb09);
 }
 
 function function_8ab36f01() {
@@ -527,21 +527,21 @@ function function_8ab36f01() {
   self.var_af9beb09 clientfield::set("" + #"hash_11d9c3835adcaece", 1);
   wait 3;
   playrumbleonposition(#"hash_605684c23d123c36", self.origin);
-  playSoundAtPosition(#"hash_302f5ee824b9e9eb", self.origin);
-  self.var_af9beb09 scene::play(#"hash_5ee79d3fbd128d25", "explosion", self.var_af9beb09);
-  self.var_af9beb09 thread scene::play(#"hash_5ee79d3fbd128d25", "explosion_idle", self.var_af9beb09);
+  playSoundAtPosition(#"evt_control_unit_success", self.origin);
+  self.var_af9beb09 scene::play(#"p9_fxanim_zm_gold_control_point_main_bundle", "explosion", self.var_af9beb09);
+  self.var_af9beb09 thread scene::play(#"p9_fxanim_zm_gold_control_point_main_bundle", "explosion_idle", self.var_af9beb09);
   wait 3;
   self thread zm_gold_vo::function_891da57a();
 }
 
 function function_741d2259() {
   self endon(#"anim_deactivate");
-  self scene::play(#"hash_e47497b4ff880f5", "activate");
-  self thread scene::play(#"hash_e47497b4ff880f5", "activate_idle");
+  self scene::play(#"p9_fxanim_zm_gold_control_point_collector_bundle", "activate");
+  self thread scene::play(#"p9_fxanim_zm_gold_control_point_collector_bundle", "activate_idle");
 }
 
 function function_ca558ad5() {
-  level endon(#"end_game", "failed_control_point" + self.script_int, #"hash_3e765c26047c9f54");
+  level endon(#"end_game", "failed_control_point" + self.script_int, #"start_exfil");
   callback::on_ai_killed(&function_559a9ad3);
   var_10ff40e4 = 7 + function_a1ef346b().size * 5;
 
@@ -607,7 +607,7 @@ function function_559a9ad3(params) {
 }
 
 function function_30f8cfb4(satellite, zone_index, var_14a22ccd = 0) {
-  level endon(#"end_game", "captured_control_point" + zone_index, "failed_control_point" + zone_index, #"defend_succeed", #"hash_397aa803a58d2ea3", #"hash_3e765c26047c9f54");
+  level endon(#"end_game", "captured_control_point" + zone_index, "failed_control_point" + zone_index, #"defend_succeed", #"hash_397aa803a58d2ea3", #"start_exfil");
   e_objective = satellite.mdl;
   var_9bb2940e = #"hash_3859482a0c5aa91f";
 
@@ -641,7 +641,7 @@ function function_30f8cfb4(satellite, zone_index, var_14a22ccd = 0) {
 }
 
 function function_49401276(e_objective) {
-  level endon(#"hash_3e765c26047c9f54");
+  level endon(#"start_exfil");
   self endon(#"hash_3ff994bb36bd6fa0");
   self.var_94d080b = 3;
 
@@ -701,12 +701,12 @@ function function_640d77f3(var_931d409 = undefined) {
   level flag::set("spawn_zombies");
 }
 
-function function_ea727237(params) {
-  function_1eaaceab(self.var_8ae5ea26.var_f8e2e6ae);
+function ai_on_death(params) {
+  function_1eaaceab(self.force_target.var_f8e2e6ae);
 }
 
 function function_e69a5ae5() {
-  level endon(#"end_game", "captured_control_point" + self.script_int, "failed_control_point" + self.script_int, #"hash_3e765c26047c9f54");
+  level endon(#"end_game", "captured_control_point" + self.script_int, "failed_control_point" + self.script_int, #"start_exfil");
   self endon(#"defend_succeed");
 
   while(true) {
@@ -727,7 +727,7 @@ function function_e69a5ae5() {
 }
 
 function function_bc369205(var_14a22ccd = 0, var_17f8efd5 = 0, var_d219813c = 0) {
-  level endon(#"end_game", "captured_control_point" + self.script_int, "failed_control_point" + self.script_int, #"charging_failed", #"charging_succeed", #"hash_3e765c26047c9f54");
+  level endon(#"end_game", "captured_control_point" + self.script_int, "failed_control_point" + self.script_int, #"charging_failed", #"charging_succeed", #"start_exfil");
   self endon(#"defend_succeed");
   self thread function_2f28c166();
 
@@ -929,17 +929,17 @@ function function_21a9e71b(success, var_14a22ccd, var_d219813c = 0) {
 
     if(self flag::get(#"exploded")) {
       self.var_af9beb09 clientfield::set("" + #"hash_11d9c3835adcaece", 0);
-      self.var_af9beb09 thread scene::play(#"hash_5ee79d3fbd128d25", "collapse_fall", self.var_af9beb09);
+      self.var_af9beb09 thread scene::play(#"p9_fxanim_zm_gold_control_point_main_bundle", "collapse_fall", self.var_af9beb09);
       self flag::clear(#"exploded");
     } else {
       self.var_af9beb09 scene::stop();
-      self.var_af9beb09 scene::init(#"hash_5ee79d3fbd128d25", self.var_af9beb09);
+      self.var_af9beb09 scene::init(#"p9_fxanim_zm_gold_control_point_main_bundle", self.var_af9beb09);
     }
 
     foreach(satellite in self.var_547f9dd5) {
       satellite.mdl clientfield::set("" + #"hash_20b22d2242b107cc", 0);
       satellite notify(#"anim_deactivate");
-      satellite thread scene::play(#"hash_e47497b4ff880f5", "stop");
+      satellite thread scene::play(#"p9_fxanim_zm_gold_control_point_collector_bundle", "stop");
     }
 
     if(level flag::get("power_on" + self.script_int)) {
@@ -968,7 +968,7 @@ function function_21a9e71b(success, var_14a22ccd, var_d219813c = 0) {
     level flag::set("failed_control_point" + self.script_int);
     level flag::clear("captured_control_point" + self.script_int);
     level notify(#"failed_control_point");
-    playSoundAtPosition(#"hash_1e81b38b571878ba", self.origin);
+    playSoundAtPosition(#"evt_control_unit_failure", self.origin);
   }
 
   if(!level flag::get(#"pap_quest_completed")) {
@@ -1040,8 +1040,8 @@ function function_e8799ac6(var_32f76af8) {
   function_640d77f3(0);
 }
 
-function function_bf606a73() {
-  level endon(#"hash_3e765c26047c9f54");
+function zombie_attack() {
+  level endon(#"start_exfil");
   self endon(#"death");
   self callback::function_d8abfc3d(#"hash_4afe635f36531659", &function_fd68cae4);
 
@@ -1134,7 +1134,7 @@ function function_bdb2b85b(origin, angles, radius, num_spots, zone_name, max_hei
 function private function_afa5893c() {
   self notify("69d00b780355467d");
   self endon("69d00b780355467d");
-  level endon(#"end_game", #"game_ended", #"hash_3e765c26047c9f54");
+  level endon(#"end_game", #"game_ended", #"start_exfil");
 
   while(true) {
     if(level.round_number == self.var_56d2adea) {
@@ -1149,7 +1149,7 @@ function private function_afa5893c() {
 function private function_2f28c166() {
   self notify("49c2422d7007c933");
   self endon("49c2422d7007c933");
-  level endon(#"end_game", "captured_control_point" + self.script_int, "failed_control_point" + self.script_int, #"charging_failed", #"charging_succeed", #"hash_3e765c26047c9f54");
+  level endon(#"end_game", "captured_control_point" + self.script_int, "failed_control_point" + self.script_int, #"charging_failed", #"charging_succeed", #"start_exfil");
 
   while(true) {
     if(self.var_2b239c6f > 2000) {

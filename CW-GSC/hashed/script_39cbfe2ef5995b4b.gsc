@@ -30,7 +30,7 @@ function private preinit() {
 
 function private function_116fd9a7() {
   item_world::function_861f348d(#"generic_ammo_pickup", &function_d045e83b);
-  item_world::function_861f348d(#"hash_76a324a4d6073913", &function_2e5b5858);
+  item_world::function_861f348d(#"generic_armor_pickup", &function_2e5b5858);
   item_world::function_861f348d(#"hash_3bfb97e39d67e5f9", &function_cb9b4dd7);
   item_world::function_861f348d(#"generic_attachment_pickup", &function_14b2eddf);
   item_world::function_861f348d(#"hash_6247ea34d3b1ddb6", &function_42ffe9b2);

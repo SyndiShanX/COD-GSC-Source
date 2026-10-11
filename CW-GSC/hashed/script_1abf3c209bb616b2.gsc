@@ -97,7 +97,7 @@ function function_7e4779a4() {
     switch (state) {
       case #"disabled":
         if(self.state == "alarm_on") {
-          self thread function_fc2bc4ba();
+          self thread alarm_off();
         }
 
         function_bb67aeb1();
@@ -107,7 +107,7 @@ function function_7e4779a4() {
         break;
       case #"destroyed":
         if(self.state == "alarm_on") {
-          self thread function_fc2bc4ba();
+          self thread alarm_off();
         }
 
         function_bb67aeb1();
@@ -129,7 +129,7 @@ function function_7e4779a4() {
         }
 
         self.state = state;
-        self thread function_fc2bc4ba();
+        self thread alarm_off();
         break;
       default:
 
@@ -169,7 +169,7 @@ function alarm_on() {
   }
 }
 
-function function_fc2bc4ba() {
+function alarm_off() {
   foreach(light in self.lights) {
     if(isDefined(self.var_bb4a3b9)) {
       light setModel(self.var_bb4a3b9);

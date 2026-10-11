@@ -52,10 +52,10 @@ function main(str_objective, b_starting) {
   level thread cp_nam_prisoner::function_1f911b89(next_obj);
   flag = "caves";
   level flag::wait_till(flag + "_complete");
-  level skipto::function_4e3ab877(b_starting, 0);
+  level skipto::objective_completed(b_starting, 0);
 }
 
-function cleanup(str_objective, b_starting, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, b_direct, player) {
   wait 1;
   caves1_room1_enemies1 = getEntArray("caves1_room1_enemies1", "targetname");
   array::thread_all(caves1_room1_enemies1, &namespace_d9b153b9::ent_cleanup);
@@ -73,7 +73,7 @@ function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   door_struct thread namespace_d9b153b9::ent_cleanup();
 }
 
-function function_c26b0bc0() {
+function flags_init() {
   level flag::init("caves_complete");
   level flag::init("flag_caves_backtrack_blocker");
   level flag::init("flag_caves_room1_player_shot");
@@ -87,10 +87,10 @@ function caves() {
   level thread savegame::checkpoint_save();
   var_2cf9fe23 = level.var_731c10af.var_42659717 + 1;
   str = "visit_" + var_2cf9fe23 + "_" + var_c79d614f;
-  bb::function_cd497743(str, level.player);
+  bb::logplayermapnotification(str, level.player);
 
   while(true) {
-    level thread namespace_d9b153b9::function_a57f6629(var_c79d614f);
+    level thread namespace_d9b153b9::notify_on_flag(var_c79d614f);
     level function_ea87c777(var_c79d614f);
 
     if(level flag::get(var_c79d614f + "_complete")) {
@@ -272,7 +272,7 @@ function function_9059fb31() {
   level flag::wait_till("flag_caves1_hallway1_finished");
 }
 
-function function_d4d6e2ff(var_3b892962) {}
+function function_d4d6e2ff(solider) {}
 
 function function_671561c4() {
   level flag::wait_till("flag_caves1_room2_start");
@@ -328,9 +328,9 @@ function function_395e2e49(var_d246885f) {
   thread function_e5bef436(var_d246885f, "caves_rappel3_struct");
 }
 
-function function_e5bef436(var_d246885f, var_142cfe56) {
+function function_e5bef436(var_d246885f, str_struct_name) {
   if(!flag::get("stealth_spotted")) {
-    struct = struct::get(var_142cfe56, "targetname");
+    struct = struct::get(str_struct_name, "targetname");
 
     if(isDefined(var_d246885f[0])) {
       var_d246885f[0] spawner::go_to_node(struct);
@@ -342,8 +342,8 @@ function function_e5bef436(var_d246885f, var_142cfe56) {
   level thread ai::function_3ff06c1e("caves1_room2_enemies1_rappel", "cave1_room2_volume1", 1);
 }
 
-function function_b3e0f5dc(var_3b892962) {
-  var_3b892962 dialogue::queue("vox_cp_prsn_35000_rms2_slowlyyougotitw_ec");
+function function_b3e0f5dc(solider) {
+  solider dialogue::queue("vox_cp_prsn_35000_rms2_slowlyyougotitw_ec");
 }
 
 function function_1d747113() {
@@ -379,7 +379,7 @@ function function_e6c0e11d() {
   wait 0.25;
   ai_array = getaiarray("caves1_room3_stealth1", "script_aigroup");
   level thread scene::play("scene_cave_bunker", ai_array);
-  thread function_99d4a1d3(ai_array);
+  thread weap_india_sup_plr_last_fcg(ai_array);
   level flag::wait_till("stealth_spotted");
   level notify(#"hash_2747c974439b3f3e");
 
@@ -406,7 +406,7 @@ function function_de1513ad() {
   level thread namespace_b6fe1dbe::music("5.0_door_1");
 }
 
-function function_99d4a1d3(ai_array) {
+function weap_india_sup_plr_last_fcg(ai_array) {
   level endon(#"hash_2747c974439b3f3e");
 
   if(isalive(ai_array[0])) {
@@ -435,7 +435,7 @@ function function_9287467c() {
   self.grenadeammo = 0;
   self getenemyinfo(level.player);
   self getperfectinfo(level.player);
-  self battlechatter::function_2ab9360b(0);
+  self battlechatter::bc_allow(0);
   level flag::wait_till("stealth_spotted");
-  self battlechatter::function_2ab9360b(1);
+  self battlechatter::bc_allow(1);
 }

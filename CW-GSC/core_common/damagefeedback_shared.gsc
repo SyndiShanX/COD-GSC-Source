@@ -98,11 +98,11 @@ function hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffset
   }
 
   if(isDefined(inflictor) && inflictor === "MOD_EXECUTION") {
-    return #"hash_58d3709b34454b17";
+    return #"evt_execution_kill_oneshot";
   }
 
   if(is_true(fatal) && victim.name == #"inventory_hero_flamethrower") {
-    hitalias = #"hash_bb326e71044938c";
+    hitalias = #"mpl_hit_flamethrower_fatal";
     return hitalias;
   }
 
@@ -113,9 +113,9 @@ function hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffset
 
   if(victim.var_965cc0b3) {
     if(is_true(fatal)) {
-      hitalias = #"hash_6d7fa87ddd50800";
+      hitalias = #"mpl_hit_equipment_fatal";
     } else {
-      hitalias = #"hash_644a18cd873e501d";
+      hitalias = #"mpl_hit_equipment";
     }
   }
 
@@ -148,7 +148,7 @@ function hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffset
           if(isDefined(idflags) && idflags & 2048 && isDefined(psoffsettime)) {
             if(isDefined(psoffsettime.var_426947c4)) {
               if(weapons::isheadshot(victim, shitloc, inflictor)) {
-                hitalias = #"hash_6b219a0cac330e0b";
+                hitalias = #"mpl_hit_alert_helmet_broke";
               } else {
                 hitalias = #"mpl_hit_alert_armor_broke";
               }
@@ -167,16 +167,16 @@ function hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffset
             hitalias = #"mpl_hit_alert_burn";
           } else if(is_true(fatal)) {
             if(weapons::isheadshot(victim, shitloc, inflictor)) {
-              hitalias = #"hash_616dd8ea01d089ac";
+              hitalias = #"mpl_hit_head_fatal";
             } else {
-              hitalias = #"hash_31e38d8520839566";
+              hitalias = #"mpl_hit_body_fatal";
             }
           } else if(weapons::isheadshot(victim, shitloc, inflictor)) {
-            hitalias = #"hash_29ca1afa9209bfc6";
+            hitalias = #"mpl_hit_head_nf";
           } else if(inflictor == "MOD_MELEE_WEAPON_BUTT") {} else if(shitloc === "riotshield") {
             hitalias = #"prj_bullet_impact_shield";
           } else {
-            hitalias = #"hash_205c83ac75849f80";
+            hitalias = #"mpl_hit_body_nf";
           }
 
           break;
@@ -217,15 +217,15 @@ function hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffset
     } else if(inflictor == "MOD_BURNED" || inflictor == "MOD_DOT") {
       hitalias = #"mpl_hit_alert_burn";
     } else {
-      hitalias = #"hash_205c83ac75849f80";
+      hitalias = #"mpl_hit_body_nf";
 
       if(is_true(fatal)) {
-        hitalias = #"hash_31e38d8520839566";
+        hitalias = #"mpl_hit_body_fatal";
       }
     }
   } else if(inflictor === "MOD_MELEE_WEAPON_BUTT") {
     if(fatal === 1) {
-      hitalias = #"hash_27781beb722b7488";
+      hitalias = #"mpl_hit_melee_fatal";
     }
   } else if(isDefined(perkfeedback) && isDefined(perkfeedback.owner) && isDefined(perkfeedback.owner.soundmod)) {
     if(perkfeedback.owner.soundmod == #"player" && isDefined(idflags) && idflags & 2048 && isDefined(psoffsettime)) {
@@ -251,7 +251,7 @@ function hit_alert_sfx_zm(mod, inflictor, perkfeedback, weapon, victim, psoffset
   }
 
   if(victim.var_965cc0b3) {
-    hitalias = #"hash_644a18cd873e501d";
+    hitalias = #"mpl_hit_equipment";
   }
 
   if(should_play_sound(perkfeedback)) {
@@ -265,7 +265,7 @@ function hit_alert_sfx_zm(mod, inflictor, perkfeedback, weapon, victim, psoffset
           if(isDefined(idflags) && idflags & 2048 && isDefined(psoffsettime)) {
             if(isDefined(psoffsettime.var_426947c4)) {
               if(weapons::isheadshot(victim, shitloc, perkfeedback)) {
-                hitalias = #"hash_6b219a0cac330e0b";
+                hitalias = #"mpl_hit_alert_helmet_broke";
               } else {
                 hitalias = #"mpl_hit_alert_armor_broke";
               }
@@ -280,16 +280,16 @@ function hit_alert_sfx_zm(mod, inflictor, perkfeedback, weapon, victim, psoffset
             hitalias = #"mpl_hit_alert_burn";
           } else if(is_true(fatal)) {
             if(weapons::isheadshot(victim, shitloc, perkfeedback)) {
-              hitalias = #"hash_616dd8ea01d089ac";
+              hitalias = #"mpl_hit_head_fatal";
             } else {
-              hitalias = #"hash_31e38d8520839566";
+              hitalias = #"mpl_hit_body_fatal";
             }
           } else if(weapons::isheadshot(victim, shitloc, perkfeedback)) {
-            hitalias = #"hash_29ca1afa9209bfc6";
+            hitalias = #"mpl_hit_head_nf";
           } else if(perkfeedback == "MOD_MELEE_WEAPON_BUTT") {} else if(shitloc === "riotshield") {
             hitalias = #"prj_bullet_impact_shield";
           } else {
-            hitalias = #"hash_205c83ac75849f80";
+            hitalias = #"mpl_hit_body_nf";
           }
 
           break;
@@ -300,15 +300,15 @@ function hit_alert_sfx_zm(mod, inflictor, perkfeedback, weapon, victim, psoffset
     } else if(perkfeedback == "MOD_BURNED" || perkfeedback == "MOD_DOT") {
       hitalias = #"mpl_hit_alert_burn";
     } else {
-      hitalias = #"hash_205c83ac75849f80";
+      hitalias = #"mpl_hit_body_nf";
 
       if(is_true(fatal)) {
-        hitalias = #"hash_31e38d8520839566";
+        hitalias = #"mpl_hit_body_fatal";
       }
     }
   } else if(perkfeedback === "MOD_MELEE_WEAPON_BUTT") {
     if(fatal === 1) {
-      hitalias = #"hash_27781beb722b7488";
+      hitalias = #"mpl_hit_melee_fatal";
     }
   } else if(isDefined(weapon) && isDefined(weapon.owner) && isDefined(weapon.owner.soundmod)) {
     if(weapon.owner.soundmod == #"player" && isDefined(idflags) && idflags & 2048 && isDefined(psoffsettime)) {
@@ -443,8 +443,8 @@ function update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shit
     }
   }
 
-  var_57f3fd02 = isDefined(inflictor) && isPlayer(inflictor);
-  self playhitmarker(hitalias, damagestage, perkfeedback, is_dead, var_594a2d34, is_vehicle, var_32f65675, is_friendly, var_57f3fd02);
+  dorumble = isDefined(inflictor) && isPlayer(inflictor);
+  self playhitmarker(hitalias, damagestage, perkfeedback, is_dead, var_594a2d34, is_vehicle, var_32f65675, is_friendly, dorumble);
 
   if(isDefined(perkfeedback)) {
     if(isDefined(self.hud_damagefeedback_additional)) {

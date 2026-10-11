@@ -62,7 +62,7 @@ function private function_59941838(localclientnum, oldval, newval, bnewent, bini
 }
 
 function function_1deaf019(name, key, territory = level.territory) {
-  var_3e8b00df = [];
+  validentities = [];
   entities = getEntArray(0, name, key);
 
   foreach(entity in entities) {
@@ -71,14 +71,14 @@ function function_1deaf019(name, key, territory = level.territory) {
     }
 
     if(is_inside(entity.origin, undefined, territory)) {
-      var_3e8b00df[var_3e8b00df.size] = entity;
+      validentities[validentities.size] = entity;
     }
   }
 
-  return var_3e8b00df;
+  return validentities;
 }
 
-function function_1f583d2e(name, key, territory = level.territory) {
+function get_ent_array(name, key, territory = level.territory) {
   entities = getEntArray(0, name, key);
   return function_39dd704c(entities, territory);
 }

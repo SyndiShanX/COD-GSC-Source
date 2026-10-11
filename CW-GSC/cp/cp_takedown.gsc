@@ -49,10 +49,10 @@ function event_handler[level_init] main(eventstruct) {
   setclearanceceiling(16);
   init_flags();
   init_clientfields();
-  function_37dfd679();
+  init_skiptos();
   level thread lui::add_luimenu("full_screen_movie", &full_screen_movie::register);
   load::main();
-  function_22b7fffd();
+  init_scenes();
   init_callbacks();
   thread function_7ea0ce5f();
   level thread tkdn_af_wreck::function_70dd6f0e();
@@ -67,20 +67,20 @@ function event_handler[level_init] main(eventstruct) {
   }
 }
 
-function function_37dfd679() {
-  skipto::function_eb91535d("tkdn_raid_bar", &tkdn_raid_bar::main, &tkdn_raid_bar::starting, "Hit 2: Bar", &tkdn_raid_bar::cleanup, ["amsterdam_intro"]);
-  skipto::function_eb91535d("tkdn_raid_gearup", &namespace_c9f7b6af::main, &namespace_c9f7b6af::starting, "Hit 2: Gear Up", &namespace_c9f7b6af::cleanup, ["amsterdam_intro", "amsterdam_main"]);
-  skipto::function_eb91535d("tkdn_raid_apt", &tkdn_raid_apt::main, &tkdn_raid_apt::starting, "Hit 2: Apartment", &tkdn_raid_apt::cleanup, ["amsterdam_intro", "amsterdam_main"]);
-  skipto::function_eb91535d("tkdn_raid_rooftops", &tkdn_raid_roof::main, &tkdn_raid_roof::starting, "Hit 2: Rooftops", &tkdn_raid_roof::cleanup, ["amsterdam_main"]);
-  skipto::function_eb91535d("tkdn_raid_slide", &tkdn_raid_slide::main, &tkdn_raid_slide::starting, "Hit 2: Slide", &tkdn_raid_slide::cleanup, ["amsterdam_main"]);
-  skipto::function_eb91535d("tkdn_raid_capture", &tkdn_raid_capture::main, &tkdn_raid_capture::starting, "Hit 2: Capture", &tkdn_raid_capture::cleanup, ["amsterdam_main"]);
-  skipto::function_eb91535d("tkdn_af_intro", &tkdn_af_intro::main, &tkdn_af_intro::starting, "Hit 3: Intro", &tkdn_af_intro::cleanup, ["airfield_intro", "airfield_base"]);
-  skipto::function_eb91535d("tkdn_af_hill", &tkdn_af_hill::main, &tkdn_af_hill::starting, "Hit 3: Hill", &tkdn_af_hill::cleanup, ["airfield_intro", "airfield_base"]);
+function init_skiptos() {
+  skipto::add_saved("tkdn_raid_bar", &tkdn_raid_bar::main, &tkdn_raid_bar::starting, "Hit 2: Bar", &tkdn_raid_bar::cleanup, ["amsterdam_intro"]);
+  skipto::add_saved("tkdn_raid_gearup", &namespace_c9f7b6af::main, &namespace_c9f7b6af::starting, "Hit 2: Gear Up", &namespace_c9f7b6af::cleanup, ["amsterdam_intro", "amsterdam_main"]);
+  skipto::add_saved("tkdn_raid_apt", &tkdn_raid_apt::main, &tkdn_raid_apt::starting, "Hit 2: Apartment", &tkdn_raid_apt::cleanup, ["amsterdam_intro", "amsterdam_main"]);
+  skipto::add_saved("tkdn_raid_rooftops", &tkdn_raid_roof::main, &tkdn_raid_roof::starting, "Hit 2: Rooftops", &tkdn_raid_roof::cleanup, ["amsterdam_main"]);
+  skipto::add_saved("tkdn_raid_slide", &tkdn_raid_slide::main, &tkdn_raid_slide::starting, "Hit 2: Slide", &tkdn_raid_slide::cleanup, ["amsterdam_main"]);
+  skipto::add_saved("tkdn_raid_capture", &tkdn_raid_capture::main, &tkdn_raid_capture::starting, "Hit 2: Capture", &tkdn_raid_capture::cleanup, ["amsterdam_main"]);
+  skipto::add_saved("tkdn_af_intro", &tkdn_af_intro::main, &tkdn_af_intro::starting, "Hit 3: Intro", &tkdn_af_intro::cleanup, ["airfield_intro", "airfield_base"]);
+  skipto::add_saved("tkdn_af_hill", &tkdn_af_hill::main, &tkdn_af_hill::starting, "Hit 3: Hill", &tkdn_af_hill::cleanup, ["airfield_intro", "airfield_base"]);
   skipto::add("tkdn_af_tarmac", &tkdn_af_tarmac::main, &tkdn_af_tarmac::starting, "Hit 3: Tarmac", &tkdn_af_tarmac::cleanup, ["airfield_intro", "airfield_base"]);
-  skipto::function_eb91535d("tkdn_af_chase", &tkdn_af_chase::main, &tkdn_af_chase::starting, "Hit 3: Chase", &tkdn_af_chase::cleanup, ["airfield_intro", "airfield_base"]);
-  skipto::function_eb91535d("tkdn_af_rc_chase", &tkdn_af_chase::function_2ccc781e, &tkdn_af_chase::function_614083bb, "Hit 3: RC Chase", &tkdn_af_chase::function_cca97e77, ["airfield_base"]);
+  skipto::add_saved("tkdn_af_chase", &tkdn_af_chase::main, &tkdn_af_chase::starting, "Hit 3: Chase", &tkdn_af_chase::cleanup, ["airfield_intro", "airfield_base"]);
+  skipto::add_saved("tkdn_af_rc_chase", &tkdn_af_chase::function_2ccc781e, &tkdn_af_chase::function_614083bb, "Hit 3: RC Chase", &tkdn_af_chase::function_cca97e77, ["airfield_base"]);
   skipto::add("tkdn_af_skid", &tkdn_af_skid::main, &tkdn_af_skid::starting, "Hit 3: Skid", &tkdn_af_skid::cleanup, ["airfield_base"]);
-  skipto::function_eb91535d("tkdn_af_wreck", &tkdn_af_wreck::main, &tkdn_af_wreck::starting, "Hit 3: Wreck", &tkdn_af_wreck::cleanup, ["airfield_base"]);
+  skipto::add_saved("tkdn_af_wreck", &tkdn_af_wreck::main, &tkdn_af_wreck::starting, "Hit 3: Wreck", &tkdn_af_wreck::cleanup, ["airfield_base"]);
 
   skipto::add_dev("<dev string:x38>", &tkdn_raid_bar::main, &tkdn_raid_bar::starting, "<dev string:x51>", &tkdn_raid_bar::cleanup, undefined, undefined, ["<dev string:x6c>"]);
   skipto::add_dev("<dev string:x7f>", &tkdn_raid_bar::main, &tkdn_raid_bar::starting, "<dev string:x9b>", &tkdn_raid_bar::cleanup, undefined, undefined, ["<dev string:x6c>", "<dev string:xb9>", "<dev string:xcb>", "<dev string:xdd>"]);
@@ -121,19 +121,19 @@ function init_clientfields() {
   tkdn_af_wreck::init_clientfields();
 }
 
-function function_22b7fffd() {
-  tkdn_heli_intro::function_22b7fffd();
-  tkdn_heli_convoy_aslt::function_22b7fffd();
-  namespace_29b42773::function_22b7fffd();
-  tkdn_raid_bar::function_22b7fffd();
-  namespace_c9f7b6af::function_22b7fffd();
-  tkdn_raid_apt::function_22b7fffd();
-  tkdn_raid_capture::function_22b7fffd();
-  tkdn_af_hill::function_22b7fffd();
-  tkdn_af_tarmac::function_22b7fffd();
-  tkdn_af_chase::function_22b7fffd();
-  tkdn_af_skid::function_22b7fffd();
-  tkdn_af_wreck::function_22b7fffd();
+function init_scenes() {
+  tkdn_heli_intro::init_scenes();
+  tkdn_heli_convoy_aslt::init_scenes();
+  namespace_29b42773::init_scenes();
+  tkdn_raid_bar::init_scenes();
+  namespace_c9f7b6af::init_scenes();
+  tkdn_raid_apt::init_scenes();
+  tkdn_raid_capture::init_scenes();
+  tkdn_af_hill::init_scenes();
+  tkdn_af_tarmac::init_scenes();
+  tkdn_af_chase::init_scenes();
+  tkdn_af_skid::init_scenes();
+  tkdn_af_wreck::init_scenes();
 }
 
 function init_callbacks() {
@@ -143,10 +143,10 @@ function init_callbacks() {
 
 function on_player_connect() {
   if(isDefined(level.skipto_current_objective) && array::contains(level.skipto_current_objective, "tkdn_raid_bar") || level.skipto_current_objective.size == 0) {
-    util::function_f3cadc9a("cp_takedown_player_ready");
+    util::set_player_start_flag("cp_takedown_player_ready");
 
-    if(isDefined(level.var_d7d201ba) && !self flag::exists(level.var_d7d201ba)) {
-      self flag::init(level.var_d7d201ba);
+    if(isDefined(level.str_player_start_flag) && !self flag::exists(level.str_player_start_flag)) {
+      self flag::init(level.str_player_start_flag);
     }
   }
 }

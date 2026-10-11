@@ -135,7 +135,7 @@ function function_22f3bc59() {
 }
 
 function function_7cdcb903(instance) {
-  if(!getdvarint(#"hash_5d3079579464742a", 0) && (level flag::get(#"hash_4c9bb7a770c9e973") || level.var_b48509f9 < 3) || level flag::get(#"hash_3b46a8a050e7823e")) {
+  if(!getdvarint(#"hash_5d3079579464742a", 0) && (level flag::get(#"hash_4c9bb7a770c9e973") || level.star_rating < 3) || level flag::get(#"hash_3b46a8a050e7823e")) {
     return;
   }
 
@@ -225,7 +225,7 @@ function private function_60e3239e(var_edf7d1ed) {
 
 function private function_ada90340(var_2b357ce9) {
   var_dce66956 = var_2b357ce9.s_teleport;
-  mdl_device = content_manager::spawn_script_model(var_dce66956, #"hash_30876ea41ba82413");
+  mdl_device = content_manager::spawn_script_model(var_dce66956, #"p9_zm_gold_turret_ammo");
   mdl_device.angles += (0, -90, 0);
   mdl_device ghost();
   s_result = var_2b357ce9 waittill(#"player_exiting", #"rift_close");
@@ -271,7 +271,7 @@ function function_76b5a507(s_params) {
   mdl_beacon = level.var_1ea1d494.scriptmodel;
 
   if(isDefined(mdl_beacon)) {
-    var_8746b886 = util::spawn_model(#"hash_30876ea41ba82413", mdl_beacon gettagorigin("screen_exfil_jnt") + (-4.5, 15.5, 0), mdl_beacon gettagangles("screen_exfil_jnt") + (78, 0, 0));
+    var_8746b886 = util::spawn_model(#"p9_zm_gold_turret_ammo", mdl_beacon gettagorigin("screen_exfil_jnt") + (-4.5, 15.5, 0), mdl_beacon gettagangles("screen_exfil_jnt") + (78, 0, 0));
     var_8746b886 setscale(0.75);
     var_8746b886 linkTo(mdl_beacon, "screen_exfil_jnt", (-4.5, 15.5, 0), (78, 0, 0));
     var_8746b886 playSound(#"hash_3b5cbbf2a7018a89");
@@ -354,13 +354,13 @@ function function_f43ecee8(mdl_beacon) {
 
   level endon(#"end_game");
   mdl_beacon endon(#"death");
-  level waittill(#"hash_29edd9425510b40d", #"hash_66a72ae427cfc39a");
+  level waittill(#"portal_countdown_started", #"hash_66a72ae427cfc39a");
   mdl_beacon hidepart("screen_respond_jnt");
 }
 
 function function_9026620d() {
   level endon(#"end_game", #"hash_21533c72f7fcd47b");
-  level waittill(#"portal_activated", #"hash_3e765c26047c9f54");
+  level waittill(#"portal_activated", #"start_exfil");
 
   if(level flag::get(#"hash_4c9bb7a770c9e973")) {
     namespace_cf6efd05::function_c484a9be(#"hash_17d8f2b850883bac", 1);
@@ -418,9 +418,9 @@ function private function_b1f268c1(v_loc, instance) {
   level zm_vo::function_7622cb70(#"hash_6587f9c1e0ab3a1f", 1);
   a_spawns = array::randomize(isDefined(instance.contentgroups[#"hash_39aeaa4632e834e2"]) ? instance.contentgroups[#"hash_39aeaa4632e834e2"] : []);
   self callback::on_trigger(&namespace_2c949ef8::function_39ee3b21, undefined, a_spawns);
-  namespace_2c949ef8::function_8b6ae460(v_loc, undefined, 512, 2048, undefined, undefined, undefined, undefined, 512);
+  namespace_2c949ef8::do_ambush(v_loc, undefined, 512, 2048, undefined, undefined, undefined, undefined, 512);
   function_701ee731(v_loc);
-  instance.var_a9ef21d playLoopSound(#"hash_2e77024e1f0a29f1");
+  instance.var_a9ef21d playLoopSound(#"zmb_audiolog_tape_hint_lp");
 
   iprintlnbold("<dev string:x3e>");
 
@@ -445,7 +445,7 @@ function private function_c8fba110(eventstruct) {
   }
 
   self.instance.var_a9ef21d stoploopsound();
-  self.instance.var_a9ef21d playSound(#"hash_ea30fff000de600");
+  self.instance.var_a9ef21d playSound(#"zmb_audiolog_tape_activate");
   self.instance.var_a9ef21d thread scene::play(#"p9_zm_ndu_reel_to_reel_audio_recorder_01_server_bundle", self.instance.var_a9ef21d);
   level flag::set(#"hash_414ba7eb6d94978d");
   self.instance.var_a9ef21d zm_vo::function_d6f8bbd9(#"hash_68609aac048f6529");
@@ -454,7 +454,7 @@ function private function_c8fba110(eventstruct) {
   self.instance.var_a9ef21d zm_vo::function_d6f8bbd9(#"hash_686097ac048f6010");
   self.instance.var_a9ef21d zm_vo::function_d6f8bbd9(#"hash_68609eac048f6bf5");
   level flag::set(#"hash_16f61b20c3d2c610");
-  self.instance.var_a9ef21d playSound(#"hash_19cebf2f0254187a");
+  self.instance.var_a9ef21d playSound(#"zmb_audiolog_tape_end");
   self.instance.var_a9ef21d scene::stop(#"p9_zm_ndu_reel_to_reel_audio_recorder_01_server_bundle");
   self triggerenable(1);
   self.b_activated = 0;
@@ -574,12 +574,12 @@ function private function_4cb97b84(eventstruct) {
     var_af44ab5f playLoopSound(#"hash_16c9b69ca21b8cb9");
     scene::add_scene_func(#"p9_sr_mq4_magic_box_bunny_bundle", &function_ea2f5d05, "dance");
     var_af44ab5f thread scene::play(#"p9_sr_mq4_magic_box_bunny_bundle", var_af44ab5f);
-    namespace_2c949ef8::function_8b6ae460(self.origin, undefined, 500, 1500);
+    namespace_2c949ef8::do_ambush(self.origin, undefined, 500, 1500);
     function_701ee731(self.origin);
     var_af44ab5f playSound(#"hash_1f204d7a336581e8");
-    var_af44ab5f.var_41dec230 moveTo(level.var_2c678640.origin + (0, 0, 8), 1.5);
-    var_af44ab5f.var_41dec230 waittill(#"movedone");
-    var_af44ab5f.var_41dec230 delete();
+    var_af44ab5f.mdl_mover moveTo(level.var_2c678640.origin + (0, 0, 8), 1.5);
+    var_af44ab5f.mdl_mover waittill(#"movedone");
+    var_af44ab5f.mdl_mover delete();
     playFXOnTag(#"hash_2620f801cec5ff00", var_af44ab5f, "j_spine4");
     callback::on_item_pickup(&function_f37669b6);
     var_cc1fb2d0 = namespace_58949729::function_fd5e77fa(#"gold");
@@ -645,7 +645,7 @@ function private function_4cb97b84(eventstruct) {
 
     player flag::set(#"hash_35735a804a34da04");
     player clientfield::set_to_player("" + #"hash_5ef33fc92614c211", 1);
-    player thread objective_retrieval::function_4be8796(self.instance);
+    player thread objective_retrieval::field_upgrade_charge(self.instance);
     player thread objective_retrieval::function_d52adbbc(self.instance);
     player thread function_c132c1b1();
   }
@@ -662,13 +662,13 @@ function function_f37669b6(eventstruct) {
 
 function function_ea2f5d05(a_ents) {
   ent = a_ents[#"bunny"];
-  var_41dec230 = util::spawn_model("tag_origin", ent.origin, ent.angles);
-  ent linkTo(var_41dec230);
-  ent.var_41dec230 = var_41dec230;
-  var_41dec230 moveTo(ent.origin + (0, 0, 75), 2);
-  var_41dec230 waittill(#"movedone");
+  mdl_mover = util::spawn_model("tag_origin", ent.origin, ent.angles);
+  ent linkTo(mdl_mover);
+  ent.mdl_mover = mdl_mover;
+  mdl_mover moveTo(ent.origin + (0, 0, 75), 2);
+  mdl_mover waittill(#"movedone");
   wait 0.5;
-  var_41dec230 bobbing((0, 0, 1), 15, 4);
+  mdl_mover bobbing((0, 0, 1), 15, 4);
 }
 
 function private function_c132c1b1() {
@@ -838,9 +838,9 @@ function private unstable_orb(instance) {
       }
 
       var_af6fb377 = vectortoangles(var_9f3b9a91.origin - mdl_orb.origin);
-      var_b45fc900 = math::angle_dif(int(absangleclamp360(var_af6fb377[1])), int(v_average[1]));
+      n_angle_diff = math::angle_dif(int(absangleclamp360(var_af6fb377[1])), int(v_average[1]));
 
-      if(abs(var_b45fc900) > 45) {
+      if(abs(n_angle_diff) > 45) {
         if(var_853a6020 > 2500) {
           arrayremovevalue(var_5848577a, var_9f3b9a91);
           var_853a6020 = 0;
@@ -1063,7 +1063,7 @@ function function_9ad91439(instance) {
     return;
   }
 
-  instance.var_4272a188 triggerenable(0);
+  instance.starttrigger triggerenable(0);
   objective_setinvisibletoall(instance.var_e55c8b4e);
   var_1c4dd56d = instance.contentgroups[#"phase_rover"][0];
   level.var_c39a4b8f = spawnVehicle(#"hash_d069dee6a0076c8", var_1c4dd56d.origin, var_1c4dd56d.angles, "vehicle_phase_rover", 0, undefined, "sensor");
@@ -1107,7 +1107,7 @@ function private function_8693ce36(instance) {
   n_wait = instance.var_fb224b3b zm_utility::fake_physicslaunch(var_9f3b9a91.origin, 99);
   wait n_wait;
   instance.var_fb224b3b.origin = var_9f3b9a91.origin;
-  instance.var_fb224b3b playLoopSound(#"hash_2e77024e1f0a29f1");
+  instance.var_fb224b3b playLoopSound(#"zmb_audiolog_tape_hint_lp");
   trigger = content_manager::spawn_interact(var_9f3b9a91, &function_1554ed60, #"hash_1114a7cc4d89285c", undefined, undefined, undefined, undefined, (0, 0, 32));
   trigger.instance = instance;
 }
@@ -1125,7 +1125,7 @@ function private function_1554ed60(eventstruct) {
   }
 
   self.instance.var_fb224b3b stoploopsound();
-  self.instance.var_fb224b3b playSound(#"hash_ea30fff000de600");
+  self.instance.var_fb224b3b playSound(#"zmb_audiolog_tape_activate");
   self.instance.var_fb224b3b thread scene::play(#"p9_zm_ndu_reel_to_reel_audio_recorder_01_server_bundle", self.instance.var_fb224b3b);
 
   foreach(player in getPlayers()) {
@@ -1148,11 +1148,11 @@ function private function_1554ed60(eventstruct) {
     var_8485244b = self.instance.contentgroups[#"start_interact"][0];
     objective_setposition(self.instance.var_e55c8b4e, var_8485244b.origin);
     objective_setvisibletoall(self.instance.var_e55c8b4e);
-    self.instance.var_4272a188 triggerenable(1);
+    self.instance.starttrigger triggerenable(1);
   }
 
   self.instance.var_fb224b3b zm_vo::function_d6f8bbd9(#"hash_622e24d4968b218f");
-  self.instance.var_fb224b3b playSound(#"hash_19cebf2f0254187a");
+  self.instance.var_fb224b3b playSound(#"zmb_audiolog_tape_end");
   self.instance.var_fb224b3b scene::stop(#"p9_zm_ndu_reel_to_reel_audio_recorder_01_server_bundle");
   self.b_activated = 0;
   self triggerenable(1);

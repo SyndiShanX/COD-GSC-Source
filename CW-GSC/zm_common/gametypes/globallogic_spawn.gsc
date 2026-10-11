@@ -106,8 +106,8 @@ function timeuntilwavespawn(minimumwait) {
     return 0;
   }
 
-  var_a0122c26 = 50;
-  var_e0fb0ad5 = var_a0122c26 * (isDefined(self.wavespawnindex) ? self.wavespawnindex : 0);
+  framedelay = 50;
+  var_e0fb0ad5 = framedelay * (isDefined(self.wavespawnindex) ? self.wavespawnindex : 0);
   elapsed = max(0, earliestspawntime - lastwavetime - var_e0fb0ad5);
   numwavespassedearliestspawntime = elapsed / wavedelay;
   numwaves = ceil(numwavespassedearliestspawntime);

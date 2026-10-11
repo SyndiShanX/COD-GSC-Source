@@ -65,7 +65,7 @@ function function_afc62ca5() {
   self.fovcosine = 0;
   self.fovcosinebusy = 0;
   self.fovcosinez = 0;
-  self.var_1c8b76d3 = 1;
+  self.non_zombie = 1;
   self.no_gib = 1;
   self.var_1a60ad62 = 0;
   self.var_b7ba7211 = 0;
@@ -86,11 +86,11 @@ function function_afc62ca5() {
   self.ai.var_9465ce93 = gettime() + randomintrange(4500, 5500);
   self.var_c6213c58 = doa_enemy::function_d7c5adee("wolf_ghosthound");
   self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_werewolf_vocal_summon");
-  self thread namespace_9fc66ac::function_ba33d23d(#"hash_64aff27de2337435", #"hash_64aff27de2337435", #"hash_2b3a9f1a898594d7");
+  self thread doa_sound::function_ba33d23d(#"zmb_doa_ai_werewolf_vocal_ambient", #"zmb_doa_ai_werewolf_vocal_ambient", #"zmb_doa_ai_werewolf_vocal_death");
   target_set(self);
   self.showdelay = 0.7;
   earthquake(0.5, 0.75, self.origin, 1000);
-  self namespace_83eb6304::function_3ecfde67("lightningStrike");
+  self doa_fx::function_3ecfde67("lightningStrike");
   self namespace_e32bb68::function_3a59ec34("evt_doa_lightning_bolt");
 }
 
@@ -201,7 +201,7 @@ function private function_8ddb1128(entity, asmstatename) {
 }
 
 function function_6bfc7a5f(entity) {
-  namespace_250e9486::function_de68bf47(entity);
+  namespace_250e9486::stunend(entity);
   entity.var_cc2d7568 = 0;
 }
 

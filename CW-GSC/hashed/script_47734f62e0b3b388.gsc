@@ -42,7 +42,7 @@ function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(1);
   level thread function_272c06e0();
   level thread namespace_e77bf565::function_8191bcdc(1);
-  level.adler = namespace_e77bf565::function_52fe0eb3("kgb_aslt_entry");
+  level.adler = namespace_e77bf565::adler_spawn("kgb_aslt_entry");
   level.adler.ignoreme = 1;
   level.adler.ignoreall = 1;
   level flag::set("flag_aslt_entry_prompt_door");
@@ -54,7 +54,7 @@ function main(str_skipto, b_starting) {
   level.player endon(#"death");
 
   if(is_true(b_starting)) {
-    kgb_ins_prepare::function_52f0fcb3(str_skipto);
+    kgb_ins_prepare::office_guys(str_skipto);
     kgb_ins_prepare::function_84d00884();
     level thread namespace_99e99ffa::function_99e99ffa(str_skipto);
     level thread namespace_e77bf565::function_ada6d016();
@@ -74,7 +74,7 @@ function main(str_skipto, b_starting) {
   level thread function_c7b22bd4();
 
   if(isDefined(str_skipto)) {
-    skipto::function_4e3ab877(str_skipto);
+    skipto::objective_completed(str_skipto);
   }
 }
 
@@ -86,7 +86,7 @@ function init_flags() {
 
 function init_clientfields() {}
 
-function function_22b7fffd() {}
+function init_scenes() {}
 
 function function_272c06e0() {
   getEnt("guard_behind_counter", "targetname") spawner::add_spawn_function(&function_f073a9ac);
@@ -283,7 +283,7 @@ function function_9e8ed6b4() {
       arrayremovevalue(var_fc1d94f8, var_1b008e47);
 
       switch (location) {
-        case #"hash_29430aa710cd437c":
+        case #"data_murder_investigation":
           var_515424a3 = "flag_player_near_elevator";
           break;
         default:

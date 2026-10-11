@@ -50,14 +50,14 @@ function function_1d298e01(localclientnum, oldval, newval, bnewent, binitialsnap
     util::unlock_model(#"hash_40911bda0b473087");
     util::unlock_model(#"hash_7735285cc1c952f5");
     util::unlock_model(#"hash_504743f1aedb0f41");
-    util::unlock_model(#"hash_47a239d0808fb616");
+    util::unlock_model(#"c_t9_zmb_dlc4_dummy_protector");
   }
 
   if(bwasdemojump == 1) {
     util::lock_model(#"hash_40911bda0b473087");
     util::lock_model(#"hash_7735285cc1c952f5");
     util::lock_model(#"hash_504743f1aedb0f41");
-    util::lock_model(#"hash_47a239d0808fb616");
+    util::lock_model(#"c_t9_zmb_dlc4_dummy_protector");
   }
 }
 

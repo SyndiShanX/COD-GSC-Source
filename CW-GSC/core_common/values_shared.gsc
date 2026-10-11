@@ -435,11 +435,11 @@ function private function_16f5ac8e(b_value = 1) {
 
 function private function_debe5863(b_value = 1) {
   if(b_value) {
-    self function_205350ab();
+    self disableweaponreload();
     return;
   }
 
-  self function_6e1804bd();
+  self enableweaponreload();
 }
 
 function private function_15d061e0(b_value = 1) {

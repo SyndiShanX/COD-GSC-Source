@@ -39,7 +39,7 @@ function private function_72b9b674() {
     case #"control":
     case #"control_hc":
     case #"control_cdlpro":
-    case #"hash_594c4ab1d31aa150":
+    case #"control_cdl":
       return &control_start;
     case #"dm":
     case #"dm_hc":
@@ -57,8 +57,8 @@ function private function_72b9b674() {
     case #"gunfight":
       return &function_8d249e99;
     case #"koth":
-    case #"hash_156594d96f8a6568":
-    case #"hash_35a6541d081acef5":
+    case #"koth_cdlpro":
+    case #"koth_cdl":
     case #"koth_hc":
       return &koth_start;
     case #"tdm_bots":

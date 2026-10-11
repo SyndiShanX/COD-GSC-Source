@@ -84,7 +84,7 @@ function function_a5ef96da(params) {
 function private function_1cf80b5e(instance) {
   s_interact = instance.contentgroups[#"mask"][0];
   trigger = content_manager::spawn_interact(s_interact, &function_376d2d76, #"hash_86b1b2e8c4d179a");
-  trigger.var_eff718da = content_manager::spawn_script_model(s_interact, #"hash_2954df4c5aed1a55", 0, 0);
+  trigger.var_eff718da = content_manager::spawn_script_model(s_interact, #"p8_lv8_mask_festival_monkey_01_no_coll", 0, 0);
 }
 
 function function_376d2d76(params) {
@@ -288,15 +288,15 @@ function function_b6b75a5c(params) {
   var_10afbee = #"hash_7993a7bbe1e394f9";
 
   if(player.var_213dd9cc > 5 && player stats::get_stat(#"hash_2dd2a2b3580dd409", #"rarity_upgrade") < 3) {
-    var_dbf6fe1f = 3;
+    n_upgrade_level = 3;
     var_10afbee = #"hash_346eedb428a22e79";
   } else if(player.var_213dd9cc > 3 && player stats::get_stat(#"hash_2dd2a2b3580dd409", #"rarity_upgrade") < 2) {
-    var_dbf6fe1f = 2;
+    n_upgrade_level = 2;
   } else if(player.var_213dd9cc > 1 && player stats::get_stat(#"hash_2dd2a2b3580dd409", #"rarity_upgrade") < 1) {
-    var_dbf6fe1f = 1;
+    n_upgrade_level = 1;
   }
 
-  if(isDefined(var_dbf6fe1f)) {
+  if(isDefined(n_upgrade_level)) {
     level thread zm_vo::function_d6f8bbd9(#"hash_54fd752a966b89ac", 0.5, array(player));
     playFXOnTag(#"hash_2563ac540861f176", player, "j_spine4");
     player playSound(#"hash_60c6324926a9a3ed");
@@ -308,8 +308,8 @@ function function_b6b75a5c(params) {
       }
     }
 
-    player stats::set_stat(#"hash_2dd2a2b3580dd409", #"rarity_upgrade", var_dbf6fe1f);
-    iprintlnbold("Pact is made. Player starting weapon rarity increased to level " + var_dbf6fe1f);
+    player stats::set_stat(#"hash_2dd2a2b3580dd409", #"rarity_upgrade", n_upgrade_level);
+    iprintlnbold("Pact is made. Player starting weapon rarity increased to level " + n_upgrade_level);
     player clientfield::increment_to_player("" + #"ritual_activation");
     wait 2.5 + 1.3 * player.var_213dd9cc;
     var_6a25fa7 = player getlightingstate();
@@ -347,7 +347,7 @@ function function_b6b75a5c(params) {
     player playSound(#"hash_3f58b91175fd1c25");
     wait 0.2;
 
-    if(var_dbf6fe1f == 3) {
+    if(n_upgrade_level == 3) {
       player zm_stats::increment_challenge_stat(#"hash_6b661e56021d4c49");
     }
 

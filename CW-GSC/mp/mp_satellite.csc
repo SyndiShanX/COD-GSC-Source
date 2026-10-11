@@ -14,9 +14,9 @@
 function event_handler[level_init] main(eventstruct) {
   if(level.var_87c6c648 !== 1) {
     function_11e3e877(#"surface_enter", #"hash_591f9167b6a7ea8b");
-    function_11e3e877(#"hash_6be5853fe57d01b0", #"hash_1f2ced241c9e45bb");
-    function_11e3e877(#"hash_6251d9bc015e4542", #"hash_4e8bc503c06e62e3");
-    function_11e3e877(#"hash_6a2ccf46147cb7d8", #"hash_eb2febf62337433");
+    function_11e3e877(#"surface_enter_bullet_xlarge", #"hash_1f2ced241c9e45bb");
+    function_11e3e877(#"surface_enter_bullet_small", #"hash_4e8bc503c06e62e3");
+    function_11e3e877(#"surface_enter_bullet_xsmall", #"hash_eb2febf62337433");
   }
 
   clientfield::register("toplayer", "force_stream_rappel_ropes", 1, 1, "int", &force_stream_rappel_ropes, 0, 0);
@@ -35,7 +35,7 @@ function on_gameplay_started(localclientnum) {
   waitframe(1);
   util::function_8eb5d4b0(250, 2.25);
   level notify(#"hash_6ce45f8471d15231");
-  level thread scene::play(#"hash_5657eeda4a6d163f");
+  level thread scene::play(#"p9_fxanim_mp_sat_rappel_ropes_bundle");
 }
 
 function function_e5a1065e() {

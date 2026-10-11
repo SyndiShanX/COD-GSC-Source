@@ -78,11 +78,11 @@ function function_9ff0fc62(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function hit1_track_ent(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(isDefined(level.var_9a3944f4)) {
-    level.var_9a3944f4.var_ba240678 = self;
+    level.var_9a3944f4.track_ent = self;
     level.var_cc43fb24 = undefined;
 
     if(isDefined(level.var_bda6b1e1)) {
-      level.var_9a3944f4.var_ba240678.tracking = level.var_bda6b1e1;
+      level.var_9a3944f4.track_ent.tracking = level.var_bda6b1e1;
       level.var_bda6b1e1 = undefined;
     }
 
@@ -93,8 +93,8 @@ function hit1_track_ent(localclientnum, oldval, newval, bnewent, binitialsnap, f
 }
 
 function hit1_tracking(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(isDefined(level.var_9a3944f4.var_ba240678)) {
-    level.var_9a3944f4.var_ba240678.tracking = self;
+  if(isDefined(level.var_9a3944f4.track_ent)) {
+    level.var_9a3944f4.track_ent.tracking = self;
     level.var_bda6b1e1 = undefined;
     return;
   }
@@ -103,8 +103,8 @@ function hit1_tracking(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 }
 
 function hit1_track_vehicle(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(isDefined(level.var_9a3944f4.var_ba240678)) {
-    level.var_9a3944f4.var_ba240678.tracking = self;
+  if(isDefined(level.var_9a3944f4.track_ent)) {
+    level.var_9a3944f4.track_ent.tracking = self;
     level.var_bda6b1e1 = undefined;
     return;
   }
@@ -127,11 +127,11 @@ function hit1_helispotlight(localclientnum, oldval, newval, bnewent, binitialsna
   getPlayers(fieldname)[0] endon(#"death", #"disconnect");
 
   if(isDefined(level.var_cc43fb24)) {
-    level.var_9a3944f4.var_ba240678 = level.var_cc43fb24;
+    level.var_9a3944f4.track_ent = level.var_cc43fb24;
     level.var_cc43fb24 = undefined;
 
     if(isDefined(level.var_bda6b1e1)) {
-      level.var_9a3944f4.var_ba240678.tracking = level.var_bda6b1e1;
+      level.var_9a3944f4.track_ent.tracking = level.var_bda6b1e1;
       level.var_bda6b1e1 = undefined;
     }
   }
@@ -147,10 +147,10 @@ function hit1_helispotlight(localclientnum, oldval, newval, bnewent, binitialsna
     level.var_9a3944f4 = self;
 
     while(true) {
-      if(isDefined(self.var_ba240678.tracking)) {
+      if(isDefined(self.track_ent.tracking)) {
         if(is_true(var_61bc4e7)) {
-          sphere(self.var_ba240678.origin, 8, (1, 0, 0), 1, 0, 10, 1);
-          sphere(self.var_ba240678.tracking.origin, 4, (0, 0, 1), 1, 0, 10, 1);
+          sphere(self.track_ent.origin, 8, (1, 0, 0), 1, 0, 10, 1);
+          sphere(self.track_ent.tracking.origin, 4, (0, 0, 1), 1, 0, 10, 1);
         }
 
         org = self gettagorigin(tag_body);
@@ -158,7 +158,7 @@ function hit1_helispotlight(localclientnum, oldval, newval, bnewent, binitialsna
         var_ba943ae1 = self gettagangles(var_5d9bcd31);
         var_bca870f9 = angleclamp180(ang - var_ba943ae1);
         var_54c9ea3b = (0, var_bca870f9[1], 0);
-        var_26ea01fb = vectortoangles(self.var_ba240678.origin - org);
+        var_26ea01fb = vectortoangles(self.track_ent.origin - org);
         var_bca870f9 = angleclamp180(var_26ea01fb - var_ba943ae1);
         var_54c9ea3b = (0, var_bca870f9[1], 0);
         self function_2e566abb(var_7dfc67b2, (0, 0, 0), var_54c9ea3b);

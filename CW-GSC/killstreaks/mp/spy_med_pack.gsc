@@ -223,7 +223,7 @@ function function_cb436f32(object) {
   }
 
   medpack = spawn("script_model", object.origin);
-  medpack function_619a5c20();
+  medpack pingable();
   medpack setModel(level.var_c9404b0a.weapon.var_22082a57);
   object.medpack = medpack;
   medpack.var_2d045452 = object;
@@ -306,24 +306,24 @@ function private function_a1434496(team, player, result) {
   if(is_true(result)) {
     medpack.usecount++;
     medpack thread animation::play(#"hash_79647b3513fd2190");
-    var_94d1a3ec = getweapon(#"hash_44678c77a1fa37b0");
+    stimshot = getweapon(#"hash_44678c77a1fa37b0");
 
-    if(isDefined(var_94d1a3ec)) {
-      var_70aa8c50 = player hasweapon(var_94d1a3ec);
+    if(isDefined(stimshot)) {
+      var_70aa8c50 = player hasweapon(stimshot);
       var_e6f54cba = 0;
 
       if(var_70aa8c50) {
-        var_e6f54cba = player getweaponammoclip(var_94d1a3ec);
+        var_e6f54cba = player getweaponammoclip(stimshot);
 
         if(var_e6f54cba == 0) {
-          player setweaponammoclip(var_94d1a3ec, 1);
+          player setweaponammoclip(stimshot, 1);
         }
       } else {
-        player giveweapon(var_94d1a3ec);
-        player setweaponammoclip(var_94d1a3ec, 1);
+        player giveweapon(stimshot);
+        player setweaponammoclip(stimshot, 1);
       }
 
-      player switchtoweapon(var_94d1a3ec, 1);
+      player switchtoweapon(stimshot, 1);
       player gestures::function_e62f6dde("gestable_t9_stimshot", undefined, 1);
       util::wait_network_frame(2);
 
@@ -331,10 +331,10 @@ function private function_a1434496(team, player, result) {
         return;
       }
 
-      slot = player gadgetgetslot(var_94d1a3ec);
-      player function_ac25fc1f(slot, var_94d1a3ec);
-      player gadgetactivate(slot, var_94d1a3ec);
-      player gadget_health_regen::function_34daf34a(slot, var_94d1a3ec);
+      slot = player gadgetgetslot(stimshot);
+      player function_ac25fc1f(slot, stimshot);
+      player gadgetactivate(slot, stimshot);
+      player gadget_health_regen::function_34daf34a(slot, stimshot);
       util::wait_network_frame(2);
 
       if(!isDefined(player)) {
@@ -343,16 +343,16 @@ function private function_a1434496(team, player, result) {
 
       if(var_70aa8c50) {
         if(var_e6f54cba > 0) {
-          if(!player hasweapon(var_94d1a3ec)) {
-            player giveweapon(var_94d1a3ec);
+          if(!player hasweapon(stimshot)) {
+            player giveweapon(stimshot);
           }
 
-          player setweaponammoclip(var_94d1a3ec, var_e6f54cba);
+          player setweaponammoclip(stimshot, var_e6f54cba);
         } else {
-          player takeweapon(var_94d1a3ec);
+          player takeweapon(stimshot);
         }
       } else {
-        player takeweapon(var_94d1a3ec);
+        player takeweapon(stimshot);
       }
 
       util::wait_network_frame(2);

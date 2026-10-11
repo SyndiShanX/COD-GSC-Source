@@ -18,10 +18,10 @@ function private preinit() {
 function private function_22315c10(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   switch (bwastimejump) {
     case 1:
-      function_5ea2c6e3("cp_hint_tutorial_duck", 0.1, 1);
+      addsubmix("cp_hint_tutorial_duck", 0.1, 1);
       break;
     case 0:
-      function_ed62c9c2("cp_hint_tutorial_duck", 0.1);
+      clearsubmix("cp_hint_tutorial_duck", 0.1);
       break;
   }
 }

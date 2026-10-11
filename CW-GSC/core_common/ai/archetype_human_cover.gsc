@@ -148,8 +148,8 @@ function function_9d8b22d8(entity, throwifpossible = 0, var_f06df42 = 1) {
     enemyorigin = entity lastknownpos(entity.enemy);
     accuracy = 1;
 
-    if(isDefined(level.var_21347b32) && isDefined(level.gameskill)) {
-      accuracy = level.var_21347b32[level.gameskill].base_enemy_accuracy;
+    if(isDefined(level.s_game_difficulty) && isDefined(level.gameskill)) {
+      accuracy = level.s_game_difficulty[level.gameskill].base_enemy_accuracy;
     }
 
     maxdistance = 128 / accuracy;

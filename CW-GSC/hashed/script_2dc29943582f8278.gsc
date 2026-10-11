@@ -51,9 +51,9 @@ function function_60c2247c() {
   self endon(#"disconnect");
   self clientfield::set("clone_activated", 1);
   self flag::set(#"clone_activated");
-  self namespace_83eb6304::function_3ecfde67("clone_appear");
+  self doa_fx::function_3ecfde67("clone_appear");
   self thread spawnclones();
-  timeout = self namespace_1c2a96f9::function_4808b985(25);
+  timeout = self doa_fate::function_4808b985(25);
   level waittilltimeout(timeout, #"doa_exit_taken");
   self clientfield::set("clone_activated", 0);
   self flag::clear(#"clone_activated");
@@ -213,7 +213,7 @@ function function_cb30c0aa() {
 function spawnclones() {
   self endon(#"disconnect", #"player_died");
   self killclones(self);
-  timeout = self namespace_1c2a96f9::function_4808b985(25);
+  timeout = self doa_fate::function_4808b985(25);
   velocity = self getvelocity();
   velocity += (0, 0, velocity[2] * -1);
   velocity = vectorNormalize(velocity);
@@ -262,14 +262,14 @@ function spawnclones() {
 
 function private _updateclonepathing(player) {
   self endon(#"death");
-  var_81ef612a = self.origin;
+  original_spot = self.origin;
   self.lastknownpos = self.origin;
   self.lastknownpostime = gettime();
 
   while(true) {
     if(self.origin[2] + 36 <= getwaterheight(self.origin)) {
       self setblackboardattribute("_stance", "swim");
-      self setgoal(var_81ef612a, 1);
+      self setgoal(original_spot, 1);
       wait 1;
       continue;
     } else {
@@ -337,7 +337,7 @@ function _cloneorbfx(endpos, traveltime) {
     return;
   }
 
-  fxorg namespace_83eb6304::function_3ecfde67("clone_orb");
+  fxorg doa_fx::function_3ecfde67("clone_orb");
   fxendpos = endpos + (0, 0, 35);
   fxorg moveTo(fxendpos, traveltime);
   self waittilltimeout(traveltime, #"player_died", #"disconnect");
@@ -350,8 +350,8 @@ function _cloneorbfx(endpos, traveltime) {
 }
 
 function function_241f12a1(clone, player) {
-  clone namespace_7f5aeb59::function_12bdee53(clone, player);
-  clone namespace_7f5aeb59::function_31df67c1(player);
+  clone doa_player_utility::function_12bdee53(clone, player);
+  clone doa_player_utility::function_31df67c1(player);
 }
 
 function private _configureclone(clone, player, forward, spawntime) {
@@ -405,7 +405,7 @@ function private _configureclone(clone, player, forward, spawntime) {
 
 function private _playdematerialization() {
   if(isDefined(self)) {
-    self namespace_83eb6304::function_3ecfde67("clone_vanish");
+    self doa_fx::function_3ecfde67("clone_vanish");
     self namespace_e32bb68::function_3a59ec34("evt_doa_pickup_magichat_clone_disappear");
   }
 }
@@ -462,11 +462,11 @@ function private _show(spawntime, player) {
   }
 
   self namespace_e32bb68::function_3a59ec34("evt_doa_pickup_magichat_clone_appear");
-  self namespace_83eb6304::function_3ecfde67("clone_appear");
+  self doa_fx::function_3ecfde67("clone_appear");
 
   if(isDefined(player)) {
     self.color = player.doa.color;
-    self namespace_83eb6304::function_3ecfde67("player_trail_" + self.color);
+    self doa_fx::function_3ecfde67("player_trail_" + self.color);
   }
 
   self notify(#"clone_reveal");
@@ -506,11 +506,11 @@ function _clonewatchshutdown() {
   clone notify(#"hash_1e2c098e8231a30f");
   clone notify(#"barrels_done");
   clone notify(#"blades_done");
-  clone notify(#"hash_1c99dfc5992f1a01");
+  clone notify(#"magnet_expired");
 
   if(isDefined(clone)) {
     if(isDefined(clone.color)) {
-      clone namespace_83eb6304::turnofffx("player_trail_" + clone.color);
+      clone doa_fx::turnofffx("player_trail_" + clone.color);
     }
 
     clone _playdematerialization();

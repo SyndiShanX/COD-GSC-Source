@@ -158,7 +158,7 @@ function _fire(killstreaktype, player, team, killstreak_id) {
   }
 
   if(remotemissilespawnarray.size > 0) {
-    remotemissilespawn = player function_af29fe57(remotemissilespawnarray);
+    remotemissilespawn = player get_best_spawn_point(remotemissilespawnarray);
   } else {
     remotemissilespawn = undefined;
   }
@@ -285,14 +285,14 @@ function _fire(killstreaktype, player, team, killstreak_id) {
 
     veh clientfield::set("hellstorm_deploy", 1);
     veh useanimtree("generic");
-    veh setanim(#"hash_21fa3a72d877f87a", 1);
+    veh setanim(#"p9_fxanim_mp_remote_missile_jet_01_anim", 1);
 
     if(isDefined(level.var_5951cb24)) {
       self[[level.var_5951cb24]](killstreak_id, team);
     }
 
     player playsoundtoplayer(#"veh_hellstorm_bay_doors", player);
-    animlen = getanimlength(#"hash_21fa3a72d877f87a");
+    animlen = getanimlength(#"p9_fxanim_mp_remote_missile_jet_01_anim");
     wait animlen - 0.5;
 
     if(!isDefined(player)) {
@@ -324,14 +324,14 @@ function _fire(killstreaktype, player, team, killstreak_id) {
   rocket missile_settarget(undefined);
   var_36c78ec = (-70, 100, 0);
   var_f5a6dd61 = (-70, -100, 0);
-  rocket.var_ae685ec9 = spawn("script_model", startpos);
-  rocket.var_ae685ec9 setModel(missileweapon.projectilemodel);
-  rocket.var_ae685ec9 clientfield::set("remote_missile_child_rocket_fx", 1);
-  rocket.var_8039026b = spawn("script_model", startpos);
-  rocket.var_8039026b setModel(missileweapon.projectilemodel);
-  rocket.var_8039026b clientfield::set("remote_missile_child_rocket_fx", 1);
-  rocket.var_ae685ec9 linkTo(rocket, "tag_origin", var_36c78ec);
-  rocket.var_8039026b linkTo(rocket, "tag_origin", var_f5a6dd61);
+  rocket.rocket1 = spawn("script_model", startpos);
+  rocket.rocket1 setModel(missileweapon.projectilemodel);
+  rocket.rocket1 clientfield::set("remote_missile_child_rocket_fx", 1);
+  rocket.rocket2 = spawn("script_model", startpos);
+  rocket.rocket2 setModel(missileweapon.projectilemodel);
+  rocket.rocket2 clientfield::set("remote_missile_child_rocket_fx", 1);
+  rocket.rocket1 linkTo(rocket, "tag_origin", var_36c78ec);
+  rocket.rocket2 linkTo(rocket, "tag_origin", var_f5a6dd61);
   rocket.targetname = "remote_missile";
   rocket killstreaks::configure_team(killstreaktype, killstreak_id, self, undefined, undefined, undefined);
   rocket killstreak_hacking::enable_hacking("remote_missile", undefined, &hackedpostfunction);
@@ -435,7 +435,7 @@ function remote_missile_game_end_think(rocket, team, killstreak_id, killstreakty
   self notify(#"remotemissle_killstreak_done");
 }
 
-function function_af29fe57(remotemissilespawnpoints) {
+function get_best_spawn_point(remotemissilespawnpoints) {
   validenemies = [];
 
   foreach(spawnpoint in remotemissilespawnpoints) {
@@ -522,23 +522,23 @@ function watch_missile_kill_z() {
 
 function watch_missile_death(rocket, team, killstreak_id, killstreaktype, var_99178ae6) {
   self endon(#"remotemissle_killstreak_done");
-  r1 = rocket.var_ae685ec9;
-  r2 = rocket.var_8039026b;
+  r1 = rocket.rocket1;
+  r2 = rocket.rocket2;
   rocket waittill(#"death");
 
   if(isDefined(r1)) {
     r1 deletedelay();
 
-    if(isDefined(rocket.var_ae685ec9)) {
-      rocket.var_ae685ec9 = undefined;
+    if(isDefined(rocket.rocket1)) {
+      rocket.rocket1 = undefined;
     }
   }
 
   if(isDefined(r2)) {
     r2 deletedelay();
 
-    if(isDefined(rocket.var_8039026b)) {
-      rocket.var_8039026b = undefined;
+    if(isDefined(rocket.rocket2)) {
+      rocket.rocket2 = undefined;
     }
   }
 
@@ -666,14 +666,14 @@ function function_97f822ec(rocket, performplayerkillstreakend, unlink, team, kil
     rocket clientfield::set("remote_missile_fired", 0);
     rocket deletedelay();
 
-    if(isDefined(rocket.var_ae685ec9)) {
-      rocket.var_ae685ec9 deletedelay();
-      rocket.var_ae685ec9 = undefined;
+    if(isDefined(rocket.rocket1)) {
+      rocket.rocket1 deletedelay();
+      rocket.rocket1 = undefined;
     }
 
-    if(isDefined(rocket.var_8039026b)) {
-      rocket.var_8039026b deletedelay();
-      rocket.var_8039026b = undefined;
+    if(isDefined(rocket.rocket2)) {
+      rocket.rocket2 deletedelay();
+      rocket.rocket2 = undefined;
     }
   }
 
@@ -1232,7 +1232,7 @@ function function_2c190692(rocket, target) {
     return;
   }
 
-  if(isDefined(rocket.var_ae685ec9)) {
+  if(isDefined(rocket.rocket1)) {
     origin += (-70, -100, 0);
   } else {
     origin += (-70, 100, 0);
@@ -1240,12 +1240,12 @@ function function_2c190692(rocket, target) {
 
   var_67ee15f2 = magicbullet(var_6aece548, origin, targetorigin, self, target, (0, 0, 30));
 
-  if(isDefined(rocket.var_ae685ec9)) {
-    rocket.var_ae685ec9 delete();
-    rocket.var_ae685ec9 = undefined;
-  } else if(isDefined(rocket.var_8039026b)) {
-    rocket.var_8039026b delete();
-    rocket.var_8039026b = undefined;
+  if(isDefined(rocket.rocket1)) {
+    rocket.rocket1 delete();
+    rocket.rocket1 = undefined;
+  } else if(isDefined(rocket.rocket2)) {
+    rocket.rocket2 delete();
+    rocket.rocket2 = undefined;
   }
 
   var_67ee15f2 missile_settarget(target);

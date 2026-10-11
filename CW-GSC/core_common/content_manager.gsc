@@ -293,18 +293,18 @@ function function_22e120bc(struct, usecallback, hintstring, var_e0355bdc, n_widt
   return usetrigger;
 }
 
-function function_cfa4f1a0(contentstructs, modelname, var_bfbc537c = 0, var_619a5c20 = 1) {
+function function_cfa4f1a0(contentstructs, modelname, var_bfbc537c = 0, pingable = 1) {
   models = [];
 
   foreach(struct in contentstructs) {
-    model = spawn_script_model(struct, modelname, var_bfbc537c, var_619a5c20);
+    model = spawn_script_model(struct, modelname, var_bfbc537c, pingable);
     models[models.size] = model;
   }
 
   return models;
 }
 
-function spawn_script_model(struct, modelname, var_bfbc537c = 0, var_619a5c20 = 1) {
+function spawn_script_model(struct, modelname, var_bfbc537c = 0, pingable = 1) {
   model = util::spawn_model(modelname, struct.origin, struct.angles);
 
   if(isDefined(struct.targetname)) {
@@ -319,8 +319,8 @@ function spawn_script_model(struct, modelname, var_bfbc537c = 0, var_619a5c20 = 
     model disconnectPaths();
   }
 
-  if(var_619a5c20) {
-    model function_619a5c20();
+  if(pingable) {
+    model pingable();
   }
 
   parent = struct;
@@ -385,8 +385,8 @@ function spawn_zbarrier(struct, zbarrier_classname, var_e546275c = 0) {
   return zbarrier;
 }
 
-function function_690c4abe() {
-  level notify(#"hash_4a140b223cb0019d");
+function cleanup_spawned_instances() {
+  level notify(#"cleanup_spawned_instances");
   models_cleaned = 0;
 
   foreach(group in level.contentmanager.spawnedinstances) {

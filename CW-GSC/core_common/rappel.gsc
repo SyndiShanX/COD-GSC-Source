@@ -40,7 +40,7 @@ function private preinit() {
   callback::on_disconnect(&function_1fd398d8);
   callback::add_callback(#"on_vehicle_enter", &function_8307577f);
 
-  level thread function_efab52ae();
+  level thread debug_rappel();
 }
 
 function private function_7cbd94d5(b_hide = 1) {
@@ -324,7 +324,7 @@ function function_4945d10b(trigger_info) {
   level endon(#"game_ended");
   player endon(#"death");
   player endon(#"disconnect");
-  player endon(#"hash_210eae4f25120927");
+  player endon(#"ascender_cancel");
   ascendstart = self.ascendstart;
 
   if(!function_8b08f357(player, ascendstart)) {
@@ -357,7 +357,7 @@ function function_4945d10b(trigger_info) {
   } else {
     player.ascender = ascendstart;
     thread function_8c46de17(ascendstart, ascendend);
-    ascendstart thread function_cf4e25e5();
+    ascendstart thread timeout_check();
     ascendstart.inuse = 1;
     ascendend.inuse = 1;
   }
@@ -375,7 +375,7 @@ function function_8c46de17(ascendstart, ascendend) {
   }
 }
 
-function private function_cf4e25e5() {
+function private timeout_check() {
   self notify("2100ea0c1a2c851b");
   self endon("2100ea0c1a2c851b");
   wait 5;
@@ -428,7 +428,7 @@ function function_7984d635(ascendstart) {
   }
 }
 
-function function_efab52ae() {
+function debug_rappel() {
   while(getdvarint(#"hash_7cfb013f9bd630b6", 0)) {
     waitframe(1);
 

@@ -66,18 +66,18 @@ function private postinit() {
   bundle_name = killstreaks::function_e2c3bda3("straferun", "killstreak_straferun");
   killstreaks::register_killstreak(bundle_name, &usekillstreakstraferun);
   level.var_14fa3231 = [];
-  var_99f22d3c = level.var_14fa3231;
-  var_99f22d3c[var_99f22d3c.size] = {
+  specifiers = level.var_14fa3231;
+  specifiers[specifiers.size] = {
     #targetname: "chopper", #kstype: "helicopter_comlink", #var_4c13f1ac: "inventory_helicopter_comlink"};
-  var_99f22d3c[var_99f22d3c.size] = {
+  specifiers[specifiers.size] = {
     #targetname: "chopper", #kstype: "supply_drop", #var_4c13f1ac: "inventory_supply_drop"};
-  var_99f22d3c[var_99f22d3c.size] = {
+  specifiers[specifiers.size] = {
     #targetname: "chopper_gunner"};
-  var_99f22d3c[var_99f22d3c.size] = {
+  specifiers[specifiers.size] = {
     #targetname: "napalm_strike"};
-  var_99f22d3c[var_99f22d3c.size] = {
+  specifiers[specifiers.size] = {
     #targetname: "uav"};
-  var_99f22d3c[var_99f22d3c.size] = {
+  specifiers[specifiers.size] = {
     #targetname: "counteruav"};
   level.var_53bed697 = [];
 }
@@ -211,7 +211,7 @@ function function_1e30e51e(hardpointtype, killstreak_id, location, var_a6b1bda0,
 
   plane clientfield::set("scorestreakActive", 1);
   plane.var_739aa202 = var_a6b1bda0;
-  var_6f0661aa = plane.var_739aa202 == #"plane_a";
+  isfirstplane = plane.var_739aa202 == #"plane_a";
   plane.attackers = [];
   plane.attackerdata = [];
   plane.attackerdamage = [];
@@ -262,20 +262,20 @@ function function_1e30e51e(hardpointtype, killstreak_id, location, var_a6b1bda0,
 
   if(isDefined(pivot)) {
     var_1c847d0f = pivot.origin;
-    var_dda93e6c = pivot.angles;
+    path_angles = pivot.angles;
   }
 
   if(!isDefined(var_1c847d0f)) {
     var_1c847d0f = level.mapcenter;
   }
 
-  if(!isDefined(var_dda93e6c)) {
-    var_dda93e6c = (0, 90, 0);
+  if(!isDefined(path_angles)) {
+    path_angles = (0, 90, 0);
   }
 
   var_b818f98a = structcopy(location);
   var_b818f98a.origin += var_49d19de7;
-  plane vehicle::function_bb9b43a9(startnode, var_1c847d0f, var_dda93e6c, var_b818f98a, var_e4c839a6);
+  plane vehicle::function_bb9b43a9(startnode, var_1c847d0f, path_angles, var_b818f98a, var_e4c839a6);
   plane.killbox = [];
   plane.killbox[#"origin"] = var_b818f98a.origin;
   plane.killbox[#"angles"] = (0, var_b818f98a.yaw, 0);
@@ -284,7 +284,7 @@ function function_1e30e51e(hardpointtype, killstreak_id, location, var_a6b1bda0,
   plane thread watchforownerexit(self);
   plane thread targetting_delay::function_7e1a12ce(12000);
 
-  if(var_6f0661aa) {
+  if(isfirstplane) {
     plane killstreakrules::function_2e6ff61a(hardpointtype, killstreak_id, {
       #origin: var_b818f98a.origin, #team: plane.team
     });
@@ -293,7 +293,7 @@ function function_1e30e51e(hardpointtype, killstreak_id, location, var_a6b1bda0,
 
   aiutility::addaioverridedamagecallback(plane, &function_16abaea4);
 
-  if(var_6f0661aa) {
+  if(isfirstplane) {
     plane killstreaks::function_b182645e(self, hardpointtype);
   }
 

@@ -295,9 +295,9 @@ function function_3af40ef4(var_4c42f7cf, weapon) {
 }
 
 function private function_6598f0a0(item, player, networkid, itemid, itemcount, itemamount, slotid) {
-  var_6a4efe8e = itemamount clientfield::get_player_uimodel("hud_items.selfReviveAvailable");
+  hasselfrevive = itemamount clientfield::get_player_uimodel("hud_items.selfReviveAvailable");
 
-  if(var_6a4efe8e) {
+  if(hasselfrevive) {
     return slotid;
   }
 

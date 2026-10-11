@@ -44,9 +44,9 @@ function function_17c3e29f() {
   self notify("4213ebfc1999ad2b");
   self endon("4213ebfc1999ad2b");
   self endon(#"disconnect");
-  self endon(#"hash_7893364bd228d63e");
-  level waittill(#"doa_exit_taken", #"teleporter_taken", #"enter_the_wild", #"hash_7893364bd228d63e", #"host_migration_begin");
-  self notify(#"hash_7893364bd228d63e");
+  self endon(#"doa_playerdumpfps");
+  level waittill(#"doa_exit_taken", #"teleporter_taken", #"enter_the_wild", #"doa_playerdumpfps", #"host_migration_begin");
+  self notify(#"doa_playerdumpfps");
 }
 
 function function_c724b8f9() {
@@ -56,10 +56,10 @@ function function_c724b8f9() {
 
   self notify("1c3527d4af214864");
   self endon("1c3527d4af214864");
-  self endon(#"disconnect", #"hash_7893364bd228d63e");
+  self endon(#"disconnect", #"doa_playerdumpfps");
 
   if(!is_true(self.doa.var_1b452923)) {
-    self namespace_83eb6304::function_3ecfde67("firstPersonMarker");
+    self doa_fx::function_3ecfde67("firstPersonMarker");
   }
 }
 
@@ -74,8 +74,8 @@ function function_1735c657(forced) {
 
   self thread function_c724b8f9();
   self thread function_17c3e29f();
-  timeout = self namespace_1c2a96f9::function_4808b985(90);
-  result = self waittilltimeout(timeout, #"camera_changed", #"hash_7893364bd228d63e");
+  timeout = self doa_fate::function_4808b985(90);
+  result = self waittilltimeout(timeout, #"camera_changed", #"doa_playerdumpfps");
 
   if(forced) {
     if(!is_true(result.var_cff8d1e) || is_true(level.doa.var_318aa67a)) {
@@ -86,14 +86,14 @@ function function_1735c657(forced) {
   angles = absangleclamp360(self.angles);
   angles = (0, angles[1], 0);
   faceangles = isDefined(result.faceangles) ? result.faceangles : angles;
-  self notify(#"hash_7893364bd228d63e");
+  self notify(#"doa_playerdumpfps");
   self namespace_ec06fe4a::freezeplayercontrols(1);
 
   if(is_true(self.doa.var_f583234e)) {
     self clientfield::set_to_player("toggleflashlight", 0);
   }
 
-  self thread namespace_7f5aeb59::turnplayershieldon();
+  self thread doa_player_utility::turnplayershieldon();
   self.topdowncamera = 1;
   self setclientthirdperson(0);
 
@@ -102,7 +102,7 @@ function function_1735c657(forced) {
   }
 
   if(!isDefined(self.vehicle)) {
-    self namespace_83eb6304::function_3ecfde67("player_trail_" + self.doa.color);
+    self doa_fx::function_3ecfde67("player_trail_" + self.doa.color);
   }
 
   self clientfield::increment_to_player("exitFPS");
@@ -111,7 +111,7 @@ function function_1735c657(forced) {
   namespace_1e25ad94::debugmsg("<dev string:x38>" + self.name + "<dev string:x50>" + gettime());
 
   self.doa.infps = undefined;
-  self namespace_7f5aeb59::function_fae39d88();
+  self doa_player_utility::function_fae39d88();
   wait 0.25;
   self clientfield::increment_to_player("setCompassVis");
   self notify(#"critical_health_end");
@@ -137,7 +137,7 @@ function function_1735c657(forced) {
   wait 0.2;
   self namespace_ec06fe4a::freezeplayercontrols(0);
   self.doa.var_4f3aee7b = 0;
-  self namespace_83eb6304::turnofffx("firstPersonMarker");
+  self doa_fx::turnofffx("firstPersonMarker");
 
   if(is_true(self.doa.var_f583234e)) {
     self clientfield::set_to_player("toggleflashlight", 1);
@@ -152,7 +152,7 @@ function function_1735c657(forced) {
   namespace_1e25ad94::debugmsg("<dev string:x38>" + self.name + "<dev string:x6a>" + gettime());
 }
 
-function function_1f704cee(force = 0, faceangles = 1) {
+function playerfpsforatime(force = 0, faceangles = 1) {
   namespace_1e25ad94::debugmsg("+++++++++++++++++++++++++++++++ PLAYER ENTERING FP : " + self.name);
 
   if(is_true(level.doa.var_318aa67a)) {
@@ -179,9 +179,9 @@ function function_1f704cee(force = 0, faceangles = 1) {
   self.doa.infps = 1;
   self.doa.var_4f3aee7b = force;
   self.doa.var_9f8bc3f9 = 0;
-  self thread namespace_7f5aeb59::turnplayershieldon(0);
+  self thread doa_player_utility::turnplayershieldon(0);
   self thread function_49f419a1();
-  self namespace_83eb6304::turnofffx("player_trail_" + self.doa.color);
+  self doa_fx::turnofffx("player_trail_" + self.doa.color);
   v_player_velocity = self getvelocity();
 
   if(length(v_player_velocity) < 0.1) {
@@ -231,7 +231,7 @@ function function_1f704cee(force = 0, faceangles = 1) {
   }
 
   self namespace_ec06fe4a::freezeplayercontrols(0);
-  self namespace_7f5aeb59::function_fae39d88();
+  self doa_player_utility::function_fae39d88();
   self thread function_1735c657(force);
   namespace_1e25ad94::debugmsg("+++++++++++++++++++++++++++++++ PLAYER FP SETUP COMPLETE: " + self.name);
 }
