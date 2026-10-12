@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\benchmark.gsc
-*************************************************/
+ * Script: scripts\mp\gametypes\benchmark.gsc
+***********************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\parachute;

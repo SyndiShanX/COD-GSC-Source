@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\anim\notetracks.gsc
+ * Script: scripts\anim\notetracks.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\utility_common;
 #using scripts\anim\weaponlist;

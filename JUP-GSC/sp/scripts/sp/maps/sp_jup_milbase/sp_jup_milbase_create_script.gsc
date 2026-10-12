@@ -1,7 +1,9 @@
-/******************************************************************************
+/***************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\maps\sp_jup_milbase\sp_jup_milbase_create_script.gsc
-******************************************************************************/
+ * Script: scripts\sp\maps\sp_jup_milbase\sp_jup_milbase_create_script.gsc
+***************************************************************************/
+
+
 
 #using scripts\common\create_script_utility;
 #using scripts\engine\utility;

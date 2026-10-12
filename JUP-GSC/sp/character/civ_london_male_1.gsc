@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\character\civ_london_male_1.gsc
+ * Script: character\civ_london_male_1.gsc
 ***********************************************/
+
+
 
 #using scripts\code\character;
 #using scripts\common\utility;

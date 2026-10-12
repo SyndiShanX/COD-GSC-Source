@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\utility\player.gsc
+ * Script: scripts\mp\utility\player.gsc
 ***********************************************/
 
 #using script_cbb0697de4c5728;

@@ -1,7 +1,7 @@
-/****************************************************************
+/*************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_publicevent_dataheist.gsc
-****************************************************************/
+ * Script: scripts\mp\gametypes\br_publicevent_dataheist.gsc
+*************************************************************/
 
 #using script_21c19cfc7139d773;
 #using script_252fa7d2b1b1b50b;

@@ -1,7 +1,9 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\offhands.gsc
-************************************************/
+ * Script: scripts\sp\equipment\offhands.gsc
+***********************************************/
+
+
 
 #using script_624b16e62718d18a;
 #using scripts\common\utility;

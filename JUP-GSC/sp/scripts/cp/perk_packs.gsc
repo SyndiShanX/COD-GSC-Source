@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\perk_packs.gsc
+ * Script: scripts\cp\perk_packs.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\armor;

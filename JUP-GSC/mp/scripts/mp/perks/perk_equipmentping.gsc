@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\perks\perk_equipmentping.gsc
-******************************************************/
+ * Script: scripts\mp\perks\perk_equipmentping.gsc
+***************************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\utility\player_utility;

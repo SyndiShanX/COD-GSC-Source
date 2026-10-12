@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\spawncamera.gsc
+ * Script: scripts\mp\spawncamera.gsc
 ***********************************************/
 
 #using scripts\common\utility;

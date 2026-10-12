@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\stealth\callbacks.gsc
+ * Script: scripts\stealth\callbacks.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

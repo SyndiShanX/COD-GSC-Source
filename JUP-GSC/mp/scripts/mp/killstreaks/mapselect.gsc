@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\killstreaks\mapselect.gsc
-***************************************************/
+ * Script: scripts\mp\killstreaks\mapselect.gsc
+************************************************/
 
 #using scripts\common\utility;
 #using scripts\common\values;

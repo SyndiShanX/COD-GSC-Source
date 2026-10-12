@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\kits.gsc
+ * Script: scripts\cp\kits.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\values;

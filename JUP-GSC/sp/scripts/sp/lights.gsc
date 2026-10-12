@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\lights.gsc
+ * Script: scripts\sp\lights.gsc
 ***********************************************/
+
+
 
 #using scripts\common\createfx;
 #using scripts\common\utility;

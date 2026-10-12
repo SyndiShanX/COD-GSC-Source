@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\deathicons.gsc
+ * Script: scripts\mp\deathicons.gsc
 ***********************************************/
 
 #using scripts\cp_mp\entityheadicons;

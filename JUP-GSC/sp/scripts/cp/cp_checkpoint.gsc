@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\cp_checkpoint.gsc
+ * Script: scripts\cp\cp_checkpoint.gsc
 ***********************************************/
+
+
 
 #using script_3a8f9ace195c9da9;
 #using scripts\common\utility;

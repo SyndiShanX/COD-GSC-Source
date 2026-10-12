@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\battlechatter_mp.gsc
+ * Script: scripts\mp\battlechatter_mp.gsc
 ***********************************************/
 
 #using script_4a6760982b403bad;

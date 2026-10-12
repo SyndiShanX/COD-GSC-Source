@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\tripwire_cp.gsc
+ * Script: scripts\cp\tripwire_cp.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\battlechatter;
 #using scripts\common\utility;

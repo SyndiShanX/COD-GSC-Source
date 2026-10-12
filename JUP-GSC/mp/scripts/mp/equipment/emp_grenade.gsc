@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\emp_grenade.gsc
-***************************************************/
+ * Script: scripts\mp\equipment\emp_grenade.gsc
+************************************************/
 
 #using script_608c50392df8c7d1;
 #using script_74b851b7aa1ef32d;

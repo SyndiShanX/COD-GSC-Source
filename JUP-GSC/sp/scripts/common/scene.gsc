@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\scene.gsc
+ * Script: scripts\common\scene.gsc
 ***********************************************/
+
+
 
 #using scripts\common\ai;
 #using scripts\common\anim;

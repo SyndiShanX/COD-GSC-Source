@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\cp_visionsets.gsc
+ * Script: scripts\cp\cp_visionsets.gsc
 ***********************************************/
+
+
 
 #using scripts\common\anim;
 #using scripts\common\utility;

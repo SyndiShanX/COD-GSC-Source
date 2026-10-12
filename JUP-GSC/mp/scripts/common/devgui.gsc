@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\devgui.gsc
+ * Script: scripts\common\devgui.gsc
 ***********************************************/
 
 #using scripts\common\utility;

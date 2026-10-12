@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\dof.gsc
+ * Script: scripts\common\dof.gsc
 ***********************************************/
 
 #using scripts\common\utility;

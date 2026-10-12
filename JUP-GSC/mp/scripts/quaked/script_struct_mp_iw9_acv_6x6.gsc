@@ -1,7 +1,7 @@
-/**************************************************************
+/***********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\quaked\script_struct_mp_iw9_acv_6x6.gsc
-**************************************************************/
+ * Script: scripts\quaked\script_struct_mp_iw9_acv_6x6.gsc
+***********************************************************/
 
 #using scripts\cp_mp\vehicles\vehicle;
 #namespace namespace_ced425cd4b695cf0;

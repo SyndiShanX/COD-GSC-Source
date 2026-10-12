@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\soldier\zombie_react.gsc
-***************************************************/
+ * Script: scripts\asm\soldier\zombie_react.gsc
+************************************************/
 
 #using scripts\anim\utility_common;
 #using scripts\asm\asm;

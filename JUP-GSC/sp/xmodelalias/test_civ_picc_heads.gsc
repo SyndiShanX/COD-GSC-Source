@@ -1,7 +1,9 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\test_civ_picc_heads.gsc
-**************************************************/
+ * Script: xmodelalias\test_civ_picc_heads.gsc
+***********************************************/
+
+
 
 #namespace test_civ_picc_heads;
 

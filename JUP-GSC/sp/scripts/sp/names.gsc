@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\names.gsc
+ * Script: scripts\sp\names.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\aitypes\combat.gsc
+ * Script: scripts\aitypes\combat.gsc
 ***********************************************/
+
+
 
 #using scripts\aitypes\bt_util;
 #using scripts\aitypes\squad;

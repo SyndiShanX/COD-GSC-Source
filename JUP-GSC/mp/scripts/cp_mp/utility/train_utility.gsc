@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\utility\train_utility.gsc
-******************************************************/
+ * Script: scripts\cp_mp\utility\train_utility.gsc
+***************************************************/
 
 #namespace train_utility;
 

@@ -1,7 +1,7 @@
-/***************************************************************
+/************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_breakable_loot_cache.gsc
-***************************************************************/
+ * Script: scripts\mp\gametypes\br_breakable_loot_cache.gsc
+************************************************************/
 
 #using scripts\common\devgui;
 #using scripts\common\utility;

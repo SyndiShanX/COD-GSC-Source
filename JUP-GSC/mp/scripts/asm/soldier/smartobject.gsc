@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\soldier\smartobject.gsc
-**************************************************/
+ * Script: scripts\asm\soldier\smartobject.gsc
+***********************************************/
 
 #using scripts\anim\notetracks;
 #using scripts\anim\utility_common;

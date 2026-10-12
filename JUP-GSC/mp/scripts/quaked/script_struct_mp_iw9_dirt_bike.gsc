@@ -1,7 +1,7 @@
-/****************************************************************
+/*************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\quaked\script_struct_mp_iw9_dirt_bike.gsc
-****************************************************************/
+ * Script: scripts\quaked\script_struct_mp_iw9_dirt_bike.gsc
+*************************************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\vehicles\vehicle;

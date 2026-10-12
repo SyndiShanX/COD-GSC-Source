@@ -1,7 +1,9 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\character\character_sas_urban_ar.gsc
-***************************************************/
+ * Script: character\character_sas_urban_ar.gsc
+************************************************/
+
+
 
 #using scripts\code\character;
 #using scripts\common\utility;

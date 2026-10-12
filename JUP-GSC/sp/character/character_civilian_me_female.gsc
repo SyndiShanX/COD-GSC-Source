@@ -1,7 +1,9 @@
-/*********************************************************
+/******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\character\character_civilian_me_female.gsc
-*********************************************************/
+ * Script: character\character_civilian_me_female.gsc
+******************************************************/
+
+
 
 #using scripts\code\character;
 #using scripts\common\utility;

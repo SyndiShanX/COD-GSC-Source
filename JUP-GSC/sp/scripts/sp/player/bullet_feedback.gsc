@@ -1,7 +1,9 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\player\bullet_feedback.gsc
-****************************************************/
+ * Script: scripts\sp\player\bullet_feedback.gsc
+*************************************************/
+
+
 
 #using scripts\common\whizby;
 #using scripts\engine\utility;

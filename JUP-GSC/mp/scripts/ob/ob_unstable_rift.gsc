@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\ob\ob_unstable_rift.gsc
+ * Script: scripts\ob\ob_unstable_rift.gsc
 ***********************************************/
 
 #using script_100adcc1cc11d2fa;
@@ -8,9 +8,9 @@
 #using script_1feb0785278dafea;
 #using script_2d400da2610fe542;
 #using script_39d11000e476a42a;
-#using script_3a13b8032b62a5e6;
+#using scripts\mp\objective_marker_bundle_helper;
 #using script_443d99fe707f1d9f;
-#using script_46c7c73b1a7e4773;
+#using scripts\cp_mp\zombie_challenges;
 #using script_482376d10f69832c;
 #using script_4e6e58ab5d96c2b0;
 #using script_62a4f7a62643fe8;

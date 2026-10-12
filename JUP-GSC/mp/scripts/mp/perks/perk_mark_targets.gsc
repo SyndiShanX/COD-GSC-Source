@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\perks\perk_mark_targets.gsc
-*****************************************************/
+ * Script: scripts\mp\perks\perk_mark_targets.gsc
+**************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

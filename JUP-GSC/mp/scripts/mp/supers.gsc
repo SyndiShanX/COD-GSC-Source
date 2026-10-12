@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\supers.gsc
+ * Script: scripts\mp\supers.gsc
 ***********************************************/
 
 #using script_1311c5c284dd1537;

@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\killstreaks\circle_peek.gsc
-*****************************************************/
+ * Script: scripts\mp\killstreaks\circle_peek.gsc
+**************************************************/
 
 #using script_64acb6ce534155b7;
 #using scripts\common\utility;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\heartbeat.gsc
+ * Script: scripts\common\heartbeat.gsc
 ***********************************************/
 
 #using scripts\common\swim_common;

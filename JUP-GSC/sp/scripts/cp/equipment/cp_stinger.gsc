@@ -1,7 +1,9 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\equipment\cp_stinger.gsc
-**************************************************/
+ * Script: scripts\cp\equipment\cp_stinger.gsc
+***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\utility;

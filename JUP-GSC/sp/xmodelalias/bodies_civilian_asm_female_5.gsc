@@ -1,7 +1,9 @@
-/***********************************************************
+/********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\bodies_civilian_asm_female_5.gsc
-***********************************************************/
+ * Script: xmodelalias\bodies_civilian_asm_female_5.gsc
+********************************************************/
+
+
 
 #namespace bodies_civilian_asm_female_5;
 

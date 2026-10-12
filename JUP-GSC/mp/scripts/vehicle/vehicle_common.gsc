@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\vehicle\vehicle_common.gsc
-*************************************************/
+ * Script: scripts\vehicle\vehicle_common.gsc
+***********************************************/
 
 #using scripts\common\vehicle_aianim;
 #using scripts\common\vehicle_code;

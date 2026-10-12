@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\utility\inventory.gsc
+ * Script: scripts\mp\utility\inventory.gsc
 ***********************************************/
 
 #using scripts\common\utility;

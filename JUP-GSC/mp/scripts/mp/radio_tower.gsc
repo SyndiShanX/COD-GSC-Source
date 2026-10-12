@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\radio_tower.gsc
+ * Script: scripts\mp\radio_tower.gsc
 ***********************************************/
 
 #using scripts\common\callbacks;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\load.gsc
+ * Script: scripts\mp\load.gsc
 ***********************************************/
 
 #using script_17ff8fa860ec88dc;

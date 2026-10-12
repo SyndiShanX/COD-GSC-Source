@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\trickrtreat.gsc
-***************************************************/
+ * Script: scripts\mp\gametypes\trickrtreat.gsc
+************************************************/
 
 #using script_44b8991c2b01716a;
 #using scripts\common\callbacks;

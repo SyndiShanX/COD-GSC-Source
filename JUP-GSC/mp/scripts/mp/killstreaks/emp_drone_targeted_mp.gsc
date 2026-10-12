@@ -1,7 +1,7 @@
-/***************************************************************
+/************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\killstreaks\emp_drone_targeted_mp.gsc
-***************************************************************/
+ * Script: scripts\mp\killstreaks\emp_drone_targeted_mp.gsc
+************************************************************/
 
 #using scripts\engine\utility;
 #using scripts\mp\damage;

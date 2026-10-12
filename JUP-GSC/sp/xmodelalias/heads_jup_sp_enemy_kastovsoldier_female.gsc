@@ -1,7 +1,9 @@
-/**********************************************************************
+/*******************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\heads_jup_sp_enemy_kastovsoldier_female.gsc
-**********************************************************************/
+ * Script: xmodelalias\heads_jup_sp_enemy_kastovsoldier_female.gsc
+*******************************************************************/
+
+
 
 #namespace heads_jup_sp_enemy_kastovsoldier_female;
 

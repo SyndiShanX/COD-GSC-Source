@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\vo.gsc
+ * Script: scripts\cp\vo.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\utility;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\slowmo_init.gsc
+ * Script: scripts\sp\slowmo_init.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

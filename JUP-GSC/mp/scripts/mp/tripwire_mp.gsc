@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\tripwire_mp.gsc
+ * Script: scripts\mp\tripwire_mp.gsc
 ***********************************************/
 
 #using scripts\engine\utility;

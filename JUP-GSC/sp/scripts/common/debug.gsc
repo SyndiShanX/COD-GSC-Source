@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\debug.gsc
+ * Script: scripts\common\debug.gsc
 ***********************************************/
+
+
 
 #using scripts\engine\utility;
 #namespace debug;

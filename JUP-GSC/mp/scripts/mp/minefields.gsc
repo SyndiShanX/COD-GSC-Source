@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\minefields.gsc
+ * Script: scripts\mp\minefields.gsc
 ***********************************************/
 
 #using scripts\mp\flags;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\ae_utility.gsc
+ * Script: scripts\common\ae_utility.gsc
 ***********************************************/
 
 #using scripts\engine\utility;

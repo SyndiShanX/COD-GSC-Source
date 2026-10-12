@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\stayahead.gsc
+ * Script: scripts\sp\stayahead.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\math;

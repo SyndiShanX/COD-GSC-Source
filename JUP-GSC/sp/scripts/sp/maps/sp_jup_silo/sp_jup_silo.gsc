@@ -1,7 +1,9 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\maps\sp_jup_silo\sp_jup_silo.gsc
-**********************************************************/
+ * Script: scripts\sp\maps\sp_jup_silo\sp_jup_silo.gsc
+*******************************************************/
+
+
 
 #using script_10bb9f045d0c567a;
 #using script_4d3f1e28f2ed7fa4;

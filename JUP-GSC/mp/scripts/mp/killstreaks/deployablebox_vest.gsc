@@ -1,7 +1,7 @@
-/************************************************************
+/*********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\killstreaks\deployablebox_vest.gsc
-************************************************************/
+ * Script: scripts\mp\killstreaks\deployablebox_vest.gsc
+*********************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

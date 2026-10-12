@@ -1,7 +1,7 @@
-/******************************************************************
+/***************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\horde_mode_scripts\zombie_spawner_mp.gsc
-******************************************************************/
+ * Script: scripts\mp\horde_mode_scripts\zombie_spawner_mp.gsc
+***************************************************************/
 
 #using script_16ea1b94f0f381b3;
 #using script_4a6760982b403bad;

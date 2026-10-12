@@ -1,7 +1,7 @@
-/********************************************************************
+/*****************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\aitypes\zombie_abom\zombie_abom_metabones.gsc
-********************************************************************/
+ * Script: scripts\aitypes\zombie_abom\zombie_abom_metabones.gsc
+*****************************************************************/
 
 #using scripts\asm\asm;
 #using scripts\common\callbacks;

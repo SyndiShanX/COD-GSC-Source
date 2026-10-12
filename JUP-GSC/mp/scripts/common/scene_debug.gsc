@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\scene_debug.gsc
+ * Script: scripts\common\scene_debug.gsc
 ***********************************************/
 
 #using scripts\common\ai;

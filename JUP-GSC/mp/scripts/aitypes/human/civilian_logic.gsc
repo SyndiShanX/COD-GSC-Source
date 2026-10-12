@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\aitypes\human\civilian_logic.gsc
-*******************************************************/
+ * Script: scripts\aitypes\human\civilian_logic.gsc
+****************************************************/
 
 #using scripts\aitypes\bt_util;
 #using scripts\aitypes\stealth;

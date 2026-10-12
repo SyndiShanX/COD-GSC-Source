@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\unittest\patch_far.gsc
+ * Script: scripts\unittest\patch_far.gsc
 ***********************************************/
 
 #using scripts\unittest\util;

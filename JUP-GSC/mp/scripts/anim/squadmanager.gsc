@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\anim\squadmanager.gsc
+ * Script: scripts\anim\squadmanager.gsc
 ***********************************************/
 
 #using scripts\anim\battlechatter_ai;

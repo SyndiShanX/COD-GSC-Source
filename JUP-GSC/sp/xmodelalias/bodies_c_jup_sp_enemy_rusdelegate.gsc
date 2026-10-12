@@ -1,7 +1,9 @@
-/****************************************************************
+/*************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\bodies_c_jup_sp_enemy_rusdelegate.gsc
-****************************************************************/
+ * Script: xmodelalias\bodies_c_jup_sp_enemy_rusdelegate.gsc
+*************************************************************/
+
+
 
 #namespace bodies_c_jup_sp_enemy_rusdelegate;
 

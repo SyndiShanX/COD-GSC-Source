@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gestures_mp.gsc
+ * Script: scripts\mp\gestures_mp.gsc
 ***********************************************/
 
 #using scripts\common\notetrack;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\focus.gsc
+ * Script: scripts\mp\focus.gsc
 ***********************************************/
 
 #using scripts\common\utility;

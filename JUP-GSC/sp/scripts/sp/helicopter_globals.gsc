@@ -1,7 +1,9 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\helicopter_globals.gsc
-************************************************/
+ * Script: scripts\sp\helicopter_globals.gsc
+***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\sp\utility;

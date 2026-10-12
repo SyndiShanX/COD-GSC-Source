@@ -1,7 +1,9 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\vehicles\vehicle_cp.gsc
-*************************************************/
+ * Script: scripts\cp\vehicles\vehicle_cp.gsc
+***********************************************/
+
+
 
 #using script_18ae04893bb2f9ac;
 #using script_228478d4175cb3b9;

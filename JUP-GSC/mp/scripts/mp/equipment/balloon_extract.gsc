@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\balloon_extract.gsc
-*******************************************************/
+ * Script: scripts\mp\equipment\balloon_extract.gsc
+****************************************************/
 
 #using script_2d9d24f7c63ac143;
 #using script_48614492ef09b23;

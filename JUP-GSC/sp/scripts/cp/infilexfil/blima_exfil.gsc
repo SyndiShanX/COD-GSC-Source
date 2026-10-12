@@ -1,7 +1,9 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\infilexfil\blima_exfil.gsc
-****************************************************/
+ * Script: scripts\cp\infilexfil\blima_exfil.gsc
+*************************************************/
+
+
 
 #using scripts\common\anim;
 #using scripts\common\utility;

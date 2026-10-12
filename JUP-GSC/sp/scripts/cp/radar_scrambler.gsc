@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\radar_scrambler.gsc
+ * Script: scripts\cp\radar_scrambler.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\cp_debug;

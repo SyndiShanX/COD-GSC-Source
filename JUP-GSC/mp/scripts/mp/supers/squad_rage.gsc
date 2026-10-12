@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\supers\squad_rage.gsc
+ * Script: scripts\mp\supers\squad_rage.gsc
 ***********************************************/
 
 #using scripts\common\callbacks;

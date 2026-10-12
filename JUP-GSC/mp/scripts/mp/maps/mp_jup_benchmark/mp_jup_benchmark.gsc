@@ -1,7 +1,7 @@
-/********************************************************************
+/*****************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_benchmark\mp_jup_benchmark.gsc
-********************************************************************/
+ * Script: scripts\mp\maps\mp_jup_benchmark\mp_jup_benchmark.gsc
+*****************************************************************/
 
 #using script_21eb8cfd25d4abbc;
 #using script_48554021bb847168;

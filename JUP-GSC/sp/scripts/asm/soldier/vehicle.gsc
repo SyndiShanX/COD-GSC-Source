@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\soldier\vehicle.gsc
+ * Script: scripts\asm\soldier\vehicle.gsc
 ***********************************************/
+
+
 
 #using scripts\asm\asm;
 #using scripts\asm\asm_bb;

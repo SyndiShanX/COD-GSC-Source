@@ -1,7 +1,9 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\character\character_hero_price_urban.gsc
-*******************************************************/
+ * Script: character\character_hero_price_urban.gsc
+****************************************************/
+
+
 
 #using scripts\common\utility;
 #namespace character_hero_price_urban;

@@ -1,7 +1,9 @@
-/*************************************************************
+/**********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\killstreaks\white_phosphorus.gsc
-*************************************************************/
+ * Script: scripts\cp_mp\killstreaks\white_phosphorus.gsc
+**********************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\values;

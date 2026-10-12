@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\hud_util.gsc
+ * Script: scripts\mp\hud_util.gsc
 ***********************************************/
 
 #using scripts\cp_mp\utility\game_utility;

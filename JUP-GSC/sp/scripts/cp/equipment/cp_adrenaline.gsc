@@ -1,7 +1,9 @@
-/*****************************************************
+/**************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\equipment\cp_adrenaline.gsc
-*****************************************************/
+ * Script: scripts\cp\equipment\cp_adrenaline.gsc
+**************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\utility\player;

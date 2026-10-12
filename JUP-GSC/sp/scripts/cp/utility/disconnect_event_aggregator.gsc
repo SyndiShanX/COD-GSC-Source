@@ -1,7 +1,9 @@
-/*****************************************************************
+/**************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\utility\disconnect_event_aggregator.gsc
-*****************************************************************/
+ * Script: scripts\cp\utility\disconnect_event_aggregator.gsc
+**************************************************************/
+
+
 
 #namespace disconnect_event_aggregator;
 

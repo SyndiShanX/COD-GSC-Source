@@ -1,7 +1,9 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\mp\sentientpoolmanager.gsc
-*************************************************/
+ * Script: scripts\mp\sentientpoolmanager.gsc
+***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

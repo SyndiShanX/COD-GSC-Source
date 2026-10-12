@@ -1,7 +1,9 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\smartobjects\hunt_checkin.gsc
-****************************************************/
+ * Script: scripts\smartobjects\hunt_checkin.gsc
+*************************************************/
+
+
 
 #using scripts\asm\asm;
 #using scripts\asm\gesture;

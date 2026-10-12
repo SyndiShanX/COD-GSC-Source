@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\tweakables.gsc
+ * Script: scripts\mp\tweakables.gsc
 ***********************************************/
 
 #using scripts\engine\utility;

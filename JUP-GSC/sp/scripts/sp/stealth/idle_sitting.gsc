@@ -1,7 +1,9 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\stealth\idle_sitting.gsc
-**************************************************/
+ * Script: scripts\sp\stealth\idle_sitting.gsc
+***********************************************/
+
+
 
 #namespace idle_sitting;
 

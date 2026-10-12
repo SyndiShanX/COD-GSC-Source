@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\force_field.gsc
-***************************************************/
+ * Script: scripts\mp\gametypes\force_field.gsc
+************************************************/
 
 #using script_7f36f22bad523244;
 #using script_fdbc9069851786a;

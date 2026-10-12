@@ -1,7 +1,9 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\mp\killstreaks\agent_killstreak.gsc
-**********************************************************/
+ * Script: scripts\mp\killstreaks\agent_killstreak.gsc
+*******************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\aitypes\squad.gsc
+ * Script: scripts\aitypes\squad.gsc
 ***********************************************/
 
 #using scripts\aitypes\bt_util;

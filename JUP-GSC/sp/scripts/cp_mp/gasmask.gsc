@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\gasmask.gsc
+ * Script: scripts\cp_mp\gasmask.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp_mp\killstreaks\white_phosphorus;

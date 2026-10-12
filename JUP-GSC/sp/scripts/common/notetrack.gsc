@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\notetrack.gsc
+ * Script: scripts\common\notetrack.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\face;
 #using scripts\common\utility;

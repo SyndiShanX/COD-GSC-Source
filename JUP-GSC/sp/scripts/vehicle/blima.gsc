@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\vehicle\blima.gsc
+ * Script: scripts\vehicle\blima.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\vehicle;

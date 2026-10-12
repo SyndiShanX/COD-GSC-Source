@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\stealth\player.gsc
+ * Script: scripts\sp\stealth\player.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\battlechatter_table;
 #using scripts\common\utility;

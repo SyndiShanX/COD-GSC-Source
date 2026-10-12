@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\footsteps.gsc
+ * Script: scripts\sp\footsteps.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\utility;
 #namespace footsteps;

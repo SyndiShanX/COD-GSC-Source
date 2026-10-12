@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_lootcache.gsc
-****************************************************/
+ * Script: scripts\mp\gametypes\br_lootcache.gsc
+*************************************************/
 
 #using script_44b8991c2b01716a;
 #using script_744cad313ed0a87e;

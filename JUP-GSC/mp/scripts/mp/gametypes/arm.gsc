@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\arm.gsc
+ * Script: scripts\mp\gametypes\arm.gsc
 ***********************************************/
 
 #using script_1d4b01c1ec829364;

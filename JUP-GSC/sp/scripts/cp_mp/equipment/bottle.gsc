@@ -1,7 +1,9 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\equipment\bottle.gsc
-*************************************************/
+ * Script: scripts\cp_mp\equipment\bottle.gsc
+***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp_mp\equipment\bottle;

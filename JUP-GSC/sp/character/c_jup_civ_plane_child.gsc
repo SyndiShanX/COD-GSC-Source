@@ -1,7 +1,9 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\character\c_jup_civ_plane_child.gsc
-**************************************************/
+ * Script: character\c_jup_civ_plane_child.gsc
+***********************************************/
+
+
 
 #using scripts\common\utility;
 #namespace c_jup_civ_plane_child;

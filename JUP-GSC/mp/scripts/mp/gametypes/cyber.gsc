@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\cyber.gsc
+ * Script: scripts\mp\gametypes\cyber.gsc
 ***********************************************/
 
 #using script_4a6760982b403bad;

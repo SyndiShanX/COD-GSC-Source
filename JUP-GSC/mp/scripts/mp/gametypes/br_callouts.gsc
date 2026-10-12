@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_callouts.gsc
-***************************************************/
+ * Script: scripts\mp\gametypes\br_callouts.gsc
+************************************************/
 
 #using scripts\engine\utility;
 #namespace br_callouts;

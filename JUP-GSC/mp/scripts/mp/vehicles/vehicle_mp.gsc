@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\vehicles\vehicle_mp.gsc
-*************************************************/
+ * Script: scripts\mp\vehicles\vehicle_mp.gsc
+***********************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\utility\debug_utility;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\code\character.gsc
+ * Script: scripts\code\character.gsc
 ***********************************************/
 
 #using scripts\common\utility;

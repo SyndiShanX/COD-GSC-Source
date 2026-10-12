@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_ending_util.gsc
-******************************************************/
+ * Script: scripts\mp\gametypes\br_ending_util.gsc
+***************************************************/
 
 #using scripts\cp_mp\operator;
 #using scripts\cp_mp\weapon;

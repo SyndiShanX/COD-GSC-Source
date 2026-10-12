@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\unittest\private.gsc
+ * Script: scripts\unittest\private.gsc
 ***********************************************/
+
+
 
 #using scripts\unittest\util;
 #namespace namespace_106f587ebebd0cab;

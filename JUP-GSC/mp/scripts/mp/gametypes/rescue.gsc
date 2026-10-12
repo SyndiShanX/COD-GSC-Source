@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\rescue.gsc
+ * Script: scripts\mp\gametypes\rescue.gsc
 ***********************************************/
 
 #using script_4a6760982b403bad;

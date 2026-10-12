@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\anim\scripted.gsc
+ * Script: scripts\anim\scripted.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\face;
 #using scripts\asm\asm;

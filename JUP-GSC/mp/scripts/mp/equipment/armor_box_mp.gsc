@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\armor_box_mp.gsc
-****************************************************/
+ * Script: scripts\mp\equipment\armor_box_mp.gsc
+*************************************************/
 
 #using scripts\common\ae_utility;
 #using scripts\common\utility;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\unittest\switch.gsc
+ * Script: scripts\unittest\switch.gsc
 ***********************************************/
 
 #using scripts\unittest\util;

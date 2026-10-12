@@ -1,7 +1,9 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\hb_sensor.gsc
-*************************************************/
+ * Script: scripts\sp\equipment\hb_sensor.gsc
+***********************************************/
+
+
 
 #using scripts\sp\equipment\offhands;
 #namespace hb_sensor;

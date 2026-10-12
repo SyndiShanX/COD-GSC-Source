@@ -1,7 +1,7 @@
-/**************************************************************
+/***********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\equipment\thermobaric_grenade.gsc
-**************************************************************/
+ * Script: scripts\cp_mp\equipment\thermobaric_grenade.gsc
+***********************************************************/
 
 #using script_13865ca76df87ea;
 #using scripts\common\utility;
@@ -112,11 +112,11 @@ function function_90a9e9f5e4922a2a(position, gunforward, var_f901cb7707ef1b2c, f
 
 function function_8bc975f46b0dca4(istouchingground, position, bundle, blueprintindex) {
   if(istouchingground) {
-    genericblueprint_playfx(bundle, blueprintindex, "ground_explosion", position);
+    genericblueprint_playFX(bundle, blueprintindex, "ground_explosion", position);
     return;
   }
 
-  genericblueprint_playfx(bundle, blueprintindex, "air_explosion", position);
+  genericblueprint_playFX(bundle, blueprintindex, "air_explosion", position);
 }
 
 function thermobaric_fire(gunforward, groundposition, blueprintdefindex, objweapon) {

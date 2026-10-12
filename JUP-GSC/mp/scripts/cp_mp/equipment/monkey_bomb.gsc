@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\equipment\monkey_bomb.gsc
-******************************************************/
+ * Script: scripts\cp_mp\equipment\monkey_bomb.gsc
+***************************************************/
 
 #using script_9880b9dc28bc25e;
 #using scripts\common\utility;

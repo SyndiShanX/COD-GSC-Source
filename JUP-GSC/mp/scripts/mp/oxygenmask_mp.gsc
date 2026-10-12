@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\oxygenmask_mp.gsc
+ * Script: scripts\mp\oxygenmask_mp.gsc
 ***********************************************/
 
 #using scripts\common\swim_common;

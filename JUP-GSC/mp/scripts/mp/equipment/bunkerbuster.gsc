@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\bunkerbuster.gsc
-****************************************************/
+ * Script: scripts\mp\equipment\bunkerbuster.gsc
+*************************************************/
 
 #using scripts\cp_mp\utility\equipment_utility;
 #using scripts\cp_mp\utility\game_utility;

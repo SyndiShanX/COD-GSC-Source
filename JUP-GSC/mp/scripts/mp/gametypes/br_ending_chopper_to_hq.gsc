@@ -1,7 +1,7 @@
-/***************************************************************
+/************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_ending_chopper_to_hq.gsc
-***************************************************************/
+ * Script: scripts\mp\gametypes\br_ending_chopper_to_hq.gsc
+************************************************************/
 
 #using script_62c595d55b88b26;
 #using script_930a1e7bd882c1d;

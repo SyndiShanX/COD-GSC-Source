@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\molotov.gsc
+ * Script: scripts\sp\equipment\molotov.gsc
 ***********************************************/
+
+
 
 #using scripts\common\ai;
 #using scripts\common\utility;

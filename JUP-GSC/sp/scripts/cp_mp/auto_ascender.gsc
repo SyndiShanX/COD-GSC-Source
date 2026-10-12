@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\auto_ascender.gsc
+ * Script: scripts\cp_mp\auto_ascender.gsc
 ***********************************************/
+
+
 
 #using scripts\common\anim;
 #using scripts\common\utility;

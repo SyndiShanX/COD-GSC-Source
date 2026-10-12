@@ -1,7 +1,9 @@
-/************************************************************************
+/*********************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\quaked\script_vehicle_iw9_mil_air_heli_medium.gsc
-************************************************************************/
+ * Script: scripts\quaked\script_vehicle_iw9_mil_air_heli_medium.gsc
+*********************************************************************/
+
+
 
 #using scripts\vehicle\veh9_mil_air_heli_medium;
 #namespace script_vehicle_iw9_mil_air_heli_medium;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\mp\callbacksetup.gsc
+ * Script: scripts\mp\callbacksetup.gsc
 ***********************************************/
+
+
 
 #using script_4a6760982b403bad;
 #using scripts\common\callbacks;

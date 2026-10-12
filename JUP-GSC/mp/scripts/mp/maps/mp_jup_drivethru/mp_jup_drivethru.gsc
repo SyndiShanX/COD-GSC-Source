@@ -1,7 +1,7 @@
-/********************************************************************
+/*****************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_drivethru\mp_jup_drivethru.gsc
-********************************************************************/
+ * Script: scripts\mp\maps\mp_jup_drivethru\mp_jup_drivethru.gsc
+*****************************************************************/
 
 #using scripts\common\anim;
 #using scripts\common\lighting;

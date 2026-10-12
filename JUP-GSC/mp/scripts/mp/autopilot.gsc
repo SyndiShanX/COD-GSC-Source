@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\autopilot.gsc
+ * Script: scripts\mp\autopilot.gsc
 ***********************************************/
 
 #using scripts\engine\utility;

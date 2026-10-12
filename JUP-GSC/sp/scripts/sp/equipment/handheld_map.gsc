@@ -1,7 +1,9 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\handheld_map.gsc
-****************************************************/
+ * Script: scripts\sp\equipment\handheld_map.gsc
+*************************************************/
+
+
 
 #using scripts\sp\equipment\offhands;
 #namespace handheld_map;

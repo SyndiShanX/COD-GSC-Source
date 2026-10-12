@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\civilian\script_funcs.gsc
-****************************************************/
+ * Script: scripts\asm\civilian\script_funcs.gsc
+*************************************************/
 
 #using scripts\anim\utility_common;
 #using scripts\asm\asm;

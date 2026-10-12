@@ -1,7 +1,7 @@
-/********************************************************************
+/*****************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_m_exhibit\mp_jup_m_exhibit.gsc
-********************************************************************/
+ * Script: scripts\mp\maps\mp_jup_m_exhibit\mp_jup_m_exhibit.gsc
+*****************************************************************/
 
 #using script_2d5db3d458ae1dc5;
 #namespace mp_jup_m_exhibit;

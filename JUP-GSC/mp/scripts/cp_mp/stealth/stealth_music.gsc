@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\stealth\stealth_music.gsc
-******************************************************/
+ * Script: scripts\cp_mp\stealth\stealth_music.gsc
+***************************************************/
 
 #using scripts\cp_mp\stealth\utility;
 #using scripts\engine\utility;

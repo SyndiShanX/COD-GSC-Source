@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\music_and_dialog.gsc
+ * Script: scripts\mp\music_and_dialog.gsc
 ***********************************************/
 
 #using scripts\common\damage_effects;

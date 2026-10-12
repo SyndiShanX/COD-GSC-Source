@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\risk.gsc
+ * Script: scripts\mp\gametypes\risk.gsc
 ***********************************************/
 
 #using script_53da3333b83b3527;

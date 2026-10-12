@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_respawn.gsc
-**************************************************/
+ * Script: scripts\mp\gametypes\br_respawn.gsc
+***********************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\utility\inventory_utility;

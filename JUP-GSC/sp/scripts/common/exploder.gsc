@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\exploder.gsc
+ * Script: scripts\common\exploder.gsc
 ***********************************************/
+
+
 
 #using scripts\common\createfx;
 #using scripts\common\utility;

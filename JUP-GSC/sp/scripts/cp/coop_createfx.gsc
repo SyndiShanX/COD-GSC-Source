@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\coop_createfx.gsc
+ * Script: scripts\cp\coop_createfx.gsc
 ***********************************************/
+
+
 
 #using scripts\common\createfx;
 #using scripts\common\createfxmenu;

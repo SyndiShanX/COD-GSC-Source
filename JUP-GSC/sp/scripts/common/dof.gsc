@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\dof.gsc
+ * Script: scripts\common\dof.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\math;

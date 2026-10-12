@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\character\character_spetsnaz_ar.gsc
-**************************************************/
+ * Script: character\character_spetsnaz_ar.gsc
+***********************************************/
 
 #using scripts\code\character;
 #using scripts\common\utility;

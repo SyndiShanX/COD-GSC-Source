@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\pmc_missions.gsc
+ * Script: scripts\mp\pmc_missions.gsc
 ***********************************************/
 
 #using script_1174abedbefe9ada;

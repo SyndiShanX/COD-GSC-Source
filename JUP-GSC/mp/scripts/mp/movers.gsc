@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\movers.gsc
+ * Script: scripts\mp\movers.gsc
 ***********************************************/
 
 #using scripts\common\elevators;

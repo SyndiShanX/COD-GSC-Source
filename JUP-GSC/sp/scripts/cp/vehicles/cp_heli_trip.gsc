@@ -1,7 +1,9 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\vehicles\cp_heli_trip.gsc
-***************************************************/
+ * Script: scripts\cp\vehicles\cp_heli_trip.gsc
+************************************************/
+
+
 
 #using scripts\common\anim;
 #using scripts\common\utility;

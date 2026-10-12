@@ -1,7 +1,7 @@
-/**********************************************************************
+/*******************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_vertigo\mp_jup_vertigo_audio.gsc
-**********************************************************************/
+ * Script: scripts\mp\maps\mp_jup_vertigo\mp_jup_vertigo_audio.gsc
+*******************************************************************/
 
 #using scripts\engine\utility;
 #namespace mp_jup_vertigo_audio;

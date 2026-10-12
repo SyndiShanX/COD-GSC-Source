@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\cp_compass.gsc
+ * Script: scripts\cp\cp_compass.gsc
 ***********************************************/
+
+
 
 #using scripts\cp\cp_compass;
 #using scripts\cp_mp\utility\game_utility;

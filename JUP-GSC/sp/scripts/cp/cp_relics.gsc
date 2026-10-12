@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\cp_relics.gsc
+ * Script: scripts\cp\cp_relics.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\shared;
 #using scripts\asm\asm;

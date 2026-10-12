@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_quest_util.gsc
-*****************************************************/
+ * Script: scripts\mp\gametypes\br_quest_util.gsc
+**************************************************/
 
 #using script_110fd2130c2ed1fe;
 #using script_1c3dac686aa675cc;

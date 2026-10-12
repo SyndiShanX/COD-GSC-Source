@@ -1,7 +1,7 @@
-/******************************************************************
+/***************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_invasion\mp_jup_invasion.gsc
-******************************************************************/
+ * Script: scripts\mp\maps\mp_jup_invasion\mp_jup_invasion.gsc
+***************************************************************/
 
 #using script_3d2770dc09c1243;
 #using scripts\common\anim;

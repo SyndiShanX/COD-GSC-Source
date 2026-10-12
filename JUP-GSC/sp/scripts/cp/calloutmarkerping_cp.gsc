@@ -1,7 +1,9 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\calloutmarkerping_cp.gsc
-**************************************************/
+ * Script: scripts\cp\calloutmarkerping_cp.gsc
+***********************************************/
+
+
 
 #using scripts\cp\utility;
 #using scripts\cp\utility\disconnect_event_aggregator;

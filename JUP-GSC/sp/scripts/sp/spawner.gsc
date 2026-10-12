@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\spawner.gsc
+ * Script: scripts\sp\spawner.gsc
 ***********************************************/
+
+
 
 #using script_78ee1f1787a2e6a4;
 #using scripts\anim\init;

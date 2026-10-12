@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\swim_common.gsc
+ * Script: scripts\common\swim_common.gsc
 ***********************************************/
+
+
 
 #using scripts\common\heartbeat;
 #using scripts\engine\math;

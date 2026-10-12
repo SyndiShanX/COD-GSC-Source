@@ -1,7 +1,9 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\anim\battlechatter_table.gsc
-***************************************************/
+ * Script: scripts\anim\battlechatter_table.gsc
+************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

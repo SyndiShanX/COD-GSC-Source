@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\callbacks.gsc
+ * Script: scripts\common\callbacks.gsc
 ***********************************************/
 
 #using scripts\engine\utility;

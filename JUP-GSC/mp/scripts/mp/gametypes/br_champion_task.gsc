@@ -1,7 +1,7 @@
-/********************************************************
+/*****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_champion_task.gsc
-********************************************************/
+ * Script: scripts\mp\gametypes\br_champion_task.gsc
+*****************************************************/
 
 #using script_3b9af437ca74921e;
 #using script_50d581b454b6d41d;

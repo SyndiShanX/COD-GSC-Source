@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_c130.gsc
+ * Script: scripts\mp\gametypes\br_c130.gsc
 ***********************************************/
 
 #using script_7933519955f32c4e;

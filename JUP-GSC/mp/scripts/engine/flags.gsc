@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\engine\flags.gsc
+ * Script: scripts\engine\flags.gsc
 ***********************************************/
 
 #using scripts\engine\utility;

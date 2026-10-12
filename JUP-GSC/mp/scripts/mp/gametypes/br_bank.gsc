@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_bank.gsc
+ * Script: scripts\mp\gametypes\br_bank.gsc
 ***********************************************/
 
 #using scripts\engine\utility;

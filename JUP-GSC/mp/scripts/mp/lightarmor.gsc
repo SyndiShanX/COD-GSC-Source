@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\lightarmor.gsc
+ * Script: scripts\mp\lightarmor.gsc
 ***********************************************/
 
 #using scripts\common\utility;

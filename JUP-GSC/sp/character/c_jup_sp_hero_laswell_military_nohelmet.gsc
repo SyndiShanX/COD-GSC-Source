@@ -1,7 +1,9 @@
-/********************************************************************
+/*****************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\character\c_jup_sp_hero_laswell_military_nohelmet.gsc
-********************************************************************/
+ * Script: character\c_jup_sp_hero_laswell_military_nohelmet.gsc
+*****************************************************************/
+
+
 
 #using scripts\common\utility;
 #namespace c_jup_sp_hero_laswell_military_nohelmet;

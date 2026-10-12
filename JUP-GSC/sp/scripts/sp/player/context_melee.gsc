@@ -1,7 +1,9 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\player\context_melee.gsc
-**************************************************/
+ * Script: scripts\sp\player\context_melee.gsc
+***********************************************/
+
+
 
 #using scripts\anim\shared;
 #using scripts\common\ai;

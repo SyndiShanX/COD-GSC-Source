@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\smartobjects\utility.gsc
+ * Script: scripts\smartobjects\utility.gsc
 ***********************************************/
 
 #using scripts\asm\asm_bb;

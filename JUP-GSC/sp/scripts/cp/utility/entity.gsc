@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\utility\entity.gsc
+ * Script: scripts\cp\utility\entity.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\utility\player;

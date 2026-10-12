@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\team_gun.gsc
-************************************************/
+ * Script: scripts\mp\gametypes\team_gun.gsc
+***********************************************/
 
 #using scripts\mp\utility\stats;
 #namespace team_gun;

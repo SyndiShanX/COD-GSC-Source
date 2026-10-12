@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\proximity_alarm.gsc
-*******************************************************/
+ * Script: scripts\mp\equipment\proximity_alarm.gsc
+****************************************************/
 
 #using script_16ea1b94f0f381b3;
 #using scripts\common\utility;

@@ -1,7 +1,9 @@
-/*********************************************************************
+/******************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\civilian_russian_female_head_flashback.gsc
-*********************************************************************/
+ * Script: xmodelalias\civilian_russian_female_head_flashback.gsc
+******************************************************************/
+
+
 
 #namespace civilian_russian_female_head_flashback;
 

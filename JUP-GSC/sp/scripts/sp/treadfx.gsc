@@ -1,4 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\treadfx.gsc
+ * Script: scripts\sp\treadfx.gsc
 ***********************************************/
+
+

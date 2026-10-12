@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\escort_horde.gsc
-****************************************************/
+ * Script: scripts\mp\gametypes\escort_horde.gsc
+*************************************************/
 
 #using script_16ea1b94f0f381b3;
 #using script_24fbedba9a7a1ef4;

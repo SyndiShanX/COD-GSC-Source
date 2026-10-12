@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\supers\capture_bot.gsc
-***************************************************/
+ * Script: scripts\cp_mp\supers\capture_bot.gsc
+************************************************/
 
 #using script_608c50392df8c7d1;
 #using scripts\common\ae_utility;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\whizby.gsc
+ * Script: scripts\cp\whizby.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\whizby;

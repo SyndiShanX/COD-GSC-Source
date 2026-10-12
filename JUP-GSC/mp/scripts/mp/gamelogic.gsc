@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gamelogic.gsc
+ * Script: scripts\mp\gamelogic.gsc
 ***********************************************/
 
 #using script_1070be3357c9454c;

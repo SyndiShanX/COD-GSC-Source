@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\shared\utility.gsc
+ * Script: scripts\asm\shared\utility.gsc
 ***********************************************/
 
 #using scripts\anim\battlechatter;

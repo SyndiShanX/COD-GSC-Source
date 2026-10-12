@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\warrior.gsc
+ * Script: scripts\mp\gametypes\warrior.gsc
 ***********************************************/
 
 #using script_133ea27280b07bc2;

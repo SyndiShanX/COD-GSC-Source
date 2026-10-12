@@ -1,7 +1,7 @@
-/*********************************************************
+/******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_ending_chopper.gsc
-*********************************************************/
+ * Script: scripts\mp\gametypes\br_ending_chopper.gsc
+******************************************************/
 
 #using scripts\common\anim;
 #using scripts\engine\utility;

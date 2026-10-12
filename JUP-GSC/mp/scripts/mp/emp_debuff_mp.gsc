@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\emp_debuff_mp.gsc
+ * Script: scripts\mp\emp_debuff_mp.gsc
 ***********************************************/
 
 #using scripts\cp_mp\utility\player_utility;

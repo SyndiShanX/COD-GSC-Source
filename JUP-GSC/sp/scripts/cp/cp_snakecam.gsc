@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\cp_snakecam.gsc
+ * Script: scripts\cp\cp_snakecam.gsc
 ***********************************************/
+
+
 
 #using script_2c075d80ec62e503;
 #using scripts\common\utility;

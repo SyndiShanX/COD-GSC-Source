@@ -1,7 +1,9 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\vehicles\vehicle_utility.gsc
-******************************************************/
+ * Script: scripts\cp\vehicles\vehicle_utility.gsc
+***************************************************/
+
+
 
 #using scripts\cp_mp\utility\player_utility;
 #using scripts\engine\utility;

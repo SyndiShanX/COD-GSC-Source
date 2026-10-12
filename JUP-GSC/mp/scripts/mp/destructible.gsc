@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\destructible.gsc
+ * Script: scripts\mp\destructible.gsc
 ***********************************************/
 
 #using scripts\common\anim;

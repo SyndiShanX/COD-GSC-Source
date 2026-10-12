@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\stealth\manager.gsc
+ * Script: scripts\sp\stealth\manager.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\battlechatter;
 #using scripts\anim\battlechatter_table;

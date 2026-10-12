@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\motiondetectors.gsc
+ * Script: scripts\mp\motiondetectors.gsc
 ***********************************************/
 
 #using scripts\common\anim;

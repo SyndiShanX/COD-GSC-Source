@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\devgui.gsc
+ * Script: scripts\common\devgui.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\trace;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\supers\supers.gsc
+ * Script: scripts\cp_mp\supers\supers.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\values;

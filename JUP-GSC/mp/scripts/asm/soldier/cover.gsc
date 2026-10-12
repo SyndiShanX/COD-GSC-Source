@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\soldier\cover.gsc
+ * Script: scripts\asm\soldier\cover.gsc
 ***********************************************/
 
 #using scripts\anim\notetracks;

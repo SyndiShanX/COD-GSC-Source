@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\ai_mp_controller.gsc
+ * Script: scripts\mp\ai_mp_controller.gsc
 ***********************************************/
 
 #using script_1174abedbefe9ada;

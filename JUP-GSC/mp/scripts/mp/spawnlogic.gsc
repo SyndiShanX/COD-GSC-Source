@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\spawnlogic.gsc
+ * Script: scripts\mp\spawnlogic.gsc
 ***********************************************/
 
 #using scripts\common\utility;

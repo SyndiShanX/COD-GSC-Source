@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\gamer_profile.gsc
+ * Script: scripts\sp\gamer_profile.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\sp\utility;

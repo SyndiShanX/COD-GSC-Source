@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\killcam.gsc
+ * Script: scripts\cp\killcam.gsc
 ***********************************************/
+
+
 
 #using script_1b1a05843f74cfa9;
 #using scripts\cp\damage;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\anim.gsc
+ * Script: scripts\mp\anim.gsc
 ***********************************************/
 
 #using scripts\anim\face;

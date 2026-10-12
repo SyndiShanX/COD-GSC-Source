@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\anim\weaponlist.gsc
+ * Script: scripts\anim\weaponlist.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\utility_common;
 #namespace weaponlist;

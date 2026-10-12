@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\cp_c4.gsc
+ * Script: scripts\cp\cp_c4.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\equipment;

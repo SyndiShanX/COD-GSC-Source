@@ -1,7 +1,9 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\vehicles\vehicle_anim.gsc
-******************************************************/
+ * Script: scripts\cp_mp\vehicles\vehicle_anim.gsc
+***************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\brtdm.gsc
+ * Script: scripts\mp\gametypes\brtdm.gsc
 ***********************************************/
 
 #using script_3bdadfff7554ceba;

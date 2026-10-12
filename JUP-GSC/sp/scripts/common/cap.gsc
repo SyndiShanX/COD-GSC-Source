@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\cap.gsc
+ * Script: scripts\common\cap.gsc
 ***********************************************/
+
+
 
 #using scripts\asm\asm;
 #using scripts\asm\asm_bb;

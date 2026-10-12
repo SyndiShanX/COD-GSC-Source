@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\character\test_character_dog.gsc
+ * Script: character\test_character_dog.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #namespace test_character_dog;

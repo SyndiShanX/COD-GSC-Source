@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\audio.gsc
+ * Script: scripts\mp\audio.gsc
 ***********************************************/
 
 #using scripts\common\utility;

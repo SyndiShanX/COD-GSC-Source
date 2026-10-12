@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\player\secure.gsc
+ * Script: scripts\sp\player\secure.gsc
 ***********************************************/
+
+
 
 #using scripts\common\ai;
 #using scripts\common\anim;

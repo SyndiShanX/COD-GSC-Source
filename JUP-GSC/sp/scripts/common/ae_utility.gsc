@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\ae_utility.gsc
+ * Script: scripts\common\ae_utility.gsc
 ***********************************************/
+
+
 
 #using scripts\engine\utility;
 #namespace ae_utility;

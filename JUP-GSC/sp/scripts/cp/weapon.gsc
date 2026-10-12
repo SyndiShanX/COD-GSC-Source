@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\weapon.gsc
+ * Script: scripts\cp\weapon.gsc
 ***********************************************/
+
+
 
 #using script_37257c344663c658;
 #using script_737f801e6beb18c7;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\aitypes\weapon.gsc
+ * Script: scripts\aitypes\weapon.gsc
 ***********************************************/
+
+
 
 #using scripts\aitypes\bt_util;
 #using scripts\aitypes\combat;

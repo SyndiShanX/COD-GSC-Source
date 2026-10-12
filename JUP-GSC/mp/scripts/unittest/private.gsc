@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\unittest\private.gsc
+ * Script: scripts\unittest\private.gsc
 ***********************************************/
 
 #using scripts\unittest\util;

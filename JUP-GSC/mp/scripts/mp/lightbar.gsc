@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\lightbar.gsc
+ * Script: scripts\mp\lightbar.gsc
 ***********************************************/
 
 #using scripts\common\utility;

@@ -1,7 +1,7 @@
-/*********************************************************
+/******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\bots\bots_gametype_conflict.gsc
-*********************************************************/
+ * Script: scripts\mp\bots\bots_gametype_conflict.gsc
+******************************************************/
 
 #using script_27fdece778e999d8;
 #using script_4a941421347ff7df;

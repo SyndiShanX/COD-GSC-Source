@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\br_metal_detector.gsc
+ * Script: scripts\mp\br_metal_detector.gsc
 ***********************************************/
 
 #using scripts\common\utility;

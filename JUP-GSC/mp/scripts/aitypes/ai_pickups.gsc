@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\aitypes\ai_pickups.gsc
+ * Script: scripts\aitypes\ai_pickups.gsc
 ***********************************************/
 
 #namespace ai_pickups;

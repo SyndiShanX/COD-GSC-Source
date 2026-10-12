@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\bots\bots_loadout.gsc
+ * Script: scripts\mp\bots\bots_loadout.gsc
 ***********************************************/
 
 #using scripts\common\utility;

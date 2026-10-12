@@ -1,7 +1,9 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\killstreaks\uav_cp.gsc
-************************************************/
+ * Script: scripts\cp\killstreaks\uav_cp.gsc
+***********************************************/
+
+
 
 #using scripts\common\callbacks;
 #using scripts\common\utility;

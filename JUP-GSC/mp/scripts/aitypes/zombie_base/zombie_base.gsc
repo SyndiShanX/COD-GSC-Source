@@ -1,7 +1,7 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\aitypes\zombie_base\zombie_base.gsc
-**********************************************************/
+ * Script: scripts\aitypes\zombie_base\zombie_base.gsc
+*******************************************************/
 
 #using script_22e5ad6fd19f0770;
 #using script_38c251115537f16e;

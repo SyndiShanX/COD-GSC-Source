@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\stealth\corpse.gsc
+ * Script: scripts\stealth\corpse.gsc
 ***********************************************/
+
+
 
 #using scripts\asm\asm;
 #using scripts\common\utility;

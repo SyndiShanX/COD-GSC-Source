@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\outline.gsc
+ * Script: scripts\sp\outline.gsc
 ***********************************************/
+
+
 
 #using scripts\engine\utility;
 #using scripts\sp\outline;

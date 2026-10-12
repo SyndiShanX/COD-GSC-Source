@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\bots\bots_gametype_gun.gsc
-****************************************************/
+ * Script: scripts\mp\bots\bots_gametype_gun.gsc
+*************************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\weapon;

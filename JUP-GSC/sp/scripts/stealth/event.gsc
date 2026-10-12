@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\stealth\event.gsc
+ * Script: scripts\stealth\event.gsc
 ***********************************************/
+
+
 
 #using scripts\asm\asm;
 #using scripts\common\utility;

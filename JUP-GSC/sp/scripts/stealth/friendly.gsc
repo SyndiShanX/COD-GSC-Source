@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\stealth\friendly.gsc
+ * Script: scripts\stealth\friendly.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

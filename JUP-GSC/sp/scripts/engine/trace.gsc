@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\engine\trace.gsc
+ * Script: scripts\engine\trace.gsc
 ***********************************************/
+
+
 
 #using scripts\engine\math;
 #using scripts\engine\trace;

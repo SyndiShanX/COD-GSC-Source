@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\teargas.gsc
+ * Script: scripts\sp\equipment\teargas.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\values;

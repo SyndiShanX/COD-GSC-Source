@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\dmz_ai.gsc
+ * Script: scripts\mp\gametypes\dmz_ai.gsc
 ***********************************************/
 
 #using scripts\common\utility;

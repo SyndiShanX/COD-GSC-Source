@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\gesture.gsc
+ * Script: scripts\asm\gesture.gsc
 ***********************************************/
+
+
 
 #using scripts\asm\asm;
 #using scripts\asm\asm_bb;

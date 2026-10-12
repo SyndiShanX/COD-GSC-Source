@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\debug.gsc
+ * Script: scripts\sp\debug.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\init;
 #using scripts\anim\utility;

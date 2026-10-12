@@ -1,7 +1,9 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\soldier\throwgrenade.gsc
-***************************************************/
+ * Script: scripts\asm\soldier\throwgrenade.gsc
+************************************************/
+
+
 
 #using scripts\anim\battlechatter_events;
 #using scripts\anim\combat_utility;

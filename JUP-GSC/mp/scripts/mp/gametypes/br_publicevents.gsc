@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_publicevents.gsc
-*******************************************************/
+ * Script: scripts\mp\gametypes\br_publicevents.gsc
+****************************************************/
 
 #using script_294dda4a4b00ffe3;
 #using scripts\common\utility;

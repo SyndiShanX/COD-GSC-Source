@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\fakeactor.gsc
+ * Script: scripts\sp\fakeactor.gsc
 ***********************************************/
+
+
 
 #using script_1d1c16f25c2bda5e;
 #using scripts\anim\face;

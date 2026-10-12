@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\frag.gsc
+ * Script: scripts\sp\equipment\frag.gsc
 ***********************************************/
+
+
 
 #using scripts\sp\equipment\offhands;
 #namespace frag;

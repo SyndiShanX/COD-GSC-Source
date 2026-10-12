@@ -1,7 +1,9 @@
-/************************************************************
+/*********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\c_jup_civ_russian_male_body_1.gsc
-************************************************************/
+ * Script: xmodelalias\c_jup_civ_russian_male_body_1.gsc
+*********************************************************/
+
+
 
 #namespace c_jup_civ_russian_male_body_1;
 

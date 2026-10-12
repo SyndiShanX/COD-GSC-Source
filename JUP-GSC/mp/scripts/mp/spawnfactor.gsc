@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\spawnfactor.gsc
+ * Script: scripts\mp\spawnfactor.gsc
 ***********************************************/
 
 #using scripts\common\callbacks;

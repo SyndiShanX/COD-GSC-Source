@@ -1,7 +1,7 @@
-/********************************************************
+/*****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\activity_manager.gsc
-********************************************************/
+ * Script: scripts\mp\gametypes\activity_manager.gsc
+*****************************************************/
 
 #using script_1174abedbefe9ada;
 #using script_1193c0b83fce13b;

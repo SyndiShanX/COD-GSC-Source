@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\killstreaks\remote_turret.gsc
-****************************************************/
+ * Script: scripts\killstreaks\remote_turret.gsc
+*************************************************/
 
 #using scripts\common\callbacks;
 #using scripts\common\utility;

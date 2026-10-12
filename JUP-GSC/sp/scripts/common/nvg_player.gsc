@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\nvg_player.gsc
+ * Script: scripts\common\nvg_player.gsc
 ***********************************************/
+
+
 
 #using scripts\common\lighting;
 #using scripts\common\utility;

@@ -1,7 +1,7 @@
-/**************************************************************
+/***********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_publicevent_restock.gsc
-**************************************************************/
+ * Script: scripts\mp\gametypes\br_publicevent_restock.gsc
+***********************************************************/
 
 #using script_744cad313ed0a87e;
 #using scripts\common\utility;

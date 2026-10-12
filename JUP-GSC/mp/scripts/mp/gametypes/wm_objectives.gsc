@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\wm_objectives.gsc
-*****************************************************/
+ * Script: scripts\mp\gametypes\wm_objectives.gsc
+**************************************************/
 
 #using script_1cb7d67b71a3b4a0;
 #using script_3653c2969325f543;

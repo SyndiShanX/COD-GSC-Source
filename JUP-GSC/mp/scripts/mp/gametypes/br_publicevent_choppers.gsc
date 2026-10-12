@@ -1,7 +1,7 @@
-/***************************************************************
+/************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_publicevent_choppers.gsc
-***************************************************************/
+ * Script: scripts\mp\gametypes\br_publicevent_choppers.gsc
+************************************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\killstreaks\airdrop;

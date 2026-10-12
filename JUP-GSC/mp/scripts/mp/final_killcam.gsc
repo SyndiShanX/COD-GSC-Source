@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\final_killcam.gsc
+ * Script: scripts\mp\final_killcam.gsc
 ***********************************************/
 
 #using scripts\common\utility;

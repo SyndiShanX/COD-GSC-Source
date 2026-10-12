@@ -1,7 +1,9 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\vehicle_heavy_destruction.gsc
-*******************************************************/
+ * Script: scripts\sp\vehicle_heavy_destruction.gsc
+****************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\sp\utility;

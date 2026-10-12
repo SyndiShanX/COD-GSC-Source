@@ -1,7 +1,7 @@
-/*********************************************************
+/******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\captivity_respawn.gsc
-*********************************************************/
+ * Script: scripts\mp\gametypes\captivity_respawn.gsc
+******************************************************/
 
 #using script_1fefb5a9d58fa8bf;
 #using script_2d9d24f7c63ac143;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\zombie_perks.gsc
+ * Script: scripts\cp_mp\zombie_perks.gsc
 ***********************************************/
 
 #using scripts\anim\utility;

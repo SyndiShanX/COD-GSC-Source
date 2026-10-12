@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\track.gsc
+ * Script: scripts\asm\track.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\shared;
 #using scripts\anim\utility_common;

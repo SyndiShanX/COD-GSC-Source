@@ -1,7 +1,9 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\character\character_hero_hadir_prisoner.gsc
-**********************************************************/
+ * Script: character\character_hero_hadir_prisoner.gsc
+*******************************************************/
+
+
 
 #using scripts\common\utility;
 #namespace character_hero_hadir_prisoner;

@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\wm_utility.gsc
-**************************************************/
+ * Script: scripts\mp\gametypes\wm_utility.gsc
+***********************************************/
 
 #using script_930a1e7bd882c1d;
 #using scripts\anim\utility;

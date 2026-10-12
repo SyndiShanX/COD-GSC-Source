@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\map_to_map.gsc
+ * Script: scripts\mp\map_to_map.gsc
 ***********************************************/
 
 #using script_5307834cd39b435c;

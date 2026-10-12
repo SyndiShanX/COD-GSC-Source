@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\progress_tracker.gsc
-**************************************************/
+ * Script: scripts\common\progress_tracker.gsc
+***********************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

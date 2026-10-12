@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\assault.gsc
+ * Script: scripts\mp\gametypes\assault.gsc
 ***********************************************/
 
 #using scripts\common\utility;

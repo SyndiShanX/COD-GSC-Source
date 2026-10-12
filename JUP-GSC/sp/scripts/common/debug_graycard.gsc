@@ -1,7 +1,9 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\debug_graycard.gsc
-************************************************/
+ * Script: scripts\common\debug_graycard.gsc
+***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\common.gsc
+ * Script: scripts\mp\gametypes\common.gsc
 ***********************************************/
 
 #using script_29ec5691a72b84d4;

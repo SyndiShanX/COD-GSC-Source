@@ -1,7 +1,7 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\supers\redeploy_drone_beacon.gsc
-**********************************************************/
+ * Script: scripts\mp\supers\redeploy_drone_beacon.gsc
+*******************************************************/
 
 #using script_608c50392df8c7d1;
 #using script_610f57bddd265be2;

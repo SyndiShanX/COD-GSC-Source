@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\aitypes.gsc
+ * Script: scripts\cp\aitypes.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\cp_spawning_util;

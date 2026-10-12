@@ -1,7 +1,9 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\mp\bots\bots_strategy.gsc
-************************************************/
+ * Script: scripts\mp\bots\bots_strategy.gsc
+***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp_mp\utility\game_utility;

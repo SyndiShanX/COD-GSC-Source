@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\gibbing.gsc
+ * Script: scripts\sp\gibbing.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\shared;
 #using scripts\common\ai;

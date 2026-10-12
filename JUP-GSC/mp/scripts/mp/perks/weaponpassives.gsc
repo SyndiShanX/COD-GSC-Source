@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\perks\weaponpassives.gsc
-**************************************************/
+ * Script: scripts\mp\perks\weaponpassives.gsc
+***********************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\math;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\online_event.gsc
+ * Script: scripts\mp\online_event.gsc
 ***********************************************/
 
 #using scripts\common\ae_utility;

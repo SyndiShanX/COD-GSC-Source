@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\ob\ob_seismic_refractor.gsc
-**************************************************/
+ * Script: scripts\ob\ob_seismic_refractor.gsc
+***********************************************/
 
 #using script_7534b1d3ac3ea47a;
 #using scripts\common\utility;

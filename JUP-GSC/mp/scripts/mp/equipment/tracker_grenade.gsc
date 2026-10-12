@@ -1,9 +1,9 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\tracker_grenade.gsc
-*******************************************************/
+ * Script: scripts\mp\equipment\tracker_grenade.gsc
+****************************************************/
 
-#using script_3e145703891d9d8d;
+#using scripts\cp_mp\equipment\tracker_shared;
 #using scripts\common\ae_utility;
 #using scripts\common\utility;
 #using scripts\cp_mp\challenges;

@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\damage_effects.gsc
-************************************************/
+ * Script: scripts\common\damage_effects.gsc
+***********************************************/
 
 #using scripts\common\callbacks;
 #using scripts\common\swim_common;

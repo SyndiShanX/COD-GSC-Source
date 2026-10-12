@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\supers\evg.gsc
+ * Script: scripts\cp_mp\supers\evg.gsc
 ***********************************************/
 
 #using scripts\common\ae_utility;

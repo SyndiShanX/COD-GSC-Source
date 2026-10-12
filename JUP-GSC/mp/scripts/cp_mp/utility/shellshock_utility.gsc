@@ -1,7 +1,7 @@
-/***********************************************************
+/********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\utility\shellshock_utility.gsc
-***********************************************************/
+ * Script: scripts\cp_mp\utility\shellshock_utility.gsc
+********************************************************/
 
 #using scripts\common\shellshock_utility;
 #using scripts\common\utility;

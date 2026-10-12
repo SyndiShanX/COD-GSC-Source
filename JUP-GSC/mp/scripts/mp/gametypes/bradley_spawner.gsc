@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\bradley_spawner.gsc
-*******************************************************/
+ * Script: scripts\mp\gametypes\bradley_spawner.gsc
+****************************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\vehicles\vehicle_occupancy;

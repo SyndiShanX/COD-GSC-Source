@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\swim_sp.gsc
+ * Script: scripts\sp\swim_sp.gsc
 ***********************************************/
+
+
 
 #using scripts\common\ai;
 #using scripts\common\swim_common;

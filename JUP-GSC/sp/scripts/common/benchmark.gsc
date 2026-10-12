@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\benchmark.gsc
+ * Script: scripts\common\benchmark.gsc
 ***********************************************/
+
+
 
 #namespace benchmark;
 

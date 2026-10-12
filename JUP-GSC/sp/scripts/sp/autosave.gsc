@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\autosave.gsc
+ * Script: scripts\sp\autosave.gsc
 ***********************************************/
+
+
 
 #using script_575fda2758b0a36e;
 #using scripts\anim\utility_common;

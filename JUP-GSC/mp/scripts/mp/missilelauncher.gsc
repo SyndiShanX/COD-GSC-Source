@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\missilelauncher.gsc
+ * Script: scripts\mp\missilelauncher.gsc
 ***********************************************/
 
 #using scripts\common\utility;

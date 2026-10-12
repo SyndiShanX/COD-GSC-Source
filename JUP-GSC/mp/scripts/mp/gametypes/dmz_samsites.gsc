@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\dmz_samsites.gsc
-****************************************************/
+ * Script: scripts\mp\gametypes\dmz_samsites.gsc
+*************************************************/
 
 #using scripts\common\anim;
 #using scripts\common\utility;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\star_rewards.gsc
+ * Script: scripts\cp\star_rewards.gsc
 ***********************************************/
+
+
 
 #using scripts\cp\challenges_cp;
 #using scripts\cp\cp_achievement;

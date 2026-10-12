@@ -1,7 +1,7 @@
-/*****************************************************************
+/**************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_publicevent_areadenial.gsc
-*****************************************************************/
+ * Script: scripts\mp\gametypes\br_publicevent_areadenial.gsc
+**************************************************************/
 
 #using scripts\common\callbacks;
 #using scripts\common\devgui;

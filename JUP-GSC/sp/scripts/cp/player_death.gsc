@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\player_death.gsc
+ * Script: scripts\cp\player_death.gsc
 ***********************************************/
+
+
 
 #using script_48324b060b129b7b;
 #using scripts\common\damage_effects;

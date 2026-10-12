@@ -1,7 +1,7 @@
-/******************************************************************
+/***************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_elevated\mp_jup_elevated.gsc
-******************************************************************/
+ * Script: scripts\mp\maps\mp_jup_elevated\mp_jup_elevated.gsc
+***************************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

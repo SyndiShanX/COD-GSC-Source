@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\ai_armor.gsc
+ * Script: scripts\sp\ai_armor.gsc
 ***********************************************/
+
+
 
 #using scripts\common\ai;
 #using scripts\common\utility;

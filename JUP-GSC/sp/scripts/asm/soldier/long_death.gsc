@@ -1,7 +1,9 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\soldier\long_death.gsc
-*************************************************/
+ * Script: scripts\asm\soldier\long_death.gsc
+***********************************************/
+
+
 
 #using scripts\anim\utility_common;
 #using scripts\asm\asm;

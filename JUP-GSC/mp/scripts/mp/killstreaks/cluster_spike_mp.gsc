@@ -1,7 +1,7 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\killstreaks\cluster_spike_mp.gsc
-**********************************************************/
+ * Script: scripts\mp\killstreaks\cluster_spike_mp.gsc
+*******************************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\killstreaks\cluster_spike;

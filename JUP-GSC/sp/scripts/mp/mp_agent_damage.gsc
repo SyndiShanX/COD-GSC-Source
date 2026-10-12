@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\mp\mp_agent_damage.gsc
+ * Script: scripts\mp\mp_agent_damage.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\animselector;
 #using scripts\asm\asm;

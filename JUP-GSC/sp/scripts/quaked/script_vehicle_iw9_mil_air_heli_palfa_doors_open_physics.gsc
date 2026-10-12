@@ -1,7 +1,9 @@
-/******************************************************************************************
+/***************************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\quaked\script_vehicle_iw9_mil_air_heli_palfa_doors_open_physics.gsc
-******************************************************************************************/
+ * Script: scripts\quaked\script_vehicle_iw9_mil_air_heli_palfa_doors_open_physics.gsc
+***************************************************************************************/
+
+
 
 #using scripts\vehicle\veh9_mil_air_heli_palfa;
 #namespace script_vehicle_iw9_mil_air_heli_palfa_doors_open_physics;

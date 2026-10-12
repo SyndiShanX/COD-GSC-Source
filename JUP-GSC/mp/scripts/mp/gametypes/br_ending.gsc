@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_ending.gsc
-*************************************************/
+ * Script: scripts\mp\gametypes\br_ending.gsc
+***********************************************/
 
 #using script_15eddb0fac236a22;
 #using script_58321be04dca3e61;

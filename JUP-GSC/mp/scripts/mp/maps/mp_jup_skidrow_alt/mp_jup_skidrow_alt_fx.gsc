@@ -1,7 +1,7 @@
-/***************************************************************************
+/************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_skidrow_alt\mp_jup_skidrow_alt_fx.gsc
-***************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_skidrow_alt\mp_jup_skidrow_alt_fx.gsc
+************************************************************************/
 
 #namespace mp_jup_skidrow_alt_fx;
 

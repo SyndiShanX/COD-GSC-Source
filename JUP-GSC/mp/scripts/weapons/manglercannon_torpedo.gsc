@@ -1,7 +1,7 @@
-/********************************************************
+/*****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\weapons\manglercannon_torpedo.gsc
-********************************************************/
+ * Script: scripts\weapons\manglercannon_torpedo.gsc
+*****************************************************/
 
 #using script_16ea1b94f0f381b3;
 #using scripts\common\callbacks;

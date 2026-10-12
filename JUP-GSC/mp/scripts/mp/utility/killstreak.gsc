@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\utility\killstreak.gsc
-************************************************/
+ * Script: scripts\mp\utility\killstreak.gsc
+***********************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\damagefeedback;

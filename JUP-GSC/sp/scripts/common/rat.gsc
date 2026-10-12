@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\rat.gsc
+ * Script: scripts\common\rat.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

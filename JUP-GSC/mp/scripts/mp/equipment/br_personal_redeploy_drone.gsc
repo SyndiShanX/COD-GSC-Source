@@ -1,7 +1,7 @@
-/******************************************************************
+/***************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\br_personal_redeploy_drone.gsc
-******************************************************************/
+ * Script: scripts\mp\equipment\br_personal_redeploy_drone.gsc
+***************************************************************/
 
 #using scripts\common\ae_utility;
 #using scripts\common\devgui;

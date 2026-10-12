@@ -1,7 +1,7 @@
-/****************************************************************
+/*************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_skidrow\mp_jup_skidrow.gsc
-****************************************************************/
+ * Script: scripts\mp\maps\mp_jup_skidrow\mp_jup_skidrow.gsc
+*************************************************************/
 
 #using scripts\common\anim;
 #using scripts\common\utility;

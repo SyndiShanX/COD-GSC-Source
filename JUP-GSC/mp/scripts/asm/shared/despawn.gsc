@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\shared\despawn.gsc
+ * Script: scripts\asm\shared\despawn.gsc
 ***********************************************/
 
 #using scripts\asm\asm;

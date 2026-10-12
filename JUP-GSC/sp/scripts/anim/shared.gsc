@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\anim\shared.gsc
+ * Script: scripts\anim\shared.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\animselector;
 #using scripts\anim\combat_utility;

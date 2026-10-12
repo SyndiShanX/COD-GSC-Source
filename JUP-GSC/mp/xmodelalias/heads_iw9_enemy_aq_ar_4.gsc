@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\xmodelalias\heads_iw9_enemy_aq_ar_4.gsc
-******************************************************/
+ * Script: xmodelalias\heads_iw9_enemy_aq_ar_4.gsc
+***************************************************/
 
 #namespace heads_iw9_enemy_aq_ar_4;
 

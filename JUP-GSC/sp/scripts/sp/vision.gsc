@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\vision.gsc
+ * Script: scripts\sp\vision.gsc
 ***********************************************/
+
+
 
 #namespace vision;
 

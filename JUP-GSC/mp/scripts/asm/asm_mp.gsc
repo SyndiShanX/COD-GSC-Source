@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\asm_mp.gsc
+ * Script: scripts\asm\asm_mp.gsc
 ***********************************************/
 
 #using scripts\anim\notetracks_mp;

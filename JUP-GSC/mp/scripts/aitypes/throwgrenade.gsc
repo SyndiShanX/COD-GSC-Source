@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\aitypes\throwgrenade.gsc
+ * Script: scripts\aitypes\throwgrenade.gsc
 ***********************************************/
 
 #using scripts\aitypes\bt_util;

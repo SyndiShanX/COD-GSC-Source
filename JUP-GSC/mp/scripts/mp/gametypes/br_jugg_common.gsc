@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_jugg_common.gsc
-******************************************************/
+ * Script: scripts\mp\gametypes\br_jugg_common.gsc
+***************************************************/
 
 #using scripts\common\damage_effects;
 #using scripts\common\utility;

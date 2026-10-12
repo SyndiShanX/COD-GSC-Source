@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\turret.gsc
+ * Script: scripts\common\turret.gsc
 ***********************************************/
 
 #using scripts\common\utility;

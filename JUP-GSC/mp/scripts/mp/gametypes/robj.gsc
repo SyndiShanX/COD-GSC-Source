@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\robj.gsc
+ * Script: scripts\mp\gametypes\robj.gsc
 ***********************************************/
 
 #using script_7c32d91c895c063e;

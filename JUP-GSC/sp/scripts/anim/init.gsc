@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\anim\init.gsc
+ * Script: scripts\anim\init.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\battlechatter;
 #using scripts\anim\combat_utility;

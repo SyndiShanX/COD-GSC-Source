@@ -1,7 +1,7 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\character\character_al_qatala_desert_ar.gsc
-**********************************************************/
+ * Script: character\character_al_qatala_desert_ar.gsc
+*******************************************************/
 
 #using scripts\common\utility;
 #namespace character_al_qatala_desert_ar;

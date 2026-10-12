@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\cap.gsc
+ * Script: scripts\asm\cap.gsc
 ***********************************************/
+
+
 
 #using script_147448f3f080c636;
 #using scripts\anim\notetracks;

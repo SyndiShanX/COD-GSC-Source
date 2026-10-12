@@ -1,7 +1,7 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\vehicles\vehicle_load_all.gsc
-**********************************************************/
+ * Script: scripts\cp_mp\vehicles\vehicle_load_all.gsc
+*******************************************************/
 
 #using script_1d1428a3b7b402b0;
 #using script_248ec5040062d3ce;

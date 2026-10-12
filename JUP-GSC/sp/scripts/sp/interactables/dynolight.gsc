@@ -1,7 +1,9 @@
-/*****************************************************
+/**************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\interactables\dynolight.gsc
-*****************************************************/
+ * Script: scripts\sp\interactables\dynolight.gsc
+**************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\sp\utility;

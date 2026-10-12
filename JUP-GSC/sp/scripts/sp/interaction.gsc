@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\interaction.gsc
+ * Script: scripts\sp\interaction.gsc
 ***********************************************/
+
+
 
 #using scripts\asm\asm;
 #using scripts\asm\asm_sp;

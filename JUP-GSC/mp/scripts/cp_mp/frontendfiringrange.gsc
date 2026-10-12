@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\frontendfiringrange.gsc
-****************************************************/
+ * Script: scripts\cp_mp\frontendfiringrange.gsc
+*************************************************/
 
 #using script_cbb0697de4c5728;
 #using scripts\common\utility;

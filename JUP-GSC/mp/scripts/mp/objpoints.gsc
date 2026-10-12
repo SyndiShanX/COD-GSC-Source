@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\objpoints.gsc
+ * Script: scripts\mp\objpoints.gsc
 ***********************************************/
 
 #using scripts\mp\hud_util;

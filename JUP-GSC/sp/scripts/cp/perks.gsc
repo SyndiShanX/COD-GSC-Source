@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\perks.gsc
+ * Script: scripts\cp\perks.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\agent_damage;

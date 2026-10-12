@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\mp\mp_dialogue.gsc
+ * Script: scripts\mp\mp_dialogue.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\dialogue;
 #using scripts\asm\asm;

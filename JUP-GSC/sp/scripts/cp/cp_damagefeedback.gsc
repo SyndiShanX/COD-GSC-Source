@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\cp_damagefeedback.gsc
+ * Script: scripts\cp\cp_damagefeedback.gsc
 ***********************************************/
+
+
 
 #using scripts\cp\damagefeedback;
 #namespace cp_damagefeedback;

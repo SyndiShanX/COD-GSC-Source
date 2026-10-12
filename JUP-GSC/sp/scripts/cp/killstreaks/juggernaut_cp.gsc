@@ -1,7 +1,9 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\killstreaks\juggernaut_cp.gsc
-*******************************************************/
+ * Script: scripts\cp\killstreaks\juggernaut_cp.gsc
+****************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\values;

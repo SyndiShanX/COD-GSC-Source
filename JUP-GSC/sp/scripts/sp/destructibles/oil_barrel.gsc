@@ -1,7 +1,9 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\destructibles\oil_barrel.gsc
-******************************************************/
+ * Script: scripts\sp\destructibles\oil_barrel.gsc
+***************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\sp\utility;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\stealth\player.gsc
+ * Script: scripts\stealth\player.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\values;

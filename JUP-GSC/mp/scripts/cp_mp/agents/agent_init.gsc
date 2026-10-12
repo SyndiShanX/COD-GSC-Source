@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\agents\agent_init.gsc
-**************************************************/
+ * Script: scripts\cp_mp\agents\agent_init.gsc
+***********************************************/
 
 #using scripts\anim\face;
 #using scripts\anim\shared;

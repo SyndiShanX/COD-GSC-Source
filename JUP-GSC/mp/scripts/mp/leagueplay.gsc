@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\leagueplay.gsc
+ * Script: scripts\mp\leagueplay.gsc
 ***********************************************/
 
 #using script_4cdabcd91a92977;

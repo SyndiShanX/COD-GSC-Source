@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\content_manager.gsc
-************************************************/
+ * Script: scripts\cp_mp\content_manager.gsc
+***********************************************/
 
 #using scripts\cp_mp\anim_scene;
 #using scripts\cp_mp\interaction;

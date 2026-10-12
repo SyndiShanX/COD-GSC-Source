@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\ai_sentry_turret.gsc
+ * Script: scripts\mp\ai_sentry_turret.gsc
 ***********************************************/
 
 #using scripts\common\utility;

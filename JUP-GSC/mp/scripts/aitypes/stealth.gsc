@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\aitypes\stealth.gsc
+ * Script: scripts\aitypes\stealth.gsc
 ***********************************************/
 
 #using scripts\aitypes\bt_util;

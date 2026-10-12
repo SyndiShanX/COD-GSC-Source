@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\dog\move.gsc
+ * Script: scripts\asm\dog\move.gsc
 ***********************************************/
+
+
 
 #using scripts\asm\asm;
 #using scripts\common\cap;

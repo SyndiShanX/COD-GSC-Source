@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\archetypes\archassault.gsc
-****************************************************/
+ * Script: scripts\mp\archetypes\archassault.gsc
+*************************************************/
 
 #using scripts\common\utility;
 #using scripts\mp\utility\perk;

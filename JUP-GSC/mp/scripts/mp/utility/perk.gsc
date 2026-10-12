@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\utility\perk.gsc
+ * Script: scripts\mp\utility\perk.gsc
 ***********************************************/
 
 #using scripts\mp\perks\perkpackage;

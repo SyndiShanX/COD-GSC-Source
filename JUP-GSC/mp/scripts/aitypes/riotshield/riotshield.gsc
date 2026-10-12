@@ -1,7 +1,7 @@
-/********************************************************
+/*****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\aitypes\riotshield\riotshield.gsc
-********************************************************/
+ * Script: scripts\aitypes\riotshield\riotshield.gsc
+*****************************************************/
 
 #using scripts\aitypes\bt_util;
 #using scripts\anim\shared;

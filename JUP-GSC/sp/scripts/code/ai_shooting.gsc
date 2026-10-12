@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\code\ai_shooting.gsc
+ * Script: scripts\code\ai_shooting.gsc
 ***********************************************/
+
+
 
 #namespace ai_shooting;
 

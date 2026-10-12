@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\talking_gun.gsc
+ * Script: scripts\cp_mp\talking_gun.gsc
 ***********************************************/
 
 #using script_15de7dc4d21f1da3;

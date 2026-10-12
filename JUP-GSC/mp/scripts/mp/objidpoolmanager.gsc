@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\objidpoolmanager.gsc
+ * Script: scripts\mp\objidpoolmanager.gsc
 ***********************************************/
 
 #using scripts\common\utility;

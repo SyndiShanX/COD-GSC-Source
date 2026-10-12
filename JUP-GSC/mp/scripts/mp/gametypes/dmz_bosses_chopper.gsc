@@ -1,7 +1,7 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\dmz_bosses_chopper.gsc
-**********************************************************/
+ * Script: scripts\mp\gametypes\dmz_bosses_chopper.gsc
+*******************************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\killstreaks\chopper_support;

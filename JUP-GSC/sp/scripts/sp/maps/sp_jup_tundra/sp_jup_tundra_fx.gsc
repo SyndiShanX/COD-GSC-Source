@@ -1,7 +1,9 @@
-/*****************************************************************
+/**************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\maps\sp_jup_tundra\sp_jup_tundra_fx.gsc
-*****************************************************************/
+ * Script: scripts\sp\maps\sp_jup_tundra\sp_jup_tundra_fx.gsc
+**************************************************************/
+
+
 
 #using scripts\common\anim;
 #using scripts\common\lighting;

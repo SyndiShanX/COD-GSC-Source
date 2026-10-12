@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_infils_ac130.gsc
-*******************************************************/
+ * Script: scripts\mp\gametypes\br_infils_ac130.gsc
+****************************************************/
 
 #using script_75377e59f5becac8;
 #using script_930a1e7bd882c1d;

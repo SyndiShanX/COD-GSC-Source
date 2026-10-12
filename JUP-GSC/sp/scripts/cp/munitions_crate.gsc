@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\munitions_crate.gsc
+ * Script: scripts\cp\munitions_crate.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\values;

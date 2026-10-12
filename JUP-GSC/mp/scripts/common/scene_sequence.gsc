@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\scene_sequence.gsc
-************************************************/
+ * Script: scripts\common\scene_sequence.gsc
+***********************************************/
 
 #using scripts\common\scene;
 #using scripts\engine\utility;

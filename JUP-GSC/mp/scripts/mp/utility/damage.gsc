@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\utility\damage.gsc
+ * Script: scripts\mp\utility\damage.gsc
 ***********************************************/
 
 #using script_3583ff375ab3a91e;

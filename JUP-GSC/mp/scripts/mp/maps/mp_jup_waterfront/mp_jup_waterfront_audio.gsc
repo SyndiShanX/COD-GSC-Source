@@ -1,7 +1,7 @@
-/****************************************************************************
+/*************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_waterfront\mp_jup_waterfront_audio.gsc
-****************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_waterfront\mp_jup_waterfront_audio.gsc
+*************************************************************************/
 
 #namespace mp_jup_waterfront_audio;
 

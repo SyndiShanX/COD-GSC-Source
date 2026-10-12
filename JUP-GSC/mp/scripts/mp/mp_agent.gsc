@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\mp_agent.gsc
+ * Script: scripts\mp\mp_agent.gsc
 ***********************************************/
 
 #using script_cbb0697de4c5728;

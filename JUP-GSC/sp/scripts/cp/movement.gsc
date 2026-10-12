@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\movement.gsc
+ * Script: scripts\cp\movement.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\utility;

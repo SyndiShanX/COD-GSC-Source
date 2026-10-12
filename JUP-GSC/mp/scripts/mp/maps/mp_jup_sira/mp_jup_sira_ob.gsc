@@ -1,7 +1,7 @@
-/*************************************************************
+/**********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_sira\mp_jup_sira_ob.gsc
-*************************************************************/
+ * Script: scripts\mp\maps\mp_jup_sira\mp_jup_sira_ob.gsc
+**********************************************************/
 
 #using script_100adcc1cc11d2fa;
 #using script_15ecde6c46a131b0;

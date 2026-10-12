@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\screenshotcity.gsc
+ * Script: scripts\mp\screenshotcity.gsc
 ***********************************************/
 
 #using scripts\common\utility;

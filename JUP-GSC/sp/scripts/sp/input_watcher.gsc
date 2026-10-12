@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\input_watcher.gsc
+ * Script: scripts\sp\input_watcher.gsc
 ***********************************************/
+
+
 
 #namespace input_watcher;
 

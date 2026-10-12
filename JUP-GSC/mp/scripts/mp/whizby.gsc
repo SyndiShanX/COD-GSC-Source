@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\whizby.gsc
+ * Script: scripts\mp\whizby.gsc
 ***********************************************/
 
 #using scripts\common\utility;

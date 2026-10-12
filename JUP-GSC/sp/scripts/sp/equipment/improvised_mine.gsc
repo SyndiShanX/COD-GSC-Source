@@ -1,7 +1,9 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\improvised_mine.gsc
-*******************************************************/
+ * Script: scripts\sp\equipment\improvised_mine.gsc
+****************************************************/
+
+
 
 #using scripts\engine\sp\utility;
 #using scripts\engine\trace;

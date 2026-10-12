@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\utility\player.gsc
+ * Script: scripts\cp\utility\player.gsc
 ***********************************************/
+
+
 
 #using script_cbb0697de4c5728;
 #using scripts\common\lighting;

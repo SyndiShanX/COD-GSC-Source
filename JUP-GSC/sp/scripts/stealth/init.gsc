@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\stealth\init.gsc
+ * Script: scripts\stealth\init.gsc
 ***********************************************/
+
+
 
 #using scripts\stealth\manager;
 #using scripts\stealth\player;

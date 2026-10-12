@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\arena_alt.gsc
-*************************************************/
+ * Script: scripts\mp\gametypes\arena_alt.gsc
+***********************************************/
 
 #using script_4a6760982b403bad;
 #using scripts\common\utility;

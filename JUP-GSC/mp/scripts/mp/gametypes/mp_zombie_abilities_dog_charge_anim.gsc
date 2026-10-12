@@ -1,7 +1,7 @@
-/***************************************************************************
+/************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\mp_zombie_abilities_dog_charge_anim.gsc
-***************************************************************************/
+ * Script: scripts\mp\gametypes\mp_zombie_abilities_dog_charge_anim.gsc
+************************************************************************/
 
 #namespace mp_zombie_abilities_dog_charge_anim;
 #using_animtree("playerasmhellhound2");

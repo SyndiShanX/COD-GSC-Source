@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\heads_sas_urban.gsc
+ * Script: xmodelalias\heads_sas_urban.gsc
 ***********************************************/
+
+
 
 #namespace heads_sas_urban;
 

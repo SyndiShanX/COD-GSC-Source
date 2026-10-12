@@ -1,7 +1,9 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\thermite.gsc
-************************************************/
+ * Script: scripts\sp\equipment\thermite.gsc
+***********************************************/
+
+
 
 #using scripts\sp\equipment\offhands;
 #using scripts\sp\utility;

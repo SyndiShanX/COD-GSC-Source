@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\player_death.gsc
+ * Script: scripts\sp\player_death.gsc
 ***********************************************/
+
+
 
 #using scripts\common\gameskill;
 #using scripts\common\utility;

@@ -1,7 +1,7 @@
-/*****************************************************************
+/**************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_publicevent_stronghold.gsc
-*****************************************************************/
+ * Script: scripts\mp\gametypes\br_publicevent_stronghold.gsc
+**************************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

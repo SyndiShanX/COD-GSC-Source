@@ -3,7 +3,7 @@
  * Script: mp\hashed\script_5f8bc60756b1eafb.gsc
 *************************************************/
 
-#using script_372d8c5f69b0ae2e;
+#using scripts\game\scripted_melee;
 #using scripts\anim\shared;
 #using scripts\common\anim;
 #using scripts\common\utility;

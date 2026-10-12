@@ -1,7 +1,7 @@
-/****************************************************************
+/*************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\escort_horde_event_perks.gsc
-****************************************************************/
+ * Script: scripts\mp\gametypes\escort_horde_event_perks.gsc
+*************************************************************/
 
 #using scripts\common\callbacks;
 #using scripts\common\utility;

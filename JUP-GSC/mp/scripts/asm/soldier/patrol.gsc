@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\soldier\patrol.gsc
+ * Script: scripts\asm\soldier\patrol.gsc
 ***********************************************/
 
 #using scripts\aitypes\stealth;

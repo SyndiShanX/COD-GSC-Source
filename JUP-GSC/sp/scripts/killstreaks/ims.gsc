@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\killstreaks\ims.gsc
+ * Script: scripts\killstreaks\ims.gsc
 ***********************************************/
+
+
 
 #using script_16ea1b94f0f381b3;
 #using script_608c50392df8c7d1;

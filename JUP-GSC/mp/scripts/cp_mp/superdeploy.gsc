@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\superdeploy.gsc
+ * Script: scripts\cp_mp\superdeploy.gsc
 ***********************************************/
 
 #using scripts\common\utility;

@@ -1,7 +1,7 @@
-/******************************************************************************
+/***************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_shipment_alt_3\mp_jup_shipment_alt_3.gsc
-******************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_shipment_alt_3\mp_jup_shipment_alt_3.gsc
+***************************************************************************/
 
 #using script_6dcc0d17d865af91;
 #using scripts\mp\compass;

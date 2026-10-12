@@ -1,7 +1,7 @@
-/***********************************************************************
+/********************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_wasteland\mp_jup_wasteland_fx.gsc
-***********************************************************************/
+ * Script: scripts\mp\maps\mp_jup_wasteland\mp_jup_wasteland_fx.gsc
+********************************************************************/
 
 #using scripts\common\basic_wind;
 #namespace mp_jup_wasteland_fx;

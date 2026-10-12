@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\arm_vehicles.gsc
-****************************************************/
+ * Script: scripts\mp\gametypes\arm_vehicles.gsc
+*************************************************/
 
 #using scripts\common\utility;
 #using scripts\common\values;

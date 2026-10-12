@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\friendlyfire.gsc
+ * Script: scripts\sp\friendlyfire.gsc
 ***********************************************/
+
+
 
 #using scripts\common\values;
 #using scripts\engine\math;

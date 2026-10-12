@@ -1,7 +1,9 @@
-/***********************************************************************************
+/********************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\quaked\script_vehicle_iw9_suv_overland_2016_tech_physics.gsc
-***********************************************************************************/
+ * Script: scripts\quaked\script_vehicle_iw9_suv_overland_2016_tech_physics.gsc
+********************************************************************************/
+
+
 
 #using scripts\vehicle\veh9_suv_overland_2016;
 #namespace script_vehicle_iw9_suv_overland_2016_tech_physics;

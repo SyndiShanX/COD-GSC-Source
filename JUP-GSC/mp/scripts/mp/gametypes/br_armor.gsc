@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_armor.gsc
-************************************************/
+ * Script: scripts\mp\gametypes\br_armor.gsc
+***********************************************/
 
 #using scripts\cp_mp\armor;
 #using scripts\mp\codcasterclientmatchdata;

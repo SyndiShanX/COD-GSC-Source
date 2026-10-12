@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\front.gsc
+ * Script: scripts\mp\gametypes\front.gsc
 ***********************************************/
 
 #using scripts\common\utility;

@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_headgear.gsc
-***************************************************/
+ * Script: scripts\mp\gametypes\br_headgear.gsc
+************************************************/
 
 #using scripts\engine\utility;
 #using scripts\mp\gametypes\br_public;

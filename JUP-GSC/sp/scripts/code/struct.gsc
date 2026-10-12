@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\code\struct.gsc
+ * Script: scripts\code\struct.gsc
 ***********************************************/
+
+
 
 #namespace struct;
 

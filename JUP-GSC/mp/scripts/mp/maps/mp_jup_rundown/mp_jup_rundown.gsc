@@ -1,7 +1,7 @@
-/****************************************************************
+/*************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_rundown\mp_jup_rundown.gsc
-****************************************************************/
+ * Script: scripts\mp\maps\mp_jup_rundown\mp_jup_rundown.gsc
+*************************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

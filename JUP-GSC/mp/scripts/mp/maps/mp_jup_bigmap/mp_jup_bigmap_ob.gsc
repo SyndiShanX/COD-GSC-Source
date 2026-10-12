@@ -1,7 +1,7 @@
-/*****************************************************************
+/**************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_bigmap\mp_jup_bigmap_ob.gsc
-*****************************************************************/
+ * Script: scripts\mp\maps\mp_jup_bigmap\mp_jup_bigmap_ob.gsc
+**************************************************************/
 
 #using script_1107d6250762b72b;
 #using script_1342099cdbdb5641;

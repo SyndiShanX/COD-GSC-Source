@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\vehicle.gsc
+ * Script: scripts\sp\vehicle.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\notetracks;
 #using scripts\anim\shared;

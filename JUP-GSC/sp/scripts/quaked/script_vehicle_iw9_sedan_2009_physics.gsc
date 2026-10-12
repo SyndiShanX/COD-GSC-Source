@@ -1,7 +1,9 @@
-/***********************************************************************
+/********************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\quaked\script_vehicle_iw9_sedan_2009_physics.gsc
-***********************************************************************/
+ * Script: scripts\quaked\script_vehicle_iw9_sedan_2009_physics.gsc
+********************************************************************/
+
+
 
 #using script_42d1f1abe34b9521;
 #namespace script_vehicle_iw9_sedan_2009_physics;

@@ -1,7 +1,7 @@
-/*************************************************************
+/**********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_alt_mode_inflation.gsc
-*************************************************************/
+ * Script: scripts\mp\gametypes\br_alt_mode_inflation.gsc
+**********************************************************/
 
 #using scripts\engine\trace;
 #using scripts\mp\gametypes\br_dev;

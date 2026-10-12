@@ -1,7 +1,7 @@
-/********************************************************
+/*****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\snapshot_grenade.gsc
-********************************************************/
+ * Script: scripts\mp\equipment\snapshot_grenade.gsc
+*****************************************************/
 
 #using script_74b851b7aa1ef32d;
 #using scripts\common\ae_utility;

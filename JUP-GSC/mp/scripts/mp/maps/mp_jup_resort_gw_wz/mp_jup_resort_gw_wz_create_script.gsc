@@ -1,7 +1,7 @@
-/****************************************************************************************
+/*************************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_resort_gw_wz\mp_jup_resort_gw_wz_create_script.gsc
-****************************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_resort_gw_wz\mp_jup_resort_gw_wz_create_script.gsc
+*************************************************************************************/
 
 #using scripts\common\create_script_utility;
 #using scripts\engine\utility;

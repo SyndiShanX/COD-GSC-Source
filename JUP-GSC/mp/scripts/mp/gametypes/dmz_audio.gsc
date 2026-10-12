@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\dmz_audio.gsc
-*************************************************/
+ * Script: scripts\mp\gametypes\dmz_audio.gsc
+***********************************************/
 
 #using script_1174abedbefe9ada;
 #using scripts\common\utility;

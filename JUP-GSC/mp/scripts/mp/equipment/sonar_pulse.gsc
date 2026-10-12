@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\sonar_pulse.gsc
-***************************************************/
+ * Script: scripts\mp\equipment\sonar_pulse.gsc
+************************************************/
 
 #using script_16ea1b94f0f381b3;
 #using scripts\common\ae_utility;

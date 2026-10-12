@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\art.gsc
+ * Script: scripts\sp\art.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\math;

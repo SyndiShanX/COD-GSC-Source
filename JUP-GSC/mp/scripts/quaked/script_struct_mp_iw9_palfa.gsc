@@ -1,7 +1,7 @@
-/************************************************************
+/*********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\quaked\script_struct_mp_iw9_palfa.gsc
-************************************************************/
+ * Script: scripts\quaked\script_struct_mp_iw9_palfa.gsc
+*********************************************************/
 
 #using script_53aac5ae7d2ac1b4;
 #using scripts\common\utility;

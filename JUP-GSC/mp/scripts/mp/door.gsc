@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\door.gsc
+ * Script: scripts\mp\door.gsc
 ***********************************************/
 
 #using scripts\common\anim;

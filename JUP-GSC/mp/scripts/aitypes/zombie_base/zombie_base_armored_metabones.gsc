@@ -1,7 +1,7 @@
-/****************************************************************************
+/*************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\aitypes\zombie_base\zombie_base_armored_metabones.gsc
-****************************************************************************/
+ * Script: scripts\aitypes\zombie_base\zombie_base_armored_metabones.gsc
+*************************************************************************/
 
 #using scripts\common\callbacks;
 #using scripts\common\metabone;

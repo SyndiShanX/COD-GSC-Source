@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\utility\points.gsc
+ * Script: scripts\mp\utility\points.gsc
 ***********************************************/
 
 #using script_29ec5691a72b84d4;

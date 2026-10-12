@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\mgl_mp.gsc
+ * Script: scripts\mp\gametypes\mgl_mp.gsc
 ***********************************************/
 
 #using script_27fdece778e999d8;

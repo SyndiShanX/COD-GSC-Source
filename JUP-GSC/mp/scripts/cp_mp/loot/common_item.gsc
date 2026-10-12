@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\loot\common_item.gsc
-*************************************************/
+ * Script: scripts\cp_mp\loot\common_item.gsc
+***********************************************/
 
 #using script_12a101fb4d4cb63e;
 #using script_14183f3fced4ee2b;

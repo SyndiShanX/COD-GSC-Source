@@ -1,7 +1,9 @@
-/***********************************************************************
+/********************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\maps\sp_jup_vip\sp_jup_vip_makarov_reveal.gsc
-***********************************************************************/
+ * Script: scripts\sp\maps\sp_jup_vip\sp_jup_vip_makarov_reveal.gsc
+********************************************************************/
+
+
 
 #using script_19163c4e4e504a5e;
 #using script_1db908936531314b;

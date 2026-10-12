@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\killstreaks\missile_drone.gsc
-****************************************************/
+ * Script: scripts\killstreaks\missile_drone.gsc
+*************************************************/
 
 #using scripts\common\anim;
 #using scripts\common\callbacks;

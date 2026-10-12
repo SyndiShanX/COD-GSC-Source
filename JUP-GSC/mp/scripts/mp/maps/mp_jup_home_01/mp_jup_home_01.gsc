@@ -1,7 +1,7 @@
-/****************************************************************
+/*************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_home_01\mp_jup_home_01.gsc
-****************************************************************/
+ * Script: scripts\mp\maps\mp_jup_home_01\mp_jup_home_01.gsc
+*************************************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\utility\game_utility;

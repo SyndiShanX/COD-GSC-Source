@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\crafting_table.gsc
+ * Script: scripts\cp_mp\crafting_table.gsc
 ***********************************************/
 
 #using scripts\common\callbacks;

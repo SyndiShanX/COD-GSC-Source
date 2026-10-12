@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\stealth\neutral.gsc
+ * Script: scripts\stealth\neutral.gsc
 ***********************************************/
+
+
 
 #using scripts\asm\asm;
 #using scripts\asm\asm_bb;

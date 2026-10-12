@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\elim.gsc
+ * Script: scripts\mp\gametypes\elim.gsc
 ***********************************************/
 
 #using script_548072087c9fd504;

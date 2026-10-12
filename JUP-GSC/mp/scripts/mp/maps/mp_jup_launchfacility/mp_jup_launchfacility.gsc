@@ -1,7 +1,7 @@
-/******************************************************************************
+/***************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_launchfacility\mp_jup_launchfacility.gsc
-******************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_launchfacility\mp_jup_launchfacility.gsc
+***************************************************************************/
 
 #using script_3653c2969325f543;
 #using script_62384cde1a08c286;

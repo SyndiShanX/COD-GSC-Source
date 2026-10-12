@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_events.gsc
-*************************************************/
+ * Script: scripts\mp\gametypes\br_events.gsc
+***********************************************/
 
 #using scripts\mp\flags;
 #using scripts\mp\gametypes\br_circle;

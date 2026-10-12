@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\track.gsc
+ * Script: scripts\asm\track.gsc
 ***********************************************/
 
 #using scripts\anim\shared;

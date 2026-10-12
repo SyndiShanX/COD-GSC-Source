@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\visibility_mode.gsc
-*************************************************/
+ * Script: scripts\common\visibility_mode.gsc
+***********************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\math;

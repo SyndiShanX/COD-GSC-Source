@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\cp_infilexfil.gsc
+ * Script: scripts\cp\cp_infilexfil.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\face;
 #using scripts\common\anim;

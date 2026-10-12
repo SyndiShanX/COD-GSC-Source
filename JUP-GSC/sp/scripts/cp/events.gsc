@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\events.gsc
+ * Script: scripts\cp\events.gsc
 ***********************************************/
+
+
 
 #using script_4a6760982b403bad;
 #using scripts\common\ae_utility;

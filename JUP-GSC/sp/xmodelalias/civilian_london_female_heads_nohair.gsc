@@ -1,7 +1,9 @@
-/******************************************************************
+/***************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\civilian_london_female_heads_nohair.gsc
-******************************************************************/
+ * Script: xmodelalias\civilian_london_female_heads_nohair.gsc
+***************************************************************/
+
+
 
 #namespace civilian_london_female_heads_nohair;
 

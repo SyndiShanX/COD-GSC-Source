@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\stealth\callbacks.gsc
+ * Script: scripts\stealth\callbacks.gsc
 ***********************************************/
 
 #using scripts\common\utility;

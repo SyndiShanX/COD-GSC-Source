@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\perks\headgear.gsc
+ * Script: scripts\mp\perks\headgear.gsc
 ***********************************************/
 
 #using scripts\common\utility;

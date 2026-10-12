@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\engine\flags.gsc
+ * Script: scripts\engine\flags.gsc
 ***********************************************/
+
+
 
 #using scripts\engine\utility;
 #namespace flags;

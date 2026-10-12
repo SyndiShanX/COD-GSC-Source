@@ -1,7 +1,9 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\gesture\script_funcs.gsc
-***************************************************/
+ * Script: scripts\asm\gesture\script_funcs.gsc
+************************************************/
+
+
 
 #using scripts\anim\utility;
 #using scripts\anim\utility_common;

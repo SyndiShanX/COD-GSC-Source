@@ -3,7 +3,7 @@
  * Script: mp\hashed\script_363353e02499c48c.gsc
 *************************************************/
 
-#using script_3a13b8032b62a5e6;
+#using scripts\mp\objective_marker_bundle_helper;
 #using script_41387eecc35b88bf;
 #using script_62a4f7a62643fe8;
 #using script_638d701d263ee1ed;

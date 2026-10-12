@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\callbacks.gsc
+ * Script: scripts\common\callbacks.gsc
 ***********************************************/
+
+
 
 #using scripts\engine\utility;
 #namespace callback;

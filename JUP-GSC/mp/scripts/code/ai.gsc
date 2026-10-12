@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\code\ai.gsc
+ * Script: scripts\code\ai.gsc
 ***********************************************/
 
 #namespace ai;

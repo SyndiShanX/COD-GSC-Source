@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\calloutmarkerping_mp.gsc
-**************************************************/
+ * Script: scripts\mp\calloutmarkerping_mp.gsc
+***********************************************/
 
 #using scripts\cp_mp\calloutmarkerping;
 #using scripts\cp_mp\utility\loot;

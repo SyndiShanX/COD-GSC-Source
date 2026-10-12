@@ -1,7 +1,7 @@
-/****************************************************************************
+/*************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_gw_fallout_wz\mp_jup_gw_fallout_wz.gsc
-****************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_gw_fallout_wz\mp_jup_gw_fallout_wz.gsc
+*************************************************************************/
 
 #using scripts\common\create_script_utility;
 #using scripts\common\utility;

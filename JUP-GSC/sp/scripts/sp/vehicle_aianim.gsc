@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\vehicle_aianim.gsc
+ * Script: scripts\sp\vehicle_aianim.gsc
 ***********************************************/
+
+
 
 #using scripts\asm\asm_sp;
 #using scripts\common\ai;

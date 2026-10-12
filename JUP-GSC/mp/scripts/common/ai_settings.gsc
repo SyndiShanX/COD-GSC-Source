@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\ai_settings.gsc
+ * Script: scripts\common\ai_settings.gsc
 ***********************************************/
 
 #using scripts\common\values;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\accessories.gsc
+ * Script: scripts\mp\accessories.gsc
 ***********************************************/
 
 #using scripts\common\utility;

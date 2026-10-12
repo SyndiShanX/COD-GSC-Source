@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\persistence.gsc
+ * Script: scripts\cp\persistence.gsc
 ***********************************************/
+
+
 
 #using script_3f8889c16399185c;
 #using scripts\common\utility;

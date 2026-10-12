@@ -1,7 +1,9 @@
-/*************************************************************************************
+/**********************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\c_jup_civilian_russian_female_body_flashback_soccerfan.gsc
-*************************************************************************************/
+ * Script: xmodelalias\c_jup_civilian_russian_female_body_flashback_soccerfan.gsc
+**********************************************************************************/
+
+
 
 #namespace c_jup_civilian_russian_female_body_flashback_soccerfan;
 

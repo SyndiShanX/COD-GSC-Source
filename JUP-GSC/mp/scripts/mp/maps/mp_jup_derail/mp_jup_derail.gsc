@@ -1,7 +1,7 @@
-/**************************************************************
+/***********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_derail\mp_jup_derail.gsc
-**************************************************************/
+ * Script: scripts\mp\maps\mp_jup_derail\mp_jup_derail.gsc
+***********************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

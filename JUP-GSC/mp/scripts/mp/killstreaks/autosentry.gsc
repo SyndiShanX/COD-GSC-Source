@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\killstreaks\autosentry.gsc
-****************************************************/
+ * Script: scripts\mp\killstreaks\autosentry.gsc
+*************************************************/
 
 #using scripts\common\utility;
 #using scripts\common\values;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\flash.gsc
+ * Script: scripts\sp\equipment\flash.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\math;

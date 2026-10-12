@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\queue.gsc
+ * Script: scripts\common\queue.gsc
 ***********************************************/
 
 #using scripts\engine\utility;

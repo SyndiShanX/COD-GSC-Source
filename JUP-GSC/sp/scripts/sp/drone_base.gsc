@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\drone_base.gsc
+ * Script: scripts\sp\drone_base.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\sp\utility;

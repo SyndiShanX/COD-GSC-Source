@@ -1,7 +1,9 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\civ_london_male_1.gsc
-************************************************/
+ * Script: xmodelalias\civ_london_male_1.gsc
+***********************************************/
+
+
 
 #namespace civ_london_male_1;
 

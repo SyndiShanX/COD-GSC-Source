@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\soldier\lmg.gsc
+ * Script: scripts\asm\soldier\lmg.gsc
 ***********************************************/
 
 #using scripts\anim\shared;

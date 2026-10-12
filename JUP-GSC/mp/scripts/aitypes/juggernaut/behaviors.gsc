@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\aitypes\juggernaut\behaviors.gsc
-*******************************************************/
+ * Script: scripts\aitypes\juggernaut\behaviors.gsc
+****************************************************/
 
 #using scripts\aitypes\bt_util;
 #using scripts\anim\utility_common;

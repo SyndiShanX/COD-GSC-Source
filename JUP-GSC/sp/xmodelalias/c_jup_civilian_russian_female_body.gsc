@@ -1,7 +1,9 @@
-/*****************************************************************
+/**************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\c_jup_civilian_russian_female_body.gsc
-*****************************************************************/
+ * Script: xmodelalias\c_jup_civilian_russian_female_body.gsc
+**************************************************************/
+
+
 
 #namespace c_jup_civilian_russian_female_body;
 

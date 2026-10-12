@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\incursion_waves.gsc
+ * Script: scripts\cp\incursion_waves.gsc
 ***********************************************/
+
+
 
 #using script_324b68cb416acbec;
 #using script_537a712b2be3193c;

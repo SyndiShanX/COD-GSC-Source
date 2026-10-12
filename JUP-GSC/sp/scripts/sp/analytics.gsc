@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\analytics.gsc
+ * Script: scripts\sp\analytics.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\sp\utility;

@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\scene_internal.gsc
-************************************************/
+ * Script: scripts\common\scene_internal.gsc
+***********************************************/
 
 #using scripts\common\ai;
 #using scripts\common\ai_lookat;

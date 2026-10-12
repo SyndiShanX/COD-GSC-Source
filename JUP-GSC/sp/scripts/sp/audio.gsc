@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\audio.gsc
+ * Script: scripts\sp\audio.gsc
 ***********************************************/
+
+
 
 #using script_575fda2758b0a36e;
 #using scripts\common\utility;

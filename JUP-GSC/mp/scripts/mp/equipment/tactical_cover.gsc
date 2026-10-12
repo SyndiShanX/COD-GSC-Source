@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\tactical_cover.gsc
-******************************************************/
+ * Script: scripts\mp\equipment\tactical_cover.gsc
+***************************************************/
 
 #using script_13865ca76df87ea;
 #using script_74b851b7aa1ef32d;

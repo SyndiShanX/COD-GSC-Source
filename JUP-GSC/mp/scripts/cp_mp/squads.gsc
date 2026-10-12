@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\squads.gsc
+ * Script: scripts\cp_mp\squads.gsc
 ***********************************************/
 
 #using script_2342b8aad723994e;

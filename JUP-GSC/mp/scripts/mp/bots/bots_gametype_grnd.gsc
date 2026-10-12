@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\bots\bots_gametype_grnd.gsc
-*****************************************************/
+ * Script: scripts\mp\bots\bots_gametype_grnd.gsc
+**************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

@@ -1,7 +1,9 @@
-/***********************************************************
+/********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\quaked\script_struct_mp_jup_jltv.gsc
-***********************************************************/
+ * Script: scripts\quaked\script_struct_mp_jup_jltv.gsc
+********************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp_mp\vehicles\vehicle;

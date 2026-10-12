@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\globallogic.gsc
+ * Script: scripts\cp\globallogic.gsc
 ***********************************************/
+
+
 
 #using script_122c94e0d5135583;
 #using script_157445dae3af0f9f;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\stealth\manager.gsc
+ * Script: scripts\stealth\manager.gsc
 ***********************************************/
 
 #using scripts\common\utility;

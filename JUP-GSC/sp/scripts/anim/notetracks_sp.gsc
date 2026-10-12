@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\anim\notetracks_sp.gsc
+ * Script: scripts\anim\notetracks_sp.gsc
 ***********************************************/
+
+
 
 #using scripts\aitypes\dismember;
 #using scripts\anim\battlechatter;

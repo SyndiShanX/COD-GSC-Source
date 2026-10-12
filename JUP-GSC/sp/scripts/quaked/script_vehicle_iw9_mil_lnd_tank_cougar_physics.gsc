@@ -1,7 +1,9 @@
-/********************************************************************************
+/*****************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\quaked\script_vehicle_iw9_mil_lnd_tank_cougar_physics.gsc
-********************************************************************************/
+ * Script: scripts\quaked\script_vehicle_iw9_mil_lnd_tank_cougar_physics.gsc
+*****************************************************************************/
+
+
 
 #using script_7f920cca06c8da9e;
 #namespace script_vehicle_iw9_mil_lnd_tank_cougar_physics;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\emp_debuff_cp.gsc
+ * Script: scripts\cp\emp_debuff_cp.gsc
 ***********************************************/
+
+
 
 #using scripts\engine\utility;
 #namespace emp_debuff_cp;

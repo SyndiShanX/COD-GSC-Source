@@ -1,7 +1,9 @@
-/*****************************************************************
+/**************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\maps\sp_jup_vip\sp_jup_vip_lighting.gsc
-*****************************************************************/
+ * Script: scripts\sp\maps\sp_jup_vip\sp_jup_vip_lighting.gsc
+**************************************************************/
+
+
 
 #using scripts\common\ai;
 #using scripts\common\lighting;

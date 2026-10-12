@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_circle.gsc
-*************************************************/
+ * Script: scripts\mp\gametypes\br_circle.gsc
+***********************************************/
 
 #using script_21c19cfc7139d773;
 #using script_21cccabf14b4dbe6;

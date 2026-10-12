@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\killstreaks\flares.gsc
-************************************************/
+ * Script: scripts\mp\killstreaks\flares.gsc
+***********************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\utility\weapon_utility;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\vehicle_treads.gsc
+ * Script: scripts\sp\vehicle_treads.gsc
 ***********************************************/
+
+
 
 #using scripts\common\vehicle_code;
 #namespace vehicle_treads;

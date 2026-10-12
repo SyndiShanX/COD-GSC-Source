@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\flags.gsc
+ * Script: scripts\mp\flags.gsc
 ***********************************************/
 
 #namespace flags;

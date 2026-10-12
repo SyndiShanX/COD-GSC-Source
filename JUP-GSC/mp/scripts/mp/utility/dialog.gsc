@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\utility\dialog.gsc
+ * Script: scripts\mp\utility\dialog.gsc
 ***********************************************/
 
 #using scripts\common\utility;

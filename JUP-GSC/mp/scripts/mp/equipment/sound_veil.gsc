@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\sound_veil.gsc
-**************************************************/
+ * Script: scripts\mp\equipment\sound_veil.gsc
+***********************************************/
 
 #using scripts\anim\combat_utility;
 #using scripts\common\ae_utility;

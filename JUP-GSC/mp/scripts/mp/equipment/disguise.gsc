@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\disguise.gsc
-************************************************/
+ * Script: scripts\mp\equipment\disguise.gsc
+***********************************************/
 
 #using script_67015c88c47ec4f8;
 #using scripts\common\utility;

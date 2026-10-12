@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\playercards.gsc
+ * Script: scripts\mp\playercards.gsc
 ***********************************************/
 
 #using scripts\common\utility;

@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\dmz_safes.gsc
-*************************************************/
+ * Script: scripts\mp\gametypes\dmz_safes.gsc
+***********************************************/
 
 #using script_1174abedbefe9ada;
 #using script_15ca41a3fbb0e379;

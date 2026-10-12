@@ -1,7 +1,9 @@
-/********************************************************
+/*****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\inventory\cp_target_marker.gsc
-********************************************************/
+ * Script: scripts\cp\inventory\cp_target_marker.gsc
+*****************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\values;

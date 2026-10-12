@@ -1,7 +1,9 @@
-/************************************************************
+/*********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\vehicle\veh9_sedan_hatchback_1985.gsc
-************************************************************/
+ * Script: scripts\vehicle\veh9_sedan_hatchback_1985.gsc
+*********************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\vehicle_build;

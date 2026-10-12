@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\gameskill.gsc
+ * Script: scripts\common\gameskill.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\utility_common;
 #using scripts\common\utility;

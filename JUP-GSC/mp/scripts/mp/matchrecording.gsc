@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\matchrecording.gsc
+ * Script: scripts\mp\matchrecording.gsc
 ***********************************************/
 
 #using scripts\common\utility;

@@ -1,7 +1,7 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_scavenger_quest.gsc
-**********************************************************/
+ * Script: scripts\mp\gametypes\br_scavenger_quest.gsc
+*******************************************************/
 
 #using script_4948cdf739393d2d;
 #using script_64acb6ce534155b7;

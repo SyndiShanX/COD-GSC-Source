@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\anim\battlechatter_wrapper.gsc
-*****************************************************/
+ * Script: scripts\anim\battlechatter_wrapper.gsc
+**************************************************/
 
 #using scripts\anim\battlechatter;
 #using scripts\anim\utility_common;

@@ -1,7 +1,7 @@
-/**************************************************************
+/***********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_supply_drops_common.gsc
-**************************************************************/
+ * Script: scripts\mp\gametypes\br_supply_drops_common.gsc
+***********************************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\killstreaks\airdrop;

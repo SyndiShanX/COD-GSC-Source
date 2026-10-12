@@ -1,7 +1,7 @@
-/****************************************************************************
+/*************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_highrise_xmas\mp_jup_highrise_xmas.gsc
-****************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_highrise_xmas\mp_jup_highrise_xmas.gsc
+*************************************************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\utility\game_utility;

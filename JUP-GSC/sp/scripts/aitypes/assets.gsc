@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\aitypes\assets.gsc
+ * Script: scripts\aitypes\assets.gsc
 ***********************************************/
+
+
 
 #using scripts\aitypes\bt_util;
 #using scripts\common\utility;

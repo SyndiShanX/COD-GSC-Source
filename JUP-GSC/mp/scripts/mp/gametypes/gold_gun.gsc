@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\gold_gun.gsc
-************************************************/
+ * Script: scripts\mp\gametypes\gold_gun.gsc
+***********************************************/
 
 #using scripts\cp_mp\utility\inventory_utility;
 #using scripts\engine\utility;

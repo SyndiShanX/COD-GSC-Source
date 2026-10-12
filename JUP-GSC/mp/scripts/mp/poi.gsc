@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\poi.gsc
+ * Script: scripts\mp\poi.gsc
 ***********************************************/
 
 #using script_41ba451876d0900c;

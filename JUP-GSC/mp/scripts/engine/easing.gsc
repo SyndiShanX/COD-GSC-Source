@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\engine\easing.gsc
+ * Script: scripts\engine\easing.gsc
 ***********************************************/
 
 #using scripts\engine\utility;

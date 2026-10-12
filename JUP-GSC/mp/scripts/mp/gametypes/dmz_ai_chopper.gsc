@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\dmz_ai_chopper.gsc
-******************************************************/
+ * Script: scripts\mp\gametypes\dmz_ai_chopper.gsc
+***************************************************/
 
 #using script_646d60ff2fbd4ff2;
 #using scripts\common\utility;

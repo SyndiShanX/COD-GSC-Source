@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\ob_season3.gsc
-**************************************************/
+ * Script: scripts\mp\gametypes\ob_season3.gsc
+***********************************************/
 
 #using scripts\common\callbacks;
 #using scripts\common\utility;

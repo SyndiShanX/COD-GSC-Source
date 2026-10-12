@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\infilexfil\elevator_infil.gsc
-*******************************************************/
+ * Script: scripts\mp\infilexfil\elevator_infil.gsc
+****************************************************/
 
 #using scripts\common\anim;
 #using scripts\common\utility;

@@ -1,7 +1,9 @@
-/*********************************************************
+/******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\killstreaks\helper_drone_cp.gsc
-*********************************************************/
+ * Script: scripts\cp\killstreaks\helper_drone_cp.gsc
+******************************************************/
+
+
 
 #using script_294d813e5d00b68c;
 #using scripts\common\utility;

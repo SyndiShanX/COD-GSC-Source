@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\utility\lower_message.gsc
-***************************************************/
+ * Script: scripts\mp\utility\lower_message.gsc
+************************************************/
 
 #namespace lower_message;
 

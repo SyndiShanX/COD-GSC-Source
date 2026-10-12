@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\weapons_dev.gsc
+ * Script: scripts\cp_mp\weapons_dev.gsc
 ***********************************************/
 
 #using scripts\common\callbacks;

@@ -1,7 +1,9 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\super_suppression_rounds.gsc
-******************************************************/
+ * Script: scripts\cp\super_suppression_rounds.gsc
+***************************************************/
+
+
 
 #using scripts\common\ae_utility;
 #using scripts\common\utility;

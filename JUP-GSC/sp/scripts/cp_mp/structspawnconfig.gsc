@@ -1,7 +1,9 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\structspawnconfig.gsc
-**************************************************/
+ * Script: scripts\cp_mp\structspawnconfig.gsc
+***********************************************/
+
+
 
 #using scripts\common\devgui;
 #using scripts\engine\utility;

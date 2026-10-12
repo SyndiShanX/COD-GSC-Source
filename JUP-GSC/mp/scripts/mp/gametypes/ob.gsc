@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\ob.gsc
+ * Script: scripts\mp\gametypes\ob.gsc
 ***********************************************/
 
 #using script_10e910b749a22d35;
@@ -43,7 +43,7 @@
 #using script_42982ffd0134f28e;
 #using script_443d99fe707f1d9f;
 #using script_45e61c7efec047;
-#using script_46c7c73b1a7e4773;
+#using scripts\cp_mp\zombie_challenges;
 #using script_482376d10f69832c;
 #using script_485622d93fa7e4cf;
 #using script_4965f0ceafad5587;

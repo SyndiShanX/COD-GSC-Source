@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\teams.gsc
+ * Script: scripts\mp\teams.gsc
 ***********************************************/
 
 #using scripts\common\callbacks;

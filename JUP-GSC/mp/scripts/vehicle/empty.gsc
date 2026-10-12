@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\vehicle\empty.gsc
+ * Script: scripts\vehicle\empty.gsc
 ***********************************************/
 
 #namespace empty;

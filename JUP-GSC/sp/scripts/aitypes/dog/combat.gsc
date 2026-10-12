@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\aitypes\dog\combat.gsc
+ * Script: scripts\aitypes\dog\combat.gsc
 ***********************************************/
+
+
 
 #using scripts\aitypes\melee;
 #using scripts\aitypes\stealth;

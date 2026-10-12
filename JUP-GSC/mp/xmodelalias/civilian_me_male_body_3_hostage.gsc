@@ -1,7 +1,7 @@
-/**************************************************************
+/***********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\xmodelalias\civilian_me_male_body_3_hostage.gsc
-**************************************************************/
+ * Script: xmodelalias\civilian_me_male_body_3_hostage.gsc
+***********************************************************/
 
 #namespace civilian_me_male_body_3_hostage;
 

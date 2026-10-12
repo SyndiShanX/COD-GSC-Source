@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\stealth\manager.gsc
-************************************************/
+ * Script: scripts\cp_mp\stealth\manager.gsc
+***********************************************/
 
 #using scripts\anim\battlechatter;
 #using scripts\cp_mp\stealth\utility;

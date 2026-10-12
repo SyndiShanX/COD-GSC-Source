@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\mortar_launcher.gsc
-************************************************/
+ * Script: scripts\cp_mp\mortar_launcher.gsc
+***********************************************/
 
 #using scripts\common\anim;
 #using scripts\common\utility;

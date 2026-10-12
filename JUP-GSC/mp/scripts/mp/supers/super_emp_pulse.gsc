@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\supers\super_emp_pulse.gsc
-****************************************************/
+ * Script: scripts\mp\supers\super_emp_pulse.gsc
+*************************************************/
 
 #using scripts\common\ae_utility;
 #using scripts\common\utility;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\cp_core_gamescore.gsc
+ * Script: scripts\cp\cp_core_gamescore.gsc
 ***********************************************/
+
+
 
 #using scripts\cp\cp_gamescore;
 #using scripts\cp\utility;

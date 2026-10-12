@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\unittest\loop.gsc
+ * Script: scripts\unittest\loop.gsc
 ***********************************************/
 
 #using scripts\unittest\util;

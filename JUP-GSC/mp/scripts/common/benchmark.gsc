@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\benchmark.gsc
+ * Script: scripts\common\benchmark.gsc
 ***********************************************/
 
 #namespace benchmark;

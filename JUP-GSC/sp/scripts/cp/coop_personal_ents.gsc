@@ -1,7 +1,9 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\coop_personal_ents.gsc
-************************************************/
+ * Script: scripts\cp\coop_personal_ents.gsc
+***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\coop_personal_ents;

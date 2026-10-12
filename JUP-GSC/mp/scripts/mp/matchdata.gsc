@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\matchdata.gsc
+ * Script: scripts\mp\matchdata.gsc
 ***********************************************/
 
 #using script_3f8889c16399185c;

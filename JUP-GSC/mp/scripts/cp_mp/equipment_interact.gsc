@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\equipment_interact.gsc
-***************************************************/
+ * Script: scripts\cp_mp\equipment_interact.gsc
+************************************************/
 
 #using script_16ea1b94f0f381b3;
 #using scripts\common\utility;

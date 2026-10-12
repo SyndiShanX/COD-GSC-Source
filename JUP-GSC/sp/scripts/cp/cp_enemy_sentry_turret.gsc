@@ -1,7 +1,9 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\cp_enemy_sentry_turret.gsc
-****************************************************/
+ * Script: scripts\cp\cp_enemy_sentry_turret.gsc
+*************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\agent_damage;

@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\supers\super_stimpistol.gsc
-*****************************************************/
+ * Script: scripts\mp\supers\super_stimpistol.gsc
+**************************************************/
 
 #using script_74b851b7aa1ef32d;
 #using scripts\common\ae_utility;

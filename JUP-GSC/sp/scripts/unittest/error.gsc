@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\unittest\error.gsc
+ * Script: scripts\unittest\error.gsc
 ***********************************************/
+
+
 
 #using scripts\unittest\util;
 #namespace unittest_error;

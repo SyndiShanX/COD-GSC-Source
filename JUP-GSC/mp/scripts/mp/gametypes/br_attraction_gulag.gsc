@@ -1,7 +1,7 @@
-/***********************************************************
+/********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_attraction_gulag.gsc
-***********************************************************/
+ * Script: scripts\mp\gametypes\br_attraction_gulag.gsc
+********************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\trace;

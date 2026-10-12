@@ -1,7 +1,9 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\powers\coop_molotov.gsc
-*************************************************/
+ * Script: scripts\cp\powers\coop_molotov.gsc
+***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\cp_weapons;

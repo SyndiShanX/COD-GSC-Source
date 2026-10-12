@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\challenges.gsc
+ * Script: scripts\cp_mp\challenges.gsc
 ***********************************************/
 
 #using scripts\common\ae_utility;

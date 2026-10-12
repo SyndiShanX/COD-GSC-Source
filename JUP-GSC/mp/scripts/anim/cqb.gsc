@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\anim\cqb.gsc
+ * Script: scripts\anim\cqb.gsc
 ***********************************************/
 
 #using scripts\anim\utility_common;

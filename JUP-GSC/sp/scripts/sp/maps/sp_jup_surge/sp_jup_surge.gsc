@@ -1,7 +1,9 @@
-/************************************************************
+/*********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\maps\sp_jup_surge\sp_jup_surge.gsc
-************************************************************/
+ * Script: scripts\sp\maps\sp_jup_surge\sp_jup_surge.gsc
+*********************************************************/
+
+
 
 #using script_1426fa5f49d822c8;
 #using script_151f37cd7136b363;

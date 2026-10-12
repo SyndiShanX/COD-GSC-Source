@@ -1,7 +1,7 @@
-/************************************************************************
+/*********************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_elevated\mp_jup_elevated_audio.gsc
-************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_elevated\mp_jup_elevated_audio.gsc
+*********************************************************************/
 
 #using scripts\engine\utility;
 #namespace mp_jup_elevated_audio;

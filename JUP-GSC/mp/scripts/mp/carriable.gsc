@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\carriable.gsc
+ * Script: scripts\mp\carriable.gsc
 ***********************************************/
 
 #using scripts\common\utility;

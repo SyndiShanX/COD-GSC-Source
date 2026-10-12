@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\cp_puzzles_core.gsc
+ * Script: scripts\cp\cp_puzzles_core.gsc
 ***********************************************/
+
+
 
 #using script_489bc5ff08558a82;
 #using scripts\common\utility;

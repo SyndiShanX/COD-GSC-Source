@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\player\gestures.gsc
+ * Script: scripts\sp\player\gestures.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\battlechatter;
 #using scripts\common\utility;

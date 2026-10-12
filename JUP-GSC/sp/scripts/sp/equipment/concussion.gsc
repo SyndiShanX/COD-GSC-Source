@@ -1,7 +1,9 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\concussion.gsc
-**************************************************/
+ * Script: scripts\sp\equipment\concussion.gsc
+***********************************************/
+
+
 
 #using scripts\anim\combat_utility;
 #using scripts\common\utility;

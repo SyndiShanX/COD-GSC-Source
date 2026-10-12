@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\clientmatchdata.gsc
+ * Script: scripts\mp\clientmatchdata.gsc
 ***********************************************/
 
 #using scripts\common\utility;

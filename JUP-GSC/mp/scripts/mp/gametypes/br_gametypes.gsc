@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_gametypes.gsc
-****************************************************/
+ * Script: scripts\mp\gametypes\br_gametypes.gsc
+*************************************************/
 
 #using scripts\cp_mp\utility\game_utility;
 #using scripts\engine\utility;

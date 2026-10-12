@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\anim\first_frame.gsc
+ * Script: scripts\anim\first_frame.gsc
 ***********************************************/
+
+
 
 #using scripts\asm\asm;
 #using scripts\engine\utility;

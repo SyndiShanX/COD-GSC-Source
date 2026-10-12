@@ -1,7 +1,9 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\bodies_sas_urban_ar.gsc
-**************************************************/
+ * Script: xmodelalias\bodies_sas_urban_ar.gsc
+***********************************************/
+
+
 
 #namespace bodies_sas_urban_ar;
 

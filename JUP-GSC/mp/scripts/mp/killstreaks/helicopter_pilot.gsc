@@ -1,7 +1,7 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\killstreaks\helicopter_pilot.gsc
-**********************************************************/
+ * Script: scripts\mp\killstreaks\helicopter_pilot.gsc
+*******************************************************/
 
 #using scripts\common\utility;
 #using scripts\common\values;

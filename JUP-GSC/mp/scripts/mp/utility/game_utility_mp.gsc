@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\utility\game_utility_mp.gsc
-*****************************************************/
+ * Script: scripts\mp\utility\game_utility_mp.gsc
+**************************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\utility\game_utility;

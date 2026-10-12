@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\intelligence.gsc
+ * Script: scripts\sp\intelligence.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\sp\utility;

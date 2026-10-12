@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\aitypes\bt_util.gsc
+ * Script: scripts\aitypes\bt_util.gsc
 ***********************************************/
+
+
 
 #using scripts\asm\asm;
 #namespace bt_util;

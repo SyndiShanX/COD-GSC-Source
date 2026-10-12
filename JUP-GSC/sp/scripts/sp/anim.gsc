@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\anim.gsc
+ * Script: scripts\sp\anim.gsc
 ***********************************************/
+
+
 
 #using script_4dac3680f88a01c3;
 #using scripts\aitypes\bt_util;

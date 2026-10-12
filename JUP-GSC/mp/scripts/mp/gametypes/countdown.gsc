@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\countdown.gsc
-*************************************************/
+ * Script: scripts\mp\gametypes\countdown.gsc
+***********************************************/
 
 #using scripts\common\callbacks;
 #using scripts\common\utility;

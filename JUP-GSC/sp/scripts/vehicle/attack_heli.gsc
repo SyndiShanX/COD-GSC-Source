@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\vehicle\attack_heli.gsc
+ * Script: scripts\vehicle\attack_heli.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\vehicle;

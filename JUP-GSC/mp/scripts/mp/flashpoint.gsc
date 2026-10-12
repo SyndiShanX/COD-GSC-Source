@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\flashpoint.gsc
+ * Script: scripts\mp\flashpoint.gsc
 ***********************************************/
 
 #using scripts\common\utility;

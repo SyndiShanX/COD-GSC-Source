@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\bots\bots_gametype_tjugg.gsc
-******************************************************/
+ * Script: scripts\mp\bots\bots_gametype_tjugg.gsc
+***************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

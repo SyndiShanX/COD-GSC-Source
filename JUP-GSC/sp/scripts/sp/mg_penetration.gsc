@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\mg_penetration.gsc
+ * Script: scripts\sp\mg_penetration.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\sp\utility;

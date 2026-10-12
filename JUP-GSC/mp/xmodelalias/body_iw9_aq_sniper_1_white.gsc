@@ -1,7 +1,7 @@
-/*********************************************************
+/******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\xmodelalias\body_iw9_aq_sniper_1_white.gsc
-*********************************************************/
+ * Script: xmodelalias\body_iw9_aq_sniper_1_white.gsc
+******************************************************/
 
 #namespace body_iw9_aq_sniper_1_white;
 

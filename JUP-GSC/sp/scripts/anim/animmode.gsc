@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\anim\animmode.gsc
+ * Script: scripts\anim\animmode.gsc
 ***********************************************/
+
+
 
 #using scripts\asm\asm;
 #using scripts\common\notetrack;

@@ -8,12 +8,12 @@
 #using script_220d0eb95a8fab7d;
 #using script_24f248b33b79e48d;
 #using script_39d11000e476a42a;
-#using script_3a13b8032b62a5e6;
+#using scripts\mp\objective_marker_bundle_helper;
 #using script_3ab210ea917601e7;
 #using script_3e31016b9c11a616;
 #using script_3e34d236a84cfd96;
 #using script_41387eecc35b88bf;
-#using script_46c7c73b1a7e4773;
+#using scripts\cp_mp\zombie_challenges;
 #using script_4e6e58ab5d96c2b0;
 #using script_4ef01fe6151dde4d;
 #using script_4fdefae8b7bcdf73;

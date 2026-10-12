@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\killstreaks\remoteuav.gsc
-***************************************************/
+ * Script: scripts\mp\killstreaks\remoteuav.gsc
+************************************************/
 
 #using scripts\common\utility;
 #using scripts\common\values;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\juggernaut.gsc
+ * Script: scripts\mp\juggernaut.gsc
 ***********************************************/
 
 #using script_74b851b7aa1ef32d;

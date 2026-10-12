@@ -1,7 +1,9 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\juggernaut\juggernaut.gsc
-****************************************************/
+ * Script: scripts\asm\juggernaut\juggernaut.gsc
+*************************************************/
+
+
 
 #using scripts\anim\combat_utility;
 #using scripts\anim\shared;

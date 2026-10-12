@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\spycam.gsc
+ * Script: scripts\mp\equipment\spycam.gsc
 ***********************************************/
 
 #using scripts\common\utility;

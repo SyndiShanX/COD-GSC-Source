@@ -1,7 +1,9 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\killstreaks\hover_jet.gsc
-******************************************************/
+ * Script: scripts\cp_mp\killstreaks\hover_jet.gsc
+***************************************************/
+
+
 
 #using scripts\common\anim;
 #using scripts\common\utility;

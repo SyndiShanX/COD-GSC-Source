@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\damagefeedback.gsc
+ * Script: scripts\cp\damagefeedback.gsc
 ***********************************************/
+
+
 
 #using scripts\cp\damage;
 #using scripts\cp\spawning;

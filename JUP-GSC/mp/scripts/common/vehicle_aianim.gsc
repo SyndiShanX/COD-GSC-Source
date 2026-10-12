@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\vehicle_aianim.gsc
-************************************************/
+ * Script: scripts\common\vehicle_aianim.gsc
+***********************************************/
 
 #using scripts\asm\asm;
 #using scripts\asm\asm_bb;

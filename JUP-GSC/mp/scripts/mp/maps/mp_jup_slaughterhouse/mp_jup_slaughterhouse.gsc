@@ -1,7 +1,7 @@
-/******************************************************************************
+/***************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_slaughterhouse\mp_jup_slaughterhouse.gsc
-******************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_slaughterhouse\mp_jup_slaughterhouse.gsc
+***************************************************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\utility\game_utility;

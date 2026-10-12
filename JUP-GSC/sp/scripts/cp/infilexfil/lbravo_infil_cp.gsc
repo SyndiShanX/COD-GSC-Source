@@ -1,7 +1,9 @@
-/********************************************************
+/*****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\infilexfil\lbravo_infil_cp.gsc
-********************************************************/
+ * Script: scripts\cp\infilexfil\lbravo_infil_cp.gsc
+*****************************************************/
+
+
 
 #using scripts\common\anim;
 #using scripts\common\utility;

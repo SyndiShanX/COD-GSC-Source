@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\soldier\cp.gsc
+ * Script: scripts\asm\soldier\cp.gsc
 ***********************************************/
+
+
 
 #namespace cp;
 

@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\vehicle\empty_nocollision.gsc
-****************************************************/
+ * Script: scripts\vehicle\empty_nocollision.gsc
+*************************************************/
 
 #using scripts\common\vehicle_build;
 #namespace empty_nocollision;

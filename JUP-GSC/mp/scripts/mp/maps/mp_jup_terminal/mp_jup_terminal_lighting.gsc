@@ -1,7 +1,7 @@
-/***************************************************************************
+/************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_terminal\mp_jup_terminal_lighting.gsc
-***************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_terminal\mp_jup_terminal_lighting.gsc
+************************************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\math;

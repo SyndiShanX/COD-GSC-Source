@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\unittest\threads.gsc
+ * Script: scripts\unittest\threads.gsc
 ***********************************************/
+
+
 
 #using scripts\unittest\util;
 #namespace unittest_threads;

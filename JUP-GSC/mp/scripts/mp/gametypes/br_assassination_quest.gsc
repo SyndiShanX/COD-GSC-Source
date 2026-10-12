@@ -1,7 +1,7 @@
-/**************************************************************
+/***********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_assassination_quest.gsc
-**************************************************************/
+ * Script: scripts\mp\gametypes\br_assassination_quest.gsc
+***********************************************************/
 
 #using script_16ea1b94f0f381b3;
 #using script_64acb6ce534155b7;

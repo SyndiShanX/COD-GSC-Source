@@ -1,7 +1,7 @@
-/***********************************************************************
+/********************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_favela\mp_jup_favela_lighting.gsc
-***********************************************************************/
+ * Script: scripts\mp\maps\mp_jup_favela\mp_jup_favela_lighting.gsc
+********************************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\math;

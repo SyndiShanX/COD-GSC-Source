@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\killstreaks\missile_turret.gsc
-*****************************************************/
+ * Script: scripts\killstreaks\missile_turret.gsc
+**************************************************/
 
 #using script_16ea1b94f0f381b3;
 #using script_608c50392df8c7d1;

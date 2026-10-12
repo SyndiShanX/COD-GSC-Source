@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\engine\scriptable_ascender.gsc
-*****************************************************/
+ * Script: scripts\engine\scriptable_ascender.gsc
+**************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

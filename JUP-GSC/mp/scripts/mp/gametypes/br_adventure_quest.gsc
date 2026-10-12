@@ -1,7 +1,7 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_adventure_quest.gsc
-**********************************************************/
+ * Script: scripts\mp\gametypes\br_adventure_quest.gsc
+*******************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\math;

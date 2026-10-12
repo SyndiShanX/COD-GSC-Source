@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\supers\laststand_heal.gsc
-***************************************************/
+ * Script: scripts\mp\supers\laststand_heal.gsc
+************************************************/
 
 #using scripts\common\utility;
 #using scripts\common\values;

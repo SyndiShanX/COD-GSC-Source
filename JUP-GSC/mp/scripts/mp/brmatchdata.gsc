@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\brmatchdata.gsc
+ * Script: scripts\mp\brmatchdata.gsc
 ***********************************************/
 
 #using scripts\common\utility;

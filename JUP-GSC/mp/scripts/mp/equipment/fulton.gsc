@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\fulton.gsc
+ * Script: scripts\mp\equipment\fulton.gsc
 ***********************************************/
 
 #using scripts\common\anim;

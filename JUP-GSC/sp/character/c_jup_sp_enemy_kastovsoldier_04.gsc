@@ -1,7 +1,9 @@
-/************************************************************
+/*********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\character\c_jup_sp_enemy_kastovsoldier_04.gsc
-************************************************************/
+ * Script: character\c_jup_sp_enemy_kastovsoldier_04.gsc
+*********************************************************/
+
+
 
 #using scripts\code\character;
 #using scripts\common\utility;

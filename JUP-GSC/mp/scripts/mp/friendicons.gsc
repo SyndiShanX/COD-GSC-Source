@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\friendicons.gsc
+ * Script: scripts\mp\friendicons.gsc
 ***********************************************/
 
 #using scripts\mp\utility\dvars;

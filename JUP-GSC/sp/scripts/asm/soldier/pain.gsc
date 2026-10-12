@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\soldier\pain.gsc
+ * Script: scripts\asm\soldier\pain.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\battlechatter_events;
 #using scripts\anim\face;

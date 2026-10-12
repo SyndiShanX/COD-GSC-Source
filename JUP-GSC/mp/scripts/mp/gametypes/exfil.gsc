@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\exfil.gsc
+ * Script: scripts\mp\gametypes\exfil.gsc
 ***********************************************/
 
 #using scripts\common\anim;

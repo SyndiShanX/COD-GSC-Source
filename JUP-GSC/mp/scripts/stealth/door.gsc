@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\stealth\door.gsc
+ * Script: scripts\stealth\door.gsc
 ***********************************************/
 
 #using scripts\engine\trace;

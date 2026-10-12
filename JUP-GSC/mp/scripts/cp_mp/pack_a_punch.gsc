@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\pack_a_punch.gsc
+ * Script: scripts\cp_mp\pack_a_punch.gsc
 ***********************************************/
 
 #using script_638d701d263ee1ed;

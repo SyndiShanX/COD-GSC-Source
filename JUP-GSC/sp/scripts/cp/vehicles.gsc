@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\vehicles.gsc
+ * Script: scripts\cp\vehicles.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\shared;
 #using scripts\common\ai;

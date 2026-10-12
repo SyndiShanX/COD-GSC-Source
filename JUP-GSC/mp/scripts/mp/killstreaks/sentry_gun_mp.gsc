@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\killstreaks\sentry_gun_mp.gsc
-*******************************************************/
+ * Script: scripts\mp\killstreaks\sentry_gun_mp.gsc
+****************************************************/
 
 #using scripts\common\damage_tuning;
 #using scripts\common\utility;

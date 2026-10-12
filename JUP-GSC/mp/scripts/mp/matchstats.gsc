@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\matchstats.gsc
+ * Script: scripts\mp\matchstats.gsc
 ***********************************************/
 
 #using scripts\common\utility;

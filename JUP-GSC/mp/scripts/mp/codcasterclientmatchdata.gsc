@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\codcasterclientmatchdata.gsc
-******************************************************/
+ * Script: scripts\mp\codcasterclientmatchdata.gsc
+***************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\damage_tuning.gsc
+ * Script: scripts\common\damage_tuning.gsc
 ***********************************************/
+
+
 
 #namespace damage_tuning;
 

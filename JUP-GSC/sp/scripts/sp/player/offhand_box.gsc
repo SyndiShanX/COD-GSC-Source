@@ -1,7 +1,9 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\player\offhand_box.gsc
-************************************************/
+ * Script: scripts\sp\player\offhand_box.gsc
+***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\sp\utility;

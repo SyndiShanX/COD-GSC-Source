@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\dead_drop.gsc
+ * Script: scripts\cp_mp\dead_drop.gsc
 ***********************************************/
 
 #using script_5640d32580c6bc7d;

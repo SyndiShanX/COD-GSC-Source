@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\unittest\loop.gsc
+ * Script: scripts\unittest\loop.gsc
 ***********************************************/
+
+
 
 #using scripts\unittest\util;
 #namespace unittest_loop;

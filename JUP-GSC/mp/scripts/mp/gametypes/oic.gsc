@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\oic.gsc
+ * Script: scripts\mp\gametypes\oic.gsc
 ***********************************************/
 
 #using scripts\common\utility;

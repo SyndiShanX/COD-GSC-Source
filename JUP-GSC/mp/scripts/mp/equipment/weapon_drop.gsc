@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\weapon_drop.gsc
-***************************************************/
+ * Script: scripts\mp\equipment\weapon_drop.gsc
+************************************************/
 
 #using scripts\common\values;
 #using scripts\cp_mp\killstreaks\helper_drone;

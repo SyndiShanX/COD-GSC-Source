@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\unittest\variables.gsc
+ * Script: scripts\unittest\variables.gsc
 ***********************************************/
+
+
 
 #using scripts\unittest\util;
 #namespace unittest_variables;

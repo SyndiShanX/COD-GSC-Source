@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\smoke_grenade.gsc
-*****************************************************/
+ * Script: scripts\mp\equipment\smoke_grenade.gsc
+**************************************************/
 
 #using script_74b851b7aa1ef32d;
 #using scripts\common\ae_utility;

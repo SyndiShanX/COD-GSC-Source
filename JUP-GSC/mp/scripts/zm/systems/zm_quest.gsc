@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\zm\systems\zm_quest.gsc
+ * Script: scripts\zm\systems\zm_quest.gsc
 ***********************************************/
 
 #using script_292b2f4fcd5999c8;

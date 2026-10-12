@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\bounty.gsc
+ * Script: scripts\mp\bounty.gsc
 ***********************************************/
 
 #using scripts\common\utility;

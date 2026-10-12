@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\aitypes\cover.gsc
+ * Script: scripts\aitypes\cover.gsc
 ***********************************************/
+
+
 
 #using scripts\aitypes\bt_util;
 #using scripts\aitypes\combat;

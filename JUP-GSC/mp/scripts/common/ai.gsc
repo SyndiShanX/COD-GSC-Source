@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\ai.gsc
+ * Script: scripts\common\ai.gsc
 ***********************************************/
 
 #using scripts\asm\shared\utility;

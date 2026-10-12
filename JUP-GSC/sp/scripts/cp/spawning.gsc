@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\spawning.gsc
+ * Script: scripts\cp\spawning.gsc
 ***********************************************/
+
+
 
 #using script_17ca3af80f14ce7e;
 #using script_78ee1f1787a2e6a4;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\stealth\friendly.gsc
+ * Script: scripts\stealth\friendly.gsc
 ***********************************************/
 
 #using scripts\common\utility;

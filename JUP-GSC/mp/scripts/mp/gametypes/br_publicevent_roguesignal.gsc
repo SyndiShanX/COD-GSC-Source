@@ -1,7 +1,7 @@
-/******************************************************************
+/***************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_publicevent_roguesignal.gsc
-******************************************************************/
+ * Script: scripts\mp\gametypes\br_publicevent_roguesignal.gsc
+***************************************************************/
 
 #using script_294dda4a4b00ffe3;
 #using script_32d93a194074fa6a;

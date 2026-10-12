@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\scriptable.gsc
+ * Script: scripts\mp\scriptable.gsc
 ***********************************************/
 
 #using scripts\common\utility;

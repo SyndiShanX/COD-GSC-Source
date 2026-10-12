@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\radiation.gsc
+ * Script: scripts\cp_mp\radiation.gsc
 ***********************************************/
+
+
 
 #using scripts\common\callbacks;
 #using scripts\common\devgui;

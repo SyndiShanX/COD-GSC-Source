@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\shared\death.gsc
+ * Script: scripts\asm\shared\death.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\notetracks;
 #using scripts\anim\shared;

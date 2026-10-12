@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\utility\callback_group.gsc
-*******************************************************/
+ * Script: scripts\cp_mp\utility\callback_group.gsc
+****************************************************/
 
 #using scripts\engine\utility;
 #namespace callback_group;

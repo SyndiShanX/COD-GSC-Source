@@ -1,7 +1,7 @@
-/****************************************************************
+/*************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_karachi\mp_jup_karachi.gsc
-****************************************************************/
+ * Script: scripts\mp\maps\mp_jup_karachi\mp_jup_karachi.gsc
+*************************************************************/
 
 #using script_30fbbeb9a6251e9a;
 #using scripts\common\anim;

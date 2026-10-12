@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\serversettings.gsc
+ * Script: scripts\mp\serversettings.gsc
 ***********************************************/
 
 #using scripts\cp_mp\utility\game_utility;

@@ -1,7 +1,9 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\factions\faction_progression.gsc
-**********************************************************/
+ * Script: scripts\cp\factions\faction_progression.gsc
+*******************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\interaction;

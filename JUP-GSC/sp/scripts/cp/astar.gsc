@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\astar.gsc
+ * Script: scripts\cp\astar.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\utility;

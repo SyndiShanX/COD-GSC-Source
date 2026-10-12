@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\supers\blindingturret.gsc
-***************************************************/
+ * Script: scripts\mp\supers\blindingturret.gsc
+************************************************/
 
 #using scripts\cp_mp\utility\player_utility;
 #using scripts\cp_mp\utility\shellshock_utility;

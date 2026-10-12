@@ -1,7 +1,9 @@
-/*********************************************************
+/******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\equipment\aether_counter.gsc
-*********************************************************/
+ * Script: scripts\cp_mp\equipment\aether_counter.gsc
+******************************************************/
+
+
 
 #using scripts\cp_mp\utility\game_utility;
 #using scripts\engine\utility;

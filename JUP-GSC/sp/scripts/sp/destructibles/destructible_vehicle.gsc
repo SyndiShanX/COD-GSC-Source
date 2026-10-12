@@ -1,7 +1,9 @@
-/****************************************************************
+/*************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\destructibles\destructible_vehicle.gsc
-****************************************************************/
+ * Script: scripts\sp\destructibles\destructible_vehicle.gsc
+*************************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\sp\utility;

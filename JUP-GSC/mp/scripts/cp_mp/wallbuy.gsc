@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\wallbuy.gsc
+ * Script: scripts\cp_mp\wallbuy.gsc
 ***********************************************/
 
 #using script_443d99fe707f1d9f;

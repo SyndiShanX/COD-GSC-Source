@@ -1,7 +1,9 @@
-/********************************************************
+/*****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\equipment\cp_decoy_grenade.gsc
-********************************************************/
+ * Script: scripts\cp\equipment\cp_decoy_grenade.gsc
+*****************************************************/
+
+
 
 #using script_16ea1b94f0f381b3;
 #using scripts\common\utility;

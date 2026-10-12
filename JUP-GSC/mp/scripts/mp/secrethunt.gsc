@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\secrethunt.gsc
+ * Script: scripts\mp\secrethunt.gsc
 ***********************************************/
 
 #using scripts\common\utility;

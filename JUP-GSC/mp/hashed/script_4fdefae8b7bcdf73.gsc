@@ -5,7 +5,7 @@
 
 #using script_185660037b9236c1;
 #using script_2707474774db34b;
-#using script_3a13b8032b62a5e6;
+#using scripts\mp\objective_marker_bundle_helper;
 #using script_3ac7886f9e4eceef;
 #using script_41387eecc35b88bf;
 #using script_4d39bd4c621e7680;

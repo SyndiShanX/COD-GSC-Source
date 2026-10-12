@@ -1,7 +1,7 @@
-/****************************************************************
+/*************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\quaked\script_struct_mp_jup_cougar_mg.gsc
-****************************************************************/
+ * Script: scripts\quaked\script_struct_mp_jup_cougar_mg.gsc
+*************************************************************/
 
 #using script_46307eda1984556f;
 #using scripts\common\utility;

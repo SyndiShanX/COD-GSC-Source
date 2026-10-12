@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\stealth\utility.gsc
+ * Script: scripts\sp\stealth\utility.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\battlechatter;
 #using scripts\common\anim;

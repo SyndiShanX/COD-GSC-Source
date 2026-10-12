@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\vehicle\empty_heli.gsc
+ * Script: scripts\vehicle\empty_heli.gsc
 ***********************************************/
 
 #using scripts\common\vehicle_build;

@@ -1,7 +1,9 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\utility\auto_ascender_ai.gsc
-******************************************************/
+ * Script: scripts\cp\utility\auto_ascender_ai.gsc
+***************************************************/
+
+
 
 #using scripts\asm\asm;
 #using scripts\asm\asm_mp;

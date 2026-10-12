@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\anim\dialogue.gsc
+ * Script: scripts\anim\dialogue.gsc
 ***********************************************/
 
 #using scripts\anim\dialogue;

@@ -1,7 +1,9 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\mp\killstreaks\throwback_marker.gsc
-**********************************************************/
+ * Script: scripts\mp\killstreaks\throwback_marker.gsc
+*******************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\values;

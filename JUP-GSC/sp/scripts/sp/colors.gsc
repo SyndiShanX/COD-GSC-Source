@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\colors.gsc
+ * Script: scripts\sp\colors.gsc
 ***********************************************/
+
+
 
 #using scripts\common\ai;
 #using scripts\common\utility;

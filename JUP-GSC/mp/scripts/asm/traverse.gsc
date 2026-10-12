@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\traverse.gsc
+ * Script: scripts\asm\traverse.gsc
 ***********************************************/
 
 #using scripts\anim\animselector;

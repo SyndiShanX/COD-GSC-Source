@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\engine\throttle.gsc
+ * Script: scripts\engine\throttle.gsc
 ***********************************************/
+
+
 
 #using scripts\engine\utility;
 #namespace throttle;

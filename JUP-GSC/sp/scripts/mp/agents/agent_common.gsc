@@ -1,7 +1,9 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\mp\agents\agent_common.gsc
-*************************************************/
+ * Script: scripts\mp\agents\agent_common.gsc
+***********************************************/
+
+
 
 #using scripts\anim\notetracks_mp;
 #using scripts\asm\asm;

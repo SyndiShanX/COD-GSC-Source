@@ -1,7 +1,7 @@
-/*********************************************************
+/******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\equipment\breacher_drone.gsc
-*********************************************************/
+ * Script: scripts\cp_mp\equipment\breacher_drone.gsc
+******************************************************/
 
 #using script_16ea1b94f0f381b3;
 #using script_608c50392df8c7d1;

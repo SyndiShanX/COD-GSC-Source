@@ -1,7 +1,9 @@
-/*************************************************************
+/**********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\killstreaks\airdrop_multiple_cp.gsc
-*************************************************************/
+ * Script: scripts\cp\killstreaks\airdrop_multiple_cp.gsc
+**********************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp_mp\utility\killstreak_utility;

@@ -1,7 +1,7 @@
-/***********************************************************
+/********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_deployable_kiosk.gsc
-***********************************************************/
+ * Script: scripts\mp\gametypes\br_deployable_kiosk.gsc
+********************************************************/
 
 #using script_610f57bddd265be2;
 #using scripts\common\ae_utility;

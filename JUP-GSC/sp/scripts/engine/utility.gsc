@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\engine\utility.gsc
+ * Script: scripts\engine\utility.gsc
 ***********************************************/
+
+
 
 #using scripts\common\anim;
 #using scripts\common\createfx;

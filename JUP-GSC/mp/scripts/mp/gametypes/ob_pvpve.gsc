@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\ob_pvpve.gsc
-************************************************/
+ * Script: scripts\mp\gametypes\ob_pvpve.gsc
+***********************************************/
 
 #using script_2f11ea014b8bb8eb;
 #using script_3691c0b107a6701c;

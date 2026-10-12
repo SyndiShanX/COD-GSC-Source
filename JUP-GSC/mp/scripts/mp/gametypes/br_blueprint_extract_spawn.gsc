@@ -1,7 +1,7 @@
-/******************************************************************
+/***************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_blueprint_extract_spawn.gsc
-******************************************************************/
+ * Script: scripts\mp\gametypes\br_blueprint_extract_spawn.gsc
+***************************************************************/
 
 #using scripts\cp_mp\utility\game_utility;
 #using scripts\mp\gametypes\br_extract_quest;

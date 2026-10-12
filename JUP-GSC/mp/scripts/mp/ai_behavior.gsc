@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\ai_behavior.gsc
+ * Script: scripts\mp\ai_behavior.gsc
 ***********************************************/
 
 #using script_4948cdf739393d2d;

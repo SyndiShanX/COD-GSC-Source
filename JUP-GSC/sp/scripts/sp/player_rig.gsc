@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\player_rig.gsc
+ * Script: scripts\sp\player_rig.gsc
 ***********************************************/
+
+
 
 #using scripts\common\anim;
 #using scripts\common\utility;

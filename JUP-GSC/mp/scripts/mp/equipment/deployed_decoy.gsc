@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\deployed_decoy.gsc
-******************************************************/
+ * Script: scripts\mp\equipment\deployed_decoy.gsc
+***************************************************/
 
 #using scripts\common\ae_utility;
 #using scripts\common\elevators;

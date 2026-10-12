@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\loot\common_inventory.gsc
-******************************************************/
+ * Script: scripts\cp_mp\loot\common_inventory.gsc
+***************************************************/
 
 #using script_443d99fe707f1d9f;
 #using script_485622d93fa7e4cf;

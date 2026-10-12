@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\utility\hitmarker.gsc
+ * Script: scripts\mp\utility\hitmarker.gsc
 ***********************************************/
 
 #using scripts\engine\utility;

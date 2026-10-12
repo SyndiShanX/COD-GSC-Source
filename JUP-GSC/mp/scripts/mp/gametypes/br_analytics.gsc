@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_analytics.gsc
-****************************************************/
+ * Script: scripts\mp\gametypes\br_analytics.gsc
+*************************************************/
 
 #using script_4948cdf739393d2d;
 #using script_728ffcee8cbf30ee;

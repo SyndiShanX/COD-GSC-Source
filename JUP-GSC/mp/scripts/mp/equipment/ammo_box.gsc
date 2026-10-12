@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\ammo_box.gsc
-************************************************/
+ * Script: scripts\mp\equipment\ammo_box.gsc
+***********************************************/
 
 #using scripts\common\interactive;
 #using scripts\common\utility;

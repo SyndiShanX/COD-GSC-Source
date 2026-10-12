@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_armory_kiosk.gsc
-*******************************************************/
+ * Script: scripts\mp\gametypes\br_armory_kiosk.gsc
+****************************************************/
 
 #using script_15ca41a3fbb0e379;
 #using script_263974019a8ba3fa;

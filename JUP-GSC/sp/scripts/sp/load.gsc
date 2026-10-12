@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\load.gsc
+ * Script: scripts\sp\load.gsc
 ***********************************************/
+
+
 
 #using script_1096bc9315122e88;
 #using script_3798db193e76a866;

@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_pickups.gsc
-**************************************************/
+ * Script: scripts\mp\gametypes\br_pickups.gsc
+***********************************************/
 
 #using script_1193c0b83fce13b;
 #using script_15eddb0fac236a22;

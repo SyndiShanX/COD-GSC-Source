@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\bots\bots_gametype_br.gsc
-***************************************************/
+ * Script: scripts\mp\bots\bots_gametype_br.gsc
+************************************************/
 
 #using script_3d2770dc09c1243;
 #using script_40e63dd222434655;

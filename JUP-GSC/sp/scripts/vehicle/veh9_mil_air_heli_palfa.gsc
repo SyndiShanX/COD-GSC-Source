@@ -1,7 +1,9 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\vehicle\veh9_mil_air_heli_palfa.gsc
-**********************************************************/
+ * Script: scripts\vehicle\veh9_mil_air_heli_palfa.gsc
+*******************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\vehicle;

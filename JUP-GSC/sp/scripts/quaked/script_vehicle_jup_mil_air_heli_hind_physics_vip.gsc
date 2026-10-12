@@ -1,7 +1,9 @@
-/**********************************************************************************
+/*******************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\quaked\script_vehicle_jup_mil_air_heli_hind_physics_vip.gsc
-**********************************************************************************/
+ * Script: scripts\quaked\script_vehicle_jup_mil_air_heli_hind_physics_vip.gsc
+*******************************************************************************/
+
+
 
 #using scripts\vehicle\veh9_mil_air_heli_hind;
 #namespace script_vehicle_jup_mil_air_heli_hind_physics_vip;

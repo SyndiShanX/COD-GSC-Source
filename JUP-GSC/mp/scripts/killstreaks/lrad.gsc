@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\killstreaks\lrad.gsc
+ * Script: scripts\killstreaks\lrad.gsc
 ***********************************************/
 
 #using script_13865ca76df87ea;

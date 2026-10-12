@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\drone\utility.gsc
+ * Script: scripts\cp\drone\utility.gsc
 ***********************************************/
+
+
 
 #using scripts\common\values;
 #using scripts\cp\damagefeedback;

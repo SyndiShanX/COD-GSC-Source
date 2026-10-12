@@ -1,7 +1,9 @@
-/********************************************************
+/*****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\proximity_sensor.gsc
-********************************************************/
+ * Script: scripts\sp\equipment\proximity_sensor.gsc
+*****************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\math;

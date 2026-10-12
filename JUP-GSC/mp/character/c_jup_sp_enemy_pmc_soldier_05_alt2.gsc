@@ -1,7 +1,7 @@
-/***************************************************************
+/************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\character\c_jup_sp_enemy_pmc_soldier_05_alt2.gsc
-***************************************************************/
+ * Script: character\c_jup_sp_enemy_pmc_soldier_05_alt2.gsc
+************************************************************/
 
 #using scripts\common\utility;
 #namespace c_jup_sp_enemy_pmc_soldier_05_alt2;

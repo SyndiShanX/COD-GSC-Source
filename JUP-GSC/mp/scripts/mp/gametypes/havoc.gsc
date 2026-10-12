@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\havoc.gsc
+ * Script: scripts\mp\gametypes\havoc.gsc
 ***********************************************/
 
 #using scripts\common\utility;

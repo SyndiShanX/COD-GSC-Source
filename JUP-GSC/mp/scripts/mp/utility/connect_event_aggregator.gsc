@@ -1,7 +1,7 @@
-/**************************************************************
+/***********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\utility\connect_event_aggregator.gsc
-**************************************************************/
+ * Script: scripts\mp\utility\connect_event_aggregator.gsc
+***********************************************************/
 
 #namespace connect_event_aggregator;
 

@@ -1,7 +1,9 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\tripwire.gsc
-************************************************/
+ * Script: scripts\sp\equipment\tripwire.gsc
+***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\values;

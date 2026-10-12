@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\wm_buildable.gsc
-****************************************************/
+ * Script: scripts\mp\gametypes\wm_buildable.gsc
+*************************************************/
 
 #using script_29e75e5ebeca383d;
 #using scripts\common\anim;

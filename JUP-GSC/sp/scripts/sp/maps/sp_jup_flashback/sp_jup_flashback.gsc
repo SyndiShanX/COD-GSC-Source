@@ -1,7 +1,9 @@
-/********************************************************************
+/*****************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\maps\sp_jup_flashback\sp_jup_flashback.gsc
-********************************************************************/
+ * Script: scripts\sp\maps\sp_jup_flashback\sp_jup_flashback.gsc
+*****************************************************************/
+
+
 
 #using script_32876a523f324870;
 #using script_445e326aa3526cc2;

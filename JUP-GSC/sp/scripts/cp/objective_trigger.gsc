@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\objective_trigger.gsc
+ * Script: scripts\cp\objective_trigger.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\cp_debug;

@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\powerups\fire_sale.gsc
-***************************************************/
+ * Script: scripts\cp_mp\powerups\fire_sale.gsc
+************************************************/
 
 #using scripts\common\devgui;
 #using scripts\common\powerups;

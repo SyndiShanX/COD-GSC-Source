@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\spawner_scoring.gsc
+ * Script: scripts\cp\spawner_scoring.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\cp_checkpoint;

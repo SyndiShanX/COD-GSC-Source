@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\character\c_jup_mp_delta.gsc
+ * Script: character\c_jup_mp_delta.gsc
 ***********************************************/
 
 #using scripts\common\utility;

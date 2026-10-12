@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\killstreaks\plane.gsc
+ * Script: scripts\mp\killstreaks\plane.gsc
 ***********************************************/
 
 #using scripts\common\utility;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\utility\outline.gsc
+ * Script: scripts\mp\utility\outline.gsc
 ***********************************************/
 
 #using scripts\cp_mp\utility\player_utility;

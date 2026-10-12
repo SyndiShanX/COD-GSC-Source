@@ -1,7 +1,7 @@
-/***********************************************************
+/********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\powerups\bonus_points_team.gsc
-***********************************************************/
+ * Script: scripts\cp_mp\powerups\bonus_points_team.gsc
+********************************************************/
 
 #using scripts\common\devgui;
 #using scripts\common\powerups;

@@ -1,7 +1,7 @@
-/****************************************************************************
+/*************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\aitypes\zombie_disciple\zombie_disciple_metabones.gsc
-****************************************************************************/
+ * Script: scripts\aitypes\zombie_disciple\zombie_disciple_metabones.gsc
+*************************************************************************/
 
 #using scripts\common\metabone;
 #namespace zombie_disciple_metabones;

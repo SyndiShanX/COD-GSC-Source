@@ -1,7 +1,9 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\helicopter\cp_helicopter.gsc
-******************************************************/
+ * Script: scripts\cp\helicopter\cp_helicopter.gsc
+***************************************************/
+
+
 
 #using script_f603f40349f99c8;
 #using scripts\common\utility;

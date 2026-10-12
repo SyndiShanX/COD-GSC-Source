@@ -1,7 +1,7 @@
-/****************************************************************
+/*************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_vertigo\mp_jup_vertigo.gsc
-****************************************************************/
+ * Script: scripts\mp\maps\mp_jup_vertigo\mp_jup_vertigo.gsc
+*************************************************************/
 
 #using scripts\common\create_script_utility;
 #using scripts\common\exploder;

@@ -1,7 +1,9 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\vehicles\vehicle_tracking.gsc
-**********************************************************/
+ * Script: scripts\cp_mp\vehicles\vehicle_tracking.gsc
+*******************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

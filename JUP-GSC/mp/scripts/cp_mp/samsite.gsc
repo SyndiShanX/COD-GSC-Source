@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\samsite.gsc
+ * Script: scripts\cp_mp\samsite.gsc
 ***********************************************/
 
 #using scripts\common\anim;

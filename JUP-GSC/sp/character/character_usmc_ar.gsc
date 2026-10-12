@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\character\character_usmc_ar.gsc
+ * Script: character\character_usmc_ar.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #namespace character_usmc_ar;

@@ -1,7 +1,9 @@
-/********************************************************************
+/*****************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\test_alias_civilian_female_surge_head.gsc
-********************************************************************/
+ * Script: xmodelalias\test_alias_civilian_female_surge_head.gsc
+*****************************************************************/
+
+
 
 #namespace test_alias_civilian_female_surge_head;
 

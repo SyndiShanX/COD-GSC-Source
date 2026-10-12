@@ -1,7 +1,7 @@
-/*************************************************************************
+/**********************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_gw_fallout\mp_jup_gw_fallout_ob.gsc
-*************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_gw_fallout\mp_jup_gw_fallout_ob.gsc
+**********************************************************************/
 
 #using script_2047cdbf5176ba0;
 #using script_222f62686867436a;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\temp_v.gsc
+ * Script: scripts\mp\equipment\temp_v.gsc
 ***********************************************/
 
 #using script_268c558ddb2267aa;

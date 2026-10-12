@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\tac_insert.gsc
-**************************************************/
+ * Script: scripts\mp\equipment\tac_insert.gsc
+***********************************************/
 
 #using scripts\common\ae_utility;
 #using scripts\common\elevators;

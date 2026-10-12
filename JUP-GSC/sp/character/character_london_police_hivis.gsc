@@ -1,7 +1,9 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\character\character_london_police_hivis.gsc
-**********************************************************/
+ * Script: character\character_london_police_hivis.gsc
+*******************************************************/
+
+
 
 #using scripts\code\character;
 #using scripts\common\utility;

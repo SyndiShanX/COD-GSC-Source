@@ -1,7 +1,7 @@
-/*************************************************************************************
+/**********************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_rust_alt_toon\mp_jup_rust_alt_toon_lighting.gsc
-*************************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_rust_alt_toon\mp_jup_rust_alt_toon_lighting.gsc
+**********************************************************************************/
 
 #using scripts\common\lighting;
 #using scripts\common\utility;

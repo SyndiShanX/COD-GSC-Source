@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\stealth\group.gsc
+ * Script: scripts\stealth\group.gsc
 ***********************************************/
 
 #using scripts\asm\asm_bb;

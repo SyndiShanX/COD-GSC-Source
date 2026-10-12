@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\cache.gsc
+ * Script: scripts\mp\gametypes\cache.gsc
 ***********************************************/
 
 #using scripts\common\callbacks;

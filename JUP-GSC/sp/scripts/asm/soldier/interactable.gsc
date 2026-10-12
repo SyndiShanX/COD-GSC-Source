@@ -1,7 +1,9 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\soldier\interactable.gsc
-***************************************************/
+ * Script: scripts\asm\soldier\interactable.gsc
+************************************************/
+
+
 
 #using scripts\anim\utility_common;
 #using scripts\asm\asm;

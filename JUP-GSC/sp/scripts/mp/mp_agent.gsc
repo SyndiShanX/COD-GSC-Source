@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\mp\mp_agent.gsc
+ * Script: scripts\mp\mp_agent.gsc
 ***********************************************/
+
+
 
 #using script_cbb0697de4c5728;
 #using scripts\anim\animselector;

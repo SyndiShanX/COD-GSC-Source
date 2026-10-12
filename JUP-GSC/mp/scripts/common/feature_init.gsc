@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\feature_init.gsc
+ * Script: scripts\common\feature_init.gsc
 ***********************************************/
 
 #namespace feature_init;

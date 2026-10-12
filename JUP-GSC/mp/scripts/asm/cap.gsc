@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\cap.gsc
+ * Script: scripts\asm\cap.gsc
 ***********************************************/
 
 #using script_147448f3f080c636;

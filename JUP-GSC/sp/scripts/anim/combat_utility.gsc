@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\anim\combat_utility.gsc
+ * Script: scripts\anim\combat_utility.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\utility_common;
 #using scripts\asm\asm;

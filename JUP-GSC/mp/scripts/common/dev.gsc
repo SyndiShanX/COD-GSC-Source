@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\dev.gsc
+ * Script: scripts\common\dev.gsc
 ***********************************************/
 
 #namespace dev;

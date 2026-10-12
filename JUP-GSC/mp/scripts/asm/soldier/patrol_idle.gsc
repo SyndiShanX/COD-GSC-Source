@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\soldier\patrol_idle.gsc
-**************************************************/
+ * Script: scripts\asm\soldier\patrol_idle.gsc
+***********************************************/
 
 #using scripts\asm\asm;
 #using scripts\asm\asm_bb;

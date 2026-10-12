@@ -1,7 +1,9 @@
-/***********************************************************
+/********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\zombies\zombieclientmatchdata.gsc
-***********************************************************/
+ * Script: scripts\cp\zombies\zombieclientmatchdata.gsc
+********************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

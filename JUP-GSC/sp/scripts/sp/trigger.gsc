@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\trigger.gsc
+ * Script: scripts\sp\trigger.gsc
 ***********************************************/
+
+
 
 #using script_6c1b22ea36b176be;
 #using script_72ef6b9f0cf1f55a;

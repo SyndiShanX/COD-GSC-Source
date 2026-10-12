@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\linked_list.gsc
+ * Script: scripts\common\linked_list.gsc
 ***********************************************/
 
 #using scripts\common\utility;

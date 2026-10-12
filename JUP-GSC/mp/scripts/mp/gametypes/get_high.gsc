@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\get_high.gsc
-************************************************/
+ * Script: scripts\mp\gametypes\get_high.gsc
+***********************************************/
 
 #using scripts\common\callbacks;
 #using scripts\common\utility;

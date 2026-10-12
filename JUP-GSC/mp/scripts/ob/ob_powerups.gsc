@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\ob\ob_powerups.gsc
+ * Script: scripts\ob\ob_powerups.gsc
 ***********************************************/
 
 #using script_638d701d263ee1ed;

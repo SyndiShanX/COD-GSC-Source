@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\supers\haunted_box.gsc
-************************************************/
+ * Script: scripts\mp\supers\haunted_box.gsc
+***********************************************/
 
 #using script_44b8991c2b01716a;
 #using scripts\common\utility;

@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\supers\loadout_drop.gsc
-*************************************************/
+ * Script: scripts\mp\supers\loadout_drop.gsc
+***********************************************/
 
 #using scripts\common\ae_utility;
 #using scripts\common\values;

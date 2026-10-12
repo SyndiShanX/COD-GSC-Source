@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\engine\throttle.gsc
+ * Script: scripts\engine\throttle.gsc
 ***********************************************/
 
 #using scripts\engine\utility;

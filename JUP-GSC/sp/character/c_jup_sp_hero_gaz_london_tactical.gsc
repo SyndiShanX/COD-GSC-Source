@@ -1,7 +1,9 @@
-/**************************************************************
+/***********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\character\c_jup_sp_hero_gaz_london_tactical.gsc
-**************************************************************/
+ * Script: character\c_jup_sp_hero_gaz_london_tactical.gsc
+***********************************************************/
+
+
 
 #using scripts\common\utility;
 #namespace c_jup_sp_hero_gaz_london_tactical;

@@ -1,7 +1,9 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\character\c_jup_civ_plane_bystander.gsc
-******************************************************/
+ * Script: character\c_jup_civ_plane_bystander.gsc
+***************************************************/
+
+
 
 #using scripts\common\utility;
 #namespace c_jup_civ_plane_bystander;

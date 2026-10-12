@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\data_tracker.gsc
+ * Script: scripts\common\data_tracker.gsc
 ***********************************************/
 
 #using scripts\common\utility;

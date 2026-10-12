@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\cp_spawning_util.gsc
+ * Script: scripts\cp\cp_spawning_util.gsc
 ***********************************************/
+
+
 
 #using script_24e4405cf93f20ed;
 #using scripts\asm\shared\mp\utility;

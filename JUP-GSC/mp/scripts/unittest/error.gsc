@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\unittest\error.gsc
+ * Script: scripts\unittest\error.gsc
 ***********************************************/
 
 #using scripts\unittest\util;

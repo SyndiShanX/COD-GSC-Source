@@ -1,7 +1,9 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\killstreaks\init_cp.gsc
-*************************************************/
+ * Script: scripts\cp\killstreaks\init_cp.gsc
+***********************************************/
+
+
 
 #using script_17ca3af80f14ce7e;
 #using script_2b283271ad65977c;

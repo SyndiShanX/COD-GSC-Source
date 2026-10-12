@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\weapons\ww_raygun.gsc
-**************************************************/
+ * Script: scripts\cp_mp\weapons\ww_raygun.gsc
+***********************************************/
 
 #using scripts\common\system;
 #using scripts\engine\utility;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\vehicle_code.gsc
+ * Script: scripts\common\vehicle_code.gsc
 ***********************************************/
 
 #using scripts\common\ai;

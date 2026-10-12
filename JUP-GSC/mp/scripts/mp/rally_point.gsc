@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\rally_point.gsc
+ * Script: scripts\mp\rally_point.gsc
 ***********************************************/
 
 #using scripts\common\utility;

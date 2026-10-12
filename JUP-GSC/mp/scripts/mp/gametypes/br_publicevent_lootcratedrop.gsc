@@ -1,7 +1,7 @@
-/********************************************************************
+/*****************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_publicevent_lootcratedrop.gsc
-********************************************************************/
+ * Script: scripts\mp\gametypes\br_publicevent_lootcratedrop.gsc
+*****************************************************************/
 
 #using script_261e315c49e5e4ef;
 #using scripts\common\utility;

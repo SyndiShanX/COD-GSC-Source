@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\hvt.gsc
+ * Script: scripts\mp\gametypes\hvt.gsc
 ***********************************************/
 
 #using scripts\common\callbacks;

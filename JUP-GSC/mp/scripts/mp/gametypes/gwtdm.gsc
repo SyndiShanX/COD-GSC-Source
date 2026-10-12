@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\gwtdm.gsc
+ * Script: scripts\mp\gametypes\gwtdm.gsc
 ***********************************************/
 
 #using script_36967ce8ee2ea745;

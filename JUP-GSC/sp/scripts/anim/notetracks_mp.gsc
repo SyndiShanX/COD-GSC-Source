@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\anim\notetracks_mp.gsc
+ * Script: scripts\anim\notetracks_mp.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\notetracks;
 #using scripts\anim\utility_common;

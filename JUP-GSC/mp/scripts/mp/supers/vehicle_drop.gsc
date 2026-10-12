@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\supers\vehicle_drop.gsc
-*************************************************/
+ * Script: scripts\mp\supers\vehicle_drop.gsc
+***********************************************/
 
 #using scripts\common\values;
 #using scripts\cp_mp\challenges;

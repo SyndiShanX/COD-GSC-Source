@@ -1,7 +1,9 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\acid_grenade.gsc
-****************************************************/
+ * Script: scripts\sp\equipment\acid_grenade.gsc
+*************************************************/
+
+
 
 #using scripts\common\ai;
 #using scripts\engine\utility;

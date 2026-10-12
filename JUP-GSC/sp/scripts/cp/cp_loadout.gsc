@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\cp_loadout.gsc
+ * Script: scripts\cp\cp_loadout.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\cp_accessories;

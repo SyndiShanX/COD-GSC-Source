@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\analyticslog.gsc
+ * Script: scripts\mp\analyticslog.gsc
 ***********************************************/
 
 #using scripts\common\utility;

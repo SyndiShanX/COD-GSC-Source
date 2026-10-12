@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\smartobjects\hunt_point.gsc
-**************************************************/
+ * Script: scripts\smartobjects\hunt_point.gsc
+***********************************************/
 
 #using scripts\anim\battlechatter;
 #using scripts\asm\asm;

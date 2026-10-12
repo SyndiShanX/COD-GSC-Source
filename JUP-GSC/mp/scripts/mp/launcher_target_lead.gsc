@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\launcher_target_lead.gsc
-**************************************************/
+ * Script: scripts\mp\launcher_target_lead.gsc
+***********************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\emp_debuff;

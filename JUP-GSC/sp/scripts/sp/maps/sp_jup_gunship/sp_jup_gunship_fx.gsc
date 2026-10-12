@@ -1,7 +1,9 @@
-/*******************************************************************
+/****************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\maps\sp_jup_gunship\sp_jup_gunship_fx.gsc
-*******************************************************************/
+ * Script: scripts\sp\maps\sp_jup_gunship\sp_jup_gunship_fx.gsc
+****************************************************************/
+
+
 
 #using scripts\anim\utility;
 #using scripts\engine\sp\utility;

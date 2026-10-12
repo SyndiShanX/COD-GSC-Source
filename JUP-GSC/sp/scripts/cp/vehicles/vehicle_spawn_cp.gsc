@@ -1,7 +1,9 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\vehicles\vehicle_spawn_cp.gsc
-*******************************************************/
+ * Script: scripts\cp\vehicles\vehicle_spawn_cp.gsc
+****************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp_mp\vehicles\vehicle_spawn;

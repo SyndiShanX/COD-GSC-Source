@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\basic_wind.gsc
+ * Script: scripts\common\basic_wind.gsc
 ***********************************************/
 
 #using scripts\engine\utility;

@@ -1,7 +1,9 @@
-/*************************************************************************
+/**********************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\quaked\script_vehicle_jup_jltv_physics_gunship.gsc
-*************************************************************************/
+ * Script: scripts\quaked\script_vehicle_jup_jltv_physics_gunship.gsc
+**********************************************************************/
+
+
 
 #using scripts\vehicle\veh9_jltv;
 #namespace script_vehicle_jup_jltv_physics_gunship;

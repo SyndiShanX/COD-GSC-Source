@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_attractions.gsc
-******************************************************/
+ * Script: scripts\mp\gametypes\br_attractions.gsc
+***************************************************/
 
 #using scripts\cp_mp\parachute;
 #using scripts\engine\utility;

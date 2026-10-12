@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gameobjects.gsc
+ * Script: scripts\mp\gameobjects.gsc
 ***********************************************/
 
 #using script_4a6760982b403bad;

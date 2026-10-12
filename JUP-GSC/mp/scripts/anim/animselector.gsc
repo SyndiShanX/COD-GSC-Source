@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\anim\animselector.gsc
+ * Script: scripts\anim\animselector.gsc
 ***********************************************/
 
 #using scripts\anim\utility_common;

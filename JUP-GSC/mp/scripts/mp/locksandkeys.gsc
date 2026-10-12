@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\locksandkeys.gsc
+ * Script: scripts\mp\locksandkeys.gsc
 ***********************************************/
 
 #using script_2892a7e13357d95b;

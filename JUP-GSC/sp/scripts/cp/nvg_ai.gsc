@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\nvg_ai.gsc
+ * Script: scripts\cp\nvg_ai.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\shared;
 #using scripts\common\utility;

@@ -1,7 +1,7 @@
-/**********************************************************************************
+/*******************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_scrapyard_alt_v2\mp_jup_scrapyard_alt_v2.gsc
-**********************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_scrapyard_alt_v2\mp_jup_scrapyard_alt_v2.gsc
+*******************************************************************************/
 
 #using script_30fbbeb9a6251e9a;
 #using scripts\common\anim;

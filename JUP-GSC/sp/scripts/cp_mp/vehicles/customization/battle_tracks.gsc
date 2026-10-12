@@ -1,7 +1,9 @@
-/*********************************************************************
+/******************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\vehicles\customization\battle_tracks.gsc
-*********************************************************************/
+ * Script: scripts\cp_mp\vehicles\customization\battle_tracks.gsc
+******************************************************************/
+
+
 
 #using scripts\common\vehicle;
 #using scripts\cp_mp\utility\train_utility;

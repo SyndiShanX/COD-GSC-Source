@@ -1,7 +1,9 @@
-/***********************************************************
+/********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\vehicle\veh9_mil_lnd_cargo_truck.gsc
-***********************************************************/
+ * Script: scripts\vehicle\veh9_mil_lnd_cargo_truck.gsc
+********************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\vehicle_build;

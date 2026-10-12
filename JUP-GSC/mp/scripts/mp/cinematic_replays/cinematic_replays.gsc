@@ -1,7 +1,7 @@
-/*****************************************************************
+/**************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\cinematic_replays\cinematic_replays.gsc
-*****************************************************************/
+ * Script: scripts\mp\cinematic_replays\cinematic_replays.gsc
+**************************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\anim_scene.gsc
+ * Script: scripts\cp_mp\anim_scene.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\face;
 #using scripts\common\anim;

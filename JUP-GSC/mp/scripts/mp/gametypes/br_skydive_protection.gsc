@@ -1,7 +1,7 @@
-/*************************************************************
+/**********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_skydive_protection.gsc
-*************************************************************/
+ * Script: scripts\mp\gametypes\br_skydive_protection.gsc
+**********************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\trace;

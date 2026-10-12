@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\animatedmodels.gsc
+ * Script: scripts\mp\animatedmodels.gsc
 ***********************************************/
 
 #using scripts\common\utility;

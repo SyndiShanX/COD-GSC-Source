@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\loot.gsc
+ * Script: scripts\mp\loot.gsc
 ***********************************************/
 
 #using script_2d9d24f7c63ac143;

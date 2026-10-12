@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\dialogue_wheel.gsc
-************************************************/
+ * Script: scripts\common\dialogue_wheel.gsc
+***********************************************/
 
 #using scripts\anim\dialogue;
 #using scripts\common\dialogue_wheel;

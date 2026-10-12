@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\interactive.gsc
+ * Script: scripts\common\interactive.gsc
 ***********************************************/
+
+
 
 #using scripts\engine\utility;
 #namespace interactive;

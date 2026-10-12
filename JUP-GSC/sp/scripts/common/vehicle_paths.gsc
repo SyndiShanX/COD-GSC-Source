@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\vehicle_paths.gsc
+ * Script: scripts\common\vehicle_paths.gsc
 ***********************************************/
+
+
 
 #using scripts\common\ai;
 #using scripts\common\utility;

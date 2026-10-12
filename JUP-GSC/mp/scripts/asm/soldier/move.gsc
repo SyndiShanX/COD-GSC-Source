@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\soldier\move.gsc
+ * Script: scripts\asm\soldier\move.gsc
 ***********************************************/
 
 #using scripts\anim\utility_common;

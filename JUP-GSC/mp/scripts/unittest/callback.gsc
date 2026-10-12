@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\unittest\callback.gsc
+ * Script: scripts\unittest\callback.gsc
 ***********************************************/
 
 #namespace callback;

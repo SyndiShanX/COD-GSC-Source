@@ -1,7 +1,9 @@
-/*********************************************************
+/******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\equipment\throwing_knife_cp.gsc
-*********************************************************/
+ * Script: scripts\cp\equipment\throwing_knife_cp.gsc
+******************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp\damagefeedback;

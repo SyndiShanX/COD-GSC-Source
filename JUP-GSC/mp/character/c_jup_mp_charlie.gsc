@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\character\c_jup_mp_charlie.gsc
+ * Script: character\c_jup_mp_charlie.gsc
 ***********************************************/
 
 #using scripts\common\utility;

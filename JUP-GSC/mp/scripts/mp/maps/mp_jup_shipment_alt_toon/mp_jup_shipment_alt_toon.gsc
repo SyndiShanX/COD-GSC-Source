@@ -1,7 +1,7 @@
-/************************************************************************************
+/*********************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_shipment_alt_toon\mp_jup_shipment_alt_toon.gsc
-************************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_shipment_alt_toon\mp_jup_shipment_alt_toon.gsc
+*********************************************************************************/
 
 #using scripts\common\anim;
 #using scripts\common\exploder;

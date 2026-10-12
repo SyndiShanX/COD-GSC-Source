@@ -1,7 +1,7 @@
-/************************************************************
+/*********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\advanced_supply_drop.gsc
-************************************************************/
+ * Script: scripts\mp\equipment\advanced_supply_drop.gsc
+*********************************************************/
 
 #using scripts\engine\trace;
 #using scripts\engine\utility;

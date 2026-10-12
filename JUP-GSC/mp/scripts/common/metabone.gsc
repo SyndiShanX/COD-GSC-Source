@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\metabone.gsc
+ * Script: scripts\common\metabone.gsc
 ***********************************************/
 
 #using scripts\common\callbacks;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\ai.gsc
+ * Script: scripts\common\ai.gsc
 ***********************************************/
+
+
 
 #using scripts\asm\shared\utility;
 #using scripts\common\callbacks;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\awards.gsc
+ * Script: scripts\mp\awards.gsc
 ***********************************************/
 
 #using scripts\common\utility;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\soldier\melee.gsc
+ * Script: scripts\asm\soldier\melee.gsc
 ***********************************************/
 
 #using script_4449008f177af837;

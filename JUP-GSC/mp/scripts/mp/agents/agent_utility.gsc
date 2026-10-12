@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\agents\agent_utility.gsc
-**************************************************/
+ * Script: scripts\mp\agents\agent_utility.gsc
+***********************************************/
 
 #using scripts\common\utility;
 #using scripts\common\values;

@@ -1,7 +1,9 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\pipebomb.gsc
-************************************************/
+ * Script: scripts\sp\equipment\pipebomb.gsc
+***********************************************/
+
+
 
 #using scripts\sp\equipment\offhands;
 #namespace pipebomb;

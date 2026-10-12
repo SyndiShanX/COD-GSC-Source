@@ -1,7 +1,9 @@
-/********************************************************
+/*****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\killstreaks\killstreak_shared.gsc
-********************************************************/
+ * Script: scripts\killstreaks\killstreak_shared.gsc
+*****************************************************/
+
+
 
 #using script_16ea1b94f0f381b3;
 #using scripts\common\utility;

@@ -1,7 +1,9 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\cp_create_script_utility.gsc
-******************************************************/
+ * Script: scripts\cp\cp_create_script_utility.gsc
+***************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

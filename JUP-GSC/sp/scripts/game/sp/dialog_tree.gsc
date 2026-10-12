@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\game\sp\dialog_tree.gsc
+ * Script: scripts\game\sp\dialog_tree.gsc
 ***********************************************/
+
+
 
 #using script_39b1f0d056a0c138;
 #using script_72ef6b9f0cf1f55a;

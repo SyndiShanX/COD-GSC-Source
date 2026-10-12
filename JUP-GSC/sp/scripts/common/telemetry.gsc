@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\telemetry.gsc
+ * Script: scripts\common\telemetry.gsc
 ***********************************************/
+
+
 
 #namespace telemetry;
 

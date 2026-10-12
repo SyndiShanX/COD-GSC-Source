@@ -1,7 +1,9 @@
-/*****************************************************************
+/**************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\heads_jup_sp_enemy_pmc_surge_plain.gsc
-*****************************************************************/
+ * Script: xmodelalias\heads_jup_sp_enemy_pmc_surge_plain.gsc
+**************************************************************/
+
+
 
 #namespace heads_jup_sp_enemy_pmc_surge_plain;
 

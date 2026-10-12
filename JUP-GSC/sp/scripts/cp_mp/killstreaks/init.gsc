@@ -1,7 +1,9 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\killstreaks\init.gsc
-*************************************************/
+ * Script: scripts\cp_mp\killstreaks\init.gsc
+***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp_mp\killstreaks\airdrop;

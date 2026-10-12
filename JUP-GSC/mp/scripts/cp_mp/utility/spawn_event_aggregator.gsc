@@ -1,7 +1,7 @@
-/***************************************************************
+/************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\utility\spawn_event_aggregator.gsc
-***************************************************************/
+ * Script: scripts\cp_mp\utility\spawn_event_aggregator.gsc
+************************************************************/
 
 #namespace spawn_event_aggregator;
 

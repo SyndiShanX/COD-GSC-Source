@@ -1,7 +1,9 @@
-/*****************************************************************
+/**************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\maps\sp_jup_hijack\sp_jup_hijack_fx.gsc
-*****************************************************************/
+ * Script: scripts\sp\maps\sp_jup_hijack\sp_jup_hijack_fx.gsc
+**************************************************************/
+
+
 
 #using scripts\anim\dialogue;
 #using scripts\common\ai;

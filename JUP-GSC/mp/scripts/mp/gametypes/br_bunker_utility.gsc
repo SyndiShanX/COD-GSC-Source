@@ -1,7 +1,7 @@
-/*********************************************************
+/******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_bunker_utility.gsc
-*********************************************************/
+ * Script: scripts\mp\gametypes\br_bunker_utility.gsc
+******************************************************/
 
 #using scripts\common\anim;
 #using scripts\cp_mp\utility\game_utility;

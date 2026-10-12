@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\loot.gsc
+ * Script: scripts\sp\loot.gsc
 ***********************************************/
+
+
 
 #using script_72ef6b9f0cf1f55a;
 #using scripts\common\utility;

@@ -1,7 +1,9 @@
-/**************************************************************
+/***********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\maps\sp_jup_tundra\sp_jup_tundra.gsc
-**************************************************************/
+ * Script: scripts\sp\maps\sp_jup_tundra\sp_jup_tundra.gsc
+***********************************************************/
+
+
 
 #using script_1031976741eb6674;
 #using script_159c1d9ebef7e54c;

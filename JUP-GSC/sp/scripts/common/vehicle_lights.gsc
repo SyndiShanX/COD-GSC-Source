@@ -1,7 +1,9 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\vehicle_lights.gsc
-************************************************/
+ * Script: scripts\common\vehicle_lights.gsc
+***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\vehicle;

@@ -1,7 +1,9 @@
-/***********************************************************************
+/********************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\maps\sp_jup_hijack\sp_jup_hijack_lighting.gsc
-***********************************************************************/
+ * Script: scripts\sp\maps\sp_jup_hijack\sp_jup_hijack_lighting.gsc
+********************************************************************/
+
+
 
 #using scripts\common\lighting;
 #using scripts\common\scene;

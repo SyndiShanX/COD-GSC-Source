@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\mp\laststand.gsc
+ * Script: scripts\mp\laststand.gsc
 ***********************************************/
+
+
 
 #using script_21c19cfc7139d773;
 #using script_40e63dd222434655;

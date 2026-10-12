@@ -1,7 +1,7 @@
-/*********************************************************
+/******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\vehicles\vehicle_airdrop.gsc
-*********************************************************/
+ * Script: scripts\cp_mp\vehicles\vehicle_airdrop.gsc
+******************************************************/
 
 #using scripts\common\anim;
 #using scripts\common\utility;

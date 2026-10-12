@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\unittest\cond.gsc
+ * Script: scripts\unittest\cond.gsc
 ***********************************************/
 
 #using scripts\unittest\util;

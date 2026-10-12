@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\meatshield.gsc
+ * Script: scripts\mp\meatshield.gsc
 ***********************************************/
 
 #using scripts\common\values;

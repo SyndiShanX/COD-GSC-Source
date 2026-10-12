@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\values.gsc
+ * Script: scripts\common\values.gsc
 ***********************************************/
+
+
 
 #using script_4a6760982b403bad;
 #using scripts\asm\asm;

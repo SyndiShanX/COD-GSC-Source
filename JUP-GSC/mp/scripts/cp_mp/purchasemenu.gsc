@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\purchasemenu.gsc
+ * Script: scripts\cp_mp\purchasemenu.gsc
 ***********************************************/
 
 #using scripts\common\callbacks;

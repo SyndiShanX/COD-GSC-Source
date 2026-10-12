@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\plea_for_help.gsc
+ * Script: scripts\mp\plea_for_help.gsc
 ***********************************************/
 
 #using script_1174abedbefe9ada;

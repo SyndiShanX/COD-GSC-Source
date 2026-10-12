@@ -1,7 +1,9 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\smoke_bomb.gsc
-**************************************************/
+ * Script: scripts\sp\equipment\smoke_bomb.gsc
+***********************************************/
+
+
 
 #using scripts\anim\face;
 #using scripts\common\utility;

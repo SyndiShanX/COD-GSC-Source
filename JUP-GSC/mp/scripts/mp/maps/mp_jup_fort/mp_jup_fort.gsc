@@ -1,7 +1,7 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_fort\mp_jup_fort.gsc
-**********************************************************/
+ * Script: scripts\mp\maps\mp_jup_fort\mp_jup_fort.gsc
+*******************************************************/
 
 #using scripts\common\callbacks;
 #using scripts\cp_mp\utility\game_utility;

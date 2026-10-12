@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\hud_popup.gsc
+ * Script: scripts\mp\hud_popup.gsc
 ***********************************************/
 
 #namespace hud_popup;

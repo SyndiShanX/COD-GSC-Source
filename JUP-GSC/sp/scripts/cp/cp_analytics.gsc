@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\cp_analytics.gsc
+ * Script: scripts\cp\cp_analytics.gsc
 ***********************************************/
+
+
 
 #using script_3f8889c16399185c;
 #using script_4a6760982b403bad;

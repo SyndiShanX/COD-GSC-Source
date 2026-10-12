@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\anim\flashed.gsc
+ * Script: scripts\anim\flashed.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\combat_utility;
 #using scripts\anim\face;

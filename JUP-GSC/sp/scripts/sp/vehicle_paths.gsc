@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\vehicle_paths.gsc
+ * Script: scripts\sp\vehicle_paths.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\vehicle_aianim;

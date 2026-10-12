@@ -1,7 +1,9 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\engine\sp\utility_code.gsc
-*************************************************/
+ * Script: scripts\engine\sp\utility_code.gsc
+***********************************************/
+
+
 
 #using scripts\engine\math;
 #using scripts\engine\sp\utility;

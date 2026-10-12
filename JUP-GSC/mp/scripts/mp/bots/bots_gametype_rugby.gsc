@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\bots\bots_gametype_rugby.gsc
-******************************************************/
+ * Script: scripts\mp\bots\bots_gametype_rugby.gsc
+***************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

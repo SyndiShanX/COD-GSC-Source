@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\shellshock.gsc
+ * Script: scripts\mp\shellshock.gsc
 ***********************************************/
 
 #using scripts\common\concussion_utility;

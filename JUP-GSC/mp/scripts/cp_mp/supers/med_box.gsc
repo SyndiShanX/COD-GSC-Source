@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\supers\med_box.gsc
+ * Script: scripts\cp_mp\supers\med_box.gsc
 ***********************************************/
 
 #using script_608c50392df8c7d1;

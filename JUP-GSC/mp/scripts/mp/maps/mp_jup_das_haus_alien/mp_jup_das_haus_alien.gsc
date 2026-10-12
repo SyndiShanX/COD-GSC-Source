@@ -1,7 +1,7 @@
-/******************************************************************************
+/***************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_das_haus_alien\mp_jup_das_haus_alien.gsc
-******************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_das_haus_alien\mp_jup_das_haus_alien.gsc
+***************************************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

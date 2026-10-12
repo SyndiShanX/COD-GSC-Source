@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gamestaterestore.gsc
+ * Script: scripts\mp\gamestaterestore.gsc
 ***********************************************/
 
 #using script_548072087c9fd504;

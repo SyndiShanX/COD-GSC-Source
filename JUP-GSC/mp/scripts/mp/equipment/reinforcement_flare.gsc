@@ -1,7 +1,7 @@
-/***********************************************************
+/********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\reinforcement_flare.gsc
-***********************************************************/
+ * Script: scripts\mp\equipment\reinforcement_flare.gsc
+********************************************************/
 
 #using script_5bab271917698dc4;
 #using script_64acb6ce534155b7;

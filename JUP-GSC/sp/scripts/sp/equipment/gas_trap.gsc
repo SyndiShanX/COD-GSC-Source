@@ -1,7 +1,9 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\gas_trap.gsc
-************************************************/
+ * Script: scripts\sp\equipment\gas_trap.gsc
+***********************************************/
+
+
 
 #using scripts\anim\face;
 #using scripts\common\utility;

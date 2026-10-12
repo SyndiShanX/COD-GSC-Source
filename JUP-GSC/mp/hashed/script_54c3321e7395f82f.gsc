@@ -5,7 +5,7 @@
 
 #using script_3ab210ea917601e7;
 #using script_41387eecc35b88bf;
-#using script_46c7c73b1a7e4773;
+#using scripts\cp_mp\zombie_challenges;
 #using script_5f501fbedf0953f;
 #using script_638d701d263ee1ed;
 #using scripts\common\callbacks;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\mgturret.gsc
+ * Script: scripts\sp\mgturret.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\shared;
 #using scripts\common\utility;

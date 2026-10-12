@@ -1,7 +1,9 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\player\cursor_hint.gsc
-************************************************/
+ * Script: scripts\sp\player\cursor_hint.gsc
+***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\math;

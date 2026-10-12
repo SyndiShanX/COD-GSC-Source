@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\agent_drops.gsc
+ * Script: scripts\cp\agent_drops.gsc
 ***********************************************/
+
+
 
 #using scripts\cp\pickups;
 #using scripts\cp\utility;

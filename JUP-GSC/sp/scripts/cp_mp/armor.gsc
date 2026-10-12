@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\armor.gsc
+ * Script: scripts\cp_mp\armor.gsc
 ***********************************************/
+
+
 
 #using script_16ea1b94f0f381b3;
 #using script_4a6760982b403bad;

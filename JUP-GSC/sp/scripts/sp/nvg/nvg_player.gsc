@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\nvg\nvg_player.gsc
+ * Script: scripts\sp\nvg\nvg_player.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\notetracks_sp;
 #using scripts\common\nvg_player;

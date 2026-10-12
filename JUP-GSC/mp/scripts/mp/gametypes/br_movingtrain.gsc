@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_movingtrain.gsc
-******************************************************/
+ * Script: scripts\mp\gametypes\br_movingtrain.gsc
+***************************************************/
 
 #using script_2573174416494cb1;
 #using script_3aacf02225ca0da5;

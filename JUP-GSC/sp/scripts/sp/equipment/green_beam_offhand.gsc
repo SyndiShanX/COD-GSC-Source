@@ -1,7 +1,9 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\green_beam_offhand.gsc
-**********************************************************/
+ * Script: scripts\sp\equipment\green_beam_offhand.gsc
+*******************************************************/
+
+
 
 #using scripts\engine\sp\utility;
 #using scripts\engine\trace;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\queue.gsc
+ * Script: scripts\common\queue.gsc
 ***********************************************/
+
+
 
 #using scripts\engine\utility;
 #namespace queue;

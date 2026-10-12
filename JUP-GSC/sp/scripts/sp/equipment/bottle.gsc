@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\bottle.gsc
+ * Script: scripts\sp\equipment\bottle.gsc
 ***********************************************/
+
+
 
 #using scripts\engine\utility;
 #using scripts\sp\equipment\offhands;

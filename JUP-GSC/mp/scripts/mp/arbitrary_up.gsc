@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\arbitrary_up.gsc
+ * Script: scripts\mp\arbitrary_up.gsc
 ***********************************************/
 
 #using scripts\cp_mp\utility\game_utility;

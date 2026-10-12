@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\hud_util.gsc
+ * Script: scripts\sp\hud_util.gsc
 ***********************************************/
+
+
 
 #using script_72ef6b9f0cf1f55a;
 #using scripts\anim\utility;

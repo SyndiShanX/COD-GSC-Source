@@ -1,7 +1,9 @@
-/********************************************************************
+/*****************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\utility\player_frame_update_aggregator.gsc
-********************************************************************/
+ * Script: scripts\cp\utility\player_frame_update_aggregator.gsc
+*****************************************************************/
+
+
 
 #using scripts\cp\utility;
 #namespace player_frame_update_aggregator;

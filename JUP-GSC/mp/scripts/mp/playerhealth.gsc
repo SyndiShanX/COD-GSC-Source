@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\playerhealth.gsc
+ * Script: scripts\mp\playerhealth.gsc
 ***********************************************/
 
 #using scripts\common\damage_effects;

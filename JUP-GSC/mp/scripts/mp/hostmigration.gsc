@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\hostmigration.gsc
+ * Script: scripts\mp\hostmigration.gsc
 ***********************************************/
 
 #using scripts\common\utility;

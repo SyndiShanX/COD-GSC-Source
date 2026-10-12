@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\killstreaks\sentry_gun.gsc
-*******************************************************/
+ * Script: scripts\cp_mp\killstreaks\sentry_gun.gsc
+****************************************************/
 
 #using script_13865ca76df87ea;
 #using script_16ea1b94f0f381b3;

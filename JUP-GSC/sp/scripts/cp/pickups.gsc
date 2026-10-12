@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\pickups.gsc
+ * Script: scripts\cp\pickups.gsc
 ***********************************************/
+
+
 
 #using script_3a8f9ace195c9da9;
 #using script_56bbc6b044d9068e;

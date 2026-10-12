@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\soldier\melee.gsc
+ * Script: scripts\asm\soldier\melee.gsc
 ***********************************************/
+
+
 
 #using script_4449008f177af837;
 #using scripts\anim\face;

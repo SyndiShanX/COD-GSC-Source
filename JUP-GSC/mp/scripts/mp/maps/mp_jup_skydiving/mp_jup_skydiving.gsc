@@ -1,7 +1,7 @@
-/********************************************************************
+/*****************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_skydiving\mp_jup_skydiving.gsc
-********************************************************************/
+ * Script: scripts\mp\maps\mp_jup_skydiving\mp_jup_skydiving.gsc
+*****************************************************************/
 
 #using script_187e2c28364e465b;
 #using script_1bf7efeac8beb6f7;

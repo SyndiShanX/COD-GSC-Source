@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\engine\math.gsc
+ * Script: scripts\engine\math.gsc
 ***********************************************/
 
 #using scripts\engine\math;

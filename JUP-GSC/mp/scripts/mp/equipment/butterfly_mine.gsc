@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\butterfly_mine.gsc
-******************************************************/
+ * Script: scripts\mp\equipment\butterfly_mine.gsc
+***************************************************/
 
 #using scripts\common\ae_utility;
 #using scripts\common\utility;

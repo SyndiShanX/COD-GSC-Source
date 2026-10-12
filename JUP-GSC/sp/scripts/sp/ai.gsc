@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\ai.gsc
+ * Script: scripts\sp\ai.gsc
 ***********************************************/
+
+
 
 #using scripts\engine\sp\utility;
 #using scripts\engine\utility;

@@ -1,7 +1,9 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\mp\battlechatter_trigs.gsc
-*************************************************/
+ * Script: scripts\mp\battlechatter_trigs.gsc
+***********************************************/
+
+
 
 #using scripts\common\bcs_location_trigs;
 #namespace battlechatter_trigs;

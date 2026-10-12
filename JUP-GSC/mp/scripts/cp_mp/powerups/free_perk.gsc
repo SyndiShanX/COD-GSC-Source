@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\powerups\free_perk.gsc
-***************************************************/
+ * Script: scripts\cp_mp\powerups\free_perk.gsc
+************************************************/
 
 #using scripts\common\devgui;
 #using scripts\common\powerups;

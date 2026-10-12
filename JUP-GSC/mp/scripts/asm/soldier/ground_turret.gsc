@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\soldier\ground_turret.gsc
-****************************************************/
+ * Script: scripts\asm\soldier\ground_turret.gsc
+*************************************************/
 
 #using scripts\asm\asm;
 #using scripts\asm\soldier\death;

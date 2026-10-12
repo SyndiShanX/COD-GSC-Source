@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\code\delete.gsc
+ * Script: scripts\code\delete.gsc
 ***********************************************/
+
+
 
 #namespace delete;
 

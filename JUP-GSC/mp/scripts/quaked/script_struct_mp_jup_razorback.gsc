@@ -1,7 +1,7 @@
-/****************************************************************
+/*************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\quaked\script_struct_mp_jup_razorback.gsc
-****************************************************************/
+ * Script: scripts\quaked\script_struct_mp_jup_razorback.gsc
+*************************************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\utility\vehicle_omnvar_utility;

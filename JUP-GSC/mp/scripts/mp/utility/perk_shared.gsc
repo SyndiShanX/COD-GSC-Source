@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\utility\perk_shared.gsc
-*************************************************/
+ * Script: scripts\mp\utility\perk_shared.gsc
+***********************************************/
 
 #namespace perk_shared;
 

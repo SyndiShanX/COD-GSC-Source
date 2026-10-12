@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\player.gsc
+ * Script: scripts\cp\player.gsc
 ***********************************************/
+
+
 
 #namespace player;
 

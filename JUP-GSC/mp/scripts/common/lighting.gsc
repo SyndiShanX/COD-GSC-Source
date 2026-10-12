@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\lighting.gsc
+ * Script: scripts\common\lighting.gsc
 ***********************************************/
 
 #using scripts\common\exploder;

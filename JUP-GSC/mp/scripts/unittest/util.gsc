@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\unittest\util.gsc
+ * Script: scripts\unittest\util.gsc
 ***********************************************/
 
 #namespace util;

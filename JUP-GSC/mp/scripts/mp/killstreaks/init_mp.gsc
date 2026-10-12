@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\killstreaks\init_mp.gsc
-*************************************************/
+ * Script: scripts\mp\killstreaks\init_mp.gsc
+***********************************************/
 
 #using script_2f5a7fde37cb4ee8;
 #using script_368c8ef99587dfe3;

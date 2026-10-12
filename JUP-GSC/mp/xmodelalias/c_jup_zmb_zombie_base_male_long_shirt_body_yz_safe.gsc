@@ -1,7 +1,7 @@
-/*********************************************************************************
+/******************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\xmodelalias\c_jup_zmb_zombie_base_male_long_shirt_body_yz_safe.gsc
-*********************************************************************************/
+ * Script: xmodelalias\c_jup_zmb_zombie_base_male_long_shirt_body_yz_safe.gsc
+******************************************************************************/
 
 #namespace c_jup_zmb_zombie_base_male_long_shirt_body_yz_safe;
 

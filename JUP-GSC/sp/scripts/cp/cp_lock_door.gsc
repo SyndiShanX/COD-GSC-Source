@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\cp_lock_door.gsc
+ * Script: scripts\cp\cp_lock_door.gsc
 ***********************************************/
+
+
 
 #using script_3a8f9ace195c9da9;
 #using scripts\common\utility;

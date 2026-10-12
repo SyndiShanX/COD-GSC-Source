@@ -1,7 +1,9 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\utility\player_utility.gsc
-*******************************************************/
+ * Script: scripts\cp_mp\utility\player_utility.gsc
+****************************************************/
+
+
 
 #using script_cbb0697de4c5728;
 #using scripts\common\utility;

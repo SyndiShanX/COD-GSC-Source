@@ -1,7 +1,7 @@
-/***************************************************************
+/************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_hydro\mp_jup_hydro_ob.gsc
-***************************************************************/
+ * Script: scripts\mp\maps\mp_jup_hydro\mp_jup_hydro_ob.gsc
+************************************************************/
 
 #using script_100adcc1cc11d2fa;
 #using script_16ea1b94f0f381b3;

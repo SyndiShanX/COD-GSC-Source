@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\war.gsc
+ * Script: scripts\mp\gametypes\war.gsc
 ***********************************************/
 
 #using script_3d2770dc09c1243;

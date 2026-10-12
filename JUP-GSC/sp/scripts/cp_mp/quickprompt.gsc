@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\quickprompt.gsc
+ * Script: scripts\cp_mp\quickprompt.gsc
 ***********************************************/
+
+
 
 #using scripts\engine\utility;
 #namespace quickprompt;

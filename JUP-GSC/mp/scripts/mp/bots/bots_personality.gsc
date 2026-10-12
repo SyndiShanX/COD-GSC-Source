@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\bots\bots_personality.gsc
-***************************************************/
+ * Script: scripts\mp\bots\bots_personality.gsc
+************************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\utility\player_utility;

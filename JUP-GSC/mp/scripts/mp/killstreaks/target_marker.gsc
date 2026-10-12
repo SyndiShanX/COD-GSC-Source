@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\killstreaks\target_marker.gsc
-*******************************************************/
+ * Script: scripts\mp\killstreaks\target_marker.gsc
+****************************************************/
 
 #using script_2d9d24f7c63ac143;
 #using scripts\common\utility;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\dev.gsc
+ * Script: scripts\mp\dev.gsc
 ***********************************************/
 
 #using script_15cba36f180ab171;

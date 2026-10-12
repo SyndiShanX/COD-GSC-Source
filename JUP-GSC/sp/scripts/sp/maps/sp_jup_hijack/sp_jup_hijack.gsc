@@ -1,7 +1,9 @@
-/**************************************************************
+/***********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\maps\sp_jup_hijack\sp_jup_hijack.gsc
-**************************************************************/
+ * Script: scripts\sp\maps\sp_jup_hijack\sp_jup_hijack.gsc
+***********************************************************/
+
+
 
 #using script_1098b2fcad86e2ff;
 #using script_155dfa0cc34a5062;

@@ -1,7 +1,7 @@
-/*****************************************************************************
+/**************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_wasteland\mp_jup_wasteland_lighting.gsc
-*****************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_wasteland\mp_jup_wasteland_lighting.gsc
+**************************************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\math;

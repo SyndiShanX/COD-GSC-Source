@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\training_course.gsc
-*******************************************************/
+ * Script: scripts\mp\gametypes\training_course.gsc
+****************************************************/
 
 #using scripts\common\create_script_utility;
 #using scripts\common\damage_effects;

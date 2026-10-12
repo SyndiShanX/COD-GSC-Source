@@ -1,7 +1,9 @@
-/*****************************************************
+/**************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\throwingknife.gsc
-*****************************************************/
+ * Script: scripts\sp\equipment\throwingknife.gsc
+**************************************************/
+
+
 
 #using scripts\engine\sp\utility;
 #using scripts\engine\utility;

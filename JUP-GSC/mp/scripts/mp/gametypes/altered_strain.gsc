@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\altered_strain.gsc
-******************************************************/
+ * Script: scripts\mp\gametypes\altered_strain.gsc
+***************************************************/
 
 #using scripts\common\callbacks;
 #using scripts\common\utility;

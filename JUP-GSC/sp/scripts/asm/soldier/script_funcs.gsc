@@ -1,7 +1,9 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\soldier\script_funcs.gsc
-***************************************************/
+ * Script: scripts\asm\soldier\script_funcs.gsc
+************************************************/
+
+
 
 #using scripts\anim\combat_utility;
 #using scripts\anim\notetracks;

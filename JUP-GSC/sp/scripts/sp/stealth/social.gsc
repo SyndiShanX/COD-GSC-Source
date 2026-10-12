@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\stealth\social.gsc
+ * Script: scripts\sp\stealth\social.gsc
 ***********************************************/
+
+
 
 #using script_309fdce416988e98;
 #using scripts\common\utility;

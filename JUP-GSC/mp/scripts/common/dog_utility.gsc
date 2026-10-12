@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\dog_utility.gsc
+ * Script: scripts\common\dog_utility.gsc
 ***********************************************/
 
 #using scripts\anim\utility_common;

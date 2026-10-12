@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\shared\variant_asm.gsc
-*************************************************/
+ * Script: scripts\asm\shared\variant_asm.gsc
+***********************************************/
 
 #using scripts\asm\asm;
 #using scripts\engine\utility;

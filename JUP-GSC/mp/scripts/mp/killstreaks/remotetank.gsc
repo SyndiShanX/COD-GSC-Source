@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\killstreaks\remotetank.gsc
-****************************************************/
+ * Script: scripts\mp\killstreaks\remotetank.gsc
+*************************************************/
 
 #using script_13865ca76df87ea;
 #using scripts\common\callbacks;

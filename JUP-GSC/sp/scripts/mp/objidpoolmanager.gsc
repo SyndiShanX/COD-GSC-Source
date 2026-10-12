@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\mp\objidpoolmanager.gsc
+ * Script: scripts\mp\objidpoolmanager.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp_mp\weapon;

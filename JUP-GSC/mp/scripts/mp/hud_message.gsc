@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\hud_message.gsc
+ * Script: scripts\mp\hud_message.gsc
 ***********************************************/
 
 #using script_2f382e6c1908fbd4;

@@ -1,7 +1,9 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\utility\debug_utility.gsc
-******************************************************/
+ * Script: scripts\cp_mp\utility\debug_utility.gsc
+***************************************************/
+
+
 
 #namespace debug_utility;
 

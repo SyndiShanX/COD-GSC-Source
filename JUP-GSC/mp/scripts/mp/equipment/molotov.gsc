@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\molotov.gsc
+ * Script: scripts\mp\equipment\molotov.gsc
 ***********************************************/
 
 #using scripts\common\elevators;

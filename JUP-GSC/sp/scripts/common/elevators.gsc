@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\elevators.gsc
+ * Script: scripts\common\elevators.gsc
 ***********************************************/
+
+
 
 #using scripts\common\anim;
 #using scripts\common\elevators;

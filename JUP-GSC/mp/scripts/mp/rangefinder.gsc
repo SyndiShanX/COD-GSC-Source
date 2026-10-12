@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\rangefinder.gsc
+ * Script: scripts\mp\rangefinder.gsc
 ***********************************************/
 
 #using scripts\common\utility;

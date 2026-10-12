@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_vehicles.gsc
-***************************************************/
+ * Script: scripts\mp\gametypes\br_vehicles.gsc
+************************************************/
 
 #using script_439d01e25d19543b;
 #using scripts\common\utility;

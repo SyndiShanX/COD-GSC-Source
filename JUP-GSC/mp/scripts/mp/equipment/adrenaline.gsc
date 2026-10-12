@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\adrenaline.gsc
-**************************************************/
+ * Script: scripts\mp\equipment\adrenaline.gsc
+***********************************************/
 
 #using script_1174abedbefe9ada;
 #using script_74b851b7aa1ef32d;

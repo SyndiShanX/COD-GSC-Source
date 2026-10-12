@@ -1,7 +1,7 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\aitypes\zombie_abom\zombie_abom.gsc
-**********************************************************/
+ * Script: scripts\aitypes\zombie_abom\zombie_abom.gsc
+*******************************************************/
 
 #using script_1a4b23a39cb3d1af;
 #using script_38c251115537f16e;

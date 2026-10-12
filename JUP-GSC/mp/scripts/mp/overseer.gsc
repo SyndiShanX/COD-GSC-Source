@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\overseer.gsc
+ * Script: scripts\mp\overseer.gsc
 ***********************************************/
 
 #using scripts\anim\battlechatter;

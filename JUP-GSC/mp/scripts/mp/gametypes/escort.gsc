@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\escort.gsc
+ * Script: scripts\mp\gametypes\escort.gsc
 ***********************************************/
 
 #using script_16ea1b94f0f381b3;

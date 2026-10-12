@@ -1,7 +1,7 @@
-/*************************************************************************************
+/**********************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_scrapyard_alt_v2\mp_jup_scrapyard_alt_v2_fx.gsc
-*************************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_scrapyard_alt_v2\mp_jup_scrapyard_alt_v2_fx.gsc
+**********************************************************************************/
 
 #namespace mp_jup_scrapyard_alt_v2_fx;
 

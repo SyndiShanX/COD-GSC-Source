@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\stealth\group.gsc
+ * Script: scripts\stealth\group.gsc
 ***********************************************/
+
+
 
 #using scripts\asm\asm_bb;
 #using scripts\common\utility;

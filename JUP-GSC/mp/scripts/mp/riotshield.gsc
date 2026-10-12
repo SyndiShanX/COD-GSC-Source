@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\riotshield.gsc
+ * Script: scripts\mp\riotshield.gsc
 ***********************************************/
 
 #using scripts\cp_mp\utility\weapon_utility;

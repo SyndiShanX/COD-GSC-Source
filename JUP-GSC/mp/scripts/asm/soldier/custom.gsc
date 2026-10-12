@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\soldier\custom.gsc
+ * Script: scripts\asm\soldier\custom.gsc
 ***********************************************/
 
 #using scripts\asm\asm;

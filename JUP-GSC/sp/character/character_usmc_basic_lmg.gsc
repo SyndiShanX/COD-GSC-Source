@@ -1,7 +1,9 @@
-/*****************************************************
+/**************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\character\character_usmc_basic_lmg.gsc
-*****************************************************/
+ * Script: character\character_usmc_basic_lmg.gsc
+**************************************************/
+
+
 
 #using scripts\code\character;
 #using scripts\common\utility;

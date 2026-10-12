@@ -15,7 +15,7 @@
 #using script_3f9c618c4c35ed2;
 #using script_41387eecc35b88bf;
 #using script_443d99fe707f1d9f;
-#using script_46c7c73b1a7e4773;
+#using scripts\cp_mp\zombie_challenges;
 #using script_485622d93fa7e4cf;
 #using script_4e6e58ab5d96c2b0;
 #using script_4fa7e9e11630166c;

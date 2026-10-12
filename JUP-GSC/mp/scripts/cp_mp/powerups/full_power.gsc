@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\powerups\full_power.gsc
-****************************************************/
+ * Script: scripts\cp_mp\powerups\full_power.gsc
+*************************************************/
 
 #using scripts\common\callbacks;
 #using scripts\common\devgui;

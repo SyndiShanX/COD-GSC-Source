@@ -1,7 +1,9 @@
-/********************************************************************
+/*****************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\character\c_jup_sp_enemy_pmc_undercover_civ_konni.gsc
-********************************************************************/
+ * Script: character\c_jup_sp_enemy_pmc_undercover_civ_konni.gsc
+*****************************************************************/
+
+
 
 #using scripts\common\utility;
 #namespace c_jup_sp_enemy_pmc_undercover_civ_konni;

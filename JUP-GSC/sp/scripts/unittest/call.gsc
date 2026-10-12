@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\unittest\call.gsc
+ * Script: scripts\unittest\call.gsc
 ***********************************************/
+
+
 
 #using scripts\unittest\util;
 #namespace unittest_call;

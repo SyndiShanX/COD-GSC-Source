@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\idles.gsc
+ * Script: scripts\sp\idles.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\utility;
 #using scripts\asm\asm;

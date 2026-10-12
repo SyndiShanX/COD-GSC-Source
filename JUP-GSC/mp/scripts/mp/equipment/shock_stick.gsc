@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\shock_stick.gsc
-***************************************************/
+ * Script: scripts\mp\equipment\shock_stick.gsc
+************************************************/
 
 #using script_16ea1b94f0f381b3;
 #using script_74b851b7aa1ef32d;

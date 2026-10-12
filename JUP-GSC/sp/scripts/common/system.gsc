@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\system.gsc
+ * Script: scripts\common\system.gsc
 ***********************************************/
+
+
 
 #using scripts\engine\utility;
 #namespace system;

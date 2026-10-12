@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\heads_usmc_male.gsc
+ * Script: xmodelalias\heads_usmc_male.gsc
 ***********************************************/
+
+
 
 #namespace heads_usmc_male;
 

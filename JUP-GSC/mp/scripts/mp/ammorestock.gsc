@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\ammorestock.gsc
+ * Script: scripts\mp\ammorestock.gsc
 ***********************************************/
 
 #using scripts\cp_mp\damagefeedback;

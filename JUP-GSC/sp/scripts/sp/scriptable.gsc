@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\scriptable.gsc
+ * Script: scripts\sp\scriptable.gsc
 ***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\scriptable;

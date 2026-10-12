@@ -1,7 +1,9 @@
-/**********************************************************************************
+/*******************************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\c_jup_civilian_london_female_body_02_skintone_light.gsc
-**********************************************************************************/
+ * Script: xmodelalias\c_jup_civilian_london_female_body_02_skintone_light.gsc
+*******************************************************************************/
+
+
 
 #namespace c_jup_civilian_london_female_body_02_skintone_light;
 

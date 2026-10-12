@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\agent_damage.gsc
+ * Script: scripts\cp\agent_damage.gsc
 ***********************************************/
+
+
 
 #using script_17ca3af80f14ce7e;
 #using script_24fbedba9a7a1ef4;

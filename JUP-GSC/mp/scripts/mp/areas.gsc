@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\areas.gsc
+ * Script: scripts\mp\areas.gsc
 ***********************************************/
 
 #using scripts\common\utility;

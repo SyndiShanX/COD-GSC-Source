@@ -1,7 +1,7 @@
-/****************************************************************
+/*************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\aitypes\zombie_mangler\zombie_mangler.gsc
-****************************************************************/
+ * Script: scripts\aitypes\zombie_mangler\zombie_mangler.gsc
+*************************************************************/
 
 #using script_2b848668600efa30;
 #using script_33781ab60ef13663;

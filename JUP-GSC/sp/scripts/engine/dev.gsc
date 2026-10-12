@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\engine\dev.gsc
+ * Script: scripts\engine\dev.gsc
 ***********************************************/
+
+
 
 #using scripts\engine\utility;
 #namespace dev;

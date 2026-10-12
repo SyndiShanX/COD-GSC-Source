@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\killstreaks\emp.gsc
+ * Script: scripts\killstreaks\emp.gsc
 ***********************************************/
 
 #using scripts\common\callbacks;

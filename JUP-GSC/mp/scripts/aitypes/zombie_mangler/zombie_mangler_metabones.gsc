@@ -1,7 +1,7 @@
-/**************************************************************************
+/***********************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\aitypes\zombie_mangler\zombie_mangler_metabones.gsc
-**************************************************************************/
+ * Script: scripts\aitypes\zombie_mangler\zombie_mangler_metabones.gsc
+***********************************************************************/
 
 #using script_16ea1b94f0f381b3;
 #using script_35ccbf5e9962bcaa;

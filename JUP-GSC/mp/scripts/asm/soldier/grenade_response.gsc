@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\soldier\grenade_response.gsc
-*******************************************************/
+ * Script: scripts\asm\soldier\grenade_response.gsc
+****************************************************/
 
 #using scripts\anim\shared;
 #using scripts\asm\asm;

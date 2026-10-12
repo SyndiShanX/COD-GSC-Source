@@ -1,7 +1,9 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\heads_london_police.gsc
-**************************************************/
+ * Script: xmodelalias\heads_london_police.gsc
+***********************************************/
+
+
 
 #namespace heads_london_police;
 

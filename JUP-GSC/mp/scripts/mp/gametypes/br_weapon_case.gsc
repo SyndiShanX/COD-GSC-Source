@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_weapon_case.gsc
-******************************************************/
+ * Script: scripts\mp\gametypes\br_weapon_case.gsc
+***************************************************/
 
 #using script_3aacf02225ca0da5;
 #using scripts\common\callbacks;

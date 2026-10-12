@@ -1,7 +1,9 @@
-/********************************************************
+/*****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\utility\reinforcement_util.gsc
-********************************************************/
+ * Script: scripts\cp\utility\reinforcement_util.gsc
+*****************************************************/
+
+
 
 #using script_102d83a437e2b29f;
 #using script_3a8f9ace195c9da9;

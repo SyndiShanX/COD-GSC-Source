@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\ai_lookat.gsc
+ * Script: scripts\common\ai_lookat.gsc
 ***********************************************/
 
 #using scripts\common\utility;

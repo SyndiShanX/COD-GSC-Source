@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\playerstats.gsc
+ * Script: scripts\mp\playerstats.gsc
 ***********************************************/
 
 #using scripts\common\utility;

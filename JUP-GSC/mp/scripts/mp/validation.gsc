@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\validation.gsc
+ * Script: scripts\mp\validation.gsc
 ***********************************************/
 
 #using script_5c80e17482acb972;

@@ -1,7 +1,9 @@
-/***************************************************************
+/************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\character\c_jup_sp_enemy_pmc_grunt_01_winter.gsc
-***************************************************************/
+ * Script: character\c_jup_sp_enemy_pmc_grunt_01_winter.gsc
+************************************************************/
+
+
 
 #using scripts\common\utility;
 #namespace c_jup_sp_enemy_pmc_grunt_01_winter;

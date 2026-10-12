@@ -1,7 +1,9 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\equipment\hb_sensor.gsc
-****************************************************/
+ * Script: scripts\cp_mp\equipment\hb_sensor.gsc
+*************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\cp_mp\equipment;

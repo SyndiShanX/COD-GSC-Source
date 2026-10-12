@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\bots\bots.gsc
+ * Script: scripts\mp\bots\bots.gsc
 ***********************************************/
 
 #using script_3bdadfff7554ceba;

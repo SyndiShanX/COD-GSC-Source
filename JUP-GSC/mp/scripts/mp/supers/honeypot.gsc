@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\supers\honeypot.gsc
+ * Script: scripts\mp\supers\honeypot.gsc
 ***********************************************/
 
 #using scripts\common\callbacks;

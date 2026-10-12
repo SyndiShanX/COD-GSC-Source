@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\vehicles\light_tank_mp.gsc
-****************************************************/
+ * Script: scripts\mp\vehicles\light_tank_mp.gsc
+*************************************************/
 
 #using scripts\common\utility;
 #using scripts\common\values;

@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\engine\scriptable_door.gsc
-*************************************************/
+ * Script: scripts\engine\scriptable_door.gsc
+***********************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

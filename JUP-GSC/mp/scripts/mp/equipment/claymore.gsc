@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\claymore.gsc
-************************************************/
+ * Script: scripts\mp\equipment\claymore.gsc
+***********************************************/
 
 #using scripts\common\elevators;
 #using scripts\common\utility;

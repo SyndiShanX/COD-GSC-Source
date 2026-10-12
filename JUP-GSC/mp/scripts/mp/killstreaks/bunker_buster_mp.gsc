@@ -1,7 +1,7 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\killstreaks\bunker_buster_mp.gsc
-**********************************************************/
+ * Script: scripts\mp\killstreaks\bunker_buster_mp.gsc
+*******************************************************/
 
 #using script_16ea1b94f0f381b3;
 #using scripts\common\callbacks;

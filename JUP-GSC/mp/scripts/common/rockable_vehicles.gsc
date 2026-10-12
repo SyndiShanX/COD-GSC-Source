@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\rockable_vehicles.gsc
-***************************************************/
+ * Script: scripts\common\rockable_vehicles.gsc
+************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

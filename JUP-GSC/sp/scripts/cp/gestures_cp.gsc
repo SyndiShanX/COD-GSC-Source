@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\gestures_cp.gsc
+ * Script: scripts\cp\gestures_cp.gsc
 ***********************************************/
+
+
 
 #using scripts\common\notetrack;
 #using scripts\common\utility;

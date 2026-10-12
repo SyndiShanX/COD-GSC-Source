@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\whizby.gsc
+ * Script: scripts\common\whizby.gsc
 ***********************************************/
+
+
 
 #using scripts\common\values;
 #using scripts\engine\math;

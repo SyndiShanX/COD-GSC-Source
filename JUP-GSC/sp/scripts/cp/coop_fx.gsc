@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\coop_fx.gsc
+ * Script: scripts\cp\coop_fx.gsc
 ***********************************************/
+
+
 
 #namespace coop_fx;
 

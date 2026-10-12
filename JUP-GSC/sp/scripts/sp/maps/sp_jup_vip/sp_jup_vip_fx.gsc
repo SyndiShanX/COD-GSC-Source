@@ -1,7 +1,9 @@
-/***********************************************************
+/********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\maps\sp_jup_vip\sp_jup_vip_fx.gsc
-***********************************************************/
+ * Script: scripts\sp\maps\sp_jup_vip\sp_jup_vip_fx.gsc
+********************************************************/
+
+
 
 #using script_51f0a664afd44022;
 #using script_5e60754c97311cd;

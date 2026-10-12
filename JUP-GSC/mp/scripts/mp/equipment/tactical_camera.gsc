@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\tactical_camera.gsc
-*******************************************************/
+ * Script: scripts\mp\equipment\tactical_camera.gsc
+****************************************************/
 
 #using script_1311c5c284dd1537;
 #using script_2d9d24f7c63ac143;

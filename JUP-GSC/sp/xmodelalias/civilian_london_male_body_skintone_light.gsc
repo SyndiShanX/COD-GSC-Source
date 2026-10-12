@@ -1,7 +1,9 @@
-/***********************************************************************
+/********************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\civilian_london_male_body_skintone_light.gsc
-***********************************************************************/
+ * Script: xmodelalias\civilian_london_male_body_skintone_light.gsc
+********************************************************************/
+
+
 
 #namespace civilian_london_male_body_skintone_light;
 

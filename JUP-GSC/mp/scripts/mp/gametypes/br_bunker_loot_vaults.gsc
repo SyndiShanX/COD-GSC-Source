@@ -1,7 +1,7 @@
-/*************************************************************
+/**********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_bunker_loot_vaults.gsc
-*************************************************************/
+ * Script: scripts\mp\gametypes\br_bunker_loot_vaults.gsc
+**********************************************************/
 
 #using scripts\engine\scriptable;
 #using scripts\engine\utility;

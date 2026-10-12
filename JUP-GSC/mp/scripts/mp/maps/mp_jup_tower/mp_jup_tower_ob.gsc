@@ -1,7 +1,7 @@
-/***************************************************************
+/************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_tower\mp_jup_tower_ob.gsc
-***************************************************************/
+ * Script: scripts\mp\maps\mp_jup_tower\mp_jup_tower_ob.gsc
+************************************************************/
 
 #using script_100adcc1cc11d2fa;
 #using script_16a7cb806f08d342;

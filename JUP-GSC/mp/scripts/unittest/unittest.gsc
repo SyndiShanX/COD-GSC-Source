@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\unittest\unittest.gsc
+ * Script: scripts\unittest\unittest.gsc
 ***********************************************/
 
 #using script_13645532f846e433;

@@ -1,7 +1,9 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\interaction_manager.gsc
-*************************************************/
+ * Script: scripts\sp\interaction_manager.gsc
+***********************************************/
+
+
 
 #using script_4dac3680f88a01c3;
 #using scripts\common\anim;

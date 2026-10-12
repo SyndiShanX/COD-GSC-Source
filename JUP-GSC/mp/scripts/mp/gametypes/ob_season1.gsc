@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\ob_season1.gsc
-**************************************************/
+ * Script: scripts\mp\gametypes\ob_season1.gsc
+***********************************************/
 
 #using script_4ee9ddbac96043d;
 #using script_4f77311cb9cdbcd8;

@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\decon_station.gsc
-*****************************************************/
+ * Script: scripts\mp\equipment\decon_station.gsc
+**************************************************/
 
 #using script_2d9d24f7c63ac143;
 #using scripts\common\ae_utility;

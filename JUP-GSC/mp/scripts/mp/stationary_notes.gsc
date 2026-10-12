@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\stationary_notes.gsc
+ * Script: scripts\mp\stationary_notes.gsc
 ***********************************************/
 
 #using scripts\common\debug;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\asm_bb.gsc
+ * Script: scripts\asm\asm_bb.gsc
 ***********************************************/
+
+
 
 #using scripts\asm\asm;
 #using scripts\asm\shared\utility;

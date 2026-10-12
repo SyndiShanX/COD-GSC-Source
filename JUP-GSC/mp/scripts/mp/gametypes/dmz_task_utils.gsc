@@ -1,7 +1,7 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\dmz_task_utils.gsc
-******************************************************/
+ * Script: scripts\mp\gametypes\dmz_task_utils.gsc
+***************************************************/
 
 #using script_64acb6ce534155b7;
 #using script_b7a9ce0a2282b79;

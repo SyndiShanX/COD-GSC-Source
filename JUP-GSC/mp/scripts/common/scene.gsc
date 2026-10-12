@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\scene.gsc
+ * Script: scripts\common\scene.gsc
 ***********************************************/
 
 #using script_16ea1b94f0f381b3;

@@ -1,7 +1,9 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\utility\join_team_aggregator.gsc
-**********************************************************/
+ * Script: scripts\cp\utility\join_team_aggregator.gsc
+*******************************************************/
+
+
 
 #namespace join_team_aggregator;
 

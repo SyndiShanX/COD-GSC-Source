@@ -1,7 +1,7 @@
-/************************************************************
+/*********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\killstreaks\chopper_support_mp.gsc
-************************************************************/
+ * Script: scripts\mp\killstreaks\chopper_support_mp.gsc
+*********************************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\killstreaks\chopper_support;

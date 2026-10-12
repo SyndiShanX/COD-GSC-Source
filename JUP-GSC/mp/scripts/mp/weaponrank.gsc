@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\weaponrank.gsc
+ * Script: scripts\mp\weaponrank.gsc
 ***********************************************/
 
 #using script_3f8889c16399185c;

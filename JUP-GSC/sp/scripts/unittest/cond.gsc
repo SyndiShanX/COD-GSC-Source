@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\unittest\cond.gsc
+ * Script: scripts\unittest\cond.gsc
 ***********************************************/
+
+
 
 #using scripts\unittest\util;
 #namespace unittest_cond;

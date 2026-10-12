@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\featurebans.gsc
+ * Script: scripts\mp\featurebans.gsc
 ***********************************************/
 
 #using script_44b8991c2b01716a;

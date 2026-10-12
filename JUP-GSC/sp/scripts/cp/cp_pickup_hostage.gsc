@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\cp_pickup_hostage.gsc
+ * Script: scripts\cp\cp_pickup_hostage.gsc
 ***********************************************/
+
+
 
 #using script_cbb0697de4c5728;
 #using scripts\common\anim;

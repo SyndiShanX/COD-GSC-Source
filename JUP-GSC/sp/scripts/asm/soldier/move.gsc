@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\soldier\move.gsc
+ * Script: scripts\asm\soldier\move.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\utility_common;
 #using scripts\anim\weaponlist;

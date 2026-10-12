@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\dialogue_wheel.gsc
+ * Script: scripts\sp\dialogue_wheel.gsc
 ***********************************************/
+
+
 
 #using scripts\common\values;
 #using scripts\engine\sp\utility;

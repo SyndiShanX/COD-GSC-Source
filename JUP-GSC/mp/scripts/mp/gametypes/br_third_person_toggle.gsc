@@ -1,7 +1,7 @@
-/**************************************************************
+/***********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_third_person_toggle.gsc
-**************************************************************/
+ * Script: scripts\mp\gametypes\br_third_person_toggle.gsc
+***********************************************************/
 
 #using scripts\common\ui;
 #using scripts\common\values;

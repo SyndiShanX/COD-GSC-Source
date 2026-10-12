@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\supers\super_laser_charge.gsc
-*******************************************************/
+ * Script: scripts\mp\supers\super_laser_charge.gsc
+****************************************************/
 
 #using scripts\common\utility;
 #using scripts\common\values;

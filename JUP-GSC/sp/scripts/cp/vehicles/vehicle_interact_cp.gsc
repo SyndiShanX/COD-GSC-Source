@@ -1,7 +1,9 @@
-/**********************************************************
+/*******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\vehicles\vehicle_interact_cp.gsc
-**********************************************************/
+ * Script: scripts\cp\vehicles\vehicle_interact_cp.gsc
+*******************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

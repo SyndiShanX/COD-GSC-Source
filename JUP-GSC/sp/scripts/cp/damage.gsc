@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\damage.gsc
+ * Script: scripts\cp\damage.gsc
 ***********************************************/
+
+
 
 #using scripts\common\damage_effects;
 #using scripts\common\fx;

@@ -1,7 +1,9 @@
-/*****************************************************
+/**************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\bodies_civ_western_boy.gsc
-*****************************************************/
+ * Script: xmodelalias\bodies_civ_western_boy.gsc
+**************************************************/
+
+
 
 #namespace bodies_civ_western_boy;
 

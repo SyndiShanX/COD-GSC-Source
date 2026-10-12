@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\agents\agents.gsc
+ * Script: scripts\cp\agents\agents.gsc
 ***********************************************/
+
+
 
 #using scripts\mp\agents\agent_common;
 #namespace agents;

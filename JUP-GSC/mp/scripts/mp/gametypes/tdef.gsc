@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\tdef.gsc
+ * Script: scripts\mp\gametypes\tdef.gsc
 ***********************************************/
 
 #using script_4a6760982b403bad;

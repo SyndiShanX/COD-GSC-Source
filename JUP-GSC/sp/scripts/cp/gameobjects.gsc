@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\gameobjects.gsc
+ * Script: scripts\cp\gameobjects.gsc
 ***********************************************/
+
+
 
 #using script_4a6760982b403bad;
 #using scripts\common\utility;

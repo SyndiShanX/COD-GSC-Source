@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\thermite.gsc
-************************************************/
+ * Script: scripts\mp\equipment\thermite.gsc
+***********************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\utility\damage_utility;

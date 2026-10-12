@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\string.gsc
+ * Script: scripts\common\string.gsc
 ***********************************************/
+
+
 
 #namespace string;
 

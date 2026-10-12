@@ -1,7 +1,9 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\agents\agent_utils.gsc
-***************************************************/
+ * Script: scripts\cp_mp\agents\agent_utils.gsc
+************************************************/
+
+
 
 #using script_24fbedba9a7a1ef4;
 #using scripts\common\ai;

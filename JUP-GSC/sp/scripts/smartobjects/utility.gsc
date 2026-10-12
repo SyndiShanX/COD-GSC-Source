@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\smartobjects\utility.gsc
+ * Script: scripts\smartobjects\utility.gsc
 ***********************************************/
+
+
 
 #using scripts\asm\asm_bb;
 #namespace utility;

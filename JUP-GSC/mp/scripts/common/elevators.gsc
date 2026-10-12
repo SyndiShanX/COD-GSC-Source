@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\elevators.gsc
+ * Script: scripts\common\elevators.gsc
 ***********************************************/
 
 #using scripts\common\anim;
@@ -489,7 +489,7 @@ function function_12e75ac514f84d03() {
   thread function_580e82173ae3940c();
 }
 
-function elevatorextbuttonpressed(instance, part, state, player, bautouse, usestring) {
+function elevatorextbuttonPressed(instance, part, state, player, bautouse, usestring) {
   if(isDefined(instance.floornum)) {
     if(instance.elevator.currentfloor == instance.floornum) {
       instance.elevator.state = "doors_open";

@@ -1,7 +1,9 @@
-/*********************************************************
+/******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\smartobjects\stealth_look_down.gsc
-*********************************************************/
+ * Script: scripts\smartobjects\stealth_look_down.gsc
+******************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

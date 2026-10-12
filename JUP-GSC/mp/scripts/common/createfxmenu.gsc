@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\createfxmenu.gsc
+ * Script: scripts\common\createfxmenu.gsc
 ***********************************************/
 
 #using scripts\common\createfx;

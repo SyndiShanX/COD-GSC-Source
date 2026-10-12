@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\fire_traps.gsc
+ * Script: scripts\mp\fire_traps.gsc
 ***********************************************/
 
 #using scripts\cp_mp\utility\game_utility;

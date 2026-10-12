@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\utility\equipment.gsc
+ * Script: scripts\mp\utility\equipment.gsc
 ***********************************************/
 
 #using scripts\common\utility;

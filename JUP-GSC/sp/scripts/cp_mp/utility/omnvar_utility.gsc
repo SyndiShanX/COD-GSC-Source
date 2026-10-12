@@ -1,7 +1,9 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\utility\omnvar_utility.gsc
-*******************************************************/
+ * Script: scripts\cp_mp\utility\omnvar_utility.gsc
+****************************************************/
+
+
 
 #namespace omnvar_utility;
 

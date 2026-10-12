@@ -1,7 +1,9 @@
-/********************************************************
+/*****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\heads_civilian_asm_male_3.gsc
-********************************************************/
+ * Script: xmodelalias\heads_civilian_asm_male_3.gsc
+*****************************************************/
+
+
 
 #namespace heads_civilian_asm_male_3;
 

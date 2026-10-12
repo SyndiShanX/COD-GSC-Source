@@ -1,10 +1,10 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\equipment\tracker_mine.gsc
-*******************************************************/
+ * Script: scripts\cp_mp\equipment\tracker_mine.gsc
+****************************************************/
 
 #using script_16ea1b94f0f381b3;
-#using script_3e145703891d9d8d;
+#using scripts\cp_mp\equipment\tracker_shared;
 #using script_608c50392df8c7d1;
 #using scripts\common\ae_utility;
 #using scripts\common\callbacks;

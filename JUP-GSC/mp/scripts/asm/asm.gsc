@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\asm.gsc
+ * Script: scripts\asm\asm.gsc
 ***********************************************/
 
 #using scripts\anim\animselector;

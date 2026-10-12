@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\wm_ui.gsc
+ * Script: scripts\mp\gametypes\wm_ui.gsc
 ***********************************************/
 
 #using script_3fddda92c991755e;

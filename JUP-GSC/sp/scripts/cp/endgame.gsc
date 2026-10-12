@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\endgame.gsc
+ * Script: scripts\cp\endgame.gsc
 ***********************************************/
+
+
 
 #using script_3f8889c16399185c;
 #using script_48324b060b129b7b;

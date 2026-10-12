@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\spawnscoring.gsc
+ * Script: scripts\mp\spawnscoring.gsc
 ***********************************************/
 
 #using scripts\common\utility;

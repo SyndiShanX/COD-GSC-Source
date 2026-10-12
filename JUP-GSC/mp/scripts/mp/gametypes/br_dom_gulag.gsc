@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_dom_gulag.gsc
-****************************************************/
+ * Script: scripts\mp\gametypes\br_dom_gulag.gsc
+*************************************************/
 
 #using script_3583ff375ab3a91e;
 #using script_5bc60484d17fa95c;

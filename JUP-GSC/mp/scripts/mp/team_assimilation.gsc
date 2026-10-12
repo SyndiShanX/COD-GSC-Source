@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\team_assimilation.gsc
+ * Script: scripts\mp\team_assimilation.gsc
 ***********************************************/
 
 #using script_2342b8aad723994e;

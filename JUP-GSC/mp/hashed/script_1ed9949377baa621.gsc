@@ -4,7 +4,7 @@
 *************************************************/
 
 #using script_118c3165d7948d8b;
-#using script_3a13b8032b62a5e6;
+#using scripts\mp\objective_marker_bundle_helper;
 #using script_3e34d236a84cfd96;
 #using script_42f1b4ddcbbf98b4;
 #using script_485622d93fa7e4cf;

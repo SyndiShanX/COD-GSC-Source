@@ -1,7 +1,9 @@
-/******************************************************
+/***************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\powers\cp_tactical_cover.gsc
-******************************************************/
+ * Script: scripts\cp\powers\cp_tactical_cover.gsc
+***************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\values;

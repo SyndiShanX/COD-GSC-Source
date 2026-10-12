@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\vehicle_treadfx.gsc
-*************************************************/
+ * Script: scripts\common\vehicle_treadfx.gsc
+***********************************************/
 
 #using scripts\common\utility;
 #using scripts\common\vehicle_build;

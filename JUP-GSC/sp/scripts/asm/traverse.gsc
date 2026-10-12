@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\asm\traverse.gsc
+ * Script: scripts\asm\traverse.gsc
 ***********************************************/
+
+
 
 #using scripts\anim\animselector;
 #using scripts\asm\asm;

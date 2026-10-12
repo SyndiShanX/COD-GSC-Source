@@ -1,7 +1,9 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\killstreaks\gunship.gsc
-****************************************************/
+ * Script: scripts\cp_mp\killstreaks\gunship.gsc
+*************************************************/
+
+
 
 #using scripts\common\anim;
 #using scripts\common\callbacks;

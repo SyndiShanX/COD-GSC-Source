@@ -1,7 +1,9 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\mp\utility\infilexfil.gsc
-************************************************/
+ * Script: scripts\mp\utility\infilexfil.gsc
+***********************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\common\values;

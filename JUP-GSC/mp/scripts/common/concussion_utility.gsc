@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\concussion_utility.gsc
-****************************************************/
+ * Script: scripts\common\concussion_utility.gsc
+*************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

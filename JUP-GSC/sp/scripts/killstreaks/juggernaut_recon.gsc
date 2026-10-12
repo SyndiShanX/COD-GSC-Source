@@ -1,7 +1,9 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\killstreaks\juggernaut_recon.gsc
-*******************************************************/
+ * Script: scripts\killstreaks\juggernaut_recon.gsc
+****************************************************/
+
+
 
 #using script_13865ca76df87ea;
 #using scripts\common\callbacks;

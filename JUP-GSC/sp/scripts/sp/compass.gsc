@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\compass.gsc
+ * Script: scripts\sp\compass.gsc
 ***********************************************/
+
+
 
 #namespace compass;
 

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\potg_events.gsc
+ * Script: scripts\mp\potg_events.gsc
 ***********************************************/
 
 #using scripts\common\utility;

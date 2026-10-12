@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\stealth\debug.gsc
+ * Script: scripts\stealth\debug.gsc
 ***********************************************/
 
 #using scripts\common\utility;

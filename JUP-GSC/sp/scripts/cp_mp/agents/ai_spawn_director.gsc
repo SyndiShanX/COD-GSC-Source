@@ -1,7 +1,9 @@
-/*********************************************************
+/******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\agents\ai_spawn_director.gsc
-*********************************************************/
+ * Script: scripts\cp_mp\agents\ai_spawn_director.gsc
+******************************************************/
+
+
 
 #using script_2d05e472a90adb1d;
 #using script_30fbbeb9a6251e9a;

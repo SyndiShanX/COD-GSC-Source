@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\stealth\event.gsc
+ * Script: scripts\stealth\event.gsc
 ***********************************************/
 
 #using scripts\asm\asm;

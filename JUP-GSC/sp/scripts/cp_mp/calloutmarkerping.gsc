@@ -1,7 +1,9 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp_mp\calloutmarkerping.gsc
-**************************************************/
+ * Script: scripts\cp_mp\calloutmarkerping.gsc
+***********************************************/
+
+
 
 #using scripts\common\callbacks;
 #using scripts\common\devgui;

@@ -1,7 +1,7 @@
-/**************************************************************
+/***********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_gametype_resurgence.gsc
-**************************************************************/
+ * Script: scripts\mp\gametypes\br_gametype_resurgence.gsc
+***********************************************************/
 
 #using script_128d1a71fc850b8a;
 #using script_1c47017ba325709a;

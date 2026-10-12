@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\vault_door.gsc
-**************************************************/
+ * Script: scripts\mp\gametypes\vault_door.gsc
+***********************************************/
 
 #using script_3bf3f0172d4a2247;
 #using scripts\engine\scriptable;

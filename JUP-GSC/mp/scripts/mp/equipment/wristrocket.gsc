@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\wristrocket.gsc
-***************************************************/
+ * Script: scripts\mp\equipment\wristrocket.gsc
+************************************************/
 
 #using scripts\common\utility;
 #using scripts\cp_mp\utility\weapon_utility;

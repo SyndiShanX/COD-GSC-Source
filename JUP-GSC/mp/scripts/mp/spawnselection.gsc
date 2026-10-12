@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\spawnselection.gsc
+ * Script: scripts\mp\spawnselection.gsc
 ***********************************************/
 
 #using scripts\common\ui;

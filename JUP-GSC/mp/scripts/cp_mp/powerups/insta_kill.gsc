@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\powerups\insta_kill.gsc
-****************************************************/
+ * Script: scripts\cp_mp\powerups\insta_kill.gsc
+*************************************************/
 
 #using script_16ea1b94f0f381b3;
 #using script_7edf952f8921aa6b;

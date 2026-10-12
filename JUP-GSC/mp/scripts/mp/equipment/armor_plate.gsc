@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\equipment\armor_plate.gsc
-***************************************************/
+ * Script: scripts\mp\equipment\armor_plate.gsc
+************************************************/
 
 #using scripts\common\utility;
 #using scripts\common\values;

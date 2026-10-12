@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\hud.gsc
+ * Script: scripts\sp\hud.gsc
 ***********************************************/
+
+
 
 #namespace hud;
 

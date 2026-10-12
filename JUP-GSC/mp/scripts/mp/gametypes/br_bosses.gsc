@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_bosses.gsc
-*************************************************/
+ * Script: scripts\mp\gametypes\br_bosses.gsc
+***********************************************/
 
 #using script_6172179f6bd0769e;
 #using script_744cad313ed0a87e;

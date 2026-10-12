@@ -1,7 +1,7 @@
-/*************************************************************
+/**********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\infilexfil\rappel_hackney_infil.gsc
-*************************************************************/
+ * Script: scripts\mp\infilexfil\rappel_hackney_infil.gsc
+**********************************************************/
 
 #using scripts\common\anim;
 #using scripts\common\utility;

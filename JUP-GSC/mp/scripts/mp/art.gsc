@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\art.gsc
+ * Script: scripts\mp\art.gsc
 ***********************************************/
 
 #using scripts\common\utility;

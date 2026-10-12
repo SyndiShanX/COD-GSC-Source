@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\asm\asm_bb.gsc
+ * Script: scripts\asm\asm_bb.gsc
 ***********************************************/
 
 #using scripts\asm\asm;

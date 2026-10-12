@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\bcs_location_trigs.gsc
-****************************************************/
+ * Script: scripts\common\bcs_location_trigs.gsc
+*************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

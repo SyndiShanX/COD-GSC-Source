@@ -1,7 +1,7 @@
-/***************************************************************
+/************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\utility\lui_game_event_aggregator.gsc
-***************************************************************/
+ * Script: scripts\mp\utility\lui_game_event_aggregator.gsc
+************************************************************/
 
 #using scripts\engine\utility;
 #namespace lui_game_event_aggregator;

@@ -1,7 +1,7 @@
-/************************************************************************
+/*********************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_frontend_jup_01\mp_frontend_jup_01.gsc
-************************************************************************/
+ * Script: scripts\mp\maps\mp_frontend_jup_01\mp_frontend_jup_01.gsc
+*********************************************************************/
 
 #using script_cbb0697de4c5728;
 #using scripts\common\utility;

@@ -1,7 +1,9 @@
-/*************************************************************
+/**********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\xmodelalias\civilian_syrkistan_female_head.gsc
-*************************************************************/
+ * Script: xmodelalias\civilian_syrkistan_female_head.gsc
+**********************************************************/
+
+
 
 #namespace civilian_syrkistan_female_head;
 

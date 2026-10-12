@@ -1,7 +1,9 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\cp\perks\cp_perk_utility.gsc
-***************************************************/
+ * Script: scripts\cp\perks\cp_perk_utility.gsc
+************************************************/
+
+
 
 #namespace cp_perk_utility;
 

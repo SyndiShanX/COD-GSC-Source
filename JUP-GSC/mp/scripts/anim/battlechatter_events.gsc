@@ -1,7 +1,7 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\anim\battlechatter_events.gsc
-****************************************************/
+ * Script: scripts\anim\battlechatter_events.gsc
+*************************************************/
 
 #using script_433d8f78f7e5fb;
 #using scripts\anim\battlechatter;

@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\equipment\at_mine.gsc
+ * Script: scripts\sp\equipment\at_mine.gsc
 ***********************************************/
+
+
 
 #using scripts\common\vehicle;
 #using scripts\engine\sp\utility;

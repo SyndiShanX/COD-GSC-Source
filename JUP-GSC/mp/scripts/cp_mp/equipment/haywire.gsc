@@ -1,7 +1,7 @@
-/**************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\equipment\haywire.gsc
-**************************************************/
+ * Script: scripts\cp_mp\equipment\haywire.gsc
+***********************************************/
 
 #namespace haywire;
 

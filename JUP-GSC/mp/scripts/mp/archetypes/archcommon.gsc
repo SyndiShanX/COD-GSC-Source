@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\archetypes\archcommon.gsc
-***************************************************/
+ * Script: scripts\mp\archetypes\archcommon.gsc
+************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

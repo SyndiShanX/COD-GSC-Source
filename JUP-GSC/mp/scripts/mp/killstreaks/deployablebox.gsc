@@ -1,7 +1,7 @@
-/*******************************************************
+/****************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\killstreaks\deployablebox.gsc
-*******************************************************/
+ * Script: scripts\mp\killstreaks\deployablebox.gsc
+****************************************************/
 
 #using scripts\common\callbacks;
 #using scripts\common\utility;

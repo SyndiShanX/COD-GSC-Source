@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\anim\pain.gsc
+ * Script: scripts\anim\pain.gsc
 ***********************************************/
+
+
 
 #using scripts\asm\asm_sp;
 #namespace pain;

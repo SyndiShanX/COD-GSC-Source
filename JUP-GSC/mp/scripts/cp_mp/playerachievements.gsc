@@ -1,7 +1,7 @@
-/***************************************************
+/************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\cp_mp\playerachievements.gsc
-***************************************************/
+ * Script: scripts\cp_mp\playerachievements.gsc
+************************************************/
 
 #using scripts\common\utility;
 #using scripts\engine\utility;

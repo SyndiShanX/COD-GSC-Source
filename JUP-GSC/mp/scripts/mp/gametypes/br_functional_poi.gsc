@@ -1,7 +1,7 @@
-/*********************************************************
+/******************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\br_functional_poi.gsc
-*********************************************************/
+ * Script: scripts\mp\gametypes\br_functional_poi.gsc
+******************************************************/
 
 #using script_67cc94c07ab18d3a;
 #using scripts\common\callbacks;

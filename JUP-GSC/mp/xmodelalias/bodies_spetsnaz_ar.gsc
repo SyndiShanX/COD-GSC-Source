@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\xmodelalias\bodies_spetsnaz_ar.gsc
-*************************************************/
+ * Script: xmodelalias\bodies_spetsnaz_ar.gsc
+***********************************************/
 
 #namespace bodies_spetsnaz_ar;
 

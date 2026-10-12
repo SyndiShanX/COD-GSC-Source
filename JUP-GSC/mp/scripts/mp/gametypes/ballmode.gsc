@@ -1,7 +1,7 @@
-/************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\ballmode.gsc
-************************************************/
+ * Script: scripts\mp\gametypes\ballmode.gsc
+***********************************************/
 
 #using script_1a8a97698664c7c9;
 #using script_37092055e9712f79;

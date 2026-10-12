@@ -1,7 +1,9 @@
-/****************************************************
+/*************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\common\create_cover_nodes.gsc
-****************************************************/
+ * Script: scripts\common\create_cover_nodes.gsc
+*************************************************/
+
+
 
 #using scripts\common\utility;
 #using scripts\engine\math;

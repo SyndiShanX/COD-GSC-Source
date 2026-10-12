@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\common\utility.gsc
+ * Script: scripts\common\utility.gsc
 ***********************************************/
 
 #using scripts\anim\shared;

@@ -1,7 +1,7 @@
-/*************************************************
+/***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\legendary_contracts.gsc
-*************************************************/
+ * Script: scripts\mp\legendary_contracts.gsc
+***********************************************/
 
 #using scripts\cp_mp\calloutmarkerping;
 #using scripts\cp_mp\killstreaks\airdrop;

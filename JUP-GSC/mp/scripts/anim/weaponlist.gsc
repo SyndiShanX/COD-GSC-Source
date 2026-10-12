@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\anim\weaponlist.gsc
+ * Script: scripts\anim\weaponlist.gsc
 ***********************************************/
 
 #using scripts\anim\utility_common;

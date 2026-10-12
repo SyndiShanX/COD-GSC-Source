@@ -1,7 +1,9 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: sp\scripts\sp\pausemenu.gsc
+ * Script: scripts\sp\pausemenu.gsc
 ***********************************************/
+
+
 
 #using scripts\sp\endmission;
 #namespace pausemenu;

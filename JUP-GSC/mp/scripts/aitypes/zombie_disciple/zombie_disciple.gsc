@@ -1,7 +1,7 @@
-/******************************************************************
+/***************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\aitypes\zombie_disciple\zombie_disciple.gsc
-******************************************************************/
+ * Script: scripts\aitypes\zombie_disciple\zombie_disciple.gsc
+***************************************************************/
 
 #using script_3badb8914eb5ac16;
 #using script_3e4f26df9dc4b465;

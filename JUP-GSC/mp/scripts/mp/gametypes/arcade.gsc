@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\gametypes\arcade.gsc
+ * Script: scripts\mp\gametypes\arcade.gsc
 ***********************************************/
 
 #using scripts\common\utility;

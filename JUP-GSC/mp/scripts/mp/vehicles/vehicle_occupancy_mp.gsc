@@ -1,7 +1,7 @@
-/***********************************************************
+/********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\vehicles\vehicle_occupancy_mp.gsc
-***********************************************************/
+ * Script: scripts\mp\vehicles\vehicle_occupancy_mp.gsc
+********************************************************/
 
 #using script_2d9d24f7c63ac143;
 #using script_b7a9ce0a2282b79;

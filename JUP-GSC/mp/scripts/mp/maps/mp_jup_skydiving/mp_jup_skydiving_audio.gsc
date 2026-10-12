@@ -1,7 +1,7 @@
-/**************************************************************************
+/***********************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_skydiving\mp_jup_skydiving_audio.gsc
-**************************************************************************/
+ * Script: scripts\mp\maps\mp_jup_skydiving\mp_jup_skydiving_audio.gsc
+***********************************************************************/
 
 #using scripts\engine\utility;
 #using scripts\mp\flags;

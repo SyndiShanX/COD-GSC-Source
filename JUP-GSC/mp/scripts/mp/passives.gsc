@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\passives.gsc
+ * Script: scripts\mp\passives.gsc
 ***********************************************/
 
 #using scripts\common\utility;

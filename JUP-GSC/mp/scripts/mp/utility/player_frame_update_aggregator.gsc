@@ -1,7 +1,7 @@
-/********************************************************************
+/*****************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\utility\player_frame_update_aggregator.gsc
-********************************************************************/
+ * Script: scripts\mp\utility\player_frame_update_aggregator.gsc
+*****************************************************************/
 
 #using scripts\mp\flags;
 #namespace player_frame_update_aggregator;

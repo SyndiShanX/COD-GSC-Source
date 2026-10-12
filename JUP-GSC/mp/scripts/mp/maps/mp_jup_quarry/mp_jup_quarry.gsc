@@ -1,7 +1,7 @@
-/**************************************************************
+/***********************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: mp\scripts\mp\maps\mp_jup_quarry\mp_jup_quarry.gsc
-**************************************************************/
+ * Script: scripts\mp\maps\mp_jup_quarry\mp_jup_quarry.gsc
+***********************************************************/
 
 #using script_3a2451c62aa22287;
 #using scripts\common\utility;
