@@ -15,6 +15,7 @@
 #using scripts\mp_common\gametypes\globallogic;
 #using scripts\mp_common\gametypes\round;
 #using scripts\mp_common\player\player_utils;
+
 #namespace namespace_3f3933bc;
 
 function event_handler[gametype_init] main(eventstruct) {

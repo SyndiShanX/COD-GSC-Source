@@ -6,6 +6,7 @@
 #using scripts\core_common\ai\archetype_civilian;
 #using scripts\core_common\ai\archetype_utility;
 #using scripts\core_common\ai\systems\ai_interface;
+
 #namespace civilianinterface;
 
 function registercivilianinterfaceattributes() {

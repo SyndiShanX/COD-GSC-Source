@@ -21,6 +21,7 @@
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\weapons\heatseekingmissile;
 #using scripts\weapons\weapons;
+
 #namespace napalm_strike;
 
 function init_shared(bundlename, var_b083dcd0) {

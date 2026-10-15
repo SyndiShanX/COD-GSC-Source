@@ -9,6 +9,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\cp_common\skipto;
+
 #namespace duga_fx;
 
 function private autoexec __init__system__() {

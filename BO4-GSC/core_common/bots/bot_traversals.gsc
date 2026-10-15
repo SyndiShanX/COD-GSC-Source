@@ -6,6 +6,7 @@
 #include scripts\core_common\bots\bot;
 #include scripts\core_common\bots\bot_action;
 #include scripts\core_common\bots\bot_animation;
+
 #namespace bot;
 
 callback_botentereduseredge(startnode, endnode, mantlenode, startpos, endpos, mantlepos) {

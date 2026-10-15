@@ -73,6 +73,7 @@
 #include scripts\zm_common\zm_wallbuy;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_escape;
 
 autoexec opt_in() {

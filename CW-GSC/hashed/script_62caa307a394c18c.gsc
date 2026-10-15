@@ -10,6 +10,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\zm_common\aats\zm_aat;
 #using scripts\zm_common\zm_weapons;
+
 #namespace namespace_42457a0;
 
 function function_d6863a3(inflictor, attacker, meansofdeath, weapon, aat, item) {

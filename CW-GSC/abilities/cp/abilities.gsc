@@ -10,6 +10,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\system_shared;
 #using scripts\cp_common\gametypes\loadout;
+
 #namespace abilities;
 
 function private autoexec __init__system__() {

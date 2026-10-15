@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\util_shared;
+
 #namespace events;
 
 function add_timed_event(seconds, notify_string, client_notify_string) {

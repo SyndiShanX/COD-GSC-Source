@@ -10,6 +10,7 @@
 #include scripts\core_common\vehicle_death_shared;
 #include scripts\core_common\vehicle_shared;
 #include scripts\weapons\heatseekingmissile;
+
 #namespace flak_drone;
 
 init_shared() {

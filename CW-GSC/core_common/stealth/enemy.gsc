@@ -15,6 +15,7 @@
 #using scripts\core_common\stealth\utility;
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\util;
+
 #namespace enemy;
 
 function scalevolume(ent, vol) {}

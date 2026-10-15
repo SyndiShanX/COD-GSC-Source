@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace self_revive_visuals_rush;
 class cself_revive_visuals_rush: cluielem {
   var var_bf9c8c95;

@@ -4,6 +4,7 @@
 *****************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace player_insertion_choice;
 class cplayer_insertion_choice: cluielem {
   function open(localclientnum) {

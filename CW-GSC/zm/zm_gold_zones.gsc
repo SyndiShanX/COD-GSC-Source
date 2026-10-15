@@ -14,6 +14,7 @@
 #using scripts\zm_common\zm_hud;
 #using scripts\zm_common\zm_sq;
 #using scripts\zm_common\zm_zonemgr;
+
 #namespace zm_gold_zones;
 
 function autoexec init() {

@@ -7,6 +7,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\ct_core;
 #include scripts\mp_common\gametypes\ct_ruin_tutorial;
+
 #namespace ct_ruin;
 
 event_handler[gametype_init] main(eventstruct) {

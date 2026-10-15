@@ -15,6 +15,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
 #using scripts\weapons\weapons;
+
 #namespace minigame;
 class class_9e71c1a2 {
   var m_s_bundle;

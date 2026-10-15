@@ -13,6 +13,7 @@
 #using scripts\core_common\weapons_shared;
 #using scripts\mp_common\util;
 #using scripts\weapons\weaponobjects;
+
 #namespace weaponobjects;
 
 function private autoexec __init__system__() {

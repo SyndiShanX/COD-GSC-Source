@@ -22,6 +22,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\core_common\weapons_shared;
 #using scripts\killstreaks\killstreaks_util;
+
 #namespace gameobjects;
 class cinteractobj {
   var e_object;

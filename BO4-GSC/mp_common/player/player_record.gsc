@@ -14,6 +14,7 @@
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\mp_common\gametypes\globallogic_score;
 #include scripts\mp_common\player\player_loadout;
+
 #namespace player_record;
 
 function_685505ce(inputarray) {

@@ -7,6 +7,7 @@
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\renderoverridebundle;
 #include scripts\core_common\util_shared;
+
 #namespace shoutcaster;
 
 is_shoutcaster(localclientnum) {

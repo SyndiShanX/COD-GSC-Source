@@ -5,6 +5,7 @@
 
 #using scripts\core_common\system_shared;
 #using scripts\killstreaks\remotemissile_shared;
+
 #namespace remotemissile;
 
 function private autoexec __init__system__() {

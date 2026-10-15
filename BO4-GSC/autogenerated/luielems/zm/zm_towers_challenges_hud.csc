@@ -4,6 +4,7 @@
 ******************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace zm_towers_challenges_hud;
 
 class czm_towers_challenges_hud: cluielem {

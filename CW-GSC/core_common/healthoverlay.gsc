@@ -13,6 +13,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\visionset_mgr_shared;
+
 #namespace healthoverlay;
 
 function private autoexec __init__system__() {

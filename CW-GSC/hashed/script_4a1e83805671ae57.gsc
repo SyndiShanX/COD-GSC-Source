@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace stim_count;
 class class_44eccfcc: cluielem {
   var var_bf9c8c95;

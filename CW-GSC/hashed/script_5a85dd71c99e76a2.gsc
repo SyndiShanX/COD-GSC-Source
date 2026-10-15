@@ -31,6 +31,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace namespace_cbf28e01;
 
 function function_e39e219e() {}

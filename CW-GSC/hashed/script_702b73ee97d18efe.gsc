@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace bountyhunterbuy;
 class cbountyhunterbuy: cluielem {
   function open(player, flags = 0) {

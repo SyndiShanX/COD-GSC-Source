@@ -5,6 +5,7 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace grenades;
 
 init_shared() {

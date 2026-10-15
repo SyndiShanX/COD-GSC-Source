@@ -7,6 +7,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\values_shared;
 #using scripts\cp_common\snd;
+
 #namespace namespace_1d6bb8b4;
 
 function postload() {

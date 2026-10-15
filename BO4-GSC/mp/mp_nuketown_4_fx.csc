@@ -5,6 +5,7 @@
 
 #include scripts\core_common\fx_shared;
 #include scripts\core_common\struct;
+
 #namespace mp_nuketown_4_fx;
 
 main() {

@@ -14,6 +14,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\zm_common\trials\zm_trial_headshots_only;
 #using scripts\zm_common\zm_utility;
+
 #namespace ammomod_brainrot;
 
 function init_brainrot() {

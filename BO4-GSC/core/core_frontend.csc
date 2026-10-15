@@ -6,6 +6,7 @@
 #include scripts\core\core_frontend_fx;
 #include scripts\core\core_frontend_sound;
 #include scripts\core_common\util_shared;
+
 #namespace core_frontend;
 
 event_handler[level_init] main(eventstruct) {

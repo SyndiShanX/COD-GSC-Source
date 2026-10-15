@@ -23,6 +23,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\mp_common\gametypes\globallogic_score;
+
 #namespace fireteam_satlink;
 
 function private autoexec __init__system__() {

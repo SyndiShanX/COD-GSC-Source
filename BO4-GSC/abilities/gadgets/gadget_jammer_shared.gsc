@@ -15,6 +15,7 @@
 #include scripts\core_common\values_shared;
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace jammer;
 
 init_shared() {

@@ -11,6 +11,7 @@
 #include scripts\core_common\shoutcaster;
 #include scripts\core_common\util_shared;
 #include scripts\killstreaks\killstreak_detect;
+
 #namespace remotemissile;
 
 init_shared() {

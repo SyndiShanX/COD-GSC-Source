@@ -6,6 +6,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\weapons_shared;
 #include scripts\weapons\weapons;
+
 #namespace weapons;
 
 autoexec __init__system__() {

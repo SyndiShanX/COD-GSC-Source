@@ -26,6 +26,7 @@
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\snd;
+
 #namespace namespace_69b8cbbe;
 
 function start(str_objective) {

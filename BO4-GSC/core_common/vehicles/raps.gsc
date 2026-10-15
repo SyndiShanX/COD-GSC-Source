@@ -9,6 +9,7 @@
 #include scripts\core_common\vehicle_ai_shared;
 #include scripts\core_common\vehicle_shared;
 #include scripts\core_common\vehicles\smart_bomb;
+
 #namespace raps;
 
 autoexec __init__system__() {

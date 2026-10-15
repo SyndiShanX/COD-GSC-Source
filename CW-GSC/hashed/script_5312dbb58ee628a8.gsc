@@ -29,6 +29,7 @@
 #using scripts\killstreaks\remote_weapons;
 #using scripts\weapons\deployable;
 #using scripts\weapons\weaponobjects;
+
 #namespace missile_turret;
 
 function init_shared() {

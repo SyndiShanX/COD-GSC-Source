@@ -13,6 +13,7 @@
 #include scripts\zm_common\zm_talisman;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_talisman_box_guarantee_box_only;
 
 autoexec __init__system__() {

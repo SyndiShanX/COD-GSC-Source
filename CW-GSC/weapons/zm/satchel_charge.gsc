@@ -12,6 +12,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\weapons\satchel_charge;
 #using scripts\zm_common\zm_weapons;
+
 #namespace satchel_charge;
 
 function private autoexec __init__system__() {

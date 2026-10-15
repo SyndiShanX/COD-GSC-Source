@@ -7,6 +7,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_melee_weapon;
+
 #namespace zm_weap_galvaknuckles_t8;
 
 autoexec __init__system__() {

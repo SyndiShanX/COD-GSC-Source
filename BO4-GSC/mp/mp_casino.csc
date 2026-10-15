@@ -8,6 +8,7 @@
 #include scripts\mp\mp_casino_scripted;
 #include scripts\mp_common\load;
 #include scripts\mp_common\util;
+
 #namespace mp_casino;
 
 event_handler[level_init] main(eventstruct) {

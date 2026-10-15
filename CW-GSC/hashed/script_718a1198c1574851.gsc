@@ -18,6 +18,7 @@
 #using scripts\mp_common\player\player_loadout;
 #using scripts\wz_common\hud;
 #using scripts\wz_common\wz_loadouts;
+
 #namespace namespace_bc2b656d;
 
 function event_handler[gametype_init] main(eventstruct) {

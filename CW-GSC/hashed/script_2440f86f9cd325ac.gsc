@@ -28,6 +28,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_3a8e4a3;
 
 function function_98acc465() {

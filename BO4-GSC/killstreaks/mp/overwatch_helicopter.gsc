@@ -35,6 +35,7 @@
 #include scripts\mp_common\util;
 #include scripts\weapons\hacker_tool;
 #include scripts\weapons\heatseekingmissile;
+
 #namespace overwatch_helicopter;
 
 autoexec __init__system__() {

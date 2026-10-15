@@ -15,6 +15,7 @@
 #using scripts\cp_common\flashback_tv;
 #using scripts\cp_common\gametypes\save;
 #using scripts\cp_common\skipto;
+
 #namespace hub_post_yamantau;
 
 function starting(str_skipto) {}

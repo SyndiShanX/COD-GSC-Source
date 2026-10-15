@@ -4,6 +4,7 @@
 *********************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace vip_notify_text;
 class class_302a48fc: cluielem {
   function open(localclientnum) {

@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\struct;
+
 #namespace killstreak_dialog;
 
 function function_196f2c38() {

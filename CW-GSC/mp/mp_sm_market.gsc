@@ -5,6 +5,7 @@
 
 #using scripts\core_common\compass;
 #using scripts\core_common\load_shared;
+
 #namespace mp_sm_market;
 
 function event_handler[level_init] main(eventstruct) {

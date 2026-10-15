@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\struct;
+
 #namespace zm_mgturret;
 
 main() {

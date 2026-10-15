@@ -8,6 +8,7 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_orange_freeze_trap;
 
 init() {

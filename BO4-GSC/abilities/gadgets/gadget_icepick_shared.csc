@@ -8,6 +8,7 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\util_shared;
 #include scripts\killstreaks\killstreak_detect;
+
 #namespace icepick;
 
 init_shared() {

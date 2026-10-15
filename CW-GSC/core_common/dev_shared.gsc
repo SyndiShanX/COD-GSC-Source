@@ -6,6 +6,7 @@
 #using scripts\core_common\gestures;
 #using scripts\core_common\math_shared;
 #using scripts\core_common\util_shared;
+
 #namespace dev;
 
 function debug_sphere(origin, radius, color, alpha, time) {

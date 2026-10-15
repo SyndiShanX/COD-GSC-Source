@@ -14,6 +14,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_1dc364c0;
 
 function init() {

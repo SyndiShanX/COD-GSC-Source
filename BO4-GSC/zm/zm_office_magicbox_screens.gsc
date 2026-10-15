@@ -6,6 +6,7 @@
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_customgame;
+
 #namespace zm_office_magicbox_screens;
 
 init() {

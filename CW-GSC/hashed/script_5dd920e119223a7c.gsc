@@ -26,6 +26,7 @@
 #using scripts\zm_common\objective_manager;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_vo;
+
 #namespace namespace_662ff671;
 
 function event_handler[level_init] main(eventstruct) {

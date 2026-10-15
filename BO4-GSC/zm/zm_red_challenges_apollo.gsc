@@ -10,6 +10,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_vo;
+
 #namespace zm_red_challenges_apollo;
 
 init() {

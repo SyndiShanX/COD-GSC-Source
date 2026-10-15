@@ -41,6 +41,7 @@
 #using scripts\cp_common\snd_draw;
 #using scripts\cp_common\snd_utility;
 #using scripts\cp_common\util;
+
 #namespace namespace_b508dca;
 
 function function_99791793(str_objective) {

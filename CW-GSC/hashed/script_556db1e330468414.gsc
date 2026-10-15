@@ -22,6 +22,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\zm_common\zm_stats;
 #using scripts\zm_common\zm_utility;
+
 #namespace monster_house;
 
 function private autoexec __init__system__() {

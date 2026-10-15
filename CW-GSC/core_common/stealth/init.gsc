@@ -7,6 +7,7 @@
 #using scripts\core_common\stealth\player;
 #using scripts\core_common\stealth\threat_sight;
 #using scripts\core_common\stealth\utility;
+
 #namespace stealth_init;
 
 function main() {

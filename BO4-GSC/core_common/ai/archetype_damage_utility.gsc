@@ -5,6 +5,7 @@
 
 #include scripts\core_common\ai\systems\behavior_state_machine;
 #include scripts\core_common\ai\systems\behavior_tree_utility;
+
 #namespace aiutility;
 
 autoexec registerbehaviorscriptfunctions() {

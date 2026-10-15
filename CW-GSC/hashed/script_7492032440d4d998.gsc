@@ -12,6 +12,7 @@
 #using scripts\zm\zm_gold_util;
 #using scripts\zm\zm_gold_vo;
 #using scripts\zm_common\zm_utility_zsurvival;
+
 #namespace namespace_2a67e53;
 
 function init() {

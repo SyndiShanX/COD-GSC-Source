@@ -5,6 +5,7 @@
 
 #using scripts\core_common\system_shared;
 #using scripts\killstreaks\killstreaks_shared;
+
 #namespace ray_gun;
 
 function private autoexec __init__system__() {

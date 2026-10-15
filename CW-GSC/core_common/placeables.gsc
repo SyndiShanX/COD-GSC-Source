@@ -9,6 +9,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
 #using scripts\weapons\deployable;
+
 #namespace placeables;
 
 function spawnplaceable(onplacecallback, oncancelcallback, onmovecallback, onshutdowncallback, ondeathcallback, onempcallback, ondamagecallback, var_d0dd7e76, model, validmodel, invalidmodel, spawnsvehicle, pickupstring, timeout, health, empdamage, placehintstring, invalidlocationhintstring, placeimmediately = 0, var_c71994b5 = undefined) {

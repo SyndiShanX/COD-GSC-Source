@@ -19,6 +19,7 @@
 #include scripts\zm_common\zm_pack_a_punch;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
+
 #namespace zm_orange_trial_lighthouse_beam;
 
 autoexec __init__system__() {

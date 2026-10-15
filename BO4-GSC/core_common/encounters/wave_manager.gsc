@@ -12,6 +12,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\util_shared;
+
 #namespace wave_manager_sys;
 
 class cwavemanager {

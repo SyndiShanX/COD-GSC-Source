@@ -13,6 +13,7 @@
 #using scripts\killstreaks\zm\killstreakrules;
 #using scripts\killstreaks\zm\killstreaks;
 #using scripts\zm_common\zm_player;
+
 #namespace napalm_strike;
 
 function private autoexec __init__system__() {

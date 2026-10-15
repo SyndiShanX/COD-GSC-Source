@@ -7,6 +7,7 @@
 #using scripts\core_common\math_shared;
 #using scripts\core_common\oob;
 #using scripts\core_common\territory_util;
+
 #namespace oob;
 
 function init() {

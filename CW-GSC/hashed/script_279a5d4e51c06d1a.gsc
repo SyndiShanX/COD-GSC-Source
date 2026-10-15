@@ -57,6 +57,7 @@
 #using scripts\cp_common\ui\ent_name;
 #using scripts\cp_common\util;
 #using scripts\weapons\cp\spy_camera;
+
 #namespace namespace_4dc9a074;
 
 function function_4bf845e0() {}

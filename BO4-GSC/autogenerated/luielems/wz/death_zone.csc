@@ -4,6 +4,7 @@
 ****************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace death_zone;
 
 class cdeath_zone: cluielem {

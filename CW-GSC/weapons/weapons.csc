@@ -7,6 +7,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\util_shared;
+
 #namespace weapons;
 
 function init_shared() {

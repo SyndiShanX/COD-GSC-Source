@@ -8,6 +8,7 @@
 #include scripts\core_common\struct;
 #include scripts\zm\zm_hms_util;
 #include scripts\zm_common\zm_sq_modules;
+
 #namespace zm_white_defend_soul_capture;
 
 register(id, version, script_noteworthy, var_92f252fd, func_fail) {

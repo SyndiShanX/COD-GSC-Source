@@ -32,6 +32,7 @@
 #using scripts\zm_common\zm_sq;
 #using scripts\zm_common\zm_stats;
 #using scripts\zm_common\zm_utility;
+
 #namespace namespace_fa1c4f0a;
 
 function event_handler[level_init] main(eventstruct) {

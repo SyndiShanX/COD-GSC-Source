@@ -36,6 +36,7 @@
 #using scripts\mp_common\player\player_utils;
 #using scripts\mp_common\util;
 #using scripts\weapons\weapon_utils;
+
 #namespace dropkick;
 
 function event_handler[gametype_init] main(eventstruct) {

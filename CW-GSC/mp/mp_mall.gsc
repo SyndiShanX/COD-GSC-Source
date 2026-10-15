@@ -7,6 +7,7 @@
 #using scripts\core_common\load_shared;
 #using scripts\core_common\scene_shared;
 #using scripts\killstreaks\killstreaks_shared;
+
 #namespace mp_mall;
 
 function event_handler[level_init] main(eventstruct) {

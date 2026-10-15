@@ -10,6 +10,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm\zm_lightning_chain;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_weap_hand_gaia;
 
 autoexec __init__system__() {

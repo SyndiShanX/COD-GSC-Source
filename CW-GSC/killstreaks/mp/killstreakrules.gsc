@@ -5,6 +5,7 @@
 
 #using scripts\core_common\globallogic\globallogic_audio;
 #using scripts\killstreaks\killstreakrules_shared;
+
 #namespace killstreakrules;
 
 function init() {

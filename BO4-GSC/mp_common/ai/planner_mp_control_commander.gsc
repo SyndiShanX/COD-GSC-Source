@@ -11,6 +11,7 @@
 #include scripts\core_common\ai\systems\planner;
 #include scripts\mp_common\ai\planner_mp_commander_utility;
 #include scripts\mp_common\ai\planner_mp_control_squad;
+
 #namespace plannermpcontrolcommander;
 
 createcommanderplanner(team) {

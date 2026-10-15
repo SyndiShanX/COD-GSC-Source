@@ -12,6 +12,7 @@
 #using scripts\zm_common\bb;
 #using scripts\zm_common\gametypes\globallogic_player;
 #using scripts\zm_common\gametypes\globallogic_utils;
+
 #namespace globallogic_actor;
 
 function callback_actorspawned(spawner) {

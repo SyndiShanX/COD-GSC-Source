@@ -17,6 +17,7 @@
 #using scripts\cp_common\achievements;
 #using scripts\cp_common\bb;
 #using scripts\cp_common\ui\prompts;
+
 #namespace namespace_6cecf2d8;
 
 function private autoexec __init__system__() {

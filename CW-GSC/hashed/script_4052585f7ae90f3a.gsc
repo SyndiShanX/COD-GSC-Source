@@ -14,6 +14,7 @@
 #using scripts\cp_common\snd_draw;
 #using scripts\cp_common\snd_sp;
 #using scripts\cp_common\snd_utility;
+
 #namespace namespace_4ed3ce47;
 
 function private event_handler[level_preinit] function_b489bb7b(eventstruct) {

@@ -13,6 +13,7 @@
 #using scripts\core_common\item_world_util;
 #using scripts\core_common\system_shared;
 #using scripts\killstreaks\killstreaks_shared;
+
 #namespace namespace_234f0efc;
 
 function private autoexec __init__system__() {

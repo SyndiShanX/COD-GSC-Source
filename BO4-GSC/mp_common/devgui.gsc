@@ -16,6 +16,7 @@
 #include scripts\core_common\weapons_shared;
 #include scripts\killstreaks\killstreaks_util;
 #include scripts\mp_common\gametypes\globallogic_utils;
+
 #namespace devgui;
 
 autoexec __init__system__() {

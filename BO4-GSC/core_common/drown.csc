@@ -9,6 +9,7 @@
 #include scripts\core_common\math_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\visionset_mgr_shared;
+
 #namespace drown;
 
 autoexec __init__system__() {

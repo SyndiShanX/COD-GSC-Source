@@ -12,6 +12,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\cp\cp_rus_yamantau_flashlight;
 #using scripts\cp_common\util;
+
 #namespace cp_rus_yamantau;
 
 function event_handler[level_init] main(eventstruct) {

@@ -5,6 +5,7 @@
 
 #include scripts\core_common\struct;
 #include scripts\core_common\weapons_shared;
+
 #namespace killstreak_bundles;
 
 register_killstreak_bundle(type) {

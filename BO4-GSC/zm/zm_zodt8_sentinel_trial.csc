@@ -16,6 +16,7 @@
 #include scripts\zm_common\zm_sq_modules;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zodt8_sentinel;
 
 init() {

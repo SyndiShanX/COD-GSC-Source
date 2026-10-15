@@ -12,6 +12,7 @@
 #include scripts\core_common\teleport_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
+
 #namespace trigger;
 
 autoexec __init__system__() {

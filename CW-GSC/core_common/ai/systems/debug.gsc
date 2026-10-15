@@ -5,6 +5,7 @@
 
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace as_debug;
 
 function private autoexec __init__system__() {

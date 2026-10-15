@@ -10,6 +10,7 @@
 #include scripts\core_common\visionset_mgr_shared;
 #include scripts\killstreaks\killstreak_bundles;
 #include scripts\mp_common\callbacks;
+
 #namespace killstreak_vehicle;
 
 init() {

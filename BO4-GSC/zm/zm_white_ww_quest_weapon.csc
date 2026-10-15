@@ -5,6 +5,7 @@
 
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_sq_modules;
+
 #namespace zm_white_ww_quest_weapon;
 
 preload() {

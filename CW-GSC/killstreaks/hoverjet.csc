@@ -8,6 +8,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\vehicle_shared;
+
 #namespace hoverjet;
 
 function private autoexec __init__system__() {

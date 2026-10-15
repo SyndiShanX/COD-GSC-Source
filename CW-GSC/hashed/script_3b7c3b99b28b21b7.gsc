@@ -42,6 +42,7 @@
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
 #using scripts\weapons\cp\spy_camera;
+
 #namespace namespace_acaa3a2e;
 
 function init_flags() {

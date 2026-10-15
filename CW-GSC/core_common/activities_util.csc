@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\util_shared;
+
 #namespace activities;
 
 function private level_end(outcome = "failed") {

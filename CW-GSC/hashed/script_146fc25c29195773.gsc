@@ -6,6 +6,7 @@
 #using script_35ae72be7b4fec10;
 #using script_3dc93ca9902a9cda;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_6fdcb0;
 
 function function_912776e6(var_f03e723e) {

@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\zm_common\zm_utility;
+
 #namespace namespace_d592c983;
 
 function event_handler[level_init] main(eventstruct) {

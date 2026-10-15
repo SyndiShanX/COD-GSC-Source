@@ -12,6 +12,7 @@
 #using scripts\core_common\ai_shared;
 #using scripts\core_common\math_shared;
 #using scripts\core_common\spawner_shared;
+
 #namespace namespace_2be98cb7;
 
 function autoexec init() {

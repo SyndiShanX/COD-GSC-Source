@@ -7,6 +7,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\zm_common\zm_loadout;
 #using scripts\zm_common\zm_trial;
+
 #namespace zm_trial_kill_with_special;
 
 function private autoexec __init__system__() {

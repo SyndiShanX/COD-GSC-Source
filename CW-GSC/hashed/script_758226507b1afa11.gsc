@@ -20,6 +20,7 @@
 #using scripts\cp_common\snd_sp;
 #using scripts\cp_common\snd_utility;
 #using scripts\cp_common\util;
+
 #namespace namespace_5ceacc03;
 
 function private event_handler[level_preinit] function_b489bb7b(eventstruct) {

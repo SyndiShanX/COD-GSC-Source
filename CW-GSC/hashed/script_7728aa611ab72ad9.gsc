@@ -14,6 +14,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
 #using scripts\cp_common\util;
+
 #namespace namespace_307260b8;
 
 function spawn_allies(str_spawner_name, str_key = "targetname", var_e565b364 = 0) {

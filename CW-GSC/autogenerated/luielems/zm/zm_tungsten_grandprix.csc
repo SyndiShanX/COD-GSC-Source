@@ -4,6 +4,7 @@
 ***************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace zm_tungsten_grandprix;
 class czm_tungsten_grandprix: cluielem {
   function open(localclientnum) {

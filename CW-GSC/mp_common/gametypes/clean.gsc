@@ -32,6 +32,7 @@
 #using scripts\mp_common\gametypes\spawnlogic;
 #using scripts\mp_common\player\player_utils;
 #using scripts\mp_common\util;
+
 #namespace clean;
 
 function private autoexec __init__system__() {

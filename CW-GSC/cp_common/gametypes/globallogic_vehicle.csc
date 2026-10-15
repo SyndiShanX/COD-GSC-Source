@@ -6,6 +6,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
+
 #namespace vehicles;
 
 function private autoexec __init__system__() {

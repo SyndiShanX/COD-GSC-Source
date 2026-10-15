@@ -6,6 +6,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\gameobjects_shared;
 #using scripts\core_common\util_shared;
+
 #namespace entityheadicons;
 
 function init_shared() {

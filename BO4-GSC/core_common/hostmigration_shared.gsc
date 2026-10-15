@@ -6,6 +6,7 @@
 #include scripts\core_common\potm_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
+
 #namespace hostmigration;
 
 debug_script_structs() {

@@ -14,6 +14,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
+
 #namespace lui;
 class cluielem {
   var var_779239b4;

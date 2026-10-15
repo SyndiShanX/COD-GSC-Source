@@ -9,6 +9,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm\zm_lightning_chain;
 #include scripts\zm_common\zm;
+
 #namespace zm_weap_tesla_gun_t8;
 
 autoexec __init__system__() {

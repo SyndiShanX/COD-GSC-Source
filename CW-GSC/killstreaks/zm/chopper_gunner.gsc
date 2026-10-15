@@ -18,6 +18,7 @@
 #using scripts\zm_common\zm_player;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_zonemgr;
+
 #namespace chopper_gunner;
 
 function private autoexec __init__system__() {

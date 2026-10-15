@@ -15,6 +15,7 @@
 #using scripts\cp_common\gametypes\dev_class;
 #using scripts\cp_common\gametypes\loadout;
 #using scripts\cp_common\util;
+
 #namespace dev;
 
 function private autoexec __init__system__() {

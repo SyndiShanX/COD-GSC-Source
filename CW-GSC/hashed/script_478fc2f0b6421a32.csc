@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_60bf0cf2;
 
 function init() {

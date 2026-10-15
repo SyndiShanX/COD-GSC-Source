@@ -27,6 +27,7 @@
 #include scripts\mp_common\scoreevents;
 #include scripts\mp_common\teams\platoons;
 #include scripts\weapons\weapons;
+
 #namespace laststand_warzone;
 
 autoexec __init__system__() {

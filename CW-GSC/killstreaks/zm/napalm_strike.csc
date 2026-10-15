@@ -8,6 +8,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\killstreaks\napalm_strike_shared;
 #using scripts\killstreaks\zm\airsupport;
+
 #namespace napalm_strike;
 
 function private autoexec __init__system__() {

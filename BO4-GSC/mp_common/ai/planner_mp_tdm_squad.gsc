@@ -8,6 +8,7 @@
 #include scripts\core_common\ai\planner_squad_utility;
 #include scripts\core_common\ai\systems\planner;
 #include scripts\mp_common\ai\planner_mp_squad_utility;
+
 #namespace plannermptdmsquad;
 
 createsquadplanner(team) {

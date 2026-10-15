@@ -32,6 +32,7 @@
 #using scripts\killstreaks\killstreakrules_shared;
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\weapons\weaponobjects;
+
 #namespace killstreaks;
 
 function init_shared() {

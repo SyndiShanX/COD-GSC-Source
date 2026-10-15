@@ -21,6 +21,7 @@
 #using scripts\killstreaks\mp\killstreakrules;
 #using scripts\mp_common\gametypes\globallogic_score;
 #using scripts\mp_common\player\player_utils;
+
 #namespace killstreaks;
 
 function private autoexec __init__system__() {

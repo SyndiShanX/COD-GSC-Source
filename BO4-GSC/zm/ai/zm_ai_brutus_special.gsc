@@ -7,6 +7,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm\ai\zm_ai_brutus;
 #include scripts\zm_common\zm_devgui;
+
 #namespace zm_ai_brutus_special;
 
 autoexec __init__system__() {

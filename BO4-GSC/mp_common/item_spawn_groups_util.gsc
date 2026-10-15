@@ -7,6 +7,7 @@
 #include scripts\core_common\struct;
 #include scripts\mp_common\item_drop;
 #include scripts\mp_common\item_world_util;
+
 #namespace item_spawn_groups_util;
 
 function_2c4d3d40() {

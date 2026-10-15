@@ -18,6 +18,7 @@
 #include scripts\mp_common\gametypes\ct_core;
 #include scripts\mp_common\gametypes\ct_utils;
 #include scripts\mp_common\player\player_utils;
+
 #namespace ct_bots;
 
 autoexec __init__system__() {

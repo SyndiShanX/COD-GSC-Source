@@ -29,6 +29,7 @@
 #include scripts\mp_common\gametypes\globallogic_utils;
 #include scripts\mp_common\teams\teams;
 #include scripts\weapons\weapon_utils;
+
 #namespace loadout;
 
 autoexec function_313e9d31() {

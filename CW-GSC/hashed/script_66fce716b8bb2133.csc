@@ -12,6 +12,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\vehicle_shared;
+
 #namespace namespace_81522b3c;
 
 function init() {

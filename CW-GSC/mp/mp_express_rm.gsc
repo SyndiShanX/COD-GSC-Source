@@ -6,6 +6,7 @@
 #using scripts\core_common\compass;
 #using scripts\core_common\load_shared;
 #using scripts\mp\mp_express_rm_train;
+
 #namespace mp_express_rm;
 
 function event_handler[level_init] main(eventstruct) {

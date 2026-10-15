@@ -28,6 +28,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_41cb996;
 class class_9b9784aa {
   var m_type;

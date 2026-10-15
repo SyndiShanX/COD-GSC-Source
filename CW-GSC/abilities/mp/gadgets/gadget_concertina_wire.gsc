@@ -8,6 +8,7 @@
 #using scripts\core_common\battlechatter;
 #using scripts\core_common\player\player_stats;
 #using scripts\core_common\system_shared;
+
 #namespace concertina_wire;
 
 function private autoexec __init__system__() {

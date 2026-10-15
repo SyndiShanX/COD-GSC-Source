@@ -8,6 +8,7 @@
 #include scripts\zm_common\zm_customgame;
 #include scripts\zm_common\zm_wallbuy;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_bgb_wall_to_wall_clearance;
 
 autoexec __init__system__() {

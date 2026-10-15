@@ -37,6 +37,7 @@
 #using scripts\mp_common\gametypes\globallogic_utils;
 #using scripts\mp_common\gametypes\round;
 #using scripts\mp_common\util;
+
 #namespace namespace_5c32f369;
 
 function event_handler[ui_menuresponse] codecallback_menuresponse(eventstruct) {

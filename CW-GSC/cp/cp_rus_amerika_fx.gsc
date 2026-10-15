@@ -9,6 +9,7 @@
 #using scripts\core_common\fx_shared;
 #using scripts\core_common\trigger_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_f942705d;
 
 function init() {

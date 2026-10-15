@@ -4,6 +4,7 @@
 *****************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace vehicleturretdurability;
 class cvehicleturretdurability: cluielem {
   function open(localclientnum) {

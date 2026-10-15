@@ -21,6 +21,7 @@
 #include scripts\mp_common\gametypes\match;
 #include scripts\mp_common\util;
 #include scripts\weapons\weapon_utils;
+
 #namespace scoreevents;
 
 autoexec __init__system__() {

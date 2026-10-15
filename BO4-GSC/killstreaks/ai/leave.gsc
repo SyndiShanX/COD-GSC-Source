@@ -6,6 +6,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\util_shared;
 #include scripts\killstreaks\ai\state;
+
 #namespace ai_leave;
 
 init() {

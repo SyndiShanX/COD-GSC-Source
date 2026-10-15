@@ -4,6 +4,7 @@
 ******************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace zm_game_over;
 class czm_game_over: cluielem {
   function open(localclientnum) {

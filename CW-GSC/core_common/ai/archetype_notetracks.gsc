@@ -12,6 +12,7 @@
 #using scripts\core_common\ai_shared;
 #using scripts\core_common\flashlight;
 #using scripts\core_common\util_shared;
+
 #namespace animationstatenetwork;
 
 function autoexec registerdefaultnotetrackhandlerfunctions() {

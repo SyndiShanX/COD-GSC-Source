@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\util_shared;
+
 #namespace zombie_death;
 
 autoexec init_fire_fx() {

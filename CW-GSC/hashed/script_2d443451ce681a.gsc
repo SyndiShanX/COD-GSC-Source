@@ -18,6 +18,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\cp_common\load;
 #using scripts\cp_common\util;
+
 #namespace ai;
 
 function function_18c4ff86(var_86318e49, str_species) {

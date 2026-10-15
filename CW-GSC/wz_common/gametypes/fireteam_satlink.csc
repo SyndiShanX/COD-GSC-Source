@@ -10,6 +10,7 @@
 #using scripts\core_common\item_world_util;
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
+
 #namespace fireteam_satlink;
 
 function event_handler[gametype_init] main(eventstruct) {

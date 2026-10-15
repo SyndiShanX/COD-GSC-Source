@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\ai\systems\ai_interface;
+
 #namespace namespace_835228b4;
 
 function function_7304e94b() {

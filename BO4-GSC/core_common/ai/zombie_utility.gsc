@@ -14,6 +14,7 @@
 #include scripts\core_common\scene_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
+
 #namespace zombie_utility;
 
 zombiespawnsetup() {

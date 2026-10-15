@@ -18,6 +18,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\weapons\weaponobjects;
 #using scripts\weapons\weapons;
+
 #namespace molotov;
 
 function private autoexec __init__system__() {

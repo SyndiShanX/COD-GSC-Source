@@ -4,6 +4,7 @@
 ***********************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace ct_shared_warning;
 
 class cct_shared_warning: cluielem {

@@ -42,6 +42,7 @@
 #include scripts\mp_common\player\player_utils;
 #include scripts\mp_common\util;
 #include scripts\weapons\heatseekingmissile;
+
 #namespace swat_team;
 
 class class_60aca60a {

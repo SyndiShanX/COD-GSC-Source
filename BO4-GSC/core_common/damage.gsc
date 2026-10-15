@@ -5,6 +5,7 @@
 
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
+
 #namespace damage;
 
 friendlyfirecheck(owner, attacker, forcedfriendlyfirerule) {

@@ -17,6 +17,7 @@
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\weapons\heatseekingmissile;
+
 #namespace jetfighter;
 
 function private autoexec __init__system__() {

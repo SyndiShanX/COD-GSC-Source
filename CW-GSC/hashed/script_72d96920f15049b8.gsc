@@ -25,6 +25,7 @@
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\weapons\heatseekingmissile;
+
 #namespace namespace_e8c18978;
 
 function preinit(bundlename) {

@@ -12,6 +12,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\friendlyfire;
 #using scripts\cp_common\util;
+
 #namespace namespace_4e75a347;
 
 function event_handler[event_7d801d3e] function_2f02dc73(eventstruct) {

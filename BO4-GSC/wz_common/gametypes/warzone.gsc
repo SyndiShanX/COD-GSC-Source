@@ -59,6 +59,7 @@
 #include scripts\wz_common\wz_ignore_systems;
 #include scripts\wz_common\wz_progression;
 #include scripts\wz_common\wz_rat;
+
 #namespace warzone;
 
 event_handler[gametype_init] main(eventstruct) {

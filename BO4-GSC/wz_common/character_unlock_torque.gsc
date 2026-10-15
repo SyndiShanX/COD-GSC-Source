@@ -10,6 +10,7 @@
 #include scripts\mp_common\teams\teams;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace character_unlock_torque;
 
 autoexec __init__system__() {

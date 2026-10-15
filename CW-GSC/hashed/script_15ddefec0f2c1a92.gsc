@@ -32,6 +32,7 @@
 #using scripts\core_common\math_shared;
 #using scripts\core_common\oob;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_53a8fe5e;
 
 function init() {

@@ -6,6 +6,7 @@
 #using script_13114d8a31c6152a;
 #using script_35ae72be7b4fec10;
 #using scripts\core_common\system_shared;
+
 #namespace generic_note;
 
 function private autoexec __init__system__() {

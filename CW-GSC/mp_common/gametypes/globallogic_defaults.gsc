@@ -17,6 +17,7 @@
 #using scripts\mp_common\gametypes\match;
 #using scripts\mp_common\gametypes\round;
 #using scripts\mp_common\util;
+
 #namespace globallogic_defaults;
 
 function getwinningteamfromloser(losing_team) {

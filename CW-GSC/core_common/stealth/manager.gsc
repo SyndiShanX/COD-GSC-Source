@@ -15,6 +15,7 @@
 #using scripts\core_common\stealth\init;
 #using scripts\core_common\stealth\threat_sight;
 #using scripts\core_common\stealth\utility;
+
 #namespace manager;
 
 function scalevolume(ent, vol) {}

@@ -12,6 +12,7 @@
 #using scripts\zm_common\zm_trial_util;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_weapons;
+
 #namespace namespace_fcd611c3;
 
 function private autoexec __init__system__() {

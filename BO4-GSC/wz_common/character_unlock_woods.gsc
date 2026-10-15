@@ -10,6 +10,7 @@
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
 #include scripts\wz_common\character_unlock_woods_fixup;
+
 #namespace character_unlock_woods;
 
 autoexec __init__system__() {

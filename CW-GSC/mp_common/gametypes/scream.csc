@@ -10,6 +10,7 @@
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\serverfield_shared;
 #using scripts\core_common\util_shared;
+
 #namespace scream;
 
 function event_handler[gametype_init] main(eventstruct) {

@@ -38,6 +38,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace doa_player_utility;
 
 function function_c17e1c0e() {

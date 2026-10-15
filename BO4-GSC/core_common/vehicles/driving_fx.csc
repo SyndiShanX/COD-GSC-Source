@@ -6,6 +6,7 @@
 #include scripts\core_common\audio_shared;
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\vehicle_shared;
+
 #namespace driving_fx;
 
 event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {

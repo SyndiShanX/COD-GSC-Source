@@ -13,6 +13,7 @@
 #using scripts\cp_common\gametypes\save;
 #using scripts\cp_common\player_decision;
 #using scripts\cp_common\snd;
+
 #namespace ending;
 
 function private autoexec __init__system__() {

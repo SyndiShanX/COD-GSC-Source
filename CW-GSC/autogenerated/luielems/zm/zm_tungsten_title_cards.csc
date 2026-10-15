@@ -4,6 +4,7 @@
 *****************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace zm_tungsten_title_cards;
 class czm_tungsten_title_cards: cluielem {
   function open(localclientnum) {

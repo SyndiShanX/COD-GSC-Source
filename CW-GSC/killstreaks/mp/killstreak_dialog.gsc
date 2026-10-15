@@ -6,6 +6,7 @@
 #using scripts\core_common\battlechatter;
 #using scripts\core_common\globallogic\globallogic_audio;
 #using scripts\killstreaks\killstreak_dialog;
+
 #namespace killstreak_dialog;
 
 function init() {

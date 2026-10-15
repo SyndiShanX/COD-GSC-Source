@@ -39,6 +39,7 @@
 #using scripts\cp_common\snipercam;
 #using scripts\cp_common\util;
 #using scripts\weapons\cp\spy_camera;
+
 #namespace tkdn_af_hill;
 
 function starting(str_skipto) {

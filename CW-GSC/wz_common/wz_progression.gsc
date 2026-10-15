@@ -14,6 +14,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\wz_common\util;
+
 #namespace wz_progression;
 
 function private autoexec __init__system__() {

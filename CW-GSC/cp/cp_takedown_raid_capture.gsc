@@ -40,6 +40,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace tkdn_raid_capture;
 
 function starting(str_skipto) {

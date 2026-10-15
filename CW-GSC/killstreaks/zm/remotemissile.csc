@@ -8,6 +8,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\killstreaks\remotemissile_shared;
 #using scripts\killstreaks\zm\killstreaks;
+
 #namespace remotemissile;
 
 function private autoexec __init__system__() {

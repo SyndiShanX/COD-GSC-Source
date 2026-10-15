@@ -5,6 +5,7 @@
 
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
+
 #namespace namespace_f27a9d0d;
 
 function private event_handler[createstruct] function_e0a8e4ba(struct) {

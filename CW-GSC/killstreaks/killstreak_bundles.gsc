@@ -5,6 +5,7 @@
 
 #using scripts\core_common\struct;
 #using scripts\killstreaks\killstreaks_shared;
+
 #namespace killstreak_bundles;
 
 function spawned(bundle) {

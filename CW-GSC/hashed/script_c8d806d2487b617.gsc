@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\util_shared;
+
 #namespace namespace_956bd4dd;
 
 function function_f45ee99d() {

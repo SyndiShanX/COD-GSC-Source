@@ -12,6 +12,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\weapons\smokegrenade;
+
 #namespace player;
 
 function private autoexec __init__system__() {

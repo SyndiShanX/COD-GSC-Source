@@ -31,6 +31,7 @@
 #using scripts\zm_common\zm_unitrigger;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_weapons;
+
 #namespace zm_crafting;
 
 function private autoexec __init__system__() {

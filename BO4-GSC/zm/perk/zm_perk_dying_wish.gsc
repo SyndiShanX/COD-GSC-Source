@@ -12,6 +12,7 @@
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_player;
+
 #namespace zm_perk_dying_wish;
 
 autoexec __init__system__() {

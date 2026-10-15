@@ -16,6 +16,7 @@
 #include scripts\killstreaks\killstreaks_util;
 #include scripts\mp_common\player\player_loadout;
 #include scripts\mp_common\player\player_utils;
+
 #namespace ct_tutorial_skirmish;
 
 init() {

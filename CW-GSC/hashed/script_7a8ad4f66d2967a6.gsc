@@ -24,6 +24,7 @@
 #using scripts\killstreaks\airsupport;
 #using scripts\killstreaks\helicopter_shared;
 #using scripts\killstreaks\killstreaks_shared;
+
 #namespace cp_heli_killstreak;
 
 function private autoexec __init__system__() {

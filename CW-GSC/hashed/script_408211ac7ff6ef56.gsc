@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\array_shared;
+
 #namespace namespace_b637a3ed;
 
 function drop_item(index, origin, angles, var_98c867cd, random_yaw = 1, origin_offset = undefined, angle_override = undefined) {

@@ -9,6 +9,7 @@
 #include scripts\mp_common\gametypes\dev;
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\util;
+
 #namespace dev_spawn;
 
 function_d8049496() {

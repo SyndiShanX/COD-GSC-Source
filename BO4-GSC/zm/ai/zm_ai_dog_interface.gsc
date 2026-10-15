@@ -5,6 +5,7 @@
 
 #include scripts\core_common\ai\systems\ai_interface;
 #include scripts\zm\ai\zm_ai_dog;
+
 #namespace zm_ai_dog_interface;
 
 registerzombiedoginterfaceattributes() {

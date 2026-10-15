@@ -9,6 +9,7 @@
 #using scripts\core_common\vehicles\driving_fx;
 #using scripts\core_common\visionset_mgr_shared;
 #using scripts\killstreaks\killstreak_bundles;
+
 #namespace killstreak_vehicle;
 
 function init() {

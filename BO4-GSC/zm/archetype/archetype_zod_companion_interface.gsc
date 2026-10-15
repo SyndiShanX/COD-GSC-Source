@@ -5,6 +5,7 @@
 
 #include scripts\core_common\ai\systems\ai_interface;
 #include scripts\zm\archetype\archetype_zod_companion;
+
 #namespace zodcompanioninterface;
 
 registerzodcompanioninterfaceattributes() {

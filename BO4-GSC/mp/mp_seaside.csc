@@ -11,6 +11,7 @@
 #include scripts\mp\mp_seaside_fx;
 #include scripts\mp\mp_seaside_sound;
 #include scripts\mp_common\load;
+
 #namespace mp_seaside;
 
 event_handler[level_init] main(eventstruct) {

@@ -6,6 +6,7 @@
 #using scripts\core_common\array_shared;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace augmented_impact_fx;
 
 function private autoexec __init__system__() {

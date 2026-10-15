@@ -5,6 +5,7 @@
 
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
+
 #namespace zm_net;
 
 function network_choke_init(id, max) {

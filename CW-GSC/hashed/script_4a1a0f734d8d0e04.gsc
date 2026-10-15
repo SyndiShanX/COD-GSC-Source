@@ -41,6 +41,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace namespace_63e55f9b;
 
 function start(str_objective) {

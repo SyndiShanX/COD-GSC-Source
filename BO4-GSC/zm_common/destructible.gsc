@@ -8,6 +8,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\gametypes\globallogic_player;
+
 #namespace destructible;
 
 autoexec __init__system__() {

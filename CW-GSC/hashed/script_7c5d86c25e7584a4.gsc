@@ -21,6 +21,7 @@
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace namespace_69a17177;
 
 function start(str_objective) {}

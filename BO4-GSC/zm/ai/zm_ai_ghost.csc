@@ -6,6 +6,7 @@
 #include scripts\core_common\ai\systems\fx_character;
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\system_shared;
+
 #namespace zm_ai_ghost;
 
 autoexec __init__system__() {

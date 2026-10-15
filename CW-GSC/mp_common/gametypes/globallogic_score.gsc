@@ -37,6 +37,7 @@
 #using scripts\mp_common\gametypes\outcome;
 #using scripts\mp_common\high_value_target;
 #using scripts\mp_common\scoreevents;
+
 #namespace globallogic_score;
 
 function autoexec __init__() {

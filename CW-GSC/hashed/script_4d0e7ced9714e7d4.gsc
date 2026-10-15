@@ -34,6 +34,7 @@
 #using scripts\cp_common\objectives_ui;
 #using scripts\cp_common\util;
 #using scripts\weapons\weapon_utils;
+
 #namespace namespace_ac5221d7;
 
 function loadout_default(b_starting) {

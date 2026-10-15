@@ -39,6 +39,7 @@
 #using scripts\mp_common\player\player_monitor;
 #using scripts\mp_common\player\player_utils;
 #using scripts\mp_common\teams\teams;
+
 #namespace globallogic_spawn;
 
 function private autoexec __init__system__() {

@@ -28,6 +28,7 @@
 #using scripts\mp_common\gametypes\overtime;
 #using scripts\mp_common\player\player_utils;
 #using scripts\mp_common\util;
+
 #namespace groundwar_base;
 
 function event_handler[gametype_init] main(eventstruct) {

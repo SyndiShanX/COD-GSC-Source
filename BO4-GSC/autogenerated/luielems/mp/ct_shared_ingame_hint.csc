@@ -4,6 +4,7 @@
 ***************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace ct_shared_ingame_hint;
 
 class cct_shared_ingame_hint: cluielem {

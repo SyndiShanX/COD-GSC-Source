@@ -10,6 +10,7 @@
 #using scripts\core_common\stealth\utility;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace threat_sight;
 
 function scalevolume(ent, vol) {}

@@ -36,6 +36,7 @@
 #using scripts\weapons\smokegrenade;
 #using scripts\weapons\weaponobjects;
 #using scripts\weapons\weapons;
+
 #namespace supplydrop;
 
 function private autoexec __init__system__() {

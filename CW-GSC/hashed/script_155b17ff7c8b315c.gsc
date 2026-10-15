@@ -16,6 +16,7 @@
 #using scripts\cp_common\hms_util;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace namespace_4bd68414;
 
 function general_woods_take_random_photo_react_dialogue() {

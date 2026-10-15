@@ -12,6 +12,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\values_shared;
 #using scripts\cp_common\ui\prompts;
+
 #namespace arcade_machine;
 
 function private autoexec __init__system__() {

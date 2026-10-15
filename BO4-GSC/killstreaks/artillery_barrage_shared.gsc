@@ -14,6 +14,7 @@
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\killstreaks\planemortar_shared;
 #include scripts\weapons\heatseekingmissile;
+
 #namespace artillery_barrage;
 
 init_shared() {

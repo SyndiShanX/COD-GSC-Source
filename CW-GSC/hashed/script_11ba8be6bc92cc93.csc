@@ -12,6 +12,7 @@
 #using scripts\core_common\footsteps_shared;
 #using scripts\core_common\math_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_2a445563;
 
 function init() {

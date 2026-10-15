@@ -7,6 +7,7 @@
 #include scripts\zm_common\zm_audio;
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_score;
+
 #namespace zm_powerup_bonus_points_team;
 
 autoexec __init__system__() {

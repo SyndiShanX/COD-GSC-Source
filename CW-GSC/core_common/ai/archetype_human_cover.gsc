@@ -12,6 +12,7 @@
 #using scripts\core_common\ai_shared;
 #using scripts\core_common\laststand_shared;
 #using scripts\core_common\util_shared;
+
 #namespace archetype_human_cover;
 
 function autoexec registerbehaviorscriptfunctions() {

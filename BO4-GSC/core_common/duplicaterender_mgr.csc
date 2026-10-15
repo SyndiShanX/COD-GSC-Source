@@ -10,6 +10,7 @@
 #include scripts\core_common\shoutcaster;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace duplicate_render;
 
 autoexec __init__system__() {

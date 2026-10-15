@@ -10,6 +10,7 @@
 #using scripts\core_common\spawning_shared;
 #using scripts\core_common\spectate_view;
 #using scripts\core_common\system_shared;
+
 #namespace spectating;
 
 function private autoexec __init__system__() {

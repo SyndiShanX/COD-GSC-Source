@@ -5,6 +5,7 @@
 
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace spawner;
 
 function private autoexec __init__system__() {

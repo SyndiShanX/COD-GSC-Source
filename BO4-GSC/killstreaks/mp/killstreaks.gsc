@@ -11,6 +11,7 @@
 #include scripts\killstreaks\mp\killstreakrules;
 #include scripts\mp_common\gametypes\globallogic_audio;
 #include scripts\mp_common\gametypes\globallogic_score;
+
 #namespace killstreaks;
 
 autoexec __init__system__() {

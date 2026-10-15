@@ -34,6 +34,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_laststand;
 
 autoexec __init__system__() {

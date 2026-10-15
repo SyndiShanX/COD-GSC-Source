@@ -25,6 +25,7 @@
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_utility_zsurvival;
 #using scripts\zm_common\zm_vo;
+
 #namespace namespace_18bbc38e;
 
 function private autoexec __init__system__() {

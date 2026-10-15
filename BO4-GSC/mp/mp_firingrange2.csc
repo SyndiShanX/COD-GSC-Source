@@ -10,6 +10,7 @@
 #include scripts\mp\mp_firingrange2_sound;
 #include scripts\mp_common\load;
 #include scripts\mp_common\util;
+
 #namespace mp_firingrange2;
 
 event_handler[level_init] main(eventstruct) {

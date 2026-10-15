@@ -16,6 +16,7 @@
 #include scripts\core_common\weapons_shared;
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace sensor_dart;
 
 autoexec __init__system__() {

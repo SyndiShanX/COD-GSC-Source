@@ -14,6 +14,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
 #include scripts\core_common\vehicles\driving_fx;
+
 #namespace wz_vehicle;
 
 autoexec __init__system__() {

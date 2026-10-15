@@ -11,6 +11,7 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
+
 #namespace zm_trial_white_mannequin_american;
 
 autoexec __init__system__() {

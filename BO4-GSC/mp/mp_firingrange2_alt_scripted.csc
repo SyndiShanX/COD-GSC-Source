@@ -5,6 +5,7 @@
 
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
+
 #namespace mp_firingrange2_alt_scripted;
 
 autoexec __init__system__() {

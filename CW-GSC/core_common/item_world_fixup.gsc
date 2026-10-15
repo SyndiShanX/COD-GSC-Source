@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\flag_shared;
+
 #namespace item_world_fixup;
 
 function autoexec __init__() {

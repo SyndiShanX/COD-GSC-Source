@@ -6,6 +6,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\exploder_shared;
 #include scripts\core_common\util_shared;
+
 #namespace zm_red_trap_boiling_bath;
 
 init() {

@@ -18,6 +18,7 @@
 #using scripts\wz_common\wz_ignore_systems;
 #using scripts\wz_common\wz_loadouts;
 #using scripts\wz_common\wz_rat;
+
 #namespace warzone;
 
 function event_handler[gametype_init] main(eventstruct) {

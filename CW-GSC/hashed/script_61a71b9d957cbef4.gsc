@@ -7,6 +7,7 @@
 #using scripts\core_common\item_inventory_util;
 #using scripts\core_common\item_world;
 #using scripts\core_common\item_world_util;
+
 #namespace namespace_ba4f7a20;
 
 function autoexec function_8c49355e() {

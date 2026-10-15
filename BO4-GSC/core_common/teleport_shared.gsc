@@ -8,6 +8,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
+
 #namespace teleport;
 
 team(kvp, var_dad37549, b_skip_flash = 0) {

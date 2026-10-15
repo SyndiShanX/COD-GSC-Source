@@ -14,6 +14,7 @@
 #using scripts\core_common\spawning_squad;
 #using scripts\core_common\spectating;
 #using scripts\core_common\util_shared;
+
 #namespace dogtags;
 
 function init() {

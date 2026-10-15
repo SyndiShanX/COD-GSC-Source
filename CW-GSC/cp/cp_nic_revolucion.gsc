@@ -37,6 +37,7 @@
 #using scripts\cp_common\objectives_ui;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace cp_nic_revolucion;
 
 function event_handler[level_init] main(eventstruct) {

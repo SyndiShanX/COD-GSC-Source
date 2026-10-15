@@ -12,6 +12,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\mp_common\util;
+
 #namespace smart_cover;
 
 autoexec __init__system__() {

@@ -36,6 +36,7 @@
 #using scripts\zm_common\zm_vo;
 #using scripts\zm_common\zm_wallbuy;
 #using scripts\zm_common\zm_weapons;
+
 #namespace zsurvival_collapse;
 
 function private autoexec __init__system__() {

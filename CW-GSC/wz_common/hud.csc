@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\clientfield_shared;
+
 #namespace hud;
 
 function function_9b9cecdf() {

@@ -43,6 +43,7 @@
 #include scripts\mp_common\teams\teams;
 #include scripts\mp_common\userspawnselection;
 #include scripts\mp_common\util;
+
 #namespace globallogic_spawn;
 
 autoexec __init__system__() {

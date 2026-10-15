@@ -35,6 +35,7 @@
 #using scripts\cp_common\ui\ent_name;
 #using scripts\cp_common\ui\object_descriptions;
 #using scripts\cp_common\util;
+
 #namespace kgb_aslt_elev_down;
 
 function starting(str_skipto) {

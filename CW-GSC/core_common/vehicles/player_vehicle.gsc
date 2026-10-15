@@ -16,6 +16,7 @@
 #using scripts\core_common\vehicle_ai_shared;
 #using scripts\core_common\vehicle_shared;
 #using scripts\killstreaks\killstreaks_util;
+
 #namespace player_vehicle;
 
 function private autoexec __init__system__() {

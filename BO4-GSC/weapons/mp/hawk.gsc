@@ -17,6 +17,7 @@
 #include scripts\core_common\vehicles\hawk;
 #include scripts\killstreaks\airsupport;
 #include scripts\killstreaks\killstreaks_shared;
+
 #namespace hawk_mp;
 
 autoexec __init__system__() {

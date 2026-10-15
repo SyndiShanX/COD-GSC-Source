@@ -5,6 +5,7 @@
 
 #using script_4eecbd20dc9a462c;
 #using scripts\core_common\system_shared;
+
 #namespace chopper_gunner;
 
 function private autoexec __init__system__() {

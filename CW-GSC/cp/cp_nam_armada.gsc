@@ -53,6 +53,7 @@
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
 #using scripts\weapons\weapon_utils;
+
 #namespace cp_nam_armada;
 
 function private event_handler[createstruct] function_e0a8e4ba(struct) {

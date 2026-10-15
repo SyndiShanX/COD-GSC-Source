@@ -4,6 +4,7 @@
 ***********************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace full_screen_movie;
 class cfull_screen_movie: cluielem {
   function set_moviename(localclientnum, value) {

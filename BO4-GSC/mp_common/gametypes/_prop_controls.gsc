@@ -26,6 +26,7 @@
 #include scripts\mp_common\gametypes\spawning;
 #include scripts\mp_common\gametypes\spawnlogic;
 #include scripts\mp_common\util;
+
 #namespace prop_controls;
 
 notifyonplayercommand(command, key) {

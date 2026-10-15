@@ -14,6 +14,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\weapons\deployable;
 #using scripts\weapons\weaponobjects;
+
 #namespace listening_device;
 
 function private autoexec __init__system__() {

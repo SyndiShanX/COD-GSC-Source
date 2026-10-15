@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\system_shared;
+
 #namespace wz_open_skyscrapers_ffotd;
 
 autoexec __init__system__() {

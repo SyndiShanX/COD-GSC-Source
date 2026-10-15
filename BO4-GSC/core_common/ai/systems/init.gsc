@@ -6,6 +6,7 @@
 #include scripts\core_common\ai\archetype_utility;
 #include scripts\core_common\ai\systems\shared;
 #include scripts\core_common\name_shared;
+
 #namespace init;
 
 initweapon(weapon) {

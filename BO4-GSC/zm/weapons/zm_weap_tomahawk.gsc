@@ -19,6 +19,7 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_weap_tomahawk;
 
 autoexec __init__system__() {

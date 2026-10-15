@@ -15,6 +15,7 @@
 #using scripts\cp_common\achievements;
 #using scripts\cp_common\gametypes\save;
 #using scripts\cp_common\util;
+
 #namespace challenges;
 
 function private autoexec __init__system__() {

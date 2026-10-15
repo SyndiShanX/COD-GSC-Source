@@ -4,6 +4,7 @@
 ***************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace prototype_self_revive;
 class cprototype_self_revive: cluielem {
   function open(player, flags = 0) {

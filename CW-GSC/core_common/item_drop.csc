@@ -10,6 +10,7 @@
 #using scripts\core_common\item_world;
 #using scripts\core_common\item_world_util;
 #using scripts\core_common\system_shared;
+
 #namespace item_drop;
 
 function private autoexec __init__system__() {

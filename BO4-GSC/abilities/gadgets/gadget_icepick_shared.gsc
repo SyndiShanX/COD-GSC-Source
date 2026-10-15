@@ -14,6 +14,7 @@
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\util_shared;
 #include scripts\killstreaks\killstreaks_shared;
+
 #namespace icepick;
 
 init_shared() {

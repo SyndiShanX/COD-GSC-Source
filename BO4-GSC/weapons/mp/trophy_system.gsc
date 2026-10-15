@@ -7,6 +7,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\weapons\trophy_system;
+
 #namespace trophy_system;
 
 autoexec __init__system__() {

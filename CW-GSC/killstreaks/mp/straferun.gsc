@@ -25,6 +25,7 @@
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\mp_common\util;
 #using scripts\weapons\heatseekingmissile;
+
 #namespace straferun;
 
 function private autoexec __init__system__() {

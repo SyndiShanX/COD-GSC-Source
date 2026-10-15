@@ -65,6 +65,7 @@
 #using scripts\zm_common\zm_utility_zsurvival;
 #using scripts\zm_common\zm_vo;
 #using scripts\zm_common\zm_weapons;
+
 #namespace namespace_1b312da5;
 
 function private autoexec __init__system__() {

@@ -17,6 +17,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_wallbuy;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_white_toast;
 
 init_clientfields() {

@@ -10,6 +10,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\core_common\vehicle_ai_shared;
 #using scripts\core_common\vehicle_shared;
+
 #namespace smart_bomb;
 
 function function_c6f75619() {

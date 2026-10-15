@@ -12,6 +12,7 @@
 #using scripts\core_common\rank_shared;
 #using scripts\core_common\util_shared;
 #using scripts\killstreaks\killstreaks_util;
+
 #namespace scoreevents;
 
 function registerscoreeventcallback(callback, func) {

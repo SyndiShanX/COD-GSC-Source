@@ -18,6 +18,7 @@
 #using scripts\cp_common\hms_util;
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\skipto;
+
 #namespace namespace_d0cd5fb4;
 
 function starting(str_objective) {

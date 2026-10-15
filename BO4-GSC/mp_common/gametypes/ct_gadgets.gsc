@@ -8,6 +8,7 @@
 #include scripts\core_common\values_shared;
 #include scripts\mp_common\gametypes\ct_bots;
 #include scripts\mp_common\gametypes\ct_utils;
+
 #namespace ct_gadgets;
 
 function_f2f3407(gadget_name) {

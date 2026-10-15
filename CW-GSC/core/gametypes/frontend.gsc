@@ -12,6 +12,7 @@
 #using scripts\core_common\spawner_shared;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
+
 #namespace frontend;
 
 function callback_void() {}

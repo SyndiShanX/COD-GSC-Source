@@ -5,6 +5,7 @@
 
 #using scripts\core_common\ai_shared;
 #using scripts\core_common\util_shared;
+
 #namespace sound;
 
 function loop_fx_sound(alias, origin, ender) {

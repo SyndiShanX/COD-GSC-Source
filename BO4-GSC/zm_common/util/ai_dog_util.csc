@@ -9,6 +9,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm;
+
 #namespace zombie_dog_util;
 
 autoexec __init__system__() {

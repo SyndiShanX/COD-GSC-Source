@@ -9,6 +9,7 @@
 #using scripts\core_common\lui_shared;
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
+
 #namespace control;
 
 function event_handler[gametype_init] main(eventstruct) {

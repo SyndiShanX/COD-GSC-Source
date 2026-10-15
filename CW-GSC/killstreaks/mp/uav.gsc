@@ -24,6 +24,7 @@
 #using scripts\mp_common\teams\teams;
 #using scripts\mp_common\util;
 #using scripts\weapons\heatseekingmissile;
+
 #namespace uav;
 
 function private autoexec __init__system__() {

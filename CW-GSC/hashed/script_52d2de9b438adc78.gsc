@@ -11,6 +11,7 @@
 #using scripts\killstreaks\killstreakrules_shared;
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\killstreaks\killstreaks_util;
+
 #namespace ir_strobe;
 
 function init_shared() {

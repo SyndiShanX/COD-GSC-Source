@@ -12,6 +12,7 @@
 #using scripts\zm_common\zm_equipment;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_weapons;
+
 #namespace zm_weap_molotov;
 
 function private autoexec __init__system__() {

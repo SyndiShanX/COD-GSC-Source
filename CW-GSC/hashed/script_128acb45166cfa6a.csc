@@ -11,6 +11,7 @@
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_6479037a;
 
 function init() {

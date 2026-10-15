@@ -7,6 +7,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
+
 #namespace wz_blast_door_light;
 
 autoexec __init__system__() {

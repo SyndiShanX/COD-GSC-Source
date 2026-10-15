@@ -9,6 +9,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\gametypes\dev;
 #using scripts\cp_common\util;
+
 #namespace dev_class;
 
 function private autoexec __init__system__() {

@@ -6,6 +6,7 @@
 #include scripts\abilities\ability_player;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
+
 #namespace hero_weapon;
 
 autoexec __init__system__() {

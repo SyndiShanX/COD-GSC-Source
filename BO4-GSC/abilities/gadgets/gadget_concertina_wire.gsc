@@ -22,6 +22,7 @@
 #include scripts\weapons\deployable;
 #include scripts\weapons\weapon_utils;
 #include scripts\weapons\weaponobjects;
+
 #namespace concertina_wire;
 
 init_shared(var_4b51853b) {

@@ -7,6 +7,7 @@
 #using scripts\core_common\bots\bot_action;
 #using scripts\core_common\bots\bot_position;
 #using scripts\core_common\callbacks_shared;
+
 #namespace namespace_255a2b21;
 
 function preinit() {

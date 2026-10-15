@@ -38,6 +38,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\vehicle_ai_shared;
+
 #namespace namespace_2e61cc4b;
 class class_a504b9a3 {
   var var_190509f3;

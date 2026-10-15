@@ -17,6 +17,7 @@
 #using scripts\zm_common\zm_equipment;
 #using scripts\zm_common\zm_stats;
 #using scripts\zm_common\zm_utility;
+
 #namespace ammomod_shatterblast;
 
 function init_shatterblast() {

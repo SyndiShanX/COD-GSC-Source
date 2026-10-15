@@ -11,6 +11,7 @@
 #include scripts\core_common\ai\systems\planner_blackboard;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace planner_zm_commander_utility;
 
 autoexec __init__system__() {

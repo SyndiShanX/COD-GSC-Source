@@ -17,6 +17,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\weapons\weaponobjects;
+
 #namespace land_mine;
 
 function private autoexec __init__system__() {

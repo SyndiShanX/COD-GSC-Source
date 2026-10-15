@@ -28,6 +28,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace namespace_9e8d4ac3;
 
 function function_157fc984() {}

@@ -29,6 +29,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_56b772a5;
 
 function function_160c9deb(heli) {

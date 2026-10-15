@@ -21,6 +21,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
 #include scripts\core_common\weapons_shared;
+
 #namespace scene;
 
 class class_6572d7cd: csceneplayer, csceneobject {}

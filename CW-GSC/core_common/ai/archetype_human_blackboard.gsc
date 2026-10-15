@@ -5,6 +5,7 @@
 
 #using scripts\core_common\ai\systems\ai_interface;
 #using scripts\core_common\ai_shared;
+
 #namespace blackboard;
 
 function private bb_getarrivaltype() {

@@ -5,6 +5,7 @@
 
 #using scripts\core_common\load_shared;
 #using scripts\core_common\util_shared;
+
 #namespace mp_sm_deptstore;
 
 function event_handler[level_init] main(eventstruct) {

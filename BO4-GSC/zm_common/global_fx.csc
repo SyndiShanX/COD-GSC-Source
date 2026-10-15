@@ -5,6 +5,7 @@
 
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
+
 #namespace global_fx;
 
 autoexec __init__system__() {

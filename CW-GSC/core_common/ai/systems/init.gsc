@@ -5,6 +5,7 @@
 
 #using scripts\core_common\ai\archetype_utility;
 #using scripts\core_common\ai\systems\shared;
+
 #namespace init;
 
 function initweapon(weapon) {

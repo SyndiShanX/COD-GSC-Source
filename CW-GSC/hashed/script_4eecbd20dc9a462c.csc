@@ -7,6 +7,7 @@
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\scene_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_e8c18978;
 
 function preinit(bundlename) {

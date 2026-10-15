@@ -35,6 +35,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\smart_bundle;
 #using scripts\cp_common\util;
+
 #namespace namespace_d9b153b9;
 
 function function_ad9087cb() {}

@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\system_shared;
+
 #namespace art;
 
 function private autoexec __init__system__() {

@@ -36,6 +36,7 @@
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace tkdn_raid_roof;
 
 function starting(str_skipto) {

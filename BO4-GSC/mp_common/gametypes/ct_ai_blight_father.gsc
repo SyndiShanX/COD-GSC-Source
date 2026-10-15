@@ -26,6 +26,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
 #include scripts\mp_common\gametypes\ct_ai_zombie;
+
 #namespace ct_ai_blight_father;
 
 autoexec __init__system__() {

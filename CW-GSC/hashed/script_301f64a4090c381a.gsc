@@ -16,6 +16,7 @@
 #using scripts\zm_common\zm_score;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_weapons;
+
 #namespace zm_faction_buffs;
 
 function private autoexec __init__system__() {

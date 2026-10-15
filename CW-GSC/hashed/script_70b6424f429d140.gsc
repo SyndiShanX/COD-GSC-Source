@@ -28,6 +28,7 @@
 #using scripts\cp_common\snd_draw;
 #using scripts\cp_common\snd_sp;
 #using scripts\cp_common\snd_utility;
+
 #namespace tkdn_heli_intro;
 
 function starting(str_skipto) {}

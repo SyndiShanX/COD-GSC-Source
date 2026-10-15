@@ -8,6 +8,7 @@
 #using scripts\core_common\spectating;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\territory_util;
+
 #namespace spectate_view;
 
 function private autoexec __init__system__() {

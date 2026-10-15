@@ -16,6 +16,7 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_trial_red_oracle_boon;
 
 autoexec __init__system__() {

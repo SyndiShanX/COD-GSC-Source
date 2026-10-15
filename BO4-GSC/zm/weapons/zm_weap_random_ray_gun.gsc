@@ -24,6 +24,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace ww_random_ray_gun;
 
 autoexec __init__system__() {

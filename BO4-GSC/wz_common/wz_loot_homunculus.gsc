@@ -13,6 +13,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\item_world;
 #include scripts\wz_common\wz_ai_utils;
+
 #namespace wz_loot_homunculus;
 
 autoexec __init__system__() {

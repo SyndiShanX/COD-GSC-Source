@@ -25,6 +25,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\smart_bundle;
 #using scripts\cp_common\util;
+
 #namespace namespace_b092382c;
 
 function flags_init() {

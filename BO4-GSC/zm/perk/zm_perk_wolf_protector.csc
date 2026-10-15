@@ -10,6 +10,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_perks;
+
 #namespace zm_perk_wolf_protector;
 
 autoexec __init__system__() {

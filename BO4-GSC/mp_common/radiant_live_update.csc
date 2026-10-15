@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\system_shared;
+
 #namespace radiant_live_update;
 
 autoexec __init__system__() {

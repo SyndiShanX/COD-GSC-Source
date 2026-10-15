@@ -16,6 +16,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\snd_utility;
+
 #namespace snipercam;
 
 function private autoexec __init__system__() {

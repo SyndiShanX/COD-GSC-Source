@@ -41,6 +41,7 @@
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace mansion_ww_lvl3_quest;
 
 autoexec __init__system__() {

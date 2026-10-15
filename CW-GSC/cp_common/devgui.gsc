@@ -19,6 +19,7 @@
 #using scripts\cp_common\gametypes\save;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\ui;
+
 #namespace devgui;
 
 function private autoexec __init__system__() {

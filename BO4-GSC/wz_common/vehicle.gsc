@@ -22,6 +22,7 @@
 #include scripts\mp_common\item_world;
 #include scripts\wz_common\wz_contracts;
 #include scripts\wz_common\wz_progression;
+
 #namespace wz_vehicle;
 
 autoexec __init__system__() {

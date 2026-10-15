@@ -22,6 +22,7 @@
 #using scripts\cp_common\gametypes\globallogic;
 #using scripts\cp_common\gametypes\globallogic_utils;
 #using scripts\weapons\weapon_utils;
+
 #namespace globallogic_actor;
 
 function callback_actorspawned(spawner) {

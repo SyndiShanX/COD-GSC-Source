@@ -9,6 +9,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\killstreaks\killstreakrules_shared;
 #using scripts\zm_common\zm_stats;
+
 #namespace killstreakrules;
 
 function init() {

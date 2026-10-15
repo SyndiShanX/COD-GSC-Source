@@ -5,6 +5,7 @@
 
 #include scripts\core_common\ai\systems\ai_interface;
 #include scripts\zm\ai\zm_ai_gladiator;
+
 #namespace zm_ai_gladiator_interface;
 
 registergladiatorinterfaceattributes() {

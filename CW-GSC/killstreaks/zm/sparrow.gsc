@@ -12,6 +12,7 @@
 #using scripts\weapons\weapons;
 #using scripts\zm_common\aats\ammomods\ammomod_napalmburst;
 #using scripts\zm_common\zm_player;
+
 #namespace zm_sparrow;
 
 function private autoexec __init__system__() {

@@ -17,6 +17,7 @@
 #using scripts\core_common\vehicle_shared;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace namespace_3da2ad62;
 
 function event_handler[level_init] main(eventstruct) {

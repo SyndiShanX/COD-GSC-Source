@@ -6,6 +6,7 @@
 #include script_4daa124bc391e7ed;
 #include scripts\core_common\renderoverridebundle;
 #include scripts\killstreaks\killstreak_detect;
+
 #namespace killstreak_bundles;
 
 spawned(local_client_num, bundle) {

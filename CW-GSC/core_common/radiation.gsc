@@ -12,6 +12,7 @@
 #using scripts\core_common\radiation_ui;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace radiation;
 
 function private autoexec __init__system__() {

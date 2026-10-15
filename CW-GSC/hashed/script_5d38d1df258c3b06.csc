@@ -8,6 +8,7 @@
 #using scripts\core_common\player\player_stats;
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\system_shared;
+
 #namespace namespace_7c1d0bac;
 
 function private autoexec __init__system__() {

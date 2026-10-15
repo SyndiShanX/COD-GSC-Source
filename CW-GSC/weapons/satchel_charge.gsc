@@ -12,6 +12,7 @@
 #using scripts\core_common\scoreevents_shared;
 #using scripts\core_common\util_shared;
 #using scripts\weapons\weaponobjects;
+
 #namespace satchel_charge;
 
 function init_shared() {

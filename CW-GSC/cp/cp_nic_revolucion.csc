@@ -11,6 +11,7 @@
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\util_shared;
 #using scripts\cp\cp_nic_revolucion_fx;
+
 #namespace cp_nic_revolucion;
 
 function event_handler[level_init] main(eventstruct) {

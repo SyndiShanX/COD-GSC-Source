@@ -7,6 +7,7 @@
 #using scripts\core_common\battlechatter;
 #using scripts\core_common\system_shared;
 #using scripts\weapons\gravity_spikes;
+
 #namespace gravity_spikes;
 
 function private autoexec __init__system__() {

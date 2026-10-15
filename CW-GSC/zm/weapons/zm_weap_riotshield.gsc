@@ -22,6 +22,7 @@
 #using scripts\zm_common\zm_player;
 #using scripts\zm_common\zm_powerups;
 #using scripts\zm_common\zm_weapons;
+
 #namespace riotshield;
 
 function private autoexec __init__system__() {

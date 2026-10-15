@@ -16,6 +16,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
+
 #namespace hud;
 
 function private event_handler[createstruct] function_e0a8e4ba(struct) {

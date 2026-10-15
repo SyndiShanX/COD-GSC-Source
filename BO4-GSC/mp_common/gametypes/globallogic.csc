@@ -16,6 +16,7 @@
 #include scripts\killstreaks\killstreak_detect;
 #include scripts\mp_common\gametypes\display_transition;
 #include scripts\mp_common\player\player;
+
 #namespace globallogic;
 
 autoexec __init__system__() {

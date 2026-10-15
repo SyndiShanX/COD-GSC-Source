@@ -5,6 +5,7 @@
 
 #using scripts\core_common\system_shared;
 #using scripts\killstreaks\supplydrop_shared;
+
 #namespace supplydrop;
 
 function private autoexec __init__system__() {

@@ -5,6 +5,7 @@
 
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\util_shared;
+
 #namespace fx;
 
 function set_forward_and_up_vectors() {

@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\clientfield_shared;
+
 #namespace zm_white_computer_system;
 
 preload() {

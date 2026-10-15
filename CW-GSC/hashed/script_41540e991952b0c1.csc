@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace doa_bannerelement;
 class class_1bec696c: cluielem {
   function open(localclientnum) {

@@ -6,6 +6,7 @@
 #using scripts\core_common\player\player_stats;
 #using scripts\core_common\util_shared;
 #using scripts\weapons\weaponobjects;
+
 #namespace weaponobjects;
 
 function function_b455d5d8() {

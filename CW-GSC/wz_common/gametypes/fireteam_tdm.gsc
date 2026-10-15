@@ -8,6 +8,7 @@
 #using scripts\core_common\death_circle;
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
+
 #namespace fireteam_tdm;
 
 function private autoexec __init__system__() {

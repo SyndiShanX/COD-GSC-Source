@@ -18,6 +18,7 @@
 #using scripts\zm_common\zm_spawner;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_vo;
+
 #namespace zm_powerup_fire_sale;
 
 function private autoexec __init__system__() {

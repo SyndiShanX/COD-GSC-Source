@@ -27,6 +27,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicles\raps;
+
 #namespace archetype_robot;
 
 autoexec __init__system__() {

@@ -5,6 +5,7 @@
 
 #using scripts\core_common\animation_shared;
 #using scripts\core_common\system_shared;
+
 #namespace namespace_80c07c34;
 
 function private autoexec __init__system__() {

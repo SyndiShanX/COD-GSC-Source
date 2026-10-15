@@ -7,6 +7,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\filter_shared;
 #include scripts\core_common\system_shared;
+
 #namespace status_effect_pulse;
 
 autoexec __init__system__() {

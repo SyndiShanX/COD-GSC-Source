@@ -8,6 +8,7 @@
 #using scripts\core_common\load_shared;
 #using scripts\core_common\util_shared;
 #using scripts\mp_common\red_door;
+
 #namespace mp_firebase;
 
 function event_handler[level_init] main(eventstruct) {

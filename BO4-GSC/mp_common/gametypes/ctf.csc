@@ -7,6 +7,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\shoutcaster;
 #include scripts\core_common\util_shared;
+
 #namespace ctf;
 
 event_handler[gametype_init] main(eventstruct) {

@@ -34,6 +34,7 @@
 #using scripts\cp_common\snd_sp;
 #using scripts\cp_common\snd_utility;
 #using scripts\cp_common\util;
+
 #namespace namespace_347b95ee;
 
 function starting(str_skipto) {

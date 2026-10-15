@@ -6,6 +6,7 @@
 #include scripts\weapons\molotov;
 #include scripts\weapons\proximity_grenade;
 #include scripts\weapons\weaponobjects;
+
 #namespace trapd;
 
 function_ae7e49da(watcher) {

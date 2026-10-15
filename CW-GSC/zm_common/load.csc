@@ -35,6 +35,7 @@
 #using scripts\zm_common\zm_magicbox;
 #using scripts\zm_common\zm_score;
 #using scripts\zm_common\zm_traps;
+
 #namespace load;
 
 function private autoexec __init__system__() {

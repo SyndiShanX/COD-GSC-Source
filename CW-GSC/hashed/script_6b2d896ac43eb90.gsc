@@ -37,6 +37,7 @@
 #using scripts\zm_common\zm_utility_zsurvival;
 #using scripts\zm_common\zm_vo;
 #using scripts\zm_common\zm_vote;
+
 #namespace namespace_dbb31ff3;
 
 function event_handler[level_init] main(eventstruct) {

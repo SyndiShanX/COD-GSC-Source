@@ -25,6 +25,7 @@
 #using scripts\cp_common\hms_util;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace namespace_8af9269b;
 
 function private autoexec __init__system__() {

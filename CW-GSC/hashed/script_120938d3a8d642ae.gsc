@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\system_shared;
+
 #namespace area_damage;
 
 function private autoexec __init__system__() {

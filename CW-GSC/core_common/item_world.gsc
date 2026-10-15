@@ -26,6 +26,7 @@
 #using scripts\core_common\throttle_shared;
 #using scripts\core_common\util_shared;
 #using scripts\weapons\weaponobjects;
+
 #namespace item_world;
 
 function private autoexec __init__system__() {

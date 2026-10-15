@@ -16,6 +16,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\cp\cp_takedown_fx;
 #using scripts\cp_common\util;
+
 #namespace cp_takedown;
 
 function event_handler[level_init] main(eventstruct) {

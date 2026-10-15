@@ -43,6 +43,7 @@
 #using scripts\mp_common\spawnbeacon;
 #using scripts\mp_common\userspawnselection;
 #using scripts\mp_common\util;
+
 #namespace mission_koth;
 
 function event_handler[gametype_init] main(eventstruct) {

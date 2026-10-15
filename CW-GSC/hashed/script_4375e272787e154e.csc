@@ -11,6 +11,7 @@
 #using scripts\core_common\music_shared;
 #using scripts\core_common\scene_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_66d6aa44;
 
 function event_handler[level_preinit] codecallback_preinitialization(eventstruct) {

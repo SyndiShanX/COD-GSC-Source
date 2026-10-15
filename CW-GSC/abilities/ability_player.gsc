@@ -15,6 +15,7 @@
 #using scripts\core_common\scene_shared;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace ability_player;
 
 function private autoexec __init__system__() {

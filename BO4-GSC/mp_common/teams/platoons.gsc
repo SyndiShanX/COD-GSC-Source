@@ -10,6 +10,7 @@
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\mp_common\gametypes\round;
 #include scripts\mp_common\teams\teams;
+
 #namespace platoons;
 
 autoexec __init__system__() {

@@ -23,6 +23,7 @@
 #using scripts\cp_common\hms_util;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace namespace_a789f8ae;
 
 function function_96b44444() {

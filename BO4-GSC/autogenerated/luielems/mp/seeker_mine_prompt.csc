@@ -4,6 +4,7 @@
 ************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace seeker_mine_prompt;
 
 class cseeker_mine_prompt: cluielem {

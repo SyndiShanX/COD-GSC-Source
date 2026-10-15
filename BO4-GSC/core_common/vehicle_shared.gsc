@@ -24,6 +24,7 @@
 #include scripts\core_common\vehicleriders_shared;
 #include scripts\core_common\weapons_shared;
 #include scripts\weapons\heatseekingmissile;
+
 #namespace vehicle;
 
 autoexec __init__system__() {

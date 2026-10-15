@@ -10,6 +10,7 @@
 #include scripts\core_common\perks;
 #include scripts\core_common\weapons_shared;
 #include scripts\weapons\weapon_utils;
+
 #namespace armor;
 
 event_handler[gametype_init] main(eventstruct) {

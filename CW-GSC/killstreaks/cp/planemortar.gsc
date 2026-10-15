@@ -7,6 +7,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\killstreaks\planemortar_shared;
+
 #namespace planemortar;
 
 function private autoexec __init__system__() {

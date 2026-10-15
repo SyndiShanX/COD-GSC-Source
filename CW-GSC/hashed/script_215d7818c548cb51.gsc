@@ -12,6 +12,7 @@
 #using scripts\core_common\item_inventory;
 #using scripts\core_common\system_shared;
 #using scripts\zm_common\zm_utility;
+
 #namespace namespace_77bd50da;
 
 function private autoexec __init__system__() {

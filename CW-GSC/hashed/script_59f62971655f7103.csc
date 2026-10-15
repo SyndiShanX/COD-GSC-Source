@@ -8,6 +8,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
+
 #namespace battlechatter;
 
 function function_b59a25c5(player) {

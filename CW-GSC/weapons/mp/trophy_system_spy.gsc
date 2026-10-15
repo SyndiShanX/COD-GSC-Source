@@ -12,6 +12,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\weapons\trophy_system;
 #using scripts\weapons\weaponobjects;
+
 #namespace trophy_system;
 
 function private autoexec __init__system__() {

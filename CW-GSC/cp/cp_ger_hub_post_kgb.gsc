@@ -19,6 +19,7 @@
 #using scripts\cp_common\gametypes\save;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace hub_post_kgb;
 
 function starting(str_skipto) {}

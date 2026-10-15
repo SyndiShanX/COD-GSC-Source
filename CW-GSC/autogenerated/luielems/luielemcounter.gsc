@@ -4,6 +4,7 @@
 *****************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace luielemcounter;
 class class_1beae0: cluielem {
   var var_bf9c8c95;

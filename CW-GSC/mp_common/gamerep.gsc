@@ -6,6 +6,7 @@
 #using scripts\core_common\bots\bot;
 #using scripts\core_common\player\player_shared;
 #using scripts\core_common\rank_shared;
+
 #namespace gamerep;
 
 function init() {

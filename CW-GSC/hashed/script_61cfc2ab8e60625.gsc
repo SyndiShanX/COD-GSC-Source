@@ -25,6 +25,7 @@
 #using scripts\cp_common\objectives_ui;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace namespace_b100dd86;
 
 function init_clientfields() {

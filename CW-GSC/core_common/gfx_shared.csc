@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\math_shared;
+
 #namespace gfx;
 
 function setstage(localclientnum, bundle, filterid, stageprefix, stagelength, accumtime, totalaccumtime, setconstants) {

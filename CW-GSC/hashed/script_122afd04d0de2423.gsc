@@ -42,6 +42,7 @@
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
 #using scripts\weapons\cp\spy_camera;
+
 #namespace namespace_f464d565;
 
 function function_dbf2a80e(str_skipto) {

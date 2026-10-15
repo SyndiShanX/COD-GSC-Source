@@ -4,6 +4,7 @@
 ***************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace sr_objective_reward_menu;
 class class_51a06b68: cluielem {
   function open(localclientnum) {

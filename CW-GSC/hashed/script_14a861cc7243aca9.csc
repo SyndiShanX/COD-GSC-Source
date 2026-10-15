@@ -8,6 +8,7 @@
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\renderoverridebundle;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_7fe06af4;
 
 function event_handler[gametype_init] init(eventstruct) {

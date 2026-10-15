@@ -6,6 +6,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_melee_weapon;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_weap_spork;
 
 autoexec __init__system__() {

@@ -19,6 +19,7 @@
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\mp_common\player\player_record;
 #include scripts\wz_common\gametypes\warzone;
+
 #namespace wz_medals;
 
 autoexec __init__system__() {

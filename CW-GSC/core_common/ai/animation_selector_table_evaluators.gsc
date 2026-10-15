@@ -5,6 +5,7 @@
 
 #using scripts\core_common\ai\systems\animation_selector_table;
 #using scripts\core_common\animation_shared;
+
 #namespace animation_selector_table_evaluators;
 
 function autoexec registerastscriptfunctions() {

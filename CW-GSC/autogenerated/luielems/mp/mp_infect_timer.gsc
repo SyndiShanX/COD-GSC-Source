@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace mp_infect_timer;
 class cmp_infect_timer: cluielem {
   var var_bf9c8c95;

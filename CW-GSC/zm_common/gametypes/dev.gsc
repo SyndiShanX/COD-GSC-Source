@@ -19,6 +19,7 @@
 #using scripts\zm_common\gametypes\globallogic_score;
 #using scripts\zm_common\gametypes\globallogic_utils;
 #using scripts\zm_common\util;
+
 #namespace dev;
 
 function private autoexec __init__system__() {

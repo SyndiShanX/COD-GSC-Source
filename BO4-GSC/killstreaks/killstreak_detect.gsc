@@ -5,6 +5,7 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\killstreaks\killstreak_hacking;
+
 #namespace killstreak_detect;
 
 init_shared() {

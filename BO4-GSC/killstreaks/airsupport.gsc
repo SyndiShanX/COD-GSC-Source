@@ -11,6 +11,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\killstreaks\killstreakrules_shared;
 #include scripts\weapons\weapons;
+
 #namespace airsupport;
 
 init_shared() {

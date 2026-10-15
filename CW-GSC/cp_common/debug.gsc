@@ -17,6 +17,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\cp_common\debug_menu;
 #using scripts\cp_common\util;
+
 #namespace debug;
 
 function private autoexec __init__system__() {

@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\struct;
+
 #namespace zodt8_sound;
 
 main() {

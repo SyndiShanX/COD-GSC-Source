@@ -17,6 +17,7 @@
 #using scripts\cp_common\dialogue;
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\util;
+
 #namespace evac;
 
 function setup() {

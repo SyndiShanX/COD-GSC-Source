@@ -9,6 +9,7 @@
 #include scripts\core_common\renderoverridebundle;
 #include scripts\core_common\struct;
 #include scripts\mp_common\player\player;
+
 #namespace infect;
 
 event_handler[gametype_init] main(eventstruct) {

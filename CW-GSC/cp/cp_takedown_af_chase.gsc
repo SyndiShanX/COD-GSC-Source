@@ -44,6 +44,7 @@
 #using scripts\cp_common\snd;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace tkdn_af_chase;
 
 function starting(str_skipto) {

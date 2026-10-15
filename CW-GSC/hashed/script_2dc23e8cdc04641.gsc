@@ -38,6 +38,7 @@
 #using scripts\cp_common\util;
 #using scripts\killstreaks\cp\ac130;
 #using scripts\killstreaks\killstreaks_shared;
+
 #namespace namespace_379d0dc2;
 
 function private autoexec __init__system__() {

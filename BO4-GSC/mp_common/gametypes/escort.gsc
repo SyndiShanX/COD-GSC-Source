@@ -46,6 +46,7 @@
 #include scripts\mp_common\util;
 #include scripts\weapons\heatseekingmissile;
 #include scripts\weapons\weaponobjects;
+
 #namespace escort;
 
 autoexec __init__system__() {

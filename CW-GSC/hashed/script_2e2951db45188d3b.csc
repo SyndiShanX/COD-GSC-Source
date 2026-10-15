@@ -8,6 +8,7 @@
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_4ea0b0e1;
 
 function private autoexec __init__system__() {

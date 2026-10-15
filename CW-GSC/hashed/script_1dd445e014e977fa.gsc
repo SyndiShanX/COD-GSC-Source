@@ -9,6 +9,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\cp_common\util;
+
 #namespace namespace_82776369;
 
 function private autoexec __init__system__() {

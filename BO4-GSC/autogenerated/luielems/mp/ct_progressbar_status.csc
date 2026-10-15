@@ -4,6 +4,7 @@
 ***************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace ct_progressbar_status;
 
 class cct_progressbar_status: cluielem {

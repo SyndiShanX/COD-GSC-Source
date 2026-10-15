@@ -12,6 +12,7 @@
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\killstreaks\zm\killstreakrules;
+
 #namespace killstreaks;
 
 function private autoexec __init__system__() {

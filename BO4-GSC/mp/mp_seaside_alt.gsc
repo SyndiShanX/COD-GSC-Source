@@ -13,6 +13,7 @@
 #include scripts\mp\mp_seaside_alt_sound;
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\load;
+
 #namespace mp_seaside_alt;
 
 event_handler[level_init] main(eventstruct) {

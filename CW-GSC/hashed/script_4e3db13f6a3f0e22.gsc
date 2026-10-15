@@ -6,6 +6,7 @@
 #using scripts\core_common\array_shared;
 #using scripts\core_common\spawner_shared;
 #using scripts\cp_common\skipto;
+
 #namespace namespace_ff979a59;
 
 function event_handler[level_init] main(eventstruct) {

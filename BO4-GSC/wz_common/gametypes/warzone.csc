@@ -18,6 +18,7 @@
 #include scripts\wz_common\vehicle;
 #include scripts\wz_common\wz_ai;
 #include scripts\wz_common\wz_ignore_systems;
+
 #namespace warzone;
 
 event_handler[gametype_init] main(eventstruct) {

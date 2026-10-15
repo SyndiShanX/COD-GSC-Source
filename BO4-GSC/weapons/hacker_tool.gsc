@@ -12,6 +12,7 @@
 #include scripts\killstreaks\killstreaks_util;
 #include scripts\weapons\heatseekingmissile;
 #include scripts\weapons\weaponobjects;
+
 #namespace hacker_tool;
 
 init_shared() {

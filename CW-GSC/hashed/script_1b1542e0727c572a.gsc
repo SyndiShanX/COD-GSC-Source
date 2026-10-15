@@ -14,6 +14,7 @@
 #using scripts\core_common\spawner_shared;
 #using scripts\core_common\vehicle_shared;
 #using scripts\cp_common\skipto;
+
 #namespace namespace_ac51ea79;
 
 function starting(str_objective) {

@@ -9,6 +9,7 @@
 #include scripts\core_common\scene_shared;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_perks;
+
 #namespace zm_perk_death_perception;
 
 autoexec __init__system__() {

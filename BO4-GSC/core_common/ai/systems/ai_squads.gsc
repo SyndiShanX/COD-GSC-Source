@@ -7,6 +7,7 @@
 #include scripts\core_common\array_shared;
 #include scripts\core_common\spawner_shared;
 #include scripts\core_common\system_shared;
+
 #namespace aisquads;
 
 class squad {

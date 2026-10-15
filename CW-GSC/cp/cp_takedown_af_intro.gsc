@@ -36,6 +36,7 @@
 #using scripts\cp_common\snd_draw;
 #using scripts\cp_common\util;
 #using scripts\weapons\cp\spy_camera;
+
 #namespace tkdn_af_intro;
 
 function starting(str_skipto) {

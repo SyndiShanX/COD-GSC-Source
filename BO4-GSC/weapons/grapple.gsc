@@ -9,6 +9,7 @@
 #include scripts\core_common\scoreevents_shared;
 #include scripts\core_common\system_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace grapple;
 
 autoexec __init__system__() {

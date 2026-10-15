@@ -6,6 +6,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\item_world;
+
 #namespace namespace_d0937679;
 
 autoexec __init__system__() {

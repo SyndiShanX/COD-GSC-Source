@@ -4,6 +4,7 @@
 **********************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace mp_prop_controls;
 class cmp_prop_controls: cluielem {
   function open(localclientnum) {

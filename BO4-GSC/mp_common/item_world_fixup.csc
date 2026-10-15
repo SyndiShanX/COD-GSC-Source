@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\flagsys_shared;
+
 #namespace item_world_fixup;
 
 autoexec __init__() {

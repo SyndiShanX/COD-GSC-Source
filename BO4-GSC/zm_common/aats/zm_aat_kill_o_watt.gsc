@@ -10,6 +10,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm\zm_lightning_chain;
 #include scripts\zm_common\callbacks;
+
 #namespace zm_aat_kill_o_watt;
 
 autoexec __init__system__() {

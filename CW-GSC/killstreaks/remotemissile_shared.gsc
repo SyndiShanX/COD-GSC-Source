@@ -23,6 +23,7 @@
 #using scripts\killstreaks\killstreakrules_shared;
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\killstreaks\killstreaks_util;
+
 #namespace remotemissile;
 
 function init_shared(bundlename, var_bbc86faf) {

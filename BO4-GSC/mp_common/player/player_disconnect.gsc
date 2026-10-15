@@ -9,6 +9,7 @@
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\mp_common\player\player_record;
 #include scripts\mp_common\util;
+
 #namespace player;
 
 callback_playerdisconnect() {

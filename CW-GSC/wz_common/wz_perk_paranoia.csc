@@ -9,6 +9,7 @@
 #using scripts\core_common\spawning_squad;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace wz_perk_paranoia;
 
 function private autoexec __init__system__() {

@@ -9,6 +9,7 @@
 #include scripts\core_common\killcam_shared;
 #include scripts\core_common\player\player_shared;
 #include scripts\core_common\util_shared;
+
 #namespace lightninggun;
 
 init_shared() {

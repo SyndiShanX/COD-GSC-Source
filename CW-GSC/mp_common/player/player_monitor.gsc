@@ -12,6 +12,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\mp_common\bb;
 #using scripts\mp_common\gametypes\globallogic_utils;
+
 #namespace player_monitor;
 
 function private autoexec __init__system__() {

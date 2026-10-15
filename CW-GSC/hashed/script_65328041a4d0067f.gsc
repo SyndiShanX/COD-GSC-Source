@@ -10,6 +10,7 @@
 #using scripts\core_common\spawner_shared;
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\skipto;
+
 #namespace namespace_bb59e7e8;
 
 function function_dccb21b3(str_objective) {

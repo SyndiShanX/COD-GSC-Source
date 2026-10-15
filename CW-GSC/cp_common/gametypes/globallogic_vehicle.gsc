@@ -21,6 +21,7 @@
 #using scripts\core_common\vehicle_ai_shared;
 #using scripts\core_common\vehicle_shared;
 #using scripts\cp_common\util;
+
 #namespace vehicles;
 
 function private autoexec __init__system__() {

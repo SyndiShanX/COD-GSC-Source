@@ -36,6 +36,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace doa_arena;
 class class_f4bf8a8 {
   var angles;

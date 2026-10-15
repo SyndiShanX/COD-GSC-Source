@@ -47,6 +47,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
 #using scripts\zm_common\gametypes\globallogic;
+
 #namespace namespace_4dae815d;
 
 function init() {

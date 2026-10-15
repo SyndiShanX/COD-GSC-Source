@@ -5,6 +5,7 @@
 
 #using scripts\core_common\struct;
 #using scripts\core_common\vehicle_shared;
+
 #namespace siegebot;
 
 function autoexec main() {

@@ -6,6 +6,7 @@
 #include scripts\core_common\ai\archetype_utility;
 #include scripts\core_common\ai\systems\init;
 #include scripts\core_common\throttle_shared;
+
 #namespace shared;
 
 autoexec main() {

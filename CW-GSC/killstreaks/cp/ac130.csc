@@ -11,6 +11,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\util;
 #using scripts\killstreaks\ac130_shared;
+
 #namespace ac130;
 
 function private autoexec __init__system__() {

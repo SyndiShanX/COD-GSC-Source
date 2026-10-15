@@ -8,6 +8,7 @@
 #include scripts\core_common\player\player_stats;
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\gametypes\match;
+
 #namespace arena;
 
 autoexec __init__system__() {

@@ -16,6 +16,7 @@
 #using scripts\core_common\trigger_shared;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
+
 #namespace load;
 
 function private autoexec __init__system__() {

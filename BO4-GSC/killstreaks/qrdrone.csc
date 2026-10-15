@@ -8,6 +8,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
+
 #namespace qrdrone;
 
 init_shared() {

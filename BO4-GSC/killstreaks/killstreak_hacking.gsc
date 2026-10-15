@@ -9,6 +9,7 @@
 #include scripts\core_common\vehicle_shared;
 #include scripts\killstreaks\killstreak_bundles;
 #include scripts\killstreaks\killstreaks_shared;
+
 #namespace killstreak_hacking;
 
 enable_hacking(killstreakname, prehackfunction, posthackfunction) {

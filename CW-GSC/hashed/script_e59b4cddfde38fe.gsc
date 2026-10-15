@@ -11,6 +11,7 @@
 #using scripts\zm_common\zm_trial_util;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_zonemgr;
+
 #namespace zm_trial_kill_in_area;
 
 function private autoexec __init__system__() {

@@ -25,6 +25,7 @@
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_vo;
 #using scripts\zm_common\zm_zonemgr;
+
 #namespace zombie_dog_util;
 
 function private autoexec __init__system__() {

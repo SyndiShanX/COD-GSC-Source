@@ -15,6 +15,7 @@
 #include scripts\zm_common\gametypes\globallogic_audio;
 #include scripts\zm_common\gametypes\globallogic_utils;
 #include scripts\zm_common\util;
+
 #namespace globallogic_score;
 
 gethighestscoringplayer() {

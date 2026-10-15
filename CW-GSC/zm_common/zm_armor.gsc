@@ -18,6 +18,7 @@
 #using scripts\zm_common\zm_net;
 #using scripts\zm_common\zm_score;
 #using scripts\zm_common\zm_utility;
+
 #namespace zm_armor;
 
 function private autoexec __init__system__() {

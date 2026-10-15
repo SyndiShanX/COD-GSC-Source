@@ -39,6 +39,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_utility_zstandard;
 #include scripts\zm_common\zm_vo;
+
 #namespace zm_red_power_quest;
 
 init() {

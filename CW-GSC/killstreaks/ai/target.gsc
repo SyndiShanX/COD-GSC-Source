@@ -5,6 +5,7 @@
 
 #using scripts\core_common\targetting_delay;
 #using scripts\core_common\util_shared;
+
 #namespace ai_target;
 
 function function_d15dd929(radius, origin) {

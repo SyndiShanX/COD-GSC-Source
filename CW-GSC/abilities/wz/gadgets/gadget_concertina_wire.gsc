@@ -5,6 +5,7 @@
 
 #using scripts\abilities\gadgets\gadget_concertina_wire;
 #using scripts\core_common\system_shared;
+
 #namespace concertina_wire;
 
 function private autoexec __init__system__() {

@@ -10,6 +10,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\zm_common\load;
 #using scripts\zm_common\zm_bgb_pack;
+
 #namespace bgb;
 
 function private autoexec __init__system__() {

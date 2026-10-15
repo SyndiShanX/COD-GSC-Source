@@ -34,6 +34,7 @@
 #using scripts\cp_common\oed;
 #using scripts\cp_common\player_decision;
 #using scripts\cp_common\ui\prompts;
+
 #namespace util;
 
 function private autoexec __init__system__() {

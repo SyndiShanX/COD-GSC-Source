@@ -22,6 +22,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
+
 #namespace archetypenosferatu;
 
 class class_1546f28e {

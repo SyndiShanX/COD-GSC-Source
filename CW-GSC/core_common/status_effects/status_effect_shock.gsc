@@ -6,6 +6,7 @@
 #using scripts\core_common\status_effects\status_effect_util;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\values_shared;
+
 #namespace status_effect_shock;
 
 function private autoexec __init__system__() {

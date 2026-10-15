@@ -6,6 +6,7 @@
 #include scripts\core_common\ai\archetype_utility;
 #include scripts\core_common\ai\systems\animation_state_machine_mocomp;
 #include scripts\core_common\math_shared;
+
 #namespace archetype_mocomps_utility;
 
 autoexec registerdefaultanimationmocomps() {

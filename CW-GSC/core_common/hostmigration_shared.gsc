@@ -6,6 +6,7 @@
 #using scripts\core_common\potm_shared;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
+
 #namespace hostmigration;
 
 function updatetimerpausedness() {

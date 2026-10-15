@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace sr_weapon_upgrade_menu;
 class class_ec90ce81: cluielem {
   var var_bf9c8c95;

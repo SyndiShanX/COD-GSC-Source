@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\array_shared;
+
 #namespace character;
 
 setmodelfromarray(a) {

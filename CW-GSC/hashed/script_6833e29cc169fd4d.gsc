@@ -6,6 +6,7 @@
 #using script_6a0921d005260773;
 #using scripts\core_common\array_shared;
 #using scripts\core_common\math_shared;
+
 #namespace namespace_8a67e6b6;
 
 function function_a780da8() {
@@ -184,7 +185,7 @@ function private _lock_sighttest(target, var_4f358117 = 1) {
   return 0;
 }
 
-function targetisvalid(target, weapon, lockreq = 1) {
+function targetisValid(target, weapon, lockreq = 1) {
   result = 1;
 
   if(!isDefined(target)) {
@@ -254,7 +255,7 @@ function weapon_lock_meetsrangerequirement(target, maxrange, weapon) {
 
 function weapon_lock_meetsrequirement(target, radius, weapon, maxrange, var_efb1ea62) {
   result = 1;
-  isvalid = self targetisvalid(target, weapon);
+  isvalid = self targetisValid(target, weapon);
 
   if(!is_true(isvalid)) {
     self cybercomsetfailhint(target, 1);
@@ -617,7 +618,7 @@ function function_d2bc8bb1(enemies, weapon, var_efb1ea62, earlyout = 0) {
       continue;
     }
 
-    if(!targetisvalid(enemy, weapon)) {
+    if(!targetisValid(enemy, weapon)) {
       continue;
     }
 

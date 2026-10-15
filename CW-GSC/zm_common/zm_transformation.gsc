@@ -14,6 +14,7 @@
 #using scripts\core_common\scene_shared;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\values_shared;
+
 #namespace zm_transform;
 
 function preinit() {

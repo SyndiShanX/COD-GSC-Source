@@ -8,6 +8,7 @@
 #using scripts\core_common\vehicle_shared;
 #using scripts\killstreaks\killstreak_detect;
 #using scripts\killstreaks\killstreak_vehicle;
+
 #namespace recon_car;
 
 function private autoexec __init__system__() {

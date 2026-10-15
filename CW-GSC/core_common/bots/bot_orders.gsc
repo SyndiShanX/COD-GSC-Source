@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\bots\bot;
+
 #namespace bot_orders;
 
 function preinit() {

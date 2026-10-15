@@ -9,6 +9,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\zm\powerup\zm_powerup_cranked_pause;
 #using scripts\zm_common\zm_utility;
+
 #namespace zcranked;
 
 function event_handler[gametype_init] main(eventstruct) {

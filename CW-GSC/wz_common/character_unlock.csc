@@ -7,6 +7,7 @@
 #using scripts\core_common\item_inventory;
 #using scripts\core_common\item_world_fixup;
 #using scripts\core_common\system_shared;
+
 #namespace character_unlock;
 
 function private autoexec __init__system__() {

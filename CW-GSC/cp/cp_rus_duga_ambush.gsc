@@ -43,6 +43,7 @@
 #using scripts\cp_common\snd_utility;
 #using scripts\cp_common\snipercam;
 #using scripts\cp_common\util;
+
 #namespace duga_ambush;
 
 function starting(str_objective) {

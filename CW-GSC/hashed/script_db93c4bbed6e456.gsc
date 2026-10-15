@@ -9,6 +9,7 @@
 #using scripts\core_common\lui_shared;
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\util;
+
 #namespace namespace_5443b356;
 
 function autoexec main() {

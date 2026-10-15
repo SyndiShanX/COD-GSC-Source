@@ -27,6 +27,7 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_weap_flamethrower;
 
 autoexec __init__system__() {

@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace zm_corrupted_health_bar;
 class class_c982469d: cluielem {
   var var_bf9c8c95;

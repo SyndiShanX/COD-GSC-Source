@@ -6,6 +6,7 @@
 #using script_71b355b2496e3c6d;
 #using scripts\core_common\system_shared;
 #using scripts\weapons\satchel_charge;
+
 #namespace satchel_charge;
 
 function private autoexec __init__system__() {

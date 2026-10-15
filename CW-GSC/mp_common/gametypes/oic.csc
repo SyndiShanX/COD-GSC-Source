@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\clientfield_shared;
+
 #namespace oic;
 
 function event_handler[gametype_init] main(eventstruct) {

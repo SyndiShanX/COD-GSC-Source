@@ -19,6 +19,7 @@
 #using scripts\zm\zm_tungsten_main_quest;
 #using scripts\zm_common\objective_manager;
 #using scripts\zm_common\zm_score;
+
 #namespace zm_tungsten_side_quest_shooting_gallery;
 
 function init() {

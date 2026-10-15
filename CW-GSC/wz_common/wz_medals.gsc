@@ -18,6 +18,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\mp_common\gametypes\globallogic;
 #using scripts\mp_common\player\player_record;
+
 #namespace wz_medals;
 
 function private autoexec __init__system__() {

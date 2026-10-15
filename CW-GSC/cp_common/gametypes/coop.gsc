@@ -26,6 +26,7 @@
 #using scripts\cp_common\gametypes\save;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace coop;
 
 function event_handler[gametype_init] main(eventstruct) {

@@ -16,6 +16,7 @@
 #using scripts\zm_common\zm_loadout;
 #using scripts\zm_common\zm_perks;
 #using scripts\zm_common\zm_trial;
+
 #namespace zm_trial_util;
 
 function private autoexec __init__system__() {

@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace doa_textelement;
 class class_df106b1: cluielem {
   var var_bf9c8c95;

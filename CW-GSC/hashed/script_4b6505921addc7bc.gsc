@@ -20,6 +20,7 @@
 #using scripts\cp_common\dialogue;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace namespace_c80e7f5f;
 
 function init() {}

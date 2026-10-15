@@ -9,6 +9,7 @@
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\scene_shared;
 #using scripts\core_common\util_shared;
+
 #namespace display_transition;
 
 function init_shared() {

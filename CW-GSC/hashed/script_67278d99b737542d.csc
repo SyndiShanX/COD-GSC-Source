@@ -5,6 +5,7 @@
 
 #using script_2d142c6d365a90a3;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_fc40d35f;
 
 function function_d23da828() {

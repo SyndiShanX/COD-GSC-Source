@@ -6,6 +6,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_perks;
+
 #namespace zm_perk_mod_ethereal_razor;
 
 autoexec __init__system__() {

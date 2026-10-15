@@ -5,6 +5,7 @@
 
 #include scripts\core_common\ai\archetype_tiger;
 #include scripts\core_common\ai\systems\ai_interface;
+
 #namespace tigerinterface;
 
 registertigerinterfaceattributes() {

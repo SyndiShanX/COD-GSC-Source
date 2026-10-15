@@ -56,6 +56,7 @@
 #include scripts\zm_common\zm_transformation;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_ai_brutus;
 
 autoexec __init__system__() {

@@ -12,6 +12,7 @@
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\util;
+
 #namespace cp_sidemission_takedown;
 
 function event_handler[level_init] main(eventstruct) {

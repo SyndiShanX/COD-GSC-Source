@@ -10,6 +10,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\core_common\vehicle_shared;
 #using scripts\core_common\vehicles\player_vehicle;
+
 #namespace player_tank;
 
 function private autoexec __init__system__() {

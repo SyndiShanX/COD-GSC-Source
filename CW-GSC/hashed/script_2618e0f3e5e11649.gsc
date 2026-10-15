@@ -12,6 +12,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\struct;
+
 #namespace namespace_ce1f29cc;
 
 function function_6b885d72(destination) {

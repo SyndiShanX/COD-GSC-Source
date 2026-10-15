@@ -19,6 +19,7 @@
 #using scripts\cp_common\hint_tutorial;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace hub_post_takedown;
 
 function function_f50bc4b9() {

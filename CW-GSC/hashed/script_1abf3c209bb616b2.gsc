@@ -6,6 +6,7 @@
 #using scripts\core_common\array_shared;
 #using scripts\core_common\stealth\utility;
 #using scripts\core_common\struct;
+
 #namespace stealth_alarm;
 
 function init() {

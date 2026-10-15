@@ -18,6 +18,7 @@
 #using scripts\zm\ai\zm_ai_abom;
 #using scripts\zm_common\ai\zm_ai_utility;
 #using scripts\zm_common\zm_destination_manager;
+
 #namespace namespace_5665d8db;
 
 function private autoexec __init__system__() {

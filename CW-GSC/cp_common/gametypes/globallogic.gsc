@@ -52,6 +52,7 @@
 #using scripts\cp_common\rat;
 #using scripts\cp_common\util;
 #using scripts\weapons\weapons;
+
 #namespace globallogic;
 
 function private autoexec __init__system__() {

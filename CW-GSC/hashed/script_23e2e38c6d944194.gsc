@@ -5,6 +5,7 @@
 
 #using script_3dc93ca9902a9cda;
 #using scripts\core_common\system_shared;
+
 #namespace namespace_90310f6a;
 
 function private autoexec __init__system__() {

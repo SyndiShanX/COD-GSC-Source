@@ -13,6 +13,7 @@
 #using scripts\zm_common\gametypes\globallogic_utils;
 #using scripts\zm_common\gametypes\spawnlogic;
 #using scripts\zm_common\util;
+
 #namespace globallogic_defaults;
 
 function getwinningteamfromloser(losing_team) {

@@ -14,6 +14,7 @@
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\weapons\weapon_utils;
+
 #namespace battlechatter;
 
 function event_handler[weapon_change] onweaponchange(eventstruct) {

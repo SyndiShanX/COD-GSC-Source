@@ -10,6 +10,7 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
+
 #namespace zm_trial_death_from_above;
 
 autoexec __init__system__() {

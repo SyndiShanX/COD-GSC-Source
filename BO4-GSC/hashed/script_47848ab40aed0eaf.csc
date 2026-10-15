@@ -8,6 +8,7 @@
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\mp_common\item_world_fixup;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace namespace_b7ee637a;
 
 autoexec __init__system__() {

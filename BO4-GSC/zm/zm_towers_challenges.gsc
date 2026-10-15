@@ -35,6 +35,7 @@
 #include scripts\zm_common\zm_vapor_random;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_towers_challenges;
 
 autoexec __init__system__() {

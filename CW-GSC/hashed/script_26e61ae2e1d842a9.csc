@@ -6,6 +6,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\map;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_1a4edaec;
 
 function event_handler[level_init] main(eventstruct) {

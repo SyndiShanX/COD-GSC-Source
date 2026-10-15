@@ -14,6 +14,7 @@
 #include scripts\zm_common\zm_hero_weapon;
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_weap_sword_pistol;
 
 autoexec __init__system__() {

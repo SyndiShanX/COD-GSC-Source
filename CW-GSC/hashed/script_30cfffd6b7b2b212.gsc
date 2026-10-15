@@ -32,6 +32,7 @@
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\objectives_ui;
 #using scripts\cp_common\util;
+
 #namespace namespace_42da7c51;
 
 function devgui() {

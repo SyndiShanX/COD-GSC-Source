@@ -31,6 +31,7 @@
 #using scripts\cp_common\spawn_manager;
 #using scripts\cp_common\util;
 #using scripts\weapons\cp\spy_camera;
+
 #namespace namespace_d12540d8;
 
 function start(str_objective) {}

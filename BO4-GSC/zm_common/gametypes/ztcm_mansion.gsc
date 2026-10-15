@@ -9,6 +9,7 @@
 #include scripts\zm_common\gametypes\ztcm;
 #include scripts\zm_common\zm_round_logic;
 #include scripts\zm_common\zm_stats;
+
 #namespace ztcm_mansion;
 
 event_handler[gametype_init] main(eventstruct) {

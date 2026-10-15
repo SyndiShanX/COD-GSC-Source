@@ -18,6 +18,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\spawn_manager;
 #using scripts\cp_common\util;
+
 #namespace namespace_ee4af661;
 
 function start(str_objective) {

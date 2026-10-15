@@ -20,6 +20,7 @@
 #using scripts\zm_common\zm_score;
 #using scripts\zm_common\zm_unitrigger;
 #using scripts\zm_common\zm_utility;
+
 #namespace namespace_47809ab2;
 
 function init() {

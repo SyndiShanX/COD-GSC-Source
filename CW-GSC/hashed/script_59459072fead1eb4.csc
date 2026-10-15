@@ -16,6 +16,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\system_shared;
+
 #namespace namespace_f6712ec9;
 
 function init() {

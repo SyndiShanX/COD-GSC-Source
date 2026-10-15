@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace evidence_board_mission_preview;
 class class_fb1bfa12: cluielem {
   function open(localclientnum) {

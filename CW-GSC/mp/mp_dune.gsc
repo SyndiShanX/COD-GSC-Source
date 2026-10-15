@@ -11,6 +11,7 @@
 #using scripts\core_common\load_shared;
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
+
 #namespace mp_dune;
 
 function autoexec function_7defddbd() {

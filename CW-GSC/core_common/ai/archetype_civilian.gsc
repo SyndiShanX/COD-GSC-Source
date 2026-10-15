@@ -18,6 +18,7 @@
 #using scripts\core_common\laststand_shared;
 #using scripts\core_common\spawner_shared;
 #using scripts\core_common\util_shared;
+
 #namespace archetype_civilian;
 
 function autoexec main() {

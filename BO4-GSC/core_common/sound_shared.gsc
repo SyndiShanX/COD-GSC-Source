@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\util_shared;
+
 #namespace sound;
 
 loop_fx_sound(alias, origin, ender) {

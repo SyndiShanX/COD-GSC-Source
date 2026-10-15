@@ -9,6 +9,7 @@
 #using scripts\core_common\stealth\group;
 #using scripts\core_common\stealth\utility;
 #using scripts\core_common\util_shared;
+
 #namespace debug;
 
 function scalevolume(ent, vol) {}

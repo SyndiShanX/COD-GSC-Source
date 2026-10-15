@@ -9,6 +9,7 @@
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\math_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_be2ae534;
 
 function init() {

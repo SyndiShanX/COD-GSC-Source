@@ -19,6 +19,7 @@
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\mp_common\gametypes\globallogic_score;
 #using scripts\mp_common\gametypes\spy;
+
 #namespace spy_skill;
 
 function private autoexec __init__system__() {

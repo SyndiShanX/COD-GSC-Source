@@ -18,6 +18,7 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_progress;
 
 event_handler[level_init] main(eventstruct) {

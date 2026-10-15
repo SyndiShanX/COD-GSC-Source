@@ -5,6 +5,7 @@
 
 #using script_2a30ac7aa0ee8988;
 #using scripts\core_common\item_world_fixup;
+
 #namespace wz_common_items_fixup;
 
 function autoexec function_88ff61e0() {

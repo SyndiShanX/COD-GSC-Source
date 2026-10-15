@@ -6,6 +6,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\load_shared;
 #using scripts\core_common\util_shared;
+
 #namespace mp_hijacked_rm;
 
 function event_handler[level_init] main(eventstruct) {

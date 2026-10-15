@@ -35,6 +35,7 @@
 #using scripts\mp_common\player\player_killed;
 #using scripts\mp_common\player\player_monitor;
 #using scripts\mp_common\player\player_record;
+
 #namespace player;
 
 function callback_playerconnect() {

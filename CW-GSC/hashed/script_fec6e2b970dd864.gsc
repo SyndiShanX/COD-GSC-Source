@@ -12,6 +12,7 @@
 #using scripts\zm_common\zm_contracts;
 #using scripts\zm_common\zm_stats;
 #using scripts\zm_common\zm_utility;
+
 #namespace scoreevents;
 
 function private autoexec __init__system__() {

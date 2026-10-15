@@ -34,6 +34,7 @@
 #using scripts\core_common\vehicle_ai_shared;
 #using scripts\core_common\vehicle_death_shared;
 #using scripts\core_common\vehicle_shared;
+
 #namespace namespace_81522b3c;
 
 function init() {

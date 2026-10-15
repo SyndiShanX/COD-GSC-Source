@@ -35,6 +35,7 @@
 #include scripts\zm_common\trials\zm_trial_white_nukerun;
 #include scripts\zm_common\trials\zm_trial_white_population_control;
 #include scripts\zm_common\zm_powerups;
+
 #namespace zm_white_trials;
 
 main() {

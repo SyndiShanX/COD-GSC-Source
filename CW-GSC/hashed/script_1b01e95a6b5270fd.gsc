@@ -28,6 +28,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace doa_enemy;
 class class_3593c7e6 {
   var m_name;

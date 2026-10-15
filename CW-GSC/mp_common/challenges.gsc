@@ -26,6 +26,7 @@
 #using scripts\mp_common\scoreevents;
 #using scripts\mp_common\util;
 #using scripts\weapons\weapon_utils;
+
 #namespace challenges;
 
 function private autoexec __init__system__() {

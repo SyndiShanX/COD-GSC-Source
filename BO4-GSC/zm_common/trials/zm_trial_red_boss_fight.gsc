@@ -14,6 +14,7 @@
 #include scripts\zm\zm_red_fasttravel;
 #include scripts\zm_common\zm_aoe;
 #include scripts\zm_common\zm_trial;
+
 #namespace zm_trial_red_boss_fight;
 
 autoexec __init__system__() {

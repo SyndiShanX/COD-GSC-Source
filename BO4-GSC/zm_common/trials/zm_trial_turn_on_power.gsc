@@ -8,6 +8,7 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_trial_turn_on_power;
 
 autoexec __init__system__() {

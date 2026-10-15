@@ -16,6 +16,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
 #using scripts\killstreaks\killstreaks_shared;
+
 #namespace mp_tundra;
 
 function autoexec function_7defddbd() {

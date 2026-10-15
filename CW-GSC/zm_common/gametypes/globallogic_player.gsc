@@ -37,6 +37,7 @@
 #using scripts\zm_common\zm_characters;
 #using scripts\zm_common\zm_stats;
 #using scripts\zm_common\zm_utility;
+
 #namespace globallogic_player;
 
 function freezeplayerforroundend() {

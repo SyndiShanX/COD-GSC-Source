@@ -8,6 +8,7 @@
 #include scripts\core_common\math_shared;
 #include scripts\core_common\spawner_shared;
 #include scripts\core_common\values_shared;
+
 #namespace phalanx;
 
 class phalanx {

@@ -9,6 +9,7 @@
 #include scripts\zm_common\zm_player;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_bgb_blood_debt;
 
 autoexec __init__system__() {

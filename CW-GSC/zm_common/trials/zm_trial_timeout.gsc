@@ -15,6 +15,7 @@
 #using scripts\zm_common\zm_trial_util;
 #using scripts\zm_common\zm_weapons;
 #using scripts\zm_common\zm_zonemgr;
+
 #namespace zm_trial_timeout;
 
 function private autoexec __init__system__() {

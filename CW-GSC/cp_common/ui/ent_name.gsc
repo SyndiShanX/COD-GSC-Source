@@ -6,6 +6,7 @@
 #using script_35ae72be7b4fec10;
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\gametypes\globallogic_ui;
+
 #namespace entname;
 
 function add(name, team = 1) {

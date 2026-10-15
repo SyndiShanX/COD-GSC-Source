@@ -6,6 +6,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\deployable;
+
 #namespace concertina_wire;
 
 init_shared(var_4b51853b) {

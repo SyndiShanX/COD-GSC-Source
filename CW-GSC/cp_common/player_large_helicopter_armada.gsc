@@ -13,6 +13,7 @@
 #using scripts\core_common\vehicle_shared;
 #using scripts\core_common\vehicleriders_shared;
 #using scripts\core_common\vehicles\player_vehicle;
+
 #namespace player_large_helicopter_armada;
 
 function private autoexec __init__system__() {

@@ -7,6 +7,7 @@
 #include scripts\core_common\footsteps_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace ct_ai_blight_father;
 
 autoexec __init__system__() {

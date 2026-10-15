@@ -6,6 +6,7 @@
 #using script_3defbd925a406475;
 #using scripts\core_common\load_shared;
 #using scripts\core_common\util_shared;
+
 #namespace cp_ger_hub;
 
 function event_handler[level_init] main(eventstruct) {

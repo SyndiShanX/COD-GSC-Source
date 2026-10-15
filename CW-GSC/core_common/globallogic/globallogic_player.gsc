@@ -5,6 +5,7 @@
 
 #using scripts\core_common\util_shared;
 #using scripts\core_common\weapons_shared;
+
 #namespace globallogic_player;
 
 function function_c5343206(eattacker, einflictor, idamage, smeansofdeath, weapon, shitloc) {

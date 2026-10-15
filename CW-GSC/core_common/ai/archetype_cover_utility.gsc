@@ -9,6 +9,7 @@
 #using scripts\core_common\ai_shared;
 #using scripts\core_common\array_shared;
 #using scripts\core_common\math_shared;
+
 #namespace aiutility;
 
 function autoexec registerbehaviorscriptfunctions() {

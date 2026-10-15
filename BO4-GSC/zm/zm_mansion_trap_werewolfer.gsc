@@ -29,6 +29,7 @@
 #include scripts\zm_common\zm_traps;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_trap_werewolfer;
 
 autoexec __init__system__() {

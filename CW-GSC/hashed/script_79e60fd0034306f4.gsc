@@ -49,6 +49,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace namespace_f8073734;
 
 function init_flags() {

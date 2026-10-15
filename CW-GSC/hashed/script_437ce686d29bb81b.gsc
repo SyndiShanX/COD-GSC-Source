@@ -25,6 +25,7 @@
 #using scripts\zm_common\zm_laststand;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_weapons;
+
 #namespace namespace_cf6efd05;
 
 function autoexec init() {

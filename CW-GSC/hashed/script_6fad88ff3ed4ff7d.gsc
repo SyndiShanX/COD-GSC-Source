@@ -24,6 +24,7 @@
 #using scripts\cp_common\hms_util;
 #using scripts\cp_common\player_decision;
 #using scripts\cp_common\util;
+
 #namespace namespace_b73b9191;
 
 function spawn_woods() {

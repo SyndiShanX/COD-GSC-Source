@@ -32,6 +32,7 @@
 #using scripts\cp_common\snd;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace kgb_aslt_escape_deploy_gas;
 
 function starting(str_skipto) {

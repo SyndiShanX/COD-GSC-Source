@@ -28,6 +28,7 @@
 #using scripts\cp_common\hms_util;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace cp_rus_yamantau;
 
 function event_handler[level_init] main(eventstruct) {

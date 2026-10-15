@@ -8,6 +8,7 @@
 #include scripts\killstreaks\ultimate_turret_shared;
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\mp_common\gametypes\globallogic_audio;
+
 #namespace ultimate_turret;
 
 autoexec __init__system__() {

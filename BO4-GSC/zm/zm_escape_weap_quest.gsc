@@ -25,6 +25,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_escape_weap_quest;
 
 autoexec __init__system__() {

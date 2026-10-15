@@ -4,6 +4,7 @@
 ****************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace initial_black;
 
 class cinitial_black: cluielem {

@@ -27,6 +27,7 @@
 #using scripts\killstreaks\remote_weapons;
 #using scripts\weapons\hacker_tool;
 #using scripts\weapons\heatseekingmissile;
+
 #namespace ac130_shared;
 
 function preinit(var_9dedc222) {

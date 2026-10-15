@@ -6,6 +6,7 @@
 #using scripts\core_common\armor_carrier;
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\system_shared;
+
 #namespace namespace_234f0efc;
 
 function private autoexec __init__system__() {

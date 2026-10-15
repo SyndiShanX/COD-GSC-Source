@@ -9,6 +9,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\vehicle_shared;
 #using scripts\core_common\vehicles\player_vehicle;
+
 #namespace player_pbr;
 
 function private autoexec __init__system__() {

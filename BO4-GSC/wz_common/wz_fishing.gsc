@@ -14,6 +14,7 @@
 #include scripts\core_common\values_shared;
 #include scripts\mp_common\item_world;
 #include scripts\mp_common\laststand_warzone;
+
 #namespace wz_fishing;
 
 autoexec __init__system__() {

@@ -11,6 +11,7 @@
 #using scripts\zm_common\zm_trial;
 #using scripts\zm_common\zm_trial_util;
 #using scripts\zm_common\zm_weapons;
+
 #namespace zm_trial_reset_loadout;
 
 function private autoexec __init__system__() {

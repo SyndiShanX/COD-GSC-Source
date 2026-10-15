@@ -10,6 +10,7 @@
 #using scripts\core_common\lightning_chain;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace ammomod_deadwire;
 
 function init_deadwire() {

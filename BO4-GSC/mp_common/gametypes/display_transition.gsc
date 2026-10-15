@@ -19,6 +19,7 @@
 #include scripts\mp_common\gametypes\outcome;
 #include scripts\mp_common\gametypes\overtime;
 #include scripts\mp_common\player\player_utils;
+
 #namespace display_transition;
 
 init_shared() {

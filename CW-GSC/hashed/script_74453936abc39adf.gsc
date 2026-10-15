@@ -7,6 +7,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\gameobjects_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_38ee089b;
 
 function preinit() {

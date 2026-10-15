@@ -5,6 +5,7 @@
 
 #using scripts\weapons\molotov;
 #using scripts\weapons\weaponobjects;
+
 #namespace trapd;
 
 function function_ae7e49da(watcher) {

@@ -10,6 +10,7 @@
 #using scripts\core_common\vehicle_ai_shared;
 #using scripts\core_common\vehicle_shared;
 #using scripts\core_common\vehicles\auto_turret;
+
 #namespace guardian_turret;
 
 function private autoexec __init__system__() {

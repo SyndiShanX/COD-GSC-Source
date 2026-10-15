@@ -5,6 +5,7 @@
 
 #include scripts\abilities\ability_gadgets;
 #include scripts\abilities\ability_util;
+
 #namespace ability_power;
 
 cpower_print(slot, str) {

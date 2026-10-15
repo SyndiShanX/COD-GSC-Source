@@ -10,6 +10,7 @@
 #using scripts\core_common\radiation;
 #using scripts\core_common\spawning_squad;
 #using scripts\core_common\system_shared;
+
 #namespace radiation_ui;
 
 function private autoexec __init__system__() {

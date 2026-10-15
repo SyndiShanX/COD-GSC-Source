@@ -8,6 +8,7 @@
 #using scripts\core_common\scene_shared;
 #using scripts\core_common\sound_shared;
 #using scripts\core_common\util_shared;
+
 #namespace dialogue;
 
 function queue(alias, timeout, var_bcc3bb15) {

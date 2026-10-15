@@ -6,6 +6,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\system_shared;
+
 #namespace scripted_widgets;
 
 function private autoexec __init__system__() {

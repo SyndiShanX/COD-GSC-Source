@@ -9,6 +9,7 @@
 #include scripts\killstreaks\ai\escort;
 #include scripts\killstreaks\ai\state;
 #include scripts\killstreaks\ai\target;
+
 #namespace ai_patrol;
 
 init() {

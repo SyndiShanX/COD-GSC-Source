@@ -7,6 +7,7 @@
 #include scripts\zm_common\bgbs\zm_bgb_extra_credit;
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_customgame;
+
 #namespace zm_bgb_reign_drops;
 
 autoexec __init__system__() {

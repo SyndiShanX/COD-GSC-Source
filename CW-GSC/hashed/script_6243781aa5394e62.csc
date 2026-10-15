@@ -12,6 +12,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\zm\ai\zm_ai_dog;
 #using scripts\zm_common\ai\zombie_dog_toxic_cloud;
+
 #namespace namespace_ec0691f8;
 
 function private autoexec __init__system__() {

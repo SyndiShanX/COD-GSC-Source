@@ -6,6 +6,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\flag_shared;
 #using scripts\cp_common\bb;
+
 #namespace namespace_517e3310;
 
 function postload() {

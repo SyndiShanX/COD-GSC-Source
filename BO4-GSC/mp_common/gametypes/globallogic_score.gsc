@@ -34,6 +34,7 @@
 #include scripts\mp_common\gametypes\outcome;
 #include scripts\mp_common\scoreevents;
 #include scripts\mp_common\util;
+
 #namespace globallogic_score;
 
 autoexec __init__() {

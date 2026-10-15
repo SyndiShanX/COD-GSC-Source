@@ -18,6 +18,7 @@
 #include scripts\core_common\values_shared;
 #include scripts\mp_common\gametypes\spawning;
 #include scripts\wz_common\infection;
+
 #namespace spawn;
 
 function_f468d9a5(spawnpoint) {

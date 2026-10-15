@@ -22,6 +22,7 @@
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\math_shared;
 #using scripts\core_common\status_effects\status_effect_util;
+
 #namespace namespace_df4fbf0;
 
 function init() {

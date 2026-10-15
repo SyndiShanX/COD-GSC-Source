@@ -8,6 +8,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\util;
+
 #namespace namespace_aff1f617;
 
 function function_41e5864f(var_e3087505 = 1) {

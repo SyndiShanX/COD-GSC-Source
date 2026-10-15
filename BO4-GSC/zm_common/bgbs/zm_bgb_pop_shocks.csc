@@ -6,6 +6,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm\zm_lightning_chain;
 #include scripts\zm_common\zm_bgb;
+
 #namespace zm_bgb_pop_shocks;
 
 autoexec __init__system__() {

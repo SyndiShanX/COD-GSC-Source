@@ -40,6 +40,7 @@
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_vo;
 #using scripts\zm_common\zm_weapons;
+
 #namespace zm_magicbox;
 
 function private autoexec __init__system__() {

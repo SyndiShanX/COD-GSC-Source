@@ -34,6 +34,7 @@
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace namespace_ba979a10;
 
 function function_3286606(var_d9a11bf0, var_f41e3a56, radius, var_d0293722) {

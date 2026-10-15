@@ -11,6 +11,7 @@
 #using scripts\core_common\renderoverridebundle;
 #using scripts\core_common\struct;
 #using scripts\mp_common\player\player;
+
 #namespace infect;
 
 function event_handler[gametype_init] main(eventstruct) {

@@ -8,6 +8,7 @@
 #using scripts\zm_common\zm_score;
 #using scripts\zm_common\zm_trial;
 #using scripts\zm_common\zm_weapons;
+
 #namespace namespace_983e5028;
 
 function private autoexec __init__system__() {

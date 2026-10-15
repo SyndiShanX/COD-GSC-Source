@@ -9,6 +9,7 @@
 #include scripts\core_common\player\player_role;
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
+
 #namespace draft;
 
 init() {

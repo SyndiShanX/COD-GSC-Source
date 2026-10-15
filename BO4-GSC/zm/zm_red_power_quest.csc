@@ -10,6 +10,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm\perk\zm_perk_electric_cherry;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_red_power_quest;
 
 init() {

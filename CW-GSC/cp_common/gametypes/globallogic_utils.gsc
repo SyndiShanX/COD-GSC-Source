@@ -6,6 +6,7 @@
 #using script_7f6cd71c43c45c57;
 #using scripts\core_common\hud_message_shared;
 #using scripts\core_common\weapons_shared;
+
 #namespace globallogic_utils;
 
 function testshock() {

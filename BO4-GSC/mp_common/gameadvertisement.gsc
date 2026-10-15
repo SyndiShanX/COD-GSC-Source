@@ -7,6 +7,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\dev;
 #include scripts\mp_common\gametypes\globallogic_utils;
+
 #namespace gameadvertisement;
 
 init() {

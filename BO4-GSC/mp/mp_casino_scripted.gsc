@@ -10,6 +10,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\draft;
 #include scripts\mp_common\util;
+
 #namespace mp_casino_scripted;
 
 autoexec __init__system__() {

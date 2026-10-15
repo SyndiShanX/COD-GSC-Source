@@ -5,6 +5,7 @@
 
 #using scripts\core_common\util_shared;
 #using scripts\mp_common\util;
+
 #namespace spawning;
 
 function getteamstartspawnname(team, spawnpointnamebase) {

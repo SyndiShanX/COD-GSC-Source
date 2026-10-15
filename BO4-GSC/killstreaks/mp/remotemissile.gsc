@@ -7,6 +7,7 @@
 #include scripts\killstreaks\remotemissile_shared;
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\mp_common\gametypes\globallogic_audio;
+
 #namespace remotemissile;
 
 autoexec __init__system__() {

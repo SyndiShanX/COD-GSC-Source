@@ -28,6 +28,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\smart_bundle;
 #using scripts\cp_common\util;
+
 #namespace namespace_18c72e49;
 
 function start(str_objective) {}

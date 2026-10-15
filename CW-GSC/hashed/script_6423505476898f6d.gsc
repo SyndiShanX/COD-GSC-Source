@@ -17,6 +17,7 @@
 #using scripts\core_common\trigger_shared;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
+
 #namespace namespace_64f6ea7a;
 
 function function_e9823650() {

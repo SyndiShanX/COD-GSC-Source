@@ -19,6 +19,7 @@
 #using scripts\cp_common\load;
 #using scripts\cp_common\ui\interactive_map;
 #using scripts\cp_common\util;
+
 #namespace namespace_cd80be1c;
 
 function function_107f09b() {

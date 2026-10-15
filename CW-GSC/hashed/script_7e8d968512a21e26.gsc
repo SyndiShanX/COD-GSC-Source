@@ -35,6 +35,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace namespace_3aaa42f7;
 
 function init_flags() {

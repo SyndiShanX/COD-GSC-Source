@@ -13,6 +13,7 @@
 #include scripts\core_common\values_shared;
 #include scripts\core_common\vehicle_ai_shared;
 #include scripts\core_common\vehicle_shared;
+
 #namespace auto_turret;
 
 autoexec __init__system__() {

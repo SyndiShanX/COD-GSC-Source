@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\system_shared;
+
 #namespace archetype_nosferatu;
 
 function private autoexec __init__system__() {

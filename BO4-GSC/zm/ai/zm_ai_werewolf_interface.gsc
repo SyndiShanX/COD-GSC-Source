@@ -5,6 +5,7 @@
 
 #include scripts\core_common\ai\systems\ai_interface;
 #include scripts\zm\ai\zm_ai_werewolf;
+
 #namespace zm_ai_werewolf_interface;
 
 registerwerewolfinterfaceattributes() {

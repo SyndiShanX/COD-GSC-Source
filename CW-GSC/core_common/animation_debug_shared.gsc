@@ -7,6 +7,7 @@
 #using scripts\core_common\array_shared;
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\system_shared;
+
 #namespace animation;
 
 function private autoexec __init__system__() {

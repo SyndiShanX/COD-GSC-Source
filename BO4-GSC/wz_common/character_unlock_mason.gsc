@@ -12,6 +12,7 @@
 #include scripts\mp_common\teams\teams;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace character_unlock_mason;
 
 autoexec __init__system__() {

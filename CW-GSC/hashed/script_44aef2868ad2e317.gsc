@@ -59,6 +59,7 @@
 #using scripts\cp_common\ui\object_descriptions;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace kgb_ins_prepare;
 
 function starting(str_skipto) {

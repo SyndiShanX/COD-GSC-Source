@@ -11,6 +11,7 @@
 #include scripts\mp_common\draft;
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\mp_common\util;
+
 #namespace menus;
 
 autoexec __init__system__() {

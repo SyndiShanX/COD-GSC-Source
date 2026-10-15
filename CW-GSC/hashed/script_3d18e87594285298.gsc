@@ -20,6 +20,7 @@
 #using scripts\cp_common\bb;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace namespace_e1cd3aae;
 
 function private autoexec __init__system__() {

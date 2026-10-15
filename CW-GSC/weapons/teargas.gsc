@@ -18,6 +18,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\weapons\deployable;
 #using scripts\weapons\weaponobjects;
+
 #namespace teargas;
 
 function init_shared() {

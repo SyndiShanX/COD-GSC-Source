@@ -11,6 +11,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\trigger_shared;
+
 #namespace mp_maldives_elevators;
 
 autoexec __init__system__() {

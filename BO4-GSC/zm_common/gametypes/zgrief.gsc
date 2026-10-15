@@ -13,6 +13,7 @@
 #include scripts\zm_common\zm_player;
 #include scripts\zm_common\zm_round_logic;
 #include scripts\zm_common\zm_stats;
+
 #namespace zgrief;
 
 event_handler[gametype_init] main(eventstruct) {

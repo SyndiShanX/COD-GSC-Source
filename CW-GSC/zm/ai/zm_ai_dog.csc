@@ -9,6 +9,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\zm_common\ai\zombie_dog_toxic_cloud;
+
 #namespace zm_ai_dog;
 
 function private autoexec __init__system__() {

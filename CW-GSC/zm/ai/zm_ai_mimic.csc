@@ -8,6 +8,7 @@
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace zm_ai_mimic;
 
 function private autoexec __init__system__() {

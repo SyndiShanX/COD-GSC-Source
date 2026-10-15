@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\util_shared;
+
 #namespace zm_maptable;
 
 function function_10672567() {

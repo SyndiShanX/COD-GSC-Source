@@ -7,6 +7,7 @@
 #include scripts\core_common\player\player_role;
 #include scripts\core_common\player\player_stats;
 #include scripts\core_common\system_shared;
+
 #namespace hvo;
 
 autoexec __init__system__() {

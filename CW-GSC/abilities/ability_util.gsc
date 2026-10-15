@@ -5,6 +5,7 @@
 
 #using scripts\abilities\ability_player;
 #using scripts\core_common\util_shared;
+
 #namespace ability_util;
 
 function gadget_is_type(slot, type) {

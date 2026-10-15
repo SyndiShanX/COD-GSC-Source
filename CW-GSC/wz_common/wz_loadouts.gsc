@@ -9,6 +9,7 @@
 #using scripts\core_common\item_world_util;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace wz_loadouts;
 
 function private autoexec __init__system__() {

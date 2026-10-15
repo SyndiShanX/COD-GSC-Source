@@ -5,6 +5,7 @@
 
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\math_shared;
+
 #namespace tickets;
 
 autoexec __init__() {

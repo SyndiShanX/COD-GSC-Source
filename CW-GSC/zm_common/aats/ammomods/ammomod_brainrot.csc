@@ -9,6 +9,7 @@
 #using scripts\core_common\renderoverridebundle;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace ammomod_brainrot;
 
 function init_brainrot() {

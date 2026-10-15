@@ -6,6 +6,7 @@
 #include scripts\core_common\bots\bot;
 #include scripts\core_common\bots\bot_position;
 #include scripts\core_common\system_shared;
+
 #namespace mp_bot_position;
 
 autoexec __init__system__() {

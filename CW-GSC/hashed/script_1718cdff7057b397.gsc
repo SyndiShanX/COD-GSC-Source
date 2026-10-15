@@ -13,6 +13,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
 #using scripts\cp_common\util;
+
 #namespace namespace_1cd0b419;
 
 function init() {}

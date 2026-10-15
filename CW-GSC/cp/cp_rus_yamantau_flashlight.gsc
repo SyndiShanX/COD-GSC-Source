@@ -7,6 +7,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\stealth\utility;
+
 #namespace cp_rus_yamantau_flashlight;
 
 function preload() {

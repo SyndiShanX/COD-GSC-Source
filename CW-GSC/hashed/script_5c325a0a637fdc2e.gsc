@@ -18,6 +18,7 @@
 #using scripts\cp_common\breadcrumbs;
 #using scripts\cp_common\dialogue;
 #using scripts\cp_common\hms_util;
+
 #namespace namespace_7468806b;
 
 function function_79af70ae(b_starting) {

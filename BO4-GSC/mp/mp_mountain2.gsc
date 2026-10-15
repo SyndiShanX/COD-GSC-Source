@@ -8,6 +8,7 @@
 #include scripts\core_common\struct;
 #include scripts\mp\mp_mountain2_scripted;
 #include scripts\mp_common\load;
+
 #namespace mp_mountain2;
 
 event_handler[level_init] main(eventstruct) {

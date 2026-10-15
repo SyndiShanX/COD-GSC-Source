@@ -16,6 +16,7 @@
 #include scripts\mp_common\gametypes\match;
 #include scripts\weapons\grapple;
 #include scripts\weapons\weapon_utils;
+
 #namespace battlechatter;
 
 autoexec __init__system__() {

@@ -4,6 +4,7 @@
 *****************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace ct_shared_button_prompt;
 
 class cct_shared_button_prompt: cluielem {

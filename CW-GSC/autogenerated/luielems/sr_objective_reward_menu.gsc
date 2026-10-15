@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace sr_objective_reward_menu;
 class class_51a06b68: cluielem {
   var var_bf9c8c95;

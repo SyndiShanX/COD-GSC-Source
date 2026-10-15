@@ -4,6 +4,7 @@
 *************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace luielembar;
 class cluielembar: cluielem {
   var var_bf9c8c95;

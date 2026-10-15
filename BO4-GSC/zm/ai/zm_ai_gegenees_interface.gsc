@@ -5,6 +5,7 @@
 
 #include scripts\core_common\ai\systems\ai_interface;
 #include scripts\zm\ai\zm_ai_gegenees;
+
 #namespace zm_ai_gegenees_interface;
 
 registergegeneesinterfaceattributes() {

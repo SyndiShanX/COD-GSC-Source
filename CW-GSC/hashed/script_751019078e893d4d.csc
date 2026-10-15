@@ -10,6 +10,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\snd_draw;
 #using scripts\cp_common\snd_utility;
+
 #namespace snd;
 
 function private function_8f9218ba(hud) {

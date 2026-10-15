@@ -10,6 +10,7 @@
 #using scripts\core_common\player\player_loadout;
 #using scripts\core_common\throttle_shared;
 #using scripts\weapons\weaponobjects;
+
 #namespace ammo;
 
 function autoexec main() {

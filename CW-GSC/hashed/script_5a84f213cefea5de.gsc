@@ -17,6 +17,7 @@
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\weapons\weapons;
+
 #namespace namespace_1d9319e5;
 
 function private autoexec __init__system__() {

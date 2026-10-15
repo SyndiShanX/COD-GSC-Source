@@ -6,6 +6,7 @@
 #using script_78825cbb1ab9f493;
 #using scripts\core_common\dogtags;
 #using scripts\core_common\player\player_insertion;
+
 #namespace namespace_f2e23b4a;
 
 function event_handler[gametype_init] main(eventstruct) {

@@ -10,6 +10,7 @@
 #include scripts\core_common\renderoverridebundle;
 #include scripts\core_common\sound_shared;
 #include scripts\core_common\util_shared;
+
 #namespace smokegrenade;
 
 init_shared() {

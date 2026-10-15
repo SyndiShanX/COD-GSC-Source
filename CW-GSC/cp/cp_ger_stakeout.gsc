@@ -34,6 +34,7 @@
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace cp_ger_stakeout;
 
 function event_handler[level_init] main(eventstruct) {

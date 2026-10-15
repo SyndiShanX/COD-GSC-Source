@@ -35,6 +35,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace namespace_73841f48;
 
 function function_599d30fb(str_objective, b_starting) {

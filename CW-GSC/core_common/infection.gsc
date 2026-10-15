@@ -7,6 +7,7 @@
 #using scripts\core_common\player\player_role;
 #using scripts\core_common\spectating;
 #using scripts\core_common\system_shared;
+
 #namespace infection;
 
 function private autoexec __init__system__() {

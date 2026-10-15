@@ -15,6 +15,7 @@
 #include scripts\core_common\weapons_shared;
 #include scripts\weapons\tacticalinsertion;
 #include scripts\weapons\weaponobjects;
+
 #namespace trophy_system;
 
 init_shared() {

@@ -4,6 +4,7 @@
 ****************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace spectrerisingindicator;
 class cspectrerisingindicator: cluielem {
   function open(localclientnum) {

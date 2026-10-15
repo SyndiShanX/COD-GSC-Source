@@ -5,6 +5,7 @@
 
 #using scripts\core_common\match_record;
 #using scripts\core_common\territory;
+
 #namespace compass;
 
 function setupminimap(material, zone = "") {

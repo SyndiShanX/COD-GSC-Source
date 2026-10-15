@@ -7,6 +7,7 @@
 #using scripts\core_common\scene_shared;
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
+
 #namespace zm_gold_ww_quest;
 
 function init() {

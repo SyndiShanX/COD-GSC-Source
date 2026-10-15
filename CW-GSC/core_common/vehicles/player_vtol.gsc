@@ -11,6 +11,7 @@
 #using scripts\killstreaks\airsupport;
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\weapons\heatseekingmissile;
+
 #namespace player_vtol;
 
 function private autoexec __init__system__() {

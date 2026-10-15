@@ -10,6 +10,7 @@
 #include scripts\zm_common\zm_armor;
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_bgb_suit_up;
 
 autoexec __init__system__() {

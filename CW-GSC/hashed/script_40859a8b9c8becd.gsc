@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\array_shared;
+
 #namespace namespace_1125e192;
 
 function function_93c5a24() {

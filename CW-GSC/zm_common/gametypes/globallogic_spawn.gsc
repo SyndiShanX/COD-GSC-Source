@@ -27,6 +27,7 @@
 #using scripts\zm_common\util;
 #using scripts\zm_common\zm_loadout;
 #using scripts\zm_common\zm_utility;
+
 #namespace globallogic_spawn;
 
 function timeuntilspawn(includeteamkilldelay) {

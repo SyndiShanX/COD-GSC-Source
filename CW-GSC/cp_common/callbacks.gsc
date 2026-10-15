@@ -12,6 +12,7 @@
 #using scripts\cp_common\gametypes\globallogic_player;
 #using scripts\cp_common\gametypes\globallogic_scriptmover;
 #using scripts\weapons\deployable;
+
 #namespace callback;
 
 function private autoexec __init__system__() {

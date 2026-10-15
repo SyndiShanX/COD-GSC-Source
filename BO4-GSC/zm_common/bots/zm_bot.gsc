@@ -17,6 +17,7 @@
 #include scripts\zm_common\bots\zm_bot_action;
 #include scripts\zm_common\bots\zm_bot_position;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_bot;
 
 autoexec __init__system__() {

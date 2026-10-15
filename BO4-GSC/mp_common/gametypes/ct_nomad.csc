@@ -6,6 +6,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\mp_common\gametypes\ct_core;
 #include scripts\mp_common\gametypes\ct_nomad_tutorial;
+
 #namespace ct_nomad;
 
 event_handler[gametype_init] main(eventstruct) {

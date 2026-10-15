@@ -39,6 +39,7 @@
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
 #using scripts\weapons\smokegrenade;
+
 #namespace namespace_4c1dd357;
 
 function function_ad51fa26(str_objective) {

@@ -13,6 +13,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace elevators;
 
 class class_727456f3 {

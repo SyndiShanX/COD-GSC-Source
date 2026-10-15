@@ -5,6 +5,7 @@
 
 #using script_35ae72be7b4fec10;
 #using scripts\core_common\util_shared;
+
 #namespace warning_message;
 
 function create(message, var_400e244b, pulse, endons) {

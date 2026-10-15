@@ -17,6 +17,7 @@
 #using scripts\killstreaks\killstreak_dialog;
 #using scripts\weapons\deployable;
 #using scripts\weapons\weaponobjects;
+
 #namespace jammer;
 
 function private autoexec __init__system__() {

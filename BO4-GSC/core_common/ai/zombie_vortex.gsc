@@ -9,6 +9,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\vehicle_ai_shared;
 #include scripts\core_common\visionset_mgr_shared;
+
 #namespace zombie_vortex;
 
 autoexec __init__system__() {

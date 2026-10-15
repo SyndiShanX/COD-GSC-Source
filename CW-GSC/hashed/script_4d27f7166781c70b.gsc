@@ -25,6 +25,7 @@
 #using scripts\cp_common\snd;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace namespace_ef60e103;
 
 function function_7ab616c1(str_objective) {

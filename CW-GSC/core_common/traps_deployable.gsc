@@ -18,6 +18,7 @@
 #using scripts\core_common\vehicle_shared;
 #using scripts\weapons\trapd;
 #using scripts\weapons\weaponobjects;
+
 #namespace traps_deployable;
 class class_7b5e0861 {
   var m_empdamage;

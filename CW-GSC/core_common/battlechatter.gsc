@@ -16,6 +16,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\weapons\weapon_utils;
+
 #namespace battlechatter;
 
 function private autoexec __init__system__() {

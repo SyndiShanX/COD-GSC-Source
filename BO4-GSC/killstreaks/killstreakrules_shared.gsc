@@ -6,6 +6,7 @@
 #include scripts\core_common\popups_shared;
 #include scripts\core_common\values_shared;
 #include scripts\killstreaks\emp_shared;
+
 #namespace killstreakrules;
 
 init_shared() {

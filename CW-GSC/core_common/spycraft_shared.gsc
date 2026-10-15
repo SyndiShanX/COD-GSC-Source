@@ -10,6 +10,7 @@
 #using scripts\core_common\scoreevents_shared;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\values_shared;
+
 #namespace spycraft_shared;
 
 function private autoexec __init__system__() {

@@ -6,6 +6,7 @@
 #include scripts\core_common\challenges_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace ballistic_knife;
 
 init_shared() {

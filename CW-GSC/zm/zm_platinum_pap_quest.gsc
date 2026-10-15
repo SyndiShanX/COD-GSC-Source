@@ -23,6 +23,7 @@
 #using scripts\zm_common\zm_sq;
 #using scripts\zm_common\zm_unitrigger;
 #using scripts\zm_common\zm_utility;
+
 #namespace zm_platinum_pap_quest;
 
 function init() {

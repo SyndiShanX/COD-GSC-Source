@@ -37,6 +37,7 @@
 #include scripts\weapons\tacticalinsertion;
 #include scripts\weapons\weaponobjects;
 #include scripts\weapons\weapons;
+
 #namespace supplydrop;
 
 autoexec __init__system__() {

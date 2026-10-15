@@ -8,6 +8,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\util;
+
 #namespace namespace_1512c89a;
 
 function event_handler[level_init] main(eventstruct) {

@@ -18,6 +18,7 @@
 #include scripts\mp\mp_geothermal_sound;
 #include scripts\mp_common\draft;
 #include scripts\mp_common\load;
+
 #namespace mp_geothermal;
 
 event_handler[level_init] main(eventstruct) {

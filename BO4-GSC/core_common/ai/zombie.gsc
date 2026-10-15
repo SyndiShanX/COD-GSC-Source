@@ -23,6 +23,7 @@
 #include scripts\core_common\laststand_shared;
 #include scripts\core_common\math_shared;
 #include scripts\core_common\spawner_shared;
+
 #namespace zombiebehavior;
 
 autoexec init() {

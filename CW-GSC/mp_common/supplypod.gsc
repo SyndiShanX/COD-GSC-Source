@@ -28,6 +28,7 @@
 #using scripts\mp_common\draft;
 #using scripts\weapons\deployable;
 #using scripts\weapons\weaponobjects;
+
 #namespace supplypod;
 
 function private autoexec __init__system__() {

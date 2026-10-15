@@ -36,6 +36,7 @@
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_weapons;
 #using scripts\zm_common\zm_zonemgr;
+
 #namespace namespace_f0b43eb5;
 
 function private autoexec __init__system__() {

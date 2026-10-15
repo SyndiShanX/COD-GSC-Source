@@ -4,6 +4,7 @@
 *************************************************/
 
 #using scripts\core_common\item_world_fixup;
+
 #namespace warzone_fixup;
 
 function autoexec __init__() {

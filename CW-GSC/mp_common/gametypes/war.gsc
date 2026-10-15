@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using script_4acb48c9cb82bb51;
+
 #namespace war;
 
 function event_handler[gametype_init] main(eventstruct) {

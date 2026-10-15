@@ -7,6 +7,7 @@
 #include scripts\core_common\bots\bot;
 #include scripts\core_common\bots\bot_action;
 #include scripts\core_common\system_shared;
+
 #namespace zm_bot_action;
 
 autoexec __init__system__() {

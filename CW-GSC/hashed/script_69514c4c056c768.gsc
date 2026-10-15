@@ -10,6 +10,7 @@
 #using scripts\core_common\item_world_util;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\territory_util;
+
 #namespace item_supply_drop_system;
 
 function private autoexec __init__system__() {

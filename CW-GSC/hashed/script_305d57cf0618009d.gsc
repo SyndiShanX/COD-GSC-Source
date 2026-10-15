@@ -11,6 +11,7 @@
 #using scripts\core_common\oob;
 #using scripts\core_common\territory;
 #using scripts\core_common\util_shared;
+
 #namespace player_insertion;
 
 function function_63977a98(newtime) {

@@ -14,6 +14,7 @@
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_bgb_bullet_boost;
 
 autoexec __init__system__() {

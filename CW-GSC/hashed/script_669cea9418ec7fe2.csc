@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace zm_corrupted_health_bar;
 class class_c982469d: cluielem {
   function open(localclientnum) {

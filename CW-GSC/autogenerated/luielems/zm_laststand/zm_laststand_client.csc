@@ -4,6 +4,7 @@
 ***********************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace zm_laststand_client;
 class czm_laststand_client: cluielem {
   function open(localclientnum) {

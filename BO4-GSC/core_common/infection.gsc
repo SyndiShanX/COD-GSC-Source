@@ -8,6 +8,7 @@
 #include scripts\core_common\spectating;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\teams;
+
 #namespace infection;
 
 autoexec __init__system__() {

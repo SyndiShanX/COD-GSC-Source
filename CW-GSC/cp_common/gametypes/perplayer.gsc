@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\struct;
+
 #namespace perplayer;
 
 function init(id, playerbegincallback, playerendcallback) {

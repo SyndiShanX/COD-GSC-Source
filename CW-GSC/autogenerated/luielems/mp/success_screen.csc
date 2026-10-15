@@ -4,6 +4,7 @@
 ********************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace success_screen;
 class csuccess_screen: cluielem {
   function open(localclientnum) {

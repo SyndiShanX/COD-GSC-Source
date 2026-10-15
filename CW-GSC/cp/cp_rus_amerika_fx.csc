@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\clientfield_shared;
+
 #namespace namespace_f942705d;
 
 function preload() {

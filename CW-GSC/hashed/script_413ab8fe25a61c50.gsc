@@ -30,6 +30,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_77eccc4f;
 
 function function_93e7ee52(challengetype = 0, name) {

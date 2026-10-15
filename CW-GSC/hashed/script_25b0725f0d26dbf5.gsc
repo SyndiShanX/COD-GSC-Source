@@ -26,6 +26,7 @@
 #using scripts\cp_common\player_large_helicopter_armada;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace namespace_b7cfe907;
 
 function function_27e76b4c(var_39a61773, var_c027e5d, var_8703bf11 = 1) {

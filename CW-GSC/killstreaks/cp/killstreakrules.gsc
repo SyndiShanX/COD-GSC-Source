@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\killstreaks\killstreakrules_shared;
+
 #namespace killstreakrules;
 
 function init() {

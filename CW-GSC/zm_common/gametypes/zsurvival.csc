@@ -52,6 +52,7 @@
 #using scripts\zm_common\gametypes\zsurvival_collapse;
 #using scripts\zm_common\objective_manager;
 #using scripts\zm_common\zm_intel;
+
 #namespace zsurvival;
 
 function event_handler[gametype_init] main(eventstruct) {

@@ -18,6 +18,7 @@
 #using scripts\zm_common\zm_aoe;
 #using scripts\zm_common\zm_devgui;
 #using scripts\zm_common\zm_utility;
+
 #namespace zm_hazard;
 
 function init() {

@@ -7,6 +7,7 @@
 #using scripts\core_common\item_world;
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\system_shared;
+
 #namespace namespace_33c196c8;
 
 function private autoexec __init__system__() {

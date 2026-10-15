@@ -11,6 +11,7 @@
 #include scripts\core_common\flagsys_shared;
 #include scripts\core_common\gameobjects_shared;
 #include scripts\core_common\system_shared;
+
 #namespace planner_commander_utility;
 
 autoexec __init__system__() {

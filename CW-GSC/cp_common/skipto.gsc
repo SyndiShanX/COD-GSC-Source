@@ -39,6 +39,7 @@
 #using scripts\cp_common\player_decision;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace skipto;
 
 function private autoexec __init__system__() {

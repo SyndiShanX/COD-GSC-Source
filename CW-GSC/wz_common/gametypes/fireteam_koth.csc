@@ -7,6 +7,7 @@
 #using script_6741a9edbcf6c25e;
 #using script_6a72d858ff1942eb;
 #using scripts\core_common\clientfield_shared;
+
 #namespace fireteam_koth;
 
 function event_handler[gametype_init] main(eventstruct) {

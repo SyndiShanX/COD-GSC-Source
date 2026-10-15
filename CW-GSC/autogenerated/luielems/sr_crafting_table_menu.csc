@@ -4,6 +4,7 @@
 *************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace sr_crafting_table_menu;
 class class_e1dc992f: cluielem {
   function open(localclientnum) {

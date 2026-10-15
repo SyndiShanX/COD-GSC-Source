@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\system_shared;
+
 #namespace spy_wanted_order;
 
 function private autoexec __init__system__() {

@@ -4,6 +4,7 @@
 *****************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace mobile_armory_loadout;
 class class_8019ebdc: cluielem {
   function open(player, flags = 0) {

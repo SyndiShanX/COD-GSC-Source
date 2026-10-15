@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace hud_spy;
 class class_f57714e4: cluielem {
   var var_bf9c8c95;

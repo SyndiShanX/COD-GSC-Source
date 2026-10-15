@@ -6,6 +6,7 @@
 #include scripts\zm\zm_white_defend_soul_capture;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\util_shared;
+
 #namespace zm_white_ww_quest_mk2v;
 
 preload() {

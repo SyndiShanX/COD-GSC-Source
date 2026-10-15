@@ -37,6 +37,7 @@
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_weapons;
 #using scripts\zm_common\zm_zonemgr;
+
 #namespace zm_challenges;
 
 function private autoexec __init__system__() {

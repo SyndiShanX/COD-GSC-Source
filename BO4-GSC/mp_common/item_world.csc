@@ -16,6 +16,7 @@
 #include scripts\mp_common\item_inventory_util;
 #include scripts\mp_common\item_spawn_groups;
 #include scripts\mp_common\item_world_util;
+
 #namespace item_world;
 
 autoexec __init__system__() {

@@ -10,6 +10,7 @@
 #include scripts\core_common\sound_shared;
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\util_shared;
+
 #namespace mute_smoke;
 
 init_shared() {

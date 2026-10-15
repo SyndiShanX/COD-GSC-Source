@@ -8,6 +8,7 @@
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\util_shared;
 #using scripts\mp_common\laststand;
+
 #namespace vip;
 
 function event_handler[gametype_init] main(eventstruct) {

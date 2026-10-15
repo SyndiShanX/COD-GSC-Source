@@ -9,6 +9,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\gametypes\globallogic_ui;
 #using scripts\cp_common\objectives_ui;
+
 #namespace objectives;
 
 function private autoexec __init__system__() {

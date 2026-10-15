@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace sr_orda_health_bar;
 class class_90c2e4ec: cluielem {
   function open(localclientnum) {

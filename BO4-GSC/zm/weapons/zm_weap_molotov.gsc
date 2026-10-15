@@ -7,6 +7,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_equipment;
+
 #namespace zm_weap_molotov;
 
 autoexec __init__system__() {

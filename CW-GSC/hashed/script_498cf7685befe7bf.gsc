@@ -23,6 +23,7 @@
 #using scripts\cp_common\hms_util;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace namespace_604e2e22;
 
 function function_4a3de7f5(var_57ef78ed) {

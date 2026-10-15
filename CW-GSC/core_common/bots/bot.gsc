@@ -23,6 +23,7 @@
 #using scripts\core_common\status_effects\status_effect_util;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace bot;
 
 function private autoexec __init__system__() {

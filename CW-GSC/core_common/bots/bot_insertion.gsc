@@ -9,6 +9,7 @@
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\math_shared;
 #using scripts\core_common\system_shared;
+
 #namespace bot_insertion;
 
 function private autoexec __init__system__() {

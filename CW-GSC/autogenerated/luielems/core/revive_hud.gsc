@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace revive_hud;
 class crevive_hud: cluielem {
   var var_bf9c8c95;

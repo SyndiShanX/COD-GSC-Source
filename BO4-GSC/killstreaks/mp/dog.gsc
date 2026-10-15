@@ -8,6 +8,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\killstreaks\dog_shared;
 #include scripts\killstreaks\killstreaks_shared;
+
 #namespace dog;
 
 autoexec __init__system__() {

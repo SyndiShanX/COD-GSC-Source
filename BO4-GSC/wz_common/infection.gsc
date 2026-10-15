@@ -19,6 +19,7 @@
 #include scripts\wz_common\wz_ai_utils;
 #include scripts\wz_common\wz_ai_zonemgr;
 #include scripts\wz_common\wz_loadouts;
+
 #namespace infection;
 
 autoexec __init__system__() {

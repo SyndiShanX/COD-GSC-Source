@@ -5,6 +5,7 @@
 
 #include scripts\core_common\flag_shared;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_white_population_count;
 
 init() {

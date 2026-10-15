@@ -14,6 +14,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\weapons_shared;
+
 #namespace globallogic_score;
 
 autoexec __init__system__() {

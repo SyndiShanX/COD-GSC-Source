@@ -10,6 +10,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\ui\prompts;
+
 #namespace hint_tutorial;
 
 function private autoexec __init__system__() {

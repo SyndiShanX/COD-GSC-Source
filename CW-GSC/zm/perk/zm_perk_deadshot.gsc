@@ -18,6 +18,7 @@
 #using scripts\zm_common\zm_perks;
 #using scripts\zm_common\zm_stats;
 #using scripts\zm_common\zm_utility;
+
 #namespace zm_perk_deadshot;
 
 function private autoexec __init__system__() {

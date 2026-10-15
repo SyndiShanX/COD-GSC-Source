@@ -28,6 +28,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\ui\interactive_map;
 #using scripts\cp_common\util;
+
 #namespace namespace_fa335fda;
 
 function function_12624bb8(var_9e3df858, var_7b80750a) {

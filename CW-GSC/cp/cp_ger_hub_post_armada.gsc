@@ -16,6 +16,7 @@
 #using scripts\cp_common\dialogue;
 #using scripts\cp_common\gametypes\save;
 #using scripts\cp_common\skipto;
+
 #namespace hub_post_armada;
 
 function starting(str_skipto) {}

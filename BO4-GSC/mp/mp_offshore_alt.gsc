@@ -15,6 +15,7 @@
 #include scripts\mp\mp_offshore_alt_sound;
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\load;
+
 #namespace mp_offshore_alt;
 
 event_handler[level_init] main(eventstruct) {

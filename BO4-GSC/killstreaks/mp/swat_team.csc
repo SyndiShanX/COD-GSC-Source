@@ -12,6 +12,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\killstreaks\killstreak_bundles;
+
 #namespace swat_team;
 
 autoexec __init__system__() {

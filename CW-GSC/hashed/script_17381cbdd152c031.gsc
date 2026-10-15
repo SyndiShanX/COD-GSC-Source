@@ -5,6 +5,7 @@
 
 #using script_5f20d3b434d24884;
 #using scripts\core_common\struct;
+
 #namespace namespace_c501aa2e;
 
 function init() {

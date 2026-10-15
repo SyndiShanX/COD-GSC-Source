@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\cp_common\snd;
+
 #namespace cp_nic_revolucion_fx;
 
 function preload() {

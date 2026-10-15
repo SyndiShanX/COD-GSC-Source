@@ -53,6 +53,7 @@
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\weapons\weapon_utils;
 #using scripts\weapons\weapons;
+
 #namespace globallogic_player;
 
 function private autoexec __init__system__() {

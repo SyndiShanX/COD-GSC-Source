@@ -13,6 +13,7 @@
 #using scripts\core_common\vehicle_shared;
 #using scripts\cp_common\callbacks;
 #using scripts\weapons\cp\explosive_bolt;
+
 #namespace callback;
 
 function private autoexec __init__system__() {

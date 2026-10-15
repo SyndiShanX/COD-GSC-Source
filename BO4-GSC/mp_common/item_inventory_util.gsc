@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\mp_common\item_world_util;
+
 #namespace item_inventory_util;
 
 function_c92543a0(attachmentitem, attachmentname) {

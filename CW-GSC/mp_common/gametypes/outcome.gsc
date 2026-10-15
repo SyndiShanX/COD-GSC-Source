@@ -7,6 +7,7 @@
 #using scripts\core_common\flag_shared;
 #using scripts\mp_common\gametypes\globallogic;
 #using scripts\mp_common\gametypes\globallogic_score;
+
 #namespace outcome;
 
 function autoexec main() {

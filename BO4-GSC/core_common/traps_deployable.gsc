@@ -18,6 +18,7 @@
 #include scripts\core_common\vehicle_shared;
 #include scripts\weapons\trapd;
 #include scripts\weapons\weaponobjects;
+
 #namespace traps_deployable;
 
 class class_7b5e0861 {

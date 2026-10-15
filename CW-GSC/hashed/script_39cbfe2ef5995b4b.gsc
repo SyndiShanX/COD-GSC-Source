@@ -14,6 +14,7 @@
 #using scripts\core_common\item_world_util;
 #using scripts\core_common\math_shared;
 #using scripts\core_common\system_shared;
+
 #namespace namespace_efff98ec;
 
 function private autoexec __init__system__() {

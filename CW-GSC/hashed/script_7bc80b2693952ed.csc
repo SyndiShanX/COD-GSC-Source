@@ -9,6 +9,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\util;
+
 #namespace blood;
 
 function private autoexec __init__system__() {

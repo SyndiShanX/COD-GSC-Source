@@ -15,6 +15,7 @@
 #using scripts\core_common\stealth\utility;
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
+
 #namespace group;
 
 function scalevolume(ent, vol) {}

@@ -28,6 +28,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\cp_common\dialogue;
 #using scripts\cp_common\util;
+
 #namespace namespace_99e99ffa;
 
 function function_1d90bc4a() {

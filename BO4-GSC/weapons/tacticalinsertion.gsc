@@ -10,6 +10,7 @@
 #include scripts\core_common\scoreevents_shared;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace tacticalinsertion;
 
 init_shared() {

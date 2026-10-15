@@ -13,6 +13,7 @@
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
 #include scripts\wz_common\character_unlock_reznov_fixup;
+
 #namespace character_unlock_reznov;
 
 autoexec __init__system__() {

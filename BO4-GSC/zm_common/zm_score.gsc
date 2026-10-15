@@ -21,6 +21,7 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_score;
 
 autoexec __init__system__() {

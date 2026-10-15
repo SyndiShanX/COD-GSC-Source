@@ -11,6 +11,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\util;
+
 #namespace windows;
 class class_e500a966: cdoor {
   var m_s_bundle;

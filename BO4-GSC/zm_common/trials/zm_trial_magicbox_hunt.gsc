@@ -10,6 +10,7 @@
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
+
 #namespace zm_trial_magicbox_hunt;
 
 autoexec __init__system__() {

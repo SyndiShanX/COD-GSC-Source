@@ -17,6 +17,7 @@
 #using scripts\zm_common\zm_unitrigger;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_vo;
+
 #namespace zm_gold_pap_quest;
 
 function init() {

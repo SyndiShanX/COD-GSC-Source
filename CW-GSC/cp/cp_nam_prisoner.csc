@@ -18,6 +18,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\util;
+
 #namespace cp_nam_prisoner;
 
 function event_handler[level_init] main(eventstruct) {

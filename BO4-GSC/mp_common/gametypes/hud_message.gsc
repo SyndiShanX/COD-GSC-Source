@@ -8,6 +8,7 @@
 #include scripts\mp_common\gametypes\outcome;
 #include scripts\mp_common\gametypes\overtime;
 #include scripts\mp_common\teams\teams;
+
 #namespace hud_message;
 
 init() {

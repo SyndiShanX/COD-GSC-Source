@@ -7,6 +7,7 @@
 #using scripts\zm_common\zm_bgb;
 #using scripts\zm_common\zm_bgb_pack;
 #using scripts\zm_common\zm_trial;
+
 #namespace zm_trial_disable_bgbs;
 
 function private autoexec __init__system__() {

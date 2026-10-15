@@ -14,6 +14,7 @@
 #using scripts\zm_common\zm;
 #using scripts\zm_common\zm_laststand;
 #using scripts\zm_common\zm_player;
+
 #namespace ballistic_knife;
 
 function private autoexec __init__system__() {

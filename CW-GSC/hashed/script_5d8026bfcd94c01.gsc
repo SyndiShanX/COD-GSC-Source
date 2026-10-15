@@ -17,6 +17,7 @@
 #using scripts\mp_common\gametypes\globallogic_score;
 #using scripts\mp_common\player\player_utils;
 #using scripts\mp_common\util;
+
 #namespace namespace_f2e23b4a;
 
 function private autoexec __init__system__() {

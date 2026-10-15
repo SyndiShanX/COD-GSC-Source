@@ -18,6 +18,7 @@
 #using scripts\weapons\weapons;
 #using scripts\zm_common\zm_stats;
 #using scripts\zm_common\zm_utility;
+
 #namespace namespace_8d0ae0b4;
 
 function private autoexec __init__system__() {

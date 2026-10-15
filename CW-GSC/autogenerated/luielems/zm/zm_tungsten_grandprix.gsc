@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace zm_tungsten_grandprix;
 class czm_tungsten_grandprix: cluielem {
   var var_bf9c8c95;

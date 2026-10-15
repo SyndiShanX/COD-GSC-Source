@@ -12,6 +12,7 @@
 #using scripts\killstreaks\killstreakrules_shared;
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\weapons\weapons;
+
 #namespace airsupport;
 
 function init_shared() {

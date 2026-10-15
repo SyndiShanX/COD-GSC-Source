@@ -32,6 +32,7 @@
 #using scripts\cp_common\ui\ent_name;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace armada_mortar;
 
 function function_6ad1ac64(str_skipto, b_starting) {

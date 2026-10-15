@@ -8,6 +8,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\visionset_mgr_shared;
 #include scripts\zm_common\zm_bgb;
+
 #namespace zm_bgb_in_plain_sight;
 
 autoexec __init__system__() {

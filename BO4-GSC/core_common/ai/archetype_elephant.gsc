@@ -29,6 +29,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_ai_shared;
+
 #namespace archetypeelephant;
 
 class class_a504b9a3 {

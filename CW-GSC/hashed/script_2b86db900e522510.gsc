@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace encodedradio_usebar;
 class class_ba33e0c1: cluielem {
   var var_bf9c8c95;

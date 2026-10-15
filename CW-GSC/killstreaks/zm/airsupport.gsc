@@ -8,6 +8,7 @@
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\killstreaks\zm\killstreakrules;
+
 #namespace namespace_bf7415ae;
 
 function function_890b3889(killstreaktype, killstreakweapon, maxrange, var_f6825ff2, var_c7502f87, var_7551540f, var_d89073fc, var_d3deec73) {

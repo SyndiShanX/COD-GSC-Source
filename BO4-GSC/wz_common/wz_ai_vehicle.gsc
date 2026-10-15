@@ -11,6 +11,7 @@
 #include scripts\core_common\vehicle_shared;
 #include scripts\killstreaks\ai_tank_shared;
 #include scripts\weapons\heatseekingmissile;
+
 #namespace wz_ai_vehicle;
 
 function_e1a09b01() {

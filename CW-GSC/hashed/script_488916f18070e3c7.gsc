@@ -8,6 +8,7 @@
 #using scripts\core_common\scene_shared;
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
+
 #namespace namespace_d3c2ca3;
 
 function private autoexec __init__system__() {

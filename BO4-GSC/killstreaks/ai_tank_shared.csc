@@ -11,6 +11,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
 #include scripts\core_common\visionset_mgr_shared;
+
 #namespace ai_tank;
 
 init_shared(bundlename) {

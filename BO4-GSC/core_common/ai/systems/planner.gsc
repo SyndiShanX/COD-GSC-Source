@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\ai\systems\planner_blackboard;
+
 #namespace planner;
 
 _blackboardsapplyundostate(planner, state) {

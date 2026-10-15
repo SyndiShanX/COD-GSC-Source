@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\clientfield_shared;
+
 #namespace archetype_human;
 
 function autoexec precache() {}

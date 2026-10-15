@@ -7,6 +7,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\item_world_fixup;
 #using scripts\core_common\system_shared;
+
 #namespace character_unlock_fixup;
 
 function private autoexec __init__system__() {

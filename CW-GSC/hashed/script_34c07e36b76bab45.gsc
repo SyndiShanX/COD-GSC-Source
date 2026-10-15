@@ -26,6 +26,7 @@
 #using scripts\cp_common\snd;
 #using scripts\cp_common\snd_sp;
 #using scripts\cp_common\util;
+
 #namespace namespace_4dd4b998;
 
 function init_flags() {

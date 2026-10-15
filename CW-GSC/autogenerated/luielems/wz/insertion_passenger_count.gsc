@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace insertion_passenger_count;
 class cinsertion_passenger_count: cluielem {
   var var_bf9c8c95;

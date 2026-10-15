@@ -6,6 +6,7 @@
 #using script_1cd690a97dfca36e;
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\system_shared;
+
 #namespace cp_explosive_barrel;
 
 function private autoexec __init__system__() {

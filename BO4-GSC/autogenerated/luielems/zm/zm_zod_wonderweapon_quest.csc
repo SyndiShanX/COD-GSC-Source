@@ -4,6 +4,7 @@
 *******************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace zm_zod_wonderweapon_quest;
 
 class czm_zod_wonderweapon_quest: cluielem {

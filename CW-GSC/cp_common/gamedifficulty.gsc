@@ -11,6 +11,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\gametypes\save;
 #using scripts\cp_common\ui\warning_message;
+
 #namespace gamedifficulty;
 
 function autoexec init() {

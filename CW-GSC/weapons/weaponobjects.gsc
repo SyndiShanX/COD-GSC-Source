@@ -24,6 +24,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\core_common\weapons_shared;
 #using scripts\killstreaks\killstreaks_util;
+
 #namespace weaponobjects;
 
 function init_shared() {

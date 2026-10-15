@@ -6,6 +6,7 @@
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
+
 #namespace array;
 
 function filter(&array, b_keep_keys, func_filter, ...) {

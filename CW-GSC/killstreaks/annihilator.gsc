@@ -7,6 +7,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\killstreaks\killstreaks_shared;
+
 #namespace annihilator;
 
 function private autoexec __init__system__() {

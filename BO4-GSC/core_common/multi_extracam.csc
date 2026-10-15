@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\struct;
+
 #namespace multi_extracam;
 
 extracam_reset_index(localclientnum, index) {

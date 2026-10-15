@@ -29,6 +29,7 @@
 #using scripts\mp_common\player\player_utils;
 #using scripts\mp_common\util;
 #using scripts\weapons\weapon_utils;
+
 #namespace gun;
 
 function autoexec ignore_systems() {

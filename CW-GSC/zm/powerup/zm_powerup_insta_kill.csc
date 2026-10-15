@@ -6,6 +6,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\zm_common\zm_powerups;
+
 #namespace zm_powerup_insta_kill;
 
 function private autoexec __init__system__() {

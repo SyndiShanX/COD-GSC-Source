@@ -5,6 +5,7 @@
 
 #using scripts\core_common\system_shared;
 #using scripts\weapons\weaponobjects;
+
 #namespace claymore;
 
 function private autoexec __init__system__() {

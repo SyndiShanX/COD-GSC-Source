@@ -23,6 +23,7 @@
 #include scripts\core_common\weapons_shared;
 #include scripts\killstreaks\killstreaks_util;
 #include scripts\weapons\weaponobjects;
+
 #namespace shockrifle;
 
 init_shared() {

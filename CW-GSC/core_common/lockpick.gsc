@@ -11,6 +11,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\values_shared;
 #using scripts\cp_common\bb;
+
 #namespace lockpick;
 class class_d28acd06: class_9e71c1a2 {
   var m_s_bundle;

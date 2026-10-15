@@ -6,6 +6,7 @@
 #using script_58860a35d0555f74;
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\system_shared;
+
 #namespace zm_silver_ffotd;
 
 function private autoexec __init__system__() {

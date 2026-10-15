@@ -21,6 +21,7 @@
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\weapons\arc;
+
 #namespace seeker_mine_mp;
 
 autoexec __init__system__() {

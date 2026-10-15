@@ -7,6 +7,7 @@
 #include scripts\core_common\gestures;
 #include scripts\core_common\struct;
 #include scripts\mp_common\dynamic_loadout;
+
 #namespace pickup_ammo;
 
 function_cff1656d() {

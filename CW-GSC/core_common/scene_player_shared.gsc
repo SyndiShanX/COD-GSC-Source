@@ -23,6 +23,7 @@
 #using scripts\core_common\weapons_shared;
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\weapons\weapon_utils;
+
 #namespace scene;
 class class_6572d7cd: csceneplayer, csceneobject {}
 class csceneplayer: csceneobject {

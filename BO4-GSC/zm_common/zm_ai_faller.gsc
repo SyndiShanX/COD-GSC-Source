@@ -11,6 +11,7 @@
 #include scripts\zm_common\zm_laststand;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_ai_faller;
 
 zombie_faller_delete() {

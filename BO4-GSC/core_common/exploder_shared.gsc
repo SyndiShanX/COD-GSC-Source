@@ -8,6 +8,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\trigger_shared;
+
 #namespace exploder;
 
 autoexec __init__system__() {

@@ -5,6 +5,7 @@
 
 #include scripts\core_common\ai\archetype_utility;
 #include scripts\core_common\ai\systems\ai_interface;
+
 #namespace humanrpginterface;
 
 registerhumanrpginterfaceattributes() {

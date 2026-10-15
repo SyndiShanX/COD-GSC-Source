@@ -24,6 +24,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace kgb_aslt_vault_breach;
 
 function starting(str_skipto) {

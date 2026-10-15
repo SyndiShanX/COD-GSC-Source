@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\system_shared;
+
 #namespace dynent_world;
 
 function private autoexec __init__system__() {

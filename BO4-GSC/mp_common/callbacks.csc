@@ -13,6 +13,7 @@
 #include scripts\mp_common\callbacks;
 #include scripts\mp_common\vehicle;
 #include scripts\weapons\acid_bomb;
+
 #namespace callback;
 
 autoexec __init__system__() {

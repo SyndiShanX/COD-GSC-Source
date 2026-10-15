@@ -13,6 +13,7 @@
 #include scripts\core_common\scene_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\values_shared;
+
 #namespace zm_transform;
 
 autoexec __init__system__() {

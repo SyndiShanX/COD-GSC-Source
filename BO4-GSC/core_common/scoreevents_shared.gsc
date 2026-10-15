@@ -8,6 +8,7 @@
 #include scripts\core_common\contracts_shared;
 #include scripts\core_common\rank_shared;
 #include scripts\core_common\util_shared;
+
 #namespace scoreevents;
 
 function_6f51d1e9(event, players, victim, weapon) {

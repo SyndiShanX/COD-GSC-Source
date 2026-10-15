@@ -17,6 +17,7 @@
 #using scripts\core_common\vehicle_shared;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace namespace_1512c89a;
 
 function event_handler[level_init] main(eventstruct) {

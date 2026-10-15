@@ -8,6 +8,7 @@
 #using scripts\core_common\easing;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_7b8a8e22;
 
 function private autoexec __init__system__() {

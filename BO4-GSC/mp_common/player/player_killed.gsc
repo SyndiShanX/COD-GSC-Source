@@ -52,6 +52,7 @@
 #include scripts\mp_common\util;
 #include scripts\weapons\weapon_utils;
 #include scripts\weapons\weapons;
+
 #namespace player;
 
 function_df36a02d(attacker, weapon, mod) {

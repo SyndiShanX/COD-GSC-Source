@@ -6,6 +6,7 @@
 #using script_37f9ff47f340fbe8;
 #using scripts\core_common\math_shared;
 #using scripts\core_common\util_shared;
+
 #namespace easing;
 
 function ease_dvar(dvar, var_c7ec7d60, value, time, ease_type, ease_in, ease_out, var_33ce6852) {

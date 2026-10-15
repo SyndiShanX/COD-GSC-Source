@@ -23,6 +23,7 @@
 #include scripts\mp_common\gametypes\globallogic_audio;
 #include scripts\mp_common\teams\teams;
 #include scripts\weapons\heatseekingmissile;
+
 #namespace counteruav;
 
 autoexec __init__system__() {

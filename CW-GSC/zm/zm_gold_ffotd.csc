@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\system_shared;
+
 #namespace zm_gold_ffotd;
 
 function private autoexec __init__system__() {

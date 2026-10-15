@@ -11,6 +11,7 @@
 #using scripts\cp_common\snd_debug;
 #using scripts\cp_common\snd_draw;
 #using scripts\cp_common\snd_utility;
+
 #namespace snd;
 
 function private autoexec function_4047919b() {

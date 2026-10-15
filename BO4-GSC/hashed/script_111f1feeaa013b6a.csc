@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace bountyhunterbuy;
 
 class cbountyhunterbuy: cluielem {

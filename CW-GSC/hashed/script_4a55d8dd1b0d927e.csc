@@ -13,6 +13,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\mp_common\laststand;
 #using scripts\weapons\listening_device;
+
 #namespace namespace_e51f0bc1;
 
 function init() {

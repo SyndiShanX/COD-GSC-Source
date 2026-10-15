@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\system_shared;
+
 #namespace status_effect_dot;
 
 function private autoexec __init__system__() {

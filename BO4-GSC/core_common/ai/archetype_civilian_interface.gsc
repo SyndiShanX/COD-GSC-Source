@@ -6,6 +6,7 @@
 #include scripts\core_common\ai\archetype_civilian;
 #include scripts\core_common\ai\archetype_utility;
 #include scripts\core_common\ai\systems\ai_interface;
+
 #namespace civilianinterface;
 
 registercivilianinterfaceattributes() {

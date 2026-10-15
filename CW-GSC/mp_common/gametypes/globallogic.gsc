@@ -98,6 +98,7 @@
 #using scripts\weapons\mp\weapons;
 #using scripts\weapons\weapon_utils;
 #using scripts\weapons\weapons;
+
 #namespace globallogic;
 
 function private autoexec __init__system__() {

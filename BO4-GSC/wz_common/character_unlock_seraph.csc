@@ -9,6 +9,7 @@
 #include scripts\mp_common\item_world;
 #include scripts\wz_common\character_unlock_fixup;
 #include scripts\wz_common\wz_firing_range;
+
 #namespace character_unlock_seraph;
 
 autoexec __init__system__() {

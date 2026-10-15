@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace doa_textbubble_playername;
 class class_42946372: cluielem {
   function open(localclientnum) {

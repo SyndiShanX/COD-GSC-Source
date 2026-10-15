@@ -10,6 +10,7 @@
 #using scripts\core_common\load_shared;
 #using scripts\core_common\player\player_stats;
 #using scripts\core_common\util_shared;
+
 #namespace mp_zoo_rm;
 
 function event_handler[level_init] main(eventstruct) {

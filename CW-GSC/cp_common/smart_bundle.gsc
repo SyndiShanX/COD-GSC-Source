@@ -9,6 +9,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\system_shared;
+
 #namespace smart_bundle;
 
 function private autoexec __init__system__() {

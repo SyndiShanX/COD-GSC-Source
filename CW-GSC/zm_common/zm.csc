@@ -61,6 +61,7 @@
 #using scripts\zm_common\zm_wallbuy;
 #using scripts\zm_common\zm_weapons;
 #using scripts\zm_common\zm_zdraw;
+
 #namespace zm;
 
 function autoexec ignore_systems() {

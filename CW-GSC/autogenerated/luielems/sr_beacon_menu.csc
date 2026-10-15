@@ -4,6 +4,7 @@
 *****************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace sr_beacon_menu;
 class csr_beacon_menu: cluielem {
   function function_666779d(localclientnum, value) {

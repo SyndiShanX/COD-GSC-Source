@@ -32,6 +32,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
 #using scripts\weapons\cp\spy_camera;
+
 #namespace namespace_afd0968c;
 
 function init_scenes() {

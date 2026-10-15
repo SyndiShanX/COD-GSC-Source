@@ -8,6 +8,7 @@
 #using scripts\core_common\spawning_squad;
 #using scripts\core_common\struct;
 #using scripts\core_common\throttle_shared;
+
 #namespace namespace_b77e8eb1;
 
 function init() {

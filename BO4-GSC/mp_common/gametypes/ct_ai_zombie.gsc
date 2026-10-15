@@ -17,6 +17,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\values_shared;
 #include scripts\mp_common\armor;
+
 #namespace mp_ai_zombie;
 
 autoexec __init__system__() {

@@ -37,6 +37,7 @@
 #using scripts\cp_common\player_decision;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace namespace_d6f0b09d;
 
 function function_ad4c4af2(str_objective) {

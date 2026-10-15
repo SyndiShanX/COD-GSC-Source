@@ -4,6 +4,7 @@
 ************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace TerminalKeyboardFrame;
 class class_d0a96b4: cluielem {
   function open(player, flags = 0) {

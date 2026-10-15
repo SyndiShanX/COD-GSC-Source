@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\territory_util;
+
 #namespace namespace_99c84a33;
 
 function function_99652b58(name, index, team) {

@@ -5,6 +5,7 @@
 
 #using scripts\core_common\system_shared;
 #using scripts\mp_common\teams\teamset;
+
 #namespace teamset_allies;
 
 function private autoexec __init__system__() {

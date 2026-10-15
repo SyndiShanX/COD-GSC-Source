@@ -9,6 +9,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace cp_ger_hub_fx;
 
 function private autoexec __init__system__() {

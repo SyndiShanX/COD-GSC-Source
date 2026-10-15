@@ -11,6 +11,7 @@
 #using scripts\killstreaks\helicopter_shared;
 #using scripts\mp_common\callbacks;
 #using scripts\mp_common\vehicle;
+
 #namespace callback;
 
 function private autoexec __init__system__() {

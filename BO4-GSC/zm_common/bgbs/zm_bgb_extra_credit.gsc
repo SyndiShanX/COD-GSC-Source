@@ -7,6 +7,7 @@
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_player;
 #include scripts\zm_common\zm_powerups;
+
 #namespace zm_bgb_extra_credit;
 
 autoexec __init__system__() {

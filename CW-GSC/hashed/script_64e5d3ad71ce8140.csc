@@ -28,6 +28,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\weapons\weaponobjects;
+
 #namespace namespace_c85a46fe;
 
 function init() {

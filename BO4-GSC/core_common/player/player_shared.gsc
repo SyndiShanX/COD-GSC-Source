@@ -9,6 +9,7 @@
 #include scripts\core_common\player\player_loadout;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace player;
 
 autoexec __init__system__() {

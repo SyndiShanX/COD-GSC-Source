@@ -4,6 +4,7 @@
 ***************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace luielemimage;
 class cluielemimage: cluielem {
   function open(localclientnum) {

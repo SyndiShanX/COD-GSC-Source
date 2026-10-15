@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using script_35ae72be7b4fec10;
+
 #namespace namespace_ae270045;
 
 function function_cfcd9b92(var_5b36f17f, var_efccf092, var_b04adac9, var_8ab7d27b = 1, var_c1c8f1d, var_ef1623ea = 20) {

@@ -9,6 +9,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\system_shared;
 #using scripts\zm_common\zm_perks;
+
 #namespace zm_perk_death_perception;
 
 function private autoexec __init__system__() {

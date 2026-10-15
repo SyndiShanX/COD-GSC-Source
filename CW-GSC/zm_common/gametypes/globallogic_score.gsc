@@ -18,6 +18,7 @@
 #using scripts\zm_common\gametypes\globallogic_utils;
 #using scripts\zm_common\util;
 #using scripts\zm_common\zm_stats;
+
 #namespace globallogic_score;
 
 function gethighestscoringplayer() {

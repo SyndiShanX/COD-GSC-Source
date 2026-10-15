@@ -33,6 +33,7 @@
 #using scripts\cp_common\player_decision;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace namespace_fba81a7f;
 
 function start(str_objective) {

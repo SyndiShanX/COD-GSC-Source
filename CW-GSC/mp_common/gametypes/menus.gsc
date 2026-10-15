@@ -13,6 +13,7 @@
 #using scripts\mp_common\draft;
 #using scripts\mp_common\gametypes\globallogic;
 #using scripts\mp_common\util;
+
 #namespace menus;
 
 function private autoexec __init__system__() {

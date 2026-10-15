@@ -26,6 +26,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_7e1ec234;
 
 function function_10d1200d() {

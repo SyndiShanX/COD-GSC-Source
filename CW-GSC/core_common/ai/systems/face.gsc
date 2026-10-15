@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\math_shared;
+
 #namespace face;
 
 function playfacethread(facialanim, str_script_alias, importance, notifystring, waitornot, timetowait, player_or_team) {

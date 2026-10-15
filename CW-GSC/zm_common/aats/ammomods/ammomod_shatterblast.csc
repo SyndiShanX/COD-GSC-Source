@@ -5,6 +5,7 @@
 
 #using scripts\core_common\aat_shared;
 #using scripts\core_common\clientfield_shared;
+
 #namespace ammomod_shatterblast;
 
 function init_shatterblast() {

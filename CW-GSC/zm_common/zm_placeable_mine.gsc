@@ -18,6 +18,7 @@
 #using scripts\zm_common\zm_stats;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_weapons;
+
 #namespace zm_placeable_mine;
 
 function private autoexec __init__system__() {

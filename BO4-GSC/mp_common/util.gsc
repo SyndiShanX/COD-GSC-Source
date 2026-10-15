@@ -6,6 +6,7 @@
 #include scripts\core_common\lui_shared;
 #include scripts\core_common\math_shared;
 #include scripts\core_common\util_shared;
+
 #namespace util;
 
 within_fov(start_origin, start_angles, end_origin, fov) {

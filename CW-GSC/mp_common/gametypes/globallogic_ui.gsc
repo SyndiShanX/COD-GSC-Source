@@ -23,6 +23,7 @@
 #using scripts\mp_common\teams\team_assignment;
 #using scripts\mp_common\userspawnselection;
 #using scripts\mp_common\util;
+
 #namespace globallogic_ui;
 
 function init() {}

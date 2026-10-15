@@ -7,6 +7,7 @@
 #using scripts\core_common\spawner_shared;
 #using scripts\core_common\system_shared;
 #using scripts\cp_common\snd;
+
 #namespace namespace_660edc44;
 
 function private autoexec __init__system__() {

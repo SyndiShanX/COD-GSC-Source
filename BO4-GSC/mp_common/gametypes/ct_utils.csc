@@ -17,6 +17,7 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
+
 #namespace ct_utils;
 
 autoexec __init__system__() {

@@ -13,6 +13,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
 #using scripts\killstreaks\killstreaks_util;
+
 #namespace zipline_player;
 
 function private autoexec __init__system__() {

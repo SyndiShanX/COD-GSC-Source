@@ -4,6 +4,7 @@
 *****************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace zm_gold_hud;
 class czm_gold_hud: cluielem {
   function open(player, flags = 0) {

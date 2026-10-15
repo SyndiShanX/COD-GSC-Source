@@ -5,6 +5,7 @@
 
 #using scripts\core_common\scene_objects_shared;
 #using scripts\core_common\vehicle_ai_shared;
+
 #namespace scene;
 class cscenevehicle: csceneobject {
   var _e;

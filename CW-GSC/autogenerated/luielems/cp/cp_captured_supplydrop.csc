@@ -4,6 +4,7 @@
 ****************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace cp_captured_supplydrop;
 class class_35ee22bc: cluielem {
   function open(localclientnum) {

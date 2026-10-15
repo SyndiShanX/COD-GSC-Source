@@ -5,6 +5,7 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_bgb;
+
 #namespace zm_bgb_danger_closest;
 
 autoexec __init__system__() {

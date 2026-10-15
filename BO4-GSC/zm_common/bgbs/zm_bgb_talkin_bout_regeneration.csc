@@ -5,6 +5,7 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_bgb;
+
 #namespace zm_bgb_talkin_bout_regeneration;
 
 autoexec __init__system__() {

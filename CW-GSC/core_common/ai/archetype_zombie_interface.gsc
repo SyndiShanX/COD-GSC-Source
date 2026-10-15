@@ -5,6 +5,7 @@
 
 #using scripts\core_common\ai\systems\ai_interface;
 #using scripts\core_common\ai\zombie;
+
 #namespace zombieinterface;
 
 function registerzombieinterfaceattributes() {

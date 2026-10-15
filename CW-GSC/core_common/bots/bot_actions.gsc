@@ -6,6 +6,7 @@
 #using scripts\core_common\bots\bot;
 #using scripts\core_common\bots\bot_action;
 #using scripts\core_common\gameobjects_shared;
+
 #namespace bot_actions;
 
 function preinit() {

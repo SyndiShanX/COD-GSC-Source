@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\ai\systems\animation_state_machine_mocomp;
+
 #namespace bot_animation;
 
 play_animation(var_f6550bae) {

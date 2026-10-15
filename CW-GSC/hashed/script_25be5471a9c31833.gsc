@@ -22,6 +22,7 @@
 #using scripts\zm_common\zm_score;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_utility_zsurvival;
+
 #namespace namespace_82b4c2d1;
 
 function private autoexec __init__system__() {

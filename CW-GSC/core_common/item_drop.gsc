@@ -16,6 +16,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\throttle_shared;
 #using scripts\core_common\util_shared;
+
 #namespace item_drop;
 
 function private autoexec __init__system__() {

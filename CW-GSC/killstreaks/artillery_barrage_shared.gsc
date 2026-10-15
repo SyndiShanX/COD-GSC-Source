@@ -16,6 +16,7 @@
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\killstreaks\planemortar_shared;
 #using scripts\weapons\heatseekingmissile;
+
 #namespace artillery_barrage;
 
 function init_shared() {

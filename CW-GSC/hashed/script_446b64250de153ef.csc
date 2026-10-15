@@ -5,6 +5,7 @@
 
 #using script_644007a8c3885fc;
 #using scripts\core_common\item_world_fixup;
+
 #namespace namespace_2d440395;
 
 function autoexec function_88ff61e0() {

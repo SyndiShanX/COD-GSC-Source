@@ -8,6 +8,7 @@
 #using scripts\core_common\gestures;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace dynent_use;
 
 function private autoexec __init__system__() {

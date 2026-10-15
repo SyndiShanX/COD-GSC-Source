@@ -9,6 +9,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_utility;
+
 #namespace zodt8_side_quests;
 
 init() {

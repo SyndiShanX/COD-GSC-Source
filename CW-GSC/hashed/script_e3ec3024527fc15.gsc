@@ -16,6 +16,7 @@
 #using scripts\core_common\vehicleriders_shared;
 #using scripts\cp_common\gametypes\save;
 #using scripts\cp_common\util;
+
 #namespace fav;
 
 function init(var_57ef78ed) {

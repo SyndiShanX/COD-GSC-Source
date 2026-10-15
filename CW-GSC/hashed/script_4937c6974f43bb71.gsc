@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\cp_common\gametypes\globallogic_ui;
+
 #namespace namespace_82bfe441;
 
 function fade(dofadeout, fadespeed = "FadeImmediate", customfadespeed = 0) {

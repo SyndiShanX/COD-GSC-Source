@@ -39,6 +39,7 @@
 #using scripts\cp_common\snd_utility;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace tkdn_raid_bar;
 
 function starting(str_skipto) {

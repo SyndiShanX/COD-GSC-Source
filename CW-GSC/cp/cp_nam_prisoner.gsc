@@ -50,6 +50,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\smart_bundle;
 #using scripts\cp_common\util;
+
 #namespace cp_nam_prisoner;
 
 function private event_handler[createstruct] function_e0a8e4ba(struct) {

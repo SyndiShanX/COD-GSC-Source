@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace doa_bannerelement;
 class class_1bec696c: cluielem {
   var var_bf9c8c95;

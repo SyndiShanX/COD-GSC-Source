@@ -10,6 +10,7 @@
 #include scripts\killstreaks\killstreak_bundles;
 #include scripts\killstreaks\killstreakrules_shared;
 #include scripts\killstreaks\killstreaks_util;
+
 #namespace ir_strobe;
 
 init_shared() {

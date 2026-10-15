@@ -13,6 +13,7 @@
 #include scripts\zm_common\zm_magicbox;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_escape_magicbox;
 
 autoexec __init__system__() {

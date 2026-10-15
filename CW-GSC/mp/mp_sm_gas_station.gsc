@@ -6,6 +6,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\compass;
 #using scripts\core_common\load_shared;
+
 #namespace mp_sm_gas_station;
 
 function event_handler[level_init] main(eventstruct) {

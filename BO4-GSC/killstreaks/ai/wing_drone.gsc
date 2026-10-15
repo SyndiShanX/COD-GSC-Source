@@ -15,6 +15,7 @@
 #include scripts\killstreaks\ai\lead_drone;
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\killstreaks\remote_weapons;
+
 #namespace wing_drone;
 
 autoexec __init__system__() {

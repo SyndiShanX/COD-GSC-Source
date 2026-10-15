@@ -28,6 +28,7 @@
 #using scripts\cp_common\gametypes\save;
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\skipto;
+
 #namespace namespace_1ca393d1;
 
 function starting(str_skipto) {

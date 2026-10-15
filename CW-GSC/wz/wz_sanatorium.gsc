@@ -10,6 +10,7 @@
 #using scripts\core_common\load_shared;
 #using scripts\core_common\scene_shared;
 #using scripts\core_common\util_shared;
+
 #namespace wz_sanatorium;
 
 function private autoexec function_6a8a6c0e() {

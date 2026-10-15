@@ -10,6 +10,7 @@
 #using scripts\core_common\player\player_stats;
 #using scripts\core_common\scoreevents_shared;
 #using scripts\core_common\system_shared;
+
 #namespace namespace_81245006;
 
 function private autoexec __init__system__() {

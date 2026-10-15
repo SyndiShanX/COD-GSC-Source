@@ -24,6 +24,7 @@
 #include scripts\killstreaks\remote_weapons;
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\weapons\deployable;
+
 #namespace killstreak_vehicle;
 
 init() {

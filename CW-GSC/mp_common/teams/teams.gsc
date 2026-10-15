@@ -13,6 +13,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\mp_common\gametypes\globallogic_ui;
 #using scripts\mp_common\util;
+
 #namespace teams;
 
 function private autoexec __init__system__() {

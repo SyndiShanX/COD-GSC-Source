@@ -9,6 +9,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\values_shared;
+
 #namespace barricades;
 class cbarricade: cdoor {
   var m_e_door;

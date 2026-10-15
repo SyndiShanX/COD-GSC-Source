@@ -23,6 +23,7 @@
 #using scripts\cp_common\gametypes\save;
 #using scripts\cp_common\player_decision;
 #using scripts\cp_common\util;
+
 #namespace namespace_2b049a09;
 
 function private autoexec __init__system__() {

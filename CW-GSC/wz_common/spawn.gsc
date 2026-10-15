@@ -16,6 +16,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
 #using scripts\mp_common\gametypes\spawning;
+
 #namespace spawn;
 
 function function_f468d9a5(spawnpoint) {

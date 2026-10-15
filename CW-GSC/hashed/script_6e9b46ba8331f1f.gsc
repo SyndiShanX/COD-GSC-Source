@@ -16,6 +16,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
+
 #namespace namespace_b9471dc1;
 
 function register_clientfields() {

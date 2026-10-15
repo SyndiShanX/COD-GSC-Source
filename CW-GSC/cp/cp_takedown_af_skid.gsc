@@ -26,6 +26,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace tkdn_af_skid;
 
 function starting(str_skipto) {

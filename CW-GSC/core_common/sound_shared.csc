@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using script_71463f7d72636705;
+
 #namespace sound;
 
 function loop_fx_sound(clientnum, alias, origin, ender) {

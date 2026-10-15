@@ -31,6 +31,7 @@
 #include scripts\mp_common\gametypes\ct_vo;
 #include scripts\mp_common\gametypes\globallogic_score;
 #include scripts\mp_common\player\player_loadout;
+
 #namespace ct_ruin_tutorial;
 
 init() {

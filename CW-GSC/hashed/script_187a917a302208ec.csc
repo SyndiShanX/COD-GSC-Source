@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\clientfield_shared;
+
 #namespace namespace_98521e8b;
 
 function event_handler[level_init] function_9347830c(eventstruct) {

@@ -8,6 +8,7 @@
 #using scripts\core_common\scene_shared;
 #using scripts\core_common\spawner_shared;
 #using scripts\core_common\trigger_shared;
+
 #namespace namespace_ecdab0f4;
 
 function function_b68e2d37() {

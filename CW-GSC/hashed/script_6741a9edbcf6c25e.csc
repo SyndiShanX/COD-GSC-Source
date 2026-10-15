@@ -8,6 +8,7 @@
 #using scripts\core_common\armor_carrier;
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\radiation;
+
 #namespace namespace_2938acdc;
 
 function init() {

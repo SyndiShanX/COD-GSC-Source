@@ -9,6 +9,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace wz_perk_engineer;
 
 autoexec __init__system__() {

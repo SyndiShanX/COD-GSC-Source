@@ -39,6 +39,7 @@
 #include scripts\mp_common\player\player_damage;
 #include scripts\wz_common\wz_ai_utils;
 #include scripts\wz_common\wz_ai_zombie;
+
 #namespace wz_ai_brutus;
 
 autoexec __init__system__() {

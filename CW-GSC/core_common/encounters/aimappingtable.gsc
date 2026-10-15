@@ -5,6 +5,7 @@
 
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
+
 #namespace aimappingtableutility;
 
 function setmappingtableforteam(str_team, aimappingtable) {

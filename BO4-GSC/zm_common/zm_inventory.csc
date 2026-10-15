@@ -5,6 +5,7 @@
 
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_maptable;
+
 #namespace zm_inventory;
 
 function_cb96f01d(mappingname, internalname, numbits, ispersonal) {

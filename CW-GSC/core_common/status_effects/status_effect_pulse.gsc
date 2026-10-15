@@ -7,6 +7,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\status_effects\status_effect_util;
 #using scripts\core_common\system_shared;
+
 #namespace status_effect_pulse;
 
 function private autoexec __init__system__() {

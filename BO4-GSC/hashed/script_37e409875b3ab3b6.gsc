@@ -15,6 +15,7 @@
 #include scripts\zm_common\ai\planner_zm_generic_commander;
 #include scripts\zm_common\ai\planner_zm_generic_squad;
 #include scripts\zm_common\ai\planner_zm_squad_utility;
+
 #namespace namespace_4932f496;
 
 _createcommanderplanner(team) {

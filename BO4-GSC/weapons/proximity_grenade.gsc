@@ -12,6 +12,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace proximity_grenade;
 
 init_shared() {

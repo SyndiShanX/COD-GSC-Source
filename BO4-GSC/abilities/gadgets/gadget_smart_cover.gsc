@@ -19,6 +19,7 @@
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\weapons\deployable;
 #include scripts\weapons\weaponobjects;
+
 #namespace smart_cover;
 
 init_shared() {

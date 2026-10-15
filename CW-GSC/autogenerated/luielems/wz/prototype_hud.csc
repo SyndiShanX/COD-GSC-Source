@@ -4,6 +4,7 @@
 *******************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace prototype_hud;
 class cprototype_hud: cluielem {
   function open(localclientnum) {

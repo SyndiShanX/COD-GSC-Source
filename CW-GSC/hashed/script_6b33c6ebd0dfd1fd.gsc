@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\system_shared;
+
 #namespace namespace_fa63f697;
 
 function autoexec ignore_systems() {

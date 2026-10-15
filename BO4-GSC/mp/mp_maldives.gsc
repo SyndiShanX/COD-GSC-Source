@@ -6,6 +6,7 @@
 #include scripts\core_common\compass;
 #include scripts\core_common\doors_shared;
 #include scripts\mp_common\load;
+
 #namespace mp_maldives;
 
 event_handler[level_init] main(eventstruct) {

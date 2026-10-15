@@ -32,6 +32,7 @@
 #using scripts\mp_common\teams\teams;
 #using scripts\wz_common\spawn;
 #using scripts\wz_common\teams\teams;
+
 #namespace fireteam_elimination;
 
 function private autoexec __init__system__() {

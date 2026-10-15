@@ -25,6 +25,7 @@
 #using scripts\cp_common\dialogue;
 #using scripts\cp_common\gametypes\battlechatter;
 #using scripts\weapons\smokegrenade;
+
 #namespace namespace_631d466b;
 
 function autoexec registerbehaviorscriptfunctions() {

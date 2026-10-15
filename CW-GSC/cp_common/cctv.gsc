@@ -8,6 +8,7 @@
 #using script_4937c6974f43bb71;
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\system_shared;
+
 #namespace cctv;
 
 function private autoexec __init__system__() {

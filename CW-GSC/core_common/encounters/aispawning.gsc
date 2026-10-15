@@ -4,6 +4,7 @@
 *************************************************/
 
 #using scripts\core_common\array_shared;
+
 #namespace aispawningutility;
 
 function function_e312ad4d(str_team, var_f8de2ad5, str_ai_type) {

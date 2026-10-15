@@ -7,6 +7,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\util_shared;
 #using scripts\wz_common\util;
+
 #namespace hud;
 
 function function_9b9cecdf() {

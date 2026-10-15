@@ -7,6 +7,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\item_world_util;
 #using scripts\core_common\struct;
+
 #namespace item_spawn_group;
 
 function setup(seedvalue) {

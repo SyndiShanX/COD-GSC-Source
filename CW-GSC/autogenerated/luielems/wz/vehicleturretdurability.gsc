@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace vehicleturretdurability;
 class cvehicleturretdurability: cluielem {
   var var_bf9c8c95;

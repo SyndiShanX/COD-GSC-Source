@@ -4,6 +4,7 @@
 ********************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace mp_revive_prompt;
 
 class cmp_revive_prompt: cluielem {

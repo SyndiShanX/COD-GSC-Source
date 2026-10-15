@@ -6,6 +6,7 @@
 #include scripts\core_common\struct;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_clone;
 
 spawn_player_clone(player, origin = player.origin, forceweapon, forcemodel) {

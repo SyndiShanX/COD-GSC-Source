@@ -7,6 +7,7 @@
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\renderoverridebundle;
 #using scripts\core_common\util_shared;
+
 #namespace codcaster;
 
 function function_b8fe9b52(localclientnum) {

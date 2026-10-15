@@ -5,6 +5,7 @@
 
 #include scripts\core_common\util_shared;
 #include scripts\zm\zm_white_zstandard;
+
 #namespace zm_white_gamemodes;
 
 event_handler[level_finalizeinit] main(eventstruct) {

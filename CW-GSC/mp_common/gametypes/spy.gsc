@@ -55,6 +55,7 @@
 #using scripts\mp_common\player\player_killed;
 #using scripts\mp_common\player\player_loadout;
 #using scripts\mp_common\player\player_utils;
+
 #namespace spy;
 
 function event_handler[gametype_init] main(eventstruct) {

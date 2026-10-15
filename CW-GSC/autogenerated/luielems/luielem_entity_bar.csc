@@ -4,6 +4,7 @@
 *********************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace luielem_entity_bar;
 class class_276088fe: cluielem {
   function open(localclientnum) {

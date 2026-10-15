@@ -21,6 +21,7 @@
 #include scripts\core_common\vehicle_shared;
 #include scripts\core_common\vehicles\smart_bomb;
 #include scripts\weapons\arc;
+
 #namespace seeker_mine;
 
 autoexec __init__system__() {

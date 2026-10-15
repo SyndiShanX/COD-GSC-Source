@@ -24,6 +24,7 @@
 #using scripts\zm_common\zm_stats;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_vo;
+
 #namespace world_event_horde_hunt;
 
 function private autoexec __init__system__() {

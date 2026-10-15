@@ -7,6 +7,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\math_shared;
 #include scripts\core_common\util_shared;
+
 #namespace archetype_damage_effects;
 
 class class_d5e9830e {

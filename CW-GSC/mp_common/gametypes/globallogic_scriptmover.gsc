@@ -7,6 +7,7 @@
 #using scripts\core_common\damage;
 #using scripts\core_common\globallogic\globallogic_player;
 #using scripts\core_common\weapons_shared;
+
 #namespace globallogic_scriptmover;
 
 function function_8c7ec52f(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, iboneindex, imodelindex, spartname, isurfacetype, vsurfacenormal) {

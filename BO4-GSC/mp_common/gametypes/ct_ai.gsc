@@ -11,6 +11,7 @@
 #include scripts\core_common\vehicle_shared;
 #include scripts\mp_common\gametypes\ct_bots;
 #include scripts\mp_common\gametypes\ct_utils;
+
 #namespace ct_ai;
 
 function_4c8f915a(origin) {

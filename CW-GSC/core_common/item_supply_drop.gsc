@@ -15,6 +15,7 @@
 #using scripts\core_common\territory_util;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\vehicle_shared;
+
 #namespace item_supply_drop;
 
 function private autoexec __init__system__() {

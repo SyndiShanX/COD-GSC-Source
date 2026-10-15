@@ -30,6 +30,7 @@
 #include scripts\mp_common\player\player_loadout;
 #include scripts\mp_common\player\player_utils;
 #include scripts\mp_common\util;
+
 #namespace svz;
 
 event_handler[gametype_init] main(eventstruct) {

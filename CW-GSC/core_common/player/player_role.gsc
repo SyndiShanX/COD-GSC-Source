@@ -7,6 +7,7 @@
 #using scripts\core_common\player\player_loadout;
 #using scripts\core_common\player\player_stats;
 #using scripts\core_common\system_shared;
+
 #namespace player_role;
 
 function private autoexec __init__system__() {

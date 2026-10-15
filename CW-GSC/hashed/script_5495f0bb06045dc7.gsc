@@ -48,6 +48,7 @@
 #using scripts\wz_common\util;
 #using scripts\wz_common\wz_ignore_systems;
 #using scripts\wz_common\wz_progression;
+
 #namespace namespace_17baa64d;
 
 function init() {

@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace sr_beacon_menu;
 class csr_beacon_menu: cluielem {
   var var_bf9c8c95;

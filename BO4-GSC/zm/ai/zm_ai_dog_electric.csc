@@ -6,6 +6,7 @@
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
+
 #namespace zm_ai_dog_electric;
 
 autoexec __init__system__() {

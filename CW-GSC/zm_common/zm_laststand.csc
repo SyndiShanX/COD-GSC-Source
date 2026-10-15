@@ -14,6 +14,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\zm_common\load;
 #using scripts\zm_common\util;
+
 #namespace zm_laststand;
 
 function private autoexec __init__system__() {

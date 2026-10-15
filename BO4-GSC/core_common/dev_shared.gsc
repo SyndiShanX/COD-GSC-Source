@@ -5,6 +5,7 @@
 
 #include scripts\core_common\gestures;
 #include scripts\core_common\util_shared;
+
 #namespace dev;
 
 debug_sphere(origin, radius, color, alpha, time) {

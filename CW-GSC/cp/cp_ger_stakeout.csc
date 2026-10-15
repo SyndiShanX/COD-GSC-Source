@@ -16,6 +16,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\util;
 #using scripts\weapons\cp\spy_camera;
+
 #namespace cp_ger_stakeout;
 
 function event_handler[level_init] main(eventstruct) {

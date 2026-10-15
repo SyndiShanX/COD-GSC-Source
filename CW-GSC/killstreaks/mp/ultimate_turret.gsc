@@ -8,6 +8,7 @@
 #using scripts\core_common\player\player_stats;
 #using scripts\core_common\system_shared;
 #using scripts\killstreaks\ultimate_turret_shared;
+
 #namespace ultimate_turret;
 
 function private autoexec __init__system__() {

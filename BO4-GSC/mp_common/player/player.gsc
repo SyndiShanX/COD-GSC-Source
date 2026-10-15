@@ -13,6 +13,7 @@
 #include scripts\core_common\values_shared;
 #include scripts\mp_common\gametypes\globallogic_score;
 #include scripts\mp_common\player\player_utils;
+
 #namespace player;
 
 autoexec __init__() {

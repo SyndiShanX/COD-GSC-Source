@@ -5,6 +5,7 @@
 
 #include scripts\core_common\ai\archetype_stoker;
 #include scripts\core_common\ai\systems\ai_interface;
+
 #namespace stokerinterface;
 
 registerstokerinterfaceattributes() {

@@ -33,6 +33,7 @@
 #include scripts\mp_common\gametypes\globallogic_score;
 #include scripts\mp_common\player\player_loadout;
 #include scripts\weapons\mp\seeker_mine;
+
 #namespace ct_prophet_tutorial;
 
 init() {

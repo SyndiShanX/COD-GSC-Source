@@ -4,6 +4,7 @@
 *************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace sr_weapon_upgrade_menu;
 class class_ec90ce81: cluielem {
   function open(localclientnum) {

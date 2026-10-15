@@ -11,6 +11,7 @@
 #include scripts\zm_common\zm_traps;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
+
 #namespace zm_red_trap_boiling_bath;
 
 init() {

@@ -9,6 +9,7 @@
 #include scripts\zm_common\zm_maptable;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_ui_inventory;
+
 #namespace zm_office_groom_lake_challenges;
 
 init() {

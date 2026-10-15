@@ -7,6 +7,7 @@
 #include scripts\core_common\ai\systems\behavior_tree_utility;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace wz_ai_swat;
 
 autoexec __init__system__() {

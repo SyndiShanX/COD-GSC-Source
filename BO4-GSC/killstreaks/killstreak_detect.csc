@@ -10,6 +10,7 @@
 #include scripts\core_common\shoutcaster;
 #include scripts\core_common\util_shared;
 #include scripts\killstreaks\killstreak_bundles;
+
 #namespace killstreak_detect;
 
 init_shared() {

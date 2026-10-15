@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\item_world_util;
+
 #namespace item_inventory_util;
 
 function private function_c92543a0(attachmentitem, attachmentname) {

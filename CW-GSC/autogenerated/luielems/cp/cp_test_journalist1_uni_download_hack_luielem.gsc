@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace cp_test_journalist1_uni_download_hack_luielem;
 class class_b201538a: cluielem {
   var var_bf9c8c95;

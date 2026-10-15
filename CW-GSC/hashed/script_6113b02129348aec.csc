@@ -5,6 +5,7 @@
 
 #using scripts\core_common\serverfield_shared;
 #using scripts\core_common\system_shared;
+
 #namespace namespace_9b5aa273;
 
 function private autoexec __init__system__() {

@@ -7,6 +7,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
+
 #namespace weapons_shared;
 
 autoexec __init__system__() {

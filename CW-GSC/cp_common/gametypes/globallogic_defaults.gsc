@@ -12,6 +12,7 @@
 #using scripts\cp_common\gametypes\globallogic;
 #using scripts\cp_common\gametypes\globallogic_utils;
 #using scripts\cp_common\util;
+
 #namespace globallogic_defaults;
 
 function getwinningteamfromloser(losing_team) {

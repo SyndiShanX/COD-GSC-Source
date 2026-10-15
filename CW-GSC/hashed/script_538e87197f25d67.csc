@@ -10,6 +10,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_82b4c2d1;
 
 function private autoexec __init__system__() {

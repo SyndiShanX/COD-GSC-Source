@@ -8,6 +8,7 @@
 #using scripts\killstreaks\killstreak_detect;
 #using scripts\killstreaks\killstreak_vehicle;
 #using scripts\killstreaks\killstreaks_shared;
+
 #namespace killstreaks;
 
 function private autoexec __init__system__() {

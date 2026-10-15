@@ -26,6 +26,7 @@
 #using scripts\core_common\stealth\threat_sight;
 #using scripts\core_common\stealth\utility;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_77fd5d41;
 
 function scalevolume(ent, vol) {}

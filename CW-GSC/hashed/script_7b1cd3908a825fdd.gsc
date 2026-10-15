@@ -42,6 +42,7 @@
 #using scripts\zm_common\zm_vo;
 #using scripts\zm_common\zm_vote;
 #using scripts\zm_common\zm_zonemgr;
+
 #namespace namespace_591b4396;
 
 function event_handler[level_init] main(eventstruct) {

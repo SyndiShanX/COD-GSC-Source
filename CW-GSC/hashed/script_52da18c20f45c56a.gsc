@@ -18,6 +18,7 @@
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
 #using scripts\weapons\weapon_utils;
+
 #namespace action_utility;
 
 function private autoexec __init__system__() {

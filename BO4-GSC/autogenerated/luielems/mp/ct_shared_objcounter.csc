@@ -4,6 +4,7 @@
 **************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace ct_shared_objcounter;
 
 class cct_shared_objcounter: cluielem {

@@ -11,6 +11,7 @@
 #using scripts\cp_common\gametypes\globallogic_ui;
 #using scripts\cp_common\hint_tutorial;
 #using scripts\cp_common\objectives;
+
 #namespace objectives_ui;
 
 function private autoexec __init__system__() {

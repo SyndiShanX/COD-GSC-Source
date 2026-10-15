@@ -11,6 +11,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\weapons\weapons;
+
 #namespace armor_carrier;
 
 function private autoexec __init__system__() {

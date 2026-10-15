@@ -11,6 +11,7 @@
 #using scripts\core_common\lui_shared;
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\util_shared;
+
 #namespace cp_ger_hub8;
 
 function event_handler[level_init] main(eventstruct) {

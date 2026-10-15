@@ -5,6 +5,7 @@
 
 #using scripts\core_common\dogtags;
 #using scripts\core_common\util_shared;
+
 #namespace conf;
 
 function event_handler[gametype_init] main(eventstruct) {

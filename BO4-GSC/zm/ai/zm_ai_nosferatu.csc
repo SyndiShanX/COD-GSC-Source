@@ -13,6 +13,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_customgame;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_ai_nosferatu;
 
 autoexec __init__system__() {

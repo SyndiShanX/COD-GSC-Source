@@ -20,6 +20,7 @@
 #include scripts\zm_common\zm_devgui;
 #include scripts\zm_common\zm_maptable;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_characters;
 
 autoexec __init__system__() {

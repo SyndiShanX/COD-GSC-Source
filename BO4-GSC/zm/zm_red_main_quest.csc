@@ -16,6 +16,7 @@
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_blockers;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_red_main_quest;
 
 init() {

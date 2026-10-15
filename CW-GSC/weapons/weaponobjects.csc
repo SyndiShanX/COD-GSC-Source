@@ -10,6 +10,7 @@
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\renderoverridebundle;
 #using scripts\core_common\util_shared;
+
 #namespace weaponobjects;
 
 function init_shared(friendly_rob, var_4885f19e) {

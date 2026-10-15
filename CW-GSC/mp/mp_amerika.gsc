@@ -6,6 +6,7 @@
 #using scripts\core_common\compass;
 #using scripts\core_common\load_shared;
 #using scripts\core_common\scene_shared;
+
 #namespace mp_amerika;
 
 function event_handler[level_init] main(eventstruct) {

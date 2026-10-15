@@ -8,6 +8,7 @@
 #using scripts\core_common\scene_shared;
 #using scripts\core_common\system_shared;
 #using scripts\killstreaks\zm\killstreaks;
+
 #namespace chopper_gunner;
 
 function private autoexec __init__system__() {

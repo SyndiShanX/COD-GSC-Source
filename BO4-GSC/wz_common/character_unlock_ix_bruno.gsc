@@ -9,6 +9,7 @@
 #include scripts\mp_common\item_world_fixup;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace character_unlock_ix_bruno;
 
 autoexec __init__system__() {

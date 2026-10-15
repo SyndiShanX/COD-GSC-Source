@@ -47,6 +47,7 @@
 #using scripts\cp_common\ui\object_descriptions;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace namespace_e77bf565;
 
 function init_clientfields() {

@@ -4,6 +4,7 @@
 ****************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace prototype_defend_timer;
 
 class cprototype_defend_timer: cluielem {

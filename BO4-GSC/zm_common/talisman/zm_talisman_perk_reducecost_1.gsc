@@ -12,6 +12,7 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_talisman;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_talisman_perk_reducecost_1;
 
 autoexec __init__system__() {

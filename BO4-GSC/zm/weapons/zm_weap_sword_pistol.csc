@@ -7,6 +7,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_weap_sword_pistol;
 
 autoexec __init__system__() {

@@ -4,6 +4,7 @@
 ******************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace self_respawn;
 class cself_respawn: cluielem {
   function set_percent(localclientnum, value) {

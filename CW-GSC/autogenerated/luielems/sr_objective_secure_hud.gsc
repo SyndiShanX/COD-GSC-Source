@@ -4,6 +4,7 @@
 **************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace sr_objective_secure_hud;
 class csr_objective_secure_hud: cluielem {
   var var_bf9c8c95;

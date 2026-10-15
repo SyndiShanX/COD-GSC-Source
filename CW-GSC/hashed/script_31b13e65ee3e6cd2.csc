@@ -12,6 +12,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_cdc318b3;
 
 function private autoexec __init__system__() {

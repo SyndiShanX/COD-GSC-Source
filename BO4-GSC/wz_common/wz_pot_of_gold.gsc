@@ -5,6 +5,7 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\item_world;
+
 #namespace wz_pot_of_gold;
 
 autoexec __init__system__() {

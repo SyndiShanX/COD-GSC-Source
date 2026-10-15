@@ -5,6 +5,7 @@
 
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
+
 #namespace radiant_live_udpate;
 
 autoexec __init__system__() {

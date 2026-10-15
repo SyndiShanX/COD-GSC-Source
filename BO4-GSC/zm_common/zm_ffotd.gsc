@@ -7,6 +7,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\struct;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_ffotd;
 
 main_start() {}

@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\system_shared;
+
 #namespace namespace_323abaa4;
 
 function private autoexec __init__system__() {

@@ -43,6 +43,7 @@
 #include scripts\mp_common\player\player_utils;
 #include scripts\mp_common\userspawnselection;
 #include scripts\mp_common\util;
+
 #namespace sd;
 
 event_handler[gametype_init] main(eventstruct) {

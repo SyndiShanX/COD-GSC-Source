@@ -32,6 +32,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace cp_rus_kgb;
 
 function event_handler[level_init] main(eventstruct) {

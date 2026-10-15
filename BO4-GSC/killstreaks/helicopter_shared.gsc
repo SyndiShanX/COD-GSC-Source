@@ -24,6 +24,7 @@
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\killstreaks\killstreaks_util;
 #include scripts\weapons\heatseekingmissile;
+
 #namespace helicopter;
 
 init_shared(bundle_name) {

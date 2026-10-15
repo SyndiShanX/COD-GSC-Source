@@ -24,6 +24,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\throttle_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_361e505d;
 
 function private autoexec __init__system__() {

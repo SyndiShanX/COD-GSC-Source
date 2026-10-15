@@ -11,6 +11,7 @@
 #include scripts\core_common\shoutcaster;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\visionset_mgr_shared;
+
 #namespace gadget_vision_pulse;
 
 init_shared() {

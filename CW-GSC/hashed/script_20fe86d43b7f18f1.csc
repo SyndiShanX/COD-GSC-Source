@@ -5,6 +5,7 @@
 
 #using scripts\core_common\array_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_14ee8104;
 
 function function_54d0d2d1(localclientnum) {

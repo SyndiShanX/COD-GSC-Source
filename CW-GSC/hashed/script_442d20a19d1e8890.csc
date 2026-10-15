@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace incursion_infiltrationtitlecards;
 class class_7c3faeda: cluielem {
   function open(localclientnum) {

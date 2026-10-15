@@ -8,6 +8,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\zm\ai\zm_ai_hulk;
+
 #namespace namespace_45b55437;
 
 function private autoexec __init__system__() {

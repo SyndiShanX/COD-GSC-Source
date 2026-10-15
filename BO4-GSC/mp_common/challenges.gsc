@@ -25,6 +25,7 @@
 #include scripts\mp_common\supplypod;
 #include scripts\mp_common\util;
 #include scripts\weapons\weapon_utils;
+
 #namespace challenges;
 
 autoexec __init__system__() {

@@ -11,6 +11,7 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_trial_kill_enemies_for_health;
 
 autoexec __init__system__() {

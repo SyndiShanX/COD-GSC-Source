@@ -8,6 +8,7 @@
 #using scripts\core_common\renderoverridebundle;
 #using scripts\core_common\util_shared;
 #using scripts\killstreaks\killstreak_detect;
+
 #namespace napalm_strike;
 
 function init_shared(bundlename) {

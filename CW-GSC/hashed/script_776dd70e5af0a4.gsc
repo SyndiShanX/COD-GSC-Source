@@ -41,6 +41,7 @@
 #using scripts\cp_common\spawn_manager;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace namespace_b767a37e;
 
 function function_1bfb5e75(str_objective) {

@@ -11,6 +11,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm;
+
 #namespace zm_aoe;
 
 class areaofeffect {

@@ -22,6 +22,7 @@
 #using scripts\core_common\math_shared;
 #using scripts\core_common\spawner_shared;
 #using scripts\core_common\util_shared;
+
 #namespace archetypehuman;
 
 function autoexec init() {

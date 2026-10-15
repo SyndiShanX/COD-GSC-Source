@@ -12,6 +12,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\mp_common\util;
+
 #namespace gadget_vision_pulse;
 
 autoexec __init__system__() {

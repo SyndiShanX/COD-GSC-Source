@@ -10,6 +10,7 @@
 #using scripts\core_common\ping_shared;
 #using scripts\core_common\popups_shared;
 #using scripts\core_common\system_shared;
+
 #namespace ping;
 
 function private autoexec __init__system__() {

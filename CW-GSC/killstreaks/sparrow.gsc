@@ -8,6 +8,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\weapons\weapons;
+
 #namespace sparrow;
 
 function private autoexec __init__system__() {

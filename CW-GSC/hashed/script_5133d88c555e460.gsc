@@ -26,6 +26,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\math_shared;
+
 #namespace namespace_58e19d6;
 
 function init() {

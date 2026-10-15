@@ -9,6 +9,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\zm_common\zm_pack_a_punch_util;
 #using scripts\zm_common\zm_weapons;
+
 #namespace zm_camos;
 
 function private autoexec __init__system__() {

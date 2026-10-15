@@ -5,6 +5,7 @@
 
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\globallogic_utils;
+
 #namespace events;
 
 add_timed_event(seconds, notify_string, client_notify_string) {

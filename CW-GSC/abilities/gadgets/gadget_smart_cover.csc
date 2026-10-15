@@ -7,6 +7,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\util_shared;
 #using scripts\weapons\deployable;
+
 #namespace smart_cover;
 
 function init_shared() {

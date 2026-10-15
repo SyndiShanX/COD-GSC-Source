@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace sr_objective_timer;
 class class_b5586f52: cluielem {
   function open(player, flags = 0) {

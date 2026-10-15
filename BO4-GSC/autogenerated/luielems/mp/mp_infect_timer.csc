@@ -4,6 +4,7 @@
 *********************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace mp_infect_timer;
 
 class cmp_infect_timer: cluielem {

@@ -14,6 +14,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\throttle_shared;
 #include scripts\core_common\util_shared;
+
 #namespace strategic_command;
 
 autoexec __init__system__() {

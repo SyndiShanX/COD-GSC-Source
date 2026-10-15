@@ -7,6 +7,7 @@
 #include scripts\zm\perk\zm_perk_death_perception;
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_trial;
+
 #namespace zm_trial_disable_hud;
 
 autoexec __init__system__() {

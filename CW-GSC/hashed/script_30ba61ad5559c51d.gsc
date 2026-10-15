@@ -8,6 +8,7 @@
 #using scripts\zm_common\zm_trial;
 #using scripts\zm_common\zm_trial_util;
 #using scripts\zm_common\zm_weapons;
+
 #namespace namespace_11abec5a;
 
 function private autoexec __init__system__() {

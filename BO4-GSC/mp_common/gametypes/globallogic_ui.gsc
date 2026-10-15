@@ -22,6 +22,7 @@
 #include scripts\mp_common\teams\team_assignment;
 #include scripts\mp_common\userspawnselection;
 #include scripts\mp_common\util;
+
 #namespace globallogic_ui;
 
 init() {}

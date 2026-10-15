@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\ai\planner_commander;
+
 #namespace commander_util;
 
 function_2c38e191(team) {

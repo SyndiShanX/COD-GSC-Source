@@ -18,6 +18,7 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
+
 #namespace zombie_gladiator_util;
 
 autoexec __init__system__() {

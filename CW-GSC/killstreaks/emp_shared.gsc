@@ -13,6 +13,7 @@
 #using scripts\killstreaks\killstreakrules_shared;
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\weapons\weaponobjects;
+
 #namespace emp;
 
 function init_shared() {

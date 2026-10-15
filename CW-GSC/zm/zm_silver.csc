@@ -25,6 +25,7 @@
 #using scripts\zm_common\util\ai_dog_util;
 #using scripts\zm_common\zm_fasttravel;
 #using scripts\zm_common\zm_intel;
+
 #namespace zm_silver;
 
 function autoexec opt_in() {

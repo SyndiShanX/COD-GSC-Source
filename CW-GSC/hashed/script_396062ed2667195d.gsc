@@ -29,6 +29,7 @@
 #using scripts\cp_common\objectives_ui;
 #using scripts\cp_common\player_decision;
 #using scripts\cp_common\util;
+
 #namespace namespace_94c47ce5;
 
 function function_ef6de0f0() {

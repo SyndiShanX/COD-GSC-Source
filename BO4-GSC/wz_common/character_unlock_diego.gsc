@@ -8,6 +8,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace character_unlock_diego;
 
 autoexec __init__system__() {

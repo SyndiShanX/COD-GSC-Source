@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\util_shared;
+
 #namespace dm;
 
 function event_handler[gametype_init] main(eventstruct) {}

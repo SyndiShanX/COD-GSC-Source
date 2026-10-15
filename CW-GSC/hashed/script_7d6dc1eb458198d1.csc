@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace zm_control_point_hud;
 class class_a0b518ca: cluielem {
   function open(localclientnum) {

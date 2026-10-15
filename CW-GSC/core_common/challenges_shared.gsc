@@ -25,6 +25,7 @@
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\weapons\weapon_utils;
 #using scripts\weapons\weaponobjects;
+
 #namespace challenges;
 
 function private autoexec __init__system__() {

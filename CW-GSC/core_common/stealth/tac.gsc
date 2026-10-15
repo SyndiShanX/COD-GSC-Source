@@ -5,6 +5,7 @@
 
 #using scripts\core_common\ai_shared;
 #using scripts\core_common\smart_object;
+
 #namespace namespace_206491b4;
 
 function function_24b5e32(pos) {

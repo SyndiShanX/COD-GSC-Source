@@ -5,6 +5,7 @@
 
 #using scripts\core_common\status_effects\status_effect_util;
 #using scripts\core_common\system_shared;
+
 #namespace status_effect_movement_speed;
 
 function private autoexec __init__system__() {

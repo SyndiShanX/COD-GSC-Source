@@ -10,6 +10,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
 #include scripts\core_common\vehicles\seeker_mine;
+
 #namespace seeker_mine_mp;
 
 autoexec __init__system__() {

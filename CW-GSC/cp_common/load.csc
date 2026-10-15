@@ -31,6 +31,7 @@
 #using scripts\weapons\antipersonnelguidance;
 #using scripts\weapons\cp\weaponobjects;
 #using scripts\weapons\spike_charge;
+
 #namespace load;
 
 function levelnotifyhandler(clientnum, state, oldstate) {

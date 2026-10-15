@@ -19,6 +19,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
 #using scripts\cp_common\util;
+
 #namespace utility;
 
 function scalevolume(ent, vol) {}

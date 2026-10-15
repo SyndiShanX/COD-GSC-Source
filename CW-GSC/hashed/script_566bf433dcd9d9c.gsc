@@ -20,6 +20,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
 #using scripts\cp_common\gametypes\globallogic_utils;
+
 #namespace namespace_4f6b19b0;
 
 function function_6249a416() {

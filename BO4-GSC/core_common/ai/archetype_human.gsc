@@ -15,6 +15,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\math_shared;
 #include scripts\core_common\spawner_shared;
+
 #namespace archetype_human;
 
 autoexec init() {

@@ -9,6 +9,7 @@
 #using scripts\core_common\gameobjects_shared;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace weapons;
 
 function private autoexec __init__system__() {

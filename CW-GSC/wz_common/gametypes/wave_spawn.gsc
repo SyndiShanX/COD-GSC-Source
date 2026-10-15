@@ -9,6 +9,7 @@
 #using scripts\core_common\scoreevents_shared;
 #using scripts\core_common\system_shared;
 #using scripts\wz_common\spawn;
+
 #namespace wave_spawn;
 
 function private autoexec __init__system__() {

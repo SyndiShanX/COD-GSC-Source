@@ -14,6 +14,7 @@
 #include scripts\zm_common\gametypes\globallogic_player;
 #include scripts\zm_common\gametypes\spectating;
 #include scripts\zm_common\util;
+
 #namespace globallogic_ui;
 
 autoexec __init__system__() {

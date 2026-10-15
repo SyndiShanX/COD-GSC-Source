@@ -9,6 +9,7 @@
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
+
 #namespace item_drop;
 
 function autoexec main() {

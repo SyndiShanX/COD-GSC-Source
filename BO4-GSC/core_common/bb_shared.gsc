@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\callbacks_shared;
+
 #namespace bb;
 
 init_shared() {

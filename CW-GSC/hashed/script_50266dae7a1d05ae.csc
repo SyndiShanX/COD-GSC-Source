@@ -8,6 +8,7 @@
 #using scripts\core_common\load_shared;
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_3983f538;
 
 function autoexec main() {

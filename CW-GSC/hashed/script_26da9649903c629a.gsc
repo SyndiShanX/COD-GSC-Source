@@ -10,6 +10,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\math_shared;
 #using scripts\weapons\heatseekingmissile;
+
 #namespace namespace_f180c0d7;
 
 function function_c44464c8() {

@@ -11,6 +11,7 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\shaderanim_shared;
 #include scripts\core_common\system_shared;
+
 #namespace animation;
 
 autoexec __init__system__() {

@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace encodedradio_usebar;
 class class_ba33e0c1: cluielem {
   function open(localclientnum) {

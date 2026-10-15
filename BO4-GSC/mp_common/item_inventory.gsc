@@ -22,6 +22,7 @@
 #include scripts\mp_common\item_world_util;
 #include scripts\mp_common\player\player_loadout;
 #include scripts\weapons\sensor_dart;
+
 #namespace item_inventory;
 
 autoexec __init__system__() {

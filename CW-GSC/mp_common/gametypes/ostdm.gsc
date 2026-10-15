@@ -6,6 +6,7 @@
 #using scripts\core_common\globallogic\globallogic_audio;
 #using scripts\mp_common\gametypes\os;
 #using scripts\mp_common\gametypes\tdm;
+
 #namespace ostdm;
 
 function event_handler[gametype_init] main(eventstruct) {

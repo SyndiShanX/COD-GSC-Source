@@ -25,6 +25,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
 #using scripts\killstreaks\killstreaks_util;
+
 #namespace cp_sidemission_tundra;
 
 function event_handler[level_init] main(eventstruct) {

@@ -4,6 +4,7 @@
 ****************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace cp_killcam;
 class class_a5d10b03: cluielem {
   function open(player, flags = 0) {

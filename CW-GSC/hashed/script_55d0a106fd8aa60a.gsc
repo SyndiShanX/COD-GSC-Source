@@ -33,6 +33,7 @@
 #using scripts\cp_common\snd;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace namespace_7ef9d872;
 
 function function_87560e1a(str_objective, b_starting) {

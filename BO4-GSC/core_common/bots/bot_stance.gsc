@@ -6,6 +6,7 @@
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\bots\bot;
 #include scripts\core_common\system_shared;
+
 #namespace bot_stance;
 
 autoexec __init__system__() {

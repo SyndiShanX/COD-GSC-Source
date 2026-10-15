@@ -5,6 +5,7 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
+
 #namespace cp_skip_scene_menu;
 
 class ccp_skip_scene_menu: cluielem {

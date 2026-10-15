@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace doa_keytrade;
 class class_fd95a9c: cluielem {
   function open(localclientnum) {

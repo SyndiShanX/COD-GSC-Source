@@ -20,6 +20,7 @@
 #using scripts\cp_common\hms_util;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace namespace_534279a;
 
 function spawn_allies(var_1ace1e2) {

@@ -38,6 +38,7 @@
 #include scripts\zm_common\trials\zm_trial_use_magicbox;
 #include scripts\zm_common\zm_round_spawning;
 #include scripts\zm_common\zm_trial;
+
 #namespace zm_zodt8_trials;
 
 autoexec function_88c28903() {

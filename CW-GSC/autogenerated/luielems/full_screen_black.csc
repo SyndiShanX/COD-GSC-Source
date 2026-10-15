@@ -4,6 +4,7 @@
 ********************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace full_screen_black;
 class cfull_screen_black: cluielem {
   function set_endalpha(localclientnum, value) {

@@ -7,6 +7,7 @@
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_bgb_secret_shopper;
 
 autoexec __init__system__() {

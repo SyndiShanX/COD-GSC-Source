@@ -5,6 +5,7 @@
 
 #include scripts\mp_common\item_world_fixup;
 #include scripts\wz_common\wz_common_fixup;
+
 #namespace wz_escape_fixup;
 
 autoexec __init__() {

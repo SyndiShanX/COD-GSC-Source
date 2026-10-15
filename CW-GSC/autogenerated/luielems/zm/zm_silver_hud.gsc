@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace zm_silver_hud;
 class class_5813c56a: cluielem {
   var var_bf9c8c95;

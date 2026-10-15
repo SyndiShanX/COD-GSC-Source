@@ -13,6 +13,7 @@
 #using scripts\zm_common\aats\ammomods\ammomod_electriccherry;
 #using scripts\zm_common\aats\ammomods\ammomod_napalmburst;
 #using scripts\zm_common\aats\ammomods\ammomod_shatterblast;
+
 #namespace zm_aat;
 
 function private autoexec __init__system__() {

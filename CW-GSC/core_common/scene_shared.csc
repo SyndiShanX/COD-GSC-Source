@@ -19,6 +19,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\weapons\weapon_utils;
+
 #namespace scene;
 class cscene: cscriptbundlebase {
   var _a_active_shots;

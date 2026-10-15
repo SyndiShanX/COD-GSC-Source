@@ -11,6 +11,7 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
+
 #namespace zm_trial_fast_travel_rush;
 
 autoexec __init__system__() {

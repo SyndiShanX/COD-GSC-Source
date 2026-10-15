@@ -6,6 +6,7 @@
 #include scripts\core_common\animation_shared;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\flagsys_shared;
+
 #namespace animation;
 
 autoexec function_c3c9d0e5() {

@@ -14,6 +14,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\mp_common\gametypes\globallogic_score;
 #using scripts\mp_common\player\player_utils;
+
 #namespace player;
 
 function autoexec __init__() {

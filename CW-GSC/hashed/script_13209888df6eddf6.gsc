@@ -5,6 +5,7 @@
 
 #using scripts\core_common\flag_shared;
 #using scripts\cp_common\dialogue;
+
 #namespace namespace_a64c0f5b;
 
 function main() {

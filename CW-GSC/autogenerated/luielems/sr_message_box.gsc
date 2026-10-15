@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace sr_message_box;
 class class_51e5626e: cluielem {
   var var_bf9c8c95;

@@ -12,6 +12,7 @@
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_3983f538;
 
 function autoexec main() {

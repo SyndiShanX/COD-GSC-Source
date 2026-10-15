@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\struct;
+
 #namespace ir_strobe;
 
 function init_shared() {

@@ -24,6 +24,7 @@
 #using scripts\cp_common\gametypes\globallogic_ui;
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\skipto;
+
 #namespace tkdn_heli_convoy_aslt;
 
 function starting(str_skipto) {

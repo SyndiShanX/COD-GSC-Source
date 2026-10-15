@@ -7,6 +7,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\snd_draw;
 #using scripts\cp_common\snd_utility;
+
 #namespace snd;
 
 function snd_debug_init() {

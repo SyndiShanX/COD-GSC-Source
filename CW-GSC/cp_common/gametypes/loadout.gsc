@@ -10,6 +10,7 @@
 #using scripts\core_common\player\player_shared;
 #using scripts\core_common\system_shared;
 #using scripts\cp_common\gametypes\save;
+
 #namespace loadout;
 
 function private autoexec __init__system__() {

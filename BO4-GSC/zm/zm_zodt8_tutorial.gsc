@@ -39,6 +39,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zm_zodt8_tutorial;
 
 event_handler[level_init] main(eventstruct) {

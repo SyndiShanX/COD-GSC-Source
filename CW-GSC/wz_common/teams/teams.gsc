@@ -8,6 +8,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\mp_common\teams\teams;
 #using scripts\wz_common\hud;
+
 #namespace teams;
 
 function private function_74a8f2ed(var_d3ba512b, var_c0856555) {

@@ -6,6 +6,7 @@
 #include scripts\core_common\ai\systems\destructible_character;
 #include scripts\core_common\ai\systems\gib;
 #include scripts\core_common\struct;
+
 #namespace fx_character;
 
 autoexec main() {

@@ -9,6 +9,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
 #include scripts\killstreaks\killstreaks_shared;
+
 #namespace remote_weapons;
 
 init_shared() {

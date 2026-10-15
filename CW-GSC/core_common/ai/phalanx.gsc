@@ -8,6 +8,7 @@
 #using scripts\core_common\math_shared;
 #using scripts\core_common\spawner_shared;
 #using scripts\core_common\values_shared;
+
 #namespace phalanx;
 class phalanx {
   var breakingpoint_;

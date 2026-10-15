@@ -7,6 +7,7 @@
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\smart_object;
 #using scripts\core_common\struct;
+
 #namespace namespace_5cd4acd8;
 
 function init_hunt_regions() {

@@ -8,6 +8,7 @@
 #using scripts\core_common\stealth\debug;
 #using scripts\core_common\stealth\manager;
 #using scripts\core_common\stealth\utility;
+
 #namespace namespace_32a4062b;
 
 function main() {

@@ -11,6 +11,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm\weapons\zm_weap_spectral_shield;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_escape_paschal_s3;
 
 autoexec __init__system__() {

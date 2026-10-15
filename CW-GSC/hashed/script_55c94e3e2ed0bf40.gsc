@@ -36,6 +36,7 @@
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
 #using scripts\weapons\cp\spy_camera;
+
 #namespace namespace_96add23c;
 
 function function_a5ad7a90(str_objective) {

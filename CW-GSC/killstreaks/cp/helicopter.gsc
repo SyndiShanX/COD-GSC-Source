@@ -6,6 +6,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\killstreaks\helicopter_shared;
 #using scripts\killstreaks\killstreaks_shared;
+
 #namespace helicopter;
 
 function private autoexec __init__system__() {

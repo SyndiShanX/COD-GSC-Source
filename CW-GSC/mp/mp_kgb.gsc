@@ -9,6 +9,7 @@
 #using scripts\core_common\load_shared;
 #using scripts\core_common\util_shared;
 #using scripts\killstreaks\killstreaks_shared;
+
 #namespace mp_kgb;
 
 function event_handler[level_init] main(eventstruct) {

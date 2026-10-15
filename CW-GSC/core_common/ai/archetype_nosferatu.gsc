@@ -22,6 +22,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
+
 #namespace archetypenosferatu;
 class class_1546f28e {
   var adjustmentstarted;

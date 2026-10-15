@@ -14,6 +14,7 @@
 #include scripts\core_common\vehicle_shared;
 #include scripts\weapons\acid_bomb;
 #include scripts\zm\weapons\zm_weap_sticky_grenade;
+
 #namespace callback;
 
 autoexec __init__system__() {

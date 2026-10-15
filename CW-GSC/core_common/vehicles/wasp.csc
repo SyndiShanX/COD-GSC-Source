@@ -7,6 +7,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\vehicle_shared;
+
 #namespace wasp;
 
 function private autoexec __init__system__() {

@@ -7,6 +7,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\load;
 #include scripts\mp_common\util;
+
 #namespace mp_station;
 
 event_handler[level_init] main(eventstruct) {

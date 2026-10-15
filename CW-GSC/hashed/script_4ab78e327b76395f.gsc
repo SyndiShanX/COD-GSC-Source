@@ -17,6 +17,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\cp_common\bb;
 #using scripts\cp_common\ui\prompts;
+
 #namespace namespace_5f6e61d9;
 
 function private autoexec __init__system__() {

@@ -41,6 +41,7 @@
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_vo;
 #using scripts\zm_common\zm_weapons;
+
 #namespace namespace_c4d353e7;
 
 function init() {

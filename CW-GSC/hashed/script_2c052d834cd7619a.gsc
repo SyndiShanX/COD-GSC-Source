@@ -28,6 +28,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_52ba5a8a;
 
 function function_124c1a34(player, model, note) {

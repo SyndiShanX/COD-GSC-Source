@@ -33,6 +33,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace mansion_util;
 
 create_unitrigger(s_loc, func_think, hint_string, b_lookat, n_cost, var_ddbd86e1) {

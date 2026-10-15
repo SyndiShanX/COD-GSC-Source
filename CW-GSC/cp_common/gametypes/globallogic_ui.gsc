@@ -26,6 +26,7 @@
 #using scripts\cp_common\hint_tutorial;
 #using scripts\cp_common\objectives_ui;
 #using scripts\cp_common\util;
+
 #namespace globallogic_ui;
 
 function init() {

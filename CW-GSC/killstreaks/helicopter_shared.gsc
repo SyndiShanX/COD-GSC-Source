@@ -26,6 +26,7 @@
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\weapons\heatseekingmissile;
+
 #namespace helicopter;
 
 function init_shared() {

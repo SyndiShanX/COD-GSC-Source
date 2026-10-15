@@ -4,6 +4,7 @@
 ************************************************************/
 
 #include scripts\core_common\ai\systems\ai_interface;
+
 #namespace mannequininterface;
 
 registermannequininterfaceattributes() {

@@ -10,6 +10,7 @@
 #using scripts\core_common\globallogic\globallogic_score;
 #using scripts\core_common\player\player_role;
 #using scripts\core_common\util_shared;
+
 #namespace status_effect;
 
 function private register_status_effect(status_effect_type) {

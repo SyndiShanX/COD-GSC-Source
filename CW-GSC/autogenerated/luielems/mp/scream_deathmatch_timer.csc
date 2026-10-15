@@ -4,6 +4,7 @@
 *****************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace scream_deathmatch_timer;
 class class_d49eac9b: cluielem {
   function open(localclientnum) {

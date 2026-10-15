@@ -12,6 +12,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm\weapons\zm_weap_tomahawk;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_escape_weap_quest;
 
 autoexec __init__system__() {

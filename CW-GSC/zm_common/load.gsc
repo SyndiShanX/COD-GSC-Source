@@ -54,6 +54,7 @@
 #using scripts\zm_common\zm_traps;
 #using scripts\zm_common\zm_unitrigger;
 #using scripts\zm_common\zm_zonemgr;
+
 #namespace load;
 
 function private event_handler[createstruct] function_e0a8e4ba(struct) {

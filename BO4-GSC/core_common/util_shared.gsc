@@ -16,6 +16,7 @@
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\values_shared;
 #include scripts\core_common\weapons_shared;
+
 #namespace util;
 
 autoexec __init__system__() {

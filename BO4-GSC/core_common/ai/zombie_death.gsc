@@ -5,6 +5,7 @@
 
 #include scripts\core_common\ai\systems\gib;
 #include scripts\core_common\fx_shared;
+
 #namespace zombie_death;
 
 on_fire_timeout() {

@@ -51,6 +51,7 @@
 #using scripts\zm_common\zm_trial;
 #using scripts\zm_common\zm_weapons;
 #using scripts\zm_common\zm_zonemgr;
+
 #namespace zm_utility;
 
 function private autoexec __init__system__() {

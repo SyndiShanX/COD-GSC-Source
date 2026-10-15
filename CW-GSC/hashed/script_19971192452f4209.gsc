@@ -52,6 +52,7 @@
 #using scripts\cp_common\ui\object_descriptions;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace namespace_31c67f6d;
 
 function main_pre_load() {

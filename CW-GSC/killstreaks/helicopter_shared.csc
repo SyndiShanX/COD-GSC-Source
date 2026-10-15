@@ -12,6 +12,7 @@
 #using scripts\core_common\vehicle_shared;
 #using scripts\killstreaks\flak_drone;
 #using scripts\killstreaks\killstreak_bundles;
+
 #namespace helicopter;
 
 function init_shared() {

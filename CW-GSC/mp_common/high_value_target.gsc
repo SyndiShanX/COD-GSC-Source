@@ -10,6 +10,7 @@
 #using scripts\core_common\scoreevents_shared;
 #using scripts\core_common\system_shared;
 #using scripts\mp_common\player\player_utils;
+
 #namespace high_value_target;
 
 function private autoexec __init__system__() {

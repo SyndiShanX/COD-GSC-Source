@@ -8,6 +8,7 @@
 #using scripts\zm_common\trials\zm_trial_disable_hero_weapons;
 #using scripts\zm_common\zm_trial;
 #using scripts\zm_common\zm_trial_util;
+
 #namespace zm_trial_disable_upgraded_weapons;
 
 function private autoexec __init__system__() {

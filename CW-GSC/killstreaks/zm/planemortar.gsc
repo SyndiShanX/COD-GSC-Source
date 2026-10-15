@@ -17,6 +17,7 @@
 #using scripts\killstreaks\zm\killstreakrules;
 #using scripts\killstreaks\zm\killstreaks;
 #using scripts\zm_common\zm_player;
+
 #namespace planemortar;
 
 function private autoexec __init__system__() {

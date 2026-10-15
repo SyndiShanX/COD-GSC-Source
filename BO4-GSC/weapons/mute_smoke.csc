@@ -6,6 +6,7 @@
 #include scripts\core_common\audio_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\duplicaterender_mgr;
+
 #namespace mute_smoke;
 
 init_shared() {

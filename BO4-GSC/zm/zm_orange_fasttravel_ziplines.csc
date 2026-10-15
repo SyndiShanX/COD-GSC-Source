@@ -8,6 +8,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_fasttravel;
+
 #namespace zm_orange_fasttravel_ziplines;
 
 init() {

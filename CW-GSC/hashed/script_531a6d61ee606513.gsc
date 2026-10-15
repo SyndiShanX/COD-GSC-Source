@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace zm_gold_align_satellite_hud;
 class class_eaf2482a: cluielem {
   function open(player, flags = 0) {

@@ -13,6 +13,7 @@
 #using scripts\core_common\vehicle_shared;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\snd_utility;
+
 #namespace cp_ger_hub_fx;
 
 function private autoexec __init__system__() {

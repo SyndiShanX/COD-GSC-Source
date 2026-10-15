@@ -33,6 +33,7 @@
 #using scripts\weapons\deployable;
 #using scripts\weapons\listening_device;
 #using scripts\weapons\weaponobjects;
+
 #namespace namespace_e51f0bc1;
 
 function init() {

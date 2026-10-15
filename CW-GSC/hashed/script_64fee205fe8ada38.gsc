@@ -14,6 +14,7 @@
 #using scripts\core_common\status_effects\status_effect_util;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_cc727a3b;
 
 function private autoexec __init__system__() {

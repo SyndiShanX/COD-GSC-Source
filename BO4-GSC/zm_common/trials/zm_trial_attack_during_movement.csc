@@ -8,6 +8,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
+
 #namespace zm_trial_attack_during_movement;
 
 autoexec __init__system__() {

@@ -37,6 +37,7 @@
 #using scripts\mp_common\util;
 #using scripts\weapons\weapon_utils;
 #using scripts\weapons\weaponobjects;
+
 #namespace sas;
 
 function event_handler[gametype_init] main(eventstruct) {

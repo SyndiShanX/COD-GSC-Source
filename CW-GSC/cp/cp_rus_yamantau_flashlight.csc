@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\flashlight;
+
 #namespace cp_rus_yamantau_flashlight;
 
 function preload() {

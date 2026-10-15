@@ -24,6 +24,7 @@
 #using scripts\cp_common\gametypes\loadout;
 #using scripts\cp_common\gametypes\save;
 #using scripts\killstreaks\killstreaks_shared;
+
 #namespace globallogic_spawn;
 
 function timeuntilspawn(includeteamkilldelay) {

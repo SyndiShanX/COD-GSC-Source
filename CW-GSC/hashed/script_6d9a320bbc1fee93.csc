@@ -7,6 +7,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\footsteps_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_2e61cc4b;
 
 function init() {

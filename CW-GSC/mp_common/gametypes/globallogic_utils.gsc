@@ -14,6 +14,7 @@
 #using scripts\mp_common\gametypes\hostmigration;
 #using scripts\mp_common\gametypes\hud_message;
 #using scripts\mp_common\gametypes\round;
+
 #namespace globallogic_utils;
 
 function is_winner(outcome, team_or_player) {

@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace blackseajetskideployprompt;
 class cblackseajetskideployprompt: cluielem {
   function open(localclientnum) {

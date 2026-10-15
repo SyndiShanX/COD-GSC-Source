@@ -37,6 +37,7 @@
 #using scripts\cp_common\snd;
 #using scripts\cp_common\spawn_manager;
 #using scripts\cp_common\util;
+
 #namespace namespace_fe8e156a;
 
 function starting(str_skipto) {

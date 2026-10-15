@@ -20,6 +20,7 @@
 #using scripts\core_common\vehicle_shared;
 #using scripts\cp_common\pickups;
 #using scripts\cp_common\util;
+
 #namespace pickups;
 class class_23a25920: class_853435cd {
   var m_fx_glow;

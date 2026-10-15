@@ -29,6 +29,7 @@
 #include scripts\mp_common\gametypes\ct_vo;
 #include scripts\mp_common\gametypes\globallogic_score;
 #include scripts\mp_common\supplypod;
+
 #namespace ct_crash_tutorial;
 
 init() {

@@ -11,6 +11,7 @@
 #include scripts\core_common\player\player_stats;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace death_circle;
 
 autoexec __init__system__() {

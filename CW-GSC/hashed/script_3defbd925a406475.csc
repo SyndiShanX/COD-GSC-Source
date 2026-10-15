@@ -21,6 +21,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
 #using scripts\cp\cp_ger_hub_fx;
+
 #namespace namespace_fa9f53a2;
 
 function main() {

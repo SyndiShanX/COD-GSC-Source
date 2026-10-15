@@ -4,6 +4,7 @@
 **************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace pip_menu;
 class class_70ee35b1: cluielem {
   function set_moviename(localclientnum, value) {

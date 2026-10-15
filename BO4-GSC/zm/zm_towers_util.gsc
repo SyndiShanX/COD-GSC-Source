@@ -12,6 +12,7 @@
 #include scripts\zm_common\zm_magicbox;
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_towers_util;
 
 function_ae1b4f5b(var_6888276a = 75, var_7d866d50 = 75, var_aadd0545 = 75) {

@@ -9,6 +9,7 @@
 #include scripts\core_common\scoreevents_shared;
 #include scripts\core_common\sound_shared;
 #include scripts\core_common\util_shared;
+
 #namespace smokegrenade;
 
 init_shared() {

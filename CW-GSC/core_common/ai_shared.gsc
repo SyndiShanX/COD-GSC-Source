@@ -12,6 +12,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
+
 #namespace ai;
 
 function set_pacifist(val) {

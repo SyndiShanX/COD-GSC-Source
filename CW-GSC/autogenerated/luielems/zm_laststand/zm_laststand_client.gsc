@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace zm_laststand_client;
 class czm_laststand_client: cluielem {
   var var_bf9c8c95;

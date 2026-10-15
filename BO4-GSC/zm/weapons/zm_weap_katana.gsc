@@ -21,6 +21,7 @@
 #include scripts\zm_common\zm_audio;
 #include scripts\zm_common\zm_hero_weapon;
 #include scripts\zm_common\zm_loadout;
+
 #namespace zm_weap_katana;
 
 autoexec __init__system__() {

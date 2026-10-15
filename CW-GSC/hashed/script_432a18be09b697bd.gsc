@@ -40,6 +40,7 @@
 #using scripts\zm_common\zm_vo;
 #using scripts\zm_common\zm_weapons;
 #using scripts\zm_common\zm_zonemgr;
+
 #namespace namespace_45690bb8;
 
 function init() {

@@ -12,6 +12,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\draft;
+
 #namespace mp_cairo_scripted;
 
 autoexec __init__system__() {

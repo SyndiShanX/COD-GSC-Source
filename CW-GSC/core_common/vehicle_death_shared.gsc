@@ -14,6 +14,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\core_common\vehicle_ai_shared;
 #using scripts\core_common\vehicle_shared;
+
 #namespace vehicle_death;
 
 function private event_handler[createstruct] function_e0a8e4ba(struct) {

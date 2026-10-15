@@ -8,6 +8,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\visionset_mgr_shared;
 #using scripts\zm_common\zm_perks;
+
 #namespace zm_perk_quick_revive;
 
 function private autoexec __init__system__() {

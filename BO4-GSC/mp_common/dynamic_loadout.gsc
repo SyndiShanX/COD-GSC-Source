@@ -17,6 +17,7 @@
 #include scripts\mp_common\perks;
 #include scripts\mp_common\pickup_health;
 #include scripts\mp_common\player\player_loadout;
+
 #namespace dynamic_loadout;
 
 autoexec __init__system__() {

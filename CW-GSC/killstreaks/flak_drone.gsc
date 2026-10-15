@@ -10,6 +10,7 @@
 #using scripts\core_common\vehicle_death_shared;
 #using scripts\core_common\vehicle_shared;
 #using scripts\weapons\heatseekingmissile;
+
 #namespace flak_drone;
 
 function init_shared() {

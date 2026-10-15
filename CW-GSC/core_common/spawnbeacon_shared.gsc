@@ -17,6 +17,7 @@
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\weapons\deployable;
 #using scripts\weapons\weaponobjects;
+
 #namespace spawn_beacon;
 
 function init_shared() {

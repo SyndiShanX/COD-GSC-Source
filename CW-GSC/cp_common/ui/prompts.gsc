@@ -16,6 +16,7 @@
 #using scripts\cp_common\gametypes\globallogic_ui;
 #using scripts\cp_common\objectives_ui;
 #using scripts\cp_common\util;
+
 #namespace prompts;
 
 function private autoexec __init__system__() {

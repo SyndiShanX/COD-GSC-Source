@@ -9,6 +9,7 @@
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace character_unlock_prophet;
 
 autoexec __init__system__() {

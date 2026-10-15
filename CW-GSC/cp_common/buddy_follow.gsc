@@ -5,6 +5,7 @@
 
 #using scripts\core_common\colors_shared;
 #using scripts\core_common\flag_shared;
+
 #namespace buddy_follow;
 
 function setup_group(a_ai_allies, str_flag_name, origin_destination, var_b05557d5, var_7b06dc88, var_90c75dbe, var_92c0650f) {

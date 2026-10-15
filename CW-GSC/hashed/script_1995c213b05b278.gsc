@@ -8,6 +8,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\values_shared;
 #using scripts\cp_common\hint_tutorial;
+
 #namespace namespace_9b5aa273;
 
 function private autoexec __init__system__() {

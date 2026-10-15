@@ -5,6 +5,7 @@
 
 #using scripts\core_common\load_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_ff979a59;
 
 function init() {}

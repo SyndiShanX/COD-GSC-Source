@@ -20,6 +20,7 @@
 #using scripts\core_common\weapons_shared;
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\weapons\weaponobjects;
+
 #namespace trophy_system;
 
 function init_shared() {

@@ -9,6 +9,7 @@
 #using scripts\zm_common\gametypes\zm_gametype;
 #using scripts\zm_common\zm_round_logic;
 #using scripts\zm_common\zm_stats;
+
 #namespace ztcm;
 
 function event_handler[gametype_init] main(eventstruct) {

@@ -36,6 +36,7 @@
 #using scripts\cp_common\snd_sp;
 #using scripts\cp_common\snd_utility;
 #using scripts\cp_common\util;
+
 #namespace kgb_aslt_entry;
 
 function starting(str_skipto) {

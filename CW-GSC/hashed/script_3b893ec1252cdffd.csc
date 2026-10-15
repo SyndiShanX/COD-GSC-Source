@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace doa_overworld;
 class cdoa_overworld: cluielem {
   function open(localclientnum) {

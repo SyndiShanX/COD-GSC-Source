@@ -5,6 +5,7 @@
 
 #include scripts\core_common\ai\planner_commander;
 #include scripts\core_common\ai\systems\ai_interface;
+
 #namespace commanderinterface;
 
 registercommanderinterfaceattributes() {

@@ -19,6 +19,7 @@
 #using scripts\cp_common\objectives_ui;
 #using scripts\cp_common\surveycam;
 #using scripts\cp_common\util;
+
 #namespace namespace_c8bf7287;
 
 function preload() {

@@ -38,6 +38,7 @@
 #include scripts\mp_common\vehicle;
 #include scripts\weapons\weapon_utils;
 #include scripts\weapons\weapons;
+
 #namespace player;
 
 callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, boneindex, vsurfacenormal) {

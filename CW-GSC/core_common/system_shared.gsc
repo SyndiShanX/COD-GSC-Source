@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\flag_shared;
+
 #namespace system;
 
 function register(str_name, func_preinit, func_postinit, var_e9137475, reqs) {

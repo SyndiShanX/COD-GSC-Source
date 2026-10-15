@@ -12,6 +12,7 @@
 #using scripts\core_common\spawning_squad;
 #using scripts\core_common\util_shared;
 #using scripts\killstreaks\killstreak_detect;
+
 #namespace remotemissile;
 
 function init_shared() {

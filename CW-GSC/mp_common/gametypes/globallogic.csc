@@ -19,6 +19,7 @@
 #using scripts\mp_common\gametypes\cranked;
 #using scripts\mp_common\gametypes\display_transition;
 #using scripts\mp_common\player\player;
+
 #namespace globallogic;
 
 function private autoexec __init__system__() {

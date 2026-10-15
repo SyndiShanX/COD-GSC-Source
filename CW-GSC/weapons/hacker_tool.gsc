@@ -13,6 +13,7 @@
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\weapons\heatseekingmissile;
 #using scripts\weapons\weaponobjects;
+
 #namespace hacker_tool;
 
 function init_shared() {

@@ -9,6 +9,7 @@
 #include scripts\mp_common\load;
 #include scripts\wz\wz_escape_alt_ffotd;
 #include scripts\wz_common\wz_nixie_tubes;
+
 #namespace wz_escape_alt;
 
 event_handler[level_init] main(eventstruct) {

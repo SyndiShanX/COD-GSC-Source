@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\flag_shared;
+
 #namespace namespace_b2b86d39;
 
 function init_callbacks() {

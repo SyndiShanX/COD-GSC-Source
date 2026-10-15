@@ -30,6 +30,7 @@
 #using scripts\killstreaks\zm\recon_car;
 #using scripts\weapons\nightingale;
 #using scripts\zm_common\zm_utility;
+
 #namespace namespace_85745671;
 
 function private autoexec __init__system__() {

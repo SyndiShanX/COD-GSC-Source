@@ -4,6 +4,7 @@
 *******************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace zm_silver_hud;
 class class_5813c56a: cluielem {
   function open(localclientnum) {

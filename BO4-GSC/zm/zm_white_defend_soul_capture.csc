@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\zm_common\zm_sq_modules;
+
 #namespace zm_white_defend_soul_capture;
 
 register(id, version, script_noteworthy, soul_fx, var_eb6d060d) {

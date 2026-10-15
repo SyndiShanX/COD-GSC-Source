@@ -9,6 +9,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\hud_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_2a9f256a;
 
 function init() {

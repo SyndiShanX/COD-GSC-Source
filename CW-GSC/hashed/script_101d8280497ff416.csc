@@ -11,6 +11,7 @@
 #using scripts\core_common\territory;
 #using scripts\core_common\territory_util;
 #using scripts\core_common\vehicles\player_vehicle;
+
 #namespace item_spawn_groups_util;
 
 function private function_2c4d3d40() {

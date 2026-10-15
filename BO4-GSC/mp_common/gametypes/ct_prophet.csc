@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\mp_common\gametypes\ct_core;
+
 #namespace ct_prophet;
 
 event_handler[gametype_init] main(eventstruct) {

@@ -13,6 +13,7 @@
 #include scripts\mp_common\laststand_warzone;
 #include scripts\mp_common\player\player_killed;
 #include scripts\mp_common\teams\teams;
+
 #namespace wz_contracts;
 
 autoexec __init__system__() {

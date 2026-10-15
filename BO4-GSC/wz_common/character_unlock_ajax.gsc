@@ -8,6 +8,7 @@
 #include scripts\mp_common\item_drop;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace character_unlock_ajax;
 
 autoexec __init__system__() {

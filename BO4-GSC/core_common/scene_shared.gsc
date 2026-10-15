@@ -22,6 +22,7 @@
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
+
 #namespace scene;
 
 autoexec __init__system__() {

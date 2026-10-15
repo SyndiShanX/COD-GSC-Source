@@ -13,6 +13,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\util;
+
 #namespace cp_nam_prisoner_fx;
 
 function function_e5b8c5f(path_name) {

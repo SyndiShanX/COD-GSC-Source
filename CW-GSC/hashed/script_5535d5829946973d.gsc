@@ -48,6 +48,7 @@
 #using scripts\cp_common\snipercam;
 #using scripts\cp_common\util;
 #using scripts\weapons\cp\spy_camera;
+
 #namespace namespace_e967dd33;
 
 function function_2c620a1d(str_objective) {

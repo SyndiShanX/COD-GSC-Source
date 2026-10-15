@@ -10,6 +10,7 @@
 #using scripts\core_common\load_shared;
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
+
 #namespace mp_sm_game_show;
 
 function event_handler[level_init] main(eventstruct) {

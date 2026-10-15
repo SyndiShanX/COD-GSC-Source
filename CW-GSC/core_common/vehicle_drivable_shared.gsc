@@ -4,6 +4,7 @@
 ***************************************************/
 
 #using scripts\core_common\vehicle_shared;
+
 #namespace vehicle;
 
 function event_handler[level_init] main(eventstruct) {

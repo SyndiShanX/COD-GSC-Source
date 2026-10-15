@@ -7,6 +7,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_ffbf548b;
 
 function preinit() {

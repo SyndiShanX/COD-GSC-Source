@@ -4,6 +4,7 @@
 ***************************************************/
 
 #using scripts\core_common\ai_shared;
+
 #namespace notetracks;
 
 function autoexec main() {

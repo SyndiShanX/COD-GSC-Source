@@ -45,6 +45,7 @@
 #include scripts\mp_common\player\player_utils;
 #include scripts\mp_common\util;
 #include scripts\weapons\weapons;
+
 #namespace prop;
 
 event_handler[gametype_init] main(eventstruct) {

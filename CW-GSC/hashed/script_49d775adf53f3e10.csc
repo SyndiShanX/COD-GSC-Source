@@ -7,6 +7,7 @@
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\util_shared;
 #using scripts\zm_common\zm_ping;
+
 #namespace namespace_47809ab2;
 
 function init() {

@@ -20,6 +20,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\cp_common\gametypes\globallogic_ui;
 #using scripts\cp_common\util;
+
 #namespace spy_camera;
 
 function private autoexec __init__system__() {

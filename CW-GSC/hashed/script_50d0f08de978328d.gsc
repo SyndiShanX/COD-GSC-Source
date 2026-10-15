@@ -37,6 +37,7 @@
 #using scripts\mp_common\gametypes\round;
 #using scripts\mp_common\player\player_utils;
 #using scripts\mp_common\util;
+
 #namespace namespace_d150537f;
 
 function init() {

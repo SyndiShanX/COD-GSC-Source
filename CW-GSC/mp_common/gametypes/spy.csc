@@ -15,6 +15,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\mp_common\gametypes\globallogic_score;
 #using scripts\mp_common\gametypes\spy_skill;
+
 #namespace spy;
 
 function event_handler[gametype_init] main(eventstruct) {

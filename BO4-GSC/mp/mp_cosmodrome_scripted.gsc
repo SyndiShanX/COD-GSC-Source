@@ -13,6 +13,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\draft;
 #include scripts\mp_common\gametypes\globallogic_utils;
+
 #namespace mp_cosmodrome_scripted;
 
 autoexec __init__system__() {

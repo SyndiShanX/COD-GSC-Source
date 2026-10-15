@@ -4,6 +4,7 @@
 *********************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace zm_arcade_timer;
 
 class czm_arcade_timer: cluielem {

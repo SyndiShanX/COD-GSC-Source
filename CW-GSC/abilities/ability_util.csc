@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\util_shared;
+
 #namespace ability_util;
 
 function init_aoe_fx_info(aoe_name) {

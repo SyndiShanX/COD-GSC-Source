@@ -13,6 +13,7 @@
 #using scripts\cp_common\gametypes\globallogic_ui;
 #using scripts\cp_common\gametypes\save;
 #using scripts\cp_common\profile_traits;
+
 #namespace namespace_70eba6e6;
 
 function private autoexec __init__system__() {

@@ -10,6 +10,7 @@
 #include scripts\zm_common\util\ai_dog_util;
 #include scripts\zm_common\zm_devgui;
 #include scripts\zm_common\zm_ui_inventory;
+
 #namespace zm_white_devgui;
 
 init() {

@@ -4,6 +4,7 @@
 *************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace sr_perk_machine_choice;
 class class_a19c3039: cluielem {
   function open(player, flags = 0) {

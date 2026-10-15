@@ -8,6 +8,7 @@
 #using scripts\core_common\stealth\enemy;
 #using scripts\core_common\stealth\utility;
 #using scripts\cp_common\util;
+
 #namespace corpse;
 
 function scalevolume(ent, vol) {}

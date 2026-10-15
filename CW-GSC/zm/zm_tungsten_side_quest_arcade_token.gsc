@@ -62,6 +62,7 @@
 #using scripts\zm_common\zm_wallbuy;
 #using scripts\zm_common\zm_weapons;
 #using scripts\zm_common\zm_zonemgr;
+
 #namespace zm_tungsten_side_quest_arcade_token;
 
 function init() {

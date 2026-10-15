@@ -22,6 +22,7 @@
 #using scripts\cp_common\gametypes\battlechatter;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace namespace_9c83b58d;
 
 function private autoexec __init__system__() {

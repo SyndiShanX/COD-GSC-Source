@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace sr_orda_health_bar;
 class class_90c2e4ec: cluielem {
   var var_bf9c8c95;

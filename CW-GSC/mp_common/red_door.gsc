@@ -14,6 +14,7 @@
 #using scripts\core_common\trigger_shared;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
+
 #namespace red_door;
 
 function private autoexec __init__system__() {

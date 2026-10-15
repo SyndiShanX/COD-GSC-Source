@@ -16,6 +16,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\gametypes\save;
 #using scripts\cp_common\util;
+
 #namespace profile_traits;
 
 function private autoexec __init__system__() {

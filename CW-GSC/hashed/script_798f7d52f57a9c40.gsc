@@ -33,6 +33,7 @@
 #using scripts\cp_common\spawn_manager;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace kgb_aslt_vault;
 
 function starting(str_skipto) {

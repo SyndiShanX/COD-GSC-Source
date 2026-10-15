@@ -15,6 +15,7 @@
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_player;
 #include scripts\zm_common\zm_utility;
+
 #namespace hostmigration;
 
 debug_script_structs() {

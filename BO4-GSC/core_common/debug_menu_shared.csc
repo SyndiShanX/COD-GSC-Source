@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\flagsys_shared;
+
 #namespace debug_menu;
 
 open(localclientnum, a_menu_items) {

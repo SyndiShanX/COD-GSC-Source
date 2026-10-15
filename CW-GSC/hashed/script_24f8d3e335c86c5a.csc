@@ -9,6 +9,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
 #using scripts\zm_common\zm_utility;
+
 #namespace namespace_7a518726;
 
 function init() {

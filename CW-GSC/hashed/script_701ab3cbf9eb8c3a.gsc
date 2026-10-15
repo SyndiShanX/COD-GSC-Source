@@ -34,6 +34,7 @@
 #using scripts\cp_common\spawn_manager;
 #using scripts\cp_common\util;
 #using scripts\killstreaks\napalm_strike_shared;
+
 #namespace armada_crash;
 
 function function_945def6e(str_skipto, b_starting) {

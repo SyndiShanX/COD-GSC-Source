@@ -6,6 +6,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\dialog_shared;
 #include scripts\core_common\system_shared;
+
 #namespace grapple;
 
 autoexec __init__system__() {

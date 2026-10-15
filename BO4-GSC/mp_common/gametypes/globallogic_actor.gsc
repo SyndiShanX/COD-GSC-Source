@@ -21,6 +21,7 @@
 #include scripts\mp_common\player\player_utils;
 #include scripts\weapons\weapon_utils;
 #include scripts\weapons\weapons;
+
 #namespace globallogic_actor;
 
 autoexec init() {}

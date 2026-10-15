@@ -22,6 +22,7 @@
 #using scripts\cp_common\hms_util;
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\skipto;
+
 #namespace namespace_94dc1844;
 
 function function_afb0a04c() {}

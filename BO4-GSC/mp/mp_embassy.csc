@@ -7,6 +7,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\load;
+
 #namespace mp_embassy;
 
 event_handler[level_init] main(eventstruct) {

@@ -22,6 +22,7 @@
 #include scripts\core_common\values_shared;
 #include scripts\core_common\weapons_shared;
 #include scripts\weapons\trophy_system;
+
 #namespace weaponobjects;
 
 init_shared() {

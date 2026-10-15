@@ -68,6 +68,7 @@
 #using scripts\zm_common\zm_trial;
 #using scripts\zm_common\zm_trial_util;
 #using scripts\zm_common\zm_utility;
+
 #namespace ztrials;
 
 function event_handler[gametype_init] main(eventstruct) {

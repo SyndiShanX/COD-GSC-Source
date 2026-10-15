@@ -6,6 +6,7 @@
 #using script_140d5347de8af85c;
 #using scripts\core_common\math_shared;
 #using scripts\core_common\util_shared;
+
 #namespace easing;
 
 function function_a037b7c9(localclientnum, ui_model, value, time, ease_type, ease_in, ease_out, var_33ce6852) {

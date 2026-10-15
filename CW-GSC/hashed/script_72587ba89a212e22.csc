@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace dirtybomb_usebar;
 class class_fbe341f: cluielem {
   function open(localclientnum) {

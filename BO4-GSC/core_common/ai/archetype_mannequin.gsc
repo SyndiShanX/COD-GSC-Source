@@ -8,6 +8,7 @@
 #include scripts\core_common\ai\zombie;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\spawner_shared;
+
 #namespace mannequinbehavior;
 
 autoexec init() {

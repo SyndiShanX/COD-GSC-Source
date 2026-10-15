@@ -7,6 +7,7 @@
 #using scripts\core_common\item_world_util;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace item_supply_drop;
 
 function private autoexec __init__system__() {

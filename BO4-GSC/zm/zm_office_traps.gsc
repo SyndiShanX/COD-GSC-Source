@@ -8,6 +8,7 @@
 #include scripts\zm_common\zm_items;
 #include scripts\zm_common\zm_ui_inventory;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_office_traps;
 
 init() {

@@ -6,6 +6,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\system_shared;
 #using scripts\killstreaks\killstreak_hacking;
+
 #namespace killstreak_detect;
 
 function private autoexec __init__system__() {

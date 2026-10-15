@@ -7,6 +7,7 @@
 #using scripts\core_common\ai\systems\init;
 #using scripts\core_common\throttle_shared;
 #using scripts\weapons\weapons;
+
 #namespace shared;
 
 function autoexec main() {

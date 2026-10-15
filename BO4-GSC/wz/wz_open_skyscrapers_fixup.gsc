@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\mp_common\item_world_fixup;
+
 #namespace wz_open_skyscrapers_fixup;
 
 autoexec __init__() {

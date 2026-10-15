@@ -8,6 +8,7 @@
 #using scripts\core_common\array_shared;
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\struct;
+
 #namespace namespace_95fdc800;
 
 function init(name) {

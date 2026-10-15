@@ -12,6 +12,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\globallogic_score;
 #include scripts\mp_common\util;
+
 #namespace contracts;
 
 autoexec __init__system__() {

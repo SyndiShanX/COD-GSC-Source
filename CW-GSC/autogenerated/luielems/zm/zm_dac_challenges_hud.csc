@@ -4,6 +4,7 @@
 ***************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace zm_dac_challenges_hud;
 class czm_dac_challenges_hud: cluielem {
   function set_binlocation(localclientnum, value) {

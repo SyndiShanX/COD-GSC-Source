@@ -5,6 +5,7 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace character_unlock_prophet_fixup;
 
 autoexec __init__system__() {

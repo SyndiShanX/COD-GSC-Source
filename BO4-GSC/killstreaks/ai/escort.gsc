@@ -10,6 +10,7 @@
 #include scripts\killstreaks\ai\state;
 #include scripts\killstreaks\ai\target;
 #include scripts\killstreaks\ai\tracking;
+
 #namespace ai_escort;
 
 init() {

@@ -7,6 +7,7 @@
 #using scripts\core_common\bots\bot_actions;
 #using scripts\core_common\bots\bot_weapons;
 #using scripts\core_common\util_shared;
+
 #namespace bot_action;
 
 function preinit() {

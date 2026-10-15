@@ -4,6 +4,7 @@
 ************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace lui_plane_mortar;
 class class_37d61ee3: cluielem {
   var var_bf9c8c95;

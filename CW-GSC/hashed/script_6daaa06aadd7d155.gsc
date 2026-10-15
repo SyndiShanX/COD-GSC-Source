@@ -38,6 +38,7 @@
 #using scripts\cp_common\util;
 #using scripts\killstreaks\cp\ac130;
 #using scripts\killstreaks\killstreaks_shared;
+
 #namespace namespace_19fc4094;
 
 function function_4b8cec86(str_skipto) {

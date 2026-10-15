@@ -22,6 +22,7 @@
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace dialog_tree;
 
 function private autoexec __init__system__() {

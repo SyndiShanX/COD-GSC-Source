@@ -5,6 +5,7 @@
 
 #using script_35ae72be7b4fec10;
 #using scripts\core_common\math_shared;
+
 #namespace namespace_c8e236da;
 
 function function_ebf737f8(var_e11b5b56) {

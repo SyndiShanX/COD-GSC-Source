@@ -9,6 +9,7 @@
 #using scripts\core_common\scoreevents_shared;
 #using scripts\core_common\util_shared;
 #using scripts\weapons\weaponobjects;
+
 #namespace microwave_turret;
 
 function init_shared() {

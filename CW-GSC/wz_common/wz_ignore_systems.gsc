@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\system_shared;
+
 #namespace wz_ignore_systems;
 
 function autoexec ignore_systems() {

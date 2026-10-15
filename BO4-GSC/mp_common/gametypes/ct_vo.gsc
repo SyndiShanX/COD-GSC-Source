@@ -7,6 +7,7 @@
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\ct_utils;
+
 #namespace ct_vo;
 
 autoexec __init__system__() {

@@ -11,6 +11,7 @@
 #include scripts\zm_common\zm_laststand;
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_spawner;
+
 #namespace zm_ai_mannequin_ally;
 
 autoexec __init__system__() {

@@ -4,6 +4,7 @@
 ***********************************************************/
 
 #include scripts\core_common\callbacks_shared;
+
 #namespace globallogic_scriptmover;
 
 function_8c7ec52f(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, iboneindex, imodelindex, spartname, isurfacetype, vsurfacenormal) {

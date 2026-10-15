@@ -4,6 +4,7 @@
 ******************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace cp_hint_text;
 class class_ab111f2c: cluielem {
   function open(localclientnum) {

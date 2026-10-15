@@ -12,6 +12,7 @@
 #using scripts\core_common\player\player_stats;
 #using scripts\core_common\scene_shared;
 #using scripts\core_common\util_shared;
+
 #namespace mp_cliffhanger;
 
 function event_handler[level_init] main(eventstruct) {

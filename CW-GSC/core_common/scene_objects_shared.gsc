@@ -22,6 +22,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\core_common\weapons_shared;
 #using scripts\weapons\weapon_utils;
+
 #namespace scene;
 class csceneobject {
   var _b_active_anim;

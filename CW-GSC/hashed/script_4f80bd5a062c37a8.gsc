@@ -29,6 +29,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\vehicle_ai_shared;
+
 #namespace namespace_7fdfcd5b;
 
 function function_86bd7962(player, spot = player.origin, mg = 1) {

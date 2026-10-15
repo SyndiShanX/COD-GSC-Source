@@ -11,6 +11,7 @@
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
 #include scripts\wz_common\character_unlock_nikolai_fixup;
+
 #namespace character_unlock_nikolai;
 
 autoexec __init__system__() {

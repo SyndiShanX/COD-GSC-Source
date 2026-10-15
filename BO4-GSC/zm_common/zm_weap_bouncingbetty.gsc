@@ -11,6 +11,7 @@
 #include scripts\weapons\weaponobjects;
 #include scripts\zm_common\util;
 #include scripts\zm_common\zm_placeable_mine;
+
 #namespace bouncingbetty;
 
 autoexec __init__system__() {

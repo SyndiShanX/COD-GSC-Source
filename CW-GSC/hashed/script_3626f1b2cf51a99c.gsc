@@ -12,6 +12,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\cp_common\ui\prompts;
 #using scripts\weapons\weapon_utils;
+
 #namespace actions;
 
 function private autoexec __init__system__() {

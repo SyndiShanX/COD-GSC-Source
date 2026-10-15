@@ -9,6 +9,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_zonemgr;
+
 #namespace zm_quick_spawning;
 
 function private autoexec __init__system__() {

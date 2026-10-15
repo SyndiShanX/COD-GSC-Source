@@ -17,6 +17,7 @@
 #using scripts\zm_common\zm_score;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_vo;
+
 #namespace namespace_9d3ef6c5;
 
 function private autoexec __init__system__() {

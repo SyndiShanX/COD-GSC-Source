@@ -20,6 +20,7 @@
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_utility_zsurvival;
 #using scripts\zm_common\zm_wallbuy;
+
 #namespace zm_destination_manager;
 
 function private autoexec __init__system__() {

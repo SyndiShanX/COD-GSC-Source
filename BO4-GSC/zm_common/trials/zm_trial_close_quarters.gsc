@@ -9,6 +9,7 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_trial_close_quarters;
 
 autoexec __init__system__() {

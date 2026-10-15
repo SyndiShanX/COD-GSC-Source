@@ -10,6 +10,7 @@
 #include scripts\killstreaks\mp\killstreak_vehicle;
 #include scripts\mp_common\dynamic_loadout;
 #include scripts\mp_common\laststand;
+
 #namespace bounty;
 
 event_handler[gametype_init] main(eventstruct) {

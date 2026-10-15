@@ -10,6 +10,7 @@
 #using scripts\core_common\ai\systems\blackboard;
 #using scripts\core_common\ai\zombie_utility;
 #using scripts\core_common\spawner_shared;
+
 #namespace archetypecatalyst;
 
 function autoexec main() {

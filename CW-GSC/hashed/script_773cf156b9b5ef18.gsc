@@ -13,6 +13,7 @@
 #using scripts\core_common\scene_shared;
 #using scripts\cp_common\ending;
 #using scripts\cp_common\skipto;
+
 #namespace safehouse_burns;
 
 function starting(str_objective) {}

@@ -41,6 +41,7 @@
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
 #using scripts\weapons\cp\spy_camera;
+
 #namespace namespace_4e717b5b;
 
 function function_ae18fec1(str_skipto) {}

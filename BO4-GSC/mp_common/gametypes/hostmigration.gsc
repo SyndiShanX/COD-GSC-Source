@@ -4,6 +4,7 @@
 *************************************************/
 
 #include scripts\core_common\hostmigration_shared;
+
 #namespace hostmigration;
 
 callback_hostmigrationsave() {}

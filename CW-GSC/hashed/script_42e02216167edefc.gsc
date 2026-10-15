@@ -6,6 +6,7 @@
 #using script_746267f0669c40ae;
 #using scripts\core_common\array_shared;
 #using scripts\core_common\flag_shared;
+
 #namespace namespace_21dd166c;
 
 function function_ee83bc59(&array) {

@@ -5,6 +5,7 @@
 
 #include scripts\core_common\util_shared;
 #include scripts\zm\zm_mansion_zstandard;
+
 #namespace zm_mansion_gamemodes;
 
 event_handler[level_finalizeinit] main(eventstruct) {

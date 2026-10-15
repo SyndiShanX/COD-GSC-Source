@@ -10,6 +10,7 @@
 #using scripts\core_common\math_shared;
 #using scripts\core_common\stealth\utility;
 #using scripts\core_common\util_shared;
+
 #namespace player;
 
 function scalevolume(ent, vol) {}

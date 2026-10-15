@@ -32,6 +32,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace namespace_b11c1856;
 
 function starting(str_objective) {

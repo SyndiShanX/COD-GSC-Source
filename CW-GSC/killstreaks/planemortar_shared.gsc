@@ -17,6 +17,7 @@
 #using scripts\killstreaks\killstreakrules_shared;
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\killstreaks\killstreaks_util;
+
 #namespace planemortar;
 
 function init_shared() {

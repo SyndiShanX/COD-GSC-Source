@@ -11,6 +11,7 @@
 #using scripts\core_common\flashlight;
 #using scripts\core_common\stealth\utility;
 #using scripts\core_common\system_shared;
+
 #namespace namespace_dba1ec08;
 
 function private autoexec __init__system__() {

@@ -9,6 +9,7 @@
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\system_shared;
 #using scripts\zm_common\zm_fasttravel;
+
 #namespace namespace_dbb31ff3;
 
 function private autoexec __init__system__() {

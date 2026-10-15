@@ -5,6 +5,7 @@
 
 #using script_644007a8c3885fc;
 #using scripts\core_common\item_world_fixup;
+
 #namespace namespace_d5db95b4;
 
 function autoexec __init__() {

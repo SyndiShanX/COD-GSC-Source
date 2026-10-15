@@ -9,6 +9,7 @@
 #include scripts\core_common\player\player_shared;
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\util_shared;
+
 #namespace arc;
 
 init_arc(weapon, var_26b2b1bb) {

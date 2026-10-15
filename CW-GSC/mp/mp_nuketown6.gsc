@@ -16,6 +16,7 @@
 #using scripts\core_common\scene_shared;
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
+
 #namespace mp_nuketown6;
 
 function event_handler[level_init] main(eventstruct) {

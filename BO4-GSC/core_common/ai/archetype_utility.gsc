@@ -12,6 +12,7 @@
 #include scripts\core_common\ai\systems\shared;
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\array_shared;
+
 #namespace aiutility;
 
 autoexec registerbehaviorscriptfunctions() {

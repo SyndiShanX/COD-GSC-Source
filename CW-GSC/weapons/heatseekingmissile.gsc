@@ -11,6 +11,7 @@
 #using scripts\core_common\scoreevents_shared;
 #using scripts\core_common\util_shared;
 #using scripts\killstreaks\killstreaks_shared;
+
 #namespace heatseekingmissile;
 
 function init_shared() {

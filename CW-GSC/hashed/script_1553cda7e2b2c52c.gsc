@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace pitch_and_yaw_meters;
 class class_98cc868d: cluielem {
   function open(player, flags = 0) {

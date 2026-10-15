@@ -10,6 +10,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\core_common\vehicle_shared;
 #using scripts\cp_common\smart_bundle;
+
 #namespace smart_bundle;
 
 function function_4e82b483() {

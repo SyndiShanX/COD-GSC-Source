@@ -8,6 +8,7 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_orange_trial_kills_with_flinger;
 
 autoexec __init__system__() {

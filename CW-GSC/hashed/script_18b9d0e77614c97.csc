@@ -5,6 +5,7 @@
 
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\flag_shared;
+
 #namespace streamer;
 
 function function_d46dcfc2(var_74f025c6, var_11a76757, var_352bdb5f, var_45269c45) {

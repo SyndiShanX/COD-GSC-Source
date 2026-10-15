@@ -14,6 +14,7 @@
 #include scripts\zm\zm_lightning_chain;
 #include scripts\zm_common\callbacks;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_weap_ray_gun_mk2v;
 
 autoexec __init__system__() {

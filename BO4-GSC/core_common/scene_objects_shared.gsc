@@ -20,6 +20,7 @@
 #include scripts\core_common\teleport_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
+
 #namespace scene;
 
 class csceneobject {

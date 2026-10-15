@@ -30,6 +30,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_6d0b8a1a;
 
 function function_44cc3493(var_2177e1d4 = 2, player) {

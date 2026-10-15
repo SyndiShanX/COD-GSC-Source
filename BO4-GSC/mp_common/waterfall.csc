@@ -7,6 +7,7 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\water_surface;
+
 #namespace waterfall;
 
 waterfalloverlay(localclientnum) {

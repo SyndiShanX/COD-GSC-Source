@@ -34,6 +34,7 @@
 #using scripts\cp_common\snd;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace namespace_b16b5bf9;
 
 function start(str_objective) {

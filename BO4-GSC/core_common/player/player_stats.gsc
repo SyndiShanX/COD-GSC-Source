@@ -5,6 +5,7 @@
 
 #include scripts\core_common\util_shared;
 #include scripts\weapons\weapons;
+
 #namespace stats;
 
 function_d92cb558(result, vararg) {

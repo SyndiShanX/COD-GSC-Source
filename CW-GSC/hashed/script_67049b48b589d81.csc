@@ -26,6 +26,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_ec06fe4a;
 
 function function_73d79e7d(parent, offset = (0, 0, 0)) {

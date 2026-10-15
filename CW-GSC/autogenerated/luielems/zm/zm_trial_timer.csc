@@ -4,6 +4,7 @@
 ********************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace zm_trial_timer;
 class czm_trial_timer: cluielem {
   function open(localclientnum) {

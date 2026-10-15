@@ -25,6 +25,7 @@
 #using scripts\weapons\deployable;
 #using scripts\weapons\weaponobjects;
 #using scripts\weapons\weapons;
+
 #namespace spy_med_pack;
 
 function private autoexec __init__system__() {

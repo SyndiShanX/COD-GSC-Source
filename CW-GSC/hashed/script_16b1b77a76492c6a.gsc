@@ -16,6 +16,7 @@
 #using scripts\core_common\math_shared;
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_2c949ef8;
 
 function init() {

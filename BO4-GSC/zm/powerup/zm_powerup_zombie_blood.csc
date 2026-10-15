@@ -9,6 +9,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_powerups;
+
 #namespace zm_powerup_zombie_blood;
 
 autoexec __init__system__() {

@@ -9,6 +9,7 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
+
 #namespace customclass;
 
 localclientconnect(localclientnum) {

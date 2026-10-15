@@ -15,6 +15,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\zm_common\objective_manager;
+
 #namespace namespace_73df937d;
 
 function private autoexec __init__system__() {

@@ -9,6 +9,7 @@
 #include scripts\core_common\dialog_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
+
 #namespace battlechatter;
 
 autoexec __init__system__() {

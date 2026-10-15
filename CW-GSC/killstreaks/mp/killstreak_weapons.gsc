@@ -14,6 +14,7 @@
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\mp_common\gametypes\globallogic_utils;
 #using scripts\weapons\weapons;
+
 #namespace killstreak_weapons;
 
 function init() {

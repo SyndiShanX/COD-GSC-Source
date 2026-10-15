@@ -13,6 +13,7 @@
 #using scripts\weapons\weaponobjects;
 #using scripts\zm\ai\zm_ai_avogadro;
 #using scripts\zm_common\zm_utility;
+
 #namespace namespace_b062407c;
 
 function private autoexec __init__system__() {

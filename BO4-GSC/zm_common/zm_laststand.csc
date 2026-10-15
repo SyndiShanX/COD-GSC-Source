@@ -14,6 +14,7 @@
 #include scripts\zm_common\load;
 #include scripts\zm_common\util;
 #include scripts\zm_common\zm_hero_weapon;
+
 #namespace zm_laststand;
 
 autoexec __init__system__() {

@@ -27,6 +27,7 @@
 #using scripts\core_common\spawner_shared;
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
+
 #namespace namespace_f6712ec9;
 
 function init() {

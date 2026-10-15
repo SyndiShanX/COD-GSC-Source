@@ -10,6 +10,7 @@
 #include scripts\zm_common\zm_blockers;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_bgb_board_games;
 
 autoexec __init__system__() {

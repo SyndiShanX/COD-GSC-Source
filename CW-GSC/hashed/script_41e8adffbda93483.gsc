@@ -47,6 +47,7 @@
 #using scripts\cp_common\spawn_manager;
 #using scripts\cp_common\util;
 #using scripts\killstreaks\planemortar_shared;
+
 #namespace namespace_9e5ef376;
 
 function function_abfa576(str_objective) {

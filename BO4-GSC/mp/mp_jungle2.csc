@@ -9,6 +9,7 @@
 #include scripts\mp\mp_jungle2_scripted;
 #include scripts\mp\mp_jungle2_sound;
 #include scripts\mp_common\load;
+
 #namespace mp_jungle2;
 
 event_handler[level_init] main(eventstruct) {

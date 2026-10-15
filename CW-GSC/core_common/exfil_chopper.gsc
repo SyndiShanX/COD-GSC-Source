@@ -10,6 +10,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\core_common\vehicle_shared;
 #using scripts\killstreaks\helicopter_shared;
+
 #namespace exfil_chopper;
 
 function function_662f57c9() {

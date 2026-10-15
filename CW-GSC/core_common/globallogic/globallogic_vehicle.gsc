@@ -23,6 +23,7 @@
 #using scripts\core_common\vehicle_shared;
 #using scripts\core_common\weapons_shared;
 #using scripts\weapons\weapon_utils;
+
 #namespace globallogic_vehicle;
 
 function callback_vehiclespawned(spawner) {

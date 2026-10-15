@@ -25,6 +25,7 @@
 #using scripts\zm\powerup\zm_powerup_small_ammo;
 #using scripts\zm_common\ai\zombie_dog_toxic_cloud;
 #using scripts\zm_common\zm_fasttravel;
+
 #namespace zonslaught;
 
 function event_handler[gametype_init] main(eventstruct) {

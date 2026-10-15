@@ -12,6 +12,7 @@
 #include scripts\killstreaks\killstreaks_util;
 #include scripts\killstreaks\mp\killstreaks;
 #include scripts\mp_common\util;
+
 #namespace player;
 
 figure_out_friendly_fire(victim, attacker) {

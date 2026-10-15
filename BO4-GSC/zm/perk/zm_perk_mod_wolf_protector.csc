@@ -7,6 +7,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_powerups;
+
 #namespace zm_perk_mod_wolf_protector;
 
 autoexec __init__system__() {

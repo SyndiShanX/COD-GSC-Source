@@ -16,6 +16,7 @@
 #using scripts\killstreaks\killstreakrules_shared;
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\mp_common\gametypes\globallogic_utils;
+
 #namespace nuke;
 
 function private autoexec __init__system__() {

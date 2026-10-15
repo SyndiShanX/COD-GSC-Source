@@ -6,6 +6,7 @@
 #using scripts\core_common\ai\systems\ai_interface;
 #using scripts\core_common\ai\systems\blackboard;
 #using scripts\core_common\spawner_shared;
+
 #namespace namespace_baa4b777;
 
 function autoexec init() {

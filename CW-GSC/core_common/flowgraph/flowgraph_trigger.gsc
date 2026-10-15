@@ -4,6 +4,7 @@
 *******************************************************/
 
 #using scripts\core_common\flowgraph\flowgraph_core;
+
 #namespace flowgraph_trigger;
 
 function ontriggerentered(x, e_trigger) {

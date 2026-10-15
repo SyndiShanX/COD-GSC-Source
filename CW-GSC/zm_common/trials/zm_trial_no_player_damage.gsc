@@ -7,6 +7,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\system_shared;
 #using scripts\zm_common\zm_trial;
+
 #namespace zm_trial_no_player_damage;
 
 function private autoexec __init__system__() {

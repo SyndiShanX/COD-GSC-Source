@@ -6,6 +6,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_812a8849;
 
 function init() {

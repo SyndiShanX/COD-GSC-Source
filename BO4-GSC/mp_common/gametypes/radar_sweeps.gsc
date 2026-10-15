@@ -5,6 +5,7 @@
 
 #include scripts\mp_common\gametypes\globallogic_audio;
 #include scripts\mp_common\gametypes\globallogic_utils;
+
 #namespace radar_sweeps;
 
 radarsweeps() {

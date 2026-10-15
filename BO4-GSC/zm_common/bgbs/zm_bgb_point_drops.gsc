@@ -7,6 +7,7 @@
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_bgb_pack;
 #include scripts\zm_common\zm_score;
+
 #namespace zm_bgb_point_drops;
 
 autoexec __init__system__() {

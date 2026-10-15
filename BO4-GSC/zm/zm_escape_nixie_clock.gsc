@@ -16,6 +16,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace namespace_1063645;
 
 init_clientfields() {

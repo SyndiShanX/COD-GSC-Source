@@ -6,6 +6,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\easing;
 #using scripts\core_common\struct;
+
 #namespace namespace_c8bf7287;
 
 function preload() {

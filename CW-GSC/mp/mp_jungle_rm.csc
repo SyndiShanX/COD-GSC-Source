@@ -9,6 +9,7 @@
 #using scripts\mp\mp_jungle_rm_fx;
 #using scripts\mp\mp_jungle_rm_scripted;
 #using scripts\mp\mp_jungle_rm_sound;
+
 #namespace mp_jungle_rm;
 
 function event_handler[level_init] main(eventstruct) {

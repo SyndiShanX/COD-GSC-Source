@@ -6,6 +6,7 @@
 #using scripts\core_common\audio_shared;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace helicopter_sounds;
 
 function private autoexec __init__system__() {

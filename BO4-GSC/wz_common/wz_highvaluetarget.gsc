@@ -12,6 +12,7 @@
 #include scripts\mp_common\item_inventory;
 #include scripts\mp_common\item_inventory_util;
 #include scripts\mp_common\item_supply_drop;
+
 #namespace wz_highvaluetarget;
 
 autoexec __init__system__() {

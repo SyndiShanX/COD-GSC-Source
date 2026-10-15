@@ -9,6 +9,7 @@
 #using scripts\core_common\ai\systems\behavior_state_machine;
 #using scripts\core_common\ai\systems\behavior_tree_utility;
 #using scripts\core_common\ai_shared;
+
 #namespace namespace_2dd2c4d8;
 
 function autoexec registerbehaviorscriptfunctions() {

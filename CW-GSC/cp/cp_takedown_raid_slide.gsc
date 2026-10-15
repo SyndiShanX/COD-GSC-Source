@@ -34,6 +34,7 @@
 #using scripts\cp_common\objectives_ui;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace tkdn_raid_slide;
 
 function starting(str_skipto) {

@@ -6,6 +6,7 @@
 #include scripts\core_common\player\player_stats;
 #include scripts\mp_common\item_drop;
 #include scripts\mp_common\item_world;
+
 #namespace wz_blast_doors;
 
 event_handler[level_init] main(eventstruct) {

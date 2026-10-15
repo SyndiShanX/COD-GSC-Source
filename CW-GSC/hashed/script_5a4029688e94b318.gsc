@@ -39,6 +39,7 @@
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
 #using scripts\weapons\cp\spy_camera;
+
 #namespace namespace_80316bc8;
 
 function function_757efcb6(str_objective) {

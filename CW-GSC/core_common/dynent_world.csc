@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\util_shared;
+
 #namespace dynent_world;
 
 function event_handler[event_9673dc9a] function_3981d015(eventstruct) {

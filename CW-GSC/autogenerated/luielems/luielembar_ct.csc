@@ -4,6 +4,7 @@
 ****************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace luielembar_ct;
 class cluielembar_ct: cluielem {
   function open(localclientnum) {

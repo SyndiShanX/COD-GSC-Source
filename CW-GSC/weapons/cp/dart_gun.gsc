@@ -6,6 +6,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\system_shared;
 #using scripts\cp_common\bb;
+
 #namespace dart_gun;
 
 function private autoexec __init__system__() {

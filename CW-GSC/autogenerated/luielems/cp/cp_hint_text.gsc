@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace cp_hint_text;
 class class_ab111f2c: cluielem {
   var var_bf9c8c95;

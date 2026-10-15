@@ -17,6 +17,7 @@
 #using scripts\zm_common\zm_equipment;
 #using scripts\zm_common\zm_vo;
 #using scripts\zm_common\zm_weapons;
+
 #namespace namespace_e0966e1e;
 
 function private autoexec __init__system__() {

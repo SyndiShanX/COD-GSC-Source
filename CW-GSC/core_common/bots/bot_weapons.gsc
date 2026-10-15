@@ -6,6 +6,7 @@
 #using script_4e44ad88a2b0f559;
 #using scripts\core_common\bots\bot_action;
 #using scripts\killstreaks\killstreakrules_shared;
+
 #namespace bot_weapons;
 
 function preinit() {

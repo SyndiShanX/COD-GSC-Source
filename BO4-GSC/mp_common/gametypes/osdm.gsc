@@ -6,6 +6,7 @@
 #include scripts\mp_common\gametypes\dm;
 #include scripts\mp_common\gametypes\globallogic_audio;
 #include scripts\mp_common\gametypes\os;
+
 #namespace osdm;
 
 event_handler[gametype_init] main(eventstruct) {

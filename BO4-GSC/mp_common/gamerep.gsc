@@ -5,6 +5,7 @@
 
 #include scripts\core_common\bots\bot;
 #include scripts\core_common\rank_shared;
+
 #namespace gamerep;
 
 init() {

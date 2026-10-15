@@ -9,6 +9,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\item_world;
+
 #namespace wz_cash_safe;
 
 autoexec __init__system__() {

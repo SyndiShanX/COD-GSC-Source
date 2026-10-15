@@ -24,6 +24,7 @@
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\mp_common\player\player_loadout;
 #include scripts\mp_common\util;
+
 #namespace ct_core;
 
 function_46e95cc7() {

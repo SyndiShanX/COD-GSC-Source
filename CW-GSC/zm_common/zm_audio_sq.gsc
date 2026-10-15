@@ -10,6 +10,7 @@
 #using scripts\zm_common\zm_audio;
 #using scripts\zm_common\zm_sq;
 #using scripts\zm_common\zm_unitrigger;
+
 #namespace zm_audio_sq;
 
 function init() {

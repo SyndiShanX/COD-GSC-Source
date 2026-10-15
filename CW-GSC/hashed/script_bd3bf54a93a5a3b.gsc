@@ -34,6 +34,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace namespace_a613430e;
 
 function init_scenes() {}

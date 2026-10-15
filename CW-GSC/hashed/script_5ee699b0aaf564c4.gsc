@@ -23,6 +23,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
 #using scripts\core_common\vehicle_shared;
+
 #namespace namespace_aaddef5a;
 
 function function_98ebe1b4() {

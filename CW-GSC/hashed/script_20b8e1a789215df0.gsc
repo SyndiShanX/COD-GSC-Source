@@ -45,6 +45,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace namespace_e6b6aea1;
 
 function init_scenes() {

@@ -6,6 +6,7 @@
 #include scripts\core_common\flagsys_shared;
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\mp_common\gametypes\globallogic_score;
+
 #namespace outcome;
 
 autoexec main() {

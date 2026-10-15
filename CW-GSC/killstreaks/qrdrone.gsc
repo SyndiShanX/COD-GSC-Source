@@ -22,6 +22,7 @@
 #using scripts\killstreaks\remote_weapons;
 #using scripts\weapons\heatseekingmissile;
 #using scripts\weapons\weaponobjects;
+
 #namespace qrdrone;
 
 function init_shared() {

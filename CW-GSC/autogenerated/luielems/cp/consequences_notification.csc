@@ -4,6 +4,7 @@
 *******************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace consequences_notification;
 class class_c3742963: cluielem {
   function open(localclientnum) {

@@ -4,6 +4,7 @@
 ***********************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace mp_laststand_client;
 
 class cmp_laststand_client: cluielem {

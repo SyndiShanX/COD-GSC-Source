@@ -6,6 +6,7 @@
 #using scripts\core_common\math_shared;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\values_shared;
+
 #namespace zombie_horde;
 
 function private autoexec __init__system__() {

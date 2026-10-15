@@ -25,6 +25,7 @@
 #include scripts\zm_common\gametypes\spectating;
 #include scripts\zm_common\util;
 #include scripts\zm_common\zm_utility;
+
 #namespace globallogic_spawn;
 
 autoexec init() {

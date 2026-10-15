@@ -11,6 +11,7 @@
 #include scripts\mp\mp_militia_sound;
 #include scripts\mp_common\load;
 #include scripts\mp_common\util;
+
 #namespace mp_militia;
 
 event_handler[level_init] main(eventstruct) {

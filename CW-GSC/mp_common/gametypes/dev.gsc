@@ -27,6 +27,7 @@
 #using scripts\mp_common\gametypes\globallogic_utils;
 #using scripts\mp_common\player\player_loadout;
 #using scripts\mp_common\util;
+
 #namespace dev;
 
 function private autoexec __init__system__() {

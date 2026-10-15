@@ -15,6 +15,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\mp_common\gametypes\spy;
 #using scripts\mp_common\gametypes\spy_skill;
+
 #namespace spy;
 
 function function_8caeee8f(deathtime, victim, sweapon, var_7ad38e4e, meansofdeath) {

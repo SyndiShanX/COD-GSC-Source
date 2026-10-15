@@ -48,6 +48,7 @@
 #using scripts\cp_common\util;
 #using scripts\weapons\antipersonnelguidance;
 #using scripts\weapons\cp\weaponobjects;
+
 #namespace load;
 
 function private event_handler[createstruct] function_e0a8e4ba(struct) {

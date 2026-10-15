@@ -10,6 +10,7 @@
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_equipment;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_weap_wraith_fire;
 
 autoexec __init__system__() {

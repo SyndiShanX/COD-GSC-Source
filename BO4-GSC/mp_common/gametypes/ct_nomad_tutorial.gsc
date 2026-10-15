@@ -21,6 +21,7 @@
 #include scripts\mp_common\gametypes\ct_gadgets;
 #include scripts\mp_common\gametypes\ct_utils;
 #include scripts\mp_common\gametypes\ct_vo;
+
 #namespace ct_nomad_tutorial;
 
 init() {

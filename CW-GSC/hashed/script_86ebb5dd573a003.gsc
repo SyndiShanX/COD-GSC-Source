@@ -34,6 +34,7 @@
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\util;
 #using scripts\weapons\cp\spy_camera;
+
 #namespace namespace_11998b8f;
 
 function function_cdb7cc7e(starting = 1) {

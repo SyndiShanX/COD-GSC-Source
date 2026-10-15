@@ -12,6 +12,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\vehicle_shared;
+
 #namespace namespace_af0fb818;
 
 function autoexec __init__() {}

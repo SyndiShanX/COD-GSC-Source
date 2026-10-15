@@ -8,6 +8,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\util_shared;
+
 #namespace zm_zodt8_tutorial;
 
 event_handler[level_init] main(eventstruct) {

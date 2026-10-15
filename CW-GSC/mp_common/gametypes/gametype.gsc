@@ -10,6 +10,7 @@
 #using scripts\mp_common\gametypes\globallogic_score;
 #using scripts\mp_common\userspawnselection;
 #using scripts\mp_common\util;
+
 #namespace gametype;
 
 function init_mp() {

@@ -4,6 +4,7 @@
 ****************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace sr_armor_menu;
 class class_8ebbf51b: cluielem {
   function open(localclientnum) {

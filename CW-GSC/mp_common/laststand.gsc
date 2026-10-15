@@ -31,6 +31,7 @@
 #using scripts\mp_common\player\player_killed;
 #using scripts\weapons\weapon_utils;
 #using scripts\weapons\weapons;
+
 #namespace laststand_mp;
 
 function private autoexec __init__system__() {

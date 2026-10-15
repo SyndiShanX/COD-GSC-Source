@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\exploder_shared;
+
 #namespace namespace_cf4aa5f0;
 
 function function_6dbaba52(name, play_exploders, var_2f7c44e9, stop_exploders, var_50c0eadc, var_82e50bac = undefined) {

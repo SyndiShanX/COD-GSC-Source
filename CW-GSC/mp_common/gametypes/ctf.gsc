@@ -42,6 +42,7 @@
 #using scripts\mp_common\player\player_utils;
 #using scripts\mp_common\teams\teams;
 #using scripts\mp_common\util;
+
 #namespace ctf;
 
 function private autoexec __init__system__() {

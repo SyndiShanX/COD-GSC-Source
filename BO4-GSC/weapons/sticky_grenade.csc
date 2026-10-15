@@ -7,6 +7,7 @@
 #include scripts\core_common\math_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace sticky_grenade;
 
 autoexec __init__system__() {

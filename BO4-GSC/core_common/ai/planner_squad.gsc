@@ -7,6 +7,7 @@
 #include scripts\core_common\ai\systems\planner;
 #include scripts\core_common\ai\systems\planner_blackboard;
 #include scripts\core_common\bots\bot;
+
 #namespace plannersquad;
 
 function_bf7acc22(squad) {

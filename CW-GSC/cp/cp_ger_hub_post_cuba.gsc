@@ -16,6 +16,7 @@
 #using scripts\cp_common\player_decision;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace hub_post_cuba;
 
 function starting(str_skipto) {}

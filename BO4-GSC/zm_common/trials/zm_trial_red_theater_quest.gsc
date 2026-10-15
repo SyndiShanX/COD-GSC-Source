@@ -9,6 +9,7 @@
 #include scripts\zm\zm_red_main_quest;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_ui_inventory;
+
 #namespace zm_trial_red_theater_quest;
 
 autoexec __init__system__() {

@@ -6,6 +6,7 @@
 #include scripts\mp_common\item_spawn_groups_util;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\struct;
+
 #namespace item_spawn_group;
 
 setup(seedvalue, reset = 1) {

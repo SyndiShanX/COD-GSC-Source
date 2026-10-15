@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace scavenger_icon;
 class cscavenger_icon: cluielem {
   var var_bf9c8c95;

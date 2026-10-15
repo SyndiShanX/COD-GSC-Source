@@ -7,6 +7,7 @@
 #include scripts\mp\mp_offshore_fx;
 #include scripts\mp\mp_offshore_sound;
 #include scripts\mp_common\load;
+
 #namespace mp_offshore;
 
 event_handler[level_init] main(eventstruct) {

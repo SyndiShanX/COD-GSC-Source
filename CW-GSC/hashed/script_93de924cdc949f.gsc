@@ -12,6 +12,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\util;
+
 #namespace namespace_8589bd1a;
 
 function main() {}

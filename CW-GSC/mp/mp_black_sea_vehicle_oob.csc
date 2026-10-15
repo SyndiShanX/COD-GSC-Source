@@ -6,6 +6,7 @@
 #using scripts\core_common\array_shared;
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_a208feb2;
 
 function event_handler[gametype_start] main(eventstruct) {

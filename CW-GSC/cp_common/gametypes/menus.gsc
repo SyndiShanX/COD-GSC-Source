@@ -18,6 +18,7 @@
 #using scripts\cp_common\load;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace menus;
 
 function private autoexec __init__system__() {

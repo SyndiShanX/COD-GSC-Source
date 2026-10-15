@@ -20,6 +20,7 @@
 #using scripts\zm_common\zm_spawner;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_zonemgr;
+
 #namespace namespace_abfee9ba;
 
 function private autoexec __init__system__() {

@@ -5,6 +5,7 @@
 
 #using scripts\core_common\ai_shared;
 #using scripts\core_common\bots\bot;
+
 #namespace bot_position;
 
 function preinit() {

@@ -8,6 +8,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
+
 #namespace character_unlock_spectre;
 
 autoexec __init__system__() {

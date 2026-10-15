@@ -14,6 +14,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\weapons_shared;
 #include scripts\weapons\weaponobjects;
+
 #namespace gadget_tripwire;
 
 autoexec __init__system__() {

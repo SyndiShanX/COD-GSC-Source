@@ -5,6 +5,7 @@
 
 #using scripts\core_common\callbacks_shared;
 #using scripts\wz_common\util;
+
 #namespace death_circle;
 
 function init_vo() {

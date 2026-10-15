@@ -11,6 +11,7 @@
 #using scripts\core_common\scene_shared;
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_98521e8b;
 
 function event_handler[level_init] function_9347830c(eventstruct) {

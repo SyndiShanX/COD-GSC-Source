@@ -11,6 +11,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\vehicle_shared;
+
 #namespace namespace_b4dbc583;
 
 function init_flags() {

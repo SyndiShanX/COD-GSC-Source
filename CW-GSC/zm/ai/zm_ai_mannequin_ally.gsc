@@ -20,6 +20,7 @@
 #using scripts\zm_common\zm_player;
 #using scripts\zm_common\zm_powerups;
 #using scripts\zm_common\zm_spawner;
+
 #namespace zm_ai_mannequin_ally;
 
 function private autoexec __init__system__() {

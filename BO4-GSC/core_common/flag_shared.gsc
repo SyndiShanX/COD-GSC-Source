@@ -5,6 +5,7 @@
 
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\util_shared;
+
 #namespace flag;
 
 init(str_flag, b_val = 0) {

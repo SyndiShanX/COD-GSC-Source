@@ -9,6 +9,7 @@
 #include scripts\core_common\player\player_role;
 #include scripts\core_common\util_shared;
 #include scripts\killstreaks\killstreaks_shared;
+
 #namespace ct_tutorial_skirmish;
 
 init() {

@@ -23,6 +23,7 @@
 #include scripts\mp_common\player\player_damage;
 #include scripts\weapons\weapon_utils;
 #include scripts\weapons\weapons;
+
 #namespace laststand_mp;
 
 autoexec __init__system__() {

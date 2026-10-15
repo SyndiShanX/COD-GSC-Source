@@ -14,6 +14,7 @@
 #include scripts\killstreaks\mp\supplydrop;
 #include scripts\mp_common\gametypes\globallogic_utils;
 #include scripts\weapons\weapons;
+
 #namespace killstreak_weapons;
 
 init() {

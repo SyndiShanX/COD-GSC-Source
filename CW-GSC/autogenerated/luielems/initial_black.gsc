@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace initial_black;
 class cinitial_black: cluielem {
   var var_bf9c8c95;

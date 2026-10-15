@@ -20,6 +20,7 @@
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\killstreaks\remote_weapons;
 #using scripts\weapons\heatseekingmissile;
+
 #namespace hoverjet;
 
 function private autoexec __init__system__() {

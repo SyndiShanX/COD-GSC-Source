@@ -17,6 +17,7 @@
 #using scripts\weapons\mechz_firebomb;
 #using scripts\zm_common\ai\zm_ai_utility;
 #using scripts\zm_common\zm_behavior;
+
 #namespace namespace_394b7174;
 
 function private autoexec __init__system__() {

@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace stealth_meter_display;
 class class_d4941e5e: cluielem {
   function open(localclientnum) {

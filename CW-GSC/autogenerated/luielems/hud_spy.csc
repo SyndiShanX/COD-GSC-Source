@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace hud_spy;
 class class_f57714e4: cluielem {
   function function_ec7b95(localclientnum, value) {

@@ -7,6 +7,7 @@
 #using scripts\core_common\radiation;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\values_shared;
+
 #namespace namespace_2b1568cc;
 
 function private autoexec __init__system__() {

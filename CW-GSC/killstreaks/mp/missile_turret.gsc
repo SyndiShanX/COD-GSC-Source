@@ -8,6 +8,7 @@
 #using scripts\core_common\globallogic\globallogic_audio;
 #using scripts\core_common\player\player_stats;
 #using scripts\core_common\system_shared;
+
 #namespace missile_turret;
 
 function private autoexec __init__system__() {

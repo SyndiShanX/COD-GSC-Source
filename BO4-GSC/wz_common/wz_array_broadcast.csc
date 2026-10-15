@@ -10,6 +10,7 @@
 #include scripts\core_common\exploder_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
+
 #namespace wz_array_broadcast;
 
 autoexec __init__system__() {

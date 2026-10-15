@@ -11,6 +11,7 @@
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_trial_distance_traveled;
 
 autoexec __init__system__() {

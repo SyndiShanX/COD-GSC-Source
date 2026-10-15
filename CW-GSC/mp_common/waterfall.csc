@@ -6,6 +6,7 @@
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\trigger_shared;
 #using scripts\core_common\water_surface;
+
 #namespace waterfall;
 
 function waterfalloverlay(localclientnum) {

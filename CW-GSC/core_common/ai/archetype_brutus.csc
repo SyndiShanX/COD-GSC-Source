@@ -9,6 +9,7 @@
 #using scripts\core_common\footsteps_shared;
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\system_shared;
+
 #namespace archetype_brutus;
 
 function private autoexec __init__system__() {

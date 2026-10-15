@@ -32,6 +32,7 @@
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\mp_common\gametypes\globallogic_audio;
 #include scripts\weapons\heatseekingmissile;
+
 #namespace drone_squadron;
 
 autoexec __init__system__() {

@@ -24,6 +24,7 @@
 #include scripts\wz_common\wz_ee_poster;
 #include scripts\wz_common\wz_loadouts;
 #include scripts\wz_common\wz_nixie_tubes;
+
 #namespace wz_escape;
 
 event_handler[level_init] main(eventstruct) {

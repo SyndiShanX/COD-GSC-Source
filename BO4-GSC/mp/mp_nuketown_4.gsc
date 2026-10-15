@@ -19,6 +19,7 @@
 #include scripts\mp\mp_nuketown_4_sound;
 #include scripts\mp_common\load;
 #include scripts\mp_common\util;
+
 #namespace mp_nuketown_4;
 
 event_handler[level_init] main(eventstruct) {

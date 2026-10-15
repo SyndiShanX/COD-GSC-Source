@@ -6,6 +6,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\weapons\proximity_grenade;
 #include scripts\weapons\weaponobjects;
+
 #namespace claymore;
 
 autoexec __init__system__() {

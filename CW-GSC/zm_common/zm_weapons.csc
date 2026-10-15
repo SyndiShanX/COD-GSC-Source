@@ -18,6 +18,7 @@
 #using scripts\zm_common\zm_loadout;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_wallbuy;
+
 #namespace zm_weapons;
 
 function private autoexec __init__system__() {

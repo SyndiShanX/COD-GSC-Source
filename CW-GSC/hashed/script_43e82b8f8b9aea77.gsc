@@ -34,6 +34,7 @@
 #using scripts\cp_common\snd;
 #using scripts\cp_common\ui\ent_name;
 #using scripts\cp_common\util;
+
 #namespace namespace_fdde5f3d;
 
 function function_f50bc4b9() {

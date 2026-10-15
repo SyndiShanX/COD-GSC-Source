@@ -31,6 +31,7 @@
 #include scripts\mp_common\bots\mp_bot_action;
 #include scripts\mp_common\bots\mp_bot_position;
 #include scripts\mp_common\draft;
+
 #namespace bot;
 
 autoexec __init__system__() {

@@ -9,6 +9,7 @@
 #include scripts\zm\zm_red_challenges_rewards;
 #include scripts\zm_common\zm_sq_modules;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_red_challenges;
 
 init() {

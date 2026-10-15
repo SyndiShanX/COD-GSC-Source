@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace remote_missile_targets;
 class cremote_missile_targets: cluielem {
   var var_bf9c8c95;

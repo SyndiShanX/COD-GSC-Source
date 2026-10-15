@@ -7,6 +7,7 @@
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace zm_bot_soak_test;
 
 autoexec __init__system__() {

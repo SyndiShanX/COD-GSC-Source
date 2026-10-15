@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\array_shared;
+
 #namespace match_record;
 
 function function_d92cb558(result, vararg) {

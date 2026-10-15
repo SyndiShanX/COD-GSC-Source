@@ -12,6 +12,7 @@
 #using scripts\core_common\serverfield_shared;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace wz_doa;
 
 function event_handler[level_init] main(eventstruct) {

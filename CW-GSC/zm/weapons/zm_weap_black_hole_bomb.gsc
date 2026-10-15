@@ -22,6 +22,7 @@
 #using scripts\zm_common\zm_stats;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_weapons;
+
 #namespace zm_weap_black_hole_bomb;
 
 function private autoexec __init__system__() {

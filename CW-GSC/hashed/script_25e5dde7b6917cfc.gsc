@@ -36,6 +36,7 @@
 #using scripts\cp_common\snd;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace armada_code;
 
 function intro_flow(str_skipto, b_starting) {

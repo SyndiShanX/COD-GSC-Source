@@ -6,6 +6,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\item_supply_drop;
 #using scripts\core_common\system_shared;
+
 #namespace wz_player;
 
 function private autoexec __init__system__() {

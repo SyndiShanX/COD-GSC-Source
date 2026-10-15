@@ -18,6 +18,7 @@
 #include scripts\wz_common\wz_ai_vehicle;
 #include scripts\wz_common\wz_ai_zombie;
 #include scripts\wz_common\wz_ai_zonemgr;
+
 #namespace wz_ai_utils;
 
 autoexec __init__system__() {

@@ -29,6 +29,7 @@
 #include scripts\mp_common\gametypes\ct_utils;
 #include scripts\mp_common\gametypes\ct_vo;
 #include scripts\mp_common\gametypes\globallogic_score;
+
 #namespace ct_battery_tutorial;
 
 init() {

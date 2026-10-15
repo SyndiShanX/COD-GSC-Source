@@ -9,6 +9,7 @@
 #include scripts\core_common\scene_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace gadget_cymbal_monkey;
 
 autoexec __init__system__() {

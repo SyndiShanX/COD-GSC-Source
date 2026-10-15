@@ -6,6 +6,7 @@
 #using script_35ae72be7b4fec10;
 #using scripts\core_common\values_shared;
 #using scripts\cp_common\gametypes\globallogic_ui;
+
 #namespace namespace_29a279dd;
 
 function set_display(state, text, desc) {

@@ -9,6 +9,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\util;
+
 #namespace namespace_f180c0d7;
 
 function pstfx_script_vignette(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

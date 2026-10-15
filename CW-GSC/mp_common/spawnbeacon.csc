@@ -5,6 +5,7 @@
 
 #using scripts\core_common\spawnbeacon_shared;
 #using scripts\core_common\system_shared;
+
 #namespace spawn_beacon;
 
 function private autoexec __init__system__() {

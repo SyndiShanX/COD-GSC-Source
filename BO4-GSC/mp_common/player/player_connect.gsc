@@ -30,6 +30,7 @@
 #include scripts\mp_common\player\player_killed;
 #include scripts\mp_common\player\player_monitor;
 #include scripts\mp_common\player\player_record;
+
 #namespace player;
 
 callback_playerconnect() {

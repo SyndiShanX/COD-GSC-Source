@@ -22,6 +22,7 @@
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\player\player_loadout;
 #include scripts\mp_common\player\player_utils;
+
 #namespace ct_seraph;
 
 event_handler[gametype_init] main(eventstruct) {

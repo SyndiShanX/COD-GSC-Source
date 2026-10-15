@@ -7,6 +7,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;
 #include scripts\mp_common\gametypes\ct_core;
+
 #namespace ct_seraph;
 
 event_handler[gametype_init] main(eventstruct) {

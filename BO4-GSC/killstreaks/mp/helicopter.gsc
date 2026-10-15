@@ -13,6 +13,7 @@
 #include scripts\mp_common\challenges;
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\mp_common\player\player_utils;
+
 #namespace helicopter;
 
 autoexec __init__system__() {

@@ -21,6 +21,7 @@
 #include scripts\killstreaks\killstreak_bundles;
 #include scripts\killstreaks\killstreakrules_shared;
 #include scripts\killstreaks\killstreaks_shared;
+
 #namespace dog;
 
 init_shared() {

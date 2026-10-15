@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\clientfield_shared;
+
 #namespace weapons;
 
 init_shared() {

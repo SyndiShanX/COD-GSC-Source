@@ -5,6 +5,7 @@
 
 #using script_1cd690a97dfca36e;
 #using scripts\cp_common\snd;
+
 #namespace snd;
 
 function function_9ae4fc6f(soundalias, targets) {

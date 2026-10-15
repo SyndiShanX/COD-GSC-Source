@@ -4,6 +4,7 @@
 *****************************************************/
 
 #using scripts\core_common\scene_shared;
+
 #namespace flowgraph_scene;
 
 function playscenefunc(x, e_entity, sb_name, b_thread) {

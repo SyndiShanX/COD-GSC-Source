@@ -7,6 +7,7 @@
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_bgb;
+
 #namespace zm_bgb_conflagration_liquidation;
 
 autoexec __init__system__() {

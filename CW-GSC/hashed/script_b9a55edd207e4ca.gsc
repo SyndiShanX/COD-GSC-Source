@@ -38,6 +38,7 @@
 #using scripts\wz_common\hud;
 #using scripts\wz_common\spawn;
 #using scripts\wz_common\wz_loadouts;
+
 #namespace namespace_2938acdc;
 
 function init() {

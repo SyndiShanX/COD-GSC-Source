@@ -11,6 +11,7 @@
 #include scripts\core_common\weapons_shared;
 #include scripts\mp_common\item_inventory;
 #include scripts\mp_common\item_inventory_util;
+
 #namespace wz_spectre;
 
 autoexec __init__system__() {

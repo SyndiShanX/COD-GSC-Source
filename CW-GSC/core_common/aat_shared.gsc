@@ -14,6 +14,7 @@
 #using scripts\core_common\spawner_shared;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace aat;
 
 function private autoexec __init__system__() {

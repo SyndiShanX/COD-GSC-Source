@@ -6,6 +6,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\flagsys_shared;
 #include scripts\zm_common\zm_utility;
+
 #namespace mansion_achievements;
 
 init() {

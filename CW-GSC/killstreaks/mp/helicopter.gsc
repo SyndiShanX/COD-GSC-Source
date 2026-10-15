@@ -15,6 +15,7 @@
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\mp_common\challenges;
 #using scripts\mp_common\player\player_utils;
+
 #namespace helicopter;
 
 function private autoexec __init__system__() {

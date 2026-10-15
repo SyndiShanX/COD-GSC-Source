@@ -10,6 +10,7 @@
 #using scripts\core_common\ai\zombie_utility;
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\spawner_shared;
+
 #namespace namespace_5df129e7;
 
 function autoexec init() {

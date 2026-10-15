@@ -13,6 +13,7 @@
 #using scripts\core_common\territory;
 #using scripts\core_common\territory_util;
 #using scripts\core_common\util_shared;
+
 #namespace weapon_cache;
 
 function private autoexec __init__system__() {

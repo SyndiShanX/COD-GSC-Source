@@ -5,6 +5,7 @@
 
 #using scripts\core_common\ai\archetype_brutus;
 #using scripts\core_common\ai\systems\ai_interface;
+
 #namespace brutusinterface;
 
 function registerbrutusinterfaceattributes() {

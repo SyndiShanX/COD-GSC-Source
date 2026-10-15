@@ -30,6 +30,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\vehicles\siegebot;
+
 #namespace doa_siegebot;
 
 function function_7980d69c() {

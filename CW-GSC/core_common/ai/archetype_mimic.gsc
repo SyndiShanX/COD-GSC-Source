@@ -22,6 +22,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
 #using scripts\zm_common\ai\zm_ai_utility;
+
 #namespace archetype_mimic;
 
 function private autoexec __init__system__() {

@@ -7,6 +7,7 @@
 #include scripts\core_common\struct;
 #include scripts\mp\mp_casino_scripted;
 #include scripts\mp_common\load;
+
 #namespace mp_casino;
 
 function_1fb8a998(originallocation, newlocation) {

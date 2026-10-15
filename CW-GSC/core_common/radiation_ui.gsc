@@ -8,6 +8,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\radiation;
 #using scripts\core_common\system_shared;
+
 #namespace radiation_ui;
 
 function private autoexec __init__system__() {

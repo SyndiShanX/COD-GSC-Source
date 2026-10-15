@@ -5,6 +5,7 @@
 
 #using script_7a8059ca02b7b09e;
 #using scripts\core_common\system_shared;
+
 #namespace telemetry;
 
 function private autoexec __init__system__() {

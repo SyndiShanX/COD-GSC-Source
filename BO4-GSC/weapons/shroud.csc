@@ -8,6 +8,7 @@
 #include scripts\core_common\math_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace shroud;
 
 autoexec __init__system__() {

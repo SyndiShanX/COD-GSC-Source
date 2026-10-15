@@ -25,6 +25,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\spawn_manager;
+
 #namespace kgb_aslt_bunker_escape;
 
 function starting(str_skipto) {

@@ -13,6 +13,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\vehicle_shared;
+
 #namespace namespace_e85e312c;
 class class_6e09f777 {
   var var_5ee36218;

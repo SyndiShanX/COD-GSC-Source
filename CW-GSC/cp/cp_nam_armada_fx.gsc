@@ -7,6 +7,7 @@
 #using scripts\core_common\exploder_shared;
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\fx_shared;
+
 #namespace armada_fx;
 
 function function_c44464c8() {

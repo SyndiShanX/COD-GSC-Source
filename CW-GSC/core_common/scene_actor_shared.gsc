@@ -10,6 +10,7 @@
 #using scripts\core_common\scene_shared;
 #using scripts\core_common\spawner_shared;
 #using scripts\core_common\util_shared;
+
 #namespace scene;
 class csceneactor: csceneobject {
   var _b_set_goal;

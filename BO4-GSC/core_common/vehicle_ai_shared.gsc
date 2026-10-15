@@ -13,6 +13,7 @@
 #include scripts\core_common\values_shared;
 #include scripts\core_common\vehicle_death_shared;
 #include scripts\core_common\vehicle_shared;
+
 #namespace vehicle_ai;
 
 autoexec __init__system__() {

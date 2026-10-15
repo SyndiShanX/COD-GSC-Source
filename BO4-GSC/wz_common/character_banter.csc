@@ -7,6 +7,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace character_banter;
 
 event_handler[event_10eed35b] function_d8f1209f(eventstruct) {

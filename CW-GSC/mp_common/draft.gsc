@@ -17,6 +17,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\mp_common\gametypes\globallogic;
 #using scripts\mp_common\player\player_loadout;
+
 #namespace draft;
 
 function private autoexec __init__system__() {

@@ -25,6 +25,7 @@
 #using scripts\cp_common\hms_util;
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\skipto;
+
 #namespace cp_rus_siege;
 
 function event_handler[level_init] main(eventstruct) {

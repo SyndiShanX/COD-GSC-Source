@@ -17,6 +17,7 @@
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\mp_common\gametypes\globallogic_audio;
 #include scripts\mp_common\player\player_loadout;
+
 #namespace draft;
 
 autoexec __init__system__() {

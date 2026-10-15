@@ -12,6 +12,7 @@
 #using scripts\wz_common\hud;
 #using scripts\wz_common\vehicle;
 #using scripts\wz_common\wz_ignore_systems;
+
 #namespace namespace_17baa64d;
 
 function init() {

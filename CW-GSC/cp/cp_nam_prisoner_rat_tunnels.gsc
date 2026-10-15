@@ -30,6 +30,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\snd_utility;
 #using scripts\cp_common\util;
+
 #namespace cp_nam_prisoner_rat_tunnels;
 
 function start(str_objective) {

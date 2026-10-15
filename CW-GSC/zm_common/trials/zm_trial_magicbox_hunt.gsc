@@ -10,6 +10,7 @@
 #using scripts\zm_common\zm_powerups;
 #using scripts\zm_common\zm_trial;
 #using scripts\zm_common\zm_trial_util;
+
 #namespace zm_trial_magicbox_hunt;
 
 function private autoexec __init__system__() {

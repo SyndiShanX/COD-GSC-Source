@@ -19,6 +19,7 @@
 #using scripts\core_common\spawning_shared;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\values_shared;
+
 #namespace namespace_66d6aa44;
 
 function event_handler[level_init] function_9347830c(eventstruct) {

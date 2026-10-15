@@ -25,6 +25,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\killstreaks\killstreaks_util;
+
 #namespace item_inventory;
 
 function private autoexec __init__system__() {

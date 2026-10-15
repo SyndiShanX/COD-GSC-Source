@@ -116,6 +116,7 @@
 #using scripts\zm_common\zm_utility_zsurvival;
 #using scripts\zm_common\zm_vo;
 #using scripts\zm_common\zm_weapons;
+
 #namespace zsurvival;
 
 function event_handler[gametype_init] main(eventstruct) {

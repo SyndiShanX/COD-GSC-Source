@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\array_shared;
+
 #namespace namespace_81245006;
 
 initweakpoints(entity, var_97e1b97d) {

@@ -6,6 +6,7 @@
 #using script_35ae72be7b4fec10;
 #using script_3dc93ca9902a9cda;
 #using scripts\cp_common\gametypes\globallogic_ui;
+
 #namespace namespace_6f1d35e1;
 
 function function_eea42dd9(var_f873ed0b, var_e3ec46f0) {

@@ -24,6 +24,7 @@
 #using scripts\core_common\vehicles\driving_fx;
 #using scripts\mp_common\callbacks;
 #using scripts\wz_common\wz_perk_paranoia;
+
 #namespace load;
 
 function levelnotifyhandler(clientnum, state, oldstate) {

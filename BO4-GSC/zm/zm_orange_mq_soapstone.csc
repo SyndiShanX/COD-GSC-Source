@@ -8,6 +8,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_sq_modules;
+
 #namespace zm_orange_mq_soapstone;
 
 preload() {

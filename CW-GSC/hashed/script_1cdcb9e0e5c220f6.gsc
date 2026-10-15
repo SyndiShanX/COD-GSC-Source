@@ -41,6 +41,7 @@
 #using scripts\cp_common\ui\ent_name;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace kgb_ins_rv;
 
 function starting(str_skipto) {

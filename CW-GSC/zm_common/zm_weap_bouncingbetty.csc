@@ -5,6 +5,7 @@
 
 #using scripts\core_common\system_shared;
 #using scripts\weapons\bouncingbetty;
+
 #namespace bouncingbetty;
 
 function private autoexec __init__system__() {

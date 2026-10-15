@@ -8,6 +8,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\collectibles;
 #using scripts\cp_common\gametypes\save;
+
 #namespace player_decision;
 
 function private autoexec __init__system__() {

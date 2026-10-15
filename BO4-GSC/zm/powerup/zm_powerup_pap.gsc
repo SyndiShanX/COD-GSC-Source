@@ -21,6 +21,7 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace namespace_47a807c3;
 
 autoexec __init__system__() {

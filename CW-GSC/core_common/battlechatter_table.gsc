@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\array_shared;
+
 #namespace battlechatter_table;
 
 function function_c5dda35e(category, ...) {

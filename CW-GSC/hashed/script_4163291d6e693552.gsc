@@ -18,6 +18,7 @@
 #using scripts\zm_common\zm_fasttravel;
 #using scripts\zm_common\zm_stats;
 #using scripts\zm_common\zm_vo;
+
 #namespace namespace_7589cf5c;
 
 function function_df911075() {

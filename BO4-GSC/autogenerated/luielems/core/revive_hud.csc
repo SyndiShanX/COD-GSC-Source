@@ -4,6 +4,7 @@
 ******************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace revive_hud;
 
 class crevive_hud: cluielem {

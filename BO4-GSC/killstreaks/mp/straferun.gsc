@@ -23,6 +23,7 @@
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\mp_common\util;
 #include scripts\weapons\heatseekingmissile;
+
 #namespace straferun;
 
 autoexec __init__system__() {

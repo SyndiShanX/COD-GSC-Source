@@ -13,6 +13,7 @@
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_trial_white_minutemen;
 
 autoexec __init__system__() {

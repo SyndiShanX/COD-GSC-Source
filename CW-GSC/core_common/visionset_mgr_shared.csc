@@ -7,6 +7,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\system_shared;
+
 #namespace visionset_mgr;
 
 function private autoexec __init__system__() {

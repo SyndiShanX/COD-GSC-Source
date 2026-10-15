@@ -17,6 +17,7 @@
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\killstreaks\ultimate_turret_shared;
 #include scripts\weapons\deployable;
+
 #namespace ultimate_turret;
 
 autoexec __init__system__() {

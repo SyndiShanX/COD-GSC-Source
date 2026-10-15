@@ -12,6 +12,7 @@
 #using scripts\mp_common\gametypes\globallogic_utils;
 #using scripts\mp_common\gametypes\round;
 #using scripts\mp_common\scoreevents;
+
 #namespace namespace_4b798cb0;
 
 function private autoexec __init__system__() {

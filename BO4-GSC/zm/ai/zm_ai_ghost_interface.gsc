@@ -5,6 +5,7 @@
 
 #include scripts\core_common\ai\systems\ai_interface;
 #include scripts\zm\ai\zm_ai_ghost;
+
 #namespace zm_ai_ghost_interface;
 
 function_fd76c3b() {

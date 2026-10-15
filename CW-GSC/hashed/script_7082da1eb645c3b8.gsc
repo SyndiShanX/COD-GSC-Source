@@ -35,6 +35,7 @@
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
 #using scripts\weapons\cp\spy_camera;
+
 #namespace namespace_be0b7a4;
 
 function function_cc475eed(str_objective) {

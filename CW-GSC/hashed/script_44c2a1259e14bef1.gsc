@@ -18,6 +18,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\zm_common\zm_laststand;
 #using scripts\zm_common\zm_stats;
+
 #namespace namespace_32e85820;
 
 function private autoexec __init__system__() {

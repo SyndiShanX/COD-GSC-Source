@@ -5,6 +5,7 @@
 
 #using scripts\core_common\map;
 #using scripts\core_common\player\player_shared;
+
 #namespace teams;
 
 function function_7f8faff9(team) {

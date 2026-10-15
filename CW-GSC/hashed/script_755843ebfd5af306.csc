@@ -8,6 +8,7 @@
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\math_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_53a8fe5e;
 
 function init() {

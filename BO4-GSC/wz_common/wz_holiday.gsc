@@ -6,6 +6,7 @@
 #include scripts\core_common\flagsys_shared;
 #include scripts\core_common\player\player_stats;
 #include scripts\mp_common\item_world;
+
 #namespace wz_holiday;
 
 autoexec __init() {

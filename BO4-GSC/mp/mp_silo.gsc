@@ -17,6 +17,7 @@
 #include scripts\mp\mp_silo_sound;
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\load;
+
 #namespace mp_silo;
 
 event_handler[level_init] main(eventstruct) {

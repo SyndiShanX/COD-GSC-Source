@@ -13,6 +13,7 @@
 #using scripts\cp_common\hms_util;
 #using scripts\cp_common\ui\prompts;
 #using scripts\cp_common\util;
+
 #namespace grenade_ammo_box;
 
 function private autoexec __init__system__() {

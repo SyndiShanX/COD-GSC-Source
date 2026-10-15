@@ -15,6 +15,7 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_transformation;
 #include scripts\zm_common\zm_utility;
+
 #namespace zombie_werewolf_util;
 
 autoexec __init__system__() {

@@ -14,6 +14,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
 #include scripts\mp_common\load;
+
 #namespace wz_open_skyscrapers_death_circle;
 
 function_6f6f5189() {

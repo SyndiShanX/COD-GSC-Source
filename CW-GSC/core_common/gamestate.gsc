@@ -5,6 +5,7 @@
 
 #using scripts\core_common\gamestate_util;
 #using scripts\core_common\system_shared;
+
 #namespace gamestate;
 
 function private autoexec __init__system__() {

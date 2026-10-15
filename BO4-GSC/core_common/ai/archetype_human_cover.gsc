@@ -10,6 +10,7 @@
 #include scripts\core_common\ai\systems\behavior_tree_utility;
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\laststand_shared;
+
 #namespace archetype_human_cover;
 
 autoexec registerbehaviorscriptfunctions() {

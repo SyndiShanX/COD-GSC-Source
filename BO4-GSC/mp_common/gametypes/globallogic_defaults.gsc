@@ -21,6 +21,7 @@
 #include scripts\mp_common\gametypes\round;
 #include scripts\mp_common\teams\platoons;
 #include scripts\mp_common\util;
+
 #namespace globallogic_defaults;
 
 getwinningteamfromloser(losing_team) {

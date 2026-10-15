@@ -16,6 +16,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\cp\cp_rus_amerika_fx;
 #using scripts\weapons\cp\spy_camera;
+
 #namespace cp_rus_amerika;
 
 function event_handler[level_init] main(eventstruct) {

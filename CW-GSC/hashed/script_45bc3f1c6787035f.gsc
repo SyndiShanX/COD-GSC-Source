@@ -9,6 +9,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\util_shared;
 #using scripts\zm_common\zm_score;
+
 #namespace namespace_7eea54d0;
 
 function init() {

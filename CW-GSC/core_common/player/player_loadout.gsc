@@ -4,6 +4,7 @@
 *************************************************/
 
 #using scripts\core_common\util_shared;
+
 #namespace loadout;
 
 function function_87bcb1b() {

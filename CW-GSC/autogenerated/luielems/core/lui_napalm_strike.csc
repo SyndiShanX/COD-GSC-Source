@@ -4,6 +4,7 @@
 *************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace lui_napalm_strike;
 class clui_napalm_strike: cluielem {
   function open(localclientnum) {

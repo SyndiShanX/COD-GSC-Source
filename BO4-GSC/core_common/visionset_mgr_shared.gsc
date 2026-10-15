@@ -7,6 +7,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\math_shared;
 #include scripts\core_common\system_shared;
+
 #namespace visionset_mgr;
 
 autoexec __init__system__() {

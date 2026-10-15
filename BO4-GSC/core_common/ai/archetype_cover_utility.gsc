@@ -7,6 +7,7 @@
 #include scripts\core_common\ai\systems\behavior_tree_utility;
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\math_shared;
+
 #namespace aiutility;
 
 autoexec registerbehaviorscriptfunctions() {

@@ -26,6 +26,7 @@
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\mp_common\teams\teams;
 #using scripts\weapons\heatseekingmissile;
+
 #namespace counteruav;
 
 function private autoexec __init__system__() {

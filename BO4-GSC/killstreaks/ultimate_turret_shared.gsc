@@ -24,6 +24,7 @@
 #include scripts\killstreaks\remote_weapons;
 #include scripts\weapons\deployable;
 #include scripts\weapons\weaponobjects;
+
 #namespace ultimate_turret;
 
 init_shared() {

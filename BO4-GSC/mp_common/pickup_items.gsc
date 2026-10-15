@@ -9,6 +9,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\weapons;
+
 #namespace pickup_items;
 
 autoexec __init__system__() {

@@ -12,6 +12,7 @@
 #include scripts\zm_common\zm_contracts;
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_traps;
+
 #namespace zm_trap_electric;
 
 autoexec __init__system__() {

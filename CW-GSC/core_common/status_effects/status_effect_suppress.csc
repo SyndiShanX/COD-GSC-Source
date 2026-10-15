@@ -5,6 +5,7 @@
 
 #using scripts\core_common\serverfield_shared;
 #using scripts\core_common\system_shared;
+
 #namespace status_effect_suppress;
 
 function private autoexec __init__system__() {

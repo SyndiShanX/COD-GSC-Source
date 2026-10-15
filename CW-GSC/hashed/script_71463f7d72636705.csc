@@ -5,6 +5,7 @@
 
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
+
 #namespace sound_tinnitus;
 
 function function_fbb3b7ed(_notify, _handle) {

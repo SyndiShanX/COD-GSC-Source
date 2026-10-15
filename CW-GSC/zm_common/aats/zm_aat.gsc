@@ -17,6 +17,7 @@
 #using scripts\zm_common\aats\ammomods\ammomod_shatterblast;
 #using scripts\zm_common\zm_stats;
 #using scripts\zm_common\zm_weapons;
+
 #namespace zm_aat;
 
 function private autoexec __init__system__() {

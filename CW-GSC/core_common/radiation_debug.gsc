@@ -6,6 +6,7 @@
 #using script_c8d806d2487b617;
 #using scripts\core_common\radiation;
 #using scripts\core_common\system_shared;
+
 #namespace radiation_debug;
 
 function private autoexec __init__system__() {

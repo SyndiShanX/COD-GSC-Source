@@ -52,6 +52,7 @@
 #using scripts\zm_common\zm_unitrigger;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_wallbuy;
+
 #namespace zm_weapons;
 
 function private autoexec __init__system__() {

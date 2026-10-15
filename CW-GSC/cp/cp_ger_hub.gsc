@@ -16,6 +16,7 @@
 #using scripts\cp\cp_ger_hub_post_yamantau;
 #using scripts\cp_common\gametypes\save;
 #using scripts\cp_common\skipto;
+
 #namespace cp_ger_hub;
 
 function event_handler[level_init] main(eventstruct) {

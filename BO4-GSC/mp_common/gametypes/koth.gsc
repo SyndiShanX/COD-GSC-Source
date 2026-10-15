@@ -36,6 +36,7 @@
 #include scripts\mp_common\player\player_utils;
 #include scripts\mp_common\spawnbeacon;
 #include scripts\mp_common\util;
+
 #namespace koth;
 
 event_handler[gametype_init] main(eventstruct) {

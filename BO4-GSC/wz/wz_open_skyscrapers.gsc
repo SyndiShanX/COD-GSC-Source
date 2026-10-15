@@ -37,6 +37,7 @@
 #include scripts\wz_common\wz_holiday;
 #include scripts\wz_common\wz_jukebox;
 #include scripts\wz_common\wz_loadouts;
+
 #namespace wz_open_skyscrapers;
 
 event_handler[level_init] main(eventstruct) {

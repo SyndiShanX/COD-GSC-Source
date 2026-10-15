@@ -10,6 +10,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\cp_common\gametypes\save;
 #using scripts\cp_common\ui\prompts;
+
 #namespace collectibles;
 
 function private autoexec __init__system__() {

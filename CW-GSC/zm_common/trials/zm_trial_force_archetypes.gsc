@@ -6,6 +6,7 @@
 #using scripts\core_common\array_shared;
 #using scripts\core_common\system_shared;
 #using scripts\zm_common\zm_trial;
+
 #namespace zm_trial_force_archetypes;
 
 function private autoexec __init__system__() {

@@ -16,6 +16,7 @@
 #using scripts\core_common\scene_shared;
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\util;
+
 #namespace cp_nam_armada;
 
 function event_handler[level_init] main(eventstruct) {

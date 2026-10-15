@@ -26,6 +26,7 @@
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace namespace_29b42773;
 
 function starting(str_skipto) {

@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\callbacks_shared;
+
 #namespace namespace_a376209a;
 
 function event_handler[gametype_start] main(eventstruct) {

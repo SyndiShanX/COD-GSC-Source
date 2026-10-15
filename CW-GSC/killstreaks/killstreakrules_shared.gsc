@@ -9,6 +9,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\killstreaks\killstreaks_util;
+
 #namespace killstreakrules;
 
 function init_shared() {

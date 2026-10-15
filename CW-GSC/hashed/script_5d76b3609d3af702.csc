@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace doa_textbubble;
 class class_b20c2804: cluielem {
   function open(localclientnum) {

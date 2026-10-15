@@ -10,6 +10,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\wz_common\wz_ai_utils;
+
 #namespace wz_ee_poster;
 
 autoexec __init__system__() {

@@ -13,6 +13,7 @@
 #include scripts\zm\zm_mansion_pap_quest;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
+
 #namespace zm_trial_mansion_ghost;
 
 autoexec __init__system__() {

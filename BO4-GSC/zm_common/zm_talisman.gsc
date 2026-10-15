@@ -15,6 +15,7 @@
 #include scripts\zm_common\zm_customgame;
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_stats;
+
 #namespace zm_talisman;
 
 init() {

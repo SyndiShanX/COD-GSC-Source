@@ -8,6 +8,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\mp_common\gametypes\globallogic_ui;
 #using scripts\mp_common\player\player_damage;
+
 #namespace player;
 
 function callback_playermelee(eattacker, idamage, weapon, vorigin, vdir, boneindex, shieldhit, frombehind) {

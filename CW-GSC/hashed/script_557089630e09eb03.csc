@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace onslaught_hud;
 class class_b6739d61: cluielem {
   function open(localclientnum) {

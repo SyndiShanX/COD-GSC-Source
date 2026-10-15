@@ -35,6 +35,7 @@
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_characters;
 #include scripts\zm_common\zm_stats;
+
 #namespace globallogic_player;
 
 freezeplayerforroundend() {

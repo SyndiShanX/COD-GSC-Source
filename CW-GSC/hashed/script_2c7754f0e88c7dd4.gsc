@@ -35,6 +35,7 @@
 #using scripts\core_common\vehicle_death_shared;
 #using scripts\core_common\vehicle_shared;
 #using scripts\core_common\vehicles\raps;
+
 #namespace namespace_a0fa2b5;
 
 function init() {

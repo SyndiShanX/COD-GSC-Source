@@ -36,6 +36,7 @@
 #include scripts\zm_common\zm_ui_inventory;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_mansion;
 
 autoexec opt_in() {

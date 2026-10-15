@@ -26,6 +26,7 @@
 #using scripts\mp_common\gametypes\match;
 #using scripts\mp_common\util;
 #using scripts\weapons\weapon_utils;
+
 #namespace scoreevents;
 
 function private autoexec __init__system__() {

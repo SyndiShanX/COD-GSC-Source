@@ -34,6 +34,7 @@
 #using scripts\core_common\util_shared;
 #using scripts\zm_common\gametypes\globallogic;
 #using scripts\zm_common\gametypes\globallogic_score;
+
 #namespace namespace_d2efac9a;
 
 function init() {

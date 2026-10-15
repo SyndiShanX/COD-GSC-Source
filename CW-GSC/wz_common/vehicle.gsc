@@ -7,6 +7,7 @@
 #using scripts\core_common\item_world;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\vehicles\player_vehicle;
+
 #namespace wz_vehicle;
 
 function private autoexec __init__system__() {

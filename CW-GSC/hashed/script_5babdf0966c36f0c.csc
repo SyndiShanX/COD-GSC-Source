@@ -8,6 +8,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\zm_common\zm_utility;
+
 #namespace world_event_black_chest;
 
 function private autoexec __init__system__() {

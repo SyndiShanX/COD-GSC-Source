@@ -7,6 +7,7 @@
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\load_shared;
 #using scripts\core_common\util_shared;
+
 #namespace mp_apocalypse;
 
 function event_handler[level_init] main(eventstruct) {

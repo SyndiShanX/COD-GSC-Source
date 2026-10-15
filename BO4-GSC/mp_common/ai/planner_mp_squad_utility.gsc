@@ -17,6 +17,7 @@
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\gameobjects_shared;
 #include scripts\core_common\system_shared;
+
 #namespace planner_mp_squad_utility;
 
 autoexec __init__system__() {

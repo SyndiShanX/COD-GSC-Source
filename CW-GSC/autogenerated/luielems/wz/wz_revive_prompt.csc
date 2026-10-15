@@ -4,6 +4,7 @@
 **********************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace wz_revive_prompt;
 class cwz_revive_prompt: cluielem {
   function open(localclientnum) {

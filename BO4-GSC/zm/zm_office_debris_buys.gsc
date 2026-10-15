@@ -6,6 +6,7 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
+
 #namespace zm_office_debris_buys;
 
 autoexec __init__system__() {

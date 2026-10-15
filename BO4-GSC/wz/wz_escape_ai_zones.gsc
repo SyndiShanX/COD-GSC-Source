@@ -7,6 +7,7 @@
 #include scripts\core_common\struct;
 #include scripts\wz_common\wz_ai_utils;
 #include scripts\wz_common\wz_ai_zonemgr;
+
 #namespace wz_escape_ai_zones;
 
 init() {

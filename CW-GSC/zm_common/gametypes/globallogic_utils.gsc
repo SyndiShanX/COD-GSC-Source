@@ -7,6 +7,7 @@
 #using scripts\core_common\struct;
 #using scripts\zm_common\gametypes\globallogic_score;
 #using scripts\zm_common\gametypes\hostmigration;
+
 #namespace globallogic_utils;
 
 function testshock() {

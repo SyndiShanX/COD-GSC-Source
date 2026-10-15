@@ -6,6 +6,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\spawning_squad;
 #using scripts\core_common\system_shared;
+
 #namespace hud_message;
 
 function private autoexec __init__system__() {

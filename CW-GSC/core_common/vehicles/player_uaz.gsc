@@ -6,6 +6,7 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\vehicle_shared;
+
 #namespace player_uaz;
 
 function private autoexec __init__system__() {

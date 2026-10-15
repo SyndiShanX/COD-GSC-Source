@@ -26,6 +26,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_1e25ad94;
 
 function debug_circle(origin, radius, seconds, color) {

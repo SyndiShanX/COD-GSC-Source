@@ -5,6 +5,7 @@
 
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\load;
+
 #namespace mp_cosmodrome;
 
 event_handler[level_init] main(eventstruct) {

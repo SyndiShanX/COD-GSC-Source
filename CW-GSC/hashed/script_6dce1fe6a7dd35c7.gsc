@@ -32,6 +32,7 @@
 #using scripts\core_common\math_shared;
 #using scripts\core_common\status_effects\status_effect_util;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_2a445563;
 class class_9f07f58e {
   var adjustmentstarted;

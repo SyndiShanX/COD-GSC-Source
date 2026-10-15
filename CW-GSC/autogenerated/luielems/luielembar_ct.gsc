@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace luielembar_ct;
 class cluielembar_ct: cluielem {
   var var_bf9c8c95;

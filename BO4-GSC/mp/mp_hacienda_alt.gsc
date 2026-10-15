@@ -17,6 +17,7 @@
 #include scripts\mp_common\draft;
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\load;
+
 #namespace mp_hacienda_alt;
 
 event_handler[level_init] main(eventstruct) {

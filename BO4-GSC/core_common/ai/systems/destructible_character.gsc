@@ -8,6 +8,7 @@
 #include scripts\core_common\math_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
+
 #namespace destructserverutils;
 
 autoexec __init__system__() {

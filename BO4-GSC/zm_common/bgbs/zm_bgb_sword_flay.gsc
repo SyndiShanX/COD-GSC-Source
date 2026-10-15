@@ -6,6 +6,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_stats;
+
 #namespace zm_bgb_sword_flay;
 
 autoexec __init__system__() {

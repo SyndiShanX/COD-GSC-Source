@@ -43,6 +43,7 @@
 #using scripts\zm_common\zm_laststand;
 #using scripts\zm_common\zm_player;
 #using scripts\zm_common\zm_utility;
+
 #namespace namespace_4db53432;
 
 function event_handler[level_init] main(eventstruct) {

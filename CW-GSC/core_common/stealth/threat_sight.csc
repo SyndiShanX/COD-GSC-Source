@@ -7,6 +7,7 @@
 #using scripts\core_common\class_shared;
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\system_shared;
+
 #namespace threat_sight;
 
 function scalevolume(ent, vol) {}

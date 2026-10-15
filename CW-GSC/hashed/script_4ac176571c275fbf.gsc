@@ -10,6 +10,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
 #using scripts\core_common\vehicles\player_vehicle;
+
 #namespace namespace_d2883a2e;
 
 function private autoexec __init__system__() {

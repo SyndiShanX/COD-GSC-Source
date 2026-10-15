@@ -23,6 +23,7 @@
 #using scripts\core_common\vehicleriders_shared;
 #using scripts\core_common\weapons_shared;
 #using scripts\weapons\heatseekingmissile;
+
 #namespace vehicle;
 
 function private autoexec __init__system__() {

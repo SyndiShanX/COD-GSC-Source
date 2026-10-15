@@ -6,6 +6,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\oob;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_b77e8eb1;
 
 function init(var_551ace8a, var_94aa053c) {

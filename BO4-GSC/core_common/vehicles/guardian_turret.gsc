@@ -10,6 +10,7 @@
 #include scripts\core_common\vehicle_ai_shared;
 #include scripts\core_common\vehicle_shared;
 #include scripts\core_common\vehicles\auto_turret;
+
 #namespace guardian_turret;
 
 autoexec __init__system__() {

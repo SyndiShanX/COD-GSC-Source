@@ -9,6 +9,7 @@
 #using scripts\core_common\stealth\enemy;
 #using scripts\core_common\stealth\event;
 #using scripts\core_common\stealth\group;
+
 #namespace namespace_578db516;
 
 function main() {

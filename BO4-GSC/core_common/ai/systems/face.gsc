@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\math_shared;
+
 #namespace face;
 
 saygenericdialogue(typestring) {

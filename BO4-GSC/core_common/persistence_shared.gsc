@@ -8,6 +8,7 @@
 #include scripts\core_common\rank_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
+
 #namespace persistence;
 
 autoexec __init__system__() {

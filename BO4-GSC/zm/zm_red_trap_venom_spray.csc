@@ -5,6 +5,7 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\postfx_shared;
+
 #namespace zm_red_trap_venom_spray;
 
 init() {

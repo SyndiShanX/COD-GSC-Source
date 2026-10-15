@@ -9,6 +9,7 @@
 #using scripts\core_common\trigger_shared;
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\hms_util;
+
 #namespace namespace_f6d09d1a;
 
 function init() {

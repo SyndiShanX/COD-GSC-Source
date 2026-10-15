@@ -7,6 +7,7 @@
 #include scripts\core_common\ai\strategic_command;
 #include scripts\core_common\ai\systems\blackboard;
 #include scripts\core_common\ai\systems\planner;
+
 #namespace plannergenericcommander;
 
 _createcommanderplanner(team) {

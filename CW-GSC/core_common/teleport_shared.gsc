@@ -8,6 +8,7 @@
 #using scripts\core_common\spawner_shared;
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
+
 #namespace teleport;
 
 function team(kvp, var_dad37549, var_b095575e = 0) {

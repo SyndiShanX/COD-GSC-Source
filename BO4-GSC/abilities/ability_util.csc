@@ -4,6 +4,7 @@
 ***********************************************/
 
 #include scripts\core_common\util_shared;
+
 #namespace ability_util;
 
 init_aoe_fx_info(aoe_name) {

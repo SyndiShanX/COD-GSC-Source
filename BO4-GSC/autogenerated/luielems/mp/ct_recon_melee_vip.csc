@@ -4,6 +4,7 @@
 ************************************************************/
 
 #include scripts\core_common\lui_shared;
+
 #namespace ct_recon_melee_vip;
 
 class cct_recon_melee_vip: cluielem {

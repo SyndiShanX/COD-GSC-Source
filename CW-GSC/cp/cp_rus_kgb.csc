@@ -13,6 +13,7 @@
 #using scripts\core_common\postfx_shared;
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
+
 #namespace cp_rus_kgb;
 
 function event_handler[level_init] main(eventstruct) {

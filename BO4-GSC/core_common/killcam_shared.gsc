@@ -14,6 +14,7 @@
 #include scripts\core_common\values_shared;
 #include scripts\core_common\visionset_mgr_shared;
 #include scripts\weapons\tacticalinsertion;
+
 #namespace killcam;
 
 autoexec __init__system__() {

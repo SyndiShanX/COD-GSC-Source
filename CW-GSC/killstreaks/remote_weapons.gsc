@@ -10,6 +10,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\killstreaks\killstreaks_util;
+
 #namespace remote_weapons;
 
 function init_shared() {

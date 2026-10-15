@@ -6,6 +6,7 @@
 #using script_4daa124bc391e7ed;
 #using scripts\core_common\renderoverridebundle;
 #using scripts\killstreaks\killstreak_detect;
+
 #namespace killstreak_bundles;
 
 function spawned(local_client_num, bundle) {

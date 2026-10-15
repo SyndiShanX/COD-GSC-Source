@@ -6,6 +6,7 @@
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
 #using scripts\cp_common\spawn_manager;
+
 #namespace spawn_manager;
 
 function spawn_manager_debug() {

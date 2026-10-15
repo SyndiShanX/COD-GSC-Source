@@ -4,6 +4,7 @@
 ***************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace cp_chyron;
 class ccp_chyron: cluielem {
   function function_6b7b6e4(localclientnum, value) {

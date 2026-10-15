@@ -6,6 +6,7 @@
 #using scripts\core_common\bots\bot;
 #using scripts\core_common\bots\bot_animation;
 #using scripts\core_common\callbacks_shared;
+
 #namespace bot_traversals;
 
 function preinit() {

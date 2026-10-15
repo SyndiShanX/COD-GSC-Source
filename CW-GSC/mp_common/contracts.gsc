@@ -17,6 +17,7 @@
 #using scripts\mp_common\gametypes\globallogic_utils;
 #using scripts\mp_common\util;
 #using scripts\weapons\weapon_utils;
+
 #namespace contracts;
 
 function private autoexec __init__system__() {

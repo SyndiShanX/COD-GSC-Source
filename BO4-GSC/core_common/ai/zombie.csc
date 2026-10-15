@@ -7,6 +7,7 @@
 #include scripts\core_common\ai\systems\gib;
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\clientfield_shared;
+
 #namespace zombie;
 
 autoexec main() {

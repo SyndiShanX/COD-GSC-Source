@@ -14,6 +14,7 @@
 #using scripts\killstreaks\killstreaks_shared;
 #using scripts\killstreaks\planemortar_shared;
 #using scripts\mp_common\util;
+
 #namespace planemortar;
 
 function private autoexec __init__system__() {

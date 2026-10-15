@@ -6,6 +6,7 @@
 #include scripts\core_common\array_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;
+
 #namespace vehicle;
 
 autoexec init() {

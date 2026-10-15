@@ -24,6 +24,7 @@
 #using scripts\cp_common\gametypes\save;
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\util;
+
 #namespace kgb_aslt_bunker;
 
 function starting(str_skipto) {

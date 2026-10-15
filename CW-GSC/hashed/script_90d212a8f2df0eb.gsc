@@ -37,6 +37,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\smart_bundle;
 #using scripts\cp_common\util;
+
 #namespace namespace_dfa5ee23;
 
 function start(str_objective) {}

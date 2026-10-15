@@ -8,6 +8,7 @@
 #include scripts\core_common\player\player_stats;
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\system_shared;
+
 #namespace wz_snowball_fx;
 
 autoexec __init__system__() {

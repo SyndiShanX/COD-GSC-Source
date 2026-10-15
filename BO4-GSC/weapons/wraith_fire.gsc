@@ -18,6 +18,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\weapons\weaponobjects;
 #include scripts\weapons\weapons;
+
 #namespace wraith_fire;
 
 autoexec __init__system__() {

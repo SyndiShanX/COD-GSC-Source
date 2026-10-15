@@ -23,6 +23,7 @@
 #include scripts\mp_common\player\player_record;
 #include scripts\wz_common\gametypes\warzone;
 #include scripts\wz_common\wz_contracts;
+
 #namespace wz_progression;
 
 autoexec __init__system__() {

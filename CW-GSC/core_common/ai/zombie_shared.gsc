@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\sound_shared;
+
 #namespace zombie_shared;
 
 function handlenotetrack(note, flagname, customfunction, var1) {

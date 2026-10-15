@@ -9,6 +9,7 @@
 #using scripts\zm_common\zm_loadout;
 #using scripts\zm_common\zm_score;
 #using scripts\zm_common\zm_trial;
+
 #namespace zm_trial_reset_points;
 
 function private autoexec __init__system__() {

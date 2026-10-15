@@ -38,6 +38,7 @@
 #using scripts\cp_common\skipto;
 #using scripts\cp_common\smart_bundle;
 #using scripts\cp_common\util;
+
 #namespace namespace_c6aa31df;
 
 function start(str_objective) {}

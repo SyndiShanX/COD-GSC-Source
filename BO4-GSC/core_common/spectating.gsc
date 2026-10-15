@@ -7,6 +7,7 @@
 #include scripts\core_common\laststand_shared;
 #include scripts\core_common\player\player_shared;
 #include scripts\core_common\system_shared;
+
 #namespace spectating;
 
 autoexec __init__system__() {

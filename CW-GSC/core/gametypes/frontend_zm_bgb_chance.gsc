@@ -4,6 +4,7 @@
 *****************************************************/
 
 #using scripts\core_common\clientfield_shared;
+
 #namespace zm_frontend_zm_bgb_chance;
 
 function zm_frontend_bgb_slots_logic() {

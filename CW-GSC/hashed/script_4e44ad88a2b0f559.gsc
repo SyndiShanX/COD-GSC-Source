@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\bots\bot;
+
 #namespace namespace_87549638;
 
 function preinit() {}

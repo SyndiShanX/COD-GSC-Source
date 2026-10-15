@@ -7,6 +7,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\item_inventory;
 #using scripts\zm_common\aats\ammomods\ammomod_deadwire;
+
 #namespace ammomod_electriccherry;
 
 function init_electriccherry() {

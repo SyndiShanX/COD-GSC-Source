@@ -10,6 +10,7 @@
 #using scripts\core_common\footsteps_shared;
 #using scripts\core_common\math_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_df4fbf0;
 
 function init() {

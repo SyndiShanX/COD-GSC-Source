@@ -9,6 +9,7 @@
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_melee_weapon;
 #include scripts\zm_common\zm_weapons;
+
 #namespace zm_weap_spknifeork;
 
 autoexec __init__system__() {

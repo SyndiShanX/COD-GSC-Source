@@ -4,6 +4,7 @@
 *****************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace sr_message_box;
 class class_51e5626e: cluielem {
   function open(localclientnum) {

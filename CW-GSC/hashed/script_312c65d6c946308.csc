@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\struct;
+
 #namespace namespace_e86ffa8;
 
 function function_e75318e9(var_c1c9cf07) {

@@ -13,6 +13,7 @@
 #include scripts\mp_common\item_drop;
 #include scripts\mp_common\item_inventory;
 #include scripts\mp_common\item_world;
+
 #namespace wz_cash_safe;
 
 autoexec __init__system__() {

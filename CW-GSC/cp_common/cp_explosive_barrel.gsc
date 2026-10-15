@@ -9,6 +9,7 @@
 #using scripts\core_common\values_shared;
 #using scripts\cp_common\hms_util;
 #using scripts\cp_common\util;
+
 #namespace cp_explosive_barrel;
 
 function private autoexec __init__system__() {

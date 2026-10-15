@@ -9,6 +9,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\item_supply_drop;
+
 #namespace wz_ee_motd_plane;
 
 autoexec __init__system__() {

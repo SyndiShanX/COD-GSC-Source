@@ -4,6 +4,7 @@
 ******************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace zm_hint_text;
 class czm_hint_text: cluielem {
   function open(localclientnum) {

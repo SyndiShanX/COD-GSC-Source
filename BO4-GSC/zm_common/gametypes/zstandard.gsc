@@ -53,6 +53,7 @@
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
+
 #namespace zstandard;
 
 event_handler[gametype_init] main(eventstruct) {

@@ -37,6 +37,7 @@
 #include scripts\mp_common\spawnbeacon;
 #include scripts\mp_common\userspawnselection;
 #include scripts\mp_common\util;
+
 #namespace dom;
 
 event_handler[gametype_init] main(eventstruct) {

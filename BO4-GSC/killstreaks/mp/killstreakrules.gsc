@@ -5,6 +5,7 @@
 
 #include scripts\killstreaks\killstreakrules_shared;
 #include scripts\mp_common\gametypes\globallogic_audio;
+
 #namespace killstreakrules;
 
 init() {

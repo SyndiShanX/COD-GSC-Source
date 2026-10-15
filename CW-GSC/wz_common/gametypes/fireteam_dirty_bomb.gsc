@@ -33,6 +33,7 @@
 #using scripts\mp_common\laststand;
 #using scripts\mp_common\player\player_utils;
 #using scripts\wz_common\wz_rat;
+
 #namespace fireteam_dirty_bomb;
 
 function private autoexec __init__system__() {

@@ -5,6 +5,7 @@
 
 #using scripts\core_common\system_shared;
 #using scripts\killstreaks\killstreakrules_shared;
+
 #namespace annihilator_rules;
 
 function private autoexec __init__system__() {

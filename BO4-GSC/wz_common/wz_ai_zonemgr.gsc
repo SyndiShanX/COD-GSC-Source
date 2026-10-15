@@ -15,6 +15,7 @@
 #include scripts\mp_common\item_world;
 #include scripts\wz_common\wz_ai_utils;
 #include scripts\wz_common\wz_ai_zombie;
+
 #namespace wz_ai_zonemgr;
 
 autoexec __init__system__() {

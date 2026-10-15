@@ -14,6 +14,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\zm_common\zm_equipment;
 #using scripts\zm_common\zm_utility;
+
 #namespace ammomod_deadwire;
 
 function init_deadwire() {

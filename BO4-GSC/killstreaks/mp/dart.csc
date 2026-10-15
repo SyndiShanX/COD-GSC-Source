@@ -9,6 +9,7 @@
 #include scripts\core_common\vehicle_shared;
 #include scripts\core_common\visionset_mgr_shared;
 #include scripts\killstreaks\qrdrone;
+
 #namespace dart;
 
 autoexec __init__system__() {

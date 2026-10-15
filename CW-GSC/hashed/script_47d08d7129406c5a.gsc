@@ -12,6 +12,7 @@
 #using scripts\core_common\vehicle_death_shared;
 #using scripts\core_common\vehicle_shared;
 #using scripts\core_common\vehicles\player_vehicle;
+
 #namespace namespace_c8fb02a7;
 
 function function_a01726dd() {

@@ -9,6 +9,7 @@
 #using scripts\core_common\gestures;
 #using scripts\core_common\system_shared;
 #using scripts\weapons\land_mine;
+
 #namespace namespace_f3e83343;
 
 function private autoexec __init__system__() {

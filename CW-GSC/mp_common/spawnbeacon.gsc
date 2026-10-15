@@ -19,6 +19,7 @@
 #using scripts\mp_common\userspawnselection;
 #using scripts\weapons\deployable;
 #using scripts\weapons\weaponobjects;
+
 #namespace spawn_beacon;
 
 function private autoexec __init__system__() {

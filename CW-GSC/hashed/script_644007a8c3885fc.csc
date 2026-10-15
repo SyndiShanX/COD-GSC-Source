@@ -5,6 +5,7 @@
 
 #using scripts\core_common\item_world_fixup;
 #using scripts\core_common\system_shared;
+
 #namespace namespace_1c7b37c6;
 
 function private autoexec __init__system__() {

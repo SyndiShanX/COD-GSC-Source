@@ -4,6 +4,7 @@
 **********************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace scavenger_icon;
 class cscavenger_icon: cluielem {
   function function_65b281a(localclientnum) {

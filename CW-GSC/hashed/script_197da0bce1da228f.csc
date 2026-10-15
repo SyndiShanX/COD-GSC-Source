@@ -8,6 +8,7 @@
 #using scripts\core_common\item_world;
 #using scripts\core_common\system_shared;
 #using scripts\core_common\util_shared;
+
 #namespace namespace_4aff7b6b;
 
 function private autoexec __init__system__() {

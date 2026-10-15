@@ -5,6 +5,7 @@
 
 #include scripts\core_common\util_shared;
 #include scripts\zm\zm_escape_zstandard;
+
 #namespace zm_escape_gamemodes;
 
 event_handler[level_finalizeinit] main(eventstruct) {

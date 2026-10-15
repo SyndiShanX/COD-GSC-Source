@@ -5,6 +5,7 @@
 
 #using scripts\core_common\array_shared;
 #using scripts\core_common\struct;
+
 #namespace zm_game_module_utility;
 
 function move_ring(ring) {

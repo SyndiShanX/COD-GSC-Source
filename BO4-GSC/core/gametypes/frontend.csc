@@ -22,6 +22,7 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\weapon_customization_icon;
 #include scripts\mp_common\devgui;
+
 #namespace frontend;
 
 function_9bfe9255(var_f75a02ea, mode) {

@@ -23,6 +23,7 @@
 #include scripts\weapons\tabun;
 #include scripts\weapons\trophy_system;
 #include scripts\weapons\weaponobjects;
+
 #namespace weapons;
 
 init_shared() {

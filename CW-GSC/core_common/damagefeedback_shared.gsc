@@ -9,6 +9,7 @@
 #using scripts\core_common\weapons_shared;
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\weapons\weapon_utils;
+
 #namespace damagefeedback;
 
 function private autoexec __init__system__() {

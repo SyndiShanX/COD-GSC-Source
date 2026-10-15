@@ -15,6 +15,7 @@
 #using scripts\cp_common\objectives;
 #using scripts\cp_common\objectives_ui;
 #using scripts\cp_common\ui\prompts;
+
 #namespace interactive_map;
 
 function private autoexec __init__system__() {

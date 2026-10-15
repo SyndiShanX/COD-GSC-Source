@@ -5,6 +5,7 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
+
 #namespace zm_trial_weapon_locked;
 
 class czm_trial_weapon_locked: cluielem {

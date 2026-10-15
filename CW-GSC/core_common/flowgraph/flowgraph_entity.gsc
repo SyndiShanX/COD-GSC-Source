@@ -4,6 +4,7 @@
 ******************************************************/
 
 #using scripts\core_common\flowgraph\flowgraph_core;
+
 #namespace flowgraph_entity;
 
 function isentitydefinedfunc(e_entity) {

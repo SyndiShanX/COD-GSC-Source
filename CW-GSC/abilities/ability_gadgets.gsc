@@ -8,6 +8,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\flag_shared;
 #using scripts\core_common\system_shared;
+
 #namespace ability_gadgets;
 
 function private autoexec __init__system__() {

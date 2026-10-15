@@ -9,6 +9,7 @@
 #using scripts\zm_common\zm_maptable;
 #using scripts\zm_common\zm_melee_weapon;
 #using scripts\zm_common\zm_weapons;
+
 #namespace zm_weap_bowie;
 
 function private autoexec __init__system__() {

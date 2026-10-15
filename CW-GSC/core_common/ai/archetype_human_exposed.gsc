@@ -8,6 +8,7 @@
 #using scripts\core_common\ai\archetype_utility;
 #using scripts\core_common\ai\systems\behavior_state_machine;
 #using scripts\core_common\ai\systems\behavior_tree_utility;
+
 #namespace archetype_human_exposed;
 
 function autoexec registerbehaviorscriptfunctions() {

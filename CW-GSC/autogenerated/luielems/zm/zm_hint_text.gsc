@@ -5,6 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\lui_shared;
+
 #namespace zm_hint_text;
 class czm_hint_text: cluielem {
   var var_bf9c8c95;

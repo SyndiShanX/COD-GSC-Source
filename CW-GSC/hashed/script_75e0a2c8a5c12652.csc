@@ -4,6 +4,7 @@
 ***********************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace doa_textelement;
 class class_df106b1: cluielem {
   function open(localclientnum) {

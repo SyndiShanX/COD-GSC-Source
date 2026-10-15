@@ -6,6 +6,7 @@
 #using scripts\abilities\ability_util;
 #using scripts\core_common\struct;
 #using scripts\core_common\util_shared;
+
 #namespace killstreaks;
 
 function switch_to_last_non_killstreak_weapon(immediate, awayfromball, gameended) {

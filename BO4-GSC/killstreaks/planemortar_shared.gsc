@@ -10,6 +10,7 @@
 #include scripts\killstreaks\killstreakrules_shared;
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\killstreaks\killstreaks_util;
+
 #namespace planemortar;
 
 init_shared() {

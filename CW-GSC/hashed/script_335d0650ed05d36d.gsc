@@ -19,6 +19,7 @@
 #using scripts\core_common\system_shared;
 #using scripts\core_common\territory_util;
 #using scripts\core_common\util_shared;
+
 #namespace spawning;
 
 function function_d0149d6b() {

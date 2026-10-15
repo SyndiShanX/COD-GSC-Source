@@ -25,6 +25,7 @@
 #using scripts\killstreaks\killstreaks_util;
 #using scripts\killstreaks\remote_weapons;
 #using scripts\weapons\deployable;
+
 #namespace killstreak_vehicle;
 
 function init_killstreak(bundle) {

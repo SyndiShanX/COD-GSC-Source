@@ -22,6 +22,7 @@
 #include scripts\mp_common\gametypes\spawning;
 #include scripts\mp_common\gametypes\spawnlogic;
 #include scripts\mp_common\util;
+
 #namespace prop_dev;
 
 adddevguicommand(path, var_c669188) {

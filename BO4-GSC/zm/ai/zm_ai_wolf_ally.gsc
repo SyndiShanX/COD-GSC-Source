@@ -21,6 +21,7 @@
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_spawner;
+
 #namespace zm_ai_wolf_ally;
 
 class class_b382833a {

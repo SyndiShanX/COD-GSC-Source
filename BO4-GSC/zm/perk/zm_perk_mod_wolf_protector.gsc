@@ -20,6 +20,7 @@
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
+
 #namespace zm_perk_mod_wolf_protector;
 
 autoexec __init__system__() {

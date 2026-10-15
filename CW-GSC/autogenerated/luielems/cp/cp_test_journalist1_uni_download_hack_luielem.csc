@@ -4,6 +4,7 @@
 ***************************************************************************************/
 
 #using scripts\core_common\lui_shared;
+
 #namespace cp_test_journalist1_uni_download_hack_luielem;
 class class_b201538a: cluielem {
   function open(localclientnum) {

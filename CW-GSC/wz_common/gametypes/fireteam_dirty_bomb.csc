@@ -12,6 +12,7 @@
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\item_world_util;
 #using scripts\core_common\struct;
+
 #namespace fireteam_dirty_bomb;
 
 function event_handler[gametype_init] main(eventstruct) {

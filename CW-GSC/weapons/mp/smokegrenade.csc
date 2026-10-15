@@ -5,6 +5,7 @@
 
 #using scripts\core_common\system_shared;
 #using scripts\weapons\smokegrenade;
+
 #namespace smokegrenade;
 
 function private autoexec __init__system__() {

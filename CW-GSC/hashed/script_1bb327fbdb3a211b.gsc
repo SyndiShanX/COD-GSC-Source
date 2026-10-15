@@ -34,6 +34,7 @@
 #using scripts\zm_common\zm_unitrigger;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_vo;
+
 #namespace namespace_8a08914c;
 
 function init() {

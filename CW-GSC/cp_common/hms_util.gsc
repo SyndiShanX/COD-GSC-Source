@@ -23,6 +23,7 @@
 #using scripts\cp_common\gamedifficulty;
 #using scripts\cp_common\snd;
 #using scripts\cp_common\util;
+
 #namespace hms_util;
 
 function function_2e7c81f6(var_6ec87b1c, var_1bf8e54c, var_67e93cde, var_16081583) {

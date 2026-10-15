@@ -8,6 +8,7 @@
 #include scripts\core_common\sound_shared;
 #include scripts\core_common\struct;
 #include scripts\zm_common\util;
+
 #namespace fx;
 
 print_org(fxcommand, fxid, fxpos, waittime) {
