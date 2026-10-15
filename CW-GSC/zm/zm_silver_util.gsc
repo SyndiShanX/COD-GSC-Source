@@ -93,7 +93,7 @@ function function_b9adea4e() {
 }
 
 function function_3be9e71a() {
-  var_9463599a = spawncollision(#"hash_1d1c56a494aa468e", "collider", self.origin + (0, 0, 50), self.angles);
+  var_9463599a = spawncollision(#"collision_player_sphere_64", "collider", self.origin + (0, 0, 50), self.angles);
   var_9463599a setscale(2);
   return var_9463599a;
 }

@@ -486,7 +486,7 @@ function debugdvars() {
 
     if(noanimscripts && getdvarstring(#"debug_noanimscripts") == "<dev string:x73>") {
       level.animation.defaultexception = &util::void;
-      level.animation notify(#"hash_1c96242baab724dd");
+      level.animation notify(#"new exceptions");
       noanimscripts = 0;
     }
 
@@ -495,7 +495,7 @@ function debugdvars() {
       thread dynamic_ai_spawner();
     } else if(getdvarint(#"debug_dynamic_ai_spawning", 0) == 0 && isDefined(level.spawn_anywhere_active) && level.spawn_anywhere_active == 1) {
       level.spawn_anywhere_active = 0;
-      level notify(#"hash_34e65f3c6ffc6a39");
+      level notify(#"kill dynamic spawning");
     }
 
     debug_ik_on_actors();
@@ -1749,7 +1749,7 @@ function dynamic_ai_spawner() {
   }
 
   getPlayers()[0] thread spawn_guy_placement();
-  level waittill(#"hash_34e65f3c6ffc6a39");
+  level waittill(#"kill dynamic spawning");
 
   if(isDefined(level.dynamic_spawn_hud)) {
     level.dynamic_spawn_hud destroy();
@@ -1788,7 +1788,7 @@ function dynamic_ai_spawner_find_spawners() {
 }
 
 function spawn_guy_placement() {
-  level endon(#"hash_34e65f3c6ffc6a39");
+  level endon(#"kill dynamic spawning");
   assert(isDefined(level.aitypes) && level.aitypes.size > 0, "<dev string:x7e0>");
   level.dynamic_spawn_hud = newdebughudelem(getPlayers()[0]);
   level.dynamic_spawn_hud.alignx = "<dev string:x1fd>";

@@ -800,7 +800,7 @@ function function_8fddd50e() {
   trace_start = temp_origin;
   trace_end = temp_origin + (0, 0, -100);
   var_dfa8eaa5 = playerphysicstrace(trace_start, trace_end);
-  a_str_models = [#"hash_4bee36a9434de051", #"hash_4bee33a9434ddb38", #"hash_4bee34a9434ddceb", #"hash_4bee39a9434de56a"];
+  a_str_models = [#"p9_sur_tombstone_stash_01", #"p9_sur_tombstone_stash_02", #"p9_sur_tombstone_stash_03", #"p9_sur_tombstone_stash_04"];
   stash = util::spawn_model(a_str_models[self.entity_num], var_dfa8eaa5 + (0, 0, 15));
   stash pingable();
   stash clientfield::set("" + #"hash_2897f04212a28873", 1);

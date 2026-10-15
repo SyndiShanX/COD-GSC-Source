@@ -735,7 +735,7 @@ function function_9e39dad3(var_b555f02e) {
       var_d19e0f1f thread scene::play(#"p9_fxanim_zm_gold_essence_trap_machine_02_bundle", "play", var_d19e0f1f);
       var_d19e0f1f.var_78530c1a = util::spawn_model(#"p9_zm_gold_essence_trap_machine_screen_02", var_d19e0f1f.origin, var_d19e0f1f.angles);
       var_d19e0f1f.var_78530c1a linkTo(var_d19e0f1f);
-      var_d19e0f1f.light_ent = util::spawn_model(#"hash_565777717feba8e8", var_d19e0f1f.origin, var_d19e0f1f.angles);
+      var_d19e0f1f.light_ent = util::spawn_model(#"p9_zm_gold_essence_trap_machine_02_light", var_d19e0f1f.origin, var_d19e0f1f.angles);
       var_d19e0f1f.light_ent linkTo(var_d19e0f1f);
       break;
     case 3:
@@ -743,7 +743,7 @@ function function_9e39dad3(var_b555f02e) {
       mdl_mts thread scene::play(#"p9_fxanim_zm_gold_essence_trap_machine_01_bundle", "play", mdl_mts);
       mdl_mts.var_78530c1a = util::spawn_model(#"p9_zm_gold_essence_trap_machine_screen_01", mdl_mts.origin, mdl_mts.angles);
       mdl_mts.var_78530c1a linkTo(mdl_mts);
-      mdl_mts.light_ent = util::spawn_model(#"hash_51c576bf73f00a45", mdl_mts.origin, mdl_mts.angles);
+      mdl_mts.light_ent = util::spawn_model(#"p9_zm_gold_essence_trap_machine_01_light", mdl_mts.origin, mdl_mts.angles);
       mdl_mts.light_ent linkTo(mdl_mts);
       var_535d61f8 = getEnt("retinal_scan", "targetname");
       var_535d61f8 clientfield::set("" + #"hash_33a2a9faed4bf8d9", 1);
@@ -870,7 +870,7 @@ function function_35e13260() {
   exploder::exploder("fxexp_cin_mid_main_spawn_red");
   exploder::exploder("fxexp_cin_mid_main_spawn");
   function_7814d598(#"on");
-  level.var_5a3a7338 = spawncollision(#"hash_1d1c56a494aa468e", "collider", s_portal_pos.origin, s_portal_pos.angles);
+  level.var_5a3a7338 = spawncollision(#"collision_player_sphere_64", "collider", s_portal_pos.origin, s_portal_pos.angles);
   level.var_5a3a7338 setscale(2.5);
   level thread function_ddd13d30(s_portal_pos);
   var_d19e0f1f zm_vo::function_d6f8bbd9(#"hash_3003250228537400");
@@ -936,7 +936,7 @@ function function_74b83d82(b_skipped, var_19e802fa) {
     }
 
     if(!isDefined(level.var_5a3a7338)) {
-      level.var_5a3a7338 = spawncollision(#"hash_1d1c56a494aa468e", "collider", s_portal_pos.origin, s_portal_pos.angles);
+      level.var_5a3a7338 = spawncollision(#"collision_player_sphere_64", "collider", s_portal_pos.origin, s_portal_pos.angles);
       level.var_5a3a7338 setscale(2.5);
     }
 

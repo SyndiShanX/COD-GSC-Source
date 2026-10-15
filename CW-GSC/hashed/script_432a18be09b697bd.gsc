@@ -1050,7 +1050,7 @@ function function_21c1b671(var_a276c861) {
     var_ae85d54b[var_a75f9486] = util::spawn_model("tag_origin", var_764631a2.origin, var_764631a2.angles);
     var_ae85d54b[var_a75f9486] clientfield::set("" + #"hash_18735ccb22cdefb5", 1);
     t_damage = getEnt(var_764631a2.target, "targetname");
-    var_7b423d38 = spawncollision(#"hash_54b848a634771748", "collider", var_ae85d54b[var_a75f9486].origin, var_ae85d54b[var_a75f9486].angles);
+    var_7b423d38 = spawncollision(#"collision_bullet_sphere_32", "collider", var_ae85d54b[var_a75f9486].origin, var_ae85d54b[var_a75f9486].angles);
     var_ae85d54b[var_a75f9486].t_damage = t_damage;
     var_ae85d54b[var_a75f9486].var_7b423d38 = var_7b423d38;
     var_ae85d54b[var_a75f9486] thread function_d54434e2();

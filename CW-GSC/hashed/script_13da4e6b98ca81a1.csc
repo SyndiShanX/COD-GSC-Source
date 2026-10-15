@@ -333,7 +333,7 @@ function function_995e01b6(localclientnum, player) {
 
   rob = player is_friendly(localclientnum) ? #"hash_17daa1d16cd73cd2" : #"hash_17daa0d16cd73b1f";
   postfx = #"hash_2e3ec8882293a18f" + (player is_friendly(localclientnum) ? "_team1" : "_team2");
-  var_1762ffa = util::spawn_model(localclientnum, #"hash_445c4aedaf62d3b9", player.origin, player.angles - (90, 0, 0));
+  var_1762ffa = util::spawn_model(localclientnum, #"p9_codcaster_arrow", player.origin, player.angles - (90, 0, 0));
   teamcolor = get_team_color(localclientnum, player.team, 3);
 
   if(player function_21c0fa55() && !function_4af9029c(localclientnum)) {

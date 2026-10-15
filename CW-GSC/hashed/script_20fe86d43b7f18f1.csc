@@ -22,15 +22,15 @@ function function_54d0d2d1(localclientnum) {
   array::add(self.var_553a42c, zombie);
   zombie = self function_b439ef43(localclientnum, #"c_t9_zmb_hulking_summoner_zombie2", "tag_zom2_LE", "ai_t9_zm_hulkingsum_attached_zombie_02");
   array::add(self.var_553a42c, zombie);
-  zombie = self function_b439ef43(localclientnum, #"hash_56156f3147132aa4", "tag_zom3_LE", "ai_t9_zm_hulkingsum_attached_zombie_03");
+  zombie = self function_b439ef43(localclientnum, #"c_t9_zmb_hulking_summoner_zombie3", "tag_zom3_LE", "ai_t9_zm_hulkingsum_attached_zombie_03");
   array::add(self.var_553a42c, zombie);
   zombie = self function_b439ef43(localclientnum, #"c_t9_zmb_hulking_summoner_zombie1", "tag_zom1_RI", "ai_t9_zm_hulkingsum_attached_zombie_04");
   array::add(self.var_553a42c, zombie);
   zombie = self function_b439ef43(localclientnum, #"c_t9_zmb_hulking_summoner_zombie2", "tag_zom2_RI", "ai_t9_zm_hulkingsum_attached_zombie_05");
   array::add(self.var_553a42c, zombie);
-  zombie = self function_b439ef43(localclientnum, #"hash_56156f3147132aa4", "tag_zom3_RI", "ai_t9_zm_hulkingsum_attached_zombie_06");
+  zombie = self function_b439ef43(localclientnum, #"c_t9_zmb_hulking_summoner_zombie3", "tag_zom3_RI", "ai_t9_zm_hulkingsum_attached_zombie_06");
   array::add(self.var_553a42c, zombie);
-  zombie = self function_b439ef43(localclientnum, #"hash_56156e31471328f1", "tag_zom4_RI", "ai_t9_zm_hulkingsum_attached_zombie_07");
+  zombie = self function_b439ef43(localclientnum, #"c_t9_zmb_hulking_summoner_zombie4", "tag_zom4_RI", "ai_t9_zm_hulkingsum_attached_zombie_07");
   array::add(self.var_553a42c, zombie);
   self thread function_65300f49();
 }

@@ -184,13 +184,13 @@ function function_92c05efb(var_9da78756) {
   if(isDefined(var_9da78756)) {
     switch (var_9da78756.type) {
       case 1:
-        self setModel(#"hash_104dce48b019e348");
+        self setModel(#"p9_zm_gold_screen_flag_02");
         break;
       case 2:
-        self setModel(#"hash_104dd148b019e861");
+        self setModel(#"p9_zm_gold_screen_flag_01");
         break;
       case 3:
-        self setModel(#"hash_104dcf48b019e4fb");
+        self setModel(#"p9_zm_gold_screen_flag_03");
         break;
     }
 

@@ -1072,7 +1072,7 @@ function function_f1216c02(localclientnum, var_8a4ba442, str_rarity) {
           level.var_5caba701 setModel(#"p9_core_frontend_weapon_inspect_legendary");
           break;
         case #"ultra":
-          level.var_5caba701 setModel(#"hash_6e1193289746f2cc");
+          level.var_5caba701 setModel(#"p9_core_frontend_weapon_inspect_ultra");
           break;
         default:
           level.var_5caba701 setModel(#"p9_core_frontend_weapon_inspect_base");

@@ -204,7 +204,7 @@ function function_eb76d765() {
 }
 
 function function_3236ac12() {
-  var_55b751c2 = array(#"p7_rus_light_lamp_oil", #"p9_wz_barrel_vintage_wood_rusty", #"p8_nt4_radio_transceiver_01", #"ach_sandbag_cover_03", #"hash_2444d731ff4d4123");
+  var_55b751c2 = array(#"p7_rus_light_lamp_oil", #"p9_wz_barrel_vintage_wood_rusty", #"p8_nt4_radio_transceiver_01", #"ach_sandbag_cover_03", #"c_t9_sv_gore_payload");
   str_model = array::random(var_55b751c2);
   n_scale = 1;
   v_ang = (0, 0, 0);
@@ -223,7 +223,7 @@ function function_3236ac12() {
 }
 
 function function_44b02002() {
-  var_55b751c2 = array(#"p7_cai_weigh_scale_vintage_blue", #"p8_soc_food_spice_sack_02_full_03", #"p8_food_fruit_apple_crate", #"hash_2444d731ff4d4123");
+  var_55b751c2 = array(#"p7_cai_weigh_scale_vintage_blue", #"p8_soc_food_spice_sack_02_full_03", #"p8_food_fruit_apple_crate", #"c_t9_sv_gore_payload");
   str_model = array::random(var_55b751c2);
   n_scale = 1;
   v_ang = (0, 0, 0);
@@ -238,7 +238,7 @@ function function_44b02002() {
 }
 
 function function_18973f36() {
-  var_55b751c2 = array(#"p8_nt4_soviet_statue", #"p9_rm_dwn_coffee_maker_vintage_espresso", #"p8_life_preserver_ring_old_01", #"p8_nt4_globe_earth", #"hash_2444d731ff4d4123");
+  var_55b751c2 = array(#"p8_nt4_soviet_statue", #"p9_rm_dwn_coffee_maker_vintage_espresso", #"p8_life_preserver_ring_old_01", #"p8_nt4_globe_earth", #"c_t9_sv_gore_payload");
   str_model = array::random(var_55b751c2);
   n_scale = 1;
   v_ang = (0, 0, 0);
@@ -261,7 +261,7 @@ function function_18973f36() {
 }
 
 function function_7ae74cf3() {
-  var_55b751c2 = array(#"p8_aut_toys_christmas_globe_snow", #"p8_wmd_generator", #"p9_rm_stm_ice_hockey_goal_net", #"p8_wz_ep_snowman", #"hash_2444d731ff4d4123");
+  var_55b751c2 = array(#"p8_aut_toys_christmas_globe_snow", #"p8_wmd_generator", #"p9_rm_stm_ice_hockey_goal_net", #"p8_wz_ep_snowman", #"c_t9_sv_gore_payload");
   str_model = array::random(var_55b751c2);
   n_scale = 1;
   v_ang = (0, 0, 0);

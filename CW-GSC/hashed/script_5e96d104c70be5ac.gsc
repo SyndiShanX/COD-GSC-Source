@@ -525,7 +525,7 @@ function on_player_spawned() {
   }
 
   self.pers[#"telemetry"].life = {};
-  self.pers[#"telemetry"].life.var_62c7b24e = function_f8d53445();
+  self.pers[#"telemetry"].life.spawn_time_ms = function_f8d53445();
   self.pers[#"telemetry"].life.spawn_origin = self.origin;
 
   if(isDefined(game.telemetry.life_count)) {

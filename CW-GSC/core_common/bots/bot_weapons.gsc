@@ -604,7 +604,7 @@ function private function_e105d8c8(actionparams) {
 
   if(self.bot.enemyvisible) {
     if(!self function_754cc239(actionparams)) {
-      actionparams.debug[actionparams.debug.size] = #"hash_7ff8e322102305fd";
+      actionparams.debug[actionparams.debug.size] = #"enemy visible";
 
       return undefined;
     }
@@ -650,7 +650,7 @@ function private function_16906804(actionparams) {
 
   if(self.bot.enemyvisible) {
     if(!self function_754cc239(actionparams)) {
-      actionparams.debug[actionparams.debug.size] = #"hash_7ff8e322102305fd";
+      actionparams.debug[actionparams.debug.size] = #"enemy visible";
 
       return undefined;
     }
@@ -690,7 +690,7 @@ function private function_8640f24(actionparams) {
 
   if(self.bot.enemyvisible) {
     if(!self function_754cc239(actionparams)) {
-      actionparams.debug[actionparams.debug.size] = #"hash_7ff8e322102305fd";
+      actionparams.debug[actionparams.debug.size] = #"enemy visible";
 
       return undefined;
     }
@@ -732,7 +732,7 @@ function private function_d3c685b8(actionparams) {
 
   if(self.bot.enemyvisible) {
     if(!self function_754cc239(actionparams)) {
-      actionparams.debug[actionparams.debug.size] = #"hash_7ff8e322102305fd";
+      actionparams.debug[actionparams.debug.size] = #"enemy visible";
 
       return undefined;
     }
@@ -771,7 +771,7 @@ function private function_bd46948a(actionparams) {
   actionparams.debug[actionparams.debug.size] = #"hash_203858dc9db13ce9";
 
   if(self.bot.enemyvisible) {
-    actionparams.debug[actionparams.debug.size] = #"hash_7ff8e322102305fd";
+    actionparams.debug[actionparams.debug.size] = #"enemy visible";
 
     return undefined;
   }
@@ -804,7 +804,7 @@ function private function_22630da6(actionparams) {
   }
 
   if(self.bot.enemyvisible) {
-    actionparams.debug[actionparams.debug.size] = #"hash_7ff8e322102305fd";
+    actionparams.debug[actionparams.debug.size] = #"enemy visible";
 
     return undefined;
   }

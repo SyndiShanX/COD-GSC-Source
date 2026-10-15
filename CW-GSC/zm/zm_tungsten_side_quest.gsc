@@ -867,7 +867,7 @@ function function_2d3b4eae() {
   self endon("77b6c41259ef8052");
   wait 1;
   level.var_85bdbe16.var_4786038c = gettime() + int(10 * 1000);
-  self setModel(#"hash_38bb346aa2def993");
+  self setModel(#"p9_zm_tungsten_screen_cabinet_red");
   self playSound(#"hash_d8b240f851233e4");
   self playLoopSound(#"hash_d3e38e2cdff435c");
   wait 10;
@@ -931,7 +931,7 @@ function function_4b0c47c1() {
         level.var_648bb225++;
 
         if(level.var_648bb225 >= getPlayers().size) {
-          level.var_51d15368 setModel(#"hash_5a97ed63dc83d26f");
+          level.var_51d15368 setModel(#"p9_zm_tungsten_screen_cabinet_green");
           level flag::set(#"hash_7fa3d027663c32a9");
         }
       }

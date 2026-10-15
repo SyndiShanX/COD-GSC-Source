@@ -113,7 +113,7 @@ function private function_d45dd62(localclientnum, b_state, currentplayer) {
 }
 
 function function_9b05e2c0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(self.model === #"hash_1d9e6c13811400c6" || self.model === #"hash_1d9e6b138113ff13") {
+  if(self.model === #"p9_zm_tungsten_phase_cap_01" || self.model === #"p9_zm_tungsten_phase_cap_02") {
     str_rob = #"hash_1a6400b20e8126bf";
   } else {
     str_rob = #"hash_4a9cb80afea6f8cb";

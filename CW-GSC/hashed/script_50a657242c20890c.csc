@@ -23,16 +23,16 @@ function function_114cfee9(localclientnum, oldval, newval, bnewent, binitialsnap
   if(bwasdemojump) {
     level.var_47807d96 = bwasdemojump;
     forcestreamxmodel(#"hash_3bc4ed2f30d82d31" + level.var_47807d96);
-    forcestreamxmodel(#"hash_104dd148b019e861");
-    forcestreamxmodel(#"hash_104dce48b019e348");
-    forcestreamxmodel(#"hash_104dcf48b019e4fb");
+    forcestreamxmodel(#"p9_zm_gold_screen_flag_01");
+    forcestreamxmodel(#"p9_zm_gold_screen_flag_02");
+    forcestreamxmodel(#"p9_zm_gold_screen_flag_03");
     return;
   }
 
   level.var_47807d96 = undefined;
-  stopforcestreamingxmodel(#"hash_104dd148b019e861");
-  stopforcestreamingxmodel(#"hash_104dce48b019e348");
-  stopforcestreamingxmodel(#"hash_104dcf48b019e4fb");
+  stopforcestreamingxmodel(#"p9_zm_gold_screen_flag_01");
+  stopforcestreamingxmodel(#"p9_zm_gold_screen_flag_02");
+  stopforcestreamingxmodel(#"p9_zm_gold_screen_flag_03");
 }
 
 function function_2810997c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

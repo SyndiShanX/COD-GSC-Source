@@ -221,7 +221,7 @@ function function_c439c1a(var_b3ea46c) {
   self clientfield::set("sewer_exit_flashlight_fx", 0);
   wait 0.1;
   self clientfield::set("sewer_exit_flashlight_fx", 1);
-  var_b3ea46c waittill(#"hash_5873836b3d218a02", #"hash_bafe4ef8ff3636a");
+  var_b3ea46c waittill(#"single anim", #"hash_bafe4ef8ff3636a");
   self clientfield::set("sewer_exit_flashlight_fx", 0);
   wait 0.1;
   self clientfield::set("sewer_exit_flashlight_fx", 1);

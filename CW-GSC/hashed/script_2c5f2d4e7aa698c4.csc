@@ -150,7 +150,7 @@ function function_b5557b14(localclientnum, oldval, newval, bnewent, binitialsnap
       str_model = #"p9_sur_machine_computer_screen_off";
       break;
     case 1:
-      str_model = #"hash_3408d07d4023960a";
+      str_model = #"p9_sur_machine_computer_screen_no_inactive";
       break;
     case 2:
       str_model = #"p9_sur_machine_computer_screen_no_trial";
@@ -170,7 +170,7 @@ function function_b5557b14(localclientnum, oldval, newval, bnewent, binitialsnap
 
       break;
     case 6:
-      str_model = #"hash_75170f904e96e8ef";
+      str_model = #"p9_sur_machine_computer_screen_no_audiolog";
       break;
     case 7:
       var_d5fa8477 = self zm_intel::function_2bcfd899(fieldname, #"hash_71c51f24f7f3037d", #"audiolog");

@@ -46,7 +46,7 @@ function function_9ed7339b(struct) {
 
   foreach(point in spawn_points) {
     spawn_struct = point;
-    scriptmodel = content_manager::spawn_script_model(spawn_struct, #"hash_94b3a8b935248d0", 1);
+    scriptmodel = content_manager::spawn_script_model(spawn_struct, #"p9_usa_large_ammo_crate_01_sur", 1);
     scriptmodel clientfield::set("set_compass_icon", 1);
     forward = anglesToForward(scriptmodel.angles);
     forward = vectorNormalize(forward);

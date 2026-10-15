@@ -184,7 +184,7 @@ function function_d7f67c90() {
   var_c89beff = getEnt("clip_tunnel_end", "targetname");
   var_c89beff setinvisibletoall();
   var_cc61b071 = struct::get("door_town_square");
-  level.var_c79d163e = util::spawn_model(#"hash_33df2ba078538a8c", var_cc61b071.origin, var_cc61b071.angles);
+  level.var_c79d163e = util::spawn_model(#"p9_sur_door_metal_large", var_cc61b071.origin, var_cc61b071.angles);
   var_57b44c1c = struct::get(#"hash_1c10f2ed01e2d5a");
   level.var_5850fb1d = util::spawn_model(var_57b44c1c.model, var_57b44c1c.origin, var_57b44c1c.angles);
   var_7dd14c74 = getEnt("clip_device_table", "targetname");
@@ -422,7 +422,7 @@ function function_5a2421aa(b_skipped) {
 function function_9547f28c() {
   s_button = struct::get("start_mq_button");
   s_button.var_c9b734f5 = util::spawn_model(#"p9_zm_tungsten_hulk_lock", s_button.origin, s_button.angles);
-  s_button.var_c36e3eb9 = util::spawn_model(#"hash_51b155104fbf49b4", s_button.origin, s_button.angles);
+  s_button.var_c36e3eb9 = util::spawn_model(#"sr_ee_hulk_lock", s_button.origin, s_button.angles);
   s_button.var_c9b734f5 setscale(s_button.modelscale);
   s_button.var_c36e3eb9 setscale(s_button.modelscale);
   s_button.var_c9b734f5 hide();
@@ -3994,7 +3994,7 @@ function function_be1b951c() {
   a_models = array::get_all_closest(s_door.origin, models, undefined, undefined, 1000);
 
   foreach(model in a_models) {
-    if(model.model === #"hash_94b3a8b935248d0") {
+    if(model.model === #"p9_usa_large_ammo_crate_01_sur") {
       self thread function_ed93e125(model);
     }
   }

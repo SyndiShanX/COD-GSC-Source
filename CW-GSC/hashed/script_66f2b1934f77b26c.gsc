@@ -391,7 +391,7 @@ function function_869127f6() {
       level thread function_338329dd();
     }
 
-    level.var_7a5b491e = util::spawn_model(#"hash_35eb10c0021b1cc0", var_c21a31f7.origin, var_c21a31f7.angles);
+    level.var_7a5b491e = util::spawn_model(#"p9_zm_gold_magic_box_bunny", var_c21a31f7.origin, var_c21a31f7.angles);
     playSoundAtPosition(#"evt_bunny_spawn", var_c21a31f7.origin);
     level.var_7a5b491e thread scene::play(#"hash_68710fac299c41dd", "dance", level.var_7a5b491e);
     level.var_7a5b491e clientfield::set("" + #"hash_7b253f73f6f094c6", 1);
@@ -852,17 +852,17 @@ function function_db5c2d6a(var_8b93416f, var_ea14a37) {
 
   self flag::set("jump_pad_quest_start");
   self.var_37db5cf = 1;
-  self.var_63c8edf4 setModel(#"hash_229ea252394102ef");
-  self.var_43032f5e setModel(#"hash_612ce9acf731e7c2");
+  self.var_63c8edf4 setModel(#"p9_zm_gold_jumppads_machine_main_screen_green");
+  self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_main_number_green_03");
   self.var_63c8edf4 playSound(#"evt_jumppad_countdown_3");
   wait 1;
-  self.var_43032f5e setModel(#"hash_612ceaacf731e975");
+  self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_main_number_green_02");
   self.var_63c8edf4 playSound(#"evt_jumppad_countdown_2");
   wait 1;
-  self.var_43032f5e setModel(#"hash_612ce7acf731e45c");
+  self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_main_number_green_01");
   self.var_63c8edf4 playSound(#"evt_jumppad_countdown_1");
   wait 1;
-  self.var_43032f5e setModel(#"hash_cbac724d17f7914");
+  self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_main_number_green_arrow");
   self.var_63c8edf4 playSound(#"hash_635ee326c0c9c783");
   var_bc6423c3 = self.var_43032f5e.angles;
   bsuccess = 1;
@@ -873,17 +873,17 @@ function function_db5c2d6a(var_8b93416f, var_ea14a37) {
 
     switch (dir) {
       case 0:
-        self.var_63c8edf4 setModel(#"hash_49b66d6eecdd601d");
+        self.var_63c8edf4 setModel(#"p9_zm_gold_jumppads_machine_main_screen_green_up");
         break;
       case 90:
-        self.var_63c8edf4 setModel(#"hash_66f6d645c0e69071");
+        self.var_63c8edf4 setModel(#"p9_zm_gold_jumppads_machine_main_screen_green_left");
         break;
       case 180:
-        self.var_63c8edf4 setModel(#"hash_5c1474042a8ce47c");
+        self.var_63c8edf4 setModel(#"p9_zm_gold_jumppads_machine_main_screen_green_down");
         break;
       case 270:
       default:
-        self.var_63c8edf4 setModel(#"hash_f057eb0c68cb8d2");
+        self.var_63c8edf4 setModel(#"p9_zm_gold_jumppads_machine_main_screen_green_right");
         break;
     }
 
@@ -907,8 +907,8 @@ function function_db5c2d6a(var_8b93416f, var_ea14a37) {
 
   self flag::clear("jump_pad_quest_start");
   self.var_43032f5e.angles = var_bc6423c3;
-  self.var_43032f5e setModel(#"hash_cbac724d17f7914");
-  self.var_63c8edf4 setModel(#"hash_229ea252394102ef");
+  self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_main_number_green_arrow");
+  self.var_63c8edf4 setModel(#"p9_zm_gold_jumppads_machine_main_screen_green");
   self notify(#"hash_342385e92a15b40", {
     #success: bsuccess
   });

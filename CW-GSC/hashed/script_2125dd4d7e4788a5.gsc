@@ -774,7 +774,7 @@ function function_457be561(v_org, v_ang) {
   if(is_true(self.var_2e5efdc7)) {
     self scene::play(#"p9_fxanim_sv_canister_pod_bundle", self);
     self scene::stop();
-    self setModel(#"hash_6a3359ce6cad3369");
+    self setModel(#"p9_fxanim_sv_canister_empty_mod");
     self rotateYaw(-90, 0.05);
   }
 

@@ -1003,15 +1003,15 @@ function function_6bed14f6(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_62492e2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   switch (bwasdemojump) {
     case 1:
-      forcestreamxmodel(#"hash_18ea421c8e112587");
+      forcestreamxmodel(#"p9_zm_platinum_personal_computer_screen_03");
       break;
     case 2:
-      forcestreamxmodel(#"hash_18ea3f1c8e11206e");
-      stopforcestreamingxmodel(#"hash_18ea421c8e112587");
+      forcestreamxmodel(#"p9_zm_platinum_personal_computer_screen_04");
+      stopforcestreamingxmodel(#"p9_zm_platinum_personal_computer_screen_03");
       break;
     case 3:
       forcestreamxmodel(#"p9_zm_platinum_intel_documents_r_05");
-      stopforcestreamingxmodel(#"hash_18ea3f1c8e11206e");
+      stopforcestreamingxmodel(#"p9_zm_platinum_personal_computer_screen_04");
       break;
     case 4:
       forcestreamxmodel(#"p9_zm_platinum_intel_documents_r_06");
@@ -1026,15 +1026,15 @@ function function_62492e2(localclientnum, oldval, newval, bnewent, binitialsnap,
       stopforcestreamingxmodel(#"p9_zm_platinum_intel_documents_r_07");
       break;
     case 7:
-      forcestreamxmodel(#"hash_18ea3d1c8e111d08");
-      forcestreamxmodel(#"hash_18ea3e1c8e111ebb");
+      forcestreamxmodel(#"p9_zm_platinum_personal_computer_screen_06");
+      forcestreamxmodel(#"p9_zm_platinum_personal_computer_screen_07");
       stopforcestreamingxmodel(#"p9_zm_platinum_personal_computer_screen_05");
       break;
     case 0:
-      stopforcestreamingxmodel(#"hash_18ea3d1c8e111d08");
-      stopforcestreamingxmodel(#"hash_18ea3e1c8e111ebb");
-      stopforcestreamingxmodel(#"hash_18ea421c8e112587");
-      stopforcestreamingxmodel(#"hash_18ea3f1c8e11206e");
+      stopforcestreamingxmodel(#"p9_zm_platinum_personal_computer_screen_06");
+      stopforcestreamingxmodel(#"p9_zm_platinum_personal_computer_screen_07");
+      stopforcestreamingxmodel(#"p9_zm_platinum_personal_computer_screen_03");
+      stopforcestreamingxmodel(#"p9_zm_platinum_personal_computer_screen_04");
       stopforcestreamingxmodel(#"p9_zm_platinum_personal_computer_screen_05");
       stopforcestreamingxmodel(#"p9_zm_platinum_intel_documents_r_05");
       stopforcestreamingxmodel(#"p9_zm_platinum_intel_documents_r_06");

@@ -42,7 +42,7 @@ function preinit() {
 function postinit() {}
 
 function function_a380fe5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(isinarray(array(#"p9_sur_fow_path_capsule_forest_cap", #"hash_57b5acde2128e4b4", #"p9_sur_fow_path_capsule_golova_cap", #"p9_sur_fow_path_capsule_sanatorium_cap", #"hash_7b74b9b952f922d3", #"hash_181d690a4afd8b13", #"p9_sur_fow_path_capsule_sanatorium_s4_mq_cap", #"p9_sur_fow_path_capsule_dunes_cap", #"p9_sur_fow_path_capsule_black_sea_cap"), hash(self.model))) {
+  if(isinarray(array(#"p9_sur_fow_path_capsule_forest_cap", #"p9_sur_fow_path_capsule_skilodge_cap", #"p9_sur_fow_path_capsule_golova_cap", #"p9_sur_fow_path_capsule_sanatorium_cap", #"p9_sur_fow_path_capsule_duga_cap", #"p9_sur_fow_path_capsule_zoo_02_cap", #"p9_sur_fow_path_capsule_sanatorium_s4_mq_cap", #"p9_sur_fow_path_capsule_dunes_cap", #"p9_sur_fow_path_capsule_black_sea_cap"), hash(self.model))) {
     str_rob = #"hash_515a30ee41d5cb3c";
   } else {
     str_rob = #"hash_4a9cb80afea6f8cb";

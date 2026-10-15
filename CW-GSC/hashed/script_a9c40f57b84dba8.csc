@@ -42,7 +42,7 @@ function preinit() {
   }
 
   zm_ping::function_5ae4a10c(#"sr_ee_hulk_wild_thing", "sr_ee_hulk_wild_thing", undefined, undefined, #"ui_icon_general_feedback_cymbalmonkey");
-  zm_ping::function_5ae4a10c(#"hash_7b7cbb4eb2fd70e3", "sr_ee_hulk_interest", #"hash_c614bf6db74b718", undefined, #"uie_ui_icon_equipment_widget_essence_trap");
+  zm_ping::function_5ae4a10c(#"p9_zm_essence_trap", "sr_ee_hulk_interest", #"hash_c614bf6db74b718", undefined, #"uie_ui_icon_equipment_widget_essence_trap");
   zm_ping::function_5ae4a10c(#"p9_fxanim_zm_gold_essence_trap_mod", "sr_ee_hulk_interest_fake", #"hash_c614bf6db74b718", undefined, #"uie_ui_icon_equipment_widget_essence_trap");
 }
 
@@ -52,7 +52,7 @@ function function_a233f763(localclientnum, oldval, newval, bnewent, binitialsnap
       case #"sr_ee_hulk_wild_thing":
         self.targetname = "sr_ee_hulk_wild_thing";
         break;
-      case #"hash_7b7cbb4eb2fd70e3":
+      case #"p9_zm_essence_trap":
         self.targetname = "sr_ee_hulk_interest";
         break;
       case #"p9_fxanim_zm_gold_essence_trap_mod":
@@ -65,9 +65,9 @@ function function_a233f763(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_a913a80c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   switch (bwastimejump) {
     case 1:
-      forcestreamxmodel(#"hash_413e6d8ec7666d41");
-      forcestreamxmodel(#"hash_413e6b8ec76669db");
-      forcestreamxmodel(#"hash_413e6c8ec7666b8e");
+      forcestreamxmodel(#"p9_sur_film_projector_image_03");
+      forcestreamxmodel(#"p9_sur_film_projector_image_01");
+      forcestreamxmodel(#"p9_sur_film_projector_image_02");
       function_3385d776(#"hash_31b9905217e0bfe3");
       break;
     case 2:
@@ -389,7 +389,7 @@ function function_54098fb4(localclientnum, oldval, newval, bnewent, binitialsnap
         }
 
         break;
-      case #"hash_bc01edf8191a2b1":
+      case #"p9_sur_fow_path_capsule_forest_battery_quadrant":
         self renderoverridebundle::function_f4eab437(fieldname, 1, #"hash_1a1e90e909359ce0");
         break;
       case #"hash_7f6a9e056951dafb":

@@ -429,7 +429,7 @@ function set_compass_icon(localclientnum, oldval, newval, bnewent, binitialsnap,
       case #"p8_wz_ep_fishing_pole":
         str_objective = #"hash_249d888e2d3c6aed";
         break;
-      case #"hash_94b3a8b935248d0":
+      case #"p9_usa_large_ammo_crate_01_sur":
         str_objective = #"hash_669c000075d7222";
         break;
       case #"p9_fxanim_zm_gold_control_point_collector_mod":
@@ -438,7 +438,7 @@ function set_compass_icon(localclientnum, oldval, newval, bnewent, binitialsnap,
       case #"p9_fxanim_zm_gold_control_point_crystal_mod":
         str_objective = #"hash_73705646f7ccc79c";
         break;
-      case #"hash_3d3aeedc296addd":
+      case #"p9_zm_gold_moskva_bridge_console_01":
         str_objective = #"hash_5ae3492cc261d9c9";
         break;
       case #"p9_zm_gold_teleporter_b":

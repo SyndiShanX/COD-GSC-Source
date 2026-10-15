@@ -26,10 +26,10 @@ function private preinit() {
   function_5ae4a10c(5, "power_double_door", #"hash_59bd96ed40a5975e", undefined, #"ui_icon_minimap_powerdoors");
   function_5ae4a10c(6, "intel", #"hash_1f02d183075803d9", #"zmpingitemintel", undefined, 1);
   function_5ae4a10c(12, "barricade", #"hash_6bd049dac126e3d7", undefined, #"uie_ui_hud_barricade_ping", 1, 98);
-  function_5ae4a10c(array(#"p9_usa_large_ammo_crate_01", #"hash_94b3a8b935248d0"), "ammocache", #"hash_6d999ac22537eeb7", #"hash_e98c059b131f86c", #"ui_icon_minimap_ammocache");
+  function_5ae4a10c(array(#"p9_usa_large_ammo_crate_01", #"p9_usa_large_ammo_crate_01_sur"), "ammocache", #"hash_6d999ac22537eeb7", #"hash_e98c059b131f86c", #"ui_icon_minimap_ammocache");
   function_5ae4a10c(array(#"p9_fxanim_zm_gp_dac_xmodel", #"p9_fxanim_zm_gp_dac_low_xmodel"), "pc_terminal", #"hash_393d988e963356ec", #"hash_2e657370192514b5", #"hash_5c22f831283cbe0d", 0, -20);
   function_5ae4a10c(array(#"p9_fxanim_zm_gp_wunderfizz_on_xmodel", #"p9_fxanim_zm_gp_wunderfizz_on_low_xmodel"), "fizz_machine", #"hash_a8b446447be6cb5", #"hash_307d328d2ca73346", #"ui_icon_minimap_wunderfizz");
-  function_5ae4a10c(array(#"p9_fxanim_zm_gp_crafting_xmodel", #"hash_15f88361c2fa15c"), "crafting_table", #"hash_27a696fe263f18f5", #"hash_4990f9c23cc9c32a", #"ui_icon_minimap_craftingtable");
+  function_5ae4a10c(array(#"p9_fxanim_zm_gp_crafting_xmodel", #"p9_fxanim_zm_gp_crafting_low_xmodel"), "crafting_table", #"hash_27a696fe263f18f5", #"hash_4990f9c23cc9c32a", #"ui_icon_minimap_craftingtable");
   function_5ae4a10c(#"p9_fxanim_zm_gp_pap_xmodel", "pack_a_punch", #"hash_632b8df2d8b1e18b", #"hash_5e9f5daa234fe730", #"ui_icon_minimap_weaponupgrade");
   function_5ae4a10c(array(#"p9_fxanim_zm_gp_armor_station_xmodel", #"p9_fxanim_zm_gp_armor_station_low_xmodel"), "armor_station", #"hash_9c7074e60cba94e", #"hash_51d31303312306d", #"ui_icon_minimap_armorstation", 1, -20);
   function_5ae4a10c("p9_fxanim_zm_gp_chest_01_sml_low_xmodel", "explore_chest_small", #"hash_526ea917d293160b", #"hash_69eda3d15a6035ab", #"hash_4c2e7f9c9b051d54");
@@ -41,7 +41,7 @@ function private preinit() {
   function_5ae4a10c(#"p9_sur_essence_container", "large_essence", #"hash_1f00efce440309fb", #"zmpingitemaetherium", #"ui_icon_general_feedback_large_essence_cannister");
   function_5ae4a10c(undefined, "magicbox", #"hash_3f01b77865c1572d", #"hash_4542da19e0c104c", #"ui_icon_minimap_mysterybox");
   function_5ae4a10c(undefined, "wallbuy", &function_d1852e75, #"hash_5fc866a41152b3c", #"ui_icon_minimap_wallbuys");
-  function_5ae4a10c(#"hash_615f17c2d8b69f96", "exfil_radio", undefined, #"hash_4e2a478df2a81e8c");
+  function_5ae4a10c(#"p9_zm_radio_pack_01b_surface", "exfil_radio", undefined, #"hash_4e2a478df2a81e8c");
   function_5ae4a10c(array(#"p9_sur_elemental_pop", #"p9_sur_elemental_pop_off"), "perk_elemental_pop", #"hash_6d71fbf718d4b5e1", #"hash_5605b2abdf38cd4", #"ui_icon_minimap_elementalpop", 1, -20);
   function_5ae4a10c(array(#"p9_sur_machine_juggernog", #"p9_sur_machine_juggernog_off"), "perk_juggernog", #"hash_90f7c3bd3c217c4", #"hash_22f552b15fc207f8", #"ui_icon_minimap_juggernog", 1, -20);
   function_5ae4a10c(array(#"p9_sur_machine_quick_revive", #"p9_sur_machine_quick_revive_off"), "perk_quick_revive", #"hash_634c9bd3e54d280a", #"hash_1aadb875c07be53a", #"ui_icon_minimap_quickrevive", 1, -20);
@@ -49,7 +49,7 @@ function private preinit() {
   function_5ae4a10c(array(#"p9_sur_machine_staminup", #"p9_sur_machine_staminup_off"), "perk_staminup", #"hash_199b94b5cb963ae5", #"hash_35f32b2271ef6ed7", #"ui_icon_minimap_staminup", 1, -20);
   function_5ae4a10c(array(#"p9_sur_vending_ads", #"p9_sur_vending_ads_off"), "perk_deadshot", #"hash_7c5e12190fbe93c0", #"hash_462ae51bbab3172a", #"ui_icon_minimap_deadshotdaiquiri", 1, -20);
   function_5ae4a10c(array(#"p9_sur_machine_tombstone", #"p9_sur_machine_tombstone_off"), "perk_tombstone", #"hash_10f37b608ff27f9b", #"hash_13b63b8343516b9e", #"ui_icon_minimap_toombstonesoda", 1, -20);
-  function_5ae4a10c(array(#"hash_4bee36a9434de051", #"hash_4bee33a9434ddb38", #"hash_4bee34a9434ddceb", #"hash_4bee39a9434de56a"), "tombstone_stash", #"hash_3b1c85278c23c698", undefined, #"ui_icon_general_feedback_stash");
+  function_5ae4a10c(array(#"p9_sur_tombstone_stash_01", #"p9_sur_tombstone_stash_02", #"p9_sur_tombstone_stash_03", #"p9_sur_tombstone_stash_04"), "tombstone_stash", #"hash_3b1c85278c23c698", undefined, #"ui_icon_general_feedback_stash");
   function_5ae4a10c(array(#"p9_sur_machine_mule_kick", #"hash_47b744b5982bc2a4", #"p9_fxanim_zm_gp_mule_kick_mod"), "perk_mule_kick", #"hash_69c36ca7036b925d", #"hash_68784da81f2a99f7", #"ui_icon_minimap_mulekick", 1, -20);
   function_5ae4a10c(array(#"p9_sur_machine_death_perception"), "perk_death_perception", #"hash_4c319044777c42e5", #"hash_4df32dcf844b0659", #"ui_icon_minimap_deathperception", 1, -20);
   function_5ae4a10c(#"p7_zm_power_up_nuke", "powerup_nuke", #"zombie/powerup_nuke", #"hash_db9d5c95dfea201", #"ui_icon_zombie_powerup_nuke_large");
@@ -73,7 +73,7 @@ function private preinit() {
   function_5ae4a10c(array(#"p9_sur_crystal_medium_01_orange", #"p9_sur_crystal_medium_02_orange"), "world_event_monster_house", #"hash_2ada18a5a09b2150", #"hash_2e354b187fdbfbbc", #"hash_237f8ac6e3096959");
   function_5ae4a10c(#"p9_fxanim_zm_gp_chest_01_lrg_black_xmodel", "world_event_black_chest", #"hash_3704fa0bf24407c2", #"hash_5b20033c44a4321f", #"hash_102649046bcfedd1");
   function_5ae4a10c(#"wpn_t9_sr_swarm_hulking_summoner", "world_event_black_chest_swarm", #"hash_1af19c8f09575317", #"hash_76483333c5c6984", #"hash_16fe2add4180ac0", 0, -100);
-  function_5ae4a10c(#"hash_698f8c105a349a42", "platinum_klaus_hand", #"hash_4e85ae5f5e2418f4", #"hash_5b20033c44a4321f", #"hash_605a95c3bb95cae8", 0, 0);
+  function_5ae4a10c(#"c_t9_zmb_dlc4_dummy_protector_hand", "platinum_klaus_hand", #"hash_4e85ae5f5e2418f4", #"hash_5b20033c44a4321f", #"hash_605a95c3bb95cae8", 0, 0);
   function_5ae4a10c(#"p9_fxanim_zm_gp_wunderfizz_off_low_xmodel", "fizz_machine", #"hash_a8b446447be6cb5", #"hash_307d328d2ca73346", #"ui_icon_minimap_wunderfizz");
   function_5ae4a10c(#"p9_fxanim_zm_gp_wunderfizz_off_xmodel", "fizz_machine", #"hash_a8b446447be6cb5", #"hash_307d328d2ca73346", #"ui_icon_minimap_wunderfizz");
   function_5ae4a10c(#"p8_wz_ep_fishing_pole", "fishing", #"hash_37f2a930f03bac8c", #"hash_5b20033c44a4321f", #"ui_icon_minimap_fishing_pole", 0, -32);

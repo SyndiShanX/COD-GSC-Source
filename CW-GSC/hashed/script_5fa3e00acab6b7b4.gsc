@@ -349,7 +349,7 @@ function on_player_spawned() {
   }
 
   self.pers[#"telemetry"].life = {};
-  self.pers[#"telemetry"].life.var_62c7b24e = function_f8d53445();
+  self.pers[#"telemetry"].life.spawn_time_ms = function_f8d53445();
   self.pers[#"telemetry"].life.spawn_origin = self.origin;
   self.pers[#"telemetry"].life.var_cc189f4f = isDefined(self.pers[#"score"]) ? self.pers[#"score"] : 0;
   self.pers[#"telemetry"].life.var_a04d3223 = isDefined(self.pers[#"assists"]) ? self.pers[#"assists"] : 0;
@@ -448,16 +448,16 @@ function function_607901f4(data) {
   deathdata = {};
   deathdata.died = died;
   deathdata.var_161a9fc9 = isDefined(data.var_d18366fd) ? data.var_d18366fd : 0;
-  deathdata.var_62c7b24e = 0;
+  deathdata.spawn_time_ms = 0;
   deathdata.var_75cd3884 = 0;
   deathdata.var_39872854 = 0;
 
-  if(isDefined(data.victim.pers[#"telemetry"].life.var_62c7b24e)) {
-    deathdata.var_62c7b24e = data.victim.pers[#"telemetry"].life.var_62c7b24e;
+  if(isDefined(data.victim.pers[#"telemetry"].life.spawn_time_ms)) {
+    deathdata.spawn_time_ms = data.victim.pers[#"telemetry"].life.spawn_time_ms;
 
     if(isDefined(data.victim.pers[#"telemetry"].life.var_75cd3884)) {
       deathdata.var_75cd3884 = data.victim.pers[#"telemetry"].life.var_75cd3884;
-      deathdata.var_39872854 = deathdata.var_75cd3884 - deathdata.var_62c7b24e;
+      deathdata.var_39872854 = deathdata.var_75cd3884 - deathdata.spawn_time_ms;
     }
   }
 

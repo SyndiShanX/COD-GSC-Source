@@ -353,7 +353,7 @@ function friendly_fire_callback(entity, damage, attacker, method, weapon, einfli
 }
 
 function friendly_fire_think(entity) {
-  level endon(#"hash_fef7dac2cb38596");
+  level endon(#"mission failed");
   entity endon(#"no_friendly_fire");
 
   if(!isDefined(entity)) {
@@ -559,7 +559,7 @@ function turnoff() {
 
 function missionfail() {
   self endon(#"death");
-  level endon(#"hash_2a5bc3aedd245590");
+  level endon(#"mine death");
   self.participation = 0;
   self.lives = 0;
 
@@ -573,14 +573,14 @@ function missionfail() {
 
 function function_708f45ad() {
   self endon(#"death");
-  level endon(#"hash_2a5bc3aedd245590");
+  level endon(#"mine death");
   self.participation = 0;
   wait 0.05;
   self.participation = 0;
 }
 
 function notifydamage(entity) {
-  level endon(#"hash_fef7dac2cb38596");
+  level endon(#"mission failed");
   entity endon(#"death");
 
   for(;;) {
@@ -589,14 +589,14 @@ function notifydamage(entity) {
 }
 
 function notifydamagenotdone(entity) {
-  level endon(#"hash_fef7dac2cb38596");
+  level endon(#"mission failed");
   waitresult = entity waittill(#"damage_notdone");
   waitresult.amount = -1;
   entity notify(#"friendlyfire_notify", waitresult);
 }
 
 function notifydeath(entity) {
-  level endon(#"hash_fef7dac2cb38596");
+  level endon(#"mission failed");
   waitresult = entity waittill(#"death");
   waitresult.amount = -1;
   entity notify(#"friendlyfire_notify", waitresult);

@@ -286,7 +286,7 @@ function function_3fead2ea() {
   level endon(#"end_game");
   level flag::wait_till("power_on");
   level clientfield::set("" + #"hash_1012bcebf9b9294", 1);
-  self.mdl_screen = util::spawn_model(#"hash_18ea421c8e112587", self.origin, self.angles);
+  self.mdl_screen = util::spawn_model(#"p9_zm_platinum_personal_computer_screen_03", self.origin, self.angles);
   self.mdl_screen playSound(#"zmb_mq_stp5_screen_on");
   self.mdl_screen playLoopSound(#"zmb_mq_stp5_screen_lp_alarm");
 }
@@ -2296,7 +2296,7 @@ function function_16053431() {
   level scene::play(#"p9_fxanim_zm_platinum_card_reader_bundle");
   level flag::set(#"hash_220ba0e612fb8706");
   level clientfield::set("" + #"hash_1012bcebf9b9294", 2);
-  e_computer.mdl_screen setModel(#"hash_18ea3f1c8e11206e");
+  e_computer.mdl_screen setModel(#"p9_zm_platinum_personal_computer_screen_04");
   e_computer.mdl_screen playSound(#"zmb_mq_stp5_selection_right");
   e_computer.mdl_screen playLoopSound(#"zmb_mq_stp5_screen_lp");
   var_f0d459d8 = ["p9_zm_platinum_intel_documents_r_05", "p9_zm_platinum_intel_documents_r_06", "p9_zm_platinum_intel_documents_r_07", "p9_zm_platinum_personal_computer_screen_05"];
@@ -3057,15 +3057,15 @@ function function_7e855f1a() {
 
 function function_d78c944b() {
   if(!isDefined(self.mdl_screen)) {
-    self.mdl_screen = util::spawn_model(#"hash_18ea3e1c8e111ebb", self.origin, self.angles);
+    self.mdl_screen = util::spawn_model(#"p9_zm_platinum_personal_computer_screen_07", self.origin, self.angles);
   } else {
-    self.mdl_screen setModel(#"hash_18ea3e1c8e111ebb");
+    self.mdl_screen setModel(#"p9_zm_platinum_personal_computer_screen_07");
     self.mdl_screen playSound(#"zmb_mq_stp5_selection_wrong");
     self.mdl_screen playLoopSound(#"zmb_mq_stp5_screen_lp_alarm");
   }
 
   self zm_unitrigger::function_fac87205(#"hash_58ebb0f6cc10122e");
-  self.mdl_screen setModel(#"hash_18ea3d1c8e111d08");
+  self.mdl_screen setModel(#"p9_zm_platinum_personal_computer_screen_06");
   self.mdl_screen playSound(#"zmb_mq_stp5_selection_right");
   self.mdl_screen playLoopSound(#"zmb_mq_stp5_screen_lp");
   level notify(#"hash_32cdc77246645d55");
@@ -3073,9 +3073,9 @@ function function_d78c944b() {
 
 function function_1be639cd() {
   if(!isDefined(self.mdl_screen)) {
-    self.mdl_screen = util::spawn_model(#"hash_18ea3d1c8e111d08", self.origin, self.angles);
+    self.mdl_screen = util::spawn_model(#"p9_zm_platinum_personal_computer_screen_06", self.origin, self.angles);
   } else {
-    self.mdl_screen setModel(#"hash_18ea3d1c8e111d08");
+    self.mdl_screen setModel(#"p9_zm_platinum_personal_computer_screen_06");
   }
 
   zm_unitrigger::unregister_unitrigger(self.s_unitrigger);

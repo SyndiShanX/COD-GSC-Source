@@ -336,7 +336,7 @@ function function_da48420c() {
   hidemiscmodels("power_arrow");
   level.var_b2371398 = getEnt("zm_re_com", "script_noteworthy");
   level.var_59b6e9a5 setModel(#"p9_zm_ndu_computer_screen_medical_password");
-  level.var_6c682532 = util::spawn_model(#"hash_2a7c96f5ca0f16a4", level.var_b2371398.origin, level.var_b2371398.angles);
+  level.var_6c682532 = util::spawn_model(#"p9_zm_ndu_computer_screen_medical_horizontal_01", level.var_b2371398.origin, level.var_b2371398.angles);
   level.var_59b6e9a5 thread function_c0a7e4cc();
   level.var_6c682532 thread function_c0a7e4cc();
   level.var_b2371398 playLoopSound(#"hash_1849514e59b9f8f5");

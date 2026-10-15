@@ -372,10 +372,10 @@ function getrankfromname(name) {
     case #"cpl.":
       self.airank = "corporal";
       break;
-    case #"hash_1b74eb18c9f1846d":
+    case #"sgt.":
       self.airank = "sergeant";
       break;
-    case #"hash_12acac191dfe13b9":
+    case #"lt.":
       self.airank = "lieutenant";
       break;
     case #"cpt.":

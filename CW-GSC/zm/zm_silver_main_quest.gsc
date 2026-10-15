@@ -553,7 +553,7 @@ function init_purifier() {
   }
 
   level.var_7c6e836b = util::spawn_model(#"p9_zm_ndu_computer_screen_medical_a", level.var_b2371398.origin, level.var_b2371398.angles);
-  level.var_3a734155 = util::spawn_model(#"hash_2a7c99f5ca0f1bbd", level.var_b2371398.origin, level.var_b2371398.angles);
+  level.var_3a734155 = util::spawn_model(#"p9_zm_ndu_computer_screen_medical_horizontal_02", level.var_b2371398.origin, level.var_b2371398.angles);
   level.var_7c6e836b playSound(#"hash_98bcba1225bfa3");
   wait 1;
 
@@ -562,7 +562,7 @@ function init_purifier() {
   }
 
   level.var_fc67035a = util::spawn_model(#"p9_zm_ndu_computer_screen_medical_h", level.var_b2371398.origin, level.var_b2371398.angles);
-  level.var_50356cd9 = util::spawn_model(#"hash_2a7c98f5ca0f1a0a", level.var_b2371398.origin, level.var_b2371398.angles);
+  level.var_50356cd9 = util::spawn_model(#"p9_zm_ndu_computer_screen_medical_horizontal_03", level.var_b2371398.origin, level.var_b2371398.angles);
   level.var_fc67035a playSound(#"hash_98bcba1225bfa3");
   wait 1;
 
@@ -2002,7 +2002,7 @@ function function_1226c0a6() {
     level.var_3df02306 delete();
   }
 
-  var_aa2444c4 = spawncollision(#"hash_1d1c56a494aa468e", "collider", var_91a2766f.origin, var_91a2766f.angles);
+  var_aa2444c4 = spawncollision(#"collision_player_sphere_64", "collider", var_91a2766f.origin, var_91a2766f.angles);
   var_aa2444c4 setscale(2);
   music::setmusicstate("mq_8_emotional", undefined, 4);
   s_scene scene::play("aib_t9_zm_silver_megaton_monologue_01", level.var_b0eb5e2);

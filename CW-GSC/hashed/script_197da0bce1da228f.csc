@@ -62,7 +62,7 @@ function private function_62708cfa(localclientnum, oldval, newval, bnewent, bini
   var_a194b407 = 1;
 
   if(isDefined(self.model)) {
-    var_e2a65b72 = [#"sr_ee_hulk_wild_thing", #"hash_7b7cbb4eb2fd70e3", #"p9_fxanim_zm_gold_essence_trap_mod", #"p9_sur_console_launch_key_01"];
+    var_e2a65b72 = [#"sr_ee_hulk_wild_thing", #"p9_zm_essence_trap", #"p9_fxanim_zm_gold_essence_trap_mod", #"p9_sur_console_launch_key_01"];
 
     if(isinarray(var_e2a65b72, self.model)) {
       var_a194b407 = 0;

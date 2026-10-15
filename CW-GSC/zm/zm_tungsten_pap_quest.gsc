@@ -909,7 +909,7 @@ function function_8ad7a0a7(b_skipped, var_19e802fa) {
 function function_266ae0b1() {
   s_button = struct::get("lock_down_button");
   s_button.var_c9b734f5 = util::spawn_model(#"p9_zm_tungsten_hulk_lock", s_button.origin, s_button.angles);
-  s_button.var_c36e3eb9 = util::spawn_model(#"hash_51b155104fbf49b4", s_button.origin, s_button.angles);
+  s_button.var_c36e3eb9 = util::spawn_model(#"sr_ee_hulk_lock", s_button.origin, s_button.angles);
   s_button.var_c9b734f5 setscale(s_button.modelscale);
   s_button.var_c36e3eb9 setscale(s_button.modelscale);
   s_button.var_c36e3eb9 hide();

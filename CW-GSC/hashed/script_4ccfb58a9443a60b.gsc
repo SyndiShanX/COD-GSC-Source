@@ -76,7 +76,7 @@ function function_db05041b(struct, hint_string, callbackfunction) {
   assert(isDefined(hint_string), "<dev string:x8b>");
 
   if(zm_utility::is_survival() || is_true(level.var_76e8fb05)) {
-    model = #"hash_15f88361c2fa15c";
+    model = #"p9_fxanim_zm_gp_crafting_low_xmodel";
 
     if(zm_utility::is_survival()) {
       var_c6d25878 = &zm_utility::function_f5a222a8;

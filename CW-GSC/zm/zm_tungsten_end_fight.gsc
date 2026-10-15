@@ -2529,7 +2529,7 @@ function function_15e00116(s_spawn) {
   level.var_75a7d6.var_4b6d9c4a[level.var_75a7d6.var_4b6d9c4a.size] = var_8c50f796;
 
   while(true) {
-    var_8c50f796.var_7e2d3fc6 = spawncollision(#"hash_54ae3ca6346eae5f", "", var_8c50f796.origin + (0, 0, 130), var_8c50f796.angles);
+    var_8c50f796.var_7e2d3fc6 = spawncollision(#"collision_bullet_sphere_64", "", var_8c50f796.origin + (0, 0, 130), var_8c50f796.angles);
 
     if(isDefined(var_8c50f796.var_7e2d3fc6)) {
       break;

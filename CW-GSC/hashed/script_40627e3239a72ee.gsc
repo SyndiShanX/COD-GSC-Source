@@ -272,7 +272,7 @@ function function_4675ef4e() {
 }
 
 function function_47a1b8() {
-  self.scriptmodel = util::spawn_model(#"hash_2a623b8543cec8c8", self.origin, self.angles);
+  self.scriptmodel = util::spawn_model(#"p9_zm_platinum_debris_pile", self.origin, self.angles);
   self.scriptmodel setscale(0.6);
   self zm_unitrigger::function_fac87205(#"hash_2813adbf78aefe3f", 64);
   self.scriptmodel clientfield::set("" + #"hash_8b9fe3412e34513", 1);

@@ -432,22 +432,22 @@ function function_726d8f3a(var_fd713d4b = 1) {
 
   switch (self.script_int) {
     case 1:
-      self.var_43032f5e setModel(#"hash_2dc5f32522c37c29");
+      self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_sub_number_green_01");
       break;
     case 2:
-      self.var_43032f5e setModel(#"hash_2dc5f02522c37710");
+      self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_sub_number_green_02");
       break;
     case 3:
-      self.var_43032f5e setModel(#"hash_2dc5f12522c378c3");
+      self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_sub_number_green_03");
       break;
     case 4:
-      self.var_43032f5e setModel(#"hash_2dc5f62522c38142");
+      self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_sub_number_green_04");
       break;
     case 5:
-      self.var_43032f5e setModel(#"hash_2dc5f72522c382f5");
+      self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_sub_number_green_05");
       break;
     case 6:
-      self.var_43032f5e setModel(#"hash_2dc5f42522c37ddc");
+      self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_sub_number_green_06");
       break;
     default:
       break;
@@ -469,30 +469,30 @@ function function_b858693f(index) {
 
       switch (var_90ddceac.script_int) {
         case 1:
-          var_b4fbcdc9 = #"hash_612ce7acf731e45c";
+          var_b4fbcdc9 = #"p9_zm_gold_jumppads_machine_main_number_green_01";
           break;
         case 2:
-          var_b4fbcdc9 = #"hash_612ceaacf731e975";
+          var_b4fbcdc9 = #"p9_zm_gold_jumppads_machine_main_number_green_02";
           break;
         case 3:
-          var_b4fbcdc9 = #"hash_612ce9acf731e7c2";
+          var_b4fbcdc9 = #"p9_zm_gold_jumppads_machine_main_number_green_03";
           break;
         case 4:
-          var_b4fbcdc9 = #"hash_612ce4acf731df43";
+          var_b4fbcdc9 = #"p9_zm_gold_jumppads_machine_main_number_green_04";
           break;
         case 5:
-          var_b4fbcdc9 = #"hash_612ce3acf731dd90";
+          var_b4fbcdc9 = #"p9_zm_gold_jumppads_machine_main_number_green_05";
           break;
         case 6:
-          var_b4fbcdc9 = #"hash_612ce6acf731e2a9";
+          var_b4fbcdc9 = #"p9_zm_gold_jumppads_machine_main_number_green_06";
           break;
         default:
           break;
       }
 
       if(level flag::get(var_90ddceac.var_803f2038)) {
-        var_90ddceac.var_43032f5e setModel(#"hash_cbac724d17f7914");
-        var_90ddceac.var_63c8edf4 setModel(#"hash_229ea252394102ef");
+        var_90ddceac.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_main_number_green_arrow");
+        var_90ddceac.var_63c8edf4 setModel(#"p9_zm_gold_jumppads_machine_main_screen_green");
         var_90ddceac.var_63c8edf4 stoploopsound();
         var_90ddceac.var_63c8edf4 playSound(#"hash_56bfe731349ae3ce");
       } else {
@@ -515,7 +515,7 @@ function function_7c7f1e12() {
   }
 
   self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_main_number_red_x");
-  self.var_63c8edf4 setModel(#"hash_a894b6c603d3613");
+  self.var_63c8edf4 setModel(#"p9_zm_gold_jumppads_machine_main_screen_red");
   self.var_63c8edf4 playLoopSound(#"hash_53528a3f2802b9d9");
 }
 
@@ -526,22 +526,22 @@ function function_df6e6fce() {
 
   switch (self.script_int) {
     case 1:
-      self.var_43032f5e setModel(#"hash_1730e3d42048d1b5");
+      self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_sub_number_red_01");
       break;
     case 2:
-      self.var_43032f5e setModel(#"hash_1730e0d42048cc9c");
+      self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_sub_number_red_02");
       break;
     case 3:
-      self.var_43032f5e setModel(#"hash_1730e1d42048ce4f");
+      self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_sub_number_red_03");
       break;
     case 4:
-      self.var_43032f5e setModel(#"hash_1730ded42048c936");
+      self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_sub_number_red_04");
       break;
     case 5:
-      self.var_43032f5e setModel(#"hash_1730dfd42048cae9");
+      self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_sub_number_red_05");
       break;
     case 6:
-      self.var_43032f5e setModel(#"hash_1730dcd42048c5d0");
+      self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_sub_number_red_06");
       break;
     default:
       break;

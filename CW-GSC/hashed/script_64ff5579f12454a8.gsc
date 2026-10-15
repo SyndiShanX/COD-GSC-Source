@@ -542,7 +542,7 @@ function private function_f5f14ffe(instance) {
     level.var_2c678640.zbarrier delete();
   }
 
-  content_manager::spawn_script_model(level.var_2c678640, #"hash_7fb5646204aceaf6");
+  content_manager::spawn_script_model(level.var_2c678640, #"p9_sur_magic_box_dmg");
   level flag::wait_till(#"hash_414ba7eb6d94978d");
   level.var_2c678640.angles += (0, 90, 0);
   playFX(#"hash_5ee919420dab816a", level.var_2c678640.origin + (0, 0, 10), anglesToForward(level.var_2c678640.angles), anglestoup(level.var_2c678640.angles));

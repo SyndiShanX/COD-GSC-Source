@@ -1971,7 +1971,7 @@ function function_5a22584f() {
   }
 
   level flag::set("rbz_exfil_allowed");
-  mdl_beacon = content_manager::spawn_script_model(s_beacon, #"hash_615f17c2d8b69f96");
+  mdl_beacon = content_manager::spawn_script_model(s_beacon, #"p9_zm_radio_pack_01b_surface");
   mdl_beacon playLoopSound(#"zmb_exfil_radio_inactive_lp");
   mdl_beacon function_23a29590();
 

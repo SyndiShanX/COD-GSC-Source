@@ -75,8 +75,8 @@ function private preinit() {
   add_cover_node(#"cover crouch window");
   add_cover_node(#"cover right");
   add_cover_node(#"cover left");
-  add_cover_node(#"hash_22a0cbc4c551a678");
-  add_cover_node(#"hash_4c95cba4aba377ad");
+  add_cover_node(#"cover wide left");
+  add_cover_node(#"cover wide right");
   add_cover_node(#"cover pillar");
   add_cover_node(#"conceal stand");
   add_cover_node(#"conceal crouch");
