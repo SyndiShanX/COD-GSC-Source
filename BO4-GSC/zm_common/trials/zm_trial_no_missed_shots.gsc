@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_3688d332e17e9ac1.gsc
+ * Script: scripts\zm_common\trials\zm_trial_no_missed_shots.gsc
 ***********************************************/
 
 #include scripts\core_common\array_shared;
@@ -9,10 +9,10 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-#namespace namespace_ae2d0839;
+#namespace zm_trial_no_missed_shots;
 
 autoexec __init__system__() {
-  system::register(#"hash_7c9607fd2f57a1c7", &__init__, undefined, undefined);
+  system::register(#"zm_trial_no_missed_shots", &__init__, undefined, undefined);
 }
 
 __init__() {

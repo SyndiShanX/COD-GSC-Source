@@ -4,12 +4,12 @@
 ***********************************************/
 
 #include script_11c9779550732489;
-#include script_3c345dd878d144b7;
-#include script_43de70169069c6ab;
-#include script_4f8f41168a7c3ea8;
+#include scripts\zm\zm_escape_fast_travel_hellholes;
+#include scripts\zm\zm_escape_weap_quest_spoon;
+#include scripts\zm\zm_escape_weap_quest_mg;
 #include scripts\zm\zm_escape_weap_quest_spork;
-#include script_675455e5e6c0c5ad;
-#include script_711bbbba637da80;
+#include scripts\zm\zm_escape_nixie_clock;
+#include scripts\zm\zm_escape_paschal_s3;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\exploder_shared;
 #include scripts\core_common\struct;
@@ -71,7 +71,7 @@ event_handler[level_init] main(eventstruct) {
   zm_escape_util::init_clientfields();
   paschal::init();
   namespace_1063645::init_clientfields();
-  namespace_b99141ed::init_clientfields();
+  fast_travel_hellholes::init_clientfields();
   zm_utility::function_beed5764("rob_zm_eyes_red", #"zm_ai/fx8_zombie_eye_glow_red");
   level._effect[#"headshot"] = #"zombie/fx_bul_flesh_head_fatal_zmb";
   level._effect[#"headshot_nochunks"] = #"zombie/fx_bul_flesh_head_nochunks_zmb";

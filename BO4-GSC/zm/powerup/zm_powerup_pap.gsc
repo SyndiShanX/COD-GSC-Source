@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_4b0b3de126cf7c9a.gsc
+ * Script: scripts\zm\powerup\zm_powerup_pap.gsc
 ***********************************************/
 
 #include scripts\core_common\aat_shared;

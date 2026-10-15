@@ -1,13 +1,13 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_293299be863018bb.gsc
+ * Script: scripts\zm\zm_office_ee_delusional_dempsey.gsc
 ***********************************************/
 
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\struct;
 #include scripts\zm\zm_hms_util;
 #include scripts\zm_common\zm_sq;
-#namespace namespace_6f62781f;
+#namespace zm_office_ee_delusional_dempsey;
 
 init() {
   init_flags();

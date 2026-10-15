@@ -3,7 +3,7 @@
  * Script: wz_common\wz_ai_utils.gsc
 ***********************************************/
 
-#include script_cb32d07c95e5628;
+#include scripts\mp_common\item_spawn_groups_util;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\infection;

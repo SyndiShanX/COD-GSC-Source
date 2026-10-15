@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_602009d88d859543.gsc
+ * Script: scripts\zm\zm_escape_fast_travel_hellholes.gsc
 ***********************************************/
 
 #include scripts\core_common\ai\zombie_utility;
@@ -28,7 +28,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
-#namespace namespace_b99141ed;
+#namespace fast_travel_hellholes;
 
 init() {
   level.var_d0fafce1 = 1;

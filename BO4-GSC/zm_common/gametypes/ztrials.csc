@@ -3,9 +3,9 @@
  * Script: zm_common\gametypes\ztrials.csc
 ***********************************************/
 
-#include script_1793e0dffb81a6c8;
-#include script_45657e86e8f90414;
-#include script_5afd8ff8f8304cc4;
+#include scripts\zm_common\trials\zm_trial_pack_a_punch_sacrifice;
+#include scripts\zm_common\trials\zm_trial_attack_during_movement;
+#include scripts\zm_common\trials\zm_trial_kill_enemies_for_health;
 #include script_70ab01a7690ea256;
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\struct;
@@ -31,7 +31,7 @@ onstartgametype() {
 }
 
 event_handler[event_b72c1844] function_df05c5d(eventstruct) {
-  if(namespace_fcd611c3::is_active() && self namespace_fcd611c3::function_26f124d8()) {
+  if(zm_trial_attack_during_movement::is_active() && self zm_trial_attack_during_movement::function_26f124d8()) {
     return;
   }
 

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_4f52494a6ac904e9.csc
+ * Script: scripts\zm\ai\zm_ai_zombie_electric.csc
 ***********************************************/
 
 #include scripts\core_common\ai_shared;
@@ -8,10 +8,10 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-#namespace namespace_1d05befd;
+#namespace zm_ai_zombie_electric;
 
 autoexec __init__system__() {
-  system::register(#"hash_831eacd382054cc", &__init__, undefined, undefined);
+  system::register(#"zm_ai_zombie_electric", &__init__, undefined, undefined);
 }
 
 __init__() {

@@ -3,7 +3,7 @@
  * Script: zm\zm_zodt8_devgui.gsc
 ***********************************************/
 
-#include script_7893277eec698972;
+#include scripts\zm\zm_zodt8_wonder_weapon_quest;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\flag_shared;
 #include scripts\zm\zm_zodt8;

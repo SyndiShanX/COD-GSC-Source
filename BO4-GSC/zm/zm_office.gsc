@@ -3,11 +3,11 @@
  * Script: zm\zm_office.gsc
 ***********************************************/
 
-#include script_174ebb9642933bf7;
-#include script_293299be863018bb;
-#include script_4bae07eadc57bb51;
-#include script_59a783d756554a80;
-#include script_7be39c34f66312aa;
+#include scripts\zm_common\util\ai_nova_crawler_util;
+#include scripts\zm\zm_office_ee_delusional_dempsey;
+#include scripts\zm\zm_office_groom_lake_quest;
+#include scripts\zm\zm_office_vo_hooks;
+#include scripts\zm\zm_office_magicbox_screens;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\exploder_shared;
@@ -147,7 +147,7 @@ event_handler[level_init] main(eventstruct) {
   level thread zm_office_magicbox_screens::init();
   level thread zm_office_defcon::pentagon_packapunch_init();
   level thread zm_office_ww_quest::init();
-  level thread namespace_6f62781f::init();
+  level thread zm_office_ee_delusional_dempsey::init();
   level thread zm_office_vo_hooks::init();
   level thread zm_office_sound::main();
 

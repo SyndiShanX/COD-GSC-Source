@@ -3,13 +3,13 @@
  * Script: zm\zm_escape.gsc
 ***********************************************/
 
-#include script_22ebc4167e3bcd3f;
-#include script_2ba3951675c7ee1c;
+#include scripts\zm\zm_escape_weap_quest_spoon;
+#include scripts\zm\zm_escape_weap_quest_mg;
 #include script_36222395658446f5;
-#include script_46cea9e5d4ef9e21;
-#include script_602009d88d859543;
+#include scripts\zm\zm_escape_nixie_clock;
+#include scripts\zm\zm_escape_fast_travel_hellholes;
 #include scripts\zm\zm_escape_weap_quest_spork;
-#include script_668c4fbb94671fb4;
+#include scripts\zm\zm_escape_paschal_s3;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\callbacks_shared;
@@ -110,7 +110,7 @@ event_handler[level_init] main(eventstruct) {
   zm_escape_weap_quest_spoon::init_clientfields();
   zm_escape_util::init_clientfields();
   namespace_1063645::init_clientfields();
-  namespace_b99141ed::init_clientfields();
+  fast_travel_hellholes::init_clientfields();
   level._effect[#"headshot"] = #"zombie/fx_bul_flesh_head_fatal_zmb";
   level._effect[#"headshot_nochunks"] = #"zombie/fx_bul_flesh_head_nochunks_zmb";
   level._effect[#"bloodspurt"] = #"zombie/fx_bul_flesh_neck_spurt_zmb";
@@ -131,7 +131,7 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"poltergeist"] = #"maps/zm_escape/fx8_magicbox_poltergeist";
   level.var_a9c40fde = &function_2d2f3503;
   level.var_1e480ea7 = &function_bcc6a9d8;
-  namespace_b99141ed::init();
+  fast_travel_hellholes::init();
   paschal::init();
   zm_escape_achievement::init();
   level.custom_spawner_entry[#"crawl"] = &zm_spawner::function_45bb11e4;

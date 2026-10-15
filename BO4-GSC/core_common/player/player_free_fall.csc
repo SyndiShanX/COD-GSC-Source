@@ -3,7 +3,7 @@
  * Script: core_common\player\player_free_fall.csc
 ***************************************************/
 
-#include script_7ca3324ffa5389e4;
+#include scripts\core_common\player\player_free_fall_util;
 #include scripts\core_common\animation_shared;
 #include scripts\core_common\audio_shared;
 #include scripts\core_common\callbacks_shared;

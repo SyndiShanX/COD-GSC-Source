@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_6630cc78c80e1cac.gsc
+ * Script: scripts\zm\zm_office_ee_oscars.gsc
 ***********************************************/
 
 #include scripts\core_common\array_shared;
@@ -11,7 +11,7 @@
 #include scripts\zm_common\zm_sq;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_vo;
-#namespace namespace_a35b0e2;
+#namespace zm_office_ee_oscars;
 
 autoexec __init__system__() {
   system::register(#"hash_4fac8791c22b4bd7", &init, undefined, undefined);

@@ -3,17 +3,17 @@
  * Script: zm\zm_zodt8_trials.gsc
 ***********************************************/
 
-#include script_112484f657ccd8b7;
-#include script_1d1e3c193b0a51d;
+#include scripts\zm_common\trials\zm_trial_regen_during_movement;
+#include scripts\zm_common\trials\zm_trial_damage_during_movement;
 #include script_30ba61ad5559c51d;
-#include script_3688d332e17e9ac1;
+#include scripts\zm_common\trials\zm_trial_no_missed_shots;
 #include script_3c775b8df460b415;
 #include script_444bc5b4fa0fe14f;
 #include script_45993630a26b2d85;
 #include script_67da0c3654a906b6;
-#include script_6951ea86fdae9ae0;
-#include script_6ff72d27da99fb12;
-#include script_ddbbb750404a64b;
+#include scripts\zm_common\trials\zm_trial_attack_during_movement;
+#include scripts\zm_common\trials\zm_trial_fast_travel_rush;
+#include scripts\zm_common\trials\zm_trial_round_ending_zone;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\trials\zm_trial_close_quarters;

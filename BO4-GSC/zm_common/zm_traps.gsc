@@ -3,8 +3,8 @@
  * Script: zm_common\zm_traps.gsc
 ***********************************************/
 
-#include script_2f9a68261f6a17be;
-#include script_301f64a4090c381a;
+#include scripts\zm_common\trials\zm_trial_trap_kills_only;
+#include scripts\zm_common\zm_faction_buffs;
 #include scripts\core_common\ai\zombie_death;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\callbacks_shared;

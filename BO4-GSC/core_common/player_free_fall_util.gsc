@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_7ca3324ffa5389e4.gsc
+ * Script: scripts\core_common\player\player_free_fall_util.csc
 ***********************************************/
 
 #namespace player_free_fall_util;

@@ -3,7 +3,7 @@
  * Script: zm\zm_office_teleporters.gsc
 ***********************************************/
 
-#include script_4bae07eadc57bb51;
+#include scripts\zm\zm_office_groom_lake_quest;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;

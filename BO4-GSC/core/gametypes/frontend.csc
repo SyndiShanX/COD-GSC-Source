@@ -3,7 +3,7 @@
  * Script: core\gametypes\frontend.csc
 ***********************************************/
 
-#include script_7ca3324ffa5389e4;
+#include scripts\core_common\player\player_free_fall_util;
 #include scripts\core\gametypes\frontend_blackmarket;
 #include scripts\core\gametypes\frontend_draft;
 #include scripts\core_common\activecamo_shared;

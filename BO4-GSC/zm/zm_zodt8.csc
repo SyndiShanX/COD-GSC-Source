@@ -3,7 +3,7 @@
  * Script: zm\zm_zodt8.csc
 ***********************************************/
 
-#include script_54a67b7ed7b385e6;
+#include scripts\zm\zm_zodt8_wonder_weapon_quest;
 #include scripts\core_common\audio_shared;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;

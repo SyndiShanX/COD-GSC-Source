@@ -3,7 +3,7 @@
  * Script: hashed\script_6bde36b41fffe41b.gsc
 ***********************************************/
 
-#include script_71e26f08f03b7a7a;
+#include scripts\mp_common\item_supply_drop_system;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\gametypes\globallogic;

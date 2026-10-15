@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_73aaf54a7fda2755.gsc
+ * Script: scripts\zm\ai\zm_ai_zombie_electric.gsc
 ***********************************************/
 
 #include scripts\core_common\ai\systems\gib;
@@ -13,10 +13,10 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_behavior;
 #include scripts\zm_common\zm_devgui;
-#namespace namespace_1d05befd;
+#namespace zm_ai_zombie_electric;
 
 autoexec __init__system__() {
-  system::register(#"hash_831eacd382054cc", &__init__, &__main__, undefined);
+  system::register(#"zm_ai_zombie_electric", &__init__, &__main__, undefined);
 }
 
 __init__() {

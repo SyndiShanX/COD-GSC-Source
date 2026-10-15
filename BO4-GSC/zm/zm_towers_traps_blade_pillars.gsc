@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_22272f0ebd9de783.gsc
+ * Script: scripts\zm\zm_towers_traps_blade_pillars.gsc
 ***********************************************/
 
 #include scripts\core_common\ai\zombie_death;
@@ -25,10 +25,10 @@
 #include scripts\zm_common\zm_traps;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
-#namespace namespace_a5b1b1d7;
+#namespace zm_traps_blade_pillars;
 
 autoexec __init__system__() {
-  system::register(#"hash_55c1d88784016490", &__init__, &__main__, undefined);
+  system::register(#"zm_traps_blade_pillars", &__init__, &__main__, undefined);
 }
 
 __init__() {

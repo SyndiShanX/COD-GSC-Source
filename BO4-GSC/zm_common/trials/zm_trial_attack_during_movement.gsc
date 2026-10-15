@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_6951ea86fdae9ae0.gsc
+ * Script: scripts\zm_common\trials\zm_trial_attack_during_movement.gsc
 ***********************************************/
 
 #include scripts\core_common\ai\zombie_utility;
@@ -12,10 +12,10 @@
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-#namespace namespace_fcd611c3;
+#namespace zm_trial_attack_during_movement;
 
 autoexec __init__system__() {
-  system::register(#"hash_281322718ac3cd88", &__init__, undefined, undefined);
+  system::register(#"zm_trial_attack_during_movement", &__init__, undefined, undefined);
 }
 
 __init__() {
@@ -23,7 +23,7 @@ __init__() {
     return;
   }
 
-  zm_trial::register_challenge(#"hash_64d77357e69aee75", &on_begin, &on_end);
+  zm_trial::register_challenge(#"attack_during_movement", &on_begin, &on_end);
 }
 
 on_begin(var_c8a36f90, var_a9dd1993, var_2953986a, var_3790b4e4, var_edc5a14f) {
@@ -52,7 +52,7 @@ on_end(round_reset) {
 }
 
 is_active() {
-  s_challenge = zm_trial::function_a36e8c38(#"hash_64d77357e69aee75");
+  s_challenge = zm_trial::function_a36e8c38(#"attack_during_movement");
   return isDefined(s_challenge);
 }
 

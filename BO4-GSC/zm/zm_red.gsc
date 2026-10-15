@@ -3,8 +3,8 @@
  * Script: zm\zm_red.gsc
 ***********************************************/
 
-#include script_65930a0d8e6a77c2;
-#include script_6c983b627f4a3d51;
+#include scripts\zm\zm_red_trap_venom_spray;
+#include scripts\zm\zm_red_challenges_apollo;
 #include scripts\abilities\ability_player;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\array_shared;

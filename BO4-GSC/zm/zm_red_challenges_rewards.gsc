@@ -3,8 +3,8 @@
  * Script: zm\zm_red_challenges_rewards.gsc
 ***********************************************/
 
-#include script_39347d985163e17;
-#include script_6c983b627f4a3d51;
+#include scripts\zm_common\trials\zm_trial_red_oracle_boon;
+#include scripts\zm\zm_red_challenges_apollo;
 #include scripts\core_common\aat_shared;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\clientfield_shared;

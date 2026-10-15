@@ -3,12 +3,12 @@
  * Script: zm\zm_orange_trials.gsc
 ***********************************************/
 
-#include script_28bfe6df1650ab79;
+#include scripts\zm_common\trials\zm_trial_death_from_above;
 #include script_3d07a022f5c96f45;
 #include script_4109fe9f86c53247;
-#include script_4f1abd7be75f8a2f;
+#include scripts\zm\zm_orange_trial_kills_with_flinger;
 #include script_67da0c3654a906b6;
-#include script_ddbbb750404a64b;
+#include scripts\zm_common\trials\zm_trial_round_ending_zone;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\callbacks_shared;

@@ -4,8 +4,8 @@
 ***********************************************/
 
 #include script_34e49e82e2f499e1;
-#include script_5f3e7d348fbc5283;
-#include script_71e26f08f03b7a7a;
+#include scripts\wz_common\wz_pot_of_gold;
+#include scripts\mp_common\item_supply_drop_system;
 #include script_7611295950bc2c87;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\callbacks_shared;

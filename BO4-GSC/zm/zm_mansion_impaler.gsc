@@ -3,7 +3,7 @@
  * Script: zm\zm_mansion_impaler.gsc
 ***********************************************/
 
-#include script_6b221588ece2c4aa;
+#include scripts\weapons\weaponobjects_crap;
 #include scripts\core_common\ai\systems\gib;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\array_shared;

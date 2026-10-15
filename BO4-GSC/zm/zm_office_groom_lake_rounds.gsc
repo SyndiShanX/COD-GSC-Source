@@ -3,7 +3,7 @@
  * Script: zm\zm_office_groom_lake_rounds.gsc
 ***********************************************/
 
-#include script_174ebb9642933bf7;
+#include scripts\zm_common\util\ai_nova_crawler_util;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\array_shared;

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_45657e86e8f90414.csc
+ * Script: scripts\zm_common\trials\zm_trial_attack_during_movement.csc
 ***********************************************/
 
 #include scripts\core_common\array_shared;
@@ -8,10 +8,10 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-#namespace namespace_fcd611c3;
+#namespace zm_trial_attack_during_movement;
 
 autoexec __init__system__() {
-  system::register(#"hash_281322718ac3cd88", &__init__, undefined, undefined);
+  system::register(#"zm_trial_attack_during_movement", &__init__, undefined, undefined);
 }
 
 __init__() {
@@ -19,7 +19,7 @@ __init__() {
     return;
   }
 
-  zm_trial::register_challenge(#"hash_64d77357e69aee75", &on_begin, &on_end);
+  zm_trial::register_challenge(#"attack_during_movement", &on_begin, &on_end);
 }
 
 on_begin(localclientnum, a_params) {
@@ -31,7 +31,7 @@ on_end(round_reset) {
 }
 
 is_active() {
-  s_challenge = zm_trial::function_a36e8c38(#"hash_64d77357e69aee75");
+  s_challenge = zm_trial::function_a36e8c38(#"attack_during_movement");
   return isDefined(s_challenge);
 }
 

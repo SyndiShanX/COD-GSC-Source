@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_578af034e151f03e.gsc
+ * Script: scripts\zm\zm_office_magicbox_screens.csc
 ***********************************************/
 
 #namespace zm_office_magicbox_screens;

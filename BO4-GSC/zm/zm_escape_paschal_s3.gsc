@@ -3,7 +3,7 @@
  * Script: zm\zm_escape_paschal_s3.gsc
 ***********************************************/
 
-#include script_46cea9e5d4ef9e21;
+#include scripts\zm\zm_escape_nixie_clock;
 #include scripts\core_common\ai\systems\gib;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\ai_shared;

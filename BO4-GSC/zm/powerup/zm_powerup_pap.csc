@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_26b191e111bca72e.csc
+ * Script: scripts\zm\powerup\zm_powerup_pap.csc
 ***********************************************/
 
 #include scripts\core_common\struct;

@@ -3,7 +3,7 @@
  * Script: zm_common\zm_blockers.gsc
 ***********************************************/
 
-#include script_301f64a4090c381a;
+#include scripts\zm_common\zm_faction_buffs;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\clientfield_shared;

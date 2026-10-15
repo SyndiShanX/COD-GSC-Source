@@ -3,7 +3,7 @@
  * Script: wz_common\wz_medals.gsc
 ***********************************************/
 
-#include script_1d29de500c266470;
+#include scripts\core_common\player\player_free_fall_util;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\challenges_shared;

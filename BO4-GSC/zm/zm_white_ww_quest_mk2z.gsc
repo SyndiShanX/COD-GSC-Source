@@ -1,10 +1,10 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_34b02db2817b42f.gsc
+ * Script: scripts\zm\zm_white_ww_quest_mk2z.gsc
 ***********************************************/
 
-#include script_174ce72cc0f850;
-#include script_724752ab26bff81b;
+#include scripts\zm\zm_white_defend_soul_capture;
+#include scripts\zm\zm_white_ww_quest_weapon;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
@@ -20,7 +20,7 @@
 #include scripts\zm_common\zm_ui_inventory;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
-#namespace namespace_90b0490e;
+#namespace zm_white_ww_quest_mk2z;
 
 preload() {
   level flag::init(#"chimney_grenaded");

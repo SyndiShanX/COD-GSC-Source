@@ -3,7 +3,7 @@
  * Script: zm\zm_office.csc
 ***********************************************/
 
-#include script_578af034e151f03e;
+#include scripts\zm\zm_office_magicbox_screens;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\exploder_shared;
 #include scripts\core_common\renderoverridebundle;

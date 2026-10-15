@@ -3,7 +3,7 @@
  * Script: zm\zm_orange_snowball_piles.gsc
 ***********************************************/
 
-#include script_652cf01d4f20aeb5;
+#include scripts\zm\zm_orange_ee_sams_box;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\struct;

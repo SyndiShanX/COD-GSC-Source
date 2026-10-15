@@ -3,7 +3,7 @@
  * Script: mp_common\item_world.csc
 ***********************************************/
 
-#include script_68c78107b4aa059c;
+#include scripts\mp_common\item_spawn_groups_util;
 #include scripts\core_common\activecamo_shared;
 #include scripts\core_common\activecamo_shared_util;
 #include scripts\core_common\callbacks_shared;

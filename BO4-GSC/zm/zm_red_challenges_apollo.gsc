@@ -3,7 +3,7 @@
  * Script: zm\zm_red_challenges_apollo.gsc
 ***********************************************/
 
-#include script_6c983b627f4a3d51;
+#include scripts\zm\zm_red_challenges_apollo;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\scene_shared;

@@ -3,8 +3,8 @@
  * Script: zm\zm_office_special_rounds.gsc
 ***********************************************/
 
-#include script_174ebb9642933bf7;
-#include script_59a783d756554a80;
+#include scripts\zm_common\util\ai_nova_crawler_util;
+#include scripts\zm\zm_office_vo_hooks;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\callbacks_shared;

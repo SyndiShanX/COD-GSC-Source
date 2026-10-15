@@ -3,7 +3,7 @@
  * Script: zm\perk\zm_perk_electric_cherry.gsc
 ***********************************************/
 
-#include script_6951ea86fdae9ae0;
+#include scripts\zm_common\trials\zm_trial_attack_during_movement;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\array_shared;
@@ -221,7 +221,7 @@ electric_cherry_reload_attack() {
       continue;
     }
 
-    if(namespace_fcd611c3::is_active() && !self namespace_fcd611c3::function_26f124d8()) {
+    if(zm_trial_attack_during_movement::is_active() && !self zm_trial_attack_during_movement::function_26f124d8()) {
       continue;
     }
 

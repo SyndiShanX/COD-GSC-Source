@@ -3,7 +3,7 @@
  * Script: core_common\ai\archetype_nosferatu.gsc
 **************************************************/
 
-#include script_1f0e83e43bf9c3b9;
+#include scripts\core_common\ai\archetype_nosferatu_interface;
 #include scripts\core_common\aat_shared;
 #include scripts\core_common\ai\systems\ai_blackboard;
 #include scripts\core_common\ai\systems\animation_state_machine_mocomp;

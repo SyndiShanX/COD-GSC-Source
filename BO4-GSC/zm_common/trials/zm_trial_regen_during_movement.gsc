@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_112484f657ccd8b7.gsc
+ * Script: scripts\zm_common\trials\zm_trial_regen_during_movement.gsc
 ***********************************************/
 
 #include scripts\core_common\ai\zombie_utility;
@@ -11,10 +11,10 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-#namespace namespace_ab88201b;
+#namespace zm_trial_regen_during_movement;
 
 autoexec __init__system__() {
-  system::register(#"hash_77812dea54caab85", &__init__, undefined, undefined);
+  system::register(#"zm_trial_regen_during_movement", &__init__, undefined, undefined);
 }
 
 __init__() {
@@ -22,7 +22,7 @@ __init__() {
     return;
   }
 
-  zm_trial::register_challenge(#"hash_6840f605489bddc2", &on_begin, &on_end);
+  zm_trial::register_challenge(#"regen_during_movement", &on_begin, &on_end);
 }
 
 on_begin(var_c8a36f90) {

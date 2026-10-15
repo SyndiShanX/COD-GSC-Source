@@ -3,7 +3,7 @@
  * Script: zm\zm_office_ee_pernell_archive.gsc
 ***********************************************/
 
-#include script_59a783d756554a80;
+#include scripts\zm\zm_office_vo_hooks;
 #include scripts\core_common\aat_shared;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\clientfield_shared;

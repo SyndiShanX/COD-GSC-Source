@@ -4,12 +4,12 @@
 ***********************************************/
 
 #include script_23c01b321e642c31;
-#include script_28bfe6df1650ab79;
+#include scripts\zm_common\trials\zm_trial_death_from_above;
 #include script_30ba61ad5559c51d;
 #include script_43642da1b2402e5c;
-#include script_6951ea86fdae9ae0;
+#include scripts\zm_common\trials\zm_trial_attack_during_movement;
 #include script_6f5e741b2bceba3a;
-#include script_ddbbb750404a64b;
+#include scripts\zm_common\trials\zm_trial_round_ending_zone;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\exploder_shared;

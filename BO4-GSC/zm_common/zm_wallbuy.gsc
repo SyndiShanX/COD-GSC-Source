@@ -3,7 +3,7 @@
  * Script: zm_common\zm_wallbuy.gsc
 ***********************************************/
 
-#include script_301f64a4090c381a;
+#include scripts\zm_common\zm_faction_buffs;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\struct;

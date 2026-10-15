@@ -3,8 +3,8 @@
  * Script: zm\perk\zm_perk_slider.gsc
 ***********************************************/
 
-#include script_2f9a68261f6a17be;
-#include script_6951ea86fdae9ae0;
+#include scripts\zm_common\trials\zm_trial_trap_kills_only;
+#include scripts\zm_common\trials\zm_trial_attack_during_movement;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\clientfield_shared;
@@ -241,7 +241,7 @@ function_2772480a() {
     return false;
   }
 
-  if(namespace_fcd611c3::is_active() && level.var_e91491fb !== #"slide") {
+  if(zm_trial_attack_during_movement::is_active() && level.var_e91491fb !== #"slide") {
     return false;
   }
 

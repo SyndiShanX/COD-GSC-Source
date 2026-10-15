@@ -3,7 +3,7 @@
  * Script: hashed\script_34e49e82e2f499e1.gsc
 ***********************************************/
 
-#include script_cb32d07c95e5628;
+#include scripts\mp_common\item_spawn_groups_util;
 #include scripts\core_common\player\player_stats;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;

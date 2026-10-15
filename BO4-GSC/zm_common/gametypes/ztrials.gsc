@@ -4,10 +4,10 @@
 ***********************************************/
 
 #include script_1496ada77dc2f2e2;
-#include script_6951ea86fdae9ae0;
-#include script_770e34dfe9b07f3c;
-#include script_7828033bc0ecda72;
-#include script_7b843bf90a032750;
+#include scripts\zm_common\trials\zm_trial_attack_during_movement;
+#include scripts\zm_common\trials\zm_trial_pack_a_punch_sacrifice;
+#include scripts\zm_common\trials\zm_trial_no_player_death;
+#include scripts\zm_common\trials\zm_trial_kill_enemies_for_health;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\math_shared;

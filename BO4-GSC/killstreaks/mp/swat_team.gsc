@@ -3,7 +3,7 @@
  * Script: killstreaks\mp\swat_team.gsc
 ***********************************************/
 
-#include script_52d2de9b438adc78;
+#include scripts\killstreaks\ir_strobe_deploy;
 #include scripts\core_common\ai\archetype_damage_utility;
 #include scripts\core_common\ai\archetype_human;
 #include scripts\core_common\ai\archetype_human_interface;

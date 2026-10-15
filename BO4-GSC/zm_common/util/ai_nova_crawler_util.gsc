@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_174ebb9642933bf7.gsc
+ * Script: scripts\zm_common\util\ai_nova_crawler_util.gsc
 ***********************************************/
 
 #include scripts\core_common\ai\zombie_utility;

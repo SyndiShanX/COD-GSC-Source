@@ -3,7 +3,7 @@
  * Script: mp_common\gametypes\bounty.gsc
 ***********************************************/
 
-#include script_52d2de9b438adc78;
+#include scripts\killstreaks\ir_strobe_deploy;
 #include script_702b73ee97d18efe;
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\animation_shared;

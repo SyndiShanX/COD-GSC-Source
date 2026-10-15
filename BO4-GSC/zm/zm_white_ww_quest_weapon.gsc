@@ -3,10 +3,10 @@
  * Script: zm\zm_white_ww_quest_weapon.gsc
 ***********************************************/
 
-#include script_3122530a9381e18b;
-#include script_34b02db2817b42f;
-#include script_5f9141e04e4e94a2;
-#include script_74608ad5d25450b1;
+#include scripts\zm\zm_white_ww_quest_mk2v;
+#include scripts\zm\zm_white_ww_quest_mk2z;
+#include scripts\zm\zm_white_ww_quest_mk2y;
+#include scripts\zm\zm_white_ww_quest_mk2x;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\flag_shared;
@@ -324,10 +324,10 @@ function_256cc56e() {
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger);
   zm_unitrigger::function_c9e3607c(s_unitrigger, "HINT_WEAPON", level.a_w_ray_guns[2]);
   level.var_cb94d41d thread function_7d123028();
-  namespace_ca03bbb4::start_quest();
-  namespace_3b2b9e06::start_quest();
-  namespace_825eac6b::start_quest();
-  namespace_90b0490e::start_quest();
+  zm_white_ww_quest_mk2v::start_quest();
+  zm_white_ww_quest_mk2x::start_quest();
+  zm_white_ww_quest_mk2y::start_quest();
+  zm_white_ww_quest_mk2z::start_quest();
 }
 
 function_c3076788(e_player) {

@@ -3,7 +3,7 @@
  * Script: zm\zm_office_ww_quest.gsc
 ***********************************************/
 
-#include script_59a783d756554a80;
+#include scripts\zm\zm_office_vo_hooks;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\exploder_shared;

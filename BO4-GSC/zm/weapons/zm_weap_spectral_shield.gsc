@@ -4,7 +4,7 @@
 **************************************************/
 
 #include script_24c32478acf44108;
-#include script_6951ea86fdae9ae0;
+#include scripts\zm_common\trials\zm_trial_attack_during_movement;
 #include scripts\core_common\ai\zombie_death;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\ai_shared;
@@ -765,7 +765,7 @@ function_1b33fb6d(var_155e1cdd) {
     self thread function_423e10ee();
 
     while(zm_utility::is_player_valid(self) && self attackButtonPressed() && !self fragButtonPressed() && !self adsButtonPressed() && !self zm_utility::is_drinking() && !(isDefined(self.var_4154aa8f) && self.var_4154aa8f)) {
-      if(self isweaponlocked(var_155e1cdd) || namespace_fcd611c3::is_active() && !self namespace_fcd611c3::function_26f124d8()) {
+      if(self isweaponlocked(var_155e1cdd) || zm_trial_attack_during_movement::is_active() && !self zm_trial_attack_during_movement::function_26f124d8()) {
         break;
       }
 

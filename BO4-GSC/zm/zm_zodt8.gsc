@@ -4,7 +4,7 @@
 ***********************************************/
 
 #include script_444bc5b4fa0fe14f;
-#include script_7893277eec698972;
+#include scripts\zm\zm_zodt8_wonder_weapon_quest;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\array_shared;

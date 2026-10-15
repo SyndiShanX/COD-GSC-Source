@@ -3,7 +3,7 @@
  * Script: weapons\mp\weaponobjects.gsc
 ***********************************************/
 
-#include script_6b221588ece2c4aa;
+#include scripts\weapons\weaponobjects_crap;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\flagsys_shared;

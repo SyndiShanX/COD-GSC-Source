@@ -3,7 +3,7 @@
  * Script: killstreaks\supplydrop_shared.csc
 ***********************************************/
 
-#include script_324d329b31b9b4ec;
+#include scripts\killstreaks\ir_strobe_deploy;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;

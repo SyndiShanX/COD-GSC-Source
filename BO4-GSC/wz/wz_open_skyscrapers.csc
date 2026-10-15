@@ -3,7 +3,7 @@
  * Script: wz\wz_open_skyscrapers.csc
 ***********************************************/
 
-#include script_4da75c87643c8b07;
+#include scripts\wz_common\wz_blast_door_light;
 #include script_58d14a82f7aa9d6d;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\util_shared;

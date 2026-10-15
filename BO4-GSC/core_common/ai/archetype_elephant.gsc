@@ -4,7 +4,7 @@
 *************************************************/
 
 #include script_2c5daa95f8fec03c;
-#include script_67e37e63e177f107;
+#include scripts\core_common\vehicles\elephant_dust_ball;
 #include scripts\core_common\ai\archetype_damage_utility;
 #include scripts\core_common\ai\archetype_locomotion_utility;
 #include scripts\core_common\ai\systems\ai_blackboard;

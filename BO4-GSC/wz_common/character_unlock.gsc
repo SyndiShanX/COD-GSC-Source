@@ -3,7 +3,7 @@
  * Script: wz_common\character_unlock.gsc
 ***********************************************/
 
-#include script_71e26f08f03b7a7a;
+#include scripts\mp_common\item_supply_drop_system;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\player\player_stats;
 #include scripts\core_common\system_shared;

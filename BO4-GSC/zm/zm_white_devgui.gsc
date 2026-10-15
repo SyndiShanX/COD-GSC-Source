@@ -3,7 +3,7 @@
  * Script: zm\zm_white_devgui.gsc
 ***********************************************/
 
-#include script_724752ab26bff81b;
+#include scripts\zm\zm_white_ww_quest_weapon;
 #include scripts\core_common\flag_shared;
 #include scripts\zm\zm_white_mee;
 #include scripts\zm\zm_white_special_rounds;

@@ -3,7 +3,7 @@
  * Script: mp_common\item_world.gsc
 ***********************************************/
 
-#include script_cb32d07c95e5628;
+#include scripts\mp_common\item_spawn_groups_util;
 #include scripts\abilities\gadgets\gadget_homunculus;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\callbacks_shared;

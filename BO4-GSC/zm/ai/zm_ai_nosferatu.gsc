@@ -3,7 +3,7 @@
  * Script: zm\ai\zm_ai_nosferatu.gsc
 ***********************************************/
 
-#include script_1f0e83e43bf9c3b9;
+#include scripts\core_common\ai\archetype_nosferatu_interface;
 #include scripts\core_common\aat_shared;
 #include scripts\core_common\ai\archetype_damage_utility;
 #include scripts\core_common\ai\archetype_locomotion_utility;

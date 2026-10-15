@@ -3,7 +3,7 @@
  * Script: zm\zm_red.csc
 ***********************************************/
 
-#include script_41a75e0d79b62736;
+#include scripts\zm\zm_red_trap_venom_spray;
 #include scripts\core_common\beam_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\postfx_shared;

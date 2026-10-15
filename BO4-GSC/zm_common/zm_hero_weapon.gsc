@@ -3,7 +3,7 @@
  * Script: zm_common\zm_hero_weapon.gsc
 ***********************************************/
 
-#include script_301f64a4090c381a;
+#include scripts\zm_common\zm_faction_buffs;
 #include scripts\abilities\ability_player;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\ai_shared;

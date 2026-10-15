@@ -3,7 +3,7 @@
  * Script: killstreaks\mp\supplydrop.gsc
 ***********************************************/
 
-#include script_52d2de9b438adc78;
+#include scripts\killstreaks\ir_strobe_deploy;
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\challenges_shared;

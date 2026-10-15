@@ -1,12 +1,12 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_102fa70a8153e81f.csc
+ * Script: scripts\zm\zm_white_ww_quest_mk2v.csc
 ***********************************************/
 
-#include script_5f90a0e71aee1dc4;
+#include scripts\zm\zm_white_defend_soul_capture;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\util_shared;
-#namespace namespace_ca03bbb4;
+#namespace zm_white_ww_quest_mk2v;
 
 preload() {
   level._effect[#"hash_679508ac36adc26a"] = #"hash_1b41a5e8ae3f4112";

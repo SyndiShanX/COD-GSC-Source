@@ -3,7 +3,7 @@
  * Script: zm\zm_escape_pebble.gsc
 ***********************************************/
 
-#include script_668c4fbb94671fb4;
+#include scripts\zm\zm_escape_paschal_s3;
 #include scripts\core_common\ai\zombie_death;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\array_shared;

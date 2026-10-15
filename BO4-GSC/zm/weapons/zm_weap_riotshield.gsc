@@ -3,7 +3,7 @@
  * Script: zm\weapons\zm_weap_riotshield.gsc
 ***********************************************/
 
-#include script_301f64a4090c381a;
+#include scripts\zm_common\zm_faction_buffs;
 #include scripts\core_common\ai\zombie_death;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\ai_shared;

@@ -4,8 +4,8 @@
 ***********************************************/
 
 #include script_24c32478acf44108;
-#include script_2f9a68261f6a17be;
-#include script_6951ea86fdae9ae0;
+#include scripts\zm_common\trials\zm_trial_trap_kills_only;
+#include scripts\zm_common\trials\zm_trial_attack_during_movement;
 #include scripts\core_common\ai\systems\gib;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\clientfield_shared;
@@ -387,7 +387,7 @@ function_69153101() {
     return false;
   }
 
-  if(namespace_fcd611c3::is_active()) {
+  if(zm_trial_attack_during_movement::is_active()) {
     return false;
   }
 

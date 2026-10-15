@@ -1,10 +1,10 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_3122530a9381e18b.gsc
+ * Script: scripts\zm\zm_white_ww_quest_mk2v.gsc
 ***********************************************/
 
-#include script_174ce72cc0f850;
-#include script_724752ab26bff81b;
+#include scripts\zm\zm_white_defend_soul_capture;
+#include scripts\zm\zm_white_ww_quest_weapon;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
@@ -21,7 +21,7 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
-#namespace namespace_ca03bbb4;
+#namespace zm_white_ww_quest_mk2v;
 
 preload() {
   zm_white_defend_soul_capture::register(#"sc_mk2v", 20000, "sc_mk2v", &function_a66f0de2, &function_17f3e9e2);

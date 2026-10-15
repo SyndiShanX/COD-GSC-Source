@@ -3,7 +3,7 @@
  * Script: zm\zm_white_util.gsc
 ***********************************************/
 
-#include script_5f9141e04e4e94a2;
+#include scripts\zm\zm_white_ww_quest_mk2y;
 #include scripts\core_common\array_shared;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\flag_shared;
@@ -386,7 +386,7 @@ function_ae18909c() {
   }
 
   if(!b_success && level flag::get(#"hash_3a183a144032bbf3")) {
-    b_success = self namespace_825eac6b::function_33d9b1f8();
+    b_success = self zm_white_ww_quest_mk2y::function_33d9b1f8();
   }
 
   if(!b_success) {
