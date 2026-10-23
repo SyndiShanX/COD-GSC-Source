@@ -54,7 +54,7 @@ init() {
     zm_weapons::include_zombie_weapon(#"hash_41a492d8cc5893f9", 0);
     zm_weapons::add_zombie_weapon(#"hash_41a492d8cc5893f9", "", 0, 0, undefined, undefined, 0, "", "", 0, undefined, 0);
     level.n_kill_count = 0;
-    level.var_3a67ac0e = array(#"hash_10d96c6e67b7604d", #"p7_compass_vintage", #"p7_world_globe_vintage_01", #"p7_ra2_tool_vintage_pincer_02", #"p7_zm_ori_scope_vintage");
+    level.var_3a67ac0e = array(#"p8_zm_binoculars_brass_vintage", #"p7_compass_vintage", #"p7_world_globe_vintage_01", #"p7_ra2_tool_vintage_pincer_02", #"p7_zm_ori_scope_vintage");
     level.var_b26f906a = array(#"hash_6750f91495cec97a", #"hash_5cfcc1e6699e46b6", #"hash_6e6d2b3030f3d6c6", #"hash_6382fc1f3035ccb0", #"hash_76274c14299e46ca");
     level.var_e083ecbd = randomint(level.a_s_chests.size);
     level.var_f9f50915 = level.a_s_chests[level.var_e083ecbd];

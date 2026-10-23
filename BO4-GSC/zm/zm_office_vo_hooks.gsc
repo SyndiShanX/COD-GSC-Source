@@ -126,7 +126,7 @@ function_132e0bea() {
       waitframe(1);
     }
 
-    play_pentagon_announcer_vox(#"hash_1984a3f4bf85aff0");
+    play_pentagon_announcer_vox(#"vox_pentagon_power_on_pann_0");
   }
 }
 

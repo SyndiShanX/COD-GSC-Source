@@ -169,10 +169,10 @@ regen_health(weapon, source_player, var_7b8559d4) {
     player.var_9db94fe3 = source_player;
 
     if(player == source_player) {
-      player playsoundtoplayer(#"hash_74180c0cc64f28b", player);
-      player playsoundtoallbutplayer(#"hash_74180c0cc64f28b", player);
+      player playsoundtoplayer(#"gdt_tak5_impact_success", player);
+      player playsoundtoallbutplayer(#"gdt_tak5_impact_success", player);
     } else {
-      player playSound(#"hash_74180c0cc64f28b");
+      player playSound(#"gdt_tak5_impact_success");
     }
 
     player callback::callback(#"on_buff");

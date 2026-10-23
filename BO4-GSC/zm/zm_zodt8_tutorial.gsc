@@ -566,7 +566,7 @@ tutorial() {
   self thread lui::screen_fade_out(3);
   clientfield::set_world_uimodel("hudItems.ztut.showLocation", 0);
   wait 1;
-  function_cc60408f(array(#"hash_48af8239068e44f2", #"vox_advance_end_narr_0"), "end_game");
+  function_cc60408f(array(#"vox_advance_blight_kill_narr_0", #"vox_advance_end_narr_0"), "end_game");
   music::setmusicstate("zodt8_death");
   level.tutorial_complete = 1;
   level notify(#"end_game");

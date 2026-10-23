@@ -994,7 +994,7 @@ function_6366a177(s_lookat, var_3ac8690f, var_149b3205) {
   self val::set(#"placeholder_jump_scare", #"freezecontrols");
   self val::set(#"placeholder_jump_scare", "ignoreme", 1);
   self val::set(#"placeholder_jump_scare", "takedamage", 0);
-  var_6c759f99 = util::spawn_model(#"hash_3ae1ad382a5ec0c8", s_lookat.origin + (0, 0, -62), s_lookat.angles);
+  var_6c759f99 = util::spawn_model(#"c_t8_zmb_dlc1_catherine_ghost_jumpscare_head", s_lookat.origin + (0, 0, -62), s_lookat.angles);
   var_6c759f99 hide();
   var_6c759f99 showtoplayer(self);
 

@@ -50,8 +50,8 @@ function_791e18ed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_8dfe2b97 = util::playFXOnTag(localclientnum, "zm_weapons/fx8_aat_brain_decay_torso", self, str_fx_tag);
 
     if(!isDefined(self.var_67857d4d)) {
-      self playSound(localclientnum, #"hash_637c5e1579bb239a");
-      self.var_67857d4d = self playLoopSound(#"hash_6064261162c8a2e");
+      self playSound(localclientnum, #"zmb_aat_braindecay_turned_start");
+      self.var_67857d4d = self playLoopSound(#"zmb_aat_braindecay_turned_lp");
     }
 
     if(isDefined(self.var_4703d488)) {

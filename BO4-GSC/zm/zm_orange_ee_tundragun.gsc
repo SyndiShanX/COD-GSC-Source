@@ -91,7 +91,7 @@ function_f16c0259() {
       var_cf41b762 = self.script_int === level.var_97da986d.var_6f9b20c6;
 
       if(var_cf41b762) {
-        self playSound(#"hash_4a51cdb0e1682b6c");
+        self playSound(#"zmb_target_bullseye");
 
         if(level.var_97da986d.var_6f9b20c6 === 0) {
           level thread function_213f1c48();

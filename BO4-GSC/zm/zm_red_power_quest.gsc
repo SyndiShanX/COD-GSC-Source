@@ -216,7 +216,7 @@ function_bda82828() {
   wait 1;
 
   foreach(player in util::get_active_players()) {
-    player thread zm_vo::vo_say(#"hash_33e1e5be84d42bba", 0, 1, 9999, 1, 1, 1);
+    player thread zm_vo::vo_say(#"vox_amphi_aftermath_1_orac_0", 0, 1, 9999, 1, 1, 1);
   }
 
   vol_amphitheater = getEnt("vol_power_quest_kill_zone", "targetname");

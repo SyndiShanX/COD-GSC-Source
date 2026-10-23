@@ -33,11 +33,11 @@ main() {
 function_96da6081() {
   level flag::wait_till_any(array("power_on", "power_on1"));
   level.var_4687b0d0 = [];
-  level.var_4687b0d0[0] = array(#"hash_41c5ef88d30a0d04");
-  level.var_4687b0d0[1] = array(#"hash_77d26356e7772673");
-  level.var_4687b0d0[2] = array(#"hash_5f2672545b99ea1a");
-  level.var_4687b0d0[3] = array(#"hash_47c8e68ac1a558b9");
-  level.var_4687b0d0[4] = array(#"hash_b75c49e9dcc7900", #"hash_3d4162f1d6598a06", #"hash_38da480a84b97bda", #"hash_21856919a8b0f180", #"hash_3a59c33cb06334", #"hash_27a3a2bb7b9f52c2", #"hash_1448f639d29f413e", #"hash_7e02a393e0c315fc");
+  level.var_4687b0d0[0] = array(#"vox_audio_log_5_0_alis_0");
+  level.var_4687b0d0[1] = array(#"vox_audio_log_6_0_alis_0");
+  level.var_4687b0d0[2] = array(#"vox_audio_log_7_0_alis_0");
+  level.var_4687b0d0[3] = array(#"vox_audio_log_8_0_alis_0");
+  level.var_4687b0d0[4] = array(#"vox_audio_log_9_0_alis_0", #"hash_3d4162f1d6598a06", #"hash_38da480a84b97bda", #"hash_21856919a8b0f180", #"hash_3a59c33cb06334", #"hash_27a3a2bb7b9f52c2", #"hash_1448f639d29f413e", #"hash_7e02a393e0c315fc");
   level.var_4687b0d0[5] = array(#"vox_audio_log_10_alis_0");
   a_s_rolls = struct::get_array("s_roll");
 

@@ -102,7 +102,7 @@ function_5bb13b48(player) {
 
       self.parentobj setinvisibletoplayer(player);
       self.trigger setinvisibletoplayer(player);
-      self playsoundtoplayer(#"hash_587fec4cf4ba3ebb", player);
+      self playsoundtoplayer(#"evt_bh_ammo_stash_open", player);
       self.usecount++;
       player gestures::function_56e00fbf(#"gestable_grab", undefined, 0);
 

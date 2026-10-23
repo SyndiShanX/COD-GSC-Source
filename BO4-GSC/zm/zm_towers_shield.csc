@@ -318,7 +318,7 @@ function_103be84b(localclientnum, str_piece, s_start) {
       n_drop_time = 1;
       break;
     case #"katar":
-      str_model = #"hash_55f4b4dc9ecc95a5";
+      str_model = #"p8_zm_gla_shield_part_katar_upgrade";
       var_6b518b80 = #"hash_3c5ef4492a237f89";
       var_458142a9 = #"hash_748199dab24b7972";
       n_drop_time = 0;

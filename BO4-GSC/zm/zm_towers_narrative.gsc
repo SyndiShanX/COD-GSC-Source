@@ -44,7 +44,7 @@ init() {
   array::thread_all(a_s_scrolls, &function_58c9a8b3, 1);
   a_s_skulls = struct::get_array(#"hash_70b8946b02777c1d");
   array::thread_all(a_s_skulls, &function_58c9a8b3);
-  level thread function_c2e32573("narrative_whispers", array(#"hash_609c2bdb6def129f", #"hash_4af81ddd4ad3f4d1", #"hash_23a8e8f61c4fc32c", #"hash_7f6bf79b60f1e8d4"), 1, #"zmb_sq_audiolog_oracle_start", #"zmb_sq_audiolog_oracle_end", 1.5);
+  level thread function_c2e32573("narrative_whispers", array(#"vox_ee_prima_intro_orac_0", #"hash_4af81ddd4ad3f4d1", #"vox_ee_library_orac_0", #"hash_7f6bf79b60f1e8d4"), 1, #"zmb_sq_audiolog_oracle_start", #"zmb_sq_audiolog_oracle_end", 1.5);
   level thread function_c2e32573("narrative_warning", array(#"hash_5c9150da16c41e10", #"hash_66dd1564ba1e9474", #"hash_4489363f604b439c", #"hash_4e2811c0bd19be20", #"hash_7101f8d31ad66888"), 1);
   level thread function_a38e222b();
   level thread function_831dcf3e();

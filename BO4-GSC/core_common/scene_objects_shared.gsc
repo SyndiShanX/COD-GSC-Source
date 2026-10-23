@@ -1219,8 +1219,8 @@ class csceneobject {
       return;
     }
 
-    if(isDefined(var_55b4f21e.var_39fd697b)) {
-      a_ents = getEntArray(var_55b4f21e.var_39fd697b, "targetname", 1);
+    if(isDefined(var_55b4f21e.dx_op_ping_leba_toro)) {
+      a_ents = getEntArray(var_55b4f21e.dx_op_ping_leba_toro, "targetname", 1);
       array::thread_all(a_ents, &val::set, #"script_hide", "hide", 1);
     } else if(isDefined(var_55b4f21e.var_4ceff7a6)) {
       a_ents = getEntArray(var_55b4f21e.var_4ceff7a6, "targetname", 1);

@@ -228,7 +228,7 @@ function_eddc2ed3() {
     wait 1;
 
     if(!zm_white_main_quest::function_6cebbce1()) {
-      level.var_23674b8f.e_player zm_white_util::function_491673da(#"hash_61ea1c56d8b85109");
+      level.var_23674b8f.e_player zm_white_util::function_491673da(#"vox_ww_y_orb_find_rush_0");
     }
   }
 }
@@ -346,7 +346,7 @@ start_step_3() {
   wait 3;
 
   if(!zm_white_main_quest::function_6cebbce1() && zm_utility::is_classic()) {
-    level.var_23674b8f.e_player thread zm_white_util::function_491673da(#"hash_6942fd3186464801");
+    level.var_23674b8f.e_player thread zm_white_util::function_491673da(#"vox_ww_y_orb_success_rush_0");
   }
 
   var_3d7dfe05 = struct::get("mk2y_defend");

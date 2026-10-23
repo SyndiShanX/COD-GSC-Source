@@ -1310,7 +1310,7 @@ function_db68db95(s_pos) {
   wait 5;
   self.ignoreme = 0;
   wait 6;
-  self zm_vo::vo_say(#"hash_31995b2656971de0", 0, 1, 9999, 1, 1);
+  self zm_vo::vo_say(#"vox_zeus_eagle_free_nag_orac_0", 0, 1, 9999, 1, 1);
   self function_66b6e720(#"p8_fxanim_zm_red_drakaina_bundle");
 }
 
@@ -1717,7 +1717,7 @@ function_23f28dd1(var_5ea5c94d) {
   }
 
   foreach(player in util::get_active_players()) {
-    player thread zm_vo::vo_say(#"hash_76c659bb664b357e", 0.5, 1, 9999, 1, 1);
+    player thread zm_vo::vo_say(#"vox_omphalos_exposed_orac_0", 0.5, 1, 9999, 1, 1);
   }
 
   zm_trial::function_ae725d63();

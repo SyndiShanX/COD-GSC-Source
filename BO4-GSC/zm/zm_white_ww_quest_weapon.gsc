@@ -306,7 +306,7 @@ function_cbeb9a33() {
 
 function_256cc56e() {
   if(isDefined(level.var_f13364b4.var_12633dc5) && zm_utility::is_classic()) {
-    level.var_f13364b4.var_12633dc5 thread zm_white_util::function_491673da(#"hash_ef67a616ce1cb99");
+    level.var_f13364b4.var_12633dc5 thread zm_white_util::function_491673da(#"vox_ww_num_correct_rush_0");
   }
 
   if(!zm_utility::is_ee_enabled()) {

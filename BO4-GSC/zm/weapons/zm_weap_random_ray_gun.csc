@@ -46,8 +46,8 @@ shrink_globe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
     self.fx_globe = playFX(localclientnum, "zm_weapons/fx8_www_shrink_globe", self.origin, v_forward, v_up);
 
     if(!isDefined(self.var_66db8b1a)) {
-      self playSound(localclientnum, #"hash_fe927ec8b31e2d");
-      self.var_66db8b1a = self playLoopSound(#"hash_57b1409fb6e001f3");
+      self playSound(localclientnum, #"wpn_wkud_shrink_start");
+      self.var_66db8b1a = self playLoopSound(#"wpn_wkud_shrink_lp");
     }
 
     return;
@@ -63,7 +63,7 @@ shrink_globe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
   if(isDefined(self.var_66db8b1a)) {
     self stoploopsound(self.var_66db8b1a);
     self.var_66db8b1a = undefined;
-    self playSound(localclientnum, #"hash_12c7ff63913e6a34");
+    self playSound(localclientnum, #"wpn_wkud_shrink_end");
   }
 }
 

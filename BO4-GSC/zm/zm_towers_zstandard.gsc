@@ -142,7 +142,7 @@ function_bbbc20bf(var_a7bc1cee = 0) {
     mdl_head show();
 
     if(var_a7bc1cee) {
-      mdl_head playSound(#"hash_3d7066af9c9bf849");
+      mdl_head playSound(#"zmb_papquest_head_place");
       mdl_head thread zm_towers_pap_quest::function_61cf4d04();
     }
   }

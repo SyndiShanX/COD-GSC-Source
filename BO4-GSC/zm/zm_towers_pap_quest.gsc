@@ -1004,7 +1004,7 @@ function_f3c4aeac() {
   }
 
   self show();
-  self playSound(#"hash_3d7066af9c9bf849");
+  self playSound(#"zmb_papquest_head_place");
   self thread fx::play("fx_challenge_head_blood_burst", self getcentroid(), undefined, undefined, 1, undefined, 1, 0);
   self thread fx::play("fx_challenge_head_blood_drips", self getcentroid(), undefined, #"fx_stop_blood_drips", 1, str_fx_tag, 1, 0);
 }

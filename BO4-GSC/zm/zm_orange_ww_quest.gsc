@@ -184,13 +184,13 @@ function_f7a8831a() {
     self zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
     level flag::set(#"ww_icicle_melting");
     var_3eb924ae = spawn("script_origin", self.origin);
-    var_3eb924ae playLoopSound(#"hash_549b97233315d94");
+    var_3eb924ae playLoopSound(#"evt_icicle_boil_lp");
     level.s_ww_quest.s_icicle_in_pot scene::play("melt");
     level.s_ww_quest.var_27a40ea3 = level.s_ww_quest.s_icicle_in_pot.scene_ents[#"prop 1"];
     level.s_ww_quest.var_27a40ea3 hidepart("tag_icicle", "p8_fxanim_zm_orange_frozen_key", 1);
     level.s_ww_quest.s_icicle_in_pot scene::play("evaporate");
     var_3eb924ae delete();
-    playSoundAtPosition(#"hash_1fe7d157e75bcb38", self.origin);
+    playSoundAtPosition(#"evt_icicle_boil_done", self.origin);
     level flag::clear(#"ww_icicle_melting");
     level flag::set(#"ww_icicle_melted");
   }

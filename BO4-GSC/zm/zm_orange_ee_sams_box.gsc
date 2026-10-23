@@ -263,7 +263,7 @@ function_6c5a5d32() {
   self waittill(#"trigger_activated");
   level zm_ui_inventory::function_7df6bb60("zm_orange_zipquest_keycard_1", 2);
   level zm_ui_inventory::function_7df6bb60("zm_orange_zipquest_keycard_2", 2);
-  playSoundAtPosition(#"hash_218d931e2eeaafc4", self.e_key_1.origin);
+  playSoundAtPosition(#"evt_vault_key_uninsert", self.e_key_1.origin);
   self.e_key_1 delete();
   self.e_key_2 delete();
   level flag::set(#"hash_4119ce1986c28b9d");

@@ -2069,7 +2069,7 @@ perseus_teleport_fx(v_destination) {
   v_forward = anglesToForward(e_perseus.angles);
   level waittill(#"play_teleport_tell_fx");
   var_2ff979fa = spawn("script_model", v_destination);
-  var_2ff979fa playSound(#"hash_4cc85ba1ffa59d0b");
+  var_2ff979fa playSound(#"evt_perseus_lightning_tell");
   playFXOnTag(level._effect[#"hash_661c427afb24e5f2"], e_perseus, "tag_weapon_right");
   playFX(level._effect[#"hash_4d8d2bc22add9939"], var_2ff979fa.origin, v_forward, (1, 0, 0));
   level waittill(#"play_teleport_fx");

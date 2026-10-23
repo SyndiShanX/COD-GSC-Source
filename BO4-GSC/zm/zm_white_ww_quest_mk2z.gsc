@@ -187,7 +187,7 @@ function_9d66ea6f(e_item, e_player) {
     level.var_74170866.e_player zm_hms_util::function_51b752a9("vox_ww_z_ammo_pickup", 0);
 
     if(!zm_white_main_quest::function_6cebbce1()) {
-      level.var_74170866.e_player zm_white_util::function_491673da(#"hash_571c990866faa511");
+      level.var_74170866.e_player zm_white_util::function_491673da(#"vox_ww_z_chimney_start_rush_0");
     }
   }
 }

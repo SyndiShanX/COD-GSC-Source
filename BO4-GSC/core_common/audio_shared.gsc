@@ -200,7 +200,7 @@ function_30d4f8c4(attacker, smeansofdeath, weapon) {
     case #"pistol_revolver_t8":
     case #"tr_powersemi_t8":
     case #"pistol_standard_t8":
-      str_alias = #"hash_2b81ab20b5e3d199";
+      str_alias = #"mpl_death_by_weapon_singleshot";
       break;
     case #"shotgun_pump_t8":
     case #"shotgun_semiauto_t8":

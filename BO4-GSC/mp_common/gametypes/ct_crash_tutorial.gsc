@@ -772,7 +772,7 @@ function_9b2c973f() {
       if(n_current_health <= var_9192acd9 && !var_66075595) {
         var_66075595 = 1;
         ct_vo::function_3ca1b77d();
-        level ct_vo::play_vo(#"hash_552f1f27a33c7e19", 1);
+        level ct_vo::play_vo(#"vox_tvoi_tutor_crash_final_event_tak5_nag", 1);
       }
 
       if(var_2cf11630 <= var_8fe4b14 && !var_ca0b6cf8) {

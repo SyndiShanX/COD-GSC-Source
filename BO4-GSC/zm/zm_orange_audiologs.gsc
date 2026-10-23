@@ -85,7 +85,7 @@ init_reels() {
   level.s_audiologs.s_reels = spawnStruct();
   level.s_audiologs.s_reels.n_collected = 0;
   level.s_audiologs.s_reels.n_played = 0;
-  level.s_audiologs.s_reels.a_str_vox = array(#"hash_6fce75e5c4fe6210", #"hash_172aa60779a37741", #"hash_2388426b6c075d62", #"hash_1a1854072d6b2453", #"hash_23883c6b6c075330", #"hash_23883f6b6c075849");
+  level.s_audiologs.s_reels.a_str_vox = array(#"vox_audio_reel_stem_1_sfx", #"vox_audio_reel_stem_2_sfx", #"vox_audio_reel_stem_3", #"vox_audio_reel_stem_4_sfx", #"vox_audio_reel_stem_5", #"vox_audio_reel_stem_6");
   var_d1c55c66 = getEntArray("audiolog_reel", "targetname");
   array::run_all(var_d1c55c66, &zm_item_pickup::create_item_pickup, &pickup_reel, "", undefined, 96);
   level.s_audiologs.s_reels.s_playback = struct::get("audiolog_reel_player");
@@ -147,7 +147,7 @@ function_4a547e41() {
 }
 
 function_922ff46a() {
-  level.s_audiologs.var_bc136840 = array(#"hash_5f4b3985abc17212", #"hash_5f4b3885abc1705f", #"hash_5f4b3785abc16eac", #"hash_5f4b3685abc16cf9", #"hash_5f4b3585abc16b46");
+  level.s_audiologs.var_bc136840 = array(#"vox_pablo_log_stem_1", #"vox_pablo_log_stem_2", #"vox_pablo_log_stem_3", #"vox_pablo_log_stem_4", #"vox_pablo_log_stem_5");
   var_b41e84c = struct::get_array("audiolog_pablo");
   array::run_all(var_b41e84c, &zm_unitrigger::create, "", 96);
   array::thread_all(var_b41e84c, &function_a8be9b98);

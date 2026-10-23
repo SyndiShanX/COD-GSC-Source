@@ -670,7 +670,7 @@ function_2380f2d5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     return;
   }
 
-  self.mdl_paper = util::spawn_model(localclientnum, #"hash_11298e91093a52ac", self.origin, self.angles);
+  self.mdl_paper = util::spawn_model(localclientnum, #"p8_fxanim_zm_esc_book_zombie_numbers_mod", self.origin, self.angles);
   self.mdl_paper.var_d2f68d5d = newval;
   self.mdl_paper.show_function = &function_9fcac487;
   self.mdl_paper.hide_function = &function_ffd0f7c6;
@@ -766,13 +766,13 @@ function_9fcac487(localclientnum) {
 
 function_6c3e8bde(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    forcestreamxmodel(#"hash_4c06bc763e373f0f");
-    forcestreamxmodel(#"hash_11298e91093a52ac");
+    forcestreamxmodel(#"p8_fxanim_zm_esc_book_zombie_timeline_mod");
+    forcestreamxmodel(#"p8_fxanim_zm_esc_book_zombie_numbers_mod");
     return;
   }
 
-  stopforcestreamingxmodel(#"hash_4c06bc763e373f0f");
-  stopforcestreamingxmodel(#"hash_11298e91093a52ac");
+  stopforcestreamingxmodel(#"p8_fxanim_zm_esc_book_zombie_timeline_mod");
+  stopforcestreamingxmodel(#"p8_fxanim_zm_esc_book_zombie_numbers_mod");
 }
 
 ghost_spoon_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

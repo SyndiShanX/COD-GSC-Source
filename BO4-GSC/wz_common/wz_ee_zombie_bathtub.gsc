@@ -80,7 +80,7 @@ on_player_item_pickup(params) {
 
       if(isDefined(zombie_arm)) {
         var_4805bfaa = (zombie_arm.origin[0], zombie_arm.origin[1], zombie_arm.origin[2] + -24);
-        zombie_arm playSound(#"hash_134bc3c2ce6ed759");
+        zombie_arm playSound(#"evt_spk_hand_retract");
         level thread function_ca44f5a5(zombie_arm, var_4805bfaa, 1);
         level clientfield::increment("zombie_arm_blood_splash", 1);
         callback::remove_callback(#"on_item_pickup", &on_player_item_pickup);

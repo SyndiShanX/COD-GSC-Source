@@ -2543,13 +2543,13 @@ player_collisionbox(var_96065dae, var_8d3fbac4 = undefined, n_size = 0) {
 
   switch (n_size) {
     case 0:
-      level.var_33bd6a8 setModel(#"hash_413df540de077fc5");
+      level.var_33bd6a8 setModel(#"p8_tutorial_target_area_circle_r90");
       break;
     case 1:
-      level.var_33bd6a8 setModel(#"hash_413df540de077fc5");
+      level.var_33bd6a8 setModel(#"p8_tutorial_target_area_circle_r90");
       break;
     case 2:
-      level.var_33bd6a8 setModel(#"hash_1d86ea391eae27af");
+      level.var_33bd6a8 setModel(#"p8_tutorial_target_area_circle_r180");
       break;
   }
 

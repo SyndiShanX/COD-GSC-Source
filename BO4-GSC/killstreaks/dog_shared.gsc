@@ -56,7 +56,7 @@ deployed_off(slot, weapon) {
 
 spawned(type) {
   assert(isPlayer(self));
-  playSoundAtPosition(#"hash_7245f25f5953631c", self.origin);
+  playSoundAtPosition(#"fly_dog_whistle_call_scr", self.origin);
   player = self;
   bundle = level.killstreaks[type].script_bundle;
 

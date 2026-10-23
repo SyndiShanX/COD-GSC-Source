@@ -738,7 +738,7 @@ function_e03ea502() {
             var_d866ecc6 = math::clamp(var_d866ecc6, 0, 0.75);
 
             if(self.var_7e008e0c > 0 && !(isDefined(self.var_5288b14b) && self.var_5288b14b)) {
-              self playsoundtoplayer(#"hash_d71dba92ab8897c", self);
+              self playsoundtoplayer(#"zmb_rush_lose_multi_big", self);
               self thread function_a097cde6();
             }
           }
@@ -791,7 +791,7 @@ function_c1ab015e() {
   wait 5;
 
   while(self.var_7e008e0c > 0) {
-    self playsoundtoplayer(#"hash_10a416158cd8fd3a", self);
+    self playsoundtoplayer(#"zmb_rush_lose_multi_warn", self);
     self notify(#"multiplier_timeout");
     wait 1;
   }

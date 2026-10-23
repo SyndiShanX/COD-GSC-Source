@@ -74,12 +74,12 @@ function_fe65f5a6(var_b7358df3, e_player, n_timeout = 1) {
   n_delay_time = randomfloatrange(2, 5);
   wait n_delay_time;
   self thread namespace_9ff9f642::slowdown(#"zm_trial_zombie_speed_changes", var_b7358df3);
-  self playSound(#"hash_46661e1d0062f53b");
+  self playSound(#"zmb_trial_horror_zombie_move");
 
   if(math::cointoss(20)) {
     if(isDefined(e_player) && isalive(e_player)) {
       if(e_player islookingat(self)) {
-        self playsoundtoplayer(#"hash_69671b54d86128ce", e_player);
+        self playsoundtoplayer(#"zmb_trial_horror_zombie_move_stinger", e_player);
       }
     }
   }

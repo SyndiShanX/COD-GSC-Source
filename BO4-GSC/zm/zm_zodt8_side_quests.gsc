@@ -798,7 +798,7 @@ function_bf250d60() {
         }
 
         if(self.targetname == #"floaters_post") {
-          playSoundAtPosition(#"hash_123df27d58070a48", self.origin);
+          playSoundAtPosition(#"zmb_statue_trident_fall", self.origin);
         }
       }
 
@@ -2312,7 +2312,7 @@ function_ff05eb5() {
       if(isDefined(self.var_fd9d797f) && self.var_fd9d797f) {
         iprintlnbold("<dev string:x166>");
 
-        playSoundAtPosition(#"hash_5ef8e030b84ace08", self.origin);
+        playSoundAtPosition(#"zmb_skull_music_success", self.origin);
         level thread scene::play(str_bundle, "sample");
         waitresult.attacker util::delay(3, "death", &zm_audio::create_and_play_dialog, #"skull_singers", #"correct_tune");
 
@@ -2329,7 +2329,7 @@ function_ff05eb5() {
 
       iprintlnbold("<dev string:x178>");
 
-      playSoundAtPosition(#"hash_165a8e8934d64af5", self.origin);
+      playSoundAtPosition(#"zmb_skull_music_fail", self.origin);
       level thread scene::play(str_bundle, "fail");
       waitresult.attacker util::delay(3, "death", &zm_audio::create_and_play_dialog, #"skull_singers", #"wrong_tune");
     }

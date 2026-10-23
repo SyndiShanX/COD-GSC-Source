@@ -577,7 +577,7 @@ function_53a333a8(var_ecffa2a8, var_41f9c5ff = undefined, var_893baaf = undefine
       var_41f9c5ff = self function_73fda38e(var_41f9c5ff);
       self set_tribute(self.n_tribute + var_41f9c5ff);
       self.var_6b3806e8 += var_41f9c5ff / level.var_8b7ab859;
-      self playsoundtoplayer(#"hash_51923ec42cdda138", self);
+      self playsoundtoplayer(#"zmb_tribute_ticker_flash", self);
     }
   } else if(isDefined(var_ecffa2a8)) {
     n_amount = self function_955b59b2(var_ecffa2a8, var_893baaf);
@@ -587,7 +587,7 @@ function_53a333a8(var_ecffa2a8, var_41f9c5ff = undefined, var_893baaf = undefine
     } else {
       set_tribute(self.n_tribute + n_amount);
       self.var_6b3806e8 += n_amount / level.var_8b7ab859;
-      self playsoundtoplayer(#"hash_51923ec42cdda138", self);
+      self playsoundtoplayer(#"zmb_tribute_ticker_flash", self);
     }
   }
 
@@ -597,16 +597,16 @@ function_53a333a8(var_ecffa2a8, var_41f9c5ff = undefined, var_893baaf = undefine
   if(var_1f5eb74c != self.var_9e09931e) {
     switch (self.var_9e09931e) {
       case 1:
-        self playsoundtoplayer(#"hash_15350c3643360459", self);
+        self playsoundtoplayer(#"zmb_tribute_item_upgraded", self);
         break;
       case 2:
-        self playsoundtoplayer(#"hash_15350c3643360459", self);
+        self playsoundtoplayer(#"zmb_tribute_item_upgraded", self);
         break;
       case 3:
-        self playsoundtoplayer(#"hash_15350c3643360459", self);
+        self playsoundtoplayer(#"zmb_tribute_item_upgraded", self);
         break;
       case 4:
-        self playsoundtoplayer(#"hash_15350c3643360459", self);
+        self playsoundtoplayer(#"zmb_tribute_item_upgraded", self);
         break;
     }
 

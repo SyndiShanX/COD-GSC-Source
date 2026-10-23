@@ -249,7 +249,7 @@ pickup_dung(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
 
 function_8565be53(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   playFX(localclientnum, level._effect[#"hash_6ff3eb2dd0078a51"], self.origin);
-  playSound(localclientnum, #"hash_2e08e4ff8f949d48", self.origin);
+  playSound(localclientnum, #"zmb_funtime_danu_wood_break", self.origin);
 }
 
 function_35bf68a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -1744,14 +1744,14 @@ maelstrom_initiate_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 
   foreach(s_fx in a_s_fx) {
     playFX(localclientnum, level._effect[#"maelstrom_initiate"], s_fx.origin, anglesToForward(s_fx.angles));
-    playSound(localclientnum, #"hash_44163603295b2408", s_fx.origin);
+    playSound(localclientnum, #"zmb_funtime_electro_ped_activate", s_fx.origin);
   }
 }
 
 maelstrom_conduct(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self.var_7ef98b90 = util::playFXOnTag(localclientnum, level._effect[#"maelstrom_conduct"], self, "tag_origin");
-    self playSound(localclientnum, #"hash_68123d3c746fe40c");
+    self playSound(localclientnum, #"zmb_funtime_electro_spike_charge");
     return;
   }
 
@@ -1766,8 +1766,8 @@ function_e21e7dbe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_8e8be900 = util::playFXOnTag(localclientnum, level._effect[#"hash_1814d4cc1867739c"], self, "tag_origin");
 
     if(!isDefined(self.var_45052c1f)) {
-      self playSound(localclientnum, #"hash_5653bacd3880f5e6");
-      self.var_45052c1f = self playLoopSound(#"hash_1158ca937d0645df");
+      self playSound(localclientnum, #"zmb_funtime_electro_ball_activate");
+      self.var_45052c1f = self playLoopSound(#"zmb_funtime_electro_ball_lp");
     }
 
     return;
@@ -1779,7 +1779,7 @@ function_e21e7dbe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(isDefined(self.var_45052c1f)) {
-    self playSound(localclientnum, #"hash_3dc40c9d94d68a08");
+    self playSound(localclientnum, #"zmb_funtime_electro_ball_end");
     self stoploopsound(self.var_45052c1f);
     self.var_45052c1f = undefined;
   }
@@ -1807,28 +1807,28 @@ maelstrom_discharge(localclientnum, oldval, newval, bnewent, binitialsnap, field
 maelstrom_death(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   playFX(localclientnum, level._effect[#"maelstrom_death"], self.origin, anglesToForward((0, 0, 0)), anglestoup((0, 0, 0)));
   function_36e4ebd4(localclientnum, "lightninggun_fire");
-  self playSound(localclientnum, #"hash_784c6d9757964494");
+  self playSound(localclientnum, #"zmb_funtime_electro_ai_death");
 }
 
 maelstrom_storm(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     if(!isDefined(self.var_cc93270e)) {
-      self playSound(localclientnum, #"hash_5949809a2b6867a3");
-      self.var_cc93270e = self playLoopSound(#"hash_15a98fa81782b075");
+      self playSound(localclientnum, #"zmb_funtime_electro_storm_start");
+      self.var_cc93270e = self playLoopSound(#"zmb_funtime_electro_storm_lp");
     }
 
     return;
   }
 
   if(isDefined(self.var_cc93270e)) {
-    self playSound(localclientnum, #"hash_2a8bc9fc5e6a2b6");
+    self playSound(localclientnum, #"zmb_funtime_electro_storm_end");
     self stoploopsound(self.var_cc93270e);
     self.var_cc93270e = undefined;
   }
 }
 
 maelstrom_storm_change(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  self playSound(localclientnum, #"hash_57b0d65c6bc36311");
+  self playSound(localclientnum, #"zmb_funtime_electro_storm_change");
 }
 
 maelstrom_ending(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

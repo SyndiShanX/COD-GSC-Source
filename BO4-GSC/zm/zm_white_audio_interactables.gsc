@@ -310,11 +310,11 @@ uin_kls_counteruavdefeated() {
 
 function_ac06ab3a() {
   level.var_ea514bc4 = [];
-  var_1c8e90b4 = array(#"hash_6fce75e5c4fe6210");
-  var_ab6a16ff = array(#"hash_172aa60779a37741");
-  var_e6c1fe70 = array(#"hash_511e79ef416368e2");
-  var_51ba7b4a = array(#"hash_1a1854072d6b2453");
-  var_68e586cf = array(#"hash_39204e32adbe7694");
+  var_1c8e90b4 = array(#"vox_audio_reel_stem_1_sfx");
+  var_ab6a16ff = array(#"vox_audio_reel_stem_2_sfx");
+  var_e6c1fe70 = array(#"vox_audio_reel_stem_3_sfx");
+  var_51ba7b4a = array(#"vox_audio_reel_stem_4_sfx");
+  var_68e586cf = array(#"vox_audio_reel_stem_5_sfx");
   level.var_ea514bc4[0] = {
     #var_8a821e1e: 0, #in_inventory: 0, #vo_line: var_1c8e90b4
   };

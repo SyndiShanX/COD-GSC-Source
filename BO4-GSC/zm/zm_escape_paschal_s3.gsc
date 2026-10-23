@@ -124,7 +124,7 @@ function_486ef0f6() {
 
   if(!isDefined(level.var_bbc27d0e)) {
     var_c26c0a90 = struct::get("k_fx_pos", "targetname");
-    level.var_bbc27d0e = util::spawn_model(#"hash_4c06bc763e373f0f", var_c26c0a90.origin, var_c26c0a90.angles);
+    level.var_bbc27d0e = util::spawn_model(#"p8_fxanim_zm_esc_book_zombie_timeline_mod", var_c26c0a90.origin, var_c26c0a90.angles);
   }
 
   var_a9b19429 = 0;
