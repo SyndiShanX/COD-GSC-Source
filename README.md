@@ -1,8 +1,10 @@
 # COD-GSC-Source
 
-A Repo of all COD games I've dumped and formatted the PC GSC/CSC files for
+A Repo for the PC GSC/CSC/LUA of the COD games I've dumped and formatted
 
 If you have any Issues/Suggestions, please Submit them in [Issues](https://github.com/SyndiShanX/COD-GSC-Source/issues)
+
+Feel free to join my [Discord](https://discord.com/invite/grjBktEUCy)
 
 ## Blitz:
 
