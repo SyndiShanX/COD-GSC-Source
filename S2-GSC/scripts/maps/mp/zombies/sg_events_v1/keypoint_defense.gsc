@@ -7,8 +7,8 @@ init() {
   maps\mp\mp_zombies_attack_object::init();
   maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::sg_obj_register_defaults("type_defense_common", ::basic_defense_run, 120, 1, 1);
   level._zombies_shotgun_obj_keypoint_defense_dmg_structs = initialize_damage_states();
-  var_0 = common_scripts\utility::_id_46B5("zmb_shotgun_keypoint_defend_point_a", "targetname");
-  var_1 = common_scripts\utility::_id_46B5("zmb_shotgun_keypoint_defend_point_b", "targetname");
+  var_0 = common_scripts\utility::getstruct("zmb_shotgun_keypoint_defend_point_a", "targetname");
+  var_1 = common_scripts\utility::getstruct("zmb_shotgun_keypoint_defend_point_b", "targetname");
 
   if(isDefined(var_0) && isDefined(var_1)) {
     foreach(var_3 in [var_0, var_1]) {
@@ -31,14 +31,14 @@ basic_defense_run(var_0) {
     var_2 = ["zombie_generic", "zombie_exploder"];
   }
 
-  var_3 = common_scripts\utility::_id_46B5("zmb_shotgun_keypoint_defend_point_a", "targetname");
-  var_4 = common_scripts\utility::_id_46B5("zmb_shotgun_keypoint_defend_point_b", "targetname");
+  var_3 = common_scripts\utility::getstruct("zmb_shotgun_keypoint_defend_point_a", "targetname");
+  var_4 = common_scripts\utility::getstruct("zmb_shotgun_keypoint_defend_point_b", "targetname");
   var_5 = [var_3, var_4];
   var_6 = common_scripts\utility::random(var_5);
   level.outro_targetname = var_6.targetname + "_cam";
   var_7 = spawn("script_model", var_6.origin);
   var_7 setModel("tag_origin");
-  var_7.ammo_attack_points = common_scripts\utility::_id_46B7(var_6._id_0165, "targetname");
+  var_7.ammo_attack_points = common_scripts\utility::getstructarray(var_6._id_0165, "targetname");
 
   if(isDefined(var_6.angles)) {
     var_7.angles = var_6.angles;
@@ -55,7 +55,7 @@ basic_defense_run(var_0) {
   var_7.capture_health = var_8;
   var_7.maxhealth = var_8;
   level thread maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::single_ent_health_display_start(var_7, 0, 1);
-  var_7 common_scripts\utility::_id_3799("obj_destroyed");
+  var_7 common_scripts\utility::ent_flag_init("obj_destroyed");
   var_9 = spawn("script_model", var_7.origin);
   var_9 setModel("zmb_uberschnalle_battery_chunk_01");
 
@@ -107,23 +107,23 @@ initialize_damage_states() {
 
     switch (var_3) {
       case 1:
-        var_4._id_3F02 = ::set_condition_prestine;
+        var_4.func = ::set_condition_prestine;
         var_4.fx = undefined;
         break;
       case 2:
-        var_4._id_3F02 = ::set_condition_damage_low;
+        var_4.func = ::set_condition_damage_low;
         var_4.fx = "zmb_battery_defense_dmg_1";
         break;
       case 3:
-        var_4._id_3F02 = ::set_condition_damage_med;
+        var_4.func = ::set_condition_damage_med;
         var_4.fx = "zmb_battery_defense_dmg_2";
         break;
       case 4:
-        var_4._id_3F02 = ::set_condition_damage_high;
+        var_4.func = ::set_condition_damage_high;
         var_4.fx = "zmb_battery_defense_dmg_3";
         break;
       case 5:
-        var_4._id_3F02 = ::set_condition_damage_exp;
+        var_4.func = ::set_condition_damage_exp;
         var_4.fx = "zmb_battery_defense_dmg_fail";
         break;
     }
@@ -163,18 +163,18 @@ set_condition(var_0) {
   if(var_0 == var_1.size) {
     wait 1.3;
     var_2 = _id_0547::_id_408F();
-    var_2 = common_scripts\utility::_id_40B0(self.origin, var_2);
+    var_2 = common_scripts\utility::get_array_of_closest(self.origin, var_2);
 
     foreach(var_5, var_4 in var_2) {
       if(var_5 < 4) {
-        var_4 _meth_8682(0, 10, 1, "none", 1);
+        var_4 setfirstinfected(0, 10, 1, "none", 1);
       }
     }
   }
 
   clear_dmg_fx();
   spawn_defense_fx(var_1[var_0 - 1].fx);
-  self[[var_1[var_0 - 1]._id_3F02]]();
+  self[[var_1[var_0 - 1].func]]();
 }
 
 set_condition_prestine() {}
@@ -198,7 +198,7 @@ basic_defense_wait_for_destruction() {
   level endon("sg_obj_timeout");
   level endon("sg_defense_failed");
   var_0 = self;
-  var_0 common_scripts\utility::_id_379C("obj_destroyed");
+  var_0 common_scripts\utility::ent_flag_wait("obj_destroyed");
   level notify("sg_defense_failed");
 }
 

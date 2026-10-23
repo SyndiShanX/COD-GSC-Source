@@ -25,7 +25,7 @@ init() {
 }
 
 mayprocesschallenges() {
-  if(maps\mp\_utility::_id_761E()) {
+  if(maps\mp\_utility::practiceroundgame()) {
     return 0;
   }
 
@@ -37,7 +37,7 @@ mayprocesschallenges() {
     }
   }
 
-  if(_func_3AF()) {
+  if(xmodelalias/alias_ger_heads_scarf_for_muddy_cheap()) {
     return 0;
   }
 
@@ -64,16 +64,16 @@ onplayerconnect() {
       var_0 thread monitorscavengerpickup();
       var_0 thread monitorkillstreakprogress();
       var_0 thread monitorfinalstandsurvival();
-      var_0 thread _id_63B2();
+      var_0 thread monitorminetriggering();
       var_0 thread _id_63FA();
-      var_0 thread _id_63C3();
+      var_0 thread monitorplayermatchchallenges();
       var_0 notifyonplayercommand("jumped", "+goStand");
-      var_0 thread _id_63AE();
+      var_0 thread monitormantle();
       var_0.streaksdestroyedthislife = [];
     } else
       var_0 thread _id_0468::ae_sendzmskinunlockevent();
 
-    var_0 thread _id_63CA();
+    var_0 thread monitorprocesschallenge();
   }
 }
 
@@ -82,16 +82,16 @@ onplayerspawned() {
 
   for(;;) {
     self waittill("spawned_player");
-    thread _id_6B74();
+    thread onplayerdeath();
   }
 }
 
-_id_6B74() {
+onplayerdeath() {
   self endon("disconnect");
   self waittill("death");
 
-  if(isDefined(self._id_4B8F)) {
-    self._id_4B8F = 0;
+  if(isDefined(self.hasscavengedammothislife)) {
+    self.hasscavengedammothislife = 0;
   }
 
   if(isDefined(self.streaksdestroyedthislife)) {
@@ -106,7 +106,7 @@ monitorscavengerpickup() {
     self waittill("scavenger_pickup");
 
     if(maps\mp\_utility::_hasperk("specialty_class_forage")) {
-      self._id_4B8F = 1;
+      self.hasscavengedammothislife = 1;
     } else if(maps\mp\_utility::_hasperk("specialty_class_clandestine")) {
       processchallenge("ch_dlc1_cladestine");
     }
@@ -126,11 +126,11 @@ monitorfinalstandsurvival() {
 }
 
 initmissiondata() {
-  while(!isDefined(level._id_5A61)) {
+  while(!isDefined(level.killstreakfuncs)) {
     waitframe();
   }
 
-  var_0 = getarraykeys(level._id_5A61);
+  var_0 = getarraykeys(level.killstreakfuncs);
 
   foreach(var_2 in var_0) {
     self.pers[var_2] = 0;
@@ -138,7 +138,7 @@ initmissiondata() {
 
   self.pers["lastBulletKillTime"] = 0;
   self.pers["bulletStreak"] = 0;
-  self._id_3961 = [];
+  self.explosiveinfo = [];
 }
 
 registermissioncallback(var_0, var_1) {
@@ -149,9 +149,9 @@ registermissioncallback(var_0, var_1) {
   level.missioncallbacks[var_0][level.missioncallbacks[var_0].size] = var_1;
 }
 
-_id_4451(var_0) {
-  if(isDefined(self._id_20A9[var_0])) {
-    return self._id_20A9[var_0];
+getchallengestatus(var_0) {
+  if(isDefined(self.challengedata[var_0])) {
+    return self.challengedata[var_0];
   } else {
     return 0;
   }
@@ -286,9 +286,9 @@ ch_hardpoints(var_0) {
     return;
   }
   var_1 = var_0.player;
-  var_1.pers[var_0._id_4B1F]++;
+  var_1.pers[var_0.hardpointtype]++;
 
-  switch (var_0._id_4B1F) {
+  switch (var_0.hardpointtype) {
     case "uav":
       var_1 processchallenge("ch_uav");
       var_1 processchallenge("ch_assault_streaks");
@@ -313,30 +313,30 @@ ch_hardpoints(var_0) {
 }
 
 ch_vehicle_kills(var_0) {
-  if(!isDefined(var_0._id_1180) || !isPlayer(var_0._id_1180)) {
+  if(!isDefined(var_0.attacker) || !isPlayer(var_0.attacker)) {
     return;
   }
-  if(!maps\mp\_utility::iskillstreakweapon(var_0._id_953E)) {
+  if(!maps\mp\_utility::iskillstreakweapon(var_0.sweapon)) {
     return;
   }
-  var_1 = var_0._id_1180;
+  var_1 = var_0.attacker;
 
-  if(!isDefined(var_1.pers[var_0._id_953E + "_streak"]) || isDefined(var_1.pers[var_0._id_953E + "_streakTime"]) && gettime() - var_1.pers[var_0._id_953E + "_streakTime"] > 7000) {
-    var_1.pers[var_0._id_953E + "_streak"] = 0;
-    var_1.pers[var_0._id_953E + "_streakTime"] = gettime();
+  if(!isDefined(var_1.pers[var_0.sweapon + "_streak"]) || isDefined(var_1.pers[var_0.sweapon + "_streakTime"]) && gettime() - var_1.pers[var_0.sweapon + "_streakTime"] > 7000) {
+    var_1.pers[var_0.sweapon + "_streak"] = 0;
+    var_1.pers[var_0.sweapon + "_streakTime"] = gettime();
   }
 
-  var_1.pers[var_0._id_953E + "_streak"]++;
+  var_1.pers[var_0.sweapon + "_streak"]++;
 
-  switch (var_0._id_953E) {
+  switch (var_0.sweapon) {
     case "artillery_mp":
       var_1 processchallenge("ch_carpetbomber");
 
-      if(var_1.pers[var_0._id_953E + "_streak"] >= 5) {
+      if(var_1.pers[var_0.sweapon + "_streak"] >= 5) {
         var_1 processchallenge("ch_carpetbomb");
       }
 
-      if(isDefined(var_1._id_3B4B)) {
+      if(isDefined(var_1.finalkill)) {
         var_1 processchallenge("ch_finishingtouch");
       }
 
@@ -344,11 +344,11 @@ ch_vehicle_kills(var_0) {
     case "stealth_bomb_mp":
       var_1 processchallenge("ch_thespirit");
 
-      if(var_1.pers[var_0._id_953E + "_streak"] >= 6) {
+      if(var_1.pers[var_0.sweapon + "_streak"] >= 6) {
         var_1 processchallenge("ch_redcarpet");
       }
 
-      if(isDefined(var_1._id_3B4B)) {
+      if(isDefined(var_1.finalkill)) {
         var_1 processchallenge("ch_technokiller");
       }
 
@@ -356,7 +356,7 @@ ch_vehicle_kills(var_0) {
     case "sentry_minigun_mp":
       var_1 processchallenge("ch_looknohands");
 
-      if(isDefined(var_1._id_3B4B)) {
+      if(isDefined(var_1.finalkill)) {
         var_1 processchallenge("ch_absentee");
       }
 
@@ -366,7 +366,7 @@ ch_vehicle_kills(var_0) {
     case "ac130_105mm_mp":
       var_1 processchallenge("ch_spectre");
 
-      if(isDefined(var_1._id_3B4B)) {
+      if(isDefined(var_1.finalkill)) {
         var_1 processchallenge("ch_deathfromabove");
       }
 
@@ -374,11 +374,11 @@ ch_vehicle_kills(var_0) {
     case "remotemissile_projectile_mp":
       var_1 processchallenge("ch_predator");
 
-      if(var_1.pers[var_0._id_953E + "_streak"] >= 4) {
+      if(var_1.pers[var_0.sweapon + "_streak"] >= 4) {
         var_1 processchallenge("ch_reaper");
       }
 
-      if(isDefined(var_1._id_3B4B)) {
+      if(isDefined(var_1.finalkill)) {
         var_1 processchallenge("ch_dronekiller");
       }
 
@@ -389,57 +389,57 @@ ch_vehicle_kills(var_0) {
 }
 
 ch_vehicle_killed(var_0) {
-  if(!isDefined(var_0._id_1180) || !isPlayer(var_0._id_1180)) {
+  if(!isDefined(var_0.attacker) || !isPlayer(var_0.attacker)) {
     return;
   }
-  var_1 = var_0._id_1180;
-  var_2 = maps\mp\_utility::_id_4431(var_0._id_953E, 1);
+  var_1 = var_0.attacker;
+  var_2 = maps\mp\_utility::_id_4431(var_0.sweapon, 1);
 
   if(maps\mp\_utility::_id_5856(var_2)) {
-    var_2 = maps\mp\gametypes\_class::_id_4432(var_2);
+    var_2 = maps\mp\gametypes\_class::getbasefromlootversion(var_2);
   }
 
-  var_3 = _id_40EE(var_0._id_953E, var_2);
+  var_3 = get_challenge_weapon_class(var_0.sweapon, var_2);
 
   if(var_3 == "weapon_projectile") {
-    if(isDefined(level._id_20AA["ch_vehicle_" + var_2])) {
+    if(isDefined(level.challengeinfo["ch_vehicle_" + var_2])) {
       var_1 processchallenge("ch_vehicle_" + var_2);
     }
 
-    if(isDefined(level._id_20AA["ch_marksman_" + var_2]) && var_2 != "dp28_mp") {
+    if(isDefined(level.challengeinfo["ch_marksman_" + var_2]) && var_2 != "dp28_mp") {
       var_1 processchallenge("ch_marksman_" + var_2);
     }
   }
 
   if(var_1 maps\mp\_utility::_hasperk("specialty_coldblooded") && var_1 maps\mp\_utility::_hasperk("specialty_spygame") && var_1 maps\mp\_utility::_hasperk("specialty_heartbreaker")) {
-    if(!isDefined(var_0._id_A2C8) || !isDefined(var_0._id_A2C8.setsurfacetype) || var_0._id_A2C8.setsurfacetype != "prison_turret") {
+    if(!isDefined(var_0.vehicle) || !isDefined(var_0.vehicle.setsurfacetype) || var_0.vehicle.setsurfacetype != "prison_turret") {
       var_1 processchallenge("ch_precision_airhunt");
     }
   }
 
-  if(isDefined(var_0._id_A2C8) && isDefined(var_0._id_A2C8._id_01C8) && var_0._id_A2C8._id_01C8 == "drone_recon" && issubstr(var_2, "exoknife")) {
+  if(isDefined(var_0.vehicle) && isDefined(var_0.vehicle._id_01C8) && var_0.vehicle._id_01C8 == "drone_recon" && issubstr(var_2, "exoknife")) {
     var_1 processchallenge("ch_precision_knife");
   }
 
-  if(issubstr(var_0._id_953E, "rapid_fire") && issubstr(var_0._id_953E, "fmj")) {
+  if(issubstr(var_0.sweapon, "rapid_fire") && issubstr(var_0.sweapon, "fmj")) {
     var_1 processchallenge("ch_combatefficiency_hotlead");
   }
 }
 
-_id_23E3(var_0) {
+clearidshortly(var_0) {
   self endon("disconnect");
   self notify("clearing_expID_" + var_0);
   self endon("clearing_expID_" + var_0);
   wait 3.0;
-  self._id_3962[var_0] = undefined;
+  self.explosivekills[var_0] = undefined;
 }
 
-_id_6157() {
+mgkill() {
   var_0 = self;
 
   if(!isDefined(var_0.pers["MGStreak"])) {
     var_0.pers["MGStreak"] = 0;
-    var_0 thread _id_36D8();
+    var_0 thread endmgstreakwhenleavemg();
 
     if(!isDefined(var_0.pers["MGStreak"])) {
       return;
@@ -453,7 +453,7 @@ _id_6157() {
   }
 }
 
-_id_36D8() {
+endmgstreakwhenleavemg() {
   self endon("disconnect");
 
   for(;;) {
@@ -466,11 +466,11 @@ _id_36D8() {
   }
 }
 
-_id_36D7() {
+endmgstreak() {
   self.pers["MGStreak"] = undefined;
 }
 
-_id_5A3B(var_0) {
+killedbestenemyplayer(var_0) {
   if(!isDefined(self.pers["countermvp_streak"]) || !var_0) {
     self.pers["countermvp_streak"] = 0;
   }
@@ -488,7 +488,7 @@ _id_5A3B(var_0) {
   }
 }
 
-_id_5712(var_0) {
+ishighestscoringplayer(var_0) {
   if(!isDefined(var_0.score) || var_0.score < 1) {
     return 0;
   }
@@ -522,37 +522,37 @@ _id_5712(var_0) {
 }
 
 _id_7752(var_0) {
-  if(!isDefined(self._id_20A9) || !isDefined(self._id_20A9[var_0])) {
+  if(!isDefined(self.challengedata) || !isDefined(self.challengedata[var_0])) {
     return;
   }
-  if(self._id_20A9[var_0] != 2) {
+  if(self.challengedata[var_0] != 2) {
     return;
   }
   if(!maps\mp\_utility::rankingenabled() || maps\mp\_utility::privatematch()) {
     return;
   }
-  var_1 = maps\mp\gametypes\_hud_util::_id_2097(var_0);
+  var_1 = maps\mp\gametypes\_hud_util::ch_getprogress(var_0);
 
-  if(var_1 >= level._id_20AA[var_0]["targetval"]) {
+  if(var_1 >= level.challengeinfo[var_0]["targetval"]) {
     return;
   }
   var_2 = var_1 + 1;
 
-  if(var_2 == level._id_20AA[var_0]["targetval"]) {
-    thread maps\mp\gametypes\_hud_message::_id_9102(var_0 + "_complete");
-    self._id_20A9[var_0] = 3;
-    maps\mp\gametypes\_hud_util::_id_209F(var_0, 3);
+  if(var_2 == level.challengeinfo[var_0]["targetval"]) {
+    thread maps\mp\gametypes\_hud_message::splashnotify(var_0 + "_complete");
+    self.challengedata[var_0] = 3;
+    maps\mp\gametypes\_hud_util::ch_setstate(var_0, 3);
   } else
-    maps\mp\gametypes\_hud_util::_id_209E(var_0, var_2);
+    maps\mp\gametypes\_hud_util::ch_setprogress(var_0, var_2);
 }
 
 ch_kills(var_0) {
-  var_0._id_A490 _id_73D3();
+  var_0.victim playerdied();
 
-  if(!isDefined(var_0._id_1180) || !isPlayer(var_0._id_1180)) {
+  if(!isDefined(var_0.attacker) || !isPlayer(var_0.attacker)) {
     return;
   } else {
-    var_1 = var_0._id_1180;
+    var_1 = var_0.attacker;
   }
 
   if(isbot(var_1)) {
@@ -560,28 +560,28 @@ ch_kills(var_0) {
   }
   var_1 _id_7752("ch_daily_0");
 
-  if(var_0._id_8CD7 == "MOD_HEAD_SHOT") {
+  if(var_0.smeansofdeath == "MOD_HEAD_SHOT") {
     var_1 _id_7752("ch_daily_1");
   }
 
   var_2 = 0;
   var_3 = 0;
   var_4 = 1;
-  var_5[var_0._id_A490.name] = var_0._id_A490.name;
-  var_6[var_0._id_953E] = var_0._id_953E;
+  var_5[var_0.victim.name] = var_0.victim.name;
+  var_6[var_0.sweapon] = var_0.sweapon;
   var_7 = 1;
   var_8 = [];
-  var_9 = var_0._id_8CD7;
+  var_9 = var_0.smeansofdeath;
   var_10 = var_0.time;
-  var_11 = _getweaponattachments(var_0._id_953E);
+  var_11 = _getweaponattachments(var_0.sweapon);
   var_12 = 0;
 
-  if(isDefined(var_1._id_6FBA[var_0._id_953E]) && !maps\mp\_utility::_id_5755(var_9)) {
+  if(isDefined(var_1.pickedupweaponfrom[var_0.sweapon]) && !maps\mp\_utility::ismeleemod(var_9)) {
     var_12++;
   }
 
-  var_13 = maps\mp\_utility::iskillstreakweapon(var_0._id_953E);
-  var_14 = maps\mp\_utility::_id_56DF(var_0._id_953E);
+  var_13 = maps\mp\_utility::iskillstreakweapon(var_0.sweapon);
+  var_14 = maps\mp\_utility::isenvironmentweapon(var_0.sweapon);
   var_15 = 0;
 
   if(var_9 == "MOD_HEAD_SHOT") {
@@ -591,28 +591,28 @@ ch_kills(var_0) {
   var_16 = 0;
   var_17 = 0;
 
-  if(isDefined(var_0._id_62A1["longshot"])) {
+  if(isDefined(var_0.modifiers["longshot"])) {
     var_16 = 1;
     var_17++;
   }
 
-  var_18 = var_0._id_A85F;
+  var_18 = var_0.was_ads;
   var_19 = 0;
 
-  if(var_1._id_7AD2 == 2) {
+  if(var_1.recentkillcount == 2) {
     var_19 = 1;
   }
 
   var_20 = 0;
 
-  if(var_1._id_7AD2 == 3) {
+  if(var_1.recentkillcount == 3) {
     var_20 = 1;
   }
 
   var_21 = "";
 
-  if(isDefined(var_0._id_1199)) {
-    var_21 = var_0._id_1199;
+  if(isDefined(var_0.attackerstance)) {
+    var_21 = var_0.attackerstance;
   }
 
   var_22 = 0;
@@ -622,7 +622,7 @@ ch_kills(var_0) {
   var_26 = 0;
   var_27 = 0;
 
-  switch (var_1._id_5A57.size + 1) {
+  switch (var_1.killsthislife.size + 1) {
     case 5:
       var_22 = 1;
       break;
@@ -645,12 +645,12 @@ ch_kills(var_0) {
       break;
   }
 
-  foreach(var_29 in var_1._id_5A57) {
-    if(maps\mp\_utility::iscacsecondaryweapon(var_29._id_953E) && !maps\mp\_utility::_id_5755(var_29._id_8CD7)) {
+  foreach(var_29 in var_1.killsthislife) {
+    if(maps\mp\_utility::iscacsecondaryweapon(var_29.sweapon) && !maps\mp\_utility::ismeleemod(var_29.smeansofdeath)) {
       var_3++;
     }
 
-    if(isDefined(var_29._id_62A1["longshot"])) {
+    if(isDefined(var_29.modifiers["longshot"])) {
       var_17++;
     }
 
@@ -662,7 +662,7 @@ ch_kills(var_0) {
       var_4++;
     }
 
-    if(isDefined(var_1._id_6FBA[var_29._id_953E]) && !maps\mp\_utility::_id_5755(var_29._id_8CD7)) {
+    if(isDefined(var_1.pickedupweaponfrom[var_29.sweapon]) && !maps\mp\_utility::ismeleemod(var_29.smeansofdeath)) {
       var_12++;
 
       if(var_12 == 5) {
@@ -670,57 +670,57 @@ ch_kills(var_0) {
       }
     }
 
-    if(maps\mp\_utility::iskillstreakweapon(var_29._id_953E)) {
-      if(!isDefined(var_8[var_29._id_953E])) {
-        var_8[var_29._id_953E] = 0;
+    if(maps\mp\_utility::iskillstreakweapon(var_29.sweapon)) {
+      if(!isDefined(var_8[var_29.sweapon])) {
+        var_8[var_29.sweapon] = 0;
       }
 
-      var_8[var_29._id_953E]++;
+      var_8[var_29.sweapon]++;
       continue;
     }
 
-    if(isDefined(level._id_6AF5[var_1.team]) && var_29.time > level._id_6AF5[var_1.team]) {
+    if(isDefined(level.onelefttime[var_1.team]) && var_29.time > level.onelefttime[var_1.team]) {
       var_2++;
     }
 
-    if(isDefined(var_29._id_A490)) {
-      if(!isDefined(var_5[var_29._id_A490.name]) && !isDefined(var_6[var_29._id_953E]) && !maps\mp\_utility::iskillstreakweapon(var_29._id_953E)) {
+    if(isDefined(var_29.victim)) {
+      if(!isDefined(var_5[var_29.victim.name]) && !isDefined(var_6[var_29.sweapon]) && !maps\mp\_utility::iskillstreakweapon(var_29.sweapon)) {
         var_7++;
       }
 
-      var_5[var_29._id_A490.name] = var_29._id_A490.name;
+      var_5[var_29.victim.name] = var_29.victim.name;
     }
 
-    var_6[var_29._id_953E] = var_29._id_953E;
+    var_6[var_29.sweapon] = var_29.sweapon;
   }
 
-  var_31 = maps\mp\_utility::_id_45B5(var_0._id_953E);
+  var_31 = maps\mp\_utility::_id_45B5(var_0.sweapon);
   var_32 = var_31;
 
-  if(common_scripts\utility::_id_9467(var_31, "iw5_")) {
+  if(common_scripts\utility::string_starts_with(var_31, "iw5_")) {
     var_32 = getsubstr(var_31, 4);
   }
 
-  var_33 = _id_40EE(var_0._id_953E, var_31);
+  var_33 = get_challenge_weapon_class(var_0.sweapon, var_31);
 
   if(level.teambased) {
-    if(level.teamcount[var_0._id_A490.pers["team"]] > 3 && var_1._id_5A42.size >= level.teamcount[var_0._id_A490.pers["team"]]) {
+    if(level.teamcount[var_0.victim.pers["team"]] > 3 && var_1.killedplayers.size >= level.teamcount[var_0.victim.pers["team"]]) {
       var_1 processchallenge("ch_precision_cleanhouse");
     }
   }
 
-  if(isDefined(var_1._id_3959) && var_0._id_A490 == var_1._id_3959) {
+  if(isDefined(var_1.explosive_drone_owner) && var_0.victim == var_1.explosive_drone_owner) {
     var_1 processchallenge("ch_precision_protected");
   }
 
   var_34 = undefined;
 
-  if(maps\mp\_utility::_id_57E5(var_0._id_953E, "alt_")) {
-    var_34 = getsubstr(var_0._id_953E, 4);
+  if(maps\mp\_utility::isstrstart(var_0.sweapon, "alt_")) {
+    var_34 = getsubstr(var_0.sweapon, 4);
   }
 
-  if(isDefined(var_1._id_6FBA[var_0._id_953E]) || isDefined(var_34) && isDefined(var_1._id_6FBA[var_34])) {
-    if(!maps\mp\_utility::_id_5755(var_9)) {
+  if(isDefined(var_1.pickedupweaponfrom[var_0.sweapon]) || isDefined(var_34) && isDefined(var_1.pickedupweaponfrom[var_34])) {
+    if(!maps\mp\_utility::ismeleemod(var_9)) {
       var_1 processchallenge("ch_boot_stolen");
     }
   }
@@ -733,16 +733,16 @@ ch_kills(var_0) {
     var_1 processchallenge("ch_boot_prone");
   }
 
-  if(isDefined(var_0._id_62A1["assaultObjective"])) {
+  if(isDefined(var_0.modifiers["assaultObjective"])) {
     var_1 processchallenge("ch_heroics_assault");
     var_35 = 1;
     var_36 = 1;
 
     for(var_37 = 0; var_37 < var_1.recentkills.size; var_37++) {
-      if(isDefined(var_1.recentkills[var_37]._id_62A1["assaultObjective"])) {
+      if(isDefined(var_1.recentkills[var_37].modifiers["assaultObjective"])) {
         var_35++;
 
-        if(var_1.recentkills[var_37]._id_62A1["assaultObjective"] == var_0._id_62A1["assaultObjective"]) {
+        if(var_1.recentkills[var_37].modifiers["assaultObjective"] == var_0.modifiers["assaultObjective"]) {
           var_36++;
         }
 
@@ -757,16 +757,16 @@ ch_kills(var_0) {
     }
 
     if(var_36 == 3) {
-      var_1 thread ch_monitorkillerdoingwork(var_0._id_62A1["assaultObjective"]);
+      var_1 thread ch_monitorkillerdoingwork(var_0.modifiers["assaultObjective"]);
     }
   }
 
-  if(isDefined(var_0._id_62A1["defendObjective"])) {
+  if(isDefined(var_0.modifiers["defendObjective"])) {
     var_1 processchallenge("ch_heroics_defender");
     var_38 = 1;
 
     for(var_37 = 0; var_37 < var_1.recentkills.size; var_37++) {
-      if(isDefined(var_1.recentkills[var_37]._id_62A1["defendObjective"])) {
+      if(isDefined(var_1.recentkills[var_37].modifiers["defendObjective"])) {
         var_38++;
         continue;
       }
@@ -780,8 +780,8 @@ ch_kills(var_0) {
 
     var_39 = 1;
 
-    foreach(var_29 in var_1._id_5A57) {
-      if(isDefined(var_29._id_62A1["defendObjective"]) && var_29._id_62A1["defendObjective"] == var_0._id_62A1["defendObjective"]) {
+    foreach(var_29 in var_1.killsthislife) {
+      if(isDefined(var_29.modifiers["defendObjective"]) && var_29.modifiers["defendObjective"] == var_0.modifiers["defendObjective"]) {
         var_39++;
       }
     }
@@ -792,67 +792,67 @@ ch_kills(var_0) {
   }
 
   if(!isDefined(level.disabledivisionchallenges) || !level.disabledivisionchallenges) {
-    if(isDefined(var_0._id_1180._id_0079) && !var_14 && !var_13) {
-      var_42 = _id_04CA::_id_44A0(var_0._id_1180._id_0079);
+    if(isDefined(var_0.attacker._id_0079) && !var_14 && !var_13) {
+      var_42 = _id_04CA::_id_44A0(var_0.attacker._id_0079);
 
       if(var_42 == "infantry") {
         var_1 processchallenge("ch_infantry_kills");
 
-        if(var_33 == "weapon_assault" && !maps\mp\_utility::_id_5755(var_9)) {
+        if(var_33 == "weapon_assault" && !maps\mp\_utility::ismeleemod(var_9)) {
           var_1 processchallenge("ch_infantry_weapon");
         }
 
-        if(common_scripts\utility::_id_562E(var_0._id_62A1["divisions_infantry_kill"])) {
+        if(common_scripts\utility::_id_562E(var_0.modifiers["divisions_infantry_kill"])) {
           var_1 processchallenge("ch_infantry_skill");
         }
       } else if(var_42 == "airborne") {
         var_1 processchallenge("ch_airborne_kills");
 
-        if(var_33 == "weapon_smg" && !maps\mp\_utility::_id_5755(var_9)) {
+        if(var_33 == "weapon_smg" && !maps\mp\_utility::ismeleemod(var_9)) {
           var_1 processchallenge("ch_airborne_weapon");
         }
 
-        if(common_scripts\utility::_id_562E(var_0._id_62A1["divisions_airborne_kill"])) {
+        if(common_scripts\utility::_id_562E(var_0.modifiers["divisions_airborne_kill"])) {
           var_1 processchallenge("ch_airborne_skill");
         }
       } else if(var_42 == "armored") {
         var_1 processchallenge("ch_armored_kills");
 
-        if(var_33 == "weapon_heavy" && !maps\mp\_utility::_id_5755(var_9)) {
+        if(var_33 == "weapon_heavy" && !maps\mp\_utility::ismeleemod(var_9)) {
           var_1 processchallenge("ch_armored_weapon");
         }
 
-        if(common_scripts\utility::_id_562E(var_0._id_62A1["divisions_armored_kill"])) {
+        if(common_scripts\utility::_id_562E(var_0.modifiers["divisions_armored_kill"])) {
           var_1 processchallenge("ch_armored_skill");
         }
       } else if(var_42 == "mountain") {
         var_1 processchallenge("ch_mountain_kills");
 
-        if(var_33 == "weapon_sniper" && !maps\mp\_utility::_id_5755(var_9)) {
+        if(var_33 == "weapon_sniper" && !maps\mp\_utility::ismeleemod(var_9)) {
           var_1 processchallenge("ch_mountain_weapon");
         }
 
-        if(common_scripts\utility::_id_562E(var_0._id_62A1["divisions_mountain_kill"])) {
+        if(common_scripts\utility::_id_562E(var_0.modifiers["divisions_mountain_kill"])) {
           var_1 processchallenge("ch_mountain_skill");
         }
       } else if(var_42 == "expeditionary") {
         var_1 processchallenge("ch_expeditionary_kills");
 
-        if(var_33 == "weapon_shotgun" && !maps\mp\_utility::_id_5755(var_9)) {
+        if(var_33 == "weapon_shotgun" && !maps\mp\_utility::ismeleemod(var_9)) {
           var_1 processchallenge("ch_expeditionary_weapon");
         }
 
-        if(common_scripts\utility::_id_562E(var_0._id_62A1["divisions_cavalry_kill"])) {
+        if(common_scripts\utility::_id_562E(var_0.modifiers["divisions_cavalry_kill"])) {
           var_1 processchallenge("ch_expeditionary_skill");
         }
       } else if(var_42 == "resistance") {
         var_1 processchallenge("ch_resistance_kills");
 
-        if(var_33 == "weapon_pistol" && !maps\mp\_utility::_id_5755(var_9)) {
+        if(var_33 == "weapon_pistol" && !maps\mp\_utility::ismeleemod(var_9)) {
           var_1 processchallenge("ch_resistance_weapon");
         }
 
-        if(common_scripts\utility::_id_562E(var_0._id_62A1["division_resistance_kill"])) {
+        if(common_scripts\utility::_id_562E(var_0.modifiers["division_resistance_kill"])) {
           var_1 processchallenge("ch_resistance_skill");
         }
       } else if(var_42 == "grenadier") {
@@ -866,49 +866,49 @@ ch_kills(var_0) {
       else if(var_42 == "scout") {
         var_1 processchallenge("ch_scout_kills");
 
-        if(var_33 == "weapon_sniper" && !maps\mp\_utility::_id_5755(var_9)) {
+        if(var_33 == "weapon_sniper" && !maps\mp\_utility::ismeleemod(var_9)) {
           var_1 processchallenge("ch_scout_weapon");
         }
 
-        if(common_scripts\utility::_id_562E(var_0._id_62A1["division_scout_kill"])) {
+        if(common_scripts\utility::_id_562E(var_0.modifiers["division_scout_kill"])) {
           var_1 processchallenge("ch_scout_skill");
         }
       } else if(var_42 == "artillery") {
         var_1 processchallenge("ch_artillery_kills");
 
-        if(var_33 == "weapon_assault" && !maps\mp\_utility::_id_5755(var_9)) {
+        if(var_33 == "weapon_assault" && !maps\mp\_utility::ismeleemod(var_9)) {
           var_1 processchallenge("ch_artillery_weapon");
         }
 
-        if(common_scripts\utility::_id_562E(var_0._id_62A1["division_artillery_kill"])) {
+        if(common_scripts\utility::_id_562E(var_0.modifiers["division_artillery_kill"])) {
           var_1 processchallenge("ch_artillery_skill");
         }
       }
     }
   }
 
-  if(var_0._id_A490 != var_0._id_1180) {
-    var_43 = !level.teambased || var_0._id_A490.team != var_0._id_1180.team;
+  if(var_0.victim != var_0.attacker) {
+    var_43 = !level.teambased || var_0.victim.team != var_0.attacker.team;
 
     if(var_43 && var_1 maps\mp\_utility::_hasperk("specialty_radarimmune")) {
       var_44 = 0;
 
-      if(isDefined(level._id_9FDA)) {
+      if(isDefined(level.uavmodels)) {
         if(level.teambased) {
-          var_44 = level._id_9FDA[maps\mp\_utility::getotherteam(var_0._id_1180.team)].size;
-        } else if(level._id_9FDA.size > 0) {
+          var_44 = level.uavmodels[maps\mp\_utility::getotherteam(var_0.attacker.team)].size;
+        } else if(level.uavmodels.size > 0) {
           var_45 = 0;
 
-          foreach(var_47 in level._id_9FDA) {
+          foreach(var_47 in level.uavmodels) {
             if(var_47._id_0117 == var_1) {
               var_45++;
             }
           }
 
           if(var_45 > 0) {
-            var_44 = level._id_9FDA.size - var_45;
+            var_44 = level.uavmodels.size - var_45;
           } else {
-            var_44 = level._id_9FDA.size;
+            var_44 = level.uavmodels.size;
           }
         }
       }
@@ -966,20 +966,20 @@ ch_kills(var_0) {
     if(var_43 && var_1 maps\mp\_utility::_hasperk("specialty_delaymine")) {
       var_52 = 0;
 
-      if(isDefined(level._id_9FDA)) {
+      if(isDefined(level.uavmodels)) {
         if(level.teambased) {
-          foreach(var_47 in level._id_9FDA[maps\mp\_utility::getotherteam(var_1.team)]) {
+          foreach(var_47 in level.uavmodels[maps\mp\_utility::getotherteam(var_1.team)]) {
             if(isDefined(var_47._id_9FE0) && var_47._id_9FE0 == "counter") {
               var_52 = 1;
               break;
             }
           }
 
-          if(isDefined(level._id_35F5) && level._id_35F5.team != var_1.team) {
+          if(isDefined(level.empowner) && level.empowner.team != var_1.team) {
             var_52 = 1;
           }
         } else {
-          foreach(var_47 in level._id_9FDA) {
+          foreach(var_47 in level.uavmodels) {
             if(isDefined(var_47._id_9FE0) && var_47._id_9FE0 == "counter" && isDefined(var_47._id_0117) && !(var_47._id_0117 == var_1)) {
               var_52 = 1;
               break;
@@ -997,43 +997,43 @@ ch_kills(var_0) {
       var_1 processchallenge("ch_field_serrated");
     }
 
-    var_57 = maps\mp\_utility::getweaponclass(var_0._id_953E);
+    var_57 = maps\mp\_utility::getweaponclass(var_0.sweapon);
 
     if(var_43 && var_1 maps\mp\_utility::_hasperk("specialty_class_launched") && var_57 == "weapon_projectile") {
       var_1 processchallenge("ch_explosives_launched");
     }
 
     if(var_43 && var_1 maps\mp\_utility::_hasperk("specialty_class_rifleman")) {
-      if(isDefined(var_1._id_5BD0) && gettime() - var_1._id_5BD0 < 5000) {
+      if(isDefined(var_1.lastprimaryweaponswaptime) && gettime() - var_1.lastprimaryweaponswaptime < 5000) {
         var_1 processchallenge("ch_marksman_rifleman");
       }
     }
 
     if(var_43 && var_1 maps\mp\_utility::_hasperk("specialty_class_primed")) {
-      if(isDefined(var_1._id_5B8B) && gettime() - var_1._id_5B8B < 2000) {
+      if(isDefined(var_1.lastdamagefromenemytargettime) && gettime() - var_1.lastdamagefromenemytargettime < 2000) {
         var_1 processchallenge("ch_marksman_primed");
       }
     }
 
-    if(var_43 && var_1 maps\mp\_utility::_hasperk("specialty_class_forage") && isDefined(var_1._id_4B8F) && var_1._id_4B8F == 1) {
+    if(var_43 && var_1 maps\mp\_utility::_hasperk("specialty_class_forage") && isDefined(var_1.hasscavengedammothislife) && var_1.hasscavengedammothislife == 1) {
       var_1 processchallenge("ch_field_forage");
     }
 
     if(var_43 && var_1 maps\mp\_utility::_hasperk("specialty_class_instincts") && isDefined(var_1._id_6F4D) && var_1._id_6F4D.size > 0) {
-      var_58 = var_0._id_A490 getentitynumber();
+      var_58 = var_0.victim getentitynumber();
 
       if(isDefined(var_1._id_6F4D[var_58]) && var_1._id_6F4D[var_58]) {
         var_1 processchallenge("ch_operations_instincts");
       }
     }
 
-    if((var_0._id_A490 common_scripts\utility::_id_56F4() || var_0._id_A490 common_scripts\utility::_id_56B5()) && var_1 maps\mp\_utility::_hasperk("specialty_stun_resistance")) {
+    if((var_0.victim common_scripts\utility::_id_56F4() || var_0.victim common_scripts\utility::_id_56B5()) && var_1 maps\mp\_utility::_hasperk("specialty_stun_resistance")) {
       if(var_1 maps\mp\_utility::_hasperk("specialty_sprintfire")) {
         var_1 processchallenge("ch_perks3_junkie");
       }
 
-      if(isDefined(var_0._id_A490._id_1189[var_1.guid])) {
-        foreach(var_60 in var_0._id_A490._id_1189[var_1.guid]._id_A9DF) {
+      if(isDefined(var_0.victim.attackerdata[var_1.guid])) {
+        foreach(var_60 in var_0.victim.attackerdata[var_1.guid]._id_A9DF) {
           if(var_60 == "flash_grenade_mp" || var_60 == "stun_grenade_mp" || var_60 == "signal_flare_mp") {
             var_1 processchallenge("ch_perks2_tacmask");
           }
@@ -1043,7 +1043,7 @@ ch_kills(var_0) {
 
     if(var_43 && var_1 maps\mp\_utility::_hasperk("specialty_sixthsense") && isDefined(var_1._id_4B65) && var_1._id_4B65) {
       var_62 = var_1.origin;
-      var_63 = var_0._id_A490.origin;
+      var_63 = var_0.victim.origin;
 
       if(isDefined(level._id_08E2) && distancesquared(var_62, var_63) <= level._id_08E2 * level._id_08E2) {
         var_1 processchallenge("ch_perks1_sixthsense");
@@ -1051,92 +1051,92 @@ ch_kills(var_0) {
     }
   }
 
-  if(var_10 < var_0._id_A490._id_2577) {
+  if(var_10 < var_0.victim.concussionendtime) {
     var_1 processchallenge("ch_exolauncher_stun");
   }
 
-  if(isDefined(var_0._id_A490._id_5384)) {
+  if(isDefined(var_0.victim.inplayersmokescreen)) {
     var_1 processchallenge("ch_exolauncher_smoke");
   }
 
-  if(issubstr(var_0._id_953E, "extended_mag")) {
+  if(issubstr(var_0.sweapon, "extended_mag")) {
     var_1 processchallenge("ch_combathandling_extended_mag");
     var_1 _id_18AC();
   }
 
-  if(issubstr(var_0._id_953E, "grip")) {
+  if(issubstr(var_0.sweapon, "grip")) {
     var_1 processchallenge("ch_combathandling_grip");
   }
 
-  if(issubstr(var_0._id_953E, "fast_ads")) {
+  if(issubstr(var_0.sweapon, "fast_ads")) {
     var_1 processchallenge("ch_combathandling_fast_ads");
   }
 
-  if(issubstr(var_0._id_953E, "reduced_sway")) {
+  if(issubstr(var_0.sweapon, "reduced_sway")) {
     var_1 processchallenge("ch_combathandling_reduced_sway");
   }
 
-  if(issubstr(var_0._id_953E, "hipfire")) {
+  if(issubstr(var_0.sweapon, "hipfire")) {
     var_1 processchallenge("ch_combatefficiency_hipfire");
   }
 
-  if(issubstr(var_0._id_953E, "fast_ads") && issubstr(var_0._id_953E, "grip")) {
+  if(issubstr(var_0.sweapon, "fast_ads") && issubstr(var_0.sweapon, "grip")) {
     var_1 processchallenge("ch_combathandling_fastshooting");
   }
 
-  if(issubstr(var_0._id_953E, "fast_ads") && issubstr(var_0._id_953E, "grip") && issubstr(var_0._id_953E, "extended_mag")) {
+  if(issubstr(var_0.sweapon, "fast_ads") && issubstr(var_0.sweapon, "grip") && issubstr(var_0.sweapon, "extended_mag")) {
     var_1 processchallenge("ch_combathandling_smoothop");
   }
 
-  if(!var_18 && issubstr(var_0._id_953E, "hipfire") && issubstr(var_0._id_953E, "extended_mag") && issubstr(var_0._id_953E, "rapid_fire")) {
+  if(!var_18 && issubstr(var_0.sweapon, "hipfire") && issubstr(var_0.sweapon, "extended_mag") && issubstr(var_0.sweapon, "rapid_fire")) {
     var_1 processchallenge("ch_combatefficiency_gunner");
   }
 
-  if(issubstr(var_0._id_953E, "fmj")) {
+  if(issubstr(var_0.sweapon, "fmj")) {
     var_1 processchallenge("ch_combatefficiency_fmj");
   }
 
-  if(issubstr(var_0._id_953E, "head_damage")) {
+  if(issubstr(var_0.sweapon, "head_damage")) {
     var_1 processchallenge("ch_combatefficiency_head_damage");
   }
 
-  if(issubstr(var_0._id_953E, "rapid_fire")) {
+  if(issubstr(var_0.sweapon, "rapid_fire")) {
     var_1 processchallenge("ch_combatefficiency_rapid_fire");
   }
 
-  if(issubstr(var_0._id_953E, "extended_range")) {
+  if(issubstr(var_0.sweapon, "extended_range")) {
     var_1 processchallenge("ch_combatefficiency_extended_range");
   }
 
-  if(issubstr(var_0._id_953E, "lens_sight")) {
+  if(issubstr(var_0.sweapon, "lens_sight")) {
     var_1 processchallenge("ch_combatefficiency_lens_sight");
   }
 
-  if(issubstr(var_0._id_953E, "aperture_sight")) {
+  if(issubstr(var_0.sweapon, "aperture_sight")) {
     var_1 processchallenge("ch_combatefficiency_aperture_sight");
   }
 
-  if(issubstr(var_0._id_953E, "telescopic_sight")) {
+  if(issubstr(var_0.sweapon, "telescopic_sight")) {
     var_1 processchallenge("ch_combatefficiency_telescopic_sight");
   }
 
-  if(var_15 && issubstr(var_0._id_953E, "fmj") && issubstr(var_0._id_953E, "extended_range")) {
+  if(var_15 && issubstr(var_0.sweapon, "fmj") && issubstr(var_0.sweapon, "extended_range")) {
     var_1 processchallenge("ch_combatefficiency_headhunter");
   }
 
-  if(issubstr(var_0._id_953E, "extended_range") && issubstr(var_0._id_953E, "fmj") && (issubstr(var_0._id_953E, "telescopic_sight") || !issubstr(var_0._id_953E, "iron_sight"))) {
+  if(issubstr(var_0.sweapon, "extended_range") && issubstr(var_0.sweapon, "fmj") && (issubstr(var_0.sweapon, "telescopic_sight") || !issubstr(var_0.sweapon, "iron_sight"))) {
     var_1 processchallenge("ch_combatefficiency_assassin");
   }
 
-  if(issubstr(var_0._id_953E, "akimbo")) {
+  if(issubstr(var_0.sweapon, "akimbo")) {
     var_1 _id_34C3();
   }
 
   foreach(var_65 in var_11) {
-    playrumblelooponentity(var_1, var_65, var_11, var_0._id_953E, var_18, var_15, var_16, var_19, var_22);
+    playrumblelooponentity(var_1, var_65, var_11, var_0.sweapon, var_18, var_15, var_16, var_19, var_22);
   }
 
-  if(!maps\mp\_utility::_id_5755(var_9) && !var_14 && !var_13) {
+  if(!maps\mp\_utility::ismeleemod(var_9) && !var_14 && !var_13) {
     switch (var_33) {
       case "weapon_smg":
         var_1 processchallenge("ch_smg_kill");
@@ -1239,19 +1239,19 @@ ch_kills(var_0) {
     }
 
     if(var_9 == "MOD_HEAD_SHOT") {
-      if(isDefined(level._id_20AA["ch_attach_unlock_headShots_" + var_32])) {
+      if(isDefined(level.challengeinfo["ch_attach_unlock_headShots_" + var_32])) {
         var_1 processchallenge("ch_attach_unlock_headShots_" + var_32);
       }
     }
   }
 
-  if(isDefined(var_1._id_7E9F)) {
-    if(var_10 - var_1._id_7E9F._id_002B < 3000) {
+  if(isDefined(var_1.riotshieldentity)) {
+    if(var_10 - var_1.riotshieldentity._id_002B < 3000) {
       var_1 processchallenge("ch_attach_unlock_postplant_riotshieldt6");
     }
   }
 
-  if(maps\mp\_utility::_id_5755(var_9) && !var_14 && !var_13) {
+  if(maps\mp\_utility::ismeleemod(var_9) && !var_14 && !var_13) {
     if(!issubstr(var_31, "riotshield")) {
       var_1.pers["meleeKillStreak"]++;
 
@@ -1275,17 +1275,17 @@ ch_kills(var_0) {
 
     var_1 notify("increment_melee_kills");
 
-    if(isgunmeleeattack(var_9, var_0._id_953E) && !issubstr(var_0._id_953E, "bayonet")) {
+    if(isgunmeleeattack(var_9, var_0.sweapon) && !issubstr(var_0.sweapon, "bayonet")) {
       var_1 processchallenge("ch_humiliation_blunttrauma");
     }
   }
 
   if(issubstr(var_9, "MOD_IMPACT") && !var_14 && !var_13) {
-    if(issubstr(var_0._id_953E, "exoknife_mp")) {
+    if(issubstr(var_0.sweapon, "exoknife_mp")) {
       var_1 processchallenge("ch_exolauncher_knife");
     }
 
-    if(maps\mp\_utility::_id_57E5(var_0._id_953E, "throwingknife_")) {
+    if(maps\mp\_utility::isstrstart(var_0.sweapon, "throwingknife_")) {
       var_1 processchallenge("ch_lethals_knifekills");
 
       if(var_16) {
@@ -1294,17 +1294,17 @@ ch_kills(var_0) {
       }
     }
 
-    if(var_31 == "iw5_microdronelauncher" && isDefined(level._id_20AA["ch_impact_iw5_microdronelauncher"])) {
+    if(var_31 == "iw5_microdronelauncher" && isDefined(level.challengeinfo["ch_impact_iw5_microdronelauncher"])) {
       var_1 processchallenge("ch_impact_iw5_microdronelauncher");
     }
 
     if(var_31 == "iw5_exocrossbow") {
-      if(isDefined(level._id_20AA["ch_attach_unlock_kills_" + var_32])) {
+      if(isDefined(level.challengeinfo["ch_attach_unlock_kills_" + var_32])) {
         var_1 processchallenge("ch_attach_unlock_kills_" + var_32);
       }
 
       if(var_18) {
-        if(isDefined(level._id_20AA["ch_attach_unlock_ads_" + var_32])) {
+        if(isDefined(level.challengeinfo["ch_attach_unlock_ads_" + var_32])) {
           var_1 processchallenge("ch_attach_unlock_ads_" + var_32);
         }
       }
@@ -1320,33 +1320,33 @@ ch_kills(var_0) {
     }
 
     if(var_31 == "iw5_exocrossbow") {
-      if(isDefined(level._id_20AA["ch_attach_unlock_kills_" + var_32])) {
+      if(isDefined(level.challengeinfo["ch_attach_unlock_kills_" + var_32])) {
         var_1 processchallenge("ch_attach_unlock_kills_" + var_32);
       }
 
       if(var_18) {
-        if(isDefined(level._id_20AA["ch_attach_unlock_ads_" + var_32])) {
+        if(isDefined(level.challengeinfo["ch_attach_unlock_ads_" + var_32])) {
           var_1 processchallenge("ch_attach_unlock_ads_" + var_32);
         }
       }
     }
 
-    if(maps\mp\_utility::_id_57E5(var_0._id_953E, "frag_")) {
+    if(maps\mp\_utility::isstrstart(var_0.sweapon, "frag_")) {
       var_1 processchallenge("ch_exolauncher_frag");
       var_1 processchallenge("ch_lethals_fragkills");
 
-      if(var_0._id_A490._id_3961["cookedKill"]) {
+      if(var_0.victim.explosiveinfo["cookedKill"]) {
         var_1 processchallenge("ch_lethals_masterchef");
       }
 
-      if(var_0._id_A490._id_3961["throwbackKill"]) {
+      if(var_0.victim.explosiveinfo["throwbackKill"]) {
         var_1 processchallenge("ch_precision_return");
       }
 
       var_69 = 1;
 
       foreach(var_71 in var_1.recentkills) {
-        if(maps\mp\_utility::_id_57E5(var_71._id_953E, "frag_")) {
+        if(maps\mp\_utility::isstrstart(var_71.sweapon, "frag_")) {
           var_69++;
         }
       }
@@ -1356,32 +1356,32 @@ ch_kills(var_0) {
       }
     }
 
-    if(maps\mp\_utility::_id_57E5(var_0._id_953E, "semtex_")) {
+    if(maps\mp\_utility::isstrstart(var_0.sweapon, "semtex_")) {
       var_1 processchallenge("ch_exolauncher_semtex");
       var_1 processchallenge("ch_lethals_semtexkills");
     }
 
-    if(maps\mp\_utility::_id_57E5(var_0._id_953E, "thermite_")) {
+    if(maps\mp\_utility::isstrstart(var_0.sweapon, "thermite_")) {
       var_1 processchallenge("ch_lethals_thermitekills");
     }
 
-    if(maps\mp\_utility::_id_57E5(var_0._id_953E, "c4_")) {
+    if(maps\mp\_utility::isstrstart(var_0.sweapon, "c4_")) {
       var_1 processchallenge("ch_lethals_c4kills");
     }
 
-    if(isDefined(var_0._id_35A9.classname) && var_0._id_35A9.classname == "scriptable") {
+    if(isDefined(var_0.einflictor.classname) && var_0.einflictor.classname == "scriptable") {
       var_1 processchallenge("ch_precision_sitaware");
     }
 
-    if(isDefined(var_0._id_953E) && var_0._id_953E == "mp_lab_gas_explosion") {
+    if(isDefined(var_0.sweapon) && var_0.sweapon == "mp_lab_gas_explosion") {
       var_1 processchallenge("ch_precision_sitaware");
     }
 
-    if(maps\mp\_utility::_id_5781(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_class_bang")) {
+    if(maps\mp\_utility::isplayeronenemyteam(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_class_bang")) {
       var_1 processchallenge("ch_explosives_bang");
     }
 
-    if(isDefined(var_0._id_A490._id_3961) && isDefined(var_0._id_A490._id_3961["midAirDetonate"]) && var_0._id_A490._id_3961["midAirDetonate"]) {
+    if(isDefined(var_0.victim.explosiveinfo) && isDefined(var_0.victim.explosiveinfo["midAirDetonate"]) && var_0.victim.explosiveinfo["midAirDetonate"]) {
       var_1 processchallenge("ch_dlc1_saboteur");
     }
   }
@@ -1389,7 +1389,7 @@ ch_kills(var_0) {
   foreach(var_65 in var_11) {
     switch (var_65) {
       case "gl":
-        if(isDefined(level._id_20AA["ch_attach_kill_" + var_65])) {
+        if(isDefined(level.challengeinfo["ch_attach_kill_" + var_65])) {
           var_1 processchallenge("ch_attach_kill_" + var_65);
         }
 
@@ -1397,7 +1397,7 @@ ch_kills(var_0) {
     }
   }
 
-  if(issubstr(var_9, "MOD_EXPLOSIVE") && var_0._id_953E == "airdrop_trap_explosive_mp") {
+  if(issubstr(var_9, "MOD_EXPLOSIVE") && var_0.sweapon == "airdrop_trap_explosive_mp") {
     var_1 processchallenge("ch_precision_surprise");
   }
 
@@ -1413,11 +1413,11 @@ ch_kills(var_0) {
       }
 
       if(var_31 == "blunderbuss_mp") {
-        var_1 tier4camochallenge(var_0._id_953E, "ch_camoT4_triplekill_");
+        var_1 tier4camochallenge(var_0.sweapon, "ch_camoT4_triplekill_");
       }
     }
 
-    if(isDefined(var_0._id_62A1["oneshotkill"])) {
+    if(isDefined(var_0.modifiers["oneshotkill"])) {
       switch (var_33) {
         case "weapon_shotgun":
         case "weapon_sniper":
@@ -1430,17 +1430,17 @@ ch_kills(var_0) {
       }
     }
 
-    if(var_33 == "weapon_other" && _weapontype(var_0._id_953E) == "melee") {
+    if(var_33 == "weapon_other" && _weapontype(var_0.sweapon) == "melee") {
       var_1 processchallenge("ch_camo_" + var_31);
     }
   }
 
   if(var_33 == "weapon_projectile" && var_9 == "MOD_PROJECTILE") {
-    var_1 _id_99C5(var_0._id_953E, "ch_camoT2_directhitkill_");
-    var_1 tier4camochallenge(var_0._id_953E, "ch_camoT4_directhitkill_");
+    var_1 _id_99C5(var_0.sweapon, "ch_camoT2_directhitkill_");
+    var_1 tier4camochallenge(var_0.sweapon, "ch_camoT4_directhitkill_");
   }
 
-  if(isDefined(var_1.recentkills) && var_1.recentkills.size >= 1 && !isgunmeleeattack(var_9, var_0._id_953E)) {
+  if(isDefined(var_1.recentkills) && var_1.recentkills.size >= 1 && !isgunmeleeattack(var_9, var_0.sweapon)) {
     if(var_1.recentkills.size == 1 && var_1 maps\mp\_utility::_hasperk("specialty_class_escalation")) {
       var_1 processchallenge("ch_dlc2_escalation");
     }
@@ -1448,9 +1448,9 @@ ch_kills(var_0) {
     var_75 = 1;
 
     for(var_37 = 0; var_37 < var_1.recentkills.size; var_37++) {
-      var_76 = maps\mp\_utility::_id_45B5(var_1.recentkills[var_37]._id_953E);
+      var_76 = maps\mp\_utility::_id_45B5(var_1.recentkills[var_37].sweapon);
 
-      if(var_76 == var_31 && !isgunmeleeattack(var_1.recentkills[var_37]._id_8CD7, var_1.recentkills[var_37]._id_953E)) {
+      if(var_76 == var_31 && !isgunmeleeattack(var_1.recentkills[var_37].smeansofdeath, var_1.recentkills[var_37].sweapon)) {
         var_75++;
         continue;
       }
@@ -1459,36 +1459,36 @@ ch_kills(var_0) {
     }
 
     if(var_75 == 2) {
-      var_1 _id_99C5(var_0._id_953E, "ch_camoT2_doublekill_");
-      var_1 tier3camochallenge(var_0._id_953E, "ch_camoT3_doublekill_");
-      var_1 tier4camochallenge(var_0._id_953E, "ch_camoT4_doublekill_");
+      var_1 _id_99C5(var_0.sweapon, "ch_camoT2_doublekill_");
+      var_1 tier3camochallenge(var_0.sweapon, "ch_camoT3_doublekill_");
+      var_1 tier4camochallenge(var_0.sweapon, "ch_camoT4_doublekill_");
     }
 
     if(var_75 == 3) {
       if(var_31 != "blunderbuss_mp") {
-        var_1 tier4camochallenge(var_0._id_953E, "ch_camoT4_triplekill_");
+        var_1 tier4camochallenge(var_0.sweapon, "ch_camoT4_triplekill_");
       }
     }
   }
 
-  if(isDefined(var_1._id_5A57) && var_1._id_5A57.size >= 4 && !isgunmeleeattack(var_9, var_0._id_953E)) {
+  if(isDefined(var_1.killsthislife) && var_1.killsthislife.size >= 4 && !isgunmeleeattack(var_9, var_0.sweapon)) {
     var_75 = 1;
 
-    foreach(var_29 in var_1._id_5A57) {
-      var_76 = maps\mp\_utility::_id_45B5(var_29._id_953E);
+    foreach(var_29 in var_1.killsthislife) {
+      var_76 = maps\mp\_utility::_id_45B5(var_29.sweapon);
 
-      if(var_76 == var_31 && !isgunmeleeattack(var_29._id_8CD7, var_29._id_953E)) {
+      if(var_76 == var_31 && !isgunmeleeattack(var_29.smeansofdeath, var_29.sweapon)) {
         var_75++;
       }
     }
 
     if(var_75 == 5) {
-      var_1 _id_99C5(var_0._id_953E, "ch_camoT2_killstreak5_");
+      var_1 _id_99C5(var_0.sweapon, "ch_camoT2_killstreak5_");
     }
   }
 
-  if(isDefined(var_1.lastweaponswaptime) && gettime() - var_1.lastweaponswaptime < 5000 && !isgunmeleeattack(var_9, var_0._id_953E)) {
-    var_1 _id_99C5(var_0._id_953E, "ch_camoT2_switchkill_");
+  if(isDefined(var_1.lastweaponswaptime) && gettime() - var_1.lastweaponswaptime < 5000 && !isgunmeleeattack(var_9, var_0.sweapon)) {
+    var_1 _id_99C5(var_0.sweapon, "ch_camoT2_switchkill_");
 
     if(var_33 == "weapon_pistol" && var_1 maps\mp\_utility::_hasperk("specialty_class_shifty")) {
       var_1 processchallenge("ch_dlc1_shifty");
@@ -1499,51 +1499,51 @@ ch_kills(var_0) {
     }
   }
 
-  if(isDefined(var_1._id_9A8D[var_0._id_953E]) && var_1._id_9A8D[var_0._id_953E] == var_0._id_A490 && isDefined(var_1.tookweaponkillweapon[var_0._id_953E]) && !isgunmeleeattack(var_9, var_0._id_953E)) {
-    var_1 _id_99C5(var_1.tookweaponkillweapon[var_0._id_953E], "ch_camoT2_takeandkill_");
+  if(isDefined(var_1.tookweaponfrom[var_0.sweapon]) && var_1.tookweaponfrom[var_0.sweapon] == var_0.victim && isDefined(var_1.tookweaponkillweapon[var_0.sweapon]) && !isgunmeleeattack(var_9, var_0.sweapon)) {
+    var_1 _id_99C5(var_1.tookweaponkillweapon[var_0.sweapon], "ch_camoT2_takeandkill_");
   }
 
-  if(isDefined(var_0._id_1180._id_0079) && !isgunmeleeattack(var_9, var_0._id_953E) && !var_14 && !var_13) {
-    var_42 = _id_04CA::_id_44A0(var_0._id_1180._id_0079);
+  if(isDefined(var_0.attacker._id_0079) && !isgunmeleeattack(var_9, var_0.sweapon) && !var_14 && !var_13) {
+    var_42 = _id_04CA::_id_44A0(var_0.attacker._id_0079);
 
     switch (var_33) {
       case "weapon_assault":
         if(var_42 == "infantry") {
-          var_1 _id_99C5(var_0._id_953E, "ch_camoT2_maindivision_");
+          var_1 _id_99C5(var_0.sweapon, "ch_camoT2_maindivision_");
         } else {
-          var_1 _id_99C5(var_0._id_953E, "ch_camoT2_altdivision_");
+          var_1 _id_99C5(var_0.sweapon, "ch_camoT2_altdivision_");
         }
 
         break;
       case "weapon_smg":
         if(var_42 == "airborne") {
-          var_1 _id_99C5(var_0._id_953E, "ch_camoT2_maindivision_");
+          var_1 _id_99C5(var_0.sweapon, "ch_camoT2_maindivision_");
         } else {
-          var_1 _id_99C5(var_0._id_953E, "ch_camoT2_altdivision_");
+          var_1 _id_99C5(var_0.sweapon, "ch_camoT2_altdivision_");
         }
 
         break;
       case "weapon_heavy":
         if(var_42 == "armored") {
-          var_1 _id_99C5(var_0._id_953E, "ch_camoT2_maindivision_");
+          var_1 _id_99C5(var_0.sweapon, "ch_camoT2_maindivision_");
         } else {
-          var_1 _id_99C5(var_0._id_953E, "ch_camoT2_altdivision_");
+          var_1 _id_99C5(var_0.sweapon, "ch_camoT2_altdivision_");
         }
 
         break;
       case "weapon_sniper":
         if(var_42 == "mountain") {
-          var_1 _id_99C5(var_0._id_953E, "ch_camoT2_maindivision_");
+          var_1 _id_99C5(var_0.sweapon, "ch_camoT2_maindivision_");
         } else {
-          var_1 _id_99C5(var_0._id_953E, "ch_camoT2_altdivision_");
+          var_1 _id_99C5(var_0.sweapon, "ch_camoT2_altdivision_");
         }
 
         break;
       case "weapon_shotgun":
         if(var_42 == "expeditionary") {
-          var_1 _id_99C5(var_0._id_953E, "ch_camoT2_maindivision_");
+          var_1 _id_99C5(var_0.sweapon, "ch_camoT2_maindivision_");
         } else {
-          var_1 _id_99C5(var_0._id_953E, "ch_camoT2_altdivision_");
+          var_1 _id_99C5(var_0.sweapon, "ch_camoT2_altdivision_");
         }
 
         break;
@@ -1551,24 +1551,24 @@ ch_kills(var_0) {
 
     if(var_31 == "dp28_mp") {
       if(var_42 == "mountain") {
-        var_1 _id_99C5(var_0._id_953E, "ch_camoT2_maindivision_");
+        var_1 _id_99C5(var_0.sweapon, "ch_camoT2_maindivision_");
       } else {
-        var_1 _id_99C5(var_0._id_953E, "ch_camoT2_altdivision_");
+        var_1 _id_99C5(var_0.sweapon, "ch_camoT2_altdivision_");
       }
     }
   }
 
   if(var_33 == "weapon_launcher") {
-    if(isDefined(level._id_20AA["ch_kills_" + var_31])) {
+    if(isDefined(level.challengeinfo["ch_kills_" + var_31])) {
       var_1 processchallenge("ch_kills_" + var_31);
     }
 
-    if(issubstr(var_0._id_A490.model, "npc_exo_armor_mp_base")) {
-      if(isDefined(level._id_20AA["ch_vehicle_" + var_31])) {
+    if(issubstr(var_0.victim.model, "npc_exo_armor_mp_base")) {
+      if(isDefined(level.challengeinfo["ch_vehicle_" + var_31])) {
         var_1 processchallenge("ch_vehicle_" + var_31);
       }
 
-      if(isDefined(level._id_20AA["ch_goliath_" + var_31])) {
+      if(isDefined(level.challengeinfo["ch_goliath_" + var_31])) {
         var_1 processchallenge("ch_goliath_" + var_31);
       }
     }
@@ -1576,7 +1576,7 @@ ch_kills(var_0) {
 
   if(var_22 || var_23 || var_24 || var_25 || var_26 || var_27) {
     if(var_33 == "weapon_sniper") {
-      if(isDefined(level._id_20AA["ch_blood_" + var_31])) {
+      if(isDefined(level.challengeinfo["ch_blood_" + var_31])) {
         var_1 processchallenge("ch_blood_" + var_31);
       }
     }
@@ -1622,17 +1622,17 @@ ch_kills(var_0) {
     }
   }
 
-  if(isDefined(var_1._id_6EF6)) {
-    var_1._id_6EF6++;
+  if(isDefined(var_1.patient_zero)) {
+    var_1.patient_zero++;
 
-    if(var_1._id_6EF6 == 3) {
+    if(var_1.patient_zero == 3) {
       var_1 processchallenge("ch_infect_patientzero");
     }
   }
 }
 
 isgunmeleeattack(var_0, var_1) {
-  return maps\mp\_utility::_id_5755(var_0) && _weapontype(var_1) != "melee";
+  return maps\mp\_utility::ismeleemod(var_0) && _weapontype(var_1) != "melee";
 }
 
 _id_6359() {
@@ -1655,7 +1655,7 @@ _id_99C5(var_0, var_1) {
   var_4 = _id_4450(var_3);
 
   if(isDefined(var_4)) {
-    if(_id_56A7(var_3, var_4)) {
+    if(ischallengeunlocked(var_3, var_4)) {
       processchallenge(var_3);
     }
   }
@@ -1676,7 +1676,7 @@ tier3camochallenge(var_0, var_1) {
     return;
   }
   if(!isDefined(self.pers["weaponPrestige"][var_2])) {
-    self.pers["weaponPrestige"][var_2] = self getplayerdata(common_scripts\utility::_id_46AE(), "weaponStats", var_2, "prestigeLevel");
+    self.pers["weaponPrestige"][var_2] = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "weaponStats", var_2, "prestigeLevel");
   }
 
   if(isDefined(var_4)) {
@@ -1701,7 +1701,7 @@ tier4camochallenge(var_0, var_1) {
     return;
   }
   if(!isDefined(self.pers["weaponPrestige"][var_2])) {
-    self.pers["weaponPrestige"][var_2] = self getplayerdata(common_scripts\utility::_id_46AE(), "weaponStats", var_2, "prestigeLevel");
+    self.pers["weaponPrestige"][var_2] = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "weaponStats", var_2, "prestigeLevel");
   }
 
   if(isDefined(var_4)) {
@@ -1712,20 +1712,20 @@ tier4camochallenge(var_0, var_1) {
 }
 
 _id_4450(var_0) {
-  if(isDefined(var_0) && isDefined(level._id_20AA[var_0])) {
-    var_1 = level._id_20AA[var_0]["index"];
+  if(isDefined(var_0) && isDefined(level.challengeinfo[var_0])) {
+    var_1 = level.challengeinfo[var_0]["index"];
     return var_1;
   }
 }
 
-_id_40EE(var_0, var_1) {
+get_challenge_weapon_class(var_0, var_1) {
   var_2 = maps\mp\_utility::getweaponclass(var_0);
 
   if(!isDefined(var_1)) {
     var_1 = maps\mp\_utility::_id_4431(var_0, 1);
 
     if(maps\mp\_utility::_id_5856(var_1)) {
-      var_1 = maps\mp\gametypes\_class::_id_4432(var_1);
+      var_1 = maps\mp\gametypes\_class::getbasefromlootversion(var_1);
     }
   }
 
@@ -1740,12 +1740,12 @@ _id_40EE(var_0, var_1) {
   return var_2;
 }
 
-_id_2092(var_0, var_1, var_2, var_3) {
-  if(!maps\mp\_utility::_id_56DF(var_0._id_953E)) {
-    var_1 _id_36D7();
+ch_bulletdamagecommon(var_0, var_1, var_2, var_3) {
+  if(!maps\mp\_utility::isenvironmentweapon(var_0.sweapon)) {
+    var_1 endmgstreak();
   }
 
-  if(maps\mp\_utility::iskillstreakweapon(var_0._id_953E)) {
+  if(maps\mp\_utility::iskillstreakweapon(var_0.sweapon)) {
     return;
   }
   if(isbot(var_1)) {
@@ -1759,11 +1759,11 @@ _id_2092(var_0, var_1, var_2, var_3) {
 
   var_1.pers["lastBulletKillTime"] = var_2;
 
-  if(!var_0._id_A494) {
+  if(!var_0.victimonground) {
     var_1 processchallenge("ch_hardlanding");
   }
 
-  if(!var_0._id_1190) {
+  if(!var_0.attackeronground) {
     var_1.pers["midairStreak"]++;
   }
 
@@ -1771,29 +1771,29 @@ _id_2092(var_0, var_1, var_2, var_3) {
     var_1 processchallenge("ch_airborne");
   }
 
-  if(var_2 < var_0._id_A490._id_3D48) {
+  if(var_2 < var_0.victim.flashendtime) {
     var_1 processchallenge("ch_flashbangvet");
   }
 
-  if(var_2 < var_1._id_3D48) {
+  if(var_2 < var_1.flashendtime) {
     var_1 processchallenge("ch_blindfire");
   }
 
-  if(var_2 < var_0._id_A490._id_2577) {
+  if(var_2 < var_0.victim.concussionendtime) {
     var_1 processchallenge("ch_concussionvet");
   }
 
-  if(var_2 < var_1._id_2577) {
+  if(var_2 < var_1.concussionendtime) {
     var_1 processchallenge("ch_slowbutsure");
   }
 
   if(var_1.pers["bulletStreak"] == 2) {
-    if(isDefined(var_0._id_62A1["headshot"])) {
-      foreach(var_5 in var_1._id_5A57) {
+    if(isDefined(var_0.modifiers["headshot"])) {
+      foreach(var_5 in var_1.killsthislife) {
         if(var_5.time != var_2) {
           continue;
         }
-        if(!isDefined(var_0._id_62A1["headshot"])) {
+        if(!isDefined(var_0.modifiers["headshot"])) {
           continue;
         }
         var_1 processchallenge("ch_allpro");
@@ -1806,17 +1806,17 @@ _id_2092(var_0, var_1, var_2, var_3) {
   }
 
   if(var_3 == "weapon_pistol") {
-    if(isDefined(var_0._id_A490._id_1189) && isDefined(var_0._id_A490._id_1189[var_1.guid])) {
-      if(isDefined(var_0._id_A490._id_1189[var_1.guid]._id_5792)) {
+    if(isDefined(var_0.victim.attackerdata) && isDefined(var_0.victim.attackerdata[var_1.guid])) {
+      if(isDefined(var_0.victim.attackerdata[var_1.guid].isprimary)) {
         var_1 processchallenge("ch_fastswap");
       }
     }
   }
 
-  if(!isDefined(var_1._id_5133) || !var_1._id_5133) {
-    if(var_0._id_1199 == "crouch") {
+  if(!isDefined(var_1.infinalstand) || !var_1.infinalstand) {
+    if(var_0.attackerstance == "crouch") {
       var_1 processchallenge("ch_crouchshot");
-    } else if(var_0._id_1199 == "prone") {
+    } else if(var_0.attackerstance == "prone") {
       var_1 processchallenge("ch_proneshot");
 
       if(var_3 == "weapon_sniper") {
@@ -1826,12 +1826,12 @@ _id_2092(var_0, var_1, var_2, var_3) {
   }
 
   if(var_3 == "weapon_sniper") {
-    if(isDefined(var_0._id_62A1["oneshotkill"])) {
+    if(isDefined(var_0.modifiers["oneshotkill"])) {
       var_1 processchallenge("ch_ghillie");
     }
   }
 
-  if(issubstr(var_0._id_953E, "silencer")) {
+  if(issubstr(var_0.sweapon, "silencer")) {
     var_1 processchallenge("ch_stealthvet");
   }
 }
@@ -1839,7 +1839,7 @@ _id_2092(var_0, var_1, var_2, var_3) {
 ch_roundplayed(var_0) {
   var_1 = var_0.player;
 
-  if(var_1._id_A869) {
+  if(var_1.wasaliveatmatchstart) {
     var_2 = var_1.pers["deaths"];
     var_3 = var_1.pers["kills"];
     var_4 = 1000000;
@@ -1862,7 +1862,7 @@ ch_roundplayed(var_0) {
     if(var_1.score > 0) {
       switch (level.gametype) {
         case "dm":
-          if(var_0._id_7002 < 3) {
+          if(var_0.place < 3) {
             var_1 processchallenge("ch_victor_dm");
             var_1 processchallenge("ch_ffa_win");
           }
@@ -1870,70 +1870,70 @@ ch_roundplayed(var_0) {
           var_1 processchallenge("ch_ffa_participate");
           break;
         case "war":
-          if(var_0._id_AA42) {
+          if(var_0.winner) {
             var_1 processchallenge("ch_war_win");
           }
 
           var_1 processchallenge("ch_war_participate");
           break;
         case "kc":
-          if(var_0._id_AA42) {
+          if(var_0.winner) {
             var_1 processchallenge("ch_kc_win");
           }
 
           var_1 processchallenge("ch_kc_participate");
           break;
         case "dd":
-          if(var_0._id_AA42) {
+          if(var_0.winner) {
             var_1 processchallenge("ch_dd_win");
           }
 
           var_1 processchallenge("ch_dd_participate");
           break;
         case "koth":
-          if(var_0._id_AA42) {
+          if(var_0.winner) {
             var_1 processchallenge("ch_koth_win");
           }
 
           var_1 processchallenge("ch_koth_participate");
           break;
         case "sab":
-          if(var_0._id_AA42) {
+          if(var_0.winner) {
             var_1 processchallenge("ch_sab_win");
           }
 
           var_1 processchallenge("ch_sab_participate");
           break;
         case "sd":
-          if(var_0._id_AA42) {
+          if(var_0.winner) {
             var_1 processchallenge("ch_sd_win");
           }
 
           var_1 processchallenge("ch_sd_participate");
           break;
         case "dom":
-          if(var_0._id_AA42) {
+          if(var_0.winner) {
             var_1 processchallenge("ch_dom_win");
           }
 
           var_1 processchallenge("ch_dom_participate");
           break;
         case "ctf":
-          if(var_0._id_AA42) {
+          if(var_0.winner) {
             var_1 processchallenge("ch_ctf_win");
           }
 
           var_1 processchallenge("ch_ctf_participate");
           break;
         case "tdef":
-          if(var_0._id_AA42) {
+          if(var_0.winner) {
             var_1 processchallenge("ch_tdef_win");
           }
 
           var_1 processchallenge("ch_tdef_participate");
           break;
         case "hp":
-          if(var_0._id_AA42) {
+          if(var_0.winner) {
             var_1 processchallenge("ch_hp_win");
           }
 
@@ -1944,24 +1944,24 @@ ch_roundplayed(var_0) {
 }
 
 ch_roundwin(var_0) {
-  if(!var_0._id_AA42) {
+  if(!var_0.winner) {
     return;
   }
   var_1 = var_0.player;
 
-  if(var_1._id_A869) {
+  if(var_1.wasaliveatmatchstart) {
     switch (level.gametype) {
       case "war":
         if(level.hardcoremode) {
           var_1 processchallenge("ch_teamplayer_hc");
 
-          if(var_0._id_7002 == 0) {
+          if(var_0.place == 0) {
             var_1 processchallenge("ch_mvp_thc");
           }
         } else {
           var_1 processchallenge("ch_teamplayer");
 
-          if(var_0._id_7002 == 0) {
+          if(var_0.place == 0) {
             var_1 processchallenge("ch_mvp_tdm");
           }
         }
@@ -1986,7 +1986,7 @@ ch_roundwin(var_0) {
   }
 }
 
-_id_73CC(var_0, var_1, var_2, var_3, var_4, var_5) {
+playerdamaged(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isPlayer(self)) {
     return;
   }
@@ -1999,39 +1999,39 @@ _id_73CC(var_0, var_1, var_2, var_3, var_4, var_5) {
   waitframe();
   maps\mp\_utility::waittillslowprocessallowed();
   var_6 = spawnStruct();
-  var_6._id_A490 = self;
-  var_6._id_35A9 = var_0;
-  var_6._id_1180 = var_1;
-  var_6._id_502C = var_2;
-  var_6._id_8CD7 = var_3;
-  var_6._id_953E = var_4;
-  var_6._id_8B0A = var_5;
-  var_6._id_A494 = var_6._id_A490 isonground();
+  var_6.victim = self;
+  var_6.einflictor = var_0;
+  var_6.attacker = var_1;
+  var_6.idamage = var_2;
+  var_6.smeansofdeath = var_3;
+  var_6.sweapon = var_4;
+  var_6.shitloc = var_5;
+  var_6.victimonground = var_6.victim isonground();
 
   if(isPlayer(var_1)) {
-    var_6._id_118B = isDefined(var_6._id_1180._id_00E8);
-    var_6._id_1190 = var_6._id_1180 isonground();
-    var_6._id_1199 = var_6._id_1180 getstance();
+    var_6.attackerinlaststand = isDefined(var_6.attacker._id_00E8);
+    var_6.attackeronground = var_6.attacker isonground();
+    var_6.attackerstance = var_6.attacker getstance();
   } else {
-    var_6._id_118B = 0;
-    var_6._id_1190 = 0;
-    var_6._id_1199 = "stand";
+    var_6.attackerinlaststand = 0;
+    var_6.attackeronground = 0;
+    var_6.attackerstance = "stand";
   }
 
   if(isDefined(self) && isDefined(var_1) && isDefined(self.team) && isDefined(var_1.team)) {
-    if(self.team != var_1.team && maps\mp\_utility::_hasperk("specialty_class_hunker") && _isexplosivedamagemod(var_6._id_8CD7) && maps\mp\_utility::isreallyalive(self) && !_id_052D::_id_3154(var_4)) {
+    if(self.team != var_1.team && maps\mp\_utility::_hasperk("specialty_class_hunker") && _isexplosivedamagemod(var_6.smeansofdeath) && maps\mp\_utility::isreallyalive(self) && !_id_052D::_id_3154(var_4)) {
       processchallenge("ch_explosives_hunker");
     }
 
     if(self.team != var_1.team && maps\mp\_utility::_hasperk("specialty_class_primed")) {
-      self._id_5B8B = gettime();
+      self.lastdamagefromenemytargettime = gettime();
     }
   }
 
-  _id_3217("playerDamaged", var_6);
+  domissioncallback("playerDamaged", var_6);
 }
 
-_id_7417(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self._id_0DDF = self getplayerangles();
 
   if(isDefined(var_1)) {
@@ -2040,46 +2040,46 @@ _id_7417(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   self endon("disconnect");
   var_8 = spawnStruct();
-  var_8._id_A490 = self;
-  var_8._id_35A9 = var_0;
-  var_8._id_1180 = var_1;
-  var_8._id_502C = var_2;
-  var_8._id_8CD7 = var_3;
-  var_8._id_953E = var_4;
-  var_8._id_912F = var_5;
-  var_8._id_8B0A = var_6;
+  var_8.victim = self;
+  var_8.einflictor = var_0;
+  var_8.attacker = var_1;
+  var_8.idamage = var_2;
+  var_8.smeansofdeath = var_3;
+  var_8.sweapon = var_4;
+  var_8.sprimaryweapon = var_5;
+  var_8.shitloc = var_6;
   var_8.time = gettime();
-  var_8._id_62A1 = var_7;
-  var_8._id_A494 = var_8._id_A490 isonground();
+  var_8.modifiers = var_7;
+  var_8.victimonground = var_8.victim isonground();
 
   if(isPlayer(var_1)) {
-    var_8._id_118B = isDefined(var_8._id_1180._id_00E8);
-    var_8._id_1190 = var_8._id_1180 isonground();
-    var_8._id_1199 = var_8._id_1180 getstance();
+    var_8.attackerinlaststand = isDefined(var_8.attacker._id_00E8);
+    var_8.attackeronground = var_8.attacker isonground();
+    var_8.attackerstance = var_8.attacker getstance();
   } else {
-    var_8._id_118B = 0;
-    var_8._id_1190 = 0;
-    var_8._id_1199 = "stand";
+    var_8.attackerinlaststand = 0;
+    var_8.attackeronground = 0;
+    var_8.attackerstance = "stand";
   }
 
   var_9 = 0;
 
-  if(isDefined(var_8._id_35A9) && isDefined(var_8._id_35A9._id_3BE0)) {
-    var_9 = var_8._id_35A9._id_3BE0;
+  if(isDefined(var_8.einflictor) && isDefined(var_8.einflictor.firedads)) {
+    var_9 = var_8.einflictor.firedads;
   } else if(isDefined(var_1) && isPlayer(var_1)) {
     var_9 = var_1 playerads();
   }
 
-  var_8._id_A85F = 0;
+  var_8.was_ads = 0;
 
   if(var_9 >= 0.2) {
-    var_8._id_A85F = 1;
+    var_8.was_ads = 1;
   }
 
-  _id_A685(var_8);
+  waitandprocessplayerkilledcallback(var_8);
 
   if(isDefined(var_1) && maps\mp\_utility::isreallyalive(var_1)) {
-    var_1._id_5A57[var_1._id_5A57.size] = var_8;
+    var_1.killsthislife[var_1.killsthislife.size] = var_8;
     var_1.recentkills = common_scripts\utility::_id_0F86(var_1.recentkills, var_8, 0);
 
     if(!isDefined(level.recentkillers)) {
@@ -2108,55 +2108,55 @@ _id_7417(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     }
   }
 
-  var_8._id_1180 notify("playerKilledChallengesProcessed");
+  var_8.attacker notify("playerKilledChallengesProcessed");
 }
 
-_id_A3F7(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+vehiclekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = spawnStruct();
-  var_7._id_A2C8 = var_1;
-  var_7._id_A490 = var_0;
-  var_7._id_35A9 = var_2;
-  var_7._id_1180 = var_3;
-  var_7._id_502C = var_4;
-  var_7._id_8CD7 = var_5;
-  var_7._id_953E = var_6;
+  var_7.vehicle = var_1;
+  var_7.victim = var_0;
+  var_7.einflictor = var_2;
+  var_7.attacker = var_3;
+  var_7.idamage = var_4;
+  var_7.smeansofdeath = var_5;
+  var_7.sweapon = var_6;
   var_7.time = gettime();
-  _id_3217("vehicleKilled", var_7);
+  domissioncallback("vehicleKilled", var_7);
 }
 
-_id_A685(var_0) {
-  if(isDefined(var_0._id_1180)) {
-    var_0._id_1180 endon("disconnect");
+waitandprocessplayerkilledcallback(var_0) {
+  if(isDefined(var_0.attacker)) {
+    var_0.attacker endon("disconnect");
   }
 
-  self._id_7757 = 1;
+  self.processingkilledchallenges = 1;
   waitframe();
   maps\mp\_utility::waittillslowprocessallowed();
-  _id_3217("playerKilled", var_0);
-  self._id_7757 = undefined;
+  domissioncallback("playerKilled", var_0);
+  self.processingkilledchallenges = undefined;
 }
 
-_id_73B5() {
+playerassist() {
   var_0 = spawnStruct();
   var_0.player = self;
-  _id_3217("playerAssist", var_0);
+  domissioncallback("playerAssist", var_0);
 }
 
-_id_A20F(var_0) {
+usehardpoint(var_0) {
   self endon("disconnect");
   waitframe();
   maps\mp\_utility::waittillslowprocessallowed();
   var_1 = spawnStruct();
   var_1.player = self;
-  var_1._id_4B1F = var_0;
-  _id_3217("playerHardpoint", var_1);
+  var_1.hardpointtype = var_0;
+  domissioncallback("playerHardpoint", var_1);
 }
 
-_id_7F13() {
-  _id_3217("roundBegin");
+roundbegin() {
+  domissioncallback("roundBegin");
 }
 
-_id_7F15(var_0) {
+roundend(var_0) {
   var_1 = spawnStruct();
 
   if(level.teambased) {
@@ -2164,30 +2164,30 @@ _id_7F15(var_0) {
 
     for(var_3 = 0; var_3 < level.placement[var_2].size; var_3++) {
       var_1.player = level.placement[var_2][var_3];
-      var_1._id_AA42 = var_2 == var_0;
-      var_1._id_7002 = var_3;
-      _id_3217("roundEnd", var_1);
+      var_1.winner = var_2 == var_0;
+      var_1.place = var_3;
+      domissioncallback("roundEnd", var_1);
     }
 
     var_2 = "axis";
 
     for(var_3 = 0; var_3 < level.placement[var_2].size; var_3++) {
       var_1.player = level.placement[var_2][var_3];
-      var_1._id_AA42 = var_2 == var_0;
-      var_1._id_7002 = var_3;
-      _id_3217("roundEnd", var_1);
+      var_1.winner = var_2 == var_0;
+      var_1.place = var_3;
+      domissioncallback("roundEnd", var_1);
     }
   } else {
     for(var_3 = 0; var_3 < level.placement["all"].size; var_3++) {
       var_1.player = level.placement["all"][var_3];
-      var_1._id_AA42 = isDefined(var_0) && isPlayer(var_0) && var_1.player == var_0;
-      var_1._id_7002 = var_3;
-      _id_3217("roundEnd", var_1);
+      var_1.winner = isDefined(var_0) && isPlayer(var_0) && var_1.player == var_0;
+      var_1.place = var_3;
+      domissioncallback("roundEnd", var_1);
     }
   }
 }
 
-_id_3217(var_0, var_1) {
+domissioncallback(var_0, var_1) {
   if(!mayprocesschallenges()) {
     return;
   }
@@ -2208,7 +2208,7 @@ _id_3217(var_0, var_1) {
   }
 }
 
-_id_638F() {
+monitorfalldistance() {
   self endon("disconnect");
   level endon("game_ended");
 
@@ -2248,21 +2248,21 @@ _id_638F() {
   }
 }
 
-_id_63C3() {
-  thread _id_63AF("increment_melee_kills", 15, "ch_precision_slice");
-  thread _id_63AF("increment_stuck_kills", 5, "ch_precision_ticktick");
-  thread _id_63AF("increment_pistol_headshots", 10, "ch_precision_pistoleer");
-  thread _id_63AF("increment_ar_headshots", 5, "ch_precision_headhunt");
-  thread _id_63AF("increment_sharpshooter_kills", 10, "ch_precision_sharpshoot");
-  thread _id_63AF("increment_oneshotgun_kills", 10, "ch_precision_cqexpert");
-  thread _id_63AF("increment_duallethal_kills", 5, "ch_precision_dangerclose");
-  thread _id_63AF("increment_lethaldouble_kills", 3, "ch_lethals_firediscipline");
-  thread _id_63AF("increment_nemesis_kills", 5, "ch_humiliation_archnemesis");
-  thread _id_63AF("increment_resupplylethal_kills", 3, "ch_lethals_resourceful");
+monitorplayermatchchallenges() {
+  thread monitormatchchallenges("increment_melee_kills", 15, "ch_precision_slice");
+  thread monitormatchchallenges("increment_stuck_kills", 5, "ch_precision_ticktick");
+  thread monitormatchchallenges("increment_pistol_headshots", 10, "ch_precision_pistoleer");
+  thread monitormatchchallenges("increment_ar_headshots", 5, "ch_precision_headhunt");
+  thread monitormatchchallenges("increment_sharpshooter_kills", 10, "ch_precision_sharpshoot");
+  thread monitormatchchallenges("increment_oneshotgun_kills", 10, "ch_precision_cqexpert");
+  thread monitormatchchallenges("increment_duallethal_kills", 5, "ch_precision_dangerclose");
+  thread monitormatchchallenges("increment_lethaldouble_kills", 3, "ch_lethals_firediscipline");
+  thread monitormatchchallenges("increment_nemesis_kills", 5, "ch_humiliation_archnemesis");
+  thread monitormatchchallenges("increment_resupplylethal_kills", 3, "ch_lethals_resourceful");
   thread monitortier2camomatchchallenges("increment_camo_multidestroy", 5, "ch_camoT2_multidestroy_");
 }
 
-_id_63AF(var_0, var_1, var_2) {
+monitormatchchallenges(var_0, var_1, var_2) {
   level endon("game_ended");
   self endon("disconnect");
 
@@ -2274,7 +2274,7 @@ _id_63AF(var_0, var_1, var_2) {
     game[var_2][self.guid] = 0;
   }
 
-  thread _id_7CB9(var_2);
+  thread remove_tracking_on_disconnect(var_2);
 
   for(;;) {
     self waittill(var_0, var_3);
@@ -2307,7 +2307,7 @@ monitortier2camomatchchallenges(var_0, var_1, var_2) {
 
     if(!isDefined(game[var_4][self.guid])) {
       game[var_4][self.guid] = 0;
-      thread _id_7CB9(var_4);
+      thread remove_tracking_on_disconnect(var_4);
     }
 
     var_5 = game[var_4][self.guid];
@@ -2320,7 +2320,7 @@ monitortier2camomatchchallenges(var_0, var_1, var_2) {
   }
 }
 
-_id_7CB9(var_0) {
+remove_tracking_on_disconnect(var_0) {
   level endon("game_ended");
   self waittill("disconnect");
 
@@ -2329,14 +2329,14 @@ _id_7CB9(var_0) {
   }
 }
 
-_id_5BBD() {
+lastmansd() {
   if(!mayprocesschallenges()) {
     return;
   }
-  if(!self._id_A869) {
+  if(!self.wasaliveatmatchstart) {
     return;
   }
-  if(self._id_9857 > 0) {
+  if(self.teamkillsthisround > 0) {
     return;
   }
   processchallenge("ch_lastmanstanding");
@@ -2362,14 +2362,14 @@ monitorbombuse() {
   }
 }
 
-_id_63AB() {
+monitorlivetime() {
   for(;;) {
     self waittill("spawned_player");
-    thread _id_9520();
+    thread survivalistchallenge();
   }
 }
 
-_id_9520() {
+survivalistchallenge() {
   self endon("death");
   self endon("disconnect");
   wait 300;
@@ -2384,7 +2384,7 @@ _id_63E5() {
   self.pers["airstrikeStreak"] = 0;
   self.pers["meleeKillStreak"] = 0;
   self.pers["shieldKillStreak"] = 0;
-  thread _id_63B3();
+  thread monitormisc();
 
   for(;;) {
     self waittill("death");
@@ -2394,16 +2394,16 @@ _id_63E5() {
   }
 }
 
-_id_63B3() {
+monitormisc() {
   self endon("disconnect");
 
   for(;;) {
-    var_0 = common_scripts\utility::_id_A716("destroyed_explosive", "begin_airstrike", "destroyed_car", "destroyed_car");
-    _id_63B4(var_0);
+    var_0 = common_scripts\utility::waittill_any_return_no_endon_death("destroyed_explosive", "begin_airstrike", "destroyed_car", "destroyed_car");
+    monitormisccallback(var_0);
   }
 }
 
-_id_63B4(var_0) {
+monitormisccallback(var_0) {
   switch (var_0) {
     case "begin_airstrike":
       self.pers["airstrikeStreak"] = 0;
@@ -2417,7 +2417,7 @@ _id_63B4(var_0) {
     case "crushed_enemy":
       processchallenge("ch_heads_up");
 
-      if(isDefined(self._id_3B4B)) {
+      if(isDefined(self.finalkill)) {
         processchallenge("ch_droppincrates");
       }
 
@@ -2435,10 +2435,10 @@ _id_4C1F() {
   if(!maps\mp\_utility::rankingenabled()) {
     return;
   }
-  if(isDefined(self._id_5B8D) && self._id_5B8D) {
-    self._id_4C21++;
+  if(isDefined(self.lastdamagewasfromenemy) && self.lastdamagewasfromenemy) {
+    self.healthregenerationstreak++;
 
-    if(self._id_4C21 >= 5 && maps\mp\_utility::_hasperk("specialty_class_remedy")) {
+    if(self.healthregenerationstreak >= 5 && maps\mp\_utility::_hasperk("specialty_class_remedy")) {
       processchallenge("ch_dlc4_remedy");
     }
   }
@@ -2454,12 +2454,12 @@ healthregeneratedbrinkofdeath() {
   if(!maps\mp\_utility::rankingenabled()) {
     return;
   }
-  thread _id_7D53();
+  thread resetbrinkofdeathkillstreakshortly();
 
-  if(isDefined(self._id_5B8D) && self._id_5B8D) {
-    self._id_4C21++;
+  if(isDefined(self.lastdamagewasfromenemy) && self.lastdamagewasfromenemy) {
+    self.healthregenerationstreak++;
 
-    if(self._id_4C21 >= 5) {
+    if(self.healthregenerationstreak >= 5) {
       processchallenge("ch_invincible");
 
       if(maps\mp\_utility::_hasperk("specialty_class_remedy")) {
@@ -2469,27 +2469,27 @@ healthregeneratedbrinkofdeath() {
   }
 }
 
-_id_7D53() {
+resetbrinkofdeathkillstreakshortly() {
   self endon("disconnect");
   self endon("death");
   self endon("damage");
   wait 1;
-  self._id_1C83 = 0;
+  self.brinkofdeathkillstreak = 0;
 }
 
-_id_7463() {
-  self._id_1C83 = 0;
-  self._id_4C21 = 0;
+playerspawned() {
+  self.brinkofdeathkillstreak = 0;
+  self.healthregenerationstreak = 0;
 }
 
-_id_73D3() {
-  self._id_1C83 = 0;
-  self._id_4C21 = 0;
+playerdied() {
+  self.brinkofdeathkillstreak = 0;
+  self.healthregenerationstreak = 0;
 }
 
-_id_5678() {
+isatbrinkofdeath() {
   var_0 = self.health / self.maxhealth;
-  return var_0 <= level._id_4C1D;
+  return var_0 <= level.healthoverlaycutoff;
 }
 
 processchallenge(var_0, var_1, var_2) {
@@ -2510,8 +2510,8 @@ processchallenge(var_0, var_1, var_2) {
   if(!maps\mp\_utility::rankingenabled()) {
     return;
   }
-  if(isDefined(level._id_20AA[var_0]) && isDefined(level._id_20AA[var_0]["requiresPrestige"])) {
-    var_4 = level._id_20AA[var_0]["requiresPrestige"];
+  if(isDefined(level.challengeinfo[var_0]) && isDefined(level.challengeinfo[var_0]["requiresPrestige"])) {
+    var_4 = level.challengeinfo[var_0]["requiresPrestige"];
 
     if(var_4 != "") {
       if(maps\mp\gametypes\_rank::getprestigelevel() < int(var_4)) {
@@ -2521,7 +2521,7 @@ processchallenge(var_0, var_1, var_2) {
   }
 
   if(getdvarint("1258", 0) == 1) {
-    if(common_scripts\utility::_id_9467(var_0, "ch_camo") || common_scripts\utility::_id_9467(var_0, "ch_reticle")) {
+    if(common_scripts\utility::string_starts_with(var_0, "ch_camo") || common_scripts\utility::string_starts_with(var_0, "ch_reticle")) {
       return;
     }
   }
@@ -2530,19 +2530,19 @@ processchallenge(var_0, var_1, var_2) {
     var_1 = 1;
   }
 
-  var_5 = _id_4451(var_0);
+  var_5 = getchallengestatus(var_0);
 
   if(var_5 == 0) {
     return;
   }
-  if(var_5 > level._id_20AA[var_0]["targetval"].size) {
+  if(var_5 > level.challengeinfo[var_0]["targetval"].size) {
     return;
   }
-  var_6 = maps\mp\gametypes\_hud_util::_id_2097(var_0);
+  var_6 = maps\mp\gametypes\_hud_util::ch_getprogress(var_0);
 
   if(isDefined(var_2) && var_2) {
     var_7 = var_1;
-  } else if(maps\mp\gametypes\_hud_util::_id_5850(var_0)) {
+  } else if(maps\mp\gametypes\_hud_util::isweaponclasschallenge(var_0)) {
     var_7 = var_6;
   } else {
     var_7 = var_6 + var_1;
@@ -2550,19 +2550,19 @@ processchallenge(var_0, var_1, var_2) {
 
   var_8 = 0;
 
-  for(var_9 = level._id_20AA[var_0]["targetval"][var_5]; isDefined(var_9) && var_7 >= var_9; var_9 = level._id_20AA[var_0]["targetval"][var_5 + var_8]) {
+  for(var_9 = level.challengeinfo[var_0]["targetval"][var_5]; isDefined(var_9) && var_7 >= var_9; var_9 = level.challengeinfo[var_0]["targetval"][var_5 + var_8]) {
     var_8++;
   }
 
   if(var_6 < var_7) {
-    maps\mp\gametypes\_hud_util::_id_209E(var_0, var_7);
+    maps\mp\gametypes\_hud_util::ch_setprogress(var_0, var_7);
   }
 
   if(var_8 > 0) {
     for(var_10 = var_5; var_8; var_8--) {
-      thread _id_47B3(var_0, var_5);
+      thread giverankxpafterwait(var_0, var_5);
       var_11 = _getchallengeid(var_0, var_5);
-      var_12 = common_scripts\utility::_id_9AAD(var_11);
+      var_12 = common_scripts\utility::tostring(var_11);
       var_13 = int(getsubstr(var_12, 0, var_12.size - 2));
 
       if(!isDefined(game["challengeStruct"]["challengesCompleted"][self.guid])) {
@@ -2581,29 +2581,29 @@ processchallenge(var_0, var_1, var_2) {
         game["challengeStruct"]["challengesCompleted"][self.guid][game["challengeStruct"]["challengesCompleted"][self.guid].size] = var_13;
       }
 
-      if(var_5 >= level._id_20AA[var_0]["targetval"].size && level._id_20AA[var_0]["parent_challenge"] != "") {
-        processchallenge(level._id_20AA[var_0]["parent_challenge"]);
+      if(var_5 >= level.challengeinfo[var_0]["targetval"].size && level.challengeinfo[var_0]["parent_challenge"] != "") {
+        processchallenge(level.challengeinfo[var_0]["parent_challenge"]);
       }
 
       var_5++;
     }
 
     if(!issubstr(var_0, "ch_limited_bloodshed") && !issubstr(var_0, "ch_division_iconic_weapon") && !issubstr(var_0, "ch_hq_data")) {
-      thread maps\mp\gametypes\_hud_message::_id_20AB(var_0, var_10, var_5);
+      thread maps\mp\gametypes\_hud_message::challengesplashnotify(var_0, var_10, var_5);
     }
 
-    maps\mp\gametypes\_hud_util::_id_209F(var_0, var_5);
-    self._id_20A9[var_0] = var_5;
+    maps\mp\gametypes\_hud_util::ch_setstate(var_0, var_5);
+    self.challengedata[var_0] = var_5;
   }
 }
 
-_id_47B3(var_0, var_1) {
+giverankxpafterwait(var_0, var_1) {
   self endon("disconnect");
   wait 0.25;
-  maps\mp\gametypes\_rank::giverankxp("challenge", level._id_20AA[var_0]["reward"][var_1], undefined, undefined, var_0);
+  maps\mp\gametypes\_rank::giverankxp("challenge", level.challengeinfo[var_0]["reward"][var_1], undefined, undefined, var_0);
 }
 
-_id_6022(var_0) {
+masterychallengeprocess(var_0) {
   if(tablelookup("mp/allChallengesTable.csv", 0, "ch_" + var_0 + "_mastery", 1) == "") {
     return;
   }
@@ -2614,7 +2614,7 @@ _id_6022(var_0) {
     if(var_4 == "") {
       continue;
     }
-    if(maps\mp\gametypes\_class::_id_567C(var_0, var_4)) {
+    if(maps\mp\gametypes\_class::isattachmentunlocked(var_0, var_4)) {
       var_1++;
     }
   }
@@ -2622,11 +2622,11 @@ _id_6022(var_0) {
   processchallenge("ch_" + var_0 + "_mastery", var_1, 1);
 }
 
-_id_56A7(var_0, var_1) {
+ischallengeunlocked(var_0, var_1) {
   var_2 = _tablelookupbyrow("mp/allChallengesTable.csv", var_1, 8);
 
   if(var_2 != "") {
-    var_3 = _id_4451(var_2);
+    var_3 = getchallengestatus(var_2);
 
     if(var_3 > 1) {
       return 1;
@@ -2636,7 +2636,7 @@ _id_56A7(var_0, var_1) {
   var_4 = _tablelookupbyrow("mp/allChallengesTable.csv", var_1, 6);
 
   if(var_4 != "") {
-    var_5 = maps\mp\gametypes\_rank::_id_4652();
+    var_5 = maps\mp\gametypes\_rank::getrank();
 
     if(var_5 < int(var_4)) {
       return 0;
@@ -2646,9 +2646,9 @@ _id_56A7(var_0, var_1) {
   var_6 = _tablelookupbyrow("mp/allChallengesTable.csv", var_1, 7);
 
   if(var_6 != "") {
-    var_7 = _id_4451(var_6);
+    var_7 = getchallengestatus(var_6);
 
-    if(var_7 <= level._id_20AA[var_6]["targetval"].size) {
+    if(var_7 <= level.challengeinfo[var_6]["targetval"].size) {
       return 0;
     }
   }
@@ -2657,10 +2657,10 @@ _id_56A7(var_0, var_1) {
 }
 
 updatechalleges() {
-  self._id_20A9 = [];
+  self.challengedata = [];
 
-  if(!isDefined(self._id_20A1)) {
-    self._id_20A1 = [];
+  if(!isDefined(self.ch_unique_earned_streaks)) {
+    self.ch_unique_earned_streaks = [];
   }
 
   if(!isDefined(game["challengeStruct"])) {
@@ -2690,7 +2690,7 @@ updatechalleges() {
   var_0 = 0;
   var_1 = getdvarint("spv_challenge_mastery_completion", 0) == 1;
 
-  foreach(var_6, var_3 in level._id_20AA) {
+  foreach(var_6, var_3 in level.challengeinfo) {
     var_0++;
 
     if(var_0 % 40 == 0) {
@@ -2700,21 +2700,21 @@ updatechalleges() {
     if(_func_367() && !_id_5680(var_6)) {
       continue;
     }
-    self._id_20A9[var_6] = 0;
+    self.challengedata[var_6] = 0;
     var_4 = var_3["index"];
-    var_5 = maps\mp\gametypes\_hud_util::_id_2098(var_6);
+    var_5 = maps\mp\gametypes\_hud_util::ch_getstate(var_6);
 
-    if(maps\mp\gametypes\_hud_util::_id_5807(var_6) && !isDefined(game["challengeStruct"]["limitedChallengesReset"][self.guid])) {
-      maps\mp\gametypes\_hud_util::_id_209E(var_6, 0);
+    if(maps\mp\gametypes\_hud_util::istimelimitedchallenge(var_6) && !isDefined(game["challengeStruct"]["limitedChallengesReset"][self.guid])) {
+      maps\mp\gametypes\_hud_util::ch_setprogress(var_6, 0);
       var_5 = 0;
     }
 
     if(var_5 == 0) {
-      maps\mp\gametypes\_hud_util::_id_209F(var_6, 1);
+      maps\mp\gametypes\_hud_util::ch_setstate(var_6, 1);
       var_5 = 1;
     }
 
-    self._id_20A9[var_6] = var_5;
+    self.challengedata[var_6] = var_5;
 
     if(common_scripts\utility::_id_562E(var_1) && issubstr(var_6, "_master")) {
       processchallenge(var_6, 0);
@@ -2728,36 +2728,36 @@ _id_5680(var_0) {
   return tablelookup("mp/allChallengesTable.csv", 0, var_0, 44) != "";
 }
 
-_id_5732(var_0) {
+isinunlocktable(var_0) {
   return tablelookup("mp/unlockTable.csv", 0, var_0, 0) != "";
 }
 
-_id_444F(var_0) {
+getchallengefilter(var_0) {
   return tablelookup("mp/allChallengesTable.csv", 0, var_0, 5);
 }
 
-_id_4452(var_0) {
+getchallengetable(var_0) {
   return tablelookup("mp/challengeTable.csv", 8, var_0, 4);
 }
 
-_id_46DE(var_0, var_1) {
+gettierfromtable(var_0, var_1) {
   return tablelookup(var_0, 0, var_1, 1);
 }
 
-_id_584F(var_0) {
-  if(isDefined(_id_4732(var_0))) {
+isweaponchallenge(var_0) {
+  if(isDefined(getweaponfromchallenge(var_0))) {
     return 1;
   }
 
   return 0;
 }
 
-_id_4732(var_0) {
+getweaponfromchallenge(var_0) {
   if(!isDefined(var_0)) {
     return undefined;
   }
 
-  var_1 = _id_444F(var_0);
+  var_1 = getchallengefilter(var_0);
 
   if(!isDefined(var_1)) {
     return undefined;
@@ -2785,12 +2785,12 @@ _id_4732(var_0) {
   return undefined;
 }
 
-_id_4724(var_0) {
+getweaponattachmentfromchallenge(var_0) {
   if(!isDefined(var_0)) {
     return undefined;
   }
 
-  var_1 = _id_444F(var_0);
+  var_1 = getchallengefilter(var_0);
 
   if(!isDefined(var_1) || var_1 != "attachment") {
     return undefined;
@@ -2801,7 +2801,7 @@ _id_4724(var_0) {
   if(var_2.size > 0) {
     var_3 = var_2[var_2.size - 1];
 
-    if(isDefined(var_3) && maps\mp\_utility::_id_5679(var_3)) {
+    if(isDefined(var_3) && maps\mp\_utility::isattachment(var_3)) {
       return var_3;
     }
   }
@@ -2809,12 +2809,12 @@ _id_4724(var_0) {
   return undefined;
 }
 
-_id_573C(var_0) {
+iskillstreakchallenge(var_0) {
   if(!isDefined(var_0)) {
     return 0;
   }
 
-  var_1 = _id_444F(var_0);
+  var_1 = getchallengefilter(var_0);
 
   if(isDefined(var_1) && (var_1 == "killstreaks_assault" || var_1 == "killstreaks_support")) {
     return 1;
@@ -2823,7 +2823,7 @@ _id_573C(var_0) {
   return 0;
 }
 
-_id_453B(var_0) {
+getkillstreakfromchallenge(var_0) {
   var_1 = "ch_";
   var_2 = getsubstr(var_0, var_1.size, var_0.size);
 
@@ -2834,17 +2834,17 @@ _id_453B(var_0) {
   return var_2;
 }
 
-_id_20A8(var_0, var_1, var_2) {
+challenge_targetval(var_0, var_1, var_2) {
   var_3 = tablelookup(var_0, 0, var_1, 9 + (var_2 - 1) * 2);
   return int(var_3);
 }
 
-_id_20A7(var_0, var_1, var_2) {
+challenge_rewardval(var_0, var_1, var_2) {
   var_3 = tablelookup(var_0, 0, var_1, 10 + (var_2 - 1) * 2);
   return int(var_3);
 }
 
-_id_20A6(var_0, var_1) {
+challenge_parentchallenge(var_0, var_1) {
   var_2 = tablelookup(var_0, 0, var_1, 42);
 
   if(!isDefined(var_2)) {
@@ -2854,7 +2854,7 @@ _id_20A6(var_0, var_1) {
   return var_2;
 }
 
-_id_1D42(var_0, var_1) {
+buildchallengetableinfo(var_0, var_1) {
   var_2 = 0;
   var_3 = 0;
 
@@ -2874,60 +2874,60 @@ _id_1D42(var_0, var_1) {
     if(var_5 == "1") {
       continue;
     }
-    level._id_20AA[var_4] = [];
-    level._id_20AA[var_4]["index"] = var_3;
-    level._id_20AA[var_4]["type"] = var_1;
-    level._id_20AA[var_4]["targetval"] = [];
-    level._id_20AA[var_4]["reward"] = [];
-    level._id_20AA[var_4]["parent_challenge"] = "";
-    level._id_20AA[var_4]["requiresPrestige"] = _tablelookupbyrow("mp/allChallengesTable.csv", var_3, 45);
+    level.challengeinfo[var_4] = [];
+    level.challengeinfo[var_4]["index"] = var_3;
+    level.challengeinfo[var_4]["type"] = var_1;
+    level.challengeinfo[var_4]["targetval"] = [];
+    level.challengeinfo[var_4]["reward"] = [];
+    level.challengeinfo[var_4]["parent_challenge"] = "";
+    level.challengeinfo[var_4]["requiresPrestige"] = _tablelookupbyrow("mp/allChallengesTable.csv", var_3, 45);
 
-    if(_id_584F(var_4)) {
-      var_6 = _id_4732(var_4);
-      var_7 = _id_4724(var_4);
+    if(isweaponchallenge(var_4)) {
+      var_6 = getweaponfromchallenge(var_4);
+      var_7 = getweaponattachmentfromchallenge(var_4);
 
       if(isDefined(var_6)) {
-        level._id_20AA[var_4]["weapon"] = var_6;
+        level.challengeinfo[var_4]["weapon"] = var_6;
       }
 
       if(isDefined(var_7)) {
-        level._id_20AA[var_4]["attachment"] = var_7;
+        level.challengeinfo[var_4]["attachment"] = var_7;
       }
-    } else if(_id_573C(var_4)) {
-      var_8 = _id_453B(var_4);
+    } else if(iskillstreakchallenge(var_4)) {
+      var_8 = getkillstreakfromchallenge(var_4);
 
       if(isDefined(var_8)) {
-        level._id_20AA[var_4]["killstreak"] = var_8;
+        level.challengeinfo[var_4]["killstreak"] = var_8;
       }
     }
 
     for(var_9 = 1; var_9 < 10; var_9++) {
-      var_10 = _id_20A8(var_0, var_4, var_9);
-      var_11 = _id_20A7(var_0, var_4, var_9);
+      var_10 = challenge_targetval(var_0, var_4, var_9);
+      var_11 = challenge_rewardval(var_0, var_4, var_9);
 
       if(var_10 == 0) {
         break;
       }
 
-      level._id_20AA[var_4]["targetval"][var_9] = var_10;
-      level._id_20AA[var_4]["reward"][var_9] = var_11;
+      level.challengeinfo[var_4]["targetval"][var_9] = var_10;
+      level.challengeinfo[var_4]["reward"][var_9] = var_11;
       var_2 = var_2 + var_11;
     }
 
-    level._id_20AA[var_4]["parent_challenge"] = _id_20A6(var_0, var_4);
+    level.challengeinfo[var_4]["parent_challenge"] = challenge_parentchallenge(var_0, var_4);
   }
 
   return int(var_2);
 }
 
-_id_1D41() {
-  level._id_20AA = [];
+buildchallegeinfo() {
+  level.challengeinfo = [];
 
   if(getDvar("4017") == "1" && !_func_367()) {
     return;
   }
   var_0 = 0;
-  var_0 = var_0 + _id_1D42("mp/allChallengesTable.csv", 0);
+  var_0 = var_0 + buildchallengetableinfo("mp/allChallengesTable.csv", 0);
   _id_1D43();
 }
 
@@ -2941,18 +2941,18 @@ _id_1D43() {
       break;
     }
 
-    level._id_20AA[var_1] = [];
-    level._id_20AA[var_1]["index"] = var_0;
-    level._id_20AA[var_1]["type"] = 1;
-    level._id_20AA[var_1]["targetval"] = [];
-    level._id_20AA[var_1]["reward"] = [];
-    level._id_20AA[var_1]["targetval"] = _id_20A8("mp/dailychallengesTable.csv", var_1, 1);
-    level._id_20AA[var_1]["reward"] = _id_20A7("mp/dailychallengesTable.csv", var_1, 1);
+    level.challengeinfo[var_1] = [];
+    level.challengeinfo[var_1]["index"] = var_0;
+    level.challengeinfo[var_1]["type"] = 1;
+    level.challengeinfo[var_1]["targetval"] = [];
+    level.challengeinfo[var_1]["reward"] = [];
+    level.challengeinfo[var_1]["targetval"] = challenge_targetval("mp/dailychallengesTable.csv", var_1, 1);
+    level.challengeinfo[var_1]["reward"] = challenge_rewardval("mp/dailychallengesTable.csv", var_1, 1);
     var_0++;
   }
 }
 
-_id_63CA() {
+monitorprocesschallenge() {
   self endon("disconnect");
   level endon("game_end");
 
@@ -3057,7 +3057,7 @@ playerhasammo() {
   return 0;
 }
 
-_id_6365() {
+monitoradstime() {
   self endon("disconnect");
   self._id_0A12 = 0.0;
 
@@ -3072,20 +3072,20 @@ _id_6365() {
   }
 }
 
-_id_63CB() {
+monitorpronetime() {
   self endon("disconnect");
   level endon("game_ended");
-  self._id_777B = undefined;
+  self.pronetime = undefined;
   var_0 = 0;
 
   for(;;) {
     var_1 = self getstance();
 
     if(var_1 == "prone" && var_0 == 0) {
-      self._id_777B = gettime();
+      self.pronetime = gettime();
       var_0 = 1;
     } else if(var_1 != "prone") {
-      self._id_777B = undefined;
+      self.pronetime = undefined;
       var_0 = 0;
     }
 
@@ -3093,22 +3093,22 @@ _id_63CB() {
   }
 }
 
-_id_639D() {
+monitorholdbreath() {
   self endon("disconnect");
-  self._id_4DEC = 0;
+  self.holdingbreath = 0;
 
   for(;;) {
     self waittill("hold_breath");
-    self._id_4DEC = 1;
+    self.holdingbreath = 1;
     self waittill("release_breath");
-    self._id_4DEC = 0;
+    self.holdingbreath = 0;
   }
 }
 
-_id_63AE() {
+monitormantle() {
   self endon("disconnect");
   level endon("game_ended");
-  self._id_5FD3 = 0;
+  self.mantling = 0;
 
   for(;;) {
     self waittill("jumped");
@@ -3117,12 +3117,12 @@ _id_63AE() {
     var_1 = self getcurrentweapon();
 
     if(var_1 == "none") {
-      self._id_5FD3 = 1;
+      self.mantling = 1;
     } else {
-      self._id_5FD3 = 0;
+      self.mantling = 0;
     }
 
-    if(self._id_5FD3) {
+    if(self.mantling) {
       if(self isitemunlocked2("specialty_fastmantle") && maps\mp\_utility::_hasperk("specialty_fastmantle")) {
         processchallenge("ch_fastmantle");
       }
@@ -3131,7 +3131,7 @@ _id_63AE() {
       var_1 = self getcurrentweapon();
 
       if(var_1 == var_0) {
-        self._id_5FD3 = 0;
+        self.mantling = 0;
       }
     }
   }
@@ -3153,7 +3153,7 @@ _id_63FA() {
     if(maps\mp\_utility::iskillstreakweapon(var_1)) {
       continue;
     }
-    if(maps\mp\_utility::_id_568F(var_1) || maps\mp\_utility::isuseweapon(var_1)) {
+    if(maps\mp\_utility::isbombsiteweapon(var_1) || maps\mp\_utility::isuseweapon(var_1)) {
       continue;
     }
     self.lastweaponswaptime = gettime();
@@ -3162,11 +3162,11 @@ _id_63FA() {
     if(var_2 != "primary") {
       continue;
     }
-    self._id_5BD0 = gettime();
+    self.lastprimaryweaponswaptime = gettime();
   }
 }
 
-_id_6395() {
+monitorflashbang() {
   self endon("disconnect");
 
   for(;;) {
@@ -3179,7 +3179,7 @@ _id_6395() {
   }
 }
 
-_id_6375() {
+monitorconcussion() {
   self endon("disconnect");
 
   for(;;) {
@@ -3192,20 +3192,20 @@ _id_6375() {
   }
 }
 
-_id_63B2() {
+monitorminetriggering() {
   self endon("disconnect");
 
   for(;;) {
-    common_scripts\utility::_id_A70A("triggered_mine", "triggered_claymore");
-    thread _id_A68C();
+    common_scripts\utility::waittill_any("triggered_mine", "triggered_claymore");
+    thread waitdelayminetime();
   }
 }
 
-_id_A68C() {
+waitdelayminetime() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  wait(level._id_2CE8 + 2);
+  wait(level.delayminetime + 2);
   processchallenge("ch_delaymine");
 
   if(maps\mp\_utility::_hasperk("specialty_class_flanker")) {
@@ -3213,7 +3213,7 @@ _id_A68C() {
   }
 }
 
-_id_55B0(var_0) {
+is_lethal_equipment(var_0) {
   if(!isDefined(var_0)) {
     return 0;
   }
@@ -3241,7 +3241,7 @@ ch_monitorkillerdoingwork(var_0) {
 }
 
 _id_18AC() {
-  if(!isDefined(self._id_18AE) || !isDefined(self._id_5A57) || self._id_5A57.size == 0) {
+  if(!isDefined(self._id_18AE) || !isDefined(self.killsthislife) || self.killsthislife.size == 0) {
     self._id_18AE = 0;
   }
 
@@ -3254,7 +3254,7 @@ _id_18AC() {
 }
 
 _id_34C3() {
-  if(!isDefined(self._id_0BA8) || !isDefined(self._id_5A57) || self._id_5A57.size == 0) {
+  if(!isDefined(self._id_0BA8) || !isDefined(self.killsthislife) || self.killsthislife.size == 0) {
     self._id_0BA8 = 0;
   }
 
@@ -3296,10 +3296,10 @@ playrumblelooponentity(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
       var_11 = 1;
 
       for(var_12 = 0; var_12 < var_0.recentkills.size; var_12++) {
-        var_13 = maps\mp\_utility::_id_45B5(var_0.recentkills[var_12]._id_953E);
-        var_14 = issubstr(var_0.recentkills[var_12]._id_953E, var_1);
+        var_13 = maps\mp\_utility::_id_45B5(var_0.recentkills[var_12].sweapon);
+        var_14 = issubstr(var_0.recentkills[var_12].sweapon, var_1);
 
-        if(var_0.recentkills[var_12]._id_A85F && var_13 == var_9 && var_14) {
+        if(var_0.recentkills[var_12].was_ads && var_13 == var_9 && var_14) {
           var_11++;
           continue;
         }
@@ -3312,14 +3312,14 @@ playrumblelooponentity(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
       }
     }
 
-    if(isDefined(var_0._id_5A57) && var_0._id_5A57.size >= 4) {
+    if(isDefined(var_0.killsthislife) && var_0.killsthislife.size >= 4) {
       var_11 = 1;
 
-      foreach(var_16 in var_0._id_5A57) {
-        var_13 = maps\mp\_utility::_id_45B5(var_16._id_953E);
-        var_14 = issubstr(var_16._id_953E, var_1);
+      foreach(var_16 in var_0.killsthislife) {
+        var_13 = maps\mp\_utility::_id_45B5(var_16.sweapon);
+        var_14 = issubstr(var_16.sweapon, var_1);
 
-        if(var_16._id_A85F && var_13 == var_9 && var_14) {
+        if(var_16.was_ads && var_13 == var_9 && var_14) {
           var_11++;
         }
       }
@@ -3351,9 +3351,9 @@ _id_0B9D() {
   var_0 = isDefined(level._id_3CE0) && level._id_3CE0 == self;
   var_1 = 0;
 
-  if(level.teambased && isDefined(level._id_9FDA)) {
-    if(isDefined(level._id_9FDA)) {
-      foreach(var_3 in level._id_9FDA[self.team]) {
+  if(level.teambased && isDefined(level.uavmodels)) {
+    if(isDefined(level.uavmodels)) {
+      foreach(var_3 in level.uavmodels[self.team]) {
         if(var_3._id_01C8 == "counter_uav" && isDefined(var_3._id_0117) && var_3._id_0117 == self) {
           var_1 = 1;
           break;

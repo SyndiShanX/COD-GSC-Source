@@ -19,10 +19,10 @@ main() {
   }
 
   waittillframeend;
-  level._id_515E = [];
+  level.init_animatedmodels = [];
   var_8 = getEntArray("animated_model", "targetname");
   common_scripts\utility::_id_0FB2(var_8, ::_id_0E9F);
-  level._id_515E = undefined;
+  level.init_animatedmodels = undefined;
 }
 
 _id_0E9F() {

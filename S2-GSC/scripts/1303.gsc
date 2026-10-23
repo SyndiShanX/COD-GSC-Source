@@ -4,7 +4,7 @@
 **************************************/
 
 init() {
-  level._id_5A61["carepackage"] = ::_id_9E24;
+  level.killstreakfuncs["carepackage"] = ::_id_9E24;
 }
 
 _id_9E24(var_0) {

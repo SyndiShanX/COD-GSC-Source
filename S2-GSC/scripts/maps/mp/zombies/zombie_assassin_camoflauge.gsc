@@ -9,7 +9,7 @@ seek_special_ability_use() {
 
 activate_special_ability() {
   thread maps\mp\zombies\zombie_assassin::recharge_special_ability(13.5);
-  _id_0378::_id_8D74("aud_assassin_use_camoflage");
+  _id_0378::snd_message("aud_assassin_use_camoflage");
 }
 
 spawn_a_blinding_area() {
@@ -18,7 +18,7 @@ spawn_a_blinding_area() {
     return;
   }
 
-  playFX(common_scripts\utility::_id_44F5("zmi_assassin_teleport"), self.origin);
+  playFX(common_scripts\utility::getfx("zmi_assassin_teleport"), self.origin);
   wait 0.125;
 
   foreach(var_1 in level.players) {
@@ -40,7 +40,7 @@ showoff() {
     level.players[var_0] thread intro_fog_vision();
   }
 
-  playFX(common_scripts\utility::_id_44F5("zmi_assassin_teleport"), self.origin);
+  playFX(common_scripts\utility::getfx("zmi_assassin_teleport"), self.origin);
 }
 
 intro_fog_vision() {
@@ -62,11 +62,11 @@ play_assassin_blur(var_0) {
   self endon("new_blur");
   self endon("death");
   self endon("disconnect");
-  _id_0378::_id_8D74("aud_strt_asn_camo_blur");
+  _id_0378::snd_message("aud_strt_asn_camo_blur");
   maps\mp\mp_zombie_island_fog_zones::set_light_and_fog("mp_zombie_island_distort", "mp_zombie_island_distort", 1.4 * var_0);
   wait(1.4 * var_0);
   self.current_fog_state = undefined;
-  _id_0378::_id_8D74("aud_stp_asn_camo_blur");
+  _id_0378::snd_message("aud_stp_asn_camo_blur");
 }
 
 assassin_camo_notetrack_handler(var_0, var_1, var_2, var_3) {

@@ -8,7 +8,7 @@ main() {
 }
 
 _id_7BBE() {
-  _id_0378::_id_8DC7("mp_intro_dday_plane_flyover", ::_id_64FF);
+  _id_0378::snd_register_message("mp_intro_dday_plane_flyover", ::_id_64FF);
 }
 
 _id_64FF(var_0, var_1) {

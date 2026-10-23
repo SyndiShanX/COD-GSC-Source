@@ -40,18 +40,18 @@ vignette_init() {
     waitframe();
   }
 
-  foreach(var_1 in level._id_AC80._id_ACB3) {
+  foreach(var_1 in level.zone_data.zones) {
     var_1 thread vignette_listen_when_zone_activated();
   }
 
   level thread vignette_get_remaining_wave_count();
-  var_3 = common_scripts\utility::_id_46B7("vignette_groundkill_org", "targetname");
+  var_3 = common_scripts\utility::getstructarray("vignette_groundkill_org", "targetname");
 
   foreach(var_5 in var_3) {
     var_5 thread vignette_handler("groundkill");
   }
 
-  var_7 = common_scripts\utility::_id_46B7("vignette_wallkill_org", "targetname");
+  var_7 = common_scripts\utility::getstructarray("vignette_wallkill_org", "targetname");
 
   foreach(var_5 in var_7) {
     var_5 thread vignette_handler("wallkill");
@@ -110,13 +110,13 @@ vignette_start_listener(var_0, var_1, var_2, var_3, var_4) {
 
   var_5 = undefined;
 
-  while(!common_scripts\utility::_id_562E(level._id_AC80._id_08A9)) {
+  while(!common_scripts\utility::_id_562E(level.zone_data._id_08A9)) {
     waitframe();
   }
 
   var_6 = 50;
   var_7 = self.origin + (0, 0, var_6);
-  var_5 = _id_055A::_id_578B(var_7, 0);
+  var_5 = _id_055A::ispointinanyzonereturn(var_7, 0);
   var_0.ent_zone_name = var_5;
 
   for(;;) {
@@ -130,7 +130,7 @@ vignette_start_listener(var_0, var_1, var_2, var_3, var_4) {
 
     var_0.is_in_recently_enabled_zone = 0;
 
-    if(isDefined(var_5) && isDefined(level._id_AC80._id_ACB3[var_5].was_unlocked_on_wave) && level._id_AC80._id_ACB3[var_5].was_unlocked_on_wave > level._id_A980 - level.vignette_recent_wave_buffer) {
+    if(isDefined(var_5) && isDefined(level.zone_data.zones[var_5].was_unlocked_on_wave) && level.zone_data.zones[var_5].was_unlocked_on_wave > level.wavecounter - level.vignette_recent_wave_buffer) {
       var_0.is_in_recently_enabled_zone = 1;
     }
 
@@ -141,12 +141,12 @@ vignette_start_listener(var_0, var_1, var_2, var_3, var_4) {
     }
 
     var_0.not_over_zombie_limit = var_8.size < level.vignette_max_level_zombies_allowed;
-    var_0.wave_isnt_over = !_id_056D::_id_584C(level._id_A980);
+    var_0.wave_isnt_over = !_id_056D::_id_584C(level.wavecounter);
     var_0.limit_not_reached = level.vignettes_occurred_in_current_wave < level.vignettes_total_per_wave_allowed;
     var_0.players_not_seen_for_time = var_0.time_since_loc_seen >= level.vignette_spawn_cant_be_seen_for_time;
     var_0.req_zombs_remaining = level.vignette_req_remaining_zombies_to_spawn < level.remaining_zomb_count;
 
-    if(var_0.not_over_zombie_limit && var_0.wave_isnt_over && var_0.is_in_player_zone && var_0.is_in_recently_enabled_zone && level._id_A980 != 0 && level._id_7F2A != "zombie_dog" && level.vignette_cooldown_current <= 0 && var_0.limit_not_reached && var_0.radial_cooldown_is_safe && var_0.players_not_seen_for_time && var_0.req_zombs_remaining) {
+    if(var_0.not_over_zombie_limit && var_0.wave_isnt_over && var_0.is_in_player_zone && var_0.is_in_recently_enabled_zone && level.wavecounter != 0 && level.roundtype != "zombie_dog" && level.vignette_cooldown_current <= 0 && var_0.limit_not_reached && var_0.radial_cooldown_is_safe && var_0.players_not_seen_for_time && var_0.req_zombs_remaining) {
       var_10 = [];
       var_11 = [];
 
@@ -243,7 +243,7 @@ vignette_run(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     if(isDefined(var_1) && isDefined(var_2) && isDefined(var_11) && isalive(var_11) && isDefined(var_10) && isalive(var_10) && !common_scripts\utility::_id_562E(var_11.vignette_interrupted)) {
       vignette_execute_paired_scene(var_11, var_10, var_1, var_2, 0);
     } else if(isalive(var_10)) {
-      _id_0378::_id_8D74("play_vignette_victim_hurt_vo", var_10);
+      _id_0378::snd_message("play_vignette_victim_hurt_vo", var_10);
     }
 
     if(isDefined(var_3) && isDefined(var_4) && isDefined(var_11) && isalive(var_11) && isDefined(var_10) && isalive(var_10) && !common_scripts\utility::_id_562E(var_11.vignette_interrupted)) {
@@ -299,7 +299,7 @@ vignette_actor_run_anim_entry(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {
     vignette_zombie_run_loop(var_2, var_3);
   } else {
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FD(var_2, 0, "scripted_anim");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnuntilnotetrack_safe(var_2, 0, "scripted_anim");
   }
 }
 
@@ -310,7 +310,7 @@ vignette_zombie_run_loop(var_0, var_1) {
     thread vignette_loop_timeout_or_timeout_notify("loop_end", var_1);
   }
 
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FD(var_0, 0, "scripted_anim");
+  maps\mp\agents\_scripted_agent_anim_util::playanimnuntilnotetrack_safe(var_0, 0, "scripted_anim");
 }
 
 vignette_actor_enter_safe_state() {
@@ -318,7 +318,7 @@ vignette_actor_enter_safe_state() {
     return;
   }
   self scragentsetscripted(1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "vignette spawn");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "vignette spawn");
   self._id_509A = 1;
   thread vignette_damage_listener();
 }
@@ -332,7 +332,7 @@ vignette_actor_leave_safe_state() {
   }
 
   self scragentsetscripted(0);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "vignette spawn");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "vignette spawn");
 }
 
 vignette_damage_listener() {
@@ -345,7 +345,7 @@ vignette_damage_listener() {
 
 vignette_loop_timeout_or_timeout_notify(var_0, var_1) {
   childthread vignette_loop_player_close_notify(self, "player_nearby");
-  common_scripts\utility::_id_A71A(var_1, "damage", "bulletwhizby", "player_nearby");
+  common_scripts\utility::waittill_any_timeout(var_1, "damage", "bulletwhizby", "player_nearby");
   self notify(var_0);
 }
 
@@ -471,7 +471,7 @@ vignette_wave_count_reset() {
   wait 2;
 
   for(;;) {
-    if(_id_056D::_id_584C(level._id_A980) && !var_0) {
+    if(_id_056D::_id_584C(level.wavecounter) && !var_0) {
       if(level.vignettes_total_per_wave_allowed < level.vignettes_total_per_wave_max) {
         level.vignettes_total_per_wave_allowed++;
       }
@@ -480,7 +480,7 @@ vignette_wave_count_reset() {
       var_0 = 1;
     }
 
-    if(!_id_056D::_id_584C(level._id_A980) && var_0) {
+    if(!_id_056D::_id_584C(level.wavecounter) && var_0) {
       var_0 = 0;
     }
 
@@ -516,21 +516,21 @@ vignette_get_remaining_wave_count_checked() {
 }
 
 vignette_listen_when_zone_activated() {
-  while(!self._id_556E) {
+  while(!self.is_enabled) {
     wait 0.5;
   }
 
-  if(level._id_A980 == 0) {
+  if(level.wavecounter == 0) {
     self.was_unlocked_on_wave = 1;
   } else {
-    self.was_unlocked_on_wave = level._id_A980;
+    self.was_unlocked_on_wave = level.wavecounter;
   }
 
-  while(level._id_A980 <= self.was_unlocked_on_wave + level.vignette_recent_wave_buffer) {
+  while(level.wavecounter <= self.was_unlocked_on_wave + level.vignette_recent_wave_buffer) {
     level waittill("zombie_wave_started");
   }
 
-  level notify("zone_vignette_cleanup", self._id_AC8A);
+  level notify("zone_vignette_cleanup", self.zone_name);
 }
 
 vignette_is_not_near_zombies() {
@@ -545,7 +545,7 @@ vignette_is_not_near_zombies() {
   return 1;
 }
 
-_id_5718(var_0, var_1) {
+isinarray(var_0, var_1) {
   if(isDefined(var_0)) {
     foreach(var_3 in var_0) {
       if(var_3 == var_1) {

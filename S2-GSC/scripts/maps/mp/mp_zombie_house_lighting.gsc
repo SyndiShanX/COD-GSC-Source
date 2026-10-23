@@ -61,7 +61,7 @@ nightvisiongogglesforceon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   var_8 = newhudelem();
   var_8.x = 0;
   var_8.y = 0;
-  var_8._id_910A = 1;
+  var_8.splatter = 1;
   var_8.alignx = "left";
   var_8.aligny = "top";
   var_8.sort = 1;
@@ -69,7 +69,7 @@ nightvisiongogglesforceon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   var_8._id_00C6 = "fullscreen";
   var_8._id_01CA = "fullscreen";
   var_8.alpha = var_4;
-  var_8 thread _id_236B();
+  var_8 thread cleanup_overlay();
 
   if(isDefined(var_5)) {
     var_8.x = var_5;
@@ -141,11 +141,11 @@ nightvisiongogglesforceon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
     var_8 destroy();
   }
 
-  level._id_6CA4 = var_8;
-  return level._id_6CA4;
+  level.overlay = var_8;
+  return level.overlay;
 }
 
-_id_236B() {
+cleanup_overlay() {
   level waittill("end_screen_effect");
   self destroy();
 }

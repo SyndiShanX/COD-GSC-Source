@@ -11,24 +11,24 @@ init() {
   setdvarifuninitialized("specialistBasicTraining2_score", 400);
   setdvarifuninitialized("specialistBasicTraining3_score", 600);
   setdvarifuninitialized("specialistBasicTraining4_score", 800);
-  level._id_6F5A = [];
-  level._id_90D7 = "specialty_s1_temp";
-  level._id_90D5 = "specialty_s1_temp";
-  level._id_90D6 = "specialty_s1_temp";
-  level._id_90D9 = "specialty_s1_temp";
+  level.perkfuncs = [];
+  level.specialty_finalstand_icon = "specialty_s1_temp";
+  level.specialty_c4_death_icon = "specialty_s1_temp";
+  level.specialty_compassping_revenge_icon = "specialty_s1_temp";
+  level.specialty_juiced_icon = "specialty_s1_temp";
 
-  if(!isDefined(level._id_585D) || !level._id_585D) {
-    level._id_906A["enemy"] = "npc_usa_emergency_flare";
-    level._id_906A["friendly"] = "npc_usa_emergency_flare";
-    level._id_9069["enemy"] = loadfx("vfx/props/tac_insert_enemy");
-    level._id_9069["friendly"] = loadfx("vfx/props/tac_insert_friendly");
-    level._id_9062 = loadfx("vfx/explosion/mp_tac_explosion");
+  if(!isDefined(level.iszombiegame) || !level.iszombiegame) {
+    level.spawnglowmodel["enemy"] = "npc_usa_emergency_flare";
+    level.spawnglowmodel["friendly"] = "npc_usa_emergency_flare";
+    level.spawnglow["enemy"] = loadfx("vfx/props/tac_insert_enemy");
+    level.spawnglow["friendly"] = loadfx("vfx/props/tac_insert_friendly");
+    level.spawnfire = loadfx("vfx/explosion/mp_tac_explosion");
   }
 
   level._effect["ricochet"] = loadfx("vfx/test/test_fx");
   level.disableoffhandweapons = [];
-  level._id_6F68 = [];
-  level._id_6F6C = [];
+  level.perksetfuncs = [];
+  level.perkunsetfuncs = [];
   level.disableoffhandweapons["specialty_blastshield"] = 1;
   level.disableoffhandweapons["specialty_blastshield2"] = 1;
   level.disableoffhandweapons["specialty_akimbo"] = 1;
@@ -228,116 +228,116 @@ init() {
   level.disableoffhandweapons["signal_flare_expeditionary_mp"] = 1;
   level.disableoffhandweapons["extra_health_mp"] = 1;
   level.disableoffhandweapons["specialty_null"] = 1;
-  level._id_6F68["specialty_blastshield"] = _id_052C::eqon;
-  level._id_6F6C["specialty_blastshield"] = _id_052C::_id_A053;
-  level._id_6F68["specialty_falldamage"] = _id_052C::_id_8689;
-  level._id_6F6C["specialty_falldamage"] = _id_052C::_id_A065;
-  level._id_6F68["specialty_localjammer"] = _id_052C::_id_86C2;
-  level._id_6F6C["specialty_localjammer"] = _id_052C::_id_A06F;
-  level._id_6F68["specialty_thermal"] = _id_052C::_id_8741;
-  level._id_6F6C["specialty_thermal"] = _id_052C::_id_A083;
-  level._id_6F68["specialty_blackbox"] = _id_052C::disableaudiozoom;
-  level._id_6F6C["specialty_blackbox"] = _id_052C::_id_A052;
-  level._id_6F68["specialty_steelnerves"] = _id_052C::_id_8734;
-  level._id_6F6C["specialty_steelnerves"] = _id_052C::_id_A080;
-  level._id_6F68["specialty_delaymine"] = _id_052C::_id_8663;
-  level._id_6F6C["specialty_delaymine"] = _id_052C::_id_A057;
-  level._id_6F68["specialty_improvedobjectives"] = _id_052C::setimprovedobjectives;
-  level._id_6F6C["specialty_improvedobjectives"] = _id_052C::unsetimprovedobjectives;
-  level._id_6F68["specialty_endgame"] = _id_052C::_id_8675;
-  level._id_6F6C["specialty_endgame"] = _id_052C::_id_A05C;
-  level._id_6F68["specialty_rearview"] = _id_052C::_id_870E;
-  level._id_6F6C["specialty_rearview"] = _id_052C::_id_A078;
-  level._id_6F68["specialty_onemanarmy"] = _id_052C::_id_86E0;
-  level._id_6F6C["specialty_onemanarmy"] = _id_052C::_id_A071;
-  level._id_6F68["specialty_steadyaimpro"] = _id_052C::_id_8733;
-  level._id_6F6C["specialty_steadyaimpro"] = _id_052C::_id_A07F;
-  level._id_6F68["specialty_stun_resistance"] = _id_052C::_id_8736;
-  level._id_6F6C["specialty_stun_resistance"] = _id_052C::_id_A082;
-  level._id_6F68["specialty_marksman"] = _id_052C::_id_86C6;
-  level._id_6F6C["specialty_marksman"] = _id_052C::_id_A070;
-  level._id_6F68["specialty_double_load"] = _id_052C::_id_866D;
-  level._id_6F6C["specialty_double_load"] = _id_052C::_id_A059;
-  level._id_6F68["specialty_sharp_focus"] = _id_052C::_id_8721;
-  level._id_6F6C["specialty_sharp_focus"] = _id_052C::_id_A07B;
-  level._id_6F68["specialty_regenspeed"] = _id_052C::_id_8711;
-  level._id_6F6C["specialty_regenspeed"] = _id_052C::_id_A079;
-  level._id_6F68["specialty_empimmune"] = _id_052C::_id_8673;
-  level._id_6F6C["specialty_empimmune"] = _id_052C::_id_A05B;
-  level._id_6F68["specialty_overkill_pro"] = _id_052C::_id_86E8;
-  level._id_6F6C["specialty_overkill_pro"] = _id_052C::_id_A073;
-  level._id_6F68["specialty_personaluav"] = _id_052C::_id_86F4;
-  level._id_6F6C["specialty_personaluav"] = _id_052C::_id_A076;
-  level._id_6F68["specialty_crouchmovement"] = _id_052C::_id_8658;
-  level._id_6F6C["specialty_crouchmovement"] = _id_052C::_id_A056;
-  level._id_6F68["specialty_light_armor"] = _id_052C::_id_86BB;
-  level._id_6F6C["specialty_light_armor"] = _id_052C::_id_A06E;
-  level._id_6F68["specialty_fightorflight"] = _id_052C::_id_867F;
-  level._id_6F6C["specialty_fightorflight"] = _id_052C::_id_A060;
-  level._id_6F68["specialty_extraammo"] = _id_052C::_id_867A;
-  level._id_6F6C["specialty_extraammo"] = _id_052C::_id_A05E;
-  level._id_6F68["specialty_radarpingonspawn"] = _id_052C::_id_870D;
-  level._id_6F6C["specialty_radarpingonspawn"] = _id_052C::_id_A077;
-  level._id_6F68["specialty_perception"] = _id_052C::_id_86F1;
-  level._id_6F6C["specialty_perception"] = _id_052C::_id_A075;
-  level._id_6F68["specialty_throwequipmentfarther"] = _id_052C::_id_8743;
-  level._id_6F6C["specialty_throwequipmentfarther"] = _id_052C::_id_A084;
-  level._id_6F68["specialty_shortfuse"] = _id_052C::_id_8722;
-  level._id_6F6C["specialty_shortfuse"] = _id_052C::_id_A07C;
-  level._id_6F68["specialty_cookinggrenadedeath"] = _id_052C::_id_8656;
-  level._id_6F6C["specialty_cookinggrenadedeath"] = _id_052C::_id_A055;
-  level._id_6F68["specialty_explosiveearlywarning"] = _id_052C::_id_8678;
-  level._id_6F6C["specialty_explosiveearlywarning"] = _id_052C::_id_A05D;
-  level._id_6F68["specialty_class_snowblind"] = _id_052C::setsnowblind;
-  level._id_6F6C["specialty_class_snowblind"] = _id_052C::unsetsnowblind;
-  level._id_6F68["specialty_class_thaw"] = _id_052C::setthaw;
-  level._id_6F6C["specialty_class_thaw"] = _id_052C::unsetthaw;
-  level._id_6F68["specialty_class_humbug"] = _id_052C::sethumbug;
-  level._id_6F6C["specialty_class_humbug"] = _id_052C::unsethumbug;
-  level._id_6F68["specialty_gpsjammer"] = _id_052C::setgpsjammer;
-  level._id_6F6C["specialty_gpsjammer"] = _id_052C::unsetgpsjammer;
-  level._id_6F68["specialty_class_shifty"] = _id_052C::setshifty;
-  level._id_6F6C["specialty_class_shifty"] = _id_052C::unsetshifty;
-  level._id_6F68["specialty_deadeye"] = _id_052C::setdeadeye;
-  level._id_6F6C["specialty_deadeye"] = _id_052C::unsetdeadeye;
-  level._id_6F68["specialty_class_resistance_enlisted"] = _id_052C::setresistancedivisionscramblerindicator;
-  level._id_6F6C["specialty_class_resistance_enlisted"] = _id_052C::unsetresistancedivisionscramblerindicator;
-  level._id_6F68["specialty_class_resistance_expert"] = _id_052C::setresistancedivisionscramblerindicator;
-  level._id_6F6C["specialty_class_resistance_expert"] = _id_052C::unsetresistancedivisionscramblerindicator;
-  level._id_6F68["specialty_class_resistance_master"] = _id_052C::setresistancedivisionscramblerindicator;
-  level._id_6F6C["specialty_class_resistance_master"] = _id_052C::unsetresistancedivisionscramblerindicator;
-  level._id_6F68["specialty_class_resistance_grandmaster"] = _id_052C::setresistancedivisionscramblerindicator;
-  level._id_6F6C["specialty_class_resistance_grandmaster"] = _id_052C::unsetresistancedivisionscramblerindicator;
-  level._id_6F68["specialty_sprintfasterovertime"] = _id_052C::setsprintfasterovertime;
-  level._id_6F6C["specialty_sprintfasterovertime"] = _id_052C::unsetsprintfasterovertime;
-  level._id_6F68["specialty_regenbullets"] = _id_052C::setregeneratebulletsovertime;
-  level._id_6F6C["specialty_regenbullets"] = _id_052C::unsetregeneratebulletsovertime;
-  level._id_6F68["specialty_regenequipment"] = _id_052C::setregenerateequipmentovertime;
-  level._id_6F6C["specialty_regenequipment"] = _id_052C::unsetregenerateequipmentovertime;
-  level._id_6F68["specialty_explosiveammoresupply"] = _id_052C::setlaunched;
-  level._id_6F6C["specialty_explosiveammoresupply"] = _id_052C::unsetlaunched;
-  level._id_6F68["specialty_boostafterkill"] = _id_052C::setescalationboostafterkill;
-  level._id_6F6C["specialty_boostafterkill"] = _id_052C::unsetescalationboostafterkill;
-  level._id_6F68["specialty_randomgun"] = _id_052C::setrandomgun;
-  level._id_6F6C["specialty_randomgun"] = _id_052C::unsetrandomgun;
-  level._id_6F68["specialty_perkstreaks"] = _id_052C::setperkstreaks;
-  level._id_6F6C["specialty_perkstreaks"] = _id_052C::unsetperkstreaks;
-  level._id_6F68["specialty_medic"] = maps\mp\perks\_medic::setmedic;
-  level._id_6F6C["specialty_medic"] = maps\mp\perks\_medic::unsetmedic;
-  level._id_6F68["specialty_boostafterreload"] = _id_052C::setclassifiedboostafterreload;
-  level._id_6F6C["specialty_boostafterreload"] = _id_052C::unsetclassifiedboostafterreload;
-  level._id_6F68["specialty_sessionProgressionA"] = _id_052C::setserumbasictraining;
-  level._id_6F6C["specialty_sessionProgressionA"] = _id_052C::unsetserumbasictraining;
-  level._id_6F68["specialty_finalstand"] = _id_052C::_id_8680;
-  level._id_6F6C["specialty_finalstand"] = _id_052C::_id_A061;
-  level._id_6F68["specialty_juiced"] = _id_052C::_id_86B4;
-  level._id_6F6C["specialty_juiced"] = _id_052C::_id_A06B;
-  level._id_6F68["specialty_carepackage"] = _id_052C::_id_8642;
-  level._id_6F6C["specialty_carepackage"] = _id_052C::_id_A054;
-  level._id_6F68["specialty_stopping_power"] = _id_052C::_id_8735;
-  level._id_6F6C["specialty_stopping_power"] = _id_052C::_id_A081;
-  level._id_6F68["specialty_uav"] = _id_052C::_id_8752;
-  level._id_6F6C["specialty_uav"] = _id_052C::_id_A085;
+  level.perksetfuncs["specialty_blastshield"] = _id_052C::eqon;
+  level.perkunsetfuncs["specialty_blastshield"] = _id_052C::unsetblastshield;
+  level.perksetfuncs["specialty_falldamage"] = _id_052C::setfreefall;
+  level.perkunsetfuncs["specialty_falldamage"] = _id_052C::unsetfreefall;
+  level.perksetfuncs["specialty_localjammer"] = _id_052C::setlocaljammer;
+  level.perkunsetfuncs["specialty_localjammer"] = _id_052C::unsetlocaljammer;
+  level.perksetfuncs["specialty_thermal"] = _id_052C::setthermal;
+  level.perkunsetfuncs["specialty_thermal"] = _id_052C::unsetthermal;
+  level.perksetfuncs["specialty_blackbox"] = _id_052C::disableaudiozoom;
+  level.perkunsetfuncs["specialty_blackbox"] = _id_052C::unsetblackbox;
+  level.perksetfuncs["specialty_steelnerves"] = _id_052C::setsteelnerves;
+  level.perkunsetfuncs["specialty_steelnerves"] = _id_052C::unsetsteelnerves;
+  level.perksetfuncs["specialty_delaymine"] = _id_052C::setdelaymine;
+  level.perkunsetfuncs["specialty_delaymine"] = _id_052C::unsetdelaymine;
+  level.perksetfuncs["specialty_improvedobjectives"] = _id_052C::setimprovedobjectives;
+  level.perkunsetfuncs["specialty_improvedobjectives"] = _id_052C::unsetimprovedobjectives;
+  level.perksetfuncs["specialty_endgame"] = _id_052C::setendgame;
+  level.perkunsetfuncs["specialty_endgame"] = _id_052C::unsetendgame;
+  level.perksetfuncs["specialty_rearview"] = _id_052C::setrearview;
+  level.perkunsetfuncs["specialty_rearview"] = _id_052C::unsetrearview;
+  level.perksetfuncs["specialty_onemanarmy"] = _id_052C::setonemanarmy;
+  level.perkunsetfuncs["specialty_onemanarmy"] = _id_052C::unsetonemanarmy;
+  level.perksetfuncs["specialty_steadyaimpro"] = _id_052C::setsteadyaimpro;
+  level.perkunsetfuncs["specialty_steadyaimpro"] = _id_052C::unsetsteadyaimpro;
+  level.perksetfuncs["specialty_stun_resistance"] = _id_052C::setstunresistance;
+  level.perkunsetfuncs["specialty_stun_resistance"] = _id_052C::unsetstunresistance;
+  level.perksetfuncs["specialty_marksman"] = _id_052C::setmarksman;
+  level.perkunsetfuncs["specialty_marksman"] = _id_052C::unsetmarksman;
+  level.perksetfuncs["specialty_double_load"] = _id_052C::setdoubleload;
+  level.perkunsetfuncs["specialty_double_load"] = _id_052C::unsetdoubleload;
+  level.perksetfuncs["specialty_sharp_focus"] = _id_052C::setsharpfocus;
+  level.perkunsetfuncs["specialty_sharp_focus"] = _id_052C::unsetsharpfocus;
+  level.perksetfuncs["specialty_regenspeed"] = _id_052C::setregenspeed;
+  level.perkunsetfuncs["specialty_regenspeed"] = _id_052C::unsetregenspeed;
+  level.perksetfuncs["specialty_empimmune"] = _id_052C::setempimmune;
+  level.perkunsetfuncs["specialty_empimmune"] = _id_052C::unsetempimmune;
+  level.perksetfuncs["specialty_overkill_pro"] = _id_052C::setoverkillpro;
+  level.perkunsetfuncs["specialty_overkill_pro"] = _id_052C::unsetoverkillpro;
+  level.perksetfuncs["specialty_personaluav"] = _id_052C::setpersonaluav;
+  level.perkunsetfuncs["specialty_personaluav"] = _id_052C::unsetpersonaluav;
+  level.perksetfuncs["specialty_crouchmovement"] = _id_052C::setcrouchmovement;
+  level.perkunsetfuncs["specialty_crouchmovement"] = _id_052C::unsetcrouchmovement;
+  level.perksetfuncs["specialty_light_armor"] = _id_052C::setlightarmor;
+  level.perkunsetfuncs["specialty_light_armor"] = _id_052C::unsetlightarmor;
+  level.perksetfuncs["specialty_fightorflight"] = _id_052C::_id_867F;
+  level.perkunsetfuncs["specialty_fightorflight"] = _id_052C::_id_A060;
+  level.perksetfuncs["specialty_extraammo"] = _id_052C::_id_867A;
+  level.perkunsetfuncs["specialty_extraammo"] = _id_052C::_id_A05E;
+  level.perksetfuncs["specialty_radarpingonspawn"] = _id_052C::_id_870D;
+  level.perkunsetfuncs["specialty_radarpingonspawn"] = _id_052C::_id_A077;
+  level.perksetfuncs["specialty_perception"] = _id_052C::_id_86F1;
+  level.perkunsetfuncs["specialty_perception"] = _id_052C::_id_A075;
+  level.perksetfuncs["specialty_throwequipmentfarther"] = _id_052C::_id_8743;
+  level.perkunsetfuncs["specialty_throwequipmentfarther"] = _id_052C::_id_A084;
+  level.perksetfuncs["specialty_shortfuse"] = _id_052C::_id_8722;
+  level.perkunsetfuncs["specialty_shortfuse"] = _id_052C::_id_A07C;
+  level.perksetfuncs["specialty_cookinggrenadedeath"] = _id_052C::_id_8656;
+  level.perkunsetfuncs["specialty_cookinggrenadedeath"] = _id_052C::_id_A055;
+  level.perksetfuncs["specialty_explosiveearlywarning"] = _id_052C::_id_8678;
+  level.perkunsetfuncs["specialty_explosiveearlywarning"] = _id_052C::_id_A05D;
+  level.perksetfuncs["specialty_class_snowblind"] = _id_052C::setsnowblind;
+  level.perkunsetfuncs["specialty_class_snowblind"] = _id_052C::unsetsnowblind;
+  level.perksetfuncs["specialty_class_thaw"] = _id_052C::setthaw;
+  level.perkunsetfuncs["specialty_class_thaw"] = _id_052C::unsetthaw;
+  level.perksetfuncs["specialty_class_humbug"] = _id_052C::sethumbug;
+  level.perkunsetfuncs["specialty_class_humbug"] = _id_052C::unsethumbug;
+  level.perksetfuncs["specialty_gpsjammer"] = _id_052C::setgpsjammer;
+  level.perkunsetfuncs["specialty_gpsjammer"] = _id_052C::unsetgpsjammer;
+  level.perksetfuncs["specialty_class_shifty"] = _id_052C::setshifty;
+  level.perkunsetfuncs["specialty_class_shifty"] = _id_052C::unsetshifty;
+  level.perksetfuncs["specialty_deadeye"] = _id_052C::setdeadeye;
+  level.perkunsetfuncs["specialty_deadeye"] = _id_052C::unsetdeadeye;
+  level.perksetfuncs["specialty_class_resistance_enlisted"] = _id_052C::setresistancedivisionscramblerindicator;
+  level.perkunsetfuncs["specialty_class_resistance_enlisted"] = _id_052C::unsetresistancedivisionscramblerindicator;
+  level.perksetfuncs["specialty_class_resistance_expert"] = _id_052C::setresistancedivisionscramblerindicator;
+  level.perkunsetfuncs["specialty_class_resistance_expert"] = _id_052C::unsetresistancedivisionscramblerindicator;
+  level.perksetfuncs["specialty_class_resistance_master"] = _id_052C::setresistancedivisionscramblerindicator;
+  level.perkunsetfuncs["specialty_class_resistance_master"] = _id_052C::unsetresistancedivisionscramblerindicator;
+  level.perksetfuncs["specialty_class_resistance_grandmaster"] = _id_052C::setresistancedivisionscramblerindicator;
+  level.perkunsetfuncs["specialty_class_resistance_grandmaster"] = _id_052C::unsetresistancedivisionscramblerindicator;
+  level.perksetfuncs["specialty_sprintfasterovertime"] = _id_052C::setsprintfasterovertime;
+  level.perkunsetfuncs["specialty_sprintfasterovertime"] = _id_052C::unsetsprintfasterovertime;
+  level.perksetfuncs["specialty_regenbullets"] = _id_052C::setregeneratebulletsovertime;
+  level.perkunsetfuncs["specialty_regenbullets"] = _id_052C::unsetregeneratebulletsovertime;
+  level.perksetfuncs["specialty_regenequipment"] = _id_052C::setregenerateequipmentovertime;
+  level.perkunsetfuncs["specialty_regenequipment"] = _id_052C::unsetregenerateequipmentovertime;
+  level.perksetfuncs["specialty_explosiveammoresupply"] = _id_052C::setlaunched;
+  level.perkunsetfuncs["specialty_explosiveammoresupply"] = _id_052C::unsetlaunched;
+  level.perksetfuncs["specialty_boostafterkill"] = _id_052C::setescalationboostafterkill;
+  level.perkunsetfuncs["specialty_boostafterkill"] = _id_052C::unsetescalationboostafterkill;
+  level.perksetfuncs["specialty_randomgun"] = _id_052C::setrandomgun;
+  level.perkunsetfuncs["specialty_randomgun"] = _id_052C::unsetrandomgun;
+  level.perksetfuncs["specialty_perkstreaks"] = _id_052C::setperkstreaks;
+  level.perkunsetfuncs["specialty_perkstreaks"] = _id_052C::unsetperkstreaks;
+  level.perksetfuncs["specialty_medic"] = maps\mp\perks\_medic::setmedic;
+  level.perkunsetfuncs["specialty_medic"] = maps\mp\perks\_medic::unsetmedic;
+  level.perksetfuncs["specialty_boostafterreload"] = _id_052C::setclassifiedboostafterreload;
+  level.perkunsetfuncs["specialty_boostafterreload"] = _id_052C::unsetclassifiedboostafterreload;
+  level.perksetfuncs["specialty_sessionProgressionA"] = _id_052C::setserumbasictraining;
+  level.perkunsetfuncs["specialty_sessionProgressionA"] = _id_052C::unsetserumbasictraining;
+  level.perksetfuncs["specialty_finalstand"] = _id_052C::setfinalstand;
+  level.perkunsetfuncs["specialty_finalstand"] = _id_052C::unsetfinalstand;
+  level.perksetfuncs["specialty_juiced"] = _id_052C::setjuiced;
+  level.perkunsetfuncs["specialty_juiced"] = _id_052C::unsetjuiced;
+  level.perksetfuncs["specialty_carepackage"] = _id_052C::setcarepackage;
+  level.perkunsetfuncs["specialty_carepackage"] = _id_052C::unsetcarepackage;
+  level.perksetfuncs["specialty_stopping_power"] = _id_052C::setstoppingpower;
+  level.perkunsetfuncs["specialty_stopping_power"] = _id_052C::unsetstoppingpower;
+  level.perksetfuncs["specialty_uav"] = _id_052C::setuav;
+  level.perkunsetfuncs["specialty_uav"] = _id_052C::unsetuav;
   _id_052C::buildwunderlustweaponlist();
 
   if(isDefined(level._id_3FDE)) {
@@ -465,7 +465,7 @@ _id_A277(var_0, var_1) {
   }
 }
 
-_id_44B5() {
+getemptyperks() {
   var_0 = [];
 
   for(var_1 = 0; var_1 < 9; var_1++) {
@@ -484,13 +484,13 @@ onplayerconnect() {
 }
 
 _id_73C7() {
-  self._id_6F65 = [];
+  self.perks = [];
 }
 
 onplayerspawned() {
   self endon("disconnect");
 
-  if(maps\mp\_utility::_id_551F()) {
+  if(maps\mp\_utility::invirtuallobby()) {
     return;
   }
   for(;;) {
@@ -502,7 +502,7 @@ onplayerspawned() {
   }
 }
 
-_id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+cac_modified_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9 = 0;
 
   if(maps\mp\_utility::isbulletdamage(var_3)) {
@@ -515,14 +515,14 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     }
 
     if(isPlayer(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_paint_pro") && !maps\mp\_utility::iskillstreakweapon(var_4) && (isPlayer(var_0) || _isagent(var_0))) {
-      if(!var_0 _id_052C::_id_576D()) {
+      if(!var_0 _id_052C::ispainted()) {
         var_1 maps\mp\gametypes\_missions::processchallenge("ch_bulletpaint");
       }
 
-      var_0 thread _id_052C::_id_86ED(var_1, 1);
+      var_0 thread _id_052C::setpainted(var_1, 1);
     }
 
-    if(isPlayer(var_0) && isDefined(var_0._id_4B9A) && var_0._id_4B9A && !maps\mp\_utility::_id_570A(var_4, var_7, var_3, var_1)) {
+    if(isPlayer(var_0) && isDefined(var_0._id_4B9A) && var_0._id_4B9A && !maps\mp\_utility::isheadshot(var_4, var_7, var_3, var_1)) {
       var_9 = var_9 - (var_2 - 1);
       var_10 = var_2;
 
@@ -538,7 +538,7 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     } else if(isPlayer(var_1) && (var_1 maps\mp\_utility::_hasperk("specialty_bulletdamage") || var_1 maps\mp\_utility::_hasperk("specialty_moredamage")) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest")) {
       var_9 = var_9 + 0;
     } else if(isPlayer(var_1) && (var_1 maps\mp\_utility::_hasperk("specialty_bulletdamage") || var_1 maps\mp\_utility::_hasperk("specialty_moredamage"))) {
-      var_9 = var_9 + var_2 * level._id_1D7C;
+      var_9 = var_9 + var_2 * level.bulletdamagemod;
     } else if(var_0 maps\mp\_utility::_hasperk("specialty_armorvest")) {
       var_9 = var_9 - var_2 * level._id_0F6A;
     }
@@ -548,7 +548,7 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     }
 
     if(isPlayer(var_1) && var_1 != var_0 && var_1 maps\mp\_utility::_hasperk("specialty_paint") && (!maps\mp\_utility::iskillstreakweapon(var_4) || issubstr(var_4, "killstreak_molotov_cocktail"))) {
-      var_0 thread _id_052C::_id_86ED(var_1, 0);
+      var_0 thread _id_052C::setpainted(var_1, 0);
     }
 
     if(maps\mp\_utility::getweaponclass(var_4) == "weapon_projectile" && weaponclass(var_4) == "rocketlauncher" && isPlayer(var_1) && _weaponinheritsperks(var_4) && var_1 maps\mp\_utility::_hasperk("specialty_class_launched")) {
@@ -566,9 +566,9 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     else if(isPlayer(var_1) && _weaponinheritsperks(var_4) && (var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage") && var_0 maps\mp\_utility::_hasperk("specialty_blastshield2"))) {
       var_9 = var_9 + 0;
     } else if(isPlayer(var_1) && _weaponinheritsperks(var_4) && (var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage") && var_0 maps\mp\_utility::_hasexperimentalbtperk("specialty_reducedexplosivefallprotection"))) {
-      var_9 = var_9 + (var_2 * level._id_395D + var_2 * level.clumsydamagemod);
+      var_9 = var_9 + (var_2 * level.explosivedamagemod + var_2 * level.clumsydamagemod);
     } else if(isPlayer(var_1) && _weaponinheritsperks(var_4) && var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage")) {
-      var_9 = var_9 + var_2 * level._id_395D;
+      var_9 = var_9 + var_2 * level.explosivedamagemod;
     } else if(var_0 maps\mp\_utility::_hasexperimentalbtperk("specialty_reducedexplosivefallprotection")) {
       var_9 = var_9 + var_2 * level.clumsydamagemod;
     } else if(var_0 maps\mp\_utility::_hasperk("specialty_blastshield2") && isDefined(var_0._id_90D4) && (var_4 != "semtex_mp" || var_2 < 145) && !_id_0513::_id_57F6(var_4) && !_id_3154(var_4)) {
@@ -579,7 +579,7 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       var_2 = var_2 * var_0._id_944B;
     }
 
-    if(_id_0513::_id_513A()) {
+    if(_id_0513::ingrenadegraceperiod()) {
       var_2 = var_2 * level._id_597E;
     }
   } else if(var_3 == "MOD_FALLING") {
@@ -591,12 +591,12 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     if(var_0 maps\mp\_utility::_hasexperimentalbtperk("specialty_reducedexplosivefallprotection")) {
       var_9 = var_9 + var_2 * level.clumsydamagemod;
     }
-  } else if(maps\mp\_utility::_id_5755(var_3)) {
+  } else if(maps\mp\_utility::ismeleemod(var_3)) {
     if(var_1 maps\mp\_utility::_hasperk("specialty_increasedmeleedamage")) {
       var_2 = var_2 * level._id_60E3;
     }
 
-    if(isDefined(var_0._id_4B76) && var_0._id_4B76) {
+    if(isDefined(var_0.haslightarmor) && var_0.haslightarmor) {
       if(issubstr(var_4, "riotshield") || var_4 == "exoshield_equipment_mp") {
         var_2 = int(var_0.maxhealth * 0.66);
       } else {
@@ -605,7 +605,7 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     }
   } else if(maps\mp\_utility::_id_5697(var_3, var_4)) {
     if(isDefined(var_1) && isPlayer(var_1) && var_1 != var_0 && var_1 maps\mp\_utility::_hasperk("specialty_paint") && (!maps\mp\_utility::iskillstreakweapon(var_4) || issubstr(var_4, "killstreak_molotov_cocktail")) && !issubstr(var_4, "dragon_breath")) {
-      var_0 thread _id_052C::_id_86ED(var_1, 0);
+      var_0 thread _id_052C::setpainted(var_1, 0);
     }
 
     if(var_0 maps\mp\_utility::_hasperk("specialty_fireshield") && isDefined(var_0._id_90D8)) {
@@ -615,7 +615,7 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   var_11 = _getweaponbasename(var_4);
 
-  if(isDefined(var_0._id_5D2E) && isDefined(var_11)) {
+  if(isDefined(var_0.lightarmorhp) && isDefined(var_11)) {
     switch (var_11) {
       case "exoknife_jug_mp":
       case "exoknife_mp":
@@ -624,22 +624,22 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
         break;
       case "semtex_mp":
       case "semtexproj_mp":
-        if(isDefined(var_8) && isDefined(var_8._id_9488) && var_8._id_9488 == var_0) {
+        if(isDefined(var_8) && isDefined(var_8.stuckenemyentity) && var_8.stuckenemyentity == var_0) {
           var_2 = var_0.health;
           var_9 = 0;
         }
 
         break;
       default:
-        if(var_3 != "MOD_FALLING" && !maps\mp\_utility::_id_5755(var_3) && !maps\mp\_utility::_id_570A(var_11, var_7, var_3, var_1) && !maps\mp\_utility::_id_56F8(var_11, var_3, var_1)) {
-          var_0 _id_052C::_id_86BC(var_0._id_5D2E - (var_2 + var_9));
+        if(var_3 != "MOD_FALLING" && !maps\mp\_utility::ismeleemod(var_3) && !maps\mp\_utility::isheadshot(var_11, var_7, var_3, var_1) && !maps\mp\_utility::isfmjdamage(var_11, var_3, var_1)) {
+          var_0 _id_052C::setlightarmorhp(var_0.lightarmorhp - (var_2 + var_9));
           var_2 = 0;
           var_9 = 0;
 
-          if(var_0._id_5D2E <= 0) {
-            var_2 = _abs(var_0._id_5D2E);
+          if(var_0.lightarmorhp <= 0) {
+            var_2 = _abs(var_0.lightarmorhp);
             var_9 = 0;
-            _id_052C::_id_A06E();
+            _id_052C::unsetlightarmor();
           }
         }
 
@@ -669,11 +669,11 @@ _id_532A() {
   level.bayonetchargemovespeedscale = 1.04;
   level.shieldchargemovespeedscale = 1.07;
   level.launchedrocketlauncherdamagemod = 1.3;
-  level._id_1D7C = maps\mp\_utility::getintproperty("perk_bulletDamage", 40) / 100;
-  level._id_395D = maps\mp\_utility::getintproperty("perk_explosiveDamage", 40) / 100;
+  level.bulletdamagemod = maps\mp\_utility::getintproperty("perk_bulletDamage", 40) / 100;
+  level.explosivedamagemod = maps\mp\_utility::getintproperty("perk_explosiveDamage", 40) / 100;
   level.clumsydamagemod = maps\mp\_utility::getintproperty("perk_clumsyDamage", 120) / 100;
   level._id_60E3 = maps\mp\_utility::getintproperty("perk_meleeDamage", 200) / 100;
-  level._id_7EA1 = maps\mp\_utility::getintproperty("perk_riotShield", 100) / 100;
+  level.riotshieldmod = maps\mp\_utility::getintproperty("perk_riotShield", 100) / 100;
   level._id_0F6A = maps\mp\_utility::getintproperty("perk_armorVest", 25) / 100;
   var_0 = getdvarfloat("1773");
   var_1 = getdvarfloat("2817");
@@ -681,25 +681,25 @@ _id_532A() {
   level._id_08E2 = var_1 * var_1;
 }
 
-_id_1E15() {}
+cac_selector() {}
 
-_id_4778() {
+giveblindeyeafterspawn() {
   self endon("death");
   self endon("disconnect");
   maps\mp\_utility::giveperk("specialty_blindeye");
-  self._id_907E = 1;
+  self.spawnperk = 1;
 
-  while(!isDefined(self._id_1444)) {
+  while(!isDefined(self.avoidkillstreakonspawntimer)) {
     waitframe();
   }
 
-  while(self._id_1444 > 0) {
-    self._id_1444 = self._id_1444 - 0.05;
+  while(self.avoidkillstreakonspawntimer > 0) {
+    self.avoidkillstreakonspawntimer = self.avoidkillstreakonspawntimer - 0.05;
     waitframe();
   }
 
   maps\mp\_utility::_id_0735("specialty_blindeye");
-  self._id_907E = 0;
+  self.spawnperk = 0;
 }
 
 _id_3154(var_0) {
@@ -839,7 +839,7 @@ _id_0F36() {
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_instincts")) {
-    if(getdvarint("isMLGMatch", 0) == 0 && !_func_3AF()) {
+    if(getdvarint("isMLGMatch", 0) == 0 && !xmodelalias/alias_ger_heads_scarf_for_muddy_cheap()) {
       maps\mp\_utility::giveperk("specialty_perception");
     }
 
@@ -849,12 +849,12 @@ _id_0F36() {
       maps\mp\_utility::giveperk("specialty_stun_resistance");
       maps\mp\_utility::giveperk("specialty_resistshellshock");
       maps\mp\_utility::giveperk("specialty_immunesmoke");
-      self._id_94BE = 0.1;
+      self.stunscaler = 0.1;
     }
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_espionage")) {
-    self._id_90DA = 6.0;
+    self.specialty_paint_time = 6.0;
     maps\mp\_utility::giveperk("specialty_paint_pro");
     maps\mp\_utility::giveperk("specialty_minimapdangerinfo");
   }
@@ -980,7 +980,7 @@ _id_0F36() {
       maps\mp\_utility::giveperk("specialty_stun_resistance");
       maps\mp\_utility::giveperk("specialty_resistshellshock");
       maps\mp\_utility::giveperk("specialty_immunesmoke");
-      self._id_94BE = 0.1;
+      self.stunscaler = 0.1;
     }
 
     if(maps\mp\_utility::_hasperk("specialty_class_martyrdom")) {

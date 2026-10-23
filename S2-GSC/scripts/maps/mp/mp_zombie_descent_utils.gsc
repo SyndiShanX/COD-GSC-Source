@@ -38,10 +38,10 @@ earthquake_alive_players_with_origin(var_0, var_1, var_2, var_3) {
 }
 
 flag_try_set(var_0) {
-  if(!common_scripts\utility::_id_3C83(var_0)) {
+  if(!common_scripts\utility::flag_exist(var_0)) {
     return;
   }
-  if(common_scripts\utility::_id_3C77(var_0)) {
+  if(common_scripts\utility::flag(var_0)) {
     return;
   }
   common_scripts\utility::flag_set(var_0);
@@ -49,7 +49,7 @@ flag_try_set(var_0) {
 
 lockin_system_monitor_death() {
   self endon("stop_using_station");
-  common_scripts\utility::_id_A70A("death", "enter_last_stand", "begin_last_stand");
+  common_scripts\utility::waittill_any("death", "enter_last_stand", "begin_last_stand");
   self notify("stop_using_station");
 }
 
@@ -248,7 +248,7 @@ vo_intro() {
   var_0 = 0;
 
   foreach(var_2 in level.players) {
-    if(_id_0547::_id_5565(_id_0378::_id_307B(var_2._id_20D8), "oliv")) {
+    if(_id_0547::_id_5565(_id_0378::_id_307B(var_2.characterindex), "oliv")) {
       var_0 = 1;
       break;
     }
@@ -263,7 +263,7 @@ vo_intro() {
 
 vo_blood_tube_enter(var_0) {
   if(!common_scripts\utility::_id_562E(var_0)) {
-    if(common_scripts\utility::_id_562E(self._id_57DE)) {
+    if(common_scripts\utility::_id_562E(self.isspeaking)) {
       return;
     }
     if(common_scripts\utility::_id_562E(level.wavestories.story_playing)) {
@@ -276,13 +276,13 @@ vo_blood_tube_enter(var_0) {
 
   var_1 = undefined;
 
-  if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "dros")) {
+  if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "dros")) {
     var_1 = "oohwedidnthaveoneofthesei";
-  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff")) {
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "jeff")) {
     var_1 = "idontlikethisidontlikethi";
-  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "mari")) {
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "mari")) {
     var_1 = "ivegotabadfeelingaboutthi";
-  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "oliv")) {
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "oliv")) {
     var_1 = "thissmellsofbloodoldblood";
   } else {}
 
@@ -295,7 +295,7 @@ vo_blood_tube_enter(var_0) {
 
 vo_blood_tube_exit(var_0) {
   if(!common_scripts\utility::_id_562E(var_0)) {
-    if(common_scripts\utility::_id_562E(self._id_57DE)) {
+    if(common_scripts\utility::_id_562E(self.isspeaking)) {
       return;
     }
     if(common_scripts\utility::_id_562E(level.wavestories.story_playing)) {
@@ -308,13 +308,13 @@ vo_blood_tube_exit(var_0) {
 
   var_1 = undefined;
 
-  if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "dros")) {
+  if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "dros")) {
     var_1 = "sothatswhatitfeelsliketob";
-  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff")) {
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "jeff")) {
     var_1 = "tellmeidonthavetodothatag";
-  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "mari")) {
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "mari")) {
     var_1 = "deargoddidtheytravelthisw";
-  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "oliv")) {
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "oliv")) {
     var_1 = "nosanemindwouldcreatesuch";
   } else {}
 
@@ -327,7 +327,7 @@ vo_blood_tube_exit(var_0) {
 
 vo_hear_klaus(var_0) {
   if(!common_scripts\utility::_id_562E(var_0)) {
-    if(common_scripts\utility::_id_562E(self._id_57DE)) {
+    if(common_scripts\utility::_id_562E(self.isspeaking)) {
       return;
     }
     if(common_scripts\utility::_id_562E(level.wavestories.story_playing)) {
@@ -337,15 +337,15 @@ vo_hear_klaus(var_0) {
 
   var_1 = undefined;
 
-  if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "dros")) {
+  if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "dros")) {
     var_1 = "wheredoiknowthatvoicefrom";
-  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff")) {
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "jeff")) {
     var_1 = "ohhellisthatwhoithinkitis";
-  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "oliv")) {
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "oliv")) {
     var_2 = 0;
 
     foreach(var_4 in level.players) {
-      if(_id_0547::_id_5565(_id_0378::_id_307B(var_4._id_20D8), "mari")) {
+      if(_id_0547::_id_5565(_id_0378::_id_307B(var_4.characterindex), "mari")) {
         var_2 = 1;
       }
     }
@@ -355,7 +355,7 @@ vo_hear_klaus(var_0) {
     } else {
       var_1 = undefined;
     }
-  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "mari"))
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "mari"))
     var_1 = "cryingiknewitklausklausme";
   else {}
 
@@ -367,7 +367,7 @@ vo_hear_klaus(var_0) {
 
 vo_see_corpse_eater(var_0) {
   if(!common_scripts\utility::_id_562E(var_0)) {
-    if(common_scripts\utility::_id_562E(self._id_57DE)) {
+    if(common_scripts\utility::_id_562E(self.isspeaking)) {
       return;
     }
     if(common_scripts\utility::_id_562E(level.wavestories.story_playing)) {
@@ -380,13 +380,13 @@ vo_see_corpse_eater(var_0) {
 
   var_1 = undefined;
 
-  if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "dros")) {
+  if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "dros")) {
     var_1 = "ohhellaretheyallthisbigju";
-  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff")) {
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "jeff")) {
     var_1 = "lookslikewevefoundtheorig";
-  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "mari")) {
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "mari")) {
     var_1 = "mytheoryageneticanomalyth";
-  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "oliv")) {
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "oliv")) {
     var_1 = "thisiswherehorrorwasbornt";
   } else {}
 
@@ -418,7 +418,7 @@ vo_see_feed_listen() {
 
 vo_see_corpse_eater_feed(var_0) {
   if(!common_scripts\utility::_id_562E(var_0)) {
-    if(common_scripts\utility::_id_562E(self._id_57DE)) {
+    if(common_scripts\utility::_id_562E(self.isspeaking)) {
       return;
     }
     if(common_scripts\utility::_id_562E(level.wavestories.story_playing)) {
@@ -434,13 +434,13 @@ vo_see_corpse_eater_feed(var_0) {
 
   var_1 = undefined;
 
-  if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "dros")) {
+  if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "dros")) {
     var_1 = "gahonlythingworsethanthew";
-  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff")) {
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "jeff")) {
     var_1 = "whyaretheyattackingthenaz";
-  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "mari")) {
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "mari")) {
     var_1 = "theyarentfeedingonthefles";
-  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "oliv")) {
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "oliv")) {
     var_1 = "thisiswherethelegendsofth";
   } else {}
 
@@ -523,10 +523,10 @@ vo_radio_convo_boss_end(var_0) {
 
   level.radio_convo_playing = 1;
   level.wavestories.story_playing = 1;
-  _id_0378::_id_8D74("aud_outro_vo_submix_start");
+  _id_0378::snd_message("aud_outro_vo_submix_start");
   vo_play_radio_convo_on_all_players(["zmb_dlc4_fzn_dwn_ride_colonelweverecoveredcapta", "zmb_dlc4_fzn_dwn_ride_thisisasecurechannelcolje", "zmb_dlc4_fzn_dwn_ride_iamheretoguideyouasihavef"], "vo_radio_convo_3_line_done");
   level waittill("vo_radio_convo_3_line_done");
-  _id_0378::_id_8D74("aud_outro_vo_submix_end");
+  _id_0378::snd_message("aud_outro_vo_submix_end");
   level.radio_convo_playing = 0;
   level.wavestories.story_playing = 0;
 }
@@ -590,7 +590,7 @@ vo_init_weapon_whispers() {
 }
 
 vo_can_hear_whisper(var_0) {
-  if(common_scripts\utility::_id_562E(self._id_57DE)) {
+  if(common_scripts\utility::_id_562E(self.isspeaking)) {
     return 0;
   }
 
@@ -767,7 +767,7 @@ snowspawnnotetrackhandler(var_0, var_1, var_2, var_3) {
 }
 
 zombiedripfx(var_0) {
-  if(level._id_A980 >= 20) {
+  if(level.wavecounter >= 20) {
     return;
   }
   var_1 = "spawn_water_drip";
@@ -780,7 +780,7 @@ zombiedripfx(var_0) {
 
   foreach(var_5 in var_2) {
     if(isDefined(self gettagorigin(var_5))) {
-      _id_0547::_id_74A5(common_scripts\utility::_id_44F5(var_1), self, var_5);
+      _id_0547::playfxontagnetwork(common_scripts\utility::getfx(var_1), self, var_5);
     }
   }
 
@@ -793,7 +793,7 @@ zombiedripfxcleanup(var_0, var_1) {
   while(isDefined(self) && isalive(self)) {
     wait 0.1;
 
-    if(!isDefined(self._id_53D9) || !self._id_53D9) {
+    if(!isDefined(self.inspawnanim) || !self.inspawnanim) {
       break;
     }
   }
@@ -805,7 +805,7 @@ zombiedripfxcleanup(var_0, var_1) {
   }
   foreach(var_3 in var_0) {
     if(isDefined(self gettagorigin(var_3))) {
-      _id_0547::_id_9406(common_scripts\utility::_id_44F5(var_1), self, var_3);
+      _id_0547::stopfxontagnetwork(common_scripts\utility::getfx(var_1), self, var_3);
     }
   }
 }
@@ -814,7 +814,7 @@ zombiespawnfx(var_0) {
   if(level.zombiespawnfxcount >= 12) {
     return;
   }
-  var_1 = _spawnfx(common_scripts\utility::_id_44F5(var_0), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+  var_1 = _spawnfx(common_scripts\utility::getfx(var_0), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
   _triggerfx(var_1);
   level.zombiespawnfxcount++;
   common_scripts\utility::waittill_notify_or_timeout("death", 2.0);
@@ -834,8 +834,8 @@ try_catch_on_fire() {
 
   if(var_0 < 4) {
     self.isonfire = 1;
-    _id_0547::_id_A6F6();
-    self _meth_8682(0, 100, 1, "none", 1);
+    _id_0547::waitnetworkframe();
+    self setfirstinfected(0, 100, 1, "none", 1);
   }
 }
 
@@ -852,8 +852,8 @@ start_screenshake(var_0) {
 }
 
 reveal_first_room_door() {
-  foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "flag_limbo_to_cave_intro" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1)) {
+  foreach(var_1 in level.zombiedoors) {
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "flag_limbo_to_cave_intro" && (!isDefined(var_1.open) || !var_1.open)) {
       var_1 notify("open", undefined);
     }
   }
@@ -877,7 +877,7 @@ spine_pickup_anim(var_0) {
   var_1 setstance("stand");
   var_1 allowcrouch(0);
   var_1 allowprone(0);
-  var_1 thread _id_0378::_id_8D74("ripsaw_spine_cut");
+  var_1 thread _id_0378::snd_message("ripsaw_spine_cut");
   var_1 wait_for_weapon_change(var_0);
   wait 3;
 
@@ -925,7 +925,7 @@ set_fx(var_0, var_1) {
   }
 
   self._id_3F74 = var_0;
-  self.fx = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_0), self, var_1);
+  self.fx = _spawnlinkedfx(common_scripts\utility::getfx(var_0), self, var_1);
   _triggerfx(self.fx);
 
   if(_isagent(self)) {

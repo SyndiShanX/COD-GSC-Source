@@ -21,7 +21,7 @@ init() {
   var_0._id_5ED2["default look"]["whole_body"] = "zom_brute_b_base";
   var_0._id_1144["whole_body"] = "zom_klaus_wholebody";
   var_0._id_4C12 = 1.0;
-  var_0._id_60E2 = 30;
+  var_0.meleedamage = 30;
   var_0._id_8302 = 200;
   var_0._id_8303 = 60;
   var_0.parenttype = "zombie_generic";
@@ -51,7 +51,7 @@ _id_AB6D(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   if(!isDefined(var_1) || var_5 == "turretweapon_zeppelin_gun_zm" && common_scripts\utility::_id_562E(self._id_A87C)) {
     return;
   }
-  var_1 thread _id_04C7::_id_A102("standard");
+  var_1 thread _id_04C7::updatedamagefeedback("standard");
   self notify("brute_boss_damage", var_2, var_5);
 }
 
@@ -124,10 +124,10 @@ _id_AB68(var_0, var_1, var_2) {
 _id_AB69(var_0) {
   self notify("show an uber battery");
   self endon("returning to arena");
-  var_1 = common_scripts\utility::_id_46B7("brute_exit_destination", "targetname");
-  var_2 = common_scripts\utility::_id_4461(self.origin, var_1);
+  var_1 = common_scripts\utility::getstructarray("brute_exit_destination", "targetname");
+  var_2 = common_scripts\utility::getclosest(self.origin, var_1);
   self._id_1928 = var_2;
-  var_3 = common_scripts\utility::_id_46B7("brute_roar_point", "targetname");
+  var_3 = common_scripts\utility::getstructarray("brute_roar_point", "targetname");
   var_4 = 1;
 
   while(var_4) {
@@ -146,7 +146,7 @@ _id_AB69(var_0) {
 
 _id_AB64(var_0) {
   self notify("returning to arena");
-  var_1 = common_scripts\utility::_id_46B7("brute_exit_destination", "targetname");
+  var_1 = common_scripts\utility::getstructarray("brute_exit_destination", "targetname");
   var_2 = _id_44C9(var_1, 256);
 
   if(var_2.size > 0) {
@@ -157,7 +157,7 @@ _id_AB64(var_0) {
 
   self setOrigin(var_3.origin + (0, 0, 8));
   self.angles = var_3.angles;
-  var_4 = common_scripts\utility::_id_46B5("final_brute_boss", "targetname");
+  var_4 = common_scripts\utility::getstruct("final_brute_boss", "targetname");
   self._id_1928 = var_4;
   self._id_9E1B = 1;
   self waittill("traverse_end");
@@ -357,7 +357,7 @@ _id_7678(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 
   if(!common_scripts\utility::_id_562E(var_3)) {
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_9, var_11, 1.0, "scripted_anim");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_9, var_11, 1.0, "scripted_anim");
   } else {
     _id_309A(var_0, var_4, var_5);
   }
@@ -388,16 +388,16 @@ _id_309A(var_0, var_1, var_2) {
     var_8 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_7);
 
     if(var_3[var_5] == var_1) {
-      childthread maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_7, var_8, 1.0, "scripted_anim");
+      childthread maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_7, var_8, 1.0, "scripted_anim");
 
       while(!var_4._id_8B58) {
-        _id_0547::_id_A6F6();
+        _id_0547::waitnetworkframe();
       }
 
       continue;
     }
 
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_7, var_8, 1.0, "scripted_anim");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_7, var_8, 1.0, "scripted_anim");
   }
 
   self._id_55A6 = 0;
@@ -412,7 +412,7 @@ _id_1CB8() {
   self endon("death");
   var_0 = 0;
 
-  if(common_scripts\utility::_id_562E(self._id_55A6) || maps\mp\agents\_scripted_agent_anim_util::_id_57E2()) {
+  if(common_scripts\utility::_id_562E(self._id_55A6) || maps\mp\agents\_scripted_agent_anim_util::isstatelocked()) {
     return 0;
   }
 
@@ -420,7 +420,7 @@ _id_1CB8() {
 
   if(var_1._id_8F15 || var_1._id_6895 > 0) {
     if(var_1._id_6891 > var_1._id_687E) {
-      if(common_scripts\utility::_id_24A6()) {
+      if(common_scripts\utility::cointoss()) {
         _id_AB74();
       } else {
         _id_AB76();
@@ -571,7 +571,7 @@ _id_1CCD(var_0) {
     var_0 waittill("show an uber battery");
     var_3 show();
     _playFXOnTag(level._effect["gk_raven_hc_ee_uber_attached"], var_3, "tag_origin");
-    var_3 _id_0378::_id_8D74("uber_battery_spawn");
+    var_3 _id_0378::snd_message("uber_battery_spawn");
   }
 }
 
@@ -653,7 +653,7 @@ _id_A0EB(var_0) {
 
 iswaitingonsound(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
-    var_0 call[[common_scripts\utility::_id_98E7(var_2, ::enableplayeruse, ::disableplayeruse)]](var_1);
+    var_0 call[[common_scripts\utility::ter_op(var_2, ::enableplayeruse, ::disableplayeruse)]](var_1);
   }
 }
 
@@ -706,7 +706,7 @@ _id_3203(var_0, var_1) {
     }
 
     foreach(var_9 in var_6) {
-      var_10 = common_scripts\utility::_id_98E7(isPlayer(var_9), var_4, var_5);
+      var_10 = common_scripts\utility::ter_op(isPlayer(var_9), var_4, var_5);
       var_11 = self gettagorigin(var_3);
 
       if(!common_scripts\utility::_id_0F79(var_2, var_9) && distance(var_11, var_9.origin) < 64) {
@@ -730,7 +730,7 @@ _id_AB6B(var_0) {
   var_3 = spawnStruct();
   var_3.origin = var_1 gettagorigin(var_0);
   var_3.angles = var_1.angles;
-  var_3._id_2F74 = 1;
+  var_3.disabled = 1;
   var_4 = spawnStruct();
   var_4._id_2434 = 30;
   var_4._id_60C1 = 60;
@@ -746,7 +746,7 @@ _id_AB6B(var_0) {
     }
     var_3.origin = var_1 gettagorigin(var_0);
     var_3.angles = var_1.angles;
-    var_3._id_2F74 = !common_scripts\utility::_id_0F79(["scripted_brute_exit_traversal", "scripted_brute_entrance_traversal", "brute_standing_attack", "brute_standing_attack_180", "brute_walking_attack", "brute_up_stairs", "brute_down_stairs"], var_1._id_AB5C);
+    var_3.disabled = !common_scripts\utility::_id_0F79(["scripted_brute_exit_traversal", "scripted_brute_entrance_traversal", "brute_standing_attack", "brute_standing_attack_180", "brute_walking_attack", "brute_up_stairs", "brute_down_stairs"], var_1._id_AB5C);
   }
 }
 
@@ -758,7 +758,7 @@ _id_AB6F() {
 
 _id_AB7D(var_0, var_1, var_2) {
   _id_054D::_id_6BD7(var_0, var_1, var_2);
-  self._id_90DC = "zombie_boss_village";
+  self.species = "zombie_boss_village";
 }
 
 _id_AB7C() {
@@ -767,8 +767,8 @@ _id_AB7C() {
   self _meth_856C(var_0, var_1);
   self._id_00BD = var_1;
   self.radius = var_0;
-  self _meth_85A1("zombie_boss_village");
-  self _meth_84D4();
+  self set_target_tracking_disabled("zombie_boss_village");
+  self scragentusemodelcollisionbounds();
   self.maxhealth = 100000;
   self.health = self.maxhealth;
   self._id_6816 = 1;
@@ -875,7 +875,7 @@ _id_AB7E() {
 _id_1160(var_0) {
   self._id_1F0F = 0;
   self._id_117D = var_0;
-  common_scripts\utility::_id_A70A("brute finished scripted state", "brute behavior was unlocked");
+  common_scripts\utility::waittill_any("brute finished scripted state", "brute behavior was unlocked");
   self._id_1F0F = 1;
 }
 
@@ -957,7 +957,7 @@ _id_A271(var_0) {
 
 _id_A01F(var_0) {
   var_1 = anglesToForward(var_0);
-  var_1 = common_scripts\utility::_id_3D5D(var_1);
+  var_1 = common_scripts\utility::flat_origin(var_1);
   var_1 = vectorNormalize(var_1);
   return var_1;
 }

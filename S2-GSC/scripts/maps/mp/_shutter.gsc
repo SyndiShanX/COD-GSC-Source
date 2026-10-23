@@ -4,8 +4,8 @@
 ****************************************/
 
 main() {
-  level._id_50DB = 0;
-  common_scripts\utility::_id_0F8A(getEntArray("wire", "targetname"), ::_id_AA49);
+  level.inc = 0;
+  common_scripts\utility::_id_0F8A(getEntArray("wire", "targetname"), ::wirewander);
   var_0 = getEntArray("shutter_left", "targetname");
   var_1 = getEntArray("shutter_right_open", "targetname");
 
@@ -27,7 +27,7 @@ main() {
   wait 0.2;
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    var_0[var_2]._id_930E = var_0[var_2].angles[1];
+    var_0[var_2].startyaw = var_0[var_2].angles[1];
   }
 
   var_4 = getEntArray("shutter_right", "targetname");
@@ -44,20 +44,20 @@ main() {
   }
 
   for(var_2 = 0; var_2 < var_4.size; var_2++) {
-    var_4[var_2]._id_930E = var_4[var_2].angles[1];
+    var_4[var_2].startyaw = var_4[var_2].angles[1];
   }
 
   var_1 = undefined;
   var_5 = "left";
 
   for(;;) {
-    common_scripts\utility::_id_0F8A(var_0, ::_id_8C38, var_5);
-    common_scripts\utility::_id_0F8A(var_4, ::_id_8C39, var_5);
+    common_scripts\utility::_id_0F8A(var_0, ::shutterwanderleft, var_5);
+    common_scripts\utility::_id_0F8A(var_4, ::shutterwanderright, var_5);
     level waittill("wind blows", var_5);
   }
 }
 
-_id_AA27() {
+windcontroller() {
   for(;;) {
     var_0 = "left";
 
@@ -70,10 +70,10 @@ _id_AA27() {
   }
 }
 
-_id_8C38(var_0, var_1) {
-  level._id_50DB++;
+shutterwanderleft(var_0, var_1) {
+  level.inc++;
   level endon("wind blows");
-  var_2 = var_0._id_930E;
+  var_2 = var_0.startyaw;
 
   if(var_1 == "left") {
     var_2 = var_2 + 179.9;
@@ -93,7 +93,7 @@ _id_8C38(var_0, var_1) {
     var_2 = var_0.angles[1] + var_4;
     var_5 = var_0.angles[1] + var_4 * -1;
 
-    if(var_2 < var_0._id_930E || var_2 > var_0._id_930E + 179) {
+    if(var_2 < var_0.startyaw || var_2 > var_0.startyaw + 179) {
       var_2 = var_5;
     }
 
@@ -109,10 +109,10 @@ _id_8C38(var_0, var_1) {
   }
 }
 
-_id_8C39(var_0, var_1) {
-  level._id_50DB++;
+shutterwanderright(var_0, var_1) {
+  level.inc++;
   level endon("wind blows");
-  var_2 = var_0._id_930E;
+  var_2 = var_0.startyaw;
 
   if(var_1 == "left") {
     var_2 = var_2 + 179.9;
@@ -132,7 +132,7 @@ _id_8C39(var_0, var_1) {
     var_2 = var_0.angles[1] + var_4;
     var_5 = var_0.angles[1] + var_4 * -1;
 
-    if(var_2 < var_0._id_930E || var_2 > var_0._id_930E + 179) {
+    if(var_2 < var_0.startyaw || var_2 > var_0.startyaw + 179) {
       var_2 = var_5;
     }
 
@@ -148,7 +148,7 @@ _id_8C39(var_0, var_1) {
   }
 }
 
-_id_AA49(var_0) {
+wirewander(var_0) {
   var_1 = getEntArray(var_0.target, "targetname");
   var_2 = var_1[0].origin;
   var_3 = var_1[1].origin;

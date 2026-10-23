@@ -3,7 +3,7 @@
  * Script: scripts\1250.gsc
 **************************************/
 
-_id_8662() {
+setdefaultpostfx() {
   var_0 = self;
   var_0 visionsetnakedforplayer("mp_hub_allies_vlobby", 0);
 }
@@ -15,9 +15,9 @@ _id_A594(var_0, var_1) {
   self.pers["class"] = var_0;
   self.class = var_0;
   maps\mp\gametypes\_class::setclass(self.pers["class"]);
-  self._id_95AE = undefined;
-  self._id_95AF = undefined;
-  maps\mp\gametypes\_class::_id_4790(self.pers["team"], self.pers["class"]);
+  self.tag_stowed_back = undefined;
+  self.tag_stowed_hip = undefined;
+  maps\mp\gametypes\_class::giveloadout(self.pers["team"], self.pers["class"]);
   _id_04E0::_id_115E();
 }
 
@@ -68,7 +68,7 @@ _id_8418(var_0, var_1) {
 
 _id_8877() {}
 
-_id_62F5() {
+monitor_class_select_or_weapon_change() {
   self endon("disconnect");
   var_0 = ["soldier_key", "soldier_rim", "soldier_fill", "soldier_rimR"];
   var_1 = ["gun_key", "gun_rim", "gun_fill"];
@@ -82,7 +82,7 @@ _id_62F5() {
 
     if(var_4 == "weapon_select" && isDefined(var_5)) {
       var_7 = int(var_5);
-      var_8 = maps\mp\gametypes\_class::_id_1D66(maps\mp\_utility::_id_452B(var_7), undefined, undefined, undefined, undefined, undefined, undefined, maps\mp\_utility::_id_472C(var_7));
+      var_8 = maps\mp\gametypes\_class::buildweaponname(maps\mp\_utility::_id_452B(var_7), undefined, undefined, undefined, undefined, undefined, undefined, maps\mp\_utility::_id_472C(var_7));
       var_9 = [];
       var_9[var_9.size] = var_8;
       self loadweapons(var_9);
@@ -96,8 +96,8 @@ _id_62F5() {
           var_11 = int(var_5 / 16);
 
           if(var_11 > 0) {
-            self._id_294D = var_11 - 1;
-            _id_A594("custom" + (self._id_294D + 1), 0);
+            self.currentselectedclass = var_11 - 1;
+            _id_A594("custom" + (self.currentselectedclass + 1), 0);
           }
         }
       }
@@ -114,27 +114,27 @@ _id_62F5() {
         var_12[var_13] = var_14;
       }
 
-      self _meth_84C7(var_12);
+      self set_grenadeammo(var_12);
       self loadcustomizationplayerview(self);
     }
   }
 }
 
 _id_0953(var_0) {
-  for(var_1 = 0; var_1 < level._id_60B7.size; var_1++) {
-    if(level._id_60B7[var_1]._id_01D6 == var_0._id_01D6) {
-      level._id_60B7[var_1] = var_0;
+  for(var_1 = 0; var_1 < level.mccqueue.size; var_1++) {
+    if(level.mccqueue[var_1]._id_01D6 == var_0._id_01D6) {
+      level.mccqueue[var_1] = var_0;
       var_0 = undefined;
       break;
     }
   }
 
   if(isDefined(var_0)) {
-    level._id_60B7[level._id_60B7.size] = var_0;
+    level.mccqueue[level.mccqueue.size] = var_0;
   }
 }
 
-_id_6EA2(var_0) {
+party_members(var_0) {
   foreach(var_2 in var_0) {
     var_3 = var_2._id_01D6;
 
@@ -157,8 +157,8 @@ _id_3B94(var_0) {
   return var_1;
 }
 
-_id_631E() {
-  level._id_60B7 = [];
+monitor_member_class_changes() {
+  level.mccqueue = [];
   var_0 = maps\mp\_utility::_id_4604();
 
   for(;;) {
@@ -173,7 +173,7 @@ _id_631E() {
       var_4 = 0;
       var_5 = 0;
 
-      foreach(var_7 in level._id_60B7) {
+      foreach(var_7 in level.mccqueue) {
         var_8 = _id_3B94(var_7._id_01D6);
 
         if(isDefined(var_8) && var_7._id_011C != 0) {
@@ -201,7 +201,7 @@ _id_631E() {
         var_9._id_76F4 = maps\mp\_utility::_id_452A(tablelookup("mp/camoTable.csv", 0, var_7._id_0143, 1));
         var_9._id_7700 = maps\mp\_utility::_id_452A(tablelookup("mp/reticleTable.csv", 0, var_7._id_0145, 1));
         var_9.primarypaintjobid = var_7._id_76EF;
-        var_9.primarycharmguid = var_7._id_76F0;
+        var_9.primarycharmguid = var_7.primary_light;
         var_9.botsetscriptgoalnode = var_7._id_016E;
         var_9.botsetflag[0] = maps\mp\_utility::_id_452A(tablelookup("mp/attachmenttable.csv", 0, var_7._id_0170, 3));
         var_9.botsetflag[1] = maps\mp\_utility::_id_452A(tablelookup("mp/attachmenttable.csv", 0, var_7._id_0171, 3));
@@ -263,8 +263,8 @@ _id_631E() {
         var_9._id_7709 = maps\mp\_utility::_id_473C(var_9._id_76F7, 0);
         var_9.botgetscriptgoalradius = maps\mp\_utility::_id_473C(var_9.botsetscriptgoalnode, 0);
         var_9._id_60FC = maps\mp\_utility::_id_473C(var_9._id_60E9, 0);
-        var_9._id_76F8 = maps\mp\gametypes\_class::_id_1D66(maps\mp\_utility::_id_452B(var_9._id_76F7), var_9._id_76F3[0], var_9._id_76F3[1], var_9._id_76F3[2], var_9._id_76F3[3], var_9._id_76F3[4], var_9._id_76F3[5], maps\mp\_utility::_id_472C(var_9._id_76F7), var_9._id_76F5, var_9._id_76F4, var_9._id_7700, var_9._id_0144);
-        var_9.botclearscriptgoal = maps\mp\gametypes\_class::_id_1D66(maps\mp\_utility::_id_452B(var_9.botsetscriptgoalnode), var_9.botsetflag[0], var_9.botsetflag[1], var_9.botsetflag[2], var_9.botsetflag[3], var_9.botsetflag[4], var_9.botsetflag[5], maps\mp\_utility::_id_472C(var_9.botsetscriptgoalnode), var_9.botsetscriptmove, var_9.botsetstance, var_9.botsetscriptenemy, var_9._id_0176);
+        var_9.primaryname = maps\mp\gametypes\_class::buildweaponname(maps\mp\_utility::_id_452B(var_9._id_76F7), var_9._id_76F3[0], var_9._id_76F3[1], var_9._id_76F3[2], var_9._id_76F3[3], var_9._id_76F3[4], var_9._id_76F3[5], maps\mp\_utility::_id_472C(var_9._id_76F7), var_9._id_76F5, var_9._id_76F4, var_9._id_7700, var_9._id_0144);
+        var_9.botclearscriptgoal = maps\mp\gametypes\_class::buildweaponname(maps\mp\_utility::_id_452B(var_9.botsetscriptgoalnode), var_9.botsetflag[0], var_9.botsetflag[1], var_9.botsetflag[2], var_9.botsetflag[3], var_9.botsetflag[4], var_9.botsetflag[5], maps\mp\_utility::_id_472C(var_9.botsetscriptgoalnode), var_9.botsetscriptmove, var_9.botsetstance, var_9.botsetscriptenemy, var_9._id_0176);
         var_9._id_5A62 = 0;
         var_9._id_5A63 = 0;
         var_9._id_5A64 = 0;
@@ -276,12 +276,12 @@ _id_631E() {
         var_9._id_69AD = maps\mp\_utility::_id_44CE(var_9._id_959F, 0);
         var_9._id_69AC = 0;
         var_14 = [];
-        var_14[level._id_2682["shirt"]] = var_7._id_017F;
-        var_14[level._id_2682["head"]] = var_7._id_00B9;
-        var_14[level._id_2682["pants"]] = var_7._id_011A;
-        var_14[level._id_2682["eyewear"]] = var_7._id_0091;
-        var_14[level._id_2682["hat"]] = var_7._id_00B8;
-        var_14[level._id_2682["gear"]] = var_7._id_00A8;
+        var_14[level.costumecat2idx["shirt"]] = var_7._id_017F;
+        var_14[level.costumecat2idx["head"]] = var_7._id_00B9;
+        var_14[level.costumecat2idx["pants"]] = var_7._id_011A;
+        var_14[level.costumecat2idx["eyewear"]] = var_7._id_0091;
+        var_14[level.costumecat2idx["hat"]] = var_7._id_00B8;
+        var_14[level.costumecat2idx["gear"]] = var_7._id_00A8;
         var_8 = _id_3B94(var_7._id_01D6);
 
         if(isDefined(var_8) && var_7._id_011C != 0) {
@@ -298,16 +298,16 @@ _id_631E() {
         var_15 = 0;
         var_16 = "customClasses";
 
-        if(isDefined(var_8._id_294D)) {
-          var_15 = var_8._id_294D;
+        if(isDefined(var_8.currentselectedclass)) {
+          var_15 = var_8.currentselectedclass;
         }
 
-        var_9.class = "custom" + common_scripts\utility::_id_9AAD(var_15 + 1);
+        var_9.class = "custom" + common_scripts\utility::tostring(var_15 + 1);
         var_9._id_231B = var_15;
         var_8._id_A597 = var_9;
       }
 
-      level._id_60B7 = [];
+      level.mccqueue = [];
       waitframe();
     }
   }

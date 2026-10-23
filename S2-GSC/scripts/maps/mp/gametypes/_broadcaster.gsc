@@ -47,7 +47,7 @@ monitorzoom() {
 
       if(var_2 == self getentitynumber()) {
         var_3 = var_1 % 100;
-        self._id_1E99._id_ACCB = var_3;
+        self.camera._id_ACCB = var_3;
         break;
       }
     }
@@ -75,8 +75,8 @@ _id_1CAD() {
   setdvarifuninitialized("broadcaster_team_pucks", 1);
   self.team = "spectator";
   self._id_0179 = "spectator";
-  maps\mp\_utility::_id_A165("spectator");
-  _id_050F::_id_872F();
+  maps\mp\_utility::updatesessionstate("spectator");
+  _id_050F::setspectatepermissions();
   self allowspectateteam("allies", 1);
   self allowspectateteam("axis", 1);
   self allowspectateteam("freelook", 1);
@@ -110,11 +110,11 @@ _id_44DC() {
 }
 
 _id_1CA5() {
-  if(self._id_1E99._id_77AC) {
-    self._id_1E99._id_77AC = 0;
+  if(self.camera._id_77AC) {
+    self.camera._id_77AC = 0;
     self notify("broadcaster_stop_player_pucks");
   } else {
-    self._id_1E99._id_77AC = 1;
+    self.camera._id_77AC = 1;
     thread _id_1CAA();
   }
 }
@@ -126,7 +126,7 @@ _id_1CA2() {
     level waittill("player_spawned", var_0);
     var_0 thread _id_1CA9();
 
-    if(isDefined(self._id_1E99._id_9815) && self._id_1E99._id_9815 == var_0) {
+    if(isDefined(self.camera._id_9815) && self.camera._id_9815 == var_0) {
       thread _id_1CA8(1);
     }
   }
@@ -134,9 +134,9 @@ _id_1CA2() {
 
 _id_1CA8(var_0) {
   level endon("game_ended");
-  var_1 = self._id_1E99._id_9815;
+  var_1 = self.camera._id_9815;
 
-  if(isDefined(var_1) && self._id_1E99._id_A4A8 != "first_person") {
+  if(isDefined(var_1) && self.camera._id_A4A8 != "first_person") {
     if(isDefined(var_1._id_981E)) {
       if(!isDefined(var_1._id_981E[self getentitynumber()])) {
         var_1._id_981E[self getentitynumber()] = 0;
@@ -149,7 +149,7 @@ _id_1CA8(var_0) {
       var_1._id_981E = [];
 
     if(var_1 gettagindex("tag_origin") != -1) {
-      _playfxontagforclients(common_scripts\utility::_id_44F5("broadcaster_followed_player"), var_1, "tag_origin", self);
+      _playfxontagforclients(common_scripts\utility::getfx("broadcaster_followed_player"), var_1, "tag_origin", self);
       var_1._id_981E[self getentitynumber()] = 1;
     }
 
@@ -157,7 +157,7 @@ _id_1CA8(var_0) {
     self waittill("broadcaster_stop_target_player_puck");
 
     if(var_1 gettagindex("tag_origin") != -1) {
-      _killfxontagforclient(common_scripts\utility::_id_44F5("broadcaster_followed_player"), var_1, "tag_origin", self);
+      _killfxontagforclient(common_scripts\utility::getfx("broadcaster_followed_player"), var_1, "tag_origin", self);
       var_1._id_981E[self getentitynumber()] = 0;
     }
   }
@@ -172,7 +172,7 @@ _id_1C9E(var_0) {
 }
 
 _id_1CAA() {
-  if(self._id_1E99._id_77AC) {
+  if(self.camera._id_77AC) {
     foreach(var_1 in level.players) {
       if(!var_1 ismlgspectator()) {
         var_1 thread _id_1CA9();
@@ -187,24 +187,24 @@ _id_1CA9() {
   var_0 = self;
 
   foreach(var_2 in level.broadcasters) {
-    if(isDefined(var_2._id_1E99) && isDefined(var_2._id_1E99._id_77AC) && var_2._id_1E99._id_77AC) {
+    if(isDefined(var_2.camera) && isDefined(var_2.camera._id_77AC) && var_2.camera._id_77AC) {
       while(self.hasspawned == 0) {
         waitframe();
       }
 
       wait 0.5;
 
-      if(var_2._id_1E99._id_A4A8 == "first_person") {
+      if(var_2.camera._id_A4A8 == "first_person") {
         continue;
       }
       var_3 = "broadcaster_" + var_2 getentitynumber() + "_player_puck";
       var_4 = var_3 + "_allies";
       var_5 = var_3 + "_axis";
 
-      if(var_0.team == "allies" && common_scripts\utility::_id_3F6F(var_4)) {
-        _playfxontagforclients(common_scripts\utility::_id_44F5(var_4), var_0, "tag_origin", var_2);
-      } else if(var_0.team == "axis" && common_scripts\utility::_id_3F6F(var_5)) {
-        _playfxontagforclients(common_scripts\utility::_id_44F5(var_5), var_0, "tag_origin", var_2);
+      if(var_0.team == "allies" && common_scripts\utility::fxexists(var_4)) {
+        _playfxontagforclients(common_scripts\utility::getfx(var_4), var_0, "tag_origin", var_2);
+      } else if(var_0.team == "axis" && common_scripts\utility::fxexists(var_5)) {
+        _playfxontagforclients(common_scripts\utility::getfx(var_5), var_0, "tag_origin", var_2);
       }
 
       thread _id_1C9F(var_2);
@@ -239,10 +239,10 @@ _id_1CAB(var_0) {
   var_2 = var_1 + "_allies";
   var_3 = var_1 + "_axis";
 
-  if(self.team == "allies" && common_scripts\utility::_id_3F6F(var_2)) {
-    _killfxontagforclient(common_scripts\utility::_id_44F5(var_2), self, "tag_origin", var_0);
-  } else if(self.team == "axis" && common_scripts\utility::_id_3F6F(var_3)) {
-    _killfxontagforclient(common_scripts\utility::_id_44F5(var_3), self, "tag_origin", var_0);
+  if(self.team == "allies" && common_scripts\utility::fxexists(var_2)) {
+    _killfxontagforclient(common_scripts\utility::getfx(var_2), self, "tag_origin", var_0);
+  } else if(self.team == "axis" && common_scripts\utility::fxexists(var_3)) {
+    _killfxontagforclient(common_scripts\utility::getfx(var_3), self, "tag_origin", var_0);
   }
 }
 
@@ -253,10 +253,10 @@ broadcasterkillteampuck() {
       var_3 = var_2 + "_allies";
       var_4 = var_2 + "_axis";
 
-      if(self.team == "allies" && common_scripts\utility::_id_3F6F(var_3)) {
-        _killfxontagforclient(common_scripts\utility::_id_44F5(var_3), self, "tag_origin", var_1);
-      } else if(self.team == "axis" && common_scripts\utility::_id_3F6F(var_4)) {
-        _killfxontagforclient(common_scripts\utility::_id_44F5(var_4), self, "tag_origin", var_1);
+      if(self.team == "allies" && common_scripts\utility::fxexists(var_3)) {
+        _killfxontagforclient(common_scripts\utility::getfx(var_3), self, "tag_origin", var_1);
+      } else if(self.team == "axis" && common_scripts\utility::fxexists(var_4)) {
+        _killfxontagforclient(common_scripts\utility::getfx(var_4), self, "tag_origin", var_1);
       }
     }
   }
@@ -268,7 +268,7 @@ _id_1C91() {
 
   for(;;) {
     var_0 = self getnormalizedmovement();
-    self._id_1E99._id_5388 = var_0;
+    self.camera._id_5388 = var_0;
     waitframe();
   }
 }
@@ -302,7 +302,7 @@ _id_1C9D() {
               self notify("broadcaster_view_set_sky_cam");
               break;
             case 4:
-              self._id_1E99._id_ACCB = var_3;
+              self.camera._id_ACCB = var_3;
               break;
             case 5:
               thread _id_1C97();
@@ -320,17 +320,17 @@ _id_1C9D() {
 
           break;
         case "broadcaster_camera_input":
-          self._id_1E99._id_1C92 = var_6 == 1;
+          self.camera._id_1C92 = var_6 == 1;
           break;
         case "broadcaster_client_change":
           thread _id_1CA7(var_6);
           break;
         case "broadcaster_toggle_ball_cam":
-          self._id_1E99.broadcasterballcamenabled = var_6 == 1;
+          self.camera.broadcasterballcamenabled = var_6 == 1;
 
-          if(!self._id_1E99.broadcasterballcamenabled) {
+          if(!self.camera.broadcasterballcamenabled) {
             thread broadcasterkillballcam();
-          } else if(self._id_1E99._id_A4A8 == "first_person") {
+          } else if(self.camera._id_A4A8 == "first_person") {
             thread broadcasterstartballcam();
           }
 
@@ -362,35 +362,35 @@ _id_1C9C() {
 }
 
 _id_1CA6() {
-  self._id_1E99._id_53C0 = 0;
-  self._id_1E99._id_53C1 = 0;
-  self._id_1E99._id_164B = 0;
+  self.camera._id_53C0 = 0;
+  self.camera._id_53C1 = 0;
+  self.camera._id_164B = 0;
 }
 
 _id_1CAC() {
-  self._id_1E99._id_164B = !common_scripts\utility::_id_562E(self._id_1E99._id_164B);
+  self.camera._id_164B = !common_scripts\utility::_id_562E(self.camera._id_164B);
 }
 
 _id_1CA7(var_0) {
   self endon("broadcaster_view_player_has_changed");
-  self._id_1E99._id_164B = 0;
-  var_1 = maps\mp\gametypes\_playerlogic::_id_4622(var_0);
+  self.camera._id_164B = 0;
+  var_1 = maps\mp\gametypes\_playerlogic::getplayerfromclientnum(var_0);
 
-  if(isDefined(self._id_1E99._id_9815) && var_1 == self._id_1E99._id_9815) {
+  if(isDefined(self.camera._id_9815) && var_1 == self.camera._id_9815) {
     return;
   }
-  if(self._id_1E99._id_A4A8 == "first_person") {
+  if(self.camera._id_A4A8 == "first_person") {
     self.forcespectatorclient = var_0;
     self waittill("forced_spectator_client_loaded");
   }
 
-  self._id_1E99._id_9815 = var_1;
+  self.camera._id_9815 = var_1;
   self setclientomnvar("ui_broadcaster_client_num", var_0);
   var_2 = self _meth_82F1(var_0);
   _id_A0E8(var_2);
   self notify("broadcaster_stop_target_player_puck");
 
-  if(self._id_1E99._id_A4A8 != "first_person") {
+  if(self.camera._id_A4A8 != "first_person") {
     thread _id_1CA8();
   }
 
@@ -416,7 +416,7 @@ _id_A0E9(var_0, var_1) {
 
 _id_A0E8(var_0) {
   var_1 = 3;
-  var_2 = var_0._id_90E4;
+  var_2 = var_0.spectatorviewloadout;
 
   if(isDefined(var_2)) {
     _id_A0E9(var_2._id_7709.guid, "primary_weapon");
@@ -459,10 +459,10 @@ _id_A0E8(var_0) {
 }
 
 _id_1C93() {
-  if(self._id_1E99._id_A4A8 == "first_person") {
+  if(self.camera._id_A4A8 == "first_person") {
     return;
   }
-  var_0 = self._id_1E99;
+  var_0 = self.camera;
   var_1 = var_0._id_9815;
   var_2 = bulletTrace(var_0.origin, var_0.origin + anglesToForward(var_0.angles) * 5000, 0);
   var_3 = 1000;
@@ -506,7 +506,7 @@ _id_1CA4() {
   var_0 playerlinkTo(var_4, "tag_player");
   var_0 cameralinkTo(var_4, "tag_player");
   var_0 allowfire(0);
-  var_0._id_1E99 = var_4;
+  var_0.camera = var_4;
   var_4.player = var_0;
   var_0 visionsetnakedforplayer("airplane", 5);
 }
@@ -525,34 +525,34 @@ _id_1CA3() {
 
 _id_1C9A(var_0) {
   self.forcespectatorclient = self getentitynumber();
-  _id_050F::_id_872F();
-  self._id_1E99._id_A4A8 = "third_person";
+  _id_050F::setspectatepermissions();
+  self.camera._id_A4A8 = "third_person";
   _luinotifyeventextra(&"broadcaster_view_skycam_applied", 1, self getentitynumber());
   level notify("broadcaster_ball_end", self._id_9815);
   self notify("changeGoalFx");
   waitframe();
-  self cameralinkTo(self._id_1E99, "tag_player");
+  self cameralinkTo(self.camera, "tag_player");
   thread _id_1CAA();
   thread _id_1CA8();
 
-  if(isDefined(level._id_AC7C) && isDefined(level._id_AC7C.broadcastermesh)) {
-    level._id_AC7C.broadcastermesh showtoplayer(self);
+  if(isDefined(level.zone) && isDefined(level.zone.broadcastermesh)) {
+    level.zone.broadcastermesh showtoplayer(self);
   }
 
-  self._id_1E99 _meth_8472();
-  self._id_1E99 thread _id_1C8C(var_0);
+  self.camera _meth_8472();
+  self.camera thread _id_1C8C(var_0);
   self visionsetnakedforplayer("airplane", var_0);
   wait(var_0);
 
   if(isDefined(level.bomboutlineactive) && level.bomboutlineactive && isDefined(level.freezecontrols)) {
-    level.freezecontrols hudoutlineenableforclient(self, maps\mp\_utility::_id_46D4(game["attackers"]), 0);
+    level.freezecontrols hudoutlineenableforclient(self, maps\mp\_utility::getteamindex(game["attackers"]), 0);
   }
 }
 
 _id_1C99(var_0) {
-  self._id_1E99 thread _id_1C95(var_0);
+  self.camera thread _id_1C95(var_0);
 
-  if(self._id_1E99.broadcasterballcamenabled) {
+  if(self.camera.broadcasterballcamenabled) {
     thread broadcasterstartballcam();
   }
 
@@ -562,16 +562,16 @@ _id_1C99(var_0) {
   _luinotifyeventextra(&"broadcaster_view_fps_applied", 1, self getentitynumber());
   wait(var_0);
 
-  if(isDefined(level._id_AC7C) && isDefined(level._id_AC7C.broadcastermesh)) {
-    level._id_AC7C.broadcastermesh _meth_8006(self);
+  if(isDefined(level.zone) && isDefined(level.zone.broadcastermesh)) {
+    level.zone.broadcastermesh _meth_8006(self);
   }
 
   self allowspectateteam("allies", 1);
   self allowspectateteam("axis", 1);
-  self.forcespectatorclient = self._id_1E99._id_9815 getentitynumber();
+  self.forcespectatorclient = self.camera._id_9815 getentitynumber();
   setDvar("scr_game_lockspectatorpov", 1);
   self forcespectatepov(self getxuid(), "first_person");
-  self._id_1E99._id_A4A8 = "first_person";
+  self.camera._id_A4A8 = "first_person";
 
   if(isDefined(level.bomboutlineactive) && level.bomboutlineactive && isDefined(level.freezecontrols)) {
     level.freezecontrols hudoutlinedisableforclient(self);
@@ -719,8 +719,8 @@ _id_1C8C(var_0) {
   var_3 = (70, 270, 0);
   self._id_1C92 = 1;
 
-  if(!isDefined(level._id_5FF0)) {
-    level._id_5FF0 = 1024;
+  if(!isDefined(level.mapsize)) {
+    level.mapsize = 1024;
   }
 
   for(;;) {
@@ -746,8 +746,8 @@ _id_1C8C(var_0) {
     var_9 = self._id_53C1 - 150 * var_7;
 
     if(self._id_164B && isDefined(self._id_7436)) {
-      var_10 = level._id_5FF0;
-      var_11 = level._id_5FEB;
+      var_10 = level.mapsize;
+      var_11 = level.mapcenter;
       var_8 = clamp(var_8 + self._id_7436[0] - var_11[0], var_10 * -1, var_10) - self._id_7436[0] + var_11[0];
       var_9 = clamp(var_9 + self._id_7436[1] - var_11[1], var_10 * -1, var_10) - self._id_7436[1] + var_11[1];
     } else {
@@ -758,7 +758,7 @@ _id_1C8C(var_0) {
 
     self._id_53C0 = var_8;
     self._id_53C1 = var_9;
-    self.origin = (self._id_7436[0] + var_8, self._id_7436[1] + var_9 + var_5, max(self._id_7436[2] + var_4, var_1._id_9092[2] + var_5));
+    self.origin = (self._id_7436[0] + var_8, self._id_7436[1] + var_9 + var_5, max(self._id_7436[2] + var_4, var_1.spawnpos[2] + var_5));
     self.angles = var_3;
     waitframe();
     var_2 = var_1;
@@ -766,23 +766,23 @@ _id_1C8C(var_0) {
 }
 
 _id_1C96() {
-  if(self._id_1E99._id_3DC2 == 0) {
+  if(self.camera._id_3DC2 == 0) {
     return;
   }
   level endon("game_ended");
   self endon("broadcaster_view_player_has_changed");
   self endon("broadcaster_follow_killer_stop");
-  var_0 = self._id_1E99._id_9815;
+  var_0 = self.camera._id_9815;
   var_0 waittill("death");
   thread _id_1CA7(var_0._id_00E6 getentitynumber());
 }
 
 _id_1C97() {
-  if(self._id_1E99._id_3DC2) {
-    self._id_1E99._id_3DC2 = 0;
+  if(self.camera._id_3DC2) {
+    self.camera._id_3DC2 = 0;
     self notify("broadcaster_follow_killer_stop");
   } else {
-    self._id_1E99._id_3DC2 = 1;
+    self.camera._id_3DC2 = 1;
     thread _id_1C96();
   }
 }
@@ -797,14 +797,14 @@ broadcasterkillballcam() {
   self notify("broadcaster_kill_ballcam");
   _luinotifyevent(&"broadcaster_stop_ballcam", 1, self getentitynumber());
 
-  if(self._id_1E99._id_A4A8 == "first_person") {
-    self._id_1E99.watchedball = undefined;
+  if(self.camera._id_A4A8 == "first_person") {
+    self.camera.watchedball = undefined;
     self allowspectateteam("allies", 1);
     self allowspectateteam("axis", 1);
-    self.forcespectatorclient = self._id_1E99._id_9815 getentitynumber();
+    self.forcespectatorclient = self.camera._id_9815 getentitynumber();
     setDvar("scr_game_lockspectatorpov", 1);
     self forcespectatepov(self getxuid(), "first_person");
-    self._id_1E99 _id_1C95(0.5);
+    self.camera _id_1C95(0.5);
   }
 }
 
@@ -816,20 +816,20 @@ broadcasterstartballcam() {
   for(;;) {
     level waittill("broadcaster_throw_ball", var_0, var_1, var_2);
 
-    if(!self._id_1E99.broadcasterballcamenabled || self._id_1E99._id_A4A8 == "third_person" || self._id_1E99._id_9815 != var_0) {
+    if(!self.camera.broadcasterballcamenabled || self.camera._id_A4A8 == "third_person" || self.camera._id_9815 != var_0) {
       continue;
     }
-    self._id_1E99 notify("end_follows");
+    self.camera notify("end_follows");
     self notify("changeGoalFx");
-    self._id_1E99.watchedball = var_1._id_A582[0];
+    self.camera.watchedball = var_1.visuals[0];
     self.forcespectatorclient = self getentitynumber();
     waitframe();
-    self cameralinkTo(self._id_1E99, "tag_player", 1);
-    self._id_1E99 _meth_8472();
-    var_3 = broadcastermoveballcam(self._id_1E99.watchedball.origin, var_2);
-    self._id_1E99 moveTo(var_3, 10.5, 5.25, 5.25);
-    self._id_1E99.angles = vectortoangles(var_2);
-    self._id_1E99 thread updateballcam();
+    self cameralinkTo(self.camera, "tag_player", 1);
+    self.camera _meth_8472();
+    var_3 = broadcastermoveballcam(self.camera.watchedball.origin, var_2);
+    self.camera moveTo(var_3, 10.5, 5.25, 5.25);
+    self.camera.angles = vectortoangles(var_2);
+    self.camera thread updateballcam();
     thread broadcasterstopballcam();
   }
 }
@@ -839,16 +839,16 @@ broadcasterstopballcam() {
   self endon("game_ended");
   self endon("broadcaster_view_set_sky_cam");
   self endon("broadcaster_kill_ballcam");
-  self._id_1E99.watchedball endon("drop_object");
-  self._id_1E99.watchedball endon("death");
+  self.camera.watchedball endon("drop_object");
+  self.camera.watchedball endon("death");
 
   for(;;) {
     level waittill("broadcaster_ball_end", var_0, var_1);
 
-    if(isDefined(self._id_1E99.watchedball) && self._id_1E99.watchedball != var_0) {
+    if(isDefined(self.camera.watchedball) && self.camera.watchedball != var_0) {
       continue;
     }
-    self._id_1E99.watchedball = undefined;
+    self.camera.watchedball = undefined;
 
     if(var_1) {
       _luinotifyevent(&"broadcaster_stop_ballcam", 1, self getentitynumber());
@@ -856,10 +856,10 @@ broadcasterstopballcam() {
 
     self allowspectateteam("allies", 1);
     self allowspectateteam("axis", 1);
-    self.forcespectatorclient = self._id_1E99._id_9815 getentitynumber();
+    self.forcespectatorclient = self.camera._id_9815 getentitynumber();
     setDvar("scr_game_lockspectatorpov", 1);
     self forcespectatepov(self getxuid(), "first_person");
-    self._id_1E99 _id_1C95(0.5);
+    self.camera _id_1C95(0.5);
     break;
   }
 }
@@ -903,12 +903,12 @@ _id_1C9B() {
 
   if(!getdvarint("233")) {
     foreach(var_3 in var_0) {
-      if(isDefined(var_3._id_5D56) && isDefined(var_3.classname) && (var_3.classname == "script_brushmodel" || var_3.classname == "script_model")) {
-        if(var_3._id_5D56 == 0) {
+      if(isDefined(var_3.lightingstate) && isDefined(var_3.classname) && (var_3.classname == "script_brushmodel" || var_3.classname == "script_model")) {
+        if(var_3.lightingstate == 0) {
           continue;
         }
-        if(var_3._id_5D56 == var_1) {
-          var_3 common_scripts\utility::_id_8BE0();
+        if(var_3.lightingstate == var_1) {
+          var_3 common_scripts\utility::show_solid();
           var_3 allowriotshieldplant();
           continue;
         }

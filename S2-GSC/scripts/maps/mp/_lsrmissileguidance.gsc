@@ -3,7 +3,7 @@
  * Script: scripts\maps\mp\_lsrmissileguidance.gsc
 ***************************************************/
 
-_id_631C() {
+monitor_lsr_missile_launch() {
   self endon("death");
   self endon("disconnect");
   self endon("faux_spawn");
@@ -12,18 +12,18 @@ _id_631C() {
     self waittill("missile_fire", var_0, var_1);
 
     if(issubstr(var_1, "maaws")) {
-      if(!isDefined(self._id_5F39)) {
-        self._id_5F39 = spawn("script_origin", self.origin);
-        self._id_5F39.targetname = "lsr_missile";
+      if(!isDefined(self.lsr_target_ent)) {
+        self.lsr_target_ent = spawn("script_origin", self.origin);
+        self.lsr_target_ent.targetname = "lsr_missile";
       }
 
-      self._id_5F39 thread _id_5F3A(var_0);
-      var_0 thread _id_5F38(self);
+      self.lsr_target_ent thread lsr_target_monitor_and_cleanup(var_0);
+      var_0 thread lsr_rocket_think(self);
     }
   }
 }
 
-_id_5F38(var_0) {
+lsr_rocket_think(var_0) {
   self endon("death");
   var_0 endon("death");
   var_0 endon("disconnect");
@@ -35,25 +35,25 @@ _id_5F38(var_0) {
       var_2 = var_0 getEye();
       var_3 = var_2 + var_1 * 15000;
       var_4 = bulletTrace(var_2, var_3, 1, var_0, 1, 0, 0, 0, 0);
-      var_0._id_5F39.origin = var_4["position"];
-      self missile_settargetEnt(var_0._id_5F39);
+      var_0.lsr_target_ent.origin = var_4["position"];
+      self missile_settargetEnt(var_0.lsr_target_ent);
     }
 
     waitframe();
   }
 }
 
-_id_5F3A(var_0) {
-  if(!isDefined(self._id_5F37)) {
-    self._id_5F37 = 1;
+lsr_target_monitor_and_cleanup(var_0) {
+  if(!isDefined(self.lsr_rocket_count)) {
+    self.lsr_rocket_count = 1;
   } else {
-    self._id_5F37++;
+    self.lsr_rocket_count++;
   }
 
   var_0 waittill("death");
-  self._id_5F37--;
+  self.lsr_rocket_count--;
 
-  if(self._id_5F37 == 0) {
+  if(self.lsr_rocket_count == 0) {
     self delete();
   }
 }

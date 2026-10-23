@@ -5,7 +5,7 @@
 
 init() {
   if(!isDefined(game["gamestarted"])) {
-    _func_377("mp/ddl/breadcrumbdata.ddl");
+    soundscripts/_snd_hud("mp/ddl/breadcrumbdata.ddl");
     _func_378();
   }
 }
@@ -22,12 +22,12 @@ _id_5E8B() {
   if(isbot(self) || istestclient(self)) {
     return;
   }
-  if(maps\mp\_utility::isreallyalive(self) && isDefined(self._id_5CC6) && _id_0485::_id_1F59(self._id_5CC6)) {
+  if(maps\mp\_utility::isreallyalive(self) && isDefined(self._id_5CC6) && _id_0485::canloglife(self._id_5CC6)) {
     var_0 = getdvarfloat("34");
 
     for(;;) {
       var_1 = self playerads() > 0.5;
-      _func_29B(self, self._id_5CC6, var_1);
+      recordbreadcrumbdataforplayer(self, self._id_5CC6, var_1);
       wait(var_0);
     }
   }

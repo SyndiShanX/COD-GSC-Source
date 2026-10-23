@@ -17,11 +17,11 @@ init() {
   level._id_067B["Launch_Value"]._id_A416 = 24000;
   level._id_067B["Launch_Value"]._id_4DF8 = 7000;
   level._id_067B["Launch_Value"]._id_9826 = 1500;
-  level._id_5A61["fritzx"] = ::_id_9E2F;
-  level._id_5A7D["fritzx_projectile_mp"] = "fritzx";
-  level._id_5A7D["azon_projectile_mp"] = "fritzx";
-  level._id_5A7D["fritzx_projectile_grenadier_mp"] = "fritzx";
-  level._id_5A7D["azon_projectile_grenadier_mp"] = "fritzx";
+  level.killstreakfuncs["fritzx"] = ::_id_9E2F;
+  level.killstreakwieldweapons["fritzx_projectile_mp"] = "fritzx";
+  level.killstreakwieldweapons["azon_projectile_mp"] = "fritzx";
+  level.killstreakwieldweapons["fritzx_projectile_grenadier_mp"] = "fritzx";
+  level.killstreakwieldweapons["azon_projectile_grenadier_mp"] = "fritzx";
 }
 
 _id_9E2F(var_0) {
@@ -39,20 +39,20 @@ _id_9E2F(var_0) {
     return 0;
   }
 
-  var_1 = _id_051E::_id_5345("fritzx", 1, 0, 0);
+  var_1 = _id_051E::initridekillstreak("fritzx", 1, 0, 0);
 
   if(var_1 != "success") {
     wait 0.75;
     var_2 = self getcurrentweapon();
 
     if(var_2 == "none" || maps\mp\_utility::iskillstreakweapon(var_2)) {
-      self switchtoweapon(common_scripts\utility::_id_4550());
+      self switchtoweapon(common_scripts\utility::getlastweapon());
     }
 
     return 0;
   }
 
-  maps\mp\_utility::_id_744E();
+  maps\mp\_utility::playersaveangles();
   maps\mp\_utility::setusingremote("fritzx");
   self._id_3EE8 = 0;
   thread _id_92D3(var_0);
@@ -145,11 +145,11 @@ _id_49DA() {
   var_1 = 0;
   var_2 = _id_4433();
   thread _id_700F();
-  var_3 = spawn("script_model", var_2._id_92FA);
+  var_3 = spawn("script_model", var_2.startpos);
   var_3 setModel("tag_origin");
   var_3.angles = (90, 0, 0);
   self cameralinkTo(var_3, "tag_origin");
-  var_4 = spawn("script_model", var_2._id_92FA + (-1 * var_1, 0, -1 * var_0 - 52));
+  var_4 = spawn("script_model", var_2.startpos + (-1 * var_1, 0, -1 * var_0 - 52));
   var_4 notsolid();
 
   if(isDefined(self.team) && self.team == "allies") {
@@ -161,12 +161,12 @@ _id_49DA() {
   var_4 hide();
   var_4 showtoplayer(self);
   var_4 scriptmodelplayanim("ks_usa_glidebomb_hatchdoors_open");
-  var_5 = spawn("script_model", var_2._id_92FA + (-1 * var_1, 0, -1 * var_0));
+  var_5 = spawn("script_model", var_2.startpos + (-1 * var_1, 0, -1 * var_0));
 
   if(isDefined(level._id_47CF)) {
-    _playfxontagforclients(common_scripts\utility::_id_44F5(level._id_47CF), var_4, "TAG_ORIGIN", self);
+    _playfxontagforclients(common_scripts\utility::getfx(level._id_47CF), var_4, "TAG_ORIGIN", self);
   } else {
-    _playfxontagforclients(common_scripts\utility::_id_44F5("glidebomb_hatchdoors_light_med"), var_4, "TAG_ORIGIN", self);
+    _playfxontagforclients(common_scripts\utility::getfx("glidebomb_hatchdoors_light_med"), var_4, "TAG_ORIGIN", self);
   }
 
   thread _id_5A06(var_4);
@@ -199,10 +199,10 @@ _id_49DA() {
   }
 
   var_8 = spawnStruct();
-  var_8._id_3290 = var_4;
-  var_8._id_92FA = var_2._id_92FA;
+  var_8.doors = var_4;
+  var_8.startpos = var_2.startpos;
   var_8._id_8203 = var_5;
-  var_8._id_1E99 = var_3;
+  var_8.camera = var_3;
   var_8._id_3DBF = var_0;
   var_8._id_4C35 = var_1;
   var_8._id_3EE5 = var_5.angles;
@@ -213,15 +213,15 @@ _id_5A06(var_0) {
   level waittill("bomb_start");
 
   if(isDefined(level._id_47CF)) {
-    _killfxontagforclient(common_scripts\utility::_id_44F5(level._id_47CF), var_0, "TAG_ORIGIN", self);
+    _killfxontagforclient(common_scripts\utility::getfx(level._id_47CF), var_0, "TAG_ORIGIN", self);
   } else {
-    _killfxontagforclient(common_scripts\utility::_id_44F5("glidebomb_hatchdoors_light_med"), var_0, "TAG_ORIGIN", self);
+    _killfxontagforclient(common_scripts\utility::getfx("glidebomb_hatchdoors_light_med"), var_0, "TAG_ORIGIN", self);
   }
 }
 
 _id_3496(var_0, var_1) {
-  var_2 = var_1._id_92FA;
-  var_3 = var_1._id_92FA + (-1 * var_1._id_4C35 + 68, 0, -1 * var_1._id_3DBF);
+  var_2 = var_1.startpos;
+  var_3 = var_1.startpos + (-1 * var_1._id_4C35 + 68, 0, -1 * var_1._id_3DBF);
   var_4 = maps\mp\_utility::_hasperk("specialty_improvedstreaks");
 
   if(isDefined(var_4) && var_4) {
@@ -244,11 +244,11 @@ _id_3496(var_0, var_1) {
   var_7 = var_2 + (0, _getnorthyaw(), 0);
   var_8 = _magicbullet(var_5, var_6, var_7, self);
   var_8.angles = var_1._id_3EE5;
-  var_8 _meth_866D(1, 1);
+  var_8 setdoubleload(1, 1);
   var_8 thread _id_49F7(self);
-  var_8._id_5A2C = var_1._id_1E99;
-  var_8._id_5A2C setscriptmoverkillcam("script_entity");
-  var_8._id_5A2C._id_5A32 = gettime();
+  var_8.killcament = var_1.camera;
+  var_8.killcament setscriptmoverkillcam("script_entity");
+  var_8.killcament.killcamstarttime = gettime();
   var_8._id_0117 = self;
   var_8.team = self.team;
   var_8._id_5CC6 = var_0;
@@ -256,11 +256,11 @@ _id_3496(var_0, var_1) {
   var_8._id_4C35 = var_1._id_4C35;
   var_8._id_3DBF = var_1._id_3DBF;
   thread _id_3162(var_7, var_6);
-  self _meth_8200(var_8);
-  var_1._id_1E99 thread _id_1E9A(var_8, self);
-  self _meth_80AA();
-  level._id_7C66 = 1;
-  var_8 thread maps\mp\gametypes\_damage::_id_8676(10, undefined, ::_id_624B, undefined, 1);
+  self controlslinkto(var_8);
+  var_1.camera thread _id_1E9A(var_8, self);
+  self thermalvisionfofoverlayon();
+  level.remotemissileinprogress = 1;
+  var_8 thread maps\mp\gametypes\_damage::setentitydamagecallback(10, undefined, ::_id_624B, undefined, 1);
   var_8 _id_3EEA(self, var_3);
   _id_0485::_id_5E9A("fritzx", var_8.origin);
   thread _id_2380(var_8, var_1);
@@ -379,8 +379,8 @@ _id_1E9A(var_0, var_1) {
           }
 
           var_1 thread _id_7CF0(var_0, var_1);
-          _playFXOnTag(common_scripts\utility::_id_44F5("fritz_streamers"), var_0, "tag_tip_fx");
-          _playfxontagforclients(common_scripts\utility::_id_44F5("fritz_flying_1P"), var_0, "tag_tip_fx", var_1);
+          _playFXOnTag(common_scripts\utility::getfx("fritz_streamers"), var_0, "tag_tip_fx");
+          _playfxontagforclients(common_scripts\utility::getfx("fritz_flying_1P"), var_0, "tag_tip_fx", var_1);
           var_11 = var_10 * (-1 * var_7);
           var_2 = _vectorlerp(var_2, var_11, var_5);
           self.origin = var_0.origin + var_2;
@@ -414,7 +414,7 @@ _id_2380(var_0, var_1) {
     self._id_4B69 = undefined;
 
     if(isDefined(var_0)) {
-      _playfxontagforclients(common_scripts\utility::_id_44F5("fritz_explosion_1P"), var_0, "tag_tip_fx", self);
+      _playfxontagforclients(common_scripts\utility::getfx("fritz_explosion_1P"), var_0, "tag_tip_fx", self);
     }
 
     self notify("missile_strike_complete");
@@ -513,7 +513,7 @@ _id_4434(var_0) {
       }
 
       if(var_3._id_9099 == var_13._id_9099) {
-        if(common_scripts\utility::_id_24A6()) {
+        if(common_scripts\utility::cointoss()) {
           var_13 = var_3;
         }
       }
@@ -526,7 +526,7 @@ _id_4434(var_0) {
 _id_624B(var_0, var_1, var_2, var_3) {
   playFX(level._id_7C65["explode"], self.origin);
   var_4 = "fritzx_destroyed";
-  maps\mp\gametypes\_damage::_id_6B4B(var_0, var_1, var_2, var_3, var_4, undefined, undefined, 0);
+  maps\mp\gametypes\_damage::onkillstreakkilled(var_0, var_1, var_2, var_3, var_4, undefined, undefined, 0);
   _id_3EE9();
   self delete();
 }
@@ -547,51 +547,51 @@ _id_4433() {
     var_5 = undefined;
   }
 
-  var_0._id_92FA = undefined;
-  var_0._id_9834 = undefined;
+  var_0.startpos = undefined;
+  var_0.targetpos = undefined;
 
   if(isDefined(var_5)) {
-    var_0._id_92FA = var_5.origin;
-    var_0._id_9834 = var_5._id_01A4.origin;
+    var_0.startpos = var_5.origin;
+    var_0.targetpos = var_5._id_01A4.origin;
     var_6 = 5500;
 
     if(isDefined(level._id_7C62)) {
       var_6 = level._id_7C62;
     }
 
-    var_7 = vectorNormalize(var_0._id_92FA - var_0._id_9834);
-    var_0._id_92FA = var_7 * var_6 + var_0._id_9834;
+    var_7 = vectorNormalize(var_0.startpos - var_0.targetpos);
+    var_0.startpos = var_7 * var_6 + var_0.targetpos;
   } else {
     var_8 = (0, 0, level._id_067B["Launch_Value"]._id_A416);
     var_6 = level._id_067B["Launch_Value"]._id_4DF8;
     var_9 = level._id_067B["Launch_Value"]._id_9826;
     var_10 = anglesToForward(self.angles);
-    var_0._id_92FA = self.origin + var_8 + var_10 * var_6 * -1;
-    var_0._id_9834 = self.origin + var_10 * var_9;
+    var_0.startpos = self.origin + var_8 + var_10 * var_6 * -1;
+    var_0.targetpos = self.origin + var_10 * var_9;
   }
 
   return var_0;
 }
 
 _id_7489() {
-  common_scripts\utility::_id_A732("missile_strike_complete", "ms_early_exit");
+  common_scripts\utility::waittill_either("missile_strike_complete", "ms_early_exit");
   _id_7445();
 }
 
 _id_7445() {
   self endon("disconnect");
-  self _meth_8201();
+  self controlsunlink();
   maps\mp\_utility::freezecontrolswrapper(1);
   _id_7CEF(self);
   self setclientomnvar("ui_show_fritzx_hud", 0);
 
-  if(!level.gameended || isDefined(self._id_3B4B)) {
+  if(!level.gameended || isDefined(self.finalkill)) {
     _id_0526::_id_745C();
   }
 
   waitframe();
-  maps\mp\gametypes\_hostmigration::_id_A782();
-  self _meth_80AB();
+  maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
+  self thermalvisionfofoverlayoff();
   self enablereload(1);
   _id_0526::_id_7D04(0.05);
   _id_0526::_id_A232(0);
@@ -608,15 +608,15 @@ _id_7445() {
     maps\mp\_utility::setthirdpersondof(1);
   }
 
-  maps\mp\_utility::_id_7447();
+  maps\mp\_utility::playerrestoreangles();
 }
 
 _id_7244(var_0) {
   var_0 endon("death");
   self endon("disconnect");
-  common_scripts\utility::_id_A70A("joined_team", "joined_spectators");
+  common_scripts\utility::waittill_any("joined_team", "joined_spectators");
   self notify("missile_strike_complete");
-  level._id_7C66 = undefined;
+  level.remotemissileinprogress = undefined;
 }
 
 _id_7EB5() {
@@ -624,19 +624,19 @@ _id_7EB5() {
   level._id_7EBB[var_0] = self;
   self waittill("death");
   level._id_7EBB[var_0] = undefined;
-  level._id_7C66 = undefined;
+  level.remotemissileinprogress = undefined;
 }
 
 _id_7242(var_0, var_1) {
-  common_scripts\utility::_id_A70A("ms_early_exit", "missile_strike_complete", "disconnect");
-  var_0._id_3290 hide();
-  var_0._id_3290 delete();
+  common_scripts\utility::waittill_any("ms_early_exit", "missile_strike_complete", "disconnect");
+  var_0.doors hide();
+  var_0.doors delete();
 
   if(isDefined(self)) {
-    self _meth_8201();
+    self controlsunlink();
 
     if(isDefined(var_1)) {
-      _killfxontagforclient(common_scripts\utility::_id_44F5("fritz_flying_1P"), var_1, "tag_tip_fx", self);
+      _killfxontagforclient(common_scripts\utility::getfx("fritz_flying_1P"), var_1, "tag_tip_fx", self);
     }
   }
 }

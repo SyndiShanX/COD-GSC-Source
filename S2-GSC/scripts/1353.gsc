@@ -26,7 +26,7 @@ init() {
     var_1 thread _id_5288();
   }
 
-  level._id_346F = common_scripts\utility::_id_46B7("drop_gate", "script_noteworthy");
+  level._id_346F = common_scripts\utility::getstructarray("drop_gate", "script_noteworthy");
 
   foreach(var_4 in level._id_346F) {
     var_4 thread _id_51C5();
@@ -82,7 +82,7 @@ _id_15D0() {
 }
 
 _id_15DB(var_0) {
-  if(common_scripts\utility::_id_562E(self._id_2FAE) && common_scripts\utility::_id_562E(var_0._id_2FDA)) {
+  if(common_scripts\utility::_id_562E(self._id_2FAE) && common_scripts\utility::_id_562E(var_0.dismember_crawl)) {
     return undefined;
   }
 
@@ -170,7 +170,7 @@ _id_15D3(var_0) {
   _id_15D7(var_0);
 
   if(self._id_1890.size == 1) {
-    common_scripts\utility::_id_9DA3();
+    common_scripts\utility::trigger_on();
   }
 }
 
@@ -194,7 +194,7 @@ _id_15D7(var_0, var_1) {
 
 _id_15D4(var_0) {
   if(self._id_1890.size == 1) {
-    common_scripts\utility::_id_9D9F();
+    common_scripts\utility::trigger_off();
   }
 
   _id_15D6(var_0);
@@ -285,9 +285,9 @@ _id_51C5() {
   self.getviewkickscale = undefined;
   self._id_9553 = [];
   var_0 = common_scripts\utility::_id_41EE();
-  var_1 = common_scripts\utility::_id_46B7(self.target, "targetname");
+  var_1 = common_scripts\utility::getstructarray(self.target, "targetname");
   var_2 = getEntArray(self.target, "targetname");
-  var_3 = common_scripts\utility::_id_41ED();
+  var_3 = common_scripts\utility::get_linked_ents();
 
   foreach(var_5 in var_2) {
     switch (var_5.classname) {
@@ -370,14 +370,14 @@ _id_3466() {
   self._id_4C11 = 0;
   self._id_4C15 = 1;
   self._id_6C05 = 0;
-  self._id_931A = 3;
+  self.state = 3;
   self._id_5CCB = 0;
   self._id_5CCC = 0;
   self._id_5CCD = undefined;
-  thread common_scripts\utility::_id_2CB4(3, ::_id_3469);
+  thread common_scripts\utility::delay_script_call(3, ::_id_3469);
 
   for(;;) {
-    switch (self._id_931A) {
+    switch (self.state) {
       case 3:
         self notify("gate_open");
         self._id_5CCB = 0;
@@ -388,7 +388,7 @@ _id_3466() {
         thread _id_3461(0);
         thread _id_3460(1);
         _id_3456();
-        _id_0378::_id_8D74("drop_gate", "drop", self.getweaponlistall);
+        _id_0378::snd_message("drop_gate", "drop", self.getweaponlistall);
         _id_7127("s2_zom_gate_lift_drop_gate", 1);
         _id_84AE(0);
         break;
@@ -399,7 +399,7 @@ _id_3466() {
         thread _id_3467();
         self waittill("pull_state_change");
         self._id_5CCB = 1;
-        _id_0378::_id_8D74("drop_gate", "pos1", self.getweaponlistall);
+        _id_0378::snd_message("drop_gate", "pos1", self.getweaponlistall);
         thread _id_3458();
         _id_7127("s2_zom_gate_lift_position_1_gate", 1);
         _id_84AE(1);
@@ -412,7 +412,7 @@ _id_3466() {
         thread _id_3467();
         self waittill("pull_state_change");
         self._id_5CCB = 1;
-        _id_0378::_id_8D74("drop_gate", "pos2", self.getweaponlistall);
+        _id_0378::snd_message("drop_gate", "pos2", self.getweaponlistall);
         thread _id_3458();
         _id_7127("s2_zom_gate_lift_position_2_gate", 1);
         _id_84AE(2);
@@ -424,7 +424,7 @@ _id_3466() {
         thread _id_3467();
         self waittill("pull_state_change");
         self._id_5CCB = 1;
-        _id_0378::_id_8D74("drop_gate", "pos3", self.getweaponlistall);
+        _id_0378::snd_message("drop_gate", "pos3", self.getweaponlistall);
         thread _id_3458();
         _id_7127("s2_zom_gate_lift_position_3_gate", 1, ::_id_3FFF);
         _id_84AE(3);
@@ -455,11 +455,11 @@ _id_3460(var_0) {
 _id_3461(var_0) {
   foreach(var_2 in self._id_2F0F) {
     if(var_0) {
-      var_2 common_scripts\utility::_id_9DA3();
+      var_2 common_scripts\utility::trigger_on();
       continue;
     }
 
-    var_2 common_scripts\utility::_id_9D9F();
+    var_2 common_scripts\utility::trigger_off();
   }
 }
 
@@ -531,7 +531,7 @@ _id_4A2C(var_0, var_1) {
 
 _id_84AE(var_0) {
   self notify("gate_state_changed");
-  self._id_931A = var_0;
+  self.state = var_0;
 }
 
 _id_A1E0(var_0) {
@@ -572,7 +572,7 @@ _id_3469() {
 _id_4F91(var_0) {
   var_1 = var_0._id_15CC;
 
-  if(common_scripts\utility::_id_562E(self._id_2FDA)) {
+  if(common_scripts\utility::_id_562E(self.dismember_crawl)) {
     thread _id_053C::_id_4F86(var_0);
     return 1;
   } else if(var_1 _id_3459()) {
@@ -637,7 +637,7 @@ _id_346B() {
     }
   }
 
-  _id_0378::_id_8D74("drop_gate_pull_level", self.getweaponlistall, var_2);
+  _id_0378::snd_message("drop_gate_pull_level", self.getweaponlistall, var_2);
   self._id_5B26 = gettime();
 }
 
@@ -663,7 +663,7 @@ _id_346E(var_0) {
   self._id_92C9 = 1;
   var_0 _id_3454(var_0._id_4C15);
   var_0 endon("gate_open");
-  common_scripts\utility::_id_A70A("drop_gate_interact_interrupt", "stop_gate_pull");
+  common_scripts\utility::waittill_any("drop_gate_interact_interrupt", "stop_gate_pull");
   var_0 _id_3454(0 - var_0._id_4C15);
 }
 
@@ -685,15 +685,15 @@ _id_345E(var_0) {
 }
 
 _id_3459() {
-  return self._id_931A != 3;
+  return self.state != 3;
 }
 
 _id_3463() {
-  return self._id_931A == 0;
+  return self.state == 0;
 }
 
 _id_345B(var_0, var_1) {
-  var_2 = level._id_3462[self._id_931A];
+  var_2 = level._id_3462[self.state];
 
   if(var_1 == "mount") {
     var_2 = level._id_3462[0];
@@ -733,7 +733,7 @@ _id_5288() {
   self._id_15D9 = "boards";
   var_0 = common_scripts\utility::_id_44BE(self.target, "targetname");
   var_1 = common_scripts\utility::_id_41EE();
-  var_2 = common_scripts\utility::_id_41F0();
+  var_2 = common_scripts\utility::get_linked_structs();
   _id_5289(var_0);
   var_3 = _getscriptablearray(self.target, "targetname");
   self.issighted = var_3[0];
@@ -858,7 +858,7 @@ _id_885D() {
   var_1 = common_scripts\utility::array_randomize(self._id_188D);
 
   if(var_0 == self._id_6044) {
-    common_scripts\utility::_id_9D9F();
+    common_scripts\utility::trigger_off();
   }
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
@@ -910,7 +910,7 @@ _id_345F() {
 }
 
 _id_AA28() {
-  self._id_A1F5 = 1;
+  self.use_time = 1;
   var_0 = undefined;
 
   if(!common_scripts\utility::_id_562E(level._id_0C11)) {
@@ -922,7 +922,7 @@ _id_AA28() {
   for(;;) {
     var_1 = 0;
 
-    if(!common_scripts\utility::_id_562E(self._id_9D9F)) {
+    if(!common_scripts\utility::_id_562E(self.trigger_off)) {
       foreach(var_3 in level.players) {
         if(_id_563C(var_3) && self istouching(var_3)) {
           var_0 = var_3;
@@ -946,8 +946,8 @@ _id_AA28() {
 
     if(var_0._id_7D10 < level._id_609C) {
       var_7 = _min(level._id_609C - var_0._id_7D10, 10);
-      var_0 maps\mp\gametypes\zombies::_id_47AE("repair");
-      var_0 thread _id_054E::_id_62D9();
+      var_0 maps\mp\gametypes\zombies::givepointsforevent("repair");
+      var_0 thread _id_054E::moneyspend();
       var_0._id_7D10 = var_0._id_7D10 + var_7;
     }
 

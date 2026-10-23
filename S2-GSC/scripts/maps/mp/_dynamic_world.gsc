@@ -4,144 +4,144 @@
 **********************************************/
 
 init() {
-  common_scripts\utility::_id_0FB2(getEntArray("com_wall_fan_blade_rotate_slow", "targetname"), ::_id_3A1E, "veryslow");
-  common_scripts\utility::_id_0FB2(getEntArray("com_wall_fan_blade_rotate", "targetname"), ::_id_3A1E, "slow");
-  common_scripts\utility::_id_0FB2(getEntArray("com_wall_fan_blade_rotate_fast", "targetname"), ::_id_3A1E, "fast");
+  common_scripts\utility::_id_0FB2(getEntArray("com_wall_fan_blade_rotate_slow", "targetname"), ::fan_blade_rotate, "veryslow");
+  common_scripts\utility::_id_0FB2(getEntArray("com_wall_fan_blade_rotate", "targetname"), ::fan_blade_rotate, "slow");
+  common_scripts\utility::_id_0FB2(getEntArray("com_wall_fan_blade_rotate_fast", "targetname"), ::fan_blade_rotate, "fast");
   var_0 = [];
-  var_0["trigger_multiple_dyn_metal_detector"] = ::_id_6121;
-  var_0["trigger_multiple_dyn_creaky_board"] = ::_id_2776;
-  var_0["trigger_multiple_dyn_photo_copier"] = ::_id_6F8C;
-  var_0["trigger_multiple_dyn_copier_no_light"] = ::_id_6F90;
-  var_0["trigger_radius_motion_light"] = ::_id_6462;
-  var_0["trigger_radius_dyn_motion_dlight"] = ::_id_6C69;
-  var_0["trigger_multiple_dyn_dog_bark"] = ::_id_3198;
-  var_0["trigger_radius_bird_startle"] = ::_id_1762;
-  var_0["trigger_multiple_dyn_motion_light"] = ::_id_6462;
-  var_0["trigger_multiple_dyn_door"] = ::_id_9D70;
-  _id_72B0();
+  var_0["trigger_multiple_dyn_metal_detector"] = ::metal_detector;
+  var_0["trigger_multiple_dyn_creaky_board"] = ::creaky_board;
+  var_0["trigger_multiple_dyn_photo_copier"] = ::photo_copier;
+  var_0["trigger_multiple_dyn_copier_no_light"] = ::photo_copier_no_light;
+  var_0["trigger_radius_motion_light"] = ::motion_light;
+  var_0["trigger_radius_dyn_motion_dlight"] = ::outdoor_motion_dlight;
+  var_0["trigger_multiple_dyn_dog_bark"] = ::dog_bark;
+  var_0["trigger_radius_bird_startle"] = ::bird_startle;
+  var_0["trigger_multiple_dyn_motion_light"] = ::motion_light;
+  var_0["trigger_multiple_dyn_door"] = ::trigger_door;
+  player_init();
 
   foreach(var_4, var_2 in var_0) {
     var_3 = getEntArray(var_4, "classname");
-    common_scripts\utility::_id_0FB2(var_3, ::_id_9DC3);
+    common_scripts\utility::_id_0FB2(var_3, ::triggertouchthink);
     common_scripts\utility::_id_0FB2(var_3, var_2);
   }
 
-  common_scripts\utility::_id_0FB2(getEntArray("vending_machine", "targetname"), ::_id_A403);
-  common_scripts\utility::_id_0FB2(getEntArray("toggle", "targetname"), ::_id_A1F6);
-  common_scripts\utility::_id_0FB2(getEntArray("sliding_door", "targetname"), ::_id_8CA1);
+  common_scripts\utility::_id_0FB2(getEntArray("vending_machine", "targetname"), ::vending_machine);
+  common_scripts\utility::_id_0FB2(getEntArray("toggle", "targetname"), ::use_toggle);
+  common_scripts\utility::_id_0FB2(getEntArray("sliding_door", "targetname"), ::sliding_door);
   level thread onplayerconnect();
   var_5 = _getEnt("civilian_jet_origin", "targetname");
 
   if(isDefined(var_5)) {
-    var_5 thread _id_2301();
+    var_5 thread civilian_jet_flyby();
   }
 
-  thread _id_5409();
+  thread interactive_tv();
 }
 
 onplayerconnect() {
   for(;;) {
     level waittill("connecting", var_0);
-    var_0 thread _id_64B5();
+    var_0 thread movementtracker();
   }
 }
 
-_id_72B0() {
+player_init() {
   if(common_scripts\utility::issp()) {
     foreach(var_1 in level.players) {
-      var_1._id_9AC5 = [];
-      var_1 thread _id_64B5();
+      var_1.touchtriggers = [];
+      var_1 thread movementtracker();
     }
   }
 }
 
 _id_0AAB() {
-  self._id_9AC5 = [];
-  thread _id_64B5();
+  self.touchtriggers = [];
+  thread movementtracker();
 }
 
-_id_2301() {
+civilian_jet_flyby() {
   level endon("game_ended");
-  _id_5963();
+  jet_init();
   level waittill("prematch_over");
 
   for(;;) {
-    thread _id_5967();
+    thread jet_timer();
     self waittill("start_flyby");
-    thread _id_5961();
+    thread jet_flyby();
     self waittill("flyby_done");
-    _id_5966();
+    jet_reset();
   }
 }
 
-_id_5963() {
-  self._id_5964 = getEntArray(self.target, "targetname");
-  self._id_5962 = _getEnt("civilian_jet_flyto", "targetname");
-  self._id_3776 = getEntArray("engine_fx", "targetname");
-  self._id_3D3F = getEntArray("flash_fx", "targetname");
-  self._id_595B = loadfx("vfx/test/test_fx");
-  self._id_595E = loadfx("vfx/lights/aircraft_light_wingtip_red");
-  self._id_595D = loadfx("vfx/lights/aircraft_light_wingtip_green");
-  self._id_595C = loadfx("vfx/lights/aircraft_light_red_blink");
-  level._id_2304 = undefined;
-  var_0 = vectorNormalize(self.origin - self._id_5962.origin) * 20000;
-  self._id_5962.origin = self._id_5962.origin - var_0;
+jet_init() {
+  self.jet_parts = getEntArray(self.target, "targetname");
+  self.jet_flyto = _getEnt("civilian_jet_flyto", "targetname");
+  self.engine_fxs = getEntArray("engine_fx", "targetname");
+  self.flash_fxs = getEntArray("flash_fx", "targetname");
+  self.jet_engine_fx = loadfx("vfx/test/test_fx");
+  self.jet_flash_fx_red = loadfx("vfx/lights/aircraft_light_wingtip_red");
+  self.jet_flash_fx_green = loadfx("vfx/lights/aircraft_light_wingtip_green");
+  self.jet_flash_fx_blink = loadfx("vfx/lights/aircraft_light_red_blink");
+  level.civilianjetflyby = undefined;
+  var_0 = vectorNormalize(self.origin - self.jet_flyto.origin) * 20000;
+  self.jet_flyto.origin = self.jet_flyto.origin - var_0;
   self.origin = self.origin + var_0;
 
-  foreach(var_2 in self._id_5964) {
+  foreach(var_2 in self.jet_parts) {
     var_2.origin = var_2.origin + var_0;
-    var_2._id_6A43 = var_2.origin;
+    var_2.old_origin = var_2.origin;
     var_2 hide();
   }
 
-  foreach(var_5 in self._id_3776) {
+  foreach(var_5 in self.engine_fxs) {
     var_5.origin = var_5.origin + var_0;
   }
 
-  foreach(var_8 in self._id_3D3F) {
+  foreach(var_8 in self.flash_fxs) {
     var_8.origin = var_8.origin + var_0;
   }
 
   var_10 = self.origin;
-  var_11 = self._id_5962.origin;
-  self._id_5960 = var_11 - var_10;
+  var_11 = self.jet_flyto.origin;
+  self.jet_fly_vec = var_11 - var_10;
   var_12 = 2000;
   var_13 = _abs(distance(var_10, var_11));
-  self._id_595F = var_13 / var_12;
+  self.jet_flight_time = var_13 / var_12;
 }
 
-_id_5966() {
-  foreach(var_1 in self._id_5964) {
-    var_1.origin = var_1._id_6A43;
+jet_reset() {
+  foreach(var_1 in self.jet_parts) {
+    var_1.origin = var_1.old_origin;
     var_1 hide();
   }
 }
 
-_id_5967() {
+jet_timer() {
   level endon("game_ended");
-  var_0 = _id_46E1();
+  var_0 = gettimeinterval();
   var_1 = max(10, var_0);
   var_1 = _min(var_1, 100);
 
   if(getDvar("jet_flyby_timer") != "") {
-    level._id_2305 = 5 + getdvarint("jet_flyby_timer");
+    level.civilianjetflyby_timer = 5 + getdvarint("jet_flyby_timer");
   } else {
-    level._id_2305 = (0.25 + _randomfloatrange(0.3, 0.7)) * 60 * var_1;
+    level.civilianjetflyby_timer = (0.25 + _randomfloatrange(0.3, 0.7)) * 60 * var_1;
   }
 
-  wait(level._id_2305);
+  wait(level.civilianjetflyby_timer);
 
-  while(isDefined(level._id_0B97) || isDefined(level._id_084B) || isDefined(level._id_2210) || isDefined(level._id_7C66)) {
+  while(isDefined(level._id_0B97) || isDefined(level._id_084B) || isDefined(level.chopper) || isDefined(level.remotemissileinprogress)) {
     waitframe();
   }
 
   self notify("start_flyby");
-  level._id_2304 = 1;
+  level.civilianjetflyby = 1;
   self waittill("flyby_done");
-  level._id_2304 = undefined;
+  level.civilianjetflyby = undefined;
 }
 
-_id_46E1() {
+gettimeinterval() {
   if(common_scripts\utility::issp()) {
     return 10.0;
   }
@@ -156,29 +156,29 @@ _id_46E1() {
 getwatcheddvar(var_0) {
   var_0 = "scr_" + level.gametype + "_" + var_0;
 
-  if(isDefined(level._id_6CC8) && isDefined(level._id_6CC8[var_0])) {
-    return level._id_6CC8[var_0];
+  if(isDefined(level.overridewatchdvars) && isDefined(level.overridewatchdvars[var_0])) {
+    return level.overridewatchdvars[var_0];
   }
 
   return level.watchdvars[var_0].value;
 }
 
-_id_5961() {
-  foreach(var_1 in self._id_5964) {
+jet_flyby() {
+  foreach(var_1 in self.jet_parts) {
     var_1 show();
   }
 
   var_3 = [];
   var_4 = [];
 
-  foreach(var_6 in self._id_3776) {
+  foreach(var_6 in self.engine_fxs) {
     var_7 = spawn("script_model", var_6.origin);
     var_7 setModel("tag_origin");
     var_7.angles = var_6.angles;
     var_3[var_3.size] = var_7;
   }
 
-  foreach(var_10 in self._id_3D3F) {
+  foreach(var_10 in self.flash_fxs) {
     var_11 = spawn("script_model", var_10.origin);
     var_11 setModel("tag_origin");
     var_11.color = var_10._id_0165;
@@ -186,40 +186,40 @@ _id_5961() {
     var_4[var_4.size] = var_11;
   }
 
-  thread _id_5965(self._id_5964[0], level._id_5FEB);
+  thread jet_planesound(self.jet_parts[0], level.mapcenter);
   waitframe();
 
   foreach(var_7 in var_3) {
-    _playFXOnTag(self._id_595B, var_7, "tag_origin");
+    _playFXOnTag(self.jet_engine_fx, var_7, "tag_origin");
   }
 
   foreach(var_11 in var_4) {
     if(isDefined(var_11.color) && var_11.color == "blink") {
-      _playFXOnTag(self._id_595C, var_11, "tag_origin");
+      _playFXOnTag(self.jet_flash_fx_blink, var_11, "tag_origin");
       continue;
     }
 
     if(isDefined(var_11.color) && var_11.color == "red") {
-      _playFXOnTag(self._id_595E, var_11, "tag_origin");
+      _playFXOnTag(self.jet_flash_fx_red, var_11, "tag_origin");
       continue;
     }
 
-    _playFXOnTag(self._id_595D, var_11, "tag_origin");
+    _playFXOnTag(self.jet_flash_fx_green, var_11, "tag_origin");
   }
 
-  foreach(var_1 in self._id_5964) {
-    var_1 moveTo(var_1.origin + self._id_5960, self._id_595F);
+  foreach(var_1 in self.jet_parts) {
+    var_1 moveTo(var_1.origin + self.jet_fly_vec, self.jet_flight_time);
   }
 
   foreach(var_7 in var_3) {
-    var_7 moveTo(var_7.origin + self._id_5960, self._id_595F);
+    var_7 moveTo(var_7.origin + self.jet_fly_vec, self.jet_flight_time);
   }
 
   foreach(var_11 in var_4) {
-    var_11 moveTo(var_11.origin + self._id_5960, self._id_595F);
+    var_11 moveTo(var_11.origin + self.jet_fly_vec, self.jet_flight_time);
   }
 
-  wait(self._id_595F + 1);
+  wait(self.jet_flight_time + 1);
 
   foreach(var_7 in var_3) {
     var_7 delete();
@@ -232,23 +232,23 @@ _id_5961() {
   self notify("flyby_done");
 }
 
-_id_5965(var_0, var_1) {
-  var_0 thread _id_74D6("veh_mig29_dist_loop");
+jet_planesound(var_0, var_1) {
+  var_0 thread playsound_loop_on_ent("veh_mig29_dist_loop");
 
-  while(!_id_982B(var_0, var_1)) {
+  while(!targetisclose(var_0, var_1)) {
     waitframe();
   }
 
-  var_0 thread _id_74D6("veh_mig29_close_loop");
+  var_0 thread playsound_loop_on_ent("veh_mig29_close_loop");
 
-  while(_id_982C(var_0, var_1)) {
+  while(targetisinfront(var_0, var_1)) {
     waitframe();
   }
 
   wait 0.5;
-  var_0 thread _id_74D5("veh_mig29_sonic_boom");
+  var_0 thread playsound_float("veh_mig29_sonic_boom");
 
-  while(_id_982B(var_0, var_1)) {
+  while(targetisclose(var_0, var_1)) {
     waitframe();
   }
 
@@ -257,7 +257,7 @@ _id_5965(var_0, var_1) {
   var_0 notify("stop soundveh_mig29_dist_loop");
 }
 
-_id_74D5(var_0, var_1, var_2) {
+playsound_float(var_0, var_1, var_2) {
   var_3 = spawn("script_origin", (0, 0, 1));
   var_3 hide();
 
@@ -277,11 +277,11 @@ _id_74D5(var_0, var_1, var_2) {
   var_3 delete();
 }
 
-_id_74D6(var_0, var_1) {
+playsound_loop_on_ent(var_0, var_1) {
   var_2 = spawn("script_origin", (0, 0, 0));
   var_2 hide();
   var_2 endon("death");
-  thread common_scripts\utility::_id_2D18(var_2);
+  thread common_scripts\utility::delete_on_death(var_2);
 
   if(isDefined(var_1)) {
     var_2.origin = self.origin + var_1;
@@ -299,9 +299,9 @@ _id_74D6(var_0, var_1) {
   var_2 delete();
 }
 
-_id_982C(var_0, var_1) {
-  var_2 = anglesToForward(common_scripts\utility::_id_3D5C(var_0.angles));
-  var_3 = vectorNormalize(common_scripts\utility::_id_3D5D(var_1) - var_0.origin);
+targetisinfront(var_0, var_1) {
+  var_2 = anglesToForward(common_scripts\utility::flat_angle(var_0.angles));
+  var_3 = vectorNormalize(common_scripts\utility::flat_origin(var_1) - var_0.origin);
   var_4 = vectordot(var_2, var_3);
 
   if(var_4 > 0) {
@@ -311,8 +311,8 @@ _id_982C(var_0, var_1) {
   }
 }
 
-_id_982B(var_0, var_1) {
-  var_2 = _id_982C(var_0, var_1);
+targetisclose(var_0, var_1) {
+  var_2 = targetisinfront(var_0, var_1);
 
   if(var_2) {
     var_3 = 1;
@@ -320,8 +320,8 @@ _id_982B(var_0, var_1) {
     var_3 = -1;
   }
 
-  var_4 = common_scripts\utility::_id_3D5D(var_0.origin);
-  var_5 = var_4 + anglesToForward(common_scripts\utility::_id_3D5C(var_0.angles)) * (var_3 * 100000);
+  var_4 = common_scripts\utility::flat_origin(var_0.origin);
+  var_5 = var_4 + anglesToForward(common_scripts\utility::flat_angle(var_0.angles)) * (var_3 * 100000);
   var_6 = _pointonsegmentnearesttopoint(var_4, var_5, var_1);
   var_7 = distance(var_4, var_6);
 
@@ -332,59 +332,59 @@ _id_982B(var_0, var_1) {
   }
 }
 
-_id_A403() {
+vending_machine() {
   level endon("game_ended");
   self endon("death");
   self setCursorHint("HINT_ACTIVATE");
-  self._id_A5B1 = _getEnt(self.target, "targetname");
-  var_0 = _getEnt(self._id_A5B1.target, "targetname");
+  self.vm_normal = _getEnt(self.target, "targetname");
+  var_0 = _getEnt(self.vm_normal.target, "targetname");
   var_1 = _getEnt(var_0.target, "targetname");
   var_2 = _getEnt(var_1.target, "targetname");
-  self._id_A5AC = var_2.origin;
+  self.vm_launch_from = var_2.origin;
   var_3 = _getEnt(var_2.target, "targetname");
-  self._id_A5AD = var_3.origin;
+  self.vm_launch_to = var_3.origin;
 
   if(isDefined(var_3.target)) {
-    self._id_A5A7 = _getEnt(var_3.target, "targetname").origin;
+    self.vm_fx_loc = _getEnt(var_3.target, "targetname").origin;
   }
 
-  self._id_A5B1 setCanDamage(1);
-  self._id_A5B2 = self._id_A5B1.model;
-  self._id_A5A5 = self._id_A5B1._id_0165;
-  self._id_A5C0 = var_0.model;
-  self._id_A5C2 = var_0.origin;
-  self._id_A5C1 = var_0.angles;
-  self._id_A5C4 = var_1.origin;
-  self._id_A5C3 = var_1.angles;
-  precachemodel(self._id_A5A5);
+  self.vm_normal setCanDamage(1);
+  self.vm_normal_model = self.vm_normal.model;
+  self.vm_damaged_model = self.vm_normal._id_0165;
+  self.vm_soda_model = var_0.model;
+  self.vm_soda_start_pos = var_0.origin;
+  self.vm_soda_start_angle = var_0.angles;
+  self.vm_soda_stop_pos = var_1.origin;
+  self.vm_soda_stop_angle = var_1.angles;
+  precachemodel(self.vm_damaged_model);
   var_0 delete();
   var_1 delete();
   var_2 delete();
   var_3 delete();
-  self._id_8ED8 = [];
-  self._id_8EDB = 12;
-  self._id_8EDC = undefined;
-  self._id_4F00 = 400;
-  thread _id_A404(self._id_A5B1);
+  self.soda_array = [];
+  self.soda_count = 12;
+  self.soda_slot = undefined;
+  self.hp = 400;
+  thread vending_machine_damage_monitor(self.vm_normal);
   self playLoopSound("vending_machine_hum");
 
   for(;;) {
     self waittill("trigger", var_4);
     self playSound("vending_machine_button_press");
 
-    if(!self._id_8EDB) {
+    if(!self.soda_count) {
       continue;
     }
-    if(isDefined(self._id_8EDC)) {
-      _id_8EDA();
+    if(isDefined(self.soda_slot)) {
+      soda_can_eject();
     }
 
-    _id_8ED9(_id_8FF4());
+    soda_can_drop(spawn_soda());
     waitframe();
   }
 }
 
-_id_A404(var_0) {
+vending_machine_damage_monitor(var_0) {
   level endon("game_ended");
   var_1 = "mod_grenade mod_projectile mod_explosive mod_grenade_splash mod_projectile_splash splash";
   var_2 = loadfx("vfx/test/test_fx");
@@ -402,29 +402,29 @@ _id_A404(var_0) {
         var_3 = var_3 * 3;
       }
 
-      self._id_4F00 = self._id_4F00 - var_3;
+      self.hp = self.hp - var_3;
 
-      if(self._id_4F00 > 0) {
+      if(self.hp > 0) {
         continue;
       }
       self notify("death");
       self.origin = self.origin + (0, 0, 10000);
 
-      if(!isDefined(self._id_A5A7)) {
-        var_8 = self._id_A5B1.origin + (37, -31, 52);
+      if(!isDefined(self.vm_fx_loc)) {
+        var_8 = self.vm_normal.origin + (37, -31, 52);
       } else {
-        var_8 = self._id_A5A7;
+        var_8 = self.vm_fx_loc;
       }
 
       playFX(var_2, var_8);
-      self._id_A5B1 setModel(self._id_A5A5);
+      self.vm_normal setModel(self.vm_damaged_model);
 
-      while(self._id_8EDB > 0) {
-        if(isDefined(self._id_8EDC)) {
-          _id_8EDA();
+      while(self.soda_count > 0) {
+        if(isDefined(self.soda_slot)) {
+          soda_can_eject();
         }
 
-        _id_8ED9(_id_8FF4());
+        soda_can_drop(spawn_soda());
         waitframe();
       }
 
@@ -434,39 +434,39 @@ _id_A404(var_0) {
   }
 }
 
-_id_8FF4() {
-  var_0 = spawn("script_model", self._id_A5C2);
-  var_0 setModel(self._id_A5C0);
-  var_0.origin = self._id_A5C2;
-  var_0.angles = self._id_A5C1;
+spawn_soda() {
+  var_0 = spawn("script_model", self.vm_soda_start_pos);
+  var_0 setModel(self.vm_soda_model);
+  var_0.origin = self.vm_soda_start_pos;
+  var_0.angles = self.vm_soda_start_angle;
   return var_0;
 }
 
-_id_8ED9(var_0) {
-  var_0 moveTo(self._id_A5C4, 0.2);
+soda_can_drop(var_0) {
+  var_0 moveTo(self.vm_soda_stop_pos, 0.2);
   var_0 playSound("vending_machine_soda_drop");
   wait 0.2;
-  self._id_8EDC = var_0;
-  self._id_8EDB--;
+  self.soda_slot = var_0;
+  self.soda_count--;
 }
 
-_id_8EDA() {
+soda_can_eject() {
   self endon("death");
 
-  if(isDefined(self._id_8EDC._id_35AB) && self._id_8EDC._id_35AB == 1) {
+  if(isDefined(self.soda_slot.ejected) && self.soda_slot.ejected == 1) {
     return;
   }
   var_0 = 1;
   var_1 = var_0 * -999;
   var_2 = int(40000);
   var_3 = (int(var_2 / 2), int(var_2 / 2), 0) - (randomint(var_2), randomint(var_2), 0);
-  var_4 = vectorNormalize(self._id_A5AD - self._id_A5AC + var_3);
+  var_4 = vectorNormalize(self.vm_launch_to - self.vm_launch_from + var_3);
   var_5 = var_4 * _randomfloatrange(var_1, var_0);
-  self._id_8EDC physicslaunchclient(self._id_A5AC, var_5);
-  self._id_8EDC._id_35AB = 1;
+  self.soda_slot physicslaunchclient(self.vm_launch_from, var_5);
+  self.soda_slot.ejected = 1;
 }
 
-_id_3E88() {
+freefall() {
   level endon("game_ended");
   var_0 = "briefcase_bomb_mp";
 
@@ -483,7 +483,7 @@ _id_3E88() {
   }
 }
 
-_id_6121() {
+metal_detector() {
   level endon("game_ended");
   var_0 = _getEnt(self.target, "targetname");
   var_0 enablegrenadetouchdamage();
@@ -515,21 +515,21 @@ _id_6121() {
 
   self._id_0BAC = 0;
   self._id_0BAA = 0;
-  self._id_9A89 = 0;
-  thread _id_6122(var_0);
-  thread _id_6123();
-  thread _id_6124(var_5, "weapon_claymore", "weapon_c4");
+  self.tolerance = 0;
+  thread metal_detector_dmg_monitor(var_0);
+  thread metal_detector_touch_monitor();
+  thread metal_detector_weapons(var_5, "weapon_claymore", "weapon_c4");
   var_12 = (var_3.origin[0], var_3.origin[1], var_11);
   var_13 = (var_4.origin[0], var_4.origin[1], var_11);
   var_14 = loadfx("vfx/test/test_fx");
 
   for(;;) {
-    common_scripts\utility::_id_A70A("dmg_triggered", "touch_triggered", "weapon_triggered");
-    thread _id_74D4("alarm_metal_detector", var_14, var_12, var_13);
+    common_scripts\utility::waittill_any("dmg_triggered", "touch_triggered", "weapon_triggered");
+    thread playsound_and_light("alarm_metal_detector", var_14, var_12, var_13);
   }
 }
 
-_id_74D4(var_0, var_1, var_2, var_3) {
+playsound_and_light(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
 
   if(!self._id_0BAC) {
@@ -550,13 +550,13 @@ _id_74D4(var_0, var_1, var_2, var_3) {
 _id_0F06() {
   level endon("game_ended");
 
-  if(!self._id_9A89) {
+  if(!self.tolerance) {
     return;
   }
   var_0 = self._id_0BAB + 0.15;
 
-  if(self._id_9A89) {
-    self._id_9A89--;
+  if(self.tolerance) {
+    self.tolerance--;
   } else {
     self._id_0BAA = 1;
   }
@@ -568,16 +568,16 @@ _id_0F06() {
     var_2 = 2;
   }
 
-  _id_A714("dmg_triggered", "touch_triggered", "weapon_triggered", var_2 + 2);
+  waittill_any_or_timeout("dmg_triggered", "touch_triggered", "weapon_triggered", var_2 + 2);
   var_3 = gettime() - var_1;
 
   if(var_3 > var_2 * 1000 + 1150) {
     self._id_0BAA = 0;
-    self._id_9A89 = 0;
+    self.tolerance = 0;
   }
 }
 
-_id_A714(var_0, var_1, var_2, var_3) {
+waittill_any_or_timeout(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   self endon(var_0);
   self endon(var_1);
@@ -585,39 +585,39 @@ _id_A714(var_0, var_1, var_2, var_3) {
   wait(var_3);
 }
 
-_id_6124(var_0, var_1, var_2) {
+metal_detector_weapons(var_0, var_1, var_2) {
   level endon("game_ended");
 
   for(;;) {
-    _id_A773();
+    waittill_weapon_placed();
     var_3 = getEntArray("grenade", "classname");
 
     foreach(var_5 in var_3) {
       if(isDefined(var_5.model) && (var_5.model == var_1 || var_5.model == var_2)) {
-        if(_id_5719(var_5, var_0)) {
-          thread _id_A9AE(var_5, var_0);
+        if(isinbound(var_5, var_0)) {
+          thread weapon_notify_loop(var_5, var_0);
         }
       }
     }
   }
 }
 
-_id_A773() {
+waittill_weapon_placed() {
   level endon("game_ended");
   self endon("dmg_triggered");
   self waittill("touch_triggered");
 }
 
-_id_A9AE(var_0, var_1) {
+weapon_notify_loop(var_0, var_1) {
   var_0 endon("death");
 
-  while(_id_5719(var_0, var_1)) {
+  while(isinbound(var_0, var_1)) {
     self notify("weapon_triggered");
     wait(self._id_0BAB);
   }
 }
 
-_id_5719(var_0, var_1) {
+isinbound(var_0, var_1) {
   var_2 = var_1[0];
   var_3 = var_1[1];
   var_4 = var_1[2];
@@ -628,9 +628,9 @@ _id_5719(var_0, var_1) {
   var_9 = var_0.origin[1];
   var_10 = var_0.origin[2];
 
-  if(_id_571A(var_8, var_2, var_3)) {
-    if(_id_571A(var_9, var_4, var_5)) {
-      if(_id_571A(var_10, var_6, var_7)) {
+  if(isinbound_single(var_8, var_2, var_3)) {
+    if(isinbound_single(var_9, var_4, var_5)) {
+      if(isinbound_single(var_10, var_6, var_7)) {
         return 1;
       }
     }
@@ -639,7 +639,7 @@ _id_5719(var_0, var_1) {
   return 0;
 }
 
-_id_571A(var_0, var_1, var_2) {
+isinbound_single(var_0, var_1, var_2) {
   if(var_0 > var_1 && var_0 < var_2) {
     return 1;
   }
@@ -647,7 +647,7 @@ _id_571A(var_0, var_1, var_2) {
   return 0;
 }
 
-_id_6122(var_0) {
+metal_detector_dmg_monitor(var_0) {
   level endon("game_ended");
 
   for(;;) {
@@ -659,7 +659,7 @@ _id_6122(var_0) {
   }
 }
 
-_id_6123() {
+metal_detector_touch_monitor() {
   level endon("game_ended");
 
   for(;;) {
@@ -685,16 +685,16 @@ _id_0BAD(var_0) {
   return 0;
 }
 
-_id_2776() {
+creaky_board() {
   level endon("game_ended");
 
   for(;;) {
     self waittill("trigger_enter", var_0);
-    var_0 thread _id_30A4(self);
+    var_0 thread do_creak(self);
   }
 }
 
-_id_30A4(var_0) {
+do_creak(var_0) {
   self endon("disconnect");
   self endon("death");
   self playSound("step_walk_plr_woodcreak_on");
@@ -710,21 +710,21 @@ _id_30A4(var_0) {
   }
 }
 
-_id_6462() {
+motion_light() {
   level endon("game_ended");
-  self._id_64DD = 1;
-  self._id_5D7C = 0;
+  self.movetracker = 1;
+  self.lightson = 0;
   var_0 = getEntArray(self.target, "targetname");
-  common_scripts\utility::_id_6753(["com_two_light_fixture_off", "com_two_light_fixture_on"], ::precachemodel);
+  common_scripts\utility::noself_array_call(["com_two_light_fixture_off", "com_two_light_fixture_on"], ::precachemodel);
 
   foreach(var_2 in var_0) {
-    var_2._id_5D71 = [];
+    var_2.lightrigs = [];
     var_3 = _getEnt(var_2.target, "targetname");
 
     if(!isDefined(var_3.target)) {
       continue;
     }
-    var_2._id_5D71 = getEntArray(var_3.target, "targetname");
+    var_2.lightrigs = getEntArray(var_3.target, "targetname");
   }
 
   for(;;) {
@@ -733,29 +733,29 @@ _id_6462() {
     while(_id_0F13(self)) {
       var_5 = 0;
 
-      foreach(var_7 in self._id_9AC3) {
-        if(isDefined(var_7._id_3040) && var_7._id_3040 > 5.0) {
+      foreach(var_7 in self.touchlist) {
+        if(isDefined(var_7.distmoved) && var_7.distmoved > 5.0) {
           var_5 = 1;
         }
       }
 
       if(var_5) {
-        if(!self._id_5D7C) {
-          self._id_5D7C = 1;
+        if(!self.lightson) {
+          self.lightson = 1;
           var_0[0] playSound("switch_auto_lights_on");
 
           foreach(var_2 in var_0) {
             var_2 setlightintensity(1.0);
 
-            if(isDefined(var_2._id_5D71)) {
-              foreach(var_11 in var_2._id_5D71) {
+            if(isDefined(var_2.lightrigs)) {
+              foreach(var_11 in var_2.lightrigs) {
                 var_11 setModel("com_two_light_fixture_on");
               }
             }
           }
         }
 
-        thread _id_6463(var_0, 10.0);
+        thread motion_light_timeout(var_0, 10.0);
       }
 
       waitframe();
@@ -763,7 +763,7 @@ _id_6462() {
   }
 }
 
-_id_6463(var_0, var_1) {
+motion_light_timeout(var_0, var_1) {
   self notify("motion_light_timeout");
   self endon("motion_light_timeout");
   wait(var_1);
@@ -771,28 +771,28 @@ _id_6463(var_0, var_1) {
   foreach(var_3 in var_0) {
     var_3 setlightintensity(0);
 
-    if(isDefined(var_3._id_5D71)) {
-      foreach(var_5 in var_3._id_5D71) {
+    if(isDefined(var_3.lightrigs)) {
+      foreach(var_5 in var_3.lightrigs) {
         var_5 setModel("com_two_light_fixture_off");
       }
     }
   }
 
   var_0[0] playSound("switch_auto_lights_off");
-  self._id_5D7C = 0;
+  self.lightson = 0;
 }
 
-_id_6C69() {
-  if(!isDefined(level._id_6C6B)) {
-    level._id_6C6B = loadfx("vfx/lights/outdoor_motion_light");
+outdoor_motion_dlight() {
+  if(!isDefined(level.outdoor_motion_light)) {
+    level.outdoor_motion_light = loadfx("vfx/lights/outdoor_motion_light");
   }
 
   level endon("game_ended");
-  self._id_64DD = 1;
-  self._id_5D7C = 0;
+  self.movetracker = 1;
+  self.lightson = 0;
   var_0 = _getEnt(self.target, "targetname");
   var_1 = getEntArray(var_0.target, "targetname");
-  common_scripts\utility::_id_6753(["com_two_light_fixture_off", "com_two_light_fixture_on"], ::precachemodel);
+  common_scripts\utility::noself_array_call(["com_two_light_fixture_off", "com_two_light_fixture_on"], ::precachemodel);
 
   for(;;) {
     self waittill("trigger_enter");
@@ -800,26 +800,26 @@ _id_6C69() {
     while(_id_0F13(self)) {
       var_2 = 0;
 
-      foreach(var_4 in self._id_9AC3) {
-        if(isDefined(var_4._id_3040) && var_4._id_3040 > 5.0) {
+      foreach(var_4 in self.touchlist) {
+        if(isDefined(var_4.distmoved) && var_4.distmoved > 5.0) {
           var_2 = 1;
         }
       }
 
       if(var_2) {
-        if(!self._id_5D7C) {
-          self._id_5D7C = 1;
+        if(!self.lightson) {
+          self.lightson = 1;
           var_0 playSound("switch_auto_lights_on");
           var_0 setModel("com_two_light_fixture_on");
 
           foreach(var_7 in var_1) {
-            var_7._id_5D2F = spawn("script_model", var_7.origin);
-            var_7._id_5D2F setModel("tag_origin");
-            _playFXOnTag(level._id_6C6B, var_7._id_5D2F, "tag_origin");
+            var_7.lightent = spawn("script_model", var_7.origin);
+            var_7.lightent setModel("tag_origin");
+            _playFXOnTag(level.outdoor_motion_light, var_7.lightent, "tag_origin");
           }
         }
 
-        thread _id_6C6A(var_0, var_1, 10.0);
+        thread outdoor_motion_dlight_timeout(var_0, var_1, 10.0);
       }
 
       waitframe();
@@ -827,23 +827,23 @@ _id_6C69() {
   }
 }
 
-_id_6C6A(var_0, var_1, var_2) {
+outdoor_motion_dlight_timeout(var_0, var_1, var_2) {
   self notify("motion_light_timeout");
   self endon("motion_light_timeout");
   wait(var_2);
 
   foreach(var_4 in var_1) {
-    var_4._id_5D2F delete();
+    var_4.lightent delete();
   }
 
   var_0 playSound("switch_auto_lights_off");
   var_0 setModel("com_two_light_fixture_off");
-  self._id_5D7C = 0;
+  self.lightson = 0;
 }
 
-_id_3198() {
+dog_bark() {
   level endon("game_ended");
-  self._id_64DD = 1;
+  self.movetracker = 1;
   var_0 = _getEnt(self.target, "targetname");
 
   for(;;) {
@@ -852,9 +852,9 @@ _id_3198() {
     while(_id_0F13(self)) {
       var_2 = 0;
 
-      foreach(var_4 in self._id_9AC3) {
-        if(isDefined(var_4._id_3040) && var_4._id_3040 > var_2) {
-          var_2 = var_4._id_3040;
+      foreach(var_4 in self.touchlist) {
+        if(isDefined(var_4.distmoved) && var_4.distmoved > var_2) {
+          var_2 = var_4.distmoved;
         }
       }
 
@@ -869,16 +869,16 @@ _id_3198() {
   }
 }
 
-_id_9D70() {
+trigger_door() {
   var_0 = _getEnt(self.target, "targetname");
-  self._id_3288 = var_0;
-  self._id_3282 = _id_4710(vectorNormalize(self getorigin() - var_0 getorigin()));
-  var_0._id_1631 = var_0.angles[1];
+  self.doorent = var_0;
+  self.doorangle = getvectorrightangle(vectorNormalize(self getorigin() - var_0 getorigin()));
+  var_0.baseyaw = var_0.angles[1];
   var_1 = 1.0;
 
   for(;;) {
     self waittill("trigger_enter", var_2);
-    var_0 thread _id_328D(var_1, _id_44A7(var_2));
+    var_0 thread dooropen(var_1, getdoorside(var_2));
 
     if(_id_0F13(self)) {
       self waittill("trigger_empty");
@@ -890,51 +890,51 @@ _id_9D70() {
       self waittill("trigger_empty");
     }
 
-    var_0 thread _id_3285(var_1);
+    var_0 thread doorclose(var_1);
   }
 }
 
-_id_328D(var_0, var_1) {
+dooropen(var_0, var_1) {
   if(var_1) {
-    self rotateTo((0, self._id_1631 + 90, 1), var_0, 0.1, 0.75);
+    self rotateTo((0, self.baseyaw + 90, 1), var_0, 0.1, 0.75);
   } else {
-    self rotateTo((0, self._id_1631 - 90, 1), var_0, 0.1, 0.75);
+    self rotateTo((0, self.baseyaw - 90, 1), var_0, 0.1, 0.75);
   }
 
   self playSound("door_generic_house_open");
   wait(var_0 + 0.05);
 }
 
-_id_3285(var_0) {
-  self rotateTo((0, self._id_1631, 1), var_0);
+doorclose(var_0) {
+  self rotateTo((0, self.baseyaw, 1), var_0);
   self playSound("door_generic_house_close");
   wait(var_0 + 0.05);
 }
 
-_id_44A7(var_0) {
-  return vectordot(self._id_3282, vectorNormalize(var_0.origin - self._id_3288 getorigin())) > 0;
+getdoorside(var_0) {
+  return vectordot(self.doorangle, vectorNormalize(var_0.origin - self.doorent getorigin())) > 0;
 }
 
-_id_4710(var_0) {
+getvectorrightangle(var_0) {
   return (var_0[1], 0 - var_0[0], var_0[2]);
 }
 
-_id_A1F6() {
+use_toggle() {
   if(self.classname != "trigger_use_touch") {
     return;
   }
   var_0 = getEntArray(self.target, "targetname");
-  self._id_5D7C = 1;
+  self.lightson = 1;
 
   foreach(var_2 in var_0) {
-    var_2 setlightintensity(1.5 * self._id_5D7C);
+    var_2 setlightintensity(1.5 * self.lightson);
   }
 
   for(;;) {
     self waittill("trigger");
-    self._id_5D7C = !self._id_5D7C;
+    self.lightson = !self.lightson;
 
-    if(self._id_5D7C) {
+    if(self.lightson) {
       foreach(var_2 in var_0) {
         var_2 setlightintensity(1.5);
       }
@@ -951,13 +951,13 @@ _id_A1F6() {
   }
 }
 
-_id_1762() {}
+bird_startle() {}
 
-_id_6F8E(var_0) {
-  self._id_2660 = _id_4290(var_0);
+photo_copier_init(var_0) {
+  self.copier = get_photo_copier(var_0);
 
-  if(isDefined(self._id_2660)) {
-    var_1 = _getEnt(self._id_2660.target, "targetname");
+  if(isDefined(self.copier)) {
+    var_1 = _getEnt(self.copier.target, "targetname");
 
     if(isDefined(var_1)) {
       var_2 = _getEnt(var_1.target, "targetname");
@@ -965,18 +965,18 @@ _id_6F8E(var_0) {
       if(isDefined(var_2)) {
         var_2.intensity = var_2 getlightintensity();
         var_2 setlightintensity(0);
-        var_0._id_2664 = var_1;
-        var_0._id_9269 = var_1.origin;
-        var_0._id_5CCE = var_2;
-        var_3 = self._id_2660.angles + (0, 90, 0);
+        var_0.copy_bar = var_1;
+        var_0.start_pos = var_1.origin;
+        var_0.light = var_2;
+        var_3 = self.copier.angles + (0, 90, 0);
         var_4 = anglesToForward(var_3);
-        var_0._id_369A = var_0._id_9269 + var_4 * 30;
+        var_0.end_pos = var_0.start_pos + var_4 * 30;
       }
     }
   }
 }
 
-_id_4290(var_0) {
+get_photo_copier(var_0) {
   if(!isDefined(var_0.target)) {
     var_1 = getEntArray("destructible_toy", "targetname");
     var_2 = var_1[0];
@@ -999,77 +999,77 @@ _id_4290(var_0) {
   return var_2;
 }
 
-_id_A724() {
-  if(!isDefined(self._id_2660)) {
+waittill_copier_copies() {
+  if(!isDefined(self.copier)) {
     return;
   }
-  self._id_2660 endon("FX_State_Change0");
-  self._id_2660 endon("death");
+  self.copier endon("FX_State_Change0");
+  self.copier endon("death");
   self waittill("trigger_enter");
 }
 
-_id_6F8C() {
+photo_copier() {
   level endon("game_ended");
-  _id_6F8E(self);
+  photo_copier_init(self);
 
-  if(!isDefined(self._id_2660)) {
+  if(!isDefined(self.copier)) {
     return;
   }
-  self._id_2660 endon("FX_State_Change0");
-  thread _id_6F91();
+  self.copier endon("FX_State_Change0");
+  thread photo_copier_stop();
 
   for(;;) {
-    _id_A724();
+    waittill_copier_copies();
     self playSound("mach_copier_run");
 
-    if(isDefined(self._id_2664)) {
-      _id_7D2E(self);
-      thread _id_6F8D();
-      thread _id_6F8F();
+    if(isDefined(self.copy_bar)) {
+      reset_copier(self);
+      thread photo_copier_copy_bar_goes();
+      thread photo_copier_light_on();
     }
 
     wait 3;
   }
 }
 
-_id_6F90() {
+photo_copier_no_light() {
   level endon("game_ended");
   self endon("death");
 
   if(common_scripts\utility::get_template_level() == "hamburg") {
     return;
   }
-  self._id_2660 = _id_4290(self);
+  self.copier = get_photo_copier(self);
 
-  if(!isDefined(self._id_2660)) {
+  if(!isDefined(self.copier)) {
     return;
   }
-  self._id_2660 endon("FX_State_Change0");
+  self.copier endon("FX_State_Change0");
 
   for(;;) {
-    _id_A724();
+    waittill_copier_copies();
     self playSound("mach_copier_run");
     wait 3;
   }
 }
 
-_id_7D2E(var_0) {
-  var_0._id_2664 moveTo(var_0._id_9269, 0.2);
-  var_0._id_5CCE setlightintensity(0);
+reset_copier(var_0) {
+  var_0.copy_bar moveTo(var_0.start_pos, 0.2);
+  var_0.light setlightintensity(0);
 }
 
-_id_6F8D() {
-  self._id_2660 notify("bar_goes");
-  self._id_2660 endon("bar_goes");
-  self._id_2660 endon("FX_State_Change0");
-  self._id_2660 endon("death");
-  var_0 = self._id_2664;
+photo_copier_copy_bar_goes() {
+  self.copier notify("bar_goes");
+  self.copier endon("bar_goes");
+  self.copier endon("FX_State_Change0");
+  self.copier endon("death");
+  var_0 = self.copy_bar;
   wait 2.0;
-  var_0 moveTo(self._id_369A, 1.6);
+  var_0 moveTo(self.end_pos, 1.6);
   wait 1.8;
-  var_0 moveTo(self._id_9269, 1.6);
+  var_0 moveTo(self.start_pos, 1.6);
   wait 1.6;
-  var_1 = self._id_5CCE;
+  var_1 = self.light;
   var_2 = 0.2;
   var_3 = var_2 / 0.05;
 
@@ -1086,12 +1086,12 @@ _id_6F8D() {
   }
 }
 
-_id_6F8F() {
-  self._id_2660 notify("light_on");
-  self._id_2660 endon("light_on");
-  self._id_2660 endon("FX_State_Change0");
-  self._id_2660 endon("death");
-  var_0 = self._id_5CCE;
+photo_copier_light_on() {
+  self.copier notify("light_on");
+  self.copier endon("light_on");
+  self.copier endon("FX_State_Change0");
+  self.copier endon("death");
+  var_0 = self.light;
   var_1 = 0.2;
   var_2 = var_1 / 0.05;
 
@@ -1102,16 +1102,16 @@ _id_6F8F() {
     waitframe();
   }
 
-  _id_6F92(var_0);
+  photo_light_flicker(var_0);
 }
 
-_id_6F91() {
-  self._id_2660 waittill("FX_State_Change0");
-  self._id_2660 endon("death");
-  _id_7D2E(self);
+photo_copier_stop() {
+  self.copier waittill("FX_State_Change0");
+  self.copier endon("death");
+  reset_copier(self);
 }
 
-_id_6F92(var_0) {
+photo_light_flicker(var_0) {
   var_0 setlightintensity(1);
   waitframe();
   var_0 setlightintensity(0);
@@ -1123,7 +1123,7 @@ _id_6F92(var_0) {
   var_0 setlightintensity(1);
 }
 
-_id_3A1E(var_0) {
+fan_blade_rotate(var_0) {
   var_1 = 0;
   var_2 = 20000;
   var_3 = 1.0;
@@ -1176,27 +1176,27 @@ _id_3A1E(var_0) {
   }
 }
 
-_id_9DC3(var_0, var_1) {
+triggertouchthink(var_0, var_1) {
   level endon("game_ended");
   self endon("deleted");
-  self._id_37D8 = self getentitynumber();
+  self.entnum = self getentitynumber();
 
   for(;;) {
     self waittill("trigger", var_2);
 
-    if(!isPlayer(var_2) && !isDefined(var_2._id_3BAA)) {
+    if(!isPlayer(var_2) && !isDefined(var_2.finished_spawning)) {
       continue;
     }
     if(!isalive(var_2)) {
       continue;
     }
-    if(isDefined(var_2._id_9AC5) && !isDefined(var_2._id_9AC5[self._id_37D8])) {
-      var_2 thread _id_7477(self, var_0, var_1);
+    if(isDefined(var_2.touchtriggers) && !isDefined(var_2.touchtriggers[self.entnum])) {
+      var_2 thread playertouchtriggerthink(self, var_0, var_1);
     }
   }
 }
 
-_id_7477(var_0, var_1, var_2) {
+playertouchtriggerthink(var_0, var_1, var_2) {
   var_0 endon("deleted");
 
   if(!isPlayer(self)) {
@@ -1209,10 +1209,10 @@ _id_7477(var_0, var_1, var_2) {
     var_3 = "player" + gettime();
   }
 
-  var_0._id_9AC3[var_3] = self;
+  var_0.touchlist[var_3] = self;
 
-  if(isDefined(var_0._id_64DD)) {
-    self._id_64DE++;
+  if(isDefined(var_0.movetracker)) {
+    self.movetrackers++;
   }
 
   var_0 notify("trigger_enter", self);
@@ -1222,17 +1222,17 @@ _id_7477(var_0, var_1, var_2) {
     self thread[[var_1]](var_0);
   }
 
-  self._id_9AC5[var_0._id_37D8] = var_0;
+  self.touchtriggers[var_0.entnum] = var_0;
 
   while(isalive(self) && self istouching(var_0) && (common_scripts\utility::issp() || !level.gameended)) {
     waitframe();
   }
 
   if(isDefined(self)) {
-    self._id_9AC5[var_0._id_37D8] = undefined;
+    self.touchtriggers[var_0.entnum] = undefined;
 
-    if(isDefined(var_0._id_64DD)) {
-      self._id_64DE--;
+    if(isDefined(var_0.movetracker)) {
+      self.movetrackers--;
     }
 
     self notify("trigger_leave", var_0);
@@ -1245,7 +1245,7 @@ _id_7477(var_0, var_1, var_2) {
   if(!common_scripts\utility::issp() && level.gameended) {
     return;
   }
-  var_0._id_9AC3[var_3] = undefined;
+  var_0.touchlist[var_3] = undefined;
   var_0 notify("trigger_leave", self);
 
   if(!_id_0F13(var_0)) {
@@ -1253,8 +1253,8 @@ _id_7477(var_0, var_1, var_2) {
   }
 }
 
-_id_64B5() {
-  if(isDefined(level._id_2F91)) {
+movementtracker() {
+  if(isDefined(level.disablemovementtracker)) {
     return;
   }
   self endon("disconnect");
@@ -1263,136 +1263,136 @@ _id_64B5() {
     self endon("death");
   }
 
-  self._id_64DE = 0;
-  self._id_3040 = 0;
+  self.movetrackers = 0;
+  self.distmoved = 0;
 
   for(;;) {
     self waittill("trigger_enter");
     var_0 = self.origin;
 
-    while(self._id_64DE) {
-      self._id_3040 = distance(var_0, self.origin);
+    while(self.movetrackers) {
+      self.distmoved = distance(var_0, self.origin);
       var_0 = self.origin;
       waitframe();
     }
 
-    self._id_3040 = 0;
+    self.distmoved = 0;
   }
 }
 
 _id_0F13(var_0) {
-  return var_0._id_9AC3.size;
+  return var_0.touchlist.size;
 }
 
-_id_7476(var_0, var_1) {
-  return isDefined(var_0._id_9AC5[var_1._id_37D8]);
+playertouchingtrigger(var_0, var_1) {
+  return isDefined(var_0.touchtriggers[var_1.entnum]);
 }
 
-_id_5409() {
+interactive_tv() {
   var_0 = getEntArray("interactive_tv", "targetname");
 
   if(var_0.size) {
-    common_scripts\utility::_id_6753(["com_tv2_d", "com_tv1_d", "com_tv1", "com_tv2", "com_tv1_testpattern", "com_tv2_testpattern"], ::precachemodel);
-    level._id_1BB0["tv_explode"] = loadfx("vfx/test/test_fx");
+    common_scripts\utility::noself_array_call(["com_tv2_d", "com_tv1_d", "com_tv1", "com_tv2", "com_tv1_testpattern", "com_tv2_testpattern"], ::precachemodel);
+    level.breakables_fx["tv_explode"] = loadfx("vfx/test/test_fx");
   }
 
-  level._id_9FB8 = getEntArray("interactive_tv_light", "targetname");
-  common_scripts\utility::_id_0FB2(getEntArray("interactive_tv", "targetname"), ::_id_9FB9);
+  level.tv_lite_array = getEntArray("interactive_tv_light", "targetname");
+  common_scripts\utility::_id_0FB2(getEntArray("interactive_tv", "targetname"), ::tv_logic);
 }
 
-_id_9FB9() {
+tv_logic() {
   self setCanDamage(1);
-  self._id_29D1 = undefined;
-  self._id_6A14 = undefined;
-  self._id_29D1 = "com_tv2_d";
-  self._id_6A14 = "com_tv2";
-  self._id_6B58 = "com_tv2_testpattern";
+  self.damagemodel = undefined;
+  self.offmodel = undefined;
+  self.damagemodel = "com_tv2_d";
+  self.offmodel = "com_tv2";
+  self.onmodel = "com_tv2_testpattern";
 
   if(issubstr(self.model, "1")) {
-    self._id_6A14 = "com_tv1";
-    self._id_6B58 = "com_tv1_testpattern";
+    self.offmodel = "com_tv1";
+    self.onmodel = "com_tv1_testpattern";
   }
 
   if(isDefined(self.target)) {
-    if(isDefined(level._id_2F49)) {
+    if(isDefined(level.disable_interactive_tv_use_triggers)) {
       var_0 = _getEnt(self.target, "targetname");
 
       if(isDefined(var_0)) {
         var_0 delete();
       }
     } else {
-      self._id_A241 = _getEnt(self.target, "targetname");
-      self._id_A241 useTriggerRequireLookAt();
-      self._id_A241 setCursorHint("HINT_NOICON");
+      self.usetrig = _getEnt(self.target, "targetname");
+      self.usetrig useTriggerRequireLookAt();
+      self.usetrig setCursorHint("HINT_NOICON");
     }
   }
 
-  var_1 = common_scripts\utility::_id_40B0(self.origin, level._id_9FB8, undefined, undefined, 64);
+  var_1 = common_scripts\utility::get_array_of_closest(self.origin, level.tv_lite_array, undefined, undefined, 64);
 
   if(var_1.size) {
-    self._id_5DD4 = var_1[0];
-    level._id_9FB8 = common_scripts\utility::_id_0F93(level._id_9FB8, self._id_5DD4);
-    self._id_5DD6 = self._id_5DD4 getlightintensity();
+    self.lite = var_1[0];
+    level.tv_lite_array = common_scripts\utility::_id_0F93(level.tv_lite_array, self.lite);
+    self.liteintensity = self.lite getlightintensity();
   }
 
-  thread _id_9FB7();
+  thread tv_damage();
 
-  if(isDefined(self._id_A241)) {
-    thread _id_9FBA();
+  if(isDefined(self.usetrig)) {
+    thread tv_off();
   }
 }
 
-_id_9FBA() {
-  self._id_A241 endon("death");
+tv_off() {
+  self.usetrig endon("death");
 
   for(;;) {
     wait 0.2;
-    self._id_A241 waittill("trigger");
+    self.usetrig waittill("trigger");
     self notify("off");
 
-    if(self.model == self._id_6A14) {
-      self setModel(self._id_6B58);
+    if(self.model == self.offmodel) {
+      self setModel(self.onmodel);
 
-      if(isDefined(self._id_5DD4)) {
-        self._id_5DD4 setlightintensity(self._id_5DD6);
+      if(isDefined(self.lite)) {
+        self.lite setlightintensity(self.liteintensity);
       }
 
       continue;
     }
 
-    self setModel(self._id_6A14);
+    self setModel(self.offmodel);
 
-    if(isDefined(self._id_5DD4)) {
-      self._id_5DD4 setlightintensity(0);
+    if(isDefined(self.lite)) {
+      self.lite setlightintensity(0);
     }
   }
 }
 
-_id_9FB7() {
+tv_damage() {
   self waittill("damage", var_0, var_1, var_2, var_3, var_4);
   self notify("off");
 
-  if(isDefined(self._id_A241)) {
-    self._id_A241 notify("death");
+  if(isDefined(self.usetrig)) {
+    self.usetrig notify("death");
   }
 
-  self setModel(self._id_29D1);
+  self setModel(self.damagemodel);
 
-  if(isDefined(self._id_5DD4)) {
-    self._id_5DD4 setlightintensity(0);
+  if(isDefined(self.lite)) {
+    self.lite setlightintensity(0);
   }
 
-  _playFXOnTag(level._id_1BB0["tv_explode"], self, "tag_fx");
+  _playFXOnTag(level.breakables_fx["tv_explode"], self, "tag_fx");
   self playSound("tv_shot_burst");
 
-  if(isDefined(self._id_A241)) {
-    self._id_A241 delete();
+  if(isDefined(self.usetrig)) {
+    self.usetrig delete();
   }
 }
 
-_id_8CA1() {
-  if(!isDefined(self._id_6BF5)) {
-    self._id_6BF5 = 1;
+sliding_door() {
+  if(!isDefined(self.open_time)) {
+    self.open_time = 1;
   }
 
   var_0 = getEntArray(self.target, "script_linkname");
@@ -1404,19 +1404,19 @@ _id_8CA1() {
       continue;
     }
 
-    var_3 _id_3265(self._id_6BF5);
+    var_3 door_init(self.open_time);
   }
 
   var_0 = common_scripts\utility::_id_0F94(var_0, var_1);
 
   for(;;) {
-    if(!isDefined(_func_2D1())) {
+    if(!isDefined(maps/_lights())) {
       wait 1;
       continue;
     }
 
     var_5 = _vehicle_getarray();
-    var_6 = common_scripts\utility::_id_0F73(_func_2D1(), var_5);
+    var_6 = common_scripts\utility::_id_0F73(maps/_lights(), var_5);
     var_7 = 0;
 
     foreach(var_9 in var_6) {
@@ -1430,54 +1430,54 @@ _id_8CA1() {
     }
 
     if(var_7 > 0) {
-      _id_6BE2(var_0);
+      open_all_doors(var_0);
     } else {
       var_11 = 1;
-      thread _id_2430(var_0, var_11);
+      thread close_all_doors(var_0, var_11);
     }
 
     waitframe();
   }
 }
 
-_id_3265(var_0) {
-  self._id_926A = self.origin;
-  self._id_8CA2 = "closed";
+door_init(var_0) {
+  self.start_position = self.origin;
+  self.sliding_door_state = "closed";
   var_1 = _getEnt(self.target, "targetname");
-  self._id_6BF3 = var_1.origin;
-  self._id_6BF8 = distance(self._id_6BF3, self.origin) / var_0;
+  self.open_position = var_1.origin;
+  self.open_velocity = distance(self.open_position, self.origin) / var_0;
 }
 
-_id_6BE2(var_0) {
+open_all_doors(var_0) {
   foreach(var_2 in var_0) {
-    if(var_2._id_8CA2 == "open" || var_2._id_8CA2 == "opening") {
+    if(var_2.sliding_door_state == "open" || var_2.sliding_door_state == "opening") {
       continue;
     }
-    var_2 thread _id_6BE8();
+    var_2 thread open_door();
   }
 }
 
-_id_6BE8() {
-  self._id_8CA2 = "opening";
-  var_0 = distance(self.origin, self._id_6BF3) / self._id_6BF8;
+open_door() {
+  self.sliding_door_state = "opening";
+  var_0 = distance(self.origin, self.open_position) / self.open_velocity;
 
   if(var_0 < 0.05) {
     var_0 = 0.05;
   }
 
-  self moveTo(self._id_6BF3, var_0);
+  self moveTo(self.open_position, var_0);
   self playSound("glass_door_open");
   wait(var_0);
-  self._id_8CA2 = "open";
+  self.sliding_door_state = "open";
 }
 
-_id_2430(var_0, var_1) {
+close_all_doors(var_0, var_1) {
   foreach(var_3 in var_0) {
-    if(var_3._id_8CA2 == "closed" || var_3._id_8CA2 == "opening") {
+    if(var_3.sliding_door_state == "closed" || var_3.sliding_door_state == "opening") {
       continue;
     }
-    var_3 moveTo(var_3._id_926A, var_1);
+    var_3 moveTo(var_3.start_position, var_1);
     self playSound("glass_door_close");
-    var_3._id_8CA2 = "closed";
+    var_3.sliding_door_state = "closed";
   }
 }

@@ -196,17 +196,17 @@ _id_7679(var_0, var_1) {
   self.angles = var_0.angles;
   self setOrigin(var_0.origin);
   maps\mp\mp_zombie_nest_ee_util::_id_8579(var_0.angles);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "tower_objective");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "tower_objective");
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_1, undefined, 1);
 
   for(;;) {
-    if(common_scripts\utility::_id_562E(self._id_2FDA)) {
+    if(common_scripts\utility::_id_562E(self.dismember_crawl)) {
       _id_8605(1);
       break;
     }
 
     var_3 = maps\mp\mp_zombie_nest_ee_util::_id_7AC3(var_2);
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_3, 1.0, "scripted_anim");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_2, var_3, 1.0, "scripted_anim");
   }
 }
 
@@ -237,7 +237,7 @@ _id_9E0E(var_0, var_1, var_2, var_3, var_4) {
     if(common_scripts\utility::_id_562E(var_0[var_6]._id_60D0)) {
       continue;
     }
-    if(!var_0[var_6] _id_0547::_id_4B2C()) {
+    if(!var_0[var_6] _id_0547::has_entered_game()) {
       continue;
     }
     if(!var_0[var_6] _id_5552(var_3)) {
@@ -291,8 +291,8 @@ _id_7C0F(var_0, var_1) {
 
       if(isDefined(var_5) && isalive(var_5)) {
         if(var_5 _id_3E77()) {
-          if(var_5 _id_561C() || common_scripts\utility::_id_562E(var_5._id_2FDA) || !var_5 _id_5552(var_1)) {
-            if(common_scripts\utility::_id_562E(var_5._id_2FDA) || !var_5 _id_5552(var_1)) {
+          if(var_5 _id_561C() || common_scripts\utility::_id_562E(var_5.dismember_crawl) || !var_5 _id_5552(var_1)) {
+            if(common_scripts\utility::_id_562E(var_5.dismember_crawl) || !var_5 _id_5552(var_1)) {
               var_5 _id_8605(1);
             } else if(var_5 _id_561C()) {
               var_5 _id_8605();
@@ -338,7 +338,7 @@ _id_49A2(var_0) {
   self notify("clear_tower_behavior_handled");
   _id_8605();
   waitframe();
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "tower_objective");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "tower_objective");
   self scragentsetscripted(0);
   self scragentsetphysicsmode("gravity");
 }
@@ -454,7 +454,7 @@ _id_425A(var_0, var_1) {
     var_2 = common_scripts\utility::_id_0F73(var_2, var_4);
   }
 
-  var_2 = common_scripts\utility::_id_40B0(var_1, var_2);
+  var_2 = common_scripts\utility::get_array_of_closest(var_1, var_2);
   return var_2;
 }
 
@@ -473,7 +473,7 @@ _id_4082(var_0) {
 }
 
 _id_10CD(var_0, var_1, var_2) {
-  if(!_id_7590(var_0, var_1._id_7588._id_AB4E)) {
+  if(!_id_7590(var_0, var_1.position._id_AB4E)) {
     var_0._id_9B61 = var_1._id_9110;
     var_0._id_60D0 = 1;
     var_1._id_9110._id_65FB = var_0;
@@ -483,7 +483,7 @@ _id_10CD(var_0, var_1, var_2) {
 _id_52DD(var_0) {
   for(var_1 = 0; var_1 < self.size; var_1++) {
     var_2 = var_0._id_38C4["objectiveHealth"];
-    self[var_1]._id_AB4E = common_scripts\utility::_id_46B7(self[var_1].target, "targetname");
+    self[var_1]._id_AB4E = common_scripts\utility::getstructarray(self[var_1].target, "targetname");
 
     for(var_3 = 0; var_3 < self[var_1]._id_AB4E.size; var_3++) {
       self[var_1]._id_AB4E[var_3]._id_38B2 = var_0._id_38C3;
@@ -496,7 +496,7 @@ _id_52DD(var_0) {
 
     if(isDefined(self[var_1]._id_65E8)) {
       foreach(var_5 in self[var_1]._id_65E8) {
-        var_6 = common_scripts\utility::_id_4461(var_5.origin, var_0._id_ABEA._id_1176, 250);
+        var_6 = common_scripts\utility::getclosest(var_5.origin, var_0._id_ABEA._id_1176, 250);
 
         if(isDefined(var_6)) {
           var_5._id_65DE = var_6;
@@ -532,10 +532,10 @@ _id_7591(var_0) {
 
 _id_9E0B(var_0) {
   var_1 = spawnStruct();
-  var_1._id_7588 = var_0;
-  var_1._id_9110 = var_1._id_7588 maps\mp\mp_zombie_nest_ee_util::_id_442B();
+  var_1.position = var_0;
+  var_1._id_9110 = var_1.position maps\mp\mp_zombie_nest_ee_util::_id_442B();
 
-  if(isDefined(var_1._id_7588) && isDefined(var_1._id_9110)) {
+  if(isDefined(var_1.position) && isDefined(var_1._id_9110)) {
     return var_1;
   } else {
     return undefined;

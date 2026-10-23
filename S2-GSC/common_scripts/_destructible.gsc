@@ -6,21 +6,21 @@
 init() {
   level._id_2E2A = 50;
   level._id_2E29 = [];
-  level._id_2928 = 0;
-  level._id_254D = gettime();
+  level.currentcaralarms = 0;
+  level.commonstarttime = gettime();
 
-  if(!isDefined(level._id_3A53)) {
-    level._id_3A53 = 0;
+  if(!isDefined(level.fast_destructible_explode)) {
+    level.fast_destructible_explode = 0;
   }
 
-  if(!isDefined(level._id_3F02)) {
-    level._id_3F02 = [];
+  if(!isDefined(level.func)) {
+    level.func = [];
   }
 
   var_0 = 1;
 
   if(var_0) {
-    _id_3B74();
+    find_destructibles();
   }
 
   var_1 = getEntArray("delete_on_load", "targetname");
@@ -29,15 +29,15 @@ init() {
     var_3 delete();
   }
 
-  _id_51B4();
-  _id_51B5();
+  init_destroyed_count();
+  init_destructible_frame_queue();
 }
 
-_id_2AB9() {}
+debgugprintdestructiblelist() {}
 
-_id_3B74() {
-  if(!isDefined(level._id_2DFA)) {
-    level._id_2DFA = [];
+find_destructibles() {
+  if(!isDefined(level.destructible_functions)) {
+    level.destructible_functions = [];
   }
 
   var_0 = [];
@@ -51,52 +51,52 @@ _id_3B74() {
   var_4 = getEntArray("destructible_vehicle", "targetname");
 
   foreach(var_6 in var_4) {
-    var_6 thread _id_87D3(var_0);
+    var_6 thread setup_destructibles_thread(var_0);
   }
 
   var_8 = getEntArray("destructible_toy", "targetname");
 
   foreach(var_10 in var_8) {
-    var_10 thread _id_87D3(var_0);
+    var_10 thread setup_destructibles_thread(var_0);
   }
 
-  _id_2AB9();
+  debgugprintdestructiblelist();
 }
 
-_id_87D3(var_0) {
-  _id_87D2();
-  _id_87D0(var_0);
+setup_destructibles_thread(var_0) {
+  setup_destructibles();
+  setup_destructible_dots(var_0);
 }
 
-_id_87D0(var_0) {
-  var_1 = self._id_2E25;
+setup_destructible_dots(var_0) {
+  var_1 = self.destuctableinfo;
 
   foreach(var_3 in var_0) {
-    if(isDefined(level._id_0075[var_1]._id_2DF3)) {
+    if(isDefined(level._id_0075[var_1].destructible_dots)) {
       return;
     }
     if(isDefined(var_3.setlookatent) && issubstr(var_3.setlookatent, "destructible_type") && issubstr(var_3.setlookatent, self._id_0075)) {
       if(distancesquared(self.origin, var_3.origin) < 1) {
         var_4 = getEntArray(var_3.target, "targetname");
-        level._id_0075[var_1]._id_2DF3 = [];
+        level._id_0075[var_1].destructible_dots = [];
 
         foreach(var_6 in var_4) {
           var_7 = var_6.setmovespeedscale;
 
-          if(!isDefined(level._id_0075[var_1]._id_2DF3[var_7])) {
-            level._id_0075[var_1]._id_2DF3[var_7] = [];
+          if(!isDefined(level._id_0075[var_1].destructible_dots[var_7])) {
+            level._id_0075[var_1].destructible_dots[var_7] = [];
           }
 
-          var_8 = level._id_0075[var_1]._id_2DF3[var_7].size;
-          level._id_0075[var_1]._id_2DF3[var_7][var_8]["classname"] = var_6.classname;
-          level._id_0075[var_1]._id_2DF3[var_7][var_8]["origin"] = var_6.origin;
-          var_9 = common_scripts\utility::_id_98E7(isDefined(var_6.spawnflags), var_6.spawnflags, 0);
-          level._id_0075[var_1]._id_2DF3[var_7][var_8]["spawnflags"] = var_9;
+          var_8 = level._id_0075[var_1].destructible_dots[var_7].size;
+          level._id_0075[var_1].destructible_dots[var_7][var_8]["classname"] = var_6.classname;
+          level._id_0075[var_1].destructible_dots[var_7][var_8]["origin"] = var_6.origin;
+          var_9 = common_scripts\utility::ter_op(isDefined(var_6.spawnflags), var_6.spawnflags, 0);
+          level._id_0075[var_1].destructible_dots[var_7][var_8]["spawnflags"] = var_9;
 
           switch (var_6.classname) {
             case "trigger_radius":
-              level._id_0075[var_1]._id_2DF3[var_7][var_8]["radius"] = var_6._id_00BD;
-              level._id_0075[var_1]._id_2DF3[var_7][var_8]["height"] = var_6._id_00BD;
+              level._id_0075[var_1].destructible_dots[var_7][var_8]["radius"] = var_6._id_00BD;
+              level._id_0075[var_1].destructible_dots[var_7][var_8]["height"] = var_6._id_00BD;
               break;
             default:
           }
@@ -110,7 +110,7 @@ _id_87D0(var_0) {
   }
 }
 
-_id_2E02(var_0) {
+destructible_getinfoindex(var_0) {
   if(!isDefined(level._id_0075)) {
     return -1;
   }
@@ -128,7 +128,7 @@ _id_2E02(var_0) {
   return -1;
 }
 
-_id_2DA4(var_0, var_1, var_2, var_3, var_4, var_5) {
+dest_cover(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_1)) {
     var_1 = 0;
   }
@@ -141,117 +141,117 @@ _id_2DA4(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_3 = 150;
   }
 
-  _id_2DED(var_0, "tag_origin", 1, undefined, 32, "no_melee");
+  destructible_create(var_0, "tag_origin", 1, undefined, 32, "no_melee");
 
   if(isDefined(var_4)) {
-    _id_2E1C(undefined, var_4, undefined, undefined, 32, "no_melee");
+    destructible_state(undefined, var_4, undefined, undefined, 32, "no_melee");
   }
 
   for(var_6 = 0; var_6 < var_1; var_6++) {
     var_7 = "fx_joint_" + var_6;
-    _id_2E0F(var_7, undefined, var_3, undefined, undefined, "no_melee", 1);
-    _id_2DFB(var_7, var_2);
+    destructible_part(var_7, undefined, var_3, undefined, undefined, "no_melee", 1);
+    destructible_fx(var_7, var_2);
 
     if(isDefined(var_5)) {
-      _id_2E15(var_5);
+      destructible_sound(var_5);
     }
 
-    _id_2E1C(undefined);
+    destructible_state(undefined);
   }
 }
 
-_id_2E03(var_0) {
-  var_1 = _id_2E02(var_0);
+destructible_gettype(var_0) {
+  var_1 = destructible_getinfoindex(var_0);
 
   if(var_1 >= 0) {
     return var_1;
   }
 
   if(issubstr(var_0, "dest_cover")) {
-    _id_2DA4(self._id_0075, self.atdangerousnode, self.isingoal, self.setruntopos, self.nearclaimnodeandangle, self.nearnode);
-    var_1 = _id_2E02(var_0);
+    dest_cover(self._id_0075, self.atdangerousnode, self.isingoal, self.setruntopos, self.nearclaimnodeandangle, self.nearnode);
+    var_1 = destructible_getinfoindex(var_0);
     return var_1;
   }
 
-  if(!isDefined(level._id_2DFA[var_0])) {
+  if(!isDefined(level.destructible_functions[var_0])) {
     return -1;
   }
 
-  [[level._id_2DFA[var_0]]]();
-  var_1 = _id_2E02(var_0);
+  [[level.destructible_functions[var_0]]]();
+  var_1 = destructible_getinfoindex(var_0);
   return var_1;
 }
 
-_id_87D2() {
+setup_destructibles() {
   var_0 = undefined;
-  self._id_6297 = 0;
+  self.modeldummyon = 0;
   _id_0914();
-  self._id_2E25 = _id_2E03(self._id_0075);
+  self.destuctableinfo = destructible_gettype(self._id_0075);
 
-  if(self._id_2E25 < 0) {
+  if(self.destuctableinfo < 0) {
     return;
   }
-  _id_7643();
+  precache_destructibles();
   _id_091C();
 
-  if(isDefined(level._id_2E1E) && isDefined(level._id_2E1E[self._id_0075])) {
-    common_scripts\utility::_id_3C9F(level._id_2E1E[self._id_0075] + "_loaded");
+  if(isDefined(level.destructible_transient) && isDefined(level.destructible_transient[self._id_0075])) {
+    common_scripts\utility::flag_wait(level.destructible_transient[self._id_0075] + "_loaded");
   }
 
-  if(isDefined(level._id_0075[self._id_2E25]._id_1145)) {
-    foreach(var_3 in level._id_0075[self._id_2E25]._id_1145) {
-      if(isDefined(var_3._id_95A6)) {
-        self attach(var_3.model, var_3._id_95A6);
+  if(isDefined(level._id_0075[self.destuctableinfo].attachedmodels)) {
+    foreach(var_3 in level._id_0075[self.destuctableinfo].attachedmodels) {
+      if(isDefined(var_3.tag)) {
+        self attach(var_3.model, var_3.tag);
       } else {
         self attach(var_3.model);
       }
 
-      if(self._id_6297) {
-        if(isDefined(var_3._id_95A6)) {
-          self._id_6296 attach(var_3.model, var_3._id_95A6);
+      if(self.modeldummyon) {
+        if(isDefined(var_3.tag)) {
+          self.modeldummy attach(var_3.model, var_3.tag);
           continue;
         }
 
-        self._id_6296 attach(var_3.model);
+        self.modeldummy attach(var_3.model);
       }
     }
   }
 
-  if(isDefined(level._id_0075[self._id_2E25]._id_6E9F)) {
-    self._id_2E10 = [];
+  if(isDefined(level._id_0075[self.destuctableinfo].parts)) {
+    self.destructible_parts = [];
 
-    for(var_5 = 0; var_5 < level._id_0075[self._id_2E25]._id_6E9F.size; var_5++) {
-      self._id_2E10[var_5] = spawnStruct();
-      self._id_2E10[var_5].v["currentState"] = 0;
+    for(var_5 = 0; var_5 < level._id_0075[self.destuctableinfo].parts.size; var_5++) {
+      self.destructible_parts[var_5] = spawnStruct();
+      self.destructible_parts[var_5].v["currentState"] = 0;
 
-      if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_5][0].v["health"])) {
-        self._id_2E10[var_5].v["health"] = level._id_0075[self._id_2E25]._id_6E9F[var_5][0].v["health"];
+      if(isDefined(level._id_0075[self.destuctableinfo].parts[var_5][0].v["health"])) {
+        self.destructible_parts[var_5].v["health"] = level._id_0075[self.destuctableinfo].parts[var_5][0].v["health"];
       }
 
-      if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_5][0].v["random_dynamic_attachment_1"])) {
-        var_6 = randomint(level._id_0075[self._id_2E25]._id_6E9F[var_5][0].v["random_dynamic_attachment_1"].size);
-        var_7 = level._id_0075[self._id_2E25]._id_6E9F[var_5][0].v["random_dynamic_attachment_tag"][var_6];
-        var_8 = level._id_0075[self._id_2E25]._id_6E9F[var_5][0].v["random_dynamic_attachment_1"][var_6];
-        var_9 = level._id_0075[self._id_2E25]._id_6E9F[var_5][0].v["random_dynamic_attachment_2"][var_6];
-        var_10 = level._id_0075[self._id_2E25]._id_6E9F[var_5][0].v["clipToRemove"][var_6];
-        thread _id_30DF(var_7, var_8, var_9, var_10);
+      if(isDefined(level._id_0075[self.destuctableinfo].parts[var_5][0].v["random_dynamic_attachment_1"])) {
+        var_6 = randomint(level._id_0075[self.destuctableinfo].parts[var_5][0].v["random_dynamic_attachment_1"].size);
+        var_7 = level._id_0075[self.destuctableinfo].parts[var_5][0].v["random_dynamic_attachment_tag"][var_6];
+        var_8 = level._id_0075[self.destuctableinfo].parts[var_5][0].v["random_dynamic_attachment_1"][var_6];
+        var_9 = level._id_0075[self.destuctableinfo].parts[var_5][0].v["random_dynamic_attachment_2"][var_6];
+        var_10 = level._id_0075[self.destuctableinfo].parts[var_5][0].v["clipToRemove"][var_6];
+        thread do_random_dynamic_attachment(var_7, var_8, var_9, var_10);
       }
 
       if(var_5 == 0) {
         continue;
       }
-      var_11 = level._id_0075[self._id_2E25]._id_6E9F[var_5][0].v["modelName"];
-      var_12 = level._id_0075[self._id_2E25]._id_6E9F[var_5][0].v["tagName"];
+      var_11 = level._id_0075[self.destuctableinfo].parts[var_5][0].v["modelName"];
+      var_12 = level._id_0075[self.destuctableinfo].parts[var_5][0].v["tagName"];
 
-      for(var_13 = 1; isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_5][var_13]); var_13++) {
-        var_14 = level._id_0075[self._id_2E25]._id_6E9F[var_5][var_13].v["tagName"];
-        var_15 = level._id_0075[self._id_2E25]._id_6E9F[var_5][var_13].v["modelName"];
+      for(var_13 = 1; isDefined(level._id_0075[self.destuctableinfo].parts[var_5][var_13]); var_13++) {
+        var_14 = level._id_0075[self.destuctableinfo].parts[var_5][var_13].v["tagName"];
+        var_15 = level._id_0075[self.destuctableinfo].parts[var_5][var_13].v["modelName"];
 
         if(isDefined(var_14) && var_14 != var_12) {
-          _id_4D03(var_14);
+          hideapart(var_14);
 
-          if(self._id_6297) {
-            self._id_6296 _id_4D03(var_14);
+          if(self.modeldummyon) {
+            self.modeldummy hideapart(var_14);
           }
         }
       }
@@ -259,7 +259,7 @@ _id_87D2() {
   }
 
   if(isDefined(self.target)) {
-    thread _id_2E05();
+    thread destructible_handles_collision_brushes();
   }
 
   if(self._id_003B != "script_vehicle") {
@@ -267,19 +267,19 @@ _id_87D2() {
   }
 
   if(common_scripts\utility::issp()) {
-    thread _id_258B();
+    thread connecttraverses();
   }
 
-  thread _id_2E1D();
+  thread destructible_think();
 
   if(issubstr(self._id_0075, "dest_cover")) {
-    thread _id_2E23();
+    thread destructiblecoverwatcher();
   }
 
-  thread _id_2DFF();
+  thread destructible_fx_spawnimmediate();
 }
 
-_id_2DED(var_0, var_1, var_2, var_3, var_4, var_5) {
+destructible_create(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(level._id_0075)) {
     level._id_0075 = [];
   }
@@ -287,43 +287,43 @@ _id_2DED(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = level._id_0075.size;
   level._id_0075[var_6] = spawnStruct();
   level._id_0075[var_6].v["type"] = var_0;
-  level._id_0075[var_6]._id_6E9F = [];
-  level._id_0075[var_6]._id_6E9F[0][0] = spawnStruct();
-  level._id_0075[var_6]._id_6E9F[0][0].v["modelName"] = self.model;
-  level._id_0075[var_6]._id_6E9F[0][0].v["tagName"] = var_1;
-  level._id_0075[var_6]._id_6E9F[0][0].v["health"] = var_2;
-  level._id_0075[var_6]._id_6E9F[0][0].v["validAttackers"] = var_3;
-  level._id_0075[var_6]._id_6E9F[0][0].v["validDamageZone"] = var_4;
-  level._id_0075[var_6]._id_6E9F[0][0].v["validDamageCause"] = var_5;
-  level._id_0075[var_6]._id_6E9F[0][0].v["godModeAllowed"] = 1;
-  level._id_0075[var_6]._id_6E9F[0][0].v["rotateTo"] = self.angles;
-  level._id_0075[var_6]._id_6E9F[0][0].v["vehicle_exclude_anim"] = 0;
+  level._id_0075[var_6].parts = [];
+  level._id_0075[var_6].parts[0][0] = spawnStruct();
+  level._id_0075[var_6].parts[0][0].v["modelName"] = self.model;
+  level._id_0075[var_6].parts[0][0].v["tagName"] = var_1;
+  level._id_0075[var_6].parts[0][0].v["health"] = var_2;
+  level._id_0075[var_6].parts[0][0].v["validAttackers"] = var_3;
+  level._id_0075[var_6].parts[0][0].v["validDamageZone"] = var_4;
+  level._id_0075[var_6].parts[0][0].v["validDamageCause"] = var_5;
+  level._id_0075[var_6].parts[0][0].v["godModeAllowed"] = 1;
+  level._id_0075[var_6].parts[0][0].v["rotateTo"] = self.angles;
+  level._id_0075[var_6].parts[0][0].v["vehicle_exclude_anim"] = 0;
 }
 
-_id_2E0F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+destructible_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_10 = level._id_0075.size - 1;
-  var_11 = level._id_0075[var_10]._id_6E9F.size;
+  var_11 = level._id_0075[var_10].parts.size;
   var_12 = 0;
-  _id_2E08(var_11, var_12, var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, undefined, var_9);
+  destructible_info(var_11, var_12, var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, undefined, var_9);
 }
 
-_id_2E1C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+destructible_state(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = level._id_0075.size - 1;
-  var_9 = level._id_0075[var_8]._id_6E9F.size - 1;
-  var_10 = level._id_0075[var_8]._id_6E9F[var_9].size;
+  var_9 = level._id_0075[var_8].parts.size - 1;
+  var_10 = level._id_0075[var_8].parts[var_9].size;
 
   if(!isDefined(var_0) && var_9 == 0) {
-    var_0 = level._id_0075[var_8]._id_6E9F[var_9][0].v["tagName"];
+    var_0 = level._id_0075[var_8].parts[var_9][0].v["tagName"];
   }
 
-  _id_2E08(var_9, var_10, var_0, var_1, var_2, var_3, var_4, var_5, undefined, undefined, var_6, var_7);
+  destructible_info(var_9, var_10, var_0, var_1, var_2, var_3, var_4, var_5, undefined, undefined, var_6, var_7);
 }
 
-_id_2DFD(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  _id_2DFB(var_0, var_1, var_2, var_3, var_4, var_5, 1, var_6);
+destructible_fx_spawn_immediate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  destructible_fx(var_0, var_1, var_2, var_3, var_4, var_5, 1, var_6);
 }
 
-_id_2DFB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+destructible_fx(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(!isDefined(var_2)) {
     var_2 = 1;
   }
@@ -345,187 +345,187 @@ _id_2DFB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 
   var_8 = level._id_0075.size - 1;
-  var_9 = level._id_0075[var_8]._id_6E9F.size - 1;
-  var_10 = level._id_0075[var_8]._id_6E9F[var_9].size - 1;
+  var_9 = level._id_0075[var_8].parts.size - 1;
+  var_10 = level._id_0075[var_8].parts[var_9].size - 1;
   var_11 = 0;
 
-  if(isDefined(level._id_0075[var_8]._id_6E9F[var_9][var_10].v["fx_filename"])) {
-    if(isDefined(level._id_0075[var_8]._id_6E9F[var_9][var_10].v["fx_filename"][var_4])) {
-      var_11 = level._id_0075[var_8]._id_6E9F[var_9][var_10].v["fx_filename"][var_4].size;
+  if(isDefined(level._id_0075[var_8].parts[var_9][var_10].v["fx_filename"])) {
+    if(isDefined(level._id_0075[var_8].parts[var_9][var_10].v["fx_filename"][var_4])) {
+      var_11 = level._id_0075[var_8].parts[var_9][var_10].v["fx_filename"][var_4].size;
     }
   }
 
   if(isDefined(var_3)) {
-    level._id_0075[var_8]._id_6E9F[var_9][var_10].v["fx_valid_damagetype"][var_4][var_11] = var_3;
+    level._id_0075[var_8].parts[var_9][var_10].v["fx_valid_damagetype"][var_4][var_11] = var_3;
   }
 
-  level._id_0075[var_8]._id_6E9F[var_9][var_10].v["fx_filename"][var_4][var_11] = var_1;
-  level._id_0075[var_8]._id_6E9F[var_9][var_10].v["fx_tag"][var_4][var_11] = var_0;
-  level._id_0075[var_8]._id_6E9F[var_9][var_10].v["fx_useTagAngles"][var_4][var_11] = var_2;
-  level._id_0075[var_8]._id_6E9F[var_9][var_10].v["fx_cost"][var_4][var_11] = var_5;
-  level._id_0075[var_8]._id_6E9F[var_9][var_10].v["spawn_immediate"][var_4][var_11] = var_6;
-  level._id_0075[var_8]._id_6E9F[var_9][var_10].v["state_change_kill"][var_4][var_11] = var_7;
+  level._id_0075[var_8].parts[var_9][var_10].v["fx_filename"][var_4][var_11] = var_1;
+  level._id_0075[var_8].parts[var_9][var_10].v["fx_tag"][var_4][var_11] = var_0;
+  level._id_0075[var_8].parts[var_9][var_10].v["fx_useTagAngles"][var_4][var_11] = var_2;
+  level._id_0075[var_8].parts[var_9][var_10].v["fx_cost"][var_4][var_11] = var_5;
+  level._id_0075[var_8].parts[var_9][var_10].v["spawn_immediate"][var_4][var_11] = var_6;
+  level._id_0075[var_8].parts[var_9][var_10].v["state_change_kill"][var_4][var_11] = var_7;
 }
 
-_id_2DEE(var_0) {
+destructible_createdot_predefined(var_0) {
   var_1 = level._id_0075.size - 1;
-  var_2 = level._id_0075[var_1]._id_6E9F.size - 1;
-  var_3 = level._id_0075[var_1]._id_6E9F[var_2].size - 1;
+  var_2 = level._id_0075[var_1].parts.size - 1;
+  var_3 = level._id_0075[var_1].parts[var_2].size - 1;
 
-  if(!isDefined(level._id_0075[var_1]._id_6E9F[var_2][var_3].v["dot"])) {
-    level._id_0075[var_1]._id_6E9F[var_2][var_3].v["dot"] = [];
+  if(!isDefined(level._id_0075[var_1].parts[var_2][var_3].v["dot"])) {
+    level._id_0075[var_1].parts[var_2][var_3].v["dot"] = [];
   }
 
-  var_4 = level._id_0075[var_1]._id_6E9F[var_2][var_3].v["dot"].size;
-  var_5 = _id_27E2();
+  var_4 = level._id_0075[var_1].parts[var_2][var_3].v["dot"].size;
+  var_5 = createdot();
   var_5.type = "predefined";
   var_5._id_00D4 = var_0;
-  level._id_0075[var_1]._id_6E9F[var_2][var_3].v["dot"][var_4] = var_5;
+  level._id_0075[var_1].parts[var_2][var_3].v["dot"][var_4] = var_5;
 }
 
-_id_2DEF(var_0, var_1, var_2, var_3) {
+destructible_createdot_radius(var_0, var_1, var_2, var_3) {
   var_4 = level._id_0075.size - 1;
-  var_5 = level._id_0075[var_4]._id_6E9F.size - 1;
-  var_6 = level._id_0075[var_4]._id_6E9F[var_5].size - 1;
+  var_5 = level._id_0075[var_4].parts.size - 1;
+  var_6 = level._id_0075[var_4].parts[var_5].size - 1;
 
-  if(!isDefined(level._id_0075[var_4]._id_6E9F[var_5][var_6].v["dot"])) {
-    level._id_0075[var_4]._id_6E9F[var_5][var_6].v["dot"] = [];
+  if(!isDefined(level._id_0075[var_4].parts[var_5][var_6].v["dot"])) {
+    level._id_0075[var_4].parts[var_5][var_6].v["dot"] = [];
   }
 
-  var_7 = level._id_0075[var_4]._id_6E9F[var_5][var_6].v["dot"].size;
-  var_8 = _id_27E3((0, 0, 0), var_1, var_2, var_3);
-  var_8._id_95A6 = var_0;
-  level._id_0075[var_4]._id_6E9F[var_5][var_6].v["dot"][var_7] = var_8;
+  var_7 = level._id_0075[var_4].parts[var_5][var_6].v["dot"].size;
+  var_8 = createdot_radius((0, 0, 0), var_1, var_2, var_3);
+  var_8.tag = var_0;
+  level._id_0075[var_4].parts[var_5][var_6].v["dot"][var_7] = var_8;
 }
 
-_id_2E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+destructible_setdot_ontick(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = level._id_0075.size - 1;
-  var_9 = level._id_0075[var_8]._id_6E9F.size - 1;
-  var_10 = level._id_0075[var_8]._id_6E9F[var_9].size - 1;
-  var_11 = level._id_0075[var_8]._id_6E9F[var_9][var_10].v["dot"].size - 1;
-  var_12 = level._id_0075[var_8]._id_6E9F[var_9][var_10].v["dot"][var_11];
-  var_12 _id_866A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);
-  _id_52AF(var_6);
+  var_9 = level._id_0075[var_8].parts.size - 1;
+  var_10 = level._id_0075[var_8].parts[var_9].size - 1;
+  var_11 = level._id_0075[var_8].parts[var_9][var_10].v["dot"].size - 1;
+  var_12 = level._id_0075[var_8].parts[var_9][var_10].v["dot"][var_11];
+  var_12 setdot_ontick(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);
+  initdot(var_6);
 }
 
-_id_2E14(var_0, var_1, var_2) {
+destructible_setdot_ontickfunc(var_0, var_1, var_2) {
   var_3 = level._id_0075.size - 1;
-  var_4 = level._id_0075[var_3]._id_6E9F.size - 1;
-  var_5 = level._id_0075[var_3]._id_6E9F[var_4].size - 1;
-  var_6 = level._id_0075[var_3]._id_6E9F[var_4][var_5].v["dot"].size - 1;
-  var_7 = level._id_0075[var_3]._id_6E9F[var_4][var_5].v["dot"][var_6];
-  var_8 = var_7._id_99C1.size;
-  var_7._id_99C1[var_8]._id_6B05 = var_0;
-  var_7._id_99C1[var_8]._id_6B33 = var_1;
-  var_7._id_99C1[var_8]._id_6AE6 = var_2;
+  var_4 = level._id_0075[var_3].parts.size - 1;
+  var_5 = level._id_0075[var_3].parts[var_4].size - 1;
+  var_6 = level._id_0075[var_3].parts[var_4][var_5].v["dot"].size - 1;
+  var_7 = level._id_0075[var_3].parts[var_4][var_5].v["dot"][var_6];
+  var_8 = var_7.ticks.size;
+  var_7.ticks[var_8].onenterfunc = var_0;
+  var_7.ticks[var_8].onexitfunc = var_1;
+  var_7.ticks[var_8].ondeathfunc = var_2;
 }
 
-_id_2DE8(var_0, var_1) {
+destructible_builddot_ontick(var_0, var_1) {
   var_2 = level._id_0075.size - 1;
-  var_3 = level._id_0075[var_2]._id_6E9F.size - 1;
-  var_4 = level._id_0075[var_2]._id_6E9F[var_3].size - 1;
-  var_5 = level._id_0075[var_2]._id_6E9F[var_3][var_4].v["dot"].size - 1;
-  var_6 = level._id_0075[var_2]._id_6E9F[var_3][var_4].v["dot"][var_5];
-  var_6 _id_1D45(var_0, var_1);
+  var_3 = level._id_0075[var_2].parts.size - 1;
+  var_4 = level._id_0075[var_2].parts[var_3].size - 1;
+  var_5 = level._id_0075[var_2].parts[var_3][var_4].v["dot"].size - 1;
+  var_6 = level._id_0075[var_2].parts[var_3][var_4].v["dot"][var_5];
+  var_6 builddot_ontick(var_0, var_1);
 }
 
-_id_2DE9(var_0) {
+destructible_builddot_startloop(var_0) {
   var_1 = level._id_0075.size - 1;
-  var_2 = level._id_0075[var_1]._id_6E9F.size - 1;
-  var_3 = level._id_0075[var_1]._id_6E9F[var_2].size - 1;
-  var_4 = level._id_0075[var_1]._id_6E9F[var_2][var_3].v["dot"].size - 1;
-  var_5 = level._id_0075[var_1]._id_6E9F[var_2][var_3].v["dot"][var_4];
-  var_5 _id_1D46(var_0);
+  var_2 = level._id_0075[var_1].parts.size - 1;
+  var_3 = level._id_0075[var_1].parts[var_2].size - 1;
+  var_4 = level._id_0075[var_1].parts[var_2][var_3].v["dot"].size - 1;
+  var_5 = level._id_0075[var_1].parts[var_2][var_3].v["dot"][var_4];
+  var_5 builddot_startloop(var_0);
 }
 
-_id_2DE7(var_0, var_1, var_2, var_3, var_4, var_5) {
+destructible_builddot_damage(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = level._id_0075.size - 1;
-  var_7 = level._id_0075[var_6]._id_6E9F.size - 1;
-  var_8 = level._id_0075[var_6]._id_6E9F[var_7].size - 1;
-  var_9 = level._id_0075[var_6]._id_6E9F[var_7][var_8].v["dot"].size - 1;
-  var_10 = level._id_0075[var_6]._id_6E9F[var_7][var_8].v["dot"][var_9];
-  var_10 _id_1D44(var_0, var_1, var_2, var_3, var_4, var_5);
+  var_7 = level._id_0075[var_6].parts.size - 1;
+  var_8 = level._id_0075[var_6].parts[var_7].size - 1;
+  var_9 = level._id_0075[var_6].parts[var_7][var_8].v["dot"].size - 1;
+  var_10 = level._id_0075[var_6].parts[var_7][var_8].v["dot"][var_9];
+  var_10 builddot_damage(var_0, var_1, var_2, var_3, var_4, var_5);
 }
 
-_id_2DEA(var_0) {
+destructible_builddot_wait(var_0) {
   var_1 = level._id_0075.size - 1;
-  var_2 = level._id_0075[var_1]._id_6E9F.size - 1;
-  var_3 = level._id_0075[var_1]._id_6E9F[var_2].size - 1;
-  var_4 = level._id_0075[var_1]._id_6E9F[var_2][var_3].v["dot"].size - 1;
-  var_5 = level._id_0075[var_1]._id_6E9F[var_2][var_3].v["dot"][var_4];
-  var_5 _id_1D47(var_0);
+  var_2 = level._id_0075[var_1].parts.size - 1;
+  var_3 = level._id_0075[var_1].parts[var_2].size - 1;
+  var_4 = level._id_0075[var_1].parts[var_2][var_3].v["dot"].size - 1;
+  var_5 = level._id_0075[var_1].parts[var_2][var_3].v["dot"][var_4];
+  var_5 builddot_wait(var_0);
 }
 
-_id_2E0A(var_0, var_1, var_2, var_3) {
+destructible_loopfx(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {
     var_3 = 0;
   }
 
   var_4 = level._id_0075.size - 1;
-  var_5 = level._id_0075[var_4]._id_6E9F.size - 1;
-  var_6 = level._id_0075[var_4]._id_6E9F[var_5].size - 1;
+  var_5 = level._id_0075[var_4].parts.size - 1;
+  var_6 = level._id_0075[var_4].parts[var_5].size - 1;
   var_7 = 0;
 
-  if(isDefined(level._id_0075[var_4]._id_6E9F[var_5][var_6].v["loopfx_filename"])) {
-    var_7 = level._id_0075[var_4]._id_6E9F[var_5][var_6].v["loopfx_filename"].size;
+  if(isDefined(level._id_0075[var_4].parts[var_5][var_6].v["loopfx_filename"])) {
+    var_7 = level._id_0075[var_4].parts[var_5][var_6].v["loopfx_filename"].size;
   }
 
-  level._id_0075[var_4]._id_6E9F[var_5][var_6].v["loopfx_filename"][var_7] = var_1;
-  level._id_0075[var_4]._id_6E9F[var_5][var_6].v["loopfx_tag"][var_7] = var_0;
-  level._id_0075[var_4]._id_6E9F[var_5][var_6].v["loopfx_rate"][var_7] = var_2;
-  level._id_0075[var_4]._id_6E9F[var_5][var_6].v["loopfx_cost"][var_7] = var_3;
+  level._id_0075[var_4].parts[var_5][var_6].v["loopfx_filename"][var_7] = var_1;
+  level._id_0075[var_4].parts[var_5][var_6].v["loopfx_tag"][var_7] = var_0;
+  level._id_0075[var_4].parts[var_5][var_6].v["loopfx_rate"][var_7] = var_2;
+  level._id_0075[var_4].parts[var_5][var_6].v["loopfx_cost"][var_7] = var_3;
 }
 
-_id_2E07(var_0, var_1, var_2, var_3) {
+destructible_healthdrain(var_0, var_1, var_2, var_3) {
   var_4 = level._id_0075.size - 1;
-  var_5 = level._id_0075[var_4]._id_6E9F.size - 1;
-  var_6 = level._id_0075[var_4]._id_6E9F[var_5].size - 1;
-  level._id_0075[var_4]._id_6E9F[var_5][var_6].v["healthdrain_amount"] = var_0;
-  level._id_0075[var_4]._id_6E9F[var_5][var_6].v["healthdrain_interval"] = var_1;
-  level._id_0075[var_4]._id_6E9F[var_5][var_6].v["badplace_radius"] = var_2;
-  level._id_0075[var_4]._id_6E9F[var_5][var_6].v["badplace_team"] = var_3;
+  var_5 = level._id_0075[var_4].parts.size - 1;
+  var_6 = level._id_0075[var_4].parts[var_5].size - 1;
+  level._id_0075[var_4].parts[var_5][var_6].v["healthdrain_amount"] = var_0;
+  level._id_0075[var_4].parts[var_5][var_6].v["healthdrain_interval"] = var_1;
+  level._id_0075[var_4].parts[var_5][var_6].v["badplace_radius"] = var_2;
+  level._id_0075[var_4].parts[var_5][var_6].v["badplace_team"] = var_3;
 }
 
-_id_2E15(var_0, var_1, var_2) {
+destructible_sound(var_0, var_1, var_2) {
   var_3 = level._id_0075.size - 1;
-  var_4 = level._id_0075[var_3]._id_6E9F.size - 1;
-  var_5 = level._id_0075[var_3]._id_6E9F[var_4].size - 1;
+  var_4 = level._id_0075[var_3].parts.size - 1;
+  var_5 = level._id_0075[var_3].parts[var_4].size - 1;
 
   if(!isDefined(var_2)) {
     var_2 = 0;
   }
 
-  if(!isDefined(level._id_0075[var_3]._id_6E9F[var_4][var_5].v["sound"])) {
-    level._id_0075[var_3]._id_6E9F[var_4][var_5].v["sound"] = [];
-    level._id_0075[var_3]._id_6E9F[var_4][var_5].v["soundCause"] = [];
+  if(!isDefined(level._id_0075[var_3].parts[var_4][var_5].v["sound"])) {
+    level._id_0075[var_3].parts[var_4][var_5].v["sound"] = [];
+    level._id_0075[var_3].parts[var_4][var_5].v["soundCause"] = [];
   }
 
-  if(!isDefined(level._id_0075[var_3]._id_6E9F[var_4][var_5].v["sound"][var_2])) {
-    level._id_0075[var_3]._id_6E9F[var_4][var_5].v["sound"][var_2] = [];
-    level._id_0075[var_3]._id_6E9F[var_4][var_5].v["soundCause"][var_2] = [];
+  if(!isDefined(level._id_0075[var_3].parts[var_4][var_5].v["sound"][var_2])) {
+    level._id_0075[var_3].parts[var_4][var_5].v["sound"][var_2] = [];
+    level._id_0075[var_3].parts[var_4][var_5].v["soundCause"][var_2] = [];
   }
 
-  var_6 = level._id_0075[var_3]._id_6E9F[var_4][var_5].v["sound"][var_2].size;
-  level._id_0075[var_3]._id_6E9F[var_4][var_5].v["sound"][var_2][var_6] = var_0;
-  level._id_0075[var_3]._id_6E9F[var_4][var_5].v["soundCause"][var_2][var_6] = var_1;
+  var_6 = level._id_0075[var_3].parts[var_4][var_5].v["sound"][var_2].size;
+  level._id_0075[var_3].parts[var_4][var_5].v["sound"][var_2][var_6] = var_0;
+  level._id_0075[var_3].parts[var_4][var_5].v["soundCause"][var_2][var_6] = var_1;
 }
 
-_id_2E0B(var_0, var_1) {
+destructible_loopsound(var_0, var_1) {
   var_2 = level._id_0075.size - 1;
-  var_3 = level._id_0075[var_2]._id_6E9F.size - 1;
-  var_4 = level._id_0075[var_2]._id_6E9F[var_3].size - 1;
+  var_3 = level._id_0075[var_2].parts.size - 1;
+  var_4 = level._id_0075[var_2].parts[var_3].size - 1;
 
-  if(!isDefined(level._id_0075[var_2]._id_6E9F[var_3][var_4].v["loopsound"])) {
-    level._id_0075[var_2]._id_6E9F[var_3][var_4].v["loopsound"] = [];
-    level._id_0075[var_2]._id_6E9F[var_3][var_4].v["loopsoundCause"] = [];
+  if(!isDefined(level._id_0075[var_2].parts[var_3][var_4].v["loopsound"])) {
+    level._id_0075[var_2].parts[var_3][var_4].v["loopsound"] = [];
+    level._id_0075[var_2].parts[var_3][var_4].v["loopsoundCause"] = [];
   }
 
-  var_5 = level._id_0075[var_2]._id_6E9F[var_3][var_4].v["loopsound"].size;
-  level._id_0075[var_2]._id_6E9F[var_3][var_4].v["loopsound"][var_5] = var_0;
-  level._id_0075[var_2]._id_6E9F[var_3][var_4].v["loopsoundCause"][var_5] = var_1;
+  var_5 = level._id_0075[var_2].parts[var_3][var_4].v["loopsound"].size;
+  level._id_0075[var_2].parts[var_3][var_4].v["loopsound"][var_5] = var_0;
+  level._id_0075[var_2].parts[var_3][var_4].v["loopsoundCause"][var_5] = var_1;
 }
 
-_id_2DE3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+destructible_anim(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(!isDefined(var_3)) {
     var_3 = 0;
   }
@@ -547,7 +547,7 @@ _id_2DE3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   _id_0901("animation", var_9);
 }
 
-_id_2E1A(var_0) {
+destructible_spotlight(var_0) {
   var_1 = [];
   var_1["spotlight_tag"] = var_0;
   var_1["spotlight_fx"] = "spotlight_fx";
@@ -564,212 +564,212 @@ _id_093A(var_0, var_1) {
 
 _id_093B(var_0) {
   var_1 = level._id_0075.size - 1;
-  var_2 = level._id_0075[var_1]._id_6E9F.size - 1;
-  var_3 = level._id_0075[var_1]._id_6E9F[var_2].size - 1;
+  var_2 = level._id_0075[var_1].parts.size - 1;
+  var_3 = level._id_0075[var_1].parts[var_2].size - 1;
 
   foreach(var_6, var_5 in var_0) {
-    level._id_0075[var_1]._id_6E9F[var_2][var_3].v[var_6] = var_5;
+    level._id_0075[var_1].parts[var_2][var_3].v[var_6] = var_5;
   }
 }
 
 _id_0901(var_0, var_1) {
   var_2 = level._id_0075.size - 1;
-  var_3 = level._id_0075[var_2]._id_6E9F.size - 1;
-  var_4 = level._id_0075[var_2]._id_6E9F[var_3].size - 1;
-  var_5 = level._id_0075[var_2]._id_6E9F[var_3][var_4].v;
+  var_3 = level._id_0075[var_2].parts.size - 1;
+  var_4 = level._id_0075[var_2].parts[var_3].size - 1;
+  var_5 = level._id_0075[var_2].parts[var_3][var_4].v;
 
   if(!isDefined(var_5[var_0])) {
     var_5[var_0] = [];
   }
 
   var_5[var_0][var_5[var_0].size] = var_1;
-  level._id_0075[var_2]._id_6E9F[var_3][var_4].v = var_5;
+  level._id_0075[var_2].parts[var_3][var_4].v = var_5;
 }
 
-_id_2DEB() {
+destructible_car_alarm() {
   var_0 = level._id_0075.size - 1;
-  var_1 = level._id_0075[var_0]._id_6E9F.size - 1;
-  var_2 = level._id_0075[var_0]._id_6E9F[var_1].size - 1;
-  level._id_0075[var_0]._id_6E9F[var_1][var_2].v["triggerCarAlarm"] = 1;
+  var_1 = level._id_0075[var_0].parts.size - 1;
+  var_2 = level._id_0075[var_0].parts[var_1].size - 1;
+  level._id_0075[var_0].parts[var_1][var_2].v["triggerCarAlarm"] = 1;
 }
 
-_id_2E09(var_0) {
+destructible_lights_out(var_0) {
   if(!isDefined(var_0)) {
     var_0 = 256;
   }
 
   var_1 = level._id_0075.size - 1;
-  var_2 = level._id_0075[var_1]._id_6E9F.size - 1;
-  var_3 = level._id_0075[var_1]._id_6E9F[var_2].size - 1;
-  level._id_0075[var_1]._id_6E9F[var_2][var_3].v["break_nearby_lights"] = var_0;
+  var_2 = level._id_0075[var_1].parts.size - 1;
+  var_3 = level._id_0075[var_1].parts[var_2].size - 1;
+  level._id_0075[var_1].parts[var_2][var_3].v["break_nearby_lights"] = var_0;
 }
 
-_id_7A38(var_0, var_1, var_2, var_3) {
+random_dynamic_attachment(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_2)) {
     var_2 = "";
   }
 
   var_4 = level._id_0075.size - 1;
-  var_5 = level._id_0075[var_4]._id_6E9F.size - 1;
+  var_5 = level._id_0075[var_4].parts.size - 1;
   var_6 = 0;
 
-  if(!isDefined(level._id_0075[var_4]._id_6E9F[var_5][var_6].v["random_dynamic_attachment_1"])) {
-    level._id_0075[var_4]._id_6E9F[var_5][var_6].v["random_dynamic_attachment_1"] = [];
-    level._id_0075[var_4]._id_6E9F[var_5][var_6].v["random_dynamic_attachment_2"] = [];
-    level._id_0075[var_4]._id_6E9F[var_5][var_6].v["random_dynamic_attachment_tag"] = [];
+  if(!isDefined(level._id_0075[var_4].parts[var_5][var_6].v["random_dynamic_attachment_1"])) {
+    level._id_0075[var_4].parts[var_5][var_6].v["random_dynamic_attachment_1"] = [];
+    level._id_0075[var_4].parts[var_5][var_6].v["random_dynamic_attachment_2"] = [];
+    level._id_0075[var_4].parts[var_5][var_6].v["random_dynamic_attachment_tag"] = [];
   }
 
-  var_7 = level._id_0075[var_4]._id_6E9F[var_5][var_6].v["random_dynamic_attachment_1"].size;
-  level._id_0075[var_4]._id_6E9F[var_5][var_6].v["random_dynamic_attachment_1"][var_7] = var_1;
-  level._id_0075[var_4]._id_6E9F[var_5][var_6].v["random_dynamic_attachment_2"][var_7] = var_2;
-  level._id_0075[var_4]._id_6E9F[var_5][var_6].v["random_dynamic_attachment_tag"][var_7] = var_0;
-  level._id_0075[var_4]._id_6E9F[var_5][var_6].v["clipToRemove"][var_7] = var_3;
+  var_7 = level._id_0075[var_4].parts[var_5][var_6].v["random_dynamic_attachment_1"].size;
+  level._id_0075[var_4].parts[var_5][var_6].v["random_dynamic_attachment_1"][var_7] = var_1;
+  level._id_0075[var_4].parts[var_5][var_6].v["random_dynamic_attachment_2"][var_7] = var_2;
+  level._id_0075[var_4].parts[var_5][var_6].v["random_dynamic_attachment_tag"][var_7] = var_0;
+  level._id_0075[var_4].parts[var_5][var_6].v["clipToRemove"][var_7] = var_3;
 }
 
-_id_2E11(var_0, var_1) {
+destructible_physics(var_0, var_1) {
   var_2 = level._id_0075.size - 1;
-  var_3 = level._id_0075[var_2]._id_6E9F.size - 1;
-  var_4 = level._id_0075[var_2]._id_6E9F[var_3].size - 1;
+  var_3 = level._id_0075[var_2].parts.size - 1;
+  var_4 = level._id_0075[var_2].parts[var_3].size - 1;
 
-  if(!isDefined(level._id_0075[var_2]._id_6E9F[var_3][var_4].v["physics"])) {
-    level._id_0075[var_2]._id_6E9F[var_3][var_4].v["physics"] = [];
-    level._id_0075[var_2]._id_6E9F[var_3][var_4].v["physics_tagName"] = [];
-    level._id_0075[var_2]._id_6E9F[var_3][var_4].v["physics_velocity"] = [];
+  if(!isDefined(level._id_0075[var_2].parts[var_3][var_4].v["physics"])) {
+    level._id_0075[var_2].parts[var_3][var_4].v["physics"] = [];
+    level._id_0075[var_2].parts[var_3][var_4].v["physics_tagName"] = [];
+    level._id_0075[var_2].parts[var_3][var_4].v["physics_velocity"] = [];
   }
 
-  var_5 = level._id_0075[var_2]._id_6E9F[var_3][var_4].v["physics"].size;
-  level._id_0075[var_2]._id_6E9F[var_3][var_4].v["physics"][var_5] = 1;
-  level._id_0075[var_2]._id_6E9F[var_3][var_4].v["physics_tagName"][var_5] = var_0;
-  level._id_0075[var_2]._id_6E9F[var_3][var_4].v["physics_velocity"][var_5] = var_1;
+  var_5 = level._id_0075[var_2].parts[var_3][var_4].v["physics"].size;
+  level._id_0075[var_2].parts[var_3][var_4].v["physics"][var_5] = 1;
+  level._id_0075[var_2].parts[var_3][var_4].v["physics_tagName"][var_5] = var_0;
+  level._id_0075[var_2].parts[var_3][var_4].v["physics_velocity"][var_5] = var_1;
 }
 
-_id_2E18(var_0) {
+destructible_splash_damage_scaler(var_0) {
   var_1 = level._id_0075.size - 1;
-  var_2 = level._id_0075[var_1]._id_6E9F.size - 1;
-  var_3 = level._id_0075[var_1]._id_6E9F[var_2].size - 1;
-  level._id_0075[var_1]._id_6E9F[var_2][var_3].v["splash_damage_scaler"] = var_0;
+  var_2 = level._id_0075[var_1].parts.size - 1;
+  var_3 = level._id_0075[var_1].parts[var_2].size - 1;
+  level._id_0075[var_1].parts[var_2][var_3].v["splash_damage_scaler"] = var_0;
 }
 
-_id_2DF4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
+destructible_explode(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
   var_14 = level._id_0075.size - 1;
-  var_15 = level._id_0075[var_14]._id_6E9F.size - 1;
-  var_16 = level._id_0075[var_14]._id_6E9F[var_15].size - 1;
+  var_15 = level._id_0075[var_14].parts.size - 1;
+  var_16 = level._id_0075[var_14].parts[var_15].size - 1;
 
   if(common_scripts\utility::issp()) {
-    level._id_0075[var_14]._id_6E9F[var_15][var_16].v["explode_range"] = var_2;
+    level._id_0075[var_14].parts[var_15][var_16].v["explode_range"] = var_2;
   } else {
-    level._id_0075[var_14]._id_6E9F[var_15][var_16].v["explode_range"] = var_3;
+    level._id_0075[var_14].parts[var_15][var_16].v["explode_range"] = var_3;
   }
 
-  level._id_0075[var_14]._id_6E9F[var_15][var_16].v["explode"] = 1;
-  level._id_0075[var_14]._id_6E9F[var_15][var_16].v["explode_force_min"] = var_0;
-  level._id_0075[var_14]._id_6E9F[var_15][var_16].v["explode_force_max"] = var_1;
-  level._id_0075[var_14]._id_6E9F[var_15][var_16].v["explode_mindamage"] = var_4;
-  level._id_0075[var_14]._id_6E9F[var_15][var_16].v["explode_maxdamage"] = var_5;
-  level._id_0075[var_14]._id_6E9F[var_15][var_16].v["continueDamage"] = var_6;
-  level._id_0075[var_14]._id_6E9F[var_15][var_16].v["originOffset"] = var_7;
-  level._id_0075[var_14]._id_6E9F[var_15][var_16].v["earthQuakeScale"] = var_8;
-  level._id_0075[var_14]._id_6E9F[var_15][var_16].v["earthQuakeRadius"] = var_9;
-  level._id_0075[var_14]._id_6E9F[var_15][var_16].v["originOffset3d"] = var_10;
-  level._id_0075[var_14]._id_6E9F[var_15][var_16].v["delaytime"] = var_11;
-  level._id_0075[var_14]._id_6E9F[var_15][var_16].v["explode_angularImpulse_min"] = var_12;
-  level._id_0075[var_14]._id_6E9F[var_15][var_16].v["explode_angularImpulse_max"] = var_13;
+  level._id_0075[var_14].parts[var_15][var_16].v["explode"] = 1;
+  level._id_0075[var_14].parts[var_15][var_16].v["explode_force_min"] = var_0;
+  level._id_0075[var_14].parts[var_15][var_16].v["explode_force_max"] = var_1;
+  level._id_0075[var_14].parts[var_15][var_16].v["explode_mindamage"] = var_4;
+  level._id_0075[var_14].parts[var_15][var_16].v["explode_maxdamage"] = var_5;
+  level._id_0075[var_14].parts[var_15][var_16].v["continueDamage"] = var_6;
+  level._id_0075[var_14].parts[var_15][var_16].v["originOffset"] = var_7;
+  level._id_0075[var_14].parts[var_15][var_16].v["earthQuakeScale"] = var_8;
+  level._id_0075[var_14].parts[var_15][var_16].v["earthQuakeRadius"] = var_9;
+  level._id_0075[var_14].parts[var_15][var_16].v["originOffset3d"] = var_10;
+  level._id_0075[var_14].parts[var_15][var_16].v["delaytime"] = var_11;
+  level._id_0075[var_14].parts[var_15][var_16].v["explode_angularImpulse_min"] = var_12;
+  level._id_0075[var_14].parts[var_15][var_16].v["explode_angularImpulse_max"] = var_13;
 }
 
-_id_2DF9(var_0) {
+destructible_function(var_0) {
   var_1 = level._id_0075.size - 1;
-  var_2 = level._id_0075[var_1]._id_6E9F.size - 1;
-  var_3 = level._id_0075[var_1]._id_6E9F[var_2].size - 1;
-  level._id_0075[var_1]._id_6E9F[var_2][var_3].v["function"] = var_0;
+  var_2 = level._id_0075[var_1].parts.size - 1;
+  var_3 = level._id_0075[var_1].parts[var_2].size - 1;
+  level._id_0075[var_1].parts[var_2][var_3].v["function"] = var_0;
 }
 
-_id_2E0E(var_0) {
+destructible_notify(var_0) {
   var_1 = level._id_0075.size - 1;
-  var_2 = level._id_0075[var_1]._id_6E9F.size - 1;
-  var_3 = level._id_0075[var_1]._id_6E9F[var_2].size - 1;
-  level._id_0075[var_1]._id_6E9F[var_2][var_3].v["functionNotify"] = var_0;
+  var_2 = level._id_0075[var_1].parts.size - 1;
+  var_3 = level._id_0075[var_1].parts[var_2].size - 1;
+  level._id_0075[var_1].parts[var_2][var_3].v["functionNotify"] = var_0;
 }
 
-_id_2DF0(var_0) {
+destructible_damage_threshold(var_0) {
   var_1 = level._id_0075.size - 1;
-  var_2 = level._id_0075[var_1]._id_6E9F.size - 1;
-  var_3 = level._id_0075[var_1]._id_6E9F[var_2].size - 1;
-  level._id_0075[var_1]._id_6E9F[var_2][var_3].v["damage_threshold"] = var_0;
+  var_2 = level._id_0075[var_1].parts.size - 1;
+  var_3 = level._id_0075[var_1].parts[var_2].size - 1;
+  level._id_0075[var_1].parts[var_2][var_3].v["damage_threshold"] = var_0;
 }
 
-_id_2DE5(var_0, var_1) {
+destructible_attachmodel(var_0, var_1) {
   var_1 = _tolower(var_1);
   var_2 = level._id_0075.size - 1;
 
-  if(!isDefined(level._id_0075[var_2]._id_1145)) {
-    level._id_0075[var_2]._id_1145 = [];
+  if(!isDefined(level._id_0075[var_2].attachedmodels)) {
+    level._id_0075[var_2].attachedmodels = [];
   }
 
   var_3 = spawnStruct();
   var_3.model = var_1;
-  var_3._id_95A6 = var_0;
-  level._id_0075[var_2]._id_1145[level._id_0075[var_2]._id_1145.size] = var_3;
+  var_3.tag = var_0;
+  level._id_0075[var_2].attachedmodels[level._id_0075[var_2].attachedmodels.size] = var_3;
 }
 
-_id_2E08(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+destructible_info(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   if(isDefined(var_3)) {
     var_3 = _tolower(var_3);
   }
 
   var_13 = level._id_0075.size - 1;
-  level._id_0075[var_13]._id_6E9F[var_0][var_1] = spawnStruct();
-  level._id_0075[var_13]._id_6E9F[var_0][var_1].v["modelName"] = var_3;
-  level._id_0075[var_13]._id_6E9F[var_0][var_1].v["tagName"] = var_2;
-  level._id_0075[var_13]._id_6E9F[var_0][var_1].v["health"] = var_4;
-  level._id_0075[var_13]._id_6E9F[var_0][var_1].v["validAttackers"] = var_5;
-  level._id_0075[var_13]._id_6E9F[var_0][var_1].v["validDamageZone"] = var_6;
-  level._id_0075[var_13]._id_6E9F[var_0][var_1].v["validDamageCause"] = var_7;
-  level._id_0075[var_13]._id_6E9F[var_0][var_1].v["alsoDamageParent"] = var_8;
-  level._id_0075[var_13]._id_6E9F[var_0][var_1].v["physicsOnExplosion"] = var_9;
-  level._id_0075[var_13]._id_6E9F[var_0][var_1].v["grenadeImpactDeath"] = var_10;
-  level._id_0075[var_13]._id_6E9F[var_0][var_1].v["godModeAllowed"] = 0;
-  level._id_0075[var_13]._id_6E9F[var_0][var_1].v["splashRotation"] = var_11;
-  level._id_0075[var_13]._id_6E9F[var_0][var_1].v["receiveDamageFromParent"] = var_12;
+  level._id_0075[var_13].parts[var_0][var_1] = spawnStruct();
+  level._id_0075[var_13].parts[var_0][var_1].v["modelName"] = var_3;
+  level._id_0075[var_13].parts[var_0][var_1].v["tagName"] = var_2;
+  level._id_0075[var_13].parts[var_0][var_1].v["health"] = var_4;
+  level._id_0075[var_13].parts[var_0][var_1].v["validAttackers"] = var_5;
+  level._id_0075[var_13].parts[var_0][var_1].v["validDamageZone"] = var_6;
+  level._id_0075[var_13].parts[var_0][var_1].v["validDamageCause"] = var_7;
+  level._id_0075[var_13].parts[var_0][var_1].v["alsoDamageParent"] = var_8;
+  level._id_0075[var_13].parts[var_0][var_1].v["physicsOnExplosion"] = var_9;
+  level._id_0075[var_13].parts[var_0][var_1].v["grenadeImpactDeath"] = var_10;
+  level._id_0075[var_13].parts[var_0][var_1].v["godModeAllowed"] = 0;
+  level._id_0075[var_13].parts[var_0][var_1].v["splashRotation"] = var_11;
+  level._id_0075[var_13].parts[var_0][var_1].v["receiveDamageFromParent"] = var_12;
 }
 
-_id_7643() {
-  if(!isDefined(level._id_0075[self._id_2E25]._id_6E9F)) {
+precache_destructibles() {
+  if(!isDefined(level._id_0075[self.destuctableinfo].parts)) {
     return;
   }
-  if(isDefined(level._id_0075[self._id_2E25]._id_1145)) {
-    foreach(var_1 in level._id_0075[self._id_2E25]._id_1145) {
+  if(isDefined(level._id_0075[self.destuctableinfo].attachedmodels)) {
+    foreach(var_1 in level._id_0075[self.destuctableinfo].attachedmodels) {
       precachemodel(var_1.model);
     }
   }
 
-  for(var_3 = 0; var_3 < level._id_0075[self._id_2E25]._id_6E9F.size; var_3++) {
-    for(var_4 = 0; var_4 < level._id_0075[self._id_2E25]._id_6E9F[var_3].size; var_4++) {
-      if(level._id_0075[self._id_2E25]._id_6E9F[var_3].size <= var_4) {
+  for(var_3 = 0; var_3 < level._id_0075[self.destuctableinfo].parts.size; var_3++) {
+    for(var_4 = 0; var_4 < level._id_0075[self.destuctableinfo].parts[var_3].size; var_4++) {
+      if(level._id_0075[self.destuctableinfo].parts[var_3].size <= var_4) {
         continue;
       }
-      if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_3][var_4].v["modelName"])) {
-        precachemodel(level._id_0075[self._id_2E25]._id_6E9F[var_3][var_4].v["modelName"]);
+      if(isDefined(level._id_0075[self.destuctableinfo].parts[var_3][var_4].v["modelName"])) {
+        precachemodel(level._id_0075[self.destuctableinfo].parts[var_3][var_4].v["modelName"]);
       }
 
-      if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_3][var_4].v["animation"])) {
-        var_5 = level._id_0075[self._id_2E25]._id_6E9F[var_3][var_4].v["animation"];
+      if(isDefined(level._id_0075[self.destuctableinfo].parts[var_3][var_4].v["animation"])) {
+        var_5 = level._id_0075[self.destuctableinfo].parts[var_3][var_4].v["animation"];
 
         foreach(var_7 in var_5) {
           if(isDefined(var_7["mpAnim"])) {
-            common_scripts\utility::_id_6756("precacheMpAnim", var_7["mpAnim"]);
+            common_scripts\utility::noself_func("precacheMpAnim", var_7["mpAnim"]);
           }
         }
       }
 
-      if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_3][var_4].v["random_dynamic_attachment_1"])) {
-        foreach(var_10 in level._id_0075[self._id_2E25]._id_6E9F[var_3][var_4].v["random_dynamic_attachment_1"]) {
+      if(isDefined(level._id_0075[self.destuctableinfo].parts[var_3][var_4].v["random_dynamic_attachment_1"])) {
+        foreach(var_10 in level._id_0075[self.destuctableinfo].parts[var_3][var_4].v["random_dynamic_attachment_1"]) {
           if(isDefined(var_10) && var_10 != "") {
             precachemodel(var_10);
             precachemodel(var_10 + "_destroy");
           }
         }
 
-        foreach(var_10 in level._id_0075[self._id_2E25]._id_6E9F[var_3][var_4].v["random_dynamic_attachment_2"]) {
+        foreach(var_10 in level._id_0075[self.destuctableinfo].parts[var_3][var_4].v["random_dynamic_attachment_2"]) {
           if(isDefined(var_10) && var_10 != "") {
             precachemodel(var_10);
             precachemodel(var_10 + "_destroy");
@@ -781,15 +781,15 @@ _id_7643() {
 }
 
 _id_091C() {
-  if(!isDefined(level._id_0075[self._id_2E25]._id_6E9F)) {
+  if(!isDefined(level._id_0075[self.destuctableinfo].parts)) {
     return;
   }
-  for(var_0 = 0; var_0 < level._id_0075[self._id_2E25]._id_6E9F.size; var_0++) {
-    for(var_1 = 0; var_1 < level._id_0075[self._id_2E25]._id_6E9F[var_0].size; var_1++) {
-      if(level._id_0075[self._id_2E25]._id_6E9F[var_0].size <= var_1) {
+  for(var_0 = 0; var_0 < level._id_0075[self.destuctableinfo].parts.size; var_0++) {
+    for(var_1 = 0; var_1 < level._id_0075[self.destuctableinfo].parts[var_0].size; var_1++) {
+      if(level._id_0075[self.destuctableinfo].parts[var_0].size <= var_1) {
         continue;
       }
-      var_2 = level._id_0075[self._id_2E25]._id_6E9F[var_0][var_1];
+      var_2 = level._id_0075[self.destuctableinfo].parts[var_0][var_1];
 
       if(isDefined(var_2.v["fx_filename"])) {
         for(var_3 = 0; var_3 < var_2.v["fx_filename"].size; var_3++) {
@@ -803,14 +803,14 @@ _id_091C() {
             for(var_6 = 0; var_6 < var_4.size; var_6++) {
               var_7 = var_4[var_6];
               var_8 = var_5[var_6];
-              level._id_0075[self._id_2E25]._id_6E9F[var_0][var_1].v["fx"][var_3][var_6] = loadfx(var_7, var_8);
+              level._id_0075[self.destuctableinfo].parts[var_0][var_1].v["fx"][var_3][var_6] = loadfx(var_7, var_8);
             }
           }
         }
       }
 
-      var_9 = level._id_0075[self._id_2E25]._id_6E9F[var_0][var_1].v["loopfx_filename"];
-      var_10 = level._id_0075[self._id_2E25]._id_6E9F[var_0][var_1].v["loopfx_tag"];
+      var_9 = level._id_0075[self.destuctableinfo].parts[var_0][var_1].v["loopfx_filename"];
+      var_10 = level._id_0075[self.destuctableinfo].parts[var_0][var_1].v["loopfx_tag"];
 
       if(isDefined(var_9)) {
         if(isDefined(var_2.v["loopfx"]) && var_2.v["loopfx"].size == var_9.size) {
@@ -819,14 +819,14 @@ _id_091C() {
         for(var_6 = 0; var_6 < var_9.size; var_6++) {
           var_11 = var_9[var_6];
           var_12 = var_10[var_6];
-          level._id_0075[self._id_2E25]._id_6E9F[var_0][var_1].v["loopfx"][var_6] = loadfx(var_11, var_12);
+          level._id_0075[self.destuctableinfo].parts[var_0][var_1].v["loopfx"][var_6] = loadfx(var_11, var_12);
         }
       }
     }
   }
 }
 
-_id_1F4B(var_0) {
+candamagedestructible(var_0) {
   foreach(var_2 in self._id_2E27) {
     if(var_2 == var_0) {
       return 1;
@@ -836,7 +836,7 @@ _id_1F4B(var_0) {
   return 0;
 }
 
-_id_2E1D() {
+destructible_think() {
   var_0 = 0;
   var_1 = self.model;
   var_2 = undefined;
@@ -845,7 +845,7 @@ _id_2E1D() {
   var_5 = undefined;
   var_6 = undefined;
   var_7 = self.model;
-  _id_2E1F(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
+  destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
   self endon("stop_taking_damage");
 
   for(;;) {
@@ -863,7 +863,7 @@ _id_2E1D() {
     if(!isDefined(var_0)) {
       continue;
     }
-    if(isDefined(var_5) && isDefined(var_5.type) && var_5.type == "soft_landing" && !var_5 _id_1F4B(self)) {
+    if(isDefined(var_5) && isDefined(var_5.type) && var_5.type == "soft_landing" && !var_5 candamagedestructible(self)) {
       continue;
     }
     if(common_scripts\utility::issp()) {
@@ -877,17 +877,17 @@ _id_2E1D() {
     }
     if(common_scripts\utility::issp()) {
       if(isDefined(var_5) && isPlayer(var_5)) {
-        self._id_29D4 = var_5;
+        self.damageowner = var_5;
       }
     } else if(isDefined(var_5) && isPlayer(var_5))
-      self._id_29D4 = var_5;
-    else if(isDefined(var_5) && isDefined(var_5._id_48EA) && isPlayer(var_5._id_48EA)) {
-      self._id_29D4 = var_5._id_48EA;
+      self.damageowner = var_5;
+    else if(isDefined(var_5) && isDefined(var_5.gunner) && isPlayer(var_5.gunner)) {
+      self.damageowner = var_5.gunner;
     }
 
-    var_8 = _id_4487(var_8);
+    var_8 = getdamagetype(var_8);
 
-    if(_id_5609(var_5, var_8)) {
+    if(is_shotgun_damage(var_5, var_8)) {
       if(common_scripts\utility::issp()) {
         var_0 = var_0 * 8.0;
       } else {
@@ -906,7 +906,7 @@ _id_2E1D() {
         var_2 = undefined;
       }
 
-      var_11 = level._id_0075[self._id_2E25]._id_6E9F[0][0].v["tagName"];
+      var_11 = level._id_0075[self.destuctableinfo].parts[0][0].v["tagName"];
 
       if(isDefined(var_11) && isDefined(var_9) && var_11 == var_9) {
         var_2 = undefined;
@@ -914,8 +914,8 @@ _id_2E1D() {
     }
 
     if(var_8 == "splash" || var_8 == "energy") {
-      if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[0][0].v["splash_damage_scaler"])) {
-        var_0 = var_0 * level._id_0075[self._id_2E25]._id_6E9F[0][0].v["splash_damage_scaler"];
+      if(isDefined(level._id_0075[self.destuctableinfo].parts[0][0].v["splash_damage_scaler"])) {
+        var_0 = var_0 * level._id_0075[self.destuctableinfo].parts[0][0].v["splash_damage_scaler"];
       } else if(common_scripts\utility::issp()) {
         var_0 = var_0 * 9.0;
       } else {
@@ -926,15 +926,15 @@ _id_2E1D() {
         self setModel(self.nearclaimnodeandangle);
       }
 
-      _id_2E17(int(var_0), var_3, var_4, var_5, var_8);
+      destructible_splash_damage(int(var_0), var_3, var_4, var_5, var_8);
       continue;
     }
 
-    thread _id_2E1F(int(var_0), var_1, var_2, var_3, var_4, var_5, var_8);
+    thread destructible_update_part(int(var_0), var_1, var_2, var_3, var_4, var_5, var_8);
   }
 }
 
-_id_5609(var_0, var_1) {
+is_shotgun_damage(var_0, var_1) {
   if(var_1 != "bullet") {
     return 0;
   }
@@ -947,7 +947,7 @@ _id_5609(var_0, var_1) {
 
   if(isPlayer(var_0)) {
     var_2 = var_0 getcurrentweapon();
-  } else if(isDefined(level._id_3603) && level._id_3603) {
+  } else if(isDefined(level.enable_ai_shotgun_destructible_damage) && level.enable_ai_shotgun_destructible_damage) {
     if(isDefined(var_0._id_01D0)) {
       var_2 = var_0._id_01D0;
     }
@@ -966,7 +966,7 @@ _id_5609(var_0, var_1) {
   return 0;
 }
 
-_id_45FD(var_0, var_1) {
+getpartandstateindex(var_0, var_1) {
   var_2 = spawnStruct();
   var_2.v = [];
   var_3 = -1;
@@ -979,17 +979,17 @@ _id_45FD(var_0, var_1) {
     var_4 = 0;
   }
 
-  for(var_5 = 0; var_5 < level._id_0075[self._id_2E25]._id_6E9F.size; var_5++) {
-    var_4 = self._id_2E10[var_5].v["currentState"];
+  for(var_5 = 0; var_5 < level._id_0075[self.destuctableinfo].parts.size; var_5++) {
+    var_4 = self.destructible_parts[var_5].v["currentState"];
 
-    if(level._id_0075[self._id_2E25]._id_6E9F[var_5].size <= var_4) {
+    if(level._id_0075[self.destuctableinfo].parts[var_5].size <= var_4) {
       continue;
     }
     if(!isDefined(var_1)) {
       continue;
     }
-    if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_5][var_4].v["tagName"])) {
-      var_6 = level._id_0075[self._id_2E25]._id_6E9F[var_5][var_4].v["tagName"];
+    if(isDefined(level._id_0075[self.destuctableinfo].parts[var_5][var_4].v["tagName"])) {
+      var_6 = level._id_0075[self.destuctableinfo].parts[var_5][var_4].v["tagName"];
 
       if(_tolower(var_6) == _tolower(var_1)) {
         var_3 = var_5;
@@ -1003,18 +1003,18 @@ _id_45FD(var_0, var_1) {
   return var_2;
 }
 
-_id_2E1F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(!isDefined(self._id_2E10)) {
+destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(!isDefined(self.destructible_parts)) {
     return;
   }
-  if(self._id_2E10.size == 0) {
+  if(self.destructible_parts.size == 0) {
     return;
   }
-  if(level._id_3A53) {
+  if(level.fast_destructible_explode) {
     self endon("destroyed");
   }
 
-  var_8 = _id_45FD(var_1, var_2);
+  var_8 = getpartandstateindex(var_1, var_2);
   var_9 = var_8.v["stateIndex"];
   var_10 = var_8.v["partIndex"];
 
@@ -1026,31 +1026,31 @@ _id_2E1F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_13 = 0;
 
   for(;;) {
-    var_9 = self._id_2E10[var_10].v["currentState"];
+    var_9 = self.destructible_parts[var_10].v["currentState"];
 
-    if(!isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_9])) {
+    if(!isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_9])) {
       break;
     }
 
-    if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][0].v["alsoDamageParent"])) {
-      if(_id_4487(var_6) != "splash") {
-        var_14 = level._id_0075[self._id_2E25]._id_6E9F[var_10][0].v["alsoDamageParent"];
+    if(isDefined(level._id_0075[self.destuctableinfo].parts[var_10][0].v["alsoDamageParent"])) {
+      if(getdamagetype(var_6) != "splash") {
+        var_14 = level._id_0075[self.destuctableinfo].parts[var_10][0].v["alsoDamageParent"];
         var_15 = int(var_0 * var_14);
-        thread _id_6807(var_15, var_5, var_4, var_3, var_6, "", "");
+        thread notifydamageafterframe(var_15, var_5, var_4, var_3, var_6, "", "");
       }
     }
 
-    if(var_10 == 0 && _id_4487(var_6) != "splash") {
-      for(var_16 = 0; var_16 < level._id_0075[self._id_2E25]._id_6E9F.size; var_16++) {
-        var_17 = level._id_0075[self._id_2E25]._id_6E9F[var_16];
+    if(var_10 == 0 && getdamagetype(var_6) != "splash") {
+      for(var_16 = 0; var_16 < level._id_0075[self.destuctableinfo].parts.size; var_16++) {
+        var_17 = level._id_0075[self.destuctableinfo].parts[var_16];
 
         if(!isDefined(var_17[0].v["receiveDamageFromParent"])) {
           continue;
         }
         var_18 = 0;
 
-        if(isDefined(self._id_2E10[var_16].v["currentState"])) {
-          var_18 = self._id_2E10[var_16].v["currentState"];
+        if(isDefined(self.destructible_parts[var_16].v["currentState"])) {
+          var_18 = self.destructible_parts[var_16].v["currentState"];
         }
 
         if(!isDefined(var_17[var_18])) {
@@ -1062,44 +1062,44 @@ _id_2E1F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         var_19 = var_17[var_18].v["tagName"];
         var_14 = var_17[0].v["receiveDamageFromParent"];
         var_20 = int(var_0 * var_14);
-        thread _id_6807(var_20, var_5, var_4, var_3, var_6, "", var_19);
+        thread notifydamageafterframe(var_20, var_5, var_4, var_3, var_6, "", var_19);
       }
     }
 
-    if(!isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_9].v["health"])) {
+    if(!isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_9].v["health"])) {
       break;
     }
 
-    if(!isDefined(self._id_2E10[var_10].v["health"])) {
+    if(!isDefined(self.destructible_parts[var_10].v["health"])) {
       break;
     }
 
     if(var_12) {
-      self._id_2E10[var_10].v["health"] = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_9].v["health"];
+      self.destructible_parts[var_10].v["health"] = level._id_0075[self.destuctableinfo].parts[var_10][var_9].v["health"];
     }
 
     var_12 = 0;
 
-    if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_9].v["grenadeImpactDeath"]) && var_6 == "impact") {
+    if(isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_9].v["grenadeImpactDeath"]) && var_6 == "impact") {
       var_0 = 100000000;
     }
 
-    if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_9].v["damage_threshold"]) && level._id_0075[self._id_2E25]._id_6E9F[var_10][var_9].v["damage_threshold"] > var_0) {
+    if(isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_9].v["damage_threshold"]) && level._id_0075[self.destuctableinfo].parts[var_10][var_9].v["damage_threshold"] > var_0) {
       var_0 = 0;
     }
 
-    var_21 = self._id_2E10[var_10].v["health"];
-    var_22 = _id_567E(var_10, var_9, var_5);
+    var_21 = self.destructible_parts[var_10].v["health"];
+    var_22 = isattackervalid(var_10, var_9, var_5);
 
     if(var_22) {
-      var_23 = _id_5825(var_10, var_9, var_6);
+      var_23 = isvaliddamagecause(var_10, var_9, var_6);
 
       if(var_23) {
         if(isDefined(var_5)) {
           if(isPlayer(var_5)) {
-            self._id_724D = self._id_724D + var_0;
+            self.player_damage = self.player_damage + var_0;
           } else if(var_5 != self) {
-            self._id_6727 = self._id_6727 + var_0;
+            self.non_player_damage = self.non_player_damage + var_0;
           }
         }
 
@@ -1109,183 +1109,183 @@ _id_2E1F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
           }
         }
 
-        self._id_2E10[var_10].v["health"] = self._id_2E10[var_10].v["health"] - var_0;
+        self.destructible_parts[var_10].v["health"] = self.destructible_parts[var_10].v["health"] - var_0;
       }
     }
 
-    if(self._id_2E10[var_10].v["health"] > 0) {
+    if(self.destructible_parts[var_10].v["health"] > 0) {
       return;
     }
     if(isDefined(var_7)) {
-      var_7.v["fxcost"] = _id_4283(var_10, self._id_2E10[var_10].v["currentState"]);
+      var_7.v["fxcost"] = get_part_fx_cost_for_action_state(var_10, self.destructible_parts[var_10].v["currentState"]);
       _id_091D(self, var_7, var_0);
 
-      if(!isDefined(self._id_A6E7)) {
-        self._id_A6E7 = 1;
+      if(!isDefined(self.waiting_for_queue)) {
+        self.waiting_for_queue = 1;
       } else {
-        self._id_A6E7++;
+        self.waiting_for_queue++;
       }
 
       self waittill("queue_processed", var_24);
-      self._id_A6E7--;
+      self.waiting_for_queue--;
 
-      if(self._id_A6E7 == 0) {
-        self._id_A6E7 = undefined;
+      if(self.waiting_for_queue == 0) {
+        self.waiting_for_queue = undefined;
       }
 
       if(!var_24) {
-        self._id_2E10[var_10].v["health"] = var_21;
+        self.destructible_parts[var_10].v["health"] = var_21;
         return;
       }
     }
 
-    var_0 = int(_abs(self._id_2E10[var_10].v["health"]));
+    var_0 = int(_abs(self.destructible_parts[var_10].v["health"]));
 
     if(var_0 < 0) {
       return;
     }
-    self._id_2E10[var_10].v["currentState"]++;
-    var_9 = self._id_2E10[var_10].v["currentState"];
+    self.destructible_parts[var_10].v["currentState"]++;
+    var_9 = self.destructible_parts[var_10].v["currentState"];
     var_25 = var_9 - 1;
     var_26 = undefined;
 
-    if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25])) {
-      var_26 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v;
+    if(isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_25])) {
+      var_26 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v;
     }
 
     var_27 = undefined;
 
-    if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_9])) {
-      var_27 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_9].v;
+    if(isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_9])) {
+      var_27 = level._id_0075[self.destuctableinfo].parts[var_10][var_9].v;
     }
 
-    if(!isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25])) {
+    if(!isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_25])) {
       return;
     }
-    if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["explode"])) {
-      self._id_3949 = 1;
+    if(isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["explode"])) {
+      self.exploding = 1;
     }
 
-    if(isDefined(self._id_5EFB) && isDefined(self._id_5EFB[common_scripts\utility::_id_9AAD(var_10)])) {
-      for(var_16 = 0; var_16 < self._id_5EFB[common_scripts\utility::_id_9AAD(var_10)].size; var_16++) {
-        self notify(self._id_5EFB[common_scripts\utility::_id_9AAD(var_10)][var_16]);
+    if(isDefined(self.loopingsoundstopnotifies) && isDefined(self.loopingsoundstopnotifies[common_scripts\utility::tostring(var_10)])) {
+      for(var_16 = 0; var_16 < self.loopingsoundstopnotifies[common_scripts\utility::tostring(var_10)].size; var_16++) {
+        self notify(self.loopingsoundstopnotifies[common_scripts\utility::tostring(var_10)][var_16]);
 
-        if(common_scripts\utility::issp() && self._id_6297) {
-          self._id_6296 notify(self._id_5EFB[common_scripts\utility::_id_9AAD(var_10)][var_16]);
+        if(common_scripts\utility::issp() && self.modeldummyon) {
+          self.modeldummy notify(self.loopingsoundstopnotifies[common_scripts\utility::tostring(var_10)][var_16]);
         }
       }
 
-      self._id_5EFB[common_scripts\utility::_id_9AAD(var_10)] = undefined;
+      self.loopingsoundstopnotifies[common_scripts\utility::tostring(var_10)] = undefined;
     }
 
     if(isDefined(var_26["break_nearby_lights"])) {
-      _id_2E01(var_26["break_nearby_lights"]);
+      destructible_get_my_breakable_light(var_26["break_nearby_lights"]);
     }
 
-    if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_9])) {
+    if(isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_9])) {
       if(var_10 == 0) {
         var_28 = var_27["modelName"];
 
         if(isDefined(var_28) && var_28 != self.model) {
           self setModel(var_28);
 
-          if(common_scripts\utility::issp() && self._id_6297) {
-            self._id_6296 setModel(var_28);
+          if(common_scripts\utility::issp() && self.modeldummyon) {
+            self.modeldummy setModel(var_28);
           }
 
-          _id_2E19(var_27);
+          destructible_splash_rotatation(var_27);
         }
       } else {
-        _id_4D03(var_2);
+        hideapart(var_2);
 
-        if(common_scripts\utility::issp() && self._id_6297) {
-          self._id_6296 _id_4D03(var_2);
+        if(common_scripts\utility::issp() && self.modeldummyon) {
+          self.modeldummy hideapart(var_2);
         }
 
         var_2 = var_27["tagName"];
 
         if(isDefined(var_2)) {
-          _id_8BED(var_2);
+          showapart(var_2);
 
-          if(common_scripts\utility::issp() && self._id_6297) {
-            self._id_6296 _id_8BED(var_2);
+          if(common_scripts\utility::issp() && self.modeldummyon) {
+            self.modeldummy showapart(var_2);
           }
         }
       }
     }
 
-    var_29 = _id_4168();
+    var_29 = get_dummy();
 
-    if(isDefined(self._id_3949)) {
-      _id_23A2(var_29);
+    if(isDefined(self.exploding)) {
+      clear_anims(var_29);
     }
 
-    var_30 = _id_2DE4(var_26, var_29, var_6, var_10);
-    var_30 = _id_2E00(var_26, var_29, var_6, var_10, var_30);
+    var_30 = destructible_animation_think(var_26, var_29, var_6, var_10);
+    var_30 = destructible_fx_think(var_26, var_29, var_6, var_10, var_30);
     self notify("FX_State_Change_Kill" + var_10);
-    var_30 = _id_2E16(var_26, var_29, var_6, var_30);
+    var_30 = destructible_sound_think(var_26, var_29, var_6, var_30);
 
-    if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["loopfx"])) {
-      var_31 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["loopfx_filename"].size;
+    if(isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["loopfx"])) {
+      var_31 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["loopfx_filename"].size;
 
       if(var_31 > 0) {
         self notify("FX_State_Change" + var_10);
       }
 
       for(var_32 = 0; var_32 < var_31; var_32++) {
-        var_33 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["loopfx"][var_32];
-        var_34 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["loopfx_tag"][var_32];
-        var_35 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["loopfx_rate"][var_32];
-        thread _id_5EEF(var_33, var_34, var_35, var_10);
+        var_33 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["loopfx"][var_32];
+        var_34 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["loopfx_tag"][var_32];
+        var_35 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["loopfx_rate"][var_32];
+        thread loopfx_ontag(var_33, var_34, var_35, var_10);
       }
     }
 
-    if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["loopsound"])) {
-      for(var_16 = 0; var_16 < level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["loopsound"].size; var_16++) {
-        var_36 = _id_583B("loopsoundCause", var_26, var_16, var_6);
+    if(isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["loopsound"])) {
+      for(var_16 = 0; var_16 < level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["loopsound"].size; var_16++) {
+        var_36 = isvalidsoundcause("loopsoundCause", var_26, var_16, var_6);
 
         if(var_36) {
-          var_37 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["loopsound"][var_16];
-          var_38 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["tagName"];
-          thread _id_7152(var_37, var_38);
+          var_37 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["loopsound"][var_16];
+          var_38 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["tagName"];
+          thread play_loop_sound_on_destructible(var_37, var_38);
 
-          if(!isDefined(self._id_5EFB)) {
-            self._id_5EFB = [];
+          if(!isDefined(self.loopingsoundstopnotifies)) {
+            self.loopingsoundstopnotifies = [];
           }
 
-          if(!isDefined(self._id_5EFB[common_scripts\utility::_id_9AAD(var_10)])) {
-            self._id_5EFB[common_scripts\utility::_id_9AAD(var_10)] = [];
+          if(!isDefined(self.loopingsoundstopnotifies[common_scripts\utility::tostring(var_10)])) {
+            self.loopingsoundstopnotifies[common_scripts\utility::tostring(var_10)] = [];
           }
 
-          var_39 = self._id_5EFB[common_scripts\utility::_id_9AAD(var_10)].size;
-          self._id_5EFB[common_scripts\utility::_id_9AAD(var_10)][var_39] = "stop sound" + var_37;
+          var_39 = self.loopingsoundstopnotifies[common_scripts\utility::tostring(var_10)].size;
+          self.loopingsoundstopnotifies[common_scripts\utility::tostring(var_10)][var_39] = "stop sound" + var_37;
         }
       }
     }
 
-    if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["triggerCarAlarm"])) {
-      thread _id_3097();
+    if(isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["triggerCarAlarm"])) {
+      thread do_car_alarm();
     }
 
-    if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["break_nearby_lights"])) {
-      thread _id_1BA6();
+    if(isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["break_nearby_lights"])) {
+      thread break_nearest_light();
     }
 
-    if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["healthdrain_amount"])) {
+    if(isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["healthdrain_amount"])) {
       self notify("Health_Drain_State_Change" + var_10);
-      var_40 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["healthdrain_amount"];
-      var_41 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["healthdrain_interval"];
-      var_42 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["modelName"];
-      var_43 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["tagName"];
-      var_44 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["badplace_radius"];
-      var_45 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["badplace_team"];
+      var_40 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["healthdrain_amount"];
+      var_41 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["healthdrain_interval"];
+      var_42 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["modelName"];
+      var_43 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["tagName"];
+      var_44 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["badplace_radius"];
+      var_45 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["badplace_team"];
 
       if(var_40 > 0) {
-        thread _id_4C08(var_40, var_41, var_10, var_42, var_43, var_44, var_45);
+        thread health_drain(var_40, var_41, var_10, var_42, var_43, var_44, var_45);
       }
     }
 
-    var_46 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["dot"];
+    var_46 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["dot"];
 
     if(isDefined(var_46)) {
       foreach(var_48 in var_46) {
@@ -1294,7 +1294,7 @@ _id_2E1F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         if(var_48.type == "predefined" && isDefined(var_49)) {
           var_50 = [];
 
-          foreach(var_52 in level._id_0075[self._id_2E25]._id_2DF3[var_49]) {
+          foreach(var_52 in level._id_0075[self.destuctableinfo].destructible_dots[var_49]) {
             var_53 = var_52["classname"];
             var_54 = undefined;
 
@@ -1304,64 +1304,64 @@ _id_2E1F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
                 var_56 = var_52["spawnflags"];
                 var_57 = var_52["radius"];
                 var_58 = var_52["height"];
-                var_54 = _id_27E3(self.origin + var_55, var_56, var_57, var_58);
-                var_54._id_99C1 = var_48._id_99C1;
+                var_54 = createdot_radius(self.origin + var_55, var_56, var_57, var_58);
+                var_54.ticks = var_48.ticks;
                 var_50[var_50.size] = var_54;
                 break;
               default:
             }
           }
 
-          level thread _id_92C7(var_50);
+          level thread startdot_group(var_50);
           continue;
         }
 
         if(isDefined(var_48)) {
-          if(isDefined(var_48._id_95A6)) {
-            var_48 _id_866B(self gettagorigin(var_48._id_95A6));
+          if(isDefined(var_48.tag)) {
+            var_48 setdot_origin(self gettagorigin(var_48.tag));
           }
 
-          level thread _id_92C7([var_48]);
+          level thread startdot_group([var_48]);
         }
       }
 
       var_46 = undefined;
     }
 
-    if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["explode"])) {
+    if(isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["explode"])) {
       var_13 = 1;
-      var_61 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["explode_force_min"];
-      var_62 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["explode_force_max"];
-      var_63 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["explode_angularImpulse_min"];
-      var_64 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["explode_angularImpulse_max"];
-      var_65 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["explode_range"];
-      var_66 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["explode_mindamage"];
-      var_67 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["explode_maxdamage"];
-      var_68 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["continueDamage"];
-      var_69 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["originOffset"];
-      var_70 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["earthQuakeScale"];
-      var_71 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["earthQuakeRadius"];
-      var_72 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["originOffset3d"];
-      var_73 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["delaytime"];
+      var_61 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["explode_force_min"];
+      var_62 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["explode_force_max"];
+      var_63 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["explode_angularImpulse_min"];
+      var_64 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["explode_angularImpulse_max"];
+      var_65 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["explode_range"];
+      var_66 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["explode_mindamage"];
+      var_67 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["explode_maxdamage"];
+      var_68 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["continueDamage"];
+      var_69 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["originOffset"];
+      var_70 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["earthQuakeScale"];
+      var_71 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["earthQuakeRadius"];
+      var_72 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["originOffset3d"];
+      var_73 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["delaytime"];
 
       if(isDefined(var_5) && var_5 != self) {
-        self._id_1180 = var_5;
+        self.attacker = var_5;
 
         if(self._id_003B == "script_vehicle") {
-          self._id_29B2 = var_6;
+          self.damage_type = var_6;
         }
       }
 
-      thread _id_3923(var_10, var_61, var_62, var_65, var_66, var_67, var_68, var_69, var_70, var_71, var_5, var_72, var_73, var_63, var_64);
+      thread explode(var_10, var_61, var_62, var_65, var_66, var_67, var_68, var_69, var_70, var_71, var_5, var_72, var_73, var_63, var_64);
     }
 
     var_74 = undefined;
 
-    if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["physics"])) {
-      for(var_16 = 0; var_16 < level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["physics"].size; var_16++) {
+    if(isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["physics"])) {
+      for(var_16 = 0; var_16 < level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["physics"].size; var_16++) {
         var_74 = undefined;
-        var_75 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["physics_tagName"][var_16];
-        var_76 = level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["physics_velocity"][var_16];
+        var_75 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["physics_tagName"][var_16];
+        var_76 = level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["physics_velocity"][var_16];
         var_77 = undefined;
 
         if(isDefined(var_76)) {
@@ -1402,11 +1402,11 @@ _id_2E1F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         if(isDefined(var_75)) {
           var_86 = undefined;
 
-          for(var_87 = 0; var_87 < level._id_0075[self._id_2E25]._id_6E9F.size; var_87++) {
-            if(!isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_87][0].v["tagName"])) {
+          for(var_87 = 0; var_87 < level._id_0075[self.destuctableinfo].parts.size; var_87++) {
+            if(!isDefined(level._id_0075[self.destuctableinfo].parts[var_87][0].v["tagName"])) {
               continue;
             }
-            if(level._id_0075[self._id_2E25]._id_6E9F[var_87][0].v["tagName"] != var_75) {
+            if(level._id_0075[self.destuctableinfo].parts[var_87][0].v["tagName"] != var_75) {
               continue;
             }
             var_86 = var_87;
@@ -1414,37 +1414,37 @@ _id_2E1F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
           }
 
           if(isDefined(var_74)) {
-            thread _id_6FA3(var_86, 0, var_74, var_77);
+            thread physics_launch(var_86, 0, var_74, var_77);
           } else {
-            thread _id_6FA3(var_86, 0, var_3, var_77);
+            thread physics_launch(var_86, 0, var_3, var_77);
           }
 
           continue;
         }
 
         if(isDefined(var_74)) {
-          thread _id_6FA3(var_10, var_25, var_74, var_77);
+          thread physics_launch(var_10, var_25, var_74, var_77);
         } else {
-          thread _id_6FA3(var_10, var_25, var_3, var_77);
+          thread physics_launch(var_10, var_25, var_3, var_77);
         }
 
         return;
       }
     }
 
-    if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v) && isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["functionNotify"])) {
-      self notify(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["functionNotify"]);
+    if(isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_25].v) && isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["functionNotify"])) {
+      self notify(level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["functionNotify"]);
     }
 
-    if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["function"])) {
-      self thread[[level._id_0075[self._id_2E25]._id_6E9F[var_10][var_25].v["function"]]]();
+    if(isDefined(level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["function"])) {
+      self thread[[level._id_0075[self.destuctableinfo].parts[var_10][var_25].v["function"]]]();
     }
 
     var_12 = 1;
   }
 }
 
-_id_2E19(var_0) {
+destructible_splash_rotatation(var_0) {
   var_1 = var_0["splashRotation"];
   var_2 = var_0["rotateTo"];
 
@@ -1460,7 +1460,7 @@ _id_2E19(var_0) {
   self.angles = (self.angles[0], var_2[1], self.angles[2]);
 }
 
-_id_29A7(var_0) {
+damage_not(var_0) {
   var_1 = strtok(var_0, " ");
   var_2 = strtok("splash melee bullet splash impact unknown", " ");
   var_3 = "";
@@ -1476,23 +1476,23 @@ _id_29A7(var_0) {
   return var_3;
 }
 
-_id_2E17(var_0, var_1, var_2, var_3, var_4) {
+destructible_splash_damage(var_0, var_1, var_2, var_3, var_4) {
   if(var_0 <= 0) {
     return;
   }
-  if(isDefined(self._id_3928)) {
+  if(isDefined(self.exploded)) {
     return;
   }
-  if(!isDefined(level._id_0075[self._id_2E25]._id_6E9F)) {
+  if(!isDefined(level._id_0075[self.destuctableinfo].parts)) {
     return;
   }
-  var_5 = _id_440C(var_2);
+  var_5 = getallactiveparts(var_2);
 
   if(var_5.size <= 0) {
     return;
   }
-  var_5 = _id_8666(var_5, var_1);
-  var_6 = _id_456B(var_5);
+  var_5 = setdistanceonparts(var_5, var_1);
+  var_6 = getlowestpartdistance(var_5);
 
   foreach(var_8 in var_5) {
     var_9 = var_8.v["distance"] * 1.4;
@@ -1501,38 +1501,38 @@ _id_2E17(var_0, var_1, var_2, var_3, var_4) {
     if(var_10 <= 0) {
       continue;
     }
-    if(isDefined(self._id_3928)) {
+    if(isDefined(self.exploded)) {
       continue;
     }
-    thread _id_2E1F(var_10, var_8.v["modelName"], var_8.v["tagName"], var_1, var_2, var_3, var_4, var_8);
+    thread destructible_update_part(var_10, var_8.v["modelName"], var_8.v["tagName"], var_1, var_2, var_3, var_4, var_8);
   }
 }
 
-_id_440C(var_0) {
+getallactiveparts(var_0) {
   var_1 = [];
 
-  if(!isDefined(level._id_0075[self._id_2E25]._id_6E9F)) {
+  if(!isDefined(level._id_0075[self.destuctableinfo].parts)) {
     return var_1;
   }
 
-  for(var_2 = 0; var_2 < level._id_0075[self._id_2E25]._id_6E9F.size; var_2++) {
+  for(var_2 = 0; var_2 < level._id_0075[self.destuctableinfo].parts.size; var_2++) {
     var_3 = var_2;
-    var_4 = self._id_2E10[var_3].v["currentState"];
+    var_4 = self.destructible_parts[var_3].v["currentState"];
 
-    for(var_5 = 0; var_5 < level._id_0075[self._id_2E25]._id_6E9F[var_3].size; var_5++) {
-      var_6 = level._id_0075[self._id_2E25]._id_6E9F[var_3][var_5].v["splashRotation"];
+    for(var_5 = 0; var_5 < level._id_0075[self.destuctableinfo].parts[var_3].size; var_5++) {
+      var_6 = level._id_0075[self.destuctableinfo].parts[var_3][var_5].v["splashRotation"];
 
       if(isDefined(var_6) && var_6) {
         var_7 = vectortoangles(var_0);
         var_8 = var_7[1] - 90;
-        level._id_0075[self._id_2E25]._id_6E9F[var_3][var_5].v["rotateTo"] = (0, var_8, 0);
+        level._id_0075[self.destuctableinfo].parts[var_3][var_5].v["rotateTo"] = (0, var_8, 0);
       }
     }
 
-    if(!isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_3][var_4])) {
+    if(!isDefined(level._id_0075[self.destuctableinfo].parts[var_3][var_4])) {
       continue;
     }
-    var_9 = level._id_0075[self._id_2E25]._id_6E9F[var_3][var_4].v["tagName"];
+    var_9 = level._id_0075[self.destuctableinfo].parts[var_3][var_4].v["tagName"];
 
     if(!isDefined(var_9)) {
       var_9 = "";
@@ -1541,7 +1541,7 @@ _id_440C(var_0) {
     if(var_9 == "") {
       continue;
     }
-    var_10 = level._id_0075[self._id_2E25]._id_6E9F[var_3][var_4].v["modelName"];
+    var_10 = level._id_0075[self.destuctableinfo].parts[var_3][var_4].v["modelName"];
 
     if(!isDefined(var_10)) {
       var_10 = "";
@@ -1556,7 +1556,7 @@ _id_440C(var_0) {
   return var_1;
 }
 
-_id_8666(var_0, var_1) {
+setdistanceonparts(var_0, var_1) {
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_3 = distance(var_1, self gettagorigin(var_0[var_2].v["tagName"]));
     var_0[var_2].v["distance"] = var_3;
@@ -1565,7 +1565,7 @@ _id_8666(var_0, var_1) {
   return var_0;
 }
 
-_id_456B(var_0) {
+getlowestpartdistance(var_0) {
   var_1 = undefined;
 
   foreach(var_3 in var_0) {
@@ -1583,7 +1583,7 @@ _id_456B(var_0) {
   return var_1;
 }
 
-_id_583B(var_0, var_1, var_2, var_3, var_4) {
+isvalidsoundcause(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_4)) {
     var_5 = var_1[var_0][var_4][var_2];
   } else {
@@ -1601,13 +1601,13 @@ _id_583B(var_0, var_1, var_2, var_3, var_4) {
   return 0;
 }
 
-_id_567E(var_0, var_1, var_2) {
-  if(isDefined(self._id_3E1B)) {
+isattackervalid(var_0, var_1, var_2) {
+  if(isDefined(self.forceexploding)) {
     return 1;
   }
 
-  if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_0][var_1].v["explode"])) {
-    if(isDefined(self._id_323D)) {
+  if(isDefined(level._id_0075[self.destuctableinfo].parts[var_0][var_1].v["explode"])) {
+    if(isDefined(self.dontallowexplode)) {
       return 0;
     }
   }
@@ -1620,7 +1620,7 @@ _id_567E(var_0, var_1, var_2) {
     return 1;
   }
 
-  var_3 = level._id_0075[self._id_2E25]._id_6E9F[var_0][var_1].v["validAttackers"];
+  var_3 = level._id_0075[self.destuctableinfo].parts[var_0][var_1].v["validAttackers"];
 
   if(!isDefined(var_3)) {
     return 1;
@@ -1631,11 +1631,11 @@ _id_567E(var_0, var_1, var_2) {
       return 1;
     }
 
-    if(!isDefined(var_2._id_29CF)) {
+    if(!isDefined(var_2.damageisfromplayer)) {
       return 1;
     }
 
-    if(var_2._id_29CF == 0) {
+    if(var_2.damageisfromplayer == 0) {
       return 1;
     }
   } else if(var_3 == "player_only") {
@@ -1643,15 +1643,15 @@ _id_567E(var_0, var_1, var_2) {
       return 1;
     }
 
-    if(isDefined(var_2._id_29CF) && var_2._id_29CF) {
+    if(isDefined(var_2.damageisfromplayer) && var_2.damageisfromplayer) {
       return 1;
     }
-  } else if(var_3 == "no_ai" && isDefined(level._id_5665)) {
-    if(![[level._id_5665]](var_2)) {
+  } else if(var_3 == "no_ai" && isDefined(level.isaifunc)) {
+    if(![[level.isaifunc]](var_2)) {
       return 1;
     }
-  } else if(var_3 == "ai_only" && isDefined(level._id_5665)) {
-    if([[level._id_5665]](var_2)) {
+  } else if(var_3 == "ai_only" && isDefined(level.isaifunc)) {
+    if([[level.isaifunc]](var_2)) {
       return 1;
     }
   } else {}
@@ -1659,18 +1659,18 @@ _id_567E(var_0, var_1, var_2) {
   return 0;
 }
 
-_id_5825(var_0, var_1, var_2) {
+isvaliddamagecause(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     return 1;
   }
 
-  var_3 = level._id_0075[self._id_2E25]._id_6E9F[var_0][var_1].v["godModeAllowed"];
+  var_3 = level._id_0075[self.destuctableinfo].parts[var_0][var_1].v["godModeAllowed"];
 
-  if(var_3 && (isDefined(self._id_480F) && self._id_480F || isDefined(self.setconvergenceheightpercent) && self.setconvergenceheightpercent && var_2 == "bullet")) {
+  if(var_3 && (isDefined(self.godmode) && self.godmode || isDefined(self.setconvergenceheightpercent) && self.setconvergenceheightpercent && var_2 == "bullet")) {
     return 0;
   }
 
-  var_4 = level._id_0075[self._id_2E25]._id_6E9F[var_0][var_1].v["validDamageCause"];
+  var_4 = level._id_0075[self.destuctableinfo].parts[var_0][var_1].v["validDamageCause"];
 
   if(!isDefined(var_4)) {
     return 1;
@@ -1695,7 +1695,7 @@ _id_5825(var_0, var_1, var_2) {
   return 1;
 }
 
-_id_4487(var_0) {
+getdamagetype(var_0) {
   if(!isDefined(var_0)) {
     return "unknown";
   }
@@ -1729,7 +1729,7 @@ _id_4487(var_0) {
   }
 }
 
-_id_29A6(var_0, var_1, var_2) {
+damage_mirror(var_0, var_1, var_2) {
   self notify("stop_damage_mirror");
   self endon("stop_damage_mirror");
   var_0 endon("stop_taking_damage");
@@ -1747,68 +1747,68 @@ _id_29A6(var_0, var_1, var_2) {
 }
 
 _id_0914() {
-  self._id_724D = 0;
-  self._id_6727 = 0;
-  self._id_1FCF = 1;
+  self.player_damage = 0;
+  self.non_player_damage = 0;
+  self.car_damage_owner_recorder = 1;
 }
 
-_id_5EEF(var_0, var_1, var_2, var_3) {
+loopfx_ontag(var_0, var_1, var_2, var_3) {
   self endon("FX_State_Change" + var_3);
   self endon("delete_destructible");
   level endon("putout_fires");
 
   while(isDefined(self)) {
-    var_4 = _id_4168();
+    var_4 = get_dummy();
     _playFXOnTag(var_0, var_4, var_1);
     wait(var_2);
   }
 }
 
-_id_4C08(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+health_drain(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("Health_Drain_State_Change" + var_2);
   level endon("putout_fires");
   self endon("destroyed");
 
-  if(isDefined(var_5) && isDefined(level._id_2DE6)) {
-    var_5 = var_5 * level._id_2DE6;
+  if(isDefined(var_5) && isDefined(level.destructible_badplace_radius_multiplier)) {
+    var_5 = var_5 * level.destructible_badplace_radius_multiplier;
   }
 
-  if(isDefined(var_0) && isDefined(level._id_2E06)) {
-    var_0 = var_0 * level._id_2E06;
+  if(isDefined(var_0) && isDefined(level.destructible_health_drain_amount_multiplier)) {
+    var_0 = var_0 * level.destructible_health_drain_amount_multiplier;
   }
 
   wait(var_1);
-  self._id_4C18 = 1;
+  self.healthdrain = 1;
   var_7 = undefined;
 
-  if(isDefined(level._id_2F30) && level._id_2F30) {
+  if(isDefined(level.disable_destructible_bad_places) && level.disable_destructible_bad_places) {
     var_5 = undefined;
   }
 
-  if(isDefined(var_5) && isDefined(level._id_14F6)) {
+  if(isDefined(var_5) && isDefined(level.badplace_cylinder_func)) {
     var_7 = "" + gettime();
 
-    if(!isDefined(self._id_2F71)) {
+    if(!isDefined(self.disablebadplace)) {
       if(isDefined(self.scriptmodelplayanim)) {
         var_5 = self.scriptmodelplayanim;
       }
 
       if(common_scripts\utility::issp() && isDefined(var_6)) {
         if(var_6 == "both") {
-          call[[level._id_14F6]](var_7, 0, self.origin, var_5, 128, "allies", "bad_guys");
+          call[[level.badplace_cylinder_func]](var_7, 0, self.origin, var_5, 128, "allies", "bad_guys");
         } else {
-          call[[level._id_14F6]](var_7, 0, self.origin, var_5, 128, var_6);
+          call[[level.badplace_cylinder_func]](var_7, 0, self.origin, var_5, 128, var_6);
         }
 
-        thread _id_14F8(var_7);
+        thread badplace_remove(var_7);
       } else {
-        call[[level._id_14F6]](var_7, 0, self.origin, var_5, 128);
-        thread _id_14F8(var_7);
+        call[[level.badplace_cylinder_func]](var_7, 0, self.origin, var_5, 128);
+        thread badplace_remove(var_7);
       }
     }
   }
 
-  while(isDefined(self) && self._id_2E10[var_2].v["health"] > 0) {
+  while(isDefined(self) && self.destructible_parts[var_2].v["health"] > 0) {
     self notify("damage", var_0, self, (0, 0, 0), (0, 0, 0), "MOD_UNKNOWN", var_3, var_4);
     wait(var_1);
   }
@@ -1816,28 +1816,28 @@ _id_4C08(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self notify("remove_badplace");
 }
 
-_id_14F8(var_0) {
-  common_scripts\utility::_id_A70A("destroyed", "remove_badplace");
-  call[[level._id_14F7]](var_0);
+badplace_remove(var_0) {
+  common_scripts\utility::waittill_any("destroyed", "remove_badplace");
+  call[[level.badplace_delete_func]](var_0);
 }
 
-_id_6FA3(var_0, var_1, var_2, var_3) {
-  var_4 = _id_6FA6(var_0, var_1);
+physics_launch(var_0, var_1, var_2, var_3) {
+  var_4 = physics_object_create(var_0, var_1);
   var_4 physicslaunchclient(var_2, var_3);
 }
 
-_id_6FA4(var_0, var_1, var_2, var_3) {
-  var_4 = _id_6FA6(var_0, var_1);
+physics_launch_with_impulse(var_0, var_1, var_2, var_3) {
+  var_4 = physics_object_create(var_0, var_1);
   var_4 physicslaunchclientwithimpulse(var_2, var_3);
 }
 
-_id_6FA6(var_0, var_1) {
-  var_2 = level._id_0075[self._id_2E25]._id_6E9F[var_0][var_1].v["modelName"];
-  var_3 = level._id_0075[self._id_2E25]._id_6E9F[var_0][var_1].v["tagName"];
-  _id_4D03(var_3);
+physics_object_create(var_0, var_1) {
+  var_2 = level._id_0075[self.destuctableinfo].parts[var_0][var_1].v["modelName"];
+  var_3 = level._id_0075[self.destuctableinfo].parts[var_0][var_1].v["tagName"];
+  hideapart(var_3);
 
   if(level._id_2E29.size >= level._id_2E2A) {
-    _id_6FA7(level._id_2E29[0]);
+    physics_object_remove(level._id_2E29[0]);
   }
 
   var_4 = spawn("script_model", self gettagorigin(var_3));
@@ -1847,7 +1847,7 @@ _id_6FA6(var_0, var_1) {
   return var_4;
 }
 
-_id_6FA7(var_0) {
+physics_object_remove(var_0) {
   var_1 = [];
 
   for(var_2 = 0; var_2 < level._id_2E29.size; var_2++) {
@@ -1864,9 +1864,9 @@ _id_6FA7(var_0) {
   }
 }
 
-_id_3923(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14) {
-  if(isDefined(var_3) && isDefined(level._id_2DF5)) {
-    var_3 = var_3 * level._id_2DF5;
+explode(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14) {
+  if(isDefined(var_3) && isDefined(level.destructible_explosion_radius_multiplier)) {
+    var_3 = var_3 * level.destructible_explosion_radius_multiplier;
   }
 
   if(!isDefined(var_7)) {
@@ -1878,10 +1878,10 @@ _id_3923(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(!isDefined(var_6) || isDefined(var_6) && !var_6) {
-    if(isDefined(self._id_3928)) {
+    if(isDefined(self.exploded)) {
       return;
     }
-    self._id_3928 = 1;
+    self.exploded = 1;
   }
 
   if(!isDefined(var_12)) {
@@ -1892,25 +1892,25 @@ _id_3923(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   level notify("destructible_exploded", self, var_10);
 
   if(self._id_003B == "script_vehicle") {
-    self notify("death", var_10, self._id_29B2);
+    self notify("death", var_10, self.damage_type);
   }
 
   if(common_scripts\utility::issp()) {
-    thread _id_2FC6();
+    thread disconnecttraverses();
   }
 
-  if(!level._id_3A53) {
+  if(!level.fast_destructible_explode) {
     waitframe();
   }
 
   if(!isDefined(self)) {
     return;
   }
-  var_15 = self._id_2E10[var_0].v["currentState"];
+  var_15 = self.destructible_parts[var_0].v["currentState"];
   var_16 = undefined;
 
-  if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_0][var_15])) {
-    var_16 = level._id_0075[self._id_2E25]._id_6E9F[var_0][var_15].v["tagName"];
+  if(isDefined(level._id_0075[self.destuctableinfo].parts[var_0][var_15])) {
+    var_16 = level._id_0075[self.destuctableinfo].parts[var_0][var_15].v["tagName"];
   }
 
   if(isDefined(var_16)) {
@@ -1923,19 +1923,19 @@ _id_3923(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   self notify("stop_car_alarm");
   waittillframeend;
 
-  if(isDefined(level._id_0075[self._id_2E25]._id_6E9F)) {
-    for(var_18 = level._id_0075[self._id_2E25]._id_6E9F.size - 1; var_18 >= 0; var_18--) {
+  if(isDefined(level._id_0075[self.destuctableinfo].parts)) {
+    for(var_18 = level._id_0075[self.destuctableinfo].parts.size - 1; var_18 >= 0; var_18--) {
       if(var_18 == var_0) {
         continue;
       }
-      var_19 = self._id_2E10[var_18].v["currentState"];
+      var_19 = self.destructible_parts[var_18].v["currentState"];
 
-      if(var_19 >= level._id_0075[self._id_2E25]._id_6E9F[var_18].size) {
-        var_19 = level._id_0075[self._id_2E25]._id_6E9F[var_18].size - 1;
+      if(var_19 >= level._id_0075[self.destuctableinfo].parts[var_18].size) {
+        var_19 = level._id_0075[self.destuctableinfo].parts[var_18].size - 1;
       }
 
-      var_20 = level._id_0075[self._id_2E25]._id_6E9F[var_18][var_19].v["modelName"];
-      var_16 = level._id_0075[self._id_2E25]._id_6E9F[var_18][var_19].v["tagName"];
+      var_20 = level._id_0075[self.destuctableinfo].parts[var_18][var_19].v["modelName"];
+      var_16 = level._id_0075[self.destuctableinfo].parts[var_18][var_19].v["tagName"];
 
       if(!isDefined(var_20)) {
         continue;
@@ -1945,31 +1945,31 @@ _id_3923(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
       }
       var_21 = 0;
 
-      if(isDefined(self._id_2E10[var_18].v["health"])) {
-        var_21 = self._id_2E10[var_18].v["health"];
+      if(isDefined(self.destructible_parts[var_18].v["health"])) {
+        var_21 = self.destructible_parts[var_18].v["health"];
       }
 
       var_22 = 0;
 
-      if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_18][var_19].v["health"])) {
-        var_22 = level._id_0075[self._id_2E25]._id_6E9F[var_18][var_19].v["health"];
+      if(isDefined(level._id_0075[self.destuctableinfo].parts[var_18][var_19].v["health"])) {
+        var_22 = level._id_0075[self.destuctableinfo].parts[var_18][var_19].v["health"];
       }
 
       if(var_22 > 0 && var_21 <= 0) {
         continue;
       }
-      if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_18][0].v["physicsOnExplosion"])) {
-        if(level._id_0075[self._id_2E25]._id_6E9F[var_18][0].v["physicsOnExplosion"] > 0) {
-          var_23 = level._id_0075[self._id_2E25]._id_6E9F[var_18][0].v["physicsOnExplosion"];
+      if(isDefined(level._id_0075[self.destuctableinfo].parts[var_18][0].v["physicsOnExplosion"])) {
+        if(level._id_0075[self.destuctableinfo].parts[var_18][0].v["physicsOnExplosion"] > 0) {
+          var_23 = level._id_0075[self.destuctableinfo].parts[var_18][0].v["physicsOnExplosion"];
           var_24 = self gettagorigin(var_16);
           var_25 = vectorNormalize(var_24 - var_17);
           var_25 = var_25 * (_randomfloatrange(var_1, var_2) * var_23);
 
           if(isDefined(var_13) && isDefined(var_14)) {
-            var_26 = common_scripts\utility::_id_7A61(var_13, var_14);
-            thread _id_6FA4(var_18, var_19, var_25, var_26);
+            var_26 = common_scripts\utility::randomvectorrange(var_13, var_14);
+            thread physics_launch_with_impulse(var_18, var_19, var_25, var_26);
           } else
-            thread _id_6FA3(var_18, var_19, var_24, var_25);
+            thread physics_launch(var_18, var_19, var_24, var_25);
 
           continue;
         }
@@ -1983,7 +1983,7 @@ _id_3923(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     self notify("stop_taking_damage");
   }
 
-  if(!level._id_3A53) {
+  if(!level.fast_destructible_explode) {
     waitframe();
   }
 
@@ -1991,35 +1991,35 @@ _id_3923(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     return;
   }
   var_28 = var_17 + (0, 0, var_7) + var_11;
-  var_29 = getsubstr(level._id_0075[self._id_2E25].v["type"], 0, 7) == "vehicle";
+  var_29 = getsubstr(level._id_0075[self.destuctableinfo].v["type"], 0, 7) == "vehicle";
 
   if(var_29) {
-    anim._id_5B7D = gettime();
-    anim._id_5B7A = var_28;
-    anim._id_5B7B = var_17;
-    anim._id_5B7C = var_3;
+    anim.lastcarexplosiontime = gettime();
+    anim.lastcarexplosiondamagelocation = var_28;
+    anim.lastcarexplosionlocation = var_17;
+    anim.lastcarexplosionrange = var_3;
   }
 
-  level thread _id_846F(1);
+  level thread set_disable_friendlyfire_value_delayed(1);
 
   if(var_12 > 0) {
     wait(var_12);
   }
 
-  if(isDefined(level._id_2E12)) {
-    thread[[level._id_2E12]]();
+  if(isDefined(level.destructible_protection_func)) {
+    thread[[level.destructible_protection_func]]();
   }
 
   if(common_scripts\utility::issp()) {
-    if(level._id_3FD4 == 0 && !_id_7381()) {
+    if(level.gameskill == 0 && !player_touching_post_clip()) {
       self radiusdamage(var_28, var_3, var_5, var_4, self, "MOD_RIFLE_BULLET");
     } else {
       self radiusdamage(var_28, var_3, var_5, var_4, self);
     }
 
-    if(isDefined(self._id_29D4) && var_29) {
-      self._id_29D4 notify("destroyed_car");
-      level notify("player_destroyed_car", self._id_29D4, var_28);
+    if(isDefined(self.damageowner) && var_29) {
+      self.damageowner notify("destroyed_car");
+      level notify("player_destroyed_car", self.damageowner, var_28);
     }
   } else {
     var_30 = "destructible_toy";
@@ -2028,14 +2028,14 @@ _id_3923(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
       var_30 = "destructible_car";
     }
 
-    if(!isDefined(self._id_29D4)) {
+    if(!isDefined(self.damageowner)) {
       self radiusdamage(var_28, var_3, var_5, var_4, self, "MOD_EXPLOSIVE", var_30);
     } else {
-      self radiusdamage(var_28, var_3, var_5, var_4, self._id_29D4, "MOD_EXPLOSIVE", var_30);
+      self radiusdamage(var_28, var_3, var_5, var_4, self.damageowner, "MOD_EXPLOSIVE", var_30);
 
       if(var_29) {
-        self._id_29D4 notify("destroyed_car");
-        level notify("player_destroyed_car", self._id_29D4, var_28);
+        self.damageowner notify("destroyed_car");
+        level notify("player_destroyed_car", self.damageowner, var_28);
       }
     }
   }
@@ -2044,7 +2044,7 @@ _id_3923(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     _earthquake(var_8, 2.0, var_28, var_9);
   }
 
-  level thread _id_846F(0, 0.05);
+  level thread set_disable_friendlyfire_value_delayed(0, 0.05);
   var_31 = 0.01;
   var_32 = var_3 * var_31;
   var_3 = var_3 * 0.99;
@@ -2052,16 +2052,16 @@ _id_3923(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
   if(var_27) {
     self setCanDamage(0);
-    thread _id_2398();
+    thread cleanupvars();
   }
 
   self notify("destroyed");
 }
 
-_id_2398() {
+cleanupvars() {
   waitframe();
 
-  while(isDefined(self) && isDefined(self._id_A6E7)) {
+  while(isDefined(self) && isDefined(self.waiting_for_queue)) {
     self waittill("queue_processed");
     waitframe();
   }
@@ -2070,27 +2070,27 @@ _id_2398() {
     return;
   }
   self._id_0ED4 = undefined;
-  self._id_1180 = undefined;
-  self._id_1FCF = undefined;
-  self._id_1FD9 = undefined;
-  self._id_29D4 = undefined;
-  self._id_2E10 = undefined;
+  self.attacker = undefined;
+  self.car_damage_owner_recorder = undefined;
+  self.caralarm = undefined;
+  self.damageowner = undefined;
+  self.destructible_parts = undefined;
   self._id_0075 = undefined;
-  self._id_2E25 = undefined;
-  self._id_4C18 = undefined;
-  self._id_6727 = undefined;
-  self._id_724D = undefined;
+  self.destuctableinfo = undefined;
+  self.healthdrain = undefined;
+  self.non_player_damage = undefined;
+  self.player_damage = undefined;
 
-  if(!isDefined(level._id_2DEC)) {
+  if(!isDefined(level.destructible_cleans_up_more)) {
     return;
   }
   self.setjitterparams = undefined;
-  self._id_3949 = undefined;
-  self._id_5EFB = undefined;
-  self._id_1FC7 = undefined;
+  self.exploding = undefined;
+  self.loopingsoundstopnotifies = undefined;
+  self.car_alarm_org = undefined;
 }
 
-_id_846F(var_0, var_1) {
+set_disable_friendlyfire_value_delayed(var_0, var_1) {
   level notify("set_disable_friendlyfire_value_delayed");
   level endon("set_disable_friendlyfire_value_delayed");
 
@@ -2098,31 +2098,31 @@ _id_846F(var_0, var_1) {
     wait(var_1);
   }
 
-  level._id_3ECF = var_0;
+  level.friendlyfiredisabledfordestructible = var_0;
 }
 
-_id_258B() {
-  var_0 = _id_4391();
+connecttraverses() {
+  var_0 = get_traverse_disconnect_brush();
 
   if(!isDefined(var_0)) {
     return;
   }
-  var_0 call[[level._id_2587]]();
+  var_0 call[[level.connectpathsfunction]]();
   var_0.origin = var_0.origin - (0, 0, 10000);
 }
 
-_id_2FC6() {
-  var_0 = _id_4391();
+disconnecttraverses() {
+  var_0 = get_traverse_disconnect_brush();
 
   if(!isDefined(var_0)) {
     return;
   }
   var_0.origin = var_0.origin + (0, 0, 10000);
-  var_0 call[[level._id_2FC3]]();
+  var_0 call[[level.disconnectpathsfunction]]();
   var_0.origin = var_0.origin - (0, 0, 10000);
 }
 
-_id_4391() {
+get_traverse_disconnect_brush() {
   if(!isDefined(self.target)) {
     return undefined;
   }
@@ -2146,31 +2146,31 @@ _id_4391() {
   }
 }
 
-_id_4D03(var_0) {
+hideapart(var_0) {
   self hidepart(var_0);
 }
 
-_id_8BED(var_0) {
+showapart(var_0) {
   self showpart(var_0);
 }
 
-_id_2F37() {
-  self._id_323D = 1;
+disable_explosion() {
+  self.dontallowexplode = 1;
 }
 
-_id_3DED() {
-  self._id_323D = undefined;
-  self._id_3E1B = 1;
+force_explosion() {
+  self.dontallowexplode = undefined;
+  self.forceexploding = 1;
   self notify("damage", 100000, self, self.origin, self.origin, "MOD_EXPLOSIVE", "", "");
 }
 
-_id_4168() {
+get_dummy() {
   if(!common_scripts\utility::issp()) {
     return self;
   }
 
-  if(self._id_6297) {
-    var_0 = self._id_6296;
+  if(self.modeldummyon) {
+    var_0 = self.modeldummy;
   } else {
     var_0 = self;
   }
@@ -2178,8 +2178,8 @@ _id_4168() {
   return var_0;
 }
 
-_id_7152(var_0, var_1) {
-  var_2 = _id_4168();
+play_loop_sound_on_destructible(var_0, var_1) {
+  var_2 = get_dummy();
   var_3 = spawn("script_origin", (0, 0, 0));
 
   if(isDefined(var_1)) {
@@ -2189,7 +2189,7 @@ _id_7152(var_0, var_1) {
   }
 
   var_3 playLoopSound(var_0);
-  var_2 thread _id_3E01(var_0);
+  var_2 thread force_stop_sound(var_0);
   var_2 waittill("stop sound" + var_0);
 
   if(!isDefined(var_3)) {
@@ -2199,16 +2199,16 @@ _id_7152(var_0, var_1) {
   var_3 delete();
 }
 
-_id_3E01(var_0) {
+force_stop_sound(var_0) {
   self endon("stop sound" + var_0);
   level waittill("putout_fires");
   self notify("stop sound" + var_0);
 }
 
-_id_6807(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+notifydamageafterframe(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   waittillframeend;
 
-  if(isDefined(self._id_3928)) {
+  if(isDefined(self.exploded)) {
     return;
   }
   if(common_scripts\utility::issp()) {
@@ -2220,7 +2220,7 @@ _id_6807(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self notify("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6);
 }
 
-_id_71A7(var_0, var_1) {
+play_sound(var_0, var_1) {
   if(isDefined(var_1)) {
     var_2 = spawn("script_origin", self gettagorigin(var_1));
     var_2 hide();
@@ -2241,55 +2241,55 @@ _id_71A7(var_0, var_1) {
   }
 }
 
-_id_3097() {
-  if(isDefined(self._id_1FD9)) {
+do_car_alarm() {
+  if(isDefined(self.caralarm)) {
     return;
   }
-  self._id_1FD9 = 1;
+  self.caralarm = 1;
 
-  if(!_id_8B54()) {
+  if(!should_do_car_alarm()) {
     return;
   }
-  self._id_1FC7 = spawn("script_model", self.origin);
-  self._id_1FC7 hide();
-  self._id_1FC7 playLoopSound("car_alarm");
-  level._id_2928++;
-  thread _id_1FC8();
+  self.car_alarm_org = spawn("script_model", self.origin);
+  self.car_alarm_org hide();
+  self.car_alarm_org playLoopSound("car_alarm");
+  level.currentcaralarms++;
+  thread car_alarm_timeout();
   self waittill("stop_car_alarm");
-  level._id_5B79 = gettime();
-  level._id_2928--;
-  self._id_1FC7 stoploopsound("car_alarm");
-  self._id_1FC7 delete();
+  level.lastcaralarmtime = gettime();
+  level.currentcaralarms--;
+  self.car_alarm_org stoploopsound("car_alarm");
+  self.car_alarm_org delete();
 }
 
-_id_1FC8() {
+car_alarm_timeout() {
   self endon("stop_car_alarm");
   wait 25;
 
   if(!isDefined(self)) {
     return;
   }
-  thread _id_71A7("car_alarm_off");
+  thread play_sound("car_alarm_off");
   self notify("stop_car_alarm");
 }
 
-_id_8B54() {
-  if(level._id_2928 >= 2) {
+should_do_car_alarm() {
+  if(level.currentcaralarms >= 2) {
     return 0;
   }
 
   var_0 = undefined;
 
-  if(!isDefined(level._id_5B79)) {
-    if(common_scripts\utility::_id_24A6()) {
+  if(!isDefined(level.lastcaralarmtime)) {
+    if(common_scripts\utility::cointoss()) {
       return 1;
     }
 
-    var_0 = gettime() - level._id_254D;
+    var_0 = gettime() - level.commonstarttime;
   } else
-    var_0 = gettime() - level._id_5B79;
+    var_0 = gettime() - level.lastcaralarmtime;
 
-  if(level._id_2928 == 0 && var_0 >= 120) {
+  if(level.currentcaralarms == 0 && var_0 >= 120) {
     return 1;
   }
 
@@ -2300,7 +2300,7 @@ _id_8B54() {
   return 0;
 }
 
-_id_30DF(var_0, var_1, var_2, var_3) {
+do_random_dynamic_attachment(var_0, var_1, var_2, var_3) {
   var_4 = [];
 
   if(common_scripts\utility::issp()) {
@@ -2325,7 +2325,7 @@ _id_30DF(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     var_5 = self gettagorigin(var_0);
-    var_6 = _id_410A(var_5, var_3);
+    var_6 = get_closest_with_targetname(var_5, var_3);
 
     if(isDefined(var_6)) {
       var_6 delete();
@@ -2351,7 +2351,7 @@ _id_30DF(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_410A(var_0, var_1) {
+get_closest_with_targetname(var_0, var_1) {
   var_2 = undefined;
   var_3 = undefined;
   var_4 = getEntArray(var_1, "targetname");
@@ -2368,7 +2368,7 @@ _id_410A(var_0, var_1) {
   return var_3;
 }
 
-_id_7381() {
+player_touching_post_clip() {
   var_0 = undefined;
 
   if(!isDefined(self.target)) {
@@ -2388,7 +2388,7 @@ _id_7381() {
     return 0;
   }
 
-  var_5 = _id_42AD(var_0);
+  var_5 = get_player_touching(var_0);
 
   if(isDefined(var_5)) {
     return 1;
@@ -2397,7 +2397,7 @@ _id_7381() {
   return 0;
 }
 
-_id_42AD(var_0) {
+get_player_touching(var_0) {
   foreach(var_2 in level.players) {
     if(!isalive(var_2)) {
       continue;
@@ -2410,15 +2410,15 @@ _id_42AD(var_0) {
   return undefined;
 }
 
-_id_560F() {
+is_so() {
   return getDvar("1996") == "1";
 }
 
-_id_2E05() {
+destructible_handles_collision_brushes() {
   var_0 = getEntArray(self.target, "targetname");
   var_1 = [];
-  var_1["pre"] = ::_id_24E0;
-  var_1["post"] = ::_id_24DF;
+  var_1["pre"] = ::collision_brush_pre_explosion;
+  var_1["post"] = ::collision_brush_post_explosion;
 
   foreach(var_3 in var_0) {
     if(!isDefined(var_3.getenemyinfo)) {
@@ -2428,27 +2428,27 @@ _id_2E05() {
   }
 }
 
-_id_24E0(var_0) {
+collision_brush_pre_explosion(var_0) {
   waittillframeend;
 
   if(common_scripts\utility::issp() && var_0.spawnflags & 1) {
-    var_0 call[[level._id_2FC3]]();
+    var_0 call[[level.disconnectpathsfunction]]();
   }
 
   self waittill("exploded");
 
   if(common_scripts\utility::issp() && var_0.spawnflags & 1) {
-    var_0 call[[level._id_2587]]();
+    var_0 call[[level.connectpathsfunction]]();
   }
 
   var_0 delete();
 }
 
-_id_24DF(var_0) {
+collision_brush_post_explosion(var_0) {
   var_0 notsolid();
 
   if(common_scripts\utility::issp() && var_0.spawnflags & 1) {
-    var_0 call[[level._id_2587]]();
+    var_0 call[[level.connectpathsfunction]]();
   }
 
   self waittill("exploded");
@@ -2456,14 +2456,14 @@ _id_24DF(var_0) {
 
   if(common_scripts\utility::issp()) {
     if(var_0.spawnflags & 1) {
-      var_0 call[[level._id_2FC3]]();
+      var_0 call[[level.disconnectpathsfunction]]();
     }
 
-    if(_id_560F()) {
-      var_1 = _id_42AD(var_0);
+    if(is_so()) {
+      var_1 = get_player_touching(var_0);
 
       if(isDefined(var_1)) {
-        self thread[[level._id_3F05]](var_1);
+        self thread[[level.func_destructible_crush_player]](var_1);
       }
     } else {}
   }
@@ -2473,7 +2473,7 @@ _id_24DF(var_0) {
 
 _id_2AFD(var_0) {}
 
-_id_2E01(var_0) {
+destructible_get_my_breakable_light(var_0) {
   var_1 = getEntArray("light_destructible", "targetname");
 
   if(common_scripts\utility::issp()) {
@@ -2499,17 +2499,17 @@ _id_2E01(var_0) {
   if(!isDefined(var_4)) {
     return;
   }
-  self._id_1BAF = var_4;
+  self.breakable_light = var_4;
 }
 
-_id_1BA6(var_0) {
-  if(!isDefined(self._id_1BAF)) {
+break_nearest_light(var_0) {
+  if(!isDefined(self.breakable_light)) {
     return;
   }
-  self._id_1BAF setlightintensity(0);
+  self.breakable_light setlightintensity(0);
 }
 
-_id_2B01(var_0, var_1, var_2, var_3) {
+debug_radiusdamage_circle(var_0, var_1, var_2, var_3) {
   var_4 = 16;
   var_5 = 360 / var_4;
   var_6 = [];
@@ -2524,7 +2524,7 @@ _id_2B01(var_0, var_1, var_2, var_3) {
     var_6[var_6.size] = (var_11, var_12, var_13);
   }
 
-  thread _id_2AC5(var_6, 5.0, (1, 0, 0), var_0);
+  thread debug_circle_drawlines(var_6, 5.0, (1, 0, 0), var_0);
   var_6 = [];
 
   for(var_7 = 0; var_7 < var_4; var_7++) {
@@ -2537,7 +2537,7 @@ _id_2B01(var_0, var_1, var_2, var_3) {
     var_6[var_6.size] = (var_11, var_12, var_13);
   }
 
-  thread _id_2AC5(var_6, 5.0, (1, 0, 0), var_0);
+  thread debug_circle_drawlines(var_6, 5.0, (1, 0, 0), var_0);
   var_6 = [];
 
   for(var_7 = 0; var_7 < var_4; var_7++) {
@@ -2550,10 +2550,10 @@ _id_2B01(var_0, var_1, var_2, var_3) {
     var_6[var_6.size] = (var_11, var_12, var_13);
   }
 
-  thread _id_2AC5(var_6, 5.0, (1, 0, 0), var_0);
+  thread debug_circle_drawlines(var_6, 5.0, (1, 0, 0), var_0);
 }
 
-_id_2AC5(var_0, var_1, var_2, var_3) {
+debug_circle_drawlines(var_0, var_1, var_2, var_3) {
   for(var_4 = 0; var_4 < var_0.size; var_4++) {
     var_5 = var_0[var_4];
 
@@ -2563,12 +2563,12 @@ _id_2AC5(var_0, var_1, var_2, var_3) {
       var_6 = var_0[var_4 + 1];
     }
 
-    thread _id_2AF0(var_5, var_6, var_1, var_2);
-    thread _id_2AF0(var_3, var_5, var_1, var_2);
+    thread debug_line(var_5, var_6, var_1, var_2);
+    thread debug_line(var_3, var_5, var_1, var_2);
   }
 }
 
-_id_2AF0(var_0, var_1, var_2, var_3) {
+debug_line(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {
     var_3 = (1, 1, 1);
   }
@@ -2578,52 +2578,52 @@ _id_2AF0(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_911E(var_0) {
+spotlight_tag_origin_cleanup(var_0) {
   var_0 endon("death");
   level waittill("new_destructible_spotlight");
   var_0 delete();
 }
 
-_id_9117(var_0, var_1, var_2, var_3, var_4) {
+spotlight_fizzles_out(var_0, var_1, var_2, var_3, var_4) {
   level endon("new_destructible_spotlight");
-  thread _id_911E(var_4);
+  thread spotlight_tag_origin_cleanup(var_4);
   var_5 = var_0["spotlight_brightness"];
   wait(_randomfloatrange(2, 5));
-  _id_2E00(var_0, var_1, var_2, var_3);
-  level._id_2E1A delete();
+  destructible_fx_think(var_0, var_1, var_2, var_3);
+  level.destructible_spotlight delete();
   var_4 delete();
 }
 
-_id_2E1B(var_0, var_1, var_2, var_3) {
+destructible_spotlight_think(var_0, var_1, var_2, var_3) {
   if(!common_scripts\utility::issp()) {
     return;
   }
-  if(!isDefined(self._id_1BAF)) {
+  if(!isDefined(self.breakable_light)) {
     return;
   }
   var_1 common_scripts\utility::getweaponheatlevel("startignoringspotLight");
 
-  if(!isDefined(level._id_2E1A)) {
-    level._id_2E1A = common_scripts\utility::_id_8FFC();
-    var_4 = common_scripts\utility::_id_44F5(var_0["spotlight_fx"]);
-    _playFXOnTag(var_4, level._id_2E1A, "tag_origin");
+  if(!isDefined(level.destructible_spotlight)) {
+    level.destructible_spotlight = common_scripts\utility::spawn_tag_origin();
+    var_4 = common_scripts\utility::getfx(var_0["spotlight_fx"]);
+    _playFXOnTag(var_4, level.destructible_spotlight, "tag_origin");
   }
 
   level notify("new_destructible_spotlight");
-  level._id_2E1A unlink();
-  var_5 = common_scripts\utility::_id_8FFC();
+  level.destructible_spotlight unlink();
+  var_5 = common_scripts\utility::spawn_tag_origin();
   var_5 linkTo(self, var_0["spotlight_tag"], (0, 0, 0), (0, 0, 0));
-  level._id_2E1A.origin = self._id_1BAF.origin;
-  level._id_2E1A.angles = self._id_1BAF.angles;
-  level._id_2E1A thread _id_9117(var_0, var_1, var_2, var_3, var_5);
+  level.destructible_spotlight.origin = self.breakable_light.origin;
+  level.destructible_spotlight.angles = self.breakable_light.angles;
+  level.destructible_spotlight thread spotlight_fizzles_out(var_0, var_1, var_2, var_3, var_5);
   waitframe();
 
   if(isDefined(var_5)) {
-    level._id_2E1A linkTo(var_5);
+    level.destructible_spotlight linkTo(var_5);
   }
 }
 
-_id_5641(var_0, var_1, var_2, var_3) {
+is_valid_damagetype(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
 
   if(isDefined(var_1["fx_valid_damagetype"])) {
@@ -2637,8 +2637,8 @@ _id_5641(var_0, var_1, var_2, var_3) {
   return issubstr(var_4, var_0);
 }
 
-_id_2E16(var_0, var_1, var_2, var_3) {
-  if(isDefined(self._id_3928)) {
+destructible_sound_think(var_0, var_1, var_2, var_3) {
+  if(isDefined(self.exploded)) {
     return undefined;
   }
 
@@ -2655,28 +2655,28 @@ _id_2E16(var_0, var_1, var_2, var_3) {
   }
 
   for(var_4 = 0; var_4 < var_0["sound"][var_3].size; var_4++) {
-    var_5 = _id_583B("soundCause", var_0, var_4, var_2, var_3);
+    var_5 = isvalidsoundcause("soundCause", var_0, var_4, var_2, var_3);
 
     if(!var_5) {
       continue;
     }
     var_6 = var_0["sound"][var_3][var_4];
     var_7 = var_0["tagName"];
-    var_1 thread _id_71A7(var_6, var_7);
+    var_1 thread play_sound(var_6, var_7);
   }
 
   return var_3;
 }
 
-_id_2DFC(var_0) {
-  var_1 = level._id_0075[self._id_2E25]._id_6E9F[0].size - 1;
+destructible_fx_kill_state_wait(var_0) {
+  var_1 = level._id_0075[self.destuctableinfo].parts[0].size - 1;
   self endon("FX_State_Change_Kill" + var_0);
 
   for(;;) {
     var_2 = -1;
 
-    if(isDefined(self._id_2E10[0].v["currentState"])) {
-      var_2 = self._id_2E10[0].v["currentState"];
+    if(isDefined(self.destructible_parts[0].v["currentState"])) {
+      var_2 = self.destructible_parts[0].v["currentState"];
     }
 
     if(var_2 == var_1) {
@@ -2687,7 +2687,7 @@ _id_2DFC(var_0) {
   }
 }
 
-_id_2DFE(var_0, var_1, var_2, var_3, var_4, var_5) {
+destructible_fx_spawn_think(var_0, var_1, var_2, var_3, var_4, var_5) {
   waittillframeend;
 
   if(!isDefined(var_5)) {
@@ -2703,7 +2703,7 @@ _id_2DFE(var_0, var_1, var_2, var_3, var_4, var_5) {
       waitframe();
 
       if(var_5 == 1 || var_5 == 2) {
-        _id_2DFC(var_3);
+        destructible_fx_kill_state_wait(var_3);
 
         if(var_5 == 1) {
           _stopFXOnTag(var_1, var_0, var_2);
@@ -2724,7 +2724,7 @@ _id_2DFE(var_0, var_1, var_2, var_3, var_4, var_5) {
       waitframe();
 
       if(var_5 == 1 || var_5 == 2) {
-        _id_2DFC(var_3);
+        destructible_fx_kill_state_wait(var_3);
 
         if(var_5 == 1) {
           var_7 delete();
@@ -2748,7 +2748,7 @@ _id_2DFE(var_0, var_1, var_2, var_3, var_4, var_5) {
     waitframe();
 
     if(var_5 == 1 || var_5 == 2) {
-      _id_2DFC(var_3);
+      destructible_fx_kill_state_wait(var_3);
 
       if(var_5 == 1) {
         var_7 delete();
@@ -2761,15 +2761,15 @@ _id_2DFE(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 }
 
-_id_2DFF() {
-  if(!isDefined(level._id_0075[self._id_2E25]._id_6E9F)) {
+destructible_fx_spawnimmediate() {
+  if(!isDefined(level._id_0075[self.destuctableinfo].parts)) {
     return;
   }
-  var_0 = _id_4168();
+  var_0 = get_dummy();
 
-  for(var_1 = 0; var_1 < level._id_0075[self._id_2E25]._id_6E9F.size; var_1++) {
-    for(var_2 = 0; var_2 < level._id_0075[self._id_2E25]._id_6E9F[var_1].size; var_2++) {
-      var_3 = level._id_0075[self._id_2E25]._id_6E9F[var_1][var_2];
+  for(var_1 = 0; var_1 < level._id_0075[self.destuctableinfo].parts.size; var_1++) {
+    for(var_2 = 0; var_2 < level._id_0075[self.destuctableinfo].parts[var_1].size; var_2++) {
+      var_3 = level._id_0075[self.destuctableinfo].parts[var_1][var_2];
 
       if(isDefined(var_3.v["fx_filename"])) {
         for(var_4 = 0; var_4 < var_3.v["fx_filename"].size; var_4++) {
@@ -2781,11 +2781,11 @@ _id_2DFF() {
             for(var_8 = 0; var_8 < var_5.size; var_8++) {
               if(var_7[var_8] == 1) {
                 var_9 = var_3.v["state_change_kill"][var_4][var_8];
-                var_10 = level._id_0075[self._id_2E25]._id_6E9F[var_1][var_2].v["fx"][var_4][var_8];
+                var_10 = level._id_0075[self.destuctableinfo].parts[var_1][var_2].v["fx"][var_4][var_8];
                 var_11 = var_6[var_8];
                 var_12 = var_5[var_8];
-                var_13 = level._id_0075[self._id_2E25]._id_6E9F[var_1][var_2].v["fx_useTagAngles"][var_4][var_8];
-                thread _id_2DFE(var_0, var_10, var_11, var_1, var_13, var_9);
+                var_13 = level._id_0075[self.destuctableinfo].parts[var_1][var_2].v["fx_useTagAngles"][var_4][var_8];
+                thread destructible_fx_spawn_think(var_0, var_10, var_11, var_1, var_13, var_9);
               }
             }
           }
@@ -2795,7 +2795,7 @@ _id_2DFF() {
   }
 }
 
-_id_2E00(var_0, var_1, var_2, var_3, var_4) {
+destructible_fx_think(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_0["fx"])) {
     return undefined;
   }
@@ -2811,7 +2811,7 @@ _id_2E00(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_0["fx_filename"][var_4].size;
 
   for(var_6 = 0; var_6 < var_5; var_6++) {
-    if(!_id_5641(var_2, var_0, var_6, var_4)) {
+    if(!is_valid_damagetype(var_2, var_0, var_6, var_4)) {
       continue;
     }
     if(var_0["spawn_immediate"][var_4][var_6] == 1) {
@@ -2825,22 +2825,22 @@ _id_2E00(var_0, var_1, var_2, var_3, var_4) {
       self notify("FX_State_Change" + var_3);
 
       if(var_0["fx_useTagAngles"][var_4][var_6]) {
-        thread _id_2DFE(var_1, var_7, var_9, var_3, 1, var_8);
+        thread destructible_fx_spawn_think(var_1, var_7, var_9, var_3, 1, var_8);
       } else {
-        thread _id_2DFE(var_1, var_7, var_9, var_3, 0, var_8);
+        thread destructible_fx_spawn_think(var_1, var_7, var_9, var_3, 0, var_8);
       }
 
       continue;
     }
 
-    thread _id_2DFE(var_1, var_7, undefined, var_3, 0, var_8);
+    thread destructible_fx_spawn_think(var_1, var_7, undefined, var_3, 0, var_8);
   }
 
   return var_4;
 }
 
-_id_2DE4(var_0, var_1, var_2, var_3) {
-  if(isDefined(self._id_3928)) {
+destructible_animation_think(var_0, var_1, var_2, var_3) {
+  if(isDefined(self.exploded)) {
     return undefined;
   }
 
@@ -2848,18 +2848,18 @@ _id_2DE4(var_0, var_1, var_2, var_3) {
     return undefined;
   }
 
-  if(isDefined(self._id_66E6)) {
+  if(isDefined(self.no_destructible_animation)) {
     return undefined;
   }
 
   if(isDefined(var_0["randomly_flip"]) && !isDefined(self.setjitterparams)) {
-    if(common_scripts\utility::_id_24A6()) {
+    if(common_scripts\utility::cointoss()) {
       self.angles = self.angles + (0, 180, 0);
     }
   }
 
   if(isDefined(var_0["spotlight_tag"])) {
-    thread _id_2E1B(var_0, var_1, var_2, var_3);
+    thread destructible_spotlight_think(var_0, var_1, var_2, var_3);
     waitframe();
   }
 
@@ -2901,8 +2901,8 @@ _id_2DE4(var_0, var_1, var_2, var_3) {
 
   self._id_0ED4[self._id_0ED4.size] = var_5;
 
-  if(isDefined(self._id_3949)) {
-    _id_23A2(var_1);
+  if(isDefined(self.exploding)) {
+    clear_anims(var_1);
   }
 
   if(isDefined(var_9) && var_9 > 0) {
@@ -2930,7 +2930,7 @@ _id_2DE4(var_0, var_1, var_2, var_3) {
   return undefined;
 }
 
-_id_23A2(var_0) {
+clear_anims(var_0) {
   if(isDefined(self._id_0ED4)) {
     foreach(var_2 in self._id_0ED4) {
       if(common_scripts\utility::issp()) {
@@ -2943,80 +2943,80 @@ _id_23A2(var_0) {
   }
 }
 
-_id_51B4() {
-  level._id_2DC8 = 0;
-  level._id_2DC9 = 0.5;
+init_destroyed_count() {
+  level.destroyedcount = 0;
+  level.destroyedcounttimeout = 0.5;
 
   if(common_scripts\utility::issp()) {
-    level._id_607E = 20;
+    level.maxdestructions = 20;
   } else {
-    level._id_607E = 2;
+    level.maxdestructions = 2;
   }
 }
 
 _id_0976() {
-  level._id_2DC8++;
-  wait(level._id_2DC9);
-  level._id_2DC8--;
+  level.destroyedcount++;
+  wait(level.destroyedcounttimeout);
+  level.destroyedcount--;
 }
 
-_id_414B() {
-  return level._id_2DC8;
+get_destroyed_count() {
+  return level.destroyedcount;
 }
 
-_id_420B() {
-  return level._id_607E;
+get_max_destroyed_count() {
+  return level.maxdestructions;
 }
 
-_id_51B5() {
-  level._id_2E24 = [];
+init_destructible_frame_queue() {
+  level.destructibleframequeue = [];
 }
 
 _id_091D(var_0, var_1, var_2) {
   var_3 = self getentitynumber();
 
-  if(!isDefined(level._id_2E24[var_3])) {
-    level._id_2E24[var_3] = spawnStruct();
-    level._id_2E24[var_3]._id_37D8 = var_3;
-    level._id_2E24[var_3]._id_2DE2 = var_0;
-    level._id_2E24[var_3]._id_9AB1 = 0;
-    level._id_2E24[var_3]._id_6635 = 9999999;
-    level._id_2E24[var_3]._id_3F6B = 0;
+  if(!isDefined(level.destructibleframequeue[var_3])) {
+    level.destructibleframequeue[var_3] = spawnStruct();
+    level.destructibleframequeue[var_3].entnum = var_3;
+    level.destructibleframequeue[var_3].destructible = var_0;
+    level.destructibleframequeue[var_3].totaldamage = 0;
+    level.destructibleframequeue[var_3].neardistance = 9999999;
+    level.destructibleframequeue[var_3].fxcost = 0;
   }
 
-  level._id_2E24[var_3]._id_3F6B = level._id_2E24[var_3]._id_3F6B + var_1.v["fxcost"];
-  level._id_2E24[var_3]._id_9AB1 = level._id_2E24[var_3]._id_9AB1 + var_2;
+  level.destructibleframequeue[var_3].fxcost = level.destructibleframequeue[var_3].fxcost + var_1.v["fxcost"];
+  level.destructibleframequeue[var_3].totaldamage = level.destructibleframequeue[var_3].totaldamage + var_2;
 
-  if(var_1.v["distance"] < level._id_2E24[var_3]._id_6635) {
-    level._id_2E24[var_3]._id_6635 = var_1.v["distance"];
+  if(var_1.v["distance"] < level.destructibleframequeue[var_3].neardistance) {
+    level.destructibleframequeue[var_3].neardistance = var_1.v["distance"];
   }
 
-  thread _id_49CE();
+  thread handle_destructible_frame_queue();
 }
 
-_id_49CE() {
+handle_destructible_frame_queue() {
   level notify("handle_destructible_frame_queue");
   level endon("handle_destructible_frame_queue");
   waitframe();
-  var_0 = level._id_2E24;
-  level._id_2E24 = [];
-  var_1 = _id_8F1F(var_0);
+  var_0 = level.destructibleframequeue;
+  level.destructibleframequeue = [];
+  var_1 = sort_destructible_frame_queue(var_0);
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(_id_414B() < _id_420B()) {
-      if(var_1[var_2]._id_3F6B) {
+    if(get_destroyed_count() < get_max_destroyed_count()) {
+      if(var_1[var_2].fxcost) {
         thread _id_0976();
       }
 
-      var_1[var_2]._id_2DE2 notify("queue_processed", 1);
+      var_1[var_2].destructible notify("queue_processed", 1);
       continue;
     }
 
-    var_1[var_2]._id_2DE2 notify("queue_processed", 0);
+    var_1[var_2].destructible notify("queue_processed", 0);
   }
 }
 
-_id_8F1F(var_0) {
+sort_destructible_frame_queue(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
@@ -3026,7 +3026,7 @@ _id_8F1F(var_0) {
   for(var_5 = 1; var_5 < var_1.size; var_5++) {
     var_6 = var_1[var_5];
 
-    for(var_7 = var_5 - 1; var_7 >= 0 && _id_40D5(var_6, var_1[var_7]) == var_6; var_7--) {
+    for(var_7 = var_5 - 1; var_7 >= 0 && get_better_destructible(var_6, var_1[var_7]) == var_6; var_7--) {
       var_1[var_7 + 1] = var_1[var_7];
     }
 
@@ -3036,22 +3036,22 @@ _id_8F1F(var_0) {
   return var_1;
 }
 
-_id_40D5(var_0, var_1) {
-  if(var_0._id_9AB1 > var_1._id_9AB1) {
+get_better_destructible(var_0, var_1) {
+  if(var_0.totaldamage > var_1.totaldamage) {
     return var_0;
   } else {
     return var_1;
   }
 }
 
-_id_4283(var_0, var_1) {
+get_part_fx_cost_for_action_state(var_0, var_1) {
   var_2 = 0;
 
-  if(!isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_0][var_1])) {
+  if(!isDefined(level._id_0075[self.destuctableinfo].parts[var_0][var_1])) {
     return var_2;
   }
 
-  var_3 = level._id_0075[self._id_2E25]._id_6E9F[var_0][var_1].v;
+  var_3 = level._id_0075[self.destuctableinfo].parts[var_0][var_1].v;
 
   if(isDefined(var_3["fx"])) {
     foreach(var_5 in var_3["fx_cost"]) {
@@ -3064,8 +3064,8 @@ _id_4283(var_0, var_1) {
   return var_2;
 }
 
-_id_52AF(var_0) {
-  if(!common_scripts\utility::_id_3C83("FLAG_DOT_init")) {
+initdot(var_0) {
+  if(!common_scripts\utility::flag_exist("FLAG_DOT_init")) {
     common_scripts\utility::flag_init("FLAG_DOT_init");
     common_scripts\utility::flag_set("FLAG_DOT_init");
   }
@@ -3074,7 +3074,7 @@ _id_52AF(var_0) {
 
   switch (var_0) {
     case "poison":
-      if(!common_scripts\utility::_id_3C83("FLAG_DOT_poison_init")) {
+      if(!common_scripts\utility::flag_exist("FLAG_DOT_poison_init")) {
         common_scripts\utility::flag_init("FLAG_DOT_poison_init");
         common_scripts\utility::flag_set("FLAG_DOT_poison_init");
       }
@@ -3084,60 +3084,60 @@ _id_52AF(var_0) {
   }
 }
 
-_id_27E2() {
+createdot() {
   var_0 = spawnStruct();
-  var_0._id_99C1 = [];
+  var_0.ticks = [];
   return var_0;
 }
 
-_id_27E3(var_0, var_1, var_2, var_3) {
+createdot_radius(var_0, var_1, var_2, var_3) {
   var_4 = spawnStruct();
   var_4.type = "trigger_radius";
   var_4.origin = var_0;
   var_4.spawnflags = var_1;
   var_4.radius = var_2;
-  var_4._id_6220 = var_2;
-  var_4._id_6098 = var_2;
+  var_4.minradius = var_2;
+  var_4.maxradius = var_2;
   var_4._id_00BD = var_3;
-  var_4._id_99C1 = [];
+  var_4.ticks = [];
   return var_4;
 }
 
-_id_866B(var_0) {
+setdot_origin(var_0) {
   self.origin = var_0;
 }
 
-_id_866C(var_0, var_1) {
+setdot_radius(var_0, var_1) {
   if(isDefined(self.classname) && self.classname != "trigger_radius") {}
 
   if(!isDefined(var_1)) {
     var_1 = var_0;
   }
 
-  self._id_6220 = var_0;
-  self._id_6098 = var_1;
+  self.minradius = var_0;
+  self.maxradius = var_1;
 }
 
-_id_8669(var_0, var_1) {
+setdot_height(var_0, var_1) {
   if(isDefined(self.classname) && issubstr(self.classname, "trigger")) {
     return;
   }
 }
 
-_id_866A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+setdot_ontick(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(isDefined(var_0)) {} else
     var_0 = 0;
 
   var_6 = _tolower(var_6);
   var_7 = _tolower(var_7);
-  var_8 = self._id_99C1.size;
-  self._id_99C1[var_8] = spawnStruct();
-  self._id_99C1[var_8]._id_35FE = 0;
-  self._id_99C1[var_8]._id_2CAC = var_0;
-  self._id_99C1[var_8]._id_00D9 = var_1;
-  self._id_99C1[var_8].duration = var_2;
-  self._id_99C1[var_8]._id_61BD = var_3;
-  self._id_99C1[var_8]._id_607B = var_4;
+  var_8 = self.ticks.size;
+  self.ticks[var_8] = spawnStruct();
+  self.ticks[var_8].enable = 0;
+  self.ticks[var_8].delay = var_0;
+  self.ticks[var_8]._id_00D9 = var_1;
+  self.ticks[var_8].duration = var_2;
+  self.ticks[var_8].mindamage = var_3;
+  self.ticks[var_8].maxdamage = var_4;
 
   switch (var_5) {
     case 1:
@@ -3146,8 +3146,8 @@ _id_866A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     default:
   }
 
-  self._id_99C1[var_8]._id_0093 = var_5;
-  self._id_99C1[var_8].starttime = 0;
+  self.ticks[var_8]._id_0093 = var_5;
+  self.ticks[var_8].starttime = 0;
 
   switch (var_6) {
     case "normal":
@@ -3155,11 +3155,11 @@ _id_866A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     case "poison":
       switch (var_7) {
         case "player":
-          self._id_99C1[var_8].type = var_6;
-          self._id_99C1[var_8]._id_0A32 = var_7;
-          self._id_99C1[var_8]._id_6B05 = ::_id_6B04;
-          self._id_99C1[var_8]._id_6B33 = ::_id_6B32;
-          self._id_99C1[var_8]._id_6AE6 = ::_id_6AE5;
+          self.ticks[var_8].type = var_6;
+          self.ticks[var_8]._id_0A32 = var_7;
+          self.ticks[var_8].onenterfunc = ::onenterdot_poisondamageplayer;
+          self.ticks[var_8].onexitfunc = ::onexitdot_poisondamageplayer;
+          self.ticks[var_8].ondeathfunc = ::ondeathdot_poisondamageplayer;
           break;
         default:
       }
@@ -3169,64 +3169,64 @@ _id_866A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 }
 
-_id_1D45(var_0, var_1) {
+builddot_ontick(var_0, var_1) {
   var_1 = _tolower(var_1);
-  var_2 = self._id_99C1.size;
-  self._id_99C1[var_2] = spawnStruct();
-  self._id_99C1[var_2].duration = var_0;
-  self._id_99C1[var_2]._id_2CAC = 0;
-  self._id_99C1[var_2]._id_6B05 = ::_id_6B00;
-  self._id_99C1[var_2]._id_6B33 = ::_id_6B30;
-  self._id_99C1[var_2]._id_6AE6 = ::_id_6AE4;
+  var_2 = self.ticks.size;
+  self.ticks[var_2] = spawnStruct();
+  self.ticks[var_2].duration = var_0;
+  self.ticks[var_2].delay = 0;
+  self.ticks[var_2].onenterfunc = ::onenterdot_buildfunc;
+  self.ticks[var_2].onexitfunc = ::onexitdot_buildfunc;
+  self.ticks[var_2].ondeathfunc = ::ondeathdot_buildfunc;
 
   switch (var_1) {
     case "player":
-      self._id_99C1[var_2]._id_0A32 = var_1;
+      self.ticks[var_2]._id_0A32 = var_1;
       break;
     default:
   }
 }
 
-_id_1D46(var_0) {
-  var_1 = self._id_99C1.size - 1;
+builddot_startloop(var_0) {
+  var_1 = self.ticks.size - 1;
 
-  if(!isDefined(self._id_99C1[var_1]._id_932C)) {
-    self._id_99C1[var_1]._id_932C = [];
+  if(!isDefined(self.ticks[var_1].statements)) {
+    self.ticks[var_1].statements = [];
   }
 
-  var_2 = self._id_99C1[var_1]._id_932C.size;
-  self._id_99C1[var_1]._id_932C = [];
-  self._id_99C1[var_1]._id_932C["vars"] = [];
-  self._id_99C1[var_1]._id_932C["vars"]["count"] = var_0;
+  var_2 = self.ticks[var_1].statements.size;
+  self.ticks[var_1].statements = [];
+  self.ticks[var_1].statements["vars"] = [];
+  self.ticks[var_1].statements["vars"]["count"] = var_0;
 }
 
-_id_1D44(var_0, var_1, var_2, var_3, var_4, var_5) {
-  var_6 = self._id_99C1.size - 1;
+builddot_damage(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = self.ticks.size - 1;
 
-  if(!isDefined(self._id_99C1[var_6]._id_932C["actions"])) {
-    self._id_99C1[var_6]._id_932C["actions"] = [];
+  if(!isDefined(self.ticks[var_6].statements["actions"])) {
+    self.ticks[var_6].statements["actions"] = [];
   }
 
-  var_7 = self._id_99C1[var_6]._id_932C["actions"].size;
-  self._id_99C1[var_6]._id_932C["actions"][var_7] = [];
-  self._id_99C1[var_6]._id_932C["actions"][var_7]["vars"] = [var_0, var_1, var_2, var_3, var_4, var_5];
-  self._id_99C1[var_6]._id_932C["actions"][var_7]["func"] = ::_id_310C;
+  var_7 = self.ticks[var_6].statements["actions"].size;
+  self.ticks[var_6].statements["actions"][var_7] = [];
+  self.ticks[var_6].statements["actions"][var_7]["vars"] = [var_0, var_1, var_2, var_3, var_4, var_5];
+  self.ticks[var_6].statements["actions"][var_7]["func"] = ::dobuilddot_damage;
 }
 
-_id_1D47(var_0) {
-  var_1 = self._id_99C1.size - 1;
+builddot_wait(var_0) {
+  var_1 = self.ticks.size - 1;
 
-  if(!isDefined(self._id_99C1[var_1]._id_932C["actions"])) {
-    self._id_99C1[var_1]._id_932C["actions"] = [];
+  if(!isDefined(self.ticks[var_1].statements["actions"])) {
+    self.ticks[var_1].statements["actions"] = [];
   }
 
-  var_2 = self._id_99C1[var_1]._id_932C["actions"].size;
-  self._id_99C1[var_1]._id_932C["actions"][var_2] = [];
-  self._id_99C1[var_1]._id_932C["actions"][var_2]["vars"] = [var_0];
-  self._id_99C1[var_1]._id_932C["actions"][var_2]["func"] = ::_id_310D;
+  var_2 = self.ticks[var_1].statements["actions"].size;
+  self.ticks[var_1].statements["actions"][var_2] = [];
+  self.ticks[var_1].statements["actions"][var_2]["vars"] = [var_0];
+  self.ticks[var_1].statements["actions"][var_2]["func"] = ::dobuilddot_wait;
 }
 
-_id_6B00(var_0, var_1) {
+onenterdot_buildfunc(var_0, var_1) {
   var_2 = var_1 getentitynumber();
   var_1 endon("death");
   var_1 endon("LISTEN_kill_tick_" + var_0 + "_" + var_2);
@@ -3235,7 +3235,7 @@ _id_6B00(var_0, var_1) {
   self endon("death");
   self endon("LISTEN_exit_dot_" + var_2);
   var_2 = undefined;
-  var_3 = var_1._id_99C1[var_0]._id_932C;
+  var_3 = var_1.ticks[var_0].statements;
 
   if(!isDefined(var_3) || !isDefined(var_3["vars"]) || !isDefined(var_3["vars"]["count"]) || !isDefined(var_3["actions"])) {
     return;
@@ -3253,15 +3253,15 @@ _id_6B00(var_0, var_1) {
   }
 }
 
-_id_6B30(var_0, var_1) {
+onexitdot_buildfunc(var_0, var_1) {
   var_2 = var_1 getentitynumber();
   var_3 = self getentitynumber();
   var_1 notify("LISTEN_kill_tick_" + var_0 + "_" + var_2 + "_" + var_3);
 }
 
-_id_6AE4(var_0, var_1) {}
+ondeathdot_buildfunc(var_0, var_1) {}
 
-_id_310C(var_0, var_1, var_2) {
+dobuilddot_damage(var_0, var_1, var_2) {
   var_3 = var_2[0];
   var_4 = var_2[1];
   var_5 = var_2[2];
@@ -3271,7 +3271,7 @@ _id_310C(var_0, var_1, var_2) {
   self thread[[level.callbackplayerdamage]](var_1, var_1, var_4, var_6, var_7, var_8, var_1.origin, (0, 0, 0) - var_1.origin, "none", 0);
 }
 
-_id_310D(var_0, var_1, var_2) {
+dobuilddot_wait(var_0, var_1, var_2) {
   var_3 = var_1 getentitynumber();
   var_4 = self getentitynumber();
   var_1 endon("death");
@@ -3286,7 +3286,7 @@ _id_310D(var_0, var_1, var_2) {
   wait(var_2[0]);
 }
 
-_id_92C7(var_0) {
+startdot_group(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
@@ -3295,78 +3295,78 @@ _id_92C7(var_0) {
     switch (var_3.type) {
       case "trigger_radius":
         var_4 = spawn("trigger_radius", var_3.origin, var_3.spawnflags, var_3.radius, var_3._id_00BD);
-        var_4._id_6220 = var_3._id_6220;
-        var_4._id_6098 = var_3._id_6098;
-        var_4._id_99C1 = var_3._id_99C1;
+        var_4.minradius = var_3.minradius;
+        var_4.maxradius = var_3.maxradius;
+        var_4.ticks = var_3.ticks;
         var_1[var_1.size] = var_4;
         break;
       default:
     }
 
-    if(isDefined(var_3._id_6E74)) {
-      var_4 linkTo(var_3._id_6E74);
-      var_3._id_6E74._id_32B1 = var_4;
+    if(isDefined(var_3.parent)) {
+      var_4 linkTo(var_3.parent);
+      var_3.parent.dot = var_4;
     }
 
-    var_5 = var_4._id_99C1;
+    var_5 = var_4.ticks;
 
     foreach(var_7 in var_5) {
       var_7.starttime = gettime();
     }
 
     foreach(var_7 in var_5) {
-      if(!var_7._id_2CAC) {
-        var_7._id_35FE = 1;
+      if(!var_7.delay) {
+        var_7.enable = 1;
       }
     }
 
     foreach(var_7 in var_5) {
       if(issubstr(var_7._id_0A32, "player")) {
-        var_4._id_6B6B = 1;
+        var_4.onplayer = 1;
         break;
       }
     }
   }
 
   foreach(var_4 in var_1) {
-    var_4._id_32B2 = [];
+    var_4.dot_group = [];
 
     foreach(var_16 in var_1) {
       if(var_4 == var_16) {
         continue;
       }
-      var_4._id_32B2[var_4._id_32B2.size] = var_16;
+      var_4.dot_group[var_4.dot_group.size] = var_16;
     }
   }
 
   foreach(var_4 in var_1) {
-    if(var_4._id_6B6B) {
-      var_4 thread _id_92C8();
+    if(var_4.onplayer) {
+      var_4 thread startdot_player();
     }
   }
 
   foreach(var_4 in var_1) {
-    var_4 thread _id_6381();
+    var_4 thread monitordot();
   }
 }
 
-_id_92C8() {
-  thread _id_9DC3(::_id_6B01, ::_id_6B31);
+startdot_player() {
+  thread triggertouchthink(::onenterdot_player, ::onexitdot_player);
 }
 
-_id_6381() {
+monitordot() {
   var_0 = gettime();
 
   while(isDefined(self)) {
-    foreach(var_4, var_2 in self._id_99C1) {
+    foreach(var_4, var_2 in self.ticks) {
       if(isDefined(var_2) && gettime() - var_0 >= var_2.duration * 1000) {
         var_3 = self getentitynumber();
         self notify("LISTEN_kill_tick_" + var_4 + "_" + var_3);
-        self._id_99C1[var_4] = undefined;
+        self.ticks[var_4] = undefined;
       }
     }
 
-    if(!self._id_99C1.size) {
+    if(!self.ticks.size) {
       break;
     }
 
@@ -3374,8 +3374,8 @@ _id_6381() {
   }
 
   if(isDefined(self)) {
-    foreach(var_2 in self._id_99C1) {
-      self[[var_2._id_6AE6]]();
+    foreach(var_2 in self.ticks) {
+      self[[var_2.ondeathfunc]]();
     }
 
     self notify("death");
@@ -3383,35 +3383,35 @@ _id_6381() {
   }
 }
 
-_id_6B01(var_0) {
+onenterdot_player(var_0) {
   var_1 = var_0 getentitynumber();
   self notify("LISTEN_enter_dot_" + var_1);
 
-  foreach(var_4, var_3 in var_0._id_99C1) {
-    if(!var_3._id_35FE) {
-      thread _id_3144(var_4, var_0, var_3._id_2CAC, var_3._id_6B05);
+  foreach(var_4, var_3 in var_0.ticks) {
+    if(!var_3.enable) {
+      thread dodot_delayfunc(var_4, var_0, var_3.delay, var_3.onenterfunc);
     }
   }
 
-  foreach(var_4, var_3 in var_0._id_99C1) {
-    if(var_3._id_35FE && var_3._id_0A32 == "player") {
-      self thread[[var_3._id_6B05]](var_4, var_0);
+  foreach(var_4, var_3 in var_0.ticks) {
+    if(var_3.enable && var_3._id_0A32 == "player") {
+      self thread[[var_3.onenterfunc]](var_4, var_0);
     }
   }
 }
 
-_id_6B31(var_0) {
+onexitdot_player(var_0) {
   var_1 = var_0 getentitynumber();
   self notify("LISTEN_exit_dot_" + var_1);
 
-  foreach(var_4, var_3 in var_0._id_99C1) {
-    if(var_3._id_35FE && var_3._id_0A32 == "player") {
-      self thread[[var_3._id_6B33]](var_4, var_0);
+  foreach(var_4, var_3 in var_0.ticks) {
+    if(var_3.enable && var_3._id_0A32 == "player") {
+      self thread[[var_3.onexitfunc]](var_4, var_0);
     }
   }
 }
 
-_id_3144(var_0, var_1, var_2, var_3) {
+dodot_delayfunc(var_0, var_1, var_2, var_3) {
   var_4 = var_1 getentitynumber();
   var_5 = self getentitynumber();
   var_1 endon("LISTEN_kill_tick_" + var_0 + "_" + var_4 + "_" + var_5);
@@ -3425,7 +3425,7 @@ _id_3144(var_0, var_1, var_2, var_3) {
   self thread[[var_3]](var_0, var_1);
 }
 
-_id_6B04(var_0, var_1) {
+onenterdot_poisondamageplayer(var_0, var_1) {
   var_2 = var_1 getentitynumber();
   var_3 = self getentitynumber();
   var_1 endon("death");
@@ -3436,56 +3436,56 @@ _id_6B04(var_0, var_1) {
   self endon("death");
   self endon("LISTEN_exit_dot_" + var_2);
 
-  if(!isDefined(self._id_6B02)) {
-    self._id_6B02 = [];
+  if(!isDefined(self.onenterdot_poisondamagecount)) {
+    self.onenterdot_poisondamagecount = [];
   }
 
-  if(!isDefined(self._id_6B02[var_0])) {
-    self._id_6B02[var_0] = [];
+  if(!isDefined(self.onenterdot_poisondamagecount[var_0])) {
+    self.onenterdot_poisondamagecount[var_0] = [];
   }
 
-  self._id_6B02[var_0][var_2] = 0;
-  var_4 = common_scripts\utility::_id_98E7(common_scripts\utility::issp(), 1.5, 1);
+  self.onenterdot_poisondamagecount[var_0][var_2] = 0;
+  var_4 = common_scripts\utility::ter_op(common_scripts\utility::issp(), 1.5, 1);
 
-  while(isDefined(var_1) && isDefined(var_1._id_99C1[var_0])) {
-    self._id_6B02[var_0][var_2]++;
+  while(isDefined(var_1) && isDefined(var_1.ticks[var_0])) {
+    self.onenterdot_poisondamagecount[var_0][var_2]++;
 
-    switch (self._id_6B02[var_0][var_2]) {
+    switch (self.onenterdot_poisondamagecount[var_0][var_2]) {
       case 1:
         self viewkick(1, self.origin);
         break;
       case 3:
         self shellshock("mp_radiation_low", 4);
-        _id_3149(var_1, var_4 * 2);
+        dodot_poisondamage(var_1, var_4 * 2);
         break;
       case 4:
         self shellshock("mp_radiation_med", 5);
-        thread _id_3148(var_0, var_1);
-        _id_3149(var_1, var_4 * 2);
+        thread dodot_poisonblackout(var_0, var_1);
+        dodot_poisondamage(var_1, var_4 * 2);
         break;
       case 6:
         self shellshock("mp_radiation_high", 5);
-        _id_3149(var_1, var_4 * 2);
+        dodot_poisondamage(var_1, var_4 * 2);
         break;
       case 8:
         self shellshock("mp_radiation_high", 5);
-        _id_3149(var_1, var_4 * 500);
+        dodot_poisondamage(var_1, var_4 * 500);
         break;
     }
 
-    wait(var_1._id_99C1[var_0]._id_00D9);
+    wait(var_1.ticks[var_0]._id_00D9);
   }
 }
 
-_id_6B32(var_0, var_1) {
+onexitdot_poisondamageplayer(var_0, var_1) {
   var_2 = var_1 getentitynumber();
   var_3 = self getentitynumber();
-  var_4 = self._id_6B03;
+  var_4 = self.onenterdot_poisondamageoverlay;
 
   if(isDefined(var_4)) {
     foreach(var_7, var_6 in var_4) {
       if(isDefined(var_4[var_7]) && isDefined(var_4[var_7][var_2])) {
-        var_4[var_7][var_2] thread _id_3146(0.1, 0);
+        var_4[var_7][var_2] thread dodot_fadeoutblackout(0.1, 0);
       }
     }
   }
@@ -3493,23 +3493,23 @@ _id_6B32(var_0, var_1) {
   var_1 notify("LISTEN_kill_tick_" + var_0 + "_" + var_2 + "_" + var_3);
 }
 
-_id_6AE5() {
+ondeathdot_poisondamageplayer() {
   var_0 = self getentitynumber();
 
   foreach(var_2 in level.players) {
-    var_3 = var_2._id_6B03;
+    var_3 = var_2.onenterdot_poisondamageoverlay;
 
     if(isDefined(var_3)) {
       foreach(var_6, var_5 in var_3) {
         if(isDefined(var_3[var_6]) && isDefined(var_3[var_6][var_0])) {
-          var_3[var_6][var_0] thread _id_3147();
+          var_3[var_6][var_0] thread dodot_fadeoutblackoutanddestroy();
         }
       }
     }
   }
 }
 
-_id_3149(var_0, var_1) {
+dodot_poisondamage(var_0, var_1) {
   if(common_scripts\utility::issp()) {
     return;
   }
@@ -3517,7 +3517,7 @@ _id_3149(var_0, var_1) {
   return;
 }
 
-_id_3148(var_0, var_1) {
+dodot_poisonblackout(var_0, var_1) {
   var_2 = var_1 getentitynumber();
   var_3 = self getentitynumber();
   var_1 endon("death");
@@ -3528,15 +3528,15 @@ _id_3148(var_0, var_1) {
   self endon("death");
   self endon("LISTEN_exit_dot_" + var_2);
 
-  if(!isDefined(self._id_6B03)) {
-    self._id_6B03 = [];
+  if(!isDefined(self.onenterdot_poisondamageoverlay)) {
+    self.onenterdot_poisondamageoverlay = [];
   }
 
-  if(!isDefined(self._id_6B03[var_0])) {
-    self._id_6B03[var_0] = [];
+  if(!isDefined(self.onenterdot_poisondamageoverlay[var_0])) {
+    self.onenterdot_poisondamageoverlay[var_0] = [];
   }
 
-  if(!isDefined(self._id_6B03[var_0][var_2])) {
+  if(!isDefined(self.onenterdot_poisondamageoverlay[var_0][var_2])) {
     var_4 = _newclienthudelem(self);
     var_4.x = 0;
     var_4.y = 0;
@@ -3546,10 +3546,10 @@ _id_3148(var_0, var_1) {
     var_4._id_01CA = "fullscreen";
     var_4.alpha = 0;
     var_4 setshader("black", 640, 480);
-    self._id_6B03[var_0][var_2] = var_4;
+    self.onenterdot_poisondamageoverlay[var_0][var_2] = var_4;
   }
 
-  var_4 = self._id_6B03[var_0][var_2];
+  var_4 = self.onenterdot_poisondamageoverlay[var_0][var_2];
   var_5 = 1;
   var_6 = 2;
   var_7 = 0.25;
@@ -3559,9 +3559,9 @@ _id_3148(var_0, var_1) {
   var_11 = 0;
 
   for(;;) {
-    while(self._id_6B02[var_0][var_2] > 1) {
+    while(self.onenterdot_poisondamagecount[var_0][var_2] > 1) {
       var_12 = var_10 - var_9;
-      var_11 = (self._id_6B02[var_0][var_2] - var_9) / var_12;
+      var_11 = (self.onenterdot_poisondamagecount[var_0][var_2] - var_9) / var_12;
 
       if(var_11 < 0) {
         var_11 = 0;
@@ -3580,8 +3580,8 @@ _id_3148(var_0, var_1) {
       }
 
       var_18 = var_14 / 2;
-      var_4 _id_3145(var_18, var_16);
-      var_4 _id_3146(var_18, var_17);
+      var_4 dodot_fadeinblackout(var_18, var_16);
+      var_4 dodot_fadeoutblackout(var_18, var_17);
       wait(var_11 * 0.5);
     }
 
@@ -3590,30 +3590,30 @@ _id_3148(var_0, var_1) {
     }
 
     if(var_4.alpha != 0) {
-      var_4 _id_3146(1, 0);
+      var_4 dodot_fadeoutblackout(1, 0);
     }
 
     waitframe();
   }
 
-  var_4 _id_3145(2, 0);
+  var_4 dodot_fadeinblackout(2, 0);
 }
 
-_id_3145(var_0, var_1) {
+dodot_fadeinblackout(var_0, var_1) {
   self fadeovertime(var_0);
   self.alpha = var_1;
   var_1 = undefined;
   wait(var_0);
 }
 
-_id_3146(var_0, var_1) {
+dodot_fadeoutblackout(var_0, var_1) {
   self fadeovertime(var_0);
   self.alpha = var_1;
   var_1 = undefined;
   wait(var_0);
 }
 
-_id_3147(var_0, var_1) {
+dodot_fadeoutblackoutanddestroy(var_0, var_1) {
   self fadeovertime(var_0);
   self.alpha = var_1;
   var_1 = undefined;
@@ -3621,27 +3621,27 @@ _id_3147(var_0, var_1) {
   self destroy();
 }
 
-_id_9DC3(var_0, var_1) {
+triggertouchthink(var_0, var_1) {
   level endon("game_ended");
   self endon("death");
-  self._id_37D8 = self getentitynumber();
+  self.entnum = self getentitynumber();
 
   for(;;) {
     self waittill("trigger", var_2);
 
-    if(!isPlayer(var_2) && !isDefined(var_2._id_3BAA)) {
+    if(!isPlayer(var_2) && !isDefined(var_2.finished_spawning)) {
       continue;
     }
     if(!isalive(var_2)) {
       continue;
     }
-    if(!isDefined(var_2._id_9AC5[self._id_37D8])) {
-      var_2 thread _id_7477(self, var_0, var_1);
+    if(!isDefined(var_2.touchtriggers[self.entnum])) {
+      var_2 thread playertouchtriggerthink(self, var_0, var_1);
     }
   }
 }
 
-_id_7477(var_0, var_1, var_2) {
+playertouchtriggerthink(var_0, var_1, var_2) {
   var_0 endon("death");
 
   if(!isPlayer(self)) {
@@ -3654,18 +3654,18 @@ _id_7477(var_0, var_1, var_2) {
     var_3 = "player" + gettime();
   }
 
-  var_0._id_9AC3[var_3] = self;
+  var_0.touchlist[var_3] = self;
 
-  if(isDefined(var_0._id_64DD)) {
-    self._id_64DE++;
+  if(isDefined(var_0.movetracker)) {
+    self.movetrackers++;
   }
 
   var_0 notify("trigger_enter", self);
   self notify("trigger_enter", var_0);
   var_4 = 1;
 
-  foreach(var_6 in var_0._id_32B2) {
-    foreach(var_8 in self._id_9AC5) {
+  foreach(var_6 in var_0.dot_group) {
+    foreach(var_8 in self.touchtriggers) {
       if(var_6 == var_8) {
         var_4 = 0;
       }
@@ -3676,7 +3676,7 @@ _id_7477(var_0, var_1, var_2) {
     self thread[[var_1]](var_0);
   }
 
-  self._id_9AC5[var_0._id_37D8] = var_0;
+  self.touchtriggers[var_0.entnum] = var_0;
 
   while(isalive(self) && (common_scripts\utility::issp() || !level.gameended)) {
     var_11 = 1;
@@ -3684,11 +3684,11 @@ _id_7477(var_0, var_1, var_2) {
     if(self istouching(var_0)) {
       waitframe();
     } else {
-      if(!var_0._id_32B2.size) {
+      if(!var_0.dot_group.size) {
         var_11 = 0;
       }
 
-      foreach(var_6 in var_0._id_32B2) {
+      foreach(var_6 in var_0.dot_group) {
         if(self istouching(var_6)) {
           waitframe();
           break;
@@ -3703,10 +3703,10 @@ _id_7477(var_0, var_1, var_2) {
   }
 
   if(isDefined(self)) {
-    self._id_9AC5[var_0._id_37D8] = undefined;
+    self.touchtriggers[var_0.entnum] = undefined;
 
-    if(isDefined(var_0._id_64DD)) {
-      self._id_64DE--;
+    if(isDefined(var_0.movetracker)) {
+      self.movetrackers--;
     }
 
     self notify("trigger_leave", var_0);
@@ -3719,7 +3719,7 @@ _id_7477(var_0, var_1, var_2) {
   if(!common_scripts\utility::issp() && level.gameended) {
     return;
   }
-  var_0._id_9AC3[var_3] = undefined;
+  var_0.touchlist[var_3] = undefined;
   var_0 notify("trigger_leave", self);
 
   if(!_id_0F13(var_0)) {
@@ -3728,7 +3728,7 @@ _id_7477(var_0, var_1, var_2) {
 }
 
 _id_0F13(var_0) {
-  return var_0._id_9AC3.size;
+  return var_0.touchlist.size;
 }
 
 _id_42C9(var_0) {
@@ -3739,7 +3739,7 @@ _id_42CA(var_0) {
   return level._id_05FE[var_0];
 }
 
-_id_2E23() {
+destructiblecoverwatcher() {
   if(!isDefined(level.player)) {
     return;
   }
@@ -3748,16 +3748,16 @@ _id_2E23() {
   }
 
   while(isDefined(self)) {
-    if(isDefined(self._id_2E10)) {
+    if(isDefined(self.destructible_parts)) {
       var_0 = 0;
 
-      for(var_1 = 1; var_1 < self._id_2E10.size; var_1++) {
-        if(self._id_2E10[var_1].v["currentState"] == 1) {
+      for(var_1 = 1; var_1 < self.destructible_parts.size; var_1++) {
+        if(self.destructible_parts[var_1].v["currentState"] == 1) {
           var_0++;
         }
       }
 
-      if(var_0 == self._id_2E10.size - 1) {
+      if(var_0 == self.destructible_parts.size - 1) {
         break;
       }
     }

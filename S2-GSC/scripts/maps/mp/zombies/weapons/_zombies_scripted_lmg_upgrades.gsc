@@ -44,7 +44,7 @@ lewis_run_bullet_rewind() {
     if(!isDefined(var_5["position"])) {
       continue;
     }
-    playFX(common_scripts\utility::_id_44F5("zmb_lewis_upgraded_rewind"), var_5["position"]);
+    playFX(common_scripts\utility::getfx("zmb_lewis_upgraded_rewind"), var_5["position"]);
     var_0.rewindorigins[var_0.rewindorigins.size] = var_5["position"];
     var_2 = var_0 _id_0586::_id_078B("lewis_zm") + "+" + _id_056C::getattachmentforzombieweapon("lewis_zm", "zmb_mad_minute");
 
@@ -55,7 +55,7 @@ lewis_run_bullet_rewind() {
       for(var_6 = 0; var_6 < 7; var_6++) {
         foreach(var_8 in common_scripts\utility::array_randomize(var_0.rewindorigins)) {
           _magicbullet(var_2, var_8, var_0 getEye() + (0, 0, -16), var_0);
-          playFX(common_scripts\utility::_id_44F5("zmb_lewis_upgraded_rewind"), var_8);
+          playFX(common_scripts\utility::getfx("zmb_lewis_upgraded_rewind"), var_8);
           waitframe();
         }
 
@@ -136,7 +136,7 @@ mg42_laser_rounds() {
 run_bren_reload_shield(var_0) {
   var_1 = self;
   var_1 endon("disconnect");
-  var_2 = _spawnlinkedfx(common_scripts\utility::_id_44F5("force_zombie_bubble"), var_1, "J_SpineLower");
+  var_2 = _spawnlinkedfx(common_scripts\utility::getfx("force_zombie_bubble"), var_1, "J_SpineLower");
   var_1.linkedbubblefx = var_2;
   _triggerfx(var_2);
   var_1 maps\mp\agents\_agent_utility::deleteentonagentdeath(var_2);
@@ -166,8 +166,8 @@ run_bren_reload_shield(var_0) {
         continue;
       }
       var_5 = 1;
-      playFX(common_scripts\utility::_id_44F5("tesla_blood_explosion"), var_1.origin);
-      var_7 _id_0378::_id_8D74("aud_ww_blood_explode");
+      playFX(common_scripts\utility::getfx("tesla_blood_explosion"), var_1.origin);
+      var_7 _id_0378::snd_message("aud_ww_blood_explode");
       var_7 do_strong_giest_damage(level.heavy_giest_dmg, var_1, var_1 _id_0586::_id_078B("bren_zm"));
     }
 
@@ -178,8 +178,8 @@ run_bren_reload_shield(var_0) {
     }
   }
 
-  playFX(common_scripts\utility::_id_44F5("force_zombie_bubble_pop"), var_1.origin);
-  _id_0378::_id_8D74("zmb_pomel_grenade_final_explosion", var_1.origin);
+  playFX(common_scripts\utility::getfx("force_zombie_bubble_pop"), var_1.origin);
+  _id_0378::snd_message("zmb_pomel_grenade_final_explosion", var_1.origin);
 
   if(isDefined(var_2)) {
     var_2 delete();
@@ -246,7 +246,7 @@ exectute_stinger_feedback(var_0, var_1, var_2, var_3) {
 
   if(_id_0547::_id_5565(var_1, "blyskawica_zm")) {
     if(randomint(3) == 0) {
-      playFX(common_scripts\utility::_id_44F5("impact_sparks"), var_2, anglesToForward(var_3), anglestoup(var_3));
+      playFX(common_scripts\utility::getfx("impact_sparks"), var_2, anglesToForward(var_3), anglestoup(var_3));
     }
   }
 
@@ -268,7 +268,7 @@ exectute_stinger_feedback(var_0, var_1, var_2, var_3) {
     }
 
     if(var_0.timesstung > 5) {
-      playFX(common_scripts\utility::_id_44F5("impact_sparks"), var_2, anglesToForward(var_3), anglestoup(var_3));
+      playFX(common_scripts\utility::getfx("impact_sparks"), var_2, anglesToForward(var_3), anglestoup(var_3));
     }
 
     if(var_0.timesstung >= 12 && (gettime() - var_4.laststingbursttime) / 1000 > 4) {
@@ -306,7 +306,7 @@ exectute_mg81_feedback(var_0, var_1, var_2, var_3) {
 do_pommel_explosion_radius(var_0, var_1, var_2, var_3) {
   var_1 endon("disconnect");
   playFX(level._effect["zmb_pommel_energy_field_burst"], var_2);
-  _id_0378::_id_8D74("zmb_pomel_grenade_final_explosion", var_2);
+  _id_0378::snd_message("zmb_pomel_grenade_final_explosion", var_2);
 
   foreach(var_5 in _id_0547::_id_408F()) {
     if(!isDefined(var_5._id_0A4B) || !common_scripts\utility::_id_0F79(["zombie_generic", "zombie_berserker", "zombie_heavy", "zombie_exploder"], var_5._id_0A4B)) {
@@ -334,7 +334,7 @@ try_catch_on_fire(var_0) {
   var_2 = 0;
 
   if(!isDefined(level.zmb_fire_explode_origin)) {
-    level.zmb_fire_explode_origin = var_1 common_scripts\utility::_id_8FFC();
+    level.zmb_fire_explode_origin = var_1 common_scripts\utility::spawn_tag_origin();
     level.zmb_fire_explode_origin show();
   }
 
@@ -374,26 +374,26 @@ try_catch_on_fire(var_0) {
 
   if(var_2 < 4) {
     var_1.isonfire = 1;
-    _id_0547::_id_A6F6();
+    _id_0547::waitnetworkframe();
     var_1 childthread set_on_fire_and_detonate(var_0);
   }
 }
 
 scripted_lmgs_on_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(common_scripts\utility::_id_562E(self._id_2E68) && isDefined(var_1) && isPlayer(var_1)) {
+  if(common_scripts\utility::_id_562E(self.detonateondeath) && isDefined(var_1) && isPlayer(var_1)) {
     level thread do_vmg_explosion(self.origin, var_1);
   }
 }
 
 do_vmg_explosion(var_0, var_1) {
-  _id_0547::_id_A6F6();
+  _id_0547::waitnetworkframe();
   level.zmb_fire_explode_origin.origin = var_0;
   level.zmb_fire_explode_origin _meth_8561("drag_explosive_zombie_zm", var_1, level.zmb_fire_explode_origin);
 }
 
 set_on_fire_and_detonate(var_0) {
-  self _meth_8682(0, 100, 1, "none", 1);
-  self._id_2E68 = 1;
+  self setfirstinfected(0, 100, 1, "none", 1);
+  self.detonateondeath = 1;
 }
 
 attempt_reload_action(var_0, var_1) {

@@ -100,18 +100,18 @@ _id_170F(var_0, var_1) {
   var_1 _id_04E0::_id_7D1D(2);
   var_0 _id_04E0::_id_7D1E(1);
   var_1 _id_04E0::_id_7D1E(1);
-  var_0 _meth_866C(&"player_interact_notification_end", 0);
-  var_0 _meth_866C(&"player_interact_notification_center_end", 0);
+  var_0 setdot_radius(&"player_interact_notification_end", 0);
+  var_0 setdot_radius(&"player_interact_notification_center_end", 0);
 
   if(var_0._id_56A4) {
     if(isDefined(var_0._id_155F)) {
-      var_0._id_155F _id_04E0::_id_1543((0, 0, 80), var_0);
+      var_0._id_155F _id_04E0::ball_physics_launch_drop((0, 0, 80), var_0);
     }
   }
 
   if(var_1._id_56A4) {
     if(isDefined(var_1._id_155F)) {
-      var_1._id_155F _id_04E0::_id_1543((0, 0, 80), var_1);
+      var_1._id_155F _id_04E0::ball_physics_launch_drop((0, 0, 80), var_1);
     }
   }
 
@@ -185,9 +185,9 @@ _id_6388(var_0) {
   self._id_34CF.y = 350;
   self._id_34CF.alignx = "center";
   self._id_34CF._id_01CA = "fullscreen";
-  self._id_34CF._id_35B2 = "icon";
-  self._id_34CF._id_6E74 = level._id_A012;
-  self._id_34CF._id_6E74 maps\mp\gametypes\_hud_util::_id_09A6(self._id_34CF);
+  self._id_34CF.elemtype = "icon";
+  self._id_34CF.parent = level.uiparent;
+  self._id_34CF.parent maps\mp\gametypes\_hud_util::_id_09A6(self._id_34CF);
   self._id_34CF.name = "duelHealth1P";
   self._id_34D0 = _newclienthudelem(var_0);
   self._id_34D0 setshader("mtl_hub_1v1_health_bar_100", var_1, var_2);
@@ -198,9 +198,9 @@ _id_6388(var_0) {
   self._id_34D0._id_01D9 = self.origin[2];
   self._id_34D0 setwaypoint(1, 0, 0);
   self._id_34D0 settargetEnt(self);
-  self._id_34D0._id_35B2 = "icon";
-  self._id_34D0._id_6E74 = level._id_A012;
-  self._id_34D0._id_6E74 maps\mp\gametypes\_hud_util::_id_09A6(self._id_34D0);
+  self._id_34D0.elemtype = "icon";
+  self._id_34D0.parent = level.uiparent;
+  self._id_34D0.parent maps\mp\gametypes\_hud_util::_id_09A6(self._id_34D0);
   self._id_34D0.name = "duelHealth3P";
 
   for(;;) {

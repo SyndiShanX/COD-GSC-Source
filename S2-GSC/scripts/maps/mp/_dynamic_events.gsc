@@ -3,15 +3,15 @@
  * Script: scripts\maps\mp\_dynamic_events.gsc
 ***********************************************/
 
-_id_352E(var_0, var_1, var_2) {
+dynamicevent(var_0, var_1, var_2) {
   if(getdvarint("233")) {
     return;
   }
-  if(isDefined(level._id_352F)) {
-    if(level._id_352F == 1) {
+  if(isDefined(level.dynamiceventstype)) {
+    if(level.dynamiceventstype == 1) {
       return;
     }
-    if(level._id_352F == 2) {
+    if(level.dynamiceventstype == 2) {
       if(isDefined(var_2)) {
         level[[var_2]]();
       }
@@ -32,22 +32,22 @@ _id_352E(var_0, var_1, var_2) {
     return;
   }
 
-  if(!isDefined(level._id_352E)) {
-    level._id_352E = [];
+  if(!isDefined(level.dynamicevent)) {
+    level.dynamicevent = [];
   }
 
   if(level.gametype == "sd" || level.gametype == "sr") {
-    level thread _id_4A59(var_0, var_2);
+    level thread handle_sd_dynamicevent(var_0, var_2);
   } else {
-    level thread _id_49DC(var_0, var_1, 0);
+    level thread handle_dynamicevent(var_0, var_1, 0);
   }
 
-  level thread _id_5E8F();
+  level thread logdynamiceventstarttime();
 }
 
-_id_5E8F() {}
+logdynamiceventstarttime() {}
 
-_id_4A59(var_0, var_1) {
+handle_sd_dynamicevent(var_0, var_1) {
   game["dynamicEvent_switchedsides"] = game["switchedsides"];
 
   if(level.gametype == "sd") {
@@ -70,14 +70,14 @@ _id_4A59(var_0, var_1) {
 
   if(game["dynamicEvent_switchedsides"] == 0) {
     game["dynamicEvent_teamA_RoundTally"]++;
-    _id_2151(var_0, var_1, game["dynamicEvent_teamA_RoundTally"]);
+    check_do_event(var_0, var_1, game["dynamicEvent_teamA_RoundTally"]);
   } else if(game["dynamicEvent_switchedsides"] == 1) {
     game["dynamicEvent_teamB_RoundTally"]++;
-    _id_2151(var_0, var_1, game["dynamicEvent_teamB_RoundTally"]);
+    check_do_event(var_0, var_1, game["dynamicEvent_teamB_RoundTally"]);
   }
 }
 
-_id_2151(var_0, var_1, var_2) {
+check_do_event(var_0, var_1, var_2) {
   var_3 = int(game["dynamicEvent_scorelimit"] / 2);
 
   if(var_3 == 0) {
@@ -98,9 +98,9 @@ _id_2151(var_0, var_1, var_2) {
   }
 }
 
-_id_49DC(var_0, var_1, var_2) {
-  var_3 = _id_44AE();
-  var_4 = _id_44AD();
+handle_dynamicevent(var_0, var_1, var_2) {
+  var_3 = getdynamiceventtimelimit();
+  var_4 = getdynamiceventstarttime();
   var_5 = undefined;
   var_6 = maps\mp\_utility::getscorelimit();
 
@@ -108,11 +108,11 @@ _id_49DC(var_0, var_1, var_2) {
     var_2 = 1;
   }
 
-  while(var_3 > var_4 && (!var_2 || (!isDefined(var_5) || var_5 <= var_6 * level._id_352E["start_percent"]))) {
+  while(var_3 > var_4 && (!var_2 || (!isDefined(var_5) || var_5 <= var_6 * level.dynamicevent["start_percent"]))) {
     wait 1;
-    maps\mp\gametypes\_hostmigration::_id_A782();
+    maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
     var_3 = var_3 - 1;
-    var_5 = _id_44AC();
+    var_5 = getdynamiceventhighestscore();
   }
 
   level notify("dynamic_event_starting");
@@ -122,39 +122,39 @@ _id_49DC(var_0, var_1, var_2) {
   }
 }
 
-_id_8672(var_0) {
+setdynamiceventstartpercent(var_0) {
   if(!isDefined(var_0)) {
     var_0 = 0.5;
   }
 
   if(var_0 < 0 || var_0 > 1) {}
 
-  level._id_352E["start_percent"] = var_0;
+  level.dynamicevent["start_percent"] = var_0;
 }
 
-_id_44AD() {
-  if(!isDefined(level._id_352E["start_percent"])) {
-    _id_8672();
+getdynamiceventstarttime() {
+  if(!isDefined(level.dynamicevent["start_percent"])) {
+    setdynamiceventstartpercent();
   }
 
-  var_0 = _id_44AE();
-  var_1 = var_0 - var_0 * level._id_352E["start_percent"];
+  var_0 = getdynamiceventtimelimit();
+  var_1 = var_0 - var_0 * level.dynamicevent["start_percent"];
   return var_1;
 }
 
-_id_44AC() {
+getdynamiceventhighestscore() {
   var_0 = undefined;
 
   if(level.teambased) {
-    var_1 = _id_04D2::_id_473F();
+    var_1 = _id_04D2::getwinningteam();
 
-    if(isDefined(var_1) && var_1 == "none" && isDefined(level._id_985B)) {
-      var_0 = _id_04D2::_id_063E(level._id_985B[0]);
+    if(isDefined(var_1) && var_1 == "none" && isDefined(level.teamnamelist)) {
+      var_0 = _id_04D2::_id_063E(level.teamnamelist[0]);
     } else if(isDefined(var_1)) {
       var_0 = _id_04D2::_id_063E(var_1);
     }
   } else {
-    var_2 = _id_04D2::_id_450A();
+    var_2 = _id_04D2::gethighestscoringplayer();
 
     if(!isDefined(var_2) && isDefined(level.players) && level.players.size > 0) {
       var_0 = _id_04D2::_id_0638(level.players[0]);
@@ -166,7 +166,7 @@ _id_44AC() {
   return var_0;
 }
 
-_id_44AE() {
+getdynamiceventtimelimit() {
   var_0 = maps\mp\_utility::gettimelimit();
 
   if(var_0 == 0) {

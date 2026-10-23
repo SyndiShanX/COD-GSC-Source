@@ -9,7 +9,7 @@ init() {
   var_0 = undefined;
   thread maps\mp\_utility::_id_6F74(::_id_A8DF, var_0);
   level._id_A9C8["raven_sword_zm"] = ::_id_7A7C;
-  level._id_62B3["raven_sword_zm"] = ::_id_7A7E;
+  level.modifyweapondamage["raven_sword_zm"] = ::_id_7A7E;
   level.activeswordname = "raven_sword_zm+" + maps\mp\gametypes\_class::_id_A9EE("zom_raven");
   _id_0547::_id_7BA9(::_id_7A7F);
 }
@@ -68,12 +68,12 @@ _id_A8DF(var_0) {
       var_1 = var_2;
     }
 
-    common_scripts\utility::_id_A70A("weapon_taken", "weapon_given");
+    common_scripts\utility::waittill_any("weapon_taken", "weapon_given");
   }
 }
 
 _id_7A7E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(var_1 _meth_8661()) {
+  if(var_1 setdefaultdof()) {
     if(var_1 _id_0547::_id_1F54(var_0, var_4)) {
       return var_2;
     } else {
@@ -81,7 +81,7 @@ _id_7A7E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     }
   }
 
-  var_8 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level._id_A980);
+  var_8 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level.wavecounter);
 
   if(var_1._id_7A8D._id_08BE) {
     var_1 _id_90F2(1);
@@ -119,7 +119,7 @@ _id_5242() {
 _id_7A80() {
   self._id_7A8D._id_08BE = 1;
 
-  while(self _meth_8661() || self ismeleeing()) {
+  while(self setdefaultdof() || self ismeleeing()) {
     waitframe();
   }
 
@@ -139,14 +139,14 @@ _id_7119() {
   var_0 = self getcurrentweapon();
 
   if(var_0 == level.activeswordname && self._id_7A8D._id_08BE == 1) {
-    var_1 = common_scripts\utility::_id_44F5("zmb_sword_activate");
+    var_1 = common_scripts\utility::getfx("zmb_sword_activate");
     self._id_7A8D._id_35A6 = _spawnlinkedfx(var_1, self, "TAG_WW_MELEE_FX", 1);
     _triggerfx(self._id_7A8D._id_35A6);
-    _id_0378::_id_8D74("aud_raven_sword_power_up");
+    _id_0378::snd_message("aud_raven_sword_power_up");
   }
 
   while(common_scripts\utility::_id_562E(self._id_7A8D._id_08BE)) {
-    common_scripts\utility::_id_A70A("weapon_given", "weapon_taken", "zombie_player_spawn_finished", "melee_weapon_change", "weapon_switch_started");
+    common_scripts\utility::waittill_any("weapon_given", "weapon_taken", "zombie_player_spawn_finished", "melee_weapon_change", "weapon_switch_started");
     waitframe();
 
     while(self isswitchingweapon()) {
@@ -156,15 +156,15 @@ _id_7119() {
     var_0 = self getcurrentweapon();
 
     if(var_0 == level.activeswordname && self._id_7A8D._id_08BE == 1) {
-      var_1 = common_scripts\utility::_id_44F5("zmb_sword_activate");
+      var_1 = common_scripts\utility::getfx("zmb_sword_activate");
       self._id_7A8D._id_35A6 = _spawnlinkedfx(var_1, self, "TAG_WW_MELEE_FX", 1);
       _triggerfx(self._id_7A8D._id_35A6);
-      _id_0378::_id_8D74("aud_raven_sword_power_up");
+      _id_0378::snd_message("aud_raven_sword_power_up");
       continue;
     }
 
     if(isDefined(self._id_7A8D._id_35A6)) {
-      _id_0378::_id_8D74("aud_raven_sword_power_dwn");
+      _id_0378::snd_message("aud_raven_sword_power_dwn");
       self._id_7A8D._id_35A6 delete();
       self._id_7A8D._id_35A6 = undefined;
     }
@@ -181,7 +181,7 @@ _id_7A81() {
     self switchtoweaponimmediate("raven_sword_zm");
   }
 
-  _id_0378::_id_8D74("aud_raven_sword_power_dwn");
+  _id_0378::snd_message("aud_raven_sword_power_dwn");
 
   if(isDefined(self._id_7A8D) && isDefined(self._id_7A8D._id_35A6)) {
     self._id_7A8D._id_35A6 delete();
@@ -224,14 +224,14 @@ _id_5FC5() {
       _id_90F2(4);
       thread _id_9AB9();
 
-      while(self _meth_8661()) {
+      while(self setdefaultdof()) {
         waitframe();
       }
 
       continue;
     }
 
-    while(self _meth_8661()) {
+    while(self setdefaultdof()) {
       waitframe();
     }
   }
@@ -241,7 +241,7 @@ _id_9AB9() {
   self endon("death");
   self endon("disconnect");
   self endon("touch_of_death_aoe_cleanup");
-  var_0 = common_scripts\utility::_id_44F5("zmb_raven_sword_touch_of_death_aoe");
+  var_0 = common_scripts\utility::getfx("zmb_raven_sword_touch_of_death_aoe");
   playFX(var_0, self.origin);
   self._id_7A8D._id_9AC4 = 1;
   var_1 = gettime();
@@ -254,8 +254,8 @@ _id_9AB9() {
     foreach(var_4 in _sortbydistance(var_2, self.origin, 100)) {
       var_5 = var_4.health;
 
-      if(var_4 _id_0547::_id_53DC()) {
-        var_5 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level._id_A980) * 0.1;
+      if(var_4 _id_0547::instakillimmune()) {
+        var_5 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level.wavecounter) * 0.1;
       }
 
       var_4 dodamage(var_5, self.origin, self, self, "MOD_MELEE", "raven_sword_tod_aoe_zm", "none");
@@ -269,7 +269,7 @@ _id_9AB9() {
 }
 
 _id_9ABA() {
-  common_scripts\utility::_id_A70A("death", "disconnect", "touch_of_death_aoe_complete");
+  common_scripts\utility::waittill_any("death", "disconnect", "touch_of_death_aoe_complete");
   _id_0547::_id_7CF8(self, "touch_of_death_aoe");
   self._id_7A8D._id_9AC4 = 0;
   self notify("touch_of_death_aoe_cleanup");
@@ -281,7 +281,7 @@ _id_5FC4() {
   for(;;) {
     self waittill("melee_fired", var_0);
 
-    if(issubstr(var_0, "raven_sword_zm") && self _meth_8661()) {
+    if(issubstr(var_0, "raven_sword_zm") && self setdefaultdof()) {
       wait 0.45;
       self._id_99FE = gettime();
 
@@ -292,7 +292,7 @@ _id_5FC4() {
       self._id_9A00 = gettime();
       wait 0.3;
 
-      while(self _meth_8661()) {
+      while(self setdefaultdof()) {
         waitframe();
       }
     }
@@ -311,12 +311,12 @@ _id_2416() {
     var_1 = 120;
     var_2 = 1;
     var_3 = 5;
-    var_4 = common_scripts\utility::_id_44F5("zmb_raven_sword_burst");
+    var_4 = common_scripts\utility::getfx("zmb_raven_sword_burst");
     playFX(var_4, self.origin + (0, 0, 40));
-    _id_0378::_id_8D74("aud_raven_sword_aoe");
+    _id_0378::snd_message("aud_raven_sword_aoe");
   }
 
-  var_5 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level._id_A980);
+  var_5 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level.wavecounter);
   var_6 = int(var_2) + int(var_3 * var_5);
   var_7 = _id_0586::zombies_hit_by_melee_cone(var_0, var_1);
 

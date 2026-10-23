@@ -12,9 +12,9 @@ main() {
   _id_04D4::setupcallbacks();
 
   if(_isusingmatchrulesdata()) {
-    level._id_5300 = ::_id_5300;
-    [[level._id_5300]]();
-    level thread maps\mp\_utility::_id_7C13();
+    level.initializematchrules = ::initializematchrules;
+    [[level.initializematchrules]]();
+    level thread maps\mp\_utility::reinitializematchrulesonmigration();
   } else {
     maps\mp\_utility::registerroundswitchdvar(level.gametype, 0, 0, 9);
     maps\mp\_utility::registertimelimitdvar(level.gametype, 10);
@@ -23,16 +23,16 @@ main() {
     maps\mp\_utility::registerwinlimitdvar(level.gametype, 1);
     maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
     maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
-    level._id_6031 = 0;
-    level._id_6035 = 0;
+    level.matchrules_damagemultiplier = 0;
+    level.matchrules_vampirism = 0;
   }
 
   maps\mp\_utility::_id_873B(1);
-  level._id_6BAF = ::_id_6BAF;
-  level._id_6B5C = ::_id_6B5C;
+  level.onstartgametype = ::onstartgametype;
+  level.onnormaldeath = ::onnormaldeath;
 
-  if(level._id_6031 || level._id_6035) {
-    level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
+    level.modifyplayerdamage = maps\mp\gametypes\_damage::gamemodemodifyplayerdamage;
   }
 
   game["dialog"]["gametype"] = "kc_intro";
@@ -46,11 +46,11 @@ main() {
   game["dialog"]["kill_lost"] = "kc_killlost";
   game["dialog"]["defense_obj"] = "kc_start";
   game["dialog"]["offense_obj"] = "kc_start";
-  level._id_257E["vanish"] = loadfx("vfx/unique/dogtag_vanish");
+  level.conf_fx["vanish"] = loadfx("vfx/unique/dogtag_vanish");
 }
 
-_id_5300() {
-  maps\mp\_utility::_id_8653();
+initializematchrules() {
+  maps\mp\_utility::setcommonrulesfrommatchrulesdata();
   _setdynamicdvar("scr_conf_roundswitch", 0);
   maps\mp\_utility::registerroundswitchdvar("conf", 0, 0, 9);
   _setdynamicdvar("scr_conf_roundlimit", 1);
@@ -61,7 +61,7 @@ _id_5300() {
   maps\mp\_utility::registerhalftimedvar("conf", 0);
 }
 
-_id_6BAF() {
+onstartgametype() {
   _setclientnamemode("auto_change");
 
   if(!isDefined(game["switchedsides"])) {
@@ -89,26 +89,26 @@ _id_6BAF() {
   maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_CONF_HINT");
   maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_CONF_HINT");
   _id_050D::_id_10E4();
-  level._id_31F9 = [];
+  level.dogtags = [];
   var_2[0] = level.gametype;
   var_2[1] = "blocker_conf";
   _id_04D1::main(var_2);
 }
 
-_id_6B5C(var_0, var_1, var_2) {
-  level thread _id_903E(var_0, var_1);
+onnormaldeath(var_0, var_1, var_2) {
+  level thread spawndogtags(var_0, var_1);
 
-  if(game["state"] == "postgame" && game["teamScores"][var_1.team] > game["teamScores"][level._id_6C63[var_1.team]]) {
-    var_1._id_3B4B = 1;
+  if(game["state"] == "postgame" && game["teamScores"][var_1.team] > game["teamScores"][level.otherteam[var_1.team]]) {
+    var_1.finalkill = 1;
   }
 }
 
-_id_903E(var_0, var_1) {
+spawndogtags(var_0, var_1) {
   var_2 = var_0.pers["team"];
 
-  if(isDefined(level._id_31F9[var_0.guid])) {
-    playFX(level._id_257E["vanish"], level._id_31F9[var_0.guid]._id_28D4);
-    level._id_31F9[var_0.guid] notify("reset");
+  if(isDefined(level.dogtags[var_0.guid])) {
+    playFX(level.conf_fx["vanish"], level.dogtags[var_0.guid].curorigin);
+    level.dogtags[var_0.guid] notify("reset");
   } else {
     var_3 = [];
 
@@ -125,23 +125,23 @@ _id_903E(var_0, var_1) {
     }
 
     var_4 = spawn("trigger_radius", (0, 0, 0), 0, 32, 32);
-    level._id_31F9[var_0.guid] = _id_04D1::_id_2837("any", var_4, var_3, (0, 0, 16));
-    maps\mp\_utility::_objective_delete(level._id_31F9[var_0.guid]._id_698A);
-    maps\mp\_utility::_objective_delete(level._id_31F9[var_0.guid]._id_698B);
-    maps\mp\_utility::_objective_delete(level._id_31F9[var_0.guid]._id_698C);
-    _id_04EC::_id_2D3E(level._id_31F9[var_0.guid]._id_6996["allies"]);
-    _id_04EC::_id_2D3E(level._id_31F9[var_0.guid]._id_6996["axis"]);
-    _id_04EC::_id_2D3E(level._id_31F9[var_0.guid]._id_6996["broadcaster"]);
-    level._id_31F9[var_0.guid] _id_04D1::_id_8A5A(0);
-    level._id_31F9[var_0.guid]._id_6BBF = ::_id_6BBF;
-    level._id_31F9[var_0.guid]._id_A490 = var_0;
-    level._id_31F9[var_0.guid]._id_A496 = var_2;
-    level._id_31F9[var_0.guid]._id_6989 = _id_04D1::_id_45A9();
-    _objective_add(level._id_31F9[var_0.guid]._id_6989, "invisible", (0, 0, 0));
-    level._id_31F9[var_0.guid]._id_6988 = _id_04D1::_id_45A9();
-    _objective_add(level._id_31F9[var_0.guid]._id_6988, "invisible", (0, 0, 0));
-    level thread _id_2404(var_0);
-    var_0 thread _id_95BD(level._id_31F9[var_0.guid]);
+    level.dogtags[var_0.guid] = _id_04D1::createuseobject("any", var_4, var_3, (0, 0, 16));
+    maps\mp\_utility::_objective_delete(level.dogtags[var_0.guid].objidallies);
+    maps\mp\_utility::_objective_delete(level.dogtags[var_0.guid].objidaxis);
+    maps\mp\_utility::_objective_delete(level.dogtags[var_0.guid].objidmlgspectator);
+    _id_04EC::deleteobjpoint(level.dogtags[var_0.guid].objpoints["allies"]);
+    _id_04EC::deleteobjpoint(level.dogtags[var_0.guid].objpoints["axis"]);
+    _id_04EC::deleteobjpoint(level.dogtags[var_0.guid].objpoints["broadcaster"]);
+    level.dogtags[var_0.guid] _id_04D1::setusetime(0);
+    level.dogtags[var_0.guid].onuse = ::onuse;
+    level.dogtags[var_0.guid].victim = var_0;
+    level.dogtags[var_0.guid].victimteam = var_2;
+    level.dogtags[var_0.guid].objid = _id_04D1::_id_45A9();
+    _objective_add(level.dogtags[var_0.guid].objid, "invisible", (0, 0, 0));
+    level.dogtags[var_0.guid]._id_6988 = _id_04D1::_id_45A9();
+    _objective_add(level.dogtags[var_0.guid]._id_6988, "invisible", (0, 0, 0));
+    level thread clearonvictimdisconnect(var_0);
+    var_0 thread tagteamupdater(level.dogtags[var_0.guid]);
   }
 
   if(isDefined(var_0._id_6E6B) && var_0._id_6E6B && isDefined(var_0.paratrooperinsertgroundposition)) {
@@ -150,31 +150,31 @@ _id_903E(var_0, var_1) {
     var_5 = var_0.origin + (0, 0, 14);
   }
 
-  level._id_31F9[var_0.guid]._id_28D4 = var_5;
-  level._id_31F9[var_0.guid]._id_9D65.origin = var_5;
-  level._id_31F9[var_0.guid]._id_A582[0].origin = var_5;
-  level._id_31F9[var_0.guid]._id_A582[1].origin = var_5;
-  level._id_31F9[var_0.guid] _id_04D1::_id_5307();
-  level._id_31F9[var_0.guid] _id_04D1::_id_0C30("any");
-  level._id_31F9[var_0.guid]._id_A582[0] thread _id_8C21(level._id_31F9[var_0.guid], maps\mp\_utility::getotherteam(var_2));
-  level._id_31F9[var_0.guid]._id_A582[1] thread _id_8C21(level._id_31F9[var_0.guid], var_2);
-  level._id_31F9[var_0.guid]._id_A582[0] _id_84DF("friendly", 1);
-  level._id_31F9[var_0.guid]._id_A582[1] _id_84DF("enemy", 1);
-  level._id_31F9[var_0.guid]._id_1180 = var_1;
-  _objective_icon(level._id_31F9[var_0.guid]._id_6989, "waypoint_dogtags");
-  _objective_position(level._id_31F9[var_0.guid]._id_6989, var_5);
-  _objective_state(level._id_31F9[var_0.guid]._id_6989, "active");
-  _objective_playerteam(level._id_31F9[var_0.guid]._id_6989, var_0 getentitynumber());
-  _objective_icon(level._id_31F9[var_0.guid]._id_6988, "waypoint_dogtags_friendlys");
-  _objective_position(level._id_31F9[var_0.guid]._id_6988, var_5);
-  _objective_state(level._id_31F9[var_0.guid]._id_6988, "active");
-  _objective_playerenemyteam(level._id_31F9[var_0.guid]._id_6988, var_0 getentitynumber());
+  level.dogtags[var_0.guid].curorigin = var_5;
+  level.dogtags[var_0.guid].trigger.origin = var_5;
+  level.dogtags[var_0.guid].visuals[0].origin = var_5;
+  level.dogtags[var_0.guid].visuals[1].origin = var_5;
+  level.dogtags[var_0.guid] _id_04D1::initializetagpathvariables();
+  level.dogtags[var_0.guid] _id_04D1::_id_0C30("any");
+  level.dogtags[var_0.guid].visuals[0] thread showtoteam(level.dogtags[var_0.guid], maps\mp\_utility::getotherteam(var_2));
+  level.dogtags[var_0.guid].visuals[1] thread showtoteam(level.dogtags[var_0.guid], var_2);
+  level.dogtags[var_0.guid].visuals[0] set_hudoutline("friendly", 1);
+  level.dogtags[var_0.guid].visuals[1] set_hudoutline("enemy", 1);
+  level.dogtags[var_0.guid].attacker = var_1;
+  _objective_icon(level.dogtags[var_0.guid].objid, "waypoint_dogtags");
+  _objective_position(level.dogtags[var_0.guid].objid, var_5);
+  _objective_state(level.dogtags[var_0.guid].objid, "active");
+  _objective_playerteam(level.dogtags[var_0.guid].objid, var_0 getentitynumber());
+  _objective_icon(level.dogtags[var_0.guid]._id_6988, "waypoint_dogtags_friendlys");
+  _objective_position(level.dogtags[var_0.guid]._id_6988, var_5);
+  _objective_state(level.dogtags[var_0.guid]._id_6988, "active");
+  _objective_playerenemyteam(level.dogtags[var_0.guid]._id_6988, var_0 getentitynumber());
   playsoundatpos(var_5, "mp_killconfirm_tags_drop");
-  level._id_31F9[var_0.guid]._id_A582[0] scriptmodelplayanim("mp_dogtag_spin");
-  level._id_31F9[var_0.guid]._id_A582[1] scriptmodelplayanim("mp_dogtag_spin");
+  level.dogtags[var_0.guid].visuals[0] scriptmodelplayanim("mp_dogtag_spin");
+  level.dogtags[var_0.guid].visuals[1] scriptmodelplayanim("mp_dogtag_spin");
 }
 
-_id_8C21(var_0, var_1) {
+showtoteam(var_0, var_1) {
   var_0 endon("death");
   var_0 endon("reset");
   self hide();
@@ -202,105 +202,105 @@ _id_8C21(var_0, var_1) {
         self showtoplayer(var_3);
       }
 
-      if(var_0._id_A496 == var_3.team && var_3 == var_0._id_1180) {
-        _objective_state(var_0._id_6989, "invisible");
+      if(var_0.victimteam == var_3.team && var_3 == var_0.attacker) {
+        _objective_state(var_0.objid, "invisible");
       }
     }
   }
 }
 
-_id_6BBF(var_0) {
+onuse(var_0) {
   if(isDefined(var_0._id_0117)) {
     var_0 = var_0._id_0117;
   }
 
   var_1 = var_0.pers["team"];
 
-  if(var_1 == self._id_A496) {
+  if(var_1 == self.victimteam) {
     var_2 = _id_0380::_id_6842("mp_kc_tag_denied", undefined, var_0.origin);
 
     if(isPlayer(var_0)) {
       var_0 maps\mp\_utility::leaderdialogonplayer("kill_denied");
     }
 
-    if(isDefined(self._id_1180) && isPlayer(self._id_1180)) {
-      self._id_1180 maps\mp\_utility::leaderdialogonplayer("kc_killlost");
+    if(isDefined(self.attacker) && isPlayer(self.attacker)) {
+      self.attacker maps\mp\_utility::leaderdialogonplayer("kc_killlost");
     }
 
-    var_3 = self._id_A490 == var_0;
-    var_0 _id_047A::_id_5A38(var_3);
+    var_3 = self.victim == var_0;
+    var_0 _id_047A::killdeniedevent(var_3);
   } else {
     var_4 = _id_0380::_id_6842("mp_kc_tag_collected", undefined, var_0.origin);
 
-    if(isPlayer(self._id_1180) && self._id_1180 != var_0) {
-      level thread maps\mp\gametypes\_rank::_id_1457("team_confirmed", self._id_1180);
+    if(isPlayer(self.attacker) && self.attacker != var_0) {
+      level thread maps\mp\gametypes\_rank::awardgameevent("team_confirmed", self.attacker);
     }
 
-    var_0 _id_047A::_id_5A35();
+    var_0 _id_047A::killconfirmedevent();
 
     if(isPlayer(var_0)) {
       var_0 maps\mp\_utility::leaderdialogonplayer("kill_confirmed");
     }
 
-    var_0 _id_04D2::_id_47BD(var_1, 1, 1);
+    var_0 _id_04D2::giveteamscoreforobjective(var_1, 1, 1);
   }
 
-  level thread _id_047A::_id_63E9(var_0);
-  _id_7D6F();
+  level thread _id_047A::monitortagcollector(var_0);
+  resettags();
 }
 
-_id_7D6F() {
-  self._id_1180 = undefined;
+resettags() {
+  self.attacker = undefined;
   self notify("reset");
-  self._id_A582[0] hide();
-  self._id_A582[1] hide();
-  self._id_28D4 = (0, 0, 1000);
-  self._id_9D65.origin = (0, 0, 1000);
-  self._id_A582[0].origin = (0, 0, 1000);
-  self._id_A582[1].origin = (0, 0, 1000);
+  self.visuals[0] hide();
+  self.visuals[1] hide();
+  self.curorigin = (0, 0, 1000);
+  self.trigger.origin = (0, 0, 1000);
+  self.visuals[0].origin = (0, 0, 1000);
+  self.visuals[1].origin = (0, 0, 1000);
   _id_04D1::_id_0C30("none");
-  _objective_state(self._id_6989, "invisible");
+  _objective_state(self.objid, "invisible");
   _objective_state(self._id_6988, "invisible");
 }
 
-_id_95BD(var_0) {
+tagteamupdater(var_0) {
   level endon("game_ended");
   self endon("disconnect");
 
   for(;;) {
     self waittill("joined_team");
-    var_0._id_A496 = self.pers["team"];
-    var_0 _id_7D6F();
+    var_0.victimteam = self.pers["team"];
+    var_0 resettags();
   }
 }
 
-_id_2404(var_0) {
+clearonvictimdisconnect(var_0) {
   level endon("game_ended");
   var_1 = var_0.guid;
   var_0 waittill("disconnect");
 
-  if(isDefined(level._id_31F9[var_1])) {
-    level._id_31F9[var_1] _id_04D1::_id_0C30("none");
-    playFX(level._id_257E["vanish"], level._id_31F9[var_1]._id_28D4);
-    level._id_31F9[var_1] notify("reset");
+  if(isDefined(level.dogtags[var_1])) {
+    level.dogtags[var_1] _id_04D1::_id_0C30("none");
+    playFX(level.conf_fx["vanish"], level.dogtags[var_1].curorigin);
+    level.dogtags[var_1] notify("reset");
     waitframe();
 
-    if(isDefined(level._id_31F9[var_1])) {
-      objective_delete(level._id_31F9[var_1]._id_6989);
-      objective_delete(level._id_31F9[var_1]._id_6988);
-      level._id_31F9[var_1]._id_9D65 delete();
+    if(isDefined(level.dogtags[var_1])) {
+      objective_delete(level.dogtags[var_1].objid);
+      objective_delete(level.dogtags[var_1]._id_6988);
+      level.dogtags[var_1].trigger delete();
 
-      for(var_2 = 0; var_2 < level._id_31F9[var_1]._id_A582.size; var_2++) {
-        level._id_31F9[var_1]._id_A582[var_2] delete();
+      for(var_2 = 0; var_2 < level.dogtags[var_1].visuals.size; var_2++) {
+        level.dogtags[var_1].visuals[var_2] delete();
       }
 
-      level._id_31F9[var_1] notify("deleted");
-      level._id_31F9[var_1] = undefined;
+      level.dogtags[var_1] notify("deleted");
+      level.dogtags[var_1] = undefined;
     }
   }
 }
 
-_id_84DF(var_0, var_1) {
+set_hudoutline(var_0, var_1) {
   var_2 = undefined;
   var_0 = _tolower(var_0);
   var_3["friendly"] = 1;

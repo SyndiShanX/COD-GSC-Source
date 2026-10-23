@@ -4,13 +4,13 @@
 **************************************************************************/
 
 init() {
-  var_0 = common_scripts\utility::_id_46B5("orbital_gravity_entangler", "targetname");
-  var_1 = common_scripts\utility::_id_46B5(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getstruct("orbital_gravity_entangler", "targetname");
+  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
   var_0.radius = distance(var_0.origin, var_1.origin);
-  var_2 = var_0 common_scripts\utility::_id_8FFC();
+  var_2 = var_0 common_scripts\utility::spawn_tag_origin();
   var_2 show();
   var_2 thread rotate_me();
-  var_3 = var_0 common_scripts\utility::_id_8FFC();
+  var_3 = var_0 common_scripts\utility::spawn_tag_origin();
   var_3 show();
   var_3 thread rotate_me(1);
   level.oribital_rotator_1 = var_2;
@@ -52,7 +52,7 @@ watch_for_grab() {
       continue;
     }
     level.grenades_in_orbit = common_scripts\utility::_id_0FA0(level.grenades_in_orbit);
-    var_1 = common_scripts\utility::_id_40B0(var_0.origin, level.grenades_in_orbit);
+    var_1 = common_scripts\utility::get_array_of_closest(var_0.origin, level.grenades_in_orbit);
     var_1 = common_scripts\utility::_id_0FA0(var_1);
 
     if(var_1.size == 0) {
@@ -64,7 +64,7 @@ watch_for_grab() {
     if(_distance2d(var_0.origin, var_1[0].origin) > 70) {
       continue;
     }
-    _id_0586::_id_478A(var_0);
+    _id_0586::givegrenadesafterrounds(var_0);
     var_0.grenadecolorsheld = common_scripts\utility::_id_0F6F(var_0.grenadecolorsheld, var_1[0]._id_3F74);
     var_1[0] remove_fake_projectile();
   }
@@ -90,7 +90,7 @@ watch_for_entanglements() {
           if(isDefined(var_5)) {
             var_2 set_fx(var_5);
           } else {
-            var_2 _meth_8561(var_2._id_A9E0, var_2._id_0117, var_2);
+            var_2 _meth_8561(var_2.weaponname, var_2._id_0117, var_2);
             var_2 remove_fake_projectile();
           }
 
@@ -152,7 +152,7 @@ watch_for_grenades_and_projectiles(var_0) {
   var_4 = var_0.origin;
   childthread watch_for_grab();
   var_5 = ["frag_grenade_zm", "c4_zm", "semtex_zm", "throwingknife_zm"];
-  common_scripts\utility::_id_3C9F(_id_0557::_id_7838("quest_deathraven", "quest_deathraven_survive_rush"));
+  common_scripts\utility::flag_wait(_id_0557::_id_7838("quest_deathraven", "quest_deathraven_survive_rush"));
 
   for(;;) {
     self waittill("grenade_fire", var_6, var_7);
@@ -189,7 +189,7 @@ watch_for_grenades_and_projectiles(var_0) {
     if(!isDefined(var_8)) {
       continue;
     }
-    var_8._id_A9E0 = var_7;
+    var_8.weaponname = var_7;
     var_8._id_0117 = self;
     level.grenades_in_orbit = common_scripts\utility::_id_0F6F(level.grenades_in_orbit, var_8);
     var_8 thread handle_detonation(self, var_7);
@@ -220,7 +220,7 @@ spawn_a_fake_grenade(var_0, var_1) {
   }
 
   var_2 = self;
-  var_3 = var_2 common_scripts\utility::_id_8FFC();
+  var_3 = var_2 common_scripts\utility::spawn_tag_origin();
   var_3 show();
   var_3.angles = (30, 0, 15);
   var_4 = getzombielethalmodel(var_1);
@@ -259,7 +259,7 @@ get_is_facing_against_circle(var_0, var_1) {
 }
 
 get_player_angle_flat() {
-  var_0 = common_scripts\utility::_id_3D5C(self _meth_8566());
+  var_0 = common_scripts\utility::flat_angle(self _meth_8566());
   var_0 = var_0[1];
   return int(var_0);
 }
@@ -308,20 +308,20 @@ handle_detonation(var_0, var_1) {
 get_hyper_color(var_0, var_1) {
   var_2 = [var_0, var_1];
 
-  if(_id_4B29("blue", var_2) && _id_4B29("yellow", var_2)) {
+  if(has_color("blue", var_2) && has_color("yellow", var_2)) {
     return "proj_trail_green";
   }
 
-  if(_id_4B29("blue", var_2) && _id_4B29("red", var_2)) {
+  if(has_color("blue", var_2) && has_color("red", var_2)) {
     return "proj_trail_magenta";
   }
 
-  if(_id_4B29("blue", var_2) && _id_4B29("green", var_2)) {
+  if(has_color("blue", var_2) && has_color("green", var_2)) {
     return "proj_trail_cyan";
   }
 }
 
-_id_4B29(var_0, var_1) {
+has_color(var_0, var_1) {
   foreach(var_3 in var_1) {
     if(issubstr(var_3, var_0)) {
       return 1;
@@ -343,7 +343,7 @@ set_fx(var_0) {
   }
 
   self._id_3F74 = var_0;
-  self.fx = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_0), self, "tag_fx");
+  self.fx = _spawnlinkedfx(common_scripts\utility::getfx(var_0), self, "tag_fx");
   self.ee_color = get_color_for_grenade(var_0);
   _triggerfx(self.fx);
 }
@@ -382,7 +382,7 @@ seek_enemy_targets(var_0, var_1) {
     }
 
     if(self.lethallevel == 0) {
-      var_6 = common_scripts\utility::_id_4461(self.origin, _id_0547::_id_408F());
+      var_6 = common_scripts\utility::getclosest(self.origin, _id_0547::_id_408F());
 
       if(isDefined(var_6) && distance(self.origin, var_6.origin) < 96) {
         var_6 dodamage(var_6.health + 1, self.origin, var_0, self, "MOD_MELEE", var_1);

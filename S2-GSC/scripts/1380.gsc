@@ -20,7 +20,7 @@ init() {
   var_0._id_5ED2["default look"]["heads"] = ["zom_fireman_head"];
   var_0._id_4C12 = 20;
   var_0._id_4C07 = 175000;
-  var_0._id_60E2 = 90;
+  var_0.meleedamage = 90;
   var_0._id_2F9B = 1;
   var_0._id_907C = "zombie_fireman";
   var_0._id_8302 = 80;
@@ -28,7 +28,7 @@ init() {
   var_0.parenttype = "zombie_generic";
   var_0.suppressive_fire_speed_multiplier = 0.3;
   _id_0547::_id_0A52(var_0, "zombie_fireman");
-  level._id_9E16["zombie_fireman"] = ::_id_9E17;
+  level.trycalculatesectororigin["zombie_fireman"] = ::_id_9E17;
   level._id_7A5D["zombie_fireman"] = ::_id_3C08;
   _id_0547::_id_7BD0("fireman_do_flame", ::_id_3BF1, ::_id_3D2B, -1);
   level._effect["zombie_fireman_flamethrower"] = loadfx("vfx/fire/flamethrower_end_med");
@@ -63,9 +63,9 @@ _id_3BFB(var_0) {
 }
 
 _id_ABA7() {
-  self._id_64C2 = 1.0 * _id_054D::_id_4440();
+  self.moveratescale = 1.0 * _id_054D::_id_4440();
 
-  if(isDefined(self._id_28D2)) {
+  if(isDefined(self.curmeleetarget)) {
     var_0 = isDefined(self._id_5B88) && gettime() - self._id_5B88 > 5000;
 
     if(var_0) {
@@ -92,21 +92,21 @@ _id_ABA7() {
 }
 
 _id_8A1B() {
-  self _meth_85A1("zombie_fireman");
+  self set_target_tracking_disabled("zombie_fireman");
   self scragentsetclipmode("agent");
-  self._id_11AB = 70 + self.radius;
-  self._id_60F5 = "large";
-  self._id_60F6 = 200;
-  self._id_64C2 = 1.0;
-  self._id_672D = 1.0;
-  self._id_9D0D = 1.0;
-  self._id_4013 = 1.0;
+  self.attackoffset = 70 + self.radius;
+  self.meleesectortype = "large";
+  self.meleesectorupdatetime = 200;
+  self.moveratescale = 1.0;
+  self.nonmoveratescale = 1.0;
+  self.traverseratescale = 1.0;
+  self.generalspeedratescale = 1.0;
   _id_0547::_id_86C8(100);
-  _id_0547::_id_86C7(self._id_60F0);
-  self scragentsetgoalRadius(self._id_2BCA);
-  self._id_60E4 = 0.25;
+  _id_0547::setmeleeradius(self.meleeradiusbase);
+  self scragentsetgoalRadius(self.defaultgoalradius);
+  self.meleedebouncetime = 0.25;
   self._id_3CFA = 3;
-  self._id_0EAD._id_6AFE["melee"] = ::_id_3BFD;
+  self._id_0EAD.onenter["melee"] = ::_id_3BFD;
   self._id_01B5 = 1;
   self._id_3CF9 = 1;
   self._id_3CFB = 0;
@@ -114,7 +114,7 @@ _id_8A1B() {
   self _meth_85E0(1);
   self _meth_85DE(var_0);
   self._id_2FA4 = 1;
-  self._id_3FF1 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_fireman"), level._id_A980) / 3;
+  self._id_3FF1 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_fireman"), level.wavecounter) / 3;
   self._id_3FF2 = self._id_3FF1;
   self._id_3FEE = 0;
 }
@@ -150,7 +150,7 @@ _id_ABAB() {
     if(common_scripts\utility::_id_562E(self._id_5748)) {
       continue;
     }
-    if(!_id_0547::_id_4B2C()) {
+    if(!_id_0547::has_entered_game()) {
       _id_053C::_id_4F9A();
       continue;
     }
@@ -162,11 +162,11 @@ _id_ABAB() {
       }
 
       if(_id_3BF0()) {
-        if(!isDefined(self._id_5BC1) || distancesquared(self._id_5BC1, self.origin) > 256) {
-          self._id_60ED = self._id_0108;
+        if(!isDefined(self.lastmeleepos) || distancesquared(self.lastmeleepos, self.origin) > 256) {
+          self.meleemovemode = self._id_0108;
         }
 
-        self scragentbeginmelee(self._id_28D2);
+        self scragentbeginmelee(self.curmeleetarget);
         continue;
       }
     }
@@ -186,23 +186,23 @@ _id_3BEE() {
     return 0;
   }
 
-  if(!isDefined(self._id_28D2)) {
+  if(!isDefined(self.curmeleetarget)) {
     return 0;
   }
 
-  if(self._id_0BA4 == "melee" || maps\mp\agents\_scripted_agent_anim_util::_id_57E2()) {
+  if(self._id_0BA4 == "melee" || maps\mp\agents\_scripted_agent_anim_util::isstatelocked()) {
     return 0;
   }
 
-  if(!_id_0547::_id_4B2C()) {
+  if(!_id_0547::has_entered_game()) {
     return 0;
   }
 
-  if(maps\mp\agents\humanoid\_humanoid::_id_A7F8()) {
+  if(maps\mp\agents\humanoid\_humanoid::wanttoattacktargetbutcant()) {
     return 0;
   }
 
-  if(maps\mp\agents\humanoid\_humanoid::_id_2EE6()) {
+  if(maps\mp\agents\humanoid\_humanoid::didpastmeleefail()) {
     return 0;
   }
 
@@ -232,10 +232,10 @@ _id_3BF0() {
     return 0;
   }
 
-  if(isDefined(self._id_60E4) && isDefined(self._id_5BC0)) {
-    var_0 = gettime() - self._id_5BC0;
+  if(isDefined(self.meleedebouncetime) && isDefined(self.lastmeleefinishtime)) {
+    var_0 = gettime() - self.lastmeleefinishtime;
 
-    if(var_0 < self._id_60E4 * 1000) {
+    if(var_0 < self.meleedebouncetime * 1000) {
       return 0;
     }
   }
@@ -244,11 +244,11 @@ _id_3BF0() {
 }
 
 _id_3C0F(var_0) {
-  if(!isDefined(self._id_28D2)) {
+  if(!isDefined(self.curmeleetarget)) {
     return 0;
   }
 
-  if(!maps\mp\_utility::isreallyalive(self._id_28D2)) {
+  if(!maps\mp\_utility::isreallyalive(self.curmeleetarget)) {
     return 0;
   }
 
@@ -256,8 +256,8 @@ _id_3C0F(var_0) {
     return 0;
   }
 
-  if(!maps\mp\agents\humanoid\_humanoid_util::_id_56DD(self._id_28D2)) {
-    if(!maps\mp\agents\humanoid\_humanoid::_id_5859(self._id_28D2.origin)) {
+  if(!maps\mp\agents\humanoid\_humanoid_util::isentstandingonme(self.curmeleetarget)) {
+    if(!maps\mp\agents\humanoid\_humanoid::iswithinattackheight(self.curmeleetarget.origin)) {
       return 0;
     }
 
@@ -268,7 +268,7 @@ _id_3C0F(var_0) {
     }
   }
 
-  if(maps\mp\agents\humanoid\_humanoid_melee::_id_5753()) {
+  if(maps\mp\agents\humanoid\_humanoid_melee::ismeleeblocked()) {
     return 0;
   }
 
@@ -276,16 +276,16 @@ _id_3C0F(var_0) {
 }
 
 _id_AA4F() {
-  return distancesquared(self.origin, self._id_28D2.origin) <= _squared(250);
+  return distancesquared(self.origin, self.curmeleetarget.origin) <= _squared(250);
 }
 
 _id_AA53() {
-  return distancesquared(self.origin, self._id_28D2.origin) <= _squared(self._id_60F0);
+  return distancesquared(self.origin, self.curmeleetarget.origin) <= _squared(self.meleeradiusbase);
 }
 
 _id_56EE() {
-  var_0 = self.origin + (0, 0, self._id_60E1);
-  var_1 = self._id_28D2.origin + (0, 0, self._id_60E1);
+  var_0 = self.origin + (0, 0, self.meleecheckheight);
+  var_1 = self.curmeleetarget.origin + (0, 0, self.meleecheckheight);
   var_2 = _physicstrace(var_0, var_1);
   return distancesquared(var_2, var_1) > 1;
 }
@@ -294,27 +294,27 @@ _id_3BF1() {
   self endon("death");
   self endon("flame_interrupt");
 
-  if(!isDefined(self._id_28D2)) {
+  if(!isDefined(self.curmeleetarget)) {
     return;
   }
-  self._id_28D2 endon("disconnect");
-  var_0 = maps\mp\agents\humanoid\_humanoid::_id_457E(self._id_28D2);
+  self.curmeleetarget endon("disconnect");
+  var_0 = maps\mp\agents\humanoid\_humanoid::getmeleeattackpoint(self.curmeleetarget);
 
   if(_id_56EE()) {
-    return maps\mp\agents\humanoid\_humanoid_melee::_id_60E7();
+    return maps\mp\agents\humanoid\_humanoid_melee::meleefailed();
   }
 
   var_1 = 0;
   var_2 = undefined;
 
-  if(var_0._id_A266 && self._id_3CF9) {
-    var_3 = maps\mp\agents\humanoid\_humanoid_util::_id_1F51(self.origin, var_0.origin);
+  if(var_0.valid && self._id_3CF9) {
+    var_3 = maps\mp\agents\humanoid\_humanoid_util::canhumanoidmovepointtopoint(self.origin, var_0.origin);
 
     if(var_3) {
       var_1 = 1;
       var_2 = var_0.origin;
     } else {
-      var_4 = _bullettracepassed(self.origin + (0, 0, 32), self._id_28D2.origin + (0, 0, 32), 0, undefined);
+      var_4 = _bullettracepassed(self.origin + (0, 0, 32), self.curmeleetarget.origin + (0, 0, 32), 0, undefined);
 
       if(var_4) {
         var_1 = 1;
@@ -327,25 +327,25 @@ _id_3BF1() {
     return;
   }
   self._id_3CFB = gettime();
-  _id_3C01(self._id_28D2, var_2);
+  _id_3C01(self.curmeleetarget, var_2);
 }
 
 _id_3BFD() {
   self endon("death");
   self endon("killanimscript");
-  self._id_28D2 endon("disconnect");
-  var_0 = maps\mp\agents\humanoid\_humanoid::_id_457E(self._id_28D2);
+  self.curmeleetarget endon("disconnect");
+  var_0 = maps\mp\agents\humanoid\_humanoid::getmeleeattackpoint(self.curmeleetarget);
 
-  if(maps\mp\agents\humanoid\_humanoid_melee::_id_5753()) {
-    return maps\mp\agents\humanoid\_humanoid_melee::_id_60E7();
+  if(maps\mp\agents\humanoid\_humanoid_melee::ismeleeblocked()) {
+    return maps\mp\agents\humanoid\_humanoid_melee::meleefailed();
   }
 
-  if(var_0._id_A266 && !_id_AA53()) {
-    maps\mp\agents\humanoid\_humanoid_melee::_id_60E7();
+  if(var_0.valid && !_id_AA53()) {
+    maps\mp\agents\humanoid\_humanoid_melee::meleefailed();
     return;
   }
 
-  _id_3C02(self._id_28D2, var_0.origin);
+  _id_3C02(self.curmeleetarget, var_0.origin);
 }
 
 _id_3C02(var_0, var_1) {
@@ -353,17 +353,17 @@ _id_3C02(var_0, var_1) {
   var_2 = "attack_stand";
   var_3 = 0;
 
-  if(isDefined(self._id_60ED)) {
-    var_2 = "attack_" + self._id_60ED;
+  if(isDefined(self.meleemovemode)) {
+    var_2 = "attack_" + self.meleemovemode;
     var_3 = 1;
-    self._id_60ED = undefined;
+    self.meleemovemode = undefined;
   }
 
   var_4 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_2);
   var_5 = 0;
   var_6 = 1.0;
-  self._id_5BBE = undefined;
-  self._id_5BBF = undefined;
+  self.lastmeleefailedmypos = undefined;
+  self.lastmeleefailedpos = undefined;
   var_7 = randomint(self getanimentrycount(var_4));
   var_8 = self getanimentry(var_4, var_7);
   var_9 = _getanimlength(var_8);
@@ -384,17 +384,17 @@ _id_3C02(var_0, var_1) {
   thread _id_3C0E(var_4, var_9);
   var_13 = undefined;
   self scragentsetanimscale(1, 1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "DoAttack");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "DoAttack");
   childthread _id_A137(var_0, var_8, var_9, var_6, var_10);
   wait(var_12);
   self notify("cancel_updatelerppos");
   self scragentsetanimmode("anim deltas");
   self scragentsetanimscale(1, 1);
-  self._id_5BC1 = self.origin;
+  self.lastmeleepos = self.origin;
   var_14 = var_9 / var_6 - var_12;
 
   if(var_14 > 0) {
-    maps\mp\agents\_scripted_agent_anim_util::_id_A79F("attack_anim", "end", var_14);
+    maps\mp\agents\_scripted_agent_anim_util::waituntilnotetrack_safe("attack_anim", "end", var_14);
   }
 
   self notify("cancel_updatelerppos");
@@ -410,8 +410,8 @@ _id_3C01(var_0, var_1) {
   var_2 = common_scripts\utility::random(["s2_fireman_attack_flamethrower_stand", "s2_fireman_attack_flamethrower_walk"]);
   var_3 = 1;
   var_4 = 1.0;
-  self._id_5BBE = undefined;
-  self._id_5BBF = undefined;
+  self.lastmeleefailedmypos = undefined;
+  self.lastmeleefailedpos = undefined;
   var_5 = randomint(self getanimentrycount(var_2));
   var_6 = self getanimentry(var_2, var_5);
   var_7 = _getanimlength(var_6);
@@ -430,8 +430,8 @@ _id_3C01(var_0, var_1) {
 
 _id_3C0E(var_0, var_1) {
   maps\mp\_utility::waitfortimeornotify(var_1, "killanimscript");
-  self._id_5BC0 = gettime();
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "DoAttack");
+  self.lastmeleefinishtime = gettime();
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "DoAttack");
 }
 
 _id_4511(var_0, var_1, var_2, var_3) {
@@ -466,7 +466,7 @@ _id_A136(var_0, var_1, var_2, var_3) {
       break;
     }
 
-    var_7 = maps\mp\agents\humanoid\_humanoid_melee::_id_4707(var_0, var_2);
+    var_7 = maps\mp\agents\humanoid\_humanoid_melee::getupdatedattackpos(var_0, var_2);
 
     if(!isDefined(var_7)) {
       break;
@@ -489,8 +489,8 @@ _id_A136(var_0, var_1, var_2, var_3) {
 _id_3D2A() {
   self endon("death");
   self scragentsetanimscale(1, 1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "DoFiremanFlameAttack");
-  _id_0378::_id_8D74("flamethrower_start", "tag_flamethrower_fx");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "DoFiremanFlameAttack");
+  _id_0378::snd_message("flamethrower_start", "tag_flamethrower_fx");
   thread _id_3D29();
   var_0 = gettime();
   self._id_7ACF = 0;
@@ -507,10 +507,10 @@ _id_3D2A() {
       if(_id_5625(var_9)) {
         if(var_9.team == self.team) {
           if(var_9._id_0A4B != "zombie_fireman") {
-            var_9 _meth_8682(0, 10, 1, "none", 1);
+            var_9 setfirstinfected(0, 10, 1, "none", 1);
             var_9 dodamage(5, var_9 getEye(), undefined, undefined, "MOD_ENERGY");
             var_10 = 10;
-            var_9 _id_0378::_id_8D74("zombie_ignite", var_10);
+            var_9 _id_0378::snd_message("zombie_ignite", var_10);
           }
 
           continue;
@@ -567,7 +567,7 @@ _id_3D29() {
   var_0 = spawn("script_model", self gettagorigin("tag_flamethrower_fx") + (600, 0, 0));
   var_0 setModel("tag_origin");
   var_0 linkTo(self, "tag_flamethrower_fx");
-  var_1 = _func_382("zmb_brenner_flamethrower_beam", self, "tag_flamethrower_fx", var_0, "tag_origin");
+  var_1 = vehicle_scripts/_attack_heli("zmb_brenner_flamethrower_beam", self, "tag_flamethrower_fx", var_0, "tag_origin");
   self waittill("cancel_updatelerppos");
   var_1 delete();
   var_0 delete();
@@ -581,11 +581,11 @@ _id_3D31() {
   self notify("cancel_updatelerppos");
   self scragentsetanimmode("anim deltas");
   self scragentsetanimscale(1, 1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "DoFiremanFlameAttack");
-  self._id_5BC1 = self.origin;
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "DoFiremanFlameAttack");
+  self.lastmeleepos = self.origin;
   self._id_5B9B = self.origin;
   self._id_3CF9 = 0;
-  _id_0378::_id_8D74("flamethrower_stop", "tag_flamethrower_fx");
+  _id_0378::snd_message("flamethrower_stop", "tag_flamethrower_fx");
 }
 
 _id_3D2B() {
@@ -650,7 +650,7 @@ _id_A137(var_0, var_1, var_2, var_3, var_4) {
   if(var_4.size == 0) {
     return;
   }
-  if(common_scripts\utility::_id_627D(var_4.size, 2) != 0) {}
+  if(common_scripts\utility::mod(var_4.size, 2) != 0) {}
 
   var_5 = var_2 / var_3 * var_4[0];
   var_6 = var_2 / var_3 * var_4[1];
@@ -672,17 +672,17 @@ _id_21CD(var_0) {
   var_2 = (var_1 - self.origin) * (1, 1, 0);
   var_3 = length(var_2);
 
-  foreach(var_5 in level._id_6E97) {
+  foreach(var_5 in level.participants) {
     if(!isDefined(var_5)) {
       continue;
     }
-    if(_id_0547::_id_577E(var_5)) {
+    if(_id_0547::isplayerinlaststand(var_5)) {
       continue;
     }
     if(_isalliedsentient(var_5, self)) {
       continue;
     }
-    _id_21CE(var_5, var_1, var_2, var_3, self._id_60E2);
+    _id_21CE(var_5, var_1, var_2, var_3, self.meleedamage);
   }
 
   if(isDefined(var_0) && isDefined(var_0._id_56ED) && var_0._id_56ED) {
@@ -707,7 +707,7 @@ _id_21CE(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
   self notify("attack_hit", var_0, self.origin);
-  maps\mp\agents\humanoid\_humanoid_melee::_id_3210(var_0, var_4, "MOD_IMPACT");
+  maps\mp\agents\humanoid\_humanoid_melee::domeleedamage(var_0, var_4, "MOD_IMPACT");
   self._id_4DE5[self._id_4DE5.size] = var_0;
 }
 
@@ -737,10 +737,10 @@ _id_A112() {
   for(;;) {
     wait(var_0);
 
-    if(!isDefined(self._id_5B9B) || !isDefined(self._id_28D2)) {
+    if(!isDefined(self._id_5B9B) || !isDefined(self.curmeleetarget)) {
       continue;
     }
-    var_1 = maps\mp\agents\humanoid\_humanoid::_id_457E(self._id_28D2);
+    var_1 = maps\mp\agents\humanoid\_humanoid::getmeleeattackpoint(self.curmeleetarget);
 
     if(!isDefined(var_1.origin)) {
       continue;
@@ -765,7 +765,7 @@ _id_A113() {
     var_2 = -1;
     var_3 = [];
 
-    foreach(var_5 in level._id_6E97) {
+    foreach(var_5 in level.participants) {
       waitframe();
       var_6 = _id_1E49(var_5);
 
@@ -816,11 +816,11 @@ _id_388D(var_0) {
     return -1;
   }
 
-  if(_id_0547::_id_8B95(var_0)) {
+  if(_id_0547::shouldignoreent(var_0)) {
     return -1;
   }
 
-  if(_id_0547::_id_577D(var_0)) {
+  if(_id_0547::isplayerinfected(var_0)) {
     return -1;
   }
 
@@ -855,11 +855,11 @@ _id_9B84(var_0, var_1, var_2) {
 }
 
 _id_388B(var_0) {
-  if(!isDefined(self._id_28D2)) {
+  if(!isDefined(self.curmeleetarget)) {
     return 1;
   }
 
-  if(self._id_28D2 == var_0 && _lengthsquared(var_0.origin - self.origin) < _squared(250)) {
+  if(self.curmeleetarget == var_0 && _lengthsquared(var_0.origin - self.origin) < _squared(250)) {
     return -1;
   }
 
@@ -867,13 +867,13 @@ _id_388B(var_0) {
 }
 
 _id_9E17(var_0, var_1, var_2, var_3) {
-  if(gettime() - var_0._id_9A18 >= 50) {
-    var_0.origin = maps\mp\agents\humanoid\_humanoid_util::_id_60F4(var_1, var_0._id_686A, var_2);
-    var_0.origin = maps\mp\agents\humanoid\_humanoid_util::_id_34AB(var_0.origin, 15, 55);
-    var_0._id_9A18 = gettime();
+  if(gettime() - var_0.timestamp >= 50) {
+    var_0.origin = maps\mp\agents\humanoid\_humanoid_util::meleesectortargetposition(var_1, var_0.num, var_2);
+    var_0.origin = maps\mp\agents\humanoid\_humanoid_util::dropsectorpostoground(var_0.origin, 15, 55);
+    var_0.timestamp = gettime();
 
     if(isDefined(var_0.origin)) {
-      var_4 = self._id_60E1;
+      var_4 = self.meleecheckheight;
       var_5 = var_0.origin + (0, 0, var_4);
       var_6 = var_1 + (0, 0, var_4);
       var_7 = _physicstrace(var_5, var_6);
@@ -889,9 +889,9 @@ _id_ABA9(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9 = "unknown kill method";
 
   if(isDefined(var_1)) {
-    var_9 = common_scripts\utility::_id_98E7(isPlayer(var_1), var_1.name, "") + " killed fireman";
-    var_10 = _id_0541::_id_5E60("head");
-    _id_0541::_id_65D0(self._id_6250 | var_10, 1, 1, (0, 0, 1), 0);
+    var_9 = common_scripts\utility::ter_op(isPlayer(var_1), var_1.name, "") + " killed fireman";
+    var_10 = _id_0541::locationtobodypart("head");
+    _id_0541::mutilate(self.missingbodyparts | var_10, 1, 1, (0, 0, 1), 0);
   }
 
   var_11 = self gettagorigin("j_head");
@@ -908,11 +908,11 @@ _id_3C10() {
   level waittill("zombie_wave_started");
 
   for(;;) {
-    while(level._id_A980 < level._id_66A6) {
+    while(level.wavecounter < level._id_66A6) {
       level waittill("zombie_wave_started");
     }
 
-    if(level._id_7F2A == "zombie_dog") {
+    if(level.roundtype == "zombie_dog") {
       level._id_66A6++;
     } else if(level._id_3C00) {
       _id_3C13();
@@ -951,9 +951,9 @@ _id_3C13() {
   }
 
   if(var_3 == var_4) {
-    level._id_66A6 = level._id_A980 + var_3;
+    level._id_66A6 = level.wavecounter + var_3;
   } else {
-    level._id_66A6 = level._id_A980 + _randomintrange(var_3, var_4);
+    level._id_66A6 = level.wavecounter + _randomintrange(var_3, var_4);
   }
 
   level._id_3BFE++;
@@ -979,7 +979,7 @@ _id_3C12() {
 
 _id_3C11(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
-    var_1 = _id_054D::_id_4696("zombie_fireman", 1, 0);
+    var_1 = _id_054D::getspawnpoint("zombie_fireman", 1, 0);
   }
 
   if(!isDefined(var_1)) {
@@ -1021,7 +1021,7 @@ _id_3C11(var_0, var_1, var_2) {
   }
 
   if(!common_scripts\utility::_id_562E(var_0)) {
-    level._id_66A6 = level._id_A980 + _randomintrange(5, 7);
+    level._id_66A6 = level.wavecounter + _randomintrange(5, 7);
   }
 
   return var_5;
@@ -1033,7 +1033,7 @@ _id_3C0D(var_0) {
   var_2 = 10000;
   var_3 = 9216;
   var_4 = 2250000;
-  maps\mp\agents\_scripted_agent_anim_util::_id_A79F("scripted_anim", "land", 2);
+  maps\mp\agents\_scripted_agent_anim_util::waituntilnotetrack_safe("scripted_anim", "land", 2);
   playFX(level._effect["zmb_ground_impact_lrg"], var_0 + (0, 0, -12));
   var_5 = _id_0547::_id_408F();
 
@@ -1121,7 +1121,7 @@ _id_3C03(var_0, var_1, var_2) {
 _id_3C08() {
   var_0 = [];
 
-  foreach(var_2 in level._id_AC4F) {
+  foreach(var_2 in level.zombies_spawners_zombie) {
     var_3 = 0;
 
     if(isDefined(var_2.setlookatent)) {
@@ -1134,7 +1134,7 @@ _id_3C08() {
       }
     }
 
-    if(level._id_AC80._id_ACB3[var_2._id_AC8A]._id_556E && var_3) {
+    if(level.zone_data.zones[var_2.zone_name].is_enabled && var_3) {
       var_0[var_0.size] = var_2;
     }
   }
@@ -1172,7 +1172,7 @@ _id_ABA8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     var_2 = 0;
 
     if(!isDefined(self.lastsparkfxtime) || self.lastsparkfxtime != gettime()) {
-      playFX(common_scripts\utility::_id_44F5("fireman_sparks"), var_6);
+      playFX(common_scripts\utility::getfx("fireman_sparks"), var_6);
       self.lastsparkfxtime = gettime();
     }
   }
@@ -1187,7 +1187,7 @@ _id_3FEF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     _id_0380::_id_2889("zmb_fireman_gas_tank_destroyed", undefined, self.origin);
     self._id_3FEE = 1;
     thread _id_3FF0(var_6);
-    self _meth_8682(0.01 * self.maxhealth, 1.5, 20.0, "none", 1, self, var_5);
+    self setfirstinfected(0.01 * self.maxhealth, 1.5, 20.0, "none", 1, self, var_5);
     self dodamage(self._id_3FF2, self.origin, var_1, var_0, "MOD_EXPLOSIVE", var_5);
 
     if(isDefined(level.zmb_events_player_destoyed_brenner_gas_tank)) {
@@ -1198,12 +1198,12 @@ _id_3FEF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
 _id_3FF3(var_0) {
   if(randomint(100) >= 80) {
-    _playFXOnTag(common_scripts\utility::_id_44F5("fireman_leak"), self, "TAG_STOWED_BACK");
+    _playFXOnTag(common_scripts\utility::getfx("fireman_leak"), self, "TAG_STOWED_BACK");
   }
 }
 
 _id_3FF0(var_0) {
-  _playFXOnTag(common_scripts\utility::_id_44F5("fireman_explosion"), self, "TAG_STOWED_BACK");
+  _playFXOnTag(common_scripts\utility::getfx("fireman_explosion"), self, "TAG_STOWED_BACK");
 }
 
 _id_ABA6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {

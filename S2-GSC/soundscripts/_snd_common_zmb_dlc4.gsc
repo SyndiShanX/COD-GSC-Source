@@ -9,63 +9,63 @@ snd_zmb_init_dlc4() {
 }
 
 snd_zmb_register_messages_dlc4() {
-  _id_0378::_id_8DC7("zmb_HAMMER_melee_hit_wooden", ::zmb_hammer_melee_hit_wooden);
-  _id_0378::_id_8DC7("zmb_HAMMER_melee_hit_metal", ::zmb_hammer_melee_hit_metal);
-  _id_0378::_id_8DC7("dlc4_throw_hammer", ::dlc4_throw_hammer);
-  _id_0378::_id_8DC7("dlc4_hammer_catch", ::dlc4_hammer_catch);
-  _id_0378::_id_8DC7("zmb_HAMMER_throw_hit_metal", ::zmb_hammer_throw_hit_metal);
-  _id_0378::_id_8DC7("aud_hammer_lightning", ::hammer_lightning);
-  _id_0378::_id_8DC7("aud_hammer_trail_lp", ::hammer_trail_lp);
-  _id_0378::_id_8DC7("aud_hammer_emp_charged", ::hammer_emp_charged);
-  _id_0378::_id_8DC7("zmb_shield_bash", ::zmb_shield_bash);
-  _id_0378::_id_8DC7("zmb_shield_hit", ::zmb_shield_hit);
-  _id_0378::_id_8DC7("zmb_shield_break", ::zmb_shield_break);
-  _id_0378::_id_8DC7("zmb_bloodraven_shield_bash", ::zmb_bloodraven_shield_bash);
-  _id_0378::_id_8DC7("aud_zmb_scythe_swing", ::scythe_swing);
-  _id_0378::_id_8DC7("aud_zmb_scythe_impact", ::scythe_impact);
-  _id_0378::_id_8DC7("aud_zmb_scythe_emp_swing", ::scythe_emp_swing);
-  _id_0378::_id_8DC7("aud_zmb_scythe_burst", ::scythe_burst);
-  _id_0378::_id_8DC7("aud_zmb_scythe_proj_shoot", ::scythe_proj_shoot);
-  _id_0378::_id_8DC7("aud_zmb_scythe_proj_loop", ::scythe_proj_loop);
-  _id_0378::_id_8DC7("aud_zmb_scythe_proj_impact", ::scythe_proj_impact);
-  _id_0378::_id_8DC7("aud_zmb_scythe_charged_loop_start", ::scythe_charged_loop_start);
-  _id_0378::_id_8DC7("aud_zmb_scythe_charged_loop_stop", ::scythe_charged_loop_stop);
-  _id_0378::_id_8DC7("aud_corpse_eater_soul_suck", ::corpse_eater_soul_suck);
-  _id_0378::_id_8DC7("aud_corpse_eater_fully_charged", ::corpse_eater_fully_charged);
-  _id_0378::_id_8DC7("aud_corpse_eater_pre_explosion", ::corpse_eater_pre_explosion);
-  _id_0378::_id_8DC7("aud_corpse_eater_explosion", ::corpse_eater_explosion);
-  _id_0378::_id_8DC7("aud_moonorb_stuck", ::moonorb_stuck);
-  _id_0378::_id_8DC7("aud_moonorb_orphaned_lp", ::moonorb_orphaned_lp);
-  _id_0378::_id_8DC7("aud_moonorb_control_burst", ::moonorb_control_burst);
-  _id_0378::_id_8DC7("aud_moonorb_control_lp", ::moonorb_control_lp);
-  _id_0378::_id_8DC7("aud_moonorb_teleport", ::moonorb_teleport);
-  _id_0378::_id_8DC7("aud_dlc4_magic_poof", ::dlc4_magic_poof);
-  _id_0378::_id_8DC7("god_king_giestblast_charge", ::god_king_giestblast_charge);
-  _id_0378::_id_8DC7("god_king_giestblast_throw", ::god_king_giestblast_throw);
-  _id_0378::_id_8DC7("god_king_giestbomb_projectile", ::god_king_giestbomb_projectile);
-  _id_0378::_id_8DC7("god_king_pull_summon", ::god_king_pull_summon);
-  _id_0378::_id_8DC7("god_king_pull", ::god_king_pull);
-  _id_0378::_id_8DC7("god_king_melee", ::god_king_melee);
-  _id_0378::_id_8DC7("flame_wave_runner_start", ::god_king_flame_wave_runner_start);
-  _id_0378::_id_8DC7("flame_wave_runner_stop", ::god_king_flame_wave_runner_stop);
-  _id_0378::_id_8DC7("flame_wave_runner_inside", ::god_king_flame_wave_runner_inside);
-  _id_0378::_id_8DC7("flame_wave_runner_outside", ::god_king_flame_wave_runner_outside);
-  _id_0378::_id_8DC7("god_king_giestdrain", ::god_king_giestdrain);
-  _id_0378::_id_8DC7("god_king_giestdrain_plate_destroyed", ::god_king_giestdrain_plate_destroyed);
-  _id_0378::_id_8DC7("aud_clear_mute_zvox_for_drain", ::clear_mute_zvox_for_drain);
-  _id_0378::_id_8DC7("god_king_sun_cast", ::god_king_sun_cast);
-  _id_0378::_id_8DC7("god_king_sun_blast", ::god_king_sun_blast);
-  _id_0378::_id_8DC7("god_king_sun_blast_hit_plr", ::god_king_sun_blast_hit_plr);
-  _id_0378::_id_8DC7("god_king_lightning_summon", ::god_king_lightning_summon);
-  _id_0378::_id_8DC7("god_king_lightning", ::god_king_lightning);
-  _id_0378::_id_8DC7("god_king_detonate_cast", ::god_king_detonate_cast);
-  _id_0378::_id_8DC7("god_king_detonate_throw", ::god_king_detonate_throw);
-  _id_0378::_id_8DC7("god_king_force_summon", ::god_king_force_summon);
-  _id_0378::_id_8DC7("god_king_force_kneel", ::god_king_force_kneel);
-  _id_0378::_id_8DC7("god_king_finale_drain_first", ::god_king_finale_drain_first);
-  _id_0378::_id_8DC7("god_king_finale_melee", ::god_king_finale_melee);
-  _id_0378::_id_8DC7("god_king_finale_drain_end", ::god_king_finale_drain_end);
-  _id_0378::_id_8DC7("god_king_death", ::god_king_death);
+  _id_0378::snd_register_message("zmb_HAMMER_melee_hit_wooden", ::zmb_hammer_melee_hit_wooden);
+  _id_0378::snd_register_message("zmb_HAMMER_melee_hit_metal", ::zmb_hammer_melee_hit_metal);
+  _id_0378::snd_register_message("dlc4_throw_hammer", ::dlc4_throw_hammer);
+  _id_0378::snd_register_message("dlc4_hammer_catch", ::dlc4_hammer_catch);
+  _id_0378::snd_register_message("zmb_HAMMER_throw_hit_metal", ::zmb_hammer_throw_hit_metal);
+  _id_0378::snd_register_message("aud_hammer_lightning", ::hammer_lightning);
+  _id_0378::snd_register_message("aud_hammer_trail_lp", ::hammer_trail_lp);
+  _id_0378::snd_register_message("aud_hammer_emp_charged", ::hammer_emp_charged);
+  _id_0378::snd_register_message("zmb_shield_bash", ::zmb_shield_bash);
+  _id_0378::snd_register_message("zmb_shield_hit", ::zmb_shield_hit);
+  _id_0378::snd_register_message("zmb_shield_break", ::zmb_shield_break);
+  _id_0378::snd_register_message("zmb_bloodraven_shield_bash", ::zmb_bloodraven_shield_bash);
+  _id_0378::snd_register_message("aud_zmb_scythe_swing", ::scythe_swing);
+  _id_0378::snd_register_message("aud_zmb_scythe_impact", ::scythe_impact);
+  _id_0378::snd_register_message("aud_zmb_scythe_emp_swing", ::scythe_emp_swing);
+  _id_0378::snd_register_message("aud_zmb_scythe_burst", ::scythe_burst);
+  _id_0378::snd_register_message("aud_zmb_scythe_proj_shoot", ::scythe_proj_shoot);
+  _id_0378::snd_register_message("aud_zmb_scythe_proj_loop", ::scythe_proj_loop);
+  _id_0378::snd_register_message("aud_zmb_scythe_proj_impact", ::scythe_proj_impact);
+  _id_0378::snd_register_message("aud_zmb_scythe_charged_loop_start", ::scythe_charged_loop_start);
+  _id_0378::snd_register_message("aud_zmb_scythe_charged_loop_stop", ::scythe_charged_loop_stop);
+  _id_0378::snd_register_message("aud_corpse_eater_soul_suck", ::corpse_eater_soul_suck);
+  _id_0378::snd_register_message("aud_corpse_eater_fully_charged", ::corpse_eater_fully_charged);
+  _id_0378::snd_register_message("aud_corpse_eater_pre_explosion", ::corpse_eater_pre_explosion);
+  _id_0378::snd_register_message("aud_corpse_eater_explosion", ::corpse_eater_explosion);
+  _id_0378::snd_register_message("aud_moonorb_stuck", ::moonorb_stuck);
+  _id_0378::snd_register_message("aud_moonorb_orphaned_lp", ::moonorb_orphaned_lp);
+  _id_0378::snd_register_message("aud_moonorb_control_burst", ::moonorb_control_burst);
+  _id_0378::snd_register_message("aud_moonorb_control_lp", ::moonorb_control_lp);
+  _id_0378::snd_register_message("aud_moonorb_teleport", ::moonorb_teleport);
+  _id_0378::snd_register_message("aud_dlc4_magic_poof", ::dlc4_magic_poof);
+  _id_0378::snd_register_message("god_king_giestblast_charge", ::god_king_giestblast_charge);
+  _id_0378::snd_register_message("god_king_giestblast_throw", ::god_king_giestblast_throw);
+  _id_0378::snd_register_message("god_king_giestbomb_projectile", ::god_king_giestbomb_projectile);
+  _id_0378::snd_register_message("god_king_pull_summon", ::god_king_pull_summon);
+  _id_0378::snd_register_message("god_king_pull", ::god_king_pull);
+  _id_0378::snd_register_message("god_king_melee", ::god_king_melee);
+  _id_0378::snd_register_message("flame_wave_runner_start", ::god_king_flame_wave_runner_start);
+  _id_0378::snd_register_message("flame_wave_runner_stop", ::god_king_flame_wave_runner_stop);
+  _id_0378::snd_register_message("flame_wave_runner_inside", ::god_king_flame_wave_runner_inside);
+  _id_0378::snd_register_message("flame_wave_runner_outside", ::god_king_flame_wave_runner_outside);
+  _id_0378::snd_register_message("god_king_giestdrain", ::god_king_giestdrain);
+  _id_0378::snd_register_message("god_king_giestdrain_plate_destroyed", ::god_king_giestdrain_plate_destroyed);
+  _id_0378::snd_register_message("aud_clear_mute_zvox_for_drain", ::clear_mute_zvox_for_drain);
+  _id_0378::snd_register_message("god_king_sun_cast", ::god_king_sun_cast);
+  _id_0378::snd_register_message("god_king_sun_blast", ::god_king_sun_blast);
+  _id_0378::snd_register_message("god_king_sun_blast_hit_plr", ::god_king_sun_blast_hit_plr);
+  _id_0378::snd_register_message("god_king_lightning_summon", ::god_king_lightning_summon);
+  _id_0378::snd_register_message("god_king_lightning", ::god_king_lightning);
+  _id_0378::snd_register_message("god_king_detonate_cast", ::god_king_detonate_cast);
+  _id_0378::snd_register_message("god_king_detonate_throw", ::god_king_detonate_throw);
+  _id_0378::snd_register_message("god_king_force_summon", ::god_king_force_summon);
+  _id_0378::snd_register_message("god_king_force_kneel", ::god_king_force_kneel);
+  _id_0378::snd_register_message("god_king_finale_drain_first", ::god_king_finale_drain_first);
+  _id_0378::snd_register_message("god_king_finale_melee", ::god_king_finale_melee);
+  _id_0378::snd_register_message("god_king_finale_drain_end", ::god_king_finale_drain_end);
+  _id_0378::snd_register_message("god_king_death", ::god_king_death);
 }
 
 dlc4_player_spawned() {
@@ -565,7 +565,7 @@ drain_plate(var_0, var_1) {
 blood_plate_drain_blood(var_0) {
   var_0.blood_strt = _id_0380::_id_2889("zmb_gdkng_drain_blood_strt", undefined, var_0.plate_model.origin);
   var_0.blood_lp = _id_0380::_id_6842("zmb_gdkng_drain_blood_lp", undefined, var_0.plate_model.origin, 0.3);
-  var_0 common_scripts\utility::_id_A70A("drain_ended", "plate_destroyed");
+  var_0 common_scripts\utility::waittill_any("drain_ended", "plate_destroyed");
   _id_0380::_id_6850(var_0.blood_lp, 0.5);
   var_0.blood_stop = _id_0380::_id_2889("zmb_gdkng_drain_blood_end", undefined, var_0.plate_model.origin);
 }
@@ -641,7 +641,7 @@ god_king_finale_drain_first() {
   level endon("aud_stop_godking_finale_sfx");
   _id_0380::_id_6844("zmb_gdkng_giest_finale_buildup", undefined, self);
   wait 0.5;
-  level._id_11CB.final_drain_lp = _id_0380::_id_6844("zmb_gdkng_giest_finale_lp", undefined, self);
+  level.aud.final_drain_lp = _id_0380::_id_6844("zmb_gdkng_giest_finale_lp", undefined, self);
   thread finale_elec_oneshots();
   thread finale_whoosh_oneshots();
 }
@@ -678,7 +678,7 @@ god_king_finale_melee() {
 }
 
 god_king_finale_drain_end() {
-  _id_0380::_id_6850(level._id_11CB.final_drain_lp, 0.5);
+  _id_0380::_id_6850(level.aud.final_drain_lp, 0.5);
   _id_0380::_id_288B("zmb_gdkng_giest_finale_end", undefined, self);
   level notify("aud_stop_godking_finale_sfx");
 }

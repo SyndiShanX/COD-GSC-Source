@@ -9,7 +9,7 @@ ammo_cache_setup() {
 
   foreach(var_3 in var_0) {
     var_4 = common_scripts\utility::_id_44BE(var_3.target, "targetname");
-    var_3._id_9DC2 = [];
+    var_3.triggers = [];
     var_3._id_629F = [];
 
     foreach(var_6 in var_4) {
@@ -21,8 +21,8 @@ ammo_cache_setup() {
       switch (var_7) {
         case "ammo_cache_trigger":
           var_6.look_pos = var_3.origin;
-          var_6._id_267B = var_1;
-          var_3._id_9DC2[var_3._id_9DC2.size] = var_6;
+          var_6.cost = var_1;
+          var_3.triggers[var_3.triggers.size] = var_6;
           break;
         case "ammo_cache_model":
           var_3._id_629F[var_3._id_629F.size] = var_6;
@@ -30,15 +30,15 @@ ammo_cache_setup() {
       }
     }
 
-    foreach(var_10 in var_3._id_9DC2) {
-      var_10 _meth_8660(1, var_3.origin);
+    foreach(var_10 in var_3.triggers) {
+      var_10 setdefaultcostumeifneeded(1, var_3.origin);
       var_10.face_pos = var_3.origin;
 
       if(_id_0547::_id_5819(var_10)) {
-        _id_0547::_id_8A4F(var_10, ::ammo_cache_update_hints_for_player);
+        _id_0547::setupusetriggerforclient(var_10, ::ammo_cache_update_hints_for_player);
       } else {}
 
-      var_10 thread ammo_cache_think(var_3, var_10._id_267B);
+      var_10 thread ammo_cache_think(var_3, var_10.cost);
     }
   }
 
@@ -58,7 +58,7 @@ ammo_cache_update_hints_for_player(var_0) {
     waittillframeend;
     var_2._id_6642 = 1;
     var_2._id_401E = var_3;
-    self._id_267B = int(var_2._id_401E);
+    self.cost = int(var_2._id_401E);
     [var_5, var_6] = common_scripts\utility::_id_A70E(var_0, "ammo_cache_used", level, "sg_obj_end");
     waittillframeend;
 
@@ -98,15 +98,15 @@ ammo_cache_think(var_0, var_1) {
   var_2 = self;
 
   for(;;) {
-    [var_4, var_5] = var_2 _id_0547::_id_A795();
-    var_6 = _id_0547::_id_462A(var_4);
+    [var_4, var_5] = var_2 _id_0547::waittilltriggerortokenuse();
+    var_6 = _id_0547::getplayerweaponzombies(var_4);
     var_7 = 0;
 
     if(!_id_0547::_id_5836(var_6)) {
       continue;
     }
     if(_id_0548::_id_4B6A(var_4, var_6)) {
-      _id_0548::_id_300A(var_4, var_7);
+      _id_0548::displayfullammomessage(var_4, var_7);
       continue;
     }
 
@@ -115,13 +115,13 @@ ammo_cache_think(var_0, var_1) {
       continue;
     }
 
-    if(var_4 maps\mp\gametypes\zombies::_id_11C2(var_2._id_267B)) {
+    if(var_4 maps\mp\gametypes\zombies::attempttobuy(var_2.cost)) {
       _id_0548::_id_3AC1(var_4, var_6);
       var_4.ammo_cache_uses++;
       var_4.ammo_cache_available_uses--;
       var_4 notify("ammo_cache_used");
       var_4 givemaxammo(var_6);
-      var_4 thread _id_054E::_id_62D9();
+      var_4 thread _id_054E::moneyspend();
       continue;
     }
 
@@ -158,7 +158,7 @@ ammo_cache_low_ammo_highlight() {
   var_0 endon("disconnect");
 
   if(!isalive(var_0)) {
-    var_0 common_scripts\utility::_id_A70A("spawned_player", "faux_spawn");
+    var_0 common_scripts\utility::waittill_any("spawned_player", "faux_spawn");
   }
 
   var_0.caches_highlighted = 0;
@@ -188,7 +188,7 @@ ammo_cache_low_ammo_highlight() {
       continue;
     }
 
-    if(_id_0547::_id_577E(var_0)) {
+    if(_id_0547::isplayerinlaststand(var_0)) {
       continue;
     }
     var_3 = var_0 getcurrentweapon();
@@ -196,7 +196,7 @@ ammo_cache_low_ammo_highlight() {
     if(_id_0547::_id_5565(var_3, "none")) {
       continue;
     }
-    if(_id_0547::_id_5865(var_3) || _id_0547::_id_585B(var_3) || _id_0547::iszombieconsumableweapon(var_3) || _id_0547::_id_585C(var_3)) {
+    if(_id_0547::_id_5865(var_3) || _id_0547::_id_585B(var_3) || _id_0547::iszombieconsumableweapon(var_3) || _id_0547::iszombieequipment(var_3)) {
       continue;
     }
     var_4 = var_0 getfractionmaxammo(var_3);

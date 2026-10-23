@@ -4,21 +4,21 @@
 ***********************************************************/
 
 main() {
-  level._id_6662 = common_scripts\utility::_id_46B7("objective_testing_spawners", "targetname");
-  level._id_6664 = common_scripts\utility::_id_46B7("objective_testing_spawners_salt", "targetname");
-  level._id_6663 = common_scripts\utility::_id_46B7("objective_testing_spawners_com", "targetname");
-  level._id_6661 = common_scripts\utility::_id_46B7("objective_testing_spawners_blimp", "targetname");
+  level._id_6662 = common_scripts\utility::getstructarray("objective_testing_spawners", "targetname");
+  level._id_6664 = common_scripts\utility::getstructarray("objective_testing_spawners_salt", "targetname");
+  level._id_6663 = common_scripts\utility::getstructarray("objective_testing_spawners_com", "targetname");
+  level._id_6661 = common_scripts\utility::getstructarray("objective_testing_spawners_blimp", "targetname");
 }
 
 _id_772E() {
   for(;;) {
     var_0 = 0;
 
-    foreach(var_2 in maps\mp\agents\_agent_utility::_id_43FD("all")) {
+    foreach(var_2 in maps\mp\agents\_agent_utility::getactiveagentsoftype("all")) {
       if(common_scripts\utility::_id_562E(var_2._id_6816)) {
         continue;
       }
-      if(var_2._id_901F <= level._id_A980 && var_2._id_6816) {
+      if(var_2._id_901F <= level.wavecounter && var_2._id_6816) {
         var_0++;
       }
     }
@@ -31,7 +31,7 @@ _id_772E() {
 _id_0CAE(var_0, var_1, var_2, var_3) {
   wait 0.5;
 
-  foreach(var_5 in level._id_AC1D) {
+  foreach(var_5 in level.zombiedoors) {
     var_5 notify("open", level.players[0]);
   }
 
@@ -51,7 +51,7 @@ _id_0CAE(var_0, var_1, var_2, var_3) {
           level.players[var_8] _id_8706(var_0, var_1);
 
           if(0) {
-            level.players[var_8]._id_AC5B = 1;
+            level.players[var_8].zombiesignoreme = 1;
           }
 
           level.players[var_8] maps\mp\gametypes\zombies::_id_4798(var_2 - 500);
@@ -123,5 +123,5 @@ _id_7C11(var_0) {
   }
 
   wait 1;
-  level._id_A980 = var_0;
+  level.wavecounter = var_0;
 }

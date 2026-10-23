@@ -4,33 +4,33 @@
 **************************************/
 
 init() {
-  if(isDefined(level._id_5FEC)) {
-    [[level._id_5FEC]]();
+  if(isDefined(level.mapcustomkillstreakfunc)) {
+    [[level.mapcustomkillstreakfunc]]();
   }
 
   level thread _id_057B::init();
-  level thread _id_398E();
-  level._id_5A7D["orbital_carepackage_pod_zm_mp"] = "carepackage";
-  level._id_69A6 = "orbital_carepackage_pod_zm_mp";
-  level thread _id_7F1C();
+  level thread extrainit();
+  level.killstreakwieldweapons["orbital_carepackage_pod_zm_mp"] = "carepackage";
+  level.ocp_weap_name = "orbital_carepackage_pod_zm_mp";
+  level thread roundlogic();
 }
 
-_id_398E() {
+extrainit() {
   level.teamemped["allies"] = 0;
   level.teamemped["axis"] = 0;
-  level._id_6C25 = 0;
-  level._id_6241 = [];
+  level.orbitalsupportinuse = 0;
+  level.missile_strike_gas_clouds = [];
 }
 
-_id_1A4E() {
+bot_killstreak_setup() {
   var_0 = gettime();
 
-  if(!isDefined(level._id_5A59)) {
-    maps\mp\bots\_bots_ks::_id_1AB3("zm_squadmate", maps\mp\bots\_bots_ks::_id_1A50);
-    maps\mp\bots\_bots_ks::_id_1AB3("uav", maps\mp\bots\_bots_ks::_id_1A4B, maps\mp\bots\_bots_ks::_id_1A3E);
-    maps\mp\bots\_bots_ks::_id_1AB3("carepackage", maps\mp\bots\_bots_ks::_id_1A4B, maps\mp\bots\_bots_ks::_id_1A3E);
-    maps\mp\bots\_bots_ks::_id_1AB3("missile_strike", maps\mp\bots\_bots_ks::_id_1A4B, maps\mp\bots\_bots_ks::_id_1A3E);
-    maps\mp\bots\_bots_ks::_id_1AB3("airstrike", maps\mp\bots\_bots_ks::_id_1A4B, maps\mp\bots\_bots_ks::_id_1A3E);
+  if(!isDefined(level.killstreak_botfunc)) {
+    maps\mp\bots\_bots_ks::bot_register_killstreak_func("zm_squadmate", maps\mp\bots\_bots_ks::bot_killstreak_simple_use);
+    maps\mp\bots\_bots_ks::bot_register_killstreak_func("uav", maps\mp\bots\_bots_ks::bot_killstreak_never_use, maps\mp\bots\_bots_ks::bot_killstreak_do_not_use);
+    maps\mp\bots\_bots_ks::bot_register_killstreak_func("carepackage", maps\mp\bots\_bots_ks::bot_killstreak_never_use, maps\mp\bots\_bots_ks::bot_killstreak_do_not_use);
+    maps\mp\bots\_bots_ks::bot_register_killstreak_func("missile_strike", maps\mp\bots\_bots_ks::bot_killstreak_never_use, maps\mp\bots\_bots_ks::bot_killstreak_do_not_use);
+    maps\mp\bots\_bots_ks::bot_register_killstreak_func("airstrike", maps\mp\bots\_bots_ks::bot_killstreak_never_use, maps\mp\bots\_bots_ks::bot_killstreak_do_not_use);
   }
 }
 
@@ -39,16 +39,16 @@ _id_0B81() {}
 getEye() {
   var_0 = undefined;
 
-  if(isDefined(level._id_AB45) && level._id_AB45.size > 0) {
-    var_0 = level._id_AB45[level._id_AB45.size - 1];
+  if(isDefined(level.zmscorestreaks) && level.zmscorestreaks.size > 0) {
+    var_0 = level.zmscorestreaks[level.zmscorestreaks.size - 1];
   }
 
-  level._id_AB45 = [];
-  level._id_AB44 = 0;
+  level.zmscorestreaks = [];
+  level.zmscorestreakindex = 0;
   var_1 = [];
 
-  if(isDefined(level._id_AB30)) {
-    var_1 = [[level._id_AB30]]();
+  if(isDefined(level.zmgetscorestreaksforschedule)) {
+    var_1 = [[level.zmgetscorestreaksforschedule]]();
   } else {
     var_1[var_1.size] = "sentry_" + _randomintrange(1, 4);
     var_1[var_1.size] = "drone_" + _randomintrange(1, 3);
@@ -67,15 +67,15 @@ getEye() {
     var_4 = _id_45AC(var_1, var_2, var_0);
 
     if(var_4 != -1) {
-      level._id_AB45[level._id_AB45.size] = var_1[var_4];
+      level.zmscorestreaks[level.zmscorestreaks.size] = var_1[var_4];
       var_0 = var_1[var_4];
       var_1[var_4] = undefined;
       continue;
     }
 
-    level._id_AB45[level._id_AB45.size] = level._id_AB45[0];
+    level.zmscorestreaks[level.zmscorestreaks.size] = level.zmscorestreaks[0];
     var_4 = getarraykeys(var_1)[0];
-    level._id_AB45[0] = var_1[var_4];
+    level.zmscorestreaks[0] = var_1[var_4];
   }
 }
 
@@ -105,18 +105,18 @@ _id_45AC(var_0, var_1, var_2) {
   return -1;
 }
 
-_id_8A17() {
-  level._id_AB20 = common_scripts\utility::_id_46B7("carepackageDropPosition", "targetname");
+setupdroppositions() {
+  level.zmcarepackagelandingspots = common_scripts\utility::getstructarray("carepackageDropPosition", "targetname");
 
-  foreach(var_1 in level._id_AB20) {
-    var_1._id_510A = isDefined(var_1.setlookatent) && var_1.setlookatent == "indoors";
-    var_1._id_4882 = var_1.origin;
+  foreach(var_1 in level.zmcarepackagelandingspots) {
+    var_1.indoors = isDefined(var_1.setlookatent) && var_1.setlookatent == "indoors";
+    var_1.groundorg = var_1.origin;
 
-    if(var_1._id_510A) {
+    if(var_1.indoors) {
       var_2 = var_1.origin;
       var_3 = var_1.origin + (0, 0, -10000);
       var_4 = bulletTrace(var_2, var_3, 0);
-      var_1._id_4882 = var_4["position"];
+      var_1.groundorg = var_4["position"];
     }
 
     waitframe();
@@ -133,32 +133,32 @@ unlinkfromplayerview() {
   var_0[var_0.size] = 700;
   var_0[var_0.size] = 800;
   var_0[var_0.size] = 1000;
-  level._id_AB38 = common_scripts\utility::array_randomize(var_0);
-  level._id_AB39 = 0;
+  level.zmmoneyschedule = common_scripts\utility::array_randomize(var_0);
+  level.zmmoneyscheduleindex = 0;
 }
 
 _id_45A8() {
-  if(level._id_AB38.size == level._id_AB39) {
+  if(level.zmmoneyschedule.size == level.zmmoneyscheduleindex) {
     unlinkfromplayerview();
   }
 
-  var_0 = level._id_AB38[level._id_AB39];
-  level._id_AB39++;
+  var_0 = level.zmmoneyschedule[level.zmmoneyscheduleindex];
+  level.zmmoneyscheduleindex++;
   return var_0;
 }
 
-_id_7F1C() {
-  level._id_AB20 = common_scripts\utility::_id_46B7("carepackageDropPosition", "targetname");
+roundlogic() {
+  level.zmcarepackagelandingspots = common_scripts\utility::getstructarray("carepackageDropPosition", "targetname");
 
-  if(level._id_AB20.size == 0) {
+  if(level.zmcarepackagelandingspots.size == 0) {
     return;
   }
-  level._id_AB47 = [];
-  level._id_4477 = ::_id_4476;
-  level._id_AB34 = 0;
-  level._id_AB35 = 0;
-  level._id_AB33 = 0;
-  thread _id_8A17();
+  level.zmusedcarepackagelandingspots = [];
+  level.getcratefordroptype = ::getcrate;
+  level.zmkillstreakcrateprevo = 0;
+  level.zmkillstreakcratereactvo = 0;
+  level.zmkillstreakcratefirstvo = 0;
+  thread setupdroppositions();
   thread getEye();
   thread unlinkfromplayerview();
   var_0 = _randomintrange(3, 5);
@@ -166,9 +166,9 @@ _id_7F1C() {
   for(;;) {
     level waittill("zombie_wave_started");
 
-    while(level._id_A980 >= var_0) {
+    while(level.wavecounter >= var_0) {
       var_1 = _randomfloatrange(20, 30);
-      var_2 = level common_scripts\utility::_id_A74D("zombie_wave_ended", var_1);
+      var_2 = level common_scripts\utility::waittill_notify_or_timeout_return("zombie_wave_ended", var_1);
 
       if(!isDefined(var_2) || var_2 != "timeout") {
         continue;
@@ -176,18 +176,18 @@ _id_7F1C() {
       if(isDefined(level._id_671D) && level._id_671D == 1) {
         continue;
       }
-      var_2 = _id_3493();
+      var_2 = dropcarepackage();
 
       if(isDefined(var_2)) {
-        if(isDefined(level._id_7F25)) {
-          level._id_7F25[level._id_7F25.size] = var_2;
+        if(isDefined(level.roundsupplydrops)) {
+          level.roundsupplydrops[level.roundsupplydrops.size] = var_2;
         }
 
         if(level.players.size == 4) {
-          var_2 = _id_3493();
+          var_2 = dropcarepackage();
 
-          if(isDefined(var_2) && isDefined(level._id_7F25)) {
-            level._id_7F25[level._id_7F25.size] = var_2;
+          if(isDefined(var_2) && isDefined(level.roundsupplydrops)) {
+            level.roundsupplydrops[level.roundsupplydrops.size] = var_2;
           }
         }
 
@@ -199,58 +199,58 @@ _id_7F1C() {
   }
 }
 
-_id_4460(var_0) {
+getcloseplayertodroppoint(var_0) {
   var_1 = _sortbydistance(level.players, var_0);
   return var_1[0];
 }
 
-_id_4476(var_0) {
-  if(level._id_AB45.size == level._id_AB44) {
+getcrate(var_0) {
+  if(level.zmscorestreaks.size == level.zmscorestreakindex) {
     getEye();
   }
 
-  var_4 = level._id_AB45[level._id_AB44];
-  level._id_AB44++;
+  var_4 = level.zmscorestreaks[level.zmscorestreakindex];
+  level.zmscorestreakindex++;
   return var_4;
 }
 
-_id_3493(var_0) {
-  var_1 = _id_45F6();
+dropcarepackage(var_0) {
+  var_1 = getowner();
 
   if(!isDefined(var_1)) {
     return;
   }
   if(!isDefined(var_0)) {
-    var_0 = _id_4478(var_1);
+    var_0 = getcratelandingspot(var_1);
   }
 
   if(!isDefined(var_0)) {
     return;
   }
-  if(!var_0._id_510A) {
+  if(!var_0.indoors) {
     var_2 = _id_0529::_id_4AAE(var_1, var_0, "zombies", []);
 
-    if(isDefined(var_2) && !level._id_AB34) {
-      var_1 = _id_4460(var_0.origin);
-      level._id_AB34 = 1;
+    if(isDefined(var_2) && !level.zmkillstreakcrateprevo) {
+      var_1 = getcloseplayertodroppoint(var_0.origin);
+      level.zmkillstreakcrateprevo = 1;
     }
 
     return var_2;
   } else
-    return _id_3495(var_1, var_0);
+    return dropcratephysics(var_1, var_0);
 }
 
-_id_3495(var_0, var_1) {
+dropcratephysics(var_0, var_1) {
   var_2 = "airdrop_assault";
-  var_3 = _id_4476(var_2);
-  var_4 = var_0 _id_0514::_id_27CB(var_0, var_2, var_3, var_1.origin, undefined, 0, 1);
+  var_3 = getcrate(var_2);
+  var_4 = var_0 _id_0514::createairdropcrate(var_0, var_2, var_3, var_1.origin, undefined, 0, 1);
   var_4 physicslaunchserver((0, 0, 0));
-  var_4 thread _id_0529::_id_2745();
-  var_4 _id_0514::_id_6FAD(var_2, var_3);
+  var_4 thread _id_0529::cratedetectstopphysics();
+  var_4 _id_0514::physicswaiter(var_2, var_3);
   return var_3;
 }
 
-_id_45F6() {
+getowner() {
   foreach(var_1 in level.players) {
     if(isDefined(var_1)) {
       return var_1;
@@ -258,13 +258,13 @@ _id_45F6() {
   }
 }
 
-_id_4478(var_0) {
+getcratelandingspot(var_0) {
   var_1 = 2;
-  var_2 = _id_470A();
+  var_2 = getvalidnodes();
 
   if(var_2.size == 0) {
-    level._id_AB47 = [];
-    var_2 = _id_470A();
+    level.zmusedcarepackagelandingspots = [];
+    var_2 = getvalidnodes();
   }
 
   var_2 = common_scripts\utility::array_randomize(var_2);
@@ -280,7 +280,7 @@ _id_4478(var_0) {
       var_4 = 0;
     }
 
-    var_7 = _id_1FFF(var_6._id_4882, var_0);
+    var_7 = carepackagetrace(var_6.groundorg, var_0);
     var_4++;
 
     if(var_7) {
@@ -290,19 +290,19 @@ _id_4478(var_0) {
   }
 
   if(isDefined(var_3)) {
-    level._id_AB47[level._id_AB47.size] = var_3;
+    level.zmusedcarepackagelandingspots[level.zmusedcarepackagelandingspots.size] = var_3;
     return var_3;
   }
 }
 
-_id_470A() {
+getvalidnodes() {
   var_0 = [];
 
-  foreach(var_2 in level._id_AB20) {
-    if(common_scripts\utility::_id_0F79(level._id_AB47, var_2)) {
+  foreach(var_2 in level.zmcarepackagelandingspots) {
+    if(common_scripts\utility::_id_0F79(level.zmusedcarepackagelandingspots, var_2)) {
       continue;
     }
-    if(isDefined(var_2._id_0165) && !common_scripts\utility::_id_3C77(var_2._id_0165)) {
+    if(isDefined(var_2._id_0165) && !common_scripts\utility::flag(var_2._id_0165)) {
       continue;
     }
     var_0[var_0.size] = var_2;
@@ -311,7 +311,7 @@ _id_470A() {
   return var_0;
 }
 
-_id_4689(var_0) {
+getslotnumber(var_0) {
   var_1 = undefined;
   var_2 = 2;
   var_3 = 5;
@@ -319,7 +319,7 @@ _id_4689(var_0) {
   for(var_4 = var_2; var_4 < var_3; var_4++) {
     var_5 = var_0.pers["killstreaks"][var_4];
 
-    if(!isDefined(var_5) || !isDefined(var_5._id_944C) || var_5._id_13AF == 0) {
+    if(!isDefined(var_5) || !isDefined(var_5.streakname) || var_5.available == 0) {
       var_1 = var_4;
       break;
     }
@@ -328,16 +328,16 @@ _id_4689(var_0) {
   return var_1;
 }
 
-_id_4AD0(var_0) {
-  if(!isDefined(_id_4689(var_0))) {
-    _id_8C1A(var_0);
+handlekillstreaklimit(var_0) {
+  if(!isDefined(getslotnumber(var_0))) {
+    showstreaklimitreached(var_0);
     return 1;
   }
 
   return 0;
 }
 
-_id_8C1A(var_0) {
+showstreaklimitreached(var_0) {
   var_0 iprintlnbold(&"ZOMBIES_STREAK_LIMIT");
 }
 
@@ -357,7 +357,7 @@ _id_2454(var_0) {
   return 0;
 }
 
-_id_1FFF(var_0, var_1) {
+carepackagetrace(var_0, var_1) {
   var_2 = 100;
   var_3 = 26;
   return _capsuletracepassed(var_0 + (0, 0, 6), var_3, var_2, var_1, 0);
@@ -366,9 +366,9 @@ _id_1FFF(var_0, var_1) {
 _id_5A5F(var_0) {
   self endon("death");
 
-  if(!level._id_AB35) {
-    var_1 = _id_4460(self.origin);
-    level._id_AB35 = 1;
+  if(!level.zmkillstreakcratereactvo) {
+    var_1 = getcloseplayertodroppoint(self.origin);
+    level.zmkillstreakcratereactvo = 1;
   }
 
   self._id_0117 = undefined;
@@ -382,38 +382,38 @@ _id_5A5F(var_0) {
 
   var_5 = undefined;
 
-  if(isDefined(game["strings"][var_0 + self._id_275E + "_hint"])) {
-    var_5 = game["strings"][var_0 + self._id_275E + "_hint"];
+  if(isDefined(game["strings"][var_0 + self.cratetype + "_hint"])) {
+    var_5 = game["strings"][var_0 + self.cratetype + "_hint"];
   } else {
     var_5 = &"PLATFORM_GET_KILLSTREAK";
   }
 
-  _id_0514::_id_275B(var_5, var_4);
-  _id_0514::_id_275A("all", _id_051E::_id_4533(var_2));
+  _id_0514::cratesetuphintstrings(var_5, var_4);
+  _id_0514::cratesetupforuse("all", _id_051E::getkillstreakcrateicon(var_2));
   thread _id_274F();
 
   for(;;) {
     self waittill("captured", var_1);
-    var_6 = _id_4689(var_1);
+    var_6 = getslotnumber(var_1);
     var_2 = self._id_944E;
 
     if(isDefined(self._id_0117) && var_1 != self._id_0117) {
       if(!level.teambased || var_1.team != self.team) {
-        var_1 thread _id_047A::_id_4D4F(self._id_0117);
+        var_1 thread _id_047A::hijackerevent(self._id_0117);
       } else {
-        self._id_0117 thread _id_047A::_id_8AD6();
+        self._id_0117 thread _id_047A::sharedevent();
       }
     }
 
     var_1 playlocalsound("orbital_pkg_use");
 
-    if(!level._id_AB33) {
-      level._id_AB33 = 1;
+    if(!level.zmkillstreakcratefirstvo) {
+      level.zmkillstreakcratefirstvo = 1;
     } else {}
 
     var_1 thread maps\mp\gametypes\_hud_message::killstreaksplashnotify(var_2, undefined, undefined, var_6);
-    var_1 thread _id_051E::_id_478D(var_2, 0, 0, var_1, var_6);
-    _id_0514::_id_2D30(1);
+    var_1 thread _id_051E::givekillstreak(var_2, 0, 0, var_1, var_6);
+    _id_0514::deletecrate(1);
   }
 }
 
@@ -435,26 +435,26 @@ _id_274F(var_0, var_1) {
     if(isDefined(self._id_0117) && var_3 == self._id_0117) {
       continue;
     }
-    if(!var_1 && _id_4AD0(var_3)) {
+    if(!var_1 && handlekillstreaklimit(var_3)) {
       continue;
     }
     if(var_3 isjumping() || isDefined(var_3._id_3900) && var_3._id_3900) {
       continue;
     }
-    if(!var_3 isonground() && !_id_0514::_id_A6F8(var_3)) {
+    if(!var_3 isonground() && !_id_0514::waitplayerstuckoncarepackagereturn(var_3)) {
       continue;
     }
-    if(!_id_0514::_id_A276(var_3)) {
+    if(!_id_0514::validateopenconditions(var_3)) {
       continue;
     }
-    var_3._id_56A1 = 1;
+    var_3.iscapturingcrate = 1;
     var_4 = _id_0514::_id_2836();
     var_5 = 0;
 
-    if(self._id_275E == "booby_trap") {
-      var_5 = var_4 _id_0514::_id_A213(var_3, 500, var_0);
+    if(self.cratetype == "booby_trap") {
+      var_5 = var_4 _id_0514::useholdthink(var_3, 500, var_0);
     } else {
-      var_5 = var_4 _id_0514::_id_A213(var_3, 2000, var_0);
+      var_5 = var_4 _id_0514::useholdthink(var_3, 2000, var_0);
     }
 
     if(isDefined(var_4)) {
@@ -463,43 +463,43 @@ _id_274F(var_0, var_1) {
 
     if(!var_5) {
       if(isDefined(var_3)) {
-        var_3._id_56A1 = 0;
+        var_3.iscapturingcrate = 0;
       }
 
       continue;
     }
 
-    var_3._id_56A1 = 0;
+    var_3.iscapturingcrate = 0;
 
-    if(isDefined(level._id_68A1)) {
-      level._id_68A1--;
+    if(isDefined(level.numzombierewarddrops)) {
+      level.numzombierewarddrops--;
     }
 
     self notify("captured", var_3);
   }
 }
 
-_id_62D5(var_0) {
+moneycratethink(var_0) {
   self endon("death");
   self._id_0117 = undefined;
   var_1 = undefined;
 
-  if(isDefined(game["strings"][var_0 + self._id_275E + "_hint"])) {
-    var_1 = game["strings"][var_0 + self._id_275E + "_hint"];
+  if(isDefined(game["strings"][var_0 + self.cratetype + "_hint"])) {
+    var_1 = game["strings"][var_0 + self.cratetype + "_hint"];
   } else {
     var_1 = &"PLATFORM_GET_KILLSTREAK";
   }
 
-  _id_0514::_id_275B(var_1);
-  _id_0514::_id_275A("all", "hud_carepkg_world_credits");
+  _id_0514::cratesetuphintstrings(var_1);
+  _id_0514::cratesetupforuse("all", "hud_carepkg_world_credits");
   thread _id_274F(undefined, 1);
 
   for(;;) {
     self waittill("captured", var_2);
     var_2 playlocalsound("zmb_ss_credits_acquire");
     var_3 = _id_45A8();
-    var_2 maps\mp\gametypes\zombies::_id_47AE("crate", var_3, 1);
-    _id_0514::_id_2D30(1);
+    var_2 maps\mp\gametypes\zombies::givepointsforevent("crate", var_3, 1);
+    _id_0514::deletecrate(1);
   }
 }
 
@@ -507,7 +507,7 @@ _id_62A8(var_0, var_1, var_2, var_3) {
   var_4 = var_2;
 
   if(isPlayer(var_1) && _isagent(var_0)) {
-    return var_4 * level._id_A980;
+    return var_4 * level.wavecounter;
   }
 
   switch (var_3) {
@@ -516,7 +516,7 @@ _id_62A8(var_0, var_1, var_2, var_3) {
     case "killstreakmahem_mp":
     case "remote_energy_turret_mp":
     case "sentry_minigun_mp":
-      if(_id_0547::_id_580A()) {
+      if(_id_0547::istrapresistant()) {
         var_4 = int(var_4 * 0.1);
       } else {
         var_4 = var_4 * 3;
@@ -524,13 +524,13 @@ _id_62A8(var_0, var_1, var_2, var_3) {
 
       break;
     case "turretheadmg_mp":
-      var_4 = 200 + level._id_A980 * 10;
+      var_4 = 200 + level.wavecounter * 10;
       break;
     case "turretheadrocket_mp":
-      var_4 = 800 + level._id_A980 * _randomintrange(50, 75);
+      var_4 = 800 + level.wavecounter * _randomintrange(50, 75);
       break;
     case "turretheadenergy_mp":
-      var_4 = var_4 * 3 + int(level._id_A980 / 2);
+      var_4 = var_4 * 3 + int(level.wavecounter / 2);
       break;
     default:
       break;

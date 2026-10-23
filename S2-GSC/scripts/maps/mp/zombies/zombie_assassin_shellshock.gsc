@@ -15,8 +15,8 @@ special_assassin_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
 
 spawn_an_aod() {
   var_0 = self.origin;
-  playFX(common_scripts\utility::_id_44F5("stunning_burst_aoe"), var_0);
-  _id_0378::_id_8D74("aud_assassin_use_shell_shock");
+  playFX(common_scripts\utility::getfx("stunning_burst_aoe"), var_0);
+  _id_0378::snd_message("aud_assassin_use_shell_shock");
 
   if(isDefined(self.custom_on_shellshock_func)) {
     self thread[[self.custom_on_shellshock_func]]();
@@ -146,7 +146,7 @@ do_shellshock_jack_buff(var_0) {
       if(_id_0547::_id_5565(var_3._id_0A4B, "zombie_assassin")) {
         continue;
       }
-      if(!var_3 _id_0547::_id_4B2C()) {
+      if(!var_3 _id_0547::has_entered_game()) {
         continue;
       }
       if(distance(self.origin, var_3.origin) > 112) {
@@ -166,12 +166,12 @@ do_jack_blood_beam(var_0) {
   var_1 = spawn("script_model", self.origin);
   var_1 setModel("tag_origin");
   waitframe();
-  playFX(common_scripts\utility::_id_44F5("stunning_burst"), self.origin);
-  var_2 = _func_382("zmb_geistkraft_reg_beam_med", var_1, "tag_origin", var_0, "j_neck");
-  var_0 thread _id_0378::_id_8D74("aud_wonder_weapon_electrocute_strt");
+  playFX(common_scripts\utility::getfx("stunning_burst"), self.origin);
+  var_2 = vehicle_scripts/_attack_heli("zmb_geistkraft_reg_beam_med", var_1, "tag_origin", var_0, "j_neck");
+  var_0 thread _id_0378::snd_message("aud_wonder_weapon_electrocute_strt");
   wait 0.75;
-  var_0 thread _id_0378::_id_8D74("aud_wonder_weapon_electrocute_end");
-  playFX(common_scripts\utility::_id_44F5("zmb_isl_med_trap_gib_rnr"), var_0.origin);
+  var_0 thread _id_0378::snd_message("aud_wonder_weapon_electrocute_end");
+  playFX(common_scripts\utility::getfx("zmb_isl_med_trap_gib_rnr"), var_0.origin);
   var_0 dodamage(var_0.health + 1, self.origin, undefined, undefined, "MOD_PROJECTILE", "fliegerfaust_zm");
   var_2 delete();
   var_1 delete();

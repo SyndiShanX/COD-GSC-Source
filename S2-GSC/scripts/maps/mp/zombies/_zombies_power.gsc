@@ -4,33 +4,33 @@
 ******************************************************/
 
 init() {
-  level._id_7606 = [];
-  level._id_7F21 = [];
-  var_0 = common_scripts\utility::_id_46B7("power_switch", "targetname");
-  common_scripts\utility::_id_0FB2(var_0, ::_id_7603);
+  level.power_switches = [];
+  level.roundpowerstations = [];
+  var_0 = common_scripts\utility::getstructarray("power_switch", "targetname");
+  common_scripts\utility::_id_0FB2(var_0, ::power_switch_init);
   var_1 = getEntArray("power_show", "targetname");
-  common_scripts\utility::_id_0FB2(var_1, ::_id_75FE);
+  common_scripts\utility::_id_0FB2(var_1, ::power_show_ent_run);
   var_2 = getEntArray("power_hide", "targetname");
-  common_scripts\utility::_id_0FB2(var_2, ::_id_75FA);
+  common_scripts\utility::_id_0FB2(var_2, ::power_hide_ent_run);
 }
 
-_id_7603() {
+power_switch_init() {
   if(!isDefined(self.getnegotiationnextnode)) {
-    _id_75F9("Power switch at " + self.origin + " missing use script_flag.");
+    power_error("Power switch at " + self.origin + " missing use script_flag.");
     return;
   }
 
   common_scripts\utility::flag_init(self.getnegotiationnextnode);
-  self._id_8BF7 = [];
-  self._id_4D07 = [];
+  self.showents = [];
+  self.hideents = [];
   var_0 = getEntArray(self.target, "targetname");
 
   foreach(var_2 in var_0) {
-    _id_7601(var_2);
+    power_switch_ent_init(var_2);
   }
 
-  self._id_9835 = var_0;
-  var_4 = common_scripts\utility::_id_46B7(self.target, "targetname");
+  self.targets = var_0;
+  var_4 = common_scripts\utility::getstructarray(self.target, "targetname");
 
   foreach(var_6 in var_4) {
     _id_7605(var_6);
@@ -38,18 +38,18 @@ _id_7603() {
 
   self.target_structs = var_4;
 
-  if(!isDefined(self._id_9D65)) {
-    _id_75F9("Power switch at " + self.origin + " missing use trigger.");
+  if(!isDefined(self.trigger)) {
+    power_error("Power switch at " + self.origin + " missing use trigger.");
     return;
   }
 
-  self._id_7602 = level._id_7606.size;
-  level._id_7606[level._id_7606.size] = self;
-  thread _id_7604();
-  thread _id_7600();
+  self.power_switch_index = level.power_switches.size;
+  level.power_switches[level.power_switches.size] = self;
+  thread power_switch_run();
+  thread power_switch_button_run();
 }
 
-_id_7601(var_0) {
+power_switch_ent_init(var_0) {
   var_1 = var_0._id_0165;
 
   if(!isDefined(var_1)) {
@@ -72,31 +72,31 @@ _id_7601(var_0) {
 
   switch (var_1) {
     case "trigger":
-      self._id_9D65 = var_0;
+      self.trigger = var_0;
       break;
     case "button":
-      self._id_1DC7 = var_0;
+      self.button = var_0;
       break;
     case "anim_model":
-      self._id_6298 = var_0;
+      self.modelent = var_0;
 
-      if(isDefined(self._id_6298.setflaggedanimknoball)) {
-        var_2 = strtok(self._id_6298.setflaggedanimknoball, ",");
-        self._id_6298._id_75FB = var_2[0];
-        self._id_6298._id_7608 = var_2[1];
-        self._id_6298._id_75FC = var_2[2];
-        self._id_6298._id_7607 = var_2[3];
+      if(isDefined(self.modelent.setflaggedanimknoball)) {
+        var_2 = strtok(self.modelent.setflaggedanimknoball, ",");
+        self.modelent._id_75FB = var_2[0];
+        self.modelent._id_7608 = var_2[1];
+        self.modelent._id_75FC = var_2[2];
+        self.modelent._id_7607 = var_2[3];
       }
 
       break;
     case "show":
-      self._id_8BF7[self._id_8BF7.size] = var_0;
+      self.showents[self.showents.size] = var_0;
       break;
     case "hide":
-      self._id_4D07[self._id_4D07.size] = var_0;
+      self.hideents[self.hideents.size] = var_0;
       break;
     default:
-      _id_75F9("Unknown ent type '" + var_1 + "' on entity at " + var_0.origin + ".");
+      power_error("Unknown ent type '" + var_1 + "' on entity at " + var_0.origin + ".");
   }
 }
 
@@ -113,24 +113,24 @@ _id_7605(var_0) {
   }
 }
 
-_id_7604() {
+power_switch_run() {
   var_0 = undefined;
   var_1 = undefined;
   var_2 = undefined;
 
   for(;;) {
-    _id_0378::_id_8D74("generator_power_switch_state", "stopped");
+    _id_0378::snd_message("generator_power_switch_state", "stopped");
 
-    foreach(var_4 in self._id_8BF7) {
+    foreach(var_4 in self.showents) {
       var_4 hide();
     }
 
-    foreach(var_4 in self._id_4D07) {
+    foreach(var_4 in self.hideents) {
       var_4 show();
     }
 
-    self._id_9D65 setCursorHint("HINT_NOICON");
-    self._id_9D65 setHintString(&"ZOMBIES_POWER_ON");
+    self.trigger setCursorHint("HINT_NOICON");
+    self.trigger setHintString(&"ZOMBIES_POWER_ON");
 
     if(isDefined(var_0)) {
       var_0 delete();
@@ -141,16 +141,16 @@ _id_7604() {
     }
 
     if(isDefined(self._id_5104)) {
-      var_1 = _id_0547::_id_8FBA(self._id_5104, self._id_5104._id_81BB);
+      var_1 = _id_0547::_id_8FBA(self._id_5104, self._id_5104.script_fxid);
       _triggerfx(var_1, 0.5);
     }
 
-    if(isDefined(self._id_6298._id_75FB)) {
-      self._id_6298 scriptmodelplayanim(self._id_6298._id_75FB);
+    if(isDefined(self.modelent._id_75FB)) {
+      self.modelent scriptmodelplayanim(self.modelent._id_75FB);
     }
 
     for(;;) {
-      self._id_9D65 waittill("trigger", var_8);
+      self.trigger waittill("trigger", var_8);
 
       if(!isDefined(level._id_7609)) {
         break;
@@ -158,15 +158,15 @@ _id_7604() {
     }
 
     level._id_400E[level._id_400E.size] = ["survivalist_set 2 -1", "all"];
-    var_8 maps\mp\gametypes\zombies::_id_47AE("power_on");
+    var_8 maps\mp\gametypes\zombies::givepointsforevent("power_on");
     var_8 _id_054E::_id_743B();
-    level._id_7F21[level._id_7F21.size] = self._id_7602;
+    level.roundpowerstations[level.roundpowerstations.size] = self.power_switch_index;
     level notify("power_on");
     level._id_75FD = 1;
-    self._id_9D65 setHintString("");
+    self.trigger setHintString("");
     self notify("on");
     common_scripts\utility::flag_set(self.getnegotiationnextnode);
-    _id_0378::_id_8D74("generator_power_switch_state", "starting");
+    _id_0378::snd_message("generator_power_switch_state", "starting");
 
     if(isDefined(var_1)) {
       var_1 delete();
@@ -177,48 +177,48 @@ _id_7604() {
       var_2.angles = self._id_5105.angles;
       var_2 setModel("tag_origin");
 
-      if(isDefined(self._id_5105._id_81C7)) {
-        var_2 linkTo(self._id_6298, self._id_5105._id_81C7);
+      if(isDefined(self._id_5105.script_ghettotag)) {
+        var_2 linkTo(self.modelent, self._id_5105.script_ghettotag);
       }
 
-      var_0 = _spawnlinkedfx(common_scripts\utility::_id_44F5(self._id_5105._id_81BB), var_2, "tag_origin");
+      var_0 = _spawnlinkedfx(common_scripts\utility::getfx(self._id_5105.script_fxid), var_2, "tag_origin");
       _triggerfx(var_0);
     }
 
-    if(isDefined(self._id_6298._id_7608)) {
-      self._id_6298 scriptmodelplayanim(self._id_6298._id_7608, "power_on");
-      self._id_6298 waittillmatch("power_on", "end");
+    if(isDefined(self.modelent._id_7608)) {
+      self.modelent scriptmodelplayanim(self.modelent._id_7608, "power_on");
+      self.modelent waittillmatch("power_on", "end");
     }
 
-    if(isDefined(self._id_6298._id_75FC)) {
-      self._id_6298 scriptmodelplayanim(self._id_6298._id_75FC);
+    if(isDefined(self.modelent._id_75FC)) {
+      self.modelent scriptmodelplayanim(self.modelent._id_75FC);
     }
 
-    _id_0378::_id_8D74("generator_power_switch_state", "running");
+    _id_0378::snd_message("generator_power_switch_state", "running");
 
-    foreach(var_4 in self._id_8BF7) {
+    foreach(var_4 in self.showents) {
       var_4 show();
     }
 
-    foreach(var_4 in self._id_4D07) {
+    foreach(var_4 in self.hideents) {
       var_4 hide();
     }
 
     level waittill("zombie_power_penalty_start");
     self notify("off");
-    common_scripts\utility::_id_3C7B(self.getnegotiationnextnode);
-    _id_0378::_id_8D74("generator_power_switch_state", "stopping");
+    common_scripts\utility::flag_clear(self.getnegotiationnextnode);
+    _id_0378::snd_message("generator_power_switch_state", "stopping");
 
-    if(isDefined(self._id_6298._id_7607)) {
-      self._id_6298 scriptmodelplayanim(self._id_6298._id_7607, "power_on");
-      self._id_6298 waittillmatch("power_on", "end");
+    if(isDefined(self.modelent._id_7607)) {
+      self.modelent scriptmodelplayanim(self.modelent._id_7607, "power_on");
+      self.modelent waittillmatch("power_on", "end");
     }
 
-    foreach(var_4 in self._id_8BF7) {
+    foreach(var_4 in self.showents) {
       var_4 hide();
     }
 
-    foreach(var_4 in self._id_4D07) {
+    foreach(var_4 in self.hideents) {
       var_4 show();
     }
 
@@ -226,58 +226,58 @@ _id_7604() {
   }
 }
 
-_id_7600() {
-  if(!isDefined(self._id_1DC7)) {
+power_switch_button_run() {
+  if(!isDefined(self.button)) {
     return;
   }
   var_0 = 0.4;
-  var_1 = self._id_1DC7.origin;
+  var_1 = self.button.origin;
   var_2 = var_1 + (0, 0, 16);
 
   for(;;) {
     self waittill("on");
-    self._id_1DC7 moveTo(var_2, var_0);
+    self.button moveTo(var_2, var_0);
     self waittill("off");
-    self._id_1DC7 moveTo(var_1, var_0);
+    self.button moveTo(var_1, var_0);
   }
 }
 
-_id_75FE() {
+power_show_ent_run() {
   self endon("death");
 
   if(!isDefined(self.getnegotiationnextnode)) {
-    _id_75F9("Power show entity at " + self.origin + " missing script_flag.");
+    power_error("Power show entity at " + self.origin + " missing script_flag.");
     return;
   }
 
   for(;;) {
     self hide();
-    common_scripts\utility::_id_3C9F(self.getnegotiationnextnode);
+    common_scripts\utility::flag_wait(self.getnegotiationnextnode);
     self show();
     common_scripts\utility::flag_waitopen(self.getnegotiationnextnode);
   }
 }
 
-_id_75FA() {
+power_hide_ent_run() {
   self endon("death");
 
   if(!isDefined(self.getnegotiationnextnode)) {
-    _id_75F9("Power hide entity at " + self.origin + " missing script_flag.");
+    power_error("Power hide entity at " + self.origin + " missing script_flag.");
     return;
   }
 
   for(;;) {
     self show();
-    common_scripts\utility::_id_3C9F(self.getnegotiationnextnode);
+    common_scripts\utility::flag_wait(self.getnegotiationnextnode);
     self hide();
     common_scripts\utility::flag_waitopen(self.getnegotiationnextnode);
   }
 }
 
-_id_75F9(var_0) {}
+power_error(var_0) {}
 
 power_switch_find(var_0) {
-  foreach(var_2 in level._id_7606) {
+  foreach(var_2 in level.power_switches) {
     if(_id_0547::_id_5565(var_0, var_2.getnegotiationnextnode)) {
       return var_2;
     }

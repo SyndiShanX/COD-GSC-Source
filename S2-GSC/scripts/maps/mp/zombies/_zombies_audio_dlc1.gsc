@@ -8,118 +8,118 @@ initdlc1audio() {
 }
 
 initleveldialog() {
-  level._id_A62B _id_054E::_id_AB1A("player", "ability", "special_camo1", "camouflage", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "ability", "special_camo2", "camouflage2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "ability", "special_mad1", "freefire", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "ability", "special_mad2", "freefire2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "ability", "special_taunt1", "frontline", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "ability", "special_taunt2", "frontline2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "ability", "special_burst1", "shellshock", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "ability", "special_burst2", "shellshock2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "ability", "special_burst3", "shellshock3", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "mod_use", "mod_supplyammo1", "supplyammomod", "thanks");
-  level._id_A62B _id_054E::_id_AB1A("player", "mod_use", "mod_supplyammo2", "supplyammomod2", "thanks");
-  level._id_A62B _id_054E::_id_AB1A("player", "mod_use", "mod_headshot1", "headshotmod", "mod_headshot_reply");
-  level._id_A62B _id_054E::_id_AB1A("player", "mod_use", "mod_headshot2", "headshotmod2", "mod_headshot_reply");
-  level._id_A62B _id_054E::_id_AB1A("player", "mod_use", "mod_serratededge1", "serreatededgemod", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "mod_use", "mod_serratededge2", "serreatededgemod2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "mod_use", "mod_covertexfiltration1", "covertexfilration", "revived");
-  level._id_A62B _id_054E::_id_AB1A("player", "mod_use", "mod_covertexfiltration2", "covertexfilration2", "revived");
-  level._id_A62B _id_054E::_id_AB1A("player", "mod_use", "mod_fieryburst1", "fieryburstmod", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "mod_use", "mod_fieryburst2", "fieryburstmod2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "mod_use", "mod_comeandgetit1", "comeandgetitmod", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "mod_use", "mod_comeandgetit2", "comeandgetitmod2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "mod_use", "mod_teameffort1", "teameffort", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "mod_use", "mod_teameffort2", "teameffort2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "revive_ally1", "modrevived", "revived");
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "revive_ally2", "modrevived2", "revived");
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "revived1", "modrevived_reply", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "revived2", "modrevived_reply2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "give_money1", "givemoney", undefined, 25);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "give_money2", "givemoney2", undefined, 25);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "weaponreminder", "weaponreminder", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "weaponreminder2", "weaponreminder2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "got_item3", "givemoney_reply", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "got_item4", "givemoney_reply2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "lost_and_found", "lostandfound", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "lost_and_found1", "lostandfound2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "needmoney1", "not_enough_jolt", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "needmoney2", "not_enough_jolt2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "newweapon", "newweapon", undefined, 40);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "newweapon1", "newweapon2", undefined, 40);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "newweapon2", "newweapon3", undefined, 40);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "newpackweapon", "newpackweapon", undefined, 50);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "newpackweapon2", "newpackweapon2", undefined, 50);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "newpackweapon3", "newpackweapon3", undefined, 50);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "newpackweapon4", "teslafired", undefined, 50);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "reloading", "reloading", undefined, 5);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "consumableweapon", "consumableweapon", undefined, 75);
-  level._id_A62B _id_054E::_id_AB1A("player", "general", "consumableweapon2", "consumableweapon2", undefined, 75);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "treasurezombieseen1", "treasurezombieseen", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "treasurezombieseen2", "treasurezombieseen2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "treasurezombiemove1", "treasurezombiemove", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "treasurezombiemove2", "treasurezombiemove2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "treasurezombiefail1", "treasurezombiefail", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "treasurezombiefail2", "treasurezombiefail2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "treasurezombiewarn1", "treasurezombiewarn", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "treasurezombiewarn2", "treasurezombiewarn2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "treasurezombiewin1", "treasurezombiewin", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "treasurezombiewin2", "treasurezombiewin2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "bombersee1", "bombersee", undefined, 5);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "bombersee2", "bombersee2", undefined, 5);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "bomberkillshot1", "bomberskillshot", undefined, 25);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "sprintersee1", "sprintersee", undefined, 1);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "followersurpise1", "followersurpise", undefined, 25);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "followeranger1", "lookout", undefined, 25);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "assassinnearby", "assassinnearby", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "assassinnearby2", "assassinnearby2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "assassinnearby3", "assassinnearby3", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "assassinsee", "assassinsee", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "assassinsee2", "assassinsee2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "assassinsee3", "assassinsee3", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "assassinhides", "assassinhides", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "assassinhides2", "assassinhides2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "assassinhides3", "assassinhides3", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "eliteassassinsee", "eliteassassinsee", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "eliteassassinhides", "eliteassassinhides", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "eliteassassinhides2", "eliteassassinhides2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "eliteassassinhides3", "eliteassassinhides3", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "enemyfrontline", "enemyfrontline_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "enemyfrontlineshielded", "enemyfrontlineshielded_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "enemyfrontlineshielded2", "enemyfrontlineshielded2_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "enemyfrontlineshielded3", "enemyfrontlineshielded3_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "enemyfrontlineattacked", "enemyfrontlineattacked_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "enemyfrontlineattacked2", "enemyfrontlineattacked2_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "enemyfrontlineattacked3", "enemyfrontlineattacked3_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "eliteassassinappear", "eliteassassinappear_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "eliteassassinappear2", "eliteassassinappear2_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "eliteassassinappear3", "eliteassassinappear3_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "enemyshellshock", "enemyshellshock_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "enemyshellshock2", "enemyshellshock2_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "enemyshellshockfire", "enemyshellshockfire_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "enemyshellshockfire2", "enemyshellshockfire2_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "anothereliteassassin", "anothereliteassassin_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "anothereliteassassin2", "anothereliteassassin2_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "enemyfreefire", "enemyfreefire_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "enemyfreefire2", "enemyfreefire2_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "enemyfreefire3", "enemyfreefire3_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "eliteassassinfoglifts", "eliteassassinfoglifts", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "eliteassassindie", "eliteassassindie_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "eliteassassindieoneleft", "eliteassassindieoneleft_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "eliteassassindieoneleft3", "eliteassassindieoneleft2_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "enemy", "eliteassassindieoneleft3", "eliteassassindieoneleft3_hi", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "perk", "perk_first1", "vendingfirsttime", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "perk", "perk_first2", "vendingfirsttime2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "perk", "perk_shock1", "blitzshock", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "perk", "perk_shock2", "blitzshock2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "perk", "perk_punch1", "blitzpunch", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "perk", "perk_punch2", "blitzpunch2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "perk", "perk_revive", "blitzrevive", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "perk", "perk_revive1", "blitzrevive2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "perk", "perk_reload", "blitzreload", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "perk", "perk_reload1", "blitzreload2", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "perk", "perk_run", "blitzrun", undefined);
-  level._id_A62B _id_054E::_id_AB1A("player", "perk", "perk_damage", "blitzdamage", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "ability", "special_camo1", "camouflage", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "ability", "special_camo2", "camouflage2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "ability", "special_mad1", "freefire", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "ability", "special_mad2", "freefire2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "ability", "special_taunt1", "frontline", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "ability", "special_taunt2", "frontline2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "ability", "special_burst1", "shellshock", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "ability", "special_burst2", "shellshock2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "ability", "special_burst3", "shellshock3", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "mod_use", "mod_supplyammo1", "supplyammomod", "thanks");
+  level.vox _id_054E::zmbvoxadd("player", "mod_use", "mod_supplyammo2", "supplyammomod2", "thanks");
+  level.vox _id_054E::zmbvoxadd("player", "mod_use", "mod_headshot1", "headshotmod", "mod_headshot_reply");
+  level.vox _id_054E::zmbvoxadd("player", "mod_use", "mod_headshot2", "headshotmod2", "mod_headshot_reply");
+  level.vox _id_054E::zmbvoxadd("player", "mod_use", "mod_serratededge1", "serreatededgemod", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "mod_use", "mod_serratededge2", "serreatededgemod2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "mod_use", "mod_covertexfiltration1", "covertexfilration", "revived");
+  level.vox _id_054E::zmbvoxadd("player", "mod_use", "mod_covertexfiltration2", "covertexfilration2", "revived");
+  level.vox _id_054E::zmbvoxadd("player", "mod_use", "mod_fieryburst1", "fieryburstmod", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "mod_use", "mod_fieryburst2", "fieryburstmod2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "mod_use", "mod_comeandgetit1", "comeandgetitmod", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "mod_use", "mod_comeandgetit2", "comeandgetitmod2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "mod_use", "mod_teameffort1", "teameffort", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "mod_use", "mod_teameffort2", "teameffort2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "general", "revive_ally1", "modrevived", "revived");
+  level.vox _id_054E::zmbvoxadd("player", "general", "revive_ally2", "modrevived2", "revived");
+  level.vox _id_054E::zmbvoxadd("player", "general", "revived1", "modrevived_reply", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "general", "revived2", "modrevived_reply2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "general", "give_money1", "givemoney", undefined, 25);
+  level.vox _id_054E::zmbvoxadd("player", "general", "give_money2", "givemoney2", undefined, 25);
+  level.vox _id_054E::zmbvoxadd("player", "general", "weaponreminder", "weaponreminder", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "general", "weaponreminder2", "weaponreminder2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "general", "got_item3", "givemoney_reply", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "general", "got_item4", "givemoney_reply2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "general", "lost_and_found", "lostandfound", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "general", "lost_and_found1", "lostandfound2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "general", "needmoney1", "not_enough_jolt", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "general", "needmoney2", "not_enough_jolt2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "general", "newweapon", "newweapon", undefined, 40);
+  level.vox _id_054E::zmbvoxadd("player", "general", "newweapon1", "newweapon2", undefined, 40);
+  level.vox _id_054E::zmbvoxadd("player", "general", "newweapon2", "newweapon3", undefined, 40);
+  level.vox _id_054E::zmbvoxadd("player", "general", "newpackweapon", "newpackweapon", undefined, 50);
+  level.vox _id_054E::zmbvoxadd("player", "general", "newpackweapon2", "newpackweapon2", undefined, 50);
+  level.vox _id_054E::zmbvoxadd("player", "general", "newpackweapon3", "newpackweapon3", undefined, 50);
+  level.vox _id_054E::zmbvoxadd("player", "general", "newpackweapon4", "teslafired", undefined, 50);
+  level.vox _id_054E::zmbvoxadd("player", "general", "reloading", "reloading", undefined, 5);
+  level.vox _id_054E::zmbvoxadd("player", "general", "consumableweapon", "consumableweapon", undefined, 75);
+  level.vox _id_054E::zmbvoxadd("player", "general", "consumableweapon2", "consumableweapon2", undefined, 75);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "treasurezombieseen1", "treasurezombieseen", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "treasurezombieseen2", "treasurezombieseen2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "treasurezombiemove1", "treasurezombiemove", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "treasurezombiemove2", "treasurezombiemove2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "treasurezombiefail1", "treasurezombiefail", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "treasurezombiefail2", "treasurezombiefail2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "treasurezombiewarn1", "treasurezombiewarn", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "treasurezombiewarn2", "treasurezombiewarn2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "treasurezombiewin1", "treasurezombiewin", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "treasurezombiewin2", "treasurezombiewin2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "bombersee1", "bombersee", undefined, 5);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "bombersee2", "bombersee2", undefined, 5);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "bomberkillshot1", "bomberskillshot", undefined, 25);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "sprintersee1", "sprintersee", undefined, 1);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "followersurpise1", "followersurpise", undefined, 25);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "followeranger1", "lookout", undefined, 25);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "assassinnearby", "assassinnearby", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "assassinnearby2", "assassinnearby2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "assassinnearby3", "assassinnearby3", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "assassinsee", "assassinsee", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "assassinsee2", "assassinsee2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "assassinsee3", "assassinsee3", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "assassinhides", "assassinhides", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "assassinhides2", "assassinhides2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "assassinhides3", "assassinhides3", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "eliteassassinsee", "eliteassassinsee", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "eliteassassinhides", "eliteassassinhides", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "eliteassassinhides2", "eliteassassinhides2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "eliteassassinhides3", "eliteassassinhides3", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "enemyfrontline", "enemyfrontline_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "enemyfrontlineshielded", "enemyfrontlineshielded_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "enemyfrontlineshielded2", "enemyfrontlineshielded2_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "enemyfrontlineshielded3", "enemyfrontlineshielded3_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "enemyfrontlineattacked", "enemyfrontlineattacked_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "enemyfrontlineattacked2", "enemyfrontlineattacked2_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "enemyfrontlineattacked3", "enemyfrontlineattacked3_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "eliteassassinappear", "eliteassassinappear_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "eliteassassinappear2", "eliteassassinappear2_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "eliteassassinappear3", "eliteassassinappear3_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "enemyshellshock", "enemyshellshock_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "enemyshellshock2", "enemyshellshock2_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "enemyshellshockfire", "enemyshellshockfire_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "enemyshellshockfire2", "enemyshellshockfire2_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "anothereliteassassin", "anothereliteassassin_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "anothereliteassassin2", "anothereliteassassin2_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "enemyfreefire", "enemyfreefire_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "enemyfreefire2", "enemyfreefire2_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "enemyfreefire3", "enemyfreefire3_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "eliteassassinfoglifts", "eliteassassinfoglifts", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "eliteassassindie", "eliteassassindie_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "eliteassassindieoneleft", "eliteassassindieoneleft_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "eliteassassindieoneleft3", "eliteassassindieoneleft2_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "enemy", "eliteassassindieoneleft3", "eliteassassindieoneleft3_hi", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "perk", "perk_first1", "vendingfirsttime", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "perk", "perk_first2", "vendingfirsttime2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "perk", "perk_shock1", "blitzshock", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "perk", "perk_shock2", "blitzshock2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "perk", "perk_punch1", "blitzpunch", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "perk", "perk_punch2", "blitzpunch2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "perk", "perk_revive", "blitzrevive", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "perk", "perk_revive1", "blitzrevive2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "perk", "perk_reload", "blitzreload", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "perk", "perk_reload1", "blitzreload2", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "perk", "perk_run", "blitzrun", undefined);
+  level.vox _id_054E::zmbvoxadd("player", "perk", "perk_damage", "blitzdamage", undefined);
 }
 
 initwavestories() {
@@ -154,22 +154,22 @@ addwavestory(var_0, var_1, var_2) {
   var_4.stories[var_3] = spawnStruct();
   var_4.stories[var_3]._id_7215 = 0;
   var_4.stories[var_3].require_all_present = var_1;
-  var_4.stories[var_3]._id_5D99 = [];
+  var_4.stories[var_3].lines = [];
 
   foreach(var_6 in var_0) {
-    var_7 = var_4.stories[var_3]._id_5D99.size;
-    var_4.stories[var_3]._id_5D99[var_7] = spawnStruct();
+    var_7 = var_4.stories[var_3].lines.size;
+    var_4.stories[var_3].lines[var_7] = spawnStruct();
     var_8 = _func_36D(var_6[0], level._id_071D._id_7501);
     var_9 = strtok(var_8, "_");
-    var_4.stories[var_3]._id_5D99[var_7]._id_90BE = var_9[0];
-    var_4.stories[var_3]._id_5D99[var_7]._id_0BB4 = var_6[0];
+    var_4.stories[var_3].lines[var_7].speaker = var_9[0];
+    var_4.stories[var_3].lines[var_7]._id_0BB4 = var_6[0];
 
     if(isDefined(var_6[1])) {
-      var_4.stories[var_3]._id_5D99[var_7].post_delay = var_6[1];
+      var_4.stories[var_3].lines[var_7].post_delay = var_6[1];
       continue;
     }
 
-    var_4.stories[var_3]._id_5D99[var_7].post_delay = 1;
+    var_4.stories[var_3].lines[var_7].post_delay = 1;
   }
 
   return var_4.stories[var_3];
@@ -261,7 +261,7 @@ zombie_wave_maxed() {
 
 players_already_talking() {
   foreach(var_1 in level.players) {
-    if(common_scripts\utility::_id_562E(var_1._id_57DE)) {
+    if(common_scripts\utility::_id_562E(var_1.isspeaking)) {
       return 1;
     }
   }
@@ -312,15 +312,15 @@ try_run_conversation(var_0, var_1, var_2, var_3) {
     level thread timeout_conversation(var_2);
   }
 
-  foreach(var_6 in var_0._id_5D99) {
-    var_7 = var_6._id_90BE;
+  foreach(var_6 in var_0.lines) {
+    var_7 = var_6.speaker;
     var_8 = undefined;
     var_9 = 0;
     var_10 = 0;
 
     foreach(var_12 in level.players) {
-      if(isDefined(var_12._id_20D8)) {
-        var_13 = _id_0378::_id_307B(var_12._id_20D8);
+      if(isDefined(var_12.characterindex)) {
+        var_13 = _id_0378::_id_307B(var_12.characterindex);
 
         if(var_13 == var_7) {
           var_8 = var_12;
@@ -402,7 +402,7 @@ get_all_alive_player_character_names() {
   foreach(var_2 in level.players) {
     var_3 = "";
 
-    switch (var_2._id_20D8) {
+    switch (var_2.characterindex) {
       case 0:
         var_3 = "jeff";
         break;
@@ -430,8 +430,8 @@ get_all_alive_player_character_names() {
 get_expected_characters() {
   var_0 = [];
 
-  foreach(var_2 in self._id_5D99) {
-    var_0 = common_scripts\utility::_id_0F6F(var_0, var_2._id_90BE);
+  foreach(var_2 in self.lines) {
+    var_0 = common_scripts\utility::_id_0F6F(var_0, var_2.speaker);
   }
 
   return var_0;

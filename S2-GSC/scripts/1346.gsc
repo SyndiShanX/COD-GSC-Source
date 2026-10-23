@@ -53,7 +53,7 @@ _id_5329() {
 
 initpairedmeleealignmenthelper() {
   level.paired_melee_model = spawn("script_model", (0, 0, 0));
-  level.paired_melee_model common_scripts\utility::_id_4CEB();
+  level.paired_melee_model common_scripts\utility::hide_notsolid();
   level.paired_melee_model setModel("tag_sync");
 }
 
@@ -118,7 +118,7 @@ _id_457F(var_0, var_1) {
 }
 
 attemptheavymeleekill(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(!var_0 _meth_864D(var_2) || !var_2 _meth_8661() || !var_2 _id_0547::_id_1F54(var_0, var_5)) {
+  if(!var_0 _meth_864D(var_2) || !var_2 setdefaultdof() || !var_2 _id_0547::_id_1F54(var_0, var_5)) {
     return 0;
   }
 
@@ -185,7 +185,7 @@ _id_4ADD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     var_30 = 0.2;
     var_31 = "fatal_zombie_snd";
 
-    if(var_5 _meth_8661() && !common_scripts\utility::_id_562E(self._id_0103)) {
+    if(var_5 setdefaultdof() && !common_scripts\utility::_id_562E(self._id_0103)) {
       var_31 = "hit_zombie_snd";
     }
 
@@ -202,7 +202,7 @@ _id_4ADD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
         var_32.delaysec = var_32.delaysec + var_1["fatal_zombie_snd_delay"];
       }
 
-      var_0 _id_0378::_id_8D74(var_1[var_31], var_32);
+      var_0 _id_0378::snd_message(var_1[var_31], var_32);
     }
 
     thread _id_4AB1(var_0, var_5, var_14, var_28);
@@ -225,20 +225,20 @@ _id_2678(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_11 = var_8;
 
   if(getdvarint("paired_death_debug", 0)) {
-    thread maps\mp\_utility::_id_33C0(var_11, var_4, (1, 0, 0), "paired_death_lerp_start");
+    thread maps\mp\_utility::draw_line_until_notify(var_11, var_4, (1, 0, 0), "paired_death_lerp_start");
   }
 
   var_12 = var_10;
 
   for(var_13 = 0; var_13 <= 1.0; var_12 = gettime()) {
     if(getdvarint("paired_death_debug", 0)) {
-      thread maps\mp\_utility::_id_33C0(var_11, self.origin, (0, 1, 0), "paired_death_lerp_start");
+      thread maps\mp\_utility::draw_line_until_notify(var_11, self.origin, (0, 1, 0), "paired_death_lerp_start");
     }
 
     var_14 = var_12 * 0.001 - var_3 * var_2;
 
     if(common_scripts\utility::_id_562E(var_1)) {
-      var_15 = common_scripts\utility::_id_627D(var_14, var_7) / var_7;
+      var_15 = common_scripts\utility::mod(var_14, var_7) / var_7;
     } else {
       var_15 = clamp(var_14 / var_7, 0, 1);
     }
@@ -257,7 +257,7 @@ _id_2678(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     self.angles = _func_10B(var_9, var_18["angles"], var_19);
 
     if(getdvarint("paired_death_debug", 0)) {
-      thread maps\mp\_utility::_id_33C0(var_11, self.origin, (0, 0, 1), "paired_death_lerp_start");
+      thread maps\mp\_utility::draw_line_until_notify(var_11, self.origin, (0, 0, 1), "paired_death_lerp_start");
     }
 
     var_11 = self.origin;
@@ -296,7 +296,7 @@ _id_4AB1(var_0, var_1, var_2, var_3) {
 
     if(getdvarint("paired_death_obstacle_ent", 0)) {
       waitframe();
-      var_12 = _func_2E3(var_10._id_4033);
+      var_12 = maps/_player_death(var_10._id_4033);
     } else {
       var_13 = var_3 + vectorNormalize(var_8) * var_5;
       var_12 = _func_2E2(var_13, (var_6, var_7, 100), var_9);
@@ -306,7 +306,7 @@ _id_4AB1(var_0, var_1, var_2, var_3) {
   }
 
   if(getdvarint("paired_death_debug", 0)) {
-    maps\mp\_utility::_id_33C0(var_3, var_3 + (0, 0, 100), (1, 0, 0), var_4);
+    maps\mp\_utility::draw_line_until_notify(var_3, var_3 + (0, 0, 100), (1, 0, 0), var_4);
   }
 
   wait(var_2);
@@ -371,7 +371,7 @@ _id_4AB2(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_16 = max(0, var_13 * var_10 / var_3 - var_4);
   wait(var_16);
   var_17 = 16;
-  var_0 _id_0541::_id_65D0(var_17, 1, 1, anglesToForward(var_0.angles) * -1, 1);
+  var_0 _id_0541::mutilate(var_17, 1, 1, anglesToForward(var_0.angles) * -1, 1);
   _id_054D::_id_90B0(var_0, var_17);
 }
 
@@ -385,7 +385,7 @@ handlethirdpersonalignment() {
   self endon("disconnect");
   self _meth_85C9(1);
 
-  while(self _meth_8661()) {
+  while(self setdefaultdof()) {
     waitframe();
   }
 

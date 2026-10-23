@@ -4,41 +4,41 @@
 ***************************************************/
 
 setparent(var_0) {
-  if(isDefined(self._id_6E74) && self._id_6E74 == var_0) {
+  if(isDefined(self.parent) && self.parent == var_0) {
     return;
   }
-  if(isDefined(self._id_6E74)) {
-    self._id_6E74 _id_7CD5(self);
+  if(isDefined(self.parent)) {
+    self.parent removechild(self);
   }
 
-  self._id_6E74 = var_0;
-  self._id_6E74 _id_09A6(self);
+  self.parent = var_0;
+  self.parent _id_09A6(self);
 
-  if(isDefined(self._id_7538)) {
-    setpoint(self._id_7538, self._id_7C16, self._id_AACD, self._id_AAEB);
+  if(isDefined(self.point)) {
+    setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
   } else {
     setpoint("TOPLEFT");
   }
 }
 
-_id_45FC() {
-  return self._id_6E74;
+getparent() {
+  return self.parent;
 }
 
 _id_09A6(var_0) {
-  var_0._id_00D4 = self._id_21F6.size;
-  self._id_21F6[self._id_21F6.size] = var_0;
+  var_0._id_00D4 = self.children.size;
+  self.children[self.children.size] = var_0;
 }
 
-_id_7CD5(var_0) {
-  var_0._id_6E74 = undefined;
+removechild(var_0) {
+  var_0.parent = undefined;
 
-  if(self._id_21F6[self._id_21F6.size - 1] != var_0) {
-    self._id_21F6[var_0._id_00D4] = self._id_21F6[self._id_21F6.size - 1];
-    self._id_21F6[var_0._id_00D4]._id_00D4 = var_0._id_00D4;
+  if(self.children[self.children.size - 1] != var_0) {
+    self.children[var_0._id_00D4] = self.children[self.children.size - 1];
+    self.children[var_0._id_00D4]._id_00D4 = var_0._id_00D4;
   }
 
-  self._id_21F6[self._id_21F6.size - 1] = undefined;
+  self.children[self.children.size - 1] = undefined;
   var_0._id_00D4 = undefined;
 }
 
@@ -47,7 +47,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
     var_4 = 0;
   }
 
-  var_5 = _id_45FC();
+  var_5 = getparent();
 
   if(var_4) {
     self moveovertime(var_4);
@@ -57,14 +57,14 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
     var_2 = 0;
   }
 
-  self._id_AACD = var_2;
+  self.xoffset = var_2;
 
   if(!isDefined(var_3)) {
     var_3 = 0;
   }
 
-  self._id_AAEB = var_3;
-  self._id_7538 = var_0;
+  self.yoffset = var_3;
+  self.point = var_0;
   self.alignx = "center";
   self.aligny = "middle";
 
@@ -88,7 +88,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
     var_1 = var_0;
   }
 
-  self._id_7C16 = var_1;
+  self.relativepoint = var_1;
   var_6 = "center_adjustable";
   var_7 = "middle";
 
@@ -108,7 +108,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
     var_6 = "right_adjustable";
   }
 
-  if(var_5 == level._id_A012) {
+  if(var_5 == level.uiparent) {
     self._id_00C6 = var_6;
     self._id_01CA = var_7;
   } else {
@@ -161,208 +161,208 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   }
 
   self.y = var_5.y + var_10 * var_11;
-  self.x = self.x + self._id_AACD;
-  self.y = self.y + self._id_AAEB;
+  self.x = self.x + self.xoffset;
+  self.y = self.y + self.yoffset;
 
-  switch (self._id_35B2) {
+  switch (self.elemtype) {
     case "bar":
-      _id_8708(var_0, var_1, var_2, var_3);
+      setpointbar(var_0, var_1, var_2, var_3);
       break;
   }
 
-  _id_A0F5();
+  updatechildren();
 }
 
-_id_8708(var_0, var_1, var_2, var_3) {
-  self._id_1586._id_00C6 = self._id_00C6;
-  self._id_1586._id_01CA = self._id_01CA;
-  self._id_1586.alignx = "left";
-  self._id_1586.aligny = self.aligny;
-  self._id_1586.y = self.y;
+setpointbar(var_0, var_1, var_2, var_3) {
+  self.bar._id_00C6 = self._id_00C6;
+  self.bar._id_01CA = self._id_01CA;
+  self.bar.alignx = "left";
+  self.bar.aligny = self.aligny;
+  self.bar.y = self.y;
 
   if(self.alignx == "left") {
-    self._id_1586.x = self.x;
+    self.bar.x = self.x;
   } else if(self.alignx == "right") {
-    self._id_1586.x = self.x - self._id_01D2;
+    self.bar.x = self.x - self._id_01D2;
   } else {
-    self._id_1586.x = self.x - int(self._id_01D2 / 2);
+    self.bar.x = self.x - int(self._id_01D2 / 2);
   }
 
   if(self.aligny == "top") {
-    self._id_1586.y = self.y;
+    self.bar.y = self.y;
   } else if(self.aligny == "bottom") {
-    self._id_1586.y = self.y;
+    self.bar.y = self.y;
   }
 
-  _id_A0E3(self._id_1586._id_3E6E);
+  updatebar(self.bar.frac);
 }
 
-_id_A0E3(var_0, var_1) {
-  if(self._id_35B2 == "bar") {
-    _id_A0E5(var_0, var_1);
+updatebar(var_0, var_1) {
+  if(self.elemtype == "bar") {
+    updatebarscale(var_0, var_1);
   }
 }
 
-_id_A0E5(var_0, var_1) {
+updatebarscale(var_0, var_1) {
   var_2 = int(self._id_01D2 * var_0 + 0.5);
 
   if(!var_2) {
     var_2 = 1;
   }
 
-  self._id_1586._id_3E6E = var_0;
-  self._id_1586 setshader(self._id_1586._id_8AC7, var_2, self._id_00BD);
+  self.bar.frac = var_0;
+  self.bar setshader(self.bar.shader, var_2, self._id_00BD);
 
   if(isDefined(var_1) && var_2 < self._id_01D2) {
     if(var_1 > 0) {
-      self._id_1586 scaleovertime((1 - var_0) / var_1, self._id_01D2, self._id_00BD);
+      self.bar scaleovertime((1 - var_0) / var_1, self._id_01D2, self._id_00BD);
     } else if(var_1 < 0) {
-      self._id_1586 scaleovertime(var_0 / (-1 * var_1), 1, self._id_00BD);
+      self.bar scaleovertime(var_0 / (-1 * var_1), 1, self._id_00BD);
     }
   }
 
-  self._id_1586._id_7A78 = var_1;
-  self._id_1586._id_5C09 = gettime();
+  self.bar.rateofchange = var_1;
+  self.bar.lastupdatetime = gettime();
 }
 
 createfontstring(var_0, var_1) {
   var_2 = _newclienthudelem(self);
-  var_2._id_35B2 = "font";
+  var_2.elemtype = "font";
   var_2._id_009A = var_0;
   var_2._id_017A = 1;
   var_2.fontscale = var_1;
-  var_2._id_15FC = var_1;
+  var_2.basefontscale = var_1;
   var_2.x = 0;
   var_2.y = 0;
   var_2._id_01D2 = 0;
-  var_2._id_00BD = int(level._id_3DD8 * var_1);
-  var_2._id_AACD = 0;
-  var_2._id_AAEB = 0;
-  var_2._id_21F6 = [];
-  var_2 setparent(level._id_A012);
-  var_2._id_4CC7 = 0;
+  var_2._id_00BD = int(level.fontheight * var_1);
+  var_2.xoffset = 0;
+  var_2.yoffset = 0;
+  var_2.children = [];
+  var_2 setparent(level.uiparent);
+  var_2.hidden = 0;
   return var_2;
 }
 
-_id_2829(var_0, var_1, var_2) {
+createserverfontstring(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     var_3 = _newteamhudelem(var_2);
   } else {
     var_3 = newhudelem();
   }
 
-  var_3._id_35B2 = "font";
+  var_3.elemtype = "font";
   var_3._id_009A = var_0;
   var_3._id_017A = 1;
   var_3.fontscale = var_1;
-  var_3._id_15FC = var_1;
+  var_3.basefontscale = var_1;
   var_3.x = 0;
   var_3.y = 0;
   var_3._id_01D2 = 0;
-  var_3._id_00BD = int(level._id_3DD8 * var_1);
-  var_3._id_AACD = 0;
-  var_3._id_AAEB = 0;
-  var_3._id_21F6 = [];
-  var_3 setparent(level._id_A012);
-  var_3._id_4CC7 = 0;
+  var_3._id_00BD = int(level.fontheight * var_1);
+  var_3.xoffset = 0;
+  var_3.yoffset = 0;
+  var_3.children = [];
+  var_3 setparent(level.uiparent);
+  var_3.hidden = 0;
   return var_3;
 }
 
-_id_282B(var_0, var_1, var_2) {
+createservertimer(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     var_3 = _newteamhudelem(var_2);
   } else {
     var_3 = newhudelem();
   }
 
-  var_3._id_35B2 = "timer";
+  var_3.elemtype = "timer";
   var_3._id_009A = var_0;
   var_3._id_017A = 1;
   var_3.fontscale = var_1;
-  var_3._id_15FC = var_1;
+  var_3.basefontscale = var_1;
   var_3.x = 0;
   var_3.y = 0;
   var_3._id_01D2 = 0;
-  var_3._id_00BD = int(level._id_3DD8 * var_1);
-  var_3._id_AACD = 0;
-  var_3._id_AAEB = 0;
-  var_3._id_21F6 = [];
-  var_3 setparent(level._id_A012);
-  var_3._id_4CC7 = 0;
+  var_3._id_00BD = int(level.fontheight * var_1);
+  var_3.xoffset = 0;
+  var_3.yoffset = 0;
+  var_3.children = [];
+  var_3 setparent(level.uiparent);
+  var_3.hidden = 0;
   return var_3;
 }
 
-_id_2833(var_0, var_1) {
+createtimer(var_0, var_1) {
   var_2 = _newclienthudelem(self);
-  var_2._id_35B2 = "timer";
+  var_2.elemtype = "timer";
   var_2._id_009A = var_0;
   var_2._id_017A = 1;
   var_2.fontscale = var_1;
-  var_2._id_15FC = var_1;
+  var_2.basefontscale = var_1;
   var_2.x = 0;
   var_2.y = 0;
   var_2._id_01D2 = 0;
-  var_2._id_00BD = int(level._id_3DD8 * var_1);
-  var_2._id_AACD = 0;
-  var_2._id_AAEB = 0;
-  var_2._id_21F6 = [];
-  var_2 setparent(level._id_A012);
-  var_2._id_4CC7 = 0;
+  var_2._id_00BD = int(level.fontheight * var_1);
+  var_2.xoffset = 0;
+  var_2.yoffset = 0;
+  var_2.children = [];
+  var_2 setparent(level.uiparent);
+  var_2.hidden = 0;
   return var_2;
 }
 
 createicon(var_0, var_1, var_2) {
   var_3 = _newclienthudelem(self);
-  var_3._id_35B2 = "icon";
+  var_3.elemtype = "icon";
   var_3.x = 0;
   var_3.y = 0;
   var_3._id_01D2 = var_1;
   var_3._id_00BD = var_2;
-  var_3._id_1630 = var_3._id_01D2;
-  var_3._id_15FD = var_3._id_00BD;
-  var_3._id_AACD = 0;
-  var_3._id_AAEB = 0;
-  var_3._id_21F6 = [];
-  var_3 setparent(level._id_A012);
-  var_3._id_4CC7 = 0;
+  var_3.basewidth = var_3._id_01D2;
+  var_3.baseheight = var_3._id_00BD;
+  var_3.xoffset = 0;
+  var_3.yoffset = 0;
+  var_3.children = [];
+  var_3 setparent(level.uiparent);
+  var_3.hidden = 0;
 
   if(isDefined(var_0)) {
     var_3 setshader(var_0, var_1, var_2);
-    var_3._id_8AC7 = var_0;
+    var_3.shader = var_0;
   }
 
   return var_3;
 }
 
-_id_282A(var_0, var_1, var_2, var_3) {
+createservericon(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {
     var_4 = _newteamhudelem(var_3);
   } else {
     var_4 = newhudelem();
   }
 
-  var_4._id_35B2 = "icon";
+  var_4.elemtype = "icon";
   var_4.x = 0;
   var_4.y = 0;
   var_4._id_01D2 = var_1;
   var_4._id_00BD = var_2;
-  var_4._id_1630 = var_4._id_01D2;
-  var_4._id_15FD = var_4._id_00BD;
-  var_4._id_AACD = 0;
-  var_4._id_AAEB = 0;
-  var_4._id_21F6 = [];
-  var_4 setparent(level._id_A012);
-  var_4._id_4CC7 = 0;
+  var_4.basewidth = var_4._id_01D2;
+  var_4.baseheight = var_4._id_00BD;
+  var_4.xoffset = 0;
+  var_4.yoffset = 0;
+  var_4.children = [];
+  var_4 setparent(level.uiparent);
+  var_4.hidden = 0;
 
   if(isDefined(var_0)) {
     var_4 setshader(var_0, var_1, var_2);
-    var_4._id_8AC7 = var_0;
+    var_4.shader = var_0;
   }
 
   return var_4;
 }
 
-_id_2828(var_0, var_1, var_2, var_3, var_4, var_5) {
+createserverbar(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_4)) {
     var_6 = _newteamhudelem(var_4);
   } else {
@@ -371,15 +371,15 @@ _id_2828(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_6.x = 0;
   var_6.y = 0;
-  var_6._id_3E6E = 0;
+  var_6.frac = 0;
   var_6.color = var_0;
   var_6.sort = -2;
-  var_6._id_8AC7 = "progress_bar_fill";
+  var_6.shader = "progress_bar_fill";
   var_6 setshader("progress_bar_fill", var_1, var_2);
-  var_6._id_4CC7 = 0;
+  var_6.hidden = 0;
 
   if(isDefined(var_3)) {
-    var_6._id_3D49 = var_3;
+    var_6.flashfrac = var_3;
   }
 
   if(isDefined(var_4)) {
@@ -388,61 +388,61 @@ _id_2828(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_7 = newhudelem();
   }
 
-  var_7._id_35B2 = "bar";
+  var_7.elemtype = "bar";
   var_7.x = 0;
   var_7.y = 0;
   var_7._id_01D2 = var_1;
   var_7._id_00BD = var_2;
-  var_7._id_AACD = 0;
-  var_7._id_AAEB = 0;
-  var_7._id_1586 = var_6;
-  var_7._id_21F6 = [];
+  var_7.xoffset = 0;
+  var_7.yoffset = 0;
+  var_7.bar = var_6;
+  var_7.children = [];
   var_7.sort = -3;
   var_7.color = (0, 0, 0);
   var_7.alpha = 0.5;
-  var_7 setparent(level._id_A012);
+  var_7 setparent(level.uiparent);
   var_7 setshader("progress_bar_bg", var_1, var_2);
-  var_7._id_4CC7 = 0;
+  var_7.hidden = 0;
   return var_7;
 }
 
-_id_27CF(var_0, var_1, var_2, var_3) {
+createbar(var_0, var_1, var_2, var_3) {
   var_4 = _newclienthudelem(self);
   var_4.x = 0;
   var_4.y = 0;
-  var_4._id_3E6E = 0;
+  var_4.frac = 0;
   var_4.color = var_0;
   var_4.sort = -2;
-  var_4._id_8AC7 = "progress_bar_fill";
+  var_4.shader = "progress_bar_fill";
   var_4 setshader("progress_bar_fill", var_1, var_2);
-  var_4._id_4CC7 = 0;
+  var_4.hidden = 0;
 
   if(isDefined(var_3)) {
-    var_4._id_3D49 = var_3;
+    var_4.flashfrac = var_3;
   }
 
   var_5 = _newclienthudelem(self);
-  var_5._id_35B2 = "bar";
+  var_5.elemtype = "bar";
   var_5._id_01D2 = var_1;
   var_5._id_00BD = var_2;
-  var_5._id_AACD = 0;
-  var_5._id_AAEB = 0;
-  var_5._id_1586 = var_4;
-  var_5._id_21F6 = [];
+  var_5.xoffset = 0;
+  var_5.yoffset = 0;
+  var_5.bar = var_4;
+  var_5.children = [];
   var_5.sort = -3;
   var_5.color = (0, 0, 0);
   var_5.alpha = 0.5;
-  var_5 setparent(level._id_A012);
+  var_5 setparent(level.uiparent);
   var_5 setshader("progress_bar_bg", var_1 + 4, var_2 + 4);
-  var_5._id_4CC7 = 0;
+  var_5.hidden = 0;
   return var_5;
 }
 
-_id_447D() {
-  var_0 = self._id_1586._id_3E6E;
+getcurrentfraction() {
+  var_0 = self.bar.frac;
 
-  if(isDefined(self._id_1586._id_7A78)) {
-    var_0 = var_0 + (gettime() - self._id_1586._id_5C09) * self._id_1586._id_7A78 / 1000;
+  if(isDefined(self.bar.rateofchange)) {
+    var_0 = var_0 + (gettime() - self.bar.lastupdatetime) * self.bar.rateofchange / 1000;
 
     if(var_0 > 1) {
       var_0 = 1;
@@ -465,21 +465,21 @@ _id_2821(var_0, var_1, var_2) {
     var_1 = 0;
   }
 
-  if(self issplitscreenplayer() && !_func_3BA()) {
+  if(self issplitscreenplayer() && !xmodelalias/alias_ger_heads_urb_clean_par()) {
     var_1 = var_1 + 20;
   }
 
   if(_func_367()) {
-    var_3 = _id_27CF((0.25, 0.58, 0.53), level._id_76FD, level._id_76FA);
+    var_3 = createbar((0.25, 0.58, 0.53), level.primaryprogressbarwidth, level.primaryprogressbarheight);
   } else {
-    var_3 = _id_27CF((1, 1, 1), level._id_76FD, level._id_76FA);
+    var_3 = createbar((1, 1, 1), level.primaryprogressbarwidth, level.primaryprogressbarheight);
   }
 
-  var_3 setpoint("CENTER", undefined, level._id_76FE + var_0, level._id_76FF + var_1);
+  var_3 setpoint("CENTER", undefined, level.primaryprogressbarx + var_0, level.primaryprogressbary + var_1);
   return var_3;
 }
 
-_id_2822(var_0, var_1) {
+createprimaryprogressbartext(var_0, var_1) {
   if(!isDefined(var_0)) {
     var_0 = 0;
   }
@@ -488,86 +488,86 @@ _id_2822(var_0, var_1) {
     var_1 = 0;
   }
 
-  if(self issplitscreenplayer() && !_func_3BA()) {
+  if(self issplitscreenplayer() && !xmodelalias/alias_ger_heads_urb_clean_par()) {
     var_1 = var_1 + 20;
   }
 
   if(_func_367()) {
     var_2 = createfontstring("mphubfont", 1.4);
   } else {
-    var_2 = createfontstring("hudbig", level._id_76F9);
+    var_2 = createfontstring("hudbig", level.primaryprogressbarfontsize);
   }
 
-  var_2 setpoint("CENTER", undefined, level._id_76FB + var_0, level._id_76FC + var_1);
+  var_2 setpoint("CENTER", undefined, level.primaryprogressbartextx + var_0, level.primaryprogressbartexty + var_1);
   var_2.sort = -1;
   return var_2;
 }
 
-_id_2830(var_0) {
-  var_1 = _id_2828((1, 0, 0), level._id_9867, level._id_9865, undefined, var_0);
-  var_1 setpoint("TOP", undefined, 0, level._id_9868);
+createteamprogressbar(var_0) {
+  var_1 = createserverbar((1, 0, 0), level.teamprogressbarwidth, level.teamprogressbarheight, undefined, var_0);
+  var_1 setpoint("TOP", undefined, 0, level.teamprogressbary);
   return var_1;
 }
 
-_id_2831(var_0) {
-  var_1 = _id_2829("default", level._id_9864, var_0);
-  var_1 setpoint("TOP", undefined, 0, level._id_9866);
+createteamprogressbartext(var_0) {
+  var_1 = createserverfontstring("default", level.teamprogressbarfontsize, var_0);
+  var_1 setpoint("TOP", undefined, 0, level.teamprogressbartexty);
   return var_1;
 }
 
-_id_8685(var_0) {
-  self._id_1586._id_3D49 = var_0;
+setflashfrac(var_0) {
+  self.bar.flashfrac = var_0;
 }
 
-_id_4D06() {
-  if(self._id_4CC7) {
+hideelem() {
+  if(self.hidden) {
     return;
   }
-  self._id_4CC7 = 1;
+  self.hidden = 1;
 
   if(self.alpha != 0) {
     self.alpha = 0;
   }
 
-  if(self._id_35B2 == "bar" || self._id_35B2 == "bar_shader") {
-    self._id_1586._id_4CC7 = 1;
+  if(self.elemtype == "bar" || self.elemtype == "bar_shader") {
+    self.bar.hidden = 1;
 
-    if(self._id_1586.alpha != 0) {
-      self._id_1586.alpha = 0;
+    if(self.bar.alpha != 0) {
+      self.bar.alpha = 0;
     }
   }
 }
 
-_id_8BF6() {
-  if(!self._id_4CC7) {
+showelem() {
+  if(!self.hidden) {
     return;
   }
-  self._id_4CC7 = 0;
+  self.hidden = 0;
 
-  if(self._id_35B2 == "bar" || self._id_35B2 == "bar_shader") {
+  if(self.elemtype == "bar" || self.elemtype == "bar_shader") {
     if(self.alpha != 0.5) {
       self.alpha = 0.5;
     }
 
-    self._id_1586._id_4CC7 = 0;
+    self.bar.hidden = 0;
 
-    if(self._id_1586.alpha != 1) {
-      self._id_1586.alpha = 1;
+    if(self.bar.alpha != 1) {
+      self.bar.alpha = 1;
     }
   } else if(self.alpha != 1)
     self.alpha = 1;
 }
 
-_id_3D59() {
+flashthread() {
   self endon("death");
 
-  if(!self._id_4CC7) {
+  if(!self.hidden) {
     self.alpha = 1;
   }
 
   for(;;) {
-    if(self._id_3E6E >= self._id_3D49) {
-      if(!self._id_4CC7) {
+    if(self.frac >= self.flashfrac) {
+      if(!self.hidden) {
         self fadeovertime(0.3);
         self.alpha = 0.2;
         wait 0.35;
@@ -579,7 +579,7 @@ _id_3D59() {
       continue;
     }
 
-    if(!self._id_4CC7 && self.alpha != 1) {
+    if(!self.hidden && self.alpha != 1) {
       self.alpha = 1;
     }
 
@@ -590,89 +590,89 @@ _id_3D59() {
 destroyelem() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < self._id_21F6.size; var_1++) {
-    if(isDefined(self._id_21F6[var_1])) {
-      var_0[var_0.size] = self._id_21F6[var_1];
+  for(var_1 = 0; var_1 < self.children.size; var_1++) {
+    if(isDefined(self.children[var_1])) {
+      var_0[var_0.size] = self.children[var_1];
     }
   }
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    var_0[var_1] setparent(_id_45FC());
+    var_0[var_1] setparent(getparent());
   }
 
-  if(self._id_35B2 == "bar" || self._id_35B2 == "bar_shader") {
-    self._id_1586 destroy();
+  if(self.elemtype == "bar" || self.elemtype == "bar_shader") {
+    self.bar destroy();
   }
 
   self destroy();
 }
 
-_id_86AA(var_0) {
+seticonshader(var_0) {
   self setshader(var_0, self._id_01D2, self._id_00BD);
-  self._id_8AC7 = var_0;
+  self.shader = var_0;
 }
 
-_id_4519(var_0) {
-  return self._id_8AC7;
+geticonshader(var_0) {
+  return self.shader;
 }
 
-_id_86AB(var_0, var_1) {
-  self setshader(self._id_8AC7, var_0, var_1);
+seticonsize(var_0, var_1) {
+  self setshader(self.shader, var_0, var_1);
 }
 
-_id_8A69(var_0) {
+setwidth(var_0) {
   self._id_01D2 = var_0;
 }
 
-_id_86A1(var_0) {
+setheight(var_0) {
   self._id_00BD = var_0;
 }
 
-_id_8723(var_0, var_1) {
+setsize(var_0, var_1) {
   self._id_01D2 = var_0;
   self._id_00BD = var_1;
 }
 
-_id_A0F5() {
-  for(var_0 = 0; var_0 < self._id_21F6.size; var_0++) {
-    var_1 = self._id_21F6[var_0];
-    var_1 setpoint(var_1._id_7538, var_1._id_7C16, var_1._id_AACD, var_1._id_AAEB);
+updatechildren() {
+  for(var_0 = 0; var_0 < self.children.size; var_0++) {
+    var_1 = self.children[var_0];
+    var_1 setpoint(var_1.point, var_1.relativepoint, var_1.xoffset, var_1.yoffset);
   }
 }
 
-_id_9C7F() {
-  self.x = self._id_AACD;
-  self.y = self._id_AAEB;
+transitionreset() {
+  self.x = self.xoffset;
+  self.y = self.yoffset;
 
-  if(self._id_35B2 == "font") {
-    self.fontscale = self._id_15FC;
+  if(self.elemtype == "font") {
+    self.fontscale = self.basefontscale;
     self.label = &"";
-  } else if(self._id_35B2 == "icon")
-    self setshader(self._id_8AC7, self._id_01D2, self._id_00BD);
+  } else if(self.elemtype == "icon")
+    self setshader(self.shader, self._id_01D2, self._id_00BD);
 
   self.alpha = 0;
 }
 
-_id_9C84(var_0) {
-  switch (self._id_35B2) {
+transitionzoomin(var_0) {
+  switch (self.elemtype) {
     case "timer":
     case "font":
       self.fontscale = 6.3;
       self changefontscaleovertime(var_0);
-      self.fontscale = self._id_15FC;
+      self.fontscale = self.basefontscale;
       break;
     case "icon":
-      self setshader(self._id_8AC7, self._id_01D2 * 6, self._id_00BD * 6);
+      self setshader(self.shader, self._id_01D2 * 6, self._id_00BD * 6);
       self scaleovertime(var_0, self._id_01D2, self._id_00BD);
       break;
   }
 }
 
-_id_9C7E(var_0, var_1) {
+transitionpulsefxin(var_0, var_1) {
   var_2 = int(var_0) * 1000;
   var_3 = int(var_1) * 1000;
 
-  switch (self._id_35B2) {
+  switch (self.elemtype) {
     case "timer":
     case "font":
       self setpulsefx(var_2 + 250, var_3 + var_2, var_2 + 250);
@@ -682,7 +682,7 @@ _id_9C7E(var_0, var_1) {
   }
 }
 
-_id_9C81(var_0, var_1) {
+transitionslidein(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = "left";
   }
@@ -703,17 +703,17 @@ _id_9C81(var_0, var_1) {
   }
 
   self moveovertime(var_0);
-  self.x = self._id_AACD;
-  self.y = self._id_AAEB;
+  self.x = self.xoffset;
+  self.y = self.yoffset;
 }
 
-_id_9C82(var_0, var_1) {
+transitionslideout(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = "left";
   }
 
-  var_2 = self._id_AACD;
-  var_3 = self._id_AAEB;
+  var_2 = self.xoffset;
+  var_3 = self.yoffset;
 
   switch (var_1) {
     case "left":
@@ -736,8 +736,8 @@ _id_9C82(var_0, var_1) {
   self.y = var_3;
 }
 
-_id_9C85(var_0) {
-  switch (self._id_35B2) {
+transitionzoomout(var_0) {
+  switch (self.elemtype) {
     case "timer":
     case "font":
       self changefontscaleovertime(var_0);
@@ -748,22 +748,22 @@ _id_9C85(var_0) {
   }
 }
 
-_id_9C78(var_0) {
+transitionfadein(var_0) {
   self fadeovertime(var_0);
 
-  if(isDefined(self._id_6073)) {
-    self.alpha = self._id_6073;
+  if(isDefined(self.maxalpha)) {
+    self.alpha = self.maxalpha;
   } else {
     self.alpha = 1;
   }
 }
 
-_id_9C79(var_0) {
+transitionfadeout(var_0) {
   self fadeovertime(0.15);
   self.alpha = 0;
 }
 
-_id_5807(var_0) {
+istimelimitedchallenge(var_0) {
   if(issubstr(var_0, "ch_limited")) {
     return 1;
   }
@@ -771,59 +771,59 @@ _id_5807(var_0) {
   return 0;
 }
 
-_id_5850(var_0) {
-  if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_kills")) {
+isweaponclasschallenge(var_0) {
+  if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_kills")) {
     return 1;
   }
 
-  if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_hipfirekills")) {
+  if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_hipfirekills")) {
     return 1;
   }
 
-  if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_headShots")) {
+  if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_headShots")) {
     return 1;
   }
 
   return 0;
 }
 
-_id_2097(var_0) {
-  if(_id_5850(var_0)) {
-    return _id_775C(var_0);
+ch_getprogress(var_0) {
+  if(isweaponclasschallenge(var_0)) {
+    return processviaitemstatsprogress(var_0);
   }
 
-  return self getplayerdata(common_scripts\utility::_id_46AE(), "challengeProgress", var_0);
+  return self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeProgress", var_0);
 }
 
-_id_2098(var_0) {
-  if(_id_5850(var_0)) {
-    return _id_775D(var_0);
+ch_getstate(var_0) {
+  if(isweaponclasschallenge(var_0)) {
+    return processviaitemstatsstate(var_0);
   } else {
-    return self getplayerdata(common_scripts\utility::_id_46AE(), "challengeState", var_0);
+    return self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeState", var_0);
   }
 }
 
-_id_209E(var_0, var_1) {
-  if(_id_5850(var_0)) {
+ch_setprogress(var_0, var_1) {
+  if(isweaponclasschallenge(var_0)) {
     return;
   }
-  var_2 = maps\mp\_utility::_id_2315(var_1);
-  self setplayerdata(common_scripts\utility::_id_46AE(), "challengeProgress", var_0, var_2);
+  var_2 = maps\mp\_utility::clamptoshort(var_1);
+  self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeProgress", var_0, var_2);
 
   if(issubstr(var_0, "ch_daily_") && var_2 > 0) {
-    thread maps\mp\gametypes\_hud_message::_id_9102(var_0, var_2);
+    thread maps\mp\gametypes\_hud_message::splashnotify(var_0, var_2);
   }
 }
 
-_id_209F(var_0, var_1) {
-  if(_id_5850(var_0)) {
+ch_setstate(var_0, var_1) {
+  if(isweaponclasschallenge(var_0)) {
     return;
   } else {
-    self setplayerdata(common_scripts\utility::_id_46AE(), "challengeState", var_0, var_1);
+    self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeState", var_0, var_1);
   }
 }
 
-_id_2099(var_0, var_1) {
+ch_gettarget(var_0, var_1) {
   if(issubstr(var_0, "ch_daily")) {
     var_2 = tablelookup("mp/dailyChallengesTable.csv", 0, var_0, 9);
   } else {
@@ -837,7 +837,7 @@ _id_2099(var_0, var_1) {
   return 0;
 }
 
-_id_3005(var_0, var_1, var_2, var_3) {
+displayclientstring(var_0, var_1, var_2, var_3) {
   var_4 = createfontstring("hudbig", var_2);
   var_4 setpoint("CENTER", "CENTER", 0, var_1);
   var_4.sort = 1001;
@@ -845,35 +845,35 @@ _id_3005(var_0, var_1, var_2, var_3) {
   var_4.foreground = 0;
   var_4.hidewheninmenu = 1;
   var_4 settext(var_0);
-  common_scripts\utility::_id_A70A(var_3, "joined_team", "death");
+  common_scripts\utility::waittill_any(var_3, "joined_team", "death");
 
   if(isDefined(var_4)) {
     var_4 destroyelem();
   }
 }
 
-_id_775C(var_0) {
-  if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_hipfirekills")) {
-    return _id_9AB0(var_0, "hipfirekills");
-  } else if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_kills")) {
-    return _id_9AB0(var_0, "kills");
-  } else if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_headShots")) {
-    return _id_9AB0(var_0, "headShots");
+processviaitemstatsprogress(var_0) {
+  if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_hipfirekills")) {
+    return totalallweaponvariants(var_0, "hipfirekills");
+  } else if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_kills")) {
+    return totalallweaponvariants(var_0, "kills");
+  } else if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_headShots")) {
+    return totalallweaponvariants(var_0, "headShots");
   }
 }
 
-_id_775D(var_0) {
-  var_1 = _id_775C(var_0);
+processviaitemstatsstate(var_0) {
+  var_1 = processviaitemstatsprogress(var_0);
   var_2 = 1;
 
-  for(var_3 = _id_2099(var_0, var_2); var_3 > 0 && var_1 >= var_3; var_3 = _id_2099(var_0, var_2)) {
+  for(var_3 = ch_gettarget(var_0, var_2); var_3 > 0 && var_1 >= var_3; var_3 = ch_gettarget(var_0, var_2)) {
     var_2++;
   }
 
   return var_2;
 }
 
-_id_9AB0(var_0, var_1) {
+totalallweaponvariants(var_0, var_1) {
   var_2 = undefined;
   var_3 = 0;
   var_4 = strtok(var_0, "_");
@@ -888,22 +888,22 @@ _id_9AB0(var_0, var_1) {
   if(isDefined(var_2)) {
     for(var_6 = _tablelookuprownum("mp/statstable.csv", 28, var_2); var_6 >= 0; var_6 = _tablelookuprownum("mp/statstable.csv", 28, var_2, var_6 - 1)) {
       var_7 = _tablelookupbyrow("mp/statstable.csv", var_6, 2);
-      var_3 = var_3 + self getplayerdata(common_scripts\utility::_id_46AE(), "weaponStats", var_7, var_1);
+      var_3 = var_3 + self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "weaponStats", var_7, var_1);
     }
 
-    if(var_1 == "kills" && isDefined(self._id_9BBA)) {
-      var_3 = var_3 + self._id_9BBA;
+    if(var_1 == "kills" && isDefined(self.trackingweaponkills)) {
+      var_3 = var_3 + self.trackingweaponkills;
     }
 
-    if(var_1 == "hipfirekills" && isDefined(self._id_9BB8)) {
-      var_3 = var_3 + self._id_9BB8;
+    if(var_1 == "hipfirekills" && isDefined(self.trackingweaponhipfirekills)) {
+      var_3 = var_3 + self.trackingweaponhipfirekills;
     }
 
-    if(var_1 == "headShots" && isDefined(self._id_9BB7)) {
-      var_3 = var_3 + self._id_9BB7;
+    if(var_1 == "headShots" && isDefined(self.trackingweaponheadshots)) {
+      var_3 = var_3 + self.trackingweaponheadshots;
     }
 
-    var_8 = self getplayerdata(common_scripts\utility::_id_46AE(), "attachUnlock_" + var_1, var_2);
+    var_8 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "attachUnlock_" + var_1, var_2);
 
     if(var_8 > var_3) {
       var_8 = 0;

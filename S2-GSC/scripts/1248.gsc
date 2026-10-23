@@ -46,7 +46,7 @@ _id_7471(var_0) {
   var_1 notify("virtualLobbyActive");
 
   if(level._id_A220) {} else {
-    if(!isDefined(var_1._id_1E99) && isDefined(var_0)) {
+    if(!isDefined(var_1.camera) && isDefined(var_0)) {
       var_2 = _getEnt(var_0, "targetname");
       var_3 = var_2.origin;
       var_4 = var_2.angles;
@@ -57,12 +57,12 @@ _id_7471(var_0) {
       var_5._id_92B8 = var_4;
       var_5.setmovingplatformplayerturnrate = (0, 0, 0);
       var_5._id_9815 = var_1;
-      var_1._id_1E99 = var_5;
+      var_1.camera = var_5;
       var_5.player = var_1;
       var_5.targetname = "camera2player";
     }
 
-    var_1 cameralinkTo(var_1._id_1E99, "tag_player");
+    var_1 cameralinkTo(var_1.camera, "tag_player");
   }
 
   var_1._id_537A = 1;
@@ -131,16 +131,16 @@ _id_73E5(var_0) {
   if(isDefined(var_0) && var_0 == 1) {
     var_1 = spawn("script_origin", (0, 0, 0));
     self._id_2608 = var_1;
-    self _meth_8200(var_1);
+    self controlslinkto(var_1);
   } else if(isDefined(self._id_2608)) {
-    self _meth_8201();
+    self controlsunlink();
     self._id_2608 delete();
   }
 }
 
 _id_7DF8(var_0, var_1, var_2, var_3, var_4, var_5) {
   self _meth_8546(var_0);
-  self _meth_8309(var_1);
+  self scripted_elems(var_1);
   self allowads(var_2);
   self allowcrouch(0);
   self allowsprint(0);
@@ -163,7 +163,7 @@ _id_7DF8(var_0, var_1, var_2, var_3, var_4, var_5) {
 
 _id_A04C() {
   self _meth_8546(1);
-  self _meth_8309(1);
+  self scripted_elems(1);
   self allowads(1);
   self allowcrouch(1);
   self allowsprint(1);
@@ -210,7 +210,7 @@ _id_721A(var_0, var_1) {
 
   if(self._id_56A4) {
     if(isDefined(self._id_155F)) {
-      self._id_155F _id_1543((0, 0, 0), self);
+      self._id_155F ball_physics_launch_drop((0, 0, 0), self);
     }
   }
 
@@ -227,7 +227,7 @@ _id_721A(var_0, var_1) {
   if(var_11 == 2) {
     var_12 = self _meth_85E1(1);
 
-    if(common_scripts\utility::_id_9467(var_12, "mp_emote_")) {
+    if(common_scripts\utility::string_starts_with(var_12, "mp_emote_")) {
       return 0;
     }
 
@@ -246,7 +246,7 @@ _id_721A(var_0, var_1) {
   } else {
     var_12 = self _meth_85E1(0);
 
-    if(common_scripts\utility::_id_9467(var_12, "mp_emote_")) {
+    if(common_scripts\utility::string_starts_with(var_12, "mp_emote_")) {
       return 0;
     }
 
@@ -298,7 +298,7 @@ _id_459B(var_0, var_1) {
   foreach(var_4 in level.players) {
     if(maps\mp\_utility::isreallyalive(var_4)) {
       if(!isDefined(var_1) || isDefined(var_1) && (var_4._id_5721 || var_4._id_572F)) {
-        if(common_scripts\utility::_id_302B(self.origin, var_4.origin) < _squared(var_0)) {
+        if(common_scripts\utility::distance_2d_squared(self.origin, var_4.origin) < _squared(var_0)) {
           var_2 = common_scripts\utility::_id_0972(var_2, var_4);
         }
       }
@@ -316,7 +316,7 @@ _id_63C0() {
     if(maps\mp\_utility::isreallyalive(self) && var_0 != getDvar("hub_emote")) {
       var_0 = getDvar("hub_emote");
       _id_721A(var_0);
-      thread maps\mp\gametypes\_hud_util::_id_3005("Current emote: " + var_0, -100, 1, "hideCurrentEmoteStatus");
+      thread maps\mp\gametypes\_hud_util::displayclientstring("Current emote: " + var_0, -100, 1, "hideCurrentEmoteStatus");
       wait 1;
       self notify("hideCurrentEmoteStatus");
     }
@@ -374,7 +374,7 @@ _id_639E() {
       }
 
       var_2 = int(var_1 / 12.0);
-      var_3 = maps\mp\gametypes\_hud_util::_id_2097("ch_hq_falls");
+      var_3 = maps\mp\gametypes\_hud_util::ch_getprogress("ch_hq_falls");
 
       if(var_2 > var_3 && isalive(self)) {
         maps\mp\gametypes\_missions::processchallenge("ch_hq_falls", var_2, 1);
@@ -462,17 +462,17 @@ _id_9C8C(var_0) {
 }
 
 _id_4618() {
-  var_0 = maps\mp\_utility::_id_1E01();
+  var_0 = maps\mp\_utility::cac_getcustomclassloc();
 
-  if(!isDefined(self._id_294D)) {
-    self._id_294D = maps\mp\gametypes\_class::_id_1E05();
+  if(!isDefined(self.currentselectedclass)) {
+    self.currentselectedclass = maps\mp\gametypes\_class::_id_1E05();
   }
 
   if(level._id_4F50 && isDefined(self._id_9FB3)) {
-    self._id_294D = self._id_9FB3;
+    self.currentselectedclass = self._id_9FB3;
   }
 
-  var_1 = maps\mp\_utility::getclassindex("lobby" + (self._id_294D + 1));
+  var_1 = maps\mp\_utility::getclassindex("lobby" + (self.currentselectedclass + 1));
 
   if(level._id_A220) {
     if(isDefined(self._id_A597)) {
@@ -481,7 +481,7 @@ _id_4618() {
       var_2 = _id_4834(var_0, var_1);
     }
   } else
-    var_2 = self._id_5E01[var_0][var_1];
+    var_2 = self.loadouts[var_0][var_1];
 
   self._id_0079 = var_2["division"];
   var_3 = var_2["primaryWeaponStruct"];
@@ -495,7 +495,7 @@ _id_4618() {
   var_11 = maps\mp\_utility::_id_4431(maps\mp\_utility::_id_4737(var_4));
 
   if(maps\mp\_utility::_id_5856(var_11)) {
-    var_11 = maps\mp\gametypes\_class::_id_4432(var_11);
+    var_11 = maps\mp\gametypes\_class::getbasefromlootversion(var_11);
   }
 
   if(maps\mp\_utility::getweaponclass(var_11) == "weapon_pistol") {
@@ -525,14 +525,14 @@ _id_4618() {
 
   if(isDefined(var_3) && isDefined(var_3.guid) && var_3.guid != 0) {
     var_15 = maps\mp\_utility::_id_4737(var_3);
-    self._id_7706 = maps\mp\gametypes\_class::_id_1D66(var_15, var_2["primaryAttachmentsGUID"][0], var_2["primaryAttachmentsGUID"][1], var_2["primaryAttachmentsGUID"][2], var_2["primaryAttachmentsGUID"][3], var_2["primaryAttachmentsGUID"][4], var_2["primaryAttachmentsGUID"][5], maps\mp\_utility::_id_472D(var_3), var_2["primaryCamoGUID"], var_2["primaryCamo2GUID"], var_2["primaryReticleGUID"], var_2["primaryCustomization"], self, self._id_0079);
+    self._id_7706 = maps\mp\gametypes\_class::buildweaponname(var_15, var_2["primaryAttachmentsGUID"][0], var_2["primaryAttachmentsGUID"][1], var_2["primaryAttachmentsGUID"][2], var_2["primaryAttachmentsGUID"][3], var_2["primaryAttachmentsGUID"][4], var_2["primaryAttachmentsGUID"][5], maps\mp\_utility::_id_472D(var_3), var_2["primaryCamoGUID"], var_2["primaryCamo2GUID"], var_2["primaryReticleGUID"], var_2["primaryCustomization"], self, self._id_0079);
     self.primarypaintjobid = var_2["primaryPaintjobId"];
     self.primarycharmguid = var_2["primaryCharmGUID"];
   }
 
   if(isDefined(var_4) && isDefined(var_4.guid) && var_4.guid != 0) {
     var_15 = maps\mp\_utility::_id_4737(var_4);
-    self.botgetscriptgoal = maps\mp\gametypes\_class::_id_1D66(var_15, var_2["secondaryAttachmentsGUID"][0], var_2["secondaryAttachmentsGUID"][1], var_2["secondaryAttachmentsGUID"][2], var_2["secondaryAttachmentsGUID"][3], var_2["secondaryAttachmentsGUID"][4], var_9, maps\mp\_utility::_id_472D(var_4), var_2["secondaryCamoGUID"], var_2["secondaryCamo2GUID"], var_2["secondaryReticleGUID"], var_2["secondaryCustomization"], self, self._id_0079);
+    self.botgetscriptgoal = maps\mp\gametypes\_class::buildweaponname(var_15, var_2["secondaryAttachmentsGUID"][0], var_2["secondaryAttachmentsGUID"][1], var_2["secondaryAttachmentsGUID"][2], var_2["secondaryAttachmentsGUID"][3], var_2["secondaryAttachmentsGUID"][4], var_9, maps\mp\_utility::_id_472D(var_4), var_2["secondaryCamoGUID"], var_2["secondaryCamo2GUID"], var_2["secondaryReticleGUID"], var_2["secondaryCustomization"], self, self._id_0079);
     self.secondarypaintjobid = var_2["secondaryPaintjobId"];
     self.secondarycharmguid = var_2["secondaryCharmGUID"];
   }
@@ -568,7 +568,7 @@ _id_115E() {
   if(isDefined(self._id_2FAC) && self._id_2FAC) {
     return;
   }
-  var_0 = maps\mp\_utility::_id_1E01();
+  var_0 = maps\mp\_utility::cac_getcustomclassloc();
   var_1 = maps\mp\gametypes\_class::_id_1E05();
 
   if(level._id_4F50 && isDefined(self._id_9FB3)) {
@@ -584,7 +584,7 @@ _id_115E() {
       var_3 = _id_4834(var_0, var_2);
     }
   } else
-    var_3 = self._id_5E01[var_0][var_2];
+    var_3 = self.loadouts[var_0][var_2];
 
   var_4 = var_3["division"];
   var_5 = var_3["primaryWeaponStruct"];
@@ -592,7 +592,7 @@ _id_115E() {
 
   if(isDefined(var_5) && isDefined(var_5.guid) && var_5.guid != 0) {
     var_7 = maps\mp\_utility::_id_4737(var_5);
-    var_6 = maps\mp\gametypes\_class::_id_1D66(var_7, var_3["primaryAttachmentsGUID"][0], var_3["primaryAttachmentsGUID"][1], var_3["primaryAttachmentsGUID"][2], var_3["primaryAttachmentsGUID"][3], var_3["primaryAttachmentsGUID"][4], var_3["primaryAttachmentsGUID"][5], maps\mp\_utility::_id_472D(var_5), var_3["primaryCamoGUID"], var_3["primaryCamo2GUID"], var_3["primaryReticleGUID"], var_3["primaryCustomization"], self, var_4);
+    var_6 = maps\mp\gametypes\_class::buildweaponname(var_7, var_3["primaryAttachmentsGUID"][0], var_3["primaryAttachmentsGUID"][1], var_3["primaryAttachmentsGUID"][2], var_3["primaryAttachmentsGUID"][3], var_3["primaryAttachmentsGUID"][4], var_3["primaryAttachmentsGUID"][5], maps\mp\_utility::_id_472D(var_5), var_3["primaryCamoGUID"], var_3["primaryCamo2GUID"], var_3["primaryReticleGUID"], var_3["primaryCustomization"], self, var_4);
   }
 
   if(isDefined(var_6) && maps\mp\_utility::getweaponclass(var_6) != "weapon_other" && var_6 != "riotshield_mp") {
@@ -721,7 +721,7 @@ _id_2DD2(var_0) {
 
 _id_2386(var_0) {
   if(!isDefined(var_0) || !var_0) {
-    common_scripts\utility::_id_A70A("disconnect", "death");
+    common_scripts\utility::waittill_any("disconnect", "death");
   }
 
   if(isDefined(self._id_308C)) {
@@ -806,7 +806,7 @@ _id_5790(var_0) {
     return 1;
   } else if(isDefined(self._id_56AD) && self._id_56AD) {
     return 1;
-  } else if(self _meth_803D()) {
+  } else if(self same_color_code_as_last_time()) {
     return 1;
   } else if(isDefined(self.isintimertag) && self.isintimertag) {
     return 1;
@@ -919,9 +919,9 @@ _id_532E() {
   }
   wait 1;
   setdvarifuninitialized("spv_hub_ball_kswitch", 0);
-  level._id_1564[0] = common_scripts\utility::_id_46B5("ball_spawn_point_1", "targetname");
-  level._id_1564[1] = common_scripts\utility::_id_46B5("ball_spawn_point_2", "targetname");
-  level._id_1564[2] = common_scripts\utility::_id_46B5("ball_spawn_point_3", "targetname");
+  level._id_1564[0] = common_scripts\utility::getstruct("ball_spawn_point_1", "targetname");
+  level._id_1564[1] = common_scripts\utility::getstruct("ball_spawn_point_2", "targetname");
+  level._id_1564[2] = common_scripts\utility::getstruct("ball_spawn_point_3", "targetname");
 
   for(var_0 = 0; var_0 < level._id_1564.size; var_0++) {
     level._id_1564[var_0] thread _id_1553();
@@ -944,37 +944,37 @@ _id_1553() {
     }
 
     var_0 show();
-    var_0 thread _id_6FA2();
+    var_0 thread physics_impact_watch();
     var_1 = 24;
     var_2 = spawn("trigger_radius", var_0.origin - (0, 0, var_1 / 2), 0, var_1, var_1);
     var_2 enablelinkTo();
     var_2 linkTo(var_0);
-    var_2._id_66F0 = 1;
+    var_2.no_moving_platfrom_unlink = 1;
     var_3 = [var_0];
-    var_4 = _id_04D1::_id_27D6("any", var_2, var_3, (0, 0, 32), 0, 0, 1);
+    var_4 = _id_04D1::createcarryobject("any", var_2, var_3, (0, 0, 32), 0, 0, 1);
     var_4 _id_04D1::_id_0C1D("any");
-    var_4 _id_04D1::_id_8A60("any");
-    var_4._id_698F = 0;
-    var_4._id_6993 = 1.0;
+    var_4 _id_04D1::setvisibleteam("any");
+    var_4.objidpingenemy = 0;
+    var_4.objpingdelay = 1.0;
     var_4._id_0C33 = 0;
     var_4.carryweapon = "hub_ball_mp";
     var_4._id_59D8 = 1;
-    var_4._id_A965 = 0;
+    var_4.waterbadtrigger = 0;
     var_4.visualgroundoffset = (0, 0, 30);
-    var_4._id_1F84 = ::_id_150E;
-    var_4._id_6B62 = ::_id_1535;
-    var_4._id_866E = ::_id_1550;
-    var_4._id_201D = ::_id_1555;
+    var_4.canuseobject = ::ball_can_pickup;
+    var_4.onpickup = ::ball_on_pickup;
+    var_4.setdropped = ::ball_set_dropped;
+    var_4.carryweaponthink = ::_id_1555;
     var_4.requireslos = 1;
     var_4._id_152D = self.setmovespeedscale;
-    maps\mp\_utility::_objective_delete(var_4._id_698A);
-    maps\mp\_utility::_objective_delete(var_4._id_698B);
-    maps\mp\_utility::_objective_delete(var_4._id_698C);
-    var_4._id_2562 = undefined;
+    maps\mp\_utility::_objective_delete(var_4.objidallies);
+    maps\mp\_utility::_objective_delete(var_4.objidaxis);
+    maps\mp\_utility::_objective_delete(var_4.objidmlgspectator);
+    var_4.compassicons = undefined;
     var_4._id_2561 = undefined;
-    var_4._id_698A = undefined;
-    var_4._id_698B = undefined;
-    var_4._id_698C = undefined;
+    var_4.objidallies = undefined;
+    var_4.objidaxis = undefined;
+    var_4.objidmlgspectator = undefined;
     var_4 thread monitorballkswitch();
 
     for(;;) {
@@ -1000,16 +1000,16 @@ monitorballkswitch() {
     wait 1;
   }
 
-  _id_04D1::_id_23DA();
-  _id_04D1::_id_2D2F();
+  _id_04D1::clearcarrier();
+  _id_04D1::deletecarryobject();
 }
 
-_id_150E(var_0) {
+ball_can_pickup(var_0) {
   if(!isDefined(var_0)) {
     return 0;
   }
 
-  if(isDefined(self._id_34B1) && self._id_34B1 >= gettime()) {
+  if(isDefined(self.droptime) && self.droptime >= gettime()) {
     return 0;
   }
 
@@ -1017,7 +1017,7 @@ _id_150E(var_0) {
     return 0;
   }
 
-  if(var_0 _id_72F0()) {
+  if(var_0 player_no_pickup_time()) {
     return 0;
   }
 
@@ -1027,30 +1027,30 @@ _id_150E(var_0) {
 
   var_1 = var_0 _meth_85E1(1);
 
-  if(common_scripts\utility::_id_9467(var_1, "mp_emote_")) {
+  if(common_scripts\utility::string_starts_with(var_1, "mp_emote_")) {
     return 0;
   }
 
   var_1 = var_0 _meth_85E1(0);
 
-  if(common_scripts\utility::_id_9467(var_1, "mp_emote_")) {
+  if(common_scripts\utility::string_starts_with(var_1, "mp_emote_")) {
     return 0;
   }
 
   return 1;
 }
 
-_id_1535(var_0) {
+ball_on_pickup(var_0) {
   self notify("pickup_object");
-  var_1 = self._id_A582[0] getlinkedparent();
+  var_1 = self.visuals[0] getlinkedparent();
 
   if(isDefined(var_1)) {
-    self._id_A582[0] unlink();
+    self.visuals[0] unlink();
   }
 
-  self._id_A582[0] physicsstop();
-  self._id_A582[0] show();
-  self._id_A582[0] ghost();
+  self.visuals[0] physicsstop();
+  self.visuals[0] show();
+  self.visuals[0] ghost();
   var_0 setweaponammoclip("hub_ball_mp", 1);
   var_0 playSound("grid_ball_pickup");
   var_0 maps\mp\_utility::giveperk("specialty_ballcarrier");
@@ -1060,9 +1060,9 @@ _id_1535(var_0) {
 
   if(isDefined(self._id_152D)) {
     var_0 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_data_ball" + self._id_152D);
-    var_2 = var_0 maps\mp\gametypes\_hud_util::_id_2097("ch_hq_data_ball1");
-    var_3 = var_0 maps\mp\gametypes\_hud_util::_id_2097("ch_hq_data_ball2");
-    var_4 = var_0 maps\mp\gametypes\_hud_util::_id_2097("ch_hq_data_ball3");
+    var_2 = var_0 maps\mp\gametypes\_hud_util::ch_getprogress("ch_hq_data_ball1");
+    var_3 = var_0 maps\mp\gametypes\_hud_util::ch_getprogress("ch_hq_data_ball2");
+    var_4 = var_0 maps\mp\gametypes\_hud_util::ch_getprogress("ch_hq_data_ball3");
     var_5 = var_2 + var_3 + var_4;
     var_0 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_balls", var_5, 1);
   }
@@ -1070,13 +1070,13 @@ _id_1535(var_0) {
   var_0 common_scripts\utility::_id_0601();
 }
 
-_id_1550(var_0) {
+ball_set_dropped(var_0) {
   if(!isDefined(var_0)) {
     var_0 = 0;
   }
 
-  self._id_57A6 = 1;
-  self._id_34B1 = gettime();
+  self.isresetting = 1;
+  self.droptime = gettime();
   self notify("dropped");
   var_1 = self.carrier;
 
@@ -1088,36 +1088,36 @@ _id_1550(var_0) {
 
   var_3 = (0, 0, 0);
 
-  for(var_4 = 0; var_4 < self._id_A582.size; var_4++) {
-    self._id_A582[var_4].origin = var_2;
-    self._id_A582[var_4].angles = var_3;
-    self._id_A582[var_4] show();
+  for(var_4 = 0; var_4 < self.visuals.size; var_4++) {
+    self.visuals[var_4].origin = var_2;
+    self.visuals[var_4].angles = var_3;
+    self.visuals[var_4] show();
   }
 
-  self._id_9D65.origin = var_2;
-  _id_151D();
-  self._id_28D4 = self._id_9D65.origin;
-  _id_1511();
-  _id_04D1::_id_23DA();
-  self._id_57A6 = 0;
+  self.trigger.origin = var_2;
+  ball_dont_interpolate();
+  self.curorigin = self.trigger.origin;
+  ball_carrier_cleanup();
+  _id_04D1::clearcarrier();
+  self.isresetting = 0;
 
   if(!var_0) {
-    _id_1542((0, 0, 80));
+    ball_physics_launch((0, 0, 80));
   }
 
   thread _id_1533();
   return 1;
 }
 
-_id_151D() {
-  self._id_A582[0] dontinterpolate();
-  self._id_1521 = 0;
+ball_dont_interpolate() {
+  self.visuals[0] dontinterpolate();
+  self.ball_fx_active = 0;
 }
 
-_id_1511() {
+ball_carrier_cleanup() {
   if(isDefined(self.carrier)) {
     var_0 = self.carrier;
-    var_0._id_6735 = gettime() + 500;
+    var_0.nopickuptime = gettime() + 500;
     var_0 common_scripts\utility::_id_0615();
     var_0._id_56A4 = 0;
     var_0._id_155F = undefined;
@@ -1130,7 +1130,7 @@ _id_1511() {
 _id_1555() {
   self endon("disconnect");
   thread _id_1557();
-  self._id_2016 waittill("dropped");
+  self.carryobject waittill("dropped");
 }
 
 _id_1557() {
@@ -1150,7 +1150,7 @@ _id_1557() {
     break;
   }
 
-  if(isDefined(self._id_2016)) {
+  if(isDefined(self.carryobject)) {
     self _meth_85C9(1);
     wait 0.1;
     var_3 = self getplayerangles();
@@ -1160,14 +1160,14 @@ _id_1557() {
     self _meth_85C9(0);
     _id_0468::_id_0A27("passBall");
     self playSound("grid_ball_throw");
-    self._id_2016 thread _id_1543(var_4 * var_1, self);
+    self.carryobject thread ball_physics_launch_drop(var_4 * var_1, self);
   }
 }
 
 _id_1556() {
   self endon("death");
   self endon("disconnect");
-  self._id_6EA7 = 1;
+  self.pass_or_throw_active = 1;
   self allowmelee(0);
 
   while("hub_ball_mp" == self getcurrentweapon()) {
@@ -1176,43 +1176,43 @@ _id_1556() {
 
   wait 1;
   self allowmelee(1);
-  self._id_6EA7 = 0;
+  self.pass_or_throw_active = 0;
 }
 
-_id_1543(var_0, var_1) {
-  _id_1550(1);
-  _id_1542(var_0, var_1);
+ball_physics_launch_drop(var_0, var_1) {
+  ball_set_dropped(1);
+  ball_physics_launch(var_0, var_1);
 }
 
-_id_1542(var_0, var_1) {
-  var_2 = self._id_A582[0];
-  var_2._id_6C43 = undefined;
+ball_physics_launch(var_0, var_1) {
+  var_2 = self.visuals[0];
+  var_2.origin_prev = undefined;
   var_2 physicslaunchserver(var_2.origin + (0.1, 0, 0.25), var_0);
   thread _id_1546(var_1);
 }
 
 _id_1546(var_0) {
-  var_1 = self._id_A582[0];
-  var_2 = self._id_9D65;
+  var_1 = self.visuals[0];
+  var_2 = self.trigger;
   var_1 endon("physics_finished");
 
   for(;;) {
     var_2 waittill("trigger", var_3);
 
-    if(isDefined(var_0) && var_0 == var_3 && var_3 _id_72F0()) {
+    if(isDefined(var_0) && var_0 == var_3 && var_3 player_no_pickup_time()) {
       continue;
     }
-    if(self._id_34B1 >= gettime()) {
+    if(self.droptime >= gettime()) {
       continue;
     }
-    if(var_1.origin == var_1._id_162D + (0, 0, 4000)) {
+    if(var_1.origin == var_1.baseorigin + (0, 0, 4000)) {
       continue;
     }
-    if(!_id_150E(var_3)) {}
+    if(!ball_can_pickup(var_3)) {}
   }
 }
 
-_id_6FA2() {
+physics_impact_watch() {
   self endon("death");
 
   for(;;) {
@@ -1227,12 +1227,12 @@ _id_6FA2() {
   }
 }
 
-_id_72F0() {
-  return isDefined(self._id_6735) && self._id_6735 > gettime();
+player_no_pickup_time() {
+  return isDefined(self.nopickuptime) && self.nopickuptime > gettime();
 }
 
-_id_1541() {
-  var_0 = self._id_A582[0];
+ball_physics_fake_bounce() {
+  var_0 = self.visuals[0];
 
   if(!var_0 physicsisactive()) {
     return;
@@ -1245,9 +1245,9 @@ _id_1541() {
 }
 
 _id_1516() {
-  self._id_A582[0] dontinterpolate();
-  self._id_A582[0] physicsstop();
-  self._id_A582[0].origin = (0, 0, 0);
+  self.visuals[0] dontinterpolate();
+  self.visuals[0] physicsstop();
+  self.visuals[0].origin = (0, 0, 0);
 }
 
 _id_1533() {
@@ -1257,7 +1257,7 @@ _id_1533() {
   var_0 = common_scripts\utility::waittill_any_return("ballIsInactive", "pickup_object");
 
   if(var_0 == "ballIsInactive") {
-    _id_04D1::_id_2D2F();
+    _id_04D1::deletecarryobject();
   } else {
     return;
   }
@@ -1626,7 +1626,7 @@ _id_5E88(var_0, var_1, var_2, var_3) {
     var_5 = -1;
   }
 
-  self _meth_8681("telemetry_hq_event", ["base", ["hq_guid", _func_398(), "utc_timestamp_join", var_4, "data_center_id", _func_397(), "game_time", gettime(), "player_index", var_5, "player_count", level.players.size, "event_name", var_0, "event_category", var_1, "duration_seconds", var_2], var_0, var_3]);
+  self setfireloopmod("telemetry_hq_event", ["base", ["hq_guid", _func_398(), "utc_timestamp_join", var_4, "data_center_id", _func_397(), "game_time", gettime(), "player_index", var_5, "player_count", level.players.size, "event_name", var_0, "event_category", var_1, "duration_seconds", var_2], var_0, var_3]);
 }
 
 _id_582B() {
@@ -1658,7 +1658,7 @@ _id_7D1D(var_0) {
         self._id_4F4D = self._id_4F4D + 1;
       }
 
-      self _meth_85EA("ET_PLAYER");
+      self set_vehicle_goal_position("ET_PLAYER");
       break;
     default:
       break;
@@ -1670,7 +1670,7 @@ _id_86FE() {
   self endon("disconnect");
   level endon("game_ended");
   wait 4;
-  self _meth_85EA("ET_PLAYER_HUB");
+  self set_vehicle_goal_position("ET_PLAYER_HUB");
 }
 
 _id_7E4E(var_0) {
@@ -1798,17 +1798,17 @@ clientclearsoundsubmix() {
       var_0 = 502;
     }
 
-    if(!isDefined(var_1) && isDefined(self._id_18A8)) {
-      if(issubstr(self._id_18A8, "huba")) {
+    if(!isDefined(var_1) && isDefined(self.body)) {
+      if(issubstr(self.body, "huba")) {
         var_1 = 500;
-      } else if(issubstr(self._id_18A8, "hubb")) {
+      } else if(issubstr(self.body, "hubb")) {
         var_0 = 499;
         var_1 = 499;
-      } else if(issubstr(self._id_18A8, "hubc"))
+      } else if(issubstr(self.body, "hubc"))
         var_1 = 501;
-      else if(issubstr(self._id_18A8, "hubd")) {
+      else if(issubstr(self.body, "hubd")) {
         var_1 = 502;
-      } else if(issubstr(self._id_18A8, "hube")) {
+      } else if(issubstr(self.body, "hube")) {
         var_1 = 503;
       }
     }
@@ -1834,7 +1834,7 @@ clientclearsoundsubmix() {
     var_1 = _randomintrange(500, 504);
   }
 
-  self _meth_84C7([var_1, var_0, 0, 0, 0]);
+  self set_grenadeammo([var_1, var_0, 0, 0, 0]);
 }
 
 _id_4B02(var_0, var_1, var_2) {
@@ -1848,7 +1848,7 @@ _id_4B02(var_0, var_1, var_2) {
         if(var_5._id_0ED2[0] == "") {
           continue;
         }
-        var_5._id_378F scriptmodelplayanimdeltamotionfrompos(var_5._id_0ED2[0], self.switchtoweapon.origin, self.switchtoweapon.angles);
+        var_5.ent scriptmodelplayanimdeltamotionfrompos(var_5._id_0ED2[0], self.switchtoweapon.origin, self.switchtoweapon.angles);
       }
 
       var_0 waittillmatch("animEnded", "end");
@@ -1858,7 +1858,7 @@ _id_4B02(var_0, var_1, var_2) {
         if(var_5._id_0ED2[var_3] == "") {
           continue;
         }
-        var_5._id_378F scriptmodelplayanimdeltamotionfrompos(var_5._id_0ED2[var_3], self.switchtoweapon.origin, self.switchtoweapon.angles);
+        var_5.ent scriptmodelplayanimdeltamotionfrompos(var_5._id_0ED2[var_3], self.switchtoweapon.origin, self.switchtoweapon.angles);
       }
 
       var_0 waittillmatch("animEnded", "end");
@@ -1867,7 +1867,7 @@ _id_4B02(var_0, var_1, var_2) {
 }
 
 _id_4F45(var_0) {
-  if(!_isdedicatedserver() && (!_func_3AE() || common_scripts\utility::_id_562E(level._id_AC5A))) {
+  if(!_isdedicatedserver() && (!xmodelalias/alias_ger_heads_scarf_for_muddy() || common_scripts\utility::_id_562E(level._id_AC5A))) {
     while(!_istransientloaded(var_0)) {
       waitframe();
     }
@@ -1887,7 +1887,7 @@ _id_74AB(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    var_4 = var_0 common_scripts\utility::_id_A712(var_3);
+    var_4 = var_0 common_scripts\utility::waittill_any_in_array_return(var_3);
   }
 }
 
@@ -1907,7 +1907,7 @@ _id_3E15(var_0) {
 }
 
 _id_4B90() {
-  if(self getplayerdata(common_scripts\utility::_id_46AE(), "forceTutorialDivision") >= 1 || self getplayerdata(common_scripts\utility::_id_46AE(), "matchesCompleted") >= 1) {
+  if(self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "forceTutorialDivision") >= 1 || self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "matchesCompleted") >= 1) {
     return 1;
   }
 

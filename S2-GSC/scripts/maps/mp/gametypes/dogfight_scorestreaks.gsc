@@ -5,8 +5,8 @@
 
 init_dogfight_killstreaks() {
   level thread scorestreakdvarhostmigration();
-  level._id_5A61["dogfight_flak"] = ::tryusedogfightflak;
-  level._id_5A7D["killstreak_flak_gun_raids"] = "dogfight_flak";
+  level.killstreakfuncs["dogfight_flak"] = ::tryusedogfightflak;
+  level.killstreakwieldweapons["killstreak_flak_gun_raids"] = "dogfight_flak";
 }
 
 scorestreakdvarhostmigration() {
@@ -16,7 +16,7 @@ scorestreakdvarhostmigration() {
   for(;;) {
     level waittill("host_migration_begin");
     setDvar("scorestreak_enabled_dogfight_flak", 1);
-    maps\mp\gametypes\_hostmigration::_id_A782();
+    maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
   }
 }
 
@@ -34,7 +34,7 @@ tryusedogfightflak(var_0) {
   var_2 = undefined;
 
   if(getdvarint("dogfightFlakDamageScaleEnabled", 1) || getdvarint("dogfightFlakDamageWeightEnabled", 1)) {
-    var_3 = common_scripts\utility::_id_46B5("dogfight_flak_zone", "targetname");
+    var_3 = common_scripts\utility::getstruct("dogfight_flak_zone", "targetname");
     var_1 = var_3.origin[2];
     var_2 = var_3.origin[2] + var_3._id_00BD;
   }
@@ -61,7 +61,7 @@ fighter_scorestreak_watcher(var_0) {
   if(isPlayer(var_0) && !isbot(var_0)) {
     var_0 notifyonplayercommand("activate_fighter_scorestreak", "+actionslot 4");
 
-    if(!level._id_258F) {
+    if(!level.console) {
       var_0 notifyonplayercommand("activate_fighter_scorestreak_keyboard", "+actionslot 5");
     }
   }
@@ -70,13 +70,13 @@ fighter_scorestreak_watcher(var_0) {
     var_1 = var_0 common_scripts\utility::waittill_any_return("activate_fighter_scorestreak", "activate_fighter_scorestreak_keyboard");
 
     if(isDefined(var_1)) {
-      if(var_1 == "activate_fighter_scorestreak" && !var_0 common_scripts\utility::_id_55E0()) {
+      if(var_1 == "activate_fighter_scorestreak" && !var_0 common_scripts\utility::is_player_gamepad_enabled()) {
         continue;
-      } else if(var_1 == "activate_fighter_scorestreak_keyboard" && var_0 common_scripts\utility::_id_55E0()) {
+      } else if(var_1 == "activate_fighter_scorestreak_keyboard" && var_0 common_scripts\utility::is_player_gamepad_enabled()) {
         continue;
       }
-      if(isDefined(var_0._id_5A69)) {
-        var_0 _id_051E::_id_5A7A();
+      if(isDefined(var_0.killstreakindexweapon)) {
+        var_0 _id_051E::killstreakusepressed();
       }
     }
 
@@ -179,12 +179,12 @@ dogfight_atmosphereflak(var_0, var_1) {
 }
 
 dogfight_flakexplosioneffects(var_0, var_1) {
-  var_2 = common_scripts\utility::_id_8FFC();
+  var_2 = common_scripts\utility::spawn_tag_origin();
   var_2.origin = var_0;
   var_2 show();
   waitframe();
-  _playFXOnTag(common_scripts\utility::_id_44F5("flak_gun_explosion"), var_2, "tag_origin");
-  _id_0378::_id_8D74("ks_flak_cannon_explo", var_0);
+  _playFXOnTag(common_scripts\utility::getfx("flak_gun_explosion"), var_2, "tag_origin");
+  _id_0378::snd_message("ks_flak_cannon_explo", var_0);
   wait 4.5;
   var_2 delete();
 
@@ -275,7 +275,7 @@ getflaktargets() {
 
   foreach(var_2 in level.pp_array) {
     if(level.teambased) {
-      if(isDefined(var_2.team) && var_2.team == common_scripts\utility::_id_416F(self.team)) {
+      if(isDefined(var_2.team) && var_2.team == common_scripts\utility::get_enemy_team(self.team)) {
         var_0 = common_scripts\utility::_id_0F6F(var_0, var_2);
       }
 

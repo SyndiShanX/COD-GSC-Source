@@ -16,7 +16,7 @@ _id_1F80(var_0) {
 }
 
 _id_A218(var_0) {
-  maps\mp\gametypes\zombies::_id_53DD(self, 1);
+  maps\mp\gametypes\zombies::instakillpickup(self, 1);
 }
 
 _id_4525(var_0) {

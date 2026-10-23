@@ -6,15 +6,15 @@
 main() {
   _id_0367::_id_8E3E("bp_ship");
   _id_7BBA();
-  _id_5C22();
-  level._id_11CB.intermission_music_aliases = ["mus_intermission_dlc2"];
-  level._id_11CB.wave_cues = ["dlcx_mus_intro_assault", "dlcx_mus_wave_04", "dlcx_mus_wave_02", "dlcx_mus_wave_03", "dlcx_mus_movin", "dlcx_mus_screetchy1", "dlcx_mus_wave_07", "dlcx_mus_wave_01", "dlcx_mus_wave_05"];
-  _id_0366::snd_set_mus_combat_cues_override(level._id_11CB.wave_cues);
+  launch_threads();
+  level.aud.intermission_music_aliases = ["mus_intermission_dlc2"];
+  level.aud.wave_cues = ["dlcx_mus_intro_assault", "dlcx_mus_wave_04", "dlcx_mus_wave_02", "dlcx_mus_wave_03", "dlcx_mus_movin", "dlcx_mus_screetchy1", "dlcx_mus_wave_07", "dlcx_mus_wave_01", "dlcx_mus_wave_05"];
+  _id_0366::snd_set_mus_combat_cues_override(level.aud.wave_cues);
   _id_0366::snd_zmb_set_start_intermission_music_override_callback(::start_intermission_music_override_callback);
   _id_0366::snd_zmb_set_map_wave_music_master_volume_scalar(0.8);
 }
 
-_id_5C22() {
+launch_threads() {
   thread _id_35E1();
   thread cable_oneshots();
   thread boat_oneshots();
@@ -23,31 +23,31 @@ _id_5C22() {
 }
 
 _id_7BBA() {
-  _id_0378::_id_8DC7("player_connect_map", ::_id_7248);
-  _id_0378::_id_8DC7("player_spawned", ::_id_7330);
-  _id_0378::_id_8DC7("wave_begin", ::_id_A979);
-  _id_0378::_id_8DC7("wave_end", ::_id_A97A);
-  _id_0378::_id_8DC7("aud_repair_leaking_water", ::repair_leaking_water);
-  _id_0378::_id_8DC7("zombie_soul_suck", ::_id_ABF8);
-  _id_0378::_id_8DC7("zombie_soul_suck_threshold", ::_id_ABF9);
-  _id_0378::_id_8DC7("start_water_trap", ::start_water_trap);
-  _id_0378::_id_8DC7("water_trap_damage_player", ::water_trap_damage_player);
-  _id_0378::_id_8DC7("zmb_dnk_ship_tilt", ::zmb_dnk_ship_tilt);
-  _id_0378::_id_8DC7("start_vehicle_slide", ::start_vehicle_slide);
-  _id_0378::_id_8DC7("straub_laugh_hallucination", ::straub_laugh_hallucination);
-  _id_0378::_id_8DC7("zmb_dnk_uber_leak_start", ::zmb_dnk_uber_leak_start);
-  _id_0378::_id_8DC7("zmb_fish_jump", ::zmb_fish_jump);
-  _id_0378::_id_8DC7("ee_follow_fish_earthquake", ::ee_follow_fish_earthquake);
-  _id_0378::_id_8DC7("ctf_void_enter", ::ctf_void_enter);
-  _id_0378::_id_8DC7("ctf_void_exit", ::ctf_void_exit);
-  _id_0378::_id_8DC7("ctf_bucket_move", ::ctf_bucket_move);
-  _id_0378::_id_8DC7("ctf_fish_360", ::ctf_fish_360);
-  _id_0378::_id_8DC7("escape_boat_rise", ::escape_boat_rise);
-  _id_0378::_id_8DC7("flare_fx", ::_id_3D34);
+  _id_0378::snd_register_message("player_connect_map", ::_id_7248);
+  _id_0378::snd_register_message("player_spawned", ::_id_7330);
+  _id_0378::snd_register_message("wave_begin", ::_id_A979);
+  _id_0378::snd_register_message("wave_end", ::_id_A97A);
+  _id_0378::snd_register_message("aud_repair_leaking_water", ::repair_leaking_water);
+  _id_0378::snd_register_message("zombie_soul_suck", ::_id_ABF8);
+  _id_0378::snd_register_message("zombie_soul_suck_threshold", ::_id_ABF9);
+  _id_0378::snd_register_message("start_water_trap", ::start_water_trap);
+  _id_0378::snd_register_message("water_trap_damage_player", ::water_trap_damage_player);
+  _id_0378::snd_register_message("zmb_dnk_ship_tilt", ::zmb_dnk_ship_tilt);
+  _id_0378::snd_register_message("start_vehicle_slide", ::start_vehicle_slide);
+  _id_0378::snd_register_message("straub_laugh_hallucination", ::straub_laugh_hallucination);
+  _id_0378::snd_register_message("zmb_dnk_uber_leak_start", ::zmb_dnk_uber_leak_start);
+  _id_0378::snd_register_message("zmb_fish_jump", ::zmb_fish_jump);
+  _id_0378::snd_register_message("ee_follow_fish_earthquake", ::ee_follow_fish_earthquake);
+  _id_0378::snd_register_message("ctf_void_enter", ::ctf_void_enter);
+  _id_0378::snd_register_message("ctf_void_exit", ::ctf_void_exit);
+  _id_0378::snd_register_message("ctf_bucket_move", ::ctf_bucket_move);
+  _id_0378::snd_register_message("ctf_fish_360", ::ctf_fish_360);
+  _id_0378::snd_register_message("escape_boat_rise", ::escape_boat_rise);
+  _id_0378::snd_register_message("flare_fx", ::_id_3D34);
 }
 
 start_intermission_music_override_callback() {
-  var_0 = level._id_11CB.intermission_music_aliases[randomint(level._id_11CB.intermission_music_aliases.size)];
+  var_0 = level.aud.intermission_music_aliases[randomint(level.aud.intermission_music_aliases.size)];
   var_1 = 3.0;
   var_2 = 5.0;
   _id_0366::_id_8E31(var_0, var_1, var_2);
@@ -56,8 +56,8 @@ start_intermission_music_override_callback() {
 _id_7248() {
   soundscripts\_snd_common_zmb_dlc3::dlc3_altered_state_init();
 
-  if(!isDefined(self._id_11CB)) {
-    self._id_11CB = spawnStruct();
+  if(!isDefined(self.aud)) {
+    self.aud = spawnStruct();
   }
 }
 
@@ -100,34 +100,34 @@ water_trap_damage_player() {
 _id_8E8F() {}
 
 _id_35E1() {
-  level._id_11CB._id_35E1 = [];
+  level.aud._id_35E1 = [];
   wait 0.5;
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_pipe_water_hum_int_lp", undefined, (70, 1557, -248));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_canvas_flap_small_lp", undefined, (930, -497, -58));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_canvas_flap_small_lp", undefined, (950, -1122, -161));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_canvas_flap_small_lp", undefined, (60, -1325, 75));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_canvas_flap_small_lp", undefined, (408, -619, 177));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_pipe_water_hum_int_lp", undefined, (681, 1635, -208));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_pipe_water_small_lp", undefined, (711, 1451, -184));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_pipe_water_hum_int_lp", undefined, (397, 692, -123));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_vent_rattle_metal_lp", undefined, (604, -207, -135));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_mp_projector_lp", undefined, (598, -354, -204));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("mp_bat_waves_lp", undefined, (-167, -1200, -190));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("mp_bat_waves_lp", undefined, (960, -900, -190));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (70, 542, -1));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (348, 834, -120));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (348, 375, -136));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (348, -3, -136));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (700, 985, -147));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (850, 1736, -184));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (610, -1518, -184));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (743, 1289, -184));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (538, 1109, -184));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (726, -601, -123));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (70, 542, -2));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_lamp_hum_lp", undefined, (172, 1109, -135));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_lamp_hum_lp", undefined, (207, 1369, -198));
-  level._id_11CB._id_35E1[level._id_11CB._id_35E1.size] = _id_0380::_id_6842("emt_steam_leak_int_lp", undefined, (625, 1729, -200));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_pipe_water_hum_int_lp", undefined, (70, 1557, -248));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_canvas_flap_small_lp", undefined, (930, -497, -58));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_canvas_flap_small_lp", undefined, (950, -1122, -161));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_canvas_flap_small_lp", undefined, (60, -1325, 75));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_canvas_flap_small_lp", undefined, (408, -619, 177));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_pipe_water_hum_int_lp", undefined, (681, 1635, -208));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_pipe_water_small_lp", undefined, (711, 1451, -184));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_pipe_water_hum_int_lp", undefined, (397, 692, -123));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_vent_rattle_metal_lp", undefined, (604, -207, -135));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_mp_projector_lp", undefined, (598, -354, -204));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("mp_bat_waves_lp", undefined, (-167, -1200, -190));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("mp_bat_waves_lp", undefined, (960, -900, -190));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (70, 542, -1));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (348, 834, -120));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (348, 375, -136));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (348, -3, -136));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (700, 985, -147));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (850, 1736, -184));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (610, -1518, -184));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (743, 1289, -184));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (538, 1109, -184));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (726, -601, -123));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_electric_hum_small_lp", undefined, (70, 542, -2));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_lamp_hum_lp", undefined, (172, 1109, -135));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_lamp_hum_lp", undefined, (207, 1369, -198));
+  level.aud._id_35E1[level.aud._id_35E1.size] = _id_0380::_id_6842("emt_steam_leak_int_lp", undefined, (625, 1729, -200));
 }
 
 cable_oneshots() {
@@ -317,11 +317,11 @@ straub_laugh_hallucination(var_0) {
 
 zmb_dnk_uber_leak_start(var_0) {
   var_1 = _id_0380::_id_6842("zmb_dnk_uber_leak_start", undefined, var_0);
-  level._id_11CB.uber_leak_loop = _id_0380::_id_6842("zmb_dnk_uber_leak_lp", undefined, var_0);
+  level.aud.uber_leak_loop = _id_0380::_id_6842("zmb_dnk_uber_leak_lp", undefined, var_0);
 }
 
 zmb_dnk_uber_leak_stop() {
-  _id_0380::_id_6850(level._id_11CB.uber_leak_loop);
+  _id_0380::_id_6850(level.aud.uber_leak_loop);
 }
 
 zmb_fish_jump(var_0) {
@@ -345,11 +345,11 @@ ctf_void_enter() {
     var_1 clientaddsoundsubmix("enter_the_void", 3.0);
     var_1 notify("kill_dlc3_wave_mus_switcher");
     var_1 thread play_void_music();
-    var_1._id_11CB.in_the_void = 1;
+    var_1.aud.in_the_void = 1;
   }
 
   var_3 = _id_0380::_id_2888("ctf_void_enter");
-  level._id_11CB.void_ambi = _id_0380::_id_6840("amb_zmb_dnk_the_void_ext", undefined, 3.0);
+  level.aud.void_ambi = _id_0380::_id_6840("amb_zmb_dnk_the_void_ext", undefined, 3.0);
 }
 
 ctf_void_exit() {
@@ -357,12 +357,12 @@ ctf_void_exit() {
     var_1 clientclearsoundsubmix("enter_the_void", 3.0);
     var_1 _id_0366::_id_8E09();
     var_1 notify("kill_void_music_thread");
-    var_1._id_11CB.in_the_void = undefined;
+    var_1.aud.in_the_void = undefined;
   }
 
   var_3 = _id_0380::_id_2888("ctf_void_exit");
-  _id_0380::_id_6850(level._id_11CB.void_ambi, 3.0);
-  _id_0380::_id_6850(level._id_11CB.void_geist_gun_lp, 1.0);
+  _id_0380::_id_6850(level.aud.void_ambi, 3.0);
+  _id_0380::_id_6850(level.aud.void_geist_gun_lp, 1.0);
 }
 
 play_void_music() {
@@ -411,7 +411,7 @@ _id_3D34() {
   var_0 = (1078, -560, -2196);
   _id_0380::_id_2889("void_flare_vfx", undefined, var_0);
 
-  if(!isDefined(level._id_11CB.void_geist_gun_lp)) {
-    level._id_11CB.void_geist_gun_lp = _id_0380::_id_6842("void_geist_gun_lp", undefined, (1016, -392, -2108));
+  if(!isDefined(level.aud.void_geist_gun_lp)) {
+    level.aud.void_geist_gun_lp = _id_0380::_id_6842("void_geist_gun_lp", undefined, (1016, -392, -2108));
   }
 }

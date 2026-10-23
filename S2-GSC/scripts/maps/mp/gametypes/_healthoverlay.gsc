@@ -4,13 +4,13 @@
 ********************************************************/
 
 init() {
-  level._id_4C1D = 0.55;
+  level.healthoverlaycutoff = 0.55;
   var_0 = 4;
-  var_0 = _id_0511::_id_46F7("player", "healthregentime");
-  level._id_73FA = var_0 * 1000;
+  var_0 = _id_0511::gettweakablevalue("player", "healthregentime");
+  level.playerhealth_regularregendelay = var_0 * 1000;
   level.playerhealth_grenadierregendelay = int(max(var_0 - 1, 0) * 1000);
   level._id_73FB = 1.5;
-  level._id_4C1E = level._id_73FA <= 0;
+  level._id_4C1E = level.playerhealth_regularregendelay <= 0;
   level thread onplayerconnect();
 }
 
@@ -26,13 +26,13 @@ onplayerspawned() {
 
   for(;;) {
     self waittill("spawned_player");
-    thread _id_73FC();
+    thread playerhealthregen();
     thread playerdeathmixmonitor();
     self.breathmute_submix_active = 0;
   }
 }
 
-_id_73FC() {
+playerhealthregen() {
   self endon("death");
   self endon("disconnect");
   self endon("joined_team");
@@ -47,7 +47,7 @@ _id_73FC() {
     return;
   }
   var_0 = 0;
-  thread _id_7434();
+  thread playerpainbreathingsound();
 
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5);
@@ -58,8 +58,8 @@ _id_73FC() {
     var_0 = gettime();
     var_6 = self.health / self.maxhealth;
 
-    if(var_6 <= level._id_4C1D) {
-      self._id_10F4 = 1;
+    if(var_6 <= level.healthoverlaycutoff) {
+      self.atbrinkofdeath = 1;
     }
 
     if(_func_367()) {
@@ -83,21 +83,21 @@ _id_1BC0(var_0, var_1, var_2) {
   self endon("joined_spectators");
   level endon("game_ended");
 
-  if(maps\mp\_utility::isusingremote() || maps\mp\_utility::_id_572D()) {
+  if(maps\mp\_utility::isusingremote() || maps\mp\_utility::isinremotetransition()) {
     return;
   }
   if(!isPlayer(self)) {
     return;
   }
   if(isDefined(var_2) && var_2 != "MOD_FALLING" || isDefined(var_1) && var_1 > 1) {
-    _id_720E(var_0);
+    playdamagesound(var_0);
   }
 
-  if(isDefined(level._id_585D) && level._id_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
   var_3 = maps\mp\_utility::_hasperk("specialty_fasterhealthregen");
-  var_4 = level._id_73FA;
+  var_4 = level.playerhealth_regularregendelay;
 
   if(var_3) {
     var_4 = level.playerhealth_grenadierregendelay;
@@ -107,7 +107,7 @@ _id_1BC0(var_0, var_1, var_2) {
     var_4 = self._id_98E1 * 1000;
   }
 
-  self._id_1BC1 = var_0 + 0.6 * var_4;
+  self.breathingstoptime = var_0 + 0.6 * var_4;
 
   if(var_3) {
     wait(var_4 / 1000);
@@ -115,23 +115,23 @@ _id_1BC0(var_0, var_1, var_2) {
     wait(1.4 * (var_4 / 1000));
   }
 
-  if(!level.gameended && isDefined(self._id_10F4) && self._id_10F4 == 1) {
+  if(!level.gameended && isDefined(self.atbrinkofdeath) && self.atbrinkofdeath == 1) {
     self clientclearsoundsubmix("mute_breath");
     self.breathmute_submix_active = 0;
-    self._id_10F4 = 0;
+    self.atbrinkofdeath = 0;
   }
 }
 
-_id_720E(var_0) {
-  if(isDefined(level._id_297F)) {
-    self thread[[level._id_297F]](var_0);
+playdamagesound(var_0) {
+  if(isDefined(level.customplaydamagesound)) {
+    self thread[[level.customplaydamagesound]](var_0);
     return;
   }
 
-  if(isDefined(self._id_29AB) && self._id_29AB + 3000 > var_0) {
+  if(isDefined(self.damage_sound_time) && self.damage_sound_time + 3000 > var_0) {
     return;
   }
-  self._id_29AB = var_0;
+  self.damage_sound_time = var_0;
   var_1 = _randomintrange(1, 8);
   self clientaddsoundsubmix("mute_breath");
   self.breathmute_submix_active = 1;
@@ -150,7 +150,7 @@ _id_720E(var_0) {
 
   self waittill("pain_sound_done");
 
-  if(!common_scripts\utility::_id_562E(self._id_10F4)) {
+  if(!common_scripts\utility::_id_562E(self.atbrinkofdeath)) {
     self clientclearsoundsubmix("mute_breath");
     self.breathmute_submix_active = 0;
   }
@@ -172,9 +172,9 @@ _id_4C20() {
   if(maps\mp\_utility::_hasexperimentalbtperk("specialty_fightorflight") && (!isDefined(self._id_50A0) || !self._id_50A0)) {
     return;
   }
-  var_0 = isDefined(self._id_10F4) && self._id_10F4;
+  var_0 = isDefined(self.atbrinkofdeath) && self.atbrinkofdeath;
   var_1 = maps\mp\_utility::_hasperk("specialty_fasterhealthregen");
-  var_2 = level._id_73FA;
+  var_2 = level.playerhealth_regularregendelay;
 
   if(var_1) {
     var_2 = level.playerhealth_grenadierregendelay;
@@ -225,7 +225,7 @@ _id_4C20() {
     }
   }
 
-  maps\mp\gametypes\_damage::_id_7D51();
+  maps\mp\gametypes\_damage::resetattackerlist();
 
   if(var_0) {
     self notify("recovery_battlecry");
@@ -234,16 +234,16 @@ _id_4C20() {
     maps\mp\gametypes\_missions::_id_4C1F();
 }
 
-_id_A651() {
+wait_for_not_using_remote() {
   self notify("waiting_to_stop_remote");
   self endon("waiting_to_stop_remote");
   self endon("death");
   level endon("game_ended");
   self waittill("stopped_using_remote");
-  maps\mp\_utility::_id_7E50(0);
+  maps\mp\_utility::revertvisionsetforplayer(0);
 }
 
-_id_7434() {
+playerpainbreathingsound() {
   level endon("game_ended");
   self endon("death");
   self endon("disconnect");
@@ -256,7 +256,7 @@ _id_7434() {
   if(!isPlayer(self)) {
     return;
   }
-  if(isDefined(level._id_585D) && level._id_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
   wait 3;
@@ -267,13 +267,13 @@ _id_7434() {
     if(self.health <= 0) {
       return;
     }
-    if(self.health >= self.maxhealth * level._id_4C1D) {
+    if(self.health >= self.maxhealth * level.healthoverlaycutoff) {
       continue;
     }
-    if(level._id_4C1E && (!isDefined(self._id_1BC1) || gettime() > self._id_1BC1)) {
+    if(level._id_4C1E && (!isDefined(self.breathingstoptime) || gettime() > self.breathingstoptime)) {
       continue;
     }
-    if(maps\mp\_utility::isusingremote() || maps\mp\_utility::_id_572D()) {
+    if(maps\mp\_utility::isusingremote() || maps\mp\_utility::isinremotetransition()) {
       continue;
     }
     if(self._id_165B) {
@@ -323,7 +323,7 @@ _id_7467() {
   if(!isPlayer(self)) {
     return;
   }
-  if(isDefined(level._id_585D) && level._id_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
   for(;;) {

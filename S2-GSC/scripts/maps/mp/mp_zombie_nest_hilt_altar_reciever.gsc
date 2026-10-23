@@ -30,14 +30,14 @@ _id_84DD(var_0) {
   }
 }
 
-_id_84D6() {
-  self._id_5CCE = _id_0547::_id_8FBA(self, "raven_upgrade_green_light");
-  _triggerfx(self._id_5CCE);
+getgravity() {
+  self.light = _id_0547::_id_8FBA(self, "raven_upgrade_green_light");
+  _triggerfx(self.light);
 }
 
 _id_84D5() {
-  if(isDefined(self._id_5CCE)) {
-    self._id_5CCE delete();
+  if(isDefined(self.light)) {
+    self.light delete();
   }
 }
 

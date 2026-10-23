@@ -15,7 +15,7 @@ init() {
   level thread _id_0529::_id_52F4();
   level.zombiecratecapturethink = ::zm_care_crate_capture_think;
   level.zombiecarepackageusefunc = ::zm_care_crate_capture;
-  var_1 = common_scripts\utility::_id_46B7("carepackage_dz", "targetname");
+  var_1 = common_scripts\utility::getstructarray("carepackage_dz", "targetname");
   var_2 = var_1;
 
   foreach(var_4 in var_1) {
@@ -44,7 +44,7 @@ zm_care_flare_marker(var_0) {
 
 zm_care_spawn_toggle_fx(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
-    var_3 = common_scripts\utility::_id_46B7("carepackage_dz", "targetname");
+    var_3 = common_scripts\utility::getstructarray("carepackage_dz", "targetname");
     var_4 = [];
 
     foreach(var_6 in var_3) {
@@ -54,7 +54,7 @@ zm_care_spawn_toggle_fx(var_0, var_1, var_2) {
     }
 
     if(isDefined(var_2)) {
-      var_1 = common_scripts\utility::_id_4461(var_2.origin, var_4);
+      var_1 = common_scripts\utility::getclosest(var_2.origin, var_4);
     } else {
       var_1 = common_scripts\utility::random(var_3);
     }
@@ -78,7 +78,7 @@ zm_care_spawn_toggle_fx(var_0, var_1, var_2) {
     }
 
     if(common_scripts\utility::_id_562E(var_0)) {
-      var_1._id_3D34 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_red_flare_idle"), var_1.flare_model, "TAG_FX");
+      var_1._id_3D34 = _spawnlinkedfx(common_scripts\utility::getfx("zmb_red_flare_idle"), var_1.flare_model, "TAG_FX");
       _triggerfx(var_1._id_3D34);
     }
   }
@@ -107,7 +107,7 @@ zm_care_crush_listen() {
           var_1._id_6E4C thread watch_for_player_damage(var_1);
         }
 
-        var_1._id_A045 = ::unresolved_collision_nearest_node_carepackage;
+        var_1.unresolved_collision_func = ::unresolved_collision_nearest_node_carepackage;
       }
     }
 
@@ -163,7 +163,7 @@ zm_care_crate_capture(var_0) {
   var_1 = self;
   var_2 = var_0;
   level notify("zombies_crate_captured", var_1, var_2, var_0.origin);
-  var_0 _id_0529::_id_2D30();
+  var_0 _id_0529::deletecrate();
 }
 
 zm_care_crate_capture_think(var_0) {
@@ -174,11 +174,11 @@ zm_care_crate_capture_think(var_0) {
   if(common_scripts\utility::_id_562E(var_0)) {
     return;
   }
-  var_1 = common_scripts\utility::_id_46B7("carepackage_dz", "targetname");
-  var_2 = common_scripts\utility::_id_4461(self.origin, var_1, 250);
+  var_1 = common_scripts\utility::getstructarray("carepackage_dz", "targetname");
+  var_2 = common_scripts\utility::getclosest(self.origin, var_1, 250);
   self setHintString(&"MP_CARE_PACKAGE_PICKUP");
 
-  if(!self _meth_8562()) {
+  if(!self set_promotion_order()) {
     self makeusable();
   } else if(isDefined(level.players)) {
     foreach(var_4 in level.players) {
@@ -205,11 +205,11 @@ zm_care_crate_attempt_capture(var_0) {
   if(!var_0 isonground() && !_id_0529::_id_A7A0(var_0)) {
     return;
   }
-  if(_id_0547::_id_577E(var_0)) {
+  if(_id_0547::isplayerinlaststand(var_0)) {
     return;
   }
   var_1 = 1000;
-  var_0._id_56A1 = 1;
+  var_0.iscapturingcrate = 1;
   var_2 = _id_0547::zmcreatesustainedholdent();
   var_3 = var_2 _id_0547::zmsustainedholdthink(var_0, var_1, ["captured"]);
 
@@ -218,7 +218,7 @@ zm_care_crate_attempt_capture(var_0) {
   }
 
   if(isDefined(var_0)) {
-    var_0._id_56A1 = 0;
+    var_0.iscapturingcrate = 0;
   }
 
   if(!var_3) {

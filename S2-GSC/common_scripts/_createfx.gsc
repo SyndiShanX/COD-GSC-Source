@@ -2816,8 +2816,8 @@ write_log(var_0, var_1, var_2, var_3, var_4) {
     }
 
     _id_55E9(var_0) {
-      var_1 = level._id_5FEB - (32768, 32768, 32768);
-      var_2 = level._id_5FEB + (32768, 32768, 32768);
+      var_1 = level.mapcenter - (32768, 32768, 32768);
+      var_2 = level.mapcenter + (32768, 32768, 32768);
       var_3 = var_0[0] > var_1[0] && var_0[0] < var_2[0];
       var_4 = var_0[1] > var_1[1] && var_0[1] < var_2[1];
       var_5 = var_0[2] > var_1[2] && var_0[2] < var_2[2];

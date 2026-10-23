@@ -36,19 +36,19 @@ init() {
   }
 
   level.maxlives = 490;
-  level._id_6083 = 255;
-  level._id_6087 = 64;
-  level._id_608C = 24;
+  level.maxevents = 255;
+  level.maxkillstreaks = 64;
+  level.maxlogclients = 24;
   level._id_609D = 24;
   level._id_60A7 = 12;
-  level thread _id_3F9E();
+  level thread gameendlistener();
 
   if(getDvar("4017") != "1") {
-    level thread _id_7B2D();
+    level thread reconlogplayerinfo();
   }
 }
 
-_id_6036() {
+matchstarted() {
   _sysprint("MatchStarted: Completed");
 
   if(getDvar("4017") == "1") {
@@ -66,23 +66,23 @@ _id_6036() {
   setmatchdata("match_common", "localTimeStringAtMatchStart", var_1);
   var_2 = getmatchdata("match_common", "player_count");
   setmatchdata("match_common", "player_count_start", var_2);
-  _func_39E();
+  xmodelalias/alias_civ_aac_heads_f();
   setmatchdata("match_common", "is_esports_rules", maps\mp\_utility::_id_56B1());
 
   if(maps\mp\_utility::privatematch()) {
     setmatchdata("match_common", "is_private_match", 1);
   }
 
-  if(_func_3AF()) {
+  if(xmodelalias/alias_ger_heads_scarf_for_muddy_cheap()) {
     setmatchdata("match_common", "is_ranked_mode", 1);
   }
 
-  if(_id_4574() == 0) {
+  if(getmatchstarttimeutc() == 0) {
     setmatchdata("match_common", "utc_start_time", _getsystemtime());
     startmatchtimer();
 
-    if(!_func_367() && _func_3BC()) {
-      _func_3BD();
+    if(!_func_367() && xmodelalias/alias_ger_heads_urb_muddy_cheap()) {
+      xmodelalias/alias_ger_heads_urb_muddy_wet();
     }
   }
 
@@ -120,7 +120,7 @@ _id_0853() {
   }
 }
 
-_id_4574() {
+getmatchstarttimeutc() {
   return getmatchdata("match_common", "utc_start_time");
 }
 
@@ -139,7 +139,7 @@ getmatchtimepassed() {
 }
 
 _id_5E99(var_0) {
-  if(!_id_1F55(self) || !_id_1F58()) {
+  if(!canlogclient(self) || !_id_1F58()) {
     return;
   }
   var_1 = getmatchdata("killstreak_available_count");
@@ -149,15 +149,15 @@ _id_5E99(var_0) {
   setmatchdata("killstreaks_available", var_1, "event_time_ms", var_2);
   setmatchdata("killstreaks_available", var_1, "life_index", self._id_5CC6);
 
-  if(_func_3BC()) {
-    self _meth_8681("dtel_killstreak", ["killstreak", ["life_index", self._id_5CC6, "player_index", self.clientid, "event_type", var_0, "event_time_ms", var_2, "event_pos", [0, 0, 0], "deployed", 0]]);
+  if(xmodelalias/alias_ger_heads_urb_muddy_cheap()) {
+    self setfireloopmod("dtel_killstreak", ["killstreak", ["life_index", self._id_5CC6, "player_index", self.clientid, "event_type", var_0, "event_time_ms", var_2, "event_pos", [0, 0, 0], "deployed", 0]]);
   }
 }
 
 _id_5E9A(var_0, var_1) {
   maps\mp\gametypes\_persistence::incrementscorestreakstat(var_0, "uses", 1);
 
-  if(!_id_1F55(self) || !_id_1F57()) {
+  if(!canlogclient(self) || !canlogkillstreak()) {
     return;
   }
   if(level._id_53C7) {
@@ -191,33 +191,33 @@ _id_5E9A(var_0, var_1) {
   setmatchdata("killstreaks", var_2, "event_pos", 1, int(var_1[1]));
   setmatchdata("killstreaks", var_2, "event_pos", 2, int(var_1[2]));
   setmatchdata("killstreaks", var_2, "life_index", self._id_5CC6);
-  self._id_293B = var_2;
+  self.currentkillstreakindex = var_2;
 
-  if(_func_3BC()) {
-    self _meth_8681("dtel_killstreak", ["killstreak", ["life_index", self._id_5CC6, "player_index", self.clientid, "event_type", var_0, "event_time_ms", var_3, "event_pos", [int(var_1[0]), int(var_1[1]), int(var_1[2])], "deployed", 1]]);
+  if(xmodelalias/alias_ger_heads_urb_muddy_cheap()) {
+    self setfireloopmod("dtel_killstreak", ["killstreak", ["life_index", self._id_5CC6, "player_index", self.clientid, "event_type", var_0, "event_time_ms", var_3, "event_pos", [int(var_1[0]), int(var_1[1]), int(var_1[2])], "deployed", 1]]);
   }
 
   _reconspatialevent(var_1, "script_mp_killstreak: eventType %s, player_name %s, player %d, gameTime %d", var_0, self.name, self.clientid, gettime());
 }
 
 logkillstreakassist(var_0) {
-  if(!isDefined(var_0._id_293B)) {
+  if(!isDefined(var_0.currentkillstreakindex)) {
     return;
   }
-  if(0 <= var_0._id_293B && var_0._id_293B < level._id_6087) {
-    var_1 = getmatchdata("killstreaks", var_0._id_293B, "assists_total");
-    setmatchdata("killstreaks", var_0._id_293B, "assists_total", var_1 + 1);
+  if(0 <= var_0.currentkillstreakindex && var_0.currentkillstreakindex < level.maxkillstreaks) {
+    var_1 = getmatchdata("killstreaks", var_0.currentkillstreakindex, "assists_total");
+    setmatchdata("killstreaks", var_0.currentkillstreakindex, "assists_total", var_1 + 1);
   }
 }
 
-_id_5E93(var_0, var_1, var_2) {
-  if(!_id_1F56()) {
+loggameevent(var_0, var_1, var_2) {
+  if(!canlogevent()) {
     return;
   }
   var_3 = -1;
 
-  if(maps\mp\_utility::_id_56FF(self)) {
-    if(!_id_1F55(self)) {
+  if(maps\mp\_utility::isgameparticipant(self)) {
+    if(!canlogclient(self)) {
       return;
     } else {
       var_3 = self._id_5CC6;
@@ -248,8 +248,8 @@ _id_5E93(var_0, var_1, var_2) {
   setmatchdata("events", var_4, "life_index", var_3);
   setmatchdata("events", var_4, "extra_data", var_6);
 
-  if(_func_3BC()) {
-    self _meth_8681("dtel_gameevent", ["gameevent", ["life_index", var_3, "event_type", var_0, "event_time_ms", var_5, "event_pos", [int(var_1[0]), int(var_1[1]), int(var_1[2])], "extra_data", var_6]]);
+  if(xmodelalias/alias_ger_heads_urb_muddy_cheap()) {
+    self setfireloopmod("dtel_gameevent", ["gameevent", ["life_index", var_3, "event_type", var_0, "event_time_ms", var_5, "event_pos", [int(var_1[0]), int(var_1[1]), int(var_1[2])], "extra_data", var_6]]);
   }
 
   if(var_3 != -1 && isDefined(self.name) && isDefined(self.clientid)) {
@@ -257,39 +257,39 @@ _id_5E93(var_0, var_1, var_2) {
   }
 }
 
-_id_5E96(var_0, var_1) {
-  if(!_id_1F59(var_0)) {
+logkillevent(var_0, var_1) {
+  if(!canloglife(var_0)) {
     return;
   }
   setmatchdata("lives", var_0, "death_modifiers", var_1, 1);
 
-  if(_func_3BC()) {
-    self _meth_8681("dtel_death_modifier", ["death", ["life_index", var_0, "player_index", self.clientid, "modifier", var_1]]);
+  if(xmodelalias/alias_ger_heads_urb_muddy_cheap()) {
+    self setfireloopmod("dtel_death_modifier", ["death", ["life_index", var_0, "player_index", self.clientid, "modifier", var_1]]);
   }
 }
 
-_id_5E9D(var_0, var_1) {
-  if(!_id_1F59(var_0)) {
+logmultikill(var_0, var_1) {
+  if(!canloglife(var_0)) {
     return;
   }
   setmatchdata("lives", var_0, "multikill", var_1);
 
-  if(_func_3BC()) {
-    self _meth_8681("dtel_multikill", ["death", ["life_index", var_0, "player_index", self.clientid, "multikill", var_1]]);
+  if(xmodelalias/alias_ger_heads_urb_muddy_cheap()) {
+    self setfireloopmod("dtel_multikill", ["death", ["life_index", var_0, "player_index", self.clientid, "multikill", var_1]]);
   }
 }
 
-_id_5EA6(var_0) {
-  if(!_id_1F55(self) || !_id_1F59(self._id_5CC6)) {
+logplayerlife(var_0) {
+  if(!canlogclient(self) || !canloglife(self._id_5CC6)) {
     return;
   }
   var_1 = gettime() - level._id_5CC7[self._id_5CC6];
   self.totallifetime = self.totallifetime + var_1;
   setmatchdata("lives", self._id_5CC6, "player_index", self.clientid);
-  setmatchdata("lives", self._id_5CC6, "spawn_pos", 0, int(self._id_9092[0]));
-  setmatchdata("lives", self._id_5CC6, "spawn_pos", 1, int(self._id_9092[1]));
-  setmatchdata("lives", self._id_5CC6, "spawn_pos", 2, int(self._id_9092[2]));
-  setmatchdata("lives", self._id_5CC6, "wasTacticalInsertion", self._id_A87A);
+  setmatchdata("lives", self._id_5CC6, "spawn_pos", 0, int(self.spawnpos[0]));
+  setmatchdata("lives", self._id_5CC6, "spawn_pos", 1, int(self.spawnpos[1]));
+  setmatchdata("lives", self._id_5CC6, "spawn_pos", 2, int(self.spawnpos[2]));
+  setmatchdata("lives", self._id_5CC6, "wasTacticalInsertion", self.wasti);
 
   if(isDefined(self._id_90AC)) {
     setmatchdata("lives", self._id_5CC6, "spawn_time_ms", self._id_90AC);
@@ -299,7 +299,7 @@ _id_5EA6(var_0) {
 
   setmatchdata("lives", self._id_5CC6, "duration_ms", var_1);
 
-  if(!(isDefined(level._id_585D) && level._id_585D)) {
+  if(!(isDefined(level.iszombiegame) && level.iszombiegame)) {
     if(isDefined(self._id_2943)) {
       setmatchdata("lives", self._id_5CC6, "victim_loadout_index", self._id_2943);
     } else {
@@ -307,36 +307,36 @@ _id_5EA6(var_0) {
     }
   }
 
-  var_2 = maps\mp\_utility::_id_2315(self.pers["score"] - self._id_80A7);
+  var_2 = maps\mp\_utility::clamptoshort(self.pers["score"] - self.scoreatlifestart);
   setmatchdata("lives", self._id_5CC6, "score_earned", var_2);
 
   if(isDefined(self.pers["summary"]) && isDefined(self.pers["summary"]["xp"])) {
-    if(isDefined(self._id_AAD0)) {
-      var_3 = maps\mp\_utility::_id_2315(self.pers["summary"]["xp"] - self._id_AAD0);
+    if(isDefined(self.xpatlifestart)) {
+      var_3 = maps\mp\_utility::clamptoshort(self.pers["summary"]["xp"] - self.xpatlifestart);
       setmatchdata("lives", self._id_5CC6, "xp_earned", var_3);
     }
   }
 }
 
-_id_5EAA(var_0, var_1) {
-  if(!_id_1F55(self)) {
+logplayerxp(var_0, var_1) {
+  if(!canlogclient(self)) {
     return;
   }
   setmatchdata("players", self.clientid, var_1, var_0);
 }
 
 _id_5EA1(var_0, var_1) {
-  if(!_id_1F55(self) || isbot(self)) {
+  if(!canlogclient(self) || isbot(self)) {
     return;
   }
   var_2 = getmatchdata("players", self.clientid, "awards", var_0);
   var_2 = var_2 + var_1;
-  var_2 = maps\mp\_utility::_id_2314(var_2);
+  var_2 = maps\mp\_utility::clamptobyte(var_2);
   setmatchdata("players", self.clientid, "awards", var_0, var_2);
 }
 
-_id_5E9F(var_0, var_1) {
-  if(!_id_1F55(self) || !_id_1F55(var_1) || !_id_1F59(var_0)) {
+logplayerandkilleradsandfov(var_0, var_1) {
+  if(!canlogclient(self) || !canlogclient(var_1) || !canloglife(var_0)) {
     return;
   }
   if(var_1 playerads() > 0.5) {
@@ -397,10 +397,10 @@ _id_2E62(var_0, var_1) {
     var_6 = 0;
 
     foreach(var_10 in var_8) {
-      if(!maps\mp\_utility::_id_5679(var_10)) {
+      if(!maps\mp\_utility::isattachment(var_10)) {
         continue;
       }
-      var_11 = maps\mp\_utility::_id_1150(var_10);
+      var_11 = maps\mp\_utility::attachmentmap_tobase(var_10);
 
       if(var_6 < var_2) {
         var_5[var_6] = var_11;
@@ -418,32 +418,32 @@ _id_2E62(var_0, var_1) {
   }
 
   var_13 = spawnStruct();
-  var_13._id_A9E0 = var_7;
+  var_13.weaponname = var_7;
   var_13._id_1154 = var_5;
-  var_13._id_A9F4 = var_3;
+  var_13.weapontype = var_3;
   var_13._id_A9BF = var_4;
-  var_13._id_A9E1 = var_0;
+  var_13.weaponnamefull = var_0;
   return var_13;
 }
 
 _id_5EA0(var_0, var_1) {
-  if(!_id_1F59(var_0)) {
+  if(!canloglife(var_0)) {
     return;
   }
-  if(_id_1F55(self)) {
+  if(canlogclient(self)) {
     var_2 = _getstanceandmotionstateforplayer(self);
     setmatchdata("lives", var_0, "victim_motionstate", var_2);
   }
 
-  if(_id_1F55(var_1)) {
+  if(canlogclient(var_1)) {
     var_2 = _getstanceandmotionstateforplayer(var_1);
     setmatchdata("lives", var_0, "attacker_motionstate", var_2);
   }
 }
 
-_id_5EA5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(level._id_585D) {
-    var_9 = common_scripts\utility::_id_98E7(isDefined(self.name), self.name, "");
+logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  if(level.iszombiegame) {
+    var_9 = common_scripts\utility::ter_op(isDefined(self.name), self.name, "");
     var_10 = "";
     var_11 = "";
 
@@ -457,16 +457,16 @@ _id_5EA5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       }
     }
 
-    var_12 = common_scripts\utility::_id_98E7(isDefined(var_5), var_5, "");
-    _reconspatialevent(self.origin, "script_zombie_playerdeath: iDamage %d, sMeansOfDeath %s, sHitLoc %s, victimCurrentWeapon %s, sKillersWeapon %s, attackerName %s, victimName %s, zombie_type %s, zombies_wave %d", var_3, var_4, var_7, var_8, var_12, var_11, var_9, var_10, level._id_A980);
+    var_12 = common_scripts\utility::ter_op(isDefined(var_5), var_5, "");
+    _reconspatialevent(self.origin, "script_zombie_playerdeath: iDamage %d, sMeansOfDeath %s, sHitLoc %s, victimCurrentWeapon %s, sKillersWeapon %s, attackerName %s, victimName %s, zombie_type %s, zombies_wave %d", var_3, var_4, var_7, var_8, var_12, var_11, var_9, var_10, level.wavecounter);
     return;
   }
 
-  if(!_id_1F55(self) || !_id_1F55(var_2) || !_id_1F59(var_0)) {
+  if(!canlogclient(self) || !canlogclient(var_2) || !canloglife(var_0)) {
     return;
   }
   if(var_1 == var_2) {
-    _id_5E9F(var_0, var_2);
+    logplayerandkilleradsandfov(var_0, var_2);
   }
 
   _id_5EA0(var_0, var_2);
@@ -485,22 +485,22 @@ _id_5EA5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   setmatchdata("lives", var_0, "attacker_weapon_guid", var_14.guid);
   var_15 = _id_2E62(var_5, var_6);
 
-  if(_func_12A("Weapon", var_15._id_A9E0)) {
-    setmatchdata("lives", var_0, "attacker_weapon", var_15._id_A9E0);
+  if(_func_12A("Weapon", var_15.weaponname)) {
+    setmatchdata("lives", var_0, "attacker_weapon", var_15.weaponname);
   }
 
-  if(isDefined(var_2) && var_2 _meth_8680()) {
+  if(isDefined(var_2) && var_2 setfinalstand()) {
     setmatchdata("lives", var_0, "attacker_weapon_altmode", 1);
   }
 
-  if(maps\mp\_utility::iskillstreakweapon(var_15._id_A9E1)) {
-    _id_5E96(var_0, "killstreak");
+  if(maps\mp\_utility::iskillstreakweapon(var_15.weaponnamefull)) {
+    logkillevent(var_0, "killstreak");
 
-    if(isDefined(var_2._id_293B)) {
-      var_16 = getmatchdata("killstreaks", var_2._id_293B, "kills_total");
+    if(isDefined(var_2.currentkillstreakindex)) {
+      var_16 = getmatchdata("killstreaks", var_2.currentkillstreakindex, "kills_total");
       var_16++;
-      setmatchdata("killstreaks", var_2._id_293B, "kills_total", maps\mp\_utility::_id_2315(var_16));
-      setmatchdata("lives", var_0, "attacker_killstreak_index", var_2._id_293B);
+      setmatchdata("killstreaks", var_2.currentkillstreakindex, "kills_total", maps\mp\_utility::clamptoshort(var_16));
+      setmatchdata("lives", var_0, "attacker_killstreak_index", var_2.currentkillstreakindex);
     } else
       setmatchdata("lives", var_0, "attacker_killstreak_index", 255);
   } else
@@ -519,24 +519,24 @@ _id_5EA5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   var_18 = _id_2E62(var_8, undefined);
 
-  if(var_18._id_A9F4 != "exclusive" && !_func_367()) {
-    if(maps\mp\_utility::iskillstreakweapon(var_18._id_A9E0)) {
+  if(var_18.weapontype != "exclusive" && !_func_367()) {
+    if(maps\mp\_utility::iskillstreakweapon(var_18.weaponname)) {
       if(isDefined(self.primaryweapon)) {
         var_19 = maps\mp\_utility::_id_4431(self.primaryweapon);
         setmatchdata("lives", var_0, "victim_weapon", var_19);
       }
     } else
-      setmatchdata("lives", var_0, "victim_weapon", var_18._id_A9E0);
+      setmatchdata("lives", var_0, "victim_weapon", var_18.weaponname);
   }
 
   var_20 = maps\mp\_utility::_id_473D(var_8);
   setmatchdata("lives", var_0, "victim_weapon_guid", var_20.guid);
 
-  if(self _meth_8680()) {
+  if(self setfinalstand()) {
     setmatchdata("lives", var_0, "victim_weapon_altmode", 1);
   }
 
-  if(isDefined(self._id_6FBA) && isDefined(self._id_6FBA[var_18._id_A9E1])) {
+  if(isDefined(self.pickedupweaponfrom) && isDefined(self.pickedupweaponfrom[var_18.weaponnamefull])) {
     setmatchdata("lives", var_0, "victim_weapon_pickedup", 1);
   }
 
@@ -590,12 +590,12 @@ _id_5EA5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       var_22 = 1;
     }
 
-    if(var_4 == "MOD_EXPLOSIVE" || var_4 == "MOD_GRENADE" || var_4 == "MOD_GRENADE_SPLASH" || var_4 == "MOD_PROJECTILE_SPLASH" || var_4 == "MOD_PROJECTILE" || var_4 == "MOD_MELEE" || var_4 == "MOD_MELEE_ALT" || var_4 == "MOD_MELEE_DOG" || maps\mp\_utility::_id_5697(var_4, var_5) || var_4 == "MOD_SUICIDE" || var_4 == "MOD_IMPACT" || var_4 == "MOD_TRIGGER_HURT" || var_4 == "MOD_FALLING" || var_4 == "MOD_CRUSH" || isDefined(level._id_5A7D) && isDefined(level._id_5A7D[var_5])) {
+    if(var_4 == "MOD_EXPLOSIVE" || var_4 == "MOD_GRENADE" || var_4 == "MOD_GRENADE_SPLASH" || var_4 == "MOD_PROJECTILE_SPLASH" || var_4 == "MOD_PROJECTILE" || var_4 == "MOD_MELEE" || var_4 == "MOD_MELEE_ALT" || var_4 == "MOD_MELEE_DOG" || maps\mp\_utility::_id_5697(var_4, var_5) || var_4 == "MOD_SUICIDE" || var_4 == "MOD_IMPACT" || var_4 == "MOD_TRIGGER_HURT" || var_4 == "MOD_FALLING" || var_4 == "MOD_CRUSH" || isDefined(level.killstreakwieldweapons) && isDefined(level.killstreakwieldweapons[var_5])) {
       var_22 = -1;
     }
 
-    if(isDefined(self._id_1189) && isDefined(self._id_1189[var_2.guid]) && isDefined(self._id_1189[var_2.guid]._id_3C67)) {
-      var_23 = self._id_1189[var_2.guid]._id_3C67;
+    if(isDefined(self.attackerdata) && isDefined(self.attackerdata[var_2.guid]) && isDefined(self.attackerdata[var_2.guid]._id_3C67)) {
+      var_23 = self.attackerdata[var_2.guid]._id_3C67;
     }
 
     var_24 = -1;
@@ -607,7 +607,7 @@ _id_5EA5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_31 = 180 - _acos(clamp(var_21, -1, 1));
     setmatchdata("lives", var_0, "dot_of_death", var_21);
 
-    if(isDefined(var_2._id_6FBA) && isDefined(var_2._id_6FBA[var_15._id_A9E1])) {
+    if(isDefined(var_2.pickedupweaponfrom) && isDefined(var_2.pickedupweaponfrom[var_15.weaponnamefull])) {
       setmatchdata("lives", var_0, "attacker_weapon_pickedup", 1);
     }
 
@@ -648,11 +648,11 @@ _id_5EA5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   var_36 = 1;
   var_37 = 0;
-  var_38 = maps\mp\_utility::_id_566A(self);
+  var_38 = maps\mp\_utility::isaiteamparticipant(self);
   var_39 = 0;
 
   if(isPlayer(var_2)) {
-    var_39 = maps\mp\_utility::_id_566A(var_2);
+    var_39 = maps\mp\_utility::isaiteamparticipant(var_2);
   }
 
   var_40 = length(self.origin - var_2.origin);
@@ -676,18 +676,18 @@ _id_5EA5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_48 = 4.0;
   var_49 = 2.0;
 
-  if(self._id_29A2.size > 1) {
+  if(self.damage_info.size > 1) {
     var_36 = 0;
   }
 
-  if(isDefined(self._id_29A2[var_2 getentitynumber()])) {
-    var_37 = self._id_29A2[var_2 getentitynumber()]._id_6875;
+  if(isDefined(self.damage_info[var_2 getentitynumber()])) {
+    var_37 = self.damage_info[var_2 getentitynumber()]._id_6875;
   }
 
   var_50 = self._id_A9F6;
   var_51 = weaponclass(var_50);
 
-  if(issubstr(var_15._id_A9E0, "loot")) {
+  if(issubstr(var_15.weaponname, "loot")) {
     var_41 = 1;
   }
 
@@ -717,16 +717,16 @@ _id_5EA5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_55[var_56] = "none";
   }
 
-  _reconspatialevent(self.origin, "script_mp_playerdeath: player_name %s, life_id %d, angles %v, death_dot %f, is_killstreak %b, mod %s, gameTime %d, spawnToDeathTime %f, attackerAliveTime %f, attacker_life_id %d, perk1 %s, perk2 %s, perk3 %s, perk4 %s, perk5 %s, perk6 %s, headOnHead %d, angle %f, damagedAttacker %d, damageDealtThisLife %f, damageRecievedThisLife %f, spawnToDamageReceivedTime %f, spawnToDamageDealtTime %f, timeSpentSprintingThisLife %f, timeSpentSprintingToFirstEngagement %f, spawnVersion %f, firstDamageHeadOnHead %d", self.name, self._id_5CC6, self.angles, var_21, maps\mp\_utility::iskillstreakweapon(var_15._id_A9E1), var_4, var_45, var_43, var_44, var_13, var_54[0], var_54[1], var_54[2], var_54[3], var_54[4], var_54[5], var_22, var_31, var_24, var_25, var_26, var_27, var_28, var_29, var_30, level._id_90B4, var_23);
-  _reconspatialevent(self.origin, "script_mp_weaponinfo: player_name %s, life_id %d, isbot %b, attacker_name %s, attacker %d, attacker_pos %v, distance %f, ads_fraction %f, is_killstreak %b, weapon_type %s, weapon_class %s, weapon_name %s, isLoot %b, attachment0 %s, attachment1 %s, attachment2 %s, numShots %d, soleAttacker %b, gameTime %d, attachment3 %s, attachment4 %s, attachment5 %s", self.name, self._id_5CC6, var_38, var_35, var_46, var_2.origin, var_40, var_42, maps\mp\_utility::iskillstreakweapon(var_15._id_A9E1), var_15._id_A9F4, var_15._id_A9BF, var_15._id_A9E0, var_41, var_15._id_1154[0], var_15._id_1154[1], var_15._id_1154[2], var_37, var_36, var_45, var_15._id_1154[3], var_15._id_1154[4], var_15._id_1154[5]);
-  _reconspatialevent(self.origin, "script_mp_weaponinfo_ext: player_name %s, life_id %d, gametime %d, version %f, victimWeapon %s, victimWeaponClass %s, killerIsBot %b, vic_attachment0 %s, vic_attachment1 %s, vic_attachment2 %s, vic_attachment3 %s, vic_attachment4 %s, vic_attachment5 %s, mechanics_version %f", self.name, self._id_5CC6, var_45, var_47, var_18._id_A9E0, var_18._id_A9BF, var_39, var_18._id_1154[0], var_18._id_1154[1], var_18._id_1154[2], var_18._id_1154[3], var_18._id_1154[4], var_18._id_1154[5], var_49);
+  _reconspatialevent(self.origin, "script_mp_playerdeath: player_name %s, life_id %d, angles %v, death_dot %f, is_killstreak %b, mod %s, gameTime %d, spawnToDeathTime %f, attackerAliveTime %f, attacker_life_id %d, perk1 %s, perk2 %s, perk3 %s, perk4 %s, perk5 %s, perk6 %s, headOnHead %d, angle %f, damagedAttacker %d, damageDealtThisLife %f, damageRecievedThisLife %f, spawnToDamageReceivedTime %f, spawnToDamageDealtTime %f, timeSpentSprintingThisLife %f, timeSpentSprintingToFirstEngagement %f, spawnVersion %f, firstDamageHeadOnHead %d", self.name, self._id_5CC6, self.angles, var_21, maps\mp\_utility::iskillstreakweapon(var_15.weaponnamefull), var_4, var_45, var_43, var_44, var_13, var_54[0], var_54[1], var_54[2], var_54[3], var_54[4], var_54[5], var_22, var_31, var_24, var_25, var_26, var_27, var_28, var_29, var_30, level._id_90B4, var_23);
+  _reconspatialevent(self.origin, "script_mp_weaponinfo: player_name %s, life_id %d, isbot %b, attacker_name %s, attacker %d, attacker_pos %v, distance %f, ads_fraction %f, is_killstreak %b, weapon_type %s, weapon_class %s, weapon_name %s, isLoot %b, attachment0 %s, attachment1 %s, attachment2 %s, numShots %d, soleAttacker %b, gameTime %d, attachment3 %s, attachment4 %s, attachment5 %s", self.name, self._id_5CC6, var_38, var_35, var_46, var_2.origin, var_40, var_42, maps\mp\_utility::iskillstreakweapon(var_15.weaponnamefull), var_15.weapontype, var_15._id_A9BF, var_15.weaponname, var_41, var_15._id_1154[0], var_15._id_1154[1], var_15._id_1154[2], var_37, var_36, var_45, var_15._id_1154[3], var_15._id_1154[4], var_15._id_1154[5]);
+  _reconspatialevent(self.origin, "script_mp_weaponinfo_ext: player_name %s, life_id %d, gametime %d, version %f, victimWeapon %s, victimWeaponClass %s, killerIsBot %b, vic_attachment0 %s, vic_attachment1 %s, vic_attachment2 %s, vic_attachment3 %s, vic_attachment4 %s, vic_attachment5 %s, mechanics_version %f", self.name, self._id_5CC6, var_45, var_47, var_18.weaponname, var_18._id_A9BF, var_39, var_18._id_1154[0], var_18._id_1154[1], var_18._id_1154[2], var_18._id_1154[3], var_18._id_1154[4], var_18._id_1154[5], var_49);
 
   if(isDefined(var_2._id_5DFA) && isDefined(var_2._id_5DFA[0]) && isDefined(var_2._id_5DFA[1]) && isDefined(var_2._id_5DFA[2]) && isDefined(var_2._id_5DFA[3]) && isDefined(var_2._id_5DFA[4]) && isDefined(var_2._id_5DFA[5]) && isDefined(var_2._id_5DFA[6]) && isDefined(var_2._id_5DFA[7]) && isDefined(var_2._id_5DFA[8])) {
     _reconspatialevent(self.origin, "script_mp_divisions_perks: player_name %s, life_id %d, gameTime %d, perkVersion %f, attacker_life_id %d, perk1 %s, perk2 %s, perk3 %s, perk4 %s, perk5 %s, perk6 %s, perk7 %s, perk8 %s, perk9 %s, attacker_perk1 %s, attacker_perk2 %s, attacker_perk3 %s, attacker_perk4 %s, attacker_perk5 %s, attacker_perk6 %s, attacker_perk7 %s, attacker_perk8 %s, attacker_perk9 %s", self.name, self._id_5CC6, var_45, var_48, var_13, var_54[0], var_54[1], var_54[2], var_54[3], var_54[4], var_54[5], var_54[6], var_54[7], var_54[8], var_55[0], var_55[1], var_55[2], var_55[3], var_55[4], var_55[5], var_55[6], var_55[7], var_55[8]);
   }
 
-  if(!isDefined(level._id_6026)) {
-    level._id_6026 = [];
+  if(!isDefined(level.matchdata)) {
+    level.matchdata = [];
   }
 
   if(!isDefined(game["deathCount"])) {
@@ -750,7 +750,7 @@ _id_5EA5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       game["trapSpawnDiedTooFastCount"]++;
     }
 
-    if(self._id_9070._id_9CFD == 0) {
+    if(self.spawninfo._id_9CFD == 0) {
       if(!isDefined(game["trapSpawnByAnyMeansCount"])) {
         game["trapSpawnByAnyMeansCount"] = 1;
       } else {
@@ -765,11 +765,11 @@ _id_5EA5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
         var_2.pers["causedBadSpawnByAnyMeansCount"]++;
       }
 
-      self._id_9070._id_9CFD = 1;
+      self.spawninfo._id_9CFD = 1;
     }
   }
 
-  if(isPlayer(var_2) && var_44 <= 3.0 && !(var_15._id_A9E0 == "sentry_minigun_mp")) {
+  if(isPlayer(var_2) && var_44 <= 3.0 && !(var_15.weaponname == "sentry_minigun_mp")) {
     if(isDefined(var_2) && isDefined(var_2.pers["victimSpawnCount"])) {
       var_2.pers["victimSpawnCount"]++;
     }
@@ -780,7 +780,7 @@ _id_5EA5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       game["trapSpawnKilledTooFastCount"]++;
     }
 
-    if(var_2._id_9070._id_9CFD == 0) {
+    if(var_2.spawninfo._id_9CFD == 0) {
       if(!isDefined(game["trapSpawnByAnyMeansCount"])) {
         game["trapSpawnByAnyMeansCount"] = 1;
       } else {
@@ -788,11 +788,11 @@ _id_5EA5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       }
 
       var_2.pers["badSpawnByAnyMeansCount"]++;
-      var_2._id_9070._id_9CFD = 1;
+      var_2.spawninfo._id_9CFD = 1;
     }
   }
 
-  if(_func_3BC()) {
+  if(xmodelalias/alias_ger_heads_urb_muddy_cheap()) {
     var_57 = self.origin;
 
     if(isDefined(self.fighterspawningfunc)) {
@@ -814,12 +814,12 @@ _id_5EA5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       var_61 = [int(var_62[0]), int(var_62[1]), int(var_62[2])];
     }
 
-    self _meth_8681("dtel_death", ["death", ["life_index", var_0, "player_index", self.clientid, "death_pos", var_58, "death_time_ms", var_17, "victim_weapon_guid", var_20.guid, "attacker_life_index", var_59, "attacker_player_index", var_60, "attacker_pos", var_61, "attacker_weapon_guid", var_14.guid]]);
+    self setfireloopmod("dtel_death", ["death", ["life_index", var_0, "player_index", self.clientid, "death_pos", var_58, "death_time_ms", var_17, "victim_weapon_guid", var_20.guid, "attacker_life_index", var_59, "attacker_player_index", var_60, "attacker_pos", var_61, "attacker_weapon_guid", var_14.guid]]);
   }
 }
 
 _id_5EA4() {
-  if(!_id_1F55(self)) {
+  if(!canlogclient(self)) {
     return;
   }
   setmatchdata("players", self.clientid, "score", maps\mp\_utility::getpersstat("score"));
@@ -870,13 +870,13 @@ _id_5EA4() {
     var_4 = self.pers["causedVictimSpawnCount"];
   }
 
-  setmatchdata("players", self.clientid, "spawns", maps\mp\_utility::_id_2315(var_0));
-  setmatchdata("players", self.clientid, "immediate_action_spawns", maps\mp\_utility::_id_2315(var_1));
-  setmatchdata("players", self.clientid, "victim_spawns", maps\mp\_utility::_id_2315(var_2));
-  setmatchdata("players", self.clientid, "immediate_actions_caused", maps\mp\_utility::_id_2315(var_3));
-  setmatchdata("players", self.clientid, "victim_spawns_caused", maps\mp\_utility::_id_2315(var_4));
+  setmatchdata("players", self.clientid, "spawns", maps\mp\_utility::clamptoshort(var_0));
+  setmatchdata("players", self.clientid, "immediate_action_spawns", maps\mp\_utility::clamptoshort(var_1));
+  setmatchdata("players", self.clientid, "victim_spawns", maps\mp\_utility::clamptoshort(var_2));
+  setmatchdata("players", self.clientid, "immediate_actions_caused", maps\mp\_utility::clamptoshort(var_3));
+  setmatchdata("players", self.clientid, "victim_spawns_caused", maps\mp\_utility::clamptoshort(var_4));
 
-  if(isDefined(level._id_585D) && level._id_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
   _id_0513::_id_A196();
@@ -893,25 +893,25 @@ _id_5EA4() {
     }
   }
 
-  setmatchdata("players", self.clientid, "kills", maps\mp\_utility::_id_2315(self.pers["kills"]));
-  setmatchdata("players", self.clientid, "deaths", maps\mp\_utility::_id_2315(self.pers["deaths"]));
-  var_12 = self getplayerdata(common_scripts\utility::_id_46A7(), "callingCardIndex");
-  var_13 = self getplayerdata(common_scripts\utility::_id_46A7(), "activeEmblemSlot");
+  setmatchdata("players", self.clientid, "kills", maps\mp\_utility::clamptoshort(self.pers["kills"]));
+  setmatchdata("players", self.clientid, "deaths", maps\mp\_utility::clamptoshort(self.pers["deaths"]));
+  var_12 = self getplayerdata(common_scripts\utility::getstatsgroup_common(), "callingCardIndex");
+  var_13 = self getplayerdata(common_scripts\utility::getstatsgroup_common(), "activeEmblemSlot");
   setmatchdata("players", self.clientid, "calling_card_index", var_12);
   setmatchdata("players", self.clientid, "active_emblem_slot", var_13);
 }
 
-_id_36DB() {
+endofgamesummarylogger() {
   foreach(var_1 in level.players) {
     waitframe();
 
     if(!isDefined(var_1)) {
       continue;
     }
-    _id_5EA7(var_1);
+    logplayerping(var_1);
 
-    if(isDefined(var_1._id_2E50) && var_1._id_2E50 && var_1 maps\mp\_utility::rankingenabled()) {
-      var_1 setplayerdata(common_scripts\utility::_id_46AE(), "restXPGoal", var_1._id_2E50);
+    if(isDefined(var_1.detectedexploit) && var_1.detectedexploit && var_1 maps\mp\_utility::rankingenabled()) {
+      var_1 setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "restXPGoal", var_1.detectedexploit);
     }
 
     if(isDefined(var_1.pers["weaponsUsed"])) {
@@ -920,24 +920,24 @@ _id_36DB() {
 
       if(var_1.pers["weaponsUsed"].size > 3) {
         for(var_3 = var_1.pers["weaponsUsed"].size - 1; var_3 > var_1.pers["weaponsUsed"].size - 3; var_3--) {
-          var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "weaponsUsed", var_2, var_1.pers["weaponsUsed"][var_3]);
-          var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "weaponXpEarned", var_2, var_1.pers["weaponXpEarned"][var_3]);
+          var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "weaponsUsed", var_2, var_1.pers["weaponsUsed"][var_3]);
+          var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "weaponXpEarned", var_2, var_1.pers["weaponXpEarned"][var_3]);
           var_2++;
         }
       } else {
         for(var_3 = var_1.pers["weaponsUsed"].size - 1; var_3 >= 0; var_3--) {
-          var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "weaponsUsed", var_2, var_1.pers["weaponsUsed"][var_3]);
-          var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "weaponXpEarned", var_2, var_1.pers["weaponXpEarned"][var_3]);
+          var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "weaponsUsed", var_2, var_1.pers["weaponsUsed"][var_3]);
+          var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "weaponXpEarned", var_2, var_1.pers["weaponXpEarned"][var_3]);
           var_2++;
         }
       }
     } else {
-      var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "weaponsUsed", 0, "none");
-      var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "weaponsUsed", 1, "none");
-      var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "weaponsUsed", 2, "none");
-      var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "weaponXpEarned", 0, 0);
-      var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "weaponXpEarned", 1, 0);
-      var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "weaponXpEarned", 2, 0);
+      var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "weaponsUsed", 0, "none");
+      var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "weaponsUsed", 1, "none");
+      var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "weaponsUsed", 2, "none");
+      var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "weaponXpEarned", 0, 0);
+      var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "weaponXpEarned", 1, 0);
+      var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "weaponXpEarned", 2, 0);
     }
 
     var_4 = undefined;
@@ -951,25 +951,25 @@ _id_36DB() {
       var_4 = game["challengeStruct"]["challengesCompleted"][var_1.guid];
 
       if(var_4.size > 0) {
-        var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "challengeNumCompleted", var_4.size);
-        var_6 = maps\mp\_utility::_id_2314(var_4.size);
+        var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "challengeNumCompleted", var_4.size);
+        var_6 = maps\mp\_utility::clamptobyte(var_4.size);
         setmatchdata("players", var_1.clientid, "challenges_completed", var_6);
       } else
-        var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "challengeNumCompleted", 0);
+        var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "challengeNumCompleted", 0);
     } else
-      var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "challengeNumCompleted", 0);
+      var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "challengeNumCompleted", 0);
 
     for(var_3 = 0; var_3 < 20; var_3++) {
       if(isDefined(var_4) && isDefined(var_4[var_3]) && var_4[var_3] != 8000) {
-        var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "challengesCompleted", var_3, var_4[var_3]);
+        var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "challengesCompleted", var_3, var_4[var_3]);
         continue;
       }
 
-      var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "challengesCompleted", var_3, 0);
+      var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "challengesCompleted", var_3, 0);
     }
 
-    var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "gameMode", level.gametype);
-    var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "map", _tolower(getDvar("1673")));
+    var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "gameMode", level.gametype);
+    var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "map", _tolower(getDvar("1673")));
   }
 }
 
@@ -992,19 +992,19 @@ _id_32C6() {
   }
 }
 
-_id_5EA7(var_0) {
+logplayerping(var_0) {
   if(!isDefined(var_0.pers["maxPing"]) || !isDefined(var_0.pers["minPing"]) || !isDefined(var_0.pers["pingAccumulation"]) || !isDefined(var_0.pers["pingSampleCount"])) {
     return;
   }
   if(var_0.pers["pingSampleCount"] > 0 && var_0.pers["maxPing"] > 0) {
-    var_1 = maps\mp\_utility::_id_2315(var_0.pers["pingAccumulation"] / var_0.pers["pingSampleCount"]);
+    var_1 = maps\mp\_utility::clamptoshort(var_0.pers["pingAccumulation"] / var_0.pers["pingSampleCount"]);
     setmatchdata("players", var_0.clientid, "average_ping", var_1);
-    setmatchdata("players", var_0.clientid, "max_ping", maps\mp\_utility::_id_2315(var_0.pers["maxPing"]));
-    setmatchdata("players", var_0.clientid, "min_ping", maps\mp\_utility::_id_2315(var_0.pers["minPing"]));
+    setmatchdata("players", var_0.clientid, "max_ping", maps\mp\_utility::clamptoshort(var_0.pers["maxPing"]));
+    setmatchdata("players", var_0.clientid, "min_ping", maps\mp\_utility::clamptoshort(var_0.pers["minPing"]));
   }
 }
 
-_id_3F9E() {
+gameendlistener() {
   level waittill("game_ended");
 
   foreach(var_1 in level.players) {
@@ -1013,7 +1013,7 @@ _id_3F9E() {
     if(!isalive(var_1)) {
       continue;
     }
-    var_1 _id_5EA6(0);
+    var_1 logplayerlife(0);
   }
 
   foreach(var_1 in level.players) {
@@ -1026,7 +1026,7 @@ _id_3F9E() {
   }
 }
 
-_id_1F55(var_0) {
+canlogclient(var_0) {
   if(_func_367()) {
     return 0;
   }
@@ -1035,27 +1035,27 @@ _id_1F55(var_0) {
     return 0;
   }
 
-  return var_0.clientid < level._id_608C;
+  return var_0.clientid < level.maxlogclients;
 }
 
-_id_1F56() {
-  return getmatchdata("match_common", "event_count") < level._id_6083;
+canlogevent() {
+  return getmatchdata("match_common", "event_count") < level.maxevents;
 }
 
-_id_1F57() {
-  return getmatchdata("killstreak_count") < level._id_6087;
+canlogkillstreak() {
+  return getmatchdata("killstreak_count") < level.maxkillstreaks;
 }
 
 _id_1F58() {
-  return getmatchdata("killstreak_available_count") < level._id_6087;
+  return getmatchdata("killstreak_available_count") < level.maxkillstreaks;
 }
 
-_id_1F59(var_0) {
+canloglife(var_0) {
   return isDefined(var_0) && var_0 < level.maxlives - 1;
 }
 
-_id_5EAF(var_0, var_1, var_2, var_3) {
-  if(!_id_1F55(self)) {
+logweaponstat(var_0, var_1, var_2, var_3) {
+  if(!canlogclient(self)) {
     return;
   }
   if(maps\mp\_utility::iskillstreakweapon(var_0)) {
@@ -1073,7 +1073,7 @@ _id_5EAF(var_0, var_1, var_2, var_3) {
   var_4 = var_4 + var_2;
   self.pers["mpWeaponStats"][var_0][var_1] = var_4;
 
-  if(isDefined(level._id_585D) && level._id_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
   var_5 = isbot(self) || istestclient(self);
@@ -1142,154 +1142,154 @@ _id_1D40() {
   return var_0;
 }
 
-_id_5E97() {
-  if(!_id_1F55(self)) {
+logkillsconfirmed() {
+  if(!canlogclient(self)) {
     return;
   }
   setmatchdata("players", self.clientid, "kills_confirmed", self.pers["confirmed"]);
 }
 
-_id_5E98() {
-  if(!_id_1F55(self)) {
+logkillsdenied() {
+  if(!canlogclient(self)) {
     return;
   }
   setmatchdata("players", self.clientid, "kills_denied", self.pers["denied"]);
 }
 
-_id_5E95() {
-  if(isDefined(level._id_585D) && level._id_585D) {
+loginitialstats() {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
   if(getdvarint("2506") > 0) {
-    var_0 = self getplayerdata(common_scripts\utility::_id_46AE(), "experience");
+    var_0 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "experience");
     setmatchdata("players", self.clientid, "start_xp", var_0);
-    setmatchdata("players", self.clientid, "start_kills", self getplayerdata(common_scripts\utility::_id_46AE(), "kills"));
-    setmatchdata("players", self.clientid, "start_deaths", self getplayerdata(common_scripts\utility::_id_46AE(), "deaths"));
-    setmatchdata("players", self.clientid, "start_wins", self getplayerdata(common_scripts\utility::_id_46AE(), "wins"));
-    setmatchdata("players", self.clientid, "start_losses", self getplayerdata(common_scripts\utility::_id_46AE(), "losses"));
-    setmatchdata("players", self.clientid, "start_hits", self getplayerdata(common_scripts\utility::_id_46AE(), "hits"));
-    setmatchdata("players", self.clientid, "start_misses", self getplayerdata(common_scripts\utility::_id_46AE(), "misses"));
-    setmatchdata("players", self.clientid, "start_games_played", self getplayerdata(common_scripts\utility::_id_46AE(), "gamesPlayed"));
-    setmatchdata("players", self.clientid, "start_time_played_total", self getplayerdata(common_scripts\utility::_id_46AE(), "timePlayedTotal"));
-    setmatchdata("players", self.clientid, "start_score", self getplayerdata(common_scripts\utility::_id_46AE(), "score"));
-    setmatchdata("players", self.clientid, "start_unlock_points", self getplayerdata(common_scripts\utility::_id_46AE(), "unlockPoints"));
-    setmatchdata("players", self.clientid, "start_prestige", self getplayerdata(common_scripts\utility::_id_46AE(), "prestige"));
-    setmatchdata("players", self.clientid, "start_gdf_rating", self getplayerdata(common_scripts\utility::_id_46AE(), "gdfRating"));
-    setmatchdata("players", self.clientid, "start_gdf_variance", self getplayerdata(common_scripts\utility::_id_46AE(), "gdfVariance"));
-    setmatchdata("players", self.clientid, "start_sos_rating", self getplayerdata(common_scripts\utility::_id_46AE(), "sosRating"));
-    setmatchdata("players", self.clientid, "start_sos_weight", self getplayerdata(common_scripts\utility::_id_46AE(), "sosWeight"));
-    setmatchdata("players", self.clientid, "start_division_xp", "infantry", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "infantry", "experience"));
-    setmatchdata("players", self.clientid, "start_division_xp", "airborne", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "airborne", "experience"));
-    setmatchdata("players", self.clientid, "start_division_xp", "armored", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "armored", "experience"));
-    setmatchdata("players", self.clientid, "start_division_xp", "mountain", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "mountain", "experience"));
-    setmatchdata("players", self.clientid, "start_division_xp", "expeditionary", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "expeditionary", "experience"));
-    setmatchdata("players", self.clientid, "start_division_xp", "resistance", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "resistance", "experience"));
-    setmatchdata("players", self.clientid, "start_division_xp", "grenadier", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "grenadier", "experience"));
-    setmatchdata("players", self.clientid, "start_division_xp", "commando", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "commando", "experience"));
-    setmatchdata("players", self.clientid, "start_division_xp", "scout", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "scout", "experience"));
-    setmatchdata("players", self.clientid, "start_division_xp", "artillery", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "artillery", "experience"));
-    setmatchdata("players", self.clientid, "start_division_level", "infantry", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "infantry", "level"));
-    setmatchdata("players", self.clientid, "start_division_level", "airborne", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "airborne", "level"));
-    setmatchdata("players", self.clientid, "start_division_level", "armored", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "armored", "level"));
-    setmatchdata("players", self.clientid, "start_division_level", "mountain", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "mountain", "level"));
-    setmatchdata("players", self.clientid, "start_division_level", "expeditionary", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "expeditionary", "level"));
-    setmatchdata("players", self.clientid, "start_division_level", "resistance", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "resistance", "level"));
-    setmatchdata("players", self.clientid, "start_division_level", "grenadier", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "grenadier", "level"));
-    setmatchdata("players", self.clientid, "start_division_level", "commando", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "commando", "level"));
-    setmatchdata("players", self.clientid, "start_division_level", "scout", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "scout", "level"));
-    setmatchdata("players", self.clientid, "start_division_level", "artillery", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "artillery", "level"));
-    setmatchdata("players", self.clientid, "start_division_prestige", "infantry", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "infantry", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "start_division_prestige", "airborne", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "airborne", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "start_division_prestige", "armored", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "armored", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "start_division_prestige", "mountain", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "mountain", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "start_division_prestige", "expeditionary", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "expeditionary", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "start_division_prestige", "resistance", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "resistance", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "start_division_prestige", "grenadier", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "grenadier", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "start_division_prestige", "commando", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "commando", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "start_division_prestige", "scout", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "scout", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "start_division_prestige", "artillery", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "artillery", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "start_kills", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "kills"));
+    setmatchdata("players", self.clientid, "start_deaths", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "deaths"));
+    setmatchdata("players", self.clientid, "start_wins", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "wins"));
+    setmatchdata("players", self.clientid, "start_losses", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "losses"));
+    setmatchdata("players", self.clientid, "start_hits", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "hits"));
+    setmatchdata("players", self.clientid, "start_misses", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "misses"));
+    setmatchdata("players", self.clientid, "start_games_played", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "gamesPlayed"));
+    setmatchdata("players", self.clientid, "start_time_played_total", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "timePlayedTotal"));
+    setmatchdata("players", self.clientid, "start_score", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "score"));
+    setmatchdata("players", self.clientid, "start_unlock_points", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "unlockPoints"));
+    setmatchdata("players", self.clientid, "start_prestige", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "prestige"));
+    setmatchdata("players", self.clientid, "start_gdf_rating", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "gdfRating"));
+    setmatchdata("players", self.clientid, "start_gdf_variance", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "gdfVariance"));
+    setmatchdata("players", self.clientid, "start_sos_rating", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "sosRating"));
+    setmatchdata("players", self.clientid, "start_sos_weight", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "sosWeight"));
+    setmatchdata("players", self.clientid, "start_division_xp", "infantry", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "infantry", "experience"));
+    setmatchdata("players", self.clientid, "start_division_xp", "airborne", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "airborne", "experience"));
+    setmatchdata("players", self.clientid, "start_division_xp", "armored", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "armored", "experience"));
+    setmatchdata("players", self.clientid, "start_division_xp", "mountain", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "mountain", "experience"));
+    setmatchdata("players", self.clientid, "start_division_xp", "expeditionary", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "expeditionary", "experience"));
+    setmatchdata("players", self.clientid, "start_division_xp", "resistance", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "resistance", "experience"));
+    setmatchdata("players", self.clientid, "start_division_xp", "grenadier", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "grenadier", "experience"));
+    setmatchdata("players", self.clientid, "start_division_xp", "commando", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "commando", "experience"));
+    setmatchdata("players", self.clientid, "start_division_xp", "scout", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "scout", "experience"));
+    setmatchdata("players", self.clientid, "start_division_xp", "artillery", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "artillery", "experience"));
+    setmatchdata("players", self.clientid, "start_division_level", "infantry", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "infantry", "level"));
+    setmatchdata("players", self.clientid, "start_division_level", "airborne", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "airborne", "level"));
+    setmatchdata("players", self.clientid, "start_division_level", "armored", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "armored", "level"));
+    setmatchdata("players", self.clientid, "start_division_level", "mountain", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "mountain", "level"));
+    setmatchdata("players", self.clientid, "start_division_level", "expeditionary", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "expeditionary", "level"));
+    setmatchdata("players", self.clientid, "start_division_level", "resistance", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "resistance", "level"));
+    setmatchdata("players", self.clientid, "start_division_level", "grenadier", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "grenadier", "level"));
+    setmatchdata("players", self.clientid, "start_division_level", "commando", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "commando", "level"));
+    setmatchdata("players", self.clientid, "start_division_level", "scout", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "scout", "level"));
+    setmatchdata("players", self.clientid, "start_division_level", "artillery", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "artillery", "level"));
+    setmatchdata("players", self.clientid, "start_division_prestige", "infantry", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "infantry", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "start_division_prestige", "airborne", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "airborne", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "start_division_prestige", "armored", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "armored", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "start_division_prestige", "mountain", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "mountain", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "start_division_prestige", "expeditionary", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "expeditionary", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "start_division_prestige", "resistance", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "resistance", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "start_division_prestige", "grenadier", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "grenadier", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "start_division_prestige", "commando", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "commando", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "start_division_prestige", "scout", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "scout", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "start_division_prestige", "artillery", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "artillery", "prestigeLevel"));
     var_1 = 12;
-    var_2 = self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_current_season");
+    var_2 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_current_season");
 
     if(var_2 >= 0 && var_2 < var_1) {
       setmatchdata("players", self.clientid, "ranked_play_current_season", var_2);
-      setmatchdata("players", self.clientid, "start_mmr_current", self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_2, "mmr_current"));
+      setmatchdata("players", self.clientid, "start_mmr_current", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_season_data", var_2, "mmr_current"));
     }
   }
 }
 
 _id_5E92() {
-  if(isDefined(level._id_585D) && level._id_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
   if(getdvarint("2506") > 0) {
-    var_0 = self getplayerdata(common_scripts\utility::_id_46AE(), "experience");
+    var_0 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "experience");
     setmatchdata("players", self.clientid, "end_xp", var_0);
-    setmatchdata("players", self.clientid, "end_kills", self getplayerdata(common_scripts\utility::_id_46AE(), "kills"));
-    setmatchdata("players", self.clientid, "end_deaths", self getplayerdata(common_scripts\utility::_id_46AE(), "deaths"));
-    setmatchdata("players", self.clientid, "end_wins", self getplayerdata(common_scripts\utility::_id_46AE(), "wins"));
-    setmatchdata("players", self.clientid, "end_losses", self getplayerdata(common_scripts\utility::_id_46AE(), "losses"));
-    setmatchdata("players", self.clientid, "end_hits", self getplayerdata(common_scripts\utility::_id_46AE(), "hits"));
-    setmatchdata("players", self.clientid, "end_misses", self getplayerdata(common_scripts\utility::_id_46AE(), "misses"));
-    setmatchdata("players", self.clientid, "end_games_played", self getplayerdata(common_scripts\utility::_id_46AE(), "gamesPlayed"));
-    setmatchdata("players", self.clientid, "end_time_played_total", self getplayerdata(common_scripts\utility::_id_46AE(), "timePlayedTotal"));
-    setmatchdata("players", self.clientid, "end_score", self getplayerdata(common_scripts\utility::_id_46AE(), "score"));
-    setmatchdata("players", self.clientid, "end_unlock_points", self getplayerdata(common_scripts\utility::_id_46AE(), "unlockPoints"));
-    setmatchdata("players", self.clientid, "end_prestige", self getplayerdata(common_scripts\utility::_id_46AE(), "prestige"));
-    setmatchdata("players", self.clientid, "end_gdf_rating", self getplayerdata(common_scripts\utility::_id_46AE(), "gdfRating"));
-    setmatchdata("players", self.clientid, "end_gdf_variance", self getplayerdata(common_scripts\utility::_id_46AE(), "gdfVariance"));
-    setmatchdata("players", self.clientid, "end_sos_rating", self getplayerdata(common_scripts\utility::_id_46AE(), "sosRating"));
-    setmatchdata("players", self.clientid, "end_sos_weight", self getplayerdata(common_scripts\utility::_id_46AE(), "sosWeight"));
-    setmatchdata("players", self.clientid, "end_division_xp", "infantry", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "infantry", "experience"));
-    setmatchdata("players", self.clientid, "end_division_xp", "airborne", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "airborne", "experience"));
-    setmatchdata("players", self.clientid, "end_division_xp", "armored", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "armored", "experience"));
-    setmatchdata("players", self.clientid, "end_division_xp", "mountain", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "mountain", "experience"));
-    setmatchdata("players", self.clientid, "end_division_xp", "expeditionary", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "expeditionary", "experience"));
-    setmatchdata("players", self.clientid, "end_division_xp", "resistance", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "resistance", "experience"));
-    setmatchdata("players", self.clientid, "end_division_xp", "grenadier", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "grenadier", "experience"));
-    setmatchdata("players", self.clientid, "end_division_xp", "commando", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "commando", "experience"));
-    setmatchdata("players", self.clientid, "end_division_xp", "scout", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "scout", "experience"));
-    setmatchdata("players", self.clientid, "end_division_xp", "artillery", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "artillery", "experience"));
-    setmatchdata("players", self.clientid, "end_division_level", "infantry", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "infantry", "level"));
-    setmatchdata("players", self.clientid, "end_division_level", "airborne", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "airborne", "level"));
-    setmatchdata("players", self.clientid, "end_division_level", "armored", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "armored", "level"));
-    setmatchdata("players", self.clientid, "end_division_level", "mountain", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "mountain", "level"));
-    setmatchdata("players", self.clientid, "end_division_level", "expeditionary", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "expeditionary", "level"));
-    setmatchdata("players", self.clientid, "end_division_level", "resistance", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "resistance", "level"));
-    setmatchdata("players", self.clientid, "end_division_level", "grenadier", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "grenadier", "level"));
-    setmatchdata("players", self.clientid, "end_division_level", "commando", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "commando", "level"));
-    setmatchdata("players", self.clientid, "end_division_level", "scout", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "scout", "level"));
-    setmatchdata("players", self.clientid, "end_division_level", "artillery", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "artillery", "level"));
-    setmatchdata("players", self.clientid, "end_division_prestige", "infantry", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "infantry", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "end_division_prestige", "airborne", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "airborne", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "end_division_prestige", "armored", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "armored", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "end_division_prestige", "mountain", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "mountain", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "end_division_prestige", "expeditionary", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "expeditionary", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "end_division_prestige", "resistance", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "resistance", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "end_division_prestige", "grenadier", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "grenadier", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "end_division_prestige", "commando", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "commando", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "end_division_prestige", "scout", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "scout", "prestigeLevel"));
-    setmatchdata("players", self.clientid, "end_division_prestige", "artillery", self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "artillery", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "end_kills", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "kills"));
+    setmatchdata("players", self.clientid, "end_deaths", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "deaths"));
+    setmatchdata("players", self.clientid, "end_wins", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "wins"));
+    setmatchdata("players", self.clientid, "end_losses", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "losses"));
+    setmatchdata("players", self.clientid, "end_hits", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "hits"));
+    setmatchdata("players", self.clientid, "end_misses", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "misses"));
+    setmatchdata("players", self.clientid, "end_games_played", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "gamesPlayed"));
+    setmatchdata("players", self.clientid, "end_time_played_total", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "timePlayedTotal"));
+    setmatchdata("players", self.clientid, "end_score", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "score"));
+    setmatchdata("players", self.clientid, "end_unlock_points", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "unlockPoints"));
+    setmatchdata("players", self.clientid, "end_prestige", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "prestige"));
+    setmatchdata("players", self.clientid, "end_gdf_rating", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "gdfRating"));
+    setmatchdata("players", self.clientid, "end_gdf_variance", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "gdfVariance"));
+    setmatchdata("players", self.clientid, "end_sos_rating", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "sosRating"));
+    setmatchdata("players", self.clientid, "end_sos_weight", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "sosWeight"));
+    setmatchdata("players", self.clientid, "end_division_xp", "infantry", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "infantry", "experience"));
+    setmatchdata("players", self.clientid, "end_division_xp", "airborne", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "airborne", "experience"));
+    setmatchdata("players", self.clientid, "end_division_xp", "armored", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "armored", "experience"));
+    setmatchdata("players", self.clientid, "end_division_xp", "mountain", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "mountain", "experience"));
+    setmatchdata("players", self.clientid, "end_division_xp", "expeditionary", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "expeditionary", "experience"));
+    setmatchdata("players", self.clientid, "end_division_xp", "resistance", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "resistance", "experience"));
+    setmatchdata("players", self.clientid, "end_division_xp", "grenadier", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "grenadier", "experience"));
+    setmatchdata("players", self.clientid, "end_division_xp", "commando", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "commando", "experience"));
+    setmatchdata("players", self.clientid, "end_division_xp", "scout", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "scout", "experience"));
+    setmatchdata("players", self.clientid, "end_division_xp", "artillery", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "artillery", "experience"));
+    setmatchdata("players", self.clientid, "end_division_level", "infantry", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "infantry", "level"));
+    setmatchdata("players", self.clientid, "end_division_level", "airborne", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "airborne", "level"));
+    setmatchdata("players", self.clientid, "end_division_level", "armored", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "armored", "level"));
+    setmatchdata("players", self.clientid, "end_division_level", "mountain", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "mountain", "level"));
+    setmatchdata("players", self.clientid, "end_division_level", "expeditionary", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "expeditionary", "level"));
+    setmatchdata("players", self.clientid, "end_division_level", "resistance", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "resistance", "level"));
+    setmatchdata("players", self.clientid, "end_division_level", "grenadier", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "grenadier", "level"));
+    setmatchdata("players", self.clientid, "end_division_level", "commando", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "commando", "level"));
+    setmatchdata("players", self.clientid, "end_division_level", "scout", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "scout", "level"));
+    setmatchdata("players", self.clientid, "end_division_level", "artillery", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "artillery", "level"));
+    setmatchdata("players", self.clientid, "end_division_prestige", "infantry", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "infantry", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "end_division_prestige", "airborne", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "airborne", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "end_division_prestige", "armored", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "armored", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "end_division_prestige", "mountain", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "mountain", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "end_division_prestige", "expeditionary", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "expeditionary", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "end_division_prestige", "resistance", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "resistance", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "end_division_prestige", "grenadier", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "grenadier", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "end_division_prestige", "commando", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "commando", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "end_division_prestige", "scout", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "scout", "prestigeLevel"));
+    setmatchdata("players", self.clientid, "end_division_prestige", "artillery", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "artillery", "prestigeLevel"));
     var_1 = 12;
-    var_2 = self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_current_season");
+    var_2 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_current_season");
 
     if(var_2 >= 0 && var_2 < var_1) {
-      setmatchdata("players", self.clientid, "end_mmr_min", self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_2, "mmr_min"));
-      setmatchdata("players", self.clientid, "end_mmr_max", self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_2, "mmr_max"));
-      setmatchdata("players", self.clientid, "end_mmr_current", self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_2, "mmr_current"));
-      setmatchdata("players", self.clientid, "end_weight_current", self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_2, "weight_current"));
-      setmatchdata("players", self.clientid, "end_ranked_games_completed", self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_2, "ranked_games_completed"));
-      setmatchdata("players", self.clientid, "end_ranked_games_abandoned", self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_2, "ranked_games_abandoned"));
+      setmatchdata("players", self.clientid, "end_mmr_min", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_season_data", var_2, "mmr_min"));
+      setmatchdata("players", self.clientid, "end_mmr_max", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_season_data", var_2, "mmr_max"));
+      setmatchdata("players", self.clientid, "end_mmr_current", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_season_data", var_2, "mmr_current"));
+      setmatchdata("players", self.clientid, "end_weight_current", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_season_data", var_2, "weight_current"));
+      setmatchdata("players", self.clientid, "end_ranked_games_completed", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_season_data", var_2, "ranked_games_completed"));
+      setmatchdata("players", self.clientid, "end_ranked_games_abandoned", self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_season_data", var_2, "ranked_games_abandoned"));
     }
 
     if(isDefined(self.pers["rank"])) {
-      var_3 = maps\mp\_utility::_id_2314(maps\mp\gametypes\_rank::_id_4652());
+      var_3 = maps\mp\_utility::clamptobyte(maps\mp\gametypes\_rank::getrank());
       setmatchdata("players", self.clientid, "end_rank", var_3);
     }
   }
 }
 
-_id_7B2D() {
+reconlogplayerinfo() {
   for(;;) {
     if(getdvarint("3833") == 0) {
       foreach(var_1 in level.players) {
@@ -1334,10 +1334,10 @@ _id_7B2D() {
 
         var_7 = gettime();
 
-        if(common_scripts\utility::_id_562E(level._id_585D)) {
-          var_8 = common_scripts\utility::_id_98E7(isDefined(level._id_A980), level._id_A980, 0);
+        if(common_scripts\utility::_id_562E(level.iszombiegame)) {
+          var_8 = common_scripts\utility::ter_op(isDefined(level.wavecounter), level.wavecounter, 0);
           var_9 = common_scripts\utility::_id_562E(var_1._id_00E8);
-          var_10 = common_scripts\utility::_id_98E7(isDefined(var_1._id_20D8), var_1._id_20D8, 0);
+          var_10 = common_scripts\utility::ter_op(isDefined(var_1.characterindex), var_1.characterindex, 0);
           var_11 = ["Jefferson", "Drostan", "Marie", "Olivia", "Hunter", "Mountaineer", "Urban Survivalist", "B.A.T. Agent", "B.A.T. Elite", "Assassin"][var_10];
 
           if(!isDefined(var_11)) {
@@ -1357,7 +1357,7 @@ _id_7B2D() {
 }
 
 _id_5EAE() {
-  if(level._id_585D) {
+  if(level.iszombiegame) {
     return;
   }
   level endon("game_ended");
@@ -1367,8 +1367,8 @@ _id_5EAE() {
     setmatchdata("rounds", game["roundsPlayed"], "start_time_ms", var_0);
     setmatchdata("rounds", game["roundsPlayed"], "is_overtime", maps\mp\_utility::inovertime());
 
-    if(_func_3BC()) {
-      level.players[0] _meth_8681("dtel_round_start", ["round_start", ["time_ms", var_0, "axis_score", _getteamscore("axis"), "allies_score", _getteamscore("allies"), "is_overtime", maps\mp\_utility::inovertime()]]);
+    if(xmodelalias/alias_ger_heads_urb_muddy_cheap()) {
+      level.players[0] setfireloopmod("dtel_round_start", ["round_start", ["time_ms", var_0, "axis_score", _getteamscore("axis"), "allies_score", _getteamscore("allies"), "is_overtime", maps\mp\_utility::inovertime()]]);
     }
 
     level waittill("round_switch", var_1);
@@ -1376,7 +1376,7 @@ _id_5EAE() {
 }
 
 _id_5E91(var_0, var_1, var_2) {
-  if(level._id_585D) {
+  if(level.iszombiegame) {
     return;
   }
   var_3 = getmatchtimepassed();
@@ -1390,7 +1390,7 @@ _id_5E91(var_0, var_1, var_2) {
   setmatchdata("allies_score", var_2);
   setmatchdata("axis_score", var_1);
 
-  if(_func_3BC()) {
-    level.players[0] _meth_8681("dtel_round_end", ["round_end", ["time_ms", var_3, "axis_score", var_1, "allies_score", var_2, "is_overtime", maps\mp\_utility::inovertime()]]);
+  if(xmodelalias/alias_ger_heads_urb_muddy_cheap()) {
+    level.players[0] setfireloopmod("dtel_round_end", ["round_end", ["time_ms", var_3, "axis_score", var_1, "allies_score", var_2, "is_overtime", maps\mp\_utility::inovertime()]]);
   }
 }

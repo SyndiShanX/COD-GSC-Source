@@ -4,10 +4,10 @@
 ****************************************************************/
 
 main() {
-  _id_87A7();
+  setup_callbacks();
 }
 
-_id_87A7() {
+setup_callbacks() {
   level.bot_funcs["gametype_think"] = ::bot_dogfight_think;
 }
 

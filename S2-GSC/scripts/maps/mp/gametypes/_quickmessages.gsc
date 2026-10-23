@@ -35,13 +35,13 @@ init() {
   precachestring(&"QUICKMESSAGE_COME_ON");
 }
 
-_id_7892(var_0) {
+quickcommands(var_0) {
   self endon("disconnect");
 
-  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self._id_8F67)) {
+  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.spamdelay)) {
     return;
   }
-  self._id_8F67 = 1;
+  self.spamdelay = 1;
 
   switch (var_0) {
     case "1":
@@ -79,17 +79,17 @@ _id_7892(var_0) {
   }
 
   clearthermalfog();
-  _id_329E(var_1, var_2);
+  doquickmessage(var_1, var_2);
   wait 2;
-  self._id_8F67 = undefined;
-  _id_7DF2();
+  self.spamdelay = undefined;
+  restoreheadicon();
 }
 
-_id_789C(var_0) {
-  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self._id_8F67)) {
+quickstatements(var_0) {
+  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.spamdelay)) {
     return;
   }
-  self._id_8F67 = 1;
+  self.spamdelay = 1;
 
   switch (var_0) {
     case "1":
@@ -123,17 +123,17 @@ _id_789C(var_0) {
   }
 
   clearthermalfog();
-  _id_329E(var_1, var_2);
+  doquickmessage(var_1, var_2);
   wait 2;
-  self._id_8F67 = undefined;
-  _id_7DF2();
+  self.spamdelay = undefined;
+  restoreheadicon();
 }
 
-_id_7896(var_0) {
-  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self._id_8F67)) {
+quickresponses(var_0) {
+  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.spamdelay)) {
     return;
   }
-  self._id_8F67 = 1;
+  self.spamdelay = 1;
 
   switch (var_0) {
     case "1":
@@ -163,19 +163,19 @@ _id_7896(var_0) {
   }
 
   clearthermalfog();
-  _id_329E(var_1, var_2);
+  doquickmessage(var_1, var_2);
   wait 2;
-  self._id_8F67 = undefined;
-  _id_7DF2();
+  self.spamdelay = undefined;
+  restoreheadicon();
 }
 
-_id_329E(var_0, var_1) {
+doquickmessage(var_0, var_1) {
   if(self.sessionstate != "playing") {
     return;
   }
-  var_2 = [[level._id_46D9]](self.team);
+  var_2 = [[level.getteamvoiceprefix]](self.team);
 
-  if(isDefined(level._id_7895) && level._id_7895) {
+  if(isDefined(level.quickmessagetoall) && level.quickmessagetoall) {
     self._id_00BB = "none";
     self._id_00BA = "talkingicon";
     self playSound(var_2 + var_0);
@@ -196,20 +196,20 @@ _id_329E(var_0, var_1) {
 
 clearthermalfog() {
   if(isDefined(self._id_00BA)) {
-    self._id_6A5A = self._id_00BA;
+    self.oldheadicon = self._id_00BA;
   }
 
   if(isDefined(self._id_00BB)) {
-    self._id_6A5B = self._id_00BB;
+    self.oldheadiconteam = self._id_00BB;
   }
 }
 
-_id_7DF2() {
-  if(isDefined(self._id_6A5A)) {
-    self._id_00BA = self._id_6A5A;
+restoreheadicon() {
+  if(isDefined(self.oldheadicon)) {
+    self._id_00BA = self.oldheadicon;
   }
 
-  if(isDefined(self._id_6A5B)) {
-    self._id_00BB = self._id_6A5B;
+  if(isDefined(self.oldheadiconteam)) {
+    self._id_00BB = self.oldheadiconteam;
   }
 }

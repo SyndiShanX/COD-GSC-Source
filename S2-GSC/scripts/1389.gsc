@@ -4,19 +4,19 @@
 **************************************/
 
 init() {
-  while(!isDefined(level._id_947C)) {
+  while(!isDefined(level.struct_class_names)) {
     waittillframeend;
   }
 
-  if(!isDefined(level._id_AC4F)) {
-    level._id_AC4F = [];
+  if(!isDefined(level.zombies_spawners_zombie)) {
+    level.zombies_spawners_zombie = [];
   }
 
-  level._id_AC11 = 0;
+  level.zombie_wave_running = 0;
   level._id_4699 = [];
-  level._id_1F4F = [];
-  level._id_7F22 = [];
-  level._id_7F18 = [];
+  level.candroppickupsfunc = [];
+  level.roundstartfunc = [];
+  level.roundendfunc = [];
   level._id_6889 = [];
   level._id_65C9 = [];
   level._id_64B7 = [];
@@ -31,12 +31,12 @@ init() {
 }
 
 run_post_launch_optional_spawner_params_override() {
-  var_0 = common_scripts\utility::_id_46B7("zmb_addon_script_parameters_override", "targetname");
-  var_1 = common_scripts\utility::_id_46B7("zombie_spawner", "script_noteworthy");
+  var_0 = common_scripts\utility::getstructarray("zmb_addon_script_parameters_override", "targetname");
+  var_1 = common_scripts\utility::getstructarray("zombie_spawner", "script_noteworthy");
   var_2 = undefined;
 
   foreach(var_4 in var_0) {
-    var_5 = common_scripts\utility::_id_4461(var_4.origin, var_1);
+    var_5 = common_scripts\utility::getclosest(var_4.origin, var_1);
     var_5.setlookatent = var_4.setlookatent;
     var_6 = strtok(var_5.setlookatent, " ,");
 
@@ -97,7 +97,7 @@ _id_52B5() {
 
 _id_4743(var_0, var_1) {
   if(!isDefined(var_0)) {
-    var_0 = level._id_A980;
+    var_0 = level.wavecounter;
   }
 
   if(!isDefined(var_1)) {
@@ -112,8 +112,8 @@ _id_468C() {
 }
 
 _id_1E51(var_0) {
-  if(isDefined(level._id_6893) && isDefined(level._id_6893[level._id_7F2A])) {
-    return [[level._id_6893[level._id_7F2A]]](var_0);
+  if(isDefined(level._id_6893) && isDefined(level._id_6893[level.roundtype])) {
+    return [[level._id_6893[level.roundtype]]](var_0);
   }
 
   return var_0;
@@ -125,7 +125,7 @@ _id_A78F() {
   while(var_0 == 0) {
     var_0 = 1;
 
-    if(_id_0547::_id_585E()) {
+    if(_id_0547::iszombiegamepaused()) {
       var_0 = 0;
       waitframe();
     }
@@ -135,7 +135,7 @@ _id_A78F() {
       wait 0.1;
     }
 
-    while(maps\mp\agents\_agent_utility::_id_45BB() >= _id_4577()) {
+    while(maps\mp\agents\_agent_utility::getnumactiveagents() >= _id_4577()) {
       var_0 = 0;
       wait 0.1;
     }
@@ -197,14 +197,14 @@ _id_5A86() {
   }
 
   if(maps\mp\_utility::_id_585F()) {
-    if(common_scripts\utility::_id_3794("zombie_passive")) {
+    if(common_scripts\utility::ent_flag("zombie_passive")) {
       level._id_ABED maps\mp\_utility::_id_5DC6(var_0);
     } else {
       level._id_ABEC maps\mp\_utility::_id_5DC6(var_0);
     }
   }
 
-  self._id_6734 = 1;
+  self.nopickups = 1;
   self._id_AC10 = 1;
   self suicide();
 }
@@ -278,12 +278,12 @@ _id_7FE1() {
 
     if(var_0) {
       if(common_scripts\utility::_id_562E(level.iszombiesshotgun) && common_scripts\utility::_id_562E(level.zmb_is_endless_wave)) {
-        if(_id_66D7() > level._id_A980) {
+        if(_id_66D7() > level.wavecounter) {
           level._id_AC12 maps\mp\_utility::_id_5DC7();
-          _id_7B87(level._id_A980);
+          _id_7B87(level.wavecounter);
         }
       } else {
-        while(_id_66D7() > level._id_A980) {
+        while(_id_66D7() > level.wavecounter) {
           wait 0.2;
         }
 
@@ -323,7 +323,7 @@ _id_7FE1() {
     }
 
     if(should_override_follower_spawn(isDefined(var_1._id_3EEC), var_3)) {
-      if(maps\mp\_utility::_id_4571() == "mp_zombie_house") {
+      if(maps\mp\_utility::getmapname() == "mp_zombie_house") {
         var_3 = "zombie_generic";
       } else {
         var_3 = common_scripts\utility::random(["zombie_exploder", "zombie_berserker", "zombie_berserker"]);
@@ -348,10 +348,10 @@ _id_7FE1() {
         var_11 = undefined;
       } else {
         var_12 = _id_0547::_id_7A37();
-        var_11 = _id_055A::_id_4696(var_3, 0, 0, var_12._id_38C2);
+        var_11 = _id_055A::getspawnpoint(var_3, 0, 0, var_12._id_38C2);
       }
     } else if(isDefined(level.zmb_locked_spawn_zones))
-      var_11 = _id_055A::_id_4696(var_3, 0, 0, common_scripts\utility::random(level.zmb_locked_spawn_zones));
+      var_11 = _id_055A::getspawnpoint(var_3, 0, 0, common_scripts\utility::random(level.zmb_locked_spawn_zones));
     else {
       var_11 = undefined;
     }
@@ -372,7 +372,7 @@ _id_7FE1() {
       if(isDefined(var_13)) {
         break;
       } else if(isDefined(level.zmb_locked_spawn_zones))
-        var_11 = _id_055A::_id_4696(var_3, 0, 0, common_scripts\utility::random(level.zmb_locked_spawn_zones));
+        var_11 = _id_055A::getspawnpoint(var_3, 0, 0, common_scripts\utility::random(level.zmb_locked_spawn_zones));
 
       waitframe();
     }
@@ -418,7 +418,7 @@ _id_A6DC(var_0) {
 }
 
 _id_584C(var_0) {
-  if(_id_0547::_id_585E()) {
+  if(_id_0547::iszombiegamepaused()) {
     return 0;
   }
 
@@ -444,7 +444,7 @@ _id_584C(var_0) {
     return 0;
   }
 
-  foreach(var_2 in maps\mp\agents\_agent_utility::_id_43FD("all")) {
+  foreach(var_2 in maps\mp\agents\_agent_utility::getactiveagentsoftype("all")) {
     if(common_scripts\utility::_id_562E(var_2._id_6816)) {
       continue;
     }
@@ -470,11 +470,11 @@ _id_584C(var_0) {
 }
 
 _id_45C2() {
-  var_0 = maps\mp\agents\_agent_utility::_id_43FD("all");
+  var_0 = maps\mp\agents\_agent_utility::getactiveagentsoftype("all");
   var_1 = 0;
 
   foreach(var_3 in var_0) {
-    if(var_3.team == level._id_3772) {
+    if(var_3.team == level.enemyteam) {
       var_1++;
     }
   }
@@ -488,9 +488,9 @@ _id_1E56() {
   }
 
   if(isDefined(level.zombieslevelspawndelayfunc)) {
-    return [[level.zombieslevelspawndelayfunc]](level._id_A980);
+    return [[level.zombieslevelspawndelayfunc]](level.wavecounter);
   } else {
-    return _id_957F(level._id_A980);
+    return _id_957F(level.wavecounter);
   }
 }
 

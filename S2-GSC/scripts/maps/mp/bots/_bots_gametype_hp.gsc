@@ -4,58 +4,58 @@
 ******************************************************/
 
 main() {
-  _id_87A7();
-  _id_8796();
+  setup_callbacks();
+  setup_bot_hp();
 }
 
-_id_87A7() {
-  level.bot_funcs["gametype_think"] = ::_id_1A1A;
-  level.bot_funcs["should_start_cautious_approach"] = ::_id_8B7C;
+setup_callbacks() {
+  level.bot_funcs["gametype_think"] = ::bot_hp_think;
+  level.bot_funcs["should_start_cautious_approach"] = ::should_start_cautious_approach_hp;
 }
 
-_id_8796() {
-  maps\mp\bots\_bots_util::_id_1B20();
+setup_bot_hp() {
+  maps\mp\bots\_bots_util::bot_waittill_bots_enabled();
   var_0 = 0;
 
   for(var_1 = 0; var_1 < level._id_0BCF.size; var_1++) {
     var_2 = level._id_0BCF[var_1];
     var_2.shootblank = "zone_" + var_1;
-    var_2 thread maps\mp\bots\_bots_gametype_common::_id_6361();
+    var_2 thread maps\mp\bots\_bots_gametype_common::monitor_zone_control();
     var_3 = 0;
 
-    if(isDefined(var_2._id_9D5E._id_9D9F) && var_2._id_9D5E._id_9D9F) {
-      var_2._id_9D5E common_scripts\utility::_id_9DA3();
+    if(isDefined(var_2.trig.trigger_off) && var_2.trig.trigger_off) {
+      var_2.trig common_scripts\utility::trigger_on();
       var_3 = 1;
     }
 
-    var_2._id_671A = maps\mp\bots\_bots_gametype_common::_id_1A08(var_2._id_9D5E);
+    var_2.nodes = maps\mp\bots\_bots_gametype_common::bot_get_valid_nodes_in_trigger(var_2.trig);
 
     if(var_3) {
-      var_2._id_9D5E common_scripts\utility::_id_9D9F();
+      var_2.trig common_scripts\utility::trigger_off();
     }
   }
 
-  level._id_1AD9 = 1;
+  level.bot_set_zone_nodes = 1;
 
   if(!var_0) {
-    level._id_1A19 = 1;
-    var_4 = level._id_AC7C;
+    level.bot_hp_allow_predictive_capping = 1;
+    var_4 = level.zone;
 
     if(!isDefined(var_4)) {
       var_4 = common_scripts\utility::random(level._id_0BCF);
     }
 
-    maps\mp\bots\_bots_gametype_common::_id_1951([var_4]);
-    level._id_19EA[var_4 getentitynumber()] = 1;
-    level._id_19E8 = 1;
-    thread _id_1950(var_4);
+    maps\mp\bots\_bots_gametype_common::bot_cache_entrances_to_zones([var_4]);
+    level.bot_gametype_zones_precached[var_4 getentitynumber()] = 1;
+    level.bot_gametype_precaching_done = 1;
+    thread bot_cache_entrances_to_other_zones(var_4);
   }
 }
 
-_id_1950(var_0) {
+bot_cache_entrances_to_other_zones(var_0) {
   for(var_1 = common_scripts\utility::_id_0F93(level._id_0BCF, var_0); var_1.size > 0; var_1 = common_scripts\utility::_id_0F93(var_1, var_2)) {
     var_2 = undefined;
-    var_3 = level._id_AC7C;
+    var_3 = level.zone;
 
     if(isDefined(var_3) && common_scripts\utility::_id_0F79(var_1, var_3)) {
       var_2 = var_3;
@@ -63,26 +63,26 @@ _id_1950(var_0) {
       var_2 = common_scripts\utility::random(var_1);
     }
 
-    maps\mp\bots\_bots_gametype_common::_id_1951([var_2]);
-    level._id_19EA[var_2 getentitynumber()] = 1;
+    maps\mp\bots\_bots_gametype_common::bot_cache_entrances_to_zones([var_2]);
+    level.bot_gametype_zones_precached[var_2 getentitynumber()] = 1;
   }
 }
 
-_id_1A1A() {
+bot_hp_think() {
   self notify("bot_hp_think");
   self endon("bot_hp_think");
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
 
-  while(!isDefined(level._id_19E8)) {
+  while(!isDefined(level.bot_gametype_precaching_done)) {
     waitframe();
   }
 
   self botsetflag("separation", 0);
   self botsetflag("grenade_objectives", 1);
   var_0 = undefined;
-  var_1 = level._id_AC7C;
+  var_1 = level.zone;
 
   for(;;) {
     waitframe();
@@ -90,70 +90,70 @@ _id_1A1A() {
     if(self.health <= 0) {
       continue;
     }
-    if(!isDefined(level._id_AC7C) || !isDefined(level._id_19EA[level._id_AC7C getentitynumber()])) {
-      if(maps\mp\bots\_bots_util::_id_1A2D()) {
-        maps\mp\bots\_bots_strategy::_id_19A3();
+    if(!isDefined(level.zone) || !isDefined(level.bot_gametype_zones_precached[level.zone getentitynumber()])) {
+      if(maps\mp\bots\_bots_util::bot_is_defending()) {
+        maps\mp\bots\_bots_strategy::bot_defend_stop();
       }
 
-      self._id_291F = undefined;
-      self[[self._id_6F7F]]();
+      self.current_zone = undefined;
+      self[[self.personality_update_function]]();
       continue;
     }
 
-    if(var_1 != level._id_AC7C) {
+    if(var_1 != level.zone) {
       var_0 = undefined;
-      var_1 = level._id_AC7C;
+      var_1 = level.zone;
     }
 
-    if(isDefined(level._id_ACAF) && !isDefined(var_0) && level._id_7A62 == 0 && level._id_1A19) {
-      var_2 = level._id_ACAF - gettime();
+    if(isDefined(level.zonemovetime) && !isDefined(var_0) && level.randomzonespawn == 0 && level.bot_hp_allow_predictive_capping) {
+      var_2 = level.zonemovetime - gettime();
 
       if(var_2 > 0 && var_2 < 10000) {
-        var_3 = level._id_AC7C._id_3FCA _id_04D1::_id_45F7() == self.team;
+        var_3 = level.zone.gameobject _id_04D1::getownerteam() == self.team;
 
         if(!var_3) {
-          var_4 = level._id_AC7C._id_AC7F.radius * 6;
+          var_4 = level.zone.zone_bounds.radius * 6;
 
           if(var_2 < 5000) {
-            var_4 = level._id_AC7C._id_AC7F.radius * 3;
+            var_4 = level.zone.zone_bounds.radius * 3;
           }
 
-          var_5 = distance(level._id_AC7C._id_AC7F._id_206B, self.origin);
+          var_5 = distance(level.zone.zone_bounds.center, self.origin);
 
           if(var_5 > var_4) {
-            var_0 = _id_1ADF();
+            var_0 = bot_should_cap_next_zone();
           }
         } else {
-          var_6 = maps\mp\bots\_bots_util::_id_19F9(self.team);
+          var_6 = maps\mp\bots\_bots_util::bot_get_max_players_on_team(self.team);
           var_7 = _ceil(var_6 / 2);
 
           if(var_2 < 5000) {
             var_7 = _ceil(var_6 / 3);
           }
 
-          var_8 = _id_19FB(level._id_AC7C);
+          var_8 = bot_get_num_teammates_capturing_zone(level.zone);
 
           if(var_8 + 1 > var_7) {
-            var_0 = _id_1ADF();
+            var_0 = bot_should_cap_next_zone();
           }
         }
       }
     }
 
-    var_9 = level._id_AC7C;
+    var_9 = level.zone;
 
     if(isDefined(var_0) && var_0) {
-      var_9 = level._id_ACB3[(level._id_76EE + 1) % level._id_ACB3.size];
+      var_9 = level.zones[(level.prevzoneindex + 1) % level.zones.size];
     }
 
-    if(!_id_1A2B(var_9)) {
-      _id_1969(var_9);
+    if(!bot_is_capturing_zone(var_9)) {
+      bot_capture_hp_zone(var_9);
     }
   }
 }
 
-_id_1ADF() {
-  if(level._id_7A62) {
+bot_should_cap_next_zone() {
+  if(level.randomzonespawn) {
     return 0;
   } else {
     var_0 = self botgetdifficultysetting("strategyLevel");
@@ -171,17 +171,17 @@ _id_1ADF() {
   }
 }
 
-_id_19FB(var_0) {
-  return _id_1A03(var_0).size;
+bot_get_num_teammates_capturing_zone(var_0) {
+  return bot_get_teammates_capturing_zone(var_0).size;
 }
 
-_id_1A03(var_0) {
+bot_get_teammates_capturing_zone(var_0) {
   var_1 = [];
 
-  foreach(var_3 in level._id_6E97) {
-    if(var_3 != self && maps\mp\_utility::_id_5800(var_3) && _isalliedsentient(self, var_3)) {
-      if(var_3 istouching(level._id_AC7C._id_9D5E)) {
-        if(!_isai(var_3) || var_3 _id_1A2B(var_0)) {
+  foreach(var_3 in level.participants) {
+    if(var_3 != self && maps\mp\_utility::isteamparticipant(var_3) && _isalliedsentient(self, var_3)) {
+      if(var_3 istouching(level.zone.trig)) {
+        if(!_isai(var_3) || var_3 bot_is_capturing_zone(var_0)) {
           var_1[var_1.size] = var_3;
         }
       }
@@ -191,29 +191,29 @@ _id_1A03(var_0) {
   return var_1;
 }
 
-_id_1A2B(var_0) {
-  if(!maps\mp\bots\_bots_util::_id_1A28()) {
+bot_is_capturing_zone(var_0) {
+  if(!maps\mp\bots\_bots_util::bot_is_capturing()) {
     return 0;
   }
 
-  return self._id_291F == var_0;
+  return self.current_zone == var_0;
 }
 
-_id_1969(var_0) {
-  self._id_291F = var_0;
-  var_1["entrance_points_index"] = var_0._id_37DA;
-  var_1["override_origin_node"] = var_0._id_206D;
-  maps\mp\bots\_bots_strategy::_id_196B(var_0.origin, var_0._id_671A, var_0._id_9D5E, var_1);
+bot_capture_hp_zone(var_0) {
+  self.current_zone = var_0;
+  var_1["entrance_points_index"] = var_0.entrance_indices;
+  var_1["override_origin_node"] = var_0.center_node;
+  maps\mp\bots\_bots_strategy::bot_capture_zone(var_0.origin, var_0.nodes, var_0.trig, var_1);
 }
 
-_id_8B7C(var_0) {
+should_start_cautious_approach_hp(var_0) {
   if(var_0) {
-    var_1 = level._id_AC7C._id_3FCA _id_04D1::_id_45F7();
+    var_1 = level.zone.gameobject _id_04D1::getownerteam();
 
     if(var_1 == "neutral" || var_1 == self.team) {
       return 0;
     }
   }
 
-  return maps\mp\bots\_bots_strategy::_id_8B7A(var_0);
+  return maps\mp\bots\_bots_strategy::should_start_cautious_approach_default(var_0);
 }

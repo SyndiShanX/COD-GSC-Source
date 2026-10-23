@@ -273,7 +273,7 @@ _id_0A23(var_0, var_1, var_2, var_3) {
   } else if(isDefined(var_2) && maps\mp\_utility::isexplosivedamage(var_2)) {
     var_4[var_4.size] = 3;
     var_4[var_4.size] = 3;
-  } else if(isDefined(var_0._id_5033) && var_0._id_5033 &level.idflags_penetration) {
+  } else if(isDefined(var_0.idflags) && var_0.idflags &level.idflags_penetration) {
     var_4[var_4.size] = 3;
     var_4[var_4.size] = 4;
   } else if(isDefined(var_2) && var_2 == "MOD_MELEE") {
@@ -291,11 +291,11 @@ _id_0A23(var_0, var_1, var_2, var_3) {
     var_3[var_3.size] = "winter_map_kill";
   }
 
-  if(self.team != var_0.team && isDefined(var_0._id_2013)) {
+  if(self.team != var_0.team && isDefined(var_0.carryflag)) {
     var_3[var_3.size] = "flag_carrier_kill";
   }
 
-  if(level.gametype == "hp" && isDefined(level._id_AC7C._id_9D5E) && self istouching(level._id_AC7C._id_9D5E)) {
+  if(level.gametype == "hp" && isDefined(level.zone.trig) && self istouching(level.zone.trig)) {
     var_3[var_3.size] = "kill_on_hp";
   }
 
@@ -313,8 +313,8 @@ _id_0A23(var_0, var_1, var_2, var_3) {
   }
 
   if(!maps\mp\_utility::iskillstreakweapon(var_1) && maps\mp\_utility::_id_5695(var_2) && !maps\mp\_utility::isdogfightgametype()) {
-    if(isDefined(self._id_3BE0)) {
-      var_12 = self._id_3BE0;
+    if(isDefined(self.firedads)) {
+      var_12 = self.firedads;
     } else {
       var_12 = self playerads();
     }
@@ -571,11 +571,11 @@ _id_0A24(var_0, var_1) {
   var_2 = checkgamemode(var_2, 3);
   var_2 = checkspecialmodes(var_2);
 
-  if(level.gametype == "dom" && isDefined(self._id_9AC5)) {
-    foreach(var_4 in self._id_9AC5) {
+  if(level.gametype == "dom" && isDefined(self.touchtriggers)) {
+    foreach(var_4 in self.touchtriggers) {
       var_5 = 0;
 
-      foreach(var_7 in level._id_3CC5) {
+      foreach(var_7 in level.flags) {
         if(var_4 == var_7) {
           var_5 = 1;
           break;
@@ -865,7 +865,7 @@ _id_0A1E(var_0, var_1, var_2, var_3) {
   var_4[var_4.size] = 3;
 
   if(isPlayer(var_3)) {
-    var_6 = _id_04D2::_id_450B(3);
+    var_6 = _id_04D2::gethighestscoringplayersarray(3);
     var_7 = 2;
 
     if(level.players.size > 5) {
@@ -908,10 +908,10 @@ _id_0A1E(var_0, var_1, var_2, var_3) {
   var_4[var_4.size] = var_11;
   var_4[var_4.size] = 7;
 
-  if(_func_3AF()) {
-    var_15 = _func_3B5();
-    var_16 = self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_15, "ranked_games_total");
-    var_17 = !self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_15, "mmr_was_adjusted");
+  if(xmodelalias/alias_ger_heads_scarf_for_muddy_cheap()) {
+    var_15 = xmodelalias/alias_ger_heads_ss_muddy_cheap();
+    var_16 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_season_data", var_15, "ranked_games_total");
+    var_17 = !self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_season_data", var_15, "mmr_was_adjusted");
 
     if(!var_17 || var_16 >= getdvarint("4697", 10)) {
       var_4[var_4.size] = 3;
@@ -1248,12 +1248,12 @@ _id_0A2B(var_0, var_1) {
 }
 
 ae_sendrankedplayrankupevent(var_0) {
-  var_1 = self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_current_season");
-  var_2 = self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_1, "rewarded", var_0 - 1);
+  var_1 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_current_season");
+  var_2 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_season_data", var_1, "rewarded", var_0 - 1);
 
   if(!isDefined(var_2) || var_2 == 0) {
     self _meth_8697(31, [1, var_1 + 1, 2, var_0]);
-    self setplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_1, "rewarded", var_0 - 1, 1);
+    self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_season_data", var_1, "rewarded", var_0 - 1, 1);
   }
 }
 
@@ -1328,7 +1328,7 @@ ae_sendzombiekillevent(var_0, var_1) {
     var_3[var_3.size] = 1;
   }
 
-  if(level.gametype == "undead" && isDefined(level._id_AC7C._id_9D5E) && self istouching(level._id_AC7C._id_9D5E)) {
+  if(level.gametype == "undead" && isDefined(level.zone.trig) && self istouching(level.zone.trig)) {
     var_2[var_2.size] = "kill_on_hp";
   }
 

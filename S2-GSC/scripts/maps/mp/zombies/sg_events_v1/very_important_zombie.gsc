@@ -35,7 +35,7 @@ basic_assassinate_model_swap() {
   self.headmodel = "zom_head_fdr04_org1";
   self attach(self.headmodel);
   self._id_4B5A = 1;
-  self._id_4B6E = 0;
+  self.hashelmet = 0;
   self._id_4CAA = "ger_alfakey_valhat_r1c1";
   self attach(self._id_4CAA);
   self attach("ger_m_valpants_r1");
@@ -67,7 +67,7 @@ wait_for_low_health_or_lack_of_patience() {
 }
 
 basic_vip_run(var_0, var_1) {
-  _id_0547::_id_A6F6();
+  _id_0547::waitnetworkframe();
   var_2 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_other_zombies_count");
   var_3 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_repitions");
 
@@ -88,11 +88,11 @@ basic_vip_run(var_0, var_1) {
   switch (var_1) {
     case "assassinate_common":
       level thread maps\mp\zombies\shotgun\_zombies_shotgun_rideau_global::run_rideau_bomber_comment();
-      var_5 = common_scripts\utility::_id_46B7("sg_assassinate_spawn_point", "targetname");
+      var_5 = common_scripts\utility::getstructarray("sg_assassinate_spawn_point", "targetname");
       break;
     case "type_escort":
       level thread maps\mp\zombies\shotgun\_zombies_shotgun_rideau_global::run_rideau_escort_bomber_comment();
-      var_5 = common_scripts\utility::_id_46B7("sg_escort_spawn_point", "targetname");
+      var_5 = common_scripts\utility::getstructarray("sg_escort_spawn_point", "targetname");
       break;
   }
 
@@ -159,26 +159,26 @@ basic_vip_run(var_0, var_1) {
   level notify("sg_VIP_finished");
 
   if(_id_0547::_id_5565(var_1, "assassinate_common")) {
-    if(common_scripts\utility::_id_3C77("flag_sg_VIP_complete")) {
-      common_scripts\utility::_id_3C7B("flag_sg_VIP_complete");
-      common_scripts\utility::_id_3C7B("flag_sg_VIP_killed");
-      common_scripts\utility::_id_3C7B("flag_sg_VIP_timeout");
+    if(common_scripts\utility::flag("flag_sg_VIP_complete")) {
+      common_scripts\utility::flag_clear("flag_sg_VIP_complete");
+      common_scripts\utility::flag_clear("flag_sg_VIP_killed");
+      common_scripts\utility::flag_clear("flag_sg_VIP_timeout");
       return 0;
     } else {
-      common_scripts\utility::_id_3C7B("flag_sg_VIP_complete");
-      common_scripts\utility::_id_3C7B("flag_sg_VIP_killed");
-      common_scripts\utility::_id_3C7B("flag_sg_VIP_timeout");
+      common_scripts\utility::flag_clear("flag_sg_VIP_complete");
+      common_scripts\utility::flag_clear("flag_sg_VIP_killed");
+      common_scripts\utility::flag_clear("flag_sg_VIP_timeout");
       return 1;
     }
-  } else if(common_scripts\utility::_id_3C77("flag_sg_VIP_complete")) {
-    common_scripts\utility::_id_3C7B("flag_sg_VIP_complete");
-    common_scripts\utility::_id_3C7B("flag_sg_VIP_killed");
-    common_scripts\utility::_id_3C7B("flag_sg_VIP_timeout");
+  } else if(common_scripts\utility::flag("flag_sg_VIP_complete")) {
+    common_scripts\utility::flag_clear("flag_sg_VIP_complete");
+    common_scripts\utility::flag_clear("flag_sg_VIP_killed");
+    common_scripts\utility::flag_clear("flag_sg_VIP_timeout");
     return 1;
   } else {
-    common_scripts\utility::_id_3C7B("flag_sg_VIP_complete");
-    common_scripts\utility::_id_3C7B("flag_sg_VIP_killed");
-    common_scripts\utility::_id_3C7B("flag_sg_VIP_timeout");
+    common_scripts\utility::flag_clear("flag_sg_VIP_complete");
+    common_scripts\utility::flag_clear("flag_sg_VIP_killed");
+    common_scripts\utility::flag_clear("flag_sg_VIP_timeout");
     return 0;
   }
 }
@@ -187,7 +187,7 @@ basic_vip_get_waypoints(var_0) {
   var_1 = self;
 
   for(var_2 = []; isDefined(var_1.target); var_1 = var_3) {
-    var_3 = common_scripts\utility::_id_46B5(var_1.target, "targetname");
+    var_3 = common_scripts\utility::getstruct(var_1.target, "targetname");
     var_2[var_2.size] = var_3;
   }
 
@@ -312,18 +312,18 @@ basic_vip_waitfor_done_death_or_timeout(var_0, var_1, var_2) {
   }
 
   thread basic_vip_kill_listener(var_1);
-  common_scripts\utility::_id_3CA2("flag_sg_VIP_killed", "flag_sg_VIP_complete", "flag_sg_VIP_timeout");
+  common_scripts\utility::flag_wait_any("flag_sg_VIP_killed", "flag_sg_VIP_complete", "flag_sg_VIP_timeout");
 
   if(isDefined(var_2)) {
     var_2 notify("stop_modifying_wave");
   }
 
-  return common_scripts\utility::_id_3C77("flag_sg_VIP_killed");
+  return common_scripts\utility::flag("flag_sg_VIP_killed");
 }
 
 basic_vip_timeout_listener(var_0) {
   level endon("sg_VIP_finished");
-  level common_scripts\utility::_id_A70A("sg_obj_timeout", "round complete");
+  level common_scripts\utility::waittill_any("sg_obj_timeout", "round complete");
   common_scripts\utility::flag_set("flag_sg_VIP_timeout");
   var_0 _id_0563::_id_AB99(level.player, level.player, 1000, undefined, "MOD_BULLET", "m1911_zm", var_0.origin, (0, 0, 0), "tag_origin", 0, "tag_weapon");
 }
@@ -332,7 +332,7 @@ basic_vip_kill_listener(var_0) {
   level endon("sg_VIP_finished");
   var_1 = 1;
 
-  while(!common_scripts\utility::_id_3C77("flag_sg_VIP_complete") && any_vib_alive(var_0)) {
+  while(!common_scripts\utility::flag("flag_sg_VIP_complete") && any_vib_alive(var_0)) {
     waitframe();
   }
 
@@ -340,7 +340,7 @@ basic_vip_kill_listener(var_0) {
 }
 
 any_vib_alive(var_0) {
-  foreach(var_2 in maps\mp\agents\_agent_utility::_id_43FD("all")) {
+  foreach(var_2 in maps\mp\agents\_agent_utility::getactiveagentsoftype("all")) {
     if(common_scripts\utility::_id_562E(var_2.sgvip)) {
       return 1;
     }
@@ -356,9 +356,9 @@ basic_vip_init() {
 }
 
 basic_vip_clear() {
-  common_scripts\utility::_id_3C7B("flag_sg_VIP_complete");
-  common_scripts\utility::_id_3C7B("flag_sg_VIP_killed");
-  common_scripts\utility::_id_3C7B("flag_sg_VIP_timeout");
+  common_scripts\utility::flag_clear("flag_sg_VIP_complete");
+  common_scripts\utility::flag_clear("flag_sg_VIP_killed");
+  common_scripts\utility::flag_clear("flag_sg_VIP_timeout");
 }
 
 spawn_new_important_bomber(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -422,7 +422,7 @@ new_important_bomber(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_1) && var_1 == "assassinate_common") {
     level thread maps\mp\_utility::_id_6F74(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::set_waypoints_to_enemy, 2, "sg_VIP_finished");
     var_5._id_0009 = &"ZOMBIE_DLC3_IMPORTANT_TARGET";
-    var_5 maps\mp\agents\_agent_common::_id_83FD(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_assassinate_common_health"));
+    var_5 maps\mp\agents\_agent_common::set_agent_health(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_assassinate_common_health"));
     var_5 thread basic_vip_move_to_destination("zm_hud_type_escort_icon", var_4);
     var_5 thread basic_assassinate_sprint_when_near_death();
     var_5.exploder_godmode = 1;
@@ -438,10 +438,10 @@ new_important_bomber(var_0, var_1, var_2, var_3, var_4) {
     }
   } else {
     level thread maps\mp\_utility::_id_6F74(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::set_waypoints_to_enemy, 1, "sg_VIP_finished");
-    var_5 maps\mp\agents\_agent_utility::hudoutlineenable(level._id_746E);
+    var_5 maps\mp\agents\_agent_utility::hudoutlineenable(level.playerteam);
     var_7 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_escort_health");
     var_7 = var_7 * maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_escort_health_redskull");
-    var_5 maps\mp\agents\_agent_common::_id_83FD(int(var_7));
+    var_5 maps\mp\agents\_agent_common::set_agent_health(int(var_7));
     var_5 thread basic_vip_move_to_destination("zm_hud_type_escort_icon");
   }
 

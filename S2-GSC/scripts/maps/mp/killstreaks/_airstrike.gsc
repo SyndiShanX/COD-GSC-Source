@@ -4,14 +4,14 @@
 ******************************************************/
 
 init() {
-  level._id_80B7["airstrike"] = 400;
+  level.visionsetnakedforplayer_lerp["airstrike"] = 400;
   level._id_80B8["airstrike"] = 75;
   level.setwhizbyprobabilities["airstrike"] = -1;
-  level._id_80B9["airstrike"] = 6.0;
+  level.returnplayercontrol["airstrike"] = 6.0;
   level.makeglobalunusable["airstrike"] = 8.0;
-  level._id_5A61["airstrike"] = ::_id_9E23;
-  level._id_5A7D["airstrike_bomb_mp"] = "airstrike";
-  level._id_5A7D["airstrike_bomb_axis_mp"] = "airstrike";
+  level.killstreakfuncs["airstrike"] = ::_id_9E23;
+  level.killstreakwieldweapons["airstrike_bomb_mp"] = "airstrike";
+  level.killstreakwieldweapons["airstrike_bomb_axis_mp"] = "airstrike";
 }
 
 _id_9E23(var_0) {
@@ -71,7 +71,7 @@ _id_0B9A(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     var_9 = _id_0527::_id_4570();
 
-    if(maps\mp\_utility::_id_4571() == "mp_airship") {
+    if(maps\mp\_utility::getmapname() == "mp_airship") {
       var_9 = var_9 - 180;
     }
 
@@ -79,7 +79,7 @@ _id_0B9A(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     for(var_11 = -5; var_11 < 6; var_11++) {
       var_12 = spawnStruct();
-      var_12.origin = (level._id_5FEB[0] + _cos(var_9 + 90) * var_11 * 700, level._id_5FEB[1] + _sin(var_9 + 90) * var_11 * 700, level._id_5FEB[2]);
+      var_12.origin = (level.mapcenter[0] + _cos(var_9 + 90) * var_11 * 700, level.mapcenter[1] + _sin(var_9 + 90) * var_11 * 700, level.mapcenter[2]);
       var_12._id_7F31 = _abs((_abs(var_11) - 5) / 50);
       var_10[var_10.size] = var_12;
     }
@@ -118,7 +118,7 @@ _id_0B9A(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_11DA() {
-  var_0 = _id_0380::_id_2889("mp_ks_air_raid_siren", undefined, level._id_5FEB + (0, 0, 200));
+  var_0 = _id_0380::_id_2889("mp_ks_air_raid_siren", undefined, level.mapcenter + (0, 0, 200));
 }
 
 _id_4435(var_0, var_1, var_2) {
@@ -155,7 +155,7 @@ _id_4435(var_0, var_1, var_2) {
       }
 
       if(isDefined(self) && var_4 == self && var_11 <= 1000) {
-        if(maps\mp\_utility::_id_4571() != "mp_shipment_s2" && maps\mp\_utility::_id_4571() != "mp_sandbox_01") {
+        if(maps\mp\_utility::getmapname() != "mp_shipment_s2" && maps\mp\_utility::getmapname() != "mp_sandbox_01") {
           if(!_bullettracepassed(var_4.origin + (0, 0, 32), var_4.origin + (0, 0, 10000), 0, var_4)) {
             var_10._id_7F31 = var_10._id_7F31 - 3.25;
             continue;
@@ -237,7 +237,7 @@ _id_4435(var_0, var_1, var_2) {
     }
 
     if(var_10._id_7F31 == var_21._id_7F31) {
-      if(common_scripts\utility::_id_24A6()) {
+      if(common_scripts\utility::cointoss()) {
         var_21 = var_10;
       }
     }

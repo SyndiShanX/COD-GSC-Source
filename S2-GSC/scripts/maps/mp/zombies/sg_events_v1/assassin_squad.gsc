@@ -16,10 +16,10 @@ init() {
 
 basic_assassin_squad_run(var_0) {
   level endon("sg_obj_timeout");
-  var_1 = common_scripts\utility::_id_46B7("zmb_assassin_spawnpoint_leader", "targetname");
+  var_1 = common_scripts\utility::getstructarray("zmb_assassin_spawnpoint_leader", "targetname");
   var_2 = common_scripts\utility::random(var_1);
   var_2.leader = 1;
-  var_3 = common_scripts\utility::_id_46B7(var_2.target, "targetname");
+  var_3 = common_scripts\utility::getstructarray(var_2.target, "targetname");
   var_4 = common_scripts\utility::_id_0F73(var_3, [var_2]);
   maps\mp\mp_zombie_nest_ee_wave_manipulation::_id_8608();
   var_5 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("meuchler_common_leader_type");
@@ -92,12 +92,12 @@ respawnanassassinsquadzombie() {
     var_1 = 1;
   }
 
-  var_2 = common_scripts\utility::_id_46B7("zmb_assassin_spawnpoint_leader", "targetname");
+  var_2 = common_scripts\utility::getstructarray("zmb_assassin_spawnpoint_leader", "targetname");
   var_3 = common_scripts\utility::random(var_2);
   var_4 = spawn_sh_assassin(undefined, var_0, var_3);
   self._id_6701 = 1;
   self._id_2A9D = undefined;
-  self._id_6734 = 1;
+  self.nopickups = 1;
   self._id_AC10 = 1;
   self suicide();
 }

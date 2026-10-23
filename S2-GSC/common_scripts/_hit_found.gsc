@@ -197,7 +197,7 @@ _id_9F91(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_7 = var_7 | 134217728;
   }
 
-  var_8 = _func_335(var_0, var_1, var_6, var_7, self, var_4);
+  var_8 = maps/_weather(var_0, var_1, var_6, var_7, self, var_4);
   return var_8;
 }
 
@@ -213,7 +213,7 @@ _id_1D85(var_0, var_1, var_2, var_3, var_4) {
     var_9 = 377749489;
   }
 
-  var_6 = _func_335(var_0, var_1, var_9, var_7, self, undefined, var_8);
+  var_6 = maps/_weather(var_0, var_1, var_9, var_7, self, undefined, var_8);
 
   if(var_6["is_matching_hit_found"]) {
     return [var_6["position"], var_6["surfacetype"], var_6["entity"]];
@@ -237,7 +237,7 @@ _id_6FAC(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_5)) {
     var_9 = _physicstrace(var_7, var_8, var_3);
   } else {
-    var_10 = _func_335(var_7, var_8, var_5, undefined, var_3);
+    var_10 = maps/_weather(var_7, var_8, var_5, undefined, var_3);
 
     if(var_10["is_matching_hit_found"]) {
       var_9 = var_10["position"];
@@ -461,8 +461,8 @@ _id_10D0(var_0, var_1, var_2, var_3, var_4) {
     var_1 = var_0;
   }
 
-  var_0._id_5C66 = var_0 _meth_85A3();
-  var_0._id_7E86 = var_0 _meth_85A4();
+  var_0._id_5C66 = var_0 set_threat_grenade_response();
+  var_0._id_7E86 = var_0 set_threshold();
   var_0._id_9A95 = var_0 gettoparc();
   var_0._id_1B4B = var_0 getbottomarc();
   var_5 = var_1 gettagorigin("TAG_PLAYER");
@@ -497,11 +497,11 @@ _id_10D0(var_0, var_1, var_2, var_3, var_4) {
   var_18 = var_5 - var_7;
   [var_20, var_21, var_22, var_23] = _id_43D8(var_2[2], var_7, var_5, var_8, var_18[2], 0, var_17, var_0._id_5C66, var_0._id_7E86, var_0._id_9A95, var_0._id_1B4B);
 
-  if(isDefined(var_20) && var_20 < var_0 _meth_85A3()) {
+  if(isDefined(var_20) && var_20 < var_0 set_threat_grenade_response()) {
     var_0 setleftarc(var_20);
   }
 
-  if(isDefined(var_21) && var_21 < var_0 _meth_85A4()) {
+  if(isDefined(var_21) && var_21 < var_0 set_threshold()) {
     var_0 setrightarc(var_21);
   }
 

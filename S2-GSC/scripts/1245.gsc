@@ -18,12 +18,12 @@ init() {
   level.setcorpsefalling["sentry_minigun"]._id_6F25 = 0.35;
   level.setcorpsefalling["sentry_minigun"]._id_83E8 = "sentry";
   level.setcorpsefalling["sentry_minigun"].getpathgoalpos = "sentry_offline";
-  level.setcorpsefalling["sentry_minigun"]._id_9A01 = 90.0;
+  level.setcorpsefalling["sentry_minigun"].timeout = 90.0;
   level.setcorpsefalling["sentry_minigun"]._id_90FA = 0.05;
   level.setcorpsefalling["sentry_minigun"]._id_6CA3 = 8.0;
   level.setcorpsefalling["sentry_minigun"]._id_2650 = 0.1;
   level.setcorpsefalling["sentry_minigun"]._id_3F84 = 0.3;
-  level.setcorpsefalling["sentry_minigun"]._id_944C = "sentry";
+  level.setcorpsefalling["sentry_minigun"].streakname = "sentry";
   level.setcorpsefalling["sentry_minigun"]._id_01D1 = "sentry_supplydrop_mp";
   level.setcorpsefalling["sentry_minigun"]._id_6294 = "hub_lootcrate_normal";
   level.setcorpsefalling["sentry_minigun"]._id_629D = "tag_origin";
@@ -73,7 +73,7 @@ _id_11BF(var_0) {
     _id_A85E();
   }
 
-  self _meth_85EF(&"supply_drop_player_warp_complete");
+  self set_vision_set_player(&"supply_drop_player_warp_complete");
   self setclientomnvar("ui_hub_prep_supplydrop", 1);
 
   for(;;) {
@@ -104,7 +104,7 @@ _id_1718(var_0, var_1) {
 
   if(self._id_56A4) {
     if(isDefined(self._id_155F)) {
-      self._id_155F _id_04E0::_id_1543((0, 0, 80), self);
+      self._id_155F _id_04E0::ball_physics_launch_drop((0, 0, 80), self);
     }
   }
 
@@ -153,30 +153,30 @@ _id_9BC5() {
   self endon("disconnect");
   self._id_4DEF endon("placed");
   self._id_4DEF endon("death");
-  self._id_4DEF._id_1F2F = 1;
+  self._id_4DEF.canbeplaced = 1;
   var_0 = -1;
   var_1 = self _meth_85E1(0);
   var_2 = self _meth_85E1(1);
 
   for(;;) {
     if(isDefined(self._id_4DEF)) {
-      var_3 = self _meth_82D6(1, 35);
+      var_3 = self canplayerplacesentry(1, 35);
       self._id_4DEF.origin = var_3["origin"];
       self._id_4DEF.angles = var_3["angles"];
-      self._id_4DEF._id_1F2F = _id_2865() && self isonground() && var_3["result"] && _id_21EE(self._id_4DEF) && _abs(self._id_4DEF.origin[2] - self.origin[2]) < 8;
+      self._id_4DEF.canbeplaced = _id_2865() && self isonground() && var_3["result"] && _id_21EE(self._id_4DEF) && _abs(self._id_4DEF.origin[2] - self.origin[2]) < 8;
 
-      if(self._id_4DEF._id_1F2F) {
+      if(self._id_4DEF.canbeplaced) {
         var_4 = self._id_4DEF.origin - self.origin;
         var_4 = vectortoangles(var_4);
         var_4 = var_4 * (0, 1, 0);
         var_5 = self.origin + (0, 0, 73);
         var_6 = self.origin + anglestoright(var_4) * 55 + anglesToForward(var_4) * -60 + (0, 0, 73);
         var_7 = bulletTrace(var_5, var_6, 1, self);
-        self._id_4DEF._id_1F2F = var_7["fraction"] == 1.0;
+        self._id_4DEF.canbeplaced = var_7["fraction"] == 1.0;
       }
 
-      if(self._id_4DEF._id_1F2F != var_0) {
-        if(self._id_4DEF._id_1F2F) {
+      if(self._id_4DEF.canbeplaced != var_0) {
+        if(self._id_4DEF.canbeplaced) {
           _killfxontagforclient(level._id_94F2, self._id_4DEF, "TAG_ORIGIN", self);
           waitframe();
           _playfxontagforclients(level._id_94F1, self._id_4DEF, "TAG_ORIGIN", self);
@@ -189,7 +189,7 @@ _id_9BC5() {
         }
       }
 
-      var_0 = self._id_4DEF._id_1F2F;
+      var_0 = self._id_4DEF.canbeplaced;
       waitframe();
 
       if(var_1 != self _meth_85E1(0) || var_2 != self _meth_85E1(1)) {
@@ -225,7 +225,7 @@ _id_63CC(var_0, var_1) {
         return;
       }
 
-      if(self._id_4DEF._id_1F2F) {
+      if(self._id_4DEF.canbeplaced) {
         while(!self isonground()) {
           waitframe();
         }
@@ -420,7 +420,7 @@ _id_7FAF(var_0, var_1, var_2) {
   var_5 = 0;
   self._id_5F08 = [];
   self notify("beginLootReveal");
-  self _meth_85EF(&"supply_drop_allow_card_reveal", 1, var_0);
+  self set_vision_set_player(&"supply_drop_allow_card_reveal", 1, var_0);
   self setclientomnvar("ui_hub_prep_supplydrop", 0);
 
   for(;;) {
@@ -439,7 +439,7 @@ _id_7FAF(var_0, var_1, var_2) {
     waitframe();
   }
 
-  self _meth_85EF(&"supply_drop_begin_card_reveal", 0);
+  self set_vision_set_player(&"supply_drop_begin_card_reveal", 0);
   thread _id_A6BF();
   _id_8737(0);
   var_4 = 3;
@@ -451,13 +451,13 @@ _id_7FAF(var_0, var_1, var_2) {
 
     if(common_scripts\utility::_id_562E(var_2)) {
       for(var_9 = 0; var_9 < self._id_48CC.size; var_9++) {
-        if(_func_3B2(self._id_48CC[var_9])) {
+        if(xmodelalias/alias_ger_heads_scarf_ss_muddy(self._id_48CC[var_9])) {
           var_8[var_8.size] = self._id_48CC[var_9];
         }
       }
     } else {
       for(var_9 = 0; var_9 < self._id_48CC.size; var_9++) {
-        if(!_func_3B2(self._id_48CC[var_9])) {
+        if(!xmodelalias/alias_ger_heads_scarf_ss_muddy(self._id_48CC[var_9])) {
           var_8[var_8.size] = self._id_48CC[var_9];
           continue;
         }
@@ -514,7 +514,7 @@ _id_7FAF(var_0, var_1, var_2) {
   var_13 = hasextraloot(var_0) && !common_scripts\utility::_id_562E(var_2);
 
   if(!var_13) {
-    self _meth_85EF(&"supply_drop_all_cards_revealed");
+    self set_vision_set_player(&"supply_drop_all_cards_revealed");
   }
 
   if(!isDefined(self._id_1388) || !self._id_1388) {
@@ -687,7 +687,7 @@ _id_5106(var_0, var_1, var_2) {
   var_5 = 0;
   var_6 = 0;
   var_7 = (var_0 + 1) * 2;
-  var_8 = "tag_fx" + common_scripts\utility::_id_9AAD(var_0 + 1);
+  var_8 = "tag_fx" + common_scripts\utility::tostring(var_0 + 1);
 
   if(isDefined(self.currentguids)) {
     var_3 = self.currentguids[var_0];
@@ -885,7 +885,7 @@ _id_7421(var_0) {
   self notifyonplayercommandremove("leftDpad", "+actionslot 3");
   self notifyonplayercommandremove("rightDpad", "+actionslot 4");
   _id_04E0::_id_721A("mp_unarmed_stand_flare_throw", 1);
-  maps\mp\_utility::_id_2CED(1.0, ::_id_49E9);
+  maps\mp\_utility::delaythread(1.0, ::_id_49E9);
   self._id_76A5 = _id_04E0::_id_43F8();
   self._id_76A4 = self getplayerangles();
   self setclientomnvar("ui_hub_opening_supplydrop", 1);
@@ -925,7 +925,7 @@ _id_49E9() {
 
 _id_2360(var_0) {
   var_0 endon("death");
-  common_scripts\utility::_id_A70A("death", "disconnect", "supplydrop_timeout");
+  common_scripts\utility::waittill_any("death", "disconnect", "supplydrop_timeout");
   var_0 delete();
   level._id_08C2 = common_scripts\utility::_id_0F93(level._id_08C2, var_0);
 }
@@ -948,7 +948,7 @@ _id_7423() {
   self._id_572B = 0;
   _id_04E0::_id_870B(0);
   self setclientomnvar("ui_hub_opening_supplydrop", 0);
-  self _meth_85EF(&"exit_supply_drop", 0);
+  self set_vision_set_player(&"exit_supply_drop", 0);
   self._id_1387 = 0;
   self._id_579F = 1;
 }
@@ -1078,22 +1078,22 @@ _id_36E1(var_0) {
 }
 
 _id_2FA9() {
-  if(!isDefined(self._id_2F81)) {
-    self._id_2F81 = 0;
+  if(!isDefined(self.disabledweapon)) {
+    self.disabledweapon = 0;
   }
 
-  self._id_2F81++;
+  self.disabledweapon++;
   self disableweapons();
 }
 
 _id_366B() {
-  if(!isDefined(self._id_2F81)) {
-    self._id_2F81 = 0;
+  if(!isDefined(self.disabledweapon)) {
+    self.disabledweapon = 0;
   }
 
-  self._id_2F81--;
+  self.disabledweapon--;
 
-  if(!self._id_2F81) {
+  if(!self.disabledweapon) {
     self enableweapons();
   }
 }
@@ -1101,7 +1101,7 @@ _id_366B() {
 oncarrierdeathordisconnect() {
   self._id_4DEF endon("placed");
   self._id_4DEF endon("death");
-  common_scripts\utility::_id_A70A("death", "disconnect");
+  common_scripts\utility::waittill_any("death", "disconnect");
   self._id_4DEF delete();
   self._id_4DEF = undefined;
 }
@@ -1111,7 +1111,7 @@ _id_1459(var_0) {
 
   foreach(var_3 in level.players) {
     if(isPlayer(var_3) && maps\mp\_utility::isreallyalive(var_3) && self != var_3) {
-      if(common_scripts\utility::_id_302B(self._id_08DD.origin, var_3.origin) < 65536) {
+      if(common_scripts\utility::distance_2d_squared(self._id_08DD.origin, var_3.origin) < 65536) {
         var_1[var_1.size] = var_3;
 
         if(isDefined(var_0)) {
@@ -1139,7 +1139,7 @@ _id_A85E() {
   self endon("disconnect");
 
   if(!isDefined(level._id_77A6)) {
-    level._id_77A6 = common_scripts\utility::_id_46B7("psd_spawn_location", "targetname");
+    level._id_77A6 = common_scripts\utility::getstructarray("psd_spawn_location", "targetname");
   }
 
   var_0 = common_scripts\utility::random(level._id_77A6);
@@ -1219,7 +1219,7 @@ monitorsupplydropawarded() {
     var_3 = tablelookup("mp/supplyDropTypes.csv", 1, var_1, 0);
 
     if(var_3 != "") {
-      thread maps\mp\gametypes\_hud_message::_id_9102(var_3, var_1);
+      thread maps\mp\gametypes\_hud_message::splashnotify(var_3, var_1);
     }
   }
 }

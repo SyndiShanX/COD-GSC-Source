@@ -33,7 +33,7 @@ init() {
   var_0._id_0879 = "zombie_bob";
   var_0._id_4C12 = 1;
   var_0.overridehealth = int(bob_health_scale_per_num_players() * 32000);
-  var_0._id_60E2 = 65;
+  var_0.meleedamage = 65;
   var_0._id_8302 = 85;
   var_0._id_8303 = 15;
   var_0.parenttype = "zombie_generic";
@@ -43,7 +43,7 @@ init() {
   var_0.shockbyteslablood = 0;
   var_0._id_5ED2["bob"]["whole_body"] = "zom_bob";
   _id_0547::_id_0A52(var_0, "zombie_bob");
-  _id_0541::_id_2F92("crawl", ["zombie_bob"]);
+  _id_0541::disablemutatorfortypes("crawl", ["zombie_bob"]);
   _id_0547::_id_7BD0("zombie_bob_charge", _id_0547::zombie_charge_run, undefined, 6, _id_0547::zombie_charge_cleanup);
   _id_0547::_id_7BD0("zombie_bob_infect", ::zombie_bob_infect_zombies, undefined, 6, ::zombie_bob_infect_cleanup);
   _id_0547::_id_7BD0("zombie_bob_smoke", ::zombie_bob_smoke_atk, undefined, 6, ::zombie_bob_smoke_atk_cleanup);
@@ -84,7 +84,7 @@ init_bob_health() {
 
 init_bob_phase_handler() {
   var_0 = spawnStruct();
-  var_0._id_3F02 = _id_0547::_id_4B2C;
+  var_0.func = _id_0547::has_entered_game;
   var_0.value = 0;
   register_bob_phase("bob_punch", "bob_sizzle", ::zombie_bob_punch_think, [], ["bob_was_koed"], [var_0]);
   register_bob_phase("bob_sizzle", "bob_smoke", ::zombie_bob_sizzle_think, [], ["bob_was_koed"], [var_0]);
@@ -116,10 +116,10 @@ zombie_bob_think_setup() {
   self._id_6816 = 1;
   self.nomutilate = 1;
   self.nopairmelee = 1;
-  self._id_15E1 = 1;
+  self.barrivalsenabled = 1;
   self._id_57FD = 1;
   self.isteslastunimmune = 1;
-  self _meth_84D4();
+  self scragentusemodelcollisionbounds();
 }
 
 zombie_bob_should_charge() {
@@ -131,7 +131,7 @@ zombie_bob_should_charge() {
     return 0;
   }
 
-  if(self._id_78D7 >= self._id_6099 && isPlayer(var_0) && _issentient(var_0) && self agentcanseesentient(var_0) && _id_0547::_id_1F5B(self.origin, var_0.origin) && common_scripts\utility::_id_0F79(_id_053C::_id_4F88(), var_0) && (!isDefined(self._id_3043) || !maps\mp\agents\humanoid\_humanoid_util::_id_8BAE()) && !isDefined(self._id_1927) && (!_id_053C::_id_5686() || !common_scripts\utility::_id_0F79(self._id_983C, var_0)) && (!isDefined(level._id_5B1B) || gettime() - level._id_5B1B > 10000) && !common_scripts\utility::_id_562E(self._id_57C0)) {
+  if(self._id_78D7 >= self._id_6099 && isPlayer(var_0) && _issentient(var_0) && self agentcanseesentient(var_0) && _id_0547::canmovepointtopoint(self.origin, var_0.origin) && common_scripts\utility::_id_0F79(_id_053C::_id_4F88(), var_0) && (!isDefined(self.distractiondrone) || !maps\mp\agents\humanoid\_humanoid_util::shouldtargetdistractiondrone()) && !isDefined(self._id_1927) && (!_id_053C::_id_5686() || !common_scripts\utility::_id_0F79(self._id_983C, var_0)) && (!isDefined(level._id_5B1B) || gettime() - level._id_5B1B > 10000) && !common_scripts\utility::_id_562E(self._id_57C0)) {
     return 1;
   }
 
@@ -165,13 +165,13 @@ zombie_bob_charge_cooldown_wait() {
 
 zombie_bob_do_charge() {
   zombie_bob_charge_request(self._id_00E6);
-  _id_0378::_id_8D74("aud_bob_engine", "bob_engine_rev");
+  _id_0378::snd_message("aud_bob_engine", "bob_engine_rev");
   level._id_5B1B = gettime();
   self.waiting_for_charge_end = 1;
 }
 
 zombie_bob_punch_think() {
-  if(maps\mp\agents\_scripted_agent_anim_util::_id_57E2()) {
+  if(maps\mp\agents\_scripted_agent_anim_util::isstatelocked()) {
     return 0;
   }
 
@@ -181,7 +181,7 @@ zombie_bob_punch_think() {
     return 0;
   }
 
-  if(self.health <= self.phase2health || common_scripts\utility::_id_3794("FORCE_bob_sizzle") || common_scripts\utility::_id_3794("FORCE_bob_smoke")) {
+  if(self.health <= self.phase2health || common_scripts\utility::ent_flag("FORCE_bob_sizzle") || common_scripts\utility::ent_flag("FORCE_bob_smoke")) {
     self.health = self.phase2health;
     self notify("bob_stop_engine_pulse");
     return 1;
@@ -195,7 +195,7 @@ zombie_bob_punch_think() {
 }
 
 zombie_bob_sizzle_think() {
-  if(maps\mp\agents\_scripted_agent_anim_util::_id_57E2()) {
+  if(maps\mp\agents\_scripted_agent_anim_util::isstatelocked()) {
     return 0;
   }
 
@@ -203,7 +203,7 @@ zombie_bob_sizzle_think() {
     return 0;
   }
 
-  if(self.health <= self.phase3health || common_scripts\utility::_id_3794("FORCE_bob_smoke")) {
+  if(self.health <= self.phase3health || common_scripts\utility::ent_flag("FORCE_bob_smoke")) {
     self.health = self.phase3health;
     self notify("bob_stop_engine_pulse");
     return 1;
@@ -212,7 +212,7 @@ zombie_bob_sizzle_think() {
   var_0 = 15;
 
   if(isDefined(self.enterednewphase)) {
-    _id_0378::_id_8D74("aud_bob_stab_leg");
+    _id_0378::snd_message("aud_bob_stab_leg");
     var_1 = "bob_stand_powerup";
     var_2 = self[[maps\mp\agents\_agent_utility::_id_0A59("get_action_params")]]();
     var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_087C(var_1, var_2);
@@ -242,7 +242,7 @@ zombie_bob_actually_die() {
 }
 
 zombie_bob_smoke_think() {
-  if(maps\mp\agents\_scripted_agent_anim_util::_id_57E2()) {
+  if(maps\mp\agents\_scripted_agent_anim_util::isstatelocked()) {
     return 0;
   }
 
@@ -251,7 +251,7 @@ zombie_bob_smoke_think() {
   }
 
   if(self.health <= 1) {
-    _id_0378::_id_8D74("aud_bob_engine", "bob_killed");
+    _id_0378::snd_message("aud_bob_engine", "bob_killed");
     level notify("bob_stop_smoke");
     thread zombie_bob_actually_die();
     var_0 = "death_full_body_stand";
@@ -264,7 +264,7 @@ zombie_bob_smoke_think() {
   var_3 = 30;
 
   if(isDefined(self.enterednewphase)) {
-    _id_0378::_id_8D74("aud_bob_stab_leg");
+    _id_0378::snd_message("aud_bob_stab_leg");
     var_0 = "bob_stand_powerup";
     var_1 = self[[maps\mp\agents\_agent_utility::_id_0A59("get_action_params")]]();
     var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_087C(var_0, var_1);
@@ -319,32 +319,32 @@ zombie_bob_is_dead() {
   self.smoke_damage = 1;
   self.zombie_limit_damage = undefined;
   self dodamage(1, (0, 0, 0), undefined, undefined, undefined, "wunderbuss_zm");
-  common_scripts\utility::_id_3799("bob_was_koed");
-  common_scripts\utility::_id_379A("bob_was_koed");
+  common_scripts\utility::ent_flag_init("bob_was_koed");
+  common_scripts\utility::ent_flag_set("bob_was_koed");
 }
 
 zombie_bob_think() {
   self endon("death");
   level endon("game_ended");
   self endon("owner_disconnect");
-  self _meth_85A1("zombie_bob");
-  common_scripts\utility::_id_3799("bob_punch");
-  common_scripts\utility::_id_3799("bob_sizzle");
-  common_scripts\utility::_id_3799("bob_smoke");
-  common_scripts\utility::_id_3799("FORCE_bob_sizzle");
-  common_scripts\utility::_id_3799("FORCE_bob_smoke");
-  common_scripts\utility::_id_3799("bob_was_koed");
+  self set_target_tracking_disabled("zombie_bob");
+  common_scripts\utility::ent_flag_init("bob_punch");
+  common_scripts\utility::ent_flag_init("bob_sizzle");
+  common_scripts\utility::ent_flag_init("bob_smoke");
+  common_scripts\utility::ent_flag_init("FORCE_bob_sizzle");
+  common_scripts\utility::ent_flag_init("FORCE_bob_smoke");
+  common_scripts\utility::ent_flag_init("bob_was_koed");
   self.zombie_bob_can_take_damage = 0;
   init_bob_health();
   thread zombie_bob_think_setup();
   set_bob_phase("bob_punch");
   _id_0547::_id_86C8(100);
-  _id_0547::_id_86C7(100);
+  _id_0547::setmeleeradius(100);
 
   for(;;) {
     wait 0.2;
 
-    if(common_scripts\utility::_id_3794("bob_was_koed")) {
+    if(common_scripts\utility::ent_flag("bob_was_koed")) {
       continue;
     }
     run_bob_phase_logic();
@@ -359,7 +359,7 @@ zombie_bob_think() {
       _id_0547::zombie_charge_cleanup(self._id_645E);
     }
 
-    if(_id_053C::_id_4F84()) {
+    if(_id_053C::humanoid_begin_melee()) {
       continue;
     }
     if(_id_053C::_id_4F9B()) {
@@ -374,7 +374,7 @@ zombie_bob_think() {
 
 run_bob_phase_logic() {
   foreach(var_1 in level.zmb_bob_agent_phases) {
-    if(common_scripts\utility::_id_3794(var_1.name)) {
+    if(common_scripts\utility::ent_flag(var_1.name)) {
       bob_phase_handler(var_1);
     }
   }
@@ -386,7 +386,7 @@ bob_has_excuse_to_skip(var_0) {
   }
 
   foreach(var_2 in var_0.reasons_to_skip) {
-    if(common_scripts\utility::_id_3794(var_2)) {
+    if(common_scripts\utility::ent_flag(var_2)) {
       return 1;
     }
   }
@@ -399,7 +399,7 @@ bob_phase_handler(var_0) {
 
   if(!var_1) {
     foreach(var_3 in var_0.reasons_to_block_progress) {
-      if(self[[var_3._id_3F02]]() == var_3.value) {
+      if(self[[var_3.func]]() == var_3.value) {
         return;
       }
     }
@@ -419,11 +419,11 @@ bob_phase_handler(var_0) {
 
 set_bob_phase(var_0) {
   foreach(var_2 in level.zmb_bob_agent_phases) {
-    common_scripts\utility::_id_3796(var_2.name);
+    common_scripts\utility::ent_flag_clear(var_2.name);
   }
 
-  common_scripts\utility::_id_379A(var_0);
-  _id_0378::_id_8D74("aud_bob_engine", var_0);
+  common_scripts\utility::ent_flag_set(var_0);
+  _id_0378::snd_message("aud_bob_engine", var_0);
   self.enterednewphase = 1;
 }
 
@@ -451,11 +451,11 @@ zombie_bob_on_damaged_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
 
   var_11 = 0;
 
-  if(common_scripts\utility::_id_3794("bob_punch")) {
+  if(common_scripts\utility::ent_flag("bob_punch")) {
     var_11 = self.phase2health;
   }
 
-  if(common_scripts\utility::_id_3794("bob_sizzle")) {
+  if(common_scripts\utility::ent_flag("bob_sizzle")) {
     var_11 = self.phase3health;
   }
 
@@ -466,13 +466,13 @@ zombie_bob_on_damaged_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
   if(var_2 == 0) {
     return;
   }
-  _id_054D::_id_6BD3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+  _id_054D::onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
 
 zombie_bob_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   self.lastweapondamage = var_5;
 
-  if(common_scripts\utility::_id_3794("bob_was_koed")) {
+  if(common_scripts\utility::ent_flag("bob_was_koed")) {
     return;
   }
   if(self._id_78D7 < self._id_6099) {
@@ -484,7 +484,7 @@ zombie_bob_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
   if(!self.zombie_bob_can_take_damage && !isDefined(self.smoke_damage)) {
     return;
   }
-  if(common_scripts\utility::_id_3794("bob_smoke") && !isDefined(self.smoke_damage)) {
+  if(common_scripts\utility::ent_flag("bob_smoke") && !isDefined(self.smoke_damage)) {
     return;
   }
   if(var_5 != "wunderbuss_zm") {
@@ -495,7 +495,7 @@ zombie_bob_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
     }
   }
 
-  if(common_scripts\utility::_id_3794("bob_smoke") && var_5 != "wunderbuss_zm") {
+  if(common_scripts\utility::ent_flag("bob_smoke") && var_5 != "wunderbuss_zm") {
     return;
   }
   _playFXOnTag(level._effect["zmb_bob_metalhit_1"], self, "Engine");
@@ -595,14 +595,14 @@ zombie_bob_smoke_atk_spawn_hit_volumes(var_0, var_1) {
 }
 
 zombie_bob_smoke_atk_spawn_cloud(var_0) {
-  var_0 _id_0378::_id_8D74("aud_bob_engine", "bob_engine_rev");
-  var_0 _id_0378::_id_8D74("aud_bob_smoke_attack_strt");
+  var_0 _id_0378::snd_message("aud_bob_engine", "bob_engine_rev");
+  var_0 _id_0378::snd_message("aud_bob_smoke_attack_strt");
   wait 2;
   var_1 = anglesToForward(var_0.angles);
   var_2 = anglestoup(var_0.angles);
   var_3 = var_0.origin;
   var_4 = _spawnfx(level._effect["zmb_ber_bob_smk_cloud_lp"], var_3, var_1, var_2);
-  _id_0378::_id_8D74("aud_bob_smoke_attack_loop", 25, var_3);
+  _id_0378::snd_message("aud_bob_smoke_attack_loop", 25, var_3);
   _triggerfx(var_4);
   thread zombie_bob_smoke_atk_cloud_damage(var_3);
   thread zombie_bob_smoke_atk_spawn_hit_volumes(var_0, var_3);
@@ -622,7 +622,7 @@ zombie_bob_smoke_atk() {
 zombie_bob_smoke_atk_cleanup() {}
 
 zombie_bob_make_sizzlers() {
-  if(common_scripts\utility::_id_3794("bob_sizzle")) {
+  if(common_scripts\utility::ent_flag("bob_sizzle")) {
     thread zombie_bob_engine_pulse();
   }
 
@@ -662,7 +662,7 @@ zombie_bob_make_sizzlers() {
         var_10 thread maps\mp\zombies\zombie_sizzler::zombie_make_sizzler(var_13);
         var_14 = (0, 0, 40);
         var_4 = playFX(level._effect["zmb_ber_bob_beam_wv"], var_5, var_10.origin + var_14 - var_5);
-        _id_0378::_id_8D74("aud_bob_shoot_gun", var_5);
+        _id_0378::snd_message("aud_bob_shoot_gun", var_5);
         var_2--;
       }
     }
@@ -672,13 +672,13 @@ zombie_bob_make_sizzlers() {
       var_17 = (0, 0, -1000);
       var_18 = bulletTrace(var_5, var_5 + var_8 * var_16 + var_17, 1, self);
       var_4 = _playFXOnTag(level._effect["zmb_ber_bob_beam_wv"], self, "TAG_FX_GUN");
-      _id_0378::_id_8D74("aud_bob_shoot_gun", var_5);
+      _id_0378::snd_message("aud_bob_shoot_gun", var_5);
     }
 
     waitframe();
   }
 
-  if(common_scripts\utility::_id_3794("bob_sizzle")) {
+  if(common_scripts\utility::ent_flag("bob_sizzle")) {
     self notify("bob_stop_engine_pulse");
   }
 }
@@ -692,7 +692,7 @@ zombie_bob_kill_fx_on_death(var_0) {
 zombie_bob_engine_pulse() {
   self endon("death");
 
-  if(common_scripts\utility::_id_3794("bob_was_koed")) {
+  if(common_scripts\utility::ent_flag("bob_was_koed")) {
     return;
   }
   self.engine_pulse = _spawnlinkedfx(level._effect["zmb_ber_bob_engine_glow"], self, "engine");
@@ -719,7 +719,7 @@ zombie_bob_engine_pulse() {
 zombie_bob_engine_smk_ambient() {
   self endon("death");
 
-  if(common_scripts\utility::_id_3794("bob_was_koed")) {
+  if(common_scripts\utility::ent_flag("bob_was_koed")) {
     return;
   }
   waitframe();
@@ -767,7 +767,7 @@ zombie_bob_charge_request(var_0) {
 }
 
 make_vulnerable_while_stage1_charge_roar() {
-  if(!common_scripts\utility::_id_3794("bob_punch")) {
+  if(!common_scripts\utility::ent_flag("bob_punch")) {
     return;
   }
   waitframe();

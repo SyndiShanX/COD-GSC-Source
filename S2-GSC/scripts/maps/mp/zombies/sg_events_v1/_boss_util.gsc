@@ -22,7 +22,7 @@ spawn_zombie_boss_weapon_loot(var_0) {
   var_1 endon("disconnect");
   var_2 = spawnStruct();
   var_2.origin = _func_2E1(var_0) + (0, 0, 24);
-  var_3 = var_2 common_scripts\utility::_id_8FFC();
+  var_3 = var_2 common_scripts\utility::spawn_tag_origin();
   var_3 show();
   var_3 thread floaty();
   var_3.angles = var_3.angles + (30, 70, 0);
@@ -39,7 +39,7 @@ spawn_zombie_boss_weapon_loot(var_0) {
   }
 
   var_3 showtoplayer(var_1);
-  var_3 _id_0378::_id_8D74("zmb_ballistic_aura");
+  var_3 _id_0378::snd_message("zmb_ballistic_aura");
   var_5 showtoplayer(var_1);
   wait_for_player_pickup_or_timeout(var_3, var_1);
   var_3 delete();
@@ -103,7 +103,7 @@ show_reward_splash(var_0, var_1) {
   var_0 endon("disconnect");
   _id_0555::issprinting("dlc3_ba_hint", var_0, var_1);
   wait 1;
-  var_0 maps\mp\gametypes\_hud_message::_id_9102("zm_collectible_splash_11");
+  var_0 maps\mp\gametypes\_hud_message::splashnotify("zm_collectible_splash_11");
 }
 
 wait_for_player_pickup_or_timeout(var_0, var_1) {

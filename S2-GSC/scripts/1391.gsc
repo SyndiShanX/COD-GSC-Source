@@ -16,7 +16,7 @@ _id_1F7D(var_0) {
 }
 
 _id_A208(var_0) {
-  maps\mp\gametypes\zombies::_id_32C8(self, 1);
+  maps\mp\gametypes\zombies::doublepointspickup(self, 1);
 }
 
 _id_44A8(var_0) {

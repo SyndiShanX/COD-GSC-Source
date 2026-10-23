@@ -18,26 +18,26 @@ _id_4323() {
 _id_9D6F(var_0) {}
 
 _id_9DAC(var_0) {
-  var_1 = common_scripts\utility::_id_2798(var_0.setgoalnode);
+  var_1 = common_scripts\utility::create_flags_and_return_tokens(var_0.setgoalnode);
   var_0 _id_097B(var_1);
-  var_0 common_scripts\utility::_id_A0D3();
+  var_0 common_scripts\utility::update_trigger_based_on_flags();
 }
 
 _id_9DAB(var_0) {
-  var_1 = common_scripts\utility::_id_2798(var_0.pushplayer);
+  var_1 = common_scripts\utility::create_flags_and_return_tokens(var_0.pushplayer);
   var_0 _id_097B(var_1);
-  var_0 common_scripts\utility::_id_A0D3();
+  var_0 common_scripts\utility::update_trigger_based_on_flags();
 }
 
 _id_097B(var_0) {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
 
-    if(!isDefined(level._id_9D7B[var_0[var_1]])) {
-      level._id_9D7B[var_0[var_1]] = [];
+    if(!isDefined(level.trigger_flags[var_0[var_1]])) {
+      level.trigger_flags[var_0[var_1]] = [];
     }
 
-    level._id_9D7B[var_0[var_1]] = common_scripts\utility::_id_0F6F(level._id_9D7B[var_0[var_1]], self);
+    level.trigger_flags[var_0[var_1]] = common_scripts\utility::_id_0F6F(level.trigger_flags[var_0[var_1]], self);
   }
 }
 
@@ -70,7 +70,7 @@ _id_4397(var_0) {
     var_1 = common_scripts\utility::_id_0F73(var_1, var_2);
   }
 
-  var_3 = common_scripts\utility::_id_46B7(self.target, "targetname");
+  var_3 = common_scripts\utility::getstructarray(self.target, "targetname");
 
   if(isDefined(var_3)) {
     var_1 = common_scripts\utility::_id_0F73(var_1, var_3);
@@ -95,9 +95,9 @@ _id_4397(var_0) {
 
 _id_9D79(var_0) {
   var_0 endon("death");
-  var_1 = var_0 common_scripts\utility::_id_4395();
+  var_1 = var_0 common_scripts\utility::get_trigger_flag();
 
-  if(!common_scripts\utility::_id_3C83(var_1)) {
+  if(!common_scripts\utility::flag_exist(var_1)) {
     common_scripts\utility::flag_init(var_1);
   }
 
@@ -110,24 +110,24 @@ _id_9D79(var_0) {
 
 _id_9D75(var_0) {
   var_0 endon("death");
-  var_1 = var_0 common_scripts\utility::_id_4395();
+  var_1 = var_0 common_scripts\utility::get_trigger_flag();
 
-  if(!common_scripts\utility::_id_3C83(var_1)) {
+  if(!common_scripts\utility::flag_exist(var_1)) {
     common_scripts\utility::flag_init(var_1);
   }
 
   for(;;) {
     var_0 waittill("trigger", var_2);
     var_0 common_scripts\utility::script_delay();
-    common_scripts\utility::_id_3C7B(var_1, var_2);
+    common_scripts\utility::flag_clear(var_1, var_2);
   }
 }
 
 _id_9D7A(var_0) {
   var_0 endon("death");
-  var_1 = var_0 common_scripts\utility::_id_4395();
+  var_1 = var_0 common_scripts\utility::get_trigger_flag();
 
-  if(!common_scripts\utility::_id_3C83(var_1)) {
+  if(!common_scripts\utility::flag_exist(var_1)) {
     common_scripts\utility::flag_init(var_1);
   }
 
@@ -143,7 +143,7 @@ _id_9D7A(var_0) {
       wait 0.25;
     }
 
-    common_scripts\utility::_id_3C7B(var_1, var_2);
+    common_scripts\utility::flag_clear(var_1, var_2);
   }
 }
 
@@ -167,9 +167,9 @@ _id_9D8E(var_0, var_1) {
   var_5 = var_4.origin;
   var_0 endon("death");
   var_4 endon("death");
-  var_6 = var_0 common_scripts\utility::_id_4395();
+  var_6 = var_0 common_scripts\utility::get_trigger_flag();
 
-  if(!common_scripts\utility::_id_3C83(var_6)) {
+  if(!common_scripts\utility::flag_exist(var_6)) {
     common_scripts\utility::flag_init(var_6);
   }
 
@@ -181,7 +181,7 @@ _id_9D8E(var_0, var_1) {
 
   for(;;) {
     if(var_1) {
-      common_scripts\utility::_id_3C7B(var_6, var_0);
+      common_scripts\utility::flag_clear(var_6, var_0);
     }
 
     for(;;) {
@@ -195,7 +195,7 @@ _id_9D8E(var_0, var_1) {
     while(var_8 istouching(var_0)) {
       if(var_7 && !_sighttracepassed(var_8 getEye(), var_5, 0, undefined)) {
         if(var_1) {
-          common_scripts\utility::_id_3C7B(var_6, var_0);
+          common_scripts\utility::flag_clear(var_6, var_0);
         }
 
         wait 0.5;
@@ -210,7 +210,7 @@ _id_9D8E(var_0, var_1) {
       if(var_12 >= var_2) {
         common_scripts\utility::flag_set(var_6, var_8);
       } else if(var_1) {
-        common_scripts\utility::_id_3C7B(var_6, var_0);
+        common_scripts\utility::flag_clear(var_6, var_0);
       }
 
       if(var_7) {

@@ -133,8 +133,8 @@ _id_5370() {
   self.notifiedlootservice = 0;
   self._id_AB46 = [];
   self._id_AB46["prestigeLevel"] = _id_0547::_id_4745(self, "prestigeLevel");
-  self._id_AB46["maxRankXP"] = common_scripts\utility::_id_98E7(self._id_AB46["prestigeLevel"] == level.zmmaxprestige, level.zmmaxrankxpfinalprestige, level._id_AB37);
-  self._id_AB46["maxRank"] = common_scripts\utility::_id_98E7(self._id_AB46["prestigeLevel"] == level.zmmaxprestige, level.zmmaxrankfinalprestige, level._id_AB36);
+  self._id_AB46["maxRankXP"] = common_scripts\utility::ter_op(self._id_AB46["prestigeLevel"] == level.zmmaxprestige, level.zmmaxrankxpfinalprestige, level._id_AB37);
+  self._id_AB46["maxRank"] = common_scripts\utility::ter_op(self._id_AB46["prestigeLevel"] == level.zmmaxprestige, level.zmmaxrankfinalprestige, level._id_AB36);
   self._id_AB46["totalXP"] = _id_0547::_id_4745(self, "totalXP");
   self._id_AB46["rank"] = _id_AB2C(self._id_AB46["totalXP"]);
   self._id_AB46["nextXPGoal"] = _id_AB2D(self._id_AB46["rank"]);
@@ -162,7 +162,7 @@ _id_5370() {
   self.ismapinsequence = self getplayerdata(common_scripts\utility::_id_46A8(), "zmShatteredRecord", "isMapInSequence");
   self.iseeinsequence = self getplayerdata(common_scripts\utility::_id_46A8(), "zmShatteredRecord", "isEEInSequence");
   self.isredskullinsequence = self getplayerdata(common_scripts\utility::_id_46A8(), "zmShatteredRecord", "isRedSkullInSequence");
-  self setplayerdata(common_scripts\utility::_id_46A8(), "zmShatteredRecord", "prevMapName", maps\mp\_utility::_id_4571());
+  self setplayerdata(common_scripts\utility::_id_46A8(), "zmShatteredRecord", "prevMapName", maps\mp\_utility::getmapname());
   self setplayerdata(common_scripts\utility::_id_46A8(), "zmShatteredRecord", "prevWinStatus", 0);
   self setplayerdata(common_scripts\utility::_id_46A8(), "zmShatteredRecord", "isMapInSequence", 0);
   self setplayerdata(common_scripts\utility::_id_46A8(), "zmShatteredRecord", "isEEInSequence", 0);
@@ -189,7 +189,7 @@ zombieplayerxpupdatethink() {
 zombieupdateplayerxp(var_0, var_1) {
   var_2 = level.zmxpscale;
 
-  if(self _meth_86B4(0) > 1) {
+  if(self setjuiced(0) > 1) {
     var_2 = max(var_2, getdvarint("party_zmXPScale"));
   }
 
@@ -255,26 +255,26 @@ zombieplayerstatsupdatethink() {
 
 zombiewritestats() {
   var_0 = self;
-  _id_0547::_id_8A6C(var_0, "totalRounds", self._id_AB46["totalRounds"] + level._id_A980, 0);
+  _id_0547::_id_8A6C(var_0, "totalRounds", self._id_AB46["totalRounds"] + level.wavecounter, 0);
   _id_0547::_id_8A6C(var_0, "totalKills", self._id_AB46["totalKills"] + var_0._id_00E3, 0);
   _id_0547::_id_8A6C(var_0, "totalRevives", self._id_AB46["totalRevives"] + var_0._id_0021, 0);
-  _id_0547::_id_8A6C(var_0, "totalMoneyEarned", self._id_AB46["totalMoneyEarned"] + var_0._id_62D7, 0);
-  _id_0547::_id_8A6C(var_0, "totalMoneySpent", self._id_AB46["totalMoneySpent"] + (var_0._id_62D7 - var_0._id_62D6), 0);
+  _id_0547::_id_8A6C(var_0, "totalMoneyEarned", self._id_AB46["totalMoneyEarned"] + var_0.moneyearnedtotal, 0);
+  _id_0547::_id_8A6C(var_0, "totalMoneySpent", self._id_AB46["totalMoneySpent"] + (var_0.moneyearnedtotal - var_0.moneycurrent), 0);
   _id_0547::_id_8A6C(var_0, "totalMagicBox", self._id_AB46["totalMagicBox"] + var_0._id_5F7C, 0);
-  _id_0547::_id_8A6C(var_0, "totalTraps", self._id_AB46["totalTraps"] + var_0._id_9CFF, 0);
+  _id_0547::_id_8A6C(var_0, "totalTraps", self._id_AB46["totalTraps"] + var_0.trapuses, 0);
   _id_0547::_id_8A6C(var_0, "totalHeadshots", self._id_AB46["totalHeadshots"] + var_0._id_4BF7, 0);
   _id_0547::_id_8A6C(var_0, "totalMeleeKills", self._id_AB46["totalMeleeKills"] + var_0._id_60EC, 0);
-  _id_0547::_id_8A6C(var_0, "totalTimePlayed", self._id_AB46["totalTimePlayed"] + var_0._id_9A06["total"], 0);
-  _id_0547::_id_8A6C(var_0, "highestRound", level._id_A980, 2);
+  _id_0547::_id_8A6C(var_0, "totalTimePlayed", self._id_AB46["totalTimePlayed"] + var_0.timeplayed["total"], 0);
+  _id_0547::_id_8A6C(var_0, "highestRound", level.wavecounter, 2);
   _id_0547::_id_8A6C(var_0, "mostKillsGame", var_0._id_00E3, 2);
   _id_0547::_id_8A6C(var_0, "mostRevives", var_0._id_0021, 2);
-  _id_0547::_id_8A6C(var_0, "mostMoneyEarned", var_0._id_62D7, 2);
-  _id_0547::_id_8A6C(var_0, "mostMoneySpent", var_0._id_62D7 - var_0._id_62D6, 2);
+  _id_0547::_id_8A6C(var_0, "mostMoneyEarned", var_0.moneyearnedtotal, 2);
+  _id_0547::_id_8A6C(var_0, "mostMoneySpent", var_0.moneyearnedtotal - var_0.moneycurrent, 2);
   _id_0547::_id_8A6C(var_0, "mostMagicBox", var_0._id_5F7C, 2);
-  _id_0547::_id_8A6C(var_0, "mostTraps", var_0._id_9CFF, 2);
+  _id_0547::_id_8A6C(var_0, "mostTraps", var_0.trapuses, 2);
   _id_0547::_id_8A6C(var_0, "mostHeadshotsGame", var_0._id_4BF7, 2);
   _id_0547::_id_8A6C(var_0, "mostMeleeKills", var_0._id_60EC, 2);
-  _id_0547::_id_8A6C(var_0, "mostTimePlayed", var_0._id_9A06["total"], 2);
+  _id_0547::_id_8A6C(var_0, "mostTimePlayed", var_0.timeplayed["total"], 2);
   _id_0547::_id_8A6C(var_0, "mostXP", var_0._id_AB46["xp"] - var_0._id_AB46["totalXP"], 2);
 }
 
@@ -336,9 +336,9 @@ _id_AC39(var_0) {
     if(level.onlinegame) {
       if(level._id_AB42[var_2][19] != 0) {
         if(level._id_AB42[var_2][19] == 1) {
-          thread maps\mp\gametypes\_hud_message::_id_9102("zm_reward_supply");
+          thread maps\mp\gametypes\_hud_message::splashnotify("zm_reward_supply");
         } else if(level._id_AB42[var_2][19] == 2) {
-          thread maps\mp\gametypes\_hud_message::_id_9102("zm_reward_supply_rare");
+          thread maps\mp\gametypes\_hud_message::splashnotify("zm_reward_supply_rare");
         }
       }
     }
@@ -423,7 +423,7 @@ _id_AB48(var_0, var_1) {}
 getzmxpscale() {
   var_0 = getdvarint("5916", 1);
   var_1 = getdvarint("5915", 1);
-  var_2 = _func_3B9("zm");
+  var_2 = xmodelalias/alias_ger_heads_urb_clean("zm");
   var_3 = max(var_0, var_1);
   var_3 = max(var_3, var_2);
 

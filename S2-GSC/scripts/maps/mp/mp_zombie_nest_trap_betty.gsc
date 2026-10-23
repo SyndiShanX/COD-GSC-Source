@@ -5,7 +5,7 @@
 
 _id_9C97(var_0) {
   var_0 notify("bouncing_betty_trap_started");
-  var_0._id_6667 = common_scripts\utility::_id_46B7("trap_betty_fx_spawns", "script_noteworthy");
+  var_0._id_6667 = common_scripts\utility::getstructarray("trap_betty_fx_spawns", "script_noteworthy");
   var_1 = getEntArray(var_0.target, "targetname");
   level._id_9C97 = var_1[0];
   level._id_9C97._id_9C92 = var_0;
@@ -16,7 +16,7 @@ _id_9C97(var_0) {
       continue;
     }
     if(var_3._id_0165 == "betty_trigger") {
-      var_4 = common_scripts\utility::_id_46B7(var_3.target, "targetname");
+      var_4 = common_scripts\utility::getstructarray(var_3.target, "targetname");
 
       if(!isDefined(var_4)) {
         return;
@@ -44,7 +44,7 @@ _id_8C2C(var_0) {
     for(var_4 = 0; var_4 < 4; var_4++) {
       var_1[var_4] = spawn("script_model", var_2[var_4].origin);
       var_1[var_4] setModel("tag_origin");
-      var_1[var_4]._id_65FA = _id_2832(var_1[var_4]);
+      var_1[var_4]._id_65FA = createthreaticon(var_1[var_4]);
       var_1[var_4] thread _id_3D8E(var_4 + 1);
     }
 
@@ -66,11 +66,11 @@ _id_3D8E(var_0) {
 
 _id_9409() {
   self._id_9409 = 0;
-  common_scripts\utility::_id_A70A("cooldown", "no_power", "deactivate", "ready");
+  common_scripts\utility::waittill_any("cooldown", "no_power", "deactivate", "ready");
   self._id_9409 = 1;
 }
 
-_id_2832(var_0) {
+createthreaticon(var_0) {
   var_1 = newhudelem();
   var_1 setshader("hud_destructibledeathicon", 1, 1);
   var_1.alpha = 0;
@@ -91,8 +91,8 @@ _id_9CC4(var_0, var_1) {
   var_2 = 0;
   var_3 = 0.15;
 
-  if(isDefined(self._id_817A)) {
-    var_4 = self._id_817A;
+  if(isDefined(self.script_duration)) {
+    var_4 = self.script_duration;
   } else {
     var_4 = 20;
   }
@@ -120,18 +120,18 @@ _id_2E66(var_0) {
 
   self._id_5BBA = var_1;
   playFX(level._effect["bouncing_betty_explode"], var_1);
-  _id_0378::_id_8D74("aud_trap_betty_triggered", var_1);
+  _id_0378::snd_message("aud_trap_betty_triggered", var_1);
   wait 0.6;
   var_2 = var_1 + (0, 0, 70);
   playFX(level._effect["bouncing_betty_explosion"], var_2);
-  _id_0378::_id_8D74("aud_trap_betty_explo", var_1);
+  _id_0378::snd_message("aud_trap_betty_explo", var_1);
   var_3 = _id_0547::_id_408F();
 
   foreach(var_5 in var_3) {
     var_6 = distance(var_5.origin, var_2);
 
     if(var_6 < 256) {
-      if(var_5 _id_0547::_id_580A()) {
+      if(var_5 _id_0547::istrapresistant()) {
         var_5 dodamage(var_5.health * 0.25, var_2, level._id_9C97, level._id_9C97, "MOD_EXPLOSIVE", "trap_zm_mp");
       } else {
         maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::_id_6FEE(var_5);

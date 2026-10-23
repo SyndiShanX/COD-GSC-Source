@@ -26,7 +26,7 @@ onplayerconnect() {
 
 _id_5356() {
   level._id_90DB = [];
-  var_0 = common_scripts\utility::_id_46B7("special_weapon", "targetname");
+  var_0 = common_scripts\utility::getstructarray("special_weapon", "targetname");
   level.all_crates = [];
   level.all_empty_crates = [];
 
@@ -34,8 +34,8 @@ _id_5356() {
     var_2._id_272F = _getEnt(var_2.target, "targetname");
     var_2.crate_empty = _getEnt(var_2._id_272F.target, "targetname");
     var_2.crate_empty hide();
-    var_2._id_9D65 = _getEnt(var_2.crate_empty.target, "targetname");
-    var_2._id_5A6E = var_2._id_9D65.setlookatent;
+    var_2.trigger = _getEnt(var_2.crate_empty.target, "targetname");
+    var_2._id_5A6E = var_2.trigger.setlookatent;
     var_2._id_00C5 = tablelookup("mp/killstreaktable.csv", 1, var_2._id_5A6E, 2);
     var_2._id_5A68 = tablelookup("mp/killstreaktable.csv", 1, var_2._id_5A6E, 19);
 
@@ -49,8 +49,8 @@ _id_5356() {
       var_2._id_5A68 = "scorestreak_raid_superweapon_neutral_hud";
     }
 
-    var_2._id_9D65 setHintString(level._id_A85D[var_2._id_5A6E]);
-    var_2._id_A582 = getEntArray(var_2._id_9D65.target, "targetname");
+    var_2.trigger setHintString(level._id_A85D[var_2._id_5A6E]);
+    var_2.visuals = getEntArray(var_2.trigger.target, "targetname");
     var_2.oncooldown = 0;
     var_2._id_6210 = undefined;
     _id_0502::_id_1D39(var_2);
@@ -86,9 +86,9 @@ weaponsetupfinishonconnect() {
     thread disablespecialweaponpickup();
   }
 
-  if(isDefined(self._id_9D65._id_0165) && (self._id_9D65._id_0165 == "attackers" || self._id_9D65._id_0165 == "defenders")) {
-    var_1 = game[self._id_9D65._id_0165];
-    self._id_9D65 setteamfortrigger(var_1);
+  if(isDefined(self.trigger._id_0165) && (self.trigger._id_0165 == "attackers" || self.trigger._id_0165 == "defenders")) {
+    var_1 = game[self.trigger._id_0165];
+    self.trigger setteamfortrigger(var_1);
   }
 }
 
@@ -110,10 +110,10 @@ onplayerspawned(var_0) {
 
   for(;;) {
     self waittill("spawned_player");
-    var_1 = var_0._id_9D65 getpickuptriggerteam();
+    var_1 = var_0.trigger getpickuptriggerteam();
     var_2 = common_scripts\utility::_id_0F79(var_1, self);
 
-    if(isDefined(var_0._id_9D65._id_0165)) {
+    if(isDefined(var_0.trigger._id_0165)) {
       var_3 = 0;
       var_1 = getpickuptriggerteam();
 
@@ -123,13 +123,13 @@ onplayerspawned(var_0) {
             weapsethighlight(var_0, var_2);
           }
 
-          if(var_2 && var_0._id_6989 != -1) {
+          if(var_2 && var_0.objid != -1) {
             weapsethighlight(var_0, var_2);
-            _objective_playermask_showto(var_0._id_6989, self getentitynumber());
-          } else if(var_0._id_6989 != -1) {
+            _objective_playermask_showto(var_0.objid, self getentitynumber());
+          } else if(var_0.objid != -1) {
             weapsethighlight(var_0, var_2);
-            _objective_playermask_showto(var_0._id_6989, self getentitynumber());
-            _objective_playermask_hidefrom(var_0._id_6989, self getentitynumber());
+            _objective_playermask_showto(var_0.objid, self getentitynumber());
+            _objective_playermask_hidefrom(var_0.objid, self getentitynumber());
           }
         }
       }
@@ -152,12 +152,12 @@ weapsethighlight(var_0, var_1) {
 _id_A943() {
   level endon("game_ended");
   level endon("runBomberObjective");
-  self._id_9D65 waittill("trigger", var_0);
+  self.trigger waittill("trigger", var_0);
   var_1 = maps\mp\killstreaks\_raid_ss_serum_util::pickupisserum(self._id_5A6E);
 
   if(var_1) {
     while(!maps\mp\killstreaks\_raid_ss_serum_util::handleserumpickup(var_0)) {
-      self._id_9D65 waittill("trigger", var_0);
+      self.trigger waittill("trigger", var_0);
     }
   }
 
@@ -170,8 +170,8 @@ _id_A943() {
   }
 
   self.refillcount--;
-  self._id_9D65 makeunusable();
-  var_0 _id_051E::_id_478D(self._id_5A6E, 0, 0, var_0, var_2);
+  self.trigger makeunusable();
+  var_0 _id_051E::givekillstreak(self._id_5A6E, 0, 0, var_0, var_2);
   var_0 thread maps\mp\gametypes\_hud_message::killstreaksplashnotify(self._id_5A6E, 500, undefined, undefined);
 
   if(var_1) {
@@ -180,7 +180,7 @@ _id_A943() {
 
   self._id_4F6B.alpha = 0;
 
-  foreach(var_5 in self._id_A582) {
+  foreach(var_5 in self.visuals) {
     var_5 hide();
   }
 
@@ -190,10 +190,10 @@ _id_A943() {
 }
 
 disablespecialweaponpickup() {
-  self._id_9D65 makeunusable();
+  self.trigger makeunusable();
   self._id_4F6B.alpha = 0;
 
-  foreach(var_1 in self._id_A582) {
+  foreach(var_1 in self.visuals) {
     var_1 hide();
   }
 
@@ -201,10 +201,10 @@ disablespecialweaponpickup() {
 }
 
 enablespecialweaponpickup() {
-  self._id_9D65 makeusable();
+  self.trigger makeusable();
   self._id_4F6B.alpha = 1;
 
-  foreach(var_1 in self._id_A582) {
+  foreach(var_1 in self.visuals) {
     var_1 show();
   }
 
@@ -214,7 +214,7 @@ enablespecialweaponpickup() {
 trackvisualmodelsshow() {
   level endon("game_ended");
   level endon("runBomberObjective");
-  var_0 = self._id_A582;
+  var_0 = self.visuals;
   var_1 = self.refillcount;
 
   while(self.refillcount > 0) {
@@ -238,7 +238,7 @@ trackvisualmodelsshow() {
 
 getpickuptriggerteam() {
   if(isDefined(self._id_0165)) {
-    var_0 = _id_0502::_id_4627(game[self._id_0165]);
+    var_0 = _id_0502::getplayersonteam(game[self._id_0165]);
     return var_0;
   }
 
@@ -269,9 +269,9 @@ _id_7DB5() {
 
   self.oncooldown = 0;
   _id_0502::_id_1D3B(!self.oncooldown);
-  self._id_9D65 makeusable();
+  self.trigger makeusable();
 
-  foreach(var_1 in self._id_A582) {
+  foreach(var_1 in self.visuals) {
     var_1 show();
   }
 
@@ -326,18 +326,18 @@ _id_283A(var_0, var_1, var_2, var_3) {
   var_4.x = var_0.origin[0];
   var_4.y = var_0.origin[1];
   var_4._id_01D9 = var_0.origin[2] + 10 - var_2;
-  var_4._id_35B2 = "icon";
-  var_4._id_6E74 = level._id_A012;
+  var_4.elemtype = "icon";
+  var_4.parent = level.uiparent;
   level._id_90DB = common_scripts\utility::_id_0F6F(level._id_90DB, var_4);
   level._id_90DB = common_scripts\utility::_id_0F97(level._id_90DB);
   return var_4;
 }
 
 remove_all_special_weaps() {
-  var_0 = common_scripts\utility::_id_46B7("special_weapon", "targetname");
+  var_0 = common_scripts\utility::getstructarray("special_weapon", "targetname");
 
   foreach(var_2 in var_0) {
-    foreach(var_4 in var_2._id_A582) {
+    foreach(var_4 in var_2.visuals) {
       var_4 delete();
     }
 

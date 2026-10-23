@@ -16,7 +16,7 @@ complete_descent_trophy_event_1(var_0) {
 }
 
 run_shattered_trophy_event_1() {
-  common_scripts\utility::_id_3C9F(_id_0557::_id_7838("quest_firstdoor", "quest_firstdoor_bloodpool"));
+  common_scripts\utility::flag_wait(_id_0557::_id_7838("quest_firstdoor", "quest_firstdoor_bloodpool"));
   complete_descent_trophy_event_1();
 }
 
@@ -25,11 +25,11 @@ complete_descent_trophy_event_2(var_0) {
 }
 
 run_shattered_trophy_event_2() {
-  while(!common_scripts\utility::_id_3C83("flag_descent_pap")) {
+  while(!common_scripts\utility::flag_exist("flag_descent_pap")) {
     waitframe();
   }
 
-  common_scripts\utility::_id_3C9F("flag_descent_pap");
+  common_scripts\utility::flag_wait("flag_descent_pap");
   complete_descent_trophy_event_2();
 }
 
@@ -57,7 +57,7 @@ run_shattered_trophy_event_3() {
     if(common_scripts\utility::_id_0F79(var_0, var_3)) {
       continue;
     }
-    common_scripts\utility::_id_3C9F(var_3 + "_trophy_event_3");
+    common_scripts\utility::flag_wait(var_3 + "_trophy_event_3");
   }
 
   complete_descent_trophy_event_3();

@@ -19,7 +19,7 @@ init() {
   var_0._id_0879 = "zombie_king";
   var_0._id_4C12 = 10;
   var_0.overridehealth = int(2451660);
-  var_0._id_60E2 = 65;
+  var_0.meleedamage = 65;
   var_0._id_8302 = 100;
   var_0._id_8303 = 32;
   var_0.tacklebymelee = 0;
@@ -31,7 +31,7 @@ init() {
   var_0._id_5ED2["zombie_king"]["whole_body"] = "zom_darkone_base";
   _id_0547::_id_0A52(var_0, "zombie_king");
   _id_0547::registeranimtree("zombie_king", #animtree);
-  _id_0541::_id_2F92("crawl", ["zombie_king"]);
+  _id_0541::disablemutatorfortypes("crawl", ["zombie_king"]);
   thread validate_level_setup();
   _id_0547::_id_7BD0("king_default", ::state_default_run, ::state_default_interrupt, 100, ::state_default_end);
   _id_0547::_id_7BD0("king_stand_pain", ::anim_state_stand_pain_run, ::anim_state_stand_pain_interrupt, 149, ::anim_state_stand_pain_end);
@@ -96,7 +96,7 @@ validate_level_setup() {
 
 king_think_setup() {
   level notify("zombie_king_spawned");
-  maps\mp\agents\humanoid\_humanoid::_id_8A27();
+  maps\mp\agents\humanoid\_humanoid::setuphumanoidstate();
   thread _id_054D::_id_A146();
   self.iszombieking = 1;
 
@@ -104,9 +104,9 @@ king_think_setup() {
     self.issolomode = 1;
   }
 
-  self _meth_85A1("zombie");
+  self set_target_tracking_disabled("zombie");
   self scragentsetscripted(1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "zombie_king");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "zombie_king");
   self.ispermanentlyscripted = 1;
   self._id_55AB = 1;
   self._id_57E8 = 1;
@@ -114,7 +114,7 @@ king_think_setup() {
   self.ignoredistractiondrones = 1;
   self.shortstun = 1;
   self._id_509A = 1;
-  self._id_6734 = 1;
+  self.nopickups = 1;
   self._id_0C29 = 0;
   self.is_flamethrower_immune = 1;
   self.lucky_crit_nerf = 1;
@@ -125,17 +125,17 @@ king_think_setup() {
   self._id_66EC = 1;
   self._id_00BD = 100;
   self.radius = 32;
-  self._id_2BCA = self.radius + 1;
-  self scragentsetgoalRadius(self._id_2BCA);
+  self.defaultgoalradius = self.radius + 1;
+  self scragentsetgoalRadius(self.defaultgoalradius);
   _id_0547::_id_86C8(280);
-  _id_0547::_id_86C7(280);
+  _id_0547::setmeleeradius(280);
   self.candamageallies = 1;
   self._id_2A9D = "death";
-  self._id_11AB = 85 + self.radius;
-  self._id_60F5 = "large";
-  self._id_60F6 = 200;
-  self._id_60E1 = 40;
-  self _meth_84D4();
+  self.attackoffset = 85 + self.radius;
+  self.meleesectortype = "large";
+  self.meleesectorupdatetime = 200;
+  self.meleecheckheight = 40;
+  self scragentusemodelcollisionbounds();
   self.king_damage_finished_funcs = [];
   self.vo_drain_punished_int = 0;
   self.vo_taunt_int = 0;
@@ -146,11 +146,11 @@ king_think_setup() {
     self.stunnedclip.original_org = self.stunnedclip.origin;
     self.stunnedclip.original_ang = self.stunnedclip.angles;
     self.stunnedclip notsolid();
-    self.stunnedclip._id_A045 = ::body_clip_unresolved_collision;
-    self.stunnedclip._id_A049 = 1;
+    self.stunnedclip.unresolved_collision_func = ::body_clip_unresolved_collision;
+    self.stunnedclip.unresolved_collision_notify_min = 1;
   }
 
-  common_scripts\utility::_id_3799("phase_transition_active");
+  common_scripts\utility::ent_flag_init("phase_transition_active");
   attacks_init();
   phases_init();
   thread wave_management_think();
@@ -167,7 +167,7 @@ king_think_setup() {
 king_scale_health() {
   waitframe();
   var_0 = self.maxhealth * level.player.size;
-  maps\mp\agents\_agent_common::_id_83FD(int(var_0));
+  maps\mp\agents\_agent_common::set_agent_health(int(var_0));
 }
 
 end_condition() {
@@ -179,7 +179,7 @@ end_condition() {
 
 attacks_init() {
   self.attack_basic["geist_blast"] = spawnStruct();
-  self.attack_basic["geist_blast"]._id_116E = "geist_blast";
+  self.attack_basic["geist_blast"].attack_name = "geist_blast";
   self.attack_basic["geist_blast"].scr_st = "geist_blast";
   self.attack_basic["geist_blast"].try_func = ::special_geist_blast_try;
   self.attack_basic["geist_blast"]._id_920F = ::special_geist_blast_start;
@@ -191,7 +191,7 @@ attacks_init() {
   self.attack_basic["geist_blast"].allow_pain = 1;
   register_boss_special_attack_wrapper("geist_blast");
   self.attack_basic["geist_lightning"] = spawnStruct();
-  self.attack_basic["geist_lightning"]._id_116E = "geist_lightning";
+  self.attack_basic["geist_lightning"].attack_name = "geist_lightning";
   self.attack_basic["geist_lightning"].scr_st = "geist_lightning";
   self.attack_basic["geist_lightning"].try_func = ::special_geist_lightning_try;
   self.attack_basic["geist_lightning"]._id_920F = ::special_geist_lightning_start;
@@ -202,7 +202,7 @@ attacks_init() {
   self.attack_basic["geist_lightning"].allow_pain = 1;
   register_boss_special_attack_wrapper("geist_lightning");
   self.attack_basic["geist_bomb"] = spawnStruct();
-  self.attack_basic["geist_bomb"]._id_116E = "geist_bomb";
+  self.attack_basic["geist_bomb"].attack_name = "geist_bomb";
   self.attack_basic["geist_bomb"].scr_st = "geist_bomb";
   self.attack_basic["geist_bomb"].try_func = ::special_geist_bombs_try;
   self.attack_basic["geist_bomb"]._id_920F = ::special_geist_bombs_start;
@@ -213,7 +213,7 @@ attacks_init() {
   self.attack_basic["geist_bomb"].allow_pain = 1;
   register_boss_special_attack_wrapper("geist_bomb");
   self.attack_basic["geist_detonate"] = spawnStruct();
-  self.attack_basic["geist_detonate"]._id_116E = "detonate";
+  self.attack_basic["geist_detonate"].attack_name = "detonate";
   self.attack_basic["geist_detonate"].scr_st = "detonate";
   self.attack_basic["geist_detonate"].try_func = ::special_detonate_try;
   self.attack_basic["geist_detonate"]._id_920F = ::special_detonate_start;
@@ -224,7 +224,7 @@ attacks_init() {
   self.attack_basic["geist_detonate"].allow_pain = 1;
   register_boss_special_attack_wrapper("geist_detonate");
   self.attack_basic["geist_pull"] = spawnStruct();
-  self.attack_basic["geist_pull"]._id_116E = "geist_pull";
+  self.attack_basic["geist_pull"].attack_name = "geist_pull";
   self.attack_basic["geist_pull"].scr_st = "geist_pull";
   self.attack_basic["geist_pull"].try_func = ::special_geist_pull_try;
   self.attack_basic["geist_pull"]._id_920F = ::special_geist_pull_start;
@@ -235,7 +235,7 @@ attacks_init() {
   self.attack_basic["geist_pull"].anim_end_func = ::anim_state_geist_pull_end;
   register_boss_special_attack_wrapper("geist_pull");
   self.attack_basic["geist_drain"] = spawnStruct();
-  self.attack_basic["geist_drain"]._id_116E = "geist_drain";
+  self.attack_basic["geist_drain"].attack_name = "geist_drain";
   self.attack_basic["geist_drain"].scr_st = "geist_drain";
   self.attack_basic["geist_drain"].try_func = ::special_geist_drain_try;
   self.attack_basic["geist_drain"]._id_920F = ::special_geist_drain_start;
@@ -246,7 +246,7 @@ attacks_init() {
   self.attack_basic["geist_drain"].anim_end_func = ::anim_state_geist_drain_end;
   register_boss_special_attack_wrapper("geist_drain");
   self.attack_basic["flame_wave"] = spawnStruct();
-  self.attack_basic["flame_wave"]._id_116E = "flame_wave";
+  self.attack_basic["flame_wave"].attack_name = "flame_wave";
   self.attack_basic["flame_wave"].scr_st = "flame_wave";
   self.attack_basic["flame_wave"].try_func = ::uber_flame_wave_try;
   self.attack_basic["flame_wave"]._id_920F = ::uber_flame_wave_start;
@@ -257,7 +257,7 @@ attacks_init() {
   self.attack_basic["flame_wave"].anim_end_func = ::anim_state_flame_wave_end;
   register_boss_special_attack_wrapper("flame_wave");
   self.attack_basic["force"] = spawnStruct();
-  self.attack_basic["force"]._id_116E = "force";
+  self.attack_basic["force"].attack_name = "force";
   self.attack_basic["force"].scr_st = "force";
   self.attack_basic["force"].try_func = ::uber_force_try;
   self.attack_basic["force"]._id_920F = ::uber_force_start;
@@ -267,7 +267,7 @@ attacks_init() {
   self.attack_basic["force"].scr_pri = 152;
   register_boss_special_attack_wrapper("force");
   self.attack_basic["sun"] = spawnStruct();
-  self.attack_basic["sun"]._id_116E = "sun";
+  self.attack_basic["sun"].attack_name = "sun";
   self.attack_basic["sun"].scr_st = "sun";
   self.attack_basic["sun"].try_func = ::uber_sun_try;
   self.attack_basic["sun"]._id_920F = ::uber_sun_start;
@@ -277,7 +277,7 @@ attacks_init() {
   self.attack_basic["sun"].scr_pri = 153;
   register_boss_special_attack_wrapper("sun");
   self.attack_basic["sit"] = spawnStruct();
-  self.attack_basic["sit"]._id_116E = "sit";
+  self.attack_basic["sit"].attack_name = "sit";
   self.attack_basic["sit"].scr_st = "sit";
   self.attack_basic["sit"].try_func = ::special_geist_sit_try;
   self.attack_basic["sit"]._id_920F = ::special_geist_sit_start;
@@ -288,7 +288,7 @@ attacks_init() {
   self.attack_basic["sit"].anim_end_func = ::anim_state_geist_sit_end;
   register_boss_special_attack_wrapper("sit");
   self.attack_basic["geist_kneel"] = spawnStruct();
-  self.attack_basic["geist_kneel"]._id_116E = "kneel";
+  self.attack_basic["geist_kneel"].attack_name = "kneel";
   self.attack_basic["geist_kneel"].scr_st = "kneel";
   self.attack_basic["geist_kneel"].try_func = ::special_geist_kneel_try;
   self.attack_basic["geist_kneel"]._id_920F = ::special_geist_kneel_start;
@@ -299,7 +299,7 @@ attacks_init() {
   self.attack_basic["geist_kneel"].anim_end_func = ::anim_state_geist_kneel_end;
   register_boss_special_attack_wrapper("geist_kneel");
   self.attack_basic["geist_drain_special_fake"] = spawnStruct();
-  self.attack_basic["geist_drain_special_fake"]._id_116E = "geist_drain_special_fake";
+  self.attack_basic["geist_drain_special_fake"].attack_name = "geist_drain_special_fake";
   self.attack_basic["geist_drain_special_fake"].scr_st = "geist_drain_special_fake";
   self.attack_basic["geist_drain_special_fake"].try_func = ::special_geist_drain_special_fake_try;
   self.attack_basic["geist_drain_special_fake"]._id_920F = ::special_geist_drain_special_fake_start;
@@ -310,7 +310,7 @@ attacks_init() {
   self.attack_basic["geist_drain_special_fake"].anim_end_func = ::anim_state_geist_drain_special_fake_end;
   register_boss_special_attack_wrapper("geist_drain_special_fake");
   self.attack_basic["geist_drain_special"] = spawnStruct();
-  self.attack_basic["geist_drain_special"]._id_116E = "geist_drain_special";
+  self.attack_basic["geist_drain_special"].attack_name = "geist_drain_special";
   self.attack_basic["geist_drain_special"].scr_st = "geist_drain_special";
   self.attack_basic["geist_drain_special"].try_func = ::special_geist_drain_special_try;
   self.attack_basic["geist_drain_special"]._id_920F = ::special_geist_drain_special_start;
@@ -321,7 +321,7 @@ attacks_init() {
   self.attack_basic["geist_drain_special"].anim_end_func = ::anim_state_geist_drain_special_end;
   register_boss_special_attack_wrapper("geist_drain_special");
   self.attack_basic["melee"] = spawnStruct();
-  self.attack_basic["melee"]._id_116E = "melee";
+  self.attack_basic["melee"].attack_name = "melee";
   self.attack_basic["melee"].scr_st = "king_melee";
   self.attack_basic["melee"].try_func = ::special_melee_try;
   self.attack_basic["melee"]._id_920F = ::special_melee_start;
@@ -333,14 +333,14 @@ attacks_init() {
   register_boss_special_attack_wrapper("melee");
   melee_init();
   self.attack_basic["move_face_enemy"] = spawnStruct();
-  self.attack_basic["move_face_enemy"]._id_116E = "move_face_enemy";
+  self.attack_basic["move_face_enemy"].attack_name = "move_face_enemy";
   self.attack_basic["move_face_enemy"].try_func = ::special_move_face_enemy_try;
   self.attack_basic["move_face_enemy"]._id_920F = ::special_move_face_enemy_start;
   self.attack_basic["move_face_enemy"].think_func = ::special_move_face_enemy_think;
   self.attack_basic["move_face_enemy"]._id_367E = ::special_move_face_enemy_end;
   register_boss_special_attack_wrapper("move_face_enemy");
   self.attack_basic["move_to_enemy"] = spawnStruct();
-  self.attack_basic["move_to_enemy"]._id_116E = "move_to_enemy";
+  self.attack_basic["move_to_enemy"].attack_name = "move_to_enemy";
   self.attack_basic["move_to_enemy"].try_func = ::special_move_to_enemy_try;
   self.attack_basic["move_to_enemy"]._id_920F = ::special_move_to_enemy_start;
   self.attack_basic["move_to_enemy"].think_func = ::special_move_to_enemy_think;
@@ -358,7 +358,7 @@ melee_init() {
   var_0._id_0F3E = 60;
   var_0.arc_distance = 280;
   var_0.arc_rotation_offset = 0;
-  var_0._id_2994 = 0;
+  var_0.damage = 0;
   var_0.facing_rotation_allowed = 0;
   level.king_melee_attacks["quick"] = var_0;
   var_0 = spawnStruct();
@@ -618,7 +618,7 @@ king_set_current_phase(var_0) {
   var_1.current_phase = level.zombie_king.phases[var_0];
   var_1.current_special_move_index = undefined;
   var_1.transition_move_index = undefined;
-  var_1 common_scripts\utility::_id_379A("phase_transition_active");
+  var_1 common_scripts\utility::ent_flag_set("phase_transition_active");
   var_1 thread king_set_phase_fx(var_1.current_phase);
   var_1 thread wave_management_set(var_1.current_phase_index);
 }
@@ -638,23 +638,23 @@ king_set_phase_fx(var_0) {
     var_1.phase_fx_3_ent delete();
   }
 
-  if(var_1 common_scripts\utility::_id_3794("phase_transition_active") && var_1.current_phase_index != 0) {
+  if(var_1 common_scripts\utility::ent_flag("phase_transition_active") && var_1.current_phase_index != 0) {
     var_2 = "zmb_king_gk_levitation_chn_1";
     var_3 = "zmb_king_gk_levitation_chn_2";
     var_4 = "zmb_king_gk_levitation_chn_3";
-    var_1.transition_fx_1_ent = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_2), var_1, "TAG_FX01");
+    var_1.transition_fx_1_ent = _spawnlinkedfx(common_scripts\utility::getfx(var_2), var_1, "TAG_FX01");
     _triggerfx(var_1.transition_fx_1_ent);
     var_1 king_handle_attached_vfx_cleanup(var_1.transition_fx_1_ent);
     var_1.transition_fx_1_ent thread delete_on_parent_notify(var_1, "clear_transition_fx");
-    var_1.transition_fx_2_ent = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_3), var_1, "TAG_FX01");
+    var_1.transition_fx_2_ent = _spawnlinkedfx(common_scripts\utility::getfx(var_3), var_1, "TAG_FX01");
     _triggerfx(var_1.transition_fx_2_ent);
     var_1 king_handle_attached_vfx_cleanup(var_1.transition_fx_2_ent);
     var_1.transition_fx_2_ent thread delete_on_parent_notify(var_1, "clear_transition_fx");
-    var_1.transition_fx_3_ent = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_4), var_1, "TAG_FX01");
+    var_1.transition_fx_3_ent = _spawnlinkedfx(common_scripts\utility::getfx(var_4), var_1, "TAG_FX01");
     _triggerfx(var_1.transition_fx_3_ent);
     var_1 king_handle_attached_vfx_cleanup(var_1.transition_fx_3_ent);
     var_1.transition_fx_3_ent thread delete_on_parent_notify(var_1, "clear_transition_fx");
-    var_1 common_scripts\utility::_id_37A1("phase_transition_active");
+    var_1 common_scripts\utility::ent_flag_waitopen("phase_transition_active");
   }
 
   if(isDefined(var_1.transition_fx_1_ent)) {
@@ -670,19 +670,19 @@ king_set_phase_fx(var_0) {
   }
 
   if(isDefined(var_0.fx_1_name)) {
-    var_1.phase_fx_1_ent = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_0.fx_1_name), var_1, "TAG_FX01");
+    var_1.phase_fx_1_ent = _spawnlinkedfx(common_scripts\utility::getfx(var_0.fx_1_name), var_1, "TAG_FX01");
     _triggerfx(var_1.phase_fx_1_ent);
     var_1 king_handle_attached_vfx_cleanup(var_1.phase_fx_1_ent);
   }
 
   if(isDefined(var_0.fx_2_name)) {
-    var_1.phase_fx_2_ent = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_0.fx_2_name), var_1, "TAG_FX02");
+    var_1.phase_fx_2_ent = _spawnlinkedfx(common_scripts\utility::getfx(var_0.fx_2_name), var_1, "TAG_FX02");
     _triggerfx(var_1.phase_fx_2_ent);
     var_1 king_handle_attached_vfx_cleanup(var_1.phase_fx_2_ent);
   }
 
   if(isDefined(var_0.fx_3_name)) {
-    var_1.phase_fx_3_ent = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_0.fx_3_name), var_1, "TAG_FX03");
+    var_1.phase_fx_3_ent = _spawnlinkedfx(common_scripts\utility::getfx(var_0.fx_3_name), var_1, "TAG_FX03");
     _triggerfx(var_1.phase_fx_3_ent);
     var_1 king_handle_attached_vfx_cleanup(var_1.phase_fx_3_ent);
   }
@@ -748,7 +748,7 @@ process_special_moves() {
     var_5 = var_0.current_phase.transition_attack_set;
   }
 
-  if(!isDefined(var_2) && var_0 common_scripts\utility::_id_3794("phase_transition_active") && isDefined(var_0.current_phase) && isDefined(var_0.current_phase.transition_attack_set)) {
+  if(!isDefined(var_2) && var_0 common_scripts\utility::ent_flag("phase_transition_active") && isDefined(var_0.current_phase) && isDefined(var_0.current_phase.transition_attack_set)) {
     var_6 = 0;
 
     if(isDefined(var_0.transition_move_index)) {
@@ -761,7 +761,7 @@ process_special_moves() {
       var_8 = var_7 + var_6;
 
       if(var_8 >= var_0.current_phase.transition_attack_set.size) {
-        var_0 common_scripts\utility::_id_3796("phase_transition_active");
+        var_0 common_scripts\utility::ent_flag_clear("phase_transition_active");
         break;
       }
 
@@ -777,8 +777,8 @@ process_special_moves() {
 
       var_7++;
     }
-  } else if(var_0 common_scripts\utility::_id_3794("phase_transition_active"))
-    var_0 common_scripts\utility::_id_3796("phase_transition_active");
+  } else if(var_0 common_scripts\utility::ent_flag("phase_transition_active"))
+    var_0 common_scripts\utility::ent_flag_clear("phase_transition_active");
 
   var_11 = undefined;
 
@@ -794,7 +794,7 @@ process_special_moves() {
     }
 
     for(var_7 = 0; var_7 < var_11.size; var_7++) {
-      var_8 = common_scripts\utility::_id_627D(var_7 + var_12, var_11.size);
+      var_8 = common_scripts\utility::mod(var_7 + var_12, var_11.size);
       var_13 = var_11[var_8];
       var_9 = var_13.name;
       var_2 = level.boss_special_moves[var_9];
@@ -861,7 +861,7 @@ wave_management_living_think() {
 
 manage_respawn(var_0) {
   var_1 = undefined;
-  var_2 = common_scripts\utility::_id_46B7("zone_citadel_spawners", "targetname");
+  var_2 = common_scripts\utility::getstructarray("zone_citadel_spawners", "targetname");
   var_3 = undefined;
 
   for(;;) {
@@ -928,8 +928,8 @@ wave_management_set(var_0) {
       break;
   }
 
-  if(common_scripts\utility::_id_3794("phase_transition_active")) {
-    common_scripts\utility::_id_37A1("phase_transition_active");
+  if(common_scripts\utility::ent_flag("phase_transition_active")) {
+    common_scripts\utility::ent_flag_waitopen("phase_transition_active");
   }
 
   self notify("phase_wave_management_update");
@@ -1181,12 +1181,12 @@ anim_state_geist_blast_run() {
   var_0 disable_geist_bullet_shield();
   var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("geist_bolt");
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
-  var_0.fx_blast_hand = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_gk_geistblast_buildup"), var_0, "J_Wrist_LE");
-  var_0.fx_blast_hand _id_0378::_id_8D74("god_king_giestblast_charge");
+  var_0.fx_blast_hand = _spawnlinkedfx(common_scripts\utility::getfx("zmb_gk_geistblast_buildup"), var_0, "J_Wrist_LE");
+  var_0.fx_blast_hand _id_0378::snd_message("god_king_giestblast_charge");
   var_0 king_handle_attached_vfx_cleanup(var_0.fx_blast_hand, 1);
   _triggerfx(var_0.fx_blast_hand);
   var_0 thread blast_tracking_notetrack();
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1, "king_attack", "premature_end", ::geist_blast_handle_notetracks);
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1, "king_attack", "premature_end", ::geist_blast_handle_notetracks);
   var_0.fx_blast_hand delete();
   var_0.fx_blast_hand = undefined;
   var_0.current_blast.anim_state_completed = 1;
@@ -1196,7 +1196,7 @@ blast_tracking_notetrack() {
   var_0 = self;
   var_0 endon("death");
   var_0 endon("geist_blast_end");
-  maps\mp\agents\_scripted_agent_anim_util::_id_A79E("king_attack", "stop_tracking", "geist_bolt");
+  maps\mp\agents\_scripted_agent_anim_util::waituntilnotetrack("king_attack", "stop_tracking", "geist_bolt");
 
   if(!isDefined(var_0.current_blast)) {
     return;
@@ -1224,9 +1224,9 @@ geist_blast_throw() {
   var_2 = var_0 gettagorigin("J_Wrist_LE");
   var_3 = _magicbullet("geist_blast_red", var_2, var_1, var_0, 1, 1);
   var_3._id_0117 = var_0;
-  var_0.current_blast._id_776C = var_3;
+  var_0.current_blast.projectile = var_3;
   var_3 thread geist_blast_zombie_damage();
-  _id_0378::_id_8D74("god_king_giestblast_throw", var_3, var_0);
+  _id_0378::snd_message("god_king_giestblast_throw", var_3, var_0);
 
   if(isDefined(level.ice_blocks)) {
     var_3 thread maps\mp\mp_zombie_descent_ee_main::test_ice_block_projectile_hit(var_0);
@@ -1259,8 +1259,8 @@ geist_blast_zombie_damage() {
   var_0 waittill("explode", var_1);
   var_2 = var_0._id_0117;
 
-  if(isDefined(var_2.current_blast) && isDefined(var_2.current_blast._id_776C)) {
-    var_2.current_blast._id_776C = undefined;
+  if(isDefined(var_2.current_blast) && isDefined(var_2.current_blast.projectile)) {
+    var_2.current_blast.projectile = undefined;
   }
 
   var_3 = _id_0547::_id_408F();
@@ -1396,11 +1396,11 @@ anim_state_geist_lightning_run() {
   var_0 disable_geist_bullet_shield();
   var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("geist_lightning");
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
-  var_0.fx_lightning_hand = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_blood_zmb_bolt"), var_0, "J_Wrist_RI");
+  var_0.fx_lightning_hand = _spawnlinkedfx(common_scripts\utility::getfx("zmb_blood_zmb_bolt"), var_0, "J_Wrist_RI");
   var_0 king_handle_attached_vfx_cleanup(var_0.fx_lightning_hand, 1);
   _triggerfx(self.fx_lightning_hand);
-  var_0.fx_lightning_hand _id_0378::_id_8D74("god_king_lightning_summon");
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1, "king_attack", "end", ::geist_lightning_handle_notetracks);
+  var_0.fx_lightning_hand _id_0378::snd_message("god_king_lightning_summon");
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1, "king_attack", "end", ::geist_lightning_handle_notetracks);
   var_0.current_lightning.anim_state_completed = 1;
   var_0.fx_lightning_hand delete();
   var_0.fx_lightning_hand = undefined;
@@ -1515,7 +1515,7 @@ try_lightning(var_0, var_1) {
     var_18 = undefined;
 
     if(_id_0547::_id_5565(var_17[0], 1)) {
-      var_15 = common_scripts\utility::_id_8FFC();
+      var_15 = common_scripts\utility::spawn_tag_origin();
       var_15 thread delete_time(0.2);
       var_15.origin = var_17[1];
       var_15 show();
@@ -1523,10 +1523,10 @@ try_lightning(var_0, var_1) {
       var_18 = 1;
     }
 
-    var_19 = _func_382("zmb_geistkraft_godking_lightning_beam", var_13, var_14, var_15, var_16);
+    var_19 = vehicle_scripts/_attack_heli("zmb_geistkraft_godking_lightning_beam", var_13, var_14, var_15, var_16);
     var_19 thread delete_time(0.1);
-    _playFXOnTag(common_scripts\utility::_id_44F5("zmb_giestkraft_impact"), var_7, "J_spine4");
-    var_0 _id_0378::_id_8D74("god_king_lightning");
+    _playFXOnTag(common_scripts\utility::getfx("zmb_giestkraft_impact"), var_7, "J_spine4");
+    var_0 _id_0378::snd_message("god_king_lightning");
 
     if(_id_0547::_id_5565(var_18, 1)) {
       return;
@@ -1628,7 +1628,7 @@ anim_state_geist_bombs_run() {
   var_0 disable_geist_bullet_shield();
   var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("geist_bombs");
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1, "king_attack", "end", ::geist_bombs_handle_notetracks);
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1, "king_attack", "end", ::geist_bombs_handle_notetracks);
   var_0.current_bombs.anim_state_completed = 1;
 }
 
@@ -1703,24 +1703,24 @@ get_bomb_start_pos(var_0) {
 
 geist_bombs_projectile_think(var_0) {
   var_1 = self;
-  _id_0378::_id_8D74("god_king_giestbomb_projectile", "spawn", var_1);
+  _id_0378::snd_message("god_king_giestbomb_projectile", "spawn", var_1);
   var_1 waittill("explode", var_2);
   geist_bombs_static_think(var_2);
 }
 
 geist_bombs_static_think(var_0) {
   var_1 = _getgroundposition(var_0, 12);
-  var_2 = common_scripts\utility::_id_8FFC();
+  var_2 = common_scripts\utility::spawn_tag_origin();
   var_2 show();
   var_2.origin = var_1 + (0, 0, 25);
-  var_3 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_bomb_sphere"), var_2, "tag_origin");
-  var_4 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_godking_giestbomb"), var_2, "tag_origin");
-  var_5 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_godking_giestbomb_prime"), var_2, "tag_origin");
+  var_3 = _spawnlinkedfx(common_scripts\utility::getfx("zmb_bomb_sphere"), var_2, "tag_origin");
+  var_4 = _spawnlinkedfx(common_scripts\utility::getfx("zmb_godking_giestbomb"), var_2, "tag_origin");
+  var_5 = _spawnlinkedfx(common_scripts\utility::getfx("zmb_godking_giestbomb_prime"), var_2, "tag_origin");
   thread show_bomb_vfx(var_4, var_3, var_5);
-  _id_0378::_id_8D74("god_king_giestbomb_projectile", "activate", var_2);
+  _id_0378::snd_message("god_king_giestbomb_projectile", "activate", var_2);
   wait 6;
-  _playFXOnTag(common_scripts\utility::_id_44F5("zmb_giestbomb_exp_1shot"), var_2, "TAG_ORIGIN");
-  _id_0378::_id_8D74("god_king_giestbomb_projectile", "explode", var_2);
+  _playFXOnTag(common_scripts\utility::getfx("zmb_giestbomb_exp_1shot"), var_2, "TAG_ORIGIN");
+  _id_0378::snd_message("god_king_giestbomb_projectile", "explode", var_2);
   var_6 = _id_0547::_id_408F();
   var_7 = level.players;
   var_8 = common_scripts\utility::_id_0F73(var_6, var_7);
@@ -1757,7 +1757,7 @@ special_detonate_try() {
   var_3 = [];
 
   foreach(var_0 in var_2) {
-    if(var_0 _id_0547::_id_4B2C()) {
+    if(var_0 _id_0547::has_entered_game()) {
       var_3[var_3.size] = var_0;
     }
   }
@@ -1841,8 +1841,8 @@ anim_state_detonate_run() {
   var_0 disable_geist_bullet_shield();
   var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("detonate");
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
-  var_0 _id_0378::_id_8D74("god_king_detonate_cast");
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1, "king_attack", "end", ::detonate_handle_notetracks);
+  var_0 _id_0378::snd_message("god_king_detonate_cast");
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1, "king_attack", "end", ::detonate_handle_notetracks);
   var_0.current_detonate.anim_state_completed = 1;
 }
 
@@ -1865,8 +1865,8 @@ detonate_throw() {
 
   if(king_enemy_target_is_valid(var_0.current_detonate.target)) {
     var_1 = var_0.current_detonate.target;
-    var_2 = _func_382("zmb_geistkraft_reg_beam_med", var_0, "J_Wrist_RI", var_1, "J_Spine4");
-    _id_0378::_id_8D74("god_king_detonate_throw", var_1);
+    var_2 = vehicle_scripts/_attack_heli("zmb_geistkraft_reg_beam_med", var_0, "J_Wrist_RI", var_1, "J_Spine4");
+    _id_0378::snd_message("god_king_detonate_throw", var_1);
     var_2 thread delete_time(0.45);
     var_1 thread detonate_victim(var_0);
   }
@@ -1891,7 +1891,7 @@ detonate_victim(var_0) {
   var_1.isempowered = 1;
   var_1.fuze_fx = _spawnlinkedfx(level._effect["zmf_corpse_eater_smoldering"], var_1, "J_Spine4");
   _triggerfx(var_1.fuze_fx);
-  var_1 _id_0378::_id_8D74("aud_corpse_eater_fully_charged");
+  var_1 _id_0378::snd_message("aud_corpse_eater_fully_charged");
   var_1 maps\mp\agents\_agent_utility::deleteentonagentdeath(var_1.fuze_fx);
   wait 10;
   thread try_detonation(var_0);
@@ -1904,7 +1904,7 @@ try_detonation(var_0) {
 
   var_1 = self gettagorigin("J_Spine4");
   playFX(level._effect["zmb_corpse_eater_detonate"], var_1);
-  _id_0378::_id_8D74("aud_corpse_eater_explosion");
+  _id_0378::snd_message("aud_corpse_eater_explosion");
 
   if(common_scripts\utility::_id_562E(self.isforceshieldactive)) {
     break_force_shield();
@@ -1927,7 +1927,7 @@ zombie_detonate_clear_property(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
     self.isempowered = undefined;
   }
 
-  if(common_scripts\utility::_id_3C77("flag_boss_complete")) {
+  if(common_scripts\utility::flag("flag_boss_complete")) {
     _id_0547::_id_2D8C(::zombie_detonate_clear_property);
   }
 }
@@ -2012,8 +2012,8 @@ anim_state_geist_pull_run() {
   var_0 start_manual_rotation();
   var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("kneel_vortex");
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
-  var_0 _id_0378::_id_8D74("god_king_pull_summon");
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1, "king_attack", "end", ::geist_pull_handle_notetracks);
+  var_0 _id_0378::snd_message("god_king_pull_summon");
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1, "king_attack", "end", ::geist_pull_handle_notetracks);
   var_0.current_pull.anim_state_completed = 1;
 }
 
@@ -2034,8 +2034,8 @@ geist_pull_handle_notetracks(var_0, var_1, var_2, var_3) {
 geist_pull_aoe() {
   var_0 = self;
   var_1 = "TAG_WEAPON_LEFT";
-  _playFXOnTag(common_scripts\utility::_id_44F5("zmb_pommel_energy_field_burst"), var_0, var_1);
-  var_0 _id_0378::_id_8D74("god_king_pull");
+  _playFXOnTag(common_scripts\utility::getfx("zmb_pommel_energy_field_burst"), var_0, var_1);
+  var_0 _id_0378::snd_message("god_king_pull");
   var_2 = [];
   var_2 = var_0 king_get_targets_in_range(1600);
   var_0 thread spawn_attractor_nodes();
@@ -2057,7 +2057,7 @@ geist_pull_attack_victim(var_0, var_1) {
   var_2 endon("death");
   var_3 = isPlayer(var_0);
 
-  if(var_3 && _id_0547::_id_577E(var_0)) {
+  if(var_3 && _id_0547::isplayerinlaststand(var_0)) {
     return;
   }
   var_4 = var_0.origin + (0, 0, 32);
@@ -2081,13 +2081,13 @@ geist_pull_attack_victim(var_0, var_1) {
   var_13 = var_1 * var_11;
 
   if(common_scripts\utility::_id_562E(var_10)) {
-    if(var_3 && !_id_0547::_id_577E(var_0)) {
+    if(var_3 && !_id_0547::isplayerinlaststand(var_0)) {
       var_0 shellshock("zm_heavy_hit", var_13, var_12);
       var_0 allowsprint(0);
       var_0 playRumbleOnEntity("damage_heavy");
     }
 
-    if(!var_3 && var_0 _id_0547::_id_4B2C() && isDefined(var_2.pull_attractor._id_0F6D)) {
+    if(!var_3 && var_0 _id_0547::has_entered_game() && isDefined(var_2.pull_attractor._id_0F6D)) {
       var_0 thread attract_to_boss(common_scripts\utility::random(var_2.pull_attractor._id_0F6D));
       var_0 thread pull_mind_control_fx();
     }
@@ -2104,7 +2104,7 @@ geist_pull_attack_victim(var_0, var_1) {
 
   wait(var_1 * var_11);
 
-  if(var_3 && !_id_0547::_id_577E(var_0)) {
+  if(var_3 && !_id_0547::isplayerinlaststand(var_0)) {
     var_0 allowsprint(1);
   }
 
@@ -2124,7 +2124,7 @@ pulse_drag_in_victim(var_0) {
 
 pull_mind_control_fx() {
   self endon("death");
-  self.boss_control_fx = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_red_zmb_blind"), self, "J_Head");
+  self.boss_control_fx = _spawnlinkedfx(common_scripts\utility::getfx("zmb_red_zmb_blind"), self, "J_Head");
   _triggerfx(self.boss_control_fx);
   maps\mp\agents\_agent_utility::deleteentonagentdeath(self.boss_control_fx);
 }
@@ -2137,11 +2137,11 @@ pull_mind_control_clear_fx() {
 
 spawn_attractor_nodes() {
   var_0 = self;
-  var_1 = common_scripts\utility::_id_8FFC();
-  var_2 = common_scripts\utility::_id_8FFC();
-  var_3 = common_scripts\utility::_id_8FFC();
-  var_4 = common_scripts\utility::_id_8FFC();
-  var_5 = common_scripts\utility::_id_8FFC();
+  var_1 = common_scripts\utility::spawn_tag_origin();
+  var_2 = common_scripts\utility::spawn_tag_origin();
+  var_3 = common_scripts\utility::spawn_tag_origin();
+  var_4 = common_scripts\utility::spawn_tag_origin();
+  var_5 = common_scripts\utility::spawn_tag_origin();
   var_1.origin = var_0.origin;
   var_2.origin = var_0.origin + (115, 0, 0);
   var_3.origin = var_0.origin + (0, 115, 0);
@@ -2155,7 +2155,7 @@ spawn_attractor_nodes() {
   var_0.pull_attractor = var_1;
   var_0.pull_attractor._id_0F6D = [var_2, var_3, var_4, var_5];
   var_0.pull_attractor thread attractor_rotate();
-  var_0 common_scripts\utility::_id_A70A("zombie_kneel", "geist_drain_result", "flame_wave_cast");
+  var_0 common_scripts\utility::waittill_any("zombie_kneel", "geist_drain_result", "flame_wave_cast");
 
   if(isDefined(var_2)) {
     var_2 delete();
@@ -2192,15 +2192,15 @@ attract_to_boss(var_0) {
   var_1 endon("death");
 
   if(level.players.size > 0) {
-    var_0._id_4883 = _func_2E1(var_0.origin, level.players[0]);
+    var_0.groundpos = _func_2E1(var_0.origin, level.players[0]);
   } else {
-    var_0._id_4883 = var_0.origin;
+    var_0.groundpos = var_0.origin;
   }
 
   var_2 = 0;
 
-  if(isDefined(level._id_AC80) && isDefined(level._id_AC80._id_ACB3) && level._id_AC80._id_ACB3.size > 0) {
-    var_2 = _id_055A::_id_578A(var_0._id_4883, 1);
+  if(isDefined(level.zone_data) && isDefined(level.zone_data.zones) && level.zone_data.zones.size > 0) {
+    var_2 = _id_055A::ispointinanyzone(var_0.groundpos, 1);
   }
 
   if(!var_2) {
@@ -2217,22 +2217,22 @@ attract_to_boss(var_0) {
       continue;
     }
 
-    if(isDefined(var_1._id_3044) && var_1._id_3044 >= 5) {
+    if(isDefined(var_1.distractiondronebadpathcount) && var_1.distractiondronebadpathcount >= 5) {
       if(distance(var_1.origin, var_0.origin) > 256) {
         var_1._id_3045 = var_0;
-        var_1._id_3044 = 0;
-        var_1._id_3043 = undefined;
+        var_1.distractiondronebadpathcount = 0;
+        var_1.distractiondrone = undefined;
         waitframe();
         continue;
       }
     }
 
-    if(!isDefined(var_1._id_3043) || distancesquared(var_1._id_3043._id_4883, var_1.origin) > distancesquared(var_0._id_4883, var_1.origin)) {
-      var_3 = var_1 _meth_857B(var_1.origin, var_0._id_4883);
+    if(!isDefined(var_1.distractiondrone) || distancesquared(var_1.distractiondrone.groundpos, var_1.origin) > distancesquared(var_0.groundpos, var_1.origin)) {
+      var_3 = var_1 _meth_857B(var_1.origin, var_0.groundpos);
 
       if(var_3.size > 0) {
-        var_1._id_3043 = var_0;
-        var_1._id_3044 = 0;
+        var_1.distractiondrone = var_0;
+        var_1.distractiondronebadpathcount = 0;
         var_1._id_3045 = undefined;
       }
     }
@@ -2303,7 +2303,7 @@ anim_state_geist_sit_run() {
   var_0 pause_manual_rotation();
   var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("death_stand_2_sit");
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1, "king_attack", "end");
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1, "king_attack", "end");
   var_0.king_seated = 1;
   var_0.current_sit.anim_state_completed = 1;
 }
@@ -2367,9 +2367,9 @@ anim_state_geist_kneel_run() {
   var_0 start_manual_rotation();
   var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("kneel_burst");
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
-  _id_0378::_id_8D74("god_king_force_kneel");
+  _id_0378::snd_message("god_king_force_kneel");
   var_0 thread vo_play_gdk_ability_line("kneel_execute");
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1, "king_attack", "end", ::geist_kneel_handle_notetracks);
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1, "king_attack", "end", ::geist_kneel_handle_notetracks);
   var_0.current_kneel.anim_state_completed = 1;
 }
 
@@ -2531,7 +2531,7 @@ anim_state_geist_drain_run() {
   var_0 pause_manual_rotation();
   var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("geist_drain_enter");
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1, "king_attack", "end", ::geist_drain_cast_handle_notetracks);
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1, "king_attack", "end", ::geist_drain_cast_handle_notetracks);
   _id_0555::issprinting("dlc4_godking_drain");
   var_0.drainshieldacive = 1;
   var_0 anim_state_geist_drain_cast_control();
@@ -2544,7 +2544,7 @@ anim_state_geist_drain_run() {
     var_0 enable_geist_bullet_shield();
     var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("geist_drain_exit");
     var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1, "king_attack", "end");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1, "king_attack", "end");
   } else {
     var_0.current_drain.geist_drain_struct attack_geist_drain_stop();
     _id_0555::issprinting("dlc4_godking_drain_end");
@@ -2554,7 +2554,7 @@ anim_state_geist_drain_run() {
     var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
     var_0 notify("clear_transition_fx");
     var_0 thread play_punish_vo();
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1, "king_attack", "end");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1, "king_attack", "end");
     var_0.drainpunishactive = 1;
     var_0 anim_state_ground_recover_loop();
     var_0.drainpunishactive = undefined;
@@ -2566,7 +2566,7 @@ anim_state_geist_drain_run() {
     var_0 enable_geist_bullet_shield();
     var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("geist_drain_stumble_recover");
     var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1, "king_attack", "end");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1, "king_attack", "end");
     var_0 thread disable_body_clip();
   }
 
@@ -2614,10 +2614,10 @@ body_clip_unresolved_collision(var_0) {
   var_4 = spawnStruct();
   var_4.origin = var_3;
   var_1[var_1.size] = var_4;
-  self._id_A048 = var_1;
+  self.unresolved_collision_nodes = var_1;
   var_5 = level.use_zombie_unresolved_collision;
   level.use_zombie_unresolved_collision = undefined;
-  _id_0488::_id_A047(var_0, 0);
+  _id_0488::unresolved_collision_nearest_node(var_0, 0);
   level.use_zombie_unresolved_collision = var_5;
 }
 
@@ -2676,14 +2676,14 @@ king_geist_drain_report_result(var_0) {
 
 king_start_geist_drain_cast_fx() {
   var_0 = self;
-  var_0.current_drain.fx_left_hand = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_gk_geistdrain_hands"), var_0, "J_Wrist_LE");
-  var_0.current_drain.fx_right_hand = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_gk_geistdrain_hands"), var_0, "J_Wrist_RI");
+  var_0.current_drain.fx_left_hand = _spawnlinkedfx(common_scripts\utility::getfx("zmb_gk_geistdrain_hands"), var_0, "J_Wrist_LE");
+  var_0.current_drain.fx_right_hand = _spawnlinkedfx(common_scripts\utility::getfx("zmb_gk_geistdrain_hands"), var_0, "J_Wrist_RI");
   var_0 king_handle_attached_vfx_cleanup(var_0.current_drain.fx_left_hand);
   var_0 king_handle_attached_vfx_cleanup(var_0.current_drain.fx_right_hand);
   _triggerfx(var_0.current_drain.fx_left_hand);
   _triggerfx(var_0.current_drain.fx_right_hand);
-  var_0.current_drain.fx_left_hand thread _id_0547::_id_2D20(var_0, "geist_drain_result");
-  var_0.current_drain.fx_right_hand thread _id_0547::_id_2D20(var_0, "geist_drain_result");
+  var_0.current_drain.fx_left_hand thread _id_0547::delete_on_notification(var_0, "geist_drain_result");
+  var_0.current_drain.fx_right_hand thread _id_0547::delete_on_notification(var_0, "geist_drain_result");
 }
 
 king_spawn_geist_drain() {
@@ -2705,7 +2705,7 @@ setup_geist_drain_pain() {
   var_0 endon("death");
   var_0.current_drain._id_4DE0 = 0;
   var_0 thread geist_drain_plate_destruction_wait();
-  var_0 common_scripts\utility::_id_A70A("geist_drain_result", "geist_drain_end");
+  var_0 common_scripts\utility::waittill_any("geist_drain_result", "geist_drain_end");
   var_0 cleanup_geist_drain_pain();
 }
 
@@ -2749,7 +2749,7 @@ geist_drain_aoe(var_0) {
   var_6 = "J_Wrist_LE";
   var_7 = "J_Wrist_RI";
   var_8 = "TAG_SWORD";
-  _id_0378::_id_8D74("god_king_giestdrain", var_1, var_0);
+  _id_0378::snd_message("god_king_giestdrain", var_1, var_0);
   var_9 = [var_7, var_6, var_8];
   var_10 = _sortbydistance(level.blood_plates, var_1.origin, 2400);
 
@@ -2758,9 +2758,9 @@ geist_drain_aoe(var_0) {
       var_9 = sort_tags_by_distance_2d(var_12.origin, var_1, var_9);
       var_13 = var_9[0];
       var_9 = common_scripts\utility::_id_0F93(var_9, var_13);
-      var_12.loc_beam = _func_382("zmb_geistkraft_blood_beam_med_drain", var_12.plate_model, "TAG_ORIGIN", var_1, var_13);
-      var_12.loc_beam thread _id_0547::_id_2D20(var_12, "plate_destroyed");
-      var_12.loc_beam thread _id_0547::_id_2D20(var_12, "drain_ended");
+      var_12.loc_beam = vehicle_scripts/_attack_heli("zmb_geistkraft_blood_beam_med_drain", var_12.plate_model, "TAG_ORIGIN", var_1, var_13);
+      var_12.loc_beam thread _id_0547::delete_on_notification(var_12, "plate_destroyed");
+      var_12.loc_beam thread _id_0547::delete_on_notification(var_12, "drain_ended");
       var_12 thread drain_plate_think(var_12.loc_beam, var_2, var_1);
     }
   }
@@ -2776,7 +2776,7 @@ geist_drain_aoe(var_0) {
           var_13 = var_6;
         }
 
-        var_19 = _func_382("zmb_geistkraft_reg_beam_med", var_1, var_13, var_18, "J_Spine4");
+        var_19 = vehicle_scripts/_attack_heli("zmb_geistkraft_reg_beam_med", var_1, var_13, var_18, "J_Spine4");
         var_19 thread delete_time(int(var_2));
 
         if(isPlayer(var_18)) {
@@ -2810,9 +2810,9 @@ geist_drain_aoe(var_0) {
   }
 
   drain_heal_king(100000);
-  playFX(common_scripts\utility::_id_44F5("zmb_hilt_sphere_explosion"), var_1 gettagorigin(var_8), var_1 gettagangles(var_8));
+  playFX(common_scripts\utility::getfx("zmb_hilt_sphere_explosion"), var_1 gettagorigin(var_8), var_1 gettagangles(var_8));
   var_1 thread king_geist_drain_report_result("complete");
-  _id_0378::_id_8D74("aud_clear_mute_zvox_for_drain");
+  _id_0378::snd_message("aud_clear_mute_zvox_for_drain");
 }
 
 drain_heal_king(var_0) {
@@ -2832,7 +2832,7 @@ drain_heal_king(var_0) {
 drain_plate_think(var_0, var_1, var_2) {
   var_3 = self;
   var_3.fount_active = 1;
-  var_3.drain_fx_ent = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_desc_blood_plates_lt_drain"), var_3.plate_model, "TAG_ORIGIN");
+  var_3.drain_fx_ent = _spawnlinkedfx(common_scripts\utility::getfx("zmb_desc_blood_plates_lt_drain"), var_3.plate_model, "TAG_ORIGIN");
   _triggerfx(var_3.drain_fx_ent);
   var_3.plate_hit_clip solid();
   var_3.plate_hit_clip setCanDamage(1);
@@ -2847,7 +2847,7 @@ drain_plate_think(var_0, var_1, var_2) {
   var_3.plate_hit_clip setCanDamage(0);
   var_3.plate_hit_clip setdamagecallbackon(0);
   var_3.plate_hit_clip.damagecallback = undefined;
-  playFX(common_scripts\utility::_id_44F5("zmb_hilt_sphere_explosion"), var_3.plate_model.origin, anglesToForward(var_3.plate_model.angles));
+  playFX(common_scripts\utility::getfx("zmb_hilt_sphere_explosion"), var_3.plate_model.origin, anglesToForward(var_3.plate_model.angles));
   var_3.fount_active = 0;
 }
 
@@ -2863,7 +2863,7 @@ geist_drain_plate_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
 
   if(isPlayer(var_1)) {
     var_13 = "weakpoint";
-    var_1 thread _id_04C7::_id_A102(var_13);
+    var_1 thread _id_04C7::updatedamagefeedback(var_13);
 
     if(king_check_if_raven_weapons(var_5)) {
       var_2 = var_2 * 2.5;
@@ -2875,7 +2875,7 @@ geist_drain_plate_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
       self.my_fount notify("plate_destroyed");
 
       if(isDefined(level.zombie_king)) {
-        _id_0378::_id_8D74("god_king_giestdrain_plate_destroyed");
+        _id_0378::snd_message("god_king_giestdrain_plate_destroyed");
         level.zombie_king notify("plate_destroyed");
       }
     }
@@ -2988,12 +2988,12 @@ anim_state_flame_wave_run() {
   if(_id_0547::_id_5565(var_1, "complete")) {
     var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("flame_wave_end");
     var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_2);
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_3, 1, "king_attack", "end");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_2, var_3, 1, "king_attack", "end");
   } else {
     var_0.current_flame_wave.flame_wave_struct attack_flame_wave_stop();
     var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("flame_wave_pain");
     var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_2);
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_3, 1, "king_attack", "end");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_2, var_3, 1, "king_attack", "end");
   }
 
   var_0.current_flame_wave.anim_state_completed = 1;
@@ -3006,7 +3006,7 @@ anim_state_flame_wave_cast_control() {
   var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("flame_wave_cast");
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
   var_0 notify("flame_wave_cast");
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1, "king_attack", "end", ::flame_wave_cast_handle_notetracks);
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1, "king_attack", "end", ::flame_wave_cast_handle_notetracks);
   var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("flame_wave_ctrl");
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
   var_0 maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_1, var_2);
@@ -3051,7 +3051,7 @@ setup_flame_wave_pain() {
   var_0 endon("death");
   var_0.current_flame_wave._id_4DE0 = 0;
   var_0 add_king_damage_finished_func("flame_wave_pain", ::flame_wave_on_damage_finished);
-  var_0 common_scripts\utility::_id_A70A("flame_wave_result", "flame_wave_end");
+  var_0 common_scripts\utility::waittill_any("flame_wave_result", "flame_wave_end");
   var_0 cleanup_flame_wave_pain();
 }
 
@@ -3107,9 +3107,9 @@ flame_wave_sound_runner(var_0) {
   var_2 setModel("tag_origin");
   var_2 hide();
   var_2 showtoplayer(var_1);
-  _id_0378::_id_8D74("flame_wave_runner_start", var_2, var_1);
+  _id_0378::snd_message("flame_wave_runner_start", var_2, var_1);
   flame_wave_sound_runner_run(var_0, var_2);
-  _id_0378::_id_8D74("flame_wave_runner_stop", var_2, var_1);
+  _id_0378::snd_message("flame_wave_runner_stop", var_2, var_1);
   wait 1.0;
   var_2 delete();
 }
@@ -3132,9 +3132,9 @@ flame_wave_sound_runner_run(var_0, var_1) {
 
     if(var_7 != var_4) {
       if(var_7) {
-        _id_0378::_id_8D74("flame_wave_runner_inside", var_1, var_2);
+        _id_0378::snd_message("flame_wave_runner_inside", var_1, var_2);
       } else {
-        _id_0378::_id_8D74("flame_wave_runner_outside", var_1, var_2);
+        _id_0378::snd_message("flame_wave_runner_outside", var_1, var_2);
       }
     }
 
@@ -3157,9 +3157,9 @@ attack_flame_wave_run() {
   var_2 = anglesToForward((0, var_1, 0));
 
   if(_id_0547::_id_5565(var_0.istrial, 1)) {
-    var_0.fx = _spawnfx(common_scripts\utility::_id_44F5("zmb_desc_flame_wave_02"), var_0.origin, (0, 1, 0), (0, 0, 1));
+    var_0.fx = _spawnfx(common_scripts\utility::getfx("zmb_desc_flame_wave_02"), var_0.origin, (0, 1, 0), (0, 0, 1));
   } else {
-    var_0.fx = _spawnfx(common_scripts\utility::_id_44F5("zmb_desc_flame_wave"), var_0.origin, var_2, (0, 0, 1));
+    var_0.fx = _spawnfx(common_scripts\utility::getfx("zmb_desc_flame_wave"), var_0.origin, var_2, (0, 0, 1));
   }
 
   setfxkillondelete(var_0.fx, 1);
@@ -3228,7 +3228,7 @@ target_hit_by_flame_wave(var_0) {
     var_1 endon("attack_flame_wave_stop");
     wait(var_3);
     var_0 maps\mp\mp_zombie_descent_ee_main::ice_block_break();
-  } else if(isPlayer(var_0) && !_id_0547::_id_577E(var_0)) {
+  } else if(isPlayer(var_0) && !_id_0547::isplayerinlaststand(var_0)) {
     var_0 _id_0547::_id_7454(0);
     var_0 dodamage(var_0.health + 666, var_1.origin, var_1._id_0117, undefined, "MOD_BURNED", "zombie_king_uber_flame");
   } else
@@ -3335,7 +3335,7 @@ anim_state_force_run() {
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
   var_0 thread force_attack_run();
   var_0 thread vo_play_gdk_ability_line("overwhelm_force");
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1, "king_attack", "end", ::force_handle_notetracks);
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1, "king_attack", "end", ::force_handle_notetracks);
   var_0.current_force.anim_state_completed = 1;
 }
 
@@ -3354,7 +3354,7 @@ force_attack_run() {
     var_0 = "TAG_ORIGIN";
   }
 
-  _id_0378::_id_8D74("god_king_force_summon");
+  _id_0378::snd_message("god_king_force_summon");
   self waittill("notify_force_unleash");
   thread force_apply_shield();
 }
@@ -3375,9 +3375,9 @@ enable_force_shield() {
     return;
   }
   self.isforceshieldactive = 1;
-  self._id_480F = 1;
+  self.godmode = 1;
   self.nomutilate = 1;
-  var_0 = _spawnlinkedfx(common_scripts\utility::_id_44F5("force_zombie_bubble"), self, "J_SpineLower");
+  var_0 = _spawnlinkedfx(common_scripts\utility::getfx("force_zombie_bubble"), self, "J_SpineLower");
   maps\mp\agents\_agent_utility::deleteentonagentdeath(var_0);
   _triggerfx(var_0);
   self.myforceshield = var_0;
@@ -3389,9 +3389,9 @@ break_force_shield() {
   }
 
   self.isforceshieldactive = 0;
-  _playFXOnTag(common_scripts\utility::_id_44F5("force_zombie_bubble_pop"), self, "J_SpineLower");
+  _playFXOnTag(common_scripts\utility::getfx("force_zombie_bubble_pop"), self, "J_SpineLower");
   self.nomutilate = 0;
-  self._id_480F = 0;
+  self.godmode = 0;
 }
 
 uber_sun_try() {
@@ -3450,7 +3450,7 @@ anim_state_sun_run() {
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
   var_0 thread sun_attack_run();
   var_0 thread vo_play_gdk_ability_line("light_of_the_sun");
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1, "king_attack", "end", ::sun_handle_notetracks);
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1, "king_attack", "end", ::sun_handle_notetracks);
   var_0.current_sun.anim_state_completed = 1;
 }
 
@@ -3469,17 +3469,17 @@ sun_attack_run() {
     var_0 = "TAG_ORIGIN";
   }
 
-  self.fx_sun_tell = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_gk_lightsun_buildup"), self, var_0);
+  self.fx_sun_tell = _spawnlinkedfx(common_scripts\utility::getfx("zmb_gk_lightsun_buildup"), self, var_0);
   king_handle_attached_vfx_cleanup(self.fx_sun_tell);
   _triggerfx(self.fx_sun_tell);
-  self.fx_sun_tell _id_0378::_id_8D74("god_king_sun_cast");
+  self.fx_sun_tell _id_0378::snd_message("god_king_sun_cast");
   wait 0.15;
   thread sun_do_preface_damage(var_0);
   self waittill("notify_sun_kill");
   self.fx_sun_tell delete();
   self.fx_sun_tell = undefined;
-  _playFXOnTag(common_scripts\utility::_id_44F5("zmb_gk_lightsun_blast"), self, var_0);
-  _id_0378::_id_8D74("god_king_sun_blast");
+  _playFXOnTag(common_scripts\utility::getfx("zmb_gk_lightsun_blast"), self, var_0);
+  _id_0378::snd_message("god_king_sun_blast");
   thread praise_the_sun(var_0);
 }
 
@@ -3514,7 +3514,7 @@ praise_the_sun(var_0) {
     }
     if(_bullettracepassed(self gettagorigin(var_0), var_5 getEye(), 0, self)) {
       var_5 dodamage(var_5.health + 666, self.origin, self, self, "MOD_ENERGY", "zombie_king_uber_sun");
-      _id_0378::_id_8D74("god_king_sun_blast_hit_plr", var_5);
+      _id_0378::snd_message("god_king_sun_blast_hit_plr", var_5);
     }
   }
 }
@@ -3573,25 +3573,25 @@ anim_state_geist_drain_special_run() {
   if(_id_0547::_id_5565(var_1, "complete")) {
     var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("death_fail");
     var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_2);
-    var_0 _id_0378::_id_8D74("god_king_finale_melee");
+    var_0 _id_0378::snd_message("god_king_finale_melee");
     var_0 thread vo_play_gdk_ability_line("end_fail");
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_3, 1, "king_attack", "end");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_2, var_3, 1, "king_attack", "end");
     var_0.king_seated = 0;
 
     foreach(var_5 in level.players) {
-      var_6 = _func_382("zmb_geistkraft_blood_beam_med_drain", var_5, "J_Spine4", var_0, "TAG_SWORD");
+      var_6 = vehicle_scripts/_attack_heli("zmb_geistkraft_blood_beam_med_drain", var_5, "J_Spine4", var_0, "TAG_SWORD");
       var_6 thread delete_time(2);
       var_5 thread king_zombie_wins(var_0);
     }
 
-    var_0 _id_0378::_id_8D74("god_king_finale_drain_end");
+    var_0 _id_0378::snd_message("god_king_finale_drain_end");
   } else {
     var_0.current_drain_special.geist_drain_special_struct attack_geist_drain_special_stop();
     var_0 notify("fatal_blow");
     var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("death_finale");
     var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_2);
-    var_0 _id_0378::_id_8D74("god_king_death");
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_3, 1, "king_attack", "end");
+    var_0 _id_0378::snd_message("god_king_death");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_2, var_3, 1, "king_attack", "end");
 
     if(isDefined(level.zombie_king_sword.hitbox)) {
       level.zombie_king_sword.hitbox delete();
@@ -3602,7 +3602,7 @@ anim_state_geist_drain_special_run() {
       level.zombie_king_sword delete();
     }
 
-    var_0 _id_0378::_id_8D74("god_king_finale_drain_end");
+    var_0 _id_0378::snd_message("god_king_finale_drain_end");
     var_0 thread zombie_king_play_dead();
   }
 
@@ -3637,7 +3637,7 @@ anim_state_geist_drain_special_cast_control() {
     if(isDefined(var_4)) {
       var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_4);
       var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_2);
-      var_0 maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_3, 1, "king_death", "end");
+      var_0 maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_2, var_3, 1, "king_death", "end");
     }
   }
 }
@@ -3666,7 +3666,7 @@ setup_geist_drain_special_pain() {
   var_0 endon("death");
   var_0.current_drain_special.damage_taken = 0;
   var_0 add_king_damage_finished_func("geist_drain_special_pain", ::geist_drain_special_on_damage_finished);
-  var_0 common_scripts\utility::_id_A70A("geist_drain_special_result", "geist_drain_special_end");
+  var_0 common_scripts\utility::waittill_any("geist_drain_special_result", "geist_drain_special_end");
   var_0 cleanup_geist_drain_special_pain();
 }
 
@@ -3822,7 +3822,7 @@ geist_drain_special_aoe(var_0) {
         var_11 = var_4;
       }
 
-      var_12 = _func_382("zmb_geistkraft_blood_beam_med_drain", var_1, var_11, var_10, "J_Spine4");
+      var_12 = vehicle_scripts/_attack_heli("zmb_geistkraft_blood_beam_med_drain", var_1, var_11, var_10, "J_Spine4");
       var_12 thread delete_time(int(var_2));
       var_13 = var_10.health + 1;
 
@@ -3946,7 +3946,7 @@ king_spawn_geist_drain_special_fake() {
   var_0 = self;
   var_0 endon("geist_drain_special_fake_result");
   var_0 endon("geist_drain_special_fake_end");
-  var_0 _id_0378::_id_8D74("god_king_finale_drain_first");
+  var_0 _id_0378::snd_message("god_king_finale_drain_first");
   var_0 thread vo_play_gdk_ability_line("geist_drain");
   var_1 = "J_Wrist_LE";
   var_2 = "J_Wrist_RI";
@@ -3958,7 +3958,7 @@ king_spawn_geist_drain_special_fake() {
       var_5 = var_1;
     }
 
-    var_4.drain_beam = _func_382("zmb_geistkraft_blood_beam_med_drain", var_0, var_5, var_4, "J_Head");
+    var_4.drain_beam = vehicle_scripts/_attack_heli("zmb_geistkraft_blood_beam_med_drain", var_0, var_5, var_4, "J_Head");
     var_4.drain_beam thread delete_on_parent_notify(var_4, "kill_fake_drain_beam");
     var_4 notify("drain_fake_start");
   }
@@ -3971,7 +3971,7 @@ anim_state_geist_drain_special_fake_end() {}
 
 attack_geist_drain_special_fake_wait_till_stopped() {
   var_0 = self;
-  var_0 common_scripts\utility::_id_A70A("attack_geist_drain_special_fake_stop", "transition_scene_done");
+  var_0 common_scripts\utility::waittill_any("attack_geist_drain_special_fake_stop", "transition_scene_done");
 }
 
 special_melee_try() {
@@ -3981,7 +3981,7 @@ special_melee_try() {
   if(isDefined(var_1)) {
     var_0.current_melee = spawnStruct();
     var_0.current_melee.melee_targets = var_1;
-    var_0.current_melee._id_9297 = gettime();
+    var_0.current_melee.start_time = gettime();
     return 1;
   }
 
@@ -4062,10 +4062,10 @@ anim_state_melee_run() {
     return;
   }
   var_1 = var_0.current_melee.melee_struct.anim_action;
-  var_0 _id_0378::_id_8D74("god_king_melee");
+  var_0 _id_0378::snd_message("god_king_melee");
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_1);
   var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_2);
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_3, 1, "king_attack", "end", ::melee_handle_notetracks);
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_2, var_3, 1, "king_attack", "end", ::melee_handle_notetracks);
   var_0.current_melee.anim_state_completed = 1;
 }
 
@@ -4287,7 +4287,7 @@ register_boss_special_attack_wrapper(var_0, var_1) {
     var_2 = self.attack_basic[var_0];
   }
 
-  var_3 = var_2._id_116E;
+  var_3 = var_2.attack_name;
   var_4 = var_2.try_func;
   var_5 = var_2._id_920F;
   var_6 = var_2.think_func;
@@ -4336,7 +4336,7 @@ king_enemy_target_is_valid(var_0) {
     return 0;
   }
 
-  if(var_1 _id_0547::_id_8B95(var_0)) {
+  if(var_1 _id_0547::shouldignoreent(var_0)) {
     return 0;
   }
 
@@ -4431,7 +4431,7 @@ king_get_detonate_target() {
   var_0 = common_scripts\utility::_id_0FA2(var_0);
 
   foreach(var_3 in var_0) {
-    if(king_enemy_target_is_valid(var_3) && (!isPlayer(var_3) && var_3 _id_0547::_id_4B2C())) {
+    if(king_enemy_target_is_valid(var_3) && (!isPlayer(var_3) && var_3 _id_0547::has_entered_game())) {
       return var_3;
     }
   }
@@ -4446,7 +4446,7 @@ king_get_all_targets() {
 
   foreach(var_3 in var_1) {
     if(king_enemy_target_is_valid(var_3)) {
-      if(isDefined(var_3._id_0A4B) && !var_3 _id_0547::_id_4B2C()) {
+      if(isDefined(var_3._id_0A4B) && !var_3 _id_0547::has_entered_game()) {
         continue;
       }
       var_0[var_0.size] = var_3;
@@ -4499,7 +4499,7 @@ get_victim_player() {
       var_2[var_2.size] = var_6;
     }
 
-    if(!_id_0547::_id_577E(var_6) && !common_scripts\utility::_id_562E(var_6.boss_victim_cooldown)) {
+    if(!_id_0547::isplayerinlaststand(var_6) && !common_scripts\utility::_id_562E(var_6.boss_victim_cooldown)) {
       var_1[var_1.size] = var_6;
     }
   }
@@ -4619,7 +4619,7 @@ king_create_destination_path(var_0) {
   for(var_9 = 1; var_9 < var_7.size - 1; var_9++) {
     var_10 = var_7[var_9];
     var_11 = var_10 - var_2;
-    [var_13, var_14] = _id_0547::_id_776A(var_11, var_8);
+    [var_13, var_14] = _id_0547::project(var_11, var_8);
     var_15 = max(var_2[2] + var_13[2], var_10[2]);
     var_0.move_targets[var_0.move_targets.size] = create_move_target((var_10[0], var_10[1], var_15), var_4);
   }
@@ -4656,7 +4656,7 @@ handle_clear_on_interrupt(var_0) {
   var_1 = self;
   var_0 endon("entitydeleted");
   var_1 endon("death");
-  common_scripts\utility::_id_A70C(var_1, "stand_pain_interrupt", var_1, "invalid_target_interrupt");
+  common_scripts\utility::waittill_any_ents(var_1, "stand_pain_interrupt", var_1, "invalid_target_interrupt");
   var_0 delete();
 }
 
@@ -4700,7 +4700,7 @@ king_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
 
   if(king_check_if_raven_weapons(var_5) && !common_scripts\utility::_id_562E(var_13.drainshieldacive)) {
     var_14 = "weakpoint";
-    var_1 thread _id_04C7::_id_A102(var_14);
+    var_1 thread _id_04C7::updatedamagefeedback(var_14);
     var_2 = 49033.2;
   }
 
@@ -4709,8 +4709,8 @@ king_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
   }
 
   if(isDefined(var_8) && var_8 == "soft") {
-    var_15 = var_1 _meth_850B(var_5, var_8);
-    var_16 = var_1 _meth_850B(var_5, "head");
+    var_15 = var_1 getweapondamagelocationmultiplier(var_5, var_8);
+    var_16 = var_1 getweapondamagelocationmultiplier(var_5, "head");
 
     if(var_15 <= 0) {
       var_15 = 1;
@@ -4722,7 +4722,7 @@ king_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
   }
 
   if(var_13[[var_13 maps\mp\agents\_agent_utility::_id_0A59("is_hit_weak_point")]](var_13, var_0, var_1, var_2, var_4, var_5, undefined, var_7, var_8)) {
-    var_19 = var_1 _meth_850B(var_5, var_8);
+    var_19 = var_1 getweapondamagelocationmultiplier(var_5, var_8);
     var_20 = weaponclass(var_5);
 
     if(var_19 == 0 || weaponclass(var_5) == "sniper") {} else {
@@ -4735,7 +4735,7 @@ king_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
 
   if(isPlayer(var_1) && maps\mp\zombies\weapons\_zombie_dlc4_melee::is_scythe_death_burst_weapon(var_5)) {
     var_14 = "weakpoint";
-    var_1 thread _id_04C7::_id_A102(var_14);
+    var_1 thread _id_04C7::updatedamagefeedback(var_14);
     var_2 = var_13.maxhealth * 0.03;
   }
 
@@ -4745,7 +4745,7 @@ king_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
 
   if(var_2 <= 0) {
     var_14 = "none";
-    var_1 thread _id_04C7::_id_A102(var_14);
+    var_1 thread _id_04C7::updatedamagefeedback(var_14);
   }
 
   var_13 _id_054D::_id_6BD1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
@@ -4769,7 +4769,7 @@ god_king_impact_vfx(var_0, var_1) {
   var_2 = gettime();
 
   if(!_id_0547::_id_5565(level.last_god_king_impact_vfx, var_2)) {
-    var_3 = common_scripts\utility::_id_627D(level.last_god_king_impact_vfx_index + 1, 4);
+    var_3 = common_scripts\utility::mod(level.last_god_king_impact_vfx_index + 1, 4);
     var_4 = level.god_king_impact_vfx[var_3];
     var_4.origin = var_0;
     var_4 dontinterpolate();
@@ -4784,7 +4784,7 @@ reflect_bullet(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
   if(maps\mp\_utility::_id_5695(var_3)) {
-    var_5 = var_4 + vectorNormalize(vectorNormalize(var_1 getEye() - var_4) + _id_7A43(0.9)) * 3000;
+    var_5 = var_4 + vectorNormalize(vectorNormalize(var_1 getEye() - var_4) + random_vector(0.9)) * 3000;
     _magicbullet(var_2, var_4, var_5, var_0);
   }
 }
@@ -4829,7 +4829,7 @@ king_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
 
   if(isPlayer(var_1) && common_scripts\utility::_id_562E(var_11.drainpunishactive) && !var_11 punish_damage_limit_reached()) {
     var_12 = "weakpoint";
-    var_1 thread _id_04C7::_id_A102(var_12);
+    var_1 thread _id_04C7::updatedamagefeedback(var_12);
     var_2 = int(var_2 * 1.25);
 
     if(!isDefined(var_11.punishdamage)) {
@@ -4839,7 +4839,7 @@ king_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     }
   } else if(isPlayer(var_1) && common_scripts\utility::_id_562E(var_11.drainpunishactive) && var_11 punish_damage_limit_reached()) {
     var_12 = "none";
-    var_1 thread _id_04C7::_id_A102(var_12);
+    var_1 thread _id_04C7::updatedamagefeedback(var_12);
     var_2 = 0;
   }
 
@@ -4850,7 +4850,7 @@ king_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     var_11 thread[[var_14]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
   }
 
-  _id_054D::_id_6BD3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+  _id_054D::onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
 
 add_king_damage_finished_func(var_0, var_1) {
@@ -4906,7 +4906,7 @@ state_default_run() {
         }
       } else {
         var_13 = var_0 get_angled_anim_info_for_action("stand_2_strafe", var_12);
-        var_0 maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_13._id_0E84, var_13._id_0E18, 1, "king_move");
+        var_0 maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_13._id_0E84, var_13._id_0E18, 1, "king_move");
         var_0 start_manual_move();
         var_1 = 1;
         var_3 = undefined;
@@ -4921,7 +4921,7 @@ state_default_run() {
       var_0 pause_manual_move();
       var_12 = _angleclamp180(var_5 - var_4);
       var_13 = var_0 get_angled_anim_info_for_action("strafe_2_stand", var_12);
-      var_0 maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_13._id_0E84, var_13._id_0E18, 1, "king_move");
+      var_0 maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_13._id_0E84, var_13._id_0E18, 1, "king_move");
       var_1 = 0;
       var_14 = undefined;
       var_7 = 1;
@@ -4978,7 +4978,7 @@ get_angled_anim_info_for_action(var_0, var_1) {
   var_3 = self;
   var_2._id_0E84 = var_3 maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_0);
   var_4 = var_3 getanimentrycount(var_2._id_0E84);
-  var_2._id_0E18 = maps\mp\agents\_scripted_agent_anim_util::_id_4416(var_1, var_4);
+  var_2._id_0E18 = maps\mp\agents\_scripted_agent_anim_util::getangleindexvariable(var_1, var_4);
   return var_2;
 }
 
@@ -5041,7 +5041,7 @@ get_random_boss_blood_position() {
 
 get_boss_pull_position(var_0) {
   if(common_scripts\utility::_id_562E(level.king_level_setup)) {
-    if(!var_0 common_scripts\utility::_id_3794("phase_transition_active") && _id_0547::_id_5565(var_0.current_phase_index, 3) || _id_0547::_id_5565(var_0.current_phase_index, 4)) {
+    if(!var_0 common_scripts\utility::ent_flag("phase_transition_active") && _id_0547::_id_5565(var_0.current_phase_index, 3) || _id_0547::_id_5565(var_0.current_phase_index, 4)) {
       var_1 = level.bossfight.throne_pos;
     } else {
       var_1 = level.bossfight.boss_drain_pos;
@@ -5096,7 +5096,7 @@ anim_state_stand_pain_run(var_0, var_1) {
 
   var_5 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_3);
   var_6 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_5);
-  var_2 maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_5, var_6, 1, "", "end");
+  var_2 maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_5, var_6, 1, "", "end");
 }
 
 anim_state_stand_pain_interrupt(var_0, var_1) {}
@@ -5119,7 +5119,7 @@ handle_manual_move() {
   var_1 thread _id_0547::_id_2D19(var_0);
   var_0.puck = var_1;
   var_0.move_targets = [];
-  var_0 common_scripts\utility::_id_3799("manual_move_enabled");
+  var_0 common_scripts\utility::ent_flag_init("manual_move_enabled");
   var_0 scragentsetphysicsmode("noclip");
   var_0 scragentsynchronizeanims(0.1, 0.1, var_0.puck, "tag_origin", "tag_sync");
 
@@ -5157,9 +5157,9 @@ manual_move_motion(var_0) {
   if(var_2 == 0) {
     waitframe();
   } else {
-    var_0._id_9255 = var_1.puck.origin;
-    var_0._id_9297 = gettime() / 1000;
-    var_0._id_36AD = var_0._id_9297 + var_3;
+    var_0.start_origin = var_1.puck.origin;
+    var_0.start_time = gettime() / 1000;
+    var_0.end_time = var_0.start_time + var_3;
     var_1.puck moveTo(var_0.origin, var_3);
     wait(var_3);
     waitframe();
@@ -5175,11 +5175,11 @@ wait_for_valid_manual_move() {
   for(;;) {
     var_1 = get_next_manual_move();
 
-    if(var_0 common_scripts\utility::_id_3794("manual_move_enabled") && isDefined(var_1)) {
+    if(var_0 common_scripts\utility::ent_flag("manual_move_enabled") && isDefined(var_1)) {
       return var_1;
     }
 
-    var_0 common_scripts\utility::_id_A70A("manual_move_enabled", "new_manual_move");
+    var_0 common_scripts\utility::waittill_any("manual_move_enabled", "new_manual_move");
   }
 }
 
@@ -5203,10 +5203,10 @@ get_next_manual_move() {
 start_manual_move() {
   var_0 = self;
 
-  if(var_0 common_scripts\utility::_id_3794("manual_move_enabled")) {
+  if(var_0 common_scripts\utility::ent_flag("manual_move_enabled")) {
     return;
   }
-  var_0 common_scripts\utility::_id_379A("manual_move_enabled");
+  var_0 common_scripts\utility::ent_flag_set("manual_move_enabled");
   var_0.puck.origin = var_0 gettagorigin("tag_sync");
   var_0.puck.angles = var_0 gettagangles("tag_sync");
 }
@@ -5214,7 +5214,7 @@ start_manual_move() {
 pause_manual_move() {
   var_0 = self;
 
-  if(!var_0 common_scripts\utility::_id_3794("manual_rotate_enabled")) {
+  if(!var_0 common_scripts\utility::ent_flag("manual_rotate_enabled")) {
     return;
   }
   var_0.puck moveTo(var_0.puck.origin, 0.1);
@@ -5223,7 +5223,7 @@ pause_manual_move() {
     var_0 notify("manual_move_end", "result_paused");
   }
 
-  var_0 common_scripts\utility::_id_3796("manual_move_enabled");
+  var_0 common_scripts\utility::ent_flag_clear("manual_move_enabled");
 }
 
 set_move_path(var_0) {
@@ -5277,7 +5277,7 @@ create_move_target(var_0, var_1) {
 handle_manual_rotation() {
   var_0 = self;
   var_0 endon("death");
-  var_0 common_scripts\utility::_id_3799("manual_rotate_enabled");
+  var_0 common_scripts\utility::ent_flag_init("manual_rotate_enabled");
 
   for(;;) {
     wait_for_valid_rotation_target();
@@ -5304,29 +5304,29 @@ wait_for_valid_rotation_target() {
   var_0 = self;
 
   for(;;) {
-    if(isDefined(var_0.rotation_target) && var_0 common_scripts\utility::_id_3794("manual_rotate_enabled")) {
+    if(isDefined(var_0.rotation_target) && var_0 common_scripts\utility::ent_flag("manual_rotate_enabled")) {
       return;
     }
-    var_0 common_scripts\utility::_id_A70A("manual_rotate_enabled", "new_rotation_target");
+    var_0 common_scripts\utility::waittill_any("manual_rotate_enabled", "new_rotation_target");
   }
 }
 
 start_manual_rotation() {
   var_0 = self;
 
-  if(var_0 common_scripts\utility::_id_3794("manual_rotate_enabled")) {
+  if(var_0 common_scripts\utility::ent_flag("manual_rotate_enabled")) {
     return;
   }
-  var_0 common_scripts\utility::_id_379A("manual_rotate_enabled");
+  var_0 common_scripts\utility::ent_flag_set("manual_rotate_enabled");
 }
 
 pause_manual_rotation() {
   var_0 = self;
 
-  if(!var_0 common_scripts\utility::_id_3794("manual_rotate_enabled")) {
+  if(!var_0 common_scripts\utility::ent_flag("manual_rotate_enabled")) {
     return;
   }
-  var_0 common_scripts\utility::_id_3796("manual_rotate_enabled");
+  var_0 common_scripts\utility::ent_flag_clear("manual_rotate_enabled");
   var_0.puck rotateTo(var_0.puck.angles, 0.05);
 }
 
@@ -5339,11 +5339,11 @@ get_desired_rotation_yaw() {
 
   switch (var_0.rotation_target.type) {
     case "yaw":
-      return var_0.rotation_target._id_AAE8;
+      return var_0.rotation_target.yaw;
     case "origin":
       return _vectortoyaw(var_0.rotation_target.origin - var_0.puck.origin);
     case "ent":
-      return _vectortoyaw(var_0.rotation_target._id_378F.origin - var_0.puck.origin);
+      return _vectortoyaw(var_0.rotation_target.ent.origin - var_0.puck.origin);
   }
 
   return var_0.puck.angles[1];
@@ -5352,19 +5352,19 @@ get_desired_rotation_yaw() {
 get_manual_rotation_target_yaw_in_time(var_0) {
   var_1 = self;
 
-  if(!var_1 common_scripts\utility::_id_3794("manual_rotate_enabled") || !isDefined(var_1.rotation_target)) {
+  if(!var_1 common_scripts\utility::ent_flag("manual_rotate_enabled") || !isDefined(var_1.rotation_target)) {
     return var_1.puck.angles[1];
   }
 
   switch (var_1.rotation_target.type) {
     case "yaw":
-      return var_1.rotation_target._id_AAE8;
+      return var_1.rotation_target.yaw;
     case "origin":
       var_2 = var_1 get_expected_position_in_time(var_0);
       return _vectortoyaw(var_1.rotation_target.origin - var_2);
     case "ent":
       var_2 = var_1 get_expected_position_in_time(var_0);
-      return _vectortoyaw(var_1.rotation_target._id_378F.origin - var_2);
+      return _vectortoyaw(var_1.rotation_target.ent.origin - var_2);
   }
 
   return var_1.puck.angles[1];
@@ -5374,18 +5374,18 @@ get_expected_position_in_time(var_0) {
   var_1 = self;
   var_2 = var_1.origin;
 
-  if(var_1 common_scripts\utility::_id_3794("manual_move_enabled")) {
+  if(var_1 common_scripts\utility::ent_flag("manual_move_enabled")) {
     var_2 = var_1.puck.origin;
 
     if(isDefined(var_1.current_move_target)) {
       var_3 = var_1.current_move_target;
       var_4 = gettime() / 1000 + var_0;
 
-      if(var_4 < var_3._id_9297) {
+      if(var_4 < var_3.start_time) {
         var_2 = var_1.puck.origin;
-      } else if(var_4 < var_3._id_36AD) {
-        var_5 = (var_4 - var_3._id_9297) / (var_3._id_36AD - var_3._id_9297);
-        var_2 = _vectorlerp(var_3._id_9255, var_3.origin, clamp(var_5, 0, 1));
+      } else if(var_4 < var_3.end_time) {
+        var_5 = (var_4 - var_3.start_time) / (var_3.end_time - var_3.start_time);
+        var_2 = _vectorlerp(var_3.start_origin, var_3.origin, clamp(var_5, 0, 1));
       } else
         var_2 = var_3.origin;
     }
@@ -5414,7 +5414,7 @@ create_rotation_target_shared(var_0) {
 create_rotation_target_yaw(var_0, var_1) {
   var_2 = create_rotation_target_shared(var_1);
   var_2.type = "yaw";
-  var_2._id_AAE8 = var_0;
+  var_2.yaw = var_0;
   return var_2;
 }
 
@@ -5428,7 +5428,7 @@ create_rotation_target_origin(var_0, var_1) {
 create_rotation_target_ent(var_0, var_1) {
   var_2 = create_rotation_target_shared(var_1);
   var_2.type = "ent";
-  var_2._id_378F = var_0;
+  var_2.ent = var_0;
   return var_2;
 }
 
@@ -5530,7 +5530,7 @@ vo_get_gdk_ability_line(var_0) {
     case "end_taunt":
       var_4 = ["evennowyoucannotdefeatme", "relyingonbirdstosuccoryou"];
       var_2 = var_4[self.vo_taunt_int];
-      self.vo_taunt_int = common_scripts\utility::_id_627D(self.vo_taunt_int + 1, var_4.size);
+      self.vo_taunt_int = common_scripts\utility::mod(self.vo_taunt_int + 1, var_4.size);
       break;
     case "end_fail":
       var_2 = "yourmercyisweakness";
@@ -5541,14 +5541,14 @@ vo_get_gdk_ability_line(var_0) {
     case "drain_punished":
       var_5 = ["thisthisisnotwhatiwantedi", "betrayedbymyknightsprison", "aaarghgahneveryoudareno", "cowardsstrikemedownevenno"];
       var_2 = var_5[self.vo_drain_punished_int];
-      self.vo_drain_punished_int = common_scripts\utility::_id_627D(self.vo_drain_punished_int + 1, var_5.size);
+      self.vo_drain_punished_int = common_scripts\utility::mod(self.vo_drain_punished_int + 1, var_5.size);
       break;
     case "intro":
       var_2 = "yourpainyourbloodyourterr";
       break;
   }
 
-  if(common_scripts\utility::_id_562E(var_3) && self.vo_lines_played.size > 0 && isDefined(common_scripts\utility::_id_0F7E(self.vo_lines_played, var_0)) && common_scripts\utility::_id_24A6()) {
+  if(common_scripts\utility::_id_562E(var_3) && self.vo_lines_played.size > 0 && isDefined(common_scripts\utility::_id_0F7E(self.vo_lines_played, var_0)) && common_scripts\utility::cointoss()) {
     var_2 = undefined;
   }
 
@@ -5569,7 +5569,7 @@ temp_idle_anim() {
   var_2 = var_0 getanimentrycount(var_1);
   var_3 = gettime();
   var_4 = randomint(var_2);
-  var_0 maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_4, 1);
+  var_0 maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_4, 1);
 }
 
 sort_tags_by_distance(var_0, var_1, var_2) {
@@ -5619,7 +5619,7 @@ zombie_king_play_dead() {
   var_0 notify("geist_drain_special_end");
   var_0 notify("fight_complete");
   var_0 notify("it_is_over");
-  var_0._id_480F = 0;
+  var_0.godmode = 0;
   var_0._id_1DEB = 1;
   waitframe();
   var_0 dodamage(var_0.health + 666, var_0.origin);
@@ -5631,8 +5631,8 @@ zombie_king_play_dead() {
   level.zombie_king_corpse thread vo_play_gdk_ability_line("end_succeed");
 
   while(isDefined(var_0) && _id_0547::_id_5565(var_0._id_0A4B, "zombie_king")) {
-    if(common_scripts\utility::_id_562E(var_0._id_480F)) {
-      var_0._id_480F = 0;
+    if(common_scripts\utility::_id_562E(var_0.godmode)) {
+      var_0.godmode = 0;
     }
 
     var_0 dodamage(var_0.health + 666, var_0.origin);
@@ -5674,7 +5674,7 @@ spawn_wings() {
     var_0.wing_fx delete();
   }
 
-  var_0.wing_fx = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_desc_player_wings"), var_0, "J_Spine4");
+  var_0.wing_fx = _spawnlinkedfx(common_scripts\utility::getfx("zmb_desc_player_wings"), var_0, "J_Spine4");
   _triggerfx(var_0.wing_fx);
   var_0 maps\mp\gametypes\_playerlogic::deleteentonplayerdisconnect(var_0.wing_fx);
   var_0.wing_fx thread _id_0547::_id_2D19(var_0);
@@ -5687,7 +5687,7 @@ ravenlord_ammo_refill() {
     wait 8;
     var_1 = var_0 getcurrentweapon();
 
-    if(var_1 == "none" || _id_0547::_id_57AF(var_1) || _id_0547::_id_5862(var_1) || _id_0547::iszombieconsumableweapon(var_1) || _id_0547::_id_5864(var_1) || _id_0547::_id_585C(var_1) || _id_0548::is_grenadier_immune_weapon(var_1)) {
+    if(var_1 == "none" || _id_0547::isrippedturretweapon(var_1) || _id_0547::_id_5862(var_1) || _id_0547::iszombieconsumableweapon(var_1) || _id_0547::_id_5864(var_1) || _id_0547::iszombieequipment(var_1) || _id_0548::is_grenadier_immune_weapon(var_1)) {
       continue;
     }
     var_2 = var_0 getweaponammoclip(var_1);
@@ -5816,7 +5816,7 @@ ravenlord_apply_health_to_players() {
   }
 }
 
-_id_7A43(var_0) {
+random_vector(var_0) {
   return (_randomfloatrange(var_0 * -1, var_0), _randomfloatrange(var_0 * -1, var_0), _randomfloatrange(var_0 * -1, var_0));
 }
 

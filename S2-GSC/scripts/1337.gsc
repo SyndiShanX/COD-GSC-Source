@@ -18,10 +18,10 @@ _id_2F9E() {
   }
 }
 
-_id_62A6(var_0, var_1, var_2) {
+modifydamage(var_0, var_1, var_2) {
   var_3 = var_0;
 
-  if(isDefined(var_2) && maps\mp\_utility::_id_5755(var_2) && isDefined(var_1._id_60E8)) {
+  if(isDefined(var_2) && maps\mp\_utility::ismeleemod(var_2) && isDefined(var_1._id_60E8)) {
     switch (self._id_0A4B) {
       case "zombie_berserker":
       case "zombie_generic":

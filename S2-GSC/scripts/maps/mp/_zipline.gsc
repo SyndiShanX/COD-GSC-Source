@@ -8,14 +8,14 @@ init() {
   var_1 = getEntArray("zipline", "targetname");
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    var_3 = _id_04D1::_id_2837("neutral", var_1[var_2], var_0, (0, 0, 0));
+    var_3 = _id_04D1::createuseobject("neutral", var_1[var_2], var_0, (0, 0, 0));
     var_3 _id_04D1::_id_0C30("any");
-    var_3 _id_04D1::_id_8A5A(0.25);
-    var_3 _id_04D1::_id_8A59(&"MP_ZIPLINE_USE");
-    var_3 _id_04D1::_id_8A57(&"MP_ZIPLINE_USE");
-    var_3 _id_04D1::_id_8A60("any");
-    var_3._id_6ABC = ::_id_6ABC;
-    var_3._id_6BBF = ::_id_6BBF;
+    var_3 _id_04D1::setusetime(0.25);
+    var_3 _id_04D1::setusetext(&"MP_ZIPLINE_USE");
+    var_3 _id_04D1::setusehinttext(&"MP_ZIPLINE_USE");
+    var_3 _id_04D1::setvisibleteam("any");
+    var_3.onbeginuse = ::onbeginuse;
+    var_3.onuse = ::onuse;
     var_4 = [];
     var_5 = _getEnt(var_1[var_2].target, "targetname");
 
@@ -32,34 +32,34 @@ init() {
       break;
     }
 
-    var_3._id_9835 = var_4;
+    var_3.targets = var_4;
   }
 
   precachemodel("tag_player");
-  _id_51C7();
+  init_elevator();
 }
 
-_id_6ABC(var_0) {
+onbeginuse(var_0) {
   var_0 playSound("scrambler_pullout_lift_plr");
 }
 
-_id_6BBF(var_0) {
-  var_0 thread _id_AAF8(self);
+onuse(var_0) {
+  var_0 thread zip(self);
 }
 
-_id_AAF8(var_0) {
+zip(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("zipline_drop");
   level endon("game_ended");
-  var_1 = spawn("script_origin", var_0._id_9D65.origin);
-  var_1.origin = var_0._id_9D65.origin;
+  var_1 = spawn("script_origin", var_0.trigger.origin);
+  var_1.origin = var_0.trigger.origin;
   var_1.angles = self.angles;
   var_1 setModel("tag_player");
   self playerlinktodelta(var_1, "tag_player", 1, 180, 180, 180, 180);
-  thread _id_A8F9(var_1);
-  thread _id_A8FF(var_1);
-  var_2 = var_0._id_9835;
+  thread watchdeath(var_1);
+  thread watchdrop(var_1);
+  var_2 = var_0.targets;
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_4 = distance(var_1.origin, var_2[var_3].origin) / 600;
@@ -83,7 +83,7 @@ _id_AAF8(var_0) {
   var_1 delete();
 }
 
-_id_A8FF(var_0) {
+watchdrop(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("destination");
@@ -94,7 +94,7 @@ _id_A8FF(var_0) {
   var_0 delete();
 }
 
-_id_A8F9(var_0) {
+watchdeath(var_0) {
   self endon("disconnect");
   self endon("destination");
   self endon("zipline_drop");
@@ -104,106 +104,106 @@ _id_A8F9(var_0) {
   var_0 delete();
 }
 
-_id_51C7() {
+init_elevator() {
   var_0 = [];
   var_1 = getEntArray("elevator_button", "targetname");
-  level._id_35B3 = spawnStruct();
-  level._id_35B3.location = "floor1";
-  level._id_35B3._id_932D = [];
-  level._id_35B3._id_932D["elevator"] = "closed";
-  level._id_35B3._id_2DAC = [];
+  level.elevator = spawnStruct();
+  level.elevator.location = "floor1";
+  level.elevator.states = [];
+  level.elevator.states["elevator"] = "closed";
+  level.elevator.destinations = [];
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    var_3 = _id_04D1::_id_2837("neutral", var_1[var_2], var_0, (0, 0, 0));
+    var_3 = _id_04D1::createuseobject("neutral", var_1[var_2], var_0, (0, 0, 0));
     var_3 _id_04D1::_id_0C30("any");
-    var_3 _id_04D1::_id_8A5A(0.25);
-    var_3 _id_04D1::_id_8A59(&"MP_ZIPLINE_USE");
-    var_3 _id_04D1::_id_8A57(&"MP_ZIPLINE_USE");
-    var_3 _id_04D1::_id_8A60("any");
-    var_3._id_6ABC = ::_id_6ABD;
-    var_3._id_6BBF = ::_id_6BC0;
+    var_3 _id_04D1::setusetime(0.25);
+    var_3 _id_04D1::setusetext(&"MP_ZIPLINE_USE");
+    var_3 _id_04D1::setusehinttext(&"MP_ZIPLINE_USE");
+    var_3 _id_04D1::setvisibleteam("any");
+    var_3.onbeginuse = ::onbeginuse_elevator;
+    var_3.onuse = ::onuse_elevator;
     var_3.location = var_1[var_2].shootblank;
-    level._id_35B3._id_932D[var_1[var_2].shootblank] = "closed";
+    level.elevator.states[var_1[var_2].shootblank] = "closed";
 
     if(isDefined(var_1[var_2].target)) {
-      var_4 = common_scripts\utility::_id_46B5(var_1[var_2].target, "targetname");
+      var_4 = common_scripts\utility::getstruct(var_1[var_2].target, "targetname");
 
       if(isDefined(var_4)) {
-        level._id_35B3._id_2DAC[var_1[var_2].shootblank] = var_4;
+        level.elevator.destinations[var_1[var_2].shootblank] = var_4;
       }
     }
   }
 }
 
-_id_6ABD(var_0) {}
+onbeginuse_elevator(var_0) {}
 
-_id_6BC0(var_0) {
+onuse_elevator(var_0) {
   switch (self.location) {
     case "floor1":
-      if(level._id_35B3._id_932D["floor1"] == "closed") {
-        if(level._id_35B3.location == "floor1") {
-          if(level._id_35B3._id_932D["elevator"] == "closed") {
-            level thread _id_6BE1("floor1");
-            level thread _id_6BE1("elevator");
+      if(level.elevator.states["floor1"] == "closed") {
+        if(level.elevator.location == "floor1") {
+          if(level.elevator.states["elevator"] == "closed") {
+            level thread open("floor1");
+            level thread open("elevator");
           }
-        } else if(level._id_35B3.location == "floor2") {
-          if(level._id_35B3._id_932D["elevator"] == "opened") {
+        } else if(level.elevator.location == "floor2") {
+          if(level.elevator.states["elevator"] == "opened") {
             level notify("stop_autoClose");
-            level thread _id_242F("floor2");
-            level _id_242F("elevator");
+            level thread close("floor2");
+            level close("elevator");
           }
 
-          if(level._id_35B3._id_932D["elevator"] == "closed") {
-            level _id_646F();
-            level thread _id_6BE1("floor1");
-            level thread _id_6BE1("elevator");
+          if(level.elevator.states["elevator"] == "closed") {
+            level move();
+            level thread open("floor1");
+            level thread open("elevator");
           }
         }
       }
 
       break;
     case "floor2":
-      if(level._id_35B3._id_932D["floor2"] == "closed") {
-        if(level._id_35B3.location == "floor2") {
-          if(level._id_35B3._id_932D["elevator"] == "closed") {
-            level thread _id_6BE1("floor2");
-            level thread _id_6BE1("elevator");
+      if(level.elevator.states["floor2"] == "closed") {
+        if(level.elevator.location == "floor2") {
+          if(level.elevator.states["elevator"] == "closed") {
+            level thread open("floor2");
+            level thread open("elevator");
           }
-        } else if(level._id_35B3.location == "floor1") {
-          if(level._id_35B3._id_932D["elevator"] == "opened") {
+        } else if(level.elevator.location == "floor1") {
+          if(level.elevator.states["elevator"] == "opened") {
             level notify("stop_autoClose");
-            level thread _id_242F("floor1");
-            level _id_242F("elevator");
+            level thread close("floor1");
+            level close("elevator");
           }
 
-          if(level._id_35B3._id_932D["elevator"] == "closed") {
-            level _id_646F();
-            level thread _id_6BE1("floor2");
-            level thread _id_6BE1("elevator");
+          if(level.elevator.states["elevator"] == "closed") {
+            level move();
+            level thread open("floor2");
+            level thread open("elevator");
           }
         }
       }
 
       break;
     case "elevator":
-      if(level._id_35B3._id_932D["elevator"] == "opened") {
+      if(level.elevator.states["elevator"] == "opened") {
         level notify("stop_autoClose");
-        level thread _id_242F(level._id_35B3.location);
-        level _id_242F("elevator");
+        level thread close(level.elevator.location);
+        level close("elevator");
       }
 
-      if(level._id_35B3._id_932D["elevator"] == "closed") {
-        level _id_646F();
-        level thread _id_6BE1(level._id_35B3.location);
-        level thread _id_6BE1("elevator");
+      if(level.elevator.states["elevator"] == "closed") {
+        level move();
+        level thread open(level.elevator.location);
+        level thread open("elevator");
       }
 
       break;
   }
 }
 
-_id_6BE1(var_0) {
-  level._id_35B3._id_932D[var_0] = "opening";
+open(var_0) {
+  level.elevator.states[var_0] = "opening";
   var_1 = _getEnt("e_door_" + var_0 + "_left", "targetname");
   var_2 = _getEnt("e_door_" + var_0 + "_right", "targetname");
 
@@ -217,15 +217,15 @@ _id_6BE1(var_0) {
   }
 
   wait 2;
-  level._id_35B3._id_932D[var_0] = "opened";
+  level.elevator.states[var_0] = "opened";
 
   if(var_0 == "elevator") {
-    level thread _id_1386();
+    level thread autoclose();
   }
 }
 
-_id_242F(var_0) {
-  level._id_35B3._id_932D[var_0] = "closing";
+close(var_0) {
+  level.elevator.states[var_0] = "closing";
   var_1 = _getEnt("e_door_" + var_0 + "_left", "targetname");
   var_2 = _getEnt("e_door_" + var_0 + "_right", "targetname");
 
@@ -239,39 +239,39 @@ _id_242F(var_0) {
   }
 
   wait 2;
-  level._id_35B3._id_932D[var_0] = "closed";
+  level.elevator.states[var_0] = "closed";
 }
 
-_id_1386() {
+autoclose() {
   level endon("stop_autoClose");
   wait 10;
-  level thread _id_242F(level._id_35B3.location);
-  level thread _id_242F("elevator");
+  level thread close(level.elevator.location);
+  level thread close("elevator");
 }
 
-_id_646F() {
-  level._id_35B3._id_932D["elevator"] = "moving";
+move() {
+  level.elevator.states["elevator"] = "moving";
   var_0 = _getEnt("e_door_elevator_left", "targetname");
   var_1 = _getEnt("e_door_elevator_right", "targetname");
   var_2 = _getEnt("elevator", "targetname");
 
-  if(level._id_35B3.location == "floor1") {
-    level._id_35B3.location = "floor2";
-    var_3 = var_0.origin[2] - level._id_35B3._id_2DAC["floor1"].origin[2];
-    var_0 moveTo((var_0.origin[0], var_0.origin[1], level._id_35B3._id_2DAC["floor2"].origin[2] + var_3), 5);
-    var_3 = var_1.origin[2] - level._id_35B3._id_2DAC["floor1"].origin[2];
-    var_1 moveTo((var_1.origin[0], var_1.origin[1], level._id_35B3._id_2DAC["floor2"].origin[2] + var_3), 5);
-    var_2 moveTo(level._id_35B3._id_2DAC["floor2"].origin, 5);
+  if(level.elevator.location == "floor1") {
+    level.elevator.location = "floor2";
+    var_3 = var_0.origin[2] - level.elevator.destinations["floor1"].origin[2];
+    var_0 moveTo((var_0.origin[0], var_0.origin[1], level.elevator.destinations["floor2"].origin[2] + var_3), 5);
+    var_3 = var_1.origin[2] - level.elevator.destinations["floor1"].origin[2];
+    var_1 moveTo((var_1.origin[0], var_1.origin[1], level.elevator.destinations["floor2"].origin[2] + var_3), 5);
+    var_2 moveTo(level.elevator.destinations["floor2"].origin, 5);
   } else {
-    level._id_35B3.location = "floor1";
-    var_3 = var_0.origin[2] - level._id_35B3._id_2DAC["floor2"].origin[2];
-    var_0 moveTo((var_0.origin[0], var_0.origin[1], level._id_35B3._id_2DAC["floor1"].origin[2] + var_3), 5);
-    var_3 = var_1.origin[2] - level._id_35B3._id_2DAC["floor2"].origin[2];
-    var_1 moveTo((var_1.origin[0], var_1.origin[1], level._id_35B3._id_2DAC["floor1"].origin[2] + var_3), 5);
-    var_2 moveTo(level._id_35B3._id_2DAC["floor1"].origin, 5);
+    level.elevator.location = "floor1";
+    var_3 = var_0.origin[2] - level.elevator.destinations["floor2"].origin[2];
+    var_0 moveTo((var_0.origin[0], var_0.origin[1], level.elevator.destinations["floor1"].origin[2] + var_3), 5);
+    var_3 = var_1.origin[2] - level.elevator.destinations["floor2"].origin[2];
+    var_1 moveTo((var_1.origin[0], var_1.origin[1], level.elevator.destinations["floor1"].origin[2] + var_3), 5);
+    var_2 moveTo(level.elevator.destinations["floor1"].origin, 5);
   }
 
   wait 5;
   var_2 playSound("elev_bell_ding");
-  level._id_35B3._id_932D["elevator"] = "closed";
+  level.elevator.states["elevator"] = "closed";
 }

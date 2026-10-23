@@ -3,7 +3,7 @@
  * Script: animscripts\notetracks_common.gsc
 *********************************************/
 
-_id_6784(var_0) {
+notetrack_playsound(var_0) {
   if(isDefined(self) && _soundexists(var_0)) {
     self playSound(var_0);
   } else {}
@@ -29,17 +29,17 @@ _id_430B(var_0, var_1) {
   return var_3;
 }
 
-_id_7BF0() {
-  anim._id_67D0["dropgun"] = ::_id_67B5;
-  anim._id_67D0["unlink"] = ::_id_67E6;
-  anim._id_67D0["dismember_left_arm"] = ::_id_679D;
-  anim._id_67D0["dismember_right_arm"] = ::_id_67A1;
-  anim._id_67D0["dismember_left_leg"] = ::_id_679F;
-  anim._id_67D0["dismember_right_leg"] = ::_id_67A3;
-  anim._id_67D0["dismember_novfx_left_arm"] = ::_id_679E;
-  anim._id_67D0["dismember_novfx_right_arm"] = ::_id_67A2;
-  anim._id_67D0["dismember_novfx_left_leg"] = ::_id_67A0;
-  anim._id_67D0["dismember_novfx_right_leg"] = ::_id_67A4;
+registernotetracks() {
+  anim.notetracks["dropgun"] = ::_id_67B5;
+  anim.notetracks["unlink"] = ::_id_67E6;
+  anim.notetracks["dismember_left_arm"] = ::_id_679D;
+  anim.notetracks["dismember_right_arm"] = ::_id_67A1;
+  anim.notetracks["dismember_left_leg"] = ::_id_679F;
+  anim.notetracks["dismember_right_leg"] = ::_id_67A3;
+  anim.notetracks["dismember_novfx_left_arm"] = ::_id_679E;
+  anim.notetracks["dismember_novfx_right_arm"] = ::_id_67A2;
+  anim.notetracks["dismember_novfx_left_leg"] = ::_id_67A0;
+  anim.notetracks["dismember_novfx_right_leg"] = ::_id_67A4;
 
   if(getdvarint("fov_notetracks_code_handling") == 0 && !_isdedicatedserver()) {
     anim._id_67D4["fov_"] = ::_id_67B2;
@@ -52,7 +52,7 @@ _id_7BF0() {
   anim._id_67D4["playrumble_"] = ::_id_67C6;
   anim._id_67D4["playrumbleloop_"] = ::_id_67C7;
   anim._id_67D4["stoprumble_"] = ::_id_67E2;
-  anim._id_67D0["stopallrumbles"] = ::_id_67DF;
+  anim.notetracks["stopallrumbles"] = ::_id_67DF;
   anim._id_67D4["setmodel_"] = ::_id_67D6;
   anim._id_67D4["attachmodeltotag"] = ::_id_6793;
   anim._id_67D4["detachmodelfromtag"] = ::_id_679A;
@@ -72,12 +72,12 @@ _id_7BF0() {
     var_0 = getarraykeys(level._id_0686);
 
     foreach(var_2 in var_0) {
-      anim._id_67D0[var_2] = ::_id_297E;
+      anim.notetracks[var_2] = ::customnotetrackfx;
     }
   }
 }
 
-_id_A025() {
+unlinknextframe() {
   wait 0.1;
 
   if(isDefined(self)) {
@@ -94,7 +94,7 @@ _id_67B5(var_0, var_1, var_2) {
 
   foreach(var_5 in var_3) {
     var_5 unlink();
-    var_5 _meth_8273();
+    var_5 physicslaunchserveritem();
   }
 }
 
@@ -102,7 +102,7 @@ _id_679D(var_0, var_1, var_2) {
   _id_04EB::_id_4AAB("left_arm");
 
   if(isDefined(self._id_65D2) && isDefined(self._id_65D1)) {
-    _playFXOnTag(common_scripts\utility::_id_44F5(self._id_65D2), self, self._id_65D1);
+    _playFXOnTag(common_scripts\utility::getfx(self._id_65D2), self, self._id_65D1);
   }
 }
 
@@ -114,7 +114,7 @@ _id_67A1(var_0, var_1, var_2) {
   _id_04EB::_id_4AAB("right_arm");
 
   if(isDefined(self._id_65D2) && isDefined(self._id_65D1)) {
-    _playFXOnTag(common_scripts\utility::_id_44F5(self._id_65D2), self, self._id_65D1);
+    _playFXOnTag(common_scripts\utility::getfx(self._id_65D2), self, self._id_65D1);
   }
 }
 
@@ -126,7 +126,7 @@ _id_679F(var_0, var_1, var_2) {
   _id_04EB::_id_4AAB("left_leg");
 
   if(isDefined(self._id_65D2) && isDefined(self._id_65D1)) {
-    _playFXOnTag(common_scripts\utility::_id_44F5(self._id_65D2), self, self._id_65D1);
+    _playFXOnTag(common_scripts\utility::getfx(self._id_65D2), self, self._id_65D1);
   }
 }
 
@@ -138,7 +138,7 @@ _id_67A3(var_0, var_1, var_2) {
   _id_04EB::_id_4AAB("right_leg");
 
   if(isDefined(self._id_65D2) && isDefined(self._id_65D1)) {
-    _playFXOnTag(common_scripts\utility::_id_44F5(self._id_65D2), self, self._id_65D1);
+    _playFXOnTag(common_scripts\utility::getfx(self._id_65D2), self, self._id_65D1);
   }
 }
 
@@ -146,7 +146,7 @@ _id_67A4(var_0, var_1, var_2) {
   _id_04EB::_id_4AAB("right_leg");
 }
 
-_id_297E(var_0, var_1) {
+customnotetrackfx(var_0, var_1) {
   if(isDefined(self._id_00B5)) {
     var_2 = self._id_00B5;
   } else {
@@ -165,19 +165,19 @@ _id_297E(var_0, var_1) {
     return;
   }
   if(_isai(self) && isDefined(var_3.fx)) {
-    _playFXOnTag(var_3.fx, self, var_3._id_95A6);
+    _playFXOnTag(var_3.fx, self, var_3.tag);
   }
 
-  if(!isDefined(var_3._id_8F3A) && !isDefined(var_3._id_8F3C)) {
+  if(!isDefined(var_3.sound_prefix) && !isDefined(var_3.sound_suffix)) {
     return;
   }
-  var_4 = "" + var_3._id_8F3A + var_2 + var_3._id_8F3C;
+  var_4 = "" + var_3.sound_prefix + var_2 + var_3.sound_suffix;
 
   if(!_soundexists(var_4)) {
-    var_4 = "" + var_3._id_8F3A + "default" + var_3._id_8F3C;
+    var_4 = "" + var_3.sound_prefix + "default" + var_3.sound_suffix;
   }
 
-  _id_6784(var_4);
+  notetrack_playsound(var_4);
 }
 
 _id_6793(var_0, var_1, var_2) {
@@ -460,7 +460,7 @@ notetrackhideorshow_internal(var_0, var_1, var_2, var_3) {
 }
 
 _id_67D6(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::_id_9462(var_0, "_");
+  var_3 = common_scripts\utility::string_find(var_0, "_");
 
   if(!isDefined(var_3) || var_3 == -1) {
     return;
@@ -650,14 +650,14 @@ _id_67B2(var_0, var_1, var_2) {
     return;
   else if(var_4 == "end") {
     return;
-  } else if(_id_561B(var_4)) {
+  } else if(is_string_a_number(var_4)) {
     var_4 = int(var_4);
   } else {
     return;
   }
 
   if(isDefined(var_6)) {
-    if(_id_561B(var_6)) {
+    if(is_string_a_number(var_6)) {
       var_6 = _float(var_6);
 
       if(isDefined(var_5) && var_5 == "mayaframes") {
@@ -665,7 +665,7 @@ _id_67B2(var_0, var_1, var_2) {
       }
     } else if(isDefined(var_6))
       return;
-  } else if(isDefined(var_5) && _id_561B(var_5))
+  } else if(isDefined(var_5) && is_string_a_number(var_5))
     var_6 = _float(var_5);
   else {
     var_6 = 0;
@@ -714,15 +714,15 @@ _id_45B8(var_0) {
     }
   }
 
-  var_4 = anim._id_67D0[_tolower(var_0)];
+  var_4 = anim.notetracks[_tolower(var_0)];
   return var_4;
 }
 
-_id_4AD9(var_0, var_1, var_2, var_3, var_4, var_5) {
+handlenotetrack(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = undefined;
 
   if(!isDefined(var_5) || _isstring(var_5)) {
-    var_6 = _id_4627(var_5);
+    var_6 = getplayersonteam(var_5);
   } else if(_isarray(var_5)) {
     var_6 = var_5;
   } else if(isPlayer(var_5)) {
@@ -748,7 +748,7 @@ _id_4AD9(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 }
 
-_id_3222(var_0, var_1, var_2, var_3, var_4, var_5) {
+donotetracks(var_0, var_1, var_2, var_3, var_4, var_5) {
   for(;;) {
     self waittill(var_1, var_6);
 
@@ -760,7 +760,7 @@ _id_3222(var_0, var_1, var_2, var_3, var_4, var_5) {
       var_5 = "undefined";
     }
 
-    var_7 = _id_4AD9(var_6, var_1, var_2, var_5, var_4, var_0);
+    var_7 = handlenotetrack(var_6, var_1, var_2, var_5, var_4, var_0);
 
     if(isDefined(var_7)) {
       return var_7;
@@ -768,11 +768,11 @@ _id_3222(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 }
 
-_id_945F(var_0) {
+string(var_0) {
   return "" + var_0;
 }
 
-_id_561B(var_0) {
+is_string_a_number(var_0) {
   var_1 = _float(var_0);
 
   if(_func_2C6(var_0, " ")) {
@@ -782,7 +782,7 @@ _id_561B(var_0) {
   }
 
   if(_func_2C6(var_0, "-.") || _func_2C6(var_0, ".")) {
-    var_0 = "0" + _id_945F(var_0);
+    var_0 = "0" + string(var_0);
   }
 
   if(issubstr(var_0, ".")) {
@@ -790,12 +790,12 @@ _id_561B(var_0) {
       var_0 = _func_2FF(var_0, "0");
     }
   } else
-    var_0 = _id_945F(var_0);
+    var_0 = string(var_0);
 
-  return _id_945F(var_1) == var_0;
+  return string(var_1) == var_0;
 }
 
-_id_4627(var_0, var_1) {
+getplayersonteam(var_0, var_1) {
   if(!isDefined(var_0)) {
     var_0 = "all";
   }
@@ -834,7 +834,7 @@ switchtooffhand(var_0, var_1, var_2, var_3, var_4) {
 
   thread fov_notetrack_team_setter(var_4);
   self scriptmodelplayanimdeltamotionfrompos(var_0, var_1, var_2, var_3);
-  thread _id_3222(var_4, var_3);
+  thread donotetracks(var_4, var_3);
 }
 
 fov_notetrack_team_setter(var_0) {
@@ -849,7 +849,7 @@ fov_notetrack_team_setter(var_0) {
     if(var_1 == "all") {
       return;
     }
-    thread _id_8C21(var_1, 0);
+    thread showtoteam(var_1, 0);
   } else if(_isarray(var_0)) {
     self hide();
 
@@ -866,7 +866,7 @@ fov_notetrack_team_setter(var_0) {
   }
 }
 
-_id_8C21(var_0, var_1) {
+showtoteam(var_0, var_1) {
   self notify("showToTeam");
   self endon("showToTeam");
   self endon("clear");
@@ -891,7 +891,7 @@ _id_8C21(var_0, var_1) {
   }
 
   for(;;) {
-    level common_scripts\utility::_id_A70A("joined_team", "joined_spectators", "spawn_after_spectator", "class_select_cancel_spectator");
+    level common_scripts\utility::waittill_any("joined_team", "joined_spectators", "spawn_after_spectator", "class_select_cancel_spectator");
     self hide();
 
     foreach(var_3 in level.players) {

@@ -42,18 +42,18 @@ _id_784F() {
   var_1 = var_0.setgoalnode;
   var_2 = undefined;
 
-  foreach(var_4 in level._id_7606) {
+  foreach(var_4 in level.power_switches) {
     if(_id_0547::_id_5565(var_4.getnegotiationnextnode, var_1)) {
       var_2 = var_4;
     }
   }
 
-  if(isDefined(var_2) && isDefined(var_2._id_6298)) {
-    var_6 = _id_0557::_id_782F(var_2._id_6298.origin + (0, 0, 30), [var_2._id_6298]);
+  if(isDefined(var_2) && isDefined(var_2.modelent)) {
+    var_6 = _id_0557::_id_782F(var_2.modelent.origin + (0, 0, 30), [var_2.modelent]);
     _id_0557::_id_781D("2 open salt mine", var_6);
   } else {}
 
-  common_scripts\utility::_id_3C9F(var_1);
+  common_scripts\utility::flag_wait(var_1);
   _id_0557::_id_782D("2 open salt mine", "enable power");
 }
 
@@ -61,7 +61,7 @@ _id_7851() {
   var_0 = _id_4587();
   thread _id_A10A("med", "red");
   thread _id_A10A("rnd", "red");
-  common_scripts\utility::_id_3CA2("flag_med_enigma_set", "flag_rnd_enigma_set", "flag_salt_mine_door_found");
+  common_scripts\utility::flag_wait_any("flag_med_enigma_set", "flag_rnd_enigma_set", "flag_salt_mine_door_found");
   _id_0557::_id_782D("2 open salt mine", "explore bunker");
 }
 
@@ -72,7 +72,7 @@ _id_7867() {
     }
   }
 
-  if(common_scripts\utility::_id_3C77("flag_med_enigma_set") || common_scripts\utility::_id_3C77("flag_rnd_enigma_set")) {
+  if(common_scripts\utility::flag("flag_med_enigma_set") || common_scripts\utility::flag("flag_rnd_enigma_set")) {
     _id_0557::_id_7822("2 open salt mine", &"ZOMBIE_NEST_HINT_STEP_REROUTE_POWER_2");
   }
 
@@ -86,7 +86,7 @@ quest_step_reroute_power_helper() {
   level endon(_id_0557::_id_7838("2 open salt mine", "use power machines"));
 
   if(!0) {
-    var_0 = level._id_A980;
+    var_0 = level.wavecounter;
     var_1 = var_0 + 2;
 
     if(1) {
@@ -94,11 +94,11 @@ quest_step_reroute_power_helper() {
     }
 
     if(1) {
-      if(level._id_A980 <= var_1) {
+      if(level.wavecounter <= var_1) {
         for(;;) {
           level waittill("zombie_wave_started");
 
-          if(level._id_A980 > var_1) {
+          if(level.wavecounter > var_1) {
             break;
           }
         }
@@ -165,7 +165,7 @@ _id_785F() {
 _id_378A() {
   foreach(var_1 in level.players) {
     var_1 _id_054C::_id_AC23("shardroom");
-    var_1 _id_0378::_id_8D74("objective_complete", "shardroom");
+    var_1 _id_0378::snd_message("objective_complete", "shardroom");
   }
 }
 
@@ -217,7 +217,7 @@ lerpfov() {
   if(level._id_36B0) {
     var_4 = _id_4470();
     var_5 = var_4.setclientdvars[0].origin;
-    common_scripts\utility::_id_3C9F("com_to_mine");
+    common_scripts\utility::flag_wait("com_to_mine");
     common_scripts\utility::flag_set("flag_salt_mine_main_ent_opened");
     thread maps\mp\mp_zombie_nest_ee_util::_id_7213("entermine", var_5, 200, 512);
   }
@@ -233,13 +233,13 @@ lerpfov() {
 _id_7EFD() {
   foreach(var_1 in level.players) {
     var_1 _id_054C::_id_AC23("rotor");
-    var_1 _id_0378::_id_8D74("objective_complete", "rotor");
+    var_1 _id_0378::snd_message("objective_complete", "rotor");
   }
 }
 
 _id_7D6D(var_0) {
   for(var_1 = 0; var_1 < level._id_358E.size; var_1++) {
-    level._id_358E[var_1] common_scripts\utility::_id_9D9F();
+    level._id_358E[var_1] common_scripts\utility::trigger_off();
   }
 
   _id_7D6C();
@@ -261,9 +261,9 @@ _id_7D6D(var_0) {
 
 _id_7D6C() {
   level._id_3591 = 0;
-  common_scripts\utility::_id_3C7B("flag_med_enigma_set");
-  common_scripts\utility::_id_3C7B("flag_rnd_enigma_set");
-  thread _id_0378::_id_8D74("aud_fuse_timer_stop", level._id_358E);
+  common_scripts\utility::flag_clear("flag_med_enigma_set");
+  common_scripts\utility::flag_clear("flag_rnd_enigma_set");
+  thread _id_0378::snd_message("aud_fuse_timer_stop", level._id_358E);
 
   for(var_0 = 0; var_0 < level._id_358E.size; var_0++) {
     level._id_358E[var_0]._id_5F59 _id_8718();
@@ -274,7 +274,7 @@ _id_7D6C() {
 
 _id_7AAC() {
   for(var_0 = 0; var_0 < level._id_358E.size; var_0++) {
-    level._id_358E[var_0] common_scripts\utility::_id_9DA3();
+    level._id_358E[var_0] common_scripts\utility::trigger_on();
   }
 }
 
@@ -283,15 +283,15 @@ _id_8A3F() {
   self._id_5F59 = _getEnt(self.target, "targetname");
 
   if(isDefined(self._id_5F59.target)) {
-    self._id_6643 = common_scripts\utility::_id_44BD(self._id_5F59.target, "targetname");
+    self._id_6643 = common_scripts\utility::getent_or_struct(self._id_5F59.target, "targetname");
   }
 
   if(isDefined(self._id_6643) && isDefined(self._id_6643.target)) {
-    self._id_6646 = common_scripts\utility::_id_44BD(self._id_6643.target, "targetname");
+    self._id_6646 = common_scripts\utility::getent_or_struct(self._id_6643.target, "targetname");
   }
 
   if(isDefined(self._id_6646) && isDefined(self._id_6646.target)) {
-    self._id_6647 = common_scripts\utility::_id_44BD(self._id_6646.target, "targetname");
+    self._id_6647 = common_scripts\utility::getent_or_struct(self._id_6646.target, "targetname");
   }
 }
 
@@ -301,7 +301,7 @@ _id_7EFC() {
 
   while(level._id_3591 < level._id_357D) {
     self waittill("trigger", var_0);
-    _id_0378::_id_8D74("aud_enigma_switch_activate");
+    _id_0378::snd_message("aud_enigma_switch_activate");
 
     if(isDefined(self.setlookatent)) {
       if(self.setlookatent == "rotor_machine_rnd") {
@@ -320,7 +320,7 @@ _id_7EFC() {
     self._id_5F59 thread _id_8717();
 
     if(self._id_08A9 == 0) {
-      common_scripts\utility::_id_9D9F();
+      common_scripts\utility::trigger_off();
       self._id_08A9 = 1;
       level._id_3591++;
       var_0 thread _id_2EB7();
@@ -335,10 +335,10 @@ _id_7EFC() {
       }
 
       if(level._id_3591 >= level._id_357D) {
-        thread _id_0378::_id_8D74("aud_fuse_timer_stop", level._id_358E);
+        thread _id_0378::snd_message("aud_fuse_timer_stop", level._id_358E);
         level notify("nest_ee_both_machines_used");
         common_scripts\utility::flag_set("flag_both_enigmas_set");
-        var_0 _id_0378::_id_8D74("aud_saltmine_door_powered");
+        var_0 _id_0378::snd_message("aud_saltmine_door_powered");
 
         if(isDefined(level._id_3590)) {
           _id_0557::_id_7847("2 open salt mine", level._id_3590);
@@ -528,13 +528,13 @@ _id_92C4() {
     var_3 thread _id_9300(var_0);
   }
 
-  thread _id_0378::_id_8D74("aud_fuse_timer_start", level._id_358E);
+  thread _id_0378::snd_message("aud_fuse_timer_start", level._id_358E);
 
   while(!level._id_3593 && !var_1) {
     if(var_0 < 10) {
       foreach(var_6 in level.players) {
         if(var_6 maps\mp\mp_zombie_nest_ee_util::_id_7402()) {
-          thread _id_0378::_id_8D74("aud_start_enigma_timer", var_0, var_1);
+          thread _id_0378::snd_message("aud_start_enigma_timer", var_0, var_1);
         }
       }
     }
@@ -545,7 +545,7 @@ _id_92C4() {
     if(var_0 <= 0 && !level._id_3593) {
       foreach(var_6 in level.players) {
         if(var_6 maps\mp\mp_zombie_nest_ee_util::_id_7402()) {
-          thread _id_0378::_id_8D74("aud_start_enigma_timer", var_0, var_1);
+          thread _id_0378::snd_message("aud_start_enigma_timer", var_0, var_1);
           var_6 thread _id_2EA7();
         }
       }

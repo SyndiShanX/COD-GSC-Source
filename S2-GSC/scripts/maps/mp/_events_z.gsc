@@ -29,10 +29,10 @@ initialize_contract_tracking() {
   create_new_contract_type("wave_survival", "survival_starting_weapons", ::contract_validate_weapon_used, [::get_next_player_weapon, ::get_weapon_on_round_change], get_player_starter_weapons(), "Survive Usings Starter Weapons");
   create_new_contract_type("wave_survival", "survival_no_damage", ::contract_fail_on_player_damage, [::wait_for_player_dmg], undefined, "Survive Without Taking damage");
   create_new_contract_type("wave_survival", "survival_shotgun", ::contract_validate_weapon_used, [::get_next_player_weapon, ::get_weapon_on_round_change], "weapon_shotgun", "Survive With Only ShotGun");
-  create_new_contract_type("wave_survival", "survival_no_move", ::contract_fail_on_player_move, [_id_0547::_id_A6F6], undefined, "Survive Without Moving");
-  create_new_contract_type("wave_survival", "survival_one_area_only", ::contract_fail_on_zone_change, [_id_0547::_id_A6F6], undefined, "Survive Single Area");
-  create_new_contract_type("wave_survival", "survival_first_area", ::contract_fail_on_new_zone, [_id_0547::_id_A6F6], undefined, "First Area");
-  create_new_contract_type("wave_survival", "survival_crouched", ::contract_fail_on_not_crouched, [_id_0547::_id_A6F6], undefined, "Crouched");
+  create_new_contract_type("wave_survival", "survival_no_move", ::contract_fail_on_player_move, [_id_0547::waitnetworkframe], undefined, "Survive Without Moving");
+  create_new_contract_type("wave_survival", "survival_one_area_only", ::contract_fail_on_zone_change, [_id_0547::waitnetworkframe], undefined, "Survive Single Area");
+  create_new_contract_type("wave_survival", "survival_first_area", ::contract_fail_on_new_zone, [_id_0547::waitnetworkframe], undefined, "First Area");
+  create_new_contract_type("wave_survival", "survival_crouched", ::contract_fail_on_not_crouched, [_id_0547::waitnetworkframe], undefined, "Crouched");
   level thread maps\mp\_utility::_id_6F74(::assigncontractsfirstboxweapon);
   create_new_contract_type("wave_survival", "survival_first_box_only", ::contract_validate_weapon_used, [::get_next_player_weapon, ::get_weapon_on_round_change], "no_box_weapon", "Survive Using First Weapon From Box");
   add_area_contract(["zone1_4_bridge_tower"]);
@@ -103,13 +103,13 @@ initialize_contract_tracking() {
 }
 
 _id_0F4C() {
-  if(!isDefined(level._id_AC1D)) {
+  if(!isDefined(level.zombiedoors)) {
     return 0;
   }
 
   var_0 = [];
 
-  foreach(var_2 in level._id_AC1D) {
+  foreach(var_2 in level.zombiedoors) {
     if(common_scripts\utility::_id_562E(var_2.is_quest_door)) {
       continue;
     }
@@ -120,7 +120,7 @@ _id_0F4C() {
   }
 
   foreach(var_2 in var_0) {
-    if(!common_scripts\utility::_id_562E(var_2._id_6BE1)) {
+    if(!common_scripts\utility::_id_562E(var_2.open)) {
       return 0;
     }
   }
@@ -183,10 +183,10 @@ assigncontractsfirstboxweapon(var_0) {
   foreach(var_5 in var_1.active_contract_tracker["wave_survival"]) {
     switch (var_5.condition) {
       case "survival_first_box_only":
-        if(!_id_0547::_id_585C(_id_0547::_id_AAF9(var_3))) {
-          var_5._id_6E55 = [];
-          var_5._id_6E55[0] = _id_0547::_id_AAF9(var_3);
-          var_5._id_6E55[1] = _id_0586::_id_078B(var_3);
+        if(!_id_0547::iszombieequipment(_id_0547::_id_AAF9(var_3))) {
+          var_5.param1 = [];
+          var_5.param1[0] = _id_0547::_id_AAF9(var_3);
+          var_5.param1[1] = _id_0586::_id_078B(var_3);
         } else
           var_1 thread assigncontractsfirstboxweapon(var_1.contractsboxattempts);
 
@@ -271,11 +271,11 @@ player_purchase_report_collection(var_0, var_1) {
 }
 
 is_wave_0(var_0, var_1, var_2, var_3) {
-  return level._id_A980 == 0;
+  return level.wavecounter == 0;
 }
 
 is_after_wave_10(var_0, var_1, var_2, var_3) {
-  return level._id_A980 >= 10;
+  return level.wavecounter >= 10;
 }
 
 assassin_charge_kill(var_0, var_1, var_2, var_3) {
@@ -414,8 +414,8 @@ register_unique_kill_func(var_0, var_1, var_2, var_3) {
   }
 
   var_4 = spawnStruct();
-  var_4._id_502A = var_0;
-  var_4._id_3F02 = var_1;
+  var_4.id = var_0;
+  var_4.func = var_1;
   var_4.value = var_2;
   var_4.debugname = var_3;
   level.register_unique_kill_funcs = common_scripts\utility::_id_0F6F(level.register_unique_kill_funcs, var_4);
@@ -425,12 +425,12 @@ contracts_zombies_death_tracking(var_0, var_1, var_2, var_3, var_4, var_5, var_6
   var_9 = self;
   var_10 = [];
 
-  if(common_scripts\utility::_id_562E(var_9._id_5A3D)) {
-    var_1 = common_scripts\utility::_id_4461(var_9.origin, level.players);
+  if(common_scripts\utility::_id_562E(var_9.killedbynuke)) {
+    var_1 = common_scripts\utility::getclosest(var_9.origin, level.players);
   }
 
   if(var_4 == "turretweapon_zeppelin_gun_zm") {
-    var_1 = common_scripts\utility::_id_4461(var_9.origin, level.players);
+    var_1 = common_scripts\utility::getclosest(var_9.origin, level.players);
   }
 
   if(var_4 == "drag_explosive_zombie_zm") {
@@ -497,11 +497,11 @@ contracts_consecutive_waves_tracking() {
     }
 
     level notify("wave_survival");
-    _id_0547::_id_A6F6();
+    _id_0547::waitnetworkframe();
     maps\mp\_achievement_engine_z_utils::ae_sendwavesurvivalevent_zm(var_0, "survival_wave_single");
 
     foreach(var_5 in var_0.active_contract_tracker["wave_survival"]) {
-      maps\mp\_achievement_engine_z_utils::ae_sendwavesurvivalevent_zm(var_0, var_5.condition, var_5._id_005C, var_5._id_6E55);
+      maps\mp\_achievement_engine_z_utils::ae_sendwavesurvivalevent_zm(var_0, var_5.condition, var_5._id_005C, var_5.param1);
     }
   }
 }
@@ -719,7 +719,7 @@ mp_zombie_nest_01_tower_battle_report_efficiency(var_0) {
   var_1 = 85;
   var_2 = 1;
 
-  if(maps\mp\_utility::_id_4571() == "mp_zombie_nest_01") {
+  if(maps\mp\_utility::getmapname() == "mp_zombie_nest_01") {
     var_2 = 2;
   }
 
@@ -779,7 +779,7 @@ quest_contracts_completed(var_0, var_1) {
 orders_and_contracts_challenge_init(var_0, var_1) {
   level.orders_and_contracts_event_report[var_0] = spawnStruct();
   level.orders_and_contracts_event_report[var_0].name = var_0;
-  level.orders_and_contracts_event_report[var_0]._id_1E61 = var_1;
+  level.orders_and_contracts_event_report[var_0].callback = var_1;
 }
 
 is_contracts_game_online() {
@@ -799,12 +799,12 @@ initialize_player_zombies_contract(var_0) {
   }
 
   var_2 = spawnStruct();
-  var_2._id_6E55 = var_0._id_6E55;
+  var_2.param1 = var_0.param1;
   var_2.condition = var_0.condition;
   var_2._id_005C = 0;
   var_2.complete = 0;
   var_2.name = var_0.name;
-  var_2._id_3F02 = var_0._id_3F02;
+  var_2.func = var_0.func;
   var_2.type = var_0.type;
 
   if(!isDefined(var_1.active_contract_tracker[var_2.type])) {
@@ -842,7 +842,7 @@ try_stat_reset(var_0, var_1, var_2) {
 }
 
 validate_contract_rule(var_0, var_1) {
-  return ![[var_0._id_3F02]](var_0, var_1);
+  return ![[var_0.func]](var_0, var_1);
 }
 
 add_generic_contract(var_0, var_1, var_2) {
@@ -856,7 +856,7 @@ add_area_contract(var_0) {
     var_1 = var_1 + (var_3 + " ");
   }
 
-  create_new_contract_type("wave_survival", "survival_area", ::contract_fail_on_player_leave_area, [_id_0547::_id_A6F6], var_0, var_1);
+  create_new_contract_type("wave_survival", "survival_area", ::contract_fail_on_player_leave_area, [_id_0547::waitnetworkframe], var_0, var_1);
 }
 
 contracts_init_player_member_variables() {
@@ -874,8 +874,8 @@ create_new_contract_type(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8.type = var_0;
   var_8.name = var_5;
   var_8.condition = var_1;
-  var_8._id_6E55 = var_4;
-  var_8._id_3F02 = var_2;
+  var_8.param1 = var_4;
+  var_8.func = var_2;
 
   if(!isDefined(level.zmb_unique_zombie_contracts)) {
     level.zmb_unique_zombie_contracts = [];
@@ -929,7 +929,7 @@ get_current_active_ability() {
     return "role_ability_mad_minute_zm";
   }
 
-  if(common_scripts\utility::_id_3798("stunning_burst_active") && common_scripts\utility::_id_3794("stunning_burst_active")) {
+  if(common_scripts\utility::ent_flag_exist("stunning_burst_active") && common_scripts\utility::ent_flag("stunning_burst_active")) {
     return "role_ability_stunning_burst_zm";
   }
 
@@ -938,7 +938,7 @@ get_current_active_ability() {
 
 contract_fail_on_player_leave_area(var_0, var_1) {
   var_2 = self;
-  return !var_2 _id_0547::player_validate_is_in_zones(var_0._id_6E55);
+  return !var_2 _id_0547::player_validate_is_in_zones(var_0.param1);
 }
 
 contract_validate_weapon_used(var_0, var_1, var_2) {
@@ -954,10 +954,10 @@ contract_validate_weapon_used(var_0, var_1, var_2) {
   } else {
     var_4 = var_0.condition;
 
-    if(_isarray(var_0._id_6E55)) {
-      var_5 = var_0._id_6E55;
+    if(_isarray(var_0.param1)) {
+      var_5 = var_0.param1;
     } else {
-      var_5 = [var_0._id_6E55];
+      var_5 = [var_0.param1];
     }
   }
 
@@ -973,7 +973,7 @@ contract_validate_weapon_used(var_0, var_1, var_2) {
       if(var_4 == "survival_shotgun") {
         var_11 = maps\mp\_utility::getweaponclass(_id_0547::zombies_to_mp(var_7), 1);
 
-        if(_id_0547::_id_5565(var_11, var_0._id_6E55) || weapon_is_a_match(var_7, "p38_pap_zm")) {
+        if(_id_0547::_id_5565(var_11, var_0.param1) || weapon_is_a_match(var_7, "p38_pap_zm")) {
           var_8 = 1;
         }
 
@@ -1047,7 +1047,7 @@ proceed_to_contract_progress_reset(var_0, var_1, var_2) {
       return 0;
     }
 
-    if(_id_0547::_id_5866(var_1) || _id_0547::_id_5863(var_1) && !_id_0547::_id_5565(var_1, "alt+wunderbuss_zm")) {
+    if(_id_0547::_id_5866(var_1) || _id_0547::iszombielethal(var_1) && !_id_0547::_id_5565(var_1, "alt+wunderbuss_zm")) {
       return 0;
     }
   }
@@ -1223,7 +1223,7 @@ is_being_chased_by_zombie() {
   var_1 = 0;
 
   foreach(var_3 in var_0) {
-    if(_id_0547::_id_5565(var_3._id_28D2, self)) {
+    if(_id_0547::_id_5565(var_3.curmeleetarget, self)) {
       return 1;
     }
   }
@@ -1264,16 +1264,16 @@ start_boss_battle_tracking() {
 }
 
 end_boss_battle_tracking() {
-  common_scripts\utility::_id_3C7B("zmb_contracts_boss_battle_active");
+  common_scripts\utility::flag_clear("zmb_contracts_boss_battle_active");
 }
 
 contracts_start_track_boss_battle_laststand() {
   var_0 = self;
   var_0 endon("disconnect");
-  common_scripts\utility::_id_3C9F("zmb_contracts_boss_battle_active");
+  common_scripts\utility::flag_wait("zmb_contracts_boss_battle_active");
   var_0 endon("enter_last_stand");
 
-  while(common_scripts\utility::_id_3C77("zmb_contracts_boss_battle_active")) {
+  while(common_scripts\utility::flag("zmb_contracts_boss_battle_active")) {
     waitframe();
   }
 

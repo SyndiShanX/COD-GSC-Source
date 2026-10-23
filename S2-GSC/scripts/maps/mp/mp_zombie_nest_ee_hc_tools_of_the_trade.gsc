@@ -16,11 +16,11 @@ main() {
 }
 
 _id_52EC() {
-  var_0 = common_scripts\utility::_id_46B5("nest_ee_hc_com_fuse_struct", "targetname");
+  var_0 = common_scripts\utility::getstruct("nest_ee_hc_com_fuse_struct", "targetname");
   var_1 = _getEnt(var_0.target, "targetname");
   var_2 = _getEnt("nest_ee_hc_com_door_trig", "targetname");
   level._id_6874 = 0;
-  var_3 = common_scripts\utility::_id_46B7("nest_ee_hc_safe_struct", "targetname");
+  var_3 = common_scripts\utility::getstructarray("nest_ee_hc_safe_struct", "targetname");
 
   foreach(var_5 in var_3) {
     var_6 = common_scripts\utility::_id_44BE(var_5.target, "targetname");
@@ -38,8 +38,8 @@ _id_52EC() {
           var_5._id_3B9C[_id_0547::_id_9470(var_10.getnegotiationnextnode) - 1] = var_10;
           break;
         case "nest_ee_hc_safe_trigger":
-          var_5._id_9D65 = var_10;
-          var_5._id_9D65 common_scripts\utility::_id_9D9F();
+          var_5.trigger = var_10;
+          var_5.trigger common_scripts\utility::trigger_off();
           break;
         case "nest_ee_hc_safe_sentry_trig_offset":
           var_5._id_9DA2 = var_10;
@@ -67,9 +67,9 @@ _id_52EC() {
     var_15 hide();
   }
 
-  var_17 = common_scripts\utility::_id_46B5("nest_ee_hc_com_power_struct", "targetname");
+  var_17 = common_scripts\utility::getstruct("nest_ee_hc_com_power_struct", "targetname");
   var_18 = _getEnt(var_17.target, "targetname");
-  var_19 = common_scripts\utility::_id_46B5("nest_ee_hc_com_power_door_struct", "targetname");
+  var_19 = common_scripts\utility::getstruct("nest_ee_hc_com_power_door_struct", "targetname");
   var_20 = _getEnt(var_19.target, "targetname");
   var_21["original_objective_trigs"] = level._id_358E;
   var_21["fuse_trigger"] = var_2;
@@ -86,8 +86,8 @@ _id_8B98() {
 }
 
 _id_9A92() {
-  self["fuse_trigger"] common_scripts\utility::_id_9D9F();
-  common_scripts\utility::_id_3C9F(_id_0557::_id_7838("5 Right Hand fuses", "tower confirm hand"));
+  self["fuse_trigger"] common_scripts\utility::trigger_off();
+  common_scripts\utility::flag_wait(_id_0557::_id_7838("5 Right Hand fuses", "tower confirm hand"));
   _id_A64A(self["original_objective_trigs"]);
   thread _id_7EFB();
 }
@@ -96,15 +96,15 @@ _id_760C() {
   var_0 = maps\mp\mp_zombie_nest_ee_cart::_id_8A2B("light_zm_objective", "light_zm_puzzle", "on", "lightoff", "puzzlelight");
   var_1 = maps\mp\mp_zombie_nest_ee_cart::_id_8A2B("beam_zm_objective", "light_zm_lgtbeam", "lightbeam", "lightbeamoff", "glow");
   self["power_box_door"] thread maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::_id_6C01();
-  playFX(common_scripts\utility::_id_44F5("zmb_ee_switch_sparks"), self["power_box"].origin, anglesToForward(self["power_box"].angles), anglestoup(self["power_box"].angles));
+  playFX(common_scripts\utility::getfx("zmb_ee_switch_sparks"), self["power_box"].origin, anglesToForward(self["power_box"].angles), anglestoup(self["power_box"].angles));
   self["power_box"]._id_0A33 = common_scripts\utility::_id_0F73(var_0, var_1);
   self["power_box"] setCanDamage(1);
   self["power_box"].cleartargetyaw = self;
-  self["power_box"] thread maps\mp\gametypes\_damage::_id_8676(1, "head_gibs", maps\mp\mp_zombie_nest_ee_util::_id_9902, ::_id_2575);
+  self["power_box"] thread maps\mp\gametypes\_damage::setentitydamagecallback(1, "head_gibs", maps\mp\mp_zombie_nest_ee_util::_id_9902, ::_id_2575);
 }
 
 _id_2575(var_0, var_1, var_2, var_3) {
-  var_4 = common_scripts\utility::_id_46B5("nest_ee_hc_com_power_struct", "targetname");
+  var_4 = common_scripts\utility::getstruct("nest_ee_hc_com_power_struct", "targetname");
   var_5 = _getEnt(var_4.target, "targetname");
   var_6 = anglesToForward(var_5.angles);
 
@@ -115,15 +115,15 @@ _id_2575(var_0, var_1, var_2, var_3) {
   if(issubstr(var_1, "teslagun")) {
     _id_0557::_id_4BC8("circuit shot by tesla");
 
-    if(!isDefined(self._id_177E) || level._id_A980 > self._id_177E) {
+    if(!isDefined(self._id_177E) || level.wavecounter > self._id_177E) {
       if(!isDefined(self._id_177E)) {
-        self._id_177E = level._id_A980;
+        self._id_177E = level.wavecounter;
       }
 
       playFX(level._effect["zmb_elec_coil_charge"], var_5.origin, var_6);
-      var_5 _id_0378::_id_8D74("aud_wonder_weapon_elec_coil_charge");
+      var_5 _id_0378::snd_message("aud_wonder_weapon_elec_coil_charge");
       thread _id_4BD0();
-    } else if(!(self._id_177E > level._id_A980)) {}
+    } else if(!(self._id_177E > level.wavecounter)) {}
   }
 
   return 0;
@@ -137,11 +137,11 @@ _id_4BD0() {
   level thread _id_7E3E();
   common_scripts\utility::flag_set("flag_bunker_lights_off");
   common_scripts\utility::flag_set("flag_bunker_lights_off");
-  _id_0378::_id_8D74("aud_bunker_lights", "off");
+  _id_0378::snd_message("aud_bunker_lights", "off");
   level._id_9A93 = 1;
   wait 30;
-  common_scripts\utility::_id_3C7B("flag_bunker_lights_off");
-  _id_0378::_id_8D74("aud_bunker_lights", "on");
+  common_scripts\utility::flag_clear("flag_bunker_lights_off");
+  _id_0378::snd_message("aud_bunker_lights", "on");
   level._id_9A93 = 0;
   level thread _id_4D0A();
 
@@ -149,13 +149,13 @@ _id_4BD0() {
     level thread maps\mp\mp_zombie_nest_ee_cart::_id_A0EF(self._id_0A33, 1);
   }
 
-  self._id_177E = level._id_A980;
+  self._id_177E = level.wavecounter;
 }
 
 _id_4D0A() {
   level notify("com lights on");
   waitframe();
-  var_0 = common_scripts\utility::_id_46B7("nest_ee_hc_safe_struct", "targetname");
+  var_0 = common_scripts\utility::getstructarray("nest_ee_hc_safe_struct", "targetname");
 
   foreach(var_2 in var_0) {
     if(!common_scripts\utility::_id_562E(var_2._id_8026)) {
@@ -165,7 +165,7 @@ _id_4D0A() {
 }
 
 _id_7E3E() {
-  var_0 = common_scripts\utility::_id_46B7("nest_ee_hc_safe_struct", "targetname");
+  var_0 = common_scripts\utility::getstructarray("nest_ee_hc_safe_struct", "targetname");
 
   foreach(var_2 in var_0) {
     if(!common_scripts\utility::_id_562E(var_2._id_8026)) {
@@ -194,15 +194,15 @@ _id_6BA1(var_0, var_1) {
   var_2 = var_0 stopfiring();
   var_0._id_8026 = 1;
   var_0._id_17F7 show();
-  var_0._id_9D65 common_scripts\utility::_id_9DA3();
+  var_0.trigger common_scripts\utility::trigger_on();
   _id_057E::_id_7CC2(self);
-  var_0 _id_A680(var_2, var_0._id_9D65, var_0._id_2E71);
+  var_0 _id_A680(var_2, var_0.trigger, var_0._id_2E71);
   var_0._id_7A79 show();
   var_0.getcorpseanim setscriptablepartstate("machine_main", "opening");
   wait(_getanimlength(%zmb_ob_safe_open));
   var_0.getcorpseanim setscriptablepartstate("machine_main", "opened");
-  var_0._id_9D65 waittill("trigger", var_3);
-  var_3 _id_0378::_id_8D74("zmb_ravens_key_pickup");
+  var_0.trigger waittill("trigger", var_3);
+  var_3 _id_0378::snd_message("zmb_ravens_key_pickup");
   var_0._id_7A79 hide();
   _id_7E67();
 }
@@ -253,7 +253,7 @@ _id_A680(var_0, var_1, var_2) {
   while(!var_5) {
     var_1 waittill("trigger", var_6);
     var_7 = _id_3B8A(var_6, var_2, 5);
-    var_3[var_7] = common_scripts\utility::_id_98E7(var_3[var_7] < 9, var_3[var_7] + 1, 0);
+    var_3[var_7] = common_scripts\utility::ter_op(var_3[var_7] < 9, var_3[var_7] + 1, 0);
     self.getcorpseanim setscriptablepartstate("dial_0" + (var_7 + 1), "idle_" + var_3[var_7]);
     wait 0.15;
     var_8 = 0;
@@ -319,7 +319,7 @@ _id_7E67() {
     var_1 waittill("trigger", var_3);
 
     if(!var_2._id_6C02) {
-      var_2 _id_0378::_id_8D74("aud_open_raven_door");
+      var_2 _id_0378::snd_message("aud_open_raven_door");
 
       foreach(var_5 in var_0) {
         var_5 rotatepitch(90, 2);
@@ -336,7 +336,7 @@ _id_7E67() {
     }
 
     var_3 _id_6FDA();
-    _id_0378::_id_8D74("aud_pickup_raven_sword");
+    _id_0378::snd_message("aud_pickup_raven_sword");
   }
 }
 
@@ -365,18 +365,18 @@ _id_7EFB() {
 
   while(!var_0) {
     self["secret_door"] _id_8580();
-    self["fuse_trigger"] common_scripts\utility::_id_9DA3();
+    self["fuse_trigger"] common_scripts\utility::trigger_on();
     var_0 = _id_11C1(30);
 
     if(!var_0) {
-      self["fuse_trigger"] common_scripts\utility::_id_9D9F();
+      self["fuse_trigger"] common_scripts\utility::trigger_off();
       self["secret_door"] _id_857F();
       _id_A64A(self["original_objective_trigs"]);
     }
   }
 
   self["secret_door"] _id_857C();
-  self["fuse_trigger"] common_scripts\utility::_id_9D9F();
+  self["fuse_trigger"] common_scripts\utility::trigger_off();
   _id_0557::_id_4BC8("circuit found");
   thread _id_760C();
 }
@@ -429,12 +429,12 @@ _id_8582() {
 
 _id_11C1(var_0) {
   self["fuse_trigger"] endon("time_out");
-  thread _id_9A01(var_0);
+  thread timeout(var_0);
   self["fuse_trigger"] waittill("trigger", var_1);
   return isDefined(var_1);
 }
 
-_id_9A01(var_0) {
+timeout(var_0) {
   wait(var_0);
   self["fuse_trigger"] notify("trigger", undefined);
 }
@@ -446,11 +446,11 @@ _id_A64A(var_0) {
 
   while(!_id_3789(var_0)) {
     var_3 = common_scripts\utility::_id_A70B(var_0, "trigger");
-    var_3 _id_0378::_id_8D74("aud_enigma_switch_activate");
+    var_3 _id_0378::snd_message("aud_enigma_switch_activate");
     var_3._id_5F59 thread maps\mp\mp_zombie_nest_ee_enigma::_id_8717();
     var_3._id_08A9 = 1;
     common_scripts\utility::flag_set(var_3.setlookatent);
-    var_3 common_scripts\utility::_id_9D9F();
+    var_3 common_scripts\utility::trigger_off();
   }
 }
 

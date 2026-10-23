@@ -6,140 +6,140 @@
 main() {
   _id_0367::_id_8E3E("dlc4_fzn_dwn");
   _id_7BBA();
-  _id_51D8();
-  _id_5C22();
-  level._id_11CB.intermission_music_aliases = ["mus_intermission_dlc2"];
-  level._id_11CB.wave_cues = ["dlcx_mus_intro_assault", "dlcx_mus_wave_04", "dlcx_mus_wave_02", "dlcx_mus_wave_03", "dlcx_mus_movin", "dlcx_mus_screetchy1", "dlcx_mus_wave_07", "dlcx_mus_wave_01", "dlcx_mus_wave_05"];
-  _id_0366::snd_set_mus_combat_cues_override(level._id_11CB.wave_cues);
+  init_globals();
+  launch_threads();
+  level.aud.intermission_music_aliases = ["mus_intermission_dlc2"];
+  level.aud.wave_cues = ["dlcx_mus_intro_assault", "dlcx_mus_wave_04", "dlcx_mus_wave_02", "dlcx_mus_wave_03", "dlcx_mus_movin", "dlcx_mus_screetchy1", "dlcx_mus_wave_07", "dlcx_mus_wave_01", "dlcx_mus_wave_05"];
+  _id_0366::snd_set_mus_combat_cues_override(level.aud.wave_cues);
   _id_0366::snd_zmb_set_start_intermission_music_override_callback(::start_intermission_music_override_callback);
   _id_0366::snd_zmb_set_map_wave_music_master_volume_scalar(0.8);
 }
 
 _id_7BBA() {
-  _id_0378::_id_8DC7("player_connect_map", ::_id_7248);
-  _id_0378::_id_8DC7("player_spawned", ::_id_7330);
-  _id_0378::_id_8DC7("wave_begin", ::_id_A979);
-  _id_0378::_id_8DC7("wave_end", ::_id_A97A);
-  _id_0378::_id_8DC7("aud_stormraven_uberschnell_place", ::stormraven_uberschnell_place);
-  _id_0378::_id_8DC7("aud_stormraven_bloodfall", ::stormraven_bloodfall);
-  _id_0378::_id_8DC7("aud_stormraven_bloodstopper_pickup", ::stormraven_bloodstopper_pickup);
-  _id_0378::_id_8DC7("aud_stormraven_bloodstopper_place", ::stormraven_bloodstopper_place);
-  _id_0378::_id_8DC7("aud_stop_stormraven_bloodfall", ::stop_stormraven_bloodfall);
-  _id_0378::_id_8DC7("aud_stormraven_warhammer_spawn", ::stormraven_warhammer_spawn);
-  _id_0378::_id_8DC7("aud_stormraven_warhammer_tp_out", ::stormraven_warhammer_tp_out);
-  _id_0378::_id_8DC7("aud_stormraven_warhammer_tp_in", ::stormraven_warhammer_tp_in);
-  _id_0378::_id_8DC7("aud_stormraven_warhammer_burst_mvmt", ::stormraven_warhammer_burst_mvmt);
-  _id_0378::_id_8DC7("aud_stormraven_warhammer_steady_mvmt", ::stormraven_warhammer_steady_mvmt);
-  _id_0378::_id_8DC7("aud_stormraven_warhammer_tether", ::stormraven_warhammer_tether);
-  _id_0378::_id_8DC7("aud_stormraven_warhammer_pickup", ::stormraven_warhammer_pickup);
-  _id_0378::_id_8DC7("aud_stormraven_warhammer_run_charged", ::stormraven_warhammer_run_charged);
-  _id_0378::_id_8DC7("aud_stormraven_warhammer_rune_strike", ::stormraven_warhammer_rune_strike);
-  _id_0378::_id_8DC7("aud_stormraven_warhammer_timed_charge", ::stormraven_warhammer_timed_charge);
-  _id_0378::_id_8DC7("aud_stormraven_charge_puzzle_spin", ::stormraven_charge_puzzle_spin);
-  _id_0378::_id_8DC7("aud_stormraven_charge_puzzle_rotate", ::stormraven_charge_puzzle_rotate);
-  _id_0378::_id_8DC7("aud_stormraven_warhammer_puz_run_ch", ::stormraven_warhammer_puz_run_ch);
-  _id_0378::_id_8DC7("aud_stormraven_warhammer_trial_strikes", ::stormraven_warhammer_trial_strikes);
-  _id_0378::_id_8DC7("aud_stormraven_warhammer_ascend_strike", ::stormraven_warhammer_ascend_strike);
-  _id_0378::_id_8DC7("aud_blood_plate_absorb", ::aud_blood_plate_absorb);
-  _id_0378::_id_8DC7("aud_blood_plate_press", ::aud_blood_plate_press);
-  _id_0378::_id_8DC7("aud_blood_plate_release", ::aud_blood_plate_release);
-  _id_0378::_id_8DC7("aud_blood_plate_lock", ::aud_blood_plate_lock);
-  _id_0378::_id_8DC7("aud_blood_plate_full_lp", ::aud_blood_plate_lp_full);
-  _id_0378::_id_8DC7("zombie_soul_suck", ::_id_ABF8);
-  _id_0378::_id_8DC7("zombie_soul_suck_threshold", ::_id_ABF9);
-  _id_0378::_id_8DC7("aud_deathraven_button", ::deathraven_button);
-  _id_0378::_id_8DC7("aud_deathraven_earthquake", ::deathraven_earthquake);
-  _id_0378::_id_8DC7("aud_deathraven_firewall", ::deathraven_firewall);
-  _id_0378::_id_8DC7("aud_deathraven_scythe_appear", ::deathraven_scythe_appear);
-  _id_0378::_id_8DC7("aud_deathraven_scythe_obtain", ::deathraven_scythe_obtain);
-  _id_0378::_id_8DC7("aud_deathraven_place_scythe", ::deathraven_place_scythe);
-  _id_0378::_id_8DC7("aud_deathraven_place_spine", ::deathraven_place_spine);
-  _id_0378::_id_8DC7("aud_deathraven_scythe_heat_stage_1", ::deathraven_scythe_heat_stage_1);
-  _id_0378::_id_8DC7("aud_deathraven_scythe_heat_stage_2", ::deathraven_scythe_heat_stage_2);
-  _id_0378::_id_8DC7("aud_deathraven_scythe_heated", ::deathraven_scythe_heated);
-  _id_0378::_id_8DC7("aud_deathraven_pickup_scythe", ::deathraven_pickup_scythe);
-  _id_0378::_id_8DC7("aud_deathraven_exit_trail", ::exit_trial);
-  _id_0378::_id_8DC7("aud_stormraven_lightning_rod_ascend", ::stormraven_lightning_rod_ascend);
-  _id_0378::_id_8DC7("aud_stormraven_lightning_rod_rotate", ::stormraven_lightning_rod_rotate);
-  _id_0378::_id_8DC7("aud_moonraven_book_pickup", ::moonraven_book_pickup);
-  _id_0378::_id_8DC7("aud_moonraven_book_place", ::moonraven_book_place);
-  _id_0378::_id_8DC7("aud_moonraven_gear_pickup", ::moonraven_gear_pickup);
-  _id_0378::_id_8DC7("aud_moonraven_gear_place", ::moonraven_gear_place);
-  _id_0378::_id_8DC7("aud_moonraven_orrery_lower_gears_move", ::moonraven_orrery_lower_gears_move);
-  _id_0378::_id_8DC7("aud_moonraven_orrery_move", ::moonraven_orrery_move);
-  _id_0378::_id_8DC7("aud_moonraven_orrery_stop", ::moonraven_orrery_stop);
-  _id_0378::_id_8DC7("aud_moonraven_orrery_lock", ::moonraven_orrery_lock);
-  _id_0378::_id_8DC7("aud_moonraven_constellation_find", ::moonraven_constellation_find);
-  _id_0378::_id_8DC7("aud_moonraven_constellation_done", ::moonraven_constellation_done);
-  _id_0378::_id_8DC7("aud_moonraven_trial_fire_strt", ::moonraven_trial_fire_strt);
-  _id_0378::_id_8DC7("aud_moonraven_enter_trial", ::enter_trial);
-  _id_0378::_id_8DC7("aud_moonraven_exit_trail", ::exit_trial);
-  _id_0378::_id_8DC7("aud_blood_tube_door_open", ::blood_tube_door_open);
-  _id_0378::_id_8DC7("aud_blood_tube_door_close", ::blood_tube_door_close);
-  _id_0378::_id_8DC7("aud_blood_tube_filling_up", ::blood_tube_filling_up);
-  _id_0378::_id_8DC7("aud_blood_tube_engulf", ::blood_tube_engulf);
-  _id_0378::_id_8DC7("aud_blood_tube_splash", ::blood_tube_splash);
-  _id_0378::_id_8DC7("aud_pap_rise", ::pap_rise);
-  _id_0378::_id_8DC7("aud_bloodraven_radio_pickup", ::bloodraven_radio_pickup);
-  _id_0378::_id_8DC7("aud_bloodraven_speaker_pickup", ::bloodraven_speaker_pickup);
-  _id_0378::_id_8DC7("aud_bloodraven_radio_place", ::bloodraven_radio_place);
-  _id_0378::_id_8DC7("aud_bloodraven_speaker_place", ::bloodraven_speaker_place);
-  _id_0378::_id_8DC7("aud_bloodraven_bloodstopper_pickup", ::bloodraven_bloodstopper_pickup);
-  _id_0378::_id_8DC7("aud_bloodraven_bloodstopper_place", ::bloodraven_bloodstopper_place);
-  _id_0378::_id_8DC7("aud_bloodraven_wustling_spawn", ::bloodraven_wustling_spawn);
-  _id_0378::_id_8DC7("aud_bloodraven_bloodpool_ready", ::bloodraven_bloodpool_ready);
-  _id_0378::_id_8DC7("aud_bloodraven_reveal_bloodpool_code", ::bloodraven_reveal_bloodpool_code);
-  _id_0378::_id_8DC7("aud_bloodraven_tune_radio", ::bloodraven_tune_radio);
-  _id_0378::_id_8DC7("aud_bloodraven_bloodcode_final", ::bloodraven_bloodcode_final);
-  _id_0378::_id_8DC7("aud_bloodraven_enter_trial", ::enter_trial);
-  _id_0378::_id_8DC7("aud_bloodraven_exit_trial", ::exit_trial);
-  _id_0378::_id_8DC7("aud_citadel_wpn_placement", ::citadel_wpn_placement);
-  _id_0378::_id_8DC7("aud_citadel_pillar_ignite", ::citadel_pillar_ignite);
-  _id_0378::_id_8DC7("aud_citadel_shield_pillar_fire_lp", ::citadel_shield_pillar_fire_lp);
-  _id_0378::_id_8DC7("aud_citadel_hammer_pillar_fire_lp", ::citadel_hammer_pillar_fire_lp);
-  _id_0378::_id_8DC7("aud_citadel_spike_pillar_fire_lp", ::citadel_spike_pillar_fire_lp);
-  _id_0378::_id_8DC7("aud_citadel_scythe_pillar_fire_lp", ::citadel_scythe_pillar_fire_lp);
-  _id_0378::_id_8DC7("aud_citadel_all_weapons_placed", ::citadel_all_weapons_placed);
-  _id_0378::_id_8DC7("aud_citadel_entrance", ::citadel_entrance);
-  _id_0378::_id_8DC7("aud_gdk_intro", ::aud_gdk_intro);
-  _id_0378::_id_8DC7("aud_boss_music_start", ::boss_music_start);
-  _id_0378::_id_8DC7("dlc_handle_boss_killed_music", ::dlc_handle_boss_killed_music);
-  _id_0378::_id_8DC7("aud_trap_spikes", ::archives_spike_trap);
-  _id_0378::_id_8DC7("aud_damage_ice", ::damage_ice);
-  _id_0378::_id_8DC7("aud_break_ice", ::break_ice);
-  _id_0378::_id_8DC7("aud_spawn_raven", ::spawn_raven);
-  _id_0378::_id_8DC7("aud_raven_fly_away", ::raven_fly_away);
-  _id_0378::_id_8DC7("aud_outro_vo_submix_start", ::outro_vo_submix_start);
-  _id_0378::_id_8DC7("aud_outro_vo_submix_end", ::outro_vo_submix_end);
+  _id_0378::snd_register_message("player_connect_map", ::_id_7248);
+  _id_0378::snd_register_message("player_spawned", ::_id_7330);
+  _id_0378::snd_register_message("wave_begin", ::_id_A979);
+  _id_0378::snd_register_message("wave_end", ::_id_A97A);
+  _id_0378::snd_register_message("aud_stormraven_uberschnell_place", ::stormraven_uberschnell_place);
+  _id_0378::snd_register_message("aud_stormraven_bloodfall", ::stormraven_bloodfall);
+  _id_0378::snd_register_message("aud_stormraven_bloodstopper_pickup", ::stormraven_bloodstopper_pickup);
+  _id_0378::snd_register_message("aud_stormraven_bloodstopper_place", ::stormraven_bloodstopper_place);
+  _id_0378::snd_register_message("aud_stop_stormraven_bloodfall", ::stop_stormraven_bloodfall);
+  _id_0378::snd_register_message("aud_stormraven_warhammer_spawn", ::stormraven_warhammer_spawn);
+  _id_0378::snd_register_message("aud_stormraven_warhammer_tp_out", ::stormraven_warhammer_tp_out);
+  _id_0378::snd_register_message("aud_stormraven_warhammer_tp_in", ::stormraven_warhammer_tp_in);
+  _id_0378::snd_register_message("aud_stormraven_warhammer_burst_mvmt", ::stormraven_warhammer_burst_mvmt);
+  _id_0378::snd_register_message("aud_stormraven_warhammer_steady_mvmt", ::stormraven_warhammer_steady_mvmt);
+  _id_0378::snd_register_message("aud_stormraven_warhammer_tether", ::stormraven_warhammer_tether);
+  _id_0378::snd_register_message("aud_stormraven_warhammer_pickup", ::stormraven_warhammer_pickup);
+  _id_0378::snd_register_message("aud_stormraven_warhammer_run_charged", ::stormraven_warhammer_run_charged);
+  _id_0378::snd_register_message("aud_stormraven_warhammer_rune_strike", ::stormraven_warhammer_rune_strike);
+  _id_0378::snd_register_message("aud_stormraven_warhammer_timed_charge", ::stormraven_warhammer_timed_charge);
+  _id_0378::snd_register_message("aud_stormraven_charge_puzzle_spin", ::stormraven_charge_puzzle_spin);
+  _id_0378::snd_register_message("aud_stormraven_charge_puzzle_rotate", ::stormraven_charge_puzzle_rotate);
+  _id_0378::snd_register_message("aud_stormraven_warhammer_puz_run_ch", ::stormraven_warhammer_puz_run_ch);
+  _id_0378::snd_register_message("aud_stormraven_warhammer_trial_strikes", ::stormraven_warhammer_trial_strikes);
+  _id_0378::snd_register_message("aud_stormraven_warhammer_ascend_strike", ::stormraven_warhammer_ascend_strike);
+  _id_0378::snd_register_message("aud_blood_plate_absorb", ::aud_blood_plate_absorb);
+  _id_0378::snd_register_message("aud_blood_plate_press", ::aud_blood_plate_press);
+  _id_0378::snd_register_message("aud_blood_plate_release", ::aud_blood_plate_release);
+  _id_0378::snd_register_message("aud_blood_plate_lock", ::aud_blood_plate_lock);
+  _id_0378::snd_register_message("aud_blood_plate_full_lp", ::aud_blood_plate_lp_full);
+  _id_0378::snd_register_message("zombie_soul_suck", ::_id_ABF8);
+  _id_0378::snd_register_message("zombie_soul_suck_threshold", ::_id_ABF9);
+  _id_0378::snd_register_message("aud_deathraven_button", ::deathraven_button);
+  _id_0378::snd_register_message("aud_deathraven_earthquake", ::deathraven_earthquake);
+  _id_0378::snd_register_message("aud_deathraven_firewall", ::deathraven_firewall);
+  _id_0378::snd_register_message("aud_deathraven_scythe_appear", ::deathraven_scythe_appear);
+  _id_0378::snd_register_message("aud_deathraven_scythe_obtain", ::deathraven_scythe_obtain);
+  _id_0378::snd_register_message("aud_deathraven_place_scythe", ::deathraven_place_scythe);
+  _id_0378::snd_register_message("aud_deathraven_place_spine", ::deathraven_place_spine);
+  _id_0378::snd_register_message("aud_deathraven_scythe_heat_stage_1", ::deathraven_scythe_heat_stage_1);
+  _id_0378::snd_register_message("aud_deathraven_scythe_heat_stage_2", ::deathraven_scythe_heat_stage_2);
+  _id_0378::snd_register_message("aud_deathraven_scythe_heated", ::deathraven_scythe_heated);
+  _id_0378::snd_register_message("aud_deathraven_pickup_scythe", ::deathraven_pickup_scythe);
+  _id_0378::snd_register_message("aud_deathraven_exit_trail", ::exit_trial);
+  _id_0378::snd_register_message("aud_stormraven_lightning_rod_ascend", ::stormraven_lightning_rod_ascend);
+  _id_0378::snd_register_message("aud_stormraven_lightning_rod_rotate", ::stormraven_lightning_rod_rotate);
+  _id_0378::snd_register_message("aud_moonraven_book_pickup", ::moonraven_book_pickup);
+  _id_0378::snd_register_message("aud_moonraven_book_place", ::moonraven_book_place);
+  _id_0378::snd_register_message("aud_moonraven_gear_pickup", ::moonraven_gear_pickup);
+  _id_0378::snd_register_message("aud_moonraven_gear_place", ::moonraven_gear_place);
+  _id_0378::snd_register_message("aud_moonraven_orrery_lower_gears_move", ::moonraven_orrery_lower_gears_move);
+  _id_0378::snd_register_message("aud_moonraven_orrery_move", ::moonraven_orrery_move);
+  _id_0378::snd_register_message("aud_moonraven_orrery_stop", ::moonraven_orrery_stop);
+  _id_0378::snd_register_message("aud_moonraven_orrery_lock", ::moonraven_orrery_lock);
+  _id_0378::snd_register_message("aud_moonraven_constellation_find", ::moonraven_constellation_find);
+  _id_0378::snd_register_message("aud_moonraven_constellation_done", ::moonraven_constellation_done);
+  _id_0378::snd_register_message("aud_moonraven_trial_fire_strt", ::moonraven_trial_fire_strt);
+  _id_0378::snd_register_message("aud_moonraven_enter_trial", ::enter_trial);
+  _id_0378::snd_register_message("aud_moonraven_exit_trail", ::exit_trial);
+  _id_0378::snd_register_message("aud_blood_tube_door_open", ::blood_tube_door_open);
+  _id_0378::snd_register_message("aud_blood_tube_door_close", ::blood_tube_door_close);
+  _id_0378::snd_register_message("aud_blood_tube_filling_up", ::blood_tube_filling_up);
+  _id_0378::snd_register_message("aud_blood_tube_engulf", ::blood_tube_engulf);
+  _id_0378::snd_register_message("aud_blood_tube_splash", ::blood_tube_splash);
+  _id_0378::snd_register_message("aud_pap_rise", ::pap_rise);
+  _id_0378::snd_register_message("aud_bloodraven_radio_pickup", ::bloodraven_radio_pickup);
+  _id_0378::snd_register_message("aud_bloodraven_speaker_pickup", ::bloodraven_speaker_pickup);
+  _id_0378::snd_register_message("aud_bloodraven_radio_place", ::bloodraven_radio_place);
+  _id_0378::snd_register_message("aud_bloodraven_speaker_place", ::bloodraven_speaker_place);
+  _id_0378::snd_register_message("aud_bloodraven_bloodstopper_pickup", ::bloodraven_bloodstopper_pickup);
+  _id_0378::snd_register_message("aud_bloodraven_bloodstopper_place", ::bloodraven_bloodstopper_place);
+  _id_0378::snd_register_message("aud_bloodraven_wustling_spawn", ::bloodraven_wustling_spawn);
+  _id_0378::snd_register_message("aud_bloodraven_bloodpool_ready", ::bloodraven_bloodpool_ready);
+  _id_0378::snd_register_message("aud_bloodraven_reveal_bloodpool_code", ::bloodraven_reveal_bloodpool_code);
+  _id_0378::snd_register_message("aud_bloodraven_tune_radio", ::bloodraven_tune_radio);
+  _id_0378::snd_register_message("aud_bloodraven_bloodcode_final", ::bloodraven_bloodcode_final);
+  _id_0378::snd_register_message("aud_bloodraven_enter_trial", ::enter_trial);
+  _id_0378::snd_register_message("aud_bloodraven_exit_trial", ::exit_trial);
+  _id_0378::snd_register_message("aud_citadel_wpn_placement", ::citadel_wpn_placement);
+  _id_0378::snd_register_message("aud_citadel_pillar_ignite", ::citadel_pillar_ignite);
+  _id_0378::snd_register_message("aud_citadel_shield_pillar_fire_lp", ::citadel_shield_pillar_fire_lp);
+  _id_0378::snd_register_message("aud_citadel_hammer_pillar_fire_lp", ::citadel_hammer_pillar_fire_lp);
+  _id_0378::snd_register_message("aud_citadel_spike_pillar_fire_lp", ::citadel_spike_pillar_fire_lp);
+  _id_0378::snd_register_message("aud_citadel_scythe_pillar_fire_lp", ::citadel_scythe_pillar_fire_lp);
+  _id_0378::snd_register_message("aud_citadel_all_weapons_placed", ::citadel_all_weapons_placed);
+  _id_0378::snd_register_message("aud_citadel_entrance", ::citadel_entrance);
+  _id_0378::snd_register_message("aud_gdk_intro", ::aud_gdk_intro);
+  _id_0378::snd_register_message("aud_boss_music_start", ::boss_music_start);
+  _id_0378::snd_register_message("dlc_handle_boss_killed_music", ::dlc_handle_boss_killed_music);
+  _id_0378::snd_register_message("aud_trap_spikes", ::archives_spike_trap);
+  _id_0378::snd_register_message("aud_damage_ice", ::damage_ice);
+  _id_0378::snd_register_message("aud_break_ice", ::break_ice);
+  _id_0378::snd_register_message("aud_spawn_raven", ::spawn_raven);
+  _id_0378::snd_register_message("aud_raven_fly_away", ::raven_fly_away);
+  _id_0378::snd_register_message("aud_outro_vo_submix_start", ::outro_vo_submix_start);
+  _id_0378::snd_register_message("aud_outro_vo_submix_end", ::outro_vo_submix_end);
 }
 
 start_intermission_music_override_callback() {
-  var_0 = level._id_11CB.intermission_music_aliases[randomint(level._id_11CB.intermission_music_aliases.size)];
+  var_0 = level.aud.intermission_music_aliases[randomint(level.aud.intermission_music_aliases.size)];
   var_1 = 3.0;
   var_2 = 5.0;
   _id_0366::_id_8E31(var_0, var_1, var_2);
 }
 
-_id_51D8() {
-  level._id_11CB = spawnStruct();
-  level._id_11CB.pap_rose_once_already = 0;
-  level._id_11CB.bloodfall_count_started = 0;
-  level._id_11CB.bloodfall_counter = 0;
-  level._id_11CB.bloodfall_ent = [];
-  level._id_11CB.bloodfall_snd = [];
-  level._id_11CB.moon_count = 0;
-  level._id_11CB.shield_pillar_fire_snd_handle = undefined;
-  level._id_11CB.hammer_pillar_fire_snd_handle = undefined;
-  level._id_11CB.spike_pillar_fire_snd_handle = undefined;
-  level._id_11CB.scythe_pillar_fire_snd_handle = undefined;
-  level._id_11CB.cit_shield_pillar_fire_playing = 0;
-  level._id_11CB.cit_hammer_pillar_fire_playing = 0;
-  level._id_11CB.cit_spike_pillar_fire_playing = 0;
-  level._id_11CB.cit_scythe_pillar_fire_playing = 0;
-  level._id_11CB.final_strike_started = 0;
+init_globals() {
+  level.aud = spawnStruct();
+  level.aud.pap_rose_once_already = 0;
+  level.aud.bloodfall_count_started = 0;
+  level.aud.bloodfall_counter = 0;
+  level.aud.bloodfall_ent = [];
+  level.aud.bloodfall_snd = [];
+  level.aud.moon_count = 0;
+  level.aud.shield_pillar_fire_snd_handle = undefined;
+  level.aud.hammer_pillar_fire_snd_handle = undefined;
+  level.aud.spike_pillar_fire_snd_handle = undefined;
+  level.aud.scythe_pillar_fire_snd_handle = undefined;
+  level.aud.cit_shield_pillar_fire_playing = 0;
+  level.aud.cit_hammer_pillar_fire_playing = 0;
+  level.aud.cit_spike_pillar_fire_playing = 0;
+  level.aud.cit_scythe_pillar_fire_playing = 0;
+  level.aud.final_strike_started = 0;
 }
 
-_id_5C22() {
+launch_threads() {
   thread _id_35E1();
   thread zmb_metal_creak_1();
   thread zmb_metal_creak_4();
@@ -418,8 +418,8 @@ zmb_cave_drips_05() {
 }
 
 _id_7248() {
-  if(!isDefined(self._id_11CB)) {
-    self._id_11CB = spawnStruct();
+  if(!isDefined(self.aud)) {
+    self.aud = spawnStruct();
   }
 }
 
@@ -446,10 +446,10 @@ stormraven_bloodfall() {
   if(!isDefined(self)) {
     return;
   }
-  level._id_11CB.bloodfall_snd[level._id_11CB.bloodfall_counter] = _id_0380::_id_6844("zmb_stormraven_bloodfall_lp", undefined, self);
+  level.aud.bloodfall_snd[level.aud.bloodfall_counter] = _id_0380::_id_6844("zmb_stormraven_bloodfall_lp", undefined, self);
 
-  if(level._id_11CB.bloodfall_counter < 3) {
-    level._id_11CB.bloodfall_counter = level._id_11CB.bloodfall_counter + 1;
+  if(level.aud.bloodfall_counter < 3) {
+    level.aud.bloodfall_counter = level.aud.bloodfall_counter + 1;
   }
 }
 
@@ -471,12 +471,12 @@ stop_stormraven_bloodfall() {
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(level._id_11CB.bloodfall_snd[level._id_11CB.bloodfall_counter])) {
-    _id_0380::_id_6850(level._id_11CB.bloodfall_snd[level._id_11CB.bloodfall_counter]);
+  if(isDefined(level.aud.bloodfall_snd[level.aud.bloodfall_counter])) {
+    _id_0380::_id_6850(level.aud.bloodfall_snd[level.aud.bloodfall_counter]);
   }
 
-  if(level._id_11CB.bloodfall_counter > 0) {
-    level._id_11CB.bloodfall_counter = level._id_11CB.bloodfall_counter - 1;
+  if(level.aud.bloodfall_counter > 0) {
+    level.aud.bloodfall_counter = level.aud.bloodfall_counter - 1;
   }
 }
 
@@ -742,11 +742,11 @@ firewall_whoosh_oneshots(var_0) {
 deathraven_scythe_appear() {
   var_0 = self;
   _id_0380::_id_288B("zmb_weap_scythe_spawn", undefined, var_0);
-  level._id_11CB.scythe_appear_lp = _id_0380::_id_6844("zmb_weap_scythe_idle_lp", undefined, var_0, 0.2);
+  level.aud.scythe_appear_lp = _id_0380::_id_6844("zmb_weap_scythe_idle_lp", undefined, var_0, 0.2);
 }
 
 deathraven_scythe_obtain() {
-  _id_0380::_id_6850(level._id_11CB.scythe_appear_lp, 0.75);
+  _id_0380::_id_6850(level.aud.scythe_appear_lp, 0.75);
 }
 
 deathraven_place_spine() {
@@ -761,21 +761,21 @@ deathraven_place_scythe() {
 
 deathraven_scythe_heat_stage_1() {
   var_0 = self;
-  level._id_11CB.scythe_sizzle_stage_1 = _id_0380::_id_6844("zmb_dsnt_scythe_sizzle_lvl_1_lp", undefined, var_0, 0.2);
+  level.aud.scythe_sizzle_stage_1 = _id_0380::_id_6844("zmb_dsnt_scythe_sizzle_lvl_1_lp", undefined, var_0, 0.2);
 }
 
 deathraven_scythe_heat_stage_2() {
   var_0 = self;
 
-  if(!isDefined(level._id_11CB.scythe_sizzle_stage_2)) {
-    level._id_11CB.scythe_sizzle_stage_2 = _id_0380::_id_6844("zmb_dsnt_scythe_sizzle_lvl_2_lp", undefined, var_0, 0.2);
+  if(!isDefined(level.aud.scythe_sizzle_stage_2)) {
+    level.aud.scythe_sizzle_stage_2 = _id_0380::_id_6844("zmb_dsnt_scythe_sizzle_lvl_2_lp", undefined, var_0, 0.2);
   }
 }
 
 deathraven_scythe_heated() {
   var_0 = self;
-  _id_0380::_id_6850(level._id_11CB.scythe_sizzle_stage_1, 0.5);
-  _id_0380::_id_6850(level._id_11CB.scythe_sizzle_stage_2, 0.5);
+  _id_0380::_id_6850(level.aud.scythe_sizzle_stage_1, 0.5);
+  _id_0380::_id_6850(level.aud.scythe_sizzle_stage_2, 0.5);
   _id_0380::_id_288B("zmb_dsnt_scythe_heated", undefined, var_0);
 }
 
@@ -833,7 +833,7 @@ moonraven_gear_place() {
 moonraven_orrery_lower_gears_move() {
   self endon("disconnect");
 
-  while(!common_scripts\utility::_id_3C77("moonraven_gears_stop_rotation")) {
+  while(!common_scripts\utility::flag("moonraven_gears_stop_rotation")) {
     if(!isDefined(self.lower_gear_lp)) {
       self.lower_gear_lp = _id_0380::_id_6842("zmb_orrery_gears_lower_lp", undefined, self.origin + (0, 50, 0), 0.2);
     }
@@ -846,31 +846,31 @@ moonraven_orrery_lower_gears_move() {
 }
 
 moonraven_orrery_move(var_0) {
-  level._id_11CB.moon_count++;
+  level.aud.moon_count++;
 
-  if(level._id_11CB.moon_count > 4) {
-    level._id_11CB.moon_count = 4;
+  if(level.aud.moon_count > 4) {
+    level.aud.moon_count = 4;
   }
 
-  switch (level._id_11CB.moon_count) {
+  switch (level.aud.moon_count) {
     case 0:
       _id_0380::_id_288B("zmb_orrery_ring_strt", undefined, level.orrery_moon_a);
       break;
     case 1:
       _id_0380::_id_288B("zmb_orrery_ring_strt", undefined, level.orrery_moon_a);
-      level._id_11CB.moon_lp_1 = _id_0380::_id_6844("zmb_orrery_gears_main_a_lp", undefined, level.orrery_moon_a, 0.2);
+      level.aud.moon_lp_1 = _id_0380::_id_6844("zmb_orrery_gears_main_a_lp", undefined, level.orrery_moon_a, 0.2);
       break;
     case 2:
       _id_0380::_id_288B("zmb_orrery_ring_strt", undefined, level.orrery_moon_a);
-      level._id_11CB.moon_lp_2 = _id_0380::_id_6844("zmb_orrery_gears_layer_a_lp", undefined, level.orrery_moon_a, 0.2);
+      level.aud.moon_lp_2 = _id_0380::_id_6844("zmb_orrery_gears_layer_a_lp", undefined, level.orrery_moon_a, 0.2);
       break;
     case 3:
       _id_0380::_id_288B("zmb_orrery_ring_strt", undefined, level.orrery_moon_a);
-      level._id_11CB.moon_lp_3 = _id_0380::_id_6844("zmb_orrery_gears_layer_c_lp", undefined, level.orrery_moon_a, 0.2);
+      level.aud.moon_lp_3 = _id_0380::_id_6844("zmb_orrery_gears_layer_c_lp", undefined, level.orrery_moon_a, 0.2);
       break;
     case 4:
       _id_0380::_id_288B("zmb_orrery_ring_strt", undefined, level.orrery_moon_a);
-      level._id_11CB.moon_lp_4 = _id_0380::_id_6844("zmb_orrery_gears_layer_b_lp", undefined, level.orrery_moon_a, 0.2);
+      level.aud.moon_lp_4 = _id_0380::_id_6844("zmb_orrery_gears_layer_b_lp", undefined, level.orrery_moon_a, 0.2);
       break;
     default:
       break;
@@ -878,30 +878,30 @@ moonraven_orrery_move(var_0) {
 }
 
 moonraven_orrery_stop(var_0) {
-  level._id_11CB.moon_count--;
+  level.aud.moon_count--;
 
-  if(level._id_11CB.moon_count < 0) {
-    level._id_11CB.moon_count = 0;
+  if(level.aud.moon_count < 0) {
+    level.aud.moon_count = 0;
   }
 
-  switch (level._id_11CB.moon_count) {
+  switch (level.aud.moon_count) {
     case 0:
-      _id_0380::_id_6850(level._id_11CB.moon_lp_1, 0.3);
-      _id_0380::_id_6850(level._id_11CB.moon_lp_2, 0.3);
-      _id_0380::_id_6850(level._id_11CB.moon_lp_3, 0.3);
+      _id_0380::_id_6850(level.aud.moon_lp_1, 0.3);
+      _id_0380::_id_6850(level.aud.moon_lp_2, 0.3);
+      _id_0380::_id_6850(level.aud.moon_lp_3, 0.3);
       _id_0380::_id_288B("zmb_orrery_ring_stop", undefined, level.orrery_moon_a);
       break;
     case 1:
-      _id_0380::_id_6850(level._id_11CB.moon_lp_2, 0.3);
-      _id_0380::_id_6850(level._id_11CB.moon_lp_3, 0.3);
+      _id_0380::_id_6850(level.aud.moon_lp_2, 0.3);
+      _id_0380::_id_6850(level.aud.moon_lp_3, 0.3);
       _id_0380::_id_288B("zmb_orrery_ring_stop", undefined, level.orrery_moon_a);
       break;
     case 2:
-      _id_0380::_id_6850(level._id_11CB.moon_lp_3, 0.3);
+      _id_0380::_id_6850(level.aud.moon_lp_3, 0.3);
       _id_0380::_id_288B("zmb_orrery_ring_stop", undefined, level.orrery_moon_a);
       break;
     case 3:
-      _id_0380::_id_6850(level._id_11CB.moon_lp_4, 0.3);
+      _id_0380::_id_6850(level.aud.moon_lp_4, 0.3);
       _id_0380::_id_288B("zmb_orrery_ring_stop", undefined, level.orrery_moon_a);
       break;
     case 4:
@@ -1097,10 +1097,10 @@ exit_trial() {
 }
 
 pap_rise_blood_lp_handler(var_0) {
-  if(!level._id_11CB.pap_rose_once_already) {
+  if(!level.aud.pap_rose_once_already) {
     level waittill("aud_pap_machine_blood_lp_starts");
     _id_0380::_id_6844("zmb_pap_machine_rise_blood_lp", undefined, var_0);
-    level._id_11CB.pap_rose_once_already = 1;
+    level.aud.pap_rose_once_already = 1;
   }
 }
 
@@ -1126,62 +1126,62 @@ citadel_pillar_ignite(var_0) {
 }
 
 citadel_shield_pillar_fire_lp(var_0) {
-  if(!level._id_11CB.cit_shield_pillar_fire_playing) {
-    level._id_11CB.shield_pillar_fire_snd_handle = _id_0380::_id_6842("zmb_citadel_pillar_fire_lp_03", undefined, var_0, 1.5);
-    level._id_11CB.cit_shield_pillar_fire_playing = 1;
+  if(!level.aud.cit_shield_pillar_fire_playing) {
+    level.aud.shield_pillar_fire_snd_handle = _id_0380::_id_6842("zmb_citadel_pillar_fire_lp_03", undefined, var_0, 1.5);
+    level.aud.cit_shield_pillar_fire_playing = 1;
   }
 
   level waittill("aud_shield_removed_from_plith");
 
-  if(isDefined(level._id_11CB.shield_pillar_fire_snd_handle)) {
-    _id_0380::_id_6850(level._id_11CB.shield_pillar_fire_snd_handle);
-    level._id_11CB.cit_shield_pillar_fire_playing = 0;
-    level._id_11CB.shield_pillar_fire_snd_handle = undefined;
+  if(isDefined(level.aud.shield_pillar_fire_snd_handle)) {
+    _id_0380::_id_6850(level.aud.shield_pillar_fire_snd_handle);
+    level.aud.cit_shield_pillar_fire_playing = 0;
+    level.aud.shield_pillar_fire_snd_handle = undefined;
   }
 }
 
 citadel_hammer_pillar_fire_lp(var_0) {
-  if(!level._id_11CB.cit_hammer_pillar_fire_playing) {
-    level._id_11CB.hammer_pillar_fire_snd_handle = _id_0380::_id_6842("zmb_citadel_pillar_fire_lp_01", undefined, var_0, 1.5);
-    level._id_11CB.cit_hammer_pillar_fire_playing = 1;
+  if(!level.aud.cit_hammer_pillar_fire_playing) {
+    level.aud.hammer_pillar_fire_snd_handle = _id_0380::_id_6842("zmb_citadel_pillar_fire_lp_01", undefined, var_0, 1.5);
+    level.aud.cit_hammer_pillar_fire_playing = 1;
   }
 
   level waittill("aud_hammer_removed_from_plith");
 
-  if(isDefined(level._id_11CB.hammer_pillar_fire_snd_handle)) {
-    _id_0380::_id_6850(level._id_11CB.hammer_pillar_fire_snd_handle);
-    level._id_11CB.cit_hammer_pillar_fire_playing = 0;
-    level._id_11CB.hammer_pillar_fire_snd_handle = undefined;
+  if(isDefined(level.aud.hammer_pillar_fire_snd_handle)) {
+    _id_0380::_id_6850(level.aud.hammer_pillar_fire_snd_handle);
+    level.aud.cit_hammer_pillar_fire_playing = 0;
+    level.aud.hammer_pillar_fire_snd_handle = undefined;
   }
 }
 
 citadel_spike_pillar_fire_lp(var_0) {
-  if(!level._id_11CB.cit_spike_pillar_fire_playing) {
-    level._id_11CB.spike_pillar_fire_snd_handle = _id_0380::_id_6842("zmb_citadel_pillar_fire_lp_02", undefined, var_0, 1.5);
-    level._id_11CB.cit_spike_pillar_fire_playing = 1;
+  if(!level.aud.cit_spike_pillar_fire_playing) {
+    level.aud.spike_pillar_fire_snd_handle = _id_0380::_id_6842("zmb_citadel_pillar_fire_lp_02", undefined, var_0, 1.5);
+    level.aud.cit_spike_pillar_fire_playing = 1;
   }
 
   level waittill("aud_spike_removed_from_plith");
 
-  if(isDefined(level._id_11CB.spike_pillar_fire_snd_handle)) {
-    _id_0380::_id_6850(level._id_11CB.spike_pillar_fire_snd_handle);
-    level._id_11CB.cit_spike_pillar_fire_playing = 0;
-    level._id_11CB.spike_pillar_fire_snd_handle = undefined;
+  if(isDefined(level.aud.spike_pillar_fire_snd_handle)) {
+    _id_0380::_id_6850(level.aud.spike_pillar_fire_snd_handle);
+    level.aud.cit_spike_pillar_fire_playing = 0;
+    level.aud.spike_pillar_fire_snd_handle = undefined;
   }
 }
 
 citadel_scythe_pillar_fire_lp(var_0) {
-  if(!level._id_11CB.cit_scythe_pillar_fire_playing) {
-    level._id_11CB.scythe_pillar_fire_snd_handle = _id_0380::_id_6842("zmb_citadel_pillar_fire_lp_04", undefined, var_0, 1.5);
-    level._id_11CB.cit_scythe_pillar_fire_playing = 1;
+  if(!level.aud.cit_scythe_pillar_fire_playing) {
+    level.aud.scythe_pillar_fire_snd_handle = _id_0380::_id_6842("zmb_citadel_pillar_fire_lp_04", undefined, var_0, 1.5);
+    level.aud.cit_scythe_pillar_fire_playing = 1;
   }
 
   level waittill("aud_scythe_removed_from_plith");
 
-  if(isDefined(level._id_11CB.scythe_pillar_fire_snd_handle)) {
-    _id_0380::_id_6850(level._id_11CB.scythe_pillar_fire_snd_handle);
-    level._id_11CB.cit_scythe_pillar_fire_playing = 0;
-    level._id_11CB.scythe_pillar_fire_snd_handle = undefined;
+  if(isDefined(level.aud.scythe_pillar_fire_snd_handle)) {
+    _id_0380::_id_6850(level.aud.scythe_pillar_fire_snd_handle);
+    level.aud.cit_scythe_pillar_fire_playing = 0;
+    level.aud.scythe_pillar_fire_snd_handle = undefined;
   }
 }
 
@@ -1242,8 +1242,8 @@ boss_music_start() {
     var_1 clientaddsoundsubmix("god_king_fight", 2.0);
   }
 
-  if(!isDefined(level._id_11CB.boss_music_playing) && !isDefined(level._id_11CB.boss_is_dead)) {
-    level._id_11CB.boss_music_playing = 1;
+  if(!isDefined(level.aud.boss_music_playing) && !isDefined(level.aud.boss_is_dead)) {
+    level.aud.boss_music_playing = 1;
 
     foreach(var_1 in level.players) {
       var_1 _id_0366::_id_8E47(1.0);
@@ -1255,8 +1255,8 @@ boss_music_start() {
 }
 
 dlc_handle_boss_killed_music() {
-  level._id_11CB.boss_music_playing = undefined;
-  level._id_11CB.boss_is_dead = 1;
+  level.aud.boss_music_playing = undefined;
+  level.aud.boss_is_dead = 1;
 
   foreach(var_1 in level.players) {
     var_1 _id_0366::_id_8E09();
@@ -1289,13 +1289,13 @@ break_ice() {
 spawn_raven() {
   while(isDefined(self)) {
     var_0 = _randomintrange(5, 10);
-    level._id_11CB.crow_amb_caw = _id_0380::_id_288B("zmb_dsnt_raven_ee_caw", undefined, self);
+    level.aud.crow_amb_caw = _id_0380::_id_288B("zmb_dsnt_raven_ee_caw", undefined, self);
     wait(var_0);
   }
 }
 
 raven_fly_away() {
-  _id_0380::_stoplocalsound(level._id_11CB.crow_amb_caw, 0.1);
+  _id_0380::_stoplocalsound(level.aud.crow_amb_caw, 0.1);
   _id_0380::_id_2889("training_crow_caw", undefined, self.origin);
 }
 

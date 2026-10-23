@@ -17,13 +17,13 @@ init() {
 rungenerator_jump() {
   var_0 = self;
   var_0 endon("disconnect");
-  var_1 = common_scripts\utility::_id_46B7("generator_path_ends", "targetname");
-  common_scripts\utility::_id_3C9F(_id_0557::_id_7838("quest_deathraven", "quest_deathraven_survive_rush"));
+  var_1 = common_scripts\utility::getstructarray("generator_path_ends", "targetname");
+  common_scripts\utility::flag_wait(_id_0557::_id_7838("quest_deathraven", "quest_deathraven_survive_rush"));
 
   for(;;) {
     waitframe();
 
-    if(!var_0 _meth_82E5()) {
+    if(!var_0 script_wait()) {
       continue;
     }
     foreach(var_3 in var_1) {
@@ -34,7 +34,7 @@ rungenerator_jump() {
           var_4 = level.oribital_rotator_1;
         }
 
-        var_5 = level.oribital_rotator_1 common_scripts\utility::_id_8FFC();
+        var_5 = level.oribital_rotator_1 common_scripts\utility::spawn_tag_origin();
         var_0 maps\mp\gametypes\_playerlogic::deleteentonplayerdisconnect(var_5);
         var_5 show();
 
@@ -72,7 +72,7 @@ run_troubled_double_points(var_0) {
   common_scripts\utility::flag_init("troubled_double_points_0");
   common_scripts\utility::flag_init("troubled_double_points_1");
   common_scripts\utility::flag_init("troubled_double_points_2");
-  var_1 = common_scripts\utility::_id_46B5("side_raven_ee", "targetname");
+  var_1 = common_scripts\utility::getstruct("side_raven_ee", "targetname");
   var_2 = getEntArray(var_1.target, "targetname");
   common_scripts\utility::_id_0FB2(var_2, ::set_flag_on_damage);
 
@@ -93,18 +93,18 @@ run_troubled_double_points(var_0) {
     waitframe();
   }
 
-  var_7 = common_scripts\utility::_id_46B5("troubled_double_points", "targetname");
-  var_8 = common_scripts\utility::_id_46B7(var_7.target, "targetname");
-  var_9 = var_7 common_scripts\utility::_id_8FFC();
+  var_7 = common_scripts\utility::getstruct("troubled_double_points", "targetname");
+  var_8 = common_scripts\utility::getstructarray(var_7.target, "targetname");
+  var_9 = var_7 common_scripts\utility::spawn_tag_origin();
   var_9.angles = (0, 30, 0);
   var_9 show();
   var_10 = ["troubled_double_points_spawn", "troubled_double_points_spawn_2", "troubled_double_points_spawn_3"];
 
   foreach(var_13, var_12 in var_10) {
-    if(!common_scripts\utility::_id_3C77("troubled_double_points_" + var_13)) {
+    if(!common_scripts\utility::flag("troubled_double_points_" + var_13)) {
       var_9 childthread wait_for_grab("troubled_double_points_" + var_13);
-      var_9 childthread move_around(common_scripts\utility::_id_46B7(var_12, "targetname"));
-      common_scripts\utility::_id_3C9F("troubled_double_points_" + var_13);
+      var_9 childthread move_around(common_scripts\utility::getstructarray(var_12, "targetname"));
+      common_scripts\utility::flag_wait("troubled_double_points_" + var_13);
     }
 
     if(isDefined(var_9.fx)) {
@@ -115,7 +115,7 @@ run_troubled_double_points(var_0) {
   }
 
   level thread maps\mp\gametypes\zombies::_id_08AA();
-  var_14 = common_scripts\utility::_id_46B5("zmb_dlc4_size_ee_final", "targetname");
+  var_14 = common_scripts\utility::getstruct("zmb_dlc4_size_ee_final", "targetname");
   var_15 = 0;
 
   while(!common_scripts\utility::_id_562E(var_15)) {
@@ -136,17 +136,17 @@ run_troubled_double_points(var_0) {
 }
 
 run_mini_game(var_0) {
-  var_1 = common_scripts\utility::_id_46B7(var_0.target, "targetname");
-  var_2 = var_1[0] common_scripts\utility::_id_8FFC();
+  var_1 = common_scripts\utility::getstructarray(var_0.target, "targetname");
+  var_2 = var_1[0] common_scripts\utility::spawn_tag_origin();
   var_2 show();
-  var_2._id_21F6 = [];
+  var_2.children = [];
   var_2 thread rotate_target();
   var_2 set_orbiters(20);
   var_3 = var_2 run_game_sequence(var_1, var_0);
-  var_4 = common_scripts\utility::_id_46B5("dlc4_ee_weap_reward", "targetname");
-  var_5 = common_scripts\utility::_id_46B5(var_4.target, "targetname");
+  var_4 = common_scripts\utility::getstruct("dlc4_ee_weap_reward", "targetname");
+  var_5 = common_scripts\utility::getstruct(var_4.target, "targetname");
 
-  foreach(var_7 in var_2._id_21F6) {
+  foreach(var_7 in var_2.children) {
     var_7 show();
   }
 
@@ -170,7 +170,7 @@ run_mini_game(var_0) {
   var_2 movez(-512, 8, 3);
   wait 2;
 
-  foreach(var_12 in var_2._id_21F6) {
+  foreach(var_12 in var_2.children) {
     var_12 delete();
   }
 
@@ -223,7 +223,7 @@ prespawn_a_floating_award(var_0, var_1, var_2) {
   var_3.angles = (var_3.angles[0] - 30, randomint(360), var_3.angles[2]);
   var_3 makeunusable();
   var_3 set_hidden_but_sent_to_player(var_2);
-  var_4 = var_3 common_scripts\utility::_id_8FFC();
+  var_4 = var_3 common_scripts\utility::spawn_tag_origin();
   var_4.origin = var_4.origin + (0, 0, 8);
   var_4 set_hidden_but_sent_to_player(var_2);
   var_3.origin = var_4.origin;
@@ -257,7 +257,7 @@ run_game_sequence(var_0, var_1) {
     var_1.fx = _id_0547::_id_8FBA(var_1, "zmf_descent_vision_blood_ready");
     _triggerfx(var_1.fx);
 
-    foreach(var_6 in var_2._id_21F6) {
+    foreach(var_6 in var_2.children) {
       var_6 hide();
     }
 
@@ -265,11 +265,11 @@ run_game_sequence(var_0, var_1) {
     var_4.is_in_side_ee_mini_game = 1;
     var_1.fx delete();
     var_4 childthread maintain_grenades();
-    var_8 = level._id_A980;
+    var_8 = level.wavecounter;
     var_3 = 0;
 
     foreach(var_10 in var_0) {
-      foreach(var_6 in var_2._id_21F6) {
+      foreach(var_6 in var_2.children) {
         var_6 hide();
       }
 
@@ -277,21 +277,21 @@ run_game_sequence(var_0, var_1) {
       var_2.angles = vectortoangles(var_2.origin - var_1.origin);
       wait 1;
 
-      foreach(var_6 in var_2._id_21F6) {
+      foreach(var_6 in var_2.children) {
         var_6 show();
       }
 
       var_3 = var_2 wait_for_success_or_timeout();
 
       if(var_3) {
-        foreach(var_6 in var_2._id_21F6) {
-          playFX(common_scripts\utility::_id_44F5("proj_trail_green_os"), var_6.origin);
+        foreach(var_6 in var_2.children) {
+          playFX(common_scripts\utility::getfx("proj_trail_green_os"), var_6.origin);
         }
 
         continue;
       }
 
-      foreach(var_6 in var_2._id_21F6) {
+      foreach(var_6 in var_2.children) {
         var_6 hide();
       }
 
@@ -301,7 +301,7 @@ run_game_sequence(var_0, var_1) {
     var_4.is_in_side_ee_mini_game = 0;
 
     if(!var_3) {
-      while(level._id_A980 < var_8 + 5) {
+      while(level.wavecounter < var_8 + 5) {
         waitframe();
       }
     } else
@@ -321,24 +321,24 @@ set_orbiters(var_0) {
   var_2[2] = (0, 0, var_0);
   var_2[3] = (0, 0, -1 * var_0);
 
-  if(!isDefined(var_1._id_21F6)) {
-    var_1._id_21F6 = [];
+  if(!isDefined(var_1.children)) {
+    var_1.children = [];
   }
 
-  foreach(var_4 in var_1._id_21F6) {
-    _stopFXOnTag(common_scripts\utility::_id_44F5("proj_trail_white"), var_4, "tag_origin");
+  foreach(var_4 in var_1.children) {
+    _stopFXOnTag(common_scripts\utility::getfx("proj_trail_white"), var_4, "tag_origin");
   }
 
-  if(!isDefined(var_1._id_21F6) || var_1._id_21F6.size == 0) {
+  if(!isDefined(var_1.children) || var_1.children.size == 0) {
     for(var_6 = 0; var_6 < 4; var_6++) {
-      var_7 = var_1 common_scripts\utility::_id_8FFC();
+      var_7 = var_1 common_scripts\utility::spawn_tag_origin();
       var_7 show();
       var_7 linktosynchronizedparent(var_1, "tag_origin", var_2[var_6], (0, 0, 0));
-      var_1._id_21F6[var_1._id_21F6.size] = var_7;
+      var_1.children[var_1.children.size] = var_7;
     }
   } else {
     for(var_6 = 0; var_6 < 4; var_6++) {
-      var_7 = var_1._id_21F6[var_6];
+      var_7 = var_1.children[var_6];
       var_7 unlink();
       var_7 linktosynchronizedparent(var_1, "tag_origin", var_2[var_6], (0, 0, 0));
     }
@@ -351,8 +351,8 @@ reset_fx() {
   var_0 = self;
   waitframe();
 
-  foreach(var_2 in var_0._id_21F6) {
-    _playFXOnTag(common_scripts\utility::_id_44F5("proj_trail_white"), var_2, "tag_origin");
+  foreach(var_2 in var_0.children) {
+    _playFXOnTag(common_scripts\utility::getfx("proj_trail_white"), var_2, "tag_origin");
   }
 }
 
@@ -386,7 +386,7 @@ maintain_grenades() {
 
   while(common_scripts\utility::_id_562E(var_0.is_in_side_ee_mini_game)) {
     var_0.grenadecolorsheld = ["proj_trail_white", "proj_trail_white", "proj_trail_white", "proj_trail_white"];
-    _id_0586::_id_478A(var_0);
+    _id_0586::givegrenadesafterrounds(var_0);
     waitframe();
   }
 }
@@ -445,8 +445,8 @@ set_flag_on_damage() {
     var_11 = (0, 0, 0);
   }
 
-  playFX(common_scripts\utility::_id_44F5("ee_lamp_fx"), self.origin + var_10, anglesToForward(var_11), anglestoup(var_11));
-  _id_0378::_id_8D74("aud_raven_fly_away");
+  playFX(common_scripts\utility::getfx("ee_lamp_fx"), self.origin + var_10, anglesToForward(var_11), anglestoup(var_11));
+  _id_0378::snd_message("aud_raven_fly_away");
 }
 
 move_around(var_0) {
@@ -474,7 +474,7 @@ move_around(var_0) {
     }
     var_1 = common_scripts\utility::random(var_0);
     playFX(level._effect["zmb_dnk_geistkraftexplode"], self.origin);
-    _id_0378::_id_8D74("aud_dlc4_magic_poof", self.origin);
+    _id_0378::snd_message("aud_dlc4_magic_poof", self.origin);
 
     if(isDefined(self.fx)) {
       self.fx delete();
@@ -487,7 +487,7 @@ move_around(var_0) {
     }
     self.origin = var_1.origin;
     playFX(level._effect["zmb_dnk_geistkraftexplode"], var_1.origin);
-    _id_0378::_id_8D74("dlc3_magic_poof", self.origin);
+    _id_0378::snd_message("dlc3_magic_poof", self.origin);
   }
 }
 
@@ -525,8 +525,8 @@ run_harmonic_kinectic_acceleration() {
   waitframe();
 
   if(self.weaponlocktargettooclose == "a") {
-    common_scripts\utility::_id_3C9F("flag_archives_to_bridge_1");
-    common_scripts\utility::_id_3C9F("flag_gallery_to_bridge_1");
+    common_scripts\utility::flag_wait("flag_archives_to_bridge_1");
+    common_scripts\utility::flag_wait("flag_gallery_to_bridge_1");
     common_scripts\utility::flag_set("zmb_double_points_available");
   }
 
@@ -560,12 +560,12 @@ launchplayers(var_0) {
     }
 
     var_4 = distance(var_1.origin, var_0.dest_path.landing.origin) < 512;
-    _id_0378::_id_8D74("tesla_hc_energy_lamp_destruct", var_1.origin);
+    _id_0378::snd_message("tesla_hc_energy_lamp_destruct", var_1.origin);
 
     if(!var_4) {
-      var_5 = var_1 common_scripts\utility::_id_8FFC();
+      var_5 = var_1 common_scripts\utility::spawn_tag_origin();
       var_5 show();
-      var_6 = var_1 common_scripts\utility::_id_8FFC();
+      var_6 = var_1 common_scripts\utility::spawn_tag_origin();
       var_6 show();
       var_1 playerlinkTo(var_5, "tag_player");
       var_7 = get_required_velocity(var_0.dest_path.origin, var_1.origin);
@@ -584,7 +584,7 @@ launchplayers(var_0) {
       var_6 delete();
     } else {
       var_11 = var_1 _meth_8566();
-      var_11 = common_scripts\utility::_id_3D5C(var_11);
+      var_11 = common_scripts\utility::flat_angle(var_11);
       var_12 = vectorNormalize(anglesToForward(var_11));
       var_7 = get_required_velocity((var_1.origin[0] + 128 * var_12[0], var_1.origin[1] + 128 * var_12[1], var_0.dest_path.origin[2]), var_1.origin);
       var_1 setvelocity(var_7);
@@ -668,8 +668,8 @@ get_required_velocity(var_0, var_1) {
 initialize_plate() {
   var_0 = self;
   var_1 = common_scripts\utility::_id_44BE(var_0.target, "targetname");
-  var_0.dest_path = common_scripts\utility::_id_46B5("launch_path_" + var_0.weaponlocktargettooclose, "script_noteworthy");
-  var_0.dest_path.landing = common_scripts\utility::_id_46B5(var_0.dest_path.target, "targetname");
+  var_0.dest_path = common_scripts\utility::getstruct("launch_path_" + var_0.weaponlocktargettooclose, "script_noteworthy");
+  var_0.dest_path.landing = common_scripts\utility::getstruct(var_0.dest_path.target, "targetname");
 
   foreach(var_3 in var_1) {
     var_4 = var_3._id_0165;

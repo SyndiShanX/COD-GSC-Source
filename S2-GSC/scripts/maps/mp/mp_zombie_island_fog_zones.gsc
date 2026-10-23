@@ -12,10 +12,10 @@ init() {
   var_0.exitfunc = ::on_player_left_fog;
   var_1 = spawnStruct();
   var_1.check = ::should_restore_fog_vision_from_camo;
-  var_1._id_3F02 = ::clear_player_vision;
+  var_1.func = ::clear_player_vision;
   var_2 = spawnStruct();
   var_2.check = ::should_restore_fog_vision_isolated_room;
-  var_2._id_3F02 = ::clear_restore_fog_vision_isolated_room;
+  var_2.func = ::clear_restore_fog_vision_isolated_room;
   var_0.optionalstatechangechecks = [var_1, var_2];
   level thread maps\mp\_utility::_id_6F74(::run_fog_callbacks, var_0);
   level thread island_intro_window_countdown();
@@ -32,7 +32,7 @@ run_fog_callbacks(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_0.iszombie = var_1;
   }
 
-  var_0.endon_notification = common_scripts\utility::_id_98E7(common_scripts\utility::_id_562E(var_0.iszombie), "death", "disconnect");
+  var_0.endon_notification = common_scripts\utility::ter_op(common_scripts\utility::_id_562E(var_0.iszombie), "death", "disconnect");
   self.fog_callback_data = var_0;
   run_fog_callbacks_internal();
   self.fog_callback_data = undefined;
@@ -104,7 +104,7 @@ on_player_zone_change(var_0, var_1, var_2) {
 
   var_4 = get_fog_and_light_set(var_1, 1);
   self.current_volume_is_interior = !fog_is_thick_for_agent(var_4.fog);
-  childthread set_light_and_fog(var_0.fog, var_0._id_5CCE, var_3);
+  childthread set_light_and_fog(var_0.fog, var_0.light, var_3);
 }
 
 clear_player_vision() {
@@ -120,8 +120,8 @@ should_force_fog_change(var_0) {
 
   foreach(var_3 in var_0) {
     if(self[[var_3.check]]()) {
-      if(isDefined(var_3._id_3F02)) {
-        self[[var_3._id_3F02]]();
+      if(isDefined(var_3.func)) {
+        self[[var_3.func]]();
       }
 
       var_1 = 1;
@@ -173,7 +173,7 @@ apply_clientside_volume_exploder() {
 toggle_on_player_touch(var_0) {
   for(;;) {
     wait_for_touching_any_volume(var_0);
-    [[var_0._id_6B05]](self);
+    [[var_0.onenterfunc]](self);
     wait_for_touching_no_volume(var_0);
     [[var_0.onvacantfunc]](self);
   }
@@ -181,7 +181,7 @@ toggle_on_player_touch(var_0) {
 
 wait_for_touching_any_volume(var_0) {
   for(;;) {
-    foreach(var_2 in var_0._id_A615) {
+    foreach(var_2 in var_0.volumes) {
       if(self istouching(var_2)) {
         return;
       }
@@ -197,7 +197,7 @@ wait_for_touching_no_volume(var_0) {
   while(var_1) {
     var_1 = 0;
 
-    foreach(var_3 in var_0._id_A615) {
+    foreach(var_3 in var_0.volumes) {
       if(self istouching(var_3)) {
         var_1 = 1;
       }
@@ -239,13 +239,13 @@ get_fog_and_light_set(var_0, var_1) {
 
   if(var_3) {
     var_2.fog = var_0.fog_set_active;
-    var_2._id_5CCE = var_0.light_set_active;
+    var_2.light = var_0.light_set_active;
   } else {
     var_2.fog = var_0.fog_set_normal;
-    var_2._id_5CCE = var_0.light_set_normal;
+    var_2.light = var_0.light_set_normal;
   }
 
-  var_2.time = level._id_A565[var_2.fog]._id_9C83;
+  var_2.time = level.vision_set_fog[var_2.fog].transitiontime;
   return var_2;
 }
 
@@ -255,7 +255,7 @@ get_fog_volumn_touched(var_0) {
   }
 
   foreach(var_2 in self) {
-    foreach(var_4 in var_2._id_A615) {
+    foreach(var_4 in var_2.volumes) {
       if(var_0 istouching(var_4)) {
         return var_2;
       }

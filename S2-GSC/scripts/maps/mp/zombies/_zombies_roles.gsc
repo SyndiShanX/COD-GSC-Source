@@ -129,7 +129,7 @@ _id_956B(var_0) {
 
 _id_6AB3() {
   self endon("zm_role_putaway");
-  common_scripts\utility::_id_A70A("death", "begin_last_stand");
+  common_scripts\utility::waittill_any("death", "begin_last_stand");
   common_scripts\utility::_id_0617();
 }
 

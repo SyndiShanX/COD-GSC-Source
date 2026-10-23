@@ -4,10 +4,10 @@
 *****************************************************/
 
 init() {
-  level._id_5A61["molotovs"] = ::_id_9E32;
-  level._id_5A7D["killstreak_molotov_cocktail_mp"] = "molotovs";
-  level._id_5A7D["killstreak_molotov_cocktail_grenadier_mp"] = "molotovs";
-  level._id_5A7D["thermite_flames_mp"] = "molotovs";
+  level.killstreakfuncs["molotovs"] = ::_id_9E32;
+  level.killstreakwieldweapons["killstreak_molotov_cocktail_mp"] = "molotovs";
+  level.killstreakwieldweapons["killstreak_molotov_cocktail_grenadier_mp"] = "molotovs";
+  level.killstreakwieldweapons["thermite_flames_mp"] = "molotovs";
 }
 
 _id_9E32(var_0) {

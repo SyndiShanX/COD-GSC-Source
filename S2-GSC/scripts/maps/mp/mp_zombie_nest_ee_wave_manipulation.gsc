@@ -122,42 +122,42 @@ restore_normal_rounds(var_0) {
   _id_8607();
 }
 
-_id_4DA1(var_0) {
-  if(level._id_258F) {
-    self._id_35D5.fontscale = 1;
+hint_position_internal(var_0) {
+  if(level.console) {
+    self.elm.fontscale = 1;
   } else {
-    self._id_35D5.fontscale = 0.08;
+    self.elm.fontscale = 0.08;
   }
 
-  self._id_35D5.x = 0;
-  self._id_35D5.y = -40;
-  self._id_35D5.alignx = "left";
-  self._id_35D5.aligny = "bottom";
-  self._id_35D5._id_00C6 = "left";
-  self._id_35D5._id_01CA = "middle";
-  self._id_35D5.sort = 1;
-  self._id_35D5.alpha = 0.8;
+  self.elm.x = 0;
+  self.elm.y = -40;
+  self.elm.alignx = "left";
+  self.elm.aligny = "bottom";
+  self.elm._id_00C6 = "left";
+  self.elm._id_01CA = "middle";
+  self.elm.sort = 1;
+  self.elm.alpha = 0.8;
 
-  if(!isDefined(self._id_1739)) {
+  if(!isDefined(self.bg)) {
     return;
   }
-  self._id_1739.x = 0;
-  self._id_1739.y = -40;
-  self._id_1739.alignx = "center";
-  self._id_1739.aligny = "middle";
-  self._id_1739._id_00C6 = "center";
-  self._id_1739._id_01CA = "middle";
-  self._id_1739.sort = -1;
+  self.bg.x = 0;
+  self.bg.y = -40;
+  self.bg.alignx = "center";
+  self.bg.aligny = "middle";
+  self.bg._id_00C6 = "center";
+  self.bg._id_01CA = "middle";
+  self.bg.sort = -1;
 
-  if(level._id_258F) {
-    self._id_1739 setshader("popmenu_bg", 650, 52);
+  if(level.console) {
+    self.bg setshader("popmenu_bg", 650, 52);
   } else {
-    self._id_1739 setshader("popmenu_bg", 650, 42);
+    self.bg setshader("popmenu_bg", 650, 42);
   }
 
   if(!isDefined(var_0)) {
     var_0 = 0.5;
   }
 
-  self._id_1739.alpha = var_0;
+  self.bg.alpha = var_0;
 }

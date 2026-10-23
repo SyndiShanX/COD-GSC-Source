@@ -49,7 +49,7 @@ watch_melee_weapon_ownership(var_0) {
       var_1 = var_2;
     }
 
-    common_scripts\utility::_id_A70A("weapon_taken", "weapon_given");
+    common_scripts\utility::waittill_any("weapon_taken", "weapon_given");
   }
 }
 
@@ -74,7 +74,7 @@ scale_damage() {
     level.bladedamage = max(3400, var_1 * 1);
     level.bladecleavedamage = max(1, var_1 * 0.7);
     level waittill("waveupdate");
-    var_0 = level._id_A980;
+    var_0 = level.wavecounter;
   }
 }
 
@@ -84,7 +84,7 @@ setup_heavy_melee_abilityinfo(var_0, var_1, var_2, var_3) {
   }
 
   var_4 = spawnStruct();
-  var_4._id_953E = var_0;
+  var_4.sweapon = var_0;
   var_4.firedelay = var_1;
   var_4.weaponlostendon = var_2;
   var_4.firingfunction = var_3;
@@ -99,14 +99,14 @@ run_heavy_melee_ability(var_0) {
   for(;;) {
     self waittill("melee_fired", var_1);
 
-    if(issubstr(var_1, var_0._id_953E) && self _meth_8661()) {
+    if(issubstr(var_1, var_0.sweapon) && self setdefaultdof()) {
       if(isDefined(var_0.firedelay)) {
         wait(var_0.firedelay);
       }
 
       thread[[var_0.firingfunction]](var_0);
 
-      while(self _meth_8661()) {
+      while(self setdefaultdof()) {
         waitframe();
       }
     }
@@ -175,7 +175,7 @@ togglemarathonability(var_0) {
 
 bat_init() {
   level.zombiemeleeweapon["zom_dlc2_1_zm"] = 1;
-  level._id_62B3["zom_dlc2_1_zm"] = ::bat_modify_damage;
+  level.modifyweapondamage["zom_dlc2_1_zm"] = ::bat_modify_damage;
   level.meleeaoeweapons["baseballbat_aoe_zm"] = 1;
   var_0 = [];
   var_0[16]["noGib"] = 1;
@@ -242,7 +242,7 @@ delayed_bat_hit(var_0, var_1) {
   var_3._id_60B8 = undefined;
   var_3._id_01D0 = "baseballbat_aoe_zm";
   var_3.delaysec = undefined;
-  var_0 _id_0378::_id_8D74("zmb_bat_melee_hit_wooden", var_3);
+  var_0 _id_0378::snd_message("zmb_bat_melee_hit_wooden", var_3);
   var_0 dodamage(level.batcolumndamage, self getEye(), self, self, "MOD_MELEE", "baseballbat_aoe_zm", "none");
   _playFXOnTag(level._effect["zmb_bat_long_hit_crit_blood"], var_0, "TAG_EYE");
 
@@ -256,7 +256,7 @@ delayed_bat_hit(var_0, var_1) {
 }
 
 bat_modify_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(var_1 _meth_8661()) {
+  if(var_1 setdefaultdof()) {
     return 0;
   }
 
@@ -265,7 +265,7 @@ bat_modify_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
 bat_hc_init() {
   level.zombiemeleeweapon["zom_dlc2_1hc_zm"] = 1;
-  level._id_62B3["zom_dlc2_1hc_zm"] = ::bat_hc_modify_damage;
+  level.modifyweapondamage["zom_dlc2_1hc_zm"] = ::bat_hc_modify_damage;
   level.meleeaoeweapons["baseballbat_hc_aoe_zm"] = 1;
   level._effect["zmb_hc_bat_aoe_fx"] = loadfx("vfx/trail/zmb_hc_bat_projectile");
   var_0 = [];
@@ -321,10 +321,10 @@ bat_hc_blast(var_0) {
   var_6.angles = var_1.angles;
   var_6 setModel("tag_origin");
   var_6._id_2DA7 = var_5["position"];
-  var_6._id_2F0C = vectorNormalize(var_6._id_2DA7 - var_6.origin);
+  var_6.dir = vectorNormalize(var_6._id_2DA7 - var_6.origin);
   var_6._id_9B7F = var_5["fraction"];
   var_6.player = var_1;
-  var_6._id_953E = "baseballbat_hc_aoe_zm";
+  var_6.sweapon = "baseballbat_hc_aoe_zm";
   var_6._id_018A = 1000;
   var_6.hit_radius = 30;
   var_6.hit_height = 30;
@@ -342,15 +342,15 @@ bat_hc_blast_think(var_0) {
   }
 
   var_3 = var_0.origin - var_0.hit_height * 0.5 * (0, 0, 1);
-  var_0._id_9D65 = spawn("trigger_radius", var_3, 0, var_0.hit_radius, var_0.hit_height);
-  var_0._id_9D65 enablelinkTo();
-  var_0._id_9D65 linkTo(var_0);
+  var_0.trigger = spawn("trigger_radius", var_3, 0, var_0.hit_radius, var_0.hit_height);
+  var_0.trigger enablelinkTo();
+  var_0.trigger linkTo(var_0);
   thread bat_hc_blast_watch_collision(var_0);
-  _playFXOnTag(common_scripts\utility::_id_44F5("zmb_hc_bat_aoe_fx"), var_0, "tag_origin");
-  _id_0378::_id_8D74("zmb_hc_bat_aoe_fx", var_0, "tag_origin");
+  _playFXOnTag(common_scripts\utility::getfx("zmb_hc_bat_aoe_fx"), var_0, "tag_origin");
+  _id_0378::snd_message("zmb_hc_bat_aoe_fx", var_0, "tag_origin");
   wait(var_2);
   var_0 notify("bat_hc_blast_end");
-  var_0._id_9D65 delete();
+  var_0.trigger delete();
   var_0 delete();
 }
 
@@ -358,7 +358,7 @@ bat_hc_blast_watch_collision(var_0) {
   var_0 endon("death");
 
   for(;;) {
-    var_0._id_9D65 waittill("trigger", var_1);
+    var_0.trigger waittill("trigger", var_1);
 
     if(isDefined(var_1.team) && !_isenemyteam(var_0.player.team, var_1.team)) {
       continue;
@@ -383,7 +383,7 @@ bat_hc_blast_hit(var_0, var_1) {
     var_3._id_60B8 = undefined;
     var_3._id_01D0 = "baseballbat_aoe_zm";
     var_3.delaysec = undefined;
-    var_0 _id_0378::_id_8D74("zmb_bat_melee_hit_metal", var_3);
+    var_0 _id_0378::snd_message("zmb_bat_melee_hit_metal", var_3);
     var_0 dodamage(level.bathcaoedamage, var_2 getEye(), var_2, var_2, "MOD_MELEE", "baseballbat_hc_aoe_zm", "none");
     _playFXOnTag(level._effect["zmb_giestkraft_impact"], var_0, "J_Spine4");
 
@@ -401,7 +401,7 @@ bat_hc_blast_hit(var_0, var_1) {
 }
 
 bat_hc_modify_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(var_1 _meth_8661()) {
+  if(var_1 setdefaultdof()) {
     return 0;
   }
 
@@ -410,7 +410,7 @@ bat_hc_modify_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
 axe_init() {
   level.zombiemeleeweapon["zom_dlc2_3_zm"] = 1;
-  level._id_62B3["zom_dlc2_3_zm"] = ::axe_modify_damage;
+  level.modifyweapondamage["zom_dlc2_3_zm"] = ::axe_modify_damage;
   level._id_A9C8["zom_dlc2_3_zm"] = ::axe_heavy_melee_fatal;
   var_0 = [];
   var_0[16]["noGib"] = 1;
@@ -479,7 +479,7 @@ axe_modify_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 axe_hc_init() {
   level._effect["zmb_hc_axe_aoe"] = loadfx("vfx/zombie/zmb_axe_burst");
   level.zombiemeleeweapon["zom_dlc2_3hc_zm"] = 1;
-  level._id_62B3["zom_dlc2_3hc_zm"] = ::axe_hc_modify_damage;
+  level.modifyweapondamage["zom_dlc2_3hc_zm"] = ::axe_hc_modify_damage;
   level._id_A9C8["zom_dlc2_3hc_zm"] = ::axe_hc_heavy_melee_fatal;
   level.meleeaoeweapons["axe_aoe_zm"] = 1;
   var_0 = [];
@@ -591,7 +591,7 @@ axe_hc_explosion() {
   var_0 = self _meth_8566();
   var_1 = _anglestoaxis(var_0);
   var_2 = self getEye() + var_1["forward"] * 48;
-  var_3 = common_scripts\utility::_id_44F5("zmb_hc_axe_aoe");
+  var_3 = common_scripts\utility::getfx("zmb_hc_axe_aoe");
   playFX(var_3, var_2, var_1["up"], var_1["forward"]);
   var_4 = _id_0547::get_zombies_touching_sphere(var_2, 250, 1, self);
   var_4 = _sortbydistance(var_4, var_2);
@@ -618,7 +618,7 @@ axe_hc_explosion_delayed_hit(var_0, var_1, var_2) {
 
 trench_knife_init() {
   level.zombiemeleeweapon["zom_dlc2_2_zm"] = 1;
-  level._id_62B3["zom_dlc2_2_zm"] = ::trench_knife_modify_damage;
+  level.modifyweapondamage["zom_dlc2_2_zm"] = ::trench_knife_modify_damage;
   level._id_A9C8["zom_dlc2_2_zm"] = ::trench_knife_heavy_melee_fatal;
   var_0 = [];
   var_0[16]["noGib"] = 1;
@@ -683,7 +683,7 @@ trench_knife_heavy_melee_fatal(var_0) {
 
 trench_knife_hc_init() {
   level.zombiemeleeweapon["zom_dlc2_2hc_zm"] = 1;
-  level._id_62B3["zom_dlc2_2hc_zm"] = ::trench_knife_hc_modify_damage;
+  level.modifyweapondamage["zom_dlc2_2hc_zm"] = ::trench_knife_hc_modify_damage;
   level._id_A9C8["zom_dlc2_2hc_zm"] = ::trench_knife_hc_heavy_melee_fatal;
   var_0 = [];
   var_0[16]["noGib"] = 1;
@@ -764,8 +764,8 @@ trench_knife_hc_spec_effect() {
 
     var_0 notify("immediateHealthRegen");
   } else if(var_0 _id_0547::_id_73E9() < var_0 _id_0547::playergetmaxarmorcount()) {
-    _playfxontagforclients(common_scripts\utility::_id_44F5("zmb_melee_drain_player"), var_0, "J_Spine4", var_0);
-    _id_0378::_id_8D74("zmb_knife_finisher_effects");
+    _playfxontagforclients(common_scripts\utility::getfx("zmb_melee_drain_player"), var_0, "J_Spine4", var_0);
+    _id_0378::snd_message("zmb_knife_finisher_effects");
     wait 0.2;
     var_0 _id_0547::_id_73AC(1);
   }
@@ -777,12 +777,12 @@ trench_knife_hc_modify_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
 
 blade_init() {
   level.zombiemeleeweapon["zom_dlc2_4_zm"] = 1;
-  level._id_62B3["zom_dlc2_4_zm"] = ::blade_modify_damage;
+  level.modifyweapondamage["zom_dlc2_4_zm"] = ::blade_modify_damage;
   level.meleeaoeweapons["blade_aoe_zm"] = 1;
-  level._id_2FE9["zom_dlc2_4_zm"] = 1;
-  level._id_4D3D["zom_dlc2_4_zm"] = 1;
-  level._id_2FE9["blade_aoe_zm"] = 1;
-  level._id_4D3D["blade_aoe_zm"] = 1;
+  level.dismembermentignorelocation["zom_dlc2_4_zm"] = 1;
+  level.highdamageweapons["zom_dlc2_4_zm"] = 1;
+  level.dismembermentignorelocation["blade_aoe_zm"] = 1;
+  level.highdamageweapons["blade_aoe_zm"] = 1;
   level.zerorewardweapons["blade_aoe_zm"] = 1;
   var_0 = [];
   var_0[16]["noGib"] = 1;
@@ -821,7 +821,7 @@ blade_lost() {
 }
 
 blade_modify_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(var_1 _meth_8661()) {
+  if(var_1 setdefaultdof()) {
     return 0;
   }
 
@@ -841,9 +841,9 @@ blade_melee_cone(var_0) {
     thread delayed_blade_hit(var_1[var_2], var_2);
   }
 
-  var_3 = common_scripts\utility::_id_44F5("zmb_raven_sword_barb_burst");
+  var_3 = common_scripts\utility::getfx("zmb_raven_sword_barb_burst");
   playFX(var_3, self.origin + (0, 0, 50), anglesToForward(self.angles));
-  _id_0378::_id_8D74("zmb_sword_aoe", self.origin);
+  _id_0378::snd_message("zmb_sword_aoe", self.origin);
 }
 
 delayed_blade_hit(var_0, var_1) {
@@ -853,7 +853,7 @@ delayed_blade_hit(var_0, var_1) {
     waitframe();
   }
 
-  _id_0378::_id_8D74("zmb_sword_melee_hit_delayed", var_0.origin);
+  _id_0378::snd_message("zmb_sword_melee_hit_delayed", var_0.origin);
   var_0 dodamage(level.bladecleavedamage, self getEye(), self, self, "MOD_MELEE", "blade_aoe_zm", "none");
   _playFXOnTag(level._effect["zmb_giestkraft_impact"], var_0, "J_Spine4");
 
@@ -879,5 +879,5 @@ playzombiekilledbeamexplodefx() {
     var_0 = self.origin;
   }
 
-  playFX(common_scripts\utility::_id_44F5("zmb_blood_blast"), var_0);
+  playFX(common_scripts\utility::getfx("zmb_blood_blast"), var_0);
 }

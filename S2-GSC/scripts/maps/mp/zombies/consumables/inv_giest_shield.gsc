@@ -9,7 +9,7 @@ _id_52A4() {
   common_scripts\utility::_id_092C("tesla blood shock", "vfx/zombie/abilities_perks/zmb_blood_zmb_stun");
   level.giest_bubble_voulnerable_zombies = ["zombie_generic", "zombie_berserker", "zombie_heavy", "zombie_exploder", "zombie_sizzler", "zombie_assassin"];
 
-  if(!(maps\mp\_utility::_id_4571() == "mp_zombie_island")) {
+  if(!(maps\mp\_utility::getmapname() == "mp_zombie_island")) {
     level thread maps\mp\zombies\weapons\_zombie_aoe_grenade::init_pommel_aud();
   }
 
@@ -45,8 +45,8 @@ spawn_a_giest_bubble_shield(var_0, var_1) {
   var_3.origin = var_0;
   var_4 = _id_0547::_id_8FBA(var_3, "zmb_player_consumable_bubble");
   _triggerfx(var_4);
-  _id_0378::_id_8D74("zmb_pomel_grenade_detonate", var_3.origin);
-  _id_0378::_id_8D74("zmb_pomel_grenade_force_field", var_3.origin);
+  _id_0378::snd_message("zmb_pomel_grenade_detonate", var_3.origin);
+  _id_0378::snd_message("zmb_pomel_grenade_force_field", var_3.origin);
   var_5 = gettime();
   var_6 = 15;
 
@@ -80,13 +80,13 @@ spawn_a_giest_bubble_shield(var_0, var_1) {
     foreach(var_12 in level.players) {
       if(distance(var_3.origin, var_12.origin) > 120 && !common_scripts\utility::_id_562E(var_12.isgiestshieldaffected)) {
         var_12.isgiestshieldaffected = 1;
-        var_12 _id_0378::_id_8D74("aud_strt_asn_camo_blur");
+        var_12 _id_0378::snd_message("aud_strt_asn_camo_blur");
         continue;
       }
 
       if(common_scripts\utility::_id_562E(var_12.isgiestshieldaffected)) {
         var_12.isgiestshieldaffected = 1;
-        var_12 _id_0378::_id_8D74("aud_stp_asn_camo_blur");
+        var_12 _id_0378::snd_message("aud_stp_asn_camo_blur");
       }
     }
 
@@ -104,7 +104,7 @@ spawn_a_giest_bubble_shield(var_0, var_1) {
 
   var_4 delete();
   playFX(level._effect["force_zombie_bubble_pop"], var_3.origin);
-  _id_0378::_id_8D74("zmb_pomel_grenade_final_explosion", var_3.origin);
+  _id_0378::snd_message("zmb_pomel_grenade_final_explosion", var_3.origin);
 }
 
 loop_spark_fx() {
@@ -123,7 +123,7 @@ loop_spark_fx() {
 }
 
 play_shield_zombie_shock_vfx() {
-  _playFXOnTag(common_scripts\utility::_id_44F5("tesla blood shock"), self, "j_spine4");
+  _playFXOnTag(common_scripts\utility::getfx("tesla blood shock"), self, "j_spine4");
 }
 
 death_shock_launch(var_0) {
@@ -141,8 +141,8 @@ death_shock_launch(var_0) {
 
     if(gettime() - var_2.geistshieldattacker.lastexplodetime > 100) {
       var_2.geistshieldattacker.lastexplodetime = gettime();
-      playFX(common_scripts\utility::_id_44F5("tesla_blood_explosion"), var_2.giest_shield_origin);
-      var_2 _id_0378::_id_8D74("aud_ww_blood_explode");
+      playFX(common_scripts\utility::getfx("tesla_blood_explosion"), var_2.giest_shield_origin);
+      var_2 _id_0378::snd_message("aud_ww_blood_explode");
     }
   }
 

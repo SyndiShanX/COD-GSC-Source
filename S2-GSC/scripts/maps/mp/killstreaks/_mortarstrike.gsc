@@ -4,14 +4,14 @@
 *********************************************************/
 
 init() {
-  level._id_80B7["mortar_strike"] = 300;
+  level.visionsetnakedforplayer_lerp["mortar_strike"] = 300;
   level._id_80B8["mortar_strike"] = 100;
   level.setwhizbyprobabilities["mortar_strike"] = 0;
-  level._id_80B9["mortar_strike"] = 1.0;
+  level.returnplayercontrol["mortar_strike"] = 1.0;
   level.makeglobalunusable["mortar_strike"] = 4.0;
-  level._id_5A61["mortar_strike"] = ::_id_9E34;
-  level._id_5A7D["mortar_strike_projectile_mp"] = "mortar_strike";
-  level._id_5A7D["mortar_strike_projectile_axis_mp"] = "mortar_strike";
+  level.killstreakfuncs["mortar_strike"] = ::_id_9E34;
+  level.killstreakwieldweapons["mortar_strike_projectile_mp"] = "mortar_strike";
+  level.killstreakwieldweapons["mortar_strike_projectile_axis_mp"] = "mortar_strike";
 }
 
 _id_9E34(var_0) {
@@ -45,8 +45,8 @@ _id_63B6(var_0, var_1) {
 _id_63B5() {
   self endon("death");
   self endon("disconnect");
-  common_scripts\utility::_id_A70A("stop_location_selection", "mortars_empty");
-  self switchtoweapon(common_scripts\utility::_id_4550());
+  common_scripts\utility::waittill_any("stop_location_selection", "mortars_empty");
+  self switchtoweapon(common_scripts\utility::getlastweapon());
   maps\mp\_utility::freezecontrolswrapper(0);
 }
 
@@ -85,7 +85,7 @@ _id_3C16(var_0, var_1, var_2) {
   var_9 = (32, -8, 16);
   var_10 = self.origin + _rotatevector(var_9, self.angles);
   var_11 = _func_1B6(_id_052A::_id_458D(var_2, self.team), var_8["position"] + (0, 0, _id_052A::_id_4578()), var_8["position"], 1.5, _id_052A::_id_4578(), self);
-  var_11 _id_0378::_id_8D74("ks_projectile_fired", var_2);
+  var_11 _id_0378::snd_message("ks_projectile_fired", var_2);
   var_11 thread _id_052A::_id_7EBD(var_2, var_3, var_4);
   var_11 thread _id_052A::_id_624F(self);
 }

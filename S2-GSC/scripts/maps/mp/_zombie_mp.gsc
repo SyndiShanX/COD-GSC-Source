@@ -16,15 +16,15 @@ on_player_connect() {
   var_0._id_76D8 = "";
   var_0._id_76D9 = -1;
   var_0.notifiedlootservice = 0;
-  var_0._id_A9EB = [];
+  var_0.weaponstate = [];
   var_0._id_A9DF = [];
   var_0._id_AC5D = [];
   var_0.besttimetrialtimes = [];
-  var_0._id_7545 = [];
+  var_0.pointnotifylua = [];
   var_0._id_00B7 = 0;
   var_0._id_014D = 0;
   var_0._id_5F7C = 0;
-  var_0._id_9CFF = 0;
+  var_0.trapuses = 0;
   var_0.zombiepointsearned = 0;
   var_0._id_4BF7 = 0;
   var_0._id_60EC = 0;
@@ -33,7 +33,7 @@ on_player_connect() {
   var_0.equipmentused = 0;
   var_0._id_394C = 0;
   var_0._id_6882 = 0;
-  var_0._id_6881 = 0;
+  var_0.numberofbleedouts = 0;
   var_0._id_178B = 0;
   var_0._id_68A0 = 0;
   var_0._id_7D10 = 0;
@@ -44,7 +44,7 @@ on_player_connect() {
   var_0._id_7E5F = 0;
   var_0._id_598C = 0;
   var_0._id_6E48 = 0;
-  var_0._id_2AB8 = 0;
+  var_0.deathtime = 0;
   var_0._id_99F8 = 0;
   var_0._id_32CD = 0;
   var_0._id_5BF3 = 0;
@@ -149,7 +149,7 @@ zombies_init_generic() {
   var_7._id_0EAE = "mp_zombie_animclass";
   var_7._id_0879 = "mp_zombie_generic";
   var_7._id_4C12 = 1;
-  var_7._id_60E2 = 40;
+  var_7.meleedamage = 40;
   var_7._id_8302 = 65;
   var_7._id_8303 = 15;
   var_7.suppressive_fire_speed_multiplier = 0.3;
@@ -175,7 +175,7 @@ zombies_init() {
   level._id_0A41["zombie"]["onAIConnect"] = _id_0547::_id_6AB7;
   level._id_0A41["zombie"]["on_killed"] = ::_id_6BD4;
   level._id_0A41["zombie"]["on_damaged"] = ::_id_6BD1;
-  level._id_0A41["zombie"]["on_damaged_finished"] = _id_054D::_id_6BD3;
+  level._id_0A41["zombie"]["on_damaged_finished"] = _id_054D::onzombiedamagefinished;
   level._id_0A41["zombie"]["is_hit_weak_point"] = _id_054D::_id_5714;
   level._id_0A41["zombie"]["spawn"] = ::_id_6BD7;
   level._id_0A41["zombie"]["think"] = _id_0547::_id_0A58;
@@ -189,17 +189,17 @@ zombies_init() {
   _createthreatbiasgroup("zombies");
   level._id_087D = ["s2", "t7", "s1"];
   maps\mp\agents\_scripted_agent_anim_util::_id_5159("mp_zombie_generic");
-  level._id_2775 = 0;
-  level._id_2FDD = [];
-  level._id_66BF = 0;
-  level._id_37E6 = [];
-  level._id_3772 = "hostile";
+  level.crawlingzombies = 0;
+  level.dismemberedbodyparts = [];
+  level.nextdismemberedbodypartindex = 0;
+  level.entswithfx = [];
+  level.enemyteam = "hostile";
   level._id_6F43 = 0;
   _id_0542::_id_5329();
   _id_0541::main();
   _id_055A::init();
   level thread _id_055A::_id_6B3F();
-  level thread _id_4ACC();
+  level thread handlehostmigration();
   _id_055A::_id_088A();
   level._id_071D.global_threat_scalar = 1;
   level._snd_num_players_in_combat = 4;
@@ -234,13 +234,13 @@ zombies_init() {
   level._effect["crawl_dust"] = loadfx("vfx/treadfx/DLC/crawl_dust");
   level._effect["nuke_blast"] = loadfx("vfx/gameplay/mp/zombie/zombie_nuke_burst");
   level._effect["zombieSpawn"] = loadfx("vfx/unique/infected_turn_lightning_01");
-  level._id_666C = 2;
+  level.network_max_events = 2;
   level._id_ABD3 = -1000;
-  level._id_A980 = 0;
+  level.wavecounter = 0;
   level.zombiearray = [];
 }
 
-_id_4ACC() {
+handlehostmigration() {
   level endon("game_ended");
 
   for(;;) {
@@ -254,7 +254,7 @@ spawnzombiesforteam(var_0, var_1, var_2) {
     var_4 = _id_054D::_id_90BA("mp_zombie_generic", var_0, "test", 0, 0, 1, undefined, 0);
 
     if(isDefined(var_4)) {
-      playFX(common_scripts\utility::_id_44F5("zombieSpawn"), var_4.origin);
+      playFX(common_scripts\utility::getfx("zombieSpawn"), var_4.origin);
       var_4 editzombiestats();
       var_4.ispassiveexempt = 1;
       var_4 _id_0547::disableoffhandsecondaryweapons();
@@ -271,7 +271,7 @@ spawnzombiesforteam(var_0, var_1, var_2) {
 }
 
 quicksort_hardpoint_dist_compare(var_0, var_1) {
-  return _distance2dsquared(var_0.origin, level._id_AC7C.origin) < _distance2dsquared(var_1.origin, level._id_AC7C.origin);
+  return _distance2dsquared(var_0.origin, level.zone.origin) < _distance2dsquared(var_1.origin, level.zone.origin);
 }
 
 killallzombies() {
@@ -279,14 +279,14 @@ killallzombies() {
     return;
   }
   foreach(var_1 in level.zombiearray) {
-    playFX(common_scripts\utility::_id_44F5("zombieSpawn"), var_1.origin);
-    _id_0378::_id_8D74("aud_zombie_spawn", var_1.origin);
+    playFX(common_scripts\utility::getfx("zombieSpawn"), var_1.origin);
+    _id_0378::snd_message("aud_zombie_spawn", var_1.origin);
     var_1 suicide();
   }
 }
 
 editzombiestats() {
-  self._id_60E2 = 50;
+  self.meleedamage = 50;
   self.maxhealth = 175;
   self.health = int(self.maxhealth);
   var_0 = spawnStruct();
@@ -340,8 +340,8 @@ handlezombieaggro(var_0, var_1) {
     }
   }
 
-  var_2 = common_scripts\utility::_id_7897(var_2, var_1);
-  maps\mp\agents\humanoid\_humanoid_util::_id_867E(var_2[0]);
+  var_2 = common_scripts\utility::quicksort(var_2, var_1);
+  maps\mp\agents\humanoid\_humanoid_util::setfavoriteenemy(var_2[0]);
 }
 
 changezombieallegiance(var_0) {
@@ -369,10 +369,10 @@ updatezombiemovemode() {
 }
 
 _id_6BD7(var_0, var_1, var_2) {
-  _id_0547::_id_6BAA(var_0, var_1, var_2);
+  _id_0547::onspawnscriptagenthumanoid(var_0, var_1, var_2);
   self._id_220D = _id_054D::_id_6BD0;
   self._id_648E = common_scripts\utility::random(getarraykeys(level._id_087E["mp_zombie_generic"]["move_style"]));
-  _id_0378::_id_8D74("onZombieSpawn");
+  _id_0378::snd_message("onZombieSpawn");
   thread _id_0547::_id_4A58();
   var_3 = _id_0547::_id_AC4B(self.origin, "spawn");
   var_3 _id_0547::_id_AC48("agent_type", self._id_0A4B);
@@ -396,12 +396,12 @@ _id_6BD1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     var_2 = 666;
   }
 
-  maps\mp\agents\_agents::_id_6A73(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+  maps\mp\agents\_agents::on_agent_generic_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
 
 _id_6BD4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self playSound("zvox_gen_death1");
-  var_1 _id_04C7::_id_A102("killshot_nosound");
+  var_1 _id_04C7::updatedamagefeedback("killshot_nosound");
   level.zombiearray = common_scripts\utility::_id_0F93(level.zombiearray, self);
   _id_0547::_id_6B9E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
   _id_054D::_id_90BC(self._id_08D9, var_3, var_4);
@@ -414,14 +414,14 @@ _id_6BD4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_1.pers["zombieKills"]++;
 
     if(level.gametype == "undead") {
-      if(var_1 istouching(level._id_AC7C._id_9D5E)) {
-        _id_04D2::_id_47BD(var_1.team, 1, 1);
-        level thread maps\mp\gametypes\_rank::_id_1457("undead_zombie_killed_hp", var_1, var_4, undefined, var_3);
+      if(var_1 istouching(level.zone.trig)) {
+        _id_04D2::giveteamscoreforobjective(var_1.team, 1, 1);
+        level thread maps\mp\gametypes\_rank::awardgameevent("undead_zombie_killed_hp", var_1, var_4, undefined, var_3);
       } else
-        level thread maps\mp\gametypes\_rank::_id_1457("undead_zombie_killed", var_1, var_4, undefined, var_3);
+        level thread maps\mp\gametypes\_rank::awardgameevent("undead_zombie_killed", var_1, var_4, undefined, var_3);
 
       level maps\mp\gametypes\undead::attemptdropteslagun(self.origin);
-      var_1 maps\mp\_utility::_id_867C(var_1.pers["zombieKills"]);
+      var_1 maps\mp\_utility::setextrascore1(var_1.pers["zombieKills"]);
     }
 
     var_1 _id_0468::ae_sendzombiekillevent(var_4, var_3);

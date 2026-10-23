@@ -12,30 +12,30 @@ _id_52F4(var_0) {
   level._effect["care_package_allies_beacon"] = loadfx("vfx/lights/usa_carepackage_beacon");
   level._effect["care_package_axis_beacon"] = loadfx("vfx/lights/ger_carepackage_beacon");
   level._effect["care_package_landed"] = loadfx("vfx/smoke/care_package_landed");
-  level._id_5A7D["killstreak_carepackage_grenade_mp"] = "carepackage";
-  level._id_5A7D["killstreak_carepackage_grenade_axis_mp"] = "carepackage";
-  level._id_5A7D["killstreak_emergency_carepackage_grenade_mp"] = "emergency_carepackage";
-  level._id_5A7D["killstreak_emergency_carepackage_grenade_axis_mp"] = "emergency_carepackage";
-  level._id_5A7D["carepackage_crate_mp"] = "carepackage";
-  level._id_80B7["carepackage"] = 0;
+  level.killstreakwieldweapons["killstreak_carepackage_grenade_mp"] = "carepackage";
+  level.killstreakwieldweapons["killstreak_carepackage_grenade_axis_mp"] = "carepackage";
+  level.killstreakwieldweapons["killstreak_emergency_carepackage_grenade_mp"] = "emergency_carepackage";
+  level.killstreakwieldweapons["killstreak_emergency_carepackage_grenade_axis_mp"] = "emergency_carepackage";
+  level.killstreakwieldweapons["carepackage_crate_mp"] = "carepackage";
+  level.visionsetnakedforplayer_lerp["carepackage"] = 0;
   level._id_80B8["carepackage"] = 0;
   level.setwhizbyprobabilities["carepackage"] = 0;
-  level._id_80B9["carepackage"] = 1;
+  level.returnplayercontrol["carepackage"] = 1;
   level.makeglobalunusable["carepackage"] = 0;
-  level._id_80B7["raid_carepackage"] = 0;
+  level.visionsetnakedforplayer_lerp["raid_carepackage"] = 0;
   level._id_80B8["raid_carepackage"] = 0;
   level.setwhizbyprobabilities["raid_carepackage"] = 0;
-  level._id_80B9["raid_carepackage"] = 1;
+  level.returnplayercontrol["raid_carepackage"] = 1;
   level.makeglobalunusable["raid_carepackage"] = 0;
-  level._id_80B7["emergency_carepackage"] = 0;
+  level.visionsetnakedforplayer_lerp["emergency_carepackage"] = 0;
   level._id_80B8["emergency_carepackage"] = 0;
   level.setwhizbyprobabilities["emergency_carepackage"] = 0;
-  level._id_80B9["emergency_carepackage"] = 1;
+  level.returnplayercontrol["emergency_carepackage"] = 1;
   level.makeglobalunusable["emergency_carepackage"] = 0;
-  level._id_80B7["zm_carepackage"] = 0;
+  level.visionsetnakedforplayer_lerp["zm_carepackage"] = 0;
   level._id_80B8["zm_carepackage"] = 0;
   level.setwhizbyprobabilities["zm_carepackage"] = 0;
-  level._id_80B9["zm_carepackage"] = 1;
+  level.returnplayercontrol["zm_carepackage"] = 1;
   level.makeglobalunusable["zm_carepackage"] = 0;
   _id_8A0E();
 
@@ -49,7 +49,7 @@ _id_52F4(var_0) {
 }
 
 _id_27D4() {
-  level._id_275F = [];
+  level.cratetypes = [];
   _id_09A9("uav", 120, "lowEndStreak", &"MP_UAV_PICKUP");
   _id_09A9("counter_uav", 105, "lowEndStreak", &"MP_COUNTER_UAV_PICKUP");
   _id_09A9("fighter_strike", 100, "lowEndStreak", &"MP_FIGHTER_STRIKE_PICKUP");
@@ -90,7 +90,7 @@ _id_27D5(var_0) {
 _id_4019() {
   level._id_274B["all"] = 0;
 
-  foreach(var_1 in level._id_275F) {
+  foreach(var_1 in level.cratetypes) {
     var_2 = var_1._id_944E;
     var_3 = var_1._id_9451;
 
@@ -99,9 +99,9 @@ _id_4019() {
     }
 
     level._id_274B[var_3] = level._id_274B[var_3] + var_1._id_7A8F;
-    level._id_275F[var_2]._id_9452 = level._id_274B[var_3];
+    level.cratetypes[var_2]._id_9452 = level._id_274B[var_3];
     level._id_274B["all"] = level._id_274B["all"] + var_1._id_7A8F;
-    level._id_275F[var_2]._id_0C36 = level._id_274B["all"];
+    level.cratetypes[var_2]._id_0C36 = level._id_274B["all"];
   }
 }
 
@@ -109,12 +109,12 @@ _id_09A9(var_0, var_1, var_2, var_3) {
   if(getdvarint("scorestreak_enabled_" + var_0) == 0) {
     return;
   }
-  level._id_275F[var_0] = spawnStruct();
-  level._id_275F[var_0]._id_944E = var_0;
-  level._id_275F[var_0]._id_9451 = var_2;
-  level._id_275F[var_0]._id_7A8F = var_1;
-  level._id_275F[var_0]._id_0C36 = var_1;
-  level._id_275F[var_0]._id_9452 = var_1;
+  level.cratetypes[var_0] = spawnStruct();
+  level.cratetypes[var_0]._id_944E = var_0;
+  level.cratetypes[var_0]._id_9451 = var_2;
+  level.cratetypes[var_0]._id_7A8F = var_1;
+  level.cratetypes[var_0]._id_0C36 = var_1;
+  level.cratetypes[var_0]._id_9452 = var_1;
 
   if(isDefined(var_3)) {
     game["strings"][var_0 + "_hint"] = var_3;
@@ -130,7 +130,7 @@ _id_8A0E() {
   level._id_1FFC = _getEnt(var_0[0].target, "targetname");
 
   foreach(var_2 in var_0) {
-    var_2 _id_2D30(0, 0, 0);
+    var_2 deletecrate(0, 0, 0);
   }
 }
 
@@ -145,7 +145,7 @@ _id_464D(var_0, var_1) {
     while(!isDefined(var_3) || common_scripts\utility::_id_0F79(var_1, var_3)) {
       var_4 = randomint(level._id_274B[var_0]);
 
-      foreach(var_6 in level._id_275F) {
+      foreach(var_6 in level.cratetypes) {
         if(var_6._id_9451 != var_0) {
           continue;
         }
@@ -159,7 +159,7 @@ _id_464D(var_0, var_1) {
   } else {
     var_4 = randomint(level._id_274B["all"]);
 
-    foreach(var_6 in level._id_275F) {
+    foreach(var_6 in level.cratetypes) {
       var_3 = var_6._id_944E;
 
       if(var_6._id_0C36 > var_4) {
@@ -187,7 +187,7 @@ _id_7032(var_0, var_1, var_2, var_3, var_4) {
   var_6 = [];
 
   for(var_7 = 0; var_7 < _id_45BE(var_2); var_7++) {
-    var_8 = _id_3493(var_0, var_1, _id_448E(var_2, var_5[var_7]), var_2, var_6, var_3, var_4);
+    var_8 = dropcarepackage(var_0, var_1, _id_448E(var_2, var_5[var_7]), var_2, var_6, var_3, var_4);
     var_6[var_6.size] = var_8;
 
     if(var_8 == "uav") {
@@ -200,7 +200,7 @@ _id_7032(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-_id_3493(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+dropcarepackage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   _id_0527::_id_34B0(var_0.origin, var_0);
   var_7 = var_0.origin + (_randomintrange(-3, 3), _randomfloatrange(-3, 3), -5);
   return _id_4AAE(var_1, var_7, var_3, var_2, var_4, var_5, var_6);
@@ -301,12 +301,12 @@ _id_742D(var_0) {
   self endon("grenade_info_processing");
   var_1 = self getcurrentweapon();
 
-  while(var_1 == var_0 || maps\mp\_utility::_id_568F(var_1) || maps\mp\_utility::isuseweapon(var_1)) {
+  while(var_1 == var_0 || maps\mp\_utility::isbombsiteweapon(var_1) || maps\mp\_utility::isuseweapon(var_1)) {
     self waittill("weapon_change", var_1);
   }
 
   if(maps\mp\_utility::iskillstreakweapon(var_1)) {
-    self._id_5992 = var_1;
+    self.justswitchedtokillstreakweapon = var_1;
   }
 
   self notify("carepackage_grenade_switch");
@@ -339,7 +339,7 @@ _id_8A0F(var_0, var_1, var_2, var_3, var_4) {
   level.all_drop_crates[level.all_drop_crates.size] = var_5;
 
   if(level.all_drop_crates.size > 18) {
-    level.all_drop_crates[0] _id_2D30(1, 1, 1);
+    level.all_drop_crates[0] deletecrate(1, 1, 1);
   }
 
   var_5 thread _id_2358(var_0);
@@ -370,9 +370,9 @@ _id_8A0F(var_0, var_1, var_2, var_3, var_4) {
   var_5._id_6E4A = var_6;
   var_5._id_6E4C = var_7;
 
-  if(isDefined(var_5._id_5A2C)) {
-    var_5._id_5A2C linkTo(var_6, "tag_origin", (0, 0, 250), (90, 0, 0));
-    var_5._id_5A2C._id_5A32 = gettime();
+  if(isDefined(var_5.killcament)) {
+    var_5.killcament linkTo(var_6, "tag_origin", (0, 0, 250), (90, 0, 0));
+    var_5.killcament.killcamstarttime = gettime();
   }
 
   var_6 thread _id_64B8();
@@ -395,7 +395,7 @@ _id_8A0F(var_0, var_1, var_2, var_3, var_4) {
   var_6 thread _id_63BB(var_5, var_6);
   var_7 thread _id_63BA(var_6, var_5);
   var_5 thread _id_6376(var_0);
-  var_5 thread _id_2745();
+  var_5 thread cratedetectstopphysics();
   var_5 thread _id_2752(var_2, var_0);
   var_5 thread _id_74BA();
 }
@@ -416,7 +416,7 @@ _id_2358(var_0) {
 _id_64B8() {
   self endon("death");
   self endon("detach");
-  _id_0378::_id_8D74("ks_carepackage_parachute");
+  _id_0378::snd_message("ks_carepackage_parachute");
 
   for(;;) {
     if(!isDefined(self._id_2D6A) || !self._id_2D6A) {
@@ -442,7 +442,7 @@ _id_63BA(var_0, var_1) {
       }
     }
   } else
-    common_scripts\utility::_id_A732("damage", "death");
+    common_scripts\utility::waittill_either("damage", "death");
 
   var_0 thread _id_2E45(var_1, 1);
 }
@@ -479,7 +479,7 @@ _id_2E45(var_0, var_1) {
   if(!isDefined(var_0) || !isDefined(self)) {
     return;
   }
-  if(isDefined(var_0._id_34A3) && var_0._id_34A3) {
+  if(isDefined(var_0.droppingtoground) && var_0.droppingtoground) {
     return;
   }
   self notify("detach");
@@ -488,21 +488,21 @@ _id_2E45(var_0, var_1) {
     var_0._id_6E4C delete();
   }
 
-  var_0._id_34A3 = 1;
+  var_0.droppingtoground = 1;
   self scriptmodelplayanimdeltamotion("carepackage_parachute_detach");
   wait 0.2;
 
   if(var_0.visualteam == "allies") {
-    _playFXOnTag(common_scripts\utility::_id_44F5("care_package_allies_beacon"), var_0, "TAG_FX");
+    _playFXOnTag(common_scripts\utility::getfx("care_package_allies_beacon"), var_0, "TAG_FX");
   } else {
-    _playFXOnTag(common_scripts\utility::_id_44F5("care_package_axis_beacon"), var_0, "TAG_FX");
+    _playFXOnTag(common_scripts\utility::getfx("care_package_axis_beacon"), var_0, "TAG_FX");
   }
 
   var_0 unlink();
 
-  if(isDefined(var_0._id_5A2C)) {
-    var_0._id_5A2C unlink();
-    var_0._id_5A2C thread _id_5A2E(var_0);
+  if(isDefined(var_0.killcament)) {
+    var_0.killcament unlink();
+    var_0.killcament thread _id_5A2E(var_0);
   }
 
   if(!_func_367()) {
@@ -510,7 +510,7 @@ _id_2E45(var_0, var_1) {
   }
 
   if(_func_367() && var_1) {
-    var_0 _id_2D30(1, 1, 1);
+    var_0 deletecrate(1, 1, 1);
   } else {
     var_3 = 500;
 
@@ -539,8 +539,8 @@ _id_2E45(var_0, var_1) {
 _id_74BA() {
   self endon("death");
   self waittill("physics_impact", var_0, var_1, var_2, var_3);
-  _id_0378::_id_8D74("ks_carepackage_firstImpact");
-  playFX(common_scripts\utility::_id_44F5("care_package_landed"), var_0, var_1);
+  _id_0378::snd_message("ks_carepackage_firstImpact");
+  playFX(common_scripts\utility::getfx("care_package_landed"), var_0, var_1);
 
   if(_func_367()) {
     self._id_5AFA = 1;
@@ -553,10 +553,10 @@ _id_720C() {
   self endon("physics_finished");
   self waittill("physics_impact", var_0, var_1, var_2, var_3);
   _id_0380::_id_6844("ks_carepackage_physics", undefined, self);
-  playFX(common_scripts\utility::_id_44F5("care_package_landed"), var_0, var_1);
+  playFX(common_scripts\utility::getfx("care_package_landed"), var_0, var_1);
 }
 
-_id_2745() {
+cratedetectstopphysics() {
   if(!isDefined(self)) {
     return;
   }
@@ -592,7 +592,7 @@ _id_0F30(var_0, var_1) {
   var_7 = var_5[1] * var_2;
   var_8 = -1 * var_5[1] * var_4;
   var_9 = var_5[0] * var_4;
-  self _meth_8274((var_6, var_7, var_3), (var_8, var_9, 0));
+  self script_print_fx((var_6, var_7, var_3), (var_8, var_9, 0));
 }
 
 _id_6376(var_0) {
@@ -632,14 +632,14 @@ _id_6376(var_0) {
 _id_2752(var_0, var_1) {
   self endon("death");
   self waittill("physics_finished");
-  self._id_34A3 = 0;
+  self.droppingtoground = 0;
   thread _id_5A5F(var_0);
 
   if(!_func_367()) {
     if(maps\mp\_utility::_id_585F() && isDefined(level.zombie_crate_timeout_callback)) {
       level thread[[level.zombie_crate_timeout_callback]](self);
     } else {
-      level thread _id_34B2(self);
+      level thread droptimeout(self);
     }
   }
 
@@ -647,43 +647,43 @@ _id_2752(var_0, var_1) {
 
   foreach(var_4 in var_2) {
     if(self istouching(var_4)) {
-      _id_2D30();
+      deletecrate();
       return;
     }
   }
 
   if(isDefined(self._id_0117) && _abs(self.origin[2] - self._id_0117.origin[2]) > 4000) {
-    _id_2D30();
+    deletecrate();
     return;
   }
 
   var_6 = spawnStruct();
-  var_6._id_2AA8 = ::_id_64EB;
-  var_6._id_9AC2 = ::_id_64EC;
-  thread _id_0488::_id_4A27(var_6);
+  var_6.deathoverridecallback = ::_id_64EB;
+  var_6.touchingplatformvalid = ::movingplatformtouchvalid;
+  thread _id_0488::handle_moving_platforms(var_6);
   thread _id_275D();
 }
 
 _id_64EB(var_0) {
-  _id_2D30(1, 1);
+  deletecrate(1, 1);
 }
 
-_id_64EC(var_0) {
-  return _id_1FFA(var_0) && _id_1FFB(var_0);
+movingplatformtouchvalid(var_0) {
+  return carepackageandcarepackagevalid(var_0) && _id_1FFB(var_0);
 }
 
-_id_1FFA(var_0) {
+carepackageandcarepackagevalid(var_0) {
   return !isDefined(self.targetname) || !isDefined(var_0.targetname) || self.targetname != "care_package" || var_0.targetname != "care_package";
 }
 
 _id_1FFB(var_0) {
-  return !isDefined(self.targetname) || !isDefined(var_0._id_1FFE) || self.targetname != "care_package" || !var_0._id_1FFE;
+  return !isDefined(self.targetname) || !isDefined(var_0.carepackagetouchvalid) || self.targetname != "care_package" || !var_0.carepackagetouchvalid;
 }
 
 _id_275D() {
   var_0 = _getnodesinradiussorted(self.origin, 300, 0, 300);
 
-  foreach(var_2 in _func_2D1()) {
+  foreach(var_2 in maps/_lights()) {
     if(!isalive(var_2)) {
       continue;
     }
@@ -710,8 +710,8 @@ _id_27D3(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_7 = spawn("script_model", var_2);
   var_7.angles = var_3;
-  var_7._id_28D5 = 0;
-  var_7._id_A22B = 0;
+  var_7.curprogress = 0;
+  var_7.userate = 0;
 
   if(_func_367()) {
     var_7.team = "any";
@@ -737,41 +737,41 @@ _id_27D3(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7._id_8F52 = var_5;
   var_7.targetname = "care_package";
   var_7._id_3009 = spawn("script_model", var_7.origin);
-  var_7._id_65E1 = ::_id_2D30;
+  var_7._id_65E1 = ::deletecrate;
 
   if(var_7.visualteam == "any") {
     var_7 setModel("ger_carepackage_crate");
     var_7._id_3009 setModel("ger_carepackage_crate");
-    _playFXOnTag(common_scripts\utility::_id_44F5("care_package_axis_beacon"), var_7, "TAG_FX");
+    _playFXOnTag(common_scripts\utility::getfx("care_package_axis_beacon"), var_7, "TAG_FX");
     var_7.visualteam = "axis";
   } else if(var_7.visualteam == "zm") {
     var_7 setModel("zbw_carepackage_crate");
     var_7._id_3009 setModel("zbw_carepackage_crate");
-    _playFXOnTag(common_scripts\utility::_id_44F5("care_package_axis_beacon"), var_7, "TAG_FX");
+    _playFXOnTag(common_scripts\utility::getfx("care_package_axis_beacon"), var_7, "TAG_FX");
     var_7.visualteam = "zm";
   } else {
-    var_8 = _id_0510::_id_46C6(var_7.visualteam);
+    var_8 = _id_0510::getteamcratemodel(var_7.visualteam);
     var_7 setModel(var_8);
     var_7._id_3009 setModel(var_8);
 
     if(var_7.visualteam == "axis") {
-      _playFXOnTag(common_scripts\utility::_id_44F5("care_package_axis_beacon"), var_7, "TAG_FX");
+      _playFXOnTag(common_scripts\utility::getfx("care_package_axis_beacon"), var_7, "TAG_FX");
     } else {
-      _playFXOnTag(common_scripts\utility::_id_44F5("care_package_allies_beacon"), var_7, "TAG_FX");
+      _playFXOnTag(common_scripts\utility::getfx("care_package_allies_beacon"), var_7, "TAG_FX");
     }
   }
 
   var_7._id_3009 linkTo(var_7, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_7._id_3009 notsolid();
-  var_7._id_54F5 = 0;
+  var_7.inuse = 0;
 
   if(var_4) {
     var_7 clonebrushmodeltoscriptmodel(level._id_1FFC);
   }
 
-  var_7._id_5A2C = spawn("script_model", var_7.origin + (0, 0, 250));
-  var_7._id_5A2C setscriptmoverkillcam("script_entity");
-  var_7._id_5A2C _meth_80B1();
+  var_7.killcament = spawn("script_model", var_7.origin + (0, 0, 250));
+  var_7.killcament setscriptmoverkillcam("script_entity");
+  var_7.killcament _meth_80B1();
   return var_7;
 }
 
@@ -806,23 +806,23 @@ _id_5A2E(var_0) {
   }
 }
 
-_id_275A(var_0) {
+cratesetupforuse(var_0) {
   if(_func_367()) {
     if(self.origin[2] >= 90) {
       _playFXOnTag(level._effect["care_package_hit"], self, "tag_origin");
       common_scripts\utility::_id_0F93(level._id_1FFD, self);
       _setomnvar("ui_fge_carepackages_remaining", level._id_1FFD.size);
-      _id_2D30(1, 1, 1);
+      deletecrate(1, 1, 1);
     } else {
       var_1 = spawn("trigger_radius", self.origin + (0, 0, -1), 0, 160, 128);
-      var_2 = _id_04D1::_id_2837("neutral", var_1, [self], (0, 0, 100));
+      var_2 = _id_04D1::createuseobject("neutral", var_1, [self], (0, 0, 100));
       var_2 _id_04D1::_id_0C30("enemy");
-      var_2 _id_04D1::_id_8A5A(10);
-      var_2 _id_04D1::_id_8A59(&"MP_SECURING_CRATE");
-      var_2._id_6ABC = ::_id_6AC0;
-      var_2._id_6AFA = ::_id_6AFD;
-      level._id_76FD = 200;
-      level._id_76FA = 5;
+      var_2 _id_04D1::setusetime(10);
+      var_2 _id_04D1::setusetext(&"MP_SECURING_CRATE");
+      var_2.onbeginuse = ::_id_6AC0;
+      var_2.onenduse = ::_id_6AFD;
+      level.primaryprogressbarwidth = 200;
+      level.primaryprogressbarheight = 5;
       self._id_321B = var_2;
       self hudoutlineenableforclients(level.players, 2, 0);
 
@@ -880,7 +880,7 @@ _id_275A(var_0) {
       if(!level.teambased && isDefined(self._id_0117)) {
         _objective_playerteam(var_3, self._id_0117 getentitynumber());
       } else {
-        _objective_team(var_3, level._id_6C63[self.team]);
+        _objective_team(var_3, level.otherteam[self.team]);
       }
 
       self._id_698D = var_3;
@@ -893,41 +893,41 @@ _id_275A(var_0) {
 
 _id_8A21(var_0, var_1) {
   if(self.team == "any") {
-    foreach(var_3 in level._id_985B) {
+    foreach(var_3 in level.teamnamelist) {
       if(isDefined(var_0) && _isarray(var_0)) {
-        _id_869F(var_3, var_0);
+        setheadicon_multiple(var_3, var_0);
         continue;
       }
 
-      _id_0479::_id_869E(var_3, var_0, (0, 0, 25), 14, 14, undefined, undefined, undefined, undefined, undefined, 0, "tag_weapon", var_1);
+      _id_0479::setheadicon(var_3, var_0, (0, 0, 25), 14, 14, undefined, undefined, undefined, undefined, undefined, 0, "tag_weapon", var_1);
     }
   } else {
     var_5 = self._id_944E;
 
     if(level.teambased) {
       if(isDefined(var_0) && _isarray(var_0)) {
-        _id_869F(self.team, var_0);
+        setheadicon_multiple(self.team, var_0);
       } else {
-        _id_0479::_id_869E(self.team, var_0, (0, 0, 25), 14, 14, undefined, undefined, undefined, undefined, undefined, 0, "tag_weapon", var_1);
+        _id_0479::setheadicon(self.team, var_0, (0, 0, 25), 14, 14, undefined, undefined, undefined, undefined, undefined, 0, "tag_weapon", var_1);
       }
     } else if(isDefined(self._id_0117)) {
       if(isDefined(var_0) && _isarray(var_0)) {
-        _id_869F(self._id_0117, var_0);
+        setheadicon_multiple(self._id_0117, var_0);
       } else {
-        _id_0479::_id_869E(self._id_0117, var_0, (0, 0, 25), 14, 14, undefined, undefined, undefined, undefined, undefined, 0, "tag_weapon", var_1);
+        _id_0479::setheadicon(self._id_0117, var_0, (0, 0, 25), 14, 14, undefined, undefined, undefined, undefined, undefined, 0, "tag_weapon", var_1);
       }
     }
   }
 }
 
-_id_869F(var_0, var_1) {
+setheadicon_multiple(var_0, var_1) {
   var_2 = 10;
   var_3 = 0;
-  self._id_5010 = [];
+  self.iconents = [];
 
   foreach(var_5 in var_1) {
-    self._id_5010[var_5] = common_scripts\utility::_id_8FFC();
-    self._id_5010[var_5] _id_0479::_id_869E(var_0, var_5, (0, 0, 20 + var_3 * var_2), 14, 14, undefined, undefined, undefined, undefined, "tag_weapon", 0);
+    self.iconents[var_5] = common_scripts\utility::spawn_tag_origin();
+    self.iconents[var_5] _id_0479::setheadicon(var_0, var_5, (0, 0, 20 + var_3 * var_2), 14, 14, undefined, undefined, undefined, undefined, "tag_weapon", 0);
     var_3++;
   }
 }
@@ -942,18 +942,18 @@ _id_6AC0(var_0, var_1) {
 
 _id_6AFD(var_0, var_1, var_2) {
   if(!var_2) {
-    self._id_28D5 = 0;
+    self.curprogress = 0;
     self._id_7450--;
     return;
   }
 
-  var_3 = self._id_9AC3["allies"];
+  var_3 = self.touchlist["allies"];
 
   foreach(var_5 in var_3) {
     var_5.player thread maps\mp\gametypes\_missions::processchallenge("ch_hq_aagun");
   }
 
-  self._id_A582[0] notify("captured", var_1);
+  self.visuals[0] notify("captured", var_1);
 }
 
 _id_2744() {
@@ -966,9 +966,9 @@ _id_2744() {
 }
 
 preventactionslotspam() {
-  self _meth_8309(0);
-  common_scripts\utility::_id_A716("death", "game_ended", "disconnect", "attemptCaptureEnd");
-  self _meth_8309(1);
+  self scripted_elems(0);
+  common_scripts\utility::waittill_any_return_no_endon_death("death", "game_ended", "disconnect", "attemptCaptureEnd");
+  self scripted_elems(1);
 }
 
 _id_11C3(var_0) {
@@ -978,7 +978,7 @@ _id_11C3(var_0) {
   if(!var_0 isonground() && !_id_A7A0(var_0)) {
     return;
   }
-  if(!_id_A276(var_0)) {
+  if(!validateopenconditions(var_0)) {
     return;
   }
   if(level.gametype == "infect" && isDefined(var_0._id_0179) && var_0._id_0179 == "axis") {
@@ -997,17 +997,17 @@ _id_11C3(var_0) {
       var_1 = 500;
   }
 
-  var_0._id_56A1 = 1;
+  var_0.iscapturingcrate = 1;
   var_0 thread preventactionslotspam();
   var_2 = _id_2836();
-  var_3 = var_2 _id_A213(var_0, var_1, self);
+  var_3 = var_2 useholdthink(var_0, var_1, self);
 
   if(isDefined(var_2)) {
     var_2 delete();
   }
 
   if(isDefined(var_0)) {
-    var_0._id_56A1 = 0;
+    var_0.iscapturingcrate = 0;
   }
 
   if(!var_3) {
@@ -1041,7 +1041,7 @@ _id_A7A0(var_0) {
   return 0;
 }
 
-_id_A276(var_0) {
+validateopenconditions(var_0) {
   var_1 = var_0 getcurrentprimaryweapon();
 
   if(maps\mp\_utility::_id_579B() && (issubstr(var_1, "flamethrower") || common_scripts\utility::_id_73F5(var_0) && !maps\mp\_utility::playerhaskillstreak(var_0, "basic_training_serum"))) {
@@ -1053,11 +1053,11 @@ _id_A276(var_0) {
     return 1;
   }
 
-  if(!var_0 _id_051E::_id_1F6E()) {
+  if(!var_0 _id_051E::canshufflewithkillstreakweapon()) {
     return 0;
   }
 
-  if(isDefined(var_0._id_20CC) && !var_0 _id_051E::_id_1F6E()) {
+  if(isDefined(var_0.changingweapon) && !var_0 _id_051E::canshufflewithkillstreakweapon()) {
     return 0;
   }
 
@@ -1081,7 +1081,7 @@ _id_5A5F(var_0) {
   }
 
   if(!maps\mp\_utility::_id_585F()) {
-    _id_275A(_id_051E::_id_4533(var_0));
+    cratesetupforuse(_id_051E::getkillstreakcrateicon(var_0));
   }
 
   if(isDefined(self._id_56C5) && self._id_56C5) {
@@ -1106,11 +1106,11 @@ _id_5A5F(var_0) {
     self setCursorHint("HINT_NOICON");
     self setHintString(var_2);
     self setsecondaryhintstring(&"MP_CARE_PACKAGE_PICKUP");
-    self _meth_84A6(1);
+    self set_forcedgoal(1);
 
     if(level.gametype == "infect") {
       self setsecondaryhintstring(&"INFECT_NO_CAPTURE_CRATE");
-      self _meth_84A6(1);
+      self set_forcedgoal(1);
     }
   }
 
@@ -1127,7 +1127,7 @@ _id_5A5F(var_0) {
         if(var_5._id_572A) {
           continue;
         }
-        var_5 _meth_866C(&"delete_supply_drop_countdown", 1, self);
+        var_5 setdot_radius(&"delete_supply_drop_countdown", 1, self);
       }
     } else if(maps\mp\_utility::_id_585F()) {
       if(isDefined(level.zombiecarepackageusefunc)) {
@@ -1146,14 +1146,14 @@ _id_5A5F(var_0) {
             }
           }
         } else if(!level.teambased || var_5.team != self.team) {
-          var_5 thread _id_047A::_id_4D4F(self._id_0117);
+          var_5 thread _id_047A::hijackerevent(self._id_0117);
 
           if(isDefined(level.hijackeventfunc)) {
             self[[level.hijackeventfunc]]();
           }
         } else {
           _id_0468::_id_0A1A("sharepackage", self._id_0117, undefined, undefined, undefined);
-          self._id_0117 thread _id_047A::_id_8AD6();
+          self._id_0117 thread _id_047A::sharedevent();
         }
       }
 
@@ -1172,13 +1172,13 @@ _id_5A5F(var_0) {
         }
       }
 
-      var_9 = var_5 _id_051E::_id_45A5(self._id_944E, 0);
+      var_9 = var_5 _id_051E::getnextkillstreakslotindex(self._id_944E, 0);
       var_5 thread maps\mp\gametypes\_hud_message::killstreaksplashnotify(self._id_944E, undefined, undefined, var_9, var_8);
-      var_5 thread _id_051E::_id_478D(self._id_944E, 0, 0, self._id_0117);
+      var_5 thread _id_051E::givekillstreak(self._id_944E, 0, 0, self._id_0117);
       var_5 _id_0468::_id_0A28("packageCapped");
     }
 
-    _id_2D30(1);
+    deletecrate(1);
   }
 }
 
@@ -1210,7 +1210,7 @@ _id_2750() {
 
             self setHintString(var_3);
             self settertiaryhintstring("");
-            self._id_5022 = _id_051E::_id_4533(self._id_944E);
+            self._id_5022 = _id_051E::getkillstreakcrateicon(self._id_944E);
             _id_8A21(self._id_5022);
             _id_0380::_id_6840("scavenger_pack_pickup", self._id_0117);
             return 1;
@@ -1236,7 +1236,7 @@ _id_97F9() {
   self._id_6DDF = 0;
 }
 
-_id_A213(var_0, var_1, var_2) {
+useholdthink(var_0, var_1, var_2) {
   if(isPlayer(var_0)) {
     var_0 playerlinkTo(self);
   } else {
@@ -1244,30 +1244,30 @@ _id_A213(var_0, var_1, var_2) {
   }
 
   var_0 common_scripts\utility::_id_0602();
-  thread _id_A215(var_0);
-  self._id_28D5 = 0;
-  self._id_54F5 = 1;
-  self._id_A22B = 0;
+  thread useholdthinkplayerreset(var_0);
+  self.curprogress = 0;
+  self.inuse = 1;
+  self.userate = 0;
 
   if(isPlayer(var_0)) {
-    var_0 thread _id_6F82(self, var_1, var_2);
+    var_0 thread personalusebar(self, var_1, var_2);
   }
 
-  var_3 = _id_A214(var_0, var_1);
+  var_3 = useholdthinkloop(var_0, var_1);
 
   if(!isDefined(self)) {
     return 0;
   }
 
   self notify("useHoldThinkLoopDone");
-  self._id_54F5 = 0;
-  self._id_28D5 = 0;
+  self.inuse = 0;
+  self.curprogress = 0;
   return var_3;
 }
 
-_id_A215(var_0) {
+useholdthinkplayerreset(var_0) {
   var_0 endon("death");
-  common_scripts\utility::_id_A70A("death", "captured", "useHoldThinkLoopDone");
+  common_scripts\utility::waittill_any("death", "captured", "useHoldThinkLoopDone");
 
   if(isalive(var_0)) {
     var_0 common_scripts\utility::_id_0616();
@@ -1278,29 +1278,29 @@ _id_A215(var_0) {
   }
 }
 
-_id_6F82(var_0, var_1, var_2) {
+personalusebar(var_0, var_1, var_2) {
   self endon("disconnect");
   self setclientomnvar("ui_use_bar_text", 1);
   self setclientomnvar("ui_use_bar_start_time", int(gettime()));
   var_3 = -1;
 
-  while(maps\mp\_utility::isreallyalive(self) && isDefined(var_0) && var_0._id_54F5 && !level.gameended) {
-    if(var_3 != var_0._id_A22B) {
-      if(var_0._id_28D5 > var_1) {
-        var_0._id_28D5 = var_1;
+  while(maps\mp\_utility::isreallyalive(self) && isDefined(var_0) && var_0.inuse && !level.gameended) {
+    if(var_3 != var_0.userate) {
+      if(var_0.curprogress > var_1) {
+        var_0.curprogress = var_1;
       }
 
-      if(var_0._id_A22B > 0) {
+      if(var_0.userate > 0) {
         var_4 = int(var_2.origin[0]);
         var_5 = int(var_2.origin[1]);
         var_6 = int(var_2.origin[2] + 25);
-        self _meth_85EF(&"carepackage_icon_world_position", 3, var_4, var_5, var_6);
+        self set_vision_set_player(&"carepackage_icon_world_position", 3, var_4, var_5, var_6);
         var_7 = gettime();
-        var_8 = var_0._id_28D5 / var_1;
-        var_9 = var_7 + (1 - var_8) * (var_1 / var_0._id_A22B);
+        var_8 = var_0.curprogress / var_1;
+        var_9 = var_7 + (1 - var_8) * (var_1 / var_0.userate);
         self setclientomnvar("ui_use_bar_end_time", int(var_9));
-        self setclientomnvar("ui_mp_carepackage_scorestreak", maps\mp\_utility::_id_453F(var_2._id_944E));
-        self setclientomnvar("ui_mp_carepackage_team", maps\mp\_utility::_id_46D4(var_2.team));
+        self setclientomnvar("ui_mp_carepackage_scorestreak", maps\mp\_utility::getkillstreakindex(var_2._id_944E));
+        self setclientomnvar("ui_mp_carepackage_team", maps\mp\_utility::getteamindex(var_2.team));
 
         if(isDefined(var_2._id_0117)) {
           self setclientomnvar("ui_mp_carepackage_owner", var_2._id_0117 getentitynumber());
@@ -1309,7 +1309,7 @@ _id_6F82(var_0, var_1, var_2) {
         var_2 _id_8A21(var_2._id_5022, self);
       }
 
-      var_3 = var_0._id_A22B;
+      var_3 = var_0.userate;
     }
 
     waitframe();
@@ -1322,15 +1322,15 @@ _id_6F82(var_0, var_1, var_2) {
   self setclientomnvar("ui_use_bar_end_time", 0);
 }
 
-_id_A214(var_0, var_1) {
-  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 useButtonPressed() && self._id_28D5 < var_1) {
-    self._id_28D5 = self._id_28D5 + self._id_A22B * 50;
+useholdthinkloop(var_0, var_1) {
+  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 useButtonPressed() && self.curprogress < var_1) {
+    self.curprogress = self.curprogress + self.userate * 50;
 
-    if(!self._id_A22B) {
-      self._id_A22B = 1;
+    if(!self.userate) {
+      self.userate = 1;
     }
 
-    if(self._id_28D5 >= var_1) {
+    if(self.curprogress >= var_1) {
       return maps\mp\_utility::isreallyalive(var_0);
     }
 
@@ -1342,9 +1342,9 @@ _id_A214(var_0, var_1) {
 
 _id_2836() {
   var_0 = spawn("script_origin", self.origin);
-  var_0._id_28D5 = 0;
-  var_0._id_A22B = 0;
-  var_0._id_54F5 = 0;
+  var_0.curprogress = 0;
+  var_0.userate = 0;
+  var_0.inuse = 0;
   var_0 thread _id_2D57(self);
   return var_0;
 }
@@ -1355,7 +1355,7 @@ _id_2D57(var_0) {
   self delete();
 }
 
-_id_2D30(var_0, var_1, var_2) {
+deletecrate(var_0, var_1, var_2) {
   if(!isDefined(var_0)) {
     var_0 = 1;
   }
@@ -1376,8 +1376,8 @@ _id_2D30(var_0, var_1, var_2) {
     maps\mp\_utility::_objective_delete(self._id_698D);
   }
 
-  if(isDefined(self._id_5A2C)) {
-    self._id_5A2C delete();
+  if(isDefined(self.killcament)) {
+    self.killcament delete();
   }
 
   if(isDefined(self._id_6DB1)) {
@@ -1393,11 +1393,11 @@ _id_2D30(var_0, var_1, var_2) {
   }
 
   if(var_0 && (self.visualteam == "axis" || self.visualteam == "zm")) {
-    playFX(common_scripts\utility::_id_44F5("care_package_axis_destroy"), self.origin, anglesToForward(self.angles));
+    playFX(common_scripts\utility::getfx("care_package_axis_destroy"), self.origin, anglesToForward(self.angles));
   }
 
   if(var_0 && self.visualteam == "allies") {
-    playFX(common_scripts\utility::_id_44F5("care_package_allies_destroy"), self.origin, anglesToForward(self.angles));
+    playFX(common_scripts\utility::getfx("care_package_allies_destroy"), self.origin, anglesToForward(self.angles));
   }
 
   if(var_1 && self.visualteam == "allies") {
@@ -1408,8 +1408,8 @@ _id_2D30(var_0, var_1, var_2) {
     _id_0380::_id_6842("ks_carepackage_open_axis", undefined, self.origin);
   }
 
-  if(isDefined(self._id_5010)) {
-    foreach(var_4 in self._id_5010) {
+  if(isDefined(self.iconents)) {
+    foreach(var_4 in self.iconents) {
       var_4 delete();
     }
   }
@@ -1423,26 +1423,26 @@ _id_2D30(var_0, var_1, var_2) {
       self._id_320E delete();
     }
 
-    if(isDefined(self._id_321B._id_9D65)) {
-      self._id_321B._id_9D65 delete();
+    if(isDefined(self._id_321B.trigger)) {
+      self._id_321B.trigger delete();
     }
 
-    self._id_321B _id_04D1::_id_2D58();
+    self._id_321B _id_04D1::deleteuseobject();
   }
 
   self delete();
 }
 
-_id_34B2(var_0) {
+droptimeout(var_0) {
   level endon("game_ended");
   var_0 endon("death");
   maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(90);
 
-  while(var_0._id_28D5 != 0) {
+  while(var_0.curprogress != 0) {
     wait 1;
   }
 
-  var_0 _id_2D30(1, 1);
+  var_0 deletecrate(1, 1);
 }
 
 _id_27DF(var_0, var_1) {

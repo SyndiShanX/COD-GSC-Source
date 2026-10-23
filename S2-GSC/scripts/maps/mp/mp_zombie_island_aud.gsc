@@ -7,132 +7,132 @@ main() {
   _id_5196();
   _id_0367::_id_8E3E("isla");
   _id_7BBA();
-  _id_5C22();
-  level._id_11CB.intermission_music_aliases = ["mus_intermission_dlc1"];
-  level._id_11CB.wave_cues = ["dlcx_mus_intro_assault", "dlcx_mus_wave_04", "dlcx_mus_wave_02", "dlcx_mus_wave_03", "dlcx_mus_movin", "dlcx_mus_screetchy1", "dlcx_mus_wave_01", "dlcx_mus_wave_05"];
-  level._id_11CB.pagan_tone_handle = undefined;
-  _id_0366::snd_set_mus_combat_cues_override(level._id_11CB.wave_cues);
+  launch_threads();
+  level.aud.intermission_music_aliases = ["mus_intermission_dlc1"];
+  level.aud.wave_cues = ["dlcx_mus_intro_assault", "dlcx_mus_wave_04", "dlcx_mus_wave_02", "dlcx_mus_wave_03", "dlcx_mus_movin", "dlcx_mus_screetchy1", "dlcx_mus_wave_01", "dlcx_mus_wave_05"];
+  level.aud.pagan_tone_handle = undefined;
+  _id_0366::snd_set_mus_combat_cues_override(level.aud.wave_cues);
   _id_0366::snd_zmb_set_start_intermission_music_override_callback(::island_start_intermission_music_override_callback);
 }
 
 island_start_intermission_music_override_callback() {
-  var_0 = level._id_11CB.intermission_music_aliases[randomint(level._id_11CB.intermission_music_aliases.size)];
+  var_0 = level.aud.intermission_music_aliases[randomint(level.aud.intermission_music_aliases.size)];
   var_1 = 3.0;
   var_2 = 5.0;
   _id_0366::_id_8E31(var_0, var_1, var_2);
 }
 
 _id_7BBA() {
-  _id_0378::_id_8DC7("player_connect_map", ::_id_7248);
-  _id_0378::_id_8DC7("player_spawned", ::_id_7330);
-  _id_0378::_id_8DC7("wave_begin", ::_id_A979);
-  _id_0378::_id_8DC7("wave_end", ::_id_A97A);
-  _id_0378::_id_8DC7("begin_intro_assault", ::begin_intro_assault);
-  _id_0378::_id_8DC7("end_intro_assault", ::end_intro_assault);
-  _id_0378::_id_8DC7("aud_fog_rolling_in", ::aud_fog_rolling_in);
-  _id_0378::_id_8DC7("aud_fog_rolling_out", ::aud_fog_rolling_out);
-  _id_0378::_id_8DC7("aud_fog_settled", ::snd_zmb_fog_assassin_vox);
-  _id_0378::_id_8DC7("aud_fog_lifted", ::aud_fog_lifted);
-  _id_0378::_id_8DC7("aud_scare_off_crows", ::aud_scare_off_crows);
-  _id_0378::_id_8DC7("mine_cart_lever", ::mine_cart_lever);
-  _id_0378::_id_8DC7("mine_cart_gate_opening", ::mine_cart_gate_opening);
-  _id_0378::_id_8DC7("mine_cart_gate_closing", ::mine_cart_gate_closing);
-  _id_0378::_id_8DC7("mine_cart_transportation", ::mine_cart_transportation);
-  _id_0378::_id_8DC7("sub_pen_floor_trap_warning_fire", ::sub_pen_floor_trap_warning_fire);
-  _id_0378::_id_8DC7("sub_pen_floor_trap_pyro_flame", ::sub_pen_floor_trap_pyro_flame);
-  _id_0378::_id_8DC7("sub_pen_floor_trap_decaying_fire", ::sub_pen_floor_trap_decaying_fire);
-  _id_0378::_id_8DC7("sub_pen_prop_trap_start", ::sub_pen_prop_trap_start);
-  _id_0378::_id_8DC7("sub_pen_prop_trap_extend", ::sub_pen_prop_trap_extend);
-  _id_0378::_id_8DC7("sub_pen_prop_trap_stop", ::sub_pen_prop_trap_stop);
-  _id_0378::_id_8DC7("sub_pen_prop_trap_hit", ::sub_pen_prop_trap_hit);
-  _id_0378::_id_8DC7("sub_pen_prop_trap_player_hit", ::sub_pen_prop_trap_player_hit);
-  _id_0378::_id_8DC7("gas_valve_state", ::_id_3FE4);
-  _id_0378::_id_8DC7("zombie_soul_suck", ::_id_ABF8);
-  _id_0378::_id_8DC7("zombie_soul_suck_threshold", ::_id_ABF9);
-  _id_0378::_id_8DC7("start_corpse_gate_alarm", ::start_corpse_gate_alarm);
-  _id_0378::_id_8DC7("stop_corpse_gate_alarm", ::stop_corpse_gate_alarm);
-  _id_0378::_id_8DC7("aud_corpse_gate_open", ::corpse_gate_open);
-  _id_0378::_id_8DC7("aud_isla_fireman_intro", ::isla_fireman_intro);
-  _id_0378::_id_8DC7("fire_panel_turn_off", ::fire_panel_turn_off);
-  _id_0378::_id_8DC7("fire_panel_turn_on", ::fire_panel_turn_on);
-  _id_0378::_id_8DC7("aud_plane_mission_start", ::plane_mission_start);
-  _id_0378::_id_8DC7("aud_plane_spawn", ::plane_spawn);
-  _id_0378::_id_8DC7("aud_plane_firing", ::plane_firing);
-  _id_0378::_id_8DC7("aud_plane_damage_player", ::plane_damage_player);
-  _id_0378::_id_8DC7("aud_plane_tailspin", ::plane_tailspin);
-  _id_0378::_id_8DC7("aud_plane_explode", ::plane_explode);
-  _id_0378::_id_8DC7("aud_last_plane_spawn", ::last_plane_spawn);
-  _id_0378::_id_8DC7("aud_last_plane_crash", ::last_plane_crash);
-  _id_0378::_id_8DC7("dist_artillery_shot", ::dist_artillery_shot);
-  _id_0378::_id_8DC7("dist_ship_artillery_inc", ::dist_ship_artillery_inc);
-  _id_0378::_id_8DC7("dist_ship_artillery_impact", ::dist_ship_artillery_impact);
-  _id_0378::_id_8DC7("distant_ship_explode", ::distant_ship_explode);
-  _id_0378::_id_8DC7("distant_water_explode", ::distant_water_explode);
-  _id_0378::_id_8DC7("artillery_battery_placed", ::artillery_battery_placed);
-  _id_0378::_id_8DC7("artillery_valve_vert_turn", ::artillery_valve_vert_turn);
-  _id_0378::_id_8DC7("artillery_valve_hor_turn", ::artillery_valve_hor_turn);
-  _id_0378::_id_8DC7("artillery_valve_vert_no_turn", ::artillery_valve_vert_no_turn);
-  _id_0378::_id_8DC7("artillery_valve_hor_no_turn", ::artillery_valve_hor_no_turn);
-  _id_0378::_id_8DC7("artillery_power_filled", ::artillery_power_filled);
-  _id_0378::_id_8DC7("artillery_power_depleted", ::artillery_power_depleted);
-  _id_0378::_id_8DC7("artillery_cannon_shot", ::artillery_cannon_shot);
-  _id_0378::_id_8DC7("flak_gun_gate_up", ::flak_gun_gate_up);
-  _id_0378::_id_8DC7("flak_gun_gate_down", ::flak_gun_gate_down);
-  _id_0378::_id_8DC7("artillery_bunker_trap_spikes", ::artillery_bunker_trap_spikes);
-  _id_0378::_id_8DC7("radio_tower_artillery_shot", ::radio_tower_artillery_shot);
-  _id_0378::_id_8DC7("radio_tower_incoming_mortar", ::radio_tower_incoming_mortar);
-  _id_0378::_id_8DC7("radio_tower_mortar_impact", ::radio_tower_mortar_impact);
-  _id_0378::_id_8DC7("radio_tower_explosion", ::radio_tower_explosion);
-  _id_0378::_id_8DC7("pap_schell_insert", ::pap_schell_insert);
-  _id_0378::_id_8DC7("pap_schell_insert_final", ::pap_schell_insert_final);
-  _id_0378::_id_8DC7("pap_elevator_move", ::pap_elevator_move);
-  _id_0378::_id_8DC7("pap_elevator_door_open", ::pap_elevator_door_open);
-  _id_0378::_id_8DC7("pagen_door_place_stone", ::pagen_door_place_stone);
-  _id_0378::_id_8DC7("pagen_door_opened", ::pagen_door_opened);
-  _id_0378::_id_8DC7("pagen_door_closing", ::pagen_door_closing);
-  _id_0378::_id_8DC7("pagan_head_place", ::pagan_head_place);
-  _id_0378::_id_8DC7("pagen_room_flush_begin", ::pagen_room_flush_begin);
-  _id_0378::_id_8DC7("pagen_room_flush_end", ::pagen_room_flush_end);
-  _id_0378::_id_8DC7("assassin_hc_cry", ::assassin_hc_cry);
-  _id_0378::_id_8DC7("corpse_gate_talk", ::corpse_gate_talk);
-  _id_0378::_id_8DC7("ripsaw_collect_gun_chassis", ::ripsaw_collect_gun_chassis);
-  _id_0378::_id_8DC7("ripsaw_collect_saw_blade", ::ripsaw_collect_saw_blade);
-  _id_0378::_id_8DC7("ripsaw_insert_chassis", ::ripsaw_insert_chassis);
-  _id_0378::_id_8DC7("ripsaw_insert_sawblade", ::ripsaw_insert_sawblade);
-  _id_0378::_id_8DC7("ripsaw_insert_charged_spine", ::ripsaw_insert_charged_spine);
-  _id_0378::_id_8DC7("ripsaw_weapon_build_infusion", ::ripsaw_weapon_build_infusion);
-  _id_0378::_id_8DC7("ripsaw_spine_cut", _id_0366::ripsaw_spine_cut);
-  _id_0378::_id_8DC7("ripsaw_fatal_melee", _id_0366::ripsaw_fatal_melee);
-  _id_0378::_id_8DC7("ripsaw_charge", ::ripsaw_charge);
-  _id_0378::_id_8DC7("charged_ripsaw_hit_pest", ::charged_ripsaw_hit_pest);
-  _id_0378::_id_8DC7("aud_ripsaw_start_spinning", _id_0366::ripsaw_start_spinning);
-  _id_0378::_id_8DC7("aud_ripsaw_stop_spinning", _id_0366::ripsaw_stop_spinning);
-  _id_0378::_id_8DC7("pommel_earthquake", ::pagan_room_earthquake);
-  _id_0378::_id_8DC7("pommel_earthquake_stop", ::pagan_room_earthquake_stop);
-  _id_0378::_id_8DC7("pommel_skull_destroyed", ::pommel_skull_destroyed);
-  _id_0378::_id_8DC7("pommel_pickup", ::pommel_pickup);
-  _id_0378::_id_8DC7("freezer_crane_retrieving", ::freezer_crane_retrieving);
-  _id_0378::_id_8DC7("nazi_head_roll", ::nazi_head_roll);
-  _id_0378::_id_8DC7("radio_part_drops", ::radio_part_drops);
-  _id_0378::_id_8DC7("radio_parts_assemble", ::radio_parts_assemble);
-  _id_0378::_id_8DC7("js_corpse_becomes_zombie", ::js_corpse_becomes_zombie);
-  _id_0378::_id_8DC7("js_assassin_landing", ::js_assassin_landing);
-  _id_0378::_id_8DC7("zmb_pomel_grenade_cook", ::zmb_pomel_grenade_cook);
-  _id_0378::_id_8DC7("zmb_pomel_grenade_detonate", ::zmb_pomel_grenade_detonate);
-  _id_0378::_id_8DC7("zmb_pomel_grenade_force_field", ::zmb_pomel_grenade_force_field);
-  _id_0378::_id_8DC7("zmb_pomel_grenade_final_explosion", ::zmb_pomel_grenade_final_explosion);
-  _id_0378::_id_8DC7("zmb_pomel_grenade_float", ::zmb_pomel_grenade_float);
-  _id_0378::_id_8DC7("zmb_pomel_grenade_retrieval", ::zmb_pomel_grenade_retrieval);
-  _id_0378::_id_8DC7("aud_ibeam_squeak", ::ibeam_squeak);
-  _id_0378::_id_8DC7("aud_ibeam_complete", ::ibeam_complete);
+  _id_0378::snd_register_message("player_connect_map", ::_id_7248);
+  _id_0378::snd_register_message("player_spawned", ::_id_7330);
+  _id_0378::snd_register_message("wave_begin", ::_id_A979);
+  _id_0378::snd_register_message("wave_end", ::_id_A97A);
+  _id_0378::snd_register_message("begin_intro_assault", ::begin_intro_assault);
+  _id_0378::snd_register_message("end_intro_assault", ::end_intro_assault);
+  _id_0378::snd_register_message("aud_fog_rolling_in", ::aud_fog_rolling_in);
+  _id_0378::snd_register_message("aud_fog_rolling_out", ::aud_fog_rolling_out);
+  _id_0378::snd_register_message("aud_fog_settled", ::snd_zmb_fog_assassin_vox);
+  _id_0378::snd_register_message("aud_fog_lifted", ::aud_fog_lifted);
+  _id_0378::snd_register_message("aud_scare_off_crows", ::aud_scare_off_crows);
+  _id_0378::snd_register_message("mine_cart_lever", ::mine_cart_lever);
+  _id_0378::snd_register_message("mine_cart_gate_opening", ::mine_cart_gate_opening);
+  _id_0378::snd_register_message("mine_cart_gate_closing", ::mine_cart_gate_closing);
+  _id_0378::snd_register_message("mine_cart_transportation", ::mine_cart_transportation);
+  _id_0378::snd_register_message("sub_pen_floor_trap_warning_fire", ::sub_pen_floor_trap_warning_fire);
+  _id_0378::snd_register_message("sub_pen_floor_trap_pyro_flame", ::sub_pen_floor_trap_pyro_flame);
+  _id_0378::snd_register_message("sub_pen_floor_trap_decaying_fire", ::sub_pen_floor_trap_decaying_fire);
+  _id_0378::snd_register_message("sub_pen_prop_trap_start", ::sub_pen_prop_trap_start);
+  _id_0378::snd_register_message("sub_pen_prop_trap_extend", ::sub_pen_prop_trap_extend);
+  _id_0378::snd_register_message("sub_pen_prop_trap_stop", ::sub_pen_prop_trap_stop);
+  _id_0378::snd_register_message("sub_pen_prop_trap_hit", ::sub_pen_prop_trap_hit);
+  _id_0378::snd_register_message("sub_pen_prop_trap_player_hit", ::sub_pen_prop_trap_player_hit);
+  _id_0378::snd_register_message("gas_valve_state", ::_id_3FE4);
+  _id_0378::snd_register_message("zombie_soul_suck", ::_id_ABF8);
+  _id_0378::snd_register_message("zombie_soul_suck_threshold", ::_id_ABF9);
+  _id_0378::snd_register_message("start_corpse_gate_alarm", ::start_corpse_gate_alarm);
+  _id_0378::snd_register_message("stop_corpse_gate_alarm", ::stop_corpse_gate_alarm);
+  _id_0378::snd_register_message("aud_corpse_gate_open", ::corpse_gate_open);
+  _id_0378::snd_register_message("aud_isla_fireman_intro", ::isla_fireman_intro);
+  _id_0378::snd_register_message("fire_panel_turn_off", ::fire_panel_turn_off);
+  _id_0378::snd_register_message("fire_panel_turn_on", ::fire_panel_turn_on);
+  _id_0378::snd_register_message("aud_plane_mission_start", ::plane_mission_start);
+  _id_0378::snd_register_message("aud_plane_spawn", ::plane_spawn);
+  _id_0378::snd_register_message("aud_plane_firing", ::plane_firing);
+  _id_0378::snd_register_message("aud_plane_damage_player", ::plane_damage_player);
+  _id_0378::snd_register_message("aud_plane_tailspin", ::plane_tailspin);
+  _id_0378::snd_register_message("aud_plane_explode", ::plane_explode);
+  _id_0378::snd_register_message("aud_last_plane_spawn", ::last_plane_spawn);
+  _id_0378::snd_register_message("aud_last_plane_crash", ::last_plane_crash);
+  _id_0378::snd_register_message("dist_artillery_shot", ::dist_artillery_shot);
+  _id_0378::snd_register_message("dist_ship_artillery_inc", ::dist_ship_artillery_inc);
+  _id_0378::snd_register_message("dist_ship_artillery_impact", ::dist_ship_artillery_impact);
+  _id_0378::snd_register_message("distant_ship_explode", ::distant_ship_explode);
+  _id_0378::snd_register_message("distant_water_explode", ::distant_water_explode);
+  _id_0378::snd_register_message("artillery_battery_placed", ::artillery_battery_placed);
+  _id_0378::snd_register_message("artillery_valve_vert_turn", ::artillery_valve_vert_turn);
+  _id_0378::snd_register_message("artillery_valve_hor_turn", ::artillery_valve_hor_turn);
+  _id_0378::snd_register_message("artillery_valve_vert_no_turn", ::artillery_valve_vert_no_turn);
+  _id_0378::snd_register_message("artillery_valve_hor_no_turn", ::artillery_valve_hor_no_turn);
+  _id_0378::snd_register_message("artillery_power_filled", ::artillery_power_filled);
+  _id_0378::snd_register_message("artillery_power_depleted", ::artillery_power_depleted);
+  _id_0378::snd_register_message("artillery_cannon_shot", ::artillery_cannon_shot);
+  _id_0378::snd_register_message("flak_gun_gate_up", ::flak_gun_gate_up);
+  _id_0378::snd_register_message("flak_gun_gate_down", ::flak_gun_gate_down);
+  _id_0378::snd_register_message("artillery_bunker_trap_spikes", ::artillery_bunker_trap_spikes);
+  _id_0378::snd_register_message("radio_tower_artillery_shot", ::radio_tower_artillery_shot);
+  _id_0378::snd_register_message("radio_tower_incoming_mortar", ::radio_tower_incoming_mortar);
+  _id_0378::snd_register_message("radio_tower_mortar_impact", ::radio_tower_mortar_impact);
+  _id_0378::snd_register_message("radio_tower_explosion", ::radio_tower_explosion);
+  _id_0378::snd_register_message("pap_schell_insert", ::pap_schell_insert);
+  _id_0378::snd_register_message("pap_schell_insert_final", ::pap_schell_insert_final);
+  _id_0378::snd_register_message("pap_elevator_move", ::pap_elevator_move);
+  _id_0378::snd_register_message("pap_elevator_door_open", ::pap_elevator_door_open);
+  _id_0378::snd_register_message("pagen_door_place_stone", ::pagen_door_place_stone);
+  _id_0378::snd_register_message("pagen_door_opened", ::pagen_door_opened);
+  _id_0378::snd_register_message("pagen_door_closing", ::pagen_door_closing);
+  _id_0378::snd_register_message("pagan_head_place", ::pagan_head_place);
+  _id_0378::snd_register_message("pagen_room_flush_begin", ::pagen_room_flush_begin);
+  _id_0378::snd_register_message("pagen_room_flush_end", ::pagen_room_flush_end);
+  _id_0378::snd_register_message("assassin_hc_cry", ::assassin_hc_cry);
+  _id_0378::snd_register_message("corpse_gate_talk", ::corpse_gate_talk);
+  _id_0378::snd_register_message("ripsaw_collect_gun_chassis", ::ripsaw_collect_gun_chassis);
+  _id_0378::snd_register_message("ripsaw_collect_saw_blade", ::ripsaw_collect_saw_blade);
+  _id_0378::snd_register_message("ripsaw_insert_chassis", ::ripsaw_insert_chassis);
+  _id_0378::snd_register_message("ripsaw_insert_sawblade", ::ripsaw_insert_sawblade);
+  _id_0378::snd_register_message("ripsaw_insert_charged_spine", ::ripsaw_insert_charged_spine);
+  _id_0378::snd_register_message("ripsaw_weapon_build_infusion", ::ripsaw_weapon_build_infusion);
+  _id_0378::snd_register_message("ripsaw_spine_cut", _id_0366::ripsaw_spine_cut);
+  _id_0378::snd_register_message("ripsaw_fatal_melee", _id_0366::ripsaw_fatal_melee);
+  _id_0378::snd_register_message("ripsaw_charge", ::ripsaw_charge);
+  _id_0378::snd_register_message("charged_ripsaw_hit_pest", ::charged_ripsaw_hit_pest);
+  _id_0378::snd_register_message("aud_ripsaw_start_spinning", _id_0366::ripsaw_start_spinning);
+  _id_0378::snd_register_message("aud_ripsaw_stop_spinning", _id_0366::ripsaw_stop_spinning);
+  _id_0378::snd_register_message("pommel_earthquake", ::pagan_room_earthquake);
+  _id_0378::snd_register_message("pommel_earthquake_stop", ::pagan_room_earthquake_stop);
+  _id_0378::snd_register_message("pommel_skull_destroyed", ::pommel_skull_destroyed);
+  _id_0378::snd_register_message("pommel_pickup", ::pommel_pickup);
+  _id_0378::snd_register_message("freezer_crane_retrieving", ::freezer_crane_retrieving);
+  _id_0378::snd_register_message("nazi_head_roll", ::nazi_head_roll);
+  _id_0378::snd_register_message("radio_part_drops", ::radio_part_drops);
+  _id_0378::snd_register_message("radio_parts_assemble", ::radio_parts_assemble);
+  _id_0378::snd_register_message("js_corpse_becomes_zombie", ::js_corpse_becomes_zombie);
+  _id_0378::snd_register_message("js_assassin_landing", ::js_assassin_landing);
+  _id_0378::snd_register_message("zmb_pomel_grenade_cook", ::zmb_pomel_grenade_cook);
+  _id_0378::snd_register_message("zmb_pomel_grenade_detonate", ::zmb_pomel_grenade_detonate);
+  _id_0378::snd_register_message("zmb_pomel_grenade_force_field", ::zmb_pomel_grenade_force_field);
+  _id_0378::snd_register_message("zmb_pomel_grenade_final_explosion", ::zmb_pomel_grenade_final_explosion);
+  _id_0378::snd_register_message("zmb_pomel_grenade_float", ::zmb_pomel_grenade_float);
+  _id_0378::snd_register_message("zmb_pomel_grenade_retrieval", ::zmb_pomel_grenade_retrieval);
+  _id_0378::snd_register_message("aud_ibeam_squeak", ::ibeam_squeak);
+  _id_0378::snd_register_message("aud_ibeam_complete", ::ibeam_complete);
 }
 
 _id_7248() {
-  if(!isDefined(self._id_11CB)) {
-    self._id_11CB = spawnStruct();
+  if(!isDefined(self.aud)) {
+    self.aud = spawnStruct();
   }
 
-  if(isDefined(level._id_11CB.intro_assault_executing)) {
+  if(isDefined(level.aud.intro_assault_executing)) {
     var_0 = 1;
     _id_0366::_id_8E4D();
     _id_A979(var_0);
@@ -222,11 +222,11 @@ isla_wave_mus_switcher() {
 }
 
 begin_intro_assault() {
-  level._id_11CB.intro_assault_executing = 1;
+  level.aud.intro_assault_executing = 1;
 }
 
 end_intro_assault() {
-  level._id_11CB.intro_assault_executing = undefined;
+  level.aud.intro_assault_executing = undefined;
 
   foreach(var_1 in level.players) {
     var_1 _id_0366::_id_8E4E();
@@ -325,7 +325,7 @@ _id_5196() {
   _id_0367::_id_8E38(var_0, var_1);
 }
 
-_id_5C22() {
+launch_threads() {
   thread _id_35E1();
 }
 
@@ -392,7 +392,7 @@ snd_zmb_fog_assassin_vox() {
 ambient_assassin_vox_watcher() {
   level endon("aud_fog_lifted");
   var_0 = self;
-  level._id_11CB.amb_assassin_clicks = undefined;
+  level.aud.amb_assassin_clicks = undefined;
   var_1 = _randomintrange(10, 18);
   var_2 = 1000;
 
@@ -405,7 +405,7 @@ ambient_assassin_vox_watcher() {
         var_7 = var_6._id_0A4B;
         var_8 = distance(var_6.origin, var_0.origin);
 
-        if(isDefined(var_7) && var_7 == "zombie_assassin" && var_8 < var_2 || isDefined(level._id_11CB.amb_assassin_clicks)) {
+        if(isDefined(var_7) && var_7 == "zombie_assassin" && var_8 < var_2 || isDefined(level.aud.amb_assassin_clicks)) {
           var_3 = 0;
           break;
         }
@@ -413,9 +413,9 @@ ambient_assassin_vox_watcher() {
 
       if(var_3) {
         var_10 = var_0.origin + (_randomintrange(150, 250), _randomintrange(150, 250), var_0.origin[2]);
-        level._id_11CB.amb_assassin_clicks = _id_0380::_id_2889("zvox_ass_dist_clicks", undefined, var_10);
+        level.aud.amb_assassin_clicks = _id_0380::_id_2889("zvox_ass_dist_clicks", undefined, var_10);
         wait(var_1);
-        level._id_11CB.amb_assassin_clicks = undefined;
+        level.aud.amb_assassin_clicks = undefined;
       }
     }
 
@@ -532,20 +532,20 @@ cart_begin_leave(var_0) {
 }
 
 cart_begin_roundabout(var_0) {
-  level._id_11CB.mine_cart_lp_handle = _id_0380::_id_6844("zmb_mine_cart_lp", undefined, var_0, 2.0);
+  level.aud.mine_cart_lp_handle = _id_0380::_id_6844("zmb_mine_cart_lp", undefined, var_0, 2.0);
 }
 
 cart_begin_arrival(var_0) {
-  if(!isDefined(level._id_11CB.mine_cart_lp_handle)) {
-    level._id_11CB.mine_cart_lp_handle = _id_0380::_id_6844("zmb_mine_cart_lp", undefined, var_0);
+  if(!isDefined(level.aud.mine_cart_lp_handle)) {
+    level.aud.mine_cart_lp_handle = _id_0380::_id_6844("zmb_mine_cart_lp", undefined, var_0);
     wait 0.1;
-    _id_0380::_id_6850(level._id_11CB.mine_cart_lp_handle, 3.4);
-    level._id_11CB.mine_cart_lp_handle = undefined;
+    _id_0380::_id_6850(level.aud.mine_cart_lp_handle, 3.4);
+    level.aud.mine_cart_lp_handle = undefined;
     wait 0.6;
     _id_0380::_id_288B("zmb_mine_cart_end", undefined, var_0);
   } else {
-    _id_0380::_id_6850(level._id_11CB.mine_cart_lp_handle, 3.5);
-    level._id_11CB.mine_cart_lp_handle = undefined;
+    _id_0380::_id_6850(level.aud.mine_cart_lp_handle, 3.5);
+    level.aud.mine_cart_lp_handle = undefined;
     wait 0.7;
     _id_0380::_id_288B("zmb_mine_cart_end", undefined, var_0);
   }
@@ -582,7 +582,7 @@ sub_pen_prop_trap_start() {
   wait 1.0;
   _id_0380::_id_288B("zmb_trap_sub_start", undefined, var_0);
   wait 2.0;
-  level._id_11CB.sub_trap_loop_handle = _id_0380::_id_6844("zmb_trap_sub_lp", undefined, var_0, 2.5);
+  level.aud.sub_trap_loop_handle = _id_0380::_id_6844("zmb_trap_sub_lp", undefined, var_0, 2.5);
 }
 
 sub_pen_prop_trap_extend() {
@@ -592,8 +592,8 @@ sub_pen_prop_trap_extend() {
 
 sub_pen_prop_trap_stop() {
   var_0 = self;
-  _id_0380::_id_6850(level._id_11CB.sub_trap_loop_handle, 1.0);
-  level._id_11CB.sub_trap_loop_handle = undefined;
+  _id_0380::_id_6850(level.aud.sub_trap_loop_handle, 1.0);
+  level.aud.sub_trap_loop_handle = undefined;
   wait 0.5;
   _id_0380::_id_288B("zmb_trap_sub_stop", undefined, var_0);
 }
@@ -610,15 +610,15 @@ _id_3FE4(var_0, var_1) {
   var_2 = self;
   var_3 = var_2 getentitynumber();
 
-  if(!isDefined(level._id_11CB._id_A28E)) {
-    level._id_11CB._id_A28E = [];
+  if(!isDefined(level.aud._id_A28E)) {
+    level.aud._id_A28E = [];
   }
 
-  var_4 = level._id_11CB._id_A28E[var_3];
+  var_4 = level.aud._id_A28E[var_3];
 
   if(!isDefined(var_4)) {
     var_4 = spawnStruct();
-    level._id_11CB._id_A28E[var_3] = var_4;
+    level.aud._id_A28E[var_3] = var_4;
   }
 
   switch (var_0) {
@@ -629,14 +629,14 @@ _id_3FE4(var_0, var_1) {
         _id_0380::_id_684E(var_4._id_3FE3, 0, 0);
       }
 
-      _id_046C::_id_8DA0("zmb_valve_start_unlock", var_2.origin);
+      _id_046C::snd_play_in_space("zmb_valve_start_unlock", var_2.origin);
       break;
     case "opening":
       if(isDefined(var_4._id_9E98)) {
-        _func_352(var_4._id_9E98, 0.1);
+        maps/taken_tent_precache(var_4._id_9E98, 0.1);
       }
 
-      var_4._id_9E98 = _func_351("zmb_valve_opening_lp", var_2, undefined, undefined, undefined, "hard");
+      var_4._id_9E98 = maps/taken_tent_fx("zmb_valve_opening_lp", var_2, undefined, undefined, undefined, "hard");
 
       if(var_1) {
         _id_0380::_id_684E(var_4._id_3FE3, 1, self._id_A29D);
@@ -645,10 +645,10 @@ _id_3FE4(var_0, var_1) {
       break;
     case "closing":
       if(isDefined(var_4._id_9E98)) {
-        _func_352(var_4._id_9E98, 0.1);
+        maps/taken_tent_precache(var_4._id_9E98, 0.1);
       }
 
-      var_4._id_9E98 = _func_351("zmb_valve_closing_lp", var_2, undefined, undefined, undefined, "hard");
+      var_4._id_9E98 = maps/taken_tent_fx("zmb_valve_closing_lp", var_2, undefined, undefined, undefined, "hard");
 
       if(var_1) {
         _id_0380::_id_684E(var_4._id_3FE3, 0, self._id_A29D);
@@ -656,19 +656,19 @@ _id_3FE4(var_0, var_1) {
 
       break;
     case "open":
-      _id_046C::_id_8DA0("zmb_valve_open", var_2.origin);
+      _id_046C::snd_play_in_space("zmb_valve_open", var_2.origin);
 
       if(var_1) {
         _id_0380::_id_684E(var_4._id_3FE3, 0.666, 2.0);
       }
 
-      _func_352(var_4._id_9E98, 0.1);
+      maps/taken_tent_precache(var_4._id_9E98, 0.1);
       break;
     case "closed":
-      _id_046C::_id_8DA0("zmb_valve_stop_lock", var_2.origin);
+      _id_046C::snd_play_in_space("zmb_valve_stop_lock", var_2.origin);
 
       if(isDefined(var_4._id_9E98)) {
-        _func_352(var_4._id_9E98, 0.1);
+        maps/taken_tent_precache(var_4._id_9E98, 0.1);
       }
 
       if(isDefined(var_4._id_3FE3)) {
@@ -696,20 +696,20 @@ _id_ABF9(var_0) {
 
 start_corpse_gate_alarm() {
   var_0 = (1622, 4461, 41);
-  level._id_11CB.corpse_gate_alarm_ent = undefined;
+  level.aud.corpse_gate_alarm_ent = undefined;
 
-  while(!common_scripts\utility::_id_3C77("flag_subpen_traps_completed") && !common_scripts\utility::_id_562E(level.stop_final_boss_fire_alarm)) {
-    level._id_11CB.corpse_gate_alarm_ent = _id_0380::_id_2889("zmb_corpse_gate_alarm", undefined, var_0);
+  while(!common_scripts\utility::flag("flag_subpen_traps_completed") && !common_scripts\utility::_id_562E(level.stop_final_boss_fire_alarm)) {
+    level.aud.corpse_gate_alarm_ent = _id_0380::_id_2889("zmb_corpse_gate_alarm", undefined, var_0);
     wait 5.5;
-    level._id_11CB.corpse_gate_alarm_ent = undefined;
+    level.aud.corpse_gate_alarm_ent = undefined;
     waitframe();
   }
 }
 
 stop_corpse_gate_alarm() {
-  if(isDefined(level._id_11CB.corpse_gate_alarm_ent)) {
-    _id_0380::_stoplocalsound(level._id_11CB.corpse_gate_alarm_ent, 1.5);
-    level._id_11CB.corpse_gate_alarm_ent = undefined;
+  if(isDefined(level.aud.corpse_gate_alarm_ent)) {
+    _id_0380::_stoplocalsound(level.aud.corpse_gate_alarm_ent, 1.5);
+    level.aud.corpse_gate_alarm_ent = undefined;
   }
 }
 
@@ -783,7 +783,7 @@ plane_firing() {
   self endon("death");
   var_0 = self;
 
-  while(common_scripts\utility::_id_3794("turret_on")) {
+  while(common_scripts\utility::ent_flag("turret_on")) {
     _id_0380::_id_288B("veh_stuka_mg_shot", undefined, var_0);
     wait 0.1;
   }
@@ -804,7 +804,7 @@ plane_tailspin() {
   self endon("death");
   var_0 = self;
 
-  if(!common_scripts\utility::_id_3C77("aud_last_plane_spawned")) {
+  if(!common_scripts\utility::flag("aud_last_plane_spawned")) {
     _id_0380::_id_288D("plane_destruct_death_pop", undefined, var_0, undefined, undefined, 0.1);
   } else {
     _id_0380::_id_288D("last_plane_crash_flyby_main", undefined, var_0, undefined, undefined, 0.1);
@@ -832,8 +832,8 @@ last_plane_spawn_watcher(var_0) {
 
     if(var_2 <= 12500) {
       common_scripts\utility::flag_set("aud_last_plane_spawned");
-      level._id_11CB.last_play_flyby_snd = _id_0380::_id_288B("last_plane_flyby", undefined, var_0);
-      _id_0380::_id_288F(level._id_11CB.last_play_flyby_snd, var_0, "last_plane_sound_done");
+      level.aud.last_play_flyby_snd = _id_0380::_id_288B("last_plane_flyby", undefined, var_0);
+      _id_0380::_id_288F(level.aud.last_play_flyby_snd, var_0, "last_plane_sound_done");
       var_0 waittill("last_plane_sound_done");
     }
 
@@ -842,8 +842,8 @@ last_plane_spawn_watcher(var_0) {
 }
 
 last_plane_crash(var_0) {
-  common_scripts\utility::_id_3C7B("aud_last_plane_spawned");
-  _id_0380::_stoplocalsound(level._id_11CB.last_play_flyby_snd, 0.1);
+  common_scripts\utility::flag_clear("aud_last_plane_spawned");
+  _id_0380::_stoplocalsound(level.aud.last_play_flyby_snd, 0.1);
   _id_0380::_id_2889("last_plane_crash_explode_main", undefined, var_0);
   level notify("stop_plane_int_submix");
 
@@ -883,7 +883,7 @@ distant_water_explode() {
 artillery_battery_placed() {
   var_0 = (-13, 3572, 1049);
   _id_0380::_id_2889("zmb_artillery_battery_placement", undefined, var_0);
-  level._id_11CB.artillery_battery_placed = 1;
+  level.aud.artillery_battery_placed = 1;
 }
 
 artillery_valve_vert_turn() {
@@ -910,8 +910,8 @@ artillery_power_filled() {
   waitframe();
   var_0 = (285, 3469, 1153);
 
-  if(level._id_11CB.artillery_battery_placed) {
-    level._id_11CB.artillery_battery_placed = 0;
+  if(level.aud.artillery_battery_placed) {
+    level.aud.artillery_battery_placed = 0;
   } else {
     _id_0380::_id_2889("zmb_artillery_charged_up", undefined, var_0);
   }
@@ -1125,28 +1125,28 @@ corpse_gate_german_dialogue(var_0) {
 pagan_head_place(var_0, var_1) {
   switch (var_1) {
     case "flag_anointed_monk_head_placed":
-      _id_0380::_id_6850(level._id_11CB.pagan_tone_handle, 0.5);
+      _id_0380::_id_6850(level.aud.pagan_tone_handle, 0.5);
       _id_0380::_id_6844("pagan_head_place_01", undefined, var_0);
       wait 1.0;
-      level._id_11CB.pagan_tone_handle = _id_0380::_id_6844("pagan_head_place_tone_01", undefined, var_0);
+      level.aud.pagan_tone_handle = _id_0380::_id_6844("pagan_head_place_tone_01", undefined, var_0);
       break;
     case "flag_anointed_fol_head_placed":
-      _id_0380::_id_6850(level._id_11CB.pagan_tone_handle, 0.5);
+      _id_0380::_id_6850(level.aud.pagan_tone_handle, 0.5);
       _id_0380::_id_6844("pagan_head_place_02", undefined, var_0);
       wait 1.0;
-      level._id_11CB.pagan_tone_handle = _id_0380::_id_6844("pagan_head_place_tone_02", undefined, var_0);
+      level.aud.pagan_tone_handle = _id_0380::_id_6844("pagan_head_place_tone_02", undefined, var_0);
       break;
     case "flag_anointed_asn_head_placed":
-      _id_0380::_id_6850(level._id_11CB.pagan_tone_handle, 0.5);
+      _id_0380::_id_6850(level.aud.pagan_tone_handle, 0.5);
       _id_0380::_id_6844("pagan_head_place_03", undefined, var_0);
       wait 1.0;
-      level._id_11CB.pagan_tone_handle = _id_0380::_id_6844("pagan_head_place_tone_03", undefined, var_0);
+      level.aud.pagan_tone_handle = _id_0380::_id_6844("pagan_head_place_tone_03", undefined, var_0);
       break;
     case "flag_anointed_pest_head_placed":
-      _id_0380::_id_6850(level._id_11CB.pagan_tone_handle, 0.5);
+      _id_0380::_id_6850(level.aud.pagan_tone_handle, 0.5);
       _id_0380::_id_6844("pagan_head_place_04", undefined, var_0);
       wait 1.0;
-      level._id_11CB.pagan_tone_handle = _id_0380::_id_6844("pagan_head_place_tone_04", undefined, var_0);
+      level.aud.pagan_tone_handle = _id_0380::_id_6844("pagan_head_place_tone_04", undefined, var_0);
       break;
     default:
       break;
@@ -1162,20 +1162,20 @@ pagan_room_earthquake(var_0, var_1, var_2) {
 
   switch (var_0) {
     case "rumble":
-      if(!isDefined(level._id_11CB.paganearthquake_rumble_handle)) {
+      if(!isDefined(level.aud.paganearthquake_rumble_handle)) {
         var_6 = var_1;
         var_7 = 2.5;
         _id_0366::_id_8E30(0.75, var_6);
-        level._id_11CB.paganearthquake_rumble_handle = _id_0380::_id_6842("zmb_isla_earthquake_rumble_lp", undefined, var_2, var_6);
+        level.aud.paganearthquake_rumble_handle = _id_0380::_id_6842("zmb_isla_earthquake_rumble_lp", undefined, var_2, var_6);
       }
 
       break;
     case "earthquake":
-      if(!isDefined(level._id_11CB.paganearthquake_quake_handle)) {
+      if(!isDefined(level.aud.paganearthquake_quake_handle)) {
         var_6 = 0.25;
         var_7 = var_1 * 0.5 * 0.95;
         _id_0366::_id_8E30(0.25, var_6);
-        level._id_11CB.paganearthquake_quake_handle = _id_0380::_id_6842("zmb_isla_earthquake_lp", undefined, var_2, var_6);
+        level.aud.paganearthquake_quake_handle = _id_0380::_id_6842("zmb_isla_earthquake_lp", undefined, var_2, var_6);
         wait(var_1 * 0.5);
         _id_0380::_id_6842("zmb_isla_earthquake_settle", undefined, var_2, var_6);
         pagan_room_earthquake_stop(var_7);
@@ -1192,16 +1192,16 @@ pagan_room_earthquake_stop(var_0) {
     var_2 clientclearsoundsubmix("paganearthquake");
   }
 
-  if(isDefined(level._id_11CB.paganearthquake_rumble_handle)) {
-    _id_0380::_id_6850(level._id_11CB.paganearthquake_rumble_handle, var_0);
+  if(isDefined(level.aud.paganearthquake_rumble_handle)) {
+    _id_0380::_id_6850(level.aud.paganearthquake_rumble_handle, var_0);
   }
 
-  if(isDefined(level._id_11CB.zone1earthquake_quake_handle)) {
-    _id_0380::_id_6850(level._id_11CB.zone1earthquake_quake_handle, var_0);
+  if(isDefined(level.aud.zone1earthquake_quake_handle)) {
+    _id_0380::_id_6850(level.aud.zone1earthquake_quake_handle, var_0);
   }
 
-  level._id_11CB.paganearthquake_rumble_handle = undefined;
-  level._id_11CB.paganearthquake_quake_handle = undefined;
+  level.aud.paganearthquake_rumble_handle = undefined;
+  level.aud.paganearthquake_quake_handle = undefined;
 }
 
 pommel_skull_destroyed(var_0) {
@@ -1283,7 +1283,7 @@ get_random_alive_player() {
 }
 
 get_closest_alive_player(var_0) {
-  var_1 = common_scripts\utility::_id_40B0(var_0, level.players);
+  var_1 = common_scripts\utility::get_array_of_closest(var_0, level.players);
 
   foreach(var_3 in var_1) {
     if(!isalive(var_3)) {
@@ -1311,7 +1311,7 @@ get_player_looking_at(var_0, var_1, var_2) {
     if(distance(var_5.origin, var_0.origin) > var_1) {
       continue;
     }
-    if(!maps\mp\_utility::_id_3B8E(var_5, var_0, var_2)) {
+    if(!maps\mp\_utility::findisfacing(var_5, var_0, var_2)) {
       continue;
     }
     return var_5;

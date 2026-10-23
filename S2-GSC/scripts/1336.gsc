@@ -6,7 +6,7 @@
 init() {
   _id_0586::_id_7BDB("Mad Minute", ::_id_7F42, ::_id_7F44);
   _id_0586::_id_7BDB("Mk. II", ::_id_7F43, ::_id_7F45);
-  level._id_62B3["frag_skull_zm"] = ::_id_62AA;
+  level.modifyweapondamage["frag_skull_zm"] = ::_id_62AA;
   level._effect["zmb_death_mm_screen"] = loadfx("vfx/zombie/abilities_perks/zmb_death_mm_screen");
   level._effect["zmb_blood_ammo_up"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_ammo_up");
   level._effect["zmb_blood_grenades_up"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_grenades_up");
@@ -19,7 +19,7 @@ _id_3662() {
   thread _id_0547::_id_73EC();
   _id_0547::_id_7458(1, "mad_minute");
   _playFXOnTag(level._effect["zmb_death_mm_screen"], self, "Tag_Origin");
-  _id_0378::_id_8D74("aud_mad_minute_use");
+  _id_0378::snd_message("aud_mad_minute_use");
 
   if(_id_0547::_id_4BA7("specialty_class_explosives_handler_zm")) {
     var_1 = 921600;
@@ -31,7 +31,7 @@ _id_3662() {
         var_4 = 1;
       } else if(distancesquared(self.origin, var_3.origin) < var_1) {
         var_4 = 1;
-        var_3 _meth_866C(&"add_teammate_mod_buffs", 3, "specialty_class_explosives_handler_zm", 1, self);
+        var_3 setdot_radius(&"add_teammate_mod_buffs", 3, "specialty_class_explosives_handler_zm", 1, self);
       }
 
       if(var_4) {
@@ -61,7 +61,7 @@ _id_3662() {
           var_11 = var_3 getweaponammostock(var_9);
           var_3 setweaponammostock(var_9, var_11 + var_10);
           _playFXOnTag(level._effect["zmb_blood_ammo_up"], var_3, "TAG_WEAPON_RIGHT");
-          var_3 _meth_866C(&"add_teammate_mod_buffs", 3, "specialty_class_ammo_carrier_zm", 1, self);
+          var_3 setdot_radius(&"add_teammate_mod_buffs", 3, "specialty_class_ammo_carrier_zm", 1, self);
         }
       }
     }
@@ -93,7 +93,7 @@ _id_2F9E() {
   }
 }
 
-_id_62A6(var_0, var_1, var_2) {
+modifydamage(var_0, var_1, var_2) {
   var_3 = 1;
 
   if(isDefined(var_1._id_5F5C) && var_1._id_5F5C) {

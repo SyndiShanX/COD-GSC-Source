@@ -4,12 +4,12 @@
 ****************************************************/
 
 init() {
-  level._id_5A61["v2_rocket"] = ::_id_9E3D;
-  level._id_5A7D["v2_rocket_mp"] = "v2_rocket";
+  level.killstreakfuncs["v2_rocket"] = ::_id_9E3D;
+  level.killstreakwieldweapons["v2_rocket_mp"] = "v2_rocket";
   level._effect["nuke_flash"] = loadfx("vfx/explosion/v2_explosion_mp_rnr");
   setdvarifuninitialized("scr_nukeTimer", 10);
   level._id_6866 = getdvarint("scr_nukeTimer");
-  level._id_685E = spawnStruct();
+  level.nukeinfo = spawnStruct();
 }
 
 _id_9E3D(var_0) {
@@ -58,16 +58,16 @@ wait_for_nuke_cancelled() {
   _setomnvar("ui_bomb_a_state", 0);
   level._id_685D = undefined;
   level.nukecoolingdown = undefined;
-  level._id_685E.player = undefined;
-  level._id_685E.team = undefined;
+  level.nukeinfo.player = undefined;
+  level.nukeinfo.team = undefined;
 }
 
 _id_3252() {
   level endon("nuke_cancelled");
   thread wait_for_nuke_user_disconnect();
   level thread wait_for_nuke_cancelled();
-  level._id_685E.player = self;
-  level._id_685E.team = self.pers["team"];
+  level.nukeinfo.player = self;
+  level.nukeinfo.team = self.pers["team"];
   level._id_685D = 1;
   level.nukecoolingdown = 1;
   _setomnvar("ui_bomb_a_state", 4);
@@ -94,7 +94,7 @@ _id_3252() {
     level._id_6856 hide();
   }
 
-  _id_0378::_id_8D74("aud_v2_incoming");
+  _id_0378::snd_message("aud_v2_incoming");
 
   for(var_0 = level._id_6866; var_0 > 0; var_0--) {
     _id_0380::_id_6840("mp_s2_obj_timer_tick_1s", undefined);
@@ -104,7 +104,7 @@ _id_3252() {
 
 _id_6861() {
   level endon("nuke_cancelled");
-  _id_0378::_id_8D74("aud_v2_explosion");
+  _id_0378::snd_message("aud_v2_explosion");
 }
 
 _id_685C() {
@@ -176,25 +176,25 @@ _id_6867() {
 _id_6858() {
   level endon("nuke_cancelled");
   level notify("nuke_death");
-  maps\mp\gametypes\_hostmigration::_id_A782();
+  maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
   _ambientstop(1);
   var_0 = 0;
 
   foreach(var_2 in level.players) {
     if(level.teambased) {
-      if(isDefined(level._id_685E.team) && var_2.team == level._id_685E.team) {
+      if(isDefined(level.nukeinfo.team) && var_2.team == level.nukeinfo.team) {
         continue;
       }
-    } else if(isDefined(level._id_685E.player) && var_2 == level._id_685E.player) {
+    } else if(isDefined(level.nukeinfo.player) && var_2 == level.nukeinfo.player) {
       continue;
     }
     var_2.nuked = 1;
 
     if(isalive(var_2)) {
-      var_2 thread maps\mp\gametypes\_damage::_id_3BAC(level._id_685E.player, level._id_685E.player, 999999, 0, "MOD_EXPLOSIVE", "v2_rocket_mp", var_2.origin, var_2.origin, "none", 0, 0);
+      var_2 thread maps\mp\gametypes\_damage::finishplayerdamagewrapper(level.nukeinfo.player, level.nukeinfo.player, 999999, 0, "MOD_EXPLOSIVE", "v2_rocket_mp", var_2.origin, var_2.origin, "none", 0, 0);
 
-      if(isDefined(var_2._id_5738) && var_2._id_5738 == 1) {
-        var_2 dodamage(1, var_2.origin, level._id_685E.player, level._id_685E.player, "MOD_EXPLOSIVE", "v2_rocket_mp");
+      if(isDefined(var_2.isjuggernaut) && var_2.isjuggernaut == 1) {
+        var_2 dodamage(1, var_2.origin, level.nukeinfo.player, level.nukeinfo.player, "MOD_EXPLOSIVE", "v2_rocket_mp");
       }
 
       var_0 = var_0 + 0.05;
@@ -218,11 +218,11 @@ _id_6853() {
   level endon("game_ended");
   level notify("nuke_EMPJam");
   level endon("nuke_EMPJam");
-  level thread _id_6855(level._id_685E.player);
+  level thread _id_6855(level.nukeinfo.player);
   level notify("nuke_emp_update");
 
   foreach(var_1 in level.players) {
-    if(level.teambased && var_1.team == level._id_685E.team) {
+    if(level.teambased && var_1.team == level.nukeinfo.team) {
       continue;
     }
     var_1.nuked = undefined;
@@ -237,9 +237,9 @@ _id_6855(var_0) {
   var_1 = [];
 
   if(level.teambased) {
-    var_1 = level._id_9FDA[maps\mp\_utility::getotherteam(var_0.team)];
+    var_1 = level.uavmodels[maps\mp\_utility::getotherteam(var_0.team)];
   } else {
-    var_1 = level._id_9FDA;
+    var_1 = level.uavmodels;
   }
 
   foreach(var_3 in var_1) {
@@ -283,14 +283,14 @@ _id_A0D6() {
   var_0 = level._id_6866 * 1000 + gettime();
   _setomnvar("ui_nuke_end_milliseconds", var_0);
   level waittill("host_migration_begin");
-  var_1 = maps\mp\gametypes\_hostmigration::_id_A782();
+  var_1 = maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
 
   if(var_1 > 0) {
     _setomnvar("ui_nuke_end_milliseconds", var_0 + var_1);
   }
 }
 
-_id_3D58(var_0) {
+flashrumbleloop(var_0) {
   self endon("stop_monitoring_flash");
   self notify("flash_rumble_loop");
   self endon("flash_rumble_loop");
@@ -303,26 +303,26 @@ _id_3D58(var_0) {
 }
 
 applyv2flash(var_0, var_1) {
-  if(!isDefined(self._id_3D46) || var_0 > self._id_3D46) {
-    self._id_3D46 = var_0;
+  if(!isDefined(self.flashduration) || var_0 > self.flashduration) {
+    self.flashduration = var_0;
   }
 
-  if(!isDefined(self._id_3D57) || var_1 > self._id_3D57) {
-    self._id_3D57 = var_1;
+  if(!isDefined(self.flashrumbleduration) || var_1 > self.flashrumbleduration) {
+    self.flashrumbleduration = var_1;
   }
 
   waitframe();
 
-  if(isDefined(self._id_3D46)) {
-    self shellshock("flashbang_mp", self._id_3D46);
-    self._id_3D48 = gettime() + self._id_3D46 * 1000;
-    thread maps\mp\_utility::_id_5D22("flashed", 0.05, 0.1, 0.55);
+  if(isDefined(self.flashduration)) {
+    self shellshock("flashbang_mp", self.flashduration);
+    self.flashendtime = gettime() + self.flashduration * 1000;
+    thread maps\mp\_utility::light_set_override_for_player("flashed", 0.05, 0.1, 0.55);
   }
 
-  if(isDefined(self._id_3D57)) {
-    thread _id_3D58(self._id_3D57);
+  if(isDefined(self.flashrumbleduration)) {
+    thread flashrumbleloop(self.flashrumbleduration);
   }
 
-  self._id_3D46 = undefined;
-  self._id_3D57 = undefined;
+  self.flashduration = undefined;
+  self.flashrumbleduration = undefined;
 }

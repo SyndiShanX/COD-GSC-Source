@@ -83,7 +83,7 @@ _id_46BD(var_0) {
 
 _id_A77A() {
   while(_isremovedentity(self) == 0) {
-    common_scripts\utility::_id_A70A("death", "disconnect");
+    common_scripts\utility::waittill_any("death", "disconnect");
   }
 }
 
@@ -418,7 +418,7 @@ _id_05D9(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 }
 
 _id_1E74(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(_func_336(var_0) == 1) {
+  if(maps/aachen_b_fx(var_0) == 1) {
     _id_05DA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
   } else {
     _id_05D9(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
@@ -635,9 +635,9 @@ _id_8A7A(var_0, var_1) {
 _id_0708() {
   if(isDefined(self) == 1 && _isremovedentity(self) == 0 && isDefined(self._id_05C8) == 0) {
     self._id_05C8 = spawnStruct();
-    self._id_05C8._id_A60D = 1.0;
-    self._id_05C8._id_6FF7 = 1.0;
-    self._id_05C8._id_996E = [];
+    self._id_05C8.volume = 1.0;
+    self._id_05C8.pitch = 1.0;
+    self._id_05C8.threads = [];
   }
 }
 
@@ -653,9 +653,9 @@ _id_070B(var_0, var_1, var_2) {
 
 _id_070A(var_0, var_1, var_2) {
   if(isDefined(var_0._id_8F4E) == 1 && var_0._id_8F4E == "clientsnd") {
-    _func_355(var_0._id_4983, var_1, var_2);
+    maps/transport_ship_fx(var_0._id_4983, var_1, var_2);
   } else if(isDefined(var_0._id_8F4E) == 1 && var_0._id_8F4E == "sndentity") {
-    var_0 _meth_8642(var_1, var_2);
+    var_0 setcarepackage(var_1, var_2);
   } else {
     var_0 scalepitch(var_1, var_2);
   }
@@ -669,9 +669,9 @@ _id_070C(var_0, var_1) {
 
   if(isDefined(var_1) == 1) {
     if(var_1 == ::_id_070B) {
-      self._id_05C8._id_A60D = var_0;
+      self._id_05C8.volume = var_0;
     } else if(var_1 == ::_id_070A) {
-      self._id_05C8._id_6FF7 = var_0;
+      self._id_05C8.pitch = var_0;
     }
   }
 }
@@ -679,9 +679,9 @@ _id_070C(var_0, var_1) {
 _id_06F7(var_0) {
   if(isDefined(self._id_05C8) == 1) {
     if(var_0 == ::_id_070B) {
-      return self._id_05C8._id_A60D;
+      return self._id_05C8.volume;
     } else if(var_0 == ::_id_070A) {
-      return self._id_05C8._id_6FF7;
+      return self._id_05C8.pitch;
     }
   }
 
@@ -703,7 +703,7 @@ _id_0707() {
     var_1 = "pitch";
   }
 
-  self._id_05C8._id_996E[var_1] = undefined;
+  self._id_05C8.threads[var_1] = undefined;
 
   if(isDefined(self._id_05C8._id_57B7) == 0 && isDefined(self._id_05C8._id_57B6) == 0) {
     self._id_05C8._id_57B5 = undefined;
@@ -768,10 +768,10 @@ _id_0709(var_0, var_1, var_2, var_3, var_4) {
     var_15 = "pitch";
   }
 
-  self._id_05C8._id_996E[var_15] = thisthread;
+  self._id_05C8.threads[var_15] = thisthread;
   self endon("sfx_stop_scale_" + var_15);
 
-  while(var_11 < var_10 && isDefined(self) == 1 && isDefined(self._id_05C8._id_996E[var_15]) == 1) {
+  while(var_11 < var_10 && isDefined(self) == 1 && isDefined(self._id_05C8.threads[var_15]) == 1) {
     var_16 = (var_10 - var_11) * 0.001;
 
     if(isDefined(self._id_05C8._id_A6F2) == 1) {
@@ -922,7 +922,7 @@ _id_06F8(var_0) {
 
 _id_06FC() {
   self endon("param_stop");
-  common_scripts\utility::_id_A70A("death", "disconnect");
+  common_scripts\utility::waittill_any("death", "disconnect");
   _id_06F8();
 }
 
@@ -1161,26 +1161,26 @@ _id_8A96(var_0) {
 
 _id_070D(var_0, var_1, var_2) {
   var_3 = spawn("script_origin", self.origin);
-  var_3 linkTo(self, var_0._id_95A6, var_0._id_6A15, (0, 0, 0));
+  var_3 linkTo(self, var_0.tag, var_0.offset, (0, 0, 0));
   var_3 dontinterpolate();
   return var_3;
 }
 
 _id_070F(var_0, var_1, var_2) {
-  var_0._id_378F dontinterpolate();
-  var_0._id_378F._id_8F47 = _id_02F0::_id_800B(var_0._id_0BB4, var_0._id_378F);
-  _id_02F0::disableplayeruse(var_0._id_378F._id_8F47, 0.0, 0.0);
-  _id_02F0::enableplayeruse(var_0._id_378F._id_8F47, var_2, 0.0);
-  common_scripts\utility::_id_2CB4(0.05, _id_02F0::disableplayeruse, var_0._id_378F._id_8F47, var_1, 0.05);
-  common_scripts\utility::_id_2CB4(0.05, _id_02F0::enableplayeruse, var_0._id_378F._id_8F47, var_2, 0.05);
+  var_0.ent dontinterpolate();
+  var_0.ent._id_8F47 = _id_02F0::_id_800B(var_0._id_0BB4, var_0.ent);
+  _id_02F0::disableplayeruse(var_0.ent._id_8F47, 0.0, 0.0);
+  _id_02F0::enableplayeruse(var_0.ent._id_8F47, var_2, 0.0);
+  common_scripts\utility::delay_script_call(0.05, _id_02F0::disableplayeruse, var_0.ent._id_8F47, var_1, 0.05);
+  common_scripts\utility::delay_script_call(0.05, _id_02F0::enableplayeruse, var_0.ent._id_8F47, var_2, 0.05);
 }
 
 _id_0710(var_0, var_1, var_2) {
-  if(isDefined(var_0._id_378F) == 0) {
+  if(isDefined(var_0.ent) == 0) {
     return;
   }
-  var_3 = var_0._id_378F;
-  var_4 = var_0._id_378F._id_8F47;
+  var_3 = var_0.ent;
+  var_4 = var_0.ent._id_8F47;
 
   if(isDefined(var_4) == 1) {
     if(isDefined(var_1) == 1) {
@@ -1192,7 +1192,7 @@ _id_0710(var_0, var_1, var_2) {
       wait(var_1);
     }
 
-    _id_02F0::enableammogeneration(var_0._id_378F._id_8F47);
+    _id_02F0::enableammogeneration(var_0.ent._id_8F47);
     waitframe();
   }
 
@@ -1223,26 +1223,26 @@ _id_06FE(var_0, var_1) {
   var_16 = startignoringspotlight(var_4, var_6, var_7, var_8, var_9);
   var_17 = startignoringspotlight(var_4, var_11, var_12, var_13, var_14);
 
-  if(isDefined(var_5._id_378F) == 1 && isDefined(var_5._id_378F._id_8F47) == 1 && var_16 <= var_3) {
+  if(isDefined(var_5.ent) == 1 && isDefined(var_5.ent._id_8F47) == 1 && var_16 <= var_3) {
     thread _id_0710(var_5);
-    var_5._id_378F = undefined;
+    var_5.ent = undefined;
     return;
-  } else if(isDefined(var_5._id_378F) == 0 && var_16 > var_3) {
-    var_5._id_378F = _id_070D(var_5, var_16, var_17);
+  } else if(isDefined(var_5.ent) == 0 && var_16 > var_3) {
+    var_5.ent = _id_070D(var_5, var_16, var_17);
     return;
   }
 
-  if(isDefined(var_5._id_378F) == 1) {
-    if(isDefined(var_5._id_378F._id_8F47) == 0) {
+  if(isDefined(var_5.ent) == 1) {
+    if(isDefined(var_5.ent._id_8F47) == 0) {
       thread _id_070F(var_5, var_16, var_17);
-      var_5._id_378F._id_90EE = var_4;
+      var_5.ent._id_90EE = var_4;
     } else {
-      var_18 = _abs(var_4 - var_5._id_378F._id_90EE);
+      var_18 = _abs(var_4 - var_5.ent._id_90EE);
 
       if(var_18 > var_2) {
-        _id_02F0::disableplayeruse(var_5._id_378F._id_8F47, var_16, 0.05, var_10);
-        _id_02F0::enableplayeruse(var_5._id_378F._id_8F47, var_17, 0.05, var_15);
-        var_5._id_378F._id_90EE = var_4;
+        _id_02F0::disableplayeruse(var_5.ent._id_8F47, var_16, 0.05, var_10);
+        _id_02F0::enableplayeruse(var_5.ent._id_8F47, var_17, 0.05, var_15);
+        var_5.ent._id_90EE = var_4;
       }
     }
   }
@@ -1290,8 +1290,8 @@ _id_070E(var_0, var_1, var_2, var_3, var_4) {
 
   var_5 = spawnStruct();
   var_5._id_0BB4 = var_0;
-  var_5._id_95A6 = var_1;
-  var_5._id_6A15 = var_2;
+  var_5.tag = var_1;
+  var_5.offset = var_2;
   var_5._id_6FFC = var_3;
   var_5._id_A614 = var_4;
   self._id_05CA[self._id_05CA.size] = var_5;
@@ -1321,8 +1321,8 @@ _id_0718() {
   if(isDefined(self._id_05D1) == 1) {
     self waittill("sfx_stop_audioTimer");
 
-    if(isDefined(self._id_05D1._id_8F40) == 1) {
-      self._id_05D1._id_8F40 delete();
+    if(isDefined(self._id_05D1.soundent) == 1) {
+      self._id_05D1.soundent delete();
     }
 
     self._id_05D1 = undefined;
@@ -1349,9 +1349,9 @@ _id_0719(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   thread _id_0718();
   self endon("sfx_stop_audioTimer");
 
-  while(gettime() <= self._id_05D1._id_36ED) {
+  while(gettime() <= self._id_05D1.endtime) {
     var_7 = gettime();
-    var_8 = self._id_05D1._id_36ED - var_7;
+    var_8 = self._id_05D1.endtime - var_7;
     var_9 = 1000;
 
     if(var_8 <= 5000) {
@@ -1372,15 +1372,15 @@ _id_0719(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     if(var_8 <= var_10) {
       if(self._id_05D1._id_8F4D != 0) {
-        self._id_05D1._id_8F40 playSound(var_1);
+        self._id_05D1.soundent playSound(var_1);
         self._id_05D1._id_8F4D = 0;
       } else {
-        self._id_05D1._id_8F40 playSound(var_2);
+        self._id_05D1.soundent playSound(var_2);
         self._id_05D1._id_8F4D = 1;
       }
 
       var_12 = startignoringspotlight(var_8, 0, var_0, var_4, var_3);
-      self._id_05D1._id_8F40 _id_8AAC(var_12, 0.05, var_5);
+      self._id_05D1.soundent _id_8AAC(var_12, 0.05, var_5);
     }
 
     waitframe();
@@ -1409,10 +1409,10 @@ _id_8AC3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(isDefined(self._id_05D1) == 0) {
     self._id_05D1 = spawnStruct();
-    self._id_05D1._id_36ED = var_8 + var_0;
+    self._id_05D1.endtime = var_8 + var_0;
     self._id_05D1._id_8F4D = 0;
-    self._id_05D1._id_8F40 = spawn("script_origin", self.origin);
-    self._id_05D1._id_8F40 linkTo(self);
+    self._id_05D1.soundent = spawn("script_origin", self.origin);
+    self._id_05D1.soundent linkTo(self);
   }
 
   thread _id_0719(var_0, var_1, var_2, var_4, var_5, var_6, var_7);
@@ -1428,7 +1428,7 @@ _id_06F6() {
 
   for(;;) {
     foreach(var_1 in level._id_05C0) {
-      var_2 = var_1._id_1E61;
+      var_2 = var_1.callback;
       var_3 = var_1._id_59E1;
       var_4 = getDvar(var_3);
 
@@ -1446,7 +1446,7 @@ _id_06F6() {
     waitframe();
 
     if(isDefined(level.hostmigrationtimer)) {
-      _id_A782();
+      waittillhostmigrationdone();
 
       foreach(var_1 in level._id_05C0) {
         _sfx_dvar_init_value(var_1._id_59E1, var_1.value);
@@ -1455,7 +1455,7 @@ _id_06F6() {
   }
 }
 
-_id_A782() {
+waittillhostmigrationdone() {
   if(!isDefined(level.hostmigrationtimer)) {
     return 0;
   }
@@ -1475,7 +1475,7 @@ _id_06F5() {
 _id_06F4(var_0, var_1, var_2) {
   _id_8A80(var_0);
   level._id_05C0[var_0] = spawnStruct();
-  level._id_05C0[var_0]._id_1E61 = var_2;
+  level._id_05C0[var_0].callback = var_2;
   level._id_05C0[var_0]._id_59E1 = var_0;
   level._id_05C0[var_0].value = var_1;
   _sfx_dvar_init_value(var_0, var_1);
@@ -1571,10 +1571,10 @@ _id_0703(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_17.aligny = "bottom";
   var_17._id_4DF6 = "fullscreen";
   var_17._id_01CA = "fullscreen";
-  var_17._id_AACD = 0;
-  var_17._id_AAEB = 0;
-  var_17._id_AACF = 0;
-  var_17._id_AAEC = 0;
+  var_17.xoffset = 0;
+  var_17.yoffset = 0;
+  var_17.xpadding = 0;
+  var_17.ypadding = 0;
 }
 
 _id_8AA0(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -1785,11 +1785,11 @@ _id_0717(var_0) {
 
   var_1 = level._id_05D0._id_3E6B / 20;
   level._id_05D0 endon("sfx_timecode_done");
-  level._id_05D0._id_565F = 1;
+  level._id_05D0.isactive = 1;
   level._id_05D0._id_3E71 = 0;
   level._id_05D0._id_52DB = var_0;
 
-  while(isDefined(level._id_05D0) == 1 && level._id_05D0._id_565F == 1) {
+  while(isDefined(level._id_05D0) == 1 && level._id_05D0.isactive == 1) {
     var_2 = level._id_05D0._id_75F6;
     var_3 = level._id_05D0._id_75F7;
     var_4 = 1.0;
@@ -1823,7 +1823,7 @@ _id_8AC1() {
     return;
   }
   level._id_05D0 notify("sfx_timecode_done");
-  level._id_05D0._id_565F = 0;
+  level._id_05D0.isactive = 0;
   level._id_05D0._id_5848 = 0;
   level._id_05D0._id_6014 = undefined;
   level._id_05D0 = undefined;
@@ -2311,7 +2311,7 @@ _id_8DCA(var_0, var_1) {
     if(isDefined(var_3.v["type"]) == 0) {
       continue;
     }
-    if(isDefined(var_3.v["origin"]) == 1 && common_scripts\utility::_id_9467(var_3.v["type"], "soundfx") == 1) {
+    if(isDefined(var_3.v["origin"]) == 1 && common_scripts\utility::string_starts_with(var_3.v["type"], "soundfx") == 1) {
       var_4 = var_3.v["origin"];
       var_5 = (270, 0, 0);
       var_4 = (_floor(var_4[0]), _floor(var_4[1]), _floor(var_4[2]));

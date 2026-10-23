@@ -23,7 +23,7 @@ report_player_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
     if(isDefined(var_11.check) && ![[var_11.check]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9)) {
       continue;
     }
-    level thread[[var_11._id_3F02]](var_11.param);
+    level thread[[var_11.func]](var_11.param);
   }
 }
 
@@ -33,7 +33,7 @@ agent_is_zombie(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
 
 register_on_player_down_func(var_0, var_1) {
   var_2 = spawnStruct();
-  var_2._id_3F02 = var_0;
+  var_2.func = var_0;
   var_2.param = var_1;
   level.zmb_challenges_on_entered_laststand_funcs = common_scripts\utility::_id_0F6F(level.zmb_challenges_on_entered_laststand_funcs, var_2);
 }
@@ -41,17 +41,17 @@ register_on_player_down_func(var_0, var_1) {
 report_player_entered_last_stand() {
   for(;;) {
     var_0 = self;
-    var_0 common_scripts\utility::_id_A70A("enter_last_stand");
+    var_0 common_scripts\utility::waittill_any("enter_last_stand");
 
     foreach(var_2 in level.zmb_challenges_on_entered_laststand_funcs) {
-      level thread[[var_2._id_3F02]](var_2.param);
+      level thread[[var_2.func]](var_2.param);
     }
   }
 }
 
 register_on_player_dmg_func(var_0, var_1, var_2) {
   var_3 = spawnStruct();
-  var_3._id_3F02 = var_0;
+  var_3.func = var_0;
   var_3.param = var_1;
   var_3.check = var_2;
   level.zmb_challenges_on_dmg_funcs = common_scripts\utility::_id_0F6F(level.zmb_challenges_on_dmg_funcs, var_3);
@@ -74,7 +74,7 @@ register_on_zombie_dmg_func(var_0, var_1, var_2) {
   }
 
   var_3 = spawnStruct();
-  var_3._id_3F02 = var_0;
+  var_3.func = var_0;
   var_3.param = var_1;
   var_3._id_67E9 = var_2;
   level.zmb_challenges_on_zombie_dmg_funcs = common_scripts\utility::_id_0F6F(level.zmb_challenges_on_zombie_dmg_funcs, var_3);
@@ -101,7 +101,7 @@ get_next_player_weapon() {
       continue;
     }
     foreach(var_4 in level.zmb_challenges_on_zombie_dmg_funcs) {
-      if([[var_4._id_3F02]](var_4.param, var_1, var_2)) {
+      if([[var_4.func]](var_4.param, var_1, var_2)) {
         if(_isstring(var_4._id_67E9)) {
           level notify(var_4._id_67E9);
           continue;
@@ -126,7 +126,7 @@ is_lethal_or_tactical(var_0, var_1, var_2) {
     var_6 = var_3 maps\mp\_events_z::set_last_checked_weapon(var_6);
     var_8 = 0;
 
-    if(_id_0547::_id_585C(var_6)) {
+    if(_id_0547::iszombieequipment(var_6)) {
       var_8 = 1;
     }
 
@@ -180,10 +180,10 @@ wait_for_consecutive_waves_with_condition(var_0, var_1, var_2, var_3, var_4, var
   }
 
   var_10._id_005C = 0;
-  var_10._id_4800 = var_0;
-  var_10._id_502A = var_1;
+  var_10.goal = var_0;
+  var_10.id = var_1;
   var_10.success_notification = var_1;
-  var_10._id_2566 = 0;
+  var_10.completed = 0;
   var_10.name = var_7;
   var_10.conditions_check_func = [::no_check_on_wave_break];
   var_10.add_player_progress_func = ::add_one_wave_survived;
@@ -205,7 +205,7 @@ wait_for_consecutive_waves_with_condition(var_0, var_1, var_2, var_3, var_4, var
     try_add_progress_with_conditions([var_10], var_9 getcurrentweapon(), var_9, 1);
   }
 
-  var_9.consecutive_wave_tracking_array[var_1]._id_2566 = 1;
+  var_9.consecutive_wave_tracking_array[var_1].completed = 1;
   return challenge_completed(var_10, var_1);
 }
 
@@ -220,10 +220,10 @@ wait_for_required_zombie_kills(var_0, var_1, var_2, var_3, var_4, var_5, var_6) 
   var_8 = register_zombie_killed_response(var_2, ::add_one_zombie_kill, var_6, var_1, var_4, var_3);
   var_9 = spawnStruct();
   var_9._id_005C = 0;
-  var_9._id_4800 = var_0;
-  var_9._id_502A = var_1;
-  var_9._id_7DB9 = var_8;
-  var_9._id_2566 = 0;
+  var_9.goal = var_0;
+  var_9.id = var_1;
+  var_9.response = var_8;
+  var_9.completed = 0;
   var_9.name = var_5;
   var_7.special_zombie_kills_tracking_array[var_1] = var_9;
 
@@ -231,12 +231,12 @@ wait_for_required_zombie_kills(var_0, var_1, var_2, var_3, var_4, var_5, var_6) 
     wait 0.125;
   }
 
-  var_7.special_zombie_kills_tracking_array[var_1]._id_2566 = 1;
+  var_7.special_zombie_kills_tracking_array[var_1].completed = 1;
   return var_7 challenge_completed(var_9, var_1);
 }
 
 wait_for_gekocht_stage_challenge(var_0) {
-  var_1 = common_scripts\utility::_id_46B5("stage_check_struct", "targetname");
+  var_1 = common_scripts\utility::getstruct("stage_check_struct", "targetname");
   var_2 = _getEnt(var_1.target, "targetname");
   var_3 = 0;
   var_4 = 0.5;
@@ -297,7 +297,7 @@ is_agent_on_stage(var_0) {
 
 challenge_completed(var_0, var_1, var_2) {
   var_3 = self;
-  var_0._id_2566 = 1;
+  var_0.completed = 1;
   return 1;
 }
 
@@ -357,14 +357,14 @@ try_clear_progress_with_conditions(var_0, var_1, var_2) {
 
   for(;;) {
     var_5 = 0;
-    _id_0547::_id_A6F6();
+    _id_0547::waitnetworkframe();
 
     if(!isDefined(level.player) || !isDefined(level.players)) {
       waitframe();
     }
 
     if(common_scripts\utility::_id_0F79(var_0, "all_players_in_common_zone")) {
-      var_6 = _id_055A::_id_4562(level.players[0].origin);
+      var_6 = _id_055A::getlocationzone(level.players[0].origin);
 
       if(!isDefined(var_6)) {
         continue;
@@ -424,11 +424,11 @@ get_players_to_reset(var_0, var_1) {
 
 reset_progress_when_off_stage(var_0) {
   var_1 = self;
-  var_2 = common_scripts\utility::_id_46B5("stage_check_struct", "targetname");
+  var_2 = common_scripts\utility::getstruct("stage_check_struct", "targetname");
   var_3 = _getEnt(var_2.target, "targetname");
 
   for(;;) {
-    _id_0547::_id_A6F6();
+    _id_0547::waitnetworkframe();
 
     if(!var_1 is_agent_on_stage(var_3)) {
       clear_player_wave_progress(var_0, var_1);
@@ -501,7 +501,7 @@ valid_zombie_and_no_duplicate_melee_weapons(var_0, var_1, var_2, var_3, var_4, v
     return 0;
   }
 
-  if(valid_attacker(var_4) && correct_zombie_type(var_5, var_0._id_0A4B) && is_new_melee_weapon(_func_337(_func_337(var_3, "_zm"), "hc"), var_2)) {
+  if(valid_attacker(var_4) && correct_zombie_type(var_5, var_0._id_0A4B) && is_new_melee_weapon(maps/aachen_b_precache(maps/aachen_b_precache(var_3, "_zm"), "hc"), var_2)) {
     level.wustling_melee_kill_types = common_scripts\utility::_id_0F6F(level.wustling_melee_kill_types, var_3);
     var_4.special_zombie_kills_tracking_array[var_1]._id_005C = level.wustling_melee_kill_types.size;
   }
@@ -621,7 +621,7 @@ add_one_wave_survived(var_0, var_1, var_2) {
 
 skip_equipment_check_on_wave_break(var_0) {
   foreach(var_2 in var_0.valid_weapons) {
-    if(_id_0547::_id_585C(maps\mp\_utility::_id_4431(var_2)) || _id_0547::_id_5565(var_2, "trap_zm_mp")) {
+    if(_id_0547::iszombieequipment(maps\mp\_utility::_id_4431(var_2)) || _id_0547::_id_5565(var_2, "trap_zm_mp")) {
       return 1;
     }
   }
@@ -631,12 +631,12 @@ skip_equipment_check_on_wave_break(var_0) {
 
 run_trophy_challenge(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9 = spawnStruct();
-  var_9._id_3F02 = var_1;
+  var_9.func = var_1;
   var_9.successfunc = var_2;
   var_9.trophyflag = var_5;
-  var_9._id_4800 = var_3;
-  var_9._id_6E5C = var_4;
-  var_9._id_6E55 = var_6;
+  var_9.goal = var_3;
+  var_9.params = var_4;
+  var_9.param1 = var_6;
   var_9.param2 = var_7;
   var_9.param3 = var_8;
   var_9.requiresteamwork = var_0;
@@ -652,40 +652,40 @@ run_trophy_challenge_internal(var_0, var_1, var_2) {
 monitor_players_using_melee_weapons(var_0) {
   var_1 = self;
   var_1 endon("disconnect");
-  var_2 = var_1 wait_for_consecutive_waves_with_condition(var_0._id_4800, var_0.trophyflag, var_0._id_6E55, var_0._id_6E5C, undefined, 0, 1, var_0.trophyflag);
+  var_2 = var_1 wait_for_consecutive_waves_with_condition(var_0.goal, var_0.trophyflag, var_0.param1, var_0.params, undefined, 0, 1, var_0.trophyflag);
   var_0 handle_result(var_2, var_1);
 }
 
 monitor_players_zombie_kills(var_0) {
   var_1 = self;
   var_1 endon("disconnect");
-  var_2 = var_0._id_6E5C[0];
-  var_3 = var_0._id_6E5C[1];
-  var_4 = var_1 wait_for_required_zombie_kills(var_0._id_4800, var_0.trophyflag, var_0._id_6E55, var_2, var_3, var_0.trophyflag);
+  var_2 = var_0.params[0];
+  var_3 = var_0.params[1];
+  var_4 = var_1 wait_for_required_zombie_kills(var_0.goal, var_0.trophyflag, var_0.param1, var_2, var_3, var_0.trophyflag);
   var_0 handle_result(var_4, var_1);
 }
 
 monitor_players_zombie_wustling_melee_kills(var_0) {
   var_1 = self;
   var_1 endon("disconnect");
-  var_2 = var_0._id_6E5C[0];
-  var_3 = var_0._id_6E5C[1];
+  var_2 = var_0.params[0];
+  var_3 = var_0.params[1];
   level.wustling_melee_kill_types = [];
-  var_4 = var_1 wait_for_required_zombie_kills(var_0._id_4800, var_0.trophyflag, var_0._id_6E55, var_2, var_3, var_0.trophyflag);
+  var_4 = var_1 wait_for_required_zombie_kills(var_0.goal, var_0.trophyflag, var_0.param1, var_2, var_3, var_0.trophyflag);
   var_0 handle_result(var_4, var_1);
 }
 
 gekocht_stage_challenge(var_0) {
   var_1 = self;
   var_1 endon("disconnect");
-  var_2 = wait_for_gekocht_stage_challenge(var_0._id_4800);
+  var_2 = wait_for_gekocht_stage_challenge(var_0.goal);
   var_0 handle_result(var_2, var_1);
 }
 
 monitor_players_zombie_geistkraft_collections(var_0) {
   var_1 = self;
   var_1 endon("disconnect");
-  var_2 = wait_for_players_zombie_geistkraft_challenge(var_0._id_6E5C);
+  var_2 = wait_for_players_zombie_geistkraft_challenge(var_0.params);
   var_0 handle_result(var_2, var_1);
 }
 
@@ -696,7 +696,7 @@ monitor_players_survival_in_zone(var_0) {
 
   var_1 = self;
   var_1 endon("disconnect");
-  var_2 = var_1 wait_for_consecutive_waves_with_condition(var_0._id_4800, var_0.trophyflag, var_0._id_6E55, undefined, var_0._id_6E5C, 0, 1, var_0.trophyflag, var_0.param2);
+  var_2 = var_1 wait_for_consecutive_waves_with_condition(var_0.goal, var_0.trophyflag, var_0.param1, undefined, var_0.params, 0, 1, var_0.trophyflag, var_0.param2);
   var_0 handle_result(var_2, var_1);
   return var_2;
 }
@@ -726,11 +726,11 @@ handle_result(var_0, var_1) {
 }
 
 wait_for_round(var_0) {
-  while(!isDefined(level._id_A980)) {
+  while(!isDefined(level.wavecounter)) {
     waitframe();
   }
 
-  while(level._id_A980 < var_0) {
+  while(level.wavecounter < var_0) {
     level waittill("round complete");
   }
 }

@@ -45,12 +45,12 @@ scripted_mtx20_on_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   var_9 = self;
 
   if(common_scripts\utility::_id_562E(var_9.bouttoblow)) {
-    playFX(common_scripts\utility::_id_44F5("zmb_dp28_green_impact"), var_9 getEye());
+    playFX(common_scripts\utility::getfx("zmb_dp28_green_impact"), var_9 getEye());
     level thread _id_0380::_id_2889("zmb_wpn_crossbow_cricket_explo", undefined, var_9 getEye());
   }
 
   if(issubstr(var_4, "m2hyde") && issubstr(var_4, "_pap_zm") && common_scripts\utility::_id_0F79(level.zmb_minibosstypes, var_9._id_0A4B)) {
-    playFX(common_scripts\utility::_id_44F5("zmb_dp28_green_impact_lrg"), var_9.origin);
+    playFX(common_scripts\utility::getfx("zmb_dp28_green_impact_lrg"), var_9.origin);
     level thread _id_0380::_id_2889("zmb_wpn_crossbow_cricket_explo", undefined, var_9 getEye());
 
     foreach(var_9 in _id_0547::_id_408F()) {
@@ -80,7 +80,7 @@ green_splode(var_0) {
   var_0 endon("disconnect");
   var_1.bouttoblow = 1;
   waitframe();
-  _playFXOnTag(common_scripts\utility::_id_44F5("zmi_m2hyde_acid_dot"), var_1, "tag_eye");
+  _playFXOnTag(common_scripts\utility::getfx("zmi_m2hyde_acid_dot"), var_1, "tag_eye");
   var_1 childthread loop_green_fx();
   wait(_randomfloat(3));
 
@@ -95,7 +95,7 @@ loop_green_fx() {
   var_0 = self;
 
   for(;;) {
-    _playFXOnTag(common_scripts\utility::_id_44F5("zmb_green_zmb_stun"), var_0, "j_spine4");
+    _playFXOnTag(common_scripts\utility::getfx("zmb_green_zmb_stun"), var_0, "j_spine4");
     wait 0.75;
   }
 }

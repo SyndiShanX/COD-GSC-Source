@@ -41,8 +41,8 @@ _id_ABD2(var_0) {
 }
 
 _id_08F4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  var_8 = common_scripts\utility::_id_46B5(var_7, "targetname");
-  var_9 = common_scripts\utility::_id_46B7(var_8.target, "targetname");
+  var_8 = common_scripts\utility::getstruct(var_7, "targetname");
+  var_9 = common_scripts\utility::getstructarray(var_8.target, "targetname");
 
   foreach(var_11 in var_9) {
     var_11._id_38B2 = var_0._id_38C3;
@@ -53,7 +53,7 @@ _id_08F4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_0._id_ABEA._id_5054 = var_9;
   var_0._id_ABEA._id_1176 = var_1;
   var_0._id_ABEA._id_67EA = var_2;
-  var_0._id_ABEA._id_AC7C = var_3;
+  var_0._id_ABEA.zone = var_3;
   var_0._id_ABEA._id_38B7 = var_4;
   var_0._id_ABEA._id_38B8 = var_5;
   var_0._id_ABEA._id_29B3 = var_6;
@@ -213,7 +213,7 @@ _id_2C2D(var_0, var_1) {
 
     for(var_7 = 0; var_7 < var_6; var_7++) {
       var_3[var_5]._id_28FF = var_3[var_5]._id_28FF - var_1;
-      var_3[var_5] thread _id_0378::_id_8D74("aud_tower_machine_zombie_hit");
+      var_3[var_5] thread _id_0378::snd_message("aud_tower_machine_zombie_hit");
       var_4 = 1;
     }
 

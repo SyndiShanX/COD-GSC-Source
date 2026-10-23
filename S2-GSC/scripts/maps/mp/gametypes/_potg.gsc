@@ -67,7 +67,7 @@ _id_942E(var_0) {
       level._id_74CB[var_1]._id_1EB5 = undefined;
       level._id_74CB[var_1].victimnum = undefined;
       level._id_74CB[var_1]._id_01D0 = "none";
-      level._id_74CB[var_1]._id_A490 = undefined;
+      level._id_74CB[var_1].victim = undefined;
     }
   }
 
@@ -81,7 +81,7 @@ _id_942E(var_0) {
         level._id_74CB[var_1]._id_1EB5 = self._id_75F8[var_1]._id_1EB5;
         level._id_74CB[var_1].victimnum = self._id_75F8[var_1].victimnum;
         level._id_74CB[var_1]._id_01D0 = self._id_75F8[var_1]._id_01D0;
-        level._id_74CB[var_1]._id_A490 = self._id_75F8[var_1]._id_A490;
+        level._id_74CB[var_1].victim = self._id_75F8[var_1].victim;
         continue;
       }
 
@@ -96,13 +96,13 @@ _id_A155(var_0) {
   if(isDefined(level._id_74CC)) {
     if(level._id_74CC < var_0) {
       _id_942E(var_0);
-      _func_3B6();
+      xmodelalias/alias_ger_heads_ss_muddy_wet();
       _id_04CE::_id_7B3B(self, _func_369());
       _id_772D();
     }
   } else {
     _id_942E(var_0);
-    _func_3B6();
+    xmodelalias/alias_ger_heads_ss_muddy_wet();
     _id_04CE::_id_7B3B(self, _func_369());
     _id_772D();
   }
@@ -201,11 +201,11 @@ _id_4AE2(var_0, var_1, var_2, var_3) {
         self._id_75F8[var_5]._id_8CA6 = 1;
 
         if(isDefined(var_2)) {
-          self._id_75F8[var_5]._id_A490 = var_2;
+          self._id_75F8[var_5].victim = var_2;
         }
 
         if(!isDefined(self._id_75F8[var_5]._id_1EB5) && isDefined(var_2) && isDefined(var_1)) {
-          var_6 = var_2 maps\mp\gametypes\_damage::_id_452F(self, var_3, var_1);
+          var_6 = var_2 maps\mp\gametypes\_damage::getkillcamentity(self, var_3, var_1);
 
           if(isDefined(var_6)) {
             self._id_75F8[var_5]._id_1EB5 = var_6 getentitynumber();

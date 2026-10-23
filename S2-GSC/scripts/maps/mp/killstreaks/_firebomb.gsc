@@ -5,17 +5,17 @@
 
 init() {
   setdvarifuninitialized("firebomb_debug", 0);
-  level._id_80B7["firebomb"] = 230;
+  level.visionsetnakedforplayer_lerp["firebomb"] = 230;
   level._id_80B8["firebomb"] = 65;
   level.setwhizbyprobabilities["firebomb"] = -1;
-  level._id_80B9["firebomb"] = 6.0;
+  level.returnplayercontrol["firebomb"] = 6.0;
   level.makeglobalunusable["firebomb"] = 24.0;
-  level._id_5A61["firebomb"] = ::_id_9E2B;
-  level._id_5A7D["firebomb_bomb_mp"] = "firebomb";
-  level._id_5A7D["firebomb_bomb_axis_mp"] = "firebomb";
-  level._id_5A7D["firebomb_bomb_grenadier_mp"] = "firebomb";
-  level._id_5A7D["firebomb_bomb_axis_grenadier_mp"] = "firebomb";
-  level._id_5A7D["firebomb_flames_mp"] = "firebomb";
+  level.killstreakfuncs["firebomb"] = ::_id_9E2B;
+  level.killstreakwieldweapons["firebomb_bomb_mp"] = "firebomb";
+  level.killstreakwieldweapons["firebomb_bomb_axis_mp"] = "firebomb";
+  level.killstreakwieldweapons["firebomb_bomb_grenadier_mp"] = "firebomb";
+  level.killstreakwieldweapons["firebomb_bomb_axis_grenadier_mp"] = "firebomb";
+  level.killstreakwieldweapons["firebomb_flames_mp"] = "firebomb";
   level._id_08D5 = 0;
 }
 
@@ -101,7 +101,7 @@ _id_6393(var_0, var_1, var_2, var_3, var_4) {
         continue;
       }
       if(var_10.team != var_3 || isDefined(var_2) && var_10 == var_2 || isDefined(level.hardcoremode) && level.hardcoremode) {
-        if(!isDefined(var_10._id_A019)) {
+        if(!isDefined(var_10.underwater)) {
           if(!isDefined(var_10._id_5B9A) || var_10._id_5B9A != gettime()) {
             if(_id_73E1(var_10, var_0, var_7)) {
               if(_id_740F(var_10, var_0)) {

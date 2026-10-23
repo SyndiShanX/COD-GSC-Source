@@ -11,7 +11,7 @@ main() {
   _id_0483::main();
   maps\mp\mp_d_day_lighting::main();
   maps\mp\mp_d_day_aud::main();
-  _id_0472::_id_8A2F("compass_map_mp_d_day");
+  _id_0472::setupminimap("compass_map_mp_d_day");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   level._id_5A7C = "mp_d_day_killstreak";
@@ -118,8 +118,8 @@ _id_3AAD() {
 
 _id_7043(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   level endon("game_ended");
-  var_7 = common_scripts\utility::_id_46B5("intro_flight_path_start", "targetname");
-  var_8 = common_scripts\utility::_id_46B5("intro_flight_path_end", "targetname");
+  var_7 = common_scripts\utility::getstruct("intro_flight_path_start", "targetname");
+  var_8 = common_scripts\utility::getstruct("intro_flight_path_end", "targetname");
 
   if(!isDefined(var_0)) {
     var_0 = 100;
@@ -177,9 +177,9 @@ _id_7043(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_20 = anglestoright(var_18.angles);
 
     if(isDefined(var_6) && var_6) {
-      _playFXOnTag(common_scripts\utility::_id_44F5("fighter_plane_flyover"), var_18, "tag_origin");
+      _playFXOnTag(common_scripts\utility::getfx("fighter_plane_flyover"), var_18, "tag_origin");
     } else {
-      _playFXOnTag(common_scripts\utility::_id_44F5("bomber_plane_flyover"), var_18, "tag_origin");
+      _playFXOnTag(common_scripts\utility::getfx("bomber_plane_flyover"), var_18, "tag_origin");
     }
 
     if(isDefined(var_5) && var_15) {
@@ -191,39 +191,39 @@ _id_7043(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     switch (var_13) {
       case 1:
         var_18.origin = var_16;
-        var_18._id_4800 = var_17;
+        var_18.goal = var_17;
         var_18._id_7035 = 1;
         var_18._id_7021 = var_13 + var_0;
         break;
       case 2:
         var_18.origin = var_16 + var_20 * var_12 * -1 + var_19 * var_12 * -1;
-        var_18._id_4800 = var_17 + var_20 * var_12 * -1 + var_19 * var_12 * -1;
+        var_18.goal = var_17 + var_20 * var_12 * -1 + var_19 * var_12 * -1;
         var_18._id_7035 = 2;
         var_18._id_7021 = var_13 + var_0;
         break;
       case 3:
         var_18.origin = var_16 + var_20 * var_12 + var_19 * var_12 * -1;
-        var_18._id_4800 = var_17 + var_20 * var_12 + var_19 * var_12 * -1;
+        var_18.goal = var_17 + var_20 * var_12 + var_19 * var_12 * -1;
         var_18._id_7035 = 3;
         var_18._id_7021 = var_13 + var_0;
         break;
       case 4:
         var_18.origin = var_16 + var_20 * var_12 * -2 + var_19 * var_12 * -2;
-        var_18._id_4800 = var_17 + var_20 * var_12 * -2 + var_19 * var_12 * -2;
+        var_18.goal = var_17 + var_20 * var_12 * -2 + var_19 * var_12 * -2;
         var_18._id_7035 = 4;
         var_18._id_7021 = var_13 + var_0;
         break;
       case 5:
         var_18.origin = var_16 + var_20 * var_12 * 2 + var_19 * var_12 * -2;
-        var_18._id_4800 = var_17 + var_20 * var_12 * 2 + var_19 * var_12 * -2;
+        var_18.goal = var_17 + var_20 * var_12 * 2 + var_19 * var_12 * -2;
         var_18._id_7035 = 5;
         var_18._id_7021 = var_13 + var_0;
         break;
     }
 
     var_18 thread _id_7025();
-    var_18 _id_0378::_id_8D74("mp_intro_dday_plane_flyover", var_10, var_18._id_7021);
-    var_18 moveTo(var_18._id_4800, var_2);
+    var_18 _id_0378::snd_message("mp_intro_dday_plane_flyover", var_10, var_18._id_7021);
+    var_18 moveTo(var_18.goal, var_2);
     var_13++;
     waitframe();
   }

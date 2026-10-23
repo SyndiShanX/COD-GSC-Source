@@ -63,7 +63,7 @@ flare_player_throw(var_0) {
   if(isDefined(var_0)) {
     var_0 endon("death");
 
-    if(_id_0547::_id_577E(self)) {
+    if(_id_0547::isplayerinlaststand(self)) {
       var_0 delete();
       return;
     }
@@ -91,10 +91,10 @@ flare_handle_effects(var_0, var_1) {
   var_2._id_3D33 = 1750;
   var_2.burn_duration = 1750;
   var_2._id_3D37 = 16384;
-  var_2._id_3F83 = common_scripts\utility::_id_8FFC();
+  var_2._id_3F83 = common_scripts\utility::spawn_tag_origin();
   var_2._id_3F83 linktosynchronizedparent(self);
   var_2._id_3F83 show();
-  _playFXOnTag(common_scripts\utility::_id_44F5("signal_flare_zombie"), var_2._id_3F83, "TAG_ORIGIN");
+  _playFXOnTag(common_scripts\utility::getfx("signal_flare_zombie"), var_2._id_3F83, "TAG_ORIGIN");
   thread flare_handle_cleanup(var_2);
   wait 1;
 
@@ -112,7 +112,7 @@ flare_handle_effects(var_0, var_1) {
       }
       if(distancesquared(var_5.origin, var_2.landing_point) < var_2._id_3D37 / 2) {
         if(_bullettracepassed(var_5.origin, var_2.landing_point, 0, var_5, self)) {
-          var_5 _meth_8682(var_5.maxhealth / 10, 0.5, 5, "none", 1, self._id_0117, "dot_generic_zm");
+          var_5 setfirstinfected(var_5.maxhealth / 10, 0.5, 5, "none", 1, self._id_0117, "dot_generic_zm");
           var_5 thread flare_zombie_burn(2.5);
           var_5.on_fire = 1;
         }
@@ -131,7 +131,7 @@ flare_zombie_burn(var_0) {
 
 flare_handle_cleanup(var_0) {
   self waittill("death");
-  _killfxontag(common_scripts\utility::_id_44F5("signal_flare_zombie"), var_0._id_3F83, "TAG_ORIGIN");
+  _killfxontag(common_scripts\utility::getfx("signal_flare_zombie"), var_0._id_3F83, "TAG_ORIGIN");
 
   if(isDefined(var_0._id_3F71)) {
     var_0._id_3F71 delete();

@@ -80,11 +80,11 @@ _id_536E() {
   }
 
   foreach(var_2, var_4 in level._id_AB23) {
-    level._id_6F68[var_2] = var_4;
+    level.perksetfuncs[var_2] = var_4;
   }
 
   foreach(var_2, var_4 in level._id_AB25) {
-    level._id_6F6C[var_2] = var_4;
+    level.perkunsetfuncs[var_2] = var_4;
   }
 }
 
@@ -216,8 +216,8 @@ _id_A05A() {
 }
 
 _id_21B2() {
-  if(_id_0547::_id_4BA7("specialty_class_dutiful_medic_zm") && isDefined(self._id_57AB) && self._id_57AB && gettime() - self._id_3514 > 30000) {
-    self _meth_866C(&"trigger_mod_proc_and_stop", 2, "specialty_class_dutiful_medic_zm", 30000);
+  if(_id_0547::_id_4BA7("specialty_class_dutiful_medic_zm") && isDefined(self.isreviving) && self.isreviving && gettime() - self._id_3514 > 30000) {
+    self setdot_radius(&"trigger_mod_proc_and_stop", 2, "specialty_class_dutiful_medic_zm", 30000);
     self._id_3514 = gettime();
     return 1;
   } else

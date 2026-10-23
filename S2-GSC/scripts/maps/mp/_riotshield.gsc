@@ -4,20 +4,20 @@
 *******************************************/
 
 init() {
-  level._id_7E95 = [];
-  level._id_7E95[level._id_7E95.size] = "riotshield_mp";
+  level.riot_shield_names = [];
+  level.riot_shield_names[level.riot_shield_names.size] = "riotshield_mp";
 }
 
 _id_4B8C() {
-  return isDefined(self._id_3EF6) || isDefined(self._id_14EA);
+  return isDefined(self.frontshieldmodel) || isDefined(self.backshieldmodel);
 }
 
-_id_4B8D() {
-  return isDefined(self._id_3EF6);
+hasriotshieldequipped() {
+  return isDefined(self.frontshieldmodel);
 }
 
-_id_A9C9(var_0) {
-  if(!isDefined(level._id_7E95)) {
+weaponisriotshield(var_0) {
+  if(!isDefined(level.riot_shield_names)) {
     return 0;
   }
 
@@ -27,7 +27,7 @@ _id_A9C9(var_0) {
     var_1 = var_0;
   }
 
-  foreach(var_3 in level._id_7E95) {
+  foreach(var_3 in level.riot_shield_names) {
     if(var_3 == var_1) {
       return 1;
     }
@@ -36,12 +36,12 @@ _id_A9C9(var_0) {
   return 0;
 }
 
-_id_45DD(var_0) {
+getotherriotshieldname(var_0) {
   var_1 = 0;
   var_2 = self getweaponlistprimaries();
 
   foreach(var_4 in var_2) {
-    if(_id_A9C9(var_4)) {
+    if(weaponisriotshield(var_4)) {
       if(var_4 == var_0 && !var_1) {
         var_1 = 1;
         continue;
@@ -55,35 +55,35 @@ _id_45DD(var_0) {
 }
 
 _id_A118(var_0, var_1) {
-  self._id_3EF6 = undefined;
-  self._id_14EA = undefined;
+  self.frontshieldmodel = undefined;
+  self.backshieldmodel = undefined;
 
   if(!isDefined(var_0)) {
     var_0 = self getcurrentprimaryweapon();
   }
 
-  if(_id_A9C9(var_0)) {
-    self._id_3EF6 = _getweaponmodel(var_0);
+  if(weaponisriotshield(var_0)) {
+    self.frontshieldmodel = _getweaponmodel(var_0);
 
-    if(isDefined(self.riotshield_backpack) && self._id_267E[3] == 0) {
-      self._id_267E[3] = self.riotshield_backpack;
-      self _meth_84C7(self._id_267E, self.team, 1);
+    if(isDefined(self.riotshield_backpack) && self.costume[3] == 0) {
+      self.costume[3] = self.riotshield_backpack;
+      self set_grenadeammo(self.costume, self.team, 1);
       self.riotshield_backpack = undefined;
     }
   }
 
-  var_2 = _id_45DD(var_0);
+  var_2 = getotherriotshieldname(var_0);
 
   if(isDefined(var_2)) {
-    self._id_14EA = _getweaponmodel(var_2);
+    self.backshieldmodel = _getweaponmodel(var_2);
 
-    if(!isDefined(self.riotshield_backpack) && self._id_267E[3] != 0) {
-      self.riotshield_backpack = self._id_267E[3];
+    if(!isDefined(self.riotshield_backpack) && self.costume[3] != 0) {
+      self.riotshield_backpack = self.costume[3];
     }
 
-    if(isDefined(self.riotshield_backpack) && self._id_267E[3] != 0) {
-      self._id_267E[3] = 0;
-      self _meth_84C7(self._id_267E, self.team, 1);
+    if(isDefined(self.riotshield_backpack) && self.costume[3] != 0) {
+      self.costume[3] = 0;
+      self set_grenadeammo(self.costume, self.team, 1);
     }
   }
 
@@ -91,16 +91,16 @@ _id_A118(var_0, var_1) {
     var_1 = 0;
   }
 
-  self _meth_84D2(var_0, var_1);
+  self refreshshieldmodels(var_0, var_1);
 }
 
-_id_7E96() {
-  self._id_3EF6 = undefined;
-  self._id_14EA = undefined;
+riotshield_clear() {
+  self.frontshieldmodel = undefined;
+  self.backshieldmodel = undefined;
   self.riotshield_backpack = undefined;
 }
 
-_id_37C2() {
+entisstucktoshield() {
   if(!self islinked()) {
     return 0;
   }
@@ -147,11 +147,11 @@ _id_7E9B() {
     self waittill("weapon_switch_started", var_0);
 
     if(self isonladder()) {
-      thread _id_7E9A();
+      thread riotshield_watch_for_ladder_early_exit();
       break;
     }
 
-    if(isDefined(self._id_3EF6) && isDefined(self._id_14EA)) {
+    if(isDefined(self.frontshieldmodel) && isDefined(self.backshieldmodel)) {
       wait 0.5;
       break;
     }
@@ -160,7 +160,7 @@ _id_7E9B() {
   self notify("riotshield_change_weapon", var_0);
 }
 
-_id_7E9A() {
+riotshield_watch_for_ladder_early_exit() {
   if(_func_367()) {
     return;
   }
@@ -198,7 +198,7 @@ _id_9BC6() {
     var_0 = 1;
   }
 
-  _id_A118(self._id_2954, var_0);
+  _id_A118(self.currentweaponatspawn, var_0);
 
   if(!_id_4B8C()) {
     if(_func_367()) {
@@ -221,32 +221,32 @@ _id_9BC6() {
       var_3 = 1;
     }
 
-    if(_id_A9C9(var_2)) {
+    if(weaponisriotshield(var_2)) {
       if(_id_4B8C()) {
-        if(isDefined(self._id_7EA3)) {
-          self takeweapon(self._id_7EA3);
-          self._id_7EA3 = undefined;
+        if(isDefined(self.riotshieldtakeweapon)) {
+          self takeweapon(self.riotshieldtakeweapon);
+          self.riotshieldtakeweapon = undefined;
         }
       }
 
-      if(_id_5832(var_1)) {
+      if(isvalidnonshieldweapon(var_1)) {
         self._id_5BC4 = var_1;
       }
     } else if(issubstr(var_2, "killstreak_uav") || issubstr(var_2, "super_soldier_syrum")) {
       continue;
     }
-    _id_A15C(var_2, var_3);
+    updateriotshieldattachfornewweapon(var_2, var_3);
   }
 }
 
-_id_A15C(var_0, var_1) {
+updateriotshieldattachfornewweapon(var_0, var_1) {
   if(self ismantling() && var_0 == "none") {
     return;
   }
   _id_A118(var_0, var_1);
 }
 
-_id_5832(var_0) {
+isvalidnonshieldweapon(var_0) {
   if(maps\mp\_utility::iskillstreakweapon(var_0)) {
     return 0;
   }
@@ -255,11 +255,11 @@ _id_5832(var_0) {
     return 0;
   }
 
-  if(maps\mp\gametypes\_class::_id_5826(var_0, 1) || maps\mp\gametypes\_class::_id_5826(var_0, 0)) {
+  if(maps\mp\gametypes\_class::isvalidequipment(var_0, 1) || maps\mp\gametypes\_class::isvalidequipment(var_0, 0)) {
     return 0;
   }
 
-  if(_id_A9C9(var_0)) {
+  if(weaponisriotshield(var_0)) {
     return 0;
   }
 
@@ -270,8 +270,8 @@ _id_5832(var_0) {
   return 1;
 }
 
-_id_A93C(var_0, var_1) {
+watchriotshieldstuckentitydeath(var_0, var_1) {
   var_0 endon("death");
-  common_scripts\utility::_id_A70A("damageThenDestroyRiotshield", "death", "disconnect", "weapon_change", "deploy_riotshield");
+  common_scripts\utility::waittill_any("damageThenDestroyRiotshield", "death", "disconnect", "weapon_change", "deploy_riotshield");
   var_0 detonate(var_1);
 }

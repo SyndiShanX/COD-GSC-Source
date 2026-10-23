@@ -9,9 +9,9 @@ main() {
   _id_04D4::setupcallbacks();
 
   if(_isusingmatchrulesdata()) {
-    level._id_5300 = ::_id_5300;
-    [[level._id_5300]]();
-    level thread maps\mp\_utility::_id_7C13();
+    level.initializematchrules = ::initializematchrules;
+    [[level.initializematchrules]]();
+    level thread maps\mp\_utility::reinitializematchrulesonmigration();
   } else {
     maps\mp\_utility::registertimelimitdvar(level.gametype, 5);
     maps\mp\_utility::registerscorelimitdvar(level.gametype, 0);
@@ -19,8 +19,8 @@ main() {
     maps\mp\_utility::registerroundlimitdvar(level.gametype, 1);
     maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
     maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
-    level._id_6031 = 0;
-    level._id_6035 = 0;
+    level.matchrules_damagemultiplier = 0;
+    level.matchrules_vampirism = 0;
     _setdynamicdvar("scr_game_radarMode", 1);
   }
 
@@ -28,13 +28,13 @@ main() {
   setdvarifuninitialized("blades_score_defectivegrenade", 6);
   setdvarifuninitialized("blades_score_melee", 3);
   setdvarifuninitialized("blades_score_throwingknife", 0);
-  _id_872E();
+  setspecialloadouts();
   maps\mp\_utility::_id_873B(0);
   level.disableforfeit = 1;
-  level._id_6BA7 = ::_id_6BA7;
+  level.onspawnplayer = ::onspawnplayer;
   level._id_6B7B = ::_id_6B7B;
-  level._id_6BAF = ::_id_6BAF;
-  level._id_6B5C = ::_id_6B5C;
+  level.onstartgametype = ::onstartgametype;
+  level.onnormaldeath = ::onnormaldeath;
   level._id_6B7F = ::_id_6B7F;
   level._id_1DEA = ::_id_1785;
   level.thermalvisionon = 1;
@@ -49,8 +49,8 @@ main() {
   level.disabledivisionpassives = 1;
   level.disabledivisionskills = 1;
 
-  if(level._id_6031 || level._id_6035) {
-    level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
+    level.modifyplayerdamage = maps\mp\gametypes\_damage::gamemodemodifyplayerdamage;
   }
 
   _setteammode("ffa");
@@ -64,8 +64,8 @@ main() {
   }
 }
 
-_id_5300() {
-  maps\mp\_utility::_id_8653(1);
+initializematchrules() {
+  maps\mp\_utility::setcommonrulesfrommatchrulesdata(1);
   _setdynamicdvar("scr_oitc_winlimit", 1);
   maps\mp\_utility::registerwinlimitdvar("oitc", 1);
   _setdynamicdvar("scr_oitc_roundlimit", 1);
@@ -74,7 +74,7 @@ _id_5300() {
   maps\mp\_utility::registerhalftimedvar("oitc", 0);
 }
 
-_id_6BAF() {
+onstartgametype() {
   _setclientnamemode("auto_change");
   maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_BLADES");
   maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_BLADES");
@@ -90,21 +90,21 @@ _id_6BAF() {
   maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_BLADES_HINT");
   maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_BLADES_HINT");
   _id_050D::_id_10E4();
-  level._id_A239 = 0;
+  level.usestartspawns = 0;
   var_0[0] = "oitc";
   _id_04D1::main(var_0);
 
   foreach(var_2 in level.players) {
     var_2.pers["gamemodeLoadout"] = level.oitc_loadout;
-    var_2 maps\mp\gametypes\_class::_id_4773(var_2.team, "gamemode");
+    var_2 maps\mp\gametypes\_class::giveandapplyloadout(var_2.team, "gamemode");
   }
 
-  level._id_7895 = 1;
-  level._id_17EF = 1;
+  level.quickmessagetoall = 1;
+  level.blockweapondrops = 1;
   level thread onplayerconnect();
 }
 
-_id_6B5C(var_0, var_1, var_2) {
+onnormaldeath(var_0, var_1, var_2) {
   var_3 = 0;
 
   foreach(var_5 in level.players) {
@@ -114,7 +114,7 @@ _id_6B5C(var_0, var_1, var_2) {
   }
 
   if(game["state"] == "postgame" && var_1.score >= var_3) {
-    var_1._id_3B4B = 1;
+    var_1.finalkill = 1;
   }
 }
 
@@ -132,7 +132,7 @@ _id_6B7F(var_0, var_1, var_2, var_3, var_4) {
       var_5 = getdvarint("blades_score_throwingknife", 0);
     }
 
-    var_1 _id_04D2::_id_A161(var_1, var_5);
+    var_1 _id_04D2::updatescorestatsffa(var_1, var_5);
   }
 
   return var_5;
@@ -158,19 +158,19 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(var_3 == "MOD_FALLING" || isPlayer(var_1)) {
     if(var_3 == "MOD_FALLING" || var_1 == self || _id_5806(var_4, var_3)) {
       self playlocalsound("mp_war_objective_lost");
-      self._id_8C15 = 1;
+      self.showsetbacksplash = 1;
       self.setbackduetosuicide = var_3 == "MOD_FALLING" || var_1 == self;
-      self._id_65ED++;
-      self._id_0021 = self._id_65ED;
+      self.mysetbacks++;
+      self._id_0021 = self.mysetbacks;
       var_10 = self.score;
       self.pers["score"] = 0;
       self.score = 0;
-      maps\mp\_utility::_id_867B(0);
-      _id_04D2::_id_A161(self, var_10 * -1);
+      maps\mp\_utility::setextrascore0(0);
+      _id_04D2::updatescorestatsffa(self, var_10 * -1);
 
       if(_id_5806(var_4, var_3) && isDefined(var_1)) {
-        var_1._id_9149++;
-        var_1 maps\mp\_utility::_id_867C(var_1._id_9149);
+        var_1.stabs++;
+        var_1 maps\mp\_utility::setextrascore1(var_1.stabs);
         var_1 thread _id_047A::bankruptenemybladesscoreevent();
         var_11 = getleadingplayer();
 
@@ -235,8 +235,8 @@ isriflebulletkill(var_0, var_1) {
   return var_0 == "alt+m30_blades_mp+m30_rifle_blades" && var_1 != "MOD_MELEE";
 }
 
-_id_872E() {
-  level.oitc_loadout = maps\mp\gametypes\_class::_id_44B4();
+setspecialloadouts() {
+  level.oitc_loadout = maps\mp\gametypes\_class::getemptyloadout();
   level.oitc_loadout["loadoutDivision"] = 6;
   level.oitc_loadout["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::_id_473C(16846848, 0);
   level.oitc_loadout["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::_id_473C(16920576, 0);
@@ -246,15 +246,15 @@ _id_872E() {
 onplayerconnect() {
   for(;;) {
     level waittill("connected", var_0);
-    var_0._id_9149 = 0;
-    var_0._id_65ED = 0;
+    var_0.stabs = 0;
+    var_0.mysetbacks = 0;
     var_0.lastscoretime = 0;
-    var_0._id_8C15 = 0;
+    var_0.showsetbacksplash = 0;
     var_0.setbackduetosuicide = 0;
   }
 }
 
-_id_7B82() {
+refillammo() {
   level endon("game_ended");
   self endon("disconnect");
 
@@ -266,16 +266,16 @@ _id_7B82() {
       self givestartammo(self.lethalweapon);
 
       if(self.lethalweapon == "throwingknife_mp") {
-        _id_04C7::_id_A102("resupply_throwingknife");
+        _id_04C7::updatedamagefeedback("resupply_throwingknife");
         continue;
       }
 
-      _id_04C7::_id_A102("resupply_equipment");
+      _id_04C7::updatedamagefeedback("resupply_equipment");
     }
   }
 }
 
-_id_7B85() {
+refillsinglecountammo() {
   level endon("game_ended");
   self endon("disconnect");
 
@@ -297,29 +297,29 @@ _id_1785() {
   self.pers["gamemodeLoadout"] = level.oitc_loadout;
   self.class = self.pers["class"];
   self.lastclass = self.pers["lastClass"];
-  maps\mp\gametypes\_class::_id_4790(self.team, self.class);
+  maps\mp\gametypes\_class::giveloadout(self.team, self.class);
 }
 
-_id_6BA7() {
-  self _meth_8328();
+onspawnplayer() {
+  self sd_bombs();
   _id_1785();
-  thread _id_A6F3();
+  thread waitloadoutdone();
 }
 
-_id_A6F3() {
+waitloadoutdone() {
   level endon("game_ended");
   self endon("disconnect");
   level waittill("player_spawned");
   givesticksnstonesloadout();
 
-  if(self._id_8C15) {
+  if(self.showsetbacksplash) {
     if(self.setbackduetosuicide) {
       thread _id_047A::bankruptedbladesscoresuicideevent();
     } else {
       thread _id_047A::bankruptedbladesscoreevent();
     }
 
-    self._id_8C15 = 0;
+    self.showsetbacksplash = 0;
     self.setbackduetosuicide = 0;
   }
 }

@@ -20,14 +20,14 @@ hudoutlineenable(var_0, var_1) {
   self setentityowner(var_1);
 }
 
-_id_5291() {
+initagentscriptvariables() {
   self._id_0A4B = "player";
   self.pers = [];
-  self._id_4B60 = 0;
-  self._id_565F = 0;
-  self._id_5664 = 1;
-  self._id_A87A = 0;
-  self._id_57D6 = 0;
+  self.hasdied = 0;
+  self.isactive = 0;
+  self.isagent = 1;
+  self.wasti = 0;
+  self.issniper = 0;
   self.entity_number = self getentitynumber();
   self._id_0A4A = 0;
   self._id_0A42 = 0;
@@ -35,56 +35,56 @@ _id_5291() {
   self._id_00CA = 0;
   self._id_00CE = 0;
   self detachall();
-  _id_5334(0);
+  initplayerscriptvariables(0);
 }
 
-_id_5334(var_0) {
+initplayerscriptvariables(var_0) {
   if(!var_0) {
     self.class = undefined;
     self.lastclass = undefined;
-    self._id_1444 = undefined;
+    self.avoidkillstreakonspawntimer = undefined;
     self.guid = undefined;
     self.name = undefined;
     self.saved_actionslotdata = undefined;
-    self._id_6F65 = undefined;
-    self._id_696D = undefined;
-    self._id_9AC5 = undefined;
-    self._id_2016 = undefined;
-    self._id_2310 = undefined;
-    self._id_1F63 = undefined;
+    self.perks = undefined;
+    self.objectivescaler = undefined;
+    self.touchtriggers = undefined;
+    self.carryobject = undefined;
+    self.claimtrigger = undefined;
+    self.canpickupobject = undefined;
     self._id_5A3E = undefined;
     self._id_0179 = undefined;
     self.sessionstate = undefined;
     self._id_5BE2 = undefined;
-    self._id_5BE0 = undefined;
-    self._id_2F81 = undefined;
-    self._id_2F82 = undefined;
-    self._id_2F7E = undefined;
-    self._id_2F80 = undefined;
-    self._id_8AFE = undefined;
-    self._id_8AFD = undefined;
+    self.lastspawnpoint = undefined;
+    self.disabledweapon = undefined;
+    self.disabledweaponswitch = undefined;
+    self.disabledoffhandweapons = undefined;
+    self.disabledusability = undefined;
+    self.shielddamage = undefined;
+    self.shieldbullethits = undefined;
   } else {
-    self._id_1444 = 5;
-    self.guid = maps\mp\_utility::_id_4704();
+    self.avoidkillstreakonspawntimer = 5;
+    self.guid = maps\mp\_utility::getuniqueid();
     self.name = self.guid;
     self._id_0179 = self.team;
     self.sessionstate = "playing";
-    self._id_8AFE = 0;
-    self._id_8AFD = 0;
+    self.shielddamage = 0;
+    self.shieldbullethits = 0;
     self._id_0A42 = 1;
-    maps\mp\gametypes\_playerlogic::_id_8A40();
+    maps\mp\gametypes\_playerlogic::setupsavedactionslots();
     _id_052D::_id_73C7();
 
-    if(maps\mp\_utility::_id_56FF(self)) {
-      self._id_696D = 1;
-      _id_04D1::_id_5240();
-      self._id_2F81 = 0;
-      self._id_2F82 = 0;
-      self._id_2F7E = 0;
+    if(maps\mp\_utility::isgameparticipant(self)) {
+      self.objectivescaler = 1;
+      _id_04D1::init_player_gameobjects();
+      self.disabledweapon = 0;
+      self.disabledweaponswitch = 0;
+      self.disabledoffhandweapons = 0;
     }
   }
 
-  self._id_2F80 = 1;
+  self.disabledusability = 1;
 }
 
 _id_7D2A() {
@@ -92,16 +92,16 @@ _id_7D2A() {
 
   if(isDefined(level._id_0A4E)) {
     foreach(var_2 in level._id_0A4E) {
-      if(isDefined(var_2._id_565F) && var_2._id_565F) {
+      if(isDefined(var_2.isactive) && var_2.isactive) {
         continue;
       }
       if(isDefined(var_2._id_57A5) && var_2._id_57A5) {
         continue;
       }
-      if(isDefined(var_2._id_A6ED) && var_2._id_A6ED) {
+      if(isDefined(var_2.waitingtodeactivate) && var_2.waitingtodeactivate) {
         continue;
       }
-      if(isDefined(level._id_2DA2) && common_scripts\utility::_id_0F79(level._id_2DA2, var_2)) {
+      if(isDefined(level.despawning_agents) && common_scripts\utility::_id_0F79(level.despawning_agents, var_2)) {
         continue;
       }
       var_0 = var_2;
@@ -119,7 +119,7 @@ _id_34A8() {
 
 _id_5344(var_0, var_1) {
   var_0 _id_34A8();
-  var_0 _id_5291();
+  var_0 initagentscriptvariables();
 
   if(isDefined(var_1)) {
     var_0._id_0A4B = var_1;
@@ -129,11 +129,11 @@ _id_5344(var_0, var_1) {
 _id_3B8C(var_0) {
   if(isDefined(level._id_0A4E)) {
     foreach(var_2 in level._id_0A4E) {
-      if((!isDefined(var_2._id_565F) || !var_2._id_565F) && (!isDefined(var_2._id_57A5) || !var_2._id_57A5)) {
-        if(isDefined(var_2._id_A6ED) && var_2._id_A6ED) {
+      if((!isDefined(var_2.isactive) || !var_2.isactive) && (!isDefined(var_2._id_57A5) || !var_2._id_57A5)) {
+        if(isDefined(var_2.waitingtodeactivate) && var_2.waitingtodeactivate) {
           continue;
         }
-        if(isDefined(level._id_2DA2) && common_scripts\utility::_id_0F79(level._id_2DA2, var_2)) {
+        if(isDefined(level.despawning_agents) && common_scripts\utility::_id_0F79(level.despawning_agents, var_2)) {
           continue;
         }
         return var_2;
@@ -144,11 +144,11 @@ _id_3B8C(var_0) {
   return undefined;
 }
 
-_id_44EE(var_0) {
+getfreeagent(var_0) {
   var_1 = _id_3B8C(var_0);
 
   if(isDefined(var_1)) {
-    var_1 _id_5291();
+    var_1 initagentscriptvariables();
 
     if(isDefined(var_0)) {
       var_1._id_0A4B = var_0;
@@ -161,42 +161,42 @@ _id_44EE(var_0) {
 }
 
 _id_08A7() {
-  self._id_565F = 1;
+  self.isactive = 1;
 }
 
-_id_2A73() {
-  thread _id_2A74();
+deactivateagent() {
+  thread deactivateagentdelayed();
 }
 
-_id_2A74() {
+deactivateagentdelayed() {
   self notify("deactivateAgentDelayed");
   self endon("deactivateAgentDelayed");
 
-  if(!isDefined(level._id_2DA2)) {
-    level._id_2DA2 = [];
+  if(!isDefined(level.despawning_agents)) {
+    level.despawning_agents = [];
   }
 
-  if(!common_scripts\utility::_id_0F79(level._id_2DA2, self)) {
-    level._id_2DA2 = common_scripts\utility::_id_0F6F(level._id_2DA2, self);
+  if(!common_scripts\utility::_id_0F79(level.despawning_agents, self)) {
+    level.despawning_agents = common_scripts\utility::_id_0F6F(level.despawning_agents, self);
   }
 
-  if(maps\mp\_utility::_id_56FF(self)) {
-    _id_050D::_id_7CDF();
+  if(maps\mp\_utility::isgameparticipant(self)) {
+    _id_050D::removefromparticipantsarray();
   }
 
   _removefromcharactersarray(self);
   waitframe();
-  self._id_565F = 0;
-  self._id_4B60 = 0;
+  self.isactive = 0;
+  self.hasdied = 0;
   self._id_0117 = undefined;
-  self._id_2589 = undefined;
-  self._id_A6ED = undefined;
+  self.connecttime = undefined;
+  self.waitingtodeactivate = undefined;
 
-  foreach(var_1 in _func_2D1()) {
-    if(isDefined(var_1._id_1193)) {
-      foreach(var_4, var_3 in var_1._id_1193) {
+  foreach(var_1 in maps/_lights()) {
+    if(isDefined(var_1.attackers)) {
+      foreach(var_4, var_3 in var_1.attackers) {
         if(var_3 == self) {
-          var_1._id_1193[var_4] = undefined;
+          var_1.attackers[var_4] = undefined;
         }
       }
     }
@@ -206,19 +206,19 @@ _id_2A74() {
   self detachall();
   self notify("disconnect");
   self agentclearscriptvars();
-  level._id_2DA2 = common_scripts\utility::_id_0F93(level._id_2DA2, self);
+  level.despawning_agents = common_scripts\utility::_id_0F93(level.despawning_agents, self);
 }
 
-_id_45BB(var_0) {
+getnumactiveagents(var_0) {
   if(!isDefined(var_0)) {
     var_0 = "all";
   }
 
-  var_1 = _id_43FD(var_0);
+  var_1 = getactiveagentsoftype(var_0);
   return var_1.size;
 }
 
-_id_43FD(var_0) {
+getactiveagentsoftype(var_0) {
   var_1 = [];
 
   if(!isDefined(level._id_0A4E)) {
@@ -226,7 +226,7 @@ _id_43FD(var_0) {
   }
 
   foreach(var_3 in level._id_0A4E) {
-    if(isDefined(var_3._id_565F) && var_3._id_565F) {
+    if(isDefined(var_3.isactive) && var_3.isactive) {
       if(var_0 == "all" || var_3._id_0A4B == var_0) {
         var_1[var_1.size] = var_3;
       }
@@ -236,11 +236,11 @@ _id_43FD(var_0) {
   return var_1;
 }
 
-_id_45C7(var_0) {
-  return _id_45C8(var_0, "all");
+getnumownedactiveagents(var_0) {
+  return getnumownedactiveagentsbytype(var_0, "all");
 }
 
-_id_45C8(var_0, var_1) {
+getnumownedactiveagentsbytype(var_0, var_1) {
   var_2 = 0;
 
   if(!isDefined(level._id_0A4E)) {
@@ -248,7 +248,7 @@ _id_45C8(var_0, var_1) {
   }
 
   foreach(var_4 in level._id_0A4E) {
-    if(isDefined(var_4._id_565F) && var_4._id_565F) {
+    if(isDefined(var_4.isactive) && var_4.isactive) {
       if(isDefined(var_4._id_0117) && var_4._id_0117 == var_0) {
         if(var_1 == "all" || var_4._id_0A4B == var_1) {
           var_2++;
@@ -277,19 +277,19 @@ _id_45AE(var_0) {
   return level._id_60A5;
 }
 
-_id_470C(var_0, var_1) {
+getvalidspawnpathnodenearplayer(var_0, var_1) {
   var_2 = _getnodesinradius(self.origin, 350, 64, 128, "Path");
 
   if(!isDefined(var_2) || var_2.size == 0) {
     return undefined;
   }
 
-  if(isDefined(level._id_A966) && isDefined(level._id_9DC7)) {
+  if(isDefined(level.waterdeletez) && isDefined(level.trigunderwater)) {
     var_3 = var_2;
     var_2 = [];
 
     foreach(var_5 in var_3) {
-      if(var_5.origin[2] > level._id_A966 || !_ispointinvolume(var_5.origin, level._id_9DC7)) {
+      if(var_5.origin[2] > level.waterdeletez || !_ispointinvolume(var_5.origin, level.trigunderwater)) {
         var_2[var_2.size] = var_5;
       }
     }
@@ -297,7 +297,7 @@ _id_470C(var_0, var_1) {
 
   var_7 = anglesToForward(self.angles);
   var_8 = -10;
-  var_9 = _func_2D4(self);
+  var_9 = maps/_loadout_code(self);
   var_10 = (0, 0, var_9);
 
   if(!isDefined(var_0)) {
@@ -373,11 +373,11 @@ _id_470C(var_0, var_1) {
   }
 }
 
-_id_5A28(var_0) {
+killagent(var_0) {
   var_0 dodamage(var_0.health + 500000, var_0.origin);
 }
 
-_id_5A39() {
+killdog() {
   self[[_id_0A59("on_damaged")]](level, undefined, self.health + 1, 0, "MOD_CRUSH", "none", (0, 0, 0), (0, 0, 0), "none", 0, "");
 }
 
@@ -392,7 +392,7 @@ deleteentonagentdeath(var_0) {
 
 watchentdeleteforagentdeath(var_0) {
   self endon("death");
-  var_0 common_scripts\utility::_id_A70A("death", "entitydeleted");
+  var_0 common_scripts\utility::waittill_any("death", "entitydeleted");
   self.agentondeathcleanup = common_scripts\utility::_id_0F93(self.agentondeathcleanup, var_0);
 }
 

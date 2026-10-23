@@ -4,7 +4,7 @@
 *******************************************************/
 
 init() {
-  if(!isDefined(game["gamestarted"]) && !(maps\mp\_utility::_id_551F() || _func_367())) {
+  if(!isDefined(game["gamestarted"]) && !(maps\mp\_utility::invirtuallobby() || _func_367())) {
     var_0 = getDvar("1924");
 
     switch (var_0) {
@@ -24,8 +24,8 @@ init() {
 
     level._id_609F = 10;
     _func_37B("mp/ddl/spawndata_" + var_0 + ".ddl");
-    _func_37C();
-    _func_37A("matchSpawnData", "spawnTuningVersion", common_scripts\utility::_id_9AAD(level._id_90B4));
+    soundscripts/_snd_playsound();
+    _func_37A("matchSpawnData", "spawnTuningVersion", common_scripts\utility::tostring(level._id_90B4));
     _func_37A("matchSpawnData", "gametype", getDvar("1924"));
     level._id_903C = 1;
   }
@@ -47,7 +47,7 @@ _id_57DC(var_0) {
 _id_5EAC() {
   level endon("game_ended");
 
-  if(maps\mp\_utility::_id_551F() || _func_367()) {
+  if(maps\mp\_utility::invirtuallobby() || _func_367()) {
     return;
   }
   var_0 = 18;
@@ -78,14 +78,14 @@ _id_5EAC() {
     if(!isDefined(var_10) && !isPlayer(var_10)) {
       continue;
     }
-    if(isDefined(level._id_A239) && level._id_A239 && (isDefined(level.ingraceperiod) && level.ingraceperiod)) {
+    if(isDefined(level.usestartspawns) && level.usestartspawns && (isDefined(level.ingraceperiod) && level.ingraceperiod)) {
       continue;
     }
     var_11 = _id_57DC(level.gametype) && var_9 < var_4 - 1 && randomint(3) == 0;
 
     if(var_11) {
       var_9++;
-      _func_37A("spawns", var_9, "spawnTuningVersion", common_scripts\utility::_id_9AAD(level._id_90B4));
+      _func_37A("spawns", var_9, "spawnTuningVersion", common_scripts\utility::tostring(level._id_90B4));
       _func_37A("spawns", var_9, "timeFromMatchStart", maps\mp\_utility::gettimepassed());
       _func_37A("spawns", var_9, "matchID", getmatchdata("match_common", "matchID"));
       _func_37A("spawns", var_9, "playerID", var_10.clientid);
@@ -93,7 +93,7 @@ _id_5EAC() {
 
     var_12 = 0;
     var_13 = 0;
-    var_14 = maps\mp\_utility::_id_44FB();
+    var_14 = maps\mp\_utility::getgametimepassedseconds();
     var_15 = var_10.team;
     var_16 = 0;
 
@@ -101,7 +101,7 @@ _id_5EAC() {
       if(isbot(var_18) || istestclient(var_18) || var_18 == var_10) {
         continue;
       }
-      if(maps\mp\_utility::isreallyalive(var_18) && isDefined(var_18._id_5CC6) && _id_0485::_id_1F59(var_18._id_5CC6)) {
+      if(maps\mp\_utility::isreallyalive(var_18) && isDefined(var_18._id_5CC6) && _id_0485::canloglife(var_18._id_5CC6)) {
         if(level.teambased && var_18.team == var_15) {
           if(var_12 < var_1) {
             var_5[var_12]._id_5E3E = var_18.origin;
@@ -140,7 +140,7 @@ _id_5EAC() {
 
     var_20 = gettime();
     var_21 = var_10;
-    _reconspatialevent(var_10._id_9092, "script_mp_spawndata_plyrlocs: player_name %s, life_id %d, team %s, gameTime %d, ally_0_loc %v, ally_0_ang %v, ally_1_loc %v, ally_1_ang %v, ally_2_loc %v, ally_2_ang %v, ally_3_loc %v, ally_3_ang %v, ally_4_loc %v, ally_4_ang %v, ally_5_loc %v, ally_5_ang %v, ally_6_loc %v, ally_6_ang %v, ally_7_loc %v, ally_7_ang %v, ally_8_loc %v, ally_8_ang %v, enemy_0_loc %v, enemy_0_ang %v, enemy_1_loc %v, enemy_1_ang %v, enemy_2_loc %v, enemy_2_ang %v, enemy_3_loc %v, enemy_3_ang %v, enemy_4_loc %v, enemy_4_ang %v, enemy_5_loc %v, enemy_5_ang %v, enemy_6_loc %v, enemy_6_ang %v, enemy_7_loc %v, enemy_7_ang %v, enemy_8_loc %v, enemy_8_ang %v, enemy_9_loc %v, enemy_9_ang %v", var_21.name, var_21._id_5CC6, var_21.team, var_20, var_5[0]._id_5E3E, var_5[0]._id_0DCE, var_5[1]._id_5E3E, var_5[1]._id_0DCE, var_5[2]._id_5E3E, var_5[2]._id_0DCE, var_5[3]._id_5E3E, var_5[3]._id_0DCE, var_5[4]._id_5E3E, var_5[4]._id_0DCE, var_5[5]._id_5E3E, var_5[5]._id_0DCE, var_5[6]._id_5E3E, var_5[6]._id_0DCE, var_5[7]._id_5E3E, var_5[7]._id_0DCE, var_5[8]._id_5E3E, var_5[8]._id_0DCE, var_6[0]._id_5E3E, var_6[0]._id_0DCE, var_6[1]._id_5E3E, var_6[1]._id_0DCE, var_6[2]._id_5E3E, var_6[2]._id_0DCE, var_6[3]._id_5E3E, var_6[3]._id_0DCE, var_6[4]._id_5E3E, var_6[4]._id_0DCE, var_6[5]._id_5E3E, var_6[5]._id_0DCE, var_6[6]._id_5E3E, var_6[6]._id_0DCE, var_6[7]._id_5E3E, var_6[7]._id_0DCE, var_6[8]._id_5E3E, var_6[8]._id_0DCE, var_6[9]._id_5E3E, var_6[9]._id_0DCE);
+    _reconspatialevent(var_10.spawnpos, "script_mp_spawndata_plyrlocs: player_name %s, life_id %d, team %s, gameTime %d, ally_0_loc %v, ally_0_ang %v, ally_1_loc %v, ally_1_ang %v, ally_2_loc %v, ally_2_ang %v, ally_3_loc %v, ally_3_ang %v, ally_4_loc %v, ally_4_ang %v, ally_5_loc %v, ally_5_ang %v, ally_6_loc %v, ally_6_ang %v, ally_7_loc %v, ally_7_ang %v, ally_8_loc %v, ally_8_ang %v, enemy_0_loc %v, enemy_0_ang %v, enemy_1_loc %v, enemy_1_ang %v, enemy_2_loc %v, enemy_2_ang %v, enemy_3_loc %v, enemy_3_ang %v, enemy_4_loc %v, enemy_4_ang %v, enemy_5_loc %v, enemy_5_ang %v, enemy_6_loc %v, enemy_6_ang %v, enemy_7_loc %v, enemy_7_ang %v, enemy_8_loc %v, enemy_8_ang %v, enemy_9_loc %v, enemy_9_ang %v", var_21.name, var_21._id_5CC6, var_21.team, var_20, var_5[0]._id_5E3E, var_5[0]._id_0DCE, var_5[1]._id_5E3E, var_5[1]._id_0DCE, var_5[2]._id_5E3E, var_5[2]._id_0DCE, var_5[3]._id_5E3E, var_5[3]._id_0DCE, var_5[4]._id_5E3E, var_5[4]._id_0DCE, var_5[5]._id_5E3E, var_5[5]._id_0DCE, var_5[6]._id_5E3E, var_5[6]._id_0DCE, var_5[7]._id_5E3E, var_5[7]._id_0DCE, var_5[8]._id_5E3E, var_5[8]._id_0DCE, var_6[0]._id_5E3E, var_6[0]._id_0DCE, var_6[1]._id_5E3E, var_6[1]._id_0DCE, var_6[2]._id_5E3E, var_6[2]._id_0DCE, var_6[3]._id_5E3E, var_6[3]._id_0DCE, var_6[4]._id_5E3E, var_6[4]._id_0DCE, var_6[5]._id_5E3E, var_6[5]._id_0DCE, var_6[6]._id_5E3E, var_6[6]._id_0DCE, var_6[7]._id_5E3E, var_6[7]._id_0DCE, var_6[8]._id_5E3E, var_6[8]._id_0DCE, var_6[9]._id_5E3E, var_6[9]._id_0DCE);
     var_22 = -1;
     var_23 = -1;
     var_24 = "none";
@@ -158,7 +158,7 @@ _id_5EAC() {
       }
     }
 
-    if(!isDefined(level._id_6026)) {
+    if(!isDefined(level.matchdata)) {
       var_32 = -1;
       var_33 = -1;
     } else {
@@ -183,7 +183,7 @@ _id_5EAC() {
     var_39 = -1;
 
     if(level.teambased) {
-      var_25 = _id_04D2::_id_473F();
+      var_25 = _id_04D2::getwinningteam();
 
       if(maps\mp\_utility::isroundbased() || maps\mp\_utility::isobjectivebased()) {
         var_36 = maps\mp\_utility::getroundswon(var_21.team);
@@ -199,7 +199,7 @@ _id_5EAC() {
         var_35 = _id_04D2::_id_063E("axis");
       }
     } else {
-      var_40 = _id_04D2::_id_450B(2);
+      var_40 = _id_04D2::gethighestscoringplayersarray(2);
       var_36 = var_21.score;
 
       if(var_40.size > 0 && var_40[0] != var_21) {
@@ -216,7 +216,7 @@ _id_5EAC() {
     }
 
     var_41 = maps\mp\_utility::getscorelimit();
-    var_42 = common_scripts\utility::_id_98E7(var_36 > var_37, var_36, var_37);
+    var_42 = common_scripts\utility::ter_op(var_36 > var_37, var_36, var_37);
 
     if(var_41 > 0) {
       var_43 = var_42 / var_41;
@@ -224,9 +224,9 @@ _id_5EAC() {
       var_43 = -1;
     }
 
-    var_24 = common_scripts\utility::_id_98E7(isDefined(game["status"]), game["status"], "none");
-    var_22 = common_scripts\utility::_id_98E7(isDefined(game["timePassed"]), game["timePassed"], -1);
-    var_23 = maps\mp\gametypes\_gamelogic::_id_46E5();
+    var_24 = common_scripts\utility::ter_op(isDefined(game["status"]), game["status"], "none");
+    var_22 = common_scripts\utility::ter_op(isDefined(game["timePassed"]), game["timePassed"], -1);
+    var_23 = maps\mp\gametypes\_gamelogic::gettimeremaining();
     var_44 = 0;
 
     if(var_24 == "normal") {
@@ -236,9 +236,9 @@ _id_5EAC() {
     }
 
     if(var_11) {
-      _func_37A("spawns", var_9, "matchInfo", "scoreAllies", maps\mp\_utility::_id_2315(var_34));
-      _func_37A("spawns", var_9, "matchInfo", "scoreAxis", maps\mp\_utility::_id_2315(var_35));
-      _func_37A("spawns", var_9, "matchInfo", "roundNum", maps\mp\_utility::_id_2314(var_44));
+      _func_37A("spawns", var_9, "matchInfo", "scoreAllies", maps\mp\_utility::clamptoshort(var_34));
+      _func_37A("spawns", var_9, "matchInfo", "scoreAxis", maps\mp\_utility::clamptoshort(var_35));
+      _func_37A("spawns", var_9, "matchInfo", "roundNum", maps\mp\_utility::clamptobyte(var_44));
     }
 
     _reconevent("script_mp_spawndata_matchinfo: player_name %s, life_id %d, team %s, gameTime %d, timePassed %d, timeRemaining %d, gameStatus %s,winning_team %s, winning_score_perc %f, ally_score %d, enemy_score %d, ally_score_for_cur_round %d, enemy_score_for_cur_round %d, aliveCount %d, activeCount %d, joinCount %d, botJoinCount %d, spawnCount %d, deathCount %d, playlistName %s, qaPlayList %d", var_21.name, var_21._id_5CC6, var_21.team, var_20, var_22, var_23, var_24, var_25, var_43, var_36, var_37, var_38, var_39, var_26, var_27, var_28, var_32, var_29, var_33, var_30, var_31);
@@ -315,44 +315,44 @@ _id_5EA8(var_0, var_1) {
   var_25 = -1;
   var_26 = -1;
 
-  if(isDefined(self._id_9070)) {
-    if(isDefined(self._id_9070._id_9087)) {
-      if(isDefined(self._id_9070._id_0BD9)) {
-        var_6 = self._id_9070._id_0BD9;
+  if(isDefined(self.spawninfo)) {
+    if(isDefined(self.spawninfo._id_9087)) {
+      if(isDefined(self.spawninfo._id_0BD9)) {
+        var_6 = self.spawninfo._id_0BD9;
       }
 
-      if(isDefined(self._id_9070._id_6884)) {
-        var_7 = self._id_9070._id_6884;
+      if(isDefined(self.spawninfo._id_6884)) {
+        var_7 = self.spawninfo._id_6884;
       }
 
-      if(isDefined(self._id_9070._id_689C)) {
-        var_26 = self._id_9070._id_689C;
+      if(isDefined(self.spawninfo._id_689C)) {
+        var_26 = self.spawninfo._id_689C;
       }
 
-      if(isDefined(self._id_9070._id_9087._id_5C09)) {
-        var_8 = self._id_9070._id_9087._id_5C09;
+      if(isDefined(self.spawninfo._id_9087.lastupdatetime)) {
+        var_8 = self.spawninfo._id_9087.lastupdatetime;
       }
 
-      if(isDefined(self._id_9070._id_76E6) && isDefined(self._id_9070._id_76E6.origin)) {
-        var_13 = _distance2d(self._id_9092, self._id_9070._id_76E6.origin);
+      if(isDefined(self.spawninfo._id_76E6) && isDefined(self.spawninfo._id_76E6.origin)) {
+        var_13 = _distance2d(self.spawnpos, self.spawninfo._id_76E6.origin);
       }
 
-      var_14 = _func_391(self._id_9070._id_9087._id_00D4, self.team);
+      var_14 = _func_391(self.spawninfo._id_9087._id_00D4, self.team);
 
       if(!isDefined(var_14) || var_14 > 15000) {
         var_14 = -1;
       }
 
-      var_15 = _func_391(self._id_9070._id_9087._id_00D4, maps\mp\_utility::getotherteam(self.team));
+      var_15 = _func_391(self.spawninfo._id_9087._id_00D4, maps\mp\_utility::getotherteam(self.team));
 
       if(!isDefined(var_15) || var_15 > 15000) {
         var_15 = -1;
       }
 
-      var_27 = _func_393(self._id_9070._id_9087._id_00D4, self.team);
+      var_27 = _func_393(self.spawninfo._id_9087._id_00D4, self.team);
 
       if(var_27 > 0) {
-        var_16 = _func_392(self._id_9070._id_9087._id_00D4, self.team);
+        var_16 = _func_392(self.spawninfo._id_9087._id_00D4, self.team);
 
         if(!isDefined(var_16) || var_16 > 15000) {
           var_16 = -1;
@@ -361,10 +361,10 @@ _id_5EA8(var_0, var_1) {
         }
       }
 
-      var_28 = _func_393(self._id_9070._id_9087._id_00D4, maps\mp\_utility::getotherteam(self.team));
+      var_28 = _func_393(self.spawninfo._id_9087._id_00D4, maps\mp\_utility::getotherteam(self.team));
 
       if(var_28 > 0) {
-        var_17 = _func_392(self._id_9070._id_9087._id_00D4, maps\mp\_utility::getotherteam(self.team));
+        var_17 = _func_392(self.spawninfo._id_9087._id_00D4, maps\mp\_utility::getotherteam(self.team));
 
         if(!isDefined(var_17) || var_17 > 15000) {
           var_17 = -1;
@@ -373,67 +373,67 @@ _id_5EA8(var_0, var_1) {
         }
       }
 
-      var_18 = _func_394(self._id_9070._id_9087._id_00D4, self.team);
-      var_19 = _func_395(self._id_9070._id_9087._id_00D4, maps\mp\_utility::getotherteam(self.team));
+      var_18 = _func_394(self.spawninfo._id_9087._id_00D4, self.team);
+      var_19 = _func_395(self.spawninfo._id_9087._id_00D4, maps\mp\_utility::getotherteam(self.team));
 
-      if(isDefined(self._id_9070._id_9087._id_2055) && self._id_9070._id_9087._id_2055) {
+      if(isDefined(self.spawninfo._id_9087._id_2055) && self.spawninfo._id_9087._id_2055) {
         var_23 = 1;
       } else {
         var_23 = 0;
       }
 
-      if(isDefined(self._id_9070._id_90B3)) {
-        if(isDefined(self._id_9070._id_90B3["primary"])) {
-          var_24 = self._id_9070._id_90B3["primary"];
+      if(isDefined(self.spawninfo._id_90B3)) {
+        if(isDefined(self.spawninfo._id_90B3["primary"])) {
+          var_24 = self.spawninfo._id_90B3["primary"];
         }
 
-        if(isDefined(self._id_9070._id_90B3["secondary"])) {
-          var_25 = self._id_9070._id_90B3["secondary"];
+        if(isDefined(self.spawninfo._id_90B3["secondary"])) {
+          var_25 = self.spawninfo._id_90B3["secondary"];
         }
       }
 
-      var_29 = _id_050C::_id_3B91(self.team, self._id_9070._id_9087, 0);
+      var_29 = _id_050C::_id_3B91(self.team, self.spawninfo._id_9087, 0);
 
       if(isDefined(var_29)) {
         var_11 = _sqrt(var_29);
       }
 
-      var_30 = _id_050C::_id_3B92(self.team, self._id_9070._id_9087, 0);
+      var_30 = _id_050C::_id_3B92(self.team, self.spawninfo._id_9087, 0);
 
       if(isDefined(var_30)) {
         var_12 = _sqrt(var_30);
       }
 
       if(isDefined(self._id_00E6) && isDefined(self._id_00E6.origin)) {
-        var_10 = _distance2d(self._id_9070._id_9087.origin, self._id_00E6.origin);
+        var_10 = _distance2d(self.spawninfo._id_9087.origin, self._id_00E6.origin);
       }
 
-      if(isDefined(self._id_5B90)) {
-        var_9 = _distance2d(self._id_9070._id_9087.origin, self._id_5B90);
+      if(isDefined(self.lastdeathpos)) {
+        var_9 = _distance2d(self.spawninfo._id_9087.origin, self.lastdeathpos);
       }
     }
   }
 
   if(var_0) {
     _func_37A("spawns", var_1, "playerInfo", "lifeNum", self._id_5CC6);
-    _func_37A("spawns", var_1, "playerInfo", "wasTacticalInsertion", self._id_A87A);
+    _func_37A("spawns", var_1, "playerInfo", "wasTacticalInsertion", self.wasti);
     _func_37A("spawns", var_1, "playerInfo", "team", self.team);
-    _func_37A("spawns", var_1, "playerInfo", "spawnPos", 0, int(self._id_9092[0]));
-    _func_37A("spawns", var_1, "playerInfo", "spawnPos", 1, int(self._id_9092[1]));
-    _func_37A("spawns", var_1, "playerInfo", "spawnPos", 2, int(self._id_9092[2]));
+    _func_37A("spawns", var_1, "playerInfo", "spawnPos", 0, int(self.spawnpos[0]));
+    _func_37A("spawns", var_1, "playerInfo", "spawnPos", 1, int(self.spawnpos[1]));
+    _func_37A("spawns", var_1, "playerInfo", "spawnPos", 2, int(self.spawnpos[2]));
   }
 
   switch (level.gametype) {
     case "conf":
     case "war":
-      if(isDefined(level._id_6026) && isDefined(game["spawnClaimFlipCount"])) {
+      if(isDefined(level.matchdata) && isDefined(game["spawnClaimFlipCount"])) {
         var_31 = game["spawnClaimFlipCount"];
       } else {
         var_31 = -1;
       }
 
       if(var_0) {
-        _func_37A("tdmSpawns", var_1, "numTimesSidesFlipped", maps\mp\_utility::_id_2315(var_31));
+        _func_37A("tdmSpawns", var_1, "numTimesSidesFlipped", maps\mp\_utility::clamptoshort(var_31));
         _func_37A("tdmSpawns", var_1, "causedSidesToFlip", var_23);
       }
 
@@ -454,9 +454,9 @@ _id_5EA8(var_0, var_1) {
         var_44 = _id_050C::_id_4500();
 
         if(isDefined(var_44)) {
-          if(isDefined(var_44._id_565F)) {
-            var_32 = var_44._id_565F["allies"];
-            var_33 = var_44._id_565F["axis"];
+          if(isDefined(var_44.isactive)) {
+            var_32 = var_44.isactive["allies"];
+            var_33 = var_44.isactive["axis"];
 
             if(isDefined(var_44._id_0BF3)) {
               var_34 = var_44._id_0BF3;
@@ -468,16 +468,16 @@ _id_5EA8(var_0, var_1) {
 
             var_36 = var_32 && var_33 && isDefined(var_44._id_0BF3) && isDefined(var_44._id_1479);
 
-            if(isDefined(var_44._id_6162)) {
-              var_37 = var_44._id_6162;
+            if(isDefined(var_44.midpoint)) {
+              var_37 = var_44.midpoint;
             }
 
             if(isDefined(var_44._id_9851)) {
               var_38 = var_44._id_9851;
             }
 
-            if(isDefined(var_44._id_5C09)) {
-              var_39 = var_44._id_5C09;
+            if(isDefined(var_44.lastupdatetime)) {
+              var_39 = var_44.lastupdatetime;
             }
 
             if(isDefined(var_44._id_5C0A)) {
@@ -498,9 +498,9 @@ _id_5EA8(var_0, var_1) {
       _reconevent("script_mp_spawndata_info_tdm: player_name %s, life_id %d, team %s, gameTime %d, causedSpawnClaimsToFlip %d, spawnClaimsFlipCount %d, usingFrontline %b, frontlineActive %b, frontlineMidpoint %v, frontlineYaw %f, frontlineAlliesAverage %v, frontlineAxisAverage %v, frontlineActiveAllies %b, frontlineActiveAxis %b, frontlineLastUpdateTime %d, frontlineLastUpdateTimeDelta %d, frontlineUptime %d, frontlineDowntime %d", self.name, self._id_5CC6, self.team, var_2, var_23, var_31, var_43, var_36, var_37, var_38, var_34, var_35, var_32, var_33, var_39, var_40, var_41, var_42);
       break;
     case "hp":
-      var_45 = level._id_AC7C.origin;
-      var_46 = _distance2d(self._id_9092, var_45);
-      var_47 = level._id_AC7C._id_3FCA _id_04D1::_id_45F7();
+      var_45 = level.zone.origin;
+      var_46 = _distance2d(self.spawnpos, var_45);
+      var_47 = level.zone.gameobject _id_04D1::getownerteam();
 
       if(var_47 == self.team) {
         var_20 = var_46;
@@ -524,14 +524,14 @@ _id_5EA8(var_0, var_1) {
         var_50 = 0;
       }
 
-      if(isDefined(self._id_5B90)) {
-        var_51 = _distance2d(self._id_5B90, var_45);
+      if(isDefined(self.lastdeathpos)) {
+        var_51 = _distance2d(self.lastdeathpos, var_45);
       } else {
         var_51 = -1;
       }
 
       if(var_0) {
-        _func_37A("hpSpawns", var_1, "timeInHardPoint", maps\mp\_utility::_id_2315(var_48));
+        _func_37A("hpSpawns", var_1, "timeInHardPoint", maps\mp\_utility::clamptoshort(var_48));
         _func_37A("hpSpawns", var_1, "diedInHardPoint", var_50);
         _func_37A("hpSpawns", var_1, "hpZoneInfo", "controllingTeam", _id_46CA(var_47));
         _func_37A("hpSpawns", var_1, "hpZoneInfo", "position", 0, int(var_45[0]));
@@ -551,8 +551,8 @@ _id_5EA8(var_0, var_1) {
       var_56 = 0;
 
       foreach(var_58 in level._id_3211) {
-        if(isDefined(self._id_5B90)) {
-          var_59 = _distance2d(self._id_5B90, var_58._id_28D4);
+        if(isDefined(self.lastdeathpos)) {
+          var_59 = _distance2d(self.lastdeathpos, var_58.curorigin);
 
           if(var_53 == -1 || var_59 < var_53) {
             var_53 = var_59;
@@ -560,15 +560,15 @@ _id_5EA8(var_0, var_1) {
           }
         }
 
-        if(isDefined(self._id_9092)) {
-          var_60 = _distance2d(self._id_9092, var_58._id_28D4);
+        if(isDefined(self.spawnpos)) {
+          var_60 = _distance2d(self.spawnpos, var_58.curorigin);
 
           if(var_55 == -1 || var_60 < var_55) {
             var_55 = var_60;
             var_54 = var_58.label;
           }
 
-          var_61 = var_58 _id_04D1::_id_45F7();
+          var_61 = var_58 _id_04D1::getownerteam();
 
           if(var_61 == self.team && (var_20 == -1 || var_60 < var_20)) {
             var_20 = var_60;
@@ -581,25 +581,25 @@ _id_5EA8(var_0, var_1) {
           if(var_0 && var_56 < 3) {
             _func_37A("domSpawns", var_1, "domFlagInfo", var_56, "flag", _id_44A4(var_58.label));
             _func_37A("domSpawns", var_1, "domFlagInfo", var_56, "controllingTeam", _id_46CA(var_61));
-            _func_37A("domSpawns", var_1, "domFlagInfo", var_56, "position", 0, int(var_58._id_28D4[0]));
-            _func_37A("domSpawns", var_1, "domFlagInfo", var_56, "position", 1, int(var_58._id_28D4[1]));
-            _func_37A("domSpawns", var_1, "domFlagInfo", var_56, "position", 2, int(var_58._id_28D4[2]));
+            _func_37A("domSpawns", var_1, "domFlagInfo", var_56, "position", 0, int(var_58.curorigin[0]));
+            _func_37A("domSpawns", var_1, "domFlagInfo", var_56, "position", 1, int(var_58.curorigin[1]));
+            _func_37A("domSpawns", var_1, "domFlagInfo", var_56, "position", 2, int(var_58.curorigin[2]));
           }
         }
       }
 
-      var_63 = level._id_3211[0]._id_A582[0].origin;
-      var_64 = level._id_3211[0]._id_6DB2;
-      var_65 = level._id_3211[1]._id_A582[0].origin;
-      var_66 = level._id_3211[1]._id_6DB2;
-      var_67 = level._id_3211[2]._id_A582[0].origin;
-      var_68 = level._id_3211[2]._id_6DB2;
+      var_63 = level._id_3211[0].visuals[0].origin;
+      var_64 = level._id_3211[0].ownerteam;
+      var_65 = level._id_3211[1].visuals[0].origin;
+      var_66 = level._id_3211[1].ownerteam;
+      var_67 = level._id_3211[2].visuals[0].origin;
+      var_68 = level._id_3211[2].ownerteam;
       var_69 = var_20;
       var_70 = var_21;
       var_71 = var_22;
 
-      if(isDefined(self._id_9070) && isDefined(self._id_9070._id_9087) && isDefined(self._id_9070._id_9087._id_766F)) {
-        var_72 = self._id_9070._id_9087._id_766F;
+      if(isDefined(self.spawninfo) && isDefined(self.spawninfo._id_9087) && isDefined(self.spawninfo._id_9087._id_766F)) {
+        var_72 = self.spawninfo._id_9087._id_766F;
       } else {
         var_72 = "none";
       }
@@ -623,17 +623,17 @@ _id_5EA8(var_0, var_1) {
       _reconevent("script_mp_spawndata_info_dom: player_name %s, life_id %d, team %s, gameTime %d, a_origin %v, a_owner %s, b_origin %v, b_owner %s,c_origin %v, c_owner %s, spawnFlag %s, nearestFlagOnSpawn %s, diedOnFlag %b, nearestFlagOnDeath %s, distToAllyFlagOnSpawn %f, distToEnemyFlagOnSpawn %f, distToNeutralFlagOnSpawn %f, captures %d, defend_kills %d", self.name, self._id_5CC6, self.team, var_2, var_63, var_64, var_65, var_66, var_67, var_68, var_72, var_54, var_74, var_52, var_69, var_70, var_71, var_73, var_49);
       break;
     case "ctf":
-      if(isDefined(level._id_9853[self.team].carrier)) {
-        var_22 = _distance2d(self._id_9092, level._id_9853[self.team].carrier.origin);
+      if(isDefined(level.teamflags[self.team].carrier)) {
+        var_22 = _distance2d(self.spawnpos, level.teamflags[self.team].carrier.origin);
       }
 
-      var_20 = _distance2d(self._id_9092, level._id_9853[self.team].origin);
-      var_21 = _distance2d(self._id_9092, level._id_9853[maps\mp\_utility::getotherteam(self.team)].origin);
+      var_20 = _distance2d(self.spawnpos, level.teamflags[self.team].origin);
+      var_21 = _distance2d(self.spawnpos, level.teamflags[maps\mp\_utility::getotherteam(self.team)].origin);
       var_75 = var_20;
       var_76 = var_21;
       var_77 = var_22;
-      var_78 = level._id_9853["allies"];
-      var_79 = level._id_9853["axis"];
+      var_78 = level.teamflags["allies"];
+      var_79 = level.teamflags["axis"];
       var_80 = var_78.carrier;
       var_81 = var_79.carrier;
       var_82 = undefined;
@@ -693,8 +693,8 @@ _id_5EA8(var_0, var_1) {
       break;
   }
 
-  _reconspatialevent(self._id_9092, "script_mp_spawndata_spawninfo: player_name %s, life_id %d, life_index %d, was_tactical_insertion %b, team %s, gameTime %d, tuning_version %f, allBadSpawn %d, spawnTypePercPrimary %f, spawnTypePercSecondary %f,number_of_choices %d, distToNearestAlly %f, distToNearestEnemy %f, averageDistToAlly %f, averageDistToEnemy %f, numNearbyAllies %d, numNearbyEnemies %d, distToDeathLocation %f, distToLastAttacker %f, distToPrevSpawnLocation %f, distToNearestAllyDeathLocation %f, distToNearestEnemySpawnLocation %f", self.name, self._id_5CC6, self._id_6870, self._id_A87A, self.team, var_2, var_3, var_6, var_24, var_25, var_7, var_14, var_15, var_16, var_17, var_18, var_19, var_9, var_10, var_13, var_11, var_12);
-  _reconspatialevent(self._id_9092, "script_mp_playerspawn: player_name %s, life_id %d, life_index %d, was_tactical_insertion %b, team %s, gameTime %d, version %f, script_file %s, allBadSpawn %b, number_of_choices %d, last_update_time %d, distToPrevSpawnLocation %f, distToNearestFriendly %f, distToNearestEnemy %f, numNearbyFriendlies %d, numNearbyEnemies %d, distToNearestFriendlyObjective %f, distToNearestEnemyObjective %f, averageDistToFriendly %f, averageDistToEnemy %f, distToNearestNeutralObjective %f, causedSpawnClaimsToFlip %d, spawnTypePercPrimary %f, spawnTypePercSecondary %f, numSecondaryBetterThanTopPrimary %d, isTTLOSDataAvailable %d", self.name, self._id_5CC6, self._id_6870, self._id_A87A, self.team, var_2, var_3, var_5, var_6, var_7, var_8, var_13, var_14, var_15, var_18, var_19, var_20, var_21, var_16, var_17, var_22, var_23, var_24, var_25, var_26, var_4);
+  _reconspatialevent(self.spawnpos, "script_mp_spawndata_spawninfo: player_name %s, life_id %d, life_index %d, was_tactical_insertion %b, team %s, gameTime %d, tuning_version %f, allBadSpawn %d, spawnTypePercPrimary %f, spawnTypePercSecondary %f,number_of_choices %d, distToNearestAlly %f, distToNearestEnemy %f, averageDistToAlly %f, averageDistToEnemy %f, numNearbyAllies %d, numNearbyEnemies %d, distToDeathLocation %f, distToLastAttacker %f, distToPrevSpawnLocation %f, distToNearestAllyDeathLocation %f, distToNearestEnemySpawnLocation %f", self.name, self._id_5CC6, self.num_lives, self.wasti, self.team, var_2, var_3, var_6, var_24, var_25, var_7, var_14, var_15, var_16, var_17, var_18, var_19, var_9, var_10, var_13, var_11, var_12);
+  _reconspatialevent(self.spawnpos, "script_mp_playerspawn: player_name %s, life_id %d, life_index %d, was_tactical_insertion %b, team %s, gameTime %d, version %f, script_file %s, allBadSpawn %b, number_of_choices %d, last_update_time %d, distToPrevSpawnLocation %f, distToNearestFriendly %f, distToNearestEnemy %f, numNearbyFriendlies %d, numNearbyEnemies %d, distToNearestFriendlyObjective %f, distToNearestEnemyObjective %f, averageDistToFriendly %f, averageDistToEnemy %f, distToNearestNeutralObjective %f, causedSpawnClaimsToFlip %d, spawnTypePercPrimary %f, spawnTypePercSecondary %f, numSecondaryBetterThanTopPrimary %d, isTTLOSDataAvailable %d", self.name, self._id_5CC6, self.num_lives, self.wasti, self.team, var_2, var_3, var_5, var_6, var_7, var_8, var_13, var_14, var_15, var_18, var_19, var_20, var_21, var_16, var_17, var_22, var_23, var_24, var_25, var_26, var_4);
 }
 
 _id_5E90() {
@@ -712,7 +712,7 @@ _id_5E90() {
     }
   }
 
-  if(!isDefined(level._id_6026)) {
+  if(!isDefined(level.matchdata)) {
     var_7 = -1;
     var_8 = -1;
     var_9 = -1;
@@ -775,7 +775,7 @@ _id_5E90() {
   var_16 = -1;
 
   if(level.teambased) {
-    var_17 = _id_04D2::_id_473F();
+    var_17 = _id_04D2::getwinningteam();
 
     if(maps\mp\_utility::isroundbased() || maps\mp\_utility::isobjectivebased()) {
       var_15 = maps\mp\_utility::getroundswon("allies");
@@ -785,7 +785,7 @@ _id_5E90() {
       var_16 = _id_04D2::_id_063E("axis");
     }
   } else {
-    var_18 = _id_04D2::_id_450B(2);
+    var_18 = _id_04D2::gethighestscoringplayersarray(2);
 
     if(isDefined(var_18[0])) {
       var_15 = var_18[0].score;
@@ -799,7 +799,7 @@ _id_5E90() {
   }
 
   var_19 = maps\mp\_utility::getscorelimit();
-  var_20 = common_scripts\utility::_id_98E7(var_15 > var_16, var_15, var_16);
+  var_20 = common_scripts\utility::ter_op(var_15 > var_16, var_15, var_16);
 
   if(var_19 > 0) {
     var_21 = var_20 / var_19;
@@ -807,9 +807,9 @@ _id_5E90() {
     var_21 = -1;
   }
 
-  var_22 = common_scripts\utility::_id_98E7(isDefined(game["status"]), game["status"], "none");
-  var_23 = common_scripts\utility::_id_98E7(isDefined(game["timePassed"]), game["timePassed"], -1);
-  var_24 = maps\mp\gametypes\_gamelogic::_id_46E5();
+  var_22 = common_scripts\utility::ter_op(isDefined(game["status"]), game["status"], "none");
+  var_23 = common_scripts\utility::ter_op(isDefined(game["timePassed"]), game["timePassed"], -1);
+  var_24 = maps\mp\gametypes\_gamelogic::gettimeremaining();
   _reconevent("script_mp_spawndata_gameover: gameTime %d, tuning_version %f, timePassed %d, timeRemaining %d, gameStatus %s,winning_team %s, winning_score_perc %f, allies_score %d, axis_score %d, objectiveFlipCount %d, activeCount %d, joinCount %d, botJoinCount %d, spawnCount %d, deathCount %d, badSpawnByAnyMeansCount %d, victimSpawnDiedTooFastCount %d, victimSpawnKilledTooFastCount %d, immediateActionDmgDealtCount %d, immediateActionDmgReceivedCount %d, playlistName %s, qaPlayList %d", var_0, var_1, var_23, var_24, var_22, var_17, var_21, var_15, var_16, var_14, var_2, var_3, var_7, var_4, var_8, var_13, var_9, var_10, var_11, var_12, var_5, var_6);
 
   foreach(var_26 in level.players) {
@@ -865,8 +865,8 @@ _id_5E90() {
 }
 
 _id_7AF5(var_0) {
-  if(!isDefined(var_0._id_5BE1)) {
-    var_0._id_5BE1 = "none";
+  if(!isDefined(var_0.lastspawnteam)) {
+    var_0.lastspawnteam = "none";
   }
 
   if(!isDefined(var_0._id_5BE2)) {
@@ -874,14 +874,14 @@ _id_7AF5(var_0) {
   }
 
   if(level.teambased) {
-    var_1 = var_0._id_3EFF["allies"];
-    var_2 = var_0._id_3EFF["axis"];
+    var_1 = var_0.fullsights["allies"];
+    var_2 = var_0.fullsights["axis"];
     var_3 = var_0._id_266E["allies"];
     var_4 = var_0._id_266E["axis"];
     var_5 = _func_391(var_0._id_00D4, "allies");
     var_6 = _func_391(var_0._id_00D4, "axis");
   } else {
-    var_1 = var_0._id_3EFF["none"];
+    var_1 = var_0.fullsights["none"];
     var_2 = -1;
     var_3 = var_0._id_266E["none"];
     var_4 = -1;

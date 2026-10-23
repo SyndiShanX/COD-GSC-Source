@@ -5,7 +5,7 @@
 
 init() {}
 
-_id_A102(var_0, var_1) {
+updatedamagefeedback(var_0, var_1) {
   if(!isPlayer(self) || !isDefined(var_0)) {
     return;
   }
@@ -37,15 +37,15 @@ _id_A102(var_0, var_1) {
       _id_865B(var_0);
       break;
     case "weakpoint":
-      if(isDefined(level._id_585D) && level._id_585D) {
+      if(isDefined(level.iszombiegame) && level.iszombiegame) {
         _id_865B("headshot");
       }
 
       break;
     case "headshot":
-      if(isDefined(level._id_585D) && level._id_585D) {
+      if(isDefined(level.iszombiegame) && level.iszombiegame) {
         _id_865B("headshot");
-      } else if(!level._id_258F) {
+      } else if(!level.console) {
         _id_865B("standard");
       } else {
         _id_865B("headshot");
@@ -62,7 +62,7 @@ _id_A102(var_0, var_1) {
       _id_865B("killshot_headshot");
       break;
     case "minor":
-      if(isDefined(level._id_585D) && level._id_585D) {
+      if(isDefined(level.iszombiegame) && level.iszombiegame) {
         _id_865B("minor");
       } else {
         _id_865B("standard");

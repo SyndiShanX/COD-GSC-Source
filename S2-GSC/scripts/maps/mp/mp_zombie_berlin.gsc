@@ -25,7 +25,7 @@ main() {
   maps\mp\mp_zombie_berlin_traps::main();
   maps\mp\mp_zombie_berlin_vo::main();
   thread maps\mp\zombies\vignettes::vignette_init();
-  _id_0472::_id_8A2F("compass_map_mp_zombie_berlin");
+  _id_0472::setupminimap("compass_map_mp_zombie_berlin");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   setDvar("4341", "0");
@@ -97,7 +97,7 @@ init_zones() {
   _id_055A::_id_0993("zone_airship_middle_front", "zone_airship_left", "flag_open_cargobay_left_complete");
   level.zmb_registered_quest_zones = [];
 
-  foreach(var_2, var_1 in level._id_AC80._id_ACB3) {
+  foreach(var_2, var_1 in level.zone_data.zones) {
     if(issubstr(var_2, "airship")) {
       level.zmb_registered_quest_zones = common_scripts\utility::_id_0F6F(level.zmb_registered_quest_zones, var_2);
     }
@@ -132,7 +132,7 @@ init_drop_pod_doors() {
   waitframe();
   waitframe();
   waitframe();
-  var_0 = common_scripts\utility::_id_46B7("door", "targetname");
+  var_0 = common_scripts\utility::getstructarray("door", "targetname");
 
   foreach(var_2 in var_0) {
     foreach(var_4 in var_2.setclientdvars) {
@@ -153,7 +153,7 @@ init_quests() {
 
 all_flags_exist(var_0) {
   foreach(var_2 in var_0) {
-    if(!common_scripts\utility::_id_3C83(var_2)) {
+    if(!common_scripts\utility::flag_exist(var_2)) {
       return 0;
     }
   }
@@ -182,9 +182,9 @@ init_berlin_quest_notebook() {
 }
 
 init_berlin_traps() {
-  thread _id_0546::_id_9CC6("trap_tank", "active", maps\mp\mp_zombie_berlin_trap_tank::trap_tank);
-  thread _id_0546::_id_9CC6("trap_bomber_prop", "active", maps\mp\mp_zombie_berlin_trap_bomber_prop::trap_bomber_prop);
-  thread _id_0546::_id_9CC6("trap_cage_blitz", "active", maps\mp\mp_zombie_berlin_trap_cage_blitz::trap_cage_blitz);
+  thread _id_0546::trap_setup_custom_function("trap_tank", "active", maps\mp\mp_zombie_berlin_trap_tank::trap_tank);
+  thread _id_0546::trap_setup_custom_function("trap_bomber_prop", "active", maps\mp\mp_zombie_berlin_trap_bomber_prop::trap_bomber_prop);
+  thread _id_0546::trap_setup_custom_function("trap_cage_blitz", "active", maps\mp\mp_zombie_berlin_trap_cage_blitz::trap_cage_blitz);
 }
 
 init_weapons() {
@@ -210,7 +210,7 @@ init_new_zombie_types() {
 
 init_sizzler_arrival() {
   common_scripts\utility::flag_init("flag_sizzlers_active");
-  common_scripts\utility::_id_3C9F("flag_sizzlers_active");
+  common_scripts\utility::flag_wait("flag_sizzlers_active");
 
   if(isDefined(level.straub_airship)) {
     level.straub_airship.canmakesizzlers = 1;
@@ -226,7 +226,7 @@ make_fodders_sizzler_airship() {
     waitframe();
   }
 
-  while(common_scripts\utility::_id_3C77("flag_sizzlers_active")) {
+  while(common_scripts\utility::flag("flag_sizzlers_active")) {
     if(common_scripts\utility::_id_562E(level.straub_airship.canmakesizzlers)) {
       maps\mp\mp_zombie_berlin_utils::airship_turret_update_valid_targets();
     }
@@ -237,17 +237,17 @@ make_fodders_sizzler_airship() {
 
 sizzler_max_count_manager() {
   level endon("entered_airship_sizzler_pause");
-  common_scripts\utility::_id_3C9F("flag_airship_summoned");
-  level.next_sizzler_inc_round = level._id_A980 + _randomintrange(3, 5);
+  common_scripts\utility::flag_wait("flag_airship_summoned");
+  level.next_sizzler_inc_round = level.wavecounter + _randomintrange(3, 5);
 
   for(;;) {
-    while(level._id_A980 < level.next_sizzler_inc_round) {
+    while(level.wavecounter < level.next_sizzler_inc_round) {
       level waittill("zombie_wave_started");
     }
 
     if(level.maxactivesizzlers < 6) {
       level.maxactivesizzlers++;
-      level.next_sizzler_inc_round = level._id_A980 + _randomintrange(3, 5);
+      level.next_sizzler_inc_round = level.wavecounter + _randomintrange(3, 5);
     } else
       return;
 
@@ -296,10 +296,10 @@ performance_stuff() {
 
 church_door_listener() {
   common_scripts\utility::flag_init("garden_to_church");
-  common_scripts\utility::_id_3C9F("garden_to_church");
+  common_scripts\utility::flag_wait("garden_to_church");
 
-  foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "garden_to_church" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1)) {
+  foreach(var_1 in level.zombiedoors) {
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "garden_to_church" && (!isDefined(var_1.open) || !var_1.open)) {
       var_1 notify("open", undefined);
     }
   }
@@ -307,10 +307,10 @@ church_door_listener() {
 
 cabaret_door_listener() {
   common_scripts\utility::flag_init("club_to_garden");
-  common_scripts\utility::_id_3C9F("club_to_garden");
+  common_scripts\utility::flag_wait("club_to_garden");
 
-  foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "club_to_garden" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1)) {
+  foreach(var_1 in level.zombiedoors) {
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "club_to_garden" && (!isDefined(var_1.open) || !var_1.open)) {
       var_1 notify("open", undefined);
     }
   }
@@ -318,10 +318,10 @@ cabaret_door_listener() {
 
 museum_door_listener() {
   common_scripts\utility::flag_init("museum_to_garden");
-  common_scripts\utility::_id_3C9F("museum_to_garden");
+  common_scripts\utility::flag_wait("museum_to_garden");
 
-  foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "museum_to_garden" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1)) {
+  foreach(var_1 in level.zombiedoors) {
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "museum_to_garden" && (!isDefined(var_1.open) || !var_1.open)) {
       var_1 notify("open", undefined);
     }
   }
@@ -348,14 +348,14 @@ tether_fakery_update(var_0) {
     self.fake_tether_visible = 0;
   }
 
-  if(self istouching(level.tether_fakery_vol) && !self.fake_tether_visible && !common_scripts\utility::_id_3C77("flag_hc_quest_finale_door_open")) {
+  if(self istouching(level.tether_fakery_vol) && !self.fake_tether_visible && !common_scripts\utility::flag("flag_hc_quest_finale_door_open")) {
     self.fake_tether_visible = 1;
     common_scripts\_exploder::_id_088E(var_0, self);
   }
 
   if(!self istouching(level.tether_fakery_vol) && self.fake_tether_visible) {
     self.fake_tether_visible = 0;
-    common_scripts\_exploder::_id_2A6D(var_0, self, 1);
+    common_scripts\_exploder::deactivate_clientside_exploder(var_0, self, 1);
   }
 }
 

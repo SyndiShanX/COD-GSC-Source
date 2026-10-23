@@ -16,7 +16,7 @@ main() {
 _id_8AD1() {
   foreach(var_1 in level.players) {
     var_1 _id_054C::_id_AC23("shardroom");
-    var_1 _id_0378::_id_8D74("objective_complete", "shardroom");
+    var_1 _id_0378::snd_message("objective_complete", "shardroom");
   }
 }
 
@@ -51,7 +51,7 @@ _id_786A() {
       }
 
       thread _id_2E7A(var_3);
-      var_0 common_scripts\utility::_id_9D9F();
+      var_0 common_scripts\utility::trigger_off();
       _id_0557::_id_7847("3 shard", var_2);
     }
   }
@@ -61,9 +61,9 @@ _id_786A() {
 
 _id_784E() {
   _playFXOnTag(level._effect["zmb_gk_hilt_init"], level._id_3571, "TAG_FX");
-  _id_0378::_id_8D74("aud_claw_move_start", level._id_3571, 0);
+  _id_0378::snd_message("aud_claw_move_start", level._id_3571, 0);
   level._id_3576 _id_202A();
-  _id_0378::_id_8D74("aud_claw_move_stop", level._id_3571);
+  _id_0378::snd_message("aud_claw_move_stop", level._id_3571);
   level._id_3576 thread _id_2E88("zombie soul");
   var_0 = undefined;
 
@@ -72,7 +72,7 @@ _id_784E() {
     _id_0557::_id_781D("3 shard", var_0);
   }
 
-  var_1 = common_scripts\utility::_id_46B5("zmb_hilt_effects", "targetname");
+  var_1 = common_scripts\utility::getstruct("zmb_hilt_effects", "targetname");
   var_2 = spawn("script_model", var_1.origin);
   var_2 setModel("tag_origin");
   _playFXOnTag(level._effect["zmb_geistkraft_radius_400"], var_2, "tag_origin");
@@ -90,7 +90,7 @@ _id_784E() {
   }
 
   wait 3;
-  _id_0378::_id_8D74("aud_claw_move_start", level._id_3571, 0);
+  _id_0378::snd_message("aud_claw_move_start", level._id_3571, 0);
   level._id_3576 _id_2029();
   thread _id_2E7E();
   _id_0557::_id_782D("3 shard", "collect souls");
@@ -107,8 +107,8 @@ _id_089D() {
 _id_7866() {
   level._id_6F18 = 1;
 
-  if(!common_scripts\utility::_id_3C77("flag_com_valve_turned")) {
-    _id_0378::_id_8D74("aud_claw_move_stop", level._id_3571);
+  if(!common_scripts\utility::flag("flag_com_valve_turned")) {
+    _id_0378::snd_message("aud_claw_move_stop", level._id_3571);
 
     if(0) {
       var_0 = _getEnt("shard_valve", "targetname");
@@ -117,7 +117,7 @@ _id_7866() {
     }
 
     thread _id_2028();
-    common_scripts\utility::_id_3C9F("flag_com_valve_turned");
+    common_scripts\utility::flag_wait("flag_com_valve_turned");
   } else
     _id_0557::_id_8596("3 shard", 0);
 
@@ -177,13 +177,13 @@ _id_202B() {
   var_1 = level._id_3576;
   var_1 scriptmodelclearanim();
   var_1 scriptmodelplayanimdeltamotionfrompos("s2_zom_shroud_lift_rise_active", var_1._id_0BBE.origin, var_1._id_0BBE.angles);
-  _id_0378::_id_8D74("aud_claw_move_start", level._id_3571, 0);
+  _id_0378::snd_message("aud_claw_move_start", level._id_3571, 0);
   wait(var_0);
-  _id_0378::_id_8D74("aud_claw_move_stop", level._id_3571);
+  _id_0378::snd_message("aud_claw_move_stop", level._id_3571);
 }
 
 _id_2021() {
-  common_scripts\utility::_id_3C9F("flag_com_valve_turned");
+  common_scripts\utility::flag_wait("flag_com_valve_turned");
   self setModel("zmb_light_cage_standalone_green_01");
 }
 
@@ -197,16 +197,16 @@ _id_2717() {
   if(!common_scripts\utility::_id_562E(level._id_3572._id_08F1)) {
     return;
   }
-  _id_0378::_id_8D74("comm_room_claw_trapdoor_closing", self.origin);
+  _id_0378::snd_message("comm_room_claw_trapdoor_closing", self.origin);
 }
 
 _id_2022(var_0) {
   switch (var_0) {
     case "stuck_bang_large":
-      level._id_3571 _id_0378::_id_8D74("shard_room_claw_stuck_impact");
+      level._id_3571 _id_0378::snd_message("shard_room_claw_stuck_impact");
       break;
     case "first_panel_closed":
-      _id_0378::_id_8D74("comm_room_claw_trapdoor_closed", self.origin);
+      _id_0378::snd_message("comm_room_claw_trapdoor_closed", self.origin);
     case "camera_shake":
       var_1 = 0.2;
       var_2 = 0.4;
@@ -215,18 +215,18 @@ _id_2022(var_0) {
       _earthquake(var_1, var_2, var_3, var_4);
       break;
     case "nudge_start_open":
-      _id_0378::_id_8D74("comm_room_claw_trapdoor_stall", self.origin);
+      _id_0378::snd_message("comm_room_claw_trapdoor_stall", self.origin);
       break;
     case "actually_start_open":
-      _id_0378::_id_8D74("comm_room_claw_trapdoor_start_open", self.origin);
+      _id_0378::snd_message("comm_room_claw_trapdoor_start_open", self.origin);
       level._id_3572._id_08F1 = 1;
       break;
     case "post_open_vibrate":
-      _id_0378::_id_8D74("comm_room_claw_trapdoor_end_open", self.origin);
+      _id_0378::snd_message("comm_room_claw_trapdoor_end_open", self.origin);
       level._id_3595._id_137B = 1;
       break;
     case "slide_begin":
-      _id_0378::_id_8D74("comm_room_claw_trapdoor_slider", self.origin);
+      _id_0378::snd_message("comm_room_claw_trapdoor_slider", self.origin);
       break;
   }
 }
@@ -282,7 +282,7 @@ _id_8A12(var_0) {
 
 _id_8A45(var_0, var_1) {
   var_2 = _getEnt(var_0, "targetname");
-  var_2._id_0BBE = common_scripts\utility::_id_46B5(var_1, "targetname");
+  var_2._id_0BBE = common_scripts\utility::getstruct(var_1, "targetname");
   var_2._id_6C4E = var_2.origin;
   return var_2;
 }
@@ -299,7 +299,7 @@ _id_2E88(var_0) {
 
   foreach(var_2 in level.players) {
     if(_id_055A::_id_7413(var_2, "zone4_2_hilt")) {
-      if(common_scripts\utility::_id_24A6()) {
+      if(common_scripts\utility::cointoss()) {
         var_2 thread _id_0367::_id_8E3C("clawfillhiltroom");
         continue;
       }
@@ -334,7 +334,7 @@ _id_2E7A(var_0) {
 }
 
 _id_2E7E() {
-  if(!common_scripts\utility::_id_3C77("flag_com_valve_turned")) {
+  if(!common_scripts\utility::flag("flag_com_valve_turned")) {
     foreach(var_1 in level.players) {
       if(_id_055A::_id_7413(var_1, "zone3_1_com") || _id_055A::_id_7413(var_1, "zone4_1_mine") || _id_055A::_id_7413(var_1, "zone4_2_hilt")) {
         var_1 thread _id_0367::_id_8E3C("clawstuck");

@@ -53,12 +53,12 @@ init() {
   level.razer_touch_trigs = [];
   var_6 = getEntArray("trigger_multiple", "classname");
 
-  if(!common_scripts\utility::_id_3C83("ripsaw_punch_active")) {
+  if(!common_scripts\utility::flag_exist("ripsaw_punch_active")) {
     common_scripts\utility::flag_init("ripsaw_punch_active");
   }
 
   foreach(var_8 in var_6) {
-    if(isDefined(var_8._id_81C7) && var_8._id_81C7 == "razergun_blade_listener") {
+    if(isDefined(var_8.script_ghettotag) && var_8.script_ghettotag == "razergun_blade_listener") {
       level.razer_touch_trigs[level.razer_touch_trigs.size] = var_8;
     }
   }
@@ -139,14 +139,14 @@ handle_sawgun_state_change(var_0, var_1, var_2) {
     return;
   }
   if(var_2) {
-    _id_0378::_id_8D74("aud_ripsaw_start_spinning");
+    _id_0378::snd_message("aud_ripsaw_start_spinning");
   } else {
-    _id_0378::_id_8D74("aud_ripsaw_stop_spinning");
+    _id_0378::snd_message("aud_ripsaw_stop_spinning");
   }
 }
 
 razergun_heavy_melee_fatal(var_0) {
-  _id_0378::_id_8D74("ripsaw_fatal_melee");
+  _id_0378::snd_message("ripsaw_fatal_melee");
   return common_scripts\utility::_id_562E(self._id_165B) || self adsButtonPressed();
 }
 
@@ -222,7 +222,7 @@ togglemarathonability(var_0) {
 
 zombie_on_electric_charge() {
   var_0 = self;
-  var_1 = common_scripts\utility::_id_44F5("zmb_elec_cherry_zombie");
+  var_1 = common_scripts\utility::getfx("zmb_elec_cherry_zombie");
   var_2 = var_0.origin + (0, 0, 40);
   playFX(var_1, var_2);
 }
@@ -234,9 +234,9 @@ do_electric_charge(var_0, var_1) {
   if(isDefined(var_3) && !issubstr(var_3, "razergun_zm") && !issubstr(var_3, "razergun_pap_zm")) {
     return;
   }
-  playFX(common_scripts\utility::_id_44F5("zmb_elec_cherry_wv"), var_2);
-  _id_0378::_id_8D74("electric_cherry_vfx");
-  _playfxontagforclients(common_scripts\utility::_id_44F5("zmb_elec_cherry_player"), self, "J_Spine4", self);
+  playFX(common_scripts\utility::getfx("zmb_elec_cherry_wv"), var_2);
+  _id_0378::snd_message("electric_cherry_vfx");
+  _playfxontagforclients(common_scripts\utility::getfx("zmb_elec_cherry_player"), self, "J_Spine4", self);
   _id_053A::mini_stunning_burst_execute(var_2, self, var_1, 0.7, undefined, undefined, "zombie_fireman", ::zombie_on_electric_charge);
 }
 
@@ -274,7 +274,7 @@ handle_reflection(var_0, var_1, var_2) {
       var_2 = "zmb_razergun_red_trail";
     }
 
-    var_4 = _id_055A::_id_4562(self.origin);
+    var_4 = _id_055A::getlocationzone(self.origin);
 
     if(_id_0547::_id_5565(var_4, "sub_pens_1_zone")) {
       if(isDefined(level._effect[var_2 + "_int"])) {
@@ -462,7 +462,7 @@ monitor_razergun_kills(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
   if(isDefined(var_0) && common_scripts\utility::_id_562E(var_0.is_razergun_projectile)) {
     var_0.total_kills++;
 
-    if(var_0.total_kills == 13 && maps\mp\_utility::_id_4571() == "mp_zombie_island") {
+    if(var_0.total_kills == 13 && maps\mp\_utility::getmapname() == "mp_zombie_island") {
       var_1 maps\mp\gametypes\zombies::_id_47C8("DLC1_ZM_BAKERS");
     }
 
@@ -489,11 +489,11 @@ should_razgun_expire(var_0, var_1) {
 }
 
 delete_the_projectile() {
-  _killfxontag(common_scripts\utility::_id_44F5("razergun_projectile"), self, "tag_origin");
-  _killfxontag(common_scripts\utility::_id_44F5(self.current_trail_fx), self, "tag_origin");
+  _killfxontag(common_scripts\utility::getfx("razergun_projectile"), self, "tag_origin");
+  _killfxontag(common_scripts\utility::getfx(self.current_trail_fx), self, "tag_origin");
   self delete();
 }
 
 play_fx_on_razergun_projectile(var_0) {
-  _playFXOnTag(common_scripts\utility::_id_44F5(var_0), self, "tag_origin");
+  _playFXOnTag(common_scripts\utility::getfx(var_0), self, "tag_origin");
 }

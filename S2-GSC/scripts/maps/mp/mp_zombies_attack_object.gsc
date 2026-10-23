@@ -33,7 +33,7 @@ create_inanimate_zombie_enemy(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
     }
 
     var_16 = _id_0547::_id_43F0(self.origin, var_4, var_3, 1);
-    var_16 = common_scripts\utility::_id_40B0(self.origin, var_16);
+    var_16 = common_scripts\utility::get_array_of_closest(self.origin, var_16);
 
     foreach(var_18 in var_16) {
       if(var_18 has_a_distraction()) {
@@ -77,7 +77,7 @@ create_inanimate_zombie_enemy(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
   }
 
   self thread[[var_5]]();
-  common_scripts\utility::_id_379A(var_2);
+  common_scripts\utility::ent_flag_set(var_2);
 }
 
 get_cur_objective_health() {
@@ -93,7 +93,7 @@ get_cur_objective_health() {
 has_a_distraction() {
   var_0 = self;
 
-  if(isDefined(var_0._id_3043)) {
+  if(isDefined(var_0.distractiondrone)) {
     return 1;
   }
 
@@ -155,7 +155,7 @@ preform_zombie_object_melee(var_0) {
   for(;;) {
     var_6 = self getanimentrycount(var_2);
     var_7 = randomint(var_6);
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_7, 1.0, "scripted_anim");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_2, var_7, 1.0, "scripted_anim");
 
     if(isDefined(self.enemy_object)) {
       self.enemy_object take_objective_health(45);
@@ -219,7 +219,7 @@ travel_and_attack_position(var_0, var_1) {
   self endon("death");
   self endon("cancel_attack_travel");
 
-  if(!(maps\mp\_utility::_id_4571() == "mp_zombie_island")) {
+  if(!(maps\mp\_utility::getmapname() == "mp_zombie_island")) {
     self._id_6941 = 1;
   }
 
@@ -266,10 +266,10 @@ allowed_to_attack(var_0) {
 
   switch (var_0) {
     case "zombie_is_passive":
-      var_1 = !isDefined(self._id_3794["zombie_passive"]) || !common_scripts\utility::_id_3794("zombie_passive");
+      var_1 = !isDefined(self.ent_flag["zombie_passive"]) || !common_scripts\utility::ent_flag("zombie_passive");
       break;
     case "zombie_is_crawler":
-      var_1 = !common_scripts\utility::_id_562E(self._id_2FDA);
+      var_1 = !common_scripts\utility::_id_562E(self.dismember_crawl);
       break;
     case "zombie_is_objective":
       var_1 = !isDefined(self.escort_wps);

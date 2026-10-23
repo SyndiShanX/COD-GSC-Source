@@ -92,7 +92,7 @@ monitor_active_grenades() {
       var_2.life = var_2.life + 0.1;
 
       if(var_2.life > 2.4) {
-        var_3 = var_2 common_scripts\utility::_id_8FFC();
+        var_3 = var_2 common_scripts\utility::spawn_tag_origin();
         var_3 show();
 
         if(isDefined(var_3)) {

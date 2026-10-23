@@ -39,9 +39,9 @@ update_assassin_fog_count() {
   if(level.continue_adding_to_assassin_count <= 0) {
     return;
   }
-  if(level._id_A980 >= level.next_assassin_add) {
+  if(level.wavecounter >= level.next_assassin_add) {
     level.continue_adding_to_assassin_count--;
-    level.next_assassin_add = level._id_A980 + 20;
+    level.next_assassin_add = level.wavecounter + 20;
     level.max_fog_assassin_spawns++;
   }
 }
@@ -52,11 +52,11 @@ initializeclientsideexplodervolume(var_0, var_1, var_2, var_3) {
   }
 
   var_4 = spawnStruct();
-  var_4._id_A615 = getEntArray(var_0, "targetname");
+  var_4.volumes = getEntArray(var_0, "targetname");
   var_4.optionaldebug = var_3;
-  var_4._id_6B05 = var_1;
+  var_4.onenterfunc = var_1;
   var_4.onvacantfunc = var_2;
-  var_4._id_5764 = 0;
+  var_4.ison = 0;
   level.clientside_exploder_runners = common_scripts\utility::_id_0F6F(level.clientside_exploder_runners, var_4);
 }
 
@@ -66,7 +66,7 @@ fog_start(var_0, var_1) {
   level.first_fog_sequence = 1;
   wait_for_initial_fog_conditions();
   var_0 = randomint(var_0) + 10;
-  common_scripts\utility::_id_A63E(var_0, "fasttrack_to_next_fog_state");
+  common_scripts\utility::wait_endon(var_0, "fasttrack_to_next_fog_state");
   common_scripts\utility::flag_set(var_1);
 }
 
@@ -82,13 +82,13 @@ fog_rolling_in(var_0, var_1) {
   level endon(var_1);
 
   foreach(var_3 in level.players) {
-    var_3 _id_0378::_id_8D74("aud_fog_rolling_in");
+    var_3 _id_0378::snd_message("aud_fog_rolling_in");
   }
 
-  level childthread common_scripts\_exploder::_id_2A6D(206, undefined, 0);
-  common_scripts\utility::_id_A63E(1, "fasttrack_to_next_fog_state");
+  level childthread common_scripts\_exploder::deactivate_clientside_exploder(206, undefined, 0);
+  common_scripts\utility::wait_endon(1, "fasttrack_to_next_fog_state");
   level childthread common_scripts\_exploder::_id_088E(205);
-  common_scripts\utility::_id_A63E(8, "fasttrack_to_next_fog_state");
+  common_scripts\utility::wait_endon(8, "fasttrack_to_next_fog_state");
   common_scripts\utility::flag_set(var_1);
 }
 
@@ -98,10 +98,10 @@ on_fog_settled(var_0, var_1) {
   level thread spawn_assassin_zombies(gettime());
   maps\mp\mp_zombie_island_fog_zones::set_fog_is_heavy(1);
   level thread run_effects_fog();
-  level _id_0378::_id_8D74("aud_fog_settled");
+  level _id_0378::snd_message("aud_fog_settled");
   level thread turn_on_fog_lights();
-  common_scripts\utility::_id_A63E(0.2, "fasttrack_to_next_fog_state");
-  common_scripts\utility::_id_A63E(var_0, "fasttrack_to_next_fog_state");
+  common_scripts\utility::wait_endon(0.2, "fasttrack_to_next_fog_state");
+  common_scripts\utility::wait_endon(var_0, "fasttrack_to_next_fog_state");
   common_scripts\utility::flag_set(var_1);
 }
 
@@ -110,18 +110,18 @@ fog_rolling_out(var_0, var_1) {
   level notify("fog_rolling_out");
 
   foreach(var_3 in level.players) {
-    var_3 _id_0378::_id_8D74("aud_fog_rolling_out");
+    var_3 _id_0378::snd_message("aud_fog_rolling_out");
   }
 
-  level _id_0378::_id_8D74("aud_fog_lifted");
+  level _id_0378::snd_message("aud_fog_lifted");
   level thread stop_effects_fog();
   level childthread common_scripts\_exploder::_id_088E(204);
   level childthread common_scripts\_exploder::_id_088E(206);
   level thread turn_off_fog_lights();
-  common_scripts\utility::_id_A63E(9, "fasttrack_to_next_fog_state");
+  common_scripts\utility::wait_endon(9, "fasttrack_to_next_fog_state");
   level.island_fog_settle_time = 0;
   maps\mp\mp_zombie_island_fog_zones::set_fog_is_heavy(0);
-  common_scripts\utility::_id_A63E(var_0, "fasttrack_to_next_fog_state");
+  common_scripts\utility::wait_endon(var_0, "fasttrack_to_next_fog_state");
   common_scripts\utility::flag_set(var_1);
 }
 
@@ -129,7 +129,7 @@ wait_for_intermission(var_0, var_1) {
   level endon(var_1);
   wait_for_wave_requirement();
   var_0 = randomint(240);
-  common_scripts\utility::_id_A63E(var_0, "fasttrack_to_next_fog_state");
+  common_scripts\utility::wait_endon(var_0, "fasttrack_to_next_fog_state");
   common_scripts\utility::flag_set(var_1);
 }
 
@@ -191,9 +191,9 @@ is_fog_rolling_in() {
 
 wait_for_wave_requirement() {
   level endon("fasttrack_to_next_fog_state");
-  var_0 = level._id_A980 + _randomintrange(2, 5);
+  var_0 = level.wavecounter + _randomintrange(2, 5);
 
-  while(level._id_A980 <= var_0) {
+  while(level.wavecounter <= var_0) {
     wait 1;
   }
 }
@@ -240,9 +240,9 @@ turn_off_fog_lights() {
 spawn_first_assassins() {
   var_0 = [];
 
-  foreach(var_2 in level._id_AC80._id_ACB3) {
-    if(common_scripts\utility::_id_562E(var_2._id_556E) && var_2._id_AC8A != "cart_tunnel_zone") {
-      var_0 = common_scripts\utility::_id_0F6F(var_0, var_2._id_AC8A);
+  foreach(var_2 in level.zone_data.zones) {
+    if(common_scripts\utility::_id_562E(var_2.is_enabled) && var_2.zone_name != "cart_tunnel_zone") {
+      var_0 = common_scripts\utility::_id_0F6F(var_0, var_2.zone_name);
     }
   }
 
@@ -271,7 +271,7 @@ ramp_zombies() {
 next_fog_state(var_0) {
   level.current_fog_flag = var_0.waitflag;
   level childthread play_fog_state(var_0);
-  common_scripts\utility::_id_3C9F(var_0.waitflag);
+  common_scripts\utility::flag_wait(var_0.waitflag);
 
   while(common_scripts\utility::_id_562E(level.fog_state_is_locked)) {
     waitframe();
@@ -299,7 +299,7 @@ initialize_fog_loop() {
 
 clear_all_fog_flags() {
   foreach(var_1 in level.fogfuncs) {
-    common_scripts\utility::_id_3C7B(var_1.waitflag);
+    common_scripts\utility::flag_clear(var_1.waitflag);
   }
 }
 
@@ -315,14 +315,14 @@ toggle_next_fog_state() {
 
 get_fog_volumn_touched(var_0) {
   foreach(var_2 in self) {
-    foreach(var_4 in var_2._id_A615) {
+    foreach(var_4 in var_2.volumes) {
       if(var_0 istouching(var_4)) {
         return var_2;
       }
     }
   }
 
-  if(common_scripts\utility::_id_562E(var_0._id_A019)) {
+  if(common_scripts\utility::_id_562E(var_0.underwater)) {
     return self[1];
   } else {
     return self[0];
@@ -338,9 +338,9 @@ run_effects_fog() {
 }
 
 stop_effects_fog() {
-  level thread common_scripts\_exploder::_id_2A6D(201, undefined, 0);
-  level thread common_scripts\_exploder::_id_2A6D(202, undefined, 0);
-  level thread common_scripts\_exploder::_id_2A6D(208, undefined, 0);
+  level thread common_scripts\_exploder::deactivate_clientside_exploder(201, undefined, 0);
+  level thread common_scripts\_exploder::deactivate_clientside_exploder(202, undefined, 0);
+  level thread common_scripts\_exploder::deactivate_clientside_exploder(208, undefined, 0);
 }
 
 cliffside_vista_fog_on(var_0) {
@@ -348,14 +348,14 @@ cliffside_vista_fog_on(var_0) {
 }
 
 cliffside_vista_fog_off(var_0) {
-  level thread common_scripts\_exploder::_id_2A6D(212, var_0, 0);
+  level thread common_scripts\_exploder::deactivate_clientside_exploder(212, var_0, 0);
 }
 
 spawn_assassin_cover() {
-  var_0 = common_scripts\utility::_id_46B7("assassin_despawners", "targetname");
+  var_0 = common_scripts\utility::getstructarray("assassin_despawners", "targetname");
 
   foreach(var_2 in var_0) {
-    var_2._id_905E = common_scripts\utility::_id_46B7(var_2.target, "targetname");
+    var_2._id_905E = common_scripts\utility::getstructarray(var_2.target, "targetname");
 
     foreach(var_4 in var_2._id_905E) {
       var_4.spawner_fog_fx = _id_0547::_id_8FBA(var_4, "zmb_isl_fog_zmb_assn_01");
@@ -365,10 +365,10 @@ spawn_assassin_cover() {
 }
 
 despawn_assassin_cover() {
-  var_0 = common_scripts\utility::_id_46B7("assassin_despawners", "targetname");
+  var_0 = common_scripts\utility::getstructarray("assassin_despawners", "targetname");
 
   foreach(var_2 in var_0) {
-    var_2._id_905E = common_scripts\utility::_id_46B7(var_2.target, "targetname");
+    var_2._id_905E = common_scripts\utility::getstructarray(var_2.target, "targetname");
 
     foreach(var_4 in var_2._id_905E) {
       if(isDefined(var_4.spawner_fog_fx)) {
@@ -403,9 +403,9 @@ initializefogzone(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawnStruct();
 
   if(var_0 == "default" || var_0 == "introduction") {
-    var_5._id_A615 = [];
+    var_5.volumes = [];
   } else {
-    var_5._id_A615 = getEntArray(var_0, "targetname");
+    var_5.volumes = getEntArray(var_0, "targetname");
   }
 
   var_5.name = var_0;
@@ -435,7 +435,7 @@ get_is_fog_active() {
 }
 
 wait_till_fog_active() {
-  common_scripts\utility::_id_3C9F("2. fog rolling in");
+  common_scripts\utility::flag_wait("2. fog rolling in");
 }
 
 get_fog_active_flag() {

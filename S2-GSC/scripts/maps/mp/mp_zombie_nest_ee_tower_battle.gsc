@@ -35,7 +35,7 @@ _id_27CD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_10 = _id_86D9(var_3, var_4, var_5, var_6);
   _id_8A37("5 Right Hand fuses", var_10["machine_targetnames"]);
   var_9["main_trigger"] _id_52FA(var_10["machine_targetnames"]);
-  var_11 = common_scripts\utility::_id_46B5("tower_attack_on_deck_positions_struct", "targetname");
+  var_11 = common_scripts\utility::getstruct("tower_attack_on_deck_positions_struct", "targetname");
   var_12 = spawnStruct();
   var_12._id_7B8C = var_12;
   var_12._id_38C3 = "zombie_tower_rumble_" + var_10["battleID"];
@@ -45,11 +45,11 @@ _id_27CD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 }
 
 _id_6A77(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::_id_46B5("tower_battle_sfx_top", "targetname");
-  var_3 thread _id_0378::_id_8D74("aud_tower_alarm");
+  var_3 = common_scripts\utility::getstruct("tower_battle_sfx_top", "targetname");
+  var_3 thread _id_0378::snd_message("aud_tower_alarm");
 
   foreach(var_5 in var_0) {
-    var_5._id_08BC = level._id_A980;
+    var_5._id_08BC = level.wavecounter;
   }
 
   if(!var_1) {
@@ -62,8 +62,8 @@ _id_6A77(var_0, var_1, var_2) {
 }
 
 _id_6A78(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::_id_46B5("tower_battle_sfx_top", "targetname");
-  var_3 thread _id_0378::_id_8D74("aud_tower_alarm_stop");
+  var_3 = common_scripts\utility::getstruct("tower_battle_sfx_top", "targetname");
+  var_3 thread _id_0378::snd_message("aud_tower_alarm_stop");
   level thread maps\mp\gametypes\zombies::orders_and_contracts_report_event("mp_zombie_nest_01_tower_battle", get_lowest_attack_spot_health(var_1));
 
   foreach(var_5 in var_0._id_65E8) {
@@ -77,7 +77,7 @@ _id_6A78(var_0, var_1, var_2) {
     }
   }
 
-  var_0._id_65E8[0] thread _id_0378::_id_8D74("aud_tower_machine_move_stop");
+  var_0._id_65E8[0] thread _id_0378::snd_message("aud_tower_machine_move_stop");
 
   foreach(var_11 in var_2) {
     if(isDefined(var_11._id_4D91)) {
@@ -99,19 +99,19 @@ get_lowest_attack_spot_health(var_0) {
 }
 
 _id_6A76(var_0, var_1) {
-  var_2 = common_scripts\utility::_id_46B5("tower_battle_sfx_top", "targetname");
-  var_2 thread _id_0378::_id_8D74("aud_tower_alarm_stop");
+  var_2 = common_scripts\utility::getstruct("tower_battle_sfx_top", "targetname");
+  var_2 thread _id_0378::snd_message("aud_tower_alarm_stop");
 
   foreach(var_4 in var_0._id_65E8) {
     var_4 _id_A180(5, 0, 0);
     var_4 _id_A180(5, 0, 2);
   }
 
-  var_0._id_65E8[0] thread _id_0378::_id_8D74("aud_tower_machine_destroyed");
+  var_0._id_65E8[0] thread _id_0378::snd_message("aud_tower_machine_destroyed");
 
   foreach(var_7 in level.players) {
     if(distance(var_7.origin, var_1[0].origin) < 300) {
-      var_7 maps\mp\_utility::_id_2CED(4, _id_0367::_id_8E3C, "lightningrodbroke");
+      var_7 maps\mp\_utility::delaythread(4, _id_0367::_id_8E3C, "lightningrodbroke");
     }
   }
 
@@ -125,7 +125,7 @@ _id_6A7D(var_0, var_1, var_2) {
 
   if(var_2 && !level._id_9B19) {
     foreach(var_4 in level.players) {
-      if(_id_0547::_id_577E(var_4)) {
+      if(_id_0547::isplayerinlaststand(var_4)) {
         continue;
       }
       if(distance(var_4.origin, var_0.origin) < 300) {
@@ -136,7 +136,7 @@ _id_6A7D(var_0, var_1, var_2) {
   }
 
   var_0 thread _id_A0E2(var_0._id_28FF, var_1);
-  var_0 thread _id_0378::_id_8D74("aud_tower_machine_dmg_state", var_0._id_28FF, var_1);
+  var_0 thread _id_0378::snd_message("aud_tower_machine_dmg_state", var_0._id_28FF, var_1);
 }
 
 _id_46EE(var_0) {
@@ -196,7 +196,7 @@ _id_A0E2(var_0, var_1) {
       }
 
       var_2 = anglesToForward(self.angles);
-      self._id_299D = _spawnfx(common_scripts\utility::_id_44F5("ee_fuse_blowout"), self.origin, var_2);
+      self._id_299D = _spawnfx(common_scripts\utility::getfx("ee_fuse_blowout"), self.origin, var_2);
       _triggerfx(self._id_299D);
       self._id_28FC = 4;
     }
@@ -218,7 +218,7 @@ _id_8A37(var_0, var_1) {
 
 _id_8A36(var_0, var_1) {
   var_2 = spawnStruct();
-  var_2._id_94D4 = var_0;
+  var_2.success = var_0;
   var_2._id_39D1 = var_1;
   return var_2;
 }
@@ -237,7 +237,7 @@ _id_A69B(var_0, var_1, var_2) {
     }
 
     var_6 setHintString(&"ZOMBIE_NEST_LIFT_RODS");
-    var_7 = common_scripts\utility::_id_4461(var_6.origin, var_2);
+    var_7 = common_scripts\utility::getclosest(var_6.origin, var_2);
     var_6 thread _id_A6C0(var_4, var_7);
   }
 
@@ -266,12 +266,12 @@ _id_A6AE(var_0) {
   }
 
   foreach(var_2 in var_0) {
-    var_2 common_scripts\utility::_id_9DA3();
+    var_2 common_scripts\utility::trigger_on();
     var_2 setHintString(&"ZOMBIE_NEST_MACHINE_COOLING");
     var_2 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
   }
 
-  while(var_0[0]._id_08BC == level._id_A980) {
+  while(var_0[0]._id_08BC == level.wavecounter) {
     wait 1;
   }
 }
@@ -301,27 +301,27 @@ _id_4ADA(var_0) {
 }
 
 _id_A6C0(var_0, var_1) {
-  common_scripts\utility::_id_9DA3();
+  common_scripts\utility::trigger_on();
   self._id_57A4 = 0;
   self._id_65E7 _id_A180(0);
   var_2 = undefined;
 
   while(!self._id_57A4) {
     self waittill("trigger", var_2);
-    self._id_65E7 thread _id_0378::_id_8D74("aud_tower_machine_use");
+    self._id_65E7 thread _id_0378::snd_message("aud_tower_machine_use");
 
     if(isDefined(var_1._id_299D)) {
       var_1._id_299D delete();
     }
 
-    if(var_0 == 0 || var_2 maps\mp\gametypes\zombies::_id_11C2(var_0)) {
-      self._id_28D5 = 0;
+    if(var_0 == 0 || var_2 maps\mp\gametypes\zombies::attempttobuy(var_0)) {
+      self.curprogress = 0;
       self._id_57A4 = 1;
     }
   }
 
   self._id_65E7 _id_A180(1);
-  common_scripts\utility::_id_9D9F();
+  common_scripts\utility::trigger_off();
   level notify("ee trigger was repaired", var_2, self);
 }
 
@@ -340,7 +340,7 @@ _id_A181(var_0) {
       break;
     case 3:
       thread _id_64AC(1);
-      thread _id_0378::_id_8D74("aud_tower_machine_move_strt");
+      thread _id_0378::snd_message("aud_tower_machine_move_strt");
       break;
     case 4:
       thread _id_64AC(2);
@@ -414,7 +414,7 @@ _id_64AC(var_0) {
       var_1._id_7EBE = var_1._id_7EC3 - var_1._id_7EBF;
       var_1 scriptmodelplayanim(var_1._id_7EC2, "", var_1._id_7EBE, 1, 1);
       wait(var_1._id_7EC3 - var_1._id_7EBE - 0.333333);
-      var_1 thread _id_0378::_id_8D74("aud_tower_machine_crash");
+      var_1 thread _id_0378::snd_message("aud_tower_machine_crash");
       wait 0.333333;
       var_1 scriptmodelplayanim(var_1._id_7EC0);
       var_1 notify("lightning rod state change complete");
@@ -523,7 +523,7 @@ _id_5DA3(var_0, var_1) {
 
 _id_52ED() {
   var_0 = _getEnt("nest_ee_fuse_piece_lift", "targetname");
-  var_0 common_scripts\utility::_id_9D9F();
+  var_0 common_scripts\utility::trigger_off();
   var_0 setHintString(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
   var_0 thread _id_2EB2();
   var_0._id_65E7 = _getEnt("inner_spire_lever", "targetname");
@@ -574,7 +574,7 @@ _id_46ED(var_0, var_1, var_2) {
 
   for(var_4 = 0; var_4 < var_2.size; var_4++) {
     var_3["attack_positions"][var_4] = _getEnt(var_2[var_4], "targetname");
-    var_3["attack_positions"][var_4]._id_AC6A = common_scripts\utility::_id_46B7(var_3["attack_positions"][var_4].target, "targetname");
+    var_3["attack_positions"][var_4]._id_AC6A = common_scripts\utility::getstructarray(var_3["attack_positions"][var_4].target, "targetname");
   }
 
   return var_3;
@@ -583,7 +583,7 @@ _id_46ED(var_0, var_1, var_2) {
 _id_86D9(var_0, var_1, var_2, var_3) {
   var_4 = [];
   var_4["notifications"] = spawnStruct();
-  var_4["notifications"]._id_94D4 = var_0;
+  var_4["notifications"].success = var_0;
   var_4["notifications"]._id_39D1 = var_1;
   var_4["battleID"] = var_2;
   var_4["machine_targetnames"] = var_3;

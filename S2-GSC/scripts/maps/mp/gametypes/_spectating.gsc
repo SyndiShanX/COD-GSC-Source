@@ -4,9 +4,9 @@
 *****************************************************/
 
 init() {
-  level._id_90E2["allies"] = spawnStruct();
-  level._id_90E2["axis"] = spawnStruct();
-  level._id_90E2["none"] = spawnStruct();
+  level.spectateoverride["allies"] = spawnStruct();
+  level.spectateoverride["axis"] = spawnStruct();
+  level.spectateoverride["none"] = spawnStruct();
   level thread _id_04C3::init();
   level thread onplayerconnect();
 }
@@ -14,29 +14,29 @@ init() {
 onplayerconnect() {
   for(;;) {
     level waittill("connected", var_0);
-    var_0 thread _id_6B49();
-    var_0 thread _id_6B48();
-    var_0 thread _id_6BAC();
+    var_0 thread onjoinedteam();
+    var_0 thread onjoinedspectators();
+    var_0 thread onspectatingclient();
   }
 }
 
-_id_6B49() {
+onjoinedteam() {
   self endon("disconnect");
 
   for(;;) {
     self waittill("joined_team");
-    _id_872F();
+    setspectatepermissions();
   }
 }
 
-_id_6B48() {
+onjoinedspectators() {
   self endon("disconnect");
 
   for(;;) {
     self waittill("joined_spectators");
-    _id_872F();
+    setspectatepermissions();
 
-    if(!maps\mp\_utility::_id_551F() && !_func_367() && (self ismlgspectator() || isDefined(self.pers["broadcaster"]) && self.pers["broadcaster"])) {
+    if(!maps\mp\_utility::invirtuallobby() && !_func_367() && (self ismlgspectator() || isDefined(self.pers["broadcaster"]) && self.pers["broadcaster"])) {
       _id_04C3::_id_1C8B();
       self setmlgspectator(1);
     }
@@ -49,7 +49,7 @@ _id_A0E7() {
   if(self ismlgspectator()) {
     for(;;) {
       level waittill("player_spawned", var_0);
-      var_1 = var_0._id_90E4;
+      var_1 = var_0.spectatorviewloadout;
 
       if(isDefined(var_1)) {
         if(isDefined(var_1._id_7709)) {
@@ -64,7 +64,7 @@ _id_A0E7() {
   }
 }
 
-_id_6BAC() {
+onspectatingclient() {
   self endon("disconnect");
   thread _id_A0E7();
   var_0 = self getspectatingplayer();
@@ -90,27 +90,27 @@ _id_6BAC() {
       self setcarddisplayslot(var_0, 6);
 
       if(self ismlgspectator()) {
-        _id_A168(var_0);
+        updatespectatedloadout(var_0);
       }
     }
   }
 }
 
-_id_A16A() {
+updatespectatesettings() {
   level endon("game_ended");
 
   for(var_0 = 0; var_0 < level.players.size; var_0++) {
-    level.players[var_0] _id_872F();
+    level.players[var_0] setspectatepermissions();
   }
 }
 
-_id_872F() {
+setspectatepermissions() {
   var_0 = self._id_0179;
 
-  if(level.gameended && gettime() - level._id_3F9F >= 2000) {
-    if(level._id_6520) {
-      for(var_1 = 0; var_1 < level._id_985B.size; var_1++) {
-        self allowspectateteam(level._id_985B[var_1], 0);
+  if(level.gameended && gettime() - level.gameendtime >= 2000) {
+    if(level.multiteambased) {
+      for(var_1 = 0; var_1 < level.teamnamelist.size; var_1++) {
+        self allowspectateteam(level.teamnamelist[var_1], 0);
       }
     } else {
       self allowspectateteam("allies", 0);
@@ -122,18 +122,18 @@ _id_872F() {
     return;
   }
 
-  var_2 = _id_0511::_id_46F7("game", "spectatetype");
-  var_3 = _id_0511::_id_46F7("game", "lockspectatepov");
+  var_2 = _id_0511::gettweakablevalue("game", "spectatetype");
+  var_3 = _id_0511::gettweakablevalue("game", "lockspectatepov");
 
   if(common_scripts\utility::_id_562E(level.disableprespawnspectator) && !common_scripts\utility::_id_562E(self.hasspawned) && isDefined(self.team) && self.team != "spectator") {
     var_2 = 0;
   }
 
-  if(self ismlgspectator() && !maps\mp\_utility::_id_551F()) {
+  if(self ismlgspectator() && !maps\mp\_utility::invirtuallobby()) {
     var_2 = 1;
   }
 
-  if(isDefined(level._id_585D) && level._id_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     var_2 = 1;
   }
 
@@ -143,9 +143,9 @@ _id_872F() {
 
   switch (var_2) {
     case 0:
-      if(level._id_6520) {
-        for(var_1 = 0; var_1 < level._id_985B.size; var_1++) {
-          self allowspectateteam(level._id_985B[var_1], 0);
+      if(level.multiteambased) {
+        for(var_1 = 0; var_1 < level.teamnamelist.size; var_1++) {
+          self allowspectateteam(level.teamnamelist[var_1], 0);
         }
       } else {
         self allowspectateteam("allies", 0);
@@ -161,27 +161,27 @@ _id_872F() {
         self allowspectateteam("axis", 1);
         self allowspectateteam("none", 1);
         self allowspectateteam("freelook", 0);
-      } else if(isDefined(var_0) && (var_0 == "allies" || var_0 == "axis") && !level._id_6520) {
+      } else if(isDefined(var_0) && (var_0 == "allies" || var_0 == "axis") && !level.multiteambased) {
         self allowspectateteam(var_0, 1);
         self allowspectateteam(maps\mp\_utility::getotherteam(var_0), 0);
         self allowspectateteam("freelook", 0);
         self allowspectateteam("none", 0);
-      } else if(isDefined(var_0) && issubstr(var_0, "team_") && level._id_6520) {
-        for(var_1 = 0; var_1 < level._id_985B.size; var_1++) {
-          if(var_0 == level._id_985B[var_1]) {
-            self allowspectateteam(level._id_985B[var_1], 1);
+      } else if(isDefined(var_0) && issubstr(var_0, "team_") && level.multiteambased) {
+        for(var_1 = 0; var_1 < level.teamnamelist.size; var_1++) {
+          if(var_0 == level.teamnamelist[var_1]) {
+            self allowspectateteam(level.teamnamelist[var_1], 1);
             continue;
           }
 
-          self allowspectateteam(level._id_985B[var_1], 0);
+          self allowspectateteam(level.teamnamelist[var_1], 0);
         }
 
         self allowspectateteam("freelook", 0);
         self allowspectateteam("none", 0);
       } else {
-        if(level._id_6520) {
-          for(var_1 = 0; var_1 < level._id_985B.size; var_1++) {
-            self allowspectateteam(level._id_985B[var_1], 0);
+        if(level.multiteambased) {
+          for(var_1 = 0; var_1 < level.teamnamelist.size; var_1++) {
+            self allowspectateteam(level.teamnamelist[var_1], 0);
           }
         } else {
           self allowspectateteam("allies", 0);
@@ -194,9 +194,9 @@ _id_872F() {
 
       break;
     case 2:
-      if(level._id_6520) {
-        for(var_1 = 0; var_1 < level._id_985B.size; var_1++) {
-          self allowspectateteam(level._id_985B[var_1], 1);
+      if(level.multiteambased) {
+        for(var_1 = 0; var_1 < level.teamnamelist.size; var_1++) {
+          self allowspectateteam(level.teamnamelist[var_1], 1);
         }
       } else {
         self allowspectateteam("allies", 1);
@@ -233,21 +233,21 @@ _id_872F() {
   }
 
   if(isDefined(var_0) && (var_0 == "axis" || var_0 == "allies" || var_0 == "none")) {
-    if(isDefined(level._id_90E2[var_0]._id_0C24)) {
+    if(isDefined(level.spectateoverride[var_0]._id_0C24)) {
       self allowspectateteam("freelook", 1);
     }
 
-    if(isDefined(level._id_90E2[var_0]._id_0C22)) {
+    if(isDefined(level.spectateoverride[var_0]._id_0C22)) {
       self allowspectateteam(maps\mp\_utility::getotherteam(var_0), 1);
     }
 
-    if(isDefined(level._id_90E2[var_0].allownonespectate)) {
+    if(isDefined(level.spectateoverride[var_0].allownonespectate)) {
       self allowspectateteam("none", 1);
     }
   }
 }
 
-_id_A169(var_0, var_1, var_2) {
+updatespectatedloadoutweapon(var_0, var_1, var_2) {
   var_3 = 0;
 
   if(isDefined(var_1) && var_1 != 0) {
@@ -271,12 +271,12 @@ _id_A169(var_0, var_1, var_2) {
   }
 }
 
-_id_A168(var_0) {
-  var_1 = var_0._id_90E4;
+updatespectatedloadout(var_0) {
+  var_1 = var_0.spectatorviewloadout;
   var_2 = maps\mp\_utility::_id_4604();
   var_3 = 3;
-  _id_A169("ui_broadcaster_loadout_primary_", var_1._id_7709.guid, [var_1._id_76F3[0], var_1._id_76F3[1], var_1._id_76F3[2]]);
-  _id_A169("ui_broadcaster_loadout_secondary_", var_1.botgetscriptgoalradius.guid, [var_1.botsetflag[0], var_1.botsetflag[1]]);
+  updatespectatedloadoutweapon("ui_broadcaster_loadout_primary_", var_1._id_7709.guid, [var_1._id_76F3[0], var_1._id_76F3[1], var_1._id_76F3[2]]);
+  updatespectatedloadoutweapon("ui_broadcaster_loadout_secondary_", var_1.botgetscriptgoalradius.guid, [var_1.botsetflag[0], var_1.botsetflag[1]]);
   var_4 = 0;
 
   if(isDefined(var_1._id_69AD)) {

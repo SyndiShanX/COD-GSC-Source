@@ -7,7 +7,7 @@ main() {
   self setModel("mp_sentinel_body_nojet_b");
   codescripts\character::attachhead("alias_mp_sentinel_heads", _id_03D7::main());
   self setviewmodel("viewhands_s1_pmc");
-  self._id_A600 = "american";
+  self.voice = "american";
   self setclothtype("vestlight");
 }
 

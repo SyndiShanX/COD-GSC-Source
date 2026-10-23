@@ -4,6 +4,6 @@
 **************************************/
 
 main() {
-  level._id_9FC7 = 1;
-  _id_0425::_id_8A1D();
+  level.tweakfile = 1;
+  _id_0425::setupfog();
 }

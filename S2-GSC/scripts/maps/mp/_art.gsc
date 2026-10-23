@@ -4,65 +4,65 @@
 **************************************/
 
 main() {
-  if(!isDefined(level._id_3189)) {
-    level._id_3189["nearStart"] = 0;
-    level._id_3189["nearEnd"] = 0;
-    level._id_3189["farStart"] = 0;
-    level._id_3189["farEnd"] = 0;
-    level._id_3189["nearBlur"] = 6;
-    level._id_3189["farBlur"] = 1.8;
+  if(!isDefined(level.dofdefault)) {
+    level.dofdefault["nearStart"] = 0;
+    level.dofdefault["nearEnd"] = 0;
+    level.dofdefault["farStart"] = 0;
+    level.dofdefault["farEnd"] = 0;
+    level.dofdefault["nearBlur"] = 6;
+    level.dofdefault["farBlur"] = 1.8;
   }
 }
 
-_id_882C() {}
+setup_fog_tweak() {}
 
-_id_5365() {}
+inittweaks() {}
 
-_id_9FC8() {}
+tweaklightset() {}
 
-_id_9FC6() {}
+tweakart() {}
 
-_id_3E57() {}
+fovslidercheck() {}
 
-_id_2597() {
-  if(!isDefined(level._id_A565)) {
-    level._id_A565 = [];
+construct_vision_ents() {
+  if(!isDefined(level.vision_set_fog)) {
+    level.vision_set_fog = [];
   }
 
   var_0 = getEntArray("trigger_multiple_light_visionset", "classname");
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2.canmantle)) {
-      _id_2598(var_2.canmantle);
+      construct_vision_set(var_2.canmantle);
     }
 
     if(isDefined(var_2.ismantling)) {
-      _id_2598(var_2.ismantling);
+      construct_vision_set(var_2.ismantling);
     }
 
     if(isDefined(var_2.forcemantle)) {
-      _id_2598(var_2.forcemantle);
+      construct_vision_set(var_2.forcemantle);
     }
   }
 }
 
-_id_2598(var_0) {
-  if(isDefined(level._id_A565[var_0])) {
+construct_vision_set(var_0) {
+  if(isDefined(level.vision_set_fog[var_0])) {
     return;
   }
-  _id_278D(var_0);
-  _id_27C7(var_0);
+  create_default_vision_set_fog(var_0);
+  create_vision_set_vision(var_0);
   _iprintlnbold("new vision: " + var_0);
 }
 
-_id_27C7(var_0) {
-  if(!isDefined(level._id_A56A)) {
-    level._id_A56A = [];
+create_vision_set_vision(var_0) {
+  if(!isDefined(level.vision_set_vision)) {
+    level.vision_set_vision = [];
   }
 
   var_1 = spawnStruct();
   var_1.name = var_0;
-  level._id_A56A[var_0] = var_1;
+  level.vision_set_vision[var_0] = var_1;
   return var_1;
 }
 
@@ -70,80 +70,80 @@ _id_0988() {}
 
 _id_0987(var_0) {}
 
-_id_278D(var_0) {
-  var_1 = _id_27C6(var_0);
-  var_1._id_92C6 = 3764.17;
-  var_1._id_497B = 19391;
-  var_1._id_7B4C = 0.661137;
-  var_1._id_4848 = 0.554261;
-  var_1._id_180C = 0.454014;
-  var_1._id_608F = 0.7;
-  var_1._id_9C83 = 0;
-  var_1._id_8C98 = 0;
-  var_1._id_8C9A = 0;
-  var_1._id_8C99 = 0;
-  var_1._id_4C37 = 0;
-  var_1._id_4C36 = 0;
-  var_1._id_4C38 = 1000;
+create_default_vision_set_fog(var_0) {
+  var_1 = create_vision_set_fog(var_0);
+  var_1.startdist = 3764.17;
+  var_1.halfwaydist = 19391;
+  var_1.red = 0.661137;
+  var_1.green = 0.554261;
+  var_1.blue = 0.454014;
+  var_1.maxopacity = 0.7;
+  var_1.transitiontime = 0;
+  var_1.skyfogintensity = 0;
+  var_1.skyfogminangle = 0;
+  var_1.skyfogmaxangle = 0;
+  var_1.heightfogenabled = 0;
+  var_1.heightfogbaseheight = 0;
+  var_1.heightfoghalfplanedistance = 1000;
 }
 
-_id_27C6(var_0) {
-  if(!isDefined(level._id_A565)) {
-    level._id_A565 = [];
+create_vision_set_fog(var_0) {
+  if(!isDefined(level.vision_set_fog)) {
+    level.vision_set_fog = [];
   }
 
   var_1 = spawnStruct();
   var_1.name = var_0;
-  var_1._id_8C98 = 0;
-  var_1._id_8C9A = 0;
-  var_1._id_8C99 = 0;
-  var_1._id_4C37 = 0;
-  var_1._id_4C36 = 0;
-  var_1._id_4C38 = 1000;
-  var_1._id_1105 = 0.0;
-  var_1._id_110E = 0.0;
-  var_1._id_110F = 0.0;
-  var_1._id_1104 = 1.0;
-  var_1._id_10FF = 0;
-  var_1._id_1100 = 1.0;
-  var_1._id_1101 = 0.0;
-  var_1._id_111F = 0;
-  var_1._id_1115 = 0.0;
-  var_1._id_1116 = 0.0;
-  var_1._id_1117 = 0.0;
-  var_1._id_1120 = 0.0;
-  var_1._id_111C = 0.0;
-  var_1._id_111D = 0.0;
-  var_1._id_111E = 0.0;
-  var_1._id_1122 = 0.0;
-  var_1._id_1125 = 0;
-  var_1._id_1123 = (0, 0, 0);
-  var_1._id_111B = 0;
-  var_1._id_1124 = 0.0;
-  var_1._id_1118 = 0.0;
-  var_1._id_1119 = 0.0;
-  var_1._id_111A = 0.0;
-  var_1._id_1121 = 0.0;
-  level._id_A565[_tolower(var_0)] = var_1;
+  var_1.skyfogintensity = 0;
+  var_1.skyfogminangle = 0;
+  var_1.skyfogmaxangle = 0;
+  var_1.heightfogenabled = 0;
+  var_1.heightfogbaseheight = 0;
+  var_1.heightfoghalfplanedistance = 1000;
+  var_1.atmosfogextinctiondesaturation = 0.0;
+  var_1.atmosfogheightfogmaximumoffset = 0.0;
+  var_1.atmosfogheightfogstrengthofdepthfog = 0.0;
+  var_1.atmosfogentityscale = 1.0;
+  var_1.atmosfogairlightcapacity = 0;
+  var_1.atmosfogairlightdensityscalar = 1.0;
+  var_1.atmosfogairlightvertexinnermutedradius = 0.0;
+  var_1.atmosfogsplineenabled = 0;
+  var_1.atmosfogsplinecustomdistance1 = 0.0;
+  var_1.atmosfogsplinecustomdistance2 = 0.0;
+  var_1.atmosfogsplinecustomdistance3 = 0.0;
+  var_1.atmosfogsplinemaxdistance = 0.0;
+  var_1.atmosfogsplinecustomvisibility1 = 0.0;
+  var_1.atmosfogsplinecustomvisibility2 = 0.0;
+  var_1.atmosfogsplinecustomvisibility3 = 0.0;
+  var_1.atmosfogsplinemaxdistancevisibility = 0.0;
+  var_1.atmosfogsplineusemaxdistancevisibilityoverride = 0;
+  var_1.atmosfogsplinemaxdistancevisibilityoverride = (0, 0, 0);
+  var_1.atmosfogsplinecustomtangentsenabled = 0;
+  var_1.atmosfogsplinestartingtangentangle = 0.0;
+  var_1.atmosfogsplinecustomtangentangle1 = 0.0;
+  var_1.atmosfogsplinecustomtangentangle2 = 0.0;
+  var_1.atmosfogsplinecustomtangentangle3 = 0.0;
+  var_1.atmosfogsplinemaxdistancetangentangle = 0.0;
+  level.vision_set_fog[_tolower(var_0)] = var_1;
   return var_1;
 }
 
-_id_849E(var_0, var_1) {
-  level._id_A569._id_A563 = var_0;
-  level._id_A569.time = var_1;
-  var_2 = _id_419B(var_0);
+set_fog(var_0, var_1) {
+  level.vision_set_transition_ent.vision_set = var_0;
+  level.vision_set_transition_ent.time = var_1;
+  var_2 = get_fog(var_0);
 
   if(getdvarint("scr_art_tweak") != 0) {
-    _id_9C8B(var_2);
+    translateenttosliders(var_2);
     var_1 = 0;
   }
 
   common_scripts\utility::finishentitydamage(var_2, var_1);
 }
 
-_id_9C8B(var_0) {}
+translateenttosliders(var_0) {}
 
-_id_4F63() {
+hud_init() {
   var_0 = 7;
   var_1 = [];
   var_2 = 15;
@@ -179,29 +179,29 @@ _id_4F63() {
     var_4 = var_4 - var_2;
   }
 
-  level._id_8F65 = var_1;
+  level.spam_group_hudelems = var_1;
 }
 
 _id_0681() {
-  if(!isDefined(level._id_8309)) {
-    level._id_8309 = [];
+  if(!isDefined(level.scripted_elems)) {
+    level.scripted_elems = [];
   }
 
   var_0 = newhudelem();
-  level._id_8309[level._id_8309.size] = var_0;
+  level.scripted_elems[level.scripted_elems.size] = var_0;
   return var_0;
 }
 
 _id_06DC(var_0) {
-  self._id_7AC5 = var_0;
+  self.realtext = var_0;
   self settext("_");
   thread _id_05E3();
   var_1 = 0;
 
-  foreach(var_3 in level._id_8309) {
-    if(isDefined(var_3._id_7AC5)) {
-      var_1 = var_1 + var_3._id_7AC5.size;
-      var_3 settext(var_3._id_7AC5);
+  foreach(var_3 in level.scripted_elems) {
+    if(isDefined(var_3.realtext)) {
+      var_1 = var_1 + var_3.realtext.size;
+      var_3 settext(var_3.realtext);
     }
   }
 }
@@ -219,13 +219,13 @@ _id_05E3() {
   level._id_05E3 = 0;
 }
 
-_id_869A() {
-  _id_7D2D();
+setgroup_up() {
+  reset_cmds();
   var_0 = undefined;
-  var_1 = getarraykeys(level._id_A565);
+  var_1 = getarraykeys(level.vision_set_fog);
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(var_1[var_2] == level._id_A569._id_A563) {
+    if(var_1[var_2] == level.vision_set_transition_ent.vision_set) {
       var_0 = var_2 + 1;
       break;
     }
@@ -234,16 +234,16 @@ _id_869A() {
   if(var_0 == var_1.size) {
     return;
   }
-  _id_8659(var_1[var_0]);
+  setcurrentgroup(var_1[var_0]);
 }
 
-_id_8699() {
-  _id_7D2D();
+setgroup_down() {
+  reset_cmds();
   var_0 = undefined;
-  var_1 = getarraykeys(level._id_A565);
+  var_1 = getarraykeys(level.vision_set_fog);
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(var_1[var_2] == level._id_A569._id_A563) {
+    if(var_1[var_2] == level.vision_set_transition_ent.vision_set) {
       var_0 = var_2 - 1;
       break;
     }
@@ -252,26 +252,26 @@ _id_8699() {
   if(var_0 < 0) {
     return;
   }
-  _id_8659(var_1[var_0]);
+  setcurrentgroup(var_1[var_0]);
 }
 
-_id_7D2D() {}
+reset_cmds() {}
 
-_id_A567(var_0, var_1) {
+vision_set_fog_changes_mp(var_0, var_1) {
   foreach(var_3 in level.players) {
     var_3 visionsetnakedforplayer(var_0, var_1);
     _luinotifyevent(&"dev_vision_exec");
     waitframe();
   }
 
-  _id_849E(var_0, var_1);
+  set_fog(var_0, var_1);
 }
 
-_id_8659(var_0) {
-  var_1 = getarraykeys(level._id_A565);
+setcurrentgroup(var_0) {
+  var_1 = getarraykeys(level.vision_set_fog);
   level._id_8F66 = var_0;
   var_2 = 0;
-  var_3 = int(level._id_8F65.size / 2);
+  var_3 = int(level.spam_group_hudelems.size / 2);
 
   for(var_4 = 0; var_4 < var_1.size; var_4++) {
     if(var_1[var_4] == var_0) {
@@ -280,78 +280,78 @@ _id_8659(var_0) {
     }
   }
 
-  level._id_8F65[var_3] _id_06DC(var_1[var_2]);
+  level.spam_group_hudelems[var_3] _id_06DC(var_1[var_2]);
 
-  for(var_4 = 1; var_4 < level._id_8F65.size - var_3; var_4++) {
+  for(var_4 = 1; var_4 < level.spam_group_hudelems.size - var_3; var_4++) {
     if(var_2 - var_4 < 0) {
-      level._id_8F65[var_3 + var_4] _id_06DC(".");
+      level.spam_group_hudelems[var_3 + var_4] _id_06DC(".");
       continue;
     }
 
-    level._id_8F65[var_3 + var_4] _id_06DC(var_1[var_2 - var_4]);
+    level.spam_group_hudelems[var_3 + var_4] _id_06DC(var_1[var_2 - var_4]);
   }
 
-  for(var_4 = 1; var_4 < level._id_8F65.size - var_3; var_4++) {
+  for(var_4 = 1; var_4 < level.spam_group_hudelems.size - var_3; var_4++) {
     if(var_2 + var_4 > var_1.size - 1) {
-      level._id_8F65[var_3 - var_4] _id_06DC(".");
+      level.spam_group_hudelems[var_3 - var_4] _id_06DC(".");
       continue;
     }
 
-    level._id_8F65[var_3 - var_4] _id_06DC(var_1[var_2 + var_4]);
+    level.spam_group_hudelems[var_3 - var_4] _id_06DC(var_1[var_2 + var_4]);
   }
 
-  _id_A567(var_1[var_2], 0);
+  vision_set_fog_changes_mp(var_1[var_2], 0);
 }
 
-_id_419B(var_0) {
-  if(!isDefined(level._id_A565)) {
-    level._id_A565 = [];
+get_fog(var_0) {
+  if(!isDefined(level.vision_set_fog)) {
+    level.vision_set_fog = [];
   }
 
-  var_1 = level._id_A565[var_0];
+  var_1 = level.vision_set_fog[var_0];
   return var_1;
 }
 
-_id_51D3() {
-  if(!isDefined(level._id_3DA9)) {
-    level._id_3DA9 = spawnStruct();
-    level._id_3DA9._id_3DAC = "";
-    level._id_3DA9.time = 0;
+init_fog_transition() {
+  if(!isDefined(level.fog_transition_ent)) {
+    level.fog_transition_ent = spawnStruct();
+    level.fog_transition_ent.fogset = "";
+    level.fog_transition_ent.time = 0;
   }
 }
 
-_id_7406() {
-  var_0 = level._id_A569._id_A563;
-  level._id_A569._id_A563 = "";
-  level._id_A569.time = "";
-  _id_51D3();
-  level._id_3DA9._id_3DAC = "";
-  level._id_3DA9.time = "";
-  _id_8659(var_0);
+playerinit() {
+  var_0 = level.vision_set_transition_ent.vision_set;
+  level.vision_set_transition_ent.vision_set = "";
+  level.vision_set_transition_ent.time = "";
+  init_fog_transition();
+  level.fog_transition_ent.fogset = "";
+  level.fog_transition_ent.time = "";
+  setcurrentgroup(var_0);
 }
 
-_id_1DCA(var_0, var_1) {
+button_down(var_0, var_1) {
   var_2 = level.player buttonPressed(var_0);
 
   if(!var_2) {
     var_2 = level.player buttonPressed(var_1);
   }
 
-  if(!isDefined(level._id_1DDF[var_0])) {
-    level._id_1DDF[var_0] = 0;
+  if(!isDefined(level.buttons[var_0])) {
+    level.buttons[var_0] = 0;
   }
 
-  if(gettime() < level._id_1DDF[var_0]) {
+  if(gettime() < level.buttons[var_0]) {
     return 0;
   }
 
-  level._id_1DDF[var_0] = gettime() + 400;
+  level.buttons[var_0] = gettime() + 400;
   return var_2;
 }
 
-_id_34DB() {}
+dumpsettings() {}
 
-_id_1002() {
+artstartvisionfileexport() {
   common_scripts\utility:: fileprint_launcher();
 }
 
@@ -359,7 +359,7 @@ _id_0FD0() {
   return common_scripts\utility:: fileprint_launcher_end_file( "\\share\\raw\\vision\\" + level._id_015D + ".vision", 1 );
 }
 
-_id_1001() {
+artstartfogfileexport() {
   common_scripts\utility:: fileprint_launcher();
 }
 
@@ -380,24 +380,24 @@ _id_0FD1() {
 
 _id_0FCE() {}
 
-_id_27A5(var_0) {
-  if(!isDefined(level._id_5D21)) {
-    level._id_5D21 = [];
+create_light_set(var_0) {
+  if(!isDefined(level.light_set)) {
+    level.light_set = [];
   }
 
   var_1 = spawnStruct();
   var_1.name = var_0;
-  level._id_5D21[var_0] = var_1;
+  level.light_set[var_0] = var_1;
   return var_1;
 }
 
 getvisionsetindexfromname(var_0) {
-  if(!isDefined(level._id_A565)) {
+  if(!isDefined(level.vision_set_fog)) {
     return;
   }
   var_1 = 0;
 
-  foreach(var_4, var_3 in level._id_A565) {
+  foreach(var_4, var_3 in level.vision_set_fog) {
     if(var_4 == var_0) {
       return var_1;
     }
@@ -407,7 +407,7 @@ getvisionsetindexfromname(var_0) {
 
   var_5 = "";
 
-  foreach(var_4, var_3 in level._id_A565) {
+  foreach(var_4, var_3 in level.vision_set_fog) {
     var_5 = var_5 + "'" + var_4 + "'";
   }
 }

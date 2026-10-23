@@ -160,7 +160,7 @@ _id_2817(var_0) {
   if(!level.teambased) {
     _objective_playerteam(var_1._id_3770, self getentitynumber());
   } else {
-    _objective_team(var_1._id_3770, level._id_6C63[self.team]);
+    _objective_team(var_1._id_3770, level.otherteam[self.team]);
   }
 
   if(self._id_4B78) {

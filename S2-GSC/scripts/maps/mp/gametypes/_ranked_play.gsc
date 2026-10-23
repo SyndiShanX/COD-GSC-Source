@@ -10,7 +10,7 @@ waitforbackendreply() {
 }
 
 init() {
-  if(_func_3AF()) {
+  if(xmodelalias/alias_ger_heads_scarf_for_muddy_cheap()) {
     thread _id_6B90();
     level._id_75E7 = ::waitforbackendreply;
   }
@@ -99,9 +99,9 @@ getrankformmr(var_0) {
 giverankadvancerewards(var_0) {
   if(isDefined(self.initial_mmr)) {
     var_1 = self.initial_mmr;
-    var_2 = self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_0, "mmr_current");
-    var_3 = self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_0, "ranked_games_total");
-    var_4 = !self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_0, "mmr_was_adjusted");
+    var_2 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_season_data", var_0, "mmr_current");
+    var_3 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_season_data", var_0, "ranked_games_total");
+    var_4 = !self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_season_data", var_0, "mmr_was_adjusted");
     var_5 = var_3 == getdvarint("4697", 10);
 
     if(!var_4) {
@@ -120,7 +120,7 @@ giverankadvancerewards(var_0) {
       }
     } else if(!var_4 || var_3 > getdvarint("4697", 10)) {
       if(var_0 == 1) {
-        var_8 = self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_0, "mmr_max");
+        var_8 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "ranked_play_season_data", var_0, "mmr_max");
         var_9 = getrankformmr(var_8);
 
         if(var_9 < 1) {

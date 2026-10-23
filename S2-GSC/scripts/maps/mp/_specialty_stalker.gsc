@@ -3,14 +3,14 @@
  * Script: scripts\maps\mp\_specialty_stalker.gsc
 **************************************************/
 
-_id_93B0() {
+stock_think() {
   self endon("death");
   self endon("disconnect");
   self endon("faux_spawn");
-  self._id_4B45 = 0;
+  self.has_stock = 0;
 
   for(;;) {
-    if(!self._id_4B45) {
+    if(!self.has_stock) {
       if(self hasperk("specialty_stalker", 1)) {
         self unsetperk("specialty_stalker", 1);
       }

@@ -12,9 +12,9 @@ main() {
   _id_04D4::setupcallbacks();
 
   if(_isusingmatchrulesdata()) {
-    level._id_5300 = ::_id_5300;
-    [[level._id_5300]]();
-    level thread maps\mp\_utility::_id_7C13();
+    level.initializematchrules = ::initializematchrules;
+    [[level.initializematchrules]]();
+    level thread maps\mp\_utility::reinitializematchrulesonmigration();
   } else {
     maps\mp\_utility::registerroundswitchdvar(level.gametype, 0, 0, 9);
     maps\mp\_utility::registertimelimitdvar(level.gametype, 5);
@@ -23,16 +23,16 @@ main() {
     maps\mp\_utility::registerwinlimitdvar(level.gametype, 1);
     maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
     maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
-    level._id_6031 = 0;
-    level._id_6035 = 0;
+    level.matchrules_damagemultiplier = 0;
+    level.matchrules_vampirism = 0;
   }
 
   maps\mp\_utility::_id_873B(1);
-  level._id_6BAF = ::_id_6BAF;
-  level._id_6B5C = ::_id_6B5C;
+  level.onstartgametype = ::onstartgametype;
+  level.onnormaldeath = ::onnormaldeath;
 
-  if(level._id_6031 || level._id_6035) {
-    level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
+    level.modifyplayerdamage = maps\mp\gametypes\_damage::gamemodemodifyplayerdamage;
   }
 
   game["dialog"]["gametype"] = "tdm_intro";
@@ -46,8 +46,8 @@ main() {
   maps\mp\gametypes\dogfight_common::dogfightinit();
 }
 
-_id_5300() {
-  maps\mp\_utility::_id_8653();
+initializematchrules() {
+  maps\mp\_utility::setcommonrulesfrommatchrulesdata();
   _setdynamicdvar("scr_dogfight_roundswitch", 0);
   maps\mp\_utility::registerroundswitchdvar("dogfight", 0, 0, 9);
   _setdynamicdvar("scr_dogfight_roundlimit", 1);
@@ -58,7 +58,7 @@ _id_5300() {
   maps\mp\_utility::registerhalftimedvar("dogfight", 0);
 }
 
-_id_6BAF() {
+onstartgametype() {
   _setclientnamemode("auto_change");
 
   if(!isDefined(game["switchedsides"])) {
@@ -88,32 +88,32 @@ _id_6BAF() {
   maps\mp\gametypes\dogfight_common::ondogfightstart();
 }
 
-_id_6B5C(var_0, var_1, var_2) {
-  level _id_04D2::_id_47BD(var_1.pers["team"], 1, 1);
+onnormaldeath(var_0, var_1, var_2) {
+  level _id_04D2::giveteamscoreforobjective(var_1.pers["team"], 1, 1);
 
-  if(game["state"] == "postgame" && game["teamScores"][var_1.team] > game["teamScores"][level._id_6C63[var_1.team]]) {
-    var_1._id_3B4B = 1;
+  if(game["state"] == "postgame" && game["teamScores"][var_1.team] > game["teamScores"][level.otherteam[var_1.team]]) {
+    var_1.finalkill = 1;
   }
 }
 
-_id_6BB6() {
-  level._id_3B5C = "none";
+ontimelimit() {
+  level.finalkillcam_winner = "none";
 
   if(game["status"] == "overtime") {
     var_0 = "forfeit";
   } else if(game["teamScores"]["allies"] == game["teamScores"]["axis"]) {
     var_0 = "overtime";
   } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
-    level._id_3B5C = "axis";
+    level.finalkillcam_winner = "axis";
     var_0 = "axis";
   } else {
-    level._id_3B5C = "allies";
+    level.finalkillcam_winner = "allies";
     var_0 = "allies";
   }
 
-  if(maps\mp\_utility::_id_761E()) {
+  if(maps\mp\_utility::practiceroundgame()) {
     var_0 = "none";
   }
 
-  thread maps\mp\gametypes\_gamelogic::_id_36B9(var_0, game["end_reason"]["time_limit_reached"]);
+  thread maps\mp\gametypes\_gamelogic::endgame(var_0, game["end_reason"]["time_limit_reached"]);
 }

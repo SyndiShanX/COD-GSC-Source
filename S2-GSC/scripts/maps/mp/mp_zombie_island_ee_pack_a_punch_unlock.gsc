@@ -27,7 +27,7 @@ add_player_fuse_count() {
 handle_island_pack_a_punch(var_0) {
   level thread handle_fuses(var_0);
   var_1 = _getEnt("zmb_pack_a_punch_elevator", "targetname");
-  var_2 = common_scripts\utility::_id_46B5("zmb_pack_a_punch_scripted_node", "targetname");
+  var_2 = common_scripts\utility::getstruct("zmb_pack_a_punch_scripted_node", "targetname");
   var_3 = _getEnt("pack_a_punch_dummy", "targetname");
   var_4 = _getEnt("zmb_pack_a_punch_door_clip", "targetname");
 
@@ -59,7 +59,7 @@ handle_island_pack_a_punch(var_0) {
   var_10.eleaudcallbacks[2] = ::elevator_raise_3_callback;
 
   for(var_11 = 0; var_11 < var_0.size; var_11++) {
-    common_scripts\utility::_id_3C9F(var_0[var_11]);
+    common_scripts\utility::flag_wait(var_0[var_11]);
     var_1 thread[[var_10.eleaudcallbacks[var_11]]]();
     var_1 scriptmodelplayanimdeltamotionfrompos("zmb_elevator_cart_move_0" + (var_11 + 1), var_2.origin, var_2.angles, "scripted_anim");
     wait(_getanimlength(var_9["zmb_elevator_cart_move_0" + (var_11 + 1)]));
@@ -81,21 +81,21 @@ packapunchlight() {
 }
 
 elevator_raise_1_callback() {
-  _id_0378::_id_8D74("pap_elevator_move");
+  _id_0378::snd_message("pap_elevator_move");
 }
 
 elevator_raise_2_callback() {
-  _id_0378::_id_8D74("pap_elevator_move");
+  _id_0378::snd_message("pap_elevator_move");
 }
 
 elevator_raise_3_callback() {
-  _id_0378::_id_8D74("pap_elevator_move");
+  _id_0378::snd_message("pap_elevator_move");
 }
 
 wait_for_upgrade_machine_arrived(var_0, var_1) {
   level.pap_model = var_1;
   var_1 _meth_8006(var_0);
-  common_scripts\utility::_id_3C9F("pap_elevator_arrived");
+  common_scripts\utility::flag_wait("pap_elevator_arrived");
 }
 
 open_elevator_doors(var_0) {
@@ -106,12 +106,12 @@ open_elevator_doors(var_0) {
     self waittill("scripted_anim", var_2);
   }
 
-  _id_0378::_id_8D74("pap_elevator_door_open");
+  _id_0378::snd_message("pap_elevator_door_open");
   var_1 scriptmodelplayanimdeltamotionfrompos("zmb_elevator_door_open_02", var_0.origin, var_0.angles, "script_anim");
 }
 
 handle_fuses(var_0) {
-  var_1 = common_scripts\utility::_id_46B5("elevator_trigger_pap", "targetname");
+  var_1 = common_scripts\utility::getstruct("elevator_trigger_pap", "targetname");
   var_2 = common_scripts\utility::_id_44BE(var_1.target, "targetname");
   var_1.fuse_spawns = [];
   var_1.fuse_spawns_start_structs = [];
@@ -119,7 +119,7 @@ handle_fuses(var_0) {
   foreach(var_4 in var_2) {
     switch (var_4._id_0165) {
       case "elevator_electroschnell_trig":
-        var_1._id_9D65 = var_4;
+        var_1.trigger = var_4;
         break;
       case "elevator_electroschnell":
         var_1.fuse_spawns[var_4.setanimknobrestart - 1] = var_4;
@@ -131,28 +131,28 @@ handle_fuses(var_0) {
     }
   }
 
-  var_1._id_9D65 _meth_8660(1, var_1.fuse_spawns[1].origin);
-  var_1._id_9D65 setHintString(&"ZOMBIE_ISLAND_PAP_INSERT");
+  var_1.trigger setdefaultcostumeifneeded(1, var_1.fuse_spawns[1].origin);
+  var_1.trigger setHintString(&"ZOMBIE_ISLAND_PAP_INSERT");
   var_1 show_fuse(0);
-  var_1._id_9D65 waittill("trigger", var_6);
-  var_1._id_9D65 common_scripts\utility::_id_9D9F();
+  var_1.trigger waittill("trigger", var_6);
+  var_1.trigger common_scripts\utility::trigger_off();
   set_upgrade_machine_visuals(1);
   var_6 thread _id_0367::_id_8E3C("elevatorhint");
   var_1 insert_fuse(0);
 
   for(var_7 = 0; var_7 < var_0.size; var_7++) {
-    common_scripts\utility::_id_3C9F("pap_elevator_access_" + (var_7 + 1));
-    var_1._id_9D65 common_scripts\utility::_id_9DA3();
-    var_1._id_9D65 thread wait_for_user_electroschnell_insert(var_0[var_7], var_7);
-    common_scripts\utility::_id_3C9F(var_0[var_7]);
-    var_1._id_9D65 common_scripts\utility::_id_9D9F();
+    common_scripts\utility::flag_wait("pap_elevator_access_" + (var_7 + 1));
+    var_1.trigger common_scripts\utility::trigger_on();
+    var_1.trigger thread wait_for_user_electroschnell_insert(var_0[var_7], var_7);
+    common_scripts\utility::flag_wait(var_0[var_7]);
+    var_1.trigger common_scripts\utility::trigger_off();
     var_1 show_fuse(var_7 + 1);
     var_1 insert_fuse(var_7 + 1);
     set_upgrade_machine_visuals(var_7 + 2);
     wait 0.75;
   }
 
-  var_1._id_9D65 common_scripts\utility::_id_9D9F();
+  var_1.trigger common_scripts\utility::trigger_off();
 }
 
 show_fuse(var_0) {
@@ -165,9 +165,9 @@ insert_fuse(var_0) {
   self.fuse_spawns[var_0] moveTo(self.fuse_spawns[var_0]._id_6C4E, 1);
 
   if(var_0 <= 2) {
-    self.fuse_spawns[var_0] _id_0378::_id_8D74("pap_schell_insert");
+    self.fuse_spawns[var_0] _id_0378::snd_message("pap_schell_insert");
   } else if(var_0 == 3) {
-    self.fuse_spawns[var_0] _id_0378::_id_8D74("pap_schell_insert_final");
+    self.fuse_spawns[var_0] _id_0378::snd_message("pap_schell_insert_final");
   }
 }
 
@@ -186,7 +186,7 @@ wait_for_user_electroschnell_insert(var_0, var_1) {
       break;
   }
 
-  common_scripts\utility::_id_9D9F();
+  common_scripts\utility::trigger_off();
   common_scripts\utility::flag_set(var_0);
 }
 

@@ -5,9 +5,9 @@
 
 init() {
   level thread _id_0564::_id_3BFB(0);
-  level.zmb_final_boss_intro_goal = common_scripts\utility::_id_46B5("zmb_final_boss_intro_goal", "targetname");
+  level.zmb_final_boss_intro_goal = common_scripts\utility::getstruct("zmb_final_boss_intro_goal", "targetname");
   level thread ensure_no_fireman_spawn();
-  level.zmb_island_final_boss_phases_spawns = common_scripts\utility::_id_46B7("zmb_final_boss_start_spawns", "targetname");
+  level.zmb_island_final_boss_phases_spawns = common_scripts\utility::getstructarray("zmb_final_boss_start_spawns", "targetname");
   common_scripts\utility::flag_init("spawn_the_fireman_zombie");
   common_scripts\utility::flag_init("fireman_boss_wait");
   var_0 = spawnStruct();
@@ -38,7 +38,7 @@ set_island_final_boss_settings_casual() {
 ensure_no_fireman_spawn() {
   for(;;) {
     wait 1;
-    level._id_66A6 = level._id_A980 + 99999;
+    level._id_66A6 = level.wavecounter + 99999;
   }
 }
 
@@ -71,12 +71,12 @@ wait_for_boss_intro_done() {
 }
 
 spawn_a_fireman() {
-  common_scripts\utility::_id_3C9F("spawn_the_fireman_zombie");
+  common_scripts\utility::flag_wait("spawn_the_fireman_zombie");
   wait 2.15;
-  var_0 = common_scripts\utility::_id_46B5("zmb_fireman_spawnpoint_phase_2", "targetname");
+  var_0 = common_scripts\utility::getstruct("zmb_fireman_spawnpoint_phase_2", "targetname");
   var_1 = _id_0564::_id_3C11(0, var_0, 0);
   var_1 _id_0547::disableoffhandsecondaryweapons();
-  var_1 maps\mp\agents\_agent_common::_id_83FD(int(maps\mp\zquests\casual\island_ee_main::get_difficulty_setting("zmb_assassin_boss_fireman_health")));
+  var_1 maps\mp\agents\_agent_common::set_agent_health(int(maps\mp\zquests\casual\island_ee_main::get_difficulty_setting("zmb_assassin_boss_fireman_health")));
   var_2 = common_scripts\utility::_id_44BE("stove_panel", "targetname");
   var_3 = [];
 
@@ -87,8 +87,8 @@ spawn_a_fireman() {
   }
 
   foreach(var_5 in var_3) {
-    playFX(common_scripts\utility::_id_44F5("zmb_isl_fire_pyro_rnr"), var_5.origin);
-    var_5 _id_0378::_id_8D74("sub_pen_floor_trap_pyro_flame");
+    playFX(common_scripts\utility::getfx("zmb_isl_fire_pyro_rnr"), var_5.origin);
+    var_5 _id_0378::snd_message("sub_pen_floor_trap_pyro_flame");
   }
 
   level notify("sub_pen_blockers_close");
@@ -104,12 +104,12 @@ spawn_a_fireman() {
   }
 
   foreach(var_5 in var_9) {
-    var_14 = common_scripts\utility::_id_4461(var_5.origin, var_10);
+    var_14 = common_scripts\utility::getclosest(var_5.origin, var_10);
     var_11 = common_scripts\utility::_id_0F6F(var_11, var_14);
   }
 
   level.burn_tags = [];
-  _id_0378::_id_8D74("start_corpse_gate_alarm");
+  _id_0378::snd_message("start_corpse_gate_alarm");
   level.continue_final_boss_fire = 1;
 
   while(level.continue_final_boss_fire) {
@@ -125,7 +125,7 @@ spawn_a_fireman() {
 }
 
 open_sub_pens_door() {
-  common_scripts\utility::_id_3C9F("zombie_island_boss_phase_2_rush_defeated");
+  common_scripts\utility::flag_wait("zombie_island_boss_phase_2_rush_defeated");
   level.stop_final_boss_fire_alarm = 1;
   level.continue_final_boss_fire = 0;
 
@@ -200,7 +200,7 @@ set_fireman_spawn_flag() {
     wait 0.125;
   }
 
-  while(level.zmb_island_artillery_sled common_scripts\utility::_id_3794("zmb_island_cart_path_mid_complete")) {
+  while(level.zmb_island_artillery_sled common_scripts\utility::ent_flag("zmb_island_cart_path_mid_complete")) {
     wait 0.125;
   }
 
@@ -240,15 +240,15 @@ get_spawner_targetname_for_phase(var_0) {
 }
 
 wait_for_phase_cart_ride(var_0) {
-  common_scripts\utility::_id_3C9F(var_0.phase_flag);
+  common_scripts\utility::flag_wait(var_0.phase_flag);
 }
 
 wait_for_phase_rush(var_0) {
-  common_scripts\utility::_id_3C9F(var_0.phase_flag + "_rush_defeated");
+  common_scripts\utility::flag_wait(var_0.phase_flag + "_rush_defeated");
 }
 
 wait_for_phase_combat(var_0) {
-  common_scripts\utility::_id_3C9F(var_0.phase_flag + "_assassins_defeated");
+  common_scripts\utility::flag_wait(var_0.phase_flag + "_assassins_defeated");
 }
 
 wait_for_players_to_mine_cart(var_0) {
@@ -272,7 +272,7 @@ kill_remaining_zombies(var_0) {
 }
 
 get_rush_spawners() {
-  var_0 = common_scripts\utility::_id_46B5("intro_bunker_struct", "targetname");
+  var_0 = common_scripts\utility::getstruct("intro_bunker_struct", "targetname");
   var_1 = common_scripts\utility::_id_44BE(var_0.target, "targetname");
   var_0.rush_spawners = [];
 
@@ -352,13 +352,13 @@ run_assassin_boss_phase(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
       }
 
       if(var_1 == 2) {
-        common_scripts\utility::_id_3C9F("fireman_boss_wait");
+        common_scripts\utility::flag_wait("fireman_boss_wait");
       }
 
       var_15 = undefined;
 
       if(isDefined(var_2)) {
-        var_16 = common_scripts\utility::_id_46B7(var_2, "targetname");
+        var_16 = common_scripts\utility::getstructarray(var_2, "targetname");
         var_15 = var_16[var_10];
       }
 
@@ -452,9 +452,9 @@ move_players_to_boss_start() {
     level.players[var_1] setclientomnvar("ui_hide_hud", 1);
     level.players[var_1] allowfire(0);
     level.players[var_1] hideviewmodel();
-    level.players[var_1] _id_0547::_id_8A6D(1);
+    level.players[var_1] _id_0547::setzombiesignoreme(1);
     level.players[var_1] playerlinkTo(var_0);
-    level.players[var_1]._id_480F = 1;
+    level.players[var_1].godmode = 1;
     level.players[var_1] disableoffhandweapons();
     level.players[var_1] disableoffhandsecondaryweapons();
   }
@@ -476,16 +476,16 @@ move_players_to_boss_start() {
   common_scripts\utility::flag_set("players_boss_spawn_done");
   wait 1;
   level thread maps\mp\zquests\casual\island_ee_util::_id_7432(1, 0, "black");
-  common_scripts\utility::_id_3C9F("asn_players_are_blinded");
+  common_scripts\utility::flag_wait("asn_players_are_blinded");
   setDvar("1874", 1);
 
   for(var_1 = 0; var_1 < level.players.size; var_1++) {
     level.players[var_1] setclientomnvar("ui_hide_hud", 0);
     level.players[var_1] allowfire(1);
     level.players[var_1] showviewmodel();
-    level.players[var_1] _id_0547::_id_8A6D(0);
+    level.players[var_1] _id_0547::setzombiesignoreme(0);
     level.players[var_1] unlink();
-    level.players[var_1]._id_480F = 0;
+    level.players[var_1].godmode = 0;
     level.players[var_1] enableoffhandweapons();
     level.players[var_1] enableoffhandsecondaryweapons();
   }

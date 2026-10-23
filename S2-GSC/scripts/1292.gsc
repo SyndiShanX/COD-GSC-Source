@@ -47,7 +47,7 @@ _id_57DA(var_0) {
 }
 
 _id_468F(var_0, var_1) {
-  var_2 = tablelookup(var_0, 0, maps\mp\_utility::_id_4571(), var_1);
+  var_2 = tablelookup(var_0, 0, maps\mp\_utility::getmapname(), var_1);
 
   if(!isDefined(var_2) || var_2 == "") {
     var_2 = tablelookup(var_0, 0, "mp_default", var_1);
@@ -96,7 +96,7 @@ _id_1437(var_0, var_1) {
 }
 
 _id_1443(var_0, var_1) {
-  foreach(var_3 in level._id_486C) {
+  foreach(var_3 in level.grenades) {
     if(!isDefined(var_3) || !var_3 _id_56E4(self)) {
       continue;
     }
@@ -109,7 +109,7 @@ _id_1443(var_0, var_1) {
 }
 
 _id_1447(var_0, var_1) {
-  var_2 = level._id_61ED;
+  var_2 = level.mines;
 
   foreach(var_4 in var_2) {
     if(!isDefined(var_4) || !var_4 _id_56E4(self)) {
@@ -124,7 +124,7 @@ _id_1447(var_0, var_1) {
 }
 
 _id_56E4(var_0) {
-  if(!level.teambased || level._id_3EC4 || isDefined(var_0) && !isDefined(var_0.team)) {
+  if(!level.teambased || level.friendlyfire || isDefined(var_0) && !isDefined(var_0.team)) {
     return 1;
   }
 
@@ -159,7 +159,7 @@ _id_144D(var_0, var_1) {
 }
 
 _id_143A(var_0, var_1) {
-  var_2 = _id_04D1::_id_44B9(var_0);
+  var_2 = _id_04D1::getenemyteam(var_0);
 
   if(var_1._id_266E[var_2] > 0) {
     return 0;
@@ -169,9 +169,9 @@ _id_143A(var_0, var_1) {
 }
 
 _id_1442(var_0, var_1) {
-  var_2 = _id_04D1::_id_44B9(var_0);
+  var_2 = _id_04D1::getenemyteam(var_0);
 
-  if(var_1._id_3EFF[var_2] > 0) {
+  if(var_1.fullsights[var_2] > 0) {
     return 0;
   }
 
@@ -188,8 +188,8 @@ _id_765F(var_0, var_1) {
   if(!isDefined(level._id_9034)) {
     level._id_9034 = 0;
     var_3 = _id_050D::_id_44F9();
-    var_4 = _id_050D::_id_46A0("allies");
-    var_5 = _id_050D::_id_46A0("axis");
+    var_4 = _id_050D::getspawnpointarray("allies");
+    var_5 = _id_050D::getspawnpointarray("axis");
 
     foreach(var_7 in var_3) {
       var_8 = 9999999;
@@ -240,7 +240,7 @@ _id_765F(var_0, var_1) {
 }
 
 _id_10DE(var_0, var_1) {
-  if(_id_2936() && isDefined(var_1._id_3EF5) && level._id_3EF3._id_565F[self.team] && var_1._id_3EF5 != self.team) {
+  if(_id_2936() && isDefined(var_1._id_3EF5) && level._id_3EF3.isactive[self.team] && var_1._id_3EF5 != self.team) {
     return 0;
   }
 
@@ -262,7 +262,7 @@ _id_1451(var_0, var_1) {
 }
 
 _id_144C(var_0, var_1) {
-  if(isDefined(self._id_5BE0) && self._id_5BE0 == var_1) {
+  if(isDefined(self.lastspawnpoint) && self.lastspawnpoint == var_1) {
     return 0;
   }
 
@@ -284,7 +284,7 @@ _id_144A(var_0, var_1) {
 }
 
 _id_143E(var_0, var_1) {
-  if(isDefined(var_1._id_5BE1) && (!level.teambased || var_1._id_5BE1 != var_0)) {
+  if(isDefined(var_1.lastspawnteam) && (!level.teambased || var_1.lastspawnteam != var_0)) {
     var_2 = var_1._id_5BE2 + 500;
 
     if(gettime() < var_2) {
@@ -409,11 +409,11 @@ _id_68A3(var_0, var_1) {
 }
 
 _id_1446(var_0, var_1) {
-  if(!isDefined(self._id_5B90)) {
+  if(!isDefined(self.lastdeathpos)) {
     return 100;
   }
 
-  var_2 = distancesquared(var_1.origin, self._id_5B90);
+  var_2 = distancesquared(var_1.origin, self.lastdeathpos);
 
   if(var_2 > 4000000) {
     return 100;
@@ -424,11 +424,11 @@ _id_1446(var_0, var_1) {
 }
 
 _id_7664(var_0, var_1) {
-  if(!isDefined(self._id_5B90)) {
+  if(!isDefined(self.lastdeathpos)) {
     return 0;
   }
 
-  var_2 = distancesquared(var_1.origin, self._id_5B90);
+  var_2 = distancesquared(var_1.origin, self.lastdeathpos);
 
   if(var_2 > 400000000) {
     return 0;
@@ -580,7 +580,7 @@ _id_7660(var_0, var_1) {
 }
 
 _id_AAFF(var_0, var_1) {
-  var_2 = _id_04D1::_id_44B9(var_0);
+  var_2 = _id_04D1::getenemyteam(var_0);
 
   if(_func_393(var_1._id_00D4, var_2) == 0) {
     return 100;
@@ -673,7 +673,7 @@ _id_7662(var_0, var_1) {
 }
 
 _id_7661(var_0, var_1) {
-  if(var_0 == "allies" && level._id_0BF7 == 0 || var_0 == "axis" && level._id_147E == 0) {
+  if(var_0 == "allies" && level._id_0BF7 == 0 || var_0 == "axis" && level.axisflagstatus == 0) {
     return 0;
   } else {
     return _id_7662(var_0, var_1);
@@ -690,7 +690,7 @@ _id_1441(var_0, var_1) {
 }
 
 _id_1440(var_0, var_1) {
-  if(var_0 == "allies" && level._id_0BF7 == 0 || var_0 == "axis" && level._id_147E == 0) {
+  if(var_0 == "allies" && level._id_0BF7 == 0 || var_0 == "axis" && level.axisflagstatus == 0) {
     return _id_1441(var_0, var_1);
   } else {
     return 0;
@@ -782,7 +782,7 @@ _id_7666(var_0, var_1) {
 }
 
 avoidveryclosetorelic(var_0, var_1) {
-  var_2 = level._id_1562[0]._id_28D4;
+  var_2 = level.balls[0].curorigin;
   var_3 = distancesquared(var_2, var_1.origin);
 
   if(var_3 <= level._id_9037["HPZoneTooCloseDistance"]) {
@@ -793,7 +793,7 @@ avoidveryclosetorelic(var_0, var_1) {
 }
 
 prefernearrelic(var_0, var_1) {
-  var_2 = level._id_1562[0]._id_28D4;
+  var_2 = level.balls[0].curorigin;
   var_3 = distancesquared(var_2, var_1.origin);
 
   if(var_3 >= level._id_9037["HPZoneNearDistance"]) {
@@ -851,7 +851,7 @@ _id_AB32(var_0, var_1) {
     return 0;
   }
 
-  if(isDefined(level._id_AC88) && [[level._id_AC88]](var_1._id_0165)) {
+  if(isDefined(level.zone_is_contaminated_func) && [[level.zone_is_contaminated_func]](var_1._id_0165)) {
     return 0;
   }
 
@@ -863,11 +863,11 @@ _id_AB3F(var_0, var_1) {
     return 0;
   }
 
-  if(!isDefined(self._id_5B90) || !isDefined(level._id_4200) || !isDefined(level._id_43F2)) {
+  if(!isDefined(self.lastdeathpos) || !isDefined(level._id_4200) || !isDefined(level._id_43F2)) {
     return 100;
   }
 
-  var_2 = [[level._id_4200]](self._id_5B90);
+  var_2 = [[level._id_4200]](self.lastdeathpos);
 
   if(!isDefined(var_2)) {
     return 100;
@@ -891,15 +891,15 @@ _id_AB40(var_0, var_1) {
     return 0;
   }
 
-  if(!isDefined(level._id_AC88)) {
+  if(!isDefined(level.zone_is_contaminated_func)) {
     return 0;
   }
 
-  if(!isDefined(self._id_5B90) || !isDefined(level._id_4200) || !isDefined(level._id_43F4)) {
+  if(!isDefined(self.lastdeathpos) || !isDefined(level._id_4200) || !isDefined(level._id_43F4)) {
     return 100;
   }
 
-  var_2 = [[level._id_4200]](self._id_5B90);
+  var_2 = [[level._id_4200]](self.lastdeathpos);
 
   if(!isDefined(var_2)) {
     return 100;
@@ -919,11 +919,11 @@ _id_AB40(var_0, var_1) {
 }
 
 _id_AB41(var_0, var_1) {
-  if(!isDefined(self._id_5B90)) {
+  if(!isDefined(self.lastdeathpos)) {
     return 0;
   }
 
-  var_2 = distance(var_1.origin, self._id_5B90);
+  var_2 = distance(var_1.origin, self.lastdeathpos);
 
   if(var_2 >= 2500 || var_2 <= 500) {
     return 0;
@@ -950,16 +950,16 @@ _id_A11B() {
   var_1 = _id_4572();
   var_2 = gettime();
 
-  if(!isDefined(var_0._id_5C09)) {
-    var_0._id_5C09 = var_2;
-  } else if(var_0._id_565F["allies"] && var_0._id_565F["axis"]) {
+  if(!isDefined(var_0.lastupdatetime)) {
+    var_0.lastupdatetime = var_2;
+  } else if(var_0.isactive["allies"] && var_0.isactive["axis"]) {
     var_0._id_A1C7 = var_0._id_A1C7 + var_0._id_5C0A;
   } else {
     var_0._id_32D2 = var_0._id_32D2 + var_0._id_5C0A;
   }
 
-  var_3 = (var_2 - var_0._id_5C09) / 1000.0;
-  var_0._id_5C09 = var_2;
+  var_3 = (var_2 - var_0.lastupdatetime) / 1000.0;
+  var_0.lastupdatetime = var_2;
   var_0._id_5C0A = var_3;
   var_4 = _id_44F2("allies");
 
@@ -989,16 +989,16 @@ _id_A11B() {
 
   var_0._id_5030 = var_8;
   var_0._id_5031 = var_7;
-  var_9 = common_scripts\utility::_id_98E7(var_0._id_9A9D == "allies", "axis", "allies");
-  var_10 = common_scripts\utility::_id_98E7(var_0._id_9A9D == "allies", var_4, var_5);
-  var_11 = common_scripts\utility::_id_98E7(var_9 == "allies", var_4, var_5);
-  var_12 = _distance2dsquared(var_11, (var_1._id_5FEB[0] - var_1._id_3D75, var_1._id_5FEB[1], var_8[2])) < _distance2dsquared(var_10, (var_1._id_5FEB[0] - var_1._id_3D75, var_1._id_5FEB[1], var_8[2]));
-  var_13 = _distance2dsquared(var_11, (var_1._id_5FEB[0] + var_1._id_3D75, var_1._id_5FEB[1], var_8[2])) > _distance2dsquared(var_10, (var_1._id_5FEB[0] + var_1._id_3D75, var_1._id_5FEB[1], var_8[2]));
+  var_9 = common_scripts\utility::ter_op(var_0._id_9A9D == "allies", "axis", "allies");
+  var_10 = common_scripts\utility::ter_op(var_0._id_9A9D == "allies", var_4, var_5);
+  var_11 = common_scripts\utility::ter_op(var_9 == "allies", var_4, var_5);
+  var_12 = _distance2dsquared(var_11, (var_1.mapcenter[0] - var_1._id_3D75, var_1.mapcenter[1], var_8[2])) < _distance2dsquared(var_10, (var_1.mapcenter[0] - var_1._id_3D75, var_1.mapcenter[1], var_8[2]));
+  var_13 = _distance2dsquared(var_11, (var_1.mapcenter[0] + var_1._id_3D75, var_1.mapcenter[1], var_8[2])) > _distance2dsquared(var_10, (var_1.mapcenter[0] + var_1._id_3D75, var_1.mapcenter[1], var_8[2]));
   var_14 = 0;
   var_2 = gettime();
 
   if(var_2 > var_0._id_5B9D + var_1._id_3D76) {
-    if(var_7 < var_1._id_3D72 && var_7 > -180 - var_1._id_3D72 || var_7 > var_1._id_3D70 && var_7 < 180 - var_1._id_3D70 || _distance2d(var_1._id_5FEB, var_8) > var_1._id_3D75 || var_13 || var_12) {
+    if(var_7 < var_1._id_3D72 && var_7 > -180 - var_1._id_3D72 || var_7 > var_1._id_3D70 && var_7 < 180 - var_1._id_3D70 || _distance2d(var_1.mapcenter, var_8) > var_1._id_3D75 || var_13 || var_12) {
       if(isDefined(var_0._id_530B)) {
         if(var_2 > var_0._id_530B + var_1._id_3D71) {
           if(var_13 || var_12) {
@@ -1017,10 +1017,10 @@ _id_A11B() {
   } else
     var_0._id_530B = undefined;
 
-  var_15 = clamp(var_8[0], var_1._id_5FEB[0] - var_1.radius, var_1._id_5FEB[0] + var_1.radius);
-  var_16 = var_1._id_5FEB[1];
+  var_15 = clamp(var_8[0], var_1.mapcenter[0] - var_1.radius, var_1.mapcenter[0] + var_1.radius);
+  var_16 = var_1.mapcenter[1];
   var_8 = (var_15, var_16, var_8[2]);
-  var_17 = 1 - _abs((var_8[0] - var_1._id_5FEB[0]) / var_1.radius);
+  var_17 = 1 - _abs((var_8[0] - var_1.mapcenter[0]) / var_1.radius);
   var_18 = 0;
 
   if(var_7 < var_1._id_6224 * var_17 && var_7 > -180 - var_1._id_6224 * var_17) {
@@ -1042,32 +1042,32 @@ _id_A11B() {
   } else if(var_7 > var_1._id_60A8 * var_17)
     var_18 = 1;
 
-  if(!isDefined(var_0._id_9851) || !var_0._id_565F["allies"] || !var_0._id_565F["axis"]) {
+  if(!isDefined(var_0._id_9851) || !var_0.isactive["allies"] || !var_0.isactive["axis"]) {
     var_0._id_9851 = var_7;
   }
 
   var_0._id_9851 = var_7;
 
-  if(!isDefined(var_0._id_6162) || !var_0._id_565F["allies"] || !var_0._id_565F["axis"]) {
-    var_0._id_6162 = var_8;
+  if(!isDefined(var_0.midpoint) || !var_0.isactive["allies"] || !var_0.isactive["axis"]) {
+    var_0.midpoint = var_8;
   }
 
-  var_19 = var_8 - var_0._id_6162;
+  var_19 = var_8 - var_0.midpoint;
   var_20 = _length2d(var_19);
   var_21 = _min(var_20, 40.0 * var_3);
 
   if(var_21 > 0) {
     var_19 = var_19 * (var_21 / var_20);
-    var_0._id_6162 = var_0._id_6162 + var_19;
+    var_0.midpoint = var_0.midpoint + var_19;
   }
 
   var_22 = anglesToForward((0, var_0._id_9851, 0));
 
   if(var_0._id_3C62) {
     var_0._id_5B9D = gettime();
-    var_23 = var_0._id_6162 - var_0._id_0BF3;
+    var_23 = var_0.midpoint - var_0._id_0BF3;
     var_24 = vectordot(var_23, var_22);
-    var_0._id_9A9D = common_scripts\utility::_id_98E7(var_24 > 0, "allies", "axis");
+    var_0._id_9A9D = common_scripts\utility::ter_op(var_24 > 0, "allies", "axis");
     var_0._id_3C62 = 0;
   }
 
@@ -1076,7 +1076,7 @@ _id_A11B() {
 
   foreach(var_27 in var_25) {
     var_28 = undefined;
-    var_29 = var_0._id_6162 - var_27.origin;
+    var_29 = var_0.midpoint - var_27.origin;
     var_24 = vectordot(vectorNormalize(var_29), vectorNormalize(var_22));
 
     if(var_0._id_9A9D == "allies" && var_24 > 0 || var_0._id_9A9D != "allies" && var_24 <= 0) {
@@ -1118,10 +1118,10 @@ _id_A11A() {
     var_2._id_5E94["axisCenter"] = [[level._id_602D]]();
   }
 
-  if(!var_2._id_565F["allies"] && !var_2._id_565F["axis"]) {
+  if(!var_2.isactive["allies"] && !var_2.isactive["axis"]) {
     return;
   }
-  var_3 = (var_2._id_6162[0], var_2._id_6162[1], level._id_5FEB[2]);
+  var_3 = (var_2.midpoint[0], var_2.midpoint[1], level.mapcenter[2]);
   var_4 = anglestoright((0, var_2._id_9851, 0));
   var_5 = var_3 + var_4 * 5000;
   var_6 = var_3 - var_4 * 5000;
@@ -1129,19 +1129,19 @@ _id_A11A() {
   if(isDefined(level._id_602E)) {
     var_7 = undefined;
 
-    if(var_2._id_565F["allies"] && var_2._id_565F["axis"]) {
+    if(var_2.isactive["allies"] && var_2.isactive["axis"]) {
       var_7 = "FRONT_LINE";
     } else {
-      var_7 = common_scripts\utility::_id_98E7(var_2._id_565F["allies"], "FRONT_LINE_ALLIES", "FRONT_LINE_AXIS");
+      var_7 = common_scripts\utility::ter_op(var_2.isactive["allies"], "FRONT_LINE_ALLIES", "FRONT_LINE_AXIS");
     }
 
     [[level._id_602E]](var_2._id_5E94["line"], "allies", var_7, var_5[0], var_5[1], gettime(), undefined, var_6[0], var_6[1]);
   }
 
   if(isDefined(level._id_602E)) {
-    var_8 = common_scripts\utility::_id_98E7(var_2._id_565F["axis"], var_2._id_1479, (10000, 10000, 10000));
+    var_8 = common_scripts\utility::ter_op(var_2.isactive["axis"], var_2._id_1479, (10000, 10000, 10000));
     [[level._id_602E]](var_2._id_5E94["axisCenter"], "axis", "ANCHOR", var_8[0], var_8[1], gettime());
-    var_9 = common_scripts\utility::_id_98E7(var_2._id_565F["allies"], var_2._id_0BF3, (10000, 10000, 10000));
+    var_9 = common_scripts\utility::ter_op(var_2.isactive["allies"], var_2._id_0BF3, (10000, 10000, 10000));
     [[level._id_602E]](var_2._id_5E94["alliesCenter"], "allies", "ANCHOR", var_9[0], var_9[1], gettime());
   }
 }
@@ -1174,7 +1174,7 @@ _id_7FA2(var_0) {
     return;
   }
   var_1 = _id_4500();
-  var_1._id_565F[var_0] = 1;
+  var_1.isactive[var_0] = 1;
 
   if(getdvarint("scr_frontline_trap_checks") == 0) {
     return;
@@ -1194,7 +1194,7 @@ _id_7FA2(var_0) {
     if(!isDefined(var_7._id_3EF5) || var_7._id_3EF5 != var_0) {
       continue;
     }
-    if(!isDefined(var_7._id_3EFF) || !isDefined(var_7._id_3EFF[var_3]) || var_7._id_3EFF[var_3] <= 0) {
+    if(!isDefined(var_7.fullsights) || !isDefined(var_7.fullsights[var_3]) || var_7.fullsights[var_3] <= 0) {
       var_4++;
     }
   }
@@ -1208,7 +1208,7 @@ _id_7FA2(var_0) {
       var_1._id_2F7F[var_0] = 1;
     }
 
-    var_1._id_565F[var_0] = 0;
+    var_1.isactive[var_0] = 0;
   }
 }
 
@@ -1221,7 +1221,7 @@ _id_2936() {
     return 0;
   }
 
-  if(maps\mp\_utility::_id_4571() != "mp_d_day") {
+  if(maps\mp\_utility::getmapname() != "mp_d_day") {
     return 0;
   }
 
@@ -1231,9 +1231,9 @@ _id_2936() {
 _id_4500() {
   if(!isDefined(level._id_3EF3)) {
     level._id_3EF3 = spawnStruct();
-    level._id_3EF3._id_565F = [];
-    level._id_3EF3._id_565F["allies"] = 0;
-    level._id_3EF3._id_565F["axis"] = 0;
+    level._id_3EF3.isactive = [];
+    level._id_3EF3.isactive["allies"] = 0;
+    level._id_3EF3.isactive["axis"] = 0;
     level._id_3EF3._id_A1C7 = 0.0;
     level._id_3EF3._id_32D2 = 0.0;
     level._id_3EF3._id_5B9D = 0.0;
@@ -1249,7 +1249,7 @@ _id_4572() {
   if(!isDefined(level._id_3EF4)) {
     level._id_3EF4 = spawnStruct();
     var_0 = getEntArray("minimap_corner", "targetname");
-    level._id_3EF4._id_5FEB = _id_050D::_id_3B89(var_0[0].origin, var_0[1].origin);
+    level._id_3EF4.mapcenter = _id_050D::findboxcenter(var_0[0].origin, var_0[1].origin);
     level._id_3EF4.radius = 500;
     level._id_3EF4._id_60A8 = 20;
     level._id_3EF4._id_6224 = -20;

@@ -53,7 +53,7 @@ init() {
   var_6._id_0EAE = "zombie_animclass";
   var_6._id_0879 = "zombie_generic";
   var_6._id_4C12 = 1;
-  var_6._id_60E2 = 40;
+  var_6.meleedamage = 40;
   var_6._id_8302 = 65;
   var_6._id_8303 = 15;
   var_6.suppressive_fire_speed_multiplier = 0.3;
@@ -76,9 +76,9 @@ init() {
 }
 
 _id_ABB5() {
-  maps\mp\agents\humanoid\_humanoid::_id_8A27();
+  maps\mp\agents\humanoid\_humanoid::setuphumanoidstate();
   thread _id_054D::_id_AC15();
-  thread _id_0547::_id_A692();
+  thread _id_0547::waitforbadpath();
   thread _id_AB4F();
   thread _id_054D::_id_A0EE();
   thread _id_054D::_id_A146();
@@ -102,12 +102,12 @@ _id_ABB5() {
     var_2 = (self._id_901F - var_1) / (var_0 - var_1);
     var_3 = _func_2CA(60, 72, var_2);
     var_3 = clamp(var_3, 60, 72);
-    _id_0547::_id_86C7(var_3);
+    _id_0547::setmeleeradius(var_3);
   }
 }
 
 _id_ABB3() {
-  self _meth_85A1("zombie");
+  self set_target_tracking_disabled("zombie");
   _id_ABB4();
 }
 
@@ -116,7 +116,7 @@ zombie_generic_think_wait(var_0) {
     var_0 = 0.2;
   }
 
-  wait(common_scripts\utility::_id_98E7(isDefined(self.has_think_waited), var_0, _randomfloat(var_0)));
+  wait(common_scripts\utility::ter_op(isDefined(self.has_think_waited), var_0, _randomfloat(var_0)));
   self.has_think_waited = 1;
 }
 
@@ -127,7 +127,7 @@ _id_ABB4() {
   _id_ABB5();
 
   for(;;) {
-    if(_id_053C::_id_4F8C()) {} else if(_id_053C::_id_4F84()) {} else if(_id_053C::_id_4F9B()) {} else if(_id_053C::_id_4F9A()) {} else
+    if(_id_053C::_id_4F8C()) {} else if(_id_053C::humanoid_begin_melee()) {} else if(_id_053C::_id_4F9B()) {} else if(_id_053C::_id_4F9A()) {} else
       _id_053C::_id_0647();
 
     zombie_generic_think_wait();
@@ -138,7 +138,7 @@ _id_AB4F() {
   self endon("death");
 
   for(;;) {
-    var_0 = common_scripts\utility::_id_A717("attack_hit", "attack_miss");
+    var_0 = common_scripts\utility::waittill_any_return_parms("attack_hit", "attack_miss");
 
     switch (var_0[0]) {
       case "attack_hit":

@@ -19,7 +19,7 @@ init() {
   level._effect["zmb_isl_geis_pommel_float"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_geis_pommel_float");
   _id_0547::_id_7BA9(::handle_pommel_kills);
 
-  if(maps\mp\_utility::_id_4571() != "mp_zombie_island") {
+  if(maps\mp\_utility::getmapname() != "mp_zombie_island") {
     init_pommel_aud();
   }
 
@@ -58,14 +58,14 @@ handle_aoe_state_change(var_0, var_1, var_2) {
     return;
   }
   if(var_2) {
-    _id_0378::_id_8D74("zmb_pomel_grenade_cook");
+    _id_0378::snd_message("zmb_pomel_grenade_cook");
   } else {
     self notify("aud_stop_pomel_nade_cook");
   }
 }
 
 initialize_pommel_grenade_pickups() {
-  var_0 = common_scripts\utility::_id_46B7("zmb_hc_grenade_pickup", "targetname");
+  var_0 = common_scripts\utility::getstructarray("zmb_hc_grenade_pickup", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::_id_44BE(var_2.target, "targetname");
@@ -79,7 +79,7 @@ initialize_pommel_grenade_pickups() {
           var_2.fx = _id_0547::_id_8FBA(var_5, "zmb_isl_geis_pommel_float");
           break;
         case "pommel_trigger":
-          var_2._id_9D65 = var_5;
+          var_2.trigger = var_5;
           break;
       }
     }
@@ -87,7 +87,7 @@ initialize_pommel_grenade_pickups() {
 }
 
 spawn_pommel_special_pickup(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::_id_46B7("zmb_hc_grenade_pickup", "targetname");
+  var_3 = common_scripts\utility::getstructarray("zmb_hc_grenade_pickup", "targetname");
   var_4 = undefined;
 
   foreach(var_6 in var_3) {
@@ -103,19 +103,19 @@ spawn_pommel_special_pickup(var_0, var_1, var_2) {
     var_4.origin = var_2;
     var_4.model_spawn = spawn("script_model", var_2);
     var_4.model_spawn setModel("npc_zom_barb_pommel");
-    var_4.fx = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_isl_geis_pommel_float"), var_4, "tag_origin");
-    var_4 _id_0547::_id_AC41(&"ZOMBIES_EMPTY_STRING", (0, 0, 8));
+    var_4.fx = _spawnlinkedfx(common_scripts\utility::getfx("zmb_isl_geis_pommel_float"), var_4, "tag_origin");
+    var_4 _id_0547::zombies_make_usable(&"ZOMBIES_EMPTY_STRING", (0, 0, 8));
     level.zmb_spawned_pommel_pickup = var_4;
   }
 
   _triggerfx(var_4.fx);
   var_4.model_spawn show();
-  var_4.model_spawn _id_0378::_id_8D74("pommel_pickup");
+  var_4.model_spawn _id_0378::snd_message("pommel_pickup");
   var_4 thread rotate_pommel();
   var_8 = 1;
 
   for(;;) {
-    var_4._id_9D65 waittill("trigger", var_9);
+    var_4.trigger waittill("trigger", var_9);
 
     if(common_scripts\utility::_id_0F79(var_9 getweaponlistall(), "island_grenade_hc_zm")) {
       continue;
@@ -123,7 +123,7 @@ spawn_pommel_special_pickup(var_0, var_1, var_2) {
     if(var_8) {
       var_8 = 0;
 
-      if(maps\mp\_utility::_id_4571() == "mp_zombie_island") {
+      if(maps\mp\_utility::getmapname() == "mp_zombie_island") {
         maps\mp\gametypes\zombies::_id_47A8("DLC1_ZM_DARKER");
       }
     }
@@ -135,7 +135,7 @@ spawn_pommel_special_pickup(var_0, var_1, var_2) {
 }
 
 rotate_pommel() {
-  self._id_9D65 endon("trigger");
+  self.trigger endon("trigger");
 
   for(;;) {
     self.model_spawn rotateby((25, 25, 25), 1);
@@ -153,7 +153,7 @@ register_pommel_step_func(var_0, var_1, var_2) {
   }
 
   var_3 = spawnStruct();
-  var_3._id_3F02 = var_0;
+  var_3.func = var_0;
   var_3.agent_target = var_1;
   var_3.looping = var_2;
 
@@ -197,17 +197,17 @@ track_player_aoe_grenade() {
 
       if(!_id_0547::_id_5565(var_3[1], "timeout")) {
         var_4 = var_1 replace_projectile_with_model();
-        var_4 common_scripts\utility::_id_3799("pommel_stone_running");
+        var_4 common_scripts\utility::ent_flag_init("pommel_stone_running");
         level.zmb_active_pommel_grenades = common_scripts\utility::_id_0F6F(level.zmb_active_pommel_grenades, var_4);
         playFX(level._effect["zmb_pommel_energy_field_burst"], var_4.origin);
-        _id_0378::_id_8D74("zmb_pomel_grenade_detonate", var_4.origin);
+        _id_0378::snd_message("zmb_pomel_grenade_detonate", var_4.origin);
         var_5 = var_4 initial_burst(self);
         var_0 = thread handle_pommel_energy_field(var_4);
         var_4 thread run_pommel_aoe(var_5);
-        var_4 common_scripts\utility::_id_379C("pommel_stone_running");
+        var_4 common_scripts\utility::ent_flag_wait("pommel_stone_running");
         level.zmb_active_pommel_grenades = common_scripts\utility::_id_0F93(level.zmb_active_pommel_grenades, var_4);
         playFX(level._effect["zmb_pommel_energy_field_burst"], var_4.origin);
-        _id_0378::_id_8D74("zmb_pomel_grenade_final_explosion", var_4.origin);
+        _id_0378::snd_message("zmb_pomel_grenade_final_explosion", var_4.origin);
         var_5 = var_4 initial_burst(self);
 
         if(isDefined(var_0)) {
@@ -227,12 +227,12 @@ track_player_aoe_grenade() {
             break;
           }
 
-          var_4 _id_0378::_id_8D74("zmb_pomel_grenade_float", self);
+          var_4 _id_0378::snd_message("zmb_pomel_grenade_float", self);
           var_4 moveTo(var_7, var_8);
           wait 0.15;
         }
 
-        _id_0378::_id_8D74("zmb_pomel_grenade_retrieval");
+        _id_0378::snd_message("zmb_pomel_grenade_retrieval");
         var_4 delete();
       } else
         var_1 delete();
@@ -243,8 +243,8 @@ track_player_aoe_grenade() {
 }
 
 handle_pommel_energy_field(var_0) {
-  var_1 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_pommel_energy_field"), var_0._id_95AB, "TAG_ORIGIN");
-  _id_0378::_id_8D74("zmb_pomel_grenade_force_field", var_0.origin);
+  var_1 = _spawnlinkedfx(common_scripts\utility::getfx("zmb_pommel_energy_field"), var_0.tag_origin, "TAG_ORIGIN");
+  _id_0378::snd_message("zmb_pomel_grenade_force_field", var_0.origin);
   _triggerfx(var_1);
   return var_1;
 }
@@ -263,7 +263,7 @@ run_pommel_aoe(var_0) {
   } else
     wait 2.5;
 
-  common_scripts\utility::_id_379A("pommel_stone_running");
+  common_scripts\utility::ent_flag_set("pommel_stone_running");
   self notify("pommel_done");
 }
 
@@ -353,15 +353,15 @@ is_close_to(var_0) {
 }
 
 apply_aoe_func(var_0) {
-  self thread[[var_0._id_3F02]]();
+  self thread[[var_0.func]]();
 }
 
 replace_projectile_with_model() {
   var_0 = spawn("script_model", self.origin);
   var_0 setModel("npc_zom_barb_pommel");
-  var_0._id_95AB = spawn("script_model", var_0.origin);
-  var_0._id_95AB setModel("tag_origin");
-  var_0._id_95AB.angles = (-90, 0, 0);
+  var_0.tag_origin = spawn("script_model", var_0.origin);
+  var_0.tag_origin setModel("tag_origin");
+  var_0.tag_origin.angles = (-90, 0, 0);
   self delete();
   return var_0;
 }
@@ -374,7 +374,7 @@ handle_pommel_kills(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
     var_1.pommelkills++;
     var_1.lifetimepommelkills++;
 
-    if(var_1.lifetimepommelkills == 250 && maps\mp\_utility::_id_4571() == "mp_zombie_island") {
+    if(var_1.lifetimepommelkills == 250 && maps\mp\_utility::getmapname() == "mp_zombie_island") {
       var_1 maps\mp\gametypes\zombies::_id_47C8("DLC1_ZM_POMMEL");
     }
   }
@@ -406,13 +406,13 @@ init_pommel_kill_tracking() {
 }
 
 init_pommel_aud() {
-  _id_0378::_id_8DC7("zmb_pomel_grenade_cook", ::zmb_pommel_grenade_cook);
-  _id_0378::_id_8DC7("zmb_pomel_grenade_detonate", ::zmb_pommel_grenade_detonate);
-  _id_0378::_id_8DC7("zmb_pomel_grenade_force_field", ::zmb_pommel_grenade_force_field);
-  _id_0378::_id_8DC7("zmb_pomel_grenade_final_explosion", ::zmb_pommel_grenade_final_explosion);
-  _id_0378::_id_8DC7("zmb_pomel_grenade_float", ::zmb_pommel_grenade_float);
-  _id_0378::_id_8DC7("zmb_pomel_grenade_retrieval", ::zmb_pommel_grenade_retrieval);
-  _id_0378::_id_8DC7("pommel_pickup", ::zmb_pommel_grenade_pickup);
+  _id_0378::snd_register_message("zmb_pomel_grenade_cook", ::zmb_pommel_grenade_cook);
+  _id_0378::snd_register_message("zmb_pomel_grenade_detonate", ::zmb_pommel_grenade_detonate);
+  _id_0378::snd_register_message("zmb_pomel_grenade_force_field", ::zmb_pommel_grenade_force_field);
+  _id_0378::snd_register_message("zmb_pomel_grenade_final_explosion", ::zmb_pommel_grenade_final_explosion);
+  _id_0378::snd_register_message("zmb_pomel_grenade_float", ::zmb_pommel_grenade_float);
+  _id_0378::snd_register_message("zmb_pomel_grenade_retrieval", ::zmb_pommel_grenade_retrieval);
+  _id_0378::snd_register_message("pommel_pickup", ::zmb_pommel_grenade_pickup);
 }
 
 zmb_pommel_grenade_cook() {

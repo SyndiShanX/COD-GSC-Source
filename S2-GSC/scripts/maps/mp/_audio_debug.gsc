@@ -100,7 +100,7 @@ _id_06E8(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(var_4) == 1 && var_4 != "") {
-    if(common_scripts\utility::_id_9462(var_5, var_4) < 0) {
+    if(common_scripts\utility::string_find(var_5, var_4) < 0) {
       return -1;
     }
   }

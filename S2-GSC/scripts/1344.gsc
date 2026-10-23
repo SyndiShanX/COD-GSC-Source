@@ -185,7 +185,7 @@ _id_ABA4(var_0, var_1, var_2, var_3, var_4, var_5) {
   self scragentsetorientmode("face angle abs", var_11["angles"]);
   self scragentsetphysicsmode("noclip");
   self scragentsetscripted(1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "FallingZombie");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "FallingZombie");
   maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_7, var_8);
   var_36 = var_17 * var_9;
   wait(var_36);
@@ -204,16 +204,16 @@ _id_ABA4(var_0, var_1, var_2, var_3, var_4, var_5) {
   self scragentsetanimscale(1, var_16);
   self _meth_85D4(var_37);
   wait(var_39);
-  _id_0378::_id_8D74("zombie_fall_impact");
+  _id_0378::snd_message("zombie_fall_impact");
   var_42 = _anglestoaxis(self.angles);
-  playFX(common_scripts\utility::_id_44F5("ground_impact"), self.origin, var_42["forward"], var_42["up"]);
+  playFX(common_scripts\utility::getfx("ground_impact"), self.origin, var_42["forward"], var_42["up"]);
   self notify("zombie_fall_impact");
   self scragentsetanimscale(1, 1);
   self _meth_85D4(1);
   self scragentsetphysicsmode("gravity");
   var_43 = (1 - var_14) * var_17;
   wait(var_43);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "FallingZombie");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "FallingZombie");
   self scragentsetscripted(0);
   _id_0547::disableoffhandsecondaryweapons();
 
@@ -224,6 +224,6 @@ _id_ABA4(var_0, var_1, var_2, var_3, var_4, var_5) {
 
 _id_17EE(var_0) {
   self._id_3A1B = 1;
-  var_0 common_scripts\utility::_id_A70A("death", "zombie_fall_impact");
+  var_0 common_scripts\utility::waittill_any("death", "zombie_fall_impact");
   self._id_3A1B = undefined;
 }

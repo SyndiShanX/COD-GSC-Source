@@ -4,10 +4,10 @@
 ************************************************************************/
 
 main() {
-  _id_87A7();
+  setup_callbacks();
 }
 
-_id_87A7() {
+setup_callbacks() {
   level.bot_funcs["gametype_think"] = ::_id_1ABC;
 }
 
@@ -20,7 +20,7 @@ _id_1ABC() {
   self endon("owner_disconnect");
 
   for(;;) {
-    self[[self._id_6F7F]]();
+    self[[self.personality_update_function]]();
     waitframe();
   }
 }

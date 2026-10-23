@@ -10,7 +10,7 @@ init() {
   var_0["fx"] = "pickup_share_money";
   var_0["onDestroyed"] = ::_id_8ADB;
   var_0["canBeDroppedByZombies"] = maps\mp\gametypes\zombies::_id_6FC7;
-  level._id_6FBF["share_money"] = var_0;
+  level.pickup["share_money"] = var_0;
   level._id_8AD2 = [];
   level._id_349D = [];
   level thread maps\mp\_utility::_id_6F74(::_id_A90B);
@@ -19,10 +19,10 @@ init() {
 _id_8ADC(var_0) {
   var_1 = _id_4680();
   _id_0555::issprinting("take_share", var_0);
-  _id_0378::_id_8D74("zmb_points_pickup", var_1.origin);
+  _id_0378::snd_message("zmb_points_pickup", var_1.origin);
   var_0 _id_47BB(var_1._id_62D3);
   var_1 _id_8ADE(0);
-  level thread maps\mp\gametypes\zombies::_id_7CED(self);
+  level thread maps\mp\gametypes\zombies::removepickup(self);
 }
 
 _id_8ADB() {
@@ -160,7 +160,7 @@ _id_A90C() {
     var_3 _id_8ADD(var_1, 0);
 
     if(var_3._id_62D3 <= 0) {
-      level thread maps\mp\gametypes\zombies::_id_7CED(var_3);
+      level thread maps\mp\gametypes\zombies::removepickup(var_3);
     }
   }
 }
@@ -193,16 +193,16 @@ _id_A90B() {
     }
     var_3 = _id_467D();
 
-    if(!var_0 maps\mp\gametypes\zombies::_id_11C2(var_3, 1, 1)) {
+    if(!var_0 maps\mp\gametypes\zombies::attempttobuy(var_3, 1, 1)) {
       var_0 playsoundtoplayer("zmb_ui_purchase_fail", var_0);
       _id_0555::issprinting("poor_share", var_0);
       continue;
     }
 
     var_4 = _id_4681(var_0);
-    var_5 = common_scripts\utility::_id_4461(var_4, level._id_8AD2, _id_467A());
+    var_5 = common_scripts\utility::getclosest(var_4, level._id_8AD2, _id_467A());
     _id_0555::issprinting("share", var_0);
-    _id_0378::_id_8D74("zmb_points_share", var_0.origin);
+    _id_0378::snd_message("zmb_points_share", var_0.origin);
 
     if(!isDefined(var_5)) {
       var_9 = "player share_money on notify " + var_1;
@@ -224,7 +224,7 @@ _id_A90B() {
       var_10 _id_8ADD(var_0 getentitynumber());
 
       if(var_10._id_62D3 <= 0) {
-        level thread maps\mp\gametypes\zombies::_id_7CED(var_10);
+        level thread maps\mp\gametypes\zombies::removepickup(var_10);
       }
     }
 
@@ -253,7 +253,7 @@ _id_47BB(var_0) {
 
 _id_4681(var_0) {
   var_1 = anglesToForward(var_0.angles);
-  var_1 = common_scripts\utility::_id_3D5D(var_1);
+  var_1 = common_scripts\utility::flat_origin(var_1);
   var_1 = vectorNormalize(var_1);
   var_2 = var_0.origin + var_1 * _id_467E() + (0, 0, 30);
   var_3 = _func_2E1(var_2, var_0);
@@ -267,7 +267,7 @@ _id_8ADD(var_0, var_1) {
 
   var_2 = _id_4680();
   var_3 = var_2._id_8AD3[var_0]._id_0DBD;
-  var_4 = maps\mp\gametypes\_playerlogic::_id_4622(var_0);
+  var_4 = maps\mp\gametypes\_playerlogic::getplayerfromclientnum(var_0);
 
   if(isDefined(var_4)) {
     if(var_1) {
@@ -297,7 +297,7 @@ sharemoneyremoveamountbyplayer(var_0, var_1) {
     var_2._id_8AD3[var_3] = undefined;
 
     if(var_2._id_62D3 <= 0) {
-      level thread maps\mp\gametypes\zombies::_id_7CED(var_2);
+      level thread maps\mp\gametypes\zombies::removepickup(var_2);
     }
   }
 

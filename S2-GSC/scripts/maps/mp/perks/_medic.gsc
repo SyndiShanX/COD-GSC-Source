@@ -6,10 +6,10 @@
 initmedic() {
   level.medics = [];
   level.medictriggers = [];
-  thread _id_87A7();
+  thread setup_callbacks();
 }
 
-_id_87A7() {
+setup_callbacks() {
   level._id_0A41["medic_patient"] = [];
   level._id_0A41["medic_patient"]["spawn"] = ::spawnmedicpatient;
   level._id_0A41["medic_patient"]["think"] = ::medicpatientthink;
@@ -48,7 +48,7 @@ canspawnmedicpatienttrigger() {
 
   var_0 = maps\mp\agents\_agent_utility::get_max_agents();
 
-  if(maps\mp\agents\_agent_utility::_id_45BB() >= var_0) {
+  if(maps\mp\agents\_agent_utility::getnumactiveagents() >= var_0) {
     return 0;
   }
 
@@ -84,7 +84,7 @@ canmediccreatepatient(var_0) {
 
   var_1 = maps\mp\agents\_agent_utility::get_max_agents();
 
-  if(maps\mp\agents\_agent_utility::_id_45BB() >= var_1) {
+  if(maps\mp\agents\_agent_utility::getnumactiveagents() >= var_1) {
     return 0;
   }
 
@@ -97,10 +97,10 @@ setupmedicpatienttrigger() {
   var_0 = spawnStruct();
   var_0.origin = self.origin;
   var_0.angles = (0, 0, 0);
-  var_0._id_9D65 = spawn("script_origin", var_0.origin);
-  var_0._id_9D65._id_68FB = var_0;
-  var_0._id_9D65 makeusable();
-  var_0._id_9D65 setHintString(&"DIVISIONS_DLC3_MEDIC_PATIENT_TRIGGER");
+  var_0.trigger = spawn("script_origin", var_0.origin);
+  var_0.trigger.object = var_0;
+  var_0.trigger makeusable();
+  var_0.trigger setHintString(&"DIVISIONS_DLC3_MEDIC_PATIENT_TRIGGER");
   var_0.model = spawn("script_model", var_0.origin);
   var_0.model linkTo(self, "tag_origin");
   var_0.model setModel("tag_origin");
@@ -111,7 +111,7 @@ setupmedicpatienttrigger() {
   var_0 thread handlemedictriggerdeleteaftertime(var_1);
   var_1 setpatientactive(0);
   var_1 maps\mp\agents\_agent_utility::hudoutlineenable(self.team);
-  var_1 _meth_86D0();
+  var_1 setmoveanimpain();
 }
 
 medic_trigger_enable_use_watcher(var_0) {
@@ -119,26 +119,26 @@ medic_trigger_enable_use_watcher(var_0) {
   self endon("disconnect");
   self endon("joined_team");
   self endon("joined_spectators");
-  var_0._id_9D65 endon("deleted");
+  var_0.trigger endon("deleted");
 
   foreach(var_2 in level.players) {
     if(var_2 canmediccreatepatient(self)) {
-      var_0._id_9D65 enableplayeruse(var_2);
+      var_0.trigger enableplayeruse(var_2);
       continue;
     }
 
-    var_0._id_9D65 disableplayeruse(var_2);
+    var_0.trigger disableplayeruse(var_2);
   }
 
   for(;;) {
     level waittill("joined_team", var_2);
 
     if(var_2 canmediccreatepatient(self)) {
-      var_0._id_9D65 enableplayeruse(var_2);
+      var_0.trigger enableplayeruse(var_2);
       continue;
     }
 
-    var_0._id_9D65 disableplayeruse(var_2);
+    var_0.trigger disableplayeruse(var_2);
   }
 }
 
@@ -146,7 +146,7 @@ handlemedictrigger(var_0) {
   var_0 endon("disconnect");
   self endon("death");
   level endon("game_ended");
-  self._id_9D65 waittill("trigger", var_1);
+  self.trigger waittill("trigger", var_1);
   var_0 maps\mp\agents\_agent_utility::hudoutlineenable(var_1.team, var_1);
   var_0 _meth_86D1();
   var_1 thread end_medic_patient(var_0);
@@ -156,7 +156,7 @@ handlemedictrigger(var_0) {
   var_0 thread[[level._id_0A55]](var_1);
 
   foreach(var_3 in level.medictriggers) {
-    var_3._id_9D65 disableplayeruse(var_1);
+    var_3.trigger disableplayeruse(var_1);
   }
 
   var_0 notify("patient_revived");
@@ -178,10 +178,10 @@ setpatientactive(var_0) {
 handlemedictriggerdeleteaftertime(var_0) {
   self endon("death");
   level endon("game_ended");
-  var_1 = var_0 common_scripts\utility::_id_A71A(20);
+  var_1 = var_0 common_scripts\utility::waittill_any_timeout(20);
   var_0 _meth_86D1();
   var_0.patientdown = undefined;
-  maps\mp\agents\_agent_utility::_id_5A28(var_0);
+  maps\mp\agents\_agent_utility::killagent(var_0);
   handlemedictriggerdelete();
 }
 
@@ -189,18 +189,18 @@ handlemedictriggerdelete() {
   if(isDefined(self)) {
     level.medictriggers = common_scripts\utility::_id_0F93(level.medictriggers, self);
     self.model delete();
-    self._id_9D65 notify("deleted");
-    self._id_9D65 delete();
+    self.trigger notify("deleted");
+    self.trigger delete();
     self notify("death");
   }
 }
 
 spawnmedicpatient(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("disconnect");
-  maps\mp\agents\_agent_utility::_id_5334(1);
-  self._id_5BE0 = spawnStruct();
-  self._id_5BE0.origin = var_0;
-  self._id_5BE0.angles = var_1;
+  maps\mp\agents\_agent_utility::initplayerscriptvariables(1);
+  self.lastspawnpoint = spawnStruct();
+  self.lastspawnpoint.origin = var_0;
+  self.lastspawnpoint.angles = var_1;
   maps\mp\agents\_agent_utility::_id_08A7();
   self._id_5CC6 = maps\mp\agents\_agent_utility::_id_45AE(self.name);
   self._id_5BE2 = gettime();
@@ -219,26 +219,26 @@ spawnmedicpatient(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   self[[level.bot_funcs["bot_set_personality"]]]("default");
-  maps\mp\agents\_agent_common::_id_83FD(getdvarint("scr_player_maxhealth", 100));
+  maps\mp\agents\_agent_common::set_agent_health(getdvarint("scr_player_maxhealth", 100));
   self[[level._id_0A5B]]();
-  maps\mp\gametypes\_class::_id_4773(self.team, self.class, 1);
+  maps\mp\gametypes\_class::giveandapplyloadout(self.team, self.class, 1);
 
   if(isDefined(self._id_0117)) {
     self thread[[level._id_0A55]](self._id_0117);
   }
 
-  thread maps\mp\_flashgrenades::_id_6394();
+  thread maps\mp\_flashgrenades::monitorflash();
   self thread[[level.bot_funcs["bot_think_watch_enemy"]]](1);
   self thread[[level.bot_funcs["bot_think_tactical_goals"]]]();
   self thread[[maps\mp\agents\_agent_utility::_id_0A59("think")]]();
 
-  if(!self._id_4B60) {
+  if(!self.hasdied) {
     _id_050D::_id_09FA();
   }
 
-  thread _id_0513::_id_9B90();
-  self._id_4B60 = 0;
-  thread _id_04D6::_id_73FC();
+  thread _id_0513::track_damage_info();
+  self.hasdied = 0;
+  thread _id_04D6::playerhealthregen();
 
   if(self.team == "allies") {
     self setModel("usa_paratrooper_streak_org1_mp");
@@ -260,7 +260,7 @@ medicpatientthink() {
   self endon("owner_disconnect");
 
   for(;;) {
-    self[[self._id_6F7F]]();
+    self[[self.personality_update_function]]();
     waitframe();
   }
 }
@@ -279,15 +279,15 @@ onmedicpatientdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
 onmedicpatientkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self[[level._id_0A5D]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 1);
 
-  if(isDefined(level._id_6A75)) {
-    [[level._id_6A75]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+  if(isDefined(level.on_agent_player_killed)) {
+    [[level.on_agent_player_killed]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
   }
 
-  thread _id_0513::_id_34A9(var_1, var_3, var_4);
+  thread _id_0513::dropscavengerfordeath(var_1, var_3, var_4);
 
-  if(self._id_565F) {
-    self._id_4B60 = 1;
-    maps\mp\agents\_agent_utility::_id_2A73();
+  if(self.isactive) {
+    self.hasdied = 1;
+    maps\mp\agents\_agent_utility::deactivateagent();
   }
 
   if(isDefined(self._id_0117)) {
@@ -301,7 +301,7 @@ onmedicpatientkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
 end_medic_patient(var_0) {
   level endon("game_ended");
   self endon("patient_died");
-  var_1 = common_scripts\utility::_id_A71B(60, "disconnect", "joined_team");
-  maps\mp\agents\_agent_utility::_id_5A28(var_0);
+  var_1 = common_scripts\utility::waittill_any_timeout_no_endon_death(60, "disconnect", "joined_team");
+  maps\mp\agents\_agent_utility::killagent(var_0);
   self.medic_patient_array = common_scripts\utility::_id_0F93(self.medic_patient_array, var_0);
 }

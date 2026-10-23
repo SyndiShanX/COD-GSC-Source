@@ -46,7 +46,7 @@ is_character_present_in_match(var_0) {
 
   foreach(var_2 in var_0) {
     foreach(var_4 in level.players) {
-      if(common_scripts\utility::_id_0F79(level.charactergroups[var_2], var_4._id_20D8)) {
+      if(common_scripts\utility::_id_0F79(level.charactergroups[var_2], var_4.characterindex)) {
         return 1;
       }
     }
@@ -57,7 +57,7 @@ is_character_present_in_match(var_0) {
 
 player_is_character_type(var_0) {
   var_1 = self;
-  return common_scripts\utility::_id_0F79(level.charactergroups[var_0], var_1._id_20D8);
+  return common_scripts\utility::_id_0F79(level.charactergroups[var_0], var_1.characterindex);
 }
 
 random_valid_character_player(var_0, var_1) {
@@ -118,7 +118,7 @@ player_vo_to_self(var_0, var_1, var_2) {
     } else {
       if(!isDefined(level.rideau_radio)) {
         level.rideau_radio = spawn("script_origin", (0, 0, -10000));
-        level.rideau_radio._id_20D8 = 8;
+        level.rideau_radio.characterindex = 8;
       }
 
       if(var_3 issplitscreenplayer()) {
@@ -150,15 +150,15 @@ try_run_conversation(var_0, var_1, var_2, var_3, var_4) {
     level thread timeout_conversation(var_2);
   }
 
-  foreach(var_7 in var_0._id_5D99) {
-    var_8 = var_7._id_90BE;
+  foreach(var_7 in var_0.lines) {
+    var_8 = var_7.speaker;
     var_9 = undefined;
     var_10 = 0;
     var_11 = 0;
 
     foreach(var_13 in level.players) {
-      if(isDefined(var_13._id_20D8)) {
-        var_14 = _id_0378::_id_307B(var_13._id_20D8);
+      if(isDefined(var_13.characterindex)) {
+        var_14 = _id_0378::_id_307B(var_13.characterindex);
 
         if(var_14 == var_8) {
           var_9 = var_13;

@@ -27,10 +27,10 @@ _id_29A5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
 _id_3B9D(var_0) {
   var_1 = self;
-  playFX(common_scripts\utility::_id_44F5("tesla_blood_explosion"), var_1.origin + (0, 0, 24));
+  playFX(common_scripts\utility::getfx("tesla_blood_explosion"), var_1.origin + (0, 0, 24));
   var_2 = maps\mp\gametypes\zombies::_id_1E59() * 2;
   _id_0580::_id_98E9(var_1.origin, _id_4184(), var_0.player, undefined, "teslagun_zm_blood", (0.580392, 0.192157, 0.337255), var_2);
-  var_1 _id_0378::_id_8D74("aud_ww_blood_explode");
+  var_1 _id_0378::snd_message("aud_ww_blood_explode");
 }
 
 _id_7788(var_0, var_1) {

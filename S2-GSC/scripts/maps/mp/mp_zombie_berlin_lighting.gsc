@@ -40,7 +40,7 @@ set_default_scriptable_state() {
 }
 
 set_dagger_step03_light() {
-  maps\mp\_utility::_id_5C98("dagger_step03_light", 1, 3000);
+  maps\mp\_utility::lerp_spot_intensity("dagger_step03_light", 1, 3000);
 }
 
 set_anchor_lights() {

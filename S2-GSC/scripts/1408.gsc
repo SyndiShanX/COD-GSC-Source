@@ -25,7 +25,7 @@ init() {
 _id_98F6(var_0) {
   var_1 = self;
   var_1.player = var_0;
-  var_2 = var_0 common_scripts\utility::_id_A74D("disconnect", 5);
+  var_2 = var_0 common_scripts\utility::waittill_notify_or_timeout_return("disconnect", 5);
 
   if(!_id_0547::_id_5565("timeout", var_2)) {
     var_1.player = undefined;
@@ -36,7 +36,7 @@ _id_98FD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(_id_0547::_id_5565(var_2, var_0)) {
     return;
   }
-  if(_id_0547::_id_5565(var_2._id_000A, level._id_746E)) {
+  if(_id_0547::_id_5565(var_2._id_000A, level.playerteam)) {
     return;
   }
   if(_id_0547::_id_5565(var_4, "MOD_MELEE")) {
@@ -49,8 +49,8 @@ _id_98FD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     return;
   }
   var_8 = spawnStruct();
-  var_8._id_953E = var_5;
-  var_8._id_8CD7 = var_4;
+  var_8.sweapon = var_5;
+  var_8.smeansofdeath = var_4;
   var_8._id_6B87 = var_6;
   var_8._id_4DCD = 0;
   var_8._id_94B3 = var_7;
@@ -106,7 +106,7 @@ _id_9900(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   wait 0;
   var_7._id_98FE = _id_4385();
 
-  if(var_7 maps\mp\agents\humanoid\_humanoid_util::_id_56BC()) {
+  if(var_7 maps\mp\agents\humanoid\_humanoid_util::iscrawling()) {
     var_7 dodamage(var_7.health + 10, var_0, var_4, var_7, var_5, "dot_generic_zm");
     return;
   }
@@ -168,7 +168,7 @@ _id_9900(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       continue;
     }
     var_2._id_4DCD++;
-    _id_98EA(var_7, var_1, var_16, var_17, var_10._id_953E);
+    _id_98EA(var_7, var_1, var_16, var_17, var_10.sweapon);
     var_16 thread _id_9900(var_7.origin, var_17, var_2, var_3 + 1);
   }
 }
@@ -177,7 +177,7 @@ play_shock_fx(var_0, var_1, var_2) {
   self endon("death");
 
   for(var_3 = 0; var_3 < var_2; var_3 = var_3 + 0.35) {
-    _playFXOnTag(common_scripts\utility::_id_44F5(var_0), self, var_1);
+    _playFXOnTag(common_scripts\utility::getfx(var_0), self, var_1);
     wait 0.35;
   }
 }
@@ -185,9 +185,9 @@ play_shock_fx(var_0, var_1, var_2) {
 play_shock_sound(var_0) {
   self notify("play_shock_sound");
   wait 0;
-  thread _id_0378::_id_8D74("aud_wonder_weapon_electrocute_strt");
-  common_scripts\utility::_id_A71B(var_0, "death", "play_shock_sound");
-  thread _id_0378::_id_8D74("aud_wonder_weapon_electrocute_end");
+  thread _id_0378::snd_message("aud_wonder_weapon_electrocute_strt");
+  common_scripts\utility::waittill_any_timeout_no_endon_death(var_0, "death", "play_shock_sound");
+  thread _id_0378::snd_message("aud_wonder_weapon_electrocute_end");
 }
 
 _id_9901(var_0) {
@@ -204,8 +204,8 @@ _id_9901(var_0) {
 _id_98FF(var_0, var_1) {
   var_2 = self;
 
-  if(_id_0547::_id_5565(var_2._id_0A4B, "zombie_fireman") || var_2 maps\mp\agents\humanoid\_humanoid_util::_id_56BC() || common_scripts\utility::_id_562E(var_2.isteslastunimmune)) {
-    var_2 thread _id_98EE(var_0, var_1.player, var_1._id_8CD7, var_1._id_953E, 0);
+  if(_id_0547::_id_5565(var_2._id_0A4B, "zombie_fireman") || var_2 maps\mp\agents\humanoid\_humanoid_util::iscrawling() || common_scripts\utility::_id_562E(var_2.isteslastunimmune)) {
+    var_2 thread _id_98EE(var_0, var_1.player, var_1.smeansofdeath, var_1.sweapon, 0);
   } else {
     var_3 = getcurrentprimaryweapon(var_0, var_1.player);
     var_2 thread _id_0547::_id_7D1A("tesla_shock", [var_3], 4);
@@ -236,7 +236,7 @@ _id_98EE(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(-1 == var_7 gettagindex(var_10)) {
       continue;
     }
-    _playFXOnTag(common_scripts\utility::_id_44F5(var_8), var_7, var_10);
+    _playFXOnTag(common_scripts\utility::getfx(var_8), var_7, var_10);
     break;
   }
 
@@ -289,7 +289,7 @@ _id_98FA(var_0, var_1, var_2, var_3, var_4) {
   var_5._id_9014 = var_2;
   var_5._id_606B = var_3;
   var_5._id_A0A7 = var_4;
-  var_5._id_953E = var_0;
+  var_5.sweapon = var_0;
   level thread maps\mp\_utility::_id_6F74(::_id_98F9, var_5);
 }
 
@@ -312,12 +312,12 @@ _id_98F7(var_0) {
   if(!isDefined(var_2)) {
     return;
   }
-  _id_98EA(var_1, "tag_origin", var_0, var_2, var_1._id_953E);
+  _id_98EA(var_1, "tag_origin", var_0, var_2, var_1.sweapon);
 }
 
 _id_98F8(var_0, var_1) {
   var_2 = self;
-  var_0 thread _id_98EE(var_2.origin, var_2.player, "MOD_ENERGY", var_2._id_953E, 1, var_1);
+  var_0 thread _id_98EE(var_2.origin, var_2.player, "MOD_ENERGY", var_2.sweapon, 1, var_1);
 }
 
 _id_98FC() {
@@ -359,7 +359,7 @@ _id_98FC() {
       }
       var_2[var_8] = 1;
 
-      if(issubstr(var_0._id_953E, "moon")) {
+      if(issubstr(var_0.sweapon, "moon")) {
         var_0 _id_0583::_id_63FC(var_5);
       } else {
         var_0 _id_98F7(var_5);
@@ -382,7 +382,7 @@ _id_98F9(var_0) {
   for(;;) {
     var_1 waittill("weapon_fired", var_2);
 
-    if(!_id_0547::_id_5565(var_2, var_0._id_953E)) {
+    if(!_id_0547::_id_5565(var_2, var_0.sweapon)) {
       continue;
     }
     var_3 = [[var_0._id_8FAD]]();
@@ -397,10 +397,10 @@ _id_98F9(var_0) {
     var_11.angles = var_1.angles;
     var_11 setModel("tag_origin");
     var_11._id_2DA7 = var_10["position"];
-    var_11._id_2F0C = vectorNormalize(var_11._id_2DA7 - var_11.origin);
+    var_11.dir = vectorNormalize(var_11._id_2DA7 - var_11.origin);
     var_11._id_9B7F = var_10["fraction"];
     var_11.player = var_1;
-    var_11._id_953E = var_0._id_953E;
+    var_11.sweapon = var_0.sweapon;
     var_11 thread _id_98FB();
     var_11 thread _id_98FC();
     var_11 thread[[var_0._id_A0A7]]();
@@ -419,7 +419,7 @@ tesla_ammo_tracker(var_0) {
   level endon(var_0 + "_stop_tracking");
 
   for(;;) {
-    common_scripts\utility::_id_A70C(self, "missile_fire", level, "maxAmmoPickup", self, "heavyMeleeClip_earned");
+    common_scripts\utility::waittill_any_ents(self, "missile_fire", level, "maxAmmoPickup", self, "heavyMeleeClip_earned");
 
     if(self hasweapon(var_0)) {
       self._id_A2AF[var_0] = self getweaponammostock(var_0);
@@ -437,7 +437,7 @@ tesla_drop_watcher(var_0, var_1, var_2) {
     var_3 = var_0 common_scripts\utility::waittill_any_return("bleedout", "weapon_change", "becameSpectator", "disconnect", "death");
 
     if(var_3 == "weapon_change") {
-      if(_id_0547::_id_577E(var_0)) {
+      if(_id_0547::isplayerinlaststand(var_0)) {
         continue;
       } else if(!_id_0547::_id_73F9(var_0, var_1)) {
         if(var_2) {
@@ -471,7 +471,7 @@ init_variant_structs_simple() {
 
 tesla_variant_struct_init(var_0) {
   var_1 = spawnStruct();
-  var_1._id_A9E0 = var_0;
+  var_1.weaponname = var_0;
   var_1._id_2916 = "not built";
   var_1._id_2909 = undefined;
   return var_1;
@@ -545,7 +545,7 @@ _id_40C5(var_0) {
 }
 
 _id_98EB(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = _func_382(_id_40C5(var_4), var_0, var_1, var_2, var_3);
+  var_5 = vehicle_scripts/_attack_heli(_id_40C5(var_4), var_0, var_1, var_2, var_3);
   wait(level._id_98F5._id_0F43);
   var_5 delete();
 }
@@ -570,7 +570,7 @@ getcurrentweapon(var_0) {
   var_1._id_172A = 1;
   var_2 = "scripted_tesla_shock";
 
-  if(var_1 maps\mp\agents\humanoid\_humanoid_util::_id_56BC()) {
+  if(var_1 maps\mp\agents\humanoid\_humanoid_util::iscrawling()) {
     var_2 = "stun_hold";
   }
 
@@ -600,6 +600,6 @@ takeallweapons(var_0) {
   if(isDefined(var_0._id_6AA0)) {
     var_1 thread[[var_0._id_6AA0]](var_0);
   } else {
-    var_1 thread _id_98EE(var_0._id_29A8, var_0.player, var_0._id_8CD7, var_0._id_953E, 0);
+    var_1 thread _id_98EE(var_0._id_29A8, var_0.player, var_0.smeansofdeath, var_0.sweapon, 0);
   }
 }

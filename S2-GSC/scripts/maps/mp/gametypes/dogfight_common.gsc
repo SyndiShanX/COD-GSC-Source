@@ -7,8 +7,8 @@ dogfightinit() {
   level.isdogfight = 1;
 
   if(!1) {
-    level._id_5A74 = 1;
-    level._id_5A6F = 0;
+    level.killstreaksdisabled = 1;
+    level.killstreakrewards = 0;
   }
 
   level._id_2FAB = 1;
@@ -47,26 +47,26 @@ ondogfightstart() {
   }
 
   if(isDefined(level.dogfighthardboundary) && isDefined(level.dogfightsoftboundary)) {
-    level.dogfighthardboundarystruct = common_scripts\utility::_id_46B5(level.dogfighthardboundary, "targetname");
-    level.dogfightsoftboundarystruct = common_scripts\utility::_id_46B5(level.dogfightsoftboundary, "targetname");
+    level.dogfighthardboundarystruct = common_scripts\utility::getstruct(level.dogfighthardboundary, "targetname");
+    level.dogfightsoftboundarystruct = common_scripts\utility::getstruct(level.dogfightsoftboundary, "targetname");
   } else if(isDefined(level.dogfightcenter)) {
     if(_isvector(level.dogfightcenter)) {
       setup_boundaries_with_origin(level.dogfightcenter);
     } else {
-      var_0 = common_scripts\utility::_id_46B5(level.dogfightcenter, "targetname");
+      var_0 = common_scripts\utility::getstruct(level.dogfightcenter, "targetname");
       setup_boundaries_with_origin(var_0.origin);
     }
   } else
     setup_boundaries_with_origin((0, 0, 0));
 
   if(isDefined(level.dogfightspawnmin) && isDefined(level.dogfightspawnmax)) {
-    level.dogfightspawnminstruct = common_scripts\utility::_id_46B5(level.dogfightspawnmin, "targetname");
-    level.dogfightspawnmaxstruct = common_scripts\utility::_id_46B5(level.dogfightspawnmax, "targetname");
+    level.dogfightspawnminstruct = common_scripts\utility::getstruct(level.dogfightspawnmin, "targetname");
+    level.dogfightspawnmaxstruct = common_scripts\utility::getstruct(level.dogfightspawnmax, "targetname");
   } else
     setup_spawns_with_hard_boundary();
 
   if(isDefined(level.dogfightformationspawn)) {
-    level.dogfightformationspawnstruct = common_scripts\utility::_id_46B5(level.dogfightformationspawn, "targetname");
+    level.dogfightformationspawnstruct = common_scripts\utility::getstruct(level.dogfightformationspawn, "targetname");
   } else {
     setup_formation_spawn_struct();
   }
@@ -96,8 +96,8 @@ ondogfightstart() {
 }
 
 update_map_center(var_0) {
-  level._id_5FEB = var_0;
-  _setmapcenter(level._id_5FEB);
+  level.mapcenter = var_0;
+  _setmapcenter(level.mapcenter);
 }
 
 setup_minimap(var_0, var_1) {
@@ -114,12 +114,12 @@ setup_minimap(var_0, var_1) {
     var_10 = var_5 + var_0[1];
     var_6[0].origin = (var_7, var_8, var_0[2]);
     var_6[1].origin = (var_9, var_10, var_0[2]);
-    _id_0472::_id_8A2F(var_1);
+    _id_0472::setupminimap(var_1);
   }
 }
 
 load_formation_nodes() {
-  var_0 = common_scripts\utility::_id_46B7("formation_node", "targetname");
+  var_0 = common_scripts\utility::getstructarray("formation_node", "targetname");
 
   if(var_0.size == 0) {
     return;
@@ -207,15 +207,15 @@ monitordogfightafk() {
 
   for(;;) {
     if(!(isDefined(self.controlsfrozen) && self.controlsfrozen)) {
-      var_0 = self _meth_86D4();
-      var_1 = self _meth_86D5();
+      var_0 = self setneutralicons();
+      var_1 = self setnextplayergrenadetime();
       var_2 = var_0[0] != 0 || var_0[1] != 0 || var_1[0] != 0 || var_1[1] != 0;
 
       if(self attackButtonPressed() || self adsButtonPressed() || var_2) {
         self.lastinputtime = gettime();
       } else if(gettime() - self.lastinputtime >= 75000) {
         _kick(self getentitynumber(), "EXE_PLAYERKICKED_INACTIVE");
-        level thread maps\mp\gametypes\_gamelogic::_id_A11E();
+        level thread maps\mp\gametypes\_gamelogic::updategameevents();
       }
     }
 
@@ -239,7 +239,7 @@ onteamswitch(var_0) {
   self endon("end_p47_switch_team_watcher");
   var_1 = self;
   var_2 = var_1.team;
-  var_3 = var_1 common_scripts\utility::_id_A716("joined_team", "joined_spectators", "disconnect");
+  var_3 = var_1 common_scripts\utility::waittill_any_return_no_endon_death("joined_team", "joined_spectators", "disconnect");
 
   if(var_3 == "joined_team" || var_3 == "joined_spectators") {
     var_2 = var_1.team;
@@ -335,7 +335,7 @@ onhostmigration(var_0) {
       }
     }
 
-    var_4 = maps\mp\gametypes\_hostmigration::_id_A782();
+    var_4 = maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
   }
 }
 
@@ -391,7 +391,7 @@ dogfight_wait_for_match_timer(var_0, var_1) {
   _func_3C6(0, 2, 3, 1);
   level waittill("match_start_timer_beginning");
   setup_minimap(var_0, var_1);
-  wait(level._id_7692 - 3);
+  wait(level.prematchperiodend - 3);
   _func_3C6(100, 187.5, 284.09, 143.75);
 }
 
@@ -420,7 +420,7 @@ _id_31E6(var_0, var_1) {
 
   setDvar("fd_pause_update", 0);
 
-  if(level._id_7691 > 0) {
+  if(level.prematchperiod > 0) {
     thread dogfight_wait_for_match_timer(var_0, var_1);
     thread dogfight_prematch_wait();
   } else
@@ -433,8 +433,8 @@ _id_31E6(var_0, var_1) {
     var_3.fighterspawningfunc = ::get_random_spawn_origin_angles;
   }
 
-  level.old_customplaydamagesound = level._id_297F;
-  level._id_297F = ::plane_damage_sound_callback;
+  level.old_customplaydamagesound = level.customplaydamagesound;
+  level.customplaydamagesound = ::plane_damage_sound_callback;
   level.nobotscorestreaks = 1;
   level._id_5A77 = 0;
   level._id_6465["velocityscaler"] = 1.5;
@@ -460,7 +460,7 @@ _id_31E6(var_0, var_1) {
   }
 
   _id_1E8D();
-  level._id_17EF = 0;
+  level.blockweapondrops = 0;
   level.pp_array = [];
   thread onplayerconnect();
   thread watch_for_player_spawn();
@@ -475,7 +475,7 @@ dogfight_end() {
     var_1.fighterspawningfunc = undefined;
   }
 
-  level._id_297F = level.old_customplaydamagesound;
+  level.customplaydamagesound = level.old_customplaydamagesound;
   level._id_4C1E = 0;
   level.nobotscorestreaks = 0;
   level._id_5A77 = 5000;
@@ -585,24 +585,24 @@ spawn_fighter_vfx_states() {
   var_2 = spawnStruct();
   var_2.health_threshold_frac = 0.75;
   var_2.vfx_tag = var_1;
-  var_2.vfx_in = common_scripts\utility::_id_44F5("fighter_dmg_low_start");
+  var_2.vfx_in = common_scripts\utility::getfx("fighter_dmg_low_start");
   var_2.vfx_in_length = 0.5;
-  var_2.vfx_loop = common_scripts\utility::_id_44F5("fighter_dmg_low_loop");
-  var_2.vfx_out = common_scripts\utility::_id_44F5("fighter_dmg_high_stop");
+  var_2.vfx_loop = common_scripts\utility::getfx("fighter_dmg_low_loop");
+  var_2.vfx_out = common_scripts\utility::getfx("fighter_dmg_high_stop");
   var_3 = spawnStruct();
   var_3.health_threshold_frac = 0.4;
   var_3.vfx_tag = var_1;
-  var_3.vfx_in = common_scripts\utility::_id_44F5("fighter_dmg_med_start");
+  var_3.vfx_in = common_scripts\utility::getfx("fighter_dmg_med_start");
   var_3.vfx_in_length = 0.5;
-  var_3.vfx_loop = common_scripts\utility::_id_44F5("fighter_dmg_medium_loop");
-  var_3.vfx_out = common_scripts\utility::_id_44F5("fighter_dmg_high_stop");
+  var_3.vfx_loop = common_scripts\utility::getfx("fighter_dmg_medium_loop");
+  var_3.vfx_out = common_scripts\utility::getfx("fighter_dmg_high_stop");
   var_4 = spawnStruct();
   var_4.health_threshold_frac = 0.15;
   var_4.vfx_tag = var_1;
-  var_4.vfx_in = common_scripts\utility::_id_44F5("fighter_dmg_hvy_start");
+  var_4.vfx_in = common_scripts\utility::getfx("fighter_dmg_hvy_start");
   var_4.vfx_in_length = 0.5;
-  var_4.vfx_loop = common_scripts\utility::_id_44F5("fighter_dmg_high_loop");
-  var_4.vfx_out = common_scripts\utility::_id_44F5("fighter_dmg_high_stop");
+  var_4.vfx_loop = common_scripts\utility::getfx("fighter_dmg_high_loop");
+  var_4.vfx_out = common_scripts\utility::getfx("fighter_dmg_high_stop");
   var_5 = [var_2, var_3, var_4];
   var_0 thread common_damage_state_fx_watcher(var_5, 1);
 }
@@ -702,7 +702,7 @@ common_damage_state_fx_update_watcher(var_0, var_1) {
       continue;
     }
 
-    var_2 common_scripts\utility::_id_A732("health_update", "match_end");
+    var_2 common_scripts\utility::waittill_either("health_update", "match_end");
     waittillframeend;
   }
 }
@@ -746,7 +746,7 @@ common_damage_state_fx_watcher(var_0, var_1) {
           var_8 = var_9;
 
           if(var_3 != var_8) {
-            _id_0378::_id_8D74("aud_fighter_damage_state_change", var_8);
+            _id_0378::snd_message("aud_fighter_damage_state_change", var_8);
           }
 
           var_3 = var_9;
@@ -901,29 +901,29 @@ add_target_icon(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_9 = "tag_origin";
   var_10 = 12500;
   var_11 = 15900;
-  var_0 _meth_866C(&"target_add_icon", 8, self, 1, var_9, var_8, var_10, var_11, 0, 0.8);
-  var_0 _meth_866C(&"target_set_alpha_fade_when_close", 3, self, 1, 1);
+  var_0 setdot_radius(&"target_add_icon", 8, self, 1, var_9, var_8, var_10, var_11, 0, 0.8);
+  var_0 setdot_radius(&"target_set_alpha_fade_when_close", 3, self, 1, 1);
 
   if(common_scripts\utility::_id_562E(var_3)) {
-    var_0 _meth_866C(&"target_set_swatch", 4, self, 1, "HUD", "friendlyTeam");
+    var_0 setdot_radius(&"target_set_swatch", 4, self, 1, "HUD", "friendlyTeam");
   } else {
-    var_0 _meth_866C(&"target_set_swatch", 4, self, 1, "HUD", "enemyTeam");
+    var_0 setdot_radius(&"target_set_swatch", 4, self, 1, "HUD", "enemyTeam");
   }
 
   if(common_scripts\utility::_id_562E(var_2)) {
-    var_0 _meth_866C(&"target_set_world_offset", 5, self, 1, 0, 0, 300);
+    var_0 setdot_radius(&"target_set_world_offset", 5, self, 1, 0, 0, 300);
   }
 
   if(common_scripts\utility::_id_562E(var_1)) {
-    var_0 _meth_866C(&"target_set_scale", 3, self, 1, 2);
+    var_0 setdot_radius(&"target_set_scale", 3, self, 1, 2);
   } else {
-    var_0 _meth_866C(&"target_set_scale", 3, self, 1, 1.5);
+    var_0 setdot_radius(&"target_set_scale", 3, self, 1, 1.5);
   }
 
-  var_0 _meth_866C(&"target_set_alignment", 4, self, 1, "center", "middle");
+  var_0 setdot_radius(&"target_set_alignment", 4, self, 1, "center", "middle");
 
   if(common_scripts\utility::_id_562E(var_4)) {
-    var_0 _meth_866C(&"target_set_clamp", 3, self, 1, 1);
+    var_0 setdot_radius(&"target_set_clamp", 3, self, 1, 1);
   }
 
   self notify("dogfight_target_added");
@@ -931,7 +931,7 @@ add_target_icon(var_0, var_1, var_2, var_3, var_4, var_5) {
 
 remove_target_on_death(var_0) {
   if(isDefined(var_0) && isPlayer(var_0)) {
-    var_0 _meth_866C(&"target_remove_all", 1, self);
+    var_0 setdot_radius(&"target_remove_all", 1, self);
   }
 }
 
@@ -1055,7 +1055,7 @@ _id_A334() {
     self waittill("vehicle_mount", var_0);
 
     if(isDefined(var_0) && isDefined(var_0.team)) {
-      common_scripts\utility::_id_5FA9(var_0.team);
+      common_scripts\utility::make_entity_sentient_mp(var_0.team);
     }
   }
 }
@@ -1142,7 +1142,7 @@ _id_4A31(var_0, var_1) {
   self endon("handle_p47_50cals");
   self endon("death");
   var_1 endon("death");
-  _id_0378::_id_8D74("p47_turret_plr");
+  _id_0378::snd_message("p47_turret_plr");
   var_2 = 0;
   var_3 = _randomintrange(20, 40);
   var_4 = var_3 + _randomintrange(10, 20);
@@ -1202,7 +1202,7 @@ _id_4A31(var_0, var_1) {
     var_20 = 0.0;
 
     if(var_19) {
-      var_20 = _randomfloatrange(0.0025, 0.005) * common_scripts\utility::_id_98E7(common_scripts\utility::_id_24A6(), 1.0, -1.0);
+      var_20 = _randomfloatrange(0.0025, 0.005) * common_scripts\utility::ter_op(common_scripts\utility::cointoss(), 1.0, -1.0);
     }
 
     if(1) {
@@ -1451,7 +1451,7 @@ player_spawn_helper(var_0) {
   var_0 setclientdvar("cg_altimeterRange", get_dogfight_boundary_height(0));
   var_2 = get_dogfight_boundary_center(0);
   var_0 setclientdvar("cg_altimeterCenter", var_2[2]);
-  var_0._id_4D13 = 1;
+  var_0.hideondeath = 1;
 
   if(isbot(var_0) || _isagent(var_0)) {
     var_0._id_0100 = 576000000;
@@ -1460,7 +1460,7 @@ player_spawn_helper(var_0) {
   thread spawn_fighter(var_0);
 
   if(isPlayer(var_0) && !isbot(var_0)) {
-    var_0 maps\mp\gametypes\_class::_id_4773(var_0.team, var_0.class);
+    var_0 maps\mp\gametypes\_class::giveandapplyloadout(var_0.team, var_0.class);
     fighter_set_perks(var_0);
 
     if(1) {
@@ -1628,7 +1628,7 @@ spawn_fighter(var_0) {
     var_0._id_0009 = &"RAIDS_DOGFIGHT_AGENTNAME";
 
     foreach(var_10 in level.players) {
-      if(!level.teambased || var_10.team == common_scripts\utility::_id_416F(var_0._id_000A)) {
+      if(!level.teambased || var_10.team == common_scripts\utility::get_enemy_team(var_0._id_000A)) {
         var_3 thread add_target_icon(var_10, 0, 1, 0, undefined, var_5);
       }
     }
@@ -1638,9 +1638,9 @@ spawn_fighter(var_0) {
   var_0 mountvehiclesafe(var_3);
   var_0 disableusability();
   var_12 = get_turret_weapon_info(var_0.team);
-  var_3 vehicle_scripts\_fighter_mp::_id_51FB(var_12);
+  var_3 vehicle_scripts\_fighter_mp::init_local(var_12);
   var_3 thread _id_4A31(1, var_0);
-  var_3 _id_0378::_id_8D74("aud_figher_spawn");
+  var_3 _id_0378::snd_message("aud_figher_spawn");
   var_0 thread _id_4A35();
   var_0 thread watch_boundary(var_3);
 
@@ -1672,11 +1672,11 @@ spawn_fighter(var_0) {
     foreach(var_10 in level.players) {
       var_14 = var_10 _meth_85E2();
 
-      if((!level.teambased || var_10.team == common_scripts\utility::_id_416F(var_0.team)) && isDefined(var_14) && var_14 fighter_is_alive()) {
+      if((!level.teambased || var_10.team == common_scripts\utility::get_enemy_team(var_0.team)) && isDefined(var_14) && var_14 fighter_is_alive()) {
         var_14 thread add_target_icon(var_0, 0, 1, 0, undefined, var_5);
       }
 
-      if(!level.teambased || var_10.team == common_scripts\utility::_id_416F(var_0.team)) {
+      if(!level.teambased || var_10.team == common_scripts\utility::get_enemy_team(var_0.team)) {
         var_3 thread add_target_icon(var_10, 0, 1, 0, undefined, var_5);
       }
     }
@@ -1685,7 +1685,7 @@ spawn_fighter(var_0) {
       foreach(var_17 in level._id_0A4E) {
         var_14 = var_17 _meth_85E2();
 
-        if(isDefined(var_14) && (!level.teambased || var_17._id_000A == common_scripts\utility::_id_416F(var_0.team))) {
+        if(isDefined(var_14) && (!level.teambased || var_17._id_000A == common_scripts\utility::get_enemy_team(var_0.team))) {
           var_14 thread add_target_icon(var_0, 0, 1, 0, undefined, var_5);
         }
       }
@@ -2140,7 +2140,7 @@ fighter_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(isDefined(var_2) && level.dogfightshowui) {
     var_12 = "raid_fighter_killshot";
-    var_2 _id_04C7::_id_A102(var_12);
+    var_2 _id_04C7::updatedamagefeedback(var_12);
   }
 
   var_13 = fighter_get_crash_animation(var_7, var_1);
@@ -2166,7 +2166,7 @@ fighter_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       var_15 = 2;
 
     thread fighter_play_crash_anim(var_0, var_14, var_13, var_16);
-    var_7 _id_0378::_id_8D74("aud_fighter_start_death", var_14);
+    var_7 _id_0378::snd_message("aud_fighter_start_death", var_14);
   }
 
   var_7.forcenodeathanim = 0;
@@ -2196,7 +2196,7 @@ fighter_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(isDefined(var_14)) {
     var_20 = var_14 gettagorigin("TAG_AIM");
-    var_7 _id_0378::_id_8D74("aud_fighter_final_explosion", var_20);
+    var_7 _id_0378::snd_message("aud_fighter_final_explosion", var_20);
 
     if(!var_16) {
       playFX(level._effect["mp_raid_fighter_bounds_death"], var_14 gettagorigin("prop"));
@@ -2249,7 +2249,7 @@ fighter_damage_callback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   var_15 = "raid_fighter";
 
   if(level.dogfightshowui) {
-    var_1 _id_04C7::_id_A102(var_15);
+    var_1 _id_04C7::updatedamagefeedback(var_15);
   }
 
   var_12.health = var_12.health - int(var_2);
@@ -2298,7 +2298,7 @@ common_award_pending_assists(var_0, var_1) {
       var_10 = undefined;
 
       foreach(var_12 in level.players) {
-        var_13 = var_12 maps\mp\_utility::_id_4704();
+        var_13 = var_12 maps\mp\_utility::getuniqueid();
 
         if(var_13 == var_6) {
           var_10 = var_12;
@@ -2317,7 +2317,7 @@ common_award_pending_assists(var_0, var_1) {
         var_16 = "assist_steal";
       }
 
-      var_10 thread _id_047A::_id_774E(var_1, var_16);
+      var_10 thread _id_047A::processassistevent(var_1, var_16);
     }
   }
 }
@@ -2504,7 +2504,7 @@ agent_spawn(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_1 = (0, 0, 0);
   }
 
-  if(!common_scripts\utility::_id_562E(var_7._id_565F)) {
+  if(!common_scripts\utility::_id_562E(var_7.isactive)) {
     var_7 spawnagent(var_0, var_1);
     var_7 enableanimstate(0);
   }
@@ -2516,8 +2516,8 @@ agent_spawn(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7.maxhealth = 100;
   var_7.health = var_7.maxhealth;
   var_7.name = "Agent";
-  var_7._id_565F = 1;
-  var_7._id_4B60 = 0;
+  var_7.isactive = 1;
+  var_7.hasdied = 0;
   var_7 thread agent_think();
 }
 
@@ -2539,14 +2539,14 @@ _id_0A40(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 }
 
 agent_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  level thread maps\mp\gametypes\_rank::_id_1457("raids_npc_kill", var_1, var_4, self, var_3, var_0);
+  level thread maps\mp\gametypes\_rank::awardgameevent("raids_npc_kill", var_1, var_4, self, var_3, var_0);
 
-  if(isDefined(level._id_6A75)) {
-    [[level._id_6A75]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+  if(isDefined(level.on_agent_player_killed)) {
+    [[level.on_agent_player_killed]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
   }
 
-  if(self._id_565F) {
-    self._id_4B60 = 1;
+  if(self.isactive) {
+    self.hasdied = 1;
     var_9 = self _meth_85E2();
 
     if(isDefined(var_9)) {
@@ -2574,7 +2574,7 @@ bot_spawnagents() {
   var_4 = 3;
 
   foreach(var_6 in level.bomberescortfighteragents) {
-    if(var_6._id_565F && var_6._id_4B60) {
+    if(var_6.isactive && var_6.hasdied) {
       var_6 thread agent_spawn();
       var_4--;
     }

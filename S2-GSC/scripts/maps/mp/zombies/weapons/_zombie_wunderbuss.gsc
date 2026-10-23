@@ -6,17 +6,17 @@
 init() {
   _precacherumble("viewmodel_small");
   level.zm_grenade_funcs["alt+wunderbuss_zm"] = ::onboltfired;
-  level._id_62B3["wunderbuss_zm"] = ::wunderbussmodifyenergydamage;
+  level.modifyweapondamage["wunderbuss_zm"] = ::wunderbussmodifyenergydamage;
   level.modifyweapondamageoninstakill["alt+wunderbuss_zm"] = ::wunderbussmodifyboltdamageoninstakill;
-  level._id_2FE9["wunderbuss_zm"] = 1;
-  level._id_4D3D["wunderbuss_zm"] = 1;
+  level.dismembermentignorelocation["wunderbuss_zm"] = 1;
+  level.highdamageweapons["wunderbuss_zm"] = 1;
   level.weaponmaxammofuncs["wunderbuss_zm"] = ::wunderbussmaxammofunc;
   level.zombieprimaryweapon["wunderbuss_zm"] = 1;
   level.wunderbussbolts = [];
   _id_0547::_id_7BA9(::onenemykilled);
   _id_054D::_id_7BC6(::wunderbuss_kill_info_fallback);
   setdvarifuninitialized("wunderbuss_debug", 0);
-  thread maps\mp\_utility::_id_6F74(::_id_5330);
+  thread maps\mp\_utility::_id_6F74(::initplayer);
   thread scaledamage();
   level._effect["zmb_blood_blast"] = loadfx("vfx/map/mp_zombie_berlin/zmb_wunderbuss_blood_blast");
   level._effect["zmb_ber_bolt_rod_gk_attach"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bolt_rod_gk_attach");
@@ -32,7 +32,7 @@ wunderbuss_kill_info_fallback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
   }
 }
 
-_id_5330() {
+initplayer() {
   var_0 = self;
   var_0.wunderbussbolts = [];
   var_0.wunderbussboltpickups = [];
@@ -65,11 +65,11 @@ cleanupbolt(var_0, var_1) {
   var_2 = var_0._id_0117;
   var_2.wunderbussbolts = common_scripts\utility::_id_0F93(var_2.wunderbussbolts, var_0);
 
-  if(isDefined(var_0._id_6FD8)) {
-    var_0._id_6FD8 delete();
+  if(isDefined(var_0.pickuptrigger)) {
+    var_0.pickuptrigger delete();
   }
 
-  if(isDefined(var_0._id_776C)) {
+  if(isDefined(var_0.projectile)) {
     thread deleteboltprojectile(var_0, var_1);
   }
 
@@ -100,9 +100,9 @@ onboltfired(var_0) {
   var_1 = self;
   var_2 = spawnStruct();
   var_0.boltstruct = var_2;
-  var_2._id_776C = var_0;
+  var_2.projectile = var_0;
   var_2._id_0117 = var_1;
-  var_2.playerindex = _id_0547::_id_429D(var_1);
+  var_2.playerindex = _id_0547::get_player_index(var_1);
   var_2._id_5F5C = var_1._id_5F5C;
   var_1.wunderbussbolts = common_scripts\utility::_id_0972(var_1.wunderbussbolts, var_2);
   var_1 thread manageboltstick(var_0);
@@ -205,7 +205,7 @@ boltstucktoenemy(var_0, var_1) {
     var_0 thread boltfx_stuck(self);
   }
 
-  var_1 dodamage(level.wunderbussboltstartdamage, var_3._id_776C.origin, var_3._id_0117, var_3._id_776C, "MOD_RIFLE_BULLET", "dot_generic_zm");
+  var_1 dodamage(level.wunderbussboltstartdamage, var_3.projectile.origin, var_3._id_0117, var_3.projectile, "MOD_RIFLE_BULLET", "dot_generic_zm");
   addbolttostuckboltarray(var_3);
   thread boltdot(var_3);
 }
@@ -246,11 +246,11 @@ boltfx_chargebeam(var_0, var_1, var_2, var_3) {
   }
 
   if(var_2.wunder_beams.size < 1) {
-    var_5 = var_0 common_scripts\utility::_id_8FFC();
+    var_5 = var_0 common_scripts\utility::spawn_tag_origin();
     var_5 linkTo(var_0, "Tag_FX", (0, 0, 0), (0, 180, 0));
     var_5 thread boltfx_chargebeamupdateangle(var_2);
-    var_4 = _func_382("zmb_wunderbuss_charge_beam", var_5, "tag_origin", var_2, "Tag_Origin");
-    var_4 _id_0378::_id_8D74("aud_ber_wunderbuss_charge_beam", var_5.origin, var_2.origin);
+    var_4 = vehicle_scripts/_attack_heli("zmb_wunderbuss_charge_beam", var_5, "tag_origin", var_2, "Tag_Origin");
+    var_4 _id_0378::snd_message("aud_ber_wunderbuss_charge_beam", var_5.origin, var_2.origin);
     var_4 hide();
     var_4 showtoplayer(var_2);
     var_2.wunder_beams = common_scripts\utility::_id_0F6F(var_2.wunder_beams, var_4);
@@ -269,7 +269,7 @@ boltfx_chargebeam(var_0, var_1, var_2, var_3) {
       }
     }
 
-    var_2 _id_0378::_id_8D74("aud_ber_wunderbuss_charge_beam_end");
+    var_2 _id_0378::snd_message("aud_ber_wunderbuss_charge_beam_end");
     var_2.wunder_beams = common_scripts\utility::_id_0F93(var_2.wunder_beams, var_4);
     var_4 notify("aud_stop_beam_charge");
     var_4 delete();
@@ -308,7 +308,7 @@ unstickboltfromenemy(var_0, var_1) {
     var_2 notify("bolt_kill");
 
     if(isDefined(var_0)) {
-      playFX(common_scripts\utility::_id_44F5("zmb_ber_szlr_geistkraftdrain_1"), var_0.origin);
+      playFX(common_scripts\utility::getfx("zmb_ber_szlr_geistkraftdrain_1"), var_0.origin);
     }
 
     cleanupbolt(var_2);
@@ -339,7 +339,7 @@ unstickboltfromally(var_0) {
   var_1 notify("bolt_kill");
 
   if(isDefined(var_0)) {
-    playFX(common_scripts\utility::_id_44F5("zmb_ber_szlr_geistkraftdrain_1"), var_0.origin);
+    playFX(common_scripts\utility::getfx("zmb_ber_szlr_geistkraftdrain_1"), var_0.origin);
   }
 
   cleanupbolt(var_1);
@@ -353,7 +353,7 @@ deleteboltprojectile(var_0, var_1) {
   if(common_scripts\utility::_id_562E(var_0.projectiledeleting)) {
     return;
   }
-  var_2 = var_0._id_776C;
+  var_2 = var_0.projectile;
   var_2 notify("projectileCleanup");
 
   if(isDefined(var_2.bolt_effects)) {
@@ -362,13 +362,13 @@ deleteboltprojectile(var_0, var_1) {
   }
 
   if(var_1) {
-    var_0._id_776C endon("death");
+    var_0.projectile endon("death");
     var_0.projectiledeleting = 1;
-    var_0._id_776C common_scripts\utility::_id_4CEB();
+    var_0.projectile common_scripts\utility::hide_notsolid();
     wait 5;
   }
 
-  var_0._id_776C delete();
+  var_0.projectile delete();
 }
 
 deletedroppedbolt(var_0) {
@@ -415,7 +415,7 @@ createpickuptrigger(var_0, var_1, var_2) {
   var_3 enablelinkTo();
   var_3 linkTo(var_1);
   var_3.targetname = "stuck_wunderbuss_bolt";
-  var_0._id_6FD8 = var_3;
+  var_0.pickuptrigger = var_3;
 
   if(1) {
     var_1 hudoutlineenableforclient(var_0._id_0117, 0, 0);
@@ -444,7 +444,7 @@ createpickuptrigger(var_0, var_1, var_2) {
     if(!1) {
       var_5 = var_4 getweaponammostock("alt+wunderbuss_zm");
       var_4 setweaponammostock("alt+wunderbuss_zm", var_5 + 1);
-      var_4 _id_04C7::_id_A102("resupply_launcher");
+      var_4 _id_04C7::updatedamagefeedback("resupply_launcher");
     }
 
     if(0) {
@@ -485,7 +485,7 @@ handlecliponlyhack() {
   var_0 = self;
 
   for(;;) {
-    var_0 common_scripts\utility::_id_A70A("weapon_given", "heavyMeleeClip_earned");
+    var_0 common_scripts\utility::waittill_any("weapon_given", "heavyMeleeClip_earned");
     waitframe();
 
     if(var_0 hasweapon("wunderbuss_zm")) {
@@ -507,14 +507,14 @@ scaledamage() {
     var_2 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), var_0);
     level.wunderbussenergydamage = var_2 * 0.15;
     level waittill("waveupdate");
-    var_0 = level._id_A980;
+    var_0 = level.wavecounter;
   }
 }
 
 boltdot(var_0) {
   var_0 endon("bolt_drop");
   var_0 endon("bolt_kill");
-  var_0._id_776C endon("death");
+  var_0.projectile endon("death");
   var_1 = level.wunderbussboltstartdamage;
 
   for(var_2 = 0; var_2 < 5; var_2++) {
@@ -527,11 +527,11 @@ boltdot(var_0) {
 
     var_0._id_0117 wunderbussaddenergyammo(1);
     wunderbuss_challenges_report_zombie_hit_by_bolt(var_0._id_0117, var_0.stucktoagenttype);
-    var_0.stuckto dodamage(var_3, var_0._id_776C.origin, var_0._id_0117, var_0._id_776C, "MOD_RIFLE_BULLET", "dot_generic_zm");
+    var_0.stuckto dodamage(var_3, var_0.projectile.origin, var_0._id_0117, var_0.projectile, "MOD_RIFLE_BULLET", "dot_generic_zm");
     var_1 = var_1 * 2;
   }
 
-  thread unstickboltfromenemy(var_0._id_776C);
+  thread unstickboltfromenemy(var_0.projectile);
 }
 
 boltammoinstantreward(var_0, var_1, var_2) {

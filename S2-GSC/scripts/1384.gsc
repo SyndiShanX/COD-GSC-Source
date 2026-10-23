@@ -15,7 +15,7 @@ init() {
   var_0._id_0EAE = "zombie_animclass";
   var_0._id_0879 = "zombie_generic";
   var_0._id_4C12 = 1;
-  var_0._id_60E2 = 0;
+  var_0.meleedamage = 0;
   var_0._id_2F9B = 1;
   var_0.parenttype = "zombie_generic";
   var_0._id_5ED2["revived klaus"]["whole_body"] = "zom_klaus_wholebody";
@@ -27,10 +27,10 @@ _id_5A9A() {
   self endon("death");
   level endon("game_ended");
   self endon("owner_disconnect");
-  maps\mp\agents\humanoid\_humanoid::_id_8A27();
-  thread _id_0547::_id_A692();
-  self _meth_85A1("zombie");
-  self._id_480F = 1;
+  maps\mp\agents\humanoid\_humanoid::setuphumanoidstate();
+  thread _id_0547::waitforbadpath();
+  self set_target_tracking_disabled("zombie");
+  self.godmode = 1;
   self._id_6816 = 1;
   self._id_00CE = 1;
   self.shouldnotpreventlaststand = 1;
@@ -79,7 +79,7 @@ _id_5A97(var_0, var_1) {
   self._id_00CF = 1;
   self._id_0C29 = 0;
   self.ispassiveexempt = 1;
-  var_2 maps\mp\agents\_agent_utility::hudoutlineenable(level._id_746E);
+  var_2 maps\mp\agents\_agent_utility::hudoutlineenable(level.playerteam);
   var_2._id_6701 = 1;
 
   if(common_scripts\utility::_id_562E(var_1)) {
@@ -96,16 +96,16 @@ _id_5A93() {
   var_0 = "s2_klaus_revive";
   maps\mp\agents\humanoid\_humanoid_util::getcurrentoffhand(self.origin, self.angles, var_0, 0, 0, undefined, 1, 1, "klaus_getup");
   self scragentsetscripted(1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "ScriptedAnimation");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "ScriptedAnimation");
   self scragentsetanimmode("anim deltas");
   self scragentsetorientmode("face angle abs", self.angles);
   self scragentsetphysicsmode("noclip");
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_0, 1, 1, "scripted_anim", "end", undefined);
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_0, 1, 1, "scripted_anim", "end", undefined);
   _id_5A94();
 }
 
 _id_5A94() {
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "ScriptedAnimation");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "ScriptedAnimation");
   self scragentsetscripted(0);
   self scragentsetphysicsmode("gravity");
   _id_0547::disableoffhandsecondaryweapons();
@@ -135,7 +135,7 @@ _id_5A9B(var_0) {
 
 _id_5A98() {
   self._id_5A8B = 1;
-  self._id_78C5 = _spawnlinkedfx(common_scripts\utility::_id_44F5("temp_klaus_radius"), self, "J_MainRoot");
+  self._id_78C5 = _spawnlinkedfx(common_scripts\utility::getfx("temp_klaus_radius"), self, "J_MainRoot");
   _triggerfx(self._id_78C5);
   self._id_78C5 thread _id_0547::_id_2D19(self);
   thread _id_5A8C();
@@ -160,7 +160,7 @@ _id_5A8C() {
   for(;;) {
     if(common_scripts\utility::_id_562E(self._id_5A8B)) {
       foreach(var_1 in level.players) {
-        var_2 = _distance2d(var_1.origin, self.origin) < 256 && _abs(var_1.origin[2] - self.origin[2]) < 64.0 && !_id_0547::_id_577E(var_1);
+        var_2 = _distance2d(var_1.origin, self.origin) < 256 && _abs(var_1.origin[2] - self.origin[2]) < 64.0 && !_id_0547::isplayerinlaststand(var_1);
 
         if(var_2) {
           var_1 _id_0547::_id_7454(3);
@@ -196,7 +196,7 @@ klaus_knockback_effect_think() {
         if(!isalive(var_1)) {
           continue;
         }
-        if(_id_0547::_id_577E(var_1)) {
+        if(_id_0547::isplayerinlaststand(var_1)) {
           continue;
         }
         if(var_1 istouching(self)) {
@@ -230,11 +230,11 @@ _id_5A96() {
   thread _id_5A99();
   var_0 = "s2_klaus_death";
   self scragentsetscripted(1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "ScriptedAnimation");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "ScriptedAnimation");
   self scragentsetanimmode("anim deltas");
   self scragentsetorientmode("face angle abs", self.angles);
   self scragentsetphysicsmode("noclip");
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_0, 0, 1, "scripted_anim", "disapear", undefined);
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_0, 0, 1, "scripted_anim", "disapear", undefined);
   self._id_1DEB = 1;
   self suicide();
 }

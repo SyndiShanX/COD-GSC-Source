@@ -9,13 +9,13 @@ _id_51CF() {
   var_0._id_6F9C = 500;
   var_0._id_6F9B = 360;
   common_scripts\utility::_id_092C("vision_beam", "vfx/lights/mp_zombie_nest/zmb_sentry_vision_light");
-  level._id_6FBF["Fireman Head"]["func"] = ::_id_3C09;
-  level._id_6FBF["Fireman Head"]["model"] = "npc_zom_fireman_head";
-  level._id_6FBF["Fireman Head"]["canBeDroppedByZombies"] = maps\mp\gametypes\zombies::_id_6FC7;
-  level._id_6FBF["Fireman Head"]["phys_overrides"] = var_0;
-  level._id_6FBF["Fireman Head"]["posOffset"] = (0, 0, 0);
-  level._id_6FBF["Fireman Head"]["extraTimeoutSecs"] = 180;
-  level._id_6FBF["Fireman Head"]["outline"] = 1;
+  level.pickup["Fireman Head"]["func"] = ::_id_3C09;
+  level.pickup["Fireman Head"]["model"] = "npc_zom_fireman_head";
+  level.pickup["Fireman Head"]["canBeDroppedByZombies"] = maps\mp\gametypes\zombies::_id_6FC7;
+  level.pickup["Fireman Head"]["phys_overrides"] = var_0;
+  level.pickup["Fireman Head"]["posOffset"] = (0, 0, 0);
+  level.pickup["Fireman Head"]["extraTimeoutSecs"] = 180;
+  level.pickup["Fireman Head"]["outline"] = 1;
 
   if(!isDefined(level._id_4BDF)) {
     level._id_4BDF = [];
@@ -50,7 +50,7 @@ _id_6312() {
       var_0._id_5605 = var_4;
 
       if(var_4) {
-        var_5 = common_scripts\utility::_id_44F5("vision_beam");
+        var_5 = common_scripts\utility::getfx("vision_beam");
         var_6 = _spawnlinkedfx(var_5, var_0, "tag_fx", 1);
         _triggerfx(var_6);
         var_0._id_3BF4 = var_6;
@@ -144,7 +144,7 @@ _id_3C09(var_0) {
   var_1._id_558F = 1;
   var_0 _id_0586::_id_078C("sentryhead_zm");
   var_0 _id_0586::_id_078E("sentryhead_zm");
-  level thread maps\mp\gametypes\zombies::_id_7CED(var_1);
+  level thread maps\mp\gametypes\zombies::removepickup(var_1);
 }
 
 _id_418D() {
@@ -163,7 +163,7 @@ _id_4758() {
 
 _id_95CB() {
   if(self getcurrentweapon() == "sentryhead_zm") {
-    var_0 = self._id_5B98;
+    var_0 = self.lastequippedweapon;
 
     if(!isDefined(var_0) || var_0 == "none") {
       var_1 = self getweaponlistprimaries();
@@ -189,7 +189,7 @@ _id_95CB() {
 
 _id_6360() {
   for(;;) {
-    common_scripts\utility::_id_A70A("weapon_change", "begin_last_stand");
+    common_scripts\utility::waittill_any("weapon_change", "begin_last_stand");
 
     if(self getcurrentweapon() == "sentryhead_zm") {
       continue;

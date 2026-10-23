@@ -5,10 +5,10 @@
 
 init() {
   level._effect["fighter_trail"] = loadfx("vfx/scorestreaks/fighter_strike_plane_trail");
-  level._id_5A61["fighter_strike"] = ::_id_9E2A;
-  level._id_5A7D["fighter_strike_gun_mp"] = "fighter_strike";
-  level._id_5A7D["fighter_strike_plane_mp"] = "fighter_strike";
-  level._id_5A7D["fighter_strike_plane_grenadier_mp"] = "fighter_strike";
+  level.killstreakfuncs["fighter_strike"] = ::_id_9E2A;
+  level.killstreakwieldweapons["fighter_strike_gun_mp"] = "fighter_strike";
+  level.killstreakwieldweapons["fighter_strike_plane_mp"] = "fighter_strike";
+  level.killstreakwieldweapons["fighter_strike_plane_grenadier_mp"] = "fighter_strike";
   setDvar("4711", "2500 2500");
 }
 
@@ -27,7 +27,7 @@ _id_9E2A(var_0) {
     return 0;
   }
 
-  if(isDefined(self._id_A019) && self._id_A019) {
+  if(isDefined(self.underwater) && self.underwater) {
     return 0;
   }
 
@@ -49,11 +49,11 @@ getaimassisttargetangles(var_0, var_1) {
   self endon("stop_location_selection");
   var_2 = maps\mp\_utility::_hasperk("specialty_improvedstreaks");
 
-  if(!isDefined(level._id_5FF0)) {
-    level._id_5FF0 = 1024;
+  if(!isDefined(level.mapsize)) {
+    level.mapsize = 1024;
   }
 
-  var_3 = level._id_5FF0 / 6.46875;
+  var_3 = level.mapsize / 6.46875;
 
   if(level.splitscreen) {
     var_3 = var_3 * 1.5;
@@ -135,7 +135,7 @@ _id_318B(var_0, var_1, var_2, var_3) {
 }
 
 _id_73DA(var_0) {
-  var_1 = _id_051E::_id_5345(var_0, 1, 0, 0);
+  var_1 = _id_051E::initridekillstreak(var_0, 1, 0, 0);
 
   if(var_1 != "success") {
     if(var_1 != "disconnect") {
@@ -160,7 +160,7 @@ _id_44D8(var_0) {
 _id_44D7(var_0) {
   var_1 = _id_44D8(var_0);
 
-  switch (maps\mp\_utility::_id_4571()) {
+  switch (maps\mp\_utility::getmapname()) {
     case "mp_raid_cobra":
       return var_1 + 2250;
     case "mp_aachen_v2":
@@ -237,7 +237,7 @@ _id_1E83(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_1)) {
     var_1 maps\mp\_utility::setusingremote("fighter_strike");
-    var_1 maps\mp\_utility::_id_744E();
+    var_1 maps\mp\_utility::playersaveangles();
     var_1 maps\mp\_utility::freezecontrolswrapper(1);
     var_1 thread _id_0526::_id_8A61(0.05, level._id_5A7C, level._id_5A6B);
     _id_0526::_id_A232(1);
@@ -292,9 +292,9 @@ _id_9080(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_13 = spawn("script_model", var_10.origin);
   var_13 setModel("tag_origin");
   var_13.angles = var_10.angles;
-  var_10._id_5A2C = var_13;
-  var_10._id_5A2C setscriptmoverkillcam("script_entity");
-  var_10._id_5A2C._id_5A32 = gettime();
+  var_10.killcament = var_13;
+  var_10.killcament setscriptmoverkillcam("script_entity");
+  var_10.killcament.killcamstarttime = gettime();
 
   if(isDefined(var_1)) {
     var_1._id_700B = var_10;
@@ -380,7 +380,7 @@ _id_9080(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_11._id_5C2F = gettime();
   var_11 setCanDamage(1);
   var_11 setCanRadiusDamage(1);
-  var_11 thread maps\mp\gametypes\_damage::_id_8676(_id_0527::_id_4612(var_5), undefined, ::_id_6B36, ::_id_6B35, 1);
+  var_11 thread maps\mp\gametypes\_damage::setentitydamagecallback(_id_0527::_id_4612(var_5), undefined, ::_id_6B36, ::_id_6B35, 1);
   var_11 thread _id_0527::_id_2818();
   var_11 thread _id_0527::_id_4ACE();
   _id_0527::_id_09E1(var_11);
@@ -388,7 +388,7 @@ _id_9080(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_10 thread _id_4AB8();
   thread _id_637A(var_10, var_1);
   thread _id_63A8(var_10, var_1);
-  thread _id_637D(var_10, var_1);
+  thread monitordisconnect(var_10, var_1);
   thread _id_636E(var_10, var_1);
   thread _id_63D9(var_10, var_1);
 
@@ -398,7 +398,7 @@ _id_9080(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     var_1 cameralinkTo(var_13, "tag_origin");
-    _playfxontagforclients(common_scripts\utility::_id_44F5("fighter_flying_1P"), var_14, "tag_origin", var_1);
+    _playfxontagforclients(common_scripts\utility::getfx("fighter_flying_1P"), var_14, "tag_origin", var_1);
     var_10 thread _id_27EA((900, 450, -50), var_1);
     var_10 thread _id_27EA((1300, -600, -100), var_1);
     var_10 thread _id_27EB(var_1);
@@ -555,14 +555,14 @@ _id_6390(var_0, var_1, var_2) {
   var_4 delete();
 
   if(isDefined(self._id_0117) && isPlayer(self._id_0117)) {
-    self._id_0117 _meth_80AA();
+    self._id_0117 thermalvisionfofoverlayon();
     self._id_0117 thread _id_051E::_id_0A2F();
 
     if(getdvarint("5270", 1)) {
       self._id_0117 setclientomnvar("ui_plane_gunner_phase", 3);
     }
 
-    self._id_0117 _meth_8200(self);
+    self._id_0117 controlslinkto(self);
     self._id_0117._id_260D = 1;
     thread _id_3AAC(self, self._id_0117);
     thread _id_316F(self, self._id_0117);
@@ -585,7 +585,7 @@ _id_6390(var_0, var_1, var_2) {
   }
 
   if(isDefined(self._id_0117) && isPlayer(self._id_0117) && isDefined(self._id_0117._id_260D)) {
-    self._id_0117 _meth_8201();
+    self._id_0117 controlsunlink();
     self._id_0117._id_260D = undefined;
     self._id_0117 maps\mp\_utility::freezecontrolswrapper(1);
     self._id_0117 notify("player_exit");
@@ -599,7 +599,7 @@ _id_6390(var_0, var_1, var_2) {
   self notify("startPullUp");
 
   if(maps\mp\_utility::_id_579B() && isDefined(var_2)) {
-    self _meth_866D(0, 1);
+    self setdoubleload(0, 1);
   }
 
   wait 1.0;
@@ -635,12 +635,12 @@ _id_6B36(var_0, var_1, var_2, var_3) {
   var_4 = "fighter_strike_destroyed";
   var_5 = "fighter_destroyed";
   var_6 = "callout_destroyed_fighter_strike";
-  maps\mp\gametypes\_damage::_id_6B4B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 1);
+  maps\mp\gametypes\_damage::onkillstreakkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 1);
 }
 
 _id_4AB8(var_0) {
   self endon("airstrike_complete");
-  common_scripts\utility::_id_A732("death", "crashing");
+  common_scripts\utility::waittill_either("death", "crashing");
 
   if(isDefined(self)) {
     var_1 = anglesToForward(self.angles);
@@ -649,7 +649,7 @@ _id_4AB8(var_0) {
       level._effect["fighter_explode"] = loadfx("vfx/scorestreaks/ss_fighter_plane_death");
     }
 
-    playFX(common_scripts\utility::_id_44F5("fighter_explode"), self.origin, var_1);
+    playFX(common_scripts\utility::getfx("fighter_explode"), self.origin, var_1);
     thread _id_1358(var_0);
   }
 
@@ -669,7 +669,7 @@ _id_2390() {
   }
 
   waittillframeend;
-  maps\mp\gametypes\_hostmigration::_id_A782();
+  maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
 
   if(isDefined(self._id_703D)) {
     self._id_703D delete();
@@ -743,14 +743,14 @@ _id_637A(var_0, var_1) {
   }
 
   var_0 endon("StopWaitForDeathorTimeout");
-  var_0 common_scripts\utility::_id_A70A("death", "crashing");
+  var_0 common_scripts\utility::waittill_any("death", "crashing");
   var_0 notify("StopWaitForLeavingAirspace");
   var_0 notify("StopWaitForExitCommand");
   var_0 notify("StopWaitForChangeTeams");
   var_0 notify("StopWaitForRoundSwitch");
   var_0 notify("StopWaitForDisconnect");
   waittillframeend;
-  maps\mp\gametypes\_hostmigration::_id_A782();
+  maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
 
   if(isDefined(var_1)) {
     var_1 thread _id_7445(0, var_0);
@@ -785,7 +785,7 @@ _id_63A8(var_0, var_1) {
   var_0 notify("leavingPlayspace");
 }
 
-_id_637D(var_0, var_1) {
+monitordisconnect(var_0, var_1) {
   level endon("game_ended");
   var_0 endon("StopWaitForDisconnect");
 
@@ -808,7 +808,7 @@ _id_636E(var_0, var_1) {
   if(!isDefined(var_1)) {
     return;
   }
-  var_1 common_scripts\utility::_id_A70A("joined_team", "joined_spectators");
+  var_1 common_scripts\utility::waittill_any("joined_team", "joined_spectators");
   var_0 notify("StopWaitForLeavingAirspace");
   var_0 notify("StopWaitForDeathorTimeout");
   var_0 notify("StopWaitForExitCommand");
@@ -902,10 +902,10 @@ _id_7445(var_0, var_1) {
 
   if(var_0) {
     wait 0.5;
-    maps\mp\gametypes\_hostmigration::_id_A782();
+    maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
   }
 
-  self _meth_80AB();
+  self thermalvisionfofoverlayoff();
   self notify("clearAerialKillstreakMarkers");
 
   if(maps\mp\_utility::isreallyalive(self)) {
@@ -928,7 +928,7 @@ _id_7445(var_0, var_1) {
     }
 
     if(isDefined(var_1._id_3F6E)) {
-      _killfxontagforclient(common_scripts\utility::_id_44F5("fighter_flying_1P"), var_1._id_3F6E, "tag_origin", self);
+      _killfxontagforclient(common_scripts\utility::getfx("fighter_flying_1P"), var_1._id_3F6E, "tag_origin", self);
     }
   }
 
@@ -936,7 +936,7 @@ _id_7445(var_0, var_1) {
   self cameraunlink();
 
   if(isDefined(self._id_260D)) {
-    self _meth_8201();
+    self controlsunlink();
     self._id_260D = undefined;
   }
 
@@ -953,7 +953,7 @@ _id_7445(var_0, var_1) {
   self enablereload(1);
   _id_0526::_id_7D04(0.05);
   _id_0526::_id_A232(0);
-  maps\mp\_utility::_id_7447();
+  maps\mp\_utility::playerrestoreangles();
   self._id_4B67 = undefined;
   self notify("player_exit");
 }
@@ -997,7 +997,7 @@ _id_27EA(var_0, var_1) {
   var_5 hide();
   var_5 showtoplayer(var_1);
   var_5 moveTo(var_3, var_4);
-  common_scripts\utility::_id_A71A(var_4, "StopWaitForExitCommand");
+  common_scripts\utility::waittill_any_timeout(var_4, "StopWaitForExitCommand");
 
   if(isDefined(var_5)) {
     var_5 delete();
@@ -1016,11 +1016,11 @@ _id_27EB(var_0) {
     level._effect["fighter_clouds_1P"] = loadfx("vfx/scorestreaks/ss_fighter_plane_clouds");
   }
 
-  _playfxontagforclients(common_scripts\utility::_id_44F5("fighter_clouds_1P"), var_2, "tag_origin", var_0);
-  common_scripts\utility::_id_A71A(5, "StopWaitForExitCommand");
+  _playfxontagforclients(common_scripts\utility::getfx("fighter_clouds_1P"), var_2, "tag_origin", var_0);
+  common_scripts\utility::waittill_any_timeout(5, "StopWaitForExitCommand");
 
   if(isDefined(var_2)) {
-    _stopfxontagforclient(common_scripts\utility::_id_44F5("fighter_clouds_1P"), var_2, "tag_origin", var_0);
+    _stopfxontagforclient(common_scripts\utility::getfx("fighter_clouds_1P"), var_2, "tag_origin", var_0);
     var_2 delete();
   }
 }

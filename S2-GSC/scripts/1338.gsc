@@ -16,11 +16,11 @@ init() {
 }
 
 _id_3662() {
-  if(!common_scripts\utility::_id_3798("stunning_burst_active")) {
-    common_scripts\utility::_id_3799("stunning_burst_active");
+  if(!common_scripts\utility::ent_flag_exist("stunning_burst_active")) {
+    common_scripts\utility::ent_flag_init("stunning_burst_active");
   }
 
-  common_scripts\utility::_id_379A("stunning_burst_active");
+  common_scripts\utility::ent_flag_set("stunning_burst_active");
   _id_054B::_id_6AB2("role_ability_stunning_burst_zm");
   var_0 = _id_0547::_id_408F();
   var_1 = [];
@@ -29,21 +29,21 @@ _id_3662() {
   var_4 = 518400;
 
   if(common_scripts\utility::_id_562E(_id_0547::_id_4BA7("specialty_class_breathing_room_zm")) && !common_scripts\utility::_id_562E(_id_0547::_id_4BA7("specialty_class_sustain_zone_zm"))) {
-    playFX(common_scripts\utility::_id_44F5("stunning_burst_aoe_mega"), var_2 + (0, 0, var_3));
-    _id_0378::_id_8D74("aud_stunning_burst_use");
+    playFX(common_scripts\utility::getfx("stunning_burst_aoe_mega"), var_2 + (0, 0, var_3));
+    _id_0378::snd_message("aud_stunning_burst_use");
     var_4 = var_4 * 2.25;
   } else if(!common_scripts\utility::_id_562E(_id_0547::_id_4BA7("specialty_class_breathing_room_zm")) && common_scripts\utility::_id_562E(_id_0547::_id_4BA7("specialty_class_sustain_zone_zm"))) {
-    playFX(common_scripts\utility::_id_44F5("stunning_burst_aoe"), var_2 + (0, 0, var_3));
-    _id_0378::_id_8D74("aud_stunning_burst_use");
+    playFX(common_scripts\utility::getfx("stunning_burst_aoe"), var_2 + (0, 0, var_3));
+    _id_0378::snd_message("aud_stunning_burst_use");
     thread sustain_zone_fx(level._effect["stunning_burst_sustain"], var_2 + (0, 0, var_3));
     var_4 = var_4 * 0.25;
   } else if(common_scripts\utility::_id_562E(_id_0547::_id_4BA7("specialty_class_breathing_room_zm")) && common_scripts\utility::_id_562E(_id_0547::_id_4BA7("specialty_class_sustain_zone_zm"))) {
-    playFX(common_scripts\utility::_id_44F5("stunning_burst_aoe_mega"), var_2 + (0, 0, var_3));
-    _id_0378::_id_8D74("aud_stunning_burst_use");
+    playFX(common_scripts\utility::getfx("stunning_burst_aoe_mega"), var_2 + (0, 0, var_3));
+    _id_0378::snd_message("aud_stunning_burst_use");
     thread sustain_zone_fx(level._effect["stunning_burst_sustain_br"], var_2 + (0, 0, var_3));
   } else {
-    playFX(common_scripts\utility::_id_44F5("stunning_burst_aoe"), var_2 + (0, 0, var_3));
-    _id_0378::_id_8D74("aud_stunning_burst_use");
+    playFX(common_scripts\utility::getfx("stunning_burst_aoe"), var_2 + (0, 0, var_3));
+    _id_0378::snd_message("aud_stunning_burst_use");
   }
 
   foreach(var_6 in var_0) {
@@ -95,24 +95,24 @@ sustain_zone_fx(var_0, var_1) {
 }
 
 _id_2F9E() {
-  if(common_scripts\utility::_id_3798("stunning_burst_active")) {
-    common_scripts\utility::_id_3796("stunning_burst_active");
+  if(common_scripts\utility::ent_flag_exist("stunning_burst_active")) {
+    common_scripts\utility::ent_flag_clear("stunning_burst_active");
   }
 }
 
 _id_0A31(var_0) {
   if(_id_0547::_id_4BA7("specialty_class_on_your_feet_zm")) {
-    if(isPlayer(var_0) && _id_0547::_id_577E(var_0)) {
+    if(isPlayer(var_0) && _id_0547::isplayerinlaststand(var_0)) {
       var_0 _id_0553::_id_53E2(self);
       playFX(level._effect["zmb_blood_player_heal"], var_0.origin, anglesToForward(var_0.angles));
-      var_0 _meth_866C(&"add_teammate_mod_buffs", 3, "specialty_class_on_your_feet_zm", 1, self);
+      var_0 setdot_radius(&"add_teammate_mod_buffs", 3, "specialty_class_on_your_feet_zm", 1, self);
     }
   }
 
   if(_id_0547::_id_4BA7("specialty_class_bolster_morale_zm")) {
     if(isPlayer(var_0) && var_0 _id_0547::_id_73E9() < var_0 _id_0547::playergetmaxarmorcount()) {
       var_0 _id_0547::_id_73AC(1);
-      var_0 _meth_866C(&"add_teammate_mod_buffs", 3, "specialty_class_bolster_morale_zm", 1, self);
+      var_0 setdot_radius(&"add_teammate_mod_buffs", 3, "specialty_class_bolster_morale_zm", 1, self);
     }
   }
 }
@@ -123,13 +123,13 @@ _id_94C0(var_0, var_1, var_2) {
   }
 
   var_0._id_94B4[var_0._id_94B4.size] = self;
-  var_3 = var_0 common_scripts\utility::_id_A74D("death", var_2);
+  var_3 = var_0 common_scripts\utility::waittill_notify_or_timeout_return("death", var_2);
 
   if(!isDefined(var_3) || isDefined(var_3) && var_3 != "timeout") {
     return;
   }
   var_0._id_94B4 = common_scripts\utility::_id_0F93(var_0._id_94B4, self);
-  var_4 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level._id_A980);
+  var_4 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level.wavecounter);
   var_0 dodamage(var_4 * 0.125, var_1, self, self, "MOD_ENERGY", "dot_generic_zm");
 
   if(!isalive(var_0)) {
@@ -139,16 +139,16 @@ _id_94C0(var_0, var_1, var_2) {
   var_0.stunnedbybursttime = gettime();
   var_5 = "stunning_burst";
   var_0 thread play_shock_fx(var_5, "J_Spine4", self, 0.35);
-  var_0 _id_0378::_id_8D74("aud_stun_zombies_strt");
+  var_0 _id_0378::snd_message("aud_stun_zombies_strt");
   var_0 notify("is_tower_battle_distracted");
 
   if(_id_0547::_id_4BA7("specialty_class_fiery_burst_zm")) {
-    var_0 _meth_8682(0.03 * var_4, 1.5, 20.0, "none", 1, self, "dot_generic_zm");
+    var_0 setfirstinfected(0.03 * var_4, 1.5, 20.0, "none", 1, self, "dot_generic_zm");
   }
 
   var_0 thread _id_0547::_id_7D1A("stunning_burst", [var_1, self], undefined, [self, "stunning_burst_active", self, "disconnect", self, "death"]);
-  common_scripts\utility::_id_A70C(self, "stunning_burst_active", var_0, "death");
-  var_0 _id_0378::_id_8D74("aud_stun_zombies_end");
+  common_scripts\utility::waittill_any_ents(self, "stunning_burst_active", var_0, "death");
+  var_0 _id_0378::snd_message("aud_stun_zombies_end");
   var_0 _id_AC56(self, 0);
 }
 
@@ -166,7 +166,7 @@ play_shock_fx(var_0, var_1, var_2, var_3) {
       wait(var_3 - (var_4 - self.recentshockfxtime));
     }
 
-    _playFXOnTag(common_scripts\utility::_id_44F5(var_0), self, var_1);
+    _playFXOnTag(common_scripts\utility::getfx(var_0), self, var_1);
     self.recentshockfxtime = var_4;
     wait(var_3);
   }
@@ -211,7 +211,7 @@ _id_AC2B(var_0) {
 }
 
 zombiecanbestunknockedback() {
-  if(maps\mp\agents\humanoid\_humanoid_util::_id_56BC()) {
+  if(maps\mp\agents\humanoid\_humanoid_util::iscrawling()) {
     return 0;
   }
 
@@ -225,7 +225,7 @@ zombiecanbestunknockedback() {
 zombiestunknockbackanim(var_0, var_1) {
   var_2 = undefined;
   self._id_561D = 1;
-  var_3 = maps\mp\agents\humanoid\_humanoid_util::_id_29CB(var_0);
+  var_3 = maps\mp\agents\humanoid\_humanoid_util::damagehitangle(var_0);
   var_4 = _angleclamp180(var_3 - self.angles[1]);
 
   if(_abs(var_4) < 45) {
@@ -250,15 +250,15 @@ zombiestunknockbackanim(var_0, var_1) {
 
   if(self._id_0A4B == "zombie_fireman") {
     var_5 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("scripted_fire_stun_burst");
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_5, randomint(2), 1, "stun_anim");
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_5, 2, 1, "stun_anim");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_5, randomint(2), 1, "stun_anim");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_5, 2, 1, "stun_anim");
     self scragentsetanimscale(1, 1);
   } else if(self._id_0A4B == "zombie_assassin") {
     var_5 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("scripted_asn_stun_burst");
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_5, 0, 1, "stun_anim");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_5, 0, 1, "stun_anim");
     self.assassinmuststopattackingandleave = 1;
   } else {
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_5, var_7, 1, "stun_anim");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_5, var_7, 1, "stun_anim");
     self scragentsetanimscale(1, 1);
   }
 }
@@ -276,7 +276,7 @@ _id_AC63(var_0, var_1, var_2) {
     return;
   }
   self scragentsetscripted(1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "stunning_burst");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "stunning_burst");
 
   if(!common_scripts\utility::_id_562E(var_2) && zombiecanbestunknockedback()) {
     zombiestunknockbackanim(var_0, var_1);
@@ -290,7 +290,7 @@ _id_AC63(var_0, var_1, var_2) {
 }
 
 _id_AC62(var_0) {
-  if(isPlayer(var_0) && !var_0 common_scripts\utility::_id_3794("stunning_burst_active")) {
+  if(isPlayer(var_0) && !var_0 common_scripts\utility::ent_flag("stunning_burst_active")) {
     return;
   }
   var_0 endon("stunning_burst_active");
@@ -315,7 +315,7 @@ _id_AC62(var_0) {
 
     self scragentsetanimmode("anim deltas");
     self scragentsetorientmode("face angle abs", self.angles);
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_4, 1, "stun_anim");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_2, var_4, 1, "stun_anim");
   }
 }
 
@@ -323,7 +323,7 @@ _id_AC64() {
   self._id_561D = 0;
   self notify("stunning_burst_end");
   self scragentsetscripted(0);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "stunning_burst");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "stunning_burst");
 }
 
 _id_AC65(var_0, var_1, var_2) {
@@ -339,7 +339,7 @@ zombiestunstaterestart(var_0, var_1) {
   thread _id_0547::_id_7D1A("stunning_burst", [var_0, var_1, 1], undefined, [var_1, "stunning_burst_active", var_1, "disconnect", var_1, "death"]);
 }
 
-_id_62A6(var_0) {
+modifydamage(var_0) {
   var_1 = 1.0;
 
   if(_id_AC2A() && isDefined(self._id_94BD)) {
@@ -370,10 +370,10 @@ _id_9529(var_0) {
     var_3 = "stunning_burst_sustain";
   }
 
-  var_4 = _spawnfx(common_scripts\utility::_id_44F5(var_3), var_2);
+  var_4 = _spawnfx(common_scripts\utility::getfx(var_3), var_2);
   _triggerfx(var_4);
   thread _id_952A(var_1, var_0);
-  common_scripts\utility::_id_A70C(self, "disconnect", self, "stunning_burst_active");
+  common_scripts\utility::waittill_any_ents(self, "disconnect", self, "stunning_burst_active");
   var_4 delete();
   self notify("sustain_zone_complete");
 }
@@ -428,7 +428,7 @@ mini_stunning_burst_execute(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
     }
     var_13 = spawnStruct();
     var_13.origin = var_0;
-    var_13._id_1180 = var_1;
+    var_13.attacker = var_1;
     var_13.durationsecs = var_3;
     level thread mini_stunning_burst_stun_zombie(var_12, var_13, var_4, var_7, var_10);
     var_10 = var_10 + 0.05;
@@ -445,7 +445,7 @@ mini_stunning_burst_stun_zombie(var_0, var_1, var_2, var_3, var_4) {
 
   var_5 = 0.125 * maps\mp\gametypes\zombies::_id_1E59();
   var_6 = var_1.origin;
-  var_7 = var_1._id_1180;
+  var_7 = var_1.attacker;
   var_0 dodamage(var_5, var_6, var_7, var_7, "MOD_ENERGY", "dot_generic_zm");
 
   if(common_scripts\utility::_id_562E(var_0._id_57E8)) {
@@ -458,7 +458,7 @@ mini_stunning_burst_state_run_manage_fx() {
   var_0 = self;
   var_0 endon("death");
   var_0 endon("flag_mini_burst");
-  var_1 = common_scripts\utility::_id_44F5("stunning_burst");
+  var_1 = common_scripts\utility::getfx("stunning_burst");
 
   for(;;) {
     _playFXOnTag(var_1, var_0, "J_Spine4");
@@ -468,9 +468,9 @@ mini_stunning_burst_state_run_manage_fx() {
 
 mini_stunning_burst_state_run_manage_aud() {
   var_0 = self;
-  var_0 _id_0378::_id_8D74("aud_stun_zombies_strt");
-  var_0 common_scripts\utility::_id_A732("flag_mini_burst", "death");
-  var_0 _id_0378::_id_8D74("aud_stun_zombies_end");
+  var_0 _id_0378::snd_message("aud_stun_zombies_strt");
+  var_0 common_scripts\utility::waittill_either("flag_mini_burst", "death");
+  var_0 _id_0378::snd_message("aud_stun_zombies_end");
 }
 
 mini_stunning_burst_state_run_hold(var_0) {
@@ -493,28 +493,28 @@ mini_stunning_burst_state_run_hold(var_0) {
     var_6 = randomint(var_3);
 
     if(var_1._id_0A4B == "zombie_exploder") {
-      var_6 = common_scripts\utility::_id_98E7(common_scripts\utility::_id_562E(var_1._id_392C), 0, 1);
+      var_6 = common_scripts\utility::ter_op(common_scripts\utility::_id_562E(var_1._id_392C), 0, 1);
     }
 
     var_1 scragentsetanimmode("anim deltas");
     var_1 scragentsetorientmode("face angle abs", var_1.angles);
-    var_1 maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_6, 1, "stun_anim");
+    var_1 maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_2, var_6, 1, "stun_anim");
   }
 }
 
 mini_stunning_burst_state_run(var_0) {
   var_1 = self;
   var_1 scragentsetscripted(1);
-  var_1 maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "mini_stunning_burst");
+  var_1 maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "mini_stunning_burst");
   var_2 = var_0.origin;
-  var_3 = var_0._id_1180;
+  var_3 = var_0.attacker;
   var_4 = var_0.durationsecs;
 
-  if(!var_1 common_scripts\utility::_id_3798("flag_mini_burst")) {
-    var_1 common_scripts\utility::_id_3799("flag_mini_burst");
+  if(!var_1 common_scripts\utility::ent_flag_exist("flag_mini_burst")) {
+    var_1 common_scripts\utility::ent_flag_init("flag_mini_burst");
   }
 
-  var_1 common_scripts\utility::_id_379A("flag_mini_burst");
+  var_1 common_scripts\utility::ent_flag_set("flag_mini_burst");
   var_1 thread mini_stunning_burst_state_run_manage_fx();
   var_1 thread mini_stunning_burst_state_run_manage_aud();
 
@@ -532,13 +532,13 @@ mini_stunning_burst_state_interrupt(var_0) {}
 mini_stunning_burst_state_finish(var_0) {
   var_1 = self;
   var_1._id_561D = 0;
-  var_1 common_scripts\utility::_id_3796("flag_mini_burst");
+  var_1 common_scripts\utility::ent_flag_clear("flag_mini_burst");
   var_1 scragentsetscripted(0);
-  var_1 maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "mini_stunning_burst");
+  var_1 maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "mini_stunning_burst");
 }
 
 mini_stunning_burst_affected() {
   var_0 = self;
-  var_1 = var_0 common_scripts\utility::_id_3798("flag_mini_burst") && var_0 common_scripts\utility::_id_3794("flag_mini_burst");
+  var_1 = var_0 common_scripts\utility::ent_flag_exist("flag_mini_burst") && var_0 common_scripts\utility::ent_flag("flag_mini_burst");
   return var_1;
 }

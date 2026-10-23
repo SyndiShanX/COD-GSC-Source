@@ -4,12 +4,12 @@
 ******************************************************/
 
 _id_50F3() {
-  var_0 = common_scripts\utility::_id_46B5("raven_progress", "targetname");
+  var_0 = common_scripts\utility::getstruct("raven_progress", "targetname");
 
   if(!isDefined(var_0)) {
     return;
   }
-  var_1 = common_scripts\utility::_id_46B7(var_0.target, "targetname");
+  var_1 = common_scripts\utility::getstructarray(var_0.target, "targetname");
   var_2 = _id_0557::_id_7838("6B Left Hand overcharge", "activate left hand");
   var_3 = _id_0557::_id_7838("7 Voice paintings", "enter code pieces");
   var_4 = _id_0557::_id_7838("5 Right Hand fuses", "tower confirm hand");
@@ -17,7 +17,7 @@ _id_50F3() {
   foreach(var_6 in var_1) {
     switch (var_6._id_0165) {
       case "right":
-        var_6._id_3F80 = common_scripts\utility::_id_46B5(var_6._id_0165 + "_to_center_fx", "script_noteworthy");
+        var_6._id_3F80 = common_scripts\utility::getstruct(var_6._id_0165 + "_to_center_fx", "script_noteworthy");
 
         if(!isDefined(var_6._id_3F80)) {
           return;
@@ -28,7 +28,7 @@ _id_50F3() {
         var_6 thread _id_7A8C(var_3, var_3);
         break;
       case "left2":
-        var_6._id_3F80 = common_scripts\utility::_id_46B5("middle_to_center_fx", "script_noteworthy");
+        var_6._id_3F80 = common_scripts\utility::getstruct("middle_to_center_fx", "script_noteworthy");
 
         if(!isDefined(var_6._id_3F80)) {
           return;
@@ -36,7 +36,7 @@ _id_50F3() {
         var_6 thread _id_7A8C(var_3, var_3);
         break;
       case "left":
-        var_6._id_3F80 = common_scripts\utility::_id_46B5(var_6._id_0165 + "_to_center_fx", "script_noteworthy");
+        var_6._id_3F80 = common_scripts\utility::getstruct(var_6._id_0165 + "_to_center_fx", "script_noteworthy");
 
         if(!isDefined(var_6._id_3F80)) {
           return;
@@ -61,7 +61,7 @@ _id_50F3() {
 }
 
 _id_7A8C(var_0, var_1) {
-  common_scripts\utility::_id_3CA2(var_0, var_1);
+  common_scripts\utility::flag_wait_any(var_0, var_1);
   self.angles = (270, 270, 90);
 
   if(isDefined(self._id_3F80)) {
@@ -82,7 +82,7 @@ _id_7EB3(var_0) {
 
 _id_A6CD(var_0) {
   level endon("brute_tesla_skip_cheat");
-  common_scripts\utility::_id_3C9F(var_0);
+  common_scripts\utility::flag_wait(var_0);
 }
 
 _id_A6A0(var_0, var_1) {
@@ -92,14 +92,14 @@ _id_A6A0(var_0, var_1) {
   level._id_4D74 = _id_0547::_id_8FBA(var_0, "zmb_hilt_sphere");
   var_2 = _getEnt("hilt_model", "targetname");
   _triggerfx(level._id_4D74);
-  var_2 _id_0378::_id_8D74("aud_start_hilt_sphere_sound");
+  var_2 _id_0378::snd_message("aud_start_hilt_sphere_sound");
   wait 5;
   self setCanDamage(1);
   var_3 = [];
 
   while(var_3.size < level.players.size) {
     var_4 = _id_A6CE(self, "brute tesla activation fail");
-    _id_0378::_id_8D74("aud_hilt_destroy");
+    _id_0378::snd_message("aud_hilt_destroy");
 
     if(isDefined(var_4)) {
       if(!common_scripts\utility::_id_0F79(var_3, var_4)) {
@@ -119,7 +119,7 @@ _id_A6A0(var_0, var_1) {
   playFX(level._effect["zmb_hilt_sphere_explosion"], var_0.origin, anglesToForward(var_0.angles));
   level._id_4D74 delete();
   var_5 = _getEnt("nest_ee_shard_intro_start_trig", "targetname");
-  var_5 common_scripts\utility::_id_9DA3();
+  var_5 common_scripts\utility::trigger_on();
   var_6 = undefined;
 
   foreach(var_8 in level.players) {
@@ -140,8 +140,8 @@ _id_A6A0(var_0, var_1) {
 
   var_5 setHintString(&"ZOMBIE_NEST_SHARD_INTRO_TRIG");
   var_5 waittill("trigger", var_4);
-  var_5 common_scripts\utility::_id_9D9F();
-  _id_0378::_id_8D74("aud_pickup_raven_sword");
+  var_5 common_scripts\utility::trigger_off();
+  _id_0378::snd_message("aud_pickup_raven_sword");
   common_scripts\utility::flag_set("flag_hilt_collected");
 
   if(isDefined(var_2)) {
@@ -164,7 +164,7 @@ _id_4030(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     level._id_6666 = 0;
   }
 
-  var_9 = common_scripts\utility::_id_4461(self.origin, level._id_08E3);
+  var_9 = common_scripts\utility::getclosest(self.origin, level._id_08E3);
   var_10 = 0;
 
   if(isDefined(var_9) && isDefined(var_9._id_7D24)) {
@@ -214,7 +214,7 @@ _id_4030(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       thread _id_2024(var_9, var_9._id_2E37, var_9._id_2DA5, var_9._id_2DA6);
     }
 
-    if(!common_scripts\utility::_id_562E(self._id_2FDA) && !_id_0547::_id_5565(self._id_0A4B, "zombie_fireman")) {
+    if(!common_scripts\utility::_id_562E(self.dismember_crawl) && !_id_0547::_id_5565(self._id_0A4B, "zombie_fireman")) {
       _id_865C("scripted_soul_eat", 0);
     }
 
@@ -463,7 +463,7 @@ _id_56B0(var_0, var_1, var_2, var_3) {
 }
 
 _id_2024(var_0, var_1, var_2, var_3) {
-  _id_0378::_id_8D74("aud_zombie_soul_absorb");
+  _id_0378::snd_message("aud_zombie_soul_absorb");
 
   if(!isDefined(level._id_6666)) {
     level._id_6666 = 0;
@@ -478,7 +478,7 @@ _id_2024(var_0, var_1, var_2, var_3) {
     return;
   }
   level._id_6666++;
-  var_5 = _func_382("zmb_geistkraft_reg_beam_med", var_4, "j_neck", var_0, var_1);
+  var_5 = vehicle_scripts/_attack_heli("zmb_geistkraft_reg_beam_med", var_4, "j_neck", var_0, var_1);
 
   if(!isDefined(var_2)) {
     var_6 = "zmb_cart_charge_pnt";
@@ -496,7 +496,7 @@ _id_2024(var_0, var_1, var_2, var_3) {
   _playFXOnTag(level._effect["zmb_gk_claw_battery_charge_1"], level._id_3571, "flap1_shroud");
   _playFXOnTag(level._effect["zmb_gk_claw_battery_charge_2"], level._id_3571, "flap2_shroud");
   _playFXOnTag(level._effect["zmb_gk_claw_battery_charge_3"], level._id_3571, "flap3_shroud");
-  _id_0378::_id_8D74("zombie_soul_suck", var_4.origin, var_0.origin);
+  _id_0378::snd_message("zombie_soul_suck", var_4.origin, var_0.origin);
   wait 0.45;
   var_5 delete();
   level._id_6666--;
@@ -510,7 +510,7 @@ _id_9030(var_0, var_1, var_2) {
   for(var_3 = 0; var_3 < var_2; var_3++) {
     var_4 = spawn("script_model", self.origin);
     var_4 setModel("tag_origin");
-    _playFXOnTag(common_scripts\utility::_id_44F5("zmb_elec_trail"), var_4, "tag_origin");
+    _playFXOnTag(common_scripts\utility::getfx("zmb_elec_trail"), var_4, "tag_origin");
     var_5 = distance(self.origin, var_0.origin) / var_1;
     var_4 moveTo(var_0.origin, var_5);
     wait(var_5);
@@ -534,7 +534,7 @@ _id_9066(var_0, var_1, var_2, var_3, var_4) {
   }
   var_5 = spawn("script_model", var_2);
   var_5 setModel("tag_origin");
-  _playFXOnTag(common_scripts\utility::_id_44F5(var_3), var_5, "tag_origin");
+  _playFXOnTag(common_scripts\utility::getfx(var_3), var_5, "tag_origin");
   var_5 linktosynchronizedparent(var_0, var_1);
   var_5 thread _id_36EC(var_3, var_4);
 }
@@ -608,7 +608,7 @@ _id_649B(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 _id_A6AC(var_0) {
-  var_1 = common_scripts\utility::_id_8FFC();
+  var_1 = common_scripts\utility::spawn_tag_origin();
 
   foreach(var_3 in var_0) {
     var_3 thread _id_6815(var_1);
@@ -626,21 +626,21 @@ _id_6815(var_0) {
 
 _id_0FB7() {
   foreach(var_1 in self) {
-    var_1 common_scripts\utility::_id_9D9F();
+    var_1 common_scripts\utility::trigger_off();
   }
 }
 
 _id_0FB8() {
   foreach(var_1 in self) {
-    var_1 common_scripts\utility::_id_9DA3();
+    var_1 common_scripts\utility::trigger_on();
   }
 }
 
 _id_3C28() {
   self endon("flame_jets_done");
-  var_0 = common_scripts\utility::_id_46B5("well_explosion", "script_noteworthy");
-  var_1 = common_scripts\utility::_id_46B5(var_0.target, "targetname");
-  var_2 = common_scripts\utility::_id_46B5(var_1.target, "targetname");
+  var_0 = common_scripts\utility::getstruct("well_explosion", "script_noteworthy");
+  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_2 = common_scripts\utility::getstruct(var_1.target, "targetname");
   var_3 = 2;
   var_4 = [];
 
@@ -721,7 +721,7 @@ _id_3C25(var_0) {
 
   var_6 = _id_053F::_id_44A6(var_3[0]._id_0165);
 
-  if(isDefined(var_6) && !common_scripts\utility::_id_562E(var_6._id_6BE1)) {
+  if(isDefined(var_6) && !common_scripts\utility::_id_562E(var_6.open)) {
     return;
   }
   var_7 = var_3;
@@ -781,7 +781,7 @@ _id_8CD6(var_0, var_1, var_2) {
   var_6 = var_5[2] - self.origin[2];
 
   if(var_6 > 0) {
-    var_7 = common_scripts\utility::_id_8FFC();
+    var_7 = common_scripts\utility::spawn_tag_origin();
     self playerlinkTo(var_7);
     var_8 = var_6 / var_4;
     var_7 moveTo((self.origin[0], self.origin[1], var_5[2]), var_8);
@@ -800,7 +800,7 @@ _id_8CD6(var_0, var_1, var_2) {
   var_15 = vectorNormalize(self.origin - (var_5[0], var_5[1], self.origin[2]));
   var_16 = var_11 / var_13;
   var_17 = (var_16 * var_15[0], var_16 * var_15[1], var_12);
-  var_18 = common_scripts\utility::_id_46B5("nest_ee_arm_fire_objective_angle", "targetname");
+  var_18 = common_scripts\utility::getstruct("nest_ee_arm_fire_objective_angle", "targetname");
   self setvelocity(var_17);
   thread _id_7726(var_14, var_1.origin[2] + var_9);
   thread _id_7722(var_13, _distance2d(var_5, var_2.origin), var_5);
@@ -896,7 +896,7 @@ _id_A699(var_0, var_1) {
   }
 
   if(isDefined(var_0)) {
-    _playFXOnTag(common_scripts\utility::_id_44F5(var_0), self, var_1);
+    _playFXOnTag(common_scripts\utility::getfx(var_0), self, var_1);
   }
 
   self._id_2DA8 = 1;
@@ -904,7 +904,7 @@ _id_A699(var_0, var_1) {
   self._id_2DA8 = 0;
 
   if(isDefined(var_0)) {
-    _stopFXOnTag(common_scripts\utility::_id_44F5(var_0), self, var_1);
+    _stopFXOnTag(common_scripts\utility::getfx(var_0), self, var_1);
   }
 }
 
@@ -945,10 +945,10 @@ _id_9484(var_0) {
 }
 
 _id_45FF(var_0) {
-  var_1 = common_scripts\utility::_id_46B5(var_0, "targetname");
+  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
 
   for(var_2 = [var_1]; !var_1 _id_5773(); var_2 = common_scripts\utility::_id_0F6F(var_2, var_1)) {
-    var_1 = common_scripts\utility::_id_46B5(var_1.target, "targetname");
+    var_1 = common_scripts\utility::getstruct(var_1.target, "targetname");
   }
 
   return var_2;
@@ -967,8 +967,8 @@ _id_56AC() {
 }
 
 _id_A16D(var_0) {
-  if(isDefined(self._id_3F3F)) {
-    self._id_3F3F delete();
+  if(isDefined(self.fx_ent)) {
+    self.fx_ent delete();
   }
 
   var_1 = undefined;
@@ -985,14 +985,14 @@ _id_A16D(var_0) {
   }
 
   if(isDefined(var_1)) {
-    self._id_3F3F = _spawnfx(common_scripts\utility::_id_44F5(var_1), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+    self.fx_ent = _spawnfx(common_scripts\utility::getfx(var_1), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
     self._id_2916 = var_0;
   }
 
   if(gettime() < 500) {
-    _triggerfx(self._id_3F3F, 0.5);
+    _triggerfx(self.fx_ent, 0.5);
   } else {
-    _triggerfx(self._id_3F3F);
+    _triggerfx(self.fx_ent);
   }
 }
 
@@ -1074,14 +1074,14 @@ _id_44C8(var_0, var_1) {
   var_2 = [];
 
   if(var_1) {
-    var_2[0] = common_scripts\utility::_id_46B5(var_0, "targetname");
+    var_2[0] = common_scripts\utility::getstruct(var_0, "targetname");
   } else {
     var_2[0] = _getEnt(var_0, "targetname");
   }
 
   while(isDefined(var_2[var_2.size - 1].target)) {
     if(var_1) {
-      var_2 = common_scripts\utility::_id_0F6F(var_2, common_scripts\utility::_id_46B5(var_2[var_2.size - 1].target, "targetname"));
+      var_2 = common_scripts\utility::_id_0F6F(var_2, common_scripts\utility::getstruct(var_2[var_2.size - 1].target, "targetname"));
       continue;
     }
 
@@ -1095,19 +1095,19 @@ _id_73B8() {
   self endon("disconnect");
 
   for(;;) {
-    if(common_scripts\utility::_id_3C77("flag_bunker_lights_off")) {
+    if(common_scripts\utility::flag("flag_bunker_lights_off")) {
       if(_id_7402()) {
-        if(!isDefined(self._id_3D4C)) {
+        if(!isDefined(self.flashlight)) {
           _id_0551::_id_3D52(1);
         }
-      } else if(isDefined(self._id_3D4C))
+      } else if(isDefined(self.flashlight))
         _id_0551::_id_3D52(0);
     } else {
-      if(isDefined(self._id_3D4C)) {
+      if(isDefined(self.flashlight)) {
         _id_0551::_id_3D52(0);
       }
 
-      common_scripts\utility::_id_3C9F("flag_bunker_lights_off");
+      common_scripts\utility::flag_wait("flag_bunker_lights_off");
     }
 
     wait 1;
@@ -1124,7 +1124,7 @@ _id_08B0() {
 
   foreach(var_5 in var_3) {
     var_5 setscriptablepartstate("smasher", "working", 0);
-    var_5 _id_0378::_id_8D74("aud_start_med_forge");
+    var_5 _id_0378::snd_message("aud_start_med_forge");
   }
 
   wait(_getanimlength(%zmb_untotenpresse_01_activate));
@@ -1168,7 +1168,7 @@ _id_08B6() {
   foreach(var_11 in var_9) {
     var_11 setscriptablepartstate("pistons", "working", 0);
     var_11 setscriptablepartstate("core", "working", 0);
-    var_11 _id_0378::_id_8D74("aud_start_rnd_forge");
+    var_11 _id_0378::snd_message("aud_start_rnd_forge");
   }
 
   wait(var_7);
@@ -1258,8 +1258,8 @@ _id_8A53() {
   var_1._id_6FC5 = _getEnt("ww_part_02_pickup", "targetname");
   var_1._id_6FC2 = _getEnt(var_1._id_6FC5.target, "targetname");
   _playFXOnTag(level._effect["zmb_tesla_tube_prop_idle"], var_1._id_6FC2, "TAG_ORIGIN");
-  var_0._id_6FC5 common_scripts\utility::_id_9D9F();
-  var_1._id_6FC5 common_scripts\utility::_id_9D9F();
+  var_0._id_6FC5 common_scripts\utility::trigger_off();
+  var_1._id_6FC5 common_scripts\utility::trigger_off();
   var_0._id_6FC5 useTriggerRequireLookAt();
   var_1._id_6FC5 useTriggerRequireLookAt();
 
@@ -1280,23 +1280,23 @@ _id_8BEC(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(var_0)) {
-    common_scripts\utility::_id_3C9F(var_0);
+    common_scripts\utility::flag_wait(var_0);
   }
 
   self._id_6FC2 show();
 
   if(isDefined(var_2)) {
-    common_scripts\utility::_id_3C9F(var_2);
+    common_scripts\utility::flag_wait(var_2);
   }
 
-  self._id_6FC5 common_scripts\utility::_id_9DA3();
+  self._id_6FC5 common_scripts\utility::trigger_on();
   self._id_6FC5 waittill("trigger", var_4);
 
   if(isDefined(var_1)) {
     common_scripts\utility::flag_set(var_1);
   }
 
-  self._id_6FC5 common_scripts\utility::_id_9D9F();
+  self._id_6FC5 common_scripts\utility::trigger_off();
   self._id_6FC2 hide();
   return var_4;
 }
@@ -1424,9 +1424,9 @@ _id_8A38(var_0, var_1, var_2) {
     }
   }
 
-  if(isDefined(var_1) && isDefined(var_3._id_9D65)) {
+  if(isDefined(var_1) && isDefined(var_3.trigger)) {
     var_3 _id_0547::_id_A28D(var_1, var_2);
-    var_3._id_9D65 setHintString(var_1);
+    var_3.trigger setHintString(var_1);
   }
 
   return var_3;
@@ -1456,7 +1456,7 @@ _id_720B(var_0, var_1, var_2, var_3) {
 
 _id_4462(var_0) {
   var_1 = _id_440D();
-  return common_scripts\utility::_id_4461(var_0, var_1);
+  return common_scripts\utility::getclosest(var_0, var_1);
 }
 
 _id_44BA(var_0) {

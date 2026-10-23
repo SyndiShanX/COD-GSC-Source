@@ -16,7 +16,7 @@ init() {
   var_0._id_0E88 = "zombie_generic";
   var_0._id_0879 = "zombie_generic";
   var_0._id_4C12 = 1;
-  var_0._id_60E2 = 40;
+  var_0.meleedamage = 40;
   var_0._id_8302 = 65;
   var_0._id_8303 = 15;
   var_0.parenttype = "zombie_generic";
@@ -31,7 +31,7 @@ init() {
   var_0._id_5ED2["sizzler"]["whole_body"] = "zom_sizzler_body_org1";
   var_0._id_5ED2["sizzler"]["heads"] = ["zom_sizzler_head_org1"];
   _id_0547::_id_0A52(var_0, "zombie_sizzler");
-  _id_0541::_id_2F92("crawl", ["zombie_sizzler"]);
+  _id_0541::disablemutatorfortypes("crawl", ["zombie_sizzler"]);
   level.numactivesizzlers = 0;
   level.numpendingsizzlers = 0;
   level.maxactivesizzlers = 2;
@@ -54,7 +54,7 @@ zombie_sizzler_think_setup() {
   self _meth_85DE(var_0);
   self._id_2FA4 = 0;
   self.cornerlessturnmindegreeoverride = 70;
-  self _meth_85A1("zombie_sizzler");
+  self set_target_tracking_disabled("zombie_sizzler");
   self.stuckfortraversalthreshold = 16;
 }
 
@@ -70,7 +70,7 @@ zombie_sizzler_think() {
     if(_id_053C::_id_4F8C()) {
       continue;
     }
-    if(_id_053C::_id_4F84()) {
+    if(_id_053C::humanoid_begin_melee()) {
       continue;
     }
     if(_id_053C::_id_4F9B()) {
@@ -84,7 +84,7 @@ zombie_sizzler_think() {
 }
 
 zombie_sizzler_move_mode_func() {
-  self._id_64C2 = 1 * _id_054D::_id_4440();
+  self.moveratescale = 1 * _id_054D::_id_4440();
   var_0 = gettime() * 0.001;
 
   if(isDefined(self._id_92EA) && var_0 - self._id_92EA > 2) {
@@ -113,7 +113,7 @@ zombie_make_sizzler(var_0, var_1) {
 
   var_5 = "sizzler_transform";
   var_6 = spawnStruct();
-  var_6._id_81C7 = "ignoreRealign";
+  var_6.script_ghettotag = "ignoreRealign";
   var_6.setflaggedanimknoball = var_2;
   var_7 = self getanimentrycount(var_3);
 
@@ -149,7 +149,7 @@ zombie_make_sizzler(var_0, var_1) {
   var_15 = _getmovedelta(var_13, 0, var_14);
   var_16 = self localtoworldcoords(var_15);
 
-  if(!_id_0547::_id_1F5B(self.origin, var_16)) {
+  if(!_id_0547::canmovepointtopoint(self.origin, var_16)) {
     if(var_1) {
       var_6.optional_script_anim_index = 2;
     } else {
@@ -162,7 +162,7 @@ zombie_make_sizzler(var_0, var_1) {
 
   [var_19, var_20] = getsizzlerboltoffsets(var_1, var_12);
   var_21 = getsizzlerbolt();
-  var_21._id_54F5 = 1;
+  var_21.inuse = 1;
   var_21.posoffset = var_19;
   var_21.anglesoffset = var_20;
   var_21._id_5DBE = var_4;
@@ -176,12 +176,12 @@ zombie_make_sizzler(var_0, var_1) {
   var_23["end_notetrack"] = var_5;
   self.transformingtosizzler = 1;
   thread maps\mp\agents\humanoid\_humanoid_util::getcurrentoffhand(self.origin, self.angles, var_3, var_6.optional_script_anim_index, 0, undefined, 1, 0, undefined, undefined, var_23);
-  _id_0378::_id_8D74("vox_request", "transform");
+  _id_0378::snd_message("vox_request", "transform");
   var_24 = self.origin;
   wait(var_6.optional_timeoffset - 0.05);
   level notify("spawn_sizzler_start");
-  playFX(common_scripts\utility::_id_44F5("zmb_ber_szlr_burst_1"), self.origin);
-  _id_0378::_id_8D74("zmb_siz_trans_fx_burst", var_24);
+  playFX(common_scripts\utility::getfx("zmb_ber_szlr_burst_1"), self.origin);
+  _id_0378::snd_message("zmb_siz_trans_fx_burst", var_24);
   _killfxontag(level._effect["zmb_ber_bolt_rod_gk_attach"], var_21, "TAG_ORIGIN");
   var_6.origin = self gettagorigin("tag_origin");
   var_6.angles = self gettagangles("tag_origin");
@@ -198,7 +198,7 @@ zombie_make_sizzler(var_0, var_1) {
     level.numactivesizzlers++;
   }
 
-  self._id_6734 = 1;
+  self.nopickups = 1;
   self._id_1DEB = 1;
   self suicide();
 }
@@ -209,7 +209,7 @@ zombie_make_sizzler_simple() {
   var_1 = "s2_zom_sizzler_stand_change_react";
   var_2 = "sizzler_transform";
   var_3 = spawnStruct();
-  var_3._id_81C7 = "ignoreRealign";
+  var_3.script_ghettotag = "ignoreRealign";
   var_3.setflaggedanimknoball = var_0;
   var_4 = self getanimentrycount(var_1);
   var_5 = 1;
@@ -219,7 +219,7 @@ zombie_make_sizzler_simple() {
   var_8 = _getmovedelta(var_6, 0, var_7);
   var_9 = self localtoworldcoords(var_8);
 
-  if(!_id_0547::_id_1F5B(self.origin, var_9)) {
+  if(!_id_0547::canmovepointtopoint(self.origin, var_9)) {
     var_3.optional_script_anim_index = 4;
     var_6 = self getanimentry(var_1, var_3.optional_script_anim_index);
     var_7 = maps\mp\agents\_scripted_agent_anim_util::_id_45B9(var_6, var_2, 0);
@@ -231,12 +231,12 @@ zombie_make_sizzler_simple() {
   var_12["end_notetrack"] = var_2;
   self.transformingtosizzler = 1;
   thread maps\mp\agents\humanoid\_humanoid_util::getcurrentoffhand(self.origin, self.angles, var_1, var_3.optional_script_anim_index, 0, undefined, 1, 0, undefined, undefined, var_12);
-  _id_0378::_id_8D74("vox_request", "transform");
+  _id_0378::snd_message("vox_request", "transform");
   var_13 = self.origin;
   wait(var_3.optional_timeoffset - 0.05);
   level notify("spawn_sizzler_start");
-  playFX(common_scripts\utility::_id_44F5("zmb_ber_szlr_burst_1"), self.origin);
-  _id_0378::_id_8D74("zmb_siz_trans_fx_burst", var_13);
+  playFX(common_scripts\utility::getfx("zmb_ber_szlr_burst_1"), self.origin);
+  _id_0378::snd_message("zmb_siz_trans_fx_burst", var_13);
   var_3.origin = self gettagorigin("tag_origin");
   var_3.angles = self gettagangles("tag_origin");
   var_14 = _id_054D::_id_90BA("zombie_sizzler", var_3, "zombie sizzler spawn", 1, 0, 1);
@@ -247,7 +247,7 @@ zombie_make_sizzler_simple() {
     level.numactivesizzlers++;
   }
 
-  self._id_6734 = 1;
+  self.nopickups = 1;
   self._id_1DEB = 1;
   self suicide();
 }
@@ -260,12 +260,12 @@ zombie_sizzler_on_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
 zombie_sizzler_vfx() {
   self endon("death");
   waitframe();
-  _playFXOnTag(common_scripts\utility::_id_44F5("zmb_sizzler_zombie_smoldering"), self, "J_Spine4");
-  _playFXOnTag(common_scripts\utility::_id_44F5("zmb_sizzler_head"), self, "J_head");
-  _playFXOnTag(common_scripts\utility::_id_44F5("zmb_sizzler_flames"), self, "J_Knee_LE");
-  _playFXOnTag(common_scripts\utility::_id_44F5("zmb_sizzler_flames"), self, "J_Knee_RI");
+  _playFXOnTag(common_scripts\utility::getfx("zmb_sizzler_zombie_smoldering"), self, "J_Spine4");
+  _playFXOnTag(common_scripts\utility::getfx("zmb_sizzler_head"), self, "J_head");
+  _playFXOnTag(common_scripts\utility::getfx("zmb_sizzler_flames"), self, "J_Knee_LE");
+  _playFXOnTag(common_scripts\utility::getfx("zmb_sizzler_flames"), self, "J_Knee_RI");
   waitframe();
-  _playFXOnTag(common_scripts\utility::_id_44F5("zmb_sizzler_mouth"), self, "jnt_mandible");
+  _playFXOnTag(common_scripts\utility::getfx("zmb_sizzler_mouth"), self, "jnt_mandible");
 }
 
 zombie_sizzler_slot_available() {
@@ -298,7 +298,7 @@ monitor_sizzler_bolt(var_0) {
   var_1 notsolid();
   var_1 _id_0547::cleanup_damageable_script_model();
   self.boltdamageinit = undefined;
-  var_1._id_54F5 = 0;
+  var_1.inuse = 0;
   var_1.posoffset = undefined;
   var_1.anglesoffset = undefined;
   var_1._id_5DBE = undefined;

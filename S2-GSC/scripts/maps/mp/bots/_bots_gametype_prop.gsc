@@ -4,10 +4,10 @@
 ********************************************************/
 
 main() {
-  _id_87A7();
+  setup_callbacks();
 }
 
-_id_87A7() {
+setup_callbacks() {
   level.bot_funcs["gametype_think"] = ::bot_prop_think;
   level.bot_funcs["know_enemies_on_start"] = undefined;
 }
@@ -28,7 +28,7 @@ bot_prop_think() {
       continue;
     }
     if(self botgetpersonality() != "run_and_gun") {
-      maps\mp\bots\_bots_util::_id_1AD5("run_and_gun");
+      maps\mp\bots\_bots_util::bot_set_personality("run_and_gun");
     }
 
     if(bot_is_on_prop_team()) {
@@ -43,7 +43,7 @@ bot_prop_think() {
         var_3 = self botsetscriptgoalnode(var_2, "tactical");
 
         if(var_3) {
-          var_4 = common_scripts\utility::_id_A712(["goal", "bad_path", "no_path", "node_relinquished", "script_goal_changed"]);
+          var_4 = common_scripts\utility::waittill_any_in_array_return(["goal", "bad_path", "no_path", "node_relinquished", "script_goal_changed"]);
 
           if(var_4 == "goal") {
             self botsetflag("disable_movement", 1);
@@ -57,7 +57,7 @@ bot_prop_think() {
     }
 
     if(!common_scripts\utility::_id_562E(self.phfrozen)) {
-      if(!self _meth_86C2() && gettime() - var_0 > 10000) {
+      if(!self setlocaljammer() && gettime() - var_0 > 10000) {
         var_5 = self._id_0088;
 
         if(!isDefined(var_5)) {
@@ -73,7 +73,7 @@ bot_prop_think() {
           self botgetimperfectenemyinfo(var_5, var_9.origin);
           var_0 = gettime();
         } else
-          self[[level._id_1A8F["default"]]]();
+          self[[level.bot_pers_update["default"]]]();
       }
     }
   }

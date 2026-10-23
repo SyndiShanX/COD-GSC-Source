@@ -34,13 +34,13 @@ main() {
 _id_7865() {
   level._id_3571._id_692A = 1;
   level._id_3571._id_5787 = 0;
-  var_0 = common_scripts\utility::_id_46B5("cart_align_node", "targetname");
+  var_0 = common_scripts\utility::getstruct("cart_align_node", "targetname");
   level._id_3571._id_0BBE = var_0;
   thread _id_9033();
-  thread _id_0378::_id_8D74("aud_cart_lights_off");
+  thread _id_0378::snd_message("aud_cart_lights_off");
   level thread _id_A0EF(level._id_3573, 0);
   common_scripts\utility::flag_set("flag_bunker_lights_off");
-  _id_0378::_id_8D74("aud_bunker_lights", "off");
+  _id_0378::snd_message("aud_bunker_lights", "off");
   wait 4;
   var_1 = level._id_64C7;
   var_2 = undefined;
@@ -55,7 +55,7 @@ _id_7865() {
     _id_0557::_id_781D("4 cart", var_2);
   }
 
-  var_1._id_92A1 common_scripts\utility::_id_9DA3();
+  var_1._id_92A1 common_scripts\utility::trigger_on();
   var_1._id_92A1 setHintString(&"ZOMBIE_NEST_MOVE_SHROUD");
   var_1._id_1DD3 showpart("TAG_LIGHT_GREEN");
   var_1._id_1DD3 hidepart("TAG_LIGHT_RED");
@@ -71,7 +71,7 @@ _id_7865() {
     _id_0557::_id_7847("4 cart", var_2);
   }
 
-  var_1._id_92A1 common_scripts\utility::_id_9D9F();
+  var_1._id_92A1 common_scripts\utility::trigger_off();
   _id_0557::_id_782D("4 cart", "press button");
 }
 
@@ -96,14 +96,14 @@ _id_7863() {
 
   level._id_3E3B._id_4D91 = _id_0559::_id_7BE3(level._id_3E3B._id_6FC5, "tesla_barrel");
   var_2 = level._id_3E3B maps\mp\mp_zombie_nest_ee_util::_id_8BEC();
-  level._id_3E3B._id_4D91._id_2F74 = 1;
+  level._id_3E3B._id_4D91.disabled = 1;
   common_scripts\utility::flag_set("flag_ww_part_01_picked_up");
   var_2 _id_2EBE(1);
   _id_0557::_id_782D("4 cart", "pickup ww frame");
 }
 
 _id_7869() {
-  _id_0378::_id_8D74("aud_claw_move_start", level._id_3571);
+  _id_0378::snd_message("aud_claw_move_start", level._id_3571);
   level._id_3571 _id_202D("rnd_5");
   _id_0557::_id_782D("4 cart", "rewind from rnd");
 }
@@ -122,26 +122,26 @@ _id_7864() {
 
   level._id_5981._id_4D91 = _id_0559::_id_7BE3(level._id_5981._id_6FC5, "tesla_core");
   var_2 = level._id_5981 maps\mp\mp_zombie_nest_ee_util::_id_8BEC();
-  level._id_5981._id_4D91._id_2F74 = 1;
+  level._id_5981._id_4D91.disabled = 1;
   common_scripts\utility::flag_set("flag_ww_part_02_picked_up");
   var_2 _id_2EBE(2);
   _id_0557::_id_782D("4 cart", "pickup ww core");
 }
 
 _id_7868() {
-  _id_0378::_id_8D74("aud_claw_move_start", level._id_3571);
+  _id_0378::snd_message("aud_claw_move_start", level._id_3571);
   level._id_3571 _id_202D("med_5");
   _id_0557::_id_782D("4 cart", "rewind from med");
 }
 
 _id_7857() {
   level._id_3571 _id_202D("com_1");
-  _id_0378::_id_8D74("aud_claw_move_stop", level._id_3571);
+  _id_0378::snd_message("aud_claw_move_stop", level._id_3571);
   common_scripts\utility::flag_set("flag_cart_reached_end");
   level thread _id_A0EF(level._id_3573, 1);
-  common_scripts\utility::_id_3C7B("flag_bunker_lights_off");
+  common_scripts\utility::flag_clear("flag_bunker_lights_off");
   level._id_6F18 = 0;
-  _id_0378::_id_8D74("aud_bunker_lights", "on");
+  _id_0378::snd_message("aud_bunker_lights", "on");
 
   if(1) {
     _id_0557::_id_7847("4 cart", level._id_3571._id_68C1);
@@ -156,7 +156,7 @@ _id_784A() {
     _id_0557::_id_781D("4 cart", var_0);
   }
 
-  common_scripts\utility::_id_3C9F("flag_ww_forged");
+  common_scripts\utility::flag_wait("flag_ww_forged");
   level thread maps\mp\gametypes\zombies::orders_and_contracts_report_event("geistcraft_device_powered");
 
   foreach(var_2 in level.players) {
@@ -229,7 +229,7 @@ _id_64A0() {
   var_2 = _getanimlength(var_0);
   var_3 = _getanimlength(var_1);
   self._id_1DD3 scriptmodelplayanim("zmb_objective_button_02_push");
-  self._id_1DD3 _id_0378::_id_8D74("aud_start_claw_button_press");
+  self._id_1DD3 _id_0378::snd_message("aud_start_claw_button_press");
   wait(var_2);
   self._id_1DD3 showpart("TAG_LIGHT_RED");
   self._id_1DD3 hidepart("TAG_LIGHT_GREEN");
@@ -248,31 +248,31 @@ _id_2023(var_0) {
     var_0 = "rnd";
   }
 
-  level._id_3571._id_7E93 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_geistkraft_radius_256"), level._id_3571, "TAG_FX");
+  level._id_3571._id_7E93 = _spawnlinkedfx(common_scripts\utility::getfx("zmb_geistkraft_radius_256"), level._id_3571, "TAG_FX");
   _triggerfx(level._id_3571._id_7E93);
   level._id_3571._id_2DA8 = 1;
   level._id_3571 thread _id_201F(var_0);
 
   if(var_0 == "rnd") {
-    _id_0378::_id_8D74("aud_claw_move_start", level._id_3571);
+    _id_0378::snd_message("aud_claw_move_start", level._id_3571);
   }
 
   level._id_3571 _id_202D(var_0 + "_1");
-  _id_0378::_id_8D74("aud_claw_move_stop", level._id_3571);
-  common_scripts\utility::_id_3C9F("flag_cart_req_1_met");
+  _id_0378::snd_message("aud_claw_move_stop", level._id_3571);
+  common_scripts\utility::flag_wait("flag_cart_req_1_met");
   _id_6AA2();
-  _id_0378::_id_8D74("aud_claw_move_start", level._id_3571);
+  _id_0378::snd_message("aud_claw_move_start", level._id_3571);
   level._id_3571 _id_202D(var_0 + "_2");
-  _id_0378::_id_8D74("aud_claw_move_stop", level._id_3571);
-  common_scripts\utility::_id_3C9F("flag_cart_req_2_met");
-  _id_0378::_id_8D74("aud_claw_move_start", level._id_3571);
+  _id_0378::snd_message("aud_claw_move_stop", level._id_3571);
+  common_scripts\utility::flag_wait("flag_cart_req_2_met");
+  _id_0378::snd_message("aud_claw_move_start", level._id_3571);
   level._id_3571 _id_202D(var_0 + "_3");
-  _id_0378::_id_8D74("aud_claw_move_stop", level._id_3571);
-  common_scripts\utility::_id_3C9F("flag_cart_req_3_met");
+  _id_0378::snd_message("aud_claw_move_stop", level._id_3571);
+  common_scripts\utility::flag_wait("flag_cart_req_3_met");
   _id_6A9F();
-  _id_0378::_id_8D74("aud_claw_move_start", level._id_3571);
+  _id_0378::snd_message("aud_claw_move_start", level._id_3571);
   level._id_3571 _id_202D(var_0 + "_4");
-  _id_0378::_id_8D74("aud_claw_move_stop", level._id_3571);
+  _id_0378::snd_message("aud_claw_move_stop", level._id_3571);
   thread _id_08B9(var_0);
 
   if(var_0 == "rnd") {
@@ -290,13 +290,13 @@ _id_2023(var_0) {
 }
 
 _id_201F(var_0) {
-  common_scripts\utility::_id_3C7B("flag_cart_req_1_met");
-  common_scripts\utility::_id_3C7B("flag_cart_req_2_met");
-  common_scripts\utility::_id_3C7B("flag_cart_req_3_met");
+  common_scripts\utility::flag_clear("flag_cart_req_1_met");
+  common_scripts\utility::flag_clear("flag_cart_req_2_met");
+  common_scripts\utility::flag_clear("flag_cart_req_3_met");
   level._id_3571 thread _id_91C5(5, "flag_cart_req_1_met");
-  common_scripts\utility::_id_3C9F("flag_cart_req_1_met");
+  common_scripts\utility::flag_wait("flag_cart_req_1_met");
   level._id_3571 thread _id_91C5(5, "flag_cart_req_2_met");
-  common_scripts\utility::_id_3C9F("flag_cart_req_2_met");
+  common_scripts\utility::flag_wait("flag_cart_req_2_met");
   level._id_3571 thread _id_91C5(5, "flag_cart_req_3_met");
 }
 
@@ -324,7 +324,7 @@ _id_202D(var_0) {
       break;
     case "med_4":
     case "rnd_4":
-      _id_0378::_id_8D74("aud_claw_connection_forge");
+      _id_0378::snd_message("aud_claw_connection_forge");
     case "med_3":
     case "med_2":
     case "rnd_3":
@@ -431,7 +431,7 @@ _id_2E7B() {
     var_1._id_5ED1 = var_1.origin;
   }
 
-  while(!common_scripts\utility::_id_3C77(var_0)) {
+  while(!common_scripts\utility::flag(var_0)) {
     var_1 waittill("trigger", var_3);
 
     if(!isPlayer(var_3)) {
@@ -461,7 +461,7 @@ _id_2E7B() {
 
 _id_2E84() {
   foreach(var_1 in level.players) {
-    if(_id_0547::_id_577E(var_1)) {
+    if(_id_0547::isplayerinlaststand(var_1)) {
       continue;
     }
     if(distance(var_1.origin, level._id_3571.origin) < 500) {

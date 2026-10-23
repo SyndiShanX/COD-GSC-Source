@@ -51,7 +51,7 @@ _id_002D(var_0, var_1, var_2, var_3) {
 
   if(var_4 == anim._id_39EB) {
     return 0;
-  } else if(var_4 == anim._id_94D4) {
+  } else if(var_4 == anim.success) {
     return 1;
   } else if(var_4 == anim._id_7FB8) {
     return 2;

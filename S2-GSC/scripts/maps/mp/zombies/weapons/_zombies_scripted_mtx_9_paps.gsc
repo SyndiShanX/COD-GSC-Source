@@ -74,9 +74,9 @@ scripted_mtx9_on_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
     if(!common_scripts\utility::_id_562E(var_1.bubblecharged)) {
       var_1.bubbleshieldbuildup++;
 
-      if(!common_scripts\utility::_id_562E(self._id_2FDA) && !_id_0547::_id_5565(self._id_0A4B, "zombie_fireman")) {
+      if(!common_scripts\utility::_id_562E(self.dismember_crawl) && !_id_0547::_id_5565(self._id_0A4B, "zombie_fireman")) {
         _id_865C("scripted_soul_eat", 0);
-        _id_0378::_id_8D74("aud_zombie_soul_absorb");
+        _id_0378::snd_message("aud_zombie_soul_absorb");
       }
     }
 
@@ -182,7 +182,7 @@ get_bomb_start_pos(var_0) {
 
 geist_bombs_projectile_think(var_0, var_1) {
   var_2 = self;
-  _id_0378::_id_8D74("aud_pap_wpn_emp44_bomb_reload", "spawn", var_2);
+  _id_0378::snd_message("aud_pap_wpn_emp44_bomb_reload", "spawn", var_2);
   var_2 waittill("explode", var_3);
   geist_bombs_static_think(var_3, var_0, var_1);
 
@@ -193,7 +193,7 @@ geist_bombs_projectile_think(var_0, var_1) {
 
 geist_bombs_static_think(var_0, var_1, var_2) {
   var_3 = _getgroundposition(var_0, 12);
-  var_4 = common_scripts\utility::_id_8FFC();
+  var_4 = common_scripts\utility::spawn_tag_origin();
   var_4 show();
   var_4.origin = var_3 + (0, 0, 25);
   var_5 = "zmb_godking_giestbomb";
@@ -208,21 +208,21 @@ geist_bombs_static_think(var_0, var_1, var_2) {
     var_6 = "zmb_godking_giestbomb2_prime";
   }
 
-  var_7 = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_5), var_4, "TAG_ORIGIN");
-  var_8 = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_6), var_4, "TAG_ORIGIN");
+  var_7 = _spawnlinkedfx(common_scripts\utility::getfx(var_5), var_4, "TAG_ORIGIN");
+  var_8 = _spawnlinkedfx(common_scripts\utility::getfx(var_6), var_4, "TAG_ORIGIN");
   setfxkillondelete(var_7, 1);
   setfxkillondelete(var_8, 1);
   var_9 = 0.6;
   var_10 = 2.6;
   thread show_bomb_vfx(var_7, var_8, var_9, var_10);
-  _id_0378::_id_8D74("aud_pap_wpn_emp44_bomb_reload", "activate", var_4);
+  _id_0378::snd_message("aud_pap_wpn_emp44_bomb_reload", "activate", var_4);
   wait(var_9 + var_10);
 
   if(!var_2) {
-    _playFXOnTag(common_scripts\utility::_id_44F5("zmb_giestbomb_exp_1shot"), var_4, "TAG_ORIGIN");
+    _playFXOnTag(common_scripts\utility::getfx("zmb_giestbomb_exp_1shot"), var_4, "TAG_ORIGIN");
   }
 
-  _id_0378::_id_8D74("aud_pap_wpn_emp44_bomb_reload", "explode", var_4);
+  _id_0378::snd_message("aud_pap_wpn_emp44_bomb_reload", "explode", var_4);
   var_11 = _id_0547::_id_408F();
   var_12 = level.players;
   var_13 = common_scripts\utility::_id_0F73(var_11, var_12);
@@ -294,12 +294,12 @@ try_charlton_blackhole(var_0, var_1) {
   }
   level.last_charlton_blackhole_time = gettime();
   var_2 = _getgroundposition(var_0, 12);
-  level.charlton_blackhole = common_scripts\utility::_id_8FFC();
+  level.charlton_blackhole = common_scripts\utility::spawn_tag_origin();
   level.charlton_blackhole show();
   level.charlton_blackhole.origin = var_2 + (0, 0, 4);
-  level.charlton_blackhole.vfxent_radius = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_embers_wind_vortex"), level.charlton_blackhole, "tag_origin");
+  level.charlton_blackhole.vfxent_radius = _spawnlinkedfx(common_scripts\utility::getfx("zmb_embers_wind_vortex"), level.charlton_blackhole, "tag_origin");
   _triggerfx(level.charlton_blackhole.vfxent_radius);
-  level.charlton_blackhole _id_0378::_id_8D74("aud_pap_wpn_charlton_vortex");
+  level.charlton_blackhole _id_0378::snd_message("aud_pap_wpn_charlton_vortex");
   level.charlton_blackhole thread spawn_blackhole();
   wait 5;
 
@@ -366,7 +366,7 @@ sdk_zm_fire_think() {
     self waittill("weapon_fired", var_0);
 
     if(issubstr(var_0, "sdk") && is_paped(var_0)) {
-      _id_0378::_id_8D74("aud_pap_wpn_sdk_shottysnipe_fire", self getEye());
+      _id_0378::snd_message("aud_pap_wpn_sdk_shottysnipe_fire", self getEye());
     }
   }
 }
@@ -376,8 +376,8 @@ dp28_modify_projectile(var_0, var_1) {
   self _meth_8519(0, 0);
 
   if(var_1) {
-    _playFXOnTag(common_scripts\utility::_id_44F5("zmi_hc_rune_green"), self, "tag_origin");
-    _id_0378::_id_8D74("aud_pap_wpn_crossbow_cricket_shot");
+    _playFXOnTag(common_scripts\utility::getfx("zmi_hc_rune_green"), self, "tag_origin");
+    _id_0378::snd_message("aud_pap_wpn_crossbow_cricket_shot");
   }
 
   return self;
@@ -400,7 +400,7 @@ dp28_death_bolt(var_0, var_1) {
 
     if(var_3) {
       var_2 thread dp28_noisy_cricket(var_0);
-      var_2 thread common_scripts\utility::_id_2CBE(0.15, ::delete);
+      var_2 thread common_scripts\utility::delaycall(0.15, ::delete);
     }
   }
 }
@@ -535,8 +535,8 @@ play_noisy_cricket_vfx(var_0) {
   }
   var_1 = gettime();
   level.noisy_circket_vfx_time = common_scripts\utility::_id_0F6F(level.noisy_circket_vfx_time, var_1);
-  playFX(common_scripts\utility::_id_44F5("zmb_dp28_green_impact"), var_0.origin);
-  var_0 _id_0378::_id_8D74("aud_pap_wpn_crossbow_cricket_explo");
+  playFX(common_scripts\utility::getfx("zmb_dp28_green_impact"), var_0.origin);
+  var_0 _id_0378::snd_message("aud_pap_wpn_crossbow_cricket_explo");
   wait 1.25;
   level.noisy_circket_vfx_time = common_scripts\utility::_id_0F93(level.noisy_circket_vfx_time, var_1);
 }

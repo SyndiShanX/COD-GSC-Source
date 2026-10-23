@@ -4,14 +4,14 @@
 ***********************************************************/
 
 init() {
-  level._id_80B7["missile_strike"] = 450;
+  level.visionsetnakedforplayer_lerp["missile_strike"] = 450;
   level._id_80B8["missile_strike"] = 300;
   level.setwhizbyprobabilities["missile_strike"] = 0;
-  level._id_80B9["missile_strike"] = 1.0;
+  level.returnplayercontrol["missile_strike"] = 1.0;
   level.makeglobalunusable["missile_strike"] = 18.0;
-  level._id_5A61["missile_strike"] = ::_id_9E31;
-  level._id_5A7D["missile_strike_projectile_mp"] = "missile_strike";
-  level._id_5A7D["missile_strike_projectile_axis_mp"] = "missile_strike";
+  level.killstreakfuncs["missile_strike"] = ::_id_9E31;
+  level.killstreakwieldweapons["missile_strike_projectile_mp"] = "missile_strike";
+  level.killstreakwieldweapons["missile_strike_projectile_axis_mp"] = "missile_strike";
 }
 
 _id_9E31(var_0) {

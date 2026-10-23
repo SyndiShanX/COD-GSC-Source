@@ -11,7 +11,7 @@ main() {
   maps\mp\mp_zombie_house_lighting::main();
   maps\mp\mp_zombie_house_aud::main();
   level._id_AC2E = 1;
-  _id_0472::_id_8A2F("compass_map_mp_zombie_house");
+  _id_0472::setupminimap("compass_map_mp_zombie_house");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   level._id_2986 = "mp/zombieEnemyWavesHouse.csv";
@@ -57,11 +57,11 @@ _id_3FD2() {
   level waittill("player_spawned", var_0);
   var_1 = _id_325F();
 
-  foreach(var_3 in var_1._id_9DC2) {
-    var_3 common_scripts\utility::_id_9D9F();
+  foreach(var_3 in var_1.triggers) {
+    var_3 common_scripts\utility::trigger_off();
   }
 
-  level._id_7F22["normal"] = ::_id_4EF6;
+  level.roundstartfunc["normal"] = ::_id_4EF6;
   level._id_0A41["zombie_generic"]["move_mode"] = ::_id_4EF7;
 }
 
@@ -89,18 +89,18 @@ _id_357A() {
     var_1 thread _id_3579();
   }
 
-  common_scripts\utility::_id_3C9F("flag_all_lamps_hit");
+  common_scripts\utility::flag_wait("flag_all_lamps_hit");
 
   foreach(var_4 in level._id_65F6) {
     _id_3281(var_4, 1);
   }
 
-  level._id_65F6[0] _id_0378::_id_8D74("ee_complete");
+  level._id_65F6[0] _id_0378::snd_message("ee_complete");
   thread _id_357C();
 }
 
 _id_3597() {
-  common_scripts\utility::_id_3C9F("flag_all_lamps_hit");
+  common_scripts\utility::flag_wait("flag_all_lamps_hit");
   level._id_8C52 = [];
   level._id_8C52 = getEntArray("klaus_signs", "targetname");
 
@@ -112,7 +112,7 @@ _id_3597() {
     var_1 thread _id_3596();
   }
 
-  common_scripts\utility::_id_3C9F("flag_all_signs_hit");
+  common_scripts\utility::flag_wait("flag_all_signs_hit");
 }
 
 _id_3596() {
@@ -146,11 +146,11 @@ _id_358C() {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(common_scripts\utility::_id_3C77("flag_all_signs_hit") && common_scripts\utility::_id_3C77("flag_all_lamps_hit") && var_1 maps\mp\gametypes\zombies::_id_11C2(10000, 1)) {
-      _id_0378::_id_8D74("ee_piano_use", var_0.origin, 1);
+    if(common_scripts\utility::flag("flag_all_signs_hit") && common_scripts\utility::flag("flag_all_lamps_hit") && var_1 maps\mp\gametypes\zombies::attempttobuy(10000, 1)) {
+      _id_0378::snd_message("ee_piano_use", var_0.origin, 1);
       break;
     } else {
-      _id_0378::_id_8D74("ee_piano_use", var_0.origin, 0);
+      _id_0378::snd_message("ee_piano_use", var_0.origin, 0);
       wait 1;
       continue;
     }
@@ -161,18 +161,18 @@ _id_358C() {
 }
 
 _id_357C() {
-  while(!isDefined(level._id_5F7F)) {
+  while(!isDefined(level.magicboxweapons)) {
     wait 1;
   }
 
-  _id_0548::_id_7CEA("fliegerfaust_zm");
+  _id_0548::removemagicboxweapon("fliegerfaust_zm");
 }
 
 _id_357B() {
   var_0 = [];
   var_1 = undefined;
 
-  foreach(var_3 in level._id_5F7F) {
+  foreach(var_3 in level.magicboxweapons) {
     var_4 = _id_0547::_id_AAF9(var_3["baseNameNoMP"], undefined, 1);
     var_1 = _id_0547::_id_9475(var_4) + "_pap_zm";
 
@@ -180,7 +180,7 @@ _id_357B() {
       continue;
     }
     if(isDefined(var_1)) {
-      _id_0548::_id_7CEA(var_3["baseNameNoMP"]);
+      _id_0548::removemagicboxweapon(var_3["baseNameNoMP"]);
       _id_0548::_id_09C8(var_1, "none", "none", "none");
     }
   }
@@ -204,8 +204,8 @@ _id_3579() {
     var_10 = (0, 0, -23);
   }
 
-  playFX(common_scripts\utility::_id_44F5("ee_lamp_fx"), self.origin + var_10, anglesToForward(self.angles), anglestoup(self.angles));
-  _id_0378::_id_8D74("ee_update");
+  playFX(common_scripts\utility::getfx("ee_lamp_fx"), self.origin + var_10, anglesToForward(self.angles), anglestoup(self.angles));
+  _id_0378::snd_message("ee_update");
   var_11 = 1;
 
   foreach(var_13 in level._id_5AF2) {
@@ -244,22 +244,22 @@ _id_327D() {
       switch (var_5) {
         case "door_model":
           var_1._id_326B = var_4;
-          var_6 = common_scripts\utility::_id_46B5(var_4.target, "targetname");
-          var_7 = common_scripts\utility::_id_46B5(var_6.target, "targetname");
+          var_6 = common_scripts\utility::getstruct(var_4.target, "targetname");
+          var_7 = common_scripts\utility::getstruct(var_6.target, "targetname");
           var_1._id_6BE3 = var_6.angles;
           var_1._id_2443 = var_7.angles;
           break;
         case "door_model_r":
           var_1._id_326D = var_4;
-          var_8 = common_scripts\utility::_id_46B5(var_4.target, "targetname");
-          var_9 = common_scripts\utility::_id_46B5(var_8.target, "targetname");
+          var_8 = common_scripts\utility::getstruct(var_4.target, "targetname");
+          var_9 = common_scripts\utility::getstruct(var_8.target, "targetname");
           var_1._id_6BF2 = var_8.origin;
           var_1._id_2446 = var_9.origin;
           break;
         case "door_model_l":
           var_1._id_326C = var_4;
-          var_10 = common_scripts\utility::_id_46B5(var_4.target, "targetname");
-          var_11 = common_scripts\utility::_id_46B5(var_10.target, "targetname");
+          var_10 = common_scripts\utility::getstruct(var_4.target, "targetname");
+          var_11 = common_scripts\utility::getstruct(var_10.target, "targetname");
           var_1._id_6BF1 = var_10.origin;
           var_1._id_2445 = var_11.origin;
           break;
@@ -277,8 +277,8 @@ _id_327C() {
 
   foreach(var_1 in level._id_4EE7) {
     var_2 = _getEnt(var_1.target, "targetname");
-    var_3 = common_scripts\utility::_id_46B5(var_2.target, "targetname");
-    var_4 = common_scripts\utility::_id_46B5(var_3.target, "targetname");
+    var_3 = common_scripts\utility::getstruct(var_2.target, "targetname");
+    var_4 = common_scripts\utility::getstruct(var_3.target, "targetname");
     var_1._id_326B = var_2;
     var_1._id_6BE3 = var_3.angles;
     var_1._id_2443 = var_4.angles;
@@ -320,7 +320,7 @@ _id_3281(var_0, var_1) {
 _id_325F() {
   var_0 = "house_to_end";
 
-  foreach(var_2 in level._id_AC1D) {
+  foreach(var_2 in level.zombiedoors) {
     if(_id_0547::_id_5565(var_2.getnegotiationnextnode, var_0)) {
       return var_2;
     }
@@ -328,27 +328,27 @@ _id_325F() {
 }
 
 _id_4EF6() {
-  if(level._id_A980 == 6) {
+  if(level.wavecounter == 6) {
     level._id_7F1B = 5;
   }
 
-  if(level._id_A980 == 7) {
+  if(level.wavecounter == 7) {
     level._id_7F1B = 4;
   }
 
-  if(level._id_A980 == 8) {
+  if(level.wavecounter == 8) {
     level._id_7F1B = 3;
   }
 
-  if(level._id_A980 == 9) {
+  if(level.wavecounter == 9) {
     level._id_7F1B = 2;
   }
 
-  if(level._id_A980 == 10) {
+  if(level.wavecounter == 10) {
     level._id_7F1B = 1;
   }
 
-  if(level._id_A980 == 50) {
+  if(level.wavecounter == 50) {
     _id_0564::_id_3C11(0);
   }
 }

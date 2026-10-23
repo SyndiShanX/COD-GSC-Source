@@ -83,18 +83,18 @@ hunter_blood_2() {
 survivalist_blood_0_type_2() {
   level endon("survivalist_blood_0_type_2_failed");
   childthread watch_for_player_downs("survivalist_blood_0_type_2_failed", 0, ::boss_fight_active, "_25. SURVIVALIST BLOOD 1");
-  common_scripts\utility::_id_3C9F("final boss wrapped up");
+  common_scripts\utility::flag_wait("final boss wrapped up");
   return 1;
 }
 
 survivalist_blood_1_type_2() {
-  common_scripts\utility::_id_3C9F("final boss wrapped up");
+  common_scripts\utility::flag_wait("final boss wrapped up");
   return level.frontline_assassin_buff_count < 10;
 }
 
 survivalist_blood_2_type_2() {
   level endon("survivalist_blood_2_type_2_failed");
-  common_scripts\utility::_id_3C9F("final boss wrapped up");
+  common_scripts\utility::flag_wait("final boss wrapped up");
   return 1;
 }
 
@@ -123,14 +123,14 @@ slayer_bat_2_type_2() {
 hunter_bat_0_type_2() {
   level endon("start_to_right_climb");
   level waittill(maps\mp\gametypes\zombies::get_round_complete_notify(25));
-  return !common_scripts\utility::_id_3C77("start_to_right_climb");
+  return !common_scripts\utility::flag("start_to_right_climb");
 }
 
 hunter_bat_1_type_2() {
   level endon("vista_beach_to_sub_pens_1");
   level endon("right_climb_to_sub_pens_1");
   level waittill(maps\mp\gametypes\zombies::get_round_complete_notify(20));
-  return !common_scripts\utility::_id_3C77("vista_beach_to_sub_pens_1") && !common_scripts\utility::_id_3C77("right_climb_to_sub_pens_1");
+  return !common_scripts\utility::flag("vista_beach_to_sub_pens_1") && !common_scripts\utility::flag("right_climb_to_sub_pens_1");
 }
 
 hunter_bat_2_type_2() {
@@ -181,7 +181,7 @@ survivalist_bat_0_type_2() {
   level endon("survivalist_bat_0_type_2_failed");
   level endon("another_player_joined0");
   level childthread fail_on_player_joined(self, "another_player_joined", 0);
-  common_scripts\utility::_id_3C9F(_id_0557::_id_7838("Explore the Beach", "Survive the Beach"));
+  common_scripts\utility::flag_wait(_id_0557::_id_7838("Explore the Beach", "Survive the Beach"));
   wait 1;
   return level.players.size == 1;
 }
@@ -192,7 +192,7 @@ survivalist_bat_1_type_2() {
   level endon("another_player_joined1");
   level childthread fail_on_player_joined(self, "another_player_joined", 1);
   childthread wait_for_consecutive_waves_with_weapons(1, "survivalist_bat_1_type_2_failed", ::player_using_valid_weapons_no_mercy, ["shovel_zm"], 0, 1, "_14. SURVIVALIST BAT 2");
-  common_scripts\utility::_id_3C9F(_id_0557::_id_7838("Explore the Beach", "Survive the Beach"));
+  common_scripts\utility::flag_wait(_id_0557::_id_7838("Explore the Beach", "Survive the Beach"));
   wait 1;
   return level.players.size == 1;
 }
@@ -203,7 +203,7 @@ survivalist_bat_2_type_2() {
   level endon("another_player_joined2");
   level childthread fail_on_player_joined(self, "another_player_joined", 2);
   childthread watch_for_crouch(2, "survivalist_bat_2_type_2_failed");
-  common_scripts\utility::_id_3C9F(_id_0557::_id_7838("Explore the Beach", "Survive the Beach"));
+  common_scripts\utility::flag_wait(_id_0557::_id_7838("Explore the Beach", "Survive the Beach"));
   wait 1;
   return level.players.size == 1;
 }
@@ -211,14 +211,14 @@ survivalist_bat_2_type_2() {
 slayer_origin_0_type_2() {
   level endon("assassin_origin_0_type_2_failed");
   childthread watch_player_spending("assassin_origin_0_type_2_failed", 9000, " 4.SLAYER ORIGIN 1");
-  common_scripts\utility::_id_3C9F("final boss wrapped up");
+  common_scripts\utility::flag_wait("final boss wrapped up");
   return 1;
 }
 
 slayer_origin_1_type_2() {
   level endon("assassin_origin_1_type_2_failed");
   childthread watch_player_spending("assassin_origin_1_type_2_failed", 7500, " 5.SLAYER ORIGIN 2");
-  common_scripts\utility::_id_3C9F("flag_pommel_given");
+  common_scripts\utility::flag_wait("flag_pommel_given");
   return 1;
 }
 
@@ -244,10 +244,10 @@ hunter_origin_1_type_2() {
 }
 
 hunter_origin_2_type_2() {
-  common_scripts\utility::_id_3C9F("final boss wrapped up");
+  common_scripts\utility::flag_wait("final boss wrapped up");
 
   foreach(var_1 in level.players) {
-    if(isDefined(var_1._id_62D6) && var_1._id_62D6 >= 15000) {
+    if(isDefined(var_1.moneycurrent) && var_1.moneycurrent >= 15000) {
       return 1;
     }
   }
@@ -257,26 +257,26 @@ hunter_origin_2_type_2() {
 
 mountain_origin_0_type_2() {
   level endon("mountain_origin_0_type_2_failed");
-  common_scripts\utility::_id_3C9F("flag_pommel_given");
+  common_scripts\utility::flag_wait("flag_pommel_given");
   return 1;
 }
 
 mountain_origin_1_type_2() {
   level endon("special_ability_used");
-  common_scripts\utility::_id_3C9F("flag_pommel_given");
+  common_scripts\utility::flag_wait("flag_pommel_given");
   return 1;
 }
 
 mountain_origin_2_type_2() {
   level endon("zombie_took_projectile_damage_from_razergun_zm");
   level endon("zombie_took_projectile_damage_from_razergun_pap_zm");
-  common_scripts\utility::_id_3C9F("flag_pommel_given");
+  common_scripts\utility::flag_wait("flag_pommel_given");
   return 1;
 }
 
 survivalist_origin_0_type_2() {
   level endon("survivalist_origin_0_type_2_failed");
-  common_scripts\utility::_id_3C9F("final boss wrapped up");
+  common_scripts\utility::flag_wait("final boss wrapped up");
   return 1;
 }
 
@@ -330,7 +330,7 @@ secret_challenges_get_zombie_killed_feedback(var_0, var_1, var_2, var_3, var_4, 
     level.mountain_bat_2_type_2++;
   }
 
-  if(level._id_A980 == 0 && !_id_0586::_id_AB31(var_6)) {
+  if(level.wavecounter == 0 && !_id_0586::_id_AB31(var_6)) {
     level notify("survivalist_bat_0_type_2_failed");
   }
 
@@ -359,9 +359,9 @@ watch_for_player_downs(var_0, var_1, var_2, var_3) {
     var_4 = self;
 
     if(var_1) {
-      var_4 common_scripts\utility::_id_A70A("enter_last_stand", "give_armor");
+      var_4 common_scripts\utility::waittill_any("enter_last_stand", "give_armor");
     } else {
-      var_4 common_scripts\utility::_id_A70A("enter_last_stand");
+      var_4 common_scripts\utility::waittill_any("enter_last_stand");
     }
 
     if(!isDefined(var_2) || [[var_2]]()) {
@@ -441,7 +441,7 @@ challenge_validate_weapon_used(var_0, var_1, var_2) {
 
 skip_equipment_check_on_wave_break(var_0) {
   foreach(var_2 in var_0.valid_weapons) {
-    if(_id_0547::_id_585C(maps\mp\_utility::_id_4431(var_2)) || _id_0547::_id_5565(var_2, "trap_zm_mp")) {
+    if(_id_0547::iszombieequipment(maps\mp\_utility::_id_4431(var_2)) || _id_0547::_id_5565(var_2, "trap_zm_mp")) {
       return 1;
     }
   }
@@ -469,7 +469,7 @@ watch_player_spending(var_0, var_1, var_2) {
 }
 
 wait_for_points_required(var_0, var_1, var_2) {
-  while(!isDefined(self._id_62D6) || self._id_62D6 < var_0) {
+  while(!isDefined(self.moneycurrent) || self.moneycurrent < var_0) {
     self waittill("money_update");
   }
 
@@ -526,10 +526,10 @@ wait_for_consecutive_waves_with_weapons(var_0, var_1, var_2, var_3, var_4, var_5
   var_8 = register_zombie_killed_response(var_2, ::clear_player_progress, var_1, var_3);
   var_9 = spawnStruct();
   var_9._id_005C = 0;
-  var_9._id_4800 = var_0;
-  var_9._id_502A = var_1;
-  var_9._id_7DB9 = var_8;
-  var_9._id_2566 = 0;
+  var_9.goal = var_0;
+  var_9.id = var_1;
+  var_9.response = var_8;
+  var_9.completed = 0;
   var_9.name = var_6;
   var_7.consecutive_wave_tracking_array[var_1] = var_9;
 
@@ -539,8 +539,8 @@ wait_for_consecutive_waves_with_weapons(var_0, var_1, var_2, var_3, var_4, var_5
     challenge_validate_weapon_used(var_7 getcurrentweapon(), var_7, 1);
   }
 
-  var_9._id_2566 = 1;
-  level.zmb_zombie_killed_responses[var_1]._id_2566 = 1;
+  var_9.completed = 1;
+  level.zmb_zombie_killed_responses[var_1].completed = 1;
   level notify(var_1);
 }
 
@@ -553,11 +553,11 @@ wait_for_consecutive_waves_in_event(var_0, var_1, var_2, var_3) {
 
   var_5 = spawnStruct();
   var_5._id_005C = 0;
-  var_5._id_502A = var_1;
+  var_5.id = var_1;
   var_5.player_validation_func = var_2;
   var_5.name = var_3;
-  var_5._id_2566 = 0;
-  var_5._id_4800 = var_0;
+  var_5.completed = 0;
+  var_5.goal = var_0;
   var_4.event_attendance_array[var_1] = var_5;
 
   while(var_4.event_attendance_array[var_1]._id_005C < var_0) {
@@ -576,7 +576,7 @@ wait_for_consecutive_waves_in_event(var_0, var_1, var_2, var_3) {
     var_4.event_attendance_array[var_1]._id_005C++;
   }
 
-  var_4.event_attendance_array[var_1]._id_2566 = 1;
+  var_4.event_attendance_array[var_1].completed = 1;
   level notify(var_1);
 }
 

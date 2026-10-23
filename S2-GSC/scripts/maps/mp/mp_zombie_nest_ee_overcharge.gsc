@@ -34,7 +34,7 @@ main() {
 _id_6C9E() {
   foreach(var_1 in level.players) {
     var_1 _id_054C::_id_AC23("lefthandofgod");
-    var_1 _id_0378::_id_8D74("objective_complete", "lefthandofgod");
+    var_1 _id_0378::snd_message("objective_complete", "lefthandofgod");
   }
 }
 
@@ -84,7 +84,7 @@ _id_7862() {
 
       var_4[var_0._id_17A9] show();
       _playFXOnTag(level._effect["zmb_uberschnelle_charge"], var_4[var_0._id_17A9], "tag_origin");
-      _id_0378::_id_8D74("aud_uberschnelle_place_altar");
+      _id_0378::snd_message("aud_uberschnelle_place_altar");
       _id_86A4();
       common_scripts\utility::flag_set("quest_item_blimp_uberschnelle_" + var_0._id_17A9);
     }
@@ -92,7 +92,7 @@ _id_7862() {
 
   var_0 notify("stop_hide_show");
   waitframe();
-  var_0 common_scripts\utility::_id_9DA3();
+  var_0 common_scripts\utility::trigger_on();
   _id_0557::_id_782D("6A Left Hand blimp parts", "Blimp Battery Hunt");
   _id_0557::_id_782D("6B Left Hand overcharge", "examine left hand");
 }
@@ -102,7 +102,7 @@ _id_92B6(var_0) {
   var_0 endon("start zombie blocking behavior");
   var_0 endon("blimp part was deposited");
   level waittill("player grabbed uber battery");
-  var_1 = common_scripts\utility::_id_46B7("zombie_spawner", "script_noteworthy");
+  var_1 = common_scripts\utility::getstructarray("zombie_spawner", "script_noteworthy");
 
   foreach(var_3 in var_1) {
     if(isDefined(var_3.setgoalnode) && var_3.setgoalnode == "zombie_blimp_player_blocker") {
@@ -115,7 +115,7 @@ _id_179C() {
   self._id_686D = randomint(3) + 1;
 
   if(isDefined(self.target)) {
-    self._id_301B = common_scripts\utility::_id_46B5(self.target, "targetname");
+    self._id_301B = common_scripts\utility::getstruct(self.target, "targetname");
   }
 
   while(self._id_686D > 0) {
@@ -165,8 +165,8 @@ _id_7861() {
   }
 
   thread _id_2E73(var_3);
-  var_1 common_scripts\utility::_id_9D9F();
-  var_0 _id_0378::_id_8D74("aud_activate_left_hand_of_god");
+  var_1 common_scripts\utility::trigger_off();
+  var_0 _id_0378::snd_message("aud_activate_left_hand_of_god");
   thread maps\mp\mp_zombie_nest_ee_util::_id_4D78(2);
   _id_0557::_id_782D("6B Left Hand overcharge", "activate left hand");
 }
@@ -186,9 +186,9 @@ _id_8C24() {
     }
 
     if(var_1) {
-      common_scripts\utility::_id_9DA3();
+      common_scripts\utility::trigger_on();
     } else {
-      common_scripts\utility::_id_9D9F();
+      common_scripts\utility::trigger_off();
     }
 
     wait 0.5;
@@ -269,7 +269,7 @@ _id_A787(var_0) {
   level endon(var_0);
 
   for(;;) {
-    var_1 = common_scripts\utility::_id_4461(self.origin, level.players, 200);
+    var_1 = common_scripts\utility::getclosest(self.origin, level.players, 200);
 
     if(isDefined(var_1)) {
       break;
@@ -293,7 +293,7 @@ _id_86A7(var_0) {
   }
 
   _id_0557::_id_7822("6A Left Hand blimp parts", &"ZOMBIE_NEST_SHOOT_BLIMP_GUN");
-  level common_scripts\utility::_id_A70A("destroyed_blimp_gun", "blimp_ee_look_for_battery");
+  level common_scripts\utility::waittill_any("destroyed_blimp_gun", "blimp_ee_look_for_battery");
 
   if(0) {
     _id_0557::_id_7847("6A Left Hand blimp parts", var_1);
@@ -356,7 +356,7 @@ _id_20C7(var_0) {
   }
   var_0 thread _id_2EB0();
   var_0 thread _id_2E8D();
-  var_0 common_scripts\utility::_id_A70A("trigger", "soft_triggered", "bypassed");
+  var_0 common_scripts\utility::waittill_any("trigger", "soft_triggered", "bypassed");
   _id_0557::_id_7822("6B Left Hand overcharge", &"ZOMBIE_NEST_HINT_STEP_BATTERIES");
   var_0 setHintString(&"ZOMBIE_NEST_PLACE_UBER");
   var_0 notify("discovered");

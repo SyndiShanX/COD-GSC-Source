@@ -10,20 +10,20 @@ main() {
 }
 
 _id_7BBA() {
-  _id_0378::_id_8DC7("player_connect_map", ::_id_7248);
-  _id_0378::_id_8DC7("player_spawned", ::_id_7330);
-  _id_0378::_id_8DC7("wave_begin", ::_id_A979);
-  _id_0378::_id_8DC7("wave_end", ::_id_A97A);
-  _id_0378::_id_8DC7("enter_last_stand", ::_id_37B4);
-  _id_0378::_id_8DC7("revive", ::_id_7E51);
-  _id_0378::_id_8DC7("death", ::_id_2A83);
-  _id_0378::_id_8DC7("end_respawn", ::_id_36A1);
-  _id_0378::_id_8DC7("end_joined_spectators", ::_id_3689);
-  _id_0378::_id_8DC7("door_open", ::_id_326F);
-  _id_0378::_id_8DC7("door_close", ::_id_3257);
-  _id_0378::_id_8DC7("ee_complete", ::_id_3577);
-  _id_0378::_id_8DC7("ee_update", ::_id_3598);
-  _id_0378::_id_8DC7("ee_piano_use", ::_id_358B);
+  _id_0378::snd_register_message("player_connect_map", ::_id_7248);
+  _id_0378::snd_register_message("player_spawned", ::_id_7330);
+  _id_0378::snd_register_message("wave_begin", ::_id_A979);
+  _id_0378::snd_register_message("wave_end", ::_id_A97A);
+  _id_0378::snd_register_message("enter_last_stand", ::_id_37B4);
+  _id_0378::snd_register_message("revive", ::_id_7E51);
+  _id_0378::snd_register_message("death", ::death);
+  _id_0378::snd_register_message("end_respawn", ::_id_36A1);
+  _id_0378::snd_register_message("end_joined_spectators", ::_id_3689);
+  _id_0378::snd_register_message("door_open", ::door_open);
+  _id_0378::snd_register_message("door_close", ::_id_3257);
+  _id_0378::snd_register_message("ee_complete", ::_id_3577);
+  _id_0378::snd_register_message("ee_update", ::_id_3598);
+  _id_0378::snd_register_message("ee_piano_use", ::_id_358B);
 }
 
 _id_526E() {}
@@ -45,7 +45,7 @@ _id_37B4() {}
 
 _id_7E51() {}
 
-_id_2A83() {
+death() {
   var_0 = 5.0;
   _id_0366::_id_8E32(var_0);
 }
@@ -54,7 +54,7 @@ _id_36A1() {}
 
 _id_3689() {}
 
-_id_326F() {}
+door_open() {}
 
 _id_3257() {
   level._id_120E = _id_0380::_id_2889("training_house_door_close", undefined, self.origin);

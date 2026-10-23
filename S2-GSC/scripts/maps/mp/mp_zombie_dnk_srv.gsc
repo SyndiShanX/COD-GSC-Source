@@ -10,7 +10,7 @@ main() {
   _id_0483::main();
   maps\mp\mp_zombie_dnk_lighting::main();
   maps\mp\mp_zombie_dnk_aud::main();
-  _id_0472::_id_8A2F("compass_map_mp_zombie_dnk_srv");
+  _id_0472::setupminimap("compass_map_mp_zombie_dnk_srv");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   setDvar("1520", "-1 -1 -1 50");
@@ -99,7 +99,7 @@ dnk_srv_ee_wheel_listen() {
 
 dnk_srv_drop_fuse() {
   var_0 = _getEnt("srv_pap_fuse_spawn_loc", "targetname");
-  var_1 = common_scripts\utility::_id_46B5(var_0.target, "targetname");
+  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
   var_2 = _getEnt(var_1.target, "targetname");
 
   if(isDefined(var_1)) {

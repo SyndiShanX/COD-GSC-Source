@@ -4,25 +4,25 @@
 ************************************************************/
 
 main() {
-  _id_87A7();
+  setup_callbacks();
 }
 
-_id_87A7() {
+setup_callbacks() {
   level._id_0A41["squadmate"]["spawn"] = ::_id_90A6;
   level._id_0A41["squadmate"]["think"] = ::_id_0C6D;
   level._id_0A41["squadmate"]["onAIConnect"] = ::_id_6BAE;
   level._id_0A41["squadmate"]["on_damaged_finished"] = maps\mp\agents\_agents::_id_0A40;
-  level._id_0A41["squadmate"]["on_damaged"] = maps\mp\agents\_agents::_id_6A74;
-  level._id_0A41["squadmate"]["on_killed"] = maps\mp\agents\_agents::_id_6A75;
+  level._id_0A41["squadmate"]["on_damaged"] = maps\mp\agents\_agents::on_agent_player_damaged;
+  level._id_0A41["squadmate"]["on_killed"] = maps\mp\agents\_agents::on_agent_player_killed;
   level._id_0A41["minion"]["spawn"] = ::_id_9079;
   level._id_0A41["minion"]["think"] = ::_id_621A;
   level._id_0A41["minion"]["on_damaged_finished"] = maps\mp\agents\_agents::_id_0A40;
-  level._id_0A41["minion"]["on_damaged"] = maps\mp\agents\_agents::_id_6A74;
-  level._id_0A41["minion"]["on_killed"] = maps\mp\agents\_agents::_id_6A75;
+  level._id_0A41["minion"]["on_damaged"] = maps\mp\agents\_agents::on_agent_player_damaged;
+  level._id_0A41["minion"]["on_killed"] = maps\mp\agents\_agents::on_agent_player_killed;
   level._id_0A41["beach_ally"]["spawn"] = ::_id_9079;
   level._id_0A41["beach_ally"]["think"] = ::_id_621A;
   level._id_0A41["beach_ally"]["on_damaged_finished"] = maps\mp\agents\_agents::_id_0A40;
-  level._id_0A41["beach_ally"]["on_damaged"] = maps\mp\agents\_agents::_id_6A74;
+  level._id_0A41["beach_ally"]["on_damaged"] = maps\mp\agents\_agents::on_agent_player_damaged;
   level._id_0A41["beach_ally"]["on_killed"] = ::_id_6A79;
   level._id_0A41["player"]["think"] = ::agent_player_raid_think;
   level._id_17C8 = ::_id_17C8;
@@ -37,16 +37,16 @@ _id_9079(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     [[maps\mp\agents\_agent_utility::_id_0A59("onAIConnect")]]();
   }
 
-  maps\mp\agents\_agents::_id_8F70(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
+  maps\mp\agents\_agents::spawn_agent_player(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
   maps\mp\agents\_agent_utility::hudoutlineenable(self.team);
   self._id_0009 = &"RAIDS_SQUADMATE";
   self setagentcostumeindex(1, self.team);
-  self._id_2F05 = "veteran";
+  self.difficulty = "veteran";
   _id_8727();
-  _id_04C2::_id_2F72(self);
-  self._id_6734 = 1;
-  self._id_672C = 1;
-  thread _id_6BA4();
+  _id_04C2::disablebattlechatter(self);
+  self.nopickups = 1;
+  self.nonkillstreakagent = 1;
+  thread onspawnfinished();
 }
 
 _id_621A() {}
@@ -56,33 +56,33 @@ _id_90A6(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     [[maps\mp\agents\_agent_utility::_id_0A59("onAIConnect")]]();
   }
 
-  maps\mp\agents\_agents::_id_8F70(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
+  maps\mp\agents\_agents::spawn_agent_player(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
   maps\mp\agents\_agent_utility::hudoutlineenable(self.team);
   self._id_0009 = &"RAIDS_SQUADMATE";
   self setagentcostumeindex(1, self.team);
-  self._id_2F05 = "veteran";
+  self.difficulty = "veteran";
   _id_8727();
-  _id_04C2::_id_2F72(self);
-  self._id_6734 = 1;
-  self._id_672C = 1;
-  thread _id_6BA4();
+  _id_04C2::disablebattlechatter(self);
+  self.nopickups = 1;
+  self.nonkillstreakagent = 1;
+  thread onspawnfinished();
 }
 
 _id_6BAE() {}
 
 _id_8727() {
-  maps\mp\bots\_bots_util::_id_1AD5("run_and_gun");
+  maps\mp\bots\_bots_util::bot_set_personality("run_and_gun");
 
-  if(isDefined(self._id_2F05)) {
-    maps\mp\bots\_bots_util::bot_set_difficulty(self._id_2F05);
+  if(isDefined(self.difficulty)) {
+    maps\mp\bots\_bots_util::bot_set_difficulty(self.difficulty);
   } else {
     maps\mp\bots\_bots_util::bot_set_difficulty("regular");
   }
 
-  self._id_2F05 = self botgetdifficulty();
+  self.difficulty = self botgetdifficulty();
 }
 
-_id_6BA4(var_0) {
+onspawnfinished(var_0) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
@@ -109,27 +109,27 @@ _id_0C6D() {
       var_2 = _getnodesinradiussorted(self._id_0117.origin, 256, 0);
 
       if(var_2.size >= 2) {
-        self._id_2C85 = var_2[1];
+        self.defense_force_next_node_goal = var_2[1];
         self notify("defend_force_node_recalculation");
         var_1 = gettime() + 1000;
       }
     } else if(_float(self.health) / self.maxhealth >= 0.6)
       var_0 = 0;
     else if(!var_0) {
-      var_3 = maps\mp\bots\_bots_util::_id_19CE(self._id_0117.origin, 350, 1);
+      var_3 = maps\mp\bots\_bots_util::bot_find_node_to_guard_player(self._id_0117.origin, 350, 1);
 
       if(isDefined(var_3)) {
-        self._id_2C85 = var_3;
+        self.defense_force_next_node_goal = var_3;
         self notify("defend_force_node_recalculation");
         var_0 = 1;
       }
     }
 
-    if(!maps\mp\bots\_bots_util::_id_1A30(self._id_0117)) {
+    if(!maps\mp\bots\_bots_util::bot_is_guarding_player(self._id_0117)) {
       var_4["override_goal_type"] = "critical";
       var_4["min_goal_time"] = 20;
       var_4["max_goal_time"] = 30;
-      maps\mp\bots\_bots_strategy::_id_1A0C(self._id_0117, 350, var_4);
+      maps\mp\bots\_bots_strategy::bot_guard_player(self._id_0117, 350, var_4);
     }
 
     waitframe();
@@ -156,7 +156,7 @@ _id_0A5F() {
   self endon("death");
   _id_0A5E();
   thread _id_0A60();
-  maps\mp\bots\_bots_strategy::_id_1A8D(self.origin, 512, []);
+  maps\mp\bots\_bots_strategy::bot_patrol_area(self.origin, 512, []);
   wait 15;
   self dodamage(self.health + 100, self.origin);
 }
@@ -200,19 +200,19 @@ _id_0A60() {
 
 _id_6A79(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self[[level._id_0A5D]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 0);
-  level thread maps\mp\gametypes\_rank::_id_1457("raids_npc_kill", var_1, var_4, self, var_3);
+  level thread maps\mp\gametypes\_rank::awardgameevent("raids_npc_kill", var_1, var_4, self, var_3);
 
-  if(isDefined(level._id_6A75)) {
-    [[level._id_6A75]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+  if(isDefined(level.on_agent_player_killed)) {
+    [[level.on_agent_player_killed]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
   }
 
-  if(self._id_565F) {
-    self._id_4B60 = 1;
+  if(self.isactive) {
+    self.hasdied = 1;
 
-    if(maps\mp\_utility::getgametypenumlives() != 1 && (isDefined(self._id_7DAD) && self._id_7DAD)) {
+    if(maps\mp\_utility::getgametypenumlives() != 1 && (isDefined(self.respawn_on_death) && self.respawn_on_death)) {
       self thread[[maps\mp\agents\_agent_utility::_id_0A59("spawn")]]();
     } else {
-      maps\mp\agents\_agent_utility::_id_2A73();
+      maps\mp\agents\_agent_utility::deactivateagent();
     }
   }
 }

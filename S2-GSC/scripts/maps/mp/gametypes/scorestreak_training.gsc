@@ -12,9 +12,9 @@ main() {
   _id_04D4::setupcallbacks();
 
   if(_isusingmatchrulesdata()) {
-    level._id_5300 = ::_id_5300;
-    [[level._id_5300]]();
-    level thread maps\mp\_utility::_id_7C13();
+    level.initializematchrules = ::initializematchrules;
+    [[level.initializematchrules]]();
+    level thread maps\mp\_utility::reinitializematchrulesonmigration();
   } else {
     maps\mp\_utility::registerroundswitchdvar(level.gametype, 0, 0, 9);
     maps\mp\_utility::registertimelimitdvar(level.gametype, 0);
@@ -24,8 +24,8 @@ main() {
     maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
     maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
     _setdynamicdvar("scr_game_allowkillcam", 0);
-    level._id_6031 = 0;
-    level._id_6035 = 0;
+    level.matchrules_damagemultiplier = 0;
+    level.matchrules_vampirism = 0;
   }
 
   setDvar("scr_scorestreak_training_timelimit", 0);
@@ -48,23 +48,23 @@ main() {
   setDvar("scr_team_fftype", 0);
   setDvar("scr_game_onlyheadshots", 0);
   setDvar("2043", 0);
-  level._id_4867 = 0;
-  _id_872E();
+  level.grenadegraceperiod = 0;
+  setspecialloadouts();
   maps\mp\_utility::_id_873B(1);
   _setnojiptime(1);
-  _func_246(1);
+  setnojipscore(1);
   level.disableforfeit = 1;
-  level._id_1B3E = 1;
-  level._id_4696 = ::_id_4696;
-  level._id_6BA7 = ::_id_6B81;
-  level._id_6BAF = ::_id_6BAF;
-  level._id_6B5C = ::_id_6B5C;
+  level.bots_gametype_handles_team_choice = 1;
+  level.getspawnpoint = ::getspawnpoint;
+  level.onspawnplayer = ::_id_6B81;
+  level.onstartgametype = ::onstartgametype;
+  level.onnormaldeath = ::onnormaldeath;
   level._id_6B7F = ::_id_6B7F;
   level._id_1DEA = ::clearalltextafterhudelem;
   game["switchedsides"] = 0;
 
-  if(level._id_6031 || level._id_6035) {
-    level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
+    level.modifyplayerdamage = maps\mp\gametypes\_damage::gamemodemodifyplayerdamage;
   }
 
   game["dialog"]["gametype"] = "streak_intro";
@@ -89,8 +89,8 @@ apply_score_training_mix() {
   }
 }
 
-_id_5300() {
-  maps\mp\_utility::_id_8653(1);
+initializematchrules() {
+  maps\mp\_utility::setcommonrulesfrommatchrulesdata(1);
   _setdynamicdvar("scr_scorestreak_training_roundswitch", 0);
   maps\mp\_utility::registerroundswitchdvar("scorestreak_training", 0, 0, 9);
   _setdynamicdvar("scr_scorestreak_training_roundlimit", 0);
@@ -103,7 +103,7 @@ _id_5300() {
   maps\mp\_utility::registertimelimitdvar("scorestreak_training", 0);
 }
 
-_id_6BAF() {
+onstartgametype() {
   _setclientnamemode("auto_change");
   maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_SCORESTREAK_TRAINING");
   maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_SCORESTREAK_TRAINING");
@@ -122,11 +122,11 @@ _id_6BAF() {
   var_0[0] = "scorestreak_training";
   _id_04D1::main(var_0);
   level thread onplayerconnect();
-  level._id_7691 = 0;
-  level._id_7692 = 0;
-  level._id_5A70 = 0;
-  level._id_17EF = 1;
-  level._id_7895 = 1;
+  level.prematchperiod = 0;
+  level.prematchperiodend = 0;
+  level.killstreakrounddelay = 0;
+  level.blockweapondrops = 1;
+  level.quickmessagetoall = 1;
 }
 
 onplayerconnect() {
@@ -139,7 +139,7 @@ onplayerconnect() {
   }
 }
 
-_id_6B5C(var_0, var_1, var_2) {
+onnormaldeath(var_0, var_1, var_2) {
   self setclientomnvar("ui_show_scorestreak_training_hud", 0);
   var_3 = 0;
 
@@ -150,7 +150,7 @@ _id_6B5C(var_0, var_1, var_2) {
   }
 
   if(game["state"] == "postgame" && var_1.score >= var_3) {
-    var_1._id_3B4B = 1;
+    var_1.finalkill = 1;
   }
 }
 
@@ -205,7 +205,7 @@ _id_57BA(var_0, var_1) {
       if(isDefined(var_1) && var_1) {
         maps\mp\gametypes\_missions::processchallenge("ch_scorestreaktraining_flakMaster");
         self.pers["scorestreaksDowned"]++;
-        maps\mp\_utility::_id_867C(self.pers["scorestreaksDowned"]);
+        maps\mp\_utility::setextrascore1(self.pers["scorestreaksDowned"]);
       }
 
       return 1;
@@ -214,8 +214,8 @@ _id_57BA(var_0, var_1) {
   }
 }
 
-_id_872E() {
-  level.makeunusable = maps\mp\gametypes\_class::_id_44B4();
+setspecialloadouts() {
+  level.makeunusable = maps\mp\gametypes\_class::getemptyloadout();
   level.makeunusable["loadoutDivision"] = 1;
   level.makeunusable["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::_id_473C(16859136, 0);
   level.makeunusable["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::_id_473C(17002496, 0);
@@ -224,11 +224,11 @@ _id_872E() {
     level.makeunusable["loadoutPerksGUID"][var_0] = 0;
   }
 
-  level._id_80B1 = maps\mp\gametypes\_class::_id_44B4();
+  level._id_80B1 = maps\mp\gametypes\_class::getemptyloadout();
   level._id_80B1["loadoutDivision"] = 1;
   level._id_80B1["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::_id_473C(16875520, 0);
   level._id_80B1["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::_id_473C(16859136, 0);
-  level.makeusable = maps\mp\gametypes\_class::_id_44B4();
+  level.makeusable = maps\mp\gametypes\_class::getemptyloadout();
   level.makeusable["loadoutDivision"] = 0;
   level.makeusable["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::_id_473C(16879616, 0);
   level.makeusable["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::_id_473C(16957440, 0);
@@ -243,7 +243,7 @@ _id_6B81() {
   }
 
   if(isPlayer(self) && !isbot(self) && !_isagent(self)) {
-    if(self _meth_85C0()) {
+    if(self set_up_auto_non_ai_turret()) {
       self _meth_85BF(0);
     }
 
@@ -269,7 +269,7 @@ clearalltextafterhudelem() {
 
   self.class = self.pers["class"];
   self.lastclass = self.pers["lastClass"];
-  maps\mp\gametypes\_class::_id_4790(self.team, self.class);
+  maps\mp\gametypes\_class::giveloadout(self.team, self.class);
 
   if(var_0) {
     thread _id_47A9();
@@ -288,8 +288,8 @@ _id_7D57() {
 }
 
 _id_7D56(var_0) {
-  maps\mp\gametypes\_hud_util::_id_209F(var_0, 1);
-  maps\mp\gametypes\_hud_util::_id_209E(var_0, 0);
+  maps\mp\gametypes\_hud_util::ch_setstate(var_0, 1);
+  maps\mp\gametypes\_hud_util::ch_setprogress(var_0, 0);
 }
 
 _id_47A9() {
@@ -347,12 +347,12 @@ _id_A93E() {
       continue;
     }
     self notify("cancel_stowed_ammo");
-    maps\mp\_utility::_id_940B(0);
-    thread _id_051E::_id_2400();
+    maps\mp\_utility::stoplocationselection(0);
+    thread _id_051E::clearkillstreaks();
     self setclientomnvar("ks_icon0", 0);
     var_2 = maps\mp\_utility::_id_4544(var_1);
-    thread maps\mp\gametypes\_hud_message::killstreaksplashnotify(var_2, _id_051E::_id_46B4(var_2), undefined, 0);
-    thread _id_051E::_id_478D(var_2, 0, 0, self);
+    thread maps\mp\gametypes\_hud_message::killstreaksplashnotify(var_2, _id_051E::getstreakcost(var_2), undefined, 0);
+    thread _id_051E::givekillstreak(var_2, 0, 0, self);
     _id_0468::_id_0A2A("streakTraining");
   }
 }
@@ -361,7 +361,7 @@ _id_244D() {
   self setclientomnvar("ui_show_scorestreak_training_hud", 0);
 }
 
-_id_4696(var_0) {
+getspawnpoint(var_0) {
   var_1 = self;
 
   if(!isDefined(var_1)) {

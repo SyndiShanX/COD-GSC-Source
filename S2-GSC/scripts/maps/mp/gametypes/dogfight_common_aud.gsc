@@ -5,37 +5,37 @@
 
 init_dogfight_audio() {
   _id_02F0::_id_7FE7();
-  _id_51D8();
+  init_globals();
   _id_02F2::_id_524C();
-  _id_5C22();
-  _id_7BD2();
+  launch_threads();
+  register_snd_messages();
   _id_02F0::_id_8014("sndentity");
 }
 
 init_plane_data() {
-  self._id_11CB = spawnStruct();
-  self._id_11CB._id_0CAC = 0;
-  self._id_11CB._id_0863 = 0;
-  self._id_11CB.p47_throttle_pitch = 1.0;
-  self._id_11CB.p47_throttle_on = 0;
-  self._id_11CB.p47_brake_on = 0;
-  self._id_11CB.acceleration_vol_boost = 0;
+  self.aud = spawnStruct();
+  self.aud._id_0CAC = 0;
+  self.aud._id_0863 = 0;
+  self.aud.p47_throttle_pitch = 1.0;
+  self.aud.p47_throttle_on = 0;
+  self.aud.p47_brake_on = 0;
+  self.aud.acceleration_vol_boost = 0;
 }
 
-_id_51D8() {
+init_globals() {
   level._id_9B88 = 0;
 }
 
-_id_5C22() {
+launch_threads() {
   level thread init_dogfight_submix();
 }
 
-_id_7BD2() {
-  _id_0378::_id_8DC7("aud_figher_spawn", ::fighter_spawn);
-  _id_0378::_id_8DC7("p47_turret_plr", ::_id_6DD0);
-  _id_0378::_id_8DC7("aud_fighter_start_death", ::fighter_start_death);
-  _id_0378::_id_8DC7("aud_fighter_final_explosion", ::fighter_final_explosion);
-  _id_0378::_id_8DC7("aud_fighter_damage_state_change", ::fighter_damage_state_change);
+register_snd_messages() {
+  _id_0378::snd_register_message("aud_figher_spawn", ::fighter_spawn);
+  _id_0378::snd_register_message("p47_turret_plr", ::_id_6DD0);
+  _id_0378::snd_register_message("aud_fighter_start_death", ::fighter_start_death);
+  _id_0378::snd_register_message("aud_fighter_final_explosion", ::fighter_final_explosion);
+  _id_0378::snd_register_message("aud_fighter_damage_state_change", ::fighter_damage_state_change);
 }
 
 init_dogfight_submix() {
@@ -45,15 +45,15 @@ init_dogfight_submix() {
 fighter_spawn() {
   var_0 = self getvehicleowner();
   var_0 _id_02F2::_id_8A9D("mp_dogfight");
-  self._id_11CB = spawnStruct();
-  self._id_11CB._id_0CAC = 0;
-  self._id_11CB._id_0863 = 0;
-  self._id_11CB.p47_throttle_pitch = 1.0;
-  self._id_11CB.p47_throttle_on = 0;
-  self._id_11CB.p47_brake_on = 0;
-  self._id_11CB.acceleration_vol_boost = 0;
-  self._id_11CB.hard_bank = 0;
-  self._id_11CB.pitching = 0;
+  self.aud = spawnStruct();
+  self.aud._id_0CAC = 0;
+  self.aud._id_0863 = 0;
+  self.aud.p47_throttle_pitch = 1.0;
+  self.aud.p47_throttle_on = 0;
+  self.aud.p47_brake_on = 0;
+  self.aud.acceleration_vol_boost = 0;
+  self.aud.hard_bank = 0;
+  self.aud.pitching = 0;
   common_scripts\utility::flag_init("damage_state_1");
   common_scripts\utility::flag_init("damage_state_2");
   thread _id_6DBE();
@@ -82,7 +82,7 @@ _id_6DBE() {
   var_4 = _id_0380::_id_6847("blg_wind_lp", var_0, self, 1, 1, 0.5, self, "stop_p47_sounds");
   thread main_engine_loop(var_1);
   thread _id_1585(var_2, var_3);
-  thread _id_AA25(var_4);
+  thread wind(var_4);
   var_0 thread raid_flyby_watcher(var_0.team);
   thread dogfight_close_loop(var_0, var_0.team);
   thread p47_watch_game_end(var_0, self);
@@ -98,95 +98,95 @@ main_engine_loop(var_0) {
   self endon("death");
   var_2 = ["blg_p47_accelerate_start1", "blg_p47_accelerate_start2", "blg_p47_accelerate_start3"];
   var_3 = ["blg_p47_brake1", "blg_p47_brake2", "blg_p47_brake3"];
-  self._id_11CB.engine_pitch_multiplier = 1;
-  self._id_11CB.engine_vol_multiplier = 0.5;
+  self.aud.engine_pitch_multiplier = 1;
+  self.aud.engine_vol_multiplier = 0.5;
   var_4 = 0.5;
   var_5 = 0;
 
   while(isDefined(self) == 1) {
     var_6 = var_1 getnormalizedmovementx();
 
-    if(var_6 <= -0.5 && self._id_11CB.pitching == 0) {
-      if(self._id_11CB.p47_brake_on == 0) {
-        self._id_11CB.p47_brake_on = 1;
+    if(var_6 <= -0.5 && self.aud.pitching == 0) {
+      if(self.aud.p47_brake_on == 0) {
+        self.aud.p47_brake_on = 1;
         self notify("stop_accelerate_sound");
         var_7 = _id_02EF::_id_42DD(var_3, "brake_aliases", 3);
         var_8 = _id_0380::_id_6844(var_7, var_1, self, 0, 1);
       }
 
-      self._id_11CB.engine_pitch_multiplier = self._id_11CB.engine_pitch_multiplier * 0.99;
+      self.aud.engine_pitch_multiplier = self.aud.engine_pitch_multiplier * 0.99;
 
-      if(self._id_11CB.engine_pitch_multiplier < 0.8) {
-        self._id_11CB.engine_pitch_multiplier = 0.85;
+      if(self.aud.engine_pitch_multiplier < 0.8) {
+        self.aud.engine_pitch_multiplier = 0.85;
       }
 
-      self._id_11CB.engine_vol_multiplier = self._id_11CB.engine_vol_multiplier * 1.1;
+      self.aud.engine_vol_multiplier = self.aud.engine_vol_multiplier * 1.1;
 
-      if(self._id_11CB.engine_vol_multiplier > 1) {
-        self._id_11CB.engine_vol_multiplier = 1;
+      if(self.aud.engine_vol_multiplier > 1) {
+        self.aud.engine_vol_multiplier = 1;
       }
-    } else if(var_6 < 0.5 && var_6 >= 0 && self._id_11CB.pitching == 0) {
-      if(self._id_11CB.p47_throttle_on == 1 || self._id_11CB.p47_brake_on == 1) {
-        self._id_11CB.p47_throttle_on = 0;
-        self._id_11CB.p47_brake_on = 0;
-      }
-
-      if(self._id_11CB.engine_pitch_multiplier > 1) {
-        self._id_11CB.engine_pitch_multiplier = self._id_11CB.engine_pitch_multiplier * 0.99;
-      } else if(self._id_11CB.engine_pitch_multiplier < 1) {
-        self._id_11CB.engine_pitch_multiplier = self._id_11CB.engine_pitch_multiplier * 1.01;
+    } else if(var_6 < 0.5 && var_6 >= 0 && self.aud.pitching == 0) {
+      if(self.aud.p47_throttle_on == 1 || self.aud.p47_brake_on == 1) {
+        self.aud.p47_throttle_on = 0;
+        self.aud.p47_brake_on = 0;
       }
 
-      if(self._id_11CB.engine_vol_multiplier > var_4) {
-        self._id_11CB.engine_vol_multiplier = self._id_11CB.engine_vol_multiplier * 0.99;
-      } else if(self._id_11CB.engine_vol_multiplier < var_4) {
-        self._id_11CB.engine_vol_multiplier = self._id_11CB.engine_vol_multiplier * 1.01;
+      if(self.aud.engine_pitch_multiplier > 1) {
+        self.aud.engine_pitch_multiplier = self.aud.engine_pitch_multiplier * 0.99;
+      } else if(self.aud.engine_pitch_multiplier < 1) {
+        self.aud.engine_pitch_multiplier = self.aud.engine_pitch_multiplier * 1.01;
       }
-    } else if(var_6 >= 0.5 || self._id_11CB.pitching == 1) {
-      if(self._id_11CB.p47_throttle_on == 0) {
-        self._id_11CB.p47_throttle_on = 1;
+
+      if(self.aud.engine_vol_multiplier > var_4) {
+        self.aud.engine_vol_multiplier = self.aud.engine_vol_multiplier * 0.99;
+      } else if(self.aud.engine_vol_multiplier < var_4) {
+        self.aud.engine_vol_multiplier = self.aud.engine_vol_multiplier * 1.01;
+      }
+    } else if(var_6 >= 0.5 || self.aud.pitching == 1) {
+      if(self.aud.p47_throttle_on == 0) {
+        self.aud.p47_throttle_on = 1;
         var_9 = _id_02EF::_id_42DD(var_2, "accelerate_start_aliases", 4);
         var_10 = _id_0380::_id_6844(var_9, var_1, self, 0, 1);
       }
 
-      self._id_11CB.engine_pitch_multiplier = self._id_11CB.engine_pitch_multiplier * 1.01;
+      self.aud.engine_pitch_multiplier = self.aud.engine_pitch_multiplier * 1.01;
 
-      if(self._id_11CB.engine_pitch_multiplier > 1.4) {
-        self._id_11CB.engine_pitch_multiplier = self._id_11CB.engine_pitch_multiplier * 0.998;
+      if(self.aud.engine_pitch_multiplier > 1.4) {
+        self.aud.engine_pitch_multiplier = self.aud.engine_pitch_multiplier * 0.998;
       }
 
-      if(self._id_11CB.engine_pitch_multiplier > 1.6) {
-        self._id_11CB.engine_pitch_multiplier = 1.6;
+      if(self.aud.engine_pitch_multiplier > 1.6) {
+        self.aud.engine_pitch_multiplier = 1.6;
       }
 
-      self._id_11CB.engine_vol_multiplier = self._id_11CB.engine_vol_multiplier * 1.1;
+      self.aud.engine_vol_multiplier = self.aud.engine_vol_multiplier * 1.1;
 
-      if(self._id_11CB.engine_vol_multiplier > 1) {
-        self._id_11CB.engine_vol_multiplier = 1;
-      }
-    }
-
-    _id_0380::_id_684D(var_0, self._id_11CB.engine_pitch_multiplier, 0.05);
-
-    if(isDefined(self._id_11CB.duck_engine_for_turn) && self._id_11CB.duck_engine_for_turn == 1) {
-      self._id_11CB.engine_vol_multiplier = self._id_11CB.engine_vol_multiplier * 0.98;
-
-      if(self._id_11CB.engine_vol_multiplier < 0.1) {
-        self._id_11CB.engine_vol_multiplier = 0.1;
+      if(self.aud.engine_vol_multiplier > 1) {
+        self.aud.engine_vol_multiplier = 1;
       }
     }
 
-    if(isDefined(self._id_11CB.duck_engine_for_turn) && self._id_11CB.duck_engine_for_turn == 0) {
-      if(self._id_11CB.engine_vol_multiplier < var_4) {
-        self._id_11CB.engine_vol_multiplier = self._id_11CB.engine_vol_multiplier + 0.1;
+    _id_0380::_id_684D(var_0, self.aud.engine_pitch_multiplier, 0.05);
+
+    if(isDefined(self.aud.duck_engine_for_turn) && self.aud.duck_engine_for_turn == 1) {
+      self.aud.engine_vol_multiplier = self.aud.engine_vol_multiplier * 0.98;
+
+      if(self.aud.engine_vol_multiplier < 0.1) {
+        self.aud.engine_vol_multiplier = 0.1;
       }
     }
 
-    if(self._id_11CB.engine_vol_multiplier > 1) {
-      self._id_11CB.engine_vol_multiplier = 1;
+    if(isDefined(self.aud.duck_engine_for_turn) && self.aud.duck_engine_for_turn == 0) {
+      if(self.aud.engine_vol_multiplier < var_4) {
+        self.aud.engine_vol_multiplier = self.aud.engine_vol_multiplier + 0.1;
+      }
     }
 
-    _id_0380::_id_684E(var_0, self._id_11CB.engine_vol_multiplier, 0.05);
+    if(self.aud.engine_vol_multiplier > 1) {
+      self.aud.engine_vol_multiplier = 1;
+    }
+
+    _id_0380::_id_684E(var_0, self.aud.engine_vol_multiplier, 0.05);
     waitframe();
   }
 }
@@ -246,20 +246,20 @@ _id_1585(var_0, var_1) {
         var_4 = 1;
         var_18 = 0;
 
-        if(isDefined(self._id_11CB._id_05C4)) {
-          _id_0380::_id_6850(self._id_11CB._id_05C4, 1.0);
+        if(isDefined(self.aud._id_05C4)) {
+          _id_0380::_id_6850(self.aud._id_05C4, 1.0);
         }
 
-        self._id_11CB._id_05C4 = _id_0380::_id_6844("blg_p47_banking", var_2, self);
+        self.aud._id_05C4 = _id_0380::_id_6844("blg_p47_banking", var_2, self);
       } else if(var_4 == 0) {
         var_4 = 1;
         var_18 = 0;
 
-        if(isDefined(self._id_11CB._id_05C4)) {
-          _id_0380::_id_6850(self._id_11CB._id_05C4, 1.0);
+        if(isDefined(self.aud._id_05C4)) {
+          _id_0380::_id_6850(self.aud._id_05C4, 1.0);
         }
 
-        self._id_11CB._id_05C4 = _id_0380::_id_6844("blg_p47_banking", var_2, self);
+        self.aud._id_05C4 = _id_0380::_id_6844("blg_p47_banking", var_2, self);
       }
 
       if(var_25 < 1) {
@@ -284,7 +284,7 @@ _id_1585(var_0, var_1) {
       var_22 = var_22 + 1;
 
       if(var_22 > 55) {
-        self._id_11CB.duck_engine_for_turn = 1;
+        self.aud.duck_engine_for_turn = 1;
         var_15 = 1;
 
         if(var_23 < 1) {
@@ -297,7 +297,7 @@ _id_1585(var_0, var_1) {
       }
     } else {
       var_22 = 0;
-      self._id_11CB.duck_engine_for_turn = 0;
+      self.aud.duck_engine_for_turn = 0;
 
       if(var_23 > 0) {
         var_23 = var_23 - 0.1;
@@ -316,8 +316,8 @@ _id_1585(var_0, var_1) {
     if(var_14 > 1) {
       var_12 = var_12 + 1;
 
-      if(var_12 > 3 && self._id_11CB.pitching == 0) {
-        self._id_11CB.pitching = 1;
+      if(var_12 > 3 && self.aud.pitching == 0) {
+        self.aud.pitching = 1;
         var_13 = 0;
 
         if(var_4 == 0) {
@@ -327,23 +327,23 @@ _id_1585(var_0, var_1) {
     } else {
       var_13 = var_13 + 1;
 
-      if(var_13 > 3 && self._id_11CB.pitching == 1) {
+      if(var_13 > 3 && self.aud.pitching == 1) {
         var_12 = 0;
-        self._id_11CB.pitching = 0;
+        self.aud.pitching = 0;
       }
     }
 
     if(var_27 > var_8 && var_29 <= -0.9) {
-      self._id_11CB.hard_bank = 1;
+      self.aud.hard_bank = 1;
     } else {
-      self._id_11CB.hard_bank = 0;
+      self.aud.hard_bank = 0;
     }
 
-    if(isDefined(self._id_11CB._id_05C4)) {
+    if(isDefined(self.aud._id_05C4)) {
       var_33 = _id_02EF::startignoringspotlight(var_30, 0, 1, 0.05, 1);
-      _id_0380::_id_684E(self._id_11CB._id_05C4, var_33, 0.05);
-      var_34 = _id_02EF::startignoringspotlight(self._id_11CB.engine_pitch_multiplier, 0.8, 1.6, 0.9, 1.3);
-      _id_0380::_id_684D(self._id_11CB._id_05C4, var_34, 0.05);
+      _id_0380::_id_684E(self.aud._id_05C4, var_33, 0.05);
+      var_34 = _id_02EF::startignoringspotlight(self.aud.engine_pitch_multiplier, 0.8, 1.6, 0.9, 1.3);
+      _id_0380::_id_684D(self.aud._id_05C4, var_34, 0.05);
     }
 
     if(var_23 > 1) {
@@ -368,12 +368,12 @@ _id_1585(var_0, var_1) {
   }
 }
 
-_id_AA25(var_0) {
+wind(var_0) {
   waitframe();
   var_1 = 0.3;
 
   while(isDefined(self) == 1) {
-    if(self._id_11CB.p47_throttle_on == 1 || self._id_11CB.hard_bank == 1) {
+    if(self.aud.p47_throttle_on == 1 || self.aud.hard_bank == 1) {
       var_1 = var_1 + 0.02;
     } else if(var_1 > 0.3) {
       var_1 = var_1 - 0.02;
@@ -445,7 +445,7 @@ raid_flyby_watcher(var_0) {
 
       if(!isDefined(self.plane_data[var_21])) {
         self.plane_data[var_21] = spawnStruct();
-        self.plane_data[var_21]._id_3018 = 20001;
+        self.plane_data[var_21].dist = 20001;
         self.plane_data[var_21].distantloopstarted = 0;
         self.plane_data[var_21].closeloopstarted = 0;
         self.plane_data[var_21].closeoneshotstarted = 0;
@@ -456,11 +456,11 @@ raid_flyby_watcher(var_0) {
         self.plane_data[var_21].fartimer = 200;
       }
 
-      self.plane_data[var_21].lastdistance = self.plane_data[var_21]._id_3018;
-      self.plane_data[var_21]._id_3018 = distance(self.origin, var_20.origin);
-      self.plane_data[var_21].approachspeed = self.plane_data[var_21].lastdistance - self.plane_data[var_21]._id_3018;
+      self.plane_data[var_21].lastdistance = self.plane_data[var_21].dist;
+      self.plane_data[var_21].dist = distance(self.origin, var_20.origin);
+      self.plane_data[var_21].approachspeed = self.plane_data[var_21].lastdistance - self.plane_data[var_21].dist;
 
-      if(self.plane_data[var_21]._id_3018 < var_7) {
+      if(self.plane_data[var_21].dist < var_7) {
         if(self.plane_data[var_21].approachspeed > var_8 && self.plane_data[var_21].closeoneshotstarted == 0 && self.plane_data[var_21].closetimer >= var_10) {
           self.plane_data[var_21].closeoneshotstarted = 1;
           self.plane_data[var_21].closetimer = 0;
@@ -482,7 +482,7 @@ raid_flyby_watcher(var_0) {
         self.plane_data[var_21].closetimer = self.plane_data[var_21].closetimer + 1;
       }
 
-      if(self.plane_data[var_21]._id_3018 < var_4 && self.plane_data[var_21].closeoneshotstarted == 0) {
+      if(self.plane_data[var_21].dist < var_4 && self.plane_data[var_21].closeoneshotstarted == 0) {
         if(self.plane_data[var_21].approachspeed > var_5 && self.plane_data[var_21].midoneshotstarted == 0 && self.plane_data[var_21].midtimer >= var_6) {
           self.plane_data[var_21].midoneshotstarted = 1;
           self.plane_data[var_21].midtimer = 0;
@@ -498,7 +498,7 @@ raid_flyby_watcher(var_0) {
         self.plane_data[var_21].midtimer = self.plane_data[var_21].midtimer + 1;
       }
 
-      if(self.plane_data[var_21]._id_3018 < var_1 && self.plane_data[var_21].closeoneshotstarted == 0 && self.plane_data[var_21].midoneshotstarted == 0) {
+      if(self.plane_data[var_21].dist < var_1 && self.plane_data[var_21].closeoneshotstarted == 0 && self.plane_data[var_21].midoneshotstarted == 0) {
         if(self.plane_data[var_21].approachspeed > 120 && self.plane_data[var_21].faroneshotstarted == 0 && self.plane_data[var_21].fartimer >= var_3) {
           self.plane_data[var_21].faroneshotstarted = 1;
           self.plane_data[var_21].fartimer = 0;
@@ -540,7 +540,7 @@ dogfight_close_loop(var_0, var_1) {
 }
 
 close_loop_death_watcher(var_0) {
-  common_scripts\utility::_id_A70A("death", "stop_p47_sounds", "stop_damage_engine_loop");
+  common_scripts\utility::waittill_any("death", "stop_p47_sounds", "stop_damage_engine_loop");
   _id_0380::_id_6850(var_0, 0.5);
   var_0 = undefined;
 }
@@ -561,24 +561,24 @@ fighter_damage_state_change(var_0) {
   var_1 = self getvehicleowner();
 
   if(var_0 == 0) {
-    common_scripts\utility::_id_3C7B("damage_state_1");
+    common_scripts\utility::flag_clear("damage_state_1");
     self notify("stop_damage_engine_loop");
   }
 
   if(var_0 == 1) {
-    if(!common_scripts\utility::_id_3C77("damage_state_1")) {
+    if(!common_scripts\utility::flag("damage_state_1")) {
       common_scripts\utility::flag_set("damage_state_1");
       _id_02F2::setturretdismountorg("husky_player_damage_oneshot");
-      self._id_11CB.engine_damage_loop = _id_02F2::playershow("blg_p47_engine_damage_plr_lp", "stop_damage_engine_loop", 0, 0);
+      self.aud.engine_damage_loop = _id_02F2::playershow("blg_p47_engine_damage_plr_lp", "stop_damage_engine_loop", 0, 0);
     }
 
-    if(common_scripts\utility::_id_3C77("damage_state_2")) {
-      common_scripts\utility::_id_3C7B("damage_state_2");
+    if(common_scripts\utility::flag("damage_state_2")) {
+      common_scripts\utility::flag_clear("damage_state_2");
       self notify("stop_damage_alarm_loop");
     }
   }
 
-  if(var_0 == 2 && !common_scripts\utility::_id_3C77("damage_state_2")) {
+  if(var_0 == 2 && !common_scripts\utility::flag("damage_state_2")) {
     common_scripts\utility::flag_set("damage_state_2");
     _id_02F2::setturretdismountorg("husky_player_damage_oneshot");
   }

@@ -57,7 +57,7 @@ _id_85BE() {
   level._id_7043 = [];
   level._id_702F = _getEnt("plane_care_package_start", "targetname");
   level._id_702E = _getEnt("plane_care_package_end", "targetname");
-  level._id_5FEB = (0, 0, 0);
+  level.mapcenter = (0, 0, 0);
   level.makeglobalusable = [];
   level.makeglobalunusable = [];
   level.makeglobalunusable["carepackage"] = 0;
@@ -174,7 +174,7 @@ handleleaveactivity(var_0) {
     self waittill("luinotifyserver", var_1, var_2);
 
     if(var_1 == "hub_leave_activity") {
-      self _meth_85E9();
+      self set_vehicle_effect();
       return;
     }
   }
@@ -392,7 +392,7 @@ destroycrateaftertime(var_0) {
   wait(var_0);
 
   if(isDefined(self)) {
-    _id_0529::_id_2D30(1, 1, 1);
+    _id_0529::deletecrate(1, 1, 1);
   }
 }
 
@@ -482,7 +482,7 @@ notifyplayers(var_0, var_1) {
     if(var_3._id_572A) {
       continue;
     }
-    var_3 _meth_866C(var_1, 1, var_0);
+    var_3 setdot_radius(var_1, 1, var_0);
   }
 }
 
@@ -537,22 +537,22 @@ _id_4AB3(var_0) {
   notifyplayers(self, &"delete_supply_drop_countdown");
   common_scripts\utility::_id_0F93(level._id_1FFD, self);
   _setomnvar("ui_fge_carepackages_remaining", level._id_1FFD.size - 1);
-  _id_0529::_id_2D30(1, 1);
+  _id_0529::deletecrate(1, 1);
 }
 
 _id_4AAD(var_0) {
   level endon("game_ended");
   var_1 = spawn("script_model", self.origin + (_randomintrange(-3, 3), _randomfloatrange(-3, 3), -20));
   var_1.angles = (0, 0, 0);
-  var_1._id_28D5 = 0;
-  var_1._id_A22B = 0;
+  var_1.curprogress = 0;
+  var_1.userate = 0;
   var_1.team = "any";
   var_1._id_2748 = 99;
   var_1.visualteam = "allies";
   var_1._id_944E = "ammo";
   var_1.targetname = "care_package";
   var_1 setModel("usa_carepackage_crate");
-  _playFXOnTag(common_scripts\utility::_id_44F5("care_package_allies_beacon"), var_1, "TAG_FX");
+  _playFXOnTag(common_scripts\utility::getfx("care_package_allies_beacon"), var_1, "TAG_FX");
   var_2 = spawn("script_model", var_1 gettagorigin("tag_origin") + (0, 0, -10));
   var_2.angles = (0, 180, 0);
   var_2 setModel("usa_carepackage_parachute_anim");
@@ -583,7 +583,7 @@ _id_4AAD(var_0) {
 
   var_2 thread _id_0529::_id_63BB(var_1, var_2);
   var_3 thread _id_0529::_id_63BA(var_2, var_1);
-  var_1 thread _id_0529::_id_2745();
+  var_1 thread _id_0529::cratedetectstopphysics();
   var_1 thread _id_0529::_id_2752(var_1._id_944E);
   var_1 thread _id_0529::_id_74BA();
   var_1 thread destroycrateaftertime(60);
@@ -652,23 +652,23 @@ _id_9061() {
 }
 
 objnum(var_0) {
-  if(!isDefined(level._id_68A7)) {
-    level._id_68A7 = [];
+  if(!isDefined(level.obj_array)) {
+    level.obj_array = [];
   }
 
-  if(!isDefined(level._id_68A7[var_0])) {
-    level._id_68A7[var_0] = level._id_68A7.size + 1;
+  if(!isDefined(level.obj_array[var_0])) {
+    level.obj_array[var_0] = level.obj_array.size + 1;
   }
 
-  return level._id_68A7[var_0];
+  return level.obj_array[var_0];
 }
 
 _id_9060(var_0) {
   var_1 = maps\mp\_utility::_id_8FE4(var_0._id_0165, "ger_bomber_stuka_vista", "ger_bomber_stuka_hub", 1);
   _id_0380::_id_6846("mp_hub_allies_flak_event_plane_lp", undefined, var_1);
-  var_1 thread maps\mp\gametypes\_damage::_id_8676(1500, undefined, ::_id_7040);
+  var_1 thread maps\mp\gametypes\_damage::setentitydamagecallback(1500, undefined, ::_id_7040);
   var_1.health = var_1.maxhealth;
-  var_1._id_1193 = [];
+  var_1.attackers = [];
   var_1.damagecallback = ::_id_703F;
   var_1.firing = 0;
   var_1 _id_365E();
@@ -702,7 +702,7 @@ _id_3CE3(var_0, var_1) {
     var_4 = distancesquared(var_0.origin, var_3);
 
     if(var_4 < var_2) {
-      self dodamage(500, var_3, var_1, var_0, "MOD_PROJECTILE", var_0._id_A9E0);
+      self dodamage(500, var_3, var_1, var_0, "MOD_PROJECTILE", var_0.weaponname);
       var_0 detonate();
     }
 
@@ -719,14 +719,14 @@ managefighterplanetracers() {
 
     foreach(var_2 in level._id_7043) {
       if(var_2.firing && !var_0) {
-        var_3 = common_scripts\utility::_id_44F5("hub_plane_tracer");
+        var_3 = common_scripts\utility::getfx("hub_plane_tracer");
         _stopFXOnTag(var_3, var_2, "tag_muzzle_fx_1");
         _stopFXOnTag(var_3, var_2, "tag_muzzle_fx_2");
         var_2.firing = 0;
       }
 
       if(!var_2.firing && var_0) {
-        var_3 = common_scripts\utility::_id_44F5("hub_plane_tracer");
+        var_3 = common_scripts\utility::getfx("hub_plane_tracer");
         waitframe();
         _playFXOnTag(var_3, var_2, "tag_muzzle_fx_1");
         waitframe();
@@ -799,10 +799,10 @@ _id_64B9() {
 
   for(;;) {
     if(self._id_A995 % 2 == 0) {
-      self moveTo(level._id_705E[self._id_A995].origin + self._id_6A15, 7);
+      self moveTo(level._id_705E[self._id_A995].origin + self.offset, 7);
       wait 7;
     } else {
-      self moveTo(level._id_705E[self._id_A995].origin + self._id_6A15, 14);
+      self moveTo(level._id_705E[self._id_A995].origin + self.offset, 14);
       wait 14;
     }
 
@@ -912,7 +912,7 @@ _id_2D48(var_0) {
 }
 
 _id_7040(var_0, var_1, var_2, var_3) {
-  self._id_1180 = var_0;
+  self.attacker = var_0;
   _id_5F15();
 }
 
@@ -921,7 +921,7 @@ _id_7030(var_0, var_1, var_2, var_3) {
     var_0 = var_0 getturretowner();
   }
 
-  var_0 _id_04C7::_id_A102("standard_nosound");
+  var_0 _id_04C7::updatedamagefeedback("standard_nosound");
   return var_3;
 }
 
@@ -930,16 +930,16 @@ _id_703F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     var_1 = var_1 getturretowner();
   }
 
-  if(isDefined(self._id_6E74)) {
-    var_12 = self._id_6E74;
+  if(isDefined(self.parent)) {
+    var_12 = self.parent;
   } else {
     var_12 = self;
   }
 
-  var_12._id_1193 = maps\mp\_utility::_id_2341(var_12._id_1193);
+  var_12.attackers = maps\mp\_utility::cleanarray(var_12.attackers);
 
-  if(!common_scripts\utility::_id_0F79(var_12._id_1193, var_1)) {
-    var_12._id_1193[var_1.guid] = var_1;
+  if(!common_scripts\utility::_id_0F79(var_12.attackers, var_1)) {
+    var_12.attackers[var_1.guid] = var_1;
   }
 
   playFX(level._id_5959, self.origin);
@@ -951,24 +951,24 @@ _id_703F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   var_12.health = var_12.health - var_2;
 
   if(var_12.health <= 0) {
-    var_1 _id_04C7::_id_A102("killshot_nosound");
+    var_1 _id_04C7::updatedamagefeedback("killshot_nosound");
     var_12 _id_5F15();
 
-    foreach(var_14 in var_12._id_1193) {
+    foreach(var_14 in var_12.attackers) {
       var_14 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_aagun");
     }
   } else
-    var_1 _id_04C7::_id_A102("standard_nosound");
+    var_1 _id_04C7::updatedamagefeedback("standard_nosound");
 }
 
 _id_5F15() {
   level endon("game_ended");
   self endon("death");
 
-  if(isDefined(self._id_56BB)) {
+  if(isDefined(self.iscrashing)) {
     return;
   }
-  var_0 = common_scripts\utility::_id_44F5("hub_plane_tracer");
+  var_0 = common_scripts\utility::getfx("hub_plane_tracer");
   _stopFXOnTag(var_0, self, "tag_muzzle_fx_1");
   _stopFXOnTag(var_0, self, "tag_muzzle_fx_2");
 
@@ -981,9 +981,9 @@ _id_5F15() {
   }
 
   self notify("crashing");
-  self._id_56BB = 1;
+  self.iscrashing = 1;
   var_4 = anglesToForward(self.angles);
-  playFX(common_scripts\utility::_id_44F5("plane_death"), self.origin, var_4);
+  playFX(common_scripts\utility::getfx("plane_death"), self.origin, var_4);
   var_5 = self.origin;
   _id_0380::_id_2889("mp_hub_plane_destruct_explode", undefined, var_5);
   _id_2D47();

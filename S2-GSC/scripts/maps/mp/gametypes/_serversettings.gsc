@@ -4,29 +4,29 @@
 *********************************************************/
 
 init() {
-  level._id_4E0E = getDvar("5656");
+  level.hostname = getDvar("5656");
 
-  if(level._id_4E0E == "") {
-    level._id_4E0E = "CoDHost";
+  if(level.hostname == "") {
+    level.hostname = "CoDHost";
   }
 
-  setDvar("5656", level._id_4E0E);
+  setDvar("5656", level.hostname);
   level._id_0C32 = getdvarint("4372", 1);
   setDvar("4372", level._id_0C32);
-  level._id_3EC4 = _id_0511::_id_46F7("team", "fftype");
-  _id_2596(getDvar("1924"));
+  level.friendlyfire = _id_0511::gettweakablevalue("team", "fftype");
+  constraingametype(getDvar("1924"));
 
   for(;;) {
-    _id_A164();
+    updateserversettings();
     wait 5;
   }
 }
 
-_id_A164() {
+updateserversettings() {
   var_0 = getDvar("5656");
 
-  if(level._id_4E0E != var_0) {
-    level._id_4E0E = var_0;
+  if(level.hostname != var_0) {
+    level.hostname = var_0;
   }
 
   var_1 = getdvarint("4372", 1);
@@ -35,14 +35,14 @@ _id_A164() {
     level._id_0C32 = var_1;
   }
 
-  var_2 = _id_0511::_id_46F7("team", "fftype");
+  var_2 = _id_0511::gettweakablevalue("team", "fftype");
 
-  if(level._id_3EC4 != var_2) {
-    level._id_3EC4 = var_2;
+  if(level.friendlyfire != var_2) {
+    level.friendlyfire = var_2;
   }
 }
 
-_id_2596(var_0) {
+constraingametype(var_0) {
   var_1 = getEntArray();
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {

@@ -87,17 +87,17 @@ srvupdatemovemode() {
 }
 
 srvroundstart() {
-  if(level._id_A980 > 0 && level._id_A980 % 5 == 0) {
+  if(level.wavecounter > 0 && level.wavecounter % 5 == 0) {
     unlock_next_reciever();
   }
 
-  if(level._id_A980 > 0 && level._id_A980 % 5 == 0) {
+  if(level.wavecounter > 0 && level.wavecounter % 5 == 0) {
     if(level._id_7F1B >= 2) {
       level._id_7F1B--;
     }
   }
 
-  switch (level._id_A980) {
+  switch (level.wavecounter) {
     case 10:
       _id_0548::_id_09C8("teslagun_zm", "none", "none", "none");
       _id_0548::_id_09C8("razergun_zm", "none", "none", "none");
@@ -111,7 +111,7 @@ srvroundstart() {
 srvroundend() {}
 
 srvshowpapfuse() {
-  var_0 = common_scripts\utility::_id_46B5("srv_pap_fuse_loc", "targetname");
+  var_0 = common_scripts\utility::getstruct("srv_pap_fuse_loc", "targetname");
 
   if(isDefined(var_0)) {
     var_1 = spawn("script_model", var_0.origin);
@@ -131,9 +131,9 @@ run_pack_a_punch_log() {
 }
 
 collect_souls_to_unlock_pack_a_punch() {
-  var_0 = common_scripts\utility::_id_46B7("zmb_sg_pap_light_display", "targetname");
-  var_1 = common_scripts\utility::_id_46B7("zmb_pack_key", "targetname");
-  var_2 = common_scripts\utility::_id_46B7("zmb_sg_availablility_light_display", "targetname");
+  var_0 = common_scripts\utility::getstructarray("zmb_sg_pap_light_display", "targetname");
+  var_1 = common_scripts\utility::getstructarray("zmb_pack_key", "targetname");
+  var_2 = common_scripts\utility::getstructarray("zmb_sg_availablility_light_display", "targetname");
   var_3 = _getscriptablearray("zmb_sg_reciver_scriptable", "targetname");
 
   foreach(var_5 in var_3) {
@@ -153,11 +153,11 @@ collect_souls_to_unlock_pack_a_punch() {
   common_scripts\utility::_id_0FB2(var_1, ::set_pack_key_unlocked);
   common_scripts\utility::_id_0FB2(var_0, ::handle_unlock_lights, "zmb_sg_soul_collect_flag_");
   common_scripts\utility::_id_0FB2(var_2, ::handle_unlock_lights, "zmb_sg_soul_collect_ready_flag_", "zmb_sg_soul_collect_flag_");
-  maps\mp\_utility::_id_2CED(3, ::unlock_next_reciever);
+  maps\mp\_utility::delaythread(3, ::unlock_next_reciever);
   wait_for_pap_available();
   wait 0.5;
   level notify("pap_state_change");
-  level thread maps\mp\_utility::_id_6F74(maps\mp\gametypes\_hud_message::_id_9102, "zm_pap_unlocked");
+  level thread maps\mp\_utility::_id_6F74(maps\mp\gametypes\_hud_message::splashnotify, "zm_pap_unlocked");
 }
 
 wait_for_pap_available() {
@@ -165,7 +165,7 @@ wait_for_pap_available() {
   var_0 ghost();
 
   for(var_1 = 0; var_1 < 3; var_1++) {
-    common_scripts\utility::_id_3C9F("zmb_sg_soul_collect_flag_" + (var_1 + 1));
+    common_scripts\utility::flag_wait("zmb_sg_soul_collect_flag_" + (var_1 + 1));
   }
 }
 
@@ -177,17 +177,17 @@ unlock_next_reciever() {
   level.zmb_pap_reciver_unlocks++;
   var_0 = "zmb_sg_soul_collect_ready_flag_" + level.zmb_pap_reciver_unlocks;
 
-  if(common_scripts\utility::_id_3C83(var_0)) {
+  if(common_scripts\utility::flag_exist(var_0)) {
     common_scripts\utility::flag_set(var_0);
   }
 }
 
 handle_unlock_lights(var_0, var_1) {
-  _id_0547::_id_A6F6();
+  _id_0547::waitnetworkframe();
   var_2 = self.setmovespeedscale;
   var_3 = _id_0547::_id_8FBA(self, "zmb_nest_generator_bulb_red");
   _triggerfx(var_3);
-  common_scripts\utility::_id_3C9F(var_0 + self.setmovespeedscale);
+  common_scripts\utility::flag_wait(var_0 + self.setmovespeedscale);
   var_3 delete();
   var_3 = _id_0547::_id_8FBA(self, "zmb_nest_generator_bulb_green");
   _triggerfx(var_3);
@@ -195,7 +195,7 @@ handle_unlock_lights(var_0, var_1) {
   if(!isDefined(var_1)) {
     return;
   }
-  common_scripts\utility::_id_3C9F(var_1 + self.setmovespeedscale);
+  common_scripts\utility::flag_wait(var_1 + self.setmovespeedscale);
   var_3 delete();
   var_3 = _id_0547::_id_8FBA(self, "zmb_nest_generator_bulb_off");
   _triggerfx(var_3);
@@ -205,7 +205,7 @@ set_pack_key_unlocked() {
   var_0 = self.setmovespeedscale;
   var_1 = spawn("script_model", self.origin);
   var_1 setModel("tag_origin");
-  common_scripts\utility::_id_3C9F("zmb_sg_soul_collect_ready_flag_" + self.setmovespeedscale);
+  common_scripts\utility::flag_wait("zmb_sg_soul_collect_ready_flag_" + self.setmovespeedscale);
   var_2 = 400;
 
   if(common_scripts\utility::_id_562E(level.sg_pack_use_small_radius)) {
@@ -253,8 +253,8 @@ try_catch_on_fire() {
 
   if(var_0 < 4) {
     self.isonfire = 1;
-    _id_0547::_id_A6F6();
-    self _meth_8682(0, 100, 1, "none", 1);
+    _id_0547::waitnetworkframe();
+    self setfirstinfected(0, 100, 1, "none", 1);
   }
 }
 
@@ -290,7 +290,7 @@ waterspawnnotetrackhandler(var_0, var_1, var_2, var_3) {
 }
 
 zombiedripfx(var_0) {
-  if(level._id_A980 >= 20) {
+  if(level.wavecounter >= 20) {
     return;
   }
   var_1 = "spawn_water_drip";
@@ -303,7 +303,7 @@ zombiedripfx(var_0) {
 
   foreach(var_5 in var_2) {
     if(isDefined(self gettagorigin(var_5))) {
-      _id_0547::_id_74A5(common_scripts\utility::_id_44F5(var_1), self, var_5);
+      _id_0547::playfxontagnetwork(common_scripts\utility::getfx(var_1), self, var_5);
     }
   }
 
@@ -316,7 +316,7 @@ zombiedripfxcleanup(var_0, var_1) {
   while(isDefined(self) && isalive(self)) {
     wait 0.1;
 
-    if(!isDefined(self._id_53D9) || !self._id_53D9) {
+    if(!isDefined(self.inspawnanim) || !self.inspawnanim) {
       break;
     }
   }
@@ -328,7 +328,7 @@ zombiedripfxcleanup(var_0, var_1) {
   }
   foreach(var_3 in var_0) {
     if(isDefined(self gettagorigin(var_3))) {
-      _id_0547::_id_9406(common_scripts\utility::_id_44F5(var_1), self, var_3);
+      _id_0547::stopfxontagnetwork(common_scripts\utility::getfx(var_1), self, var_3);
     }
   }
 }
@@ -337,7 +337,7 @@ zombiespawnfx(var_0) {
   if(level.zombiespawnfxcount >= 12) {
     return;
   }
-  var_1 = _spawnfx(common_scripts\utility::_id_44F5(var_0), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+  var_1 = _spawnfx(common_scripts\utility::getfx(var_0), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
   _triggerfx(var_1);
   level.zombiespawnfxcount++;
   common_scripts\utility::waittill_notify_or_timeout("death", 2.0);

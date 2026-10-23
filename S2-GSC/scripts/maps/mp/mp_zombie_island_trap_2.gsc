@@ -10,9 +10,9 @@ trap_2(var_0) {
 
   var_1 = _getEnt("zmb_trap_propeller_model", "targetname");
   var_2 = _getEnt("propeller_damage", "script_noteworthy");
-  var_1 _id_0378::_id_8D74("sub_pen_prop_trap_extend");
+  var_1 _id_0378::snd_message("sub_pen_prop_trap_extend");
   wait 0.5;
-  var_1 _id_0378::_id_8D74("sub_pen_prop_trap_start");
+  var_1 _id_0378::snd_message("sub_pen_prop_trap_start");
   wait 1.0;
   wait 0.3;
   var_1 thread spin();
@@ -20,8 +20,8 @@ trap_2(var_0) {
   var_1 thread do_grit_blood(var_2);
   var_1 thread do_damage(var_2, var_0);
   wait 18.5;
-  var_1 _id_0378::_id_8D74("sub_pen_prop_trap_extend");
-  var_1 _id_0378::_id_8D74("sub_pen_prop_trap_stop");
+  var_1 _id_0378::snd_message("sub_pen_prop_trap_extend");
+  var_1 _id_0378::snd_message("sub_pen_prop_trap_stop");
   wait 1.5;
   var_1 notify("stop_damage");
   wait 0.5;
@@ -97,14 +97,14 @@ do_propellar_damage(var_0, var_1) {
 
   if(isPlayer(var_2)) {
     var_2 dodamage(var_2.health + 20, self.origin, var_0, var_0, "MOD_EXPLOSIVE", "trap_zm_mp");
-    _id_0378::_id_8D74("sub_pen_prop_trap_player_hit", var_2);
+    _id_0378::snd_message("sub_pen_prop_trap_player_hit", var_2);
   } else {
     var_3 = var_2 maps\mp\mp_zombie_island_trap_1::modify_damage_to_island_zombie_types(5);
     var_2 dodamage(var_3, self.origin, var_0, var_0, "MOD_EXPLOSIVE", "trap_zm_mp");
     var_2 childthread zombie_prop_gib_effects(var_0);
   }
 
-  _id_0378::_id_8D74("sub_pen_prop_trap_hit", self.origin);
+  _id_0378::snd_message("sub_pen_prop_trap_hit", self.origin);
 }
 
 zombie_prop_gib_effects(var_0) {

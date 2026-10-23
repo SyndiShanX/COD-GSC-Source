@@ -57,7 +57,7 @@ _id_3216(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   var_11 = 99999999;
-  var_12 = level._id_5FEB + (10000, 10000, 1000);
+  var_12 = level.mapcenter + (10000, 10000, 1000);
 
   foreach(var_14 in var_8) {
     var_15 = _distance2d(var_14.origin, var_1);
@@ -139,7 +139,7 @@ _id_3216(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     if(isDefined(var_6) && var_6 == "mortar_strike_projectile_d_day_mp") {
-      var_31 _id_0378::_id_8D74("aud_beach_mortar");
+      var_31 _id_0378::snd_message("aud_beach_mortar");
     } else {
       var_31 thread _id_4A1F(var_4);
     }
@@ -163,14 +163,14 @@ _id_3216(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 _id_4A1F(var_0) {
   level endon("game_ended");
   self endon("death");
-  _id_0378::_id_8D74("ks_projectile_fired", var_0);
+  _id_0378::snd_message("ks_projectile_fired", var_0);
   var_1 = 2.2;
 
   if(var_1 > 0) {
     wait(var_1);
   }
 
-  _id_0378::_id_8D74("ks_incoming_projectile", var_0);
+  _id_0378::snd_message("ks_incoming_projectile", var_0);
 }
 
 _id_3B99(var_0, var_1) {
@@ -392,7 +392,7 @@ _id_45C0(var_0, var_1, var_2) {
 }
 
 _id_4578() {
-  switch (maps\mp\_utility::_id_4571()) {
+  switch (maps\mp\_utility::getmapname()) {
     case "mp_aachen_v2":
       return 3400;
     case "mp_airship":
@@ -440,7 +440,7 @@ _id_4578() {
 }
 
 getdiveheightformap() {
-  switch (maps\mp\_utility::_id_4571()) {
+  switch (maps\mp\_utility::getmapname()) {
     case "mp_egypt_02":
     case "mp_canon_farm":
       return 1000;
@@ -508,7 +508,7 @@ vehicle_addvelocity(var_0, var_1) {
 
     switch (var_1) {
       case "mortar_strike":
-        self _meth_85EF(&"confirmed_target_location_mortar_strike", 3, var_6, int(var_7[0]), int(var_7[1]));
+        self set_vision_set_player(&"confirmed_target_location_mortar_strike", 3, var_6, int(var_7[0]), int(var_7[1]));
         self notify("single_location_selection_complete");
         break;
       case "v2_rocket":
@@ -535,14 +535,14 @@ _id_A6AB() {
   self setblurforplayer(0, 0.3);
   self setclientomnvar("ui_map_location_num_targets", 0);
 
-  if(maps\mp\gametypes\_hostmigration::_id_A782() > 0) {
-    self switchtoweapon(common_scripts\utility::_id_4550());
+  if(maps\mp\gametypes\_hostmigration::waittillhostmigrationdone() > 0) {
+    self switchtoweapon(common_scripts\utility::getlastweapon());
   }
 }
 
 _id_46C2(var_0) {
-  if(!isDefined(level._id_5FF0)) {
-    level._id_5FF0 = 1024;
+  if(!isDefined(level.mapsize)) {
+    level.mapsize = 1024;
   }
 
   var_1 = 0;

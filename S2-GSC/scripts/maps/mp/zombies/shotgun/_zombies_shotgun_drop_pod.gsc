@@ -4,14 +4,14 @@
 *************************************************************************/
 
 init() {
-  common_scripts\utility::_id_2CB4(5, ::drop_pod_init_drop_points);
+  common_scripts\utility::delay_script_call(5, ::drop_pod_init_drop_points);
   aud_blimp_attack_init();
   level._effect["zmb_zep_battery_fire_trail"] = loadfx("vfx/map/mp_zombie_nest/zmb_zep_battery_fire_trail");
   level._effect["zmb_zep_battery_land_explosion"] = loadfx("vfx/explosion/zmb_zep_battery_land_explosion");
 }
 
 drop_pod_init_drop_points() {
-  var_0 = common_scripts\utility::_id_46B7("drop_pod_position", "targetname");
+  var_0 = common_scripts\utility::getstructarray("drop_pod_position", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::_id_44BE(var_2.target, "targetname");
@@ -66,7 +66,7 @@ drop_pod_spawn_drop() {
   var_0.clip_fall linktosynchronizedparent(var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0.clip_fall solid();
   _playFXOnTag(level._effect["zmb_zep_battery_fire_trail"], var_3, "tag_origin");
-  var_3 _id_0378::_id_8D74("aud_droppod_launch");
+  var_3 _id_0378::snd_message("aud_droppod_launch");
   var_4 = (0, 0, -800);
   var_5 = 1;
   var_6 = var_1 - var_0.pod_model.origin;
@@ -83,7 +83,7 @@ drop_pod_spawn_drop() {
   var_3.origin = var_0.pod_model.origin;
   playFX(level._effect["zmb_wm_droppod_dirt_impact"], var_0.pod_model.origin + (0, 0, -20));
   _earthquake(0.3, 2, var_0.pod_model.origin, 850);
-  _id_0378::_id_8D74("aud_droppod_landed", var_0.pod_model.origin);
+  _id_0378::snd_message("aud_droppod_landed", var_0.pod_model.origin);
   var_0 drop_pod_set_drop_point_active();
   var_0.clip_fall notsolid();
   var_0.clip_fall delete();
@@ -96,7 +96,7 @@ drop_pod_open_pod_doors() {
   var_0 = _id_054D::_id_90BA("zombie_heavy", self.contents_pos, "pod guy", 0, 1, 0);
   var_0 _id_0547::disableoffhandsecondaryweapons();
   self.spawned_model scriptmodelplayanim("s2_zom_drop_pod_open");
-  self.spawned_model _id_0378::_id_8D74("aud_open_droppod_door");
+  self.spawned_model _id_0378::snd_message("aud_open_droppod_door");
 }
 
 drop_pod_set_drop_point_active() {
@@ -146,7 +146,7 @@ drop_pod_set_drop_point_active() {
           if(_canspawn(var_8)) {
             var_6 setOrigin(var_8);
           } else {
-            _id_0488::_id_A047(var_6, 0);
+            _id_0488::unresolved_collision_nearest_node(var_6, 0);
           }
         }
 
@@ -204,7 +204,7 @@ drop_pod_clip_exploit_listener() {
           if(_canspawn(var_4)) {
             var_1 setOrigin(var_4);
           } else {
-            _id_0488::_id_A047(var_1, 0);
+            _id_0488::unresolved_collision_nearest_node(var_1, 0);
           }
         }
 
@@ -217,19 +217,19 @@ drop_pod_clip_exploit_listener() {
 }
 
 aud_blimp_attack_init() {
-  _id_0378::_id_8DC7("aud_blimp_turret_explode", ::aud_blimp_turret_explode);
-  _id_0378::_id_8DC7("aud_blimp_battery_land", ::aud_blimp_battery_land);
+  _id_0378::snd_register_message("aud_blimp_turret_explode", ::aud_blimp_turret_explode);
+  _id_0378::snd_register_message("aud_blimp_battery_land", ::aud_blimp_battery_land);
 }
 
 aud_blimp_turret_explode() {
-  _id_046C::_id_8DA0("zmb_blimp_elec_turret_explo", self.origin);
+  _id_046C::snd_play_in_space("zmb_blimp_elec_turret_explo", self.origin);
   wait 1.2;
 
   if(isDefined(self)) {
-    _id_046C::_id_8DA2("zmb_blimp_elec_turret_fall", self);
+    _id_046C::snd_play_linked("zmb_blimp_elec_turret_fall", self);
   }
 }
 
 aud_blimp_battery_land(var_0) {
-  _id_046C::_id_8DA0("zmb_blimp_elec_turret_land", var_0.origin);
+  _id_046C::snd_play_in_space("zmb_blimp_elec_turret_land", var_0.origin);
 }

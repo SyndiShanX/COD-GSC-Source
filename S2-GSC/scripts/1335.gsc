@@ -14,7 +14,7 @@ init() {
 _id_3662() {
   _id_054B::_id_6AB2("role_ability_camo_zm");
   self._id_569F = 1;
-  _id_0547::_id_8A6D(1);
+  _id_0547::setzombiesignoreme(1);
 
   if(!isDefined(level.custom_camo_func_on)) {
     self visionsetnakedforplayer("zm_camo", 0.25);
@@ -23,7 +23,7 @@ _id_3662() {
   }
 
   _playfxontagforclients(level._effect["zmb_moon_player_camo_cam"], self, "Tag_Origin", self);
-  _id_0378::_id_8D74("aud_camo_use");
+  _id_0378::snd_message("aud_camo_use");
   thread _id_17BB();
   thread camoplayerfx();
   _id_0547::_id_7ACD();
@@ -42,7 +42,7 @@ camoplayerfx() {
     var_1 = _spawnlinkedfx(level._effect["zmb_moon_speed_up"], self, "J_Knee_RI");
     _triggerfx(var_0);
     _triggerfx(var_1);
-    common_scripts\utility::_id_A70A("camo_ended", "disconnect");
+    common_scripts\utility::waittill_any("camo_ended", "disconnect");
     var_0 delete();
     var_1 delete();
   }
@@ -76,7 +76,7 @@ _id_2F9E() {
       _stopFXOnTag(level._effect["zmb_moon_zmb_blind"], var_1, "J_Head");
     }
 
-    _id_0547::_id_8A6D(0);
+    _id_0547::setzombiesignoreme(0);
 
     if(!isDefined(level.custom_camo_func_off)) {
       self visionsetnakedforplayer("", 0.25);
@@ -88,7 +88,7 @@ _id_2F9E() {
   }
 }
 
-_id_62A6(var_0, var_1, var_2, var_3, var_4) {
+modifydamage(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 0;
 
   if(isDefined(var_1)) {
@@ -98,10 +98,10 @@ _id_62A6(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(var_5) {
-    if(_id_0547::_id_5863(var_4) && var_2 _id_0547::_id_4BA7("specialty_class_saboteur_zm")) {
+    if(_id_0547::iszombielethal(var_4) && var_2 _id_0547::_id_4BA7("specialty_class_saboteur_zm")) {
       var_6 = _id_054A::_id_466B(var_4);
       var_0 = var_0 * var_6;
-      var_2 _meth_866C(&"trigger_mod_proc", 1, "specialty_class_saboteur_zm");
+      var_2 setdot_radius(&"trigger_mod_proc", 1, "specialty_class_saboteur_zm");
     }
   }
 
@@ -119,13 +119,13 @@ _id_6ADC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
     }
 
     if(var_10) {
-      if(maps\mp\_utility::_id_5755(var_4) && isPlayer(var_1) && var_1 _id_0547::_id_4BA7("specialty_class_serrated_edge_zm")) {
+      if(maps\mp\_utility::ismeleemod(var_4) && isPlayer(var_1) && var_1 _id_0547::_id_4BA7("specialty_class_serrated_edge_zm")) {
         var_1 thread linkwaypointtotargetwithoffset(self);
-        var_1 _meth_866C(&"trigger_mod_proc", 1, "specialty_class_serrated_edge_zm");
+        var_1 setdot_radius(&"trigger_mod_proc", 1, "specialty_class_serrated_edge_zm");
       }
 
       if(isPlayer(var_1)) {
-        if(!0 || maps\mp\_utility::_id_4571() == "mp_zombie_island") {
+        if(!0 || maps\mp\_utility::getmapname() == "mp_zombie_island") {
           if(!0 || isDefined(self._id_0A4B) && self._id_0A4B == "zombie_assassin") {
             var_11 = 0 - var_2 * 0 - 0;
             var_1 _id_0533::_id_0F37(var_11, 0, 1);
@@ -147,12 +147,12 @@ _id_6B7E(var_0) {
 
 _id_3F91(var_0) {
   self endon("disconnect");
-  _id_0547::_id_8A6D(1);
-  self _meth_866C(&"add_teammate_mod_buffs", 3, "specialty_class_covert_exfiltration_zm", 0, var_0);
-  var_0 _meth_866C(&"trigger_mod_proc", 1, "specialty_class_covert_exfiltration_zm");
-  common_scripts\utility::_id_A71A(5, "death", "enter_last_stand");
-  self _meth_866C(&"remove_teammate_mod_buffs", 1, "specialty_class_covert_exfiltration_zm");
-  _id_0547::_id_8A6D(0);
+  _id_0547::setzombiesignoreme(1);
+  self setdot_radius(&"add_teammate_mod_buffs", 3, "specialty_class_covert_exfiltration_zm", 0, var_0);
+  var_0 setdot_radius(&"trigger_mod_proc", 1, "specialty_class_covert_exfiltration_zm");
+  common_scripts\utility::waittill_any_timeout(5, "death", "enter_last_stand");
+  self setdot_radius(&"remove_teammate_mod_buffs", 1, "specialty_class_covert_exfiltration_zm");
+  _id_0547::setzombiesignoreme(0);
 }
 
 linkwaypointtotargetwithoffset(var_0) {
@@ -164,7 +164,7 @@ linkwaypointtotargetwithoffset(var_0) {
   var_3 = var_0.linkwaypointtotargetwithoffset;
 
   if(!isDefined(var_3)) {
-    var_3 = _spawnlinkedfx(common_scripts\utility::_id_44F5("serrated_edge_bleed"), var_0, "J_Spine4");
+    var_3 = _spawnlinkedfx(common_scripts\utility::getfx("serrated_edge_bleed"), var_0, "J_Spine4");
     _triggerfx(var_3);
     var_0.linkwaypointtotargetwithoffset = var_3;
     var_0.getlinkedparent = [];
@@ -174,7 +174,7 @@ linkwaypointtotargetwithoffset(var_0) {
     var_0.getlinkedparent[var_0.getlinkedparent.size] = self;
   }
 
-  var_4 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level._id_A980);
+  var_4 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level.wavecounter);
   var_5 = var_4 * 0.03;
   var_0 childthread _id_0547::_id_AC38(var_0, var_5, self, 1.5, 30, "dot_generic_zm");
   var_0 common_scripts\utility::waittill_notify_or_timeout("death", 30);
@@ -194,7 +194,7 @@ linkwaypointtotargetwithoffset(var_0) {
 }
 
 powerlosswhenfiring() {
-  if(!0 || maps\mp\_utility::_id_4571() == "mp_zombie_island") {
+  if(!0 || maps\mp\_utility::getmapname() == "mp_zombie_island") {
     self endon("death");
     self endon("disconnect");
     self endon("camo_ended");

@@ -41,7 +41,7 @@ ship_tilting_tilt_timer() {
   for(;;) {
     level common_scripts\utility::_id_A70D(_randomintrange(level.shiptiltingtimermin, level.shiptiltingtimermax), level, "force_ship_to_tilt");
 
-    if(common_scripts\utility::_id_3C77("flag_ship_tilting_enabled")) {
+    if(common_scripts\utility::flag("flag_ship_tilting_enabled")) {
       level notify("ship_tilting_change_direction");
     }
   }
@@ -154,27 +154,27 @@ ship_tilting_object_movement() {
       var_4 = common_scripts\utility::_id_0F73(var_4, level._id_9068._id_9090);
     }
 
-    self.tilterclip._id_A048 = var_4;
-    self.tilterclip._id_A045 = ::ship_tilting_unresolved_collision_func;
+    self.tilterclip.unresolved_collision_nodes = var_4;
+    self.tilterclip.unresolved_collision_func = ::ship_tilting_unresolved_collision_func;
 
     switch (var_3) {
       case "ship_tilting_starboard":
         if(isDefined(self.starboardorigin)) {
           self moveTo(self.starboardorigin, var_0, var_1, var_2);
-          _id_0378::_id_8D74("start_vehicle_slide", var_0, "ship_tilting_starboard");
+          _id_0378::snd_message("start_vehicle_slide", var_0, "ship_tilting_starboard");
         } else {
           self moveTo(self._id_6C55, var_0, var_1, var_2);
-          _id_0378::_id_8D74("start_vehicle_slide", var_0, "ship_tilting_original");
+          _id_0378::snd_message("start_vehicle_slide", var_0, "ship_tilting_original");
         }
 
         break;
       case "ship_tilting_port":
         if(isDefined(self.portorigin)) {
           self moveTo(self.portorigin, var_0, var_1, var_2);
-          _id_0378::_id_8D74("start_vehicle_slide", var_0, "ship_tilting_port");
+          _id_0378::snd_message("start_vehicle_slide", var_0, "ship_tilting_port");
         } else {
           self moveTo(self._id_6C55, var_0, var_1, var_2);
-          _id_0378::_id_8D74("start_vehicle_slide", var_0, "ship_tilting_original");
+          _id_0378::snd_message("start_vehicle_slide", var_0, "ship_tilting_original");
         }
 
         break;
@@ -206,7 +206,7 @@ ship_tilting_collision_backup() {
       continue;
     }
     if(isPlayer(var_1)) {
-      _id_0488::_id_A047(var_1, 0);
+      _id_0488::unresolved_collision_nearest_node(var_1, 0);
       var_1 down_player();
     } else if(_isagent(var_1))
       var_1 _id_0547::_id_5A85(var_1.origin + (0, 0, 30), (var_1.origin - self.origin) * 2);
@@ -217,7 +217,7 @@ ship_tilting_collision_backup() {
 
 ship_tilting_unresolved_collision_func(var_0) {
   if(isDefined(var_0) && isPlayer(var_0)) {
-    _id_0488::_id_A047(var_0, 0);
+    _id_0488::unresolved_collision_nearest_node(var_0, 0);
     var_0 down_player();
   } else if(isDefined(var_0) && _isagent(var_0))
     var_0 _id_056D::_id_5A86();
@@ -255,8 +255,8 @@ ship_tilting_zombie_stumble() {
       }
 
       var_8 = _randomfloatrange(0.25, 1.5);
-      var_3 maps\mp\_utility::_id_2CED(var_8, ::ship_tilting_zombie_stumble_execute, var_5);
-      var_3 maps\mp\_utility::_id_2CED(var_8 + var_7, ::ship_tilting_zombie_stumble_cleanup, var_5);
+      var_3 maps\mp\_utility::delaythread(var_8, ::ship_tilting_zombie_stumble_execute, var_5);
+      var_3 maps\mp\_utility::delaythread(var_8 + var_7, ::ship_tilting_zombie_stumble_cleanup, var_5);
     }
   }
 }
@@ -324,7 +324,7 @@ ship_tilting_camera_tilt() {
   for(;;) {
     var_0 = _randomfloatrange(5, 7);
     var_1 = level common_scripts\utility::waittill_any_return("ship_tilting_starboard", "ship_tilting_port");
-    _id_0378::_id_8D74("zmb_dnk_ship_tilt", var_1);
+    _id_0378::snd_message("zmb_dnk_ship_tilt", var_1);
 
     if(var_1 == "ship_tilting_starboard") {
       level.groundrefent rotateTo((8, 0, 0), var_0, var_0 * 0.5, var_0 * 0.5);
@@ -353,36 +353,36 @@ debug_ship_tilting_tilt_ship() {
 }
 
 debug_ship_tilting_disable() {
-  common_scripts\utility::_id_3C7B("flag_ship_tilting_enabled");
+  common_scripts\utility::flag_clear("flag_ship_tilting_enabled");
 }
 
 ______trap______() {}
 
 water_trap_init() {
   level._id_9CFB = 1;
-  level._id_62B5 = 1;
+  level.modplayertrapdmg = 1;
   level._effect["trap_ready"] = loadfx("vfx/zombie/zmb_trap_light_orange_small");
   level._effect["trap_not_ready"] = loadfx("vfx/zombie/zmb_trap_light_orange_blink_small");
   level._id_9CD1["ready_to_active"] = undefined;
   level._id_9CD1["active_to_cooldown"] = undefined;
   level._id_9CD1["cooldown_to_active"] = undefined;
-  var_0 = common_scripts\utility::_id_46B5("trap_ship_tilting_water", "script_noteworthy");
+  var_0 = common_scripts\utility::getstruct("trap_ship_tilting_water", "script_noteworthy");
   var_0.damagetrigger = _getEnt("ship_tilting_trap_damage_trig", "targetname");
   var_0.vfxplane = _getEnt("ship_tilting_trap_vfx_plane", "targetname");
   var_0.vfxplane hide();
   var_0 thread water_trap_movement();
-  thread _id_0546::_id_9CC6("trap_ship_tilting_water", "active", ::water_trap);
+  thread _id_0546::trap_setup_custom_function("trap_ship_tilting_water", "active", ::water_trap);
 }
 
 water_trap(var_0) {
-  level.trapwater = var_0 common_scripts\utility::_id_8FFC();
+  level.trapwater = var_0 common_scripts\utility::spawn_tag_origin();
   level.trapwater._id_9CBB = "trap_ship_tilting_water";
   level.trapwater._id_9C92 = var_0;
-  _id_0378::_id_8D74("start_water_trap", var_0);
+  _id_0378::snd_message("start_water_trap", var_0);
   var_1 = undefined;
 
   if(isDefined(var_0.target)) {
-    var_2 = common_scripts\utility::_id_46B7(var_0.target, "targetname");
+    var_2 = common_scripts\utility::getstructarray(var_0.target, "targetname");
 
     foreach(var_4 in var_2) {
       if(_id_0547::_id_5565(var_4._id_0165, "activate_model_dest")) {
@@ -391,7 +391,7 @@ water_trap(var_0) {
     }
   }
 
-  var_6 = var_0._id_6298.angles;
+  var_6 = var_0.modelent.angles;
   var_0 thread water_trap_rotate_lever(var_6, var_1);
   var_0 thread water_trap_damage();
 }
@@ -400,9 +400,9 @@ water_trap_rotate_lever(var_0, var_1) {
   if(!isDefined(var_1)) {
     return;
   }
-  self._id_6298 rotateTo(var_1.angles, 0.35, 0.1, 0.1);
+  self.modelent rotateTo(var_1.angles, 0.35, 0.1, 0.1);
   wait 2;
-  self._id_6298 rotateTo(var_0, 0.35, 0.1, 0.1);
+  self.modelent rotateTo(var_0, 0.35, 0.1, 0.1);
 }
 
 water_trap_movement() {
@@ -429,19 +429,19 @@ water_trap_movement() {
 }
 
 water_trap_damage() {
-  self._id_565F = 1;
+  self.isactive = 1;
   self.vfxplane show();
   level thread common_scripts\_exploder::_id_088E(210);
   thread water_trap_damage_zombies();
   thread water_trap_damage_players();
-  common_scripts\utility::_id_A70A("cooldown", "no_power", "ready", "deactivate");
+  common_scripts\utility::waittill_any("cooldown", "no_power", "ready", "deactivate");
   self.vfxplane hide();
-  self._id_565F = 0;
-  level thread common_scripts\_exploder::_id_2A6D(210, undefined, 1);
+  self.isactive = 0;
+  level thread common_scripts\_exploder::deactivate_clientside_exploder(210, undefined, 1);
 }
 
 water_trap_damage_zombies() {
-  while(self._id_565F) {
+  while(self.isactive) {
     var_0 = _id_0547::_id_408F();
 
     foreach(var_2 in var_0) {
@@ -450,7 +450,7 @@ water_trap_damage_zombies() {
 
         if(isalive(var_2) && var_2._id_0BA4 != "traverse") {
           if(!isDefined(var_2.waszappedlast) || isDefined(var_2.waszappedlast) && var_3 > var_2.waszappedlast + 500) {
-            if(var_2 _id_0547::_id_580A()) {
+            if(var_2 _id_0547::istrapresistant()) {
               var_2 dodamage(var_2.health * 0.1, self.origin, level.trapwater, level.trapwater, "MOD_ENERGY", "trap_zm_mp");
             } else {
               var_2 thread _id_0546::mark_electrified();
@@ -479,12 +479,12 @@ water_trap_damage_zombies() {
 }
 
 water_trap_damage_players() {
-  while(self._id_565F) {
+  while(self.isactive) {
     foreach(var_1 in level.players) {
       if(!isalive(var_1)) {
         continue;
       }
-      if(_id_0547::_id_577E(var_1)) {
+      if(_id_0547::isplayerinlaststand(var_1)) {
         continue;
       }
       var_2 = gettime();
@@ -494,8 +494,8 @@ water_trap_damage_players() {
       }
 
       if(var_1 istouching(self.damagetrigger)) {
-        if(isalive(var_1) && !_id_0547::_id_577E(var_1) && var_2 > var_1.waszappedlast + 500) {
-          var_1 _id_0378::_id_8D74("water_trap_damage_player");
+        if(isalive(var_1) && !_id_0547::isplayerinlaststand(var_1) && var_2 > var_1.waszappedlast + 500) {
+          var_1 _id_0378::snd_message("water_trap_damage_player");
           var_1 dodamage(5, self.origin, undefined, undefined, "MOD_ENERGY");
           var_1.waszappedlast = gettime();
           waitframe();
@@ -513,22 +513,22 @@ sinking_init() {
   level.kpishouldchain = 1;
   thread sinking_vo();
   level.keypointinteractholdtime = 4;
-  var_0 = common_scripts\utility::_id_46B7("sinking_vfx_struct", "targetname");
+  var_0 = common_scripts\utility::getstructarray("sinking_vfx_struct", "targetname");
   var_1 = getEntArray("keypoint_interact_trigger", "targetname");
 
   foreach(var_3 in var_0) {
-    var_3.interacttrigger = common_scripts\utility::_id_4461(var_3.origin, var_1);
+    var_3.interacttrigger = common_scripts\utility::getclosest(var_3.origin, var_1);
     var_3.interacttrigger._id_3F76 = spawn("script_model", var_3.origin);
     var_3.interacttrigger._id_3F76 setModel("tag_origin");
     var_3.interacttrigger._id_3F76.angles = var_3.angles;
     var_3.interacttrigger thread sinking_init_leak_vfx();
-    var_3.interacttrigger _id_0378::_id_8D74("aud_repair_leaking_water");
+    var_3.interacttrigger _id_0378::snd_message("aud_repair_leaking_water");
     var_3.interacttrigger thread sinking_waitfor_interact_complete();
   }
 }
 
 sinking_init_leak_vfx() {
-  while(!isDefined(self._id_565F) || !self._id_565F) {
+  while(!isDefined(self.isactive) || !self.isactive) {
     wait 1;
   }
 
@@ -693,7 +693,7 @@ visions_footprints_logic(var_0) {
       if(isalive(var_5) && var_5._id_0BA4 != "traverse" && common_scripts\utility::_id_562E(var_5.hiddenbyvisions)) {
         foreach(var_7 in var_2) {
           if(var_5 istouching(var_7)) {
-            var_8 = common_scripts\utility::_id_348B(var_5.origin);
+            var_8 = common_scripts\utility::drop_to_ground(var_5.origin);
 
             switch (var_7._id_0165) {
               case "snow":
@@ -719,7 +719,7 @@ visions_state_apply() {
 }
 
 visions_end() {
-  level common_scripts\utility::_id_A70A("sg_obj_end", "sg_obj_timeout");
+  level common_scripts\utility::waittill_any("sg_obj_end", "sg_obj_timeout");
   self notify("altered_state_end");
   maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::altered_state_end_overlay(1);
   level notify("kill_visions_threads");
@@ -729,7 +729,7 @@ ______floating_objects______() {}
 
 floating_object_run() {
   level endon("altered_state_end");
-  var_0 = common_scripts\utility::_id_46B7("floating_object_struct", "script_noteworthy");
+  var_0 = common_scripts\utility::getstructarray("floating_object_struct", "script_noteworthy");
   var_1 = ["whale", "rideauSwim", "rideauEmote", "jackHead", "brennerHead", "monkHead", "truck", "raft", "body"];
   var_2 = _randomintrange(6, 14);
 
@@ -749,7 +749,7 @@ floating_object_run() {
 floating_object_spawn_object(var_0) {
   level endon("altered_state_end");
   var_0.modelorigin = spawn("script_origin", var_0._id_9087);
-  var_1 = common_scripts\utility::_id_46B5(var_0._id_0186.target, "targetname");
+  var_1 = common_scripts\utility::getstruct(var_0._id_0186.target, "targetname");
   var_2 = undefined;
 
   switch (var_0.objectname) {
@@ -853,7 +853,7 @@ bomb_disposal_bomb_setup() {
   var_1 = getEntArray("keypoint_interact_trigger", "targetname");
 
   foreach(var_3 in var_0) {
-    var_3.interacttrigger = common_scripts\utility::_id_4461(var_3.origin, var_1);
+    var_3.interacttrigger = common_scripts\utility::getclosest(var_3.origin, var_1);
     var_3 thread bomb_disposal_bomb_waitfor_interact_complete();
   }
 }
@@ -887,10 +887,10 @@ bomb_disposal_care_package_listen() {
 bomb_disposal_care_package_drop() {
   level endon("sg_obj_timeout");
   level endon("sg_obj_end");
-  var_0 = common_scripts\utility::_id_46B5("carepackage_dz", "targetname");
+  var_0 = common_scripts\utility::getstruct("carepackage_dz", "targetname");
   level.mark_next_package_as_objective_package = 1;
   maps\mp\zombies\zombie_carepackage::zm_care_spawn(common_scripts\utility::random(level.players), var_0);
-  var_1 = level common_scripts\utility::_id_A74D("zombies_crate_captured", 100);
+  var_1 = level common_scripts\utility::waittill_notify_or_timeout_return("zombies_crate_captured", 100);
 
   if(isDefined(var_1) && var_1 == "timeout") {
     bomb_disposal_care_package_drop();
@@ -903,7 +903,7 @@ bomb_disposal_kit_spawn() {
   var_0 = spawn("script_model", _func_2E1(self.origin) + (0, 0, 4));
   var_0 setModel("npc_gen_s_and_d_bomb");
   var_0 hudoutlineenable(0, 0);
-  var_0 _id_0547::_id_AC41(&"ZOMBIE_DLC3_BOMB_DISPOSAL_BOMB_PICKUP", (0, 0, 16));
+  var_0 _id_0547::zombies_make_usable(&"ZOMBIE_DLC3_BOMB_DISPOSAL_BOMB_PICKUP", (0, 0, 16));
   var_0 thread bomb_disposal_kit_listen_for_pickup();
 }
 
@@ -912,7 +912,7 @@ bomb_disposal_kit_listen_for_pickup() {
   var_0 = self;
   var_0 waittill("player_used", var_1);
   level notify("sg_keypoint_interact_bomb_pickup");
-  var_0 _id_0547::_id_AC40();
+  var_0 _id_0547::zombies_make_unusable();
   var_0 delete();
   var_1.bombdisposaloldweapon = var_1 getcurrentprimaryweapon();
   var_1 _id_0586::_id_078C("sg_disposal_kit_zm");
@@ -1005,7 +1005,7 @@ escape_higgins_raise() {
   var_2 scriptmodelplayanimdeltamotion("s2_zdu_ship_boat_rack_up");
   _playFXOnTag(level._effect["zmb_dnk_boat_water_pull"], var_1, "tag_origin");
   var_3 = _getanimlength(%s2_zdu_ship_boat_rack_up);
-  var_1 _id_0378::_id_8D74("escape_boat_rise", var_3);
+  var_1 _id_0378::snd_message("escape_boat_rise", var_3);
   wait(_getanimlength(%s2_zdu_ship_boat_rack_up));
   var_2 scriptmodelplayanimdeltamotion("s2_zdu_ship_boat_rack_idle_up");
   level notify("escape_ready");
@@ -1020,7 +1020,7 @@ defense_extra_run() {
 }
 
 defense_spawner_toggle() {
-  common_scripts\utility::_id_3C7B("dnk_defense_drop_spawner_enabled");
+  common_scripts\utility::flag_clear("dnk_defense_drop_spawner_enabled");
   level waittill("sg_obj_end");
   common_scripts\utility::flag_set("dnk_defense_drop_spawner_enabled");
 }
@@ -1029,9 +1029,9 @@ ___________________audio_log___________________() {}
 
 audio_log_init() {
   var_0 = _getEnt("lore_primary", "script_noteworthy");
-  var_0._id_9D5E = _getEnt(var_0.target, "targetname");
+  var_0.trig = _getEnt(var_0.target, "targetname");
   var_0 hide();
-  var_0._id_9D5E common_scripts\utility::_id_9D9F();
+  var_0.trig common_scripts\utility::trigger_off();
   audio_log_listen(var_0);
 }
 
@@ -1049,7 +1049,7 @@ audio_log_listen(var_0) {
   var_1.origin = var_0.origin;
   var_1 delete();
   var_0 show();
-  var_0._id_9D5E common_scripts\utility::_id_9DA3();
+  var_0.trig common_scripts\utility::trigger_on();
 }
 
 ___________________quest_fish___________________() {}
@@ -1076,11 +1076,11 @@ dnk_completion_rewards() {
 
   foreach(var_1 in level.players) {
     var_1 _id_056A::_id_4772(1);
-    var_1 thread maps\mp\gametypes\_hud_message::_id_9102("zm_dlc3_ee_2_complete");
+    var_1 thread maps\mp\gametypes\_hud_message::splashnotify("zm_dlc3_ee_2_complete");
 
     if(_isonlinegame()) {
       var_1 _meth_8697(43, [5, 6]);
-      var_1 thread maps\mp\gametypes\_hud_message::_id_9102("zm_camo_unlocked", 0);
+      var_1 thread maps\mp\gametypes\_hud_message::splashnotify("zm_camo_unlocked", 0);
     }
   }
 }
@@ -1118,14 +1118,14 @@ ___________________step_activate_gas___________________() {}
 
 ee_activate_gas() {
   thread ee_activate_gas_uber_think();
-  common_scripts\utility::_id_3C9F("ee_activate_gas_gas_activated");
+  common_scripts\utility::flag_wait("ee_activate_gas_gas_activated");
   maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::register_banned_objective("dnk_ext_visions");
   thread ee_activate_gas_all_players_wait_for_visions();
-  common_scripts\utility::_id_3C9F("ee_activate_gas_all_players_in_visions");
+  common_scripts\utility::flag_wait("ee_activate_gas_all_players_in_visions");
   level.zmb_sg_banned_objectives = common_scripts\utility::_id_0F6F(level.zmb_sg_banned_objectives, "dnk_ext_visions");
   level notify("ee_hallucination_intensity_increase");
   thread wait_for_round_end("ee_activate_gas_round_waited");
-  common_scripts\utility::_id_3C9F("ee_activate_gas_round_waited");
+  common_scripts\utility::flag_wait("ee_activate_gas_round_waited");
   _id_0557::_id_782D("quest_fish", "step_activate_gas");
 }
 
@@ -1137,10 +1137,10 @@ ee_activate_gas_uber_think() {
     var_1 waittill("damage", var_2, var_3, var_4, var_5, var_6);
 
     if(var_6 == "MELEE" || var_6 == "MOD_MELEE") {
-      playFX(common_scripts\utility::_id_44F5("zmb_dnk_uber_explode"), var_1.origin);
+      playFX(common_scripts\utility::getfx("zmb_dnk_uber_explode"), var_1.origin);
       var_0 setModel("zdu_damaged_uber_01");
-      playFX(common_scripts\utility::_id_44F5("zmb_dnk_uber_leak"), var_1.origin);
-      _id_0378::_id_8D74("zmb_dnk_uber_leak_start", var_1.origin);
+      playFX(common_scripts\utility::getfx("zmb_dnk_uber_leak"), var_1.origin);
+      _id_0378::snd_message("zmb_dnk_uber_leak_start", var_1.origin);
       common_scripts\utility::flag_set("ee_activate_gas_gas_activated");
       break;
     }
@@ -1177,7 +1177,7 @@ ee_activate_gas_player_grant_visions() {
   var_0 endon("disconnect");
   var_1 = _getEnt("ee_trig_dmg_uberschnell", "script_noteworthy");
 
-  while(!common_scripts\utility::_id_3C77("ee_activate_gas_all_players_in_visions")) {
+  while(!common_scripts\utility::flag("ee_activate_gas_all_players_in_visions")) {
     if(!common_scripts\utility::_id_562E(var_0.invisionstate)) {
       var_2 = distancesquared(var_0.origin, var_1.origin);
 
@@ -1195,7 +1195,7 @@ ee_activate_gas_player_grant_visions() {
 
 ee_activate_gas_player_visions_timeout() {
   self endon("disconnect");
-  var_0 = level common_scripts\utility::_id_A74D("ee_activate_gas_all_players_in_visions", 60);
+  var_0 = level common_scripts\utility::waittill_notify_or_timeout_return("ee_activate_gas_all_players_in_visions", 60);
 
   if(isDefined(var_0) && var_0 == "timeout") {
     self notify("ee_fish_visions_timeout");
@@ -1227,7 +1227,7 @@ maintain_player_vision_state() {
   for(;;) {
     level waittill("player_spawned");
 
-    if(common_scripts\utility::_id_3C77("flag_ee_altered_state_finished")) {
+    if(common_scripts\utility::flag("flag_ee_altered_state_finished")) {
       break;
     }
 
@@ -1251,15 +1251,15 @@ ee_summon_fish() {
   level.fishdestroyed = 0;
   thread ee_summon_fish_setup_fish();
   thread ee_summon_fish_wait_for_all_fish();
-  common_scripts\utility::_id_3C9F("ee_summon_fish_all_fish_destroyed");
+  common_scripts\utility::flag_wait("ee_summon_fish_all_fish_destroyed");
   thread wait_for_round_end("ee_summon_fish_round_waited");
-  common_scripts\utility::_id_3C9F("ee_summon_fish_round_waited");
+  common_scripts\utility::flag_wait("ee_summon_fish_round_waited");
   ee_summon_fish_special_fish_spawn();
   _id_0557::_id_782D("quest_fish", "step_summon_fish");
 }
 
 ee_summon_fish_setup_fish() {
-  var_0 = common_scripts\utility::_id_46B7("ee_vfx_flopping_fish", "script_noteworthy");
+  var_0 = common_scripts\utility::getstructarray("ee_vfx_flopping_fish", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     var_2.damagetrigger = _getEnt(var_2.target, "targetname");
@@ -1293,13 +1293,13 @@ ee_summon_fish_play_fx() {
 
   for(;;) {
     _playFXOnTag(level._effect["fish_flop"], self._id_3F76, "tag_origin");
-    _id_0378::_id_8D74("zmb_fish_jump", self._id_3F76);
+    _id_0378::snd_message("zmb_fish_jump", self._id_3F76);
     wait 1.1;
   }
 }
 
 ee_summon_fish_wait_for_all_fish() {
-  var_0 = common_scripts\utility::_id_46B7("ee_vfx_flopping_fish", "script_noteworthy");
+  var_0 = common_scripts\utility::getstructarray("ee_vfx_flopping_fish", "script_noteworthy");
 
   while(level.fishdestroyed < var_0.size) {
     wait 1;
@@ -1309,7 +1309,7 @@ ee_summon_fish_wait_for_all_fish() {
 }
 
 ee_summon_fish_special_fish_spawn() {
-  var_0 = common_scripts\utility::_id_46B5("ee_special_fish_start", "script_noteworthy");
+  var_0 = common_scripts\utility::getstruct("ee_special_fish_start", "script_noteworthy");
   level.specialfish = spawn("script_model", var_0.origin);
   level.specialfish setModel("zdu_red_herring_obj_01");
   level.specialfish.angles = var_0.angles;
@@ -1332,19 +1332,19 @@ ee_follow_fish() {
     level.specialfish thread ee_follow_fish_fish_think();
   }
 
-  common_scripts\utility::_id_3C9F("ee_follow_fish_all_ubers_destroyed");
+  common_scripts\utility::flag_wait("ee_follow_fish_all_ubers_destroyed");
   _id_0557::_id_782D("quest_fish", "step_follow_fish");
 }
 
 ee_follow_fish_fish_think() {
-  var_0 = common_scripts\utility::_id_46B5("ee_special_fish_start", "script_noteworthy");
-  var_1 = common_scripts\utility::_id_46B5(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getstruct("ee_special_fish_start", "script_noteworthy");
+  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
 
   for(;;) {
     if(isDefined(var_1)) {
       if(isDefined(var_1._id_0165) && var_1._id_0165 == "ee_follow_fish_channeling_spot") {
-        var_2 = common_scripts\utility::_id_46B7("ee_fish_uber_receiver_struct", "targetname");
-        var_1.uberreceiverstruct = common_scripts\utility::_id_4461(var_1.origin, var_2);
+        var_2 = common_scripts\utility::getstructarray("ee_fish_uber_receiver_struct", "targetname");
+        var_1.uberreceiverstruct = common_scripts\utility::getclosest(var_1.origin, var_2);
         var_1.uberreceiverstruct thread ee_follow_fish_uber_give_to_fish();
         ee_follow_fish_teleport_to_destination(var_1);
         level notify("ee_follow_fish_channel_spot_reached");
@@ -1354,7 +1354,7 @@ ee_follow_fish_fish_think() {
         ee_follow_fish_move_to_destination(var_1);
 
       if(isDefined(var_1.target)) {
-        var_1 = common_scripts\utility::_id_46B5(var_1.target, "targetname");
+        var_1 = common_scripts\utility::getstruct(var_1.target, "targetname");
       } else {
         self hide();
         common_scripts\utility::flag_set("ee_follow_fish_all_ubers_destroyed");
@@ -1401,11 +1401,11 @@ ee_follow_fish_teleport_to_destination(var_0) {
   wait 2;
   var_0.uberreceiverstruct thread hallucination_poof_fx();
   var_0.uberreceiverstruct.receivermodel show();
-  var_0.uberreceiverstruct._id_241F solid();
+  var_0.uberreceiverstruct.clip solid();
 }
 
 ee_follow_fish_uber_receiver_setup() {
-  var_0 = common_scripts\utility::_id_46B7("ee_fish_uber_receiver_struct", "targetname");
+  var_0 = common_scripts\utility::getstructarray("ee_fish_uber_receiver_struct", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::_id_44BE(var_2.target, "targetname");
@@ -1417,8 +1417,8 @@ ee_follow_fish_uber_receiver_setup() {
           var_2.usetrigger = var_5;
           break;
         case "ee_fish_receiver_clip":
-          var_2._id_241F = var_5;
-          var_2._id_241F._id_A045 = ::ee_uber_reciever_unresolved_collide;
+          var_2.clip = var_5;
+          var_2.clip.unresolved_collision_func = ::ee_uber_reciever_unresolved_collide;
           var_5 notsolid();
           break;
         case "ee_fish_uber_receiver":
@@ -1435,15 +1435,15 @@ ee_follow_fish_uber_receiver_setup() {
       }
     }
 
-    if(isDefined(var_2._id_241F) && isDefined(var_2.failsafe_nodes) && var_2.failsafe_nodes.size > 0) {
-      var_2._id_241F.my_uber_struct = var_2;
+    if(isDefined(var_2.clip) && isDefined(var_2.failsafe_nodes) && var_2.failsafe_nodes.size > 0) {
+      var_2.clip.my_uber_struct = var_2;
     }
   }
 }
 
 ee_uber_reciever_unresolved_collide(var_0) {
-  self._id_A048 = ee_uber_reciever_get_unresolved_collision_locs(self.my_uber_struct, var_0);
-  _id_0488::_id_A047(var_0, 0);
+  self.unresolved_collision_nodes = ee_uber_reciever_get_unresolved_collision_locs(self.my_uber_struct, var_0);
+  _id_0488::unresolved_collision_nearest_node(var_0, 0);
 }
 
 ee_uber_reciever_get_unresolved_collision_locs(var_0, var_1) {
@@ -1461,7 +1461,7 @@ ee_uber_reciever_get_unresolved_collision_locs(var_0, var_1) {
 }
 
 ee_follow_fish_uber_wall_setup() {
-  level.uberbuys = common_scripts\utility::_id_46B7("ee_uber_wall_buy_struct", "targetname");
+  level.uberbuys = common_scripts\utility::getstructarray("ee_uber_wall_buy_struct", "targetname");
 
   foreach(var_1 in level.uberbuys) {
     var_2 = getEntArray(var_1.target, "targetname");
@@ -1525,8 +1525,8 @@ ee_follow_fish_uber_wall_think() {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(var_1._id_62D6 >= 3000) {
-      var_1 maps\mp\gametypes\zombies::_id_90F5(3000);
+    if(var_1.moneycurrent >= 3000) {
+      var_1 maps\mp\gametypes\zombies::spendmoney(3000);
       var_1 _id_0585::_id_8555(undefined);
       self notify("ee_follow_fish_uber_purchased");
       break;
@@ -1585,9 +1585,9 @@ ee_follow_fish_uber_ground_spawn() {
   var_0 = spawn("script_model", _func_2E1(self.origin) + (0, 0, 4));
   var_0 setModel("npc_zom_uber_01");
   var_0 hudoutlineenable(0, 0);
-  var_0 _id_0547::_id_AC41(&"ZOMBIE_DLC3_UBER_WALL_BUY_PICKUP", (0, 0, 16));
+  var_0 _id_0547::zombies_make_usable(&"ZOMBIE_DLC3_UBER_WALL_BUY_PICKUP", (0, 0, 16));
   var_0 waittill("player_used", var_1);
-  var_0 _id_0547::_id_AC40();
+  var_0 _id_0547::zombies_make_unusable();
   var_0 delete();
   var_1 ee_follow_fish_uber_pickup();
 }
@@ -1632,7 +1632,7 @@ ee_follow_fish_uber_completed() {
   }
 
   wait 2;
-  playFX(common_scripts\utility::_id_44F5("zmb_dnk_uber_leak"), self._id_9FE1.origin);
+  playFX(common_scripts\utility::getfx("zmb_dnk_uber_leak"), self._id_9FE1.origin);
   level notify("ee_hallucination_intensity_increase");
   wait 2;
   level notify("ee_follow_fish_uber_given");
@@ -1641,7 +1641,7 @@ ee_follow_fish_uber_completed() {
 ee_follow_fish_earthquake(var_0, var_1) {
   _earthquake(0.4, var_0, var_1.origin, 850);
   _playrumblelooponposition("tank_rumble", var_1.origin);
-  _id_0378::_id_8D74("ee_follow_fish_earthquake", var_0);
+  _id_0378::snd_message("ee_follow_fish_earthquake", var_0);
   wait(var_0);
   _stopallrumbles();
 }
@@ -1657,18 +1657,18 @@ warp_fish_followed() {
 ___________________step_conquer_fish___________________() {}
 
 ee_conquer_fish() {
-  while(!common_scripts\utility::_id_562E(level._id_AC11)) {
+  while(!common_scripts\utility::_id_562E(level.zombie_wave_running)) {
     wait 0.5;
   }
 
-  if(level._id_A980 >= 9) {
+  if(level.wavecounter >= 9) {
     return;
   }
-  while(level._id_A980 % 3 == 0) {
+  while(level.wavecounter % 3 == 0) {
     wait 0.5;
   }
 
-  while(!common_scripts\utility::_id_562E(level._id_AC11)) {
+  while(!common_scripts\utility::_id_562E(level.zombie_wave_running)) {
     wait 0.5;
   }
 
@@ -1676,9 +1676,9 @@ ee_conquer_fish() {
   level.zmb_is_endless_wave = 1;
   wait 3;
   thread ee_conquer_fish_void_enter();
-  common_scripts\utility::_id_3C9F("ee_conquer_fish_entered_void");
+  common_scripts\utility::flag_wait("ee_conquer_fish_entered_void");
   thread ee_conquer_fish_void_setup();
-  common_scripts\utility::_id_3C9F("ee_conquer_fish_straub_complete");
+  common_scripts\utility::flag_wait("ee_conquer_fish_straub_complete");
   thread ee_conquer_fish_bucket_shuffle_init();
   ee_conquer_fish_bucket_shuffle_completion();
   _id_0557::_id_782D("quest_fish", "step_conquer_fish");
@@ -1691,10 +1691,10 @@ ee_conquer_fish_setup() {
 }
 
 ee_conquer_fish_void_enter() {
-  if(common_scripts\utility::_id_3C77("ee_conquer_fish_entered_void")) {
+  if(common_scripts\utility::flag("ee_conquer_fish_entered_void")) {
     return;
   }
-  _id_0378::_id_8D74("ctf_void_enter");
+  _id_0378::snd_message("ctf_void_enter");
 
   foreach(var_1 in level.players) {
     thread _id_0547::_id_09E9(var_1, "void_fading");
@@ -1711,8 +1711,8 @@ ee_conquer_fish_void_enter() {
   }
 
   level.groundrefent rotateTo((0, 0, 0), 0.05);
-  common_scripts\utility::_id_3C7B("flag_ship_tilting_enabled");
-  var_6 = common_scripts\utility::_id_46B7("ee_bucket_shuffle_tp_to_void", "targetname");
+  common_scripts\utility::flag_clear("flag_ship_tilting_enabled");
+  var_6 = common_scripts\utility::getstructarray("ee_bucket_shuffle_tp_to_void", "targetname");
 
   for(var_7 = 0; var_7 < level.players.size; var_7++) {
     level.players[var_7] setOrigin(var_6[var_7].origin);
@@ -1750,14 +1750,14 @@ ee_conquer_fish_void_enter_fade() {
   var_0.entervoidoverlayfade.alpha = 1;
   var_0.entervoidoverlayfade fadeovertime(var_2);
   var_0.entervoidoverlayfade.alpha = 0;
-  _id_0378::_id_8D74("zmb_dnk_uber_leak_stop");
+  _id_0378::snd_message("zmb_dnk_uber_leak_stop");
 }
 
 ee_conquer_fish_void_setup() {
   var_0 = getEntArray("ee_conquer_fish_platform", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    var_2 common_scripts\utility::_id_4CEB();
+    var_2 common_scripts\utility::hide_notsolid();
   }
 
   var_4 = getEntArray("ee_conquer_fish_vignette_prop", "targetname");
@@ -1786,7 +1786,7 @@ ee_conquer_fish_void_setup() {
     var_18 thread ee_conquer_fish_void_straub_vignette_init();
   }
 
-  level.voidfallteleportlocations = common_scripts\utility::_id_46B7("void_tp_platform_start", "targetname");
+  level.voidfallteleportlocations = common_scripts\utility::getstructarray("void_tp_platform_start", "targetname");
   thread ee_conquer_fish_void_fall_teleport();
 }
 
@@ -1826,7 +1826,7 @@ ee_conquer_fish_void_platform_think() {
   foreach(var_3 in var_1) {
     var_3 thread hallucination_poof_fx();
     var_3 thread platform_fog_fx();
-    var_3 common_scripts\utility::_id_8BE0();
+    var_3 common_scripts\utility::show_solid();
   }
 }
 
@@ -1849,7 +1849,7 @@ ee_conquer_fish_void_platform_vignette_think() {
 
   foreach(var_4 in var_0) {
     var_4 thread hallucination_poof_fx();
-    var_4 common_scripts\utility::_id_8BE0();
+    var_4 common_scripts\utility::show_solid();
   }
 
   level waittill("ee_conquer_fish_vignette_complete");
@@ -1857,7 +1857,7 @@ ee_conquer_fish_void_platform_vignette_think() {
 
   foreach(var_4 in var_1) {
     var_4 thread hallucination_poof_fx();
-    var_4 common_scripts\utility::_id_8BE0();
+    var_4 common_scripts\utility::show_solid();
   }
 
   level waittill("ee_conquer_fish_vignette_complete");
@@ -1865,7 +1865,7 @@ ee_conquer_fish_void_platform_vignette_think() {
 
   foreach(var_4 in var_2) {
     var_4 thread hallucination_poof_fx();
-    var_4 common_scripts\utility::_id_8BE0();
+    var_4 common_scripts\utility::show_solid();
   }
 }
 
@@ -1873,7 +1873,7 @@ _id_3D34() {
   level endon("bucket_shuffle_complete");
 
   for(;;) {
-    _id_0378::_id_8D74("flare_fx");
+    _id_0378::snd_message("flare_fx");
     wait 0.75;
     level thread common_scripts\_exploder::_id_088E(240);
     wait(_randomintrange(5, 20));
@@ -1884,7 +1884,7 @@ ee_conquer_fish_void_straub_vignette_init() {
   var_0 = self;
   wait_until_all_players_in_volume(var_0);
   wait 1;
-  var_1 = common_scripts\utility::_id_46B5(var_0.target, "targetname");
+  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
   var_1 thread hallucination_poof_fx();
   var_2 = spawn("script_model", var_1.origin);
   var_2 setModel("zom_straub_wholebody_dlc");
@@ -1895,8 +1895,8 @@ ee_conquer_fish_void_straub_vignette_init() {
 
   switch (var_1._id_0165) {
     case "ee_conquer_fish_straub_vignette_one":
-      level.voidfallteleportlocations = common_scripts\utility::_id_46B7("void_tp_platform_one", "targetname");
-      var_1._id_5055 = "s2_zom_straub_table_cleaver_idle";
+      level.voidfallteleportlocations = common_scripts\utility::getstructarray("void_tp_platform_one", "targetname");
+      var_1.idleanim = "s2_zom_straub_table_cleaver_idle";
       var_1.idleanimlength = _getanimlength(%s2_zom_straub_table_cleaver_idle);
       var_1._id_9A8E = "npc_zom_med_knife_02";
       var_1._id_778F = getEntArray("ee_conquer_fish_tfr_prop", "script_noteworthy");
@@ -1904,13 +1904,13 @@ ee_conquer_fish_void_straub_vignette_init() {
       var_1.straubclip = _getEnt("ee_conquer_fish_straub_clip_one", "script_noteworthy");
       var_1.straubclip solid();
       var_1 thread ee_conquer_fish_void_straub_vignette_play(var_2);
-      var_4 = common_scripts\utility::_id_46B7("ee_conquer_fish_tfr_zombie_spawner", "targetname");
+      var_4 = common_scripts\utility::getstructarray("ee_conquer_fish_tfr_zombie_spawner", "targetname");
       var_1 ee_conquer_fish_void_straub_event(var_2, var_4, 15, "zombie_heavy");
       break;
     case "ee_conquer_fish_straub_vignette_two":
-      level.voidfallteleportlocations = common_scripts\utility::_id_46B7("void_tp_platform_two", "targetname");
+      level.voidfallteleportlocations = common_scripts\utility::getstructarray("void_tp_platform_two", "targetname");
       level thread common_scripts\_exploder::_id_088E(203);
-      var_1._id_5055 = "s2_zom_straub_window_gaze_idle";
+      var_1.idleanim = "s2_zom_straub_window_gaze_idle";
       var_1.idleanimlength = _getanimlength(%s2_zom_straub_window_gaze_idle);
       var_1._id_9A8E = undefined;
       var_1._id_778F = undefined;
@@ -1918,15 +1918,15 @@ ee_conquer_fish_void_straub_vignette_init() {
       var_1.straubclip = _getEnt("ee_conquer_fish_straub_clip_two", "script_noteworthy");
       var_1.straubclip solid();
       var_1 thread ee_conquer_fish_void_straub_vignette_play(var_2);
-      var_4 = common_scripts\utility::_id_46B7("ee_conquer_fish_tds_zombie_spawner", "targetname");
+      var_4 = common_scripts\utility::getstructarray("ee_conquer_fish_tds_zombie_spawner", "targetname");
       var_1 ee_conquer_fish_void_straub_event(var_2, var_4, 20, "zombie_assassin");
       maps\mp\gametypes\zombies::_id_0DB9(level.players[0], 1);
       break;
     case "ee_conquer_fish_straub_vignette_three":
-      level.voidfallteleportlocations = common_scripts\utility::_id_46B7("void_tp_platform_three", "targetname");
+      level.voidfallteleportlocations = common_scripts\utility::getstructarray("void_tp_platform_three", "targetname");
       level thread common_scripts\_exploder::_id_088E(220);
       thread _id_3D34();
-      var_1._id_5055 = "s2_zom_straub_death_straub";
+      var_1.idleanim = "s2_zom_straub_death_straub";
       var_1.idleanimlength = _getanimlength(%s2_zom_straub_death_straub);
       var_1.exitanim = "s2_zom_straub_window_gaze_exit_2";
       var_1.exitanimlength = _getanimlength(%s2_zom_straub_window_gaze_exit_2);
@@ -1938,7 +1938,7 @@ ee_conquer_fish_void_straub_vignette_init() {
       var_1.straubclip solid();
       var_1.straubclip linktosynchronizedparent(var_2);
       var_1 thread ee_conquer_fish_void_straub_vignette_play(var_2, 1);
-      var_4 = common_scripts\utility::_id_46B7("ee_conquer_fish_tst_zombie_spawner", "targetname");
+      var_4 = common_scripts\utility::getstructarray("ee_conquer_fish_tst_zombie_spawner", "targetname");
       var_1 ee_conquer_fish_void_straub_event(var_2, var_4, 25, "zombie_sizzler");
       common_scripts\utility::flag_set("ee_conquer_fish_straub_complete");
       break;
@@ -1973,8 +1973,8 @@ ee_conquer_fish_void_straub_vignette_play(var_0, var_1) {
     var_2 thread ee_conquer_fish_void_straub_final_vignette_zombies();
   }
 
-  var_0 scriptmodelplayanimdeltamotionfrompos(var_2._id_5055, var_2.origin, var_2.angles);
-  var_0._id_00B9 scriptmodelplayanimdeltamotionfrompos(var_2._id_5055, var_2.origin, var_2.angles);
+  var_0 scriptmodelplayanimdeltamotionfrompos(var_2.idleanim, var_2.origin, var_2.angles);
+  var_0._id_00B9 scriptmodelplayanimdeltamotionfrompos(var_2.idleanim, var_2.origin, var_2.angles);
   var_2 ee_conquer_fish_void_straub_vignette_vo(var_0);
 
   if(var_1) {
@@ -2096,7 +2096,7 @@ ee_conquer_fish_void_straub_final_vignette(var_0) {
   var_1 = self;
 
   foreach(var_3 in level.players) {
-    _id_0378::_id_8D74("straub_laugh_hallucination", var_3);
+    _id_0378::snd_message("straub_laugh_hallucination", var_3);
   }
 
   var_0 thread ee_conquer_fish_void_straub_final_vignette_flicker();
@@ -2105,7 +2105,7 @@ ee_conquer_fish_void_straub_final_vignette(var_0) {
     var_3 thread _id_055B::_id_598A();
     var_3 shellshock("zm_dig_altered", var_1.exitanimlength);
     var_3 lerpfovscale(1.5, 1);
-    var_3 common_scripts\utility::_id_2CBE(var_1.exitanimlength, ::lerpfovscale, 1.2, 1);
+    var_3 common_scripts\utility::delaycall(var_1.exitanimlength, ::lerpfovscale, 1.2, 1);
   }
 
   var_0 scriptmodelclearanim();
@@ -2122,8 +2122,8 @@ ee_conquer_fish_void_straub_final_vignette_zombies() {
   for(var_1 = 0; var_1 < 8; var_1++) {
     level.straub_vignette_zombie[var_1] = spawn("script_model", var_0.origin);
     level.straub_vignette_zombie[var_1] setModel("zom_infantrya_bodywhole");
-    level.straub_vignette_zombie[var_1].animation_name = "s2_zom_straub_death_zom_0" + common_scripts\utility::_id_9AAD(var_1 + 1);
-    level.straub_vignette_zombie[var_1].idle_anim_name = "s2_zom_straub_death_end_zom_0" + common_scripts\utility::_id_9AAD(var_1 + 1);
+    level.straub_vignette_zombie[var_1].animation_name = "s2_zom_straub_death_zom_0" + common_scripts\utility::tostring(var_1 + 1);
+    level.straub_vignette_zombie[var_1].idle_anim_name = "s2_zom_straub_death_end_zom_0" + common_scripts\utility::tostring(var_1 + 1);
     level.straub_vignette_zombie[var_1]._id_00B9 = spawn("script_model", var_0.origin);
     level.straub_vignette_zombie[var_1]._id_00B9 setModel(common_scripts\utility::random(["zom_head_fdr02_org1", "zom_head_fdr03_org1", "zom_head_fdr04_org1"]));
     level.straub_vignette_zombie[var_1]._id_00B9 linkTo(level.straub_vignette_zombie[var_1], "j_spineupper", (0, 0, 0), (0, 0, 0));
@@ -2165,7 +2165,7 @@ ee_conquer_fish_bucket_shuffle_init() {
   thread ee_conquer_fish_bucket_shuffle_fish_float();
   var_0 = _getEnt("vol_ee_conquer_fish_bucket_shuffle_platform", "targetname");
   wait_until_all_players_in_volume(var_0);
-  level.voidfallteleportlocations = common_scripts\utility::_id_46B7("void_tp_platform_final", "targetname");
+  level.voidfallteleportlocations = common_scripts\utility::getstructarray("void_tp_platform_final", "targetname");
   wait 1;
   level.allbuckets = [];
   level thread maps\mp\_utility::_id_6F74(::ee_conquer_fish_bucket_missile_listen, undefined, "bucket_shuffle_complete");
@@ -2196,7 +2196,7 @@ ee_conquer_fish_bucket_shuffle_fish_float() {
 
 ee_conquer_fish_bucket_shuffle_setup_buckets(var_0) {
   level notify("ee_bucket_shuffle_start");
-  var_1 = common_scripts\utility::_id_46B7("ee_bucket_shuffle_bucket", "targetname");
+  var_1 = common_scripts\utility::getstructarray("ee_bucket_shuffle_bucket", "targetname");
   var_2 = 3;
 
   if(var_0 >= 1) {
@@ -2221,7 +2221,7 @@ ee_conquer_fish_bucket_shuffle_setup_buckets(var_0) {
     var_7 = spawn("script_model", var_6.origin);
     var_7 setModel("zdu_water_bucket_01");
     var_7 thread hallucination_poof_fx(0);
-    _playFXOnTag(common_scripts\utility::_id_44F5("zmb_dnk_bucket_sparks"), var_7, "tag_origin");
+    _playFXOnTag(common_scripts\utility::getfx("zmb_dnk_bucket_sparks"), var_7, "tag_origin");
     var_7 setCanDamage(1);
     var_3 = common_scripts\utility::_id_0F6F(var_3, var_7);
     level.allbuckets = common_scripts\utility::_id_0F6F(level.allbuckets, var_7);
@@ -2320,7 +2320,7 @@ ee_conquer_fish_bucket_shuffle_run(var_0, var_1) {
       break;
   }
 
-  var_6 = common_scripts\utility::_id_46B7("ee_bucket_shuffle_bucket", "targetname");
+  var_6 = common_scripts\utility::getstructarray("ee_bucket_shuffle_bucket", "targetname");
   var_7 = 0;
 
   while(var_7 < var_4) {
@@ -2329,7 +2329,7 @@ ee_conquer_fish_bucket_shuffle_run(var_0, var_1) {
     foreach(var_10 in var_1) {
       var_11 = common_scripts\utility::random(var_8);
       var_8 = common_scripts\utility::_id_0F93(var_8, var_11);
-      _id_0378::_id_8D74("ctf_bucket_move", var_10, var_2);
+      _id_0378::snd_message("ctf_bucket_move", var_10, var_2);
       var_10 moveTo(var_11.origin, var_2);
       var_10 thread ee_conquer_fish_bucket_wait_for_damage();
     }
@@ -2359,7 +2359,7 @@ ee_conquer_fish_bucket_shuffle_run(var_0, var_1) {
     var_15 = 10;
 
     for(var_16 = 0; var_16 < var_15; var_16++) {
-      _id_0378::_id_8D74("ctf_fish_360", level.bucketfish.origin, var_14);
+      _id_0378::snd_message("ctf_fish_360", level.bucketfish.origin, var_14);
       level.bucketfish rotateYaw(360, var_14);
       wait(var_14);
     }
@@ -2395,7 +2395,7 @@ ee_conquer_fish_bucket_shuffle_run(var_0, var_1) {
     }
 
     level.numbucketshuffleassassins++;
-    var_21 = common_scripts\utility::_id_46B7("ee_conquer_fish_bucket_shuffle_assassin_spawner", "targetname");
+    var_21 = common_scripts\utility::getstructarray("ee_conquer_fish_bucket_shuffle_assassin_spawner", "targetname");
     var_22 = ["zombie_assassin", "zombie_heavy"];
 
     for(var_16 = 0; var_16 < level.numbucketshuffleassassins; var_16++) {
@@ -2457,13 +2457,13 @@ ee_conquer_fish_bucket_wait_for_damage() {
 
 ee_conquer_fish_bucket_shuffle_completion() {
   level waittill("bucket_shuffle_complete");
-  _id_0378::_id_8D74("ctf_void_exit");
+  _id_0378::snd_message("ctf_void_exit");
   level thread ee_conquer_fish_exit_void();
 }
 
 ee_conquer_fish_exit_void() {
   foreach(var_1 in level.players) {
-    if(_id_0547::_id_577E(var_1)) {
+    if(_id_0547::isplayerinlaststand(var_1)) {
       var_1 notify("revive_trigger");
     }
 
@@ -2473,7 +2473,7 @@ ee_conquer_fish_exit_void() {
   level waittill("ee_conquer_fish_enter_void_fading");
   common_scripts\utility::flag_set("flag_ship_tilting_enabled");
   common_scripts\utility::flag_set("flag_ee_altered_state_finished");
-  var_3 = common_scripts\utility::_id_46B7("ee_bucket_shuffle_tp_to_ship", "targetname");
+  var_3 = common_scripts\utility::getstructarray("ee_bucket_shuffle_tp_to_ship", "targetname");
 
   for(var_4 = 0; var_4 < level.players.size; var_4++) {
     level.players[var_4] setOrigin(var_3[var_4].origin);
@@ -2501,7 +2501,7 @@ ee_conquer_fish_exit_void_failsafe() {
   for(var_0 = _id_055A::_id_5780("zone_the_void"); common_scripts\utility::_id_562E(var_0); var_0 = _id_055A::_id_5780("zone_the_void")) {
     foreach(var_2 in level.players) {
       if(_id_055A::_id_7413(var_2, "zone_the_void")) {
-        var_3 = common_scripts\utility::_id_46B7("ee_bucket_shuffle_tp_to_ship", "targetname");
+        var_3 = common_scripts\utility::getstructarray("ee_bucket_shuffle_tp_to_ship", "targetname");
         var_4 = common_scripts\utility::random(var_3);
         var_2 setOrigin(var_4.origin);
         var_2 setplayerangles(var_4.angles);
@@ -2535,7 +2535,7 @@ warp_start_bucket_shuffle() {
   level._id_ABE2 = 1;
   level._id_ABD3 = -10000;
   common_scripts\utility::flag_set("ship_to_void");
-  common_scripts\utility::_id_3C7B("flag_ship_tilting_enabled");
+  common_scripts\utility::flag_clear("flag_ship_tilting_enabled");
   level.zmb_locked_spawn_zones = ["zone_the_void"];
 }
 
@@ -2543,7 +2543,7 @@ ___________________step_get_part___________________() {}
 
 ee_get_part() {
   thread ee_get_part_think();
-  common_scripts\utility::_id_3C9F("ee_get_part_sword_part_picked_up");
+  common_scripts\utility::flag_wait("ee_get_part_sword_part_picked_up");
   level.shattered_ee_complete = 1;
   common_scripts\utility::flag_set("zmb_objectives_quest_end");
   _id_0557::_id_782D("quest_fish", "step_get_part");
@@ -2611,7 +2611,7 @@ hallucination_poof_fx(var_0) {
     _playFXOnTag(level._effect["zmb_dnk_geistkraftexplode"], var_1, "tag_origin");
   }
 
-  _id_0378::_id_8D74("dlc3_magic_poof", self.origin);
+  _id_0378::snd_message("dlc3_magic_poof", self.origin);
   wait 6;
   var_1 delete();
 }
@@ -2736,7 +2736,7 @@ wave_story_post_boss() {
 
 level_intro_vo() {
   for(;;) {
-    if(level._id_A980 >= 1) {
+    if(level.wavecounter >= 1) {
       break;
     }
 
@@ -2813,7 +2813,7 @@ get_all_alive_player_character_names() {
   foreach(var_2 in level.players) {
     var_3 = "";
 
-    switch (var_2._id_20D8) {
+    switch (var_2.characterindex) {
       case 34:
       case 29:
       case 18:
@@ -2842,7 +2842,7 @@ get_all_alive_player_character_names() {
     var_0 = common_scripts\utility::_id_0F6F(var_0, var_3);
   }
 
-  if(common_scripts\utility::_id_3C77("flag_debug_single_speaker")) {
+  if(common_scripts\utility::flag("flag_debug_single_speaker")) {
     var_0 = ["survivalist", "batagent", "batelite", "slayer"];
   }
 
@@ -2856,7 +2856,7 @@ update_expected_characters() {
   level.playercharacterslayers = [];
 
   foreach(var_1 in level.players) {
-    var_2 = var_1._id_20D8;
+    var_2 = var_1.characterindex;
 
     switch (var_2) {
       case 34:
@@ -2936,13 +2936,13 @@ check_if_speaker_valid(var_0) {
 determine_conversation_speaker_candidates(var_0) {
   var_1 = _func_36D(var_0, "zmb_bp_ship_");
 
-  if(common_scripts\utility::_id_9467(var_1, "surv")) {
+  if(common_scripts\utility::string_starts_with(var_1, "surv")) {
     var_2 = level.playercharactersurvivalists;
-  } else if(common_scripts\utility::_id_9467(var_1, "bata")) {
+  } else if(common_scripts\utility::string_starts_with(var_1, "bata")) {
     var_2 = level.playercharacterbatagents;
-  } else if(common_scripts\utility::_id_9467(var_1, "ride")) {
+  } else if(common_scripts\utility::string_starts_with(var_1, "ride")) {
     var_2 = level.playercharacterbatelites;
-  } else if(common_scripts\utility::_id_9467(var_1, "slay")) {
+  } else if(common_scripts\utility::string_starts_with(var_1, "slay")) {
     var_2 = level.playercharacterslayers;
   } else {
     var_2 = [];

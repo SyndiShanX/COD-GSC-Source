@@ -27,7 +27,7 @@ _id_AB91() {
   } else
     var_0["script_var"] = "drop_bomb";
 
-  if(common_scripts\utility::_id_3794("zombie_passive")) {
+  if(common_scripts\utility::ent_flag("zombie_passive")) {
     var_0["move_style"] = "crippled";
     var_0["move_speed"] = "passive";
   } else

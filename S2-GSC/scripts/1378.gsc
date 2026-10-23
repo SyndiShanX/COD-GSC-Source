@@ -45,7 +45,7 @@ _id_3599(var_0) {
 }
 
 _id_62D8(var_0) {
-  var_1 = _spawnfx(common_scripts\utility::_id_44F5("moneyCloud"), var_0);
+  var_1 = _spawnfx(common_scripts\utility::getfx("moneyCloud"), var_0);
   _triggerfx(var_1);
   wait 3;
   var_1 delete();

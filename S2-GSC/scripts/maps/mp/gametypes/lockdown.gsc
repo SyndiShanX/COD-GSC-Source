@@ -12,9 +12,9 @@ main() {
   _id_04D4::setupcallbacks();
 
   if(_isusingmatchrulesdata()) {
-    level._id_5300 = ::_id_5300;
-    [[level._id_5300]]();
-    level thread maps\mp\_utility::_id_7C13();
+    level.initializematchrules = ::initializematchrules;
+    [[level.initializematchrules]]();
+    level thread maps\mp\_utility::reinitializematchrulesonmigration();
   } else {
     maps\mp\_utility::registertimelimitdvar(level.gametype, 30);
     maps\mp\_utility::registerscorelimitdvar(level.gametype, 25);
@@ -22,15 +22,15 @@ main() {
     maps\mp\_utility::registerwinlimitdvar(level.gametype, 1);
     maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
     maps\mp\_utility::registerhalftimedvar(level.gametype, 1);
-    level._id_6031 = 0;
-    level._id_6035 = 0;
+    level.matchrules_damagemultiplier = 0;
+    level.matchrules_vampirism = 0;
   }
 
   maps\mp\_utility::_id_873B(1);
   level._id_0C27 = 1;
-  level._id_6BAF = ::_id_6BAF;
+  level.onstartgametype = ::onstartgametype;
   level._id_6B7B = ::_id_6B7B;
-  level._id_6BA7 = ::_id_6BA7;
+  level.onspawnplayer = ::onspawnplayer;
   level._id_5E69 = gettime();
   level._id_320D = maps\mp\_utility::getfloatproperty("scr_lockdown_capture_time", 10);
   level._id_0BDB["axis"]["time"] = 0;
@@ -38,11 +38,11 @@ main() {
   level._id_0BDB["allies"]["time"] = 0;
   level._id_0BDB["allies"]["awarded"] = 0;
   level._id_0BF4 = [];
-  level._id_147A = [];
-  level._id_3208 = spawnStruct();
+  level.axiscapturing = [];
+  level.dom = spawnStruct();
 
-  if(level._id_6031 || level._id_6035) {
-    level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
+    level.modifyplayerdamage = maps\mp\gametypes\_damage::gamemodemodifyplayerdamage;
   }
 
   game["dialog"]["gametype"] = "dom_intro";
@@ -55,8 +55,8 @@ main() {
   game["dialog"]["defense_obj"] = "dom_start";
 }
 
-_id_5300() {
-  maps\mp\_utility::_id_8653();
+initializematchrules() {
+  maps\mp\_utility::setcommonrulesfrommatchrulesdata();
   _setdynamicdvar("scr_lockdown_roundlimit", 1);
   maps\mp\_utility::registerroundlimitdvar("lockdown", 1);
   _setdynamicdvar("scr_lockdown_winlimit", 1);
@@ -68,7 +68,7 @@ _id_5300() {
   _setdynamicdvar("scr_lockdown_halftimeswitchsides", _getmatchrulesdata("lockdownData", "halfTimeSwitchSides"));
 }
 
-_id_6BAF() {
+onstartgametype() {
   if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
   }
@@ -103,7 +103,7 @@ _id_6BAF() {
   maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_LOCKDOWN_HINT");
   _setclientnamemode("auto_change");
   _id_050D::_id_10E4();
-  _id_7651();
+  precacheflags();
   var_2[0] = "dom";
   _id_04D1::main(var_2);
   _setomnvar("ui_broadcaster_game_mode_status_1", 0);
@@ -111,29 +111,29 @@ _id_6BAF() {
   _setomnvar("ui_broadcaster_game_mode_status_3", 0);
   level thread _id_3211();
   level thread _id_A109();
-  level thread _id_A160();
-  level._id_4958 = maps\mp\_utility::dvarintvalue("halftimeswitchsides", 1, 0, 1);
+  level thread updatescoreboarddom();
+  level.halftime_switch_sides = maps\mp\_utility::dvarintvalue("halftimeswitchsides", 1, 0, 1);
   level._id_0C27 = maps\mp\_utility::dvarintvalue("allowNeutral", 1, 0, 1);
 }
 
-_id_A160() {
+updatescoreboarddom() {
   level endon("game_ended");
 
   for(;;) {
     level waittill("connected", var_0);
-    var_0 thread _id_A0F1();
-    var_0 thread _id_A108();
+    var_0 thread updatecaptues();
+    var_0 thread updatedefends();
   }
 }
 
-_id_A0F1() {
+updatecaptues() {
   waittillframeend;
-  maps\mp\_utility::_id_867B(self.pers["captures"]);
+  maps\mp\_utility::setextrascore0(self.pers["captures"]);
 }
 
-_id_A108() {
+updatedefends() {
   waittillframeend;
-  maps\mp\_utility::_id_867C(self.pers["defends"]);
+  maps\mp\_utility::setextrascore1(self.pers["defends"]);
 }
 
 _id_A0EA() {
@@ -145,21 +145,21 @@ _id_A0EA() {
 
       foreach(var_3 in level._id_3211) {
         if(var_1 istouching(var_3.levelflag)) {
-          if(var_3._id_689F["axis"] * var_3._id_689F["allies"] > 0) {
+          if(var_3.numtouching["axis"] * var_3.numtouching["allies"] > 0) {
             var_1._id_0112 = 1;
-          } else if(var_3._id_6DB2 == "neutral") {
+          } else if(var_3.ownerteam == "neutral") {
             if(var_1.team == "allies") {
               var_1._id_0112 = 2;
             } else {
               var_1._id_0112 = 3;
             }
-          } else if(var_3._id_6DB2 == "allies") {
+          } else if(var_3.ownerteam == "allies") {
             if(var_1.team == "allies") {
               var_1._id_0112 = 4;
             } else {
               var_1._id_0112 = 5;
             }
-          } else if(var_3._id_6DB2 == "axis") {
+          } else if(var_3.ownerteam == "axis") {
             if(var_1.team == "axis") {
               var_1._id_0112 = 6;
             } else {
@@ -185,22 +185,22 @@ _id_A0EA() {
   }
 }
 
-_id_7651() {
+precacheflags() {
   game["neutral"] = "neutral";
-  level._id_3CB6 = "flag_holo_base_ground";
-  level._id_188C["sentinel"]["friendly"] = loadfx("vfx/unique/vfx_marker_dom");
-  level._id_188C["sentinel"]["enemy"] = loadfx("vfx/unique/vfx_marker_dom_red");
-  level._id_188C["atlas"]["friendly"] = loadfx("vfx/unique/vfx_marker_dom");
-  level._id_188C["atlas"]["enemy"] = loadfx("vfx/unique/vfx_marker_dom_red");
-  level._id_188C["neutral"]["friendly"] = loadfx("vfx/unique/vfx_marker_dom_white");
-  level._id_188C["neutral"]["enemy"] = loadfx("vfx/unique/vfx_marker_dom_white");
+  level.flagbasemodel = "flag_holo_base_ground";
+  level.boarderfxid["sentinel"]["friendly"] = loadfx("vfx/unique/vfx_marker_dom");
+  level.boarderfxid["sentinel"]["enemy"] = loadfx("vfx/unique/vfx_marker_dom_red");
+  level.boarderfxid["atlas"]["friendly"] = loadfx("vfx/unique/vfx_marker_dom");
+  level.boarderfxid["atlas"]["enemy"] = loadfx("vfx/unique/vfx_marker_dom_red");
+  level.boarderfxid["neutral"]["friendly"] = loadfx("vfx/unique/vfx_marker_dom_white");
+  level.boarderfxid["neutral"]["enemy"] = loadfx("vfx/unique/vfx_marker_dom_white");
 }
 
-_id_46C8(var_0) {
+getteamdompoints(var_0) {
   var_1 = [];
 
   foreach(var_3 in level._id_3211) {
-    if(var_3._id_6DB2 == var_0) {
+    if(var_3.ownerteam == var_0) {
       var_1[var_1.size] = var_3;
     }
   }
@@ -209,9 +209,9 @@ _id_46C8(var_0) {
 }
 
 _id_4638(var_0) {
-  var_1 = _id_46C8(var_0);
+  var_1 = getteamdompoints(var_0);
   var_2 = maps\mp\_utility::getotherteam(var_0);
-  var_3 = _id_46C8(var_2);
+  var_3 = getteamdompoints(var_2);
   var_4 = [];
 
   for(var_5 = 0; var_5 < level._id_3211.size; var_5++) {
@@ -220,8 +220,8 @@ _id_4638(var_0) {
 
   if(var_1.size == level._id_3211.size) {
     var_6 = var_0;
-    var_7 = level._id_1731[var_0];
-    var_4[var_7._id_A222.label] = 1;
+    var_7 = level.bestspawnflag[var_0];
+    var_4[var_7.useobj.label] = 1;
     return var_4;
   }
 
@@ -233,7 +233,7 @@ _id_4638(var_0) {
       var_9 = 0;
 
       foreach(var_11 in level._id_3211) {
-        if(_id_46E6(var_11) < 80000) {
+        if(gettimesincedompointcapture(var_11) < 80000) {
           var_9 = 1;
           break;
         }
@@ -254,27 +254,27 @@ _id_4638(var_0) {
   } else {
     var_6 = var_0;
     var_2 = maps\mp\_utility::getotherteam(var_6);
-    var_7 = level._id_1731[var_6];
+    var_7 = level.bestspawnflag[var_6];
 
     if(var_3.size > 0 && var_3.size < level._id_3211.size) {
       var_7 = _id_44E0(var_6, undefined, 0);
-      level._id_1731[var_6] = var_7;
+      level.bestspawnflag[var_6] = var_7;
     }
 
-    if(var_7 == level._id_1731[var_2]) {
-      var_7 = _id_44E0(var_6, level._id_1731[var_2], 1);
-      level._id_1731[var_6] = var_7;
+    if(var_7 == level.bestspawnflag[var_2]) {
+      var_7 = _id_44E0(var_6, level.bestspawnflag[var_2], 1);
+      level.bestspawnflag[var_6] = var_7;
     }
 
-    var_4[var_7._id_A222.label] = 1;
+    var_4[var_7.useobj.label] = 1;
     return var_4;
   }
 
   return var_4;
 }
 
-_id_46E6(var_0) {
-  return gettime() - var_0._id_1FC1;
+gettimesincedompointcapture(var_0) {
+  return gettime() - var_0.capturetime;
 }
 
 _id_454E() {
@@ -294,10 +294,10 @@ _id_45DB() {
 }
 
 _id_3211() {
-  level._id_5BFF["allies"] = 0;
-  level._id_5BFF["axis"] = 0;
+  level.laststatus["allies"] = 0;
+  level.laststatus["axis"] = 0;
   var_0 = maps\mp\_utility::dvarintvalue("domFlagCount", 5, 3, 5);
-  level._id_3CC5 = [];
+  level.flags = [];
   var_1 = getEntArray("mp_dom_flag_" + var_0, "script_noteworthy");
 
   if(var_1.size == 0) {
@@ -306,37 +306,37 @@ _id_3211() {
     if(var_1.size < 2) {
       return;
     }
-    level._id_3CC5 = var_1;
+    level.flags = var_1;
   } else if(var_1.size != var_0)
     return;
   else {
-    level._id_3CC5 = var_1;
+    level.flags = var_1;
 
-    for(var_2 = 0; var_2 < level._id_3CC5.size; var_2++) {
-      var_3 = level._id_3CC5[var_2];
+    for(var_2 = 0; var_2 < level.flags.size; var_2++) {
+      var_3 = level.flags[var_2];
       var_4 = spawn("trigger_radius", var_3.origin + (0, 0, -1), 0, 160, 128);
       var_4.angles = var_3.angles;
       var_4.shootblank = var_3.shootblank;
       var_4._id_0165 = var_3._id_0165;
       var_4.target = var_3.target;
       var_4.targetname = var_3.targetname;
-      level._id_3CC5[var_2] delete();
-      level._id_3CC5[var_2] = var_4;
+      level.flags[var_2] delete();
+      level.flags[var_2] = var_4;
     }
   }
 
   level._id_3211 = [];
 
-  for(var_2 = 0; var_2 < level._id_3CC5.size; var_2++) {
-    var_3 = level._id_3CC5[var_2];
+  for(var_2 = 0; var_2 < level.flags.size; var_2++) {
+    var_3 = level.flags[var_2];
     var_5[0] = spawn("script_model", var_3.origin);
     var_5[0].angles = var_3.angles;
-    var_5[0] setModel(level._id_3CB6);
-    var_6 = _id_04D1::_id_2837("neutral", var_3, var_5, (0, 0, 100));
+    var_5[0] setModel(level.flagbasemodel);
+    var_6 = _id_04D1::createuseobject("neutral", var_3, var_5, (0, 0, 100));
     var_6 _id_04D1::_id_0C30("enemy");
-    var_6 _id_04D1::_id_8A5A(level._id_320D);
-    var_6 _id_04D1::_id_8A59(&"MP_SECURING_POSITION");
-    var_7 = var_6 _id_04D1::_id_454C();
+    var_6 _id_04D1::setusetime(level._id_320D);
+    var_6 _id_04D1::setusetext(&"MP_SECURING_POSITION");
+    var_7 = var_6 _id_04D1::getlabel();
     var_6.label = var_7;
     var_6 _id_04D1::set2dicon("friendly", "waypoint_defend" + var_7);
     var_6 _id_04D1::playsoundtoteam("friendly", "waypoint_defend" + var_7);
@@ -344,42 +344,42 @@ _id_3211() {
     var_6 _id_04D1::playsoundtoteam("enemy", "waypoint_captureneutral" + var_7);
     var_6 _id_04D1::set2dicon("broadcaster", "waypoint_esports_dom_white" + var_7);
     var_6 _id_04D1::playsoundtoteam("broadcaster", "waypoint_esports_dom_white" + var_7, 3);
-    var_6 _id_04D1::_id_8A60("any");
-    var_6._id_6BBF = ::_id_6BBF;
-    var_6._id_6ABC = ::_id_6ABC;
-    var_6._id_6BCB = ::_id_6BCB;
-    var_6._id_6AFA = ::_id_6AFA;
-    var_6._id_681A = 1;
-    var_6._id_502A = "domFlag";
+    var_6 _id_04D1::setvisibleteam("any");
+    var_6.onuse = ::onuse;
+    var_6.onbeginuse = ::onbeginuse;
+    var_6.onuseupdate = ::onuseupdate;
+    var_6.onenduse = ::onenduse;
+    var_6.nousebar = 1;
+    var_6.id = "domFlag";
     var_6._id_4B25 = 0;
-    var_6._id_3C66 = 1;
+    var_6.firstcapture = 1;
     var_8 = var_5[0].origin + (0, 0, 32);
     var_9 = var_5[0].origin + (0, 0, -32);
     var_10 = bulletTrace(var_8, var_9, 0, var_5[0]);
     var_11 = vectortoangles(var_10["normal"]);
-    var_6._id_15F9 = anglesToForward(var_11);
-    var_6._id_15FB = anglestoright(var_11);
-    var_6._id_15FA = var_10["position"];
+    var_6.baseeffectforward = anglesToForward(var_11);
+    var_6.baseeffectright = anglestoright(var_11);
+    var_6.baseeffectpos = var_10["position"];
     var_5[0].origin = var_10["position"];
-    var_6 thread _id_A192(1);
-    level._id_3CC5[var_2]._id_A222 = var_6;
-    var_6.levelflag = level._id_3CC5[var_2];
+    var_6 thread updatevisuals(1);
+    level.flags[var_2].useobj = var_6;
+    var_6.levelflag = level.flags[var_2];
     level._id_3211[level._id_3211.size] = var_6;
   }
 
-  var_12 = _id_050D::_id_46A0("axis");
-  var_13 = _id_050D::_id_46A0("allies");
-  level._id_92FA["allies"] = var_13[0].origin;
-  level._id_92FA["axis"] = var_12[0].origin;
-  level._id_1731 = [];
-  level._id_1731["allies"] = _id_44E0("allies", undefined, 0);
-  level._id_1731["axis"] = _id_44E0("axis", level._id_1731["allies"], 0);
-  _id_3CC7();
+  var_12 = _id_050D::getspawnpointarray("axis");
+  var_13 = _id_050D::getspawnpointarray("allies");
+  level.startpos["allies"] = var_13[0].origin;
+  level.startpos["axis"] = var_12[0].origin;
+  level.bestspawnflag = [];
+  level.bestspawnflag["allies"] = _id_44E0("allies", undefined, 0);
+  level.bestspawnflag["axis"] = _id_44E0("axis", level.bestspawnflag["allies"], 0);
+  flagsetuplegacy();
   wait 1;
   var_14 = gettime();
 
   for(var_2 = 0; var_2 < level._id_3211.size; var_2++) {
-    _reconspatialevent(level._id_3211[var_2]._id_A582[0].origin, "script_mp_captures: team %s, gameTime %d", "neutral", var_14);
+    _reconspatialevent(level._id_3211[var_2].visuals[0].origin, "script_mp_captures: team %s, gameTime %d", "neutral", var_14);
   }
 }
 
@@ -387,13 +387,13 @@ _id_44E0(var_0, var_1, var_2) {
   var_3 = undefined;
   var_4 = undefined;
 
-  for(var_5 = 0; var_5 < level._id_3CC5.size; var_5++) {
-    var_6 = level._id_3CC5[var_5];
+  for(var_5 = 0; var_5 < level.flags.size; var_5++) {
+    var_6 = level.flags[var_5];
 
-    if(!var_2 && var_6 _id_44E3() != "neutral") {
+    if(!var_2 && var_6 getflagteam() != "neutral") {
       continue;
     }
-    var_7 = distancesquared(var_6.origin, level._id_92FA[var_0]);
+    var_7 = distancesquared(var_6.origin, level.startpos[var_0]);
 
     if((!isDefined(var_1) || var_6 != var_1) && (!isDefined(var_3) || var_7 < var_4)) {
       var_4 = var_7;
@@ -404,16 +404,16 @@ _id_44E0(var_0, var_1, var_2) {
   return var_3;
 }
 
-_id_6ABC(var_0) {
-  var_1 = _id_04D1::_id_45F7();
-  self._id_2EE9 = 0;
-  _id_04D1::_id_8A5A(level._id_320D);
+onbeginuse(var_0) {
+  var_1 = _id_04D1::getownerteam();
+  self.didstatusnotify = 0;
+  _id_04D1::setusetime(level._id_320D);
 
   if(var_1 == "neutral") {
-    _id_933E("securing" + self.label, var_0.team);
+    statusdialog("securing" + self.label, var_0.team);
 
-    if(self._id_3C66 || self._id_28D5 == 0) {
-      _id_04D1::_id_8A5A(level._id_320D);
+    if(self.firstcapture || self.curprogress == 0) {
+      _id_04D1::setusetime(level._id_320D);
     }
   } else {
     if(var_1 == "allies") {
@@ -422,51 +422,51 @@ _id_6ABC(var_0) {
       return;
     }
 
-    level._id_147A[level._id_147A.size] = self.label;
+    level.axiscapturing[level.axiscapturing.size] = self.label;
     var_2 = "allies";
   }
 }
 
-_id_6BCB(var_0, var_1, var_2) {
-  var_3 = _id_04D1::_id_45F7();
+onuseupdate(var_0, var_1, var_2) {
+  var_3 = _id_04D1::getownerteam();
 
-  if(var_1 > 0.05 && var_2 && !self._id_2EE9) {
+  if(var_1 > 0.05 && var_2 && !self.didstatusnotify) {
     _id_04D1::set2dicon("enemy", "waypoint_taking" + self.label);
     _id_04D1::playsoundtoteam("enemy", "waypoint_taking" + self.label);
     _id_04D1::set2dicon("friendly", "waypoint_losing" + self.label);
     _id_04D1::playsoundtoteam("friendly", "waypoint_losing" + self.label);
-    self._id_2EE9 = 1;
-  } else if(level._id_0C27 && var_1 > 0.49 && var_2 && self._id_2EE9 && var_3 != "neutral") {
-    var_4 = _id_04D1::_id_44AF();
+    self.didstatusnotify = 1;
+  } else if(level._id_0C27 && var_1 > 0.49 && var_2 && self.didstatusnotify && var_3 != "neutral") {
+    var_4 = _id_04D1::getearliestclaimplayer();
     var_5 = gettime();
-    _reconspatialevent(self._id_A582[0].origin, "script_mp_captures: player_name %s, life_id %d, team %s, gameTime %d", var_4.name, var_4._id_5CC6, "neutral", var_5);
-    _id_04D1::_id_86EC("neutral");
-    _id_A192();
-    _id_933E("lost" + self.label, var_3, 1);
+    _reconspatialevent(self.visuals[0].origin, "script_mp_captures: player_name %s, life_id %d, team %s, gameTime %d", var_4.name, var_4._id_5CC6, "neutral", var_5);
+    _id_04D1::setownerteam("neutral");
+    updatevisuals();
+    statusdialog("lost" + self.label, var_3, 1);
     level thread maps\mp\_utility::playsoundonplayers("mp_obj_notify_pos_lrg", var_0);
     level thread maps\mp\_utility::playsoundonplayers("mp_obj_notify_neg_lrg", var_3);
-    _id_A189(self.label, "neutral");
-    thread _id_4787(self._id_9AC3[var_0]);
+    updateuiflagomnvars(self.label, "neutral");
+    thread giveflagneutralizexp(self.touchlist[var_0]);
   }
 }
 
-_id_933E(var_0, var_1, var_2) {
+statusdialog(var_0, var_1, var_2) {
   var_3 = gettime();
 
-  if(gettime() < level._id_5BFF[var_1] + 5000 && (!isDefined(var_2) || !var_2)) {
+  if(gettime() < level.laststatus[var_1] + 5000 && (!isDefined(var_2) || !var_2)) {
     return;
   }
-  thread _id_2CDB(var_0, var_1);
-  level._id_5BFF[var_1] = gettime();
+  thread delayedleaderdialog(var_0, var_1);
+  level.laststatus[var_1] = gettime();
 }
 
-_id_6AFA(var_0, var_1, var_2) {
+onenduse(var_0, var_1, var_2) {
   if(isPlayer(var_1)) {
     var_1 setclientomnvar("ui_capture_icon", 0);
     var_1 setclientomnvar("ui_capture_status_index", 0);
   }
 
-  var_3 = _id_04D1::_id_45F7();
+  var_3 = _id_04D1::getownerteam();
 
   if(var_3 != "neutral") {
     _id_04D1::set2dicon("enemy", "waypoint_capture" + self.label);
@@ -487,34 +487,34 @@ _id_6AFA(var_0, var_1, var_2) {
   }
 }
 
-_id_A192(var_0) {
+updatevisuals(var_0) {
   if(isDefined(var_0) && var_0) {
     waittillframeend;
   }
 
-  if(!_isremovedentity(self._id_A582[0])) {
-    var_1 = self._id_A582[0];
-    _id_3EC2(var_1.origin, anglestoup(var_1.angles));
+  if(!_isremovedentity(self.visuals[0])) {
+    var_1 = self.visuals[0];
+    friendlyenemyeffects(var_1.origin, anglestoup(var_1.angles));
   }
 }
 
-_id_3EC2(var_0, var_1) {
-  var_2 = self._id_6DB2;
-  var_3 = level._id_188C[game[var_2]]["friendly"];
-  var_4 = level._id_188C[game[var_2]]["enemy"];
-  _id_3EC3();
-  self._id_3EBE = maps\mp\_utility::_id_9067(var_3, var_2, var_0, var_1);
-  self._id_1C90 = maps\mp\_utility::_id_9067(var_3, "broadcaster", var_0, var_1);
-  self._id_3766 = maps\mp\_utility::_id_9067(var_4, maps\mp\_utility::getotherteam(var_2), var_0, var_1);
+friendlyenemyeffects(var_0, var_1) {
+  var_2 = self.ownerteam;
+  var_3 = level.boarderfxid[game[var_2]]["friendly"];
+  var_4 = level.boarderfxid[game[var_2]]["enemy"];
+  friendlyenemyeffectsstop();
+  self.friendlyboarderfxid = maps\mp\_utility::spawnfxshowtoteam(var_3, var_2, var_0, var_1);
+  self._id_1C90 = maps\mp\_utility::spawnfxshowtoteam(var_3, "broadcaster", var_0, var_1);
+  self.enemyflagfxid = maps\mp\_utility::spawnfxshowtoteam(var_4, maps\mp\_utility::getotherteam(var_2), var_0, var_1);
 }
 
-_id_3EC3() {
-  if(isDefined(self._id_3ED3)) {
-    self._id_3ED3 delete();
+friendlyenemyeffectsstop() {
+  if(isDefined(self.friendlyflagfxid)) {
+    self.friendlyflagfxid delete();
   }
 
-  if(isDefined(self._id_3EBE)) {
-    self._id_3EBE delete();
+  if(isDefined(self.friendlyboarderfxid)) {
+    self.friendlyboarderfxid delete();
   }
 
   if(isDefined(self._id_1C94)) {
@@ -529,12 +529,12 @@ _id_3EC3() {
     self._id_3768 delete();
   }
 
-  if(isDefined(self._id_3766)) {
-    self._id_3766 delete();
+  if(isDefined(self.enemyflagfxid)) {
+    self.enemyflagfxid delete();
   }
 }
 
-_id_A189(var_0, var_1) {
+updateuiflagomnvars(var_0, var_1) {
   var_2 = "ui_broadcaster_game_mode_status_1";
 
   if(var_0 == "_b") {
@@ -554,65 +554,65 @@ _id_A189(var_0, var_1) {
   }
 }
 
-_id_6BBF(var_0) {
+onuse(var_0) {
   var_1 = gettime();
   var_2 = var_0.team;
-  var_3 = _id_04D1::_id_45F7();
+  var_3 = _id_04D1::getownerteam();
   var_4 = 0;
   var_5 = 0;
 
-  if(self._id_3C66 && self.label == _id_45DB()) {
+  if(self.firstcapture && self.label == _id_45DB()) {
     var_4 = 1;
-  } else if(self._id_3C66 && self.label != _id_45DB()) {
+  } else if(self.firstcapture && self.label != _id_45DB()) {
     var_5 = 1;
   }
 
-  self._id_1FC1 = gettime();
-  self._id_3C66 = 0;
+  self.capturetime = gettime();
+  self.firstcapture = 0;
   self._id_4B25 = 1;
 
-  if(isDefined(self._id_6DA9)) {
-    self._id_6DA9 = 0;
+  if(isDefined(self.ownedtheentireround)) {
+    self.ownedtheentireround = 0;
   } else {
-    self._id_6DA9 = 1;
+    self.ownedtheentireround = 1;
   }
 
-  _reconspatialevent(self._id_A582[0].origin, "script_mp_captures: player_name %s, life_id %d, team %s, gameTime %d", var_0.name, var_0._id_5CC6, var_2, var_1);
-  _id_04D1::_id_86EC(var_2);
+  _reconspatialevent(self.visuals[0].origin, "script_mp_captures: player_name %s, life_id %d, team %s, gameTime %d", var_0.name, var_0._id_5CC6, var_2, var_1);
+  _id_04D1::setownerteam(var_2);
   _id_04D1::set2dicon("enemy", "waypoint_capture" + self.label);
   _id_04D1::playsoundtoteam("enemy", "waypoint_capture" + self.label);
   _id_04D1::set2dicon("friendly", "waypoint_defend" + self.label);
   _id_04D1::playsoundtoteam("friendly", "waypoint_defend" + self.label);
-  _id_A192();
-  level._id_A239 = 0;
+  updatevisuals();
+  level.usestartspawns = 0;
 
   if(var_3 == "neutral") {
     var_6 = maps\mp\_utility::getotherteam(var_2);
-    _id_933E("secured" + self.label, var_2, 1);
-    _id_933E("enemy_has" + self.label, var_6, 1);
+    statusdialog("secured" + self.label, var_2, 1);
+    statusdialog("enemy_has" + self.label, var_6, 1);
     level thread maps\mp\_utility::playsoundonplayers("mp_obj_notify_pos_lrg", var_2);
   } else {
-    if(_id_46CC(var_2) == level._id_3CC5.size) {
-      _id_933E("secure_all", var_2);
-      _id_933E("lost_all", var_3);
+    if(getteamflagcount(var_2) == level.flags.size) {
+      statusdialog("secure_all", var_2);
+      statusdialog("lost_all", var_3);
     } else {
-      _id_933E("secured" + self.label, var_2, 1);
-      _id_933E("lost" + self.label, var_3, 1);
+      statusdialog("secured" + self.label, var_2, 1);
+      statusdialog("lost" + self.label, var_3, 1);
     }
 
     level thread maps\mp\_utility::playsoundonplayers("mp_obj_notify_pos_lrg", var_2);
     level thread maps\mp\_utility::playsoundonplayers("mp_obj_notify_neg_lrg", var_3);
-    level._id_1731[var_3] = self.levelflag;
+    level.bestspawnflag[var_3] = self.levelflag;
   }
 
-  _id_A189(self.label, var_2);
-  var_0 thread _id_046C::_id_8DAE("mp_obj_notify_pos_lrg", "mp_obj_notify_neg_lrg");
-  thread _id_4786(self._id_9AC3[var_2], var_4, var_5);
+  updateuiflagomnvars(self.label, var_2);
+  var_0 thread _id_046C::snd_play_team_splash("mp_obj_notify_pos_lrg", "mp_obj_notify_neg_lrg");
+  thread giveflagcapturexp(self.touchlist[var_2], var_4, var_5);
 }
 
-_id_4786(var_0, var_1, var_2) {
+giveflagcapturexp(var_0, var_1, var_2) {
   level endon("game_ended");
-  var_3 = _id_04D1::_id_44AF();
+  var_3 = _id_04D1::getearliestclaimplayer();
 
   if(isDefined(var_3._id_0117)) {
     var_3 = var_3._id_0117;
@@ -635,14 +635,14 @@ _id_4786(var_0, var_1, var_2) {
       continue;
     }
     var_3 thread _id_047A::_id_5E67(var_1, var_2);
-    var_3 thread _id_A101();
+    var_3 thread updatecpm();
     waitframe();
   }
 }
 
-_id_4787(var_0) {
+giveflagneutralizexp(var_0) {
   level endon("game_ended");
-  var_1 = _id_04D1::_id_44AF();
+  var_1 = _id_04D1::getearliestclaimplayer();
 
   if(isDefined(var_1._id_0117)) {
     var_1 = var_1._id_0117;
@@ -669,14 +669,14 @@ _id_4787(var_0) {
   }
 }
 
-_id_2CDB(var_0, var_1) {
+delayedleaderdialog(var_0, var_1) {
   level endon("game_ended");
   wait 0.1;
   maps\mp\_utility::waittillslowprocessallowed();
   maps\mp\_utility::leaderdialog(var_0, var_1);
 }
 
-_id_2CDC(var_0, var_1, var_2, var_3) {
+delayedleaderdialogbothteams(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   wait 0.1;
   maps\mp\_utility::waittillslowprocessallowed();
@@ -687,7 +687,7 @@ _id_A109() {
   level endon("game_ended");
 
   while(!level.gameended) {
-    var_0 = _id_45F5();
+    var_0 = getowneddomflags();
 
     if(var_0.size) {
       var_1 = undefined;
@@ -696,7 +696,7 @@ _id_A109() {
       var_4 = 0;
 
       foreach(var_6 in var_0) {
-        var_7 = var_6 _id_04D1::_id_45F7();
+        var_7 = var_6 _id_04D1::getownerteam();
 
         if(var_7 == "allies") {
           var_3++;
@@ -704,8 +704,8 @@ _id_A109() {
           var_4++;
         }
 
-        if(!isDefined(var_1) || var_1 < var_6._id_1FC1) {
-          var_1 = var_6._id_1FC1;
+        if(!isDefined(var_1) || var_1 < var_6.capturetime) {
+          var_1 = var_6.capturetime;
         }
 
         if(!isDefined(var_2)) {
@@ -718,9 +718,9 @@ _id_A109() {
       }
 
       if(var_3 > var_4) {
-        _id_04D2::_id_47BD("allies", var_3 - var_4, 1);
+        _id_04D2::giveteamscoreforobjective("allies", var_3 - var_4, 1);
       } else if(var_4 > var_3) {
-        _id_04D2::_id_47BD("axis", var_4 - var_3, 1);
+        _id_04D2::giveteamscoreforobjective("axis", var_4 - var_3, 1);
       }
 
       if(level._id_3211.size == var_0.size && var_2 != "none" && level.players.size > 5) {
@@ -753,18 +753,18 @@ _id_A109() {
       }
     }
 
-    if(maps\mp\_utility::matchmakinggame() && !level._id_0C27 && !var_12 && _id_44A5() > 120000 && !getdvarint("850")) {
-      level._id_3B5C = "none";
-      thread maps\mp\gametypes\_gamelogic::_id_36B9("none", game["end_reason"]["time_limit_reached"]);
+    if(maps\mp\_utility::matchmakinggame() && !level._id_0C27 && !var_12 && getdomroundtimepassed() > 120000 && !getdvarint("850")) {
+      level.finalkillcam_winner = "none";
+      thread maps\mp\gametypes\_gamelogic::endgame("none", game["end_reason"]["time_limit_reached"]);
       return;
     }
 
     wait 5.0;
-    maps\mp\gametypes\_hostmigration::_id_A782();
+    maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
   }
 }
 
-_id_44A5() {
+getdomroundtimepassed() {
   return gettime() - level._id_5E69;
 }
 
@@ -772,7 +772,7 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(!isPlayer(var_1)) {
     return;
   }
-  if(maps\mp\gametypes\_damage::_id_56FA(self, var_1)) {
+  if(maps\mp\gametypes\_damage::isfriendlyfire(self, var_1)) {
     return;
   }
   if(var_1 == self) {
@@ -781,10 +781,10 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_10 = 0;
   var_11 = self;
 
-  foreach(var_13 in var_1._id_9AC5) {
+  foreach(var_13 in var_1.touchtriggers) {
     var_14 = 0;
 
-    foreach(var_16 in level._id_3CC5) {
+    foreach(var_16 in level.flags) {
       if(var_13 == var_16) {
         var_14 = 1;
         break;
@@ -794,18 +794,18 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
     if(!var_14) {
       continue;
     }
-    var_18 = var_13._id_A222._id_6DB2;
+    var_18 = var_13.useobj.ownerteam;
 
     if(var_1.team != var_18) {
-      var_1 thread _id_047A::_id_5A82(var_11, var_9, var_4);
+      var_1 thread _id_047A::killwhilecapture(var_11, var_9, var_4);
       var_10 = 1;
     }
   }
 
   var_20 = 90000;
 
-  foreach(var_13 in level._id_3CC5) {
-    var_18 = var_13._id_A222._id_6DB2;
+  foreach(var_13 in level.flags) {
+    var_18 = var_13.useobj.ownerteam;
     var_22 = distancesquared(var_13.origin, var_11.origin);
     var_23 = distancesquared(var_13.origin, var_1.origin);
 
@@ -815,8 +815,8 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 
     if(var_18 == var_1.team) {
       if(var_22 < var_20 || var_23 < var_20) {
-        var_1 thread _id_047A::_id_2C80(var_11, var_9, var_4);
-        var_1 maps\mp\_utility::_id_867C(var_1.pers["defends"]);
+        var_1 thread _id_047A::defendobjectiveevent(var_11, var_9, var_4);
+        var_1 maps\mp\_utility::setextrascore1(var_1.pers["defends"]);
       }
     }
 
@@ -826,17 +826,17 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 
     if(var_18 == var_11.team) {
       if(var_23 < var_20 || var_22 < var_20) {
-        var_1 thread _id_047A::_id_10BA(self, var_9, var_4);
+        var_1 thread _id_047A::assaultobjectiveevent(self, var_9, var_4);
       }
     }
   }
 }
 
-_id_45F5() {
+getowneddomflags() {
   var_0 = [];
 
   foreach(var_2 in level._id_3211) {
-    if(var_2 _id_04D1::_id_45F7() != "neutral" && isDefined(var_2._id_1FC1)) {
+    if(var_2 _id_04D1::getownerteam() != "neutral" && isDefined(var_2.capturetime)) {
       var_0[var_0.size] = var_2;
     }
   }
@@ -844,11 +844,11 @@ _id_45F5() {
   return var_0;
 }
 
-_id_46CC(var_0) {
+getteamflagcount(var_0) {
   var_1 = 0;
 
   for(var_2 = 0; var_2 < level._id_3211.size; var_2++) {
-    if(level._id_3211[var_2] _id_04D1::_id_45F7() == var_0) {
+    if(level._id_3211[var_2] _id_04D1::getownerteam() == var_0) {
       var_1++;
     }
   }
@@ -856,11 +856,11 @@ _id_46CC(var_0) {
   return var_1;
 }
 
-_id_44E3() {
-  return self._id_A222 _id_04D1::_id_45F7();
+getflagteam() {
+  return self.useobj _id_04D1::getownerteam();
 }
 
-_id_3CC7() {
+flagsetuplegacy() {
   var_0 = _id_050D::_id_448A();
 
   foreach(var_2 in var_0) {
@@ -869,13 +869,13 @@ _id_3CC7() {
       continue;
     }
 
-    var_2._id_663E = _id_459D(var_2);
-    var_2._id_766F = var_2._id_663E._id_A222.label;
+    var_2._id_663E = getnearestflagpoint(var_2);
+    var_2._id_766F = var_2._id_663E.useobj.label;
   }
 }
 
-_id_459D(var_0) {
-  var_1 = _id_050D::_id_5770();
+getnearestflagpoint(var_0) {
+  var_1 = _id_050D::ispathdataavailable();
   var_2 = undefined;
   var_3 = undefined;
 
@@ -899,24 +899,24 @@ _id_459D(var_0) {
   return var_2.levelflag;
 }
 
-_id_6BA7() {}
+onspawnplayer() {}
 
-_id_A101() {
-  if(!isDefined(self._id_270D)) {
-    self._id_6885 = 0;
-    self._id_270D = 0;
+updatecpm() {
+  if(!isDefined(self.cpm)) {
+    self.numcaps = 0;
+    self.cpm = 0;
   }
 
-  self._id_6885++;
+  self.numcaps++;
 
   if(maps\mp\_utility::getminutespassed() < 1) {
     return;
   }
-  self._id_270D = self._id_6885 / maps\mp\_utility::getminutespassed();
+  self.cpm = self.numcaps / maps\mp\_utility::getminutespassed();
 }
 
-_id_444A() {
-  if(self._id_270D < 4) {
+getcapxpscale() {
+  if(self.cpm < 4) {
     return 1;
   } else {
     return 0.25;

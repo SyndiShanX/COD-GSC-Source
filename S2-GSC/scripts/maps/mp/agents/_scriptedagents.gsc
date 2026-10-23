@@ -4,8 +4,8 @@
 ******************************************************/
 
 _id_0114(var_0, var_1) {
-  if(isDefined(self._id_6AFF)) {
-    self[[self._id_6AFF]](var_0, var_1);
+  if(isDefined(self.onenteranimstate)) {
+    self[[self.onenteranimstate]](var_0, var_1);
   }
 }
 
@@ -13,31 +13,31 @@ _id_0113() {
   self notify("killanimscript");
 }
 
-_id_7201(var_0, var_1, var_2, var_3) {
-  _id_71FC(var_0, 0, var_1, var_2, var_3);
+playanimuntilnotetrack(var_0, var_1, var_2, var_3) {
+  playanimnuntilnotetrack(var_0, 0, var_1, var_2, var_3);
 }
 
-_id_71FC(var_0, var_1, var_2, var_3, var_4) {
+playanimnuntilnotetrack(var_0, var_1, var_2, var_3, var_4) {
   self setanimstate(var_0, var_1);
 
   if(!isDefined(var_3)) {
     var_3 = "end";
   }
 
-  _id_A79E(var_2, var_3, var_0, var_1, var_4);
+  waituntilnotetrack(var_2, var_3, var_0, var_1, var_4);
 }
 
-_id_71F9(var_0, var_1, var_2, var_3, var_4, var_5) {
+playanimnatrateuntilnotetrack(var_0, var_1, var_2, var_3, var_4, var_5) {
   self setanimstate(var_0, var_1, var_2);
 
   if(!isDefined(var_4)) {
     var_4 = "end";
   }
 
-  _id_A79E(var_3, var_4, var_0, var_1, var_5);
+  waituntilnotetrack(var_3, var_4, var_0, var_1, var_5);
 }
 
-_id_A79E(var_0, var_1, var_2, var_3, var_4) {
+waituntilnotetrack(var_0, var_1, var_2, var_3, var_4) {
   var_5 = gettime();
   var_6 = undefined;
   var_7 = undefined;
@@ -65,21 +65,21 @@ _id_A79E(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-_id_71F7(var_0, var_1) {
-  _id_71FB(var_0, 0, var_1);
+playanimfortime(var_0, var_1) {
+  playanimnfortime(var_0, 0, var_1);
 }
 
-_id_71FB(var_0, var_1, var_2) {
+playanimnfortime(var_0, var_1, var_2) {
   self setanimstate(var_0, var_1);
   wait(var_2);
 }
 
-_id_71F8(var_0, var_1, var_2, var_3) {
+playanimnatratefortime(var_0, var_1, var_2, var_3) {
   self setanimstate(var_0, var_1, var_2);
   wait(var_3);
 }
 
-_id_441C(var_0, var_1, var_2) {
+getanimscalefactors(var_0, var_1, var_2) {
   var_3 = _length2d(var_0);
   var_4 = var_0[2];
   var_5 = _length2d(var_1);
@@ -104,12 +104,12 @@ _id_441C(var_0, var_1, var_2) {
   }
 
   var_11 = spawnStruct();
-  var_11._id_AAE3 = var_7;
+  var_11.xy = var_7;
   var_11._id_01D9 = var_8;
   return var_11;
 }
 
-_id_4414(var_0, var_1) {
+getangleindex(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = 10;
   }
@@ -121,7 +121,7 @@ _id_4414(var_0, var_1) {
   }
 }
 
-_id_34A6(var_0, var_1) {
+droppostoground(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = 18;
   }
@@ -141,7 +141,7 @@ _id_34A6(var_0, var_1) {
   return var_4;
 }
 
-_id_1F5B(var_0, var_1, var_2, var_3) {
+canmovepointtopoint(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_2)) {
     var_2 = 6;
   }
@@ -156,7 +156,7 @@ _id_1F5B(var_0, var_1, var_2, var_3) {
   return self aiphysicstracepassed(var_5, var_6, var_3, self._id_00BD - var_2, 1);
 }
 
-_id_470B(var_0, var_1, var_2) {
+getvalidpointtopointmovelocation(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = 6;
   }
@@ -167,45 +167,45 @@ _id_470B(var_0, var_1, var_2) {
   return self aiphysicstrace(var_4, var_5, self.radius + 4, self._id_00BD - var_2, 1);
 }
 
-_id_466C(var_0) {
+getsafeanimmovedeltapercentage(var_0) {
   var_1 = _getmovedelta(var_0);
   var_2 = self localtoworldcoords(var_1);
-  var_3 = _id_470B(self.origin, var_2);
+  var_3 = getvalidpointtopointmovelocation(self.origin, var_2);
   var_4 = distance(self.origin, var_3);
   var_5 = distance(self.origin, var_2);
   return _min(1.0, var_4 / var_5);
 }
 
 detach(var_0, var_1, var_2, var_3) {
-  var_4 = _id_464A(var_0);
-  _id_802D(var_0, var_4, var_1, var_2, var_3);
+  var_4 = getrandomanimentry(var_0);
+  safelyplayanimnuntilnotetrack(var_0, var_4, var_1, var_2, var_3);
 }
 
 logstring(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = _id_464A(var_0);
-  _id_802C(var_0, var_5, var_1, var_2, var_3, var_4);
+  var_5 = getrandomanimentry(var_0);
+  safelyplayanimnatrateuntilnotetrack(var_0, var_5, var_1, var_2, var_3, var_4);
 }
 
-_id_802C(var_0, var_1, var_2, var_3, var_4, var_5) {
+safelyplayanimnatrateuntilnotetrack(var_0, var_1, var_2, var_3, var_4, var_5) {
   self setanimstate(var_0, var_1, var_2);
-  _id_802D(var_0, var_1, var_3, var_4, var_5);
+  safelyplayanimnuntilnotetrack(var_0, var_1, var_3, var_4, var_5);
 }
 
-_id_802D(var_0, var_1, var_2, var_3, var_4) {
+safelyplayanimnuntilnotetrack(var_0, var_1, var_2, var_3, var_4) {
   var_5 = self getanimentry(var_0, var_1);
-  var_6 = _id_466C(var_5);
+  var_6 = getsafeanimmovedeltapercentage(var_5);
   self scragentsetanimscale(var_6, 1.0);
-  _id_71FC(var_0, var_1, var_2, var_3, var_4);
+  playanimnuntilnotetrack(var_0, var_1, var_2, var_3, var_4);
   self scragentsetanimscale(1.0, 1.0);
 }
 
-_id_464A(var_0) {
+getrandomanimentry(var_0) {
   var_1 = self getanimentrycount(var_0);
   return randomint(var_1);
 }
 
-_id_4415(var_0) {
+getangleindexfromselfyaw(var_0) {
   var_1 = vectortoangles(var_0);
   var_2 = _angleclamp180(var_1[1] - self.angles[1]);
-  return _id_4414(var_2);
+  return getangleindex(var_2);
 }

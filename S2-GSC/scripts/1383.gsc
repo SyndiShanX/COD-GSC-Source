@@ -19,7 +19,7 @@ init() {
   var_1._id_0879 = "zombie_generic";
   var_1._id_5ED2[var_0]["whole_body"] = "zom_follower_base";
   var_1._id_4C12 = 10;
-  var_1._id_60E2 = 65;
+  var_1.meleedamage = 65;
   var_1._id_2F9B = 1;
   var_1._id_8302 = 75;
   var_1._id_8303 = 15;
@@ -75,7 +75,7 @@ _id_ABDB() {
   self endon("death");
 
   for(;;) {
-    var_0 = common_scripts\utility::_id_A717("attack_hit", "attack_miss");
+    var_0 = common_scripts\utility::waittill_any_return_parms("attack_hit", "attack_miss");
     level notify("follower swing", self gettagorigin("J_Wrist_RI"), 64);
     var_1 = spawnStruct();
     var_1._id_2434 = 37;
@@ -87,7 +87,7 @@ _id_ABDB() {
       var_4 = _id_0547::_id_0A51(var_3._id_0A4B);
       var_5 = isDefined(var_4) && common_scripts\utility::_id_562E(var_4.tacklebymelee);
 
-      if(var_3 == self || !var_5 || !maps\mp\agents\humanoid\_humanoid_melee::_id_11AF(var_3) || var_3 maps\mp\agents\humanoid\_humanoid_util::_id_56BC()) {
+      if(var_3 == self || !var_5 || !maps\mp\agents\humanoid\_humanoid_melee::attackshouldhit(var_3) || var_3 maps\mp\agents\humanoid\_humanoid_util::iscrawling()) {
         continue;
       }
       var_6 = var_3 _id_0547::_id_43EF(var_1, distance(self.origin, var_3.origin));
@@ -99,11 +99,11 @@ _id_ABDB() {
 _id_ABBE() {
   _id_0547::disableoffhandsecondaryweapons();
 
-  if(isDefined(self._id_3043)) {
+  if(isDefined(self.distractiondrone)) {
     return;
   }
   self._id_66AC = 10;
-  common_scripts\utility::_id_379A("zombie_passive");
+  common_scripts\utility::ent_flag_set("zombie_passive");
 }
 
 _id_ABC6() {
@@ -114,7 +114,7 @@ _id_ABC8() {
   self endon("death");
   level endon("game_ended");
   self endon("owner_disconnect");
-  self _meth_85A1("zombie_heavy");
+  self set_target_tracking_disabled("zombie_heavy");
 
   if(!common_scripts\utility::_id_562E(level.iszombiesshotgun)) {
     self._id_6816 = 1;
@@ -125,14 +125,14 @@ _id_ABC8() {
   self._id_6EB0 = 350;
   self._id_78D7 = 0;
   self._id_6099 = self.maxhealth / 4;
-  self._id_60E4 = 1.5;
+  self.meleedebouncetime = 1.5;
   self._id_5542 = 0;
   self._id_55AB = 1;
   _id_0566::_id_ABB5();
   thread _id_ABDB();
   thread zombie_heavy_grudge_think();
   _id_0547::_id_86C8(100);
-  _id_0547::_id_86C7(100);
+  _id_0547::setmeleeradius(100);
   var_0 = 0;
 
   for(;;) {
@@ -157,10 +157,10 @@ _id_ABC8() {
       _id_0547::zombie_charge_cleanup(self._id_645E);
     }
 
-    if(_id_053C::_id_4F84()) {
+    if(_id_053C::humanoid_begin_melee()) {
       continue;
     }
-    if(!_id_0547::_id_4B2C() && _id_053C::_id_4F9A()) {
+    if(!_id_0547::has_entered_game() && _id_053C::_id_4F9A()) {
       continue;
     }
     var_2 = undefined;
@@ -173,8 +173,8 @@ _id_ABC8() {
     }
 
     if(isDefined(self._id_915D)) {
-      if(_id_0547::_id_577E(self._id_915D)) {
-        self._id_28D2 = undefined;
+      if(_id_0547::isplayerinlaststand(self._id_915D)) {
+        self.curmeleetarget = undefined;
         _id_ABBE();
         continue;
       } else if(isDefined(var_2) && var_3 < 300 && var_3 + 100 < distance(self.origin, self._id_915D.origin)) {
@@ -274,7 +274,7 @@ zombie_heavy_grudge_think() {
 }
 
 zombie_heavy_valid_charge_target(var_0) {
-  if(isPlayer(var_0) && _issentient(var_0) && self agentcanseesentient(var_0) && _id_0547::_id_1F5B(self.origin, var_0.origin) && common_scripts\utility::_id_0F79(_id_053C::_id_4F88(), var_0)) {
+  if(isPlayer(var_0) && _issentient(var_0) && self agentcanseesentient(var_0) && _id_0547::canmovepointtopoint(self.origin, var_0.origin) && common_scripts\utility::_id_0F79(_id_053C::_id_4F88(), var_0)) {
     return 1;
   }
 
@@ -290,13 +290,13 @@ _id_ABC5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     self._id_78D7 = self._id_78D7 + var_2;
   }
 
-  if(self._id_78D7 >= self._id_6099 && zombie_heavy_charge_allowed() && zombie_heavy_valid_charge_target(var_1) && (!isDefined(self._id_3043) || !maps\mp\agents\humanoid\_humanoid_util::_id_8BAE()) && !isDefined(self._id_1927) && (!_id_053C::_id_5686() || !common_scripts\utility::_id_0F79(self._id_983C, var_1)) && !common_scripts\utility::_id_562E(self._id_57C0)) {
+  if(self._id_78D7 >= self._id_6099 && zombie_heavy_charge_allowed() && zombie_heavy_valid_charge_target(var_1) && (!isDefined(self.distractiondrone) || !maps\mp\agents\humanoid\_humanoid_util::shouldtargetdistractiondrone()) && !isDefined(self._id_1927) && (!_id_053C::_id_5686() || !common_scripts\utility::_id_0F79(self._id_983C, var_1)) && !common_scripts\utility::_id_562E(self._id_57C0)) {
     _id_ABB7(var_1);
     self._id_78D7 = 0;
     level._id_5B1B = gettime();
   }
 
-  _id_054D::_id_6BD3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+  _id_054D::onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
 
 _id_ABC3() {
@@ -304,7 +304,7 @@ _id_ABC3() {
     self._id_64C4 = 1;
   }
 
-  self._id_64C2 = self._id_64C4 * _id_054D::_id_4440();
+  self.moveratescale = self._id_64C4 * _id_054D::_id_4440();
   return "walk";
 }
 

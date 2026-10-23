@@ -246,9 +246,9 @@ _id_5D67(var_0) {
   var_3 = spawn("script_model", var_0);
   var_3 setModel("tag_origin");
   var_3.angles = var_3.angles + (-90, 0, 0);
-  var_4 = _func_382("zmb_wm_lightning_beam", var_2, "tag_origin", var_3, "tag_origin");
+  var_4 = vehicle_scripts/_attack_heli("zmb_wm_lightning_beam", var_2, "tag_origin", var_3, "tag_origin");
   _playFXOnTag(level._effect["zmb_wm_lightning_impact_base_rnr"], var_3, "tag_origin");
-  _id_0378::_id_8D74("lightning_strike", var_2.origin, var_0);
+  _id_0378::snd_message("lightning_strike", var_2.origin, var_0);
   wait(_randomfloatrange(0.25, 0.35));
   var_4 delete();
   var_2 delete();

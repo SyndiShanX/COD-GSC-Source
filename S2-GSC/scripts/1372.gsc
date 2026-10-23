@@ -20,7 +20,7 @@ init() {
   var_2._id_0879 = "zombie_generic";
   var_2._id_5ED2["sprinter"] = var_1;
   var_2._id_4C12 = 0.5;
-  var_2._id_60E2 = 30;
+  var_2.meleedamage = 30;
   var_2._id_8302 = 65;
   var_2._id_8303 = 15;
   var_2.parenttype = "zombie_generic";
@@ -43,13 +43,13 @@ _id_AB57() {
   self _meth_85DE(var_0);
   self._id_2FA4 = 0;
   self.cornerlessturnmindegreeoverride = 70;
-  self _meth_85A1("zombie_berserker");
+  self set_target_tracking_disabled("zombie_berserker");
   self.stuckfortraversalthreshold = 16;
   _id_0566::_id_ABB4();
 }
 
 _id_AB54() {
-  self._id_64C2 = 1.1 * _id_054D::_id_4440();
+  self.moveratescale = 1.1 * _id_054D::_id_4440();
   return "sprint";
 }
 
@@ -59,7 +59,7 @@ _id_4759() {
   waitframe();
   waitframe();
   waitframe();
-  _playFXOnTag(common_scripts\utility::_id_44F5("zmb_sprinter_head_flies"), self, "j_head");
+  _playFXOnTag(common_scripts\utility::getfx("zmb_sprinter_head_flies"), self, "j_head");
 }
 
 _id_AB52() {

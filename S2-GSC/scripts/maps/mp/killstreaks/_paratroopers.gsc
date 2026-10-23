@@ -4,7 +4,7 @@
 *********************************************************/
 
 init() {
-  thread _id_87A7();
+  thread setup_callbacks();
   level._effect["paratrooper_landing"] = loadfx("vfx/code/paratrooper_land_medium");
   level._id_6E5E = getEntArray("paratrooper_bad_lz", "targetname");
   level._id_6E71 = [];
@@ -27,7 +27,7 @@ _id_2B05() {
   }
 }
 
-_id_87A7() {
+setup_callbacks() {
   level._id_6E70 = 0;
   level._id_6E72 = 0;
   level._id_6E6A = ["default", "default", "cqb", "run_and_gun", "run_and_gun"];
@@ -41,8 +41,8 @@ _id_87A7() {
   level._id_6E62 = [1.25, 1.25, 1.25, 1.25, 1.25];
   level.paratrooper_chute_deploy_anims_vm = ["human_parachute_raids_deploy_a", "human_parachute_raids_deploy_a", "human_parachute_raids_deploy_a", "human_parachute_raids_deploy_a", "human_parachute_raids_deploy_a"];
   level.paratrooper_chute_loop_anims_vm = ["human_parachute_raids_loop_a", "human_parachute_raids_loop_a", "human_parachute_raids_loop_a", "human_parachute_raids_loop_a", "human_parachute_raids_loop_a"];
-  level._id_5A7D["agent_mp"] = "paratroopers";
-  level._id_5A61["paratroopers"] = ::_id_9E36;
+  level.killstreakwieldweapons["agent_mp"] = "paratroopers";
+  level.killstreakfuncs["paratroopers"] = ::_id_9E36;
   level._id_0A41["paratroopers"] = [];
   level._id_0A41["paratroopers"]["spawn"] = ::_id_8FE1;
   level._id_0A41["paratroopers"]["think"] = ::_id_6E69;
@@ -66,7 +66,7 @@ _id_9E36(var_0) {
     return 0;
   }
 
-  if(maps\mp\agents\_agent_utility::_id_45BB("paratroopers") >= 1) {
+  if(maps\mp\agents\_agent_utility::getnumactiveagents("paratroopers") >= 1) {
     self iprintlnbold(&"KILLSTREAKS_TOO_MANY_PARATROOPERS");
     return 0;
   }
@@ -74,7 +74,7 @@ _id_9E36(var_0) {
   var_1 = maps\mp\_utility::_hasperk("specialty_improvedstreaks");
   var_2 = maps\mp\agents\_agent_utility::get_max_agents();
 
-  if(maps\mp\agents\_agent_utility::_id_45BB() >= var_2) {
+  if(maps\mp\agents\_agent_utility::getnumactiveagents() >= var_2) {
     self iprintlnbold(&"KILLSTREAKS_UNAVAILABLE");
     return 0;
   }
@@ -397,7 +397,7 @@ _id_1132(var_0, var_1) {
     self._id_6E4F.parachute_collision = var_6;
   }
 
-  self._id_6E4F _id_0378::_id_8D74("ks_paratroopers_parachute");
+  self._id_6E4F _id_0378::snd_message("ks_paratroopers_parachute");
   thread _id_A8D1(self._id_6E4F.parachute_collision);
   thread _id_6E5F(self._id_6E4F.parachute_collision, var_3, var_4);
   thread play_idle_loop_when_ready(var_1, self.parachute_idle_starttime, self.parachute_idle_rate);
@@ -449,7 +449,7 @@ _id_6E5F(var_0, var_1, var_2) {
   var_5 = common_scripts\utility::waittill_any_return("death", "paratrooper_released", "disconnect");
 
   if(isDefined(level.hostmigrationtimer)) {
-    maps\mp\gametypes\_hostmigration::_id_A782();
+    maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
   }
 
   if(isDefined(self)) {
@@ -497,7 +497,7 @@ parachute_cleanup_anim_then_delete(var_0, var_1, var_2, var_3, var_4) {
 
   var_5 = 1;
   var_0 _meth_8450(1, 0, var_5);
-  var_0 common_scripts\utility::_id_2CBE(var_3, ::delete);
+  var_0 common_scripts\utility::delaycall(var_3, ::delete);
 }
 
 _id_A8D1(var_0) {
@@ -519,7 +519,7 @@ _id_A8D1(var_0) {
 
     if(isDefined(var_2)) {
       if(level.teambased && isDefined(var_2.team) && var_2.team != self.team || !level.teambased && isDefined(self._id_0117) && var_2 != self._id_0117) {
-        var_2 thread _id_04C7::_id_A102("standard");
+        var_2 thread _id_04C7::updatedamagefeedback("standard");
         self._id_6E4B = var_2;
         var_0._id_22DF = var_0._id_22DF - var_1;
 
@@ -592,10 +592,10 @@ watchforhostmigrationparachutemove(var_0) {
 
   level waittill("host_migration_end");
   var_2 = var_0 - var_1;
-  self moveTo(self._id_4805, var_2);
+  self moveTo(self.goal_position, var_2);
 
   if(1 && isDefined(self.parachute_model_vm)) {
-    self.parachute_model_vm moveTo(self._id_4805, var_2);
+    self.parachute_model_vm moveTo(self.goal_position, var_2);
   }
 }
 
@@ -611,13 +611,13 @@ watchforparachutemovegoalchange(var_0) {
   }
 
   self._id_0117 waittill("changeParachuteEndpoint", var_1);
-  self._id_4805 = (var_1 - self.origin) * 2 + self.origin;
+  self.goal_position = (var_1 - self.origin) * 2 + self.origin;
   var_2 = gettime() * 0.001;
   var_3 = var_0 - var_2;
-  self moveTo(self._id_4805, var_3);
+  self moveTo(self.goal_position, var_3);
 
   if(1 && isDefined(self.parachute_model_vm)) {
-    self.parachute_model_vm moveTo(self._id_4805, var_3);
+    self.parachute_model_vm moveTo(self.goal_position, var_3);
   }
 }
 
@@ -693,11 +693,11 @@ _id_64B8(var_0) {
         var_3 = var_12 * 0.05;
       }
 
-      self._id_4805 = self.origin + var_2;
-      self moveTo(self._id_4805, var_3);
+      self.goal_position = self.origin + var_2;
+      self moveTo(self.goal_position, var_3);
 
       if(1 && isDefined(self.parachute_model_vm)) {
-        self.parachute_model_vm moveTo(self._id_4805, var_3);
+        self.parachute_model_vm moveTo(self.goal_position, var_3);
       }
 
       thread watchforhostmigrationparachutemove(gettime() * 0.001 + var_3);
@@ -763,28 +763,28 @@ _id_2605(var_0) {
 _id_8FE1(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("disconnect");
 
-  while(!isDefined(level._id_4696)) {
+  while(!isDefined(level.getspawnpoint)) {
     waitframe();
   }
 
-  if(self._id_4B60) {
+  if(self.hasdied) {
     wait(_randomintrange(6, 10));
   }
 
-  maps\mp\agents\_agent_utility::_id_5334(1);
+  maps\mp\agents\_agent_utility::initplayerscriptvariables(1);
 
   if(isDefined(var_0) && isDefined(var_1)) {
     var_7 = var_0;
     var_8 = var_1;
-    self._id_5BE0 = spawnStruct();
-    self._id_5BE0.origin = var_7;
-    self._id_5BE0.angles = var_8;
+    self.lastspawnpoint = spawnStruct();
+    self.lastspawnpoint.origin = var_7;
+    self.lastspawnpoint.angles = var_8;
   } else {
     self _meth_856C();
-    var_9 = [[level._id_4696]]();
+    var_9 = [[level.getspawnpoint]]();
     var_7 = var_9.origin;
     var_8 = var_9.angles;
-    self._id_5BE0 = var_9;
+    self.lastspawnpoint = var_9;
   }
 
   maps\mp\agents\_agent_utility::_id_08A7();
@@ -821,10 +821,10 @@ _id_8FE1(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     self[[level.bot_funcs["bot_set_difficulty"]]](self botgetdifficulty());
 
   self[[level.bot_funcs["bot_set_personality"]]](level._id_6E6A[level._id_6E72]);
-  maps\mp\agents\_agent_common::_id_83FD(getdvarint("scr_player_maxhealth", 100));
+  maps\mp\agents\_agent_common::set_agent_health(getdvarint("scr_player_maxhealth", 100));
 
   if(isDefined(var_4) && var_4) {
-    self._id_7DAD = 1;
+    self.respawn_on_death = 1;
   }
 
   if(isDefined(var_2)) {
@@ -835,17 +835,17 @@ _id_8FE1(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     self thread[[level._id_0A55]](self._id_0117);
   }
 
-  thread maps\mp\_flashgrenades::_id_6394();
+  thread maps\mp\_flashgrenades::monitorflash();
   self enableanimstate(0);
 
   if(isDefined(var_6)) {
     self._id_0BA6 = var_6;
     self _meth_858A(var_6);
-    maps\mp\agents\_agent_common::_id_83FD(getdvarint("scr_player_maxhealth", 100));
+    maps\mp\agents\_agent_common::set_agent_health(getdvarint("scr_player_maxhealth", 100));
     maps\mp\gametypes\_class::_id_4774();
   } else {
     self[[level._id_0A5B]]();
-    maps\mp\gametypes\_class::_id_4773(self.team, self.class, 1);
+    maps\mp\gametypes\_class::giveandapplyloadout(self.team, self.class, 1);
   }
 
   self setperk("specialty_radarparatrooper", 1, 0);
@@ -864,7 +864,7 @@ _id_8FE1(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     maps\mp\_utility::giveperk("specialty_heartbreaker");
     maps\mp\_utility::giveperk("specialty_uavhidden");
     maps\mp\_utility::giveperk("specialty_delaymine");
-    self._id_90DA = 6.0;
+    self.specialty_paint_time = 6.0;
     maps\mp\_utility::giveperk("specialty_paint");
     maps\mp\_utility::giveperk("specialty_paint_pro");
     maps\mp\_utility::giveperk("specialty_blastshield2");
@@ -877,7 +877,7 @@ _id_8FE1(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     maps\mp\_utility::giveperk("specialty_stun_resistance");
     maps\mp\_utility::giveperk("specialty_resistshellshock");
     maps\mp\_utility::giveperk("specialty_immunesmoke");
-    self._id_94BE = 0.1;
+    self.stunscaler = 0.1;
     maps\mp\_utility::giveperk("specialty_fireshield");
     self._id_90D8 = maps\mp\_utility::getintproperty("perk_fireShieldScale", 35) / 100;
 
@@ -890,16 +890,16 @@ _id_8FE1(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self thread[[level.bot_funcs["bot_think_tactical_goals"]]]();
   self thread[[maps\mp\agents\_agent_utility::_id_0A59("think")]]();
 
-  if(!self._id_4B60) {
+  if(!self.hasdied) {
     _id_050D::_id_09FA();
   }
 
-  thread _id_0513::_id_9B90();
-  self._id_4B60 = 0;
-  thread _id_04D6::_id_73FC();
+  thread _id_0513::track_damage_info();
+  self.hasdied = 0;
+  thread _id_04D6::playerhealthregen();
   self._id_0009 = &"KILLSTREAKS_PARATROOPER";
 
-  if(maps\mp\_utility::_id_4571() != "mp_sandbox_01") {
+  if(maps\mp\_utility::getmapname() != "mp_sandbox_01") {
     if(self.team == "allies") {
       self setModel("usa_paratrooper_streak_org1_mp");
       self attach(level.paratrooper_head);
@@ -926,7 +926,7 @@ _id_6E69() {
   self endon("owner_disconnect");
 
   for(;;) {
-    self[[self._id_6F7F]]();
+    self[[self.personality_update_function]]();
     waitframe();
   }
 }
@@ -939,32 +939,32 @@ _id_6AA6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self[[level._id_0A5D]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 1);
   var_9 = _id_047A::_id_43D6(var_4, var_3);
 
-  if(isPlayer(var_1) && (!isDefined(self._id_0117) || var_1 != self._id_0117) && (!isDefined(self._id_672C) || !self._id_672C)) {
+  if(isPlayer(var_1) && (!isDefined(self._id_0117) || var_1 != self._id_0117) && (!isDefined(self.nonkillstreakagent) || !self.nonkillstreakagent)) {
     if(var_9 == "kill") {
-      maps\mp\gametypes\_damage::_id_6B4B(var_1, var_4, var_3, var_2, "paratroopers_destroyed");
+      maps\mp\gametypes\_damage::onkillstreakkilled(var_1, var_4, var_3, var_2, "paratroopers_destroyed");
     } else {
       var_10 = _id_5643(var_1);
 
       if(isDefined(var_10)) {
         var_10 maps\mp\_utility::incplayerstat(var_9, 1);
-        level thread maps\mp\gametypes\_rank::_id_1457(var_9, var_10, var_4, undefined, var_3);
+        level thread maps\mp\gametypes\_rank::awardgameevent(var_9, var_10, var_4, undefined, var_3);
       }
     }
   }
 
-  if(isDefined(level._id_6A75)) {
-    [[level._id_6A75]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+  if(isDefined(level.on_agent_player_killed)) {
+    [[level.on_agent_player_killed]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
   }
 
-  thread _id_0513::_id_34A9(var_1, var_3, var_4);
+  thread _id_0513::dropscavengerfordeath(var_1, var_3, var_4);
 
-  if(self._id_565F) {
-    self._id_4B60 = 1;
+  if(self.isactive) {
+    self.hasdied = 1;
 
-    if(maps\mp\_utility::getgametypenumlives() != 1 && (isDefined(self._id_7DAD) && self._id_7DAD)) {
+    if(maps\mp\_utility::getgametypenumlives() != 1 && (isDefined(self.respawn_on_death) && self.respawn_on_death)) {
       self thread[[maps\mp\agents\_agent_utility::_id_0A59("spawn")]]();
     } else {
-      maps\mp\agents\_agent_utility::_id_2A73();
+      maps\mp\agents\_agent_utility::deactivateagent();
     }
   }
 
@@ -1008,10 +1008,10 @@ _id_5643(var_0) {
 _id_3694() {
   level endon("game_ended");
   self endon("paratroopers_ended");
-  var_0 = common_scripts\utility::_id_A71B(80, "disconnect", "joined_team");
+  var_0 = common_scripts\utility::waittill_any_timeout_no_endon_death(80, "disconnect", "joined_team");
 
   foreach(var_2 in self._id_6E71) {
-    maps\mp\agents\_agent_utility::_id_5A28(var_2);
+    maps\mp\agents\_agent_utility::killagent(var_2);
   }
 
   level._id_6E71 = common_scripts\utility::_id_0FA0(level._id_6E71);
@@ -1058,16 +1058,16 @@ paratroopers_beacon() {
   var_1.isplayersteerable = 1;
   var_1 thread _id_0513::_id_95A0();
 
-  if(isDefined(var_1._id_359B["friendly"])) {
-    setfxkillondelete(var_1._id_359B["friendly"], 0);
+  if(isDefined(var_1.effect["friendly"])) {
+    setfxkillondelete(var_1.effect["friendly"], 0);
   }
 
-  if(isDefined(var_1._id_359B["enemy"])) {
-    setfxkillondelete(var_1._id_359B["enemy"], 0);
+  if(isDefined(var_1.effect["enemy"])) {
+    setfxkillondelete(var_1.effect["enemy"], 0);
   }
 
   wait 7.0;
-  _id_052C::_id_2D54(var_1);
+  _id_052C::deleteti(var_1);
 }
 
 applyplayercliptest(var_0, var_1, var_2) {
@@ -1159,8 +1159,8 @@ player_paratrooper(var_0, var_1, var_2) {
 
   self allowcrouch(0);
   self allowprone(0);
-  _id_0378::_id_8D74("aud_player_parachute_open");
-  _id_0378::_id_8D74("aud_player_parachute_submix");
+  _id_0378::snd_message("aud_player_parachute_open");
+  _id_0378::snd_message("aud_player_parachute_submix");
   do_paratrooper_drop(var_7, var_3[2], var_1, var_2);
 }
 
@@ -1181,12 +1181,12 @@ player_paratroopers_spawn_thread(var_0, var_1, var_2) {
         if(maps\mp\_utility::_id_579B() && isDefined(var_4.spawnpos_postraidvignette)) {
           var_5 = var_4.spawnpos_postraidvignette;
         } else {
-          var_5 = var_4._id_9092;
+          var_5 = var_4.spawnpos;
         }
 
         var_4 thread player_paratrooper(var_5);
-        var_4 _id_0378::_id_8D74("aud_player_parachute_open");
-        var_4 _id_0378::_id_8D74("aud_player_parachute_submix");
+        var_4 _id_0378::snd_message("aud_player_parachute_open");
+        var_4 _id_0378::snd_message("aud_player_parachute_submix");
       }
     }
   }
@@ -1196,8 +1196,8 @@ player_paratroopers_spawn_thread(var_0, var_1, var_2) {
 
     if(!isDefined(var_0) || var_4.team == var_0 || var_0 == "all") {
       var_4 thread player_paratrooper();
-      var_4 _id_0378::_id_8D74("aud_player_parachute_open");
-      var_4 _id_0378::_id_8D74("aud_player_parachute_submix");
+      var_4 _id_0378::snd_message("aud_player_parachute_open");
+      var_4 _id_0378::snd_message("aud_player_parachute_submix");
     }
   }
 }

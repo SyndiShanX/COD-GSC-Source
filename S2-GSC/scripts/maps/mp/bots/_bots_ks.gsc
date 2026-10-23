@@ -3,85 +3,85 @@
  * Script: scripts\maps\mp\bots\_bots_ks.gsc
 *********************************************/
 
-_id_1A4E() {
+bot_killstreak_setup() {
   if(!maps\mp\_utility::_id_0F5C()) {
     return;
   }
   var_0 = gettime();
 
-  if(!isDefined(level._id_5A59)) {
-    _id_1AB3("uav", ::_id_1A50);
-    _id_1AB3("counter_uav", ::_id_1A50);
-    _id_1AB3("flak_gun", ::_id_1A50);
-    _id_1AB3("fritzx", ::_id_1A50);
-    _id_1AB3("airstrike", ::_id_1A50);
-    _id_1AB3("plane_gunner", ::_id_1A50);
-    _id_1AB3("paratroopers", ::_id_1A50);
-    _id_1AB3("carepackage", ::_id_1A42);
-    _id_1AB3("emergency_carepackage", ::_id_1A42);
-    _id_1AB3("molotovs", ::bot_killstreak_weapon);
-    _id_1AB3("flamethrower", ::bot_killstreak_weapon);
-    _id_1AB3("firebomb", ::_id_1A3D, ::_id_1961);
-    _id_1AB3("fighter_strike", ::_id_1A3D, ::_id_1961);
-    _id_1AB3("mortar_strike", ::_id_1A3D, ::_id_1961);
-    _id_1AB3("missile_strike", ::_id_1A3D, ::_id_1961);
-    _id_1AB3("v2_rocket", ::_id_1A3D, ::_id_1961);
+  if(!isDefined(level.killstreak_botfunc)) {
+    bot_register_killstreak_func("uav", ::bot_killstreak_simple_use);
+    bot_register_killstreak_func("counter_uav", ::bot_killstreak_simple_use);
+    bot_register_killstreak_func("flak_gun", ::bot_killstreak_simple_use);
+    bot_register_killstreak_func("fritzx", ::bot_killstreak_simple_use);
+    bot_register_killstreak_func("airstrike", ::bot_killstreak_simple_use);
+    bot_register_killstreak_func("plane_gunner", ::bot_killstreak_simple_use);
+    bot_register_killstreak_func("paratroopers", ::bot_killstreak_simple_use);
+    bot_register_killstreak_func("carepackage", ::bot_killstreak_drop_outside);
+    bot_register_killstreak_func("emergency_carepackage", ::bot_killstreak_drop_outside);
+    bot_register_killstreak_func("molotovs", ::bot_killstreak_weapon);
+    bot_register_killstreak_func("flamethrower", ::bot_killstreak_weapon);
+    bot_register_killstreak_func("firebomb", ::_id_1A3D, ::bot_can_use_airstrike);
+    bot_register_killstreak_func("fighter_strike", ::_id_1A3D, ::bot_can_use_airstrike);
+    bot_register_killstreak_func("mortar_strike", ::_id_1A3D, ::bot_can_use_airstrike);
+    bot_register_killstreak_func("missile_strike", ::_id_1A3D, ::bot_can_use_airstrike);
+    bot_register_killstreak_func("v2_rocket", ::_id_1A3D, ::bot_can_use_airstrike);
   }
 
-  thread maps\mp\bots\_bots_ks_remote_vehicle::_id_7C63();
+  thread maps\mp\bots\_bots_ks_remote_vehicle::remote_vehicle_setup();
 }
 
-_id_1AB3(var_0, var_1, var_2, var_3) {
-  if(!isDefined(level._id_5A59)) {
-    level._id_5A59 = [];
+bot_register_killstreak_func(var_0, var_1, var_2, var_3) {
+  if(!isDefined(level.killstreak_botfunc)) {
+    level.killstreak_botfunc = [];
   }
 
-  level._id_5A59[var_0] = var_1;
+  level.killstreak_botfunc[var_0] = var_1;
 
-  if(!isDefined(level._id_5A58)) {
-    level._id_5A58 = [];
+  if(!isDefined(level.killstreak_botcanuse)) {
+    level.killstreak_botcanuse = [];
   }
 
-  level._id_5A58[var_0] = var_2;
+  level.killstreak_botcanuse[var_0] = var_2;
 
-  if(!isDefined(level._id_5A5A)) {
-    level._id_5A5A = [];
+  if(!isDefined(level.killstreak_botparm)) {
+    level.killstreak_botparm = [];
   }
 
-  level._id_5A5A[var_0] = var_3;
+  level.killstreak_botparm[var_0] = var_3;
 
-  if(!isDefined(level._id_1AF3)) {
-    level._id_1AF3 = [];
+  if(!isDefined(level.bot_supported_killstreaks)) {
+    level.bot_supported_killstreaks = [];
   }
 
-  level._id_1AF3[level._id_1AF3.size] = var_0;
+  level.bot_supported_killstreaks[level.bot_supported_killstreaks.size] = var_0;
 }
 
-_id_1A38(var_0, var_1) {
-  if(_id_1A49(var_0, "bots", undefined)) {
+bot_is_valid_killstreak(var_0, var_1) {
+  if(bot_killstreak_is_valid_internal(var_0, "bots", undefined)) {
     return 1;
   } else if(var_1) {}
 
   return 0;
 }
 
-_id_1A49(var_0, var_1, var_2) {
-  if(!_id_1A4A(var_0, var_1)) {
+bot_killstreak_is_valid_internal(var_0, var_1, var_2) {
+  if(!bot_killstreak_is_valid_single(var_0, var_1)) {
     return 0;
   }
 
   return 1;
 }
 
-_id_1A4A(var_0, var_1) {
+bot_killstreak_is_valid_single(var_0, var_1) {
   if(var_1 == "humans") {
-    return isDefined(level._id_5A61) && isDefined(level._id_5A61[var_0]) && maps\mp\_utility::_id_453F(var_0) != -1;
+    return isDefined(level.killstreakfuncs) && isDefined(level.killstreakfuncs[var_0]) && maps\mp\_utility::getkillstreakindex(var_0) != -1;
   } else if(var_1 == "bots") {
-    return isDefined(level._id_5A59) && isDefined(level._id_5A59[var_0]);
+    return isDefined(level.killstreak_botfunc) && isDefined(level.killstreak_botfunc[var_0]);
   }
 }
 
-_id_1B01() {
+bot_think_killstreak() {
   self notify("bot_think_killstreak");
   self endon("bot_think_killstreak");
   self endon("death");
@@ -89,45 +89,45 @@ _id_1B01() {
   level endon("game_ended");
   self._id_1B2F = undefined;
 
-  while(!isDefined(level._id_5A59)) {
+  while(!isDefined(level.killstreak_botfunc)) {
     waitframe();
   }
 
   for(;;) {
-    if(maps\mp\bots\_bots_util::_id_1937()) {
+    if(maps\mp\bots\_bots_util::bot_allowed_to_use_killstreaks()) {
       var_0 = self.pers["killstreaks"];
 
       if(isDefined(var_0)) {
         foreach(var_2 in var_0) {
-          if(isDefined(var_2._id_944C) && isDefined(self._id_1A51) && isDefined(self._id_1A51[var_2._id_944C]) && gettime() < self._id_1A51[var_2._id_944C]) {
+          if(isDefined(var_2.streakname) && isDefined(self.bot_killstreak_wait) && isDefined(self.bot_killstreak_wait[var_2.streakname]) && gettime() < self.bot_killstreak_wait[var_2.streakname]) {
             continue;
           }
-          if(var_2._id_13AF) {
-            var_3 = var_2._id_944C;
-            var_2._id_01D0 = maps\mp\_utility::_id_454A(var_2._id_944C, self.team, maps\mp\_utility::_hasperk("specialty_improvedstreaks"));
-            var_4 = level._id_5A58[var_3];
+          if(var_2.available) {
+            var_3 = var_2.streakname;
+            var_2._id_01D0 = maps\mp\_utility::getkillstreakweapon(var_2.streakname, self.team, maps\mp\_utility::_hasperk("specialty_improvedstreaks"));
+            var_4 = level.killstreak_botcanuse[var_3];
 
             if(isDefined(var_4) && !self[[var_4]](var_2)) {
               continue;
             }
-            if(!maps\mp\_utility::_id_A27A(var_2._id_944C, 1)) {
+            if(!maps\mp\_utility::validateusestreak(var_2.streakname, 1)) {
               continue;
             }
-            var_5 = level._id_5A59[var_3];
+            var_5 = level.killstreak_botfunc[var_3];
 
             if(isDefined(var_5)) {
-              var_6 = self[[var_5]](var_2, var_0, var_4, level._id_5A5A[var_2._id_944C]);
+              var_6 = self[[var_5]](var_2, var_0, var_4, level.killstreak_botparm[var_2.streakname]);
 
               if(!isDefined(var_6) || var_6 == 0) {
-                if(!isDefined(self._id_1A51)) {
-                  self._id_1A51 = [];
+                if(!isDefined(self.bot_killstreak_wait)) {
+                  self.bot_killstreak_wait = [];
                 }
 
-                self._id_1A51[var_2._id_944C] = gettime() + 5000;
+                self.bot_killstreak_wait[var_2.streakname] = gettime() + 5000;
               }
             } else {
-              var_2._id_13AF = 0;
-              _id_051E::_id_A129(0);
+              var_2.available = 0;
+              _id_051E::updatekillstreaks(0);
             }
 
             break;
@@ -140,9 +140,9 @@ _id_1B01() {
   }
 }
 
-_id_1A4B() {}
+bot_killstreak_never_use() {}
 
-_id_1A3E(var_0) {
+bot_killstreak_do_not_use(var_0) {
   return 0;
 }
 
@@ -150,16 +150,16 @@ _id_1A3C(var_0) {
   return var_0._id_01D0 == "killstreak_uav_mp";
 }
 
-_id_A3EB() {
-  return maps\mp\_utility::_id_2924() >= maps\mp\_utility::_id_60A6() || level._id_3A62 + 1 >= maps\mp\_utility::_id_60A6();
+vehicle_would_exceed_limit() {
+  return maps\mp\_utility::currentactivevehiclecount() >= maps\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + 1 >= maps\mp\_utility::maxvehiclesallowed();
 }
 
-_id_1963(var_0) {
+bot_can_use_emp(var_0) {
   if(isDefined(level.empplayer)) {
     return 0;
   }
 
-  var_1 = level._id_6C63[self.team];
+  var_1 = level.otherteam[self.team];
 
   if(isDefined(level.teamemped) && isDefined(level.teamemped[var_1]) && level.teamemped[var_1]) {
     return 0;
@@ -168,7 +168,7 @@ _id_1963(var_0) {
   return 1;
 }
 
-_id_1961(var_0) {
+bot_can_use_airstrike(var_0) {
   if(isDefined(level._id_0B93)) {
     return 0;
   }
@@ -176,10 +176,10 @@ _id_1961(var_0) {
   return 1;
 }
 
-_id_1A50(var_0, var_1, var_2, var_3) {
+bot_killstreak_simple_use(var_0, var_1, var_2, var_3) {
   wait(_randomintrange(3, 5));
 
-  if(!maps\mp\bots\_bots_util::_id_1937()) {
+  if(!maps\mp\bots\_bots_util::bot_allowed_to_use_killstreaks()) {
     return 1;
   }
 
@@ -187,14 +187,14 @@ _id_1A50(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  _id_1AF4(var_0, var_1, var_0._id_01D0);
+  bot_switch_to_killstreak_weapon(var_0, var_1, var_0._id_01D0);
   return 1;
 }
 
 bot_killstreak_weapon(var_0, var_1, var_2, var_3) {
   wait(_randomintrange(3, 5));
 
-  if(!maps\mp\bots\_bots_util::_id_1937()) {
+  if(!maps\mp\bots\_bots_util::bot_allowed_to_use_killstreaks()) {
     return 1;
   }
 
@@ -202,7 +202,7 @@ bot_killstreak_weapon(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  _id_1AF4(var_0, var_1, var_0._id_01D0);
+  bot_switch_to_killstreak_weapon(var_0, var_1, var_0._id_01D0);
 
   while(self getcurrentweapon() != var_0._id_01D0) {
     waitframe();
@@ -219,26 +219,26 @@ bot_killstreak_weapon(var_0, var_1, var_2, var_3) {
   return 1;
 }
 
-_id_1A40(var_0, var_1, var_2, var_3) {
-  _id_1A3F(var_0, var_1, var_2, var_3, "anywhere");
+bot_killstreak_drop_anywhere(var_0, var_1, var_2, var_3) {
+  bot_killstreak_drop(var_0, var_1, var_2, var_3, "anywhere");
 }
 
-_id_1A42(var_0, var_1, var_2, var_3) {
-  _id_1A3F(var_0, var_1, var_2, var_3, "outside");
+bot_killstreak_drop_outside(var_0, var_1, var_2, var_3) {
+  bot_killstreak_drop(var_0, var_1, var_2, var_3, "outside");
 }
 
-_id_1A41(var_0, var_1, var_2, var_3) {
-  _id_1A3F(var_0, var_1, var_2, var_3, "hidden");
+bot_killstreak_drop_hidden(var_0, var_1, var_2, var_3) {
+  bot_killstreak_drop(var_0, var_1, var_2, var_3, "hidden");
 }
 
-_id_1A3F(var_0, var_1, var_2, var_3, var_4) {
+bot_killstreak_drop(var_0, var_1, var_2, var_3, var_4) {
   wait(_randomintrange(2, 4));
 
   if(!isDefined(var_4)) {
     var_4 = "anywhere";
   }
 
-  if(!maps\mp\bots\_bots_util::_id_1937()) {
+  if(!maps\mp\bots\_bots_util::bot_allowed_to_use_killstreaks()) {
     return 1;
   }
 
@@ -250,12 +250,12 @@ _id_1A3F(var_0, var_1, var_2, var_3, var_4) {
 
   if(var_5 == 0) {
     foreach(var_7 in var_1) {
-      if(isDefined(var_7._id_944C) && var_7._id_944C == var_0._id_944C) {
-        var_7._id_13AF = 0;
+      if(isDefined(var_7.streakname) && var_7.streakname == var_0.streakname) {
+        var_7.available = 0;
       }
     }
 
-    _id_051E::_id_A129(0);
+    _id_051E::updatekillstreaks(0);
     return 1;
   }
 
@@ -263,7 +263,7 @@ _id_1A3F(var_0, var_1, var_2, var_3, var_4) {
 
   if(var_4 == "outside") {
     var_10 = [];
-    var_11 = maps\mp\bots\_bots_util::_id_19FA(0, 750, 0.6, 1);
+    var_11 = maps\mp\bots\_bots_util::bot_get_nodes_in_cone(0, 750, 0.6, 1);
 
     foreach(var_13 in var_11) {
       if(_nodeexposedtosky(var_13)) {
@@ -272,7 +272,7 @@ _id_1A3F(var_0, var_1, var_2, var_3, var_4) {
     }
 
     if(var_11.size > 5 && var_10.size > var_11.size * 0.6) {
-      var_15 = common_scripts\utility::_id_40B0(self.origin, var_10, undefined, undefined, undefined, 150);
+      var_15 = common_scripts\utility::get_array_of_closest(self.origin, var_10, undefined, undefined, undefined, 150);
 
       if(var_15.size > 0) {
         var_9 = common_scripts\utility::random(var_15);
@@ -304,7 +304,7 @@ _id_1A3F(var_0, var_1, var_2, var_3, var_4) {
       self botlookatpoint(var_9.origin, 2.45, "script_forced");
     }
 
-    _id_1AF4(var_0, var_1, var_0._id_01D0);
+    bot_switch_to_killstreak_weapon(var_0, var_1, var_0._id_01D0);
     wait 2.0;
     self botpressbutton("attack");
     wait 1.5;
@@ -315,19 +315,19 @@ _id_1A3F(var_0, var_1, var_2, var_3, var_4) {
   return 1;
 }
 
-_id_1AF4(var_0, var_1, var_2) {
-  _id_1A87(var_0, var_1);
+bot_switch_to_killstreak_weapon(var_0, var_1, var_2) {
+  bot_notify_streak_used(var_0, var_1);
   waitframe();
   self switchtoweapon(var_2);
 }
 
-_id_1A87(var_0, var_1) {
+bot_notify_streak_used(var_0, var_1) {
   if(isDefined(var_0._id_5703) && var_0._id_5703) {
     self notify("streakUsed1");
   } else {
     for(var_2 = 0; var_2 < 3; var_2++) {
-      if(isDefined(var_1[var_2]._id_944C)) {
-        if(var_1[var_2]._id_944C == var_0._id_944C) {
+      if(isDefined(var_1[var_2].streakname)) {
+        if(var_1[var_2].streakname == var_0.streakname) {
           break;
         }
       }
@@ -340,7 +340,7 @@ _id_1A87(var_0, var_1) {
 _id_1A3D(var_0, var_1, var_2, var_3) {
   wait(_randomintrange(3, 5));
 
-  if(!maps\mp\bots\_bots_util::_id_1937()) {
+  if(!maps\mp\bots\_bots_util::bot_allowed_to_use_killstreaks()) {
     return;
   }
   var_4 = _getzonenearest(self.origin);
@@ -349,13 +349,13 @@ _id_1A3D(var_0, var_1, var_2, var_3) {
     return;
   }
   self botsetflag("disable_movement", 1);
-  _id_1AF4(var_0, var_1, var_0._id_01D0);
+  bot_switch_to_killstreak_weapon(var_0, var_1, var_0._id_01D0);
   wait 2;
 
-  if(!isDefined(self._id_83AF)) {
+  if(!isDefined(self.selectinglocation)) {
     return;
   }
-  var_5 = level._id_AC9C;
+  var_5 = level.zonecount;
   var_6 = -1;
   var_7 = 0;
   var_8 = [];
@@ -385,7 +385,7 @@ _id_1A3D(var_0, var_1, var_2, var_3) {
   } else if(var_8.size > 0) {
     var_13 = _getzoneorigin(common_scripts\utility::random(var_8));
   } else {
-    var_13 = _getzoneorigin(randomint(level._id_AC9C));
+    var_13 = _getzoneorigin(randomint(level.zonecount));
   }
 
   var_14 = 1;
@@ -407,20 +407,20 @@ _id_1A3D(var_0, var_1, var_2, var_3) {
   self botsetflag("disable_movement", 0);
 }
 
-_id_1B05() {
+bot_think_watch_aerial_killstreak() {
   self notify("bot_think_watch_aerial_killstreak");
   self endon("bot_think_watch_aerial_killstreak");
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
 
-  if(!isDefined(level._id_5B27)) {
-    level._id_5B27 = -10000;
+  if(!isDefined(level.last_global_badplace_time)) {
+    level.last_global_badplace_time = -10000;
   }
 
-  if(!isDefined(level._id_5A5B)) {
-    level._id_5A5B["allies"] = [];
-    level._id_5A5B["axis"] = [];
+  if(!isDefined(level.killstreak_global_bp_exists_for)) {
+    level.killstreak_global_bp_exists_for["allies"] = [];
+    level.killstreak_global_bp_exists_for["axis"] = [];
   }
 
   if(!isDefined(level._id_0A2C)) {
@@ -435,7 +435,7 @@ _id_1B05() {
     wait(var_1);
     var_1 = _randomfloatrange(0.05, 4.0);
 
-    if(maps\mp\bots\_bots_util::_id_1A36()) {
+    if(maps\mp\bots\_bots_util::bot_is_remote_or_linked()) {
       continue;
     }
     if(self botgetdifficultysetting("strategyLevel") == 0) {
@@ -443,13 +443,13 @@ _id_1B05() {
     }
     var_2 = 0;
 
-    if(_id_3741(self.team)) {
-      _id_9E0D("missile_strike", ::_id_3741);
+    if(enemy_missile_strike_exists(self.team)) {
+      try_place_global_badplace("missile_strike", ::enemy_missile_strike_exists);
       var_2 = 1;
     }
 
-    if(_id_36FB(self.team)) {
-      _id_9E0D("missile_strike", ::_id_36FB);
+    if(enemy_airstrike_exists(self.team)) {
+      try_place_global_badplace("missile_strike", ::enemy_airstrike_exists);
       var_2 = 1;
     }
 
@@ -467,7 +467,7 @@ _id_1B05() {
   }
 }
 
-_id_1A31(var_0) {
+bot_is_monitoring_aerial_danger(var_0) {
   if(!isDefined(self._id_0A2D)) {
     return 0;
   }
@@ -475,7 +475,7 @@ _id_1A31(var_0) {
   return common_scripts\utility::_id_0F79(self._id_0A2D, var_0);
 }
 
-_id_62DF(var_0) {
+monitor_aerial_danger(var_0) {
   if(!isDefined(self._id_0A2D)) {
     self._id_0A2D = [];
   }
@@ -498,38 +498,38 @@ _id_62DF(var_0) {
   self._id_0A2D = common_scripts\utility::_id_0F93(self._id_0A2D, var_0);
 }
 
-_id_9E0D(var_0, var_1) {
-  if(!isDefined(level._id_5A5B[self.team][var_0])) {
-    level._id_5A5B[self.team][var_0] = 0;
+try_place_global_badplace(var_0, var_1) {
+  if(!isDefined(level.killstreak_global_bp_exists_for[self.team][var_0])) {
+    level.killstreak_global_bp_exists_for[self.team][var_0] = 0;
   }
 
-  if(!level._id_5A5B[self.team][var_0]) {
-    level._id_5A5B[self.team][var_0] = 1;
-    level thread _id_6308(self.team, var_0, var_1);
+  if(!level.killstreak_global_bp_exists_for[self.team][var_0]) {
+    level.killstreak_global_bp_exists_for[self.team][var_0] = 1;
+    level thread monitor_enemy_dangerous_killstreak(self.team, var_0, var_1);
   }
 }
 
-_id_6308(var_0, var_1, var_2) {
+monitor_enemy_dangerous_killstreak(var_0, var_1, var_2) {
   var_3 = 0.5;
 
   while([[var_2]](var_0)) {
-    if(gettime() > level._id_5B27 + 4000) {
+    if(gettime() > level.last_global_badplace_time + 4000) {
       _badplace_global("", 5.0, var_0, "only_sky");
-      level._id_5B27 = gettime();
+      level.last_global_badplace_time = gettime();
     }
 
     wait(var_3);
   }
 
-  level._id_5A5B[var_0][var_1] = 0;
+  level.killstreak_global_bp_exists_for[var_0][var_1] = 0;
 }
 
-_id_3741(var_0) {
+enemy_missile_strike_exists(var_0) {
   if(maps\mp\_utility::_id_579B()) {
     return 0;
   }
 
-  if(isDefined(level._id_7C66) && isDefined(level._id_7EBB)) {
+  if(isDefined(level.remotemissileinprogress) && isDefined(level._id_7EBB)) {
     foreach(var_2 in level._id_7EBB) {
       if(var_2.type == "remote" && var_2.team != var_0) {
         return 1;
@@ -540,14 +540,14 @@ _id_3741(var_0) {
   return 0;
 }
 
-_id_36FB(var_0) {
+enemy_airstrike_exists(var_0) {
   if(maps\mp\_utility::_id_579B()) {
     return 0;
   }
 
   if(isDefined(level.makeglobalusable)) {
     foreach(var_2 in level.makeglobalusable) {
-      if(maps\mp\_utility::_id_57E5(var_2._id_944C, "airstrike") && var_2.team != var_0) {
+      if(maps\mp\_utility::isstrstart(var_2.streakname, "airstrike") && var_2.team != var_0) {
         return 1;
       }
     }

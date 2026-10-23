@@ -9,14 +9,14 @@ main() {
   common_scripts\utility::flag_init("flag_cage_not_moving");
   common_scripts\utility::flag_init("flag_cage_power_outage_triggered");
   common_scripts\utility::flag_init("flag_pneumos_activated");
-  level._id_7532[0] = common_scripts\utility::_id_46B5("pneumo_start_1", "targetname");
+  level._id_7532[0] = common_scripts\utility::getstruct("pneumo_start_1", "targetname");
   level thread _id_6C09();
 
   if(!isDefined(level._id_7532[0])) {
     return;
   }
-  level._id_7532[1] = common_scripts\utility::_id_46B5("pneumo_start_2", "targetname");
-  level._id_7532[2] = common_scripts\utility::_id_46B5("pneumo_start_3", "targetname");
+  level._id_7532[1] = common_scripts\utility::getstruct("pneumo_start_2", "targetname");
+  level._id_7532[2] = common_scripts\utility::getstruct("pneumo_start_3", "targetname");
   var_0 = _getEnt("pneumo_box_origin", "targetname");
   var_1 = getEntArray("pneumo_tubes_geo", "targetname");
 
@@ -48,10 +48,10 @@ main() {
         }
       }
 
-      var_9 = common_scripts\utility::_id_46B5(var_3._id_3A68.target, "targetname");
+      var_9 = common_scripts\utility::getstruct(var_3._id_3A68.target, "targetname");
       var_10 = maps\mp\mp_zombie_nest_ee_util::_id_44C8("pnuemo_tube_node_begin", 1);
       var_10 = common_scripts\utility::_id_0F6F(var_10, var_9);
-      var_3._id_6EB7 = var_10;
+      var_3.path = var_10;
       var_3 thread _id_8A3B(var_0);
     }
   }
@@ -59,7 +59,7 @@ main() {
   thread _id_9E43();
   common_scripts\utility::flag_set("flag_cage_not_moving");
   level._id_6E33 = _id_8A0B();
-  var_12 = common_scripts\utility::_id_46B7("cage_button", "targetname");
+  var_12 = common_scripts\utility::getstructarray("cage_button", "targetname");
 
   foreach(var_14 in var_12) {
     var_15 = common_scripts\utility::_id_44BE(var_14.target, "targetname");
@@ -117,7 +117,7 @@ _id_6C09() {
     var_2 setscriptablepartstate("tube_model", "closed");
   }
 
-  common_scripts\utility::_id_3C9F("flag_pneumos_activated");
+  common_scripts\utility::flag_wait("flag_pneumos_activated");
 
   foreach(var_2 in var_0) {
     var_2 setscriptablepartstate("tube_model", "opening");
@@ -133,7 +133,7 @@ _id_6C09() {
 _id_9E43() {
   var_0 = [];
 
-  while(!common_scripts\utility::_id_3C77("flag_all_tubes_ridden")) {
+  while(!common_scripts\utility::flag("flag_all_tubes_ridden")) {
     var_1 = 1;
     level waittill("pneumo_tube_ridden", var_2);
 
@@ -187,11 +187,11 @@ _id_8A3B(var_0) {
   var_2 = undefined;
 
   if(isDefined(var_1) && var_1.size > 0) {
-    var_2 = common_scripts\utility::_id_4461(self._id_A1F7.origin, var_1);
+    var_2 = common_scripts\utility::getclosest(self._id_A1F7.origin, var_1);
   }
 
   if(isDefined(var_2)) {
-    self._id_A1F7 _meth_8660(1, var_2.origin);
+    self._id_A1F7 setdefaultcostumeifneeded(1, var_2.origin);
   }
 
   level thread _id_63B8(self._id_A1F7);
@@ -205,16 +205,16 @@ _id_8A3B(var_0) {
 
   var_3._id_4028 = _id_0552::_id_44FF("pneumo");
   var_3._id_401E = 250;
-  var_3._id_2F74 = 1;
+  var_3.disabled = 1;
 
-  while(!_id_055A::_id_586A("zone2_2_catacombs")) {
+  while(!_id_055A::iszoneenabled("zone2_2_catacombs")) {
     wait 1;
   }
 
-  common_scripts\utility::_id_3C9F("flag_pneumos_activated");
+  common_scripts\utility::flag_wait("flag_pneumos_activated");
 
   if(isDefined(var_3)) {
-    var_3._id_2F74 = 0;
+    var_3.disabled = 0;
     var_3._id_6642 = 1;
   }
 
@@ -223,16 +223,16 @@ _id_8A3B(var_0) {
 
   for(;;) {
     if(isDefined(self._id_A1F7)) {
-      [var_5, var_6] = self._id_A1F7 _id_0547::_id_A795();
+      [var_5, var_6] = self._id_A1F7 _id_0547::waittilltriggerortokenuse();
 
       if(!isPlayer(var_5)) {
         continue;
       }
-      if(_id_0547::_id_577E(var_5)) {
+      if(_id_0547::isplayerinlaststand(var_5)) {
         continue;
       }
-      if(_id_055A::_id_586A(self._id_0165)) {
-        if(var_5 maps\mp\gametypes\zombies::_id_11C2(250)) {
+      if(_id_055A::iszoneenabled(self._id_0165)) {
+        if(var_5 maps\mp\gametypes\zombies::attempttobuy(250)) {
           if(_id_057E::_id_314D(var_5)) {
             var_5 _id_057E::_id_95CB();
           }
@@ -250,8 +250,8 @@ _id_8A3B(var_0) {
 }
 
 _id_86E5(var_0) {
-  _id_0378::_id_8D74("aud_start_pneumo_tube");
-  var_1 = var_0._id_6EB7;
+  _id_0378::snd_message("aud_start_pneumo_tube");
+  var_1 = var_0.path;
   self._id_53F0 = 1;
   var_2 = maps\mp\mp_zombie_nest_ee_util::_id_90A9(self.origin);
   var_2.origin = var_1[0].origin;
@@ -275,7 +275,7 @@ _id_86E5(var_0) {
 }
 
 _id_7533() {
-  self._id_1782 = _id_2787("black", 1, self, (1, 1, 1));
+  self._id_1782 = create_client_overlay("black", 1, self, (1, 1, 1));
   self._id_1782 fadeovertime(0.75);
   self._id_1782.alpha = 0;
   wait 0.75;
@@ -285,7 +285,7 @@ _id_7533() {
   }
 }
 
-_id_2787(var_0, var_1, var_2, var_3) {
+create_client_overlay(var_0, var_1, var_2, var_3) {
   if(isDefined(var_2)) {
     var_4 = _newclienthudelem(var_2);
   } else {
@@ -311,7 +311,7 @@ _id_2787(var_0, var_1, var_2, var_3) {
 }
 
 _id_A072(var_0, var_1) {
-  var_2 = var_1._id_6EB7;
+  var_2 = var_1.path;
   self unlink();
   self setplayerangles(var_2[var_2.size - 1].angles);
   self setOrigin(var_2[var_2.size - 1].origin);
@@ -357,17 +357,17 @@ _id_1DE0() {
     common_scripts\utility::flag_set("flag_pneumos_activated");
   }
 
-  self._id_1E2B _id_0378::_id_8D74("zmb_pap_button");
+  self._id_1E2B _id_0378::snd_message("zmb_pap_button");
   self._id_1E2B scriptmodelplayanim("zmb_undg_cage_switch_activate");
   self._id_1E2C setHintString(&"ZOMBIES_EMPTY_STRING");
-  self._id_1E2C common_scripts\utility::_id_9D9F();
+  self._id_1E2C common_scripts\utility::trigger_off();
 
-  if(!common_scripts\utility::_id_3C77("flag_pap_available")) {
+  if(!common_scripts\utility::flag("flag_pap_available")) {
     var_1 = 0;
 
     while(!var_1) {
-      if(common_scripts\utility::_id_3C77("flag_cage_not_moving")) {
-        common_scripts\utility::_id_3C7B("flag_cage_not_moving");
+      if(common_scripts\utility::flag("flag_cage_not_moving")) {
+        common_scripts\utility::flag_clear("flag_cage_not_moving");
         _id_7A2D();
         _id_9ED1();
         var_1 = 1;
@@ -375,7 +375,7 @@ _id_1DE0() {
         continue;
       }
 
-      common_scripts\utility::_id_3C9F("flag_cage_not_moving");
+      common_scripts\utility::flag_wait("flag_cage_not_moving");
     }
   }
 
@@ -396,7 +396,7 @@ _id_203D() {
 }
 
 _id_1E34() {
-  common_scripts\utility::_id_3C9F("flag_pap_available");
+  common_scripts\utility::flag_wait("flag_pap_available");
   _id_6E42();
 
   foreach(var_1 in level.players) {
@@ -426,29 +426,29 @@ _id_7A2D() {
 
   switch (level._id_1E2E) {
     case 0:
-      level._id_6E33._id_1E31 _id_0378::_id_8D74("pap_powerup", 1);
+      level._id_6E33._id_1E31 _id_0378::snd_message("pap_powerup", 1);
       thread _id_203A();
       wait 1;
-      level._id_6E33._id_1E31 _id_0378::_id_8D74("zmb_pap_cage_up_1");
+      level._id_6E33._id_1E31 _id_0378::snd_message("zmb_pap_cage_up_1");
       var_8 = var_4;
       var_10 = "up_1";
       break;
     case 1:
       var_8 = var_5;
       _id_1E33();
-      level._id_6E33._id_1E31 _id_0378::_id_8D74("zmb_pap_cage_up_2");
+      level._id_6E33._id_1E31 _id_0378::snd_message("zmb_pap_cage_up_2");
       var_10 = "up_2";
       break;
     case 2:
       var_8 = var_6;
       _id_1E33();
-      level._id_6E33._id_1E31 _id_0378::_id_8D74("zmb_pap_cage_up_3");
+      level._id_6E33._id_1E31 _id_0378::snd_message("zmb_pap_cage_up_3");
       var_10 = "up_3";
       break;
     case 3:
       var_8 = var_7;
       _id_1E33();
-      level._id_6E33._id_1E31 _id_0378::_id_8D74("zmb_pap_cage_up_4");
+      level._id_6E33._id_1E31 _id_0378::snd_message("zmb_pap_cage_up_4");
       var_10 = "up_4";
       break;
     default:
@@ -462,7 +462,7 @@ _id_7A2D() {
   if(level._id_1E2E + 1 >= level._id_1E30) {
     _id_3299();
   } else {
-    level._id_6E33._id_1E31 _id_0378::_id_8D74("catacombs_scare", "power_down_main");
+    level._id_6E33._id_1E31 _id_0378::snd_message("catacombs_scare", "power_down_main");
   }
 
   level._id_1E2E++;
@@ -529,15 +529,15 @@ _id_17BF() {
 _id_1E33() {
   var_0 = randomint(level._id_7532.size);
 
-  if(var_0 == 0 && !common_scripts\utility::_id_3C77("flag_cage_power_outage_triggered")) {
+  if(var_0 == 0 && !common_scripts\utility::flag("flag_cage_power_outage_triggered")) {
     common_scripts\utility::flag_set("flag_cage_power_outage_triggered");
-    level._id_6E33._id_1E31 _id_0378::_id_8D74("zmb_pap_fuse");
+    level._id_6E33._id_1E31 _id_0378::snd_message("zmb_pap_fuse");
     thread _id_203B();
     level thread common_scripts\_exploder::_id_088E(207);
     wait 1;
-    level._id_6E33._id_1E31 _id_0378::_id_8D74("catacombs_scare", "power_down_main");
+    level._id_6E33._id_1E31 _id_0378::snd_message("catacombs_scare", "power_down_main");
     level._id_1E32 = [];
-    var_1 = common_scripts\utility::_id_46B7("cage_scare_spawner", "script_noteworthy");
+    var_1 = common_scripts\utility::getstructarray("cage_scare_spawner", "script_noteworthy");
 
     foreach(var_3 in var_1) {
       var_4 = _id_054D::_id_90BA("zombie_berserker", var_3, "cage zombie", 0, 1, 1);
@@ -547,14 +547,14 @@ _id_1E33() {
 
     wait 0.5;
     _id_2035();
-    level._id_6E33._id_1E31 _id_0378::_id_8D74("catacombs_scare", "power_up_secondary");
+    level._id_6E33._id_1E31 _id_0378::snd_message("catacombs_scare", "power_up_secondary");
     wait 0.5;
     _id_2039();
     level maps\mp\_utility::waitfortimeornotify(30, "cage_zombies_dead");
-    level._id_6E33._id_1E31 _id_0378::_id_8D74("catacombs_scare", "power_up_main");
+    level._id_6E33._id_1E31 _id_0378::snd_message("catacombs_scare", "power_up_main");
     _id_2037();
   } else {
-    level._id_6E33._id_1E31 _id_0378::_id_8D74("catacombs_scare", "cage_move");
+    level._id_6E33._id_1E31 _id_0378::snd_message("catacombs_scare", "cage_move");
     thread _id_203C();
   }
 }
@@ -618,7 +618,7 @@ _id_2035() {
 
   foreach(var_10 in var_8) {
     wait 0.1;
-    var_10 _id_0378::_id_8D74("catacombs_scare", "switch_lights_off");
+    var_10 _id_0378::snd_message("catacombs_scare", "switch_lights_off");
     var_10 setscriptablepartstate("switchlights", "off");
     wait 0.1;
   }
@@ -724,8 +724,8 @@ _id_516B(var_0, var_1, var_2) {
       var_5._id_1CB1 ghost();
     }
 
-    var_5 common_scripts\utility::_id_9D9F();
-    var_5 thread _id_0478::_id_9DC3(::_id_72F3, ::_id_72F4);
+    var_5 common_scripts\utility::trigger_off();
+    var_5 thread _id_0478::triggertouchthink(::_id_72F3, ::_id_72F4);
   }
 
   level._id_17BA[var_2] = var_3;
@@ -812,7 +812,7 @@ _id_2A6C(var_0) {
 }
 
 _id_088C() {
-  common_scripts\utility::_id_9DA3();
+  common_scripts\utility::trigger_on();
 
   if(isDefined(self._id_1CB1)) {
     self._id_1CB1 show();
@@ -820,7 +820,7 @@ _id_088C() {
 }
 
 _id_2A6B() {
-  common_scripts\utility::_id_9D9F();
+  common_scripts\utility::trigger_off();
 
   if(isDefined(self._id_1CB1)) {
     self._id_1CB1 ghost();

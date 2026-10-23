@@ -17,7 +17,7 @@ init() {
   var_0._id_5ED2["default"]["heads"] = ["zom_head_fdr02_org1"];
   var_0._id_4C12 = 1;
   var_0._id_7F1A = 15000;
-  var_0._id_60E2 = 40;
+  var_0.meleedamage = 40;
   var_0.parenttype = "zombie_generic";
   _id_0547::_id_0A52(var_0, "zombie_boss");
 }
@@ -36,7 +36,7 @@ zombie_boss_tesla_delayed_dmg(var_0, var_1, var_2) {
 }
 
 _id_AB61() {
-  maps\mp\agents\humanoid\_humanoid::_id_8A27();
+  maps\mp\agents\humanoid\_humanoid::setuphumanoidstate();
   thread _id_054D::_id_A146();
 }
 

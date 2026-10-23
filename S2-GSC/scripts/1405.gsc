@@ -57,7 +57,7 @@ _id_737D(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
     var_0 endon("death");
 
-    if(_id_0547::_id_577E(self)) {
+    if(_id_0547::isplayerinlaststand(self)) {
       var_0 delete();
       return;
     }
@@ -80,7 +80,7 @@ _id_2E63(var_0, var_1, var_2, var_3) {
   var_7 = 1;
   var_8 = self.origin + (0, 0, 32);
   var_0 common_scripts\utility::waittill_notify_or_timeout("missile_stuck", 15);
-  _id_0378::_id_8D74("aud_jack_in_box_land");
+  _id_0378::snd_message("aud_jack_in_box_land");
 
   if(!isDefined(self)) {
     return;
@@ -109,18 +109,18 @@ _id_2E63(var_0, var_1, var_2, var_3) {
   }
 
   self scriptmodelclearanim();
-  _playFXOnTag(common_scripts\utility::_id_44F5("jack_fuse"), self, "wick_02");
-  _id_0378::_id_8D74("aud_jack_open");
+  _playFXOnTag(common_scripts\utility::getfx("jack_fuse"), self, "wick_02");
+  _id_0378::snd_message("aud_jack_open");
   self scriptmodelplayanim("va_jackinbox_box_open");
   wait 1;
-  playFX(common_scripts\utility::_id_44F5("jack_detonate"), self.origin);
-  _id_0378::_id_8D74("aud_jack_in_box_explode");
+  playFX(common_scripts\utility::getfx("jack_detonate"), self.origin);
+  _id_0378::snd_message("aud_jack_in_box_explode");
 
-  foreach(var_10 in maps\mp\agents\_agent_utility::_id_43FD("all")) {
+  foreach(var_10 in maps\mp\agents\_agent_utility::getactiveagentsoftype("all")) {
     if(isDefined(var_10) && distance(var_10.origin, self.origin) < 128) {
       var_10 dodamage(var_4, self.origin, var_1, self, "MOD_GRENADE", "jack_in_box_decoy_zm");
 
-      if(isPlayer(var_1) && isalive(var_1) && !_id_0547::_id_577E(var_1)) {
+      if(isPlayer(var_1) && isalive(var_1) && !_id_0547::isplayerinlaststand(var_1)) {
         var_1 maps\mp\gametypes\zombies::_id_4798(50);
       }
     }
@@ -145,16 +145,16 @@ _id_11C8() {
   self endon("jack_exploded");
 
   if(level.players.size > 0) {
-    self._id_4883 = _func_2E1(self.origin, level.players[0]);
+    self.groundpos = _func_2E1(self.origin, level.players[0]);
   } else {
-    self._id_4883 = self.origin;
+    self.groundpos = self.origin;
   }
 
   level notify("jack_in_box_live");
   var_0 = 0;
 
-  if(isDefined(level._id_AC80) && isDefined(level._id_AC80._id_ACB3) && level._id_AC80._id_ACB3.size > 0) {
-    var_0 = _id_055A::_id_578A(self._id_4883, 1);
+  if(isDefined(level.zone_data) && isDefined(level.zone_data.zones) && level.zone_data.zones.size > 0) {
+    var_0 = _id_055A::ispointinanyzone(self.groundpos, 1);
   }
 
   if(!var_0) {
@@ -174,21 +174,21 @@ _id_11C8() {
       if(isDefined(var_2._id_3045) && var_2._id_3045 == self) {
         continue;
       }
-      if(isDefined(var_2._id_3044) && var_2._id_3044 >= 5) {
+      if(isDefined(var_2.distractiondronebadpathcount) && var_2.distractiondronebadpathcount >= 5) {
         if(distance(var_2.origin, self.origin) > 128) {
           var_2._id_3045 = self;
-          var_2._id_3044 = 0;
-          var_2._id_3043 = undefined;
+          var_2.distractiondronebadpathcount = 0;
+          var_2.distractiondrone = undefined;
           continue;
         }
       }
 
-      if(!isDefined(var_2._id_3043) || distancesquared(var_2._id_3043._id_4883, var_2.origin) > distancesquared(self._id_4883, var_2.origin)) {
-        var_3 = var_2 _meth_857B(var_2.origin, self._id_4883);
+      if(!isDefined(var_2.distractiondrone) || distancesquared(var_2.distractiondrone.groundpos, var_2.origin) > distancesquared(self.groundpos, var_2.origin)) {
+        var_3 = var_2 _meth_857B(var_2.origin, self.groundpos);
 
         if(var_3.size > 0) {
-          var_2._id_3043 = self;
-          var_2._id_3044 = 0;
+          var_2.distractiondrone = self;
+          var_2.distractiondronebadpathcount = 0;
           var_2._id_3045 = undefined;
         }
       }

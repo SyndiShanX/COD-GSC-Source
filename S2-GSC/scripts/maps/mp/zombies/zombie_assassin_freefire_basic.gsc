@@ -37,7 +37,7 @@ player_in_view() {
   self endon("death");
 
   foreach(var_1 in level.players) {
-    if(distance(var_1.origin, self.origin) < 712 && maps\mp\_utility::_id_3B8E(self, var_1, 35)) {
+    if(distance(var_1.origin, self.origin) < 712 && maps\mp\_utility::findisfacing(self, var_1, 35)) {
       return 1;
     }
   }
@@ -73,7 +73,7 @@ assassin_throw_notetrack_handler(var_0, var_1, var_2, var_3) {
 }
 
 get_closest_alive_player(var_0) {
-  var_1 = common_scripts\utility::_id_40B0(var_0, level.players);
+  var_1 = common_scripts\utility::get_array_of_closest(var_0, level.players);
 
   foreach(var_3 in var_1) {
     if(!isalive(var_3)) {

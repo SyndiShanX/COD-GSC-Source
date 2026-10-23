@@ -12,9 +12,9 @@ main() {
   _id_04D4::setupcallbacks();
 
   if(_isusingmatchrulesdata()) {
-    level._id_5300 = ::_id_5300;
-    [[level._id_5300]]();
-    level thread maps\mp\_utility::_id_7C13();
+    level.initializematchrules = ::initializematchrules;
+    [[level.initializematchrules]]();
+    level thread maps\mp\_utility::reinitializematchrulesonmigration();
   } else {
     maps\mp\_utility::registerroundswitchdvar(level.gametype, 3, 0, 9);
     maps\mp\_utility::registertimelimitdvar(level.gametype, 2.5);
@@ -23,25 +23,25 @@ main() {
     maps\mp\_utility::registerwinlimitdvar(level.gametype, 4);
     maps\mp\_utility::registernumlivesdvar(level.gametype, 1);
     maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
-    level._id_6031 = 0;
-    level._id_6035 = 0;
+    level.matchrules_damagemultiplier = 0;
+    level.matchrules_vampirism = 0;
   }
 
   level.objectivebased = 1;
   maps\mp\_utility::_id_873B(1);
   level._id_6B86 = maps\mp\gametypes\common_sd_sr::_id_6B86;
-  level._id_6BAF = ::_id_6BAF;
-  level._id_6BA7 = ::_id_6BA7;
+  level.onstartgametype = ::onstartgametype;
+  level.onspawnplayer = ::onspawnplayer;
   level._id_6B7B = ::_id_6B7B;
-  level._id_6AE2 = maps\mp\gametypes\common_sd_sr::_id_6AE2;
-  level._id_6B5E = maps\mp\gametypes\common_sd_sr::_id_6B5E;
-  level._id_6BB6 = maps\mp\gametypes\common_sd_sr::_id_6BB6;
-  level._id_6B5C = maps\mp\gametypes\common_sd_sr::_id_6B5C;
-  level._id_3FC7 = maps\mp\gametypes\common_sd_sr::_id_5782;
+  level.ondeadevent = maps\mp\gametypes\common_sd_sr::ondeadevent;
+  level.ononeleftevent = maps\mp\gametypes\common_sd_sr::ononeleftevent;
+  level.ontimelimit = maps\mp\gametypes\common_sd_sr::ontimelimit;
+  level.onnormaldeath = maps\mp\gametypes\common_sd_sr::onnormaldeath;
+  level.gamemodemaydropweapon = maps\mp\gametypes\common_sd_sr::isplayeroutsideofanybombsite;
   level._id_0C25 = 0;
 
-  if(level._id_6031 || level._id_6035) {
-    level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
+    level.modifyplayerdamage = maps\mp\gametypes\_damage::gamemodemodifyplayerdamage;
   }
 
   game["dialog"]["gametype"] = "sd_intro";
@@ -56,8 +56,8 @@ main() {
   _setomnvar("ui_bomb_b_timer_endtime", 0);
 }
 
-_id_5300() {
-  maps\mp\_utility::_id_8653();
+initializematchrules() {
+  maps\mp\_utility::setcommonrulesfrommatchrulesdata();
   var_0 = _getmatchrulesdata("sdData", "roundLength");
   _setdynamicdvar("scr_sd_timelimit", var_0);
   maps\mp\_utility::registertimelimitdvar("sd", var_0);
@@ -80,7 +80,7 @@ _id_5300() {
   maps\mp\_utility::registerhalftimedvar("sd", 0);
 }
 
-_id_6BAF() {
+onstartgametype() {
   if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
   }
@@ -92,7 +92,7 @@ _id_6BAF() {
     game["defenders"] = var_0;
   }
 
-  _setomnvar("ui_war_attacker_team", maps\mp\_utility::_id_46D4(game["attackers"]));
+  _setomnvar("ui_war_attacker_team", maps\mp\_utility::getteamindex(game["attackers"]));
   _setclientnamemode("manual_change");
   level._effect["bomb_explosion"] = loadfx("vfx/explosion/mp_gametype_bomb");
   level._effect["search_dstry_bomb_arming_light"] = loadfx("vfx/unique/search_dstry_bomb_arming_light");
@@ -114,50 +114,50 @@ _id_6BAF() {
   var_2[1] = "bombzone";
   var_2[2] = "blocker_sd";
   _id_04D1::main(var_2);
-  thread maps\mp\gametypes\common_sd_sr::_id_A121();
-  maps\mp\gametypes\common_sd_sr::_id_872D();
-  thread maps\mp\gametypes\common_sd_sr::_id_18FD();
+  thread maps\mp\gametypes\common_sd_sr::updategametypedvars();
+  maps\mp\gametypes\common_sd_sr::setspecialloadout();
+  thread maps\mp\gametypes\common_sd_sr::bombs();
   thread openmenu();
 }
 
-_id_6BA7() {
-  var_0 = isDefined(self._id_57A7) && self._id_57A7;
+onspawnplayer() {
+  var_0 = isDefined(self.isrespawningwithbombcarrierclass) && self.isrespawningwithbombcarrierclass;
 
-  if(maps\mp\_utility::_id_56FF(self)) {
-    self._id_5777 = 0;
-    self._id_56C2 = 0;
+  if(maps\mp\_utility::isgameparticipant(self)) {
+    self.isplanting = 0;
+    self.isdefusing = 0;
 
     if(!var_0) {
-      self._id_568D = 0;
+      self.isbombcarrier = 0;
       self._id_0112 = 0;
     }
   }
 
   if(isPlayer(self) && !var_0) {
-    if(level._id_6510 && self.pers["team"] == game["attackers"]) {
+    if(level.multibomb && self.pers["team"] == game["attackers"]) {
       self setclientomnvar("ui_carrying_bomb", 1);
-      thread maps\mp\gametypes\_hud_message::_id_9102("bomb_pickedup");
+      thread maps\mp\gametypes\_hud_message::splashnotify("bomb_pickedup");
     } else
       self setclientomnvar("ui_carrying_bomb", 0);
   }
 
-  maps\mp\_utility::_id_867B(0);
+  maps\mp\_utility::setextrascore0(0);
 
   if(isDefined(self.pers["plants"])) {
-    maps\mp\_utility::_id_867B(self.pers["plants"]);
+    maps\mp\_utility::setextrascore0(self.pers["plants"]);
   }
 
-  maps\mp\_utility::_id_867C(0);
+  maps\mp\_utility::setextrascore1(0);
 
   if(isDefined(self.pers["defuses"])) {
-    maps\mp\_utility::_id_867C(self.pers["defuses"]);
+    maps\mp\_utility::setextrascore1(self.pers["defuses"]);
   }
 
   if(isDefined(self.pers["cur_kill_streak"])) {
     self._id_00E4 = self.pers["cur_kill_streak"];
   }
 
-  self._id_57A7 = undefined;
+  self.isrespawningwithbombcarrierclass = undefined;
   level notify("spawned_player");
 }
 
@@ -166,7 +166,7 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
     self setclientomnvar("ui_carrying_bomb", 0);
   }
 
-  thread maps\mp\gametypes\common_sd_sr::_id_21AB();
+  thread maps\mp\gametypes\common_sd_sr::checkallowspectating();
   maps\mp\gametypes\common_sd_sr::_id_254C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
 
@@ -174,14 +174,14 @@ openmenu() {
   var_0 = undefined;
   var_1 = undefined;
 
-  foreach(var_3 in level._id_1913) {
-    if(isDefined(var_3._id_9D65) && isDefined(var_3._id_9D65.shootblank)) {
-      if(var_3._id_9D65.shootblank == "_a") {
+  foreach(var_3 in level.bombzones) {
+    if(isDefined(var_3.trigger) && isDefined(var_3.trigger.shootblank)) {
+      if(var_3.trigger.shootblank == "_a") {
         var_0 = var_3;
         continue;
       }
 
-      if(var_3._id_9D65.shootblank == "_b") {
+      if(var_3.trigger.shootblank == "_b") {
         var_1 = var_3;
       }
     }
@@ -195,27 +195,27 @@ openmenu() {
     var_9 = gettime();
 
     foreach(var_11 in level.players) {
-      if(isDefined(var_11._id_568D) && var_11._id_568D) {
+      if(isDefined(var_11.isbombcarrier) && var_11.isbombcarrier) {
         var_5 = var_11;
         break;
       }
     }
 
     if(!isDefined(var_5)) {
-      if(isDefined(level._id_832F)) {
-        var_6 = level._id_832F._id_9D65.origin;
+      if(isDefined(level.sdbomb)) {
+        var_6 = level.sdbomb.trigger.origin;
       }
     } else {
       var_6 = var_5.origin;
       var_7 = var_5.name;
     }
 
-    if(isDefined(level._id_18F9) && level._id_18F9 && isDefined(level._id_7069)) {
-      var_8 = level._id_7069._id_9D65.shootblank;
-      var_6 = level._id_7069._id_9D65.origin;
+    if(isDefined(level.bombplanted) && level.bombplanted && isDefined(level._id_7069)) {
+      var_8 = level._id_7069.trigger.shootblank;
+      var_6 = level._id_7069.trigger.origin;
     }
 
-    _reconevent("script_mp_sd: gameTime %d, bomb_a_loc %v, bomb_b_loc %v, bomb_loc %v, bomb_carrier %s, planted_location %s", var_9, var_0._id_9D65.origin, var_1._id_9D65.origin, var_6, var_7, var_8);
+    _reconevent("script_mp_sd: gameTime %d, bomb_a_loc %v, bomb_b_loc %v, bomb_loc %v, bomb_carrier %s, planted_location %s", var_9, var_0.trigger.origin, var_1.trigger.origin, var_6, var_7, var_8);
     wait 0.2;
   }
 }

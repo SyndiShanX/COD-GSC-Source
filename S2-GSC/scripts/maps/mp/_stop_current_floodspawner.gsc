@@ -19,10 +19,10 @@ _id_9D7C(var_0) {
   var_0 waittill("trigger");
   var_0 common_scripts\utility::script_delay();
   var_1 = getEntArray(var_0.target, "targetname");
-  common_scripts\utility::_id_0FB2(var_1, ::_id_3D85);
+  common_scripts\utility::_id_0FB2(var_1, ::flood_spawner_think);
 }
 
-_id_3D85() {
+flood_spawner_think() {
   self endon("death");
   self notify("stop_current_floodspawner");
   self endon("stop_current_floodspawner");

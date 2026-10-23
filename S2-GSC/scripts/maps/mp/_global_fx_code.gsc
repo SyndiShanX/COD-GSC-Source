@@ -3,8 +3,8 @@
  * Script: scripts\maps\mp\_global_fx_code.gsc
 ***********************************************/
 
-_id_47DC(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = common_scripts\utility::_id_46B7(var_0, "targetname");
+global_fx(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = common_scripts\utility::getstructarray(var_0, "targetname");
 
   if(var_5.size <= 0) {
     return;
@@ -30,7 +30,7 @@ _id_47DC(var_0, var_1, var_2, var_3, var_4) {
       var_7.angles = (0, 0, 0);
     }
 
-    var_8 = common_scripts\utility::_id_281B(var_3);
+    var_8 = common_scripts\utility::createoneshoteffect(var_3);
     var_8.v["origin"] = var_7.origin;
     var_8.v["angles"] = var_7.angles;
     var_8.v["fxid"] = var_3;

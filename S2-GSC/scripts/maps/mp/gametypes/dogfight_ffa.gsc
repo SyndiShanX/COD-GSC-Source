@@ -9,9 +9,9 @@ main() {
   _id_04D4::setupcallbacks();
 
   if(_isusingmatchrulesdata()) {
-    level._id_5300 = ::_id_5300;
-    [[level._id_5300]]();
-    level thread maps\mp\_utility::_id_7C13();
+    level.initializematchrules = ::initializematchrules;
+    [[level.initializematchrules]]();
+    level thread maps\mp\_utility::reinitializematchrulesonmigration();
   } else {
     maps\mp\_utility::registertimelimitdvar(level.gametype, 5);
     maps\mp\_utility::registerscorelimitdvar(level.gametype, 10);
@@ -19,16 +19,16 @@ main() {
     maps\mp\_utility::registerroundlimitdvar(level.gametype, 1);
     maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
     maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
-    level._id_6031 = 0;
-    level._id_6035 = 0;
+    level.matchrules_damagemultiplier = 0;
+    level.matchrules_vampirism = 0;
   }
 
-  level._id_6BAF = ::_id_6BAF;
-  level._id_6B5C = ::_id_6B5C;
+  level.onstartgametype = ::onstartgametype;
+  level.onnormaldeath = ::onnormaldeath;
   level._id_6B7F = ::_id_6B7F;
 
-  if(level._id_6031 || level._id_6035) {
-    level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
+    level.modifyplayerdamage = maps\mp\gametypes\_damage::gamemodemodifyplayerdamage;
   }
 
   _setteammode("ffa");
@@ -44,8 +44,8 @@ main() {
   maps\mp\gametypes\dogfight_common::dogfightinit();
 }
 
-_id_5300() {
-  maps\mp\_utility::_id_8653(1);
+initializematchrules() {
+  maps\mp\_utility::setcommonrulesfrommatchrulesdata(1);
   _setdynamicdvar("scr_dogfight_ffa_winlimit", 1);
   maps\mp\_utility::registerwinlimitdvar("dogfight_ffa", 1);
   _setdynamicdvar("scr_dogfight_ffa_roundlimit", 1);
@@ -54,7 +54,7 @@ _id_5300() {
   maps\mp\_utility::registerhalftimedvar("dogfight_ffa", 0);
 }
 
-_id_6BAF() {
+onstartgametype() {
   _setclientnamemode("auto_change");
   maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_DM");
   maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_DM");
@@ -70,15 +70,15 @@ _id_6BAF() {
   maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_DM_HINT");
   maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_DM_HINT");
   _id_050D::_id_10E4();
-  level._id_A239 = 1;
+  level.usestartspawns = 1;
   var_0[0] = "dm";
   var_0[1] = "blocker_dm";
   _id_04D1::main(var_0);
-  level._id_7895 = 1;
+  level.quickmessagetoall = 1;
   maps\mp\gametypes\dogfight_common::ondogfightstart();
 }
 
-_id_6B5C(var_0, var_1, var_2) {
+onnormaldeath(var_0, var_1, var_2) {
   var_3 = 0;
 
   foreach(var_5 in level.players) {
@@ -88,16 +88,16 @@ _id_6B5C(var_0, var_1, var_2) {
   }
 
   if(game["state"] == "postgame" && var_1.score >= var_3) {
-    var_1._id_3B4B = 1;
+    var_1.finalkill = 1;
   }
 }
 
 _id_6B7F(var_0, var_1, var_2, var_3, var_4) {
   var_5 = maps\mp\gametypes\_rank::getscoreinfovalue(var_0);
-  var_1 maps\mp\_utility::_id_867B(var_1._id_008F + var_5);
-  var_1 _id_04D2::_id_A161(var_1, var_5);
+  var_1 maps\mp\_utility::setextrascore0(var_1._id_008F + var_5);
+  var_1 _id_04D2::updatescorestatsffa(var_1, var_5);
 
-  if(_id_57BF(var_0)) {
+  if(isscoringevent(var_0)) {
     return 1;
   } else if(_id_57BD(var_0)) {
     return 0;
@@ -106,7 +106,7 @@ _id_6B7F(var_0, var_1, var_2, var_3, var_4) {
   return 0;
 }
 
-_id_57BF(var_0) {
+isscoringevent(var_0) {
   switch (var_0) {
     case "attack_dogs_kill":
     case "division_commando_kill":

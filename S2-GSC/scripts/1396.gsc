@@ -16,7 +16,7 @@ _id_1F83(var_0) {
 }
 
 _id_A221(var_0) {
-  maps\mp\gametypes\zombies::_id_685F(self, 1);
+  maps\mp\gametypes\zombies::nukepickup(self, 1);
 }
 
 _id_45BA(var_0) {

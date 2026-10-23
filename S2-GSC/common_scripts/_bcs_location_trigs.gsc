@@ -3,15 +3,15 @@
  * Script: common_scripts\_bcs_location_trigs.gsc
 **************************************************/
 
-_id_1671() {
-  if(isDefined(level._id_2A3D) && isDefined(anim.bcs_locations)) {
+bcs_location_trigs_init() {
+  if(isDefined(level.dds) && isDefined(anim.bcs_locations)) {
     return;
   }
   level.bcs_location_mappings = [];
   bcs_location_trigs_do_mappings();
   bcs_trigs_assign_aliases();
   level.bcs_location_mappings = undefined;
-  anim._id_5E5E = [];
+  anim.locationlastcallouttimes = [];
 }
 
 bcs_trigs_assign_aliases() {
@@ -35,7 +35,7 @@ bcs_trigs_assign_aliases() {
       var_6 = common_scripts\utility::array_randomize(var_6);
     }
 
-    var_3._id_5E5C = var_6;
+    var_3.locationaliases = var_6;
   }
 
   anim.bcs_locations = var_1;

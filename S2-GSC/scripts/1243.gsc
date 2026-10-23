@@ -9,22 +9,22 @@ _id_52B9() {
   level._id_7081 = [];
   spawnStruct();
   level._id_7081[0] = spawnStruct();
-  level._id_7081[0]._id_9087 = common_scripts\utility::_id_46B5("plate_spawn_left", "targetname");
+  level._id_7081[0]._id_9087 = common_scripts\utility::getstruct("plate_spawn_left", "targetname");
   level._id_7081[0]._id_7083 = (2000, 0, 1500);
   level._id_7081[1] = spawnStruct();
-  level._id_7081[1]._id_9087 = common_scripts\utility::_id_46B5("plate_spawn_mid", "targetname");
+  level._id_7081[1]._id_9087 = common_scripts\utility::getstruct("plate_spawn_mid", "targetname");
   level._id_7081[1]._id_7083 = (2000, 300, 1500);
   level._id_7081[2] = spawnStruct();
-  level._id_7081[2]._id_9087 = common_scripts\utility::_id_46B5("plate_spawn_right", "targetname");
+  level._id_7081[2]._id_9087 = common_scripts\utility::getstruct("plate_spawn_right", "targetname");
   level._id_7081[2]._id_7083 = (2000, 600, 1500);
   level._id_3C40 = _getEnt("trigger_firing_range", "targetname");
 
   if(!isDefined(level._id_3C40)) {
     return;
   }
-  level._id_3C40 thread _id_0478::_id_9DC3(::_id_37BD, ::_id_38F2);
-  level._id_3C3F = common_scripts\utility::_id_46B7("firingrange_spawn", "targetname");
-  level._id_4B13 = common_scripts\utility::_id_46B5("fireworks_start", "targetname");
+  level._id_3C40 thread _id_0478::triggertouchthink(::_id_37BD, ::_id_38F2);
+  level._id_3C3F = common_scripts\utility::getstructarray("firingrange_spawn", "targetname");
+  level._id_4B13 = common_scripts\utility::getstruct("fireworks_start", "targetname");
   level._id_4871 = loadfx("vfx/map/mp_hub/hub_grenade_toss_reward_exp");
   level._id_707F = 0;
   level._id_9B6B = 0;
@@ -39,7 +39,7 @@ _id_52B9() {
   setdvarifuninitialized("hub_start_plate_sequence", 0);
   setdvarifuninitialized("hub_launch_test_plate", 0);
 
-  if(_func_3AE() == 0) {
+  if(xmodelalias/alias_ger_heads_scarf_for_muddy() == 0) {
     thread _id_63DF("hub_complete_sequence_easy", ::_id_36E9);
     thread _id_63DF("hub_complete_sequence_medium", ::_id_74C5);
     thread _id_63DF("hub_complete_sequence_hard", ::_id_74A7);
@@ -80,7 +80,7 @@ _id_37BD(var_0) {
   self endon("death");
   self endon("disconnect");
 
-  if(_func_3AE() == 1 && self._id_5721 == 1) {
+  if(xmodelalias/alias_ger_heads_scarf_for_muddy() == 1 && self._id_5721 == 1) {
     return;
   }
   if(self getclientomnvar("ui_hub_in_1v1") != 0) {
@@ -93,13 +93,13 @@ _id_37BD(var_0) {
   self notify("force_cancel_placement");
   self.previousweaponcharmguid = 0;
 
-  if((!_id_04E0::_id_5790(var_1) || self _meth_803D() || self._id_572F) && (!_isonlinegame() || getdvarint("spv_hub_firingrange_kswitch", 1) == 0)) {
+  if((!_id_04E0::_id_5790(var_1) || self same_color_code_as_last_time() || self._id_572F) && (!_isonlinegame() || getdvarint("spv_hub_firingrange_kswitch", 1) == 0)) {
     self._id_5721 = 1;
     self setclientomnvar("ui_hub_is_preoccupied", 1);
 
     if(self._id_56A4) {
       if(isDefined(self._id_155F)) {
-        self._id_155F _id_04E0::_id_1543((0, 0, 80), self);
+        self._id_155F _id_04E0::ball_physics_launch_drop((0, 0, 80), self);
       }
     }
 
@@ -138,7 +138,7 @@ _id_37BD(var_0) {
       }
 
       if(isDefined(var_0) && !var_2) {
-        self._id_294D = maps\mp\gametypes\_class::_id_1E05();
+        self.currentselectedclass = maps\mp\gametypes\_class::_id_1E05();
       }
 
       self freezecontrols(0);
@@ -229,7 +229,7 @@ _id_9A80(var_0) {
 
   if(var_0) {
     thread _id_A8FC();
-    var_3 = common_scripts\utility::_id_44F5("divisions_bayonet_charge");
+    var_3 = common_scripts\utility::getfx("divisions_bayonet_charge");
     _playfxontagforclients(var_3, self, "j_head", self);
     self _meth_866F(1, 0, 1);
     var_1["intensity"] = 0.3;
@@ -244,7 +244,7 @@ _id_9A80(var_0) {
     }
   } else {
     self notify("removeRangeTransitionEffect");
-    var_3 = common_scripts\utility::_id_44F5("divisions_bayonet_charge");
+    var_3 = common_scripts\utility::getfx("divisions_bayonet_charge");
     _killfxontagforclient(var_3, self, "j_head", self);
 
     if(isDefined(level._id_A4B5)) {
@@ -279,7 +279,7 @@ _id_A8FC() {
 }
 
 _id_38F2(var_0) {
-  if(_func_3AE() == 0) {
+  if(xmodelalias/alias_ger_heads_scarf_for_muddy() == 0) {
     if(_id_028D::_id_5855()) {
       self notify("weaponPlantFiringRange");
       waitframe();
@@ -293,8 +293,8 @@ _id_38F2(var_0) {
       self _meth_85C7();
       self setclientomnvar("ui_hide_1v1scores", 1);
       self visionsetnakedforplayer("", 0);
-      self._id_294D = maps\mp\gametypes\_class::_id_1E05();
-      _id_04E2::_id_A594("custom" + (self._id_294D + 1), 0);
+      self.currentselectedclass = maps\mp\gametypes\_class::_id_1E05();
+      _id_04E2::_id_A594("custom" + (self.currentselectedclass + 1), 0);
       maps\mp\gametypes\_class::_id_1FA2(common_scripts\utility::_id_46AF());
       _id_04E0::_id_3663();
       self setdemigod(0);
@@ -359,10 +359,10 @@ _id_8A48() {
   level._id_7AB3 = getEntArray("flip_target", "targetname");
   level._id_7AB2 = getEntArray("flip_target_reset", "targetname");
   level._id_7AB4 = getEntArray("popup_target", "targetname");
-  var_0 = common_scripts\utility::_id_46B5("sequence_area", "targetname");
+  var_0 = common_scripts\utility::getstruct("sequence_area", "targetname");
   level.setmovingplatformtrigger = [];
   level.forcemovingplatformentity = 0;
-  level._id_83ED = common_scripts\utility::_id_46B5("sequence_reward_spawn", "targetname");
+  level._id_83ED = common_scripts\utility::getstruct("sequence_reward_spawn", "targetname");
   var_1 = getEntArray("plate_sequence", "targetname");
   level._id_707E = [];
   level._id_9B6E = [];
@@ -430,7 +430,7 @@ _id_8A48() {
     var_3 setdamagecallbackon(1);
     var_3.damagecallback = ::_id_63D0;
     var_3._id_4DC9 = 0;
-    var_3._id_7584 = "down";
+    var_3.pos = "down";
     var_3.angles = (0, 0, 0);
   }
 
@@ -524,7 +524,7 @@ _id_639A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
   if(self.health > 0) {
     if(isPlayer(var_1)) {
-      var_1 _id_04C7::_id_A102("standard_nosound");
+      var_1 _id_04C7::updatedamagefeedback("standard_nosound");
       playFX(level._id_AA65, var_6);
 
       if(isDefined(var_1._id_8B25)) {
@@ -536,11 +536,11 @@ _id_639A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(isPlayer(var_1)) {
-    var_1 _id_04C7::_id_A102("killshot_nosound");
+    var_1 _id_04C7::updatedamagefeedback("killshot_nosound");
   }
 
   var_1 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_firingrange");
-  var_12 = _func_351("mp_hub_allies_frange_wood_shot", undefined, self.origin);
+  var_12 = maps/taken_tent_fx("mp_hub_allies_frange_wood_shot", undefined, self.origin);
   playFX(level._id_AA66, self.origin);
 
   if(!isDefined(common_scripts\utility::_id_0F7E(level.aiphysicstracepassed["plate"], var_1))) {
@@ -637,11 +637,11 @@ _id_2DD9(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     return;
   }
   if(isPlayer(var_1)) {
-    var_1 _id_04C7::_id_A102("killshot_nosound");
+    var_1 _id_04C7::updatedamagefeedback("killshot_nosound");
   }
 
   if(!isDefined(level._id_4B13)) {
-    level._id_4B13 = common_scripts\utility::_id_46B5("fireworks_start", "targetname");
+    level._id_4B13 = common_scripts\utility::getstruct("fireworks_start", "targetname");
   }
 
   if(isPlayer(var_1) && isDefined(var_1._id_8B25)) {
@@ -666,7 +666,7 @@ _id_2DD9(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
   if(self._id_A985 < 3) {
     thread _id_5C2B(self._id_A985 + 1);
-  } else if(_func_3AE() == 0) {
+  } else if(xmodelalias/alias_ger_heads_scarf_for_muddy() == 0) {
     foreach(var_13 in level.players) {
       if(isDefined(common_scripts\utility::_id_0F7E(level.aiphysicstracepassed["plate"], var_13))) {
         var_13 iprintln(&"HUB_RANGE_SEQUENCE_COMPLETE", &"HUB_RANGE_SEQUENCE_HELPED");
@@ -704,10 +704,10 @@ _id_63D4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   if(gettime() / 1000 < self._id_99F1 + 0.5) {
     return;
   }
-  var_12 = _func_351("mp_hub_allies_frange_dist_metal_shot", undefined, self.origin);
+  var_12 = maps/taken_tent_fx("mp_hub_allies_frange_dist_metal_shot", undefined, self.origin);
 
   if(isPlayer(var_1)) {
-    var_1 _id_04C7::_id_A102("standard_nosound");
+    var_1 _id_04C7::updatedamagefeedback("standard_nosound");
     var_1 notify("hitFRTarget");
   }
 
@@ -791,7 +791,7 @@ _id_63D3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
   if(self.health > 0) {
     if(isPlayer(var_1)) {
-      var_1 _id_04C7::_id_A102("standard_nosound");
+      var_1 _id_04C7::updatedamagefeedback("standard_nosound");
       playFX(level._id_AA65, var_6);
 
       if(isDefined(var_1._id_8B25)) {
@@ -800,11 +800,11 @@ _id_63D3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     }
   } else {
     if(isPlayer(var_1)) {
-      var_1 _id_04C7::_id_A102("killshot_nosound");
+      var_1 _id_04C7::updatedamagefeedback("killshot_nosound");
     }
 
     var_1 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_firingrange");
-    var_12 = _func_351("mp_hub_allies_frange_wood_shot", undefined, self.origin);
+    var_12 = maps/taken_tent_fx("mp_hub_allies_frange_wood_shot", undefined, self.origin);
     self rotateTo((90, 0, 0), 0.2);
     self._id_4DC9 = 1;
     self setCanDamage(0);
@@ -860,11 +860,11 @@ _id_4AFF() {
   level endon("game_ended");
 
   if(!isDefined(level._id_22FF)) {
-    level._id_22FF = common_scripts\utility::_id_46B5("civ_event_start", "targetname");
+    level._id_22FF = common_scripts\utility::getstruct("civ_event_start", "targetname");
   }
 
   if(!isDefined(level._id_22FD)) {
-    level._id_22FD = common_scripts\utility::_id_46B5("civ_event_end", "targetname");
+    level._id_22FD = common_scripts\utility::getstruct("civ_event_end", "targetname");
   }
 
   if(!isDefined(level._id_22FF) || !isDefined(level._id_22FD)) {
@@ -925,7 +925,7 @@ _id_4AFF() {
   var_6 thread _id_64D1(level._id_22FD, 3, var_1);
   wait 3.5;
 
-  if(!level._id_22FE && _func_3AE() == 0) {
+  if(!level._id_22FE && xmodelalias/alias_ger_heads_scarf_for_muddy() == 0) {
     foreach(var_8 in level.players) {
       if(isDefined(common_scripts\utility::_id_0F7E(level.aiphysicstracepassed["tower"], var_8))) {
         var_8 iprintln(&"HUB_RANGE_SEQUENCE_COMPLETE", &"HUB_RANGE_SEQUENCE_HELPED");
@@ -949,7 +949,7 @@ _id_636F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     self.health = var_12;
 
     if(isPlayer(var_1)) {
-      var_1 _id_04C7::_id_A102("standard_nosound");
+      var_1 _id_04C7::updatedamagefeedback("standard_nosound");
       playFX(level._id_AA65, var_6);
 
       if(isDefined(var_1._id_8B25)) {
@@ -961,7 +961,7 @@ _id_636F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(isPlayer(var_1)) {
-    var_1 _id_04C7::_id_A102("killshot_nosound");
+    var_1 _id_04C7::updatedamagefeedback("killshot_nosound");
     var_1 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_firingrange");
     playFX(level._id_AA66, self.origin);
     var_1 notify("hitFRTarget");
@@ -1002,26 +1002,26 @@ _id_64D1(var_0, var_1, var_2) {
 }
 
 _id_63D0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
-  var_12 = _func_351("mp_hub_allies_frange_dist_metal_shot", undefined, self.origin);
+  var_12 = maps/taken_tent_fx("mp_hub_allies_frange_dist_metal_shot", undefined, self.origin);
 
   if(isPlayer(var_1)) {
-    var_1 _id_04C7::_id_A102("standard_nosound");
+    var_1 _id_04C7::updatedamagefeedback("standard_nosound");
     var_1 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_firingrange");
     var_1 notify("hitFRTarget");
     var_1 notify("hitFRDestroyed", self);
   }
 
-  if(isPlayer(var_1) && isDefined(var_1._id_8B25) && self._id_7584 == "down") {
+  if(isPlayer(var_1) && isDefined(var_1._id_8B25) && self.pos == "down") {
     var_1 thread _id_8B26(self);
   }
 
   var_13 = 0;
 
-  if(self._id_7584 == "down") {
+  if(self.pos == "down") {
     self setCanDamage(0);
     self rotateTo((-90, 0, 0), 0.2);
     self._id_4DC9 = 1;
-    self._id_7584 = "up";
+    self.pos = "up";
     var_13 = 1;
   }
 
@@ -1044,20 +1044,20 @@ _id_63D0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 }
 
 _id_63D1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
-  var_12 = _func_351("mp_hub_allies_frange_dist_metal_shot", undefined, self.origin);
+  var_12 = maps/taken_tent_fx("mp_hub_allies_frange_dist_metal_shot", undefined, self.origin);
 
   if(isPlayer(var_1)) {
-    var_1 _id_04C7::_id_A102("standard_nosound");
+    var_1 _id_04C7::updatedamagefeedback("standard_nosound");
   }
 
   var_13 = 0;
 
   foreach(var_15 in self._id_3D77) {
-    if(var_15._id_7584 == "up") {
+    if(var_15.pos == "up") {
       var_15 setCanDamage(1);
       var_15 rotateTo((0, 0, 0), 0.2);
       var_15._id_4DC9 = 0;
-      var_15._id_7584 = "down";
+      var_15.pos = "down";
       var_13++;
     }
   }
@@ -1070,10 +1070,10 @@ _id_63D1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 }
 
 _id_63D2(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
-  var_12 = _func_351("mp_hub_allies_frange_dist_metal_shot", undefined, self.origin);
+  var_12 = maps/taken_tent_fx("mp_hub_allies_frange_dist_metal_shot", undefined, self.origin);
 
   if(isPlayer(var_1)) {
-    var_1 _id_04C7::_id_A102("standard_nosound");
+    var_1 _id_04C7::updatedamagefeedback("standard_nosound");
     var_1 notify("hitFRTarget");
     var_1 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_firingrange");
   }
@@ -1101,7 +1101,7 @@ _id_63D2(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
 _id_638E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(var_5 == "frag_grenade_mp" || var_5 == "c4_mp" || var_5 == "semtex_mp") {
-    var_1 _id_04C7::_id_A102("standard_nosound");
+    var_1 _id_04C7::updatedamagefeedback("standard_nosound");
 
     if(_func_367()) {
       var_1 _id_04E0::_id_50F0(["hubFeatureStats", "hubFiringRangeStats", "grenadeBucketHits"], 1, undefined, undefined);
@@ -1118,7 +1118,7 @@ _id_638E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
   if(var_5 == "thermite_mp") {
     if(var_4 == "MOD_EXPLOSIVE") {
-      var_1 _id_04C7::_id_A102("standard_nosound");
+      var_1 _id_04C7::updatedamagefeedback("standard_nosound");
 
       if(_func_367()) {
         var_1 _id_04E0::_id_50F0(["hubFeatureStats", "hubFiringRangeStats", "grenadeBucketHits"], 1, undefined, undefined);
@@ -1144,7 +1144,7 @@ _id_9305() {
 
 _id_63E0() {
   level endon("game_ended");
-  level common_scripts\utility::_id_A70A("timeUp", "sequenceComplete");
+  level common_scripts\utility::waittill_any("timeUp", "sequenceComplete");
   level.forcemovingplatformentity = 0;
 }
 
@@ -1193,7 +1193,7 @@ _id_21F0(var_0, var_1) {
 }
 
 _id_36E9(var_0) {
-  if(_func_3AE() == 1) {
+  if(xmodelalias/alias_ger_heads_scarf_for_muddy() == 1) {
     return;
   }
   thread _id_60FE();
@@ -1249,7 +1249,7 @@ _id_63B1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   thread _id_60FD();
 
   if(isPlayer(var_1)) {
-    var_1 _id_04C7::_id_A102("standard_nosound");
+    var_1 _id_04C7::updatedamagefeedback("standard_nosound");
   }
 
   if(isDefined(level._id_60FF)) {
@@ -1323,7 +1323,7 @@ _id_2DDB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(isPlayer(var_1)) {
-    var_1 _id_04C7::_id_A102("standard_nosound");
+    var_1 _id_04C7::updatedamagefeedback("standard_nosound");
   }
 
   self delete();
@@ -1370,7 +1370,7 @@ _id_2DDB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 }
 
-_id_6378(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+monitordamagecallback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(isDefined(var_1._id_8F10) && var_1._id_8F10 == self) {
     return;
   }
@@ -1384,20 +1384,20 @@ _id_4AD6(var_0) {
   if(!isDefined(self._id_8F10)) {
     return;
   }
-  var_1 = common_scripts\utility::_id_9AAD(common_scripts\utility::_id_7F03(_distance2d(self.origin, self._id_8F10.origin) / 10, 0));
+  var_1 = common_scripts\utility::tostring(common_scripts\utility::_id_7F03(_distance2d(self.origin, self._id_8F10.origin) / 10, 0));
 
   for(;;) {
     switch (var_0) {
       case "up":
         if(self._id_8F10.origin[0] <= 2850) {
-          var_1 = common_scripts\utility::_id_9AAD(common_scripts\utility::_id_7F03(_distance2d(self.origin, self._id_8F10.origin + (50, 0, 0)) / 10, 0));
+          var_1 = common_scripts\utility::tostring(common_scripts\utility::_id_7F03(_distance2d(self.origin, self._id_8F10.origin + (50, 0, 0)) / 10, 0));
           self._id_8F10 movex(50, 0.01);
         }
 
         break;
       case "down":
         if(self._id_8F10.origin[0] >= 1000) {
-          var_1 = common_scripts\utility::_id_9AAD(common_scripts\utility::_id_7F03(_distance2d(self.origin, self._id_8F10.origin - (50, 0, 0)) / 10, 0));
+          var_1 = common_scripts\utility::tostring(common_scripts\utility::_id_7F03(_distance2d(self.origin, self._id_8F10.origin - (50, 0, 0)) / 10, 0));
           self._id_8F10 movex(-50, 0.01);
         }
 
@@ -1427,9 +1427,9 @@ _id_2DD0() {
 
 _id_21E4(var_0) {
   thread maps\mp\gametypes\_missions::processchallenge("ch_hq_data_sequence_" + var_0);
-  var_1 = maps\mp\gametypes\_hud_util::_id_2097("ch_hq_data_sequence_melon");
-  var_2 = maps\mp\gametypes\_hud_util::_id_2097("ch_hq_data_sequence_tower");
-  var_3 = maps\mp\gametypes\_hud_util::_id_2097("ch_hq_data_sequence_plate");
+  var_1 = maps\mp\gametypes\_hud_util::ch_getprogress("ch_hq_data_sequence_melon");
+  var_2 = maps\mp\gametypes\_hud_util::ch_getprogress("ch_hq_data_sequence_tower");
+  var_3 = maps\mp\gametypes\_hud_util::ch_getprogress("ch_hq_data_sequence_plate");
   var_4 = var_1 + var_2 + var_3;
   thread maps\mp\gametypes\_missions::processchallenge("ch_hq_sequences", var_4, 1);
 }
@@ -1561,7 +1561,7 @@ _id_478B(var_0) {
 
   var_1 = 0;
 
-  if((!_id_04E0::_id_5790(var_1) || self _meth_803D()) && (!_isonlinegame() || getdvarint("spv_hub_firingrange_kswitch", 1) == 0)) {
+  if((!_id_04E0::_id_5790(var_1) || self same_color_code_as_last_time()) && (!_isonlinegame() || getdvarint("spv_hub_firingrange_kswitch", 1) == 0)) {
     _id_9A80(0);
     var_2 = 5;
 
@@ -1569,7 +1569,7 @@ _id_478B(var_0) {
       var_2 = self._id_0079;
     }
 
-    self._id_5DEE = undefined;
+    self.loadout = undefined;
     _id_04CB::_id_A050();
     self._id_37FC = undefined;
     self._id_69AB = undefined;
@@ -1657,7 +1657,7 @@ _id_478B(var_0) {
     }
 
     if(isDefined(self._id_37FC) && !self._id_572F) {
-      if(self._id_37FC != "bouncingbetty_mp" && maps\mp\gametypes\_class::_id_5826(self._id_37FC, 0)) {
+      if(self._id_37FC != "bouncingbetty_mp" && maps\mp\gametypes\_class::isvalidequipment(self._id_37FC, 0)) {
         self setlethalweapon(self._id_37FC);
         self giveweapon(self._id_37FC);
       }
@@ -1713,8 +1713,8 @@ _id_8B26(var_0, var_1) {
   }
 
   self._id_8B25 = self._id_8B25 + var_3;
-  self _meth_85EF(&"hub_update_shootout", 3, self._id_8B25, self._id_8B24._id_8B25, var_3);
-  self._id_8B24 _meth_85EF(&"hub_update_shootout", 3, self._id_8B24._id_8B25, self._id_8B25, 0);
+  self set_vision_set_player(&"hub_update_shootout", 3, self._id_8B25, self._id_8B24._id_8B25, var_3);
+  self._id_8B24 set_vision_set_player(&"hub_update_shootout", 3, self._id_8B24._id_8B25, self._id_8B25, 0);
 }
 
 _id_11BD(var_0) {
@@ -1804,7 +1804,7 @@ checkfordisconnect(var_0) {
   self endon("disconnect");
   self endon("shootoutTimeLimit");
   self endon("shootoutChoiceMade");
-  var_0 common_scripts\utility::_id_A70A("death", "disconnect");
+  var_0 common_scripts\utility::waittill_any("death", "disconnect");
   self freezecontrols(0);
   _id_04E0::_id_870B(0);
 }
@@ -1858,10 +1858,10 @@ _id_9306(var_0, var_1) {
   var_1 setclientomnvar("ui_hub_in_shootout", 1);
   var_0 setclientomnvar("ui_hub_shootout_intro_countdown", 5);
   var_1 setclientomnvar("ui_hub_shootout_intro_countdown", 5);
-  var_0 _meth_85EF(&"hub_begin_shootout", 0);
-  var_1 _meth_85EF(&"hub_begin_shootout", 0);
-  var_0 _meth_866C(&"player_interact_notification_end", 0);
-  var_0 _meth_866C(&"player_interact_notification_center_end", 0);
+  var_0 set_vision_set_player(&"hub_begin_shootout", 0);
+  var_1 set_vision_set_player(&"hub_begin_shootout", 0);
+  var_0 setdot_radius(&"player_interact_notification_end", 0);
+  var_0 setdot_radius(&"player_interact_notification_center_end", 0);
   var_0 thread handleshootoutleaveactivity();
   var_1 thread handleshootoutleaveactivity();
   var_0 _id_04E0::_id_7DF8(0, 0, 1, 1, 0);
@@ -1873,8 +1873,8 @@ _id_9306(var_0, var_1) {
     wait 1;
     var_0 setclientomnvar("ui_hub_shootout_intro_countdown", var_2);
     var_1 setclientomnvar("ui_hub_shootout_intro_countdown", var_2);
-    var_0 _meth_85EF(&"hub_update_shootout_intro", 0);
-    var_1 _meth_85EF(&"hub_update_shootout_intro", 0);
+    var_0 set_vision_set_player(&"hub_update_shootout_intro", 0);
+    var_1 set_vision_set_player(&"hub_update_shootout_intro", 0);
   }
 
   var_0 _id_04E0::_id_A04C();
@@ -2020,7 +2020,7 @@ _id_4B07(var_0, var_1, var_2) {
   self._id_8B25 = undefined;
   self._id_8B24 = undefined;
   self._id_8B27 = undefined;
-  self _meth_85EF(&"hub_end_shootout", 0);
+  self set_vision_set_player(&"hub_end_shootout", 0);
 
   if((!isDefined(var_2) || !var_2) && self._id_5721) {
     _id_37BD();
@@ -2065,7 +2065,7 @@ _id_A79B() {
 }
 
 _id_74A7() {
-  if(_func_3AE() == 1) {
+  if(xmodelalias/alias_ger_heads_scarf_for_muddy() == 1) {
     return;
   }
   _activateclientexploder(1);
@@ -2079,7 +2079,7 @@ _id_74A7() {
 }
 
 _id_74C5() {
-  if(_func_3AE() == 1) {
+  if(xmodelalias/alias_ger_heads_scarf_for_muddy() == 1) {
     return;
   }
   for(var_0 = 0; var_0 < 3; var_0++) {

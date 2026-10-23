@@ -75,8 +75,8 @@ _id_5306() {
 _id_280E(var_0, var_1, var_2, var_3) {
   var_4 = spawnStruct();
   var_4.origin = var_0;
-  var_4._id_3E3E = anglesToForward((0, var_1, 0));
-  var_4._id_944C = var_2;
+  var_4.forward = anglesToForward((0, var_1, 0));
+  var_4.streakname = var_2;
   var_4.team = var_3;
   level.makeglobalusable[level.makeglobalusable.size] = var_4;
 }
@@ -103,8 +103,8 @@ _id_4675(var_0) {
 
   for(var_2 = 0; var_2 < level.makeglobalusable.size; var_2++) {
     var_3 = level.makeglobalusable[var_2].origin;
-    var_4 = level.makeglobalusable[var_2]._id_3E3E;
-    var_5 = level.makeglobalusable[var_2]._id_944C;
+    var_4 = level.makeglobalusable[var_2].forward;
+    var_5 = level.makeglobalusable[var_2].streakname;
     var_1 = var_1 + _id_4684(var_0, var_3, var_4, var_5);
   }
 
@@ -113,12 +113,12 @@ _id_4675(var_0) {
 
 _id_4684(var_0, var_1, var_2, var_3) {
   if(level.setwhizbyprobabilities[var_3] != 0) {
-    var_4 = var_1 + level.setwhizbyprobabilities[var_3] * level._id_80B7[var_3] * var_2;
+    var_4 = var_1 + level.setwhizbyprobabilities[var_3] * level.visionsetnakedforplayer_lerp[var_3] * var_2;
     var_5 = var_0 - var_4;
     var_5 = (var_5[0], var_5[1], 0);
     var_6 = vectordot(var_5, var_2) * var_2;
     var_7 = var_5 - var_6;
-    var_8 = var_7 + var_6 / level._id_80B9[var_3];
+    var_8 = var_7 + var_6 / level.returnplayercontrol[var_3];
   } else {
     var_8 = var_0 - var_1;
     var_8 = (var_8[0], var_8[1], 0);
@@ -126,7 +126,7 @@ _id_4684(var_0, var_1, var_2, var_3) {
 
   var_9 = _lengthsquared(var_8);
 
-  if(var_9 > level._id_80B7[var_3] * level._id_80B7[var_3]) {
+  if(var_9 > level.visionsetnakedforplayer_lerp[var_3] * level.visionsetnakedforplayer_lerp[var_3]) {
     return 0;
   }
 
@@ -135,6 +135,6 @@ _id_4684(var_0, var_1, var_2, var_3) {
   }
 
   var_10 = _sqrt(var_9);
-  var_11 = (var_10 - level._id_80B8[var_3]) / (level._id_80B7[var_3] - level._id_80B8[var_3]);
+  var_11 = (var_10 - level._id_80B8[var_3]) / (level.visionsetnakedforplayer_lerp[var_3] - level._id_80B8[var_3]);
   return 1 - var_11;
 }

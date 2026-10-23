@@ -3,62 +3,62 @@
  * Script: scripts\maps\mp\_audio.gsc
 **************************************/
 
-_id_5163() {
-  if(!isDefined(level._id_1355)) {
-    level._id_1355 = spawnStruct();
+init_audio() {
+  if(!isDefined(level.audio)) {
+    level.audio = spawnStruct();
   }
 
-  _id_5255();
-  _id_5286();
-  level._id_6B6D = ::_id_6B6D;
+  init_reverb();
+  init_whizby();
+  level.onplayerconnectaudioinit = ::onplayerconnectaudioinit;
 }
 
-_id_6B6D() {
+onplayerconnectaudioinit() {
   _id_0F2B("default");
 }
 
-_id_5255() {
+init_reverb() {
   _id_095A("default", "generic", 0.15, 0.9, 2);
 }
 
 _id_095A(var_0, var_1, var_2, var_3, var_4) {
   var_5 = [];
-  _id_55FC(var_1);
+  is_roomtype_valid(var_1);
   var_5["roomtype"] = var_1;
   var_5["wetlevel"] = var_2;
   var_5["drylevel"] = var_3;
   var_5["fadetime"] = var_4;
-  level._id_1355._id_7E43[var_0] = var_5;
+  level.audio.reverb_settings[var_0] = var_5;
 }
 
-_id_55FC(var_0) {}
+is_roomtype_valid(var_0) {}
 
 _id_0F2B(var_0) {
-  if(!isDefined(level._id_1355._id_7E43[var_0])) {
-    var_1 = level._id_1355._id_7E43["default"];
+  if(!isDefined(level.audio.reverb_settings[var_0])) {
+    var_1 = level.audio.reverb_settings["default"];
   } else {
-    var_1 = level._id_1355._id_7E43[var_0];
+    var_1 = level.audio.reverb_settings[var_0];
   }
 
   self setreverb("snd_enveffectsprio_level", var_1["roomtype"], var_1["drylevel"], var_1["wetlevel"], var_1["fadetime"]);
 }
 
-_id_5286() {
-  level._id_1355._id_AA1C = [];
-  _id_85F5(15.0, 30.0, 50.0);
-  _id_85F6(150.0, 250.0, 350.0);
+init_whizby() {
+  level.audio.whizby_settings = [];
+  set_whizby_radius(15.0, 30.0, 50.0);
+  set_whizby_spread(150.0, 250.0, 350.0);
 }
 
-_id_85F5(var_0, var_1, var_2) {
-  level._id_1355._id_AA1C["radius"] = [var_0, var_1, var_2];
+set_whizby_radius(var_0, var_1, var_2) {
+  level.audio.whizby_settings["radius"] = [var_0, var_1, var_2];
 }
 
-_id_85F6(var_0, var_1, var_2) {
-  level._id_1355._id_AA1C["spread"] = [var_0, var_1, var_2];
+set_whizby_spread(var_0, var_1, var_2) {
+  level.audio.whizby_settings["spread"] = [var_0, var_1, var_2];
 }
 
 _id_0F2E() {
-  var_0 = level._id_1355._id_AA1C;
+  var_0 = level.audio.whizby_settings;
   var_1 = var_0["spread"];
   var_2 = var_0["radius"];
   self setwhizbyspreads(0, var_1[0], var_1[1], var_1[2]);
@@ -66,10 +66,10 @@ _id_0F2E() {
 }
 
 _id_8D29(var_0, var_1) {
-  if(!isDefined(level._id_11CB._id_7A31)) {
-    level._id_11CB._id_7A31 = spawnStruct();
-    level._id_11CB._id_7A31._id_94D7 = var_0;
-    level._id_11CB._id_7A31._id_7A30 = 0;
+  if(!isDefined(level.aud._id_7A31)) {
+    level.aud._id_7A31 = spawnStruct();
+    level.aud._id_7A31._id_94D7 = var_0;
+    level.aud._id_7A31._id_7A30 = 0;
   }
 
   var_2 = [var_0, var_1];
@@ -85,20 +85,20 @@ _id_8D29(var_0, var_1) {
   }
 
   var_6 = _randomintrange(1, 100);
-  var_7 = level._id_11CB._id_7A31._id_94D7 + level._id_11CB._id_7A31._id_7A30;
+  var_7 = level.aud._id_7A31._id_94D7 + level.aud._id_7A31._id_7A30;
 
   if(var_6 <= var_7) {
-    level._id_11CB._id_7A31._id_7A30 = 0;
+    level.aud._id_7A31._id_7A30 = 0;
     return 1;
   }
 
   if(var_6 >= var_7) {
-    level._id_11CB._id_7A31._id_7A30 = level._id_11CB._id_7A31._id_7A30 + var_1;
+    level.aud._id_7A31._id_7A30 = level.aud._id_7A31._id_7A30 + var_1;
     return 0;
   }
 }
 
-_id_8DAE(var_0, var_1) {
+snd_play_team_splash(var_0, var_1) {
   if(!isDefined(var_0)) {
     var_0 = "null";
   }
@@ -126,15 +126,15 @@ _id_8DAE(var_0, var_1) {
   }
 }
 
-_id_8DAC(var_0, var_1, var_2, var_3) {}
+snd_play_on_notetrack_timer(var_0, var_1, var_2, var_3) {}
 
-_id_8DAB(var_0, var_1, var_2) {
+snd_play_on_notetrack(var_0, var_1, var_2) {
   self endon("stop_sequencing_notetracks");
   self endon("death");
-  _id_8E8B(var_0, var_1, var_2);
+  sndx_play_on_notetrack_internal(var_0, var_1, var_2);
 }
 
-_id_8E8B(var_0, var_1, var_2) {
+sndx_play_on_notetrack_internal(var_0, var_1, var_2) {
   for(;;) {
     self waittill(var_1, var_3);
 
@@ -238,7 +238,7 @@ beginlocationselection(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 }
 
-_id_8DF9(var_0, var_1, var_2) {
+snd_veh_play_loops(var_0, var_1, var_2) {
   var_3 = self;
   var_4 = [var_0, var_1, var_2];
   var_5[0] = spawn("script_origin", var_3.origin);
@@ -260,7 +260,7 @@ _id_8DF9(var_0, var_1, var_2) {
   }
 }
 
-_id_2D76(var_0, var_1) {
+deprecated_aud_map(var_0, var_1) {
   var_2 = 0.0;
   var_3 = var_1.size;
   var_4 = var_1[0];
@@ -283,7 +283,7 @@ _id_2D76(var_0, var_1) {
   return var_2;
 }
 
-_id_8DA8(var_0, var_1, var_2, var_3) {
+snd_play_loop_in_space(var_0, var_1, var_2, var_3) {
   var_4 = 0.2;
 
   if(isDefined(var_3)) {
@@ -292,11 +292,11 @@ _id_8DA8(var_0, var_1, var_2, var_3) {
 
   var_5 = spawn("script_origin", var_1);
   var_5 playLoopSound(var_0);
-  thread _id_8E89(var_5, var_2, var_4);
+  thread sndx_play_loop_in_space_internal(var_5, var_2, var_4);
   return var_5;
 }
 
-_id_8E89(var_0, var_1, var_2) {
+sndx_play_loop_in_space_internal(var_0, var_1, var_2) {
   level waittill(var_1);
 
   if(isDefined(var_0)) {
@@ -306,21 +306,21 @@ _id_8E89(var_0, var_1, var_2) {
   }
 }
 
-_id_8DCD(var_0) {
-  level._id_9A0E = 0;
+snd_script_timer(var_0) {
+  level.timer_number = 0;
 
   if(!isDefined(var_0)) {
     var_0 = 0.1;
   }
 
   for(;;) {
-    _iprintln(level._id_9A0E);
+    _iprintln(level.timer_number);
     wait(var_0);
-    level._id_9A0E = level._id_9A0E + var_0;
+    level.timer_number = level.timer_number + var_0;
   }
 }
 
-_id_8DA0(var_0, var_1, var_2, var_3) {
+snd_play_in_space(var_0, var_1, var_2, var_3) {
   playsoundatpos(var_1, var_0);
 }
 
@@ -333,19 +333,19 @@ _id_8E87(var_0, var_1, var_2) {
   playsoundatpos(var_0, var_1);
 }
 
-_id_8DA2(var_0, var_1, var_2, var_3) {
-  var_4 = _func_351(var_0, var_1, undefined, undefined, undefined, "hard", undefined, var_3);
+snd_play_linked(var_0, var_1, var_2, var_3) {
+  var_4 = maps/taken_tent_fx(var_0, var_1, undefined, undefined, undefined, "hard", undefined, var_3);
 }
 
-_id_8DA4(var_0, var_1, var_2) {
+snd_play_linked_loop(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = 0.05;
   }
 
-  var_3 = _func_351(var_0, var_1, undefined, undefined, undefined, "hard", undefined, var_2);
+  var_3 = maps/taken_tent_fx(var_0, var_1, undefined, undefined, undefined, "hard", undefined, var_2);
 }
 
-_id_12A4(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+aud_print_3d_on_ent(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   thread _id_136C(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
 }
 
@@ -391,7 +391,7 @@ _id_136C(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     if(isDefined(var_4)) {
-      thread _id_136D(var_4);
+      thread audx_print_3d_timer(var_4);
     }
 
     if(!isDefined(var_6)) {
@@ -414,7 +414,7 @@ _id_136C(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 }
 
-_id_136D(var_0) {
+audx_print_3d_timer(var_0) {
   self endon("death");
   wait(var_0);
 
@@ -423,4 +423,4 @@ _id_136D(var_0) {
   }
 }
 
-_id_8DFA() {}
+snd_vehicle_mp() {}

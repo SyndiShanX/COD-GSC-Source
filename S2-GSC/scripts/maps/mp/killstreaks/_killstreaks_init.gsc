@@ -4,27 +4,27 @@
 *************************************************************/
 
 init() {
-  if(isDefined(level._id_585D) && level._id_585D && (!isDefined(level.zombiekillstreaksenabled) || isDefined(level.zombiekillstreaksenabled) && !level.zombiekillstreaksenabled)) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame && (!isDefined(level.zombiekillstreaksenabled) || isDefined(level.zombiekillstreaksenabled) && !level.zombiekillstreaksenabled)) {
     return;
   }
   if(maps\mp\_utility::_id_571D()) {
-    maps\mp\_utility::_id_2F6D();
+    maps\mp\_utility::disableallstreaks();
   }
 
   if(maps\mp\_utility::_id_571D()) {
     return;
   }
-  level._id_5A70 = maps\mp\_utility::getintproperty("scr_game_killstreakdelay", 10);
-  level._id_5A61 = [];
-  level._id_5A75 = [];
-  level._id_5A7D = [];
+  level.killstreakrounddelay = maps\mp\_utility::getintproperty("scr_game_killstreakdelay", 10);
+  level.killstreakfuncs = [];
+  level.killstreaksetupfuncs = [];
+  level.killstreakwieldweapons = [];
 
   if(maps\mp\_utility::_id_585F() && isDefined(level.zombiekillstreaksenabled) && level.zombiekillstreaksenabled) {
     level thread _id_0527::_id_52F7();
     return;
   }
 
-  _id_5312();
+  initkillstreakdata();
   level thread _id_051E::onplayerconnect();
 
   if(maps\mp\_utility::_id_579B() || maps\mp\_utility::isprophuntgametype()) {
@@ -76,7 +76,7 @@ init() {
   level thread maps\mp\killstreaks\_basic_training_serum::init();
 }
 
-_id_5312() {
+initkillstreakdata() {
   var_0 = 0;
 
   for(;;) {
@@ -97,7 +97,7 @@ _id_5312() {
       game["dialog"]["axis_friendly_" + var_1 + "_inbound"] = "ss_" + var_5 + "_allyuse";
       game["dialog"]["axis_enemy_" + var_1 + "_inbound"] = "ss_" + var_5 + "_enemyuse";
       var_6 = int(_tablelookupbyrow("mp/killstreakTable.csv", var_0, 17));
-      maps\mp\gametypes\_rank::_id_7C06(var_1 + "_earned", var_6);
+      maps\mp\gametypes\_rank::registerxpeventinfo(var_1 + "_earned", var_6);
     }
 
     var_0++;

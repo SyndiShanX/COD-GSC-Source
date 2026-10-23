@@ -44,7 +44,7 @@ _id_09F4() {
   }
 
   thread _id_8744();
-  thread _id_871C();
+  thread setscorelimit();
   thread _id_09F4();
 }
 
@@ -60,7 +60,7 @@ _id_8744() {
   }
 }
 
-_id_871C() {
+setscorelimit() {
   var_0 = getdvarint("ds_score_limit");
 
   if(var_0 > 0) {
@@ -77,7 +77,7 @@ _id_9007(var_0) {
     waitframe();
 
     if(_func_367()) {
-      var_2 = _func_166(1, level._id_746E);
+      var_2 = _func_166(1, level.playerteam);
     } else {
       var_2 = _func_166(1);
     }
@@ -88,7 +88,7 @@ _id_9007(var_0) {
     } else {
       var_3 = spawnStruct();
       var_3._id_9843 = var_2;
-      var_3._id_7ABD = 0;
+      var_3.ready = 0;
       var_3._id_0843 = 0;
       var_1[var_1.size] = var_3;
       var_3._id_9843 thread _id_535E("autoassign", var_3);
@@ -101,7 +101,7 @@ _id_9007(var_0) {
     var_4 = 0;
 
     foreach(var_3 in var_1) {
-      if(var_3._id_7ABD || var_3._id_0843) {
+      if(var_3.ready || var_3._id_0843) {
         var_4++;
       }
     }
@@ -124,7 +124,7 @@ _id_535E(var_0, var_1) {
   }
 
   self spawntestclient();
-  maps\mp\gametypes\_playerlogic::_id_90A5();
+  maps\mp\gametypes\_playerlogic::spawnspectator();
 
   while(!isDefined(self.pers["team"])) {
     waitframe();
@@ -138,7 +138,7 @@ _id_535E(var_0, var_1) {
     }
   }
 
-  self[[level._id_1385]]();
+  self[[level.autoassign]]();
 
   if(maps\mp\_utility::_id_0C1E()) {
     var_2 = "class" + randomint(5);
@@ -149,7 +149,7 @@ _id_535E(var_0, var_1) {
   wait 0.1;
 
   if(isDefined(var_1)) {
-    var_1._id_7ABD = 1;
+    var_1.ready = 1;
   }
 }
 

@@ -15,7 +15,7 @@ spawn_a_stone_baby_pickup(var_0, var_1, var_2, var_3, var_4) {
   var_0 = _func_2E1(var_0);
   var_5 = spawn("script_model", var_0);
   var_5 setModel(var_2);
-  var_5 _id_0378::_id_8D74("baby_statue_spawn");
+  var_5 _id_0378::snd_message("baby_statue_spawn");
   var_5 rotateby((randomint(10) - 10, randomint(10) - 10, randomint(10) - 10), 0.1);
   var_5.targetname = "baby_statue_spawn";
   var_6 = bulletTrace(var_5.origin + (0, 0, 32), var_5.origin + (0, 0, -1000), 0);
@@ -28,9 +28,9 @@ spawn_a_stone_baby_pickup(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(isDefined(var_3)) {
-    var_5 _id_0547::_id_AC41(var_1, undefined, var_3);
+    var_5 _id_0547::zombies_make_usable(var_1, undefined, var_3);
   } else {
-    var_5 _id_0547::_id_AC41(var_1, (0, 0, 8));
+    var_5 _id_0547::zombies_make_usable(var_1, (0, 0, 8));
   }
 
   var_5._id_6949 = var_4;
@@ -70,7 +70,7 @@ wait_for_baby_statue_pickup() {
       self.mybabyfx delete();
     }
 
-    _id_0547::_id_AC40();
+    _id_0547::zombies_make_unusable();
     var_0 thread _id_3481(self._id_6949);
     self hide();
     var_0 set_player_holding_an_baby_statue(self._id_6949);
@@ -110,7 +110,7 @@ set_player_holding_an_baby_statue(var_0) {
   self.isswitchingtostatuepart = 1;
   self.iscarryingstatuepart = 1;
   self.currentstatueobjectiveid = var_0;
-  self._id_5B98 = self getcurrentprimaryweapon();
+  self.lastequippedweapon = self getcurrentprimaryweapon();
   var_1 = self getweaponlistprimaries();
   _id_0586::_id_078C("stone_baby_zm");
   _id_0586::_id_078E("stone_baby_zm");
@@ -143,7 +143,7 @@ wait_for_baby_lost() {
   self waittill("baby_lost", var_0);
   self allowcrouch(1);
 
-  if(!common_scripts\utility::_id_3794("flag_player_in_water")) {
+  if(!common_scripts\utility::ent_flag("flag_player_in_water")) {
     self allowprone(1);
   }
 
@@ -163,13 +163,13 @@ wait_for_baby_lost() {
 
 _id_A6DD() {
   self endon("disconnect");
-  common_scripts\utility::_id_A70A("weapon_change", "weapon_switch_started", "enter_last_stand");
+  common_scripts\utility::waittill_any("weapon_change", "weapon_switch_started", "enter_last_stand");
   self notify("baby_lost", "baby_dropped");
 }
 
 waitforbabydeposit() {
   self endon("disconnect");
-  common_scripts\utility::_id_A70A("baby_deposited");
+  common_scripts\utility::waittill_any("baby_deposited");
   self notify("baby_lost", "baby_deposited");
 }
 
@@ -236,9 +236,9 @@ take_baby_statue_from_player() {
   _id_0586::_id_0790("stone_baby_zm");
   maps\mp\_utility::_id_0735("specialty_ballcarrier");
 
-  if(!_id_0547::_id_577E(self)) {
-    if(isDefined(self._id_5B98) && self._id_5B98 != "none") {
-      _id_0586::_id_078E(self._id_5B98);
+  if(!_id_0547::isplayerinlaststand(self)) {
+    if(isDefined(self.lastequippedweapon) && self.lastequippedweapon != "none") {
+      _id_0586::_id_078E(self.lastequippedweapon);
     }
 
     self allowjump(1);

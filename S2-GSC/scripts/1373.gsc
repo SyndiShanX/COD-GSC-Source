@@ -7,7 +7,7 @@ init() {
   _id_055B::waittill_jumpscare_initialized();
   level._id_AB58 = 0;
   level._id_AB59 = 0;
-  var_0 = common_scripts\utility::_id_46B7("birds", "script_noteworthy");
+  var_0 = common_scripts\utility::getstructarray("birds", "script_noteworthy");
   level._id_AB5A = var_0.size * 0.2;
 
   foreach(var_2 in var_0) {
@@ -34,7 +34,7 @@ _id_1769() {
 
   self._id_175F = [];
 
-  foreach(var_5 in common_scripts\utility::_id_46B7(self.target, "targetname")) {
+  foreach(var_5 in common_scripts\utility::getstructarray(self.target, "targetname")) {
     if(isDefined(var_5._id_0165)) {
       switch (var_5._id_0165) {
         case "birds_anims":
@@ -59,7 +59,7 @@ _id_1769() {
     thread _id_1766();
     level._id_AB58++;
     self._id_1767 = 1;
-    _id_0378::_id_8D74("play_bird_loop", self);
+    _id_0378::snd_message("play_bird_loop", self);
     self waittill("birds_command", var_8, var_9);
     level._id_AB58--;
     self._id_1767 = 0;
@@ -80,11 +80,11 @@ _id_1769() {
 
         thread _id_8FAA(var_9);
         thread _id_3D7C();
-        _id_0378::_id_8D74("stop_bird_loop", self);
-        _id_0378::_id_8D74("play_bird_retreat", self);
+        _id_0378::snd_message("stop_bird_loop", self);
+        _id_0378::snd_message("play_bird_retreat", self);
         break;
       case "never_mind":
-        _id_0378::_id_8D74("stop_bird_loop", self);
+        _id_0378::snd_message("stop_bird_loop", self);
         break;
       default:
     }
@@ -97,7 +97,7 @@ _id_3D7C() {
   wait 0.25;
 
   foreach(var_1 in level.players) {
-    if(isDefined(var_1) && var_1 istouching(self._id_78CB) && var_1 _id_72E5(self._id_AA2A, 0)) {
+    if(isDefined(var_1) && var_1 istouching(self._id_78CB) && var_1 player_looking_at(self._id_AA2A, 0)) {
       var_1 thread _id_3D7B();
     }
   }
@@ -130,7 +130,7 @@ _id_1763(var_0, var_1) {
 
   if(isPlayer(var_1)) {
     if(distance(var_1.origin, self.origin) > 96) {
-      var_5 = common_scripts\utility::_id_4461(self.origin, maps\mp\agents\_agent_utility::_id_43FD("all"));
+      var_5 = common_scripts\utility::getclosest(self.origin, maps\mp\agents\_agent_utility::getactiveagentsoftype("all"));
     } else {
       var_5 = var_1;
     }
@@ -224,7 +224,7 @@ _id_0F0D(var_0) {
     return 0;
   }
 
-  foreach(var_2 in maps\mp\agents\_agent_utility::_id_43FD("all")) {
+  foreach(var_2 in maps\mp\agents\_agent_utility::getactiveagentsoftype("all")) {
     if(distance(var_2.origin, self.origin) < var_0) {
       return 1;
     }
@@ -262,7 +262,7 @@ _id_1768(var_0) {
     if(!var_0._id_1767) {
       continue;
     }
-    var_3 = var_2 _id_72E5(var_0._id_AA2A, var_1) && var_0 _id_055B::_id_5977(var_2);
+    var_3 = var_2 player_looking_at(var_0._id_AA2A, var_1) && var_0 _id_055B::_id_5977(var_2);
 
     if(var_3) {
       var_0 notify("birds_command", "fly_away", var_2);
@@ -297,6 +297,6 @@ _id_1766() {
   self notify("birds_command", "never_mind");
 }
 
-_id_72E5(var_0, var_1) {
+player_looking_at(var_0, var_1) {
   return vectordot(vectorNormalize(var_0 - self getEye()), anglesToForward(self getplayerangles())) > var_1;
 }

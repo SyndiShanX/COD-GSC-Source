@@ -112,7 +112,7 @@ _id_7BF4(var_0, var_1, var_2, var_3, var_4, var_5) {
 _id_2823(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawnStruct();
   var_5.type = var_0;
-  var_5._id_9D65 = var_1;
+  var_5.trigger = var_1;
   var_5._id_6641 = var_2;
 
   if(!isDefined(var_3)) {
@@ -152,7 +152,7 @@ _id_2823(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_6._id_6642 = 0;
-  var_6._id_2F74 = 0;
+  var_6.disabled = 0;
   var_6._id_0C13 = 0;
   var_6.refresh_internal_time = 0;
   var_6.refresh_internal_times_per_player = [];
@@ -226,8 +226,8 @@ _id_8C05(var_0, var_1, var_2) {
 }
 
 hideinteractprompt(var_0, var_1) {
-  var_0 _meth_866C(&"stop_progressive_interact", 0);
-  var_0 _meth_866C(&"remove_progressive_interact", 0);
+  var_0 setdot_radius(&"stop_progressive_interact", 0);
+  var_0 setdot_radius(&"remove_progressive_interact", 0);
   var_1._id_4DBA = 0;
   var_1._id_4DB6 = undefined;
   var_0 setclientomnvar("ui_zm_interaction_flags", 0);
@@ -279,7 +279,7 @@ _id_21B8(var_0, var_1) {
 
 check_for_door_power(var_0, var_1) {
   while(var_0._id_4DBA) {
-    var_2 = var_1._id_3276 _id_053F::_id_3278() && !var_1._id_3276 _id_053F::_id_3262();
+    var_2 = var_1._id_3276 _id_053F::door_requires_power() && !var_1._id_3276 _id_053F::door_has_power();
 
     if(var_2) {
       wait 0.25;
@@ -320,13 +320,13 @@ check_progressive_interact_input(var_0, var_1) {
   var_2 = 0;
   var_3 = 0;
   var_4 = 1;
-  var_5 = var_1._id_9D65;
+  var_5 = var_1.trigger;
 
   while(var_0._id_4DBA) {
     if(common_scripts\utility::_id_562E(var_1._id_9FD3.interact_disabled)) {
       if(var_2 == 1) {
-        self _meth_866C(&"stop_progressive_interact", 0);
-        self _meth_866C(&"remove_progressive_interact", 0);
+        self setdot_radius(&"stop_progressive_interact", 0);
+        self setdot_radius(&"remove_progressive_interact", 0);
         var_2 = 0;
       }
 
@@ -342,20 +342,20 @@ check_progressive_interact_input(var_0, var_1) {
 
     if(!var_3) {
       if(var_4) {
-        self _meth_866C(&"start_progressive_interact", 1, var_1.radial_progress_time);
+        self setdot_radius(&"start_progressive_interact", 1, var_1.radial_progress_time);
         var_3 = 1;
         var_2 = 1;
       }
     } else if(!var_4) {
-      self _meth_866C(&"stop_progressive_interact", 0);
+      self setdot_radius(&"stop_progressive_interact", 0);
       var_3 = 0;
     }
 
     waitframe();
   }
 
-  self _meth_866C(&"stop_progressive_interact", 0);
-  self _meth_866C(&"remove_progressive_interact", 0);
+  self setdot_radius(&"stop_progressive_interact", 0);
+  self setdot_radius(&"remove_progressive_interact", 0);
 }
 
 _id_A151(var_0) {
@@ -368,14 +368,14 @@ _id_A151(var_0) {
     var_3 = var_0 playergetuseent(1);
 
     if(var_2._id_4DBA) {
-      if(!isDefined(var_3) || var_2._id_2903._id_9D65 != var_3) {
+      if(!isDefined(var_3) || var_2._id_2903.trigger != var_3) {
         hideinteractprompt(var_0, var_2);
       } else {
         var_4 = _id_21B8(var_0, var_2._id_2903);
         var_5 = needsrefresh(var_1, var_2._id_2903);
 
         if(var_5 || isDefined(var_4)) {
-          var_0 _meth_866C(&"add_progressive_interact", 1, var_2._id_2903._id_9D65);
+          var_0 setdot_radius(&"add_progressive_interact", 1, var_2._id_2903.trigger);
           _id_8C05(var_0, var_2._id_2903, var_4);
         }
       }
@@ -383,11 +383,11 @@ _id_A151(var_0) {
       for(var_6 = 0; var_6 < var_2._id_A902.size; var_6++) {
         var_7 = var_2._id_A902[var_6];
 
-        if(var_7._id_9D65 == var_3) {
+        if(var_7.trigger == var_3) {
           var_2._id_4DBA = 1;
           var_2._id_2903 = var_7;
           var_4 = _id_21B8(var_0, var_2._id_2903);
-          var_0 _meth_866C(&"add_progressive_interact", 1, var_7._id_9D65);
+          var_0 setdot_radius(&"add_progressive_interact", 1, var_7.trigger);
           _id_8C05(var_0, var_7, var_4);
           var_0 childthread check_progressive_interact_input(var_2, var_7);
           break;
@@ -426,12 +426,12 @@ refreshplayerinteractprompts(var_0, var_1) {
 
     var_5 = needsrefresh(var_2, var_4);
     var_6 = 0;
-    var_6 = var_6 | common_scripts\utility::_id_562E(var_4._id_9FD3._id_2F74);
+    var_6 = var_6 | common_scripts\utility::_id_562E(var_4._id_9FD3.disabled);
 
     if(var_5) {
       if(common_scripts\utility::_id_562E(var_4._id_6641)) {
-        var_4._id_9D65 _meth_8660(1, var_4._id_5EB5);
-        var_4._id_9D65 useTriggerRequireLookAt(0);
+        var_4.trigger setdefaultcostumeifneeded(1, var_4._id_5EB5);
+        var_4.trigger useTriggerRequireLookAt(0);
       }
 
       if(!isDefined(var_1._id_2903) || var_4 != var_1._id_2903) {
@@ -452,11 +452,11 @@ refreshplayerinteractprompts(var_0, var_1) {
       var_4._id_9FD3.disabled_internal_per_player[var_2] = var_6;
 
       if(var_6) {
-        var_4._id_9D65 disableplayeruse(var_0);
+        var_4.trigger disableplayeruse(var_0);
         continue;
       }
 
-      var_4._id_9D65 enableplayeruse(var_0);
+      var_4.trigger enableplayeruse(var_0);
     }
   }
 }

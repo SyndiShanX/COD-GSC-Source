@@ -10,7 +10,7 @@ _id_4F3E() {
   _id_04E0::_id_4F43();
   _id_04E0::removeunusedpatchclip();
   level._id_75DF = ::_id_6B85;
-  level._id_A592 = ::_id_6BA6;
+  level.vl_onspawnplayer = ::_id_6BA6;
   level._id_A5A0 = ::_id_A596;
   level._id_A7A2 = _id_04E0::_id_4F45;
 
@@ -107,7 +107,7 @@ _id_4F3E() {
 }
 
 waitfor_loadmain() {
-  while(!isDefined(level._id_947C)) {
+  while(!isDefined(level.struct_class_names)) {
     waitframe();
   }
 }
@@ -117,7 +117,7 @@ _id_4F3F() {
   _id_04E0::_id_4F45("mp_hub_range_2_tr");
   _id_4F40();
 
-  if(_func_3AE() == 0 && !common_scripts\utility::_id_562E(level._id_AC5A)) {
+  if(xmodelalias/alias_ger_heads_scarf_for_muddy() == 0 && !common_scripts\utility::_id_562E(level._id_AC5A)) {
     waitfor_loadmain();
     level._id_5E0C = 1;
     _id_04E0::_id_4F45("mp_hub_spawn_5_tr");
@@ -149,8 +149,8 @@ _id_4F42() {
 }
 
 _id_87B2() {
-  level._id_5A61 = [];
-  maps\mp\gametypes\_missions::_id_1D41();
+  level.killstreakfuncs = [];
+  maps\mp\gametypes\_missions::buildchallegeinfo();
   level._id_47EE = ["SHG-BParker"];
 }
 
@@ -158,7 +158,7 @@ _id_89D4() {
   level._id_9956 = [];
 
   foreach(var_1 in getEntArray("interactive_chair_trigger", "targetname")) {
-    var_1 thread _id_0478::_id_9DC3(::_id_37B9, ::_id_38EF);
+    var_1 thread _id_0478::triggertouchthink(::_id_37B9, ::_id_38EF);
     level._id_9956[level._id_9956.size] = var_1;
   }
 }
@@ -182,8 +182,8 @@ _id_63F3() {
     var_0 = 0;
     var_1 = [];
 
-    if(isDefined(level._id_A012)) {
-      foreach(var_3 in level._id_A012._id_21F6) {
+    if(isDefined(level.uiparent)) {
+      foreach(var_3 in level.uiparent.children) {
         if(isDefined(var_3)) {
           var_1 = common_scripts\utility::_id_0F6F(var_1, var_3);
           var_0++;
@@ -202,13 +202,13 @@ _id_5302() {
     return;
   }
   self._id_4F3D = 1;
-  var_0 = _func_3AE() != 0 || common_scripts\utility::_id_562E(level._id_AC5A);
-  var_1 = !_func_3B0();
+  var_0 = xmodelalias/alias_ger_heads_scarf_for_muddy() != 0 || common_scripts\utility::_id_562E(level._id_AC5A);
+  var_1 = !xmodelalias/alias_ger_heads_scarf_for_snow();
   var_2 = "hq";
 
   if(common_scripts\utility::_id_562E(level._id_AC5A)) {
     var_2 = "zm";
-  } else if(_func_3AE() != 0) {
+  } else if(xmodelalias/alias_ger_heads_scarf_for_muddy() != 0) {
     var_2 = "vl";
   }
 
@@ -224,7 +224,7 @@ _id_5302() {
   maps\mp\gametypes\_missions::updatechalleges();
   thread _id_75D7();
 
-  if(!common_scripts\utility::_id_562E(level._id_AC5A) && _func_3AE() == 0) {
+  if(!common_scripts\utility::_id_562E(level._id_AC5A) && xmodelalias/alias_ger_heads_scarf_for_muddy() == 0) {
     thread _id_63B7();
   }
 
@@ -235,7 +235,7 @@ _id_5302() {
 _id_A77F() {
   self endon("disconnect");
   self waittill("spawned_player");
-  self _meth_85EF(&"hub_fade_in");
+  self set_vision_set_player(&"hub_fade_in");
   thread afktimer();
 
   if(getdvarint("spv_hub_special_qm", 0) == 1) {
@@ -291,7 +291,7 @@ _id_52A1() {
   if(_func_367() && !isDefined(self._id_5520)) {
     if(level._id_A220) {
       thread _id_04E2::_id_636A(self);
-      thread _id_04E2::_id_62F5();
+      thread _id_04E2::monitor_class_select_or_weapon_change();
     } else
       thread maps\mp\hub_vl_camera::_id_6BA9();
 
@@ -306,11 +306,11 @@ _id_13AB(var_0) {
   var_2 = [];
 
   foreach(var_4 in var_1) {
-    var_5 = common_scripts\utility::_id_44BD(var_4, "targetname");
+    var_5 = common_scripts\utility::getent_or_struct(var_4, "targetname");
     var_2[var_2.size] = var_5;
   }
 
-  var_2 = common_scripts\utility::_id_0F73(var_2, _id_050D::_id_46A0());
+  var_2 = common_scripts\utility::_id_0F73(var_2, _id_050D::getspawnpointarray());
   var_7 = var_0 getentitynumber();
   var_7 = (var_7 + randomint(5)) % var_2.size;
   return var_2[var_7];
@@ -320,7 +320,7 @@ _id_A596(var_0) {
   var_1 = level._id_3C3F[0];
 
   if(!isDefined(var_1)) {
-    var_2 = common_scripts\utility::_id_46B7("hub_lobby_avatar_spawn", "script_noteworthy");
+    var_2 = common_scripts\utility::getstructarray("hub_lobby_avatar_spawn", "script_noteworthy");
     var_1 = var_2[0];
   }
 
@@ -329,8 +329,8 @@ _id_A596(var_0) {
 }
 
 _id_6B85() {
-  var_0 = _func_3AE() != 0 || common_scripts\utility::_id_562E(level._id_AC5A);
-  var_1 = !_func_3B0();
+  var_0 = xmodelalias/alias_ger_heads_scarf_for_muddy() != 0 || common_scripts\utility::_id_562E(level._id_AC5A);
+  var_1 = !xmodelalias/alias_ger_heads_scarf_for_snow();
   setDvar("2766", level._id_1728);
   setDvar("3711", level._id_1727);
   self setclientomnvar("ui_hide_1v1scores", 1);
@@ -368,11 +368,11 @@ _id_6B85() {
     self setclientomnvar("ui_fte_welcome_message_status", 0);
     self freezecontrols(1);
     thread _id_715F();
-    _id_0378::_id_8D74("theater_cinematic_started");
+    _id_0378::snd_message("theater_cinematic_started");
     waitframe();
     self setclientomnvar("ui_show_fte_division_select", 1);
     wait 52;
-    _id_0378::_id_8D74("theater_cinematic_stopped");
+    _id_0378::snd_message("theater_cinematic_stopped");
     thread _id_04DF::_id_6380();
   } else if(_isonlinegame())
     _id_0468::_id_0A1F();
@@ -397,13 +397,13 @@ _id_6B85() {
   } else {
     thread monitorplayerusewithhubkillswitched();
 
-    if(_func_3AE() && !common_scripts\utility::_id_562E(level._id_AC5A)) {
+    if(xmodelalias/alias_ger_heads_scarf_for_muddy() && !common_scripts\utility::_id_562E(level._id_AC5A)) {
       self._id_537A = 0;
       thread _id_63F8();
     }
   }
 
-  thread _id_637D();
+  thread monitordisconnect();
   thread _id_52A1();
   thread _id_04DC::monitorsocialrankup();
   thread _id_04DD::monitorsupplydropawarded();
@@ -463,7 +463,7 @@ _id_6BA6() {
   self.pers["gamemodeLoadout"] = var_0;
   self.class = self.pers["class"];
   self.lastclass = self.pers["lastClass"];
-  maps\mp\gametypes\_class::_id_4790(level._id_746E, self.class);
+  maps\mp\gametypes\_class::giveloadout(level.playerteam, self.class);
   level._id_2BCB = self.class;
   self.maxhealth = 100;
   self.health = self.maxhealth;
@@ -579,7 +579,7 @@ _id_63F0() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(!isPlayer(var_0) && !isDefined(var_0._id_3BAA)) {
+    if(!isPlayer(var_0) && !isDefined(var_0.finished_spawning)) {
       continue;
     }
     if(!isalive(var_0)) {
@@ -590,7 +590,7 @@ _id_63F0() {
     }
     if(!isDefined(var_0._id_9C65)) {
       var_0._id_9C65 = 1;
-      var_0 thread maps\mp\gametypes\_hud_util::_id_3005("Area loading...", 0, 1.0, "remove_transient_hint");
+      var_0 thread maps\mp\gametypes\_hud_util::displayclientstring("Area loading...", 0, 1.0, "remove_transient_hint");
       var_0 thread _id_2396(self);
     }
   }
@@ -623,7 +623,7 @@ _id_64BC() {
   if(isDefined(self._id_64A4) && self._id_64A4) {
     return;
   }
-  var_0 = common_scripts\utility::_id_46B5("player_spawn_intermission", "targetname");
+  var_0 = common_scripts\utility::getstruct("player_spawn_intermission", "targetname");
 
   if(isDefined(var_0)) {
     self setOrigin(var_0.origin, 1);
@@ -638,12 +638,12 @@ _id_75D7() {
     self waittill("spawned_player");
     _id_04E0::_id_870B(0);
 
-    if(self _meth_86BE() && !isDefined(self._id_64A4)) {
-      self _meth_86BF(0);
+    if(self setlightingstate() && !isDefined(self._id_64A4)) {
+      self setlightingstate_patched(0);
       _id_64BC();
     }
 
-    if(!_func_3B0()) {
+    if(!xmodelalias/alias_ger_heads_scarf_for_snow()) {
       self freezecontrols(1);
     }
 
@@ -711,7 +711,7 @@ _id_75D7() {
     self _meth_85BE(0);
     self._id_537B = 0;
 
-    if(_func_3AE()) {
+    if(xmodelalias/alias_ger_heads_scarf_for_muddy()) {
       _id_04E0::_id_2FA2();
     } else {
       _id_04E0::_id_3663();
@@ -737,15 +737,15 @@ _id_75D7() {
     self._id_177F._id_01CA = "fullscreen";
     self._id_177F setshader("black", 640, 480);
     self._id_177F.alpha = 0;
-    self._id_177F._id_35B2 = "icon";
-    self._id_177F._id_6E74 = level._id_A012;
-    self._id_177F._id_6E74 maps\mp\gametypes\_hud_util::_id_09A6(self._id_177F);
+    self._id_177F.elemtype = "icon";
+    self._id_177F.parent = level.uiparent;
+    self._id_177F.parent maps\mp\gametypes\_hud_util::_id_09A6(self._id_177F);
     self._id_177F.name = "blackout";
 
     if(getdvarint("intro_anim_debug", 0) == 1) {} else
       _id_04DF::cleanuphubtutorialents();
 
-    if(_func_3AE() == 0) {
+    if(xmodelalias/alias_ger_heads_scarf_for_muddy() == 0) {
       thread _id_04E0::_id_63EA();
     }
 
@@ -763,7 +763,7 @@ _id_75D7() {
     self._id_4E03 = [];
     thread _id_04E0::_id_7B90();
     self disableweaponswitch();
-    _id_0378::_id_8D74("start_hub_music");
+    _id_0378::snd_message("start_hub_music");
   }
 }
 
@@ -842,18 +842,18 @@ _id_4ADC() {
     return;
   }
   wait 5;
-  var_0 = common_scripts\utility::_id_46B5("officer_tower_spawn_1", "targetname");
+  var_0 = common_scripts\utility::getstruct("officer_tower_spawn_1", "targetname");
 
   if(!isDefined(var_0)) {
     return;
   }
   level._id_6CB3 = spawn("script_model", var_0.origin);
-  level._id_6CB3 _meth_84C7([500, 500, 0, 0, 0]);
+  level._id_6CB3 set_grenadeammo([500, 500, 0, 0, 0]);
   level._id_6CB3.angles = var_0.angles;
   level._id_6CB3 scriptmodelplayanim("mp_hub_doorman_idle");
   level._id_6CB3._id_74B8 = 0;
   level._id_6CB3._id_74B7 = 0;
-  level._id_6CB4 thread _id_0478::_id_9DC3(::_id_37BC, ::_id_38F1);
+  level._id_6CB4 thread _id_0478::triggertouchthink(::_id_37BC, ::_id_38F1);
 }
 
 _id_37BC(var_0) {
@@ -1023,7 +1023,7 @@ _id_577F() {
 _id_44B2(var_0) {
   var_1 = common_scripts\utility::_id_46AF();
 
-  if(!_func_3AC()) {
+  if(!xmodelalias/alias_ger_heads_paris_grey_cap()) {
     var_1 = common_scripts\utility::_id_46AC();
   }
 
@@ -1032,7 +1032,7 @@ _id_44B2(var_0) {
 }
 
 checkplayemote() {
-  var_0 = _func_2D4(self, 1);
+  var_0 = maps/_loadout_code(self, 1);
   var_1 = self _meth_856A();
 
   if(_id_577F()) {
@@ -1183,7 +1183,7 @@ _id_63F9() {
 
     if(isDefined(self._id_56A4) && self._id_56A4) {
       if(isDefined(self._id_155F)) {
-        self._id_155F _id_04E0::_id_1543((0, 0, 80), self);
+        self._id_155F _id_04E0::ball_physics_launch_drop((0, 0, 80), self);
       }
     }
 
@@ -1191,19 +1191,19 @@ _id_63F9() {
       self waittill("luinotifyserver", var_0, var_1);
 
       if(var_0 == "hub_move_player_to_hub") {
-        while(!isDefined(self._id_9092)) {
+        while(!isDefined(self.spawnpos)) {
           waitframe();
         }
 
         if(isDefined(self._id_64A4) && self._id_64A4 == 1) {
           if(!isDefined(self.warpingtosupplydrop)) {
-            self setOrigin(self._id_9092);
+            self setOrigin(self.spawnpos);
           }
         }
 
         self._id_64A4 = 0;
         self.warpingtosupplydrop = undefined;
-        self _meth_85EF(&"hub_player_moved_to_hub_spawn");
+        self set_vision_set_player(&"hub_player_moved_to_hub_spawn");
         _id_04E0::_id_870B(_id_04E0::_id_5790(1));
         continue;
       }
@@ -1265,7 +1265,7 @@ _id_63CE() {
   self notifyonplayercommand("beginSupplyDrop_Input", "+attack");
   self notifyonplayercommand("beginSupplyDrop_Input", "+attack_akimbo_accessible");
 
-  if(!level._id_258F) {
+  if(!level.console) {
     self notifyonplayercommand("beginSupplyDrop_Input_KBM", "+smoke");
   }
 
@@ -1275,7 +1275,7 @@ _id_63CE() {
     if(!isDefined(var_0)) {
       continue;
     }
-    var_1 = level._id_258F || common_scripts\utility::_id_55E0();
+    var_1 = level.console || common_scripts\utility::is_player_gamepad_enabled();
 
     if(var_1 != (var_0 == "beginSupplyDrop_Input")) {
       continue;
@@ -1306,7 +1306,7 @@ monitortriangle() {
   for(;;) {
     self waittill("beginFriends_Input");
 
-    if(!level._id_258F && !common_scripts\utility::_id_55E0()) {
+    if(!level.console && !common_scripts\utility::is_player_gamepad_enabled()) {
       continue;
     }
     if(level._id_4F50) {
@@ -1345,35 +1345,35 @@ _id_63CD() {
 }
 
 _id_669F() {
-  level.partymembers_cb = _id_04E2::_id_6EA2;
-  level thread _id_04E2::_id_631E();
+  level.partymembers_cb = _id_04E2::party_members;
+  level thread _id_04E2::monitor_member_class_changes();
 }
 
 _id_A598() {
-  level.partymembers_cb = maps\mp\hub_vl_camera::_id_6EA2;
-  level._id_A595 = [];
-  level._id_AAE2 = [];
-  level._id_13B8 = [];
+  level.partymembers_cb = maps\mp\hub_vl_camera::party_members;
+  level.vlavatars = [];
+  level.xuid2ownerid = [];
+  level.avatarinfo = [];
   var_0 = 48;
 
   for(var_1 = 0; var_1 < var_0; var_1++) {
-    level._id_13B8[var_1] = spawnStruct();
-    level._id_13B8[var_1]._id_9A1A = 0;
-    level._id_13B8[var_1]._id_01D6 = "";
+    level.avatarinfo[var_1] = spawnStruct();
+    level.avatarinfo[var_1].timetodelete = 0;
+    level.avatarinfo[var_1]._id_01D6 = "";
   }
 
-  level._id_6077 = var_0;
-  thread maps\mp\hub_vl_camera::_id_631E();
+  level.maxavatars = var_0;
+  thread maps\mp\hub_vl_camera::monitor_member_class_changes();
   setDvar("1999", 0);
-  level._id_6871 = 4;
+  level.num_lobby_idles = 4;
   maps\mp\hub_vl_camera::_id_8774();
 }
 
 _id_A124(var_0) {
   self endon("disconnect");
 
-  if(!isDefined(self._id_20A9)) {
-    self._id_20A9 = [];
+  if(!isDefined(self.challengedata)) {
+    self.challengedata = [];
   }
 
   if(!isDefined(game["challengeStruct"])) {
@@ -1388,26 +1388,26 @@ _id_A124(var_0) {
     game["challengeStruct"]["challengesCompleted"] = [];
   }
 
-  var_1 = maps\mp\gametypes\_hud_util::_id_2098(var_0);
+  var_1 = maps\mp\gametypes\_hud_util::ch_getstate(var_0);
 
   if(var_1 == 2) {
-    maps\mp\gametypes\_hud_util::_id_209F(var_0, 1);
-    maps\mp\gametypes\_hud_util::_id_209E(var_0, 0);
+    maps\mp\gametypes\_hud_util::ch_setstate(var_0, 1);
+    maps\mp\gametypes\_hud_util::ch_setprogress(var_0, 0);
   }
 
-  self._id_20A9[var_0] = 1;
+  self.challengedata[var_0] = 1;
 }
 
 _id_A125() {
   foreach(var_1 in level._id_4F49) {
-    var_2 = maps\mp\gametypes\_hud_util::_id_2098(var_1);
+    var_2 = maps\mp\gametypes\_hud_util::ch_getstate(var_1);
 
     if(var_2 == 0) {
       var_2 = 1;
-      maps\mp\gametypes\_hud_util::_id_209F(var_1, 1);
+      maps\mp\gametypes\_hud_util::ch_setstate(var_1, 1);
     }
 
-    self._id_20A9[var_1] = var_2;
+    self.challengedata[var_1] = var_2;
   }
 }
 
@@ -1439,7 +1439,7 @@ _id_8C6D(var_0) {
   _id_04E0::_id_721A("mp_emote_sitting_loop");
 }
 
-_id_637D() {
+monitordisconnect() {
   self waittill("disconnect");
   level endon("game_ended");
 
@@ -1461,9 +1461,9 @@ _id_637D() {
   }
 
   if(isDefined(self._id_A405)) {
-    if(isDefined(self._id_A405._id_1739)) {
-      self._id_A405._id_1739 delete();
-      self._id_A405._id_1739 = undefined;
+    if(isDefined(self._id_A405.bg)) {
+      self._id_A405.bg delete();
+      self._id_A405.bg = undefined;
     }
 
     self._id_A405 delete();

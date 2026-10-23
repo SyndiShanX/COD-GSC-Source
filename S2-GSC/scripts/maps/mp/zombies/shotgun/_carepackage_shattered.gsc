@@ -10,8 +10,8 @@ init() {
 }
 
 zombie_handle_crate_timeout(var_0) {
-  var_1 = common_scripts\utility::_id_46B7("carepackage_dz", "targetname");
-  var_2 = common_scripts\utility::_id_4461(var_0.origin, var_1);
+  var_1 = common_scripts\utility::getstructarray("carepackage_dz", "targetname");
+  var_2 = common_scripts\utility::getclosest(var_0.origin, var_1);
 
   if(common_scripts\utility::_id_562E(var_2.no_crate_timeout)) {
     return;
@@ -25,12 +25,12 @@ zombie_crate_timeout(var_0) {
   var_0 endon("death");
   maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(90);
 
-  while(var_0._id_28D5 != 0) {
+  while(var_0.curprogress != 0) {
     wait 1;
   }
 
   level notify("zombies_crate_timed_out");
-  var_0 _id_0529::_id_2D30(1, 1);
+  var_0 _id_0529::deletecrate(1, 1);
 }
 
 spawn_player_carepackage(var_0) {
@@ -79,8 +79,8 @@ spawn_player_carepackage(var_0) {
   var_15 = randomint(level.players.size);
 
   foreach(var_14, var_12 in level.players) {
-    if(var_15 == var_14 && isDefined(var_6._id_90C5)) {
-      var_7[0] = var_6._id_90C5;
+    if(var_15 == var_14 && isDefined(var_6.special)) {
+      var_7[0] = var_6.special;
     }
 
     level thread maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::spawn_player_rewards(level.care_package_lz, var_7, var_2, var_1, var_12);
@@ -115,9 +115,9 @@ start_care_package_reward_all(var_0) {
     var_0 = level.zmb_shotgun_num_completed_objectives;
   }
 
-  if(level._id_A980 < 10) {
+  if(level.wavecounter < 10) {
     wait 2;
-    level thread maps\mp\_utility::_id_6F74(maps\mp\gametypes\_hud_message::_id_9102, "zm_airdrop_incoming");
+    level thread maps\mp\_utility::_id_6F74(maps\mp\gametypes\_hud_message::splashnotify, "zm_airdrop_incoming");
     level thread reward_care_package_to_players(var_0);
   }
 }
@@ -136,13 +136,13 @@ init_supply_drop_triggers() {
 
     for(var_2 = 0; var_2 < 4; var_2++) {
       var_1[var_2].setmovespeedscale = var_2;
-      _id_0547::_id_8A4F(var_1[var_2], ::hideuninitializedweapontriggersfromowner, ::hidetriggerfromotherplayer);
+      _id_0547::setupusetriggerforclient(var_1[var_2], ::hideuninitializedweapontriggersfromowner, ::hidetriggerfromotherplayer);
     }
   }
 }
 
 hideuninitializedweapontriggersfromowner(var_0) {
-  if(!isDefined(self._id_A9E0)) {
+  if(!isDefined(self.weaponname)) {
     self disableplayeruse(var_0);
   }
 }

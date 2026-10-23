@@ -20,7 +20,7 @@ main() {
   level._id_943B._id_38E6["s2_zom_straub_table_cleaver_exit_4"] = % s2_zom_straub_table_cleaver_exit_4;
   level._id_943B._id_38E6["s2_zom_straub_table_cleaver_exit_6"] = % s2_zom_straub_table_cleaver_exit_6;
   level._id_943B._id_38E6["s2_zom_straub_table_hacksaw_exit_6"] = % s2_zom_straub_table_hacksaw_exit_6;
-  level._id_943B._id_241F = _getEnt("straub_bullet_clip", "targetname");
+  level._id_943B.clip = _getEnt("straub_bullet_clip", "targetname");
   level._effect["temp_straub_radius"] = loadfx("vfx/weaponimpact/zmb_straub_impact");
   level._id_943B._id_9097 = _id_9442();
 
@@ -36,7 +36,7 @@ main() {
 _id_9445() {
   level endon("stop_straub");
   level waittill("player_spawned");
-  common_scripts\utility::_id_3CA2("gallows_to_com", "med_to_underground", "riverside_to_rooftops");
+  common_scripts\utility::flag_wait_any("gallows_to_com", "med_to_underground", "riverside_to_rooftops");
   thread _id_943D();
 
   while(level._id_943B._id_9097.size > 0) {
@@ -66,8 +66,8 @@ _id_943D(var_0) {
   level notify("stop_straub");
 
   if(isDefined(level._id_943B)) {
-    if(isDefined(level._id_943B._id_241F)) {
-      level._id_943B._id_241F delete();
+    if(isDefined(level._id_943B.clip)) {
+      level._id_943B.clip delete();
     }
 
     if(isDefined(level._id_943B._id_2913)) {
@@ -79,9 +79,9 @@ _id_943D(var_0) {
         level._id_943B._id_2913._id_9A8E delete();
       }
 
-      if(isDefined(level._id_943B._id_2913._id_18A8)) {
-        _killfxontag(common_scripts\utility::_id_44F5("temp_straub_radius"), level._id_943B._id_2913._id_18A8, "J_MainRoot");
-        level._id_943B._id_2913._id_18A8 delete();
+      if(isDefined(level._id_943B._id_2913.body)) {
+        _killfxontag(common_scripts\utility::getfx("temp_straub_radius"), level._id_943B._id_2913.body, "J_MainRoot");
+        level._id_943B._id_2913.body delete();
       }
     }
 
@@ -114,7 +114,7 @@ _id_9446() {
 }
 
 _id_9442() {
-  var_0 = common_scripts\utility::_id_46B7("Straub", "targetname");
+  var_0 = common_scripts\utility::getstructarray("Straub", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::_id_44BE(var_2.target, "targetname");
@@ -139,7 +139,7 @@ _id_9442() {
 
     var_2._id_4B56 = 0;
     var_2._id_9A8E = undefined;
-    var_2._id_5046 = var_2._id_0165;
+    var_2.idle_anim = var_2._id_0165;
     var_2._id_38E4 = var_2.animation;
     var_2._id_38E5 = var_2.getnegotiationnextnode;
 
@@ -154,24 +154,24 @@ _id_9442() {
 _id_9448() {
   level endon("stop_straub");
   childthread _id_944A();
-  self._id_18A8 = spawn("script_model", self.origin);
-  self._id_18A8.angles = self.angles;
-  self._id_18A8 setModel("zom_hero_straub_wholebody");
+  self.body = spawn("script_model", self.origin);
+  self.body.angles = self.angles;
+  self.body setModel("zom_hero_straub_wholebody");
   self._id_00B9 = spawn("script_model", self.origin);
   self._id_00B9 setModel("zom_head_kier_org1");
-  self._id_00B9 linkTo(self._id_18A8, "j_spineupper", (0, 0, 0), (0, 0, 0));
+  self._id_00B9 linkTo(self.body, "j_spineupper", (0, 0, 0), (0, 0, 0));
 
-  if(isDefined(level._id_943B._id_241F)) {
+  if(isDefined(level._id_943B.clip)) {
     thread _id_943F();
   }
 
   var_0 = undefined;
   var_1 = undefined;
 
-  if(self._id_5046 == "s2_zom_straub_table_hacksaw_idle") {
+  if(self.idle_anim == "s2_zom_straub_table_hacksaw_idle") {
     var_0 = "npc_zom_ger_med_saw_01";
     var_1 = "s2_zom_straub_medical_props_hacksaw_idle";
-  } else if(self._id_5046 == "s2_zom_straub_table_cleaver_idle") {
+  } else if(self.idle_anim == "s2_zom_straub_table_cleaver_idle") {
     var_0 = "npc_zom_med_knife_02";
     var_1 = "s2_zom_straub_medical_props_cleaver_idle";
   }
@@ -179,17 +179,17 @@ _id_9448() {
   if(isDefined(var_0)) {
     self._id_9A8E = spawn("script_model", self.origin);
     self._id_9A8E setModel(var_0);
-    self._id_9A8E linkTo(self._id_18A8, "TAG_WEAPON_RIGHT", (0, 0, 0), (0, 0, 0));
+    self._id_9A8E linkTo(self.body, "TAG_WEAPON_RIGHT", (0, 0, 0), (0, 0, 0));
   }
 
   while(!self._id_65F8._id_565E) {
-    self._id_18A8 scriptmodelplayanimdeltamotion(self._id_5046);
-    self._id_00B9 scriptmodelplayanimdeltamotion(self._id_5046);
-    wait(_getanimlength(level._id_943B._id_5049[self._id_5046]));
+    self.body scriptmodelplayanimdeltamotion(self.idle_anim);
+    self._id_00B9 scriptmodelplayanimdeltamotion(self.idle_anim);
+    wait(_getanimlength(level._id_943B._id_5049[self.idle_anim]));
   }
 
   level._id_943B._id_5B51 = gettime();
-  self._id_18A8 scriptmodelplayanimdeltamotion(self._id_38E4);
+  self.body scriptmodelplayanimdeltamotion(self._id_38E4);
   self._id_00B9 scriptmodelplayanimdeltamotion(self._id_38E4);
   var_2 = 0;
 
@@ -204,28 +204,28 @@ _id_9448() {
   if(isDefined(self._id_38E5)) {
     wait(_id_0547::_id_9470(self._id_38E5) - var_2);
 
-    if(isDefined(level._id_943B._id_241F)) {
-      level._id_943B._id_241F unlink();
+    if(isDefined(level._id_943B.clip)) {
+      level._id_943B.clip unlink();
     }
 
-    _killfxontag(common_scripts\utility::_id_44F5("temp_straub_radius"), self._id_18A8, "J_MainRoot");
+    _killfxontag(common_scripts\utility::getfx("temp_straub_radius"), self.body, "J_MainRoot");
     self._id_00B9 delete();
 
     if(isDefined(self._id_9A8E)) {
       self._id_9A8E delete();
     }
 
-    self._id_18A8 delete();
+    self.body delete();
     self notify("straub_destroyed");
   }
 }
 
 _id_943F() {
   self endon("straub_destroyed");
-  level._id_943B._id_241F.origin = self._id_18A8.origin;
-  level._id_943B._id_241F linkTo(self._id_18A8, "tag_origin", (0, 0, 32), (0, 0, 0));
-  level._id_943B._id_241F setCanDamage(1);
-  level._id_943B._id_241F thread maps\mp\gametypes\_damage::_id_8676(1, undefined, ::_id_9440, ::_id_943E);
+  level._id_943B.clip.origin = self.body.origin;
+  level._id_943B.clip linkTo(self.body, "tag_origin", (0, 0, 32), (0, 0, 0));
+  level._id_943B.clip setCanDamage(1);
+  level._id_943B.clip thread maps\mp\gametypes\_damage::setentitydamagecallback(1, undefined, ::_id_9440, ::_id_943E);
 }
 
 _id_943E(var_0, var_1, var_2, var_3) {
@@ -240,7 +240,7 @@ _id_943E(var_0, var_1, var_2, var_3) {
 
 _id_9449() {
   if(!common_scripts\utility::_id_562E(self._id_299E)) {
-    playFX(common_scripts\utility::_id_44F5("temp_straub_radius"), self.origin + (0, 0, 32));
+    playFX(common_scripts\utility::getfx("temp_straub_radius"), self.origin + (0, 0, 32));
     self._id_299E = 1;
     wait 0.25;
     self._id_299E = 0;
@@ -248,7 +248,7 @@ _id_9449() {
 }
 
 _id_9440(var_0, var_1, var_2, var_3) {
-  playFX(common_scripts\utility::_id_44F5("temp_straub_radius"), self.origin + (0, 0, 48));
+  playFX(common_scripts\utility::getfx("temp_straub_radius"), self.origin + (0, 0, 48));
 }
 
 _id_944A() {
@@ -271,7 +271,7 @@ _id_9444(var_0) {
   var_2 = _id_9443(var_1);
 
   if(var_2) {
-    var_2 = _bullettracepassed(self._id_5EB4, var_0 getEye(), 0, self._id_18A8);
+    var_2 = _bullettracepassed(self._id_5EB4, var_0 getEye(), 0, self.body);
   }
 
   return var_2;
@@ -308,7 +308,7 @@ _id_943C(var_0) {
 }
 
 _id_9447() {
-  level._id_6DD4 = common_scripts\utility::_id_46B7("pa_loudspeaker", "targetname");
+  level._id_6DD4 = common_scripts\utility::getstructarray("pa_loudspeaker", "targetname");
   level._id_6DD5 = [];
   level._id_6DD7 = [];
   level._id_6DD6 = [];
@@ -337,7 +337,7 @@ _id_9447() {
   level._id_943B._id_90C2 = 0;
   level._id_943B._id_3C54 = 0;
   level._id_943B._id_7F00 = 0;
-  level._id_943B._id_5D99 = [];
+  level._id_943B.lines = [];
   level._id_943B._id_13B1 = [];
   level._id_943B _id_09EF("intro", "zmb_nst01_stra_youmustbeklausfriendsthea", 14, undefined);
   level._id_943B _id_09EF("breached", "zmb_nst01_stra_theyvealreadybreachedthel", 9, undefined);
@@ -357,10 +357,10 @@ _id_9447() {
 }
 
 _id_09EF(var_0, var_1, var_2, var_3) {
-  self._id_5D99[var_0] = spawnStruct();
-  self._id_5D99[var_0]._id_0BB4 = var_1;
-  self._id_5D99[var_0].duration = var_2;
-  self._id_5D99[var_0]._id_3DD3 = var_3;
+  self.lines[var_0] = spawnStruct();
+  self.lines[var_0]._id_0BB4 = var_1;
+  self.lines[var_0].duration = var_2;
+  self.lines[var_0]._id_3DD3 = var_3;
 
   if(!issubstr(var_0, "_2") && !issubstr(var_0, "_3") && !issubstr(var_0, "_4")) {
     self._id_13B1[self._id_13B1.size] = var_0;
@@ -374,12 +374,12 @@ _id_7CFC(var_0) {
 }
 
 _id_46B3(var_0) {
-  var_1 = level._id_943B._id_5D99[var_0]._id_0BB4;
-  var_2 = level._id_943B._id_5D99[var_0].duration;
+  var_1 = level._id_943B.lines[var_0]._id_0BB4;
+  var_2 = level._id_943B.lines[var_0].duration;
   var_3 = undefined;
 
-  if(isDefined(level._id_943B._id_5D99[var_0]._id_3DD3)) {
-    var_3 = level._id_943B._id_5D99[var_0]._id_3DD3;
+  if(isDefined(level._id_943B.lines[var_0]._id_3DD3)) {
+    var_3 = level._id_943B.lines[var_0]._id_3DD3;
   }
 
   return [var_1, var_2, var_3];
@@ -387,13 +387,13 @@ _id_46B3(var_0) {
 
 _id_74E1(var_0, var_1) {
   level endon("straub_taunt_force_stop");
-  _id_0378::_id_8D74("play_pa_dialog", var_0, level._id_6DD7, level._id_6DD5);
+  _id_0378::snd_message("play_pa_dialog", var_0, level._id_6DD7, level._id_6DD5);
   wait(var_1);
 }
 
 _id_93F6() {
   level notify("straub_taunt_force_stop");
-  _id_0378::_id_8D74("stop_pa_dialog");
+  _id_0378::snd_message("stop_pa_dialog");
 }
 
 _id_74E2(var_0, var_1) {
@@ -410,8 +410,8 @@ _id_74E2(var_0, var_1) {
     if(isDefined(level._id_943B._id_2913)) {
       if(_id_943C(level._id_943B._id_2913)) {
         return;
-      } else if(isDefined(level._id_943B._id_2913._id_18A8)) {
-        level._id_943B._id_2913._id_18A8 hide();
+      } else if(isDefined(level._id_943B._id_2913.body)) {
+        level._id_943B._id_2913.body hide();
         level._id_943B._id_2913._id_00B9 hide();
 
         if(isDefined(level._id_943B._id_2913._id_9A8E)) {
@@ -430,7 +430,7 @@ _id_74E2(var_0, var_1) {
     var_2 = "intro";
     [var_3, var_4, var_5] = _id_46B3(var_2);
     level._id_943B._id_90C2 = 1;
-    _id_0378::_id_8D74("snd_zmb_mus_stop_all_players", 4);
+    _id_0378::snd_message("snd_zmb_mus_stop_all_players", 4);
     wait 2;
     thread _id_74E1(var_3, var_4);
     level._id_943B._id_3C54 = 1;
@@ -449,9 +449,9 @@ _id_74E2(var_0, var_1) {
       return;
     }
 
-    if((common_scripts\utility::_id_24A6() || common_scripts\utility::_id_562E(var_0)) && !common_scripts\utility::_id_562E(var_1)) {
+    if((common_scripts\utility::cointoss() || common_scripts\utility::_id_562E(var_0)) && !common_scripts\utility::_id_562E(var_1)) {
       level._id_943B._id_90C2 = 1;
-      _id_0378::_id_8D74("snd_zmb_mus_stop_all_players", 4);
+      _id_0378::snd_message("snd_zmb_mus_stop_all_players", 4);
       wait 2;
       var_2 = common_scripts\utility::random(level._id_943B._id_13B1);
       [var_3, var_4, var_5] = _id_46B3(var_2);
@@ -480,14 +480,14 @@ _id_74E2(var_0, var_1) {
       level._id_943B._id_90C2 = 0;
       level._id_943B._id_7F00 = 0;
     } else {
-      _id_0378::_id_8D74("snd_zmb_mus_stop_all_players", 4);
-      _id_0378::_id_8D74("play_pa_music", level._id_6DD6);
+      _id_0378::snd_message("snd_zmb_mus_stop_all_players", 4);
+      _id_0378::snd_message("play_pa_music", level._id_6DD6);
     }
   }
 
   if(level._id_943B._id_50D6) {
-    if(isDefined(level._id_943B._id_2913) && isDefined(level._id_943B._id_2913._id_18A8)) {
-      level._id_943B._id_2913._id_18A8 show();
+    if(isDefined(level._id_943B._id_2913) && isDefined(level._id_943B._id_2913.body)) {
+      level._id_943B._id_2913.body show();
       level._id_943B._id_2913._id_00B9 show();
 
       if(isDefined(level._id_943B._id_2913._id_9A8E)) {

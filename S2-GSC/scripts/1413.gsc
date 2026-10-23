@@ -14,7 +14,7 @@ _id_8F7E(var_0, var_1, var_2, var_3, var_4) {
 
   var_5 = spawn("script_model", var_0);
   var_5 setModel(var_2);
-  var_5 _id_0378::_id_8D74("uber_battery_spawn");
+  var_5 _id_0378::snd_message("uber_battery_spawn");
 
   if(isDefined(var_2)) {
     var_6 = _id_4700(var_2);
@@ -27,12 +27,12 @@ _id_8F7E(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(isDefined(var_3)) {
-    var_5 _id_0547::_id_AC41(var_1, undefined, var_3);
+    var_5 _id_0547::zombies_make_usable(var_1, undefined, var_3);
   } else {
-    var_5 _id_0547::_id_AC41(var_1, (0, 0, 8));
+    var_5 _id_0547::zombies_make_usable(var_1, (0, 0, 8));
   }
 
-  var_5._id_9D65 _meth_86C1(1);
+  var_5.trigger _meth_86C1(1);
   var_5._id_65F9 = _spawnlinkedfx(level._effect[var_6], var_5, "tag_origin");
   _triggerfx(var_5._id_65F9);
   var_5._id_6949 = var_4;
@@ -83,7 +83,7 @@ _id_A663() {
       self._id_65F9 delete();
     }
 
-    _id_0547::_id_AC40();
+    _id_0547::zombies_make_unusable();
     var_0 thread _id_3481(self._id_6949);
     self hide();
     var_0 _id_8555(self._id_6949);
@@ -116,7 +116,7 @@ _id_42F2(var_0) {
     if(common_scripts\utility::_id_562E(level.usenavmeshforuber)) {
       if(self isonground() && _func_2E6(self.origin)) {
         var_0._id_A269 = self.origin;
-        thread maps\mp\_utility::_id_33DF(var_0._id_A269, 8, 3, (1, 0, 0));
+        thread maps\mp\_utility::drawsphere(var_0._id_A269, 8, 3, (1, 0, 0));
       }
     } else if(self isonground())
       var_0._id_A269 = self.origin;
@@ -147,7 +147,7 @@ _id_8555(var_0) {
   var_3 = self getweaponlistprimaries();
   _id_0586::_id_078C("blimp_battery_zm");
   _id_0586::_id_078E("blimp_battery_zm");
-  _id_0378::_id_8D74("aud_zmb_uberschnell_pickup");
+  _id_0378::snd_message("aud_zmb_uberschnell_pickup");
   self disableweaponswitch();
   self allowcrouch(0);
   self allowjump(0);
@@ -201,9 +201,9 @@ _id_A6DD() {
     self endon("death");
   }
 
-  common_scripts\utility::_id_A70A("weapon_change", "weapon_switch_started", "enter_last_stand");
+  common_scripts\utility::waittill_any("weapon_change", "weapon_switch_started", "enter_last_stand");
 
-  if(maps\mp\_utility::_id_4571() == "mp_zombie_descent") {
+  if(maps\mp\_utility::getmapname() == "mp_zombie_descent") {
     while(!self isonground()) {
       waitframe();
     }
@@ -219,7 +219,7 @@ _id_A6D9() {
     self endon("death");
   }
 
-  common_scripts\utility::_id_A70A("uber_deposited");
+  common_scripts\utility::waittill_any("uber_deposited");
   self notify("uber_lost", "uber_deposited");
 }
 
@@ -276,7 +276,7 @@ _id_4702(var_0) {
 _id_4701(var_0) {
   var_1 = &"ZOMBIES_PICKUP_UBER_GEN";
 
-  if(maps\mp\_utility::_id_4571() == "mp_zombie_nest_01") {
+  if(maps\mp\_utility::getmapname() == "mp_zombie_nest_01") {
     var_1 = &"ZOMBIE_NEST_PICK_BLIMP_PIECE";
 
     if(!isDefined(var_0)) {
@@ -328,7 +328,7 @@ _id_A65A() {
 _id_429F() {}
 
 _id_2EB5() {
-  if(maps\mp\_utility::_id_4571() == "mp_zombie_nest_01" && !common_scripts\utility::_id_562E(self._id_305E)) {
+  if(maps\mp\_utility::getmapname() == "mp_zombie_nest_01" && !common_scripts\utility::_id_562E(self._id_305E)) {
     var_0 = _id_0367::_id_8E3D("zepuberpickup");
 
     if(isDefined(var_0)) {

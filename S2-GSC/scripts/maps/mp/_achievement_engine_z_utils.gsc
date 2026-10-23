@@ -28,7 +28,7 @@ ae_zm_sendkillevent(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8 = add_upgrade_info(var_8, var_2);
   var_8 = add_current_map(var_8);
   var_8 = add_player_kill_special(var_8, var_5);
-  var_8 = add_key_and_value(var_8, 8, int(level._id_A980));
+  var_8 = add_key_and_value(var_8, 8, int(level.wavecounter));
 
   if(is_community_kill(var_7, var_0)) {
     var_9 = level.players;
@@ -447,7 +447,7 @@ add_death_means_info(var_0, var_1, var_2, var_3) {
   } else if(isDefined(var_2) && maps\mp\_utility::isexplosivedamage(var_2)) {
     var_0[var_0.size] = 3;
     var_0[var_0.size] = 3;
-  } else if(isDefined(var_1._id_5033) && var_1._id_5033 &level.idflags_penetration) {
+  } else if(isDefined(var_1.idflags) && var_1.idflags &level.idflags_penetration) {
     var_0[var_0.size] = 3;
     var_0[var_0.size] = 4;
   } else if(isDefined(var_2) && var_2 == "MOD_MELEE") {
@@ -498,7 +498,7 @@ get_player_kill_special(var_0, var_1, var_2, var_3, var_4) {
   }
 
   foreach(var_8 in level.register_unique_kill_funcs) {
-    var_9 = [[var_8._id_3F02]](var_1, var_2, var_3, var_4);
+    var_9 = [[var_8.func]](var_1, var_2, var_3, var_4);
 
     if(isDefined(var_8.value) && var_9) {
       var_5 = common_scripts\utility::_id_0F6F(var_5, var_8.value);
@@ -712,7 +712,7 @@ is_community_kill(var_0, var_1) {
     return 1;
   }
 
-  if(common_scripts\utility::_id_562E(var_1._id_5A3D)) {
+  if(common_scripts\utility::_id_562E(var_1.killedbynuke)) {
     return 1;
   }
 

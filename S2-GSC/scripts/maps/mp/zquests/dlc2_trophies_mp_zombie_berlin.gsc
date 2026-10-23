@@ -107,7 +107,7 @@ watch_fail_berlin_trophy_event_6(var_0, var_1, var_2, var_3, var_4, var_5, var_6
   var_11 = _id_0547::zm_get_weapon_class(var_5);
   var_12 = 1;
 
-  if(_id_0547::_id_5863(var_5)) {
+  if(_id_0547::iszombielethal(var_5)) {
     return;
   }
   if(_id_0547::isvalidequipmentzombies(var_5)) {

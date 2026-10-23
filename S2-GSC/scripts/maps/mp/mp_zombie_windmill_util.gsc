@@ -29,7 +29,7 @@ ambient_lightning_strikes() {
     var_4 = common_scripts\utility::random(var_2);
     var_5 = var_4 getpointinbounds(_randomfloatrange(-0.99, 0.99), _randomfloatrange(-0.99, 0.99), _randomfloatrange(-0.99, 0.99));
     var_5 = var_5 + (0, 0, 1500);
-    var_5 = common_scripts\utility::_id_348B(var_5);
+    var_5 = common_scripts\utility::drop_to_ground(var_5);
 
     if(var_5[2] < -1500) {
       continue;
@@ -37,8 +37,8 @@ ambient_lightning_strikes() {
     var_0.origin = var_5 + (0, 0, var_3);
     var_0.angles = (var_0.angles[0], var_0.angles[1] + _randomintrange(45, 315), var_0.angles[2]);
     waitframe();
-    var_6 = _func_382("zmb_wm_lightning_beam", var_0, "tag_origin", var_1, "tag_origin");
-    var_6 common_scripts\utility::_id_2CBE(_randomfloatrange(0.15, 0.25), ::delete);
+    var_6 = vehicle_scripts/_attack_heli("zmb_wm_lightning_beam", var_0, "tag_origin", var_1, "tag_origin");
+    var_6 common_scripts\utility::delaycall(_randomfloatrange(0.15, 0.25), ::delete);
   }
 }
 
@@ -69,7 +69,7 @@ ambient_lightning_strikes_forvfx() {
 
     var_4 = var_2 getpointinbounds(_randomfloatrange(-0.99, 0.99), _randomfloatrange(-0.99, 0.99), _randomfloatrange(-0.99, 0.99));
     var_4 = var_4 + (0, 0, 1500);
-    var_4 = common_scripts\utility::_id_348B(var_4);
+    var_4 = common_scripts\utility::drop_to_ground(var_4);
 
     if(var_4[2] < -1500) {
       continue;
@@ -77,20 +77,20 @@ ambient_lightning_strikes_forvfx() {
     var_0.origin = var_4 + (0, 0, var_3);
     var_0.angles = (var_0.angles[0], var_0.angles[1] + _randomintrange(45, 315), var_0.angles[2]);
     waitframe();
-    var_5 = _func_382("zmb_wm_lightning_beam", var_0, "tag_origin", var_1, "tag_origin");
+    var_5 = vehicle_scripts/_attack_heli("zmb_wm_lightning_beam", var_0, "tag_origin", var_1, "tag_origin");
     _playFXOnTag(level._effect["zmb_wm_lightning_impact_base_rnr"], var_1, "tag_origin");
 
     if(getdvarint("snd_zmb_debug_lighting_strike")) {
-      _id_0378::_id_8D74("lightning_strike", var_0.origin, var_4);
+      _id_0378::snd_message("lightning_strike", var_0.origin, var_4);
     }
 
-    var_5 common_scripts\utility::_id_2CBE(_randomfloatrange(0.15, 0.25), ::delete);
+    var_5 common_scripts\utility::delaycall(_randomfloatrange(0.15, 0.25), ::delete);
   }
 }
 
 spawn_frank() {
   if(!isDefined(level.frank_dudebroman)) {
-    var_0 = common_scripts\utility::_id_46B5("frank_spawner", "targetname");
+    var_0 = common_scripts\utility::getstruct("frank_spawner", "targetname");
     var_1 = level._id_1CC0;
     level._id_1CC0 = ["zombie_generic"];
     level.frank_dudebroman = _id_054D::_id_90BA("zombie_generic", var_0, "frank guy", 0, 1, 0);
@@ -109,19 +109,19 @@ spawn_frank() {
     level.frank_dudebroman._id_297D = maps\mp\zombies\sg_events_v1\very_important_zombie::basic_vip_custom_movemode_walk;
     level.frank_dudebroman.failsafe_exempt = 1;
     level.frank_dudebroman._id_00CF = 1;
-    level.frank_dudebroman._id_480F = 1;
+    level.frank_dudebroman.godmode = 1;
     level.frank_dudebroman._id_00CE = 1;
     level.frank_dudebroman._id_509A = 1;
     level.frank_dudebroman._id_5748 = 1;
     level.frank_dudebroman.nomutilate = 1;
-    level.frank_dudebroman maps\mp\agents\_agent_utility::hudoutlineenable(level._id_746E);
-    level.frank_dudebroman maps\mp\agents\_agent_common::_id_83FD(level.frank_escort_health);
+    level.frank_dudebroman maps\mp\agents\_agent_utility::hudoutlineenable(level.playerteam);
+    level.frank_dudebroman maps\mp\agents\_agent_common::set_agent_health(level.frank_escort_health);
   }
 }
 
 windmill_think() {
   var_0 = getEntArray("windmill_gear", "targetname");
-  var_1 = common_scripts\utility::_id_46B5("windmill_anim_org", "targetname");
+  var_1 = common_scripts\utility::getstruct("windmill_anim_org", "targetname");
 
   foreach(var_3 in var_0) {
     var_3 thread windmill_play_anim_on_gear();
@@ -133,7 +133,7 @@ windmill_think() {
 windmill_idle_with_speed(var_0) {
   thread windmill_rotateby_speed(1);
   var_1 = getEntArray("windmill_gear", "targetname");
-  _id_0378::_id_8D74("start_gears", var_1);
+  _id_0378::snd_message("start_gears", var_1);
 
   foreach(var_3 in var_1) {
     var_3 thread windmill_part_speed_up_from_stop();
@@ -143,7 +143,7 @@ windmill_idle_with_speed(var_0) {
 windmill_stop_idle() {
   thread windmill_rotateby_speed(0);
   var_0 = getEntArray("windmill_gear", "targetname");
-  _id_0378::_id_8D74("stop_gears", var_0);
+  _id_0378::snd_message("stop_gears", var_0);
 
   foreach(var_2 in var_0) {
     var_2 thread windmill_part_slow_to_stop();
@@ -175,7 +175,7 @@ windmill_play_anim_on_gear() {
   var_0.previous_anim_rate = 0.05;
   var_0.total_anim_time = 10.3667;
   var_0.initial_seconds = 0;
-  var_2 = common_scripts\utility::_id_46B5("windmill_anim_org", "targetname");
+  var_2 = common_scripts\utility::getstruct("windmill_anim_org", "targetname");
   var_0 scriptmodelplayanim(var_1, undefined, var_0.initial_seconds, var_0.anim_rate);
   wait 0.15;
   var_0.initial_seconds = 0.15;
@@ -216,7 +216,7 @@ windmill_rotateby_speed(var_0) {
   var_2 = 0.5;
   var_3 = -5;
   var_1 windmill_rotateby_accelerate_to_speed(var_0, var_2, var_3);
-  var_1 _id_0378::_id_8D74("start_windmill_rotate", var_0);
+  var_1 _id_0378::snd_message("start_windmill_rotate", var_0);
 
   if(var_1.current_speed > 0) {
     for(;;) {
@@ -242,7 +242,7 @@ windmill_rotateby_accelerate_to_speed(var_0, var_1, var_2) {
     var_7 = var_6 / _abs(var_2) * var_1;
     var_8 = var_7 / 2;
     self rotatepitch(var_6, var_7, 0, var_8);
-    _id_0378::_id_8D74("stop_windmill", var_7);
+    _id_0378::snd_message("stop_windmill", var_7);
     wait(var_7);
     var_9 = var_6 / 2;
     var_10 = self.angles[0];
@@ -274,7 +274,7 @@ _id_8C92() {
   level._id_ABEC maps\mp\_utility::_id_5DC7();
   level._id_ABED maps\mp\_utility::_id_5DC7();
   level._id_AC12 maps\mp\_utility::_id_5DC7();
-  var_0 = maps\mp\agents\_agent_utility::_id_43FD("all");
+  var_0 = maps\mp\agents\_agent_utility::getactiveagentsoftype("all");
 
   foreach(var_2 in var_0) {
     if(_id_0547::_id_5565(var_2._id_0A4B, "zombie_boss_village")) {
@@ -309,7 +309,7 @@ vo_master_handler() {
 
   wait 1;
   level.rideau_radio = spawn("script_origin", (0, 0, -10000));
-  level.rideau_radio._id_20D8 = level.rideauindexes[0];
+  level.rideau_radio.characterindex = level.rideauindexes[0];
 
   while(!common_scripts\utility::_id_562E(level.gamehasstarted)) {
     waitframe();
@@ -553,7 +553,7 @@ vo_round09_end() {
 
 vo_round10_end() {
   level endon("round11_end_vo_think");
-  common_scripts\utility::_id_3C9F("zmb_players_gamemode_boss_defeated");
+  common_scripts\utility::flag_wait("zmb_players_gamemode_boss_defeated");
   wait 1.5;
   level notify("round10_end_vo_think");
   level vo_verify_characters();
@@ -581,7 +581,7 @@ vo_round10_end() {
 }
 
 vo_round11_end() {
-  common_scripts\utility::_id_3C9F("zmb_players_gamemode_escaped");
+  common_scripts\utility::flag_wait("zmb_players_gamemode_escaped");
   wait 0.35;
   level notify("round11_end_vo_think");
   level vo_verify_characters();
@@ -645,7 +645,7 @@ vo_get_character_if_present(var_0) {
   }
 
   foreach(var_3 in level.players) {
-    if(vo_check_index_against_character(var_3._id_20D8, var_1)) {
+    if(vo_check_index_against_character(var_3.characterindex, var_1)) {
       return var_3;
     }
   }
@@ -657,7 +657,7 @@ vo_character_think(var_0) {
   var_0 notify("monitoring_VO_character");
   var_0 endon("monitoring_VO_character");
 
-  while(!isDefined(var_0._id_20D8)) {
+  while(!isDefined(var_0.characterindex)) {
     waittillframeend;
   }
 
@@ -665,7 +665,7 @@ vo_character_think(var_0) {
   var_1 = var_0 vo_set_character();
 
   if(isDefined(var_1) && var_1) {
-    var_2 = var_0._id_20D8;
+    var_2 = var_0.characterindex;
     var_0 waittill("disconnect");
     vo_unset_character(var_2);
   }
@@ -674,15 +674,15 @@ vo_character_think(var_0) {
 vo_set_character() {
   var_0 = 1;
 
-  if(vo_check_index_against_character(self._id_20D8, level.rideauindexes)) {
+  if(vo_check_index_against_character(self.characterindex, level.rideauindexes)) {
     level.rideau = self;
-  } else if(vo_check_index_against_character(self._id_20D8, level.agentindexes)) {
+  } else if(vo_check_index_against_character(self.characterindex, level.agentindexes)) {
     level.agent = self;
-  } else if(vo_check_index_against_character(self._id_20D8, level.mountaineerindexes)) {
+  } else if(vo_check_index_against_character(self.characterindex, level.mountaineerindexes)) {
     level.mountaineer = self;
-  } else if(vo_check_index_against_character(self._id_20D8, level.hunterindexes)) {
+  } else if(vo_check_index_against_character(self.characterindex, level.hunterindexes)) {
     level.hunter = self;
-  } else if(vo_check_index_against_character(self._id_20D8, level.slayerindexes)) {
+  } else if(vo_check_index_against_character(self.characterindex, level.slayerindexes)) {
     level.slayer = self;
   } else {
     var_0 = 0;
@@ -735,7 +735,7 @@ vo_waitfor_end_of_round_number(var_0) {
 }
 
 vo_waitfor_start_of_round_number(var_0) {
-  while(level._id_A980 != var_0) {
+  while(level.wavecounter != var_0) {
     wait 0.25;
   }
 }

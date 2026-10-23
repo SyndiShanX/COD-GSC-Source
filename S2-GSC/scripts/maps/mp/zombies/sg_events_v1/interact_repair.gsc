@@ -102,7 +102,7 @@ basic_keypoint_interact_run(var_0) {
 
 basic_keypoint_interact_trigger_listen(var_0) {
   foreach(var_5, var_2 in var_0) {
-    if(!var_2 _meth_8562()) {
+    if(!var_2 set_promotion_order()) {
       var_2 makeusable();
     }
 
@@ -172,10 +172,10 @@ basic_keypoint_interact_trigger_hints() {
 
 basic_keypoint_interact_trigger_use() {
   var_0 = level.keypointinteractholdtime;
-  self._id_28D5 = 0;
-  self._id_A22B = 0;
-  self._id_54F5 = 0;
-  self._id_565F = 1;
+  self.curprogress = 0;
+  self.userate = 0;
+  self.inuse = 0;
+  self.isactive = 1;
   var_1 = self;
 
   if(isDefined(self.scriptableinitfunc)) {
@@ -204,7 +204,7 @@ basic_keypoint_interact_trigger_use() {
           var_2 setclientomnvar("ui_onevone_class_4", level.keypointsinteracted);
         }
 
-        self._id_565F = 0;
+        self.isactive = 0;
         self notify("interact_completed");
         level notify("sg_keypoint_interact_completed");
         break;
@@ -215,18 +215,18 @@ basic_keypoint_interact_trigger_use() {
 
 basic_keypoint_interact_create_hold_struct() {
   var_0 = spawnStruct();
-  var_0._id_28D5 = 0;
-  var_0._id_A22B = 0;
-  var_0._id_54F5 = 0;
+  var_0.curprogress = 0;
+  var_0.userate = 0;
+  var_0.inuse = 0;
   return var_0;
 }
 
 basic_keypoint_interact_hold_think(var_0, var_1, var_2) {
   var_0 endon("disconnect");
   thread basic_keypoint_interact_cleanup(var_0, var_2);
-  self._id_28D5 = 0;
-  self._id_54F5 = 1;
-  self._id_A22B = 0;
+  self.curprogress = 0;
+  self.inuse = 1;
+  self.userate = 0;
   var_3 = basic_keypoint_interact_think_loop(var_0, var_1);
 
   if(!common_scripts\utility::_id_562E(var_3)) {
@@ -243,17 +243,17 @@ basic_keypoint_interact_hold_think(var_0, var_1, var_2) {
 
   self notify("useHoldThinkLoopDone");
   var_0.radial_interact_active = undefined;
-  var_0 _meth_866C(&"stop_progressive_interact", 0);
-  var_0 _meth_866C(&"remove_progressive_interact", 0);
-  self._id_54F5 = 0;
-  self._id_28D5 = 0;
+  var_0 setdot_radius(&"stop_progressive_interact", 0);
+  var_0 setdot_radius(&"remove_progressive_interact", 0);
+  self.inuse = 0;
+  self.curprogress = 0;
   return common_scripts\utility::_id_562E(var_3);
 }
 
 flicker_trigger() {
-  common_scripts\utility::_id_9D9F();
+  common_scripts\utility::trigger_off();
   wait 0.8;
-  common_scripts\utility::_id_9DA3();
+  common_scripts\utility::trigger_on();
 }
 
 basic_keypoint_interact_cleanup(var_0, var_1) {
@@ -268,7 +268,7 @@ basic_keypoint_interact_cleanup(var_0, var_1) {
     }
   }
 
-  var_3 = common_scripts\utility::_id_A712(var_2);
+  var_3 = common_scripts\utility::waittill_any_in_array_return(var_2);
 }
 
 basic_keypoint_interact_think_loop(var_0, var_1) {
@@ -278,23 +278,23 @@ basic_keypoint_interact_think_loop(var_0, var_1) {
   level notify("sg_keypoint_interact_start");
 
   while(isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 useButtonPressed() && var_0 istouching(self)) {
-    self._id_28D5 = self._id_28D5 + self._id_A22B * 50;
+    self.curprogress = self.curprogress + self.userate * 50;
 
     if(!common_scripts\utility::_id_562E(var_0.radial_interact_active)) {
       var_0.radial_interact_active = 1;
     }
 
-    if(!self._id_A22B) {
-      self._id_A22B = 1;
+    if(!self.userate) {
+      self.userate = 1;
     }
 
-    var_3 = var_1 - self._id_28D5;
+    var_3 = var_1 - self.curprogress;
 
     if(var_3 <= 0) {
       return 1;
     } else if(!var_2) {
       var_2 = 1;
-      var_0 _meth_866C(&"start_progressive_interact", 1, var_3);
+      var_0 setdot_radius(&"start_progressive_interact", 1, var_3);
       var_0.radial_interact_active = undefined;
     }
 
@@ -318,7 +318,7 @@ basic_keypoint_interact_start_tool(var_0) {
   }
 
   _id_0548::_id_A7D6(var_1, level.keypointinteracttool);
-  _id_0378::_id_8D74("dlc3_player_repair_start", level.keypointinteracttool, var_0);
+  _id_0378::snd_message("dlc3_player_repair_start", level.keypointinteracttool, var_0);
   var_1 disableweaponswitch();
   return var_4;
 }
@@ -332,7 +332,7 @@ basic_keypoint_interact_stop_tool(var_0) {
   }
 
   var_1 _id_0586::_id_0790(level.keypointinteracttool);
-  _id_0378::_id_8D74("dlc3_player_repair_stop", level.keypointinteracttool);
+  _id_0378::snd_message("dlc3_player_repair_stop", level.keypointinteracttool);
 }
 
 basic_keypoint_interact_waitfor_interact_or_timeout() {
@@ -359,7 +359,7 @@ basic_keypoint_interact_draw_waypoint(var_0) {
   var_3 setwaypoint(0, 1, 0);
   var_3 fadeovertime(0.1);
   var_3.alpha = 1;
-  var_0 common_scripts\utility::_id_A70A("interact_completed", "sg_obj_timeout");
+  var_0 common_scripts\utility::waittill_any("interact_completed", "sg_obj_timeout");
   var_3 setwaypoint(0, 0, 0);
   var_3 fadeovertime(0.5);
   var_3.alpha = 0;

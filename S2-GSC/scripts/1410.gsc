@@ -74,9 +74,9 @@ _id_7788(var_0, var_1) {
     level._id_94DA = var_2.origin;
     level._id_94DB = _id_0580::_id_4385();
     var_4 = maps\mp\gametypes\zombies::_id_1E59() * 1;
-    _id_0580::_id_98E9(var_2.origin, _id_41DC(), var_1.player, var_2, var_1._id_953E, (0.666667, 0.423529, 0.223529), var_4);
+    _id_0580::_id_98E9(var_2.origin, _id_41DC(), var_1.player, var_2, var_1.sweapon, (0.666667, 0.423529, 0.223529), var_4);
   } else
-    var_2 thread _id_0580::_id_98EE(var_0, var_1.player, var_1._id_8CD7, var_1._id_953E, 1, "head_sparks");
+    var_2 thread _id_0580::_id_98EE(var_0, var_1.player, var_1.smeansofdeath, var_1.sweapon, 1, "head_sparks");
 }
 
 _id_94DC(var_0) {
@@ -92,8 +92,8 @@ _id_94DC(var_0) {
 _id_5994(var_0) {
   var_1 = self;
   var_1 waittill("death");
-  playFX(common_scripts\utility::_id_44F5("tesla_death_explosion"), var_1.origin);
-  var_1 _id_0378::_id_8D74("aud_ww_death_explode");
+  playFX(common_scripts\utility::getfx("tesla_death_explosion"), var_1.origin);
+  var_1 _id_0378::snd_message("aud_ww_death_explode");
   var_2 = maps\mp\gametypes\zombies::_id_1E59() * 3;
   _id_0580::_id_98E9(var_1.origin, _id_418A(), var_0.player, undefined, "teslagun_zm_death", (0.666667, 0.423529, 0.223529), var_2);
 }
@@ -106,7 +106,7 @@ _id_5995(var_0) {
   var_1 = self;
   var_1 endon("death");
   var_1 thread _id_5994(var_0);
-  _playFXOnTag(common_scripts\utility::_id_44F5("death_sticky"), var_1, "j_neck");
+  _playFXOnTag(common_scripts\utility::getfx("death_sticky"), var_1, "j_neck");
   var_2 = 0;
 
   while(!var_2) {
@@ -131,14 +131,14 @@ _id_5995(var_0) {
       var_5 = common_scripts\utility::_id_0F6F(var_5, var_7);
     }
 
-    var_7 = common_scripts\utility::_id_4461(var_1.origin, var_5);
+    var_7 = common_scripts\utility::getclosest(var_1.origin, var_5);
 
     if(!isDefined(var_7)) {
-      var_7 = common_scripts\utility::_id_4461(var_1.origin, var_4);
+      var_7 = common_scripts\utility::getclosest(var_1.origin, var_4);
     }
 
     if(!isDefined(var_7)) {
-      var_7 = common_scripts\utility::_id_4461(var_1.origin, var_3);
+      var_7 = common_scripts\utility::getclosest(var_1.origin, var_3);
     }
 
     if(!isDefined(var_7)) {

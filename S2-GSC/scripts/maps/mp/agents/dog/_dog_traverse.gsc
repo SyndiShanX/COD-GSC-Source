@@ -6,8 +6,8 @@
 main() {
   self endon("killanimscript");
 
-  if(!isDefined(level._id_31FA)) {
-    _id_52AE();
+  if(!isDefined(level.dogtraverseanims)) {
+    initdogtraverseanims();
   }
 
   var_0 = self getnegotiationstartnode();
@@ -21,15 +21,15 @@ main() {
     self scragentsetorientmode("face angle abs", var_5);
     self scragentdoanimlerp(var_0.origin, var_1.origin, var_3);
     self scragentsetphysicsmode("noclip");
-    maps\mp\agents\_scriptedagents::_id_71F7("run", var_3);
+    maps\mp\agents\_scriptedagents::playanimfortime("run", var_3);
   } else {
     var_6 = undefined;
-    var_6 = level._id_31FA[var_0._id_001E];
+    var_6 = level.dogtraverseanims[var_0._id_001E];
 
     if(!isDefined(var_6)) {
       return;
     }
-    self._id_17E8 = 1;
+    self.blockgoalpos = 1;
     var_2 = var_1.origin - var_0.origin;
     var_4 = (var_2[0], var_2[1], 0);
     var_5 = vectortoangles(var_4);
@@ -44,7 +44,7 @@ main() {
       var_9 = _getmovedelta(var_7, 0, 1);
     }
 
-    var_10 = maps\mp\agents\_scriptedagents::_id_441C(var_2, var_9);
+    var_10 = maps\mp\agents\_scriptedagents::getanimscalefactors(var_2, var_9);
     self scragentsetphysicsmode("noclip");
 
     if(var_2[2] > 0) {
@@ -64,7 +64,7 @@ main() {
           }
 
           self scragentsetanimscale(var_12, var_13);
-          maps\mp\agents\_scriptedagents::_id_71FC(var_6, 0, "traverse", "traverse_jump_start");
+          maps\mp\agents\_scriptedagents::playanimnuntilnotetrack(var_6, 0, "traverse", "traverse_jump_start");
           var_14 = _getnotetracktimes(var_7, "traverse_jump_end");
           var_15 = _getmovedelta(var_7, 0, var_11[0]);
           var_16 = _getmovedelta(var_7, 0, var_14[0]);
@@ -88,16 +88,16 @@ main() {
           var_23 = var_16 - var_15;
           var_24 = _rotatevector(var_23, var_5);
           var_25 = var_22 - self.origin;
-          var_10 = maps\mp\agents\_scriptedagents::_id_441C(var_25, var_24, 1);
-          self scragentsetanimscale(var_10._id_AAE3, var_10._id_01D9);
-          maps\mp\agents\_scriptedagents::_id_A79E("traverse", "traverse_jump_end");
+          var_10 = maps\mp\agents\_scriptedagents::getanimscalefactors(var_25, var_24, 1);
+          self scragentsetanimscale(var_10.xy, var_10._id_01D9);
+          maps\mp\agents\_scriptedagents::waituntilnotetrack("traverse", "traverse_jump_end");
           self scragentsetanimscale(var_12, var_13);
-          maps\mp\agents\_scriptedagents::_id_A79E("traverse", "code_move");
+          maps\mp\agents\_scriptedagents::waituntilnotetrack("traverse", "code_move");
           return;
         }
 
-        self scragentsetanimscale(var_10._id_AAE3, var_10._id_01D9);
-        maps\mp\agents\_scriptedagents::_id_71FC(var_6, 0, "traverse");
+        self scragentsetanimscale(var_10.xy, var_10._id_01D9);
+        maps\mp\agents\_scriptedagents::playanimnuntilnotetrack(var_6, 0, "traverse");
         return;
         return;
       }
@@ -105,26 +105,26 @@ main() {
       var_26 = _getnotetracktimes(var_7, "gravity on");
 
       if(var_26.size > 0) {
-        var_27 = var_0 _id_46BF();
+        var_27 = var_0 gettargetentpos();
 
         if(isDefined(var_27)) {
           var_28 = var_27 - self.origin;
           var_29 = var_1.origin - var_27;
           var_30 = _getmovedelta(var_7, 0, var_26[0]);
-          var_10 = maps\mp\agents\_scriptedagents::_id_441C(var_28, var_30);
-          self scragentsetanimscale(var_10._id_AAE3, var_10._id_01D9);
-          maps\mp\agents\_scriptedagents::_id_71FC(var_6, 0, "traverse", "gravity on");
+          var_10 = maps\mp\agents\_scriptedagents::getanimscalefactors(var_28, var_30);
+          self scragentsetanimscale(var_10.xy, var_10._id_01D9);
+          maps\mp\agents\_scriptedagents::playanimnuntilnotetrack(var_6, 0, "traverse", "gravity on");
           var_31 = _getmovedelta(var_7, var_26[0], 1);
-          var_10 = maps\mp\agents\_scriptedagents::_id_441C(var_29, var_31);
-          self scragentsetanimscale(var_10._id_AAE3, var_10._id_01D9);
-          maps\mp\agents\_scriptedagents::_id_A79E("traverse", "code_move");
+          var_10 = maps\mp\agents\_scriptedagents::getanimscalefactors(var_29, var_31);
+          self scragentsetanimscale(var_10.xy, var_10._id_01D9);
+          maps\mp\agents\_scriptedagents::waituntilnotetrack("traverse", "code_move");
           return;
         }
       }
 
       var_32 = _getanimlength(var_7);
       self scragentdoanimlerp(var_0.origin, var_1.origin, var_32);
-      maps\mp\agents\_scriptedagents::_id_71FC(var_6, 0, "traverse");
+      maps\mp\agents\_scriptedagents::playanimnuntilnotetrack(var_6, 0, "traverse");
       return;
       return;
     }
@@ -132,33 +132,33 @@ main() {
     var_26 = _getnotetracktimes(var_7, "gravity on");
 
     if(var_26.size > 0) {
-      self scragentsetanimscale(var_10._id_AAE3, 1);
-      maps\mp\agents\_scriptedagents::_id_71FC(var_6, 0, "traverse", "gravity on");
+      self scragentsetanimscale(var_10.xy, 1);
+      maps\mp\agents\_scriptedagents::playanimnuntilnotetrack(var_6, 0, "traverse", "gravity on");
       var_33 = _getmovedelta(var_7, 0, var_26[0]);
       var_34 = var_33[2] - var_9[2];
 
       if(_abs(var_34) > 0) {
         var_35 = self.origin[2] - var_1.origin[2];
         var_13 = var_35 / var_34;
-        self scragentsetanimscale(var_10._id_AAE3, var_13);
+        self scragentsetanimscale(var_10.xy, var_13);
         var_36 = clamp(2 / var_13, 0.5, 1);
         var_37 = var_6 + "_norestart";
         self setanimstate(var_37, 0, var_36);
       }
 
-      maps\mp\agents\_scriptedagents::_id_A79E("traverse", "code_move");
+      maps\mp\agents\_scriptedagents::waituntilnotetrack("traverse", "code_move");
     } else {
-      self scragentsetanimscale(var_10._id_AAE3, var_10._id_01D9);
+      self scragentsetanimscale(var_10.xy, var_10._id_01D9);
       var_36 = clamp(2 / var_10._id_01D9, 0.5, 1);
       var_14 = _getnotetracktimes(var_7, "traverse_jump_end");
 
       if(var_14.size > 0) {
-        maps\mp\agents\_scriptedagents::_id_71F9(var_6, 0, var_36, "traverse", "traverse_jump_end");
+        maps\mp\agents\_scriptedagents::playanimnatrateuntilnotetrack(var_6, 0, var_36, "traverse", "traverse_jump_end");
         var_37 = var_6 + "_norestart";
         self setanimstate(var_37, 0, 1);
-        maps\mp\agents\_scriptedagents::_id_A79E("traverse", "code_move");
+        maps\mp\agents\_scriptedagents::waituntilnotetrack("traverse", "code_move");
       } else
-        maps\mp\agents\_scriptedagents::_id_71FC(var_6, 0, "traverse");
+        maps\mp\agents\_scriptedagents::playanimnuntilnotetrack(var_6, 0, "traverse");
     }
 
     self scragentsetanimscale(1, 1);
@@ -167,12 +167,12 @@ main() {
 
 _id_0085() {
   self scragentsetanimscale(1, 1);
-  self._id_17E8 = 0;
+  self.blockgoalpos = 0;
 }
 
-_id_46BF() {
-  if(isDefined(self._id_9829)) {
-    return self._id_9829;
+gettargetentpos() {
+  if(isDefined(self.targetentpos)) {
+    return self.targetentpos;
   }
 
   var_0 = _getEnt(self.target, "targetname");
@@ -181,32 +181,32 @@ _id_46BF() {
     return undefined;
   }
 
-  self._id_9829 = var_0.origin;
+  self.targetentpos = var_0.origin;
   var_0 delete();
-  return self._id_9829;
+  return self.targetentpos;
 }
 
-_id_52AE() {
-  level._id_31FA = [];
-  level._id_31FA["hjk_tree_hop"] = "traverse_jump_over_24";
-  level._id_31FA["jump_across_72"] = "traverse_jump_over_24";
-  level._id_31FA["wall_hop"] = "traverse_jump_over_36";
-  level._id_31FA["window_2"] = "traverse_jump_over_36";
-  level._id_31FA["wall_over_40"] = "traverse_jump_over_36";
-  level._id_31FA["wall_over"] = "traverse_jump_over_36";
-  level._id_31FA["window_divethrough_36"] = "traverse_jump_over_36";
-  level._id_31FA["window_over_40"] = "traverse_jump_over_36";
-  level._id_31FA["window_over_quick"] = "traverse_jump_over_36";
-  level._id_31FA["jump_up_80"] = "traverse_jump_up_70";
-  level._id_31FA["jump_standing_80"] = "traverse_jump_up_70";
-  level._id_31FA["jump_down_80"] = "traverse_jump_down_70";
-  level._id_31FA["jumpdown_96"] = "traverse_jump_down_70";
-  level._id_31FA["jump_up_40"] = "traverse_jump_up_40";
-  level._id_31FA["jump_down_40"] = "traverse_jump_down_40";
-  level._id_31FA["step_up"] = "traverse_jump_up_24";
-  level._id_31FA["step_up_24"] = "traverse_jump_up_24";
-  level._id_31FA["step_down"] = "traverse_jump_down_24";
-  level._id_31FA["jump_down"] = "traverse_jump_down_24";
-  level._id_31FA["jump_across"] = "traverse_jump_over_36";
-  level._id_31FA["jump_across_100"] = "traverse_jump_over_36";
+initdogtraverseanims() {
+  level.dogtraverseanims = [];
+  level.dogtraverseanims["hjk_tree_hop"] = "traverse_jump_over_24";
+  level.dogtraverseanims["jump_across_72"] = "traverse_jump_over_24";
+  level.dogtraverseanims["wall_hop"] = "traverse_jump_over_36";
+  level.dogtraverseanims["window_2"] = "traverse_jump_over_36";
+  level.dogtraverseanims["wall_over_40"] = "traverse_jump_over_36";
+  level.dogtraverseanims["wall_over"] = "traverse_jump_over_36";
+  level.dogtraverseanims["window_divethrough_36"] = "traverse_jump_over_36";
+  level.dogtraverseanims["window_over_40"] = "traverse_jump_over_36";
+  level.dogtraverseanims["window_over_quick"] = "traverse_jump_over_36";
+  level.dogtraverseanims["jump_up_80"] = "traverse_jump_up_70";
+  level.dogtraverseanims["jump_standing_80"] = "traverse_jump_up_70";
+  level.dogtraverseanims["jump_down_80"] = "traverse_jump_down_70";
+  level.dogtraverseanims["jumpdown_96"] = "traverse_jump_down_70";
+  level.dogtraverseanims["jump_up_40"] = "traverse_jump_up_40";
+  level.dogtraverseanims["jump_down_40"] = "traverse_jump_down_40";
+  level.dogtraverseanims["step_up"] = "traverse_jump_up_24";
+  level.dogtraverseanims["step_up_24"] = "traverse_jump_up_24";
+  level.dogtraverseanims["step_down"] = "traverse_jump_down_24";
+  level.dogtraverseanims["jump_down"] = "traverse_jump_down_24";
+  level.dogtraverseanims["jump_across"] = "traverse_jump_over_36";
+  level.dogtraverseanims["jump_across_100"] = "traverse_jump_over_36";
 }

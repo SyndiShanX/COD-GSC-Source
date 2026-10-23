@@ -3,7 +3,7 @@
  * Script: scripts\maps\mp\agents\humanoid\_humanoid_util.gsc
 **************************************************************/
 
-_id_1F51(var_0, var_1, var_2) {
+canhumanoidmovepointtopoint(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = 6;
   }
@@ -20,76 +20,76 @@ _id_1F51(var_0, var_1, var_2) {
   return _capsuletracepassed(var_4, self.radius, self._id_00BD - var_2, self, var_6, 0, 0, var_5);
 }
 
-_id_45C6() {
+getnummeleesectors() {
   return 8;
 }
 
-_id_457C() {
-  return 360.0 / _id_45C6();
+getmeleeanglestep() {
+  return 360.0 / getnummeleesectors();
 }
 
-_id_60F4(var_0, var_1, var_2) {
-  var_3 = var_1 * _id_457C() - 180.0;
+meleesectortargetposition(var_0, var_1, var_2) {
+  var_3 = var_1 * getmeleeanglestep() - 180.0;
   var_4 = var_0 + anglesToForward((0, var_3, 0)) * var_2;
   return var_4;
 }
 
-_id_4582(var_0) {
-  return self._id_60F3[var_0];
+getmeleesectors(var_0) {
+  return self.meleesectors[var_0];
 }
 
-_id_A275(var_0) {
-  if(!isDefined(self._id_60F3)) {
-    self._id_60F3 = [];
+validatemeleesectors(var_0) {
+  if(!isDefined(self.meleesectors)) {
+    self.meleesectors = [];
   }
 
-  if(!isDefined(self._id_60F3[var_0])) {
-    self._id_60F3[var_0] = [];
+  if(!isDefined(self.meleesectors[var_0])) {
+    self.meleesectors[var_0] = [];
 
-    for(var_1 = 0; var_1 < _id_45C6(); var_1++) {
-      self._id_60F3[var_0][var_1] = spawnStruct();
-      self._id_60F3[var_0][var_1]._id_9A18 = 0;
-      self._id_60F3[var_0][var_1]._id_230B = undefined;
-      self._id_60F3[var_0][var_1].origin = undefined;
-      self._id_60F3[var_0][var_1]._id_686A = var_1;
+    for(var_1 = 0; var_1 < getnummeleesectors(); var_1++) {
+      self.meleesectors[var_0][var_1] = spawnStruct();
+      self.meleesectors[var_0][var_1].timestamp = 0;
+      self.meleesectors[var_0][var_1].claimer = undefined;
+      self.meleesectors[var_0][var_1].origin = undefined;
+      self.meleesectors[var_0][var_1].num = var_1;
     }
   }
 }
 
-_id_45DC(var_0) {
+getoriginformeleesectors(var_0) {
   var_1 = var_0.origin;
 
-  if(isDefined(var_0._id_4883)) {
-    var_1 = var_0._id_4883;
+  if(isDefined(var_0.groundpos)) {
+    var_1 = var_0.groundpos;
 
-    if(isDefined(self._id_3043) && var_0 == self._id_3043 && _id_4B59()) {
-      var_2 = _id_459E();
+    if(isDefined(self.distractiondrone) && var_0 == self.distractiondrone && hascalculatednearestnodetounreachabledrone()) {
+      var_2 = getnearestnodetounreachabledrone();
 
       if(isDefined(var_2)) {
         var_1 = var_2.origin;
       }
     }
   } else if(isPlayer(var_0) && (var_0 isjumping() || var_0 ishighjumping())) {
-    if(!isDefined(var_0._id_73F1)) {
-      var_0._id_73F1 = 0;
+    if(!isDefined(var_0.playergroundpostime)) {
+      var_0.playergroundpostime = 0;
     }
 
-    if(gettime() > var_0._id_73F1) {
-      var_0._id_73F0 = _getgroundposition(var_0.origin, 15);
-      var_0._id_73F1 = gettime();
+    if(gettime() > var_0.playergroundpostime) {
+      var_0.playergroundpos = _getgroundposition(var_0.origin, 15);
+      var_0.playergroundpostime = gettime();
     }
 
-    if(isDefined(var_0._id_73F0)) {
-      var_1 = var_0._id_73F0;
+    if(isDefined(var_0.playergroundpos)) {
+      var_1 = var_0.playergroundpos;
     }
   }
 
   return var_1;
 }
 
-_id_4BA3(var_0, var_1) {
-  for(var_2 = 0; var_2 < _id_45C6(); var_2++) {
-    var_3 = var_0 _id_4582(var_1);
+hasvalidmeleesectorsfortype(var_0, var_1) {
+  for(var_2 = 0; var_2 < getnummeleesectors(); var_2++) {
+    var_3 = var_0 getmeleesectors(var_1);
     var_4 = var_3[var_2];
 
     if(isDefined(var_4.origin)) {
@@ -100,14 +100,14 @@ _id_4BA3(var_0, var_1) {
   return 0;
 }
 
-_id_1E52() {
+calculatenearestnodetounreachabledrone() {
   var_0 = self getnearestnode();
 
   if(isDefined(var_0)) {
     var_1 = _nodegetsplitgroup(var_0);
 
-    if(!isDefined(self._id_3043._id_663C)) {
-      self._id_3043._id_663C = [];
+    if(!isDefined(self.distractiondrone.nearestnodeforgroup)) {
+      self.distractiondrone.nearestnodeforgroup = [];
     }
 
     var_2 = 0;
@@ -117,10 +117,10 @@ _id_1E52() {
     for(var_5 = undefined; !isDefined(var_4) && var_3 <= 1500; var_3 = var_3 + 500) {
       var_6 = [];
 
-      if(isDefined(level._id_663D)) {
-        var_6 = _getnodesinradiussorted(self._id_3043._id_4883, var_3, var_2, level._id_663D);
+      if(isDefined(level.nearestnodetounreachabledronesearchheight)) {
+        var_6 = _getnodesinradiussorted(self.distractiondrone.groundpos, var_3, var_2, level.nearestnodetounreachabledronesearchheight);
       } else {
-        var_6 = _getnodesinradiussorted(self._id_3043._id_4883, var_3, var_2);
+        var_6 = _getnodesinradiussorted(self.distractiondrone.groundpos, var_3, var_2);
       }
 
       var_7 = undefined;
@@ -139,20 +139,20 @@ _id_1E52() {
     }
 
     if(isDefined(var_4)) {
-      self._id_3043._id_663C[var_1] = var_4;
+      self.distractiondrone.nearestnodeforgroup[var_1] = var_4;
     } else if(isDefined(var_5)) {
-      self._id_3043._id_663C[var_1] = var_5;
+      self.distractiondrone.nearestnodeforgroup[var_1] = var_5;
     } else {
-      self._id_3043._id_663C[var_1] = 0;
+      self.distractiondrone.nearestnodeforgroup[var_1] = 0;
     }
   }
 }
 
-_id_4B59() {
+hascalculatednearestnodetounreachabledrone() {
   var_0 = self getnearestnode();
 
-  if(isDefined(var_0) && isDefined(self._id_3043._id_663C)) {
-    var_1 = self._id_3043._id_663C[_nodegetsplitgroup(var_0)];
+  if(isDefined(var_0) && isDefined(self.distractiondrone.nearestnodeforgroup)) {
+    var_1 = self.distractiondrone.nearestnodeforgroup[_nodegetsplitgroup(var_0)];
 
     if(isDefined(var_1)) {
       return 1;
@@ -162,9 +162,9 @@ _id_4B59() {
   return 0;
 }
 
-_id_459E() {
+getnearestnodetounreachabledrone() {
   var_0 = self getnearestnode();
-  var_1 = self._id_3043._id_663C[_nodegetsplitgroup(var_0)];
+  var_1 = self.distractiondrone.nearestnodeforgroup[_nodegetsplitgroup(var_0)];
 
   if(!_isnumber(var_1)) {
     return var_1;
@@ -173,9 +173,9 @@ _id_459E() {
   }
 }
 
-_id_8BAE() {
-  if(_id_4B59()) {
-    var_0 = _id_459E();
+shouldtargetdistractiondrone() {
+  if(hascalculatednearestnodetounreachabledrone()) {
+    var_0 = getnearestnodetounreachabledrone();
 
     if(!isDefined(var_0)) {
       return 0;
@@ -185,9 +185,9 @@ _id_8BAE() {
   return 1;
 }
 
-_id_56DE(var_0) {
-  if(isDefined(self._id_3043) && var_0 == self._id_3043) {
-    if(self._id_3044 > 5) {
+isentunreachabledrone(var_0) {
+  if(isDefined(self.distractiondrone) && var_0 == self.distractiondrone) {
+    if(self.distractiondronebadpathcount > 5) {
       return 1;
     }
   }
@@ -195,9 +195,9 @@ _id_56DE(var_0) {
   return 0;
 }
 
-_id_4583(var_0, var_1) {
-  var_0 _id_A275(self._id_60F5);
-  var_2 = var_0 _id_4582(self._id_60F5);
+getmeleetargetpoint(var_0, var_1) {
+  var_0 validatemeleesectors(self.meleesectortype);
+  var_2 = var_0 getmeleesectors(self.meleesectortype);
   var_4 = var_1;
   var_5 = self.origin - var_4;
   var_6 = _lengthsquared(var_5);
@@ -205,22 +205,22 @@ _id_4583(var_0, var_1) {
   if(var_6 < 256) {
     var_7 = -1;
 
-    for(var_8 = 0; var_8 < _id_45C6(); var_8++) {
+    for(var_8 = 0; var_8 < getnummeleesectors(); var_8++) {
       var_9 = var_2[var_8];
 
-      if(isDefined(var_9._id_230B) && var_9._id_230B == self) {
-        var_7 = var_9._id_686A;
+      if(isDefined(var_9.claimer) && var_9.claimer == self) {
+        var_7 = var_9.num;
       }
     }
 
     if(var_7 < 0) {
-      var_7 = self getentitynumber() % _id_45C6();
+      var_7 = self getentitynumber() % getnummeleesectors();
     }
 
     var_10 = var_7;
   } else {
     var_11 = _angleclamp180(_vectortoyaw(var_5)) + 180.0;
-    var_10 = var_11 / _id_457C();
+    var_10 = var_11 / getmeleeanglestep();
     var_7 = int(var_10 + 0.5);
   }
 
@@ -235,7 +235,7 @@ _id_4583(var_0, var_1) {
     var_15 = var_15 * -1;
   }
 
-  var_16 = _id_45C6();
+  var_16 = getnummeleesectors();
 
   for(var_17 = 0; var_17 < var_16 / 2 + 1; var_17++) {
     for(var_18 = var_13; var_18 != var_14; var_18 = var_18 + var_15) {
@@ -249,36 +249,36 @@ _id_4583(var_0, var_1) {
 
       var_9 = var_2[var_19];
 
-      if(!isDefined(var_12) && gettime() - var_9._id_9A18 >= self._id_60F6) {
-        if(isDefined(level._id_9E16) && isDefined(level._id_9E16[self._id_0A4B])) {
-          [[level._id_9E16[self._id_0A4B]]](var_9, var_4, self._id_11AB, self.radius);
+      if(!isDefined(var_12) && gettime() - var_9.timestamp >= self.meleesectorupdatetime) {
+        if(isDefined(level.trycalculatesectororigin) && isDefined(level.trycalculatesectororigin[self._id_0A4B])) {
+          [[level.trycalculatesectororigin[self._id_0A4B]]](var_9, var_4, self.attackoffset, self.radius);
         } else {
-          _id_9E16(var_9, var_4, self._id_11AB, self.radius);
+          trycalculatesectororigin(var_9, var_4, self.attackoffset, self.radius);
         }
       }
 
       if(!isDefined(var_12) && isDefined(var_9.origin)) {
         var_20 = 0;
 
-        if(isDefined(var_9._id_230B) && var_9._id_230B != self) {
-          var_21 = vectorNormalize(var_4 - var_9._id_230B.origin) * self.radius * 2;
-          var_20 = distancesquared(var_9._id_230B.origin + var_21, var_4);
+        if(isDefined(var_9.claimer) && var_9.claimer != self) {
+          var_21 = vectorNormalize(var_4 - var_9.claimer.origin) * self.radius * 2;
+          var_20 = distancesquared(var_9.claimer.origin + var_21, var_4);
         }
 
-        if(!isalive(var_9._id_230B) || !isDefined(var_9._id_230B._id_28D2) || var_9._id_230B._id_28D2 != var_0 || var_9._id_230B == self || var_6 < var_20) {
-          if(isDefined(var_9._id_230B) && var_9._id_230B != self) {
-            var_9._id_230B notify("lostSectorClaim");
-            var_9._id_230B.botsetdifficulty = undefined;
+        if(!isalive(var_9.claimer) || !isDefined(var_9.claimer.curmeleetarget) || var_9.claimer.curmeleetarget != var_0 || var_9.claimer == self || var_6 < var_20) {
+          if(isDefined(var_9.claimer) && var_9.claimer != self) {
+            var_9.claimer notify("lostSectorClaim");
+            var_9.claimer.botsetdifficulty = undefined;
           }
 
           if(isDefined(self.botsetdifficulty) && self.botsetdifficulty != var_9) {
-            self.botsetdifficulty._id_230B = undefined;
+            self.botsetdifficulty.claimer = undefined;
           }
 
           self.botsetdifficulty = var_9;
-          var_9._id_230B = self;
+          var_9.claimer = self;
           var_12 = var_9.origin;
-          thread _id_63DD(var_9);
+          thread monitorsectorclaim(var_9);
         }
       }
 
@@ -291,24 +291,24 @@ _id_4583(var_0, var_1) {
   return var_12;
 }
 
-_id_63DD(var_0) {
+monitorsectorclaim(var_0) {
   level endon("game_ended");
   self notify("monitorSectorClaim");
   self endon("monitorSectorClaim");
   self endon("lostSectorClaim");
-  common_scripts\utility::_id_A70A("death", "disconnect");
-  var_0._id_230B = undefined;
+  common_scripts\utility::waittill_any("death", "disconnect");
+  var_0.claimer = undefined;
 }
 
-_id_9E16(var_0, var_1, var_2, var_3) {
-  if(gettime() - var_0._id_9A18 >= 50) {
-    var_0.origin = _id_60F4(var_1, var_0._id_686A, var_2);
-    var_0.origin = _id_34AB(var_0.origin, var_3, self._id_00BD - 5);
-    var_0._id_9A18 = gettime();
+trycalculatesectororigin(var_0, var_1, var_2, var_3) {
+  if(gettime() - var_0.timestamp >= 50) {
+    var_0.origin = meleesectortargetposition(var_1, var_0.num, var_2);
+    var_0.origin = dropsectorpostoground(var_0.origin, var_3, self._id_00BD - 5);
+    var_0.timestamp = gettime();
   }
 }
 
-_id_34AB(var_0, var_1, var_2, var_3) {
+dropsectorpostoground(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {
     var_3 = 18;
   }
@@ -328,147 +328,147 @@ _id_34AB(var_0, var_1, var_2, var_3) {
   return var_6;
 }
 
-_id_56BC() {
-  return isDefined(self._id_2FDA) && self._id_2FDA;
+iscrawling() {
+  return isDefined(self.dismember_crawl) && self.dismember_crawl;
 }
 
-_id_4580() {
-  if(!isDefined(self._id_5F4C) || self._id_5F4C) {
-    return self._id_60EF;
+getmeleeradius() {
+  if(!isDefined(self.lungemeleeenabled) || self.lungemeleeenabled) {
+    return self.meleeradius;
   } else {
-    return self._id_60F0;
+    return self.meleeradiusbase;
   }
 }
 
-_id_4581() {
-  if(!isDefined(self._id_5F4C) || self._id_5F4C) {
-    return self._id_60F2;
+getmeleeradiussq() {
+  if(!isDefined(self.lungemeleeenabled) || self.lungemeleeenabled) {
+    return self.meleeradiussq;
   } else {
-    return self._id_60F1;
+    return self.meleeradiusbasesq;
   }
 }
 
-_id_5F4E(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  self._id_5F46 = var_0 * 1000.0;
-  self._id_5F47 = var_4;
-  self._id_5F45 = var_3;
-  self._id_5F44 = isDefined(var_5) && var_5;
-  self._id_5F49 = var_6;
-  self._id_5F4F = var_2;
-  self._id_5F50 = _squared(self._id_5F4F);
-  _id_0547::_id_86C7(var_1);
+lungemeleeupdate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  self.lungedebouncems = var_0 * 1000.0;
+  self.lungefx = var_4;
+  self.lungeanimstate = var_3;
+  self.lungeanimratescale = isDefined(var_5) && var_5;
+  self.lungelerprange = var_6;
+  self.lungeminrange = var_2;
+  self.lungeminrangesq = _squared(self.lungeminrange);
+  _id_0547::setmeleeradius(var_1);
 }
 
-_id_5F4B() {
-  if(isDefined(self._id_2F7D) && self._id_2F7D > 0) {
-    self._id_2F7D--;
+lungemeleeenable() {
+  if(isDefined(self.disabledlungerefcount) && self.disabledlungerefcount > 0) {
+    self.disabledlungerefcount--;
 
-    if(self._id_2F7D > 0) {
+    if(self.disabledlungerefcount > 0) {
       return;
     }
   }
 
-  self._id_5F4C = 1;
+  self.lungemeleeenabled = 1;
 }
 
-_id_5F4A() {
-  if(!isDefined(self._id_2F7D)) {
-    self._id_2F7D = 0;
+lungemeleedisable() {
+  if(!isDefined(self.disabledlungerefcount)) {
+    self.disabledlungerefcount = 0;
   }
 
-  self._id_2F7D++;
-  self._id_5F4C = 0;
+  self.disabledlungerefcount++;
+  self.lungemeleeenabled = 0;
 }
 
-_id_3141(var_0, var_1, var_2, var_3) {
-  self._id_313B = var_0 * 1000.0;
-  self._id_313A = var_1;
-  self._id_3139 = var_2;
-  self._id_3137 = ["back", "right", "left"];
-  self._id_3138 = [];
+dodgeupdate(var_0, var_1, var_2, var_3) {
+  self.dodgedebouncems = var_0 * 1000.0;
+  self.dodgechance = var_1;
+  self.dodgeanimstate = var_2;
+  self.dodge_dirs = ["back", "right", "left"];
+  self.dodge_fx = [];
 
-  foreach(var_6, var_5 in self._id_3137) {
-    self._id_3138[var_6] = level._effect[var_3 + var_5];
+  foreach(var_6, var_5 in self.dodge_dirs) {
+    self.dodge_fx[var_6] = level._effect[var_3 + var_5];
   }
 }
 
-_id_313D() {
-  if(isDefined(self._id_2F77) && self._id_2F77 > 0) {
-    self._id_2F77--;
+dodgeenable() {
+  if(isDefined(self.disableddodgerefcount) && self.disableddodgerefcount > 0) {
+    self.disableddodgerefcount--;
 
-    if(self._id_2F77 > 0) {
+    if(self.disableddodgerefcount > 0) {
       return;
     }
   }
 
-  self._id_313E = 1;
+  self.dodgeenabled = 1;
 }
 
-_id_313C() {
-  if(!isDefined(self._id_2F77)) {
-    self._id_2F77 = 0;
+dodgedisable() {
+  if(!isDefined(self.disableddodgerefcount)) {
+    self.disableddodgerefcount = 0;
   }
 
-  self._id_2F77++;
-  self._id_313E = 0;
+  self.disableddodgerefcount++;
+  self.dodgeenabled = 0;
 }
 
-_id_5C5B(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  self._id_5C50 = var_0 * 1000.0;
-  self._id_5C4F = var_1 * 1000.0;
-  self._id_5C4E = var_2;
-  self._id_5C57 = var_3;
-  self._id_5C58 = _squared(self._id_5C57);
-  self._id_5C59 = var_4;
-  self._id_5C5A = _squared(self._id_5C59);
-  self._id_5C54 = var_6;
-  self._id_5C4D = var_5;
-  self._id_5C55 = 0;
-  self._id_5C56 = 0;
+leapupdate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  self.leapdebouncems = var_0 * 1000.0;
+  self.leapchecktimems = var_1 * 1000.0;
+  self.leapchance = var_2;
+  self.leapmaxrange = var_3;
+  self.leapmaxrangesq = _squared(self.leapmaxrange);
+  self.leapminrange = var_4;
+  self.leapminrangesq = _squared(self.leapminrange);
+  self.leapfx = var_6;
+  self.leapanimstate = var_5;
+  self.leaplastcheck = 0;
+  self.leaplastperform = 0;
 }
 
-_id_5C52() {
-  if(isDefined(self._id_2F7C) && self._id_2F7C > 0) {
-    self._id_2F7C--;
+leapenable() {
+  if(isDefined(self.disabledleaprefcount) && self.disabledleaprefcount > 0) {
+    self.disabledleaprefcount--;
 
-    if(self._id_2F7C > 0) {
+    if(self.disabledleaprefcount > 0) {
       return;
     }
   }
 
-  self._id_5C53 = 1;
+  self.leapenabled = 1;
 }
 
-_id_5C51() {
-  if(!isDefined(self._id_2F7C)) {
-    self._id_2F7C = 0;
+leapdisable() {
+  if(!isDefined(self.disabledleaprefcount)) {
+    self.disabledleaprefcount = 0;
   }
 
-  self._id_2F7C++;
-  self._id_5C53 = 0;
+  self.disabledleaprefcount++;
+  self.leapenabled = 0;
 }
 
-_id_20C3(var_0, var_1) {
+changeanimclass(var_0, var_1) {
   self endon("death");
   self scragentsetscripted(1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "ChangeAnimClass");
-  self._id_5381 = 1;
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "ChangeAnimClass");
+  self.inpain = 1;
   self scragentsetorientmode("face angle abs", (0, self.angles[1], 0));
   self scragentsetanimmode("anim deltas");
   self scragentsetanimscale(1, 1);
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_1);
   var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_2);
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FD(var_2, var_3, "change_anim_class");
+  maps\mp\agents\_scripted_agent_anim_util::playanimnuntilnotetrack_safe(var_2, var_3, "change_anim_class");
   self setanimclass(var_0);
   _id_A18C();
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "ChangeAnimClass");
-  self._id_5381 = 0;
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "ChangeAnimClass");
+  self.inpain = 0;
   self scragentsetscripted(0);
 }
 
 _id_20C4(var_0) {
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "ChangeAnimClass");
-  self._id_5381 = 0;
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "ChangeAnimClass");
+  self.inpain = 0;
   self scragentsetscripted(0);
   self setanimclass(var_0);
   _id_A18C();
@@ -483,20 +483,20 @@ _id_A18C() {
       case "zombie_crawl_animclass":
       case "zombie_missing_left_leg_animclass":
       case "zombie_missing_right_leg_animclass":
-        self _meth_85A1("zombie_crawler");
+        self set_target_tracking_disabled("zombie_crawler");
         break;
       default:
-        self _meth_85A1("zombie");
+        self set_target_tracking_disabled("zombie");
     }
   } else {
     switch (self _meth_85A5()) {
       case "mp_zombie_crawl_animclass":
       case "mp_zombie_missing_left_leg_animclass":
       case "mp_zombie_missing_right_leg_animclass":
-        self _meth_85A1("zombie_crawler");
+        self set_target_tracking_disabled("zombie_crawler");
         break;
       default:
-        self _meth_85A1("zombie");
+        self set_target_tracking_disabled("zombie");
     }
   }
 }
@@ -530,10 +530,10 @@ getcurrentoffhand(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
 
   if(isDefined(var_12) && var_12 > 0) {
     self scragentsetscripted(1);
-    maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "ScriptedAnimation");
+    maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "ScriptedAnimation");
 
     if(var_4) {
-      self._id_53D9 = 1;
+      self.inspawnanim = 1;
     }
 
     self scragentsetanimmode("anim deltas");
@@ -555,7 +555,7 @@ getcurrentoffhand(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
     }
 
     if(!var_6) {
-      _id_5CA6(var_2, var_3);
+      lerptoendonground(var_2, var_3);
     }
 
     self.origin = var_0;
@@ -571,13 +571,13 @@ getcurrentoffhand(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
         var_15 = var_10["end_notetrack"];
       }
 
-      maps\mp\agents\_scripted_agent_anim_util::_id_71FD(var_2, var_3, "scripted_anim", var_15, var_5, var_14);
+      maps\mp\agents\_scripted_agent_anim_util::playanimnuntilnotetrack_safe(var_2, var_3, "scripted_anim", var_15, var_5, var_14);
     }
 
-    maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "ScriptedAnimation");
+    maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "ScriptedAnimation");
 
     if(var_4) {
-      self._id_53D9 = undefined;
+      self.inspawnanim = undefined;
       _id_0547::disableoffhandsecondaryweapons();
     }
 
@@ -587,21 +587,21 @@ getcurrentoffhand(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
 
 _id_5429() {
   self notify("ScriptedAnimationInterrupt");
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "ScriptedAnimationInterrupt");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "ScriptedAnimationInterrupt");
   self scragentsetscripted(0);
 }
 
-_id_5CA6(var_0, var_1) {
+lerptoendonground(var_0, var_1) {
   var_2 = 2;
   var_3 = self getanimentry(var_0, var_1);
-  var_4 = _id_4552(var_3);
-  var_5 = _id_462E(var_3, var_4);
-  var_6 = _id_4718(var_3);
+  var_4 = getlerptime(var_3);
+  var_5 = getposinspaceatanimtime(var_3, var_4);
+  var_6 = getverticaldeltatogroundatanimend(var_3);
   var_5 = var_5 + (0, 0, var_6 + var_2);
-  thread _id_6F54(var_5, var_4);
+  thread performlerp(var_5, var_4);
 }
 
-_id_4718(var_0) {
+getverticaldeltatogroundatanimend(var_0) {
   var_1 = 50;
   var_2 = 32;
   var_3 = 72;
@@ -614,7 +614,7 @@ _id_4718(var_0) {
   return var_8[2];
 }
 
-_id_462E(var_0, var_1) {
+getposinspaceatanimtime(var_0, var_1) {
   var_2 = _getanimlength(var_0);
   var_3 = var_1 / var_2;
   var_4 = _getmovedelta(var_0, 0, var_3);
@@ -622,13 +622,13 @@ _id_462E(var_0, var_1) {
   return self.origin + var_5;
 }
 
-_id_4552(var_0) {
+getlerptime(var_0) {
   var_1 = 0.2;
   var_2 = _getanimlength(var_0);
   return _min(var_1, var_2);
 }
 
-_id_6F54(var_0, var_1) {
+performlerp(var_0, var_1) {
   self endon("death");
   self endon("killanimscript");
   level endon("game_ended");
@@ -637,7 +637,7 @@ _id_6F54(var_0, var_1) {
   self scragentsetanimmode("anim deltas");
 }
 
-_id_45F8(var_0, var_1) {
+getpainangleindexvariable(var_0, var_1) {
   var_2 = 0;
 
   if(var_1 > 1) {
@@ -654,7 +654,7 @@ _id_45F8(var_0, var_1) {
   return var_2;
 }
 
-_id_56DD(var_0) {
+isentstandingonme(var_0) {
   var_1 = self.origin[2] + self._id_00BD;
 
   if(var_0.origin[2] < var_1) {
@@ -691,12 +691,12 @@ _id_56DD(var_0) {
   return 1;
 }
 
-_id_867E(var_0) {
+setfavoriteenemy(var_0) {
   self._id_0094 = var_0;
   self agentsetfavoriteenemy(var_0);
 }
 
-_id_29CB(var_0, var_1) {
+damagehitangle(var_0, var_1) {
   var_2 = 0;
 
   if(isDefined(var_0)) {
@@ -712,78 +712,78 @@ _id_29CB(var_0, var_1) {
   return var_2;
 }
 
-_id_362B() {
-  if(isDefined(self._id_2F79) && self._id_2F79 > 0) {
-    self._id_2F79--;
+enable_humanoid_exo_abilities() {
+  if(isDefined(self.disabledhumanoidexoabilities) && self.disabledhumanoidexoabilities > 0) {
+    self.disabledhumanoidexoabilities--;
 
-    if(self._id_2F79 > 0) {
+    if(self.disabledhumanoidexoabilities > 0) {
       return;
     }
   }
 
-  self._id_4B6F = 1;
-  _id_362D();
-  _id_8859();
-  _id_362C();
+  self.hashumanoidexoabilities = 1;
+  enable_humanoid_exo_traverse();
+  setup_humanoid_exo_combat();
+  enable_humanoid_exo_combat();
 }
 
-_id_2F43() {
-  if(!isDefined(self._id_2F79)) {
-    self._id_2F79 = 0;
+disable_humanoid_exo_abilities() {
+  if(!isDefined(self.disabledhumanoidexoabilities)) {
+    self.disabledhumanoidexoabilities = 0;
   }
 
-  self._id_2F79++;
-  _id_2F44();
-  _id_2F45();
+  self.disabledhumanoidexoabilities++;
+  disable_humanoid_exo_combat();
+  disable_humanoid_exo_traverse();
 }
 
 _id_4B31() {
-  return common_scripts\utility::_id_562E(self._id_4B6F);
+  return common_scripts\utility::_id_562E(self.hashumanoidexoabilities);
 }
 
-_id_362D() {
+enable_humanoid_exo_traverse() {
   self scragentallowboost(1);
 }
 
-_id_2F45() {
+disable_humanoid_exo_traverse() {
   self scragentallowboost(0);
 }
 
-_id_8859() {
-  var_0 = clamp(level._id_A980 / 20, 0.0, 1.0);
+setup_humanoid_exo_combat() {
+  var_0 = clamp(level.wavecounter / 20, 0.0, 1.0);
   var_1 = _func_2CA(0.35, 0.55, var_0);
   var_2 = _func_2CA(0.06, 0.12, var_0);
-  _id_5F4E(5.0, self._id_60F0 * 2, self._id_60F0 * 1.5, "attack_lunge_boost", level._effect["boost_lunge"]);
-  _id_3141(5.0, var_1, "dodge_boost", "boost_dodge_");
-  _id_5C5B(10.0, 2.0, var_2, 550, 350, "leap_boost", level._effect["boost_jump"]);
+  lungemeleeupdate(5.0, self.meleeradiusbase * 2, self.meleeradiusbase * 1.5, "attack_lunge_boost", level._effect["boost_lunge"]);
+  dodgeupdate(5.0, var_1, "dodge_boost", "boost_dodge_");
+  leapupdate(10.0, 2.0, var_2, 550, 350, "leap_boost", level._effect["boost_jump"]);
 }
 
-_id_362C() {
-  _id_5F4B();
-  _id_313D();
-  _id_5C52();
+enable_humanoid_exo_combat() {
+  lungemeleeenable();
+  dodgeenable();
+  leapenable();
 }
 
-_id_2F44() {
-  _id_5F4A();
-  _id_313C();
-  _id_5C51();
+disable_humanoid_exo_combat() {
+  lungemeleedisable();
+  dodgedisable();
+  leapdisable();
 }
 
-_id_70C9(var_0) {
-  if(!isDefined(self._id_1919)) {
+play_boost_fx(var_0) {
+  if(!isDefined(self.boostfxtag)) {
     return;
   }
-  if(self._id_1919 != "no_boost_fx") {
-    _playFXOnTag(var_0, self, self._id_1919);
+  if(self.boostfxtag != "no_boost_fx") {
+    _playFXOnTag(var_0, self, self.boostfxtag);
   }
 }
 
-_id_3B85(var_0) {
+find_valid_pathnodes_for_random_pathing(var_0) {
   var_1 = [];
 
   foreach(var_3 in level.players) {
-    if(_id_0547::_id_577E(var_3)) {
+    if(_id_0547::isplayerinlaststand(var_3)) {
       var_1[var_1.size] = var_3;
     }
   }
@@ -791,7 +791,7 @@ _id_3B85(var_0) {
   var_5 = [];
 
   foreach(var_7 in var_0) {
-    if(_id_0547::_id_6719(var_7)) {
+    if(_id_0547::nodeisinspawncloset(var_7)) {
       continue;
     }
     var_8 = 0;
@@ -812,37 +812,37 @@ _id_3B85(var_0) {
   return var_5;
 }
 
-_id_AA51(var_0) {
+withinmeleeradius(var_0) {
   if(!isDefined(var_0)) {
-    var_0 = self._id_28D2;
+    var_0 = self.curmeleetarget;
   }
 
-  if(_id_4580() == self._id_60F0) {
-    return _id_AA52(var_0);
+  if(getmeleeradius() == self.meleeradiusbase) {
+    return withinmeleeradiusbase(var_0);
   }
 
-  var_1 = distancesquared(self.origin, var_0.origin) <= _id_4581();
+  var_1 = distancesquared(self.origin, var_0.origin) <= getmeleeradiussq();
   return var_1;
 }
 
-_id_AA52(var_0) {
+withinmeleeradiusbase(var_0) {
   if(!isDefined(var_0)) {
-    var_0 = self._id_28D2;
+    var_0 = self.curmeleetarget;
   }
 
-  var_1 = distancesquared(self.origin, var_0.origin) <= self._id_60F1;
+  var_1 = distancesquared(self.origin, var_0.origin) <= self.meleeradiusbasesq;
 
   if(!var_1 && (isPlayer(var_0) || _isagent(var_0))) {
     var_2 = var_0 getgroundentity();
 
     if(isDefined(var_2) && isDefined(var_2.targetname) && var_2.targetname == "care_package") {
-      var_1 = distancesquared(self.origin, var_0.origin) <= self._id_60F1 * 4;
+      var_1 = distancesquared(self.origin, var_0.origin) <= self.meleeradiusbasesq * 4;
     }
   }
 
-  if(!var_1 && isPlayer(var_0) && common_scripts\utility::_id_562E(var_0._id_571F)) {
+  if(!var_1 && isPlayer(var_0) && common_scripts\utility::_id_562E(var_0.isinexploitspot)) {
     if(length(self getvelocity()) < 5) {
-      var_1 = distancesquared(self.origin, var_0.origin) <= self._id_60F1 * 4;
+      var_1 = distancesquared(self.origin, var_0.origin) <= self.meleeradiusbasesq * 4;
     }
   }
 

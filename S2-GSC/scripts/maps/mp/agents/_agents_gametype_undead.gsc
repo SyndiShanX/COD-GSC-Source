@@ -4,9 +4,9 @@
 **************************************************************/
 
 main() {
-  _id_87A7();
+  setup_callbacks();
 }
 
-_id_87A7() {
-  level._id_0A41["player"]["think"] = maps\mp\bots\_bots_gametype_hp::_id_1A1A;
+setup_callbacks() {
+  level._id_0A41["player"]["think"] = maps\mp\bots\_bots_gametype_hp::bot_hp_think;
 }

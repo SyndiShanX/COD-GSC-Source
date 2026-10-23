@@ -4,7 +4,7 @@
 *************************************************************/
 
 _id_8667(var_0) {
-  if(isDefined(level._id_585D) && level._id_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
   if(!isDefined(var_0) || var_0 == 5) {
@@ -49,7 +49,7 @@ _id_8667(var_0) {
       maps\mp\_utility::giveperk("specialty_stun_resistance");
       maps\mp\_utility::giveperk("specialty_resistshellshock");
       maps\mp\_utility::giveperk("specialty_immunesmoke");
-      self._id_94BE = 0.1;
+      self.stunscaler = 0.1;
       break;
     case "specialty_class_mountain_master":
       maps\mp\_utility::giveperk("specialty_silentmovement");
@@ -105,7 +105,7 @@ _id_8667(var_0) {
 }
 
 setdivisiontrainingbasedonprogressionglobaloverhaulmtx4(var_0) {
-  if(isDefined(level._id_585D) && level._id_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
   if(!isDefined(var_0) || var_0 == 5) {
@@ -135,7 +135,7 @@ setdivisiontrainingbasedonprogressionglobaloverhaulmtx4(var_0) {
     case "specialty_class_airborne_expert":
       maps\mp\_utility::giveperk("specialty_sprintreload");
     case "specialty_class_airborne_enlisted":
-      if(getdvarint("isMLGMatch", 0) == 0 && !_func_3AF()) {
+      if(getdvarint("isMLGMatch", 0) == 0 && !xmodelalias/alias_ger_heads_scarf_for_muddy_cheap()) {
         maps\mp\_utility::giveperk("specialty_steadyaimpro");
         maps\mp\_utility::giveperk("specialty_sprintfire");
         maps\mp\_utility::giveperk("specialty_divefire");
@@ -143,11 +143,11 @@ setdivisiontrainingbasedonprogressionglobaloverhaulmtx4(var_0) {
 
       break;
     case "specialty_class_armored_grandmaster":
-      if(getdvarint("isMLGMatch", 0) == 0 && !_func_3AF()) {
+      if(getdvarint("isMLGMatch", 0) == 0 && !xmodelalias/alias_ger_heads_scarf_for_muddy_cheap()) {
         maps\mp\_utility::giveperk("specialty_sharp_focus");
       }
     case "specialty_class_armored_master":
-      if(getdvarint("isMLGMatch", 0) == 0 && !_func_3AF()) {
+      if(getdvarint("isMLGMatch", 0) == 0 && !xmodelalias/alias_ger_heads_scarf_for_muddy_cheap()) {
         maps\mp\_utility::giveperk("specialty_superbulletpenetration");
         maps\mp\_utility::giveperk("specialty_armorpiercing");
       }
@@ -155,7 +155,7 @@ setdivisiontrainingbasedonprogressionglobaloverhaulmtx4(var_0) {
       maps\mp\_utility::giveperk("specialty_stun_resistance");
       maps\mp\_utility::giveperk("specialty_resistshellshock");
       maps\mp\_utility::giveperk("specialty_immunesmoke");
-      self._id_94BE = 0.1;
+      self.stunscaler = 0.1;
     case "specialty_class_armored_enlisted":
       maps\mp\_utility::giveperk("specialty_explosiveearlywarning");
       maps\mp\_utility::giveperk("specialty_throwback");
@@ -187,8 +187,8 @@ setdivisiontrainingbasedonprogressionglobaloverhaulmtx4(var_0) {
       maps\mp\_utility::giveperk("specialty_plainsight");
       break;
     case "specialty_class_expeditionary_grandmaster":
-      if(getdvarint("isMLGMatch", 0) == 0 && !_func_3AF()) {
-        self._id_90DA = 6.0;
+      if(getdvarint("isMLGMatch", 0) == 0 && !xmodelalias/alias_ger_heads_scarf_for_muddy_cheap()) {
+        self.specialty_paint_time = 6.0;
         maps\mp\_utility::giveperk("specialty_paint");
       }
     case "specialty_class_expeditionary_master":
@@ -199,7 +199,7 @@ setdivisiontrainingbasedonprogressionglobaloverhaulmtx4(var_0) {
       maps\mp\_utility::giveperk("specialty_bulletresupply");
       maps\mp\_utility::giveperk("specialty_regenbullets");
 
-      if(getdvarint("isMLGMatch", 0) == 0 && !_func_3AF()) {
+      if(getdvarint("isMLGMatch", 0) == 0 && !xmodelalias/alias_ger_heads_scarf_for_muddy_cheap()) {
         maps\mp\_utility::giveperk("specialty_lethalresupply");
         maps\mp\_utility::giveperk("specialty_tacticalresupply");
         maps\mp\_utility::giveperk("specialty_regenequipment");

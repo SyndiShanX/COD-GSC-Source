@@ -15,57 +15,57 @@ init() {
     level thread[[level._id_0792]]();
   }
 
-  if(!isDefined(level._id_AB17)) {
-    level._id_AB17 = "mp/sound/soundlength_zm_mp.csv";
+  if(!isDefined(level.zmbsoundlengthpath)) {
+    level.zmbsoundlengthpath = "mp/sound/soundlength_zm_mp.csv";
   }
 
-  level._id_AB13 = 0;
+  level.zmbglobalpriorityvoonly = 0;
 }
 
 _id_AB19() {
-  level._id_A62B = _id_AB1B();
-  level._id_A62B _id_AB1A("player", "ability", "special_camo", "camouflage", undefined);
-  level._id_A62B _id_AB1A("player", "ability", "special_mad", "freefire", undefined);
-  level._id_A62B _id_AB1A("player", "ability", "special_taunt", "frontline", undefined);
-  level._id_A62B _id_AB1A("player", "ability", "special_burst", "shellshock", undefined);
-  level._id_A62B _id_AB1A("player", "mod_use", "mod_supplyammo", "supplyammomod", "thanks");
-  level._id_A62B _id_AB1A("player", "mod_use", "mod_headshot", "headshotmod", "mod_headshot_reply");
-  level._id_A62B _id_AB1A("player", "mod_use", "mod_headshot_reply", "headshot_reply", undefined);
-  level._id_A62B _id_AB1A("player", "mod_use", "mod_serratededge", "serreatededgemod", undefined);
-  level._id_A62B _id_AB1A("player", "mod_use", "mod_enhancedspeed", "enhancedspeedmod", undefined);
-  level._id_A62B _id_AB1A("player", "mod_use", "mod_covertexfiltration", "covertexfilration", "revived");
-  level._id_A62B _id_AB1A("player", "mod_use", "mod_saboteur", "saboteur", undefined);
-  level._id_A62B _id_AB1A("player", "mod_use", "mod_fieryburst", "fieryburstmod", undefined);
-  level._id_A62B _id_AB1A("player", "mod_use", "mod_exploitweakness", "exploitweaknessmod", undefined);
-  level._id_A62B _id_AB1A("player", "mod_use", "mod_supplyarmor", "givearmormod", "thanks2");
-  level._id_A62B _id_AB1A("player", "mod_use", "mod_comeandgetit", "comeandgetitmod", undefined);
-  level._id_A62B _id_AB1A("player", "mod_use", "mod_counteroffensive", "counteroffensivemod", undefined);
-  level._id_A62B _id_AB1A("player", "mod_use", "mod_teameffort", "teameffort", undefined);
-  level._id_A62B _id_AB1A("player", "general", "revive_ally", "modrevived", "revived");
-  level._id_A62B _id_AB1A("player", "general", "revived", "modrevived_reply", undefined);
-  level._id_A62B _id_AB1A("player", "general", "give_money", "givemoney", undefined, 25);
-  level._id_A62B _id_AB1A("player", "general", "needmoney", "givemoneyv1", undefined);
-  level._id_A62B _id_AB1A("player", "general", "nag_stop_killing", "nagstopkilling", undefined);
-  level._id_A62B _id_AB1A("player", "general", "thanks", "supplyammod_reply", undefined);
-  level._id_A62B _id_AB1A("player", "general", "thanks2", "givearmormod_reply", undefined);
-  level._id_A62B _id_AB1A("player", "general", "got_item", "explosivehandler_reply", undefined);
-  level._id_A62B _id_AB1A("player", "general", "got_item2", "givemoney_reply", undefined);
-  level._id_A62B _id_AB1A("player", "enemy", "treasurezombieseen", "treasurezombieseen", undefined);
-  level._id_A62B _id_AB1A("player", "enemy", "treasurezombiemove", "treasurezombiemove", undefined);
-  level._id_A62B _id_AB1A("player", "enemy", "treasurezombiefail", "treasurezombiefail", undefined);
-  level._id_A62B _id_AB1A("player", "enemy", "treasurezombiewarn", "treasurezombiewarn", undefined);
-  level._id_A62B _id_AB1A("player", "enemy", "treasurezombiewin", "treasurezombiewin", undefined);
-  level._id_A62B _id_AB1A("player", "enemy", "bombersee", "bombersee", undefined, 5);
-  level._id_A62B _id_AB1A("player", "enemy", "bomberkillshot", "bomberskillshot", undefined, 25);
-  level._id_A62B _id_AB1A("player", "enemy", "sprintersee", "sprintersee", undefined, 1);
-  level._id_A62B _id_AB1A("player", "enemy", "followersurpise", "followersurpise", undefined, 25);
-  level._id_A62B _id_AB1A("player", "enemy", "followeranger", "lookout", undefined, 25);
-  level._id_A62B _id_AB1A("player", "enemy", "firemansee", "firemanfearreact", undefined, 100);
-  level._id_A62B _id_AB1A("player", "perk", "perk_first", "vendingfirsttime", undefined);
-  level._id_A62B _id_AB1A("player", "perk", "perk_ouch", "plr_scripted_pain_lev3_", undefined);
-  level._id_A62B _id_AB1A("player", "perk", "perk_shock", "blitzshock", undefined);
-  level._id_A62B _id_AB1A("player", "perk", "perk_punch", "blitzpunch", undefined);
-  level._id_A62B _id_AB1A("player", "general", "zmb_char_callout", "zmb_char_callout", undefined);
+  level.vox = zmbvoxcreate();
+  level.vox zmbvoxadd("player", "ability", "special_camo", "camouflage", undefined);
+  level.vox zmbvoxadd("player", "ability", "special_mad", "freefire", undefined);
+  level.vox zmbvoxadd("player", "ability", "special_taunt", "frontline", undefined);
+  level.vox zmbvoxadd("player", "ability", "special_burst", "shellshock", undefined);
+  level.vox zmbvoxadd("player", "mod_use", "mod_supplyammo", "supplyammomod", "thanks");
+  level.vox zmbvoxadd("player", "mod_use", "mod_headshot", "headshotmod", "mod_headshot_reply");
+  level.vox zmbvoxadd("player", "mod_use", "mod_headshot_reply", "headshot_reply", undefined);
+  level.vox zmbvoxadd("player", "mod_use", "mod_serratededge", "serreatededgemod", undefined);
+  level.vox zmbvoxadd("player", "mod_use", "mod_enhancedspeed", "enhancedspeedmod", undefined);
+  level.vox zmbvoxadd("player", "mod_use", "mod_covertexfiltration", "covertexfilration", "revived");
+  level.vox zmbvoxadd("player", "mod_use", "mod_saboteur", "saboteur", undefined);
+  level.vox zmbvoxadd("player", "mod_use", "mod_fieryburst", "fieryburstmod", undefined);
+  level.vox zmbvoxadd("player", "mod_use", "mod_exploitweakness", "exploitweaknessmod", undefined);
+  level.vox zmbvoxadd("player", "mod_use", "mod_supplyarmor", "givearmormod", "thanks2");
+  level.vox zmbvoxadd("player", "mod_use", "mod_comeandgetit", "comeandgetitmod", undefined);
+  level.vox zmbvoxadd("player", "mod_use", "mod_counteroffensive", "counteroffensivemod", undefined);
+  level.vox zmbvoxadd("player", "mod_use", "mod_teameffort", "teameffort", undefined);
+  level.vox zmbvoxadd("player", "general", "revive_ally", "modrevived", "revived");
+  level.vox zmbvoxadd("player", "general", "revived", "modrevived_reply", undefined);
+  level.vox zmbvoxadd("player", "general", "give_money", "givemoney", undefined, 25);
+  level.vox zmbvoxadd("player", "general", "needmoney", "givemoneyv1", undefined);
+  level.vox zmbvoxadd("player", "general", "nag_stop_killing", "nagstopkilling", undefined);
+  level.vox zmbvoxadd("player", "general", "thanks", "supplyammod_reply", undefined);
+  level.vox zmbvoxadd("player", "general", "thanks2", "givearmormod_reply", undefined);
+  level.vox zmbvoxadd("player", "general", "got_item", "explosivehandler_reply", undefined);
+  level.vox zmbvoxadd("player", "general", "got_item2", "givemoney_reply", undefined);
+  level.vox zmbvoxadd("player", "enemy", "treasurezombieseen", "treasurezombieseen", undefined);
+  level.vox zmbvoxadd("player", "enemy", "treasurezombiemove", "treasurezombiemove", undefined);
+  level.vox zmbvoxadd("player", "enemy", "treasurezombiefail", "treasurezombiefail", undefined);
+  level.vox zmbvoxadd("player", "enemy", "treasurezombiewarn", "treasurezombiewarn", undefined);
+  level.vox zmbvoxadd("player", "enemy", "treasurezombiewin", "treasurezombiewin", undefined);
+  level.vox zmbvoxadd("player", "enemy", "bombersee", "bombersee", undefined, 5);
+  level.vox zmbvoxadd("player", "enemy", "bomberkillshot", "bomberskillshot", undefined, 25);
+  level.vox zmbvoxadd("player", "enemy", "sprintersee", "sprintersee", undefined, 1);
+  level.vox zmbvoxadd("player", "enemy", "followersurpise", "followersurpise", undefined, 25);
+  level.vox zmbvoxadd("player", "enemy", "followeranger", "lookout", undefined, 25);
+  level.vox zmbvoxadd("player", "enemy", "firemansee", "firemanfearreact", undefined, 100);
+  level.vox zmbvoxadd("player", "perk", "perk_first", "vendingfirsttime", undefined);
+  level.vox zmbvoxadd("player", "perk", "perk_ouch", "plr_scripted_pain_lev3_", undefined);
+  level.vox zmbvoxadd("player", "perk", "perk_shock", "blitzshock", undefined);
+  level.vox zmbvoxadd("player", "perk", "perk_punch", "blitzpunch", undefined);
+  level.vox zmbvoxadd("player", "general", "zmb_char_callout", "zmb_char_callout", undefined);
   level._id_AB0E = [];
   level._id_AB0E["prefix"] = "zmb_";
   level._id_AB0E["zombie_generic"] = [];
@@ -103,8 +103,8 @@ _id_717E(var_0, var_1, var_2, var_3, var_4) {
   self endon("disconnect");
   self endon("stopSpeaking");
   var_5 = 0.25;
-  self._id_90C4 = var_0;
-  self._id_57DE = 1;
+  self.speakingline = var_0;
+  self.isspeaking = 1;
   self notify("speaking");
   var_6 = undefined;
 
@@ -115,7 +115,7 @@ _id_717E(var_0, var_1, var_2, var_3, var_4) {
   if(var_2 == "zmb_char_callout") {
     _id_0378::_id_307E("plr_zom_zde_callout", var_6);
   } else if(var_2 == "perk_ouch") {
-    _id_0378::_id_307E(var_0 + _id_0378::_id_307B(self._id_20D8), var_6);
+    _id_0378::_id_307E(var_0 + _id_0378::_id_307B(self.characterindex), var_6);
   } else if(common_scripts\utility::_id_562E(var_4)) {
     var_7 = _id_0367::_id_8EA0();
     var_8 = var_0 + var_7;
@@ -134,9 +134,9 @@ _id_717E(var_0, var_1, var_2, var_3, var_4) {
 
   self notify("done_speaking");
   level notify("done_speaking");
-  self._id_57DE = 0;
+  self.isspeaking = 0;
 
-  if(isDefined(level._id_A62B._id_90BE[self._id_AB1D]._id_7DB9) && isDefined(level._id_A62B._id_90BE[self._id_AB1D]._id_7DB9[var_1]) && isDefined(level._id_A62B._id_90BE[self._id_AB1D]._id_7DB9[var_1][var_2])) {
+  if(isDefined(level.vox.speaker[self.zmbvoxid].response) && isDefined(level.vox.speaker[self.zmbvoxid].response[var_1]) && isDefined(level.vox.speaker[self.zmbvoxid].response[var_1][var_2])) {
     level thread _id_89B1(self, var_1, var_2, var_3);
   }
 }
@@ -152,19 +152,19 @@ _id_277F(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
   self endon("disconnect");
 
-  if(!isDefined(self._id_AB1D)) {
+  if(!isDefined(self.zmbvoxid)) {
     return 0;
   }
 
-  if(common_scripts\utility::_id_562E(self._id_324E)) {
+  if(common_scripts\utility::_id_562E(self.dontspeak)) {
     return 0;
   }
 
-  if(!isDefined(self._id_57DE)) {
-    self._id_57DE = 0;
+  if(!isDefined(self.isspeaking)) {
+    self.isspeaking = 0;
   }
 
-  if(common_scripts\utility::_id_562E(self._id_57DE)) {
+  if(common_scripts\utility::_id_562E(self.isspeaking)) {
     return 0;
   }
 
@@ -172,7 +172,7 @@ _id_277F(var_0, var_1, var_2, var_3, var_4) {
     var_3 = 0;
   }
 
-  if(!var_3 && !_id_1F13(self._id_AB1D, var_0, var_1)) {
+  if(!var_3 && !can_event_play(self.zmbvoxid, var_0, var_1)) {
     return 0;
   }
 
@@ -188,7 +188,7 @@ _id_277F(var_0, var_1, var_2, var_3, var_4) {
       return 0;
     }
 
-    var_7 = level._id_A62B._id_90BE[var_5]._id_0BB4[var_0][var_1];
+    var_7 = level.vox.speaker[var_5]._id_0BB4[var_0][var_1];
     var_6 = var_9 + var_7;
 
     if(_soundexists(var_6 + "_lo") || _soundexists(var_6 + "_md") || _soundexists(var_6 + "_hi")) {
@@ -201,19 +201,19 @@ _id_277F(var_0, var_1, var_2, var_3, var_4) {
       var_7 = common_scripts\utility::random(var_11);
       var_8 = 1;
     } else if(var_1 == "perk_ouch")
-      var_7 = level._id_A62B._id_90BE[var_5]._id_0BB4[var_0][var_1];
-    else if(!_id_0547::_id_5565(self._id_20D8, 39)) {
+      var_7 = level.vox.speaker[var_5]._id_0BB4[var_0][var_1];
+    else if(!_id_0547::_id_5565(self.characterindex, 39)) {
       return 0;
     }
   }
 
   if(isDefined(var_7)) {
-    if(_id_0547::_id_5565(self._id_20D8, 39)) {
+    if(_id_0547::_id_5565(self.characterindex, 39)) {
       thread _id_717E(var_7, var_0, "zmb_char_callout", var_4, var_8);
     } else {
       thread _id_717E(var_7, var_0, var_1, var_4, var_8);
     }
-  } else if(_id_0547::_id_5565(self._id_20D8, 39))
+  } else if(_id_0547::_id_5565(self.characterindex, 39))
     thread _id_717E(var_7, var_0, "zmb_char_callout", var_4, var_8);
 
   return 1;
@@ -223,12 +223,12 @@ get_viable_gbl_aliases(var_0, var_1, var_2, var_3) {
   var_4 = [];
   var_5 = [];
   var_6 = [var_2, var_2 + "1", var_2 + "2", var_2 + "3", var_2 + "4", var_2 + "5"];
-  var_7 = var_3._id_20D8;
+  var_7 = var_3.characterindex;
   [var_9, var_10, var_11] = generate_possible_prefixes(var_7);
 
   foreach(var_13 in var_6) {
-    if(isDefined(level._id_A62B._id_90BE[var_0]._id_0BB4[var_1][var_13])) {
-      var_14 = level._id_A62B._id_90BE[var_0]._id_0BB4[var_1][var_13];
+    if(isDefined(level.vox.speaker[var_0]._id_0BB4[var_1][var_13])) {
+      var_14 = level.vox.speaker[var_0]._id_0BB4[var_1][var_13];
 
       if(isDefined(var_10) && var_11.size > 0) {
         foreach(var_16 in var_11) {
@@ -293,11 +293,11 @@ _id_89B1(var_0, var_1, var_2, var_3) {
     return;
   }
   if(!isDefined(var_3)) {
-    var_3 = _id_464B(var_0);
+    var_3 = getrandomcharacterinrange(var_0);
   }
 
-  if(isDefined(var_3) && isDefined(var_3._id_AB1D)) {
-    var_4 = level._id_A62B._id_90BE[var_3._id_AB1D]._id_7DB9[var_1][var_2];
+  if(isDefined(var_3) && isDefined(var_3.zmbvoxid)) {
+    var_4 = level.vox.speaker[var_3.zmbvoxid].response[var_1][var_2];
 
     if(isDefined(var_4)) {
       var_3 _id_277F(var_1, var_4);
@@ -310,7 +310,7 @@ _id_73AA() {
 
   if(!isDefined(level._id_7337)) {
     level._id_7337 = 0;
-    level._id_05AC = _id_0547::_id_4309();
+    level._id_05AC = _id_0547::get_round_enemy_array();
   }
 
   for(;;) {
@@ -319,7 +319,7 @@ _id_73AA() {
 
     if(var_0 > level._id_7337 + 1000) {
       level._id_7337 = var_0;
-      level._id_05AC = _id_0547::_id_4309();
+      level._id_05AC = _id_0547::get_round_enemy_array();
     }
 
     var_1 = level._id_05AC;
@@ -347,7 +347,7 @@ _id_73AA() {
       }
 
       if(distancesquared(var_1[var_3].origin, self.origin) < var_4 * var_4) {
-        var_6 = _id_4742(var_1[var_3].origin);
+        var_6 = getyawtospot(var_1[var_3].origin);
         var_7 = self.origin[2] - var_1[var_3].origin[2];
 
         if(var_6 > -95 && var_6 < 95 && _abs(var_7) < 50) {
@@ -387,7 +387,7 @@ player_zombie_char_ambient_noises() {
   level endon("game_ended");
 
   for(;;) {
-    if(_id_0547::_id_5565(self._id_20D8, 39) && !common_scripts\utility::_id_562E(self._id_57DE)) {
+    if(_id_0547::_id_5565(self.characterindex, 39) && !common_scripts\utility::_id_562E(self.isspeaking)) {
       switch (randomint(7)) {
         case 0:
           self playSound("zvox_gen_growl_lev1");
@@ -401,8 +401,8 @@ player_zombie_char_ambient_noises() {
   }
 }
 
-_id_A60C(var_0, var_1) {
-  var_2 = tablelookup(level._id_AB17, 0, var_0, 1);
+volength(var_0, var_1) {
+  var_2 = tablelookup(level.zmbsoundlengthpath, 0, var_0, 1);
 
   if(!isDefined(var_2) || var_2 == "") {
     if(isDefined(var_1) && var_1 == "exert") {
@@ -419,14 +419,14 @@ _id_A60C(var_0, var_1) {
   return var_2;
 }
 
-_id_4742(var_0) {
+getyawtospot(var_0) {
   var_1 = var_0;
-  var_2 = self.angles[1] - _id_4740(var_1);
+  var_2 = self.angles[1] - getyaw(var_1);
   var_2 = _angleclamp180(var_2);
   return var_2;
 }
 
-_id_4740(var_0) {
+getyaw(var_0) {
   var_1 = vectortoangles(var_0 - self.origin);
   return var_1[1];
 }
@@ -435,7 +435,7 @@ _id_3102(var_0, var_1, var_2) {
   _id_0366::_id_8E4B(var_0);
 }
 
-_id_55AE() {
+is_last_zombie() {
   if(_id_056D::_id_45C2() <= 1) {
     return 1;
   }
@@ -443,47 +443,47 @@ _id_55AE() {
   return 0;
 }
 
-_id_AB16(var_0) {
+zmbsetglobalpriorityonly(var_0) {
   if(var_0) {
-    level._id_AB13++;
+    level.zmbglobalpriorityvoonly++;
   } else {
-    level._id_AB13--;
+    level.zmbglobalpriorityvoonly--;
   }
 
-  if(level._id_AB13 < 0) {
-    level._id_AB13 = 0;
+  if(level.zmbglobalpriorityvoonly < 0) {
+    level.zmbglobalpriorityvoonly = 0;
   }
 }
 
-_id_277E(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+create_and_play_dialog_delay(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("death");
   self endon("disconnect");
   wait(var_5);
-  thread _id_277D(var_0, var_1, var_2, var_3, var_4, var_6);
+  thread create_and_play_dialog(var_0, var_1, var_2, var_3, var_4, var_6);
 }
 
-_id_277D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isDefined(self._id_AB1D)) {
+create_and_play_dialog(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(!isDefined(self.zmbvoxid)) {
     return 0;
   }
 
-  if(level._id_AB13 > 0 && var_0 != "global_priority") {
+  if(level.zmbglobalpriorityvoonly > 0 && var_0 != "global_priority") {
     return 0;
   }
 
-  if(common_scripts\utility::_id_562E(self._id_324E)) {
+  if(common_scripts\utility::_id_562E(self.dontspeak)) {
     return 0;
   }
 
-  if(_id_0547::_id_577D(self) && var_1 != "infected" && var_1 != "sq") {
+  if(_id_0547::isplayerinfected(self) && var_1 != "infected" && var_1 != "sq") {
     return 0;
   }
 
-  if(!isDefined(self._id_57DE)) {
-    self._id_57DE = 0;
+  if(!isDefined(self.isspeaking)) {
+    self.isspeaking = 0;
   }
 
-  if(common_scripts\utility::_id_562E(self._id_57DE)) {
+  if(common_scripts\utility::_id_562E(self.isspeaking)) {
     return 0;
   }
 
@@ -496,7 +496,7 @@ _id_277D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_9 = undefined;
   var_10 = undefined;
 
-  if(!isDefined(level._id_A62B._id_90BE[self._id_AB1D]._id_0BB4[var_0]) || !isDefined(level._id_A62B._id_90BE[self._id_AB1D]._id_0BB4[var_0][var_1])) {
+  if(!isDefined(level.vox.speaker[self.zmbvoxid]._id_0BB4[var_0]) || !isDefined(level.vox.speaker[self.zmbvoxid]._id_0BB4[var_0][var_1])) {
     return 0;
   }
 
@@ -504,25 +504,25 @@ _id_277D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_4 = 0;
   }
 
-  if(!var_4 && !_id_1F13(self._id_AB1D, var_0, var_1)) {
+  if(!var_4 && !can_event_play(self.zmbvoxid, var_0, var_1)) {
     return 0;
   }
 
-  var_11 = getarraykeys(level._id_A62B._id_90BE[self._id_AB1D]._id_7677);
-  var_10 = level._id_A62B._id_90BE[self._id_AB1D]._id_7677[var_11[0]];
-  var_8 = level._id_A62B._id_90BE[self._id_AB1D]._id_0BB4[var_0][var_1];
+  var_11 = getarraykeys(level.vox.speaker[self.zmbvoxid].prefixes);
+  var_10 = level.vox.speaker[self.zmbvoxid].prefixes[var_11[0]];
+  var_8 = level.vox.speaker[self.zmbvoxid]._id_0BB4[var_0][var_1];
 
   if(isPlayer(self)) {
     if(self.sessionstate != "playing") {
       return 0;
     }
 
-    if(_id_0547::_id_577E(self) && var_1 != "revive_down" && var_1 != "revive_up" && var_1 != "bonus_line_over") {
+    if(_id_0547::isplayerinlaststand(self) && var_1 != "revive_down" && var_1 != "revive_up" && var_1 != "bonus_line_over") {
       return 0;
     }
 
-    var_9 = _id_0547::_id_429D(self);
-    var_10 = level._id_A62B._id_90BE[self._id_AB1D]._id_7677[var_9];
+    var_9 = _id_0547::get_player_index(self);
+    var_10 = level.vox.speaker[self.zmbvoxid].prefixes[var_9];
   }
 
   var_12 = "";
@@ -532,7 +532,7 @@ _id_277D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       var_3 = 1;
     }
 
-    var_12 = _id_1D05("", var_8, var_3);
+    var_12 = build_dialog_line("", var_8, var_3);
 
     if(!_soundexists(var_12)) {
       return 0;
@@ -541,7 +541,7 @@ _id_277D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(var_7) {
       var_13 = var_2 + var_8;
       var_14 = "any_" + var_8;
-      var_15 = _id_AB1C(var_10, var_14, var_3);
+      var_15 = zmbvoxgetlinevariant(var_10, var_14, var_3);
 
       if(isDefined(var_15) && _soundexists(var_15) && randomint(100) > 50) {
         var_8 = var_14;
@@ -550,7 +550,7 @@ _id_277D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       }
     }
 
-    var_12 = _id_AB1C(var_10, var_8, var_3);
+    var_12 = zmbvoxgetlinevariant(var_10, var_8, var_3);
 
     if(!isDefined(var_12) && _soundexists(var_10 + var_8)) {
       var_12 = var_10 + var_8;
@@ -562,14 +562,14 @@ _id_277D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       return 0;
     }
 
-    thread _id_30DC(var_10, var_9, var_12, var_0, var_1, var_7, var_5, var_3, var_6);
+    thread do_player_or_npc_playvox(var_10, var_9, var_12, var_0, var_1, var_7, var_5, var_3, var_6);
   } else
     return 0;
 
   return 1;
 }
 
-_id_30DC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+do_player_or_npc_playvox(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self endon("disconnect");
   self endon("stopSpeaking");
   var_9 = 0.25;
@@ -578,10 +578,10 @@ _id_30DC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_9 = 0;
   }
 
-  self._id_90C4 = var_2;
-  self._id_57DE = 1;
+  self.speakingline = var_2;
+  self.isspeaking = 1;
   self notify("speaking");
-  _id_74DB(var_2, var_3, var_4, var_8);
+  playsoundwaituntildone(var_2, var_3, var_4, var_8);
 
   if(var_9 > 0) {
     wait(var_9);
@@ -589,21 +589,21 @@ _id_30DC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   self notify("done_speaking");
   level notify("done_speaking");
-  self._id_57DE = 0;
+  self.isspeaking = 0;
 
   if(var_3 == "conversation") {
-    level thread _id_87BB(self, var_1, var_3, var_4, var_6, var_7);
-  } else if(isDefined(level._id_A62B._id_90BE[self._id_AB1D]._id_7DB9) && isDefined(level._id_A62B._id_90BE[self._id_AB1D]._id_7DB9[var_3]) && isDefined(level._id_A62B._id_90BE[self._id_AB1D]._id_7DB9[var_3][var_4])) {
+    level thread setup_conversation_response_line(self, var_1, var_3, var_4, var_6, var_7);
+  } else if(isDefined(level.vox.speaker[self.zmbvoxid].response) && isDefined(level.vox.speaker[self.zmbvoxid].response[var_3]) && isDefined(level.vox.speaker[self.zmbvoxid].response[var_3][var_4])) {
     if(isDefined(level._id_05A7)) {
       level thread[[level._id_05A7]](self, var_1, var_3, var_4, var_6);
     } else {
-      level thread _id_89A9(self, var_1, var_3, var_4, var_6);
+      level thread setup_response_line(self, var_1, var_3, var_4, var_6);
     }
   }
 }
 
 _id_0F55(var_0) {
-  return _id_0F5A() && !common_scripts\utility::_id_562E(self._id_509E) && var_0 != "global_priority" && var_0 != "exert" && var_0 != "conversation" && var_0 != "ignore_nearby" && var_0 != "sq";
+  return _id_0F5A() && !common_scripts\utility::_id_562E(self.ignorenearbyspkrs) && var_0 != "global_priority" && var_0 != "exert" && var_0 != "conversation" && var_0 != "ignore_nearby" && var_0 != "sq";
 }
 
 _id_A7A1(var_0, var_1) {
@@ -612,16 +612,16 @@ _id_A7A1(var_0, var_1) {
   }
 }
 
-_id_734D() {
+player_stop_speaking() {
   self notify("stopSpeaking");
 
-  if(common_scripts\utility::_id_562E(self._id_57DE) && isDefined(self._id_90C4)) {
-    self stopsound(self._id_90C4);
-    self._id_57DE = 0;
+  if(common_scripts\utility::_id_562E(self.isspeaking) && isDefined(self.speakingline)) {
+    self stopsound(self.speakingline);
+    self.isspeaking = 0;
   }
 }
 
-_id_464B(var_0) {
+getrandomcharacterinrange(var_0) {
   var_1 = 250000;
   var_2 = [];
 
@@ -644,67 +644,67 @@ _id_464B(var_0) {
   }
 }
 
-_id_89A9(var_0, var_1, var_2, var_3, var_4) {
+setup_response_line(var_0, var_1, var_2, var_3, var_4) {
   if(level.players.size == 1) {
     return;
   }
   if(!isDefined(var_4)) {
-    var_4 = _id_464B(var_0);
+    var_4 = getrandomcharacterinrange(var_0);
   }
 
   if(isDefined(var_4)) {
-    var_5 = level._id_A62B._id_90BE[var_4._id_AB1D]._id_7DB9[var_2][var_3];
+    var_5 = level.vox.speaker[var_4.zmbvoxid].response[var_2][var_3];
 
     if(isDefined(var_5)) {
-      var_6 = level._id_A62B._id_90BE[var_0._id_AB1D]._id_7677[var_1];
-      var_4 _id_277D(var_2, var_5, var_6);
+      var_6 = level.vox.speaker[var_0.zmbvoxid].prefixes[var_1];
+      var_4 create_and_play_dialog(var_2, var_5, var_6);
     }
   }
 }
 
-_id_87BB(var_0, var_1, var_2, var_3, var_4, var_5) {
+setup_conversation_response_line(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_4) && isalive(var_4)) {
-    var_4 _id_277D(var_2, var_3, undefined, var_5 + 1, undefined, var_0);
+    var_4 create_and_play_dialog(var_2, var_3, undefined, var_5 + 1, undefined, var_0);
   }
 }
 
-_id_72D2(var_0, var_1, var_2, var_3) {
-  thread _id_73A9(var_0, var_1, var_2, var_3);
+player_kill_zombie(var_0, var_1, var_2, var_3) {
+  thread player_zombie_kill_vox(var_0, var_1, var_2, var_3);
 }
 
-_id_73A9(var_0, var_1, var_2, var_3) {
+player_zombie_kill_vox(var_0, var_1, var_2, var_3) {
   self endon("disconnect");
 
-  if(!isDefined(var_3) || common_scripts\utility::_id_562E(self._id_3E09)) {
+  if(!isDefined(var_3) || common_scripts\utility::_id_562E(self.force_wait_on_kill_line)) {
     return;
   }
   var_2 = _getweaponbasename(var_2);
-  var_4 = _id_7479(var_0, var_1, var_2, var_3);
+  var_4 = playertryzombiekillvo(var_0, var_1, var_2, var_3);
 
   if(isDefined(var_4)) {
-    self._id_3E09 = 1;
+    self.force_wait_on_kill_line = 1;
     wait 2;
-    self._id_3E09 = 0;
+    self.force_wait_on_kill_line = 0;
   }
 }
 
-_id_1F13(var_0, var_1, var_2) {
-  var_3 = _id_417C(var_0, var_1, var_2);
+can_event_play(var_0, var_1, var_2) {
+  var_3 = get_event_chance(var_0, var_1, var_2);
   return var_3 > _randomintrange(1, 100);
 }
 
-_id_417C(var_0, var_1, var_2) {
-  if(!isDefined(level._id_A62B._id_90BE[var_0]) || !isDefined(level._id_A62B._id_90BE[var_0]._id_20AD) || !isDefined(level._id_A62B._id_90BE[var_0]._id_20AD[var_1]) || !isDefined(level._id_A62B._id_90BE[var_0]._id_20AD[var_1][var_2])) {
+get_event_chance(var_0, var_1, var_2) {
+  if(!isDefined(level.vox.speaker[var_0]) || !isDefined(level.vox.speaker[var_0].chance) || !isDefined(level.vox.speaker[var_0].chance[var_1]) || !isDefined(level.vox.speaker[var_0].chance[var_1][var_2])) {
     return 0;
   }
 
-  return level._id_A62B._id_90BE[var_0]._id_20AD[var_1][var_2];
+  return level.vox.speaker[var_0].chance[var_1][var_2];
 }
 
-_id_7479(var_0, var_1, var_2, var_3) {
+playertryzombiekillvo(var_0, var_1, var_2, var_3) {
   var_4 = "kill";
 
-  if(_id_0547::_id_580B(var_2)) {
+  if(_id_0547::istrapweapon(var_2)) {
     return;
   }
   if(isDefined(var_3._id_0A4B) && var_3._id_0A4B == "zombie_treasurer") {
@@ -712,16 +712,16 @@ _id_7479(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_9A08(var_0, var_1) {
+timer_actual(var_0, var_1) {
   self endon("disconnect");
   self endon("death");
   var_2 = gettime() + var_1 * 1000;
 
   while(gettime() < var_2) {
-    if(self._id_5A36 > var_0) {
-      thread _id_277E("kill", "streak", undefined, undefined, undefined, 1);
+    if(self.killcounter > var_0) {
+      thread create_and_play_dialog_delay("kill", "streak", undefined, undefined, undefined, 1);
       wait 2;
-      self._id_5A36 = 0;
+      self.killcounter = 0;
       var_2 = -2;
     }
 
@@ -729,41 +729,41 @@ _id_9A08(var_0, var_1) {
   }
 
   wait 10;
-  self._id_5A36 = 0;
-  self._id_9A10 = 0;
+  self.killcounter = 0;
+  self.timerisrunning = 0;
 }
 
 _id_72A3(var_0, var_1, var_2) {}
 
-_id_ABCD(var_0, var_1) {}
+zombie_hurt(var_0, var_1) {}
 
-_id_741B() {
-  if(!isDefined(self._id_66C3) || gettime() > self._id_66C3) {
-    var_0 = _id_73DF("laugh");
+playerlaugh() {
+  if(!isDefined(self.nextlaughtime) || gettime() > self.nextlaughtime) {
+    var_0 = playerexert("laugh");
 
     if(var_0) {
-      self._id_66C3 = gettime() + 15000;
+      self.nextlaughtime = gettime() + 15000;
     }
   }
 }
 
-_id_72A4(var_0) {
-  thread _id_277E("general", var_0, undefined, undefined, undefined, 1);
+player_hurt_zombie_vox(var_0) {
+  thread create_and_play_dialog_delay("general", var_0, undefined, undefined, undefined, 1);
 }
 
 _id_0998(var_0) {
-  if(!isDefined(level._id_683F)) {
-    level._id_683F = [];
+  if(!isDefined(level.npcs)) {
+    level.npcs = [];
   }
 
   if(common_scripts\utility::_id_562E(var_0)) {
-    self._id_509E = 1;
+    self.ignorenearbyspkrs = 1;
   } else {
-    self._id_509E = 0;
+    self.ignorenearbyspkrs = 0;
   }
 
-  self._id_575E = 1;
-  level._id_683F[level._id_683F.size] = self;
+  self.isnpc = 1;
+  level.npcs[level.npcs.size] = self;
 }
 
 _id_0F5A() {
@@ -771,8 +771,8 @@ _id_0F5A() {
   var_1 = 0;
   var_2 = level.players;
 
-  if(isDefined(level._id_683F)) {
-    var_2 = common_scripts\utility::_id_0F73(var_2, level._id_683F);
+  if(isDefined(level.npcs)) {
+    var_2 = common_scripts\utility::_id_0F73(var_2, level.npcs);
   }
 
   foreach(var_4 in var_2) {
@@ -780,12 +780,12 @@ _id_0F5A() {
       continue;
     }
     if(isPlayer(var_4)) {
-      if(var_4.sessionstate != "playing" || _id_0547::_id_577E(var_4)) {
+      if(var_4.sessionstate != "playing" || _id_0547::isplayerinlaststand(var_4)) {
         continue;
       }
     } else {}
 
-    if(common_scripts\utility::_id_562E(var_4._id_57DE) && !common_scripts\utility::_id_562E(var_4._id_509E)) {
+    if(common_scripts\utility::_id_562E(var_4.isspeaking) && !common_scripts\utility::_id_562E(var_4.ignorenearbyspkrs)) {
       if(distancesquared(self.origin, var_4.origin) < var_0) {
         var_1 = 1;
         break;
@@ -796,68 +796,68 @@ _id_0F5A() {
   return var_1;
 }
 
-_id_AB1B() {
+zmbvoxcreate() {
   var_0 = spawnStruct();
-  var_0._id_90BE = [];
+  var_0.speaker = [];
   return var_0;
 }
 
-_id_AB1E(var_0, var_1, var_2, var_3) {
-  var_2._id_AB1D = var_0;
+zmbvoxinitspeaker(var_0, var_1, var_2, var_3) {
+  var_2.zmbvoxid = var_0;
 
-  if(!isDefined(self._id_90BE[var_0])) {
-    self._id_90BE[var_0] = spawnStruct();
-    self._id_90BE[var_0]._id_0BB4 = [];
-    self._id_90BE[var_0]._id_7677 = [];
-    self._id_90BE[var_0]._id_37E4 = [];
+  if(!isDefined(self.speaker[var_0])) {
+    self.speaker[var_0] = spawnStruct();
+    self.speaker[var_0]._id_0BB4 = [];
+    self.speaker[var_0].prefixes = [];
+    self.speaker[var_0].ents = [];
   }
 
-  self._id_90BE[var_0]._id_37E4[var_3] = var_2;
-  self._id_90BE[var_0]._id_7677[var_3] = var_1;
+  self.speaker[var_0].ents[var_3] = var_2;
+  self.speaker[var_0].prefixes[var_3] = var_1;
 }
 
-_id_AB1A(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(self._id_90BE[var_0])) {
-    self._id_90BE[var_0] = spawnStruct();
-    self._id_90BE[var_0]._id_0BB4 = [];
-    self._id_90BE[var_0]._id_7677 = [];
-    self._id_90BE[var_0]._id_37E4 = [];
+zmbvoxadd(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(self.speaker[var_0])) {
+    self.speaker[var_0] = spawnStruct();
+    self.speaker[var_0]._id_0BB4 = [];
+    self.speaker[var_0].prefixes = [];
+    self.speaker[var_0].ents = [];
   }
 
-  if(!isDefined(self._id_90BE[var_0]._id_0BB4[var_1])) {
-    self._id_90BE[var_0]._id_0BB4[var_1] = [];
+  if(!isDefined(self.speaker[var_0]._id_0BB4[var_1])) {
+    self.speaker[var_0]._id_0BB4[var_1] = [];
   }
 
-  self._id_90BE[var_0]._id_0BB4[var_1][var_2] = var_3;
+  self.speaker[var_0]._id_0BB4[var_1][var_2] = var_3;
 
   if(isDefined(var_4)) {
-    if(!isDefined(self._id_90BE[var_0]._id_7DB9)) {
-      self._id_90BE[var_0]._id_7DB9 = [];
+    if(!isDefined(self.speaker[var_0].response)) {
+      self.speaker[var_0].response = [];
     }
 
-    if(!isDefined(self._id_90BE[var_0]._id_7DB9[var_1])) {
-      self._id_90BE[var_0]._id_7DB9[var_1] = [];
+    if(!isDefined(self.speaker[var_0].response[var_1])) {
+      self.speaker[var_0].response[var_1] = [];
     }
 
-    self._id_90BE[var_0]._id_7DB9[var_1][var_2] = var_4;
+    self.speaker[var_0].response[var_1][var_2] = var_4;
   }
 
   if(!isDefined(var_5)) {
     var_5 = 100;
   }
 
-  if(!isDefined(self._id_90BE[var_0]._id_20AD)) {
-    self._id_90BE[var_0]._id_20AD = [];
+  if(!isDefined(self.speaker[var_0].chance)) {
+    self.speaker[var_0].chance = [];
   }
 
-  if(!isDefined(self._id_90BE[var_0]._id_20AD[var_1])) {
-    self._id_90BE[var_0]._id_20AD[var_1] = [];
+  if(!isDefined(self.speaker[var_0].chance[var_1])) {
+    self.speaker[var_0].chance[var_1] = [];
   }
 
-  self._id_90BE[var_0]._id_20AD[var_1][var_2] = var_5;
+  self.speaker[var_0].chance[var_1][var_2] = var_5;
 }
 
-_id_1D05(var_0, var_1, var_2) {
+build_dialog_line(var_0, var_1, var_2) {
   if(var_2 < 10) {
     return var_0 + var_1 + "_0" + var_2;
   } else {
@@ -865,43 +865,43 @@ _id_1D05(var_0, var_1, var_2) {
   }
 }
 
-_id_AB1C(var_0, var_1, var_2) {
-  if(!isDefined(self._id_8F2E)) {
-    self._id_8F2E = [];
-    self._id_8F2F = [];
+zmbvoxgetlinevariant(var_0, var_1, var_2) {
+  if(!isDefined(self.sound_dialog)) {
+    self.sound_dialog = [];
+    self.sound_dialog_available = [];
   }
 
-  if(!isDefined(self._id_8F2E[var_1])) {
-    var_3 = _id_4255(var_0, var_1);
+  if(!isDefined(self.sound_dialog[var_1])) {
+    var_3 = get_number_variants(var_0, var_1);
 
     if(var_3 <= 0) {
       return undefined;
     }
 
     for(var_4 = 0; var_4 < var_3; var_4++) {
-      self._id_8F2E[var_1][var_4] = var_4 + 1;
+      self.sound_dialog[var_1][var_4] = var_4 + 1;
     }
 
-    self._id_8F2F[var_1] = [];
+    self.sound_dialog_available[var_1] = [];
   }
 
-  if(self._id_8F2F[var_1].size <= 0) {
-    for(var_4 = 0; var_4 < self._id_8F2E[var_1].size; var_4++) {
-      self._id_8F2F[var_1][var_4] = self._id_8F2E[var_1][var_4];
+  if(self.sound_dialog_available[var_1].size <= 0) {
+    for(var_4 = 0; var_4 < self.sound_dialog[var_1].size; var_4++) {
+      self.sound_dialog_available[var_1][var_4] = self.sound_dialog[var_1][var_4];
     }
   }
 
-  var_5 = common_scripts\utility::random(self._id_8F2F[var_1]);
-  self._id_8F2F[var_1] = common_scripts\utility::_id_0F93(self._id_8F2F[var_1], var_5);
+  var_5 = common_scripts\utility::random(self.sound_dialog_available[var_1]);
+  self.sound_dialog_available[var_1] = common_scripts\utility::_id_0F93(self.sound_dialog_available[var_1], var_5);
 
   if(isDefined(var_2)) {
     var_5 = var_2;
   }
 
-  return _id_1D05(var_0, var_1, var_5);
+  return build_dialog_line(var_0, var_1, var_5);
 }
 
-_id_74DB(var_0, var_1, var_2, var_3) {
+playsoundwaituntildone(var_0, var_1, var_2, var_3) {
   if(isDefined(var_1) && var_1 == "monologue") {
     self playlocalsound(var_0);
   } else if(isDefined(var_3) && var_3.size > 0) {
@@ -913,63 +913,63 @@ _id_74DB(var_0, var_1, var_2, var_3) {
   } else
     self playsoundonmovingent(var_0);
 
-  var_7 = _id_A60C(var_0, var_1);
+  var_7 = volength(var_0, var_1);
   wait(var_7);
 }
 
-_id_4255(var_0, var_1) {
+get_number_variants(var_0, var_1) {
   for(var_2 = 1; var_2 < 30; var_2++) {
-    if(!_soundexists(_id_1D05(var_0, var_1, var_2))) {
+    if(!_soundexists(build_dialog_line(var_0, var_1, var_2))) {
       return var_2 - 1;
     }
   }
 }
 
-_id_714C() {
-  level thread _id_8A52();
+play_level_start_vox() {
+  level thread setupwaveintermissiondialog();
   wait 1;
 
-  if(isDefined(level._id_AB0F)) {
-    level thread[[level._id_AB0F]]();
+  if(isDefined(level.zmbaudiowave1vo)) {
+    level thread[[level.zmbaudiowave1vo]]();
   } else if(level.players.size == 1) {
     var_0 = _randomintrange(0, level.players.size);
-    level.players[var_0] thread _id_277D("general", "intro");
+    level.players[var_0] thread create_and_play_dialog("general", "intro");
   } else
-    level thread _id_74EA("wave1", 1, 2, 0, 3);
+    level thread playwavenumintrodialog("wave1", 1, 2, 0, 3);
 
-  level._id_AB3E = 0;
+  level.zmplayedearlywavevo = 0;
 
   for(;;) {
     level waittill("zombie_wave_started");
     wait 1;
     var_1 = 1;
 
-    if(isDefined(level._id_AB10)) {
-      var_1 = [[level._id_AB10]](var_1);
+    if(isDefined(level.zmbaudiowavestartvo)) {
+      var_1 = [[level.zmbaudiowavestartvo]](var_1);
     } else {
-      if(!var_1 && level._id_A980 == 2) {
-        _id_74EA("wave2", 2, 0, 1, 3);
+      if(!var_1 && level.wavecounter == 2) {
+        playwavenumintrodialog("wave2", 2, 0, 1, 3);
         var_1 = 1;
-      } else if(!var_1 && (level._id_A980 == 5 || level._id_A980 == 10 || level._id_A980 == 20 || level._id_A980 == 35 || level._id_A980 == 50)) {
+      } else if(!var_1 && (level.wavecounter == 5 || level.wavecounter == 10 || level.wavecounter == 20 || level.wavecounter == 35 || level.wavecounter == 50)) {
         var_0 = _randomintrange(0, level.players.size);
-        level.players[var_0] _id_277D("general", "round_" + level._id_A980);
+        level.players[var_0] create_and_play_dialog("general", "round_" + level.wavecounter);
         var_1 = 1;
       }
 
-      if(!var_1 && level._id_A980 > 2 && !level._id_AB3E) {
+      if(!var_1 && level.wavecounter > 2 && !level.zmplayedearlywavevo) {
         var_2 = _randomintrange(0, 100);
 
         if(var_2 < 30) {
-          _id_74EA("wave_early", 0, 2, 1, 3);
-          level._id_AB3E = 0;
+          playwavenumintrodialog("wave_early", 0, 2, 1, 3);
+          level.zmplayedearlywavevo = 0;
           var_1 = 1;
         }
       }
     }
 
-    if(!var_1 && level._id_A980 > 1) {
+    if(!var_1 && level.wavecounter > 1) {
       var_0 = _randomintrange(0, level.players.size);
-      level.players[var_0] _id_277D("general", "wave_start");
+      level.players[var_0] create_and_play_dialog("general", "wave_start");
       var_1 = 1;
     }
 
@@ -977,14 +977,14 @@ _id_714C() {
     var_3 = 1;
     var_4 = 0;
 
-    if(isDefined(level._id_AB12)) {
-      var_3 = [[level._id_AB12]]();
+    if(isDefined(level.zmbdowaveendvo)) {
+      var_3 = [[level.zmbdowaveendvo]]();
     }
 
     if(var_3) {
       wait 1;
       var_0 = _randomintrange(0, level.players.size);
-      var_4 = level.players[var_0] _id_277D("general", "wave_end");
+      var_4 = level.players[var_0] create_and_play_dialog("general", "wave_end");
 
       if(var_4) {
         level.players[var_0] common_scripts\utility::waittill_notify_or_timeout("done_speaking", 6);
@@ -992,65 +992,65 @@ _id_714C() {
       }
     }
 
-    if(isDefined(level._id_AB1F)) {
-      var_4 = [[level._id_AB1F]](var_4);
+    if(isDefined(level.zmbwaveintermissionvo)) {
+      var_4 = [[level.zmbwaveintermissionvo]](var_4);
     }
 
-    if(!_id_74ED() && !var_4) {
-      _id_74E9();
+    if(!playweaponremindervo() && !var_4) {
+      playwaveintermissiondialog();
     }
   }
 }
 
-_id_74EA(var_0, var_1, var_2, var_3, var_4, var_5) {
+playwavenumintrodialog(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_5)) {
     var_5 = "general";
   }
 
-  var_6 = _id_4454(var_1);
+  var_6 = getcharacterbyindex(var_1);
 
-  if(isDefined(var_6) && var_6 _id_277D(var_5, var_0)) {
+  if(isDefined(var_6) && var_6 create_and_play_dialog(var_5, var_0)) {
     level common_scripts\utility::waittill_notify_or_timeout("done_speaking", 6);
   }
 
-  var_6 = _id_4454(var_2);
+  var_6 = getcharacterbyindex(var_2);
 
-  if(isDefined(var_6) && var_6 _id_277D(var_5, var_0)) {
+  if(isDefined(var_6) && var_6 create_and_play_dialog(var_5, var_0)) {
     level common_scripts\utility::waittill_notify_or_timeout("done_speaking", 6);
   }
 
-  var_6 = _id_4454(var_3);
+  var_6 = getcharacterbyindex(var_3);
 
-  if(isDefined(var_6) && var_6 _id_277D(var_5, var_0)) {
+  if(isDefined(var_6) && var_6 create_and_play_dialog(var_5, var_0)) {
     level common_scripts\utility::waittill_notify_or_timeout("done_speaking", 6);
   }
 
-  var_6 = _id_4454(var_4);
+  var_6 = getcharacterbyindex(var_4);
 
-  if(isDefined(var_6) && var_6 _id_277D(var_5, var_0)) {
+  if(isDefined(var_6) && var_6 create_and_play_dialog(var_5, var_0)) {
     level common_scripts\utility::waittill_notify_or_timeout("done_speaking", 6);
   }
 }
 
-_id_74ED() {
-  if(level._id_A980 == 2) {
-    var_0 = _id_462C();
+playweaponremindervo() {
+  if(level.wavecounter == 2) {
+    var_0 = getplayerwhoonlyhaspistol();
 
     if(isDefined(var_0)) {
-      return var_0 _id_277D("general", "weapon_reminder", undefined, 1);
+      return var_0 create_and_play_dialog("general", "weapon_reminder", undefined, 1);
     }
-  } else if(level._id_A980 == 10) {
-    var_0 = _id_462B();
+  } else if(level.wavecounter == 10) {
+    var_0 = getplayerwhohasnotupgraded();
 
     if(isDefined(var_0)) {
-      return var_0 _id_277D("general", "weapon_reminder", undefined, 2);
+      return var_0 create_and_play_dialog("general", "weapon_reminder", undefined, 2);
     }
   }
 
   return 0;
 }
 
-_id_462C() {
+getplayerwhoonlyhaspistol() {
   foreach(var_1 in level.players) {
     var_2 = var_1 getweaponlistprimaries();
 
@@ -1091,51 +1091,51 @@ _id_73B3() {
   _id_2780(1, "enemy", "followeranger");
 }
 
-_id_462B() {
+getplayerwhohasnotupgraded() {
   foreach(var_1 in level.players) {
     var_2 = var_1 getweaponlistprimaries();
 
     foreach(var_4 in var_2) {
-      if(_id_0547::_id_4747(var_1, var_4) < 1) {
+      if(_id_0547::getzombieweaponlevel(var_1, var_4) < 1) {
         return var_1;
       }
     }
   }
 }
 
-_id_8A52() {
-  level._id_AB49 = [];
-  level._id_AB49[0] = _id_66A0();
-  level._id_AB49[1] = _id_66A0();
+setupwaveintermissiondialog() {
+  level.zmwaveintermissiondialog = [];
+  level.zmwaveintermissiondialog[0] = newwaveintermissionstruct();
+  level.zmwaveintermissiondialog[1] = newwaveintermissionstruct();
 }
 
-_id_66A0() {
+newwaveintermissionstruct() {
   var_0 = spawnStruct();
-  var_0._id_20D9 = [];
-  var_0._id_7677 = [];
+  var_0.characters = [];
+  var_0.prefixes = [];
   var_0.aiphysicstrace = 1;
   var_0._id_08BE = 0;
-  var_0._id_2566 = 0;
-  var_0._id_66CB = 1;
+  var_0.completed = 0;
+  var_0.nextround = 1;
   return var_0;
 }
 
-_id_74E9() {
-  if(level.players.size == 1 || !isDefined(level._id_A62B._id_90BE["player"]._id_0BB4["conversation"])) {
+playwaveintermissiondialog() {
+  if(level.players.size == 1 || !isDefined(level.vox.speaker["player"]._id_0BB4["conversation"])) {
     return 0;
   }
 
-  foreach(var_1 in level._id_AB49) {
-    if(_id_2EBF(var_1) && _id_7211(var_1)) {
-      _id_2EC1(var_1);
+  foreach(var_1 in level.zmwaveintermissiondialog) {
+    if(dialogcanplay(var_1) && playdialog(var_1)) {
+      dialogincrement(var_1);
       return 1;
     }
   }
 
-  foreach(var_1 in level._id_AB49) {
-    if(!var_1._id_08BE && _id_27E1(var_1)) {
-      if(_id_7211(var_1)) {
-        _id_2EC1(var_1);
+  foreach(var_1 in level.zmwaveintermissiondialog) {
+    if(!var_1._id_08BE && createdialog(var_1)) {
+      if(playdialog(var_1)) {
+        dialogincrement(var_1);
         return 1;
       } else
         return 0;
@@ -1145,16 +1145,16 @@ _id_74E9() {
   return 0;
 }
 
-_id_2EBF(var_0) {
-  return var_0._id_08BE && var_0._id_66CB <= level._id_A980 && _id_2EC0(var_0);
+dialogcanplay(var_0) {
+  return var_0._id_08BE && var_0.nextround <= level.wavecounter && dialogcharactersactive(var_0);
 }
 
-_id_2EC0(var_0) {
-  if(var_0._id_20D9.size != 2) {
+dialogcharactersactive(var_0) {
+  if(var_0.characters.size != 2) {
     return 0;
   }
 
-  foreach(var_2 in var_0._id_20D9) {
+  foreach(var_2 in var_0.characters) {
     if(!isDefined(var_2) || !maps\mp\_utility::isreallyalive(var_2)) {
       return 0;
     }
@@ -1163,14 +1163,14 @@ _id_2EC0(var_0) {
   return 1;
 }
 
-_id_2EC1(var_0) {
-  var_0._id_66CB = var_0._id_66CB + _randomintrange(2, 4);
+dialogincrement(var_0) {
+  var_0.nextround = var_0.nextround + _randomintrange(2, 4);
   var_0.aiphysicstrace++;
 }
 
-_id_7401() {
-  foreach(var_1 in level._id_AB49) {
-    if(common_scripts\utility::_id_0F79(var_1._id_20D9, self)) {
+playerinanydialog() {
+  foreach(var_1 in level.zmwaveintermissiondialog) {
+    if(common_scripts\utility::_id_0F79(var_1.characters, self)) {
       return 1;
     }
   }
@@ -1178,13 +1178,13 @@ _id_7401() {
   return 0;
 }
 
-_id_27E1(var_0) {
+createdialog(var_0) {
   var_1 = common_scripts\utility::array_randomize(level.players);
   var_2 = undefined;
   var_3 = undefined;
 
   foreach(var_5 in var_1) {
-    if(!var_5 _id_7401()) {
+    if(!var_5 playerinanydialog()) {
       if(!isDefined(var_2)) {
         var_2 = var_5;
       } else {
@@ -1201,43 +1201,43 @@ _id_27E1(var_0) {
     return 0;
   }
 
-  var_0._id_20D9[0] = var_2;
-  var_0._id_20D9[1] = var_3;
-  var_0._id_7677[0] = level._id_A62B._id_90BE[var_2._id_AB1D]._id_7677[_id_0547::_id_429D(var_2)];
-  var_0._id_7677[1] = level._id_A62B._id_90BE[var_3._id_AB1D]._id_7677[_id_0547::_id_429D(var_3)];
+  var_0.characters[0] = var_2;
+  var_0.characters[1] = var_3;
+  var_0.prefixes[0] = level.vox.speaker[var_2.zmbvoxid].prefixes[_id_0547::get_player_index(var_2)];
+  var_0.prefixes[1] = level.vox.speaker[var_3.zmbvoxid].prefixes[_id_0547::get_player_index(var_3)];
   var_0._id_08BE = 1;
-  var_0._id_2566 = 0;
+  var_0.completed = 0;
   return 1;
 }
 
-_id_7211(var_0) {
-  var_1 = "" + var_0._id_7677[0] + var_0._id_7677[1] + var_0.aiphysicstrace;
-  var_2 = var_0._id_20D9[0];
-  var_3 = var_0._id_20D9[1];
+playdialog(var_0) {
+  var_1 = "" + var_0.prefixes[0] + var_0.prefixes[1] + var_0.aiphysicstrace;
+  var_2 = var_0.characters[0];
+  var_3 = var_0.characters[1];
 
-  if(!isDefined(level._id_A62B._id_90BE["player"]._id_0BB4["conversation"][var_1])) {
-    var_1 = "" + var_0._id_7677[1] + var_0._id_7677[0] + var_0.aiphysicstrace;
-    var_2 = var_0._id_20D9[1];
-    var_3 = var_0._id_20D9[0];
+  if(!isDefined(level.vox.speaker["player"]._id_0BB4["conversation"][var_1])) {
+    var_1 = "" + var_0.prefixes[1] + var_0.prefixes[0] + var_0.aiphysicstrace;
+    var_2 = var_0.characters[1];
+    var_3 = var_0.characters[0];
 
-    if(!isDefined(level._id_A62B._id_90BE["player"]._id_0BB4["conversation"][var_1])) {
-      var_0._id_2566 = 1;
+    if(!isDefined(level.vox.speaker["player"]._id_0BB4["conversation"][var_1])) {
+      var_0.completed = 1;
       return 0;
     }
   }
 
-  return var_2 _id_277D("conversation", var_1, undefined, undefined, undefined, var_3);
+  return var_2 create_and_play_dialog("conversation", var_1, undefined, undefined, undefined, var_3);
 }
 
-_id_4454(var_0) {
+getcharacterbyindex(var_0) {
   foreach(var_2 in level.players) {
-    if(var_2._id_20D8 == var_0) {
+    if(var_2.characterindex == var_0) {
       return var_2;
     }
   }
 }
 
-_id_4456(var_0) {
+getcharacterindexbyprefix(var_0) {
   switch (var_0) {
     case "jeff":
       return 0;
@@ -1250,12 +1250,12 @@ _id_4456(var_0) {
   }
 }
 
-_id_4455(var_0) {
-  return _id_4454(_id_4456(var_0));
+getcharacterbyprefix(var_0) {
+  return getcharacterbyindex(getcharacterindexbyprefix(var_0));
 }
 
-_id_441D(var_0) {
-  var_1 = _id_4455(var_0);
+getanycharacterbyprefixexcept(var_0) {
+  var_1 = getcharacterbyprefix(var_0);
 
   if(!isDefined(var_1)) {
     return level.players[randomint(level.players.size)];
@@ -1272,39 +1272,39 @@ _id_441D(var_0) {
 
 _id_AB3D() {
   var_0 = _randomintrange(0, 3);
-  _id_734D();
-  _id_746A();
-  _id_73DF("death" + var_0);
+  player_stop_speaking();
+  playerstopexerting();
+  playerexert("death" + var_0);
 }
 
 _id_AB3C(var_0) {
-  if(isDefined(self._id_29AB) && self._id_29AB + 5000 > var_0) {
+  if(isDefined(self.damage_sound_time) && self.damage_sound_time + 5000 > var_0) {
     return;
   }
-  if(!common_scripts\utility::_id_562E(self._id_56E2)) {
-    self._id_29AB = var_0;
+  if(!common_scripts\utility::_id_562E(self.isexerting)) {
+    self.damage_sound_time = var_0;
     var_1 = _randomintrange(0, 3);
-    _id_734D();
-    _id_73DF("pain" + var_1);
+    player_stop_speaking();
+    playerexert("pain" + var_1);
   }
 }
 
-_id_73DF(var_0) {
+playerexert(var_0) {
   return 0;
 }
 
-_id_746A() {
+playerstopexerting() {
   self notify("stopExerting");
-  self._id_56E2 = undefined;
+  self.isexerting = undefined;
 }
 
-_id_38E0() {
+exert_timer() {
   self endon("disconnect");
   self endon("stopExerting");
   wait 1;
-  self._id_56E2 = 1;
+  self.isexerting = 1;
   wait(_randomfloatrange(1.5, 3));
-  self._id_56E2 = undefined;
+  self.isexerting = undefined;
 }
 
 _id_743B() {}
@@ -1362,7 +1362,7 @@ _id_73C4(var_0, var_1) {
       var_1 = "mod_serratededge";
     } else if(_id_0547::_id_4BA7("specialty_class_saboteur_zm") && playerismaincast()) {
       var_1 = "mod_saboteur";
-    } else if(_id_0547::_id_4BA7("specialty_class_mobilization_zm") && (playerismaincast() || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self._id_20D8), "slay") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self._id_20D8), "mount") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self._id_20D8), "hunt") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self._id_20D8), "surv"))) {
+    } else if(_id_0547::_id_4BA7("specialty_class_mobilization_zm") && (playerismaincast() || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self.characterindex), "slay") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self.characterindex), "mount") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self.characterindex), "hunt") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self.characterindex), "surv"))) {
       var_1 = "mod_enhancedspeed";
     }
   } else if(var_1 == "special_mad") {
@@ -1376,7 +1376,7 @@ _id_73C4(var_0, var_1) {
       var_1 = "mod_supplyarmor";
     } else if(_id_0547::_id_4BA7("specialty_class_fiery_burst_zm")) {
       var_1 = "mod_fieryburst";
-    } else if(_id_0547::_id_4BA7("specialty_class_exploit_weakness_zm") && (playerismaincast() || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self._id_20D8), "slay") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self._id_20D8), "mount") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self._id_20D8), "hunt") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self._id_20D8), "surv"))) {
+    } else if(_id_0547::_id_4BA7("specialty_class_exploit_weakness_zm") && (playerismaincast() || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self.characterindex), "slay") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self.characterindex), "mount") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self.characterindex), "hunt") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self.characterindex), "surv"))) {
       var_1 = "mod_exploitweakness";
     }
   } else if(var_1 == "special_taunt") {
@@ -1384,7 +1384,7 @@ _id_73C4(var_0, var_1) {
       var_1 = "mod_teameffort";
     } else if(_id_0547::_id_4BA7("specialty_class_come_get_zm")) {
       var_1 = "mod_comeandgetit";
-    } else if(_id_0547::_id_4BA7("specialty_class_counter_offensive_zm") && (playerismaincast() || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self._id_20D8), "slay") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self._id_20D8), "mount") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self._id_20D8), "hunt") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self._id_20D8), "surv"))) {
+    } else if(_id_0547::_id_4BA7("specialty_class_counter_offensive_zm") && (playerismaincast() || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self.characterindex), "slay") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self.characterindex), "mount") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self.characterindex), "hunt") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self.characterindex), "surv"))) {
       var_1 = "mod_counteroffensive";
     }
   } else if(var_1 == "special_melee") {}
@@ -1397,7 +1397,7 @@ _id_73C4(var_0, var_1) {
 }
 
 playerismaincast() {
-  if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "dros") || _id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff") || _id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "mari") || _id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "oliv")) {
+  if(_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "dros") || _id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "jeff") || _id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "mari") || _id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "oliv")) {
     return 1;
   } else {
     return 0;
@@ -1418,7 +1418,7 @@ _id_73C3() {
     if(var_3 == self) {
       continue;
     }
-    if(_id_0547::_id_577E(var_3)) {
+    if(_id_0547::isplayerinlaststand(var_3)) {
       continue;
     }
     if(distancesquared(self.origin, var_3.origin) < var_1) {
@@ -1453,9 +1453,9 @@ _id_73B9(var_0, var_1) {
     if(common_scripts\utility::_id_562E(var_1)) {
       var_2 = "perk_first";
 
-      if(var_0 == "electriccherry" && (_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff") || _id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "mari"))) {
+      if(var_0 == "electriccherry" && (_id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "jeff") || _id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "mari"))) {
         var_2 = "perk_shock";
-      } else if(var_0 == "punchperk" && _id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff")) {
+      } else if(var_0 == "punchperk" && _id_0547::_id_5565(_id_0378::_id_307B(self.characterindex), "jeff")) {
         var_2 = "perk_punch";
       }
     }
@@ -1476,7 +1476,7 @@ _id_73B9(var_0, var_1) {
         var_2 = "perk_run";
         break;
       case "quickrevive":
-        if(_id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self._id_20D8), "slay") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self._id_20D8), "mount") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self._id_20D8), "hunt") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self._id_20D8), "surv")) {
+        if(_id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self.characterindex), "slay") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self.characterindex), "mount") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self.characterindex), "hunt") || _id_0547::_id_5565(_id_0378::dlg_get_char_name_override_from_index(self.characterindex), "surv")) {
           var_2 = "perk_ouch";
         } else {
           var_2 = "perk_revive";
@@ -1521,7 +1521,7 @@ playeruseconsumableweapon() {
 }
 
 isshipzombiesmap() {
-  var_0 = maps\mp\_utility::_id_4571();
+  var_0 = maps\mp\_utility::getmapname();
 
   if(var_0 == "mp_zombie_nest_01" || var_0 == "mp_zombie_house" || var_0 == "mp_zombie_training") {
     return 1;
@@ -1534,7 +1534,7 @@ _id_7491(var_0, var_1) {}
 
 _id_73E4() {}
 
-_id_62D9() {
+moneyspend() {
   self playlocalsound("interact_purchase");
-  _id_0378::_id_8D74("money_spend");
+  _id_0378::snd_message("money_spend");
 }

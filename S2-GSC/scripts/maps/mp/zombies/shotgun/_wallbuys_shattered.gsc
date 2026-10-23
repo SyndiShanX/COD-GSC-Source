@@ -19,9 +19,9 @@ override_wall_buys_by_class() {
   var_0 = _getscriptablearray("wallbuy_lgt", "targetname");
 
   foreach(var_2 in level._id_A7DE) {
-    if(isDefined(var_2._id_81C7) && var_2._id_81C7 == "rand_wallbuy") {
+    if(isDefined(var_2.script_ghettotag) && var_2.script_ghettotag == "rand_wallbuy") {
       level.rand_wallbuys = common_scripts\utility::_id_0F6F(level.rand_wallbuys, var_2);
-      var_3 = common_scripts\utility::_id_4461(var_2.origin, var_0);
+      var_3 = common_scripts\utility::getclosest(var_2.origin, var_0);
 
       if(isDefined(var_3)) {
         var_2.scriptable_light = var_3;
@@ -56,7 +56,7 @@ show_wallbuy_waypoints(var_0) {
 
   foreach(var_5 in level.active_zombie_models_to_outline) {
     if(!isDefined(var_5.weapon_class)) {
-      var_6 = common_scripts\utility::_id_40B0(var_5.origin, level.active_zombie_models_to_outline);
+      var_6 = common_scripts\utility::get_array_of_closest(var_5.origin, level.active_zombie_models_to_outline);
 
       foreach(var_8 in var_6) {
         if(isDefined(var_8.weapon_class)) {
@@ -117,7 +117,7 @@ hide_wallbuy_waypoints(var_0) {
 run_wallbuy_mysterybox_mod() {
   foreach(var_1 in self._id_A7E9) {
     var_1.wallbuy = self;
-    _id_0547::_id_8A4F(var_1, ::assignwallbuymysterypurchasetoplayer, ::_id_4D1B);
+    _id_0547::setupusetriggerforclient(var_1, ::assignwallbuymysterypurchasetoplayer, ::_id_4D1B);
   }
 
   var_3 = _id_0547::zm_get_weapon_class(self._id_0165);
@@ -138,7 +138,7 @@ run_wallbuy_mysterybox_mod() {
   self.requiredbuildmaterials = var_8;
 
   foreach(var_1 in self._id_A7E9) {
-    var_1._id_267B = var_7;
+    var_1.cost = var_7;
     var_1.wallbuy._id_A9A5 = var_9;
     var_1.requiredbuildmaterials = var_8;
     var_1 thread watch_for_player_purchase();
@@ -155,7 +155,7 @@ setwallbuyitements(var_0, var_1, var_2) {
   } else
     var_1._id_586E setpickupweapon(var_2);
 
-  var_1._id_586E._id_A9E0 = var_2;
+  var_1._id_586E.weaponname = var_2;
   var_1._id_586E makeunusable();
   var_1._id_586E ghost();
 }
@@ -163,7 +163,7 @@ setwallbuyitements(var_0, var_1, var_2) {
 slide_left() {
   var_0 = 0;
 
-  switch (self._id_A9E0) {
+  switch (self.weaponname) {
     case "m1a1_zm":
       var_0 = -3;
       break;
@@ -216,10 +216,10 @@ run_wallbuy_trigger_mysterybox_mod(var_0, var_1) {
   var_6 thread watch_player_consumable_usage(var_2);
   var_7 = common_scripts\utility::array_randomize(var_0);
   var_8 = 0;
-  var_9 = maps\mp\gametypes\_class::_id_1D66("ppsh41_classic_zm", "extended_mag");
+  var_9 = maps\mp\gametypes\_class::buildweaponname("ppsh41_classic_zm", "extended_mag");
 
   for(;;) {
-    if(var_1 == "weapon_smg" && common_scripts\utility::_id_3C77("shotgun_classic_add_to_box")) {
+    if(var_1 == "weapon_smg" && common_scripts\utility::flag("shotgun_classic_add_to_box")) {
       if(!common_scripts\utility::_id_0F79(var_7, var_9)) {
         var_10 = _randomintrange(1, 4);
         var_7 = common_scripts\utility::_id_0F86(var_7, var_9, var_8 + var_10);
@@ -252,12 +252,12 @@ run_wallbuy_trigger_mysterybox_mod(var_0, var_1) {
     }
 
     setwallbuyitements(var_6, var_2, var_12);
-    var_2._id_A9E0 = var_12;
+    var_2.weaponname = var_12;
     var_2 waittill("mystery_wallbuy_used", var_13);
-    var_3 = var_2._id_586E._id_A9E0;
+    var_3 = var_2._id_586E.weaponname;
     var_12 = var_3;
     playFX(level._effect["zmb_mystery_box_gun_gk"], var_2._id_A9E3);
-    level._id_11CB._id_65F4 = _id_0380::_id_2889("zmb_mystery_box_elec", undefined, var_2._id_A9E3);
+    level.aud._id_65F4 = _id_0380::_id_2889("zmb_mystery_box_elec", undefined, var_2._id_A9E3);
     var_2._id_586E showtoplayer(var_13);
 
     if(!isDefined(var_2._id_586E._id_6C4E)) {
@@ -281,7 +281,7 @@ run_wallbuy_trigger_mysterybox_mod(var_0, var_1) {
       var_13 _id_0579::_id_A246();
     }
 
-    if(_id_0547::_id_585C(var_12)) {
+    if(_id_0547::iszombieequipment(var_12)) {
       _id_0548::_id_A7D5(var_13, var_12);
     } else {
       _id_0548::_id_A7D6(var_13, var_12);
@@ -292,7 +292,7 @@ run_wallbuy_trigger_mysterybox_mod(var_0, var_1) {
         level.zmb_shotgun_jack_in_box_odds_add_per_spin = 0;
         level.zmb_shotgun_jack_in_box_odds = 8;
         var_13 _id_057D::_id_4766();
-        var_13 thread maps\mp\gametypes\_hud_message::_id_9102("zm_collectible_splash_jitb");
+        var_13 thread maps\mp\gametypes\_hud_message::splashnotify("zm_collectible_splash_jitb");
       } else
         level.zmb_shotgun_jack_in_box_odds = level.zmb_shotgun_jack_in_box_odds + int(level.zmb_shotgun_jack_in_box_odds_add_per_spin * get_wallbuy_jack_multiplier(var_1));
     }
@@ -439,7 +439,7 @@ give_wallbuy_materials() {
 broadcast_and_unlock_available_weapon_wallbuys() {
   foreach(var_1 in level.sg_wallbuyclasses) {
     if(level.wallbuymaterials > 1 && level.wallbuymaterials == level.zombies_shotgun_weapons_level[var_1]) {
-      level thread maps\mp\_utility::_id_6F74(maps\mp\gametypes\_hud_message::_id_9102, level.zombies_shotgun_weapons_splashes[var_1]);
+      level thread maps\mp\_utility::_id_6F74(maps\mp\gametypes\_hud_message::splashnotify, level.zombies_shotgun_weapons_splashes[var_1]);
     }
   }
 
@@ -494,8 +494,8 @@ getwallbuytriggercost(var_0) {
 
   var_1 = 1000;
 
-  if(isDefined(self._id_267B)) {
-    var_1 = self._id_267B;
+  if(isDefined(self.cost)) {
+    var_1 = self.cost;
   }
 
   if(isPlayer(var_0) && var_0 _id_0573::_id_4B7B()) {
@@ -527,10 +527,10 @@ watch_for_player_purchase() {
       continue;
     }
 
-    if(!var_0 maps\mp\gametypes\zombies::_id_1F32(var_1) || !common_scripts\utility::_id_562E(self.canusewb)) {
+    if(!var_0 maps\mp\gametypes\zombies::canbuy(var_1) || !common_scripts\utility::_id_562E(self.canusewb)) {
       continue;
     }
-    if(!var_0 maps\mp\gametypes\zombies::_id_11C2(var_1)) {
+    if(!var_0 maps\mp\gametypes\zombies::attempttobuy(var_1)) {
       var_0 thread _id_054E::_id_0695("needmoney");
       continue;
     } else {
@@ -748,7 +748,7 @@ assignwallbuymysterypurchasetoplayer(var_0) {
   _id_0559::_id_7BE2(var_0, self, "wallbuy_dlc3");
   var_1._id_65DC = var_2;
   var_2._id_4028 = _id_0552::_id_44FF(get_state_for_weapon_class(_id_0547::zm_get_weapon_class(var_1.wallbuy._id_0165)));
-  var_2._id_2F74 = 0;
+  var_2.disabled = 0;
   var_2._id_6642 = 1;
   var_1.canusewb = 0;
   var_3 = 0;
@@ -772,9 +772,9 @@ assignwallbuymysterypurchasetoplayer(var_0) {
       var_1.onceonly = 1;
     }
 
-    _id_0547::_id_A6F6();
+    _id_0547::waitnetworkframe();
     var_2._id_401E = var_1 getwallbuytriggercost(var_0);
-    var_2._id_2F74 = 0;
+    var_2.disabled = 0;
     var_2._id_6642 = 1;
     var_2._id_4028 = _id_0552::_id_44FF(get_state_for_weapon_class(_id_0547::zm_get_weapon_class(var_1.wallbuy._id_0165)));
     var_1.canusewb = 1;
@@ -784,7 +784,7 @@ assignwallbuymysterypurchasetoplayer(var_0) {
     var_2._id_6642 = 1;
 
     if(var_8 == "mystery_wallbuy_used") {
-      var_2._id_2F74 = 1;
+      var_2.disabled = 1;
       var_1 waittill("mystery_wallbuy_done");
       var_2._id_4028 = _id_0552::_id_44FF(get_state_for_weapon_class(_id_0547::zm_get_weapon_class(var_1.wallbuy._id_0165)));
       var_2._id_401E = var_1 getwallbuytriggercost(var_0);
@@ -793,7 +793,7 @@ assignwallbuymysterypurchasetoplayer(var_0) {
       var_0 notify(var_6);
     }
 
-    var_2._id_2F74 = 0;
+    var_2.disabled = 0;
 
     if(var_3) {
       if(var_1 canopenwallbuy(var_0)) {

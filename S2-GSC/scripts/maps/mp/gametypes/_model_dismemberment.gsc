@@ -9,7 +9,7 @@ _id_2E43(var_0, var_1) {
   }
 }
 
-_id_5E60(var_0) {
+locationtobodypart(var_0) {
   switch (var_0) {
     case "right_arm_lower":
     case "right_hand":
@@ -36,8 +36,8 @@ _id_5E60(var_0) {
   }
 }
 
-_id_20AF(var_0) {
-  if(isDefined(self._id_4B53) && var_0 != 16) {
+chancetokeepbodypart(var_0) {
+  if(isDefined(self.hasarmor) && var_0 != 16) {
     return 1;
   }
 
@@ -51,7 +51,7 @@ _id_20AF(var_0) {
     case 8:
       return 0.5;
     case 16:
-      if(common_scripts\utility::_id_562E(self._id_4B6E) || common_scripts\utility::_id_562E(self._id_4B5A)) {
+      if(common_scripts\utility::_id_562E(self.hashelmet) || common_scripts\utility::_id_562E(self._id_4B5A)) {
         return 1;
       }
 
@@ -61,7 +61,7 @@ _id_20AF(var_0) {
   }
 }
 
-_id_4558(var_0, var_1) {
+getlimborigin(var_0, var_1) {
   var_2 = 40;
 
   switch (var_0) {
@@ -77,7 +77,7 @@ _id_4558(var_0, var_1) {
   }
 }
 
-_id_4559(var_0, var_1) {
+getlimbproperty(var_0, var_1) {
   if(isDefined(self._id_2FE3) && isDefined(self._id_2FE3[var_0])) {
     var_2 = self._id_2FE3[var_0][var_1];
 
@@ -91,8 +91,8 @@ _id_4559(var_0, var_1) {
 }
 
 _id_52A9() {
-  level._id_2FDD = [];
-  level._id_66BF = 0;
+  level.dismemberedbodyparts = [];
+  level.nextdismemberedbodypartindex = 0;
   level._id_2FDE[1]["modelToSpawn"] = "zom_shared_r_arm_slice";
   level._id_2FDE[2]["modelToSpawn"] = "zom_shared_l_arm_slice";
   level._id_2FDE[4]["modelToSpawn"] = "zom_shared_r_leg_slice";
@@ -146,7 +146,7 @@ _id_4AAB(var_0) {
       var_4 = var_2[3];
     } else {}
   } else {
-    var_5 = self._id_18A8 getcorpseanim();
+    var_5 = self.body getcorpseanim();
 
     if(_animhasnotetrack(var_5, "left_leg")) {
       var_4 = var_2[1];
@@ -176,7 +176,7 @@ _id_4AAB(var_0) {
     }
   }
 
-  var_7 = self._id_267E;
+  var_7 = self.costume;
 
   if(self.classname == "script_model") {
     if(isDefined(self.team)) {
@@ -193,5 +193,5 @@ _id_4AAB(var_0) {
   var_7[var_4[2]] = var_4[1];
   self._id_65D2 = var_4[4];
   self._id_65D1 = var_4[5];
-  self _meth_84C7(var_7, var_1, 1);
+  self set_grenadeammo(var_7, var_1, 1);
 }

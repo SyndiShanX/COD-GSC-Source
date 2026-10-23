@@ -188,7 +188,7 @@ _id_4698(var_0) {
 }
 
 _id_4670(var_0, var_1) {
-  var_2 = tablelookup(var_0, 0, maps\mp\_utility::_id_4571(), var_1);
+  var_2 = tablelookup(var_0, 0, maps\mp\_utility::getmapname(), var_1);
 
   if(!isDefined(var_2) || var_2 == "") {
     var_2 = tablelookup(var_0, 0, "mp_default", var_1);
@@ -260,7 +260,7 @@ _id_3890(var_0, var_1, var_2) {
 _id_388F(var_0, var_1) {
   var_2 = level._id_903A;
 
-  if(isDefined(level._id_746E) && var_0 != level._id_746E) {
+  if(isDefined(level.playerteam) && var_0 != level.playerteam) {
     var_2 = level._id_903B;
   }
 
@@ -315,7 +315,7 @@ _id_80AE(var_0, var_1, var_2) {
   }
 
   foreach(var_4 in var_1) {
-    if(isDefined(level._id_746E) && var_0 != level._id_746E) {
+    if(isDefined(level.playerteam) && var_0 != level.playerteam) {
       _id_3895(var_0, var_4);
       continue;
     }
@@ -610,9 +610,9 @@ scragentsetanimscale(var_0) {
 scragentsetgoalentity(var_0, var_1, var_2, var_3) {
   level._id_9068._id_9090 = var_1;
 
-  if(isDefined(level._id_746E) && var_0 != level._id_746E) {
+  if(isDefined(level.playerteam) && var_0 != level.playerteam) {
     return scragentsetgoalRadius(var_0, var_1, var_2, var_3);
-  } else if(level._id_A239 && ((maps\mp\_utility::_id_585F() || level.teambased) && level.ingraceperiod || !level.teambased && maps\mp\_utility::gettimepassed() == 0)) {
+  } else if(level.usestartspawns && ((maps\mp\_utility::_id_585F() || level.teambased) && level.ingraceperiod || !level.teambased && maps\mp\_utility::gettimepassed() == 0)) {
     return scragentsetanimscale(var_1);
   } else {
     return scragentsetgoalRadius(var_0, var_1, var_2, var_3);
@@ -686,11 +686,11 @@ _id_8BA2() {
 _id_4436(var_0, var_1, var_2, var_3, var_4, var_5) {
   level._id_A6EC = 1;
 
-  if(level._id_A239 && ((maps\mp\_utility::_id_585F() || level.teambased) && level.ingraceperiod || !level.teambased && maps\mp\_utility::gettimepassed() == 0)) {
+  if(level.usestartspawns && ((maps\mp\_utility::_id_585F() || level.teambased) && level.ingraceperiod || !level.teambased && maps\mp\_utility::gettimepassed() == 0)) {
     if(level.teambased) {
-      var_6 = _id_050D::_id_46A0(var_0);
+      var_6 = _id_050D::getspawnpointarray(var_0);
     } else {
-      var_6 = _id_050D::_id_46A0("allies");
+      var_6 = _id_050D::getspawnpointarray("allies");
     }
 
     if(level.gametype == "zombies") {
@@ -712,7 +712,7 @@ _id_4436(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_9 = level._id_90B4;
 
     if(isDefined(self)) {
-      var_10 = self._id_6870;
+      var_10 = self.num_lives;
 
       if(!isDefined(var_10)) {
         var_10 = -1;
@@ -744,7 +744,7 @@ _id_4436(var_0, var_1, var_2, var_3, var_4, var_5) {
       var_9 = level._id_90B4;
 
       if(isDefined(self)) {
-        var_10 = self._id_6870;
+        var_10 = self.num_lives;
 
         if(!isDefined(var_10)) {
           var_10 = -1;
@@ -784,7 +784,7 @@ _id_A278(var_0) {
     return;
   }
   var_1 = self _meth_856A();
-  var_2 = self _meth_856B();
+  var_2 = self set_reverb_stringtable();
 }
 
 _id_2B5D() {
@@ -802,13 +802,13 @@ _id_2B5D() {
   level.players[0] _id_4007(var_0, var_1, var_2, 0);
 }
 
-_id_5767(var_0) {
-  if(!isDefined(level._id_746E)) {
+isonhumanteam(var_0) {
+  if(!isDefined(level.playerteam)) {
     return 1;
   }
 
   if(isDefined(var_0.team)) {
-    return var_0.team == level._id_746E;
+    return var_0.team == level.playerteam;
   }
 
   return 0;

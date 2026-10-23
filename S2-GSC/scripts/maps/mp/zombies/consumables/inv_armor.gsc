@@ -14,7 +14,7 @@ canusearmor(var_0) {
     return 0;
   }
 
-  if(var_1 _id_056A::_id_4B53()) {
+  if(var_1 _id_056A::hasarmor()) {
     return 0;
   }
 
@@ -24,7 +24,7 @@ canusearmor(var_0) {
 usearmor(var_0) {
   foreach(var_2 in level.players) {
     var_2 _id_056A::_id_4775();
-    var_2 thread maps\mp\gametypes\_hud_message::_id_9102("zm_shattered_maxarmor_splash");
+    var_2 thread maps\mp\gametypes\_hud_message::splashnotify("zm_shattered_maxarmor_splash");
   }
 }
 

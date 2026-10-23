@@ -29,7 +29,7 @@ trap_1(var_0) {
 }
 
 aud_play_spike_sound() {
-  _id_0378::_id_8D74("artillery_bunker_trap_spikes", self.origin);
+  _id_0378::snd_message("artillery_bunker_trap_spikes", self.origin);
 }
 
 trap_trigger_watch(var_0) {
@@ -51,7 +51,7 @@ trap_1_damage_fx_watch(var_0) {
       if(isDefined(var_0.setlookatent) && var_0.setlookatent == "no_player_damage") {
         continue;
       }
-      if(isDefined(var_2._id_66D3) && var_2._id_66D3 > gettime()) {
+      if(isDefined(var_2.nexttrapdamage) && var_2.nexttrapdamage > gettime()) {
         continue;
       }
       if(var_1 + 3000 > gettime()) {
@@ -61,18 +61,18 @@ trap_1_damage_fx_watch(var_0) {
       continue;
     }
 
-    if(isDefined(var_2._id_000A) && var_2._id_000A == level._id_746E) {
+    if(isDefined(var_2._id_000A) && var_2._id_000A == level.playerteam) {
       if(isDefined(var_0.setlookatent) && var_0.setlookatent == "no_player_damage") {
         continue;
       }
-      if(isDefined(var_2._id_66D3) && var_2._id_66D3 > gettime()) {
+      if(isDefined(var_2.nexttrapdamage) && var_2.nexttrapdamage > gettime()) {
         continue;
       }
       if(var_1 + 3000 > gettime()) {
         continue;
       }
     } else {
-      playFX(common_scripts\utility::_id_44F5("zmb_isl_med_trap_gib_rnr"), var_2.origin);
+      playFX(common_scripts\utility::getfx("zmb_isl_med_trap_gib_rnr"), var_2.origin);
       var_4 = var_2 modify_damage_to_island_zombie_types(5);
       var_2 dodamage(var_4, var_2.origin, var_0, var_0, "MOD_EXPLOSIVE", "trap_zm_mp");
     }

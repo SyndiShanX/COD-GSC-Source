@@ -10,7 +10,7 @@ init() {
 manage_possums() {
   level endon("game_ended");
   wait 1;
-  var_3 = common_scripts\utility::_id_46B7("feign_death_struct", "targetname");
+  var_3 = common_scripts\utility::getstructarray("feign_death_struct", "targetname");
 
   foreach(var_5 in var_3) {
     var_5 initialize_feign_death();
@@ -27,17 +27,17 @@ manage_possums() {
       var_11 = var_10.scare_zone;
       var_12 = _id_055A::_id_4626(var_11, 1);
 
-      if(var_12.size == 0 && common_scripts\utility::_id_562E(level._id_AC80._id_ACB3[var_11]._id_556E)) {
+      if(var_12.size == 0 && common_scripts\utility::_id_562E(level.zone_data.zones[var_11].is_enabled)) {
         var_8 = var_10;
         break;
       }
     }
 
     if(isDefined(var_8)) {
-      var_14 = level._id_A980 + _randomintrange(2, 5);
+      var_14 = level.wavecounter + _randomintrange(2, 5);
       wait_for_jscare_complete(var_8);
 
-      while(level._id_A980 < var_14) {
+      while(level.wavecounter < var_14) {
         wait 0.125;
       }
     } else {}
@@ -56,11 +56,11 @@ wait_for_jscare_complete(var_0) {
     var_2 = spawn("script_model", var_0._id_0186.origin);
     var_0 thread do_feign_death(var_2);
     var_3 = 90;
-    var_4 = var_2 common_scripts\utility::_id_A71A(var_3, "do_jumpscare", "jscare_zombie_unfrozen");
+    var_4 = var_2 common_scripts\utility::waittill_any_timeout(var_3, "do_jumpscare", "jscare_zombie_unfrozen");
 
     if(var_4 != "do_jumpscare") {
       for(var_5 = _id_055A::_id_4626(var_0.scare_zone, 0); var_5.size != 0 && var_4 != "do_jumpscare"; var_5 = _id_055A::_id_4626(var_0.scare_zone, 0)) {
-        var_4 = var_2 common_scripts\utility::_id_A71A(1, "do_jumpscare");
+        var_4 = var_2 common_scripts\utility::waittill_any_timeout(1, "do_jumpscare");
       }
 
       if(var_4 != "do_jumpscare") {
@@ -107,7 +107,7 @@ initialize_feign_death() {
         self._id_0186 = var_4;
         break;
       case "feign_death_trigger":
-        self._id_9D65 = var_4;
+        self.trigger = var_4;
         break;
     }
   }
@@ -169,21 +169,21 @@ execute_frozen_state(var_0, var_1, var_2) {
   var_5 = self getanimentrycount(var_4);
   var_6 = randomint(var_5);
   self scragentsetscripted(1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, var_3);
-  maps\mp\_utility::_id_2CED(0.5, ::setpossumgoal);
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, var_3);
+  maps\mp\_utility::delaythread(0.5, ::setpossumgoal);
   self scragentsetorientmode("face angle abs", self.angles);
   self scragentsetanimmode("anim deltas");
   self.frozen = 1;
-  thread maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_4, var_6, 0.0, "scripted_anim", undefined, undefined, 0.0);
+  thread maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_4, var_6, 0.0, "scripted_anim", undefined, undefined, 0.0);
   var_7 = 90;
   common_scripts\utility::_id_A70D(var_7, var_1, "do_jumpscare");
   var_1 notify("do_jumpscare");
-  _id_0378::_id_8D74("js_corpse_becomes_zombie");
+  _id_0378::snd_message("js_corpse_becomes_zombie");
   self.frozen = 0;
   self notify("scripted_anim", "end");
   childthread setfacingenemy();
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_4, var_6, 1.0, "scripted_anim");
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, var_3);
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_4, var_6, 1.0, "scripted_anim");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, var_3);
   self scragentsetscripted(0);
 }
 

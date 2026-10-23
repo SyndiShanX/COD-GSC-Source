@@ -64,7 +64,7 @@ onplayerspawned() {
 
     if(getdvarint("1936")) {
       thread _id_6B7A();
-      thread _id_6B74();
+      thread onplayerdeath();
       thread _id_6B98();
       thread _id_6B76();
     }
@@ -78,13 +78,13 @@ _id_6B7A() {
   _id_7D6B();
 }
 
-_id_6B74() {
+onplayerdeath() {
   self endon("disconnect");
   self endon("spawned");
   self waittill("death");
   var_0 = self _meth_85BA("active");
   self._id_7ED1["activeOnDeath"] = var_0;
-  self _meth_85BC();
+  self set_turret_team();
   _id_942F();
 }
 
@@ -103,7 +103,7 @@ _id_6B76() {
 
     if(!var_0 && (var_1 || var_2)) {
       if(maps\mp\_utility::_id_585F()) {
-        _id_0378::_id_8D74("role_ready");
+        _id_0378::snd_message("role_ready");
       } else {
         self playsoundtoplayer("ks_earn_dna_bomb", self, 1);
       }
@@ -122,7 +122,7 @@ _id_6B98() {
   if(maps\mp\_utility::isroundbased() && !maps\mp\_utility::islastround()) {
     var_0 = self _meth_85BA("active");
     self._id_7ED1["activeOnDeath"] = var_0;
-    self _meth_85BC();
+    self set_turret_team();
     _id_942F();
   }
 }
@@ -174,7 +174,7 @@ _id_2F9E(var_0) {
 _id_2F94(var_0) {
   level endon("game_ended");
   self endon("DisabledRoleAbility");
-  common_scripts\utility::_id_A70A("death", "disconnect", "joined_team", "joined_spectators");
+  common_scripts\utility::waittill_any("death", "disconnect", "joined_team", "joined_spectators");
   _id_2F9E(var_0);
 }
 

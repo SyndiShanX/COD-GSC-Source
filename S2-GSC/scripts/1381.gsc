@@ -167,7 +167,7 @@ getanimentrycount(var_0, var_1, var_2, var_3) {
     return;
   }
   self._id_400B[var_4] = 1;
-  thread maps\mp\gametypes\_hud_message::_id_9102(var_4 + "_objective_complete");
+  thread maps\mp\gametypes\_hud_message::splashnotify(var_4 + "_objective_complete");
   _id_0468::_id_0A2B(var_3, var_1);
 }
 
@@ -193,7 +193,7 @@ zombiegearchallengecomplete(var_0, var_1, var_2) {
     var_3 _meth_8697(16, var_6);
   }
 
-  var_3 thread maps\mp\gametypes\_hud_message::_id_9102(var_4);
+  var_3 thread maps\mp\gametypes\_hud_message::splashnotify(var_4);
 }
 
 zombiegearchallengethread(var_0) {

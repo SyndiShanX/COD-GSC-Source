@@ -6,46 +6,46 @@
 main() {
   self endon("death");
   self endon("killanimscript");
-  self._id_28D2 endon("disconnect");
-  var_0 = maps\mp\agents\humanoid\_humanoid::_id_457E(self._id_28D2);
+  self.curmeleetarget endon("disconnect");
+  var_0 = maps\mp\agents\humanoid\_humanoid::getmeleeattackpoint(self.curmeleetarget);
 
-  if(_id_5753(self._id_28D2)) {
-    return _id_60E7(self._id_28D2);
+  if(ismeleeblocked(self.curmeleetarget)) {
+    return meleefailed(self.curmeleetarget);
   }
 
-  if(common_scripts\utility::_id_562E(self._id_5F4C) && var_0._id_A266) {
-    if(!isDefined(self._id_5F48)) {
-      self._id_5F48 = 0;
+  if(common_scripts\utility::_id_562E(self.lungemeleeenabled) && var_0.valid) {
+    if(!isDefined(self.lungelast)) {
+      self.lungelast = 0;
     }
 
-    if(isDefined(self._id_60ED)) {
-      var_1 = gettime() - self._id_5F48 > self._id_5F46;
-      var_2 = maps\mp\agents\humanoid\_humanoid_util::_id_1F51(self.origin, var_0.origin);
-      var_3 = distancesquared(self._id_28D2.origin, self.origin) > self._id_5F50;
+    if(isDefined(self.meleemovemode)) {
+      var_1 = gettime() - self.lungelast > self.lungedebouncems;
+      var_2 = maps\mp\agents\humanoid\_humanoid_util::canhumanoidmovepointtopoint(self.origin, var_0.origin);
+      var_3 = distancesquared(self.curmeleetarget.origin, self.origin) > self.lungeminrangesq;
 
       if(var_1 && var_2 && var_3) {
-        self._id_5F48 = gettime();
-        _id_3108(self._id_28D2, var_0.origin);
+        self.lungelast = gettime();
+        doattacklunge(self.curmeleetarget, var_0.origin);
         return;
       }
     }
 
-    if(!maps\mp\agents\humanoid\_humanoid_util::_id_AA52(self._id_28D2)) {
-      _id_5F4D(self._id_28D2);
+    if(!maps\mp\agents\humanoid\_humanoid_util::withinmeleeradiusbase(self.curmeleetarget)) {
+      lungemeleefailed(self.curmeleetarget);
       return;
     }
   }
 
-  _id_3109(self._id_28D2, var_0.origin);
+  doattackstandard(self.curmeleetarget, var_0.origin);
 }
 
-_id_5753(var_0) {
+ismeleeblocked(var_0) {
   if(!isDefined(var_0)) {
-    var_0 = self._id_28D2;
+    var_0 = self.curmeleetarget;
   }
 
-  var_1 = self.origin + (0, 0, self._id_60E1);
-  var_2 = var_0.origin + (0, 0, self._id_60E1);
+  var_1 = self.origin + (0, 0, self.meleecheckheight);
+  var_2 = var_0.origin + (0, 0, self.meleecheckheight);
   var_3 = undefined;
 
   if(isDefined(var_0.classname) && var_0.classname == "misc_turret" && isDefined(var_0._id_0B40)) {
@@ -61,9 +61,9 @@ _id_0085() {
   self scragentsetanimscale(1, 1);
 }
 
-_id_3107(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  self._id_5BBE = undefined;
-  self._id_5BBF = undefined;
+doattack(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  self.lastmeleefailedmypos = undefined;
+  self.lastmeleefailedpos = undefined;
 
   if(!isDefined(var_6)) {
     var_6 = 0;
@@ -81,7 +81,7 @@ _id_3107(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(var_11.size == 0) {
     var_11 = [0.33];
   } else if(var_11.size >= 2) {
-    var_11 = common_scripts\utility::_id_7897(var_11);
+    var_11 = common_scripts\utility::quicksort(var_11);
   }
 
   self scragentsetphysicsmode("gravity");
@@ -112,13 +112,13 @@ _id_3107(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
       var_21 = (var_18 - var_15) * var_10 / var_5;
       wait(var_21);
-      maps\mp\agents\humanoid\_humanoid_util::_id_70C9(self._id_5F47);
+      maps\mp\agents\humanoid\_humanoid_util::play_boost_fx(self.lungefx);
 
-      if(self._id_5F44) {
+      if(self.lungeanimratescale) {
         var_22 = var_1 - self.origin;
         var_23 = _getmovedelta(var_9, var_18, var_17);
-        var_24 = maps\mp\agents\_scripted_agent_anim_util::_id_441C(var_22, var_23);
-        var_19 = var_5 * clamp(1 / var_24._id_AAE3, 0.5, 1);
+        var_24 = maps\mp\agents\_scripted_agent_anim_util::getanimscalefactors(var_22, var_23);
+        var_19 = var_5 * clamp(1 / var_24.xy, 0.5, 1);
         maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_2 + "_norestart", var_8, var_19);
       }
     }
@@ -131,8 +131,8 @@ _id_3107(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_30 = self.origin;
 
     if(var_3) {
-      childthread _id_A12D(var_0, var_25, 1, self._id_5F49);
-      maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "DoAttack");
+      childthread updatelerppos(var_0, var_25, 1, self.lungelerprange);
+      maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "DoAttack");
     } else
       self scragentsetanimscale(1, 1);
 
@@ -143,10 +143,10 @@ _id_3107(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     self scragentsetanimscale(1, 1);
 
     if(var_3) {
-      maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "DoAttack");
+      maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "DoAttack");
     }
 
-    var_33 = _id_11AF(var_0);
+    var_33 = attackshouldhit(var_0);
 
     if(var_33) {
       var_34 = 0;
@@ -155,93 +155,93 @@ _id_3107(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         var_34 = var_0.health;
       }
 
-      if(isDefined(self._id_60E2)) {
-        var_34 = self._id_60E2;
+      if(isDefined(self.meleedamage)) {
+        var_34 = self.meleedamage;
       }
 
       if(isalive(var_0)) {
-        _id_3210(var_0, var_34, "MOD_IMPACT");
+        domeleedamage(var_0, var_34, "MOD_IMPACT");
       }
     }
 
-    var_35 = common_scripts\utility::_id_98E7(var_33, "attack_hit", "attack_miss");
+    var_35 = common_scripts\utility::ter_op(var_33, "attack_hit", "attack_miss");
 
     if(!isDefined(var_0.shield_hit_blocked) || gettime() != var_0.shield_hit_blocked) {
       self notify(var_35, var_0, var_1);
     }
 
-    self._id_5BC1 = self.origin;
+    self.lastmeleepos = self.origin;
     var_15 = var_17;
   }
 
   var_36 = (1.0 - var_15) * var_10 / var_5;
 
   if(var_36 > 0) {
-    maps\mp\agents\_scripted_agent_anim_util::_id_A79F("attack_anim", "end", var_36);
+    maps\mp\agents\_scripted_agent_anim_util::waituntilnotetrack_safe("attack_anim", "end", var_36);
   }
 
-  self._id_5BC0 = gettime();
+  self.lastmeleefinishtime = gettime();
 }
 
-_id_11AF(var_0) {
+attackshouldhit(var_0) {
   if(!isalive(var_0)) {
     return 0;
   }
 
-  if(!_id_AA50(var_0)) {
+  if(!withinmeleedamagerange(var_0)) {
     return 0;
   }
 
-  if(_id_56DA(var_0, self._id_60E5)) {
+  if(isenemyinfrontofme(var_0, self.meleedot)) {
     return 1;
   }
 
-  if(maps\mp\agents\humanoid\_humanoid_util::_id_56DD(var_0)) {
+  if(maps\mp\agents\humanoid\_humanoid_util::isentstandingonme(var_0)) {
     return 1;
   }
 
   return 0;
 }
 
-_id_56DA(var_0, var_1) {
+isenemyinfrontofme(var_0, var_1) {
   var_2 = vectorNormalize((var_0.origin - self.origin) * (1, 1, 0));
   var_3 = anglesToForward(self.angles);
   var_4 = vectordot(var_2, var_3);
   return var_4 > var_1;
 }
 
-_id_AA50(var_0) {
-  if(!maps\mp\agents\humanoid\_humanoid::_id_7AC0("normal", var_0)) {
+withinmeleedamagerange(var_0) {
+  if(!maps\mp\agents\humanoid\_humanoid::readytomeleetarget("normal", var_0)) {
     return 0;
   }
 
-  if(maps\mp\agents\humanoid\_humanoid_util::_id_4580() > self._id_60F0 && !maps\mp\agents\humanoid\_humanoid_util::_id_AA52(var_0)) {
+  if(maps\mp\agents\humanoid\_humanoid_util::getmeleeradius() > self.meleeradiusbase && !maps\mp\agents\humanoid\_humanoid_util::withinmeleeradiusbase(var_0)) {
     return 0;
   }
 
   return 1;
 }
 
-_id_3109(var_0, var_1) {
+doattackstandard(var_0, var_1) {
   var_2 = "attack_stand";
-  var_3 = self._id_672D;
+  var_3 = self.nonmoveratescale;
   var_4 = 0;
 
-  if(isDefined(self._id_60ED)) {
-    var_2 = "attack_" + self._id_60ED;
+  if(isDefined(self.meleemovemode)) {
+    var_2 = "attack_" + self.meleemovemode;
     var_4 = 1;
-    self._id_60ED = undefined;
+    self.meleemovemode = undefined;
   }
 
   var_5 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_2);
-  _id_3107(var_0, var_1, var_5, 0, var_4, var_3);
+  doattack(var_0, var_1, var_5, 0, var_4, var_3);
 }
 
-_id_3108(var_0, var_1) {
-  _id_3107(var_0, var_1, self._id_5F45, 1, 1, self._id_672D, 1);
+doattacklunge(var_0, var_1) {
+  doattack(var_0, var_1, self.lungeanimstate, 1, 1, self.nonmoveratescale, 1);
 }
 
-_id_A12D(var_0, var_1, var_2, var_3) {
+updatelerppos(var_0, var_1, var_2, var_3) {
   self endon("killanimscript");
   self endon("death");
   self endon("cancel_updatelerppos");
@@ -257,7 +257,7 @@ _id_A12D(var_0, var_1, var_2, var_3) {
       break;
     }
 
-    var_7 = _id_4707(var_0, var_2);
+    var_7 = getupdatedattackpos(var_0, var_2);
 
     if(!isDefined(var_7)) {
       break;
@@ -266,7 +266,7 @@ _id_A12D(var_0, var_1, var_2, var_3) {
     if(isDefined(var_3)) {
       var_8 = var_3;
     } else {
-      var_8 = maps\mp\agents\humanoid\_humanoid_util::_id_4580() - self.radius;
+      var_8 = maps\mp\agents\humanoid\_humanoid_util::getmeleeradius() - self.radius;
     }
 
     var_9 = var_7 - var_4;
@@ -276,11 +276,11 @@ _id_A12D(var_0, var_1, var_2, var_3) {
     }
 
     if(self _meth_85DF()) {
-      var_10 = common_scripts\utility::_id_3D5D(var_7 - self.origin);
+      var_10 = common_scripts\utility::flat_origin(var_7 - self.origin);
       var_11 = length(var_10);
 
       if(var_11 > 1) {
-        var_12 = vectorNormalize(common_scripts\utility::_id_3D5D(anglesToForward(self.angles)));
+        var_12 = vectorNormalize(common_scripts\utility::flat_origin(anglesToForward(self.angles)));
         var_13 = var_10 / var_11;
         var_14 = _acos(clamp(vectordot(var_13, var_12), -1, 1));
         var_15 = self _meth_85DD();
@@ -305,21 +305,21 @@ _id_A12D(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_4707(var_0, var_1) {
+getupdatedattackpos(var_0, var_1) {
   if(!var_1) {
-    var_2 = _id_0547::_id_34A6(var_0.origin);
+    var_2 = _id_0547::droppostoground(var_0.origin);
     return var_2;
   } else {
     var_3 = var_0.origin - self.origin;
     var_4 = length(var_3);
 
-    if(var_4 < self._id_11AB) {
+    if(var_4 < self.attackoffset) {
       return self.origin;
     } else {
       var_3 = var_3 / var_4;
-      var_5 = maps\mp\agents\humanoid\_humanoid::_id_457E(var_0);
+      var_5 = maps\mp\agents\humanoid\_humanoid::getmeleeattackpoint(var_0);
 
-      if(maps\mp\agents\humanoid\_humanoid_util::_id_1F51(self.origin, var_5.origin)) {
+      if(maps\mp\agents\humanoid\_humanoid_util::canhumanoidmovepointtopoint(self.origin, var_5.origin)) {
         return var_5.origin;
       } else {
         return undefined;
@@ -328,14 +328,14 @@ _id_4707(var_0, var_1) {
   }
 }
 
-_id_5797(var_0) {
+isprotectedbyriotshield(var_0) {
   if(var_0 _id_048A::_id_4B8C()) {
     var_1 = self.origin - var_0.origin;
     var_2 = vectorNormalize((var_1[0], var_1[1], 0));
     var_3 = anglesToForward(var_0.angles);
     var_4 = vectordot(var_3, var_1);
 
-    if(var_0 _id_048A::_id_4B8D()) {
+    if(var_0 _id_048A::hasriotshieldequipped()) {
       if(var_4 > 0.766) {
         return 1;
       }
@@ -346,27 +346,27 @@ _id_5797(var_0) {
   return 0;
 }
 
-_id_3210(var_0, var_1, var_2) {
-  if(_id_5797(var_0)) {
+domeleedamage(var_0, var_1, var_2) {
+  if(isprotectedbyriotshield(var_0)) {
     return;
   }
   var_0 dodamage(var_1, self.origin, self, self, var_2);
 }
 
-_id_60E7(var_0) {
+meleefailed(var_0) {
   if(!isDefined(var_0)) {
-    var_0 = self._id_28D2;
+    var_0 = self.curmeleetarget;
   }
 
-  self._id_5BBE = self.origin;
-  self._id_5BBF = var_0.origin;
+  self.lastmeleefailedmypos = self.origin;
+  self.lastmeleefailedpos = var_0.origin;
 }
 
-_id_5F4D(var_0) {
+lungemeleefailed(var_0) {
   if(!isDefined(var_0)) {
-    var_0 = self._id_28D2;
+    var_0 = self.curmeleetarget;
   }
 
   self._id_5BBB = self.origin;
-  self._id_5BBC = var_0.origin;
+  self.lastlungemeleefailedpos = var_0.origin;
 }

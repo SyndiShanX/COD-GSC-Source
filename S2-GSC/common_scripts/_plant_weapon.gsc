@@ -25,7 +25,7 @@ _id_5369(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   self._id_7076 = undefined;
-  self._id_76E7 = undefined;
+  self.prevstance = undefined;
   self._id_76EC = undefined;
   self.carryweapon = var_0;
   self._id_7073 = undefined;
@@ -41,7 +41,7 @@ _id_5369(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     self._id_7077 = "STATE_FIRST_CARRY";
 
     if(_id_43DD() == "SCRIPTED_ALTSWITCH" || _id_43DD() == "NATIVE_DPAD_LEFT") {
-      self _meth_8328();
+      self sd_bombs();
     }
   }
 
@@ -51,7 +51,7 @@ _id_5369(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
   }
 
-  thread _id_9963();
+  thread think();
   thread _id_62DA();
   thread _id_A123();
   thread _id_6370();
@@ -91,7 +91,7 @@ _id_2399(var_0) {
 
   self notify("weapon_plant_cleanup");
 
-  if(self _meth_803D()) {
+  if(self same_color_code_as_last_time()) {
     _id_2FED(var_0);
   } else if(!var_0) {
     _id_2F97();
@@ -100,11 +100,11 @@ _id_2399(var_0) {
   self._id_706A = undefined;
 
   if(_id_43DD() == "SCRIPTED_ALTSWITCH" || _id_43DD() == "NATIVE_DPAD_LEFT") {
-    self _meth_8329();
+    self sd_bombzones();
   }
 
   self._id_7076 = undefined;
-  self._id_76E7 = undefined;
+  self.prevstance = undefined;
   self._id_76EC = undefined;
   self.carryweapon = undefined;
   self._id_7077 = undefined;
@@ -144,15 +144,15 @@ _id_1F65() {
     return 0;
   }
 
-  if(isDefined(self._id_2016) && isDefined(self._id_2016.carryweapon) && (self._id_2016.carryweapon == "iw5_carrydrone_mp" || self._id_2016.carryweapon == "relic_mp")) {
+  if(isDefined(self.carryobject) && isDefined(self.carryobject.carryweapon) && (self.carryobject.carryweapon == "iw5_carrydrone_mp" || self.carryobject.carryweapon == "relic_mp")) {
     return 0;
   }
 
-  if(isDefined(self._id_5525) && self._id_5525) {
+  if(isDefined(self.inwater) && self.inwater) {
     return 0;
   }
 
-  if(!self._id_A1FC && self isonground() && !self _meth_82E5() && !self ismantling() && !self isusingoffhand() && !self isswitchingweapon() && !self isusingturret() && !self _meth_817A() && !_id_9EA3() && !isDefined(self getmovingplatformparent())) {
+  if(!self._id_A1FC && self isonground() && !self script_wait() && !self ismantling() && !self isusingoffhand() && !self isswitchingweapon() && !self isusingturret() && !self script_duration() && !_id_9EA3() && !isDefined(self getmovingplatformparent())) {
     return 1;
   }
 
@@ -160,7 +160,7 @@ _id_1F65() {
 }
 
 _id_5855() {
-  if(self _meth_803D()) {
+  if(self same_color_code_as_last_time()) {
     return 1;
   }
 
@@ -220,12 +220,12 @@ _id_707A() {
     self._id_7076 = "stand";
   }
 
-  var_4 = self _meth_86B0();
+  var_4 = self setinflictorstat();
   var_5 = max(10, var_4[0] - 15);
   var_4 = (-1 * var_5, var_4[1], var_4[2]);
   var_4 = _rotatevector(var_4, var_3);
   var_6 = self._id_7073 + var_4;
-  self._id_76E7 = self getstance();
+  self.prevstance = self getstance();
 
   if(isDefined(self._id_7076)) {
     var_7 = self._id_7076;
@@ -235,7 +235,7 @@ _id_707A() {
       var_8 = self setstance(var_7, 0);
     }
   } else
-    var_7 = self._id_76E7;
+    var_7 = self.prevstance;
 
   if(isDefined(self._id_7075)) {
     self._id_7075 = undefined;
@@ -284,7 +284,7 @@ _id_707A() {
 
   self disableoffhandweapons();
   self disableusability();
-  self _meth_803B(self._id_7073, var_15, var_16, var_17, var_18);
+  self samb1_name(self._id_7073, var_15, var_16, var_17, var_18);
   _id_707B(var_7, self._id_7073, self.angles);
 
   if(_id_43DD() == "SCRIPTED_SWAP") {
@@ -298,10 +298,10 @@ _id_707A() {
     self switchtoweapon(self._id_706A);
     self waittill("weapon_change");
   } else if(_id_43DD() == "SCRIPTED_ALTSWITCH") {
-    self _meth_8329();
+    self sd_bombzones();
     self switchtoweapon(self._id_706A);
     wait 1;
-    self _meth_8328();
+    self sd_bombs();
   } else if(_id_43DD() == "NATIVE_DPAD_LEFT") {
     thread _id_14F3(0.75);
 
@@ -309,9 +309,9 @@ _id_707A() {
       waitframe();
     }
 
-    self _meth_8328();
+    self sd_bombs();
 
-    while(self _meth_8678() || self _meth_8677()) {
+    while(self _meth_8678() || self setentityheadicon()) {
       waitframe();
     }
 
@@ -339,13 +339,13 @@ _id_2FED(var_0) {
   self allowcrouch(1);
   self allowprone(1);
 
-  if(isDefined(self._id_76E7)) {
-    self setstance(self._id_76E7);
-    self._id_76E7 = undefined;
+  if(isDefined(self.prevstance)) {
+    self setstance(self.prevstance);
+    self.prevstance = undefined;
   }
 
   self._id_7076 = undefined;
-  self _meth_803C(1);
+  self samb2_name(1);
   _id_2FEE();
 
   if(_id_43DD() == "SCRIPTED_SWAP") {
@@ -359,7 +359,7 @@ _id_2FED(var_0) {
 
       self setweaponammoclip(self.carryweapon, var_1);
       self setweaponammostock(self.carryweapon, var_2);
-      common_scripts\utility::_id_A71A(1.0, "weapon_change");
+      common_scripts\utility::waittill_any_timeout(1.0, "weapon_change");
 
       if(self getcurrentweapon() == self._id_706A) {
         self switchtoweapon(self.carryweapon);
@@ -368,7 +368,7 @@ _id_2FED(var_0) {
       self takeweapon(self._id_706A);
     }
   } else if(_id_43DD() == "SCRIPTED_ALTSWITCH") {
-    self _meth_8329();
+    self sd_bombzones();
 
     if(var_0) {
       self switchtoweapon(self.carryweapon);
@@ -376,16 +376,16 @@ _id_2FED(var_0) {
     } else
       self switchtoweaponimmediate(self.carryweapon);
 
-    self _meth_8328();
+    self sd_bombs();
   } else if(_id_43DD() == "NATIVE_DPAD_LEFT") {
     if(var_0) {
       while(self getcurrentweapon() == self._id_706A) {
         waitframe();
       }
 
-      self _meth_8328();
+      self sd_bombs();
 
-      while(self _meth_8678() || self _meth_8677()) {
+      while(self _meth_8678() || self setentityheadicon()) {
         waitframe();
       }
 
@@ -447,7 +447,7 @@ _id_A6A5(var_0) {
     var_2 = getdvarfloat("weapon_plant_input_hold_duration", 0.2);
 
     if(var_2 > 0) {
-      common_scripts\utility::_id_A63E(var_2, "plant_button_up");
+      common_scripts\utility::wait_endon(var_2, "plant_button_up");
     }
   }
 
@@ -456,7 +456,7 @@ _id_A6A5(var_0) {
 
 _id_A774() {
   for(;;) {
-    if(self getcurrentweapon() == self._id_706A && !self _meth_8677()) {
+    if(self getcurrentweapon() == self._id_706A && !self setentityheadicon()) {
       return 1;
     } else {
       waitframe();
@@ -472,7 +472,7 @@ _id_A772(var_0) {
   }
 
   for(;;) {
-    if(self getcurrentweapon() == self.carryweapon || self getcurrentweapon() == self._id_706A && self _meth_8677()) {
+    if(self getcurrentweapon() == self.carryweapon || self getcurrentweapon() == self._id_706A && self setentityheadicon()) {
       _id_98E0();
       return 1;
     } else
@@ -482,7 +482,7 @@ _id_A772(var_0) {
 
 _id_A771() {
   for(;;) {
-    if(self getcurrentweapon() == self._id_706A && self _meth_8678() || self getcurrentweapon() == self.carryweapon && self _meth_8677()) {
+    if(self getcurrentweapon() == self._id_706A && self _meth_8678() || self getcurrentweapon() == self.carryweapon && self setentityheadicon()) {
       waitframe();
       continue;
     }
@@ -491,35 +491,35 @@ _id_A771() {
   }
 }
 
-_id_37BF(var_0) {
+enterstate(var_0) {
   self._id_7077 = var_0;
 }
 
-_id_38F6() {
+exitstate() {
   switch (self._id_7077) {
     case "STATE_CARRY":
     case "STATE_FIRST_CARRY":
-      _id_37BF("STATE_CARRY_TO_PLANT");
+      enterstate("STATE_CARRY_TO_PLANT");
       break;
     case "STATE_CARRY_TO_PLANT":
-      _id_37BF("STATE_PLANTED_NO_CARRY");
+      enterstate("STATE_PLANTED_NO_CARRY");
       break;
     case "STATE_PLANTED_NO_CARRY":
-      _id_37BF("STATE_PLANTED");
+      enterstate("STATE_PLANTED");
       break;
     case "STATE_PLANTED":
-      _id_37BF("STATE_PLANTED_TO_CARRY");
+      enterstate("STATE_PLANTED_TO_CARRY");
       break;
     case "STATE_PLANTED_TO_CARRY":
-      _id_37BF("STATE_CARRY_NO_PLANT");
+      enterstate("STATE_CARRY_NO_PLANT");
       break;
     case "STATE_CARRY_NO_PLANT":
-      _id_37BF("STATE_CARRY");
+      enterstate("STATE_CARRY");
       break;
   }
 }
 
-_id_9963() {
+think() {
   self endon("disconnect");
   level endon("game_ended");
   self endon("weapon_plant_cleanup");
@@ -537,7 +537,7 @@ _id_9963() {
       case "STATE_FIRST_CARRY":
         if(isDefined(_id_A6A5())) {
           if(isDefined(self._id_7073)) {
-            _id_38F6();
+            exitstate();
           } else if(self getstance() == "prone" && _id_1F65()) {
             _id_3A66();
           }
@@ -547,7 +547,7 @@ _id_9963() {
       case "STATE_CARRY_TO_PLANT":
         _id_707A();
         self allowlean(1);
-        _id_38F6();
+        exitstate();
         break;
       case "STATE_PLANTED_NO_CARRY":
         if(_id_43DD() == "NATIVE_DPAD_LEFT") {
@@ -556,7 +556,7 @@ _id_9963() {
           _id_21B6();
         }
 
-        _id_38F6();
+        exitstate();
         break;
       case "STATE_PLANTED":
         var_3 = undefined;
@@ -568,13 +568,13 @@ _id_9963() {
         }
 
         if(isDefined(var_3)) {
-          _id_38F6();
+          exitstate();
         }
 
         break;
       case "STATE_PLANTED_TO_CARRY":
         _id_2FED(1);
-        _id_38F6();
+        exitstate();
         break;
       case "STATE_CARRY_NO_PLANT":
         if(_id_43DD() == "NATIVE_DPAD_LEFT") {
@@ -583,7 +583,7 @@ _id_9963() {
           _id_21B6();
         }
 
-        _id_38F6();
+        exitstate();
         break;
       default:
         continue;
@@ -711,7 +711,7 @@ _id_62DA() {
             self._id_7073 = var_11;
             self._id_7076 = "prone";
 
-            if(!self _meth_803A(self._id_7073)) {
+            if(!self samb(self._id_7073)) {
               self._id_7073 = undefined;
             }
           } else if(isDefined(var_11) && _id_028B::_id_4B43(var_11, var_7, _id_4074())) {
@@ -805,19 +805,19 @@ _id_62DA() {
 
       if(var_20 == 1) {
         if(!self _meth_85EC()) {
-          self _meth_8329();
+          self sd_bombzones();
           _id_680D();
         }
       } else if(var_20 == 0) {
         if(self _meth_85EC()) {
           self._id_A1FC = 0;
           self._id_A6B4 = 0;
-          self _meth_8328();
+          self sd_bombs();
           _id_680C();
         }
       }
 
-      if(self._id_7077 == "STATE_CARRY" && !self _meth_85EC() && self _meth_86B1("to_alt")) {
+      if(self._id_7077 == "STATE_CARRY" && !self _meth_85EC() && self setinitialtonormalinfected("to_alt")) {
         self._id_7073 = var_0;
         self notify("native_dpad_force_plant");
       }
@@ -832,7 +832,7 @@ _id_6370() {
   self endon("cleanupWeaponPlantImmediate");
   self notify("monitor_planted_weapon_cleanup");
   self endon("monitor_planted_weapon_cleanup");
-  var_0 = common_scripts\utility::_id_A716("weapon_plant_cleanup", "weapon_change", "death", "joined_team", "joined_spectators", "weaponPlantFiringRange");
+  var_0 = common_scripts\utility::waittill_any_return_no_endon_death("weapon_plant_cleanup", "weapon_change", "death", "joined_team", "joined_spectators", "weaponPlantFiringRange");
 
   if(var_0 == "weapon_change") {
     var_1 = 0;
@@ -912,14 +912,14 @@ _id_21D0(var_0) {
   var_7 = "";
 
   if(var_0.classname == "scriptable") {
-    var_7 = var_0 _meth_866B(0);
+    var_7 = var_0 setdot_origin(0);
   }
 
   if(_id_5778(var_0)) {
     var_2 = var_0.origin;
     var_3 = var_0.angles;
 
-    if(var_0 _meth_8221() && var_0 gettagangles("TAG_YAW") != -1) {
+    if(var_0 script_mover_is_dynamic_path() && var_0 gettagangles("TAG_YAW") != -1) {
       var_4 = var_0 gettagangles("TAG_YAW");
     }
   }
@@ -931,9 +931,9 @@ _id_21D0(var_0) {
       var_1 = 1;
     } else if((var_0.classname == "script_brushmodel" || var_0.classname == "script_model") && !var_0 _meth_86A9()) {
       var_1 = 1;
-    } else if(var_0.classname == "scriptable" && var_0 _meth_866B(0) != var_7) {
+    } else if(var_0.classname == "scriptable" && var_0 setdot_origin(0) != var_7) {
       var_1 = 1;
-    } else if(isDefined(var_0.model) && var_0.model != "" && (var_0 _meth_8687() && var_0 _meth_8672() > 0.0)) {
+    } else if(isDefined(var_0.model) && var_0.model != "" && (var_0 setfootstepeffect() && var_0 setdynamiceventstartpercent() > 0.0)) {
       var_1 = 1;
     } else if(isDefined(var_2) && _distance2dsquared(var_2, var_0.origin) > 1.0) {
       var_1 = 1;

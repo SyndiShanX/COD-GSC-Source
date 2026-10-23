@@ -24,11 +24,11 @@ complete_shattered_trophy_event_2() {
 }
 
 run_shattered_trophy_event_2() {
-  while(!common_scripts\utility::_id_3C83("flag_sword_assembled")) {
+  while(!common_scripts\utility::flag_exist("flag_sword_assembled")) {
     wait 0.5;
   }
 
-  common_scripts\utility::_id_3C9F("flag_sword_assembled");
+  common_scripts\utility::flag_wait("flag_sword_assembled");
   complete_shattered_trophy_event_2();
 }
 
@@ -136,9 +136,9 @@ monitor_players_waves_survival(var_0) {
   var_2 = 0;
   var_2 = var_1 getplayerdata(common_scripts\utility::_id_46A8(), "zmShatteredRecord", "rideOfCentury");
 
-  if(var_2 < var_0._id_4800) {
+  if(var_2 < var_0.goal) {
     for(;;) {
-      var_3 = var_0._id_4800;
+      var_3 = var_0.goal;
       level waittill("round complete");
       var_4 = var_2 + level.objectivescompleted;
       var_1 setplayerdata(common_scripts\utility::_id_46A8(), "zmShatteredRecord", "rideOfCentury", var_4);

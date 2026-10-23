@@ -4,6 +4,6 @@
 ***********************************************************/
 
 main() {
-  level._id_9FC7 = 1;
-  maps\createart\mp_zombie_berlin_fog_hdr::_id_8A1D();
+  level.tweakfile = 1;
+  maps\createart\mp_zombie_berlin_fog_hdr::setupfog();
 }

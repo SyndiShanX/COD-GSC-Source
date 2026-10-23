@@ -10,8 +10,8 @@ _id_9454(var_0) {
     if(_isai(var_2)) {
       continue;
     }
-    if(isDefined(var_2._id_9459) && var_2._id_9459.size > 0) {
-      while(isPlayer(var_2) && isPlayer(var_0) && !var_2 hasloadedcustomizationplayerview(var_0, var_2._id_9459[0])) {
+    if(isDefined(var_2.streamweapons) && var_2.streamweapons.size > 0) {
+      while(isPlayer(var_2) && isPlayer(var_0) && !var_2 hasloadedcustomizationplayerview(var_0, var_2.streamweapons[0])) {
         waitframe();
       }
     }
@@ -27,7 +27,7 @@ _id_7D67() {
     }
   }
 
-  _func_3B7(0);
+  xmodelalias/alias_ger_heads_urb(0);
 }
 
 _id_9458(var_0) {
@@ -47,7 +47,7 @@ _id_44D9() {
 
 _id_0F11() {
   foreach(var_1 in level.players) {
-    if(isDefined(var_1._id_5A29)) {
+    if(isDefined(var_1.killcam)) {
       return 1;
     }
   }
@@ -56,7 +56,7 @@ _id_0F11() {
 }
 
 _id_3B5E(var_0, var_1, var_2, var_3) {
-  var_4 = isDefined(var_0) && isDefined(var_1) && !maps\mp\_utility::_id_761E() && !maps\mp\_utility::_id_579B() && (isDefined(level.teambased) && !level.teambased || isDefined(var_1.team) && isDefined(var_0.team) && var_1.team != var_0.team || level.gametype == "ball" && isDefined(level._id_3B59) && isDefined(level._id_3B59[var_1.team]) && level._id_3B59[var_1.team] == "score");
+  var_4 = isDefined(var_0) && isDefined(var_1) && !maps\mp\_utility::practiceroundgame() && !maps\mp\_utility::_id_579B() && (isDefined(level.teambased) && !level.teambased || isDefined(var_1.team) && isDefined(var_0.team) && var_1.team != var_0.team || level.gametype == "ball" && isDefined(level._id_3B59) && isDefined(level._id_3B59[var_1.team]) && level._id_3B59[var_1.team] == "score");
 
   if(var_4) {
     var_5 = _id_44D9();
@@ -75,32 +75,32 @@ _id_52B8() {
   level._id_3B5B = [];
   level._id_3B4C = [];
   level._id_3B4E = [];
-  level._id_3B52 = [];
+  level.finalkillcam_killcamentityindex = [];
   level._id_3B53 = [];
   level._id_3B56 = [];
   level._id_3B50 = [];
   level._id_3B54 = [];
   level._id_3B58 = [];
-  level._id_3B57 = [];
+  level.finalkillcam_timegameended = [];
   level._id_3B55 = [];
   level._id_3B59 = [];
   level._id_3B5A = [];
   level._id_3B4F = [];
   level._id_3B4D = [];
 
-  if(level._id_6520) {
-    foreach(var_1 in level._id_985B) {
+  if(level.multiteambased) {
+    foreach(var_1 in level.teamnamelist) {
       level._id_3B51[var_1] = undefined;
       level._id_3B5B[var_1] = undefined;
       level._id_3B4C[var_1] = undefined;
       level._id_3B4E[var_1] = undefined;
-      level._id_3B52[var_1] = undefined;
+      level.finalkillcam_killcamentityindex[var_1] = undefined;
       level._id_3B53[var_1] = undefined;
       level._id_3B56[var_1] = undefined;
       level._id_3B50[var_1] = undefined;
       level._id_3B54[var_1] = undefined;
       level._id_3B58[var_1] = undefined;
-      level._id_3B57[var_1] = undefined;
+      level.finalkillcam_timegameended[var_1] = undefined;
       level._id_3B55[var_1] = undefined;
       level._id_3B59[var_1] = undefined;
       level._id_3B5A[var_1] = undefined;
@@ -112,13 +112,13 @@ _id_52B8() {
     level._id_3B5B["axis"] = undefined;
     level._id_3B4C["axis"] = undefined;
     level._id_3B4E["axis"] = undefined;
-    level._id_3B52["axis"] = undefined;
+    level.finalkillcam_killcamentityindex["axis"] = undefined;
     level._id_3B53["axis"] = undefined;
     level._id_3B56["axis"] = undefined;
     level._id_3B50["axis"] = undefined;
     level._id_3B54["axis"] = undefined;
     level._id_3B58["axis"] = undefined;
-    level._id_3B57["axis"] = undefined;
+    level.finalkillcam_timegameended["axis"] = undefined;
     level._id_3B55["axis"] = undefined;
     level._id_3B59["axis"] = undefined;
     level._id_3B5A["axis"] = undefined;
@@ -128,13 +128,13 @@ _id_52B8() {
     level._id_3B5B["allies"] = undefined;
     level._id_3B4C["allies"] = undefined;
     level._id_3B4E["allies"] = undefined;
-    level._id_3B52["allies"] = undefined;
+    level.finalkillcam_killcamentityindex["allies"] = undefined;
     level._id_3B53["allies"] = undefined;
     level._id_3B56["allies"] = undefined;
     level._id_3B50["allies"] = undefined;
     level._id_3B54["allies"] = undefined;
     level._id_3B58["allies"] = undefined;
-    level._id_3B57["allies"] = undefined;
+    level.finalkillcam_timegameended["allies"] = undefined;
     level._id_3B55["allies"] = undefined;
     level._id_3B59["allies"] = undefined;
     level._id_3B5A["allies"] = undefined;
@@ -146,53 +146,53 @@ _id_52B8() {
   level._id_3B5B["none"] = undefined;
   level._id_3B4C["none"] = undefined;
   level._id_3B4E["none"] = undefined;
-  level._id_3B52["none"] = undefined;
+  level.finalkillcam_killcamentityindex["none"] = undefined;
   level._id_3B53["none"] = undefined;
   level._id_3B56["none"] = undefined;
   level._id_3B50["none"] = undefined;
   level._id_3B54["none"] = undefined;
   level._id_3B58["none"] = undefined;
-  level._id_3B57["none"] = undefined;
+  level.finalkillcam_timegameended["none"] = undefined;
   level._id_3B55["none"] = undefined;
   level._id_3B59["none"] = undefined;
   level._id_3B5A["none"] = undefined;
   level._id_3B4F["none"] = undefined;
   level._id_3B4D["none"] = undefined;
-  level._id_3B5C = undefined;
+  level.finalkillcam_winner = undefined;
 }
 
-_id_3801() {
-  if(level._id_6520) {
-    for(var_0 = 0; var_0 < level._id_985B.size; var_0++) {
-      level._id_3B51[level._id_985B[var_0]] = undefined;
-      level._id_3B5B[level._id_985B[var_0]] = undefined;
-      level._id_3B4C[level._id_985B[var_0]] = undefined;
-      level._id_3B4E[level._id_985B[var_0]] = undefined;
-      level._id_3B52[level._id_985B[var_0]] = undefined;
-      level._id_3B53[level._id_985B[var_0]] = undefined;
-      level._id_3B56[level._id_985B[var_0]] = undefined;
-      level._id_3B50[level._id_985B[var_0]] = undefined;
-      level._id_3B54[level._id_985B[var_0]] = undefined;
-      level._id_3B58[level._id_985B[var_0]] = undefined;
-      level._id_3B57[level._id_985B[var_0]] = undefined;
-      level._id_3B55[level._id_985B[var_0]] = undefined;
-      level._id_3B59[level._id_985B[var_0]] = undefined;
-      level._id_3B5A[level._id_985B[var_0]] = undefined;
-      level._id_3B4F[level._id_985B[var_0]] = undefined;
-      level._id_3B4D[level._id_985B[var_0]] = undefined;
+erasefinalkillcam() {
+  if(level.multiteambased) {
+    for(var_0 = 0; var_0 < level.teamnamelist.size; var_0++) {
+      level._id_3B51[level.teamnamelist[var_0]] = undefined;
+      level._id_3B5B[level.teamnamelist[var_0]] = undefined;
+      level._id_3B4C[level.teamnamelist[var_0]] = undefined;
+      level._id_3B4E[level.teamnamelist[var_0]] = undefined;
+      level.finalkillcam_killcamentityindex[level.teamnamelist[var_0]] = undefined;
+      level._id_3B53[level.teamnamelist[var_0]] = undefined;
+      level._id_3B56[level.teamnamelist[var_0]] = undefined;
+      level._id_3B50[level.teamnamelist[var_0]] = undefined;
+      level._id_3B54[level.teamnamelist[var_0]] = undefined;
+      level._id_3B58[level.teamnamelist[var_0]] = undefined;
+      level.finalkillcam_timegameended[level.teamnamelist[var_0]] = undefined;
+      level._id_3B55[level.teamnamelist[var_0]] = undefined;
+      level._id_3B59[level.teamnamelist[var_0]] = undefined;
+      level._id_3B5A[level.teamnamelist[var_0]] = undefined;
+      level._id_3B4F[level.teamnamelist[var_0]] = undefined;
+      level._id_3B4D[level.teamnamelist[var_0]] = undefined;
     }
   } else {
     level._id_3B51["axis"] = undefined;
     level._id_3B5B["axis"] = undefined;
     level._id_3B4C["axis"] = undefined;
     level._id_3B4E["axis"] = undefined;
-    level._id_3B52["axis"] = undefined;
+    level.finalkillcam_killcamentityindex["axis"] = undefined;
     level._id_3B53["axis"] = undefined;
     level._id_3B56["axis"] = undefined;
     level._id_3B50["axis"] = undefined;
     level._id_3B54["axis"] = undefined;
     level._id_3B58["axis"] = undefined;
-    level._id_3B57["axis"] = undefined;
+    level.finalkillcam_timegameended["axis"] = undefined;
     level._id_3B55["axis"] = undefined;
     level._id_3B59["axis"] = undefined;
     level._id_3B5A["axis"] = undefined;
@@ -202,13 +202,13 @@ _id_3801() {
     level._id_3B5B["allies"] = undefined;
     level._id_3B4C["allies"] = undefined;
     level._id_3B4E["allies"] = undefined;
-    level._id_3B52["allies"] = undefined;
+    level.finalkillcam_killcamentityindex["allies"] = undefined;
     level._id_3B53["allies"] = undefined;
     level._id_3B56["allies"] = undefined;
     level._id_3B50["allies"] = undefined;
     level._id_3B54["allies"] = undefined;
     level._id_3B58["allies"] = undefined;
-    level._id_3B57["allies"] = undefined;
+    level.finalkillcam_timegameended["allies"] = undefined;
     level._id_3B55["allies"] = undefined;
     level._id_3B59["allies"] = undefined;
     level._id_3B5A["allies"] = undefined;
@@ -220,58 +220,58 @@ _id_3801() {
   level._id_3B5B["none"] = undefined;
   level._id_3B4C["none"] = undefined;
   level._id_3B4E["none"] = undefined;
-  level._id_3B52["none"] = undefined;
+  level.finalkillcam_killcamentityindex["none"] = undefined;
   level._id_3B53["none"] = undefined;
   level._id_3B56["none"] = undefined;
   level._id_3B50["none"] = undefined;
   level._id_3B54["none"] = undefined;
   level._id_3B58["none"] = undefined;
-  level._id_3B57["none"] = undefined;
+  level.finalkillcam_timegameended["none"] = undefined;
   level._id_3B55["none"] = undefined;
   level._id_3B59["none"] = undefined;
   level._id_3B5A["none"] = undefined;
   level._id_3B4F["none"] = undefined;
   level._id_3B4D["none"] = undefined;
-  level._id_3B5C = undefined;
+  level.finalkillcam_winner = undefined;
 }
 
-_id_7B32(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+recordfinalkillcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(level.teambased && isDefined(var_2.team)) {
     level._id_3B51[var_2.team] = var_0;
     level._id_3B5B[var_2.team] = var_1;
     level._id_3B4C[var_2.team] = var_2;
     level._id_3B4E[var_2.team] = var_3;
-    level._id_3B52[var_2.team] = var_4;
+    level.finalkillcam_killcamentityindex[var_2.team] = var_4;
     level._id_3B53[var_2.team] = var_5;
     level._id_3B56[var_2.team] = var_6;
     level._id_3B50[var_2.team] = var_7;
     level._id_3B54[var_2.team] = var_8;
     level._id_3B58[var_2.team] = maps\mp\_utility::getsecondspassed();
-    level._id_3B57[var_2.team] = maps\mp\_utility::getsecondspassed();
+    level.finalkillcam_timegameended[var_2.team] = maps\mp\_utility::getsecondspassed();
     level._id_3B55[var_2.team] = var_9;
     level._id_3B59[var_2.team] = var_10;
     level._id_3B5A[var_2.team] = isDefined(var_11) && var_11;
-    level._id_3B4F[var_2.team] = var_1._id_1193;
-    level._id_3B4D[var_2.team] = var_1._id_1189;
+    level._id_3B4F[var_2.team] = var_1.attackers;
+    level._id_3B4D[var_2.team] = var_1.attackerdata;
   }
 
   level._id_3B51["none"] = var_0;
   level._id_3B5B["none"] = var_1;
   level._id_3B4C["none"] = var_2;
   level._id_3B4E["none"] = var_3;
-  level._id_3B52["none"] = var_4;
+  level.finalkillcam_killcamentityindex["none"] = var_4;
   level._id_3B53["none"] = var_5;
   level._id_3B56["none"] = var_6;
   level._id_3B50["none"] = var_7;
   level._id_3B54["none"] = var_8;
   level._id_3B58["none"] = maps\mp\_utility::getsecondspassed();
-  level._id_3B57["none"] = maps\mp\_utility::getsecondspassed();
-  level._id_3B57["none"] = maps\mp\_utility::getsecondspassed();
+  level.finalkillcam_timegameended["none"] = maps\mp\_utility::getsecondspassed();
+  level.finalkillcam_timegameended["none"] = maps\mp\_utility::getsecondspassed();
   level._id_3B55["none"] = var_9;
   level._id_3B59["none"] = var_10;
   level._id_3B5A["none"] = isDefined(var_11) && var_11;
-  level._id_3B4F["none"] = var_1._id_1193;
-  level._id_3B4D["none"] = var_1._id_1189;
+  level._id_3B4F["none"] = var_1.attackers;
+  level._id_3B4D["none"] = var_1.attackerdata;
 }
 
 _id_9456() {
@@ -281,13 +281,13 @@ _id_9456() {
   if(_id_8B8C()) {
     var_0 = "none";
 
-    if(isDefined(level._id_3B5C)) {
-      var_0 = level._id_3B5C;
+    if(isDefined(level.finalkillcam_winner)) {
+      var_0 = level.finalkillcam_winner;
     }
 
     var_1 = level._id_3B5B[var_0];
     var_2 = level._id_3B4C[var_0];
-    var_3 = level._id_3B57[var_0];
+    var_3 = level.finalkillcam_timegameended[var_0];
     var_4 = level._id_3B58[var_0];
 
     if(!_id_3B5E(var_1, var_2, var_3, var_4)) {
@@ -298,27 +298,27 @@ _id_9456() {
     var_7 = level._id_3B5A[var_0];
     var_8 = level._id_3B54[var_0];
     var_9 = level._id_3B50[var_0];
-    var_10 = (gettime() - var_1._id_2AB8) / 1000;
+    var_10 = (gettime() - var_1.deathtime) / 1000;
     var_11 = var_10 + var_9;
-    var_12 = _id_04E6::_id_5A33(var_5, var_6, var_11, 0, _id_44D9(), var_7, 1);
+    var_12 = _id_04E6::killcamtime(var_5, var_6, var_11, 0, _id_44D9(), var_7, 1);
     var_13 = var_12 + var_11 + var_8 / 1000;
     self onlystreamactiveweapon(1);
-    _func_3B7(1);
-    thread _id_04E6::_id_7681(level._id_3B4C[var_0], level._id_3B4C[var_0], var_13, "none");
+    xmodelalias/alias_ger_heads_urb(1);
+    thread _id_04E6::prekillcamnotify(level._id_3B4C[var_0], level._id_3B4C[var_0], var_13, "none");
   } else if(isDefined(level._id_74CA) && level._id_74CA >= 0) {
     self onlystreamactiveweapon(1);
-    _func_3B7(1);
-    var_14 = maps\mp\gametypes\_playerlogic::_id_4006();
+    xmodelalias/alias_ger_heads_urb(1);
+    var_14 = maps\mp\gametypes\_playerlogic::gatherclassweapons();
     var_15 = level.playofthegameentity;
     var_15._id_0189 = 1;
-    self._id_9459 = self loadcustomizationplayerview(var_15, 0, var_14);
+    self.streamweapons = self loadcustomizationplayerview(var_15, 0, var_14);
     var_15._id_0189 = 0;
   }
 }
 
 _id_36B7() {
   _id_7D67();
-  level._id_8C03 = 0;
+  level.showingfinalkillcam = 0;
   level notify("final_killcam_done");
 }
 
@@ -341,7 +341,7 @@ _id_329B() {
   if(isDefined(level._id_74CA)) {} else {}
 
   if(isDefined(level._id_74CA) && level._id_74CA >= 0) {
-    level._id_8C03 = 1;
+    level.showingfinalkillcam = 1;
 
     foreach(var_1 in level.players) {
       if(level._id_74CA == var_1 getentitynumber()) {
@@ -351,7 +351,7 @@ _id_329B() {
     }
 
     foreach(var_1 in level.players) {
-      var_1 maps\mp\_utility::_id_7E50(0);
+      var_1 maps\mp\_utility::revertvisionsetforplayer(0);
       var_1 setblurforplayer(0, 0);
       var_1.forcespectatorclient = -1;
       var_1._id_0189 = 1;
@@ -412,25 +412,25 @@ _id_318C() {
   level._id_74CA = -1;
   level.playofthegameentity = undefined;
   level waittill("round_end_finished");
-  level._id_8C03 = 1;
+  level.showingfinalkillcam = 1;
   var_0 = "none";
 
-  if(isDefined(level._id_3B5C)) {
-    var_0 = level._id_3B5C;
+  if(isDefined(level.finalkillcam_winner)) {
+    var_0 = level.finalkillcam_winner;
   }
 
   var_1 = level._id_3B51[var_0];
   var_2 = level._id_3B5B[var_0];
   var_3 = level._id_3B4C[var_0];
   var_4 = level._id_3B4E[var_0];
-  var_5 = level._id_3B52[var_0];
+  var_5 = level.finalkillcam_killcamentityindex[var_0];
   var_6 = level._id_3B53[var_0];
   var_7 = level._id_3B5A[var_0];
   var_8 = level._id_3B56[var_0];
   var_9 = level._id_3B50[var_0];
   var_10 = level._id_3B54[var_0];
   var_11 = level._id_3B58[var_0];
-  var_12 = level._id_3B57[var_0];
+  var_12 = level.finalkillcam_timegameended[var_0];
   var_13 = level._id_3B55[var_0];
   var_14 = level._id_3B59[var_0];
   var_15 = level._id_3B4F[var_0];
@@ -442,25 +442,25 @@ _id_318C() {
   }
 
   if(isDefined(var_3)) {
-    var_3._id_3B4B = 1;
+    var_3.finalkill = 1;
     var_3 maps\mp\gametypes\_missions::processchallenge("ch_heroics_moviestar");
 
     if(level.gametype == "conf" && isDefined(level._id_3B4C[var_3.team]) && level._id_3B4C[var_3.team] == var_3) {
       var_3 maps\mp\gametypes\_missions::processchallenge("ch_theedge");
 
-      if(isDefined(var_3._id_62A1["revenge"])) {
+      if(isDefined(var_3.modifiers["revenge"])) {
         var_3 maps\mp\gametypes\_missions::processchallenge("ch_moneyshot");
       }
 
-      if(isDefined(var_3._id_5133) && var_3._id_5133) {
+      if(isDefined(var_3.infinalstand) && var_3.infinalstand) {
         var_3 maps\mp\gametypes\_missions::processchallenge("ch_lastresort");
       }
 
-      if(isDefined(var_2) && isDefined(var_2._id_3961) && isDefined(var_2._id_3961["stickKill"]) && var_2._id_3961["stickKill"]) {
+      if(isDefined(var_2) && isDefined(var_2.explosiveinfo) && isDefined(var_2.explosiveinfo["stickKill"]) && var_2.explosiveinfo["stickKill"]) {
         var_3 maps\mp\gametypes\_missions::processchallenge("ch_stickman");
       }
 
-      if(isDefined(var_2._id_1189) && isDefined(var_2._id_1189[var_3.guid]) && isDefined(var_2._id_1189[var_3.guid]._id_8CD7) && isDefined(var_2._id_1189[var_3.guid]._id_01D0) && issubstr(var_2._id_1189[var_3.guid]._id_8CD7, "MOD_MELEE") && issubstr(var_2._id_1189[var_3.guid]._id_01D0, "riotshield_mp")) {
+      if(isDefined(var_2.attackerdata) && isDefined(var_2.attackerdata[var_3.guid]) && isDefined(var_2.attackerdata[var_3.guid].smeansofdeath) && isDefined(var_2.attackerdata[var_3.guid]._id_01D0) && issubstr(var_2.attackerdata[var_3.guid].smeansofdeath, "MOD_MELEE") && issubstr(var_2.attackerdata[var_3.guid]._id_01D0, "riotshield_mp")) {
         var_3 maps\mp\gametypes\_missions::processchallenge("ch_owned");
       }
 
@@ -491,10 +491,10 @@ _id_318C() {
   _id_A6C9(var_3);
 
   if(_id_8B8C()) {
-    var_17 = (gettime() - var_2._id_2AB8) / 1000;
+    var_17 = (gettime() - var_2.deathtime) / 1000;
 
     foreach(var_19 in level.players) {
-      var_19 maps\mp\_utility::_id_7E50(0);
+      var_19 maps\mp\_utility::revertvisionsetforplayer(0);
 
       if(var_19 ismlgspectator()) {
         var_19 _id_04C3::resetforplayofthegamecam();
@@ -509,7 +509,7 @@ _id_318C() {
       }
 
       var_19 maps\mp\gametypes\_damage::_id_A106(var_15, var_16);
-      var_19 thread _id_04E6::_id_5A29(var_3, var_4, var_5, var_6, var_8, var_17 + var_9, var_10, 0, _id_44D9(), var_3, var_2, var_13, var_14, var_20, var_7);
+      var_19 thread _id_04E6::killcam(var_3, var_4, var_5, var_6, var_8, var_17 + var_9, var_10, 0, _id_44D9(), var_3, var_2, var_13, var_14, var_20, var_7);
     }
   }
 

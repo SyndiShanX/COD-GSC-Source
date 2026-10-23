@@ -3,8 +3,8 @@
  * Script: scripts\maps\mp\gametypes\_gamescore.gsc
 ****************************************************/
 
-_id_450A() {
-  _id_A14D();
+gethighestscoringplayer() {
+  updateplacement();
 
   if(!level.placement["all"].size) {
     return undefined;
@@ -13,14 +13,14 @@ _id_450A() {
   }
 }
 
-_id_450B(var_0) {
+gethighestscoringplayersarray(var_0) {
   var_1 = [];
 
   if(var_0 < 0) {
     return var_1;
   }
 
-  _id_A14D();
+  updateplacement();
 
   for(var_2 = 0; var_2 < var_0; var_2++) {
     if(level.placement["all"].size == var_2) {
@@ -52,8 +52,8 @@ gettiedplayerarray(var_0) {
   return var_2;
 }
 
-_id_4568() {
-  _id_A14D();
+getlosingplayers() {
+  updateplacement();
   var_0 = level.placement["all"];
   var_1 = [];
 
@@ -67,7 +67,7 @@ _id_4568() {
   return var_1;
 }
 
-_id_A161(var_0, var_1) {
+updatescorestatsffa(var_0, var_1) {
   if(level.teambased) {
     return;
   }
@@ -79,7 +79,7 @@ _id_A161(var_0, var_1) {
   }
 }
 
-_id_47A7(var_0, var_1, var_2, var_3, var_4) {
+giveplayerscore(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_1._id_0117)) {
     var_1 = var_1._id_0117;
   }
@@ -130,9 +130,9 @@ _id_47A7(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(!level.teambased) {
-    level thread _id_83E2();
-    var_1 maps\mp\gametypes\_gamelogic::_id_21D2();
-    var_1 maps\mp\gametypes\_gamelogic::_id_21E3();
+    level thread sendupdateddmscores();
+    var_1 maps\mp\gametypes\_gamelogic::checkplayerscorelimitsoon();
+    var_1 maps\mp\gametypes\_gamelogic::checkscorelimit();
   }
 }
 
@@ -151,7 +151,7 @@ _id_6B7F(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  var_1.pers["score"] = var_1.pers["score"] + var_5 * level._id_696A;
+  var_1.pers["score"] = var_1.pers["score"] + var_5 * level.objectivepointsmod;
 }
 
 _id_06D8(var_0, var_1) {
@@ -162,7 +162,7 @@ _id_06D8(var_0, var_1) {
   var_0.score = var_0.pers["score"];
 
   if(!level.teambased) {
-    var_0 thread maps\mp\gametypes\_gamelogic::_id_21E3();
+    var_0 thread maps\mp\gametypes\_gamelogic::checkscorelimit();
   }
 }
 
@@ -170,31 +170,31 @@ _id_0638(var_0) {
   return var_0.pers["score"];
 }
 
-_id_47BD(var_0, var_1, var_2) {
-  var_1 = var_1 * level._id_696A;
+giveteamscoreforobjective(var_0, var_1, var_2) {
+  var_1 = var_1 * level.objectivepointsmod;
   _id_06DB(var_0, _id_063E(var_0) + var_1, var_2);
   level notify("update_team_score", var_0, _id_063E(var_0));
   _reconevent("script_mp_scoring: gameTime %d, team %s, score %d", gettime(), var_0, var_1);
-  thread _id_47BE();
+  thread giveteamscoreforobjectiveendofframe();
 }
 
-_id_47BE() {
+giveteamscoreforobjectiveendofframe() {
   level endon("update_team_score");
   level endon("game_ended");
   waittillframeend;
-  var_0 = _id_473F();
+  var_0 = getwinningteam();
 
-  if(!level.splitscreen && var_0 != "none" && var_0 != level._id_A87B && gettime() - level._id_5C00 > 5000 && maps\mp\_utility::getscorelimit() != 1 && level.gametype != "demo") {
-    level._id_5C00 = gettime();
+  if(!level.splitscreen && var_0 != "none" && var_0 != level.waswinning && gettime() - level.laststatustime > 5000 && maps\mp\_utility::getscorelimit() != 1 && level.gametype != "demo") {
+    level.laststatustime = gettime();
     maps\mp\_utility::leaderdialog("lead_taken", var_0, "status");
 
-    if(level._id_A87B != "none") {
-      maps\mp\_utility::leaderdialog("lead_lost", level._id_A87B, "status");
+    if(level.waswinning != "none") {
+      maps\mp\_utility::leaderdialog("lead_lost", level.waswinning, "status");
     }
   }
 
   if(var_0 != "none") {
-    level._id_A87B = var_0;
+    level.waswinning = var_0;
     var_1 = _id_063E(var_0);
     var_2 = maps\mp\_utility::getwatcheddvar("scorelimit");
 
@@ -206,18 +206,18 @@ _id_47BE() {
     }
     var_3 = var_1 / var_2 * 100;
 
-    if(var_3 > level._id_80AC) {
-      _func_246(1);
+    if(var_3 > level.scorepercentagecutoff) {
+      setnojipscore(1);
     }
   }
 }
 
-_id_473F() {
-  if(maps\mp\_utility::_id_761E()) {
+getwinningteam() {
+  if(maps\mp\_utility::practiceroundgame()) {
     return "none";
   }
 
-  var_0 = level._id_985B;
+  var_0 = level.teamnamelist;
   var_1 = var_0[0];
   var_2 = game["teamScores"][var_0[0]];
   var_3 = 1;
@@ -244,20 +244,20 @@ _id_06DB(var_0, var_1, var_2) {
     return;
   }
   game["teamScores"][var_0] = var_1;
-  _id_A174(var_0);
+  updateteamscore(var_0);
 
-  if(maps\mp\_utility::inovertime() && !isDefined(level._id_6CD1) || isDefined(level._id_6CD1) && !level._id_6CD1) {
-    thread maps\mp\gametypes\_gamelogic::_id_6B9B();
+  if(maps\mp\_utility::inovertime() && !isDefined(level.overtimescorewinoverride) || isDefined(level.overtimescorewinoverride) && !level.overtimescorewinoverride) {
+    thread maps\mp\gametypes\_gamelogic::onscorelimit();
   } else {
-    thread maps\mp\gametypes\_gamelogic::_id_21EA(var_0);
+    thread maps\mp\gametypes\_gamelogic::checkteamscorelimitsoon(var_0);
 
     if(var_2) {
-      thread maps\mp\gametypes\_gamelogic::_id_21E3();
+      thread maps\mp\gametypes\_gamelogic::checkscorelimit();
     }
   }
 }
 
-_id_A174(var_0) {
+updateteamscore(var_0) {
   var_1 = 0;
 
   if(!maps\mp\_utility::isroundbased() || !maps\mp\_utility::isobjectivebased()) {
@@ -273,7 +273,7 @@ _id_063E(var_0) {
   return game["teamScores"][var_0];
 }
 
-_id_83E3() {
+sendupdatedteamscores() {
   level notify("updating_scores");
   level endon("updating_scores");
   waitframe();
@@ -284,7 +284,7 @@ _id_83E3() {
   }
 }
 
-_id_83E2() {
+sendupdateddmscores() {
   level notify("updating_dm_scores");
   level endon("updating_dm_scores");
   waitframe();
@@ -292,11 +292,11 @@ _id_83E2() {
 
   for(var_0 = 0; var_0 < level.players.size; var_0++) {
     level.players[var_0] updatedmscores();
-    level.players[var_0]._id_A105 = 1;
+    level.players[var_0].updateddmscores = 1;
   }
 }
 
-_id_7CD8() {
+removedisconnectedplayerfromplacement() {
   var_0 = 0;
   var_1 = level.placement["all"].size;
   var_2 = 0;
@@ -316,12 +316,12 @@ _id_7CD8() {
   }
   level.placement["all"][var_1 - 1] = undefined;
 
-  if(level._id_6520) {
-    _id_650D();
+  if(level.multiteambased) {
+    mtdm_updateteamplacement();
   }
 
   if(level.teambased) {
-    _id_A173();
+    updateteamplacement();
     return;
   }
 
@@ -333,11 +333,11 @@ _id_7CD8() {
   }
 }
 
-_id_A14D() {
+updateplacement() {
   var_0 = [];
 
   foreach(var_2 in level.players) {
-    if(isDefined(var_2._id_2583)) {
+    if(isDefined(var_2.connectedpostgame)) {
       continue;
     }
     if(var_2.pers["team"] == "spectator" || var_2.pers["team"] == "none") {
@@ -354,7 +354,7 @@ _id_A14D() {
       var_5 = var_2._id_008F;
     }
 
-    for(var_6 = var_4 - 1; var_6 >= 0 && _id_4438(var_2, var_0[var_6]) == var_2; var_6--) {
+    for(var_6 = var_4 - 1; var_6 >= 0 && getbetterplayer(var_2, var_0[var_6]) == var_2; var_6--) {
       var_0[var_6 + 1] = var_0[var_6];
     }
 
@@ -363,14 +363,14 @@ _id_A14D() {
 
   level.placement["all"] = var_0;
 
-  if(level._id_6520) {
-    _id_650D();
+  if(level.multiteambased) {
+    mtdm_updateteamplacement();
   } else if(level.teambased) {
-    _id_A173();
+    updateteamplacement();
   }
 }
 
-_id_4438(var_0, var_1) {
+getbetterplayer(var_0, var_1) {
   if(var_0.score > var_1.score) {
     return var_0;
   }
@@ -387,14 +387,14 @@ _id_4438(var_0, var_1) {
     return var_1;
   }
 
-  if(common_scripts\utility::_id_24A6()) {
+  if(common_scripts\utility::cointoss()) {
     return var_0;
   } else {
     return var_1;
   }
 }
 
-_id_A173() {
+updateteamplacement() {
   var_0["allies"] = [];
   var_0["axis"] = [];
   var_0["spectator"] = [];
@@ -411,10 +411,10 @@ _id_A173() {
   level.placement["axis"] = var_0["axis"];
 }
 
-_id_650D() {
+mtdm_updateteamplacement() {
   var_0["spectator"] = [];
 
-  foreach(var_2 in level._id_985B) {
+  foreach(var_2 in level.teamnamelist) {
     var_0[var_2] = [];
   }
 
@@ -427,12 +427,12 @@ _id_650D() {
     var_0[var_8][var_0[var_8].size] = var_7;
   }
 
-  foreach(var_2 in level._id_985B) {
+  foreach(var_2 in level.teamnamelist) {
     level.placement[var_2] = var_0[var_2];
   }
 }
 
-_id_52DA() {
+initialdmscoreupdate() {
   wait 0.2;
   var_0 = 0;
 
@@ -446,10 +446,10 @@ _id_52DA() {
       if(!isDefined(var_4)) {
         continue;
       }
-      if(isDefined(var_4._id_A105)) {
+      if(isDefined(var_4.updateddmscores)) {
         continue;
       }
-      var_4._id_A105 = 1;
+      var_4.updateddmscores = 1;
       var_4 updatedmscores();
       var_1 = 1;
       wait 0.5;

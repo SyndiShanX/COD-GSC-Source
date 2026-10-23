@@ -5,9 +5,9 @@
 
 _id_8D89() {
   level._id_071D = spawnStruct();
-  level._id_11CB = spawnStruct();
+  level.aud = spawnStruct();
   _id_8D88();
-  _id_8D75();
+  snd_message_init();
 
   if(getdvarint("2803", 0) > 0) {
     thread _id_A8E4();
@@ -72,52 +72,52 @@ _id_8D88() {
 
 _id_8D8A() {
   self._id_071D = spawnStruct();
-  self._id_11CB = spawnStruct();
-  _id_8D74("player_connect");
+  self.aud = spawnStruct();
+  snd_message("player_connect");
 }
 
-_id_8D75() {
+snd_message_init() {
   if(!isDefined(level._id_071D)) {
     level._id_071D = spawnStruct();
   }
 
-  if(!isDefined(level._id_071D._id_611B)) {
-    level._id_071D._id_611B = [];
+  if(!isDefined(level._id_071D.messages)) {
+    level._id_071D.messages = [];
   }
 }
 
-_id_8DC7(var_0, var_1) {
+snd_register_message(var_0, var_1) {
   _id_8D14(isDefined(level._id_071D), "Need to call snd_message_init( ) before calling this function.");
-  _id_8D14(_isarray(level._id_071D._id_611B));
-  level._id_071D._id_611B[var_0] = var_1;
+  _id_8D14(_isarray(level._id_071D.messages));
+  level._id_071D.messages[var_0] = var_1;
 }
 
-_id_8D84(var_0, var_1, var_2) {
+snd_music_message(var_0, var_1, var_2) {
   level notify("stop_other_music");
   level endon("stop_other_music");
 
   if(isDefined(var_2)) {
-    childthread _id_8D74("snd_music_handler", var_0, var_1, var_2);
+    childthread snd_message("snd_music_handler", var_0, var_1, var_2);
   } else if(isDefined(var_1)) {
-    childthread _id_8D74("snd_music_handler", var_0, var_1);
+    childthread snd_message("snd_music_handler", var_0, var_1);
   } else {
-    childthread _id_8D74("snd_music_handler", var_0);
+    childthread snd_message("snd_music_handler", var_0);
   }
 }
 
-_id_8D74(var_0, var_1, var_2, var_3) {
+snd_message(var_0, var_1, var_2, var_3) {
   _id_8D14(isDefined(level._id_071D), "Need to call snd_message_init( ) before calling this function.");
-  _id_8D14(_isarray(level._id_071D._id_611B));
+  _id_8D14(_isarray(level._id_071D.messages));
 
-  if(isDefined(level._id_071D._id_611B[var_0])) {
+  if(isDefined(level._id_071D.messages[var_0])) {
     if(isDefined(var_3)) {
-      thread[[level._id_071D._id_611B[var_0]]](var_1, var_2, var_3);
+      thread[[level._id_071D.messages[var_0]]](var_1, var_2, var_3);
     } else if(isDefined(var_2)) {
-      thread[[level._id_071D._id_611B[var_0]]](var_1, var_2);
+      thread[[level._id_071D.messages[var_0]]](var_1, var_2);
     } else if(isDefined(var_1)) {
-      thread[[level._id_071D._id_611B[var_0]]](var_1);
+      thread[[level._id_071D.messages[var_0]]](var_1);
     } else {
-      thread[[level._id_071D._id_611B[var_0]]]();
+      thread[[level._id_071D.messages[var_0]]]();
     }
   }
 }
@@ -189,14 +189,14 @@ _id_1BBF() {
   self endon("death");
 
   for(;;) {
-    level common_scripts\utility::_id_A70A("game_ended", "round_end_finished");
+    level common_scripts\utility::waittill_any("game_ended", "round_end_finished");
     thread _id_93E2();
   }
 }
 
 _id_1BBD() {
   var_0 = 0;
-  var_1 = self._id_20D8;
+  var_1 = self.characterindex;
 
   if(self hasfemalecustomizationmodel()) {
     var_0 = 1;
@@ -262,7 +262,7 @@ _id_8DFE(var_0, var_1, var_2) {}
 
 _id_8D14(var_0, var_1, var_2) {}
 
-_id_8D86() {
+snd_new_guid() {
   if(!isDefined(level._id_071D.guid)) {
     level._id_071D.guid = 0;
   }
@@ -277,7 +277,7 @@ _id_8D86() {
   return level._id_071D.guid;
 }
 
-_id_8D72(var_0, var_1) {
+snd_map(var_0, var_1) {
   return _piecewiselinearlookup(var_0, var_1);
 }
 
@@ -318,7 +318,7 @@ _id_8D1B(var_0) {
 
 _id_8DEB(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = self;
-  var_7 = var_0 + "_line_emitter_" + _id_8D86();
+  var_7 = var_0 + "_line_emitter_" + snd_new_guid();
   _id_8D14(_soundexists(var_0));
   _id_8D14(isDefined(var_1));
   _id_8D14(isDefined(var_2));
@@ -351,7 +351,7 @@ _id_8DEE(var_0) {
   }
 }
 
-_id_8DA7(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+snd_play_loop_at(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(getdvarint("snd_debug")) {
     _id_8D14(0, "snd_play_loop_at() IS OBSOLETE - DO NOT USE");
   }
@@ -368,13 +368,13 @@ _id_8DA7(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 _id_8E88(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  var_7 = _func_351(var_0, undefined, var_1, undefined, undefined, undefined, var_3, undefined, var_5);
+  var_7 = maps/taken_tent_fx(var_0, undefined, var_1, undefined, undefined, undefined, var_3, undefined, var_5);
 
   if(!isDefined(var_7)) {
     return;
   }
-  var_6 common_scripts\utility::_id_A732(var_2, "death");
-  _func_352(var_7, var_4);
+  var_6 common_scripts\utility::waittill_either(var_2, "death");
+  maps/taken_tent_precache(var_7, var_4);
 }
 
 _id_8DAA(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -392,13 +392,13 @@ _id_8DAA(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_8E8A(var_0, var_1, var_2, var_3, var_4, var_5) {
-  var_6 = _func_351(var_0, var_1, undefined, undefined, undefined, "hard", var_3, var_4, var_5);
+  var_6 = maps/taken_tent_fx(var_0, var_1, undefined, undefined, undefined, "hard", var_3, var_4, var_5);
 
   if(!isDefined(var_6)) {
     return;
   }
-  var_1 common_scripts\utility::_id_A732(var_2, "death");
-  _func_352(var_6, var_4);
+  var_1 common_scripts\utility::waittill_either(var_2, "death");
+  maps/taken_tent_precache(var_6, var_4);
 }
 
 _id_8D9E(var_0, var_1, var_2, var_3, var_4) {
@@ -429,9 +429,9 @@ _id_8DC2(var_0, var_1) {}
 
 _id_8D64(var_0) {}
 
-_id_8D3B() {}
+snd_flash_white() {}
 
-_id_8DE8(var_0) {}
+snd_slate(var_0) {}
 
 _id_7207(var_0, var_1, var_2, var_3) {
   var_4 = var_0;
@@ -446,7 +446,7 @@ _id_7207(var_0, var_1, var_2, var_3) {
   var_13 = var_2;
   var_14 = var_1;
   var_15 = undefined;
-  return _func_351(var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15);
+  return maps/taken_tent_fx(var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15);
 }
 
 _id_7208(var_0, var_1, var_2, var_3, var_4) {
@@ -462,7 +462,7 @@ _id_7208(var_0, var_1, var_2, var_3, var_4) {
   var_13 = var_3;
   var_14 = var_1;
   var_15 = undefined;
-  return _func_351(var_5, var_6, var_2, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15);
+  return maps/taken_tent_fx(var_5, var_6, var_2, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15);
 }
 
 _id_7209(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -478,7 +478,7 @@ _id_7209(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_16 = var_3;
   var_17 = var_1;
   var_18 = undefined;
-  return _func_351(var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_17, var_18);
+  return maps/taken_tent_fx(var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_17, var_18);
 }
 
 _id_8D0B(var_0) {
@@ -519,7 +519,7 @@ _id_8D19(var_0, var_1) {
 
 _id_307C(var_0, var_1, var_2) {
   var_3 = spawnStruct();
-  var_3._id_77EF = _id_8E5E(::_id_3082);
+  var_3.q = _id_8E5E(::_id_3082);
   var_3._id_586D = undefined;
   var_3._id_20CD = [];
   var_3._id_20CE = [];
@@ -620,19 +620,19 @@ _id_3083() {
 _id_3080(var_0, var_1, var_2, var_3, var_4) {
   var_5 = self;
   var_6 = var_5 _id_3087(var_0, var_1, var_2, var_3, var_4);
-  var_5._id_77EF _id_8E61(var_6);
+  var_5.q _id_8E61(var_6);
   return var_6._id_3220;
 }
 
 _id_3087(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawnStruct();
   var_5._id_0BB4 = var_0;
-  var_5._id_90BE = var_1;
+  var_5.speaker = var_1;
   var_5._id_5DD0 = var_2;
-  var_5._id_90C0 = _id_307B(var_1._id_20D8);
+  var_5._id_90C0 = _id_307B(var_1.characterindex);
   var_5.priority = _id_8D49(0, var_3);
   var_5._id_1F18 = _id_8D49(0, var_4);
-  var_5._id_3220 = var_0 + "_" + _id_8D86();
+  var_5._id_3220 = var_0 + "_" + snd_new_guid();
   return var_5;
 }
 
@@ -640,23 +640,23 @@ _id_3086() {
   var_0 = undefined;
 
   for(;;) {
-    if(self._id_77EF _id_8E62() > 0) {
+    if(self.q _id_8E62() > 0) {
       var_1 = _id_3084();
       var_2 = _id_3088(var_1);
 
       if(isDefined(var_2)) {
         if(isDefined(self._id_A22A)) {
-          var_3 = var_1._id_90BE[[self._id_A22A]]("begin", var_2, var_1._id_0BB4);
+          var_3 = var_1.speaker[[self._id_A22A]]("begin", var_2, var_1._id_0BB4);
 
           if(isDefined(var_3)) {
             dlgx_set_sound_handle_volume(var_2, var_3);
           }
         }
 
-        var_1._id_90BE waittill(var_1._id_3220);
+        var_1.speaker waittill(var_1._id_3220);
 
         if(isDefined(self._id_A22A)) {
-          var_1._id_90BE[[self._id_A22A]]("end", var_2, var_1._id_0BB4);
+          var_1.speaker[[self._id_A22A]]("end", var_2, var_1._id_0BB4);
         }
       } else
         waitframe();
@@ -664,22 +664,22 @@ _id_3086() {
       continue;
     }
 
-    self._id_77EF waittill("size_changed");
+    self.q waittill("size_changed");
   }
 }
 
 _id_3088(var_0) {
-  var_1 = [var_0._id_90BE];
+  var_1 = [var_0.speaker];
 
   if(isDefined(var_0._id_5DD0)) {
     foreach(var_3 in var_0._id_5DD0) {
-      if(var_3 != var_0._id_90BE) {
+      if(var_3 != var_0.speaker) {
         var_1[var_1.size] = var_3;
       }
     }
   }
 
-  var_5 = var_0._id_90BE;
+  var_5 = var_0.speaker;
   var_6 = 0;
   var_7 = 0.25;
   var_8 = 1.0;
@@ -690,7 +690,7 @@ _id_3088(var_0) {
     _id_308B(var_0);
     thread _id_3089(var_0);
   } else
-    _id_8D14(0, "dlgx_monitor(): could not play alias <" + var_0._id_0BB4 + "> on CharacterIndex " + var_0._id_90BE._id_20D8);
+    _id_8D14(0, "dlgx_monitor(): could not play alias <" + var_0._id_0BB4 + "> on CharacterIndex " + var_0.speaker.characterindex);
 
   return var_9;
 }
@@ -700,9 +700,9 @@ dlgx_set_sound_handle_volume(var_0, var_1) {
 }
 
 _id_3089(var_0) {
-  _func_359(var_0._id_8E51, var_0._id_90BE, var_0._id_3220);
+  soundscripts/_audio(var_0._id_8E51, var_0.speaker, var_0._id_3220);
   var_1 = gettime();
-  var_0._id_90BE waittill(var_0._id_3220);
+  var_0.speaker waittill(var_0._id_3220);
   var_2 = (gettime() - var_1) / 1000.0;
   _id_3081();
 }
@@ -722,7 +722,7 @@ _id_3081() {
 }
 
 _id_3084() {
-  return self._id_77EF _id_8E60();
+  return self.q _id_8E60();
 }
 
 _id_8E5E(var_0, var_1) {

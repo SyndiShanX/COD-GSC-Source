@@ -44,9 +44,9 @@ _id_280D(var_0, var_1, var_2, var_3) {
   var_4 = spawnStruct();
   var_4._id_7B79 = var_1;
   var_4.type = var_0;
-  var_4._id_9D65 = var_2;
+  var_4.trigger = var_2;
   var_4._id_6642 = 0;
-  var_4._id_2F74 = 0;
+  var_4.disabled = 0;
 
   if(isDefined(var_3)) {
     var_4._id_5A16 = var_3;
@@ -102,7 +102,7 @@ _id_A154(var_0) {
   var_2 = level._id_AC0C[var_1];
 
   for(;;) {
-    if(isDefined(var_2._id_2900) && !isDefined(var_2._id_2900._id_9D65)) {
+    if(isDefined(var_2._id_2900) && !isDefined(var_2._id_2900.trigger)) {
       _id_2D8F(var_0, var_2._id_2900);
 
       if(var_2._id_4DBA) {
@@ -116,7 +116,7 @@ _id_A154(var_0) {
     }
 
     if(var_2._id_4DBA) {
-      if(!isDefined(var_2._id_2900._id_9D65) || !var_0 istouching(var_2._id_2900._id_9D65) || var_2._id_2900._id_2F74) {
+      if(!isDefined(var_2._id_2900.trigger) || !var_0 istouching(var_2._id_2900.trigger) || var_2._id_2900.disabled) {
         var_2._id_4DBA = 0;
         var_2._id_2900 = undefined;
         var_0 setclientomnvar("ui_zm_contexthint_data", 0);
@@ -128,7 +128,7 @@ _id_A154(var_0) {
       for(var_1 = 0; var_1 < var_3; var_1++) {
         var_4 = var_2._id_A902[var_1];
 
-        if(!var_4._id_2F74 && isDefined(var_4._id_9D65) && var_0 istouching(var_4._id_9D65)) {
+        if(!var_4.disabled && isDefined(var_4.trigger) && var_0 istouching(var_4.trigger)) {
           var_2._id_4DBA = 1;
           var_2._id_2900 = var_4;
           _id_8655(var_0, var_4);

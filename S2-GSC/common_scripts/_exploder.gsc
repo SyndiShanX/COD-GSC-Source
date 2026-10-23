@@ -3,11 +3,11 @@
  * Script: common_scripts\_exploder.gsc
 ****************************************/
 
-_id_44D1(var_0) {
+getexploders(var_0) {
   var_0 = var_0 + "";
 
-  if(isDefined(level._id_2807)) {
-    return level._id_2807[var_0];
+  if(isDefined(level.createfxexploders)) {
+    return level.createfxexploders[var_0];
   }
 
   var_1 = [];
@@ -30,11 +30,11 @@ _id_44D1(var_0) {
   return var_1;
 }
 
-_id_885C(var_0) {
+setup_individual_exploder(var_0) {
   var_1 = var_0.setdepthoffield;
 
-  if(!isDefined(level._id_3948[var_1])) {
-    level._id_3948[var_1] = [];
+  if(!isDefined(level.exploders[var_1])) {
+    level.exploders[var_1] = [];
   }
 
   var_2 = var_0.targetname;
@@ -43,14 +43,14 @@ _id_885C(var_0) {
     var_2 = "";
   }
 
-  level._id_3948[var_1][level._id_3948[var_1].size] = var_0;
+  level.exploders[var_1][level.exploders[var_1].size] = var_0;
 
-  if(_id_393B(var_0)) {
+  if(exploder_model_starts_hidden(var_0)) {
     var_0 hide();
     return;
   }
 
-  if(_id_393A(var_0)) {
+  if(exploder_model_is_damaged_model(var_0)) {
     var_0 hide();
     var_0 notsolid();
 
@@ -63,7 +63,7 @@ _id_885C(var_0) {
     return;
   }
 
-  if(_id_3939(var_0)) {
+  if(exploder_model_is_chunk(var_0)) {
     var_0 hide();
     var_0 notsolid();
 
@@ -75,8 +75,8 @@ _id_885C(var_0) {
   }
 }
 
-_id_8A1A() {
-  level._id_3948 = [];
+setupexploders() {
+  level.exploders = [];
   var_0 = getEntArray("script_brushmodel", "classname");
   var_1 = getEntArray("script_model", "classname");
 
@@ -89,11 +89,11 @@ _id_8A1A() {
       var_4.setdepthoffield = var_4.physicslaunchserver;
     }
 
-    if(isDefined(var_4._id_6019)) {
+    if(isDefined(var_4.masked_exploder)) {
       continue;
     }
     if(isDefined(var_4.setdepthoffield)) {
-      _id_885C(var_4);
+      setup_individual_exploder(var_4);
     }
   }
 
@@ -173,11 +173,11 @@ _id_8A1A() {
   var_8["exploderchunk visible"] = 1;
   var_8["exploderchunk"] = 1;
   var_8["exploder"] = 1;
-  thread _id_8825();
+  thread setup_flag_exploders();
 
   for(var_2 = 0; var_2 < var_6.size; var_2++) {
     var_9 = var_6[var_2];
-    var_4 = common_scripts\utility::createexploder(var_9._id_81BB);
+    var_4 = common_scripts\utility::createexploder(var_9.script_fxid);
     var_4.v = [];
     var_4.v["origin"] = var_9.origin;
     var_4.v["angles"] = var_9.angles;
@@ -187,36 +187,36 @@ _id_8A1A() {
     var_4.v["firefxdelay"] = var_9.getgroundenttype;
     var_4.v["firefxsound"] = var_9.animcustom;
     var_4.v["firefxtimeout"] = var_9.isinscriptedstate;
-    var_4.v["earthquake"] = var_9._id_817B;
+    var_4.v["earthquake"] = var_9.script_earthquake;
     var_4.v["rumble"] = var_9.setswitchnode;
     var_4.v["damage"] = var_9.setanim;
     var_4.v["damage_radius"] = var_9.scriptmodelplayanim;
     var_4.v["soundalias"] = var_9.vehicle_getsteering;
     var_4.v["repeat"] = var_9.scriptmodelplayanimdeltamotion;
-    var_4.v["delay_min"] = var_9._id_8154;
+    var_4.v["delay_min"] = var_9.script_delay_min;
     var_4.v["delay_max"] = var_9.setbottomarc;
     var_4.v["target"] = var_9.target;
     var_4.v["ender"] = var_9.itemweaponsetammo;
     var_4.v["physics"] = var_9.iprintlnbold;
     var_4.v["type"] = "exploder";
 
-    if(!isDefined(var_9._id_81BB)) {
+    if(!isDefined(var_9.script_fxid)) {
       var_4.v["fxid"] = "No FX";
     } else {
-      var_4.v["fxid"] = var_9._id_81BB;
+      var_4.v["fxid"] = var_9.script_fxid;
     }
 
     var_4.v["exploder"] = var_9.setdepthoffield;
 
-    if(isDefined(level._id_2807)) {
-      var_10 = level._id_2807[var_4.v["exploder"]];
+    if(isDefined(level.createfxexploders)) {
+      var_10 = level.createfxexploders[var_4.v["exploder"]];
 
       if(!isDefined(var_10)) {
         var_10 = [];
       }
 
       var_10[var_10.size] = var_4;
-      level._id_2807[var_4.v["exploder"]] = var_10;
+      level.createfxexploders[var_4.v["exploder"]] = var_10;
     }
 
     if(!isDefined(var_4.v["delay"])) {
@@ -230,7 +230,7 @@ _id_8A1A() {
         var_12 = var_11.origin;
         var_4.v["angles"] = vectortoangles(var_12 - var_4.v["origin"]);
       } else {
-        var_11 = common_scripts\utility::_id_4375(var_4.v["target"]);
+        var_11 = common_scripts\utility::get_target_ent(var_4.v["target"]);
 
         if(isDefined(var_11)) {
           var_12 = var_11.origin;
@@ -242,12 +242,12 @@ _id_8A1A() {
     if(!isDefined(var_9._id_003B)) {
       var_4.model = var_9;
 
-      if(isDefined(var_4.model._id_8205)) {
-        precachemodel(var_4.model._id_8205);
+      if(isDefined(var_4.model.script_modelname)) {
+        precachemodel(var_4.model.script_modelname);
       }
     } else if(var_9._id_003B == "script_brushmodel" || isDefined(var_9.model)) {
       var_4.model = var_9;
-      var_4.model._id_2FBF = var_9.clearpotentialthreat;
+      var_4.model.disconnect_paths = var_9.clearpotentialthreat;
     }
 
     if(isDefined(var_9.targetname) && isDefined(var_8[var_9.targetname])) {
@@ -256,7 +256,7 @@ _id_8A1A() {
       var_4.v["exploder_type"] = "normal";
     }
 
-    if(isDefined(var_9._id_6019)) {
+    if(isDefined(var_9.masked_exploder)) {
       var_4.v["masked_exploder"] = var_9.model;
       var_4.v["masked_exploder_spawnflags"] = var_9.spawnflags;
       var_4.v["masked_exploder_script_disconnectpaths"] = var_9.clearpotentialthreat;
@@ -267,7 +267,7 @@ _id_8A1A() {
   }
 }
 
-_id_8825() {
+setup_flag_exploders() {
   waittillframeend;
   waittillframeend;
   waittillframeend;
@@ -290,16 +290,16 @@ _id_8825() {
   }
 
   foreach(var_7, var_6 in var_0) {
-    thread _id_3933(var_7);
+    thread exploder_flag_wait(var_7);
   }
 }
 
-_id_3933(var_0) {
-  if(!common_scripts\utility::_id_3C83(var_0)) {
+exploder_flag_wait(var_0) {
+  if(!common_scripts\utility::flag_exist(var_0)) {
     common_scripts\utility::flag_init(var_0);
   }
 
-  common_scripts\utility::_id_3C9F(var_0);
+  common_scripts\utility::flag_wait(var_0);
 
   foreach(var_2 in level.createfxent) {
     if(var_2.v["type"] != "exploder") {
@@ -317,31 +317,31 @@ _id_3933(var_0) {
   }
 }
 
-_id_393A(var_0) {
+exploder_model_is_damaged_model(var_0) {
   return isDefined(var_0.targetname) && var_0.targetname == "exploder";
 }
 
-_id_393B(var_0) {
+exploder_model_starts_hidden(var_0) {
   return var_0.model == "fx" && (!isDefined(var_0.targetname) || var_0.targetname != "exploderchunk");
 }
 
-_id_3939(var_0) {
+exploder_model_is_chunk(var_0) {
   return isDefined(var_0.targetname) && var_0.targetname == "exploderchunk";
 }
 
-_id_8BCA(var_0) {
+show_exploder_models_proc(var_0) {
   var_0 = var_0 + "";
 
-  if(isDefined(level._id_2807)) {
-    var_1 = level._id_2807[var_0];
+  if(isDefined(level.createfxexploders)) {
+    var_1 = level.createfxexploders[var_0];
 
     if(isDefined(var_1)) {
       foreach(var_3 in var_1) {
-        if(!_id_393B(var_3.model) && !_id_393A(var_3.model) && !_id_3939(var_3.model)) {
+        if(!exploder_model_starts_hidden(var_3.model) && !exploder_model_is_damaged_model(var_3.model) && !exploder_model_is_chunk(var_3.model)) {
           var_3.model show();
         }
 
-        if(isDefined(var_3._id_1CB4)) {
+        if(isDefined(var_3.brush_shown)) {
           var_3.model show();
         }
       }
@@ -365,11 +365,11 @@ _id_8BCA(var_0) {
         continue;
       }
       if(isDefined(var_3.model)) {
-        if(!_id_393B(var_3.model) && !_id_393A(var_3.model) && !_id_3939(var_3.model)) {
+        if(!exploder_model_starts_hidden(var_3.model) && !exploder_model_is_damaged_model(var_3.model) && !exploder_model_is_chunk(var_3.model)) {
           var_3.model show();
         }
 
-        if(isDefined(var_3._id_1CB4)) {
+        if(isDefined(var_3.brush_shown)) {
           var_3.model show();
         }
       }
@@ -377,11 +377,11 @@ _id_8BCA(var_0) {
   }
 }
 
-_id_93C8(var_0) {
+stop_exploder_proc(var_0) {
   var_0 = var_0 + "";
 
-  if(isDefined(level._id_2807)) {
-    var_1 = level._id_2807[var_0];
+  if(isDefined(level.createfxexploders)) {
+    var_1 = level.createfxexploders[var_0];
 
     if(isDefined(var_1)) {
       foreach(var_3 in var_1) {
@@ -417,12 +417,12 @@ _id_93C8(var_0) {
   }
 }
 
-_id_417F(var_0) {
+get_exploder_array_proc(var_0) {
   var_0 = var_0 + "";
   var_1 = [];
 
-  if(isDefined(level._id_2807)) {
-    var_2 = level._id_2807[var_0];
+  if(isDefined(level.createfxexploders)) {
+    var_2 = level.createfxexploders[var_0];
 
     if(isDefined(var_2)) {
       var_1 = var_2;
@@ -445,11 +445,11 @@ _id_417F(var_0) {
   return var_1;
 }
 
-_id_4CE3(var_0) {
+hide_exploder_models_proc(var_0) {
   var_0 = var_0 + "";
 
-  if(isDefined(level._id_2807)) {
-    var_1 = level._id_2807[var_0];
+  if(isDefined(level.createfxexploders)) {
+    var_1 = level.createfxexploders[var_0];
 
     if(isDefined(var_1)) {
       foreach(var_3 in var_1) {
@@ -483,11 +483,11 @@ _id_4CE3(var_0) {
   }
 }
 
-_id_2D0D(var_0) {
+delete_exploder_proc(var_0) {
   var_0 = var_0 + "";
 
-  if(isDefined(level._id_2807)) {
-    var_1 = level._id_2807[var_0];
+  if(isDefined(level.createfxexploders)) {
+    var_1 = level.createfxexploders[var_0];
 
     if(isDefined(var_1)) {
       foreach(var_3 in var_1) {
@@ -521,7 +521,7 @@ _id_2D0D(var_0) {
   level notify("killexplodertridgers" + var_0);
 }
 
-_id_392F() {
+exploder_damage() {
   if(isDefined(self.v["delay"])) {
     var_0 = self.v["delay"];
   } else {
@@ -538,8 +538,8 @@ _id_392F() {
   var_3 = self.v["origin"];
   wait(var_0);
 
-  if(isDefined(level._id_2971)) {
-    [[level._id_2971]](var_3, var_1, var_2);
+  if(isDefined(level.custom_radius_damage_for_exploders)) {
+    [[level.custom_radius_damage_for_exploders]](var_3, var_1, var_2);
   } else {
     radiusdamage(var_3, var_1, var_2, var_2);
   }
@@ -547,43 +547,43 @@ _id_392F() {
 
 _id_0895() {
   if(isDefined(self.v["firefx"])) {
-    thread _id_3BB8();
+    thread fire_effect();
   }
 
   if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
-    thread _id_1F5E();
+    thread cannon_effect();
   }
 
   if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil") {
-    thread _id_8F30();
+    thread sound_effect();
   }
 
   if(isDefined(self.v["loopsound"]) && self.v["loopsound"] != "nil") {
-    thread _id_359F();
+    thread effect_loopsound();
   }
 
   if(isDefined(self.v["damage"])) {
-    thread _id_392F();
+    thread exploder_damage();
   }
 
   if(isDefined(self.v["earthquake"])) {
-    thread _id_3931();
+    thread exploder_earthquake();
   }
 
   if(isDefined(self.v["rumble"])) {
-    thread _id_393F();
+    thread exploder_rumble();
   }
 
   if(self.v["exploder_type"] == "exploder") {
-    thread _id_1CB3();
+    thread brush_show();
   } else if(self.v["exploder_type"] == "exploderchunk" || self.v["exploder_type"] == "exploderchunk visible") {
-    thread _id_1CB5();
+    thread brush_throw();
   } else {
-    thread _id_1CB2();
+    thread brush_delete();
   }
 }
 
-_id_1CB2() {
+brush_delete() {
   var_0 = self.v["exploder"];
 
   if(isDefined(self.v["delay"]) && self.v["delay"] >= 0) {
@@ -597,19 +597,19 @@ _id_1CB2() {
   }
   if(isDefined(self.model.classname)) {
     if(common_scripts\utility::issp() && self.model.spawnflags & 1) {
-      self.model call[[level._id_2587]]();
+      self.model call[[level.connectpathsfunction]]();
     }
   }
 
   if(level.createfx_enabled) {
-    if(isDefined(self._id_3928)) {
+    if(isDefined(self.exploded)) {
       return;
     }
-    self._id_3928 = 1;
+    self.exploded = 1;
     self.model hide();
     self.model notsolid();
     wait 3;
-    self._id_3928 = undefined;
+    self.exploded = undefined;
     self.model show();
     self.model solid();
     return;
@@ -626,7 +626,7 @@ _id_1CB2() {
   }
 }
 
-_id_1CB5() {
+brush_throw() {
   if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
   }
@@ -634,7 +634,7 @@ _id_1CB5() {
   var_0 = undefined;
 
   if(isDefined(self.v["target"])) {
-    var_0 = common_scripts\utility::_id_4375(self.v["target"]);
+    var_0 = common_scripts\utility::get_target_ent(self.v["target"]);
   }
 
   if(!isDefined(var_0)) {
@@ -661,7 +661,7 @@ _id_1CB5() {
     var_9 = undefined;
 
     if(isDefined(var_0.target)) {
-      var_9 = var_0 common_scripts\utility::_id_4375();
+      var_9 = var_0 common_scripts\utility::get_target_ent();
     }
 
     if(!isDefined(var_9)) {
@@ -680,12 +680,12 @@ _id_1CB5() {
   }
 
   if(level.createfx_enabled) {
-    if(isDefined(self._id_3928)) {
+    if(isDefined(self.exploded)) {
       return;
     }
-    self._id_3928 = 1;
+    self.exploded = 1;
     wait 3;
-    self._id_3928 = undefined;
+    self.exploded = undefined;
     self.v["origin"] = var_1;
     self.v["angles"] = var_2;
     self.model hide();
@@ -697,59 +697,59 @@ _id_1CB5() {
   self.model delete();
 }
 
-_id_1CB3() {
+brush_show() {
   if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
   }
 
-  if(!isDefined(self.model._id_8205)) {
+  if(!isDefined(self.model.script_modelname)) {
     self.model show();
     self.model solid();
   } else {
-    var_0 = self.model common_scripts\utility::_id_8FFC();
+    var_0 = self.model common_scripts\utility::spawn_tag_origin();
 
     if(isDefined(self.model._id_0164)) {
       var_0._id_0164 = self.model._id_0164;
     }
 
-    var_0 setModel(self.model._id_8205);
+    var_0 setModel(self.model.script_modelname);
     var_0 show();
   }
 
-  self._id_1CB4 = 1;
+  self.brush_shown = 1;
 
-  if(common_scripts\utility::issp() && !isDefined(self.model._id_8205) && self.model.spawnflags & 1) {
-    if(!isDefined(self.model._id_2FBF)) {
-      self.model call[[level._id_2587]]();
+  if(common_scripts\utility::issp() && !isDefined(self.model.script_modelname) && self.model.spawnflags & 1) {
+    if(!isDefined(self.model.disconnect_paths)) {
+      self.model call[[level.connectpathsfunction]]();
     } else {
-      self.model call[[level._id_2FC3]]();
+      self.model call[[level.disconnectpathsfunction]]();
     }
   }
 
   if(level.createfx_enabled) {
-    if(isDefined(self._id_3928)) {
+    if(isDefined(self.exploded)) {
       return;
     }
-    self._id_3928 = 1;
+    self.exploded = 1;
     wait 3;
-    self._id_3928 = undefined;
+    self.exploded = undefined;
 
-    if(!isDefined(self.model._id_8205)) {
+    if(!isDefined(self.model.script_modelname)) {
       self.model hide();
       self.model notsolid();
     }
   }
 }
 
-_id_393F() {
+exploder_rumble() {
   if(!common_scripts\utility::issp()) {
     return;
   }
-  _id_3930();
+  exploder_delay();
   level.player playRumbleOnEntity(self.v["rumble"]);
 }
 
-_id_3930() {
+exploder_delay() {
   if(!isDefined(self.v["delay"])) {
     self.v["delay"] = 0;
   }
@@ -772,38 +772,38 @@ _id_3930() {
   }
 }
 
-_id_359F() {
+effect_loopsound() {
   common_scripts\utility::_id_3F51();
   var_0 = self.v["origin"];
   var_1 = self.v["loopsound"];
-  _id_3930();
+  exploder_delay();
   common_scripts\utility::_id_5EDF(var_1, var_0);
 }
 
-_id_8F30() {
-  _id_35A0();
+sound_effect() {
+  effect_soundalias();
 }
 
-_id_35A0() {
+effect_soundalias() {
   var_0 = self.v["origin"];
   var_1 = self.v["soundalias"];
-  _id_3930();
+  exploder_delay();
   common_scripts\utility::_id_3F50(var_1, var_0);
 }
 
-_id_3931() {
-  _id_3930();
-  common_scripts\utility::_id_30AE(self.v["earthquake"], self.v["origin"]);
+exploder_earthquake() {
+  exploder_delay();
+  common_scripts\utility::do_earthquake(self.v["earthquake"], self.v["origin"]);
 }
 
-_id_393D() {
+exploder_playsound() {
   if(!isDefined(self.v["soundalias"]) || self.v["soundalias"] == "nil") {
     return;
   }
   common_scripts\utility::_id_3F50(self.v["soundalias"], self.v["origin"]);
 }
 
-_id_3BB8() {
+fire_effect() {
   var_0 = self.v["forward"];
   var_1 = self.v["up"];
   var_2 = undefined;
@@ -822,22 +822,22 @@ _id_3BB8() {
     var_7 = self.v["firefxdelay"];
   }
 
-  _id_3930();
+  exploder_delay();
 
   if(isDefined(var_3)) {
-    common_scripts\utility::_id_5EE2(var_3, var_4, (0, 0, 0), 1, var_6);
+    common_scripts\utility::loop_fx_sound_with_angles(var_3, var_4, (0, 0, 0), 1, var_6);
   }
 
   playFX(level._effect[var_5], self.v["origin"], var_0, var_1);
 }
 
-_id_1F5E() {
+cannon_effect() {
   if(isDefined(self.v["repeat"])) {
-    thread _id_393D();
+    thread exploder_playsound();
 
     for(var_0 = 0; var_0 < self.v["repeat"]; var_0++) {
       playFX(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
-      _id_3930();
+      exploder_delay();
     }
 
     return;
@@ -848,7 +848,7 @@ _id_1F5E() {
   }
 
   if(self.v["delay"] >= 0) {
-    _id_3930();
+    exploder_delay();
     var_1 = 0;
   } else
     var_1 = self.v["delay"];
@@ -857,7 +857,7 @@ _id_1F5E() {
     self.looper delete();
   }
 
-  self.looper = _spawnfx(common_scripts\utility::_id_44F5(self.v["fxid"]), self.v["origin"], self.v["forward"], self.v["up"]);
+  self.looper = _spawnfx(common_scripts\utility::getfx(self.v["fxid"]), self.v["origin"], self.v["forward"], self.v["up"]);
 
   if(level.createfx_enabled) {
     setfxkillondelete(self.looper, 1);
@@ -869,7 +869,7 @@ _id_1F5E() {
     _triggerfx(self.looper, var_1);
   }
 
-  _id_393D();
+  exploder_playsound();
 }
 
 _id_0891(var_0, var_1, var_2) {
@@ -877,12 +877,12 @@ _id_0891(var_0, var_1, var_2) {
   level notify("exploding_" + var_0);
   var_3 = 0;
 
-  if(isDefined(level._id_2807) && !level.createfx_enabled) {
-    var_4 = level._id_2807[var_0];
+  if(isDefined(level.createfxexploders) && !level.createfx_enabled) {
+    var_4 = level.createfxexploders[var_0];
 
     if(isDefined(var_4)) {
       foreach(var_6 in var_4) {
-        if(!var_6 _id_2158()) {
+        if(!var_6 check_exploder_platform()) {
           continue;
         }
         var_6 common_scripts\utility::activate_individual_exploder();
@@ -905,7 +905,7 @@ _id_0891(var_0, var_1, var_2) {
       if(var_6.v["exploder"] + "" != var_0) {
         continue;
       }
-      if(!var_6 _id_2158()) {
+      if(!var_6 check_exploder_platform()) {
         continue;
       }
       var_6 common_scripts\utility::activate_individual_exploder();
@@ -913,17 +913,17 @@ _id_0891(var_0, var_1, var_2) {
     }
   }
 
-  if(!_id_8BA5() && !var_3) {
+  if(!shouldrunserversideeffects() && !var_3) {
     _id_088E(var_0, var_1, var_2);
   }
 }
 
 exploder(var_0, var_1, var_2) {
-  [[level._fx._id_3945]](var_0, var_1, var_2);
+  [[level._fx.exploderfunction]](var_0, var_1, var_2);
 }
 
 kill_exploder(var_0) {
-  var_1 = _id_44D1(var_0);
+  var_1 = getexploders(var_0);
 
   if(isDefined(var_1)) {
     foreach(var_3 in var_1) {
@@ -940,28 +940,28 @@ kill_exploder(var_0) {
   }
 }
 
-_id_2158() {
+check_exploder_platform() {
   var_0 = self;
   return 1;
 }
 
 _id_088E(var_0, var_1, var_2) {
-  if(!_id_5640(var_0)) {
+  if(!is_valid_clientside_exploder_name(var_0)) {
     return;
   }
   var_3 = int(var_0);
   _activateclientexploder(var_3, var_1, var_2);
 }
 
-_id_2A6D(var_0, var_1, var_2) {
-  if(!_id_5640(var_0)) {
+deactivate_clientside_exploder(var_0, var_1, var_2) {
+  if(!is_valid_clientside_exploder_name(var_0)) {
     return;
   }
   var_3 = int(var_0);
   _stopclientexploder(var_3, var_1, var_2);
 }
 
-_id_5640(var_0) {
+is_valid_clientside_exploder_name(var_0) {
   if(!isDefined(var_0)) {
     return 0;
   }
@@ -979,7 +979,7 @@ _id_5640(var_0) {
   return var_1 >= 0;
 }
 
-_id_8BA5() {
+shouldrunserversideeffects() {
   if(common_scripts\utility::issp()) {
     return 1;
   }
@@ -995,12 +995,12 @@ _id_8BA5() {
   }
 }
 
-_id_392D(var_0, var_1, var_2) {
+exploder_before_load(var_0, var_1, var_2) {
   waittillframeend;
   waittillframeend;
   _id_0891(var_0, var_1, var_2);
 }
 
-_id_392B(var_0, var_1, var_2) {
+exploder_after_load(var_0, var_1, var_2) {
   _id_0891(var_0, var_1, var_2);
 }

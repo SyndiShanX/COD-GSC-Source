@@ -37,7 +37,7 @@ player_in_view() {
   self endon("death");
 
   foreach(var_1 in level.players) {
-    if(distance(var_1.origin, self.origin) < 712 && maps\mp\_utility::_id_3B8E(self, var_1, 35)) {
+    if(distance(var_1.origin, self.origin) < 712 && maps\mp\_utility::findisfacing(self, var_1, 35)) {
       return 1;
     }
   }

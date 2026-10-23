@@ -12,7 +12,7 @@ main() {
 
 _id_9276() {
   self endon("dark_wings_objective_finished");
-  _id_0378::_id_8D74("dark_wings_start", self);
+  _id_0378::snd_message("dark_wings_start", self);
   var_0 = 0.5;
 
   for(;;) {
@@ -22,20 +22,20 @@ _id_9276() {
       continue;
     }
     self._id_400F = _float(self._id_AC2C) / _float(self._id_AC2D);
-    _id_0378::_id_8D74("dark_wings_update", self._id_400F, var_0);
+    _id_0378::snd_message("dark_wings_update", self._id_400F, var_0);
   }
 }
 
 _id_93E4() {
   self waittill("dark_wings_objective_finished");
-  _id_0378::_id_8D74("dark_wings_stop");
+  _id_0378::snd_message("dark_wings_stop");
 }
 
 _id_77AA() {
   common_scripts\utility::flag_init("nest_ee_hc_radio_available");
   self["record_player_tech"] setscriptablepartstate("tech_light", "off");
-  common_scripts\utility::_id_3C9F("nest_ee_hc_radio_available");
-  self["record_player"] _id_0547::_id_AC41(&"ZOMBIE_NEST_PLACE_HC_RECORD", undefined, self["record_player_trig_offset"].origin);
+  common_scripts\utility::flag_wait("nest_ee_hc_radio_available");
+  self["record_player"] _id_0547::zombies_make_usable(&"ZOMBIE_NEST_PLACE_HC_RECORD", undefined, self["record_player_trig_offset"].origin);
   var_0 = 0;
   self["record_player_tech"] setscriptablepartstate("tech_light", "green_on");
 
@@ -44,7 +44,7 @@ _id_77AA() {
     var_0 = common_scripts\utility::_id_562E(level._id_4BD3);
   }
 
-  self["record_player"] _id_0547::_id_AC40();
+  self["record_player"] _id_0547::zombies_make_unusable();
   self["record_player"] thread _id_86F6("on");
   self["record_player"] setscriptablepartstate("record", "on");
   self["record_player"] thread _id_9276();
@@ -60,7 +60,7 @@ _id_77AA() {
 _id_7A4D(var_0) {
   self._id_A602 = maps\mp\mp_zombie_nest_ee_paintings::_id_7A54();
   thread _id_8C5F(var_0);
-  common_scripts\utility::_id_3C9F(_id_0557::_id_7838("7 Voice paintings", "enter code pieces"));
+  common_scripts\utility::flag_wait(_id_0557::_id_7838("7 Voice paintings", "enter code pieces"));
   level._id_3581 = self._id_A602;
 }
 
@@ -87,7 +87,7 @@ _id_8C5F(var_0) {
 
 _id_52E6() {
   var_0 = [];
-  var_0["record_player_trig_offset"] = common_scripts\utility::_id_46B5("zmb_phonograph_trig_offset", "script_noteworthy");
+  var_0["record_player_trig_offset"] = common_scripts\utility::getstruct("zmb_phonograph_trig_offset", "script_noteworthy");
   var_1 = _getscriptablearray("zmb_phonograph_model", "targetname");
   var_0["record_player"] = var_1[0];
   var_2 = _getscriptablearray("hc_phonograph_tech_piece", "targetname");

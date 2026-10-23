@@ -73,7 +73,7 @@ _id_170B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(!common_scripts\utility::_id_562E(self.disable_end_sound)) {
-    _id_0378::_id_8D74("zombie_soul_suck_threshold", self.origin);
+    _id_0378::snd_message("zombie_soul_suck_threshold", self.origin);
   }
 
   if(isDefined(var_4) && !common_scripts\utility::_id_562E(self.disable_auto_deregister)) {
@@ -85,7 +85,7 @@ _id_170B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
 beginazombiesoulcollectionobjectiveonstruct(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14) {
   var_15 = self;
-  var_16 = var_15 common_scripts\utility::_id_8FFC();
+  var_16 = var_15 common_scripts\utility::spawn_tag_origin();
   var_16 show();
   var_15.collector = var_16;
 
@@ -123,7 +123,7 @@ _id_4030(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     level._id_6666 = 0;
   }
 
-  var_9 = common_scripts\utility::_id_4461(self.origin, level._id_08E3);
+  var_9 = common_scripts\utility::getclosest(self.origin, level._id_08E3);
 
   if(!isDefined(var_9)) {
     return;
@@ -207,13 +207,13 @@ _id_4030(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 }
 
 try_play_scripted_soul_suck_anim(var_0) {
-  if(!common_scripts\utility::_id_562E(self._id_2FDA) && !_id_0547::_id_5565(self._id_0A4B, "zombie_fireman")) {
+  if(!common_scripts\utility::_id_562E(self.dismember_crawl) && !_id_0547::_id_5565(self._id_0A4B, "zombie_fireman")) {
     _id_865C(var_0, 0);
   }
 }
 
 _id_2024(var_0, var_1, var_2, var_3) {
-  _id_0378::_id_8D74("aud_zombie_soul_absorb");
+  _id_0378::snd_message("aud_zombie_soul_absorb");
 
   if(!isDefined(level._id_6666)) {
     level._id_6666 = 0;
@@ -228,7 +228,7 @@ _id_2024(var_0, var_1, var_2, var_3) {
     return;
   }
   level._id_6666++;
-  var_5 = _func_382("zmb_geistkraft_reg_beam_med", var_4, "j_neck", var_0, var_1);
+  var_5 = vehicle_scripts/_attack_heli("zmb_geistkraft_reg_beam_med", var_4, "j_neck", var_0, var_1);
 
   if(!isDefined(var_2)) {
     var_6 = "zmb_cart_charge_pnt";
@@ -250,7 +250,7 @@ _id_2024(var_0, var_1, var_2, var_3) {
     _playFXOnTag(level._effect["zmb_gk_claw_battery_charge_3"], level._id_3571, "flap3_shroud");
   }
 
-  _id_0378::_id_8D74("zombie_soul_suck", var_4.origin, var_0.origin);
+  _id_0378::snd_message("zombie_soul_suck", var_4.origin, var_0.origin);
   wait 0.45;
 
   if(isDefined(var_5)) {

@@ -4,20 +4,20 @@
 ***********************************************************/
 
 main() {
-  _id_87A7();
-  _id_879C();
+  setup_callbacks();
+  setup_bot_zombies();
 }
 
-_id_87A7() {
-  level.bot_funcs["gametype_think"] = ::_id_1B2E;
+setup_callbacks() {
+  level.bot_funcs["gametype_think"] = ::bot_zombies_think;
 }
 
-_id_879C() {
-  level._id_1B3E = 1;
-  level._id_1B3F = 1;
+setup_bot_zombies() {
+  level.bots_gametype_handles_team_choice = 1;
+  level.bots_ignore_team_balance = 1;
 }
 
-_id_1B2E() {
+bot_zombies_think() {
   self notify("bot_zombies_think");
   self endon("bot_zombies_think");
   self endon("death");
@@ -26,10 +26,10 @@ _id_1B2E() {
 
   for(;;) {
     if(self botgetpersonality() != "run_and_gun") {
-      maps\mp\bots\_bots_util::_id_1AD5("run_and_gun");
+      maps\mp\bots\_bots_util::bot_set_personality("run_and_gun");
     }
 
-    if(!isDefined(self._id_19A1)) {
+    if(!isDefined(self.bot_defend_player_guarding)) {
       var_0 = 9999;
       var_1 = undefined;
 
@@ -37,23 +37,23 @@ _id_1B2E() {
         if(isbot(var_3)) {
           continue;
         }
-        if(!isDefined(var_3._id_489E)) {
-          var_3._id_489E = 0;
+        if(!isDefined(var_3.guardcount)) {
+          var_3.guardcount = 0;
         }
 
-        if(var_3._id_489E < var_0) {
-          var_0 = var_3._id_489E;
+        if(var_3.guardcount < var_0) {
+          var_0 = var_3.guardcount;
           var_1 = var_3;
         }
       }
 
       if(isDefined(var_1)) {
-        thread maps\mp\bots\_bots_strategy::_id_1A0C(var_1, 800);
-        var_1._id_489E++;
+        thread maps\mp\bots\_bots_strategy::bot_guard_player(var_1, 800);
+        var_1.guardcount++;
       }
     }
 
-    self[[self._id_6F7F]]();
+    self[[self.personality_update_function]]();
     waitframe();
   }
 }

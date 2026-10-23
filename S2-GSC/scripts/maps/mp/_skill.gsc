@@ -4,60 +4,60 @@
 **************************************/
 
 init() {
-  level._id_8C73 = getdvarint("skill_rdur_min", 60);
-  level._id_8C74 = _float(getdvarint("skill_recent_sosc", 1000)) / 1000.0;
-  level._id_8C76 = getdvarint("skill_sos_max_weight", 5);
-  level._id_8C77 = _float(getdvarint("skill_sos_tanh_scale", 1000)) / 1000.0;
-  level._id_8C75 = _float(getdvarint("skill_sos_default_rating", 500)) / 1000.0;
+  level.skill_rdur_min_sec = getdvarint("skill_rdur_min", 60);
+  level.skill_recent_sosc = _float(getdvarint("skill_recent_sosc", 1000)) / 1000.0;
+  level.skill_sos_max_weight = getdvarint("skill_sos_max_weight", 5);
+  level.skill_sos_tanh_scale = _float(getdvarint("skill_sos_tanh_scale", 1000)) / 1000.0;
+  level.skill_sos_default_rating = _float(getdvarint("skill_sos_default_rating", 500)) / 1000.0;
   level thread onplayerspawned();
 }
 
-_id_534E(var_0) {
-  if(!var_0 _id_57D1()) {
+initsosproxy(var_0) {
+  if(!var_0 isskillenabled()) {
     return;
   }
-  if(isDefined(var_0._id_8F28)) {
+  if(isDefined(var_0.sos_id)) {
     return;
   }
-  var_0._id_8F28 = level._id_8F28;
-  level._id_8F28++;
+  var_0.sos_id = level.sos_id;
+  level.sos_id++;
   var_1 = spawnStruct();
-  var_1._id_170A = maps\mp\_utility::_id_44FB();
-  var_1._id_1708 = var_0 getplayerdata(common_scripts\utility::_id_46AE(), "sosRating");
-  var_1._id_1709 = var_0 getplayerdata(common_scripts\utility::_id_46AE(), "sosWeight");
+  var_1.begin_time = maps\mp\_utility::getgametimepassedseconds();
+  var_1.begin_sos_rating = var_0 getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "sosRating");
+  var_1.begin_sos_weight = var_0 getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "sosWeight");
 
-  if(var_1._id_1709 <= 0.5) {
-    var_1._id_1708 = level._id_8C75;
+  if(var_1.begin_sos_weight <= 0.5) {
+    var_1.begin_sos_rating = level.skill_sos_default_rating;
   }
 
-  var_1._id_1704 = var_0 getplayerdata(common_scripts\utility::_id_46AE(), "gdfRating");
-  var_1._id_1705 = var_0 getplayerdata(common_scripts\utility::_id_46AE(), "gdfVariance");
-  var_1._id_5C17 = var_1._id_170A;
-  var_1._id_80A6 = undefined;
-  level._id_8F29[var_0._id_8F28] = var_1;
+  var_1.begin_gdf_rating = var_0 getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "gdfRating");
+  var_1.begin_gdf_variance = var_0 getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "gdfVariance");
+  var_1.latest_time = var_1.begin_time;
+  var_1.score_per_second = undefined;
+  level.sos_players[var_0.sos_id] = var_1;
 }
 
-_id_7743() {
+process() {
   foreach(var_1 in level.players) {
     var_1 _id_0738();
   }
 }
 
-_id_775A() {
+processplayer() {
   _id_0738();
 }
 
 onplayerspawned() {
-  level._id_8F29 = [];
-  level._id_8F28 = 0;
+  level.sos_players = [];
+  level.sos_id = 0;
 
   for(;;) {
     level waittill("player_spawned", var_0);
-    _id_534E(var_0);
+    initsosproxy(var_0);
   }
 }
 
-_id_57D1() {
+isskillenabled() {
   if(!isDefined(self)) {
     return 0;
   }
@@ -86,7 +86,7 @@ _id_0663(var_0, var_1) {
 }
 
 _id_05F3(var_0) {
-  var_1 = common_scripts\utility::_id_8C4F(var_0);
+  var_1 = common_scripts\utility::sign(var_0);
   var_2 = _exp(_log(_abs(var_0)) / 3);
   var_2 = var_2 * var_1;
   return var_2;
@@ -131,14 +131,14 @@ _id_0662(var_0) {
   var_1 = var_0;
   var_1 = var_1 * 2.0;
   var_1 = var_1 - 1.0;
-  var_1 = _id_0661(var_1) / level._id_8C77;
+  var_1 = _id_0661(var_1) / level.skill_sos_tanh_scale;
   return var_1;
 }
 
 _id_062B(var_0) {
   var_0 = clamp(var_0, -3.14159, 3.14159);
   var_1 = var_0;
-  var_1 = _id_06AC(var_1 * level._id_8C77);
+  var_1 = _id_06AC(var_1 * level.skill_sos_tanh_scale);
   var_1 = var_1 + 1.0;
   var_1 = var_1 * 0.5;
   return var_1;
@@ -244,83 +244,83 @@ _id_0739(var_0) {
   if(isbot(var_0)) {
     return;
   }
-  if(!isDefined(var_0._id_8F28)) {
+  if(!isDefined(var_0.sos_id)) {
     return;
   }
-  level._id_8F29[var_0._id_8F28]._id_5C17 = maps\mp\_utility::_id_44FB();
-  var_1 = level._id_8F29[var_0._id_8F28]._id_5C17 - level._id_8F29[var_0._id_8F28]._id_170A;
+  level.sos_players[var_0.sos_id].latest_time = maps\mp\_utility::getgametimepassedseconds();
+  var_1 = level.sos_players[var_0.sos_id].latest_time - level.sos_players[var_0.sos_id].begin_time;
 
-  if(var_1 > level._id_8C73 && isDefined(var_0.pers) && isDefined(var_0.pers["score"])) {
-    level._id_8F29[var_0._id_8F28]._id_80A6 = var_0.pers["score"] / var_1;
+  if(var_1 > level.skill_rdur_min_sec && isDefined(var_0.pers) && isDefined(var_0.pers["score"])) {
+    level.sos_players[var_0.sos_id].score_per_second = var_0.pers["score"] / var_1;
   } else {
-    level._id_8F29[var_0._id_8F28]._id_80A6 = undefined;
+    level.sos_players[var_0.sos_id].score_per_second = undefined;
   }
 }
 
 _id_0738() {
-  if(!_id_57D1()) {
+  if(!isskillenabled()) {
     return;
   }
-  if(isDefined(self._id_8C78) || !isDefined(self._id_8F28)) {
+  if(isDefined(self.skillcalculated) || !isDefined(self.sos_id)) {
     return;
   }
-  self._id_8C78 = 1;
+  self.skillcalculated = 1;
 
-  if(!isDefined(level._id_8F29[self._id_8F28])) {
+  if(!isDefined(level.sos_players[self.sos_id])) {
     return;
   }
   foreach(var_1 in level.players) {
     _id_0739(var_1);
   }
 
-  var_3 = level._id_8F29[self._id_8F28];
+  var_3 = level.sos_players[self.sos_id];
 
-  if(!isDefined(var_3._id_80A6)) {
+  if(!isDefined(var_3.score_per_second)) {
     return;
   }
-  var_4 = var_3._id_5C17 - var_3._id_170A;
+  var_4 = var_3.latest_time - var_3.begin_time;
   var_5 = 0;
   var_6 = 0;
   var_7 = 0;
-  var_8 = var_3._id_1708 * var_4;
+  var_8 = var_3.begin_sos_rating * var_4;
   var_9 = var_4;
-  var_10 = var_3._id_1705;
-  var_11 = var_3._id_1704;
+  var_10 = var_3.begin_gdf_variance;
+  var_11 = var_3.begin_gdf_rating;
   var_12 = 0;
   var_13 = 0;
 
   if(var_10 == 0.0) {
-    var_10 = _min(1.0, max(0.8596 + _abs(var_3._id_1704) * -0.18397, 0.05));
+    var_10 = _min(1.0, max(0.8596 + _abs(var_3.begin_gdf_rating) * -0.18397, 0.05));
   }
 
-  foreach(var_22, var_15 in level._id_8F29) {
-    if(var_22 == self._id_8F28) {
+  foreach(var_22, var_15 in level.sos_players) {
+    if(var_22 == self.sos_id) {
       continue;
     }
-    if(!isDefined(var_15._id_80A6)) {
+    if(!isDefined(var_15.score_per_second)) {
       continue;
     }
-    var_16 = var_15._id_5C17 - max(var_3._id_170A, var_15._id_170A);
+    var_16 = var_15.latest_time - max(var_3.begin_time, var_15.begin_time);
 
     if(var_16 <= 0) {
       continue;
     }
     var_17 = 7.0 + var_10;
 
-    if(var_15._id_1705) {
-      var_17 = var_17 + var_15._id_1705;
+    if(var_15.begin_gdf_variance) {
+      var_17 = var_17 + var_15.begin_gdf_variance;
     } else {
-      var_17 = var_17 + _min(max(_abs(var_15._id_1704) * -0.18397 + 0.8596, 0.05), 1.0);
+      var_17 = var_17 + _min(max(_abs(var_15.begin_gdf_rating) * -0.18397 + 0.8596, 0.05), 1.0);
     }
 
     var_18 = _sqrt(var_17);
-    var_19 = (var_11 - var_15._id_1704) / var_18;
+    var_19 = (var_11 - var_15.begin_gdf_rating) / var_18;
     var_20 = 0;
 
-    if(var_3._id_80A6 > var_15._id_80A6) {
+    if(var_3.score_per_second > var_15.score_per_second) {
       var_5 = var_5 + 1.0;
       var_20 = 1.0;
-    } else if(var_3._id_80A6 < var_15._id_80A6) {
+    } else if(var_3.score_per_second < var_15.score_per_second) {
       var_6 = var_6 + 1.0;
       var_20 = 0.0;
     } else {
@@ -331,26 +331,26 @@ _id_0738() {
     var_21 = 1.0 / (1.0 + _exp(var_19 * -1.0));
     var_12 = var_12 + (var_20 - var_21) / var_18;
     var_13 = var_13 + _sqrt(var_10) / var_18 * var_21 * (1.0 - var_21) / var_17;
-    var_8 = var_8 + var_15._id_1708 * var_16;
+    var_8 = var_8 + var_15.begin_sos_rating * var_16;
     var_9 = var_9 + var_16;
   }
 
   var_10 = var_10 + 0.0001;
   var_11 = var_11 + var_10 * var_12;
   var_10 = max(0.05, var_10 * (1.0 - var_10 * var_13));
-  self setplayerdata(common_scripts\utility::_id_46AE(), "gdfRating", var_11);
-  self setplayerdata(common_scripts\utility::_id_46AE(), "gdfVariance", var_10);
+  self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "gdfRating", var_11);
+  self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "gdfVariance", var_10);
   var_23 = var_8 / var_9;
   var_24 = 1.0;
-  var_25 = _id_05D7(var_5, var_6, var_7, level._id_8C74);
+  var_25 = _id_05D7(var_5, var_6, var_7, level.skill_recent_sosc);
   var_26 = _id_05D8(var_25, var_23);
   var_27 = var_26;
-  var_28 = _min(var_3._id_1709, level._id_8C76);
+  var_28 = _min(var_3.begin_sos_weight, level.skill_sos_max_weight);
   var_29 = var_28 + var_24;
 
   if(var_29 > 0) {
-    var_27 = (var_3._id_1708 * var_28 + var_27 * var_24) / var_29;
-    self setplayerdata(common_scripts\utility::_id_46AE(), "sosRating", var_27);
-    self setplayerdata(common_scripts\utility::_id_46AE(), "sosWeight", var_3._id_1709 + var_24);
+    var_27 = (var_3.begin_sos_rating * var_28 + var_27 * var_24) / var_29;
+    self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "sosRating", var_27);
+    self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "sosWeight", var_3.begin_sos_weight + var_24);
   }
 }

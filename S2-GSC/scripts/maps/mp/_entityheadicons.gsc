@@ -4,31 +4,31 @@
 ************************************************/
 
 init() {
-  if(isDefined(level._id_52B3)) {
+  if(isDefined(level.initedentityheadicons)) {
     return;
   }
-  level._id_52B3 = 1;
+  level.initedentityheadicons = 1;
 
-  if(level._id_6520) {
-    foreach(var_1 in level._id_985B) {
+  if(level.multiteambased) {
+    foreach(var_1 in level.teamnamelist) {
       var_2 = "entity_headicon_" + var_1;
-      game[var_2] = _id_0510::_id_650A(var_1);
+      game[var_2] = _id_0510::mt_getteamheadicon(var_1);
       _precacheshader(game[var_2]);
     }
   } else {
-    game["entity_headicon_allies"] = _id_0510::_id_46D1("allies");
-    game["entity_headicon_axis"] = _id_0510::_id_46D1("axis");
+    game["entity_headicon_allies"] = _id_0510::getteamheadicon("allies");
+    game["entity_headicon_axis"] = _id_0510::getteamheadicon("axis");
     _precacheshader(game["entity_headicon_allies"]);
     _precacheshader(game["entity_headicon_axis"]);
   }
 }
 
-_id_869E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
-  if(maps\mp\_utility::_id_56FF(var_0) && !isPlayer(var_0)) {
+setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+  if(maps\mp\_utility::isgameparticipant(var_0) && !isPlayer(var_0)) {
     return;
   }
-  if(!isDefined(self._id_37D6)) {
-    self._id_37D6 = [];
+  if(!isDefined(self.entityheadicons)) {
+    self.entityheadicons = [];
   }
 
   if(!isDefined(var_5)) {
@@ -60,48 +60,48 @@ _id_869E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(!isPlayer(var_0) && var_0 == "none") {
-    foreach(var_15, var_14 in self._id_37D6) {
+    foreach(var_15, var_14 in self.entityheadicons) {
       if(isDefined(var_14)) {
         var_14 destroy();
       }
 
-      self._id_37D6[var_15] = undefined;
+      self.entityheadicons[var_15] = undefined;
     }
   } else {
     if(isPlayer(var_0)) {
-      if(isDefined(self._id_37D6[var_0.guid])) {
-        self._id_37D6[var_0.guid] destroy();
-        self._id_37D6[var_0.guid] = undefined;
+      if(isDefined(self.entityheadicons[var_0.guid])) {
+        self.entityheadicons[var_0.guid] destroy();
+        self.entityheadicons[var_0.guid] = undefined;
       }
 
       if(var_1 == "") {
         return;
       }
-      if(isDefined(self._id_37D6[var_0.team])) {
-        self._id_37D6[var_0.team] destroy();
-        self._id_37D6[var_0.team] = undefined;
+      if(isDefined(self.entityheadicons[var_0.team])) {
+        self.entityheadicons[var_0.team] destroy();
+        self.entityheadicons[var_0.team] = undefined;
       }
 
       var_14 = _newclienthudelem(var_0);
-      self._id_37D6[var_0.guid] = var_14;
+      self.entityheadicons[var_0.guid] = var_14;
     } else {
-      if(isDefined(self._id_37D6[var_0])) {
-        self._id_37D6[var_0] destroy();
-        self._id_37D6[var_0] = undefined;
+      if(isDefined(self.entityheadicons[var_0])) {
+        self.entityheadicons[var_0] destroy();
+        self.entityheadicons[var_0] = undefined;
       }
 
       if(var_1 == "") {
         return;
       }
-      foreach(var_15, var_17 in self._id_37D6) {
+      foreach(var_15, var_17 in self.entityheadicons) {
         if(var_15 == "axis" || var_15 == "allies") {
           continue;
         }
         var_18 = maps\mp\_utility::getplayerforguid(var_15);
 
         if(var_18.team == var_0) {
-          self._id_37D6[var_15] destroy();
-          self._id_37D6[var_15] = undefined;
+          self.entityheadicons[var_15] destroy();
+          self.entityheadicons[var_15] = undefined;
         }
       }
 
@@ -111,7 +111,7 @@ _id_869E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
         var_14 = _newteamhudelem(var_0);
       }
 
-      self._id_37D6[var_0] = var_14;
+      self.entityheadicons[var_0] = var_14;
     }
 
     if(!isDefined(var_3) || !isDefined(var_4)) {
@@ -128,7 +128,7 @@ _id_869E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
       var_14.x = self.origin[0] + var_2[0];
       var_14.y = self.origin[1] + var_2[1];
       var_14._id_01D9 = self.origin[2] + var_2[2];
-      var_14 thread _id_59DC(self, var_2, var_6);
+      var_14 thread keeppositioned(self, var_2, var_6);
     } else {
       var_14.x = var_2[0];
       var_14.y = var_2[1];
@@ -136,30 +136,30 @@ _id_869E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
       var_14 settargetEnt(self, var_11);
     }
 
-    thread _id_2DCF();
+    thread destroyiconsondeath();
 
     if(isPlayer(var_0)) {
-      var_14 thread _id_2DD5(var_0);
+      var_14 thread destroyonownerdisconnect(var_0);
     }
 
     if(isPlayer(self)) {
-      var_14 thread _id_2DD5(self);
+      var_14 thread destroyonownerdisconnect(self);
     }
   }
 }
 
-_id_2DD5(var_0) {
+destroyonownerdisconnect(var_0) {
   self endon("death");
   var_0 waittill("disconnect");
   self destroy();
 }
 
-_id_2DCF() {
+destroyiconsondeath() {
   self notify("destroyIconsOnDeath");
   self endon("destroyIconsOnDeath");
   self waittill("death");
 
-  foreach(var_2, var_1 in self._id_37D6) {
+  foreach(var_2, var_1 in self.entityheadicons) {
     if(!isDefined(var_1)) {
       continue;
     }
@@ -167,7 +167,7 @@ _id_2DCF() {
   }
 }
 
-_id_59DC(var_0, var_1, var_2) {
+keeppositioned(var_0, var_1, var_2) {
   self endon("death");
   var_0 endon("death");
   var_0 endon("disconnect");
@@ -194,7 +194,7 @@ _id_59DC(var_0, var_1, var_2) {
   }
 }
 
-_id_873C(var_0, var_1, var_2, var_3) {
+setteamheadicon(var_0, var_1, var_2, var_3) {
   if(!level.teambased) {
     return;
   }
@@ -202,9 +202,9 @@ _id_873C(var_0, var_1, var_2, var_3) {
     var_2 = "";
   }
 
-  if(!isDefined(self._id_37D7)) {
-    self._id_37D7 = "none";
-    self._id_37D3 = undefined;
+  if(!isDefined(self.entityheadiconteam)) {
+    self.entityheadiconteam = "none";
+    self.entityheadicon = undefined;
   }
 
   if(isDefined(var_3) && var_3 == 0) {
@@ -218,19 +218,19 @@ _id_873C(var_0, var_1, var_2, var_3) {
   }
 
   var_6 = game["entity_headicon_" + var_5];
-  self._id_37D7 = var_0;
+  self.entityheadiconteam = var_0;
 
   if(isDefined(var_1)) {
-    self._id_37D4 = var_1;
+    self.entityheadiconoffset = var_1;
   } else {
-    self._id_37D4 = (0, 0, 0);
+    self.entityheadiconoffset = (0, 0, 0);
   }
 
   self notify("kill_entity_headicon_thread");
 
   if(var_0 == "none") {
-    if(isDefined(self._id_37D3)) {
-      self._id_37D3 destroy();
+    if(isDefined(self.entityheadicon)) {
+      self.entityheadicon destroy();
     }
 
     return;
@@ -241,18 +241,18 @@ _id_873C(var_0, var_1, var_2, var_3) {
   var_7.alpha = 0.8;
   var_7 setshader(var_6, 10, 10);
   var_7 setwaypoint(0, 0, 0, 1);
-  self._id_37D3 = var_7;
+  self.entityheadicon = var_7;
 
   if(!isDefined(var_3)) {
     if(var_2 == "") {
-      var_7.x = self.origin[0] + self._id_37D4[0];
-      var_7.y = self.origin[1] + self._id_37D4[1];
-      var_7._id_01D9 = self.origin[2] + self._id_37D4[2];
-      thread _id_59DB();
+      var_7.x = self.origin[0] + self.entityheadiconoffset[0];
+      var_7.y = self.origin[1] + self.entityheadiconoffset[1];
+      var_7._id_01D9 = self.origin[2] + self.entityheadiconoffset[2];
+      thread keepiconpositioned();
     } else {
-      var_7.x = self._id_37D4[0];
-      var_7.y = self._id_37D4[1];
-      var_7._id_01D9 = self._id_37D4[2];
+      var_7.x = self.entityheadiconoffset[0];
+      var_7.y = self.entityheadiconoffset[1];
+      var_7._id_01D9 = self.entityheadiconoffset[2];
       var_7 settargetEnt(self, var_2);
     }
   } else {
@@ -263,7 +263,7 @@ _id_873C(var_0, var_1, var_2, var_3) {
       var_7.x = var_9[0];
       var_7.y = var_9[1];
       var_7._id_01D9 = var_9[2];
-      thread _id_59DB(var_3);
+      thread keepiconpositioned(var_3);
     } else {
       var_7.x = var_9[0];
       var_7.y = var_9[1];
@@ -272,10 +272,10 @@ _id_873C(var_0, var_1, var_2, var_3) {
     }
   }
 
-  thread _id_2DCE();
+  thread destroyheadiconsondeath();
 }
 
-_id_86FC(var_0, var_1, var_2) {
+setplayerheadicon(var_0, var_1, var_2) {
   if(level.teambased) {
     return;
   }
@@ -283,28 +283,28 @@ _id_86FC(var_0, var_1, var_2) {
     var_2 = "";
   }
 
-  if(!isDefined(self._id_37D7)) {
-    self._id_37D7 = "none";
-    self._id_37D3 = undefined;
+  if(!isDefined(self.entityheadiconteam)) {
+    self.entityheadiconteam = "none";
+    self.entityheadicon = undefined;
   }
 
   self notify("kill_entity_headicon_thread");
 
   if(!isDefined(var_0)) {
-    if(isDefined(self._id_37D3)) {
-      self._id_37D3 destroy();
+    if(isDefined(self.entityheadicon)) {
+      self.entityheadicon destroy();
     }
 
     return;
   }
 
   var_3 = var_0.team;
-  self._id_37D7 = var_3;
+  self.entityheadiconteam = var_3;
 
   if(isDefined(var_1)) {
-    self._id_37D4 = var_1;
+    self.entityheadiconoffset = var_1;
   } else {
-    self._id_37D4 = (0, 0, 0);
+    self.entityheadiconoffset = (0, 0, 0);
   }
 
   if(var_3 == "spectator") {
@@ -318,31 +318,31 @@ _id_86FC(var_0, var_1, var_2) {
   var_5.alpha = 0.8;
   var_5 setshader(var_4, 10, 10);
   var_5 setwaypoint(0, 0, 0, 1);
-  self._id_37D3 = var_5;
+  self.entityheadicon = var_5;
 
   if(var_2 == "") {
-    var_5.x = self.origin[0] + self._id_37D4[0];
-    var_5.y = self.origin[1] + self._id_37D4[1];
-    var_5._id_01D9 = self.origin[2] + self._id_37D4[2];
-    thread _id_59DB();
+    var_5.x = self.origin[0] + self.entityheadiconoffset[0];
+    var_5.y = self.origin[1] + self.entityheadiconoffset[1];
+    var_5._id_01D9 = self.origin[2] + self.entityheadiconoffset[2];
+    thread keepiconpositioned();
   } else {
-    var_5.x = self._id_37D4[0];
-    var_5.y = self._id_37D4[1];
-    var_5._id_01D9 = self._id_37D4[2];
+    var_5.x = self.entityheadiconoffset[0];
+    var_5.y = self.entityheadiconoffset[1];
+    var_5._id_01D9 = self.entityheadiconoffset[2];
     var_5 settargetEnt(self, var_2);
   }
 
-  thread _id_2DCE();
+  thread destroyheadiconsondeath();
 }
 
-_id_59DB(var_0) {
+keepiconpositioned(var_0) {
   self endon("kill_entity_headicon_thread");
   self endon("death");
   var_1 = self.origin;
 
   for(;;) {
     if(var_1 != self.origin) {
-      _id_A122(var_0);
+      updateheadiconorigin(var_0);
       var_1 = self.origin;
     }
 
@@ -350,26 +350,26 @@ _id_59DB(var_0) {
   }
 }
 
-_id_2DCE() {
+destroyheadiconsondeath() {
   self endon("kill_entity_headicon_thread");
   self waittill("death");
 
-  if(!isDefined(self._id_37D3)) {
+  if(!isDefined(self.entityheadicon)) {
     return;
   }
-  self._id_37D3 destroy();
+  self.entityheadicon destroy();
 }
 
-_id_A122(var_0) {
+updateheadiconorigin(var_0) {
   if(!isDefined(var_0)) {
-    self._id_37D3.x = self.origin[0] + self._id_37D4[0];
-    self._id_37D3.y = self.origin[1] + self._id_37D4[1];
-    self._id_37D3._id_01D9 = self.origin[2] + self._id_37D4[2];
+    self.entityheadicon.x = self.origin[0] + self.entityheadiconoffset[0];
+    self.entityheadicon.y = self.origin[1] + self.entityheadiconoffset[1];
+    self.entityheadicon._id_01D9 = self.origin[2] + self.entityheadiconoffset[2];
   } else {
     var_1 = anglestoup(self.angles);
     var_2 = self.origin + var_1 * 28;
-    self._id_37D3.x = var_2[0];
-    self._id_37D3.y = var_2[1];
-    self._id_37D3._id_01D9 = var_2[2];
+    self.entityheadicon.x = var_2[0];
+    self.entityheadicon.y = var_2[1];
+    self.entityheadicon._id_01D9 = var_2[2];
   }
 }

@@ -4,7 +4,7 @@
 *************************************************************************/
 
 _id_2C2C(var_0, var_1) {
-  var_2 = common_scripts\utility::_id_46B7("zombie_spawner", "script_noteworthy");
+  var_2 = common_scripts\utility::getstructarray("zombie_spawner", "script_noteworthy");
   var_3 = [];
 
   foreach(var_5 in var_2) {
@@ -15,7 +15,7 @@ _id_2C2C(var_0, var_1) {
   }
 
   var_0 thread _id_2D33(var_3);
-  var_7 = maps\mp\agents\_agent_utility::_id_43FD("all");
+  var_7 = maps\mp\agents\_agent_utility::getactiveagentsoftype("all");
   var_7 = common_scripts\utility::array_randomize(var_7);
 
   foreach(var_9 in var_7) {
@@ -38,13 +38,13 @@ _id_2C2C(var_0, var_1) {
     if(!isDefined(var_9._id_0A4B)) {
       continue;
     }
-    if(var_9._id_000A == level._id_746E) {
+    if(var_9._id_000A == level.playerteam) {
       continue;
     }
     if(var_9._id_0A4B != "zombie_generic" && var_9._id_0A4B != "zombie_berserker") {
       continue;
     }
-    if(var_9 _id_0547::_id_53DC()) {
+    if(var_9 _id_0547::instakillimmune()) {
       continue;
     }
     var_10 = distance(var_9.origin, var_0._id_ABEA._id_38B7);
@@ -95,7 +95,7 @@ _id_2B65(var_0, var_1) {}
 
 _id_2D33(var_0) {
   level waittill("tower battle reset despawners");
-  var_1 = maps\mp\agents\_agent_utility::_id_43FD("all");
+  var_1 = maps\mp\agents\_agent_utility::getactiveagentsoftype("all");
 
   foreach(var_3 in var_1) {
     var_3._id_1924 = undefined;
@@ -113,7 +113,7 @@ _id_20C6(var_0, var_1) {
   if(!isDefined(self._id_0A4B) || !isalive(self)) {
     return;
   }
-  if(_id_0547::_id_4B2C() && !common_scripts\utility::_id_562E(self._id_4B9F)) {
+  if(_id_0547::has_entered_game() && !common_scripts\utility::_id_562E(self._id_4B9F)) {
     _id_ABE1();
   }
 
@@ -126,7 +126,7 @@ _id_20C6(var_0, var_1) {
 }
 
 _id_410B(var_0) {
-  var_1 = common_scripts\utility::_id_40B0(self.origin, var_0);
+  var_1 = common_scripts\utility::get_array_of_closest(self.origin, var_0);
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(var_1[var_2]._id_68A2 <= 4 && _abs(var_1[var_2].origin[2] - self.origin[2]) < 256) {
@@ -157,7 +157,7 @@ _id_9E20() {
   self._id_1924 = undefined;
 
   if(_id_0547::_id_0796()) {
-    var_1 = _id_055A::_id_4696(var_0, 0, 0, maps\mp\mp_zombie_nest_special_event_creator_interface::_id_405B());
+    var_1 = _id_055A::getspawnpoint(var_0, 0, 0, maps\mp\mp_zombie_nest_special_event_creator_interface::_id_405B());
     var_2 = _id_054D::_id_90BA(var_0, var_1, "tower_respawn");
   }
 }
@@ -173,7 +173,7 @@ _id_ABE1() {
     self scragentsetanimmode("anim deltas");
     self scragentsetorientmode("face angle abs", self.angles);
     self scragentsetscripted(1);
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1.0, "taunt_anim");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1.0, "taunt_anim");
     self scragentsetscripted(0);
   }
 }
@@ -262,7 +262,7 @@ _id_9E11(var_0, var_1, var_2) {
   }
 
   _id_A6AF(var_0, var_3);
-  var_4 _id_695C(var_1._id_94D4);
+  var_4 _id_695C(var_1.success);
   return 1;
 }
 

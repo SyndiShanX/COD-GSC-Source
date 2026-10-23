@@ -50,15 +50,15 @@ blimp_set_new_obj() {
 
 blimp_init() {
   level._id_179A = _getEnt("obj_blimp", "targetname");
-  level._id_179A._id_9255 = level._id_179A.origin;
-  level._id_179A._id_9189 = level._id_179A.angles;
+  level._id_179A.start_origin = level._id_179A.origin;
+  level._id_179A.start_angles = level._id_179A.angles;
   level._id_179A ghost();
   level._id_179A blimp_attach_weakpoints("blimp_door_damage_trigger");
   level._id_179A blimp_attach_turret("blimp_main_gun", "turretweapon_zeppelin_gun_zm");
   level._id_179A blimp_attach_battery("blimp_battery");
   level._id_179A blimp_attach_rockets("blimp_rocket_barrage_struct");
   level._id_179A.battery ghost();
-  common_scripts\utility::_id_2CB4(5, ::battery_init_drop_points);
+  common_scripts\utility::delay_script_call(5, ::battery_init_drop_points);
 }
 
 run_blimp_attack(var_0) {
@@ -75,7 +75,7 @@ run_blimp_attack(var_0) {
     level.sg_blimp_is_in_play = 1;
   }
 
-  var_1 = common_scripts\utility::_id_46B7("zmb_blimp_pieces_struct", "targetname");
+  var_1 = common_scripts\utility::getstructarray("zmb_blimp_pieces_struct", "targetname");
 
   foreach(var_3 in var_1) {
     var_3._id_57F7 = 0;
@@ -93,7 +93,7 @@ run_blimp_attack(var_0) {
     var_6 setclientomnvar("ui_onevone_class_4", 0);
   }
 
-  level._id_179A _id_0378::_id_8D74("aud_blimp_start");
+  level._id_179A _id_0378::snd_message("aud_blimp_start");
   level thread maps\mp\zombies\shotgun\_zombies_shotgun_rideau_global::run_rideau_zeppelin_comment();
   level._id_179A blimp_set_new_obj();
   var_8 = level common_scripts\utility::waittill_any_return("blimp_all_weakpoints_destroyed", "sg_obj_timeout", "sg_obj_force_end");
@@ -155,12 +155,12 @@ blimp_patrol() {
   var_2 = 4;
 
   for(;;) {
-    while(_id_0547::_id_585E()) {
+    while(_id_0547::iszombiegamepaused()) {
       waitframe();
     }
 
-    var_0 = common_scripts\utility::_id_98E7(var_0 + 1 > var_2, 1, var_0 + 1);
-    var_1 = common_scripts\utility::_id_98E7(var_0 + 1 > var_2, 1, var_0 + 1);
+    var_0 = common_scripts\utility::ter_op(var_0 + 1 > var_2, 1, var_0 + 1);
+    var_1 = common_scripts\utility::ter_op(var_0 + 1 > var_2, 1, var_0 + 1);
     blimp_set_anim_state("s2_zmb_zeppelin_flightpath_idle_circle_0" + var_0);
 
     if(blimp_is_set_to_leave()) {
@@ -229,7 +229,7 @@ blimp_attach_weakpoints(var_0) {
 
   foreach(var_3 in var_1) {
     var_3._id_65D8 = _getEnt(var_3.target, "targetname");
-    var_4 = common_scripts\utility::_id_46B5(var_3._id_65D8.target, "targetname");
+    var_4 = common_scripts\utility::getstruct(var_3._id_65D8.target, "targetname");
     var_5 = spawn("script_model", var_4.origin);
     var_5 setModel("tag_origin");
     var_3._id_65D9 = var_5;
@@ -249,7 +249,7 @@ blimp_attach_weakpoints(var_0) {
 }
 
 blimp_attach_rockets(var_0) {
-  var_1 = common_scripts\utility::_id_46B5(var_0, "targetname");
+  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
   var_2 = getEntArray(var_1.target, "targetname");
 
   foreach(var_4 in var_2) {
@@ -262,7 +262,7 @@ blimp_attach_rockets(var_0) {
 }
 
 blimp_attach_turret(var_0, var_1) {
-  var_2 = common_scripts\utility::_id_46B5(var_0, "targetname");
+  var_2 = common_scripts\utility::getstruct(var_0, "targetname");
   self.blimp_turret = var_2 turret_build(var_1, var_2._id_0165, ::turret_modify_player_damage, ::turret_on_player_damage);
   self.blimp_turret linktosynchronizedparent(self);
   self.blimp_turret ghost();
@@ -298,7 +298,7 @@ blimp_retreat(var_0, var_1) {
     if(common_scripts\utility::_id_562E(level._id_1CBA)) {
       self waittill("cancel blimp wait");
     } else {
-      blimp_wait_for_end_of_round(level._id_A980, var_2, var_3);
+      blimp_wait_for_end_of_round(level.wavecounter, var_2, var_3);
     }
 
     if(self.battery._id_5DDA > 0) {
@@ -416,7 +416,7 @@ blimp_wait_for_end_of_round(var_0, var_1, var_2) {
     }
   }
 
-  while(level._id_A980 <= var_0) {
+  while(level.wavecounter <= var_0) {
     wait 0.1;
   }
 }
@@ -444,7 +444,7 @@ blimp_get_num_parts_destroyed() {
 }
 
 blimp_setup_ref_node() {
-  var_0 = common_scripts\utility::_id_46B5("boss_zepplin_scripted_node", "targetname");
+  var_0 = common_scripts\utility::getstruct("boss_zepplin_scripted_node", "targetname");
   self._id_7B8B = var_0;
   self._id_7B8B.angles = self._id_7B8B.angles - (0, 90, 0);
 }
@@ -535,28 +535,28 @@ blimp_play_anims_and_fx() {
   }
   self._id_3F78 = 1;
   self scriptmodelplayanim("s2_zmb_zeppelin_idle");
-  var_0 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_zeppelin_gun_light"), level._id_179A.blimp_turret, "TAG_YAW");
+  var_0 = _spawnlinkedfx(common_scripts\utility::getfx("zmb_zeppelin_gun_light"), level._id_179A.blimp_turret, "TAG_YAW");
   _triggerfx(var_0);
   thread blimp_delete_fx_on_death(var_0);
-  var_0 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_zeppelin_underlight"), self, "TAG_ORIGIN");
+  var_0 = _spawnlinkedfx(common_scripts\utility::getfx("zmb_zeppelin_underlight"), self, "TAG_ORIGIN");
   _triggerfx(var_0);
   thread blimp_delete_fx_on_death(var_0);
-  var_0 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_zeppelin_spotlight_nolight"), self, "J_searchlight_A_LE_2");
+  var_0 = _spawnlinkedfx(common_scripts\utility::getfx("zmb_zeppelin_spotlight_nolight"), self, "J_searchlight_A_LE_2");
   _triggerfx(var_0);
   thread blimp_delete_fx_on_death(var_0);
-  var_0 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_zeppelin_spotlight"), self, "J_searchlight_B_LE_2");
+  var_0 = _spawnlinkedfx(common_scripts\utility::getfx("zmb_zeppelin_spotlight"), self, "J_searchlight_B_LE_2");
   _triggerfx(var_0);
   thread blimp_delete_fx_on_death(var_0);
-  var_0 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_zeppelin_spotlight_nolight"), self, "J_searchlight_C_LE_2");
+  var_0 = _spawnlinkedfx(common_scripts\utility::getfx("zmb_zeppelin_spotlight_nolight"), self, "J_searchlight_C_LE_2");
   _triggerfx(var_0);
   thread blimp_delete_fx_on_death(var_0);
-  var_0 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_zeppelin_spotlight_nolight"), self, "J_searchlight_A_RI_2");
+  var_0 = _spawnlinkedfx(common_scripts\utility::getfx("zmb_zeppelin_spotlight_nolight"), self, "J_searchlight_A_RI_2");
   _triggerfx(var_0);
   thread blimp_delete_fx_on_death(var_0);
-  var_0 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_zeppelin_spotlight"), self, "J_searchlight_B_RI_2");
+  var_0 = _spawnlinkedfx(common_scripts\utility::getfx("zmb_zeppelin_spotlight"), self, "J_searchlight_B_RI_2");
   _triggerfx(var_0);
   thread blimp_delete_fx_on_death(var_0);
-  var_0 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_zeppelin_spotlight_nolight"), self, "J_searchlight_C_RI_2");
+  var_0 = _spawnlinkedfx(common_scripts\utility::getfx("zmb_zeppelin_spotlight_nolight"), self, "J_searchlight_C_RI_2");
   _triggerfx(var_0);
   thread blimp_delete_fx_on_death(var_0);
 }
@@ -624,7 +624,7 @@ weakpoint_take_damage_and_report_death(var_0) {
       playFX(level._effect["zmb_zeppelin_battery_damage"], self.origin);
     }
 
-    var_7 _id_04C7::_id_A102("standard");
+    var_7 _id_04C7::updatedamagefeedback("standard");
     var_5 = var_7;
   }
 
@@ -739,19 +739,19 @@ weakpoint_display_damage_status_fx() {
   }
 
   var_0 = "zmb_zeppelin_shot_charge_weak_spot" + (self._id_4C13 + 1);
-  var_1 = common_scripts\utility::_id_44F5(var_0);
-  self._id_3F44 = var_1;
+  var_1 = common_scripts\utility::getfx(var_0);
+  self.fx_id = var_1;
   _playFXOnTag(var_1, self._id_65D8, "tag_origin");
 }
 
 weakpoint_clear_fx() {
-  var_0 = self._id_3F44;
+  var_0 = self.fx_id;
 
   if(!isDefined(var_0)) {
     return;
   }
   _stopFXOnTag(var_0, self._id_65D8, "tag_origin");
-  self._id_3F44 = undefined;
+  self.fx_id = undefined;
 }
 
 weakpoint_cycle() {
@@ -807,7 +807,7 @@ turret_build(var_0, var_1, var_2, var_3) {
   var_4 set_tool_hudelem(1);
 
   if(isDefined(var_2)) {
-    var_4._id_62AD = var_2;
+    var_4.modifyplayerdamage = var_2;
   }
 
   if(isDefined(var_3)) {
@@ -845,7 +845,7 @@ turret_check_if_target(var_0) {
 
 turret_start_firing() {
   level._id_179A.blimp_turret startfiring();
-  level._id_179A.blimp_turret _id_0378::_id_8D74("aud_blimp_projectile");
+  level._id_179A.blimp_turret _id_0378::snd_message("aud_blimp_projectile");
 }
 
 turret_stop_firing() {
@@ -875,7 +875,7 @@ turret_on_player_damage(var_0) {
   }
 
   var_1 _id_0547::_id_7419(var_0.origin, var_3 * var_2 + 100);
-  var_1 _id_0378::_id_8D74("aud_blimp_hit_plr");
+  var_1 _id_0378::snd_message("aud_blimp_hit_plr");
 }
 
 turret_zap_players() {
@@ -897,7 +897,7 @@ turret_zap_players() {
   for(;;) {
     wait 3;
 
-    while(_id_0547::_id_585E()) {
+    while(_id_0547::iszombiegamepaused()) {
       waitframe();
     }
 
@@ -905,7 +905,7 @@ turret_zap_players() {
       var_2 = undefined;
 
       while(!isDefined(var_2) || !isalive(var_2)) {
-        var_2 = common_scripts\utility::_id_4461(self.origin, level.players);
+        var_2 = common_scripts\utility::getclosest(self.origin, level.players);
         wait 0.25;
       }
 
@@ -914,7 +914,7 @@ turret_zap_players() {
       var_4 = spawn("script_model", var_3);
       var_4 setModel("Tag_Origin");
       var_4 linktosynchronizedparent(level._id_179A.blimp_turret);
-      var_4 _id_0378::_id_8D74("aud_blimp_charge");
+      var_4 _id_0378::snd_message("aud_blimp_charge");
       var_5 = 0;
 
       while(isalive(var_2)) {
@@ -949,8 +949,8 @@ turret_zap_players() {
       var_15.origin = var_13["position"];
       var_15.angles = vectortoangles(var_4.origin - var_15.origin);
       turret_set_target(var_15);
-      _playFXOnTag(common_scripts\utility::_id_44F5("zmb_zeppelin_shot_charge"), level._id_179A.blimp_turret, "TAG_YAW");
-      _playFXOnTag(common_scripts\utility::_id_44F5("zmb_zeppelin_shot_charge_barrel"), level._id_179A.blimp_turret, "TAG_AIM");
+      _playFXOnTag(common_scripts\utility::getfx("zmb_zeppelin_shot_charge"), level._id_179A.blimp_turret, "TAG_YAW");
+      _playFXOnTag(common_scripts\utility::getfx("zmb_zeppelin_shot_charge_barrel"), level._id_179A.blimp_turret, "TAG_AIM");
       var_16 = level._id_179A.blimp_turret gettagorigin("TAG_LIGHT");
       var_17 = level._id_179A.blimp_turret gettagangles("TAG_LIGHT");
       var_18 = spawn("script_model", var_16);
@@ -962,7 +962,7 @@ turret_zap_players() {
       wait 1;
       _stopFXOnTag(level._effect["zmb_zeppelin_spotlight_assault"], var_18, "tag_origin");
       turret_start_firing();
-      var_19 = _func_382("zmb_tesla_zep_beam", level._id_179A.blimp_turret, "tag_flash", var_15, "tag_origin");
+      var_19 = vehicle_scripts/_attack_heli("zmb_tesla_zep_beam", level._id_179A.blimp_turret, "tag_flash", var_15, "tag_origin");
       wait 1;
       turret_stop_firing();
       turret_clear_target();
@@ -985,7 +985,7 @@ turret_spawn_strike_point(var_0) {
 }
 
 battery_init_drop_points() {
-  var_0 = common_scripts\utility::_id_46B7("zmb_blimp_pieces_struct", "targetname");
+  var_0 = common_scripts\utility::getstructarray("zmb_blimp_pieces_struct", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::_id_44BE(var_2.target, "targetname");
@@ -1002,10 +1002,10 @@ battery_init_drop_points() {
           var_2._id_7F40 = var_5;
           break;
         case "zmb_blimp_pieces_clip":
-          var_2._id_241F = var_5;
-          var_2._id_241F notsolid();
-          var_2._id_241F connectpaths();
-          var_2._id_241F ghost();
+          var_2.clip = var_5;
+          var_2.clip notsolid();
+          var_2.clip connectpaths();
+          var_2.clip ghost();
           break;
       }
     }
@@ -1127,8 +1127,8 @@ battery_spawn_drop(var_0, var_1) {
   var_2 = spawn("script_model", self.origin);
   var_2 setModel("zmb_uberschnalle_battery_chunk_01");
   _playFXOnTag(level._effect["zmb_zep_battery_fire_trail"], var_2, "tag_origin");
-  var_2 _id_0378::_id_8D74("aud_blimp_turret_explode");
-  var_3 = common_scripts\utility::_id_46B7("zmb_blimp_pieces_struct", "targetname");
+  var_2 _id_0378::snd_message("aud_blimp_turret_explode");
+  var_3 = common_scripts\utility::getstructarray("zmb_blimp_pieces_struct", "targetname");
   var_4 = (0, 0, -800);
   var_5 = 4;
 
@@ -1170,7 +1170,7 @@ battery_spawn_drop(var_0, var_1) {
   }
 
   playFX(level._effect["zmb_zep_battery_land_explosion"], var_7._id_4DEA.origin + (0, 0, -20));
-  _id_0378::_id_8D74("aud_blimp_battery_land", var_7._id_4DEA);
+  _id_0378::snd_message("aud_blimp_battery_land", var_7._id_4DEA);
   var_2._id_34A5 = var_7;
   return var_2;
 }
@@ -1181,7 +1181,7 @@ battery_get_closest_valid_drop_point(var_0, var_1) {
       return undefined;
     }
 
-    var_2 = common_scripts\utility::_id_4461(var_0, var_1);
+    var_2 = common_scripts\utility::getclosest(var_0, var_1);
 
     if(!isDefined(var_2._id_57F7) || !var_2._id_57F7) {
       return var_2;
@@ -1200,9 +1200,9 @@ battery_set_drop_point_active() {
 
   var_0 setModel("zmb_uberschnalle_battery_rubble_01");
   self._id_7F41 = var_0;
-  self._id_241F solid();
-  self._id_241F show();
-  self._id_241F disconnectPaths();
+  self.clip solid();
+  self.clip show();
+  self.clip disconnectPaths();
   var_1 = common_scripts\utility::_id_0F73(level.players, _id_0547::_id_408F());
 
   foreach(var_3 in var_1) {
@@ -1212,7 +1212,7 @@ battery_set_drop_point_active() {
       }
     }
 
-    if(var_3 istouching(self._id_241F)) {
+    if(var_3 istouching(self.clip)) {
       if(isPlayer(var_3)) {
         var_4 = self.origin;
 
@@ -1224,7 +1224,7 @@ battery_set_drop_point_active() {
           if(_canspawn(var_5)) {
             var_3 setOrigin(var_5);
           } else {
-            _id_0488::_id_A047(var_3, 0);
+            _id_0488::unresolved_collision_nearest_node(var_3, 0);
           }
         }
 
@@ -1245,9 +1245,9 @@ battery_set_drop_point_inactive() {
     self._id_7F41 delete();
   }
 
-  self._id_241F connectpaths();
-  self._id_241F notsolid();
-  self._id_241F hide();
+  self.clip connectpaths();
+  self.clip notsolid();
+  self.clip hide();
   self._id_57F7 = 0;
   self notify("stop_exploit_listener");
 }
@@ -1255,14 +1255,14 @@ battery_set_drop_point_inactive() {
 battery_clip_exploit_listener() {
   self endon("stop_exploit_listener");
 
-  if(!isDefined(self._id_241F)) {
+  if(!isDefined(self.clip)) {
     return;
   }
   for(;;) {
     foreach(var_1 in level.players) {
       var_2 = var_1 getgroundentity();
 
-      if(isDefined(var_2) && var_2 == self._id_241F) {
+      if(isDefined(var_2) && var_2 == self.clip) {
         var_3 = self.origin;
 
         if(_canspawn(var_3)) {
@@ -1273,7 +1273,7 @@ battery_clip_exploit_listener() {
           if(_canspawn(var_4)) {
             var_1 setOrigin(var_4);
           } else {
-            _id_0488::_id_A047(var_1, 0);
+            _id_0488::unresolved_collision_nearest_node(var_1, 0);
           }
         }
 
@@ -1331,7 +1331,7 @@ rocket_shoot_players() {
       }
     }
 
-    while(_id_0547::_id_585E()) {
+    while(_id_0547::iszombiegamepaused()) {
       waitframe();
     }
 
@@ -1409,26 +1409,26 @@ _id_7EB8() {
 rocket_handle_damage() {
   var_0 = 1000;
   self.health = var_0;
-  self._id_93FD = 0;
+  self.stopdamagefunc = 0;
   self setCanDamage(1);
   self._id_57B1 = 0;
-  thread maps\mp\gametypes\_damage::_id_8676(var_0, undefined, ::rocket_on_destroyed, ::rocket_modify_damage);
+  thread maps\mp\gametypes\_damage::setentitydamagecallback(var_0, undefined, ::rocket_on_destroyed, ::rocket_modify_damage);
 }
 
 aud_blimp_attack_init() {
-  _id_0378::_id_8DC7("aud_play_blimp_dialog", ::aud_play_blimp_dialog);
-  _id_0378::_id_8DC7("aud_play_pa_dialog", ::aud_play_pa_dialog);
-  _id_0378::_id_8DC7("aud_stop_pa_dialog", ::aud_stop_pa_dialog);
-  _id_0378::_id_8DC7("aud_play_pa_music", ::aud_play_pa_music);
-  _id_0378::_id_8DC7("aud_zombie_soul_suck", ::aud_zombie_soul_suck);
-  _id_0378::_id_8DC7("aud_zombie_soul_suck_threshold", ::aud_zombie_soul_suck_threshold);
-  _id_0378::_id_8DC7("aud_blimp_start", ::aud_blimp_start);
-  _id_0378::_id_8DC7("aud_blimp_charge", ::aud_blimp_charge);
-  _id_0378::_id_8DC7("aud_blimp_projectile", ::aud_blimp_projectile);
-  _id_0378::_id_8DC7("aud_blimp_hit_plr", ::aud_blimp_hit_plr);
-  _id_0378::_id_8DC7("aud_blimp_turret_explode", ::aud_blimp_turret_explode);
-  _id_0378::_id_8DC7("aud_blimp_battery_land", ::aud_blimp_battery_land);
-  _id_0378::_id_8DC7("aud_blimp_projectile_impact", ::aud_blimp_projectile_impact);
+  _id_0378::snd_register_message("aud_play_blimp_dialog", ::aud_play_blimp_dialog);
+  _id_0378::snd_register_message("aud_play_pa_dialog", ::aud_play_pa_dialog);
+  _id_0378::snd_register_message("aud_stop_pa_dialog", ::aud_stop_pa_dialog);
+  _id_0378::snd_register_message("aud_play_pa_music", ::aud_play_pa_music);
+  _id_0378::snd_register_message("aud_zombie_soul_suck", ::aud_zombie_soul_suck);
+  _id_0378::snd_register_message("aud_zombie_soul_suck_threshold", ::aud_zombie_soul_suck_threshold);
+  _id_0378::snd_register_message("aud_blimp_start", ::aud_blimp_start);
+  _id_0378::snd_register_message("aud_blimp_charge", ::aud_blimp_charge);
+  _id_0378::snd_register_message("aud_blimp_projectile", ::aud_blimp_projectile);
+  _id_0378::snd_register_message("aud_blimp_hit_plr", ::aud_blimp_hit_plr);
+  _id_0378::snd_register_message("aud_blimp_turret_explode", ::aud_blimp_turret_explode);
+  _id_0378::snd_register_message("aud_blimp_battery_land", ::aud_blimp_battery_land);
+  _id_0378::snd_register_message("aud_blimp_projectile_impact", ::aud_blimp_projectile_impact);
 }
 
 aud_play_blimp_dialog(var_0, var_1) {
@@ -1498,12 +1498,12 @@ aud_sndx_play_on_pa_system(var_0, var_1, var_2) {
   for(var_8 = 0; var_8 < var_1.size; var_8++) {
     var_9 = var_1[var_8];
     var_10 = spawnStruct();
-    var_10._id_90BE = var_9;
-    var_10._id_3018 = distance(var_3.origin, var_9.origin);
+    var_10.speaker = var_9;
+    var_10.dist = distance(var_3.origin, var_9.origin);
     var_3._id_071D._id_6DD3[var_8] = var_10;
   }
 
-  var_11 = common_scripts\utility::_id_7897(var_3._id_071D._id_6DD3, ::aud_play_pa_dialog_qsort_compare_func);
+  var_11 = common_scripts\utility::quicksort(var_3._id_071D._id_6DD3, ::aud_play_pa_dialog_qsort_compare_func);
 
   if(isDefined(var_3._id_071D._id_6DDA)) {
     _id_0380::_id_6850(var_3._id_071D._id_6DDA, 0.25);
@@ -1530,7 +1530,7 @@ aud_sndx_play_on_pa_system(var_0, var_1, var_2) {
 
   for(var_8 = 0; var_8 < var_15; var_8++) {
     wait(var_4);
-    var_9 = var_11[var_8]._id_90BE;
+    var_9 = var_11[var_8].speaker;
     var_6 = var_6 * 0.5;
     var_3._id_071D._id_6DDB[var_3._id_071D._id_6DDB.size] = _id_0380::_id_6842(var_0 + "_delay", var_3, var_9.origin, 0, var_6);
   }
@@ -1564,7 +1564,7 @@ aud_play_pa_music(var_0) {
 }
 
 aud_play_pa_dialog_qsort_compare_func(var_0, var_1) {
-  return var_0._id_3018 <= var_1._id_3018;
+  return var_0.dist <= var_1.dist;
 }
 
 aud_zombie_soul_suck(var_0, var_1) {
@@ -1603,35 +1603,35 @@ aud_blimp_cleanup_on_death(var_0) {
 
 aud_blimp_charge() {
   wait 0.75;
-  _id_046C::_id_8DA0("zmb_blimp_elec_turret_charge", self.origin);
+  _id_046C::snd_play_in_space("zmb_blimp_elec_turret_charge", self.origin);
 }
 
 aud_blimp_projectile() {
-  _id_046C::_id_8DA0("zmb_blimp_elec_turret_shoot", self.origin);
+  _id_046C::snd_play_in_space("zmb_blimp_elec_turret_shoot", self.origin);
   wait 0.3;
 
   if(isDefined(self)) {
-    _id_046C::_id_8DA2("zmb_blimp_elec_turret_projectile", self);
+    _id_046C::snd_play_linked("zmb_blimp_elec_turret_projectile", self);
   }
 }
 
 aud_blimp_hit_plr() {
-  _id_046C::_id_8DA2("zmb_blimp_elec_turret_hit_plr", self);
+  _id_046C::snd_play_linked("zmb_blimp_elec_turret_hit_plr", self);
 }
 
 aud_blimp_turret_explode() {
-  _id_046C::_id_8DA0("zmb_blimp_elec_turret_explo", self.origin);
+  _id_046C::snd_play_in_space("zmb_blimp_elec_turret_explo", self.origin);
   wait 1.2;
 
   if(isDefined(self)) {
-    _id_046C::_id_8DA2("zmb_blimp_elec_turret_fall", self);
+    _id_046C::snd_play_linked("zmb_blimp_elec_turret_fall", self);
   }
 }
 
 aud_blimp_battery_land(var_0) {
-  _id_046C::_id_8DA0("zmb_blimp_elec_turret_land", var_0.origin);
+  _id_046C::snd_play_in_space("zmb_blimp_elec_turret_land", var_0.origin);
 }
 
 aud_blimp_projectile_impact() {
-  _id_046C::_id_8DA0("zmb_blimp_elec_turret_impact", self.origin);
+  _id_046C::snd_play_in_space("zmb_blimp_elec_turret_impact", self.origin);
 }

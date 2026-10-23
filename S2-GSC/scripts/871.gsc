@@ -20,7 +20,7 @@ _id_8E3C(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_8E3D(var_0, var_1, var_2, var_3, var_4, var_5) {
-  var_6 = "dlg_done_notify_" + _id_0378::_id_8D86();
+  var_6 = "dlg_done_notify_" + _id_0378::snd_new_guid();
   var_7 = _id_8EA3(var_0, var_1, var_2, var_3, var_6, var_4, var_5);
 
   if(!isDefined(var_7)) {
@@ -33,7 +33,7 @@ _id_8E3D(var_0, var_1, var_2, var_3, var_4, var_5) {
 _id_8EA3(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = self;
 
-  if(common_scripts\utility::_id_562E(var_7._id_324E)) {
+  if(common_scripts\utility::_id_562E(var_7.dontspeak)) {
     return undefined;
   }
 
@@ -80,7 +80,7 @@ _id_8E3B(var_0, var_1) {
   if(var_5.health < 10) {
     _id_0378::_id_8D64("EXITING CONV: Plr Health to Low");
   } else {
-    var_7 = var_5._id_20D8;
+    var_7 = var_5.characterindex;
     var_8 = var_2 _id_0378::_id_307B(var_7);
     var_9 = var_4["primary"][var_8];
 
@@ -101,7 +101,7 @@ _id_8E3B(var_0, var_1) {
       if(var_18 == var_5 || var_18.health < 10) {
         continue;
       }
-      var_19 = var_18._id_20D8;
+      var_19 = var_18.characterindex;
       var_20 = var_2 _id_0378::_id_307B(var_19);
       var_21 = var_4["secondary"][var_20];
 
@@ -155,7 +155,7 @@ _id_8E3E(var_0) {
 
 _id_8E39() {
   var_0 = _id_0378::_id_3083();
-  return var_0 _id_0378::_id_307B(self._id_20D8);
+  return var_0 _id_0378::_id_307B(self.characterindex);
 }
 
 _id_8E43(var_0, var_1) {}
@@ -188,7 +188,7 @@ _id_8EA2() {
 
 _id_8E9F() {
   var_0 = self;
-  var_1 = var_0._id_20D8;
+  var_1 = var_0.characterindex;
 
   if(!isDefined(var_1)) {
     return undefined;

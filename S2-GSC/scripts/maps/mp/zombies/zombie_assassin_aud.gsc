@@ -28,8 +28,8 @@ update_assassin_audio_info() {
         self.assassinaudioinformation.players_near = common_scripts\utility::_id_0F6F(self.assassinaudioinformation.players_near, var_2);
       }
 
-      self.assassinaudioinformation.isagressive = common_scripts\utility::_id_3794("zmb_assassin_is_alarmed");
-      self.assassinaudioinformation.isrunningaway = common_scripts\utility::_id_3794("Phase 4: EXITING");
+      self.assassinaudioinformation.isagressive = common_scripts\utility::ent_flag("zmb_assassin_is_alarmed");
+      self.assassinaudioinformation.isrunningaway = common_scripts\utility::ent_flag("Phase 4: EXITING");
     }
 
     wait(var_0);

@@ -63,8 +63,8 @@ _id_A17D() {
     var_2._id_01D9 = var_1.origin[2] + 90;
     var_2 setwaypoint(1, 0, 0);
     var_2 settargetEnt(var_1);
-    var_2._id_6E74 = level._id_A012;
-    var_2._id_6E74 maps\mp\gametypes\_hud_util::_id_09A6(var_2);
+    var_2.parent = level.uiparent;
+    var_2.parent maps\mp\gametypes\_hud_util::_id_09A6(var_2);
     var_2.name = "topPlayerElem";
     var_1._id_9A9A = var_2;
     var_1._id_9A9C = var_0 + 1;
@@ -89,8 +89,8 @@ _id_255A(var_0, var_1) {
 }
 
 _id_1E53() {
-  var_0 = self getplayerdata(common_scripts\utility::_id_46AE(), "kills");
-  var_1 = self getplayerdata(common_scripts\utility::_id_46AE(), "deaths");
+  var_0 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "kills");
+  var_1 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "deaths");
 
   if(!isDefined(var_0)) {
     var_0 = 0;

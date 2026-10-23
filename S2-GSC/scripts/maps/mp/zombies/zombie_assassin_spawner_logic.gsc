@@ -84,7 +84,7 @@ cool_down() {
 wait_for_activation() {
   waitframe();
   self.assassin_spawn_activated = 0;
-  common_scripts\utility::_id_3C9F(self.getnegotiationnextnode);
+  common_scripts\utility::flag_wait(self.getnegotiationnextnode);
   self.assassin_spawn_activated = 1;
 }
 
@@ -106,7 +106,7 @@ get_valid_assassin_spawner(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   var_11 = [];
-  var_12 = common_scripts\utility::_id_46B7("zmb_assassin_spawnpoint", "targetname");
+  var_12 = common_scripts\utility::getstructarray("zmb_assassin_spawnpoint", "targetname");
 
   foreach(var_14 in var_12) {
     if(!_id_0547::_id_5565(var_14._id_0165, "zombie_spawner")) {
@@ -150,7 +150,7 @@ assassin_spawn_cooldown() {
 }
 
 get_valid_assassin_exit_points(var_0) {
-  var_1 = common_scripts\utility::_id_46B7("zmb_assassin_spawnpoint", "targetname");
+  var_1 = common_scripts\utility::getstructarray("zmb_assassin_spawnpoint", "targetname");
   var_2 = [];
   var_3 = 0;
   var_4 = self.forcedzones;
@@ -179,7 +179,7 @@ get_valid_assassin_exit_points(var_0) {
       if(_id_0547::_id_5565(self.previoushole, var_6) && distance(self.origin, self.previoushole.origin) < 512) {
         continue;
       }
-      if(!_id_055A::_id_586A(var_6.getnegotiationnextnode)) {
+      if(!_id_055A::iszoneenabled(var_6.getnegotiationnextnode)) {
         continue;
       }
       if(isDefined(var_4) && !common_scripts\utility::_id_0F79(var_4, var_6.getnegotiationnextnode)) {
@@ -201,7 +201,7 @@ get_valid_assassin_exit_points(var_0) {
 seek_exit_that_maintains_momentum(var_0) {
   self endon("death");
   var_1 = get_valid_assassin_exit_points(var_0);
-  var_1 = common_scripts\utility::_id_40B0(self.origin, var_1);
+  var_1 = common_scripts\utility::get_array_of_closest(self.origin, var_1);
   var_2 = [];
   var_3 = [];
   var_4 = [];
@@ -220,7 +220,7 @@ seek_exit_that_maintains_momentum(var_0) {
     }
 
     foreach(var_10 in var_4) {
-      if(_id_0547::_id_5565(var_10._id_AC8A, var_8)) {
+      if(_id_0547::_id_5565(var_10.zone_name, var_8)) {
         var_3 = common_scripts\utility::_id_0F6F(var_2, var_7);
       }
     }
@@ -256,7 +256,7 @@ killassassinzombie() {
 
 respawnanassassinzombie() {
   var_0 = self.health;
-  var_1 = common_scripts\utility::_id_46B7("zombie_assassin_pagan_room_spawner", "targetname");
+  var_1 = common_scripts\utility::getstructarray("zombie_assassin_pagan_room_spawner", "targetname");
 
   if(everyone_in_pommel_room()) {
     var_2 = spawn_an_assassin(undefined, undefined, common_scripts\utility::random(var_1), undefined, "Phase 1: Entrance", 1, 1);
@@ -272,7 +272,7 @@ everyone_in_pommel_room(var_0, var_1) {
     return 0;
   }
 
-  if(!common_scripts\utility::_id_562E(var_1) && !_id_055A::_id_586A("isolated_room_zone")) {
+  if(!common_scripts\utility::_id_562E(var_1) && !_id_055A::iszoneenabled("isolated_room_zone")) {
     return 0;
   }
 
@@ -338,7 +338,7 @@ set_new_assassin_origin(var_0) {
 
   self.previoushole = var_1;
   set_assassin_has_teleported();
-  _playFXOnTag(common_scripts\utility::_id_44F5("zmb_isl_assassin_spawn_wisp01"), self, "TAG_ORIGIN");
+  _playFXOnTag(common_scripts\utility::getfx("zmb_isl_assassin_spawn_wisp01"), self, "TAG_ORIGIN");
   self.assassinmustleave = undefined;
   thread restore_assassin_ability(6);
 
@@ -348,7 +348,7 @@ set_new_assassin_origin(var_0) {
     var_4 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_3);
     self scragentsetanimmode("anim deltas");
     self scragentsetorientmode("face angle abs", self.angles);
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_3, var_4, 1.0, "spawn_riser");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_3, var_4, 1.0, "spawn_riser");
     self scragentsetscripted(0);
   }
 }
@@ -392,8 +392,8 @@ get_ideal_spawner_near_origin(var_0, var_1, var_2) {
   var_7 = [];
 
   if(isDefined(var_1)) {
-    var_3 = common_scripts\utility::_id_40B0(var_1, var_0);
-    var_6 = _id_055A::_id_4562(var_1);
+    var_3 = common_scripts\utility::get_array_of_closest(var_1, var_0);
+    var_6 = _id_055A::getlocationzone(var_1);
 
     if(isDefined(var_6)) {
       var_7 = _id_055A::getadjacentzones(var_6);
@@ -418,7 +418,7 @@ get_ideal_spawner_near_origin(var_0, var_1, var_2) {
     }
 
     foreach(var_12 in var_7) {
-      if(_id_0547::_id_5565(var_12._id_AC8A, var_10) && !common_scripts\utility::_id_562E(var_9.isassassincooling)) {
+      if(_id_0547::_id_5565(var_12.zone_name, var_10) && !common_scripts\utility::_id_562E(var_9.isassassincooling)) {
         var_5 = common_scripts\utility::_id_0F6F(var_5, var_9);
       }
     }
@@ -435,7 +435,7 @@ get_ideal_spawner_near_origin(var_0, var_1, var_2) {
 
 get_ideal_spawner_near_player(var_0, var_1, var_2) {
   var_3 = [];
-  var_3 = common_scripts\utility::_id_40B0(var_0.origin, var_1);
+  var_3 = common_scripts\utility::get_array_of_closest(var_0.origin, var_1);
 
   foreach(var_5 in var_3) {
     var_8 = [];
@@ -470,9 +470,9 @@ get_ideal_spawner_near_player(var_0, var_1, var_2) {
         var_15 = _id_055A::getadjacentzones(var_14);
 
         foreach(var_10 in var_15) {
-          var_8 = common_scripts\utility::_id_0F6F(var_8, var_10._id_AC8A);
+          var_8 = common_scripts\utility::_id_0F6F(var_8, var_10.zone_name);
 
-          if(var_5.getnegotiationnextnode == var_10._id_AC8A) {
+          if(var_5.getnegotiationnextnode == var_10.zone_name) {
             return var_5;
           }
         }

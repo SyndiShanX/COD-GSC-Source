@@ -121,8 +121,8 @@ _id_7031(var_0, var_1, var_2, var_3, var_4) {
       }
     }
 
-    if(isDefined(var_1._id_5A2C)) {
-      var_19 _meth_8505(var_1._id_5A2C);
+    if(isDefined(var_1.killcament)) {
+      var_19 _meth_8505(var_1.killcament);
     }
 
     var_11 = var_11 + 0.1;
@@ -189,7 +189,7 @@ _id_9302(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   for(var_7 = 0; var_7 < var_1.size; var_7++) {
     var_8 = var_1[var_7];
     var_9 = var_2[var_7];
-    var_10 = bulletTrace(level._id_5FEB + (0, 0, 10000), level._id_5FEB, 0, undefined);
+    var_10 = bulletTrace(level.mapcenter + (0, 0, 10000), level.mapcenter, 0, undefined);
     var_8 = (var_8[0], var_8[1], var_10["position"][2]);
 
     if(isDefined(var_4)) {
@@ -343,7 +343,7 @@ _id_909F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   level thread _id_051E::_id_A0DC();
   var_14 setCanDamage(1);
   var_14 setCanRadiusDamage(1);
-  var_14 thread maps\mp\gametypes\_damage::_id_8676(_id_4612(var_5), undefined, ::_id_6B9D, ::_id_6B9C, 1);
+  var_14 thread maps\mp\gametypes\_damage::setentitydamagecallback(_id_4612(var_5), undefined, ::_id_6B9D, ::_id_6B9C, 1);
   var_14 thread _id_4AB8();
   var_14._id_6F2A = 0;
   var_14 _id_74D3(var_5);
@@ -401,23 +401,23 @@ _id_74CE(var_0, var_1) {
 _id_74D3(var_0) {
   switch (var_0) {
     case "fighter_strike":
-      _id_0378::_id_8D74("ks_fighterstrike_flyby");
+      _id_0378::snd_message("ks_fighterstrike_flyby");
       break;
     case "firebomb":
     case "airstrike":
-      _id_0378::_id_8D74("ks_bombing_run_flyby");
+      _id_0378::snd_message("ks_bombing_run_flyby");
       break;
     case "carepackage":
-      _id_0378::_id_8D74("ks_carepackage_flyby");
+      _id_0378::snd_message("ks_carepackage_flyby");
       break;
     case "emergency_carepackage":
-      _id_0378::_id_8D74("ks_emergency_carepackage");
+      _id_0378::snd_message("ks_emergency_carepackage");
       break;
     case "zm_carepackage":
     case "raid_carepackage":
     case "paratrooper_insert":
     case "paratroopers":
-      _id_0378::_id_8D74("ks_carepackage_flyby");
+      _id_0378::snd_message("ks_carepackage_flyby");
       break;
   }
 }
@@ -681,7 +681,7 @@ _id_6B9C(var_0, var_1, var_2, var_3) {
     }
   }
 
-  return maps\mp\gametypes\_damage::_id_62A6(var_0, var_1, var_2, var_4);
+  return maps\mp\gametypes\_damage::modifydamage(var_0, var_1, var_2, var_4);
 }
 
 _id_576A(var_0) {
@@ -738,19 +738,19 @@ _id_5C27(var_0, var_1) {
 }
 
 _id_5C26(var_0, var_1) {
-  self dodamage(2200, self.origin, var_1, var_0, "MOD_PROJECTILE", var_0._id_A9E0);
+  self dodamage(2200, self.origin, var_1, var_0, "MOD_PROJECTILE", var_0.weaponname);
   var_0 detonate();
 }
 
 _id_2818() {
   self._id_11C7 = 1000;
   self._id_11C5 = 1000;
-  self._id_11C9 = _missile_createattractorent(self, self._id_11C7, self._id_11C5);
+  self.attractor = _missile_createattractorent(self, self._id_11C7, self._id_11C5);
 }
 
 _id_2DD3() {
-  if(isDefined(self._id_11C9)) {
-    _missile_deleteattractor(self._id_11C9);
+  if(isDefined(self.attractor)) {
+    _missile_deleteattractor(self.attractor);
   }
 }
 
@@ -816,7 +816,7 @@ _id_6B9D(var_0, var_1, var_2, var_3) {
     var_4 = "cpkg_destroyed";
   }
 
-  maps\mp\gametypes\_damage::_id_6B4B(var_0, var_1, var_2, var_3, _id_460B(self._id_01C8), var_4, _id_460D(self._id_01C8), 1);
+  maps\mp\gametypes\_damage::onkillstreakkilled(var_0, var_1, var_2, var_3, _id_460B(self._id_01C8), var_4, _id_460D(self._id_01C8), 1);
 }
 
 _id_272D() {
@@ -841,7 +841,7 @@ _id_272D() {
 _id_4AB8(var_0) {
   level endon("game_ended");
   self endon("delete");
-  common_scripts\utility::_id_A732("death", "crashing");
+  common_scripts\utility::waittill_either("death", "crashing");
 
   if(isDefined(self)) {
     var_1 = anglesToForward(self.angles);
@@ -896,15 +896,15 @@ _id_460C(var_0, var_1) {
   switch (var_0) {
     case "firebomb":
       if(var_1 == "allies") {
-        return common_scripts\utility::_id_44F5("plane_death");
+        return common_scripts\utility::getfx("plane_death");
       } else {
-        return common_scripts\utility::_id_44F5("plane_death");
+        return common_scripts\utility::getfx("plane_death");
       }
     case "airstrike":
       if(isDefined(var_1) && var_1 == "allies") {
-        return common_scripts\utility::_id_44F5("airstrike_death_allies");
+        return common_scripts\utility::getfx("airstrike_death_allies");
       } else {
-        return common_scripts\utility::_id_44F5("airstrike_death_axis");
+        return common_scripts\utility::getfx("airstrike_death_axis");
       }
     case "zm_carepackage":
     case "raid_carepackage":
@@ -912,18 +912,18 @@ _id_460C(var_0, var_1) {
     case "carepackage":
     case "paratroopers":
       if(isDefined(var_1) && var_1 == "allies") {
-        return common_scripts\utility::_id_44F5("plane_death");
+        return common_scripts\utility::getfx("plane_death");
       } else {
-        return common_scripts\utility::_id_44F5("plane_death");
+        return common_scripts\utility::getfx("plane_death");
       }
     case "emergency_carepackage":
       if(isDefined(var_1) && var_1 == "allies") {
-        return common_scripts\utility::_id_44F5("plane_death");
+        return common_scripts\utility::getfx("plane_death");
       } else {
-        return common_scripts\utility::_id_44F5("plane_death");
+        return common_scripts\utility::getfx("plane_death");
       }
     default:
-      return common_scripts\utility::_id_44F5("plane_death");
+      return common_scripts\utility::getfx("plane_death");
   }
 }
 
@@ -1037,10 +1037,10 @@ _id_703B() {
 _id_7041() {
   self endon("airstrike_complete");
   waitframe();
-  _playFXOnTag(common_scripts\utility::_id_44F5("airstrike_engine"), self, "tag_engine_right");
-  _playFXOnTag(common_scripts\utility::_id_44F5("airstrike_engine"), self, "tag_engine_left");
-  _playFXOnTag(common_scripts\utility::_id_44F5("airstrike_wingtip"), self, "tag_right_wingtip");
-  _playFXOnTag(common_scripts\utility::_id_44F5("airstrike_wingtip"), self, "tag_left_wingtip");
+  _playFXOnTag(common_scripts\utility::getfx("airstrike_engine"), self, "tag_engine_right");
+  _playFXOnTag(common_scripts\utility::getfx("airstrike_engine"), self, "tag_engine_left");
+  _playFXOnTag(common_scripts\utility::getfx("airstrike_wingtip"), self, "tag_right_wingtip");
+  _playFXOnTag(common_scripts\utility::getfx("airstrike_wingtip"), self, "tag_left_wingtip");
 }
 
 _id_281E(var_0, var_1) {
@@ -1051,7 +1051,7 @@ _id_281E(var_0, var_1) {
   var_2 thread _id_2D3B(var_3);
   var_4 = _anglestoaxis((35, -45, 0))["forward"];
   var_2 linkTo(var_0, "tag_origin", var_4 * -1 * 1000, (35, -45, 0));
-  var_0._id_5A2C = var_2;
+  var_0.killcament = var_2;
 }
 
 _id_2D3B(var_0) {
@@ -1065,7 +1065,7 @@ _id_4409() {
     return level._id_0B92;
   }
 
-  var_0 = common_scripts\utility::_id_44BD("warbird_anchor", "targetname");
+  var_0 = common_scripts\utility::getent_or_struct("warbird_anchor", "targetname");
 
   if(!isDefined(var_0)) {
     var_0 = spawnStruct();
@@ -1090,19 +1090,19 @@ _id_460F(var_0) {
 
   var_2 = 0;
 
-  if(maps\mp\_utility::_id_4571() == "mp_gibraltar_02") {
+  if(maps\mp\_utility::getmapname() == "mp_gibraltar_02") {
     var_2 = 1000;
   }
 
-  if(maps\mp\_utility::_id_4571() == "mp_wolfslair" || maps\mp\_utility::_id_4571() == "mp_wolfslair_free" || maps\mp\_utility::_id_4571() == "mp_wolfslair2") {
+  if(maps\mp\_utility::getmapname() == "mp_wolfslair" || maps\mp\_utility::getmapname() == "mp_wolfslair_free" || maps\mp\_utility::getmapname() == "mp_wolfslair2") {
     var_2 = 1000;
   }
 
-  if(maps\mp\_utility::_id_4571() == "mp_sandbox_01") {
+  if(maps\mp\_utility::getmapname() == "mp_sandbox_01") {
     var_2 = -1500;
   }
 
-  if(maps\mp\_utility::_id_4571() == "mp_airship" && (var_0 == "carepackage" || var_0 == "emergency_carepackage")) {
+  if(maps\mp\_utility::getmapname() == "mp_airship" && (var_0 == "carepackage" || var_0 == "emergency_carepackage")) {
     var_2 = 1000;
   }
 
@@ -1189,8 +1189,8 @@ _id_34AD(var_0, var_1) {
     var_3 = -1;
   }
 
-  var_4 = common_scripts\utility::_id_3D5D(var_0.origin);
-  var_5 = var_4 + anglesToForward(common_scripts\utility::_id_3D5C(var_0.angles)) * (var_3 * 100000);
+  var_4 = common_scripts\utility::flat_origin(var_0.origin);
+  var_5 = var_4 + anglesToForward(common_scripts\utility::flat_angle(var_0.angles)) * (var_3 * 100000);
   var_6 = _pointonsegmentnearesttopoint(var_4, var_5, var_1);
   var_7 = distance(var_4, var_6);
   return var_7;
@@ -1209,8 +1209,8 @@ _id_34AE(var_0, var_1, var_2) {
     var_4 = -1;
   }
 
-  var_5 = common_scripts\utility::_id_3D5D(var_0.origin);
-  var_6 = var_5 + anglesToForward(common_scripts\utility::_id_3D5C(var_0.angles)) * (var_4 * 100000);
+  var_5 = common_scripts\utility::flat_origin(var_0.origin);
+  var_6 = var_5 + anglesToForward(common_scripts\utility::flat_angle(var_0.angles)) * (var_4 * 100000);
   var_7 = _pointonsegmentnearesttopoint(var_5, var_6, var_1);
   var_8 = distance(var_5, var_7);
 
@@ -1222,8 +1222,8 @@ _id_34AE(var_0, var_1, var_2) {
 }
 
 _id_34AF(var_0, var_1) {
-  var_2 = anglesToForward(common_scripts\utility::_id_3D5C(var_0.angles));
-  var_3 = vectorNormalize(common_scripts\utility::_id_3D5D(var_1) - var_0.origin);
+  var_2 = anglesToForward(common_scripts\utility::flat_angle(var_0.angles));
+  var_3 = vectorNormalize(common_scripts\utility::flat_origin(var_1) - var_0.origin);
   var_4 = vectordot(var_2, var_3);
 
   if(var_4 > 0) {
@@ -1257,7 +1257,7 @@ _id_9E35(var_0, var_1) {
   }
 
   level._id_0B93 = 1;
-  _id_0485::_id_5E9A(var_1, level._id_5FEB);
+  _id_0485::_id_5E9A(var_1, level.mapcenter);
 
   switch (var_1) {
     case "airstrike":
@@ -1290,11 +1290,11 @@ _id_9E3A(var_0, var_1) {
 vehicle_setvelocity(var_0, var_1) {
   self endon("stop_location_selection");
 
-  if(!isDefined(level._id_5FF0)) {
-    level._id_5FF0 = 1024;
+  if(!isDefined(level.mapsize)) {
+    level.mapsize = 1024;
   }
 
-  var_2 = level._id_5FF0 / 6.46875;
+  var_2 = level.mapsize / 6.46875;
 
   if(level.splitscreen) {
     var_2 = var_2 * 1.5;
@@ -1329,7 +1329,7 @@ vehicle_setvelocity(var_0, var_1) {
 
   self setblurforplayer(0, 0.3);
   self notify("location_selection_complete");
-  _id_0378::_id_8D74("ks_bombing_run_location_selected");
+  _id_0378::snd_message("ks_bombing_run_location_selected");
   self setclientomnvar("ui_map_location_blocked", 0);
 
   if(maps\mp\_utility::_id_5668()) {
@@ -1365,8 +1365,8 @@ _id_A68F() {
   self setblurforplayer(0, 0.3);
   self setclientomnvar("ui_map_location_blocked", 0);
 
-  if(maps\mp\gametypes\_hostmigration::_id_A782() > 0) {
-    self switchtoweapon(common_scripts\utility::_id_4550());
+  if(maps\mp\gametypes\_hostmigration::waittillhostmigrationdone() > 0) {
+    self switchtoweapon(common_scripts\utility::getlastweapon());
   }
 
   level._id_0B93 = undefined;
@@ -1379,7 +1379,7 @@ _id_A272(var_0, var_1, var_2, var_3) {
 }
 
 _id_4570() {
-  switch (maps\mp\_utility::_id_4571()) {
+  switch (maps\mp\_utility::getmapname()) {
     case "mp_battleship_2":
       return 90;
     case "mp_canon_farm":

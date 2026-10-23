@@ -4,9 +4,9 @@
 ***********************************************************/
 
 main() {
-  _id_87A7();
+  setup_callbacks();
 }
 
-_id_87A7() {
-  level._id_0A41["player"]["think"] = maps\mp\bots\_bots_gametype_ctf::_id_1993;
+setup_callbacks() {
+  level._id_0A41["player"]["think"] = maps\mp\bots\_bots_gametype_ctf::bot_ctf_think;
 }

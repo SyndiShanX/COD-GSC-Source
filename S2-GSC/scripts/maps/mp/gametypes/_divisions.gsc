@@ -506,7 +506,7 @@ _id_461B(var_0) {
     return -1;
   }
 
-  if(isDefined(level._id_585D) && level._id_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return -1;
   }
 
@@ -518,7 +518,7 @@ _id_461B(var_0) {
     return _id_449F(var_0);
   }
 
-  if(_func_3AF()) {
+  if(xmodelalias/alias_ger_heads_scarf_for_muddy_cheap()) {
     return _id_449F(var_0);
   }
 
@@ -528,10 +528,10 @@ _id_461B(var_0) {
     return self.pers["divisionLevel"][var_1];
   }
 
-  if(!maps\mp\_utility::rankingenabled() || maps\mp\_utility::_id_761E()) {
+  if(!maps\mp\_utility::rankingenabled() || maps\mp\_utility::practiceroundgame()) {
     var_2 = _id_449F(var_0);
   } else {
-    var_2 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", var_1, "level");
+    var_2 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", var_1, "level");
     var_2 = var_2 + 1;
   }
 
@@ -559,7 +559,7 @@ hasaccesstov2rocket() {
     return 0;
   }
 
-  if(!maps\mp\_utility::rankingenabled() || maps\mp\_utility::_id_761E()) {
+  if(!maps\mp\_utility::rankingenabled() || maps\mp\_utility::practiceroundgame()) {
     return 0;
   }
 
@@ -571,16 +571,16 @@ hasaccesstov2rocket() {
     return self.pers["hasAccessToV2Rocket"];
   }
 
-  var_0 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "infantry", "prestigeLevel");
-  var_1 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "airborne", "prestigeLevel");
-  var_2 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "armored", "prestigeLevel");
-  var_3 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "mountain", "prestigeLevel");
-  var_4 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "expeditionary", "prestigeLevel");
-  var_5 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "resistance", "prestigeLevel");
-  var_6 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "grenadier", "prestigeLevel");
-  var_7 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "commando", "prestigeLevel");
-  var_8 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "scout", "prestigeLevel");
-  var_9 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "artillery", "prestigeLevel");
+  var_0 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "infantry", "prestigeLevel");
+  var_1 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "airborne", "prestigeLevel");
+  var_2 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "armored", "prestigeLevel");
+  var_3 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "mountain", "prestigeLevel");
+  var_4 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "expeditionary", "prestigeLevel");
+  var_5 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "resistance", "prestigeLevel");
+  var_6 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "grenadier", "prestigeLevel");
+  var_7 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "commando", "prestigeLevel");
+  var_8 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "scout", "prestigeLevel");
+  var_9 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", "artillery", "prestigeLevel");
   var_10 = 0;
 
   if(var_0 >= 1) {
@@ -635,7 +635,7 @@ updatedivisionusagestats() {
 }
 
 _id_4783(var_0, var_1) {
-  if(isDefined(level._id_585D) && level._id_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
   if(_func_367()) {
@@ -647,10 +647,10 @@ _id_4783(var_0, var_1) {
   if(isDefined(level._id_2F7A) && level._id_2F7A) {
     return;
   }
-  if(!maps\mp\_utility::rankingenabled() || maps\mp\_utility::_id_761E()) {
+  if(!maps\mp\_utility::rankingenabled() || maps\mp\_utility::practiceroundgame()) {
     return;
   }
-  if(_func_3AF()) {
+  if(xmodelalias/alias_ger_heads_scarf_for_muddy_cheap()) {
     return;
   }
   if(level.gametype == "gun" || level.gametype == "blades" || level.gametype == "infect" || level.gametype == "prop" || level.gametype == "br" || level.gametype == "aon" || level.gametype == "oitc") {
@@ -713,16 +713,16 @@ _id_4782(var_0, var_1) {
     var_5 = int(_tablelookupbyrow(getdivisionlevelingtablename(), var_3 + var_4, 1));
   }
 
-  var_6 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", var_2, "level");
+  var_6 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", var_2, "level");
   var_6 = var_6 + 1;
   var_7 = var_6;
-  var_8 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", var_2, "experience");
+  var_8 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", var_2, "experience");
   var_9 = var_8 + var_1;
   var_9 = int(_min(var_5, var_9));
   var_1 = var_9 - var_8;
-  var_10 = self getplayerdata(common_scripts\utility::_id_46A7(), "round", "divisionMatchExperience", var_2);
+  var_10 = self getplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "divisionMatchExperience", var_2);
   var_11 = var_10 + var_1;
-  self setplayerdata(common_scripts\utility::_id_46A7(), "round", "divisionMatchExperience", var_2, var_11);
+  self setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "divisionMatchExperience", var_2, var_11);
   var_12 = 1;
 
   while(var_12) {
@@ -736,9 +736,9 @@ _id_4782(var_0, var_1) {
         var_15 = int(_tablelookupbyrow(getdivisionlevelingtablename(), var_13, 3));
         thread maps\mp\gametypes\_rank::giverankxp("divisionLevel", var_15);
         var_6 = var_6 + 1;
-        self setplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", var_2, "level", var_6 - 1);
+        self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", var_2, "level", var_6 - 1);
         _id_0468::_id_0A1D(var_2, var_6);
-        var_16 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", var_2, "timeInUse");
+        var_16 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", var_2, "timeInUse");
 
         if(!isDefined(var_16)) {
           var_16 = -1;
@@ -823,7 +823,7 @@ _id_4782(var_0, var_1) {
     }
 
     if(getdvarint("1258", 0) == 0 && getdvarint("2803", 0) == 0 || var_6 < var_4) {
-      self setplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", var_2, "experience", var_9);
+      self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", var_2, "experience", var_9);
     }
   }
 }
@@ -848,14 +848,14 @@ _id_50FC(var_0, var_1, var_2) {
   if(isDefined(level._id_2F7A) && level._id_2F7A) {
     return;
   }
-  if(_func_3AF()) {
+  if(xmodelalias/alias_ger_heads_scarf_for_muddy_cheap()) {
     return;
   }
   var_3 = _id_44A0(var_0);
 
-  if(maps\mp\_utility::rankingenabled() && !maps\mp\_utility::_id_761E()) {
-    var_4 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", var_3, var_2);
-    self setplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", var_3, var_2, var_4 + var_1);
+  if(maps\mp\_utility::rankingenabled() && !maps\mp\_utility::practiceroundgame()) {
+    var_4 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", var_3, var_2);
+    self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionStats", var_3, var_2, var_4 + var_1);
   }
 }
 

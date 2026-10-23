@@ -4,23 +4,23 @@
 **************************************/
 
 init() {
-  level._id_1EB9 = 20;
-  level._id_5A61["zm_camouflage"] = ::_id_9E3E;
+  level.camo_duration = 20;
+  level.killstreakfuncs["zm_camouflage"] = ::tryusezombiecamouflage;
 }
 
-_id_9E3E(var_0, var_1) {
-  thread _id_73BA();
+tryusezombiecamouflage(var_0, var_1) {
+  thread playercamouflagemode();
   return 1;
 }
 
-_id_73BA(var_0) {
+playercamouflagemode(var_0) {
   if(!isDefined(var_0)) {
-    var_0 = level._id_1EB9;
+    var_0 = level.camo_duration;
   }
 
   var_1 = int(gettime() + var_0 * 1000);
 
-  if(isDefined(self._id_2747) && self._id_2747) {
+  if(isDefined(self.crategodmode) && self.crategodmode) {
     var_2 = self getclientomnvar("ui_zm_camo");
 
     if(var_2 >= var_1) {
@@ -30,23 +30,23 @@ _id_73BA(var_0) {
 
   self notify("playerCamouflageMode");
 
-  if(!isDefined(self._id_2747)) {
-    self._id_2747 = 0;
+  if(!isDefined(self.crategodmode)) {
+    self.crategodmode = 0;
   }
 
   self playlocalsound("zmb_ss_camo_use");
-  self._id_2747++;
-  _id_0547::_id_8A6D(1);
+  self.crategodmode++;
+  _id_0547::setzombiesignoreme(1);
   self setclientomnvar("ui_zm_camo", var_1);
-  _id_73BB(var_0);
+  playercamouflagemodewait(var_0);
 
   if(isDefined(self)) {
-    _id_0547::_id_8A6D(0);
-    self._id_2747--;
+    _id_0547::setzombiesignoreme(0);
+    self.crategodmode--;
   }
 }
 
-_id_73BB(var_0) {
+playercamouflagemodewait(var_0) {
   self endon("playerCamouflageMode");
   wait(var_0);
 }

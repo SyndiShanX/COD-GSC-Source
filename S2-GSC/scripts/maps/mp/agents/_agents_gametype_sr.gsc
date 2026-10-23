@@ -4,5 +4,5 @@
 **********************************************************/
 
 main() {
-  maps\mp\agents\_agents_gametype_sd::_id_87A7();
+  maps\mp\agents\_agents_gametype_sd::setup_callbacks();
 }

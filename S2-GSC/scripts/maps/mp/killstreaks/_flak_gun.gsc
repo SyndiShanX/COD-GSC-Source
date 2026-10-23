@@ -5,8 +5,8 @@
 
 init() {
   level._effect["flak_gun_explosion"] = loadfx("vfx/scorestreaks/ss_flak_explosion_01");
-  level._id_5A61["flak_gun"] = ::_id_9E2C;
-  level._id_5A7D["killstreak_flak_gun_mp"] = "flak_gun";
+  level.killstreakfuncs["flak_gun"] = ::_id_9E2C;
+  level.killstreakwieldweapons["killstreak_flak_gun_mp"] = "flak_gun";
 }
 
 _id_9E2C(var_0) {
@@ -18,12 +18,12 @@ _id_9E25(var_0) {
 }
 
 _id_9E30(var_0) {
-  if(level.teambased && var_0 == "counter_uav" && level._id_9850[common_scripts\utility::_id_416F(self.team)]) {
+  if(level.teambased && var_0 == "counter_uav" && level._id_9850[common_scripts\utility::get_enemy_team(self.team)]) {
     self iprintlnbold(&"KILLSTREAKS_COUNTER_RECON_TEAM_ALREADY_HAS");
     return 0;
   }
 
-  if(level.teambased && level._id_9854[common_scripts\utility::_id_416F(self.team)]) {
+  if(level.teambased && level._id_9854[common_scripts\utility::get_enemy_team(self.team)]) {
     self iprintlnbold(&"KILLSTREAKS_FLAK_GUN_TEAM_ALREADY_HAS");
     return 0;
   }
@@ -77,7 +77,7 @@ _id_A20C(var_0) {
 
 _id_6B75(var_0, var_1) {
   level endon("flakGunsDisabled");
-  common_scripts\utility::_id_A70A("disconnect", "joined_team", "joined_spectators");
+  common_scripts\utility::waittill_any("disconnect", "joined_team", "joined_spectators");
   level thread _id_4AC0(var_0, var_1);
 }
 
@@ -135,8 +135,8 @@ _id_2DC0(var_0, var_1) {
       if(var_6 || level.teambased && isDefined(var_5.team) && var_5.team == var_0.team || !level.teambased && isDefined(var_5._id_0117) && var_5._id_0117 == var_0) {
         continue;
       }
-      if(isDefined(var_5._id_275E)) {
-        var_5 = var_5._id_376E;
+      if(isDefined(var_5.cratetype)) {
+        var_5 = var_5.enemymodel;
       }
 
       var_2[var_2.size] = var_5;
@@ -153,10 +153,10 @@ _id_2DC1(var_0, var_1) {
   var_2 = [];
 
   for(;;) {
-    var_3 = level._id_9FDA;
+    var_3 = level.uavmodels;
 
     if(level.teambased) {
-      var_3 = level._id_9FDA[maps\mp\_utility::getotherteam(var_0.team)];
+      var_3 = level.uavmodels[maps\mp\_utility::getotherteam(var_0.team)];
     }
 
     foreach(var_5 in var_3) {
@@ -240,7 +240,7 @@ _id_1129(var_0, var_1) {
   for(;;) {
     if(level._id_3CE2 == 0 && level._id_3CE1 < 30) {
       var_2 = _id_0527::_id_4409();
-      var_3 = (_randomfloatrange(-3000, 3000) + level._id_5FEB[0], _randomfloatrange(-3000, 3000) + level._id_5FEB[1], var_2);
+      var_3 = (_randomfloatrange(-3000, 3000) + level.mapcenter[0], _randomfloatrange(-3000, 3000) + level.mapcenter[1], var_2);
       level._id_3CE1++;
       thread _id_3CDE(var_3, var_1);
       waitframe();
@@ -252,12 +252,12 @@ _id_1129(var_0, var_1) {
 }
 
 _id_3CDE(var_0, var_1) {
-  var_2 = common_scripts\utility::_id_8FFC();
+  var_2 = common_scripts\utility::spawn_tag_origin();
   var_2.origin = var_0;
   var_2 show();
   waitframe();
-  _playFXOnTag(common_scripts\utility::_id_44F5("flak_gun_explosion"), var_2, "tag_origin");
-  _id_0378::_id_8D74("ks_flak_cannon_explo", var_0);
+  _playFXOnTag(common_scripts\utility::getfx("flak_gun_explosion"), var_2, "tag_origin");
+  _id_0378::snd_message("ks_flak_cannon_explo", var_0);
   wait 4.5;
   var_2 delete();
   level._id_3CE1--;

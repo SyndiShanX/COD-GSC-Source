@@ -9,7 +9,7 @@ init() {
 
   foreach(var_14 in var_12) {
     var_15 = spawnStruct();
-    var_15._id_378F = var_14;
+    var_15.ent = var_14;
     var_15._id_24D1 = var_14.setlookatent;
     var_15._id_9D64 = "use";
     _id_7BA2(var_15);
@@ -26,8 +26,8 @@ _id_7BA2(var_0) {
     }
 
     if(var_0._id_9D64 == "use") {
-      var_1 = getEntArray(var_0._id_378F.target, "targetname");
-      var_1[0]._id_378F = var_0._id_378F;
+      var_1 = getEntArray(var_0.ent.target, "targetname");
+      var_1[0].ent = var_0.ent;
       var_1[0]._id_5F13 = var_0;
       thread maps\mp\_utility::_id_6F74(::_id_5F11, var_1[0]);
     }
@@ -39,18 +39,18 @@ _id_7BA2(var_0) {
 
     level._id_24DC[var_0._id_24D1] = var_0;
   } else {
-    var_1 = getEntArray(var_0._id_378F.target, "targetname");
+    var_1 = getEntArray(var_0.ent.target, "targetname");
     var_1[0] makeunusable();
-    var_0._id_378F hide();
+    var_0.ent hide();
   }
 }
 
 _id_86B3(var_0, var_1, var_2) {
-  var_0 call[[common_scripts\utility::_id_98E7(var_2, ::showtoplayer, ::_meth_8006)]](var_1);
+  var_0 call[[common_scripts\utility::ter_op(var_2, ::showtoplayer, ::_meth_8006)]](var_1);
 }
 
 _id_86B2(var_0, var_1, var_2) {
-  var_0 call[[common_scripts\utility::_id_98E7(var_2, ::enableplayeruse, ::disableplayeruse)]](var_1);
+  var_0 call[[common_scripts\utility::ter_op(var_2, ::enableplayeruse, ::disableplayeruse)]](var_1);
 }
 
 _id_5F0F(var_0) {
@@ -65,7 +65,7 @@ _id_5F0E(var_0) {
 _id_5F11(var_0) {
   var_1 = var_0._id_5F13;
   var_2 = var_1._id_24D2;
-  var_3 = var_0._id_378F;
+  var_3 = var_0.ent;
   var_4 = _id_0550::_id_415C(self, var_2);
   _id_86B3(var_3, self, !var_4);
   _id_86B2(var_0, self, !var_4);
@@ -94,7 +94,7 @@ _id_5F10(var_0) {
     if(!isPlayer(var_1)) {
       continue;
     }
-    self._id_378F _meth_8006(var_1);
+    self.ent _meth_8006(var_1);
     var_0 disableplayeruse(var_1);
 
     if(isDefined(self._id_6FC0)) {
@@ -105,6 +105,6 @@ _id_5F10(var_0) {
       continue;
     }
     _id_0550::visionsetpostapplyforplayer(var_1, self._id_24D2, 1);
-    var_1 _id_0378::_id_8D74("found_collectible");
+    var_1 _id_0378::snd_message("found_collectible");
   }
 }

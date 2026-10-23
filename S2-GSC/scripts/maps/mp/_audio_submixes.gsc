@@ -142,7 +142,7 @@ _id_8A9F(var_0, var_1) {
   }
   if(isDefined(var_1) == 1 && var_1 > 0.0) {
     var_2 _id_8A9E(var_0, 0.0, var_1);
-    var_2 common_scripts\utility::_id_2CBE(var_1 + 0.05, ::clientclearsoundsubmix, var_0, 0.0);
+    var_2 common_scripts\utility::delaycall(var_1 + 0.05, ::clientclearsoundsubmix, var_0, 0.0);
   } else {
     var_2 clientclearsoundsubmix(var_0);
     var_2._audiosubmixes[var_0] = undefined;

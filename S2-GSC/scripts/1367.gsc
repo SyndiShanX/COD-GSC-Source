@@ -71,11 +71,11 @@ _id_7846(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7._id_3008 = undefined;
   var_7._id_8BDE = var_5;
   var_7._id_8BE1 = var_6;
-  var_7._id_76A7 = common_scripts\utility::_id_98E7(isDefined(var_2), var_2, []);
+  var_7._id_76A7 = common_scripts\utility::ter_op(isDefined(var_2), var_2, []);
   level._id_ABE8[var_0] = var_7;
 
   if(isDefined(var_4)) {
-    var_8 = common_scripts\utility::_id_0F79(["mp_zombie_nest_01", "mp_zombie_training"], maps\mp\_utility::_id_4571());
+    var_8 = common_scripts\utility::_id_0F79(["mp_zombie_nest_01", "mp_zombie_training"], maps\mp\_utility::getmapname());
   } else {
     var_4 = "ZOMBIES_EMPTY_STRING";
   }
@@ -159,7 +159,7 @@ _id_781E(var_0, var_1, var_2, var_3, var_4) {
   var_6._id_A09A = var_2;
   var_6._id_00D4 = var_5._id_939C.size;
   var_6._id_4DAC = var_4;
-  var_6._id_9399 = common_scripts\utility::_id_98E7(_isarray(var_3), var_3, [var_3]);
+  var_6._id_9399 = common_scripts\utility::ter_op(_isarray(var_3), var_3, [var_3]);
   var_5._id_939C[var_6._id_00D4] = var_6;
   common_scripts\utility::flag_init(_id_7838(var_0, var_1));
 }
@@ -171,7 +171,7 @@ _id_7848(var_0) {
 }
 
 _id_7870(var_0, var_1) {
-  common_scripts\utility::_id_3C9F(_id_7838(var_0, var_1));
+  common_scripts\utility::flag_wait(_id_7838(var_0, var_1));
 }
 
 _id_782D(var_0, var_1) {
@@ -179,7 +179,7 @@ _id_782D(var_0, var_1) {
 }
 
 _id_783E(var_0, var_1) {
-  return common_scripts\utility::_id_3C77(_id_7838(var_0, var_1));
+  return common_scripts\utility::flag(_id_7838(var_0, var_1));
 }
 
 _id_7838(var_0, var_1, var_2) {
@@ -346,7 +346,7 @@ step_should_write_match_data(var_0) {
 
 quest_analytics_objective_step(var_0, var_1) {
   var_2 = getmatchdata("objective_step_count");
-  setmatchdata("objective_step_count", maps\mp\_utility::_id_2315(var_2 + 1));
+  setmatchdata("objective_step_count", maps\mp\_utility::clamptoshort(var_2 + 1));
 
   if(step_should_write_match_data(var_2)) {
     var_3 = _id_0485::getmatchtimepassed();
@@ -393,7 +393,7 @@ quest_analytics_match_summary() {
     if(isDefined(var_10)) {
       var_7 = var_10.name;
       var_8 = (var_0 - var_10._id_924E) * var_4;
-      var_9 = level._id_A980;
+      var_9 = level.wavecounter;
     }
 
     var_11 = _id_0547::_id_AC4B(undefined, "questsummary");
@@ -505,7 +505,7 @@ _id_7849(var_0) {
   var_0._id_933D = "in progress";
   var_0._id_924E = gettime();
   var_0.start_game_ms = _id_0485::getmatchtimepassed();
-  var_0._id_92AF = level._id_A980;
+  var_0._id_92AF = level.wavecounter;
   _id_7844(undefined, "quest_start", var_0, undefined);
   _id_20BA(var_0.name, var_0._id_4DAC);
 
@@ -521,13 +521,13 @@ _id_7849(var_0) {
     }
 
     var_4._id_924E = gettime();
-    var_4._id_92AF = level._id_A980;
+    var_4._id_92AF = level.wavecounter;
     _id_7844(undefined, "step_start", var_0, var_4);
     _id_7822(var_0.name, var_4._id_4DAC);
     _id_7870(var_0.name, var_4.name);
     _id_7822(var_0.name, undefined);
     var_4._id_3BA1 = gettime();
-    var_4._id_3BA4 = level._id_A980;
+    var_4._id_3BA4 = level.wavecounter;
     _id_7844(undefined, "step_end", var_0, var_4);
     quest_analytics_objective_step(var_4.name, var_0.objective_index);
 
@@ -548,7 +548,7 @@ _id_7849(var_0) {
   _id_20BA(var_0.name, undefined);
   var_0._id_3BA1 = gettime();
   var_0.finish_game_ms = _id_0485::getmatchtimepassed();
-  var_0._id_3BA4 = level._id_A980;
+  var_0._id_3BA4 = level.wavecounter;
   _id_7844(undefined, "quest_end", var_0, undefined);
 
   if(quest_should_write_match_data(var_0.objective_index)) {
@@ -728,7 +728,7 @@ _id_5F3D(var_0) {
     var_2++;
   }
 
-  var_0 _meth_85EF(&"update_zm_quest_hints", 0);
+  var_0 set_vision_set_player(&"update_zm_quest_hints", 0);
 }
 
 _id_A8D6(var_0) {
@@ -993,13 +993,13 @@ _id_783D(var_0, var_1) {
 
 _id_AB89(var_0) {
   waitframe();
-  common_scripts\utility::_id_3C9F(var_0._id_3C8C);
+  common_scripts\utility::flag_wait(var_0._id_3C8C);
   var_0._id_3E41 = 1;
   level thread maps\mp\gametypes\zombies::orders_and_contracts_report_event("any_objective_completed");
 
   foreach(var_3 in level.players) {
     var_3 quest_omnvar_mark_completed(var_0._id_00D4, 1);
-    var_3 thread maps\mp\gametypes\_hud_message::_id_9102(var_0._id_3C8C);
+    var_3 thread maps\mp\gametypes\_hud_message::splashnotify(var_0._id_3C8C);
   }
 }
 
@@ -1015,10 +1015,10 @@ _id_AB8A(var_0) {
   var_1 = self;
   var_1 endon("disconnect");
   waitframe();
-  common_scripts\utility::_id_379C(var_0._id_3C8C);
+  common_scripts\utility::ent_flag_wait(var_0._id_3C8C);
   var_0._id_3E41 = 1;
   quest_omnvar_mark_completed(var_0._id_00D4, 1);
-  thread maps\mp\gametypes\_hud_message::_id_9102(var_0._id_3C8C);
+  thread maps\mp\gametypes\_hud_message::splashnotify(var_0._id_3C8C);
 }
 
 _id_4BCA(var_0, var_1) {
@@ -1049,10 +1049,10 @@ _id_4BCB(var_0) {
 }
 
 _id_4BC8(var_0) {
-  var_1 = common_scripts\utility::_id_98E7(_isarray(var_0), var_0, [var_0]);
+  var_1 = common_scripts\utility::ter_op(_isarray(var_0), var_0, [var_0]);
 
   foreach(var_3 in var_1) {
-    if(common_scripts\utility::_id_3C77(var_3)) {
+    if(common_scripts\utility::flag(var_3)) {
       continue;
     }
     common_scripts\utility::flag_set(var_3);
@@ -1098,7 +1098,7 @@ _id_4BC9(var_0, var_1, var_2, var_3) {
 
 hc_analytics_watch_autocompletion(var_0) {
   level endon(get_hc_analytics_reported_notify(var_0));
-  common_scripts\utility::_id_3C9F(var_0);
+  common_scripts\utility::flag_wait(var_0);
   _id_4BCA(var_0, 1);
 }
 

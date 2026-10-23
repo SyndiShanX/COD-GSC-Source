@@ -63,7 +63,7 @@ _id_A13E(var_0) {
   }
   self.pers["killcam"]["IsNemesis"] = 0;
   var_1 = var_0.name;
-  var_2 = maps\mp\gametypes\_damage::_id_56FA(self, var_0);
+  var_2 = maps\mp\gametypes\_damage::isfriendlyfire(self, var_0);
 
   if(!var_2) {
     _id_A13D(var_1);

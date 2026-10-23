@@ -16,7 +16,7 @@ zmb_do_weapon_inspect(var_0) {
   var_1 common_scripts\utility::_disableoffhandweapons();
   wait 1;
 
-  while(var_1 _meth_8677()) {
+  while(var_1 setentityheadicon()) {
     waitframe();
   }
 

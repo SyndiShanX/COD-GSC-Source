@@ -13,7 +13,7 @@ init() {
   level._id_0A41["zombie_exploder"]["get_action_params"] = ::_id_AB91;
   level._id_0A41["zombie_exploder"]["move_mode"] = ::_id_AB97;
   level._id_0A41["zombie_exploder"]["on_damaged"] = ::_id_AB9B;
-  level._id_62B3["drag_explosive_zm"] = ::_id_62A2;
+  level.modifyweapondamage["drag_explosive_zm"] = ::_id_62A2;
   level._id_ABA1 = spawn("script_origin", (0, 0, 0));
   level._id_ABA1.team = "allies";
   var_0 = spawnStruct();
@@ -24,7 +24,7 @@ init() {
   var_0._id_5ED2["bomber"]["whole_body"] = "zom_bomber_base";
   var_0._id_5ED2["bomber"]["drag_weapons"] = ["zom_bomb"];
   var_0._id_4C12 = 2.0;
-  var_0._id_60E2 = 20;
+  var_0.meleedamage = 20;
   var_0._id_8302 = 65;
   var_0._id_8303 = 15;
   var_0.parenttype = "zombie_generic";
@@ -50,7 +50,7 @@ _id_AB94(var_0) {
     return;
   }
   foreach(var_2 in self._id_4BF4) {
-    if(var_2._id_95A6 == var_0) {
+    if(var_2.tag == var_0) {
       return var_2;
     }
   }
@@ -59,11 +59,11 @@ _id_AB94(var_0) {
 _id_AB9F(var_0, var_1, var_2) {
   _id_054D::_id_6BD7(var_0, var_1, var_2);
   self._id_4BF4 = [];
-  self _meth_85A1("zombie_exploder");
+  self set_target_tracking_disabled("zombie_exploder");
 
   foreach(var_4 in ["j_headb"]) {
     var_5 = spawnStruct();
-    var_5._id_95A6 = var_4;
+    var_5.tag = var_4;
     var_5.maxhealth = 0.3 * self.maxhealth;
     var_5.health = var_5.maxhealth;
     self._id_4BF4 = common_scripts\utility::_id_0F6F(self._id_4BF4, var_5);
@@ -93,7 +93,7 @@ _id_ABA0() {
     if(_id_053C::_id_4F8C()) {
       continue;
     }
-    if(_id_053C::_id_4F84()) {
+    if(_id_053C::humanoid_begin_melee()) {
       continue;
     }
     if(_id_053C::_id_4F9B()) {
@@ -128,13 +128,13 @@ _id_51C4() {
 
 _id_AB9A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(common_scripts\utility::_id_562E(self._id_392C)) {
-    if(common_scripts\utility::_id_562E(self._id_6734)) {
+    if(common_scripts\utility::_id_562E(self.nopickups)) {
       self._id_3937 _id_3940();
     } else {
       thread _id_AB90();
     }
 
-    if(isPlayer(var_1) && issubstr(var_4, "shovel") && maps\mp\_utility::_id_4571() == "mp_zombie_nest_01") {
+    if(isPlayer(var_1) && issubstr(var_4, "shovel") && maps\mp\_utility::getmapname() == "mp_zombie_nest_01") {
       var_1 maps\mp\gametypes\zombies::_id_47C8("ZM_SHOVEL");
     }
   }
@@ -148,7 +148,7 @@ _id_AB99(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   if(!common_scripts\utility::_id_562E(self.exploder_godmode) && _id_0547::_id_5565(var_10, _tolower("TAG_WEAPON"))) {
     if(common_scripts\utility::_id_562E(self._id_392C)) {
       if(isDefined(var_5) && isDefined(var_8) && isDefined(var_1) && isPlayer(var_1)) {
-        var_11 = var_1 _meth_850B(var_5, var_8);
+        var_11 = var_1 getweapondamagelocationmultiplier(var_5, var_8);
 
         if(var_11 != 0) {
           var_2 = int(var_2 / var_11);
@@ -174,10 +174,10 @@ _id_AB99(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
       if(var_12.health <= 0) {
         var_12.health = 0;
         self._id_4B34 = 1;
-        self notify(_id_40E3(var_12._id_95A6));
-        var_13 = var_12._id_95A6 + " taken out";
+        self notify(_id_40E3(var_12.tag));
+        var_13 = var_12.tag + " taken out";
 
-        switch (var_12._id_95A6) {
+        switch (var_12.tag) {
           case "j_head":
             var_13 = "\nExploder can't melee";
             self._id_1723 = 1;
@@ -189,7 +189,7 @@ _id_AB99(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
               var_13 = "\nExploder dropped bomb";
               _id_AB90();
 
-              if(isPlayer(var_1) && !_id_0547::_id_577E(var_1)) {
+              if(isPlayer(var_1) && !_id_0547::isplayerinlaststand(var_1)) {
                 var_1 thread _id_054E::_id_18EC();
               }
 
@@ -202,7 +202,7 @@ _id_AB99(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     }
   }
 
-  _id_054D::_id_6BD3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+  _id_054D::onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
   self._id_6CC4 = undefined;
 }
 
@@ -375,7 +375,7 @@ zombie_exploder_ensure_die_from_attached_explosion(var_0) {
 }
 
 _id_AB9C(var_0, var_1) {
-  var_2 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_exploder"), level._id_A980);
+  var_2 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_exploder"), level.wavecounter);
   var_3 = int(1.1 * var_2);
   var_4 = int(0.5 * var_2);
   radiusdamage(var_0, 92, var_3, var_4, var_1, "MOD_EXPLOSIVE", "drag_explosive_zombie_zm");
@@ -406,7 +406,7 @@ _id_AB97() {
     }
   }
 
-  self._id_64C2 = var_1 * _id_054D::_id_4440();
+  self.moveratescale = var_1 * _id_054D::_id_4440();
   self._id_2FA4 = var_0 != "walk";
   return var_0;
 }
@@ -461,7 +461,7 @@ _id_AB96() {
     if(var_1 > _squared(_id_AB92())) {
       continue;
     }
-    if(!_id_0547::_id_4B2C()) {
+    if(!_id_0547::has_entered_game()) {
       continue;
     }
     if(isPlayer(var_0) && !self agentcanseesentient(var_0)) {
@@ -474,11 +474,11 @@ _id_AB96() {
 _id_3932() {
   var_0 = self;
 
-  if(!common_scripts\utility::_id_562E(var_0._id_5759)) {
+  if(!common_scripts\utility::_id_562E(var_0.ismoving)) {
     return;
   }
   var_0 notify("killanimscript");
-  var_0 thread maps\mp\agents\humanoid\_humanoid_move::_id_2603();
+  var_0 thread maps\mp\agents\humanoid\_humanoid_move::continuemovement();
 }
 
 _id_3942() {
@@ -531,7 +531,7 @@ should_explode(var_0, var_1) {
     return 0;
   }
 
-  if(isDefined(common_scripts\utility::_id_4461(var_0 _id_4183(), var_1, 92))) {
+  if(isDefined(common_scripts\utility::getclosest(var_0 _id_4183(), var_1, 92))) {
     return 1;
   }
 
@@ -600,8 +600,8 @@ _id_2AD8(var_0, var_1, var_2, var_3, var_4) {
 
   for(;;) {
     foreach(var_9, var_8 in var_6) {
-      thread maps\mp\_utility::_id_33D8(var_0, var_0 + var_8, 1.0, var_3);
-      thread maps\mp\_utility::_id_33D8(var_0 + var_8, var_0 + var_8 * 2, 1.0, var_5[var_9]);
+      thread maps\mp\_utility::drawline(var_0, var_0 + var_8, 1.0, var_3);
+      thread maps\mp\_utility::drawline(var_0 + var_8, var_0 + var_8 * 2, 1.0, var_5[var_9]);
     }
 
     wait 1.0;

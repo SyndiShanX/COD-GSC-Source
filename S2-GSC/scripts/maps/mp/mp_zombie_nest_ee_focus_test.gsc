@@ -4,10 +4,10 @@
 ************************************************************/
 
 main() {
-  level._id_6662 = common_scripts\utility::_id_46B7("objective_testing_spawners", "targetname");
-  level._id_6664 = common_scripts\utility::_id_46B7("objective_testing_spawners_salt", "targetname");
-  level._id_6663 = common_scripts\utility::_id_46B7("objective_testing_spawners_com", "targetname");
-  level._id_6661 = common_scripts\utility::_id_46B7("objective_testing_spawners_blimp", "targetname");
+  level._id_6662 = common_scripts\utility::getstructarray("objective_testing_spawners", "targetname");
+  level._id_6664 = common_scripts\utility::getstructarray("objective_testing_spawners_salt", "targetname");
+  level._id_6663 = common_scripts\utility::getstructarray("objective_testing_spawners_com", "targetname");
+  level._id_6661 = common_scripts\utility::getstructarray("objective_testing_spawners_blimp", "targetname");
 }
 
 _id_3DA6() {
@@ -37,7 +37,7 @@ _id_8C92() {
   level._id_ABEC maps\mp\_utility::_id_5DC7();
   level._id_ABED maps\mp\_utility::_id_5DC7();
   level._id_AC12 maps\mp\_utility::_id_5DC7();
-  var_0 = maps\mp\agents\_agent_utility::_id_43FD("all");
+  var_0 = maps\mp\agents\_agent_utility::getactiveagentsoftype("all");
 
   foreach(var_2 in var_0) {
     if(_id_0547::_id_5565(var_2._id_0A4B, "zombie_boss_village")) {

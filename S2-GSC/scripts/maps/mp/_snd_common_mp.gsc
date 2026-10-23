@@ -5,11 +5,11 @@
 
 _id_8D80() {
   _id_7BA3();
-  thread _id_51D8();
+  thread init_globals();
   thread _id_8D81();
 }
 
-_id_51D8() {}
+init_globals() {}
 
 _id_8D81() {
   level._id_071D._id_351F = 0;
@@ -38,46 +38,46 @@ _id_8D82() {
 }
 
 _id_7BA3() {
-  _id_0378::_id_8DC7("player_connect", ::_id_7247);
-  _id_0378::_id_8DC7("mp_headshot_killed", ::_id_64FD);
-  _id_0378::_id_8DC7("mp_headshot_killer", ::_id_64FE);
-  _id_0378::_id_8DC7("snd_mp_player_death", ::_id_8D83);
-  _id_0378::_id_8DC7("ks_carepackage_flyby", ::_id_5ABE);
-  _id_0378::_id_8DC7("carepackage_airplane", ::_id_1FF6);
-  _id_0378::_id_8DC7("ks_carepackage_parachute", ::_id_1FF8);
-  _id_0378::_id_8DC7("ks_carepackage_firstImpact", ::_id_1FF7);
-  _id_0378::_id_8DC7("ks_emergency_carepackage", ::_id_35D8);
-  _id_0378::_id_8DC7("ks_paratroopers_parachute", ::_id_6E73);
-  _id_0378::_id_8DC7("aud_player_parachute_open", ::player_parachute_open);
-  _id_0378::_id_8DC7("ks_uav_deathspin", ::_id_5AC6);
-  _id_0378::_id_8DC7("ks_uav_explode", ::_id_5AC7);
-  _id_0378::_id_8DC7("ks_flak_cannon_explo", ::_id_5AC2);
-  _id_0378::_id_8DC7("ks_firebomb_explo", ::_id_5AC0);
-  _id_0378::_id_8DC7("ks_firebomb_explo_fire", ::_id_5AC1);
-  _id_0378::_id_8DC7("ks_bombing_run_location_selected", ::_id_5ABD);
-  _id_0378::_id_8DC7("ks_bombing_run_flyby", ::_id_5ABC);
-  _id_0378::_id_8DC7("ks_fighterstrike_flyby", ::_id_5ABF);
-  _id_0378::_id_8DC7("ks_projectile_fired", ::_id_5AC5);
-  _id_0378::_id_8DC7("ks_incoming_projectile", ::_id_5AC4);
-  _id_0378::_id_8DC7("ks_fritzx_dropped", ::_id_5AC3);
-  _id_0378::_id_8DC7("aud_v2_incoming", ::v2_incoming);
-  _id_0378::_id_8DC7("aud_v2_explosion", ::v2_explosion);
-  _id_0378::_id_8DC7("aud_player_parachute_submix", ::player_parachute_submix);
-  _id_0378::_id_8DC7("aud_serum_syringe_foley", ::serum_syringe_foley);
-  _id_0378::_id_8DC7("aud_serum_buff_start", ::serum_buff_start);
-  _id_0378::_id_8DC7("aud_serum_buff_end", ::serum_buff_end);
-  _id_0378::_id_8DC7("wpn_bouncingbetty_trigger", ::_id_AA91);
-  _id_0378::_id_8DC7("wpn_bouncingbetty_spin", ::_id_AA90);
-  _id_0378::_id_8DC7("wpn_bouncingbetty_exp", ::_id_AA8F);
-  _id_0378::_id_8DC7("aud_mp_zombie_relic_pickup", ::mp_zombie_relic_pickup);
-  _id_0378::_id_8DC7("aud_mp_zombie_relic_drop", ::mp_zombie_relic_drop);
-  _id_0378::_id_8DC7("aud_mp_zombie_relic_soul_captured", ::mp_zombie_relic_soul_captured);
-  _id_0378::_id_8DC7("aud_mp_zombie_relic_teleport", ::mp_zombie_relic_teleport);
-  _id_0378::_id_8DC7("aud_zombie_spawn", ::undead_hardpoint_zombie_spawn);
-  _id_0378::_id_8DC7("hqs_level_up_flag_start", ::_id_4F26);
-  _id_0378::_id_8DC7("prestige_fanfare_aircraft_flying", ::_id_4F27);
-  _id_0378::_id_8DC7("prestige_fireworks_start", ::_id_4F28);
-  _id_0378::_id_8DC7("prestige_level_up_flag_start", ::_id_4F29);
+  _id_0378::snd_register_message("player_connect", ::_id_7247);
+  _id_0378::snd_register_message("mp_headshot_killed", ::_id_64FD);
+  _id_0378::snd_register_message("mp_headshot_killer", ::_id_64FE);
+  _id_0378::snd_register_message("snd_mp_player_death", ::_id_8D83);
+  _id_0378::snd_register_message("ks_carepackage_flyby", ::_id_5ABE);
+  _id_0378::snd_register_message("carepackage_airplane", ::_id_1FF6);
+  _id_0378::snd_register_message("ks_carepackage_parachute", ::_id_1FF8);
+  _id_0378::snd_register_message("ks_carepackage_firstImpact", ::_id_1FF7);
+  _id_0378::snd_register_message("ks_emergency_carepackage", ::_id_35D8);
+  _id_0378::snd_register_message("ks_paratroopers_parachute", ::_id_6E73);
+  _id_0378::snd_register_message("aud_player_parachute_open", ::player_parachute_open);
+  _id_0378::snd_register_message("ks_uav_deathspin", ::_id_5AC6);
+  _id_0378::snd_register_message("ks_uav_explode", ::_id_5AC7);
+  _id_0378::snd_register_message("ks_flak_cannon_explo", ::_id_5AC2);
+  _id_0378::snd_register_message("ks_firebomb_explo", ::_id_5AC0);
+  _id_0378::snd_register_message("ks_firebomb_explo_fire", ::_id_5AC1);
+  _id_0378::snd_register_message("ks_bombing_run_location_selected", ::_id_5ABD);
+  _id_0378::snd_register_message("ks_bombing_run_flyby", ::_id_5ABC);
+  _id_0378::snd_register_message("ks_fighterstrike_flyby", ::_id_5ABF);
+  _id_0378::snd_register_message("ks_projectile_fired", ::_id_5AC5);
+  _id_0378::snd_register_message("ks_incoming_projectile", ::_id_5AC4);
+  _id_0378::snd_register_message("ks_fritzx_dropped", ::_id_5AC3);
+  _id_0378::snd_register_message("aud_v2_incoming", ::v2_incoming);
+  _id_0378::snd_register_message("aud_v2_explosion", ::v2_explosion);
+  _id_0378::snd_register_message("aud_player_parachute_submix", ::player_parachute_submix);
+  _id_0378::snd_register_message("aud_serum_syringe_foley", ::serum_syringe_foley);
+  _id_0378::snd_register_message("aud_serum_buff_start", ::serum_buff_start);
+  _id_0378::snd_register_message("aud_serum_buff_end", ::serum_buff_end);
+  _id_0378::snd_register_message("wpn_bouncingbetty_trigger", ::_id_AA91);
+  _id_0378::snd_register_message("wpn_bouncingbetty_spin", ::_id_AA90);
+  _id_0378::snd_register_message("wpn_bouncingbetty_exp", ::_id_AA8F);
+  _id_0378::snd_register_message("aud_mp_zombie_relic_pickup", ::mp_zombie_relic_pickup);
+  _id_0378::snd_register_message("aud_mp_zombie_relic_drop", ::mp_zombie_relic_drop);
+  _id_0378::snd_register_message("aud_mp_zombie_relic_soul_captured", ::mp_zombie_relic_soul_captured);
+  _id_0378::snd_register_message("aud_mp_zombie_relic_teleport", ::mp_zombie_relic_teleport);
+  _id_0378::snd_register_message("aud_zombie_spawn", ::undead_hardpoint_zombie_spawn);
+  _id_0378::snd_register_message("hqs_level_up_flag_start", ::_id_4F26);
+  _id_0378::snd_register_message("prestige_fanfare_aircraft_flying", ::_id_4F27);
+  _id_0378::snd_register_message("prestige_fireworks_start", ::_id_4F28);
+  _id_0378::snd_register_message("prestige_level_up_flag_start", ::_id_4F29);
 }
 
 _id_7247() {
@@ -98,7 +98,7 @@ _id_8D7F() {
 
   for(;;) {
     self waittill("spawned_player");
-    _id_0378::_id_8D74("spawned");
+    _id_0378::snd_message("spawned");
     wait 1;
 
     if(!_func_367()) {
@@ -237,7 +237,7 @@ _id_6E73() {
   var_1 = 0.5;
   var_2 = 0.5;
   var_3 = _id_0380::_id_288B("ks_ptps_parachute_lp", undefined, var_0, var_1);
-  var_0 common_scripts\utility::_id_A70A("paratrooper_released", "detach");
+  var_0 common_scripts\utility::waittill_any("paratrooper_released", "detach");
   _id_0380::_stoplocalsound(var_3, var_2);
   _id_0380::_id_2889("ks_ptps_parachute_release", undefined, var_0.origin);
 }
@@ -245,7 +245,7 @@ _id_6E73() {
 player_parachute_open() {
   _id_0380::_id_6847("player_parachute_lp", self, self, 0, 1, 1, self, "aud_stop_parachute_loop");
   _id_0380::_id_6847("player_parachute_jingles_lp", self, self, 0, 1, 1, self, "aud_stop_parachute_loop");
-  common_scripts\utility::_id_A70A("paratrooper_released", "detach");
+  common_scripts\utility::waittill_any("paratrooper_released", "detach");
   _id_0380::_id_6844("player_parachute_release", self, self);
   self notify("aud_stop_parachute_loop");
 }
@@ -356,7 +356,7 @@ v2_explosion() {
 
 player_parachute_submix() {
   self clientaddsoundsubmix("mp_tunisia_parachute_mix");
-  common_scripts\utility::_id_A70A("paratrooper_released", "detach");
+  common_scripts\utility::waittill_any("paratrooper_released", "detach");
   self clientclearsoundsubmix("mp_tunisia_parachute_mix");
 }
 
@@ -394,18 +394,18 @@ mp_zombie_relic_pickup() {
 
 mp_zombie_relic_drop() {
   var_0 = self;
-  level._id_11CB.relic_drop = _id_0380::_id_288B("mp_zombie_relic_drop", undefined, var_0);
+  level.aud.relic_drop = _id_0380::_id_288B("mp_zombie_relic_drop", undefined, var_0);
 }
 
 mp_zombie_relic_soul_captured(var_0) {
-  _id_0380::_stoplocalsound(level._id_11CB.relic_drop);
+  _id_0380::_stoplocalsound(level.aud.relic_drop);
   level waittill("mp_relic_teleport_start");
-  _id_0380::_stoplocalsound(level._id_11CB.relic_teleport);
+  _id_0380::_stoplocalsound(level.aud.relic_teleport);
 }
 
 mp_zombie_relic_teleport(var_0) {
   level notify("mp_relic_teleport_start");
-  level._id_11CB.relic_teleport = _id_0380::_id_2889("mp_zombie_relic_teleport", undefined, var_0);
+  level.aud.relic_teleport = _id_0380::_id_2889("mp_zombie_relic_teleport", undefined, var_0);
 }
 
 undead_hardpoint_zombie_spawn(var_0) {

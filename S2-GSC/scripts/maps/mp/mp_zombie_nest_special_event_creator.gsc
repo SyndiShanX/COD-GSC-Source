@@ -55,7 +55,7 @@ _id_170B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     thread maps\mp\mp_zombie_nest_special_event_creator_util::_id_9408();
   }
 
-  _id_0378::_id_8D74("zombie_soul_suck_threshold", self.origin);
+  _id_0378::snd_message("zombie_soul_suck_threshold", self.origin);
 
   if(isDefined(var_4)) {
     _id_0547::_id_2D8C(var_4);
@@ -99,8 +99,8 @@ _id_3135(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   maps\mp\mp_zombie_nest_special_event_creator_interface::_id_7C68(var_11);
 
   for(var_17 = 0; var_17 < var_2.size; var_17++) {
-    var_2[var_17] notify(var_4._id_94D4);
+    var_2[var_17] notify(var_4.success);
   }
 
-  level notify(var_4._id_94D4);
+  level notify(var_4.success);
 }

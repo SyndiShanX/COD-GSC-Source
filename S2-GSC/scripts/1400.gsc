@@ -44,7 +44,7 @@ _id_4716(var_0) {
 }
 
 _id_4717(var_0) {
-  if(_id_056B::_id_9D19(var_0._id_6F63)) {
+  if(_id_056B::_id_9D19(var_0.perkname)) {
     return 0;
   }
 

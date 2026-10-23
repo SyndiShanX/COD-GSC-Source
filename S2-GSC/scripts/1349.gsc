@@ -16,7 +16,7 @@ init() {
     level._id_9550 = [];
   }
 
-  var_0 = common_scripts\utility::_id_46B7("switch", "targetname");
+  var_0 = common_scripts\utility::getstructarray("switch", "targetname");
   common_scripts\utility::_id_0FB2(var_0, ::_id_955B);
 }
 
@@ -43,15 +43,15 @@ _id_955B() {
     _id_954A(var_2);
   }
 
-  var_4 = common_scripts\utility::_id_46B7(self.target, "targetname");
+  var_4 = common_scripts\utility::getstructarray(self.target, "targetname");
 
   foreach(var_6 in var_4) {
     _id_955A(var_6);
   }
 
-  common_scripts\utility::_id_3799("needs_update");
+  common_scripts\utility::ent_flag_init("needs_update");
 
-  if(!common_scripts\utility::_id_3C83(self.getnegotiationnextnode)) {
+  if(!common_scripts\utility::flag_exist(self.getnegotiationnextnode)) {
     common_scripts\utility::flag_init(self.getnegotiationnextnode);
   }
 
@@ -75,10 +75,10 @@ _id_955B() {
   }
 
   thread _id_9561();
-  common_scripts\utility::_id_379A("needs_update");
+  common_scripts\utility::ent_flag_set("needs_update");
 
   for(;;) {
-    common_scripts\utility::_id_379C("needs_update");
+    common_scripts\utility::ent_flag_wait("needs_update");
     _id_955F();
   }
 }
@@ -103,26 +103,26 @@ _id_954A(var_0) {
 
   switch (var_1) {
     case "trigger":
-      self._id_9D65 = var_0;
+      self.trigger = var_0;
       var_0._id_9555 = self;
       break;
     case "anim_model":
-      self._id_6298 = var_0;
+      self.modelent = var_0;
 
-      if(isDefined(self._id_6298.setflaggedanimknoball)) {
-        var_2 = strtok(self._id_6298.setflaggedanimknoball, ",");
-        self._id_6298._id_504F = var_2[0];
-        self._id_6298._id_9E90 = var_2[1];
-        self._id_6298._id_5051 = var_2[2];
-        self._id_6298._id_9E87 = var_2[3];
+      if(isDefined(self.modelent.setflaggedanimknoball)) {
+        var_2 = strtok(self.modelent.setflaggedanimknoball, ",");
+        self.modelent._id_504F = var_2[0];
+        self.modelent._id_9E90 = var_2[1];
+        self.modelent._id_5051 = var_2[2];
+        self.modelent._id_9E87 = var_2[3];
       }
 
       break;
     case "show":
-      self._id_8BF7[self._id_8BF7.size] = var_0;
+      self.showents[self.showents.size] = var_0;
       break;
     case "hide":
-      self._id_4D07[self._id_4D07.size] = var_0;
+      self.hideents[self.hideents.size] = var_0;
       break;
     default:
   }
@@ -144,34 +144,34 @@ _id_955A(var_0) {
 }
 
 _id_9561() {
-  if(!isDefined(self._id_9D65)) {
+  if(!isDefined(self.trigger)) {
     return;
   }
   for(;;) {
-    self._id_9D65 waittill("trigger", var_0);
+    self.trigger waittill("trigger", var_0);
 
     if(_id_9551()) {
       if(_id_9552()) {
         if(_id_9547()) {
-          common_scripts\utility::_id_3C7B(self.getnegotiationnextnode);
-          common_scripts\utility::_id_379A("needs_update");
+          common_scripts\utility::flag_clear(self.getnegotiationnextnode);
+          common_scripts\utility::ent_flag_set("needs_update");
         }
 
         continue;
       }
 
       common_scripts\utility::flag_set(self.getnegotiationnextnode);
-      common_scripts\utility::_id_379A("needs_update");
+      common_scripts\utility::ent_flag_set("needs_update");
     }
   }
 }
 
 _id_9560(var_0) {
   for(;;) {
-    common_scripts\utility::_id_3C9F(var_0);
-    common_scripts\utility::_id_379A("needs_update");
+    common_scripts\utility::flag_wait(var_0);
+    common_scripts\utility::ent_flag_set("needs_update");
     common_scripts\utility::flag_waitopen(var_0);
-    common_scripts\utility::_id_379A("needs_update");
+    common_scripts\utility::ent_flag_set("needs_update");
   }
 }
 
@@ -182,7 +182,7 @@ _id_9551() {
 _id_7AC7() {
   if(isDefined(self.setgoalpos)) {
     foreach(var_1 in self.setgoalpos) {
-      if(!common_scripts\utility::_id_3C77(var_1)) {
+      if(!common_scripts\utility::flag(var_1)) {
         return var_1;
       }
     }
@@ -190,7 +190,7 @@ _id_7AC7() {
 
   if(isDefined(self.checkgrenadethrowpos)) {
     foreach(var_1 in self.checkgrenadethrowpos) {
-      if(common_scripts\utility::_id_3C77(var_1)) {
+      if(common_scripts\utility::flag(var_1)) {
         return var_1;
       }
     }
@@ -200,7 +200,7 @@ _id_7AC7() {
 }
 
 _id_9552() {
-  return common_scripts\utility::_id_3C77(self.getnegotiationnextnode);
+  return common_scripts\utility::flag(self.getnegotiationnextnode);
 }
 
 _id_9547() {
@@ -208,7 +208,7 @@ _id_9547() {
 }
 
 _id_955F() {
-  if(isDefined(self._id_9D65)) {
+  if(isDefined(self.trigger)) {
     if(_id_9551()) {
       if(_id_9552()) {
         var_0 = level._id_954E[self.getnegotiationnextnode];
@@ -222,10 +222,10 @@ _id_955F() {
     }
 
     if(isDefined(var_0)) {
-      self._id_9D65 setHintString(var_0);
-      self._id_9D65 makeusable();
+      self.trigger setHintString(var_0);
+      self.trigger makeusable();
     } else
-      self._id_9D65 makeunusable();
+      self.trigger makeunusable();
   }
 
   if(_id_9552()) {
@@ -262,17 +262,17 @@ _id_955F() {
     }
   }
 
-  if(isDefined(self._id_6298)) {
+  if(isDefined(self.modelent)) {
     if(isDefined(self._id_9546) && self._id_9546 != _id_9552()) {
       if(_id_9552()) {
-        var_19 = self._id_6298._id_9E90;
+        var_19 = self.modelent._id_9E90;
       } else {
-        var_19 = self._id_6298._id_9E87;
+        var_19 = self.modelent._id_9E87;
       }
 
       if(isDefined(var_19)) {
-        self._id_6298 scriptmodelplayanim(var_19, "switch_transition_anim");
-        self._id_6298 waittillmatch("switch_transition_anim", "end");
+        self.modelent scriptmodelplayanim(var_19, "switch_transition_anim");
+        self.modelent waittillmatch("switch_transition_anim", "end");
       }
 
       self._id_9546 = undefined;
@@ -280,42 +280,42 @@ _id_955F() {
 
     if(!isDefined(self._id_9546) || self._id_9546 != _id_9552()) {
       if(_id_9552()) {
-        var_19 = self._id_6298._id_5051;
+        var_19 = self.modelent._id_5051;
       } else {
-        var_19 = self._id_6298._id_504F;
+        var_19 = self.modelent._id_504F;
       }
 
-      self._id_6298 scriptmodelplayanim(var_19);
+      self.modelent scriptmodelplayanim(var_19);
       self._id_9546 = _id_9552();
     }
   }
 
-  common_scripts\utility::_id_3796("needs_update");
+  common_scripts\utility::ent_flag_clear("needs_update");
 }
 
 _id_954C(var_0) {
-  if(!isDefined(level._effect[var_0._id_81BB])) {
-    level._effect[var_0._id_81BB] = loadfx(var_0._id_81BB);
+  if(!isDefined(level._effect[var_0.script_fxid])) {
+    level._effect[var_0.script_fxid] = loadfx(var_0.script_fxid);
   }
 }
 
 _id_954D(var_0) {
-  if(isDefined(var_0._id_3F3F)) {
+  if(isDefined(var_0.fx_ent)) {
     return;
   }
-  if(isDefined(var_0._id_81C7)) {
+  if(isDefined(var_0.script_ghettotag)) {
     var_0._id_5DA5 = spawn("script_model", var_0.origin);
     var_0._id_5DA5.angles = var_0.angles;
     var_0._id_5DA5 setModel("tag_origin");
-    var_0._id_5DA5 linkTo(self._id_6298, var_0._id_81C7);
-    var_0._id_3F3F = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_0._id_81BB), var_0._id_5DA5, "tag_origin");
+    var_0._id_5DA5 linkTo(self.modelent, var_0.script_ghettotag);
+    var_0.fx_ent = _spawnlinkedfx(common_scripts\utility::getfx(var_0.script_fxid), var_0._id_5DA5, "tag_origin");
   } else
-    var_0._id_3F3F = _spawnfx(common_scripts\utility::_id_44F5(var_0._id_81BB), var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
+    var_0.fx_ent = _spawnfx(common_scripts\utility::getfx(var_0.script_fxid), var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
 
   if(gettime() < 500) {
-    _triggerfx(var_0._id_3F3F, 0.5);
+    _triggerfx(var_0.fx_ent, 0.5);
   } else {
-    _triggerfx(var_0._id_3F3F);
+    _triggerfx(var_0.fx_ent);
   }
 }
 
@@ -326,7 +326,7 @@ _id_954B(var_0) {
     var_0._id_5DA5 delete();
   }
 
-  if(isDefined(var_0._id_3F3F)) {
-    var_0._id_3F3F delete();
+  if(isDefined(var_0.fx_ent)) {
+    var_0.fx_ent delete();
   }
 }

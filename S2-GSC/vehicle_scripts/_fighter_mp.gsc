@@ -42,11 +42,11 @@ fighterinitmg(var_0) {
     var_1 = self.setlookatanimnodes;
   }
 
-  self._id_615C = [];
+  self.mgturret = [];
 
   foreach(var_3 in var_0) {
-    var_4 = self gettagangles(var_3._id_95A6);
-    var_5 = self gettagorigin(var_3._id_95A6);
+    var_4 = self gettagangles(var_3.tag);
+    var_5 = self gettagorigin(var_3.tag);
     var_6 = _combineangles(var_4, (0, -1 * var_1, 0));
     var_7 = undefined;
 
@@ -62,21 +62,21 @@ fighterinitmg(var_0) {
     var_8 dontinterpolate();
 
     if(isDefined(var_3._id_6A1B)) {
-      var_8 linkTo(self, var_3._id_95A6, var_3._id_6A1B, (0, -1 * var_1, 0));
+      var_8 linkTo(self, var_3.tag, var_3._id_6A1B, (0, -1 * var_1, 0));
     } else {
-      var_8 linkTo(self, var_3._id_95A6, (0, 0, 0), (0, -1 * var_1, 0));
+      var_8 linkTo(self, var_3.tag, (0, 0, 0), (0, -1 * var_1, 0));
     }
 
     var_8 setModel(var_3.model);
-    var_8._id_5847 = 1;
-    var_8._id_6DB3 = self;
+    var_8.isvehicleattached = 1;
+    var_8.ownervehicle = self;
     var_8 makeusable();
 
     if(isDefined(var_3._id_00FC)) {
       var_8._id_00FC = var_3._id_00FC;
     }
 
-    self._id_615C[self._id_615C.size] = var_8;
+    self.mgturret[self.mgturret.size] = var_8;
   }
 }
 
@@ -85,11 +85,11 @@ buildfighterturret(var_0, var_1, var_2, var_3, var_4) {
     level._id_A372 = [];
   }
 
-  var_5 = level._id_A635;
+  var_5 = level.vtclassname;
   var_6 = spawnStruct();
   var_6._id_231A = var_0;
   var_6._id_5135 = var_1;
-  var_6._id_95A6 = var_2;
+  var_6.tag = var_2;
   var_6.model = var_3;
 
   if(isDefined(var_4) && var_4 == 1) {
@@ -111,12 +111,12 @@ _id_8A4D(var_0) {
 }
 
 destroyturrets() {
-  foreach(var_1 in self._id_615C) {
+  foreach(var_1 in self.mgturret) {
     var_1 makeunusable();
     var_1 delete();
   }
 
-  self._id_615C = undefined;
+  self.mgturret = undefined;
 }
 
 deathcleanup() {
@@ -128,7 +128,7 @@ deathcleanup() {
   }
 }
 
-_id_51FB(var_0) {
+init_local(var_0) {
   _id_8A4D(var_0);
   self._id_2A89 = "tag_trail_fx";
   self._id_9BDD = "tag_trail_fx";
@@ -152,8 +152,8 @@ _id_51FB(var_0) {
 }
 
 spawn_tag_origin_internal() {
-  if(isDefined(level._id_5FEB)) {
-    var_0 = spawn("script_model", level._id_5FEB);
+  if(isDefined(level.mapcenter)) {
+    var_0 = spawn("script_model", level.mapcenter);
   } else {
     var_0 = spawn("script_model", (0, 0, 0));
   }
@@ -184,7 +184,7 @@ _id_6DB8() {
   }
 
   var_1 = 0;
-  var_2 = common_scripts\utility::_id_44F5("20mm_metal_impact_1");
+  var_2 = common_scripts\utility::getfx("20mm_metal_impact_1");
   var_3 = -1;
   var_4 = 3;
 
@@ -206,7 +206,7 @@ _id_6DB8() {
     }
 
     var_1 = 1;
-    var_2 = common_scripts\utility::_id_44F5("20mm_metal_impact_1");
+    var_2 = common_scripts\utility::getfx("20mm_metal_impact_1");
     var_3 = 1.5;
     var_4 = 9;
 
@@ -257,37 +257,37 @@ _id_6DB9(var_0, var_1) {
 _id_721B() {
   self endon("death");
   self endon("stop_engineeffects");
-  common_scripts\utility::_id_3799("engineeffects");
-  common_scripts\utility::_id_379A("engineeffects");
+  common_scripts\utility::ent_flag_init("engineeffects");
+  common_scripts\utility::ent_flag_set("engineeffects");
   var_0 = undefined;
 
   if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp") {
-    var_0 = common_scripts\utility::_id_44F5("p47_exhaust");
+    var_0 = common_scripts\utility::getfx("p47_exhaust");
   } else if(self._id_01C8 == "ger_fighter_bf109_player_mp") {
-    var_0 = common_scripts\utility::_id_44F5("bf109_exhaust");
+    var_0 = common_scripts\utility::getfx("bf109_exhaust");
   }
 
   if(isDefined(var_0)) {
     for(;;) {
-      common_scripts\utility::_id_379C("engineeffects");
+      common_scripts\utility::ent_flag_wait("engineeffects");
       _playFXOnTag(var_0, self, self._id_9BDD);
-      common_scripts\utility::_id_37A1("engineeffects");
+      common_scripts\utility::ent_flag_waitopen("engineeffects");
       _stopFXOnTag(var_0, self, self._id_9BDD);
     }
   }
 }
 
 _id_93FF() {
-  common_scripts\utility::_id_3796("engineeffects");
+  common_scripts\utility::ent_flag_clear("engineeffects");
 }
 
 _id_720A() {
   var_0 = undefined;
 
   if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp") {
-    var_0 = common_scripts\utility::_id_44F5("p47_contrail_ext_vel");
+    var_0 = common_scripts\utility::getfx("p47_contrail_ext_vel");
   } else if(self._id_01C8 == "ger_fighter_bf109_player_mp") {
-    var_0 = common_scripts\utility::_id_44F5("bf109_contrail_ext_vel");
+    var_0 = common_scripts\utility::getfx("bf109_contrail_ext_vel");
   }
 
   if(isDefined(var_0)) {
@@ -299,9 +299,9 @@ _id_93FB() {
   var_0 = undefined;
 
   if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp") {
-    var_0 = common_scripts\utility::_id_44F5("p47_contrail_ext_vel");
+    var_0 = common_scripts\utility::getfx("p47_contrail_ext_vel");
   } else if(self._id_01C8 == "ger_fighter_bf109_player_mp") {
-    var_0 = common_scripts\utility::_id_44F5("bf109_contrail_ext_vel");
+    var_0 = common_scripts\utility::getfx("bf109_contrail_ext_vel");
   }
 
   if(isDefined(var_0)) {
@@ -319,9 +319,9 @@ _id_74EE() {
   var_0 = undefined;
 
   if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp") {
-    var_0 = common_scripts\utility::_id_44F5("p47_wing_evap");
+    var_0 = common_scripts\utility::getfx("p47_wing_evap");
   } else if(self._id_01C8 == "ger_fighter_bf109_player_mp") {
-    var_0 = common_scripts\utility::_id_44F5("bf109_wing_evap");
+    var_0 = common_scripts\utility::getfx("bf109_wing_evap");
   }
 
   if(isDefined(var_0)) {
@@ -333,9 +333,9 @@ _id_941A() {
   var_0 = undefined;
 
   if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp") {
-    var_0 = common_scripts\utility::_id_44F5("p47_wing_evap");
+    var_0 = common_scripts\utility::getfx("p47_wing_evap");
   } else if(self._id_01C8 == "ger_fighter_bf109_player_mp") {
-    var_0 = common_scripts\utility::_id_44F5("bf109_wing_evap");
+    var_0 = common_scripts\utility::getfx("bf109_wing_evap");
   }
 
   if(isDefined(var_0)) {

@@ -3,68 +3,68 @@
  * Script: scripts\maps\mp\hub_vl_firingrange.gsc
 **************************************************/
 
-_id_51D0() {
+init_firingrange() {
   var_0 = spawnStruct();
-  var_0._id_3E6C = _getEnt("firingrange_start", "targetname");
-  var_0._id_0C3A = _id_3C36();
-  var_0._id_0BDC = _id_3C30();
-  var_0._id_9C7C = [];
-  var_0._id_9C7D = [];
-  var_0._id_0C3B = _id_3C37();
-  var_0._id_0C39 = _id_3C34();
-  var_0._id_0C38 = _id_3C33();
-  var_0._id_0BDA = _id_3C2F();
-  var_0._id_0C37 = _id_3C35();
-  var_0._id_0BE1 = _id_3C32();
-  var_0._id_0C3C = _id_3C31();
-  var_0._id_0BD8 = _id_3C2E();
-  var_0._id_1356 = common_scripts\utility::_id_46B5("audio_buzzer_org", "targetname");
-  var_0._id_8F41 = [];
-  var_0._id_5B57 = undefined;
-  var_0._id_9812 = 32;
-  var_0._id_981D = 256;
-  var_0._id_76AF = 0;
-  var_0._id_76AE = 0;
-  var_0._id_7F1F = undefined;
-  var_0._id_621E = undefined;
-  var_0._id_621F = undefined;
-  var_0._id_6095 = undefined;
-  var_0._id_1DE2 = 0.55;
-  var_0._id_1DE1 = 0;
-  var_0._id_4839 = 24;
-  var_0._id_29BB = 0;
-  var_0._id_7A64 = 0;
-  var_0._id_8B3B = 0;
-  var_0._id_8B3C = 0;
-  var_0._id_6F48 = 0;
-  var_0._id_8BB1 = 0;
-  var_0._id_7F0E = 176;
+  var_0.fr_start = _getEnt("firingrange_start", "targetname");
+  var_0._id_0C3A = firing_range_setup_targets();
+  var_0._id_0BDC = firing_range_setup_env();
+  var_0.transitionmeshes = [];
+  var_0.transitionmeshesrev = [];
+  var_0._id_0C3B = firing_range_setup_triggers();
+  var_0._id_0C39 = firing_range_setup_min_range();
+  var_0._id_0C38 = firing_range_setup_max_range();
+  var_0._id_0BDA = firing_range_setup_booth_displays();
+  var_0._id_0C37 = firing_range_setup_target_logic();
+  var_0._id_0BE1 = firing_range_setup_floor_panels();
+  var_0._id_0C3C = firing_range_setup_env_vfx();
+  var_0._id_0BD8 = firing_range_setup_3dui_screens();
+  var_0.audio_buzzer_struct = common_scripts\utility::getstruct("audio_buzzer_org", "targetname");
+  var_0.soundents = [];
+  var_0.last_target = undefined;
+  var_0.target_move_dist = 32;
+  var_0.target_units_per_second = 256;
+  var_0.pressedup = 0;
+  var_0.presseddown = 0;
+  var_0.roundnumber = undefined;
+  var_0.minpoint = undefined;
+  var_0.minpointmodpos = undefined;
+  var_0.maxpoint = undefined;
+  var_0.buttontimertotal = 0.55;
+  var_0.buttontimer = 0;
+  var_0.gracedisance = 24;
+  var_0.damagedone = 0;
+  var_0.rangeinmeters = 0;
+  var_0.shotsfired = 0;
+  var_0.shotshit = 0;
+  var_0.percent = 0;
+  var_0.shouldupdateluadisplay = 0;
+  var_0.round_target_unit_per_second = 176;
   var_0.time = 0;
-  var_0._id_4895 = 5;
-  var_0._id_7F12 = 0;
-  var_0._id_57CC = 0;
-  var_0._id_A48D = loadfx("vfx/props/holo_target_red_spawn_in");
-  var_0._id_A48E = loadfx("vfx/props/holo_target_red_spawn_out");
-  var_0._id_A48C = loadfx("vfx/beam/firing_range_edge_glow");
-  common_scripts\utility::_id_0FB2(var_0._id_0C3B, ::_id_9DAD);
-  level._id_9804 = (1.3, 0, 25);
-  level._id_9817 = 12;
-  level._id_4DD0 = 18;
-  level._id_3C3B = var_0;
+  var_0.groupdevider = 5;
+  var_0.roundactive = 0;
+  var_0.isshuttingdown = 0;
+  var_0.vfxtargetspawn = loadfx("vfx/props/holo_target_red_spawn_in");
+  var_0.vfxtargetspawnout = loadfx("vfx/props/holo_target_red_spawn_out");
+  var_0.vfxholoedge = loadfx("vfx/beam/firing_range_edge_glow");
+  common_scripts\utility::_id_0FB2(var_0._id_0C3B, ::trigger_setup);
+  level.target_center_off = (1.3, 0, 25);
+  level.target_radius = 12;
+  level.hit_off = 18;
+  level.firingrange = var_0;
 }
 
-_id_3C32() {
+firing_range_setup_floor_panels() {
   var_0 = getEntArray("holo_emitter_floor", "targetname");
 
   foreach(var_2 in var_0) {
-    var_2._id_6A23 = var_2.origin;
-    var_2._id_A08D = var_2.origin + (0, 0, 4);
+    var_2.og_position = var_2.origin;
+    var_2.up_position = var_2.origin + (0, 0, 4);
   }
 
   return var_0;
 }
 
-_id_3C2E() {
+firing_range_setup_3dui_screens() {
   var_0 = getEntArray("display_3dui_mesh", "targetname");
 
   foreach(var_2 in var_0) {
@@ -74,36 +74,36 @@ _id_3C2E() {
   return var_0;
 }
 
-_id_3C34() {
-  var_0 = common_scripts\utility::_id_46B7("target_track_min", "targetname");
+firing_range_setup_min_range() {
+  var_0 = common_scripts\utility::getstructarray("target_track_min", "targetname");
   return var_0;
 }
 
-_id_3C33() {
-  var_0 = common_scripts\utility::_id_46B7("target_track_max", "targetname");
+firing_range_setup_max_range() {
+  var_0 = common_scripts\utility::getstructarray("target_track_max", "targetname");
   return var_0;
 }
 
-_id_3C2F() {
-  var_0 = common_scripts\utility::_id_46B7("booth_display_01", "targetname");
-  var_1 = common_scripts\utility::_id_46B7("booth_display_02", "targetname");
-  var_2 = common_scripts\utility::_id_46B7("booth_display_03", "targetname");
-  var_3 = common_scripts\utility::_id_46B7("booth_display_04", "targetname");
-  var_4 = common_scripts\utility::_id_46B7("booth_display_05", "targetname");
-  var_5 = common_scripts\utility::_id_46B7("booth_display_06", "targetname");
+firing_range_setup_booth_displays() {
+  var_0 = common_scripts\utility::getstructarray("booth_display_01", "targetname");
+  var_1 = common_scripts\utility::getstructarray("booth_display_02", "targetname");
+  var_2 = common_scripts\utility::getstructarray("booth_display_03", "targetname");
+  var_3 = common_scripts\utility::getstructarray("booth_display_04", "targetname");
+  var_4 = common_scripts\utility::getstructarray("booth_display_05", "targetname");
+  var_5 = common_scripts\utility::getstructarray("booth_display_06", "targetname");
   var_6 = [var_0, var_1, var_2, var_3, var_4, var_5];
   return var_6;
 }
 
-_id_9DAD() {
+trigger_setup() {
   var_0 = self;
-  var_0 thread _id_0478::_id_9DC3(::_id_726D, ::_id_72DD);
+  var_0 thread _id_0478::triggertouchthink(::player_enter_round_trigger, ::player_leave_round_trigger);
 }
 
-_id_726D(var_0) {
+player_enter_round_trigger(var_0) {
   level endon("shutdown_hologram");
 
-  while(level._id_3C3B._id_57CC == 1) {
+  while(level.firingrange.isshuttingdown == 1) {
     wait 0.1;
   }
 
@@ -113,24 +113,24 @@ _id_726D(var_0) {
     return;
   }
   var_2 = int(var_0.setmovespeedscale);
-  level._id_3C3B._id_7F1F = var_2;
+  level.firingrange.roundnumber = var_2;
 
-  if(!isDefined(level._id_3C3B._id_0BDC[var_2])) {
+  if(!isDefined(level.firingrange._id_0BDC[var_2])) {
     return;
   }
-  var_1 thread _id_9301(var_2);
+  var_1 thread startround(var_2);
 }
 
-_id_72DD(var_0) {
+player_leave_round_trigger(var_0) {
   var_1 = self;
 
   if(!isDefined(var_0.setmovespeedscale)) {
     return;
   }
   var_2 = int(var_0.setmovespeedscale);
-  level._id_3C3B._id_7F1F = var_2;
+  level.firingrange.roundnumber = var_2;
 
-  if(!isDefined(level._id_3C3B._id_0BDC[var_2])) {
+  if(!isDefined(level.firingrange._id_0BDC[var_2])) {
     return;
   }
   var_1 thread _id_72DE(var_2);
@@ -140,57 +140,57 @@ _id_72DE(var_0) {
   level endon("shutdown_hologram");
   var_1 = _getEnt("firing_range_round_trigger_end", "targetname");
   var_1 waittill("trigger");
-  level._id_3C3B._id_54F5 = 0;
-  thread _id_8C35(var_0, self);
+  level.firingrange.inuse = 0;
+  thread shutdownround(var_0, self);
 }
 
 _id_8DA3(var_0, var_1, var_2, var_3) {
-  _id_046C::_id_8DA2(var_0, var_1, var_2, var_3);
+  _id_046C::snd_play_linked(var_0, var_1, var_2, var_3);
 }
 
-_id_9838(var_0) {
+targetspreadshooting(var_0) {
   level endon("shutdown_hologram");
   var_1 = self;
-  var_2 = level._id_3C3B._id_0C3A[var_0][0][0];
+  var_2 = level.firingrange._id_0C3A[var_0][0][0];
   var_2._id_0BC0 = 1;
-  var_2 _id_90AA();
+  var_2 spawntarget();
   var_2 show();
   var_2 solid();
   var_2 setCanDamage(1);
   var_2 setdamagecallbackon(1);
-  var_2.damagecallback = ::_id_6378;
+  var_2.damagecallback = ::monitordamagecallback;
   var_2.health = 9999;
   var_2.maxhealth = 9999;
 
-  foreach(var_4 in level._id_3C3B._id_0C39) {
-    if(var_4.setmovespeedscale == level._id_3C3B._id_7F1F) {
-      level._id_3C3B._id_621E = var_4;
+  foreach(var_4 in level.firingrange._id_0C39) {
+    if(var_4.setmovespeedscale == level.firingrange.roundnumber) {
+      level.firingrange.minpoint = var_4;
       break;
     }
   }
 
-  foreach(var_4 in level._id_3C3B._id_0C38) {
-    if(var_4.setmovespeedscale == level._id_3C3B._id_7F1F) {
-      level._id_3C3B._id_6095 = var_4;
+  foreach(var_4 in level.firingrange._id_0C38) {
+    if(var_4.setmovespeedscale == level.firingrange.roundnumber) {
+      level.firingrange.maxpoint = var_4;
       break;
     }
   }
 
-  if(!isDefined(level._id_3C3B._id_621E) || !isDefined(level._id_3C3B._id_6095)) {
-    thread _id_8C35(var_0, var_1);
+  if(!isDefined(level.firingrange.minpoint) || !isDefined(level.firingrange.maxpoint)) {
+    thread shutdownround(var_0, var_1);
     return;
   }
 
-  level._id_3C3B._id_621F = level._id_3C3B._id_621E.origin + anglesToForward(level._id_3C3B._id_621E.angles) * -64;
-  var_2 thread _id_637F(var_1, var_2, level._id_3C3B._id_621E);
-  thread _id_63E2(var_1);
-  thread _id_6399(var_1);
-  thread _id_639C(var_1);
-  thread _id_3004(var_1, var_0);
-  var_1 thread _id_6814(var_2);
+  level.firingrange.minpointmodpos = level.firingrange.minpoint.origin + anglesToForward(level.firingrange.minpoint.angles) * -64;
+  var_2 thread monitordistance(var_1, var_2, level.firingrange.minpoint);
+  thread monitorshotsfired(var_1);
+  thread monitorgrenades(var_1);
+  thread monitorhitpercent(var_1);
+  thread displayboothholo(var_1, var_0);
+  var_1 thread notifytracker(var_2);
 }
 
-_id_637F(var_0, var_1, var_2) {
+monitordistance(var_0, var_1, var_2) {
   var_0 endon("disconnect");
   level endon("shutdown_hologram");
   self endon("death");
@@ -198,21 +198,21 @@ _id_637F(var_0, var_1, var_2) {
 
   for(;;) {
     if(!isDefined(var_1) || !isDefined(var_2)) {
-      level._id_3C3B._id_7A64 = 0;
-      var_0 setclientomnvar("ui_vlobby_round_distance", level._id_3C3B._id_7A64);
+      level.firingrange.rangeinmeters = 0;
+      var_0 setclientomnvar("ui_vlobby_round_distance", level.firingrange.rangeinmeters);
     } else {
       var_4 = _distance2d(var_1.origin, var_2.origin);
       var_5 = int(common_scripts\utility::_id_7F03(var_3 * var_4, 0));
 
-      if(var_5 != level._id_3C3B._id_7A64) {
+      if(var_5 != level.firingrange.rangeinmeters) {
         if(var_5 > 100) {
           var_5 = 100;
         } else if(var_5 < 0) {
           var_5 = 0;
         }
 
-        level._id_3C3B._id_7A64 = var_5;
-        var_0 setclientomnvar("ui_vlobby_round_distance", level._id_3C3B._id_7A64);
+        level.firingrange.rangeinmeters = var_5;
+        var_0 setclientomnvar("ui_vlobby_round_distance", level.firingrange.rangeinmeters);
       }
     }
 
@@ -220,116 +220,116 @@ _id_637F(var_0, var_1, var_2) {
   }
 }
 
-_id_6814(var_0) {
+notifytracker(var_0) {
   self endon("disconnect");
   level endon("shutdown_hologram");
   self notifyonplayercommand("toggled_up_pressed", "+actionslot 1");
   self notifyonplayercommand("toggled_up_released", "-actionslot 1");
   self notifyonplayercommand("toggled_down_pressed", "+actionslot 2");
   self notifyonplayercommand("toggled_down_released", "-actionslot 2");
-  thread _id_63F5(var_0);
-  thread _id_63F6(var_0);
-  thread _id_6383(var_0);
-  thread _id_6384(var_0);
-  thread _id_64CF(var_0, self);
+  thread monitoruppressed(var_0);
+  thread monitorupreleased(var_0);
+  thread monitordownpressed(var_0);
+  thread monitordownreleased(var_0);
+  thread movestopper(var_0, self);
 }
 
-_id_63F5(var_0) {
+monitoruppressed(var_0) {
   self endon("disconnect");
   level endon("shutdown_hologram");
 
   for(;;) {
     self waittill("toggled_up_pressed");
-    level._id_3C3B._id_1DE1 = level._id_3C3B._id_1DE2;
+    level.firingrange.buttontimer = level.firingrange.buttontimertotal;
 
-    if(level._id_3C3B._id_76AF == 0) {
-      level._id_3C3B._id_76AF = 1;
-      level._id_3C3B._id_76AE = 0;
-      thread _id_64AF(level._id_3C3B._id_6095.origin, var_0, self);
+    if(level.firingrange.pressedup == 0) {
+      level.firingrange.pressedup = 1;
+      level.firingrange.presseddown = 0;
+      thread movelogic(level.firingrange.maxpoint.origin, var_0, self);
     }
   }
 }
 
-_id_63F6(var_0) {
+monitorupreleased(var_0) {
   self endon("disconnect");
   level endon("shutdown_hologram");
 
   for(;;) {
     self waittill("toggled_up_released");
-    var_1 = _distance2d(level._id_3C3B._id_6095.origin, var_0.origin);
+    var_1 = _distance2d(level.firingrange.maxpoint.origin, var_0.origin);
 
     if(var_1 <= 1) {
       var_0 moveTo(var_0.origin, 0.05);
     } else {
-      var_2 = var_0.origin + anglesToForward(level._id_3C3B._id_0C38[0].angles) * level._id_3C3B._id_4839 * -1;
+      var_2 = var_0.origin + anglesToForward(level.firingrange._id_0C38[0].angles) * level.firingrange.gracedisance * -1;
       var_1 = _distance2d(var_2, var_0.origin);
-      var_3 = var_1 / level._id_3C3B._id_981D;
+      var_3 = var_1 / level.firingrange.target_units_per_second;
 
       if(var_3 < 0.05) {
         var_3 = 0.05;
       }
 
-      level._id_3C3B._id_1DE1 = var_3 + 0.05;
-      thread _id_64AF(var_2, var_0, self);
+      level.firingrange.buttontimer = var_3 + 0.05;
+      thread movelogic(var_2, var_0, self);
     }
 
     var_0 waittill("movedone");
-    level._id_3C3B._id_76AF = 0;
+    level.firingrange.pressedup = 0;
   }
 }
 
-_id_6383(var_0) {
+monitordownpressed(var_0) {
   self endon("disconnect");
   level endon("shutdown_hologram");
 
   for(;;) {
     self waittill("toggled_down_pressed");
-    level._id_3C3B._id_1DE1 = level._id_3C3B._id_1DE2;
+    level.firingrange.buttontimer = level.firingrange.buttontimertotal;
 
-    if(level._id_3C3B._id_76AE == 0) {
-      level._id_3C3B._id_76AE = 1;
-      level._id_3C3B._id_76AF = 0;
-      thread _id_64AF(level._id_3C3B._id_621F, var_0, self);
+    if(level.firingrange.presseddown == 0) {
+      level.firingrange.presseddown = 1;
+      level.firingrange.pressedup = 0;
+      thread movelogic(level.firingrange.minpointmodpos, var_0, self);
     }
   }
 }
 
-_id_6384(var_0) {
+monitordownreleased(var_0) {
   self endon("disconnect");
   level endon("shutdown_hologram");
 
   for(;;) {
     self waittill("toggled_down_released");
-    var_1 = _distance2d(level._id_3C3B._id_621F, var_0.origin);
+    var_1 = _distance2d(level.firingrange.minpointmodpos, var_0.origin);
 
     if(var_1 <= 1) {
       var_0 moveTo(var_0.origin, 0.05);
     } else {
-      var_2 = var_0.origin + anglesToForward(level._id_3C3B._id_0C38[0].angles) * level._id_3C3B._id_4839;
+      var_2 = var_0.origin + anglesToForward(level.firingrange._id_0C38[0].angles) * level.firingrange.gracedisance;
       var_1 = _distance2d(var_2, var_0.origin);
-      var_3 = var_1 / level._id_3C3B._id_981D;
+      var_3 = var_1 / level.firingrange.target_units_per_second;
 
       if(var_3 < 0.05) {
         var_3 = 0.05;
       }
 
-      level._id_3C3B._id_1DE1 = var_3 + 0.05;
-      thread _id_64AF(var_2, var_0, self);
+      level.firingrange.buttontimer = var_3 + 0.05;
+      thread movelogic(var_2, var_0, self);
     }
 
     var_0 waittill("movedone");
-    level._id_3C3B._id_76AE = 0;
+    level.firingrange.presseddown = 0;
   }
 }
 
-_id_64AF(var_0, var_1, var_2) {
+movelogic(var_0, var_1, var_2) {
   var_3 = _distance2d(var_0, var_1.origin);
 
   if(var_3 <= 1) {
     var_1 notify("movedone");
     return;
   } else {
-    var_4 = var_3 / level._id_3C3B._id_981D;
+    var_4 = var_3 / level.firingrange.target_units_per_second;
 
     if(var_4 < 0.05) {
       var_4 = 0.05;
@@ -339,27 +339,27 @@ _id_64AF(var_0, var_1, var_2) {
   }
 }
 
-_id_64CF(var_0, var_1) {
+movestopper(var_0, var_1) {
   var_1 endon("disconnect");
   level endon("shutdown_hologram");
 
   for(;;) {
     waitframe();
 
-    if(level._id_3C3B._id_76AE == 1 || level._id_3C3B._id_76AF == 1) {
-      if(level._id_3C3B._id_1DE1 > 0) {
-        level._id_3C3B._id_1DE1 = level._id_3C3B._id_1DE1 - 0.05;
+    if(level.firingrange.presseddown == 1 || level.firingrange.pressedup == 1) {
+      if(level.firingrange.buttontimer > 0) {
+        level.firingrange.buttontimer = level.firingrange.buttontimer - 0.05;
         continue;
       }
 
       var_0 moveTo(var_0.origin, 0.05);
-      level._id_3C3B._id_76AE = 0;
-      level._id_3C3B._id_76AF = 0;
+      level.firingrange.presseddown = 0;
+      level.firingrange.pressedup = 0;
     }
   }
 }
 
-_id_6377(var_0) {
+monitordamage(var_0) {
   var_0 endon("disconnect");
   level endon("shutdown_hologram");
   var_1 = undefined;
@@ -375,13 +375,13 @@ _id_6377(var_0) {
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 
-    if(level._id_3C3B._id_7F1F == 7) {
+    if(level.firingrange.roundnumber == 7) {
       self.health = self.maxhealth;
     }
 
     var_11 = self gettagorigin("tag_chest");
     var_0 playlocalsound("mp_hit_default");
-    var_12 = _id_4591(var_10, var_8, var_0);
+    var_12 = getmodifier(var_10, var_8, var_0);
     var_1 = common_scripts\utility::_id_7F03(_float(var_1) * var_12, 0);
     var_1 = int(var_1);
 
@@ -393,26 +393,26 @@ _id_6377(var_0) {
       var_1 = 0;
     }
 
-    level._id_3C3B._id_29BB = var_1;
-    var_13 = level._id_3C3B._id_8B3C + 1;
+    level.firingrange.damagedone = var_1;
+    var_13 = level.firingrange.shotshit + 1;
 
     if(var_13 > 9999) {
-      level._id_3C3B._id_8B3C = 0;
+      level.firingrange.shotshit = 0;
     } else if(var_13 < 0) {
-      level._id_3C3B._id_8B3C = 0;
+      level.firingrange.shotshit = 0;
     } else {
-      level._id_3C3B._id_8B3C = var_13;
+      level.firingrange.shotshit = var_13;
     }
 
-    level._id_3C3B._id_8BB1 = 1;
+    level.firingrange.shouldupdateluadisplay = 1;
   }
 }
 
-_id_6378(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+monitordamagecallback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(!isDefined(self)) {
     return;
   }
-  if(level._id_3C3B._id_7F1F == 7) {
+  if(level.firingrange.roundnumber == 7) {
     self.health = self.maxhealth;
   }
 
@@ -421,7 +421,7 @@ _id_6378(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   var_13 = 1;
 
   if(isDefined(var_1)) {
-    var_13 = _id_4591(var_5, var_11, var_1);
+    var_13 = getmodifier(var_5, var_11, var_1);
   }
 
   var_2 = common_scripts\utility::_id_7F03(_float(var_2) * var_13, 0);
@@ -435,43 +435,43 @@ _id_6378(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     var_2 = 0;
   }
 
-  level._id_3C3B._id_29BB = var_2;
+  level.firingrange.damagedone = var_2;
 
   if(isDefined(var_1)) {
     if(isDefined(var_0) && var_0 != var_1) {
-      if(!isDefined(var_0._id_2995)) {
-        var_0._id_2995 = 1;
-        var_14 = level._id_3C3B._id_8B3C + 1;
+      if(!isDefined(var_0.damage_counted)) {
+        var_0.damage_counted = 1;
+        var_14 = level.firingrange.shotshit + 1;
 
         if(var_14 > 9999) {
-          level._id_3C3B._id_8B3C = 0;
+          level.firingrange.shotshit = 0;
         } else if(var_14 < 0) {
-          level._id_3C3B._id_8B3C = 0;
+          level.firingrange.shotshit = 0;
         } else {
-          level._id_3C3B._id_8B3C = var_14;
+          level.firingrange.shotshit = var_14;
         }
 
-        level._id_3C3B._id_8BB1 = 1;
+        level.firingrange.shouldupdateluadisplay = 1;
       }
     } else
-      var_1 thread _id_268B();
+      var_1 thread countdamagingshots();
   }
 
-  level._id_3C3B._id_8BB1 = 1;
+  level.firingrange.shouldupdateluadisplay = 1;
 }
 
-_id_268B() {
+countdamagingshots() {
   level endon("shutdown_hologram");
   self endon("disconnect");
 
-  if(!isDefined(self._id_29E2)) {
-    self._id_29E2 = 1;
+  if(!isDefined(self.damagingshot)) {
+    self.damagingshot = 1;
   } else {
-    self._id_29E2++;
+    self.damagingshot++;
   }
 }
 
-_id_4591(var_0, var_1, var_2) {
+getmodifier(var_0, var_1, var_2) {
   var_3 = "none";
   var_4 = 1;
   var_5 = strtok(var_0, "_");
@@ -491,7 +491,7 @@ _id_4591(var_0, var_1, var_2) {
         var_3 = "none";
       }
 
-      var_4 = var_2 _meth_850B(var_6 + "_mp", var_3);
+      var_4 = var_2 getweapondamagelocationmultiplier(var_6 + "_mp", var_3);
       return var_4;
     } else
       return var_4;
@@ -499,7 +499,7 @@ _id_4591(var_0, var_1, var_2) {
     return var_4;
 }
 
-_id_A6DE() {
+waitforweaponfired() {
   self endon("disconnect");
   self endon("reload");
   self endon("weapon_change");
@@ -519,60 +519,60 @@ _id_A6DE() {
   return var_0;
 }
 
-_id_63E2(var_0) {
+monitorshotsfired(var_0) {
   var_0 endon("disconnect");
   level endon("shutdown_hologram");
 
   for(;;) {
-    var_0._id_29E2 = 0;
-    var_1 = var_0 _id_A6DE();
+    var_0.damagingshot = 0;
+    var_1 = var_0 waitforweaponfired();
 
     if(isDefined(var_1)) {
-      var_2 = level._id_3C3B._id_8B3B + var_1;
+      var_2 = level.firingrange.shotsfired + var_1;
 
       if(var_2 > 9999) {
-        level._id_3C3B._id_8B3B = 0;
-        level._id_3C3B._id_8B3C = 0;
-        level._id_3C3B._id_6F48 = 0;
-        var_0 setclientomnvar("ui_vlobby_round_hits", level._id_3C3B._id_8B3C);
-        var_0 setclientomnvar("ui_vlobby_round_fired", level._id_3C3B._id_8B3B);
-        var_0 setclientomnvar("ui_vlobby_round_accuracy", level._id_3C3B._id_6F48);
+        level.firingrange.shotsfired = 0;
+        level.firingrange.shotshit = 0;
+        level.firingrange.percent = 0;
+        var_0 setclientomnvar("ui_vlobby_round_hits", level.firingrange.shotshit);
+        var_0 setclientomnvar("ui_vlobby_round_fired", level.firingrange.shotsfired);
+        var_0 setclientomnvar("ui_vlobby_round_accuracy", level.firingrange.percent);
       } else if(var_2 < 0) {
-        level._id_3C3B._id_8B3B = 0;
-        level._id_3C3B._id_8B3C = 0;
-        level._id_3C3B._id_6F48 = 0;
-        var_0 setclientomnvar("ui_vlobby_round_hits", level._id_3C3B._id_8B3C);
-        var_0 setclientomnvar("ui_vlobby_round_fired", level._id_3C3B._id_8B3B);
-        var_0 setclientomnvar("ui_vlobby_round_accuracy", level._id_3C3B._id_6F48);
+        level.firingrange.shotsfired = 0;
+        level.firingrange.shotshit = 0;
+        level.firingrange.percent = 0;
+        var_0 setclientomnvar("ui_vlobby_round_hits", level.firingrange.shotshit);
+        var_0 setclientomnvar("ui_vlobby_round_fired", level.firingrange.shotsfired);
+        var_0 setclientomnvar("ui_vlobby_round_accuracy", level.firingrange.percent);
       } else {
-        level._id_3C3B._id_8BB1 = 1;
-        level._id_3C3B._id_8B3B = var_2;
+        level.firingrange.shouldupdateluadisplay = 1;
+        level.firingrange.shotsfired = var_2;
       }
 
-      if(isDefined(var_0._id_29E2)) {
-        var_3 = var_0._id_29E2;
+      if(isDefined(var_0.damagingshot)) {
+        var_3 = var_0.damagingshot;
 
-        if(var_1 < var_0._id_29E2) {
+        if(var_1 < var_0.damagingshot) {
           var_3 = var_1;
         }
 
-        var_4 = level._id_3C3B._id_8B3C + var_3;
+        var_4 = level.firingrange.shotshit + var_3;
 
         if(var_4 > 9999) {
-          level._id_3C3B._id_8B3C = 0;
+          level.firingrange.shotshit = 0;
         } else if(var_4 < 0) {
-          level._id_3C3B._id_8B3C = 0;
+          level.firingrange.shotshit = 0;
         } else {
-          level._id_3C3B._id_8B3C = var_4;
+          level.firingrange.shotshit = var_4;
         }
 
-        var_0._id_29E2 = 0;
+        var_0.damagingshot = 0;
       }
     }
   }
 }
 
-_id_6399(var_0) {
+monitorgrenades(var_0) {
   var_0 endon("disconnect");
   level endon("shutdown_hologram");
 
@@ -582,51 +582,51 @@ _id_6399(var_0) {
     if(isDefined(var_1)) {
       waittillframeend;
 
-      if(isDefined(var_1._id_7ACE) && var_1._id_7ACE) {
+      if(isDefined(var_1.recall) && var_1.recall) {
         continue;
       }
-      var_2 = level._id_3C3B._id_8B3B + 1;
+      var_2 = level.firingrange.shotsfired + 1;
 
       if(var_2 > 9999) {
-        level._id_3C3B._id_8B3B = 0;
-        level._id_3C3B._id_8B3C = 0;
-        level._id_3C3B._id_6F48 = 0;
-        var_0 setclientomnvar("ui_vlobby_round_hits", level._id_3C3B._id_8B3C);
-        var_0 setclientomnvar("ui_vlobby_round_fired", level._id_3C3B._id_8B3B);
-        var_0 setclientomnvar("ui_vlobby_round_accuracy", level._id_3C3B._id_6F48);
+        level.firingrange.shotsfired = 0;
+        level.firingrange.shotshit = 0;
+        level.firingrange.percent = 0;
+        var_0 setclientomnvar("ui_vlobby_round_hits", level.firingrange.shotshit);
+        var_0 setclientomnvar("ui_vlobby_round_fired", level.firingrange.shotsfired);
+        var_0 setclientomnvar("ui_vlobby_round_accuracy", level.firingrange.percent);
       } else if(var_2 < 0) {
-        level._id_3C3B._id_8B3B = 0;
-        level._id_3C3B._id_8B3C = 0;
-        level._id_3C3B._id_6F48 = 0;
-        var_0 setclientomnvar("ui_vlobby_round_hits", level._id_3C3B._id_8B3C);
-        var_0 setclientomnvar("ui_vlobby_round_fired", level._id_3C3B._id_8B3B);
-        var_0 setclientomnvar("ui_vlobby_round_accuracy", level._id_3C3B._id_6F48);
+        level.firingrange.shotsfired = 0;
+        level.firingrange.shotshit = 0;
+        level.firingrange.percent = 0;
+        var_0 setclientomnvar("ui_vlobby_round_hits", level.firingrange.shotshit);
+        var_0 setclientomnvar("ui_vlobby_round_fired", level.firingrange.shotsfired);
+        var_0 setclientomnvar("ui_vlobby_round_accuracy", level.firingrange.percent);
       } else {
-        level._id_3C3B._id_8BB1 = 1;
-        level._id_3C3B._id_8B3B = var_2;
+        level.firingrange.shouldupdateluadisplay = 1;
+        level.firingrange.shotsfired = var_2;
       }
     }
   }
 }
 
-_id_639C(var_0) {
+monitorhitpercent(var_0) {
   var_0 endon("disconnect");
   level endon("shutdown_hologram");
 
   for(;;) {
-    if(level._id_3C3B._id_8B3B > 0) {
-      var_1 = level._id_3C3B._id_8B3C / level._id_3C3B._id_8B3B * 100;
+    if(level.firingrange.shotsfired > 0) {
+      var_1 = level.firingrange.shotshit / level.firingrange.shotsfired * 100;
       var_1 = common_scripts\utility::_id_7F03(var_1, 0);
 
-      if(var_1 != level._id_3C3B._id_6F48) {
+      if(var_1 != level.firingrange.percent) {
         if(var_1 > 999) {
           var_1 = 999;
         } else if(var_1 < 0) {
           var_1 = 0;
         }
 
-        level._id_3C3B._id_6F48 = int(var_1);
-        level._id_3C3B._id_8BB1 = 1;
+        level.firingrange.percent = int(var_1);
+        level.firingrange.shouldupdateluadisplay = 1;
       }
     }
 
@@ -634,29 +634,29 @@ _id_639C(var_0) {
   }
 }
 
-_id_3004(var_0, var_1) {
+displayboothholo(var_0, var_1) {
   var_0 endon("disconnect");
   level endon("shutdown_hologram");
-  var_2 = _id_3B8B(level._id_3C3B._id_0BD8, var_1);
+  var_2 = finddisplay(level.firingrange._id_0BD8, var_1);
 
   if(isDefined(var_2)) {
     var_2 show();
   }
 
   for(;;) {
-    if(level._id_3C3B._id_8BB1 == 1) {
-      var_0 setclientomnvar("ui_vlobby_round_damage", level._id_3C3B._id_29BB);
-      var_0 setclientomnvar("ui_vlobby_round_hits", level._id_3C3B._id_8B3C);
-      var_0 setclientomnvar("ui_vlobby_round_fired", level._id_3C3B._id_8B3B);
-      var_0 setclientomnvar("ui_vlobby_round_accuracy", level._id_3C3B._id_6F48);
-      level._id_3C3B._id_8BB1 = 0;
+    if(level.firingrange.shouldupdateluadisplay == 1) {
+      var_0 setclientomnvar("ui_vlobby_round_damage", level.firingrange.damagedone);
+      var_0 setclientomnvar("ui_vlobby_round_hits", level.firingrange.shotshit);
+      var_0 setclientomnvar("ui_vlobby_round_fired", level.firingrange.shotsfired);
+      var_0 setclientomnvar("ui_vlobby_round_accuracy", level.firingrange.percent);
+      level.firingrange.shouldupdateluadisplay = 0;
     }
 
     wait 0.2;
   }
 }
 
-_id_3B8B(var_0, var_1) {
+finddisplay(var_0, var_1) {
   foreach(var_3 in var_0) {
     if(isDefined(var_3.setmovespeedscale) && var_3.setmovespeedscale == var_1) {
       return var_3;
@@ -664,45 +664,45 @@ _id_3B8B(var_0, var_1) {
   }
 }
 
-_id_9301(var_0) {
+startround(var_0) {
   level endon("shutdown_hologram");
   level notify("start_round");
-  level._id_3C3B._id_29BB = 0;
-  level._id_3C3B._id_7A64 = 0;
-  level._id_3C3B.time = 0;
-  level._id_3C3B._id_7F12 = 1;
-  level._id_3C3B._id_8BB1 = 1;
-  self setclientomnvar("ui_vlobby_round_distance", level._id_3C3B._id_7A64);
-  self setclientomnvar("ui_vlobby_round_damage", level._id_3C3B._id_29BB);
-  self setclientomnvar("ui_vlobby_round_hits", level._id_3C3B._id_8B3C);
-  self setclientomnvar("ui_vlobby_round_fired", level._id_3C3B._id_8B3B);
-  self setclientomnvar("ui_vlobby_round_accuracy", level._id_3C3B._id_6F48);
+  level.firingrange.damagedone = 0;
+  level.firingrange.rangeinmeters = 0;
+  level.firingrange.time = 0;
+  level.firingrange.roundactive = 1;
+  level.firingrange.shouldupdateluadisplay = 1;
+  self setclientomnvar("ui_vlobby_round_distance", level.firingrange.rangeinmeters);
+  self setclientomnvar("ui_vlobby_round_damage", level.firingrange.damagedone);
+  self setclientomnvar("ui_vlobby_round_hits", level.firingrange.shotshit);
+  self setclientomnvar("ui_vlobby_round_fired", level.firingrange.shotsfired);
+  self setclientomnvar("ui_vlobby_round_accuracy", level.firingrange.percent);
 
-  foreach(var_2 in level._id_3C3B._id_0C3A[var_0]) {
+  foreach(var_2 in level.firingrange._id_0C3A[var_0]) {
     foreach(var_4 in var_2) {
-      var_4.origin = var_4._id_6C4F;
-      var_4.angles = var_4._id_6C4D;
+      var_4.origin = var_4.original_position;
+      var_4.angles = var_4.original_orientation;
     }
   }
 
   if(level._id_010B) {
     _id_8C14(var_0);
   } else {
-    var_7 = _id_8C26(var_0);
+    var_7 = showtransition_cg(var_0);
     wait 0.1;
-    _id_3D67(level._id_3C3B._id_0BDC[var_0]);
-    _id_3D67(level._id_3C3B._id_0BDC[var_0]);
+    flickertransmeshes(level.firingrange._id_0BDC[var_0]);
+    flickertransmeshes(level.firingrange._id_0BDC[var_0]);
     wait 0.1;
-    _id_3D67(level._id_3C3B._id_0BDC[var_0]);
+    flickertransmeshes(level.firingrange._id_0BDC[var_0]);
     wait 0.1;
-    _id_4D1A(var_0, var_7);
+    hidetransitionmeshes_cg(var_0, var_7);
     wait 0.1;
     _id_8C14(var_0);
   }
 
   if(var_0 == 7) {
     self setclientomnvar("ui_vlobby_round_state", 3);
-    thread _id_9838(var_0);
+    thread targetspreadshooting(var_0);
   } else {
     self setclientomnvar("ui_vlobby_round_state", 1);
     thread _id_089E(var_0);
@@ -711,25 +711,25 @@ _id_9301(var_0) {
 
 _id_8C14(var_0) {
   level endon("shutdown_hologram");
-  var_1 = common_scripts\utility::_id_7F03(level._id_3C3B._id_0BDC[var_0].size / level._id_3C3B._id_4895, 0, "up");
+  var_1 = common_scripts\utility::_id_7F03(level.firingrange._id_0BDC[var_0].size / level.firingrange.groupdevider, 0, "up");
   var_2 = 0;
 
-  foreach(var_4 in level._id_3C3B._id_0BDC[var_0]) {
+  foreach(var_4 in level.firingrange._id_0BDC[var_0]) {
     var_4 show();
     var_4 solid();
   }
 }
 
-_id_8C27(var_0) {
+showtransitionrev(var_0) {
   level endon("shutdown_hologram");
-  level._id_3C3B._id_9C7D = [];
+  level.firingrange.transitionmeshesrev = [];
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2) && !_isremovedentity(var_2) && isDefined(var_2.classname) && var_2.classname == "script_model") {
       if(isDefined(var_2.model) && issubstr(var_2.model, "_trans")) {
         var_3 = var_2.model + "_rev";
         var_4 = spawn("script_model", var_2.origin);
-        level._id_3C3B._id_9C7D[level._id_3C3B._id_9C7D.size] = var_4;
+        level.firingrange.transitionmeshesrev[level.firingrange.transitionmeshesrev.size] = var_4;
 
         if(isDefined(var_2.angles)) {
           var_4.angles = var_2.angles;
@@ -744,16 +744,16 @@ _id_8C27(var_0) {
   }
 }
 
-_id_8C25(var_0) {
+showtransition(var_0) {
   level endon("shutdown_hologram");
-  level._id_3C3B._id_9C7C = [];
+  level.firingrange.transitionmeshes = [];
 
-  foreach(var_2 in level._id_3C3B._id_0BDC[var_0]) {
+  foreach(var_2 in level.firingrange._id_0BDC[var_0]) {
     if(isDefined(var_2.classname) && var_2.classname == "script_model") {
       if(isDefined(var_2.model) && issubstr(var_2.model, "rec_holo_range")) {
         var_3 = var_2.model + "_trans";
         var_4 = spawn("script_model", var_2.origin);
-        level._id_3C3B._id_9C7C[level._id_3C3B._id_9C7C.size] = var_4;
+        level.firingrange.transitionmeshes[level.firingrange.transitionmeshes.size] = var_4;
 
         if(isDefined(var_2.angles)) {
           var_4.angles = var_2.angles;
@@ -768,18 +768,18 @@ _id_8C25(var_0) {
   }
 }
 
-_id_3D67(var_0) {
+flickertransmeshes(var_0) {
   level endon("shutdown_hologram");
 
   if(isDefined(var_0) && _isarray(var_0)) {
-    _id_4D11(var_0);
+    hidemodels(var_0);
     waitframe();
-    _id_8C0C(var_0);
+    showmodels(var_0);
     waitframe();
   }
 }
 
-_id_8C0C(var_0) {
+showmodels(var_0) {
   level endon("shutdown_hologram");
 
   foreach(var_2 in var_0) {
@@ -790,7 +790,7 @@ _id_8C0C(var_0) {
   }
 }
 
-_id_4D11(var_0) {
+hidemodels(var_0) {
   level endon("shutdown_hologram");
 
   foreach(var_2 in var_0) {
@@ -801,11 +801,11 @@ _id_4D11(var_0) {
   }
 }
 
-_id_4D19() {
-  if(_isarray(level._id_3C3B._id_9C7C)) {
-    level._id_3C3B._id_9C7C = common_scripts\utility::_id_0F97(level._id_3C3B._id_9C7C);
+hidetransitionmeshes() {
+  if(_isarray(level.firingrange.transitionmeshes)) {
+    level.firingrange.transitionmeshes = common_scripts\utility::_id_0F97(level.firingrange.transitionmeshes);
 
-    foreach(var_1 in level._id_3C3B._id_9C7C) {
+    foreach(var_1 in level.firingrange.transitionmeshes) {
       if(isDefined(var_1) && !_isremovedentity(var_1)) {
         var_1 hide();
         var_1 notsolid();
@@ -814,29 +814,29 @@ _id_4D19() {
   }
 }
 
-_id_2D55() {
-  if(_isarray(level._id_3C3B._id_9C7D)) {
-    level._id_3C3B._id_9C7D = common_scripts\utility::_id_0F97(level._id_3C3B._id_9C7D);
+deletetransrevmeshes() {
+  if(_isarray(level.firingrange.transitionmeshesrev)) {
+    level.firingrange.transitionmeshesrev = common_scripts\utility::_id_0F97(level.firingrange.transitionmeshesrev);
 
-    foreach(var_1 in level._id_3C3B._id_9C7D) {
+    foreach(var_1 in level.firingrange.transitionmeshesrev) {
       if(isDefined(var_1) && !_isremovedentity(var_1)) {
         var_1 delete();
       }
     }
   }
 
-  level._id_3C3B._id_9C7D = [];
+  level.firingrange.transitionmeshesrev = [];
 }
 
-_id_7D00() {
-  if(_isarray(level._id_3C3B._id_9C7C)) {
-    var_0 = common_scripts\utility::_id_0F97(level._id_3C3B._id_9C7C);
-    _id_3D67(var_0);
-    _id_3D67(var_0);
+removetransitionmeshes() {
+  if(_isarray(level.firingrange.transitionmeshes)) {
+    var_0 = common_scripts\utility::_id_0F97(level.firingrange.transitionmeshes);
+    flickertransmeshes(var_0);
+    flickertransmeshes(var_0);
     wait 0.1;
-    _id_3D67(var_0);
+    flickertransmeshes(var_0);
     wait 0.1;
-    _id_3D67(var_0);
+    flickertransmeshes(var_0);
 
     foreach(var_2 in var_0) {
       if(isDefined(var_2) && !_isremovedentity(var_2)) {
@@ -846,11 +846,11 @@ _id_7D00() {
   }
 }
 
-_id_7CF7() {
-  if(_isarray(level._id_3C3B.setstablemissile)) {
-    level._id_3C3B.setstablemissile = common_scripts\utility::_id_0F97(level._id_3C3B.setstablemissile);
+removerevnmeshes() {
+  if(_isarray(level.firingrange.setstablemissile)) {
+    level.firingrange.setstablemissile = common_scripts\utility::_id_0F97(level.firingrange.setstablemissile);
 
-    foreach(var_1 in level._id_3C3B.setstablemissile) {
+    foreach(var_1 in level.firingrange.setstablemissile) {
       if(isDefined(var_1) && !_isremovedentity(var_1)) {
         var_1 delete();
       }
@@ -858,25 +858,25 @@ _id_7CF7() {
   }
 }
 
-_id_64A8() {
+movefloorpanelup() {
   level endon("shutdown_hologram");
   var_0 = _randomfloatrange(0.0, 1);
   wait(var_0);
   self setModel("rec_holo_emitter_floor_on");
-  self moveTo(self._id_A08D, 0.25, 0.1, 0.1);
+  self moveTo(self.up_position, 0.25, 0.1, 0.1);
 }
 
-_id_64A7() {
+movefloorpaneldown() {
   level endon("start_round");
   self setModel("rec_holo_emitter_floor_off");
   var_0 = _randomfloatrange(0.0, 1);
   wait(var_0);
-  self moveTo(self._id_6A23, 0.25, 0.1, 0.1);
+  self moveTo(self.og_position, 0.25, 0.1, 0.1);
 }
 
-_id_8C35(var_0, var_1) {
+shutdownround(var_0, var_1) {
   level notify("shutdown_hologram");
-  level._id_3C3B._id_57CC = 1;
+  level.firingrange.isshuttingdown = 1;
   var_1 setclientomnvar("ui_vlobby_round_state", 0);
   var_1 setclientomnvar("ui_vlobby_round_timer", 0);
   var_1 setclientomnvar("ui_vlobby_round_damage", 0);
@@ -884,32 +884,32 @@ _id_8C35(var_0, var_1) {
   var_1 setclientomnvar("ui_vlobby_round_hits", 0);
   var_1 setclientomnvar("ui_vlobby_round_fired", 0);
   var_1 setclientomnvar("ui_vlobby_round_accuracy", 0);
-  var_1 thread _id_4864(1);
+  var_1 thread grenadecleanup(1);
 
-  foreach(var_3 in level._id_3C3B._id_0BDC[var_0]) {
+  foreach(var_3 in level.firingrange._id_0BDC[var_0]) {
     var_3 hide();
     var_3 notsolid();
   }
 
   if(level._id_010B) {
-    thread maps\mp\_utility::_id_5C99("lt_shootingrange", 0.25, 6000);
+    thread maps\mp\_utility::lerp_spot_intensity_array("lt_shootingrange", 0.25, 6000);
   }
 
-  thread maps\mp\_utility::_id_5C98("lt_shootingrange_bounce", 0.25, 3000);
-  thread maps\mp\_utility::_id_5C98("lt_hologram_blue", 0.25, 0.01);
+  thread maps\mp\_utility::lerp_spot_intensity("lt_shootingrange_bounce", 0.25, 3000);
+  thread maps\mp\_utility::lerp_spot_intensity("lt_hologram_blue", 0.25, 0.01);
 
-  foreach(var_6 in level._id_3C3B._id_0C3A[var_0]) {
+  foreach(var_6 in level.firingrange._id_0C3A[var_0]) {
     foreach(var_8 in var_6) {
       if(var_8._id_0BC0 == 1) {
         var_9 = var_8.origin;
         var_10 = var_8.angles;
-        thread _id_6E9B(level._id_3C3B._id_A48E, var_9, var_10, 3);
+        thread particlespawn(level.firingrange.vfxtargetspawnout, var_9, var_10, 3);
       }
 
       var_8 dontinterpolate();
       var_8._id_0B6E disableaimassist();
-      var_8.origin = var_8._id_6C4F;
-      var_8.angles = var_8._id_6C4D;
+      var_8.origin = var_8.original_position;
+      var_8.angles = var_8.original_orientation;
       var_8._id_0B6E hide();
       var_8._id_0B6E notsolid();
       var_8 hide();
@@ -920,35 +920,35 @@ _id_8C35(var_0, var_1) {
     }
   }
 
-  foreach(var_14 in level._id_3C3B._id_0BD8) {
+  foreach(var_14 in level.firingrange._id_0BD8) {
     var_14 hide();
   }
 
-  level._id_3C3B._id_621E = undefined;
-  level._id_3C3B._id_6095 = undefined;
-  level._id_3C3B._id_621F = undefined;
-  level._id_3C3B._id_76AE = 0;
-  level._id_3C3B._id_76AF = 0;
-  level._id_3C3B._id_29BB = 0;
-  level._id_3C3B._id_7A64 = 0;
-  level._id_3C3B._id_8B3B = 0;
-  level._id_3C3B._id_8B3C = 0;
-  level._id_3C3B._id_6F48 = 0;
-  level._id_3C3B._id_7F12 = 0;
-  level._id_3C3B._id_8BB1 = 1;
-  var_1 setclientomnvar("ui_vlobby_round_distance", level._id_3C3B._id_7A64);
-  var_1 setclientomnvar("ui_vlobby_round_damage", level._id_3C3B._id_29BB);
-  var_1 setclientomnvar("ui_vlobby_round_hits", level._id_3C3B._id_8B3C);
-  var_1 setclientomnvar("ui_vlobby_round_fired", level._id_3C3B._id_8B3B);
-  var_1 setclientomnvar("ui_vlobby_round_accuracy", level._id_3C3B._id_6F48);
-  level._id_3C3B._id_57CC = 0;
+  level.firingrange.minpoint = undefined;
+  level.firingrange.maxpoint = undefined;
+  level.firingrange.minpointmodpos = undefined;
+  level.firingrange.presseddown = 0;
+  level.firingrange.pressedup = 0;
+  level.firingrange.damagedone = 0;
+  level.firingrange.rangeinmeters = 0;
+  level.firingrange.shotsfired = 0;
+  level.firingrange.shotshit = 0;
+  level.firingrange.percent = 0;
+  level.firingrange.roundactive = 0;
+  level.firingrange.shouldupdateluadisplay = 1;
+  var_1 setclientomnvar("ui_vlobby_round_distance", level.firingrange.rangeinmeters);
+  var_1 setclientomnvar("ui_vlobby_round_damage", level.firingrange.damagedone);
+  var_1 setclientomnvar("ui_vlobby_round_hits", level.firingrange.shotshit);
+  var_1 setclientomnvar("ui_vlobby_round_fired", level.firingrange.shotsfired);
+  var_1 setclientomnvar("ui_vlobby_round_accuracy", level.firingrange.percent);
+  level.firingrange.isshuttingdown = 0;
 }
 
-_id_90AA() {
+spawntarget() {
   level endon("shutdown_hologram");
   var_0 = self.origin;
   var_1 = self.angles;
-  thread _id_6E9B(level._id_3C3B._id_A48D, var_0, var_1, 3);
+  thread particlespawn(level.firingrange.vfxtargetspawn, var_0, var_1, 3);
   waitframe();
   self solid();
   self._id_A580 show();
@@ -958,16 +958,16 @@ stopignoringspotlight() {
   level notify("ScaleSoundsOnExit");
   level endon("ScaleSoundsOnExit");
 
-  if(isDefined(self._id_50CA)) {
+  if(isDefined(self.in_firingrange)) {
     for(;;) {
       waitframe();
 
-      if(self._id_50CA == 1 || getdvarint("2454", 0) == 1) {
+      if(self.in_firingrange == 1 || getdvarint("2454", 0) == 1) {
         continue;
       } else {
-        level._id_3C3B._id_8F41 = common_scripts\utility::_id_0F97(level._id_3C3B._id_8F41);
+        level.firingrange.soundents = common_scripts\utility::_id_0F97(level.firingrange.soundents);
 
-        foreach(var_1 in level._id_3C3B._id_8F41) {
+        foreach(var_1 in level.firingrange.soundents) {
           var_1 scalevolume(0, 0.5);
         }
       }
@@ -975,12 +975,12 @@ stopignoringspotlight() {
   }
 }
 
-_id_37B1(var_0) {
-  var_0._id_50CA = 1;
-  thread _id_A673(0.4, var_0);
+enter_firingrange(var_0) {
+  var_0.in_firingrange = 1;
+  thread wait_start_firingrange(0.4, var_0);
 }
 
-_id_A673(var_0, var_1) {
+wait_start_firingrange(var_0, var_1) {
   var_1 endon("enter_lobby");
 
   if(!level._id_A220) {
@@ -1000,50 +1000,50 @@ _id_A673(var_0, var_1) {
     var_1 cameraunlink();
   }
 
-  var_2 = _getgroundposition(level._id_3C3B._id_3E6C.origin, 20, 512, 120);
+  var_2 = _getgroundposition(level.firingrange.fr_start.origin, 20, 512, 120);
   var_1 dontinterpolate();
   var_1 setOrigin(var_2);
-  var_1 setplayerangles(level._id_3C3B._id_3E6C.angles);
+  var_1 setplayerangles(level.firingrange.fr_start.angles);
   var_1 setclientdvar("3078", "1.0");
-  level._id_3C3B._id_57CC = 0;
-  maps\mp\hub_vl_camera::_id_A558(var_1._id_13B3._id_6DAC, "lobby" + (var_1._id_294D + 1), 1, 1);
-  maps\mp\_utility::_id_A165("playing");
+  level.firingrange.isshuttingdown = 0;
+  maps\mp\hub_vl_camera::virtual_lobby_set_class(var_1.avatar.ownerid, "lobby" + (var_1.currentselectedclass + 1), 1, 1);
+  maps\mp\_utility::updatesessionstate("playing");
   var_1 visionsetnakedforplayer("mp_vlobby_room_fr", 0);
-  var_1 thread maps\mp\hub_vl_base::_id_3639();
-  level._id_3C3B._id_8F41 = [];
+  var_1 thread maps\mp\hub_vl_base::enable_player_controls();
+  level.firingrange.soundents = [];
   var_1 thread stopignoringspotlight();
 
-  if(maps\mp\gametypes\_class::_id_5826(maps\mp\_utility::_id_44CD(var_1._id_5DF5), 0) && !maps\mp\gametypes\_class::_id_5682(var_1._id_5DF5.guid)) {
+  if(maps\mp\gametypes\_class::isvalidequipment(maps\mp\_utility::_id_44CD(var_1._id_5DF5), 0) && !maps\mp\gametypes\_class::_id_5682(var_1._id_5DF5.guid)) {
     var_1 thread _id_6311(maps\mp\_utility::_id_44CD(var_1._id_5DF5), 0);
   }
 
-  if(maps\mp\gametypes\_class::_id_5826(maps\mp\_utility::_id_44CD(var_1._id_5DF8), 0) && !maps\mp\gametypes\_class::_id_5682(var_1._id_5DF8.guid)) {
+  if(maps\mp\gametypes\_class::isvalidequipment(maps\mp\_utility::_id_44CD(var_1._id_5DF8), 0) && !maps\mp\gametypes\_class::_id_5682(var_1._id_5DF8.guid)) {
     var_1 thread _id_6311(maps\mp\_utility::_id_44CD(var_1._id_5DF8), 1);
   }
 
   if(var_1.primaryweapon != "specialty_null" && var_1.primaryweapon != "none" && var_1.primaryweapon != "combatknife_mp" && !issubstr(var_1.primaryweapon, "em1") && !issubstr(var_1.primaryweapon, "epm3") && !issubstr(var_1.primaryweapon, "dlcgun1_mp") && !issubstr(var_1.primaryweapon, "dlcgun1loot")) {
-    var_1 thread _id_635E(var_1.primaryweapon);
+    var_1 thread monitor_weapon_ammo_count(var_1.primaryweapon);
 
     if(issubstr(var_1.primaryweapon, "_gl")) {
-      var_1 thread _id_635E("alt_" + var_1.primaryweapon);
+      var_1 thread monitor_weapon_ammo_count("alt_" + var_1.primaryweapon);
     }
   }
 
   if(var_1.botclearscriptenemy != "specialty_null" && var_1.botclearscriptenemy != "none" && var_1.botclearscriptenemy != "combatknife_mp" && !issubstr(var_1.botclearscriptenemy, "em1") && !issubstr(var_1.botclearscriptenemy, "epm3") && !issubstr(var_1.primaryweapon, "dlcgun1_mp") && !issubstr(var_1.primaryweapon, "dlcgun1loot")) {
-    var_1 thread _id_635E(var_1.botclearscriptenemy);
+    var_1 thread monitor_weapon_ammo_count(var_1.botclearscriptenemy);
 
     if(issubstr(var_1.botclearscriptenemy, "_gl")) {
-      var_1 thread _id_635E("alt_" + var_1.botclearscriptenemy);
+      var_1 thread monitor_weapon_ammo_count("alt_" + var_1.botclearscriptenemy);
     }
   }
 }
 
-_id_47A5() {
+giveplayerconroldelayed() {
   self endon("enter_lobby");
   wait 2;
   var_0 = getdvarint("2454", 0);
 
-  if(var_0 == 1 && self._id_50CA == 1) {
+  if(var_0 == 1 && self.in_firingrange == 1) {
     self allowfire(1);
   }
 }
@@ -1051,33 +1051,33 @@ _id_47A5() {
 _id_089E(var_0) {
   level endon("shutdown_hologram");
   var_1 = self;
-  level._id_3C3B._id_5B57 = undefined;
-  thread _id_63EE(var_1);
-  thread _id_63E2(var_1);
-  thread _id_639C(var_1);
+  level.firingrange.last_target = undefined;
+  thread monitortime(var_1);
+  thread monitorshotsfired(var_1);
+  thread monitorhitpercent(var_1);
 
-  foreach(var_3 in level._id_3C3B._id_0C3A[var_0]) {
+  foreach(var_3 in level.firingrange._id_0C3A[var_0]) {
     foreach(var_5 in var_3) {
-      var_5 thread _id_6377(var_1);
+      var_5 thread monitordamage(var_1);
     }
   }
 
-  thread _id_3004(var_1, var_0);
-  var_8 = level._id_3C3B._id_0C3A[var_0].size;
-  var_9 = level._id_3C3B._id_0C3A[var_0];
+  thread displayboothholo(var_1, var_0);
+  var_8 = level.firingrange._id_0C3A[var_0].size;
+  var_9 = level.firingrange._id_0C3A[var_0];
 
   for(var_10 = 0; var_10 < var_8; var_10++) {
-    thread _id_930C(var_9[var_10], var_1);
+    thread startwave(var_9[var_10], var_1);
     level waittill("wave_done");
     waitframe();
   }
 
   level notify("round_done");
-  level._id_3C3B._id_7F12 = 0;
+  level.firingrange.roundactive = 0;
   var_1 setclientomnvar("ui_vlobby_round_state", 2);
 }
 
-_id_63EE(var_0) {
+monitortime(var_0) {
   level endon("shutdown_hologram");
   level endon("round_done");
   var_1 = maps\mp\_utility::gettimepassed();
@@ -1088,27 +1088,27 @@ _id_63EE(var_0) {
     var_4 = common_scripts\utility::_id_7F03(var_3 / 1000, 1);
 
     if(var_4 > 9999.9) {
-      level._id_3C3B.time = 0;
-      var_0 setclientomnvar("ui_vlobby_round_timer", level._id_3C3B.time);
+      level.firingrange.time = 0;
+      var_0 setclientomnvar("ui_vlobby_round_timer", level.firingrange.time);
       var_0 setclientomnvar("ui_vlobby_round_state", 0);
-      thread _id_8C35(level._id_3C3B._id_7F1F, var_0);
+      thread shutdownround(level.firingrange.roundnumber, var_0);
       return;
     } else if(var_4 < 0) {
-      level._id_3C3B.time = 0;
-      var_0 setclientomnvar("ui_vlobby_round_timer", level._id_3C3B.time);
+      level.firingrange.time = 0;
+      var_0 setclientomnvar("ui_vlobby_round_timer", level.firingrange.time);
       var_0 setclientomnvar("ui_vlobby_round_state", 0);
-      thread _id_8C35(level._id_3C3B._id_7F1F, var_0);
+      thread shutdownround(level.firingrange.roundnumber, var_0);
       return;
     } else {
-      level._id_3C3B.time = var_4;
-      var_0 setclientomnvar("ui_vlobby_round_timer", level._id_3C3B.time);
+      level.firingrange.time = var_4;
+      var_0 setclientomnvar("ui_vlobby_round_timer", level.firingrange.time);
     }
 
     waitframe();
   }
 }
 
-_id_930C(var_0, var_1) {
+startwave(var_0, var_1) {
   level endon("shutdown_hologram");
 
   if(getdvarint("scr_target_bots", 0) > 0) {
@@ -1125,7 +1125,7 @@ _id_930C(var_0, var_1) {
       continue;
     }
 
-    var_4 thread _id_980F(var_1);
+    var_4 thread target_lifetime(var_1);
   }
 
   for(;;) {
@@ -1139,16 +1139,16 @@ _id_930C(var_0, var_1) {
   }
 }
 
-_id_980F(var_0) {
+target_lifetime(var_0) {
   level endon("shutdown_hologram");
-  self._id_6C4F = self.origin;
-  self._id_6C4D = self.angles;
+  self.original_position = self.origin;
+  self.original_orientation = self.angles;
   self._id_0BC0 = 1;
-  _id_90AA();
-  thread _id_980D(var_0);
-  thread _id_9810();
-  thread _id_980B();
-  thread _id_980C();
+  spawntarget();
+  thread target_handler(var_0);
+  thread target_logic();
+  thread target_handle_death();
+  thread target_handle_stop();
 }
 
 _id_9800(var_0) {
@@ -1178,7 +1178,7 @@ _id_9000(var_0, var_1, var_2) {
 }
 
 playsoundonmovingent(var_0, var_1) {
-  for(var_2 = 0; var_2 < level._id_2683.size; var_2++) {
+  for(var_2 = 0; var_2 < level.costumecategories.size; var_2++) {
     if(var_1 == "allies") {
       var_3 = 0;
     } else {
@@ -1186,7 +1186,7 @@ playsoundonmovingent(var_0, var_1) {
     }
 
     var_4 = _tablelookupbyrow("mp/agentcostumetable.csv", var_2 + var_3, var_0);
-    self._id_267E[var_2] = int(tablelookup("mp/costumeIdTable.csv", 7, var_4, 4));
+    self.costume[var_2] = int(tablelookup("mp/costumeIdTable.csv", 7, var_4, 4));
   }
 }
 
@@ -1210,7 +1210,7 @@ _id_3764(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   return maps\mp\agents\_agents::_id_0A40(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
 
-_id_6E9B(var_0, var_1, var_2, var_3, var_4) {
+particlespawn(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_1)) {
     var_1 = (0, 0, 0);
   }
@@ -1242,66 +1242,66 @@ _id_6E9B(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-_id_9810() {
+target_logic() {
   level endon("shutdown_hologram");
   self endon("death");
 
   if(isDefined(self.setlookatent)) {
     var_0 = self.setlookatent;
-    _id_64D0();
+    movetargettodest();
 
     switch (var_0) {
       case "stand":
         break;
       case "cover":
-        thread _id_7574();
+        thread popinpopout();
         break;
       case "move":
-        thread _id_649E();
+        thread movebackforth();
         break;
     }
   }
 }
 
-_id_64D0() {
+movetargettodest() {
   level endon("shutdown_hologram");
   self endon("death");
 
-  if(!isDefined(level._id_3C3B._id_7F1F)) {
+  if(!isDefined(level.firingrange.roundnumber)) {
     return;
   }
-  var_0 = level._id_3C3B._id_7F1F;
+  var_0 = level.firingrange.roundnumber;
 
-  if(!isDefined(level._id_3C3B._id_0C37[var_0])) {
+  if(!isDefined(level.firingrange._id_0C37[var_0])) {
     return;
   }
-  var_1 = common_scripts\utility::_id_4461(self.origin, level._id_3C3B._id_0C37[var_0]);
-  self._id_28F5 = var_1;
-  self._id_5B23 = self._id_28F5;
+  var_1 = common_scripts\utility::getclosest(self.origin, level.firingrange._id_0C37[var_0]);
+  self.current_ent = var_1;
+  self.last_ent = self.current_ent;
 
   for(;;) {
     if(isDefined(self)) {
-      var_2 = distance(self._id_28F5.origin, self.origin);
-      var_3 = var_2 / level._id_3C3B._id_7F0E;
+      var_2 = distance(self.current_ent.origin, self.origin);
+      var_3 = var_2 / level.firingrange.round_target_unit_per_second;
 
       if(var_3 < 0.5) {
         var_3 = 0.5;
       }
 
-      if(isDefined(self._id_28F5._id_0165) && self._id_28F5._id_0165 == "jump") {
-        self moveTo(self._id_28F5.origin, var_3 * 0.5, 0, 0.1);
-      } else if(isDefined(self._id_5B23._id_0165) && self._id_5B23._id_0165 == "jump") {
-        self moveTo(self._id_28F5.origin, var_3 * 0.5, 0.1, 0);
+      if(isDefined(self.current_ent._id_0165) && self.current_ent._id_0165 == "jump") {
+        self moveTo(self.current_ent.origin, var_3 * 0.5, 0, 0.1);
+      } else if(isDefined(self.last_ent._id_0165) && self.last_ent._id_0165 == "jump") {
+        self moveTo(self.current_ent.origin, var_3 * 0.5, 0.1, 0);
       } else {
-        self moveTo(self._id_28F5.origin, var_3);
+        self moveTo(self.current_ent.origin, var_3);
       }
 
       self waittill("movedone");
 
-      if(isDefined(self._id_28F5.target)) {
-        var_4 = _getEnt(self._id_28F5.target, "targetname");
-        self._id_5B23 = self._id_28F5;
-        self._id_28F5 = var_4;
+      if(isDefined(self.current_ent.target)) {
+        var_4 = _getEnt(self.current_ent.target, "targetname");
+        self.last_ent = self.current_ent;
+        self.current_ent = var_4;
       } else
         return;
     } else
@@ -1309,16 +1309,16 @@ _id_64D0() {
   }
 }
 
-_id_7574() {
+popinpopout() {
   level endon("shutdown_hologram");
   self endon("death");
   var_0 = 4;
   var_1 = 1;
-  var_2 = self._id_28F5.origin;
-  var_3 = self._id_5B23.origin;
+  var_2 = self.current_ent.origin;
+  var_3 = self.last_ent.origin;
 
-  if(self._id_28F5 == self._id_5B23) {
-    var_3 = self._id_6C4F;
+  if(self.current_ent == self.last_ent) {
+    var_3 = self.original_position;
   }
 
   wait(var_0);
@@ -1326,12 +1326,12 @@ _id_7574() {
   for(;;) {
     if(isDefined(self)) {
       var_4 = distance(var_3, var_2);
-      var_5 = var_4 / level._id_3C3B._id_7F0E;
+      var_5 = var_4 / level.firingrange.round_target_unit_per_second;
       self moveTo(var_3, var_5);
       self waittill("movedone");
       wait(var_1);
       var_4 = distance(var_3, var_2);
-      var_5 = var_4 / level._id_3C3B._id_7F0E;
+      var_5 = var_4 / level.firingrange.round_target_unit_per_second;
       self moveTo(var_2, var_5);
       self waittill("movedone");
       wait(var_0);
@@ -1339,23 +1339,23 @@ _id_7574() {
   }
 }
 
-_id_649E() {
+movebackforth() {
   level endon("shutdown_hologram");
   self endon("death");
   var_0 = undefined;
   var_1 = undefined;
 
-  if(isDefined(self._id_5B23._id_0165) && self._id_5B23._id_0165 == "jump") {
-    var_0 = self._id_5B23;
+  if(isDefined(self.last_ent._id_0165) && self.last_ent._id_0165 == "jump") {
+    var_0 = self.last_ent;
     var_1 = var_0.origin;
-    self._id_5B23 = _getEnt(var_0.targetname, "target");
+    self.last_ent = _getEnt(var_0.targetname, "target");
   }
 
-  var_2 = self._id_28F5.origin;
-  var_3 = self._id_5B23.origin;
+  var_2 = self.current_ent.origin;
+  var_3 = self.last_ent.origin;
 
-  if(self._id_28F5 == self._id_5B23) {
-    var_3 = self._id_6C4F;
+  if(self.current_ent == self.last_ent) {
+    var_3 = self.original_position;
   }
 
   for(;;) {
@@ -1363,29 +1363,29 @@ _id_649E() {
       if(isDefined(var_1)) {
         wait 2;
         var_4 = distance(var_1, var_2);
-        var_5 = var_4 / level._id_3C3B._id_7F0E;
+        var_5 = var_4 / level.firingrange.round_target_unit_per_second;
         self moveTo(var_1, var_5 * 0.5, 0, 0.1);
         self waittill("movedone");
         var_4 = distance(var_1, var_3);
-        var_5 = var_4 / level._id_3C3B._id_7F0E;
+        var_5 = var_4 / level.firingrange.round_target_unit_per_second;
         self moveTo(var_3, var_5 * 0.5, 0.1, 0);
         self waittill("movedone");
         wait 2;
         var_4 = distance(var_1, var_3);
-        var_5 = var_4 / level._id_3C3B._id_7F0E;
+        var_5 = var_4 / level.firingrange.round_target_unit_per_second;
         self moveTo(var_1, var_5 * 0.5, 0, 0.1);
         self waittill("movedone");
         var_4 = distance(var_1, var_2);
-        var_5 = var_4 / level._id_3C3B._id_7F0E;
+        var_5 = var_4 / level.firingrange.round_target_unit_per_second;
         self moveTo(var_2, var_5 * 0.5, 0.1, 0);
         self waittill("movedone");
       } else {
         var_4 = distance(var_3, var_2);
-        var_5 = var_4 / level._id_3C3B._id_7F0E;
+        var_5 = var_4 / level.firingrange.round_target_unit_per_second;
         self moveTo(var_3, var_5);
         self waittill("movedone");
         var_4 = distance(var_2, var_3);
-        var_5 = var_4 / level._id_3C3B._id_7F0E;
+        var_5 = var_4 / level.firingrange.round_target_unit_per_second;
         self moveTo(var_2, var_5);
         self waittill("movedone");
       }
@@ -1399,30 +1399,30 @@ laseroff() {
   for(;;) {
     var_0 = [];
 
-    for(var_1 = 0; var_1 < self._id_4DDE.size; var_1++) {
-      self._id_4DDE[var_1].time = self._id_4DDE[var_1].time - 1;
+    for(var_1 = 0; var_1 < self.hits.size; var_1++) {
+      self.hits[var_1].time = self.hits[var_1].time - 1;
 
-      if(self._id_4DDE[var_1].time > 0) {
-        var_0[var_0.size] = self._id_4DDE[var_1];
+      if(self.hits[var_1].time > 0) {
+        var_0[var_0.size] = self.hits[var_1];
       }
     }
 
-    self._id_4DDE = var_0;
+    self.hits = var_0;
 
-    foreach(var_3 in self._id_4DDE) {}
+    foreach(var_3 in self.hits) {}
 
     waitframe();
   }
 }
 
-_id_980D(var_0) {
+target_handler(var_0) {
   level endon("shutdown_hologram");
-  self._id_4DDE = [];
+  self.hits = [];
   self._id_0B6E.health = 9999;
   self._id_0B6E.maxhealth = 9999;
   self.maxhealth = 9999;
   self.health = self.maxhealth;
-  self._id_3A09 = 100;
+  self.fakehealth = 100;
   self setCanDamage(1);
   self._id_0B6E show();
   self._id_0B6E solid();
@@ -1440,25 +1440,25 @@ _id_980D(var_0) {
     var_8 = undefined;
     var_9 = undefined;
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
-    var_11 = _id_4591(var_10, var_8, var_0);
+    var_11 = getmodifier(var_10, var_8, var_0);
     var_12 = self gettagorigin("tag_head");
     var_13 = self gettagorigin("tag_chest");
     self.health = self.maxhealth;
-    var_14 = self._id_3A09;
+    var_14 = self.fakehealth;
     var_14 = _float(var_14) - _float(var_1) * var_11;
     var_14 = common_scripts\utility::_id_7F03(var_14, 0);
-    self._id_3A09 = int(var_14);
+    self.fakehealth = int(var_14);
 
-    if(self._id_3A09 <= 0) {
-      thread _id_9833(var_13);
+    if(self.fakehealth <= 0) {
+      thread targetplaydeath(var_13);
       self.health = 0;
 
       if(isDefined(var_2)) {
         if(isDefined(var_8)) {
           if(var_8 == "tag_head") {
-            var_2 _id_04C7::_id_A102("killshot_headshot");
+            var_2 _id_04C7::updatedamagefeedback("killshot_headshot");
           } else if(var_8 == "tag_chest") {
-            var_2 _id_04C7::_id_A102("mp_hit_kill");
+            var_2 _id_04C7::updatedamagefeedback("mp_hit_kill");
           }
         }
       }
@@ -1469,38 +1469,38 @@ _id_980D(var_0) {
 
     if(isDefined(var_2)) {
       if(isDefined(var_8) && var_8 == "tag_head") {
-        var_2 _id_04C7::_id_A102("headshot");
+        var_2 _id_04C7::updatedamagefeedback("headshot");
         continue;
       }
 
-      var_2 _id_04C7::_id_A102("standard");
+      var_2 _id_04C7::updatedamagefeedback("standard");
     }
   }
 }
 
 _id_9803() {
   level endon("shutdown_hologram");
-  self._id_4DDE = [];
+  self.hits = [];
 
   while(isDefined(self) && self.health > 0) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
   }
 }
 
-_id_9833(var_0) {
+targetplaydeath(var_0) {
   playFX(level._effect["recovery_scoring_target_shutter_enemy"], var_0);
 }
 
-_id_2A72() {
+deactivate_targets() {
   level notify("shutdown_hologram");
 }
 
-_id_3C37() {
+firing_range_setup_triggers() {
   var_0 = getEntArray("firing_range_round_trigger", "targetname");
   return var_0;
 }
 
-_id_3C35() {
+firing_range_setup_target_logic() {
   var_0 = getEntArray("target_logic_point", "targetname");
   var_1 = [];
 
@@ -1519,7 +1519,7 @@ _id_3C35() {
   return var_1;
 }
 
-_id_3C30() {
+firing_range_setup_env() {
   var_0 = getEntArray("round_environment", "targetname");
   var_1 = [];
 
@@ -1546,8 +1546,8 @@ _id_3C30() {
   return var_1;
 }
 
-_id_3C31() {
-  var_0 = common_scripts\utility::_id_46B7("round_environment", "targetname");
+firing_range_setup_env_vfx() {
+  var_0 = common_scripts\utility::getstructarray("round_environment", "targetname");
   var_1 = [];
 
   foreach(var_3 in var_0) {
@@ -1571,7 +1571,7 @@ _id_3C31() {
   return var_1;
 }
 
-_id_3C36() {
+firing_range_setup_targets() {
   var_0 = getEntArray("target_enemy", "targetname");
   var_1 = [];
 
@@ -1579,8 +1579,8 @@ _id_3C36() {
     var_3._id_0BC0 = 0;
     var_3.pers["team"] = "axis";
     var_3.team = "axis";
-    var_3._id_6C3E = _getEnt(var_3.target, "targetname");
-    var_3._id_0B6E = _getEnt(var_3._id_6C3E.target, "targetname");
+    var_3.origin_ent = _getEnt(var_3.target, "targetname");
+    var_3._id_0B6E = _getEnt(var_3.origin_ent.target, "targetname");
     var_3._id_0B6E linktosynchronizedparent(var_3);
     var_3._id_0B6E.pers["team"] = "axis";
     var_3._id_0B6E.team = "axis";
@@ -1591,8 +1591,8 @@ _id_3C36() {
     } else
       var_3._id_A580 = var_3;
 
-    var_3._id_6C4F = var_3.origin;
-    var_3._id_6C4D = var_3.angles;
+    var_3.original_position = var_3.origin;
+    var_3.original_orientation = var_3.angles;
     var_3._id_0B6E hide();
     var_3._id_0B6E notsolid();
     var_3 hide();
@@ -1623,11 +1623,11 @@ _id_3C36() {
   return var_1;
 }
 
-_id_980B() {
+target_handle_death() {
   level endon("shutdown_hologram");
   self waittill("death");
   level notify("target_died");
-  _id_9819();
+  target_reset();
 }
 
 _id_9801() {
@@ -1636,19 +1636,19 @@ _id_9801() {
   level notify("target_died");
 }
 
-_id_980C() {
+target_handle_stop() {
   self endon("death");
   level waittill("shutdown_hologram");
-  _id_9819();
+  target_reset();
 }
 
 _id_9802() {
   self endon("death");
   level waittill("shutdown_hologram");
-  maps\mp\agents\_agent_utility::_id_5A28(self);
+  maps\mp\agents\_agent_utility::killagent(self);
 }
 
-_id_9819() {
+target_reset() {
   self setCanDamage(0);
   self hide();
   self notsolid();
@@ -1663,10 +1663,10 @@ _id_9819() {
   }
 }
 
-_id_635E(var_0) {
+monitor_weapon_ammo_count(var_0) {
   self endon("enter_lobby");
 
-  while(self._id_50CA == 1) {
+  while(self.in_firingrange == 1) {
     var_1 = self getfractionmaxammo(var_0);
 
     if(var_1 <= 0.25) {
@@ -1678,27 +1678,27 @@ _id_635E(var_0) {
   }
 }
 
-_id_4864(var_0) {
-  if(isDefined(level._id_486C) && _isarray(level._id_486C)) {
-    foreach(var_2 in level._id_486C) {
+grenadecleanup(var_0) {
+  if(isDefined(level.grenades) && _isarray(level.grenades)) {
+    foreach(var_2 in level.grenades) {
       if(isDefined(var_2) && !_isremovedentity(var_2)) {
         if(!isDefined(self) || !isDefined(var_2._id_0117) || _isremovedentity(var_2._id_0117)) {
-          if(!isDefined(var_2._id_A9E0)) {
+          if(!isDefined(var_2.weaponname)) {
             continue;
           } else {
             var_2 notify("death");
-            var_2 thread _id_2CC3();
+            var_2 thread delaydelete();
           }
 
           continue;
         }
 
         if(var_2._id_0117 == self) {
-          if(!isDefined(var_2._id_A9E0)) {
+          if(!isDefined(var_2.weaponname)) {
             continue;
           } else {
             var_2 notify("death");
-            var_2 thread _id_2CC3();
+            var_2 thread delaydelete();
           }
         }
       }
@@ -1706,7 +1706,7 @@ _id_4864(var_0) {
   }
 }
 
-_id_2CC3() {
+delaydelete() {
   waitframe();
 
   if(isDefined(self) && !_isremovedentity(self)) {
@@ -1717,7 +1717,7 @@ _id_2CC3() {
 _id_6311(var_0, var_1) {
   self endon("enter_lobby");
 
-  while(level._id_50CA == 1) {
+  while(level.in_firingrange == 1) {
     wait 1.5;
     var_2 = self getammocount(var_0);
 
@@ -1730,12 +1730,12 @@ _id_6311(var_0, var_1) {
   }
 }
 
-_id_8C26(var_0) {
+showtransition_cg(var_0) {
   level endon("shutdown_hologram");
   var_1 = 0;
   var_2 = [];
 
-  foreach(var_4 in level._id_3C3B._id_0BDC[var_0]) {
+  foreach(var_4 in level.firingrange._id_0BDC[var_0]) {
     if(isDefined(var_4.classname) && var_4.classname == "script_model") {
       if(isDefined(var_4.model) && issubstr(var_4.model, "rec_holo_range")) {
         var_2[var_1] = var_4.model;
@@ -1756,10 +1756,10 @@ _id_8C26(var_0) {
   return var_2;
 }
 
-_id_4D1A(var_0, var_1) {
+hidetransitionmeshes_cg(var_0, var_1) {
   var_2 = 0;
 
-  foreach(var_4 in level._id_3C3B._id_0BDC[var_0]) {
+  foreach(var_4 in level.firingrange._id_0BDC[var_0]) {
     if(isDefined(var_4.classname) && var_4.classname == "script_model") {
       if(isDefined(var_4.model) && issubstr(var_4.model, "rec_holo_range")) {
         if(_isstring(var_1[var_2])) {

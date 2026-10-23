@@ -4,20 +4,20 @@
 *******************************************************/
 
 main() {
-  _id_87A7();
-  _id_8795();
+  setup_callbacks();
+  setup_bot_gun();
 }
 
-_id_87A7() {
-  level.bot_funcs["gametype_think"] = ::_id_1A0E;
+setup_callbacks() {
+  level.bot_funcs["gametype_think"] = ::bot_gun_think;
 }
 
-_id_8795() {}
+setup_bot_gun() {}
 
-_id_1A0D(var_0, var_1) {
+bot_gun_pick_personality_from_weapon(var_0, var_1) {
   if(isDefined(var_0)) {
     var_2 = var_0 + "";
-    var_3 = level._id_1B2C[var_2];
+    var_3 = level.bot_weap_personality[var_2];
 
     if(isDefined(var_3)) {
       var_4 = strtok(var_3, "| ");
@@ -35,13 +35,13 @@ _id_1A0D(var_0, var_1) {
           var_5 = common_scripts\utility::random(var_4);
         }
 
-        maps\mp\bots\_bots_util::_id_1AD5(var_5);
+        maps\mp\bots\_bots_util::bot_set_personality(var_5);
       }
     }
   }
 }
 
-_id_1A0E() {
+bot_gun_think() {
   self notify("bot_gun_think");
   self endon("bot_gun_think");
   self endon("death");
@@ -49,7 +49,7 @@ _id_1A0E() {
   level endon("game_ended");
   self endon("owner_disconnect");
   var_0 = "";
-  var_1 = self._id_6F7D;
+  var_1 = self.personality;
   wait 0.1;
 
   for(;;) {
@@ -60,11 +60,11 @@ _id_1A0E() {
 
       if(self botgetdifficultysetting("advancedPersonality") && self botgetdifficultysetting("strategyLevel") > 0) {
         var_3 = maps\mp\_utility::_id_452A(var_2);
-        _id_1A0D(var_3, var_1);
+        bot_gun_pick_personality_from_weapon(var_3, var_1);
       }
     }
 
-    self[[self._id_6F7F]]();
+    self[[self.personality_update_function]]();
     waitframe();
   }
 }

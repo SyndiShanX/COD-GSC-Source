@@ -59,13 +59,13 @@ _id_785A() {
     }
   }
 
-  common_scripts\utility::_id_3C9F("flag_all_players_in_hilt");
+  common_scripts\utility::flag_wait("flag_all_players_in_hilt");
   _id_0557::_id_782D("8A The Hilt", "Use Hilt");
 }
 
 _id_785B() {
   foreach(var_1 in level.players) {
-    maps\mp\_utility::_id_2CED(2, _id_0555::issprinting, "nest_no_return", var_1);
+    maps\mp\_utility::delaythread(2, _id_0555::issprinting, "nest_no_return", var_1);
   }
 
   var_3 = _getEnt("hilt_altar_model", "targetname");
@@ -92,12 +92,12 @@ _id_7853() {
   thread _id_7432(0.25, 0);
 
   foreach(var_2 in level.players) {
-    if(_id_0547::_id_5565(_id_0378::_id_307B(var_2._id_20D8), "mari")) {
+    if(_id_0547::_id_5565(_id_0378::_id_307B(var_2.characterindex), "mari")) {
       var_2 _id_0367::_id_8E3D("klausnononono", level.players);
     }
   }
 
-  level thread common_scripts\_exploder::_id_2A6D(238, undefined, 0);
+  level thread common_scripts\_exploder::deactivate_clientside_exploder(238, undefined, 0);
   level thread _id_76A1();
   level thread _id_92B5(3);
   level._id_179A _id_0560::_id_AB83();
@@ -161,7 +161,7 @@ _id_7432(var_0, var_1, var_2) {
         var_4._id_1781 destroy();
       }
 
-      var_4._id_1781 = _id_2787("black", 0.0, var_4, (1, 1, 1));
+      var_4._id_1781 = create_client_overlay("black", 0.0, var_4, (1, 1, 1));
       var_4._id_1781 setshader(var_2, 640, 480);
     }
 
@@ -240,7 +240,7 @@ _id_38D9(var_0) {
 }
 
 _id_9008() {
-  var_0 = common_scripts\utility::_id_46B5("final_brute_boss", "targetname");
+  var_0 = common_scripts\utility::getstruct("final_brute_boss", "targetname");
   var_1 = _id_054D::_id_90BA("zombie_boss_village", var_0, "fire well", 0, 0, 0);
   var_1._id_1CBD = var_0;
   var_1 _id_0547::disableoffhandsecondaryweapons();
@@ -343,8 +343,8 @@ _id_A6CA(var_0, var_1) {
 }
 
 _id_1CCE() {
-  playFX(common_scripts\utility::_id_44F5("nuke_blast"), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
-  _id_0378::_id_8D74("aud_nuke_explo");
+  playFX(common_scripts\utility::getfx("nuke_blast"), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+  _id_0378::snd_message("aud_nuke_explo");
   maps\mp\gametypes\zombies::_id_281C("ammo", self.origin, "random", 0, 0);
   level thread maps\mp\gametypes\zombies::_id_08B2(self.origin);
   _id_055F::_id_AB79();
@@ -394,11 +394,11 @@ _id_3AE7() {
     } else
       var_2 _id_054C::_id_AC23("brutefinale");
 
-    var_2 _id_0378::_id_8D74("objective_complete", "brutefinale");
+    var_2 _id_0378::snd_message("objective_complete", "brutefinale");
     var_2 _id_0468::_id_0A2B("killBoss");
     level._id_400E[level._id_400E.size] = ["raven_set 1 1", "all"];
 
-    if(level._id_A980 <= 12) {
+    if(level.wavecounter <= 12) {
       level._id_400E[level._id_400E.size] = ["assassin_set 0 1", "all"];
     }
 
@@ -417,11 +417,11 @@ _id_238D() {
 }
 
 _id_51EB() {
-  var_0 = common_scripts\utility::_id_44BD("klaus_revive_spawn_point", "targetname");
+  var_0 = common_scripts\utility::getent_or_struct("klaus_revive_spawn_point", "targetname");
 }
 
 _id_4AD1() {
-  var_0 = common_scripts\utility::_id_44BD("klaus_revive_spawn_point", "targetname");
+  var_0 = common_scripts\utility::getent_or_struct("klaus_revive_spawn_point", "targetname");
   var_1 = maps\mp\mp_zombie_nest_ee_hc_true_voice::_id_744B();
   var_2 = 0;
 
@@ -438,7 +438,7 @@ _id_4AD1() {
       level._id_400E[level._id_400E.size] = ["bat_elite_set 0 1", "all"];
     }
 
-    if(level._id_A980 <= 16) {
+    if(level.wavecounter <= 16) {
       level._id_400E[level._id_400E.size] = ["bat_elite_set 1 1", "all"];
     }
 
@@ -452,10 +452,10 @@ _id_4AD1() {
   } else
     thread _id_8F93(var_0);
 
-  var_3 = maps\mp\agents\_agent_utility::_id_43FD("all");
+  var_3 = maps\mp\agents\_agent_utility::getactiveagentsoftype("all");
 
   foreach(var_5 in var_3) {
-    if(var_5._id_000A == level._id_746E) {
+    if(var_5._id_000A == level.playerteam) {
       continue;
     }
     if(isalive(var_5)) {
@@ -478,10 +478,10 @@ _id_4AD1() {
       var_9._id_1781 destroy();
     }
 
-    var_9._id_324E = 0;
+    var_9.dontspeak = 0;
   }
 
-  var_11 = common_scripts\utility::_id_46B7("klaus_player_pos", "targetname");
+  var_11 = common_scripts\utility::getstructarray("klaus_player_pos", "targetname");
   var_12 = maps\mp\mp_zombie_nest_ee_util::_id_440D();
 
   for(var_13 = 0; var_13 < var_12.size; var_13++) {
@@ -505,15 +505,15 @@ _id_4AD1() {
     level._id_5A89 thread _id_0568::_id_5A98();
 
     foreach(var_9 in level.players) {
-      var_9 _id_0547::_id_8A6D(0);
+      var_9 _id_0547::setzombiesignoreme(0);
     }
 
     _id_056D::_id_8A6E(0);
     wait 1;
-    var_16 = common_scripts\utility::_id_46B5("klaus_mid_point", "targetname");
-    var_17 = common_scripts\utility::_id_46B5("klaus_mid_point_2", "targetname");
-    var_18 = common_scripts\utility::_id_46B5("klaus_mid_point_3", "targetname");
-    var_19 = common_scripts\utility::_id_46B5("klaus_ent_point", "targetname");
+    var_16 = common_scripts\utility::getstruct("klaus_mid_point", "targetname");
+    var_17 = common_scripts\utility::getstruct("klaus_mid_point_2", "targetname");
+    var_18 = common_scripts\utility::getstruct("klaus_mid_point_3", "targetname");
+    var_19 = common_scripts\utility::getstruct("klaus_ent_point", "targetname");
     thread _id_5A9D();
     level._id_5A89 _id_0568::_id_5A90(var_16);
     common_scripts\utility::flag_set("flag_dlg_klaus_reached_pnt_1");
@@ -528,7 +528,7 @@ _id_4AD1() {
     wait 7.3;
 
     foreach(var_9 in level.players) {
-      var_9 _id_0547::_id_8A6D(0);
+      var_9 _id_0547::setzombiesignoreme(0);
     }
 
     _id_056D::_id_8A6E(0);
@@ -551,7 +551,7 @@ _id_2E92() {
   wait 8;
 
   foreach(var_1 in level.players) {
-    if(_id_0547::_id_5565(_id_0378::_id_307B(var_1._id_20D8), "mari")) {
+    if(_id_0547::_id_5565(_id_0378::_id_307B(var_1.characterindex), "mari")) {
       var_1 _id_0367::_id_8E3D("holdstillbrotherifollowed", level.players);
     }
   }
@@ -560,19 +560,19 @@ _id_2E92() {
   wait 1;
 
   foreach(var_1 in level.players) {
-    if(_id_0547::_id_5565(_id_0378::_id_307B(var_1._id_20D8), "mari")) {
+    if(_id_0547::_id_5565(_id_0378::_id_307B(var_1.characterindex), "mari")) {
       var_1 _id_0367::_id_8E3D("klaus", level.players);
     }
   }
 
-  common_scripts\utility::_id_3C9F("flag_dlg_klaus_reached_pnt_1");
-  _id_0378::_id_8D74("aud_revived_klaus_speak", level._id_5A89, 3);
-  common_scripts\utility::_id_3C9F("flag_dlg_klaus_reached_pnt_2");
-  _id_0378::_id_8D74("aud_revived_klaus_speak", level._id_5A89, 4);
-  common_scripts\utility::_id_3C9F("flag_dlg_klaus_reached_pnt_3");
-  _id_0378::_id_8D74("aud_revived_klaus_speak", level._id_5A89, 5);
-  common_scripts\utility::_id_3C9F("flag_dlg_klaus_reached_pnt_4");
-  _id_0378::_id_8D74("aud_revived_klaus_speak", level._id_5A89, 6);
+  common_scripts\utility::flag_wait("flag_dlg_klaus_reached_pnt_1");
+  _id_0378::snd_message("aud_revived_klaus_speak", level._id_5A89, 3);
+  common_scripts\utility::flag_wait("flag_dlg_klaus_reached_pnt_2");
+  _id_0378::snd_message("aud_revived_klaus_speak", level._id_5A89, 4);
+  common_scripts\utility::flag_wait("flag_dlg_klaus_reached_pnt_3");
+  _id_0378::snd_message("aud_revived_klaus_speak", level._id_5A89, 5);
+  common_scripts\utility::flag_wait("flag_dlg_klaus_reached_pnt_4");
+  _id_0378::snd_message("aud_revived_klaus_speak", level._id_5A89, 6);
 }
 
 _id_5A9D() {
@@ -591,7 +591,7 @@ _id_8FEE(var_0) {
 _id_647E() {
   level._id_5A89 endon("death");
   level._id_5A89 endon("klaus_exploit_warp");
-  var_0 = common_scripts\utility::_id_46B5("klaus_revive_death_point", "targetname");
+  var_0 = common_scripts\utility::getstruct("klaus_revive_death_point", "targetname");
   level._id_5A89 _id_0568::_id_5A90(var_0);
   common_scripts\utility::flag_set("flag_klaus_reached_well");
   _id_5A8D();
@@ -600,7 +600,7 @@ _id_647E() {
 _id_5A8D() {
   level._id_5A89 thread _id_0568::_id_5A96();
   wait 0.666667;
-  _id_0378::_id_8D74("aud_revived_klaus_speak", level._id_5A89, 7);
+  _id_0378::snd_message("aud_revived_klaus_speak", level._id_5A89, 7);
   thread _id_35A7();
   wait 3.06667;
   thread maps\mp\mp_zombie_nest_ee_fire_well::_id_7854();
@@ -655,7 +655,7 @@ _id_74BE(var_0, var_1, var_2, var_3) {
   self allowmelee(1);
   self allowprone(1);
   self _meth_85BF(1);
-  self _meth_8309(1);
+  self scripted_elems(1);
 }
 
 _id_9308(var_0) {
@@ -665,7 +665,7 @@ _id_9308(var_0) {
   level thread _id_6C00();
   level waittill("brute battle complete");
   level thread common_scripts\_exploder::_id_088E(238);
-  _id_0378::_id_8D74("brute_battle_complete_notification");
+  _id_0378::snd_message("brute_battle_complete_notification");
   waitframe();
   var_1 = getEntArray("nest_brute_uber_inserts", "targetname");
 
@@ -675,7 +675,7 @@ _id_9308(var_0) {
 }
 
 _id_8FF5() {
-  var_0 = common_scripts\utility::_id_46B7(self._id_1CBD.target, "targetname");
+  var_0 = common_scripts\utility::getstructarray(self._id_1CBD.target, "targetname");
   var_1 = [];
 
   foreach(var_3 in var_0) {
@@ -702,7 +702,7 @@ _id_ABE1() {
     self scragentsetanimmode("anim deltas");
     self scragentsetorientmode("face angle abs", self.angles);
     self scragentsetscripted(1);
-    maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1.0, "taunt_anim");
+    maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1.0, "taunt_anim");
     self scragentsetscripted(0);
   }
 }
@@ -718,7 +718,7 @@ _id_A68E() {
 }
 
 _id_A696() {
-  var_0 = common_scripts\utility::_id_46B5("put_brute_out_of_misery", "targetname");
+  var_0 = common_scripts\utility::getstruct("put_brute_out_of_misery", "targetname");
 
   while(distance(self.origin, var_0.origin) > var_0.radius) {
     wait 0.5;
@@ -770,7 +770,7 @@ _id_310A() {
   level thread maps\mp\mp_zombie_nest_straub_appearances::_id_93F6();
   level thread common_scripts\_exploder::_id_088E(221);
   _id_7432(var_4, 1);
-  var_5 = common_scripts\utility::_id_46B5("final_boss_anim_intro_scripted_node", "targetname");
+  var_5 = common_scripts\utility::getstruct("final_boss_anim_intro_scripted_node", "targetname");
   level._id_7317 = spawn("script_model", (0, 0, 0));
   level._id_7317 setModel("player_generic_world_body");
   level._id_7317 ghost();
@@ -783,7 +783,7 @@ _id_310A() {
   var_8 setModel("zmb_rock_intro_02");
 
   foreach(var_10 in level.players) {
-    if(_id_0547::_id_577E(var_10)) {
+    if(_id_0547::isplayerinlaststand(var_10)) {
       var_10 notify("revive_trigger");
     }
 
@@ -808,7 +808,7 @@ _id_310A() {
 
   foreach(var_10 in level.players) {
     var_10 maps\mp\_utility::freezecontrolswrapper(1);
-    var_10._id_324E = 1;
+    var_10.dontspeak = 1;
     var_10 setclienttriggervisionset("mp_zombie_nest_01");
     var_10 setclientomnvar("ui_hide_hud", 1);
     var_10 hideviewmodel();
@@ -817,11 +817,11 @@ _id_310A() {
     var_10 setOrigin(level._id_7317 gettagorigin("tag_player"));
     var_10 setplayerangles(level._id_7317 gettagangles("tag_player"));
     var_10 playerlinktoabsolute(level._id_7317, "tag_player");
-    var_10 _id_0547::_id_8A6D(1);
+    var_10 _id_0547::setzombiesignoreme(1);
   }
 
   wait(var_4);
-  _id_0378::_id_8D74("brute_intro_begin");
+  _id_0378::snd_message("brute_intro_begin");
   level._id_7317 scriptmodelplayanimdeltamotionfrompos("s2_zom_brt_cam_intro", var_5.origin, var_5.angles, var_0);
   var_6 scriptmodelplayanimdeltamotionfrompos("s2_zom_brt_intro", var_5.origin, var_5.angles);
   var_8 scriptmodelplayanimdeltamotionfrompos("s2_zom_brt_rock_intro", var_5.origin, var_5.angles);
@@ -881,7 +881,7 @@ _id_310A() {
   thread maps\mp\mp_zombie_nest_ee_util::_id_1CC9();
   thread maps\mp\mp_zombie_nest_ee_util::_id_1CCB();
   setDvar("4712", 1);
-  level thread common_scripts\_exploder::_id_2A6D(221, undefined, 0);
+  level thread common_scripts\_exploder::deactivate_clientside_exploder(221, undefined, 0);
 
   foreach(var_10 in level.players) {
     var_10 unlink();
@@ -893,14 +893,14 @@ _id_310A() {
     var_10 allowcrouch(1);
     var_10 allowjump(1);
     var_10 _meth_8546(1);
-    var_10 _id_0547::_id_8A6D(0);
+    var_10 _id_0547::setzombiesignoreme(0);
     var_10 setclientomnvar("ui_hide_hud", 0);
-    var_10._id_324E = 0;
+    var_10.dontspeak = 0;
   }
 
   level._id_7317 delete();
   var_8 delete();
-  _id_0378::_id_8D74("brute_intro_end");
+  _id_0378::snd_message("brute_intro_end");
 }
 
 _id_20B6(var_0, var_1, var_2) {
@@ -912,7 +912,7 @@ _id_20B6(var_0, var_1, var_2) {
   }
 
   for(var_8 = 0; var_8 < var_3.size; var_8++) {
-    maps\mp\agents\_scripted_agent_anim_util::_id_A79E(var_1, var_3[var_8]["name"]);
+    maps\mp\agents\_scripted_agent_anim_util::waituntilnotetrack(var_1, var_3[var_8]["name"]);
 
     switch (var_3[var_8]["name"]) {
       case "fov end":
@@ -949,9 +949,9 @@ _id_310B(var_0) {
     var_3 disableweapons();
     var_3 playerhide();
     var_3 maps\mp\_utility::freezecontrolswrapper(1);
-    var_3 _id_0547::_id_8A6D(1);
+    var_3 _id_0547::setzombiesignoreme(1);
     var_3 setclientomnvar("ui_hide_hud", 1);
-    var_3._id_324E = 1;
+    var_3.dontspeak = 1;
   }
 
   _id_7432(var_1, 1);
@@ -974,7 +974,7 @@ _id_310B(var_0) {
 }
 
 _id_76A1() {
-  var_0 = common_scripts\utility::_id_46B7("zmb_blimp_pieces_struct", "targetname");
+  var_0 = common_scripts\utility::getstructarray("zmb_blimp_pieces_struct", "targetname");
 
   foreach(var_2 in var_0) {
     var_2._id_57F7 = 0;
@@ -985,7 +985,7 @@ _id_76A1() {
 }
 
 _id_6CC3() {
-  var_0 = common_scripts\utility::_id_46B7("zombie_spawner", "script_noteworthy");
+  var_0 = common_scripts\utility::getstructarray("zombie_spawner", "script_noteworthy");
   level._id_1CBF = [];
 
   foreach(var_2 in var_0) {
@@ -994,7 +994,7 @@ _id_6CC3() {
     }
   }
 
-  var_6 = common_scripts\utility::_id_46B7("zmb_blimp_pieces_struct", "targetname");
+  var_6 = common_scripts\utility::getstructarray("zmb_blimp_pieces_struct", "targetname");
   level._id_1CBC = [];
 
   foreach(var_2 in var_6) {
@@ -1021,7 +1021,7 @@ _id_5CCA(var_0) {
       var_8.origin = var_8.origin + (0, 0, 1024);
     } else {
       var_8 show();
-      var_9 = common_scripts\utility::_id_46B5(var_8.target, "targetname");
+      var_9 = common_scripts\utility::getstruct(var_8.target, "targetname");
       var_8.origin = var_9.origin;
 
       if(isDefined(var_9.angles)) {
@@ -1032,7 +1032,7 @@ _id_5CCA(var_0) {
     var_10 = anglesToForward(var_8.angles);
 
     if(var_8.model == "zmb_brute_debris_02") {
-      var_8._id_3BBC = _spawnfx(common_scripts\utility::_id_44F5("zmb_brute_debris_fire_01"), var_8.origin, var_10);
+      var_8._id_3BBC = _spawnfx(common_scripts\utility::getfx("zmb_brute_debris_fire_01"), var_8.origin, var_10);
       _triggerfx(var_8._id_3BBC);
     }
   }
@@ -1074,7 +1074,7 @@ _id_AA09() {
   var_0 = getEntArray("well_debris_brute", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    var_3 = common_scripts\utility::_id_46B5(var_2.target, "targetname");
+    var_3 = common_scripts\utility::getstruct(var_2.target, "targetname");
     var_2.origin = var_3.origin;
 
     if(isDefined(var_3.angles)) {
@@ -1085,7 +1085,7 @@ _id_AA09() {
 
     if(var_2.model == "zmb_brute_debris_01") {
       var_4 = anglesToForward(var_0[0].angles);
-      var_2._id_3BBC = _spawnfx(common_scripts\utility::_id_44F5("zmb_brute_debris_fire_02"), var_2.origin, var_4);
+      var_2._id_3BBC = _spawnfx(common_scripts\utility::getfx("zmb_brute_debris_fire_02"), var_2.origin, var_4);
       _triggerfx(var_2._id_3BBC);
     }
   }
@@ -1152,7 +1152,7 @@ _id_1CB7() {
 }
 
 shootstopsound() {
-  var_0 = common_scripts\utility::_id_46B7("nest_ee_brute_boss_player_spawns", "targetname");
+  var_0 = common_scripts\utility::getstructarray("nest_ee_brute_boss_player_spawns", "targetname");
   level._id_1CBB = var_0;
 
   for(var_1 = 0; var_1 < level.players.size; var_1++) {
@@ -1162,14 +1162,14 @@ shootstopsound() {
     level.players[var_1] unlink();
     level.players[var_1] enableweapons();
     level.players[var_1] freezecontrols(0);
-    level.players[var_1]._id_AC5B = 0;
+    level.players[var_1].zombiesignoreme = 0;
     level.players[var_1] playershow();
   }
 }
 
 _id_83E0(var_0) {
   maps\mp\gametypes\zombies::_id_7E57();
-  var_1 = common_scripts\utility::_id_46B7("klaus_player_pos", "targetname");
+  var_1 = common_scripts\utility::getstructarray("klaus_player_pos", "targetname");
 
   for(var_2 = 0; var_2 < level.players.size; var_2++) {
     level.players[var_2] setOrigin(var_1[var_2].origin);
@@ -1184,7 +1184,7 @@ _id_83E0(var_0) {
     level.players[var_2] allowmelee(0);
     level.players[var_2] allowprone(0);
     level.players[var_2] _meth_85BF(0);
-    level.players[var_2] _meth_8309(0);
+    level.players[var_2] scripted_elems(0);
   }
 }
 
@@ -1199,29 +1199,29 @@ _id_2D3A(var_0) {
 }
 
 _id_6C00() {
-  _id_0547::_id_A6F6();
+  _id_0547::waitnetworkframe();
 
-  foreach(var_1 in level._id_AC1D) {
+  foreach(var_1 in level.zombiedoors) {
     if(isDefined(var_1._id_3280) && var_1._id_3280 == "closeable") {
       var_1 notify("close");
     } else {
       var_1 notify("open");
     }
 
-    foreach(var_3 in var_1._id_9DC2) {
-      var_3 common_scripts\utility::_id_9D9F();
+    foreach(var_3 in var_1.triggers) {
+      var_3 common_scripts\utility::trigger_off();
     }
   }
 
   level waittill("brute battle complete");
 
-  foreach(var_1 in level._id_AC1D) {
+  foreach(var_1 in level.zombiedoors) {
     if(isDefined(var_1._id_3280) && var_1._id_3280 == "closeable") {
       var_1 notify("open");
     }
 
-    foreach(var_3 in var_1._id_9DC2) {
-      var_3 common_scripts\utility::_id_9DA3();
+    foreach(var_3 in var_1.triggers) {
+      var_3 common_scripts\utility::trigger_on();
     }
   }
 }
@@ -1239,7 +1239,7 @@ _id_94BF(var_0, var_1) {
   self notify(var_1, 0);
 }
 
-_id_2787(var_0, var_1, var_2, var_3) {
+create_client_overlay(var_0, var_1, var_2, var_3) {
   if(isDefined(var_2)) {
     var_4 = _newclienthudelem(var_2);
   } else {

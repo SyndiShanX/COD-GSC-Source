@@ -216,7 +216,7 @@ _id_06BF(var_0, var_1, var_2, var_3) {
     var_2 = var_5;
   }
 
-  if(_func_35C(var_1) == 1) {
+  if(soundscripts/_audio_music(var_1) == 1) {
     var_4 playLoopSound(var_1, var_2);
   } else {
     var_6 = "sounddone";
@@ -277,7 +277,7 @@ _id_06C3(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_5 = _id_02EF::_id_4625();
   }
 
-  var_8 = _func_360(var_0, var_1, var_6, var_7, var_4, var_2, var_3, var_5);
+  var_8 = soundscripts/_audio_vehicle_manager(var_0, var_1, var_6, var_7, var_4, var_2, var_3, var_5);
   var_8._id_8F45 = var_2;
   var_8._id_8F4E = "sndentity";
   return var_8;
@@ -356,7 +356,7 @@ _id_06BA(var_0, var_1, var_2, var_3) {
   }
 
   var_0 = spawnStruct();
-  var_0._id_4983 = _func_351(var_1, var_5, var_4, var_7, var_6, var_8, var_9, var_10, var_2, var_11, var_3);
+  var_0._id_4983 = maps/taken_tent_fx(var_1, var_5, var_4, var_7, var_6, var_8, var_9, var_10, var_2, var_11, var_3);
 
   if(isDefined(var_0._id_4983) == 0) {
     var_0 = undefined;
@@ -374,7 +374,7 @@ _id_06BA(var_0, var_1, var_2, var_3) {
 _id_06BB(var_0) {
   if(isDefined(var_0) == 1 && isDefined(var_0._id_4983) == 1) {
     var_1 = 0.0;
-    _func_352(var_0._id_4983, var_1);
+    maps/taken_tent_precache(var_0._id_4983, var_1);
     var_0._id_4983 = undefined;
   }
 }
@@ -393,7 +393,7 @@ _id_06C7(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   if(isDefined(var_5) == 0) {
-    if(_func_35C(var_1) == 1) {
+    if(soundscripts/_audio_music(var_1) == 1) {
       var_5 = level._id_06B2._id_05F7;
     } else {
       var_5 = 0.0;
@@ -438,7 +438,7 @@ _id_06C9(var_0, var_1) {
   var_2 = var_0._id_8F4E;
   var_3 = var_0._id_8F3E;
 
-  if(isDefined(var_3) == 1 && _func_35C(var_0._id_8F3E) == 1 && isDefined(var_1) == 0) {
+  if(isDefined(var_3) == 1 && soundscripts/_audio_music(var_0._id_8F3E) == 1 && isDefined(var_1) == 0) {
     var_1 = level._id_06B2._id_05F7;
   }
 
@@ -468,7 +468,7 @@ _id_06C9(var_0, var_1) {
 
 _id_06CA(var_0, var_1, var_2, var_3) {
   var_0 endon("death");
-  var_1 common_scripts\utility::_id_A70A("death", "deleted");
+  var_1 common_scripts\utility::waittill_any("death", "deleted");
   _id_06C9(var_0, var_2);
 }
 

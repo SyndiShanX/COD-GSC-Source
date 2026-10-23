@@ -6,19 +6,19 @@
 init() {
   level.ravengunisactive = 0;
   common_scripts\utility::flag_init("flag_outlaw_raven_puzzle_complete");
-  common_scripts\utility::_id_3C9F("flag_outlaw_raven_puzzle_complete");
+  common_scripts\utility::flag_wait("flag_outlaw_raven_puzzle_complete");
   thread raven_gun_delayed_init();
   _id_054D::_id_7BC6(::raven_gun_check_for_crit);
   _id_0547::_id_7BA9(::raven_gun_pap_check_for_crit_kill);
 }
 
 raven_gun_delayed_init() {
-  while(!isDefined(level._id_62B3)) {
+  while(!isDefined(level.modifyweapondamage)) {
     waitframe();
   }
 
-  level._id_62B3["raven_gun_zm"] = ::raven_gun_modify_damage;
-  level._id_62B3["raven_gun_pap_zm"] = ::raven_gun_modify_damage;
+  level.modifyweapondamage["raven_gun_zm"] = ::raven_gun_modify_damage;
+  level.modifyweapondamage["raven_gun_pap_zm"] = ::raven_gun_modify_damage;
 }
 
 raven_gun_modify_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
@@ -80,7 +80,7 @@ raven_gun_pap_check_for_crit_kill(var_0, var_1, var_2, var_3, var_4, var_5, var_
   var_9.angles = (0, var_1.angles[1], 180);
   var_9 setModel("tag_origin");
   raven_feather_poof(var_9.origin);
-  var_9.ravenfx = _playFXOnTag(common_scripts\utility::_id_44F5("raven_fly"), var_9, "tag_origin");
+  var_9.ravenfx = _playFXOnTag(common_scripts\utility::getfx("raven_fly"), var_9, "tag_origin");
   var_10 = _randomfloatrange(var_9.origin[0] - 32, var_9.origin[0] + 32);
   var_11 = _randomfloatrange(var_9.origin[1] - 32, var_9.origin[1] + 32);
   var_12 = _randomfloatrange(var_9.origin[2] + 32, var_9.origin[2] + 64);
@@ -93,12 +93,12 @@ raven_gun_pap_check_for_crit_kill(var_0, var_1, var_2, var_3, var_4, var_5, var_
 raven_seek_targets(var_0, var_1, var_2) {
   for(var_3 = 0; var_3 < 5; var_3++) {
     var_4 = undefined;
-    var_4 = common_scripts\utility::_id_4461(self.origin, _id_0547::_id_408F(), 200);
+    var_4 = common_scripts\utility::getclosest(self.origin, _id_0547::_id_408F(), 200);
 
     if(isDefined(var_4)) {
       self moveTo(var_4.origin + (0, 0, 48), 0.15);
       wait 0.15;
-      var_5 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level._id_A980);
+      var_5 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level.wavecounter);
       var_4 dodamage(var_5, self.origin, var_0, var_0, var_2, var_1);
       raven_feather_poof(var_4.origin);
     }
@@ -121,5 +121,5 @@ raven_seek_targets(var_0, var_1, var_2) {
 }
 
 raven_feather_poof(var_0) {
-  playFX(common_scripts\utility::_id_44F5("zmb_desc_raven_feathers_pop"), var_0);
+  playFX(common_scripts\utility::getfx("zmb_desc_raven_feathers_pop"), var_0);
 }

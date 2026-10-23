@@ -32,8 +32,8 @@ _id_AAED() {
     }
     var_3 = var_2[randomint(var_2.size)];
     var_4 = "j_head";
-    _playFXOnTag(common_scripts\utility::_id_44F5("storm_plasma_unstable"), var_0, "tag_origin");
-    var_0 _id_0378::_id_8D74("aud_ww_projectile_zap");
+    _playFXOnTag(common_scripts\utility::getfx("storm_plasma_unstable"), var_0, "tag_origin");
+    var_0 _id_0378::snd_message("aud_ww_projectile_zap");
     _physicsexplosioncylinder(var_0.origin, _id_43EC(), 0, 1);
     var_0 _id_0580::_id_98F7(var_3);
     var_0 _id_0580::_id_98F8(var_3, "head_sparks");
@@ -75,9 +75,9 @@ _id_9435() {
     wait(var_2);
   }
 
-  _id_0580::_id_98E9(var_0.origin, _id_43EC(), var_0.player, undefined, var_0._id_953E, (0.168627, 0.294118, 0.435294));
-  _playFXOnTag(common_scripts\utility::_id_44F5("storm_plasma_unstable"), var_0, "tag_origin");
-  var_0 _id_0378::_id_8D74("aud_storm_proj_loop_end");
+  _id_0580::_id_98E9(var_0.origin, _id_43EC(), var_0.player, undefined, var_0.sweapon, (0.168627, 0.294118, 0.435294));
+  _playFXOnTag(common_scripts\utility::getfx("storm_plasma_unstable"), var_0, "tag_origin");
+  var_0 _id_0378::snd_message("aud_storm_proj_loop_end");
 
   if(var_0._id_9B7F < 1) {
     wait(_id_4192());
@@ -88,8 +88,8 @@ _id_9435() {
 
 _id_9431() {
   var_0 = self;
-  _playFXOnTag(common_scripts\utility::_id_44F5("storm_plasma_stable"), var_0, "tag_origin");
-  var_0 _id_0378::_id_8D74("aud_storm_proj_loop_strt");
+  _playFXOnTag(common_scripts\utility::getfx("storm_plasma_stable"), var_0, "tag_origin");
+  var_0 _id_0378::snd_message("aud_storm_proj_loop_strt");
   var_0 _id_9430();
   var_0 thread _id_AAED();
   var_0 thread _id_9435();

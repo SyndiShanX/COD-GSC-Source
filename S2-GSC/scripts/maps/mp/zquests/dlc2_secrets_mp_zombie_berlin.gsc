@@ -30,10 +30,10 @@ surgeon_set_2() {
 
 surgeon_set_3() {
   var_0 = spawnStruct();
-  var_0._id_4800 = 25;
+  var_0.goal = 25;
   var_0.trophyflag = "surgeon_set_3";
-  var_0._id_6E5C = ["all_players_in_common_zone"];
-  var_0._id_6E55 = maps\mp\zquests\zmb_secret_challenges_util::players_using_berlin_melee_weapons;
+  var_0.params = ["all_players_in_common_zone"];
+  var_0.param1 = maps\mp\zquests\zmb_secret_challenges_util::players_using_berlin_melee_weapons;
   var_0.param2 = ["zone_underbelly_start", "zone_club_interior", "zone_church_interior", "zone_museum_hall"];
   var_0.requiresteamwork = 1;
   maps\mp\zquests\zmb_secret_challenges_util::monitor_players_survival_in_zone(var_0);
@@ -66,7 +66,7 @@ rebel_set_0() {
   var_0 = "rebel_set_kill0";
   level endon(var_0);
   level thread maps\mp\zquests\zmb_secret_challenges_util::register_on_player_down_func(maps\mp\zquests\zmb_secret_challenges_util::kill_hidden_challenge, var_0);
-  common_scripts\utility::_id_3C9F("berlin_cinematic_done");
+  common_scripts\utility::flag_wait("berlin_cinematic_done");
   return 1;
 }
 
@@ -115,7 +115,7 @@ super_soldier_set_1() {
   var_0 = "super_soldier_set_kill1";
   level endon(var_0);
   level childthread maps\mp\zquests\zmb_secret_challenges_util::register_on_minute_reached_func(maps\mp\zquests\zmb_secret_challenges_util::kill_hidden_challenge, var_0, 35);
-  common_scripts\utility::_id_3C9F("berlin_cinematic_done");
+  common_scripts\utility::flag_wait("berlin_cinematic_done");
   return 1;
 }
 
@@ -124,13 +124,13 @@ super_soldier_set_2() {
   var_1 = "super_soldier_set_kill2";
   level endon(var_1);
   level childthread maps\mp\zquests\zmb_secret_challenges_util::register_on_notify_set_func(maps\mp\zquests\zmb_secret_challenges_util::kill_hidden_challenge, var_1, [var_0, level.zmb_events_purchase_notify + "_" + "perk_machine"]);
-  common_scripts\utility::_id_3C9F("berlin_cinematic_done");
+  common_scripts\utility::flag_wait("berlin_cinematic_done");
   return 1;
 }
 
 super_soldier_set_3() {
   var_0 = spawnStruct();
-  var_0._id_4800 = 15;
+  var_0.goal = 15;
   var_0.trophyflag = "super_soldier_set_3";
   var_0.requiresteamwork = 1;
   childthread maps\mp\zquests\zmb_secret_challenges_util::reset_progress_when_off_stage("super_soldier_set_3");

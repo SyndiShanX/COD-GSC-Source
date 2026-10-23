@@ -3,7 +3,7 @@
  * Script: scripts\1340.gsc
 **************************************/
 
-_id_4F84() {
+humanoid_begin_melee() {
   if(self._id_00CA) {
     return 0;
   }
@@ -12,52 +12,52 @@ _id_4F84() {
     return 0;
   }
 
-  if(!isDefined(self._id_28D2)) {
+  if(!isDefined(self.curmeleetarget)) {
     return 0;
   }
 
-  if(self._id_0BA4 == "melee" || maps\mp\agents\_scripted_agent_anim_util::_id_57E2()) {
+  if(self._id_0BA4 == "melee" || maps\mp\agents\_scripted_agent_anim_util::isstatelocked()) {
     return 0;
   }
 
-  if(!_id_0547::_id_4B2C()) {
+  if(!_id_0547::has_entered_game()) {
     return 0;
   }
 
-  if(maps\mp\agents\humanoid\_humanoid::_id_A7F8()) {
+  if(maps\mp\agents\humanoid\_humanoid::wanttoattacktargetbutcant()) {
     return 0;
   }
 
-  if(maps\mp\agents\humanoid\_humanoid::_id_2EE6()) {
+  if(maps\mp\agents\humanoid\_humanoid::didpastmeleefail()) {
     return 0;
   }
 
-  var_0 = common_scripts\utility::_id_562E(self._id_5F4C) && isDefined(self._id_5F48) && gettime() - self._id_5F48 <= self._id_5F46;
+  var_0 = common_scripts\utility::_id_562E(self.lungemeleeenabled) && isDefined(self.lungelast) && gettime() - self.lungelast <= self.lungedebouncems;
 
-  if(maps\mp\agents\humanoid\_humanoid::_id_2EE5() || var_0) {
-    if(!maps\mp\agents\humanoid\_humanoid::_id_7AC0("base")) {
+  if(maps\mp\agents\humanoid\_humanoid::didpastlungemeleefail() || var_0) {
+    if(!maps\mp\agents\humanoid\_humanoid::readytomeleetarget("base")) {
       return 0;
     }
-  } else if(!maps\mp\agents\humanoid\_humanoid::_id_7AC0("normal"))
+  } else if(!maps\mp\agents\humanoid\_humanoid::readytomeleetarget("normal"))
     return 0;
 
-  if(isDefined(self._id_60E4) && isDefined(self._id_5BC0)) {
-    var_1 = gettime() - self._id_5BC0;
+  if(isDefined(self.meleedebouncetime) && isDefined(self.lastmeleefinishtime)) {
+    var_1 = gettime() - self.lastmeleefinishtime;
 
-    if(var_1 < self._id_60E4 * 1000) {
+    if(var_1 < self.meleedebouncetime * 1000) {
       return 0;
     }
   }
 
-  if(!isDefined(self._id_5BC1) || distancesquared(self._id_5BC1, self.origin) > 256) {
-    self._id_60ED = self._id_0108;
+  if(!isDefined(self.lastmeleepos) || distancesquared(self.lastmeleepos, self.origin) > 256) {
+    self.meleemovemode = self._id_0108;
   }
 
   if(isDefined(self.custom_on_melee_func)) {
     self thread[[self.custom_on_melee_func]]();
   }
 
-  self scragentbeginmelee(self._id_28D2);
+  self scragentbeginmelee(self.curmeleetarget);
   return 1;
 }
 
@@ -80,7 +80,7 @@ _id_06CE(var_0) {
   var_6 = undefined;
 
   if(!var_5) {
-    var_7 = _func_32A(self.origin, self._id_6618, self);
+    var_7 = maps/_vehicle_code(self.origin, self._id_6618, self);
     self._id_AAF3 = var_2;
 
     if(isDefined(var_7)) {
@@ -120,11 +120,11 @@ _id_0778() {
 
     if(isDefined(var_0) && !isDefined(self._id_A08E)) {
       for(;;) {
-        if(isDefined(var_0._id_54F5) && var_0._id_54F5) {
+        if(isDefined(var_0.inuse) && var_0.inuse) {
           if(isDefined(var_0._id_A228) && var_0._id_A228 != self) {
             if(!_id_584A()) {
               thread _id_21B5(var_0);
-              common_scripts\utility::_id_A70A("traversal_unblocked");
+              common_scripts\utility::waittill_any("traversal_unblocked");
               _id_8A62(0);
             }
 
@@ -144,10 +144,10 @@ _id_21B5(var_0) {
   self endon("death");
 
   for(;;) {
-    var_1 = _func_32A(self.origin, self._id_6618, self);
+    var_1 = maps/_vehicle_code(self.origin, self._id_6618, self);
 
     if(var_1.size > 0) {
-      if((var_0 != var_1[0] || !var_0._id_54F5) && (!isDefined(var_1[0]._id_54F5) || !var_1[0]._id_54F5)) {
+      if((var_0 != var_1[0] || !var_0.inuse) && (!isDefined(var_1[0].inuse) || !var_1[0].inuse)) {
         self scragentsetgoalpos(self._id_6618);
         waitframe();
         self notify("traversal_unblocked");
@@ -171,13 +171,13 @@ _id_8A62(var_0) {
 
   if(var_0) {
     self scragentsetscripted(1);
-    maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "Waiting For Traversal");
+    maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "Waiting For Traversal");
     var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("idle_noncombat");
     var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
     var_3 = self getanimentry(var_1, var_2);
     maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_1, var_2);
   } else {
-    maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "Waiting For Traversal");
+    maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "Waiting For Traversal");
     self scragentsetscripted(0);
   }
 }
@@ -307,7 +307,7 @@ _id_298D(var_0) {
       break;
 
     var_7 = anglesToForward(var_6);
-    var_7 = common_scripts\utility::_id_3D5D(var_7);
+    var_7 = common_scripts\utility::flat_origin(var_7);
     var_7 = vectorNormalize(var_7);
     var_8 = self.origin + var_7 * (var_4 / (var_5 + 1));
 
@@ -335,11 +335,11 @@ _id_1436() {
 
 _id_5724(var_0) {
   var_1 = anglesToForward(var_0.angles + (0, 0, 0));
-  var_1 = common_scripts\utility::_id_3D5D(var_1);
+  var_1 = common_scripts\utility::flat_origin(var_1);
   var_1 = vectorNormalize(var_1);
   var_2 = var_0.origin + 64 * var_1;
   var_1 = anglesToForward(var_0.angles + (0, 180, 0));
-  var_1 = common_scripts\utility::_id_3D5D(var_1);
+  var_1 = common_scripts\utility::flat_origin(var_1);
   var_1 = vectorNormalize(var_1);
   var_3 = var_0.origin + 64 * var_1;
   return distance(self.origin, var_2) < distance(self.origin, var_3);
@@ -347,11 +347,11 @@ _id_5724(var_0) {
 
 _id_5769(var_0) {
   var_1 = anglesToForward(var_0.angles + (0, -90, 0));
-  var_1 = common_scripts\utility::_id_3D5D(var_1);
+  var_1 = common_scripts\utility::flat_origin(var_1);
   var_1 = vectorNormalize(var_1);
   var_2 = var_0.origin + 64 * var_1;
   var_1 = anglesToForward(var_0.angles + (0, 90, 0));
-  var_1 = common_scripts\utility::_id_3D5D(var_1);
+  var_1 = common_scripts\utility::flat_origin(var_1);
   var_1 = vectorNormalize(var_1);
   var_3 = var_0.origin + 64 * var_1;
   return distance(self.origin, var_2) < distance(self.origin, var_3);
@@ -359,7 +359,7 @@ _id_5769(var_0) {
 
 _id_4F9B(var_0) {
   if(self._id_00CA) {
-    self._id_28D2 = undefined;
+    self.curmeleetarget = undefined;
     return 0;
   }
 
@@ -376,10 +376,10 @@ _id_4F9B(var_0) {
   } else if(isDefined(level._id_1CC4) && common_scripts\utility::_id_562E(self._id_56EB) && _id_0C35()) {
     var_1 = level._id_1CC4;
   } else if(_id_AB86() && !common_scripts\utility::_id_562E(self.has_lost_distractiondrone_interest)) {
-    var_1 = self._id_3043;
+    var_1 = self.distractiondrone;
   } else if(isDefined(self._id_9B61) && !_id_5686()) {
     if(isDefined(self._id_9B61.target) && !isDefined(self._id_9B61._id_76A3)) {
-      self._id_9B61._id_76A3 = common_scripts\utility::_id_46B5(self._id_9B61.target, "targetname");
+      self._id_9B61._id_76A3 = common_scripts\utility::getstruct(self._id_9B61.target, "targetname");
     }
 
     if(isDefined(self._id_9B61._id_76A3) && !common_scripts\utility::_id_562E(self._id_4B3B)) {
@@ -393,21 +393,21 @@ _id_4F9B(var_0) {
       var_1 = self._id_9B61;
   } else if(isDefined(self._id_1927) && !_id_5686())
     var_1 = self._id_1927;
-  else if(isDefined(self._id_0088) && !_id_0547::_id_8B95(self._id_0088)) {
+  else if(isDefined(self._id_0088) && !_id_0547::shouldignoreent(self._id_0088)) {
     var_1 = self._id_0088;
   }
 
   if(isDefined(var_1)) {
-    var_2 = self._id_11AB + self.radius * 2;
+    var_2 = self.attackoffset + self.radius * 2;
     var_3 = var_2 * var_2;
-    var_4 = self._id_11AB;
+    var_4 = self.attackoffset;
     var_5 = var_4 * var_4;
-    self._id_28D2 = var_1;
-    var_6 = maps\mp\agents\humanoid\_humanoid::_id_457E(var_1);
-    var_7 = var_6._id_3771;
+    self.curmeleetarget = var_1;
+    var_6 = maps\mp\agents\humanoid\_humanoid::getmeleeattackpoint(var_1);
+    var_7 = var_6.enemysectororigin;
     var_8 = distancesquared(var_6.origin, self.origin);
     var_9 = distancesquared(var_7, self.origin);
-    var_10 = self._id_173E;
+    var_10 = self.bhasnopath;
 
     if(var_9 < _squared(self.radius) && distancesquared(var_7, var_6.origin) > _squared(self.radius)) {
       var_10 = 1;
@@ -421,14 +421,14 @@ _id_4F9B(var_0) {
     } else if(!var_10 && var_9 > var_3 && var_8 > var_5)
       var_10 = 1;
 
-    if(var_6._id_A266) {
-      if(!var_10 && var_8 > _squared(self._id_2BCA)) {
+    if(var_6.valid) {
+      if(!var_10 && var_8 > _squared(self.defaultgoalradius)) {
         var_10 = 1;
       }
 
-      self scragentsetgoalRadius(self._id_2BCA);
-    } else if(!maps\mp\agents\humanoid\_humanoid_util::_id_4BA3(var_1, self._id_60F5)) {
-      self scragentsetgoalRadius(self._id_2BCA);
+      self scragentsetgoalRadius(self.defaultgoalradius);
+    } else if(!maps\mp\agents\humanoid\_humanoid_util::hasvalidmeleesectorsfortype(var_1, self.meleesectortype)) {
+      self scragentsetgoalRadius(self.defaultgoalradius);
       var_10 = 1;
     } else {
       self scragentsetgoalRadius(var_2);
@@ -456,18 +456,18 @@ _id_4F9B(var_0) {
     _id_0647();
     return 1;
   } else {
-    if(isDefined(self._id_28D2)) {
-      self._id_173E = 1;
+    if(isDefined(self.curmeleetarget)) {
+      self.bhasnopath = 1;
     }
 
-    self._id_28D2 = undefined;
+    self.curmeleetarget = undefined;
   }
 
   return 0;
 }
 
 _id_AB86() {
-  return isDefined(self._id_3043) && maps\mp\agents\humanoid\_humanoid_util::_id_8BAE();
+  return isDefined(self.distractiondrone) && maps\mp\agents\humanoid\_humanoid_util::shouldtargetdistractiondrone();
 }
 
 _id_0C35() {
@@ -487,11 +487,11 @@ _id_5686() {
 }
 
 humanoid_has_valid_targets(var_0) {
-  if(!common_scripts\utility::_id_562E(var_0) && (isDefined(self._id_3043) || isDefined(self._id_1928))) {
+  if(!common_scripts\utility::_id_562E(var_0) && (isDefined(self.distractiondrone) || isDefined(self._id_1928))) {
     return 1;
   }
 
-  foreach(var_2 in _func_2D1()) {
+  foreach(var_2 in maps/_lights()) {
     if(humanoid_is_valid_target(var_2)) {
       return 1;
     }
@@ -513,7 +513,7 @@ humanoid_is_valid_target(var_0) {
     return 0;
   }
 
-  if(_id_0547::_id_8B95(var_0)) {
+  if(_id_0547::shouldignoreent(var_0)) {
     return 0;
   }
 
@@ -525,7 +525,7 @@ humanoid_is_valid_target(var_0) {
 }
 
 _id_4F88() {
-  if(isDefined(self._id_3043)) {
+  if(isDefined(self.distractiondrone)) {
     return [];
   }
 
@@ -546,7 +546,7 @@ _id_4F88() {
 
   var_4 = [];
 
-  foreach(var_6 in _func_2D1()) {
+  foreach(var_6 in maps/_lights()) {
     if(humanoid_is_valid_target(var_6)) {
       var_4[var_4.size] = var_6;
     }
@@ -574,10 +574,10 @@ _id_4F9A() {
       var_1 = 16;
     }
 
-    if(self._id_173E || distancesquared(self scragentgetgoalpos(), var_0[0].origin) > var_1 * var_1) {
+    if(self.bhasnopath || distancesquared(self scragentgetgoalpos(), var_0[0].origin) > var_1 * var_1) {
       var_3 = _func_2E1(var_0[0].origin);
       _id_06CE(var_3);
-      self._id_173E = 0;
+      self.bhasnopath = 0;
     }
 
     _id_0647();
@@ -587,14 +587,14 @@ _id_4F9A() {
   return 0;
 }
 
-_id_4F87(var_0) {
+humanoid_follow(var_0) {
   if(!isDefined(var_0)) {
     return 0;
   }
 
-  if(self._id_173E || distancesquared(_id_0631(), var_0.origin) > _squared(128)) {
+  if(self.bhasnopath || distancesquared(_id_0631(), var_0.origin) > _squared(128)) {
     _id_06CE(var_0.origin);
-    self._id_173E = 0;
+    self.bhasnopath = 0;
   }
 
   _id_0647();
@@ -612,7 +612,7 @@ _id_4F7F(var_0, var_1) {
   if(common_scripts\utility::_id_562E(self._id_9E1A) || common_scripts\utility::_id_562E(level.zmb_fog_passive_lock)) {
     return;
   }
-  if(!common_scripts\utility::_id_3794("zombie_passive")) {
+  if(!common_scripts\utility::ent_flag("zombie_passive")) {
     return;
   }
   self._id_9E1A = 1;
@@ -622,7 +622,7 @@ _id_4F7F(var_0, var_1) {
   }
 
   if(var_1) {
-    foreach(var_4 in maps\mp\agents\_agent_utility::_id_43FD("all")) {
+    foreach(var_4 in maps\mp\agents\_agent_utility::getactiveagentsoftype("all")) {
       if(self == var_4) {
         continue;
       }
@@ -633,10 +633,10 @@ _id_4F7F(var_0, var_1) {
   }
 
   if(isDefined(self._id_9024)) {
-    var_6 = level._id_AC80._id_ACB3[self._id_9024];
+    var_6 = level.zone_data.zones[self._id_9024];
     var_7 = 10;
 
-    for(self.passive_activation_time_ms = gettime(); !common_scripts\utility::_id_3C77(var_6._id_AC8A); var_7 = var_7 - var_8) {
+    for(self.passive_activation_time_ms = gettime(); !common_scripts\utility::flag(var_6.zone_name); var_7 = var_7 - var_8) {
       if(var_7 <= 0 || !_id_054D::_id_0F0A(self)) {
         _id_056D::_id_5A86();
       }
@@ -649,7 +649,7 @@ _id_4F7F(var_0, var_1) {
   }
 
   self.passive_activation_time_ms = gettime();
-  common_scripts\utility::_id_3796("zombie_passive");
+  common_scripts\utility::ent_flag_clear("zombie_passive");
   humanoid_reset_passive_data();
 
   if(isDefined(self.post_passive_func)) {
@@ -690,9 +690,9 @@ _id_4F95() {
   self endon("death");
 
   for(;;) {
-    common_scripts\utility::_id_379C("zombie_passive");
+    common_scripts\utility::ent_flag_wait("zombie_passive");
     childthread humanoid_passive_check_wakeup_threads();
-    common_scripts\utility::_id_37A1("zombie_passive");
+    common_scripts\utility::ent_flag_waitopen("zombie_passive");
     self notify("zombie_no_longer_passive");
   }
 }
@@ -702,7 +702,7 @@ _id_4F96() {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
     if(isPlayer(var_1)) {
-      if(_id_0547::_id_8B95(var_1) || isDefined(var_9) && issubstr(var_9, "austen_pap_zm")) {
+      if(_id_0547::shouldignoreent(var_1) || isDefined(var_9) && issubstr(var_9, "austen_pap_zm")) {
         continue;
       }
       self.woken_by_player_aggro = 1;
@@ -779,10 +779,10 @@ _id_2208() {
   var_2 = 64;
   var_3 = 0;
   var_4 = self._id_37BB;
-  var_5 = maps\mp\agents\_agent_utility::_id_43FD("all");
+  var_5 = maps\mp\agents\_agent_utility::getactiveagentsoftype("all");
 
   for(;;) {
-    var_4 = _func_2DF(var_4, var_0);
+    var_4 = maps/_names(var_4, var_0);
     var_6 = 0;
 
     foreach(var_8 in var_5) {
@@ -832,7 +832,7 @@ _id_9C74() {
 _id_4F8C() {
   var_0 = 8;
 
-  if(common_scripts\utility::_id_3794("zombie_passive")) {
+  if(common_scripts\utility::ent_flag("zombie_passive")) {
     if(!isDefined(self._id_6EAF)) {
       self.woken_by_player_aggro = undefined;
 
@@ -842,17 +842,17 @@ _id_4F8C() {
       } else {
         self._id_6EAF = "leaving_spawn_closet";
 
-        if(!_id_0547::_id_4B2C() && isDefined(self._id_9024)) {
-          _id_06CE(level._id_AC80._id_ACB3[self._id_9024]._id_74DC);
+        if(!_id_0547::has_entered_game() && isDefined(self._id_9024)) {
+          _id_06CE(level.zone_data.zones[self._id_9024]._id_74DC);
         }
       }
     }
 
-    if(self._id_6EAF == "leaving_spawn_closet" && _id_0547::_id_4B2C()) {
+    if(self._id_6EAF == "leaving_spawn_closet" && _id_0547::has_entered_game()) {
       self._id_6EAF = "searching_for_goal";
       self._id_6EAE = _id_2208();
 
-      if(!common_scripts\utility::_id_3794("zombie_passive")) {
+      if(!common_scripts\utility::ent_flag("zombie_passive")) {
         return 1;
       }
 
@@ -877,7 +877,7 @@ _id_4F8C() {
 
 humanoid_reset_passive_data() {
   if(isDefined(self._id_6EAF)) {
-    if(self._id_6EAF == "idle" && !maps\mp\agents\_scripted_agent_anim_util::_id_57E2()) {
+    if(self._id_6EAF == "idle" && !maps\mp\agents\_scripted_agent_anim_util::isstatelocked()) {
       self scragentsetscripted(0);
     }
 
@@ -894,14 +894,14 @@ _id_635C() {
   for(;;) {
     var_0 = _id_4F88();
     var_1 = var_0.size > 0;
-    var_2 = isDefined(self._id_3043) || isDefined(self._id_1927) || isDefined(self._id_9B61) || _id_5686();
+    var_2 = isDefined(self.distractiondrone) || isDefined(self._id_1927) || isDefined(self._id_9B61) || _id_5686();
 
-    if(common_scripts\utility::_id_3794("zombie_passive")) {
+    if(common_scripts\utility::ent_flag("zombie_passive")) {
       if(common_scripts\utility::_id_562E(self._id_A7A8) && var_1 || var_2) {
         _id_4F7F("target point available");
       }
     } else if(!var_1 && !var_2 && !is_passive_exempt()) {
-      common_scripts\utility::_id_379A("zombie_passive");
+      common_scripts\utility::ent_flag_set("zombie_passive");
       self._id_A7A8 = 1;
     }
 
@@ -1068,7 +1068,7 @@ _id_1888(var_0) {
   var_3 = self._id_2309._id_1887;
   self scragentsetanimmode("anim deltas");
   self scragentsetorientmode("face angle abs", self._id_2308.angles);
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_3, 1, "board_pull");
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_2, var_3, 1, "board_pull");
 }
 
 _id_4F89() {
@@ -1089,7 +1089,7 @@ _id_4F83(var_0) {
   var_5 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_4);
   self._id_117A = var_0;
   self scragentsetscripted(1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_4, var_5, 1.0, "attack_anim", undefined, ::_id_1179);
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_4, var_5, 1.0, "attack_anim", undefined, ::_id_1179);
   self scragentsetscripted(0);
   self._id_15D2 = undefined;
 }
@@ -1100,11 +1100,11 @@ _id_1179(var_0, var_1, var_2, var_3) {
       case "zombie_melee":
         var_4 = self._id_117A.health;
 
-        if(isDefined(self._id_60E2)) {
-          var_4 = self._id_60E2;
+        if(isDefined(self.meleedamage)) {
+          var_4 = self.meleedamage;
         }
 
-        maps\mp\agents\humanoid\_humanoid_melee::_id_3210(self._id_117A, var_4, "MOD_IMPACT");
+        maps\mp\agents\humanoid\_humanoid_melee::domeleedamage(self._id_117A, var_4, "MOD_IMPACT");
         self._id_117A = undefined;
         break;
     }
@@ -1150,7 +1150,7 @@ _id_4F86(var_0) {
   self scragentsetanimmode("anim deltas");
   self scragentsetorientmode("face angle abs", self._id_2308.angles);
   self scragentsetgoalpos(self._id_6618);
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_3, 1, "gj_gate_drop");
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_2, var_3, 1, "gj_gate_drop");
   thread _id_4F85();
 }
 
@@ -1185,7 +1185,7 @@ _id_346C(var_0, var_1, var_2, var_3) {
   self setOrigin(var_10, 0);
   self scragentsetanimmode("anim deltas");
   self scragentsetorientmode("face angle abs", var_11);
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_5, var_6, 1, "gj_gate_drop", "end_start");
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_5, var_6, 1, "gj_gate_drop", "end_start");
 
   if(isDefined(var_8)) {
     wait(var_8);
@@ -1202,7 +1202,7 @@ _id_4F9C() {
   self scragentsetanimmode("anim deltas");
   self scragentsetorientmode("face angle abs", self._id_2308.angles);
   self scragentsetscripted(1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1.0, "taunt_anim");
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1.0, "taunt_anim");
   self scragentsetscripted(0);
   self._id_983D = undefined;
 }
@@ -1216,7 +1216,7 @@ _id_4F82() {
   self scragentsetorientmode("face angle abs", self._id_2308.angles);
   self scragentsetscripted(1);
   self._id_567F = 1;
-  maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1.0, "attack_anim");
+  maps\mp\agents\_scripted_agent_anim_util::playanimnatrateuntilnotetrack_safe(var_1, var_2, 1.0, "attack_anim");
   self._id_567F = 0;
   self scragentsetscripted(0);
 }

@@ -27,8 +27,8 @@ init() {
   _id_A937();
   waitframe();
   level._id_A409 = _getEnt("quartermaster_camera", "targetname");
-  level._id_A40F = common_scripts\utility::_id_46B5("quartermaster_spawn", "targetname");
-  level._id_A408 = common_scripts\utility::_id_46B5("quartermaster_bg_spawn", "targetname");
+  level._id_A40F = common_scripts\utility::getstruct("quartermaster_spawn", "targetname");
+  level._id_A408 = common_scripts\utility::getstruct("quartermaster_bg_spawn", "targetname");
   level._id_4F4A = getdvarint("cg_fov");
 
   if(!isDefined(level._id_A40F)) {
@@ -42,12 +42,12 @@ init() {
   if(!isDefined(level._id_A409) || !isDefined(level._id_A40F) || !isDefined(level._id_A408)) {
     return;
   }
-  var_0 = common_scripts\utility::_id_44BD("mail_spawn_03", "targetname");
-  var_1 = common_scripts\utility::_id_44BD("mail_bg_spawn_03", "targetname");
-  var_2 = common_scripts\utility::_id_44BD("mail_camera_03", "targetname");
-  var_3 = common_scripts\utility::_id_44BD("operations_spawn_02", "targetname");
-  var_4 = common_scripts\utility::_id_44BD("operations_bg_spawn_02", "targetname");
-  var_5 = common_scripts\utility::_id_44BD("operations_camera_02", "targetname");
+  var_0 = common_scripts\utility::getent_or_struct("mail_spawn_03", "targetname");
+  var_1 = common_scripts\utility::getent_or_struct("mail_bg_spawn_03", "targetname");
+  var_2 = common_scripts\utility::getent_or_struct("mail_camera_03", "targetname");
+  var_3 = common_scripts\utility::getent_or_struct("operations_spawn_02", "targetname");
+  var_4 = common_scripts\utility::getent_or_struct("operations_bg_spawn_02", "targetname");
+  var_5 = common_scripts\utility::getent_or_struct("operations_camera_02", "targetname");
   _id_772B(level._id_A409, "quartermasterCamera");
   _id_772B(level._id_A40F, "quartermasterSpawn");
   _id_772B(level._id_A408, "quartermasterBgSpawn");
@@ -64,14 +64,14 @@ _id_7BE9() {
     foreach(var_1 in level._id_4F51) {
       if(isDefined(var_1) && isDefined(var_1._id_6113)) {
         if(!isDefined(var_1._id_5A7E) || getdvarint(var_1._id_5A7E, 1) == 0) {
-          self _meth_84EA(var_1, var_1._id_6113);
+          self set_intensities(var_1, var_1._id_6113);
         }
       }
     }
   }
 }
 
-_id_A90E() {
+watchforhostmigration() {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
@@ -93,14 +93,14 @@ _id_A937() {
 
   for(;;) {
     level waittill("connected", var_1);
-    var_1 thread _id_A90E();
+    var_1 thread watchforhostmigration();
     var_1 _id_7BE9();
   }
 }
 
 _id_8A3C() {
   level._id_781C = _getEnt("quartermaster_npc", "targetname");
-  level._id_781C.switchtoweapon = common_scripts\utility::_id_44BD("quartermaster_scripted_node", "targetname");
+  level._id_781C.switchtoweapon = common_scripts\utility::getent_or_struct("quartermaster_scripted_node", "targetname");
   _id_772B(level._id_781C.switchtoweapon, "quartermaster_scripted_node");
 
   if(!isDefined(level._id_781C)) {
@@ -115,12 +115,12 @@ _id_8A3C() {
   level._id_781C._id_56A9 = 1;
   level._id_781C._id_9FEB = "ui_show_quartermaster_hud";
   level._id_781C._id_6113 = "quartermaster_menu";
-  level._id_781C._id_1739 = "hub_allies_bg_quartermaster";
+  level._id_781C.bg = "hub_allies_bg_quartermaster";
 }
 
 _id_8A23() {
   level._id_4BF3 = _getEnt("headquarters_npc", "targetname");
-  level._id_4BF3.switchtoweapon = common_scripts\utility::_id_44BD("headquarters_scripted_node", "targetname");
+  level._id_4BF3.switchtoweapon = common_scripts\utility::getent_or_struct("headquarters_scripted_node", "targetname");
   _id_772B(level._id_4BF3.switchtoweapon, "headquarters_scripted_node");
 
   if(!isDefined(level._id_4BF3)) {
@@ -213,25 +213,25 @@ _id_8A23() {
     var_7 = spawn("script_model", (0, 0, 0));
     var_7 setModel("hub_us_candlestick_microphone_01");
     var_7 linkTo(level._id_4BF3, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
-    level._id_4BF3._id_267E = [507, 504, 0, 0, 0, 0];
-    level._id_4BF3 _meth_84C7(level._id_4BF3._id_267E);
+    level._id_4BF3.costume = [507, 504, 0, 0, 0, 0];
+    level._id_4BF3 set_grenadeammo(level._id_4BF3.costume);
     level._id_4BF3._id_0EAC["mp_hub_ro_ask_cordinate_ro"] = spawnStruct();
-    level._id_4BF3._id_0EAC["mp_hub_ro_ask_cordinate_ro"]._id_3F02 = _id_04E0::playerlinkeduselinkedvelocity;
+    level._id_4BF3._id_0EAC["mp_hub_ro_ask_cordinate_ro"].func = _id_04E0::playerlinkeduselinkedvelocity;
     level._id_4BF3._id_0EAC["mp_hub_ro_ask_cordinate_ro"]._id_0F5D = [var_1, "coordinate"];
     level._id_4BF3._id_0EAC["mp_hub_ro_phone_call_ro"] = spawnStruct();
-    level._id_4BF3._id_0EAC["mp_hub_ro_phone_call_ro"]._id_3F02 = _id_04E0::playerlinkeduselinkedvelocity;
+    level._id_4BF3._id_0EAC["mp_hub_ro_phone_call_ro"].func = _id_04E0::playerlinkeduselinkedvelocity;
     level._id_4BF3._id_0EAC["mp_hub_ro_phone_call_ro"]._id_0F5D = [var_5, "call", var_6, "call"];
     level._id_4BF3._id_0EAC["mp_hub_ro_ask_map_ro"] = spawnStruct();
-    level._id_4BF3._id_0EAC["mp_hub_ro_ask_map_ro"]._id_3F02 = _id_04E0::playerlinkeduselinkedvelocity;
+    level._id_4BF3._id_0EAC["mp_hub_ro_ask_map_ro"].func = _id_04E0::playerlinkeduselinkedvelocity;
     level._id_4BF3._id_0EAC["mp_hub_ro_ask_map_ro"]._id_0F5D = [var_1, "map", var_4, "map"];
     level._id_4BF3._id_0EAC["mp_hub_ro_talking_ro"] = spawnStruct();
-    level._id_4BF3._id_0EAC["mp_hub_ro_talking_ro"]._id_3F02 = _id_04E0::playerlinkeduselinkedvelocity;
+    level._id_4BF3._id_0EAC["mp_hub_ro_talking_ro"].func = _id_04E0::playerlinkeduselinkedvelocity;
     level._id_4BF3._id_0EAC["mp_hub_ro_talking_ro"]._id_0F5D = [var_5, "talking", var_6, "talking"];
     level._id_4BF3._id_0EAC["mp_hub_ro_twitch_b"] = spawnStruct();
-    level._id_4BF3._id_0EAC["mp_hub_ro_twitch_b"]._id_3F02 = _id_04E0::playerlinkeduselinkedvelocity;
+    level._id_4BF3._id_0EAC["mp_hub_ro_twitch_b"].func = _id_04E0::playerlinkeduselinkedvelocity;
     level._id_4BF3._id_0EAC["mp_hub_ro_twitch_b"]._id_0F5D = [var_5, "twitch_a", var_6, "twitch_a"];
     level._id_4BF3._id_0EAC["mp_hub_ro_twitch_a"] = spawnStruct();
-    level._id_4BF3._id_0EAC["mp_hub_ro_twitch_a"]._id_3F02 = _id_04E0::playerlinkeduselinkedvelocity;
+    level._id_4BF3._id_0EAC["mp_hub_ro_twitch_a"].func = _id_04E0::playerlinkeduselinkedvelocity;
     level._id_4BF3._id_0EAC["mp_hub_ro_twitch_a"]._id_0F5D = [var_5, "twitch_b", var_6, "twitch_b"];
     level._id_4BF3 thread _id_71F3();
     thread _id_04E0::_id_74AB(var_1, level._id_4BF3._id_0B42, level._id_4BF3.switchtoweapon, ["idle", "coordinate", "map", "twitch_b"]);
@@ -248,7 +248,7 @@ _id_8A23() {
 
   level._id_4BF3._id_9FEB = "ui_show_headquarters_hud";
   level._id_4BF3._id_6113 = "headquarters_menu";
-  level._id_4BF3._id_1739 = "hub_allies_bg_requisition";
+  level._id_4BF3.bg = "hub_allies_bg_requisition";
   level._id_4BF3._id_A5CE = [];
   level._id_4BF3._id_A5CE["world"] = [];
   level._id_4BF3._id_A5CE["world"][0] = "hub_requisition_world_ambient1";
@@ -278,7 +278,7 @@ _id_8A23() {
 
 _id_8A07() {
   level._id_1783 = _getEnt("blacksmith_npc", "targetname");
-  level._id_1783.switchtoweapon = common_scripts\utility::_id_44BD("blacksmith_scripted_node", "targetname");
+  level._id_1783.switchtoweapon = common_scripts\utility::getent_or_struct("blacksmith_scripted_node", "targetname");
 
   if(!isDefined(level._id_1783)) {
     return;
@@ -293,7 +293,7 @@ _id_8A07() {
     level._id_1783._id_6DFB = [];
     var_0 = spawn("script_model", (0, 0, 0));
     var_0._id_00B9 = "hubc";
-    var_0._id_18A8 = "hubc";
+    var_0.body = "hubc";
     var_0 _id_04E0::clientclearsoundsubmix();
     var_0.name = "aide1";
     var_0._id_5717 = 0;
@@ -318,14 +318,14 @@ _id_8A07() {
     level._id_1783._id_0ED2["vendor"][0][1] = "mp_hub_gs_sharpening_knife_loop";
     level._id_1783._id_0ED2["aide1"][0][0] = "mp_hub_gs_aide_idle";
     level._id_1783._id_0ED2["grinder"][0][0] = "mp_hub_gs_sharpening_knife_loop_grinder";
-    level._id_1783._id_267E = [508, 505, 0, 0, 0, 0];
-    level._id_1783 _meth_84C7(level._id_1783._id_267E);
+    level._id_1783.costume = [508, 505, 0, 0, 0, 0];
+    level._id_1783 set_grenadeammo(level._id_1783.costume);
   }
 
   level._id_1783._id_A40D = "usa_f_blacksmith_org1";
   level._id_1783._id_9FEB = "ui_show_blacksmith_hud";
   level._id_1783._id_6113 = "blacksmith_menu";
-  level._id_1783._id_1739 = "hub_allies_bg_blacksmith";
+  level._id_1783.bg = "hub_allies_bg_blacksmith";
   level._id_1783._id_A5CE = [];
   level._id_1783._id_A5CE["world"] = [];
   level._id_1783._id_A5CE["world"][0] = "hub_blacksmith_world_ambient1";
@@ -365,7 +365,7 @@ _id_8A2D() {
   level._id_4F51[level._id_4F51.size] = level._id_5F83;
   level._id_5F83._id_9FEB = "ui_show_mail_hud";
   level._id_5F83._id_6113 = "mail_officer_menu";
-  level._id_5F83._id_1739 = "hub_allies_bg_quartermaster";
+  level._id_5F83.bg = "hub_allies_bg_quartermaster";
   level._id_5F83._id_50DA = 1;
   level._id_5F83._id_56A9 = 1;
 }
@@ -388,14 +388,14 @@ _id_8A54() {
   level._id_AC32._id_A40D = "usa_zombie_org1";
   level._id_AC32._id_9FEB = "ui_show_zombie_playlist_hud";
   level._id_AC32._id_6113 = "zombie_officer_menu";
-  level._id_AC32._id_1739 = "hub_allies_bg_zombie";
+  level._id_AC32.bg = "hub_allies_bg_zombie";
   level._id_AC32._id_50DA = 0;
   level._id_AC32._id_56A9 = 1;
 }
 
 _id_8A1F() {
   level._id_4012 = _getEnt("general_npc", "targetname");
-  level._id_4012.switchtoweapon = common_scripts\utility::_id_44BD("general_scripted_node", "targetname");
+  level._id_4012.switchtoweapon = common_scripts\utility::getent_or_struct("general_scripted_node", "targetname");
   _id_772B(level._id_4012.switchtoweapon, "general_scripted_node");
 
   if(!isDefined(level._id_4012)) {
@@ -423,13 +423,13 @@ _id_8A1F() {
   level._id_4012._id_A40D = "usa_prestige_org1";
   level._id_4012._id_9FEB = "ui_show_general_hud";
   level._id_4012._id_6113 = "general_menu";
-  level._id_4012._id_1739 = "hub_allies_bg_general";
+  level._id_4012.bg = "hub_allies_bg_general";
 
   if(1) {
     level._id_4012 setModel("tag_origin");
   } else {
-    level._id_4012._id_267E = [510, 507, 0, 0, 0, 0];
-    level._id_4012 _meth_84C7(level._id_4012._id_267E);
+    level._id_4012.costume = [510, 507, 0, 0, 0, 0];
+    level._id_4012 set_grenadeammo(level._id_4012.costume);
     var_0 = spawn("script_model", (0, 0, 0));
     var_0 setModel("eng_raidstick_org1");
     var_0 linkTo(level._id_4012, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
@@ -456,9 +456,9 @@ _id_8A20(var_0, var_1, var_2, var_3, var_4) {
   var_5._id_6113 = var_1;
 
   if(isDefined(var_2)) {
-    var_5._id_3F02 = var_2;
+    var_5.func = var_2;
   } else {
-    var_5._id_3F02 = ::_id_4AC7;
+    var_5.func = ::_id_4AC7;
   }
 
   if(isDefined(var_3)) {
@@ -480,7 +480,7 @@ _id_8A02() {
   level._id_4F51[level._id_4F51.size] = level._id_6B22;
   level._id_6B22._id_9FEB = "ui_show_onevone_officer_hud";
   level._id_6B22._id_6113 = "onevone_officer_menu";
-  level._id_6B22._id_1739 = "hub_allies_bg_1v1";
+  level._id_6B22.bg = "hub_allies_bg_1v1";
   level._id_6B22._id_50DA = 1;
   level._id_6B22._id_56A9 = 1;
 }
@@ -549,9 +549,9 @@ _id_6B43(var_0, var_1, var_2) {
 
     if(isDefined(level._id_7B46)) {
       thread _id_04DF::_id_2D4A();
-      var_1 _meth_866C(&"remove_persistent_indicator", 1, 1);
-      var_1 _meth_866C(&"remove_persistent_indicator", 1, 2);
-      var_1 _meth_866C(&"add_persistent_indicator", 2, 2, "HUB_ONB_ORDERS");
+      var_1 setdot_radius(&"remove_persistent_indicator", 1, 1);
+      var_1 setdot_radius(&"remove_persistent_indicator", 1, 2);
+      var_1 setdot_radius(&"add_persistent_indicator", 2, 2, "HUB_ONB_ORDERS");
     }
 
     var_1 thread _id_4AC9(level._id_4BF3);
@@ -699,8 +699,8 @@ _id_6BCC(var_0, var_1, var_2) {
   var_1 clientaddsoundsubmix("mp_hub_vendor_mix");
 
   if(isDefined(var_7) && var_7) {
-    if(isDefined(var_3._id_3F02)) {
-      var_1 thread[[var_3._id_3F02]](var_3);
+    if(isDefined(var_3.func)) {
+      var_1 thread[[var_3.func]](var_3);
     } else {
       var_1 thread _id_4AC7(var_3);
     }
@@ -953,10 +953,10 @@ _id_4AA9(var_0) {
 
     if(var_1 == "hub_weapon_prestiged") {
       var_3 = var_2;
-      var_4 = common_scripts\utility::_id_9462(var_3, "_mp");
+      var_4 = common_scripts\utility::string_find(var_3, "_mp");
       var_5 = getsubstr(var_3, 0, var_4);
       self._id_5791 = 1;
-      var_6 = self getplayerdata(common_scripts\utility::_id_46AE(), "weaponStats", _getweaponbasename(var_3), "prestigeLevel") + 1;
+      var_6 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "weaponStats", _getweaponbasename(var_3), "prestigeLevel") + 1;
       var_7 = _tablelookuprownum("mp/statstable.csv", 2, var_3);
       thread maps\mp\gametypes\_hud_message::_id_A9DD("weapon_prestige", var_7, var_6);
 
@@ -985,7 +985,7 @@ _id_4AA9(var_0) {
 
     if(var_1 == "hub_weapon_crafted") {
       var_3 = var_2;
-      var_4 = common_scripts\utility::_id_9462(var_3, "_mp");
+      var_4 = common_scripts\utility::string_find(var_3, "_mp");
       var_5 = getsubstr(var_3, 0, var_4);
       self._id_5791 = 1;
       var_7 = _tablelookuprownum("mp/statstable.csv", 2, var_3);
@@ -1246,8 +1246,8 @@ monitorprestigestatsreset() {
     }
     if(var_1 == 1) {
       var_2 = self.pers["prestige"] + 1;
-      self setplayerdata(common_scripts\utility::_id_46AE(), "experience", 0);
-      self setplayerdata(common_scripts\utility::_id_46AE(), "prestige", var_2);
+      self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "experience", 0);
+      self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "prestige", var_2);
       self.pers["rankxp"] = 0;
       self.pers["rank"] = 0;
       self.pers["prestige"] = var_2;
@@ -1408,7 +1408,7 @@ _id_4AA7(var_0) {
 
 _id_4AE3() {
   level endon("game_ended");
-  self _meth_82A1(1);
+  self script_stay_drone(1);
 }
 
 _id_7473(var_0) {
@@ -1422,10 +1422,10 @@ _id_7473(var_0) {
     var_1 = spawn("script_model", level._id_A40F.origin + (30, 0, 0));
     var_1 setModel("usa_raid_org1");
 
-    if(!isDefined(var_0._id_267E)) {
-      var_1 _meth_84C7([1, 1, 1, 1, 1, 1]);
+    if(!isDefined(var_0.costume)) {
+      var_1 set_grenadeammo([1, 1, 1, 1, 1, 1]);
     } else {
-      var_1 _meth_84C7(var_0._id_267E);
+      var_1 set_grenadeammo(var_0.costume);
     }
 
     var_1.angles = level._id_A409.angles + (0, 180, 0);
@@ -1478,8 +1478,8 @@ _id_7478(var_0, var_1) {
   }
 
   if(!isDefined(var_0._id_56A9)) {
-    if(isDefined(var_0._id_267E)) {
-      var_3 _meth_84C7(var_0._id_267E, "allies");
+    if(isDefined(var_0.costume)) {
+      var_3 set_grenadeammo(var_0.costume, "allies");
     }
 
     var_3.angles = level._id_A40F.angles - (0, 5, 0);
@@ -1497,9 +1497,9 @@ _id_7478(var_0, var_1) {
     }
   }
 
-  if(isDefined(var_0._id_1739) && !isDefined(var_0._id_56A9)) {
+  if(isDefined(var_0.bg) && !isDefined(var_0._id_56A9)) {
     self._id_A407 = spawn("script_model", level._id_A408.origin);
-    self._id_A407 setModel(var_0._id_1739);
+    self._id_A407 setModel(var_0.bg);
     self._id_A407.angles = level._id_A408.angles;
     self._id_A407 hide();
     self._id_A407 showtoplayer(self);
@@ -1568,8 +1568,8 @@ _id_09A5(var_0) {
   if(!isDefined(self)) {
     return;
   }
-  maps\mp\gametypes\_hud_util::_id_209E(var_0, 0);
-  maps\mp\gametypes\_hud_util::_id_209F(var_0, 2);
+  maps\mp\gametypes\_hud_util::ch_setprogress(var_0, 0);
+  maps\mp\gametypes\_hud_util::ch_setstate(var_0, 2);
 }
 
 _id_9EBF(var_0) {
@@ -1589,8 +1589,8 @@ _id_7D56(var_0) {
   if(!isDefined(self)) {
     return;
   }
-  maps\mp\gametypes\_hud_util::_id_209E(var_0, 0);
-  maps\mp\gametypes\_hud_util::_id_209F(var_0, 1);
+  maps\mp\gametypes\_hud_util::ch_setprogress(var_0, 0);
+  maps\mp\gametypes\_hud_util::ch_setstate(var_0, 1);
 }
 
 _id_71F4(var_0, var_1, var_2) {}
@@ -1633,7 +1633,7 @@ _id_74AC(var_0, var_1) {
 _id_7200(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
 
-  if(!isDefined(var_0._id_931A) || var_0._id_931A != var_1) {
+  if(!isDefined(var_0.state) || var_0.state != var_1) {
     if(!isDefined(var_0._id_0ED2[var_1])) {
       return;
     }
@@ -1648,7 +1648,7 @@ _id_7200(var_0, var_1, var_2, var_3) {
     } else
       var_0 scriptmodelplayanim(var_0._id_0ED2[var_1], "animEnded");
 
-    var_0._id_931A = var_1;
+    var_0.state = var_1;
 
     if(isDefined(var_2)) {
       var_0 waittillmatch("animEnded");
@@ -1711,7 +1711,7 @@ _id_71F3() {
         }
 
         if(isDefined(self._id_0EAC[self._id_0ED2["vendor"][var_0][var_1]])) {
-          [[self._id_0EAC[self._id_0ED2["vendor"][var_0][var_1]]._id_3F02]](self._id_0EAC[self._id_0ED2["vendor"][var_0][var_1]]._id_0F5D);
+          [[self._id_0EAC[self._id_0ED2["vendor"][var_0][var_1]].func]](self._id_0EAC[self._id_0ED2["vendor"][var_0][var_1]]._id_0F5D);
         }
 
         self waittillmatch("animEnded", "end");
@@ -1745,7 +1745,7 @@ _id_4AE5() {
       var_2 thread _id_04E0::_id_2DD4("animEnded");
 
       if(self._id_2761[var_1] == "vehicle_usa_trans_cckw_base_hub") {
-        var_2 _id_0378::_id_8D74("truck_unload");
+        var_2 _id_0378::snd_message("truck_unload");
       }
     }
 
@@ -1765,7 +1765,7 @@ _id_4AE5() {
       var_2 thread _id_04E0::_id_2DD4("animEnded");
 
       if(self._id_274A[var_1] == "vehicle_usa_trans_cckw_base_hub") {
-        var_2 _id_0378::_id_8D74("truck_load");
+        var_2 _id_0378::snd_message("truck_load");
       }
     }
   }
@@ -2037,9 +2037,9 @@ _id_2839(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   var_6._id_A40E = var_0._id_9FEB;
-  var_6._id_35B2 = "icon";
-  var_6._id_6E74 = level._id_A012;
-  var_6._id_6E74 maps\mp\gametypes\_hud_util::_id_09A6(var_6);
+  var_6.elemtype = "icon";
+  var_6.parent = level.uiparent;
+  var_6.parent maps\mp\gametypes\_hud_util::_id_09A6(var_6);
   var_6.name = var_1;
   self._id_A40B = common_scripts\utility::_id_0F6F(self._id_A40B, var_6);
   var_6.alpha = 1;
@@ -2063,9 +2063,9 @@ _id_2839(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_7.alpha = 1;
     var_7 thread _id_04E0::_id_77B4(0.5, 0.5, 1, 0.5, undefined, self, 1, 0);
     var_7._id_A40E = var_0._id_9FEB;
-    var_7._id_35B2 = "icon";
-    var_7._id_6E74 = level._id_A012;
-    var_7._id_6E74 maps\mp\gametypes\_hud_util::_id_09A6(var_7);
+    var_7.elemtype = "icon";
+    var_7.parent = level.uiparent;
+    var_7.parent maps\mp\gametypes\_hud_util::_id_09A6(var_7);
     var_7.name = var_1 + "Alert";
     self._id_A406[self._id_A406.size] = var_7;
   }
@@ -2079,7 +2079,7 @@ _id_27CC() {
 }
 
 _id_4B55() {
-  var_0 = self getplayerdata(common_scripts\utility::_id_46AE(), "challengeState", "ch_daily_0");
+  var_0 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeState", "ch_daily_0");
 
   if(var_0 == 0) {
     return 1;
@@ -2089,7 +2089,7 @@ _id_4B55() {
     return 1;
   }
 
-  var_1 = self getplayerdata(common_scripts\utility::_id_46AE(), "challengeState", "ch_daily_1");
+  var_1 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeState", "ch_daily_1");
 
   if(var_1 == 0) {
     return 1;
@@ -2164,24 +2164,24 @@ _id_76B1(var_0) {
 
   var_2 setModel(var_5);
   var_2 scriptmodelplayanimdeltamotionfrompos("mp_hub_prestige_flyby_01_plane_01", var_1.origin, var_1.angles);
-  var_2 _id_0378::_id_8D74("prestige_fanfare_aircraft_flying");
+  var_2 _id_0378::snd_message("prestige_fanfare_aircraft_flying");
 
   if(isDefined(var_3)) {
     var_3 setModel(var_5);
     var_3 scriptmodelplayanimdeltamotionfrompos("mp_hub_prestige_flyby_01_plane_02", var_1.origin, var_1.angles);
-    var_3 _id_0378::_id_8D74("prestige_fanfare_aircraft_flying");
+    var_3 _id_0378::snd_message("prestige_fanfare_aircraft_flying");
   }
 
   if(isDefined(var_4)) {
     var_4 setModel(var_5);
     var_4 scriptmodelplayanimdeltamotionfrompos("mp_hub_prestige_flyby_01_plane_03", var_1.origin, var_1.angles);
-    var_4 _id_0378::_id_8D74("prestige_fanfare_aircraft_flying");
+    var_4 _id_0378::snd_message("prestige_fanfare_aircraft_flying");
   }
 
   _activateclientexploder(100 + 10 * (var_0 - 1));
-  _id_0378::_id_8D74("prestige_fireworks_start", var_0);
+  _id_0378::snd_message("prestige_fireworks_start", var_0);
   _playFXOnTag(level._effect["prestige_flag_" + var_0], self, "tag_origin");
-  _id_0378::_id_8D74("prestige_level_up_flag_start");
+  _id_0378::snd_message("prestige_level_up_flag_start");
   waitframe();
 
   while(self _meth_85E1(0) == "mp_emote_salute") {
@@ -2209,7 +2209,7 @@ _id_2E41(var_0) {
 }
 
 _id_7D60(var_0) {
-  maps\mp\gametypes\_hud_util::_id_209F(var_0, 1);
-  maps\mp\gametypes\_hud_util::_id_209E(var_0, 0);
-  self._id_20A9[var_0] = 1;
+  maps\mp\gametypes\_hud_util::ch_setstate(var_0, 1);
+  maps\mp\gametypes\_hud_util::ch_setprogress(var_0, 0);
+  self.challengedata[var_0] = 1;
 }

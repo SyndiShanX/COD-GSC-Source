@@ -15,7 +15,7 @@ main() {
   _id_0483::main();
   maps\mp\mp_hub_zombies_01_lighting::main();
   maps\mp\mp_hub_zombies_01_aud::main();
-  _id_0472::_id_8A2F("");
+  _id_0472::setupminimap("");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   setDvar("4135", "allies");

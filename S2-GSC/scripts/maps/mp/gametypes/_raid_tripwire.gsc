@@ -7,8 +7,8 @@ runtripwirelogic() {
   setdvarifuninitialized("wall_test_debug", "0");
   level.tripwireplantedmodels = [];
   runtripwirefx();
-  level._id_5A61["tripwire"] = ::tripwire_killstreak_helper;
-  level._id_5A7D["war_tripwire_mp"] = "tripwire";
+  level.killstreakfuncs["tripwire"] = ::tripwire_killstreak_helper;
+  level.killstreakwieldweapons["war_tripwire_mp"] = "tripwire";
   setdvarifuninitialized("scorestreak_enabled_tripwire", 1);
   thread tripwire_preget_animation_distance();
 }
@@ -20,7 +20,7 @@ runtripwirefx() {
 
 watch_allow_fire() {
   self endon("placed_tripwire");
-  common_scripts\utility::_id_A70C(level, "runBomberObjective", self, "kill_player_reticle_think", self, "death", self, "disconnect", self, "weapon_change");
+  common_scripts\utility::waittill_any_ents(level, "runBomberObjective", self, "kill_player_reticle_think", self, "death", self, "disconnect", self, "weapon_change");
   thread enable_fire();
 }
 
@@ -191,14 +191,14 @@ check_wall_under_player_reticle_think(var_0, var_1) {
 
 watch_tripwire_preview_cleanup(var_0, var_1) {
   self endon("placed_tripwire");
-  common_scripts\utility::_id_A70C(level, "runBomberObjective", self, "death", self, "disconnect", self, "weapon_change");
+  common_scripts\utility::waittill_any_ents(level, "runBomberObjective", self, "death", self, "disconnect", self, "weapon_change");
   self.has_tripwire = 0;
   tripwire_cleanup(var_0, var_1, undefined);
 }
 
 watch_tripwire_placing_cleanup(var_0, var_1) {
   self endon("placed_tripwire_complete");
-  common_scripts\utility::_id_A70C(level, "runBomberObjective", self, "death", self, "disconnect");
+  common_scripts\utility::waittill_any_ents(level, "runBomberObjective", self, "death", self, "disconnect");
   self.has_tripwire = 0;
   tripwire_cleanup(var_0, var_1, undefined);
 }
@@ -433,7 +433,7 @@ tripwire_place_anywhere_placed_handler(var_0, var_1, var_2) {
   var_9 = _vectorcross(var_8, var_7);
   var_10 = _axistoangles(var_8, var_9, var_7);
   var_6.angles = var_10;
-  var_1._id_9D65 = var_6;
+  var_1.trigger = var_6;
   level.tripwireplantedmodels = common_scripts\utility::_id_0F6F(level.tripwireplantedmodels, var_1);
   var_1 thread setuptripwirekillcament(var_1);
   thread tripwire_spawn_damage_trigger(var_1);
@@ -573,7 +573,7 @@ tripwire_disarm(var_0) {
 
 tripwire_detonate(var_0) {
   var_0 radiusdamage(var_0.origin, 200, 200, 50, self, "MOD_EXPLOSIVE", "war_tripwire_mp");
-  playFX(common_scripts\utility::_id_44F5("trip_wire_exposion"), var_0.origin);
+  playFX(common_scripts\utility::getfx("trip_wire_exposion"), var_0.origin);
   _id_0380::_id_6842("mp_war_bomb_explo", undefined, var_0.origin);
   var_0 notify("tripwire_delete");
 }
@@ -597,7 +597,7 @@ tripwire_cleanup(var_0, var_1, var_2) {
 }
 
 tripwire_watch_delete(var_0, var_1, var_2) {
-  common_scripts\utility::_id_A70C(level, "game_ended", level, "runBomberObjective", self, "disconnect", self, "joined_team", self, "joined_spectators", var_0, "tripwire_delete");
+  common_scripts\utility::waittill_any_ents(level, "game_ended", level, "runBomberObjective", self, "disconnect", self, "joined_team", self, "joined_spectators", var_0, "tripwire_delete");
   tripwire_cleanup(var_0, var_1, var_2);
 }
 
@@ -625,5 +625,5 @@ setuptripwirekillcament(var_0) {
   var_5 = var_0.origin - var_3["position"];
   var_4.angles = vectortoangles(var_5);
   var_4 setscriptmoverkillcam("explosive");
-  self._id_5A2C = var_4;
+  self.killcament = var_4;
 }

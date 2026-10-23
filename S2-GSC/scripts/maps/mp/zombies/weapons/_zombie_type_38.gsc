@@ -45,7 +45,7 @@ add_one_type_38_kill(var_0, var_1, var_2) {
 
 spawn_electro_blast(var_0, var_1) {
   self endon("disconnect");
-  playFX(common_scripts\utility::_id_44F5("tesla_gun_explosion"), var_0);
+  playFX(common_scripts\utility::getfx("tesla_gun_explosion"), var_0);
   playsoundatpos(var_0, "zmb_wonder_weapon_proj_impact");
   waitframe();
 
@@ -107,7 +107,7 @@ loop_spark_fx() {
 }
 
 play_shield_zombie_shock_vfx() {
-  _playFXOnTag(common_scripts\utility::_id_44F5("tesla blood shock"), self, "j_spine4");
+  _playFXOnTag(common_scripts\utility::getfx("tesla blood shock"), self, "j_spine4");
 }
 
 shield_tesla_shock_params_create(var_0, var_1, var_2, var_3) {

@@ -55,11 +55,11 @@ _id_785E() {
   var_3 = undefined;
 
   if(0) {
-    var_4 = common_scripts\utility::_id_46B7("power_switch", "targetname");
+    var_4 = common_scripts\utility::getstructarray("power_switch", "targetname");
     var_5 = [];
 
     foreach(var_7 in var_4) {
-      var_5[var_5.size] = var_7._id_6298;
+      var_5[var_5.size] = var_7.modelent;
     }
 
     var_9 = common_scripts\utility::_id_0F73(var_5, var_0.setclientdvars);
@@ -67,8 +67,8 @@ _id_785E() {
     _id_0557::_id_781D("explore village", var_3);
   }
 
-  if(!common_scripts\utility::_id_3C77("power_sz2")) {
-    common_scripts\utility::_id_3C9F("power_sz2");
+  if(!common_scripts\utility::flag("power_sz2")) {
+    common_scripts\utility::flag_wait("power_sz2");
   }
 
   foreach(var_11 in var_0.setclientdvars) {
@@ -83,7 +83,7 @@ _id_785E() {
 
   _id_0557::_id_7822("explore village", &"ZOMBIE_NEST_HINT_STEP_OPEN_BUNKER_DOOR");
 
-  if(!common_scripts\utility::_id_562E(var_0._id_6BE1) && !common_scripts\utility::_id_562E(var_1._id_6BE1) && !common_scripts\utility::_id_562E(var_2._id_6BE1)) {
+  if(!common_scripts\utility::_id_562E(var_0.open) && !common_scripts\utility::_id_562E(var_1.open) && !common_scripts\utility::_id_562E(var_2.open)) {
     var_13 = _id_A776([var_0, var_1, var_2]);
     thread _id_1DA7();
     thread _id_1DA5();
@@ -132,7 +132,7 @@ _id_680E() {
 _id_1DA5() {
   foreach(var_1 in level.players) {
     var_1 _id_054C::_id_AC23("bunker");
-    var_1 _id_0378::_id_8D74("objective_complete", "bunker");
+    var_1 _id_0378::snd_message("objective_complete", "bunker");
   }
 }
 
@@ -235,7 +235,7 @@ _id_0985() {
     _id_0557::_id_781D("1 fire well", var_1);
   }
 
-  common_scripts\utility::_id_3C9F(var_0.getnegotiationnextnode);
+  common_scripts\utility::flag_wait(var_0.getnegotiationnextnode);
 
   if(0) {
     _id_0557::_id_7847("1 fire well", var_1);
@@ -245,10 +245,10 @@ _id_0985() {
 _id_7856() {
   var_0 = _getEnt("pilot_light_trigger", "targetname");
   var_1 = spawnStruct();
-  var_0 childthread common_scripts\utility::_id_A75D("trigger", var_1);
+  var_0 childthread common_scripts\utility::waittill_string("trigger", var_1);
 
   foreach(var_3 in level._id_3EFB) {
-    var_3 childthread common_scripts\utility::_id_A75D("valve_complete", var_1);
+    var_3 childthread common_scripts\utility::waittill_string("valve_complete", var_1);
   }
 
   var_1 waittill("returned", var_5, var_6);
@@ -306,7 +306,7 @@ _id_7855() {
     }
   }
 
-  common_scripts\utility::_id_3C9F("Pilot light activated");
+  common_scripts\utility::flag_wait("Pilot light activated");
   _id_0557::_id_782D("1 fire well", "gas flowing");
   level thread _id_3C2A();
   _id_7854();
@@ -314,20 +314,20 @@ _id_7855() {
 
 _id_A29E() {
   var_0 = self;
-  var_1 = common_scripts\utility::_id_46B7("gas_vfx", "script_noteworthy");
-  var_2 = common_scripts\utility::_id_46B7("indicator_light_vfx", "script_noteworthy");
-  var_3 = common_scripts\utility::_id_4461(self.origin, var_2);
-  var_4 = common_scripts\utility::_id_46B7("indicator_light_vfx_top", "script_noteworthy");
-  var_5 = common_scripts\utility::_id_4461(self.origin, var_4);
-  var_6 = _spawnfx(common_scripts\utility::_id_44F5("zmb_nest_generator_light_red"), var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
-  var_7 = _spawnfx(common_scripts\utility::_id_44F5("zmb_nest_generator_bulb_red"), var_5.origin, anglesToForward(var_5.angles), anglestoup(var_5.angles));
+  var_1 = common_scripts\utility::getstructarray("gas_vfx", "script_noteworthy");
+  var_2 = common_scripts\utility::getstructarray("indicator_light_vfx", "script_noteworthy");
+  var_3 = common_scripts\utility::getclosest(self.origin, var_2);
+  var_4 = common_scripts\utility::getstructarray("indicator_light_vfx_top", "script_noteworthy");
+  var_5 = common_scripts\utility::getclosest(self.origin, var_4);
+  var_6 = _spawnfx(common_scripts\utility::getfx("zmb_nest_generator_light_red"), var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
+  var_7 = _spawnfx(common_scripts\utility::getfx("zmb_nest_generator_bulb_red"), var_5.origin, anglesToForward(var_5.angles), anglestoup(var_5.angles));
   _triggerfx(var_6, 0.5);
   _triggerfx(var_7, 0.5);
-  common_scripts\utility::_id_3C9F(self.getnegotiationnextnode);
+  common_scripts\utility::flag_wait(self.getnegotiationnextnode);
   var_6 delete();
   var_7 delete();
-  var_6 = _spawnfx(common_scripts\utility::_id_44F5("zmb_nest_generator_light_green"), var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
-  var_7 = _spawnfx(common_scripts\utility::_id_44F5("zmb_nest_generator_bulb_green"), var_5.origin, anglesToForward(var_5.angles), anglestoup(var_5.angles));
+  var_6 = _spawnfx(common_scripts\utility::getfx("zmb_nest_generator_light_green"), var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
+  var_7 = _spawnfx(common_scripts\utility::getfx("zmb_nest_generator_bulb_green"), var_5.origin, anglesToForward(var_5.angles), anglestoup(var_5.angles));
   _triggerfx(var_6);
   _triggerfx(var_7);
 }
@@ -337,18 +337,18 @@ _id_7854() {
     level._id_6FEB = level.player;
   }
 
-  var_0 = common_scripts\utility::_id_46B7("well_explosion", "script_noteworthy");
+  var_0 = common_scripts\utility::getstructarray("well_explosion", "script_noteworthy");
   var_1 = var_0[0].origin;
-  _id_0378::_id_8D74("well_explosion_ignite", var_1);
+  _id_0378::snd_message("well_explosion_ignite", var_1);
   wait 0.4;
-  _id_0378::_id_8D74("well_explosion", var_1);
+  _id_0378::snd_message("well_explosion", var_1);
 
-  if(!common_scripts\utility::_id_3C77("fire trap active")) {
+  if(!common_scripts\utility::flag("fire trap active")) {
     thread _id_3C26();
 
     if(!common_scripts\utility::_id_562E(level._id_76CE)) {
       thread _id_9063();
-      _id_0378::_id_8D74("well_zombies_group_scream", var_1);
+      _id_0378::snd_message("well_zombies_group_scream", var_1);
     }
 
     thread _id_2E86();
@@ -361,7 +361,7 @@ _id_7854() {
   if(!common_scripts\utility::_id_562E(level._id_6659)) {
     foreach(var_3 in var_0) {
       _earthquake(0.3, 4, var_3.origin, 850);
-      playFX(common_scripts\utility::_id_44F5("zmb_firepit_blast"), var_3.origin);
+      playFX(common_scripts\utility::getfx("zmb_firepit_blast"), var_3.origin);
       level thread common_scripts\_exploder::_id_088E(201);
       wait 0.4;
       level thread common_scripts\_exploder::_id_088E(202);
@@ -374,7 +374,7 @@ _id_7854() {
 
   wait 3;
 
-  if(!common_scripts\utility::_id_3C77("fire trap active")) {
+  if(!common_scripts\utility::flag("fire trap active")) {
     _id_AA05();
     common_scripts\utility::flag_set("fire trap active");
     common_scripts\utility::flag_set("gallows_to_well");
@@ -394,18 +394,18 @@ _id_9CAB(var_0) {
     level._id_6FEB = level.player;
   }
 
-  var_1 = common_scripts\utility::_id_46B7("well_explosion", "script_noteworthy");
+  var_1 = common_scripts\utility::getstructarray("well_explosion", "script_noteworthy");
   var_2 = var_1[0].origin;
-  _id_0378::_id_8D74("well_explosion_ignite", var_2);
+  _id_0378::snd_message("well_explosion_ignite", var_2);
   wait 0.4;
-  _id_0378::_id_8D74("well_explosion", var_2);
+  _id_0378::snd_message("well_explosion", var_2);
 
-  if(!common_scripts\utility::_id_3C77("fire trap active")) {
+  if(!common_scripts\utility::flag("fire trap active")) {
     thread _id_3C26();
 
     if(!common_scripts\utility::_id_562E(level._id_76CE)) {
       thread _id_9063();
-      _id_0378::_id_8D74("well_zombies_group_scream", var_2);
+      _id_0378::snd_message("well_zombies_group_scream", var_2);
     }
 
     thread _id_2E86();
@@ -418,7 +418,7 @@ _id_9CAB(var_0) {
   if(!common_scripts\utility::_id_562E(level._id_6659)) {
     foreach(var_4 in var_1) {
       _earthquake(0.3, 4, var_4.origin, 850);
-      playFX(common_scripts\utility::_id_44F5("zmb_firepit_blast"), var_4.origin);
+      playFX(common_scripts\utility::getfx("zmb_firepit_blast"), var_4.origin);
       level thread common_scripts\_exploder::_id_088E(201);
       wait 0.4;
       level thread common_scripts\_exploder::_id_088E(202);
@@ -429,7 +429,7 @@ _id_9CAB(var_0) {
 
   wait 3;
 
-  if(!common_scripts\utility::_id_3C77("fire trap active")) {
+  if(!common_scripts\utility::flag("fire trap active")) {
     _id_AA05();
     common_scripts\utility::flag_set("fire trap active");
     common_scripts\utility::flag_set("gallows_to_well");
@@ -476,14 +476,14 @@ _id_3C2A() {
 }
 
 _id_3C29(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::_id_46B5(var_1, var_2);
+  var_3 = common_scripts\utility::getstruct(var_1, var_2);
   var_4 = _id_0547::_id_8FBA(var_3, "zmb_nest_generator_bulb_red");
   _triggerfx(var_4);
   common_scripts\utility::_id_3CA1(var_0);
   var_4 delete();
   var_4 = _id_0547::_id_8FBA(var_3, "zmb_nest_generator_bulb_green");
   _triggerfx(var_4);
-  common_scripts\utility::_id_3C9F(_id_0557::_id_7838("1 fire well", "gas flowing"));
+  common_scripts\utility::flag_wait(_id_0557::_id_7838("1 fire well", "gas flowing"));
 
   for(;;) {
     level waittill(var_1, var_5);
@@ -581,7 +581,7 @@ _id_AC98() {
       _id_0557::_id_7822("1 fire well", &"ZOMBIE_NEST_HINT_STEP_FIND_VALVE");
     }
 
-    if(common_scripts\utility::_id_3C77("fuel_valve_1") && common_scripts\utility::_id_3C77("fuel_valve_2") && common_scripts\utility::_id_3C77("fuel_valve_3")) {
+    if(common_scripts\utility::flag("fuel_valve_1") && common_scripts\utility::flag("fuel_valve_2") && common_scripts\utility::flag("fuel_valve_3")) {
       level._id_6FEB = var_1;
       common_scripts\utility::flag_set("Pilot light activated");
       var_0 setHintString(&"ZOMBIES_EMPTY_STRING");
@@ -593,7 +593,7 @@ _id_AC98() {
 
 _id_AC99() {
   self setHintString(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
-  common_scripts\utility::_id_3CA0("fuel_valve_1", "fuel_valve_2", "fuel_valve_3");
+  common_scripts\utility::flag_wait_all("fuel_valve_1", "fuel_valve_2", "fuel_valve_3");
   self setHintString(&"ZOMBIE_NEST_PILOTLIGHT");
 }
 
@@ -602,12 +602,12 @@ hideviewmodel(var_0) {
     return;
   }
   var_1 = _getEnt("pilot_light_trigger", "targetname");
-  var_1 common_scripts\utility::_id_9DA3();
+  var_1 common_scripts\utility::trigger_on();
 }
 
 showviewmodel() {
   var_0 = _getEnt("pilot_light_trigger", "targetname");
-  var_0 common_scripts\utility::_id_9D9F();
+  var_0 common_scripts\utility::trigger_off();
 }
 
 _id_2E85(var_0) {
@@ -698,13 +698,13 @@ _id_3BEA() {
 }
 
 _id_9063() {
-  var_0 = common_scripts\utility::_id_46B7("well_spawn", "script_noteworthy");
+  var_0 = common_scripts\utility::getstructarray("well_spawn", "script_noteworthy");
   level._id_3C24 = [];
 
   foreach(var_2 in var_0) {
     var_3 = _id_054D::_id_90BA("zombie_berserker", var_2, "fire well", 0, 1, 1);
     level._id_3C24[level._id_3C24.size] = var_3;
-    var_3 common_scripts\utility::_id_2CBE(0.5, ::_meth_8682, 0, 10000, 10000, "none", 1);
+    var_3 common_scripts\utility::delaycall(0.5, ::setfirstinfected, 0, 10000, 10000, "none", 1);
     wait 0.3;
   }
 }
@@ -724,7 +724,7 @@ _id_3C20(var_0) {
   thread maps\mp\mp_zombie_nest_ee_util::_id_3C28();
   var_1 = getEntArray("flame_jets", "script_noteworthy");
 
-  if(common_scripts\utility::_id_3C77("fire trap active")) {
+  if(common_scripts\utility::flag("fire trap active")) {
     var_2 = getEntArray("gallows_sewer_jumpscare", "targetname");
     var_1 = common_scripts\utility::_id_0F73(var_1, var_2);
   }
@@ -733,7 +733,7 @@ _id_3C20(var_0) {
     var_4 thread _id_3C21();
   }
 
-  var_6 = common_scripts\utility::_id_46B5("well_explosion_zombie_grab_radius", "script_noteworthy");
+  var_6 = common_scripts\utility::getstruct("well_explosion_zombie_grab_radius", "script_noteworthy");
 
   if(!isDefined(level._id_3BD3)) {
     level._id_3BD3 = spawn("trigger_radius", var_6.origin, 0, var_6.radius, 128);
@@ -757,20 +757,20 @@ _id_3C20(var_0) {
 
 _id_3C21() {
   level endon("flame_jets_done");
-  var_0 = common_scripts\utility::_id_46B5("well_explosion_zombie_grab_radius", "script_noteworthy");
+  var_0 = common_scripts\utility::getstruct("well_explosion_zombie_grab_radius", "script_noteworthy");
 
   for(;;) {
     self waittill("trigger", var_1);
 
-    if(!isPlayer(var_1) && _isagent(var_1) && common_scripts\utility::_id_562E(var_1._id_565F) && !var_1 _id_054D::_id_56E1()) {
-      if(_id_0547::_id_5565(var_1.team, level._id_746E)) {
+    if(!isPlayer(var_1) && _isagent(var_1) && common_scripts\utility::_id_562E(var_1.isactive) && !var_1 _id_054D::_id_56E1()) {
+      if(_id_0547::_id_5565(var_1.team, level.playerteam)) {
         continue;
       }
       if(_id_0547::_id_5565(var_1._id_0A4B, "zombie_fireman")) {
         continue;
       }
       if(!isDefined(var_1._id_6B38) || var_1._id_6B38 == 0) {
-        if(common_scripts\utility::_id_3C77("fire trap active")) {
+        if(common_scripts\utility::flag("fire trap active")) {
           if(_id_3C27()) {
             var_1._id_6B38 = 1;
             var_2 = 5000 * vectorNormalize(var_1.origin - var_0.origin);
@@ -782,9 +782,9 @@ _id_3C21() {
                 self.hitbytrap = 1;
               }
             }
-          } else if(var_1 _id_0547::_id_580A()) {
+          } else if(var_1 _id_0547::istrapresistant()) {
             var_1 dodamage(var_1.health * 0.25, var_0.origin, level.fire_well_trap, level.fire_well_trap, "MOD_EXPLOSIVE", "trap_zm_mp");
-            var_1 _meth_8682(0, 1.5, 1, "none", 1);
+            var_1 setfirstinfected(0, 1.5, 1, "none", 1);
           } else {
             thread _id_0547::_id_1DB3(var_1, 1.5);
 
@@ -796,7 +796,7 @@ _id_3C21() {
             }
           }
         } else
-          var_1 _meth_8682(0, 10000, 10000, "none", 1);
+          var_1 setfirstinfected(0, 10000, 10000, "none", 1);
       }
 
       continue;

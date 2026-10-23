@@ -18,7 +18,7 @@ onplayerconnect() {
   }
 }
 
-_id_A107() {}
+updatedeathiconsenabled() {}
 
 _id_09AA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!level.teambased) {
@@ -28,7 +28,7 @@ _id_09AA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(isPlayer(var_4) && var_4 maps\mp\_utility::_hasperk("specialty_silentkill")) {
       return;
     }
-    if(isDefined(var_5) && maps\mp\_utility::_id_5755(var_5) && isDefined(var_6) && _weapontype(var_6) == "melee") {
+    if(isDefined(var_5) && maps\mp\_utility::ismeleemod(var_5) && isDefined(var_6) && _weapontype(var_6) == "melee") {
       return;
     }
   }
@@ -45,8 +45,8 @@ _id_09AA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(level.hardcoremode) {
     return;
   }
-  if(isDefined(self._id_5B8E)) {
-    self._id_5B8E destroy();
+  if(isDefined(self.lastdeathicon)) {
+    self.lastdeathicon destroy();
   }
 
   var_8 = _newteamhudelem(var_2);
@@ -64,11 +64,11 @@ _id_09AA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   var_8 setwaypoint(0);
-  self._id_5B8E = var_8;
-  var_8 thread _id_2DDC(var_3);
+  self.lastdeathicon = var_8;
+  var_8 thread destroyslowly(var_3);
 }
 
-_id_2DDC(var_0) {
+destroyslowly(var_0) {
   self endon("death");
   wait(var_0);
   self fadeovertime(1.0);

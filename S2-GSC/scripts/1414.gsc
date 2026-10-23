@@ -7,8 +7,8 @@ _id_AC73() {
   level._id_ABE4 = [];
   level.zm_grenade_funcs = [];
   level.weaponmaxammofuncs = [];
-  level._id_6092 = 2;
-  level._id_6B83 = ::_id_AC75;
+  level.maxperplayerexplosives = 2;
+  level.onplayerspawnedweaponsfunc = ::_id_AC75;
 
   if(isDefined(level._id_AC71)) {
     [[level._id_AC71]]();
@@ -16,19 +16,19 @@ _id_AC73() {
 
   _id_0547::_id_7BA9(::_id_ABD7);
   thread _id_AC74();
-  level._id_61E0 = 0.3;
-  level._id_61E2 = 100;
-  level._id_61E1 = 20;
-  level._id_61DE = 256;
-  level._id_61DC = 350;
-  level._id_61DB = 1000;
-  level._id_61D9 = 46;
-  level._id_61EF = -1;
-  level._id_61CC = common_scripts\utility::_id_44F5("mine_launch");
-  level._id_61CF = common_scripts\utility::_id_44F5("mine_spin");
-  level._id_61C8 = common_scripts\utility::_id_44F5("mine_explode");
-  level._id_61C2["enemy"] = common_scripts\utility::_id_44F5("mine_beacon_enemy");
-  level._id_61C2["friendly"] = common_scripts\utility::_id_44F5("mine_beacon_friendly");
+  level.minedetectiongraceperiod = 0.3;
+  level.minedetectionradius = 100;
+  level.minedetectionheight = 20;
+  level.minedamageradius = 256;
+  level.minedamagemin = 350;
+  level.minedamagemax = 1000;
+  level.minedamagehalfheight = 46;
+  level.mineselfdestructtime = -1;
+  level.mine_launch = common_scripts\utility::getfx("mine_launch");
+  level.mine_spin = common_scripts\utility::getfx("mine_spin");
+  level.mine_explode = common_scripts\utility::getfx("mine_explode");
+  level.mine_beacon["enemy"] = common_scripts\utility::getfx("mine_beacon_enemy");
+  level.mine_beacon["friendly"] = common_scripts\utility::getfx("mine_beacon_friendly");
   level thread maps\mp\zombies\weapons\_zombie_type_38::init();
   level thread maps\mp\zombies\weapons\_zombie_funderbuss::init();
   level thread maps\mp\zombies\weapons\_zombie_de_lisle_carbine::init();
@@ -40,8 +40,8 @@ _id_AC73() {
 _id_AC74() {
   for(;;) {
     level waittill("connected", var_0);
-    var_0 thread _id_A92B();
-    var_0 thread _id_A918();
+    var_0 thread watchmissileusage();
+    var_0 thread watchgrenadeusage();
     var_0 thread _id_A926();
     var_0 thread _id_5371();
     var_0 thread _id_4AAA();
@@ -72,7 +72,7 @@ _id_5776(var_0) {
   return 0;
 }
 
-_id_478A(var_0) {
+givegrenadesafterrounds(var_0) {
   if(isDefined(var_0)) {
     var_1 = [var_0];
   } else {
@@ -98,7 +98,7 @@ _id_478A(var_0) {
   }
 }
 
-_id_A92B() {
+watchmissileusage() {
   self endon("disconnect");
 
   for(;;) {
@@ -107,7 +107,7 @@ _id_A92B() {
   }
 }
 
-_id_A918() {
+watchgrenadeusage() {
   self endon("disconnect");
 
   for(;;) {
@@ -125,7 +125,7 @@ _id_A918() {
       self.equipmentused = 0;
     }
 
-    if(_id_0547::_id_585C(var_1)) {
+    if(_id_0547::iszombieequipment(var_1)) {
       self.equipmentused++;
     }
 
@@ -211,7 +211,7 @@ _id_0637() {
     return "none";
   }
 
-  var_2 = common_scripts\utility::_id_4550();
+  var_2 = common_scripts\utility::getlastweapon();
 
   if(common_scripts\utility::_id_0F79(var_0, var_2)) {
     return var_2;
@@ -236,7 +236,7 @@ _id_A926() {
       maps\mp\_utility::_setactionslot(4, "weapon", var_0);
     }
 
-    common_scripts\utility::_id_A70A("weapon_given", "weapon_taken", "zombie_player_spawn_finished", "melee_weapon_change");
+    common_scripts\utility::waittill_any("weapon_given", "weapon_taken", "zombie_player_spawn_finished", "melee_weapon_change");
   }
 }
 
@@ -267,7 +267,7 @@ _id_A88C() {
   self endon("disconnect");
 
   for(;;) {
-    common_scripts\utility::_id_A70A("weapon_given", "weapon_taken");
+    common_scripts\utility::waittill_any("weapon_given", "weapon_taken");
 
     if(self.sessionstate == "spectator" || self.sessionstate == "dead") {
       continue;
@@ -448,7 +448,7 @@ _id_078C(var_0, var_1, var_2, var_3, var_4) {
     thread _id_0641(var_0, var_7, var_2, var_3, var_4);
 
     if(common_scripts\utility::_id_562E(var_2)) {
-      common_scripts\utility::_id_A70A("zm_stream_cancel_" + var_7, "zm_stream_finish_" + var_7);
+      common_scripts\utility::waittill_any("zm_stream_cancel_" + var_7, "zm_stream_finish_" + var_7);
     }
 
     return;
@@ -480,7 +480,7 @@ _id_078C(var_0, var_1, var_2, var_3, var_4) {
   _id_0736(var_8, var_7);
 
   if(var_2) {
-    common_scripts\utility::_id_A70A("zm_stream_cancel_" + var_7, "zm_stream_finish_" + var_7);
+    common_scripts\utility::waittill_any("zm_stream_cancel_" + var_7, "zm_stream_finish_" + var_7);
   }
 }
 
@@ -792,10 +792,10 @@ _id_078B(var_0, var_1, var_2, var_3) {
 
   if(!var_2) {
     if(var_0 == "zom_dlc2_1_zm" || var_0 == "zom_dlc2_2_zm" || var_0 == "zom_dlc2_3_zm") {
-      if(!common_scripts\utility::_id_3C83("dlc2_melee_packable")) {
+      if(!common_scripts\utility::flag_exist("dlc2_melee_packable")) {
         return;
       }
-      if(common_scripts\utility::_id_3C83("dlc2_melee_packable") && !common_scripts\utility::_id_3C77("dlc2_melee_packable")) {
+      if(common_scripts\utility::flag_exist("dlc2_melee_packable") && !common_scripts\utility::flag("dlc2_melee_packable")) {
         return;
       }
       var_6 = _id_0547::_id_9475(var_0) + "hc_zm";
@@ -806,23 +806,23 @@ _id_078B(var_0, var_1, var_2, var_3) {
     return;
   }
   if(!var_2) {
-    if(issubstr(var_0, "razergun_zm") && !common_scripts\utility::_id_3C77("ripsaw_punch_active")) {
+    if(issubstr(var_0, "razergun_zm") && !common_scripts\utility::flag("ripsaw_punch_active")) {
       return;
     }
     if(issubstr(var_0, "teslagun")) {
-      if(!common_scripts\utility::_id_3C83("teslagun_punch_active")) {
+      if(!common_scripts\utility::flag_exist("teslagun_punch_active")) {
         return;
       }
-      if(!common_scripts\utility::_id_3C77("teslagun_punch_active")) {
+      if(!common_scripts\utility::flag("teslagun_punch_active")) {
         return;
       }
     }
 
     if(issubstr(var_0, "zom_dlc2_1")) {
-      if(!common_scripts\utility::_id_3C83("dlc2_melee_packable")) {
+      if(!common_scripts\utility::flag_exist("dlc2_melee_packable")) {
         return;
       }
-      if(!common_scripts\utility::_id_3C77("dlc2_melee_packable")) {
+      if(!common_scripts\utility::flag("dlc2_melee_packable")) {
         return;
       }
     }
@@ -904,7 +904,7 @@ _id_078B(var_0, var_1, var_2, var_3) {
     var_12 = common_scripts\utility::_id_0F6F(var_12, 0);
   }
 
-  var_21 = maps\mp\gametypes\_class::_id_1D66(var_6, var_12[0], var_12[1], var_12[2], var_12[3], var_12[4], var_12[5], var_13, var_11, 0, var_14, var_15, var_4, undefined);
+  var_21 = maps\mp\gametypes\_class::buildweaponname(var_6, var_12[0], var_12[1], var_12[2], var_12[3], var_12[4], var_12[5], var_13, var_11, 0, var_14, var_15, var_4, undefined);
   return var_21;
 }
 
@@ -950,7 +950,7 @@ _id_ABD6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 }
 
 _id_0975(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = var_4 _meth_850B(var_2, var_3);
+  var_5 = var_4 getweapondamagelocationmultiplier(var_2, var_3);
 
   if(var_5 == 0) {
     return 0;
@@ -989,7 +989,7 @@ _id_ABD7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   var_10 = _id_43EE(var_1, var_4);
 
-  if(maps\mp\_utility::_id_5755(var_3)) {
+  if(maps\mp\_utility::ismeleemod(var_3)) {
     if(_id_176D(var_10, 2)) {
       var_1 _id_ABD5(20, "rip_and_tear");
     }
@@ -1002,7 +1002,7 @@ _id_ABD7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
     if(_id_176D(var_10, 128)) {
       if(_id_054D::_id_2EF2()) {
-        var_1 maps\mp\gametypes\zombies::_id_47AE("one_shot_one_kill");
+        var_1 maps\mp\gametypes\zombies::givepointsforevent("one_shot_one_kill");
       }
     }
 
@@ -1069,7 +1069,7 @@ _id_9B91(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_11 = undefined;
 
   foreach(var_13 in var_9._id_8B34) {
-    if(var_1 == var_13._id_356A && var_10 == var_13._id_2AB8 && _id_054D::_id_5574(var_4, var_13._id_953E)) {
+    if(var_1 == var_13._id_356A && var_10 == var_13.deathtime && _id_054D::_id_5574(var_4, var_13.sweapon)) {
       var_11 = var_13;
       break;
     }
@@ -1079,8 +1079,8 @@ _id_9B91(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_11 = spawnStruct();
     var_9._id_8B34[var_9._id_8B34.size] = var_11;
     var_11._id_356A = var_1;
-    var_11._id_2AB8 = var_10;
-    var_11._id_953E = var_4;
+    var_11.deathtime = var_10;
+    var_11.sweapon = var_4;
     var_11._id_005C = 1;
   } else
     var_11._id_005C++;
@@ -1095,7 +1095,7 @@ _id_1453() {
   self endon("efficient_kill");
   waittillframeend;
 
-  while(isDefined(level._id_AB27) && level._id_AB29 > 0) {
+  while(isDefined(level.zmdeaththrottlecount) && level.zmdeaththrottlequeue > 0) {
     waitframe();
   }
 
@@ -1122,7 +1122,7 @@ _id_4AAA() {
 
   for(;;) {
     self._id_18AD = [];
-    common_scripts\utility::_id_A70A("death", "begin_last_stand");
+    common_scripts\utility::waittill_any("death", "begin_last_stand");
   }
 }
 
@@ -1199,7 +1199,7 @@ _id_43F1(var_0, var_1, var_2, var_3, var_4) {
 
 create_streamed_world_weapon_model(var_0, var_1) {
   var_2 = spawn("weapon_" + var_0, var_1, 1);
-  var_2._id_A9E0 = var_0;
+  var_2.weaponname = var_0;
   var_2 makeunusable();
   var_2 _meth_86B3(0);
   var_2 endon("entitydeleted");
@@ -1213,7 +1213,7 @@ change_streamed_world_weapon_model(var_0) {
   var_1 = self;
   var_1 setpickupweapon(var_0);
   var_1 makeunusable();
-  var_1._id_A9E0 = var_0;
+  var_1.weaponname = var_0;
   var_1 notify("streamed_world_weapon_changed");
   var_1 endon("entitydeleted");
   var_1 endon("death");
@@ -1228,18 +1228,18 @@ show_streamed_world_weapon_to_player(var_0) {
   var_0 endon("streamed_world_weapon_changed");
   var_1 endon("disconnect");
 
-  if(var_1 worldweaponsloaded(var_0._id_A9E0)) {
+  if(var_1 worldweaponsloaded(var_0.weaponname)) {
     return;
   }
   var_0 _meth_8006(var_1);
-  var_2 = spawn("weapon_" + var_0._id_A9E0, var_0.origin, 1);
-  var_2._id_A9E0 = var_0._id_A9E0;
+  var_2 = spawn("weapon_" + var_0.weaponname, var_0.origin, 1);
+  var_2.weaponname = var_0.weaponname;
   var_2 makeunusable();
   var_2 _meth_86B3(0);
   var_2 ghost();
   var_1 thread cleanup_streamed_world_weapon(var_2, var_0);
 
-  while(!var_1 worldweaponsloaded(var_2._id_A9E0)) {
+  while(!var_1 worldweaponsloaded(var_2.weaponname)) {
     waitframe();
     var_2.origin = var_0.origin;
   }
@@ -1252,6 +1252,6 @@ show_streamed_world_weapon_to_player(var_0) {
 cleanup_streamed_world_weapon(var_0, var_1) {
   var_2 = self;
   var_0 endon("streamed_world_weapon");
-  common_scripts\utility::_id_A70C(var_2, "disconnect", var_1, "entitydeleted", var_1, "death", var_1, "streamed_world_weapon_changed");
+  common_scripts\utility::waittill_any_ents(var_2, "disconnect", var_1, "entitydeleted", var_1, "death", var_1, "streamed_world_weapon_changed");
   var_0 delete();
 }

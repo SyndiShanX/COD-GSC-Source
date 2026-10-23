@@ -28,10 +28,10 @@ _id_7E3C(var_0, var_1) {
   var_0 hide();
   level waittill("hc_nest_toy_obj_complete");
   var_2 = _getEnt("nest_hc_record_drawer", "targetname");
-  var_3 = common_scripts\utility::_id_46B5(var_2.target, "targetname");
+  var_3 = common_scripts\utility::getstruct(var_2.target, "targetname");
   var_0 show();
   var_0 linktosynchronizedparent(var_2);
-  var_2 _id_0378::_id_8D74("aud_spinning_top_drawer_open");
+  var_2 _id_0378::snd_message("aud_spinning_top_drawer_open");
   var_2 moveTo(var_3.origin, 1.5, 0, 0.5);
   wait 1.5;
   var_0 unlink();
@@ -39,13 +39,13 @@ _id_7E3C(var_0, var_1) {
   common_scripts\utility::flag_set("flag_nest_hc_ee_record_acquired");
   var_0 delete();
   level._id_4BD3 = 1;
-  var_2 _id_0378::_id_8D74("aud_spinning_top_record_obtained");
+  var_2 _id_0378::snd_message("aud_spinning_top_record_obtained");
   _id_0557::_id_4BC8("toy record get");
   getrecordreward();
 }
 
 _id_A665(var_0) {
-  for(var_1 = 0; !var_1; var_1 = maps\mp\_utility::_id_3B8E(var_2, self, 15)) {
+  for(var_1 = 0; !var_1; var_1 = maps\mp\_utility::findisfacing(var_2, self, 15)) {
     var_0 waittill("trigger", var_2);
   }
 }
@@ -65,7 +65,7 @@ _id_8F6F(var_0, var_1) {
 }
 
 _id_8573(var_0, var_1) {
-  var_2 = common_scripts\utility::_id_46B7(var_0, "targetname");
+  var_2 = common_scripts\utility::getstructarray(var_0, "targetname");
 
   foreach(var_4 in var_2) {
     var_5 = common_scripts\utility::_id_44BE(var_4.target, "targetname");
@@ -131,7 +131,7 @@ _id_171D(var_0) {
     var_14 = var_1;
     var_1++;
     common_scripts\utility::flag_init("flag_nest_hc_ee_has_arm_" + var_1);
-    var_8 = common_scripts\utility::_id_46B7(var_7.target, "targetname");
+    var_8 = common_scripts\utility::getstructarray(var_7.target, "targetname");
     var_15 = common_scripts\utility::random(var_8);
     var_15 _id_8F6F(var_14);
   }
@@ -206,7 +206,7 @@ _id_6803(var_0) {
     self waittill("trigger", var_1);
 
     foreach(var_3 in var_0) {
-      if(maps\mp\_utility::_id_3B8E(var_1, var_3, 15)) {
+      if(maps\mp\_utility::findisfacing(var_1, var_3, 15)) {
         var_3 notify("top_interact", var_1);
         break;
       }
@@ -231,7 +231,7 @@ _id_7EEC(var_0) {
     if(common_scripts\utility::_id_0F79(level._id_665D, self._id_65E5 + 1)) {
       var_1 = 1;
       level._id_665D = common_scripts\utility::_id_0F93(level._id_665D, self._id_65E5 + 1);
-      _id_0378::_id_8D74("aud_spinning_top_place");
+      _id_0378::snd_message("aud_spinning_top_place");
     }
   }
 
@@ -239,9 +239,9 @@ _id_7EEC(var_0) {
 
   for(;;) {
     self waittill("top_interact", var_3);
-    self._id_65E0 = common_scripts\utility::_id_98E7(self._id_65E0 == 12, 1, self._id_65E0 + 1);
+    self._id_65E0 = common_scripts\utility::ter_op(self._id_65E0 == 12, 1, self._id_65E0 + 1);
     var_4 = var_0[self._id_65E0 - 1].angles;
-    _id_0378::_id_8D74("aud_spinning_top_turn");
+    _id_0378::snd_message("aud_spinning_top_turn");
     self rotateby((-30, 0, 0), 0.05);
     waitframe();
 
@@ -254,10 +254,10 @@ _id_7EEC(var_0) {
 }
 
 _id_4833(var_0, var_1) {
-  var_0 _id_0547::_id_AC41(&"ZOMBIES_EMPTY_STRING");
+  var_0 _id_0547::zombies_make_usable(&"ZOMBIES_EMPTY_STRING");
   var_0 waittill("player_used");
-  var_2 = common_scripts\utility::_id_46B5("monkey_hc_dropper", "targetname");
-  var_3 = common_scripts\utility::_id_46B7(var_2.target, "targetname");
+  var_2 = common_scripts\utility::getstruct("monkey_hc_dropper", "targetname");
+  var_3 = common_scripts\utility::getstructarray(var_2.target, "targetname");
   var_4 = _getscriptablearray("monkey_destructible", "targetname");
   var_5 = var_4[0];
   var_5 thread _id_2DB2();
@@ -293,11 +293,11 @@ _id_2DB2() {
 _id_8B1B() {
   self setCanDamage(1);
   self waittill("damage");
-  _id_0378::_id_8D74("aud_spinning_top_shot");
-  self._id_65E2 = common_scripts\utility::_id_46B5(self.target, "targetname");
+  _id_0378::snd_message("aud_spinning_top_shot");
+  self._id_65E2 = common_scripts\utility::getstruct(self.target, "targetname");
   _id_348C(self._id_65E2);
-  _id_0378::_id_8D74("aud_spinning_top_fall");
-  _id_0547::_id_AC41(&"ZOMBIES_EMPTY_STRING", (0, 0, 64));
+  _id_0378::snd_message("aud_spinning_top_fall");
+  _id_0547::zombies_make_usable(&"ZOMBIES_EMPTY_STRING", (0, 0, 64));
   self waittill("player_used", var_0);
 
   switch (self._id_0F5E) {
@@ -314,7 +314,7 @@ _id_8B1B() {
 
   level._id_665D = common_scripts\utility::_id_0F6F(level._id_665D, self._id_0F5E + 1);
   common_scripts\utility::flag_set("flag_nest_hc_ee_has_arm_" + (self._id_0F5E + 1));
-  _id_0547::_id_AC40();
+  _id_0547::zombies_make_unusable();
   self delete();
 }
 
@@ -381,15 +381,15 @@ _id_4421() {
   var_0 = [];
 
   for(var_1 = 0; var_1 < 12; var_1++) {
-    var_0[var_1] = common_scripts\utility::_id_46B5(var_1 + 1 + "oc", "script_noteworthy");
+    var_0[var_1] = common_scripts\utility::getstruct(var_1 + 1 + "oc", "script_noteworthy");
   }
 
   return var_0;
 }
 
 _id_52EE() {
-  var_0 = common_scripts\utility::_id_46B5("nest_ee_hc_arm_models_struct", "targetname");
-  var_1 = common_scripts\utility::_id_46B7(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getstruct("nest_ee_hc_arm_models_struct", "targetname");
+  var_1 = common_scripts\utility::getstructarray(var_0.target, "targetname");
   var_2 = _getEnt("nest_ee_hc_arm_trig", "targetname");
   var_3 = maps\mp\mp_zombie_nest_ee_util::_id_44C8("nest_ee_hc_arm_model_window", 1);
   var_2._id_65DD = var_3;

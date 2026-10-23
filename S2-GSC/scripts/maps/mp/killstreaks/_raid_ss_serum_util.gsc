@@ -42,7 +42,7 @@ serumtimerupdate(var_0) {
 
   self setclientomnvar("serum_active_percent", 0);
   self setclientomnvar("serum_active_streakIndex", -1);
-  _id_051E::_id_A170();
+  _id_051E::updatestreakslots();
   self notify("serum_finished");
 }
 
@@ -138,7 +138,7 @@ altered_state_deactivate(var_0, var_1, var_2, var_3) {
   var_4 endon("death");
   var_4 endon("disconnect");
   level endon("game_ended");
-  _id_0378::_id_8D74("aud_serum_buff_end");
+  _id_0378::snd_message("aud_serum_buff_end");
   var_4 altered_state_fade_in(var_0, var_2);
   var_4 altered_state_end();
   var_4 altered_state_fade_out(var_1, var_2);
@@ -240,13 +240,13 @@ altered_state_start_fx(var_0) {
   }
 
   if(isDefined(var_1) && maps\mp\_utility::isreallyalive(var_1)) {
-    var_1.altered_state_fx = _spawnlinkedfxforclient(common_scripts\utility::_id_44F5(var_2), var_1, "tag_origin", var_1);
+    var_1.altered_state_fx = _spawnlinkedfxforclient(common_scripts\utility::getfx(var_2), var_1, "tag_origin", var_1);
     setfxkillondelete(var_1.altered_state_fx, 1);
     _triggerfx(var_1.altered_state_fx);
     var_1 maps\mp\gametypes\_playerlogic::deleteentonplayerdisconnect(var_1.altered_state_fx);
 
     if(0) {
-      var_1.altered_state_fx_3rd = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_3), var_1, "tag_origin");
+      var_1.altered_state_fx_3rd = _spawnlinkedfx(common_scripts\utility::getfx(var_3), var_1, "tag_origin");
       _triggerfx(var_1.altered_state_fx_3rd);
       var_1 maps\mp\gametypes\_playerlogic::deleteentonplayerdisconnect(var_1.altered_state_fx_3rd);
     }
@@ -295,8 +295,8 @@ getserumkillstreakslot(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
 
   for(var_5 = 0; var_5 < self.pers["killstreaks"].size; var_5++) {
-    if(isDefined(self.pers["killstreaks"][var_5]) && isDefined(self.pers["killstreaks"][var_5]._id_944C)) {
-      if(self.pers["killstreaks"][var_5]._id_944C == var_0 || isDefined(var_1) && self.pers["killstreaks"][var_5]._id_944C == var_1 || isDefined(var_2) && self.pers["killstreaks"][var_5]._id_944C == var_2 || isDefined(var_3) && self.pers["killstreaks"][var_5]._id_944C == var_3) {
+    if(isDefined(self.pers["killstreaks"][var_5]) && isDefined(self.pers["killstreaks"][var_5].streakname)) {
+      if(self.pers["killstreaks"][var_5].streakname == var_0 || isDefined(var_1) && self.pers["killstreaks"][var_5].streakname == var_1 || isDefined(var_2) && self.pers["killstreaks"][var_5].streakname == var_2 || isDefined(var_3) && self.pers["killstreaks"][var_5].streakname == var_3) {
         var_4 = var_5;
         break;
       }
@@ -310,8 +310,8 @@ disableserumdeathlistener(var_0) {
   self endon("disconnect");
   level endon("game_ended");
   self waittill("death");
-  self.pers["killstreaks"][var_0]._id_13AF = 1;
-  _id_051E::_id_A170();
+  self.pers["killstreaks"][var_0].available = 1;
+  _id_051E::updatestreakslots();
 }
 
 disableserum(var_0) {
@@ -319,9 +319,9 @@ disableserum(var_0) {
   self endon("disconnect");
   level endon("game_ended");
   thread disableserumdeathlistener(var_0);
-  self.pers["killstreaks"][var_0]._id_13AF = 0;
-  _id_051E::_id_A170();
+  self.pers["killstreaks"][var_0].available = 0;
+  _id_051E::updatestreakslots();
   self waittill("serum_finished");
-  self.pers["killstreaks"][var_0]._id_13AF = 1;
-  _id_051E::_id_A170();
+  self.pers["killstreaks"][var_0].available = 1;
+  _id_051E::updatestreakslots();
 }

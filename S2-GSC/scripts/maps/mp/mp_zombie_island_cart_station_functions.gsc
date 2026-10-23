@@ -65,7 +65,7 @@ set_doors_closed(var_0) {
   }
   self.zmb_mine_cart_gates[var_0].prevstate = 0;
   self.zmb_mine_cart_gates[var_0] scriptmodelplayanim("s2_zom_mine_cart_gate_close", "gate_anim");
-  self.zmb_mine_cart_gates[var_0] _id_0378::_id_8D74("mine_cart_gate_closing");
+  self.zmb_mine_cart_gates[var_0] _id_0378::snd_message("mine_cart_gate_closing");
   wait(_getanimlength(%s2_zom_mine_cart_gate_close));
   self.zmb_mine_cart_gates[var_0] scriptmodelplayanim("s2_zom_mine_cart_gate_close_idle", "gate_anim");
 }
@@ -80,7 +80,7 @@ set_doors_opened(var_0) {
   }
   self.zmb_mine_cart_gates[var_0].prevstate = 1;
   self.zmb_mine_cart_gates[var_0] scriptmodelplayanim("s2_zom_mine_cart_gate_open", "gate_anim");
-  self.zmb_mine_cart_gates[var_0] _id_0378::_id_8D74("mine_cart_gate_opening");
+  self.zmb_mine_cart_gates[var_0] _id_0378::snd_message("mine_cart_gate_opening");
   wait(_getanimlength(%s2_zom_mine_cart_gate_close));
   self.zmb_mine_cart_gates[var_0] scriptmodelplayanim("s2_zom_mine_cart_gate_open_idle", "gate_anim");
 }

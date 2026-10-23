@@ -10,7 +10,7 @@ main() {
   _id_0483::main();
   maps\mp\mp_zombie_windmill_lighting::main();
   maps\mp\mp_zombie_windmill_aud::main();
-  _id_0472::_id_8A2F("compass_map_mp_zombie_windmill_srv");
+  _id_0472::setupminimap("compass_map_mp_zombie_windmill_srv");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   level._id_AC2E = 5;
@@ -44,8 +44,8 @@ initwindmillweapons() {
 }
 
 add_windmill_ceiling_patch() {
-  var_0 = common_scripts\utility::_id_46B7("ceiling_stuff_patches_05", "targetname");
-  var_1 = common_scripts\utility::_id_46B7("ceiling_stuff_patches_04", "targetname");
+  var_0 = common_scripts\utility::getstructarray("ceiling_stuff_patches_05", "targetname");
+  var_1 = common_scripts\utility::getstructarray("ceiling_stuff_patches_04", "targetname");
 
   foreach(var_3 in var_0) {
     var_4 = spawn("script_model", var_3.origin);
@@ -74,10 +74,10 @@ init_new_zombie_types() {
 
 house_door_listener() {
   common_scripts\utility::flag_init("zone_plaza_to_zone_house");
-  common_scripts\utility::_id_3C9F("zone_plaza_to_zone_house");
+  common_scripts\utility::flag_wait("zone_plaza_to_zone_house");
 
-  foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "zone_plaza_to_zone_house" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1)) {
+  foreach(var_1 in level.zombiedoors) {
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "zone_plaza_to_zone_house" && (!isDefined(var_1.open) || !var_1.open)) {
       var_1 notify("open", undefined);
     }
   }
@@ -107,19 +107,19 @@ windmill_srv_ee() {
     var_4 setModel("zmw_belongings_toy_duck_01");
   }
 
-  var_2.target_struct = common_scripts\utility::_id_46B5(var_2.target, "targetname");
-  var_2._id_926A = var_2.origin;
+  var_2.target_struct = common_scripts\utility::getstruct(var_2.target, "targetname");
+  var_2.start_position = var_2.origin;
   var_2.raised_position = var_2.target_struct.origin;
   var_2.is_dog = 1;
   var_6 = _getEnt("srv_pap_fuse_spawn_loc", "targetname");
   var_6 linkTo(var_2);
   var_7 = _getEnt("srv_pap_fuse_pickup_trig", "targetname");
-  var_7 common_scripts\utility::_id_9D9F();
+  var_7 common_scripts\utility::trigger_off();
 
   foreach(var_4 in var_1) {
-    var_4._id_926A = var_4.origin;
-    var_4._id_931A = "lowered";
-    var_4.target_struct = common_scripts\utility::_id_46B5(var_4.target, "targetname");
+    var_4.start_position = var_4.origin;
+    var_4.state = "lowered";
+    var_4.target_struct = common_scripts\utility::getstruct(var_4.target, "targetname");
     var_4.raised_position = var_4.target_struct.origin;
     var_4.damagecallback = ::ee_dmg_listen;
   }
@@ -151,7 +151,7 @@ windmill_srv_ee() {
       while(var_14.size < level.ducks_per_window) {
         var_15 = common_scripts\utility::random(var_16);
 
-        if(_id_0547::_id_5565(var_15._id_931A, "lowered")) {
+        if(_id_0547::_id_5565(var_15.state, "lowered")) {
           var_16 = common_scripts\utility::_id_0F93(var_16, var_15);
           var_14 = common_scripts\utility::_id_0F6F(var_14, var_15);
           continue;
@@ -200,11 +200,11 @@ ee_show_dog_fail() {
   wait 1;
   self vibrate(anglestoright(self.angles), 0.3, 0.3, 5);
   wait 5;
-  self moveTo(self._id_926A, 3, 0.1, 0.1);
+  self moveTo(self.start_position, 3, 0.1, 0.1);
   wait 3;
-  self moveTo(self._id_926A + (0, 0, 15), 0.25, 0.1, 0.1);
+  self moveTo(self.start_position + (0, 0, 15), 0.25, 0.1, 0.1);
   wait 4;
-  self moveTo(self._id_926A, 3, 0.1, 0.1);
+  self moveTo(self.start_position, 3, 0.1, 0.1);
   wait 3;
 }
 
@@ -214,21 +214,21 @@ ee_show_dog_success(var_0) {
   var_0 unlink();
   var_0 thread ee_toss_fuse();
   wait 1;
-  self moveTo(self._id_926A, 1);
+  self moveTo(self.start_position, 1);
 }
 
 ee_toss_fuse() {
   var_0 = self;
-  var_1 = common_scripts\utility::_id_46B5("srv_pap_fuse_land_path", "targetname");
+  var_1 = common_scripts\utility::getstruct("srv_pap_fuse_land_path", "targetname");
   var_0 moveTo(var_1.origin, 0.15);
-  var_2 = common_scripts\utility::_id_46B5(var_1.target, "targetname");
+  var_2 = common_scripts\utility::getstruct(var_1.target, "targetname");
   wait 0.15;
 
   while(isDefined(var_2)) {
     var_0 moveTo(var_2.origin, 0.15);
 
     if(isDefined(var_2.target)) {
-      var_2 = common_scripts\utility::_id_46B5(var_2.target, "targetname");
+      var_2 = common_scripts\utility::getstruct(var_2.target, "targetname");
     } else {
       var_2 = undefined;
     }
@@ -237,22 +237,22 @@ ee_toss_fuse() {
   }
 
   var_3 = _getEnt("srv_pap_fuse_pickup_trig", "targetname");
-  var_3 common_scripts\utility::_id_9DA3();
+  var_3 common_scripts\utility::trigger_on();
   var_3 useTriggerRequireLookAt(1);
   var_3 waittill("trigger");
   var_0 delete();
-  var_3 common_scripts\utility::_id_9D9F();
+  var_3 common_scripts\utility::trigger_off();
   level thread maps\mp\zombies\zombie_survival_common::srvshowpapfuse();
 }
 
 ee_raise(var_0) {
-  if(!_id_0547::_id_5565(self._id_931A, "lowered")) {
+  if(!_id_0547::_id_5565(self.state, "lowered")) {
     return;
   }
   self setCanDamage(1);
   self setdamagecallbackon(1);
   self._id_552B = 1;
-  self._id_931A = "raising";
+  self.state = "raising";
 
   if(!isDefined(var_0)) {
     var_0 = 0.5;
@@ -265,14 +265,14 @@ ee_raise(var_0) {
     wait(var_0);
   }
 
-  self._id_931A = "raised";
+  self.state = "raised";
 }
 
 ee_lower(var_0, var_1) {
-  if(!_id_0547::_id_5565(self._id_931A, "raised")) {
+  if(!_id_0547::_id_5565(self.state, "raised")) {
     return;
   }
-  self._id_931A = "lowering";
+  self.state = "lowering";
 
   if(!isDefined(var_1)) {
     var_1 = 0;
@@ -288,7 +288,7 @@ ee_lower(var_0, var_1) {
     var_0 = 0.5;
   }
 
-  self moveTo(self._id_926A, var_0, 0.1, 0.1);
+  self moveTo(self.start_position, var_0, 0.1, 0.1);
   wait(var_0);
 
   if(!common_scripts\utility::_id_562E(var_1)) {
@@ -298,7 +298,7 @@ ee_lower(var_0, var_1) {
   }
 
   self.is_starter = 0;
-  self._id_931A = "lowered";
+  self.state = "lowered";
 }
 
 ee_dmg_listen(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {

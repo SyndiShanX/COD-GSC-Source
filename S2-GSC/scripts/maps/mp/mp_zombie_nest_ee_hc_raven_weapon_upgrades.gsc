@@ -29,8 +29,8 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   maps\mp\mp_zombie_nest_ee_workbench::_id_AA75();
   var_10 = undefined;
   var_11 = undefined;
-  var_12 = common_scripts\utility::_id_46B5(var_0, "targetname");
-  var_12._id_9C92 = common_scripts\utility::_id_46B5(var_2, "script_noteworthy");
+  var_12 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_12._id_9C92 = common_scripts\utility::getstruct(var_2, "script_noteworthy");
   var_12._id_9CD6 = common_scripts\utility::_id_44BE(var_2 + "_uber_collector", "targetname");
   var_13 = common_scripts\utility::_id_44BE(var_12.target, "targetname");
   var_14 = _getscriptablearray(var_2 + "_uber_collector", "targetname");
@@ -38,7 +38,7 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_16 = [];
   var_16["raven_uber_trap_deposit_alter"] = var_15;
   var_16["raven_uber_trap_deposit_alter"] maps\mp\mp_zombie_nest_hilt_altar_reciever::_id_84DB();
-  var_17 = common_scripts\utility::_id_46B5(var_12.target + "_trap_reciever", "targetname");
+  var_17 = common_scripts\utility::getstruct(var_12.target + "_trap_reciever", "targetname");
   var_13 = common_scripts\utility::_id_0F6F(var_13, var_17);
   var_13 = common_scripts\utility::_id_0F73(var_13, var_12._id_9CD6);
 
@@ -62,7 +62,7 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
         break;
       case "raven_uber_trap_deposit":
         var_16[var_19._id_0165] = var_19;
-        var_16[var_19._id_0165]._id_3E3C = common_scripts\utility::_id_46B5(var_16[var_19._id_0165].targetname + "_forge", "targetname");
+        var_16[var_19._id_0165]._id_3E3C = common_scripts\utility::getstruct(var_16[var_19._id_0165].targetname + "_forge", "targetname");
         var_16[var_19._id_0165]._id_65D5 = var_0;
         break;
       case "raven_uber_trap_deposit_trig":
@@ -118,7 +118,7 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_24 thread _id_3622(var_23, "5 Right Hand fuses", "lift outter rods");
 
   if(0) {
-    common_scripts\utility::_id_3C9F(_id_0557::_id_7838("4 cart", "head to com"));
+    common_scripts\utility::flag_wait(_id_0557::_id_7838("4 cart", "head to com"));
   }
 
   var_26 = var_12[[var_1]](var_16);
@@ -133,9 +133,9 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   _id_0557::_id_4BC8(var_8);
   var_12._id_9C92._id_9FE5 hide();
   var_29 = _id_0585::_id_8F7E(var_12._id_9C92._id_9FE5.origin, _id_4703(var_0), _id_4702(var_0), var_16["raven_trap_pickup_trig_offset"].origin, var_0);
-  var_16["raven_uber_trap_deposit_trig"] common_scripts\utility::_id_9D9F();
+  var_16["raven_uber_trap_deposit_trig"] common_scripts\utility::trigger_off();
   var_23 setHintString(&"ZOMBIE_NEST_PLACE_UBER");
-  var_23 _meth_8660(1, var_16["raven_uber_trap_deposit"]._id_3E3C.origin);
+  var_23 setdefaultcostumeifneeded(1, var_16["raven_uber_trap_deposit"]._id_3E3C.origin);
   var_12._id_9C92._id_9FE5._id_65E3 delete();
   var_12._id_9C92._id_9FE5.origin = var_16["raven_uber_trap_deposit"]._id_3E3C.origin;
   var_11 = undefined;
@@ -150,7 +150,7 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_30["battleID"] = 3;
   var_30["event_origin"] = var_16["main_trigger"].origin;
   var_30["notifications"] = spawnStruct();
-  var_30["notifications"]._id_94D4 = "hc_raven_" + var_0 + "_success";
+  var_30["notifications"].success = "hc_raven_" + var_0 + "_success";
   var_30["notifications"]._id_39D1 = "hc_raven_" + var_0 + "_fail";
   var_16["activation_triggers"] = [var_23];
   var_16["attack_positions"] = _getEnt(var_25.target, "targetname");
@@ -212,7 +212,7 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   }
 
   maps\mp\mp_zombie_nest_ee_workbench::_id_AA7A(level._id_AACA[var_4]);
-  common_scripts\utility::_id_9DA3();
+  common_scripts\utility::trigger_on();
   self setHintString(maps\mp\mp_zombie_nest_ee_workbench::_id_AA71(var_4));
   var_36 = "";
   var_11 = undefined;
@@ -240,22 +240,22 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   _id_0557::_id_4BC8(var_9);
   _id_0557::_id_4BC8("tesla gun upgraded");
 
-  if(isDefined(var_6) && common_scripts\utility::_id_3C83(var_6)) {
+  if(isDefined(var_6) && common_scripts\utility::flag_exist(var_6)) {
     common_scripts\utility::flag_set(var_6);
   }
 }
 
 _id_7A8E() {
-  common_scripts\utility::_id_3CA0("flag_nest_hc_ee_storm_assembled", "flag_nest_hc_ee_moon_assembled", "flag_nest_hc_ee_death_assembled", "flag_nest_hc_ee_blood_assembled");
+  common_scripts\utility::flag_wait_all("flag_nest_hc_ee_storm_assembled", "flag_nest_hc_ee_moon_assembled", "flag_nest_hc_ee_death_assembled", "flag_nest_hc_ee_blood_assembled");
   maps\mp\gametypes\zombies::_id_47A8("ZM_TESLA_CHALLENGE");
 }
 
 _id_3622(var_0, var_1, var_2) {
-  var_0 common_scripts\utility::_id_9D9F();
+  var_0 common_scripts\utility::trigger_off();
   self scriptmodelplayanim("zmb_forge_electric_coil_shutter_idle");
   _id_A64D(var_1, var_2);
   _id_6C01();
-  var_0 common_scripts\utility::_id_9DA3();
+  var_0 common_scripts\utility::trigger_on();
 }
 
 _id_8F6E(var_0, var_1, var_2, var_3, var_4) {
@@ -277,7 +277,7 @@ _id_6A77(var_0, var_1, var_2) {
     if(!isDefined(var_4)) {
       continue;
     }
-    var_4 common_scripts\utility::_id_9D9F();
+    var_4 common_scripts\utility::trigger_off();
   }
 
   foreach(var_7 in level._id_7A85) {
@@ -286,9 +286,9 @@ _id_6A77(var_0, var_1, var_2) {
 }
 
 _id_6A76(var_0, var_1) {
-  var_2 = level._id_A980;
+  var_2 = level.wavecounter;
 
-  while(level._id_A980 <= var_2) {
+  while(level.wavecounter <= var_2) {
     wait 5;
   }
 
@@ -296,7 +296,7 @@ _id_6A76(var_0, var_1) {
     if(!isDefined(var_4)) {
       continue;
     }
-    var_4 common_scripts\utility::_id_9DA3();
+    var_4 common_scripts\utility::trigger_on();
   }
 
   level.raven_forge_active = 0;
@@ -307,16 +307,16 @@ _id_6A76(var_0, var_1) {
 }
 
 _id_6A78(var_0, var_1, var_2) {
-  var_3 = level._id_A980;
+  var_3 = level.wavecounter;
 
-  while(level._id_A980 <= var_3) {
+  while(level.wavecounter <= var_3) {
     wait 5;
   }
 
   level.raven_forge_active = 0;
 
   foreach(var_5 in level._id_7A86) {
-    var_5 common_scripts\utility::_id_9DA3();
+    var_5 common_scripts\utility::trigger_on();
   }
 
   foreach(var_8 in level._id_7A85) {
@@ -353,7 +353,7 @@ _id_A6A4(var_0, var_1, var_2) {
 }
 
 _id_A6C0(var_0) {
-  common_scripts\utility::_id_9DA3();
+  common_scripts\utility::trigger_on();
   var_1 = undefined;
 
   while(!self._id_57A4) {
@@ -365,13 +365,13 @@ _id_A6C0(var_0) {
       level.raven_forge_active = 1;
     }
 
-    if(var_0 == 0 || var_1 maps\mp\gametypes\zombies::_id_11C2(var_0)) {
-      self._id_28D5 = 0;
+    if(var_0 == 0 || var_1 maps\mp\gametypes\zombies::attempttobuy(var_0)) {
+      self.curprogress = 0;
       self._id_57A4 = 1;
     }
   }
 
-  common_scripts\utility::_id_9D9F();
+  common_scripts\utility::trigger_off();
   level notify("ee trigger was repaired", var_1, self);
 }
 
@@ -405,7 +405,7 @@ _id_9870(var_0, var_1, var_2) {
   var_6 = spawn("script_model", self.origin);
   var_6 setModel("tag_origin");
   var_7 = spawnStruct();
-  var_7._id_5764 = 0;
+  var_7.ison = 0;
   var_8 = self.origin;
 
   for(;;) {
@@ -414,15 +414,15 @@ _id_9870(var_0, var_1, var_2) {
 
     for(var_11 = 0; var_11 < var_9.size; var_11++) {
       if(distance(self.origin, var_9[var_11].origin) < 256 && isDefined(var_9[var_11]._id_0A4B) && var_9[var_11]._id_0A4B == var_1) {
-        var_10 = common_scripts\utility::_id_98E7(var_10 < var_4, var_10 + 1, var_4);
+        var_10 = common_scripts\utility::ter_op(var_10 < var_4, var_10 + 1, var_4);
       }
     }
 
-    if(var_10 == var_4 && !common_scripts\utility::_id_562E(var_7._id_5764)) {
-      var_7._id_5764 = 1;
-      maps\mp\mp_zombie_nest_hilt_altar_reciever::_id_84D6();
-    } else if(common_scripts\utility::_id_562E(var_7._id_5764)) {
-      var_7._id_5764 = 0;
+    if(var_10 == var_4 && !common_scripts\utility::_id_562E(var_7.ison)) {
+      var_7.ison = 1;
+      maps\mp\mp_zombie_nest_hilt_altar_reciever::getgravity();
+    } else if(common_scripts\utility::_id_562E(var_7.ison)) {
+      var_7.ison = 0;
       maps\mp\mp_zombie_nest_hilt_altar_reciever::_id_84D5();
     }
 
@@ -431,11 +431,11 @@ _id_9870(var_0, var_1, var_2) {
 }
 
 _id_440B() {
-  var_0 = maps\mp\agents\_agent_utility::_id_43FD("all");
+  var_0 = maps\mp\agents\_agent_utility::getactiveagentsoftype("all");
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(var_3._id_000A == level._id_746E) {
+    if(var_3._id_000A == level.playerteam) {
       continue;
     }
     if(isalive(var_3)) {
@@ -522,7 +522,7 @@ _id_44EB(var_0) {
   }
 
   var_2 = _getEnt(var_1, "targetname");
-  return var_2._id_7AC4;
+  return var_2.realorigin;
 }
 
 _id_9FE9(var_0, var_1, var_2, var_3, var_4) {
@@ -536,27 +536,27 @@ _id_9FE9(var_0, var_1, var_2, var_3, var_4) {
   var_6 = spawn("script_model", var_1.origin);
   var_6 setModel(var_3);
   var_6._id_65E4 = var_1;
-  var_2 common_scripts\utility::_id_9D9F();
+  var_2 common_scripts\utility::trigger_off();
   return var_6;
 }
 
 _id_A64D(var_0, var_1) {
   level endon("open all forge uber doors");
-  common_scripts\utility::_id_3C9F(_id_0557::_id_7838(var_0, var_1));
+  common_scripts\utility::flag_wait(_id_0557::_id_7838(var_0, var_1));
 }
 
 #using_animtree("animated_props_zombies");
 
 _id_6C01() {
   self scriptmodelplayanim("zmb_forge_electric_coil_shutter_up");
-  _id_0378::_id_8D74("aud_compartment_door_open");
+  _id_0378::snd_message("aud_compartment_door_open");
   wait(_getanimlength(%zmb_forge_electric_coil_shutter_up));
   self scriptmodelplayanim("zmb_forge_electric_coil_shutter_up_idle", "shutter_up");
 }
 
 _id_2441() {
   self scriptmodelplayanim("zmb_forge_electric_coil_shutter_down");
-  _id_0378::_id_8D74("aud_compartment_door_close");
+  _id_0378::snd_message("aud_compartment_door_close");
   wait(_getanimlength(%zmb_forge_electric_coil_shutter_down));
   self scriptmodelplayanim("zmb_forge_electric_coil_shutter_idle", "shutter_down");
 }
@@ -608,11 +608,11 @@ _id_7A87(var_0) {
 }
 
 _id_1806() {
-  _id_0378::_id_8D74("blow_open_uber_concealment_door");
+  _id_0378::snd_message("blow_open_uber_concealment_door");
   level thread common_scripts\_exploder::_id_088E(239);
   self setModel("zmb_objective_panel_door_dmg_01");
   self.origin = self.origin + (0, 0, 64);
-  self movegravity(-200 * vectorNormalize(common_scripts\utility::_id_3D5C(anglesToForward(self.angles))) + (0, 0, 50), 1);
+  self movegravity(-200 * vectorNormalize(common_scripts\utility::flat_angle(anglesToForward(self.angles))) + (0, 0, 50), 1);
   self rotateby((360, 360, 360), 1);
 }
 
@@ -621,10 +621,10 @@ _id_7A8B(var_0) {
   _id_A6C3(var_0);
   var_0["cover_model"] scriptmodelplayanim("zmb_breakable_statue_bursting", "statue_burst");
   playFX(level._effect["zmb_hc_statue"], var_0["cover_model"].origin);
-  var_0["cover_model"] _id_0378::_id_8D74("aud_break_statue");
+  var_0["cover_model"] _id_0378::snd_message("aud_break_statue");
   var_0["fuse_pickup"] show();
   var_0["fuse_pickup"] maps\mp\mp_zombie_nest_ee_util::_id_A725("teslagun_zm");
-  var_1 = common_scripts\utility::_id_46B5(var_0["fuse_pickup"].target, "targetname");
+  var_1 = common_scripts\utility::getstruct(var_0["fuse_pickup"].target, "targetname");
   var_2 = var_0["fuse_pickup"];
   var_3 = var_1;
   var_2 hide();
@@ -652,28 +652,28 @@ _id_7A89(var_0) {
   var_3 setModel("tag_origin");
   var_2 setCanDamage(1);
   var_2 maps\mp\mp_zombie_nest_ee_util::_id_A725("teslagun_zm");
-  _playFXOnTag(common_scripts\utility::_id_44F5("temp_hc_challenge_indicator_lights"), var_3, "tag_origin");
+  _playFXOnTag(common_scripts\utility::getfx("temp_hc_challenge_indicator_lights"), var_3, "tag_origin");
   var_3 linktosynchronizedparent(var_2);
   var_4 = maps\mp\mp_zombie_nest_ee_util::_id_44C8(var_2.target, 1);
-  var_2._id_775E = 0;
-  _id_0378::_id_8D74("tesla_hc_energy_lamp_loop_on", var_2.origin);
+  var_2.progress = 0;
+  _id_0378::snd_message("tesla_hc_energy_lamp_loop_on", var_2.origin);
   waitframe();
 
-  while(var_2._id_775E < var_4.size) {
-    var_2.origin = var_4[var_2._id_775E].origin;
+  while(var_2.progress < var_4.size) {
+    var_2.origin = var_4[var_2.progress].origin;
     var_2 thread _id_39EA(6);
     var_2 waittill("trigger");
 
-    if(var_2._id_775E >= 0) {
-      _id_0378::_id_8D74("tesla_hc_energy_lamp_destruct", var_2.origin);
+    if(var_2.progress >= 0) {
+      _id_0378::snd_message("tesla_hc_energy_lamp_destruct", var_2.origin);
     }
 
-    var_2._id_775E++;
+    var_2.progress++;
     wait 0.15;
   }
 
-  _id_0378::_id_8D74("tesla_hc_energy_lamp_loop_off", var_2.origin);
-  _stopFXOnTag(common_scripts\utility::_id_44F5("temp_hc_challenge_indicator_lights"), var_3, "tag_origin");
+  _id_0378::snd_message("tesla_hc_energy_lamp_loop_off", var_2.origin);
+  _stopFXOnTag(common_scripts\utility::getfx("temp_hc_challenge_indicator_lights"), var_3, "tag_origin");
   var_6 = _getEnt(var_0["fuse_pickup"].target, "targetname");
   var_2.origin = var_6.origin;
   var_7 = _getEnt(var_0["fuse_pickup"].target, "targetname");
@@ -684,7 +684,7 @@ _id_7A89(var_0) {
 _id_39EA(var_0) {
   self endon("trigger");
   wait(var_0);
-  self._id_775E = -1;
+  self.progress = -1;
   self notify("trigger");
 }
 
@@ -767,7 +767,7 @@ _id_A6C1(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
 
       playFX(level._effect["zmb_receiver_charge_pnt"], var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
-      _id_0378::_id_8D74("aud_battery_electrocute");
+      _id_0378::snd_message("aud_battery_electrocute");
       var_11 = undefined;
       var_12++;
 
@@ -864,9 +864,9 @@ _id_A6B9(var_0, var_1, var_2, var_3) {
   self show();
 
   if(isDefined(var_2)) {
-    _id_0547::_id_AC41(var_0, undefined, var_2);
+    _id_0547::zombies_make_usable(var_0, undefined, var_2);
   } else {
-    _id_0547::_id_AC41(var_0, var_1);
+    _id_0547::zombies_make_usable(var_0, var_1);
   }
 
   var_4 = "";
@@ -881,13 +881,13 @@ _id_A6B9(var_0, var_1, var_2, var_3) {
     }
   }
 
-  _id_0547::_id_AC40();
+  _id_0547::zombies_make_unusable();
   self delete();
   return var_5;
 }
 
 completedeathreward() {
-  common_scripts\utility::_id_3C9F("flag_nest_hc_ee_death_assembled");
+  common_scripts\utility::flag_wait("flag_nest_hc_ee_death_assembled");
 
   foreach(var_1 in level.players) {
     var_1 _id_054C::_id_AC23("deathraven");
@@ -895,7 +895,7 @@ completedeathreward() {
 }
 
 completebloodreward() {
-  common_scripts\utility::_id_3C9F("flag_nest_hc_ee_blood_assembled");
+  common_scripts\utility::flag_wait("flag_nest_hc_ee_blood_assembled");
 
   foreach(var_1 in level.players) {
     var_1 _id_054C::_id_AC23("bloodraven");
@@ -903,7 +903,7 @@ completebloodreward() {
 }
 
 completestormreward() {
-  common_scripts\utility::_id_3C9F("flag_nest_hc_ee_storm_assembled");
+  common_scripts\utility::flag_wait("flag_nest_hc_ee_storm_assembled");
 
   foreach(var_1 in level.players) {
     var_1 _id_054C::_id_AC23("stormraven");
@@ -911,7 +911,7 @@ completestormreward() {
 }
 
 completemoonreward() {
-  common_scripts\utility::_id_3C9F("flag_nest_hc_ee_moon_assembled");
+  common_scripts\utility::flag_wait("flag_nest_hc_ee_moon_assembled");
 
   foreach(var_1 in level.players) {
     var_1 _id_054C::_id_AC23("moonraven");

@@ -51,7 +51,7 @@ _id_4721(var_0) {
 }
 
 _id_398B(var_0) {
-  var_1 = _func_337(var_0, "consumable_zm_guarantee_");
+  var_1 = maps/aachen_b_precache(var_0, "consumable_zm_guarantee_");
   return var_1;
 }
 

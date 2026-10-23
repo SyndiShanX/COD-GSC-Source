@@ -14,7 +14,7 @@ main() {
   level.custom_camo_func_off = ::island_camo_vision_stop;
   maps\mp\zombies\shotgun\_zombies_shotgun_gamemode::init_sg();
   register_dnk_sg_objectives();
-  _id_0472::_id_8A2F("compass_map_mp_zombie_dnk");
+  _id_0472::setupminimap("compass_map_mp_zombie_dnk");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   level.sg_pack_use_small_radius = 1;
@@ -96,19 +96,19 @@ ondnkstartgame() {
 }
 
 ondnkroundend() {
-  if(level._id_A980 == 1) {
+  if(level.wavecounter == 1) {
     level thread maps\mp\mp_zombie_dnk_code::wave_story_wave_1();
   }
 
-  if(level._id_A980 == 4) {
+  if(level.wavecounter == 4) {
     level thread maps\mp\mp_zombie_dnk_code::wave_story_wave_4();
   }
 
-  if(level._id_A980 == 9) {
+  if(level.wavecounter == 9) {
     level thread maps\mp\mp_zombie_dnk_code::wave_story_pre_boss();
   }
 
-  if(level._id_A980 == 10) {
+  if(level.wavecounter == 10) {
     level thread maps\mp\mp_zombie_dnk_code::wave_story_post_boss();
   }
 
@@ -130,7 +130,7 @@ beast_boss_run(var_0) {
   maps\mp\zombies\zombie_beast::init();
   level.trucks_are_port_locked = 1;
   level._id_1CC0 = undefined;
-  var_1 = common_scripts\utility::_id_46B5("sg_boss_beast_spawnpoint", "targetname");
+  var_1 = common_scripts\utility::getstruct("sg_boss_beast_spawnpoint", "targetname");
   level.boss = _id_054D::_id_90BA("zombie_bob", var_1, "bob", 0, 1, 0);
   level.boss _id_0547::disableoffhandsecondaryweapons();
   level.boss maps\mp\zombies\sg_events_v1\_boss_util::set_zombie_boss_has_weapon_loot();
@@ -145,7 +145,7 @@ beast_boss_run(var_0) {
     level thread maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::spawn_extra_redskull_assassins("zombie_assassin_freefire");
   }
 
-  level.boss maps\mp\agents\_agent_common::_id_83FD(int(var_2));
+  level.boss maps\mp\agents\_agent_common::set_agent_health(int(var_2));
   var_3 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::basic_boss_waitfor_defeated();
 
   if(!common_scripts\utility::_id_562E(var_3)) {
@@ -185,7 +185,7 @@ intro_special_zombies_attach() {
   self.hasprop = 1;
   self.prop_decorator = spawn("script_model", self.origin);
 
-  if(common_scripts\utility::_id_24A6()) {
+  if(common_scripts\utility::cointoss()) {
     self.prop_decorator setModel("bsh_life_preserve_01");
   } else {
     self.prop_decorator setModel("bsh_life_preserve_01_snow");
@@ -196,7 +196,7 @@ intro_special_zombies_attach() {
 
 special_decorator_zombie_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(isDefined(self.prop_decorator)) {
-    self.prop_decorator common_scripts\utility::_id_2CBE(4, ::delete);
+    self.prop_decorator common_scripts\utility::delaycall(4, ::delete);
   }
 }
 

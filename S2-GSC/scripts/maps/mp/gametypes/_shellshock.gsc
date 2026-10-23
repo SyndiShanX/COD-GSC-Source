@@ -5,11 +5,11 @@
 
 init() {}
 
-_id_8AF0(var_0, var_1) {
+shellshockondamage(var_0, var_1) {
   if(maps\mp\_flashgrenades::isflashbanged()) {
     return;
   }
-  if(maps\mp\_utility::isusingremote() || maps\mp\_utility::_id_572D()) {
+  if(maps\mp\_utility::isusingremote() || maps\mp\_utility::isinremotetransition()) {
     return;
   }
   if(var_0 == "MOD_EXPLOSIVE" || var_0 == "MOD_GRENADE" || var_0 == "MOD_GRENADE_SPLASH" || var_0 == "MOD_PROJECTILE" || var_0 == "MOD_PROJECTILE_SPLASH") {
@@ -21,14 +21,14 @@ _id_8AF0(var_0, var_1) {
   }
 }
 
-_id_36DC() {
+endondeath() {
   self waittill("death");
   waittillframeend;
   self notify("end_explode");
 }
 
-_id_485C() {
-  thread _id_36DC();
+grenade_earthquake() {
+  thread endondeath();
   self endon("make_dud");
   self endon("end_explode");
   var_0 = self._id_0117;
@@ -46,7 +46,7 @@ _id_485C() {
   }
 
   foreach(var_4 in level.players) {
-    if(!isalive(var_4) || var_4 maps\mp\_utility::isusingremote() || var_4 maps\mp\_utility::_id_572D()) {
+    if(!isalive(var_4) || var_4 maps\mp\_utility::isusingremote() || var_4 maps\mp\_utility::isinremotetransition()) {
       continue;
     }
     if(distancesquared(var_2, var_4.origin) > 22500) {
@@ -65,7 +65,7 @@ _id_485C() {
   }
 }
 
-_id_2F13(var_0) {
+dirteffect(var_0) {
   self notify("dirtEffect");
   self endon("dirtEffect");
   self endon("disconnect");
@@ -82,19 +82,19 @@ _id_2F13(var_0) {
 
   if(var_4 > 0 && var_4 > 0.5) {
     self setclientomnvar("ui_fullscreen_dirt_left", 1);
-    common_scripts\utility::_id_A710(var_6, 2.0);
+    common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 2.0);
   } else if(_abs(var_4) < 0.866) {
     if(var_5 > 0) {
       self setclientomnvar("ui_fullscreen_dirt_left", 1);
-      common_scripts\utility::_id_A710(var_6, 2.0);
+      common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 2.0);
     } else {
       self setclientomnvar("ui_fullscreen_dirt_left", 1);
-      common_scripts\utility::_id_A710(var_6, 2.0);
+      common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 2.0);
     }
   }
 }
 
-_id_17FE(var_0) {
+bloodeffect(var_0) {
   self notify("bloodEffect");
   self endon("bloodEffect");
   self endon("disconnect");
@@ -110,17 +110,17 @@ _id_17FE(var_0) {
   var_6 = ["death", "damage"];
 
   if(var_4 > 0 && var_4 > 0.5) {
-    common_scripts\utility::_id_A710(var_6, 7.0);
+    common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 7.0);
   } else if(_abs(var_4) < 0.866) {
     if(var_5 > 0) {
-      common_scripts\utility::_id_A710(var_6, 7.0);
+      common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 7.0);
     } else {
-      common_scripts\utility::_id_A710(var_6, 7.0);
+      common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 7.0);
     }
   }
 }
 
-_id_17FF() {
+bloodmeleeeffect() {
   self endon("disconnect");
   wait 0.5;
 
@@ -129,8 +129,8 @@ _id_17FF() {
   }
 }
 
-_id_1DEE() {
-  thread _id_36DC();
+c4_earthquake() {
+  thread endondeath();
   self endon("end_explode");
   self endon("make_dud");
   var_0 = self._id_0117;
@@ -140,7 +140,7 @@ _id_1DEE() {
   _earthquake(0.4, 0.75, var_2, 256);
 
   foreach(var_4 in level.players) {
-    if(var_4 maps\mp\_utility::isusingremote() || var_4 maps\mp\_utility::_id_572D()) {
+    if(var_4 maps\mp\_utility::isusingremote() || var_4 maps\mp\_utility::isinremotetransition()) {
       continue;
     }
     if(distance(var_2, var_4.origin) > 150) {
@@ -157,13 +157,13 @@ _id_1DEE() {
   }
 }
 
-_id_15C5() {
+barrel_earthquake() {
   var_0 = self.origin;
   _playrumbleonposition("grenade_rumble", var_0);
   _earthquake(0.4, 0.5, var_0, 512);
 
   foreach(var_2 in level.players) {
-    if(var_2 maps\mp\_utility::isusingremote() || var_2 maps\mp\_utility::_id_572D()) {
+    if(var_2 maps\mp\_utility::isusingremote() || var_2 maps\mp\_utility::isinremotetransition()) {
       continue;
     }
     if(distance(var_0, var_2.origin) > 512) {
@@ -181,7 +181,7 @@ _id_0FD9() {
   _earthquake(0.7, 0.5, self.origin, 800);
 
   foreach(var_2 in level.players) {
-    if(var_2 maps\mp\_utility::isusingremote() || var_2 maps\mp\_utility::_id_572D()) {
+    if(var_2 maps\mp\_utility::isusingremote() || var_2 maps\mp\_utility::isinremotetransition()) {
       continue;
     }
     if(distance(var_0, var_2.origin) > 600) {
@@ -193,12 +193,12 @@ _id_0FD9() {
   }
 }
 
-_id_938E(var_0) {
+stealthairstrike_earthquake(var_0) {
   _playrumbleonposition("grenade_rumble", var_0);
   _earthquake(0.6, 0.6, var_0, 2000);
 
   foreach(var_2 in level.players) {
-    if(var_2 maps\mp\_utility::isusingremote() || var_2 maps\mp\_utility::_id_572D()) {
+    if(var_2 maps\mp\_utility::isusingremote() || var_2 maps\mp\_utility::isinremotetransition()) {
       continue;
     }
     if(distance(var_0, var_2.origin) > 1000) {
@@ -215,7 +215,7 @@ _id_0B94(var_0) {
   _earthquake(0.7, 0.75, var_0, 1000);
 
   foreach(var_2 in level.players) {
-    if(var_2 maps\mp\_utility::isusingremote() || var_2 maps\mp\_utility::_id_572D()) {
+    if(var_2 maps\mp\_utility::isusingremote() || var_2 maps\mp\_utility::isinremotetransition()) {
       continue;
     }
     if(distance(var_0, var_2.origin) > 900) {

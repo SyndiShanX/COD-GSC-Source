@@ -10,10 +10,10 @@ init() {
 
 _id_3662() {
   self._id_4B66 = 1;
-  _id_0513::_id_A13B();
+  _id_0513::updatemovespeedscale();
 }
 
 _id_2F9E() {
   self._id_4B66 = 0;
-  _id_0513::_id_A13B();
+  _id_0513::updatemovespeedscale();
 }

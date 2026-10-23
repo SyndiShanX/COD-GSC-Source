@@ -3,7 +3,7 @@
  * Script: scripts\maps\mp\_trigger.gsc
 ****************************************/
 
-_id_41FC() {
+get_load_trigger_classes() {
   var_0 = _id_028C::_id_4323();
   var_1 = [];
   var_1["trigger_multiple_spawn_once"] = _id_048F::_id_9DB1;
@@ -12,8 +12,8 @@ _id_41FC() {
   return var_1;
 }
 
-_id_5258() {
-  var_0 = _id_41FC();
+init_script_triggers() {
+  var_0 = get_load_trigger_classes();
   var_1 = [];
 
   foreach(var_5, var_3 in var_0) {

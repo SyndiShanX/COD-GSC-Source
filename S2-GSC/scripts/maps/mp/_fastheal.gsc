@@ -3,14 +3,14 @@
  * Script: scripts\maps\mp\_fastheal.gsc
 *****************************************/
 
-_id_A908() {
+watchfasthealusage() {
   self endon("spawned_player");
   self endon("disconnect");
   self endon("death");
   self endon("faux_spawn");
 
-  if(!isDefined(level._id_3A58)) {
-    _id_3A57();
+  if(!isDefined(level.fasthealsettings)) {
+    fasthealinit();
   }
 
   for(;;) {
@@ -22,31 +22,31 @@ _id_A908() {
         return;
       }
 
-      thread _id_9E29();
+      thread tryusefastheal();
     }
   }
 }
 
-_id_3A57() {
-  self._id_3A58 = spawnStruct();
+fasthealinit() {
+  self.fasthealsettings = spawnStruct();
 }
 
-_id_9E29() {
-  if(!isDefined(self._id_3A58)) {
-    _id_3A57();
+tryusefastheal() {
+  if(!isDefined(self.fasthealsettings)) {
+    fasthealinit();
   }
 
-  _id_7D5D();
-  thread _id_92CC();
-  thread _id_63BF();
+  resetfastheal();
+  thread startfastheal();
+  thread monitorplayerdeath();
   return 1;
 }
 
-_id_92CC() {
+startfastheal() {
   self endon("ClearFastHeal");
   self endon("death");
   self playlocalsound("earn_superbonus");
-  self._id_56E9 = 1;
+  self.isfastheal = 1;
   self._id_50A0 = 1;
   self._id_98E1 = 1.5;
   self._id_98E2 = 13.33;
@@ -54,19 +54,19 @@ _id_92CC() {
   wait 10;
   self._id_98E1 = undefined;
   self._id_98E2 = undefined;
-  self._id_56E9 = 0;
+  self.isfastheal = 0;
 
-  if(isDefined(self._id_3A58._id_6CA4)) {
-    self._id_3A58._id_6CA4 destroy();
+  if(isDefined(self.fasthealsettings.overlay)) {
+    self.fasthealsettings.overlay destroy();
   }
 
   self notify("EndFastHeal");
 }
 
-_id_7D5D() {
-  if(isDefined(self._id_56E9) && self._id_56E9 == 1) {
-    if(isDefined(self._id_3A58._id_6CA4)) {
-      self._id_3A58._id_6CA4 destroy();
+resetfastheal() {
+  if(isDefined(self.isfastheal) && self.isfastheal == 1) {
+    if(isDefined(self.fasthealsettings.overlay)) {
+      self.fasthealsettings.overlay destroy();
     }
 
     self._id_98E1 = undefined;
@@ -75,19 +75,19 @@ _id_7D5D() {
   }
 }
 
-_id_63BF() {
+monitorplayerdeath() {
   self endon("EndFastHeal");
   self waittill("death");
   self._id_98E1 = undefined;
   self._id_98E2 = undefined;
-  self._id_56E9 = 0;
+  self.isfastheal = 0;
 
-  if(isDefined(self._id_3A58._id_6CA4)) {
-    self._id_3A58._id_6CA4 destroy();
+  if(isDefined(self.fasthealsettings.overlay)) {
+    self.fasthealsettings.overlay destroy();
   }
 }
 
-_id_7723() {
+printhealthtoscreen() {
   self endon("EndFastHeal");
   self endon("death");
 

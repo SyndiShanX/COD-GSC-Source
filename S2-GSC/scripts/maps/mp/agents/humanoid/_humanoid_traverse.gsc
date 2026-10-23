@@ -40,7 +40,7 @@ _id_32B7() {
   var_2 = self _meth_857F();
   self setOrigin(var_1, 0);
   self.angles = var_0.angles;
-  var_3 = level._id_AC6C[self._id_90DC][var_0._id_001E];
+  var_3 = level._id_AC6C[self.species][var_0._id_001E];
   var_4 = self[[maps\mp\agents\_agent_utility::_id_0A59("get_action_params")]]();
   var_5 = maps\mp\agents\_scripted_agent_anim_util::_id_087C(var_3, var_4);
 
@@ -53,12 +53,12 @@ _id_32B7() {
   var_8 = self getanimentry(var_5, var_7);
   _id_62AC(var_0, var_8);
   self endon("killanimscript");
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "DoTraverse");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "DoTraverse");
   self scragentsetorientmode("face angle abs", var_0.angles);
   self scragentsetanimmode("anim deltas");
   self scragentsetphysicsmode("noclip");
   self scragentsetanimscale(1, 1);
-  maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_5, var_7, self._id_9D0D);
+  maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_5, var_7, self.traverseratescale);
   var_9 = _getanimlength(var_8);
   var_10 = maps\mp\agents\_scripted_agent_anim_util::_id_446A(var_8);
   var_11 = _transformmove(var_1, var_0.angles, (0, 0, 0), (0, 0, 0), _getmovedelta(var_8, 0, var_10), (0, 0, 0));
@@ -69,12 +69,12 @@ _id_32B7() {
     var_13 = var_11["origin"];
   }
 
-  self._id_9D07 = vectorNormalize(var_13 - var_1);
+  self.traversalvector = vectorNormalize(var_13 - var_1);
 
   if(_animhasnotetrack(var_8, "traverse_jump_start")) {
     var_14 = maps\mp\agents\_scripted_agent_anim_util::_id_45B9(var_8, "traverse_jump_start");
     var_15 = maps\mp\agents\_scripted_agent_anim_util::_id_45B9(var_8, "traverse_jump_end");
-    wait(var_14 * var_9 / self._id_9D0D);
+    wait(var_14 * var_9 / self.traverseratescale);
     var_16 = _getmovedelta(var_8, var_14, var_15)[2];
     var_17 = _getmovedelta(var_8, var_14, var_10)[2];
     var_18 = self.origin[2] + var_17;
@@ -82,8 +82,8 @@ _id_32B7() {
 
     if(_abs(var_16) < 5) {
       self scragentsetanimscale(1, 0);
-      var_20 = (var_15 - var_14) * var_9 / self._id_9D0D;
-      childthread _id_9D0A(self.origin[2], self.origin[2] + var_16 - var_19, var_20);
+      var_20 = (var_15 - var_14) * var_9 / self.traverseratescale;
+      childthread traverse_lerp_z_over_time(self.origin[2], self.origin[2] + var_16 - var_19, var_20);
       wait(var_20);
       self scragentsetanimscale(1, 1);
     } else {
@@ -91,19 +91,19 @@ _id_32B7() {
       var_22 = var_21 / var_16;
       var_23 = clamp(var_22, 0.4, 4);
       var_24 = _sqrt(1 / var_23);
-      var_25 = self._id_9D0D * var_24;
+      var_25 = self.traverseratescale * var_24;
       self scragentsetanimscale(1, var_23);
       self _meth_85D4(var_25);
       var_20 = (var_15 - var_14) * var_9 / var_25;
       wait(var_20);
       self scragentsetanimscale(1, 1);
-      self _meth_85D4(self._id_9D0D);
+      self _meth_85D4(self.traverseratescale);
     }
 
-    var_20 = (var_10 - var_15) * var_9 / self._id_9D0D;
+    var_20 = (var_10 - var_15) * var_9 / self.traverseratescale;
     wait(var_20);
   } else {
-    var_20 = var_9 * var_10 / self._id_9D0D;
+    var_20 = var_9 * var_10 / self.traverseratescale;
     wait(var_20);
   }
 
@@ -119,7 +119,7 @@ _id_32B7() {
   }
 
   self._id_9D0C = gettime();
-  self._id_9D0B = max(0.2, (1 - var_10) * var_9 / self._id_9D0D);
+  self._id_9D0B = max(0.2, (1 - var_10) * var_9 / self.traverseratescale);
   self notify("traverse_end", var_0);
 }
 
@@ -137,7 +137,7 @@ _id_62AC(var_0, var_1) {
   }
 
   var_8 = var_2 / 1000;
-  var_0._id_54F5 = 1;
+  var_0.inuse = 1;
   var_0._id_98C3 = undefined;
   var_0._id_A228 = self;
   _func_329(var_0, 1);
@@ -147,7 +147,7 @@ _id_62AC(var_0, var_1) {
 
 disableweapons(var_0, var_1) {
   wait(var_1);
-  var_0._id_54F5 = 0;
+  var_0.inuse = 0;
   var_0._id_98C3 = undefined;
   var_0._id_A228 = undefined;
 
@@ -156,7 +156,7 @@ disableweapons(var_0, var_1) {
   }
 }
 
-_id_9D0A(var_0, var_1, var_2) {
+traverse_lerp_z_over_time(var_0, var_1, var_2) {
   var_3 = gettime();
 
   for(;;) {
@@ -175,9 +175,9 @@ _id_9D0A(var_0, var_1, var_2) {
 
 _id_0085() {
   self scragentsetanimscale(1, 1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "Traverse end_script");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "Traverse end_script");
   _id_0547::disableoffhandsecondaryweapons();
-  self._id_9D07 = undefined;
+  self.traversalvector = undefined;
 }
 
 _id_52C7() {

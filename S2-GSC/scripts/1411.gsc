@@ -22,15 +22,15 @@ _id_63FF() {
     var_0 moveTo(var_0._id_2DA7, var_3, 0, 0);
   }
 
-  _playFXOnTag(common_scripts\utility::_id_44F5("moon_plasma"), var_0, "tag_origin");
-  var_0 _id_0378::_id_8D74("aud_moon_projectile_strt");
+  _playFXOnTag(common_scripts\utility::getfx("moon_plasma"), var_0, "tag_origin");
+  var_0 _id_0378::snd_message("aud_moon_projectile_strt");
   wait(var_3);
   var_0 notify("moon_travel_end");
-  var_0 _id_0378::_id_8D74("aud_moon_projectile_end");
+  var_0 _id_0378::snd_message("aud_moon_projectile_end");
   wait(_id_4319());
   var_4 = _id_40AA() / 2;
-  _id_0580::_id_98E9(var_0.origin, var_4, var_0.player, undefined, var_0._id_953E, (0.188235, 0.235294, 0.454902));
-  playFX(common_scripts\utility::_id_44F5("tesla_moon_explosion"), var_0.origin);
+  _id_0580::_id_98E9(var_0.origin, var_4, var_0.player, undefined, var_0.sweapon, (0.188235, 0.235294, 0.454902));
+  playFX(common_scripts\utility::getfx("tesla_moon_explosion"), var_0.origin);
   var_0 delete();
 }
 
@@ -41,15 +41,15 @@ _id_AAED() {
   for(;;) {
     var_1 = _id_0547::_id_408F();
     var_2 = _id_43EC();
-    var_3 = common_scripts\utility::_id_4461(var_0.origin, var_1, var_2);
+    var_3 = common_scripts\utility::getclosest(var_0.origin, var_1, var_2);
 
     if(isDefined(var_3)) {
       var_0 _id_0580::_id_98F7(var_3);
-      playFX(common_scripts\utility::_id_44F5("tesla_moon_explosion"), var_3.origin + (0, 0, 54));
-      _playFXOnTag(common_scripts\utility::_id_44F5("moon_plasma_unstable"), var_0, "tag_origin");
-      var_3 _id_0378::_id_8D74("aud_ww_projectile_zap");
+      playFX(common_scripts\utility::getfx("tesla_moon_explosion"), var_3.origin + (0, 0, 54));
+      _playFXOnTag(common_scripts\utility::getfx("moon_plasma_unstable"), var_0, "tag_origin");
+      var_3 _id_0378::snd_message("aud_ww_projectile_zap");
       waitframe();
-      _id_0580::_id_98E9(var_3.origin, _id_40AA(), var_0.player, undefined, var_0._id_953E, (0.188235, 0.235294, 0.454902));
+      _id_0580::_id_98E9(var_3.origin, _id_40AA(), var_0.player, undefined, var_0.sweapon, (0.188235, 0.235294, 0.454902));
     }
 
     wait(max(0.05, _id_4319()));
@@ -59,12 +59,12 @@ _id_AAED() {
 _id_63FC(var_0) {
   var_1 = self;
   var_1 _id_0580::_id_98F7(var_0);
-  playFX(common_scripts\utility::_id_44F5("tesla_moon_explosion"), var_0.origin + (0, 0, 54));
-  _playFXOnTag(common_scripts\utility::_id_44F5("moon_plasma_unstable"), var_1, "tag_origin");
-  var_0 _id_0378::_id_8D74("aud_ww_projectile_zap");
+  playFX(common_scripts\utility::getfx("tesla_moon_explosion"), var_0.origin + (0, 0, 54));
+  _playFXOnTag(common_scripts\utility::getfx("moon_plasma_unstable"), var_1, "tag_origin");
+  var_0 _id_0378::snd_message("aud_ww_projectile_zap");
   waitframe();
   var_2 = maps\mp\gametypes\zombies::_id_1E59() * 2;
-  _id_0580::_id_98E9(var_0.origin, _id_40AA(), var_1.player, undefined, var_1._id_953E, (0.188235, 0.235294, 0.454902), var_2);
+  _id_0580::_id_98E9(var_0.origin, _id_40AA(), var_1.player, undefined, var_1.sweapon, (0.188235, 0.235294, 0.454902), var_2);
 }
 
 _id_4319() {

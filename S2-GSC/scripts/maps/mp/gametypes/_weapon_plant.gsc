@@ -82,7 +82,7 @@ get_weapon_paintjobid() {
 }
 
 get_weapon_charmguid() {
-  return self _meth_86CF();
+  return self setmoveanim();
 }
 
 _id_4355(var_0) {

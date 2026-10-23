@@ -6,32 +6,32 @@
 main() {
   _id_531A();
   _id_52A9();
-  _id_52AA();
+  initdismembermentweaponmodifiers();
   level._id_08D9 = [];
 }
 
 _id_09C9(var_0, var_1, var_2, var_3, var_4) {
-  level._id_65CB[var_0] = [];
-  level._id_65CB[var_0][0] = var_1;
-  level._id_65CB[var_0][2] = var_2;
-  level._id_65CB[var_0][3] = var_3;
-  level._id_65CB[var_0][4] = var_4;
+  level.mutators[var_0] = [];
+  level.mutators[var_0][0] = var_1;
+  level.mutators[var_0][2] = var_2;
+  level.mutators[var_0][3] = var_3;
+  level.mutators[var_0][4] = var_4;
 }
 
-_id_2F92(var_0, var_1) {
+disablemutatorfortypes(var_0, var_1) {
   if(!_isarray(var_1)) {
     var_1 = [var_1];
   }
 
   foreach(var_3 in var_1) {
-    level._id_65CC[var_3][var_0] = 1;
+    level.mutators_disabled[var_3][var_0] = 1;
   }
 }
 
 _id_531A() {
-  level._id_65CB = [];
-  _id_09C9("crawl", ::_id_65C8);
-  _id_2F92("crawl", ["zombie_heavy", "zombie_fireman", "zombie_exploder", "zombie_berserker"]);
+  level.mutators = [];
+  _id_09C9("crawl", ::mutatorcrawl);
+  disablemutatorfortypes("crawl", ["zombie_heavy", "zombie_fireman", "zombie_exploder", "zombie_berserker"]);
 }
 
 _id_52A9() {
@@ -70,7 +70,7 @@ _id_52A9() {
   level._id_2FDE["full"]["dismemberSound"] = "zmb_dism_instakill_explosion";
 }
 
-_id_52AA() {
+initdismembermentweaponmodifiers() {
   var_0 = "mp/zombieDismembermentModifiers.csv";
   var_1 = 0;
   var_2 = 2;
@@ -85,14 +85,14 @@ _id_52AA() {
     var_10 = _tablelookupbyrow(var_0, var_7, var_3);
     var_11 = _tablelookupbyrow(var_0, var_7, var_4);
     var_12 = _tablelookupbyrow(var_0, var_7, var_5);
-    level._id_2FEA[var_8] = _float(var_9);
-    level._id_2FEB[var_8] = _float(var_10);
-    level._id_4D3D[var_8] = var_11 == "true";
-    level._id_2FE9[var_8] = var_12 == "true";
+    level.dismembermentmodifiers[var_8] = _float(var_9);
+    level.dismembermentupgrademodifiers[var_8] = _float(var_10);
+    level.highdamageweapons[var_8] = var_11 == "true";
+    level.dismembermentignorelocation[var_8] = var_12 == "true";
   }
 }
 
-_id_65C7(var_0) {
+mutator_apply(var_0) {
   if(!isDefined(level._id_08D9[var_0])) {
     level._id_08D9[var_0] = 0;
   }
@@ -104,15 +104,15 @@ _id_65C7(var_0) {
   if(isDefined(self._id_08D9[var_0])) {
     return;
   }
-  if(isDefined(level._id_65CC[self._id_0A4B])) {
-    if(isDefined(level._id_65CC[self._id_0A4B][var_0]) && level._id_65CC[self._id_0A4B][var_0]) {
+  if(isDefined(level.mutators_disabled[self._id_0A4B])) {
+    if(isDefined(level.mutators_disabled[self._id_0A4B][var_0]) && level.mutators_disabled[self._id_0A4B][var_0]) {
       return;
     }
   }
 
   level._id_08D9[var_0]++;
   self._id_08D9[var_0] = 1;
-  self[[level._id_65CB[var_0][0]]]();
+  self[[level.mutators[var_0][0]]]();
 
   if(isDefined(self._id_08D9)) {
     self._id_08D9[var_0] = undefined;
@@ -121,35 +121,35 @@ _id_65C7(var_0) {
   level._id_08D9[var_0]--;
 }
 
-_id_9AA4(var_0, var_1) {
+torso_effects_apply(var_0, var_1) {
   if(isDefined(level._effect[var_0 + "_head"])) {
-    _id_0547::_id_74A5(level._effect[var_0 + "_head"], self, "j_head");
+    _id_0547::playfxontagnetwork(level._effect[var_0 + "_head"], self, "j_head");
   }
 
   if(isDefined(level._effect[var_0 + "_arm_r"])) {
-    _id_0547::_id_74A5(level._effect[var_0 + "_arm_r"], self, "j_shoulder_ri");
+    _id_0547::playfxontagnetwork(level._effect[var_0 + "_arm_r"], self, "j_shoulder_ri");
   }
 
   if(isDefined(level._effect[var_0 + "_arm_l"])) {
-    _id_0547::_id_74A5(level._effect[var_0 + "_arm_l"], self, "j_shoulder_le");
+    _id_0547::playfxontagnetwork(level._effect[var_0 + "_arm_l"], self, "j_shoulder_le");
   }
 
   if(isDefined(level._effect[var_0 + "_back"])) {
-    _id_0547::_id_74A5(level._effect[var_0 + "_back"], self, "j_spineupper");
+    _id_0547::playfxontagnetwork(level._effect[var_0 + "_back"], self, "j_spineupper");
   }
 
   if(isDefined(level._effect[var_0 + "_spine"])) {
-    _id_0547::_id_74A5(level._effect[var_0 + "_spine"], self, "j_spine4");
+    _id_0547::playfxontagnetwork(level._effect[var_0 + "_spine"], self, "j_spine4");
   }
 
   self._id_9AA6 = var_0;
 
   if(isDefined(var_1)) {
-    thread _id_9AA5(var_0, var_1);
+    thread torso_effects_remove(var_0, var_1);
   }
 }
 
-_id_9AA5(var_0, var_1) {
+torso_effects_remove(var_0, var_1) {
   self notify("removeTorsoEffectsDelayed");
   self endon("removeTorsoEffectsDelayed");
   self endon("death");
@@ -160,51 +160,51 @@ _id_9AA5(var_0, var_1) {
 
   if(isDefined(self)) {
     if(isDefined(level._effect[var_0 + "_head"])) {
-      _id_0547::_id_9406(level._effect[var_0 + "_head"], self, "j_head");
+      _id_0547::stopfxontagnetwork(level._effect[var_0 + "_head"], self, "j_head");
     }
 
     if(isDefined(level._effect[var_0 + "_arm_r"])) {
-      _id_0547::_id_9406(level._effect[var_0 + "_arm_r"], self, "j_shoulder_ri");
+      _id_0547::stopfxontagnetwork(level._effect[var_0 + "_arm_r"], self, "j_shoulder_ri");
     }
 
     if(isDefined(level._effect[var_0 + "_arm_l"])) {
-      _id_0547::_id_9406(level._effect[var_0 + "_arm_l"], self, "j_shoulder_le");
+      _id_0547::stopfxontagnetwork(level._effect[var_0 + "_arm_l"], self, "j_shoulder_le");
     }
 
     if(isDefined(level._effect[var_0 + "_back"])) {
-      _id_0547::_id_9406(level._effect[var_0 + "_back"], self, "j_spineupper");
+      _id_0547::stopfxontagnetwork(level._effect[var_0 + "_back"], self, "j_spineupper");
     }
 
     if(isDefined(level._effect[var_0 + "_spine"])) {
-      _id_0547::_id_9406(level._effect[var_0 + "_spine"], self, "j_spine4");
+      _id_0547::stopfxontagnetwork(level._effect[var_0 + "_spine"], self, "j_spine4");
     }
   }
 }
 
-_id_65C8() {
-  _id_65D0(12, 0);
+mutatorcrawl() {
+  mutilate(12, 0);
 }
 
-_id_92C5() {
-  self._id_2FDA = 1;
-  maps\mp\agents\humanoid\_humanoid_util::_id_313C();
+startcrawl() {
+  self.dismember_crawl = 1;
+  maps\mp\agents\humanoid\_humanoid_util::dodgedisable();
 
-  if(isDefined(self._id_5F4C)) {
-    maps\mp\agents\humanoid\_humanoid_util::_id_5F4E(10.0, 240, 120, "attack_lunge_boost", level._effect["boost_lunge"], 1, 255);
+  if(isDefined(self.lungemeleeenabled)) {
+    maps\mp\agents\humanoid\_humanoid_util::lungemeleeupdate(10.0, 240, 120, "attack_lunge_boost", level._effect["boost_lunge"], 1, 255);
   }
 
-  maps\mp\agents\humanoid\_humanoid_util::_id_5C51();
+  maps\mp\agents\humanoid\_humanoid_util::leapdisable();
   self scragentallowboost(0);
   self scragentsetorienttoground(1);
   self scragentsetviewheight(15);
-  level._id_2775++;
+  level.crawlingzombies++;
   thread _id_0547::_id_AB18(60);
   self waittill("death");
-  level._id_2775--;
+  level.crawlingzombies--;
 }
 
-_id_4494(var_0, var_1, var_2) {
-  if(_id_0547::_id_5731()) {
+getdismembermentmodifier(var_0, var_1, var_2) {
+  if(_id_0547::isinstakill()) {
     return 0;
   }
 
@@ -220,10 +220,10 @@ _id_4494(var_0, var_1, var_2) {
     return 1;
   }
 
-  var_4 = level._id_2FEA[var_3];
+  var_4 = level.dismembermentmodifiers[var_3];
 
   if(isDefined(var_0) && isPlayer(var_0) && isDefined(var_1) && isDefined(var_4) && !maps\mp\_utility::iskillstreakweapon(var_1)) {
-    var_4 = _id_21F3(var_0, var_1, var_4);
+    var_4 = checkweaponupgrademodifier(var_0, var_1, var_4);
     return var_4;
   } else if(isDefined(var_4))
     return var_4;
@@ -232,14 +232,14 @@ _id_4494(var_0, var_1, var_2) {
   }
 }
 
-_id_21F3(var_0, var_1, var_2) {
-  var_3 = level._id_2FEB[var_1];
+checkweaponupgrademodifier(var_0, var_1, var_2) {
+  var_3 = level.dismembermentupgrademodifiers[var_1];
 
   if(!isDefined(var_3)) {
     return var_2;
   }
 
-  var_4 = _id_0547::_id_4747(var_0, var_1);
+  var_4 = _id_0547::getzombieweaponlevel(var_0, var_1);
 
   if(var_4 <= 1) {
     return var_2;
@@ -250,14 +250,14 @@ _id_21F3(var_0, var_1, var_2) {
   return clamp(var_6, var_3, var_2);
 }
 
-_id_4596(var_0, var_1, var_2, var_3, var_4, var_5) {
+getmutilationmask(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(var_3 >= 1) {
     if(_id_0547::_id_21AA("exploder")) {
       return self._id_2FDB;
     }
   }
 
-  var_6 = common_scripts\utility::_id_562E(level._id_2FE9[var_1]) || common_scripts\utility::_id_562E(level._id_2FE9[var_2]) || _id_0547::_id_5731() || issubstr(var_1, "m1911_pap_zm") || issubstr(var_1, "teslagun") || issubstr(var_1, "fliegerfaust_zm") || common_scripts\utility::_id_562E(var_1 == "panzerschreck_zm") || issubstr(var_1, "razergun") || common_scripts\utility::_id_562E(var_1 == "bazooka_zm") || common_scripts\utility::_id_562E(self.luckycrit) || common_scripts\utility::_id_562E(var_1 == "island_grenade_hc_zm") || common_scripts\utility::_id_562E(var_1 == "jack_in_box_decoy_zm");
+  var_6 = common_scripts\utility::_id_562E(level.dismembermentignorelocation[var_1]) || common_scripts\utility::_id_562E(level.dismembermentignorelocation[var_2]) || _id_0547::isinstakill() || issubstr(var_1, "m1911_pap_zm") || issubstr(var_1, "teslagun") || issubstr(var_1, "fliegerfaust_zm") || common_scripts\utility::_id_562E(var_1 == "panzerschreck_zm") || issubstr(var_1, "razergun") || common_scripts\utility::_id_562E(var_1 == "bazooka_zm") || common_scripts\utility::_id_562E(self.luckycrit) || common_scripts\utility::_id_562E(var_1 == "island_grenade_hc_zm") || common_scripts\utility::_id_562E(var_1 == "jack_in_box_decoy_zm");
 
   if(var_3 < 1 && _id_0547::_id_5565(var_1, "turretweapon_ger_btry_flak38_mp_zombie")) {
     var_6 = 0;
@@ -266,7 +266,7 @@ _id_4596(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(var_6) {
     var_7 = 31;
   } else {
-    var_7 = _id_5E60(var_0);
+    var_7 = locationtobodypart(var_0);
   }
 
   var_8 = 1;
@@ -288,12 +288,12 @@ _id_4596(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   var_7 = var_7 &self._id_2FDB;
-  var_8 = var_8 * (_id_4494(var_4, var_1, undefined) * _id_4494(var_4, undefined, var_2));
+  var_8 = var_8 * (getdismembermentmodifier(var_4, var_1, undefined) * getdismembermentmodifier(var_4, undefined, var_2));
   var_8 = var_8 * (-0.7 * var_3 + 1);
-  return _id_4597(var_7, var_5, var_3, var_8);
+  return getmutilationmaskinternal(var_7, var_5, var_3, var_8);
 }
 
-_id_4597(var_0, var_1, var_2, var_3) {
+getmutilationmaskinternal(var_0, var_1, var_2, var_3) {
   var_4 = 0;
 
   if((var_0 &var_0 - 1) > 0) {
@@ -309,8 +309,8 @@ _id_4597(var_0, var_1, var_2, var_3) {
         var_6 = var_9 + (var_10 >> 2) * var_8;
         var_11 = 1 << (var_10 & 3);
 
-        if((var_0 &var_11) != 0 && isDefined(_id_18B1(var_1 | var_4 | var_11))) {
-          if(_randomfloat(1.0) > _id_20AF(var_11) * var_3) {
+        if((var_0 &var_11) != 0 && isDefined(bodypartmasktoanimclass(var_1 | var_4 | var_11))) {
+          if(_randomfloat(1.0) > chancetokeepbodypart(var_11) * var_3) {
             var_4 = var_4 | var_11;
           }
         }
@@ -319,15 +319,15 @@ _id_4597(var_0, var_1, var_2, var_3) {
       while(var_0 > 0) {
         var_11 = var_0 & 0 - var_0;
 
-        if(_randomfloat(1.0) > _id_20AF(var_11) * var_3) {
+        if(_randomfloat(1.0) > chancetokeepbodypart(var_11) * var_3) {
           var_4 = var_4 | var_11;
         }
 
         var_0 = var_0 - var_11;
       }
     }
-  } else if(var_2 >= 1 || isDefined(_id_18B1(var_1 | var_0))) {
-    if(_randomfloat(1.0) > _id_20AF(var_0) * var_3) {
+  } else if(var_2 >= 1 || isDefined(bodypartmasktoanimclass(var_1 | var_0))) {
+    if(_randomfloat(1.0) > chancetokeepbodypart(var_0) * var_3) {
       var_4 = var_0;
     }
   }
@@ -335,19 +335,19 @@ _id_4597(var_0, var_1, var_2, var_3) {
   return var_4;
 }
 
-_id_9E1D(var_0, var_1, var_2, var_3, var_4, var_5) {
+trymutilate(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = 0;
 
-  if(isalive(self) && (!maps\mp\agents\_scripted_agent_anim_util::_id_57E2() || var_3 >= 1) && self._id_0BA4 != "traverse" && _id_0547::_id_4B2C()) {
-    var_7 = _id_4596(var_0, var_1, var_2, var_3, var_4, self._id_6250);
+  if(isalive(self) && (!maps\mp\agents\_scripted_agent_anim_util::isstatelocked() || var_3 >= 1) && self._id_0BA4 != "traverse" && _id_0547::has_entered_game()) {
+    var_7 = getmutilationmask(var_0, var_1, var_2, var_3, var_4, self.missingbodyparts);
 
     if(var_7 != 0) {
-      var_8 = !common_scripts\utility::_id_562E(self._id_2FDA);
-      var_9 = isDefined(self._id_6250) && self._id_6250 == 0;
+      var_8 = !common_scripts\utility::_id_562E(self.dismember_crawl);
+      var_9 = isDefined(self.missingbodyparts) && self.missingbodyparts == 0;
 
-      if(level._id_2775 < 9999 || self._id_2FDA || (var_7 & 12) == 0 || (var_7 & 16) != 0 || (self._id_6250 & 3) != 0) {
-        if(_id_65D0(self._id_6250 | var_7, common_scripts\utility::_id_562E(level._id_4D3D[var_1]), var_3, var_5, undefined, 1)) {
-          if(_id_0547::_id_5731()) {
+      if(level.crawlingzombies < 9999 || self.dismember_crawl || (var_7 & 12) == 0 || (var_7 & 16) != 0 || (self.missingbodyparts & 3) != 0) {
+        if(mutilate(self.missingbodyparts | var_7, common_scripts\utility::_id_562E(level.highdamageweapons[var_1]), var_3, var_5, undefined, 1)) {
+          if(_id_0547::isinstakill()) {
             _earthquake(_randomfloatrange(0.15, 0.35), 1, self.origin, 200);
           }
 
@@ -355,10 +355,10 @@ _id_9E1D(var_0, var_1, var_2, var_3, var_4, var_5) {
         }
 
         if(isalive(self) && isPlayer(var_4)) {
-          if(var_8 && common_scripts\utility::_id_562E(self._id_2FDA)) {
-            var_4 thread _id_054E::_id_72A4("crawl_spawn");
-          } else if(var_9 && isDefined(self._id_6250) && self._id_6250 != 0) {
-            var_4 thread _id_054E::_id_72A4("shoot_arm");
+          if(var_8 && common_scripts\utility::_id_562E(self.dismember_crawl)) {
+            var_4 thread _id_054E::player_hurt_zombie_vox("crawl_spawn");
+          } else if(var_9 && isDefined(self.missingbodyparts) && self.missingbodyparts != 0) {
+            var_4 thread _id_054E::player_hurt_zombie_vox("shoot_arm");
           }
         }
       }
@@ -368,20 +368,20 @@ _id_9E1D(var_0, var_1, var_2, var_3, var_4, var_5) {
   return var_6;
 }
 
-_id_56FD() {
-  if(!isDefined(self._id_7AD3)) {
+isfullbodymutilation() {
+  if(!isDefined(self.recentlylostlimbs)) {
     return 0;
   }
 
-  return _id_0547::_id_2696(self._id_7AD3) >= 3;
+  return _id_0547::countlimbs(self.recentlylostlimbs) >= 3;
 }
 
 _id_A0DF(var_0, var_1) {
-  var_2 = _id_18B1(self._id_6250);
+  var_2 = bodypartmasktoanimclass(self.missingbodyparts);
 
   if(var_2 != self _meth_85A5()) {
-    if(!self._id_2FDA && (self._id_6250 & 12) != 0) {
-      thread _id_92C5();
+    if(!self.dismember_crawl && (self.missingbodyparts & 12) != 0) {
+      thread startcrawl();
     }
 
     if(var_0) {
@@ -423,27 +423,27 @@ _id_A0DF(var_0, var_1) {
 }
 
 _id_0EAF(var_0, var_1) {
-  maps\mp\agents\humanoid\_humanoid_util::_id_20C3(var_0, var_1);
+  maps\mp\agents\humanoid\_humanoid_util::changeanimclass(var_0, var_1);
 }
 
 _id_0EB0(var_0, var_1) {
   maps\mp\agents\humanoid\_humanoid_util::_id_20C4(var_0);
 }
 
-_id_65D0(var_0, var_1, var_2, var_3, var_4, var_5) {
+mutilate(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_2)) {
     var_2 = 0;
   }
 
   var_0 = var_0 &self._id_2FDB;
 
-  if(var_0 == self._id_6250) {
+  if(var_0 == self.missingbodyparts) {
     return 0;
   }
 
-  var_6 = !isDefined(_id_18B1(var_0)) || var_2 >= 1;
+  var_6 = !isDefined(bodypartmasktoanimclass(var_0)) || var_2 >= 1;
 
-  if(!_id_0547::_id_1F4C()) {
+  if(!_id_0547::candie()) {
     if(var_0 & 16) {
       var_0 = var_0 &~16;
     }
@@ -456,7 +456,7 @@ _id_65D0(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_7 = self._id_90AB < gettime();
 
-  if(_id_0547::_id_2696(var_0) - _id_0547::_id_2696(self._id_6250) >= 3) {
+  if(_id_0547::countlimbs(var_0) - _id_0547::countlimbs(self.missingbodyparts) >= 3) {
     var_7 = 0;
   }
 
@@ -473,17 +473,17 @@ _id_65D0(var_0, var_1, var_2, var_3, var_4, var_5) {
   return var_6;
 }
 
-_id_2CD5() {
+delayeddeleteeyesfx() {
   self endon("death");
   waitframe();
 
-  if(isDefined(self._id_5DAC["tag_eye"])) {
-    self._id_5DAC["tag_eye"] delete();
-    self._id_5DAC["tag_eye"] = undefined;
+  if(isDefined(self.linked_fx["tag_eye"])) {
+    self.linked_fx["tag_eye"] delete();
+    self.linked_fx["tag_eye"] = undefined;
   }
 }
 
-_id_18B1(var_0) {
+bodypartmasktoanimclass(var_0) {
   var_1 = undefined;
 
   switch (var_0) {
@@ -516,7 +516,7 @@ _id_18B1(var_0) {
   return var_1;
 }
 
-_id_5E60(var_0) {
+locationtobodypart(var_0) {
   switch (var_0) {
     case "right_arm_lower":
     case "right_hand":
@@ -543,8 +543,8 @@ _id_5E60(var_0) {
   }
 }
 
-_id_20AF(var_0) {
-  if(isDefined(self._id_4B53) && var_0 != 16) {
+chancetokeepbodypart(var_0) {
+  if(isDefined(self.hasarmor) && var_0 != 16) {
     return 1;
   }
 
@@ -558,7 +558,7 @@ _id_20AF(var_0) {
     case 8:
       return 0.5;
     case 16:
-      if(common_scripts\utility::_id_562E(self._id_4B6E) || common_scripts\utility::_id_562E(self._id_4B5A)) {
+      if(common_scripts\utility::_id_562E(self.hashelmet) || common_scripts\utility::_id_562E(self._id_4B5A)) {
         return 1;
       }
 
@@ -568,7 +568,7 @@ _id_20AF(var_0) {
   }
 }
 
-_id_4559(var_0, var_1, var_2) {
+getlimbproperty(var_0, var_1, var_2) {
   if(isDefined(self._id_2FE3) && isDefined(self._id_2FE3[var_0])) {
     var_3 = self._id_2FE3[var_0][var_2];
 
@@ -589,7 +589,7 @@ _id_4559(var_0, var_1, var_2) {
   return var_4;
 }
 
-_id_4558(var_0, var_1) {
+getlimborigin(var_0, var_1) {
   var_2 = 40;
 
   switch (var_0) {
@@ -644,9 +644,9 @@ decrementlimbqueue() {
 
 _id_2E44(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_0 = var_0 &self._id_2FDB;
-  var_6 = ~self._id_6250 &var_0;
-  self._id_6250 = self._id_6250 | var_0;
-  self._id_7AD3 = var_6;
+  var_6 = ~self.missingbodyparts &var_0;
+  self.missingbodyparts = self.missingbodyparts | var_0;
+  self.recentlylostlimbs = var_6;
 
   if(_isagent(self)) {
     self[[maps\mp\agents\_agent_utility::_id_0A59("on_mutilate")]](var_6);
@@ -682,9 +682,9 @@ detachlimbsupdatemodel(var_0, var_1, var_2, var_3, var_4, var_5) {
     _id_AC26(var_2);
     _id_903D(16, var_2, var_4);
 
-    if(isDefined(self._id_5DAC) && isDefined(self._id_5DAC["tag_eye"])) {
-      setfxkillondelete(self._id_5DAC["tag_eye"], 1);
-      thread _id_2CD5();
+    if(isDefined(self.linked_fx) && isDefined(self.linked_fx["tag_eye"])) {
+      setfxkillondelete(self.linked_fx["tag_eye"], 1);
+      thread delayeddeleteeyesfx();
     }
   }
 
@@ -701,8 +701,8 @@ _id_903D(var_0, var_1, var_2) {
   }
 
   var_3 = _id_0547::_id_4744(var_0);
-  var_4 = _id_4559(var_0, var_3, "tagName");
-  var_5 = _id_4558(var_0, var_4);
+  var_4 = getlimbproperty(var_0, var_3, "tagName");
+  var_5 = getlimborigin(var_0, var_4);
   var_6 = self gettagangles(var_4);
   var_7 = undefined;
 
@@ -710,7 +710,7 @@ _id_903D(var_0, var_1, var_2) {
     var_1 = (0, 0, 0);
   }
 
-  var_8 = _id_4559(var_0, var_3, "modelToSpawn");
+  var_8 = getlimbproperty(var_0, var_3, "modelToSpawn");
 
   if(var_2 && isDefined(var_8)) {
     var_7 = spawn("script_model", var_5);
@@ -743,19 +743,19 @@ _id_903D(var_0, var_1, var_2) {
     var_7 physicslaunchclientwithimpulse(var_15 * var_14, var_11);
     var_7 deleteonhostmigration();
 
-    if(level._id_66BF < level._id_2FDD.size) {
-      level._id_2FDD[level._id_66BF] delete();
+    if(level.nextdismemberedbodypartindex < level.dismemberedbodyparts.size) {
+      level.dismemberedbodyparts[level.nextdismemberedbodypartindex] delete();
     }
 
-    level._id_2FDD[level._id_66BF] = var_7;
-    level._id_66BF = (level._id_66BF + 1) % 20;
+    level.dismemberedbodyparts[level.nextdismemberedbodypartindex] = var_7;
+    level.nextdismemberedbodypartindex = (level.nextdismemberedbodypartindex + 1) % 20;
   }
 
-  var_16 = _id_4559(var_0, var_3, "fxTagName");
-  var_17 = _id_4559(var_0, var_3, "limbFX");
-  var_18 = _id_4559(var_0, var_3, "gibFX");
+  var_16 = getlimbproperty(var_0, var_3, "fxTagName");
+  var_17 = getlimbproperty(var_0, var_3, "limbFX");
+  var_18 = getlimbproperty(var_0, var_3, "gibFX");
 
-  if(common_scripts\utility::_id_562E(_id_4559(var_0, var_3, "noGib"))) {
+  if(common_scripts\utility::_id_562E(getlimbproperty(var_0, var_3, "noGib"))) {
     var_18 = undefined;
   }
 
@@ -771,52 +771,52 @@ _id_903D(var_0, var_1, var_2) {
     }
 
     var_24 = _vectorcross(var_23, var_22);
-    playFX(common_scripts\utility::_id_44F5(var_18), self gettagorigin(var_16), var_22, var_24);
+    playFX(common_scripts\utility::getfx(var_18), self gettagorigin(var_16), var_22, var_24);
   }
 
   if(isDefined(var_17)) {
-    _id_0547::_id_74A5(common_scripts\utility::_id_44F5(var_17), var_7, var_16, 1);
+    _id_0547::playfxontagnetwork(common_scripts\utility::getfx(var_17), var_7, var_16, 1);
   }
 
   var_25 = _id_0547::_id_4495();
-  var_26 = _id_4559(var_0, var_3, var_25);
-  thread _id_70F1(var_26);
+  var_26 = getlimbproperty(var_0, var_3, var_25);
+  thread play_dismember_sound(var_26);
 }
 
-_id_70F1(var_0) {
+play_dismember_sound(var_0) {
   waitframe();
 
   if(self.health > 0) {
     self playsoundonmovingent(var_0);
   } else {
-    _func_351(var_0, undefined, self.origin);
+    maps/taken_tent_fx(var_0, undefined, self.origin);
   }
 }
 
-_id_65CD(var_0) {
+mutatorspawnsound(var_0) {
   self notify("mutatorSpawnSound");
   self endon("mutatorSpawnSound");
 
-  if(common_scripts\utility::_id_562E(self._id_6723)) {
+  if(common_scripts\utility::_id_562E(self.nomutatorspawnsound)) {
     return;
   }
-  if(isDefined(level._id_65CB[var_0][2])) {
+  if(isDefined(level.mutators[var_0][2])) {
     wait(_randomfloatrange(0.2, 0.8));
-    var_1 = level._id_65CB[var_0][2];
+    var_1 = level.mutators[var_0][2];
     self playsoundonmovingent(var_1);
   }
 }
 
-_id_6ADD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  foreach(var_11 in level._id_65CB) {
+ondamagefinishedmutators(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  foreach(var_11 in level.mutators) {
     if(isDefined(var_11[4])) {
       self[[var_11[4]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     }
   }
 }
 
-_id_6B4A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  foreach(var_10 in level._id_65CB) {
+onkilledmutators(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  foreach(var_10 in level.mutators) {
     if(isDefined(var_10[3])) {
       self[[var_10[3]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
     }
@@ -848,11 +848,11 @@ _id_AC26(var_0, var_1) {
   self endon("death");
   self endon("entitydeleted");
 
-  if(self._id_4B6E || self._id_4B5A) {
+  if(self.hashelmet || self._id_4B5A) {
     var_2 = self._id_4CAA;
     var_3 = self gettagorigin("j_head") + (0, 0, 20);
     var_4 = self gettagangles("j_head");
-    self._id_4B6E = 0;
+    self.hashelmet = 0;
     self._id_4B5A = 0;
 
     if(isDefined(var_1)) {

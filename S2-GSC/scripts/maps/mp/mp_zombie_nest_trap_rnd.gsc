@@ -8,7 +8,7 @@ _id_9CC0(var_0) {
   level._id_9CC0 = var_1[0];
   level._id_9CC0._id_9C92 = var_0;
   level._id_9CC0._id_9CBB = var_0._id_0165;
-  thread _id_0378::_id_8D74("aud_trap_elec_start");
+  thread _id_0378::snd_message("aud_trap_elec_start");
 
   foreach(var_3 in var_1) {
     if(!isDefined(var_3._id_0165)) {
@@ -32,8 +32,8 @@ _id_9CC2(var_0) {
   var_1 = 0;
   var_2 = 0.25;
 
-  if(isDefined(self._id_817A)) {
-    var_3 = self._id_817A;
+  if(isDefined(self.script_duration)) {
+    var_3 = self.script_duration;
   } else {
     var_3 = 20;
   }
@@ -59,8 +59,8 @@ _id_9CC3(var_0) {
   var_1 = 0;
   var_2 = 0.15;
 
-  if(isDefined(self._id_817A)) {
-    var_3 = self._id_817A;
+  if(isDefined(self.script_duration)) {
+    var_3 = self.script_duration;
   } else {
     var_3 = 20;
   }
@@ -122,7 +122,7 @@ _id_9048() {
 }
 
 _id_A10B(var_0) {
-  if(_id_0547::_id_580A()) {
+  if(_id_0547::istrapresistant()) {
     self dodamage(var_0._id_29D5 * 0.25, self.origin, level._id_9CC0, level._id_9CC0, "MOD_ENERGY", "trap_zm_mp");
   } else {
     self dodamage(var_0._id_29D5, self.origin, level._id_9CC0, level._id_9CC0, "MOD_ENERGY", "trap_zm_mp");

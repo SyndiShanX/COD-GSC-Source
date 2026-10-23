@@ -30,10 +30,10 @@ init_difficulty_settings() {
 }
 
 current_fodder_zombie_health(var_0) {
-  if(level._id_A980 < var_0) {
+  if(level.wavecounter < var_0) {
     var_1 = var_0;
   } else {
-    var_1 = level._id_A980;
+    var_1 = level.wavecounter;
   }
 
   return maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), var_1);
@@ -46,7 +46,7 @@ get_difficulty_setting(var_0, var_1) {
     var_3 = var_2[level.players.size - 1];
   } else {
     var_4 = _func_2CA(var_2.minval, var_2.maxval, maps\mp\zquests\casual\island_ee_util::get_player_frac(level.players.size));
-    var_3 = var_4 * [[var_2._id_3F02]](var_2._id_6E5C);
+    var_3 = var_4 * [[var_2.func]](var_2.params);
   }
 
   return var_3;
@@ -159,7 +159,7 @@ init() {
 }
 
 wait_on_hardcore_completed() {
-  common_scripts\utility::_id_3C9F("flag_pommel_given");
+  common_scripts\utility::flag_wait("flag_pommel_given");
   _id_0557::_id_782D("Epilogue Island", "Epilogue Island Continue Quest");
 }
 
@@ -168,7 +168,7 @@ get_aa_turrets() {
 }
 
 spawn_heavies_pommel_room() {
-  var_0 = common_scripts\utility::_id_46B7("zombie_assassin_pagan_room_spawner", "targetname");
+  var_0 = common_scripts\utility::getstructarray("zombie_assassin_pagan_room_spawner", "targetname");
   level thread run_pommel_room_assassin_timer();
 
   for(;;) {
@@ -227,7 +227,7 @@ pommel_room_assassin_player_pushes() {
 }
 
 beachassaultfadein() {
-  if(common_scripts\utility::_id_3C77("frontline_zombies_spawned")) {
+  if(common_scripts\utility::flag("frontline_zombies_spawned")) {
     return;
   }
   self._id_6772 = _newclienthudelem(self);
@@ -241,14 +241,14 @@ beachassaultfadein() {
     waitframe();
   }
 
-  common_scripts\utility::_id_3C9F("frontline_zombies_spawned");
+  common_scripts\utility::flag_wait("frontline_zombies_spawned");
   thread animscripts\notetracks_common::do_fade_from_black(1.15);
 }
 
 _______globals__________() {}
 
 aa_gun_trap_init() {
-  var_0 = common_scripts\utility::_id_46B7("aa_gun_trap", "targetname");
+  var_0 = common_scripts\utility::getstructarray("aa_gun_trap", "targetname");
   common_scripts\utility::flag_init("flak_cannons_ready");
 
   foreach(var_2 in var_0) {
@@ -268,14 +268,14 @@ aa_gun_trap_prep() {
   foreach(var_2 in var_0) {
     switch (var_2._id_0165) {
       case "trig_use":
-        self._id_9D65 = var_2;
-        self._id_9D65.hint_string_available = &"ZOMBIE_ISLAND_BUY_FLAK";
-        self._id_9D65.hint_string_unavailable = &"ZOMBIE_ISLAND_FLAK_DISABLED";
-        self._id_9D65.hint_string_no_power = &"ZOMBIE_ISLAND_FLAK_NO_POWER";
-        var_2 setHintString(self._id_9D65.hint_string_unavailable);
+        self.trigger = var_2;
+        self.trigger.hint_string_available = &"ZOMBIE_ISLAND_BUY_FLAK";
+        self.trigger.hint_string_unavailable = &"ZOMBIE_ISLAND_FLAK_DISABLED";
+        self.trigger.hint_string_no_power = &"ZOMBIE_ISLAND_FLAK_NO_POWER";
+        var_2 setHintString(self.trigger.hint_string_unavailable);
         break;
       case "tur_flak_gun":
-        self._id_9EDD = var_2;
+        self.turret = var_2;
         break;
       case "flak_cannon_attack_points":
         self._id_1176 = common_scripts\utility::_id_0F6F(self._id_1176, var_2);
@@ -283,7 +283,7 @@ aa_gun_trap_prep() {
       case "sbm_wall":
         self.wall_model = var_2;
         self.wall_model.health = 500;
-        self.wall_model common_scripts\utility::_id_3799("this_turret_is_done");
+        self.wall_model common_scripts\utility::ent_flag_init("this_turret_is_done");
         break;
     }
   }
@@ -296,14 +296,14 @@ _______intro_assault__________() {}
 quest_init_intro() {}
 
 quest_step_do_intro_assault() {
-  level _id_0378::_id_8D74("begin_intro_assault");
-  level._id_1F4F["normal"] = ::dontdroppickups;
+  level _id_0378::snd_message("begin_intro_assault");
+  level.candroppickupsfunc["normal"] = ::dontdroppickups;
   level._id_ABDA = 1;
   var_0 = 50;
   level.eventpointmultiplier = 0.08;
   level.eventxpoverride = 5;
   var_1 = getEntArray("start_zone_spawners", "targetname");
-  var_2 = common_scripts\utility::_id_46B5("intro_bunker_struct", "targetname");
+  var_2 = common_scripts\utility::getstruct("intro_bunker_struct", "targetname");
   level.intro_bunker_struct = var_2;
   var_3 = common_scripts\utility::_id_44BE(var_2.target, "targetname");
   var_2.rush_spawners = [];
@@ -321,7 +321,7 @@ quest_step_do_intro_assault() {
     }
   }
 
-  var_7 = common_scripts\utility::_id_46B7("zmb_island_frontline_zombies", "targetname");
+  var_7 = common_scripts\utility::getstructarray("zmb_island_frontline_zombies", "targetname");
 
   while(!level.gamehasstarted) {
     waitframe();
@@ -344,9 +344,9 @@ quest_step_do_intro_assault() {
     _id_0547::_id_ABC9(var_11, 3);
   }
 
-  foreach(var_14 in level._id_AC1D) {
-    foreach(var_16 in var_14._id_9DC2) {
-      var_16 common_scripts\utility::_id_9D9F();
+  foreach(var_14 in level.zombiedoors) {
+    foreach(var_16 in var_14.triggers) {
+      var_16 common_scripts\utility::trigger_off();
     }
   }
 
@@ -361,8 +361,8 @@ quest_step_do_intro_assault() {
   }
 
   foreach(var_11 in level.players) {
-    var_11 maps\mp\_utility::_id_2CED(3, _id_0367::_id_8E3D, "startbeach_both");
-    var_11 maps\mp\_utility::_id_2CED(8, _id_0367::_id_8E3D, "mg42look_both");
+    var_11 maps\mp\_utility::delaythread(3, _id_0367::_id_8E3D, "startbeach_both");
+    var_11 maps\mp\_utility::delaythread(8, _id_0367::_id_8E3D, "mg42look_both");
   }
 
   var_22 = gettime();
@@ -401,20 +401,20 @@ quest_step_do_intro_assault() {
   level.eventpointmultiplier = undefined;
   level.eventxpoverride = undefined;
 
-  foreach(var_14 in level._id_AC1D) {
-    foreach(var_16 in var_14._id_9DC2) {
-      var_16 common_scripts\utility::_id_9DA3();
+  foreach(var_14 in level.zombiedoors) {
+    foreach(var_16 in var_14.triggers) {
+      var_16 common_scripts\utility::trigger_on();
     }
   }
 
   foreach(var_11 in level.players) {
-    if(var_11._id_62D6 % 10 != 0) {
+    if(var_11.moneycurrent % 10 != 0) {
       var_11 maps\mp\gametypes\zombies::_id_4798(5);
     }
   }
 
   _id_0547::_id_2D8C(::zombieskilledinintro);
-  level _id_0378::_id_8D74("end_intro_assault");
+  level _id_0378::snd_message("end_intro_assault");
   wait 5;
 
   foreach(var_11 in level.players) {
@@ -435,7 +435,7 @@ start_intro_sprint() {
   while(var_0.size < 10) {
     var_2 = _id_0547::_id_408F();
     var_2 = common_scripts\utility::_id_0F7D(var_2, var_0);
-    var_3 = common_scripts\utility::_id_4461(level.players[0].origin, var_2);
+    var_3 = common_scripts\utility::getclosest(level.players[0].origin, var_2);
 
     if(isDefined(var_3)) {
       var_3._id_6941 = 1;
@@ -482,14 +482,14 @@ vo_beach_turrets_nags_check() {
   }
 
   if(var_1 == 0) {
-    if(!common_scripts\utility::_id_3C77("flag Explore the Beach Survive the Beach")) {
+    if(!common_scripts\utility::flag("flag Explore the Beach Survive the Beach")) {
       _id_0367::snd_zmb_plr_dlg_play_line_on_each_player("mg42nag__both");
     }
   }
 }
 
 try_spawn_intro_assault_zombie(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::_id_46B7("zombie_spawner", "script_noteworthy");
+  var_3 = common_scripts\utility::getstructarray("zombie_spawner", "script_noteworthy");
   var_4 = _id_0547::_id_408F();
 
   if(var_4.size >= _id_056D::_id_4577()) {
@@ -522,7 +522,7 @@ try_spawn_intro_assault_zombie(var_0, var_1, var_2) {
   }
 
   waitframe();
-  var_8 = common_scripts\utility::_id_44F5("water_wake_stationary");
+  var_8 = common_scripts\utility::getfx("water_wake_stationary");
   waitframe();
   _playFXOnTag(var_8, var_6, "tag_origin");
 }
@@ -530,7 +530,7 @@ try_spawn_intro_assault_zombie(var_0, var_1, var_2) {
 turret_outline_logic() {
   level.turrets_used = 0;
 
-  while(!common_scripts\utility::_id_3C77("flag Explore the Beach Survive the Beach")) {
+  while(!common_scripts\utility::flag("flag Explore the Beach Survive the Beach")) {
     foreach(var_1 in level.players) {
       if(!isalive(var_1)) {
         continue;
@@ -551,7 +551,7 @@ turret_outline_logic() {
 }
 
 quest_step_intro_on_complete() {
-  level._id_1F4F["normal"] = ::droppickups;
+  level.candroppickupsfunc["normal"] = ::droppickups;
 
   if(!maps\mp\zquests\casual\island_ee_util::has_anyone_used_preplaced_turrets()) {
     maps\mp\gametypes\zombies::_id_47A8("DLC1_ZM_GOTTHIS");
@@ -572,7 +572,7 @@ quest_step_intro_on_complete() {
 }
 
 quest_step_reach_pen() {
-  common_scripts\utility::_id_3CA2("right_climb_to_sub_pens_1", "vista_beach_to_sub_pens_1");
+  common_scripts\utility::flag_wait_any("right_climb_to_sub_pens_1", "vista_beach_to_sub_pens_1");
   _id_0557::_id_782D("Explore the Beach", "Reach Sub Pens");
 }
 
@@ -606,7 +606,7 @@ zombieskilledinintro(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
     return;
   }
   var_10 = _getEnt("vol_player_beach_area", "targetname");
-  var_11 = common_scripts\utility::_id_46B7("beach_attack_pickup_location", "targetname");
+  var_11 = common_scripts\utility::getstructarray("beach_attack_pickup_location", "targetname");
   var_12 = common_scripts\utility::random(var_11);
   var_13 = var_9[0];
 
@@ -637,15 +637,15 @@ playerinwaterthink() {
   var_0 = self;
   var_0 endon("disconnect");
   var_1 = getEntArray("vol_player_in_water", "targetname");
-  var_0 common_scripts\utility::_id_3799("flag_player_in_water");
+  var_0 common_scripts\utility::ent_flag_init("flag_player_in_water");
   waitframe();
 
   for(;;) {
     var_2 = var_0 isplayerinwatercheck(var_1);
 
     if(var_2 != 1) {
-      if(var_0 common_scripts\utility::_id_3794("flag_player_in_water")) {
-        var_0 common_scripts\utility::_id_3796("flag_player_in_water");
+      if(var_0 common_scripts\utility::ent_flag("flag_player_in_water")) {
+        var_0 common_scripts\utility::ent_flag_clear("flag_player_in_water");
 
         if(common_scripts\utility::_id_562E(var_0.oncartride)) {
           continue;
@@ -660,8 +660,8 @@ playerinwaterthink() {
       continue;
     }
 
-    if(!var_0 common_scripts\utility::_id_3794("flag_player_in_water")) {
-      var_0 common_scripts\utility::_id_379A("flag_player_in_water");
+    if(!var_0 common_scripts\utility::ent_flag("flag_player_in_water")) {
+      var_0 common_scripts\utility::ent_flag_set("flag_player_in_water");
 
       if(common_scripts\utility::_id_562E(var_0.oncartride)) {
         continue;
@@ -697,29 +697,29 @@ quest_init_corpse_gate() {
 }
 
 _id_784F() {
-  common_scripts\utility::_id_3C9F("power_sz2");
+  common_scripts\utility::flag_wait("power_sz2");
   _id_0557::_id_782D("explore_the_island", "Pen Power");
 }
 
 quest_step_complete_enable_power() {
-  if(!common_scripts\utility::_id_3C77("power_sz2")) {
+  if(!common_scripts\utility::flag("power_sz2")) {
     common_scripts\utility::flag_set("power_sz2");
   }
 }
 
 quest_step_wait_for_corpsegate_found() {
-  common_scripts\utility::_id_3C9F("flag_corpse_door_found");
+  common_scripts\utility::flag_wait("flag_corpse_door_found");
   _id_0557::_id_782D("explore_the_island", "Explore Pen");
 }
 
 quest_step_complete_wait_for_corpsegate_found() {
-  if(!common_scripts\utility::_id_3C77("flag_corpse_door_found")) {
+  if(!common_scripts\utility::flag("flag_corpse_door_found")) {
     common_scripts\utility::flag_set("flag_corpse_door_found");
   }
 }
 
 quest_step_wait_for_razor_gun_assembly() {
-  common_scripts\utility::_id_3CA2(_id_0557::_id_7838("Aquire Wonder Weapon", "Ranged Razor Gun Built"), "flag_ranger_head_taken");
+  common_scripts\utility::flag_wait_any(_id_0557::_id_7838("Aquire Wonder Weapon", "Ranged Razor Gun Built"), "flag_ranger_head_taken");
   _id_0557::_id_782D("CORPSE_GATE", "Find way to open Gate");
 }
 
@@ -738,12 +738,12 @@ quest_step_decap_ranger() {
     thread head_corpse_vo();
   }
 
-  common_scripts\utility::_id_3C9F("flag_ranger_head_taken");
+  common_scripts\utility::flag_wait("flag_ranger_head_taken");
   _id_0557::_id_782D("CORPSE_GATE", "Decapitate Ranger");
 }
 
 head_corpse_vo() {
-  common_scripts\utility::_id_3C9F("start_to_right_climb");
+  common_scripts\utility::flag_wait("start_to_right_climb");
   var_0 = _getEnt("corpse_gate_sacrifice", "targetname");
 
   if(!isDefined(var_0)) {
@@ -751,7 +751,7 @@ head_corpse_vo() {
   }
   var_0 endon("death");
 
-  while(!common_scripts\utility::_id_3C77("flag_ranger_head_taken")) {
+  while(!common_scripts\utility::flag("flag_ranger_head_taken")) {
     foreach(var_2 in level.players) {
       if(distance(var_2.origin, var_0.origin) > 250 || common_scripts\utility::_id_562E(var_2.saw_head)) {
         continue;
@@ -770,14 +770,14 @@ head_corpse_vo() {
 }
 
 head_corpse_razer_gun_vo() {
-  common_scripts\utility::_id_3C9F("razergun_3_placed");
+  common_scripts\utility::flag_wait("razergun_3_placed");
   var_0 = _getEnt("corpse_gate_sacrifice", "targetname");
 
   foreach(var_2 in level.players) {
     var_2.got_head = 0;
   }
 
-  while(!common_scripts\utility::_id_3C77("flag_ranger_head_taken")) {
+  while(!common_scripts\utility::flag("flag_ranger_head_taken")) {
     foreach(var_2 in level.players) {
       if(distance(var_2.origin, var_0.origin) < 250) {
         if(var_2.got_head == 0) {
@@ -796,13 +796,13 @@ head_corpse_razer_gun_vo() {
 }
 
 quest_step_complete_decap_ranger() {
-  if(!common_scripts\utility::_id_3C77("flag_ranger_head_taken")) {
+  if(!common_scripts\utility::flag("flag_ranger_head_taken")) {
     common_scripts\utility::flag_set("flag_ranger_head_taken");
   }
 }
 
 quest_step_wait_for_first_corpsegate_opened() {
-  common_scripts\utility::_id_3C9F("flag_ranger_head_placed");
+  common_scripts\utility::flag_wait("flag_ranger_head_placed");
   var_0 = _getEnt("corpse_gate_wall", "targetname");
 
   foreach(var_2 in level.players) {
@@ -812,55 +812,55 @@ quest_step_wait_for_first_corpsegate_opened() {
   }
 
   _id_0557::_id_7822("CORPSE_GATE", _id_0557::removed_quest_hint());
-  common_scripts\utility::_id_3C9F("sub_pens_corpse_gate");
+  common_scripts\utility::flag_wait("sub_pens_corpse_gate");
   _id_0557::_id_7822("CORPSE_GATE", _id_0557::removed_quest_hint());
   level.zmb_locked_spawn_zones = ["sub_pens_1_zone"];
   maps\mp\zquests\casual\island_ee_util::clear_all_zombies();
   level thread monitor_player_attendance();
   run_freezer_combat();
-  common_scripts\utility::_id_3C9F("flag_subpen_traps_completed");
+  common_scripts\utility::flag_wait("flag_subpen_traps_completed");
   maps\mp\zquests\casual\island_ee_util::clear_all_zombies();
   level.zmb_locked_spawn_zones = undefined;
   _id_0557::_id_7822("CORPSE_GATE", _id_0557::removed_quest_hint());
-  common_scripts\utility::_id_3C9F("flag_open_corpse_door");
+  common_scripts\utility::flag_wait("flag_open_corpse_door");
   _id_0557::_id_782D("CORPSE_GATE", "Open Corpse Gate");
 }
 
 quest_step_complete_corpsegate_opened() {
   foreach(var_1 in level.players) {
     var_1 _id_054C::_id_AC23("corpsegate");
-    var_1 _id_0378::_id_8D74("objective_complete", "corpsegate");
+    var_1 _id_0378::snd_message("objective_complete", "corpsegate");
   }
 
-  if(!common_scripts\utility::_id_3C77("flag_ranger_head_placed")) {
+  if(!common_scripts\utility::flag("flag_ranger_head_placed")) {
     common_scripts\utility::flag_set("flag_ranger_head_placed");
   }
 
-  if(!common_scripts\utility::_id_3C77("sub_pens_corpse_gate")) {
+  if(!common_scripts\utility::flag("sub_pens_corpse_gate")) {
     common_scripts\utility::flag_set("sub_pens_corpse_gate");
   }
 
-  if(!common_scripts\utility::_id_3C77("flag_subpen_traps_completed")) {
+  if(!common_scripts\utility::flag("flag_subpen_traps_completed")) {
     common_scripts\utility::flag_set("flag_subpen_traps_completed");
   }
 
-  if(!common_scripts\utility::_id_3C77("flag_ranger_head_placed")) {
+  if(!common_scripts\utility::flag("flag_ranger_head_placed")) {
     common_scripts\utility::flag_set("flag_ranger_head_placed");
   }
 
-  if(!common_scripts\utility::_id_3C77("flag_ranger_head_taken")) {
+  if(!common_scripts\utility::flag("flag_ranger_head_taken")) {
     common_scripts\utility::flag_set("flag_ranger_head_taken");
   }
 
-  if(!common_scripts\utility::_id_3C77("flag_corpse_door_found")) {
+  if(!common_scripts\utility::flag("flag_corpse_door_found")) {
     common_scripts\utility::flag_set("flag_corpse_door_found");
   }
 
-  if(!common_scripts\utility::_id_3C77("flag_open_corpse_door")) {
+  if(!common_scripts\utility::flag("flag_open_corpse_door")) {
     common_scripts\utility::flag_set("flag_open_corpse_door");
   }
 
-  if(!common_scripts\utility::_id_3C77("sub_pens_corpse_gate")) {
+  if(!common_scripts\utility::flag("sub_pens_corpse_gate")) {
     common_scripts\utility::flag_set("sub_pens_corpse_gate");
   }
 }
@@ -868,9 +868,9 @@ quest_step_complete_corpsegate_opened() {
 cgate_ranger_init() {
   var_0 = _getEnt("corpse_gate_sacrifice", "targetname");
   var_0._id_00B9 = _getEnt(var_0.target, "targetname");
-  var_0._id_18A8 = _getEnt(var_0._id_00B9.target, "targetname");
-  var_0.head_trig = _getEnt(var_0._id_18A8.target, "targetname");
-  var_0.pecking_crows = _spawnlinkedfx(level._effect["zmb_isl_corpse_crows_peck"], var_0._id_18A8, "TAG_ORIGIN");
+  var_0.body = _getEnt(var_0._id_00B9.target, "targetname");
+  var_0.head_trig = _getEnt(var_0.body.target, "targetname");
+  var_0.pecking_crows = _spawnlinkedfx(level._effect["zmb_isl_corpse_crows_peck"], var_0.body, "TAG_ORIGIN");
   _triggerfx(var_0.pecking_crows, -1);
   var_0 thread cgate_ranger_think();
   level thread maps\mp\_utility::_id_6F74(::scare_crows_when_looked_at, var_0);
@@ -909,9 +909,9 @@ cgate_ranger_think() {
   self.head_trig waittill("razer_blade_touched", var_0);
   level childthread common_scripts\_exploder::_id_088E(219);
   self.head_trig delete();
-  var_1 = common_scripts\utility::_id_46B5("head_landing_scripted_node", "targetname");
-  self._id_00B9 scriptmodelplayanimdeltamotionfrompos("s2_zom_island_corpse_head", var_1.origin, common_scripts\utility::_id_98E7(isDefined(var_1.angles), var_1.angles, (0, 0, 0)), "head_fall_anim");
-  self._id_00B9 _id_0378::_id_8D74("nazi_head_roll");
+  var_1 = common_scripts\utility::getstruct("head_landing_scripted_node", "targetname");
+  self._id_00B9 scriptmodelplayanimdeltamotionfrompos("s2_zom_island_corpse_head", var_1.origin, common_scripts\utility::ter_op(isDefined(var_1.angles), var_1.angles, (0, 0, 0)), "head_fall_anim");
+  self._id_00B9 _id_0378::snd_message("nazi_head_roll");
   wait(_getanimlength(%s2_zom_island_corpse_head));
   self setHintString(&"ZOMBIE_ISLAND_PICK_UP_HEAD");
   self waittill("trigger", var_2);
@@ -925,16 +925,16 @@ scare_off_crows() {
     self.pecking_crows delete();
   }
 
-  _playFXOnTag(level._effect["zmb_isl_corpse_crows_scatter"], self._id_18A8, "TAG_ORIGIN");
-  _id_0378::_id_8D74("aud_scare_off_crows");
+  _playFXOnTag(level._effect["zmb_isl_corpse_crows_scatter"], self.body, "TAG_ORIGIN");
+  _id_0378::snd_message("aud_scare_off_crows");
 }
 
 sub_pen_blocker_listener() {
-  level thread maps\mp\_utility::_id_6F74(::push_off_the_fence, self._id_241F);
+  level thread maps\mp\_utility::_id_6F74(::push_off_the_fence, self.clip);
 
   for(;;) {
     var_0 = level common_scripts\utility::waittill_any_return("sub_pen_blockers_open", "sub_pen_blockers_close");
-    var_1 = self._id_3255 _meth_866B("gate");
+    var_1 = self._id_3255 setdot_origin("gate");
 
     if(var_0 == "sub_pen_blockers_open") {
       if(var_1 == "opened") {
@@ -949,9 +949,9 @@ sub_pen_blocker_listener() {
         var_4 suicide();
       }
 
-      self._id_241F._id_565F = 0;
-      self._id_241F connectpaths();
-      self._id_241F notsolid();
+      self.clip.isactive = 0;
+      self.clip connectpaths();
+      self.clip notsolid();
       self._id_3255 setscriptablepartstate("gate", "opening");
       wait 0.7;
       self._id_3255 setscriptablepartstate("gate", "opened");
@@ -962,9 +962,9 @@ sub_pen_blocker_listener() {
       if(var_1 == "closed") {
         continue;
       }
-      self._id_241F._id_565F = 1;
-      self._id_241F disconnectPaths();
-      self._id_241F solid();
+      self.clip.isactive = 1;
+      self.clip disconnectPaths();
+      self.clip solid();
       self._id_3255 setscriptablepartstate("gate", "closing");
       wait 0.7;
       self._id_3255 setscriptablepartstate("gate", "closed");
@@ -974,14 +974,14 @@ sub_pen_blocker_listener() {
 
 push_off_the_fence(var_0) {
   self endon("disconnect");
-  var_1 = common_scripts\utility::_id_46B5("zmb_addon_fence_teleport_line", "targetname");
-  var_2 = common_scripts\utility::_id_46B5(var_1.target, "targetname");
+  var_1 = common_scripts\utility::getstruct("zmb_addon_fence_teleport_line", "targetname");
+  var_2 = common_scripts\utility::getstruct(var_1.target, "targetname");
   var_3 = [var_1.origin, var_2.origin];
 
   for(;;) {
     waitframe();
 
-    if(!common_scripts\utility::_id_562E(var_0._id_565F)) {
+    if(!common_scripts\utility::_id_562E(var_0.isactive)) {
       continue;
     }
     if(distance(self.origin, var_0.origin) > 256) {
@@ -996,7 +996,7 @@ push_off_the_fence(var_0) {
 
 cgate_found_listener() {
   var_0 = 0;
-  var_1 = common_scripts\utility::_id_46B7("corpse_gate", "targetname");
+  var_1 = common_scripts\utility::getstructarray("corpse_gate", "targetname");
   var_2 = undefined;
   _id_0547::_id_A78B();
 
@@ -1020,13 +1020,13 @@ cgate_found_listener() {
 }
 
 run_freezer_combat() {
-  var_0 = common_scripts\utility::_id_46B5("corpse_freezer_combat_sequence", "targetname");
+  var_0 = common_scripts\utility::getstruct("corpse_freezer_combat_sequence", "targetname");
   var_1 = common_scripts\utility::_id_44BE(var_0.target, "targetname");
   thread start_combat();
 }
 
 cgate_blocker_init() {
-  var_0 = common_scripts\utility::_id_46B7("subpen_battle_blocker", "targetname");
+  var_0 = common_scripts\utility::getstructarray("subpen_battle_blocker", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::_id_44BE(var_2.target, "targetname");
@@ -1038,9 +1038,9 @@ cgate_blocker_init() {
       }
       switch (var_6._id_0165) {
         case "blocker_clip":
-          var_2._id_241F = var_6;
-          var_2._id_241F common_scripts\utility::_id_2CBE(3, ::connectpaths);
-          var_2._id_241F notsolid();
+          var_2.clip = var_6;
+          var_2.clip common_scripts\utility::delaycall(3, ::connectpaths);
+          var_2.clip notsolid();
           break;
       }
     }
@@ -1062,20 +1062,20 @@ run_corpse_door() {
   thread cgate_head_place_think();
   thread cgate_set_state("dead_idle");
   self.corpse_trig thread cgate_wait_for_deposit();
-  common_scripts\utility::_id_3C9F("flag_ranger_head_placed");
+  common_scripts\utility::flag_wait("flag_ranger_head_placed");
   thread wait_for_objective_complete();
-  common_scripts\utility::_id_3C9F("sub_pens_corpse_gate");
+  common_scripts\utility::flag_wait("sub_pens_corpse_gate");
   level thread cgate_start_collar_fx(self._id_3255);
   cgate_set_state("intro");
   thread cgate_set_state("active_idle");
-  _id_0378::_id_8D74("corpse_gate_talk", "alarm");
-  common_scripts\utility::_id_3C9F("flag_subpen_traps_completed");
+  _id_0378::snd_message("corpse_gate_talk", "alarm");
+  common_scripts\utility::flag_wait("flag_subpen_traps_completed");
   maps\mp\mp_zombie_nest_ee_wave_manipulation::_id_8608();
-  self.corpse_trig common_scripts\utility::_id_9DA3();
+  self.corpse_trig common_scripts\utility::trigger_on();
   self.corpse_trig setHintString(&"ZOMBIE_ISLAND_CORPSE_GATE_OPEN");
-  _id_0378::_id_8D74("corpse_gate_talk", "beg");
+  _id_0378::snd_message("corpse_gate_talk", "beg");
   self.corpse_trig thread wait_for_activate_after_fire_panel_battle();
-  common_scripts\utility::_id_3C9F("flag_open_corpse_door");
+  common_scripts\utility::flag_wait("flag_open_corpse_door");
   self.corpse_trig delete();
   level thread maps\mp\gametypes\zombies::orders_and_contracts_report_event("mp_zombie_island_corpsegate_open");
   cgate_set_state("outro");
@@ -1091,14 +1091,14 @@ run_corpse_door() {
 spawn_corpse_gate_fireman() {
   wait 2.5;
   level thread corpse_gate_open_vo();
-  var_0 = common_scripts\utility::_id_46B5("zmb_fireman_spawnpoint_corpsegate", "targetname");
+  var_0 = common_scripts\utility::getstruct("zmb_fireman_spawnpoint_corpsegate", "targetname");
 
-  if(!common_scripts\utility::_id_3C77("dont_spawn_fireman")) {
+  if(!common_scripts\utility::flag("dont_spawn_fireman")) {
     var_1 = _id_0564::_id_3C11(0, var_0, 0);
 
     if(isDefined(var_1)) {
       var_1 _id_0547::disableoffhandsecondaryweapons();
-      var_1 _id_0378::_id_8D74("aud_isla_fireman_intro");
+      var_1 _id_0378::snd_message("aud_isla_fireman_intro");
     }
 
     _id_0547::_id_7BA9(::zombie_firemen_max_ammo);
@@ -1159,7 +1159,7 @@ freezer_lights() {
 cgate_head_place_think() {
   level.corpse_gate._id_00B9 hide();
   level.corpse_gate.guts hide();
-  common_scripts\utility::_id_3C9F("flag_ranger_head_placed");
+  common_scripts\utility::flag_wait("flag_ranger_head_placed");
   level.corpse_gate._id_00B9 show();
 }
 
@@ -1175,7 +1175,7 @@ cgate_set_state(var_0) {
       break;
     case "intro":
       level.corpse_gate.guts show();
-      var_1 _id_0378::_id_8D74("corpse_gate_talk", "awake");
+      var_1 _id_0378::snd_message("corpse_gate_talk", "awake");
       var_1._id_3255 scriptmodelplayanimdeltamotionfrompos("s2_zom_island_corpse_gate_intro", var_1.anim_origin.origin, var_1.anim_origin.angles);
       var_1.guts scriptmodelplayanimdeltamotionfrompos("s2_zom_island_corpse_gate_intro_guts", var_1.anim_origin.origin, var_1.anim_origin.angles);
       var_1._id_00B9 scriptmodelplayanimdeltamotionfrompos("s2_zom_island_corpse_gate_intro_head", var_1.anim_origin.origin, var_1.anim_origin.angles);
@@ -1192,9 +1192,9 @@ cgate_set_state(var_0) {
     case "outro":
       level thread corpse_gate_open_rumble(var_1._id_3255);
       level thread common_scripts\_exploder::_id_088E(211);
-      var_1._id_3255 _id_0378::_id_8D74("aud_corpse_gate_open");
+      var_1._id_3255 _id_0378::snd_message("aud_corpse_gate_open");
       level thread common_scripts\_exploder::_id_088E(230);
-      var_1 _id_0378::_id_8D74("corpse_gate_talk", "beg");
+      var_1 _id_0378::snd_message("corpse_gate_talk", "beg");
       var_1._id_3255 scriptmodelplayanimdeltamotionfrompos("s2_zom_island_corpse_gate_outro", var_1.anim_origin.origin, var_1.anim_origin.angles);
       var_1.guts scriptmodelplayanimdeltamotionfrompos("s2_zom_island_corpse_gate_outro_guts", var_1.anim_origin.origin, var_1.anim_origin.angles);
       var_1._id_00B9 scriptmodelplayanimdeltamotionfrompos("s2_zom_island_corpse_gate_outro_head", var_1.anim_origin.origin, var_1.anim_origin.angles);
@@ -1236,7 +1236,7 @@ corpse_gate_open_rumble(var_0) {
 
 vo_corpse_gate_touch() {
   level endon("sub_pens_corpse_gate");
-  common_scripts\utility::_id_3C9F("power_sz2");
+  common_scripts\utility::flag_wait("power_sz2");
 
   for(;;) {
     foreach(var_1 in level.players) {
@@ -1258,16 +1258,16 @@ vo_corpse_gate_touch() {
 }
 
 vo_beach_blood() {
-  common_scripts\utility::_id_3C9F("start_to_right_climb");
+  common_scripts\utility::flag_wait("start_to_right_climb");
   _id_0367::snd_zmb_plr_dlg_play_line_on_each_player("followpath");
-  common_scripts\utility::_id_3C9F("right_climb_to_sub_pens_1");
+  common_scripts\utility::flag_wait("right_climb_to_sub_pens_1");
   _id_0367::snd_zmb_plr_dlg_play_line_on_each_player("nagsubpen");
 }
 
 wait_for_objective_complete() {
-  self.corpse_trig common_scripts\utility::_id_9D9F();
+  self.corpse_trig common_scripts\utility::trigger_off();
 
-  if(!common_scripts\utility::_id_3C77("sub_pens_corpse_gate")) {
+  if(!common_scripts\utility::flag("sub_pens_corpse_gate")) {
     var_0 = 15;
 
     switch (level.players.size) {
@@ -1305,8 +1305,8 @@ cgate_tug() {
 }
 
 cgate_toggle_soul_pos() {
-  var_0 = common_scripts\utility::_id_46B5("corspe_gate_lightning_point", "targetname");
-  var_1 = common_scripts\utility::_id_46B5(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getstruct("corspe_gate_lightning_point", "targetname");
+  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
 
   while(self.issoulcollecting) {
     self.origin = var_0.origin;
@@ -1323,13 +1323,13 @@ cgate_start_collar_fx(var_0) {
 }
 
 cgate_wait_for_deposit() {
-  common_scripts\utility::_id_3C9F("flag_ranger_head_taken");
+  common_scripts\utility::flag_wait("flag_ranger_head_taken");
   self setHintString(&"ZOMBIE_ISLAND_PLACE_RANGER_HEAD");
 
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(common_scripts\utility::_id_3C77("flag_ranger_head_taken")) {
+    if(common_scripts\utility::flag("flag_ranger_head_taken")) {
       var_0 _id_0367::_id_8E3D("corpseheadplace");
       break;
     }
@@ -1348,7 +1348,7 @@ wait_for_activate_after_fire_panel_battle() {
 }
 
 cgate_init() {
-  var_0 = common_scripts\utility::_id_46B5("corpse_gate", "targetname");
+  var_0 = common_scripts\utility::getstruct("corpse_gate", "targetname");
 
   if(isDefined(var_0)) {
     if(isDefined(var_0.getnegotiationnextnode)) {
@@ -1375,7 +1375,7 @@ cgate_init() {
     var_0._id_3255 = _getEnt("corpse_gate_wall", "targetname");
     var_0.guts = _getEnt("corpse_gate_guts_model", "script_noteworthy");
     var_0._id_00B9 = _getEnt("corpse_gate_head_model", "script_noteworthy");
-    var_0.anim_origin = common_scripts\utility::_id_46B5("anim_origin_corpse_gate", "targetname");
+    var_0.anim_origin = common_scripts\utility::getstruct("anim_origin_corpse_gate", "targetname");
     level.corpse_gate = var_0;
     level.corpse_gate thread run_corpse_door();
     level.corpse_gate thread vo_corpse_gate_touch();
@@ -1383,13 +1383,13 @@ cgate_init() {
 }
 
 vo_inside_subpens() {
-  common_scripts\utility::_id_3C9F("flag_vo_inside_subpen");
+  common_scripts\utility::flag_wait("flag_vo_inside_subpen");
 
   foreach(var_1 in level.players) {
     var_1 thread _id_0367::_id_8E3C("insidesubpen");
   }
 
-  common_scripts\utility::_id_3C9F("flag_vo_subcrates");
+  common_scripts\utility::flag_wait("flag_vo_subcrates");
 
   foreach(var_1 in level.players) {
     var_1 thread _id_0367::_id_8E3C("subcrates_both");
@@ -1407,9 +1407,9 @@ start_combat() {
   maps\mp\mp_zombie_nest_ee_wave_manipulation::_id_8606();
   level thread initial_rush();
   thread fire_panels_logic();
-  maps\mp\_utility::_id_2CED(7, common_scripts\utility::flag_set, "flag_freezer_combat_started");
+  maps\mp\_utility::delaythread(7, common_scripts\utility::flag_set, "flag_freezer_combat_started");
   _id_0367::snd_zmb_plr_dlg_play_line_on_each_player("lockedingottafightthemoff");
-  common_scripts\utility::_id_3C9F("flag_subpen_traps_completed");
+  common_scripts\utility::flag_wait("flag_subpen_traps_completed");
   level notify("stop_stoves");
   maps\mp\mp_zombie_nest_ee_wave_manipulation::_id_8607();
   level.maxed_zombies_sprint = 0;
@@ -1428,7 +1428,7 @@ monitor_player_attendance() {
   var_0 = _getEnt("sub_event_volume", "targetname");
   level.zmb_lockdown_event_active = 1;
 
-  while(!common_scripts\utility::_id_3C77("fireman_defeated")) {
+  while(!common_scripts\utility::flag("fireman_defeated")) {
     var_1 = 0;
     var_2 = 0;
 
@@ -1482,8 +1482,8 @@ monitor_player_attendance() {
 }
 
 initial_rush() {
-  var_0 = common_scripts\utility::_id_46B5("corpse_freezer_combat_sequence", "targetname");
-  var_1 = common_scripts\utility::_id_46B7("sub_pens_event_spawners", "targetname");
+  var_0 = common_scripts\utility::getstruct("corpse_freezer_combat_sequence", "targetname");
+  var_1 = common_scripts\utility::getstructarray("sub_pens_event_spawners", "targetname");
 
   foreach(var_3 in var_1) {
     _id_054D::_id_90BA("zombie_generic", var_3, "beach_rush_intro", 0, 1, 1);
@@ -1509,7 +1509,7 @@ fire_panels_logic() {
   }
 
   foreach(var_4 in var_0) {
-    var_6 = common_scripts\utility::_id_4461(var_4.origin, var_1);
+    var_6 = common_scripts\utility::getclosest(var_4.origin, var_1);
     var_2 = common_scripts\utility::_id_0F6F(var_2, var_6);
   }
 
@@ -1521,7 +1521,7 @@ fire_panels_logic() {
   level notify("flag_subpen_traps_started");
   fire_panels_intro(var_2);
   thread fire_panels_valve_panels_logic(var_2);
-  _id_0378::_id_8D74("start_corpse_gate_alarm");
+  _id_0378::snd_message("start_corpse_gate_alarm");
 
   for(;;) {
     wait 5;
@@ -1555,8 +1555,8 @@ fire_panels_logic() {
         break;
     }
 
-    if(common_scripts\utility::_id_3C77("flag_subpen_traps_completed")) {
-      _id_0378::_id_8D74("stop_corpse_gate_alarm");
+    if(common_scripts\utility::flag("flag_subpen_traps_completed")) {
+      _id_0378::snd_message("stop_corpse_gate_alarm");
       break;
     }
   }
@@ -1579,15 +1579,15 @@ fire_panels_valve_panels_logic(var_0) {
   foreach(var_7 in level._id_A2A0) {
     if(_id_0547::_id_5565(var_7.targetname, "fuel_valve")) {
       if(isDefined(var_7.getnegotiationnextnode) && var_7.getnegotiationnextnode == "fuel_valve_1") {
-        var_2 = common_scripts\utility::_id_4461(var_7.origin, var_1);
+        var_2 = common_scripts\utility::getclosest(var_7.origin, var_1);
       }
 
       if(isDefined(var_7.getnegotiationnextnode) && var_7.getnegotiationnextnode == "fuel_valve_2") {
-        var_3 = common_scripts\utility::_id_4461(var_7.origin, var_1);
+        var_3 = common_scripts\utility::getclosest(var_7.origin, var_1);
       }
 
       if(isDefined(var_7.getnegotiationnextnode) && var_7.getnegotiationnextnode == "fuel_valve_3") {
-        var_4 = common_scripts\utility::_id_4461(var_7.origin, var_1);
+        var_4 = common_scripts\utility::getclosest(var_7.origin, var_1);
       }
     }
   }
@@ -1599,21 +1599,21 @@ fire_panels_valve_panels_logic(var_0) {
 
   for(;;) {
     if(var_9 == 0) {
-      if(common_scripts\utility::_id_3C77("fuel_valve_1")) {
+      if(common_scripts\utility::flag("fuel_valve_1")) {
         var_1 = common_scripts\utility::_id_0F93(var_1, var_2);
         var_9 = 1;
       }
     }
 
     if(var_10 == 0) {
-      if(common_scripts\utility::_id_3C77("fuel_valve_2")) {
+      if(common_scripts\utility::flag("fuel_valve_2")) {
         var_1 = common_scripts\utility::_id_0F93(var_1, var_3);
         var_10 = 1;
       }
     }
 
     if(var_11 == 0) {
-      if(common_scripts\utility::_id_3C77("fuel_valve_3")) {
+      if(common_scripts\utility::flag("fuel_valve_3")) {
         var_1 = common_scripts\utility::_id_0F93(var_1, var_4);
         var_11 = 1;
       }
@@ -1623,7 +1623,7 @@ fire_panels_valve_panels_logic(var_0) {
 
     if(isDefined(var_5)) {
       var_5.temporarily_turn_off = 1;
-      var_5 _id_0378::_id_8D74("fire_panel_turn_off");
+      var_5 _id_0378::snd_message("fire_panel_turn_off");
     }
 
     wait 15;
@@ -1782,9 +1782,9 @@ fire_pattern_mid_lower(var_0) {
 }
 
 fire_panels(var_0) {
-  playFX(common_scripts\utility::_id_44F5("zmb_isl_fire_pyro_rnr"), var_0.origin, anglesToForward(var_0.angles));
-  var_0 _id_0378::_id_8D74("sub_pen_floor_trap_pyro_flame");
-  var_0 _id_0378::_id_8D74("sub_pen_floor_trap_decaying_fire");
+  playFX(common_scripts\utility::getfx("zmb_isl_fire_pyro_rnr"), var_0.origin, anglesToForward(var_0.angles));
+  var_0 _id_0378::snd_message("sub_pen_floor_trap_pyro_flame");
+  var_0 _id_0378::snd_message("sub_pen_floor_trap_decaying_fire");
   var_1 = _getEnt(var_0.target, "targetname");
   var_2 = gettime();
 
@@ -1852,14 +1852,14 @@ fire_panels_new(var_0) {
   level endon("flag_subpen_traps_completed");
   var_1 = _getEnt(var_0.target, "targetname");
   thread vo_fire_panels(var_1);
-  playFX(common_scripts\utility::_id_44F5("zmb_isl_fire_licks_rnr"), var_0.origin, anglesToForward(var_0.angles));
-  var_0 _id_0378::_id_8D74("sub_pen_floor_trap_warning_fire");
+  playFX(common_scripts\utility::getfx("zmb_isl_fire_licks_rnr"), var_0.origin, anglesToForward(var_0.angles));
+  var_0 _id_0378::snd_message("sub_pen_floor_trap_warning_fire");
   wait 3;
   wait(_randomfloatrange(0.2, 1.0));
-  playFX(common_scripts\utility::_id_44F5("zmb_isl_fire_pyro_rnr"), var_0.origin, anglesToForward(var_0.angles));
-  playFX(common_scripts\utility::_id_44F5("zmb_isl_fire_pyro_repeating_rnr"), var_0.origin, anglesToForward(var_0.angles));
-  var_0 _id_0378::_id_8D74("sub_pen_floor_trap_pyro_flame");
-  var_0 _id_0378::_id_8D74("sub_pen_floor_trap_decaying_fire");
+  playFX(common_scripts\utility::getfx("zmb_isl_fire_pyro_rnr"), var_0.origin, anglesToForward(var_0.angles));
+  playFX(common_scripts\utility::getfx("zmb_isl_fire_pyro_repeating_rnr"), var_0.origin, anglesToForward(var_0.angles));
+  var_0 _id_0378::snd_message("sub_pen_floor_trap_pyro_flame");
+  var_0 _id_0378::snd_message("sub_pen_floor_trap_decaying_fire");
   var_2 = gettime();
 
   for(;;) {
@@ -1910,19 +1910,19 @@ attempt_apply_player_damage() {
 fire_panels_always_burn(var_0) {
   level endon("flag_subpen_traps_completed");
   var_0.temporarily_turn_off = 0;
-  var_1 = _spawnfx(common_scripts\utility::_id_44F5("zmb_isl_fire_licks_m"), var_0.origin, anglesToForward(var_0.angles));
-  var_0 _id_0378::_id_8D74("sub_pen_floor_trap_warning_fire");
+  var_1 = _spawnfx(common_scripts\utility::getfx("zmb_isl_fire_licks_m"), var_0.origin, anglesToForward(var_0.angles));
+  var_0 _id_0378::snd_message("sub_pen_floor_trap_warning_fire");
   level.burn_tags = common_scripts\utility::_id_0F6F(level.burn_tags, var_1);
   _triggerfx(var_1);
   wait 3;
   var_1 delete();
   level.burn_tags = common_scripts\utility::_id_0F93(level.burn_tags, var_1);
-  var_1 = _spawnfx(common_scripts\utility::_id_44F5("zmb_isl_fire_pyro_repeating"), var_0.origin, anglesToForward(var_0.angles));
+  var_1 = _spawnfx(common_scripts\utility::getfx("zmb_isl_fire_pyro_repeating"), var_0.origin, anglesToForward(var_0.angles));
   level.burn_tags = common_scripts\utility::_id_0F6F(level.burn_tags, var_1);
   _triggerfx(var_1);
-  playFX(common_scripts\utility::_id_44F5("zmb_isl_fire_pyro"), var_0.origin, anglesToForward(var_0.angles));
-  var_0 _id_0378::_id_8D74("sub_pen_floor_trap_pyro_flame");
-  var_0 _id_0378::_id_8D74("fire_panel_turn_on");
+  playFX(common_scripts\utility::getfx("zmb_isl_fire_pyro"), var_0.origin, anglesToForward(var_0.angles));
+  var_0 _id_0378::snd_message("sub_pen_floor_trap_pyro_flame");
+  var_0 _id_0378::snd_message("fire_panel_turn_on");
   var_2 = _getEnt(var_0.target, "targetname");
   var_3 = gettime();
 
@@ -1975,17 +1975,17 @@ setup_subpen_switches() {
   var_5 = getEntArray("valveTrigger", "script_noteworthy");
 
   foreach(var_7 in var_5) {
-    var_7 common_scripts\utility::_id_9D9F();
+    var_7 common_scripts\utility::trigger_off();
   }
 
-  common_scripts\utility::_id_3C9F("flag_freezer_combat_started");
+  common_scripts\utility::flag_wait("flag_freezer_combat_started");
 
   foreach(var_7 in var_5) {
-    var_7 common_scripts\utility::_id_9DA3();
+    var_7 common_scripts\utility::trigger_on();
   }
 
   for(;;) {
-    if(common_scripts\utility::_id_3C77("fuel_valve_1") && common_scripts\utility::_id_3C77("fuel_valve_2") && common_scripts\utility::_id_3C77("fuel_valve_3")) {
+    if(common_scripts\utility::flag("fuel_valve_1") && common_scripts\utility::flag("fuel_valve_2") && common_scripts\utility::flag("fuel_valve_3")) {
       level notify("subpen_switches_success");
       common_scripts\utility::flag_set("flag_subpen_traps_completed");
 
@@ -2008,33 +2008,33 @@ setup_subpen_switches() {
 
 _id_A29E() {
   var_0 = self;
-  var_1 = common_scripts\utility::_id_46B7("gas_vfx", "script_noteworthy");
-  var_2 = common_scripts\utility::_id_46B7("indicator_light_vfx", "script_noteworthy");
-  var_3 = common_scripts\utility::_id_4461(self.origin, var_2);
-  var_4 = common_scripts\utility::_id_46B7("indicator_light_vfx_top", "script_noteworthy");
-  var_5 = common_scripts\utility::_id_4461(self.origin, var_4);
-  var_6 = _spawnfx(common_scripts\utility::_id_44F5("zmb_nest_generator_light_off"), var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
-  var_7 = _spawnfx(common_scripts\utility::_id_44F5("zmb_nest_generator_bulb_off"), var_5.origin, anglesToForward(var_5.angles), anglestoup(var_5.angles));
+  var_1 = common_scripts\utility::getstructarray("gas_vfx", "script_noteworthy");
+  var_2 = common_scripts\utility::getstructarray("indicator_light_vfx", "script_noteworthy");
+  var_3 = common_scripts\utility::getclosest(self.origin, var_2);
+  var_4 = common_scripts\utility::getstructarray("indicator_light_vfx_top", "script_noteworthy");
+  var_5 = common_scripts\utility::getclosest(self.origin, var_4);
+  var_6 = _spawnfx(common_scripts\utility::getfx("zmb_nest_generator_light_off"), var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
+  var_7 = _spawnfx(common_scripts\utility::getfx("zmb_nest_generator_bulb_off"), var_5.origin, anglesToForward(var_5.angles), anglestoup(var_5.angles));
   _triggerfx(var_6, 0.5);
   _triggerfx(var_7, 0.5);
-  common_scripts\utility::_id_3C9F("flag_freezer_combat_started");
+  common_scripts\utility::flag_wait("flag_freezer_combat_started");
   var_6 delete();
   var_7 delete();
-  var_6 = _spawnfx(common_scripts\utility::_id_44F5("zmb_nest_generator_light_red"), var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
-  var_7 = _spawnfx(common_scripts\utility::_id_44F5("zmb_nest_generator_bulb_red"), var_5.origin, anglesToForward(var_5.angles), anglestoup(var_5.angles));
+  var_6 = _spawnfx(common_scripts\utility::getfx("zmb_nest_generator_light_red"), var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
+  var_7 = _spawnfx(common_scripts\utility::getfx("zmb_nest_generator_bulb_red"), var_5.origin, anglesToForward(var_5.angles), anglestoup(var_5.angles));
   _triggerfx(var_6);
   _triggerfx(var_7);
-  common_scripts\utility::_id_3C9F(self.getnegotiationnextnode);
+  common_scripts\utility::flag_wait(self.getnegotiationnextnode);
   var_6 delete();
   var_7 delete();
-  var_6 = _spawnfx(common_scripts\utility::_id_44F5("zmb_nest_generator_light_green"), var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
-  var_7 = _spawnfx(common_scripts\utility::_id_44F5("zmb_nest_generator_bulb_green"), var_5.origin, anglesToForward(var_5.angles), anglestoup(var_5.angles));
+  var_6 = _spawnfx(common_scripts\utility::getfx("zmb_nest_generator_light_green"), var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
+  var_7 = _spawnfx(common_scripts\utility::getfx("zmb_nest_generator_bulb_green"), var_5.origin, anglesToForward(var_5.angles), anglestoup(var_5.angles));
   _triggerfx(var_6);
   _triggerfx(var_7);
 }
 
 setup_aa_guns_power_switch() {
-  var_0 = common_scripts\utility::_id_46B7("aagun_switch", "targetname");
+  var_0 = common_scripts\utility::getstructarray("aagun_switch", "targetname");
 
   foreach(var_2 in var_0) {
     var_2 initialize_aagun_switches();
@@ -2045,7 +2045,7 @@ setup_aa_guns_power_switch() {
 initialize_aagun_switches() {
   var_0 = common_scripts\utility::_id_44BE(self.target, "targetname");
   var_1 = _getscriptablearray("power_switch_island_aagun", "targetname");
-  self.computer_panels = common_scripts\utility::_id_4461(self.origin, var_1);
+  self.computer_panels = common_scripts\utility::getclosest(self.origin, var_1);
   self.computer_panels setscriptablepartstate("cbreaker", "standby_idle");
   self.computer_panels setscriptablepartstate("light_red", "on");
   self.computer_panels setscriptablepartstate("light_green", "off");
@@ -2055,12 +2055,12 @@ initialize_aagun_switches() {
   foreach(var_3 in var_0) {
     switch (var_3._id_0165) {
       case "use_trigger":
-        self._id_9D65 = var_3;
-        self._id_9D65 setHintString(&"ZOMBIES_POWER_ON");
-        self._id_9D65 waittill("trigger", var_4);
+        self.trigger = var_3;
+        self.trigger setHintString(&"ZOMBIES_POWER_ON");
+        self.trigger waittill("trigger", var_4);
         level.subpen_switches_on++;
-        self._id_9D65 common_scripts\utility::_id_9D9F();
-        self._id_9D65 setHintString("");
+        self.trigger common_scripts\utility::trigger_off();
+        self.trigger setHintString("");
         self.computer_panels setscriptablepartstate("cbreaker", "ready");
         self.computer_panels setscriptablepartstate("light_red", "off");
         self.computer_panels setscriptablepartstate("light_green", "on");
@@ -2076,10 +2076,10 @@ run_aagun_switches() {
   level endon("subpen_switches_success");
 
   for(;;) {
-    self._id_9D65 waittill("trigger", var_0);
+    self.trigger waittill("trigger", var_0);
     level.subpen_switches_on++;
-    self._id_9D65 common_scripts\utility::_id_9D9F();
-    self._id_9D65 setHintString("");
+    self.trigger common_scripts\utility::trigger_off();
+    self.trigger setHintString("");
     self.computer_panels setscriptablepartstate("cbreaker", "ready");
     self.computer_panels setscriptablepartstate("light_red", "off");
     self.computer_panels setscriptablepartstate("light_green", "on");
@@ -2096,7 +2096,7 @@ plane_ee_init() {
   level.points_to_win = 9999;
   level.aagun_ee_difficulty = 0;
   level.current_score = 0;
-  _id_0378::_id_8D74("aud_plane_mission_start");
+  _id_0378::snd_message("aud_plane_mission_start");
   var_0 = _getEnt("zmb_island_plane_crash_strap", "targetname");
   var_0 hide();
   plane_ee_set_rules();
@@ -2110,18 +2110,18 @@ plane_ee_init() {
 }
 
 aa_gun_trap_buy_me() {
-  self._id_9D65._id_267B = 750;
+  self.trigger.cost = 750;
 
   while(!_id_0557::_id_7831("CORPSE_GATE")) {
     waitframe();
   }
 
   level thread wait_for_objective_start();
-  common_scripts\utility::_id_3C9F("flak_cannons_ready");
-  self._id_9D65 setHintString(self._id_9D65.hint_string_no_power);
-  common_scripts\utility::_id_3C9F("flag_aa_guns_powered_on");
+  common_scripts\utility::flag_wait("flak_cannons_ready");
+  self.trigger setHintString(self.trigger.hint_string_no_power);
+  common_scripts\utility::flag_wait("flag_aa_guns_powered_on");
   common_scripts\utility::flag_set("flag_used_island_turret");
-  self._id_9D65 setHintString(self._id_9D65.hint_string_available);
+  self.trigger setHintString(self.trigger.hint_string_available);
   thread wait_for_aa_turret_trigger_interact();
   var_0 = undefined;
 
@@ -2136,47 +2136,47 @@ aa_gun_trap_buy_me() {
         handle_turret_lockdown();
       }
 
-      self._id_9D65 setHintString(self._id_9D65.hint_string_available);
+      self.trigger setHintString(self.trigger.hint_string_available);
       continue;
     } else
       var_0 = var_1;
 
-    if(!var_0 maps\mp\gametypes\zombies::_id_11C2(self._id_9D65._id_267B)) {
+    if(!var_0 maps\mp\gametypes\zombies::attempttobuy(self.trigger.cost)) {
       var_0 thread _id_054E::_id_0695("needmoney");
       continue;
     } else {
-      self._id_9D65 common_scripts\utility::_id_9D9F();
+      self.trigger common_scripts\utility::trigger_off();
       self.wall_model thread set_wall_up();
-      self.wall_model set_player_using_turret(var_0, self._id_9EDD);
+      self.wall_model set_player_using_turret(var_0, self.turret);
       var_0 _id_0367::_id_8E3D("flakon_both");
       var_3 = ["zombie_generic", "zombie_berserker"];
       self.wall_model thread maps\mp\mp_zombies_attack_object::create_inanimate_zombie_enemy(3, 400, "this_turret_is_done", 1024, 512, ::stunning_burst_zombies, [::player_left, ::player_died, ::player_disconnected], self._id_1176, var_3, ["zombie_is_passive", "zombie_is_crawler", "zombie_is_objective", "zombie_is_stunned"], var_0);
-      self.wall_model common_scripts\utility::_id_379C("this_turret_is_done");
-      self.wall_model unset_player_using_turret(var_0, self._id_9EDD);
-      self.wall_model common_scripts\utility::_id_3796("this_turret_is_done");
+      self.wall_model common_scripts\utility::ent_flag_wait("this_turret_is_done");
+      self.wall_model unset_player_using_turret(var_0, self.turret);
+      self.wall_model common_scripts\utility::ent_flag_clear("this_turret_is_done");
       playFX(level._effect["zmb_isl_aa_gun_gk_energy"], self.wall_model.origin, anglesToForward(self.wall_model.angles));
-      var_0 _id_0378::_id_8D74("aud_stunning_burst_use");
+      var_0 _id_0378::snd_message("aud_stunning_burst_use");
       self.wall_model thread set_wall_down();
       wait 1;
-      self._id_9D65 common_scripts\utility::_id_9DA3();
-      self._id_9D65 setHintString(self._id_9D65.hint_string_unavailable);
+      self.trigger common_scripts\utility::trigger_on();
+      self.trigger setHintString(self.trigger.hint_string_unavailable);
       wait 12.5;
       handle_turret_lockdown();
-      self._id_9D65 setHintString(self._id_9D65.hint_string_available);
+      self.trigger setHintString(self.trigger.hint_string_available);
     }
   }
 }
 
 handle_turret_lockdown() {
   while(common_scripts\utility::_id_562E(level.aa_guns_locked)) {
-    self._id_9D65 setHintString(self._id_9D65.hint_string_unavailable);
+    self.trigger setHintString(self.trigger.hint_string_unavailable);
     wait 0.125;
   }
 }
 
 wait_for_aa_turret_trigger_interact() {
   for(;;) {
-    self._id_9D65 waittill("trigger", var_0);
+    self.trigger waittill("trigger", var_0);
     level notify("aa_gun_request", var_0, self);
   }
 }
@@ -2187,20 +2187,20 @@ lock_island_aa_gun_turrets(var_0) {
 }
 
 wait_for_objective_start() {
-  common_scripts\utility::_id_3C9F(_id_0557::_id_7838("CORPSE_GATE", "Open Corpse Gate"));
+  common_scripts\utility::flag_wait(_id_0557::_id_7838("CORPSE_GATE", "Open Corpse Gate"));
   common_scripts\utility::flag_set("flak_cannons_ready");
 }
 
 set_wall_up() {
   self scriptmodelplayanim("s2_zom_flak_gun_gate_close");
-  _id_0378::_id_8D74("flak_gun_gate_up");
+  _id_0378::snd_message("flak_gun_gate_up");
   wait(_getanimlength(%s2_zom_flak_gun_gate_open));
   self scriptmodelplayanim("s2_zom_flak_gun_gate_close_idle");
 }
 
 set_wall_down() {
   self scriptmodelplayanim("s2_zom_flak_gun_gate_open");
-  _id_0378::_id_8D74("flak_gun_gate_down");
+  _id_0378::snd_message("flak_gun_gate_down");
   wait(_getanimlength(%s2_zom_flak_gun_gate_open));
   self scriptmodelplayanim("s2_zom_flak_gun_gate_open_idle");
 }
@@ -2209,7 +2209,7 @@ stunning_burst_zombies() {
   var_0 = _id_0547::_id_408F();
   var_1 = 0;
 
-  foreach(var_3 in common_scripts\utility::_id_40B0(self.origin, var_0, undefined, undefined, 200)) {
+  foreach(var_3 in common_scripts\utility::get_array_of_closest(self.origin, var_0, undefined, undefined, 200)) {
     if(_id_0547::_id_5565(var_3._id_0A4B, "zombie_generic") || _id_0547::_id_5565(var_3._id_0A4B, "zombie_berserker")) {
       var_3 _id_056D::_id_5A86();
     }
@@ -2218,11 +2218,11 @@ stunning_burst_zombies() {
 
 set_player_using_turret(var_0, var_1) {
   self.turret_player = var_0;
-  self._id_9EDD = var_1;
+  self.turret = var_1;
   var_0._id_00CE = 1;
   var_0.on_aa_gun = 1;
   var_1 useby(var_0);
-  var_0._id_480F = 1;
+  var_0.godmode = 1;
   var_0 setclientomnvar("ui_zm_turret_health", 1);
   var_0 disableturretdismount();
   wait 1.5;
@@ -2232,8 +2232,8 @@ set_player_using_turret(var_0, var_1) {
 unset_player_using_turret(var_0, var_1) {
   var_0._id_00CE = 0;
   var_0.on_aa_gun = 0;
-  var_0 _meth_85E9();
-  var_0._id_480F = 0;
+  var_0 set_vehicle_effect();
+  var_0.godmode = 0;
   var_0 setclientomnvar("ui_zm_turret_health", 0);
   var_0 notify("left_aa_gun");
 }
@@ -2245,7 +2245,7 @@ turret_time_limit(var_0) {
 
 player_left(var_0) {
   self endon(var_0);
-  self._id_9EDD waittill("turret_deactivate");
+  self.turret waittill("turret_deactivate");
 }
 
 player_died(var_0) {
@@ -2301,7 +2301,7 @@ plane_ee_score_counter() {
   }
 
   if(level.current_score >= level.points_to_win / 2) {
-    if(!common_scripts\utility::_id_3C77("flag_planes_half_way_done")) {
+    if(!common_scripts\utility::flag("flag_planes_half_way_done")) {
       level thread vo_players_half_way_done();
     }
   }
@@ -2316,11 +2316,11 @@ plane_ee_score_counter() {
 }
 
 plane_ee_cloud_handler() {
-  var_0 = common_scripts\utility::_id_46B7("struct_cloud_fx_spawner_village", "targetname");
-  var_1 = common_scripts\utility::_id_46B7("struct_cloud_fx_spawner_docks", "targetname");
-  var_2 = common_scripts\utility::_id_46B7("struct_cloud_fx_spawner_ocean", "targetname");
-  var_3 = common_scripts\utility::_id_46B7("struct_cloud_fx_spawner_beach", "targetname");
-  var_4 = common_scripts\utility::_id_46B7("struct_cloud_fx_spawner_lighthouse", "targetname");
+  var_0 = common_scripts\utility::getstructarray("struct_cloud_fx_spawner_village", "targetname");
+  var_1 = common_scripts\utility::getstructarray("struct_cloud_fx_spawner_docks", "targetname");
+  var_2 = common_scripts\utility::getstructarray("struct_cloud_fx_spawner_ocean", "targetname");
+  var_3 = common_scripts\utility::getstructarray("struct_cloud_fx_spawner_beach", "targetname");
+  var_4 = common_scripts\utility::getstructarray("struct_cloud_fx_spawner_lighthouse", "targetname");
 
   foreach(var_6 in var_0) {
     playFX(level._effect["zmb_clouds_puff_static"], var_6.origin, (1, 1, 0));
@@ -2346,7 +2346,7 @@ plane_ee_cloud_handler() {
 plane_ee_wave_handler() {
   var_0 = [1, 2, 3, 4];
 
-  while(!common_scripts\utility::_id_3C77("flag_players_have_won")) {
+  while(!common_scripts\utility::flag("flag_players_have_won")) {
     var_1 = common_scripts\utility::random(var_0);
     var_0 = common_scripts\utility::_id_0F93(var_0, var_1);
 
@@ -2440,12 +2440,12 @@ plane_ee_do_spawn_planes() {
   var_2._id_01C7 = "forward";
   var_2._id_01C1 = "forward";
   var_2._id_17DC = 0;
-  var_2._id_931A = "forward";
-  var_2 _id_0378::_id_8D74("aud_plane_spawn");
+  var_2.state = "forward";
+  var_2 _id_0378::snd_message("aud_plane_spawn");
   var_2 thread plane_ee_do_plane_turrets();
   var_2 startpath(self);
   var_2 thread plane_ee_vehicle_paths_non_heli(self);
-  var_2 thread maps\mp\gametypes\_damage::_id_8676(100);
+  var_2 thread maps\mp\gametypes\_damage::setentitydamagecallback(100);
   var_2.health = 60;
   var_2.damagecallback = ::_id_703F;
   var_2 thread plane_ee_handleflakprojectileproximity();
@@ -2461,35 +2461,35 @@ plane_ee_spawn_radio_plane(var_0, var_1) {
   var_4.mustfindacrashpath = common_scripts\utility::_id_562E(var_0);
   var_5 = common_scripts\utility::random(level.players);
   var_5 thread _id_0367::_id_8E3C("planegone");
-  var_4 common_scripts\utility::_id_3799("plane_crashed");
-  var_4 common_scripts\utility::_id_3799("plane_got_away");
+  var_4 common_scripts\utility::ent_flag_init("plane_crashed");
+  var_4 common_scripts\utility::ent_flag_init("plane_got_away");
   var_4 notify("forward");
   var_4._id_01C7 = "forward";
   var_4._id_01C1 = "forward";
   var_4._id_17DC = 0;
-  var_4._id_931A = "forward";
+  var_4.state = "forward";
   var_4 thread plane_ee_do_plane_turrets();
   var_4 startpath(self);
-  var_4 _id_0378::_id_8D74("aud_last_plane_spawn");
+  var_4 _id_0378::snd_message("aud_last_plane_spawn");
   var_4 thread plane_ee_vehicle_paths_non_heli(self);
-  var_4 thread maps\mp\gametypes\_damage::_id_8676(100);
+  var_4 thread maps\mp\gametypes\_damage::setentitydamagecallback(100);
   var_4.health = 60;
   var_4.damagecallback = ::_id_703F;
   var_4 thread plane_ee_handleflakprojectileproximity();
 
-  if(common_scripts\utility::_id_3C77("flag_ui_planes_ee_done")) {
+  if(common_scripts\utility::flag("flag_ui_planes_ee_done")) {
     var_4 thread ensure_death_scene();
   }
 
   var_4 common_scripts\utility::_id_379E("plane_crashed", "plane_got_away");
 
-  if(var_4 common_scripts\utility::_id_3794("plane_got_away")) {
+  if(var_4 common_scripts\utility::ent_flag("plane_got_away")) {
     var_4 delete();
     var_4 = _getvehiclenode("plane_start_node_radio", "targetname");
     var_4 plane_ee_spawn_radio_plane(1, 1);
   } else {
     level thread maps\mp\mp_zombie_island::ee_casual_plane_cliff_crash();
-    _id_0378::_id_8D74("aud_last_plane_crash", var_4.origin);
+    _id_0378::snd_message("aud_last_plane_crash", var_4.origin);
     _id_0557::_id_782D("Flak Tower", "Defend Flak Tower");
     var_4 delete();
     wait 2;
@@ -2498,7 +2498,7 @@ plane_ee_spawn_radio_plane(var_0, var_1) {
 }
 
 ensure_death_scene() {
-  while(!common_scripts\utility::_id_3C83("aud_last_plane_spawned")) {
+  while(!common_scripts\utility::flag_exist("aud_last_plane_spawned")) {
     waitframe();
   }
 
@@ -2511,7 +2511,7 @@ plane_damage_player() {
   self endon("death");
   var_0 = _getEnt("vol_plane_damage_area", "targetname");
 
-  while(common_scripts\utility::_id_3794("turret_on")) {
+  while(common_scripts\utility::ent_flag("turret_on")) {
     if(_id_0547::_id_5565(level.plane_wave_vo_played, 0)) {
       thread plane_wave_diving_vo();
     }
@@ -2570,16 +2570,16 @@ plane_wave_diving_vo() {
 
 plane_ee_do_plane_turrets() {
   self endon("death");
-  common_scripts\utility::_id_3799("turret_on");
-  common_scripts\utility::_id_3799("turret_off");
-  common_scripts\utility::_id_379C("turret_on");
+  common_scripts\utility::ent_flag_init("turret_on");
+  common_scripts\utility::ent_flag_init("turret_off");
+  common_scripts\utility::ent_flag_wait("turret_on");
   var_0 = self gettagorigin("TAG_MUZZLE_FX_1");
   var_1 = self gettagorigin("TAG_MUZZLE_FX_2");
-  common_scripts\utility::_id_379C("turret_on");
-  _id_0378::_id_8D74("aud_plane_firing");
+  common_scripts\utility::ent_flag_wait("turret_on");
+  _id_0378::snd_message("aud_plane_firing");
   thread plane_damage_player();
 
-  while(common_scripts\utility::_id_3794("turret_on")) {
+  while(common_scripts\utility::ent_flag("turret_on")) {
     _playFXOnTag(level._effect["zmb_isl_enemy_plane_tracer"], self, "TAG_MUZZLE_FX_1");
     _playFXOnTag(level._effect["zmb_isl_enemy_plane_tracer"], self, "TAG_MUZZLE_FX_2");
     wait 0.2;
@@ -2611,8 +2611,8 @@ _id_703F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     var_1 = var_1 getturretowner();
   }
 
-  if(isDefined(self._id_6E74)) {
-    var_12 = self._id_6E74;
+  if(isDefined(self.parent)) {
+    var_12 = self.parent;
   } else {
     var_12 = self;
   }
@@ -2625,7 +2625,7 @@ _id_703F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
   if(var_12.health <= 0) {
     if(isDefined(var_1)) {
-      var_1 _id_04C7::_id_A102("killshot");
+      var_1 _id_04C7::updatedamagefeedback("killshot");
 
       if(isDefined(level.zmb_events_player_destroyed_stuka)) {
         var_1 thread[[level.zmb_events_player_destroyed_stuka]]();
@@ -2644,22 +2644,22 @@ _id_703F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
     var_12 plane_ee_plane_crashy();
   } else if(isDefined(var_1))
-    var_1 _id_04C7::_id_A102("standard");
+    var_1 _id_04C7::updatedamagefeedback("standard");
 }
 
 _id_7040(var_0, var_1, var_2, var_3) {
   self endon("death");
-  self._id_1180 = var_0;
+  self.attacker = var_0;
 }
 
 plane_ee_plane_crashy() {
   if(common_scripts\utility::_id_562E(self.findingacrashpath)) {
     return;
   }
-  if(!isDefined(self._id_272B) || self._id_272B == 0) {
-    self._id_272B = 1;
+  if(!isDefined(self.crashing) || self.crashing == 0) {
+    self.crashing = 1;
     self notify("crashing");
-    _id_0378::_id_8D74("aud_plane_tailspin");
+    _id_0378::snd_message("aud_plane_tailspin");
 
     if(common_scripts\utility::_id_562E(self.mustfindacrashpath)) {
       self.findingacrashpath = 1;
@@ -2667,15 +2667,15 @@ plane_ee_plane_crashy() {
       wait_for_valid_crash_path();
     }
 
-    var_0 = self._id_2944;
+    var_0 = self.currentnode;
 
     if(isDefined(var_0) && isDefined(var_0.script_exploder)) {
       self.crashingspecial = 1;
-      var_0 = self._id_2944;
+      var_0 = self.currentnode;
       plane_ee_goto_linkto_path(var_0);
       waitframe();
       self waittill("reached_dynamic_path_end");
-      common_scripts\utility::_id_379A("plane_crashed");
+      common_scripts\utility::ent_flag_set("plane_crashed");
       return;
     } else {
       var_1 = _randomfloatrange(-90, 90);
@@ -2697,8 +2697,8 @@ wait_for_valid_crash_path() {
   self endon("plane_got_away");
 
   for(;;) {
-    if(isDefined(self._id_2944) && isDefined(self._id_2944.script_exploder)) {
-      var_0 = _getvehiclenodearray(self._id_2944.script_exploder, "script_linkname");
+    if(isDefined(self.currentnode) && isDefined(self.currentnode.script_exploder)) {
+      var_0 = _getvehiclenodearray(self.currentnode.script_exploder, "script_linkname");
 
       if(var_0.size > 0) {
         break;
@@ -2719,7 +2719,7 @@ plane_ee_plane_go_boom(var_0) {
 
   if(!common_scripts\utility::_id_562E(var_0)) {
     playFX(level._effect["plane_death"], self.origin, var_1);
-    _id_0378::_id_8D74("aud_plane_explode", self.origin);
+    _id_0378::snd_message("aud_plane_explode", self.origin);
   }
 
   level notify(self.targetname);
@@ -2780,11 +2780,11 @@ plane_ee_flakprojectilezombieproximitydetonate(var_0, var_1) {
   level endon("game_ended");
   var_0 endon("death");
   var_2 = 64;
-  var_3 = common_scripts\utility::_id_4461(var_0.origin, _id_0547::_id_408F());
+  var_3 = common_scripts\utility::getclosest(var_0.origin, _id_0547::_id_408F());
 
   for(;;) {
     if(isDefined(var_3) && _distance2d(var_3 getEye(), var_0.origin) < var_2 && _abs(var_0.origin[2] - var_3.origin[2]) < 120) {
-      var_1 _id_04C7::_id_A102("standard");
+      var_1 _id_04C7::updatedamagefeedback("standard");
       var_0 _meth_8561("turretweapon_ger_btry_flak38_mp_zombie", var_1, var_0);
       break;
     }
@@ -2807,7 +2807,7 @@ plane_ee_flakprojectileproximitydetonate(var_0, var_1) {
 
     if(var_4 < var_2) {
       var_0 notify("plane_death");
-      self dodamage(500, var_3, var_1, var_0, "MOD_PROJECTILE", var_0._id_A9E0);
+      self dodamage(500, var_3, var_1, var_0, "MOD_PROJECTILE", var_0.weaponname);
       var_0 detonate();
     }
 
@@ -2860,14 +2860,14 @@ plane_ee_goto_linkto_path(var_0) {
 }
 
 plane_ee_node_wait(var_0, var_1, var_2) {
-  if(self._id_1146 == var_0 && !isDefined(var_1)) {
+  if(self.attachedpath == var_0 && !isDefined(var_1)) {
     self notify("node_wait_terminated");
     waittillframeend;
     return;
   }
 
-  if(isDefined(self._id_A01E)) {
-    var_3 = "node_wait_triggered" + self._id_A01E;
+  if(isDefined(self.unique_id)) {
+    var_3 = "node_wait_triggered" + self.unique_id;
   } else {
     var_3 = "node_wait_triggered";
   }
@@ -2908,11 +2908,11 @@ plane_ee_vehicle_paths_non_heli(var_0) {
   self notify("newpath");
 
   if(isDefined(var_0)) {
-    self._id_1146 = var_0;
+    self.attachedpath = var_0;
   }
 
-  var_1 = self._id_1146;
-  self._id_2944 = self._id_1146;
+  var_1 = self.attachedpath;
+  self.currentnode = self.attachedpath;
 
   if(!isDefined(var_1)) {
     return;
@@ -2937,7 +2937,7 @@ plane_ee_vehicle_paths_non_heli(var_0) {
     if(!isDefined(self)) {
       return;
     }
-    self._id_2944 = var_4;
+    self.currentnode = var_4;
 
     if(isDefined(var_4._id_0165)) {
       self notify(var_4._id_0165);
@@ -2958,35 +2958,35 @@ plane_ee_vehicle_paths_non_heli(var_0) {
       var_8 = var_4.setviewmodeldepthoffield;
 
       if(isDefined(var_8)) {
-        level maps\mp\_utility::_id_2CED(var_8, common_scripts\_exploder::exploder, var_4.setdepthoffield);
+        level maps\mp\_utility::delaythread(var_8, common_scripts\_exploder::exploder, var_4.setdepthoffield);
       } else {
         level common_scripts\_exploder::exploder(var_4.setdepthoffield);
       }
     }
 
-    if(isDefined(var_4._id_81A0)) {
-      common_scripts\utility::flag_set(var_4._id_81A0);
+    if(isDefined(var_4.script_flag_set)) {
+      common_scripts\utility::flag_set(var_4.script_flag_set);
     }
 
     if(isDefined(var_4.stunplayer)) {
-      common_scripts\utility::_id_379A(var_4.stunplayer);
+      common_scripts\utility::ent_flag_set(var_4.stunplayer);
     }
 
     if(isDefined(var_4.shellshock)) {
-      common_scripts\utility::_id_3796(var_4.shellshock);
+      common_scripts\utility::ent_flag_clear(var_4.shellshock);
     }
 
     if(isDefined(var_4.getdoorpathnode)) {
-      common_scripts\utility::_id_3C7B(var_4.getdoorpathnode);
+      common_scripts\utility::flag_clear(var_4.getdoorpathnode);
     }
 
     if(isDefined(var_4._id_0165)) {
       if(var_4._id_0165 == "godon") {
-        self._id_480F = 1;
+        self.godmode = 1;
       }
 
       if(var_4._id_0165 == "godoff") {
-        self._id_480F = 0;
+        self.godmode = 0;
       }
 
       if(var_4._id_0165 == "engineoff") {
@@ -3044,7 +3044,7 @@ plane_ee_vehicle_paths_non_heli(var_0) {
       }
 
       self vehicle_setspeed(0, var_9);
-      common_scripts\utility::_id_379C(var_4.stopshellshock);
+      common_scripts\utility::ent_flag_wait(var_4.stopshellshock);
 
       if(!isDefined(self)) {
         return;
@@ -3123,14 +3123,14 @@ quest_step_defend_the_flak_tower() {
 flak_complete_xp_reward() {
   foreach(var_1 in level.players) {
     var_1 _id_054C::_id_AC23("flak");
-    var_1 _id_0378::_id_8D74("objective_complete", "flak");
+    var_1 _id_0378::snd_message("objective_complete", "flak");
   }
 }
 
 vo_check_first_plane_spawn() {
   var_0 = 0;
 
-  if(!common_scripts\utility::_id_3C77("flag_first_plane_has_spawn")) {
+  if(!common_scripts\utility::flag("flag_first_plane_has_spawn")) {
     common_scripts\utility::flag_set("flag_first_plane_has_spawn");
     var_0 = 1;
     return var_0;
@@ -3210,7 +3210,7 @@ quest_init_razergun_assembly() {
   razergun_bench_init();
   level thread maps\mp\_utility::_id_6F74(::comment_on_workbench_vo);
   level thread razergun_parts_collect();
-  var_0 = common_scripts\utility::_id_46B7("weapon_assembly_bench", "targetname");
+  var_0 = common_scripts\utility::getstructarray("weapon_assembly_bench", "targetname");
 
   foreach(var_2 in var_0) {
     var_2 thread manage_bench_trigger();
@@ -3219,30 +3219,30 @@ quest_init_razergun_assembly() {
   }
 
   level thread activate_workbench_on_parts_placed();
-  common_scripts\utility::_id_3C9F(_id_0557::_id_7838("explore_the_island", "Explore Pen"));
+  common_scripts\utility::flag_wait(_id_0557::_id_7838("explore_the_island", "Explore Pen"));
   common_scripts\utility::flag_set("Commence Weapon Assembly");
 }
 
 comment_on_workbench_vo() {
   self endon("death");
   self endon("disconnect");
-  var_0 = common_scripts\utility::_id_46B5("weapon_assembly_bench", "targetname");
+  var_0 = common_scripts\utility::getstruct("weapon_assembly_bench", "targetname");
 
   while(distance(self.origin, var_0.origin) > var_0.radius || _abs(var_0.origin[2] - self.origin[2]) > var_0._id_00BD) {
-    _id_0547::_id_A6F6();
+    _id_0547::waitnetworkframe();
   }
 
   thread _id_0367::_id_8E3C("weaponbenchtouch");
 }
 
 manage_bench_trigger() {
-  common_scripts\utility::_id_3CA2("players_have_razergun_1", "players_have_razergun_2");
+  common_scripts\utility::flag_wait_any("players_have_razergun_1", "players_have_razergun_2");
   self.assembly_trig setHintString(&"ZOMBIE_ISLAND_PART_PLACE");
-  common_scripts\utility::_id_3CA2("razergun_1_placed", "razergun_2_placed");
-  self.assembly_trig common_scripts\utility::_id_9D9F();
-  common_scripts\utility::_id_3CA0("players_have_razergun_1", "players_have_razergun_2");
-  self.assembly_trig common_scripts\utility::_id_9DA3();
-  common_scripts\utility::_id_3CA0("razergun_1_placed", "razergun_2_placed");
+  common_scripts\utility::flag_wait_any("razergun_1_placed", "razergun_2_placed");
+  self.assembly_trig common_scripts\utility::trigger_off();
+  common_scripts\utility::flag_wait_all("players_have_razergun_1", "players_have_razergun_2");
+  self.assembly_trig common_scripts\utility::trigger_on();
+  common_scripts\utility::flag_wait_all("razergun_1_placed", "razergun_2_placed");
   self.assembly_trig setHintString(&"ZOMBIES_EMPTY_STRING");
   self.assembly_trig makeunusable();
 
@@ -3251,22 +3251,22 @@ manage_bench_trigger() {
       var_1 makeusable();
 
       if(_id_0547::_id_5819(var_1)) {
-        _id_0547::_id_8A4F(var_1, ::razergun_bench_assign_trig);
+        _id_0547::setupusetriggerforclient(var_1, ::razergun_bench_assign_trig);
       }
 
       var_1 thread razergun_bench_assemble_think();
     }
   }
 
-  common_scripts\utility::_id_3C9F("razergun_3_placed");
+  common_scripts\utility::flag_wait("razergun_3_placed");
 
   foreach(var_1 in self.assembly_ranged_trigs) {
     var_1 makeunusable();
   }
 
-  common_scripts\utility::_id_3C9F("razergun_charged");
+  common_scripts\utility::flag_wait("razergun_charged");
   self.assembly_trig makeusable();
-  common_scripts\utility::_id_3C9F("razergun_infused");
+  common_scripts\utility::flag_wait("razergun_infused");
   self.assembly_trig makeunusable();
 
   foreach(var_1 in self.assembly_ranged_trigs) {
@@ -3275,23 +3275,23 @@ manage_bench_trigger() {
 }
 
 activate_workbench_on_parts_placed() {
-  common_scripts\utility::_id_3CA0("razergun_1_placed", "razergun_2_placed");
+  common_scripts\utility::flag_wait_all("razergun_1_placed", "razergun_2_placed");
   common_scripts\utility::flag_set("Commence Weapon Assembly");
 }
 
 quest_step_build_razergun_1() {
-  common_scripts\utility::_id_3CA0("players_have_razergun_1", "players_have_razergun_2");
+  common_scripts\utility::flag_wait_all("players_have_razergun_1", "players_have_razergun_2");
   _id_0557::_id_7822("Aquire Wonder Weapon", _id_0557::removed_quest_hint());
-  common_scripts\utility::_id_3CA0("razergun_1_placed", "razergun_2_placed");
+  common_scripts\utility::flag_wait_all("razergun_1_placed", "razergun_2_placed");
   _id_0557::_id_782D("Aquire Wonder Weapon", "Melee Razor Gun Built");
 }
 
 quest_step_build_razergun_2() {
-  common_scripts\utility::_id_3C9F("players_have_razergun_3");
+  common_scripts\utility::flag_wait("players_have_razergun_3");
   _id_0557::_id_7822("Aquire Wonder Weapon", _id_0557::removed_quest_hint());
-  common_scripts\utility::_id_3C9F("razergun_3_placed");
+  common_scripts\utility::flag_wait("razergun_3_placed");
   _id_0557::_id_7822("Aquire Wonder Weapon", _id_0557::removed_quest_hint());
-  common_scripts\utility::_id_3C9F("razergun_infused");
+  common_scripts\utility::flag_wait("razergun_infused");
   _id_0557::_id_782D("Aquire Wonder Weapon", "Ranged Razor Gun Built");
 }
 
@@ -3300,33 +3300,33 @@ razergun_build_melee() {
   var_1 = 1;
   thread razergun_build_part(self.assembly_model_2, "razergun_1_placed", "players_have_razergun_1");
   thread razergun_build_part(self.assembly_model_1, "razergun_2_placed", "players_have_razergun_2");
-  common_scripts\utility::_id_3CA0("razergun_1_placed", "razergun_2_placed");
+  common_scripts\utility::flag_wait_all("razergun_1_placed", "razergun_2_placed");
   var_2 = [self.assembly_model_1, self.assembly_model_2];
   var_3 = _getEnt("ripsaw_bench", "targetname");
   playFX(level._effect["zmb_isl_sawrack_charge_pnt"], var_3.origin, anglesToForward(var_3.angles));
-  _id_0378::_id_8D74("ripsaw_weapon_build_infusion", var_3.origin);
+  _id_0378::snd_message("ripsaw_weapon_build_infusion", var_3.origin);
 }
 
 razergun_build_melee_reward() {
-  if(!common_scripts\utility::_id_3C77("razergun_1_placed")) {
+  if(!common_scripts\utility::flag("razergun_1_placed")) {
     common_scripts\utility::flag_set("razergun_1_placed");
   }
 
-  if(!common_scripts\utility::_id_3C77("razergun_2_placed")) {
+  if(!common_scripts\utility::flag("razergun_2_placed")) {
     common_scripts\utility::flag_set("razergun_2_placed");
   }
 
-  if(!common_scripts\utility::_id_3C77("players_have_razergun_1")) {
+  if(!common_scripts\utility::flag("players_have_razergun_1")) {
     common_scripts\utility::flag_set("players_have_razergun_1");
   }
 
-  if(!common_scripts\utility::_id_3C77("players_have_razergun_2")) {
+  if(!common_scripts\utility::flag("players_have_razergun_2")) {
     common_scripts\utility::flag_set("players_have_razergun_2");
   }
 
   foreach(var_1 in level.players) {
     var_1 _id_054C::_id_AC23("razergunmelee");
-    var_1 _id_0378::_id_8D74("objective_complete", "razergunmelee");
+    var_1 _id_0378::snd_message("objective_complete", "razergunmelee");
   }
 }
 
@@ -3334,58 +3334,58 @@ razergun_build_ranged() {
   _id_0557::_id_7870("Aquire Wonder Weapon", "Melee Razor Gun Built");
   var_0 = 0;
   var_1 = 1;
-  common_scripts\utility::_id_3C9F("razergun_3_placed");
+  common_scripts\utility::flag_wait("razergun_3_placed");
   self.assembly_model_3 show();
-  self.assembly_model_3 _id_0378::_id_8D74("ripsaw_insert_charged_spine");
+  self.assembly_model_3 _id_0378::snd_message("ripsaw_insert_charged_spine");
 
-  if(!common_scripts\utility::_id_3C77("razergun_charged")) {
+  if(!common_scripts\utility::flag("razergun_charged")) {
     thread razergun_bench_charge();
-    common_scripts\utility::_id_3C9F("razergun_charged");
+    common_scripts\utility::flag_wait("razergun_charged");
   }
 
-  if(!common_scripts\utility::_id_3C77("razergun_infused")) {
+  if(!common_scripts\utility::flag("razergun_infused")) {
     thread razergun_bench_infuse();
-    common_scripts\utility::_id_3C9F("razergun_infused");
+    common_scripts\utility::flag_wait("razergun_infused");
   }
 
   level thread maps\mp\gametypes\zombies::orders_and_contracts_report_event("geistcraft_device_powered");
   var_2 = [self.assembly_model_1, self.assembly_model_2, self.assembly_model_3];
   var_3 = _getEnt("ripsaw_bench", "targetname");
   playFX(level._effect["zmb_isl_sawrack_charge_pnt"], var_3.origin, anglesToForward(var_3.angles));
-  _id_0378::_id_8D74("ripsaw_weapon_build_infusion", var_3.origin);
+  _id_0378::snd_message("ripsaw_weapon_build_infusion", var_3.origin);
 }
 
 razergun_build_ranged_reward() {
-  if(!common_scripts\utility::_id_3C77("razergun_3_placed")) {
+  if(!common_scripts\utility::flag("razergun_3_placed")) {
     common_scripts\utility::flag_set("razergun_3_placed");
   }
 
-  if(!common_scripts\utility::_id_3C77("razergun_charged")) {
+  if(!common_scripts\utility::flag("razergun_charged")) {
     common_scripts\utility::flag_set("razergun_charged");
   }
 
-  if(!common_scripts\utility::_id_3C77("razergun_infused")) {
+  if(!common_scripts\utility::flag("razergun_infused")) {
     common_scripts\utility::flag_set("razergun_infused");
   }
 
-  if(!common_scripts\utility::_id_3C77("players_have_razergun_3")) {
+  if(!common_scripts\utility::flag("players_have_razergun_3")) {
     common_scripts\utility::flag_set("players_have_razergun_3");
   }
 
-  if(!common_scripts\utility::_id_3C77("razergun_half_charged")) {
+  if(!common_scripts\utility::flag("razergun_half_charged")) {
     common_scripts\utility::flag_set("razergun_half_charged");
   }
 
   foreach(var_1 in level.players) {
     var_1 _id_054C::_id_AC23("razergunranged");
-    var_1 _id_0378::_id_8D74("objective_complete", "razergunranged");
+    var_1 _id_0378::snd_message("objective_complete", "razergunranged");
   }
 
   thread head_corpse_razer_gun_vo();
 }
 
 razergun_bench_init() {
-  var_0 = common_scripts\utility::_id_46B7("weapon_assembly_bench", "targetname");
+  var_0 = common_scripts\utility::getstructarray("weapon_assembly_bench", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::_id_44BE(var_2.target, "targetname");
@@ -3450,7 +3450,7 @@ razergun_bench_update_hint(var_0) {
   var_2 = 0;
   wait 1;
   var_3 = _id_0552::_id_7BE1(var_0, self, 0);
-  var_3._id_2F74 = 1;
+  var_3.disabled = 1;
   var_3._id_6642 = 1;
   var_4 = 0;
 
@@ -3458,31 +3458,31 @@ razergun_bench_update_hint(var_0) {
     waittillframeend;
     var_5 = var_0 wait_for_workbench_message();
 
-    if(common_scripts\utility::_id_3C77("razergun_infused")) {
+    if(common_scripts\utility::flag("razergun_infused")) {
       var_3 update_workbench_prompt_for(var_0, "razergun_zm", "razergun_saw_gun_buy_state");
       continue;
     }
 
-    if(common_scripts\utility::_id_3C77("razergun_charged")) {
-      var_3._id_2F74 = 0;
+    if(common_scripts\utility::flag("razergun_charged")) {
+      var_3.disabled = 0;
       var_3._id_6642 = 1;
       var_3._id_4028 = _id_0552::_id_44FF("razergun_saw_gun_infuse_state");
       continue;
     }
 
-    if(common_scripts\utility::_id_3C77("razergun_3_placed")) {
+    if(common_scripts\utility::flag("razergun_3_placed")) {
       var_4 = 0;
-      var_3._id_2F74 = 1;
+      var_3.disabled = 1;
       var_3._id_6642 = 1;
       continue;
     }
 
-    if(common_scripts\utility::_id_3C77("razergun_2_placed")) {
+    if(common_scripts\utility::flag("razergun_2_placed")) {
       var_6 = var_0 getcurrentweapon();
 
       if(issubstr(var_6, "spine_inspect") && !issubstr(var_6, "depleted")) {
         var_3._id_4028 = _id_0552::_id_44FF("razergun_saw_part_place");
-        var_3._id_2F74 = 0;
+        var_3.disabled = 0;
         var_3._id_401E = 0;
         var_4 = 1;
         var_3._id_6642 = 1;
@@ -3505,9 +3505,9 @@ razergun_bench_update_hint(var_0) {
 
 update_workbench_prompt_for(var_0, var_1, var_2) {
   if(common_scripts\utility::_id_0F79(var_0 getweaponlistall(), var_1)) {
-    self._id_2F74 = 1;
+    self.disabled = 1;
   } else {
-    self._id_2F74 = 0;
+    self.disabled = 0;
     self._id_4028 = _id_0552::_id_44FF(var_2);
     self._id_401E = var_0 get_razergun_cost_for_player(var_1);
   }
@@ -3548,19 +3548,19 @@ wait_for_workbench_message() {
 
 wait_for_player_message(var_0) {
   var_0 endon("message");
-  var_1 = common_scripts\utility::_id_A716("spine_collected", "spine_destroyed", "weapon_change", "new_equipment");
+  var_1 = common_scripts\utility::waittill_any_return_no_endon_death("spine_collected", "spine_destroyed", "weapon_change", "new_equipment");
   var_0 notify("message", var_1);
 }
 
 wait_for_level_message(var_0) {
   var_0 endon("message");
-  level common_scripts\utility::_id_A70A("razergun_1_placed", "razergun_2_placed", "razergun_3_placed", "razergun_charged", "razergun_infused");
+  level common_scripts\utility::waittill_any("razergun_1_placed", "razergun_2_placed", "razergun_3_placed", "razergun_charged", "razergun_infused");
   var_0 notify("message", "objective_update");
 }
 
 wait_for_ranged_weapon_reveal() {
   level endon("razergun_infused");
-  common_scripts\utility::_id_A70A("weapon_change", "new_equipment");
+  common_scripts\utility::waittill_any("weapon_change", "new_equipment");
 }
 
 razergun_bench_infuse() {
@@ -3577,15 +3577,15 @@ razergun_bench_charge() {
 
 razergun_bench_display_voltage() {
   self setscriptablepartstate("main", "off");
-  common_scripts\utility::_id_3C9F("razergun_half_charged");
+  common_scripts\utility::flag_wait("razergun_half_charged");
   self setscriptablepartstate("main", "mid_on");
   wait 2.86667;
   self setscriptablepartstate("main", "mid_on_idle");
-  common_scripts\utility::_id_3C9F("razergun_charged");
+  common_scripts\utility::flag_wait("razergun_charged");
   self setscriptablepartstate("main", "full_on");
   wait 3.03333;
   self setscriptablepartstate("main", "full_on_idle");
-  common_scripts\utility::_id_3C9F("razergun_infused");
+  common_scripts\utility::flag_wait("razergun_infused");
   self setscriptablepartstate("main", "discharge");
   wait 0.533333;
   self setscriptablepartstate("main", "off");
@@ -3595,12 +3595,12 @@ razergun_bench_assemble_think(var_0) {
   level endon("game_ended");
 
   for(;;) {
-    [var_2, var_3] = _id_0547::_id_A795();
+    [var_2, var_3] = _id_0547::waittilltriggerortokenuse();
 
     if(!isalive(var_2)) {
       continue;
     }
-    if(!common_scripts\utility::_id_3C77("razergun_3_placed")) {
+    if(!common_scripts\utility::flag("razergun_3_placed")) {
       if(!isDefined(var_2.spine_curret)) {
         if(!var_2 attempt_to_buy_razergun("razergun_melee_zm")) {
           continue;
@@ -3633,7 +3633,7 @@ razergun_bench_assemble_think(var_0) {
 }
 
 attempt_to_buy_razergun(var_0) {
-  return !common_scripts\utility::_id_0F79(self getweaponlistall(), var_0) && maps\mp\gametypes\zombies::_id_11C2(get_razergun_cost_for_player(var_0));
+  return !common_scripts\utility::_id_0F79(self getweaponlistall(), var_0) && maps\mp\gametypes\zombies::attempttobuy(get_razergun_cost_for_player(var_0));
 }
 
 show_razergun_instructions() {
@@ -3664,9 +3664,9 @@ nag_razergun_could_be_better() {
 }
 
 razergun_part_1_collected(var_0, var_1) {
-  level thread common_scripts\_exploder::_id_2A6D(222, undefined, 0);
+  level thread common_scripts\_exploder::deactivate_clientside_exploder(222, undefined, 0);
   common_scripts\utility::flag_set("players_have_razergun_2");
-  _id_0378::_id_8D74("ripsaw_collect_gun_chassis", var_1);
+  _id_0378::snd_message("ripsaw_collect_gun_chassis", var_1);
 
   if(isDefined(var_0)) {
     var_0 thread play_razergun_part_vo(1);
@@ -3674,9 +3674,9 @@ razergun_part_1_collected(var_0, var_1) {
 }
 
 razergun_part_2_collected(var_0, var_1) {
-  level thread common_scripts\_exploder::_id_2A6D(221, undefined, 0);
+  level thread common_scripts\_exploder::deactivate_clientside_exploder(221, undefined, 0);
   common_scripts\utility::flag_set("players_have_razergun_1");
-  _id_0378::_id_8D74("ripsaw_collect_saw_blade", var_1);
+  _id_0378::snd_message("ripsaw_collect_saw_blade", var_1);
 
   if(isDefined(var_0)) {
     var_0 thread play_razergun_part_vo();
@@ -3693,21 +3693,21 @@ play_razergun_part_vo(var_0) {
 
   wait 1.75;
 
-  if(common_scripts\utility::_id_3C77("players_have_razergun_1") && common_scripts\utility::_id_3C77("players_have_razergun_2")) {
+  if(common_scripts\utility::flag("players_have_razergun_1") && common_scripts\utility::flag("players_have_razergun_2")) {
     thread _id_0367::_id_8E3C("ripsaw_both");
   }
 }
 
 razergun_build_part(var_0, var_1, var_2) {
-  common_scripts\utility::_id_3C9F(var_2);
+  common_scripts\utility::flag_wait(var_2);
   self.assembly_trig thread razergun_wait_for_interact(var_1);
-  common_scripts\utility::_id_3C9F(var_1);
+  common_scripts\utility::flag_wait(var_1);
   var_0 show();
 
   if(var_0 == self.assembly_model_1) {
-    var_0 _id_0378::_id_8D74("ripsaw_insert_chassis");
+    var_0 _id_0378::snd_message("ripsaw_insert_chassis");
   } else if(var_0 == self.assembly_model_2) {
-    var_0 _id_0378::_id_8D74("ripsaw_insert_sawblade");
+    var_0 _id_0378::snd_message("ripsaw_insert_sawblade");
   }
 }
 
@@ -3737,14 +3737,14 @@ razergun_bench_all_parts_shown() {
 razergun_parts_collect() {
   razergun_blade_handle_pickup();
   razergun_stock_handle_pickup();
-  common_scripts\utility::_id_3CA0("players_have_razergun_1", "players_have_razergun_2");
+  common_scripts\utility::flag_wait_all("players_have_razergun_1", "players_have_razergun_2");
   _id_0557::_id_782D("explore_the_island", "Explore Pen");
 }
 
 add_zombie_part_glint(var_0, var_1, var_2) {
   var_3 = spawnStruct();
   var_3._id_3F74 = var_0;
-  var_3._id_378F = var_1;
+  var_3.ent = var_1;
   var_3._id_95AA = var_2;
   level thread maps\mp\_utility::_id_6F74(::handleplayerglintlookat, var_3);
   return var_3;
@@ -3758,14 +3758,14 @@ handleplayerglintlookat(var_0) {
   self endon("death");
   self endon("disconnect");
   toggle_glint_visiblity(var_0);
-  var_0._id_378F ghost();
-  _stopfxontagforclient(common_scripts\utility::_id_44F5(var_0._id_3F74), var_0._id_378F, var_0._id_95AA, self);
+  var_0.ent ghost();
+  _stopfxontagforclient(common_scripts\utility::getfx(var_0._id_3F74), var_0.ent, var_0._id_95AA, self);
 }
 
 toggle_glint_visiblity(var_0) {
   self endon("death");
   self endon("disconnect");
-  _playfxontagforclients(common_scripts\utility::_id_44F5(var_0._id_3F74), var_0._id_378F, var_0._id_95AA, self);
+  _playfxontagforclients(common_scripts\utility::getfx(var_0._id_3F74), var_0.ent, var_0._id_95AA, self);
   var_0 waittill("glint_removed");
 }
 
@@ -3775,7 +3775,7 @@ wait_for_player_facing(var_0, var_1, var_2) {
 
   for(;;) {
     waitframe();
-    var_3 = maps\mp\_utility::_id_3B8E(self, var_0, var_2);
+    var_3 = maps\mp\_utility::findisfacing(self, var_0, var_2);
 
     if(!var_1) {
       var_3 = !var_3;
@@ -3798,7 +3798,7 @@ razergun_blade_handle_pickup() {
 }
 
 sawblade_corpse_vo() {
-  common_scripts\utility::_id_3C9F("start_to_right_climb");
+  common_scripts\utility::flag_wait("start_to_right_climb");
   var_0 = _getEnt("grab_razergun_blade", "targetname");
 
   if(!isDefined(var_0)) {
@@ -3806,7 +3806,7 @@ sawblade_corpse_vo() {
   }
   var_0 endon("death");
 
-  while(!common_scripts\utility::_id_3C77("players_have_razergun_2")) {
+  while(!common_scripts\utility::flag("players_have_razergun_2")) {
     foreach(var_2 in level.players) {
       if(distance(var_2.origin, var_0.origin) > 250 || common_scripts\utility::_id_562E(var_2.islinked)) {
         continue;
@@ -3821,7 +3821,7 @@ sawblade_corpse_vo() {
 
 razergun_stock_handle_pickup() {
   var_0 = _getEnt("grab_razergun_stock", "targetname");
-  var_1 = common_scripts\utility::_id_46B7("ripsaw_frame_position", "script_noteworthy");
+  var_1 = common_scripts\utility::getstructarray("ripsaw_frame_position", "script_noteworthy");
   var_2 = common_scripts\utility::random(var_1);
   var_0.origin = var_2.origin;
   var_3 = spawn("script_model", var_2.origin);
@@ -3844,11 +3844,11 @@ razergun_part_give_on_pickup(var_0, var_1, var_2) {
 
   var_3 = add_zombie_part_glint("zmb_isl_rzgun_pickup_glint2", var_1, "tag_origin");
   self setHintString(&"ZOMBIE_ISLAND_PART_PICKUP");
-  self _meth_8660(1, var_1.origin);
+  self setdefaultcostumeifneeded(1, var_1.origin);
   self waittill("trigger", var_4);
   [[var_0]](var_4, var_1.origin);
   remove_zombie_part_glint(var_3);
-  common_scripts\utility::_id_9D9F();
+  common_scripts\utility::trigger_off();
 }
 
 ______________radio_____________() {}
@@ -3878,7 +3878,7 @@ quest_step_radio_find() {
   }
 
   _id_0367::snd_zmb_plr_dlg_play_line_on_each_player("airstrike_both");
-  common_scripts\utility::_id_3CA0("flag_radio_part_1_collected", "flag_radio_part_2_collected");
+  common_scripts\utility::flag_wait_all("flag_radio_part_1_collected", "flag_radio_part_2_collected");
   _id_0557::_id_782D("Interact with radio", "Find Missing Part");
 }
 
@@ -3896,7 +3896,7 @@ quest_step_crashed_plane_find() {
     var_1[var_1.size] = _getEnt(var_5.target, "targetname");
   }
 
-  common_scripts\utility::_id_3C9F("flag_radio_part_2_collected");
+  common_scripts\utility::flag_wait("flag_radio_part_2_collected");
   maps\mp\mp_zombie_island_ee_fog_manager::unlock_fog_from_lock();
 }
 
@@ -3913,7 +3913,7 @@ quest_step_radio_place() {
   }
 
   var_0 waittill("trigger", var_4);
-  var_0 _id_0378::_id_8D74("radio_parts_assemble");
+  var_0 _id_0378::snd_message("radio_parts_assemble");
   var_0 setHintString(&"ZOMBIES_EMPTY_STRING");
   show_radio();
   level thread radio_dialogue_tower(var_4);
@@ -3947,7 +3947,7 @@ radio_corpse_vo() {
     return;
   }
   var_0 endon("death");
-  common_scripts\utility::_id_3C9F("start_to_right_climb");
+  common_scripts\utility::flag_wait("start_to_right_climb");
 
   for(;;) {
     foreach(var_2 in level.players) {
@@ -3963,13 +3963,13 @@ radio_corpse_vo() {
 }
 
 blood_trail_vo() {
-  common_scripts\utility::_id_3C9F("start_to_right_climb");
-  var_0 = common_scripts\utility::_id_46B5("vo_blood_trail_point", "targetname");
+  common_scripts\utility::flag_wait("start_to_right_climb");
+  var_0 = common_scripts\utility::getstruct("vo_blood_trail_point", "targetname");
 
   if(!isDefined(var_0)) {
     return;
   }
-  while(!common_scripts\utility::_id_3C77("players_have_razergun_2")) {
+  while(!common_scripts\utility::flag("players_have_razergun_2")) {
     foreach(var_2 in level.players) {
       if(distance(var_2.origin, var_0.origin) > 1000 || !var_2 zombies_look_at(var_0) || common_scripts\utility::_id_562E(var_2.saw_blood_trail)) {
         continue;
@@ -3983,7 +3983,7 @@ blood_trail_vo() {
 }
 
 plane_wreckage_radio_vo() {
-  common_scripts\utility::_id_3C9F("flag_players_have_won");
+  common_scripts\utility::flag_wait("flag_players_have_won");
   var_0 = _getEnt("rope_box", "script_noteworthy");
 
   if(!isDefined(var_0)) {
@@ -3991,7 +3991,7 @@ plane_wreckage_radio_vo() {
   }
   var_0 endon("death");
 
-  while(!common_scripts\utility::_id_3C77("flag_radio_part_2_collected")) {
+  while(!common_scripts\utility::flag("flag_radio_part_2_collected")) {
     foreach(var_2 in level.players) {
       if(!var_2 zombies_look_at(var_0) || common_scripts\utility::_id_562E(var_2.saw_wreckage_radio)) {
         continue;
@@ -4040,7 +4040,7 @@ show_radio() {
 
 radio_dialogue_tower(var_0) {
   var_0 _id_0367::_id_8E3C("radiotransmission", level.players);
-  var_1 = common_scripts\utility::_id_46B5("struct_radio_dialogue", "targetname");
+  var_1 = common_scripts\utility::getstruct("struct_radio_dialogue", "targetname");
   var_2 = spawn("script_model", var_1.origin);
   var_2 setModel("tag_origin");
   var_2.radio_talk_snd = _id_0380::_id_288B("zmb_isla_comd_altyourmessagehasbeenrece", undefined, var_2);
@@ -4070,7 +4070,7 @@ artillery_zombie_listener(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   if(_id_0547::_id_5565(level.escort_bomber, self)) {
     level.escort_bomber = undefined;
 
-    if(common_scripts\utility::_id_3C77("flag_hc_bomb_escort_complete")) {
+    if(common_scripts\utility::flag("flag_hc_bomb_escort_complete")) {
       _id_0547::_id_2D8C(::artillery_zombie_listener);
     }
   }
@@ -4099,7 +4099,7 @@ quest_step_get_destroyer1_hits() {
 }
 
 quest_step_charge_artillery_ammo() {
-  common_scripts\utility::_id_3C9F("flag_destroyers_quest_complete");
+  common_scripts\utility::flag_wait("flag_destroyers_quest_complete");
   _id_0557::_id_782D("Artillery Ammo", "Charge Artillery Ammo");
 }
 
@@ -4113,11 +4113,11 @@ summon_artillery_loader_control_think() {
   var_1 = _getscriptablearray("zombie_loader_control", "targetname");
 
   for(;;) {
-    common_scripts\utility::_id_3C9F("flag_crane_in_motion");
+    common_scripts\utility::flag_wait("flag_crane_in_motion");
     var_0 setHintString(&"ZOMBIE_ISLAND_SUMMON_ARTILLERY_LOADER_UNAVAILABLE");
     self.issighted thread activate_machine();
 
-    while(common_scripts\utility::_id_3C77("flag_crane_in_motion")) {
+    while(common_scripts\utility::flag("flag_crane_in_motion")) {
       self.issighted setscriptablepartstate("light", "off");
       wait 0.5;
       self.issighted setscriptablepartstate("light", "green");
@@ -4128,18 +4128,18 @@ summon_artillery_loader_control_think() {
       self.issighted setscriptablepartstate("light", "red");
       maps\mp\zquests\casual\island_ee_util::wait_one_round_bomber();
 
-      while(level.freezer_crane._id_931A == "request_retrieve") {
+      while(level.freezer_crane.state == "request_retrieve") {
         waitframe();
       }
 
       common_scripts\utility::flag_waitopen("flag_crane_in_motion");
     }
 
-    if(common_scripts\utility::_id_3C77("flag_loader_zombie_unavailable")) {
+    if(common_scripts\utility::flag("flag_loader_zombie_unavailable")) {
       common_scripts\utility::flag_waitopen("flag_loader_zombie_unavailable");
     }
 
-    var_2 = self.issighted _meth_866B("light");
+    var_2 = self.issighted setdot_origin("light");
     var_0 setHintString(&"ZOMBIE_ISLAND_SUMMON_ARTILLERY_LOADER");
 
     if(var_2 != "green") {
@@ -4156,7 +4156,7 @@ activate_machine() {
 
 ambient_straub_pa_dialog() {
   level endon("flag_destroyers_quest_complete");
-  common_scripts\utility::_id_3C9F("spawn_ships_straub_monologue_complete");
+  common_scripts\utility::flag_wait("spawn_ships_straub_monologue_complete");
   thread maps\mp\mp_zombie_island_straub_pa_events::ambient_straub_pa_dialog_cleanup();
   wait 100;
   maps\mp\mp_zombie_island_straub_pa_events::play_straub_story_5();
@@ -4173,10 +4173,10 @@ spawn_bomber_escort_setup() {
   var_3 = _getEnt("trig_control_interact_call_bomber", "script_noteworthy");
 
   if(isDefined(var_3.target)) {
-    var_3.face_targ = common_scripts\utility::_id_46B5(var_3.target, "targetname");
+    var_3.face_targ = common_scripts\utility::getstruct(var_3.target, "targetname");
 
     if(isDefined(var_3.face_targ)) {
-      var_3 _meth_8660(1, var_3.face_targ.origin);
+      var_3 setdefaultcostumeifneeded(1, var_3.face_targ.origin);
     }
 
     var_4 = _getscriptablearray(var_3.target, "targetname");
@@ -4186,53 +4186,53 @@ spawn_bomber_escort_setup() {
       var_3.issighted setscriptablepartstate("light", "green");
     }
 
-    var_3 common_scripts\utility::_id_3799("freezer_machine_working");
+    var_3 common_scripts\utility::ent_flag_init("freezer_machine_working");
     var_3 thread summon_artillery_loader_control_think();
   }
 
-  while(!isDefined(level._id_A980) || level._id_A980 < 1) {
+  while(!isDefined(level.wavecounter) || level.wavecounter < 1) {
     wait 0.125;
   }
 
   var_5 = 0;
 
-  while(!common_scripts\utility::_id_3C77("flag_loader_complete")) {
-    var_3 common_scripts\utility::_id_9DA3();
+  while(!common_scripts\utility::flag("flag_loader_complete")) {
+    var_3 common_scripts\utility::trigger_on();
     var_3 waittill("trigger", var_6);
-    var_3 common_scripts\utility::_id_9D9F();
+    var_3 common_scripts\utility::trigger_off();
 
     if(!_id_0547::is_power_on(var_6)) {
       continue;
     }
-    if(common_scripts\utility::_id_3C77("flag_crane_in_motion") || level.freezer_crane._id_931A == "request_retrieve" || common_scripts\utility::_id_3C77("flag_loader_zombie_unavailable") || common_scripts\utility::_id_3C77("flag_bomber_wave_punished")) {
+    if(common_scripts\utility::flag("flag_crane_in_motion") || level.freezer_crane.state == "request_retrieve" || common_scripts\utility::flag("flag_loader_zombie_unavailable") || common_scripts\utility::flag("flag_bomber_wave_punished")) {
       continue;
     }
-    var_7 = level._id_A980;
+    var_7 = level.wavecounter;
     level notify("freezeer_summon_zombie", "escort_bomber");
 
     if(var_5 == 0) {
       _id_0367::snd_zmb_plr_dlg_play_line_on_each_player("freezer");
-      maps\mp\_utility::_id_2CED(5, _id_0367::snd_zmb_plr_dlg_play_line_on_each_player, "subpencrates2");
+      maps\mp\_utility::delaythread(5, _id_0367::snd_zmb_plr_dlg_play_line_on_each_player, "subpencrates2");
       var_5 = 1;
     }
 
-    if(common_scripts\utility::_id_3C77("flag_hc_bomb_escort_complete")) {
+    if(common_scripts\utility::flag("flag_hc_bomb_escort_complete")) {
       level waittill("freezer_zombie_placed", var_8);
       waittill_ent_death_timeout(var_8, "death", 120);
       continue;
     }
 
     common_scripts\utility::flag_set("flag_loader_zombie_unavailable");
-    var_3 common_scripts\utility::_id_379A("freezer_machine_working");
+    var_3 common_scripts\utility::ent_flag_set("freezer_machine_working");
     level waittill("freezer_zombie_placed", var_8);
     maps\mp\mp_zombie_nest_ee_wave_manipulation::_id_8606();
     var_8 thread set_zone_locked_on_me();
     level.maxed_zombies_sprint = 1;
     var_8 thread make_noise();
-    var_3 common_scripts\utility::_id_3796("freezer_machine_working");
+    var_3 common_scripts\utility::ent_flag_clear("freezer_machine_working");
 
     if(common_scripts\utility::_id_562E(var_2)) {
-      var_6 maps\mp\_utility::_id_2CED(1.25, _id_0367::_id_8E3D, "shipbomber");
+      var_6 maps\mp\_utility::delaythread(1.25, _id_0367::_id_8E3D, "shipbomber");
     }
 
     var_2 = 0;
@@ -4245,7 +4245,7 @@ spawn_bomber_escort_setup() {
     if(isDefined(var_9) && var_9 == 1) {
       level.escort_bomber on_reached_dest();
       var_3 setHintString("");
-      common_scripts\utility::_id_3C7B("flag_loader_zombie_unavailable");
+      common_scripts\utility::flag_clear("flag_loader_zombie_unavailable");
       common_scripts\utility::flag_set("flag_loader_complete");
       continue;
     }
@@ -4255,7 +4255,7 @@ spawn_bomber_escort_setup() {
       level.escort_bomber = undefined;
     }
 
-    common_scripts\utility::_id_3C7B("flag_loader_zombie_unavailable");
+    common_scripts\utility::flag_clear("flag_loader_zombie_unavailable");
     continue;
   }
 }
@@ -4286,7 +4286,7 @@ do_artillery_bomber_hitreaction(var_0, var_1, var_2, var_3, var_4, var_5, var_6)
   if(isPlayer(var_6)) {
     return;
   }
-  thread maps\mp\agents\humanoid\_humanoid::_id_32B0(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
+  thread maps\mp\agents\humanoid\_humanoid::dostophitreaction(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
 }
 
 set_zone_locked_on_me() {
@@ -4301,7 +4301,7 @@ wait_for_termination() {
   level endon("cancel_zone_lock");
 
   while(self.lockzoneonme) {
-    level.zmb_locked_spawn_zones = [get_escort_pressure_zone(_id_055A::_id_4562(self.origin))];
+    level.zmb_locked_spawn_zones = [get_escort_pressure_zone(_id_055A::getlocationzone(self.origin))];
     wait 0.125;
   }
 }
@@ -4312,7 +4312,7 @@ get_escort_pressure_zone(var_0) {
 
   for(var_3 = 0; var_3 < var_1.size; var_3++) {
     if(_id_0547::_id_5565(var_0, var_1[var_3])) {
-      return common_scripts\utility::_id_98E7(var_3 == var_1.size - 1, var_1[var_1.size - 1], var_1[var_3 + 1]);
+      return common_scripts\utility::ter_op(var_3 == var_1.size - 1, var_1[var_1.size - 1], var_1[var_3 + 1]);
     }
   }
 
@@ -4336,15 +4336,15 @@ setup_escort_bomber() {
   level.escort_bomber.ispassiveexempt = 1;
   level.escort_bomber._id_55AB = 1;
   level.escort_bomber.shouldnotpreventlaststand = 1;
-  level.escort_bomber maps\mp\agents\_agent_utility::hudoutlineenable(level._id_746E);
+  level.escort_bomber maps\mp\agents\_agent_utility::hudoutlineenable(level.playerteam);
   level.escort_bomber._id_00CE = 1;
-  level.escort_bomber _id_0547::_id_8A6D(1);
-  level.escort_bomber._id_6734 = 1;
+  level.escort_bomber _id_0547::setzombiesignoreme(1);
+  level.escort_bomber.nopickups = 1;
   waitframe();
   level.escort_bomber exploder_swap_bomb_for_uber();
   var_0 = int(get_difficulty_setting("zmb_escort_bomber_health"));
   self._id_3937._id_3F22 = 1;
-  level.escort_bomber maps\mp\agents\_agent_common::_id_83FD(int(var_0));
+  level.escort_bomber maps\mp\agents\_agent_common::set_agent_health(int(var_0));
   level.escort_bomber thread setup_escort_bomber_failsafe();
   level.escort_bomber thread the_classic_ee();
 }
@@ -4407,7 +4407,7 @@ tip_bomber_watch(var_0, var_1) {
 }
 
 _id_62D8(var_0) {
-  var_1 = _spawnfx(common_scripts\utility::_id_44F5("moneyCloud"), var_0);
+  var_1 = _spawnfx(common_scripts\utility::getfx("moneyCloud"), var_0);
   _triggerfx(var_1);
   wait 3;
   var_1 delete();
@@ -4416,7 +4416,7 @@ _id_62D8(var_0) {
 setup_escort_bomber_post_drop(var_0) {
   var_0._id_0009 = &"ZOMBIE_ISLAND_LOADER_ZOMBIE_NAME";
   var_0._id_00CE = 0;
-  var_0 _id_0547::_id_8A6D(0);
+  var_0 _id_0547::setzombiesignoreme(0);
   thread maps\mp\zquests\casual\island_ee_util::escort_health_display_start(var_0, -40);
   var_0 thread maps\mp\zquests\casual\island_ee_util::escort_health_display_death_listener();
   var_0 thread maps\mp\zquests\casual\island_ee_util::escort_health_display_damage_listener();
@@ -4444,9 +4444,9 @@ escort_plane_death_think() {
   var_0 endon("death");
   var_1 = _getEnt("vol_escort_bomber_death_setup", "targetname");
   var_2 = _getEnt("vol_escort_bomber_death_now", "targetname");
-  var_3 = common_scripts\utility::_id_46B5("struct_escort_killer", "targetname");
+  var_3 = common_scripts\utility::getstruct("struct_escort_killer", "targetname");
 
-  while(!common_scripts\utility::_id_3C77("flag_players_have_won")) {
+  while(!common_scripts\utility::flag("flag_players_have_won")) {
     if(!isDefined(var_1)) {
       break;
     }
@@ -4457,9 +4457,9 @@ escort_plane_death_think() {
       var_0 maps\mp\zquests\casual\island_ee_util::waittill_touching(var_2, 1);
       var_5 = spawn("script_model", var_3.origin);
       var_5 setModel("tag_origin");
-      var_5 common_scripts\utility::_id_3799("turret_on");
-      var_5 common_scripts\utility::_id_379A("turret_on");
-      var_5 _id_0378::_id_8D74("aud_plane_firing");
+      var_5 common_scripts\utility::ent_flag_init("turret_on");
+      var_5 common_scripts\utility::ent_flag_set("turret_on");
+      var_5 _id_0378::snd_message("aud_plane_firing");
 
       for(var_6 = 0; var_6 < 12; var_6++) {
         var_5.angles = vectortoangles(var_0.origin - var_5.origin);
@@ -4468,7 +4468,7 @@ escort_plane_death_think() {
         wait 0.2;
       }
 
-      var_5 common_scripts\utility::_id_3796("turret_on");
+      var_5 common_scripts\utility::ent_flag_clear("turret_on");
       waitframe();
       var_5 delete();
       var_0 suicide();
@@ -4479,28 +4479,28 @@ escort_plane_death_think() {
 }
 
 collect_bomber_waypoints_1() {
-  var_0 = common_scripts\utility::_id_46B5("artillery_bomber_waypoint_set1_1", "script_noteworthy");
+  var_0 = common_scripts\utility::getstruct("artillery_bomber_waypoint_set1_1", "script_noteworthy");
   var_1 = var_0 maps\mp\zquests\casual\island_ee_util::make_array_from_struct_chain();
   return var_1;
 }
 
 collect_bomber_waypoints_oberland() {
-  var_0 = common_scripts\utility::_id_46B5("artillery_bomber_goal", "script_noteworthy");
-  var_1 = common_scripts\utility::_id_46B5("artillery_bomber_waypoint_1a", "script_noteworthy");
-  var_2 = common_scripts\utility::_id_46B5("artillery_bomber_waypoint_1b", "script_noteworthy");
-  var_3 = common_scripts\utility::_id_46B5("artillery_bomber_waypoint_2a", "script_noteworthy");
-  var_4 = common_scripts\utility::_id_46B5("artillery_bomber_waypoint_2b", "script_noteworthy");
-  var_5 = common_scripts\utility::_id_46B5("artillery_bomber_waypoint_2c", "script_noteworthy");
-  var_6 = common_scripts\utility::_id_46B5("artillery_bomber_waypoint_3", "script_noteworthy");
-  var_7 = common_scripts\utility::_id_46B5("artillery_bomber_waypoint_4a", "script_noteworthy");
-  var_8 = common_scripts\utility::_id_46B5("artillery_bomber_waypoint_4b", "script_noteworthy");
+  var_0 = common_scripts\utility::getstruct("artillery_bomber_goal", "script_noteworthy");
+  var_1 = common_scripts\utility::getstruct("artillery_bomber_waypoint_1a", "script_noteworthy");
+  var_2 = common_scripts\utility::getstruct("artillery_bomber_waypoint_1b", "script_noteworthy");
+  var_3 = common_scripts\utility::getstruct("artillery_bomber_waypoint_2a", "script_noteworthy");
+  var_4 = common_scripts\utility::getstruct("artillery_bomber_waypoint_2b", "script_noteworthy");
+  var_5 = common_scripts\utility::getstruct("artillery_bomber_waypoint_2c", "script_noteworthy");
+  var_6 = common_scripts\utility::getstruct("artillery_bomber_waypoint_3", "script_noteworthy");
+  var_7 = common_scripts\utility::getstruct("artillery_bomber_waypoint_4a", "script_noteworthy");
+  var_8 = common_scripts\utility::getstruct("artillery_bomber_waypoint_4b", "script_noteworthy");
   var_9 = [var_0, var_8, var_7, var_6, var_5, var_4, var_3, var_2, var_1];
   return var_9;
 }
 
 on_reached_dest() {
   self endon("death");
-  var_0 = common_scripts\utility::_id_46B7("artillery_struct", "targetname");
+  var_0 = common_scripts\utility::getstructarray("artillery_struct", "targetname");
 
   foreach(var_2 in var_0) {
     var_2 maps\mp\zquests\casual\island_ee_util::add_ammo(1);
@@ -4508,7 +4508,7 @@ on_reached_dest() {
 
   common_scripts\utility::flag_set("flag_hc_bomb_escort_complete");
   maps\mp\mp_zombie_nest_ee_wave_manipulation::_id_8607();
-  _id_0378::_id_8D74("artillery_battery_placed");
+  _id_0378::snd_message("artillery_battery_placed");
 
   foreach(var_2 in var_0) {
     var_2 thread artillery_ammo_soul_collection();
@@ -4528,12 +4528,12 @@ escort_begin(var_0, var_1) {
 }
 
 spawn_ships() {
-  common_scripts\utility::_id_3C9F("spawn_ships_ee_destroyer_attacker");
+  common_scripts\utility::flag_wait("spawn_ships_ee_destroyer_attacker");
   level.artillery_ee_ships = ships_setup();
   thread ships_nag();
-  var_0 = common_scripts\utility::_id_46B7("org_boat_spawner_set1", "targetname");
-  var_1 = common_scripts\utility::_id_46B7("org_boat_spawner_set2", "targetname");
-  var_2 = common_scripts\utility::_id_46B7("org_boat_spawner_set3", "targetname");
+  var_0 = common_scripts\utility::getstructarray("org_boat_spawner_set1", "targetname");
+  var_1 = common_scripts\utility::getstructarray("org_boat_spawner_set2", "targetname");
+  var_2 = common_scripts\utility::getstructarray("org_boat_spawner_set3", "targetname");
   spawn_ship_and_move(common_scripts\utility::random(var_0), level.artillery_ee_ships[0], _randomfloatrange(35, 45));
 
   if(level.players.size > 2) {
@@ -4543,7 +4543,7 @@ spawn_ships() {
   }
 
   foreach(var_4 in level.players) {
-    var_4 maps\mp\_utility::_id_2CED(3, _id_0367::_id_8E3D, "shipnew");
+    var_4 maps\mp\_utility::delaythread(3, _id_0367::_id_8E3D, "shipnew");
   }
 
   spawn_ship_and_move(common_scripts\utility::random(var_2), level.artillery_ee_ships[0], _randomfloatrange(35, 45));
@@ -4555,7 +4555,7 @@ ships_setup() {
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::_id_44BE(var_2.target, "targetname");
     var_2.cannons = [];
-    var_2._id_241F = [];
+    var_2.clip = [];
     var_2.hit_points = [];
 
     foreach(var_5 in var_3) {
@@ -4569,7 +4569,7 @@ ships_setup() {
           var_2.boat_model linktosynchronizedparent(var_2);
           break;
         case "clip_boat":
-          var_2._id_241F[var_2._id_241F.size] = var_5;
+          var_2.clip[var_2.clip.size] = var_5;
           var_5 linktosynchronizedparent(var_2);
           break;
         case "org_cannon_1":
@@ -4593,19 +4593,19 @@ ships_setup() {
 
 spawn_ship_and_move(var_0, var_1, var_2) {
   var_3 = 3;
-  var_4 = common_scripts\utility::_id_46B5(var_0.target, "targetname");
+  var_4 = common_scripts\utility::getstruct(var_0.target, "targetname");
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
   var_1.in_motion = 1;
   var_1 moveTo(var_4.origin, var_2, 0, var_3);
 
-  if(!common_scripts\utility::_id_3C77("flag_first_ship_spawned")) {
+  if(!common_scripts\utility::flag("flag_first_ship_spawned")) {
     common_scripts\utility::flag_set("flag_first_ship_spawned");
     var_5 = common_scripts\utility::random(var_1.cannons);
     var_1 ship_fire_at_radio_tower(var_5);
 
     foreach(var_7 in level.players) {
-      var_7 maps\mp\_utility::_id_2CED(0.75, _id_0367::_id_8E3D, "shipwarn");
+      var_7 maps\mp\_utility::delaythread(0.75, _id_0367::_id_8E3D, "shipwarn");
     }
   }
 
@@ -4614,22 +4614,22 @@ spawn_ship_and_move(var_0, var_1, var_2) {
 }
 
 ship_fire_at_radio_tower(var_0) {
-  var_1 = common_scripts\utility::_id_46B5("struct_tower_boom_spot", "targetname").origin;
+  var_1 = common_scripts\utility::getstruct("struct_tower_boom_spot", "targetname").origin;
 
   if(isDefined(level.current_fog_flag) && maps\mp\mp_zombie_island_ee_fog_manager::get_is_fog_active()) {
-    playFX(common_scripts\utility::_id_44F5("zmb_battleship_cannon_muzzle_rnr"), var_0.origin);
+    playFX(common_scripts\utility::getfx("zmb_battleship_cannon_muzzle_rnr"), var_0.origin);
   } else {
-    playFX(common_scripts\utility::_id_44F5("zmb_battleship_cannon_muz_fog_rnr"), var_0.origin);
+    playFX(common_scripts\utility::getfx("zmb_battleship_cannon_muz_fog_rnr"), var_0.origin);
   }
 
-  var_0 _id_0378::_id_8D74("radio_tower_artillery_shot");
+  var_0 _id_0378::snd_message("radio_tower_artillery_shot");
   var_2 = _func_1B6("zmi_airstrike_bomb", var_0.origin, var_1, 3, var_1[2] + 2000);
-  var_2 _id_0378::_id_8D74("radio_tower_incoming_mortar");
+  var_2 _id_0378::snd_message("radio_tower_incoming_mortar");
   var_2 waittill("explode", var_3);
-  var_2 _id_0378::_id_8D74("radio_tower_mortar_impact");
+  var_2 _id_0378::snd_message("radio_tower_mortar_impact");
   wait 0.01;
-  playFX(common_scripts\utility::_id_44F5("zmb_radio_tower_explosion_rnr"), var_1, (-1, 0, 0));
-  _id_0378::_id_8D74("radio_tower_explosion", var_1);
+  playFX(common_scripts\utility::getfx("zmb_radio_tower_explosion_rnr"), var_1, (-1, 0, 0));
+  _id_0378::snd_message("radio_tower_explosion", var_1);
   wait 0.7;
   var_4 = _getEnt("sm_radio_tower", "targetname");
   var_4 scriptmodelplayanim("s2_zom_damaged_radio_tower", "tower_destroyed");
@@ -4653,14 +4653,14 @@ ship_clean_up() {
 
 sink_ship() {
   self moveTo(self.origin - (0, 0, 400), 6);
-  var_0 = common_scripts\utility::_id_8FFC();
+  var_0 = common_scripts\utility::spawn_tag_origin();
   var_0.origin = common_scripts\utility::random(self.cannons).origin;
   _playFXOnTag(level._effect["zmb_isl_ship_explosion_set"], var_0, "tag_origin");
   var_0 delete();
   wait 6;
   level notify("ship_sank");
   _id_0F7B(self.hit_points);
-  _id_0F7B(self._id_241F);
+  _id_0F7B(self.clip);
   _id_0F7B(self.cannons);
   self.boat_model delete();
   self delete();
@@ -4724,16 +4724,16 @@ fire_shell_at_player(var_0) {
   var_4 = maps\mp\zquests\casual\island_ee_util::random_2d_vector_safe_zone(self, var_1, var_2);
 
   if(isDefined(level.current_fog_flag) && maps\mp\mp_zombie_island_ee_fog_manager::get_is_fog_active()) {
-    playFX(common_scripts\utility::_id_44F5("zmb_battleship_cannon_muzzle_rnr"), var_0.origin);
+    playFX(common_scripts\utility::getfx("zmb_battleship_cannon_muzzle_rnr"), var_0.origin);
   } else {
-    playFX(common_scripts\utility::_id_44F5("zmb_battleship_cannon_muz_fog_rnr"), var_0.origin);
+    playFX(common_scripts\utility::getfx("zmb_battleship_cannon_muz_fog_rnr"), var_0.origin);
   }
 
-  var_0 _id_0378::_id_8D74("dist_artillery_shot");
+  var_0 _id_0378::snd_message("dist_artillery_shot");
   var_5 = _func_1B6("zmi_airstrike_bomb", var_0.origin, var_4, 3, level.player.origin[2] + 2000);
-  var_5 _id_0378::_id_8D74("dist_ship_artillery_inc");
+  var_5 _id_0378::snd_message("dist_ship_artillery_inc");
   var_5 waittill("explode", var_6);
-  var_5 _id_0378::_id_8D74("dist_ship_artillery_impact");
+  var_5 _id_0378::snd_message("dist_ship_artillery_impact");
   _playrumbleonposition("artillery_rumble", var_6);
   radiusdamage(var_6, 750, 50, 15, undefined, "MOD_PROJECTILE", "zmi_airstrike_bomb", 1);
   thread play_watchout_dialogue(var_6);
@@ -4742,7 +4742,7 @@ fire_shell_at_player(var_0) {
 destroyer_complete_xp_reward() {
   foreach(var_1 in level.players) {
     var_1 _id_054C::_id_AC23("destroyers");
-    var_1 _id_0378::_id_8D74("objective_complete", "destroyers");
+    var_1 _id_0378::snd_message("objective_complete", "destroyers");
   }
 }
 
@@ -4752,7 +4752,7 @@ ships_nag() {
   var_2 = _getEnt("vol_artillery_nag_deadzone", "targetname");
   level endon(_id_0557::_id_7838("Destroy 2nd Destroyer", "1st Ship Destroyed"));
 
-  while(common_scripts\utility::_id_3C77(_id_0557::_id_7838("Destroy 2nd Destroyer", "1st Ship Destroyed"))) {
+  while(common_scripts\utility::flag(_id_0557::_id_7838("Destroy 2nd Destroyer", "1st Ship Destroyed"))) {
     wait(_randomintrange(128, 256));
 
     if(var_0 < 2) {
@@ -4788,7 +4788,7 @@ waittill_ent_death_timeout_end(var_0) {
 }
 
 artillery_ammo_soul_collection() {
-  var_0 = common_scripts\utility::_id_46B5("zmb_island_artillery_soul_collection", "targetname");
+  var_0 = common_scripts\utility::getstruct("zmb_island_artillery_soul_collection", "targetname");
   self.soul_collection_ent = spawn("script_model", var_0.origin);
   self.soul_collection_ent setModel("tag_origin");
 
@@ -4817,7 +4817,7 @@ get_respawn_flag(var_0) {
 watch_assassin_bounty(var_0) {
   foreach(var_2 in var_0) {
     var_3 = get_bounty_flag(var_2);
-    common_scripts\utility::_id_3C9F(var_3);
+    common_scripts\utility::flag_wait(var_3);
   }
 
   common_scripts\utility::flag_set("bring_in_next_type");
@@ -4870,13 +4870,13 @@ on_final_boss_defeated() {
 }
 
 _id_744B() {
-  return common_scripts\utility::_id_3C77("flag_pommel_given");
+  return common_scripts\utility::flag("flag_pommel_given");
 }
 
 final_boss_island_complete_xp_reward() {
   foreach(var_1 in level.players) {
     var_1 _id_054C::_id_AC23("islandboss");
-    var_1 _id_0378::_id_8D74("objective_complete", "islandboss");
+    var_1 _id_0378::snd_message("objective_complete", "islandboss");
   }
 }
 
@@ -4912,7 +4912,7 @@ spawn_aircraft(var_0, var_1) {
   var_4._id_01C7 = "forward";
   var_4._id_01C1 = "forward";
   var_4._id_17DC = 0;
-  var_4._id_931A = "forward";
+  var_4.state = "forward";
   var_4 startpath(self);
 
   if(var_1) {
@@ -4966,18 +4966,18 @@ run_outro_for_player() {
   var_0 disableweapons();
   var_0 setclientomnvar("ui_hide_hud", 1);
   var_0 clientaddsoundsubmix("isl_outro_movie");
-  var_0._id_324E = 1;
-  var_0 _id_0547::_id_8A6D(1);
+  var_0.dontspeak = 1;
+  var_0 _id_0547::setzombiesignoreme(1);
   var_1 = 72.5;
   var_2 = 1;
   var_3 = 0;
   var_4 = 0.5;
   var_5 = "black";
-  var_6 = common_scripts\utility::_id_46B7("zmb_beach_test_spawns", "targetname");
+  var_6 = common_scripts\utility::getstructarray("zmb_beach_test_spawns", "targetname");
   var_7 = var_6[0].origin;
 
   if(!isDefined(var_0._id_1781)) {
-    var_0._id_1781 = maps\mp\zquests\casual\island_ee_util::_id_2787(var_5, 0, var_0, undefined);
+    var_0._id_1781 = maps\mp\zquests\casual\island_ee_util::create_client_overlay(var_5, 0, var_0, undefined);
   }
 
   var_8 = var_0._id_1781;
@@ -4994,8 +4994,8 @@ run_outro_for_player() {
   var_0 playershow();
   var_0 enableweapons();
   var_0 setclientomnvar("ui_hide_hud", 0);
-  var_0._id_324E = 0;
-  var_0 _id_0547::_id_8A6D(0);
+  var_0.dontspeak = 0;
+  var_0 _id_0547::setzombiesignoreme(0);
   var_0 clientclearsoundsubmix("isl_outro_movie");
   level notify("zombie_outro_finished");
 }
@@ -5051,7 +5051,7 @@ quest_step_final_boss_island() {
   level.free_cart_rides = 1;
   level.zmb_island_pommel_detor_blocked = 1;
   level.zmb_boss_fight_in_progress = 1;
-  common_scripts\utility::_id_3C9F("players_boss_spawn_done");
+  common_scripts\utility::flag_wait("players_boss_spawn_done");
   wait_for_island_boss_defeated();
   level.zmb_island_pommel_detor_blocked = 0;
   level.free_cart_rides = 0;
@@ -5077,7 +5077,7 @@ wait_for_players_at_beach() {
 
   if(_id_0547::_id_5565(level.zmb_uses_hint_notebook, 1)) {
     foreach(var_3 in level.players) {
-      maps\mp\_utility::_id_2CED(2, _id_0555::issprinting, "generic_no_return", var_3);
+      maps\mp\_utility::delaythread(2, _id_0555::issprinting, "generic_no_return", var_3);
     }
   }
 
@@ -5087,13 +5087,13 @@ wait_for_players_at_beach() {
     if(var_0 all_players_ready()) {
       break;
     } else {
-      var_0 common_scripts\utility::_id_9D9F();
+      var_0 common_scripts\utility::trigger_off();
       wait 0.2;
-      var_0 common_scripts\utility::_id_9DA3();
+      var_0 common_scripts\utility::trigger_on();
     }
   }
 
-  var_0 common_scripts\utility::_id_9D9F();
+  var_0 common_scripts\utility::trigger_off();
 }
 
 all_players_ready() {
@@ -5115,47 +5115,47 @@ all_players_ready() {
 }
 
 close_boss_battle_doors() {
-  foreach(var_1 in level._id_AC1D) {
+  foreach(var_1 in level.zombiedoors) {
     if(isDefined(var_1._id_3280) && var_1._id_3280 == "closeable") {
       var_1 notify("close");
     } else {
       var_1 notify("open");
     }
 
-    foreach(var_3 in var_1._id_9DC2) {
-      var_3 common_scripts\utility::_id_9D9F();
+    foreach(var_3 in var_1.triggers) {
+      var_3 common_scripts\utility::trigger_off();
     }
   }
 }
 
 open_boss_battle_doors() {
-  foreach(var_1 in level._id_AC1D) {
+  foreach(var_1 in level.zombiedoors) {
     if(isDefined(var_1._id_3280) && var_1._id_3280 == "closeable") {
       var_1 notify("open");
     }
 
-    foreach(var_3 in var_1._id_9DC2) {
-      var_3 common_scripts\utility::_id_9DA3();
+    foreach(var_3 in var_1.triggers) {
+      var_3 common_scripts\utility::trigger_on();
     }
   }
 }
 
 wait_for_island_boss_defeated() {
   common_scripts\utility::flag_init("intro_boss_done");
-  var_0 = common_scripts\utility::_id_46B5("zmb_island_boss_ammo", "targetname");
-  var_1 = common_scripts\utility::_id_46B7(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getstruct("zmb_island_boss_ammo", "targetname");
+  var_1 = common_scripts\utility::getstructarray(var_0.target, "targetname");
 
   foreach(var_3 in var_1) {
     maps\mp\gametypes\zombies::_id_281C("ammo", var_3.origin, "random", 0, 0);
   }
 
   if(level.zmi_final_boss_settings["phase_2_mercy"]) {
-    var_5 = common_scripts\utility::_id_46B5("zmb_final_boss_overcharge_giveaway", "targetname");
+    var_5 = common_scripts\utility::getstruct("zmb_final_boss_overcharge_giveaway", "targetname");
     maps\mp\gametypes\zombies::_id_281C("ability_fill", var_5.origin, "random", 0, 0);
   }
 
-  var_6 = common_scripts\utility::_id_46B7("zmb_island_boss_intro_zombies", "targetname");
-  var_7 = common_scripts\utility::_id_46B5("zmb_island_boss_intro_zombies_freefire_target", "targetname");
+  var_6 = common_scripts\utility::getstructarray("zmb_island_boss_intro_zombies", "targetname");
+  var_7 = common_scripts\utility::getstruct("zmb_island_boss_intro_zombies_freefire_target", "targetname");
   var_6 = common_scripts\utility::_id_0F6F(var_6, var_7);
 
   foreach(var_9 in var_6) {
@@ -5168,23 +5168,23 @@ wait_for_island_boss_defeated() {
 
   var_13 = spawnStruct();
   var_13._id_3F11 = [::wait_for_shellshock_ready];
-  var_14 = common_scripts\utility::_id_46B5("zmb_assassin_spawnpoint_boss_intro_shellshock", "targetname");
+  var_14 = common_scripts\utility::getstruct("zmb_assassin_spawnpoint_boss_intro_shellshock", "targetname");
   var_15 = maps\mp\zombies\zombie_assassin_spawner_logic::spawn_an_assassin("zombie_assassin_shellshock", 99999, var_14, 1, "Phase 3: ATTACK", 1, undefined, undefined, var_13, 1, undefined, ["start_zone"]);
   var_15.nochill = 1;
   var_15.custom_on_shellshock_func = maps\mp\zombies\zombie_assassin_shellshock::throw_debris;
   var_15 thread set_attack_in(0, 4, "zmb_final_boss_intro_goal_shellshock");
-  var_16 = common_scripts\utility::_id_46B5("zmb_assassin_spawnpoint_boss_intro_freefire", "targetname");
+  var_16 = common_scripts\utility::getstruct("zmb_assassin_spawnpoint_boss_intro_freefire", "targetname");
   var_15 = maps\mp\zombies\zombie_assassin_spawner_logic::spawn_an_assassin("zombie_assassin_freefire", 99999, var_16, 1, "Phase 3: ATTACK", 1, undefined, undefined, var_13, 1, undefined, ["start_zone"]);
   var_15.nochill = 1;
   var_15.forcedtarget = var_7;
   var_15 thread set_attack_in(0, 1.8, "zmb_final_boss_intro_goal_freefire");
   common_scripts\utility::flag_init("asn_players_are_blinded");
-  var_17 = common_scripts\utility::_id_46B5("zmb_assassin_spawnpoint_boss_intro_camo", "targetname");
+  var_17 = common_scripts\utility::getstruct("zmb_assassin_spawnpoint_boss_intro_camo", "targetname");
   var_15 = maps\mp\zombies\zombie_assassin_spawner_logic::spawn_an_assassin("zombie_assassin_camoflauge", 99999, var_17, 1, "Phase 3: ATTACK", 1, undefined, undefined, var_13, 1, undefined, ["start_zone"]);
   var_15.nochill = 1;
   var_15 thread set_attack_in(6.1, 0, "zmb_final_boss_intro_goal_camo");
   level thread set_intro_done();
-  common_scripts\utility::_id_3C9F("asn_players_are_blinded");
+  common_scripts\utility::flag_wait("asn_players_are_blinded");
 
   foreach(var_9 in level.zmb_isl_conditional_boss_spawns) {
     var_9.is_zombies_spawner_script_disabled = 1;
@@ -5192,7 +5192,7 @@ wait_for_island_boss_defeated() {
 
   foreach(var_21 in level.zmb_island_final_boss_phases) {
     level thread maps\mp\zquests\casual\island_ee_final_boss::start_zombie_island_boss_phase(var_21);
-    common_scripts\utility::_id_3C9F(var_21.phase_flag);
+    common_scripts\utility::flag_wait(var_21.phase_flag);
   }
 
   foreach(var_9 in level.zmb_isl_conditional_boss_spawns) {
@@ -5216,14 +5216,14 @@ set_attack_in(var_0, var_1, var_2) {
   self.leaveafterspecial = 1;
   self.noflurry = 1;
   self scragentsetscripted(1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "idle_noncombat");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "idle_noncombat");
   maps\mp\agents\_scripted_agent_anim_util::isenemyaware("idle_asn", 1, 1.0);
   self.bossintroassassin = 1;
   self.preformingbossintro = 1;
-  self._id_1928 = common_scripts\utility::_id_46B5(var_2, "targetname");
+  self._id_1928 = common_scripts\utility::getstruct(var_2, "targetname");
   wait(var_0);
   self scragentsetscripted(0);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "idle_noncombat");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "idle_noncombat");
   wait(var_1);
   self.bossintroassassin = 0;
   self.preformingbossintro = 0;
@@ -5236,7 +5236,7 @@ set_attack_in(var_0, var_1, var_2) {
 
   wait 0.15;
   self._id_1928 = undefined;
-  common_scripts\utility::_id_3C9F("asn_players_are_blinded");
+  common_scripts\utility::flag_wait("asn_players_are_blinded");
   self setOrigin((0, 0, 0));
   maps\mp\zombies\zombie_assassin_spawner_logic::set_assassin_removed_from_game();
 }
@@ -5269,7 +5269,7 @@ boss_ammo_pickup(var_0) {
 }
 
 initialize_intro_struct() {
-  var_0 = common_scripts\utility::_id_46B5("final_boss_intro_struct", "targetname");
+  var_0 = common_scripts\utility::getstruct("final_boss_intro_struct", "targetname");
   var_1 = common_scripts\utility::_id_44BE(var_0.target, "targetname");
   var_0.assassin_spawners = [];
 
@@ -5280,7 +5280,7 @@ initialize_intro_struct() {
         break;
       case "intro_cam_temp":
         var_0.intro_cam = var_3;
-        var_0.intro_dest = common_scripts\utility::_id_46B5(var_3.target, "targetname");
+        var_0.intro_dest = common_scripts\utility::getstruct(var_3.target, "targetname");
         break;
     }
   }
@@ -5338,8 +5338,8 @@ in_game_cinematic(var_0, var_1, var_2) {
     var_4 playerlinktoabsolute(level._id_7317, "tag_player");
   }
 
-  var_6 = common_scripts\utility::_id_46B5(var_1, "targetname");
-  var_7 = common_scripts\utility::_id_46B5(var_6.target, "targetname");
+  var_6 = common_scripts\utility::getstruct(var_1, "targetname");
+  var_7 = common_scripts\utility::getstruct(var_6.target, "targetname");
   level._id_7317.origin = var_6.origin;
   level._id_7317.angles = var_6.angles;
   level._id_7317 moveTo(var_7.origin, var_2);
@@ -5350,7 +5350,7 @@ flourish_assassins() {}
 
 destroyer_sink() {
   var_0 = _getEnt("last_destroyer", "targetname");
-  var_1 = common_scripts\utility::_id_46B5(var_0.target, "targetname");
+  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
   var_0 moveTo(var_1.origin, 10);
   var_0 rotateTo(var_1.angles, 10);
 }
@@ -5434,5 +5434,5 @@ show_parts() {
 }
 
 assassin_part_collected() {
-  return common_scripts\utility::_id_3C77("players_have_razergun_3");
+  return common_scripts\utility::flag("players_have_razergun_3");
 }

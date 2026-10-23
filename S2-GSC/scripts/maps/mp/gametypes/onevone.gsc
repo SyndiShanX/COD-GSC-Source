@@ -9,9 +9,9 @@ main() {
   _id_04D4::setupcallbacks();
 
   if(_isusingmatchrulesdata()) {
-    level._id_5300 = ::_id_5300;
-    [[level._id_5300]]();
-    level thread maps\mp\_utility::_id_7C13();
+    level.initializematchrules = ::initializematchrules;
+    [[level.initializematchrules]]();
+    level thread maps\mp\_utility::reinitializematchrulesonmigration();
   } else {
     maps\mp\_utility::registertimelimitdvar(level.gametype, 3);
     maps\mp\_utility::registerscorelimitdvar(level.gametype, 20);
@@ -20,25 +20,25 @@ main() {
     maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
     maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
     maps\mp\_utility::registerscorelimitdvar(level.gametype, 20);
-    level._id_6031 = 0;
-    level._id_6035 = 0;
+    level.matchrules_damagemultiplier = 0;
+    level.matchrules_vampirism = 0;
   }
 
-  _id_0511::_id_8751("game", "minimapHiddenWhileADS", 1);
+  _id_0511::settweakablevalue("game", "minimapHiddenWhileADS", 1);
   level._id_3992 = 0.5;
   level._id_606F = 7.0;
   level._id_09B7 = 0.0;
   level._id_6B1E = undefined;
-  level._id_6BAF = ::_id_6BAF;
-  level._id_6B5C = ::_id_6B5C;
+  level.onstartgametype = ::onstartgametype;
+  level.onnormaldeath = ::onnormaldeath;
   level._id_6B7F = ::_id_6B7F;
-  level._id_4696 = ::_id_4696;
-  level._id_6BA7 = ::_id_86E1;
+  level.getspawnpoint = ::getspawnpoint;
+  level.onspawnplayer = ::_id_86E1;
   level._id_6B7B = ::_id_6B7B;
-  level._id_6BB6 = ::_id_6BB6;
+  level.ontimelimit = ::ontimelimit;
 
-  if(level._id_6031 || level._id_6035) {
-    level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
+    level.modifyplayerdamage = maps\mp\gametypes\_damage::gamemodemodifyplayerdamage;
   }
 
   _setteammode("ffa");
@@ -51,8 +51,8 @@ main() {
   }
 }
 
-_id_5300() {
-  maps\mp\_utility::_id_8653(1);
+initializematchrules() {
+  maps\mp\_utility::setcommonrulesfrommatchrulesdata(1);
   _setdynamicdvar("scr_onevone_winlimit", 1);
   maps\mp\_utility::registerwinlimitdvar("onevone", 1);
   _setdynamicdvar("scr_onevone_roundlimit", 1);
@@ -61,7 +61,7 @@ _id_5300() {
   maps\mp\_utility::registerhalftimedvar("onevone", 0);
 }
 
-_id_6BAF() {
+onstartgametype() {
   _setclientnamemode("auto_change");
   maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_ONEVONE");
   maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_ONEVONE");
@@ -77,17 +77,17 @@ _id_6BAF() {
   maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_ONEVONE_HINT");
   maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_ONEVONE_HINT");
   _id_050D::_id_10E4();
-  level._id_A239 = 0;
+  level.usestartspawns = 0;
   var_0[0] = "onevone";
   _id_04D1::main(var_0);
-  level._id_7895 = 1;
-  level._id_7691 = 0;
-  level._id_7692 = 0;
-  level._id_17EF = 1;
+  level.quickmessagetoall = 1;
+  level.prematchperiod = 0;
+  level.prematchperiodend = 0;
+  level.blockweapondrops = 1;
   level thread _id_92EE();
 }
 
-_id_6B5C(var_0, var_1, var_2) {
+onnormaldeath(var_0, var_1, var_2) {
   var_3 = 0;
 
   foreach(var_5 in level.players) {
@@ -97,7 +97,7 @@ _id_6B5C(var_0, var_1, var_2) {
   }
 
   if(game["state"] == "postgame" && var_1.score >= var_3) {
-    var_1._id_3B4B = 1;
+    var_1.finalkill = 1;
   }
 }
 
@@ -115,10 +115,10 @@ _id_6B7F(var_0, var_1, var_2, var_3, var_4) {
 
     var_1._id_00E4++;
     var_1._id_0090 = var_1._id_00E4;
-    var_1 maps\mp\_utility::_id_867C(var_1._id_00E4);
+    var_1 maps\mp\_utility::setextrascore1(var_1._id_00E4);
     var_6 = var_5 * maps\mp\gametypes\_rank::getscoreinfovalue(var_0);
-    var_1 maps\mp\_utility::_id_867B(var_1._id_008F + var_6);
-    var_1 _id_04D2::_id_A161(var_1, var_6);
+    var_1 maps\mp\_utility::setextrascore0(var_1._id_008F + var_6);
+    var_1 _id_04D2::updatescorestatsffa(var_1, var_6);
     return var_5;
   }
 
@@ -137,7 +137,7 @@ _id_57BE(var_0) {
 
 _id_92EE() {
   level.timerstopped = 1;
-  level._id_9A13 = 1;
+  level.timerstoppedforgamemode = 1;
   level.timerpausetime = gettime();
   level._id_6B20 = 1;
 
@@ -380,7 +380,7 @@ _id_86E3(var_0, var_1) {
   if(level.gametype != "onevone" && ishqarenaingungame(var_0)) {
     return;
   }
-  var_2._id_6B15 = maps\mp\gametypes\_class::_id_44B4();
+  var_2._id_6B15 = maps\mp\gametypes\_class::getemptyloadout();
   var_2._id_6B21 = "maps/mp/gametypes/onevoneClassTable.csv";
   var_2._id_6B15["loadoutDivision"] = maps\mp\gametypes\_class::table_getdivision(var_2._id_6B21, var_0);
   var_2._id_6B15["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::_id_473C(maps\mp\gametypes\_class::table_getweapon(var_2._id_6B21, var_0, 0), 0);
@@ -521,7 +521,7 @@ _id_86E1(var_0) {
   if(!isDefined(var_0) || var_0) {
     self._id_00E4 = 0;
     self._id_0090 = self._id_00E4;
-    maps\mp\_utility::_id_867C(self._id_00E4);
+    maps\mp\_utility::setextrascore1(self._id_00E4);
   }
 
   if(isDefined(level._id_6B14) && level._id_6B14 > 0) {
@@ -531,7 +531,7 @@ _id_86E1(var_0) {
   if(!isDefined(level._id_6B15) && (!isDefined(level._id_6B1F) || !level._id_6B1F)) {
     maps\mp\_utility::freezecontrolswrapper(1);
     level waittill("onevoneClassCreated");
-    thread maps\mp\_utility::_id_3E90(0, 1.0);
+    thread maps\mp\_utility::freezecontrolswrapperwithdelay(0, 1.0);
   }
 
   if(level.players.size == 2) {
@@ -562,12 +562,12 @@ _id_86E1(var_0) {
   self.class = self.pers["class"];
   self.lastclass = self.pers["lastClass"];
   self._id_5DF2 = undefined;
-  maps\mp\gametypes\_class::_id_4790(self.team, self.class);
-  self._id_5DEE._id_5A62 = 0;
-  self._id_5DEE._id_5A63 = 0;
-  self._id_5DEE._id_5A64 = 0;
-  self._id_5DEE._id_5A65 = 0;
-  self._id_5DEE._id_59DA = 0;
+  maps\mp\gametypes\_class::giveloadout(self.team, self.class);
+  self.loadout._id_5A62 = 0;
+  self.loadout._id_5A63 = 0;
+  self.loadout._id_5A64 = 0;
+  self.loadout._id_5A65 = 0;
+  self.loadout._id_59DA = 0;
   thread _id_7B76();
 }
 
@@ -625,7 +625,7 @@ _id_4413(var_0, var_1, var_2) {
   return int(_min(var_3 + var_4 - var_2, var_1));
 }
 
-_id_6BB6() {
+ontimelimit() {
   level endon("game_ended");
 
   if(isDefined(level._id_6B23) && level._id_6B23) {
@@ -635,18 +635,18 @@ _id_6BB6() {
   var_0 = _id_46E9();
 
   if(!isDefined(var_0)) {
-    level._id_99F5 = 1;
+    level.timelimitoverride = 1;
 
     foreach(var_2 in level.players) {
       var_2 iprintlnbold("Next Kill Wins!");
     }
 
-    level common_scripts\utility::_id_A70C(level.players[0], "death", level.players[1], "death");
+    level common_scripts\utility::waittill_any_ents(level.players[0], "death", level.players[1], "death");
     var_0 = _id_46E9();
   }
 
-  level._id_3B5C = "none";
-  level thread maps\mp\gametypes\_gamelogic::_id_36B9(var_0, game["end_reason"]["time_limit_reached"]);
+  level.finalkillcam_winner = "none";
+  level thread maps\mp\gametypes\_gamelogic::endgame(var_0, game["end_reason"]["time_limit_reached"]);
 }
 
 _id_46E9() {
@@ -676,12 +676,12 @@ _id_46E9() {
 _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   self._id_00E4 = 0;
   self._id_0090 = self._id_00E4;
-  maps\mp\_utility::_id_867C(self._id_00E4);
+  maps\mp\_utility::setextrascore1(self._id_00E4);
 
   if(!isPlayer(var_1)) {
     return;
   }
-  if(maps\mp\gametypes\_damage::_id_56FA(self, var_1)) {
+  if(maps\mp\gametypes\_damage::isfriendlyfire(self, var_1)) {
     return;
   }
   if(var_1 == self) {
@@ -737,7 +737,7 @@ _id_479A() {
 _id_63F2() {
   level endon("game_ended");
   var_0 = getEntArray("minimap_corner", "targetname");
-  var_1 = _id_050D::_id_3B89(var_0[0].origin, var_0[1].origin);
+  var_1 = _id_050D::findboxcenter(var_0[0].origin, var_0[1].origin);
   level._id_6B14 = -20000;
   var_2 = -20000;
 
@@ -758,7 +758,7 @@ _id_63F2() {
   }
 }
 
-_id_4696(var_0) {
+getspawnpoint(var_0) {
   var_1 = self;
 
   if(!isDefined(var_1)) {
@@ -779,7 +779,7 @@ _id_4696(var_0) {
 
 _id_6FBC(var_0, var_1) {
   if(!isDefined(level._id_6B26)) {
-    level._id_6B26 = level._id_908C;
+    level._id_6B26 = level.spawnpoints;
     level._id_6B27 = [];
     level._id_6B28 = [];
 

@@ -15,9 +15,9 @@ african_set_0() {
   var_0 = self;
   var_1 = "african_set_0";
   level endon(var_1);
-  common_scripts\utility::_id_3C9F(_id_0557::_id_7838("quest_deathraven", "quest_deathraven_activate_rush"));
+  common_scripts\utility::flag_wait(_id_0557::_id_7838("quest_deathraven", "quest_deathraven_activate_rush"));
   level thread maps\mp\zquests\zmb_secret_challenges_util::register_on_player_dmg_func(maps\mp\zquests\zmb_secret_challenges_util::kill_hidden_challenge, var_1, maps\mp\zquests\zmb_secret_challenges_util::agent_is_zombie);
-  common_scripts\utility::_id_3C9F(_id_0557::_id_7838("quest_deathraven", "quest_deathraven_pickup_weap"));
+  common_scripts\utility::flag_wait(_id_0557::_id_7838("quest_deathraven", "quest_deathraven_pickup_weap"));
 
   if(self istouching(_getEnt("zone_gallery_deathravent_event", "targetname"))) {
     return 1;
@@ -58,8 +58,8 @@ african_set_3() {
   var_0 endon("disconnect");
   level endon("another_player_joined1");
   level childthread maps\mp\zquests\zmb_secret_challenges_util::fail_on_another_player_joined(self, "another_player_joined", 1);
-  common_scripts\utility::_id_3C9F("flag_boss_complete");
-  return level._id_A980 <= 25 && level.players.size == 1;
+  common_scripts\utility::flag_wait("flag_boss_complete");
+  return level.wavecounter <= 25 && level.players.size == 1;
 }
 
 african_set_4() {
@@ -124,14 +124,14 @@ wait_for_player_in_zone(var_0, var_1) {
 }
 
 outlaw_set_2() {
-  common_scripts\utility::_id_3C9F("moon_constellation_1_complete");
+  common_scripts\utility::flag_wait("moon_constellation_1_complete");
   var_0 = gettime() * 0.001;
 
-  while(gettime() * 0.001 - var_0 < 300 && !common_scripts\utility::_id_3C77("moon_constellation_3_complete")) {
+  while(gettime() * 0.001 - var_0 < 300 && !common_scripts\utility::flag("moon_constellation_3_complete")) {
     wait 1;
   }
 
-  if(common_scripts\utility::_id_3C77("moon_constellation_3_complete") && _id_0547::_id_5565(level.ravenweaponmanager["spike"]._id_0117, self)) {
+  if(common_scripts\utility::flag("moon_constellation_3_complete") && _id_0547::_id_5565(level.ravenweaponmanager["spike"]._id_0117, self)) {
     return 1;
   } else {
     return 0;
@@ -160,7 +160,7 @@ arabic_set_0() {
   var_0 = self;
   var_0 endon("disconnect");
 
-  while(!isDefined(level._id_A980) || level._id_A980 < 15) {
+  while(!isDefined(level.wavecounter) || level.wavecounter < 15) {
     waitframe();
   }
 
@@ -217,7 +217,7 @@ run_secret_challenges_kill_tracking(var_0, var_1, var_2, var_3, var_4, var_5, va
   }
 
   if(common_scripts\utility::_id_562E(self.throwingzombie)) {
-    var_9 = common_scripts\utility::_id_46B5("zmb_bloodraven_code_display", "targetname");
+    var_9 = common_scripts\utility::getstruct("zmb_bloodraven_code_display", "targetname");
 
     if(_distance2d(self.origin, var_9.origin) < 260) {
       level.zombie_slam_dunks++;

@@ -21,7 +21,7 @@ init() {
     return;
   }
   if(!var_1) {
-    if(maps\mp\_utility::_id_4571() == "mp_zombie_island" || maps\mp\_utility::_id_4571() == "mp_zombie_dnk" || maps\mp\_utility::_id_4571() == "mp_zombie_dnk_srv") {
+    if(maps\mp\_utility::getmapname() == "mp_zombie_island" || maps\mp\_utility::getmapname() == "mp_zombie_dnk" || maps\mp\_utility::getmapname() == "mp_zombie_dnk_srv") {
       apply_cosmetic_changes(1);
       level.zmb_additional_look_check = ::limit_oceanic_zombies;
     }
@@ -29,12 +29,12 @@ init() {
     return;
   }
 
-  if(!issubstr(maps\mp\_utility::_id_4571(), "mp_zombie")) {
+  if(!issubstr(maps\mp\_utility::getmapname(), "mp_zombie")) {
     return;
   }
   common_scripts\utility::_id_092C("mtx_fish_despawn", "vfx/map/mp_zombie_island/zmb_isl_beach_fish_flop_mtx7");
 
-  if(maps\mp\_utility::_id_4571() == "mp_zombie_island") {
+  if(maps\mp\_utility::getmapname() == "mp_zombie_island") {
     level thread run_fish_quest();
   }
 
@@ -138,12 +138,12 @@ spawn_pickupable_fish(var_0, var_1) {
     var_6 thread maps\mp\_events_z::contracts_report_player_picked_up_fish();
     var_6 thread maps\mp\gametypes\zombies::_id_4798(10);
 
-    if(!common_scripts\utility::_id_562E(var_6.foundafish) && maps\mp\_utility::_id_4571() == "mp_zombie_island") {
+    if(!common_scripts\utility::_id_562E(var_6.foundafish) && maps\mp\_utility::getmapname() == "mp_zombie_island") {
       _id_0555::issprinting("fish_single", var_6);
       var_6.foundafish = 1;
     }
 
-    _id_0378::_id_8D74("zmb_points_pickup", var_6.origin);
+    _id_0378::snd_message("zmb_points_pickup", var_6.origin);
     level.zmb_total_fish_collected++;
   }
 
@@ -164,7 +164,7 @@ fall_onto_ground(var_0, var_1) {
 
 remove_fish(var_0) {
   if(!common_scripts\utility::_id_562E(var_0)) {
-    playFX(common_scripts\utility::_id_44F5("mtx_fish_despawn"), self.origin);
+    playFX(common_scripts\utility::getfx("mtx_fish_despawn"), self.origin);
   }
 
   self ghost();
@@ -242,7 +242,7 @@ add_ocean_look(var_0) {
 
 has_body_model() {
   var_0 = ["zombie_assassin"];
-  return common_scripts\utility::_id_0F79(var_0, self._id_0A4B) || isDefined(self._id_18A8) && self._id_18A8.model == "";
+  return common_scripts\utility::_id_0F79(var_0, self._id_0A4B) || isDefined(self.body) && self.body.model == "";
 }
 
 run_fish_quest() {
@@ -269,7 +269,7 @@ run_fish_quest() {
   wait 3;
   var_1 moveTo(var_1.origin + (0, 0, 32), 6, 0, 1);
   var_1 thread vibrate_box();
-  var_1 _id_0547::_id_AC41(&"ZOMBIES_EMPTY_STRING", (0, 0, 16));
+  var_1 _id_0547::zombies_make_usable(&"ZOMBIES_EMPTY_STRING", (0, 0, 16));
   level thread maps\mp\_utility::_id_6F74(::collect_teslaguns, var_1);
 }
 

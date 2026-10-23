@@ -191,7 +191,7 @@ _id_4081(var_0, var_1, var_2) {
   if(isDefined(var_4)) {
     foreach(var_6 in var_4) {
       foreach(var_8 in var_6["anims"]) {
-        var_9 = _func_2CB(var_2, var_8);
+        var_9 = maps/_introscreen(var_2, var_8);
 
         if(!common_scripts\utility::_id_0F79(var_3, var_9)) {
           var_3[var_3.size] = var_9;
@@ -203,7 +203,7 @@ _id_4081(var_0, var_1, var_2) {
   return var_3;
 }
 
-_id_71FA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+playanimnatrateuntilnotetrack_safe(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("disconnect");
   self endon("death");
 
@@ -225,40 +225,40 @@ _id_71FA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     var_9 = var_9 * (1.0 / var_2);
-    childthread _id_678A(var_3, var_9, var_4);
+    childthread notetrack_timeout(var_3, var_9, var_4);
   }
 
-  _id_71F9(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
+  playanimnatrateuntilnotetrack(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
   self notify("Notetrack_Timeout");
 }
 
-_id_71FD(var_0, var_1, var_2, var_3, var_4, var_5) {
-  _id_71FA(var_0, var_1, 1.0, var_2, var_3, var_4, var_5);
+playanimnuntilnotetrack_safe(var_0, var_1, var_2, var_3, var_4, var_5) {
+  playanimnatrateuntilnotetrack_safe(var_0, var_1, 1.0, var_2, var_3, var_4, var_5);
 }
 
-_id_71F9(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+playanimnatrateuntilnotetrack(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   isenemyaware(var_0, var_1, var_2, var_6);
 
   if(!isDefined(var_4)) {
     var_4 = "end";
   }
 
-  _id_A79E(var_3, var_4, var_0, var_1, var_5);
+  waituntilnotetrack(var_3, var_4, var_0, var_1, var_5);
 }
 
-_id_A79F(var_0, var_1, var_2) {
+waituntilnotetrack_safe(var_0, var_1, var_2) {
   self endon("disconnect");
   self endon("death");
 
   if(isDefined(var_2)) {
-    childthread _id_678A(var_0, var_2, var_1);
+    childthread notetrack_timeout(var_0, var_2, var_1);
   }
 
-  _id_A79E(var_0, var_1);
+  waituntilnotetrack(var_0, var_1);
   self notify("Notetrack_Timeout");
 }
 
-_id_A79E(var_0, var_1, var_2, var_3, var_4) {
+waituntilnotetrack(var_0, var_1, var_2, var_3, var_4) {
   var_5 = gettime();
   var_6 = undefined;
   var_7 = undefined;
@@ -286,7 +286,7 @@ _id_A79E(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-_id_678A(var_0, var_1, var_2) {
+notetrack_timeout(var_0, var_1, var_2) {
   self notify("Notetrack_Timeout");
   self endon("Notetrack_Timeout");
   var_1 = max(0.05, var_1);
@@ -299,17 +299,17 @@ _id_678A(var_0, var_1, var_2) {
   }
 }
 
-_id_71F8(var_0, var_1, var_2, var_3) {
+playanimnatratefortime(var_0, var_1, var_2, var_3) {
   isenemyaware(var_0, var_1, var_2);
   wait(var_3);
 }
 
-_id_5ED7(var_0, var_1, var_2) {
+loop_anim_state_randomize(var_0, var_1, var_2) {
   for(;;) {
     var_3 = _id_7A35(var_0);
     isenemyaware(var_0, var_3, var_1);
     var_4 = _getanimlength(self getanimentry(var_0, var_3)) * (1.0 / var_1);
-    _id_A79F(var_2, "end", var_4);
+    waituntilnotetrack_safe(var_2, "end", var_4);
   }
 }
 
@@ -359,14 +359,14 @@ isenemyaware(var_0, var_1, var_2, var_3) {
 
   var_4 = self getanimentryname();
   self._id_28ED = _id_43C9(var_4);
-  _id_0378::_id_8D74("zombie_set_anim_state", var_0, var_4);
+  _id_0378::snd_message("zombie_set_anim_state", var_0, var_4);
 
   if(isDefined(self._id_1142)) {
     self thread[[self._id_1142]](var_0, var_1, var_2, var_3);
   }
 }
 
-_id_4416(var_0, var_1) {
+getangleindexvariable(var_0, var_1) {
   if(var_1 <= 1) {
     return 0;
   }
@@ -381,7 +381,7 @@ _id_4416(var_0, var_1) {
   }
 }
 
-_id_441C(var_0, var_1, var_2) {
+getanimscalefactors(var_0, var_1, var_2) {
   var_3 = _length2d(var_0);
   var_4 = var_0[2];
   var_5 = _length2d(var_1);
@@ -406,55 +406,55 @@ _id_441C(var_0, var_1, var_2) {
   }
 
   var_11 = spawnStruct();
-  var_11._id_AAE3 = var_7;
+  var_11.xy = var_7;
   var_11._id_01D9 = var_8;
   return var_11;
 }
 
-_id_6AFF(var_0, var_1) {
+onenteranimstate(var_0, var_1) {
   self notify("killanimscript");
 
-  if(isDefined(self._id_0EAD._id_6B2F[var_0])) {
-    self[[self._id_0EAD._id_6B2F[var_0]]]();
+  if(isDefined(self._id_0EAD.onexit[var_0])) {
+    self[[self._id_0EAD.onexit[var_0]]]();
   }
 
-  _id_38ED(var_0);
+  exitaistate(var_0);
 
-  if(!isDefined(self._id_0EAD._id_6AFE[var_1])) {
+  if(!isDefined(self._id_0EAD.onenter[var_1])) {
     return;
   }
   if(var_0 == var_1 && var_1 != "traverse") {
     return;
   }
   self._id_0BA4 = var_1;
-  _id_37B8(var_1);
-  self[[self._id_0EAD._id_6AFE[var_1]]]();
+  enteraistate(var_1);
+  self[[self._id_0EAD.onenter[var_1]]]();
 }
 
-_id_37B8(var_0) {
+enteraistate(var_0) {
   self._id_0BA4 = var_0;
 
   switch (var_0) {
     case "idle":
-      self._id_173C = 0;
+      self.bhasbadpath = 0;
       break;
     default:
       break;
   }
 }
 
-_id_38ED(var_0) {
+exitaistate(var_0) {
   switch (var_0) {
     default:
       break;
   }
 }
 
-_id_57E2() {
+isstatelocked() {
   return self._id_018F;
 }
 
-_id_8732(var_0, var_1) {
+setstatelocked(var_0, var_1) {
   self._id_018F = var_0;
 }
 
@@ -468,7 +468,7 @@ _id_43C9(var_0) {
       var_3 = getsubstr(var_2, 1);
       var_4 = int(var_3);
 
-      if(common_scripts\utility::_id_9AAD(var_4) == var_3) {
+      if(common_scripts\utility::tostring(var_4) == var_3) {
         return var_4;
       }
     }

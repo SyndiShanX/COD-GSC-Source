@@ -4,7 +4,7 @@
 **************************************/
 
 _id_5326() {
-  if(common_scripts\utility::_id_3C83("pap_in_use")) {
+  if(common_scripts\utility::flag_exist("pap_in_use")) {
     return;
   }
   common_scripts\utility::flag_init("pap_in_use");
@@ -64,7 +64,7 @@ _id_6E40(var_0) {
       var_8.is_pap_trigger = 1;
 
       if(_id_0547::_id_5819(var_8)) {
-        _id_0547::_id_8A4F(var_8, ::_id_10E1, ::_id_4D14);
+        _id_0547::setupusetriggerforclient(var_8, ::_id_10E1, ::_id_4D14);
       } else if(0) {
         var_8 setHintString(var_8._id_1DE6);
         var_8 setsecondaryhintstring(var_8._id_1DE5);
@@ -94,14 +94,14 @@ _id_6E41() {
   var_1 ghost();
 
   for(;;) {
-    [var_3, var_4] = _id_0547::_id_A795();
+    [var_3, var_4] = _id_0547::waittilltriggerortokenuse();
 
-    if(common_scripts\utility::_id_3C77("pap_in_use")) {
+    if(common_scripts\utility::flag("pap_in_use")) {
       continue;
     }
     var_5 = var_3 getcurrentprimaryweapon();
 
-    if(_id_0547::_id_57AF(var_5) || _id_0547::_id_5862(var_5) || _id_0547::iszombieconsumableweapon(var_5)) {
+    if(_id_0547::isrippedturretweapon(var_5) || _id_0547::_id_5862(var_5) || _id_0547::iszombieconsumableweapon(var_5)) {
       continue;
     }
     var_6 = _id_0547::_id_5868(var_5);
@@ -110,20 +110,20 @@ _id_6E41() {
       var_7 = self._id_6DE0;
 
       if(_id_0548::_id_4B6A(var_3, var_5)) {
-        _id_0548::_id_300A(var_3, 0);
+        _id_0548::displayfullammomessage(var_3, 0);
         continue;
       }
 
-      if(!var_3 maps\mp\gametypes\zombies::_id_11C2(var_7)) {
+      if(!var_3 maps\mp\gametypes\zombies::attempttobuy(var_7)) {
         var_3 thread _id_054E::_id_0695("needmoney");
         continue;
       }
 
-      var_3 thread _id_054E::_id_62D9();
-      _id_0548::_id_AC57(var_3, var_5);
+      var_3 thread _id_054E::moneyspend();
+      _id_0548::zombiesgiveammoandswitch(var_3, var_5);
       _id_0547::_id_4AE4(var_3, "pack_a_punch_ammo", var_7, var_5, "none");
 
-      if(!common_scripts\utility::_id_3C77("pap_in_use")) {
+      if(!common_scripts\utility::flag("pap_in_use")) {
         _playFXOnTag(level._effect["zmb_pack_a_punch_lathe_ammo"], self.issighted, "lathe_01");
       }
 
@@ -143,12 +143,12 @@ _id_6E41() {
 
     var_7 = int(self._id_6DE1);
 
-    if(!var_3 maps\mp\gametypes\zombies::_id_11C2(var_7)) {
+    if(!var_3 maps\mp\gametypes\zombies::attempttobuy(var_7)) {
       var_3 thread _id_054E::_id_0695("needmoney");
       continue;
     }
 
-    var_3 thread _id_054E::_id_62D9();
+    var_3 thread _id_054E::moneyspend();
     var_3 _id_0586::_id_0790(var_5);
 
     if(_id_0547::_id_5864(var_5) && !issubstr(var_5, "razergun")) {
@@ -168,8 +168,8 @@ _id_6E41() {
 
     _id_0547::_id_4AE4(var_3, "pack_a_punch", var_7, var_8, "none");
 
-    if(maps\mp\_utility::_id_4571() == "mp_zombie_nest_01") {
-      var_12 = var_3 maps\mp\gametypes\_playerlogic::_id_4005();
+    if(maps\mp\_utility::getmapname() == "mp_zombie_nest_01") {
+      var_12 = var_3 maps\mp\gametypes\_playerlogic::gather_spawn_weapons();
 
       if(!isDefined(var_3.magicboxweaponsrolled)) {
         var_3.magicboxweaponsrolled = [];
@@ -178,8 +178,8 @@ _id_6E41() {
       if(common_scripts\utility::_id_0F79(var_12, var_5) || !common_scripts\utility::_id_0F79(var_3.magicboxweaponsrolled, var_5)) {
         level._id_400E[level._id_400E.size] = ["survivalist_set 4 -1", var_3];
       }
-    } else if(maps\mp\_utility::_id_4571() == "mp_zombie_island") {
-      var_12 = var_3 maps\mp\gametypes\_playerlogic::_id_4005();
+    } else if(maps\mp\_utility::getmapname() == "mp_zombie_island") {
+      var_12 = var_3 maps\mp\gametypes\_playerlogic::gather_spawn_weapons();
 
       if(!isDefined(var_3.magicboxweaponsrolled)) {
         var_3.magicboxweaponsrolled = [];
@@ -210,16 +210,16 @@ _id_6E41() {
     level notify("pap_state_change");
     var_0 thread _id_7485(var_3);
     var_0 thread _id_9E21(var_3, var_8, var_3 _id_0586::_id_078B(var_5, undefined, undefined, 1));
-    common_scripts\utility::_id_A70C(var_0, "pap - player took gun", var_0, "pap - player timed out", var_3, "disconnect");
+    common_scripts\utility::waittill_any_ents(var_0, "pap - player took gun", var_0, "pap - player timed out", var_3, "disconnect");
 
     if(0) {
       self setsecondaryhintstring(self._id_1DE5);
     }
 
     _id_4D1D(self.issighted._id_586E);
-    common_scripts\utility::_id_3C7B("pap_weapon_ready");
+    common_scripts\utility::flag_clear("pap_weapon_ready");
     self._id_738D = undefined;
-    common_scripts\utility::_id_3C7B("pap_in_use");
+    common_scripts\utility::flag_clear("pap_in_use");
     level notify("pap_state_change");
   }
 }
@@ -242,7 +242,7 @@ _id_9E21(var_0, var_1, var_2) {
   }
 
   var_3 notify("pap - player took gun");
-  var_0 common_scripts\utility::_id_379A("flag_player_has_paped");
+  var_0 common_scripts\utility::ent_flag_set("flag_player_has_paped");
   var_0 _id_6E46(var_1);
 
   if(issubstr(var_1, "austen")) {
@@ -307,7 +307,7 @@ _id_42A5() {
 
 _id_10E1(var_0) {
   var_0 endon("disconnect");
-  var_0 common_scripts\utility::_id_3799("flag_player_has_paped");
+  var_0 common_scripts\utility::ent_flag_init("flag_player_has_paped");
   thread _id_6E43(var_0);
   thread _id_8C10(var_0);
   thread _id_6E45(var_0);
@@ -326,7 +326,7 @@ setexomeleechargevalid(var_0, var_1) {
   var_5.origin = (var_5.origin[0], var_5.origin[1], var_4[2]);
 
   if(!isDefined(level._id_6DDD)) {
-    level._id_6DDD = var_5 common_scripts\utility::_id_8FFC();
+    level._id_6DDD = var_5 common_scripts\utility::spawn_tag_origin();
   }
 
   self._id_6DDD = level._id_6DDD;
@@ -442,7 +442,7 @@ _id_21BD(var_0, var_1) {
   var_0 endon("disconnect");
 
   for(;;) {
-    var_0 common_scripts\utility::_id_A70A("weapon_change", "new_equipment");
+    var_0 common_scripts\utility::waittill_any("weapon_change", "new_equipment");
     _id_6E44(var_0, var_1);
   }
 }
@@ -460,7 +460,7 @@ _id_6E44(var_0, var_1) {
   wait 0.1;
   var_2 = 0;
   var_3 = "none";
-  var_4 = _id_0547::_id_462A(var_0);
+  var_4 = _id_0547::getplayerweaponzombies(var_0);
 
   if(var_4 != "none") {
     var_3 = _getweaponbasename(var_4);
@@ -478,12 +478,12 @@ _id_6E44(var_0, var_1) {
     var_1.interact_disabled = undefined;
   }
 
-  if(common_scripts\utility::_id_3C77("pap_weapon_ready") && isDefined(self._id_738D) && self._id_738D == var_0) {
+  if(common_scripts\utility::flag("pap_weapon_ready") && isDefined(self._id_738D) && self._id_738D == var_0) {
     if(1) {
       var_1._id_6F58 = "pack_pick";
       var_1._id_6F56 = 0;
     }
-  } else if(common_scripts\utility::_id_3C77("pap_in_use")) {
+  } else if(common_scripts\utility::flag("pap_in_use")) {
     self._id_3006 = undefined;
 
     if(0) {
@@ -496,7 +496,7 @@ _id_6E44(var_0, var_1) {
       var_1.interact_disabled = 1;
       var_1._id_6F56 = 0;
     }
-  } else if(_id_0547::_id_57AF(var_4) || _id_0547::_id_5862(var_4) || _id_0547::iszombieconsumableweapon(var_4) || _id_0547::_id_585B(var_4) || _id_0547::_id_5864(var_4) && !ispappablemeleeweapon(var_4) || issubstr(var_4, "tesla") && (!common_scripts\utility::_id_3C83("teslagun_punch_active") || common_scripts\utility::_id_3C83("teslagun_punch_active") && !common_scripts\utility::_id_3C77("teslagun_punch_active")) || issubstr(var_4, "razergun_melee_zm")) {
+  } else if(_id_0547::isrippedturretweapon(var_4) || _id_0547::_id_5862(var_4) || _id_0547::iszombieconsumableweapon(var_4) || _id_0547::_id_585B(var_4) || _id_0547::_id_5864(var_4) && !ispappablemeleeweapon(var_4) || issubstr(var_4, "tesla") && (!common_scripts\utility::flag_exist("teslagun_punch_active") || common_scripts\utility::flag_exist("teslagun_punch_active") && !common_scripts\utility::flag("teslagun_punch_active")) || issubstr(var_4, "razergun_melee_zm")) {
     self._id_3006 = undefined;
 
     if(0) {
@@ -542,7 +542,7 @@ _id_6E44(var_0, var_1) {
 
 ispappablemeleeweapon(var_0) {
   if(var_0 == "zom_dlc2_3_zm" || var_0 == "zom_dlc2_2_zm" || var_0 == "zom_dlc2_1_zm") {
-    if(common_scripts\utility::_id_3C83("dlc2_melee_packable") && common_scripts\utility::_id_3C77("dlc2_melee_packable")) {
+    if(common_scripts\utility::flag_exist("dlc2_melee_packable") && common_scripts\utility::flag("dlc2_melee_packable")) {
       return 1;
     }
   }
@@ -605,7 +605,7 @@ _id_86EE(var_0) {
 }
 
 _id_6E46(var_0) {
-  maps\mp\gametypes\zombies::_id_283D(self, var_0);
+  maps\mp\gametypes\zombies::createzombieweaponstate(self, var_0);
   self._id_6E48++;
   level notify("PAP_display_reset");
 
@@ -621,7 +621,7 @@ _id_6E46(var_0) {
     _id_0548::_id_A7D6(self, var_0);
   }
 
-  _id_0548::_id_AABC(self);
+  _id_0548::writeweaponlisttomatchdata(self);
 }
 
 _id_55D4(var_0) {
@@ -647,7 +647,7 @@ _id_40BD(var_0) {
 }
 
 _id_40BF(var_0) {
-  var_1 = common_scripts\utility::_id_9462(var_0, "_pap_zm");
+  var_1 = common_scripts\utility::string_find(var_0, "_pap_zm");
   var_2 = "";
 
   if(var_1 != -1) {

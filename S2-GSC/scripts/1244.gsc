@@ -16,7 +16,7 @@ monitorsocialrankup() {
     if(var_1 == -1) {
       continue;
     }
-    thread maps\mp\gametypes\_hud_message::_id_9102("social_rank_up", var_1);
+    thread maps\mp\gametypes\_hud_message::splashnotify("social_rank_up", var_1);
   }
 }
 
@@ -33,7 +33,7 @@ monitorsocialmaxrankreward() {
     if(var_1 == -1) {
       continue;
     }
-    _func_3B8(var_1, 1);
+    xmodelalias/alias_ger_heads_urb_beach_muddy(var_1, 1);
   }
 }
 
@@ -204,7 +204,7 @@ checkfordisconnect(var_0) {
   self endon("disconnect");
   self endon("tagChallengeTimeLimit");
   self endon("tagChoiceMade");
-  var_0 common_scripts\utility::_id_A70A("death", "disconnect");
+  var_0 common_scripts\utility::waittill_any("death", "disconnect");
   self freezecontrols(0);
   _id_04E0::_id_870B(0);
 }
@@ -219,7 +219,7 @@ starttimertag(var_0) {
 
   self.canpassbomb = 0;
   _id_04E0::_id_870B(1);
-  self.hastagbomb = common_scripts\utility::_id_98E7(var_0, 1, 0);
+  self.hastagbomb = common_scripts\utility::ter_op(var_0, 1, 0);
   self setclientomnvar("ui_hub_in_timer_tag", self.hastagbomb + 1);
   self _meth_8656(self.tagchallenger);
   self.tagchallenger hudoutlineenableforclient(self, 0, 0);
@@ -264,12 +264,12 @@ attemptpasstagbomb(var_0) {
     self.hastagbomb = 0;
     self setclientomnvar("ui_hub_in_timer_tag", 1);
     self setmovespeedscale(1);
-    _id_0378::_id_8D74("aud_timer_tag_take_bomb");
+    _id_0378::snd_message("aud_timer_tag_take_bomb");
     deletetimertagbombmodel();
     var_0.hastagbomb = 1;
     var_0 setclientomnvar("ui_hub_in_timer_tag", 2);
     var_0 setmovespeedscale(1.1);
-    _id_0378::_id_8D74("aud_timer_tag_give_bomb");
+    _id_0378::snd_message("aud_timer_tag_give_bomb");
     var_0 givetimertagbombmodel();
   }
 }
@@ -289,8 +289,8 @@ monitortimertagtimer(var_0, var_1, var_2) {
 completetimertag() {
   self endon("disconnect");
   self endon("death");
-  var_0 = common_scripts\utility::_id_98E7(self.hastagbomb, 0, 1);
-  self _meth_85EF(&"timer_tag_result", 1, var_0);
+  var_0 = common_scripts\utility::ter_op(self.hastagbomb, 0, 1);
+  self set_vision_set_player(&"timer_tag_result", 1, var_0);
   _id_04E0::_id_7DF8(0, 0, 0, 0, 1);
 
   if(self.hastagbomb) {
@@ -303,7 +303,7 @@ completetimertag() {
     _id_0468::_id_0A27("timerTagWin");
   } else {
     _playFXOnTag(level._effect["hub_granadier_tag_effect"], self, "tag_origin");
-    _id_0378::_id_8D74("aud_timer_tag_fireworks");
+    _id_0378::snd_message("aud_timer_tag_fireworks");
     _id_04E0::_id_721A("mp_emote_defeated_c");
     self iprintln(&"HUB_YOU_LOST");
     _id_0468::_id_0A27("timerTagLose");
@@ -332,7 +332,7 @@ completetimertag() {
 
 listenfordeathdisconnect_tag(var_0) {
   self endon("tag_ended");
-  var_1 = var_0 common_scripts\utility::_id_A70A("death", "disconnect");
+  var_1 = var_0 common_scripts\utility::waittill_any("death", "disconnect");
 
   if(isDefined(self)) {
     cleanupfailedtimertag();
@@ -360,7 +360,7 @@ cleanupfailedtimertag(var_0) {
 
   self.tagchallenger = undefined;
   self setclientomnvar("ui_hub_in_timer_tag", 0);
-  self _meth_85EF(&"timer_tag_result", 1, -1);
+  self set_vision_set_player(&"timer_tag_result", 1, -1);
 
   if(self.hastagbomb || maps\mp\_utility::_hasperk("specialty_ballcarrier")) {
     deletetimertagbombmodel();
@@ -388,9 +388,9 @@ _id_8A34(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     var_7 = var_2 getentitynumber();
-    var_0 _meth_866C(&"player_interact_notification", 2, var_6, var_7);
+    var_0 setdot_radius(&"player_interact_notification", 2, var_6, var_7);
   } else
-    var_0 _meth_866C(&"player_interact_notification", 1, var_6);
+    var_0 setdot_radius(&"player_interact_notification", 1, var_6);
 }
 
 _id_8A35(var_0, var_1, var_2) {
@@ -401,9 +401,9 @@ _id_8A35(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     var_7 = var_2 getentitynumber();
-    var_0 _meth_866C(&"player_interact_notification_center", 2, var_6, var_7);
+    var_0 setdot_radius(&"player_interact_notification_center", 2, var_6, var_7);
   } else
-    var_0 _meth_866C(&"player_interact_notification_center", 1, var_6);
+    var_0 setdot_radius(&"player_interact_notification_center", 1, var_6);
 }
 
 givetimertagbombmodel() {

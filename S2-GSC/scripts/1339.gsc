@@ -16,8 +16,8 @@ _id_3662() {
   self._id_983B = 1;
   var_0 = self.origin;
   var_1 = 0;
-  playFX(common_scripts\utility::_id_44F5("taunt_burst_aoe"), var_0 + (0, 0, var_1));
-  _id_0378::_id_8D74("aud_taunt_use");
+  playFX(common_scripts\utility::getfx("taunt_burst_aoe"), var_0 + (0, 0, var_1));
+  _id_0378::snd_message("aud_taunt_use");
   var_2 = _id_0547::_id_408F();
 
   foreach(var_4 in var_2) {
@@ -38,7 +38,7 @@ _id_3662() {
       if(var_8 == self) {
         continue;
       }
-      var_8 _meth_866C(&"add_teammate_mod_buffs", 3, "specialty_class_team_effort_zm", 0, self);
+      var_8 setdot_radius(&"add_teammate_mod_buffs", 3, "specialty_class_team_effort_zm", 0, self);
     }
   }
 
@@ -59,7 +59,7 @@ _id_2F9E() {
         if(var_1 == self) {
           continue;
         }
-        var_1 _meth_866C(&"remove_teammate_mod_buffs", 1, "specialty_class_team_effort_zm");
+        var_1 setdot_radius(&"remove_teammate_mod_buffs", 1, "specialty_class_team_effort_zm");
       }
     }
   }
@@ -72,7 +72,7 @@ _id_983E(var_0) {
   var_0 endon("death");
   self endon("disconnect");
   thread handlezombietauntfx(var_0, "taunt_lure", "J_Spine4", 1.5);
-  var_0 maps\mp\agents\humanoid\_humanoid_util::_id_867E(self);
+  var_0 maps\mp\agents\humanoid\_humanoid_util::setfavoriteenemy(self);
   var_0 notify("watchFavoriteEnemyDeath");
 
   if(!isDefined(var_0._id_983C)) {
@@ -80,8 +80,8 @@ _id_983E(var_0) {
   }
 
   var_0._id_983C = common_scripts\utility::_id_0F6F(var_0._id_983C, self);
-  common_scripts\utility::_id_A70A("taunt_expired", "disconnect");
-  var_0 maps\mp\agents\humanoid\_humanoid_util::_id_867E(undefined);
+  common_scripts\utility::waittill_any("taunt_expired", "disconnect");
+  var_0 maps\mp\agents\humanoid\_humanoid_util::setfavoriteenemy(undefined);
   var_0._id_983C = common_scripts\utility::_id_0F93(var_0._id_983C, self);
 }
 
@@ -99,7 +99,7 @@ handlezombietauntfx(var_0, var_1, var_2, var_3) {
       wait(var_3 - (var_4 - var_0.recenttauntfxtime));
     }
 
-    _playFXOnTag(common_scripts\utility::_id_44F5(var_1), var_0, var_2);
+    _playFXOnTag(common_scripts\utility::getfx(var_1), var_0, var_2);
     var_0.recenttauntfxtime = var_4;
     wait(var_3);
   }
@@ -114,7 +114,7 @@ _id_A95A() {
   }
 }
 
-_id_62A6(var_0, var_1, var_2) {
+modifydamage(var_0, var_1, var_2) {
   var_3 = 1;
 
   if(!common_scripts\utility::_id_562E(self._id_57FD) && isDefined(self._id_983C)) {
@@ -134,10 +134,10 @@ _id_62A6(var_0, var_1, var_2) {
       }
     }
 
-    if(maps\mp\_utility::_id_5755(var_2) && common_scripts\utility::_id_562E(var_1._id_983B) && var_1 _id_0547::_id_4BA7("specialty_class_come_get_zm")) {
+    if(maps\mp\_utility::ismeleemod(var_2) && common_scripts\utility::_id_562E(var_1._id_983B) && var_1 _id_0547::_id_4BA7("specialty_class_come_get_zm")) {
       var_3 = var_3 * 4;
       thread play_crit_melee_effects();
-      var_1 _meth_866C(&"trigger_mod_proc", 1, "specialty_class_come_get_zm");
+      var_1 setdot_radius(&"trigger_mod_proc", 1, "specialty_class_come_get_zm");
     }
   }
 
@@ -181,11 +181,11 @@ _id_6B73(var_0) {
     }
 
     if(var_2) {
-      var_1 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level._id_A980);
+      var_1 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level.wavecounter);
     }
 
     var_0 thread _id_AB11(0.1, var_1, var_0.origin, self, undefined, undefined, "hitem_hard_zm");
-    self _meth_866C(&"trigger_mod_proc", 1, "specialty_class_hit_em_hard_zm");
+    self setdot_radius(&"trigger_mod_proc", 1, "specialty_class_hit_em_hard_zm");
   }
 }
 

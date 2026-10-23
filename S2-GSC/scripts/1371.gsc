@@ -66,7 +66,7 @@ _id_AA35(var_0, var_1, var_2) {
     _glassradiusdamage(var_9, var_4, var_7, var_6);
   }
 
-  var_1 _id_0378::_id_8D74("window_jumpscare", var_0, self._id_5978, var_8);
+  var_1 _id_0378::snd_message("window_jumpscare", var_0, self._id_5978, var_8);
 
   if(var_2) {
     var_1 thread _id_598A();
@@ -88,7 +88,7 @@ _id_AA34(var_0) {
   self endon("death");
   var_1 = 0.2;
   wait(var_0 - var_1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "ZomWindowScare");
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "ZomWindowScare");
   self scragentsetscripted(0);
   self scragentsetphysicsmode("gravity");
 }
@@ -101,7 +101,7 @@ _id_AA2E(var_0, var_1) {
   var_2._id_5979 = var_0;
   var_2._id_597A = var_1;
   var_2 thread maps\mp\agents\humanoid\_humanoid_util::getcurrentoffhand(var_2.origin, var_2.angles, var_4, undefined, 1, ::_id_AA33, 1);
-  var_5 = common_scripts\utility::_id_46B7("window_shatter", "targetname");
+  var_5 = common_scripts\utility::getstructarray("window_shatter", "targetname");
   var_6 = undefined;
 
   foreach(var_8 in var_5) {
@@ -187,10 +187,10 @@ _id_AA32(var_0) {
 }
 
 _id_AA30(var_0) {
-  var_1 = common_scripts\utility::_id_46B7("jumpscare_spawner", "targetname");
+  var_1 = common_scripts\utility::getstructarray("jumpscare_spawner", "targetname");
 
   foreach(var_3 in var_1) {
-    var_4 = common_scripts\utility::_id_4461(var_3.origin, var_0);
+    var_4 = common_scripts\utility::getclosest(var_3.origin, var_0);
 
     if(isDefined(var_4)) {
       if(distance(var_4.origin, var_3.origin) > 100) {
@@ -218,7 +218,7 @@ _id_AA30(var_0) {
       var_3._id_597B = var_9;
     }
 
-    var_10 = common_scripts\utility::_id_46B5(var_3.target, "targetname");
+    var_10 = common_scripts\utility::getstruct(var_3.target, "targetname");
 
     if(isDefined(var_10)) {
       var_3._id_5978 = var_10.origin;
@@ -314,7 +314,7 @@ _id_50F4(var_0, var_1) {
 }
 
 _id_178C(var_0, var_1, var_2, var_3) {
-  return common_scripts\utility::_id_5D93(var_3, 0, var_1, var_0, var_2);
+  return common_scripts\utility::linear_map_clamp(var_3, 0, var_1, var_0, var_2);
 }
 
 _id_5977(var_0) {
@@ -554,8 +554,8 @@ _id_8A72(var_0, var_1, var_2) {
   var_4 childthread _id_0547::_id_AB18(var_7, 1);
   var_4 thread maps\mp\agents\humanoid\_humanoid_util::getcurrentoffhand(var_8, var_9, var_5, undefined, 0, undefined, 1);
   var_10 = var_1 + (0, 0, -30);
-  var_0 _id_0378::_id_8D74("sewage_jumpscare", var_4, var_10);
-  var_4 maps\mp\agents\_scripted_agent_anim_util::_id_A79F("scripted_anim", "cam_shake");
+  var_0 _id_0378::snd_message("sewage_jumpscare", var_4, var_10);
+  var_4 maps\mp\agents\_scripted_agent_anim_util::waituntilnotetrack_safe("scripted_anim", "cam_shake");
   var_11 = var_10 - var_0 getEye();
   var_0 setplayerangles(vectortoangles(var_11));
   var_0 thread _id_598A();
@@ -592,7 +592,7 @@ _id_9053(var_0, var_1) {
     switch (var_3._id_0165) {
       case "spawner":
         self._id_0873 = var_3.setlookatent;
-        self._id_8FA9 = var_3._id_81C7;
+        self._id_8FA9 = var_3.script_ghettotag;
         self._id_0186 = var_3;
         self._id_606E = var_3.stopuseturret;
         break;
@@ -611,7 +611,7 @@ _id_9053(var_0, var_1) {
     }
   }
 
-  if(!isDefined(self._id_0873) || !isDefined(self._id_0186) || !isDefined(self._id_502E) || !isDefined(self._id_502E.scriptmodelplayanim) || !isDefined(self._id_502E._id_82E5) || !isDefined(self._id_502F) || !isDefined(self._id_5EC8) || !isDefined(self._id_5EC8.scriptmodelplayanim)) {
+  if(!isDefined(self._id_0873) || !isDefined(self._id_0186) || !isDefined(self._id_502E) || !isDefined(self._id_502E.scriptmodelplayanim) || !isDefined(self._id_502E.script_wait) || !isDefined(self._id_502F) || !isDefined(self._id_5EC8) || !isDefined(self._id_5EC8.scriptmodelplayanim)) {
     return;
   }
   if(!isDefined(self._id_606E)) {
@@ -622,7 +622,7 @@ _id_9053(var_0, var_1) {
 
   for(;;) {
     if(isDefined(self.setgoalnode)) {
-      common_scripts\utility::_id_3C9F(self.setgoalnode);
+      common_scripts\utility::flag_wait(self.setgoalnode);
     }
 
     self waittill("trigger", var_5);
@@ -630,12 +630,12 @@ _id_9053(var_0, var_1) {
     if(!isPlayer(var_5)) {
       continue;
     }
-    if(isDefined(self.setgoalnode) && !common_scripts\utility::_id_3C77(self.setgoalnode)) {
+    if(isDefined(self.setgoalnode) && !common_scripts\utility::flag(self.setgoalnode)) {
       continue;
     }
     while(isDefined(var_5) && var_5 istouching(self)) {
       var_6 = var_5 getvelocity();
-      var_7 = var_5 getEye() + self._id_502E._id_82E5 * var_6;
+      var_7 = var_5 getEye() + self._id_502E.script_wait * var_6;
 
       if(self._id_606E > 0) {
         var_8 = vectortoangles(self._id_502E.origin - self._id_0186.origin)[1];
@@ -653,13 +653,13 @@ _id_9053(var_0, var_1) {
       var_13 = _distance2d(var_7, var_12);
 
       if(var_13 < self._id_502E.scriptmodelplayanim && vectordot(vectorNormalize(var_6), vectorNormalize(var_11 - var_12)) > 0.5) {
-        var_16 = var_5 getEye() + (self._id_502E._id_82E5 + 0.05) * var_6;
+        var_16 = var_5 getEye() + (self._id_502E.script_wait + 0.05) * var_6;
         var_17 = _distance2d(var_16, var_12);
 
         if(var_13 <= var_17) {
           var_18 = anglesToForward(var_5 _meth_8566());
 
-          if(_id_0547::_id_3048(var_11, var_7, var_7 + 9999 * var_18) < self._id_5EC8.scriptmodelplayanim && vectordot(var_18, var_11 - var_7) > 0) {
+          if(_id_0547::disttoline(var_11, var_7, var_7 + 9999 * var_18) < self._id_5EC8.scriptmodelplayanim && vectordot(var_18, var_11 - var_7) > 0) {
             var_19 = 0;
 
             foreach(var_21 in level.players) {
@@ -700,7 +700,7 @@ _id_9053(var_0, var_1) {
 _id_9052(var_0, var_1, var_2) {
   _id_5976(var_1);
   var_3 = _id_054D::_id_90BA("zombie_generic", self._id_0186, "jumpscare: " + _id_41E1(), 0, 1, 1);
-  var_1 _id_0378::_id_8D74("simple_jump_scare", var_3);
+  var_1 _id_0378::snd_message("simple_jump_scare", var_3);
   var_3._id_5979 = var_1;
   var_3._id_597A = 0;
   level notify("jumpscare_triggered", var_1, var_3);
@@ -720,8 +720,8 @@ _id_4A11(var_0, var_1, var_2) {
   self.origin = var_0._id_0186.origin;
   self.angles = var_0._id_0186.angles + (0, var_2, 0);
   self scragentsetscripted(1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "handle_js_lerp");
-  self._id_53D9 = 1;
+  maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "handle_js_lerp");
+  self.inspawnanim = 1;
   self scragentsetanimmode("anim deltas");
   self scragentsetorientmode("face angle abs", var_0._id_0186.angles);
   self scragentsetanimscale(1, 1);
@@ -756,7 +756,7 @@ _id_4A11(var_0, var_1, var_2) {
     var_21 = _transformmove(var_1.origin, var_1.angles, var_0._id_502E.origin, var_0._id_502E.angles, var_20["origin"], var_20["angles"]);
 
     if(!isDefined(var_12)) {
-      var_12 = var_0._id_0186 common_scripts\utility::_id_8FFC();
+      var_12 = var_0._id_0186 common_scripts\utility::spawn_tag_origin();
       var_12 hide();
     }
 
@@ -797,8 +797,8 @@ _id_4A11(var_0, var_1, var_2) {
   }
 
   if(isalive(self)) {
-    maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "handle_js_lerp");
-    self._id_53D9 = undefined;
+    maps\mp\agents\_scripted_agent_anim_util::setstatelocked(0, "handle_js_lerp");
+    self.inspawnanim = undefined;
     _id_0547::disableoffhandsecondaryweapons();
     self scragentsetscripted(0);
   }
@@ -854,7 +854,7 @@ _id_347E() {
   self._id_5974 = 150;
   self._id_0A30 = 1;
   self._id_3A13 = 1;
-  var_0 = common_scripts\utility::_id_46B7(self.target, "targetname");
+  var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
   var_1 = undefined;
 
   foreach(var_3 in var_0) {
@@ -914,12 +914,12 @@ _id_347F() {
 
   for(;;) {
     if(isDefined(self.setgoalnode)) {
-      common_scripts\utility::_id_3C9F(self.setgoalnode);
+      common_scripts\utility::flag_wait(self.setgoalnode);
     }
 
     self waittill("trigger", var_1);
 
-    if(isDefined(self.setgoalnode) && !common_scripts\utility::_id_3C77(self.setgoalnode)) {
+    if(isDefined(self.setgoalnode) && !common_scripts\utility::flag(self.setgoalnode)) {
       continue;
     }
     if(!isDefined(var_1) || !isPlayer(var_1)) {
@@ -1013,7 +1013,7 @@ _id_347B(var_0, var_1) {
     if(!maps\mp\_utility::isreallyalive(var_5) || !self istouching(var_5) && _distance2d(var_5.origin, self._id_5978) > self._id_5974) {
       continue;
     }
-    var_5 _id_0378::_id_8D74("fall_jumpscare", var_0, self);
+    var_5 _id_0378::snd_message("fall_jumpscare", var_0, self);
 
     if(self._id_1E8F) {
       var_8 = 1;
@@ -1048,8 +1048,8 @@ _id_41E1() {
 }
 
 _id_3DB1() {
-  var_0 = common_scripts\utility::_id_46B7("fol_incubator_spawn", "targetname");
-  var_1 = common_scripts\utility::_id_46B7("fol_incubator_dormant", "targetname");
+  var_0 = common_scripts\utility::getstructarray("fol_incubator_spawn", "targetname");
+  var_1 = common_scripts\utility::getstructarray("fol_incubator_dormant", "targetname");
   var_2 = common_scripts\utility::_id_0F73(var_0, var_1);
   common_scripts\utility::flag_init("flag_first_fol_inc_selected");
   common_scripts\utility::flag_init("flag_fol_inc_armed");
@@ -1065,7 +1065,7 @@ _id_3DB1() {
       }
       switch (var_8) {
         case "inc_js_trig":
-          var_4._id_9D5E = var_7;
+          var_4.trig = var_7;
           break;
         case "inc_js_head_pos":
           var_4._id_4BDE = var_7;
@@ -1086,7 +1086,7 @@ _id_3DB1() {
       }
     }
 
-    if(isDefined(var_4._id_9D5E)) {
+    if(isDefined(var_4.trig)) {
       var_4._id_0CA6 = 0;
       var_4._id_5975 = 0;
       var_4._id_5973 = 0;
@@ -1104,11 +1104,11 @@ _id_3DB1() {
 }
 
 _id_3DB0() {
-  return common_scripts\utility::_id_46B7("fol_incubator_spawn", "targetname");
+  return common_scripts\utility::getstructarray("fol_incubator_spawn", "targetname");
 }
 
 _id_3DAF() {
-  return common_scripts\utility::_id_46B7("fol_incubator_dormant", "targetname");
+  return common_scripts\utility::getstructarray("fol_incubator_dormant", "targetname");
 }
 
 _id_3DB3() {
@@ -1117,20 +1117,20 @@ _id_3DB3() {
   if(common_scripts\utility::_id_562E(self._id_5972) || common_scripts\utility::_id_562E(self._id_0CA6)) {
     return;
   }
-  self._id_5978 = self._id_9D5E.origin;
+  self._id_5978 = self.trig.origin;
   var_0 = 1;
   var_1 = undefined;
 
-  while(!common_scripts\utility::_id_3C77("flag_first_fol_inc_selected")) {
+  while(!common_scripts\utility::flag("flag_first_fol_inc_selected")) {
     var_2 = 0;
 
     if(isDefined(self.setgoalnode)) {
-      common_scripts\utility::_id_3C9F(self.setgoalnode);
+      common_scripts\utility::flag_wait(self.setgoalnode);
     }
 
-    self._id_9D5E waittill("trigger", var_1);
+    self.trig waittill("trigger", var_1);
 
-    if(isDefined(self.setgoalnode) && !common_scripts\utility::_id_3C77(self.setgoalnode)) {
+    if(isDefined(self.setgoalnode) && !common_scripts\utility::flag(self.setgoalnode)) {
       wait(var_0);
       continue;
     }
@@ -1196,8 +1196,8 @@ _id_3DB3() {
 
 _id_3DB2(var_0) {
   _earthquake(0.1, 0.2, self._id_3255.origin, 250);
-  var_1 = common_scripts\utility::_id_4461(self.origin, level.players, 250);
-  _id_0378::_id_8D74("fol_tube_jumpscare_rattle", var_1);
+  var_1 = common_scripts\utility::getclosest(self.origin, level.players, 250);
+  _id_0378::snd_message("fol_tube_jumpscare_rattle", var_1);
 
   if(!common_scripts\utility::_id_562E(var_1._id_3067)) {
     var_2 = var_1 _id_0367::_id_8E3D("followertanklook");
@@ -1211,7 +1211,7 @@ _id_3DB2(var_0) {
 }
 
 _id_3DAE(var_0) {
-  if(common_scripts\utility::_id_3C77("flag_first_fol_inc_selected")) {
+  if(common_scripts\utility::flag("flag_first_fol_inc_selected")) {
     return;
   } else {
     common_scripts\utility::flag_set("flag_first_fol_inc_selected");
@@ -1222,13 +1222,13 @@ _id_3DAE(var_0) {
   if(!isDefined(self._id_3255)) {
     return;
   }
-  _id_0378::_id_8D74("fol_tube_jumpscare_execute");
+  _id_0378::snd_message("fol_tube_jumpscare_execute");
   var_1 = 3.8;
   var_2 = 1.93333;
 
   if(isDefined(self._id_3255)) {
     self._id_3255 scriptmodelplayanim("zmb_incubator_panel_fol_intro_spawn");
-    _id_0378::_id_8D74("fol_tube_jumpscare_door_fall");
+    _id_0378::snd_message("fol_tube_jumpscare_door_fall");
   }
 
   if(isDefined(var_0)) {
@@ -1256,11 +1256,11 @@ _id_3DAE(var_0) {
   foreach(var_5 in self.fx) {
     var_6 = anglesToForward(var_5.angles);
     var_7 = anglestoup(var_5.angles);
-    playFX(common_scripts\utility::_id_44F5("zmb_incubator_js_explosion"), var_5.origin, var_6, var_7);
+    playFX(common_scripts\utility::getfx("zmb_incubator_js_explosion"), var_5.origin, var_6, var_7);
   }
 
   if(!isDefined(var_0) && isDefined(self._id_3255)) {
-    var_0 = common_scripts\utility::_id_4461(self._id_3255.origin, level.players);
+    var_0 = common_scripts\utility::getclosest(self._id_3255.origin, level.players);
   }
 
   if(isDefined(self._id_3255)) {
@@ -1274,7 +1274,7 @@ _id_3DAE(var_0) {
 }
 
 _id_3DAD() {
-  var_0 = _id_055A::_id_4562(self.origin);
+  var_0 = _id_055A::getlocationzone(self.origin);
 
   for(;;) {
     var_1 = 1;
@@ -1295,8 +1295,8 @@ _id_3DAD() {
   if(common_scripts\utility::_id_562E(self._id_0CA6)) {
     return;
   }
-  if(isDefined(self._id_9D5E)) {
-    self._id_9D5E delete();
+  if(isDefined(self.trig)) {
+    self.trig delete();
   }
 
   if(isDefined(self._id_3255)) {

@@ -28,7 +28,7 @@ setclienttriggeraudiozone(var_0, var_1) {
       waitframe();
     }
 
-    thread _id_6379();
+    thread monitordeath();
 
     if(1) {
       _id_8725(var_0, var_1);
@@ -179,7 +179,7 @@ _id_8725(var_0, var_1) {
 }
 
 _id_5830(var_0) {
-  return !maps\mp\_utility::_id_568F(var_0) && !maps\mp\_utility::iskillstreakweapon(var_0) && maps\mp\_utility::getweaponclass(var_0) == "weapon_heavy" && !issubstr(var_0, "bipod");
+  return !maps\mp\_utility::isbombsiteweapon(var_0) && !maps\mp\_utility::iskillstreakweapon(var_0) && maps\mp\_utility::getweaponclass(var_0) == "weapon_heavy" && !issubstr(var_0, "bipod");
 }
 
 _id_574C(var_0) {
@@ -213,7 +213,7 @@ _id_63AC(var_0) {
   }
 }
 
-_id_6379() {
+monitordeath() {
   self endon("disconnect");
   self endon("faux_spawn");
   self endon("division_change");
@@ -345,7 +345,7 @@ _id_4688(var_0, var_1, var_2, var_3, var_4, var_5) {
         var_9 = "_1";
       }
 
-      var_13 = !maps\mp\_utility::_id_56B1() && !_func_3AF();
+      var_13 = !maps\mp\_utility::_id_56B1() && !xmodelalias/alias_ger_heads_scarf_for_muddy_cheap();
 
       if(!var_4 && var_13) {
         if(maps\mp\_utility::getweaponclass(var_2) == "weapon_shotgun") {
@@ -605,7 +605,7 @@ _id_7CCD(var_0) {
     return var_0;
   }
 
-  var_1 = maps\mp\_utility::_id_4738(var_0);
+  var_1 = maps\mp\_utility::getweaponnametokens(var_0);
   var_2 = var_1[0];
 
   for(var_3 = 1; var_3 < var_1.size; var_3++) {
@@ -623,7 +623,7 @@ removealtmodeattachmentsfromweapon(var_0) {
     return var_0;
   }
 
-  var_1 = maps\mp\_utility::_id_4738(var_0);
+  var_1 = maps\mp\_utility::getweaponnametokens(var_0);
   var_2 = var_1[0];
 
   for(var_3 = 1; var_3 < var_1.size; var_3++) {
@@ -819,7 +819,7 @@ _id_3657(var_0, var_1) {
       break;
     case "bayonet_level3":
     case "bayonet_level2":
-      var_3 = common_scripts\utility::_id_44F5("divisions_bayonet_charge");
+      var_3 = common_scripts\utility::getfx("divisions_bayonet_charge");
       _playfxontagforclients(var_3, self, "j_head", self);
       var_2["intensity"] = 0.2;
       var_2["falloff"] = 1.2;
@@ -877,7 +877,7 @@ _id_2F7B(var_0, var_1, var_2, var_3) {
       break;
     case "bayonet_level3":
     case "bayonet_level2":
-      var_5 = common_scripts\utility::_id_44F5("divisions_bayonet_charge");
+      var_5 = common_scripts\utility::getfx("divisions_bayonet_charge");
       _killfxontagforclient(var_5, var_4, "j_head", self);
       break;
     case "sharpshooter_level3":
@@ -934,7 +934,7 @@ _id_2F7B(var_0, var_1, var_2, var_3) {
 _id_A8FA(var_0, var_1) {
   self endon("disconnect");
   self endon("removeDivisionVignette");
-  common_scripts\utility::_id_A70A("death", "weapon_change");
+  common_scripts\utility::waittill_any("death", "weapon_change");
   thread _id_2F7B(var_0, var_1);
 }
 
@@ -947,7 +947,7 @@ _id_4499(var_0, var_1, var_2, var_3, var_4) {
 
   switch (maps\mp\_utility::getweaponclass(var_3)) {
     case "weapon_assault":
-      if(isDefined(var_1._id_165B) && var_1._id_165B && isDefined(var_4) && maps\mp\_utility::_id_5755(var_4)) {
+      if(isDefined(var_1._id_165B) && var_1._id_165B && isDefined(var_4) && maps\mp\_utility::ismeleemod(var_4)) {
         return "divisions_infantry_kill";
       }
 
@@ -979,7 +979,7 @@ _id_4499(var_0, var_1, var_2, var_3, var_4) {
 
       break;
     case "weapon_pistol":
-      if(issubstr(var_3, "tactical_knife") && isDefined(var_4) && maps\mp\_utility::_id_5755(var_4)) {
+      if(issubstr(var_3, "tactical_knife") && isDefined(var_4) && maps\mp\_utility::ismeleemod(var_4)) {
         return "division_resistance_kill";
       }
 

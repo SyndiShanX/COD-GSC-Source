@@ -3,51 +3,51 @@
  * Script: scripts\maps\mp\bots\_bots_personality.gsc
 ******************************************************/
 
-_id_897D() {
-  level._id_1A90 = [];
-  level._id_1A91 = [];
-  level._id_1A90["active"][0] = "default";
-  level._id_1A90["active"][1] = "run_and_gun";
-  level._id_1A90["active"][2] = "cqb";
-  level._id_1A90["stationary"][0] = "camper";
-  level._id_1A92 = [];
+setup_personalities() {
+  level.bot_personality = [];
+  level.bot_personality_list = [];
+  level.bot_personality["active"][0] = "default";
+  level.bot_personality["active"][1] = "run_and_gun";
+  level.bot_personality["active"][2] = "cqb";
+  level.bot_personality["stationary"][0] = "camper";
+  level.bot_personality_type = [];
 
-  foreach(var_5, var_1 in level._id_1A90) {
+  foreach(var_5, var_1 in level.bot_personality) {
     foreach(var_3 in var_1) {
-      level._id_1A92[var_3] = var_5;
-      level._id_1A91[level._id_1A91.size] = var_3;
+      level.bot_personality_type[var_3] = var_5;
+      level.bot_personality_list[level.bot_personality_list.size] = var_3;
     }
   }
 
-  level._id_1A93 = [];
-  level._id_1A93["active"] = 4;
-  level._id_1A93["stationary"] = 1;
-  level._id_1A8E = [];
-  level._id_1A8E["default"] = ::_id_523C;
-  level._id_1A8E["camper"] = ::_id_523B;
-  level._id_1A8F["default"] = ::_id_A0C0;
-  level._id_1A8F["camper"] = ::_id_A0BF;
+  level.bot_personality_types_desired = [];
+  level.bot_personality_types_desired["active"] = 4;
+  level.bot_personality_types_desired["stationary"] = 1;
+  level.bot_pers_init = [];
+  level.bot_pers_init["default"] = ::init_personality_default;
+  level.bot_pers_init["camper"] = ::init_personality_camper;
+  level.bot_pers_update["default"] = ::update_personality_default;
+  level.bot_pers_update["camper"] = ::update_personality_camper;
 }
 
-_id_1939() {
-  self._id_6F7D = self botgetpersonality();
-  self.pers["personality"] = self._id_6F7D;
-  self._id_6F7E = level._id_1A8E[self._id_6F7D];
+bot_assign_personality_functions() {
+  self.personality = self botgetpersonality();
+  self.pers["personality"] = self.personality;
+  self.personality_init_function = level.bot_pers_init[self.personality];
 
-  if(!isDefined(self._id_6F7E)) {
-    self._id_6F7E = level._id_1A8E["default"];
+  if(!isDefined(self.personality_init_function)) {
+    self.personality_init_function = level.bot_pers_init["default"];
   }
 
-  self[[self._id_6F7E]]();
-  self._id_6F7F = level._id_1A8F[self._id_6F7D];
+  self[[self.personality_init_function]]();
+  self.personality_update_function = level.bot_pers_update[self.personality];
 
-  if(!isDefined(self._id_6F7F)) {
-    self._id_6F7F = level._id_1A8F["default"];
+  if(!isDefined(self.personality_update_function)) {
+    self.personality_update_function = level.bot_pers_update["default"];
   }
 }
 
-_id_193F() {
-  if(isDefined(self._id_6F80) && self._id_6F80) {
+bot_balance_personality() {
+  if(isDefined(self.personalitymanuallyset) && self.personalitymanuallyset) {
     return;
   }
   if(isDefined(self.pers["personality"])) {
@@ -57,15 +57,15 @@ _id_193F() {
 
   var_0 = self.team;
 
-  if(!isDefined(var_0) && !isDefined(self._id_1AFA)) {
+  if(!isDefined(var_0) && !isDefined(self.bot_team)) {
     var_0 = self.pers["team"];
   }
 
-  var_1 = getarraykeys(level._id_1A93);
+  var_1 = getarraykeys(level.bot_personality_types_desired);
   var_2 = [];
   var_3 = [];
 
-  foreach(var_9, var_5 in level._id_1A90) {
+  foreach(var_9, var_5 in level.bot_personality) {
     var_3[var_9] = 0;
 
     foreach(var_7 in var_5) {
@@ -73,16 +73,16 @@ _id_193F() {
     }
   }
 
-  foreach(var_11 in level._id_6E97) {
+  foreach(var_11 in level.participants) {
     if(var_11 == self) {
       continue;
     }
-    if(!maps\mp\_utility::_id_5800(var_11) || !isDefined(var_11._id_4B22)) {
+    if(!maps\mp\_utility::isteamparticipant(var_11) || !isDefined(var_11.has_balanced_personality)) {
       continue;
     }
     if(isDefined(var_11.team) && var_11.team == var_0 || !level.teambased) {
       var_7 = var_11 botgetpersonality();
-      var_9 = level._id_1A92[var_7];
+      var_9 = level.bot_personality_type[var_7];
       var_2[var_7] = var_2[var_7] + 1;
       var_3[var_9] = var_3[var_9] + 1;
     }
@@ -91,7 +91,7 @@ _id_193F() {
   var_13 = [];
 
   foreach(var_15 in var_1) {
-    var_13[var_15] = int(var_3[var_15] / level._id_1A93[var_15]);
+    var_13[var_15] = int(var_3[var_15] / level.bot_personality_types_desired[var_15]);
   }
 
   var_17 = undefined;
@@ -119,7 +119,7 @@ _id_193F() {
     var_23 = [];
 
     foreach(var_15 in var_1) {
-      var_23[var_15] = level._id_1A93[var_15] - var_3[var_15] % level._id_1A93[var_15];
+      var_23[var_15] = level.bot_personality_types_desired[var_15] - var_3[var_15] % level.bot_personality_types_desired[var_15];
     }
 
     var_26 = 0;
@@ -145,7 +145,7 @@ _id_193F() {
   var_34 = 9999;
   var_35 = undefined;
   var_36 = -9999;
-  var_37 = common_scripts\utility::array_randomize(level._id_1A90[var_17]);
+  var_37 = common_scripts\utility::array_randomize(level.bot_personality[var_17]);
 
   foreach(var_7 in var_37) {
     if(var_2[var_7] < var_34) {
@@ -162,76 +162,76 @@ _id_193F() {
   if(var_36 - var_34 >= 2) {
     var_32 = var_33;
   } else {
-    var_32 = common_scripts\utility::random(level._id_1A90[var_17]);
+    var_32 = common_scripts\utility::random(level.bot_personality[var_17]);
   }
 
   if(self botgetpersonality() != var_32) {
     self botsetpersonality(var_32);
   }
 
-  self._id_4B22 = 1;
+  self.has_balanced_personality = 1;
 }
 
-_id_523B() {
-  _id_23AB();
+init_personality_camper() {
+  clear_camper_data();
 }
 
-_id_523C() {
-  _id_23AB();
+init_personality_default() {
+  clear_camper_data();
 }
 
-_id_A0BF() {
-  if(_id_8B73() && !maps\mp\bots\_bots_util::_id_1A2D() && !maps\mp\bots\_bots_util::_id_1A36()) {
+update_personality_camper() {
+  if(should_select_new_ambush_point() && !maps\mp\bots\_bots_util::bot_is_defending() && !maps\mp\bots\_bots_util::bot_is_remote_or_linked()) {
     var_0 = self botgetscriptgoaltype();
     var_1 = 0;
 
-    if(!isDefined(self._id_1F00)) {
-      self._id_1F00 = 0;
+    if(!isDefined(self.camper_time_started_hunting)) {
+      self.camper_time_started_hunting = 0;
     }
 
     var_2 = var_0 == "hunt";
-    var_3 = gettime() > self._id_1F00 + 10000;
+    var_3 = gettime() > self.camper_time_started_hunting + 10000;
 
-    if((!var_2 || var_3) && !maps\mp\bots\_bots_util::_id_1A8B()) {
+    if((!var_2 || var_3) && !maps\mp\bots\_bots_util::bot_out_of_ammo()) {
       if(!self bothasscriptgoal()) {
-        _id_1AAE();
+        bot_random_path();
       }
 
-      if(isDefined(level._id_6CBF)) {
-        var_1 = [[level._id_6CBF]]();
+      if(isDefined(level.override_find_camp_node)) {
+        var_1 = [[level.override_find_camp_node]]();
       }
 
       if(!var_1) {
-        var_1 = _id_3B67();
+        var_1 = find_camp_node();
 
         if(!var_1) {
-          self._id_1F00 = gettime();
+          self.camper_time_started_hunting = gettime();
         }
       }
     }
 
     if(isDefined(var_1) && var_1) {
-      self._id_0D41 = maps\mp\bots\_bots_util::_id_1AA8("bot_find_ambush_entrances", ::_id_19C8, self._id_6708, 1);
-      var_4 = maps\mp\bots\_bots_strategy::_id_19ED("trap_directional", "trap", "c4");
+      self._id_0D41 = maps\mp\bots\_bots_util::bot_queued_process("bot_find_ambush_entrances", ::bot_find_ambush_entrances, self.node_ambushing_from, 1);
+      var_4 = maps\mp\bots\_bots_strategy::bot_get_ambush_trap_item("trap_directional", "trap", "c4");
 
       if(isDefined(var_4)) {
         var_5 = gettime();
-        maps\mp\bots\_bots_strategy::_id_1AD0(var_4, self._id_0D41, self._id_6708, self._id_0D94);
+        maps\mp\bots\_bots_strategy::bot_set_ambush_trap(var_4, self._id_0D41, self.node_ambushing_from, self._id_0D94);
         var_5 = gettime() - var_5;
 
-        if(var_5 > 0 && isDefined(self._id_0D39) && isDefined(self._id_6708)) {
+        if(var_5 > 0 && isDefined(self._id_0D39) && isDefined(self.node_ambushing_from)) {
           self._id_0D39 = self._id_0D39 + var_5;
-          self._id_6708._id_1938 = self._id_0D39 + 10000;
+          self.node_ambushing_from.bot_ambush_end = self._id_0D39 + 10000;
         }
       }
 
-      if(!maps\mp\bots\_bots_strategy::_id_1A14() && !maps\mp\bots\_bots_util::_id_1A2D() && isDefined(self._id_6708)) {
-        self botsetscriptgoalnode(self._id_6708, "camp", self._id_0D94);
-        thread _id_23CA("bad_path", "node_relinquished", "out_of_ammo");
-        thread _id_A8CF();
-        thread _id_192D("clear_camper_data", "goal");
-        thread _id_1B27("clear_camper_data", "bot_add_ambush_time_delayed", self._id_0D41, self._id_0D94);
-        childthread _id_1B0A("clear_camper_data", "goal");
+      if(!maps\mp\bots\_bots_strategy::bot_has_tactical_goal() && !maps\mp\bots\_bots_util::bot_is_defending() && isDefined(self.node_ambushing_from)) {
+        self botsetscriptgoalnode(self.node_ambushing_from, "camp", self._id_0D94);
+        thread clear_script_goal_on("bad_path", "node_relinquished", "out_of_ammo");
+        thread watch_out_of_ammo();
+        thread bot_add_ambush_time_delayed("clear_camper_data", "goal");
+        thread bot_watch_entrances_delayed("clear_camper_data", "bot_add_ambush_time_delayed", self._id_0D41, self._id_0D94);
+        childthread bot_try_trap_follower("clear_camper_data", "goal");
         return;
       }
     } else {
@@ -239,12 +239,12 @@ _id_A0BF() {
         self botclearscriptgoal();
       }
 
-      _id_A0C0();
+      update_personality_default();
     }
   }
 }
 
-_id_A0C0() {
+update_personality_default() {
   var_0 = undefined;
   var_1 = self bothasscriptgoal();
 
@@ -253,10 +253,10 @@ _id_A0C0() {
   }
 
   if(gettime() - self._id_5BE2 > 5000) {
-    _id_1B0A();
+    bot_try_trap_follower();
   }
 
-  if(!maps\mp\bots\_bots_strategy::_id_1A14() && !maps\mp\bots\_bots_util::_id_1A36()) {
+  if(!maps\mp\bots\_bots_strategy::bot_has_tactical_goal() && !maps\mp\bots\_bots_util::bot_is_remote_or_linked()) {
     var_2 = undefined;
     var_3 = undefined;
 
@@ -265,25 +265,25 @@ _id_A0C0() {
       var_3 = self botgetscriptgoalRadius();
       var_4 = var_3 * 2;
 
-      if(isDefined(self._id_1A7B) && var_2 < var_4 * var_4) {
+      if(isDefined(self.bot_memory_goal) && var_2 < var_4 * var_4) {
         var_5 = _botmemoryflags("investigated");
-        _botflagmemoryevents(0, gettime() - self._id_1A7C, 1, self._id_1A7B, var_4, "kill", var_5, self);
-        _botflagmemoryevents(0, gettime() - self._id_1A7C, 1, self._id_1A7B, var_4, "death", var_5, self);
-        self._id_1A7B = undefined;
-        self._id_1A7C = undefined;
+        _botflagmemoryevents(0, gettime() - self.bot_memory_goal_time, 1, self.bot_memory_goal, var_4, "kill", var_5, self);
+        _botflagmemoryevents(0, gettime() - self.bot_memory_goal_time, 1, self.bot_memory_goal, var_4, "death", var_5, self);
+        self.bot_memory_goal = undefined;
+        self.bot_memory_goal_time = undefined;
       }
     }
 
     if(!var_1 || var_2 < var_3 * var_3) {
-      var_6 = _id_1AAE();
+      var_6 = bot_random_path();
       var_7 = 25;
 
-      if(common_scripts\utility::_id_562E(self._id_366C)) {
+      if(common_scripts\utility::_id_562E(self.encourage_explosive_use)) {
         var_7 = 50;
       }
 
       if(var_6 && _randomfloat(100) < var_7) {
-        var_8 = maps\mp\bots\_bots_strategy::_id_19ED("trap_directional", "trap");
+        var_8 = maps\mp\bots\_bots_strategy::bot_get_ambush_trap_item("trap_directional", "trap");
 
         if(isDefined(var_8)) {
           var_9 = self botgetscriptgoal();
@@ -292,12 +292,12 @@ _id_A0C0() {
             var_10 = _getclosestnodeinsight(var_9);
 
             if(isDefined(var_10)) {
-              var_11 = _id_19C8(var_10, 0);
-              var_12 = maps\mp\bots\_bots_strategy::_id_1AD0(var_8, var_11, var_10);
+              var_11 = bot_find_ambush_entrances(var_10, 0);
+              var_12 = maps\mp\bots\_bots_strategy::bot_set_ambush_trap(var_8, var_11, var_10);
 
               if(!isDefined(var_12) || var_12) {
                 self botclearscriptgoal();
-                var_6 = _id_1AAE();
+                var_6 = bot_random_path();
               }
             }
           }
@@ -305,13 +305,13 @@ _id_A0C0() {
       }
 
       if(var_6) {
-        thread _id_23CA("enemy", "bad_path", "goal", "node_relinquished", "search_end");
+        thread clear_script_goal_on("enemy", "bad_path", "goal", "node_relinquished", "search_end");
       }
     }
   }
 }
 
-_id_1B0A(var_0, var_1) {
+bot_try_trap_follower(var_0, var_1) {
   self notify("bot_try_trap_follower");
   self endon("bot_try_trap_follower");
   self endon("death");
@@ -328,19 +328,19 @@ _id_1B0A(var_0, var_1) {
     self waittill(var_1);
   }
 
-  var_2 = maps\mp\bots\_bots_strategy::_id_19ED("trap_follower");
+  var_2 = maps\mp\bots\_bots_strategy::bot_get_ambush_trap_item("trap_follower");
 
   if(isDefined(var_2) && self isonground()) {
-    var_3 = maps\mp\bots\_bots_util::_id_19FA(300, 600, 0.7, 1);
+    var_3 = maps\mp\bots\_bots_util::bot_get_nodes_in_cone(300, 600, 0.7, 1);
 
     if(var_3.size > 0) {
       self botpressbutton(var_2["item_action"]);
-      common_scripts\utility::_id_A71A(5, "grenade_fire", "missile_fire");
+      common_scripts\utility::waittill_any_timeout(5, "grenade_fire", "missile_fire");
     }
   }
 }
 
-_id_23CA(var_0, var_1, var_2, var_3, var_4) {
+clear_script_goal_on(var_0, var_1, var_2, var_3, var_4) {
   self notify("clear_script_goal_on");
   self endon("clear_script_goal_on");
   self endon("death");
@@ -359,7 +359,7 @@ _id_23CA(var_0, var_1, var_2, var_3, var_4) {
         var_8 = 0;
       } else {
         var_9 = self botgetscriptgoal();
-        var_8 = maps\mp\bots\_bots_util::_id_1B1C(var_5, var_9);
+        var_8 = maps\mp\bots\_bots_util::bot_vectors_are_equal(var_5, var_9);
       }
     }
 
@@ -374,20 +374,20 @@ _id_23CA(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-_id_A8CF() {
+watch_out_of_ammo() {
   self notify("watch_out_of_ammo");
   self endon("watch_out_of_ammo");
   self endon("death");
   self endon("disconnect");
 
-  while(!maps\mp\bots\_bots_util::_id_1A8B()) {
+  while(!maps\mp\bots\_bots_util::bot_out_of_ammo()) {
     wait 0.5;
   }
 
   self notify("out_of_ammo");
 }
 
-_id_192D(var_0, var_1) {
+bot_add_ambush_time_delayed(var_0, var_1) {
   self notify("bot_add_ambush_time_delayed");
   self endon("bot_add_ambush_time_delayed");
   self endon("death");
@@ -405,15 +405,15 @@ _id_192D(var_0, var_1) {
     self waittill(var_1);
   }
 
-  if(isDefined(self._id_0D39) && isDefined(self._id_6708)) {
+  if(isDefined(self._id_0D39) && isDefined(self.node_ambushing_from)) {
     self._id_0D39 = self._id_0D39 + (gettime() - var_2);
-    self._id_6708._id_1938 = self._id_0D39 + 10000;
+    self.node_ambushing_from.bot_ambush_end = self._id_0D39 + 10000;
   }
 
   self notify("bot_add_ambush_time_delayed");
 }
 
-_id_1B27(var_0, var_1, var_2, var_3) {
+bot_watch_entrances_delayed(var_0, var_1, var_2, var_3) {
   self notify("bot_watch_entrances_delayed");
 
   if(var_2.size > 0) {
@@ -429,12 +429,12 @@ _id_1B27(var_0, var_1, var_2, var_3) {
     }
 
     self endon("path_enemy");
-    childthread maps\mp\bots\_bots_util::_id_1B2A(var_2, var_3, 0, self._id_0D39);
-    childthread _id_1A84();
+    childthread maps\mp\bots\_bots_util::bot_watch_nodes(var_2, var_3, 0, self._id_0D39);
+    childthread bot_monitor_watch_entrances_camp();
   }
 }
 
-_id_1A84() {
+bot_monitor_watch_entrances_camp() {
   self notify("bot_monitor_watch_entrances_camp");
   self endon("bot_monitor_watch_entrances_camp");
   self notify("bot_monitor_watch_entrances");
@@ -443,21 +443,21 @@ _id_1A84() {
   self endon("disconnect");
   self endon("death");
 
-  while(!isDefined(self._id_A8C9)) {
+  while(!isDefined(self.watch_nodes)) {
     waitframe();
   }
 
-  while(isDefined(self._id_A8C9)) {
-    foreach(var_1 in self._id_A8C9) {
-      var_1._id_A8C7[self.entity_number] = var_1._id_A8C6[self.entity_number];
+  while(isDefined(self.watch_nodes)) {
+    foreach(var_1 in self.watch_nodes) {
+      var_1.watch_node_chance[self.entity_number] = var_1._id_A8C6[self.entity_number];
     }
 
-    maps\mp\bots\_bots_strategy::_id_7733(0.5);
+    maps\mp\bots\_bots_strategy::prioritize_watch_nodes_toward_enemies(0.5);
     wait(_randomfloatrange(0.5, 0.75));
   }
 }
 
-_id_19C8(var_0, var_1) {
+bot_find_ambush_entrances(var_0, var_1) {
   self endon("disconnect");
   var_2 = [];
   var_3 = _findentrances(var_0.origin);
@@ -477,7 +477,7 @@ _id_19C8(var_0, var_1) {
       if(var_4 && var_1) {
         waitframe();
 
-        if(!maps\mp\bots\_bots_util::_id_37DF(var_6.origin, var_0.origin, "crouch")) {
+        if(!maps\mp\bots\_bots_util::entrance_visible_from(var_6.origin, var_0.origin, "crouch")) {
           continue;
         }
       }
@@ -489,7 +489,7 @@ _id_19C8(var_0, var_1) {
   return var_2;
 }
 
-_id_19C4(var_0) {
+bot_filter_ambush_inuse(var_0) {
   var_1 = [];
   var_2 = gettime();
   var_3 = var_0.size;
@@ -497,7 +497,7 @@ _id_19C4(var_0) {
   for(var_4 = 0; var_4 < var_3; var_4++) {
     var_5 = var_0[var_4];
 
-    if(!isDefined(var_5._id_1938) || var_2 > var_5._id_1938) {
+    if(!isDefined(var_5.bot_ambush_end) || var_2 > var_5.bot_ambush_end) {
       var_1[var_1.size] = var_5;
     }
   }
@@ -505,21 +505,21 @@ _id_19C4(var_0) {
   return var_1;
 }
 
-_id_19C5(var_0, var_1, var_2) {
+bot_filter_ambush_vicinity(var_0, var_1, var_2) {
   var_3 = [];
   var_4 = [];
   var_5 = var_2 * var_2;
 
   if(level.teambased) {
-    foreach(var_7 in level._id_6E97) {
+    foreach(var_7 in level.participants) {
       if(!maps\mp\_utility::isreallyalive(var_7)) {
         continue;
       }
       if(!isDefined(var_7.team)) {
         continue;
       }
-      if(var_7.team == var_1.team && var_7 != var_1 && isDefined(var_7._id_6708)) {
-        var_4[var_4.size] = var_7._id_6708.origin;
+      if(var_7.team == var_1.team && var_7 != var_1 && isDefined(var_7.node_ambushing_from)) {
+        var_4[var_4.size] = var_7.node_ambushing_from.origin;
       }
     }
   }
@@ -544,23 +544,23 @@ _id_19C5(var_0, var_1, var_2) {
   return var_3;
 }
 
-_id_23AB() {
+clear_camper_data() {
   self notify("clear_camper_data");
 
-  if(isDefined(self._id_6708) && isDefined(self._id_6708._id_1938)) {
-    self._id_6708._id_1938 = undefined;
+  if(isDefined(self.node_ambushing_from) && isDefined(self.node_ambushing_from.bot_ambush_end)) {
+    self.node_ambushing_from.bot_ambush_end = undefined;
   }
 
-  self._id_6708 = undefined;
-  self._id_753C = undefined;
+  self.node_ambushing_from = undefined;
+  self.point_to_ambush = undefined;
   self._id_0D94 = undefined;
   self._id_0D41 = undefined;
   self._id_0D38 = _randomintrange(20000, 30000);
   self._id_0D39 = -1;
 }
 
-_id_8B73() {
-  if(maps\mp\bots\_bots_strategy::_id_1A14()) {
+should_select_new_ambush_point() {
+  if(maps\mp\bots\_bots_strategy::bot_has_tactical_goal()) {
     return 0;
   }
 
@@ -575,21 +575,21 @@ _id_8B73() {
   return 0;
 }
 
-_id_3B67() {
+find_camp_node() {
   self notify("find_camp_node");
   self endon("find_camp_node");
-  return maps\mp\bots\_bots_util::_id_1AA8("find_camp_node_worker", ::_id_3B68);
+  return maps\mp\bots\_bots_util::bot_queued_process("find_camp_node_worker", ::find_camp_node_worker);
 }
 
-_id_3B68() {
+find_camp_node_worker() {
   self notify("find_camp_node_worker");
   self endon("find_camp_node_worker");
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  _id_23AB();
+  clear_camper_data();
 
-  if(level._id_AC9C <= 0) {
+  if(level.zonecount <= 0) {
     return 0;
   }
 
@@ -618,7 +618,7 @@ _id_3B68() {
       var_7 = -1;
       var_8 = -1;
 
-      for(var_9 = 0; var_9 < level._id_AC9C; var_9++) {
+      for(var_9 = 0; var_9 < level.zonecount; var_9++) {
         var_5 = _getzonenodeforindex(var_9);
         var_6 = _getlinkednodes(var_5);
 
@@ -697,21 +697,21 @@ _id_3B68() {
           var_19 = self botnodepickmultiple(var_19, var_21, var_21, "node_camp", anglesToForward(var_3));
         }
 
-        var_19 = _id_19C4(var_19);
+        var_19 = bot_filter_ambush_inuse(var_19);
 
-        if(!isDefined(self._id_1F10) || !self._id_1F10) {
+        if(!isDefined(self.can_camp_near_others) || !self.can_camp_near_others) {
           var_22 = 800;
-          var_19 = _id_19C5(var_19, self, var_22);
+          var_19 = bot_filter_ambush_vicinity(var_19, self, var_22);
         }
 
         if(var_19.size > 0) {
-          var_15 = common_scripts\utility::_id_7A46(var_19);
+          var_15 = common_scripts\utility::random_weight_sorted(var_19);
         }
       }
 
       if(isDefined(var_15)) {
         var_16 = 0;
-      } else if(isDefined(self._id_1F01)) {
+      } else if(isDefined(self.camping_needs_fallback_camp_location)) {
         if(var_17 == 1 && !var_18) {
           var_17 = 3;
         } else if(var_17 == 3 && !var_18) {
@@ -732,18 +732,18 @@ _id_3B68() {
     return 0;
   }
 
-  self._id_6708 = var_15;
+  self.node_ambushing_from = var_15;
   self._id_0D39 = gettime() + self._id_0D38;
-  self._id_6708._id_1938 = self._id_0D39;
+  self.node_ambushing_from.bot_ambush_end = self._id_0D39;
   self._id_0D94 = var_3[1];
   return 1;
 }
 
-_id_3B64(var_0, var_1) {
-  _id_23AB();
+find_ambush_node(var_0, var_1) {
+  clear_camper_data();
 
   if(isDefined(var_0)) {
-    self._id_753C = var_0;
+    self.point_to_ambush = var_0;
   } else {
     var_2 = undefined;
     var_3 = _getnodesinradius(self.origin, 5000, 0, 2000);
@@ -753,7 +753,7 @@ _id_3B64(var_0, var_1) {
     }
 
     if(isDefined(var_2)) {
-      self._id_753C = var_2.origin;
+      self.point_to_ambush = var_2.origin;
     } else {
       return 0;
     }
@@ -765,54 +765,54 @@ _id_3B64(var_0, var_1) {
     var_4 = var_1;
   }
 
-  var_5 = _getnodesinradius(self._id_753C, var_4, 0, 1000);
+  var_5 = _getnodesinradius(self.point_to_ambush, var_4, 0, 1000);
   var_6 = undefined;
 
   if(var_5.size > 0) {
     var_7 = int(max(1, int(var_5.size * 0.15)));
-    var_5 = self botnodepickmultiple(var_5, var_7, var_7, "node_ambush", self._id_753C);
+    var_5 = self botnodepickmultiple(var_5, var_7, var_7, "node_ambush", self.point_to_ambush);
   }
 
-  var_5 = _id_19C4(var_5);
+  var_5 = bot_filter_ambush_inuse(var_5);
 
   if(var_5.size > 0) {
-    var_6 = common_scripts\utility::_id_7A46(var_5);
+    var_6 = common_scripts\utility::random_weight_sorted(var_5);
   }
 
   if(!isDefined(var_6) || !self botnodeavailable(var_6)) {
     return 0;
   }
 
-  self._id_6708 = var_6;
+  self.node_ambushing_from = var_6;
   self._id_0D39 = gettime() + self._id_0D38;
-  self._id_6708._id_1938 = self._id_0D39;
-  var_8 = vectorNormalize(self._id_753C - self._id_6708.origin);
+  self.node_ambushing_from.bot_ambush_end = self._id_0D39;
+  var_8 = vectorNormalize(self.point_to_ambush - self.node_ambushing_from.origin);
   var_9 = vectortoangles(var_8);
   self._id_0D94 = var_9[1];
   return 1;
 }
 
-_id_1AAE() {
-  if(maps\mp\bots\_bots_util::_id_1A36()) {
+bot_random_path() {
+  if(maps\mp\bots\_bots_util::bot_is_remote_or_linked()) {
     return 0;
   }
 
-  var_0 = level._id_1AB0[self.team];
+  var_0 = level.bot_random_path_function[self.team];
   return self[[var_0]]();
 }
 
-_id_1AAF() {
+bot_random_path_default() {
   var_0 = 0;
   var_1 = 50;
 
-  if(self._id_6F7D == "camper") {
+  if(self.personality == "camper") {
     var_1 = 0;
   }
 
   var_2 = undefined;
 
   if(randomint(100) < var_1) {
-    var_2 = maps\mp\bots\_bots_util::_id_1AB2();
+    var_2 = maps\mp\bots\_bots_util::bot_recent_point_of_interest();
   }
 
   if(!isDefined(var_2)) {
@@ -830,12 +830,12 @@ _id_1AAF() {
   return var_0;
 }
 
-_id_1ADD() {
-  if(maps\mp\_utility::_id_761E()) {
+bot_setup_callback_class() {
+  if(maps\mp\_utility::practiceroundgame()) {
     return "practice" + _randomintrange(1, 6);
   }
 
-  if(maps\mp\bots\_bots_loadout::_id_1ADE()) {
+  if(maps\mp\bots\_bots_loadout::bot_setup_loadout_callback()) {
     return "callback";
   } else {
     return "class0";

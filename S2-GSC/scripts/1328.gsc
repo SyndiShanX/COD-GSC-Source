@@ -22,7 +22,7 @@ _id_3662() {
 
   self._id_4B64 = 1;
   thread _id_63D8();
-  _id_0513::_id_A13B();
+  _id_0513::updatemovespeedscale();
 }
 
 _id_2F9E() {
@@ -31,7 +31,7 @@ _id_2F9E() {
   }
 
   self._id_4B64 = 0;
-  _id_0513::_id_A13B();
+  _id_0513::updatemovespeedscale();
 }
 
 _id_63D8() {

@@ -74,7 +74,7 @@ _id_259E(var_0, var_1) {
   }
 
   self setclientomnvar("ui_zm_" + var_2, gettime() + int(var_1 * 1000));
-  thread maps\mp\gametypes\_hud_message::_id_9102("zm_consumable_" + var_2);
+  thread maps\mp\gametypes\_hud_message::splashnotify("zm_consumable_" + var_2);
   thread consumable_uisplash_kill(var_0, var_1);
 }
 
@@ -86,7 +86,7 @@ consumable_uisplash_kill(var_0, var_1) {
   if(isDefined(var_1)) {
     common_scripts\utility::_id_A70D(var_1, self, "weapon_consumable_taken", self, "weapon_consumable_used");
   } else {
-    common_scripts\utility::_id_A70A("weapon_consumable_taken", "weapon_consumable_used");
+    common_scripts\utility::waittill_any("weapon_consumable_taken", "weapon_consumable_used");
   }
 
   self setclientomnvar("ui_zm_" + var_2, 0);
@@ -140,7 +140,7 @@ _id_259C(var_0) {
 
     self notify("weapon_consumable_used");
   } else
-    self._id_5B98 = self getcurrentprimaryweapon();
+    self.lastequippedweapon = self getcurrentprimaryweapon();
 
   self._id_A9C1 = _id_259B(var_0);
   self._id_4BA6 = 1;
@@ -174,8 +174,8 @@ _id_259D(var_0) {
   }
 
   if(!var_1) {
-    if(isDefined(self._id_5B98) && self hasweapon(self._id_5B98)) {
-      var_2 = self._id_5B98;
+    if(isDefined(self.lastequippedweapon) && self hasweapon(self.lastequippedweapon)) {
+      var_2 = self.lastequippedweapon;
     } else {
       var_3 = self getweaponlistprimaries();
 
@@ -188,7 +188,7 @@ _id_259D(var_0) {
     }
 
     _id_0586::_id_078E(var_2);
-    self._id_5B98 = undefined;
+    self.lastequippedweapon = undefined;
   }
 
   if(self hasweapon(self._id_A9C1)) {
@@ -224,7 +224,7 @@ weapon_switch_listener(var_0) {
   for(;;) {
     self waittill("weapon_change", var_1);
 
-    if(_id_0547::_id_577E(self)) {
+    if(_id_0547::isplayerinlaststand(self)) {
       return;
     }
     if(var_1 == var_0 || var_1 == "none") {

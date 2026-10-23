@@ -72,7 +72,7 @@ lightsetforplayer() {
       var_2 = 0;
     else if(gettime() >= var_3) {
       self notify("useConsumable_sReviveSlot");
-      _id_0378::_id_8D74("play_revive_sound");
+      _id_0378::snd_message("play_revive_sound");
       break;
     }
 

@@ -9,7 +9,7 @@ init() {
 }
 
 initialize_markers() {
-  level.zmf_shattered_hardpoint_structs = common_scripts\utility::_id_46B7("zmf_shattered_hardpoint_marker", "targetname");
+  level.zmf_shattered_hardpoint_structs = common_scripts\utility::getstructarray("zmf_shattered_hardpoint_marker", "targetname");
   level.zmf_shattered_hardpoint_markers = [];
   var_0 = 16;
 
@@ -44,8 +44,8 @@ show_markers() {
 
 run_escape(var_0) {
   level endon("game_over");
-  var_1 = common_scripts\utility::_id_46B5("dom_flag_pole_b", "targetname");
-  var_2 = common_scripts\utility::_id_46B5(var_1.target, "targetname");
+  var_1 = common_scripts\utility::getstruct("dom_flag_pole_b", "targetname");
+  var_2 = common_scripts\utility::getstruct(var_1.target, "targetname");
   var_3 = spawn("script_model", var_1.origin);
   var_3 setModel("ctf_flag_pole_with_supports");
   var_4 = spawn("script_model", var_2.origin);
@@ -71,9 +71,9 @@ run_escape(var_0) {
   var_7 = spawnStruct();
   var_7 thread maps\mp\mp_zombie_nest_ee_wave_manipulation::enforce_zombie_limit("escape_started", 8);
   var_7 thread ramp_value(var_5);
-  _id_0378::_id_8D74("dlc3_start_escape_music");
+  _id_0378::snd_message("dlc3_start_escape_music");
   var_8 = var_3;
-  var_8._id_603C = "zm_hud_type_escape_common_icon";
+  var_8.material = "zm_hud_type_escape_common_icon";
   var_8.waypoint_origin = var_8.origin + (0, 0, 80);
   var_8.waypoints = [];
   level thread maps\mp\_utility::_id_6F74(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::draw_waypoint_on_struct, var_8);
@@ -82,7 +82,7 @@ run_escape(var_0) {
   show_markers();
   maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::clear_all_waypoints();
   var_7 notify("escape_started");
-  _id_0378::_id_8D74("dlc3_stop_escape_music", 80);
+  _id_0378::snd_message("dlc3_stop_escape_music", 80);
   return capture_escape_point(var_3, var_6);
 }
 
@@ -104,11 +104,11 @@ capture_escape_point(var_0, var_1) {
   }
 
   var_6 delete();
-  _id_0378::_id_8D74("dlc3_stop_escape_music", 0);
+  _id_0378::snd_message("dlc3_stop_escape_music", 0);
   var_7 = 0;
 
   foreach(var_9 in level.players) {
-    var_9._id_480F = 1;
+    var_9.godmode = 1;
   }
 
   foreach(var_9 in level.players) {

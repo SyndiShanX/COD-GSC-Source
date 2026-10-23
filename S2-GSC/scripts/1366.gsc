@@ -4,10 +4,10 @@
 **************************************/
 
 init() {
-  level thread maps\mp\_utility::_id_6F74(::_id_5330);
+  level thread maps\mp\_utility::_id_6F74(::initplayer);
 }
 
-_id_5330() {
+initplayer() {
   if(!isbot(self)) {
     self._id_7871 = [];
     thread _id_63A0();
@@ -41,7 +41,7 @@ _id_63FA() {
     foreach(var_5, var_4 in self._id_7871) {
       if(var_4.name == var_0) {
         self._id_293A = var_5;
-        var_2 = var_4._id_502A;
+        var_2 = var_4.id;
         var_1 = 1;
         break;
       }
@@ -90,7 +90,7 @@ _id_24DD(var_0, var_1, var_2) {
   var_3._id_0CAF = var_2;
   self._id_7871 = common_scripts\utility::_id_0F6F(self._id_7871, var_3);
   var_4 = int(tablelookup("mp/zombieUsableQuestItems.csv", 1, var_0, 0));
-  var_3._id_502A = var_4;
+  var_3.id = var_4;
   self setclientomnvar("ui_zm_owns_quest_items", var_4);
 }
 

@@ -4,17 +4,17 @@
 *******************************************************/
 
 main() {
-  _id_87A7();
-  _id_879B();
+  setup_callbacks();
+  setup_bot_war();
 }
 
-_id_87A7() {
-  level.bot_funcs["gametype_think"] = ::_id_1B25;
+setup_callbacks() {
+  level.bot_funcs["gametype_think"] = ::bot_war_think;
 }
 
-_id_879B() {}
+setup_bot_war() {}
 
-_id_1B25() {
+bot_war_think() {
   self notify("bot_war_think");
   self endon("bot_war_think");
   self endon("death");
@@ -23,7 +23,7 @@ _id_1B25() {
   self endon("owner_disconnect");
 
   for(;;) {
-    self[[self._id_6F7F]]();
+    self[[self.personality_update_function]]();
     waitframe();
   }
 }

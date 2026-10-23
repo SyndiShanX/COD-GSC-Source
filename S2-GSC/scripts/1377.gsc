@@ -127,7 +127,7 @@ _id_636D() {
       continue;
     }
 
-    self setclientomnvar("ui_zm_can_use_consumable", self._id_A97F < level._id_A980 && !_id_056A::isusingperkmachine());
+    self setclientomnvar("ui_zm_can_use_consumable", self._id_A97F < level.wavecounter && !_id_056A::isusingperkmachine());
   }
 }
 
@@ -308,7 +308,7 @@ _id_1F7B() {
     return 0;
   }
 
-  if(self._id_A97F >= level._id_A980) {
+  if(self._id_A97F >= level.wavecounter) {
     return 0;
   }
 
@@ -333,7 +333,7 @@ _id_A201(var_0) {
 
     level._id_400E[level._id_400E.size] = ["assassin_set 4 -1", self];
     level._id_400E[level._id_400E.size] = ["bat_elite_set 4 -1", self];
-    self._id_A97F = level._id_A980;
+    self._id_A97F = level.wavecounter;
     self notify("can_use_consumable");
   }
 }

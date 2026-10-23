@@ -4,13 +4,13 @@
 ******************************************************/
 
 init() {
-  level._id_33D6 = 0;
-  game["headicon_allies"] = _id_0510::_id_46D1("allies");
-  game["headicon_axis"] = _id_0510::_id_46D1("axis");
+  level.drawfriend = 0;
+  game["headicon_allies"] = _id_0510::getteamheadicon("allies");
+  game["headicon_axis"] = _id_0510::getteamheadicon("axis");
   level thread onplayerconnect();
 
   for(;;) {
-    _id_A117();
+    updatefriendiconsettings();
     wait 5;
   }
 }
@@ -28,7 +28,7 @@ onplayerspawned() {
 
   for(;;) {
     self waittill("spawned_player");
-    thread _id_8BFA();
+    thread showfriendicon();
   }
 }
 
@@ -41,8 +41,8 @@ _id_6B7B() {
   }
 }
 
-_id_8BFA() {
-  if(level._id_33D6) {
+showfriendicon() {
+  if(level.drawfriend) {
     if(self.pers["team"] == "allies") {
       self._id_00BA = game["headicon_allies"];
       self._id_00BB = "allies";
@@ -53,23 +53,23 @@ _id_8BFA() {
   }
 }
 
-_id_A117() {
-  var_0 = maps\mp\_utility::getintproperty("scr_drawfriend", level._id_33D6);
+updatefriendiconsettings() {
+  var_0 = maps\mp\_utility::getintproperty("scr_drawfriend", level.drawfriend);
 
-  if(level._id_33D6 != var_0) {
-    level._id_33D6 = var_0;
-    _id_A116();
+  if(level.drawfriend != var_0) {
+    level.drawfriend = var_0;
+    updatefriendicons();
   }
 }
 
-_id_A116() {
+updatefriendicons() {
   var_0 = level.players;
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
 
     if(isDefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing") {
-      if(level._id_33D6) {
+      if(level.drawfriend) {
         if(var_2.pers["team"] == "allies") {
           var_2._id_00BA = game["headicon_allies"];
           var_2._id_00BB = "allies";

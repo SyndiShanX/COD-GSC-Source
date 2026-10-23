@@ -35,11 +35,11 @@ tabunzm_handle(var_0) {
   var_0 endon("death");
   var_0 waittill("explode", var_1);
   var_2 = spawnStruct();
-  var_2._id_2994 = 10;
+  var_2.damage = 10;
   var_2.radius = 100;
   var_2._id_688C = 5;
   var_2._id_99EB = 1;
-  var_2._id_6C2C = var_1;
+  var_2.org = var_1;
   thread tabunzm_managedamage(var_2, self, tabun_get_weapon_name());
 }
 
@@ -62,8 +62,8 @@ tabunzm_managedamage(var_0, var_1, var_2) {
       if(common_scripts\utility::_id_562E(var_6.isconverted)) {
         continue;
       }
-      if(tabunzm_collisionpassed(var_6.origin, var_0._id_6C2C, var_0.radius)) {
-        if(tabunzm_zombieishittable(var_6, var_0._id_6C2C)) {
+      if(tabunzm_collisionpassed(var_6.origin, var_0.org, var_0.radius)) {
+        if(tabunzm_zombieishittable(var_6, var_0.org)) {
           if(isDefined(var_1) && (isDefined(level.currentconverts) && level.currentconverts < 8)) {
             level tabunzm_convertzombie(var_6, var_1);
           }
@@ -81,7 +81,7 @@ tabunzm_convertzombie(var_0, var_1) {
   level thread tabunzm_onzombiedeath(var_0);
   var_0._id_6816 = 1;
   var_0.isconverted = 1;
-  _playfxontagforclients(common_scripts\utility::_id_44F5("zmb_tabun_stun"), var_0, "J_Head", var_1);
+  _playfxontagforclients(common_scripts\utility::getfx("zmb_tabun_stun"), var_0, "J_Head", var_1);
 }
 
 tabunzm_onzombiedeath(var_0) {
