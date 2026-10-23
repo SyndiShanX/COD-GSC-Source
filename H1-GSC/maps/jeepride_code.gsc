@@ -4,32 +4,32 @@
  * Script: maps\jeepride_code.gsc
 ********************************/
 
-orientmodehack_axis(var_0) {
-  var_0 endon("newanim");
+orientmodehack_axis(guy) {
+  guy endon("newanim");
   self endon("death");
-  var_0 endon("death");
-  var_0 endon("death");
+  guy endon("death");
+  guy endon("death");
   self endon("unloading");
 
   for(;;) {
-    var_0 orientmode("face angle", vectortoangles(level.player.origin - var_0.origin)[1]);
+    guy orientmode("face angle", vectortoangles(level.player.origin - guy.origin)[1]);
     wait 0.05;
   }
 }
 
-player_fudge_move_rotate_to(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2)) {
-    var_2 = 1;
+player_fudge_move_rotate_to(dest, destang, moverate, org) {
+  if(!isDefined(moverate)) {
+    moverate = 1;
   }
 
-  var_3 unlink();
-  var_4 = distance(level.player.origin, var_0);
-  var_5 = var_4 / var_2;
-  var_6 = var_5 * 0.05;
-  var_7 = var_5 * 0.05;
-  var_3 moveTo(var_0, var_5, var_6, var_7);
-  var_3 rotateTo(var_1, var_5, var_6, var_7);
-  wait(var_5);
+  org unlink();
+  dist = distance(level.player.origin, dest);
+  movetime = dist / moverate;
+  accel = movetime * 0.05;
+  decel = movetime * 0.05;
+  org moveTo(dest, movetime, accel, decel);
+  org rotateTo(destang, movetime, accel, decel);
+  wait(movetime);
   level.player unlink();
 }
 
@@ -4004,23 +4004,23 @@ flag_sound(var_0) {
 }
 
 fake_water_tread() {
-  var_0 = maps\_vehicle::get_script_vehicles();
-  var_1 = undefined;
+  vehicles = maps\_vehicle::get_script_vehicles();
+  thehind = undefined;
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(var_0[var_2].vehicletype == "hind") {
-      var_1 = var_0[var_2];
+  for(i = 0; i < vehicles.size; i++) {
+    if(vehicles[i].vehicletype == "hind") {
+      thehind = vehicles[i];
     }
   }
 
-  if(!isDefined(var_1)) {
+  if(!isDefined(thehind)) {
     return;
   }
   level endon("end_fake_water_tread");
 
   for(;;) {
-    var_3 = (var_1.origin[0], var_1.origin[1], 375);
-    playFX(level._vehicle_effect[var_1.classname]["water"], var_3);
+    position = (thehind.origin[0], thehind.origin[1], 375);
+    playFX(level._vehicle_effect[thehind.classname]["water"], position);
     wait 0.1;
   }
 }
