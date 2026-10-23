@@ -168,7 +168,7 @@ function private archetypezombieonanimscriptedcallback(entity) {
 }
 
 function function_eb55349f() {
-  var_1690db4a = [#"c_t9_zmb_ndu_zombie_shirtless2", #"hash_16837b6c9b7a1881", #"hash_50fdc172aee097e6", #"c_t9_zmb_gold_zombie_male_shirtless2", #"hash_502c60e0a94ba04b"];
+  var_1690db4a = [#"c_t9_zmb_ndu_zombie_shirtless2", #"hash_16837b6c9b7a1881", #"hash_50fdc172aee097e6", #"c_t9_zmb_gold_zombie_male_shirtless2", #"c_t9_zmb_gold_zombie_labcoat_body1"];
 
   if(self.model === #"c_t9_zmb_zombie_light_body2" || isDefined(self.model) && isinarray(var_1690db4a, self.model)) {
     self clientfield::set("pustule_pulse_cf", 1);

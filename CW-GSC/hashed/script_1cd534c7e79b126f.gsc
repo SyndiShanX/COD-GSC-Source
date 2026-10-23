@@ -185,7 +185,7 @@ function function_3f808d3d(eventstruct) {
     instance flag::set(#"times_up");
 
     if(isDefined(instance.mdl_rocket)) {
-      instance.mdl_rocket playSound(#"hash_5a2c52f1f2b57bf2");
+      instance.mdl_rocket playSound(#"zmb_dragonhead_evt_end");
     }
 
     foreach(ai in a_ai) {
@@ -418,7 +418,7 @@ function function_544f03e3(s_instance) {
       s_instance.var_dae71351 = 1;
       s_instance.var_c9df36f = "takeoff level 1";
       str_shot = "fuel level 1";
-      s_instance.mdl_rocket playSound(#"hash_22ba30d426789fe");
+      s_instance.mdl_rocket playSound(#"zmb_dragonhead_tier_low");
       break;
     case 12:
       s_instance.var_2348a8fb = #"medium";
@@ -427,7 +427,7 @@ function function_544f03e3(s_instance) {
       s_instance.var_dae71351 = 2;
       s_instance.var_c9df36f = "takeoff level 2";
       str_shot = "fuel level 2";
-      s_instance.mdl_rocket playSound(#"hash_d39ad0d4958aed2");
+      s_instance.mdl_rocket playSound(#"zmb_dragonhead_tier_med");
       break;
     case 20:
       s_instance.var_2348a8fb = #"large";
@@ -436,7 +436,7 @@ function function_544f03e3(s_instance) {
       s_instance.var_dae71351 = 3;
       s_instance.var_c9df36f = "takeoff level 3";
       str_shot = "fuel level 3";
-      s_instance.mdl_rocket playSound(#"hash_2fa3cbab386aafa0");
+      s_instance.mdl_rocket playSound(#"zmb_dragonhead_tier_high");
       break;
     case 25:
       s_instance.var_2348a8fb = #"gold";
@@ -445,7 +445,7 @@ function function_544f03e3(s_instance) {
       s_instance.var_dae71351 = 3;
       s_instance.var_c9df36f = "takeoff level 4";
       str_shot = "fuel level 4";
-      s_instance.mdl_rocket playSound(#"hash_d2bc90d494ca10a");
+      s_instance.mdl_rocket playSound(#"zmb_dragonhead_tier_max");
       break;
     default:
       break;

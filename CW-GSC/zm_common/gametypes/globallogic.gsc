@@ -618,7 +618,7 @@ function matchstarttimer(counttime) {
         }
 
         if(shouldplaysound) {
-          player playlocalsound(#"hash_5e14726f77107d1b");
+          player playlocalsound(#"uin_default_timer_tick_ingame");
           var_b9ef7eae[var_b9ef7eae.size] = player;
         }
       }

@@ -286,7 +286,7 @@ function function_c2088edf(b_skipped) {
   var_611c4091 zm_unitrigger::create(&function_e594b500, 64, &function_5d8ec91d);
   level waittill(#"hash_7788540323db060");
   dimitri_eyes_pos = struct::get("dimitri_eyes_pos", "targetname");
-  var_95614195 = dimitri_eyes_pos util::spawn_model(#"hash_59fe28273eedc6e3", dimitri_eyes_pos.origin, dimitri_eyes_pos.angles);
+  var_95614195 = dimitri_eyes_pos util::spawn_model(#"c_t9_zmb_gold_zombie_labcoat_corpse_eyeball", dimitri_eyes_pos.origin, dimitri_eyes_pos.angles);
   var_535d61f8 = getEnt("retinal_scan", "targetname");
   var_535d61f8 scene::play(#"p9_fxanim_zm_gold_retinal_scanner_bundle", "up", var_535d61f8);
   var_535d61f8 clientfield::set("" + #"hash_438f8800ecce6fba", 1);

@@ -64,7 +64,7 @@ function function_9452b8f1(localclientnum, oldval, newval, bnewent, binitialsnap
     self.boltfx = function_239993de(fieldname, "zm_ai/fx8_avo_elec_projectile", self, "tag_origin_animate");
 
     if(!isDefined(self.var_cb169d5f)) {
-      self.var_cb169d5f = self playLoopSound(#"hash_64fad034010aebaa");
+      self.var_cb169d5f = self playLoopSound(#"prj_avogadro_pulse_lp");
     }
 
     return;

@@ -632,7 +632,7 @@ function function_7dd63f6c() {
 
     if(countdown <= 10) {
       foreach(player in level.players) {
-        player playlocalsound(#"hash_5e14726f77107d1b");
+        player playlocalsound(#"uin_default_timer_tick_ingame");
       }
     }
 

@@ -352,15 +352,15 @@ function function_10537d85(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(bwasdemojump == 2) {
     if(!isDefined(self.var_38a54dff)) {
-      self playSound(fieldname, #"hash_41c806945939eed6");
-      self.var_38a54dff = self playLoopSound(#"hash_518f551268d347fa");
+      self playSound(fieldname, #"zmb_tungsten_radiation_damage_start");
+      self.var_38a54dff = self playLoopSound(#"zmb_tungsten_radiation_damage_lp");
     }
 
     return;
   }
 
   if(isDefined(self.var_38a54dff)) {
-    self playSound(fieldname, #"hash_2f82db47fea25953");
+    self playSound(fieldname, #"zmb_tungsten_radiation_damage_end");
     self stoploopsound(self.var_38a54dff);
     self.var_38a54dff = undefined;
   }
@@ -376,13 +376,13 @@ function function_40ef083a() {
     level.var_d58a6548 = 30;
   }
 
-  self.var_d70173d8 = self playLoopSound(#"hash_35d7cc9a4eb405f");
+  self.var_d70173d8 = self playLoopSound(#"zmb_tungsten_radiation_stg1");
   wait level.var_d58a6548 / 3;
   self stoploopsound(self.var_d70173d8);
-  self.var_d70173d8 = self playLoopSound(#"hash_35d7dc9a4eb4212");
+  self.var_d70173d8 = self playLoopSound(#"zmb_tungsten_radiation_stg2");
   wait level.var_d58a6548 / 3;
   self stoploopsound(self.var_d70173d8);
-  self.var_d70173d8 = self playLoopSound(#"hash_35d7ec9a4eb43c5");
+  self.var_d70173d8 = self playLoopSound(#"zmb_tungsten_radiation_stg3");
 }
 
 function function_44dc8dc9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

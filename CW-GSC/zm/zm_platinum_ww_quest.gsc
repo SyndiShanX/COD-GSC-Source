@@ -176,7 +176,7 @@ function function_bb30710d() {
       player.var_19f4406e = 2;
       player flag::set(#"hash_2d6980738132f263");
       player thread zm_equipment::show_hint_text(#"hash_77929503066a286b", 10);
-      player playSound(#"hash_6d7a3786a05ee05d");
+      player playSound(#"zmb_quest_ww_flashlight_swap");
       player clientfield::set_to_player("" + #"hash_548794e256c5bad6", 1);
 
       if(isDefined(self.stub.vo_string)) {

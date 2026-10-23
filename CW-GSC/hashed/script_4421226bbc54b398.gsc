@@ -104,7 +104,7 @@ function function_7b6ac8d5(type, reason = undefined) {
   n_delay = isDefined(level.var_d1572d48) ? level.var_d1572d48 : 5;
   wait n_delay;
 
-  if(zm_utility::function_1a01f2f7(self)) {
+  if(zm_utility::gunship_ambush_index_0(self)) {
     return;
   }
 
@@ -130,7 +130,7 @@ function function_e439076f(var_5937b8ee) {
 }
 
 function private function_2ea9419c(type, amount = 1, var_8e592166 = 1) {
-  if(zm_utility::function_1a01f2f7(self)) {
+  if(zm_utility::gunship_ambush_index_0(self)) {
     return;
   }
 

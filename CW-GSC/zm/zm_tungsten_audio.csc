@@ -104,7 +104,7 @@ function function_d8392499() {
   var_c4e62be5 function_9974c822("zmb_tungsten_portal");
   var_c4e62be5 playLoopSound(#"hash_7caec96b396c14c5");
   var_c4e62be5 setforcenocull();
-  soundloopemitter(#"hash_3990cd4e6ed8ede1", (3545, 8279, -336));
+  soundloopemitter(#"zmb_tung_sq_ronnie_radio_lp", (3545, 8279, -336));
   soundloopemitter(#"amb_tv_static_horror_moved", (3563, 1785, -290));
   soundloopemitter(#"amb_tv_static_regular", (3484, 2094, -338));
   soundloopemitter(#"amb_tv_static_regular", (3577, 2091, -264));

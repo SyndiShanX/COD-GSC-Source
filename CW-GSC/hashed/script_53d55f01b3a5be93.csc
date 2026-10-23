@@ -29,7 +29,7 @@ function private function_41cca91a(localclientnum, oldval, newval, bnewent, bini
 
   if(bwastimejump) {
     self.fx = playFX(fieldname, #"hash_5e283544fff6e3d0", self.origin);
-    soundloopemitter(#"hash_50ad83fb3ade2891", self.origin + (0, 0, 20));
+    soundloopemitter(#"evt_orda_ai_healing_pool_lp", self.origin + (0, 0, 20));
     return;
   }
 
@@ -37,5 +37,5 @@ function private function_41cca91a(localclientnum, oldval, newval, bnewent, bini
     stopfx(fieldname, self.fx);
   }
 
-  soundstoploopemitter(#"hash_50ad83fb3ade2891", self.origin + (0, 0, 20));
+  soundstoploopemitter(#"evt_orda_ai_healing_pool_lp", self.origin + (0, 0, 20));
 }

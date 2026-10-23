@@ -420,11 +420,11 @@ function function_726d8f3a(var_fd713d4b = 1) {
   }
 
   if(var_fd713d4b) {
-    self.var_43032f5e setModel(#"hash_487c692b572bc449");
+    self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_sub_number_green_animate_01");
     wait 0.3;
-    self.var_43032f5e setModel(#"hash_487c662b572bbf30");
+    self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_sub_number_green_animate_02");
     wait 0.3;
-    self.var_43032f5e setModel(#"hash_487c672b572bc0e3");
+    self.var_43032f5e setModel(#"p9_zm_gold_jumppads_machine_sub_number_green_animate_03");
     wait 0.3;
   }
 

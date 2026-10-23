@@ -940,7 +940,7 @@ function function_51c1448(stat_name, amount = 1, var_4261ca42, str_weapon_name) 
     return;
   }
 
-  if(zm_utility::function_1a01f2f7(self)) {
+  if(zm_utility::gunship_ambush_index_0(self)) {
     return;
   }
 
@@ -977,7 +977,7 @@ function increment_challenge_stat(stat_name, amount = 1, var_b68b08b1 = 0) {
     return;
   }
 
-  if(zm_utility::function_1a01f2f7(self)) {
+  if(zm_utility::gunship_ambush_index_0(self)) {
     return;
   }
 
@@ -1004,7 +1004,7 @@ function function_fbce465a(stat_name, amount = 1, var_b68b08b1 = 0) {
     return;
   }
 
-  if(zm_utility::function_1a01f2f7(self)) {
+  if(zm_utility::gunship_ambush_index_0(self)) {
     return;
   }
 
@@ -1035,7 +1035,7 @@ function function_17ee4529(stat_name, amount = 1, var_4261ca42, var_b68b08b1 = 0
     return;
   }
 
-  if(zm_utility::function_1a01f2f7(self)) {
+  if(zm_utility::gunship_ambush_index_0(self)) {
     return;
   }
 
@@ -1785,7 +1785,7 @@ function function_c5f9ea85() {
     players = getPlayers();
 
     foreach(player in players) {
-      if(!zm_utility::function_1a01f2f7(player)) {
+      if(!zm_utility::gunship_ambush_index_0(player)) {
         if(!isDefined(player.var_78c18942)) {
           player.var_78c18942 = 0;
         }

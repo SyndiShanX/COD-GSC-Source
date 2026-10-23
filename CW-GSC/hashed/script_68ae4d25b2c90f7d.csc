@@ -27,7 +27,7 @@ function function_4d38c566(localclientnum, oldval, newval, bnewent, binitialsnap
   if(bwastimejump) {
     self endon(#"death");
     self util::waittill_dobj(fieldname);
-    self.var_e648d182 = self playLoopSound(#"hash_498aaf1c4d21c2c7");
+    self.var_e648d182 = self playLoopSound(#"zmb_fieldup_healingaura_lvl_5");
     function_239993de(fieldname, "zm_weapons/fx9_fld_healing_aura_lvl5_3p", self, "tag_origin");
     self thread function_93b178ae();
   }

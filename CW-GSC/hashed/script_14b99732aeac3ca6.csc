@@ -51,19 +51,19 @@ function function_f3b46741(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(bwastimejump == 2) {
-    soundloopemitter(#"hash_5c8e172b662df768", (3239, 10251, -770));
+    soundloopemitter(#"zmb_bunnyquest_stp3_prize_music_lp", (3239, 10251, -770));
     return;
   }
 
   clearsubmix("zmb_sr_dropallaudioby4", 1);
-  soundstoploopemitter(#"hash_5c8e172b662df768", (3239, 10251, -770));
+  soundstoploopemitter(#"zmb_bunnyquest_stp3_prize_music_lp", (3239, 10251, -770));
 }
 
 function function_c2924276(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
     v_pos = self.origin;
     playFX(fieldname, #"hash_5cde32c15506b440", v_pos);
-    playSound(fieldname, #"hash_2f340670f6ec30cb", v_pos + (0, 0, 25));
+    playSound(fieldname, #"zmb_bunnyquest_stp1_pickup", v_pos + (0, 0, 25));
   }
 }
 

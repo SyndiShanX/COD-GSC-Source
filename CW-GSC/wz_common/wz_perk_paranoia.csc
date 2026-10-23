@@ -226,7 +226,7 @@ function private function_3e9077b(localclientnum) {
       }
 
       if(has_los === 1) {
-        var_7cefa3dc = #"hash_73a3e9d9afd7f5b9";
+        var_7cefa3dc = #"evt_talent_paranoia_whispers";
 
         debug_sphere(self.origin, 10, (0, 1, 0));
 
@@ -254,7 +254,7 @@ function private function_3e9077b(localclientnum) {
         if(var_a0364f90 && !player hasperk(localclientnum, #"specialty_immuneparanoia") && !self isremotecontrolling(localclientnum)) {
           if(!is_true(player.var_1627fdd)) {
             player.var_1627fdd = 1;
-            player playSound(localclientnum, #"hash_74faa2aaae4a8737");
+            player playSound(localclientnum, #"evt_talent_paranoia_activate");
             player thread util::delay(15, "disconnect", &function_c97460c6);
           }
 

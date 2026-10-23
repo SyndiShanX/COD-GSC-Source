@@ -96,29 +96,29 @@ function function_6736205c(var_638b775a = 0) {
   damage = 100;
   weapon = getweapon(#"frost_blast");
   var_3decbda2 = #"zmb_fieldup_frostblast_activate";
-  var_89ae2770 = #"hash_6096d838f90bc781";
+  var_89ae2770 = #"zmb_fieldup_frostblast_swirl_1";
   slowdown = #"frost_blast";
 
   switch (var_638b775a) {
     case 2:
       weapon = getweapon(#"frost_blast_2");
-      var_89ae2770 = #"hash_6096d538f90bc268";
+      var_89ae2770 = #"zmb_fieldup_frostblast_swirl_2";
       break;
     case 3:
       weapon = getweapon(#"frost_blast_3");
-      var_89ae2770 = #"hash_6096d638f90bc41b";
+      var_89ae2770 = #"zmb_fieldup_frostblast_swirl_3";
       radius = 256;
       damage = 200;
       break;
     case 4:
       weapon = getweapon(#"frost_blast_4");
-      var_89ae2770 = #"hash_6096db38f90bcc9a";
+      var_89ae2770 = #"zmb_fieldup_frostblast_swirl_4";
       radius = 256;
       damage = 200;
       break;
     case 5:
       weapon = getweapon(#"frost_blast_5");
-      var_89ae2770 = #"hash_6096dc38f90bce4d";
+      var_89ae2770 = #"zmb_fieldup_frostblast_swirl_5";
       radius = 256;
       damage = 200;
       duration = 5;

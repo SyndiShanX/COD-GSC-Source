@@ -235,14 +235,14 @@ function launch_rocket() {
   self.var_7a1183ab clientfield::set("" + #"rocket_thruster", 1);
 
   if(isDefined(self.e_rocket)) {
-    self.e_rocket playLoopSound(#"hash_2eaf64217fead998");
+    self.e_rocket playLoopSound(#"evt_sr_obj_ret_rocket_rumble_lp");
     self.e_rocket linkTo(self.var_7a1183ab, "tag_fx_rocket_exhaust_0");
   }
 
   wait 4;
   self.e_rocket playRumbleOnEntity("sr_retrieval_rocket_takeoff");
   self flag::wait_till(#"launch");
-  self.var_7a1183ab playLoopSound(#"hash_4a9a912c07ee63e");
+  self.var_7a1183ab playLoopSound(#"evt_sr_obj_ret_rocket_move_alarm_lp");
   wait 1;
   self.var_7a1183ab clientfield::set("" + #"rocket_thruster", 0);
   self.var_7a1183ab thread scene::play(#"p9_fxanim_sv_rocket_take_off_bundle", "Shot 4", self.var_7a1183ab);
@@ -373,7 +373,7 @@ function function_182bef13(einflictor, eattacker, idamage, idflags, smeansofdeat
     return partname;
   } else if(isalive(modelindex)) {
     if(vsurfacenormal === "MOD_MELEE") {
-      self playSound(#"hash_1ddeb8af5a217a6e");
+      self playSound(#"evt_sr_obj_def_console_damaged");
     }
   }
 
@@ -2041,7 +2041,7 @@ function function_57d4f7c0(instance) {
       self notify(#"picked_up");
       self.t_pickup notify(#"picked_up");
       self.t_pickup setvisibletoall();
-      playSoundAtPosition(#"hash_1105191492bc5a15", self.origin + (0, 0, 25));
+      playSoundAtPosition(#"evt_sr_obj_ret_canister_pickup", self.origin + (0, 0, 25));
 
       if(isDefined(player)) {
         player playRumbleOnEntity("damage_heavy");
@@ -2448,7 +2448,7 @@ function canister_drop() {
     self.t_pickup setHintString(#"hash_c90fb1f338973f7");
   }
 
-  playSoundAtPosition(#"hash_3047775b10faeffc", self.origin + (0, 0, 25));
+  playSoundAtPosition(#"evt_sr_obj_ret_canister_drop", self.origin + (0, 0, 25));
   self clientfield::set("" + #"canister_glow", 1);
 
   if(isDefined(self.var_f71b7261)) {
@@ -2653,7 +2653,7 @@ function function_9a17187a(instance) {
       if(isalive(player) && !var_2ccf018f) {
         if(distance2dsquared(instance.var_25ad512b.origin, player.origin) <= 4000000) {
           var_2ccf018f = 1;
-          self playLoopSound(#"hash_4a9a912c07ee63e");
+          self playLoopSound(#"evt_sr_obj_ret_rocket_move_alarm_lp");
           self playrumblelooponentity(#"hash_1903f70fddbadc53");
           self scene::play(#"p9_fxanim_sv_rocket_take_off_bundle", "Shot 2", self);
           self stoprumble(#"hash_1903f70fddbadc53");

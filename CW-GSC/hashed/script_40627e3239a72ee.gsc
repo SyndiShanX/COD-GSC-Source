@@ -337,7 +337,7 @@ function function_c490ff56(params) {
 
   if(attacker.var_e941964e >= 50) {
     level flag::set(#"hash_73b91a4076d8a5fd");
-    playSoundAtPosition(#"hash_77b21ab51a834aa5", (0, 0, 0));
+    playSoundAtPosition(#"evt_klaus_upgrade_ready_stinger", (0, 0, 0));
     callback::remove_on_ai_killed(&function_c490ff56);
 
     iprintlnbold("<dev string:x81>");
@@ -1249,7 +1249,7 @@ function cmd(cmd) {
       break;
     case #"hash_2a439dc6ff821f8c":
       level flag::set(#"hash_73b91a4076d8a5fd");
-      playSoundAtPosition(#"hash_77b21ab51a834aa5", (0, 0, 0));
+      playSoundAtPosition(#"evt_klaus_upgrade_ready_stinger", (0, 0, 0));
       break;
     case #"hash_7f4f450f45fab726":
       spawn_loc = level.klaus.origin;

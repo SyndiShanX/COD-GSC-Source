@@ -96,7 +96,7 @@ function function_4b4f57db(var_556c090f = 0) {
     var_d46eae05 = 0;
 
     foreach(player in function_a1ef346b()) {
-      if(!zm_utility::function_1a01f2f7(player)) {
+      if(!zm_utility::gunship_ambush_index_0(player)) {
         var_d46eae05++;
       }
     }

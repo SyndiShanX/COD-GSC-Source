@@ -408,7 +408,7 @@ function function_26e6cccc(localclientnum, oldval, newval, bnewent, binitialsnap
   util::playFXOnTag(bwastimejump, "maps/zm_tungsten/fx9_zm_rcxd_born", self, "tag_origin");
   playSound(bwastimejump, #"hash_828435c0edc0e5c", self.origin + (0, 0, 20));
 
-  if(self.model === #"hash_7dde995ef49216f") {
+  if(self.model === #"veh_t9_zm_arc_xd_tungsten") {
     n_delay = 1;
     var_b978a3c9 = 0;
     wait 20;

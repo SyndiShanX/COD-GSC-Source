@@ -390,7 +390,7 @@ function function_cb2d9b9b(machine, trigger) {
 
           if(var_3069fe3 && isDefined(var_1a988176) && isDefined(var_1d1d4a2a)) {
             if(function_5aad4a79()) {
-              self playlocalsound(#"hash_500cfba1d8f28c89");
+              self playlocalsound(#"uin_armormachine_purchase_upgrade");
 
               if(var_1a988176 == #"hash_6c055e078965b4e3") {
                 self.armor = self.maxarmor;

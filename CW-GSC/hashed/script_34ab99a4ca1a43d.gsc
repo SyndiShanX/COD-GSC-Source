@@ -750,7 +750,7 @@ function function_4ec9fc99(struct, var_cc1fb2d0, var_3a053962, str_scene, var_da
 
   if(var_3a053962 === #"p9_fxanim_zm_gp_chest_01_lrg_gold_xmodel") {
     trigger setHintString("SURVIVAL/SUPPLY_DROP_OPEN");
-  } else if(var_3a053962 === #"hash_12e47c6c01f2ff59") {
+  } else if(var_3a053962 === #"wpn_t9_streak_care_package_halloween_normal_world") {
     trigger setHintString(#"hash_792d71ad95fdc718");
   } else if(var_3a053962 === "p9_fxanim_zm_gp_chest_01_lrg_low_xmodel") {
     trigger setHintString("SCRIPT/SR_LOOT_HINT_LARGE");
@@ -926,18 +926,18 @@ function function_8665f666(eventstruct) {
       eventstruct.activator zm_stats::increment_challenge_stat(#"hash_4b940f1a2905c9ec");
     }
 
-    if(self.struct.scriptmodel.model === #"hash_12e47c6c01f2ff59") {
+    if(self.struct.scriptmodel.model === #"wpn_t9_streak_care_package_halloween_normal_world") {
       eventstruct.activator zm_stats::function_17ee4529(#"hash_513bca963a91d668", 1, #"hash_735ace6b22542a65");
     }
   }
 
-  var_2fab6c8d = #"hash_3c26138474513c5c";
+  var_2fab6c8d = #"evt_sr_chest_rarity_low_open";
 
   if(isDefined(self.var_cc1fb2d0)) {
     if(self.var_cc1fb2d0 === #"sr_explore_chest_medium") {
-      var_2fab6c8d = #"hash_2f094f31f2dbf8f4";
+      var_2fab6c8d = #"evt_sr_chest_rarity_med_open";
     } else if(self.var_cc1fb2d0 === #"sr_explore_chest_large") {
-      var_2fab6c8d = #"hash_6f32121c959e02d0";
+      var_2fab6c8d = #"evt_sr_chest_rarity_high_open";
     }
   }
 

@@ -363,6 +363,6 @@ function function_f20fb48(localclientnum, oldval, newval, bnewent, binitialsnap,
   }
 
   if(bwastimejump) {
-    self.var_d4b5da49 = self playLoopSound(#"hash_13167d6761dcda8b", undefined, (0, 0, 50));
+    self.var_d4b5da49 = self playLoopSound(#"evt_dirtybomb_lastbomb_lp", undefined, (0, 0, 50));
   }
 }

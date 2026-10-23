@@ -90,7 +90,7 @@ function function_14ba47a8(localclientnum, oldval, newval, bnewent, binitialsnap
   if(bwastimejump == 1) {
     if(isDefined(level.var_b895ecc7)) {
       util::playFXOnTag(fieldname, level.var_1c0f10a2.var_2d46d6c0, self, isDefined(level.var_1c0f10a2.var_e9e2126d) ? level.var_1c0f10a2.var_e9e2126d : "tag_origin");
-      self playSound(fieldname, #"hash_af0ab88d6a59e01");
+      self playSound(fieldname, #"evt_hoverjet_destruction");
 
       if(isDefined(level.var_1c0f10a2.var_8af9fe2e)) {
         if(isDefined(level.var_1c0f10a2.var_ee967929)) {

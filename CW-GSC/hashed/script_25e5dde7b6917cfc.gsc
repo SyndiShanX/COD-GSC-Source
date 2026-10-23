@@ -1001,7 +1001,7 @@ function function_50d6beb5(str_skipto, b_starting) {
     var_5010a8d6[#"hash_505d54dd2b523ca3"] = level.var_da19489d;
   }
 
-  level namespace_b7cfe907::function_166083c9(0, struct::get("spawn_vip_intro"));
+  level namespace_b7cfe907::dx_op_ping_plbs_kleo(0, struct::get("spawn_vip_intro"));
 
   if(isDefined(level.gunner)) {
     var_d0e0aa50[#"hash_2082d5270bdcf457"] = level.gunner;

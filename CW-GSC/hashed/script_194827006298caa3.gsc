@@ -79,7 +79,7 @@ function private function_8ebf52b6(instance) {
   instance.var_ec694b2c setscale(3);
   instance.var_ec694b2c pingable();
   instance.var_ec694b2c ghost();
-  instance.var_ec694b2c playLoopSound(#"hash_5925f3613a001afc");
+  instance.var_ec694b2c playLoopSound(#"evt_sur_we_hh_radio_hint_lp");
   instance.var_ec694b2c thread function_6400a64d(instance);
   instance.n_obj_id = zm_utility::function_f5a222a8(#"hash_5a77db57fc999c42", s_start.origin);
 }

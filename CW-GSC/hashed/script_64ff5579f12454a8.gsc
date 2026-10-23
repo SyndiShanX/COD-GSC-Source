@@ -276,7 +276,7 @@ function function_76b5a507(s_params) {
     var_8746b886 setscale(0.75);
     var_8746b886 linkTo(mdl_beacon, "screen_exfil_jnt", (-4.5, 15.5, 0), (78, 0, 0));
     var_8746b886 playSound(#"hash_3b5cbbf2a7018a89");
-    var_8746b886 playLoopSound(#"hash_5c3886dfcd812df");
+    var_8746b886 playLoopSound(#"evt_sur_mq1_stp1_beacon_amp_lp");
     mdl_beacon.var_8746b886 = var_8746b886;
     mdl_beacon showpart("screen_respond_jnt");
     level thread function_f43ecee8(mdl_beacon);

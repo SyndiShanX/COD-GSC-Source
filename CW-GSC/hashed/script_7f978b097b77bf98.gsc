@@ -186,7 +186,7 @@ function private function_5338581(instance) {
 
   instance.mdl_chest clientfield::set("sr_black_chest_fx", 2);
   wait 2;
-  playSoundAtPosition(#"hash_2cc0c33bfc0f9373", instance.mdl_chest.origin + (0, 0, 20));
+  playSoundAtPosition(#"evt_sur_we_bc_chest_locks_flyaway", instance.mdl_chest.origin + (0, 0, 20));
   instance.mdl_chest thread zm_vo::function_d6f8bbd9(#"hash_15b09a217e61af64", 2.5);
   instance.var_fc398f5e = 0;
   s_chest = instance.contentgroups[#"chest"][0];
@@ -218,7 +218,7 @@ function private function_ed1e62c9(instance, var_5ec5a681, s_spawn) {
   var_d4358084 val::set(#"black_chest_swarm", "allowdeath", 0);
   var_d4358084.var_e8280122 = var_5ec5a681.origin;
   var_d4358084.targetname = "world_event_black_chest_swarm";
-  var_d4358084 playLoopSound(#"hash_4c9124e9213250df");
+  var_d4358084 playLoopSound(#"evt_orda_insect_lp");
   trigger = spawn("trigger_radius", var_5ec5a681.origin + (0, 0, 128 * -1), 0, 450, 128 * 2);
   trigger.var_d4358084 = var_d4358084;
   var_d4358084.trigger = trigger;

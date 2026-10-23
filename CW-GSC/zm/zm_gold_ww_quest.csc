@@ -73,7 +73,7 @@ function function_9b54b294(localclientnum, oldval, newval, bnewent, binitialsnap
 
   var_14db7cdb notify(#"turn_off");
   level.var_4965c181[fieldname] = undefined;
-  playSound(fieldname, #"hash_30c83800bc972d7a", var_14db7cdb gettagorigin("tag_screen_fx"));
+  playSound(fieldname, #"zmb_quest_ww_computer_sector_close", var_14db7cdb gettagorigin("tag_screen_fx"));
 
   if(isDefined(level.var_838bf3b1[fieldname])) {
     level.var_838bf3b1[fieldname] delete();

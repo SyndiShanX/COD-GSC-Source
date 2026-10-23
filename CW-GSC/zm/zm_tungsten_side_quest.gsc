@@ -496,7 +496,7 @@ function function_290d0461(var_ce9da91e) {
         self.var_5b345137++;
 
         if(isDefined(self.owner)) {
-          self.owner playsoundtoplayer(#"hash_2116f6ce15a45c4a", self.owner);
+          self.owner playsoundtoplayer(#"zmb_tung_sq_gp_lap_complete", self.owner);
           level.var_252ba2b0 zm_tungsten_grandprix::function_307daa91(self.owner, self.var_5b345137);
         }
       } else {
@@ -507,7 +507,7 @@ function function_290d0461(var_ce9da91e) {
 
         if(isDefined(self.owner)) {
           self.owner clientfield::set_to_player("" + #"hash_1a1bf38ae538a50d", 0);
-          self.owner playsoundtoplayer(#"hash_5a0bc57f6d12bf4c", self.owner);
+          self.owner playsoundtoplayer(#"zmb_tung_sq_gp_race_complete", self.owner);
           music::setmusicstate("", self.owner);
         }
 
@@ -872,7 +872,7 @@ function function_2d3b4eae() {
   self playLoopSound(#"hash_d3e38e2cdff435c");
   wait 10;
   self stoploopsound();
-  self playSound(#"hash_165795b0c096d576");
+  self playSound(#"zmb_tung_sq_gp_machine_off");
   self setModel("tag_origin");
 }
 
@@ -1003,7 +1003,7 @@ function function_ec243299() {
   for(var_ca3231c5 = 0; var_ca3231c5 < 3; var_ca3231c5++) {
     wait 1;
     level.var_579617db[var_ca3231c5] setModel(#"p9_zm_tungsten_screen_red");
-    level.var_579617db[var_ca3231c5] playSound(#"hash_66deffc681f9570e");
+    level.var_579617db[var_ca3231c5] playSound(#"zmb_tung_sq_gp_start_beep");
   }
 
   wait 0.8;
@@ -1461,7 +1461,7 @@ function function_37f28f2b(var_a276c861) {
   var_d0426a23.var_d2835a9f = getEnt("e_burger_boy_right_panel", "targetname");
 
   if(isDefined(var_d0426a23.var_52babeb3)) {
-    var_d0426a23.var_52babeb3 playSound(#"hash_597557b4448dfe42");
+    var_d0426a23.var_52babeb3 playSound(#"zmb_tung_sq_burgerboy_mascot_panel_open");
     var_d0426a23.var_52babeb3 rotateTo(var_d0426a23.var_52babeb3.angles + (0, -90, -15), 3);
   }
 
@@ -1561,7 +1561,7 @@ function function_8f75cb6a(var_a276c861) {
   var_d0426a23 = getEnt("burger_boy", "targetname");
 
   if(isDefined(var_d0426a23.var_52babeb3)) {
-    var_d0426a23.var_52babeb3 playSound(#"hash_6f0ad87dc9e28766");
+    var_d0426a23.var_52babeb3 playSound(#"zmb_tung_sq_burgerboy_mascot_panel_close");
     var_d0426a23.var_52babeb3 rotateTo(var_d0426a23.var_52babeb3.angles + (0, 90, 15), 3);
   }
 
@@ -1732,7 +1732,7 @@ function function_9db81f65() {
 
       iprintlnbold(var_f15d2e26);
 
-      self playSound(#"hash_1ddeb8af5a217a6e");
+      self playSound(#"evt_sr_obj_def_console_damaged");
       zm_sq::sndonoverride_eye_(var_f15d2e26 / 1200);
 
       if(var_f15d2e26 <= 0) {
@@ -1884,7 +1884,7 @@ function function_aa9da0e() {
     var_4f434a9b = item_drop::drop_item(0, undefined, 1, 0, point.id, self gettagorigin("tag_mouth"), self.angles, 0);
     var_4f434a9b.var_dd21aec2 = 1 | 16;
     var_4f434a9b.itementry.droptimeout = 30;
-    var_4f434a9b playSound(#"hash_3dae72c7171166b8");
+    var_4f434a9b playSound(#"zmb_tung_sq_burgerboy_mascot_launch_item");
     n_power = length(self gettagorigin("tag_mouth") - var_9917b0be);
     drop_time = var_4f434a9b zm_utility::fake_physicslaunch(var_9917b0be, n_power);
     self clientfield::increment("" + #"hash_4a1dfb77dccf6587", 1);
@@ -1905,7 +1905,7 @@ function function_7c6752c8() {
   var_772c2945 = item_drop::drop_item(0, undefined, 1, 0, point.id, v_origin, v_angles, 0);
   var_772c2945.var_dd21aec2 = 1 | 16;
   var_772c2945.itementry.droptimeout = 35;
-  var_772c2945 playSound(#"hash_3dae72c7171166b8");
+  var_772c2945 playSound(#"zmb_tung_sq_burgerboy_mascot_launch_item");
   n_power = length(v_origin + var_89f315b8 - v_position);
   drop_time = var_772c2945 zm_utility::fake_physicslaunch(v_position, n_power);
 }
@@ -1929,7 +1929,7 @@ function function_7b92ffd7(entity) {
 function function_4895e5f6() {
   self clientfield::set("" + #"hash_79077a9af52542c8", 0);
   self clientfield::set("" + #"hash_3d5c2390c0768ed2", 1);
-  self playSound(#"hash_1e57a07d7ae159c2");
+  self playSound(#"zmb_tung_sq_burgerboy_mascot_explode");
   level thread function_e8799ac6(self);
 }
 

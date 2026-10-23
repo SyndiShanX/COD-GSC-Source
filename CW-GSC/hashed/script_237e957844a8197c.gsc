@@ -526,7 +526,7 @@ function function_c9b603f3(var_57ef78ed) {
   level.lazar sethighdetail(1);
   e_clip = getEnt("cctv_exit_door_left_clip", "targetname");
   e_clip disconnectPaths();
-  level thread function_39beb73c(actors);
+  level thread dx_op_bttl_aksg_cdwf(actors);
 
   if(var_57ef78ed == "floor_one") {
     level waittill(#"hash_51b0d8debd24a46f");
@@ -553,7 +553,7 @@ function function_8d918610(var_57ef78ed) {
   level function_fd4c7e28();
 }
 
-function function_39beb73c(actors) {
+function dx_op_bttl_aksg_cdwf(actors) {
   level flag::wait_till("flg_cctv_int");
   level notify(#"hash_604e61bc28aebaeb");
   first_floor_enemies = getactorteamarray("axis");

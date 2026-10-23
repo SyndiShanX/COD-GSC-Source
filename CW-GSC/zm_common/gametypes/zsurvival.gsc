@@ -1131,7 +1131,7 @@ function private function_fa60a76c(star_rating = level.star_rating) {
   xp_gain = zm::function_d3113f01(star_rating).var_bd588afd;
 
   foreach(player in getPlayers()) {
-    if(!zm_utility::function_1a01f2f7(player)) {
+    if(!zm_utility::gunship_ambush_index_0(player)) {
       player luinotifyevent(#"hash_3e6dd0ad7b864154", 1, xp_gain);
       player addrankxpvalue("capsule_end_xp", xp_gain, 4);
     }

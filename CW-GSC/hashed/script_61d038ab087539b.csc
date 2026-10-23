@@ -70,8 +70,8 @@ function function_1e0fa475(localclientnum, oldval, newval, bnewent, binitialsnap
     }
 
     if(!isDefined(level.var_9ec7691e[binitialsnap][n_entity].var_f3844d4d)) {
-      self playSound(binitialsnap, #"hash_4ae03761643454de", self.origin + (0, 0, 75));
-      level.var_9ec7691e[binitialsnap][n_entity].var_f3844d4d = self playLoopSound(#"hash_29e3629ab48d4062", undefined, (0, 0, 75));
+      self playSound(binitialsnap, #"zmb_fieldup_teslastorm_start", self.origin + (0, 0, 75));
+      level.var_9ec7691e[binitialsnap][n_entity].var_f3844d4d = self playLoopSound(#"zmb_fieldup_teslastorm_lp", undefined, (0, 0, 75));
     }
 
     if(is_true(self.var_23fa23a9)) {
@@ -111,7 +111,7 @@ function function_1e0fa475(localclientnum, oldval, newval, bnewent, binitialsnap
             }
 
             if(!isDefined(self.var_ae02f041[binitialsnap][n_entity]) && !function_65b9eb0f(binitialsnap)) {
-              self playSound(binitialsnap, #"hash_2924768fc653f982", self.origin + (0, 0, 75));
+              self playSound(binitialsnap, #"zmb_fieldup_teslastorm_beam_start", self.origin + (0, 0, 75));
               self.var_ae02f041[binitialsnap][n_entity] = beam::function_cfb2f62a(binitialsnap, self.var_a2820ebf, "tag_origin", player_source, var_9d127d90, "beam9_zm_tesla_storm");
             }
 
@@ -164,13 +164,13 @@ function function_15de0a8a(localclientnum) {
   }
 
   if(isDefined(level.var_9ec7691e[localclientnum][n_entity].var_f3844d4d)) {
-    self playSound(localclientnum, #"hash_a4211e0f9977ecb", self.origin + (0, 0, 75));
+    self playSound(localclientnum, #"zmb_fieldup_teslastorm_end", self.origin + (0, 0, 75));
     self stoploopsound(level.var_9ec7691e[localclientnum][n_entity].var_f3844d4d);
     level.var_9ec7691e[localclientnum][n_entity].var_f3844d4d = undefined;
   }
 
   if(isDefined(self.var_ae02f041[localclientnum][n_entity])) {
-    self playSound(localclientnum, #"hash_26cf0ef2cb60a802", self.origin + (0, 0, 75));
+    self playSound(localclientnum, #"zmb_fieldup_teslastorm_beam_stop", self.origin + (0, 0, 75));
     beam::function_47deed80(localclientnum, self.var_ae02f041[localclientnum][n_entity], self);
     self.var_ae02f041[localclientnum][n_entity] = undefined;
   }

@@ -103,7 +103,7 @@ function function_4b462025(enemy, b_ignore_cleanup) {
   }
 
   grenade = self magicgrenadetype(var_d54a1968, launch_pos, velocity);
-  playSoundAtPosition(#"hash_4897d1a140f146f5", launch_pos);
+  playSoundAtPosition(#"zmb_orda_hellhound_launch", launch_pos);
   var_9f0ffc57 = (0, 0, 30);
   var_b1d0a64 = util::spawn_model(#"c_t9_zmb_hellhound", launch_pos + var_9f0ffc57, grenade.angles);
   var_b1d0a64 clientfield::set("" + #"dog_projectile_fx", 1);
@@ -308,7 +308,7 @@ function function_f2b0a2e1() {
 function private function_9fc2b867() {
   origin = vectorlerp(self gettagorigin("j_shoulder_le"), self gettagorigin("j_shoulder_ri"), 0.5);
   swarm = util::spawn_model(#"wpn_t9_sr_swarm_hulking_summoner", origin);
-  swarm playLoopSound(#"hash_4c9124e9213250df");
+  swarm playLoopSound(#"evt_orda_insect_lp");
   swarm.var_66a3d186 = self;
 
   if(!isDefined(self.swarms)) {
@@ -414,7 +414,7 @@ function private function_187bcbe() {
       self.target_ent clientfield::increment("hs_swarm_damage", 1);
       health_frac = self.health / self.maxhealth;
       self.target_ent dodamage(100 * health_frac, self.origin, undefined, undefined, "none", "MOD_EXPLOSIVE");
-      self.target_ent playsoundtoplayer(#"hash_6bee01b489607edd", self.target_ent);
+      self.target_ent playsoundtoplayer(#"evt_orda_insect_player_bite", self.target_ent);
       self deletedelay();
     }
 

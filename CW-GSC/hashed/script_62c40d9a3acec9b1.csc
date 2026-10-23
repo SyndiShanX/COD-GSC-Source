@@ -31,18 +31,18 @@ function reward_chest_fx(localclientnum, oldval, newval, bnewent, binitialsnap, 
       break;
     case 1:
       self.n_fx_id = util::playFXOnTag(fieldname, "sr/fx9_chest_explore_amb_sm", self, "tag_origin");
-      self.var_b3673abf = self playLoopSound(#"hash_149989d596125e40", undefined, (0, 0, 40));
+      self.var_b3673abf = self playLoopSound(#"evt_sr_chest_rarity_low_lp", undefined, (0, 0, 40));
       break;
     case 2:
       self.n_fx_id = util::playFXOnTag(fieldname, "sr/fx9_chest_explore_amb_md", self, "tag_origin");
-      self.var_b3673abf = self playLoopSound(#"hash_3b1f5984e7ae4c48", undefined, (0, 0, 40));
+      self.var_b3673abf = self playLoopSound(#"evt_sr_chest_rarity_med_lp", undefined, (0, 0, 40));
       break;
     case 3:
-      if(self.model === #"hash_12e47c6c01f2ff59") {} else {
+      if(self.model === #"wpn_t9_streak_care_package_halloween_normal_world") {} else {
         self.n_fx_id = util::playFXOnTag(fieldname, "sr/fx9_chest_explore_amb_lg", self, "tag_origin");
       }
 
-      self.var_b3673abf = self playLoopSound(#"hash_5dc67061425177d4", undefined, (0, 0, 40));
+      self.var_b3673abf = self playLoopSound(#"evt_sr_chest_rarity_high_lp", undefined, (0, 0, 40));
       break;
   }
 }

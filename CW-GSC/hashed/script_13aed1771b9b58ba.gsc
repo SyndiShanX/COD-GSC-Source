@@ -40,7 +40,7 @@ function private preinit() {
 
 function repair_armor() {
   self.armor = self.maxarmor;
-  self playsoundtoplayer(#"hash_493d4d80ba4199c5", self);
+  self playsoundtoplayer(#"zmb_fieldup_frenziedguard_armor_repair", self);
 }
 
 function set_target(zombie) {

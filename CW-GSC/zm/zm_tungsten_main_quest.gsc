@@ -498,7 +498,7 @@ function function_79936423() {
       }
 
       activator playRumbleOnEntity("damage_light");
-      playSoundAtPosition(#"hash_707c10126e3ac999", s_interact.origin);
+      playSoundAtPosition(#"zmb_tung_mq_midigc_button_press", s_interact.origin);
       level flag::set(#"hash_57b9473a38039ff0");
     }
   }
@@ -564,7 +564,7 @@ function function_2f0a2ce2() {
   }
 
   level function_abb25db(1, (0, 0, 0));
-  var_aeb8a47d = util::spawn_model(#"hash_b7cea188cbd2e02", (0, 0, -2048));
+  var_aeb8a47d = util::spawn_model(#"c_t9_zmb_forsaken_body_fb", (0, 0, -2048));
   var_aeb8a47d clientfield::set("" + #"hash_2fc89133ccd7b0df", 1);
   var_a8605c24 = var_aeb8a47d gettagorigin("j_head");
   var_9ee772b4 = var_aeb8a47d gettagangles("j_head");

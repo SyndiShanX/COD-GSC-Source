@@ -1945,7 +1945,7 @@ function is_player_valid(e_player, var_11e899f9 = 0, var_67fee570 = 0, var_6eefd
   return 1;
 }
 
-function function_1a01f2f7(e_player) {
+function gunship_ambush_index_0(e_player) {
   return isDefined(e_player.var_c069e1cd) && isDefined(level.var_173b2973) && is_true(e_player.var_c069e1cd >= level.var_173b2973);
 }
 

@@ -1373,7 +1373,7 @@ function function_3c81b8d8(e_player) {
 }
 
 function function_ec80a97() {
-  self playsoundtoplayer(#"hash_68d1999829296b7d", self);
+  self playsoundtoplayer(#"zmb_sq_hand_gain_reward", self);
   s_perk = struct::get("he_pe_lo", "targetname");
   s_spawn = {
     #origin: s_perk.origin, #angles: s_perk.angles, #var_738dfc81: 1

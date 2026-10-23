@@ -1116,7 +1116,7 @@ function matchstarttimer(timerlength, waitflag) {
         }
 
         if(shouldplaysound) {
-          player playlocalsound(#"hash_5e14726f77107d1b");
+          player playlocalsound(#"uin_default_timer_tick_ingame");
           var_b9ef7eae[var_b9ef7eae.size] = player;
         }
       }
@@ -1131,7 +1131,7 @@ function matchstarttimer(timerlength, waitflag) {
     arrayremovevalue(var_b9ef7eae, undefined);
 
     foreach(player in var_b9ef7eae) {
-      player playlocalsound(#"hash_66faa3f3d0b4e586");
+      player playlocalsound(#"uin_default_timer_tick_last_ingame");
     }
   }
 
@@ -3145,7 +3145,7 @@ function timelimitclock() {
       }
 
       if(timeleftint <= level.var_537d4629) {
-        var_df4e70cd = #"hash_470c729e4c6298b2";
+        var_df4e70cd = #"uin_ingame_countdown_timer_tick_warning";
       }
 
       if(timeleftint <= level.var_537d4629 || timeleftint <= level.var_1cc83170 && timeleftint % 2 == 0 || level.low_ticket_count === 1 && timeleftint % 2 == 0 || level.very_low_ticket_count === 1) {

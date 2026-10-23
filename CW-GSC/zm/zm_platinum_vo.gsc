@@ -899,7 +899,7 @@ function function_b7e4011() {
   level zm_vo::function_7622cb70("zber_hvt_fire_seq_4_orqc");
 
   foreach(e_computer in var_462905d9) {
-    e_computer playSound(#"hash_5849d9bbaffa605a");
+    e_computer playSound(#"evt_sr_obj_hvt_dish_activate");
   }
 
   wait 1;

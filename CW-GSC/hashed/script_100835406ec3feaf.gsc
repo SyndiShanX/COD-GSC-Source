@@ -237,7 +237,7 @@ function function_7d0eaace() {
     return;
   }
 
-  level.var_ea51eeb9.locks[1] playSound(#"hash_437516da741e5140");
+  level.var_ea51eeb9.locks[1] playSound(#"zmb_quest_ww_safe_open_fail");
 
   iprintlnbold("<dev string:x70>");
 }

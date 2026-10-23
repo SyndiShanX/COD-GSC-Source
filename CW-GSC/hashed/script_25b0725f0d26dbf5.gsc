@@ -505,7 +505,7 @@ function function_6a03d24d(str_skipto) {
       function_27e76b4c("heli_spawn_crash", 2, 1);
       function_14a42357(0);
       function_e1635dfe(0);
-      function_166083c9(0);
+      dx_op_ping_plbs_kleo(0);
       function_882e6973(0, undefined, 1);
       function_ed68628c(0, undefined, 1);
       break;
@@ -515,7 +515,7 @@ function function_6a03d24d(str_skipto) {
 function function_d5d40694() {
   function_14a42357(1);
   function_e1635dfe(1);
-  function_166083c9(1);
+  dx_op_ping_plbs_kleo(1);
 }
 
 function function_882e6973(in_chopper, teleport_point, bullet_shield = 1, var_dfab43c3 = 1) {
@@ -616,7 +616,7 @@ function function_e1635dfe(in_chopper, teleport_point, bullet_shield = 1) {
   level flag::set("flag_armada_copilot_spawned");
 }
 
-function function_166083c9(in_chopper, teleport_point, bullet_shield = 1, var_8ba4e144 = 1) {
+function dx_op_ping_plbs_kleo(in_chopper, teleport_point, bullet_shield = 1, var_8ba4e144 = 1) {
   if(!isDefined(level.gunner)) {
     if(var_8ba4e144) {
       str_spawner = "spawner_hero_gunner_clothanim";

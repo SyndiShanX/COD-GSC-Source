@@ -181,7 +181,7 @@ function function_8b062964() {
   level namespace_7589cf5c::play_vo("objectiveKillHVTFiringSequence4");
 
   if(isDefined(var_2972bc14)) {
-    var_2972bc14 playSound(#"hash_5849d9bbaffa605a");
+    var_2972bc14 playSound(#"evt_sr_obj_hvt_dish_activate");
   }
 
   wait 1;
@@ -1272,7 +1272,7 @@ function private function_15bda870(s_spawn, var_109708e0, s_instance) {
       wait 2;
       var_d8f8912 = util::spawn_model("tag_origin", v_death);
       var_d8f8912.targetname = "death_sound_entity";
-      var_d8f8912 playSound(#"hash_20a9cb202ff38590");
+      var_d8f8912 playSound(#"evt_sr_obj_hvt_death");
     }
 
     s_instance.var_4675adc1++;
@@ -1802,8 +1802,8 @@ function private function_90591f67(var_f5064815, var_109708e0, s_instance) {
     waitframe(1);
   }
 
-  self.mdl_trail playSound(#"hash_5be3120a37873d9e");
-  self.mdl_trail playLoopSound(#"hash_734cc0f685efb122");
+  self.mdl_trail playSound(#"evt_sr_obj_hvt_teleport_start");
+  self.mdl_trail playLoopSound(#"evt_sr_obj_hvt_teleport_lp");
   wait 0.1;
   var_6e468adf = isDefined(var_a2b4a7d6.contentgroups[#"spawn"]) ? var_a2b4a7d6.contentgroups[#"spawn"] : [];
   s_next_spawn = var_6e468adf[0];
@@ -1887,7 +1887,7 @@ function function_42fbf5d9(s_dest, s_instance, var_f5064815) {
   }
 
   if(isDefined(self)) {
-    self playSound(#"hash_292cc4273f4c0161");
+    self playSound(#"evt_sr_obj_hvt_teleport_flyaway");
   }
 
   level thread util::delay(0.5, "end_game", &zm_vo::function_7622cb70, "objectiveKillHVTMoves");
@@ -1921,7 +1921,7 @@ function function_42fbf5d9(s_dest, s_instance, var_f5064815) {
   }
 
   if(isDefined(self)) {
-    self playSound(#"hash_2758a7e5c0fac58b");
+    self playSound(#"evt_sr_obj_hvt_teleport_end");
     self stoploopsound();
   }
 

@@ -445,7 +445,7 @@ function function_ad7dbaa3() {
   }
 
   var_1e019b9b = util::spawn_model("tag_origin", var_13e92fe1.origin, var_13e92fe1.angles);
-  var_1e019b9b playSound(#"hash_94fdf10a792f5fb");
+  var_1e019b9b playSound(#"zmb_gold_mq_3_ads_place");
   var_1e019b9b playSound(#"zmb_quest_ww_gas_vacuum_start");
   level clientfield::set("" + #"hash_493518ca957daaea", 1);
   level thread function_50f8e514(var_13e92fe1);
@@ -839,7 +839,7 @@ function function_35e13260() {
   level waittill(#"disk_insert");
   var_bb8974cd = util::spawn_model(#"p9_rus_floppy_disk_01", struct::get("crp_pos").origin, struct::get("crp_pos").angles);
   var_bb8974cd moveTo(var_bb8974cd.origin + (0, -8, 0), 1, 0.25, 0.25);
-  var_bb8974cd playSound(#"hash_1c9b4881c0da618a");
+  var_bb8974cd playSound(#"zmb_gold_mq_5_floppydisk_insert");
   var_bb8974cd waittill(#"movedone");
   var_d19e0f1f zm_vo::function_d6f8bbd9(#"hash_6b29558edcd0bd8d");
   wait 1;
@@ -1033,7 +1033,7 @@ function function_a8df5533() {
   code_lock linkTo(locked_cabinet, "tag_door");
   activator = locked_cabinet zm_unitrigger::function_fac87205(#"hash_3f754ca49083b2de", 100);
   activator function_bc82f900(#"zm_gold_interact_rumble_small");
-  code_lock playSound(#"hash_34725b511df96083");
+  code_lock playSound(#"zmb_gold_mq_6_locker_beep");
   locked_cabinet thread scene::play("p7_lockers_metal_tail_01_bundle", locked_cabinet);
   aethermeter_pos = struct::get("aethermeter_pos", "targetname");
   point = function_4ba8fde(#"item_zmintel_gold_omega_artifact_5");
@@ -1203,7 +1203,7 @@ function function_3a3ca419() {
   playFX(#"hash_1dd0650d48b02a2", s_fx.origin, anglesToForward(s_fx.angles), anglestoup(s_fx.angles));
   s_crystal.mdl clientfield::set("" + #"hash_5db889fa88fbbe02", 2);
   s_crystal.mdl moveTo(s_crystal.mdl.origin + (0, 0, 30), 1);
-  playSoundAtPosition(#"hash_2eb7e53bbef32adf", s_crystal.mdl.origin + (0, 0, 50));
+  playSoundAtPosition(#"zmb_gold_mq_container_dig", s_crystal.mdl.origin + (0, 0, 50));
   s_crystal.mdl waittill(#"movedone");
   wait 2;
 
@@ -1426,7 +1426,7 @@ function function_531dcaa4() {
   playFX(#"hash_4fb181e52d7a732a", s_fx.origin, anglesToForward(s_fx.angles), anglestoup(s_fx.angles));
   s_crystal.mdl clientfield::set("" + #"hash_5db889fa88fbbe02", 1);
   s_crystal.mdl moveTo(s_crystal.mdl.origin + (0, 0, 30), 1);
-  playSoundAtPosition(#"hash_2eb7e53bbef32adf", s_crystal.mdl.origin + (0, 0, 30));
+  playSoundAtPosition(#"zmb_gold_mq_container_dig", s_crystal.mdl.origin + (0, 0, 30));
   s_crystal.mdl waittill(#"movedone");
   zm_unitrigger::unregister_unitrigger(s_trigger);
   var_a2ff5983 = struct::get_array(s_crystal.target, "targetname");
@@ -1621,7 +1621,7 @@ function function_6b76cd80(s_container) {
       s_container.mdl = s_container util::spawn_model(#"p9_zm_gold_aetherium_container", s_container.origin, s_container.angles);
       s_container.mdl clientfield::set("" + #"hash_5db889fa88fbbe02", 4);
       s_container.mdl moveTo(s_container.origin + (0, 0, 30), 1);
-      playSoundAtPosition(#"hash_2eb7e53bbef32adf", s_container.origin + (0, 0, 30));
+      playSoundAtPosition(#"zmb_gold_mq_container_dig", s_container.origin + (0, 0, 30));
       s_fx = struct::get(#"hash_5296018a08d2d23a");
       playFX(#"hash_4413769381cdade2", s_fx.origin, anglesToForward(s_fx.angles), anglestoup(s_fx.angles));
       s_container.mdl waittill(#"movedone");
@@ -2297,8 +2297,8 @@ function function_ee77f553(s_target) {
     satellite_base.fx_tag = util::spawn_model("tag_origin", satellite_fx_pos.origin, satellite_fx_pos.angles);
   }
 
-  satellite_base playSound(#"hash_3a4d278de8fac149");
-  satellite_base playLoopSound(#"hash_3d559b5f0ab4680f");
+  satellite_base playSound(#"zmb_gold_mq_9_satellite_move_start");
+  satellite_base playLoopSound(#"zmb_gold_mq_9_satellite_move_lp");
 
   foreach(player in function_a1ef346b()) {
     player function_66337ef1(#"zm_gold_interact_rumble_small");
@@ -2332,15 +2332,15 @@ function function_ee77f553(s_target) {
 
   level flag::clear(#"satellite_moving");
   satellite_base stoploopsound();
-  satellite_base playSound(#"hash_2a10867f535ea938");
+  satellite_base playSound(#"zmb_gold_mq_9_satellite_move_end");
 
   if(is_true(s_target.success)) {
     level flag::wait_till("#rotate_satellite_base_vo_success_done");
     level function_b9a3fa11(#"hash_31e43ad4ac786631", #"hash_31e44ad4ac788161", #"hash_31e44ed4ac78882d");
-    level zm_gold_vo::function_78cc0d39(#"hash_4d4e175616429fbe");
-    level zm_gold_vo::function_78cc0d39(#"hash_6101313164a1aed1");
-    level zm_gold_vo::function_78cc0d39(#"hash_23cd8c0e642e8db4");
-    level zm_gold_vo::function_78cc0d39(#"hash_267b1faaad5aa807");
+    level zm_gold_vo::function_78cc0d39(#"vox_obj_hvy_fire_seq_1_orqc_0");
+    level zm_gold_vo::function_78cc0d39(#"vox_obj_hvy_fire_seq_2_orqc_0");
+    level zm_gold_vo::function_78cc0d39(#"vox_obj_hvy_fire_seq_3_orqc_0");
+    level zm_gold_vo::function_78cc0d39(#"vox_obj_hvy_fire_seq_4_orqc_0");
     satellite_base.fx_tag clientfield::set("" + #"hash_6f292901e2fcaeb3", 1);
     level zm_vo::function_7622cb70(#"hash_2589c1d3e717294");
     level flag::clear(#"charging_failed");

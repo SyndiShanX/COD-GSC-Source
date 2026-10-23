@@ -241,8 +241,8 @@ function function_4d8337d3(localclientnum, oldval, newval, bnewent, binitialsnap
     }
 
     self postfx::playpostfxbundle(postfx);
-    self playSound(0, #"hash_52762fd483a6e3fa");
-    self.var_e950e4a8 = self playLoopSound(#"hash_48762d210569c49");
+    self playSound(0, #"zmb_ai_soo_drain_attack_start");
+    self.var_e950e4a8 = self playLoopSound(#"zmb_ai_soo_drain_attack");
     return;
   }
 
@@ -252,7 +252,7 @@ function function_4d8337d3(localclientnum, oldval, newval, bnewent, binitialsnap
     postfx::playpostfxbundle(self.var_51dd9721);
   }
 
-  self playSound(0, #"hash_4a5adfe85c2cb7da");
+  self playSound(0, #"zmb_ai_soo_drain_attack_stop");
   self stoploopsound(self.var_e950e4a8);
 }
 

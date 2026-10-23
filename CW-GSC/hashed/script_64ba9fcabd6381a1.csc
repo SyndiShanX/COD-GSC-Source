@@ -29,7 +29,7 @@ function function_6a360cde(localclientnum, oldval, newval, bnewent, binitialsnap
       self.var_83f12b7c = undefined;
     }
 
-    self playSound(fieldname, #"hash_671944ab50b7a130");
+    self playSound(fieldname, #"wpn_essence_trap_capture_success");
     self.var_a9c2bfe4 = 1;
     return;
   }

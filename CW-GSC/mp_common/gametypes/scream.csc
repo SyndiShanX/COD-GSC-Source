@@ -138,7 +138,7 @@ function function_20d6d0e5(localclientnum) {
       self.var_98524ca2 = 1;
 
       if(game.state === #"playing") {
-        playSound(localclientnum, #"hash_52643e8998135dc8");
+        playSound(localclientnum, #"mpl_scream_slasher_see_stinger");
       }
 
       self docooldown(10);
@@ -176,7 +176,7 @@ function function_9a00f210(localclientnum) {
 
       if(game.state === #"playing" && !is_true(self.var_f9cc5c06)) {
         if(!isDefined(self.var_354f4d95)) {
-          self.var_354f4d95 = self playLoopSound(#"hash_7cac75bfad504a7d");
+          self.var_354f4d95 = self playLoopSound(#"mpl_scream_slasher_chase_music_lp");
         }
 
         self serverfield::set("scream_slasher_chasing_vo", 1);
@@ -293,10 +293,10 @@ function function_b5673685(localclientnum, oldval, newval, bnewent, binitialsnap
     if(self.var_4adf3a85 === 1) {
       if(self.var_4adf3a85 !== localplayer.var_4adf3a85) {
         self.var_722de377 = self playLoopSound(#"hash_e8812b87d1132a0");
-        self.var_b598d563 = self playLoopSound(#"hash_4d880266909291e6");
+        self.var_b598d563 = self playLoopSound(#"mpl_scream_slasher_loop_whispers");
       }
     } else {
-      self.var_722de377 = self playLoopSound(#"hash_1871946a692288d");
+      self.var_722de377 = self playLoopSound(#"mpl_scream_survivor_underscore_lp");
     }
 
     if(!self function_da43934d()) {

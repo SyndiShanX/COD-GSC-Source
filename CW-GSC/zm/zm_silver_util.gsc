@@ -69,7 +69,7 @@ function function_b9adea4e() {
       self function_12995a01(3);
 
       if(!var_573efcf5) {
-        self playsoundtoplayer(#"hash_361ed2e67423ebbb", self);
+        self playsoundtoplayer(#"zmb_silver_mq_1_as_status_3", self);
         self thread zm_vo::function_d6f8bbd9(#"vox_mq_1_aetherscope_processing_athr_0", undefined, self);
         var_573efcf5 = 1;
       }
@@ -77,12 +77,12 @@ function function_b9adea4e() {
       self function_12995a01(2);
 
       if(!var_fc700937) {
-        self playsoundtoplayer(#"hash_361ed1e67423ea08", self);
+        self playsoundtoplayer(#"zmb_silver_mq_1_as_status_2", self);
         self thread zm_vo::function_d6f8bbd9(#"vox_mq_1_aetherscope_anomaly_detected_athr_0", undefined, self);
         var_fc700937 = 1;
       }
     } else {
-      self playsoundtoplayer(#"hash_361ed4e67423ef21", self);
+      self playsoundtoplayer(#"zmb_silver_mq_1_as_status_1", self);
       self function_12995a01(1);
       var_fc700937 = 0;
       var_573efcf5 = 0;
@@ -138,7 +138,7 @@ function function_e6830825(player) {
     self.trigger setinvisibletoplayer(player);
   }
 
-  self playSound(#"hash_8b8a9471179166a");
+  self playSound(#"zmb_darkaether_activation_hold_start");
 }
 
 function function_834fd6bc(team, player, success) {
@@ -152,11 +152,11 @@ function function_834fd6bc(team, player, success) {
   }
 
   if(is_true(success)) {
-    self playSound(#"hash_6fefa7ed76b6836f");
+    self playSound(#"zmb_darkaether_activation_success");
     return;
   }
 
-  self playSound(#"hash_454f385830b89f");
+  self playSound(#"zmb_darkaether_activation_hold_end");
 }
 
 function function_4cc5fca6() {

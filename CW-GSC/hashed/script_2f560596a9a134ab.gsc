@@ -109,7 +109,7 @@ function function_fc7d3519() {
 
     if(is_true(e_player.var_4373c66b)) {
       e_player function_bc82f900(#"zm_interact_rumble");
-      playSoundAtPosition(#"hash_5e201856c21548ae", self.origin);
+      playSoundAtPosition(#"amb_dac_happy_happy_reward", self.origin);
       e_player.var_4373c66b = undefined;
       e_player notify(#"hash_3cd13a6cb08bba96");
     }
@@ -1239,7 +1239,7 @@ function function_53a333a8(var_38f795c7, var_41f9c5ff = undefined, var_893baaf =
       self set_tribute(self.n_tribute + var_41f9c5ff);
       self.var_6b3806e8 += var_41f9c5ff / level.var_8b7ab859;
       self.var_207f01b0 += var_41f9c5ff / level.var_8b7ab859;
-      self playsoundtoplayer(#"hash_361faf1904fcc578", self);
+      self playsoundtoplayer(#"uin_dac_challenge_ticker_flash", self);
     }
   } else if(isDefined(var_38f795c7)) {
     n_amount = self function_955b59b2(var_38f795c7, var_893baaf);
@@ -1250,7 +1250,7 @@ function function_53a333a8(var_38f795c7, var_41f9c5ff = undefined, var_893baaf =
       set_tribute(self.n_tribute + n_amount);
       self.var_6b3806e8 += n_amount / level.var_8b7ab859;
       self.var_207f01b0 += n_amount / level.var_8b7ab859;
-      self playsoundtoplayer(#"hash_361faf1904fcc578", self);
+      self playsoundtoplayer(#"uin_dac_challenge_ticker_flash", self);
     }
   }
 
@@ -1264,25 +1264,25 @@ function function_53a333a8(var_38f795c7, var_41f9c5ff = undefined, var_893baaf =
   if(var_1f5eb74c != self.var_9e09931e) {
     switch (self.var_9e09931e) {
       case 1:
-        self playsoundtoplayer(#"hash_5a8c1c6110251059", self);
+        self playsoundtoplayer(#"uin_dac_challenge_reward_upgraded", self);
 
         iprintlnbold("<dev string:x97>");
 
         break;
       case 2:
-        self playsoundtoplayer(#"hash_5a8c1c6110251059", self);
+        self playsoundtoplayer(#"uin_dac_challenge_reward_upgraded", self);
 
         iprintlnbold("<dev string:xb1>");
 
         break;
       case 3:
-        self playsoundtoplayer(#"hash_5a8c1c6110251059", self);
+        self playsoundtoplayer(#"uin_dac_challenge_reward_upgraded", self);
 
         iprintlnbold("<dev string:xca>");
 
         break;
       case 4:
-        self playsoundtoplayer(#"hash_5a8c1c6110251059", self);
+        self playsoundtoplayer(#"uin_dac_challenge_reward_upgraded", self);
 
         iprintlnbold("<dev string:xe5>");
 

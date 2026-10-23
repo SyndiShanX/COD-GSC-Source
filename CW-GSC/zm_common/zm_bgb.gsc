@@ -599,7 +599,7 @@ function private bgb_limit_monitor() {
     case #"activated":
       for(i = level.bgb[self.bgb].limit; i > 0; i--) {
         if(i != level.bgb[self.bgb].limit) {
-          self playsoundtoplayer(#"hash_7bb31f4a25cf34a", self);
+          self playsoundtoplayer(#"zmb_elixir_common_decrement", self);
         }
 
         level.bgb[self.bgb].var_dbe7d224 = i;
@@ -652,7 +652,7 @@ function private bgb_limit_monitor() {
 
       for(i = 0; i < count; i++) {
         if(i != 0) {
-          self playsoundtoplayer(#"hash_7bb31f4a25cf34a", self);
+          self playsoundtoplayer(#"zmb_elixir_common_decrement", self);
         }
 
         self set_timer(count - i, count);

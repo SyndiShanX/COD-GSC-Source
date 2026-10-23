@@ -111,7 +111,7 @@ function private function_e7e5c90d(s_instance) {
     s_instance.var_193b9763[s_instance.var_193b9763.size] = var_5207017;
     var_5207017.var_30b30aea = content_manager::spawn_script_model(var_5207017, #"p9_zm_gold_jumppads_machine_carver", 1);
     var_5207017.var_30b30aea hide();
-    var_5207017.var_126a8ffb = content_manager::spawn_script_model(var_5207017, #"hash_31994e81355d0644");
+    var_5207017.var_126a8ffb = content_manager::spawn_script_model(var_5207017, #"p9_zm_gold_jumppads_machine_sr_variant");
     var_5207017.var_126a8ffb setforcenocull();
     var_5207017.var_126a8ffb clientfield::set("jump_pad_amb_sound_lp", 1);
     v_offset = anglestoright(var_5207017.angles) * -20 + (0, 0, 64);
@@ -176,7 +176,7 @@ function function_2558caae(eventstruct) {
 
     if(isDefined(var_5207017.var_126a8ffb)) {
       var_5207017.var_126a8ffb clientfield::set("jump_pad_active", 1);
-      var_5207017.var_126a8ffb setModel(#"hash_295fff49de9ef72c");
+      var_5207017.var_126a8ffb setModel(#"p9_zm_gold_jumppads_machine_sr_variant_on");
     }
 
     function_59d43f02(var_5207017, player);
@@ -185,7 +185,7 @@ function function_2558caae(eventstruct) {
     var_5207017 notify(#"hash_1ec9d66681c6312e");
 
     if(isDefined(var_5207017.var_126a8ffb)) {
-      var_5207017.var_126a8ffb setModel(#"hash_31994e81355d0644");
+      var_5207017.var_126a8ffb setModel(#"p9_zm_gold_jumppads_machine_sr_variant");
       var_5207017.var_126a8ffb clientfield::set("jump_pad_active", 0);
     }
 

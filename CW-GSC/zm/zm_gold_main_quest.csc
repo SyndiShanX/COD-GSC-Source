@@ -35,7 +35,7 @@ function init() {
     return;
   }
 
-  audio::playloopat(#"hash_5486b66cc8fd5daf", (1185, -14801, 7544));
+  audio::playloopat(#"zmb_gold_mq_3_ac_unit_lp", (1185, -14801, 7544));
 }
 
 function function_48f7c5e6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -59,9 +59,9 @@ function function_48f7c5e6(localclientnum, oldval, newval, bnewent, binitialsnap
       }
     }
 
-    soundstoplineemitter(#"hash_243e8130bf816d5a", (478, -15202, 7913), (-2140, -15285, 8125));
-    soundstoplineemitter(#"hash_243e8130bf816d5a", (-1414, -12858, 7953), (-2629, -14667, 8124));
-    soundstoploopemitter(#"hash_243e8030bf816ba7", (-2420, -15288, 8946));
+    soundstoplineemitter(#"zmb_gold_mq_9_satellite_laser_lp_b", (478, -15202, 7913), (-2140, -15285, 8125));
+    soundstoplineemitter(#"zmb_gold_mq_9_satellite_laser_lp_b", (-1414, -12858, 7953), (-2629, -14667, 8124));
+    soundstoploopemitter(#"zmb_gold_mq_9_satellite_laser_lp_a", (-2420, -15288, 8946));
   }
 
   if(bwasdemojump == 1) {
@@ -80,10 +80,10 @@ function function_48f7c5e6(localclientnum, oldval, newval, bnewent, binitialsnap
       }
     }
 
-    soundlineemitter(#"hash_243e8130bf816d5a", (478, -15202, 7913), (-2140, -15285, 8125));
-    soundlineemitter(#"hash_243e8130bf816d5a", (-1414, -12858, 7953), (-2629, -14667, 8124));
-    soundloopemitter(#"hash_243e8030bf816ba7", (-2420, -15288, 8946));
-    playSound(fieldname, #"hash_4df142dbfba464a5", (-2420, -15288, 8946));
+    soundlineemitter(#"zmb_gold_mq_9_satellite_laser_lp_b", (478, -15202, 7913), (-2140, -15285, 8125));
+    soundlineemitter(#"zmb_gold_mq_9_satellite_laser_lp_b", (-1414, -12858, 7953), (-2629, -14667, 8124));
+    soundloopemitter(#"zmb_gold_mq_9_satellite_laser_lp_a", (-2420, -15288, 8946));
+    playSound(fieldname, #"zmb_gold_mq_9_satellite_laser_start", (-2420, -15288, 8946));
   }
 }
 
@@ -161,7 +161,7 @@ function function_db002447(localclientnum, oldval, newval, bnewent, binitialsnap
     }
 
     self.light_fx = util::playFXOnTag(fieldname, #"hash_633f2df6ae6816e0", self, "tag_light_green");
-    playSound(fieldname, #"hash_20bed6eda7747275", self gettagorigin("tag_light_green"));
+    playSound(fieldname, #"zmb_gold_mq_2_card_success_beep", self gettagorigin("tag_light_green"));
     return;
   }
 

@@ -512,7 +512,7 @@ function function_42fbf5d9(var_956ca580, s_dest) {
   }
 
   if(isDefined(teleport_ent)) {
-    teleport_ent playSound(#"hash_292cc4273f4c0161");
+    teleport_ent playSound(#"evt_sr_obj_hvt_teleport_flyaway");
   }
 
   while(true) {
@@ -544,7 +544,7 @@ function function_42fbf5d9(var_956ca580, s_dest) {
   }
 
   if(isDefined(teleport_ent)) {
-    teleport_ent playSound(#"hash_2758a7e5c0fac58b");
+    teleport_ent playSound(#"evt_sr_obj_hvt_teleport_end");
     teleport_ent stoploopsound();
   }
 

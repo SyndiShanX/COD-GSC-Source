@@ -333,7 +333,7 @@ function function_76f53c53() {
   if(!player laststand::player_is_in_laststand() && player.sessionstate !== "spectator") {
     weap = player getcurrentweapon();
     item = player item_inventory::function_230ceec4(weap);
-    player playsoundtoplayer(#"hash_68d1999829296b7d", player);
+    player playsoundtoplayer(#"zmb_sq_hand_gain_reward", player);
 
     if(item.itementry.rarity === "Legendary") {
       var_22481c68 = struct::get_array("hh_essence_pickup_spawner", "targetname");

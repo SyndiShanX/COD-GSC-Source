@@ -93,13 +93,13 @@ function function_bbadd47c(localclientnum, oldval, newval, bnewent, binitialsnap
 
   switch (bwastimejump) {
     case 1:
-      self playSound(fieldname, #"hash_b315ff59968763f");
+      self playSound(fieldname, #"evt_sur_mq1_stp1_beacon_zap");
       self postfx::playpostfxbundle(#"hash_48d5efe2859096e0");
       self playRumbleOnEntity(fieldname, #"damage_heavy");
       earthquake(fieldname, 0.3, 1.5, self.origin, 1024);
       break;
     case 2:
-      self playSound(fieldname, #"hash_1ec55d24bb7fa94");
+      self playSound(fieldname, #"evt_sur_mq1_boss_scream_2d");
 
       if(!self postfx::function_556665f2(#"pstfx_underwater")) {
         self postfx::playpostfxbundle(#"pstfx_underwater");
@@ -267,16 +267,16 @@ function function_5e51d561(localclientnum, oldval, newval, bnewent, binitialsnap
       }
 
       var_ca4b2a1e = (-4653, -4608, 300);
-      audio::playloopat(#"hash_1c57ae0803680c93", var_ca4b2a1e);
-      playSound(fieldname, #"hash_735ba59f382594d", var_ca4b2a1e);
+      audio::playloopat(#"evt_sur_mq1_boss_intro_spawn_lp", var_ca4b2a1e);
+      playSound(fieldname, #"evt_sur_mq1_boss_intro_spawn_start", var_ca4b2a1e);
       addsubmix("zmb_sr_dropallaudioby4", 1, 1);
       break;
     case 5:
       var_ca4b2a1e = (-4653, -4608, 300);
-      playSound(fieldname, #"hash_3da10571694b9942", var_ca4b2a1e);
+      playSound(fieldname, #"evt_sur_mq1_boss_intro_spawn_rise", var_ca4b2a1e);
       wait 5;
       playSound(fieldname, #"hash_39e41dface2369a8", var_ca4b2a1e);
-      audio::stoploopat(#"hash_1c57ae0803680c93", var_ca4b2a1e);
+      audio::stoploopat(#"evt_sur_mq1_boss_intro_spawn_lp", var_ca4b2a1e);
       break;
     case 6:
       a_locations = array((-2429, -4277, 500), (-6407, -2881, 500));
@@ -316,12 +316,12 @@ function function_7b485a17(localclientnum) {
 }
 
 function function_3c6b5550() {
-  audio::playloopat(#"hash_7228dff2158154c2", (-7150, -6333, -907));
-  audio::playloopat(#"hash_7228dff2158154c2", (-6911, -6596, -901));
-  audio::playloopat(#"hash_7228dff2158154c2", (-6915, -6335, -897));
-  audio::playloopat(#"hash_7228dff2158154c2", (-3307, -4985, -923));
-  audio::playloopat(#"hash_7228dff2158154c2", (-3437, -4767, -904));
-  audio::playloopat(#"hash_7228dff2158154c2", (-3640, -4897, -901));
+  audio::playloopat(#"amb_rocket_crystals", (-7150, -6333, -907));
+  audio::playloopat(#"amb_rocket_crystals", (-6911, -6596, -901));
+  audio::playloopat(#"amb_rocket_crystals", (-6915, -6335, -897));
+  audio::playloopat(#"amb_rocket_crystals", (-3307, -4985, -923));
+  audio::playloopat(#"amb_rocket_crystals", (-3437, -4767, -904));
+  audio::playloopat(#"amb_rocket_crystals", (-3640, -4897, -901));
 }
 
 function function_e84a12f5(b_on = 1) {
@@ -392,7 +392,7 @@ function function_54098fb4(localclientnum, oldval, newval, bnewent, binitialsnap
       case #"p9_sur_fow_path_capsule_forest_battery_quadrant":
         self renderoverridebundle::function_f4eab437(fieldname, 1, #"hash_1a1e90e909359ce0");
         break;
-      case #"hash_7f6a9e056951dafb":
+      case #"p9_fxanim_sv_boss_crystals_pre_mod":
         if(bwastimejump) {
           level thread function_7da52bb6(fieldname, self);
         }
@@ -532,7 +532,7 @@ function function_7da52bb6(localclientnum, var_a2fbae60) {
   var_a2fbae60 endoncallback(&function_9ba86d16, #"death");
   var_a2fbae60.var_6aa3f2c3 = util::spawn_model(localclientnum, #"p9_fxanim_sv_boss_crystals_smod", var_a2fbae60.origin, var_a2fbae60.angles);
   var_a2fbae60 util::delay(0.2, undefined, &hide);
-  playSound(localclientnum, #"hash_6c00f83cd6fdb678", var_a2fbae60.origin + (0, 0, 50));
+  playSound(localclientnum, #"evt_sur_mq1_boss_crystal_explode", var_a2fbae60.origin + (0, 0, 50));
   var_a2fbae60.var_6aa3f2c3 animation::play_siege(#"p9_fxanim_sv_boss_crystals_sanim", undefined, 1, 0);
   var_a2fbae60 show();
   wait 1;

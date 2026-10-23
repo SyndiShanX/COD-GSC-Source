@@ -65,7 +65,7 @@ function function_8d607c5a(localclientnum) {
 }
 
 function function_59ee055f(localclientnum) {
-  self.var_5bea7e99 = self playLoopSound(#"hash_2cf37d960900db7a", undefined, (0, 0, 50));
+  self.var_5bea7e99 = self playLoopSound(#"zmb_steinersplit_geiger_lp", undefined, (0, 0, 50));
   self thread function_c3ae0dcf();
   self thread function_b53ee6c9(localclientnum);
 }
@@ -290,7 +290,7 @@ function function_8a3fc4ac(localclientnum, oldvalue, newvalue, bnewent, binitial
 
   if(bwastimejump == 1) {
     if(!isDefined(self.var_50ad299b)) {
-      self.var_50ad299b = self playLoopSound(#"hash_274eabfed204a7fc", undefined, (0, 0, 25));
+      self.var_50ad299b = self playLoopSound(#"wpn_ai_steiner_grenade_ground_lp", undefined, (0, 0, 25));
     }
 
     locations = function_371c2ab4(self.origin, self.angles);

@@ -54,7 +54,7 @@ function event_handler[gametype_init] main(eventstruct) {
   level._effect[#"hash_308d15c5b36ba48a"] = "maps/zm_red/fx8_soul_charge_purple";
   level._effect[#"orb_idle"] = "zombie/fx9_onslaught_orb_trail";
   level._effect[#"orb_activate"] = "sr/fx9_safehouse_orb_activate";
-  level.var_de8cc106 = #"hash_6d2c4c09332d861b";
+  level.var_de8cc106 = #"zmb_onslaught_darkaether_orb_lp";
   level.var_cb450873 = #"hash_4bfee97440e2b6f2";
   println("<dev string:x66>");
 }

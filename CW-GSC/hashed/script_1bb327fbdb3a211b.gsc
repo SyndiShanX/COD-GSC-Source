@@ -489,7 +489,7 @@ function private function_3db48fdd(str_item_name, v_drop_origin, var_55ab02db = 
   point = function_4ba8fde(str_item_name);
   var_60687c46 = item_drop::drop_item(0, undefined, 1, 0, point.id, v_drop_origin, var_55ab02db, 0);
   var_60687c46.var_dd21aec2 = 1 | 16;
-  var_60687c46 playLoopSound(#"hash_21d80fb4d9a84575");
+  var_60687c46 playLoopSound(#"zmb_tung_wwq_crystal_glow_lp");
 
   if(!isDefined(level.var_ddc67fdb)) {
     level.var_ddc67fdb = [];
@@ -559,8 +559,8 @@ function function_69f39621() {
     level.var_d52e24c5[level.var_d52e24c5.size] = mdl_crystal;
   }
 
-  level.var_d52e24c5[1] playSound(#"hash_16ed1f8ba3be3b37");
-  level.var_d52e24c5[1] playLoopSound(#"hash_7b219cc350a3dd43");
+  level.var_d52e24c5[1] playSound(#"zmb_tung_wwq_crystal_pool_place");
+  level.var_d52e24c5[1] playLoopSound(#"zmb_tung_wwq_crystal_pool_bubble_lp");
 }
 
 function function_38b4568d(b_skipped) {
@@ -732,8 +732,8 @@ function function_ea86330e() {
   item_ww.var_dd21aec2 = 1 | 16;
   item_ww.var_19920dbe = 1;
   item_ww.itementry.droptimeout = undefined;
-  item_ww playSound(#"hash_250f39946d7f6289");
-  item_ww playLoopSound(#"hash_3297d5eea6cd1217");
+  item_ww playSound(#"zmb_tung_wwq_axe_rise_oneshot");
+  item_ww playLoopSound(#"zmb_tung_wwq_axe_glow_lp");
   item_ww moveTo(item_ww.origin + (0, 0, 32), 5, 0.05, 0.05);
 }
 

@@ -384,7 +384,7 @@ function private function_f4ca4a44() {
   }
 
   self thread function_2d3b0724();
-  self playLoopSound(#"hash_51cc04251db6afad");
+  self playLoopSound(#"zmb_vocals_orda_ai_amb_lp");
   function_50f6999e(self);
   self thread function_da3fbd96();
 }
@@ -1247,7 +1247,7 @@ function private function_84259878(entity) {
   stomp = 1;
   var_45487755 = entity gettagorigin("j_ball_ri");
   entity clientfield::increment("hs_stomp_cf", 1);
-  entity thread function_59e78833(var_45487755, 125, 30, 100, 500, 300, #"hash_2277d6cf8d0c2cf0");
+  entity thread function_59e78833(var_45487755, 125, 30, 100, 500, 300, #"evt_orda_ai_stomp_player_hit");
 }
 
 function private function_59e78833(pos, damage, damage_min, inner_radius, outer_radius, knockback, var_a8a41c06) {
@@ -1683,7 +1683,7 @@ function private function_8a252ee4(entity) {
 
   velocity = (velocity[0], velocity[1], launch_speed);
   grenade = entity magicgrenadetype(var_d54a1968, launch_pos, velocity);
-  playSoundAtPosition(#"hash_4897d1a140f146f5", launch_pos);
+  playSoundAtPosition(#"zmb_orda_hellhound_launch", launch_pos);
   var_b1d0a64 = util::spawn_model(#"c_t9_zmb_hellhound", launch_pos, grenade.angles);
   var_b1d0a64 linkTo(grenade, "tag_origin");
   var_b1d0a64 clientfield::set("dog_projectile_fx", 1);
@@ -1832,7 +1832,7 @@ function function_eceecc98(var_66a3d186, var_241b172e, var_717ee5de) {
 
   origin = isDefined(var_241b172e) ? var_241b172e : origin;
   swarm = util::spawn_model(#"wpn_t9_sr_swarm_hulking_summoner", origin);
-  swarm playLoopSound(#"hash_4c9124e9213250df");
+  swarm playLoopSound(#"evt_orda_insect_lp");
   swarm.targetname = "sr_swarm_hulking_summoner";
   swarm.var_66a3d186 = var_66a3d186;
 
@@ -1990,7 +1990,7 @@ function function_187bcbe(var_717ee5de) {
     if(isDefined(self.target_ent) && isPlayer(self.target_ent) && isDefined(self.health_state)) {
       self.target_ent clientfield::set("hs_swarm_damage", self.health_state);
       self.target_ent dodamage(30 + 20 * (self.health_state - 2), self.origin, self.var_66a3d186, self.var_66a3d186, "none", "MOD_EXPLOSIVE");
-      self.target_ent playsoundtoplayer(#"hash_6bee01b489607edd", self.target_ent);
+      self.target_ent playsoundtoplayer(#"evt_orda_insect_player_bite", self.target_ent);
       vehicle = self.target_ent isinvehicle() ? self.target_ent getvehicleoccupied() : undefined;
 
       if(isDefined(vehicle)) {

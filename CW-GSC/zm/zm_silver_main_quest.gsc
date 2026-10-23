@@ -513,13 +513,13 @@ function function_e1352bc9() {
 
     if(!is_true(level.var_b46e7e38)) {
       level.var_b46e7e38 = 1;
-      level.var_3bc06d8a playSound(#"hash_98bcba1225bfa3");
+      level.var_3bc06d8a playSound(#"zmb_silver_mq_2_comp_type");
       level.var_3bc06d8a zm_vo::function_d6f8bbd9(#"vox_mq_2_computer_online_dwch_0");
       level.var_3bc06d8a zm_vo::function_d6f8bbd9(#"vox_mq_2_password_required_first_time_dwch_0");
       continue;
     }
 
-    level.var_3bc06d8a playSound(#"hash_1b8526005ad2bb44");
+    level.var_3bc06d8a playSound(#"zmb_silver_mq_2_comp_negative");
     level.var_3bc06d8a zm_vo::function_d6f8bbd9(#"vox_mq_2_password_required_gen_int_dwch_0");
   }
 }
@@ -554,7 +554,7 @@ function init_purifier() {
 
   level.var_7c6e836b = util::spawn_model(#"p9_zm_ndu_computer_screen_medical_a", level.var_b2371398.origin, level.var_b2371398.angles);
   level.var_3a734155 = util::spawn_model(#"p9_zm_ndu_computer_screen_medical_horizontal_02", level.var_b2371398.origin, level.var_b2371398.angles);
-  level.var_7c6e836b playSound(#"hash_98bcba1225bfa3");
+  level.var_7c6e836b playSound(#"zmb_silver_mq_2_comp_type");
   wait 1;
 
   if(isDefined(level.var_3a734155)) {
@@ -563,7 +563,7 @@ function init_purifier() {
 
   level.var_fc67035a = util::spawn_model(#"p9_zm_ndu_computer_screen_medical_h", level.var_b2371398.origin, level.var_b2371398.angles);
   level.var_50356cd9 = util::spawn_model(#"p9_zm_ndu_computer_screen_medical_horizontal_03", level.var_b2371398.origin, level.var_b2371398.angles);
-  level.var_fc67035a playSound(#"hash_98bcba1225bfa3");
+  level.var_fc67035a playSound(#"zmb_silver_mq_2_comp_type");
   wait 1;
 
   if(isDefined(level.var_50356cd9)) {
@@ -571,7 +571,7 @@ function init_purifier() {
   }
 
   level.var_729c7023 = util::spawn_model(#"p9_zm_ndu_computer_screen_medical_v", level.var_b2371398.origin, level.var_b2371398.angles);
-  level.var_729c7023 playSound(#"hash_425afc32b2eb6c0c");
+  level.var_729c7023 playSound(#"zmb_silver_mq_2_comp_positive");
   wait 1;
   var_465f425d = getEnt("ent_prf", "script_noteworthy");
   var_465f425d clientfield::set("" + #"hash_77df0b1fb17c3a18", 1);
@@ -1056,7 +1056,7 @@ function recover_container() {
   level flag::wait_till_clear(#"dark_aether_active");
   var_1d1beaf9 = getEnt("zm_rec_do", "targetname");
   var_1d1beaf9 rotateTo(var_1d1beaf9.angles + (0, -135, 0), 1, 0.25, 0.25);
-  var_1d1beaf9 playSound(#"hash_fe68e6bc00c17f6");
+  var_1d1beaf9 playSound(#"zmb_silver_mq_4_receptacle_open");
   level.var_59b6e9a5 setModel(#"p9_zm_ndu_computer_screen_medical_insert");
   level.var_59b6e9a5 playSound(#"hash_691b9c2488253fde");
   level thread function_34a1157d("aib_t9_zm_silver_secretecho_3_dmitriyev_kalashnik_01_throw", "echo_scene_dmitriyev_kalashnik_throw", "zone_proto_plane_exterior", #"hash_6ddc7fc43d014f02", "done_echo_scene_dmitriyev_kalashnik_01_throw");
@@ -1443,7 +1443,7 @@ function function_8b8ae486() {
 
     var_1d1beaf9 = getEnt("zm_rec_do", "targetname");
     var_1d1beaf9 rotateTo(var_1d1beaf9.angles + (0, 135, 0), 1, 0.25, 0.25);
-    var_1d1beaf9 playSound(#"hash_1d88d624566db32");
+    var_1d1beaf9 playSound(#"zmb_silver_mq_4_receptacle_close");
   }
 }
 
@@ -1777,7 +1777,7 @@ function function_41e8018f() {
   level notify(#"hash_795783e3edb7670");
   function_8f85d169();
   level.var_59b6e9a5 setModel(#"p9_zm_ndu_computer_screen_medical_commence");
-  level.var_59b6e9a5 playSound(#"hash_425afc32b2eb6c0c");
+  level.var_59b6e9a5 playSound(#"zmb_silver_mq_2_comp_positive");
   var_465f425d = getEnt("ent_prf", "script_noteworthy");
   var_dc67de8c = getEnt("ctrlrm_door_lft", "script_noteworthy");
   var_f059f398 = getEnt("ctrlrm_door_rt", "script_noteworthy");
@@ -3320,7 +3320,7 @@ function function_eedc944b(var_b2419dd, var_3b3f5ecb, str_zone_name, str_endon_f
   while(true) {
     waitresult = self waittill(#"trigger_activated");
     level.zones[str_zone_name].a_loc_types[#"wait_location"] = [];
-    self playSound(#"hash_7c5c78e1489169ba");
+    self playSound(#"zmb_silver_mq_2_echo_orb_activate");
     waitresult.e_who thread flag::set_for_time(2, #"hash_7ef7aab6a305d0b0");
     function_cd1efeed(str_zone_name, 0);
     a_players = getPlayers();

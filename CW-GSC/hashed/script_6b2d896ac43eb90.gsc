@@ -415,7 +415,7 @@ function destroy_beacon(mdl_beacon, var_fcfc4edd = 10, var_495727a3) {
 
   while(timer) {
     if(!var_82edff1 && timer <= 10) {
-      bomb playSound(#"hash_443ef0b39a1f5414");
+      bomb playSound(#"zmb_beacon_bomb_place");
       var_82edff1 = 1;
     }
 
@@ -437,7 +437,7 @@ function destroy_beacon(mdl_beacon, var_fcfc4edd = 10, var_495727a3) {
     iprintlnbold(timer);
   }
 
-  bomb playSound(#"hash_6842dcc160b4c6de");
+  bomb playSound(#"zmb_beacon_bomb_explode");
   bomb delete();
   mdl_beacon zm_blockers::function_c1342dc1();
   mdl_beacon setModel(#"p9_fxanim_sv_tesla_tower_dmg_mod");

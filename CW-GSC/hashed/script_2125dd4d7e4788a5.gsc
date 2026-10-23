@@ -496,8 +496,8 @@ function function_eae9567f() {
     }
 
     if(isDefined(self.mdl_rocket) && isDefined(self.mdl_truck)) {
-      self.mdl_rocket playLoopSound(#"hash_2eaf64217fead998");
-      self.mdl_truck playLoopSound(#"hash_4a9a912c07ee63e");
+      self.mdl_rocket playLoopSound(#"evt_sr_obj_ret_rocket_rumble_lp");
+      self.mdl_truck playLoopSound(#"evt_sr_obj_ret_rocket_move_alarm_lp");
       self.mdl_rocket linkTo(self.mdl_truck, "tag_fx_rocket_exhaust_0");
     }
 
@@ -1448,7 +1448,7 @@ function function_20ab9060(instance) {
     if(isDefined(e_activator) && isPlayer(e_activator) && !is_true(e_activator.var_28107825) && !is_true(self.b_pickedup)) {
       instance notify(#"canister_collected");
       player = e_activator;
-      playSoundAtPosition(#"hash_1105191492bc5a15", self.origin + (0, 0, 25));
+      playSoundAtPosition(#"evt_sr_obj_ret_canister_pickup", self.origin + (0, 0, 25));
 
       if(isDefined(s_result.activator)) {
         player playRumbleOnEntity("damage_heavy");
@@ -1945,7 +1945,7 @@ function canister_drop() {
     self.t_pickup setHintString(#"hash_c90fb1f338973f7");
   }
 
-  playSoundAtPosition(#"hash_3047775b10faeffc", self.origin + (0, 0, 25));
+  playSoundAtPosition(#"evt_sr_obj_ret_canister_drop", self.origin + (0, 0, 25));
   self clientfield::set("" + #"canister_glow", 1);
 
   if(isDefined(self.var_1474d2ee)) {

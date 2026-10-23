@@ -206,7 +206,7 @@ function function_18fbdeee() {
     }
 
     if(!is_true(self.var_508be317)) {
-      self playSound(#"hash_6a39443b1d6cbd15");
+      self playSound(#"wpn_ieu_vacuum_full_plr");
       self.var_508be317 = 1;
       self thread function_6e1aa0a9();
     }

@@ -101,7 +101,7 @@ function soundloopthink() {
 
 function function_91c6e82a() {
   level waittill(#"power_on");
-  playSound(0, #"hash_507a8d3d4874b9ca", (984, -658, -207));
+  playSound(0, #"zmb_silver_poweron_button", (984, -658, -207));
   wait 0.25;
   playSound(0, #"zmb_bunker_power_up", (524, -84, -268));
   playSound(0, #"zmb_bunker_power_alarm", (524, -84, -268));

@@ -25,7 +25,7 @@ function init() {
 function function_6b0f6eb8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump == 1) {
     playFX(fieldname, #"hash_54b4d40f53a3f69c", self.origin);
-    playSound(fieldname, #"hash_3882c488b58f4b4", self.origin + (0, 0, 25));
+    playSound(fieldname, #"evt_klaus_upgradeq_debris_dig", self.origin + (0, 0, 25));
   }
 }
 
@@ -65,7 +65,7 @@ function function_1d298e01(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_19a36115(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   var_42795d7f = array::random(["arm01_05_jnt", "arm01_04_jnt", "arm01_03_jnt", "arm02_04_jnt", "arm02_03_jnt", "arm02_01_jnt"]);
   util::playFXOnTag(bwastimejump, #"hash_36fe3341c3cc6826", self, var_42795d7f);
-  playSound(bwastimejump, #"hash_1ddeb8af5a217a6e", self.origin + (0, 0, 50));
+  playSound(bwastimejump, #"evt_sr_obj_def_console_damaged", self.origin + (0, 0, 50));
   self thread function_75f0fe2c();
 }
 
@@ -74,7 +74,7 @@ function function_75f0fe2c() {
   self endon("79ac0524aeb02124");
 
   if(!isDefined(self.var_6631a14f)) {
-    self.var_6631a14f = self playLoopSound(#"hash_13e3f89e22beb505", undefined, (0, 0, 50));
+    self.var_6631a14f = self playLoopSound(#"evt_sr_obj_def_console_alarm_lp", undefined, (0, 0, 50));
   }
 
   wait 5;

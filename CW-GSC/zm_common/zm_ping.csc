@@ -64,7 +64,7 @@ function private preinit() {
   function_5ae4a10c(#"p8_zm_powerup_full_power", "powerup_hero_power", #"zombie/powerup_hero_weapon_power", #"hash_3580f779bbcaa04d", #"ui_icon_zombie_powerup_field_upgrade_large");
   function_5ae4a10c(#"p9_zm_powerup_stocking", "powerup_naughty_or_nice", #"hash_c63a666160e5343", #"hash_ebdfcb1ce94a2dc", #"ui_icon_zombie_powerup_stocking_large");
   function_5ae4a10c(#"p9_zm_powerup_clock", "powerup_cranked_pause", #"hash_4beb7d0e9dfb41f4", #"hash_2565a35b56075980", #"ui_icon_zombie_powerup_cranked_large");
-  function_5ae4a10c(#"hash_31994e81355d0644", "world_event_jump_pad", #"hash_7614bf03db1c1bf8", #"hash_5b20033c44a4321f", #"hash_eb7621f8461d66b", 0, -32);
+  function_5ae4a10c(#"p9_zm_gold_jumppads_machine_sr_variant", "world_event_jump_pad", #"hash_7614bf03db1c1bf8", #"hash_5b20033c44a4321f", #"uie_ui_hud_minimap_jump_pad_ping", 0, -32);
   function_5ae4a10c(#"p9_fxanim_sv_dragon_console_mod", "world_event_dragon_head", #"hash_33a048b0781a38c8", #"hash_5b20033c44a4321f", #"hash_60e316ebd207430", 0, -500);
   function_5ae4a10c(#"p7_zm_ctl_deathray_sphere", "world_event_orb_follow", #"hash_77ca1dab94ef928f", #"hash_76483333c5c6984", #"hash_4598f61bd8fb7947");
   function_5ae4a10c(#"p9_zm_radio_pack_01_surface", "world_event_horde_hunt", #"hash_5bc748f665dac8a4", #"hash_5b20033c44a4321f", #"hash_23f095c979f39d9a");

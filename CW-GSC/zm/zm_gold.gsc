@@ -1203,7 +1203,7 @@ function function_a1960bde() {
   if(isDefined(var_b1081d76)) {
     var_b1081d76 connectpaths();
     var_b1081d76 moveTo(var_b1081d76.origin + (0, 0, -102), 1);
-    playSoundAtPosition(#"hash_741d94c4d2a60cce", var_b1081d76.origin + (0, 0, 50));
+    playSoundAtPosition(#"zmb_gold_mq_5_door_open", var_b1081d76.origin + (0, 0, 50));
   }
 
   level flag::set("connect_zone_opc_room_to_armory2");

@@ -622,7 +622,7 @@ function matchstarttimer() {
       }
 
       var_e8598101--;
-      self playlocalsound(#"hash_5e14726f77107d1b");
+      self playlocalsound(#"uin_default_timer_tick_ingame");
       wait 1;
     }
 

@@ -52,8 +52,8 @@ function private preinit() {
   level.cratemodelboobytrapped = bundle.var_b25fc1fc;
 
   if(getdvarint(#"hash_3f663d1e38d10d99", 0) == 1) {
-    level.cratemodelfriendly = #"hash_12e47c6c01f2ff59";
-    level.cratemodelenemy = #"hash_5c54841918c40b74";
+    level.cratemodelfriendly = #"wpn_t9_streak_care_package_halloween_normal_world";
+    level.cratemodelenemy = #"wpn_t9_streak_care_package_halloween_enemy_world";
     level.cratemodelboobytrapped = #"hash_2d42a64e786470ce";
   }
 
@@ -1167,8 +1167,8 @@ function cratespawn(killstreak, killstreakid, owner, team, drop_origin, drop_ang
       crate setModel(level.cratemodeltank);
       crate setenemymodel(level.cratemodeltank);
     } else if(getdvarint(#"hash_3f663d1e38d10d99", 0) == 2 && randomintrangeinclusive(1, 100) <= 20) {
-      crate setModel(#"hash_12e47c6c01f2ff59");
-      crate setenemymodel(#"hash_5c54841918c40b74");
+      crate setModel(#"wpn_t9_streak_care_package_halloween_normal_world");
+      crate setenemymodel(#"wpn_t9_streak_care_package_halloween_enemy_world");
       crate.var_e8a59c52 = 1;
 
       if(isDefined(level.cratetypes[#"supplydrop"][#"remote_missile"].weight)) {
@@ -1646,7 +1646,7 @@ function watch_explosive_crate(killcament) {
         self thread scene::play(#"p9_fxanim_mp_care_package_bundle", self);
 
         if(getdvarint(#"hash_3f663d1e38d10d99", 0) == 1 || is_true(self.var_e8a59c52)) {
-          playSoundAtPosition(#"hash_2dec6d8e4271a0e0", self.origin);
+          playSoundAtPosition(#"evt_supplycrate_open_halloween", self.origin);
         }
 
         self thread entityheadicons::setentityheadicon(player.team, player, "headicon_dead");
@@ -1690,7 +1690,7 @@ function function_960ea519(opener, killcament) {
       self thread[[level.var_ccf67f32]](opener);
     }
 
-    playSoundAtPosition(#"hash_2dec6d8e4271a0e0", self.origin);
+    playSoundAtPosition(#"evt_supplycrate_open_halloween", self.origin);
   }
 
   bundle = getscriptbundle("killstreak_supply_drop");
@@ -1721,7 +1721,7 @@ function function_345ada65(attacker) {
 
   if(getdvarint(#"hash_3f663d1e38d10d99", 0) == 1 || is_true(self.var_e8a59c52)) {
     playFX(#"hash_6b51d18944db0abc", self.origin, anglestoup(self.angles), anglestoright(self.angles));
-    playSoundAtPosition(#"hash_16d2b0215d38013d", self.origin);
+    playSoundAtPosition(#"evt_supplycrate_explode_halloween", self.origin);
   }
 
   if(isDefined(bundle.var_3f41a92c)) {
@@ -3108,7 +3108,7 @@ function helidropcrate(killstreak, originalowner, offset, killcament, killstreak
   if(getdvarint(#"hash_3f663d1e38d10d99", 0) == 1 || is_true(crate.var_e8a59c52)) {
     self.var_11031e00 = 1;
     self clientfield::set("" + #"hash_e4eb5c0853abab8", 1);
-    self playSound(#"hash_2548935de6c0af");
+    self playSound(#"veh_care_package_music_halloween");
   }
 
   if(killstreak == "inventory_supply_drop" || killstreak == "supply_drop") {

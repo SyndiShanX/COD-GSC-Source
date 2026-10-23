@@ -59,9 +59,9 @@ function private function_3ec12c82(localclientnum, oldval, newval, bnewent, bini
   }
 
   level.var_89331302 = undefined;
-  soundloopemitter(#"hash_dc1b05d057812db", (-20634, -21646, 214));
-  soundloopemitter(#"hash_509f2110470d7d9d", (-20444, -21594, 164));
-  soundloopemitter(#"hash_dc1b05d057812db", (-20363, -21453, 199));
+  soundloopemitter(#"evt_sur_mq2_stp2_fire_md", (-20634, -21646, 214));
+  soundloopemitter(#"evt_sur_mq2_stp2_fire_lrg", (-20444, -21594, 164));
+  soundloopemitter(#"evt_sur_mq2_stp2_fire_md", (-20363, -21453, 199));
 }
 
 function private function_1c47acdc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

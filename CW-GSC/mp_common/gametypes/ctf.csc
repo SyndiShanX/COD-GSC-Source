@@ -25,8 +25,8 @@ function event_handler[gametype_init] main(eventstruct) {
   clientfield::function_5b7d846d("ctf_reset_score", #"hash_2e6d7a783938b052", #"ctf_reset_score", 17000, 1, "int", &ctf_reset_score, 0, 0);
   forcestreamxmodel(#"p9_ctf_flag_nato_blue", 8, -1);
   forcestreamxmodel(#"p9_ctf_flag_warsaw_blue", 8, -1);
-  forcestreamxmodel(#"hash_104d7846da83e67e", 8, -1);
-  forcestreamxmodel(#"hash_34ce58df766f54dd", 8, -1);
+  forcestreamxmodel(#"p9_ctf_flag_carry_nato_red", 8, -1);
+  forcestreamxmodel(#"p9_ctf_flag_carry_warsaw_red", 8, -1);
 }
 
 function ctf_reset_score(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

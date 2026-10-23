@@ -526,7 +526,7 @@ function function_83e5a141() {
   self waittill(#"payload_go");
 
   if(isDefined(self.contentgroups[#"hash_5615a127abad1354"])) {
-    self.var_bce10cdf = content_manager::spawn_script_model(self.contentgroups[#"hash_5615a127abad1354"][0], #"hash_6a83a06a639fcc6b", 1);
+    self.var_bce10cdf = content_manager::spawn_script_model(self.contentgroups[#"hash_5615a127abad1354"][0], #"collision_payload_truck_ramp", 1);
     self.var_bce10cdf ghost();
   }
 
@@ -654,7 +654,7 @@ function function_27033bf7(instance) {
   }
 
   self notify(#"payload_start");
-  self playSound(#"hash_388c12acd0e0928");
+  self playSound(#"evt_sr_obj_payload_rover_startup");
   wait 1;
 
   if(isDefined(instance.var_f2065b9e)) {
@@ -758,7 +758,7 @@ function function_ae595d6e(einflictor, eattacker, idamage, idflags, smeansofdeat
     }
 
     if(vsurfacenormal === "MOD_MELEE") {
-      self playSound(#"hash_1ddeb8af5a217a6e");
+      self playSound(#"evt_sr_obj_def_console_damaged");
     } else if(vsurfacenormal === "MOD_UNKNOWN") {
       partname = 0;
     }
@@ -1907,11 +1907,11 @@ function function_8469f022(instance) {
   while(true) {
     if(self.var_a123c71 == 1) {
       if(var_ad5fcb11 != 1) {
-        self playSound(#"hash_432c591c600ef4d2");
+        self playSound(#"evt_sr_obj_payload_start");
         var_ad5fcb11 = 1;
       }
     } else if(var_ad5fcb11 != 0) {
-      self playSound(#"hash_5d9bb1a3ab5cf792");
+      self playSound(#"evt_sr_obj_payload_stop");
       var_ad5fcb11 = 0;
     }
 
@@ -1925,7 +1925,7 @@ function function_1e88c470(instance) {
 
   while(true) {
     if(!is_true(self.var_a123c71)) {
-      self playSound(#"hash_52af5fa9a4db69a2");
+      self playSound(#"evt_sr_obj_payload_ping");
     }
 
     wait 3;
@@ -2218,7 +2218,7 @@ function function_42fbf5d9(instance, nd_dest) {
   waitframe(1);
   self.angles = nd_dest.angles;
   self vehicle::get_on_path(nd_dest);
-  self playSound(#"hash_3a33f6dc09073444");
+  self playSound(#"evt_sr_obj_payload_portal_land");
   wait 0.5;
 
   if(self.var_6a4ec994 < 2) {

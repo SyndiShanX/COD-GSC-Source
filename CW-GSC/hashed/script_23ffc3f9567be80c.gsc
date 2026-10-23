@@ -71,7 +71,7 @@ function function_5be7e51b(struct, modelname, hint_string, callbackfunction) {
   trigger.scriptmodel = scriptmodel;
   scriptmodel.trigger = trigger;
   scriptmodel clientfield::set("item_machine_spawn_rob", 1);
-  scriptmodel playLoopSound(#"hash_5f690620ca8d62bc");
+  scriptmodel playLoopSound(#"amb_bo1pc_lp");
   playFX("sr/fx9_safehouse_mchn_wonderfizz_spawn", struct.origin);
 }
 
@@ -81,7 +81,7 @@ function function_18aca533(eventstruct) {
 
     if(isDefined(scriptmodel)) {
       scriptmodel thread scene::play("p9_fxanim_zm_gp_dac_bundle", scriptmodel);
-      playSoundAtPosition(#"hash_2306bc49a7e85ea2", scriptmodel.origin);
+      playSoundAtPosition(#"uin_bo1pc_interact", scriptmodel.origin);
       playSoundAtPosition(level.var_291ed71[0], scriptmodel.origin);
       arrayremoveindex(level.var_291ed71, 0);
 

@@ -602,7 +602,7 @@ function function_d3b93d12(n_seconds, str_label = #"", var_7ae7852d) {
       str_alias = #"uin_zombies_countdown_timer_tick";
 
       if(level.var_2ca7afd8 - level.var_74d92ff6 <= 10) {
-        str_alias = #"hash_1d660b56dca8c84";
+        str_alias = #"uin_zombies_countdown_timer_tick_warning";
       }
 
       level.var_f901067f playSound(str_alias);

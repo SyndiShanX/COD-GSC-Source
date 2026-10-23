@@ -425,7 +425,7 @@ function function_66c569e2(params) {
       self.var_5b358a38 = 1;
     }
 
-    self playSound(#"hash_7d2102e821def54b");
+    self playSound(#"zmb_ai_soo_take_damage");
   }
 }
 
@@ -522,7 +522,7 @@ function private function_671249fb(weakpoint, var_31e96b81, eattacker) {
       destructserverutils::function_8475c53a(self, weakpoint.var_f371ebb0);
       set_head_model(self, 1);
       playFXOnTag(#"hash_6236fa1cff9eed39", self, "tag_fx_head_weakspot");
-      self playSound(#"hash_2dbd7a349939d740");
+      self playSound(#"zmb_ai_soo_weakpoint_break");
 
       if(!is_true(self.var_5b6bf2e7)) {
         self.var_40994afa = 1;

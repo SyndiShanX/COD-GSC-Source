@@ -601,7 +601,7 @@ function boss_spawn(s_spawn) {
   level.var_75a7d6 flag::set(#"spawned");
   level endon(#"end_game");
   level.var_75a7d6 endon(#"defeated");
-  level.var_75a7d6.mdl_body = util::spawn_model(#"hash_b7cea188cbd2e02", s_spawn.origin, s_spawn.angles);
+  level.var_75a7d6.mdl_body = util::spawn_model(#"c_t9_zmb_forsaken_body_fb", s_spawn.origin, s_spawn.angles);
   level.var_75a7d6.mdl_body setforcenocull();
   level.var_75a7d6.mdl_body clientfield::set("" + #"hash_2fc89133ccd7b0df", 1);
   level.var_75a7d6.mdl_body clientfield::set("" + #"hash_33b8059f5b3f18b1", 1);
@@ -2247,7 +2247,7 @@ function function_7321121b(s_smash) {
           foreach(v_point in a_v_points) {
             if(isvec(v_point)) {
               playFX(#"hash_122277729dcbecd2", v_point);
-              playSoundAtPosition(#"hash_722c8e8bcd6a9ad6", v_point);
+              playSoundAtPosition(#"zmb_mq_boss_attack_smash_shockwave_explo", v_point);
 
               foreach(e_player in function_a1ef346b(undefined, v_point, 150)) {
                 if(zm_utility::is_player_valid(e_player)) {

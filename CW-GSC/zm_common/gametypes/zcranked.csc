@@ -81,7 +81,7 @@ function function_ee85e4e3(localclientnum) {
   self endon(#"death", #"disconnect", #"hash_42ef04c28c2ef326");
   waitframe(1);
   n_timer = self clientfield::get_to_player("sr_defend_timer");
-  str_alias = #"hash_43c0fcbfe93e6423";
+  str_alias = #"zmb_cranked_timer_over_15";
   blendsubmix("zmb_cranked_neardeath", 0, 0);
 
   if(is_true(self.var_5a72f7c9)) {
@@ -109,9 +109,9 @@ function function_ee85e4e3(localclientnum) {
       str_alias = #"hash_37a0bf7f61bc3362" + n_timer;
       self playRumbleOnEntity(localclientnum, #"infiltration_rumble");
     } else if(n_timer <= 10) {
-      str_alias = #"hash_bb1df4387e47518";
+      str_alias = #"zmb_cranked_timer_over_5";
     } else if(n_timer <= 15) {
-      str_alias = #"hash_43c0ffbfe93e693c";
+      str_alias = #"zmb_cranked_timer_over_10";
     }
 
     if(n_timer <= 6) {

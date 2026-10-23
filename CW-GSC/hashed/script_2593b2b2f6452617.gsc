@@ -589,7 +589,7 @@ function function_7cf83691() {
   self thread function_5839db26();
   var_43123efe = self.var_43123efe;
   var_43123efe show();
-  var_43123efe playLoopSound(#"hash_565396befc27a397");
+  var_43123efe playLoopSound(#"evt_sr_obj_generic_glow_lp");
   level.e_obj = util::spawn_model("tag_origin", self.mdl_console.origin);
   n_objective_id = zm_utility::function_f5a222a8(#"hash_2e632d14a18ddc0", level.e_obj);
   b_proximity = 0;
@@ -748,7 +748,7 @@ function function_c043100e(n_time) {
 
 function function_677356aa(instance) {
   instance endon(#"objective_ended");
-  self playSound(#"hash_67cbf2e985e3d9aa");
+  self playSound(#"evt_sr_obj_def_console_activate");
   instance waittill(#"activate");
   level flag::set("obj_defend_start");
   self thread function_763876af(instance);

@@ -451,7 +451,7 @@ function function_ef40fc60() {
   }
 
   var_89c89228 = struct::get("bny_club_dj_loc");
-  playSoundAtPosition(#"hash_6f7017b0648740c3", var_89c89228.origin);
+  playSoundAtPosition(#"zmb_bunnyquest_stp2_fail_buzzer", var_89c89228.origin);
   music::setmusicstate("bunny_outro_fail");
   level notify(#"hash_6ba7212a7d50425c");
   wait 3;
@@ -769,7 +769,7 @@ function private function_3d06cff4() {
     #var_2cdf7adf: self.script_int, #var_9171844e: self.var_9171844e
   });
   self moveTo(self.origin + (0, 0, 400), 6);
-  self playSound(#"hash_15edf5c3ecb9eada");
+  self playSound(#"zmb_bunnyquest_stp3_door_open");
   wait 1;
   col_door = getEnt(self.target, "targetname");
 

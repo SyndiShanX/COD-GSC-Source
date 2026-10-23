@@ -94,7 +94,7 @@ function function_773a9730(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_3bab499f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump) {
     if(!isDefined(self.var_fa63b371)) {
-      self playSound(fieldname, #"hash_4b620f72a399de7e");
+      self playSound(fieldname, #"evt_assault_portal_open");
       self.var_fa63b371 = playFX(fieldname, #"hash_57ae7e6f9140093f", self.origin, anglesToForward(self.angles), anglestoup(self.angles));
     }
 
@@ -102,7 +102,7 @@ function function_3bab499f(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(isDefined(self.var_fa63b371)) {
-    self playSound(fieldname, #"hash_7ab1d427d19ae56a");
+    self playSound(fieldname, #"evt_assault_portal_close");
     playFX(fieldname, #"hash_2786498a222adb04", self.origin, anglesToForward(self.angles), anglestoup(self.angles));
     killfx(fieldname, self.var_fa63b371);
     self.var_fa63b371 = undefined;

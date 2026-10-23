@@ -42,8 +42,8 @@ function function_dfadfc0e(localclientnum, oldval, newval, bnewent, binitialsnap
     }
 
     if(!isDefined(self.var_5ceafd03)) {
-      self playSound(fieldname, #"hash_3c448f01c0cd7e64");
-      self.var_5ceafd03 = self playLoopSound(#"hash_53e2a6691a758304");
+      self playSound(fieldname, #"zmb_fieldup_frenziedguard_start");
+      self.var_5ceafd03 = self playLoopSound(#"zmb_fieldup_frenziedguard_lp");
     }
 
     return;
@@ -59,7 +59,7 @@ function function_dfadfc0e(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(isDefined(self.var_5ceafd03)) {
-    self playSound(fieldname, #"hash_4b49ab981fdefe5d");
+    self playSound(fieldname, #"zmb_fieldup_frenziedguard_end");
     self stoploopsound(self.var_5ceafd03);
     self.var_5ceafd03 = undefined;
   }
@@ -90,7 +90,7 @@ function function_d3b68b9b(localclientnum, oldval, newval, bnewent, binitialsnap
       }
     }
 
-    self.var_cd26d88f = self playLoopSound(#"hash_58ee9d9df63d0294", undefined, (0, 0, 30));
+    self.var_cd26d88f = self playLoopSound(#"zmb_fieldup_frenziedguard_zombie_slowed_lp", undefined, (0, 0, 30));
     return;
   }
 

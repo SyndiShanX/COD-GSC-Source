@@ -229,7 +229,7 @@ function function_c421c41c() {
   foreach(var_82018b7b in level.var_56a47a6d) {
     switch (var_82018b7b.script_noteworthy) {
       case #"hash_35c71e67afe0f613":
-        var_82018b7b.ent = util::spawn_model(#"hash_3f79700b4c8b327", var_82018b7b.origin, var_82018b7b.angles);
+        var_82018b7b.ent = util::spawn_model(#"p9_spy_briefcase_01_closed", var_82018b7b.origin, var_82018b7b.angles);
         offsets = (0, 0, 0);
         angle_offset = (0, 0, 0);
         break;
@@ -2241,7 +2241,7 @@ function private function_c6a99754(player) {
   }
 
   if(isDefined(self.ent)) {
-    self.ent playSound(#"hash_48980a089e33b2c9");
+    self.ent playSound(#"mpl_spy_radio_decode_stop");
   }
 
   player function_3d8b0693();

@@ -94,11 +94,11 @@ function event_handler[gametype_init] main(eventstruct) {
 
   level.var_537d7278 = [];
   level.var_537d7278[#"allies"] = spawnStruct();
-  level.var_537d7278[#"allies"].friendly = #"hash_284308e81d362553";
-  level.var_537d7278[#"allies"].enemy = #"hash_104d7846da83e67e";
+  level.var_537d7278[#"allies"].friendly = #"p9_ctf_flag_carry_nato_blue";
+  level.var_537d7278[#"allies"].enemy = #"p9_ctf_flag_carry_nato_red";
   level.var_537d7278[#"axis"] = spawnStruct();
-  level.var_537d7278[#"axis"].friendly = #"hash_5a946f3f24347a8e";
-  level.var_537d7278[#"axis"].enemy = #"hash_34ce58df766f54dd";
+  level.var_537d7278[#"axis"].friendly = #"p9_ctf_flag_carry_warsaw_blue";
+  level.var_537d7278[#"axis"].enemy = #"p9_ctf_flag_carry_warsaw_red";
   level thread ctf_icon_hide();
   game.flagmodels[#"allies"] = spawnStruct();
   game.flagmodels[#"allies"].allies = #"p9_ctf_flag_nato_blue";
@@ -106,8 +106,8 @@ function event_handler[gametype_init] main(eventstruct) {
   game.flagmodels[#"axis"] = spawnStruct();
   game.flagmodels[#"axis"].axis = #"p9_ctf_flag_warsaw_blue";
   game.flagmodels[#"axis"].allies = #"p9_ctf_flag_warsaw_red";
-  game.carry_flagmodels[#"allies"] = #"hash_284308e81d362553";
-  game.carry_flagmodels[#"axis"] = #"hash_5a946f3f24347a8e";
+  game.carry_flagmodels[#"allies"] = #"p9_ctf_flag_carry_nato_blue";
+  game.carry_flagmodels[#"axis"] = #"p9_ctf_flag_carry_warsaw_blue";
 }
 
 function onprecachegametype() {

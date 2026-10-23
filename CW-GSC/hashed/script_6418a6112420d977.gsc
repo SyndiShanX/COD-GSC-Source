@@ -73,7 +73,7 @@ function function_540c0d15(instance) {
   self vehicle::toggle_lights_group(4, 1);
   self vehicle::toggle_sounds(1);
   self vehicle::lights_on();
-  self playSound(#"hash_388c12acd0e0928");
+  self playSound(#"evt_sr_obj_payload_rover_startup");
   self playrumblelooponentity(#"sr_machinery_rumble");
   self clientfield::increment("" + #"payload_health");
   self clientfield::set("" + #"payload_activate", 1);
@@ -368,7 +368,7 @@ function function_36359055(instance) {
 
   while(true) {
     if(!is_true(self.var_a123c71)) {
-      self playSound(#"hash_52af5fa9a4db69a2");
+      self playSound(#"evt_sr_obj_payload_ping");
     }
 
     wait 3;
@@ -784,11 +784,11 @@ function function_1e4eea8e(instance) {
   while(true) {
     if(is_true(self.var_a123c71)) {
       if(var_ad5fcb11 != 1) {
-        self playSound(#"hash_432c591c600ef4d2");
+        self playSound(#"evt_sr_obj_payload_start");
         var_ad5fcb11 = 1;
       }
     } else if(var_ad5fcb11 != 0) {
-      self playSound(#"hash_5d9bb1a3ab5cf792");
+      self playSound(#"evt_sr_obj_payload_stop");
       var_ad5fcb11 = 0;
     }
 
@@ -829,7 +829,7 @@ function function_24735dd6(instance) {
 
     if(s_result._notify === "bridge_riser") {
       var_90a50598 = isDefined(instance.contentgroups[#"hash_49cdcfaa651f27b1"]) ? instance.contentgroups[#"hash_49cdcfaa651f27b1"] : [];
-      str_soundalias = #"hash_77ae7c9f20198410";
+      str_soundalias = #"evt_sur_mq2_stp4_jellyfish_swim";
       n_dist = 600;
       n_speed = 100;
     } else {
@@ -972,7 +972,7 @@ function function_978eec63(einflictor, eattacker, idamage, idflags, smeansofdeat
     }
 
     if(vsurfacenormal === "MOD_MELEE") {
-      self playSound(#"hash_1ddeb8af5a217a6e");
+      self playSound(#"evt_sr_obj_def_console_damaged");
     }
 
     if(modelindex.model === #"wpn_t9_sr_electric_avogadro_projectile") {

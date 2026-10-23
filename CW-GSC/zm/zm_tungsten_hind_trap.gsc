@@ -165,7 +165,7 @@ function function_477e5e68() {
 function function_4eaecff9() {
   self playSound(#"zmb_tungsten_lever_activate");
   self.var_fdec2822 rotateTo(self.angles + (179, 0, 0), 0.3);
-  self playSound(#"hash_137dbe10929df4eb");
+  self playSound(#"zmb_tungsten_lever_activate_powerup");
   self.var_fdec2822 waittill(#"rotatedone");
   self function_7265ebeb(0);
   self.var_fdec2822 clientfield::increment("" + #"hash_575d68a64ff032b2", 1);
@@ -176,7 +176,7 @@ function function_b53f905a() {
   self.var_fdec2822 rotateTo(self.angles + (90, 0, 0), 0.3);
   self playSound(#"zmb_tungsten_lever_reset");
   wait 0.3;
-  self playSound(#"hash_7744ef898bf5b90e");
+  self playSound(#"zmb_tungsten_lever_reset_powerdown");
   self function_7265ebeb(0);
   self.var_d6b3b6e0 clientfield::set("" + #"hash_16e5e4d2ea0716b7", 1);
 }

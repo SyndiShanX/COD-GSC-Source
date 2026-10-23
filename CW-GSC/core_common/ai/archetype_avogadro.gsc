@@ -634,7 +634,7 @@ function function_5f86757d() {
     return waitresult;
   }
 
-  playSoundAtPosition(#"hash_525786cd7853a7a0", self.origin);
+  playSoundAtPosition(#"prj_avogadro_pulse_explo", self.origin);
   self clientfield::set("" + #"avogadro_bolt_fx", 0);
   return waitresult;
 }

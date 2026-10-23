@@ -252,7 +252,7 @@ function on_round_end() {
       player.var_8d41c907 = 0;
     }
 
-    if(!zm_utility::function_1a01f2f7(player)) {
+    if(!zm_utility::gunship_ambush_index_0(player)) {
       player luinotifyevent(#"hash_3e6dd0ad7b864154", 1, xp_gain);
       player addrankxpvalue("round_end_xp", xp_gain, 4);
       player.var_8d41c907 -= xp_gain;

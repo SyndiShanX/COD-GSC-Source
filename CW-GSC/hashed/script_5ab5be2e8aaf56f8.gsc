@@ -136,7 +136,7 @@ function function_79417d24(einflictor, eattacker, idamage, idflags, smeansofdeat
   if(isDefined(iboneindex) && isPlayer(iboneindex)) {
     return 0;
   } else {
-    self playSound(#"hash_1225352ba7939c9c");
+    self playSound(#"evt_sr_obj_sec_console_damaged");
 
     if(isDefined(self) && !is_true(self.is_damaged) && isDefined(level.contentmanager.activeobjective)) {
       self thread function_814c0e69(level.contentmanager.activeobjective);
@@ -271,7 +271,7 @@ function function_8b062964() {
   level namespace_7589cf5c::play_vo("objectiveSecureStartSequence4");
 
   if(isDefined(self.var_2972bc14)) {
-    self.var_2972bc14 playSound(#"hash_1dbfe54c1a1ccba9");
+    self.var_2972bc14 playSound(#"evt_sr_obj_sec_dish_activate");
   }
 
   wait 2.5;
@@ -1429,7 +1429,7 @@ function function_f5087df2() {
 
 function function_84ccd16c() {
   self playRumbleOnEntity("sr_prototype_generator_explosion");
-  self playSound(#"hash_438a231b8ad66b41");
+  self playSound(#"evt_sr_obj_sec_rocket_explode");
   wait 0.1;
 
   if(isDefined(self.mdl_fx)) {
@@ -1518,7 +1518,7 @@ function function_814c0e69(instance) {
 
   while(n_inc < 3) {
     if(isDefined(self)) {
-      self playSound(#"hash_40c9587f10b04801");
+      self playSound(#"evt_sr_obj_sec_rocket_alarm");
     }
 
     wait 0.5;

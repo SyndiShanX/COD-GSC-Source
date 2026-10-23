@@ -407,7 +407,7 @@ function function_1ef44bfb(params) {
         end_point = var_8a9e27f9 + vectorNormalize(activator getcentroid() - var_8a9e27f9) * 200;
 
         if(bullettracepassed(var_8a9e27f9, end_point, 0, self, activator)) {
-          self.var_a516906f.anim = #"hash_6194bdd16068478f";
+          self.var_a516906f.anim = #"ai_t9_zm_mimic_com_emerge_prop_quick_2_run_f_01";
         }
       }
     }
@@ -692,9 +692,9 @@ function function_5c840d7b(entity) {
 }
 
 function mimic_death_head_explosion(entity) {
-  if(entity haspart("j_head", "c_t9_zmb_mimic_head") && !entity isattached(#"hash_25e5543fd258a1a6")) {
+  if(entity haspart("j_head", "c_t9_zmb_mimic_head") && !entity isattached(#"c_t9_zmb_mimic_neck_stump")) {
     entity hidepart("j_head", "c_t9_zmb_mimic_head", 1);
-    entity attach(#"hash_25e5543fd258a1a6");
+    entity attach(#"c_t9_zmb_mimic_neck_stump");
   }
 }
 

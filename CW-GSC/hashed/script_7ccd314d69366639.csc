@@ -60,7 +60,7 @@ function function_5ce76614(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_6b90cf3a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
     self.n_fx_id = util::playFXOnTag(fieldname, "sr/fx9_canister_pod_aether", self, "tag_animate");
-    self.var_b3673abf = self playLoopSound(#"hash_724ba66a7599d72d", undefined, (0, 0, 15));
+    self.var_b3673abf = self playLoopSound(#"evt_sr_obj_ret_canister_pod_lp", undefined, (0, 0, 15));
     return;
   }
 
@@ -85,7 +85,7 @@ function function_1eb1d4d6(localclientnum, oldval, newval, bnewent, binitialsnap
     self.n_fx_id = util::playFXOnTag(fieldname, "sr/fx9_obj_retrieval_container_glow", self, "p9_sur_console_control_01_canister_handle_jnt");
 
     if(!isDefined(self.var_b3673abf)) {
-      self.var_b3673abf = self playLoopSound(#"hash_3432d05cab6568b1", undefined, (0, 0, 10));
+      self.var_b3673abf = self playLoopSound(#"evt_sr_obj_ret_canister_lp", undefined, (0, 0, 10));
     }
 
     return;
@@ -110,7 +110,7 @@ function canister_shockwave(localclientnum, oldval, newval, bnewent, binitialsna
   }
 
   playFX(bwastimejump, str_fx, self.origin, (180, 0, 0));
-  self playSound(bwastimejump, #"hash_5db462e1df5084e7");
+  self playSound(bwastimejump, #"evt_sr_obj_ret_fieldupgrade_activate");
   self playRumbleOnEntity(bwastimejump, "damage_heavy");
 }
 

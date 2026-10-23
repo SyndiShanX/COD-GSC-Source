@@ -251,7 +251,7 @@ function function_b828bd39(player, var_cdef1b0e) {
     wait time;
     self.var_3fa8a746 = 1;
     player function_bc82f900("fishing_rumble");
-    playSoundAtPosition(#"hash_5784befa5a563866", player.origin);
+    playSoundAtPosition(#"evt_fishing_fish_on", player.origin);
     self thread fishing_buoy_splash();
     new_pos = self.origin + (0, 0, -5);
     self moveTo(new_pos, 0.5);

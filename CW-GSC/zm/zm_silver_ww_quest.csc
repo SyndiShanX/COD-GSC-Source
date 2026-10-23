@@ -152,7 +152,7 @@ function function_29b9f19b(localclientnum, oldval, newval, bnewent, binitialsnap
   if(bwasdemojump == 1) {
     self.var_29b9f19b = util::playFXOnTag(fieldname, #"hash_8887a20dd955a51", self, "tag_fungus_fx");
     self.var_949340cf = util::playFXOnTag(fieldname, #"hash_40a742cacdfc9a36", self, "tag_origin");
-    self.var_c8661564 = self playLoopSound(#"hash_6dff86c60e6200a9");
+    self.var_c8661564 = self playLoopSound(#"zmb_quest_wwu_nitro_fungus_mutated_lp");
     return;
   }
 
@@ -173,13 +173,13 @@ function function_c35975ed(localclientnum, oldval, newval, bnewent, binitialsnap
   if(bwasdemojump == 1) {
     playSound(fieldname, #"zmb_quest_ww_vacuum_start", (-85, -408, 79));
     soundlineemitter(#"hash_7d00ba230936febe", (-85, -408, 79), (72, -413, 77));
-    soundloopemitter(#"hash_1543c9e1aff0cf87", (-155, -410, 81));
+    soundloopemitter(#"zmb_quest_ww_vacuum_vacuum_lp", (-155, -410, 81));
     return;
   }
 
   playSound(fieldname, #"zmb_quest_ww_vacuum_stop", (-85, -408, 79));
   soundstoplineemitter(#"hash_7d00ba230936febe", (-85, -408, 79), (72, -413, 77));
-  soundstoploopemitter(#"hash_1543c9e1aff0cf87", (-155, -410, 81));
+  soundstoploopemitter(#"zmb_quest_ww_vacuum_vacuum_lp", (-155, -410, 81));
 }
 
 function player_camera_shake(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -274,14 +274,14 @@ function ww_vacuum_crystal_fx(localclientnum, oldval, newval, bnewent, binitials
     if(self zm_utility::function_f8796df3(fieldname)) {
       if(viewmodelhastag(fieldname, "tag_flash")) {
         level.var_37d7e267[n_entity] = playviewmodelfx(fieldname, #"zombie/fx_shdw_floating_smk_zod_zmb", "tag_flash");
-        level.var_cca24823[n_entity] = self playLoopSound(#"hash_4f03b4341d714c53");
+        level.var_cca24823[n_entity] = self playLoopSound(#"zmb_ww_crystal_suckup_lp");
       }
 
       return;
     }
 
     level.var_37d7e267[n_entity] = util::playFXOnTag(fieldname, #"zombie/fx_shdw_floating_smk_zod_zmb", self, "tag_flash");
-    level.var_cca24823[n_entity] = self playLoopSound(#"hash_4f03b4341d714c53", undefined, (0, 0, 50));
+    level.var_cca24823[n_entity] = self playLoopSound(#"zmb_ww_crystal_suckup_lp", undefined, (0, 0, 50));
   }
 }
 

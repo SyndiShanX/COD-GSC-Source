@@ -95,7 +95,7 @@ function private function_5bb13b48(player) {
 
       self.parentobj setinvisibletoplayer(player);
       self.trigger setinvisibletoplayer(player);
-      player playsoundtoplayer(#"hash_8a4d3f134fa94d7", player);
+      player playsoundtoplayer(#"evt_bh_health_stash_open", player);
       self.usecount++;
       player gestures::function_56e00fbf(#"gestable_grab", undefined, 0);
 

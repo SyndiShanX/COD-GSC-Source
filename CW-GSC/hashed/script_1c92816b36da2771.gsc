@@ -362,15 +362,15 @@ function function_2c0c38a6() {
 function function_b1ac17cb() {
   level endon(#"end_game");
   level flag::wait_till(#"hash_2e1d65f192bc836d");
-  playSoundAtPosition(#"hash_3062089467caadf9", level.var_93f1848f.origin);
+  playSoundAtPosition(#"evt_klaus_unlock_door_break", level.var_93f1848f.origin);
   level.var_93f1848f thread scene::play(#"hash_e8f7626058dd98b", level.var_93f1848f);
   level.var_93f1848f notsolid();
   level waittill(#"hash_53366bbacf4a4d81");
-  playSoundAtPosition(#"hash_3062089467caadf9", level.var_93c6843d.origin);
+  playSoundAtPosition(#"evt_klaus_unlock_door_break", level.var_93c6843d.origin);
   level.var_93c6843d thread scene::play(#"hash_e8f7826058ddcf1", level.var_93c6843d);
   level.var_93c6843d notsolid();
   level waittill(#"hash_45739b14988fa0da");
-  playSoundAtPosition(#"hash_3062089467caadf9", level.var_adabb803.origin);
+  playSoundAtPosition(#"evt_klaus_unlock_door_break", level.var_adabb803.origin);
   level.var_adabb803 thread scene::play(#"hash_e8f7726058ddb3e", level.var_adabb803);
   level.var_adabb803 notsolid();
   level flag::set(#"hash_1ec3570883b4621e");
@@ -798,7 +798,7 @@ function private function_8d5c5a84(follow_player, var_1e447653 = 0) {
     land_pos = follow_player.origin;
     level.klaus zodcompanionutility::function_3fb3f41e(follow_player);
     level.klaus zodcompanionutility::function_681263de();
-    level.klaus playSound(#"hash_260545f3283bead9");
+    level.klaus playSound(#"evt_klaus_callin_alarm");
     level thread function_9eef76d4();
     var_d15867da = follow_player.cached_zone_name;
 
@@ -870,7 +870,7 @@ function function_c94afb95(var_eaf5148f = 0) {
   var_8b274988 = zm_zonemgr::get_zone_from_position(level.klaus.origin);
   var_8dd281be = isinarray(level.var_65c43c31, var_8b274988);
   level.klaus thread zm_platinum_vo::function_cc3eb0e8();
-  level.klaus playSound(#"hash_4aff00bda51f3122");
+  level.klaus playSound(#"evt_klaus_timeout_stinger");
 
   if(isDefined(level.klaus.leader)) {
     level thread namespace_33c196c8::function_2d3ad651(level.klaus.leader);

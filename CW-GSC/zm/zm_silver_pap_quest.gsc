@@ -339,7 +339,7 @@ function function_da48420c() {
   level.var_6c682532 = util::spawn_model(#"p9_zm_ndu_computer_screen_medical_horizontal_01", level.var_b2371398.origin, level.var_b2371398.angles);
   level.var_59b6e9a5 thread function_c0a7e4cc();
   level.var_6c682532 thread function_c0a7e4cc();
-  level.var_b2371398 playLoopSound(#"hash_1849514e59b9f8f5");
+  level.var_b2371398 playLoopSound(#"zmb_silver_mq_2_comp_generic_lp");
   level.var_59b6e9a5 playLoopSound(#"hash_6d260f1782892e0f");
   showmiscmodels("zm_tm_blue_in");
   showmiscmodels("zm_tm_red_in");

@@ -299,7 +299,7 @@ function function_b03d7dd0(round) {
 }
 
 function on_round_end() {
-  playSoundAtPosition(#"hash_409b69424385812a", (0, 0, 0));
+  playSoundAtPosition(#"zmb_cranked_round_transition", (0, 0, 0));
   xp_gain = zm::function_d3113f01().var_bd588afd;
   luinotifyevent(#"hash_3e6dd0ad7b864154", 1, xp_gain);
 
@@ -308,7 +308,7 @@ function on_round_end() {
       player.var_8d41c907 = 0;
     }
 
-    if(zm_utility::function_1a01f2f7(player)) {
+    if(zm_utility::gunship_ambush_index_0(player)) {
       player addrankxpvalue("round_end_xp", xp_gain, 4);
       player.var_8d41c907 -= xp_gain;
     }

@@ -141,7 +141,7 @@ function function_4aa76e8d(localclientnum, oldval, newval, bnewent, binitialsnap
   if(bwasdemojump) {
     self.var_b8719b00 = playFX(fieldname, #"hash_79820377ac325c2b", self.origin, anglesToForward(self.angles), anglestoup(self.angles));
     self.var_1aebf0ec = util::playFXOnTag(fieldname, #"hash_91d61544c778dbe", self, "tag_mouth");
-    playSound(fieldname, #"hash_161fceda8dd44ee3", self.origin + (0, 0, 40));
+    playSound(fieldname, #"zmb_tung_sq_burgerboy_mascot_start", self.origin + (0, 0, 40));
     return;
   }
 
@@ -354,7 +354,7 @@ function function_30aa821d(localclientnum, oldval, newval, bnewent, binitialsnap
         var_2b30e4c7.fx_tag.var_a3701ec9 = util::playFXOnTag(fieldname, #"zombie/fx_aat_fireworks_zmb", var_2b30e4c7.fx_tag, "tag_origin");
       }
 
-      playSound(fieldname, #"hash_5147e3b5f415d707", var_2b30e4c7.origin + (0, 0, 20));
+      playSound(fieldname, #"zmb_tung_sq_gp_fireworks", var_2b30e4c7.origin + (0, 0, 20));
     }
   }
 
@@ -367,7 +367,7 @@ function function_30aa821d(localclientnum, oldval, newval, bnewent, binitialsnap
         var_2b30e4c7.fx_tag.var_a3701ec9 = util::playFXOnTag(fieldname, #"zombie/fx_aat_fireworks_zmb", var_2b30e4c7.fx_tag, "tag_origin");
       }
 
-      playSound(fieldname, #"hash_5147e3b5f415d707", var_2b30e4c7.origin + (0, 0, 20));
+      playSound(fieldname, #"zmb_tung_sq_gp_fireworks", var_2b30e4c7.origin + (0, 0, 20));
     }
   }
 

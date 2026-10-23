@@ -97,7 +97,7 @@ function onstartgametype() {
 
 function ongameplaying() {
   level endon(#"game_ended");
-  playSoundAtPosition(#"hash_5a903084d1d3a71e", (0, 0, 0));
+  playSoundAtPosition(#"mpl_scream_slasher_select_rise", (0, 0, 0));
   level function_3c555e08();
   function_6ebe14e9();
   players = function_eb6cbb5();
@@ -995,12 +995,12 @@ function function_2c0f551b() {
           var_2586180f = 0.6 + fraction * var_56463c00;
         }
 
-        var_89dbab63 = #"hash_5d9332bbba421aef";
+        var_89dbab63 = #"mpl_scream_survivor_heartbeat_fast";
 
         if(var_2586180f >= var_3bd70d7) {
-          var_89dbab63 = #"hash_58affb5b9a7a5538";
+          var_89dbab63 = #"mpl_scream_survivor_heartbeat_slow";
         } else if(var_2586180f >= var_37805d8) {
-          var_89dbab63 = #"hash_71485ac352b330d9";
+          var_89dbab63 = #"mpl_scream_survivor_heartbeat_med";
         }
 
         currenttime = gettime();

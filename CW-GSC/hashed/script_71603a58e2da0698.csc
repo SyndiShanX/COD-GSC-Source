@@ -151,7 +151,7 @@ function function_c75159ad(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_43ae94e0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self.var_88a2ff29 = level.default_mapping;
-  playSound(bwastimejump, #"hash_51a1d69295a5b7fe", (0, 0, 0));
+  playSound(bwastimejump, #"evt_doa_pickup_firstperson_exit_2d", (0, 0, 0));
   setsoundcontext("doa_1stperson", "inactive");
 
   if(!isDefined(self.doa)) {
@@ -216,7 +216,7 @@ function function_f32984d0(localclientnum, oldval, newval, bnewent, binitialsnap
     return;
   }
 
-  playSound(localclientnum, #"hash_4716558fb561cab2", (0, 0, 0));
+  playSound(localclientnum, #"evt_doa_pickup_firstperson_enter_2d", (0, 0, 0));
   setsoundcontext("doa_1stperson", "active");
 
   if(is_true(level.doa.var_318aa67a)) {

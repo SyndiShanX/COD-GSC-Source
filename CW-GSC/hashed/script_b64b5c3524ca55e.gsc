@@ -704,7 +704,7 @@ function function_876d602(a_ents) {
 
     if(isDefined(var_fa2af647)) {
       playFX(#"sr/fx9_hvt_aether_portal_exp", var_fa2af647.origin + (0, 0, 32), anglesToForward(var_fa2af647.angles), anglestoup(var_fa2af647.angles));
-      var_fa2af647 playSound(#"hash_1412afc9788c5421");
+      var_fa2af647 playSound(#"zmb_mq_boss_cleanup_explo");
     }
 
     foreach(str_step in [#"step_01", #"step_02", #"step_03", #"step_04", #"step_05", #"step_06", #"step_07"]) {
@@ -2233,7 +2233,7 @@ function function_4f440b0(var_75a7d6, var_7ca1e76e = 0) {
   }
 
   playFX(str_fx, var_a12bf98c.origin + (0, 0, n_height), anglesToForward(var_a12bf98c.angles), anglestoup(var_a12bf98c.angles));
-  playSoundAtPosition(#"hash_1412afc9788c5421", var_a12bf98c.origin);
+  playSoundAtPosition(#"zmb_mq_boss_cleanup_explo", var_a12bf98c.origin);
   playrumbleonposition(#"hash_41054017b6b786b8", var_a12bf98c.origin);
   function_e8799ac6(var_b39864d6.origin, 1000);
   level thread zm_utility::function_9ad5aeb1(0, 1, 0, 0);
@@ -2369,7 +2369,7 @@ function function_b2871ce6(var_75a7d6) {
   if(var_9207bb3a > 0) {
     playFX(#"sr/fx9_hvt_aether_portal_exp", mdl_fx.origin, anglesToForward(mdl_fx.angles), anglestoup(mdl_fx.angles));
     playrumbleonposition(#"hash_41054017b6b786b8", mdl_fx.origin);
-    mdl_fx playSound(#"hash_292cc4273f4c0161");
+    mdl_fx playSound(#"evt_sr_obj_hvt_teleport_flyaway");
     mdl_fx moveTo(var_3d2df074.origin, var_9207bb3a);
     mdl_fx rotateTo(var_3d2df074.angles, var_9207bb3a);
     mdl_fx waittill(#"movedone");
@@ -3116,9 +3116,9 @@ function function_5e042438(var_75a7d6, e_target) {
     level thread function_4e595107(var_75a7d6, #"hash_477a7859bae6c69c");
   }
 
-  var_b39864d6 playsoundontag(#"hash_2c26cf8f03624b0a", "tag_eye");
+  var_b39864d6 playsoundontag(#"zmb_mq_boss_attack_crystal_start", "tag_eye");
   wait 0.5;
-  var_b39864d6 playLoopSound(#"hash_1dd9dd7126ae7f9e");
+  var_b39864d6 playLoopSound(#"zmb_mq_boss_attack_crystal_lp");
   wait 1;
   level thread function_d3bbbc22(var_75a7d6);
   wait 6;
@@ -3142,7 +3142,7 @@ function function_5e042438(var_75a7d6, e_target) {
   }
 
   var_b39864d6 stoploopsound();
-  var_b39864d6 playsoundontag(#"hash_65fc0ad4c7938c2a", "tag_eye");
+  var_b39864d6 playsoundontag(#"zmb_mq_boss_attack_crystal_stop", "tag_eye");
   var_b39864d6 scene::play(#"hash_63636406a7a2326", var_dee0396e, var_b39864d6);
   var_b39864d6 thread scene::play(#"hash_63636406a7a2326", var_ec892790, var_b39864d6);
   var_75a7d6 flag::clear(#"attacking");

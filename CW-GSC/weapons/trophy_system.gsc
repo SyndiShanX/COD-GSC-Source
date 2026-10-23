@@ -342,7 +342,7 @@ function projectileexplode(projectile, trophy, fxfwd, fxup) {
 
   projposition = projectile.origin;
   playFX(level.trophydetonationfx, projposition, fxfwd, fxup);
-  projectile playSound(#"hash_741683e10b98efd8");
+  projectile playSound(#"wpn_trophy_prj_exp");
   projectile notify(#"trophy_destroyed");
 
   if(isDefined(trophy)) {

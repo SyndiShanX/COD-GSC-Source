@@ -3290,7 +3290,7 @@ function function_97b4eb2c(localclientnum, var_2a4208a4, str_state = #"lobby_pos
       n_delay_min = 120;
       n_delay_max = 180;
       str_fxanim = #"p9_fxanim_mp_frontend_plane_station_guns_bundle";
-      var_df4e70cd = #"hash_20e4410e7a619aab";
+      var_df4e70cd = #"amb_frontend_plane_rumble_medium";
       break;
     case #"character_room":
       str_rumble = #"hash_4a7c098220c7b9be";
@@ -3299,7 +3299,7 @@ function function_97b4eb2c(localclientnum, var_2a4208a4, str_state = #"lobby_pos
       n_delay_min = 60;
       n_delay_max = 75;
       str_fxanim = #"p9_fxanim_mp_frontend_plane_station_character_bundle";
-      var_df4e70cd = #"hash_4332c2e140d253";
+      var_df4e70cd = #"amb_frontend_plane_rumble_large";
       break;
   }
 
@@ -3466,8 +3466,8 @@ function function_2524bdd7() {
   audio::playloopat(#"amb_frontend_loop_mtx", (2, 2, 2));
   audio::playloopat(#"amb_frontend_loop_plane", (3, 3, 3));
   audio::playloopat(#"amb_frontend_loop_lobby_zm", (4, 4, 4));
-  audio::playloopat(#"hash_55236c15e2bc2f16", (5, 5, 5));
-  audio::playloopat(#"hash_5cef4cfaac8c6a7c", (6, 6, 6));
+  audio::playloopat(#"amb_frontend_loop_lobby_numbers_high", (5, 5, 5));
+  audio::playloopat(#"amb_frontend_loop_lobby_numbers_low", (6, 6, 6));
   addsubmix("amb_frontend_drone", 0.5, 0);
   addsubmix("amb_frontend_armory", 0.5, 1);
   addsubmix("amb_frontend_lobby", 0.5, 1);

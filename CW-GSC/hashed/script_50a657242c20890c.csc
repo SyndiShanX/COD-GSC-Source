@@ -75,7 +75,7 @@ function function_718ef5ea(var_a7dcc4c7, v_center) {
 
     if(var_a7dcc4c7.origin != v_target) {
       if(!isDefined(var_a7dcc4c7.var_28cc73f6)) {
-        var_a7dcc4c7.var_28cc73f6 = var_a7dcc4c7 playLoopSound(#"hash_7f519f5efb38d2ba");
+        var_a7dcc4c7.var_28cc73f6 = var_a7dcc4c7 playLoopSound(#"zmb_gold_mq_9_cursor_move_lp");
       }
 
       var_a7dcc4c7 moveTo(v_target, 0.05);

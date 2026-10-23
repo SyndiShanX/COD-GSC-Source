@@ -872,7 +872,7 @@ function private function_56b5dd3f(team) {
 
     foreach(player in getPlayers(team)) {
       player luinotifyevent(#"hash_4e128be5bc1a0226", 1, multiplier);
-      player playsoundtoplayer(#"hash_691ccafec8b6c07f", player);
+      player playsoundtoplayer(#"mpl_war_momentum_gain_2", player);
     }
   } else if(team_momentum.value >= 100) {
     team_momentum.multiplier = 2;
@@ -884,7 +884,7 @@ function private function_56b5dd3f(team) {
 
       foreach(player in getPlayers(team)) {
         player luinotifyevent(#"hash_4e128be5bc1a0226", 1, multiplier);
-        player playsoundtoplayer(#"hash_691ccbfec8b6c232", player);
+        player playsoundtoplayer(#"mpl_war_momentum_gain_1", player);
       }
     }
   } else {

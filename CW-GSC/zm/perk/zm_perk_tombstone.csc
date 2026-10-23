@@ -90,8 +90,8 @@ function function_e32c696e(localclientnum, oldval, newval, bnewent, binitialsnap
     }
 
     if(!isDefined(level.var_929ed5c3[n_entity].var_44c08b39)) {
-      self playSound(fieldname, #"hash_9439f12723cfe43", self.origin + (0, 0, 75));
-      level.var_929ed5c3[n_entity].var_44c08b39 = self playLoopSound(#"hash_239f90b280cde695", undefined, (0, 0, 75));
+      self playSound(fieldname, #"zmb_perk_tombstone_afterlife_start", self.origin + (0, 0, 75));
+      level.var_929ed5c3[n_entity].var_44c08b39 = self playLoopSound(#"zmb_perk_tombstone_afterlife_lp", undefined, (0, 0, 75));
     }
 
     self.var_2642dd3d = 1;
@@ -139,7 +139,7 @@ function function_acf463c0(localclientnum) {
   }
 
   if(isDefined(level.var_929ed5c3[n_entity].var_44c08b39)) {
-    self playSound(localclientnum, #"hash_a486150b3965756", self.origin + (0, 0, 75));
+    self playSound(localclientnum, #"zmb_perk_tombstone_afterlife_end", self.origin + (0, 0, 75));
     self stoploopsound(level.var_929ed5c3[n_entity].var_44c08b39);
     level.var_929ed5c3[n_entity].var_44c08b39 = undefined;
   }
@@ -179,7 +179,7 @@ function function_2f3a5c2(localclientnum, oldval, newval, bnewent, binitialsnap,
   if(isDefined(self.var_212f2fe0)) {
     self stoploopsound(self.var_212f2fe0);
     self.var_212f2fe0 = undefined;
-    self playSound(fieldname, #"hash_6ece13844ae6d9c4");
+    self playSound(fieldname, #"zmb_perk_tombstone_stash_despawn");
   }
 
   if(bwastimejump) {
@@ -200,8 +200,8 @@ function function_2f3a5c2(localclientnum, oldval, newval, bnewent, binitialsnap,
     }
 
     self.eye_fx = util::playFXOnTag(fieldname, str_fx, self, "tag_origin");
-    self playSound(fieldname, #"hash_584010eeca733f75");
-    self.var_212f2fe0 = self playLoopSound(#"hash_4bf005ee9faa6c5a");
+    self playSound(fieldname, #"zmb_perk_tombstone_stash_spawn");
+    self.var_212f2fe0 = self playLoopSound(#"zmb_perk_tombstone_stash_lp");
   }
 }
 
@@ -220,6 +220,6 @@ function function_e2f686a3(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(bwastimejump && isDefined(self)) {
     self.smoke_fx = util::playFXOnTag(fieldname, #"hash_75c8e387ce756315", self, "tag_origin");
-    self.smoke_sfx = self playLoopSound(#"hash_3d5c6d04514fbbcd");
+    self.smoke_sfx = self playLoopSound(#"zmb_perk_tombstone_body_glow_lp");
   }
 }

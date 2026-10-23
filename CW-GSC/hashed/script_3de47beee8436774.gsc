@@ -2674,7 +2674,7 @@ function function_6b5096fe() {
   }
 
   if(!isDefined(level.gunner)) {
-    namespace_b7cfe907::function_166083c9(0, undefined, 1);
+    namespace_b7cfe907::dx_op_ping_plbs_kleo(0, undefined, 1);
   }
 
   if(!isDefined(level.vip)) {
@@ -2740,7 +2740,7 @@ function function_2d9dc4d1() {
   level namespace_b7cfe907::function_882e6973(1);
   level namespace_b7cfe907::function_14a42357(1);
   level namespace_b7cfe907::function_e1635dfe(1);
-  level namespace_b7cfe907::function_166083c9(1);
+  level namespace_b7cfe907::dx_op_ping_plbs_kleo(1);
   level namespace_b7cfe907::function_37fc8bb();
 }
 

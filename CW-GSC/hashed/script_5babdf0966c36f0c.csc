@@ -45,20 +45,20 @@ function function_f1dc3a2c(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(bwastimejump == 1) {
     self.var_aa4114ee = function_239993de(fieldname, #"hash_64b0865c260e817", self, "tag_origin");
-    self.var_4b0f392d = self playLoopSound(#"hash_3b6ec57280c13f40");
+    self.var_4b0f392d = self playLoopSound(#"evt_sur_we_bc_chest_locked_lp");
     return;
   }
 
   if(bwastimejump == 2) {
-    playSound(fieldname, #"hash_265dc7bbebe2c9a5", self.origin + (0, 0, 20));
+    playSound(fieldname, #"evt_sur_we_bc_chest_activation", self.origin + (0, 0, 20));
 
     if(isDefined(self.var_4b0f392d)) {
       self stoploopsound(self.var_4b0f392d);
       self.var_4b0f392d = undefined;
     }
 
-    self.var_3dec4e8f = self playLoopSound(#"hash_7391c95dbcf9cfc2");
-    playSound(fieldname, #"hash_779a84be63566050", self.origin + (0, 0, 20));
+    self.var_3dec4e8f = self playLoopSound(#"evt_sur_we_bc_chest_activation_lp");
+    playSound(fieldname, #"evt_sur_we_bc_chest_locks_start", self.origin + (0, 0, 20));
     self.var_65297126 = function_239993de(fieldname, #"hash_27ce04be3dbc0401", self, "tag_origin");
     self.var_6a713ba5 = function_239993de(fieldname, #"hash_27ce02be3dbc009b", self, "tag_origin");
     self.var_29313552 = function_239993de(fieldname, #"hash_27ce03be3dbc024e", self, "tag_origin");
@@ -69,14 +69,14 @@ function function_f1dc3a2c(localclientnum, oldval, newval, bnewent, binitialsnap
     if(isDefined(self.var_65297126)) {
       killfx(fieldname, self.var_65297126);
       self.var_65297126 = undefined;
-      playSound(fieldname, #"hash_1cd1dad84277f521", self.origin + (0, 0, 20));
+      playSound(fieldname, #"evt_sur_we_bc_chest_locks_end_1", self.origin + (0, 0, 20));
       return;
     }
 
     if(isDefined(self.var_6a713ba5)) {
       killfx(fieldname, self.var_6a713ba5);
       self.var_6a713ba5 = undefined;
-      playSound(fieldname, #"hash_1cd1d7d84277f008", self.origin + (0, 0, 20));
+      playSound(fieldname, #"evt_sur_we_bc_chest_locks_end_2", self.origin + (0, 0, 20));
       return;
     }
 
@@ -99,7 +99,7 @@ function function_f1dc3a2c(localclientnum, oldval, newval, bnewent, binitialsnap
       }
 
       function_239993de(fieldname, #"hash_77bddd3682fbdda5", self, "tag_origin");
-      self playSound(fieldname, #"hash_24989877bfd5a764");
+      self playSound(fieldname, #"evt_sur_we_bc_chest_unlocked");
     }
   }
 }

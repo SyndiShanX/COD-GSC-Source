@@ -742,7 +742,7 @@ function collect_intel(var_d5fa8477, mdl_intel, var_eac6151d, var_54c59ebe = 0) 
     currentprogress = self function_32b4eecc();
     totalprogress = level.var_731907e8;
     self luinotifyevent(#"hash_c587d2e4faec420", 3, var_d5fa8477, currentprogress, totalprogress);
-    self playlocalsound(#"hash_68c4c53739928215");
+    self playlocalsound(#"uin_reward_notification_default");
   }
 
   iprintln("<dev string:xba>" + self getentitynumber() + "<dev string:xc5>" + hashtostring(var_d5fa8477));

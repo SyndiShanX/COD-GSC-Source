@@ -304,7 +304,7 @@ function function_b0bc26b3(deathtime, starttime) {
   self playlocalsound(#"uin_gameendscore_potm_slowdown");
   setslowmotion(1, 0.25, waitbeforedeath);
   wait waitbeforedeath;
-  self playlocalsound(#"hash_6cc0ea056038c67c");
+  self playlocalsound(#"uin_gameendscore_potm_slowdown_end");
   setslowmotion(0.25, 1, 1);
   game.var_a1e9e96a = undefined;
 }

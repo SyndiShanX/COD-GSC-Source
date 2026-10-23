@@ -482,7 +482,7 @@ function function_521d48eb() {
   item.var_dd21aec2 = 1 | 16;
   n_power = length(var_a464a784.origin - var_7d0b21c8.origin) * 2;
   drop_time = item zm_utility::fake_physicslaunch(var_7d0b21c8.origin, n_power);
-  item playLoopSound(#"hash_37ef61c0931d0e79");
+  item playLoopSound(#"zmb_tung_sq_coin_glow_lp");
   item.var_9f9d9b10 = 1;
   level flag::set(#"hash_50d40a20b859977f");
 }

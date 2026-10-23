@@ -2368,8 +2368,8 @@ class cscene {
   function function_1b4fe4c4() {
     if(isarray(_a_objects)) {
       foreach(object in _a_objects) {
-        if(isDefined(object.var_55b4f21e.var_39fd697b)) {
-          a_ents = getEntArray(object.var_55b4f21e.var_39fd697b, "targetname", 1);
+        if(isDefined(object.var_55b4f21e.dx_op_ping_leba_toro)) {
+          a_ents = getEntArray(object.var_55b4f21e.dx_op_ping_leba_toro, "targetname", 1);
           array::thread_all(a_ents, &val::set, #"script_hide", "hide", 1);
         }
 

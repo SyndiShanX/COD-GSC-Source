@@ -28,12 +28,12 @@ function function_c4893dbf(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_9c4c4f14(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
-    self playSound(fieldname, #"hash_695b0d7f1ef212c");
+    self playSound(fieldname, #"evt_sr_obj_sec_energy_charge");
     self.var_f9e742c3 = util::playFXOnTag(fieldname, "sr/fx9_obj_secure_rocket_hatch_glow", self, "tag_origin");
     self.var_e8d3ed49 = util::playFXOnTag(fieldname, "sr/fx9_obj_secure_rocket_hatch_glow_cracks", self, "tag_origin");
     wait 2.5;
     playFX(fieldname, "zombie/fx9_player_shockwave_retrieval", self.origin + (0, 0, 40), anglesToForward(self.angles));
-    self playSound(fieldname, #"hash_76f535e311924a02");
+    self playSound(fieldname, #"evt_sr_obj_sec_energy_explo");
     wait 0.5;
 
     if(isDefined(self.var_e8d3ed49)) {
@@ -112,12 +112,12 @@ function function_55b89b40(localclientnum, oldval, newval, bnewent, binitialsnap
     forcestreamxmodel(#"p9_sur_machine_rocket_01");
     forcestreamxmodel(#"p9_sur_machine_rocket_legs_goo");
     self.var_48650596 = util::playFXOnTag(fieldname, "sr/fx9_obj_secure_rocket_entry", self, "tag_origin");
-    self playSound(fieldname, #"hash_73e7cc85bfce53d0");
+    self playSound(fieldname, #"evt_sr_obj_sec_rocket_entry_burn");
     wait 3.6;
 
     if(isDefined(self)) {
       self.var_67819d90 = util::playFXOnTag(fieldname, "sr/fx9_obj_secure_rocket_thruster", self, "tag_origin");
-      self playSound(fieldname, #"hash_1546dde726827b68");
+      self playSound(fieldname, #"evt_sr_obj_sec_rocket_thrust_engage");
     }
 
     wait 5.7;

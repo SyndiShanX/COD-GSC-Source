@@ -1451,7 +1451,7 @@ function function_4b31d6ba() {
     self.model playSound(#"hash_4835397d4779d016");
     wait level.var_e39b6425;
     self.model stopsound(#"hash_4835397d4779d016");
-    self.model playSound(#"hash_1e349183ce55d6ff");
+    self.model playSound(#"fly_uranium_bomb_activate");
   }
 
   self function_99c4c4e5();

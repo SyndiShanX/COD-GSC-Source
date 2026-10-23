@@ -59,9 +59,9 @@ function function_a1b40aa4(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_6d8efb27(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    playSound(fieldname, #"hash_52dfa8799787630e", (0, 0, 0));
+    playSound(fieldname, #"uin_fte_redeploy_available_sting", (0, 0, 0));
     return;
   }
 
-  playSound(fieldname, #"hash_34d90ac30af77a9b", (0, 0, 0));
+  playSound(fieldname, #"uin_fte_redeploy_unavailable_sting", (0, 0, 0));
 }

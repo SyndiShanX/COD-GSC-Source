@@ -180,7 +180,7 @@ function private preinit() {
   level.var_a27256f0 = &function_a27256f0;
   level.var_7db94180 = &function_bdf9485e;
   level.var_fd112605 = &function_21e4b1c2;
-  level.var_77d7c40d = &zm_utility::function_1a01f2f7;
+  level.var_77d7c40d = &zm_utility::gunship_ambush_index_0;
   level.scr_zm_ui_gametype = util::get_game_type();
   level.scr_zm_ui_gametype_group = "";
   level.scr_zm_map_start_location = "";
@@ -466,15 +466,15 @@ function function_b0613540() {
       var_609025d8 = (0, 30, 0);
       player_i = self getentitynumber();
       text = "<dev string:x6c>" + player_i + "<dev string:x77>" + (isDefined(self.var_c069e1cd) ? self.var_c069e1cd : 0);
-      debug2dtext(text_pos + var_609025d8 * player_i, text, zm_utility::function_1a01f2f7(self) ? (1, 0, 0) : (0, 1, 0), 1, (0, 0, 0), 1);
+      debug2dtext(text_pos + var_609025d8 * player_i, text, zm_utility::gunship_ambush_index_0(self) ? (1, 0, 0) : (0, 1, 0), 1, (0, 0, 0), 1);
 
       if(var_655d056a !== self.var_c069e1cd) {
         println(text);
       }
 
       sphere_pos = self getplayercamerapos() + anglesToForward(self getplayerangles()) * 50 + (0, 0, 15) + anglestoright(self getplayerangles()) * 25;
-      sphere(sphere_pos, 3, zm_utility::function_1a01f2f7(self) ? (1, 0, 0) : (0, 1, 0), 1, 0, 10, 1);
-      debugstar(sphere_pos, 1, zm_utility::function_1a01f2f7(self) ? (1, 0, 0) : (0, 1, 0));
+      sphere(sphere_pos, 3, zm_utility::gunship_ambush_index_0(self) ? (1, 0, 0) : (0, 1, 0), 1, 0, 10, 1);
+      debugstar(sphere_pos, 1, zm_utility::gunship_ambush_index_0(self) ? (1, 0, 0) : (0, 1, 0));
     }
 
     waitframe(1);
@@ -2258,7 +2258,7 @@ function end_game() {
     player globallogic::bbplayermatchend(gamelength);
     player persistence::set_recent_stat(0, 0, #"timeplayed", int(gamelength));
 
-    if(player ishost() && zm_utility::function_1a01f2f7(player)) {
+    if(player ishost() && zm_utility::gunship_ambush_index_0(player)) {
       function_31f24041();
     }
   }

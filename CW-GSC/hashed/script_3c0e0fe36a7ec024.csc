@@ -43,7 +43,7 @@ function sr_supply_drop_chest_fx(localclientnum, oldval, newval, bnewent, biniti
 
   if(bwastimejump == 1) {
     self.var_aa4114ee = function_239993de(fieldname, #"hash_23c80cc2126820b2", self, "tag_origin");
-    self.var_4b0f392d = self playLoopSound(#"hash_52036cf3cfe2b967");
+    self.var_4b0f392d = self playLoopSound(#"evt_sur_we_pd_chest_locked_lp");
     playSound(fieldname, #"hash_1f3fbd4b941aceed", self.origin + (0, 0, 35));
     function_239993de(fieldname, #"hash_64f736260391468a", self, "tag_origin");
     return;
@@ -52,7 +52,7 @@ function sr_supply_drop_chest_fx(localclientnum, oldval, newval, bnewent, biniti
   if(bwastimejump == 2) {
     self.n_fx = function_239993de(fieldname, #"hash_755eec380d6c4e4a", self, "tag_origin");
     self playSound(fieldname, #"hash_259adbb44db3fea8");
-    self.var_3dec4e8f = self playLoopSound(#"hash_5a60a8ef6b7d6df1");
+    self.var_3dec4e8f = self playLoopSound(#"evt_sur_we_pd_chest_activation_lp");
     return;
   }
 
@@ -76,6 +76,6 @@ function sr_supply_drop_chest_fx(localclientnum, oldval, newval, bnewent, biniti
     }
 
     function_239993de(fieldname, #"hash_160e892a069e168e", self, "tag_origin");
-    self playSound(fieldname, #"hash_2d72791853c13b5");
+    self playSound(fieldname, #"evt_sur_we_pd_chest_unlocked");
   }
 }

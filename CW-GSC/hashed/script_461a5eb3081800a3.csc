@@ -88,8 +88,8 @@ function meleeblade(localclientnum, oldval, newval, bnewent, binitialsnap, field
 function function_9fdbcf3f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
     self.var_2a38de43 = util::playFXOnTag(fieldname, "sr/fx9_obj_console_defend_vat_amb", self, "tag_origin");
-    playSound(fieldname, #"hash_4c3810ceaa5ffc33", self.origin + (0, 0, 50));
-    self.var_847c4a7c = self playLoopSound(#"hash_17bbbc791e17bbc5", undefined, (0, 0, 50));
+    playSound(fieldname, #"evt_sr_obj_def_vat_start", self.origin + (0, 0, 50));
+    self.var_847c4a7c = self playLoopSound(#"evt_sr_obj_def_vat_lp", undefined, (0, 0, 50));
     return;
   }
 
@@ -103,9 +103,9 @@ function function_9fdbcf3f(localclientnum, oldval, newval, bnewent, binitialsnap
     self.var_847c4a7c = undefined;
   }
 
-  self.var_dc761849 = self playLoopSound(#"hash_6510ab3b31555de5", undefined, (0, 0, 50));
+  self.var_dc761849 = self playLoopSound(#"evt_sr_obj_def_vat_success_lp", undefined, (0, 0, 50));
   playSound(fieldname, #"evt_sr_obj_def_success", self.origin + (0, 0, 50));
-  playSound(fieldname, #"hash_61887905bfa93f51", self.origin + (0, 0, 50));
+  playSound(fieldname, #"evt_sr_obj_def_success_head_explode", self.origin + (0, 0, 50));
   util::playFXOnTag(fieldname, "sr/fx9_obj_console_defend_head_gib", self, "tag_origin");
 }
 
@@ -116,7 +116,7 @@ function console_lights(localclientnum, oldval, newval, bnewent, binitialsnap, f
     self function_78233d29(#"hash_5e09fb8e239d3dd3", "", "Brightness", 1);
     self function_78233d29(#"hash_5e09fb8e239d3dd3", "", "Tint", 1);
     self.var_7cf04bb1 = util::playFXOnTag(fieldname, "sr/fx9_obj_console_defend_vat_lights", self, "tag_tank_lights_d0");
-    playSound(fieldname, #"hash_7907685913534e0", self.origin + (0, 0, 50));
+    playSound(fieldname, #"evt_sr_obj_def_console_startup", self.origin + (0, 0, 50));
     return;
   }
 
@@ -148,7 +148,7 @@ function console_kill(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 
 function function_e15dd642(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   util::playFXOnTag(bwastimejump, "explosions/fx9_exp_generic_lg", self, "tag_origin");
-  playSound(bwastimejump, #"hash_37863fcbc135faa0", self.origin + (0, 0, 50));
+  playSound(bwastimejump, #"evt_sr_obj_def_console_explode", self.origin + (0, 0, 50));
 
   if(isDefined(self.var_6631a14f)) {
     self stoploopsound(self.var_6631a14f);
@@ -163,7 +163,7 @@ function function_e15dd642(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_32398bfc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   util::playFXOnTag(bwastimejump, "sr/fx9_obj_console_defend_dmg_os", self, "tag_origin");
-  playSound(bwastimejump, #"hash_1ddeb8af5a217a6e", self.origin + (0, 0, 50));
+  playSound(bwastimejump, #"evt_sr_obj_def_console_damaged", self.origin + (0, 0, 50));
   self thread function_356a7b78();
 }
 
@@ -172,7 +172,7 @@ function function_356a7b78() {
   self endon("1ecded79cbe06af5");
 
   if(!isDefined(self.var_6631a14f)) {
-    self.var_6631a14f = self playLoopSound(#"hash_13e3f89e22beb505", undefined, (0, 0, 50));
+    self.var_6631a14f = self playLoopSound(#"evt_sr_obj_def_console_alarm_lp", undefined, (0, 0, 50));
   }
 
   wait 5;
@@ -197,7 +197,7 @@ function function_968ccb74(localclientnum, oldval, newval, bnewent, binitialsnap
     self.var_f3fe9c83 = util::playFXOnTag(fieldname, "sr/fx9_obj_console_defend_dmg_state_2", self, "tag_origin");
 
     if(!isDefined(self.var_6711e9c2)) {
-      self.var_6711e9c2 = self playLoopSound(#"hash_f32639ea79bff56", undefined, (0, 0, 50));
+      self.var_6711e9c2 = self playLoopSound(#"evt_sr_obj_def_console_alarm_high_lp", undefined, (0, 0, 50));
     }
   }
 }

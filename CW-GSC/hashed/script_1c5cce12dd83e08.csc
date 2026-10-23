@@ -85,8 +85,8 @@ function function_60886116(localclientnum, oldval, newval, bnewent, binitialsnap
     self.var_3e3964d7 = playFX(fieldname, "sr/fx9_hvt_aether_beam", self.origin, anglestoup(self.angles));
 
     if(!isDefined(self.var_7f6cb624)) {
-      self playSound(fieldname, #"hash_62101ae824e3101a");
-      self.var_7f6cb624 = self playLoopSound(#"hash_234e4f385aba4fae");
+      self playSound(fieldname, #"evt_sr_obj_hvt_spawn_start");
+      self.var_7f6cb624 = self playLoopSound(#"evt_sr_obj_hvt_spawn_lp");
     }
 
     wait 2.5;
@@ -107,7 +107,7 @@ function function_60886116(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(isDefined(self.var_7f6cb624)) {
-    self playSound(fieldname, #"hash_7e2855c20a4abd8f");
+    self playSound(fieldname, #"evt_sr_obj_hvt_spawn_end");
     self stoploopsound(self.var_7f6cb624);
     self.var_7f6cb624 = undefined;
   }
@@ -124,7 +124,7 @@ function function_f15a1018(localclientnum, oldval, newval, bnewent, binitialsnap
   self endon(#"death");
   self util::waittill_dobj(bwastimejump);
   playFX(bwastimejump, "sr/fx9_hvt_aether_portal_exp", self.origin + (0, 0, 32), anglesToForward(self.angles), anglestoup(self.angles));
-  self playSound(bwastimejump, #"hash_591b69e6e55b5eb1");
+  self playSound(bwastimejump, #"evt_sr_obj_hvt_shockwave");
 }
 
 function function_9f72eb8b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -134,7 +134,7 @@ function function_9f72eb8b(localclientnum, oldval, newval, bnewent, binitialsnap
   function_36e4ebd4(bwastimejump, #"zm_mansion_boss_intro_roar");
 
   if(isDefined(self) && isDefined(bwastimejump)) {
-    self playSound(bwastimejump, #"hash_6916591c817c7bf8");
+    self playSound(bwastimejump, #"evt_sr_obj_hvt_summon_stinger");
     a_players = getPlayers(bwastimejump, undefined, self.origin, 2500);
     array::thread_all(a_players, &postfx::playpostfxbundle, #"pstfx_underwater");
     level thread function_36083e9a(bwastimejump, a_players);

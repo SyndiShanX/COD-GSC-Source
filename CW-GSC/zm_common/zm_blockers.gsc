@@ -668,7 +668,7 @@ function door_activate(time, open = 1, quick, use_blocker_clip_for_pathing) {
     case #"dynamite":
       if(is_true(self.var_4ef01794) && open) {
         bomb = util::spawn_model(#"p9_fxanim_zm_ndu_essence_bomb_body_mod", self.origin, self.angles);
-        bomb playSound(#"hash_1c30789401e4a67a");
+        bomb playSound(#"exp_blocker_place_oneshot");
 
         if(isDefined(self.var_f912ea8d)) {
           timer = int(self.var_f912ea8d);

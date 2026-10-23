@@ -830,7 +830,7 @@ function unitrigger_logic() {
   while(true) {
     waitresult = self waittill(#"trigger");
     player = waitresult.activator;
-    player playSound(#"hash_5ba85bd7ec71cb6c");
+    player playSound(#"zmb_perk_tombstone_stash_grab");
     player function_8bc73ff9();
     waitframe(1);
   }

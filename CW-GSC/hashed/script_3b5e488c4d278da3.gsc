@@ -466,7 +466,7 @@ function function_4d68903d(zone) {
   snowman.zone.var_e600b8df++;
   snowman.spawn_time = gettime();
   snowman.var_5d6eb0f1 = 1;
-  snowman.rattle_sound = #"hash_52c65a6a82b13cfd";
+  snowman.rattle_sound = #"zmb_snowman_shake_tell";
   snowman disconnectPaths();
   snowman solid();
   snowman setCanDamage(1);

@@ -166,7 +166,7 @@ function function_dace284(var_96936cca, b_mute = 0) {
 
   if(var_96936cca >= 1 && !b_mute) {
     foreach(e_player in level.players) {
-      e_player playsoundtoplayer(#"hash_2ef2e5af521e9817", e_player);
+      e_player playsoundtoplayer(#"zmb_trials_checkmark_ally", e_player);
     }
   }
 
@@ -184,7 +184,7 @@ function function_7d32b7d0(var_acc46b81) {
   }
 
   foreach(e_player in level.players) {
-    e_player playsoundtoplayer(#"hash_2ef2e5af521e9817", e_player);
+    e_player playsoundtoplayer(#"zmb_trials_checkmark_ally", e_player);
   }
 
   level clientfield::set_world_uimodel("ZMHudGlobal.trials.globalCheckState", 3);
@@ -204,7 +204,7 @@ function function_2190356a(var_96936cca, b_mute = 0) {
   assert(var_96936cca >= 0 && var_96936cca <= 1000);
 
   if(var_96936cca >= 1 && !b_mute) {
-    self playsoundtoplayer(#"hash_1377aa36d8ba27e1", self);
+    self playsoundtoplayer(#"zmb_trials_checkmark_plr", self);
   }
 
   clientfield::set_world_uimodel("PlayerList.client" + self.entity_num + "." + "trialsCheckState", 1);
@@ -221,7 +221,7 @@ function function_63060af4(var_acc46b81) {
     return;
   }
 
-  self playsoundtoplayer(#"hash_1377aa36d8ba27e1", self);
+  self playsoundtoplayer(#"zmb_trials_checkmark_plr", self);
   clientfield::set_world_uimodel("PlayerList.client" + self.entity_num + "." + "trialsCheckState", 3);
 }
 
