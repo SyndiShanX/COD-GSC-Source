@@ -364,7 +364,7 @@ main() {
   level._effect["zmb_barbosa_chandelier_hc_blood"] = loadfx("vfx/map/mp_zombie_nest/zmb_barbosa_chandelier_hc_blood");
   level._effect["zmb_barbosa_chandelier_hc_trig_final"] = loadfx("vfx/map/mp_zombie_nest/zmb_barbosa_chandelier_hc_trig_final");
 
-  if(getDvar("3508") != "1") {
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_zombie_nest_01_fx::main();
   }
 }

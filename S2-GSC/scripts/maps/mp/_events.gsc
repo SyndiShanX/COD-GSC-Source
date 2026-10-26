@@ -17,7 +17,7 @@ init() {
   setdvarifuninitialized("set scr_dom_score_assist_steal", "");
   setdvarifuninitialized("set scr_dom_score_assist_tactical", "");
   setdvarifuninitialized("set scr_dom_score_assist_painted", "");
-  var_0 = getDvar("1924");
+  var_0 = getDvar("g_gametype");
   var_1 = 0;
   var_2 = [];
   var_2["dm"] = 4;

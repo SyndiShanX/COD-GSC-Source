@@ -43,7 +43,7 @@ init() {
   level._id_60A7 = 12;
   level thread gameendlistener();
 
-  if(getDvar("4017") != "1") {
+  if(getDvar("virtualLobbyActive") != "1") {
     level thread reconlogplayerinfo();
   }
 }
@@ -51,10 +51,10 @@ init() {
 matchstarted() {
   _sysprint("MatchStarted: Completed");
 
-  if(getDvar("4017") == "1") {
+  if(getDvar("virtualLobbyActive") == "1") {
     return;
   }
-  if(getDvar("1673") == getDvar("5473")) {
+  if(getDvar("mapname") == getDvar("virtualLobbyMap")) {
     return;
   }
   if(_func_367()) {
@@ -969,7 +969,7 @@ endofgamesummarylogger() {
     }
 
     var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "gameMode", level.gametype);
-    var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "map", _tolower(getDvar("1673")));
+    var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "map", _tolower(getDvar("mapname")));
   }
 }
 

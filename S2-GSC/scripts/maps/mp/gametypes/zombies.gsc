@@ -13,8 +13,8 @@ main() {
   maps\mp\gametypes\_callbacksetup::setupcallbacks();
   _id_04D4::setupcallbacks();
   _id_0541::main();
-  setDvar("1936", 1);
-  setDvar("2335", 1);
+  setDvar("combatRolesEnabled", 1);
+  setDvar("g_deadChat", 1);
   setDvar("scr_dlcRoundMode", 0);
   level._id_8D62 = _id_0366::_id_8E25;
 
@@ -33,7 +33,7 @@ main() {
   }
 
   _setdynamicdvar("4696", 0);
-  _setdynamicdvar("5539", 2);
+  _setdynamicdvar("r_hudOutlineWidth", 2);
   _setdynamicdvar("scr_zombies_timeLimit", 0);
   _setdynamicdvar("scr_zombies_numLives", 1);
   _setdynamicdvar("2298", 5000);
@@ -407,7 +407,7 @@ initializematchrules() {
   maps\mp\_utility::registertimelimitdvar(level.gametype, 0);
   _setdynamicdvar("scr_zombies_numLives", 1);
   maps\mp\_utility::registernumlivesdvar(level.gametype, 1);
-  _setdynamicdvar("5539", 1);
+  _setdynamicdvar("r_hudOutlineWidth", 1);
 }
 
 onstartgametype() {
@@ -4460,7 +4460,7 @@ _id_746B() {
     var_0 = 0;
   }
 
-  if(isDefined(var_0) && getDvar("1673") == "mp_zombie_training") {
+  if(isDefined(var_0) && getDvar("mapname") == "mp_zombie_training") {
     if(isDefined(level._id_7DD2)) {
       var_0 = level._id_7DD2;
     } else {
@@ -5140,7 +5140,7 @@ nocontrolduringcinematic() {
 }
 
 map_has_loading_cinematic() {
-  switch (getDvar("1673")) {
+  switch (getDvar("mapname")) {
     case "mp_zombie_house":
     case "mp_zombie_nest_01":
       return 0;

@@ -1079,7 +1079,7 @@ spawnintermission() {
   maps\mp\_utility::clearlowermessages();
   maps\mp\_utility::freezecontrolswrapper(1);
   self disableammogeneration();
-  self setclientdvar("3724", 1);
+  self setclientdvar("cg_everyoneHearsEveryone", 1);
   var_0 = self.pers["postGameChallenges"];
 
   if(level.rankedmatch && (self.postgamepromotion || isDefined(var_0) && var_0)) {
@@ -1139,7 +1139,7 @@ spawnendofgame() {
   self notify("end_respawn");
   setspawnvariables();
   maps\mp\_utility::clearlowermessages();
-  self setclientdvar("3724", 1);
+  self setclientdvar("cg_everyoneHearsEveryone", 1);
   maps\mp\_utility::updatesessionstate("dead");
   maps\mp\_utility::clearkillcamstate();
   self.friendlydamage = undefined;
@@ -1392,22 +1392,22 @@ initclientdvarssplitscreenspecific() {
 }
 
 initclientdvars() {
-  setDvar("4431", 1);
-  setDvar("1874", 1);
-  setDvar("1979", 1);
-  setDvar("787", 250);
+  setDvar("cg_drawTalk", 1);
+  setDvar("cg_drawCrosshair", 1);
+  setDvar("cg_drawCrosshairNames", 1);
+  setDvar("cg_hudGrenadeIconMaxRangeFrag", 250);
 
   if(level.hardcoremode) {
-    setDvar("4431", 3);
-    setDvar("1874", 0);
-    setDvar("1979", 1);
-    setDvar("787", 0);
+    setDvar("cg_drawTalk", 3);
+    setDvar("cg_drawCrosshair", 0);
+    setDvar("cg_drawCrosshairNames", 1);
+    setDvar("cg_hudGrenadeIconMaxRangeFrag", 0);
   }
 
   if(isDefined(level._id_0CB4) && level._id_0CB4) {
-    setDvar("4934", 1);
+    setDvar("cg_drawFriendlyNamesAlways", 1);
   } else {
-    setDvar("4934", 0);
+    setDvar("cg_drawFriendlyNamesAlways", 0);
   }
 
   initclientdvarssplitscreenspecific();
@@ -1550,7 +1550,7 @@ callback_playerconnect() {
   initclientdvars();
   initplayerstats();
 
-  if(getDvar("233") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
   }
 

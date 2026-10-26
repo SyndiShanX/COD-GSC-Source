@@ -289,7 +289,7 @@ init_casual_melee_pickups() {
 }
 
 performance_stuff() {
-  if(level._id_0149 && getDvar("3957") == "true") {
+  if(level._id_0149 && getDvar("ps4Game") == "true") {
     var_0 = 1;
   }
 }

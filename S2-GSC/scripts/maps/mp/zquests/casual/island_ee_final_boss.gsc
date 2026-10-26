@@ -439,7 +439,7 @@ move_players_to_boss_start() {
   waitframe();
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("tag_origin");
-  setDvar("1874", 0);
+  setDvar("cg_drawCrosshair", 0);
 
   for(var_1 = 0; var_1 < level.players.size; var_1++) {
     level.players[var_1] maps\mp\mp_zombie_island_fog_zones::set_should_restore_fog_vision_isolated_room();
@@ -477,7 +477,7 @@ move_players_to_boss_start() {
   wait 1;
   level thread maps\mp\zquests\casual\island_ee_util::_id_7432(1, 0, "black");
   common_scripts\utility::flag_wait("asn_players_are_blinded");
-  setDvar("1874", 1);
+  setDvar("cg_drawCrosshair", 1);
 
   for(var_1 = 0; var_1 < level.players.size; var_1++) {
     level.players[var_1] setclientomnvar("ui_hide_hud", 0);

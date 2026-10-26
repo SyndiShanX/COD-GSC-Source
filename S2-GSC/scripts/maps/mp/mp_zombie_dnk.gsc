@@ -201,5 +201,5 @@ special_decorator_zombie_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6,
 }
 
 performance_stuff() {
-  setDvar("634", 0);
+  setDvar("r_portalMinClipArea", 0);
 }

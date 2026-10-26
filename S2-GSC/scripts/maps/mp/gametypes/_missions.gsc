@@ -2923,7 +2923,7 @@ buildchallengetableinfo(var_0, var_1) {
 buildchallegeinfo() {
   level.challengeinfo = [];
 
-  if(getDvar("4017") == "1" && !_func_367()) {
+  if(getDvar("virtualLobbyActive") == "1" && !_func_367()) {
     return;
   }
   var_0 = 0;

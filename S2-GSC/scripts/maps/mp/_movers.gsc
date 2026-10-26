@@ -4,7 +4,7 @@
 ***************************************/
 
 main() {
-  if(getDvar("233") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
   level.getpointinbounds = [];

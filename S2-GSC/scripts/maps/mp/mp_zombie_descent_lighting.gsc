@@ -9,9 +9,9 @@ main() {
 
 xbox_optimizations() {
   setDvar("1578", 0);
-  setDvar("5156", 0);
-  setDvar("3158", 0.7);
-  setDvar("2225", 4);
+  setDvar("r_gtaoQualityLevel", 0);
+  setDvar("sm_sunShadowScale", 0.7);
+  setDvar("sm_spotUpdateLimit", 4);
   setDvar("sm_spotDynamics", 4);
 }
 

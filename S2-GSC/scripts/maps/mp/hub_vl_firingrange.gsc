@@ -1004,7 +1004,7 @@ wait_start_firingrange(var_0, var_1) {
   var_1 dontinterpolate();
   var_1 setOrigin(var_2);
   var_1 setplayerangles(level.firingrange.fr_start.angles);
-  var_1 setclientdvar("3078", "1.0");
+  var_1 setclientdvar("cg_fovScale", "1.0");
   level.firingrange.isshuttingdown = 0;
   maps\mp\hub_vl_camera::virtual_lobby_set_class(var_1.avatar.ownerid, "lobby" + (var_1.currentselectedclass + 1), 1, 1);
   maps\mp\_utility::updatesessionstate("playing");

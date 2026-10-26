@@ -18,7 +18,7 @@ main() {
   _id_0472::setupminimap("");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
-  setDvar("4135", "allies");
+  setDvar("hubTeam", "allies");
   level._id_ACBC = undefined;
   level._id_ACBA = undefined;
   level._id_ACC0 = undefined;

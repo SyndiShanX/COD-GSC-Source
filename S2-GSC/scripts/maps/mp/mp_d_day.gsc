@@ -43,8 +43,8 @@ main() {
 }
 
 addzmexploderbloodfx() {
-  setDvar("330", 1);
-  setDvar("1271", 30);
+  setDvar("r_tessellationEyeScale", 1);
+  setDvar("r_tessellationFactor", 30);
 }
 
 _id_918C() {

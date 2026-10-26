@@ -47,7 +47,7 @@ main() {
   setDvar("isMLGMatch", 0);
   setDvar("scr_team_fftype", 0);
   setDvar("scr_game_onlyheadshots", 0);
-  setDvar("2043", 0);
+  setDvar("g_hardcore", 0);
   level.grenadegraceperiod = 0;
   setspecialloadouts();
   maps\mp\_utility::_id_873B(1);

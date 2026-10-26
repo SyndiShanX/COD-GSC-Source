@@ -98,7 +98,7 @@ createloopsound() {
   var_0.v["origin"] = (0, 0, 0);
   var_0.v["server_culled"] = 1;
 
-  if(getDvar("1189") != "1") {
+  if(getDvar("serverCulledSounds") != "1") {
     var_0.v["server_culled"] = 0;
   }
 
@@ -334,7 +334,7 @@ createfxlogic() {
     level._effect = [];
   }
 
-  if(getDvar("5855") == "") {} else if(getDvar("5855") == common_scripts\utility::get_template_level()) {
+  if(getDvar("createfx_map") == "") {} else if(getDvar("createfx_map") == common_scripts\utility::get_template_level()) {
     [[level.func_position_player]]();
   }
 

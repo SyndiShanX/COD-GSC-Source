@@ -147,7 +147,7 @@ _id_87B1() {
     start_lobby_anims();
 
     if(getdvarint("5666", 0) == 0) {
-      setDvar("5666", "1");
+      setDvar("virtualLobbyReady", "1");
     }
 
     if(var_9 == 2) {
@@ -424,7 +424,7 @@ vlobby_player() {
   } else
     level.needtopresent = 1;
 
-  setDvar("1999", level.xuid2ownerid.size);
+  setDvar("virtualLobbyMembers", level.xuid2ownerid.size);
   var_0._id_1FA3 = var_30;
   var_0._id_1F9D = var_11;
 
@@ -1132,7 +1132,7 @@ lobby_update_group_new(var_0, var_1, var_2, var_3) {
 
   if(getdvarint("5666", 0) == 0) {
     wait 1.0;
-    setDvar("5666", "1");
+    setDvar("virtualLobbyReady", "1");
     thread setvirtuallobbypresentable();
   }
 }
@@ -1144,7 +1144,7 @@ setvirtuallobbypresentable() {
   if(level.vlavatars.size > 0 && isDefined(level.vlavatars[0]) && isDefined(level.vlavatars[0].primaryweapon) && isweaponloaded(level.vlavatars[0].primaryweapon)) {
     level.needtopresent = undefined;
     wait 0.5;
-    setDvar("3965", "1");
+    setDvar("virtualLobbyPresentable", "1");
   } else
     level.needtopresent = 1;
 }
@@ -1154,7 +1154,7 @@ resetvirtuallobbypresentable() {
   level endon("cancel_vlp");
   level.needtopresent = undefined;
   wait 0.25;
-  setDvar("3965", "0");
+  setDvar("virtualLobbyPresentable", "0");
 }
 
 getmodifiedrotationangle(var_0, var_1, var_2) {
@@ -2357,7 +2357,7 @@ monitor_member_class_changes() {
           if(var_7._id_011C != 0) {
             var_33 = maps\mp\hub_vl_base::_id_0902(var_7._id_01D6);
             maps\mp\hub_vl_base::vlprint("PartyMemberClassChange " + var_7._id_01D6 + " : " + var_27 + "," + var_28 + "," + var_22 + "," + var_23 + "\n");
-            setDvar("1999", level.xuid2ownerid.size);
+            setDvar("virtualLobbyMembers", level.xuid2ownerid.size);
             var_34 = getspawnpoint(var_33);
 
             if(isDefined(var_32)) {
@@ -2826,7 +2826,7 @@ monitor_create_an_operator(var_0) {
 }
 
 clans_set_highlight_gear_from_lua(var_0) {
-  setDvar("3784", 0);
+  setDvar("vl_clan_models_loaded", 0);
 
   if(isDefined(level._id_A1DB)) {
     var_1 = strtok(var_0, "#");
@@ -2869,7 +2869,7 @@ clans_set_highlight_gear_from_lua(var_0) {
     }
   }
 
-  setDvar("3784", 1);
+  setDvar("vl_clan_models_loaded", 1);
 }
 
 monitor_clans() {
@@ -3020,7 +3020,7 @@ remove_avatar(var_0) {
   level.xuid2ownerid[var_3] = undefined;
   level.avatarinfo[var_0].timetodelete = 0;
   level.avatarinfo[var_0].avatar = undefined;
-  setDvar("1999", level.xuid2ownerid.size);
+  setDvar("virtualLobbyMembers", level.xuid2ownerid.size);
   var_4 = level.vlavatars[var_0];
   level.vlavatars[var_0] = undefined;
   hide_avatar(var_4);

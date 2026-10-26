@@ -5,7 +5,7 @@
 
 init() {
   level.splitscreen = _issplitscreen();
-  level.console = getDvar("5554") == "true";
+  level.console = getDvar("consoleGame") == "true";
   level.onlinegame = _isonlinegame();
   level.rankedmatch = xmodelalias/alias_ger_heads_paris_grey_cap();
   level.practiceround = getdvarint("664");
@@ -18,14 +18,14 @@ init() {
     level.onlinegame = 1;
   }
 
-  level._id_015D = _tolower(getDvar("1673"));
+  level._id_015D = _tolower(getDvar("mapname"));
 
   if(_func_367()) {
     level.gametype = "hub";
   } else if(getdvarint("4017", 0)) {
     level.gametype = "vlobby";
   } else {
-    level.gametype = _tolower(getDvar("1924"));
+    level.gametype = _tolower(getDvar("g_gametype"));
   }
 
   level.teamnamelist = ["axis", "allies"];
@@ -116,7 +116,7 @@ registerdvars() {
   _setomnvar("ui_nuke_end_milliseconds", 0);
   setDvar("ui_danger_team", "");
   setDvar("ui_inhostmigration", 0);
-  setDvar("311", getdvarint("scr_thirdPerson"));
+  setDvar("camera_thirdPerson", getdvarint("scr_thirdPerson"));
 }
 
 setupcallbacks() {

@@ -17,14 +17,14 @@ onplayerspawned() {
 }
 
 xbox_optimizations() {
-  if(level._id_01D4 && getDvar("2695") != "true") {
-    setDvar("5153", 0);
+  if(level._id_01D4 && getDvar("ps3Game") != "true") {
+    setDvar("r_mdao", 0);
     setDvar("1578", 0);
-    setDvar("5156", 0);
+    setDvar("r_gtaoQualityLevel", 0);
   } else {
-    setDvar("5153", 1);
+    setDvar("r_mdao", 1);
     setDvar("1578", 2);
-    setDvar("5156", 1);
+    setDvar("r_gtaoQualityLevel", 1);
   }
 }
 
@@ -33,11 +33,11 @@ _id_84F8() {
   setDvar("4230", 400);
   setDvar("2664", 0);
   setDvar("2387", 1);
-  setDvar("5156", 1);
+  setDvar("r_gtaoQualityLevel", 1);
   setDvar("2428", 2);
-  setDvar("5142", 2);
+  setDvar("sm_sunPolygonOffsetBias", 2);
   setDvar("4087", 3);
-  setDvar("935", 1);
+  setDvar("sm_spotShadowMapSize", 1);
 }
 
 _id_6504(var_0, var_1) {

@@ -762,7 +762,7 @@ _id_310A() {
   var_3 = % s2_zom_brt_intro;
   var_4 = 0.25;
   wait(3 - var_4);
-  setDvar("4712", 2);
+  setDvar("r_screenSpaceShadows", 2);
   thread maps\mp\mp_zombie_nest_ee_util::_id_9EC4();
   thread maps\mp\mp_zombie_nest_ee_util::_id_3BE6();
   thread maps\mp\mp_zombie_nest_ee_util::_id_3BEC();
@@ -880,7 +880,7 @@ _id_310A() {
   level._id_7317.origin = level._id_7317.origin + (0, 0, 32);
   thread maps\mp\mp_zombie_nest_ee_util::_id_1CC9();
   thread maps\mp\mp_zombie_nest_ee_util::_id_1CCB();
-  setDvar("4712", 1);
+  setDvar("r_screenSpaceShadows", 1);
   level thread common_scripts\_exploder::deactivate_clientside_exploder(221, undefined, 0);
 
   foreach(var_10 in level.players) {

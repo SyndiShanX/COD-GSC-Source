@@ -2128,8 +2128,8 @@ callback_startgametype() {
   level.prematchperiodend = 0;
   level.postgamenotifies = 0;
   level.intermission = 0;
-  setDvar("4899", getDvar("scr_game_forceuav"));
-  setDvar("4648", getDvar("scr_game_compassRadarUpdateTime"));
+  setDvar("bg_compassShowEnemies", getDvar("scr_game_forceuav"));
+  setDvar("compassRadarUpdateTime", getDvar("scr_game_compassRadarUpdateTime"));
 
   if(!isDefined(game["gamestarted"])) {
     game["clientid"] = 0;
@@ -2423,7 +2423,7 @@ callback_startgametype() {
   thread _id_048D::init();
   thread _id_046E::init();
 
-  if(!maps\mp\_utility::invirtuallobby() && getDvar("1924") != "hub") {
+  if(!maps\mp\_utility::invirtuallobby() && getDvar("g_gametype") != "hub") {
     thread _id_051F::init();
     thread _id_0533::init();
   }
@@ -2476,9 +2476,9 @@ callback_startgametype() {
   setDvar("ui_allow_teamchange", 1);
 
   if(maps\mp\_utility::getgametypenumlives() && !maps\mp\_utility::_id_585F()) {
-    setDvar("2335", 0);
+    setDvar("g_deadChat", 0);
   } else {
-    setDvar("2335", 1);
+    setDvar("g_deadChat", 1);
   }
 
   var_10 = getdvarfloat("scr_" + level.gametype + "_waverespawndelay");
@@ -3051,7 +3051,7 @@ freezeallplayers(var_0, var_1) {
 }
 
 endgameovertime(var_0, var_1) {
-  setDvar("4899", 0);
+  setDvar("bg_compassShowEnemies", 0);
   freezeallplayers(1.0, 1);
 
   foreach(var_3 in level.players) {
@@ -3128,12 +3128,12 @@ endgameovertime(var_0, var_1) {
   game["status"] = var_0;
   level notify("restarting");
   game["state"] = "playing";
-  setDvar("2523", game["state"]);
+  setDvar("ui_game_state", game["state"]);
   _map_restart(1);
 }
 
 endgamehalftime(var_0) {
-  setDvar("4899", 0);
+  setDvar("bg_compassShowEnemies", 0);
   var_1 = "halftime";
   var_2 = 1;
 
@@ -3227,7 +3227,7 @@ endgamehalftime(var_0) {
   game["status"] = "halftime";
   level notify("restarting");
   game["state"] = "playing";
-  setDvar("2523", game["state"]);
+  setDvar("ui_game_state", game["state"]);
   _map_restart(1);
 }
 
@@ -3419,7 +3419,7 @@ endgame(var_0, var_1, var_2) {
     return;
   }
   game["state"] = "postgame";
-  setDvar("2523", "postgame");
+  setDvar("ui_game_state", "postgame");
   level.gameendtime = gettime();
   level.gameended = 1;
   level.ingraceperiod = 0;
@@ -3504,9 +3504,9 @@ endgame(var_0, var_1, var_2) {
       }
     }
 
-    setDvar("2335", 1);
+    setDvar("g_deadChat", 1);
     setDvar("ui_allow_teamchange", 0);
-    setDvar("4899", 0);
+    setDvar("bg_compassShowEnemies", 0);
     freezeallplayers(1.0, 1);
     var_13 = isDefined(level.iszombiegame) && level.iszombiegame;
 
@@ -3552,7 +3552,7 @@ endgame(var_0, var_1, var_2) {
 
         level notify("restarting");
         game["state"] = "playing";
-        setDvar("2523", "playing");
+        setDvar("ui_game_state", "playing");
         _id_6028(var_0, var_1, 0);
         _id_050B::_id_5E90();
 
@@ -3774,7 +3774,7 @@ endgame(var_0, var_1, var_2) {
       game["roundsPlayed"] = 0;
       game["switchedsides"] = 1;
       game["state"] = "playing";
-      setDvar("2523", game["state"]);
+      setDvar("ui_game_state", game["state"]);
       _map_restart(1);
       return;
     }

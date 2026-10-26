@@ -12,9 +12,9 @@ _id_A58F() {
 }
 
 vl_main() {
-  setDvar("1932", 0.15);
-  setDvar("1175", 3);
-  setDvar("190", 1.5);
+  setDvar("r_eyePupil", 0.15);
+  setDvar("r_uiBlurDstMode", 3);
+  setDvar("r_blurdstGaussianBlurRadius", 1.5);
   _func_2BB();
   level.partymembers_cb = maps\mp\hub_vl_camera::party_members;
   level.vlavatars = [];
@@ -31,7 +31,7 @@ vl_main() {
   level.maxavatars = var_0;
   thread maps\mp\hub_vl_camera::monitor_member_class_changes();
   thread maps\mp\hub_vl_camera::monitor_member_timeouts();
-  setDvar("1999", 0);
+  setDvar("virtualLobbyMembers", 0);
   level.num_lobby_idles = 4;
   maps\mp\hub_vl_firingrange::init_firingrange();
 }
@@ -364,8 +364,8 @@ monitor_move_btn_fr_vl(var_0) {
         var_0 showviewmodel();
         maps\mp\hub_vl_firingrange::enter_firingrange(var_0);
         var_0 clientclearsoundsubmix("mp_no_foley", 1);
-        setDvar("1175", 0);
-        setDvar("190", 1);
+        setDvar("r_uiBlurDstMode", 0);
+        setDvar("r_blurdstGaussianBlurRadius", 1);
       } else if(var_1 == 0 && var_0.in_firingrange) {
         var_0 hideviewmodel();
         var_0 firingrangecleanup();
@@ -378,8 +378,8 @@ monitor_move_btn_fr_vl(var_0) {
         var_0 notify("enter_lobby");
         enter_vlobby(var_0);
         var_0 clientaddsoundsubmix("mp_no_foley", 1);
-        setDvar("1175", 3);
-        setDvar("190", 1.5);
+        setDvar("r_uiBlurDstMode", 3);
+        setDvar("r_blurdstGaussianBlurRadius", 1.5);
       }
     }
 
@@ -406,7 +406,7 @@ _id_636A(var_0) {
     }
     if(isDefined(var_0._id_5721)) {
       waitframe();
-      var_0 setclientdvar("3078", "1.0");
+      var_0 setclientdvar("cg_fovScale", "1.0");
       var_0 maps\mp\hub_vl_camera::setdefaultpostfx();
 
       if(!var_0._id_5721) {

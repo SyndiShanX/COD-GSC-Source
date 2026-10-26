@@ -15,7 +15,7 @@ set_hudoutline(var_0, var_1) {
 }
 
 is_coop() {
-  if(_issplitscreen() || getDvar("4693") == "1") {
+  if(_issplitscreen() || getDvar("coop") == "1") {
     return 1;
   }
 
@@ -5451,23 +5451,23 @@ physicsgetlinspeed(var_0) {
 
 set_console_status() {
   if(!isDefined(level.console)) {
-    level.console = getDvar("5554") == "true";
+    level.console = getDvar("consoleGame") == "true";
   } else {}
 
   if(!isDefined(level._id_01D4)) {
-    level._id_01D4 = getDvar("3475") == "true";
+    level._id_01D4 = getDvar("xenonGame") == "true";
   } else {}
 
   if(!isDefined(level._id_01D5)) {
-    level._id_01D5 = getDvar("2695") == "true";
+    level._id_01D5 = getDvar("ps3Game") == "true";
   } else {}
 
   if(!isDefined(level._id_0148)) {
-    level._id_0148 = getDvar("3864") == "true";
+    level._id_0148 = getDvar("xb3Game") == "true";
   } else {}
 
   if(!isDefined(level._id_0149)) {
-    level._id_0149 = getDvar("3957") == "true";
+    level._id_0149 = getDvar("ps4Game") == "true";
   } else {}
 
   if(!isDefined(level._id_0122)) {
@@ -5557,11 +5557,11 @@ lerp_fovscale_overtime(var_0, var_1) {
 
   for(var_6 = 0; var_6 < var_3; var_6++) {
     var_5 = var_5 + var_4;
-    _setsaveddvar("3078", var_5);
+    _setsaveddvar("cg_fovScale", var_5);
     waitframe();
   }
 
-  _setsaveddvar("3078", var_1);
+  _setsaveddvar("cg_fovScale", var_1);
 }
 
 _id_77C5() {
@@ -6431,7 +6431,7 @@ _id_0923(var_0, var_1, var_2, var_3) {
 }
 
 _id_0F44() {
-  return getDvar("2559") == "1";
+  return getDvar("arcademode") == "1";
 }
 
 _id_0F46() {
@@ -6983,7 +6983,7 @@ waittill_true_goal(var_0, var_1) {
 }
 
 player_speed_percent(var_0, var_1) {
-  var_2 = int(getDvar("5502"));
+  var_2 = int(getDvar("g_speed"));
 
   if(!isDefined(level.player.g_speed)) {
     level.player.g_speed = var_2;
@@ -7009,7 +7009,7 @@ blend_movespeedscale_percent(var_0, var_1) {
 }
 
 player_speed_set(var_0, var_1) {
-  var_2 = int(getDvar("5502"));
+  var_2 = int(getDvar("g_speed"));
 
   if(!isDefined(level.player.g_speed)) {
     level.player.g_speed = var_2;
@@ -8218,7 +8218,7 @@ delete_interactives_in_volumes(var_0) {
 }
 
 mask_exploders_in_volume(var_0) {
-  if(getDvar("1459") != "") {
+  if(getDvar("createfx") != "") {
     return;
   }
   var_1 = getEntArray("script_brushmodel", "classname");
@@ -9281,7 +9281,7 @@ remove_damagefeedback() {
 }
 
 is_demo() {
-  if(getDvar("2803") == "1") {
+  if(getDvar("e3demo") == "1") {
     return 1;
   }
 

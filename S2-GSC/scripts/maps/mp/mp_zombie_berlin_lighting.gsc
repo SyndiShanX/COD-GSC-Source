@@ -6,7 +6,7 @@
 main() {
   _id_84F8();
 
-  if(level._id_01D4 && getDvar("2695") != "true") {
+  if(level._id_01D4 && getDvar("ps3Game") != "true") {
     xbox_optimizations();
   }
 
@@ -18,7 +18,7 @@ main() {
 _id_84F8() {
   setDvar("2973", 0);
   setDvar("2664", 1);
-  setDvar("2225", 8);
+  setDvar("sm_spotUpdateLimit", 8);
   setDvar("sm_spotDynamics", 8);
 }
 
@@ -142,15 +142,15 @@ airship_lowering_light_intensity_control(var_0) {
 
 xbox_optimizations() {
   setDvar("1578", 0);
-  setDvar("5156", 0);
-  setDvar("3158", 0.7);
-  setDvar("2225", 4);
+  setDvar("r_gtaoQualityLevel", 0);
+  setDvar("sm_sunShadowScale", 0.7);
+  setDvar("sm_spotUpdateLimit", 4);
   setDvar("sm_spotDynamics", 4);
 }
 
 neo_optimizations() {
   setDvar("1578", 1);
-  setDvar("5156", 1);
+  setDvar("r_gtaoQualityLevel", 1);
 }
 
 set_airship_corrupsing_spark_off() {

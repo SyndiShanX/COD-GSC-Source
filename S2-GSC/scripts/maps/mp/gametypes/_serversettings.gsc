@@ -4,17 +4,17 @@
 *********************************************************/
 
 init() {
-  level.hostname = getDvar("5656");
+  level.hostname = getDvar("sv_hostname");
 
   if(level.hostname == "") {
     level.hostname = "CoDHost";
   }
 
-  setDvar("5656", level.hostname);
+  setDvar("sv_hostname", level.hostname);
   level._id_0C32 = getdvarint("4372", 1);
-  setDvar("4372", level._id_0C32);
+  setDvar("g_allowVote", level._id_0C32);
   level.friendlyfire = _id_0511::gettweakablevalue("team", "fftype");
-  constraingametype(getDvar("1924"));
+  constraingametype(getDvar("g_gametype"));
 
   for(;;) {
     updateserversettings();
@@ -23,7 +23,7 @@ init() {
 }
 
 updateserversettings() {
-  var_0 = getDvar("5656");
+  var_0 = getDvar("sv_hostname");
 
   if(level.hostname != var_0) {
     level.hostname = var_0;

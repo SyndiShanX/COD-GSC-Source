@@ -4,10 +4,10 @@
 *********************************************/
 
 main() {
-  if(getDvar("1673") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
-  setDvar("4014", 1);
+  setDvar("hubcamera", 1);
   _id_04D4::init();
   maps\mp\gametypes\_callbacksetup::setupcallbacks();
   _id_04D4::setupcallbacks();

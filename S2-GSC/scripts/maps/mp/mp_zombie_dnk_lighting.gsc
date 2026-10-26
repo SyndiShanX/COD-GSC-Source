@@ -6,7 +6,7 @@
 main() {
   _id_84F8();
 
-  if(level._id_01D4 && getDvar("2695") != "true") {
+  if(level._id_01D4 && getDvar("ps3Game") != "true") {
     xbox_optimizations();
   }
 }
@@ -14,9 +14,9 @@ main() {
 _id_84F8() {
   setDvar("2973", 0);
   setDvar("2664", 1);
-  setDvar("5153", 1);
+  setDvar("r_mdao", 1);
 }
 
 xbox_optimizations() {
-  setDvar("5153", 0);
+  setDvar("r_mdao", 0);
 }

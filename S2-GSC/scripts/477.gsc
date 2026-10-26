@@ -4,7 +4,7 @@
 **************************************/
 
 codecallback_startgametype() {
-  if(getDvar("233") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
   }
 
@@ -15,7 +15,7 @@ codecallback_startgametype() {
 }
 
 codecallback_playerconnect() {
-  if(getDvar("233") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
   }
 
@@ -232,7 +232,7 @@ abortlevel() {
   level.callbackplayerlaststand = ::callbackvoid;
   level.callbackplayermigrated = ::callbackvoid;
   level.callbackhostmigration = ::callbackvoid;
-  setDvar("1924", "dm");
+  setDvar("g_gametype", "dm");
   exitlevel(0);
 }
 

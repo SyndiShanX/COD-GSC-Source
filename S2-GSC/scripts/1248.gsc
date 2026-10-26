@@ -75,7 +75,7 @@ _id_7472() {
   if(isDefined(self._id_537A) && self._id_537A == 0) {
     return;
   }
-  self setclientdvar("3078", "1");
+  self setclientdvar("cg_fovScale", "1");
   self._id_537A = 0;
   self._id_00C7 = 0;
   self allowlean(1);
@@ -914,7 +914,7 @@ _id_77B4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 }
 
 _id_532E() {
-  if(getDvar("1459") != "") {
+  if(getDvar("createfx") != "") {
     return;
   }
   wait 1;
@@ -1393,7 +1393,7 @@ _id_1EB6(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_86A9(var_0) {
-  self setclientdvar("4990", var_0);
+  self setclientdvar("cg_hubZoomEnabled", var_0);
 }
 
 _id_43F8() {
@@ -1424,46 +1424,46 @@ _id_636B() {
     if(getdvarint("hub_cameraAdjustMode") == 1) {
       if(getdvarint("hub_cam_preset_1") == 1) {
         if(level._id_2939 != 1) {
-          setDvar("2766", level._id_1728);
+          setDvar("cg_thirdPersonRange", level._id_1728);
           setDvar("cg_fov", 65);
           setDvar("3711", level._id_1727);
-          setDvar("1586", 364);
+          setDvar("cg_thirdPersonAngle", 364);
           setDvar("4505", 0);
           level._id_2939 = 1;
         }
       } else if(getdvarint("hub_cam_preset_2") == 1) {
         if(level._id_2939 != 2) {
-          setDvar("2766", 57);
+          setDvar("cg_thirdPersonRange", 57);
           setDvar("cg_fov", 73);
           setDvar("3711", 22);
-          setDvar("1586", 364);
+          setDvar("cg_thirdPersonAngle", 364);
           setDvar("4505", 0);
           level._id_2939 = 2;
         }
       } else if(getdvarint("hub_cam_preset_3") == 1) {
         if(level._id_2939 != 3) {
-          setDvar("2766", 60);
+          setDvar("cg_thirdPersonRange", 60);
           setDvar("cg_fov", 72);
           setDvar("3711", 18);
-          setDvar("1586", 364);
+          setDvar("cg_thirdPersonAngle", 364);
           setDvar("4505", 0);
           level._id_2939 = 3;
         }
       } else if(getdvarint("hub_cam_preset_4") == 1) {
         if(level._id_2939 != 4) {
-          setDvar("2766", 89);
+          setDvar("cg_thirdPersonRange", 89);
           setDvar("cg_fov", 70);
           setDvar("3711", level._id_1727);
-          setDvar("1586", 360);
+          setDvar("cg_thirdPersonAngle", 360);
           setDvar("4505", -5);
           level._id_2939 = 4;
         }
       } else if(getdvarint("hub_cam_preset_5") == 1) {
         if(level._id_2939 != 5) {
-          setDvar("2766", 114);
+          setDvar("cg_thirdPersonRange", 114);
           setDvar("cg_fov", 75);
           setDvar("3711", 20);
-          setDvar("1586", -1);
+          setDvar("cg_thirdPersonAngle", -1);
           setDvar("4505", -5);
           level._id_2939 = 5;
         }

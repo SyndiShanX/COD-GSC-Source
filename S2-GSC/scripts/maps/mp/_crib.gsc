@@ -90,7 +90,7 @@ player_init() {
 
 return_hud() {
   level waittill("game_ended");
-  setDvar("2562", 1);
+  setDvar("cg_draw2D", 1);
 }
 
 onplayerconnect() {
@@ -99,7 +99,7 @@ onplayerconnect() {
   var_0 waittill("spawned_player");
   wait 1;
   var_0 takeallweapons();
-  setDvar("2562", 0);
+  setDvar("cg_draw2D", 0);
 
   if(!isDefined(var_0)) {
     return;
@@ -521,11 +521,11 @@ blur_sine(var_0, var_1) {
     var_4 = var_3 / var_2;
     var_5 = _sin(180 * var_4);
     var_6 = var_0 * var_5;
-    setDvar("797", var_6);
+    setDvar("r_blur", var_6);
     waitframe();
   }
 
-  setDvar("797", 0);
+  setDvar("r_blur", 0);
 }
 
 force_player_angles() {

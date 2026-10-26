@@ -35,7 +35,7 @@ _id_636A(var_0) {
     }
     if(isDefined(var_0._id_5721)) {
       waitframe();
-      var_0 setclientdvar("3078", "1.0");
+      var_0 setclientdvar("cg_fovScale", "1.0");
       var_0 notify("buttonToFiringRangePressed");
       var_0 notify("weaponPlantFiringRange");
 

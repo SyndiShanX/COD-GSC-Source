@@ -49,10 +49,10 @@ init() {
   var_9 = loadfx("vfx/unique/supply_drop_shine");
   level.zombieimpactfx = loadfx("vfx/unique/supply_drop_impactpulse_zombie");
   level._id_7A72 = [var_9, var_8, var_7, var_6, var_5];
-  setDvar("1601", 64);
-  setDvar("1730", 0.2);
-  setDvar("4002", 0);
-  setDvar("3512", 0);
+  setDvar("sentry_placement_trace_dist", 64);
+  setDvar("sentry_placement_trace_min_normal", 0.2);
+  setDvar("sentry_placement_trace_pitch", 0);
+  setDvar("sentry_placement_trace_radius_canon_safety", 0);
   setdvarifuninitialized("hub_numDevCards", 3);
   level._id_08DE = [];
 }

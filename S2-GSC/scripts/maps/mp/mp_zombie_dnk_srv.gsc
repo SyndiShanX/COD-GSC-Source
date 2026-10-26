@@ -68,7 +68,7 @@ dnk_srv_round_end() {
 }
 
 performance_stuff() {
-  setDvar("634", 0);
+  setDvar("r_portalMinClipArea", 0);
 }
 
 dnk_srv_ee() {

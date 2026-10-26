@@ -2411,7 +2411,7 @@ get_player_touching(var_0) {
 }
 
 is_so() {
-  return getDvar("1996") == "1";
+  return getDvar("specialops") == "1";
 }
 
 destructible_handles_collision_brushes() {

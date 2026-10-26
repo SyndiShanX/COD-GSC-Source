@@ -3149,7 +3149,7 @@ handleserumbasictraining() {
   level endon("game_ended");
   var_0 = 1;
 
-  if(maps\mp\_utility::invirtuallobby() || getDvar("1924") == "hub") {
+  if(maps\mp\_utility::invirtuallobby() || getDvar("g_gametype") == "hub") {
     return;
   }
   wait 0.1;

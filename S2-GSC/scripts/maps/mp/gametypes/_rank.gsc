@@ -123,7 +123,7 @@ onplayerconnect() {
       var_0.pers["summary"]["matchStartXp"] = var_4;
     }
 
-    if(getDvar("4017") != "1") {
+    if(getDvar("virtualLobbyActive") != "1") {
       if(!_func_367()) {
         var_0 setclientdvar("3635", 0);
       }

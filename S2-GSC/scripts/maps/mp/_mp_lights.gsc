@@ -158,13 +158,13 @@ lerp_sunsamplesizenear_overtime(var_0, var_1, var_2, var_3) {
 
     for(var_9 = 0; var_9 < var_6; var_9++) {
       var_8 = var_8 + var_7;
-      var_3 setclientdvar("5699", var_8);
+      var_3 setclientdvar("sm_sunSampleSizeNear", var_8);
       var_3.sunsamplesizenear = var_8;
       wait(var_5);
     }
   }
 
-  var_3 setclientdvar("5699", var_0);
+  var_3 setclientdvar("sm_sunSampleSizeNear", var_0);
   var_3.sunsamplesizenear = var_0;
 }
 

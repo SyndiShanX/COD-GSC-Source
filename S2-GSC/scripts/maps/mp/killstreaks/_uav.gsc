@@ -546,7 +546,7 @@ sweepinguavhandlehostmigration() {
 
     if(level.gametype == "gun" || level.gametype == "blades" || level.gametype == "aon" || level.gametype == "oitc") {
       _setdynamicdvar("scr_game_compassRadarUpdateTime", 9);
-      setDvar("4648", 9);
+      setDvar("compassRadarUpdateTime", 9);
     }
 
     level notify("uav_update");

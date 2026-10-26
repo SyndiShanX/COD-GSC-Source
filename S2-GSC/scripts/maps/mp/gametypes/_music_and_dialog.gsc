@@ -321,7 +321,7 @@ onplayerspawned() {
   self endon("disconnect");
   self waittill("spawned_player");
 
-  if(getDvar("4017") == "0" && !_func_367()) {
+  if(getDvar("virtualLobbyActive") == "0" && !_func_367()) {
     if(!level.splitscreen || level.splitscreen && !isDefined(level.playedstartingmusic)) {
       if(!self issplitscreenplayer() || self issplitscreenplayerprimary()) {
         self playlocalsound(game["music"]["spawn_" + self.team]);

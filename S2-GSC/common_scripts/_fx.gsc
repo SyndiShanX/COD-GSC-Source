@@ -257,7 +257,7 @@ create_dynamicambience() {
   if(common_scripts\utility::issp()) {
     return;
   }
-  if(getDvar("1459") == "on") {
+  if(getDvar("createfx") == "on") {
     common_scripts\utility::flag_wait("createfx_started");
   }
 
@@ -582,7 +582,7 @@ add_reactive_fx() {
   if(!platformmatches()) {
     return;
   }
-  if(!common_scripts\utility::issp() && getDvar("1459") == "") {
+  if(!common_scripts\utility::issp() && getDvar("createfx") == "") {
     return;
   }
   if(!isDefined(level._fx.reactive_thread)) {
@@ -600,7 +600,7 @@ add_reactive_fx() {
 
 reactive_fx_thread() {
   if(!common_scripts\utility::issp()) {
-    if(getDvar("1459") == "on") {
+    if(getDvar("createfx") == "on") {
       common_scripts\utility::flag_wait("createfx_started");
     }
   }

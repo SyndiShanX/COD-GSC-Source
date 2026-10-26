@@ -285,7 +285,7 @@ _id_0A23(var_0, var_1, var_2, var_3) {
     var_3[var_3.size] = "switchWeaponKill";
   }
 
-  var_11 = _tolower(getDvar("1673"));
+  var_11 = _tolower(getDvar("mapname"));
 
   if(var_11 == "mp_canon_farm" || var_11 == "mp_forest_01" || var_11 == "mp_carentan_s2_winter" || var_11 == "mp_raid_bulge") {
     var_3[var_3.size] = "winter_map_kill";

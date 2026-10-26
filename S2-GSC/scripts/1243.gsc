@@ -1618,7 +1618,7 @@ _id_478B(var_0) {
         var_11 = maps\mp\_utility::_id_922B(var_11);
         maps\mp\_utility::_giveweapon(var_11);
         setDvar("4969", "");
-        setDvar("4567", 0);
+        setDvar("ui_firingRangeSelectedWeaponSlot", 0);
 
         if(var_13 == 2) {
           if(self._id_7706 != "none") {

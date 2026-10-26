@@ -5,7 +5,7 @@
 
 init() {
   if(!isDefined(game["gamestarted"]) && !(maps\mp\_utility::invirtuallobby() || _func_367())) {
-    var_0 = getDvar("1924");
+    var_0 = getDvar("g_gametype");
 
     switch (var_0) {
       case "war":
@@ -26,7 +26,7 @@ init() {
     _func_37B("mp/ddl/spawndata_" + var_0 + ".ddl");
     soundscripts/_snd_playsound();
     _func_37A("matchSpawnData", "spawnTuningVersion", common_scripts\utility::tostring(level._id_90B4));
-    _func_37A("matchSpawnData", "gametype", getDvar("1924"));
+    _func_37A("matchSpawnData", "gametype", getDvar("g_gametype"));
     level._id_903C = 1;
   }
 }

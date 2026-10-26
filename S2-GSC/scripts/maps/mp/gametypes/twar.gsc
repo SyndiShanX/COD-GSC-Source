@@ -4,7 +4,7 @@
 **********************************************/
 
 main() {
-  if(getDvar("1673") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   _id_04D4::init();
@@ -75,7 +75,7 @@ main() {
     game["max_meter"]["allies"] = 0;
   }
 
-  setDvar("5539", 1);
+  setDvar("r_hudOutlineWidth", 1);
 }
 
 initializematchrules() {

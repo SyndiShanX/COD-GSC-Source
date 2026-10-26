@@ -5771,7 +5771,7 @@ final_boss_intro_scene() {
   var_10 = % s2_zom_gdk_intro_vm;
   var_11 = % s2_zom_gdk_intro_vivian;
   level._id_22F0 = 1;
-  setDvar("4712", 2);
+  setDvar("r_screenSpaceShadows", 2);
   var_12 = "cam_note_notify";
   final_boss_intro_fade(0.25, 1);
   maps\mp\mp_zombie_descent_lighting::bossintrolightson();
@@ -5836,7 +5836,7 @@ final_boss_intro_scene() {
   var_6 delete();
   var_7 delete();
   level._id_22F0 = 0;
-  setDvar("4712", 1);
+  setDvar("r_screenSpaceShadows", 1);
   var_8 scriptmodelclearanim();
   var_8.origin = var_8.origin + (0, 0, 32);
 

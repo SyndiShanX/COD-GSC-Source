@@ -55,8 +55,8 @@ _id_21C7() {
 }
 
 _id_7FA7() {
-  setDvar("5737", 1);
-  setDvar("1471", 5);
+  setDvar("fte_demo", 1);
+  setDvar("fte_progress", 5);
   self._id_9FB4 = 0;
   _id_7FAA();
 }
@@ -163,17 +163,17 @@ _id_7FAA() {
 
 _id_6461() {
   waitframe();
-  setDvar("712", 1);
+  setDvar("r_mbEnable", 1);
   setDvar("r_mbVeliocityScaler", 100);
-  setDvar("5469", 1);
-  setDvar("904", 1);
+  setDvar("r_mbCameraRotationInfluence", 1);
+  setDvar("r_mbCameraTranslationInfluence", 1);
   setDvar("2032", "1");
   setDvar("3161", ".3");
   setDvar("r_vignettefalloff", "1.2");
 }
 
 _id_6460() {
-  setDvar("712", 0);
+  setDvar("r_mbEnable", 0);
   setDvar("3161", ".35");
   setDvar("r_vignettefalloff", "1.2");
   setDvar("2032", "0");
@@ -362,7 +362,7 @@ _id_63F1() {
       thread _id_2CD3(1, "headerremove", 1, 11);
       thread _id_2CD3(4, "headeradd", 2, 12, "HUB_FTE_HEADER3");
       thread _id_2CD3(5, "add", 2, 5, "HUB_FTE_LOBBY");
-      setDvar("1471", 5);
+      setDvar("fte_progress", 5);
       self set_vision_set_player(&"fte_lobby_open", 0);
       return;
     }
@@ -371,7 +371,7 @@ _id_63F1() {
       thread _id_2CD3(2.3, "remove", 1, 3);
       thread _id_2CD3(2.6, "remove", 1, 4);
       thread _id_2CD3(4, "add", 2, 6, "HUB_FTE_REDEEM_ORDERS");
-      setDvar("1471", 5);
+      setDvar("fte_progress", 5);
       var_1 = 1;
     }
   }
@@ -515,7 +515,7 @@ _id_6380() {
   _id_04E0::_id_A04C();
   self freezecontrols(0);
   self._id_9FB4 = 2;
-  setDvar("1471", 5);
+  setDvar("fte_progress", 5);
   _id_0468::_id_0A1F();
 }
 

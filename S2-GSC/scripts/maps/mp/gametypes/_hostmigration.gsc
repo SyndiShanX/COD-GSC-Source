@@ -39,7 +39,7 @@ callback_hostmigration() {
     }
   }
 
-  setDvar("2523", game["state"]);
+  setDvar("ui_game_state", game["state"]);
   level endon("host_migration_begin");
   hostmigrationwait();
   level.hostmigrationtimer = undefined;

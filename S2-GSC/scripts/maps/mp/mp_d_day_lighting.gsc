@@ -4,5 +4,5 @@
 *************************************************/
 
 main() {
-  setDvar("3220", 6);
+  setDvar("r_animatedVertsNoCacheScale", 6);
 }

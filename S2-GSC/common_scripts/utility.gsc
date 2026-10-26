@@ -2376,7 +2376,7 @@ noself_delaycall_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
 issp() {
   if(!isDefined(level.issp)) {
-    level.issp = !string_starts_with(getDvar("1673"), "mp_");
+    level.issp = !string_starts_with(getDvar("mapname"), "mp_");
   }
 
   return level.issp;
@@ -2384,7 +2384,7 @@ issp() {
 
 issp_towerdefense() {
   if(!isDefined(level.issp_towerdefense)) {
-    level.issp_towerdefense = string_starts_with(getDvar("1673"), "so_td_");
+    level.issp_towerdefense = string_starts_with(getDvar("mapname"), "so_td_");
   }
 
   return level.issp_towerdefense;
@@ -3869,7 +3869,7 @@ physicsgetangvel(var_0, var_1, var_2) {
     level._id_0E2F = [];
   }
 
-  var_3 = _tolower(getDvar("1673"));
+  var_3 = _tolower(getDvar("mapname"));
   var_4 = 1;
 
   if(string_starts_with(var_3, "mp_")) {

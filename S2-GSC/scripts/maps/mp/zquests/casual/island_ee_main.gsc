@@ -1079,9 +1079,9 @@ run_corpse_door() {
   self.corpse_trig delete();
   level thread maps\mp\gametypes\zombies::orders_and_contracts_report_event("mp_zombie_island_corpsegate_open");
   cgate_set_state("outro");
-  setDvar("4712", 2);
+  setDvar("r_screenSpaceShadows", 2);
   thread freezer_lights();
-  setDvar("4712", 1);
+  setDvar("r_screenSpaceShadows", 1);
 
   if(isDefined(self.getnegotiationnextnode)) {
     common_scripts\utility::flag_set(self.getnegotiationnextnode);

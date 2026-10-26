@@ -13,7 +13,7 @@ main() {
   level._id_53C7 = level.gametype == "scorestreak_training";
   level._id_53C6 = maps\mp\_utility::getmapname() == "mp_scorestreak_training";
   maps\mp\_utility::set_console_status();
-  level.createfx_enabled = getDvar("1459") != "";
+  level.createfx_enabled = getDvar("createfx") != "";
   common_scripts\utility::_id_947B();
   maps\mp\_utility::initgameflags();
   maps\mp\_utility::initlevelflags();
@@ -78,7 +78,7 @@ main() {
     _id_0473::createfx();
   }
 
-  if(getDvar("233") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     deleteduringreflectionprobegeneration();
     _id_050D::setmapcenterfordev();
     _id_0480::main();
@@ -199,15 +199,15 @@ _id_527B() {
 }
 
 disablephysicaldepthoffieldscripting() {
-  setDvar("5176", 0.1);
-  setDvar("882", 0.2);
+  setDvar("sm_spotLightScoreModelScale", 0.1);
+  setDvar("sm_spotShadowFadeTime", 0.2);
   setDvar("5800", 0);
   setDvar("1963", 0);
   setDvar("r_lightGridEnableTweaks", 0);
   setDvar("r_lightGridIntensity", 1);
   setDvar("r_lightGridContrast", 0);
-  setDvar("1175", 0);
-  setDvar("190", 1);
+  setDvar("r_uiBlurDstMode", 0);
+  setDvar("r_blurdstGaussianBlurRadius", 1);
   setDvar("r_gpuTriangleDepthFiltering", 1);
 }
 
@@ -400,7 +400,7 @@ _id_8A15() {
   var_0 = getEntArray("destructible_vehicle", "targetname");
 
   foreach(var_2 in var_0) {
-    switch (getDvar("1673")) {
+    switch (getDvar("mapname")) {
       case "mp_interchange":
         if(var_2.origin[2] > 150.0) {
           continue;

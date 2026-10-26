@@ -471,7 +471,7 @@ _id_06E0(var_0) {
   if(isDefined(var_0) == 1 && var_0 < 1) {
     return;
   }
-  if(getDvar("1459") != "on") {
+  if(getDvar("createfx") != "on") {
     if(isDefined(level._id_05B0) == 1 && level._id_05B0.size > 0) {
       return;
     }

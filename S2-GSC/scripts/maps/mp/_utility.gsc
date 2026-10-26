@@ -2837,7 +2837,7 @@ endsceneondeath(var_0) {
 }
 
 getmapname() {
-  return getDvar("1673");
+  return getDvar("mapname");
 }
 
 getgametypenumlives() {
@@ -3742,11 +3742,11 @@ touchingbadtrigger() {
     }
   }
 
-  if(getDvar("1924") == "hp" && isDefined(level.zone) && isDefined(level.zone.trig) && self istouching(level.zone.trig)) {
+  if(getDvar("g_gametype") == "hp" && isDefined(level.zone) && isDefined(level.zone.trig) && self istouching(level.zone.trig)) {
     return 1;
   }
 
-  if(getDvar("1924") == "undead" && isDefined(level.zone) && isDefined(level.zone.trig) && self istouching(level.zone.trig)) {
+  if(getDvar("g_gametype") == "undead" && isDefined(level.zone) && isDefined(level.zone.trig) && self istouching(level.zone.trig)) {
     return 1;
   }
 
@@ -4329,9 +4329,9 @@ setcommonrulesfrommatchrulesdata(var_0) {
   level.customclasspickcount = _getmatchrulesdata("commonOption", "classPickCount");
   _setdynamicdvar("scr_game_hardpoints", 1);
   _setdynamicdvar("scr_game_perks", 1);
-  _setdynamicdvar("2043", _getmatchrulesdata("commonOption", "hardcoreModeOn"));
+  _setdynamicdvar("g_hardcore", _getmatchrulesdata("commonOption", "hardcoreModeOn"));
   _setdynamicdvar("scr_thirdPerson", _getmatchrulesdata("commonOption", "forceThirdPersonView"));
-  _setdynamicdvar("311", _getmatchrulesdata("commonOption", "forceThirdPersonView"));
+  _setdynamicdvar("camera_thirdPerson", _getmatchrulesdata("commonOption", "forceThirdPersonView"));
   _setdynamicdvar("scr_game_onlyheadshots", _getmatchrulesdata("commonOption", "headshotsOnly"));
 
   if(!isDefined(var_0)) {
@@ -4376,8 +4376,8 @@ setcommonrulesfrommatchrulesdata(var_0) {
   setDvar("isMLGMatch", _getmatchrulesdata("commonOption", "isMLGMatch"));
   setDvar("isEsportsMatch", _getmatchrulesdata("commonOption", "isEsportsMatch"));
   setDvar("spawning_use_classic", _getmatchrulesdata("commonOption", "useClassicSpawning"));
-  setDvar("4899", getDvar("scr_game_forceuav"));
-  setDvar("4648", getDvar("scr_game_compassRadarUpdateTime"));
+  setDvar("bg_compassShowEnemies", getDvar("scr_game_forceuav"));
+  setDvar("compassRadarUpdateTime", getDvar("scr_game_compassRadarUpdateTime"));
 }
 
 reinitializematchrulesonmigration() {
@@ -4763,23 +4763,23 @@ set_rank_options_for_bot() {
 
 set_console_status() {
   if(!isDefined(level.console)) {
-    level.console = getDvar("5554") == "true";
+    level.console = getDvar("consoleGame") == "true";
   } else {}
 
   if(!isDefined(level._id_01D4)) {
-    level._id_01D4 = getDvar("3475") == "true";
+    level._id_01D4 = getDvar("xenonGame") == "true";
   } else {}
 
   if(!isDefined(level._id_01D5)) {
-    level._id_01D5 = getDvar("2695") == "true";
+    level._id_01D5 = getDvar("ps3Game") == "true";
   } else {}
 
   if(!isDefined(level._id_0148)) {
-    level._id_0148 = getDvar("3864") == "true";
+    level._id_0148 = getDvar("xb3Game") == "true";
   } else {}
 
   if(!isDefined(level._id_0149)) {
-    level._id_0149 = getDvar("3957") == "true";
+    level._id_0149 = getDvar("ps4Game") == "true";
   } else {}
 }
 

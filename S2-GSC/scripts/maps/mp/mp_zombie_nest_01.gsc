@@ -11,7 +11,7 @@ main() {
   _id_0426::main();
   _id_04BE::main();
 
-  if(getDvar("233") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     _id_6B91();
   }
 

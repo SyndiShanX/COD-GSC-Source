@@ -21,11 +21,11 @@ setplayerlightset() {
 _id_84F8() {
   setDvar("2973", 0);
   setDvar("2664", 0);
-  setDvar("1533", 3);
+  setDvar("r_wbMethod", 3);
   setDvar("2387", 1);
-  setDvar("5156", 1);
+  setDvar("r_gtaoQualityLevel", 1);
   setDvar("2428", "2");
   setDvar("4087", "2");
-  setDvar("5142", 2);
-  setDvar("3357", 2);
+  setDvar("sm_sunPolygonOffsetBias", 2);
+  setDvar("sm_spotPolygonOffsetBias", 2);
 }

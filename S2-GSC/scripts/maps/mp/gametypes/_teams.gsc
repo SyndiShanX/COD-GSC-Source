@@ -23,22 +23,22 @@ init() {
 }
 
 initscoreboard() {
-  setDvar("1202", getteamshortname("allies"));
-  setDvar("3729", getteamicon("allies"));
-  setDvar("4487", getteamicon("allies"));
-  setDvar("942", getteamicon("allies"));
+  setDvar("g_TeamName_Allies", getteamshortname("allies"));
+  setDvar("g_TeamIcon_Allies", getteamicon("allies"));
+  setDvar("g_TeamIcon_MyAllies", getteamicon("allies"));
+  setDvar("g_TeamIcon_EnemyAllies", getteamicon("allies"));
   var_0 = getteamcolor("allies");
-  setDvar("1138", var_0[0] + " " + var_0[1] + " " + var_0[2]);
-  setDvar("2991", getteamshortname("axis"));
-  setDvar("5558", getteamicon("axis"));
-  setDvar("675", getteamicon("axis"));
-  setDvar("4622", getteamicon("axis"));
+  setDvar("g_ScoresColor_Allies", var_0[0] + " " + var_0[1] + " " + var_0[2]);
+  setDvar("g_TeamName_Axis", getteamshortname("axis"));
+  setDvar("g_TeamIcon_Axis", getteamicon("axis"));
+  setDvar("g_TeamIcon_MyAxis", getteamicon("axis"));
+  setDvar("g_TeamIcon_EnemyAxis", getteamicon("axis"));
   var_0 = getteamcolor("axis");
-  setDvar("1513", var_0[0] + " " + var_0[1] + " " + var_0[2]);
-  setDvar("370", ".25 .25 .25");
-  setDvar("2942", ".76 .78 .10");
-  setDvar("1725", ".6 .8 .6");
-  setDvar("4832", "1 .45 .5");
+  setDvar("g_ScoresColor_Axis", var_0[0] + " " + var_0[1] + " " + var_0[2]);
+  setDvar("g_ScoresColor_Spectator", ".25 .25 .25");
+  setDvar("g_ScoresColor_Free", ".76 .78 .10");
+  setDvar("g_TeamTitleColor_MyTeam", ".6 .8 .6");
+  setDvar("g_TeamTitleColor_EnemyTeam", "1 .45 .5");
 }
 
 onplayerconnect() {

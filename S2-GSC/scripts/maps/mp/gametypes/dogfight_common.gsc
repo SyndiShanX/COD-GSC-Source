@@ -195,7 +195,7 @@ ongameend() {
 ongameexit() {
   level waittill("exitLevel_called");
   _func_3C6(100, 187.5, 284.09, 143.75);
-  setDvar("1145", 1);
+  setDvar("vehCam_mode", 1);
 }
 
 monitordogfightafk() {
@@ -341,11 +341,11 @@ onhostmigration(var_0) {
 
 bomber_set_dvars() {
   setdvarifuninitialized("allies_spawn_fighters", 1);
-  setDvar("1145", 3);
+  setDvar("vehCam_mode", 3);
   setDvar("4350", 1);
   setDvar("bot_FlightDynamicsModeEnabled", 1);
   setDvar("bg_turretIgnoreAttachedEnt", 0);
-  setDvar("1979", 0);
+  setDvar("cg_drawCrosshairNames", 0);
   setdvarifuninitialized("p47_maxhealth", 240 * level.dogfighthealthscale);
   setdvarifuninitialized("fighter_firing_mode", 0);
 }
@@ -354,7 +354,7 @@ bomber_reset_dvars() {
   setDvar("4350", 0);
   setDvar("bot_FlightDynamicsModeEnabled", 0);
   setDvar("bg_turretIgnoreAttachedEnt", 1);
-  setDvar("1979", 1);
+  setDvar("cg_drawCrosshairNames", 1);
 }
 
 fighter_set_perks(var_0) {

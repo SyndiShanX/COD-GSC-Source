@@ -914,7 +914,7 @@ totalallweaponvariants(var_0, var_1) {
 }
 
 _id_5527() {
-  return _func_367() && _func_2C6(getDvar("1673"), "mp_hub_zombies");
+  return _func_367() && _func_2C6(getDvar("mapname"), "mp_hub_zombies");
 }
 
 shoulddohubtutorialflow() {

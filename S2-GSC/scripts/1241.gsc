@@ -93,8 +93,8 @@ _id_4F3E() {
   setDvar("250", 1);
   setDvar("5679", 1);
   setDvar("3386", 1);
-  setDvar("2903", 0);
-  setDvar("31", 0.8);
+  setDvar("r_hudOutlineWhen", 0);
+  setDvar("r_hudOutlineAlpha0", 0.8);
   thread _id_4F3F();
 
   if(!level._id_A220) {
@@ -298,7 +298,7 @@ _id_52A1() {
     self._id_5520 = 1;
   }
 
-  setDvar("5666", "1");
+  setDvar("virtualLobbyReady", "1");
 }
 
 _id_13AB(var_0) {
@@ -331,7 +331,7 @@ _id_A596(var_0) {
 _id_6B85() {
   var_0 = xmodelalias/alias_ger_heads_scarf_for_muddy() != 0 || common_scripts\utility::_id_562E(level._id_AC5A);
   var_1 = !xmodelalias/alias_ger_heads_scarf_for_snow();
-  setDvar("2766", level._id_1728);
+  setDvar("cg_thirdPersonRange", level._id_1728);
   setDvar("3711", level._id_1727);
   self setclientomnvar("ui_hide_1v1scores", 1);
   self setclientomnvar("ui_hub_1v1_queueposition", -1);
@@ -1364,7 +1364,7 @@ _id_A598() {
 
   level.maxavatars = var_0;
   thread maps\mp\hub_vl_camera::monitor_member_class_changes();
-  setDvar("1999", 0);
+  setDvar("virtualLobbyMembers", 0);
   level.num_lobby_idles = 4;
   maps\mp\hub_vl_camera::_id_8774();
 }
