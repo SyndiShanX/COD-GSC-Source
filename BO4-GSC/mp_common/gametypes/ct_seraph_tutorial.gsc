@@ -568,7 +568,7 @@ function_f6df6250() {
   level notify(#"stop_nag");
   ct_utils::function_c2a10fc();
   ct_vo::function_3ca1b77d();
-  ct_vo::function_831e0584(array(#"hash_5b98b949240b7fba"), 1);
+  ct_vo::function_831e0584(array(#"vox_tvoi_tutor_sera_timed_event_0"), 1);
   wait 0.1;
 }
 
@@ -579,7 +579,7 @@ function_f36aa3f0() {
   level notify(#"stop_event1_enter_collision");
   level notify(#"start_5_targets_collision");
   level notify(#"start_5_targets_exit_collision");
-  a_str_vo = array(#"hash_5b98ba49240b816d");
+  a_str_vo = array(#"vox_tvoi_tutor_sera_timed_event_1");
   e_player = ct_utils::get_player();
   e_player thread ct_utils::function_61c3d59c(#"hash_7ae3c7f801226d64", a_str_vo);
   wait 0.1;

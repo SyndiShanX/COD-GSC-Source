@@ -1492,7 +1492,7 @@ split_cleanup(b_skipped, var_19e802fa) {
     }
   }
 
-  playSoundAtPosition(#"hash_72db081c52e1b776", (108, -2838, -191));
+  playSoundAtPosition(#"zmb_mq_mirror_reflect_impact", (108, -2838, -191));
   playSoundAtPosition(#"zmb_mq_step_complete_3", (0, 0, 0));
 
   if(var_19e802fa) {
