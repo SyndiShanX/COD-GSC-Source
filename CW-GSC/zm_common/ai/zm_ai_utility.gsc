@@ -115,8 +115,8 @@ function private function_637778cf() {
   self.var_7b22b800 = settingsbundle.var_7b22b800;
   self.var_19f5037 = namespace_42457a0::function_9caeb2f3(settingsbundle.var_349be1e8);
 
-  if(isDefined(settingsbundle.var_5c3586f3)) {
-    self.powerups = arraycopy(settingsbundle.var_5c3586f3);
+  if(isDefined(settingsbundle.powerupdroplist)) {
+    self.powerups = arraycopy(settingsbundle.powerupdroplist);
     self thread function_3edc6292();
   }
 

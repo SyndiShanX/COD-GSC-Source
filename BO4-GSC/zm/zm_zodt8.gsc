@@ -784,7 +784,7 @@ function_ea9f953(b_fore = 1, b_aft = 1) {
     t_use_water_pump_fore = getEnt("t_use_water_pump_fore", "targetname");
     var_52a797c0 = struct::get("water_pump_fore", "targetname");
     var_52a797c0 scene::play(#"p8_fxanim_zm_zod_water_pump_bundle", "end");
-    level thread function_b0a7ca7(t_use_water_pump_fore, var_52a797c0, level.e_clip_water_fore, "water_drained_fore", 40, level.var_1b85943e, -1.5, "fxexp_ambient_drain_cargo", "exp_lgt_underwater_cargo", "sfx_waterdrain_fore");
+    level thread water_pump(t_use_water_pump_fore, var_52a797c0, level.e_clip_water_fore, "water_drained_fore", 40, level.var_1b85943e, -1.5, "fxexp_ambient_drain_cargo", "exp_lgt_underwater_cargo", "sfx_waterdrain_fore");
     level exploder::exploder("exp_lgt_underwater_cargo");
   }
 
@@ -792,12 +792,12 @@ function_ea9f953(b_fore = 1, b_aft = 1) {
     t_use_water_pump_aft = getEnt("t_use_water_pump_aft", "targetname");
     var_a3423419 = struct::get("water_pump_aft", "targetname");
     var_a3423419 scene::play(#"p8_fxanim_zm_zod_water_pump_bundle", "end");
-    level thread function_b0a7ca7(t_use_water_pump_aft, var_a3423419, level.e_clip_water_aft, "water_drained_aft", 30, level.var_7836c664, -0.75, "fxexp_ambient_drain_boilers", "exp_lgt_underwater_engine", "sfx_waterdrain_aft");
+    level thread water_pump(t_use_water_pump_aft, var_a3423419, level.e_clip_water_aft, "water_drained_aft", 30, level.var_7836c664, -0.75, "fxexp_ambient_drain_boilers", "exp_lgt_underwater_engine", "sfx_waterdrain_aft");
     level exploder::exploder("exp_lgt_underwater_engine");
   }
 }
 
-function_b0a7ca7(var_32be30af, var_4c2f2156, var_eb6a4856, var_bbaf1a87, n_time, var_65feb6ff, var_c6653d4, var_ff884319, var_90c00a3d, var_4cdff787) {
+water_pump(var_32be30af, var_4c2f2156, var_eb6a4856, var_bbaf1a87, n_time, var_65feb6ff, var_c6653d4, var_ff884319, var_90c00a3d, var_4cdff787) {
   self notify(var_bbaf1a87 + "_water_pump");
   self endon(var_bbaf1a87 + "_water_pump");
 

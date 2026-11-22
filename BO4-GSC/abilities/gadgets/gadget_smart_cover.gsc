@@ -867,15 +867,15 @@ function_4e6d9621(smartcover, origins, radii) {
   assert(!isarray(radii) || origins.size == radii.size);
   assert(isDefined(smartcover.var_eda9690f) && smartcover.var_eda9690f.size > 0);
 
-  foreach(var_592587c3 in smartcover.var_eda9690f) {
+  foreach(collisionsphere in smartcover.var_eda9690f) {
     for(index = 0; index < origins.size; index++) {
-      distance = distancesquared(origins[index], var_592587c3);
+      distance = distancesquared(origins[index], collisionsphere);
       radius = isarray(radii) ? radii[index] : radii;
       combinedradius = radius + getdvarfloat(#"hash_4d17057924212aa9", 1);
 
       if(getdvarint(#"hash_686a676b28ae0af4", 0) == 1) {
         sphere(origins[index], radius, (0, 0, 1), 0.5, 0, 10, 500);
-        sphere(var_592587c3, getdvarfloat(#"hash_4d17057924212aa9", 1), (1, 0, 0), 0.5, 0, 10, 500);
+        sphere(collisionsphere, getdvarfloat(#"hash_4d17057924212aa9", 1), (1, 0, 0), 0.5, 0, 10, 500);
       }
 
       radiussqr = combinedradius * combinedradius;

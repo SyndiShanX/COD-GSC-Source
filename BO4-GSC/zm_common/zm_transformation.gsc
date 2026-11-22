@@ -449,8 +449,8 @@ transform(id, var_c2a69066, var_2cf708f4 = 1) {
     } else {
       settingsbundle = self ai::function_9139c839();
 
-      if(isDefined(settingsbundle) && isDefined(settingsbundle.var_d354164e)) {
-        foreach(var_127d3a7a in settingsbundle.var_d354164e) {
+      if(isDefined(settingsbundle) && isDefined(settingsbundle.zombiesplitmdls)) {
+        foreach(var_127d3a7a in settingsbundle.zombiesplitmdls) {
           if(self.model === var_127d3a7a.var_a3c9023c) {
             self.no_gib = 1;
             self setModel(var_127d3a7a.splitmdl);

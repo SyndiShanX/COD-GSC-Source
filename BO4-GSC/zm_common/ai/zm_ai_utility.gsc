@@ -46,8 +46,8 @@ function_637778cf() {
   self.var_95d94ac4 = settingsbundle.stunduration;
   self.score_event = settingsbundle.scoreevent;
 
-  if(isDefined(settingsbundle.var_5c3586f3)) {
-    self.powerups = arraycopy(settingsbundle.var_5c3586f3);
+  if(isDefined(settingsbundle.powerupdroplist)) {
+    self.powerups = arraycopy(settingsbundle.powerupdroplist);
     self thread function_3edc6292();
   }
 
